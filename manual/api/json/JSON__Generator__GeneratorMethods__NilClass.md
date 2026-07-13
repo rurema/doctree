@@ -22,6 +22,6 @@ alias:
 ```ruby title="例"
 require "json"
 
-nil.to_json # => "null"
+p nil.to_json # => "null"
 ```
 

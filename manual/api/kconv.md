@@ -165,8 +165,8 @@ sjis_str = "\
 \x83\x76\x83\x8d\x83\x4f\x83\x89\x83\x7e\x83\x93\x83\x4f\x8c\xbe\x8c\xea\
 \x52\x75\x62\x79".force_encoding('Shift_JIS')
 
-euc_str.iseuc  # => true
-sjis_str.iseuc # => false
+p euc_str.iseuc  # => true
+p sjis_str.iseuc # => false
 ```
 
 
@@ -406,8 +406,8 @@ jis_str = "\
 \x25\x57\x25\x6d\x25\x30\x25\x69\x25\x5f\x25\x73\x25\x30\x38\x40\x38\x6c\x1b\x28\x42\
 \x52\x75\x62\x79".force_encoding('ISO-2022-JP')
 
-euc_str.isjis  # => false
-jis_str.isjis  # => true
+p euc_str.isjis  # => false
+p jis_str.isjis  # => true
 ```
 
 #@end

@@ -21,18 +21,18 @@ category: Math
 require "cmath"
 
 # 複素数の範囲の立方根（の主値）= exp(1/3 πi)
-CMath.cbrt(-1) # => (0.5000000000000001+0.8660254037844386i)
+p CMath.cbrt(-1) # => (0.5000000000000001+0.8660254037844386i)
 
 # 実数の範囲の立方根
-Math.cbrt(-1) # => -1.0
+p Math.cbrt(-1) # => -1.0
 
 include CMath
 
 # レシーバー無しで使える
-cbrt(-1) # => (0.5000000000000001+0.8660254037844386i)
+p cbrt(-1) # => (0.5000000000000001+0.8660254037844386i)
 
 # cbrt! は Math.cbrt のエイリアス
-cbrt!(-1) # => -1.0
+p cbrt!(-1) # => -1.0
 ```
 
 ## Module Functions
@@ -50,10 +50,10 @@ cbrt!(-1) # => -1.0
 
 ```ruby title="例"
 require "cmath"
-CMath.exp!(0) # => 1
-CMath.exp!(0.5) # => Math.sqrt(Math::E)
-CMath.exp!(1) # => Math::E
-CMath.exp!(2) # => Math::E ** 2
+p CMath.exp!(0) # => 1
+p CMath.exp!(0.5) # => Math.sqrt(Math::E)
+p CMath.exp!(1) # => Math::E
+p CMath.exp!(2) # => Math::E ** 2
 ```
 
 - **SEE** [m:Math?.exp]
@@ -70,9 +70,9 @@ z の指数関数([m:Math::E] の z 乗)の値を返します。
 
 ```ruby title="例"
 require "cmath"
-CMath.exp(Complex(0, 0))# => (1.0+0.0i)
-CMath.exp(Complex(0, Math::PI)) # => (-1.0+1.2246063538223773e-16i)
-CMath.exp(Complex(0, Math::PI / 2.0)) # => (6.123031769111886e-17+1.0i)
+p CMath.exp(Complex(0, 0)) # => (1.0+0.0i)
+p CMath.exp(Complex(0, Math::PI)) # => (-1.0+1.2246063538223773e-16i)
+p CMath.exp(Complex(0, Math::PI / 2.0)) # => (6.123031769111886e-17+1.0i)
 ```
 
 ### module_function def log!(x) -> Float
@@ -92,9 +92,9 @@ CMath.exp(Complex(0, Math::PI / 2.0)) # => (6.123031769111886e-17+1.0i)
 
 ```ruby title="例"
 require "cmath"
-CMath.log!(Math::E) # => 1.0
-CMath.log!(1) # => 0.0
-CMath.log!(100, 10) # => 2.0
+p CMath.log!(Math::E) # => 1.0
+p CMath.log!(1) # => 0.0
+p CMath.log!(100, 10) # => 2.0
 CMath.log!(-1.0)# => Math::DomainError
 ```
 
@@ -115,8 +115,8 @@ z の対数を返します。
 
 ```ruby title="例"
 require "cmath"
-CMath.log(Complex(0, 0)) # => -Infinity+0.0i
-CMath.log(0) # => -Infinity
+p CMath.log(Complex(0, 0)) # => -Infinity+0.0i
+p CMath.log(0) # => -Infinity
 ```
 
 #@until 1.9.3
@@ -193,8 +193,8 @@ z の常用対数を返します。
 
 ```ruby title="例"
 require "cmath"
-CMath.cbrt!(8.0)# => 2.0
-CMath.cbrt!(-8.0) # => -2.0
+p CMath.cbrt!(8.0) # => 2.0
+p CMath.cbrt!(-8.0) # => -2.0
 ```
 
 - **SEE** [m:Math?.cbrt]
@@ -212,7 +212,7 @@ z の立方根の内、主値を返します。
 
 ```ruby title="例"
 require "cmath"
-CMath.cbrt(-8)# => (1.0000000000000002+1.7320508075688772i)
+p CMath.cbrt(-8) # => (1.0000000000000002+1.7320508075688772i)
 ```
 
 #@until 1.9.3
@@ -238,8 +238,8 @@ CMath.cbrt(-8)# => (1.0000000000000002+1.7320508075688772i)
 
 ```ruby title="例"
 require "cmath"
-CMath.sqrt!(4.0) # => 2.0
-CMath.sqrt!(9.0) # => 3.0
+p CMath.sqrt!(4.0) # => 2.0
+p CMath.sqrt!(9.0) # => 3.0
 ```
 
 - **SEE** [m:Math?.sqrt]
@@ -256,9 +256,9 @@ z の平方根を返します。
 
 ```ruby title="例"
 require "cmath"
-CMath.sqrt(-1) # => (0+1.0i)
-CMath.sqrt(1)# => 1.0
-CMath.sqrt(Complex(0, 8))# => (2.0+2.0i)
+p CMath.sqrt(-1) # => (0+1.0i)
+p CMath.sqrt(1) # => 1.0
+p CMath.sqrt(Complex(0, 8)) # => (2.0+2.0i)
 ```
 
 ### module_function def sin!(x) -> Float
@@ -274,9 +274,9 @@ CMath.sqrt(Complex(0, 8))# => (2.0+2.0i)
 
 ```ruby title="例"
 require "cmath"
-CMath.sin!(0 * Math::PI / 4) # => 0.0
-CMath.sin!(1 * Math::PI / 4) # => 0.7071067811865475
-CMath.sin!(2 * Math::PI / 4) # => 1.0
+p CMath.sin!(0 * Math::PI / 4) # => 0.0
+p CMath.sin!(1 * Math::PI / 4) # => 0.7071067811865475
+p CMath.sin!(2 * Math::PI / 4) # => 1.0
 ```
 
 - **SEE** [m:Math?.sin]
@@ -304,9 +304,9 @@ z の正弦関数の値を返します。
 
 ```ruby title="例"
 require "cmath"
-CMath.cos!(0 * Math::PI / 4) # => 1.0
-CMath.cos!(1 * Math::PI / 4) # => 0.7071067811865476
-CMath.cos!(4 * Math::PI / 4) # => -1.0
+p CMath.cos!(0 * Math::PI / 4) # => 1.0
+p CMath.cos!(1 * Math::PI / 4) # => 0.7071067811865476
+p CMath.cos!(4 * Math::PI / 4) # => -1.0
 ```
 
 - **SEE** [m:Math?.cos]
@@ -332,9 +332,9 @@ z の余弦関数の値を返します。
 
 ```ruby title="例"
 require "cmath"
-CMath.tan!(0 * Math::PI / 4) # => 0.0
-CMath.tan!(1 * Math::PI / 4) # => 1.0
-CMath.tan!(4 * Math::PI / 4) # => 0.0
+p CMath.tan!(0 * Math::PI / 4) # => 0.0
+p CMath.tan!(1 * Math::PI / 4) # => 1.0
+p CMath.tan!(4 * Math::PI / 4) # => 0.0
 ```
 
 - **SEE** [m:Math?.tan]

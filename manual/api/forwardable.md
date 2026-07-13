@@ -116,7 +116,7 @@ end
 
 q = MyQueue.new
 q.mypush 42
-q.queue    # => [42]
+p q.queue  # => [42]
 q.push 23  # => NoMethodError
 ```
 
@@ -148,9 +148,9 @@ class Zap
 end
 
 zap = Zap.new
-zap.length # => 5
-zap.first  # => "foo"
-zap.last   # => "baz"
+p zap.length # => 5
+p zap.first  # => "foo"
+p zap.last # => "baz"
 ```
 
 ## Constants

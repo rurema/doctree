@@ -16,7 +16,7 @@ library: json
 ```ruby title="例"
 require "json"
 
-String.json_creatable?  # => true
-Dir.json_creatable?     # => false
+p String.json_creatable?  # => true
+p Dir.json_creatable?   # => false
 ```
 

@@ -30,7 +30,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req['user-agent'] # => Ruby
+p req['user-agent'] # => Ruby
 ```
 
 一種類のヘッダフィールドが一つのヘッダの中に複数存在する
@@ -58,9 +58,9 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req['user-agent'] # => Ruby
+p req['user-agent'] # => Ruby
 req['user-agent'] = "update"
-req['user-agent'] # => update
+p req['user-agent'] # => update
 ```
 
 - **SEE** [m:Net::HTTPHeader#\[\]],
@@ -105,7 +105,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 res = Net::HTTP.get_response(uri)
-res.get_fields('accept-ranges') # => ["none"]
+p res.get_fields('accept-ranges') # => ["none"]
 ```
 
 - **SEE** [m:Net::HTTPHeader#\[\]], [m:Net::HTTPHeader#\[\]=],
@@ -137,7 +137,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.fetch("user-agent") # => "Ruby"
+p req.fetch("user-agent") # => "Ruby"
 ```
 
 ```ruby title="例 key のみ指定。key が存在しない"
@@ -155,7 +155,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.fetch("content-length", "default") # => "default"
+p req.fetch("content-length", "default") # => "default"
 ```
 
 ```ruby title="例 key とブロックを指定"
@@ -163,7 +163,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.fetch("content-length") { |e| 99 } # => 99
+p req.fetch("content-length") { |e| 99 } # => 99
 ```
 
 - **SEE** [m:Net::HTTPHeader#\[\]]
@@ -188,7 +188,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.basic_auth("user", "pass") # => ["Basic dXNlcjpwYXNz"]
+p req.basic_auth("user", "pass") # => ["Basic dXNlcjpwYXNz"]
 ```
 
 ### def chunked? -> bool
@@ -203,9 +203,9 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.chunked? # => false
+p req.chunked? # => false
 req["Transfer-Encoding"] = "chunked"
-req.chunked? # => true
+p req.chunked? # => true
 ```
 
 ### def content_type -> String|nil
@@ -219,9 +219,9 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/comments.cgi?post=comment')
 req = Net::HTTP::Post.new(uri.request_uri)
-req.content_type  # => nil
+p req.content_type  # => nil
 req.content_type = 'multipart/form-data'
-req.content_type  # => "multipart/form-data"
+p req.content_type  # => "multipart/form-data"
 ```
 
 ### def content_type=(type)
@@ -237,9 +237,9 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.content_type                          # => nil
+p req.content_type                        # => nil
 req.content_type = 'multipart/form-data'  # => "multipart/form-data"
-req.content_type                          # => "multipart/form-data"
+p req.content_type                        # => "multipart/form-data"
 ```
 
 ### def main_type -> String|nil
@@ -253,7 +253,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 res = Net::HTTP.get_response(uri)
-res.main_type # => "text"
+p res.main_type # => "text"
 ```
 
 ### def sub_type -> String|nil
@@ -267,7 +267,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 res = Net::HTTP.get_response(uri)
-res.sub_type # => "html"
+p res.sub_type # => "html"
 ```
 
 ### def type_params -> Hash
@@ -282,7 +282,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 res = Net::HTTP.get_response(uri)
-res.type_params # => {"charset"=>"UTF-8"}
+p res.type_params # => {"charset"=>"UTF-8"}
 ```
 
 ### def form_data=(params)
@@ -309,7 +309,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.set_form_data({"q" => "ruby", "lang" => "en"}, ';') # => "application/x-www-form-urlencoded"
+p req.set_form_data({"q" => "ruby", "lang" => "en"}, ';') # => "application/x-www-form-urlencoded"
 ```
 
 ### def content_length -> Integer|nil
@@ -325,9 +325,9 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.content_length  # => nil
+p req.content_length  # => nil
 req.content_length = 10
-req.content_length  # => 10
+p req.content_length  # => 10
 ```
 
 ### def content_length=(len)
@@ -343,9 +343,9 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.content_length      # => nil
+p req.content_length    # => nil
 req.content_length = 10 # => 10
-req.content_length      # => 10
+p req.content_length    # => 10
 ```
 
 ### def content_range -> Range|nil
@@ -360,9 +360,9 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.content_range      # => nil
+p req.content_range    # => nil
 req['Content-Range'] = "bytes 0-499/1234"
-req.content_range      # => 0..499
+p req.content_range    # => 0..499
 ```
 
 ### def range_length -> Integer|nil
@@ -382,7 +382,7 @@ require 'net/http'
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req['Content-Range'] = "bytes 1-500/1000"
-req.range_length # => 500
+p req.range_length # => 500
 ```
 
 ### def delete(key) -> [String] | nil
@@ -399,9 +399,9 @@ require 'net/http'
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req.content_length = 10
-req.content_length  # => 10
-req.delete("Content-Length")  # => ["10"]
-req.content_length  # => nil
+p req.content_length  # => 10
+p req.delete("Content-Length")  # => ["10"]
+p req.content_length  # => nil
 ```
 
 ### def each {|name, val| .... } -> ()
@@ -501,8 +501,8 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 res = Net::HTTP.get_response(uri)
-res.key?('content-type')     # => true
-res.key?('nonexist-header')  # => false
+p res.key?('content-type')   # => true
+p res.key?('nonexist-header')  # => false
 ```
 
 ### def method -> String
@@ -514,7 +514,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.method # => "GET"
+p req.method # => "GET"
 ```
 
 ### def proxy_basic_auth(account, password) -> [String]
@@ -529,7 +529,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.proxy_basic_auth("account", "password") # => ["Basic YWNjb3VudDpwYXNzd29yZA=="]
+p req.proxy_basic_auth("account", "password") # => ["Basic YWNjb3VudDpwYXNzd29yZA=="]
 ```
 
 ### def range -> Range|nil
@@ -547,7 +547,7 @@ require 'net/http'
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req['range'] = "bytes=1-5"
-req.range # => [1..5]
+p req.range # => [1..5]
 ```
 
 ```ruby title="例 Net::HTTPHeaderSyntaxError"

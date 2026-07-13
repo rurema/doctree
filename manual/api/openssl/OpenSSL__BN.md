@@ -30,13 +30,13 @@ base で、変換方法(基数)を指定します。
 ```ruby
 require 'openssl'
 
-OpenSSL::BN.new("-241") # => -241
-OpenSSL::BN.new("ff00",16) # => 65280
-OpenSSL::BN.new("\x81",2) # => 129
-OpenSSL::BN.new("\xff\x81",2) # => 65409
-OpenSSL::BN.new("\x00\x00\x00\x02\x00\x81", 0) # => 129
-OpenSSL::BN.new("\x00\x00\x00\x02\x80\x81", 0) # => -129
-OpenSSL::BN.new(1209) # => 1209
+p OpenSSL::BN.new("-241") # => -241
+p OpenSSL::BN.new("ff00",16) # => 65280
+p OpenSSL::BN.new("\x81",2) # => 129
+p OpenSSL::BN.new("\xff\x81",2) # => 65409
+p OpenSSL::BN.new("\x00\x00\x00\x02\x00\x81", 0) # => 129
+p OpenSSL::BN.new("\x00\x00\x00\x02\x80\x81", 0) # => -129
+p OpenSSL::BN.new(1209) # => 1209
 ```
 
 - **param** `str` -- 整数を表す文字列
@@ -203,11 +203,11 @@ pp bn         # => #<OpenSSL::BN 1>
 ```ruby
 require 'openssl'
 
-OpenSSL::BN.new(5) <=> 5  # =>  0
+p OpenSSL::BN.new(5) <=> 5  # =>  0
 
-OpenSSL::BN.new(5) <=> OpenSSL::BN.new(9)  # => -1
-OpenSSL::BN.new(5) <=> OpenSSL::BN.new(5)  # =>  0
-OpenSSL::BN.new(5) <=> OpenSSL::BN.new(-5)  # =>  1
+p OpenSSL::BN.new(5) <=> OpenSSL::BN.new(9)  # => -1
+p OpenSSL::BN.new(5) <=> OpenSSL::BN.new(5)  # =>  0
+p OpenSSL::BN.new(5) <=> OpenSSL::BN.new(-5)  # =>  1
 ```
 
 - **param** `other` -- 比較する整数
@@ -228,8 +228,8 @@ OpenSSL::BN.new(5) <=> OpenSSL::BN.new(-5)  # =>  1
 require 'openssl'
 
 bn = 2.to_bn
-bn >> 1    # => #<OpenSSL::BN 1>
-bn         # => #<OpenSSL::BN 2>
+p bn >> 1  # => #<OpenSSL::BN 1>
+p bn       # => #<OpenSSL::BN 2>
 ```
 
 - **param** `other` -- シフトするビット数
@@ -244,8 +244,8 @@ bn         # => #<OpenSSL::BN 2>
 require 'openssl'
 
 bn = 1.to_bn
-bn.lshift!(2)   # => #<OpenSSL::BN 4>
-bn              # => #<OpenSSL::BN 4>
+p bn.lshift!(2) # => #<OpenSSL::BN 4>
+p bn            # => #<OpenSSL::BN 4>
 ```
 
 - **param** `n` -- シフトするビット数
@@ -260,8 +260,8 @@ bn              # => #<OpenSSL::BN 4>
 require 'openssl'
 
 bn = 8.to_bn
-bn.rshift!(1)    # => #<OpenSSL::BN 4>
-bn               # => #<OpenSSL::BN 4>
+p bn.rshift!(1)  # => #<OpenSSL::BN 4>
+p bn             # => #<OpenSSL::BN 4>
 ```
 
 - **param** `n` -- シフトするビット数
@@ -274,8 +274,8 @@ bn               # => #<OpenSSL::BN 4>
 ```ruby
 require 'openssl'
 
-OpenSSL::BN.new("129").bit_set?(0) # => true
-OpenSSL::BN.new("129").bit_set?(1) # => false
+p OpenSSL::BN.new("129").bit_set?(0) # => true
+p OpenSSL::BN.new("129").bit_set?(1) # => false
 ```
 
 - **param** `n` -- 調べるビットの位置
@@ -289,7 +289,7 @@ require 'openssl'
 
 a = OpenSSL::BN.new("129")
 a.clear_bit!(0)
-a # => 128
+p a # => 128
 ```
 
 - **param** `n` -- 0にするビットの位置
@@ -355,7 +355,7 @@ p "%b" % bn      # =>     "111"
 ```ruby
 require 'openssl'
 
-OpenSSL::BN.new("7").mod_add(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 4
+p OpenSSL::BN.new("7").mod_add(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 4
 ```
 
 - **param** `other` -- 和を取る数
@@ -368,7 +368,7 @@ OpenSSL::BN.new("7").mod_add(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 4
 ```ruby
 require 'openssl'
 
-OpenSSL::BN.new("7").mod_exp(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 1
+p OpenSSL::BN.new("7").mod_exp(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 1
 ```
 
 - **param** `other` -- 指数
@@ -397,7 +397,7 @@ p (3 * 2) % 5            # => 1
 ```ruby
 require 'openssl'
 
-OpenSSL::BN.new("7").mod_mul(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 3
+p OpenSSL::BN.new("7").mod_mul(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 3
 ```
 
 - **param** `other` -- 積を取る数
@@ -417,7 +417,7 @@ OpenSSL::BN.new("7").mod_mul(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 3
 ```ruby
 require 'openssl'
 
-OpenSSL::BN.new("27").mod_sub(OpenSSL::BN.new("3"), OpenSSL::BN.new("5")) # => 4
+p OpenSSL::BN.new("27").mod_sub(OpenSSL::BN.new("3"), OpenSSL::BN.new("5")) # => 4
 ```
 
 - **param** `other` -- 引く数
@@ -433,9 +433,9 @@ OpenSSL::BN.new("27").mod_sub(OpenSSL::BN.new("3"), OpenSSL::BN.new("5")) # => 4
 ```ruby
 require 'openssl'
 
-OpenSSL::BN.new("127").num_bits # => 7
-OpenSSL::BN.new("-127").num_bits # => 7
-OpenSSL::BN.new("128").num_bits # => 8
+p OpenSSL::BN.new("127").num_bits # => 7
+p OpenSSL::BN.new("-127").num_bits # => 7
+p OpenSSL::BN.new("128").num_bits # => 8
 ```
 
 ### def num_bytes -> Integer
@@ -489,8 +489,8 @@ checksがnilである場合は OpenSSL が適切な
 require 'openssl'
 
 # 181 は 「小さな素数」である
-OpenSSL::BN.new("181").prime_fasttest?(nil, true) # => false
-OpenSSL::BN.new("181").prime_fasttest?(nil, false) # => true
+p OpenSSL::BN.new("181").prime_fasttest?(nil, true) # => false
+p OpenSSL::BN.new("181").prime_fasttest?(nil, false) # => true
 ```
 
 - **param** `checks` -- Miller-Robin法の繰り返しの回数
@@ -506,7 +506,7 @@ require 'openssl'
 
 a = OpenSSL::BN.new("128")
 a.set_bit!(0)
-a # => 129
+p a # => 129
 ```
 
 - **param** `n` -- 1にするビットの位置
@@ -595,11 +595,11 @@ pp (-5).to_bn  #=> #<OpenSSL::BN -5>
 ```ruby
 require 'openssl'
 
-OpenSSL::BN.new(-5).ucmp(5)  # =>  0
+p OpenSSL::BN.new(-5).ucmp(5)  # =>  0
 
-OpenSSL::BN.new(5).ucmp(OpenSSL::BN.new(-9))  # => -1
-OpenSSL::BN.new(-5).ucmp(OpenSSL::BN.new(5))  # =>  0
-OpenSSL::BN.new(-5).ucmp(OpenSSL::BN.new(2))  # =>  1
+p OpenSSL::BN.new(5).ucmp(OpenSSL::BN.new(-9))  # => -1
+p OpenSSL::BN.new(-5).ucmp(OpenSSL::BN.new(5))  # =>  0
+p OpenSSL::BN.new(-5).ucmp(OpenSSL::BN.new(2))  # =>  1
 ```
 
 - **param** `other` -- 比較する整数

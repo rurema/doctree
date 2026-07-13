@@ -147,9 +147,9 @@ require 'logger'
 
 logger = Logger.new(STDOUT)
 
-logger.info("test") # => I, [2019-04-16T00:40:11.837898 #2795]  INFO -- : test
+p logger.info("test") # => I, [2019-04-16T00:40:11.837898 #2795]  INFO -- : test
 logger.close
-logger.info("test") # => log writing failed. closed stream
+p logger.info("test") # => log writing failed. closed stream
 ```
 
 ### def datetime_format -> String | nil
@@ -167,10 +167,10 @@ require 'logger'
 
 logger = Logger.new(STDOUT)
 
-logger.datetime_format # => nil
+p logger.datetime_format # => nil
 logger.debug("test")
 logger.datetime_format = '%Y/%m/%dT%H:%M:%S.%06d'
-logger.datetime_format # => "%Y/%m/%dT%H:%M:%S.%06d"
+p logger.datetime_format # => "%Y/%m/%dT%H:%M:%S.%06d"
 logger.debug("test")
 
 # => D, [2019-03-12T22:52:13.674385 #17393] DEBUG -- : test
@@ -189,10 +189,10 @@ require 'logger'
 
 logger = Logger.new(STDOUT)
 
-logger.datetime_format # => nil
+p logger.datetime_format # => nil
 logger.debug("test")
 logger.datetime_format = '%Y/%m/%dT%H:%M:%S.%06d' # => "%Y/%m/%dT%H:%M:%S.%06d"
-logger.datetime_format # => "%Y/%m/%dT%H:%M:%S.%06d"
+p logger.datetime_format # => "%Y/%m/%dT%H:%M:%S.%06d"
 logger.debug("test")
 
 # => D, [2019-03-13T23:52:13.674385 #17393] DEBUG -- : test
@@ -210,9 +210,9 @@ logger.debug("test")
 require 'logger'
 
 logger = Logger.new(STDOUT, level: Logger::Severity::DEBUG)
-logger.debug? # => true
+p logger.debug? # => true
 logger = Logger.new(STDOUT, level: Logger::Severity::INFO)
-logger.debug? # => false
+p logger.debug? # => false
 ```
 
 ### def info? -> bool
@@ -224,9 +224,9 @@ logger.debug? # => false
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.info? # => true
+p logger.info? # => true
 logger.level = Logger::Severity::ERROR
-logger.info? # => false
+p logger.info? # => false
 ```
 
 ### def warn? -> bool
@@ -238,9 +238,9 @@ logger.info? # => false
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.warn? # => true
+p logger.warn? # => true
 logger.level = Logger::Severity::ERROR
-logger.warn? # => false
+p logger.warn? # => false
 ```
 
 ### def error? -> bool
@@ -252,9 +252,9 @@ logger.warn? # => false
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.error? # => true
+p logger.error? # => true
 logger.level = Logger::Severity::FATAL
-logger.error? # => false
+p logger.error? # => false
 ```
 
 ### def fatal? -> bool
@@ -266,9 +266,9 @@ logger.error? # => false
 require 'logger'
 
 logger = Logger.new(STDOUT, level: Logger::Severity::FATAL)
-logger.fatal? # => true
+p logger.fatal? # => true
 logger.level = 5
-logger.fatal? # => false
+p logger.fatal? # => false
 ```
 
 ### def debug(progname = nil) -> true
@@ -317,8 +317,8 @@ INFO 情報を出力します。
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.info("info1")               # => I, [2019-03-21T03:36:28.003418 #2533]  INFO -- : info1
-logger.info("MainApp") { "info2" } # => I, [2019-03-21T03:36:28.003493 #2533]  INFO -- MainApp: info2
+p logger.info("info1")             # => I, [2019-03-21T03:36:28.003418 #2533]  INFO -- : info1
+p logger.info("MainApp") { "info2" } # => I, [2019-03-21T03:36:28.003493 #2533]  INFO -- MainApp: info2
 ```
 
 - **SEE** [m:Logger#debug]
@@ -343,8 +343,8 @@ WARN 情報を出力します。
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.warn("warn1")              # => W, [2019-03-27T22:46:17.744243 #12744]  WARN -- : warn1
-logger.warn("MyApp") { "warn2" }  # => W, [2019-03-27T22:46:17.744322 #12744]  WARN -- MyApp: warn2
+p logger.warn("warn1")            # => W, [2019-03-27T22:46:17.744243 #12744]  WARN -- : warn1
+p logger.warn("MyApp") { "warn2" }  # => W, [2019-03-27T22:46:17.744322 #12744]  WARN -- MyApp: warn2
 logger.level = Logger::Severity::ERROR
 # 出力されない
 logger.warn("warn3")
@@ -372,8 +372,8 @@ ERROR 情報を出力します。
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.error("error1") # => E, [2019-03-15T22:54:37.925635 #14878] ERROR -- : error1
-logger.error("MainApp") { "error2" } # => E, [2019-03-16T03:50:58.062094 #2172] ERROR -- MainApp: error2
+p logger.error("error1") # => E, [2019-03-15T22:54:37.925635 #14878] ERROR -- : error1
+p logger.error("MainApp") { "error2" } # => E, [2019-03-16T03:50:58.062094 #2172] ERROR -- MainApp: error2
 logger.level = Logger::Severity::FATAL
 # 出力されない
 logger.error("error3")
@@ -401,8 +401,8 @@ FATAL 情報を出力します。
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.fatal("fatal1")               # => F, [2019-03-17T22:36:43.042422 #4028] FATAL -- : fatal1
-logger.fatal("MainApp") { "fatal2" } # => F, [2019-03-17T22:36:43.042462 #4028] FATAL -- MainApp: fatal2
+p logger.fatal("fatal1")             # => F, [2019-03-17T22:36:43.042422 #4028] FATAL -- : fatal1
+p logger.fatal("MainApp") { "fatal2" } # => F, [2019-03-17T22:36:43.042462 #4028] FATAL -- MainApp: fatal2
 ```
 
 - **SEE** [m:Logger#debug]
@@ -427,8 +427,8 @@ UNKNOWN 情報を出力します。
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.unknown("unknown1")              # => A, [2019-03-28T00:26:42.850942 #2765]   ANY -- : unknown1
-logger.unknown("MyApp") { "unknown2" }  # => A, [2019-03-28T00:26:42.851021 #2765]   ANY -- MyApp: unknown2
+p logger.unknown("unknown1")            # => A, [2019-03-28T00:26:42.850942 #2765]   ANY -- : unknown1
+p logger.unknown("MyApp") { "unknown2" }  # => A, [2019-03-28T00:26:42.851021 #2765]   ANY -- MyApp: unknown2
 ```
 
 - **SEE** [m:Logger#debug]
@@ -442,9 +442,9 @@ logger.unknown("MyApp") { "unknown2" }  # => A, [2019-03-28T00:26:42.851021 #276
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.level # => 0
+p logger.level # => 0
 logger.level = Logger::Severity::ERROR
-logger.level # => 3
+p logger.level # => 3
 ```
 
 ### def level=(level)
@@ -459,9 +459,9 @@ Logger オブジェクトのログレベルを設定します。ログレベル�
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.level # => 0
+p logger.level # => 0
 logger.level = Logger::Severity::ERROR # => 3
-logger.level # => 3
+p logger.level # => 3
 ```
 
 ### def progname -> String
@@ -472,9 +472,9 @@ logger.level # => 3
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.progname # => nil
+p logger.progname # => nil
 logger.progname = "MyProgName"
-logger.progname # => "MyProgName"
+p logger.progname # => "MyProgName"
 ```
 
 ### def progname=(name)
@@ -485,11 +485,11 @@ logger.progname # => "MyProgName"
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.progname                          # => nil
+p logger.progname                        # => nil
 logger.progname = "MyProgName"           # => "MyProgName"
-logger.progname                          # => "MyProgName"
-logger.info("info1")                     # => I, [2019-04-23T00:08:55.585459 #2823]  INFO -- MyProgName: info1
-logger.info("OtherProgName") { "info2" } # => I, [2019-04-23T00:08:55.585500 #2823]  INFO -- OtherProgName: info2
+p logger.progname                        # => "MyProgName"
+p logger.info("info1")                   # => I, [2019-04-23T00:08:55.585459 #2823]  INFO -- MyProgName: info1
+p logger.info("OtherProgName") { "info2" } # => I, [2019-04-23T00:08:55.585500 #2823]  INFO -- OtherProgName: info2
 ```
 
 ### def formatter -> String
@@ -502,7 +502,7 @@ logger.info("OtherProgName") { "info2" } # => I, [2019-04-23T00:08:55.585500 #28
 require 'logger'
 
 logger = Logger.new(STDOUT)
-logger.formatter # => nil
+p logger.formatter # => nil
 logger.info("test")
 # => I, [2019-05-09T22:13:56.509159 #13912]  INFO -- : test
 
@@ -510,7 +510,7 @@ ltsv_formatter = proc { |severity, timestamp, progname, msg|
   "time:#{timestamp}\tlevel:#{severity}\tprogname:#{progname}\tmessage:#{msg}\n"
 }
 logger.formatter = ltsv_formatter
-logger.formatter # => #<Proc:0x00007fa3048b8e00@/path/to/file:8>
+p logger.formatter # => #<Proc:0x00007fa3048b8e00@/path/to/file:8>
 logger.info("MyApp") { "test" }
 
 # => time:2019-05-09 22:13:56 +0900 level:INFO  progname:MyApp  message:test

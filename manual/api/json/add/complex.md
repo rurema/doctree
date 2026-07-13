@@ -34,7 +34,7 @@ JSON のオブジェクトから [c:Complex] のオブジェクトを生成し�
 
 ```ruby title="例"
 require 'json/add/complex'
-Complex(2, 3).to_json # => "{\"json_class\":\"Complex\",\"r\":2,\"i\":3}"
+p Complex(2, 3).to_json # => "{\"json_class\":\"Complex\",\"r\":2,\"i\":3}"
 ```
 
 - **SEE** [m:JSON::Generator::GeneratorMethods::Hash#to_json]

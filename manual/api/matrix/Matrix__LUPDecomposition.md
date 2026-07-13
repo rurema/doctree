@@ -52,9 +52,9 @@ require 'matrix'
 
 lup = Matrix[[2, 1], [1, 2]].lup
 
-lup.solve([1, -1])                  #=> Vector[(1/1), (-1/1)]
-lup.solve(Vector[3, 0])             #=> Vector[(2/1), (-1/1)]
-lup.solve(Matrix[[1, 3], [-1, 0]])  #=> Matrix[[(1/1), (2/1)], [(-1/1), (-1/1)]]
+p lup.solve([1, -1])                #=> Vector[(1/1), (-1/1)]
+p lup.solve(Vector[3, 0])           #=> Vector[(2/1), (-1/1)]
+p lup.solve(Matrix[[1, 3], [-1, 0]])  #=> Matrix[[(1/1), (2/1)], [(-1/1), (-1/1)]]
 ```
 
 #@#== ChangeLog

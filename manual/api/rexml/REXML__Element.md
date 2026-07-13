@@ -99,11 +99,11 @@ doc = REXML::Document.new(<<EOS)
 EOS
 
 children = doc.get_elements("/root/children").first
-children.name # => "children"
-children.root_node == doc # => true
+p children.name # => "children"
+p children.root_node == doc # => true
 grandchildren = doc.get_elements("/root/children/grandchildren").first
-grandchildren.name # => "grandchildren"
-grandchildren.root_node == doc # => true
+p grandchildren.name # => "grandchildren"
+p grandchildren.root_node == doc # => true
 ```
 
 
@@ -121,11 +121,11 @@ doc = REXML::Document.new(<<EOS)
 EOS
 
 children = doc.get_elements("/root/children").first
-children.name # => "children"
-children.root.name # => "root"
+p children.name # => "children"
+p children.root.name # => "root"
 grandchildren = doc.get_elements("/root/children/grandchildren").first
-grandchildren.name # => "grandchildren"
-grandchildren.root.name # => "root"
+p grandchildren.name # => "grandchildren"
+p grandchildren.root.name # => "root"
 ```
 
 ### def document -> REXML::Document | nil
@@ -168,7 +168,7 @@ self の文脈で定義されている prefix を文字列の配列を返しま�
 ```ruby
 require 'rexml/document'
 doc = REXML::Document.new("<a xmlns:x='1' xmlns:y='2'><b/><c xmlns:z='3'/></a>")
-doc.elements['//b'].prefixes # => ["x", "y"]
+p doc.elements['//b'].prefixes # => ["x", "y"]
 ```
 
 ### def namespaces -> {String => String}
@@ -180,7 +180,7 @@ self の文脈で定義されている名前空間の情報を返します。
 ```ruby
 require 'rexml/document'
 doc = REXML::Document.new("<a xmlns:x='1' xmlns:y='2'><b/><c xmlns:z='3'/></a>")
-doc.elements['//b'].namespaces # => {"x"=>"1", "y"=>"2"}
+p doc.elements['//b'].namespaces # => {"x"=>"1", "y"=>"2"}
 ```
 
 ### def namespace(prefix=nil) -> String
@@ -194,11 +194,11 @@ prefix で指示される名前空間の宣言が存在しない場合は nil �
 require 'rexml/document'
 doc = REXML::Document.new("<a xmlns='1' xmlns:y='2'><b/><c xmlns:z='3'/><y:d /></a>")
 b = doc.elements['//b']
-b.namespace      # => "1"
-b.namespace("y") # => "2"
-b.namespace("z") # => nil
+p b.namespace    # => "1"
+p b.namespace("y") # => "2"
+p b.namespace("z") # => nil
 d = doc.elements['//y:d']
-d.namespace      # => "2"
+p d.namespace    # => "2"
 ```
 
 ### def add_namespace(prefix, uri) -> self
@@ -219,9 +219,9 @@ a = REXML::Element.new("a")
 a.add_namespace("xmlns:foo", "bar" )
 a.add_namespace("foo", "bar")  # 上と同じ意味
 a.add_namespace("twiddle")
-a.to_s # => "<a xmlns:foo='bar' xmlns='twiddle'/>"
+p a.to_s # => "<a xmlns:foo='bar' xmlns='twiddle'/>"
 a.add_namespace("foo", "baz")
-a.to_s # => "<a xmlns:foo='baz' xmlns='twiddle'/>"
+p a.to_s # => "<a xmlns:foo='baz' xmlns='twiddle'/>"
 ```
 
 ### def delete_namespace(namespace = "xmlns") -> self
@@ -238,9 +238,9 @@ a.to_s # => "<a xmlns:foo='baz' xmlns='twiddle'/>"
 require 'rexml/document'
 doc = REXML::Document.new "<a xmlns:foo='bar' xmlns='twiddle'/>"
 doc.root.delete_namespace
-doc.to_s # => "<a xmlns:foo='bar'/>"
+p doc.to_s # => "<a xmlns:foo='bar'/>"
 doc.root.delete_namespace 'foo'
-doc.to_s # => "<a/>"
+p doc.to_s # => "<a/>"
 ```
 
 ### def add_element(element, attrs = nil) -> Element
@@ -267,13 +267,13 @@ attrs に { String => String } という Hash を渡すと、
 require 'rexml/document'
 doc = REXML::Document.new('<a/>')
 el = doc.root.add_element 'my-tag' # => <my-tag/>
-doc.root.to_s # => "<a><my-tag/></a>"
+p doc.root.to_s # => "<a><my-tag/></a>"
 el = doc.root.add_element 'my-tag', {'attr1'=>'val1', 'attr2'=>'val2'}
 # => <my-tag attr1='val1' attr2='val2'/>
-doc.root.to_s # => "<a><my-tag/><my-tag attr1='val1' attr2='val2'/></a>"
+p doc.root.to_s # => "<a><my-tag/><my-tag attr1='val1' attr2='val2'/></a>"
 el = REXML::Element.new 'my-tag'
-doc.root.add_element el # => <my-tag/>
-doc.root.to_s # => "<a><my-tag/><my-tag attr1='val1' attr2='val2'/><my-tag/></a>"
+p doc.root.add_element el # => <my-tag/>
+p doc.root.to_s # => "<a><my-tag/><my-tag attr1='val1' attr2='val2'/><my-tag/></a>"
 ```
 
 - **SEE** [m:REXML::Elements#add], [m:REXML::Element.new]
@@ -297,15 +297,15 @@ REXML::Element を指定すると、その要素が削除されます。
 require 'rexml/document'
 doc = REXML::Document.new '<a><b/><c/><c id="1"/><d/><c/></a>'
 doc.delete_element("/a/b")
-doc.to_s # => "<a><c/><c id='1'/><d/><c/></a>"
+p doc.to_s # => "<a><c/><c id='1'/><d/><c/></a>"
 doc.delete_element("a/c[@id='1']")
-doc.to_s # => "<a><c/><d/><c/></a>"
+p doc.to_s # => "<a><c/><d/><c/></a>"
 doc.root.delete_element("c")
-doc.to_s # => "<a><d/><c/></a>"
+p doc.to_s # => "<a><d/><c/></a>"
 doc.root.delete_element("c")
-doc.to_s # => "<a><d/></a>"
+p doc.to_s # => "<a><d/></a>"
 doc.root.delete_element(1)
-doc.to_s # => "<a/>"
+p doc.to_s # => "<a/>"
 ```
 
 ### def has_elements? -> bool
@@ -314,10 +314,10 @@ self が一つでも子要素を持つならば true を返します。
 ```ruby
 require 'rexml/document'
 doc = REXML::Document.new("<a><b/><c>Text</c></a>")
-doc.root.has_elements?               # => true
-doc.elements["/a/b"].has_elements?   # => false
+p doc.root.has_elements?             # => true
+p doc.elements["/a/b"].has_elements? # => false
 # /a/c はテキストノードしか持たないので false である
-doc.elements["/a/c"].has_elements?   # => false
+p doc.elements["/a/c"].has_elements? # => false
 ```
 
 ### def each_element_with_attribute(key, value = nil, max = 0, name = nil) {|element| ... } -> ()
@@ -409,8 +409,8 @@ xpath には XPath 文字列を指定します。
 ```ruby
 require 'rexml/document'
 doc = REXML::Document.new '<a><b/>text<c/></a>'
-doc.root.elements['b'].next_element # => <c/>
-doc.root.elements['c'].next_element # => nil
+p doc.root.elements['b'].next_element # => <c/>
+p doc.root.elements['c'].next_element # => nil
 ```
 
 ### def previous_element -> Element | nil
@@ -444,7 +444,7 @@ require 'rexml/document'
 doc = REXML::Document.new "<p>some text <b>this is bold!</b> more text</p>"
 # doc.root (<p> ... </p>) は2つのテキストノード("some text " と " more text"
 # を持っているが、前者を返す
-doc.root.text # => "some text "
+p doc.root.text # => "some text "
 ```
 
 ### def get_text(path = nil) -> REXML::Text | nil
@@ -466,7 +466,7 @@ require 'rexml/document'
 doc = REXML::Document.new "<p>some text <b>this is bold!</b> more text</p>"
 # doc.root (<p> ... </p>) は2つのテキストノード("some text " と " more text"
 # を持っているが、前者を返す
-doc.root.get_text.value # => "some text "
+p doc.root.get_text.value # => "some text "
 ```
 
 ### def text=(text)
@@ -489,7 +489,7 @@ nil を指定すると最初のテキストノードが削除されます。
 ```ruby
 require 'rexml/document'
 doc = REXML::Document.new('<a><b/></a>')
-doc.to_s # => "<a><b/></a>"
+p doc.to_s # => "<a><b/></a>"
 doc.root.text = "Foo"; doc.to_s # => "<a><b/>Foo</a>"
 doc.root.text = "Bar"; doc.to_s # => "<a><b/>Bar</a>"
 doc.root.add_element "c"
@@ -528,12 +528,12 @@ doc.root.text = nil; doc.to_s # => "<a><b/><c/></a>"
 require 'rexml/document'
 doc = REXML::Document.new('<a><b/><c/></a>')
 c = doc.root.elements[2] # <a> .. </a> の中の <c/> 要素
-c # => <c/>
-c.xpath # => "/a/c"
+p c # => <c/>
+p c.xpath # => "/a/c"
 doc = REXML::Document.new('<a><b/><b/></a>')
 b = doc.root.elements[2] # <a> .. </a> の中の2番目の <b/> 要素
-b # => <b/>
-b.xpath # => "/a/b[2]"
+p b # => <b/>
+p b.xpath # => "/a/b[2]"
 ```
 
 
@@ -562,10 +562,10 @@ doc = REXML::Document.new(<<-EOS)
 </root>
 EOS
 a = doc.get_elements("/root/a").first
-a.attribute("att") # => att='&lt;'
-a.attribute("att", "http://example.org/bar") # => bar:att='2'
-a.attribute("bar:att") # => bar:att='2'
-a.attribute("baz") # => nil
+p a.attribute("att") # => att='&lt;'
+p a.attribute("att", "http://example.org/bar") # => bar:att='2'
+p a.attribute("bar:att") # => bar:att='2'
+p a.attribute("baz") # => nil
 ```
 
 ### def has_attributes? -> bool
@@ -590,10 +590,10 @@ a.attribute("baz") # => nil
 ```ruby
 require 'rexml/document'
 doc = REXML::Document.new("<e/>")
-doc.root.add_attribute("a", "b"); doc.root # => <e a='b'/>
-doc.root.add_attribute("x:a", "c"); doc.root # => <e a='b' x:a='c'/>
+p doc.root.add_attribute("a", "b"); doc.root # => <e a='b'/>
+p doc.root.add_attribute("x:a", "c"); doc.root # => <e a='b' x:a='c'/>
 doc.root.add_attribute(REXML::Attribute.new("b", "d"))
-doc.root # => <e a='b' x:a='c' b='d'/>
+p doc.root # => <e a='b' x:a='c' b='d'/>
 ```
 
 ### def add_attributes(attrs) -> ()
@@ -618,10 +618,10 @@ Hash の場合は、
 require 'rexml/document'
 e = REXML::Element.new("e")
 e.add_attributes({"a" => "b", "c" => "d"})
-e # => <e a='b' c='d'/>
+p e # => <e a='b' c='d'/>
 e = REXML::Element.new("e")
 e.add_attributes([["a", "b"], ["c", "d"]])
-e # => <e a='b' c='d'/>
+p e # => <e a='b' c='d'/>
 ```
 
 ### def delete_attribute(key) -> REXML::Attribute | nil
@@ -636,9 +636,9 @@ key という属性名の属性が存在しない場合は削除されずに、n
 ```ruby
 require 'rexml/document'
 e = REXML::Element.new("E")
-e.add_attribute("x", "foo"); e # => <E x='foo'/>
-e.add_attribute("y:x", "bar"); e # => <E x='foo' y:x='bar'/>
-e.delete_attribute("x"); e # => <E y:x='bar'/>
+p e.add_attribute("x", "foo"); e # => <E x='foo'/>
+p e.add_attribute("y:x", "bar"); e # => <E x='foo' y:x='bar'/>
+p e.delete_attribute("x"); e # => <E y:x='bar'/>
 ```
 
 ### def cdatas -> [REXML::CData]

@@ -25,7 +25,7 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 ```ruby title="例"
 require "json/add/core"
 
-(1..5).to_json # => "{\"json_class\":\"Range\",\"a\":[1,5,false]}"
+p (1..5).to_json # => "{\"json_class\":\"Range\",\"a\":[1,5,false]}"
 ```
 
 - **SEE** [m:JSON::Generator::GeneratorMethods::Hash#to_json]

@@ -20,9 +20,9 @@ text
 </root>
 EOS
 
-doc[0].string # => " xx "
-doc.root[1].string # => " yy "
-doc.root[3].string # => " zz "
+p doc[0].string # => " xx "
+p doc.root[1].string # => " yy "
+p doc.root[3].string # => " zz "
 ```
 
 ## Class Methods

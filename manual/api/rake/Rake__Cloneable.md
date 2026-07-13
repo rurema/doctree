@@ -21,9 +21,9 @@ task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList['a.c', 'b.c']
   clone = file_list.clone
-  clone                 # => ["a.c", "b.c"]
+  p clone               # => ["a.c", "b.c"]
   clone.exclude("a.c")
-  clone == file_list    # => false
+  p clone == file_list  # => false
 end
 ```
 
@@ -41,7 +41,7 @@ task :test_rake_app do
   file_list.freeze
   dup = file_list.dup
   clone = file_list.clone
-  dup.exclude("a.c")   # => ["b.c"]
-  clone.exclude("a.c") # => can't modify frozen Rake::FileList
+  p dup.exclude("a.c") # => ["b.c"]
+  p clone.exclude("a.c") # => can't modify frozen Rake::FileList
 end
 ```

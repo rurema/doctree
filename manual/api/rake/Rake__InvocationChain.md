@@ -30,7 +30,7 @@ a.append('task_a').append('task_b').append('task_a') # => 例外発生
 task default: :test_rake_app
 task :test_rake_app do
   invocation_chain= Rake::InvocationChain.new("task_a", Rake::InvocationChain::EMPTY)
-  invocation_chain.append("task_b") # => LL("task_b", "task_a")
+  p invocation_chain.append("task_b") # => LL("task_b", "task_a")
 end
 ```
 
@@ -47,8 +47,8 @@ end
 task default: :test_rake_app
 task :test_rake_app do
   invocation_chain = Rake::InvocationChain.new("task_a", Rake::InvocationChain::EMPTY)
-  invocation_chain.member?("task_a") # => true
-  invocation_chain.member?("task_b") # => false
+  p invocation_chain.member?("task_a") # => true
+  p invocation_chain.member?("task_b") # => false
 end
 ```
 
@@ -62,7 +62,7 @@ end
 task default: :test_rake_app
 task :test_rake_app do
   invocation_chain= Rake::InvocationChain.new("task_a", Rake::InvocationChain::EMPTY)
-  invocation_chain.to_s # => "TOP => task_a"
+  p invocation_chain.to_s # => "TOP => task_a"
 end
 ```
 
@@ -82,9 +82,9 @@ end
 task default: :test_rake_app
 task :test_rake_app do
   tail = Rake::InvocationChain.new("task_a", Rake::InvocationChain::EMPTY)
-  tail.to_s # => "TOP => task_a"
+  p tail.to_s # => "TOP => task_a"
   b = Rake::InvocationChain.new("task_b", tail)
-  b.to_s # => "TOP => task_a => task_b"
+  p b.to_s # => "TOP => task_a => task_b"
 end
 ```
 
@@ -103,7 +103,7 @@ task default: :test_rake_app
 task :test_rake_app do
   chain = Rake::InvocationChain::EMPTY
   b = Rake::InvocationChain.append("task_a", chain)
-  b.to_s # => "TOP => task_a"
+  p b.to_s # => "TOP => task_a"
 end
 ```
 

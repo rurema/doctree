@@ -216,8 +216,8 @@ FileUtils.chown_R 'cvs', 'cvs', '/var/cvs', verbose: true
 
 ```ruby
 require 'fileutils'
-FileUtils.cmp('somefile', 'somefile')      #=> true
-FileUtils.cmp('/dev/null', '/dev/urandom') #=> false
+p FileUtils.cmp('somefile', 'somefile')    #=> true
+p FileUtils.cmp('/dev/null', '/dev/urandom') #=> false
 ```
 
 ### module_function def compare_stream(io_a, io_b) -> bool
@@ -775,7 +775,7 @@ FileUtils.uptodate?('hello.o', ['hello.c', 'hello.h']) or system('make')
 
 ```ruby
 require 'fileutils'
-FileUtils.collect_method(:preserve) # => ["cp", "cp_r", "copy", "install"]
+p FileUtils.collect_method(:preserve) # => ["cp", "cp_r", "copy", "install"]
 ```
 
 ### def commands -> Array
@@ -784,7 +784,7 @@ FileUtils.collect_method(:preserve) # => ["cp", "cp_r", "copy", "install"]
 
 ```ruby
 require 'fileutils'
-FileUtils.commands  # => ["chmod", "cp", "cp_r", "install", ...]
+p FileUtils.commands  # => ["chmod", "cp", "cp_r", "install", ...]
 ```
 
 ### def have_option?(mid, opt) -> bool
@@ -818,7 +818,7 @@ FileUtils.options
 
 ```ruby
 require 'fileutils'
-FileUtils.options_of(:rm)  # => ["noop", "verbose", "force"]
+p FileUtils.options_of(:rm)  # => ["noop", "verbose", "force"]
 ```
 
 #@# --- private_module_function(name) -> self

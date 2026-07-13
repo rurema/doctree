@@ -48,7 +48,7 @@ require "csv"
 row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2])
-table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+p table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
 ```
 
 ## Instance Methods
@@ -69,7 +69,7 @@ row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1])
 table << row2
-table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+p table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
 ```
 
 ### def ==(other) -> bool
@@ -88,9 +88,9 @@ row2_1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2_2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table1 = CSV::Table.new([row1_1, row1_2])
 table2 = CSV::Table.new([row2_1, row2_2])
-table1 == table2 # => true
+p table1 == table2 # => true
 table2 << CSV::Row.new(["header1", "header2"], ["row3_1", "row3_2"])
-table1 == table2 # => false
+p table1 == table2 # => false
 ```
 
 ### def [](index) -> CSV::Row | [String] | nil
@@ -168,15 +168,15 @@ row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 row3 = CSV::Row.new(["header1", "header2"], ["row3_1", "row3_2"])
 table = CSV::Table.new([row1, row2])
-table[0] # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
-table[1] # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
+p table[0] # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+p table[1] # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
 table[1] = row3
-table[1] # => #<CSV::Row "header1":"row3_1" "header2":"row3_2">
+p table[1] # => #<CSV::Row "header1":"row3_1" "header2":"row3_2">
 table.by_col!
-table[0] # => ["row1_1", "row3_1"]
-table[1] # => ["row1_2", "row3_2"]
+p table[0] # => ["row1_1", "row3_1"]
+p table[1] # => ["row1_2", "row3_2"]
 table[1] = ["row1_2", "row2_2"]
-table[1] # => ["row1_2", "row2_2"]
+p table[1] # => ["row1_2", "row2_2"]
 ```
 
 ### def by_col -> CSV::Table
@@ -197,8 +197,8 @@ row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2])
 col_table = table.by_col
-col_table[0] # => ["row1_1", "row2_1"]
-col_table[1] # => ["row1_2", "row2_2"]
+p col_table[0] # => ["row1_1", "row2_1"]
+p col_table[1] # => ["row1_2", "row2_2"]
 ```
 
 ### def by_col! -> self
@@ -216,8 +216,8 @@ row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2])
 table.by_col!
-table[0] # => ["row1_1", "row2_1"]
-table[1] # => ["row1_2", "row2_2"]
+p table[0] # => ["row1_1", "row2_1"]
+p table[1] # => ["row1_2", "row2_2"]
 ```
 
 ### def by_col_or_row -> CSV::Table
@@ -237,10 +237,10 @@ require "csv"
 row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2]).by_col!
-table             # => #<CSV::Table mode:col row_count:3>
+p table           # => #<CSV::Table mode:col row_count:3>
 col_or_row_table = table.by_col_or_row
-col_or_row_table  # => #<CSV::Table mode:col_or_row row_count:3>
-table             # => #<CSV::Table mode:col row_count:3>
+p col_or_row_table  # => #<CSV::Table mode:col_or_row row_count:3>
+p table           # => #<CSV::Table mode:col row_count:3>
 ```
 
 ### def by_col_or_row! -> self
@@ -261,9 +261,9 @@ require "csv"
 row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2]).by_col!
-table             # => #<CSV::Table mode:col row_count:3>
+p table           # => #<CSV::Table mode:col row_count:3>
 table.by_col_or_row!
-table             # => #<CSV::Table mode:col_or_row row_count:3>
+p table           # => #<CSV::Table mode:col_or_row row_count:3>
 ```
 
 ### def by_row -> CSV::Table
@@ -283,10 +283,10 @@ require "csv"
 row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2])
-table         # => #<CSV::Table mode:col_or_row row_count:3>
+p table       # => #<CSV::Table mode:col_or_row row_count:3>
 row_table = table.by_row  # => #<CSV::Table mode:row row_count:3>
-row_table[0] # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
-row_table[1] # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
+p row_table[0] # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+p row_table[1] # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
 ```
 
 ### def by_row! -> self
@@ -303,11 +303,11 @@ require "csv"
 row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2])
-table         # => #<CSV::Table mode:col_or_row row_count:3>
+p table       # => #<CSV::Table mode:col_or_row row_count:3>
 table.by_row!
-table         # => #<CSV::Table mode:row row_count:3>
-table[0] # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
-table[1] # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
+p table       # => #<CSV::Table mode:row row_count:3>
+p table[0] # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+p table[1] # => #<CSV::Row "header1":"row2_1" "header2":"row2_2">
 ```
 
 ### def delete(index_or_header) -> object
@@ -328,7 +328,7 @@ row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2])
 table.delete(1)
-table.to_a         # => [["header1", "header2"], ["row1_1", "row1_2"]]
+p table.to_a       # => [["header1", "header2"], ["row1_1", "row1_2"]]
 ```
 
 - **SEE** [m:CSV::Table#by_col!], [m:CSV::Table#by_row!], [m:CSV::Table#delete_if]
@@ -350,7 +350,7 @@ row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "invalid"])
 row3 = CSV::Row.new(["header1", "header2"], ["row3_1", "valid"])
 table = CSV::Table.new([row1, row2, row3])
 table.delete_if { |row| row["header2"] == "invalid" }
-table.to_a # => [["header1", "header2"], ["row1_1", "valid"], ["row3_1", "valid"]]
+p table.to_a # => [["header1", "header2"], ["row1_1", "valid"], ["row3_1", "valid"]]
 ```
 
 ```ruby title="例 カラムモード"
@@ -361,7 +361,7 @@ row3 = CSV::Row.new(["id", "name"], [3, "sato"])
 table = CSV::Table.new([row1, row2, row3])
 table.by_col!
 table.delete_if { |column_name, values| column_name == "id" }
-table.to_a # => [["name"], ["tanaka"], ["suzuki"], ["sato"]]
+p table.to_a # => [["name"], ["tanaka"], ["suzuki"], ["sato"]]
 ```
 
 - **SEE** [m:CSV::Table#delete]
@@ -429,7 +429,7 @@ require "csv"
 
 row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 table = CSV::Table.new([row])
-table.headers # => ["header1", "header2"]
+p table.headers # => ["header1", "header2"]
 ```
 
 ### def inspect -> String
@@ -469,9 +469,9 @@ require "csv"
 
 row = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 table = CSV::Table.new([row])
-table.mode    # => :col_or_row
+p table.mode  # => :col_or_row
 table.by_col!
-table.mode    # => :col
+p table.mode  # => :col
 ```
 
 ### def push(*rows) -> self
@@ -513,7 +513,7 @@ require "csv"
 row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2])
-table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
+p table.to_a # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
 ```
 
 ### def to_csv(options = Hash.new) -> String
@@ -551,7 +551,7 @@ require "csv"
 row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2])
-table.values_at(1) # => [#<CSV::Row "header1":"row2_1" "header2":"row2_2">]
+p table.values_at(1) # => [#<CSV::Row "header1":"row2_1" "header2":"row2_2">]
 ```
 
 ```ruby title="例 カラムモード"
@@ -561,7 +561,7 @@ row1 = CSV::Row.new(["header1", "header2"], ["row1_1", "row1_2"])
 row2 = CSV::Row.new(["header1", "header2"], ["row2_1", "row2_2"])
 table = CSV::Table.new([row1, row2])
 table.by_col!
-table.values_at(1) # => [["row1_2"], ["row2_2"]]
+p table.values_at(1) # => [["row1_2"], ["row2_2"]]
 ```
 
 - **SEE** [m:CSV::Table#by_col!], [m:CSV::Table#by_row!]

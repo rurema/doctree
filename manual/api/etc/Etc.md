@@ -206,11 +206,11 @@ pp Etc.uname
 
 ```ruby
 require "etc"
-Etc.sysconf(Etc::SC_ARG_MAX) # => 2097152
+p Etc.sysconf(Etc::SC_ARG_MAX) # => 2097152
 
 # Number of processors.
 # It is not standardized.
-Etc.sysconf(Etc::SC_NPROCESSORS_ONLN) # => 4
+p Etc.sysconf(Etc::SC_NPROCESSORS_ONLN) # => 4
 ```
 
 ### module_function def confstr(name) -> String | nil
@@ -224,11 +224,11 @@ Etc.sysconf(Etc::SC_NPROCESSORS_ONLN) # => 4
 
 ```ruby
 require "etc"
-Etc.confstr(Etc::CS_PATH) # => "/bin:/usr/bin"
+p Etc.confstr(Etc::CS_PATH) # => "/bin:/usr/bin"
 
 # GNU/Linux
-Etc.confstr(Etc::CS_GNU_LIBC_VERSION) # => "glibc 2.18"
-Etc.confstr(Etc::CS_GNU_LIBPTHREAD_VERSION) # => "NPTL 2.18"
+p Etc.confstr(Etc::CS_GNU_LIBC_VERSION) # => "glibc 2.18"
+p Etc.confstr(Etc::CS_GNU_LIBPTHREAD_VERSION) # => "NPTL 2.18"
 ```
 
 ### module_function def nprocessors -> Integer

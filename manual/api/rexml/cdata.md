@@ -24,14 +24,14 @@ doc = REXML::Document.new(<<EOS)
 <root />
 EOS
 doc.root.add(REXML::CData.new("foo bar  baz "))
-doc.to_s # => "<root><![CDATA[foo bar  baz ]]></root>\n"
+p doc.to_s # => "<root><![CDATA[foo bar  baz ]]></root>\n"
 
 doc = REXML::Document.new(<<EOS)
 <root />
 EOS
 doc.root.add(REXML::CData.new("foo  bar  baz  ", true))
 doc.root.add(REXML::CData.new("foo  bar  baz  ", false))
-doc.to_s # => "<root><![CDATA[foo  bar  baz  ]]><![CDATA[foo bar baz ]]></root>\n"
+p doc.to_s # => "<root><![CDATA[foo  bar  baz  ]]><![CDATA[foo bar baz ]]></root>\n"
 ```
 
 
@@ -54,8 +54,8 @@ require 'rexml/document'
 doc = REXML::Document.new(<<EOS)
 <root><![CDATA[foobar  baz]]></root>
 EOS
-doc.root[0].class # => REXML::CData
-doc.root[0].value # => "foobar  baz"
+p doc.root[0].class # => REXML::CData
+p doc.root[0].value # => "foobar  baz"
 ```
 
 #@# --- write(output = $stdout, indent = -1, transitive = false, ie_hack = false)

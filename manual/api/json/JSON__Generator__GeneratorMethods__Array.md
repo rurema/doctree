@@ -20,6 +20,6 @@ alias:
 ```ruby title="例"
 require "json"
 
-[1, 2, 3].to_json # => "[1,2,3]"
+p [1, 2, 3].to_json # => "[1,2,3]"
 ```
 

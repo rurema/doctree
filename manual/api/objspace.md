@@ -49,9 +49,9 @@ obj が消費するメモリ使用量をバイト単位で返します。
 ```ruby title="例"
 require 'objspace'
 
-ObjectSpace.memsize_of(10)            # => 0
+p ObjectSpace.memsize_of(10)          # => 0
 #@# todo 0 になる理由
-ObjectSpace.memsize_of("12345" * 10)  # => 91
+p ObjectSpace.memsize_of("12345" * 10)  # => 91
 ```
 
 ### module_function def memsize_of_all(klass = nil) -> Integer
@@ -256,5 +256,5 @@ class C
   end
 end
 
-C.new.foo #=> "objtrace.rb:8"
+p C.new.foo #=> "objtrace.rb:8"
 ```
