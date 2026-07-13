@@ -679,9 +679,9 @@ p true.object_id #=> 20
 そのため、同じキーとして判定される状況は [m:Object#eql?] の比較で真となる場合のみであり、このとき前段階としてハッシュ値どうしが等しい必要があります。
 つまり、
 
-`````
+```text
 A.eql?(B) ならば A.hash == B.hash
-`````
+```
 
 の関係が満たされている必要があります。
 
@@ -1597,10 +1597,10 @@ p obj.is_a?(Hash)    # false
 
 レシーバが nil であれば真を返します。
 
-`````
+```ruby
 p false.nil? #=> false
 p nil.nil? #=> true
-`````
+```
 
 - **SEE** [c:NilClass]
 
@@ -1693,11 +1693,11 @@ p ENV['OS'].tainted? #=> true
 オブジェクトの汚染に関しては[d:spec/safelevel]を参照してください。
 
 
-`````
+```console
 ruby -e 'p ARGV[0].tainted?;t=+ARGV[0];t.untaint;p t.tainted?' hoge
 # => true
 # false
-`````
+```
 #@end
 
 このメソッドは Ruby 2.7 から deprecated で、Ruby 3.2 で削除予定です。

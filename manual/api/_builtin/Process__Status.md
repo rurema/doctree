@@ -8,9 +8,7 @@ library: _builtin
 
 ### 使用例
 
-wait を使用した例
-
-`````
+```ruby title="wait を使用した例"
 fork { exit }
 Process.wait
 case
@@ -27,11 +25,9 @@ when $?.exited?
 else
   p "unknown status %#x" % $?.to_i
 end
-`````
+```
 
-SIGCHLD を trap する例
-
-`````
+```text title="SIGCHLD を trap する例"
 trap(:SIGCHLD) {|sig|
 
   puts "interrupted by signal #{sig} at #{caller[1]}"
@@ -76,7 +72,7 @@ end
    interrupted by signal 17 at -:30:in `sleep'
       child 12964 exited normally. status=0
    done
-`````
+```
 
 
 ## Instance Methods
@@ -174,12 +170,12 @@ self.to_i >> num と同じです。
 
 - **param** `num` -- 整数を指定します。
 
-``````
-fork { exit 99 }   #=> 26563
-Process.wait       #=> 26563
-$?.to_i            #=> 25344
-$? >> 8            #=> 99
-``````
+```ruby
+p fork { exit 99 } #=> 26563
+p Process.wait     #=> 26563
+p $?.to_i          #=> 25344
+p $? >> 8          #=> 99
+```
 
 ### def success?    -> bool
 

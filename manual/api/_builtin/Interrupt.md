@@ -8,9 +8,7 @@ SIGINT シグナルを受け取ると発生します。
 SIGINT 以外のシグナルを受信したときに発生する例外については
 [c:SignalException] を参照してください。
 
-使用例
-
-`````
+```ruby title="使用例"
 =begin
 #SIGINTを捕捉したい場合
 Signal.trap('INT'){
@@ -29,5 +27,5 @@ rescue Interrupt
   print "!!\n"
   exit 1
 end
-`````
+```
 

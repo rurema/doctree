@@ -13,12 +13,12 @@ library: _builtin
 これは [m:Process::GID?.eid=] と [m:Process::GID?.re_exchange] を以下のように
 組み合わせることによって実現できます。
 
-`````
+```ruby
                            # (r,e,s) == (g1,g2,??)
 Process::GID.re_exchange   # (g1,g2,??) ==> (g2,g1,??)
 Process::GID.eid = id      # (g2,g1,??) ==> (g2,id,??)
 Process::GID.re_exchange   # (g2,id,??) ==> (id,g2,??)
-`````
+```
 
 ## Module Functions
 
@@ -35,11 +35,11 @@ Process::GID.re_exchange   # (g2,id,??) ==> (id,g2,??)
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-``````
-[Process.gid, Process.egid]          #=> [0, 0]
-Process::GID.change_privilege(33)    #=> 33
-[Process.gid, Process.egid]          #=> [33, 33]
-``````
+```ruby
+p [Process.gid, Process.egid]        #=> [0, 0]
+p Process::GID.change_privilege(33)  #=> 33
+p [Process.gid, Process.egid]        #=> [33, 33]
+```
 
 ### module_function def eid    -> Integer
 
@@ -49,9 +49,9 @@ Process::GID.change_privilege(33)    #=> 33
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-``````
-Process.egid   #=> 500
-``````
+```ruby
+p Process.egid #=> 500
+```
 
 ### module_function def grant_privilege(id)    -> Integer
 ### module_function def eid=(id)
@@ -73,11 +73,11 @@ Process.egid   #=> 500
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-``````
-[Process.gid, Process.egid]          #=> [0, 0]
-Process::GID.grant_privilege(33)     #=> 33
-[Process.gid, Process.egid]          #=> [0, 33]
-``````
+```ruby
+p [Process.gid, Process.egid]        #=> [0, 0]
+p Process::GID.grant_privilege(33)   #=> 33
+p [Process.gid, Process.egid]        #=> [0, 33]
+```
 
 ### module_function def re_exchange    -> Integer
 
@@ -89,11 +89,11 @@ Process::GID.grant_privilege(33)     #=> 33
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-``````
-[Process.gid, Process.egid]   #=> [0, 33]
-Process::GID.re_exchange      #=> 0
-[Process.gid, Process.egid]   #=> [33, 0]
-``````
+```ruby
+p [Process.gid, Process.egid] #=> [0, 33]
+p Process::GID.re_exchange    #=> 0
+p [Process.gid, Process.egid] #=> [33, 0]
+```
 
 ### module_function def re_exchangeable?    -> bool
 
@@ -104,9 +104,9 @@ Process::GID.re_exchange      #=> 0
 
 現在のプロセスの実グループ ID を返します。
 
-``````
-Process.rid   #=> 500
-``````
+```ruby
+p Process.rid #=> 500
+```
 
 ### module_function def sid_available?    -> bool
 
@@ -145,7 +145,7 @@ Process.rid   #=> 500
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-````
+```ruby
 include Process
 # (r, e, s) == (500, 505, 505)
 p [gid, egid]           #=> [500, 505]
@@ -153,17 +153,17 @@ Process::GID.switch do
   p [gid, egid]         #=> [500, 500]
 end
 p [gid, egid]           #=> [500, 505]
-````
+```
 
 #@since 2.0.0
 ### module_function def from_name(name) -> Integer
 
 引数で指定した名前の実グループ ID を返します。
 
-`````
-Process::GID.from_name("wheel") # => 0
+```ruby
+p Process::GID.from_name("wheel") # => 0
 Process::GID.from_name("nosuchgroup") # => can't find group for nosuchgroup (ArgumentError)
-`````
+```
 
 - **param** `name` -- グループ名を指定します。
 

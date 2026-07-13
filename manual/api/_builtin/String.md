@@ -632,14 +632,14 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 インデックスと文字列の対応については以下の対照図も参照してください。
 
-`````
+```text
   0   1   2   3   4   5   (インデックス)
  -6  -5  -4  -3  -2  -1   (負のインデックス)
 | a | b | c | d | e | f |
 |<--------->|                'abcdef'[0..2]  # => 'abc'
                 |<----->|    'abcdef'[4..5]  # => 'ef'
         |<--------->|        'abcdef'[2..4]  # => 'cde'
-`````
+```
 
 range.last が文字列の長さ以上のときは
 (文字列の長さ - 1) を指定したものとみなされます。
@@ -673,14 +673,14 @@ p 'abcd'[-5 ..  2] # => nil
 
 文字列と「隙間」の関係については以下の模式図を参照してください。
 
-```````
+```text
  0   1   2   3   4   5   6  (隙間番号)
 -6  -5  -4  -3  -2  -1      (負の隙間番号)
  | a | b | c | d | e | f |
  |<--------->|                'abcdef'[0...3]  # => 'abc'
                  |<----->|    'abcdef'[4...6]  # => 'ef'
          |<--------->|        'abcdef'[2...5]  # => 'cde'
-```````
+```
 
 range.last が文字列の長さよりも大きいときは文字列の長さを
 指定したものとみなされます。
@@ -3513,13 +3513,12 @@ p a.chr  #=> "a"
 Ruby 1.9 で IO#getc の戻り値が Integer から String を返すように変更になりました。
 Ruby 1.8 以前と1.9以降の互換性を保つために  String#chr が存在します。
 
-例:
-`````
+```console title="例"
 # ruby 1.8 系では STDIN.getc が 116 を返すため Integer#chr が呼び出される
 $ echo test | ruby -e "p STDIN.getc.chr" # => "t"
 # ruby 1.9 系以降では STDIN.getc が "t" を返すため String#chr が呼び出される
 $ echo test | ruby -e "p STDIN.getc.chr" # => "t"
-`````
+```
 
 - **SEE** [m:String#ord], [m:Integer#chr]
 
@@ -3616,9 +3615,9 @@ p "aaaaa".rpartition("x")   # => ["", "", "aaaaa"]
 "hello世界".each_char {|c| print c, ' ' }
 ```
 は次のように出力されます。
-`````
+```text
 h e l l o 世 界
-`````
+```
 
 - **SEE** [m:String#chars]
 
@@ -3739,14 +3738,12 @@ p u.force_encoding(Encoding::UTF_8)           #=> "ほへと"
 文字列がASCII文字のみで構成されている場合に true を返します。そうでない場合は
 false を返します。
 
-例:
-
-`````
+```ruby title="例"
 'abc123'.ascii_only?        # => true
 ''.ascii_only?              # => true
 '日本語'.ascii_only?        # => false
 '日本語abc123'.ascii_only?  # => false
-`````
+```
 
 ### def valid_encoding?  -> bool
 

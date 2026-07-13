@@ -12,7 +12,7 @@ library: _builtin
 
 この例外オブジェクトを発生させる原因となったメソッド等の返り値を返します。
 
-`````
+```ruby
 object = Object.new
 def object.each
   yield :yield1
@@ -30,6 +30,6 @@ begin
 rescue StopIteration => error
   p error.result #=> :each_returned
 end
-`````
+```
 
 #@end
