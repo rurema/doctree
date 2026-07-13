@@ -440,8 +440,7 @@ proxyport は時代遅れのメソッドです。
 
 ### def proxy_pass -> String|nil
 プロクシ経由で接続し、さらにプロクシのユーザ認証を
-する HTTP オブジェクトなら認証のパスワードを
-を返します。
+する HTTP オブジェクトなら認証のパスワードを返します。
 
 そうでないなら nil を返します。
 - **SEE** [m:Net::HTTP#proxy_pass=], [m:Net::HTTP#proxy_user], [m:Net::HTTP.new]
@@ -457,8 +456,7 @@ proxyport は時代遅れのメソッドです。
 
 ### def proxy_user -> String|nil
 プロクシ経由で接続し、さらにプロクシのユーザ認証を
-する HTTP オブジェクトなら認証のユーザ名を
-を返します。
+する HTTP オブジェクトなら認証のユーザ名を返します。
 
 そうでないなら nil を返します。
 
