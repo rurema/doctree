@@ -248,7 +248,7 @@ nil を返します。
 Ruby 2.7 からは case 式は in キーワードを通じてより強力なパターンマッチ構文を提供しています。
 
 ```ruby
-case {a: 1, b: 2, c: 3}
+p case {a: 1, b: 2, c: 3}
 in a: Integer => m
   "matched: #{m}"
 else

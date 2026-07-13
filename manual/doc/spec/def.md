@@ -366,16 +366,16 @@ p bar(5)   #=> 57 (!= 53)
 def foo(x, *xs)
   puts "#{x} : #{xs.inspect}"   # Object#inspect は p のような詳細な内部表示
 end
-foo(1)        #=> 1 : []
-foo(1, 2)     #=> 1 : [2]
-foo(1, 2, 3)  #=> 1 : [2, 3]
+p foo(1)      #=> 1 : []
+p foo(1, 2)   #=> 1 : [2]
+p foo(1, 2, 3)  #=> 1 : [2, 3]
 
 def bar(x, *) # 残りの引数を単に無視したいとき
   puts "#{x}"
 end
-bar(1)        #=> 1
-bar(1, 2)     #=> 1
-bar(1, 2, 3)  #=> 1
+p bar(1)      #=> 1
+p bar(1, 2)   #=> 1
+p bar(1, 2, 3)  #=> 1
 ```
 
 Ruby 1.9 以降では可変長引数よりも後にまだ通常の引数を置くことができます。
@@ -391,7 +391,7 @@ yield を呼び出すことです。
 def foo(cnt, &block_arg)
   cnt.times { block_arg.call } # ブロックに収まったProcオブジェクトはcallで実行
 end
-foo(3) { print "Ruby! " } #=> Ruby! Ruby! Ruby!
+p foo(3) { print "Ruby! " } #=> Ruby! Ruby! Ruby!
 ```
 
 メソッド定義において、仮引数はその種類毎に以下の順序でしか指定すること
@@ -537,10 +537,10 @@ class Foo
   end
 end
 obj = Foo.new
-obj.bar rescue nil # => undefined method `bar' for #<Foo:0x4019eda4>
-obj.foo            # => method "bar" was added
-obj.foo            # => warning: method redefined; discarding old bar
-Foo.new.bar        # => :bar  (他のインスタンスでも定義済み)
+p obj.bar rescue nil # => undefined method `bar' for #<Foo:0x4019eda4>
+p obj.foo          # => method "bar" was added
+p obj.foo          # => warning: method redefined; discarding old bar
+p Foo.new.bar      # => :bar  (他のインスタンスでも定義済み)
 ```
 
 #### メソッドの評価 {#eval_method}
@@ -684,19 +684,19 @@ obj.foo rescue nil    # => -:11 - protected method `foo' called for #<Foo:0x401a
 
 # クラス定義内でも呼べない
 class Foo
-  Foo.new.foo rescue nil # => -:15 - protected method `foo' called for #<Foo:0x4019eea8>
+  p Foo.new.foo rescue nil # => -:15 - protected method `foo' called for #<Foo:0x4019eea8>
   # メソッド定義式内で呼べる
   def bar
     self.foo
   end
 end
-Foo.new.bar             # => ["-:21"]
+p Foo.new.bar           # => ["-:21"]
 
 # 特異メソッド定義式内でも呼べる
 def obj.bar
   self.foo rescue nil
 end
-obj.bar                 # => ["-:27"]
+p obj.bar               # => ["-:27"]
 ```
 
 デフォルトでは def 式がクラス定義の外(トップレベル)にあれば private、
@@ -897,9 +897,9 @@ p a # => nil
 
 ```ruby
 /(.)/ =~ "foo"
-defined? $&  # => "global-variable"
-defined? $1  # => "global-variable"
-defined? $2  # => nil
+p defined? $&  # => "global-variable"
+p defined? $1  # => "global-variable"
+p defined? $2  # => nil
 ```
 
 $&, $1, $2, などは直前のマッチの結果値が設定された場合だけ真を返します。

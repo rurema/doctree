@@ -166,7 +166,7 @@ Hash パターン はハッシュか deconstruct_keys メソッド(後述)を持
 Array パターン と Hash パターン の挙動の重要な違いは Array パターンは配列の 「全ての」 要素がマッチする必要があるということです。
 
 ```ruby
-case [1, 2, 3]
+p case [1, 2, 3]
 in [Integer, Integer]
   "matched"
 else
@@ -179,7 +179,7 @@ end
 一方 Hash パターン は一部のキーだけ指定している場合(指定しているキー以外にもキーが存在する場合)でもマッチします。
 
 ```ruby
-case {a: 1, b: 2, c: 3}
+p case {a: 1, b: 2, c: 3}
 in {a: Integer}
   "matched"
 else
@@ -192,7 +192,7 @@ end
 『{}』 だけはこのルールの例外です。『{}』 は空のハッシュのみマッチします。
 
 ```ruby
-case {a: 1, b: 2, c: 3}
+p case {a: 1, b: 2, c: 3}
 in {}
   "matched"
 else
@@ -202,7 +202,7 @@ end
 ```
 
 ```ruby
-case {}
+p case {}
 in {}
   "matched"
 else
@@ -215,7 +215,7 @@ end
 また、パターンで明示的に指定したキー以外のキーが存在しないハッシュにのみ、マッチさせたい場合には、『**nil』 を使います。
 
 ```ruby
-case {a: 1, b: 2}
+p case {a: 1, b: 2}
 #@# in {a: Integer, **nil} # this will not match the pattern having keys other than a:
 in {a: Integer, **nil} # a: 以外のキーがある場合にはマッチしない
   "matched a part"
@@ -231,7 +231,7 @@ end
 Array パターン と Hash パターン ともに残りの部分にマッチする構文をサポートしています。
 
 ```ruby
-case [1, 2, 3]
+p case [1, 2, 3]
 in [Integer, *]
   "matched"
 else
@@ -241,7 +241,7 @@ end
 ```
 
 ```ruby
-case {a: 1, b: 2, c: 3}
+p case {a: 1, b: 2, c: 3}
 in {a: Integer, **}
   "matched"
 else
@@ -264,7 +264,7 @@ case 文 (単体の in 文ではない) では、パターン の両端の 『[]
 #@end
 
 ```ruby
-case [1, 2]
+p case [1, 2]
 in Integer, Integer
   "matched"
 else
@@ -274,7 +274,7 @@ end
 ```
 
 ```ruby
-case {a: 1, b: 2, c: 3}
+p case {a: 1, b: 2, c: 3}
 in a: Integer
   "matched"
 else
@@ -330,7 +330,7 @@ end
 深い構造検査の他のパターンマッチの重要な機能の1つにマッチした部分のローカル変数への束縛があります。束縛の基本的な形はマッチしたパターンの後ろに 『=> 変数名』 と書くことです。(この形は rescue 節で 『rescue ExceptionClass => var』 の形で例外をローカル変数に格納する形に似ています)
 
 ```ruby
-case [1, 2]
+p case [1, 2]
 in Integer => a, Integer
   "matched: #{a}"
 else
@@ -340,7 +340,7 @@ end
 ```
 
 ```ruby
-case {a: 1, b: 2, c: 3}
+p case {a: 1, b: 2, c: 3}
 in a: Integer => m
   "matched: #{m}"
 else
@@ -353,7 +353,7 @@ end
 追加のチェックが不要で変数への束縛だけがしたい場合は、より簡潔な記法が利用できます。
 
 ```ruby
-case [1, 2]
+p case [1, 2]
 in a, Integer
   "matched: #{a}"
 else
@@ -363,7 +363,7 @@ end
 ```
 
 ```ruby
-case {a: 1, b: 2, c: 3}
+p case {a: 1, b: 2, c: 3}
 in a: m
   "matched: #{m}"
 else
@@ -376,7 +376,7 @@ end
 Hash パターンでは、もっと単純に書くこともできます。キーのみを指定することで、キーと同じ名前のローカル変数に値を束縛できます。
 
 ```ruby
-case {a: 1, b: 2, c: 3}
+p case {a: 1, b: 2, c: 3}
 in a:
   "matched: #{a}"
 else
@@ -389,7 +389,7 @@ end
 ネストしたパターンの場合も同様に値の束縛を利用できます。
 
 ```ruby
-case {name: 'John', friends: [{name: 'Jane'}, {name: 'Rajesh'}]}
+p case {name: 'John', friends: [{name: 'Jane'}, {name: 'Rajesh'}]}
 in name:, friends: [{name: first_friend}, *]
   "matched: #{first_friend}"
 else
@@ -402,7 +402,7 @@ end
 パターンの残りの部分も同様に変数に束縛できます。
 
 ```ruby
-case [1, 2, 3]
+p case [1, 2, 3]
 in a, *rest
   "matched: #{a}, #{rest}"
 else
@@ -412,7 +412,7 @@ end
 ```
 
 ```ruby
-case {a: 1, b: 2, c: 3}
+p case {a: 1, b: 2, c: 3}
 in a:, **rest
   "matched: #{a}, #{rest}"
 else
@@ -438,7 +438,7 @@ end
 『_』 で始まる変数は例外で、Alternative パターン と同時に利用できます。
 
 ```ruby
-case {a: 1, b: 2}
+p case {a: 1, b: 2}
 in {a: _, b: _foo} | Array
   "matched: #{_}, #{_foo}"
 else
@@ -476,7 +476,7 @@ end
 
 ```ruby
 expectation = 18
-case [1, 2]
+p case [1, 2]
 in ^expectation, *rest
   "matched. expectation was: #{expectation}"
 else
@@ -492,7 +492,7 @@ end
 jane = {school: 'high', schools: [{id: 1, level: 'middle'}, {id: 2, level: 'high'}]}
 john = {school: 'high', schools: [{id: 1, level: 'middle'}]}
 
-case jane
+p case jane
 in school:, schools: [*, {id:, level: ^school}] # select the last school, level should match
   "matched. school: #{id}"
 else
@@ -501,7 +501,7 @@ end
 #=> "matched. school: 2"
 
 #@# case john # the specified school level is "high", but last school does not match
-case john # 指定された school の level は "high" だが、最後の school はマッチしない
+p case john # 指定された school の level は "high" だが、最後の school はマッチしない
 in school:, schools: [*, {id:, level: ^school}]
   "matched. school: #{id}"
 else
@@ -573,7 +573,7 @@ class Point
   end
 end
 
-case Point.new(1, -2)
+p case Point.new(1, -2)
 #@# in px, Integer  # sub-patterns and variable binding works
 in px, Integer  # パターンと変数への束縛も動きます
   "matched: #{px}"
@@ -584,7 +584,7 @@ end
 # "deconstruct called" と出力
 #=> "matched: 1"
 
-case Point.new(1, -2)
+p case Point.new(1, -2)
 in x: 0.. => px
   "matched: #{px}"
 else
@@ -601,7 +601,7 @@ deconstruct_keys メソッドに引数 keys を渡すのは、マッチを行う
 『**rest』 パターンが使われた場合には、keys の値として nil が渡されます。
 
 ```ruby
-case Point.new(1, -2)
+p case Point.new(1, -2)
 in x: 0.. => px, **rest
   "matched: #{px}"
 else
@@ -619,7 +619,7 @@ end
 class SuperPoint < Point
 end
 
-case Point.new(1, -2)
+p case Point.new(1, -2)
 in SuperPoint(x: 0.. => px)
   "matched: #{px}"
 else
@@ -627,7 +627,7 @@ else
 end
 #=> "not matched"
 
-case SuperPoint.new(1, -2)
+p case SuperPoint.new(1, -2)
 #@# in SuperPoint[x: 0.. => px] # [] or () parentheses are allowed
 in SuperPoint[x: 0.. => px] # 括弧 [] か () が使える
   "matched: #{px}"
@@ -657,7 +657,7 @@ end
 if を使って、パターンにマッチしたときに評価される追加の条件式(ガード節)を加えることができます。この条件式では、マッチした値を束縛した変数を使うこともできます。
 
 ```ruby
-case [1, 2]
+p case [1, 2]
 in a, b if b == a*2
   "matched"
 else
@@ -667,7 +667,7 @@ end
 ```
 
 ```ruby
-case [1, 1]
+p case [1, 1]
 in a, b if b == a*2
   "matched"
 else
@@ -680,7 +680,7 @@ end
 unless も利用できます。
 
 ```ruby
-case [1, 1]
+p case [1, 1]
 in a, b unless b == a*2
   "matched"
 else
@@ -838,9 +838,9 @@ in c
   "not matched"
 end
 #@# a #=> undefined
-a #=> 未定義
+p a #=> 未定義
 #@# c #=> undefined
-c #=> 未定義
+p c #=> 未定義
 ```
 
 #@# Number of +deconstruct+, +deconstruct_keys+ method calls:
@@ -858,5 +858,5 @@ in [0]
   "matched"
 end
 #@# $i #=> undefined
-$i #=> 未定義
+p $i #=> 未定義
 ```
