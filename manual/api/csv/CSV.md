@@ -332,8 +332,8 @@ File.write("test.csv", users)
 
 File.open("test.csv", "r") do |f|
   csv = CSV.new(f, headers: true)
-  csv.class # => CSV
-  csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
+  p csv.class # => CSV
+  p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
 end
 ```
 
@@ -516,7 +516,7 @@ print csv
 require "csv"
 
 taro = ['1', 'taro', 'tanaka', '20']
-CSV.generate_line(taro, col_sep: '|') # => "1|taro|tanaka|20\n"
+p CSV.generate_line(taro, col_sep: '|') # => "1|taro|tanaka|20\n"
 ```
 
 - **SEE** [m:CSV.new]
@@ -550,7 +550,7 @@ EOS
 
 csv = CSV.instance(text, options)
 csv2 = CSV.instance(text, options)
-csv.object_id == csv2.object_id # => true
+p csv.object_id == csv2.object_id # => true
 print csv.read
 
 # => id,first name,last name,age
@@ -635,8 +635,8 @@ id,first name,last name,age
 4,yumi,adachi,21
 CSV
 csv = CSV.open("test.csv", headers: true)
-csv.class # => CSV
-csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
+p csv.class # => CSV
+p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
 ```
 
 ```ruby title="例 読み取り・ブロック指定あり"
@@ -652,8 +652,8 @@ EOS
 
 File.write("test.csv", users)
 CSV.open("test.csv", headers: true) do |csv|
-  csv.class # => CSV
-  csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
+  p csv.class # => CSV
+  p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "age":"20">
 end
 ```
 
@@ -941,12 +941,12 @@ id|first name|last name|age
 EOS
 
 csv = CSV.new(users, headers: true, col_sep: "|")
-csv.col_sep # => "|"
-csv.first.to_a # => [["id", "1"], ["first name", "taro"], ["last name", "tanaka"], ["age", "20"]]
+p csv.col_sep # => "|"
+p csv.first.to_a # => [["id", "1"], ["first name", "taro"], ["last name", "tanaka"], ["age", "20"]]
 
 csv = CSV.new(users, headers: true)
-csv.col_sep # => ","
-csv.first.to_a # => [["id|first name|last name|age", "1|taro|tanaka|20"]]
+p csv.col_sep # => ","
+p csv.first.to_a # => [["id|first name|last name|age", "1|taro|tanaka|20"]]
 ```
 
 - **SEE** [m:CSV.new]
@@ -976,7 +976,7 @@ require "csv"
 
 csv = CSV.new("date1,date2\n2018-07-09,2018-07-10")
 csv.convert(:date)
-csv.read # => [["date1", "date2"], [#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)>, #<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)>]]
+p csv.read # => [["date1", "date2"], [#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)>, #<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)>]]
 ```
 
 ```ruby title="例 ブロックを指定"
@@ -1007,7 +1007,7 @@ p csv.first
 require "csv"
 
 csv = CSV.new("header1,header2\nrow1_1,row1_2", converters: CSV::Converters.keys)
-csv.converters  # => [:integer, :float, :integer, :float, :date, :date_time, :date_time, :integer, :float]
+p csv.converters  # => [:integer, :float, :integer, :float, :date, :date_time, :date_time, :integer, :float]
 ```
 
 - **SEE** [m:CSV::Converters]
@@ -1069,7 +1069,7 @@ end
 require "csv"
 
 csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
-csv.encoding # => #<Encoding:UTF-8>
+p csv.encoding # => #<Encoding:UTF-8>
 ```
 
 ### def eof -> bool
@@ -1097,7 +1097,7 @@ csv.encoding # => #<Encoding:UTF-8>
 require "csv"
 
 csv = CSV.new(DATA)
-csv.field_size_limit # => nil
+p csv.field_size_limit # => nil
 p csv.read # => [["a", "b"], ["\n2\n2\n", ""]]
 
 DATA.rewind
@@ -1138,7 +1138,7 @@ require "csv"
 rows = [["header1", "header2"], ["row1_1,", "row1_2"]]
 result = CSV.generate(force_quotes: false) do |csv|
   rows.each { |row| csv << row }
-  csv.force_quotes? # => false
+  p csv.force_quotes? # => false
 end
 print result
 
@@ -1152,7 +1152,7 @@ require "csv"
 rows = [["header1", "header2"], ["row1_1,", "row1_2"]]
 result = CSV.generate(force_quotes: true) do |csv|
   rows.each { |row| csv << row }
-  csv.force_quotes? # => true
+  p csv.force_quotes? # => true
 end
 print result
 
@@ -1182,7 +1182,7 @@ require "csv"
 
 csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
 csv.header_convert(:symbol)
-csv.first.headers # => [:header1, :header2]
+p csv.first.headers # => [:header1, :header2]
 ```
 
 ```ruby title="例 ブロックを指定"
@@ -1192,7 +1192,7 @@ csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
 csv.header_convert do |field|
   field.to_sym
 end
-csv.first.headers # => [:header1, :header2]
+p csv.first.headers # => [:header1, :header2]
 ```
 
 - **SEE** [m:CSV#header_converters], [m:CSV#convert]
@@ -1207,8 +1207,8 @@ csv.first.headers # => [:header1, :header2]
 require "csv"
 
 csv = CSV.new("HEADER1,HEADER2\nrow1_1,row1_2", headers: true, header_converters: CSV::HeaderConverters.keys)
-csv.header_converters # => [:downcase, :symbol]
-csv.read.to_a         # => [[:header1, :header2], ["row1_1", "row1_2"]]
+p csv.header_converters # => [:downcase, :symbol]
+p csv.read.to_a       # => [[:header1, :header2], ["row1_1", "row1_2"]]
 ```
 
 - **SEE** [m:CSV.new]
@@ -1222,9 +1222,9 @@ csv.read.to_a         # => [[:header1, :header2], ["row1_1", "row1_2"]]
 require "csv"
 
 csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
-csv.header_row? # => true
+p csv.header_row? # => true
 csv.readline
-csv.header_row? # => false
+p csv.header_row? # => false
 ```
 
 ### def headers -> Array | true | nil
@@ -1237,11 +1237,11 @@ nil を返した場合は、ヘッダは使用されません。
 require "csv"
 
 csv = CSV.new("header1,header2\nrow1_1,row1_2")
-csv.headers # => nil
+p csv.headers # => nil
 csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true)
-csv.headers # => true
+p csv.headers # => true
 csv.read
-csv.headers # =>["header1", "header2"]
+p csv.headers # =>["header1", "header2"]
 ```
 
 - **SEE** [m:CSV.new]
@@ -1254,7 +1254,7 @@ ASCII 互換文字列で自身の情報を表したものを返します。
 require "csv"
 
 csv = CSV.new("header1,header2\nrow1_1,row1_2")
-csv.inspect # => "<#CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:\",\" row_sep:\"\\n\" quote_char:\"\\\"\">"
+p csv.inspect # => "<#CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:\",\" row_sep:\"\\n\" quote_char:\"\\\"\">"
 ```
 
 ### def internal_encoding   -> Encoding | nil
@@ -1291,9 +1291,9 @@ csv.inspect # => "<#CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:\",\" r
 require "csv"
 
 csv = CSV.new("header1,header2\nrow1_1,row1_2")
-csv.lineno # => 0
+p csv.lineno # => 0
 csv.readline
-csv.lineno # => 1
+p csv.lineno # => 1
 ```
 
 ### def path    -> String
@@ -1343,7 +1343,7 @@ csv.lineno # => 1
 require "csv"
 
 csv = CSV.new("header1,header2\nrow1_1,row1_2", quote_char: "'")
-csv.quote_char # => "'"
+p csv.quote_char # => "'"
 ```
 
 - **SEE** [m:CSV.new]
@@ -1399,12 +1399,12 @@ row2_1,row2_2
 require "csv"
 
 csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true, return_headers: false)
-csv.return_headers? # => false
-csv.shift # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
+p csv.return_headers? # => false
+p csv.shift # => #<CSV::Row "header1":"row1_1" "header2":"row1_2">
 
 csv = CSV.new("header1,header2\nrow1_1,row1_2", headers: true, return_headers: true)
-csv.return_headers? # => true
-csv.shift # => #<CSV::Row "header1":"header1" "header2":"header2">
+p csv.return_headers? # => true
+p csv.shift # => #<CSV::Row "header1":"header1" "header2":"header2">
 ```
 
 - **SEE** [m:CSV.new]
@@ -1417,11 +1417,11 @@ csv.shift # => #<CSV::Row "header1":"header1" "header2":"header2">
 require "csv"
 
 csv = CSV.new("header1,header2\nrow1_1,row1_2")
-csv.lineno # => 0
+p csv.lineno # => 0
 csv.readline
-csv.lineno # => 1
+p csv.lineno # => 1
 csv.rewind
-csv.lineno # => 0
+p csv.lineno # => 0
 ```
 
 - **SEE** [m:IO#rewind]
@@ -1434,8 +1434,8 @@ csv.lineno # => 0
 require "csv"
 
 csv = CSV.new("header1,header2|row1_1,row1_2", row_sep: "|")
-csv.row_sep # => "|"
-csv.read    # => [["header1", "header2"], ["row1_1", "row1_2"]]
+p csv.row_sep # => "|"
+p csv.read  # => [["header1", "header2"], ["row1_1", "row1_2"]]
 ```
 
 - **SEE** [m:CSV.new]
@@ -1464,8 +1464,8 @@ csv.read    # => [["header1", "header2"], ["row1_1", "row1_2"]]
 require "csv"
 
 csv = CSV.new(DATA.read)
-csv.readline # => ["header1", "header2"]
-csv.readline # => ["row1_1", "row1_2"]
+p csv.readline # => ["header1", "header2"]
+p csv.readline # => ["row1_1", "row1_2"]
 
 __END__
 header1,header2
@@ -1480,11 +1480,11 @@ row1_1,row1_2
 require "csv"
 
 csv = CSV.new("header1,header2\n\nrow1_1,row1_2")
-csv.skip_blanks? # => false
-csv.read         # => [["header1", "header2"], [], ["row1_1", "row1_2"]]
+p csv.skip_blanks? # => false
+p csv.read       # => [["header1", "header2"], [], ["row1_1", "row1_2"]]
 csv = CSV.new("header1,header2\n\nrow1_1,row1_2", skip_blanks: true)
-csv.skip_blanks? # => true
-csv.read         # => [["header1", "header2"], ["row1_1", "row1_2"]]
+p csv.skip_blanks? # => true
+p csv.read       # => [["header1", "header2"], ["row1_1", "row1_2"]]
 ```
 
 - **SEE** [m:CSV.new]
@@ -1548,15 +1548,15 @@ csv.read         # => [["header1", "header2"], ["row1_1", "row1_2"]]
 require "csv"
 
 csv = CSV.new("date1,date2\n2018-07-09,2018-07-10")
-csv.unconverted_fields? # => nil
+p csv.unconverted_fields? # => nil
 csv = CSV.new("date1,date2\n2018-07-09,2018-07-10", unconverted_fields: false)
-csv.unconverted_fields? # => false
+p csv.unconverted_fields? # => false
 csv = CSV.new("date1,date2\n2018-07-09,2018-07-10", headers: true, unconverted_fields: true)
-csv.unconverted_fields? # => true
+p csv.unconverted_fields? # => true
 csv.convert(:date)
 row = csv.readline
-row.fields              # => [#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)>, #<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)>]
-row.unconverted_fields  # => ["2018-07-09", "2018-07-10"]
+p row.fields            # => [#<Date: 2018-07-09 ((2458309j,0s,0n),+0s,2299161j)>, #<Date: 2018-07-10 ((2458310j,0s,0n),+0s,2299161j)>]
+p row.unconverted_fields  # => ["2018-07-09", "2018-07-10"]
 ```
 
 - **SEE** [m:CSV.new]
@@ -1570,21 +1570,21 @@ row.unconverted_fields  # => ["2018-07-09", "2018-07-10"]
 require "csv"
 
 csv = CSV.new("date1,date2\n2018-07-09,2018-07-10")
-csv.write_headers? # => nil
+p csv.write_headers? # => nil
 
 header = ["header1", "header2"]
 row = ["row1_1", "row1_2"]
 result = CSV.generate(headers: header, write_headers: false) do |csv|
-  csv.write_headers? # => false
+  p csv.write_headers? # => false
   csv << row
 end
-result # => "row1_1,row1_2\n"
+p result # => "row1_1,row1_2\n"
 
 result = CSV.generate(headers: header, write_headers: true) do |csv|
-  csv.write_headers? # => true
+  p csv.write_headers? # => true
   csv << row
 end
-result # => "header1,header2\nrow1_1,row1_2\n"
+p result # => "header1,header2\nrow1_1,row1_2\n"
 ```
 
 - **SEE** [m:CSV.new]

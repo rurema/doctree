@@ -36,9 +36,9 @@ Integer ならそのままobjを返します。
 - **raise** `TypeError` -- to_int が Integer を返さなかった場合に発生します。
 
 ```ruby title="例"
-Integer.try_convert(1)    # => 1
-Integer.try_convert(1.25) # => 1
-Integer.try_convert([])   # => nil
+p Integer.try_convert(1)  # => 1
+p Integer.try_convert(1.25) # => 1
+p Integer.try_convert([]) # => nil
 ```
 #@end
 
@@ -52,19 +52,19 @@ Integer.try_convert([])   # => nil
 - **raise** `Math::DomainError` -- n が負の整数の時に発生します。
 
 ```ruby
-Integer.sqrt(0)        # => 0
-Integer.sqrt(1)        # => 1
-Integer.sqrt(24)       # => 4
-Integer.sqrt(25)       # => 5
-Integer.sqrt(10**400) == 10**200 # => true
+p Integer.sqrt(0)      # => 0
+p Integer.sqrt(1)      # => 1
+p Integer.sqrt(24)     # => 4
+p Integer.sqrt(25)     # => 5
+p Integer.sqrt(10**400) == 10**200 # => true
 ```
 
 Math.sqrt(n).floor と同等ですが、後者は浮動小数点数の精度の限界によって
 真の値とは違う結果になることがあります。
 
 ```ruby
-Integer.sqrt(10**46)     #=> 100000000000000000000000
-Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
+p Integer.sqrt(10**46)   #=> 100000000000000000000000
+p Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
 ```
 
 
@@ -112,8 +112,8 @@ base を基数として self を位取り記数法で表記した数値を配列
 base を指定しない場合の基数は 10 です。
 
 ```ruby
-16.digits     # => [6, 1]
-16.digits(16) # => [0, 1]
+p 16.digits   # => [6, 1]
+p 16.digits(16) # => [0, 1]
 ```
 
 self は非負整数でなければいけません。非負整数でない場合は、Math::DomainErrorが発生します。
@@ -137,7 +137,7 @@ self < min であれば何もしません。
 - **return** --      self を返します。
 
 ```ruby
-5.downto(1) {|i| print i, " " } # => 5 4 3 2 1
+p 5.downto(1) {|i| print i, " " } # => 5 4 3 2 1
 ```
 
 - **SEE** [m:Integer#upto], [m:Numeric#step], [m:Integer#times]
@@ -148,10 +148,10 @@ self < min であれば何もしません。
 self の次の整数を返します。
 
 ```ruby
-1.next      #=> 2
-(-1).next   #=> 0
-1.succ      #=> 2
-(-1).succ   #=> 0
+p 1.next    #=> 2
+p (-1).next #=> 0
+p 1.succ    #=> 2
+p (-1).succ #=> 0
 ```
 
 - **SEE** [m:Integer#pred]
@@ -178,7 +178,7 @@ self が正の整数でない場合は何もしません。
 self を返します。
 
 ```ruby
-10.to_i   # => 10
+p 10.to_i # => 10
 ```
 
 #@since 2.5.0
@@ -200,14 +200,14 @@ self と等しいかより小さな整数のうち最大のものを返します
 #@end
 
 ```ruby
-1.floor           # => 1
+p 1.floor         # => 1
 #@since 2.5.0
-1.floor(2)        # => 1
+p 1.floor(2)      # => 1
 #@else
-1.floor(2)        # => 1.0
+p 1.floor(2)      # => 1.0
 #@end
-18.floor(-1)      # => 10
-(-18).floor(-1)   # => -20
+p 18.floor(-1)    # => 10
+p (-18).floor(-1) # => -20
 ```
 
 - **SEE** [m:Numeric#floor]
@@ -231,14 +231,14 @@ self と等しいかより大きな整数のうち最小のものを返します
 #@end
 
 ```ruby
-1.ceil           # => 1
+p 1.ceil         # => 1
 #@since 2.5.0
-1.ceil(2)        # => 1
+p 1.ceil(2)      # => 1
 #@else
-1.ceil(2)        # => 1.0
+p 1.ceil(2)      # => 1.0
 #@end
-18.ceil(-1)      # => 20
-(-18).ceil(-1)   # => -10
+p 18.ceil(-1)    # => 20
+p (-18).ceil(-1) # => -10
 ```
 
 - **SEE** [m:Numeric#ceil]
@@ -268,24 +268,24 @@ self ともっとも近い整数を返します。
  - :down: 0に近い方に丸められます。
 
 ```ruby
-1.round         # => 1
+p 1.round       # => 1
 #@since 2.5.0
-1.round(2)      # => 1
+p 1.round(2)    # => 1
 #@else
-1.round(2)      # => 1.0
+p 1.round(2)    # => 1.0
 #@end
-15.round(-1)    # =>  20
-(-15).round(-1) # => -20
+p 15.round(-1)  # =>  20
+p (-15).round(-1) # => -20
 
-25.round(-1, half: :up)      # => 30
-25.round(-1, half: :down)    # => 20
-25.round(-1, half: :even)    # => 20
-35.round(-1, half: :up)      # => 40
-35.round(-1, half: :down)    # => 30
-35.round(-1, half: :even)    # => 40
-(-25).round(-1, half: :up)   # => -30
-(-25).round(-1, half: :down) # => -20
-(-25).round(-1, half: :even) # => -20
+p 25.round(-1, half: :up)    # => 30
+p 25.round(-1, half: :down)  # => 20
+p 25.round(-1, half: :even)  # => 20
+p 35.round(-1, half: :up)    # => 40
+p 35.round(-1, half: :down)  # => 30
+p 35.round(-1, half: :even)  # => 40
+p (-25).round(-1, half: :up) # => -30
+p (-25).round(-1, half: :down) # => -20
+p (-25).round(-1, half: :even) # => -20
 ```
 
 - **SEE** [m:Numeric#round]
@@ -309,14 +309,14 @@ self ともっとも近い整数を返します。
 #@end
 
 ```ruby
-1.truncate           # => 1
+p 1.truncate         # => 1
 #@since 2.5.0
-1.truncate(2)        # => 1
+p 1.truncate(2)      # => 1
 #@else
-1.truncate(2)        # => 1.0
+p 1.truncate(2)      # => 1.0
 #@end
-18.truncate(-1)      # =>  10
-(-18).truncate(-1)   # => -10
+p 18.truncate(-1)    # =>  10
+p (-18).truncate(-1) # => -10
 ```
 
 - **SEE** [m:Numeric#truncate]
@@ -350,7 +350,7 @@ self > max であれば何もしません。
 - **return** --      self を返します。
 
 ```ruby
-5.upto(10) {|i| print i, " " } # => 5 6 7 8 9 10
+p 5.upto(10) {|i| print i, " " } # => 5 6 7 8 9 10
 ```
 
 - **SEE** [m:Integer#downto], [m:Numeric#step], [m:Integer#times]
@@ -360,8 +360,8 @@ self > max であれば何もしません。
 常に真を返します。
 
 ```ruby
-1.integer?     # => true
-1.0.integer?   # => false
+p 1.integer?   # => true
+p 1.0.integer? # => false
 ```
 
 ### def even? -> bool
@@ -370,8 +370,8 @@ self > max であれば何もしません。
 そうでない場合は偽を返します。
 
 ```ruby
-10.even?    # => true
-5.even?     # => false
+p 10.even?  # => true
+p 5.even?   # => false
 ```
 
 ### def odd? -> bool
@@ -380,17 +380,17 @@ self > max であれば何もしません。
 そうでない場合は偽を返します。
 
 ```ruby
-5.odd?     # => true
-10.odd?    # => false
+p 5.odd?   # => true
+p 10.odd?  # => false
 ```
 
 ### def ord    -> Integer
 自身を返します。
 
 ```ruby
-10.ord    #=> 10
+p 10.ord  #=> 10
 # String#ord
-?a.ord    #=> 97
+p ?a.ord  #=> 97
 ```
 
 - **SEE** [m:String#ord]
@@ -400,8 +400,8 @@ self > max であれば何もしません。
 self から -1 した値を返します。
 
 ```ruby
-1.pred      #=> 0
-(-1).pred   #=> -2
+p 1.pred    #=> 0
+p (-1).pred #=> -2
 ```
 
 - **SEE** [m:Integer#next]
@@ -413,8 +413,8 @@ self から -1 した値を返します。
 - **return** -- 分母を返します。
 
 ```ruby
-10.denominator    # => 1
--10.denominator   # => 1
+p 10.denominator  # => 1
+p -10.denominator # => 1
 ```
 
 - **SEE** [m:Integer#numerator]
@@ -426,17 +426,17 @@ self から -1 した値を返します。
 - **raise** `ArgumentError` -- n に整数以外のものを指定すると発生します。
 
 ```ruby
-2.gcd(2)                    # => 2
-3.gcd(7)                    # => 1
-3.gcd(-7)                   # => 1
-((1<<31)-1).gcd((1<<61)-1)  # => 1
+p 2.gcd(2)                  # => 2
+p 3.gcd(7)                  # => 1
+p 3.gcd(-7)                 # => 1
+p ((1<<31)-1).gcd((1<<61)-1)  # => 1
 ```
 
 また、self や n が 0 だった場合は、0 ではない方の整数の絶対値を返します。
 
 ```ruby
-3.gcd(0)                    # => 3
-0.gcd(-7)                   # => 7
+p 3.gcd(0)                  # => 3
+p 0.gcd(-7)                 # => 7
 ```
 
 - **SEE** [m:Integer#lcm], [m:Integer#gcdlcm]
@@ -449,9 +449,9 @@ self から -1 した値を返します。
 - **raise** `ArgumentError` -- n に整数以外のものを指定すると発生します。
 
 ```ruby
-2.gcdlcm(2)                    # => [2, 2]
-3.gcdlcm(-7)                   # => [1, 21]
-((1<<31)-1).gcdlcm((1<<61)-1)  # => [1, 4951760154835678088235319297]
+p 2.gcdlcm(2)                  # => [2, 2]
+p 3.gcdlcm(-7)                 # => [1, 21]
+p ((1<<31)-1).gcdlcm((1<<61)-1)  # => [1, 4951760154835678088235319297]
 ```
 
 - **SEE** [m:Integer#gcd], [m:Integer#lcm]
@@ -463,16 +463,16 @@ self から -1 した値を返します。
 - **raise** `ArgumentError` -- n に整数以外のものを指定すると発生します。
 
 ```ruby
-2.lcm(2)                    # => 2
-3.lcm(-7)                   # => 21
-((1<<31)-1).lcm((1<<61)-1)  # => 4951760154835678088235319297
+p 2.lcm(2)                  # => 2
+p 3.lcm(-7)                 # => 21
+p ((1<<31)-1).lcm((1<<61)-1)  # => 4951760154835678088235319297
 ```
 
 また、self や n が 0 だった場合は、0 を返します。
 
 ```ruby
-3.lcm(0)                    # => 0
-0.lcm(-7)                   # => 0
+p 3.lcm(0)                  # => 0
+p 0.lcm(-7)                 # => 0
 ```
 
 - **SEE** [m:Integer#gcd], [m:Integer#gcdlcm]
@@ -484,8 +484,8 @@ self から -1 した値を返します。
 - **return** -- 分子を返します。
 
 ```ruby
-10.numerator    # => 10
--10.numerator   # => -10
+p 10.numerator  # => 10
+p -10.numerator # => -10
 ```
 
 - **SEE** [m:Integer#denominator]
@@ -495,8 +495,8 @@ self から -1 した値を返します。
 自身を [c:Rational] に変換します。
 
 ```ruby
-1.to_r        # => (1/1)
-(1<<64).to_r  # => (18446744073709551616/1)
+p 1.to_r      # => (1/1)
+p (1<<64).to_r  # => (18446744073709551616/1)
 ```
 
 
@@ -510,9 +510,9 @@ self から -1 した値を返します。
 引数 eps は常に無視されます。
 
 ```ruby
-2.rationalize      # => (2/1)
-2.rationalize(100) # => (2/1)
-2.rationalize(0.1) # => (2/1)
+p 2.rationalize    # => (2/1)
+p 2.rationalize(100) # => (2/1)
+p 2.rationalize(0.1) # => (2/1)
 ```
 
 ### def to_f -> Float
@@ -522,9 +522,9 @@ self を浮動小数点数([c:Float])に変換します。
 self が [c:Float] の範囲に収まらない場合、[m:Float::INFINITY] を返します。
 
 ```ruby
-1.to_f                       # => 1.0
-(Float::MAX.to_i * 2).to_f   # => Infinity
-(-Float::MAX.to_i * 2).to_f  # => -Infinity
+p 1.to_f                     # => 1.0
+p (Float::MAX.to_i * 2).to_f # => Infinity
+p (-Float::MAX.to_i * 2).to_f  # => -Infinity
 ```
 
 ### def <=>(other) -> -1 | 0 | 1 | nil
@@ -536,10 +536,10 @@ self と other を比較して、self が大きい時に1、等しい時に 0、
 - **return** --      -1 か 0 か 1 か nil のいずれか
 
 ```ruby
-1 <=> 2  # => -1
-1 <=> 1  # => 0
-2 <=> 1  # => 1
-2 <=> '' # => nil
+p 1 <=> 2  # => -1
+p 1 <=> 1  # => 0
+p 2 <=> 1  # => 1
+p 2 <=> '' # => nil
 ```
 
 ### def -@ -> Integer
@@ -548,8 +548,8 @@ self と other を比較して、self が大きい時に1、等しい時に 0、
 self の符号を反転させたものを返します。
 
 ```ruby
-- 10   # => -10
-- -10  # => 10
+p(- 10) # => -10
+p(- -10) # => 10
 ```
 
 ### def +(other) -> Numeric
@@ -560,7 +560,7 @@ self の符号を反転させたものを返します。
 - **return** -- 計算結果
 
 ```ruby
-3 + 4 # => 7
+p 3 + 4 # => 7
 ```
 
 ### def -(other) -> Numeric
@@ -571,7 +571,7 @@ self の符号を反転させたものを返します。
 - **return** -- 計算結果
 
 ```ruby
-4 - 1 #=> 3
+p 4 - 1 #=> 3
 ```
 
 ### def *(other) -> Numeric
@@ -582,7 +582,7 @@ self の符号を反転させたものを返します。
 - **return** -- 計算結果
 
 ```ruby
-2 * 3   # => 6
+p 2 * 3 # => 6
 ```
 
 ### def /(other) -> Numeric
@@ -599,11 +599,11 @@ other が Float、Rational、Complex の場合、普通の商を other と
 - **return** -- 計算結果
 
 ```ruby title="例"
-7 / 2 # => 3
-7 / -2 # => -4
-7 / 2.0 # => 3.5
-7 / Rational(2, 1) # => (7/2)
-7 / Complex(2, 0) # => ((7/2)+0i)
+p 7 / 2 # => 3
+p 7 / -2 # => -4
+p 7 / 2.0 # => 3.5
+p 7 / Rational(2, 1) # => (7/2)
+p 7 / Complex(2, 0) # => ((7/2)+0i)
 
 begin
   2 / 0
@@ -627,10 +627,10 @@ div に対応する剰余メソッドは modulo です。
 - **return** -- 計算結果
 
 ```ruby title="例"
-7.div(2) # => 3
-7.div(-2) # => -4
-7.div(2.0) # => 3
-7.div(Rational(2, 1)) # => 3
+p 7.div(2) # => 3
+p 7.div(-2) # => -4
+p 7.div(2.0) # => 3
+p 7.div(Rational(2, 1)) # => 3
 
 begin
   2.div(0)
@@ -654,10 +654,10 @@ end
 算術演算子。剰余を計算します。
 
 ```ruby
-13 % 4    # =>  1
-13 % -4   # => -3
--13 % 4   # =>  3
--13 % -4  # => -1
+p 13 % 4  # =>  1
+p 13 % -4 # => -3
+p -13 % 4 # =>  3
+p -13 % -4  # => -1
 ```
 
 - **param** `other` -- 二項演算の右側の引数(対象)
@@ -672,13 +672,13 @@ r の符号は self と同じになります。
 - **param** `other` -- self を割る数。
 
 ```ruby
-5.remainder(3)    # =>  2
--5.remainder(3)   # => -2
-5.remainder(-3)   # =>  2
--5.remainder(-3)  # => -2
+p 5.remainder(3)  # =>  2
+p -5.remainder(3) # => -2
+p 5.remainder(-3) # =>  2
+p -5.remainder(-3)  # => -2
 
--1234567890987654321.remainder(13731)      # => -6966
--1234567890987654321.remainder(13731.24)   # => -9906.22531493148
+p -1234567890987654321.remainder(13731)    # => -6966
+p -1234567890987654321.remainder(13731.24) # => -9906.22531493148
 ```
 
 - **SEE** [m:Integer#divmod], [m:Integer#modulo], [m:Numeric#modulo]
@@ -720,12 +720,12 @@ self を other で割り、その(剰余を考えない)商を整数に切り上
 - **param** `other` -- self を割る数を指定します。
 
 ```ruby
-3.ceildiv(3)    # => 1
-4.ceildiv(3)    # => 2
-5.ceildiv(3)    # => 2
-3.ceildiv(1.2)  # => 3
--5.ceildiv(3)   # => -1
--5.ceildiv(-3)  # => 2
+p 3.ceildiv(3)  # => 1
+p 4.ceildiv(3)  # => 2
+p 5.ceildiv(3)  # => 2
+p 3.ceildiv(1.2)  # => 3
+p -5.ceildiv(3) # => -1
+p -5.ceildiv(-3)  # => 2
 ```
 
 #@end
@@ -746,15 +746,15 @@ self を other で割り、その(剰余を考えない)商を整数に切り上
 #@end
 
 ```ruby
-2 ** 3 # => 8
-2 ** 0 # => 1
-0 ** 0 # => 1
-3.pow(3,  8)  # =>  3
-3.pow(3, -8)  # => -5
-3.pow(2, -2)  # => -1
--3.pow(3,  8) # =>  5
--3.pow(3, -8) # => -3
-5.pow(2, -8)  # => -7
+p 2 ** 3 # => 8
+p 2 ** 0 # => 1
+p 0 ** 0 # => 1
+p 3.pow(3,  8)  # =>  3
+p 3.pow(3, -8)  # => -5
+p 3.pow(2, -2)  # => -1
+p -3.pow(3,  8) # =>  5
+p -3.pow(3, -8) # => -3
+p 5.pow(2, -8)  # => -7
 ```
 
 #@until 3.4
@@ -788,9 +788,9 @@ p 100**9999999999999999999
 self の絶対値を返します。
 
 ```ruby
--12345.abs   # => 12345
-12345.abs    # => 12345
--1234567890987654321.abs   # => 1234567890987654321
+p -12345.abs # => 12345
+p 12345.abs  # => 12345
+p -1234567890987654321.abs # => 1234567890987654321
 ```
 
 ### def ==(other) -> bool
@@ -803,8 +803,8 @@ self の絶対値を返します。
              そうでなければ false を返します。
 
 ```ruby
-1 == 2      # => false
-1 == 1.0    # => true
+p 1 == 2    # => false
+p 1 == 1.0  # => true
 ```
 
 ### def <(other)  -> bool
@@ -816,8 +816,8 @@ self の絶対値を返します。
              そうでなければ false を返します。
 
 ```ruby
-1 < 1    # => false
-1 < 2    # => true
+p 1 < 1  # => false
+p 1 < 2  # => true
 ```
 
 ### def <=(other) -> bool
@@ -830,9 +830,9 @@ self の絶対値を返します。
              そうでなければ false を返します。
 
 ```ruby
-1 <= 0    # => false
-1 <= 1    # => true
-1 <= 2    # => true
+p 1 <= 0  # => false
+p 1 <= 1  # => true
+p 1 <= 2  # => true
 ```
 
 ### def >(other)  -> bool
@@ -844,8 +844,8 @@ self の絶対値を返します。
              そうでなければ false を返します。
 
 ```ruby
-1 > 0    # => true
-1 > 1    # => false
+p 1 > 0  # => true
+p 1 > 1  # => false
 ```
 
 ### def >=(other) -> bool
@@ -858,18 +858,18 @@ self の絶対値を返します。
              そうでなければ false を返します。
 
 ```ruby
-1 >= 0    # => true
-1 >= 1    # => true
-1 >= 2    # => false
+p 1 >= 0  # => true
+p 1 >= 1  # => true
+p 1 >= 2  # => false
 ```
 
 ### def ~        -> Integer
 ビット演算子。否定を計算します。
 
 ```ruby
-~1  # => -2
-~3  # => -4
-~-4 # => 3
+p ~1  # => -2
+p ~3  # => -4
+p ~-4 # => 3
 ```
 
 ### def |(other) -> Integer
@@ -878,8 +878,8 @@ self の絶対値を返します。
 - **param** `other` -- 数値
 
 ```ruby
-1 | 1  # => 1
-2 | 3  # => 3
+p 1 | 1  # => 1
+p 2 | 3  # => 3
 ```
 
 ### def &(other) -> Integer
@@ -888,8 +888,8 @@ self の絶対値を返します。
 - **param** `other` -- 数値
 
 ```ruby
-1 & 1  # => 1
-2 & 3  # => 2
+p 1 & 1  # => 1
+p 2 & 3  # => 2
 ```
 
 ### def ^(other) -> Integer
@@ -898,8 +898,8 @@ self の絶対値を返します。
 - **param** `other` -- 数値
 
 ```ruby
-1 ^ 1  # => 0
-2 ^ 3  # => 1
+p 1 ^ 1  # => 0
+p 2 ^ 3  # => 1
 ```
 
 ### def [](nth) -> Integer
@@ -946,9 +946,9 @@ p 255[-1] # => 0
 
 #@since 2.7.0
 ```ruby title="複数ビットの例"
-0b01001101[2, 4]  #=> 0b0011
-0b01001100[2..5]  #=> 0b0011
-0b01001100[2...6] #=> 0b0011
+p 0b01001101[2, 4]  #=> 0b0011
+p 0b01001100[2..5]  #=> 0b0011
+p 0b01001100[2...6] #=> 0b0011
 #   ^^^^
 ```
 #@end
@@ -999,21 +999,21 @@ self を表すのに必要なビット数を返します。
 -1 である)場合は 0 を返します。
 
 ```ruby title="例: ceil(log2(int < 0 ? -int : int+1)) と同じ結果"
-(-2**12-1).bit_length     # => 13
-(-2**12).bit_length       # => 12
-(-2**12+1).bit_length     # => 12
--0x101.bit_length         # => 9
--0x100.bit_length         # => 8
--0xff.bit_length          # => 8
--2.bit_length             # => 1
--1.bit_length             # => 0
-0.bit_length              # => 0
-1.bit_length              # => 1
-0xff.bit_length           # => 8
-0x100.bit_length          # => 9
-(2**12-1).bit_length      # => 12
-(2**12).bit_length        # => 13
-(2**12+1).bit_length      # => 13
+p (-2**12-1).bit_length   # => 13
+p (-2**12).bit_length     # => 12
+p (-2**12+1).bit_length   # => 12
+p -0x101.bit_length       # => 9
+p -0x100.bit_length       # => 8
+p -0xff.bit_length        # => 8
+p -2.bit_length           # => 1
+p -1.bit_length           # => 0
+p 0.bit_length            # => 0
+p 1.bit_length            # => 1
+p 0xff.bit_length         # => 8
+p 0x100.bit_length        # => 9
+p (2**12-1).bit_length    # => 12
+p (2**12).bit_length      # => 13
+p (2**12+1).bit_length    # => 13
 ```
 
 - **SEE** [m:Integer#size]
@@ -1026,10 +1026,10 @@ self & mask == mask と等価です。
 - **param** `mask` -- ビットマスクを整数で指定します。
 
 ```ruby
-42.allbits?(42)                   # => true
-0b1010_1010.allbits?(0b1000_0010) # => true
-0b1010_1010.allbits?(0b1000_0001) # => false
-0b1000_0010.allbits?(0b1010_1010) # => false
+p 42.allbits?(42)                 # => true
+p 0b1010_1010.allbits?(0b1000_0010) # => true
+p 0b1010_1010.allbits?(0b1000_0001) # => false
+p 0b1000_0010.allbits?(0b1010_1010) # => false
 ```
 
 - **SEE** [m:Integer#anybits?]
@@ -1042,10 +1042,10 @@ self & mask != 0 と等価です。
 - **param** `mask` -- ビットマスクを整数で指定します。
 
 ```ruby
-42.anybits?(42)                   # => true
-0b1010_1010.anybits?(0b1000_0010) # => true
-0b1010_1010.anybits?(0b1000_0001) # => true
-0b1000_0010.anybits?(0b0010_1100) # => false
+p 42.anybits?(42)                 # => true
+p 0b1010_1010.anybits?(0b1000_0010) # => true
+p 0b1010_1010.anybits?(0b1000_0001) # => true
+p 0b1000_0010.anybits?(0b0010_1100) # => false
 ```
 
 - **SEE** [m:Integer#allbits?]
@@ -1058,10 +1058,10 @@ self & mask == 0 と等価です。
 - **param** `mask` -- ビットマスクを整数で指定します。
 
 ```ruby
-42.nobits?(42)                   # => false
-0b1010_1010.nobits?(0b1000_0010) # => false
-0b1010_1010.nobits?(0b1000_0001) # => false
-0b0100_0101.nobits?(0b1010_1010) # => true
+p 42.nobits?(42)                 # => false
+p 0b1010_1010.nobits?(0b1000_0010) # => false
+p 0b1010_1010.nobits?(0b1000_0001) # => false
+p 0b0100_0101.nobits?(0b1010_1010) # => true
 ```
 
 - **SEE** [m:Integer#allbits?]
