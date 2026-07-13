@@ -29,8 +29,6 @@ foo2.test   # => 25
 
 - **param** `obj` -- 委譲先のオブジェクト
 
-- **SEE** [m:Delegator.new]
-
 ## Instance Methods
 
 ### def __getobj__ -> object

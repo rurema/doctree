@@ -668,7 +668,7 @@ p true.object_id #=> 20
 p true.object_id #=> 20
 ```
 
-- **SEE** [m:Object#equal?],[c:Symbol]
+- **SEE** [m:Object#equal?],[m:BasicObject#__id__],[c:Symbol]
 
 ### def hash -> Integer
 

@@ -1298,11 +1298,17 @@ csv.lineno # => 1
 
 ### def path    -> String
 
+#@since 3.2
 [m:IO#path] に委譲します。
 
 #@#noexample IO#path の例を参照
 
 - **SEE** [m:IO#path]
+#@end
+#@until 3.2
+保持している IO(または [c:StringIO] 等)オブジェクトが `path` に応答する場合、その `path` を返します。
+#@#noexample IO#path の例を参照
+#@end
 
 ### def pid    -> Integer | nil
 
