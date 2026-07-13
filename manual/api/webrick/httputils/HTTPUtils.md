@@ -123,11 +123,33 @@ unreserved = num + lowalpha + upalpha + mark
 #@#--- parse_qvalues(value)
 #@#todo
 
-#@#--- escape_form(str)
-#@#todo
+### module_function def escape_form(str) -> String
 
-#@#--- unescape_form(str)
-#@#todo
+与えられた文字列を application/x-www-form-urlencoded 形式の文字列に変換します。
+スペースは `+` に変換されます。
+
+- **param** `str` -- 文字列を指定します。
+
+`````
+require 'webrick'
+p WEBrick::HTTPUtils.escape_form('foo bar+baz')  # => "foo+bar%2Bbaz"
+`````
+
+- **SEE** [m:WEBrick::HTTPUtils?.unescape_form]
+
+### module_function def unescape_form(str) -> String
+
+[m:WEBrick::HTTPUtils?.escape_form] で変換された文字列を元の文字列に戻します。
+`+` はスペースに変換されます。
+
+- **param** `str` -- 文字列を指定します。
+
+`````
+require 'webrick'
+p WEBrick::HTTPUtils.unescape_form('foo+bar%2Bbaz')  # => "foo bar+baz"
+`````
+
+- **SEE** [m:WEBrick::HTTPUtils?.escape_form]
 
 #@#--- _make_regex!(str)
 #@#todo
