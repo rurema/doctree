@@ -8,24 +8,24 @@ IO に出力する機能を持つクラスです。
 
 start で変換を開始し、push で変換する Ruby オブジェクトを渡し、
 最後に finish を呼ぶことで変換を完了します。
-`````
+```ruby
 stream = Psych::Stream.new($stdout)
 stream.start
 stream.push({:foo => 'bar'})
 stream.finish
-`````
+```
 
 YAML document は(バッファリングされずに)直接 $stdout に出力されます。
 
 finish を確実に呼び出すためには [m:Psych::Stream#start] メソッドを
 ブロック付きで呼び出すとよいでしょう。
 
-`````
+```ruby
 stream = Psych::Stream.new($stdout)
 stream.start do |em|
   em.push(:foo => 'bar')
 end
-`````
+```
 
 基本的な仕組みは [c:Psych::Visitors::YAMLTree] と似ています。
 

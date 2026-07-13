@@ -14,9 +14,7 @@ library: openssl
   - [c:OpenSSL::PKey::DH]
   - [c:OpenSSL::PKey::EC]
 
-例:
-
-`````
+```ruby title="例"
 require "openssl"
 # 署名用の鍵を新規作成
 dsa512 = OpenSSL::PKey::DSA.new(512)
@@ -25,7 +23,7 @@ data = 'hoge'
 sign = dsa512.sign("dss1", data)
 # 署名の検証
 p dsa512.verify(dss1, sign, data)
-`````
+```
 
 ## Instance Methods
 

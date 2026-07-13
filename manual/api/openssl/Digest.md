@@ -16,8 +16,7 @@ library: openssl
 利用します。
 
 
-例:
-`````
+```ruby title="例"
 require 'openssl'
 digest = OpenSSL::Digest.new("sha256")
 
@@ -27,7 +26,7 @@ File.open(filename){|f|
   end
 }
 puts digest.hexdigest
-`````
+```
 
 [lib:digest] も参照してください。
 

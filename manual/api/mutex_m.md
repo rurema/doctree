@@ -25,7 +25,7 @@ category: Thread
 
 ### 例
 クラスに [m:Module#include] する例
-`````
+```text
 require "mutex_m"
 class Foo
   include Mutex_m
@@ -36,10 +36,10 @@ obj.synchronize do
   # 危険領域(critical section)
   ...
 end
-`````
+```
 
 オブジェクトに [m:Object#extend] する例
-`````
+```ruby
 require "mutex_m"
 obj = Object.new
 obj.extend(Mutex_m)
@@ -47,7 +47,7 @@ obj.lock
 # 危険領域(critical section)  
 ... 
 obj.unlock
-`````
+```
 
 ## Singleton Methods
 

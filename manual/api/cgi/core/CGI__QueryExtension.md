@@ -88,7 +88,7 @@ ENV['HTTP_HOST'] を返します。
 マルチパートフォームの場合は、真を返します。
 そうでない場合は、偽を返します。
 
-``````````
+```ruby
 例：
 cgi = CGI.new
 if cgi.multipart?
@@ -96,7 +96,7 @@ if cgi.multipart?
 else
   field1=cgi['field1']
 end
-``````````
+```
 
 ### def negotiate -> String
 
@@ -108,12 +108,12 @@ ENV['HTTP_NEGOTIATE'] を返します。
 
 フォームから入力された値や、URLに埋め込まれた QUERY_STRING のパース結果の取得などに使用します。
 
-`````````
+```ruby
 cgi = CGI.new
-cgi.params['developer']     # => ["Matz"] (Array)
-cgi.params['developer'][0]  # => "Matz"
-cgi.params['']              # => nil
-`````````
+p cgi.params['developer']   # => ["Matz"] (Array)
+p cgi.params['developer'][0]  # => "Matz"
+p cgi.params['']            # => nil
+```
 
 ### def params=(hash)
 

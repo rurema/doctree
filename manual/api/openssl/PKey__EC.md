@@ -13,8 +13,7 @@ EC(Ellicptic Curve,楕円曲線)暗号鍵のクラスです。
 
 組み込みの曲線の名前と、それに対する説明を文字列の配列ペアの配列で返します。
 
-例:
-`````
+```ruby title="例"
 require 'openssl'
 
 OpenSSL::PKey::EC.builtin_curves
@@ -23,7 +22,7 @@ OpenSSL::PKey::EC.builtin_curves
 #     ["secp128r1", "SECG curve over a 128 bit prime field"], 
 #     ["secp128r2", "SECG curve over a 128 bit prime field"],
 #     ... ]
-`````
+```
 
 - **SEE** [m:OpenSSL::PKey::EC::Group.new]
 

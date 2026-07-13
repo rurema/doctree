@@ -22,7 +22,7 @@ Rake は以下のような特徴を持っています。
 
 ### Rake コマンドの使い方
 
-`````
+```console
 $ rake --help
 rake [-f rakefile] {options} targets...
 Options are ...
@@ -52,7 +52,7 @@ Options are ...
     -v, --verbose                 標準出力にログメッセージを表示します (デフォルト)。
     -V, --version                 このプログラムのバージョンを表示します。
     -h, -H, --help                このメッセージを表示します。
-`````
+```
 
 ### Rake ファイルの書き方
 
@@ -62,16 +62,14 @@ Options are ...
 出来る場合があります。Rakefile は普通の Ruby スクリプトと同じ文法で
 書くことができるので工夫次第で Ruby にできることなら何でもできます。
 
-簡単な例:
-`````
+```ruby title="簡単な例"
 # coding: utf-8
 task :hello do
   puts 'do task hello!'
 end
-`````
+```
 
-動的にタスクを定義する例:
-`````
+```ruby title="動的にタスクを定義する例"
 # coding: utf-8
 require 'rake/testtask'
 require 'rake/clean'    # clean, clobber の二つのタスクを定義
@@ -87,7 +85,7 @@ end
   
 desc 'execute all test'
 task 'test_all' => (1..8).to_a.map{|n| "test_step#{n}"}
-`````
+```
 
 ### 用語集
 

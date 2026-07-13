@@ -15,7 +15,7 @@ Profiler__.start_profile 実行から、Profiler__.stop_profile までの
 
 以下の使用例を参照してください。
 
-```````
+```text
 require 'profiler'
 
 Profiler__.start_profile
@@ -40,7 +40,7 @@ time   seconds   seconds    calls  ms/call  ms/call  name
    :
    :
 <snip>
-```````
+```
 
 ## Module Functions
 

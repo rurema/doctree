@@ -22,7 +22,7 @@ sublibrary:
 
 テスト対象のソース (foo.rb) を用意します。
 
-`````
+```ruby
 class Foo
   def foo
     "foo"
@@ -31,7 +31,7 @@ class Foo
     "foo"
   end
 end
-`````
+```
 
 次にユニットテスト (test_foo.rb) を書きます。
 テストを実行するメソッド (テストメソッド) の名前はすべて "test" で始まる必要があります。
@@ -40,7 +40,7 @@ end
 
 [lib:minitest/unit] を [m:Kernel?.require] しただけではテストが自動実行されません。
 
-`````
+```ruby
 require 'minitest/unit'
 require 'foo'
   
@@ -63,21 +63,21 @@ class TestFoo < MiniTest::Unit::TestCase
     assert_equal "bar", @foo.bar
   end
 end
-`````
+```
 
 または MiniTest::Unit.autorun を省略して以下のように書くこともできます。
 
-`````
+```ruby
 require 'minitest/unit'
 require 'minitest/autorun'
 require 'foo'
 # 以下略
-`````
+```
 
 テストを実行するには上で用意した test_foo.rb を実行します。
 デフォルトではすべてのテストが実行されます。
 
-`````
+```console
 $ ruby test_foo.rb
 Loaded suite test_foo
 Started
@@ -89,11 +89,11 @@ test_bar(TestFoo) [test_foo.rb:20]:
 Expected "bar", not "foo".
   
 2 tests, 2 assertions, 1 failures, 0 errors, 0 skips
-`````
+```
 
 test_bar だけテストしたい場合は以下のようなオプションを与えます。
 
-`````
+```console
 $ ruby test_foo.rb -n test_bar
 Loaded suite test_foo
 Started
@@ -105,7 +105,7 @@ test_bar(TestFoo) [test_foo.rb:20]:
 Expected "bar", not "foo".
   
 1 tests, 1 assertions, 1 failures, 0 errors, 0 skips
-`````
+```
 
 コンソールを使った testrunner のみ提供されています。
 またヘルプを表示することもできません。

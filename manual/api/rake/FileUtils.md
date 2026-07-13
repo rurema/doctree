@@ -14,8 +14,7 @@ library: rake
 - **param** `cmd` -- 引数の解釈に関しては [m:Kernel?.exec] を参照してください。
 
 
-例:
-``````
+```ruby title="例"
 sh %{ls -ltr}
    
 sh 'ls', 'file with spaces'
@@ -26,7 +25,7 @@ sh %{grep pattern file} do |ok, res|
     puts "pattern not found (status = #{res.exitstatus})"
   end
 end
-``````
+```
 
 - **SEE** [m:Kernel?.exec], [m:Kernel?.system]
 
@@ -37,10 +36,9 @@ end
 
 - **param** `args` -- Ruby インタプリタに与える引数を指定します。
 
-例:
-``````
+```ruby title="例"
 ruby %{-pe '$_.upcase!' <README}
-``````
+```
 
 - **SEE** [m:Kernel?.sh]
 
@@ -60,8 +58,7 @@ ruby %{-pe '$_.upcase!' <README}
 
 - **param** `path` -- 分割するパスを指定します。
 
-例:
-``````
-split_all("a/b/c") # =>  ['a', 'b', 'c']
-``````
+```ruby title="例"
+p split_all("a/b/c") # =>  ['a', 'b', 'c']
+```
 

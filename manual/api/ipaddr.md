@@ -8,9 +8,7 @@ IPアドレスを扱うライブラリです。
 
 IP アドレスを扱うのためのクラスです。
 
-例:
-
-`````
+```ruby title="例"
 require 'ipaddr'
   
 ipaddr1 = IPAddr.new("3ffe:505:2::1")
@@ -18,7 +16,7 @@ p ipaddr1   # => #<IPAddr: IPv6:3ffe:0505:0002:0000:0000:0000:0000:0001/ffff:fff
   
 ipaddr3 = IPAddr.new("192.168.2.0/24")
 p ipaddr3   # => #<IPAddr: IPv4:192.168.2.0/255.255.255.0>
-`````
+```
 
 ### 参照
 
@@ -49,12 +47,10 @@ p ipaddr3   # => #<IPAddr: IPv4:192.168.2.0/255.255.255.0>
 
 - **param** `addr` -- ネットワークバイトオーダーのバイト列。
 
-例:
-
-`````
+```ruby title="例"
 require 'ipaddr'
 p IPAddr.new_ntoh("\300\250\001\001")   # => <IPAddr: IPv4:192.168.1.1/255.255.255.255>
-`````
+```
 
 ### def ntop(addr) -> String
 
@@ -105,12 +101,10 @@ IPAddr オブジェクト同士が等しいかを比較します。
 - **param** `ipaddr` -- 比較対象の IPAddr オブジェクト。
               また、数値や文字列も受け付けます。
 
-例:
-
-`````
+```ruby title="例"
 require "ipaddr"
 p IPAddr.new("192.168.0.1") == IPAddr.new("192.168.0.1/24")   # => false
-`````
+```
 
 ### def mask(prefixlen)  -> IPAddr
 
@@ -132,23 +126,21 @@ p IPAddr.new("192.168.0.1") == IPAddr.new("192.168.0.1/24")   # => false
 
 整数に変換します。
 
-例:
-
-`````
+```ruby title="例"
 require "ipaddr"
 p IPAddr.new("0.0.1.0").to_i   # => 256
-`````
+```
 
 ### def to_s -> String
 
 文字列に変換します。
 
-`````
+```ruby
 require 'ipaddr'
 addr6 = IPAddr.new('::1')
-addr6.to_s       #=> "::1"
-addr6.to_string  #=> "0000:0000:0000:0000:0000:0000:0000:0001"
-`````
+p addr6.to_s     #=> "::1"
+p addr6.to_string  #=> "0000:0000:0000:0000:0000:0000:0000:0001"
+```
 
 - **SEE** [m:IPAddr#to_string]
 
@@ -156,12 +148,12 @@ addr6.to_string  #=> "0000:0000:0000:0000:0000:0000:0000:0001"
 
 標準的な文字列表現に変換します。
 
-`````
+```ruby
 require 'ipaddr'
 addr6 = IPAddr.new('::1')
-addr6.to_s       #=> "::1"
-addr6.to_string  #=> "0000:0000:0000:0000:0000:0000:0000:0001"
-`````
+p addr6.to_s     #=> "::1"
+p addr6.to_string  #=> "0000:0000:0000:0000:0000:0000:0000:0001"
+```
 
 - **SEE** [m:IPAddr#to_s]
 
@@ -201,13 +193,11 @@ IPv4 射影 IPv6 アドレスや IPv4 互換 IPv6 アドレスから、
 IPv4 アドレスの新しい IPAddr オブジェクトを返します。
 IPv4 互換でも IPv4 組み込みでもないなら self を返します。
 
-例:
-
-`````
+```ruby title="例"
 require "ipaddr"
 p IPAddr.new("0000:0000:0000:0000:0000:ffff:c0a8:0001").native
     # => #<IPAddr: IPv4:192.168.0.1/255.255.255.255>
-`````
+```
 
 #@since 2.5.0
 ### def prefix -> Integer
@@ -229,12 +219,10 @@ p IPAddr.new("0000:0000:0000:0000:0000:ffff:c0a8:0001").native
 DNS 逆引きのための文字列を返します。
 IPv6 なら [RFC:3172] で定義された形式で返します。
 
-例:
-
-`````
+```ruby title="例"
 require "ipaddr"
 p IPAddr.new("192.168.0.1").reverse   # => "1.0.168.192.in-addr.arpa"
-`````
+```
 
 ### def ip6_arpa -> String
 
@@ -272,27 +260,25 @@ self と other を比較します。
 
 次の IPAddr オブジェクトを返します。
 
-`````
+```ruby
 require 'ipaddr'
 ipaddr = IPAddr.new('192.168.1.1')
 p ipaddr.succ.to_s #=> "192.168.1.2"
-`````
+```
 
 ### def to_range -> Range
 
 self の IP アドレスとサブネットマスクで取得できる IP アドレスの範囲を
 [c:Range] オブジェクトとして返します。
 
-例:
-
-`````
+```ruby title="例"
 require 'ipaddr'
 IPAddr.new('192.168.1.1').to_range
 #=> #<IPAddr: IPv4:192.168.1.1/255.255.255.255>..#<IPAddr: IPv4:192.168.1.1/255.255.255.255>
 IPAddr.new('::1').to_range
 #=> #<IPAddr: IPv6:0000:0000:0000:0000:0000:0000:0000:0001/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff>..
 #   #<IPAddr: IPv6:0000:0000:0000:0000:0000:0000:0000:0001/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff>
-`````
+```
 
 
 #@since 1.9.2
@@ -333,23 +319,23 @@ IPAddr.new('::1').to_range
 
 IPv4 アドレスの場合に使用するマスク値。
 
-`````
+```ruby
 0xffffffff
-`````
+```
 
 ### const IN6MASK -> Integer
 
 IPv6 アドレスの場合に使用するマスク値。
 
-`````
+```ruby
 0xffffffffffffffffffffffffffffffff
-`````
+```
 
 ### const IN6FORMAT -> String
 
 IPv6 アドレスをわかりやすく表示するためのフォーマット文字列。
 
-`````
+```ruby
 "%.4x:%.4x:%.4x:%.4x:%.4x:%.4x:%.4x:%.4x"
-`````
+```
 

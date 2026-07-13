@@ -19,7 +19,7 @@ POP3 の実装は [RFC:1939] に基いています。
 'YourAccount' と 'YourPassword' は適当なアカウント名とパスワード
 に適宜読みかえてください。
 
-`````
+```ruby
 require 'net/pop'
   
 pop = Net::POP3.new('pop.example.com', 110)
@@ -36,7 +36,7 @@ else
   $stderr.puts "#{pop.mails.size} mails popped."
 end
 pop.finish                                        # セッションを終了する
-`````
+```
 
 POP サーバはネットワークのむこうに存在するので、
 なにか仕事をさせるにはその前に開始手続きを、
@@ -54,7 +54,7 @@ POP3 オブジェクトはその二つのメソッドの間でだけ有効にな
 まず、ブロック付きの [m:Net::POP3.start] を使うことで
 POP3.new, #start, #finish を併合できます。
 
-`````
+```ruby
 require 'net/pop'
   
 Net::POP3.start('pop.example.com', 110,
@@ -71,13 +71,13 @@ Net::POP3.start('pop.example.com', 110,
     $stderr.puts "#{pop.mails.size} mails popped."
   end
 }
-`````
+```
 
 [m:Net::POP3#delete_all] を使うと
 さらに [m:Net::POP3#each_mail] と
 [m:Net::POPMail#delete] を併合できます。
 
-`````
+```ruby
 require 'net/pop'
   
 Net::POP3.start('pop.example.com', 110,
@@ -94,11 +94,11 @@ Net::POP3.start('pop.example.com', 110,
     end
   end
 }
-`````
+```
 
 クラスメソッドの [m:Net::POP3.delete_all] を使うとさらに短くなります。
 
-`````
+```ruby
 require 'net/pop'
   
 i = 0
@@ -109,7 +109,7 @@ Net::POP3.delete_all('pop.example.com', 110,
   }
   i += 1
 end
-`````
+```
 
 #### メモリ使用量を減らす
 
@@ -120,7 +120,7 @@ end
 そのような場合は以下のように [m:Net::POPMail#pop] に
 File オブジェクトを与える手が使えます。
 
-`````
+```ruby
 require 'net/pop'
   
 i = 0
@@ -131,13 +131,13 @@ Net::POP3.delete_all('pop.example.com', 110,
   }
   i += 1
 end
-`````
+```
 
 [m:Net::POPMail#pop]にブロックを渡すと、
 メールデータを細かく分割してブロックを呼びだします。
 この機能を使って同様のことができます。
 
-`````
+```ruby
 require 'net/pop'
   
 i = 0
@@ -150,7 +150,7 @@ Net::POP3.delete_all('pop.example.com', 110,
   }
   i += 1
 end
-`````
+```
 
 #### APOP を使う
 
@@ -159,7 +159,7 @@ Net::POP3 クラスのかわりに Net::APOP クラスを使うと、
 また動的にノーマル POP と APOP を選択するには、
 以下のように [m:Net::POP3.APOP] メソッドを使うのが便利です。
 
-`````
+```ruby
 require 'net/pop'
   
 # use APOP authentication if $isapop == true
@@ -167,7 +167,7 @@ pop = Net::POP3.APOP($isapop).new('apop.example.com', 110)
 pop.start('YourAccount', 'YourPassword') {|pop|
   # 残りのコードは同じ
 }
-`````
+```
 
 この方法はクラス自体を変えるので、クラスメソッドの start や foreach、
 delete_all、auth_only なども APOP とともに使えます。
@@ -178,7 +178,7 @@ delete_all、auth_only なども APOP とともに使えます。
 利用しているPOP3サーバが UIDL 機能を提供している場合には、
 以下のようにして特定のメールだけを取り出すことができます。
 
-`````
+```ruby
 require 'net/pop'
 
 def need_pop?(id)
@@ -191,7 +191,7 @@ Net::POP3.start('pop.example.com', 110,
     do_something(m.pop)
   end
 end
-`````
+```
 
 [m:Net::POPMail#unique_id] はメッセージのユニークIDを文字列で返します。
 これは通常そのメッセージのハッシュ値です。

@@ -11,11 +11,11 @@ C の構造体を表すクラスです。
 構造体の各メンバへのアクセサが定義されています。
 このアクセサはシグネチャの型とメンバ名に従って定義されます。
 例えば 
-`````
+```ruby
 require 'fiddle/import'
 include Fiddle::Importer
 S = struct(["long foo", "void* bar"])
-`````
+```
 とすると、 S#foo, S#foo= というアクセサが Integer とやりとり
 するように定義され、 S#bar, S#bar= というアクセサが Fiddle::Pointer
 でやりとりするように定義されます。
@@ -30,9 +30,9 @@ addr のアドレスが指すメモリを構造体のアドレスとみなし、
 構造体を作ります。
 
 C におけるキャストと似ています。
-`````
+```c
 return (struct foo*)addr;
-`````
+```
 というコードと対応していると言えます。
 
 - **param** `addr` -- アドレス
@@ -42,9 +42,9 @@ return (struct foo*)addr;
 オブジェクトで返します。
 
 C における
-`````
+```c
 return (struct foo*)malloc(sizeof(struct foo));
-`````
+```
 というコードと対応していると言えます。
 
 ### def size -> Integer

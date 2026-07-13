@@ -10,9 +10,7 @@ until: "2.7.0"
 def_e2message メソッドや def_exception メソッドが使えます。
 これらで例外クラスとメッセージを関連づけることができます。
 
-例:
-
-`````
+```text title="例"
 class Foo
   extend Exception2MessageMapper
   def_e2message ExistingExceptionClass, "message..."
@@ -22,14 +20,12 @@ end
   
 foo = Foo.new
 foo.Fail ....
-`````
+```
 
 **2.** 何度も使いたい例外クラスは、クラスの代わりにモジュールで定義して、
 それを include して使います。
 
-例:
-
-`````
+```text title="例"
 module ErrorMod
   extend Exception2MessageMapper
   def_e2message ExistingExceptionClass, "message..."
@@ -43,13 +39,11 @@ end
   
 foo = Foo.new
 foo.Fail ....
-`````
+```
 
 **3.** 例外を設定したクラスのインスタンス以外から例外を呼ぶこともできます。
 
-例:
-
-`````
+```text title="例"
 module ErrorMod
   extend Exception2MessageMapper
   def_e2message ExistingExceptionClass, "message..."
@@ -64,5 +58,5 @@ end
   
 Foo.Fail NewExceptionClass, arg...
 Foo.Fail ExistingExceptionClass, arg...
-`````
+```
 

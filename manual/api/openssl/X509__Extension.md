@@ -31,9 +31,7 @@ short name、long name のいずれかである文字列を与えます。
 value にはその値を表す DER 形式の文字列、もしくは 
 [c:OpenSSL::ASN1::ASN1Data] のサブクラスを与えます。
 
-例;
-
-`````
+```ruby title="例"
 require 'openssl'
 include OpenSSL
 oid = "subjectKeyIdentifier"
@@ -44,7 +42,7 @@ ex2 = X509::Extension.new("2.5.29.19", "0\x03\x01\x01\xFF")
 p ex2.oid # => "basicConstrains"
 ex3 = X509::Extension.new("basicConstraints", ASN1.Sequence([ASN1::Boolean(false)]))
 p ex3 # => basicConstraints = CA:FALSE
-`````
+```
 
 - **param** `der` -- DER形式の文字列
 - **param** `oid` -- OIDを表す文字列(ドット区切り、short name, long nameのいずれか)
@@ -102,9 +100,9 @@ DER 形式のバイト列に変換して返します。
 
 ### def to_h -> Hash
 拡張領域の内容を、
-`````
+```text
 { "oid" => 識別子(extnID), "value" => 値(extnValue), "critical" => 重要度(critical) }
-`````
+```
 というハッシュで返します。
 
 ### def to_s -> String

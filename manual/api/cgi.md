@@ -235,16 +235,16 @@ CGI.new("html4Fr")  # html4.0 Frameset
 cgi には、コマンドラインから CGI スクリプトを動かすための仕組み（オフラインモード）があります。
 コマンドラインから以下のように実行すると、
 
-`````
+```console
 $ ruby -r cgi some_script.rb
 (offline mode: enter name=value pairs on standard input)
-`````
+```
 
 と聞いてくるので、
 
-`````
+```console
 q=hoge&v=foo
-`````
+```
 
 などと入力して下さい。クエリーに入力された値がセットされて、スクリプトが実行されます。
 

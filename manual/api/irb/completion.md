@@ -8,15 +8,15 @@ irb の completion 機能を提供するライブラリです。
 
 ### 使い方
 
-``````
+```console
 $ irb -r irb/completion
-``````
+```
 
 とするか, ~/.irbrc 中に
 
-``````
+```ruby
 require "irb/completion"
-``````
+```
 
 を入れてください.
 irb実行中に require "irb/completion" してもよいです.
@@ -26,7 +26,7 @@ irb 実行中に [Tab] を押すとコンプレーションします.
 トップレベルで [Tab] を押すとすべての構文要素, クラス,
 メソッドの候補がでます. 候補が唯一ならば完全に補完します.
 
-`````
+```irb
 irb(main):001:0> in    
 in                    inspect               instance_eval
 include               install_alias_method  instance_of?
@@ -35,11 +35,11 @@ irb(main):001:0> inspect
 "main"
 irb(main):002:0> foo = Object.new
 #<Object:0x4027146c>
-`````
+```
 
 "変数名." の後に [Tab] を押すと, そのオブジェクトのメソッド一覧がでます.
 
-`````
+```irb
 irb(main):003:0> foo.
 foo.==                  foo.frozen?             foo.protected_methods
 foo.===                 foo.hash                foo.public_methods
@@ -54,7 +54,7 @@ foo.eql?                foo.method              foo.type
 foo.equal?              foo.methods             foo.untaint
 foo.extend              foo.nil?                
 foo.freeze              foo.private_methods     
-`````
+```
 
 # module IRB::Completor
 

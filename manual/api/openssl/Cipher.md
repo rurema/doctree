@@ -43,7 +43,7 @@ AES を用いる場合、通常は CBC を用いれば良いでしょう。
 
 
 ### 使用例
-`````
+```ruby
 require 'openssl'
   
 # 暗号化するデータ
@@ -85,7 +85,7 @@ decrypted_data << dec.update(encrypted_data)
 decrypted_data << dec.final
   
 p decrypted_data
-`````
+```
 
 ## Class Methods
 ### def new(name) -> OpenSSL::Cipher
@@ -130,12 +130,12 @@ p decrypted_data
 ### def ciphers -> [String]
 利用可能な暗号方式名を文字列の配列で返します。
 
-`````
+```ruby
 require 'openssl'
 
 OpenSSL::Cipher.ciphers 
 # => ["AES-128-CBC", "AES-128-CFB", "AES-128-CFB1", "AES-128-CFB8", "AES-128-ECB", "AES-128-OFB", "AES-192-CBC", ... ]
-`````
+```
 
 ## Instance Methods
 ### def reset -> self

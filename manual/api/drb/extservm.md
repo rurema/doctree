@@ -23,8 +23,7 @@ DRb::ExtServManager
 
 
 
-server.rb: 
-`````
+```ruby title="server.rb"
 require 'drb/drb'
 require 'drb/extservm'
   
@@ -45,10 +44,9 @@ DRb.start_service("druby://localhost:10234", s)
   
 # drb のプロセスの終了を待つ
 DRb.thread.join
-`````
+```
 
-service.rb:
-`````
+```ruby title="service.rb"
 require 'drb/drb'
 require 'drb/extserv'
   
@@ -85,10 +83,9 @@ DRb.thread.join
 # サービスを DRb::ExtServ#stop_service で止めると、サーバスレッドが
 # 終了するため、以下の行が実行される
 puts "Stop #{ARGV[0]}"
-`````
+```
 
-client.rb:
-`````
+```ruby title="client.rb"
 require 'drb/drb'
   
 DRb.start_service
@@ -101,16 +98,15 @@ p service1.hello # => "service1"
 # No2 と名付けられたサービスを呼び出す
 service2 = s.service("No2").front
 p service2.hello # => "service2"
-`````
+```
 
-stop.rb:
-`````
+```ruby title="stop.rb"
 require 'drb/drb'
   
 DRb.start_service
 s = DRbObject.new_with_uri("druby://localhost:10234")
 s.service(ARGV[0]).stop_service
-`````
+```
 
 # class DRb::ExtServManager < Object
 [c:DRb::ExtServ] で作られたサービスを管理するクラスです。

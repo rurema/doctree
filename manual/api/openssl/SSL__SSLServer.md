@@ -16,7 +16,7 @@ SSL サーバーのためのクラス。
 
 以下はクライアントからの入力を標準出力に出力するだけのサーバです。
 
-`````
+```ruby
 require 'socket'
 require 'openssl'
   
@@ -33,7 +33,7 @@ loop do
     puts soc.read
   end
 end
-`````
+```
 
 ## Class Methods
 

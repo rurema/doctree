@@ -7,8 +7,7 @@ library: openssl
 クラスです。
 
 
-例
-`````
+```ruby title="例"
 require 'openssl'
 # ca_cert: CA の証明書オブジェクト
 # req: CSR オブジェクト
@@ -37,7 +36,7 @@ p factory.create_extension("authorityKeyIdentifier", "keyid,issuer:always")
   
 # 生成した拡張領域オブジェクトを証明書の拡張領域に追加
 newcert.add_extension(factory.create_extension("basicConstraints", "CA:FALSE"))
-`````
+```
 
 
 ## Class Methods
@@ -148,11 +147,10 @@ ExtensionFactory オブジェクトを生成します。
 ### def config=(config) 
 自身にコンフィグファイルオブジェクトを設定します。
 
-例
-`````
+```ruby title="例"
 require 'openssl'
 factory.config = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
-`````
+```
 
 - **param** `config` -- 設定ファイル([c:OpenSSL::Config] オブジェクト)
 
@@ -167,9 +165,9 @@ factory.config = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 ハッシュから [c:OpenSSL::X509::Extension] オブジェクトを生成します。
 
 渡すハッシュテーブルは 
-`````
+```text
 {"oid" => OID文字列, "value" => value文字列, "critical" => 真偽値 }
-`````
+```
 という内容が必要です。"critical" を省略した場合は false が
 渡されるのと同じになります。
 

@@ -42,9 +42,7 @@ rdoc コマンドのオプションを解析するためのクラスです。
 する必要があります。rdoc --help を実行すると追加したオプションの一覧が
 確認できます。
 
-例:
-
-`````
+```ruby title="例"
 class RDoc::Generator::Spellcheck
   RDoc::RDoc.add_generator self
 
@@ -58,7 +56,7 @@ class RDoc::Generator::Spellcheck
     end
   end
 end
-`````
+```
 
 #@# Path や Template などには Object.new したものが入っているため、全て
 #@# のオブジェクトが通るように見えるため除外。

@@ -10,24 +10,22 @@ require:
 
 ユニットテストを実行するためのタスクを作成するクラスです。
 
-例:
-`````
+```ruby title="例"
 Rake::TestTask.new do |t|
   t.libs << "test"
   t.test_files = FileList['test/test*.rb']
   t.verbose = true
 end
-`````
+```
 
 以下に test ターゲットの使用例を示します。
 
-例:
-``````
+```console title="例"
 rake test                           # run tests normally
 rake test TEST=just_one_file.rb     # run just one test file.
 rake test TESTOPTS="-v"             # run in verbose mode
 rake test TESTOPTS="--runner=fox"   # use the fox test runner
-``````
+```
 
 ## Public Instance Methods
 

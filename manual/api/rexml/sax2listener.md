@@ -33,19 +33,19 @@ type: library
 コールバックメソッドです。
 
 以下のようなXMLを処理
-`````
+```text
 <a xmlns:foo="http://foo.example.org/">
   <foo:b />
 </a>
-`````
+```
 すると
-`````
+```text
 start_prefix_mapping("foo", "http://foo.example.org/")
 start_element(nil, "a", "a", {"xmlns:foo" => "http://foo.example.org/"})
   :
 end_element(nil, "a", "a")
 end_prefix_mapping("foo")
-`````
+```
 の順で呼びだされます。つまり名前空間を導入した要素の start_element の前に
 start_prefix_mapping が呼びだされます。
 

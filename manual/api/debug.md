@@ -9,16 +9,16 @@ https://github.com/ruby/elisp にあるので、活用してください。
 
 ### 使い方
 
-`````
+```console
 $ ruby -rdebug foo.rb
-`````
+```
 
 または、Emacs から
 
-```````
+```text
 M-x load-library rubydb3x.el
 M-x rubydb
-```````
+```
 
 ### デバッグコマンド
 

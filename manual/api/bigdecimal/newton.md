@@ -12,16 +12,14 @@ require:
 
 本サブライブラリは [c:BigDecimal] に依存しません。
 
-実行例:
-
-`````
+```text title="実行例"
 require "bigdecimal"
 require "bigdecimal/newton"
 
 ...
 
 n = Newton.nlsolve(f, x)
-`````
+```
 
 引数 f には関数を表すオブジェクトを指定します。以下のメソッドに応答でき
 る必要があります。

@@ -32,9 +32,7 @@ category: DesignPattern
 
 - **param** `superclass` -- 委譲先となるクラス
 
-例:
-
-```
+```ruby title="例"
 require 'delegate'
 
 class ExtArray < DelegateClass(Array)

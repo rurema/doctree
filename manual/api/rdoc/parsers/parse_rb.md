@@ -23,12 +23,12 @@ Ruby のソースコードを解析するためのサブライブラリです。
 
 動的に定義されたメソッドをドキュメントに含めたい場合、## でコメントを開始します。
 
-`````
+```ruby
 ##
 # This is a meta-programmed method!
 
 add_my_method :meta_method, :arg1, :arg2
-`````
+```
 
 [c:RDoc::Parser::Ruby] は上記の :meta_method ようにメソッドの定義を行
 うような識別子の後に続くトークンをメソッド名として解釈します。メソッド
@@ -37,41 +37,41 @@ add_my_method :meta_method, :arg1, :arg2
 
 :method: 命令を使う事でメソッド名を指定する事もできます。
 
-`````
+```text
 ##
 # :method: woo_hoo!
-`````
+```
 
 デフォルトでは動的に定義されたメソッドはインスタンスメソッドとして解析
 されます。特異メソッドとしたい場合は、:singleton-method: 命令を指定しま
 す。
 
-`````
+```text
 ##
 # :singleton-method:
-`````
+```
 
 以下のようにメソッド名を指定する事もできます。
 
-`````
+```text
 ##
 # :singleton-method: woo_hoo!
-`````
+```
 
 また、属性についても同様に :attr:、 :attr_reader:、 :attr_writer:、
 :attr_accessor: を指定する事ができます。属性の名前は省略できます。
 
-`````
+```text
 ##
 # :attr_reader: my_attr_name
-`````
+```
 
 ### 隠しメソッド、属性
 
 :method:、 :singleton-method: や :attr: 命令を使う事で実際には定義され
 ていないメソッドもドキュメントに含める事ができます。
 
-`````
+```ruby
 ##
 # :attr_writer: ghost_writer
 # There is an attribute here, but you can't see it!
@@ -84,7 +84,7 @@ add_my_method :meta_method, :arg1, :arg2
 # this is a comment for a regular method
 
 def regular_method() end
-`````
+```
 #@end
 
 #@since 1.9.1

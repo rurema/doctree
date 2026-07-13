@@ -7,9 +7,7 @@ library: delegate
 
 委譲先に指定されたオブジェクトへメソッドの実行を委譲します。
 
-例:
-
-```
+```ruby title="例"
 require 'delegate'
 
 foo = Object.new
@@ -17,7 +15,7 @@ def foo.test
   p 25
 end
 foo2 = SimpleDelegator.new(foo)
-foo2.test   # => 25
+p foo2.test # => 25
 ```
 
 ## Class Methods

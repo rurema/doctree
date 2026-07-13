@@ -52,8 +52,7 @@ FTP はファイル転送やディレクトリ情報取得のための
 
 ### 例
 
-例1:
-`````
+```ruby title="例1"
 require 'net/ftp'
 ftp = Net::FTP.new('ftp.example.org')
 ftp.login
@@ -62,10 +61,9 @@ ftp.chdir('pub/ruby')
 files = ftp.list('ruby*')
 ftp.getbinaryfile('ruby-1.9.1-p243.tar.bz2', 'ruby.bz2', 1024)
 ftp.close
-`````
+```
 
-例2:
-`````
+```ruby title="例2"
 require 'net/ftp'
 Net::FTP.open('ftp.example.org') do |ftp|
   ftp.login
@@ -74,7 +72,7 @@ Net::FTP.open('ftp.example.org') do |ftp|
   files = ftp.list('*.bz2')
   ftp.getbinaryfile('ruby-1.9.1-p243.tar.bz2', 'ruby.bz2', 1024)
 end
-`````
+```
 
 # class Net::FTP < Object
 FTP を実装したクラスです。
@@ -847,7 +845,7 @@ MLST/MLSD が定義されました。
 - **param** `pathname` -- 情報を得るディレクトリ名
 - **SEE** [m:Net::FTP#mlst]
 
-`````
+```ruby
 require 'net/ftp'
   
 Net::FTP.open("ftp.example.org") do |ftp|
@@ -878,7 +876,7 @@ Net::FTP.open("ftp.example.org") do |ftp|
   #      :
   #  ]
 end
-`````
+```
 
 ### def mlst(pathname = nil) -> Net::FTP::MLSxEntry
 

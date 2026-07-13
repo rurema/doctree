@@ -13,12 +13,11 @@ Rake タスクを定義します。
 
 - **param** `args` -- タスク名と依存タスクを指定します。
 
-例:
-`````
+```ruby title="例"
 task :clobber => [:clean] do
   rm_rf "html"
 end
-`````
+```
 
 - **SEE** [m:Rake::Task.define_task]
 
@@ -29,8 +28,7 @@ end
 
 - **param** `args` -- ファイル名と依存ファイル名を指定します。
 
-例:
-``````
+```ruby title="例"
 file "config.cfg" => ["config.template"] do
   open("config.cfg", "w") do |outfile|
     open("config.template") do |infile|
@@ -40,7 +38,7 @@ file "config.cfg" => ["config.template"] do
     end
   end
 end
-``````
+```
 
 - **SEE** [m:Rake::Task.define_task]
 
@@ -56,10 +54,9 @@ end
 
 - **param** `dir` -- 作成するディレクトリを指定します。
 
-例:
-`````
+```ruby title="例"
 directory 'testdata/doc'
-`````
+```
 
 
 ### def multitask(args){ ... } -> Rake::MultiTask
@@ -68,10 +65,9 @@ directory 'testdata/doc'
 
 与えられた事前タスクを実行する順序は不定です。
 
-例:
-`````
+```ruby title="例"
 multitask :deploy => [:deploy_gem, :deploy_rdoc]
-`````
+```
 
 ### def namespace(name = nil){ ... } -> Rake::NameSpace
 
@@ -79,13 +75,12 @@ multitask :deploy => [:deploy_gem, :deploy_rdoc]
 
 与えられたブロックを評価する間は、その名前空間を使用します。
 
-例:
-``````
+```ruby title="例"
 ns = namespace "nested" do
   task :run
 end
 task_run = ns[:run] # find :run in the given namespace.
-``````
+```
 
 - **SEE** [m:Rake::TaskManager#in_namespace]
 
@@ -95,12 +90,11 @@ task_run = ns[:run] # find :run in the given namespace.
 
 - **param** `args` -- ルールに与えるパラメータを指定します。
 
-例:
-`````
+```ruby title="例"
 rule '.o' => '.c' do |t|
   sh %{cc -o #{t.name} #{t.source}}
 end
-`````
+```
 
 ### def desc(description) -> String
 
@@ -108,13 +102,12 @@ end
 
 - **param** `description` -- 直後のタスクの説明を指定します。
 
-例:
-``````
+```ruby title="例"
 desc "Run the Unit Tests"
 task :test => [:build] do
   runtests
 end
-``````
+```
 
 ### def import(*filenames)
 
@@ -129,9 +122,8 @@ end
 
 - **param** `filenames` -- インポートする Rakefile を指定します。
 
-例:
-``````
+```ruby title="例"
 import ".depend", "my_rules"
-``````
+```
 
 

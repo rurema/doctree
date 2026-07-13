@@ -19,9 +19,9 @@ library: digest
 
 例: Digest::MD、Digest::SHA1、Digest::SHA512のクラス名を順番に出力する。
 
-`````
+```ruby
 require 'digest'
 for a in ["MD5", "SHA1", "SHA512"]
   p Digest(a) # => Digest::MD5, Digest::SHA1, Digest::SHA512
 end
-`````
+```

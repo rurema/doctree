@@ -25,7 +25,7 @@ SSLContext を初期化します。そのため
 verify_mode に指定する定数に関しては [c:OpenSSL::SSL] を参照してください。
 必ず use_ssl = true を呼ばなければいけないところに注意してください。
 
-`````
+```ruby
 require 'net/https'
 https = Net::HTTP.new('www.example.com',443)
 https.use_ssl = true
@@ -36,14 +36,14 @@ https.start {
   response = https.get('/')
   puts response.body
 }
-`````
+```
 
 以下は HTTPS プロクシ経由でアクセスする例です。
 プロクシ経由でも通信路は暗号化されます。
 #@#詳しくは以下を参照してください。
 #@# * WWWプロキシにおけるSSLトンネリング: [[url:http://www21.ocn.ne.jp/~k-west/SSLandTLS/draft-luotonen-ssl-tunneling-03-Ja.txt]]
 
-`````
+```ruby
 require 'net/https'
 proxy_addr = 'proxy.example.com'
 proxy_port = 3128
@@ -56,7 +56,7 @@ https.start {
   response = https.get('/')
   puts response.body
 }
-`````
+```
 
 # reopen Net::HTTP
 

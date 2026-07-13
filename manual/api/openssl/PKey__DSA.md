@@ -9,13 +9,13 @@ DSA 公開鍵暗号クラス
 
 以下は、data に署名し、署名をもとに data を検証する簡単な例です。
 
-`````
+```ruby
 require "openssl"
 dsa512 = OpenSSL::PKey::DSA.new(512)
 data = 'hoge'
 sign = dsa512.sign('dss1', data)
 p dsa512.verify('dss1', sign, data)
-`````
+```
 
 ## Class Methods
 

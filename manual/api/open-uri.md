@@ -107,17 +107,17 @@ open("http://www.ruby-lang.org/en/",
 また、open-uri を読み込むと [c:URI::HTTP] と [c:URI::FTP] が
 [c:OpenURI::OpenRead] モジュールをインクルードします。ですので、
 URI オブジェクトも似たような方法で開けます。
-`````
+```text
 require 'open-uri'
 uri = URI.parse("http://www.ruby-lang.org/en/")
 uri.open {|f|
   ...
 }
-`````
+```
 URI オブジェクトは直接読み込むことができます。
 戻り値の文字列は、[c:OpenURI::Meta] で拡張されています。
-`````
+```ruby
 str = uri.read
 p str.base_uri
-`````
+```
 

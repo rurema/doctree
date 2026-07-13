@@ -17,7 +17,7 @@ YAML のパーサ。
 
 以下の例では YAML ドキュメント に含まれているスカラー値を表示します。
 
-`````
+```ruby
 # Handler for detecting scalar values
 class ScalarHandler < Psych::Handler
   def scalar value, anchor, tag, plain, quoted, style
@@ -27,16 +27,16 @@ end
 
 parser = Psych::Parser.new(ScalarHandler.new)
 parser.parse(yaml_document)
-`````
+```
 
 次の例は [c:Psych::Emitter] にパースの結果を戻しています。
 STDIN からの入力をパース→YAMLフォーマットで STDERR に出力
 という流れになっています。
 
-`````
+```ruby
 parser = Psych::Parser.new(Psych::Emitter.new($stderr))
 parser.parse($stdin)
-`````
+```
 
 [c:Psych::Parser] と [c:Psych::TreeBuilder] を組み合わせると
 YAML の AST を構築できます。

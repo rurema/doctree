@@ -30,29 +30,29 @@ CGI のセッション管理を行うライブラリ。
 
 ### 使い方 (生成)
 
-`````
+```ruby
 require 'cgi/session'
 cgi = CGI.new
 session = CGI::Session.new(cgi)
-`````
+```
 
 [m:CGI::Session.new] に [c:CGI] オブジェクトを渡します。クライアントから渡された
 セッション ID はクッキーかクエリーとして cgi に格納されているため、意識する必要はありません。
 
 ### 使い方 (セッション情報を記録する)
 
-`````
+```ruby
 session['name'] = "value"
-`````
+```
 
 [c:CGI::Session] オブジェクトは [c:Hash] のようなもので、キーに対応する値を記録します。
 デフォルトではプログラム終了時にセッション情報はファイルに記録されます。
 
 ### 使い方 (セッション情報を得る)
 
-`````
+```ruby
 name = session['name']
-`````
+```
 
 別な CGI でこのセッション情報を取り出すときは、このようにします。
 
@@ -81,7 +81,7 @@ umask 値が 0022 ならば
 [m:CGI::HtmlExtension#form] を使い、<INPUT TYPE="submit"> でページ遷移をするようにすれば、
 クッキーが使えない環境でのセッション維持に利用できます。
 
-`````
+```text
 #!/usr/bin/ruby
 require 'cgi'
 require 'cgi/session'
@@ -120,15 +120,13 @@ cgi.out('charset'=>'euc-jp') {
     </FORM>
   </BODY>
 </HTML>
-`````
+```
 
 ### 使用例
 
 ただ名前を入力するとあいさつをするだけのつまらない CGI スクリプト。
 
-ソースコード
-
-`````
+```ruby title="ソースコード"
 #!/usr/bin/ruby
 require 'kconv'
 require 'cgi'
@@ -193,7 +191,7 @@ class SessionDemo
 end
   
 SessionDemo.new
-`````
+```
 
 ### 参考URL
 
@@ -274,11 +272,9 @@ SessionDemo.new
 - **`no_cookies`**:
   真を指定すると @output_cookies が nil になります。
 
-例:
-
-`````
+```ruby title="例"
 CGI::Session.new(cgi, {"new_session" => true})
-`````
+```
 
 ### def callback(dbman)
 #@# nodoc

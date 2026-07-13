@@ -3,13 +3,13 @@ type: library
 ---
 DRb のプロトコルとして SSL/TLS 上で通信する drbssl が使えるようになります。
 
-````
+```ruby
 require 'drb/ssl'
 obj = ''
 DRb::DRbServer.new( 'drbssl://localhost:10000', 
                     obj, 
                     {:SSLCertName => [["CN","fqdn.example.com"]]})
-````
+```
 
 [m:DRb::DRbServer.new] や [m:DRb?.start_service] が 
 "drbssl" スキームを受け入れるようになります。

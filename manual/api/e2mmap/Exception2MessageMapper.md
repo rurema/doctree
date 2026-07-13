@@ -102,9 +102,7 @@ exception_name という名前の例外クラスを定義します。
 
 - **raise** `Exception2MessageMapper::ErrNotRegisteredException` -- 指定された例外クラスに対応するメッセージが存在しない場合に発生します。
 
-例:
-
-`````
+```ruby title="例"
 class Foo
   extend Exception2MessageMapper
   p def_exception :NewExceptionClass, "message...%d, %d and %d" # =>
@@ -114,12 +112,12 @@ class Foo
   end
 end
   
-Foo.new().foo() #=> in `Raise': message...1, 2 and 3 (Foo::NewExceptionClass)
+p Foo.new().foo() #=> in `Raise': message...1, 2 and 3 (Foo::NewExceptionClass)
                 #   という例外が発生します。
   
-Foo.Raise Foo::NewExceptionClass, 1, 3, 5  #=> in `Raise': message...1, 3 and 5 (Foo::NewExceptionClass)
+p Foo.Raise Foo::NewExceptionClass, 1, 3, 5  #=> in `Raise': message...1, 3 and 5 (Foo::NewExceptionClass)
                                            #   という例外が発生します。
-`````
+```
 
 ### def fail(exception_class = nil, *rest) -> ()
 登録されている情報を使用して、例外を発生させます。

@@ -131,7 +131,7 @@ abi で呼出規約を指定します。
   - [m:Fiddle::Function::STDCALL]
 のどちらかを指定します。
 
-`````
+```ruby
 require 'dl'
 require 'fiddle'
   
@@ -139,7 +139,7 @@ include Fiddle
   
 libc = DL.dlopen("/lib/libc.so.6")
 f = Fiddle::Function.new(libc["strcpy"], [TYPE_VOIDP, TYPE_VOIDP], TYPE_VOIDP)
-`````
+```
 
 
 - **param** `ptr` -- C の関数を指す [c:DL::Handle] オブジェクト
@@ -214,7 +214,7 @@ FFI の closure の wrapper です。
 そのサブクラスに call メソッドを定義し、
 new でオブジェクトを生成することで利用します。
   
-`````
+```ruby
 require 'fiddle'
 include Fiddle
   
@@ -235,11 +235,11 @@ qs = Fiddle::Function.new(libc["qsort"],
 s = "7x0cba(Uq)"
 qs.call(s, s.size, 1, Compare.new(TYPE_INT, [TYPE_VOIDP, TYPE_VOIDP]))
 p s # =>  "()07Uabcqx"
-`````
+```
 
 [m:Class.new] を使うことで、サブクラスを明示的に作ることなしに
 コールバックオブジェクトを作ることができます。
-`````
+```ruby
 require 'fiddle'
 include Fiddle # TYPE_* を使うために include する
 compare = Class.new(Fiddle::Closure){
@@ -247,7 +247,7 @@ compare = Class.new(Fiddle::Closure){
     x.to_s(1) <=> y
   end
 }.new(TYPE_INT, [TYPE_VOIDP, TYPE_VOIDP])
-`````
+```
 
 単に Ruby のブロックを C の(コールバック)関数に変換したい場合は
 [c:Fiddle::Closure::BlockCaller] を使うほうが簡単です。
@@ -282,7 +282,7 @@ Ruby のブロックをラップしたコールバック関数を表すクラス
 
 Ruby のブロックを C の関数ポインタとして表現するためのクラスです。
 
-`````
+```ruby
 require 'fiddle'
 include Fiddle
 
@@ -300,7 +300,7 @@ compare = Fiddle::Closure::BlockCaller.new(TYPE_INT, [TYPE_VOIDP, TYPE_VOIDP]){|
 s = "7x0cba(Uq)"
 qs.call(s, s.size, 1, Compare.new(TYPE_INT, [TYPE_VOIDP, TYPE_VOIDP]))
 p s # =>  "()07Uabcqx"
-`````
+```
 
 ## Class Methods
 ### def new(ret, args, abi=Fiddle::Function::DEFAULT){ ... } -> Fiddle::Closure::BlockCaller

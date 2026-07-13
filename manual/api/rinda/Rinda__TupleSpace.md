@@ -86,7 +86,7 @@ pattern で指定できるパターンについては [ref:lib:rinda/rinda#tuple
 - **param** `sec` -- 監視期間の長さ(秒数)
 
 ### 例
-`````
+```ruby
 require 'rinda/tuplespace'
   
 tuplespace = Rinda::TupleSpace.new
@@ -98,7 +98,7 @@ end
 tuplespace.write(["xyz", 0, 1]) 
 tuplespace.write(["pqr", 0, 1])
 tuplespace.write(["xyz", 4, 2])
-`````
+```
 
 ### def read(tuple, sec=nil) -> [Array|Hash]
 #@# --- read(tuple, sec=nil){|template| ... } -> [Array|Hash]
