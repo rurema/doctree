@@ -25,7 +25,7 @@ p SystemCallError.new("message")
     # => #<SystemCallError: unknown error - message>
 `````
 
-### def new(error_message, errno) -> SystemCallError
+### def new(error_message, errno, location = nil) -> SystemCallError
 ### def new(errno) -> SystemCallError
 整数 errno に対応する [c:Errno::EXXX] オブジェクトを生成して返します。
 
@@ -38,8 +38,12 @@ p SystemCallError.new("message")
 
 エラーコードの取り得る値および意味はシステムに依存します。詳しくは [c:Errno::EXXX] を参照してください。
 
+location と error_message を両方指定した場合、エラーが発生した場所を表す
+情報としてエラーメッセージに location が付加されます。
+
 - **param** `error_message` -- エラーメッセージを表す文字列
 - **param** `errno` -- システム依存のエラーコード
+- **param** `location` -- エラーが発生した場所を表す文字列
 - **raise** `TypeError` -- errno を整数に変換できないときに発生します。
 
 例:
@@ -51,6 +55,8 @@ p SystemCallError.new(2)
     # => #<Errno::ENOENT: No such file or directory>
 p SystemCallError.new(256)
     # => #<SystemCallError: Unknown error 256>
+p SystemCallError.new("message", 2, "location")
+    # => #<Errno::ENOENT: No such file or directory @ location - message>
 `````
 
 ### def ===(other) -> bool

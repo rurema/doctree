@@ -521,8 +521,8 @@ CSV.generate_line(taro, col_sep: '|') # => "1|taro|tanaka|20\n"
 
 - **SEE** [m:CSV.new]
 
-### def instance(data = $stdout, options = Hash.new) -> CSV
-### def instance(data = $stdout, options = Hash.new){|csv| ... } -> object
+### def instance(data = $stdout, **options) -> CSV
+### def instance(data = $stdout, **options){|csv| ... } -> object
 
 このメソッドは [m:CSV.new] のように [c:CSV] のインスタンスを返します。
 しかし、返される値は [m:Object#object_id] と与えられたオプションを

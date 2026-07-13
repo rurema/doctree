@@ -591,6 +591,31 @@ Windows では Net::WriteTimeout は発生しません。
 - **SEE** [m:Net::HTTP#open_timeout], [m:Net::HTTP#read_timeout], [m:Net::HTTP#write_timeout]
 #@end
 
+### def max_retries -> Integer
+冪等なリクエストが失敗した場合に再試行する最大回数を返します。
+
+デフォルトは 1 です。
+
+- **SEE** [m:Net::HTTP#max_retries=]
+
+### def max_retries=(times)
+冪等なリクエストが [c:Net::ReadTimeout]、[c:IOError]、[c:EOFError]、
+[c:Errno::ECONNRESET]、[c:Errno::ECONNABORTED]、[c:Errno::EPIPE]、
+[c:OpenSSL::SSL::SSLError]、[c:Timeout::Error] のいずれかで失敗した場合に
+再試行する最大回数を設定します。
+
+デフォルトは 1 です。
+
+- **param** `times` -- 再試行する最大回数を 0 以上の整数で指定します。
+             負の値を指定した場合は [c:ArgumentError] が発生します。
+
+```ruby title="例"
+http = Net::HTTP.new(hostname)
+http.max_retries = 2   # => 2
+http.max_retries       # => 2
+```
+
+- **SEE** [m:Net::HTTP#max_retries]
 
 ### def keep_alive_timeout -> Integer
 以前のリクエストで使ったコネクションの再利用(keep-alive)を許可する秒数を
