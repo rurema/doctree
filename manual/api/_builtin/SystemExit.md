@@ -16,12 +16,10 @@ SystemExit オブジェクトを生成して返します。
 
 - **param** `error_message` -- エラーメッセージを文字列で指定します。
 
-例:
-
-`````
+```ruby title="例"
 ex = SystemExit.new(1)
 p ex.status   # => 1
-`````
+```
 
 ## Instance Methods
 
@@ -31,9 +29,7 @@ p ex.status   # => 1
 
 終了ステータスは [m:Kernel?.exit] や [m:SystemExit.new] などで設定されます。
 
-例:
-
-`````
+```ruby title="例"
 begin
   exit 1
 rescue SystemExit => err
@@ -45,7 +41,7 @@ begin
 rescue SystemExit => err
   p err.status   # => 1
 end
-`````
+```
 
 ### def success? -> bool
 
@@ -53,9 +49,7 @@ end
 
 大半のシステムでは、ステータス 0 が正常終了を表します。
 
-例:
-
-`````
+```ruby title="例"
 begin
   exit true
 rescue SystemExit => err
@@ -67,4 +61,4 @@ begin
 rescue SystemExit => err
   p err.success?  # => false
 end
-`````
+```

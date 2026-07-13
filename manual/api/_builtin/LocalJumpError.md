@@ -16,9 +16,7 @@ return, break, retry のいずれかを実行すると発生します。
 例外 LocalJumpError を発生する原因となった
 break や return に渡した値を返します。
 
-例:
-
-`````
+```ruby title="例"
 def foo
   proc { return 10 }
 end
@@ -38,7 +36,7 @@ rescue LocalJumpError => err
   p err.reason       # => :break
   p err.exit_value   # => 5
 end
-`````
+```
 
 ### def reason -> Symbol
 
@@ -53,9 +51,7 @@ end
   - :return
   - :noreason
 
-例:
-
-`````
+```ruby title="例"
 def foo
   proc { return 10 }
 end
@@ -75,5 +71,5 @@ rescue LocalJumpError => err
   p err.reason       # => :break
   p err.exit_value   # => 5
 end
-`````
+```
 

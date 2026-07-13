@@ -89,15 +89,15 @@ p ARGV
 
 であったとします。このときシェルから次を実行すると、
 
-```````
+```console
 $ ruby argv.rb foo bar baz
-```````
+```
 
 結果は以下のように出力されます。
 
-```````
+```text
 ["foo", "bar", "baz"]
-```````
+```
 
 ### const DATA -> File
 
@@ -130,7 +130,7 @@ print DATA.gets # => 故人西辞黄鶴楼
 print DATA.gets # => 烟花三月下揚州
 print DATA.gets # => 孤帆遠影碧空尽
 print DATA.gets # => 唯見長江天際流
-DATA.gets       # => nil
+p DATA.gets     # => nil
 
 __END__
 故人西辞黄鶴楼
@@ -184,15 +184,15 @@ data from app
 
 このときシェルから次を実行すると
 
-```````
+```console
 $ ruby app.rb
-```````
+```
 
 結果は以下のように出力されます。
 
-```````
+```text
 data from app
-```````
+```
 
 ### const TOPLEVEL_BINDING -> Binding
 
@@ -237,16 +237,14 @@ Ruby のコピーライトを表す文字列。
 
 Ruby処理系実装の種類を表す文字列。
 
-例:
-
-`````
+```console title="例"
 $ ruby-1.9.1 -ve 'p RUBY_ENGINE'
 ruby 1.9.1p0 (2009-03-04 revision 22762) [x86_64-linux]
 "ruby"
 $ jruby -ve 'p RUBY_ENGINE'
 jruby 1.2.0 (ruby 1.8.6 patchlevel 287) (2009-03-16 rev 9419) [i386-java]
 "jruby"
-`````
+```
 
 ### const RUBY_ENGINE_VERSION -> String
 

@@ -80,16 +80,14 @@ bar
 - **param** `receiver` -- 原因となったメソッド呼び出しのレシーバです
 #@end
 
-例:
-
-`````
+```ruby title="例"
 nom = NoMethodError.new("message", "foo", [1,2,3])
 p nom.name
 p nom.args
   
 # => "foo"
 [1, 2, 3]
-`````
+```
 
 ## Instance Methods
 

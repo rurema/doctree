@@ -45,7 +45,7 @@ Ruby のスレッドスケジューリングは優先順位付のラウンドロ
 スレッドがある場合、その待っているスレッドに対して、同じ例外が再度
 発生します。
 
-`````
+```ruby
 begin
   t = Thread.new do
     Thread.pass    # メインスレッドが確実にjoinするように
@@ -55,7 +55,7 @@ begin
 rescue
   p $!  # => "unhandled exception"
 end
-`````
+```
 
 また、以下の 3 つの方法により、いずれかのスレッドが例外によって終
 了した時に、インタプリタ全体を中断させるように指定できます。
@@ -89,9 +89,9 @@ end
 [m:Object#inspect] や
 [m:Thread#status] によって見ることができます。
 
-````
+```ruby
 p Thread.new {sleep 1} # => #<Thread:0xa039de0 sleep>
-````
+```
 
 - **run (実行or実行可能状態)**:
  生成されたばかりのスレッドや [m:Thread#run] や

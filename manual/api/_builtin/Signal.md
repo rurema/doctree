@@ -12,11 +12,9 @@ UNIX のシグナル関連の操作を行うモジュールです。
 シグナル名とシグナル番号を対応づけた [c:Hash] オブジェクトを返し
 ます。
 
-例:
-
-`````
+```ruby title="例"
 p Signal.list   # => {"WINCH"=>28, "PROF"=>27, ...}
-`````
+```
 
 #@since 2.0.0
 - **SEE** [m:Signal?.signame]
@@ -68,28 +66,24 @@ ruby の仕組みの外でシグナルハンドラが登録された場合
 [c:SignalException] を発生させます。このようなシグナルは例外処理によっ
 て捕捉することもできます。
 
-例:
-
-`````
+```ruby title="例"
 begin
   Process.kill :QUIT, $$   # 自身にSIGQUITを送信
 rescue SignalException
   puts "rescue #$!"
 end
 # => rescue SIGQUIT
-`````
+```
 
-例:
-
-`````
-Signal.trap(:INT, "p true")       # => "DEFAULT"
-Signal.trap(:INT) { p false }     # => "p true"
-Signal.trap(:INT, proc{ p nil })  # => #<Proc:0x8e45ae0@-:2>
-Signal.trap(:INT, "SIG_IGN")      # => #<Proc:0x8e45914@-:3>
-Signal.trap(:INT, "DEFAULT")      # => "IGNORE"
-Signal.trap(:INT, "EXIT")         # => "DEFAULT"
-Signal.trap(:INT, nil)            # => "EXIT"
-`````
+```ruby title="例"
+p Signal.trap(:INT, "p true")     # => "DEFAULT"
+p Signal.trap(:INT) { p false }   # => "p true"
+p Signal.trap(:INT, proc{ p nil })  # => #<Proc:0x8e45ae0@-:2>
+p Signal.trap(:INT, "SIG_IGN")    # => #<Proc:0x8e45914@-:3>
+p Signal.trap(:INT, "DEFAULT")    # => "IGNORE"
+p Signal.trap(:INT, "EXIT")       # => "DEFAULT"
+p Signal.trap(:INT, nil)          # => "EXIT"
+```
 
 ```ruby title="例"
 Signal.trap(0, proc { puts "Terminating: #{$$}" })
@@ -115,11 +109,11 @@ fork && Process.wait
 対応するシグナル番号が存在しない場合は nil を返します。
 #@end
 
-`````
+```ruby
 Signal.trap("INT") { |signo| puts Signal.signame(signo) }
 Process.kill("INT", 0)
 # => INT
-`````
+```
 
 - **SEE** [m:Signal?.list]
 #@end

@@ -7,10 +7,10 @@ since: "2.2.0"
 [m:Kernel?.throw] に指定した tag に対して一致する
 [m:Kernel?.catch] が存在しない場合に発生します。
 
-``````
+```ruby
 throw "foo", "bar"
 # => (例外発生) UncaughtThrowError: uncaught throw "foo"
-``````
+```
 
 ## Instance Methods
 

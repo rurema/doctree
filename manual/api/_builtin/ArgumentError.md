@@ -7,14 +7,10 @@ library: _builtin
 
 なお、期待される型ではないオブジェクトが渡された場合は、ArgumentError ではなく [c:TypeError] が発生します。
 
-例:
-
-`````
+```ruby title="例"
 Time.at       # => wrong number of arguments (given 0, expected 1..2) (ArgumentError)
-`````
-`````
 Array.new(-1) # => negative array size (ArgumentError)
-`````
+```
 
 など
 

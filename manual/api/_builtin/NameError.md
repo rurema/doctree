@@ -37,13 +37,11 @@ bar
 - **param** `receiver` -- 原因となったメソッド呼び出しのレシーバです
 #@end
 
-例:
-
-`````
+```ruby title="例"
 err = NameError.new("message", "foo")
 p err       # => #<NameError: message>
 p err.name  # => "foo"
-`````
+```
 
 ## Instance Methods
 
@@ -107,9 +105,7 @@ end
 
 self が発生した時のレシーバオブジェクトを返します。
 
-例:
-
-`````
+```ruby title="例"
 class Sample
   def foo
     return "foo"
@@ -123,7 +119,7 @@ rescue NameError => err
   p err.receiver  # => #<Sample:0x007fd4d89b3110>
   p err.receiver.foo  # => "foo"
 end
-`````
+```
 
 ### def local_variables -> [Symbol]
 
@@ -131,9 +127,7 @@ self が発生した時に定義されていたローカル変数名の一覧を
 
 内部での使用に限ります。
 
-例:
-
-`````
+```ruby title="例"
 def foo
   begin
     b = "bar"
@@ -146,6 +140,6 @@ end
 
 a = "buz"
 foo
-`````
+```
 
 #@end

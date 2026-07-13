@@ -13,12 +13,12 @@ library: _builtin
 これは [m:Process::UID?.eid=] と [m:Process::UID?.re_exchange] を以下のように
 組み合わせることによって実現できます。
 
-`````
+```ruby
                            # (r,e,s) == (u1,u2,??)
 Process::UID.re_exchange   # (u1,u2,??) ==> (u2,u1,??)
 Process::UID.eid = id      # (u2,u1,??) ==> (u2,id,??)
 Process::UID.re_exchange   # (u2,id,??) ==> (id,u2,??)
-`````
+```
 
 ## Module Functions
 
@@ -43,11 +43,11 @@ Process::UID.re_exchange   # (u2,id,??) ==> (id,u2,??)
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-``````
-[Process.uid, Process.euid]          #=> [0, 0]
-Process::UID.change_privilege(33)    #=> 33
-[Process.uid, Process.euid]          #=> [33, 33]
-``````
+```ruby
+p [Process.uid, Process.euid]        #=> [0, 0]
+p Process::UID.change_privilege(33)  #=> 33
+p [Process.uid, Process.euid]        #=> [33, 33]
+```
 
 ### module_function def grant_privilege(id)    -> Integer
 ### module_function def eid=(id)
@@ -70,11 +70,11 @@ Process::UID.change_privilege(33)    #=> 33
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-``````
-[Process.uid, Process.euid]          #=> [0, 0]
-Process::UID.grant_privilege(33)     #=> 33
-[Process.uid, Process.euid]          #=> [0, 33]
-``````
+```ruby
+p [Process.uid, Process.euid]        #=> [0, 0]
+p Process::UID.grant_privilege(33)   #=> 33
+p [Process.uid, Process.euid]        #=> [0, 33]
+```
 
 ### module_function def re_exchange    -> Integer
 
@@ -127,7 +127,7 @@ Process::UID.grant_privilege(33)     #=> 33
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-````
+```ruby
 include Process
 # (r, e, s) == (500, 505, 505)
 p [uid, euid]           #=> [500, 505]
@@ -135,17 +135,17 @@ Process::UID.switch do
   p [uid, euid]         #=> [500, 500]
 end
 p [uid, euid]           #=> [500, 505]
-````
+```
 
 #@since 2.0.0
 ### module_function def from_name(name) -> Integer
 
 引数で指定した名前の実ユーザ ID を返します。
 
-`````
-Process::UID.from_name("root") # => 0
+```ruby
+p Process::UID.from_name("root") # => 0
 Process::UID.from_name("nosuchuser") # => can't find user for nosuchuser (ArgumentError)
-`````
+```
 
 - **param** `name` -- ユーザ名を指定します。
 

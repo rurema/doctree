@@ -535,20 +535,18 @@ GC.count  # => 4
   - "MALLOC_ALLOCATED_SIZE_CHECK"
   - "GC_PROFILE_DETAIL_MEMORY"
 
-例:
-
-`````
+```ruby title="例"
 GC::OPTS # => ["USE_RGENGC", "RGENGC_ESTIMATE_OLDMALLOC", "GC_ENABLE_LAZY_SWEEP"]
 # この場合、GCデバッグ機能やプロファイル機能は無効化されている
-`````
+```
 
 ### def INTERNAL_CONSTANTS -> {Symbol => Integer}
 
 GC用内部定数の値を保持するハッシュテーブルです。
 
-`````
+```ruby
 GC::INTERNAL_CONSTANTS
 # => {:RVALUE_SIZE=>40, :HEAP_PAGE_OBJ_LIMIT=>408, :HEAP_PAGE_BITMAP_SIZE=>56, :HEAP_PAGE_BITMAP_PLANES=>4}
-`````
+```
 
 #@end
