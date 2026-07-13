@@ -16,29 +16,25 @@ win32/resolv は Win32 プラットフォームで名前解決に関する情報
 
 hosts ファイルのパスを返します。ファイルが存在しない場合は nil を返します。
 
-例:
-
-`````
+```ruby title="例"
 require "win32/resolv"
 p Win32::Resolv.get_hosts_path #=> "C:\Windows\System32\drivers\etc\hosts"
-`````
+```
 
 ### module_function def get_resolv_info -> [[String], [String]]
 
 ドメイン名とネームサーバを配列の配列で返します。
 
-例:
-
-`````
+```ruby title="例"
 require "win32/resolv"
 p Win32::Resolv.get_resolv_info #=> [["my.example.com"], ["192.168.1.1"]]
-`````
+```
 
 設定されていない情報は nil になります。
 
-`````
+```ruby
 # ドメイン名が設定されていない場合。
 require "win32/resolv"
 p Win32::Resolv.get_resolv_info #=> [nil, ["192.168.1.1"]]
-`````
+```
 

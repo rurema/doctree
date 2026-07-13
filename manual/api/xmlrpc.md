@@ -38,14 +38,14 @@ is required to achieve either of these.
 
 Try the following code.  It calls a standard demonstration remote procedure.
 
-`````
+```ruby
 require 'xmlrpc/client'
 require 'pp'
 
 server = XMLRPC::Client.new2("http://xmlrpc-c.sourceforge.net/api/sample.php")
 result = server.call("sample.sumAndDifference", 5, 3)
 pp result
-`````
+```
 
 ### Documentation
 
@@ -90,35 +90,31 @@ XML parser, then you have to call the <i>set_parser</i> method of
 XMLRPC::Client instances or instances of subclasses of
 XMLRPC::BasicServer or by editing xmlrpc/config.rb.
 
-Client Example:
- 
-`````
+```ruby title="Client Example"
 require 'xmlrpc/client'
 # ...
 server = XMLRPC::Client.new( "xmlrpc-c.sourceforge.net", "/api/sample.php")
 server.set_parser(XMLRPC::XMLParser::XMLParser.new)
 # ...
-`````
+```
 
-Server Example:
-
-`````
+```ruby title="Server Example"
 require 'xmlrpc/server'
 # ...
 s = XMLRPC::CGIServer.new
 s.set_parser(XMLRPC::XMLParser::XMLStreamParser.new)
 # ...
-`````
+```
   
 or:
 
-`````
+```ruby
 require 'xmlrpc/server'
 # ...
 server = XMLRPC::Server.new(8080)
 server.set_parser(XMLRPC::XMLParser::NQXMLParser.new)
 # ...
-`````
+```
 
 
 Note that XMLStreamParser is incredible faster (and uses less memory) than any

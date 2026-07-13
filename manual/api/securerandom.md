@@ -16,7 +16,7 @@ HTTP のセッションキーなどに適しています。
 
 上の安全な乱数発生器が使用できない場合、各メソッドは NotImplementedError を発生します。
 
-`````
+```ruby
 # random hexadecimal string.
 require 'securerandom'
 p SecureRandom.hex(10) #=> "52750b30ffbc7de3b362"
@@ -38,7 +38,7 @@ p SecureRandom.base64(13) #=> "vKLJ0tXBHqQOuIcSIg=="
 require 'securerandom'
 p SecureRandom.random_bytes(10) #=> "\016\t{\370g\310pbr\301"
 p SecureRandom.random_bytes(10) #=> "\323U\030TO\234\357\020\a\337"
-`````
+```
 
 ## Singleton Methods
 
@@ -52,10 +52,10 @@ p SecureRandom.random_bytes(10) #=> "\323U\030TO\234\357\020\a\337"
 
 - **raise** `NotImplementedError` -- 安全な乱数発生器が使えない場合に発生します。
 
-`````
+```ruby
 require 'securerandom'
 p SecureRandom.base64(3)    #=> "4pYO"  (文字列のサイズは 3 でない)
-`````
+```
 
 - **SEE** [rfc:3548]
 
@@ -72,13 +72,13 @@ p SecureRandom.base64(3)    #=> "4pYO"  (文字列のサイズは 3 でない)
 
 - **raise** `NotImplementedError` --  安全な乱数発生器が使えない場合に発生します。
 
-``````
+```ruby
 require 'securerandom'
 p SecureRandom.urlsafe_base64 #=> "b4GOKm4pOYU_-BOXcrUGDg"
 p SecureRandom.urlsafe_base64 #=> "UZLdOkzop70Ddx-IJR0ABg"
 p SecureRandom.urlsafe_base64(nil, true) #=> "i0XQ-7gglIsHGV2_BNPrdQ=="
 p SecureRandom.urlsafe_base64(nil, true) #=> "-M8rLhr7JEpJlqFGUMmOxg=="
-``````
+```
 
 - **SEE** [m:SecureRandom.base64],  [rfc:3548]
 
@@ -92,10 +92,10 @@ p SecureRandom.urlsafe_base64(nil, true) #=> "-M8rLhr7JEpJlqFGUMmOxg=="
 
 - **raise** `NotImplementedError` -- 安全な乱数発生器が使えない場合に発生します。
 
-`````
+```ruby
 require 'securerandom'
 p SecureRandom.hex(3)    #=> "f72233"   (文字列のサイズは 3 でない)
-`````
+```
 
 
 ### def random_bytes(n = nil)    -> String
@@ -107,10 +107,10 @@ p SecureRandom.hex(3)    #=> "f72233"   (文字列のサイズは 3 でない)
 
 - **raise** `NotImplementedError` -- 安全な乱数発生器が使えない場合に発生します。
 
-`````
+```ruby
 require 'securerandom'
 p SecureRandom.random_bytes(3)    #=> "\321\020\203"
-`````
+```
 
 ### def random_number(n = 0)     -> Integer | Float
 
@@ -122,10 +122,10 @@ n が 0 の場合、0.0 以上 1.0 未満の実数を返します。
 
 - **raise** `NotImplementedError` -- 安全な乱数発生器が使えない場合に発生します。
 
-`````
+```ruby
 require 'securerandom'
 p SecureRandom.random_number(1 << 64)    #=> 4078466195356651249
-`````
+```
 
 ### def uuid   -> String
 
@@ -136,11 +136,11 @@ version 4 の UUID は全くランダムです (バージョンを除いて)。
 
 - **raise** `NotImplementedError` -- 安全な乱数発生器が使えない場合に発生します。
 
-``````
+```ruby
 require 'securerandom'
 p SecureRandom.uuid #=> "2d931510-d99f-494a-8c67-87feb05e1594"
 p SecureRandom.uuid #=> "62936e70-1815-439b-bf89-8492855a7e6b"
-``````
+```
 
 - **SEE** [rfc:4122]
 

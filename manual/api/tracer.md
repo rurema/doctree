@@ -9,27 +9,27 @@ category: Development
 ひとつは以下のようにコマンドラインから [m:Kernel?.require] する方法です。
 hoge.rb の実行をすべてトレース出力します。
 
-`````
+```console
 ruby -rtracer hoge.rb
-`````
+```
 
 もうひとつはソースからrequireする方法です。
 
-`````
+```ruby
 require 'tracer'
-`````
+```
 
 とした後
 
-`````
+```ruby
 Tracer.on
-`````
+```
 
 によりトレース出力を有効にします。
 
-`````
+```ruby
 Tracer.off
-`````
+```
 
 によりトレース出力を無効にします。
 
@@ -38,7 +38,7 @@ Tracer.off
 
 ### サンプルコード
 
-`````
+```ruby
 # 例: 式の評価の中でHogeクラスのメソッドが呼び出される時、トレースする。
 
 # ruby 1.8 では警告がでますが、動作します。
@@ -58,7 +58,7 @@ for i in 0..3
   puts Hoge.fuga(i) if i % 3 == 0
 end 
 Tracer.off
-`````
+```
 
 ### SEE ALSO
 
@@ -79,7 +79,7 @@ Tracer.off
 トレース出力を開始します。
 ブロックを与えられた場合はそのブロック内のみトレース出力を行います。
 
-`````
+```ruby
 require 'tracer'
 
 Tracer.on
@@ -91,7 +91,7 @@ end
 
 t = Test.new
 t.test
-`````
+```
 
 - **SEE** [m:Tracer.off]
 
@@ -112,7 +112,7 @@ t.test
 - **param** `filename` -- ソースファイルの場所を文字列で指定します。
 - **param** `proc` -- 通常、文字列を返す手続きオブジェクトを指定します。
 
-`````
+```ruby
 # 例 dummy.rb の3行目から6 行目のトレース出力に !! をつける
 require 'tracer'
 
@@ -136,7 +136,7 @@ class Dummy
   attr :number
 end
 =end
-`````
+```
 
 ### def add_filter(proc)
 ### def add_filter {|event, file, line, id, binding, klass| .... }
@@ -167,7 +167,7 @@ ruby 1.8 ではブロックを与えると警告がでます。
   イベントを表す文字列。
   以下の種類がある。カッコ内は tracer の出力での表記。
 
-```
+```text
   * line (-)   ある行を実行
   * call (>)   メソッド呼び出し
   * return (<) メソッドからのリターン
@@ -206,7 +206,7 @@ ruby 1.8 ではブロックを与えると警告がでます。
 
 - **param** `flag` -- トレース出力の開始や終了を知らせる文字列が必要ならtrueを設定します。
 
-`````
+```text
 require 'tracer'
 
 Tracer.verbose = true
@@ -225,7 +225,7 @@ Hello#0:t5.rb:7:IO:<:   puts "Hello"
 #0:t5.rb:7:IO:<:   puts "Hello"
 #0:t5.rb:7:Kernel:<:   puts "Hello"
 Trace off
-`````
+```
 
 ### def stdout -> object
 
@@ -237,7 +237,7 @@ Trace off
 
 - **param** `fp` -- 新しいトレース出力先を指定します。
 
-`````
+```ruby
 require 'tracer'
 
 fp = File.open('temptrace.txt', "w")
@@ -246,7 +246,7 @@ Tracer.on {
   puts "Hello"
 }
 fp.close
-`````
+```
 
 
 #@since 1.9.2
@@ -340,7 +340,7 @@ fp.close
 トレース出力のシンボルのハッシュです。
 下記のような文字列があります。
 
-`````
+```ruby
 EVENT_SYMBOL = {
   "line" => "-",
   "call" => ">",
@@ -350,7 +350,7 @@ EVENT_SYMBOL = {
   "c-call" => ">",
   "c-return" => "<",
 }
-`````
+```
 
 - **SEE** [m:Tracer.add_filter]
 

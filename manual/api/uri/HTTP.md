@@ -14,19 +14,18 @@ HTTP URI を表すクラスです。
 引数の正当性を検査します。
 
 - **param** `ary` -- 構成要素を表す配列を与えます。要素は次の順です。
-```
+```text
       [userinfo, host, port, path, query, fragment]
 ```
 - **param** `hash` -- 構成要素を表すハッシュを与えます。ハッシュのキーは  :scheme, :userinfo, :host, :port, :path, :query, :fragment のいずれかです。
 
 - **raise** `URI::InvalidComponentError` -- 各要素が適合しない場合に発生します。
 
-例:
-`````
+```ruby title="例"
 require 'uri'
 newuri = URI::HTTP.build({:host => 'www.example.com', :path => '/foo/bar'})  
 newuri = URI::HTTP.build([nil, "www.example.com", nil, "/path", "query", 'fragment'])
-`````
+```
 
 ### def new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)     -> URI::HTTP   
 
@@ -66,12 +65,11 @@ query が nil である場合は、自身の path を返します。
 
 path が空である場合には、path は「'/'」であるとします。
 
-例:
-`````
+```ruby title="例"
 require 'uri'
 u = URI.parse("http://example.com/search?q=xxx")
 p u.request_uri                                  #=> "/search?q=xxx"
-`````
+```
 
 # class URI::HTTPS < URI::HTTP
 

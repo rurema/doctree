@@ -9,8 +9,7 @@ HTTP の Digest 認証のためのクラスです。
 
 [RFC:2617] も参照してください。
 
-例:
-`````
+```ruby title="例"
 require 'webrick'
 config = { :Realm => 'DigestAuth example realm' }
 
@@ -21,7 +20,7 @@ htdigest.flush
 config[:UserDB] = htdigest
 
 digest_auth = WEBrick::HTTPAuth::DigestAuth.new config
-`````
+```
 
 サーブレットの initialize メソッドの中でこのクラスのインスタンスを作成
 しないようにしてください。デフォルトでは WEBrick はリクエストのたびにサー

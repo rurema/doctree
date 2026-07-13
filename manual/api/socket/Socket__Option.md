@@ -26,12 +26,12 @@ family, level, optname には Socket::SOL_SOCKET のような整数の他、
 
 - **SEE** [m:Socket::Option.int], [m:Socket::Option.bool], [m:Socket::Option.linger]
 
-`````
+```ruby
 require 'socket'
 
 sockopt = Socket::Option.new(:INET, :SOCKET, :KEEPALIVE, [1].pack("i"))
 p sockopt #=> #<Socket::Option: INET SOCKET KEEPALIVE 1>
-`````
+```
 
 ### def int(family, level, optname, integer) -> Socket::Option
 
@@ -59,7 +59,7 @@ family, level, optname には Socket::SOL_SOCKET のような整数の他、
 - **param** `optname` -- オプションの名前
 - **param** `boolean` -- データ(真偽値)
 
-`````
+```ruby
 require 'socket'
 
 p Socket::Option.bool(:INET, :SOCKET, :KEEPALIVE, true)
@@ -67,7 +67,7 @@ p Socket::Option.bool(:INET, :SOCKET, :KEEPALIVE, true)
 
 p Socket::Option.bool(:INET, :SOCKET, :KEEPALIVE, false)
 # => #<Socket::Option: AF_INET SOCKET KEEPALIVE 0>
-`````
+```
 
 ### def linger(onoff, secs) -> Socket::Option
 SOL_SOCKET/SO_LINGER 用の Socket::Option オブジェクト

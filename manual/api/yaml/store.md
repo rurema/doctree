@@ -6,9 +6,7 @@ require:
 ---
 RubyのオブジェクトをYAML形式の外部ファイルに格納するためのクラスです。
 
-例:
-
-`````
+```ruby title="例"
 require 'yaml/store'
 
 Person = Struct.new :first_name, :last_name
@@ -21,11 +19,11 @@ store.transaction do
   store["people"] = people
   store["greeting"] = { "hello" => "world" }
 end
-`````
+```
 
 上記のコードを実行すると "test.store" は以下のようになります。
 
-`````
+```yaml
 ---
 people:
 - !ruby/struct:Person
@@ -36,7 +34,7 @@ people:
   last_name: Johnson
 greeting:
   hello: world
-`````
+```
 
 # class YAML::Store < PStore
 

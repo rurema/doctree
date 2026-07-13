@@ -5,9 +5,9 @@ library: uri
 
 LDAP URI を表すクラスです。[RFC:2255] (Obsoleted by [RFC:4510], [RFC:4516])。
 
-`````
+```text
 ldap://<host>/<dn>[?<attrs>[?<scope>[?<filter>[?<extensions>]]]]
-`````
+```
 
 ## Class Methods
 
@@ -18,23 +18,22 @@ ldap://<host>/<dn>[?<attrs>[?<scope>[?<filter>[?<extensions>]]]]
 引数の正当性を検査します。
 
 - **param** `ary` -- 構成要素を表す配列を与えます。要素は次の順です。
-```
+```text
       [:host, :port, :dn, :attributes, :scope, :filter, :extensions]
 ```
 - **param** `hash` -- 構成要素を表すハッシュを与えます。ハッシュのキーは 
-```
+```text
             :host, :port, :dn, :attributes, :scope, :filter, :extensions 
 ```
             のいずれかです。
 
 - **raise** `URI::InvalidComponentError` -- 各要素が適合しない場合に発生します。
 
-例:
-`````
+```ruby title="例"
 require 'uri'
 p URI::LDAP.build(["example.com", "1", "/a", "b", "c", "d", "e=f"]).to_s   
 #=> "ldap://example.com:1/a?b?c?d?e=f"
-`````
+```
 
 ### def new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)   -> URI::LDAP
 

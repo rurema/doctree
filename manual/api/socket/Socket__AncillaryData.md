@@ -43,7 +43,7 @@ cmsg_level で指定したプロトコルによってこの部分の解釈は異
 
 cmsg_data には補助データの内容となる文字列を渡します
 
-`````
+```ruby
 require 'socket'
 
 p Socket::AncillaryData.new(:INET, :TCP, :NODELAY, "")
@@ -51,7 +51,7 @@ p Socket::AncillaryData.new(:INET, :TCP, :NODELAY, "")
   
 p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "")
 #=> #<Socket::AncillaryData: INET6 IPV6 PKTINFO "">
-`````
+```
 
 - **param** `family` -- ソケットファミリー
 - **param** `cmsg_level` -- プロトコル
@@ -66,12 +66,12 @@ Socket::AncillaryData オブジェクトを生成します。
 
 整数データのサイズおよびエンディアンは実行するホストによって異なります。
 
-`````
+```ruby
 require 'socket'
 
 p Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, STDERR.fileno)
 #=> #<Socket::AncillaryData: UNIX SOCKET RIGHTS 2>
-`````
+```
 
 - **param** `family` -- ソケットファミリー
 - **param** `cmsg_level` -- プロトコル
@@ -85,12 +85,12 @@ ios で指定したファイルのファイルデスクリプタを
 データとして持つ family=AF_UNIX, level=SOL_SOCKET, type=SCM_RIGHTS
 という Socket::AncillaryData オブジェクトを生成して返します。
 
-`````
+```ruby
 require 'socket'
 
 p Socket::AncillaryData.unix_rights(STDERR)
 #=> #<Socket::AncillaryData: UNIX SOCKET RIGHTS 2>
-`````
+```
 
 - **param** `ios` -- IO オブジェクトの配列
 - **SEE** [m:Socket::AncillaryData#unix_rights],
@@ -102,7 +102,7 @@ type が IP_PKTINFO である AncillaryData を生成します。
 
 IP_PKTINFO は非標準的拡張であり、システムによっては使えない場合があります。
 
-`````
+```ruby
 require 'socket'
 
 addr = Addrinfo.ip("127.0.0.1")
@@ -110,7 +110,7 @@ ifindex = 0
 spec_dst = Addrinfo.ip("127.0.0.1")
 p Socket::AncillaryData.ip_pktinfo(addr, ifindex, spec_dst)
 #=> #<Socket::AncillaryData: INET IP PKTINFO 127.0.0.1 ifindex:0 spec_dst:127.0.0.1>
-`````
+```
 
 - **param** `addr` -- アドレス(文字列もしくは [c:Addrinfo])
 - **param** `ifindex` -- インターフェースのインデックス(整数)
@@ -125,14 +125,14 @@ type が IPV6_PKTINFO である AncillaryData を生成します。
 
 IPV6_PKTINFO は [RFC:3542] で定義されています。
 
-`````
+```ruby
 require 'socket'
 
 addr = Addrinfo.ip("::1")
 ifindex = 0
 p Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
 #=> #<Socket::AncillaryData: INET6 IPV6 PKTINFO ::1 ifindex:0>
-`````
+```
 
 - **param** `addr` -- アドレス(文字列もしくは [c:Addrinfo])
 - **param** `ifindex` -- インターフェースのインデックス(整数)
@@ -144,63 +144,63 @@ p Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
 ### def family -> Integer
 自身が保持している socket family を返します。
 
-`````
+```ruby
 require 'socket'
 
 p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").family
 #=> 10
-`````
+```
 
 - **SEE** [m:Socket::AncillaryData.new]
 
 ### def level -> Integer
 自身が保持している cmsg level (元プロトコル) を返します。
 
-`````
+```ruby
 require 'socket'
 
 p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").level
 #=> 41
-`````
+```
 
 - **SEE** [m:Socket::AncillaryData.new]
 
 ### def type -> Integer
 自身が保持している cmsg type (種類) を返します。
 
-`````
+```ruby
 require 'socket'
 
 p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").type
 #=> 2
-`````
+```
 
 - **SEE** [m:Socket::AncillaryData.new]
 
 ### def data -> String
 自身が保持している cmsg data (データ) を返します。
 
-`````
+```ruby
 require 'socket'
 
 p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").type
 #=> ""
-`````
+```
 
 - **SEE** [m:Socket::AncillaryData.new]
 
 ### def cmsg_is?(level, type) -> bool
 自身の level と type が引数のものと一致している場合に真を返します。
 
-`````
+```ruby
 require 'socket'
 
 ancdata = Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "")
-ancdata.cmsg_is?(Socket::IPPROTO_IPV6, Socket::IPV6_PKTINFO) #=> true
-ancdata.cmsg_is?(:IPV6, :PKTINFO)       #=> true
-ancdata.cmsg_is?(:IP, :PKTINFO)         #=> false
-ancdata.cmsg_is?(:SOCKET, :RIGHTS)      #=> false
-`````
+p ancdata.cmsg_is?(Socket::IPPROTO_IPV6, Socket::IPV6_PKTINFO) #=> true
+p ancdata.cmsg_is?(:IPV6, :PKTINFO)     #=> true
+p ancdata.cmsg_is?(:IP, :PKTINFO)       #=> false
+p ancdata.cmsg_is?(:SOCKET, :RIGHTS)    #=> false
+```
 
 - **param** `level` -- 一致を確認する cmsg_level (文字列、シンボル、整数)
 - **param** `type` -- 一致を確認する cmsg_type (文字列、シンボル、整数)
@@ -211,12 +211,12 @@ ancdata.cmsg_is?(:SOCKET, :RIGHTS)      #=> false
 
 整数データのサイズおよびエンディアンは実行するホストによって異なります。
 
-`````
+```ruby
 require 'socket'
 
 ancdata = Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, STDERR.fileno)
 p ancdata.int #=> 2
-`````
+```
 
 - **raise** `TypeError` -- cmgs data のサイズが int のバイト数と異なる場合に発生します
 - **SEE** [m:Socket::AncillaryData.new] [m:Socket::AncillaryData.int]
@@ -230,14 +230,14 @@ Unix domain socket の SCM_RIGHTS 制御メッセージに含まれる
 
 この配列は [c:Socket::AncillaryData] が初期化されたときに
 作られます。例えば [m:BasicSocket#recvmsg] を :scm_rights => true
-````
+```text
 オプションを付けて呼びだし、
-````
+```
 SCM_RIGHTS な 制御メッセージを受け取ったときに配列が作られます。
 適切なオプションを指定しなかった場合は配列は生成されず、
 このメソッドは nil を返します。
 
-`````
+```ruby
 require 'socket'
 
 # recvmsg needs :scm_rights=>true for unix_rights
@@ -257,7 +257,7 @@ s1.sendmsg "stdin and a socket", 0, nil, Socket::AncillaryData.unix_rights(STDIN
 _, _, _, ctl = s2.recvmsg
 p ctl #=> #<Socket::AncillaryData: UNIX SOCKET RIGHTS 6 7>
 p ctl.unix_rights #=> nil
-`````
+```
   
 
 - **raise** `TypeError` -- family/level/type が AF_UNIX/SOL_SOCKET/SCM_RIGHTS でない場合
@@ -274,7 +274,7 @@ p ctl.unix_rights #=> nil
   -  SOL_SOCKET/SCM_TIMESTAMPNS (nano second) GNU/Linux
   -  SOL_SOCKET/SCM_BINTIME (2**(-64) second) FreeBSD
 
-`````
+```ruby
 require 'socket'
 
 Addrinfo.udp("127.0.0.1", 0).bind {|s1|
@@ -290,7 +290,7 @@ Addrinfo.udp("127.0.0.1", 0).bind {|s1|
     p t.nsec #=> 775581000
   }
 }
-`````
+```
 
 - **SEE** [m:Socket::Constants::SCM_TIMESTAMP],
      [m:Socket::Constants::SCM_TIMESTAMPNS],
@@ -306,7 +306,7 @@ Addrinfo.udp("127.0.0.1", 0).bind {|s1|
 
 IP_PKTINFO は非標準的拡張であり、システムによっては使えない場合があります。
 
-`````
+```ruby
 require 'socket'
 
 addr = Addrinfo.ip("127.0.0.1")
@@ -315,7 +315,7 @@ spec_dest = Addrinfo.ip("127.0.0.1")
 ancdata = Socket::AncillaryData.ip_pktinfo(addr, ifindex, spec_dest)
 p ancdata.ip_pktinfo
 #=> [#<Addrinfo: 127.0.0.1>, 0, #<Addrinfo: 127.0.0.1>]
-`````
+```
 
 - **raise** `TypeError` -- level, type が IPPROTO_IP, IP_PKTINFO でない場合に
        発生します。
@@ -329,14 +329,14 @@ p ancdata.ip_pktinfo
 
 IPV6_PKTINFO については [RFC:3542] を参照してください。
 
-`````
+```ruby
 require 'socket'
 
 addr = Addrinfo.ip("::1")
 ifindex = 0
 ancdata = Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
 p ancdata.ipv6_pktinfo #=> [#<Addrinfo: ::1>, 0]
-`````
+```
 
 - **SEE** [m:Socket::AncillaryData.ipv6_pktinfo], 
      [m:Socket::AncillaryData#ipv6_pktinfo_addr], 
@@ -348,14 +348,14 @@ p ancdata.ipv6_pktinfo #=> [#<Addrinfo: ::1>, 0]
 (アドレス、インターフェースのインデックス)
 のアドレスを返します。
 
-`````
+```ruby
 require 'socket'
 
 addr = Addrinfo.ip("::1")
 ifindex = 0
 ancdata = Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
 p ancdata.ipv6_pktinfo_addr #=> #<Addrinfo: ::1>
-`````
+```
 
 - **SEE** [m:Socket::AncillaryData.ipv6_pktinfo], 
      [m:Socket::AncillaryData#ipv6_pktinfo], 
@@ -367,14 +367,14 @@ p ancdata.ipv6_pktinfo_addr #=> #<Addrinfo: ::1>
 (アドレス、インターフェースのインデックス)
 のインデックスを返します。
 
-`````
+```ruby
 require 'socket'
 
 addr = Addrinfo.ip("::1")
 ifindex = 0
 ancdata = Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
 p ancdata.ipv6_pktinfo_ifindex #=> 0
-`````
+```
 
 - **SEE** [m:Socket::AncillaryData.ipv6_pktinfo], 
      [m:Socket::AncillaryData#ipv6_pktinfo], 

@@ -29,8 +29,7 @@ category: File
               そうでない場合は、そのディレクトリを使用します。
 
 
-使用例
-`````
+```ruby title="使用例"
 require 'tmpdir'
 
 puts Dir.tmpdir
@@ -82,7 +81,7 @@ ensure
   FileUtils.remove_entry_secure dir
 end
 p FileTest.directory?(dir) #=> false
-`````
+```
 
 - **raise** `ArgumentError` -- tmpdirが全てのユーザから書き込み可能かつ、sticky
                      ビットが立っていない場合に発生します。作成する一時

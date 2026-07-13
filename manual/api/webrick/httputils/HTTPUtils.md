@@ -14,11 +14,11 @@ Apache の mime.types ファイル形式の file を読み込み
 
 - **param** `file` -- Apache の mime.types ファイル形式のファイルの名前を文字列で指定します。
 
-`````
+```ruby
 require 'webrick'
 p WEBrick::HTTPUtils.load_mime_types('/etc/mime.types')
 # => {"htm"=>"text/html", "rpm"=>"application/x-rpm", ... }
-`````
+```
 
 ### module_function def mime_type(filename, mime_tab)    -> String
 
@@ -30,13 +30,13 @@ p WEBrick::HTTPUtils.load_mime_types('/etc/mime.types')
 
 - **param** `mime_tab` -- 拡張子をキー、MIME タイプを値とするハッシュを指定します。
 
-`````
+```ruby
 require 'webrick'
 include WEBrick::HTTPUtils
 p mime_type('index.html', DefaultMimeTypes)     #=> "text/html"
 p mime_type('index.html.ja', DefaultMimeTypes)  #=> "text/html"
 p mime_type('index.hoge', DefaultMimeTypes)     #=> "application/octet-stream"
-`````
+```
 
 ### module_function def parse_header(raw) -> Hash
 
@@ -76,14 +76,14 @@ HTTP ヘッダの値を分割して返します。
 
 以下の正規表現を使用して変換します。
 
-`````
+```ruby
 control  = (0x0..0x1f).collect{|c| c.chr }.join + "\x7f"
 space    = " "
 delims   = '<>#%"'
 unwise   = '{}|\\^[]`'
 nonascii = (0x80..0xff).collect{|c| c.chr }.join
 /[#{Regexp.escape(control + space + delims + unwise + nonascii)}]/n
-`````
+```
 
 - **param** `str` -- 文字列を指定します。
 
@@ -99,14 +99,14 @@ nonascii = (0x80..0xff).collect{|c| c.chr }.join
 
 以下の正規表現を使用して変換します。
 
-`````
+```ruby
 num      = '0123456789'
 lowalpha = 'abcdefghijklmnopqrstuvwxyz'
 upalpha  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 mark     = '-_.!~*\'()'
 unreserved = num + lowalpha + upalpha + mark
 /[^#{Regexp.escape(unreserved + ":@&=+$,")}]/n
-`````
+```
 
 - **param** `str` -- 文字列を指定します。
 
@@ -130,10 +130,10 @@ unreserved = num + lowalpha + upalpha + mark
 
 - **param** `str` -- 文字列を指定します。
 
-`````
+```ruby
 require 'webrick'
 p WEBrick::HTTPUtils.escape_form('foo bar+baz')  # => "foo+bar%2Bbaz"
-`````
+```
 
 - **SEE** [m:WEBrick::HTTPUtils?.unescape_form]
 
@@ -144,10 +144,10 @@ p WEBrick::HTTPUtils.escape_form('foo bar+baz')  # => "foo+bar%2Bbaz"
 
 - **param** `str` -- 文字列を指定します。
 
-`````
+```ruby
 require 'webrick'
 p WEBrick::HTTPUtils.unescape_form('foo+bar%2Bbaz')  # => "foo bar+baz"
-`````
+```
 
 - **SEE** [m:WEBrick::HTTPUtils?.escape_form]
 

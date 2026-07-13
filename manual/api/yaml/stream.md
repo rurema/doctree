@@ -45,7 +45,7 @@ i番目のドキュメントを参照します。
 
 - **param** `i` -- 参照したいドキュメントの番号を指定します。
 
-`````
+```ruby
 require 'yaml'
   
 class Dog
@@ -66,7 +66,7 @@ end
 ys.add Dog.new("pochi")
 p ys[0]
 #=> #<Dog:0x2b07b04 @name="pochi">
-`````
+```
 
 ### def add(doc) -> ()
 
@@ -74,7 +74,7 @@ p ys[0]
 
 - **param** `doc` -- 適切なオブジェクトを指定します。
 
-`````
+```ruby
 require 'yaml'
   
 class Dog
@@ -95,7 +95,7 @@ p ys.documents
 ys.add(Dog.new("tama"))
 p ys.documents
 #=> [#<YAML::DomainType:0x2b07af0 @value={"name"=>"pochi"}, @type_id="Dog", @domain="ruby.yaml.org,2002">, #<Dog:0x2b079b0 @name="tama">]
-`````
+```
 
 ### def edit(doc_num, doc) -> ()
 
@@ -105,7 +105,7 @@ doc_num番目のドキュメントをdocに変更します。
 - **param** `doc_num` -- 変更されるドキュメントの番号
 - **param** `doc` -- 適切なオブジェクト
 
-`````
+```ruby
 require 'yaml'
   
 class Dog
@@ -121,7 +121,7 @@ ys.edit(1, Dog.new("pochi"))
 ys.edit(5, Dog.new("jack"))
 p ys.documents
 #=> [#<Dog:0x2b07c44 @name="tama">, #<Dog:0x2b07c1c @name="pochi">, nil, nil, nil, #<Dog:0x2b07bf4 @name="jack">]
-`````
+```
 
 ### def emit(io = nil) -> IO | String
 
@@ -130,7 +130,7 @@ io が nil の場合は文字列を返します。
 
 - **param** `io` -- 書き込み先の IO オブジェクト
 
-`````
+```text
 require 'yaml'
   
 class Dog
@@ -157,13 +157,13 @@ name: pochi
 ---
 - Chiba
 - Saitama
-`````
+```
 
 ### def documents -> Array
 
 自身のドキュメントを配列で返します。
 
-`````
+```ruby
 require 'yaml'
   
 str1=<<EOT
@@ -181,7 +181,7 @@ p ys.documents.pop
 #=> #<YAML::DomainType:0x2b07e24 @type_id="Dog", @domain="ruby.yaml.org,2002", @value={"name"=>"pochi"}>
 p ys.documents.pop
 #=> nil
-`````
+```
 
 ### def documents=(val)
 

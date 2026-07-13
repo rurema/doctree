@@ -1,4 +1,4 @@
-```````
+```text
 Local/Remote Options:
   -l, --local                      操作をローカルに限定します
   -r, --remote                     操作をリモートに限定します
@@ -8,4 +8,4 @@ Local/Remote Options:
       --source URL                 Gem パッケージのリモートリポジトリの URL を指定します
       --[no-]http-proxy [URL]      リモートの操作に HTTP プロクシを使用します
   -u, --[no-]update-sources        ローカルソースキャッシュを更新します
-```````
+```

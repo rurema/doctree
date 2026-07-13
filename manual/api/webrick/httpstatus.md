@@ -10,7 +10,7 @@ HTTP のステータスを表す例外クラスを提供するモジュールで
 
 以下のような継承による階層を構成しています。
 
-````
+```text
 StandardError
  * WEBrick::HTTPStatus::Status
     * WEBrick::HTTPStatus::Info             (1XX)
@@ -19,7 +19,7 @@ StandardError
     * WEBrick::HTTPStatus::Error            
        * WEBrick::HTTPStatus::ClientError   (4XX)
        * WEBrick::HTTPStatus::ServerError   (5XX)
-````
+```
 
 ## Singleton Methods
 
@@ -30,10 +30,10 @@ StandardError
 
 - **param** `code` -- HTTP のステータスコードを表す整数を指定します。
 
-`````
+```ruby
 require 'webrick'
 p WEBrick::HTTPStatus[200]   #=> WEBrick::HTTPStatus::OK
-`````
+```
 
 ## Module Functions
 
@@ -44,10 +44,10 @@ p WEBrick::HTTPStatus[200]   #=> WEBrick::HTTPStatus::OK
 
 - **param** `code` -- HTTP のステータスコードを表す整数か文字列を指定します。
 
-`````
+```ruby
 require 'webrick'
 p WEBrick::HTTPStatus.reason_phrase(304)   #=> "Not Modified"
-`````
+```
 
 ### module_function def info?(code)    -> bool
 
@@ -142,10 +142,10 @@ true を返します。そうでない場合に false を返します。
 
 HTTP のステータスコードを表す整数です。
 
-`````
+```ruby
 require 'webrick'
 p WEBrick::HTTPStatus::RC_INTERNAL_SERVER_ERROR   #=> 500
-`````
+```
 
 
 # class WEBrick::HTTPStatus::Status < StandardError

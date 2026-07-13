@@ -13,7 +13,7 @@ unがワイルドカード展開([m:Dir.glob]参照)します(Unix ではシェ
 
 ### 使い方:
 
-``````
+```console
 ruby -run -e cp -- [-prv] SOURCE DEST
 ruby -run -e ln -- [-sfv] TARGET LINK_NAME
 ruby -run -e mv -- [-v] SOURCE DEST
@@ -27,7 +27,7 @@ ruby -run -e wait_writable -- [OPTION] FILE
 ruby -run -e mkmf -- [OPTION] EXTNAME [OPTION]
 ruby -run -e httpd -- [OPTION] [DocumentRoot]
 ruby -run -e help [COMMAND]
-``````
+```
 
 # reopen Kernel
 ## Private Instance Methods
@@ -36,11 +36,11 @@ ruby -run -e help [COMMAND]
 
 Change the mode of each FILE to OCTAL-MODE.
 
-`````
+```console
 ruby -run -e chmod -- [OPTION] OCTAL-MODE FILE
 
 -v          詳細表示
-`````
+```
 
 - **SEE** [man:chmod(1)]
 
@@ -48,13 +48,13 @@ ruby -run -e chmod -- [OPTION] OCTAL-MODE FILE
 ファイルやディレクトリをコピーします。
 
 
-`````
+```console
 ruby -run -e cp -- [OPTION] SOURCE DEST
 
 -p          可能であればファイルの属性を保持します。
 -r          再帰的にコピーします。
 -v          詳細表示
-`````
+```
 
 - **SEE** [man:cp(1)]
 
@@ -62,34 +62,34 @@ ruby -run -e cp -- [OPTION] SOURCE DEST
 ヘルプメッセージを表示します。
 
 
-`````
+```console
 ruby -run -e help [COMMAND]
-`````
+```
 
 ### def install -> ()
 ファイルをコピーし、その属性を設定します。
 
 
-`````
+```console
 ruby -run -e install -- [OPTION] SOURCE DEST
 
 -p          ファイルのアクセス時刻と修正時刻を保持します。
 -m          chmod と同じようにファイルのパーミッションを設定します。
 -v          詳細表示
-`````
+```
 
 - **SEE** [man:install(1)]
 
 ### def ln -> ()
 ファイルへのリンクを作成します。
 
-`````
+```console
 ruby -run -e ln -- [OPTION] TARGET LINK_NAME
 
 -s          ハードリンクの代わりにシンボリックリンクを作成します
 -f          LINK_NAME を上書きします
 -v          詳細表示
-`````
+```
 
 - **SEE** [man:ln(1)]
 
@@ -97,13 +97,13 @@ ruby -run -e ln -- [OPTION] TARGET LINK_NAME
 ディレクトリを作成します。
 
 
-`````
+```console
 ruby -run -e mkdir -- [OPTION] DIR
 
 -p          ディレクトリが存在してもエラーになりません。
             必要であれば親ディレクトリも作成します。
 -v          詳細表示
-`````
+```
 
 - **SEE** [man:mkdir(1)]
 
@@ -112,11 +112,11 @@ ruby -run -e mkdir -- [OPTION] DIR
 ファイルを移動します (ファイル名を変更します)。
 
 
-`````
+```console
 ruby -run -e mv -- [OPTION] SOURCE DEST
 
 -v          詳細表示
-`````
+```
 
 - **SEE** [man:mv(1)]
 
@@ -125,13 +125,13 @@ ruby -run -e mv -- [OPTION] SOURCE DEST
 ファイルやディレクトリを削除します。
 
 
-`````
+```console
 ruby -run -e rm -- [OPTION] FILE
 
 -f          存在しないファイルを無視します
 -r          ディレクトリを再帰的にたどってファイルやディレクトリを削除します
 -v          詳細表示
-`````
+```
 
 - **SEE** [man:rm(1)]
 
@@ -139,12 +139,12 @@ ruby -run -e rm -- [OPTION] FILE
 
 空のディレクトリを削除します。
 
-`````
+```console
 ruby -run -e rmdir -- [OPTION] DIR
 
 -p          DIR で指定されたディレクトリとその上位ディレクトリを削除します
 -v          詳細表示
-`````
+```
 
 - **SEE** [man:rmdir(1)]
 
@@ -153,11 +153,11 @@ ruby -run -e rmdir -- [OPTION] DIR
 ファイルのアクセス時刻と修正時刻を現在の時刻に変更します。
 
 
-`````
+```console
 ruby -run -e touch -- [OPTION] FILE
 
 -v          詳細表示
-`````
+```
 
 - **SEE** [man:touch(1)]
 

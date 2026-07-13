@@ -7,9 +7,7 @@ include:
 
 HTTP の Basic 認証のためのクラスです。
 
-例
-
-```````
+```ruby title="例"
 require 'webrick'
 realm = "WEBrick's realm"
 srv = WEBrick::HTTPServer.new({ :BindAddress => '127.0.0.1', :Port => 10080})
@@ -23,7 +21,7 @@ srv.mount_proc('/basic_auth') {|req, res|
   res.body = "hoge"
 }
 srv.start # http://127.0.0.1:10080/basic_auth
-```````
+```
 
 ## Class Methods
 
@@ -42,12 +40,12 @@ BasicAuth オブジェクトを生成します。config は設定を保存した
 
 config で有効なハッシュキーは以下の通りです。
 
-````
+```text
 :Realm            =>
 :UserDB           =>
 :Logger           =>
 :AutoReloadUserDB =>
-````
+```
 
 realm を表す文字列 :Realm には与えます。:UserDB
 には [c:WEBrick::HTTPAuth::Htpasswd] オブジェクトを与えます。:Logger には

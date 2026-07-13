@@ -16,7 +16,7 @@ string を圧縮します。level の有効な値は
 
 ちなみに、このメソッドは以下のコードとほぼ同じです:
 
-`````
+```ruby
 require 'zlib'
 
 def deflate(string, level)
@@ -25,15 +25,14 @@ def deflate(string, level)
   z.close
   dst
 end
-`````
+```
 
 - **param** `string` -- 圧縮する文字列を指定します。 
 - **param** `level` -- 圧縮の水準を詳細に指定します。
              有効な値は Zlib::NO_COMPRESSION, Zlib::BEST_SPEED,
              Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION 及び 0 から 9 の整数です。
 
-使用例
-`````
+```ruby title="使用例"
 require 'zlib'
 
 srand(1)
@@ -57,7 +56,7 @@ p str.size #=> 500
 #=> 200
 #=> 194
 #=> 194
-`````
+```
 
 ### def new(level = Zlib::DEFAULT_COMPRESSION, windowBits = Zlib::MAX_WBITS, memlevel = Zlib::DEF_MEM_LEVEL, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::Deflate
 
@@ -69,7 +68,7 @@ p str.size #=> 500
 - **param** `memlevel` -- 0-9の範囲の整数で指定します。詳細はzlib.hを参照してください。
 - **param** `strategy` -- [m:Zlib::FILTERED], [m:Zlib::HUFFMAN_ONLY], [m:Zlib::DEFAULT_STRATEGY]など指定します。詳細はzlib.h を参照してください。
 
-`````
+```ruby
 require 'zlib'
 
 dez = Zlib::Deflate.new(9, nil, 9)
@@ -80,7 +79,7 @@ p dezstr #=> "x\3323426$\027\001\000e\217\v\271"
 inz = Zlib::Inflate.new
 inzstr = inz.inflate(dezstr)
 p inzstr  #=> "123123123123123123123123123123123123123123123123123123123123"
-`````
+```
 
 ## Instance Methods
 
@@ -99,12 +98,12 @@ flush には [m:Zlib::NO_FLUSH], [m:Zlib::SYNC_FLUSH],
 - **param** `flush` -- [m:Zlib::NO_FLUSH], [m:Zlib::SYNC_FLUSH],
              [m:Zlib::FULL_FLUSH], [m:Zlib::FINISH] のいずれかを指定します。
 
-`````
+```ruby
 require 'zlib'
 
 dez = Zlib::Deflate.new
 p dez.deflate("123" * 20, Zlib::FINISH) #=> "x\2343426$\027\001\000e\217\v\271"
-`````
+```
 
 ### def <<(string) -> self
 
@@ -115,14 +114,14 @@ p dez.deflate("123" * 20, Zlib::FINISH) #=> "x\2343426$\027\001\000e\217\v\271"
 
 - **param** `string` --  圧縮する文字列を指定します。
 
-`````
+```ruby
 require 'zlib'
 
 dez = Zlib::Deflate.new
 dez << "123" * 5 << "ugougo" << "123" * 5 << "hogehoge"
 dezstr = dez.finish
 p dezstr #=> "x\2343426DB\245\351\371@d\210*\230\221\237\236\n\302\000\356\275\v\271"
-`````
+```
 
 ### def flush(flush = Zlib::SYNC_FLUSH) -> String
 
@@ -132,7 +131,7 @@ deflate('', flush) と同じです。flush が
 
 - **param** `flush` -- [m:Zlib::NO_FLUSH] [m:Zlib::SYNC_FLUSH] [m:Zlib::FULL_FLUSH] などを指定します。
 
-`````
+```ruby
 require 'zlib'
 
 def case1
@@ -163,20 +162,20 @@ case2
 #=> "hoge fuga end"
 #=> "x\234\312\310OO\005\000\000\000\377\377RH+MO\004\000\000\000\377\377SH\315K\001\000!\251\004\276"
 #=> "hoge fuga end"
-`````
+```
 
 ### def finish -> String
 
 圧縮ストリームを終了します。deflate('', Zlib::FINISH) と同じです。
 
-`````
+```ruby
 require 'zlib'
 
 dez = Zlib::Deflate.new
 dez << "123" * 5 << "ugougo" << "123" * 5 << "hogehoge"
 dezstr = dez.finish
 p dezstr #=> "x\2343426DB\245\351\371@d\210*\230\221\237\236\n\302\000\356\275\v\271"
-`````
+```
 
 ### def params(level, strategy) -> nil
 
@@ -189,7 +188,7 @@ p dezstr #=> "x\2343426DB\245\351\371@d\210*\230\221\237\236\n\302\000\356\275\v
 - **param** `strategy` -- [m:Zlib::FILTERED], [m:Zlib::HUFFMAN_ONLY],
                 [m:Zlib::DEFAULT_STRATEGY] など指定します。詳細は zlib.h を参照してください。
 
-`````
+```ruby
 require 'zlib'
 
 def case1
@@ -217,7 +216,7 @@ case2
 #=> "hogehogehogehogehoge00000000000000000000000000000000000000000000000000000000000000000000000000000000"
 #=> "x\234\005\3011\r\000\000\f\003 K\230j\326\257\376\277Aw\351.\335\245\273t\027\000\000\000\000\000\000\000\000\000\200\aD\367\0270"
 #=> "hogehogehogehogehoge00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-`````
+```
 
 
 ### def set_dictionary(string) -> String
@@ -229,7 +228,7 @@ case2
 - **param** `string` -- 辞書に用いる文字列を指定します。詳しくは zlib.h を参照してください。
 - **return** -- 辞書に用いる文字列を返します。 
 
-`````
+```ruby
 require 'zlib'
 
 def case1(str)
@@ -254,5 +253,5 @@ g = [ 0, 1, 1, 1, 0, 0, 0, 3, 3, 3, 0, 0, 1, 1, 0, 0, 0, 1, 2, 2, 0, 0, 0, 2, 0,
 str = (1..i).collect{|m| t = rand(g.size); sset.at(g[t])}.join("")
 
 printf "%d normal:%d, dict:%d\n", i, case1(str), case2(str, dict)
-`````
+```
 

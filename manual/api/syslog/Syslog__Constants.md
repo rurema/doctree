@@ -12,11 +12,10 @@ include Syslog::Macros
 このモジュールにはシステムで使用可能なLOG_*定数、モジュール関数が定義さ
 れています。
 
-例:
-```````
+```ruby title="例"
 require 'syslog'
 include Syslog::Constants
-```````
+```
 
 #@since 2.0.0
 それぞれの定数、モジュール関数は以下のモジュールに分けて定義されています。
@@ -44,11 +43,10 @@ include Syslog::Constants
                 詳しくは、[c:Syslog::Constants]を参照してください。
 #@end
 
-例:
-````````````
+```ruby title="例"
 require 'syslog'
 Syslog.mask = Syslog::LOG_MASK(Syslog::LOG_ERR)
-````````````
+```
 
 ### module_function def LOG_UPTO(priority) -> Integer
 
@@ -61,11 +59,10 @@ priorityまでのすべての優先度のマスクを作成します。
                 詳しくは、[c:Syslog::Constants]を参照してください。
 #@end
 
-例:
-````````````
+```ruby title="例"
 require 'syslog'
 Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
-````````````
+```
 
 ## Constants
 

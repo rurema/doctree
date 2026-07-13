@@ -102,7 +102,7 @@ Gem が依存している Gem の情報を集めて返します。
 
 自身を初期化する際に使用するデフォルトのオプションです。
 
-```````
+```text
 :env_shebang         => false,
 :domain              => :both, # HACK dup
 :force               => false,
@@ -110,4 +110,4 @@ Gem が依存している Gem の情報を集めて返します。
 :ignore_dependencies => false,
 :security_policy     => nil, # HACK NoSecurity requires OpenSSL.  AlmostNo? Low?
 :wrappers            => true
-```````
+```

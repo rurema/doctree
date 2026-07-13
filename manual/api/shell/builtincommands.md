@@ -414,15 +414,14 @@ pathがディレクトリなら, Dir#foreach
 
 - **param** `path` -- ファイルもしくはディレクトリのパスを文字列で指定します。
 
-使用例
-`````
+```ruby title="使用例"
 require 'shell'
 Shell.verbose = false
 sh = Shell.new
 sh.foreach("/tmp"){|f|
   puts f
 }
-`````
+```
 
 ### def open(path, mode) -> File | Dir
 
@@ -454,7 +453,7 @@ path がファイルなら [m:File.unlink]、path がディレクトリなら [m
 
 - **param** `file2` -- 文字列でファイルへのパスを指定します。
 
-`````
+```ruby
 require 'shell'
 Shell.verbose = false
 sh = Shell.new
@@ -467,7 +466,7 @@ p sh[:e, "foo"]         # => true
 p sh["e", "foo"]        # => true
 p sh[:exists?, "foo"]   # => true
 p sh["exists?", "foo"]  # => true
-`````
+```
 
 - **SEE** [m:Kernel?.test], [c:FileTest]
 
@@ -480,8 +479,7 @@ Dir.mkdirと同じです。 (複数可)
 
 - **return** -- 作成するディレクトリの一覧の配列を返します。
 
-使用例
-`````
+```ruby title="使用例"
 require 'shell'
 Shell.verbose = false
 sh = Shell.new
@@ -490,7 +488,7 @@ begin
 rescue => err
   puts err
 end
-`````
+```
 
 ### def rmdir(*path) -> ()
 
@@ -506,9 +504,7 @@ command を実行する.
 
 - **param** `opts` -- command のオプションを文字列で指定します。複数可。
 
-使用例:
-
-`````
+```ruby title="使用例"
 require 'shell'
 Shell.verbose = false
 sh = Shell.new
@@ -516,7 +512,7 @@ sh = Shell.new
 print sh.system("ls", "-l")
 Shell.def_system_command("head")
 sh.system("ls", "-l") | sh.head("-n 3") > STDOUT
-`````
+```
 
 
 ### def rehash -> {}
@@ -532,9 +528,7 @@ sh.system("ls", "-l") | sh.head("-n 3") > STDOUT
 
 ブロック中で shell を self として実行します。
 
-例:
-
-`````
+```ruby title="例"
 require 'shell'
 Shell.def_system_command("head")
 sh = Shell.new
@@ -543,7 +537,7 @@ sh.transact{
   # transact の中では、
   # sh.system("ls", "-l") | sh.head > STDOUT と同じとなる。
 }
-`````
+```
 
 ### def out(dev = STDOUT, &block) -> ()
 
@@ -554,8 +548,7 @@ sh.transact{
 - **param** `block` -- transact 内部で実行するシェルを指定します。
 
 
-使用例:
-`````
+```ruby title="使用例"
 require 'shell'
 Shell.def_system_command("head")
 sh = Shell.new
@@ -564,7 +557,7 @@ File.open("out.txt", "w"){ |fp|
     system("ls", "-l") | head("-n 3")
   }
 }
-`````
+```
 
 
 ### def echo(*strings) -> Shell::Filter
@@ -572,8 +565,7 @@ File.open("out.txt", "w"){ |fp|
 
 - **param** `strings` -- シェルコマンド echo に与える引数を文字列で指定します。
 
-動作例
-`````
+```ruby title="動作例"
 require 'shell'
 Shell.def_system_command("head")
 sh = Shell.new
@@ -585,7 +577,7 @@ sh.transact {
     }
   }
 }
-`````
+```
 
 
 ### def cat(*files) -> Shell::Filter
@@ -593,8 +585,7 @@ sh.transact {
 
 - **param** `files` -- シェルコマンド cat に与えるファイル名を文字列で指定します。
 
-動作例
-`````
+```ruby title="動作例"
 require 'shell'
 Shell.def_system_command("head")
 sh = Shell.new
@@ -606,7 +597,7 @@ sh.transact {
     }
   }
 }
-`````
+```
 
 
 ### def glob(pattern) -> Shell::Filter
@@ -615,8 +606,7 @@ sh.transact {
 - **param** `pattern` -- シェルコマンド glob に与えるパターンを指定します。
               パターンの書式については、[m:Dir.\[\]]を参照してください。
 
-動作例
-`````
+```ruby title="動作例"
 require 'shell'
 Shell.def_system_command("head")
 sh = Shell.new
@@ -628,7 +618,7 @@ sh.transact {
     }
   }
 }
-`````
+```
 
 - **SEE** [m:Dir.\[\]]
 
@@ -645,8 +635,7 @@ sh.transact {
 
 - **param** `file` -- シェルコマンドtee に与えるファイル名を文字列で指定します。
 
-動作例
-`````
+```ruby title="動作例"
 require 'shell'
 Shell.def_system_command("head")
 sh = Shell.new
@@ -658,7 +647,7 @@ sh.transact {
     }
   }
 }
-`````
+```
 
 ### def concat(*jobs) -> Shell::Concat
 #@todo

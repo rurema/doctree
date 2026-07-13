@@ -20,7 +20,7 @@ until: "2.7.0"
 
 - **param** `threads` -- 終了するまでまつスレッドを一つもしくは複数指定します。
 
-`````
+```ruby
 require 'thwait'
 
 threads = []
@@ -40,7 +40,7 @@ ThreadsWait.all_waits(*threads) {|th| printf("end %s\n", th.inspect) }
 #=> end #<Thread:0x2169c dead>
 #=> end #<Thread:0x21728 dead>
 #=> end #<Thread:0x214f8 dead>
-`````
+```
 
 ### def new(*threads) -> ThreadsWait
 
@@ -48,8 +48,7 @@ ThreadsWait.all_waits(*threads) {|th| printf("end %s\n", th.inspect) }
 
 - **param** `threads` -- 終了を待つスレッドを一つもしくは複数指定します。
 
-使用例
-`````
+```ruby title="使用例"
 require 'thwait'
 
 threads = []
@@ -73,7 +72,7 @@ thall.all_waits{|th|
 #=> end #<Thread:0x215d4 dead>
 #=> end #<Thread:0x21660 dead>
 #=> end #<Thread:0x21430 dead>
-`````
+```
 
 
 ## Instance Methods
@@ -83,7 +82,7 @@ thall.all_waits{|th|
 同期されるスレッドの一覧を配列で返します。
 
 使用例
-`````
+```ruby
 require 'thwait'
 
 threads = []
@@ -94,14 +93,14 @@ threads = []
 thall = ThreadsWait.new(*threads)
 p thall.threads
 #=> [#<Thread:0x21750 sleep>, #<Thread:0x216c4 sleep>, #<Thread:0x21638 sleep>]
-`````
+```
 
 ### def empty? -> bool
 
 同期されるスレッドが存在するならば true をかえします。
 
 使用例
-`````
+```ruby
 require 'thwait'
 
 threads = []
@@ -113,14 +112,14 @@ thall = ThreadsWait.new
 p thall.threads.empty? #=> true
 thall.join(*threads)
 p thall.threads.empty? #=> false
-`````
+```
 
 ### def finished? -> bool
 
 すでに終了したスレッドが存在すれば true を返します。
 
 使用例
-`````
+```ruby
 require 'thwait'
 
 threads = []
@@ -132,7 +131,7 @@ thall = ThreadsWait.new(*threads)
 p thall.finished? #=> false
 sleep 3
 p thall.finished? #=> true
-`````
+```
 
 ### def join(*threads) -> ()
 
@@ -140,7 +139,7 @@ p thall.finished? #=> true
 
 - **param** `threads` -- 複数スレッドの終了を待つスレッドに指定されたthreadsを加えます。
 
-`````
+```ruby
 require 'thwait'
 
 threads = []
@@ -153,7 +152,7 @@ p thall.threads #=> []
 thall.join(*threads)
 p thall.threads
 #=> [#<Thread:0x216ec dead>, #<Thread:0x21660 dead>, #<Thread:0x215d4 dead>, #<Thread:0x214bc dead>]
-`````
+```
 
 ### def join_nowait(*threads) -> ()
 
@@ -162,7 +161,7 @@ p thall.threads
 
 - **param** `threads` -- 複数スレッドの終了を待つスレッドに指定されたthreadsを加えます。
 
-`````
+```ruby
 require 'thwait'
 
 threads = []
@@ -175,7 +174,7 @@ p thall.threads #=> []
 thall.join_nowait(*threads)
 p thall.threads #=> [#<Thread:0x21638 sleep>, #<Thread:0x215ac sleep>, #<Thread:0x21520 sleep>, #<Thread:0x21494 sleep>, #<Thread:0x21408 sleep>]
 # 実際には終了を待っていない。sleep している。
-`````
+```
 
 ### def next_wait(nonblock = nil) -> Thread
 
@@ -187,7 +186,7 @@ p thall.threads #=> [#<Thread:0x21638 sleep>, #<Thread:0x215ac sleep>, #<Thread:
 
 - **raise** `ErrNoFinishedThread` -- nonblock がtrue でかつ、キューが空の時、発生します。
 
-`````
+```ruby
 #使用例
 require 'thwait'
 
@@ -202,7 +201,7 @@ until thall.empty?
   th = thall.next_wait
   p th
 end
-`````
+```
 
 - **SEE** [m:Queue#pop]
 
@@ -211,8 +210,7 @@ end
 指定されたスレッドすべてが終了するまで待ちます。
 ブロックが与えられた場合、スレッド終了時にブロックを評価します。
 
-使用例
-`````
+```ruby title="使用例"
 require 'thwait'
 
 threads = []
@@ -236,5 +234,5 @@ thall.all_waits{|th|
 #=> end #<Thread:0x215d4 dead>
 #=> end #<Thread:0x21660 dead>
 #=> end #<Thread:0x21430 dead>
-`````
+```
 

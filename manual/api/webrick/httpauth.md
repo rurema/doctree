@@ -31,7 +31,7 @@ Basic 認証を行うためのメソッドです。
 
 - **raise** `WEBrick::HTTPStatus::Unauthorized` -- 認証に失敗した場合に発生します。
 
-`````
+```ruby
 require 'webrick'
 srv.mount_proc('/basic_auth') {|req, res|
   HTTPAuth.basic_auth(req, res, "WEBrick's realm") {|user, pass|
@@ -39,7 +39,7 @@ srv.mount_proc('/basic_auth') {|req, res|
   }
   res.body = "hoge"
 }
-`````
+```
 
 ### module_function def proxy_basic_auth(req, res, realm){|user, pass| ... }     -> nil
 

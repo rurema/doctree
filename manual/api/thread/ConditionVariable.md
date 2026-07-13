@@ -35,7 +35,7 @@ alias ConditionVariable
 メソッドでスレッド a に対して条件が成立したことを通知します。これが典型的な
 使用例です。
 
-```````
+```text
 mutex = Mutex.new
 cv = ConditionVariable.new
 
@@ -55,12 +55,12 @@ b = Thread.start {
       cv.signal
     }
 }
-```````
+```
 
 以下は [ruby-list:14445] で紹介されている例です。@q が空になった場合、
 あるいは満タンになった場合に Condition Variable を使って wait しています。
 
-`````
+```ruby
 require 'thread'
 
 class TinyQueue
@@ -123,11 +123,11 @@ if __FILE__ == $0
     t.join
   end
 end
-`````
+```
 
 実行すると以下のように出力します。
 
-`````
+```console
 $ ruby condvar.rb
 sent Apple
 recv Apple
@@ -141,7 +141,7 @@ sent Rice
 recv Rice
 sent Milk
 recv Milk
-`````
+```
 
 ## Class Methods
 

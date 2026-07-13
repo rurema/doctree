@@ -7,8 +7,8 @@ until: "2.5.0"
 
 コマンドラインから使用すると以下のようにできます。
 
-`````
+```console
 $ ruby -rubygems -e ''
-`````
+```
 
 - **SEE** [lib:rubygems]

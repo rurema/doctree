@@ -7,7 +7,7 @@ gzip 形式の圧縮ファイルを書き出すラッパークラスです。
 IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 持つオブジェクト) と関連付けて使用します。
 
-`````
+```ruby
 require 'zlib'
 
 Zlib::GzipWriter.open('hoge.gz') {|gz|
@@ -18,7 +18,7 @@ f = File.open('hoge.gz', 'w')
 gz = Zlib::GzipWriter.new(f)
 gz.write 'jugemu jugemu gokou no surikire...'
 gz.close
-`````
+```
 
 なお、Ruby の finalizer の制約のため、GzipWriter オブジェクトは必ず
 [m:Zlib::GzipWriter#close] 等を用いてクローズしてください。
@@ -40,7 +40,7 @@ GzipWriter オブジェクトは io に gzip 形式のデータを
 - **param** `level` --  0-9の範囲の整数を指定します。詳細はzlib.hを参照してください。 
 - **param** `strategy` -- [m:Zlib::FILTERED], [m:Zlib::HUFFMAN_ONLY], [m:Zlib::DEFAULT_STRATEGY]など指定します。詳細はzlib.h を>参照してください。
 
-`````
+```ruby
 require 'zlib'
 
 filename='hoge1.gz'
@@ -50,7 +50,7 @@ gz.puts "hogehoge" * 100
 gz.close  
 p gz.closed? #=> true
 p FileTest.size(filename) #=> 32
-`````
+```
 
 ### def wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
 ### def wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
@@ -69,7 +69,7 @@ io と関連付けられた GzipWriter オブジェクトを作成します。
 - **param** `strategy` -- [m:Zlib::FILTERED], [m:Zlib::HUFFMAN_ONLY], [m:Zlib::DEFAULT_STRATEGY]など指定します。
                 詳細はzlib.h を参照してください。
 
-`````
+```ruby
 require 'zlib'
   
 def case1
@@ -96,7 +96,7 @@ end
   
 case1
 case2
-`````
+```
 
 ### def open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
 ### def open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
@@ -113,7 +113,7 @@ filename で指定されるファイルを gzip 圧縮データの
 - **param** `strategy` -- [m:Zlib::FILTERED], [m:Zlib::HUFFMAN_ONLY], [m:Zlib::DEFAULT_STRATEGY]など指定します。
                 詳細はzlib.h を参照してください。
 
-`````
+```ruby
 require 'zlib'
 
 filename='hoge1.gz'
@@ -122,7 +122,7 @@ gz.puts "hogehoge" * 100
 gz.close
 p gz.closed? #=> true
 p FileTest.size(filename) #=> 32
-`````
+```
 
 ## Instance Methods
 
@@ -137,7 +137,7 @@ finish の違いは [m:Zlib::GzipFile#close], [m:Zlib::GzipFile#finish] を
 必ずクローズしてください。そうしなければフッターを書き出すことが
 できず、壊れた gzip ファイルを生成してしまう可能性があります。
 
-`````
+```ruby
 require 'zlib'
    
 def case_finish
@@ -164,7 +164,7 @@ end
  
 case_finish
 case_close
-`````
+```
 
 ### def pos -> Integer
 ### def tell -> Integer
@@ -172,7 +172,7 @@ case_close
 現在までに圧縮したデータの長さの合計を返します。
 ファイルポインタの位置ではないことに注意して下さい。
 
-`````
+```text
 require 'zlib'
 
 filename='hoge1.gz'
@@ -187,7 +187,7 @@ Zlib::GzipWriter.wrap(f, Zlib::BEST_COMPRESSION){|gz|
 #=> 2
 #=> 3
 ...
-`````
+```
 
 ### def <<(str) -> self
 
@@ -196,7 +196,7 @@ str を出力します。str が文字列でない場合は to_s を用いて
 
 - **param** `str` -- 出力したいオブジェクトを与えます。
 
-`````
+```ruby
 require 'zlib'
 
 filename='hoge1.gz'
@@ -209,7 +209,7 @@ Zlib::GzipReader.wrap(fr){|gz|
   puts gz.read
 }
 #=> hogefuga
-`````
+```
 
 - **SEE** [m:IO#<<]
 
@@ -225,7 +225,7 @@ ch が文字列なら、その先頭 1byte を出力します。
 
 - **return** -- ch を返します。
 
-`````
+```ruby
 require 'zlib'
 
 filename='hoge1.gz'
@@ -240,7 +240,7 @@ Zlib::GzipReader.wrap(fr){|gz|
   puts gz.read
 }
 #=> ugo
-`````
+```
 
 - **SEE** [m:IO#putc], [m:Kernel?.putc]
 
@@ -250,7 +250,7 @@ Zlib::GzipReader.wrap(fr){|gz|
 
 - **param** `str` -- 出力したいオブジェクトを指定します。
 
-`````
+```ruby
 require 'zlib'
 
 filename='hoge1.gz'
@@ -263,7 +263,7 @@ Zlib::GzipReader.wrap(fr){|gz|
   puts gz.read
 }
 #=> fuga
-`````
+```
 
 - **SEE** [m:IO#puts], [m:Kernel?.puts]
 
@@ -273,7 +273,7 @@ Zlib::GzipReader.wrap(fr){|gz|
 
 - **param** `str` -- 出力するオブジェクトを指定します。
 
-`````
+```ruby
 require 'zlib'
 
 filename='hoge1.gz'
@@ -286,7 +286,7 @@ Zlib::GzipReader.wrap(fr){|gz|
   puts gz.read
 }
 #=> ugo
-`````
+```
 
 - **SEE** [m:IO#print], [m:Kernel?.print]
 
@@ -299,7 +299,7 @@ C 言語の printf と同じように、format に従い引数
 
 - **param** `args` -- フォーマットされるオブジェクトを指定します。
 
-`````
+```ruby
 require 'zlib'
 
 filename='hoge1.gz'
@@ -312,7 +312,7 @@ Zlib::GzipReader.wrap(fr){|gz|
   puts gz.read
 }
 #=>       bar
-`````
+```
 
 - **SEE** [m:IO#printf], [m:Kernel?.printf]
 
@@ -329,7 +329,7 @@ Zlib::GzipReader.wrap(fr){|gz|
 
 - **return** -- 実際に出力できたバイト数を返します。
 
-`````
+```ruby
 require 'zlib'
 
 filename='hoge1.gz'
@@ -342,7 +342,7 @@ Zlib::GzipReader.wrap(fr){|gz|
   puts gz.read
 }
 #=> foo
-`````
+```
 
 - **SEE** [m:IO#write]
 
@@ -356,7 +356,7 @@ flush に [m:Zlib::NO_FLUSH] を指定することは無意味です。
 
 - **param** `flush` -- [m:Zlib::NO_FLUSH] [m:Zlib::SYNC_FLUSH] [m:Zlib::FULL_FLUSH] などを指定します。
 
-`````
+```ruby
 require 'zlib'
  
 def case1
@@ -385,7 +385,7 @@ case1
 #=> "\037\213\b\000p\257pH\002\003K+MO\344*M\317\347\002\000<\326\000\371\t\000\000\000"
 case2
 #=> "\037\213\b\000p\257pH\002\003J+MO\344\002\000\000\000\377\377*M\317\347\002\000\000\000\377\377\003\000<\326\000\371\t\000\000\000"
-`````
+```
 
 
 ### def mtime=(time)
@@ -399,7 +399,7 @@ gzip ファイルのヘッダーに記録する最終更新時間を指定しま
 - **param** `time` -- gzip ファイルのヘッダーに記録する最終更新時間を整数で指定します。
 - **return** -- time を返します。
 
-`````
+```ruby
 require 'zlib'
 
 filename='hoge1.gz'
@@ -413,7 +413,7 @@ Zlib::GzipReader.wrap(fr){|gz|
   # 例
   #=> Thu Jan 01 09:00:01 +0900 1970
 }
-`````
+```
 
 ### def orig_name=(filename)
 
@@ -426,7 +426,7 @@ gzip ファイルのヘッダーに記録する元ファイル名を指定しま
 - **param** `filename` -- gzip ファイルのヘッダーに記録する元ファイル名を文字列で指定します。
 - **return** -- filename を返します。
 
-`````
+```ruby
 require 'zlib'
 
 filename='hoge1.gz'
@@ -439,7 +439,7 @@ fr = File.open(filename)
 Zlib::GzipReader.wrap(fr){|gz|
   puts gz.orig_name #=> hogehoge
 }
-`````
+```
 
 ### def comment=(string)
 
@@ -452,7 +452,7 @@ gzip ファイルのヘッダーに記録するコメントを指定します。
 - **param** `string` -- gzip ファイルのヘッダーに記録するコメントを文字列で指定します。
 - **return** -- string を返します。
 
-`````
+```ruby
 require 'zlib'
 
 filename='hoge1.gz'
@@ -465,5 +465,5 @@ fr = File.open(filename)
 Zlib::GzipReader.wrap(fr){|gz|
   puts gz.comment #=> hogehoge
 }
-`````
+```
 

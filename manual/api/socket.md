@@ -62,22 +62,22 @@ AF_INET なソケットにおいてホストを指定するには以下のいず
 [m:Socket.unpack_sockaddr_in] といったメソッドにより、
 例えば、以下のようにしてこの文字列を得ることが出来ます
 
-`````
+```text
 require 'socket'
 p Socket.pack_sockaddr_in("echo", "127.0.0.1")
 => "\002\000\000\a\177\000\000\001\000\000\000\000\000\000\000\000"
-`````
+```
 
 #@else
 また、ruby 1.6 以前では、以下のように [m:Array#pack] を使用できます。
 
-`````
+```text
 require 'socket'
 p [Socket::AF_INET,
    Socket.getservbyname('echo'),
    127, 0, 0, 1].pack("s n C4 x8")
 => "\002\000\000\a\177\000\000\001\000\000\000\000\000\000\000\000"
-`````
+```
 #@end
 
 ### ホスト名と IP アドレスの変換

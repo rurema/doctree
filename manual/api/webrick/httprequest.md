@@ -170,15 +170,13 @@ multipart/form-data なフォームデータであってもサイズの制限な
 同じように扱われることに注意してください。クライアントからの入力によっては巨大な文字列が
 生成されてしまいます。
 
-例:
-
-`````
+```ruby title="例"
 h = req.query
 p h['q']                       #=>  "ruby rails session"  
 p h['upfile']['content-type']  #=>  "plain/text"
 p h['upfile'].filename         #=>  "my_file.txt"
 p h['upfile']                  #=>  "hoge hoge hoge"
-`````
+```
 
 ### def query_string          -> String
 
