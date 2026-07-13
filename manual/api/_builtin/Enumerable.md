@@ -1168,6 +1168,9 @@ evens = (1..10).each_with_object([]) {|i, a| a << i*2 }
 取り扱います。すなわち、ブロックの評価値が一つ前と
 異なる所でチャンクが区切られます。
 
+ただし、ブロックの評価値が nil、:_separator、:_alone の場合は
+特別扱いされます(詳細は後述)。
+
 返り値の [c:Enumerator] は各チャンクのブロック評価値と
 各チャンクの要素を持つ配列のペアを各要素とします。
 そのため、eachだと以下のようになります。
@@ -1329,17 +1332,22 @@ p a.chunk_while {|i, j| i.even? == j.even? }.to_a
 
 ブロックを各要素に一度ずつ適用します。
 
-一要素として複数の値が渡された場合はブロックには配列として渡されます。
+each とは異なり、一要素として複数の値が渡された場合でも、
+それらをまとめて一つの配列としてブロックに渡します。
+each の場合は、ブロックの引数が一つだけならば、
+複数の値のうち最初の値だけが渡されます。
 
-```ruby title="例"
+```ruby title="例:each との違い"
 class Foo
   include Enumerable
   def each
     yield 1
-    yield 1,2
+    yield 1, 2
   end
 end
-Foo.new.each_entry{|o| print o, " -- "}
+Foo.new.each{|o| print o.inspect, " -- "}
+# => 1 -- 1 --
+Foo.new.each_entry{|o| print o.inspect, " -- "}
 # => 1 -- [1, 2] --
 ```
 
