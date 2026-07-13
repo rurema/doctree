@@ -13,9 +13,9 @@
 #@since 3.0
 ```ruby title="例"
 class User
-  attr :name # => [:name]
+  p attr :name # => [:name]
   # 複数の名前を渡すこともできる
-  attr :id, :age # => [:id, :age]
+  p attr :id, :age # => [:id, :age]
 end
 ```
 #@end
@@ -56,9 +56,9 @@ end
 #@since 3.0
 ```ruby title="例"
 class User
-  attr_accessor :name # => [:name, :name=]
+  p attr_accessor :name # => [:name, :name=]
   # 複数の名前を渡すこともできる
-  attr_accessor :id, :age # => [:id, :id=, :age, :age=]
+  p attr_accessor :id, :age # => [:id, :id=, :age, :age=]
 end
 ```
 #@end
@@ -90,9 +90,9 @@ end
 #@since 3.0
 ```ruby title="例"
 class User
-  attr_reader :name # => [:name]
+  p attr_reader :name # => [:name]
   # 複数の名前を渡すこともできる
-  attr_reader :id, :age # => [:id, :age]
+  p attr_reader :id, :age # => [:id, :age]
 end
 ```
 #@end
@@ -121,9 +121,9 @@ end
 #@since 3.0
 ```ruby title="例"
 class User
-  attr_writer :name # => [:name=]
+  p attr_writer :name # => [:name=]
   # 複数の名前を渡すこともできる
-  attr_writer :id, :age # => [:id=, :age=]
+  p attr_writer :id, :age # => [:id=, :age=]
 end
 ```
 #@end

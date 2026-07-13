@@ -188,8 +188,8 @@ Point = Data.define(:x, :y) do
   end
 end
 
-Point.new(x: 1)        # => #<data Point x=1, y=0>
-Point.new(x: 1, y: 2)  # => #<data Point x=1, y=2>
+p Point.new(x: 1)      # => #<data Point x=1, y=0>
+p Point.new(x: 1, y: 2)  # => #<data Point x=1, y=2>
 ```
 
 メンバに存在しない引数を受け取るようにすることもできます。
@@ -201,8 +201,8 @@ Point = Data.define(:x, :y) do
   end
 end
 
-Point.new(x: 1, y: 2)                  # => #<data Point x=1, y=2>
-Point.new(x: 1, y: 2, multiplier: 10)  # => #<data Point x=10, y=20>
+p Point.new(x: 1, y: 2)                # => #<data Point x=1, y=2>
+p Point.new(x: 1, y: 2, multiplier: 10)  # => #<data Point x=10, y=20>
 ```
 
 ### def members -> [Symbol]
@@ -248,7 +248,7 @@ self のメンバの値を配列で返します。
 Measure = Data.define(:amount, :unit)
 
 distance = Measure.new(10, 'km')
-distance.deconstruct # => [10, "km"]
+p distance.deconstruct # => [10, "km"]
 ```
 
 このメソッドは以下のようにパターンマッチで利用されます。
@@ -285,8 +285,8 @@ self のメンバの名前と値の組を Hash で返します。
 Measure = Data.define(:amount, :unit)
 
 distance = Measure.new(10, 'km')
-distance.deconstruct_keys(nil)       # => {:amount=>10, :unit=>"km"}
-distance.deconstruct_keys([:amount]) # => {:amount=>10}
+p distance.deconstruct_keys(nil)     # => {:amount=>10, :unit=>"km"}
+p distance.deconstruct_keys([:amount]) # => {:amount=>10}
 ```
 
 このメソッドは以下のようにパターンマッチで利用されます。
@@ -365,7 +365,7 @@ self の内容を人間に読みやすい文字列にして返します。
 ```ruby title="例"
 Customer = Data.define(:name, :address, :zip)
 joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
-joe.inspect # => "#<data Customer name=\"Joe Smith\", address=\"123 Maple, Anytown NC\", zip=12345>"
+p joe.inspect # => "#<data Customer name=\"Joe Smith\", address=\"123 Maple, Anytown NC\", zip=12345>"
 ```
 
 #@include(Data.attention)
@@ -396,7 +396,7 @@ Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
 その結果をペアとして使います。
 ```ruby title="ブロック付きの例"
 Customer = Data.define(:name, :address, :zip)
-Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value|
+p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value|
   [member, value*2]
 } # => {:name=>"Joe SmithJoe Smith", :address=>"123 Maple, Anytown NC123 Maple, Anytown NC", :zip=>24690}
 ```

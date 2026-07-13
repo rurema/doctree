@@ -192,16 +192,16 @@ module Baz
   prepend Foo
 end
 
-Bar.ancestors # => [Bar, Foo]
-Foo <= Bar # => false
-Bar <= Foo # => true
+p Bar.ancestors # => [Bar, Foo]
+p Foo <= Bar # => false
+p Bar <= Foo # => true
 
-Baz.ancestors # => [Foo, Baz]
-Foo <= Baz # => false
-Baz <= Foo # => true
+p Baz.ancestors # => [Foo, Baz]
+p Foo <= Baz # => false
+p Baz <= Foo # => true
 
-Foo <= Foo # => true
-Foo <= Object # => nil
+p Foo <= Foo # => true
+p Foo <= Object # => nil
 ```
 
 ### def >(other)  -> bool | nil
@@ -227,16 +227,16 @@ module Prepended
   prepend Awesome
 end
 
-Included.ancestors # => [Included, Awesome]
-Awesome > Included # => true
-Included > Awesome # => false
+p Included.ancestors # => [Included, Awesome]
+p Awesome > Included # => true
+p Included > Awesome # => false
 
-Prepended.ancestors # => [Awesome, Prepended]
-Awesome > Prepended # => true
-Prepended > Awesome # => false
+p Prepended.ancestors # => [Awesome, Prepended]
+p Awesome > Prepended # => true
+p Prepended > Awesome # => false
 
-Awesome > Awesome # => false
-Awesome > Object # => nil
+p Awesome > Awesome # => false
+p Awesome > Object # => nil
 ```
 
 ### def >=(other) -> bool | nil
@@ -262,16 +262,16 @@ module Baz
   prepend Foo
 end
 
-Bar.ancestors # => [Bar, Foo]
-Foo >= Bar # => true
-Bar >= Foo # => false
+p Bar.ancestors # => [Bar, Foo]
+p Foo >= Bar # => true
+p Bar >= Foo # => false
 
-Baz.ancestors # => [Foo, Baz]
-Foo >= Baz # => true
-Baz >= Foo # => false
+p Baz.ancestors # => [Foo, Baz]
+p Foo >= Baz # => true
+p Baz >= Foo # => false
 
-Foo >= Foo # => true
-Foo >= Object # => nil
+p Foo >= Foo # => true
+p Foo >= Object # => nil
 ```
 
 ### def ===(obj) -> bool
@@ -402,10 +402,10 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
 ```ruby title="例"
 autoload :Date, 'date'
 
-autoload?(:Date) # => "date"
+p autoload?(:Date) # => "date"
 Date
-autoload?(:Date) # => nil
-autoload?(:Foo) # => nil
+p autoload?(:Date) # => nil
+p autoload?(:Foo) # => nil
 ```
 
 ```ruby title="例: inherit引数"
@@ -434,9 +434,9 @@ end
 class Two < One
   @@var2 = 2
 end
-One.class_variables          # => [:@@var1]
-Two.class_variables          # => [:@@var2, :@@var1]
-Two.class_variables(false)   # => [:@@var2]
+p One.class_variables        # => [:@@var1]
+p Two.class_variables        # => [:@@var2, :@@var1]
+p Two.class_variables(false) # => [:@@var2]
 ```
 
 - **SEE** [m:Module.constants], [m:Kernel?.local_variables], [m:Kernel?.global_variables], [m:Object#instance_variables], [m:Module#constants]
@@ -560,11 +560,11 @@ module Foo; end
 
 # Symbolを指定した場合
 Foo.const_set(:FOO, 123)
-Foo::FOO # => 123
+p Foo::FOO # => 123
 
 # Stringを指定した場合
 Foo.const_set('BAR', 'abc')
-Foo::BAR # => "abc"
+p Foo::BAR # => "abc"
 
 # 既に定義されている定数の名前を指定した場合
 Foo.const_set('BAR', '123')
@@ -691,7 +691,7 @@ Ruby 2.7.2 から Warning[:deprecated] のデフォルト値が false に変更�
 
 ```ruby title="例"
 FOO = 123
-Object.deprecate_constant(:FOO) # => Object
+p Object.deprecate_constant(:FOO) # => Object
 
 FOO
 # warning: constant ::FOO is deprecated
@@ -755,8 +755,8 @@ module Outer
   include Mixin
 end
 
-Mixin.included_modules   #=> []
-Outer.included_modules   #=> [Mixin]
+p Mixin.included_modules #=> []
+p Outer.included_modules #=> [Mixin]
 ```
 
 - **SEE** [m:Module#ancestors]
@@ -821,15 +821,15 @@ class C < B
   def method3()  end
 end
 
-A.method_defined? :method1              #=> true
-C.method_defined? "method1"             #=> true
-C.method_defined? "method2"             #=> true
-C.method_defined? "method2", true       #=> true
-C.method_defined? "method2", false      #=> false
-C.method_defined? "method3"             #=> true
-C.method_defined? "protected_method1"   #=> true
-C.method_defined? "method4"             #=> false
-C.method_defined? "private_method2"     #=> false
+p A.method_defined? :method1            #=> true
+p C.method_defined? "method1"           #=> true
+p C.method_defined? "method2"           #=> true
+p C.method_defined? "method2", true     #=> true
+p C.method_defined? "method2", false    #=> false
+p C.method_defined? "method3"           #=> true
+p C.method_defined? "protected_method1" #=> true
+p C.method_defined? "method4"           #=> false
+p C.method_defined? "private_method2"   #=> false
 ```
 
 ### def module_eval(expr, fname = "(eval)", lineno = 1) -> object
@@ -1033,7 +1033,7 @@ self の public インスタンスメソッド name をオブジェクト化し�
        protected メソッド名、 private メソッド名を引数として与えると発生します。
 
 ```ruby title="例"
-Kernel.public_instance_method(:object_id) #=> #<UnboundMethod: Kernel#object_id>
+p Kernel.public_instance_method(:object_id) #=> #<UnboundMethod: Kernel#object_id>
 #@since 3.4
 Kernel.public_instance_method(:p)         #   method 'p' for module 'Kernel' is private (NameError)
 #@else
@@ -1076,8 +1076,8 @@ module Bar
   private def qux; end
 end
 
-Bar.private_instance_methods # => [:qux, :bar]
-Bar.private_instance_methods(false) # => [:qux]
+p Bar.private_instance_methods # => [:qux, :bar]
+p Bar.private_instance_methods(false) # => [:qux]
 ```
 
 ### def protected_instance_methods(inherited_too = true) -> [Symbol]
@@ -1105,9 +1105,9 @@ module Foo
   def self.foo; end
 end
 
-Foo.singleton_class.private_method_defined?(:foo) # => false
-Foo.private_class_method(:foo) # => Foo
-Foo.singleton_class.private_method_defined?(:foo) # => true
+p Foo.singleton_class.private_method_defined?(:foo) # => false
+p Foo.private_class_method(:foo) # => Foo
+p Foo.singleton_class.private_method_defined?(:foo) # => true
 ```
 
 
@@ -1138,8 +1138,8 @@ module Foo
   private_constant :Quux
 end
 
-Foo::BAR  # => "bar"
-Foo::Baz  # => Foo::Baz
+p Foo::BAR  # => "bar"
+p Foo::Baz  # => Foo::Baz
 Foo::QUX  # => NameError: private constant Foo::QUX referenced
 Foo::Quux # => NameError: private constant Foo::Quux referenced
 ```
@@ -1168,8 +1168,8 @@ Foo.foo # NoMethodError: private method 'foo' called for Foo:Class
 Foo.foo # NoMethodError: private method `foo' called for Foo:Class
 #@end
 
-Foo.public_class_method(:foo) # => Foo
-Foo.foo # => "foo"
+p Foo.public_class_method(:foo) # => Foo
+p Foo.foo # => "foo"
 ```
 
 ### def public_constant(*name) -> self
@@ -1202,7 +1202,7 @@ module SampleModule
   public_constant :SampleInnerClass
 end
 
-SampleModule::SampleInnerClass # => SampleModule::SampleInnerClass
+p SampleModule::SampleInnerClass # => SampleModule::SampleInnerClass
 ```
 
 #@since 3.2
@@ -1236,12 +1236,12 @@ class C < B
   def method3()  end
 end
 
-A.method_defined? :method1                   #=> true
-C.private_method_defined? "method1"          #=> false
-C.private_method_defined? "method2"          #=> true
-C.private_method_defined? "method2", true    #=> true
-C.private_method_defined? "method2", false   #=> false
-C.method_defined? "method2"                  #=> false
+p A.method_defined? :method1                 #=> true
+p C.private_method_defined? "method1"        #=> false
+p C.private_method_defined? "method2"        #=> true
+p C.private_method_defined? "method2", true  #=> true
+p C.private_method_defined? "method2", false #=> false
+p C.method_defined? "method2"                #=> false
 ```
 
 ### def protected_method_defined?(name, inherit=true) -> bool
@@ -1269,12 +1269,12 @@ class C < B
   def method3()  end
 end
 
-A.method_defined? :method1                    #=> true
-C.protected_method_defined? "method1"         #=> false
-C.protected_method_defined? "method2"         #=> true
-C.protected_method_defined? "method2", true   #=> true
-C.protected_method_defined? "method2", false  #=> false
-C.method_defined? "method2"                   #=> true
+p A.method_defined? :method1                  #=> true
+p C.protected_method_defined? "method1"       #=> false
+p C.protected_method_defined? "method2"       #=> true
+p C.protected_method_defined? "method2", true #=> true
+p C.protected_method_defined? "method2", false  #=> false
+p C.method_defined? "method2"                 #=> true
 ```
 
 ### def public_method_defined?(name, inherit=true) -> bool
@@ -1302,12 +1302,12 @@ class C < B
   def method3()  end
 end
 
-A.method_defined? :method1                 #=> true
-C.public_method_defined? "method1"         #=> true
-C.public_method_defined? "method1", true   #=> true
-C.public_method_defined? "method1", false  #=> true
-C.public_method_defined? "method2"         #=> false
-C.method_defined? "method2"                #=> true
+p A.method_defined? :method1               #=> true
+p C.public_method_defined? "method1"       #=> true
+p C.public_method_defined? "method1", true #=> true
+p C.public_method_defined? "method1", false  #=> true
+p C.public_method_defined? "method2"       #=> false
+p C.method_defined? "method2"              #=> true
 ```
 
 ### def class_variable_defined?(name) -> bool
@@ -1322,10 +1322,10 @@ name で与えられた名前のクラス変数がモジュールに存在する
 class Fred
   @@foo = 99
 end
-Fred.class_variable_defined?(:@@foo)    #=> true
-Fred.class_variable_defined?(:@@bar)    #=> false
-Fred.class_variable_defined?('@@foo')    #=> true
-Fred.class_variable_defined?('@@bar')    #=> false
+p Fred.class_variable_defined?(:@@foo)  #=> true
+p Fred.class_variable_defined?(:@@bar)  #=> false
+p Fred.class_variable_defined?('@@foo')  #=> true
+p Fred.class_variable_defined?('@@bar')  #=> false
 ```
 
 ### def class_variable_get(name) -> object
@@ -1387,7 +1387,7 @@ p Fred.new.foo    # => 101
 ```ruby title="例"
 class Foo
   @@foo = 1
-  remove_class_variable(:@@foo)   # => 1
+  p remove_class_variable(:@@foo) # => 1
   p @@foo   # => uninitialized class variable @@foo in Foo (NameError)
 end
 ```
@@ -1403,8 +1403,8 @@ self が特異クラスの場合に true を返します。そうでなければ
 ```ruby title="例"
 class C
 end
-C.singleton_class?                  # => false
-C.singleton_class.singleton_class?  # => true
+p C.singleton_class?                # => false
+p C.singleton_class.singleton_class?  # => true
 ```
 
 #@include(Module.prepend)
@@ -1642,7 +1642,7 @@ module M
   alias bar foo
 end
 
-M.foo   # => "foo"
+p M.foo # => "foo"
 M.bar   # => undefined method `bar' for Foo:Module (NoMethodError)
 ```
 
@@ -1663,8 +1663,8 @@ module M
   module_function :foo, :bar
 end
 
-M.foo   # => "foo"
-M.bar   # => "foo"
+p M.foo # => "foo"
+p M.bar # => "foo"
 ```
 
 ### def private() -> nil
@@ -1825,12 +1825,12 @@ module M
 end
 
 x = C.new
-x.foo # => "C#foo"
+p x.foo # => "C#foo"
 
 using M
 
 x = C.new
-x.foo # => "C#foo in M"
+p x.foo # => "C#foo in M"
 ```
 
 - **SEE** [m:main.using]
@@ -1869,7 +1869,7 @@ class C
   prepend X
 end
 
-Recorder::RECORDS # => [A, C]
+p Recorder::RECORDS # => [A, C]
 ```
 
 - **SEE** [m:Module#prepend], [m:Module#prepended]

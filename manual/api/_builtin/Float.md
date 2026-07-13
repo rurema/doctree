@@ -27,7 +27,7 @@ printf("%.50f\n", 1.0/3)
 
 ```ruby title="例"
 # 和
-3.0 + 4.5 # => 7.5
+p 3.0 + 4.5 # => 7.5
 ```
 
 ### def -(other) -> Float
@@ -37,7 +37,7 @@ printf("%.50f\n", 1.0/3)
 
 ```ruby title="例"
 # 差
-4.5 - 1.3 # => 3.2
+p 4.5 - 1.3 # => 3.2
 ```
 
 ### def -@    -> Float
@@ -46,8 +46,8 @@ printf("%.50f\n", 1.0/3)
 self の符号を反転させたものを返します。
 
 ```ruby title="例"
-- 1.2   # => -1.2
-- -1.2  # => 1.2
+p(- 1.2) # => -1.2
+p(- -1.2)  # => 1.2
 ```
 
 ### def *(other) -> Float
@@ -57,7 +57,7 @@ self の符号を反転させたものを返します。
 
 ```ruby title="例"
 # 積
-2.4 * 3   # => 7.2
+p 2.4 * 3 # => 7.2
 ```
 
 
@@ -68,8 +68,8 @@ self の符号を反転させたものを返します。
 
 ```ruby title="例"
 # 商
-1.3 / 2.4 # => 0.541666666666667
-1.0 / 0   # => Infinity
+p 1.3 / 2.4 # => 0.541666666666667
+p 1.0 / 0 # => Infinity
 ```
 
 ### def %(other) -> Float
@@ -80,7 +80,7 @@ self の符号を反転させたものを返します。
 
 ```ruby title="例"
 # 剰余
-3.0 % 1.2   # => 0.6000000000000001
+p 3.0 % 1.2 # => 0.6000000000000001
 3.0 % 0.0   # ZeroDivisionError
 ```
 
@@ -91,9 +91,9 @@ self の符号を反転させたものを返します。
 
 ```ruby title="例"
 # 冪
-1.2 ** 3.0  # => 1.7279999999999998
-3.0 + 4.5 - 1.3 / 2.4 * 3 % 1.2 ** 3.0 # => 5.875
-0.0 ** 0 # => 1.0
+p 1.2 ** 3.0  # => 1.7279999999999998
+p 3.0 + 4.5 - 1.3 / 2.4 * 3 % 1.2 ** 3.0 # => 5.875
+p 0.0 ** 0 # => 1.0
 ```
 
 ### def <=>(other) -> -1 | 0 | 1 | nil
@@ -102,11 +102,11 @@ self と other を比較して、self が大きい時に正、
 比較できない場合はnilを返します
 
 ```ruby title="例"
-3.05 <=> 3.14     # => -1
-1.732 <=> 1.414   # => 1
-3.3 - 3.3 <=> 0.0 # => 0
-3.14 <=> "hoge"   # => nil
-3.14 <=> 0.0/0.0  # => nil
+p 3.05 <=> 3.14   # => -1
+p 1.732 <=> 1.414 # => 1
+p 3.3 - 3.3 <=> 0.0 # => 0
+p 3.14 <=> "hoge" # => nil
+p 3.14 <=> 0.0/0.0  # => nil
 ```
 
 ### def ==(other) -> bool
@@ -119,15 +119,15 @@ self と other を比較して、self が大きい時に正、
              そうでなければ false を返します。
 
 ```ruby title="例"
-3.14 == 3.14000 # => true
-3.14 == 3.1415  # => false
+p 3.14 == 3.14000 # => true
+p 3.14 == 3.1415  # => false
 ```
 
 NaNどうしの比較は、未定義です。
 ```ruby title="例"
-Float::NAN == Float::NAN      # => false
-[Float::NAN] == [Float::NAN]  # => true
-[Float::NAN] == [0.0 / 0.0]   # => false
+p Float::NAN == Float::NAN    # => false
+p [Float::NAN] == [Float::NAN]  # => true
+p [Float::NAN] == [0.0 / 0.0] # => false
 ```
 
 ### def <(other)  -> bool
@@ -138,8 +138,8 @@ Float::NAN == Float::NAN      # => false
              そうでなければ false を返します。
 
 ```ruby title="例"
-3.14 <  3.1415  # => true
-3.14 <= 3.1415  # => true
+p 3.14 <  3.1415  # => true
+p 3.14 <= 3.1415  # => true
 ```
 
 ### def <=(other) -> bool
@@ -151,8 +151,8 @@ Float::NAN == Float::NAN      # => false
              そうでなければ false を返します。
 
 ```ruby title="例"
-3.14 <  3.1415  # => true
-3.14 <= 3.1415  # => true
+p 3.14 <  3.1415  # => true
+p 3.14 <= 3.1415  # => true
 ```
 
 ### def >(other)  -> bool
@@ -163,8 +163,8 @@ Float::NAN == Float::NAN      # => false
              そうでなければ false を返します。
 
 ```ruby title="例"
-3.14 >  3.1415  # => false
-3.14 >= 3.1415  # => false
+p 3.14 >  3.1415  # => false
+p 3.14 >= 3.1415  # => false
 ```
 
 ### def >=(other) -> bool
@@ -176,8 +176,8 @@ Float::NAN == Float::NAN      # => false
              そうでなければ false を返します。
 
 ```ruby title="例"
-3.14 >  3.1415  # => false
-3.14 >= 3.1415  # => false
+p 3.14 >  3.1415  # => false
+p 3.14 >= 3.1415  # => false
 ```
 
 ### def finite? -> bool
@@ -186,9 +186,9 @@ Float::NAN == Float::NAN      # => false
 そうでない場合に false を返します。
 
 ```ruby title="例"
-3.14.finite? # => true
+p 3.14.finite? # => true
 inf = 1.0/0
-inf.finite? # => false
+p inf.finite? # => false
 ```
 
 ### def infinite? -> 1 | -1 | nil
@@ -220,7 +220,7 @@ p nan.nan?  # => true
 self を返します。
 
 ```ruby title="例"
-3.14.to_f   # => 3.14
+p 3.14.to_f # => 3.14
 ```
 
 ### def to_i -> Integer
@@ -241,11 +241,11 @@ self を返します。
 #@end
 
 ```ruby title="例"
-2.8.truncate           # => 2
-(-2.8).truncate        # => -2
+p 2.8.truncate         # => 2
+p (-2.8).truncate      # => -2
 #@since 2.4.0
-1.234567.truncate(2)   # => 1.23
-34567.89.truncate(-2)  # => 34500
+p 1.234567.truncate(2) # => 1.23
+p 34567.89.truncate(-2)  # => 34500
 #@end
 ```
 
@@ -270,8 +270,8 @@ pi3.hash # => 420540030
 自身の絶対値を返します。
 
 ```ruby title="例"
-34.56.abs      # => 34.56
--34.56.abs     # => 34.56
+p 34.56.abs    # => 34.56
+p -34.56.abs   # => 34.56
 ```
 
 #@since 2.4.0
@@ -291,26 +291,26 @@ pi3.hash # => 420540030
 #@end
 
 ```ruby title="例"
-1.2.ceil      # => 2
-2.0.ceil      # => 2
-(-1.2).ceil   # => -1
-(-2.0).ceil   # => -2
+p 1.2.ceil    # => 2
+p 2.0.ceil    # => 2
+p (-1.2).ceil # => -1
+p (-2.0).ceil # => -2
 #@since 2.4.0
 
-1.234567.ceil(2)   # => 1.24
-1.234567.ceil(3)   # => 1.235
-1.234567.ceil(4)   # => 1.2346
-1.234567.ceil(5)   # => 1.23457
+p 1.234567.ceil(2) # => 1.24
+p 1.234567.ceil(3) # => 1.235
+p 1.234567.ceil(4) # => 1.2346
+p 1.234567.ceil(5) # => 1.23457
 
-34567.89.ceil(-5)  # => 100000
-34567.89.ceil(-4)  # => 40000
-34567.89.ceil(-3)  # => 35000
-34567.89.ceil(-2)  # => 34600
-34567.89.ceil(-1)  # => 34570
-34567.89.ceil(0)   # => 34568
-34567.89.ceil(1)   # => 34567.9
-34567.89.ceil(2)   # => 34567.89
-34567.89.ceil(3)   # => 34567.89
+p 34567.89.ceil(-5)  # => 100000
+p 34567.89.ceil(-4)  # => 40000
+p 34567.89.ceil(-3)  # => 35000
+p 34567.89.ceil(-2)  # => 34600
+p 34567.89.ceil(-1)  # => 34570
+p 34567.89.ceil(0) # => 34568
+p 34567.89.ceil(1) # => 34567.9
+p 34567.89.ceil(2) # => 34567.89
+p 34567.89.ceil(3) # => 34567.89
 #@end
 ```
 
@@ -335,11 +335,11 @@ self を other で割った商 q と余り r を、
 - **param** `other` -- 自身を割る数を指定します。
 
 ```ruby title="例"
-11.divmod(3)         # => [3, 2]
-(11.5).divmod(3.5)   # => [3, 1.0]
-11.divmod(-3)        # => [-4, -1]
-11.divmod(3.5)       # => [3, 0.5]
-(-11).divmod(3.5)    # => [-4, 3.0]
+p 11.divmod(3)       # => [3, 2]
+p (11.5).divmod(3.5) # => [3, 1.0]
+p 11.divmod(-3)      # => [-4, -1]
+p 11.divmod(3.5)     # => [3, 0.5]
+p (-11).divmod(3.5)  # => [-4, 3.0]
 ```
 
 - **SEE** [m:Numeric#div], [m:Numeric#modulo]
@@ -361,26 +361,26 @@ self を other で割った商 q と余り r を、
 #@end
 
 ```ruby title="例"
-1.2.floor      # => 1
-2.0.floor      # => 2
-(-1.2).floor   # => -2
-(-2.0).floor   # => -2
+p 1.2.floor    # => 1
+p 2.0.floor    # => 2
+p (-1.2).floor # => -2
+p (-2.0).floor # => -2
 #@since 2.4.0
 
-1.234567.floor(2)   # => 1.23
-1.234567.floor(3)   # => 1.234
-1.234567.floor(4)   # => 1.2345
-1.234567.floor(5)   # => 1.23456
+p 1.234567.floor(2) # => 1.23
+p 1.234567.floor(3) # => 1.234
+p 1.234567.floor(4) # => 1.2345
+p 1.234567.floor(5) # => 1.23456
 
-34567.89.floor(-5)  # => 0
-34567.89.floor(-4)  # => 30000
-34567.89.floor(-3)  # => 34000
-34567.89.floor(-2)  # => 34500
-34567.89.floor(-1)  # => 34560
-34567.89.floor(0)   # => 34567
-34567.89.floor(1)   # => 34567.8
-34567.89.floor(2)   # => 34567.89
-34567.89.floor(3)   # => 34567.89
+p 34567.89.floor(-5)  # => 0
+p 34567.89.floor(-4)  # => 30000
+p 34567.89.floor(-3)  # => 34000
+p 34567.89.floor(-2)  # => 34500
+p 34567.89.floor(-1)  # => 34560
+p 34567.89.floor(0) # => 34567
+p 34567.89.floor(1) # => 34567.8
+p 34567.89.floor(2) # => 34567.89
+p 34567.89.floor(3) # => 34567.89
 #@end
 ```
 
@@ -394,8 +394,8 @@ self を other で割った商 q と余り r を、
 - **param** `other` -- 自身と比較したい数値を指定します。
 
 ```ruby title="例"
-1.0.eql?(1)   # => false
-1.0.eql?(1.0) # => true
+p 1.0.eql?(1) # => false
+p 1.0.eql?(1.0) # => true
 ```
 
 ### def round(ndigits = 0)  -> Integer | Float
@@ -430,30 +430,30 @@ self を other で割った商 q と余り r を、
                  合発生します。
 
 ```ruby title="例"
-1.0.round      # => 1
-1.2.round      # => 1
-(-1.2).round   # => -1
-(-1.5).round   # => -2
+p 1.0.round    # => 1
+p 1.2.round    # => 1
+p (-1.2).round # => -1
+p (-1.5).round # => -2
 
 t = Math::PI # => 3.141592653589793
-t.round(3)   # => 3.142
-t.round(0)   # => 3
-t.round(1)   # => 3.1
+p t.round(3) # => 3.142
+p t.round(0) # => 3
+p t.round(1) # => 3.1
 
 t = t**10      # => 93648.04747608298
-t.round(-0)    # => 93648
-t.round(-1)    # => 93650
-t.round(-2)    # => 93600
-t.round(-3)    # => 94000
-t.round(-100)  # => 0
+p t.round(-0)  # => 93648
+p t.round(-1)  # => 93650
+p t.round(-2)  # => 93600
+p t.round(-3)  # => 94000
+p t.round(-100)  # => 0
 #@since 2.4.0
 
-2.5.round(half: :up)   # => 3
-2.5.round(half: :even) # => 2
-2.5.round(half: :down) # => 2
-3.5.round(half: :up)   # => 4
-3.5.round(half: :even) # => 4
-3.5.round(half: :down) # => 3
+p 2.5.round(half: :up) # => 3
+p 2.5.round(half: :even) # => 2
+p 2.5.round(half: :down) # => 2
+p 3.5.round(half: :up) # => 4
+p 3.5.round(half: :even) # => 4
+p 3.5.round(half: :down) # => 3
 #@end
 ```
 
@@ -464,9 +464,9 @@ t.round(-100)  # => 0
 自身がゼロの時、trueを返します。そうでない場合は false を返します。
 
 ```ruby title="例"
-10.0.zero?            # => false
-0.zero?               # => true
-0.0.zero?             # => true
+p 10.0.zero?          # => false
+p 0.zero?             # => true
+p 0.0.zero?           # => true
 ```
 
 #@since 2.3.0
@@ -475,9 +475,9 @@ t.round(-100)  # => 0
 self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
 
 ```ruby title="例"
-0.1.positive?   # => true
-0.0.positive?   # => false
--0.1.positive?  # => false
+p 0.1.positive? # => true
+p 0.0.positive? # => false
+p -0.1.positive?  # => false
 ```
 
 - **SEE** [m:Float#negative?]
@@ -487,9 +487,9 @@ self が 0 より大きい場合に true を返します。そうでない場合
 self が 0 未満の場合に true を返します。そうでない場合に false を返します。
 
 ```ruby title="例"
--0.1.negative?   # => true
-0.0.negative?    # => false
-0.1.negative?    # => false
+p -0.1.negative? # => true
+p 0.0.negative?  # => false
+p 0.1.negative?  # => false
 ```
 
 - **SEE** [m:Float#positive?]
@@ -508,12 +508,12 @@ self が 0 未満の場合に true を返します。そうでない場合に fa
 - **return** -- 文字列を返します。
 
 ```ruby title="例"
-0.00001.to_s             # => "1.0e-05"
-3.14.to_s                # => "3.14"
-10000_00000_00000.0.to_s # => "100000000000000.0"
-10000_00000_00000_00000.0.to_s # => "1.0e+19"
-(1.0/0.0).to_s           # => "Infinity"
-(0.0/0.0).to_s           # => "NaN"
+p 0.00001.to_s           # => "1.0e-05"
+p 3.14.to_s              # => "3.14"
+p 10000_00000_00000.0.to_s # => "100000000000000.0"
+p 10000_00000_00000_00000.0.to_s # => "1.0e+19"
+p (1.0/0.0).to_s         # => "Infinity"
+p (0.0/0.0).to_s         # => "NaN"
 ```
 
 ### def arg   -> 0 | Float
@@ -523,8 +523,8 @@ self が 0 未満の場合に true を返します。そうでない場合に fa
 自身の偏角(正の数なら 0、負の数なら [m:Math::PI])を返します。
 
 ```ruby title="例"
-1.arg  # => 0
--1.arg # => 3.141592653589793
+p 1.arg  # => 0
+p -1.arg # => 3.141592653589793
 ```
 
 ただし、自身が NaN(Not a number) であった場合は、NaN を返します。
@@ -536,8 +536,8 @@ self が 0 未満の場合に true を返します。そうでない場合に fa
 - **return** -- 分母を返します。
 
 ```ruby title="例"
-2.0.denominator         # => 1
-0.5.denominator         # => 2
+p 2.0.denominator       # => 1
+p 0.5.denominator       # => 2
 ```
 
 - **SEE** [m:Float#numerator]
@@ -549,8 +549,8 @@ self が 0 未満の場合に true を返します。そうでない場合に fa
 - **return** -- 分子を返します。
 
 ```ruby title="例"
-2.0.numerator           # => 2
-0.5.numerator           # => 1
+p 2.0.numerator         # => 2
+p 0.5.numerator         # => 1
 ```
 
 - **SEE** [m:Float#denominator]
@@ -560,7 +560,7 @@ self が 0 未満の場合に true を返します。そうでない場合に fa
 自身を [c:Rational] に変換します。
 
 ```ruby title="例"
-0.5.to_r      # => (1/2)
+p 0.5.to_r    # => (1/2)
 ```
 
 ### def rationalize      -> Rational
@@ -575,9 +575,9 @@ eps を省略した場合は誤差が最も小さくなるような [c:Rational]
 - **param** `eps` -- 許容する誤差
 
 ```ruby title="例"
-0.3.rationalize          # => (3/10)
-1.333.rationalize        # => (1333/1000)
-1.333.rationalize(0.01)  # => (4/3)
+p 0.3.rationalize        # => (3/10)
+p 1.333.rationalize      # => (1333/1000)
+p 1.333.rationalize(0.01)  # => (4/3)
 ```
 
 #@since 2.2.0

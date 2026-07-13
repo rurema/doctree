@@ -77,9 +77,9 @@ FileTest.executable?('/bin/bash') # => true
 ```ruby title="例"
 IO.write("empty.txt", "")
 File.chmod(0744, "empty.txt")
-FileTest.executable_real?("empty.txt")      # => true
+p FileTest.executable_real?("empty.txt")    # => true
 File.chmod(0644, "empty.txt")
-FileTest.executable_real?("empty.txt")      # => false
+p FileTest.executable_real?("empty.txt")    # => false
 ```
 
 ### module_function def exist?(file)    -> bool
@@ -115,9 +115,9 @@ FileTest.exist?('/etc/no_such_directory') # => false
 ```ruby title="例"
 IO.write("testfile", "")
 File.chown(-1, Process.gid, "testfile")
-FileTest.grpowned?("testfile")      # => true
+p FileTest.grpowned?("testfile")    # => true
 File.chown(-1, Process.gid + 10, "testfile")
-FileTest.grpowned?("testfile")      # => false
+p FileTest.grpowned?("testfile")    # => false
 ```
 
 ### module_function def directory?(file)    -> bool
@@ -207,7 +207,7 @@ require "socket"
 
 IO.write("testfile", "test")
 p FileTest.socket?("testfile")                                           # => false
-Socket.unix_server_socket('testsock') { p FileTest.socket?('testsock') } # => true
+p Socket.unix_server_socket('testsock') { p FileTest.socket?('testsock') } # => true
 ```
 
 ### module_function def owned?(file)    -> bool
@@ -221,9 +221,9 @@ Socket.unix_server_socket('testsock') { p FileTest.socket?('testsock') } # => tr
 ```ruby title="例"
 IO.write("testfile", "")
 File.chown(Process.uid, -1, "testfile")
-FileTest.owned?("testfile")      # => true
+p FileTest.owned?("testfile")    # => true
 File.chown(501, -1, "testfile")
-FileTest.owned?("testfile")      # => false
+p FileTest.owned?("testfile")    # => false
 ```
 
 ### module_function def readable?(file)    -> bool
@@ -235,9 +235,9 @@ FileTest.owned?("testfile")      # => false
 ```ruby title="例"
 IO.write("testfile", "")
 File.chmod(0644, "testfile")
-FileTest.readable?("testfile")      # => true
+p FileTest.readable?("testfile")    # => true
 File.chmod(0200, "testfile")
-FileTest.readable?("testfile")      # => false
+p FileTest.readable?("testfile")    # => false
 ```
 
 ### module_function def readable_real?(file)    -> bool
@@ -264,9 +264,9 @@ FileTest.readable?("testfile")      # => false
 require 'fileutils'
 IO.write("testfile", "")
 FileUtils.chmod("u+s", "testfile")
-FileTest.setuid?("testfile")      # => true
+p FileTest.setuid?("testfile")    # => true
 FileUtils.chmod("u-s", "testfile")
-FileTest.setuid?("testfile")      # => false
+p FileTest.setuid?("testfile")    # => false
 ```
 
 ### module_function def setgid?(file)    -> bool
@@ -280,9 +280,9 @@ FileTest.setuid?("testfile")      # => false
 require 'fileutils'
 IO.write("testfile", "")
 FileUtils.chmod("g+s", "testfile")
-FileTest.setgid?("testfile")      # => true
+p FileTest.setgid?("testfile")    # => true
 FileUtils.chmod("g-s", "testfile")
-FileTest.setgid?("testfile")      # => false
+p FileTest.setgid?("testfile")    # => false
 ```
 
 ### module_function def size(file)    -> Integer
@@ -313,9 +313,9 @@ FileTest.size('/etc/passwd') # => 5925
 
 ```ruby title="例"
 IO.write("testfile", "test")
-FileTest.size?("testfile")      # => 4
+p FileTest.size?("testfile")    # => 4
 File.delete("testfile")
-FileTest.size?("testfile")      # => nil
+p FileTest.size?("testfile")    # => nil
 ```
 
 - **SEE** [m:FileTest?.size], [m:FileTest?.zero?] 
@@ -331,9 +331,9 @@ FileTest.size?("testfile")      # => nil
 require 'fileutils'
 IO.write("testfile", "")
 FileUtils.chmod("o+t", "testfile")
-FileTest.sticky?("testfile")      # => true
+p FileTest.sticky?("testfile")    # => true
 FileUtils.chmod("o-t", "testfile")
-FileTest.sticky?("testfile")      # => false
+p FileTest.sticky?("testfile")    # => false
 ```
 
 ### module_function def symlink?(file)    -> bool
@@ -344,9 +344,9 @@ FileTest.sticky?("testfile")      # => false
 
 ```ruby title="例"
 IO.write("testfile", "test")
-FileTest.symlink?("testfile")      # => false
+p FileTest.symlink?("testfile")    # => false
 File.symlink("testfile", "testlink")
-FileTest.symlink?("testlink")      # => true
+p FileTest.symlink?("testlink")    # => true
 ```
 
 ### module_function def writable?(file)    -> bool
@@ -358,9 +358,9 @@ FileTest.symlink?("testlink")      # => true
 ```ruby title="例"
 IO.write("testfile", "test")
 File.chmod(0600, "testfile")
-FileTest.writable?("testfile")      # => true
+p FileTest.writable?("testfile")    # => true
 File.chmod(0400, "testfile")
-FileTest.writable?("testfile")      # => false
+p FileTest.writable?("testfile")    # => false
 ```
 
 ### module_function def writable_real?(file)    -> bool
@@ -388,9 +388,9 @@ FileTest.writable?("testfile")      # => false
 
 ```ruby title="例:"
 IO.write("zero.txt", "")
-FileTest.zero?("zero.txt")      # => true
+p FileTest.zero?("zero.txt")    # => true
 IO.write("nonzero.txt", "1")
-FileTest.zero?("nonzero.txt")  # => false
+p FileTest.zero?("nonzero.txt")  # => false
 ```
 
 - **SEE** [m:FileTest?.size], [m:FileTest?.size?]

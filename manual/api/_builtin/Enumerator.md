@@ -150,7 +150,7 @@ Enumerator.produce { scanner.scan(PATTERN) }.slice_after { scanner.eos? }.first
 
 ```ruby title="例"
 e = (1..3).each + [4, 5]
-e.to_a #=> [1, 2, 3, 4, 5]
+p e.to_a #=> [1, 2, 3, 4, 5]
 ```
 
 - **SEE** [m:Enumerable#chain]
@@ -172,21 +172,21 @@ e.to_a #=> [1, 2, 3, 4, 5]
 str = "Yet Another Ruby Hacker"
 
 enum = Enumerator.new {|y| str.scan(/\w+/) {|w| y << w }}
-enum.each {|word| p word }              # => "Yet"
+p enum.each {|word| p word }            # => "Yet"
                                         #    "Another"
                                         #    "Ruby"
                                         #    "Hacker"
 
-str.scan(/\w+/) {|word| p word }        # => "Yet"
+p str.scan(/\w+/) {|word| p word }      # => "Yet"
                                         #    "Another"
                                         #    "Ruby"
                                         #    "Hacker"
 ```
 
 ```ruby title="例2"
-"Hello, world!".scan(/\w+/)                     # => ["Hello", "world"]
-"Hello, world!".to_enum(:scan, /\w+/).to_a      # => ["Hello", "world"]
-"Hello, world!".to_enum(:scan).each(/\w+/).to_a # => ["Hello", "world"]
+p "Hello, world!".scan(/\w+/)                   # => ["Hello", "world"]
+p "Hello, world!".to_enum(:scan, /\w+/).to_a    # => ["Hello", "world"]
+p "Hello, world!".to_enum(:scan).each(/\w+/).to_a # => ["Hello", "world"]
 
 obj = Object.new
 
@@ -199,13 +199,13 @@ end
 
 enum = obj.to_enum :each_arg, :a, :x
 
-enum.each.to_a                  # => [:a, :x, []]
-enum.each.equal?(enum)          # => true
-enum.each { |elm| elm }         # => :method_returned
+p enum.each.to_a                # => [:a, :x, []]
+p enum.each.equal?(enum)        # => true
+p enum.each { |elm| elm }       # => :method_returned
 
-enum.each(:y, :z).to_a          # => [:a, :x, [:y, :z]]
-enum.each(:y, :z).equal?(enum)  # => false
-enum.each(:y, :z) { |elm| elm } # => :method_returned
+p enum.each(:y, :z).to_a        # => [:a, :x, [:y, :z]]
+p enum.each(:y, :z).equal?(enum)  # => false
+p enum.each(:y, :z) { |elm| elm } # => :method_returned
 ```
 
 ### def next -> object
@@ -506,9 +506,9 @@ self の要素数を返します。
 ます。
 
 ```ruby title="例"
-(1..100).to_a.permutation(4).size # => 94109400
-loop.size # => Float::INFINITY
-(1..100).drop_while.size # => nil
+p (1..100).to_a.permutation(4).size # => 94109400
+p loop.size # => Float::INFINITY
+p (1..100).drop_while.size # => nil
 ```
 
 - **SEE** [m:Enumerator.new]

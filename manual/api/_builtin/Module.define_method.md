@@ -21,5 +21,5 @@ class Foo
   def foo() p :foo end
   define_method(:bar, instance_method(:foo))
 end
-Foo.new.bar    # => :foo
+p Foo.new.bar  # => :foo
 ```

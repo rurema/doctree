@@ -69,8 +69,8 @@ end
 tanaka1 = Person.new("tanaka", 24)
 tanaka2 = Person.new("tanaka", 24)
 
-tanaka1 == tanaka1    #=> true
-tanaka1 == tanaka2    #=> false
+p tanaka1 == tanaka1  #=> true
+p tanaka1 == tanaka2  #=> false
 ```
 
 - **SEE** [m:BasicObject#equal?], [m:Object#==], [m:Object#equal?],
@@ -92,10 +92,10 @@ original = "a"
 copied = original.dup
 substituted = original
 
-original == copied          #=> true
-original == substituted     #=> true
-original.equal? copied      #=> false
-original.equal? substituted #=> true
+p original == copied        #=> true
+p original == substituted   #=> true
+p original.equal? copied    #=> false
+p original.equal? substituted #=> true
 ```
 
 - **SEE** [m:Object#equal?], [m:Object#==], [m:Object#eql?]
@@ -203,8 +203,8 @@ class Mail
   end
 end
 mail = Mail.new
-mail.send :delete, "gentle", "readers"       # => "(Mail#send) - delete gentle,readers"
-mail.__send__ :delete, "gentle", "readers"   # => "(Mail#delete) - delete gentle,readers"
+p mail.send :delete, "gentle", "readers"     # => "(Mail#send) - delete gentle,readers"
+p mail.__send__ :delete, "gentle", "readers" # => "(Mail#delete) - delete gentle,readers"
 ```
 
 - **SEE** [m:Object#send]
@@ -221,11 +221,11 @@ mail.__send__ :delete, "gentle", "readers"   # => "(Mail#delete) - delete gentle
 ```ruby title="例"
 # frozen_string_literal: false
 obj = Object.new
-obj.object_id == obj.__id__              # => true
-Object.new.__id__  == Object.new.__id__  # => false
-(21 * 2).__id__    == (21 * 2).__id__    # => true
-"hello".__id__     == "hello".__id__     # => false
-"hi".freeze.__id__ == "hi".freeze.__id__ # => true
+p obj.object_id == obj.__id__            # => true
+p Object.new.__id__  == Object.new.__id__  # => false
+p (21 * 2).__id__    == (21 * 2).__id__  # => true
+p "hello".__id__     == "hello".__id__   # => false
+p "hi".freeze.__id__ == "hi".freeze.__id__ # => true
 ```
 
 - **SEE** [m:Object#object_id], [ruby-dev:42840]
@@ -272,7 +272,7 @@ class Foo
 end
 
 dic = Foo.new({:English => %w(zero one two), :Esperanto => %w(nulo unu du)})
-dic.find_2_in :Esperanto #=> "du"
+p dic.find_2_in :Esperanto #=> "du"
 ```
 
 #@since 1.9.2

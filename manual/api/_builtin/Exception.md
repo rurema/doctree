@@ -166,12 +166,12 @@ begin
   end
 rescue
 #@since 3.4
-  $!.backtrace # => ["/path/to/test.rb:5:in 'rescue in <main>'", "/path/to/test.rb:2:in '<main>'"]
+  p $!.backtrace # => ["/path/to/test.rb:5:in 'rescue in <main>'", "/path/to/test.rb:2:in '<main>'"]
 #@else
-  $!.backtrace # => ["/path/to/test.rb:5:in `rescue in <main>'", "/path/to/test.rb:2:in `<main>'"]
+  p $!.backtrace # => ["/path/to/test.rb:5:in `rescue in <main>'", "/path/to/test.rb:2:in `<main>'"]
 #@end
   $!.set_backtrace(["dummy1", "dummy2"])
-  $!.backtrace # => ["dummy1", "dummy2"]
+  p $!.backtrace # => ["dummy1", "dummy2"]
 end
 ```
 

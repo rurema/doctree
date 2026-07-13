@@ -84,5 +84,5 @@ p false.^(1 + 1)   #=> true
 常に文字列 "false" を返します。
 
 ```ruby title="例"
-false.to_s      # => "false"
+p false.to_s    # => "false"
 ```

@@ -310,10 +310,10 @@ sleep 10
 File.chmod(0644, "testfile")
 sleep 10
 File.read("testfile")
-File.stat("testfile").birthtime   #=> 2014-02-24 11:19:17 +0900
-File.stat("testfile").mtime       #=> 2014-02-24 11:19:27 +0900
-File.stat("testfile").ctime       #=> 2014-02-24 11:19:37 +0900
-File.stat("testfile").atime       #=> 2014-02-24 11:19:47 +0900
+p File.stat("testfile").birthtime #=> 2014-02-24 11:19:17 +0900
+p File.stat("testfile").mtime     #=> 2014-02-24 11:19:27 +0900
+p File.stat("testfile").ctime     #=> 2014-02-24 11:19:37 +0900
+p File.stat("testfile").atime     #=> 2014-02-24 11:19:47 +0900
 ```
 
 ### def directory? -> bool
@@ -553,7 +553,7 @@ Dir.glob("/usr/bin/*") {|bd|
 
 ```ruby
 m = File.stat("/etc/passwd").world_readable?  # => 420
-sprintf("%o", m)                              # => "644"
+p sprintf("%o", m)                            # => "644"
 ```
 
 ### def world_writable? -> Integer | nil
@@ -565,5 +565,5 @@ sprintf("%o", m)                              # => "644"
 
 ```ruby
 m = File.stat("/tmp").world_writable?         # => 511
-sprintf("%o", m)                              # => "777"
+p sprintf("%o", m)                            # => "777"
 ```

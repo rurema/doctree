@@ -9,12 +9,12 @@
 ```ruby title="例"
 #@since 3.0
 module Kernel
-  alias_method :hoge, :puts # => :hoge
-  alias_method "foo", :puts # => :foo
+  p alias_method :hoge, :puts # => :hoge
+  p alias_method "foo", :puts # => :foo
 end
 #@else
 module Kernel
-  alias_method :hoge, :puts # => Kernel
+  p alias_method :hoge, :puts # => Kernel
 end
 #@end
 ```

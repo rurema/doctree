@@ -10,25 +10,25 @@ library: _builtin
 [m:String#to_c] のいずれかを使用します。
 
 ```ruby title="Complex オブジェクトの作り方"
-Complex(1)           # => (1+0i)
-Complex(2, 3)        # => (2+3i)
-Complex.polar(2, 3)  # => (-1.9799849932008908+0.2822400161197344i)
-Complex(0.3)         # => (0.3+0i)
-Complex('0.3-0.5i')  # => (0.3-0.5i)
-Complex('2/3+3/4i')  # => ((2/3)+(3/4)*i)
-Complex('1@2')       # => (-0.4161468365471424+0.9092974268256817i)
-3.to_c               # => (3+0i)
-0.3.to_c             # => (0.3+0i)
-'0.3-0.5i'.to_c      # => (0.3-0.5i)
-'2/3+3/4i'.to_c      # => ((2/3)+(3/4)*i)
-'1@2'.to_c           # => (-0.4161468365471424+0.9092974268256817i)
+p Complex(1)         # => (1+0i)
+p Complex(2, 3)      # => (2+3i)
+p Complex.polar(2, 3)  # => (-1.9799849932008908+0.2822400161197344i)
+p Complex(0.3)       # => (0.3+0i)
+p Complex('0.3-0.5i')  # => (0.3-0.5i)
+p Complex('2/3+3/4i')  # => ((2/3)+(3/4)*i)
+p Complex('1@2')     # => (-0.4161468365471424+0.9092974268256817i)
+p 3.to_c             # => (3+0i)
+p 0.3.to_c           # => (0.3+0i)
+p '0.3-0.5i'.to_c    # => (0.3-0.5i)
+p '2/3+3/4i'.to_c    # => ((2/3)+(3/4)*i)
+p '1@2'.to_c         # => (-0.4161468365471424+0.9092974268256817i)
 ```
 
 [c:Complex] オブジェクトは有理数の形式も実数の形式も扱う事ができます。
 
 ```ruby title="例"
-Complex(1, 1) / 2    # => ((1/2)+(1/2)*i)
-Complex(1, 1) / 2.0  # => (0.5+0.5i)
+p Complex(1, 1) / 2  # => ((1/2)+(1/2)*i)
+p Complex(1, 1) / 2.0  # => (0.5+0.5i)
 ```
 
 ## Instance Methods
@@ -40,9 +40,9 @@ Complex(1, 1) / 2.0  # => (0.5+0.5i)
 - **param** `other` -- 自身に掛ける数
 
 ```ruby title="例"
-Complex(1, 2) * 2              # => (2+4i)
-Complex(1, 2) * Complex(2, 3)  # => (-4+7i)
-Complex(1, 2) * Rational(1, 2) # => ((1/2)+(1/1)*i)
+p Complex(1, 2) * 2            # => (2+4i)
+p Complex(1, 2) * Complex(2, 3)  # => (-4+7i)
+p Complex(1, 2) * Rational(1, 2) # => ((1/2)+(1/1)*i)
 ```
 
 ### def **(other) -> Complex
@@ -52,7 +52,7 @@ Complex(1, 2) * Rational(1, 2) # => ((1/2)+(1/1)*i)
 - **param** `other` -- 自身を other 乗する数
 
 ```ruby title="例"
-Complex('i') ** 2             # => (-1+0i)
+p Complex('i') ** 2           # => (-1+0i)
 ```
 
 ### def +(other) -> Complex
@@ -62,7 +62,7 @@ Complex('i') ** 2             # => (-1+0i)
 - **param** `other` -- 自身に足す数
 
 ```ruby title="例"
-Complex(1, 2) + Complex(2, 3) # => (3+5i)
+p Complex(1, 2) + Complex(2, 3) # => (3+5i)
 ```
 
 ### def -(other) -> Complex
@@ -72,7 +72,7 @@ Complex(1, 2) + Complex(2, 3) # => (3+5i)
 - **param** `other` -- 自身から引く数
 
 ```ruby title="例"
-Complex(1, 2) - Complex(2, 3) # => (-1-1i)
+p Complex(1, 2) - Complex(2, 3) # => (-1-1i)
 ```
 
 ### def -@ -> Complex
@@ -80,8 +80,8 @@ Complex(1, 2) - Complex(2, 3) # => (-1-1i)
 自身の符号を反転させたものを返します。
 
 ```ruby title="例"
--Complex(1)     # => (-1+0i)
--Complex(-1, 1) # => (1-1i)
+p -Complex(1)   # => (-1+0i)
+p -Complex(-1, 1) # => (1-1i)
 ```
 
 ### def /(other)   -> Complex
@@ -92,8 +92,8 @@ Complex(1, 2) - Complex(2, 3) # => (-1-1i)
 - **param** `other` -- 自身を割る数
 
 ```ruby title="例"
-Complex(10.0) / 3  # => (3.3333333333333335+(0/1)*i)
-Complex(10)   / 3  # => ((10/3)+(0/1)*i)
+p Complex(10.0) / 3  # => (3.3333333333333335+(0/1)*i)
+p Complex(10)   / 3  # => ((10/3)+(0/1)*i)
 ```
 
 - **SEE** [m:Numeric#quo]
@@ -105,9 +105,9 @@ Complex(10)   / 3  # => ((10/3)+(0/1)*i)
 - **param** `other` -- 自身と比較する数値
 
 ```ruby title="例"
-Complex(2, 1) == Complex(1) # => false
-Complex(1, 0) == Complex(1) # => true
-Complex(1, 0) == 1          # => true
+p Complex(2, 1) == Complex(1) # => false
+p Complex(1, 0) == Complex(1) # => true
+p Complex(1, 0) == 1        # => true
 ```
 
 #@since 2.7.0
@@ -122,11 +122,11 @@ other が Complex で虚部がゼロの場合も同様です。
 - **param** `other` -- 自身と比較する数値
 
 ```ruby title="例"
-Complex(2, 3)  <=> Complex(2, 3) #=> nil
-Complex(2, 3)  <=> 1             #=> nil
-Complex(2)     <=> 1             #=> 1
-Complex(2)     <=> 2             #=> 0
-Complex(2)     <=> 3             #=> -1
+p Complex(2, 3)  <=> Complex(2, 3) #=> nil
+p Complex(2, 3)  <=> 1           #=> nil
+p Complex(2)     <=> 1           #=> 1
+p Complex(2)     <=> 2           #=> 0
+p Complex(2)     <=> 3           #=> -1
 ```
 
 #@end
@@ -162,9 +162,9 @@ sqrt(self.real ** 2 + self.imag ** 2)
 `````
 
 ```ruby title="例"
-Complex(1, 2).abs         # => 2.23606797749979
-Complex(3, 4).abs         # => 5.0
-Complex('1/2', '1/2').abs # => 0.7071067811865476
+p Complex(1, 2).abs       # => 2.23606797749979
+p Complex(3, 4).abs       # => 5.0
+p Complex('1/2', '1/2').abs # => 0.7071067811865476
 ```
 
 - **SEE** [m:Complex#abs2]
@@ -180,9 +180,9 @@ self.real ** 2 + self.imag ** 2
 `````
 
 ```ruby title="例"
-Complex(1, 1).abs2         # => 2
-Complex(1.0, 1.0).abs2     # => 2.0
-Complex('1/2', '1/2').abs2 # => (1/2)
+p Complex(1, 1).abs2       # => 2
+p Complex(1.0, 1.0).abs2   # => 2.0
+p Complex('1/2', '1/2').abs2 # => (1/2)
 ```
 
 - **SEE** [m:Complex#abs]
@@ -194,21 +194,21 @@ Complex('1/2', '1/2').abs2 # => (1/2)
 自身の偏角を[-π,π]の範囲で返します。
 
 ```ruby title="例"
-Complex.polar(3, Math::PI/2).arg # => 1.5707963267948966
+p Complex.polar(3, Math::PI/2).arg # => 1.5707963267948966
 ```
 
 非正の実軸付近での挙動に注意してください。以下の例のように虚部が 0.0 と
 -0.0 では値が変わります。
 
 ```ruby title="例"
-Complex(-1, 0).arg              #=>  3.141592653589793
-Complex(-1, -0).arg             #=>  3.141592653589793
-Complex(-1, -0.0).arg           #=> -3.141592653589793
+p Complex(-1, 0).arg            #=>  3.141592653589793
+p Complex(-1, -0).arg           #=>  3.141592653589793
+p Complex(-1, -0.0).arg         #=> -3.141592653589793
 
-Complex(0, 0.0).arg             #=>  0.0
-Complex(0, -0.0).arg            #=> -0.0
-Complex(-0.0, 0).arg            #=>  3.141592653589793
-Complex(-0.0, -0.0).arg         #=> -3.141592653589793
+p Complex(0, 0.0).arg           #=>  0.0
+p Complex(0, -0.0).arg          #=> -0.0
+p Complex(-0.0, 0).arg          #=>  3.141592653589793
+p Complex(-0.0, -0.0).arg       #=> -3.141592653589793
 ```
 
 #@until 1.9.3
@@ -228,8 +228,8 @@ Complex(-0.0, -0.0).arg         #=> -3.141592653589793
 #@end
 
 ```ruby title="例"
-(1 + 1i).finite?                 # => true
-(Float::INFINITY + 1i).finite?   # => false
+p (1 + 1i).finite?               # => true
+p (Float::INFINITY + 1i).finite? # => false
 ```
 
 - **SEE** [m:Complex#infinite?]
@@ -243,8 +243,8 @@ Complex(-0.0, -0.0).arg         #=> -3.141592653589793
 #@end
 
 ```ruby title="例"
-(1+1i).infinite?                   # => nil
-(Float::INFINITY + 1i).infinite?   # => 1
+p (1+1i).infinite?                 # => nil
+p (Float::INFINITY + 1i).infinite? # => 1
 ```
 
 - **SEE** [m:Complex#finite?]
@@ -257,7 +257,7 @@ other を [c:Complex] に変換して [変換後の other, self] の配列を返
 - **raise** `TypeError` -- 変換できないオブジェクトを指定した場合に発生します。
 
 ```ruby title="例"
-Complex(1).coerce(2) # => [(2+0i), (1+0i)]
+p Complex(1).coerce(2) # => [(2+0i), (1+0i)]
 ```
 
 ### def conjugate -> Complex
@@ -266,7 +266,7 @@ Complex(1).coerce(2) # => [(2+0i), (1+0i)]
 自身の共役複素数を返します。
 
 ```ruby title="例"
-Complex(1, 2).conj # => (1-2i)
+p Complex(1, 2).conj # => (1-2i)
 ```
 
 ### def denominator -> Integer
@@ -282,8 +282,8 @@ Complex(1, 2).conj # => (1-2i)
 `````
 
 ```ruby title="例"
-Complex('1/2+2/3i').denominator # => 6
-Complex(3).numerator            # => 1
+p Complex('1/2+2/3i').denominator # => 6
+p Complex(3).numerator          # => 1
 ```
 
 - **SEE** [m:Complex#numerator]
@@ -296,8 +296,8 @@ self を other で割った商を返します。
 - **param** `other` -- 自身を割る数
 
 ```ruby title="例"
-Complex(11, 22).fdiv(3) # => (3.6666666666666665+7.333333333333333i)
-Complex(11, 22).quo(3)  # => ((11/3)+(22/3)*i)
+p Complex(11, 22).fdiv(3) # => (3.6666666666666665+7.333333333333333i)
+p Complex(11, 22).quo(3)  # => ((11/3)+(22/3)*i)
 ```
 
 - **SEE** [m:Complex#quo]
@@ -313,7 +313,7 @@ Complex(11, 22).quo(3)  # => ((11/3)+(22/3)*i)
 自身の虚部を返します。
 
 ```ruby title="例"
-Complex(3, 2).imag # => 2
+p Complex(3, 2).imag # => 2
 ```
 
 - **SEE** [m:Numeric#imag]
@@ -323,11 +323,11 @@ Complex(3, 2).imag # => 2
 自身を人間が読みやすい形の文字列表現にして返します。
 
 ```ruby title="例"
-Complex(2).inspect                       # => "(2+0i)"
-Complex('-8/6').inspect                  # => "((-4/3)+0i)"
-Complex('1/2i').inspect                  # => "(0+(1/2)*i)"
-Complex(0, Float::INFINITY).inspect      # => "(0+Infinity*i)"
-Complex(Float::NAN, Float::NAN).inspect  # => "(NaN+NaN*i)"
+p Complex(2).inspect                     # => "(2+0i)"
+p Complex('-8/6').inspect                # => "((-4/3)+0i)"
+p Complex('1/2i').inspect                # => "(0+(1/2)*i)"
+p Complex(0, Float::INFINITY).inspect    # => "(0+Infinity*i)"
+p Complex(Float::NAN, Float::NAN).inspect  # => "(NaN+NaN*i)"
 ```
 
 #@until 2.0.0
@@ -359,8 +359,8 @@ Complex(Float::NAN, Float::NAN).inspect  # => "(NaN+NaN*i)"
 分子を返します。
 
 ```ruby title="例"
-Complex('1/2+2/3i').numerator # => (3+4i)
-Complex(3).numerator          # => (3+0i)
+p Complex('1/2+2/3i').numerator # => (3+4i)
+p Complex(3).numerator        # => (3+0i)
 ```
 
 - **SEE** [m:Complex#denominator]
@@ -370,7 +370,7 @@ Complex(3).numerator          # => (3+0i)
 自身の絶対値と偏角を配列にして返します。
 
 ```ruby title="例"
-Complex.polar(1, 2).polar # => [1, 2]
+p Complex.polar(1, 2).polar # => [1, 2]
 ```
 
 - **SEE** [m:Numeric#polar]
@@ -380,7 +380,7 @@ Complex.polar(1, 2).polar # => [1, 2]
 自身の実部を返します。
 
 ```ruby title="例"
-Complex(3, 2).real # => 3
+p Complex(3, 2).real # => 3
 ```
 
 ### def real? -> false
@@ -388,8 +388,8 @@ Complex(3, 2).real # => 3
 常に false を返します。
 
 ```ruby title="例"
-(2+3i).real?   # => false
-(2+0i).real?   # => false
+p (2+3i).real? # => false
+p (2+0i).real? # => false
 ```
 
 - **SEE** [m:Numeric#real?]
@@ -400,9 +400,9 @@ Complex(3, 2).real # => 3
 実部と虚部を配列にして返します。
 
 ```ruby title="例"
-Complex(3).rect    # => [3, 0]
-Complex(3.5).rect  # => [3.5, 0]
-Complex(3, 2).rect # => [3, 2]
+p Complex(3).rect  # => [3, 0]
+p Complex(3.5).rect  # => [3.5, 0]
+p Complex(3, 2).rect # => [3, 2]
 ```
 
 - **SEE** [m:Numeric#rect]
@@ -414,8 +414,8 @@ Complex(3, 2).rect # => [3, 2]
 - **raise** `RangeError` -- 虚部が実数か、0 ではない場合に発生します。
 
 ```ruby title="例"
-Complex(3).to_f    # => 3.0
-Complex(3.5).to_f  # => 3.5
+p Complex(3).to_f  # => 3.0
+p Complex(3.5).to_f  # => 3.5
 Complex(3, 2).to_f # => RangeError
 ```
 
@@ -426,8 +426,8 @@ Complex(3, 2).to_f # => RangeError
 - **raise** `RangeError` -- 虚部が実数か、0 ではない場合に発生します。
 
 ```ruby title="例"
-Complex(3).to_i    # => 3
-Complex(3.5).to_i  # => 3
+p Complex(3).to_i  # => 3
+p Complex(3.5).to_i  # => 3
 Complex(3, 2).to_i # => RangeError
 ```
 
@@ -446,7 +446,7 @@ Complex(3, 2).to_i # => RangeError
 - **raise** `RangeError` -- 虚部が実数か、0 ではない場合に発生します。
 
 ```ruby title="例"
-Complex(3).to_r    # => (3/1)
+p Complex(3).to_r  # => (3/1)
 Complex(3, 2).to_r # => RangeError
 ```
 
@@ -458,11 +458,11 @@ Complex(3, 2).to_r # => RangeError
 自身を "実部 + 虚部i" 形式の文字列にして返します。
 
 ```ruby title="例"
-Complex(2).to_s                       # => "2+0i"
-Complex('-8/6').to_s                  # => "-4/3+0i"
-Complex('1/2i').to_s                  # => "0+1/2i"
-Complex(0, Float::INFINITY).to_s      # => "0+Infinity*i"
-Complex(Float::NAN, Float::NAN).to_s  # => "NaN+NaN*i"
+p Complex(2).to_s                     # => "2+0i"
+p Complex('-8/6').to_s                # => "-4/3+0i"
+p Complex('1/2i').to_s                # => "0+1/2i"
+p Complex(0, Float::INFINITY).to_s    # => "0+Infinity*i"
+p Complex(Float::NAN, Float::NAN).to_s  # => "NaN+NaN*i"
 ```
 
 #@since 2.0.0
@@ -471,8 +471,8 @@ Complex(Float::NAN, Float::NAN).to_s  # => "NaN+NaN*i"
 self を返します。
 
 ```ruby title="例"
-Complex(2).to_c      # => (2+0i)
-Complex(-8, 6).to_c  # => (-8+6i)
+p Complex(2).to_c    # => (2+0i)
+p Complex(-8, 6).to_c  # => (-8+6i)
 ```
 #@end
 
@@ -488,9 +488,9 @@ Complex(-8, 6).to_c  # => (-8+6i)
 - **param** `i` -- 生成する複素数の虚部。省略した場合は 0 です。
 
 ```ruby title="例"
-Complex.rect(1)           # => (1+0i)
-Complex.rect(1, 2)        # => (1+2i)
-Complex.rectangular(1, 2) # => (1+2i)
+p Complex.rect(1)         # => (1+0i)
+p Complex.rect(1, 2)      # => (1+2i)
+p Complex.rectangular(1, 2) # => (1+2i)
 ```
 
 - **SEE** [m:Kernel?.Complex]
@@ -504,9 +504,9 @@ Complex.rectangular(1, 2) # => (1+2i)
 - **param** `theta` -- 生成する複素数の偏角。単位はラジアンです。省略した場合は 0 です。
 
 ```ruby title="例"
-Complex.polar(2.0)            # => (2.0+0.0i)
-Complex.polar(2.0, 0)         # => (2.0+0.0i)
-Complex.polar(2.0, Math::PI)  # => (-2.0+2.4492127076447545e-16i)
+p Complex.polar(2.0)          # => (2.0+0.0i)
+p Complex.polar(2.0, 0)       # => (2.0+0.0i)
+p Complex.polar(2.0, Math::PI)  # => (-2.0+2.4492127076447545e-16i)
 ```
 
 #@since 2.0.0
