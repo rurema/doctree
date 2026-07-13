@@ -42,7 +42,7 @@ port は接続するポート番号です。
 
 以下と同じです。
 
-#@until 3.0.0
+#@until 3.0
 `````
 require 'net/smtp'
 Net::SMTP.new(address, port).start(helo, user, password, authtype)

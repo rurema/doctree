@@ -1,6 +1,6 @@
 ## Constants
 
-#@until 3.0.0
+#@until 3.0
 ### const TRUE -> TrueClass
 非推奨です。代表的な真の値。true と同じ。
 
@@ -10,7 +10,7 @@ Ruby では false と nil が偽として扱われます。
 偽でない値(false でも nil でもない値) は全て真とみなされます。
 #@end
 
-#@until 3.0.0
+#@until 3.0
 ### const FALSE -> FalseClass
 非推奨です。代表的な偽の値。false と同じ。
 
@@ -19,7 +19,7 @@ Ruby では false と nil が偽として扱われます。
 偽でない値(false でも nil でもない値) は全て真とみなされます。
 #@end
 
-#@until 3.0.0
+#@until 3.0
 ### const NIL -> NilClass
 非推奨です。 nil と同じ。
 
