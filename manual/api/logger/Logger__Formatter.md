@@ -42,9 +42,9 @@ library: logger
 require 'logger'
 
 formatter = Logger::Formatter.new
-formatter.datetime_format # => nil
+p formatter.datetime_format # => nil
 formatter.datetime_format = '%Y-%m-%d %H:%M:%S' # => "%Y-%m-%d %H:%M:%S"
-formatter.datetime_format # => "%Y-%m-%d %H:%M:%S"
+p formatter.datetime_format # => "%Y-%m-%d %H:%M:%S"
 ```
 
 - **SEE** [m:Time#strftime]

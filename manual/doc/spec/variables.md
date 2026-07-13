@@ -236,7 +236,7 @@ class Foo
   end
 end
 
-Foo.a1          #=> :a
+p Foo.a1        #=> :a
 
 def Foo.a2
   p @@a

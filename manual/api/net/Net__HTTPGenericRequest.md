@@ -37,7 +37,7 @@ require 'net/http'
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Post.new(uri.request_uri)
 req.body = "Test Post Data"
-req.body # => "Test Post Data"
+p req.body # => "Test Post Data"
 ```
 
 - **SEE** [m:Net::HTTPGenericRequest#body=]
@@ -92,9 +92,9 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Post.new(uri.request_uri)
-req.method # => "POST"
+p req.method # => "POST"
 req = Net::HTTP::Get.new(uri.request_uri)
-req.method # => "GET"
+p req.method # => "GET"
 ```
 
 ### def path -> String
@@ -106,7 +106,7 @@ require 'net/http'
 
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
-req.path # => "/index.html"
+p req.path # => "/index.html"
 ```
 
 ### def request_body_permitted? -> bool
@@ -122,7 +122,7 @@ post = Net::HTTP::Post.new(uri.request_uri)
 post.request_body_permitted?   # => true
 
 head = Net::HTTP::Head.new(uri.request_uri)
-head.request_body_permitted?   # => false
+p head.request_body_permitted? # => false
 ```
 
 ### def response_body_permitted? -> bool
@@ -138,6 +138,6 @@ post = Net::HTTP::Post.new(uri.request_uri)
 post.response_body_permitted?   # => true
 
 head = Net::HTTP::Head.new(uri.request_uri)
-head.response_body_permitted?   # => false
+p head.response_body_permitted? # => false
 ```
 

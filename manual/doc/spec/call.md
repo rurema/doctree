@@ -118,7 +118,7 @@ foo(1,2,3,4,5,6)
 
 ```ruby
 foo = 13
-foo&.to_s # => "13"
+p foo&.to_s # => "13"
 foo = nil
 foo&.to_s # nil, not ""
 ```
@@ -407,19 +407,19 @@ def foo
   yield 1,2,3
 end
 
-foo{|v| p v}       #=> 1
+p foo{|v| p v}     #=> 1
 
 def bar
   yield [1,2,3]
 end
 
-bar{|a, b, c| p a} #=> 1
+p bar{|a, b, c| p a} #=> 1
 
 def hoge
   yield [1,2,3],4,5
 end
 
-hoge{|a, b, c| p a} #=> [1,2,3]
+p hoge{|a, b, c| p a} #=> [1,2,3]
 ```
 
 
@@ -436,8 +436,8 @@ def foo
   yield "a", "b", "c"
 end
 
-foo{|a, b, c| p [a, b, c] } # => ["a", "b", "c"]
-foo{ p [_1, _2, _3] } # => ["a", "b", "c"]
+p foo{|a, b, c| p [a, b, c] } # => ["a", "b", "c"]
+p foo{ p [_1, _2, _3] } # => ["a", "b", "c"]
 ```
 
 ブロックパラメータと番号指定パラメータを同時に使うことはできません。
@@ -488,7 +488,7 @@ foo {|a,b|
 ブロックに渡された値は it という名前で参照することもできます。
 
 ```ruby
-[1, 2, 3].map { it * 2 } # => [2, 4, 6]
+p [1, 2, 3].map { it * 2 } # => [2, 4, 6]
 
 {a: 1, b: 2}.each { p it }
 # => [:a, 1]
@@ -509,7 +509,7 @@ end
 
 ```ruby
 it = 0
-[1, 2, 3].map { it * 2 } # => [0, 0, 0]
+p [1, 2, 3].map { it * 2 } # => [0, 0, 0]
 ```
 
 it はネストできます。
