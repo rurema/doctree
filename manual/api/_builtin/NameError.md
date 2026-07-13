@@ -47,10 +47,13 @@ p err.name  # => "foo"
 
 ## Instance Methods
 
-### def name -> Symbol
+### def name -> Symbol | String | nil
 
 この例外オブジェクトを発生させる原因となった
 変数や定数、メソッドの名前をシンボルで返します。
+ただし、不正な定数名を指定して [m:Module#const_get] を呼んだ場合など、
+シンボルにできない名前が原因のときは文字列で返すことがあります。
+名前が不明な場合は nil を返すこともあります。
 
 例:
 

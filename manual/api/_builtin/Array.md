@@ -1913,6 +1913,13 @@ sort! は self を破壊的にソートし、self を返します。
 ブロックは第1引数が大きいなら正の整数、両者が等しいなら0、そして第1引数の方が小さいなら
 負の整数を返さなければいけません。両者を比較できない時は nil を返します。
 
+Array#sort, Array#sort! は安定ではありません (unstable sort)。
+安定なソートが必要な場合は [m:Enumerable#sort_by] を使って工夫する必要があります。
+詳しくは [m:Enumerable#sort_by] の項目を参照してください。
+
+※ 比較結果が同じ要素は元の順序通りに並ぶソートを
+「安定なソート (stable sort)」と言います。
+
 ```ruby title="例"
 ary1 = [ "d", "a", "e", "c", "b" ]
 p ary1.sort                             #=> ["a", "b", "c", "d", "e"]
@@ -1936,6 +1943,8 @@ p ary2.sort_by{|x| x.to_i }             #=> ["7", "8", "9", "10", "11"]
 sort_by の破壊的バージョンです。
 
 ブロックを省略した場合は [c:Enumerator] を返します。
+
+Array#sort_by! は安定ではありません (unstable sort)。
 
 ```ruby title="例"
 fruits = %w{apple pear fig}
