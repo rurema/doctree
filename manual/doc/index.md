@@ -86,11 +86,9 @@ Ruby の文法:
   - [d:spec/regexp]
   - [d:spec/lambda_proc]
 
-#### 組み込みライブラリ
-  - [lib:_builtin]
-
-#### 標準添付ライブラリ
+#### ライブラリ
   - [lib:/]
+    - [lib:_builtin]
 
 #### C API
   - [f:/]
