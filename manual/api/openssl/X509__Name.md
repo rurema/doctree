@@ -16,11 +16,10 @@ eql? と hash が定義されているため、[c:Hash] のキーとして
 ### def parse_openssl(str, template=OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
 文字列をパースして [c:OpenSSL::X509::Name] オブジェクトを返します。
 
-例:
-`````
+```ruby title="例"
 require 'openssl'
 OpenSSL::X509::Name.parse('/C=JP/ST=Kanagawa/L=Yokohama/O=Example Company/OU=Lab3/CN=foobar/emailAddress=foobar@lab3.example.co.jp')
-`````
+```
 
 - **param** `str` -- パースする文字列
 - **param** `template` -- 属性型に対応するデータ型を表わすハッシュ
@@ -50,12 +49,11 @@ obj が [c:OpenSSL::X509::Name] である場合には内容を複製した
 それ以外の場合は obj の to_der メソッドを読んで DER 形式のバイト列に変換し、
 そこから内容を作ります。
 
-例:
-```````
+```ruby title="例"
 require 'openssl'
 OpenSSL::X509::Name.new([["C", "JP"], ["ST", "Kanagawa"], ["L", "Yokohama"], ["O", "Example Company"], ["OU", "Lab3"], ["CN", "foobar"], ["emailAddress", "foobar@lab3.example.co.jp"]])
 # => OpenSSL::X509::Name object: /C=JP/ST=Kanagawa/L=Yokohama/O=Example Company/OU=Lab3/CN=foobar/emailAddress=foobar@lab3.example.co.jp
-```````
+```
 
 - **param** `ary` -- 属性型と属性値のペアの配列
 - **param** `obj` -- 識別子オブジェクトを生成するための情報
@@ -84,7 +82,7 @@ flags には通常は以下のいずれかを渡します。
 
 * 
 例:
-`````
+```ruby
 require 'openssl'
 n = OpenSSL::X509::Name.parse('/C=JP/ST=Kanagawa/L=Yokohama/O=Example Company/OU=Lab3/CN=foobar/emailAddress=foobar@lab3.example.co.jp')
 n.to_s 
@@ -97,7 +95,7 @@ n.to_s(OpenSSL::X509::Name::ONELINE)
 # => "C = JP, ST = Kanagawa, L = Yokohama, O = Example Company, OU = Lab3, CN = foobar, emailAddress = foobar@lab3.example.co.jp"
 n.to_s(OpenSSL::X509::Name::MULTILINE)
 # => "countryName               = JP\nstateOrProvinceName       = Kanagawa\nlocalityName              = Yokohama\norganizationName          = Example Company\norganizationalUnitName    = Lab3\ncommonName                = foobar\nemailAddress              = foobar@lab3.example.co.jp"
-`````
+```
 
 ### def to_a -> [[String, String, Integer]]
 
@@ -105,13 +103,12 @@ n.to_s(OpenSSL::X509::Name::MULTILINE)
 
 配列の各要素は、[属性型文字列、属性値文字列、属性値の型を表す整数([c:OpenSSL::ASN1]以下の各定数で定義されているASN1の型)] という3要素の配列です。
 
-例:
-`````
+```ruby title="例"
 require 'openssl'
 n = OpenSSL::X509::Name.parse('/C=JP/ST=Kanagawa/L=Yokohama/O=Example Company/OU=Lab3/CN=foobar/emailAddress=foobar@lab3.example.co.jp')
 n.to_a
 # => [["C", "JP", 19], ["ST", "Kanagawa", 12], ["L", "Yokohama", 12], ["O", "Example Company", 12], ["OU", "Lab3", 12], ["CN", "foobar", 12], ["emailAddress", "foobar@lab3.example.co.jp", 22]]
-`````
+```
 
 ### def cmp(other) ->  -1 | 0 | 1 
 ### def <=>(other) ->  -1 | 0 | 1 
@@ -146,10 +143,10 @@ OpenSSL 0.9.8 と互換な古い方式のハッシュ関数の
 キーは属性型文字列で、ASN.1の型を表わす整数が対応します。
 
 以下の文字列がキーです。
-`````
+```text
 'C', 'countryName', 'serialNumber', 'dnQualifier',
 'DC', 'domainComponent', 'emailAddress'
-`````
+```
 
 ### const DEFAULT_OBJECT_TYPE -> Integer
 属性値のデフォルトの ASN.1 の型です。

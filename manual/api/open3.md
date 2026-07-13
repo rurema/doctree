@@ -78,10 +78,10 @@ Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr
 標準出力、標準エラー出力に接続されたパイプを 3 要素の配列で返します。
 cmd は組み込み関数 [m:Kernel?.exec] と同じ規則で解釈されます。
 
-`````
+```ruby
 require 'open3'
 stdin, stdout, stderr = *Open3.popen3("/usr/bin/nroff -man")
-`````
+```
 
 - **param** `cmd` -- 実行するコマンドを指定します。
 

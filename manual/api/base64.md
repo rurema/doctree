@@ -16,14 +16,14 @@ ASCII 文字のうちの 65 文字 ([A-Za-z0-9+/] の 64 文字と '=')
 
 ### 使用方法
 
-``````
+```ruby
 require "base64"
 
 enc   = Base64.encode64('Send reinforcements')
                     # => "U2VuZCByZWluZm9yY2VtZW50cw==\n"
 plain = Base64.decode64(enc)
                     # => "Send reinforcements"
-``````
+```
 
 
 データをエンコードするために Base64 エンコードを使用するのは、あらゆるバイナリデータを
@@ -43,7 +43,7 @@ ASCII 文字のうちの 65 文字 ([A-Za-z0-9+/] の 64 文字と '=')
 
 ### 使用方法
 
-`````
+```ruby
 require 'base64'
 # EUC-JP の場合
 p Base64.b64encode("日本語")      # => "xvzL3Ljs\n"
@@ -51,7 +51,7 @@ p Base64.decode64('xvzL3Ljs')    # => "日本語"
 p Base64.decode_b("日本語")       # => "日本語"
 p Base64.decode_b("C 言語ポインタ完全制覇")
                            # => "C 言語ポインタ完全制覇"
-`````
+```
 
 #@end
 

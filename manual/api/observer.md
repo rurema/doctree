@@ -19,7 +19,7 @@ Observable モジュールを include したクラスは
 そのままオブザーバの update メソッドに渡されます。
 
 ### サンプルコード
-`````
+```ruby
 require "observer"
 
 class Ticker          ### Periodically fetch a stock price.
@@ -83,7 +83,7 @@ ticker.run
 # => Current price: 102
 # => Current price: 87
 # => Current price: 121
-`````
+```
 
 ## Instance Methods
 

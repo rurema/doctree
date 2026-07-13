@@ -17,23 +17,21 @@ require:
   既に存在する RDoc が古くなくても RDoc を作成します。
 
 
-例:
-``````
+```ruby title="例"
 Rake::RDocTask.new do |rd|
   rd.main = "README.rdoc"
   rd.rdoc_files.include("README.rdoc", "lib/**/*.rb")
 end
-``````
+```
 
-例:
-``````
+```ruby title="例"
 # RDoc タスクに別の名前を付ける例
 Rake::RDocTask.new(:rdoc_dev) do |rd|
   rd.main = "README.doc"
   rd.rdoc_files.include("README.rdoc", "lib/**/*.rb")
   rd.options << "--all"
 end
-``````
+```
 
 # class Rake::RDocTask < Rake::TaskLib
 

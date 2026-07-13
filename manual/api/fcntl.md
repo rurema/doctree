@@ -6,8 +6,7 @@ category: I/O
 [man:fcntl(2)]) で使用できる定数を集めたモジュールです。
 
 
-例:
-```````
+```ruby title="例"
 require "fcntl"
 m = s.fcntl(Fcntl::F_GETFL, 0)
 f.fcntl(Fcntl::F_SETFL, Fcntl::O_NONBLOCK|m)
@@ -20,7 +19,7 @@ f = IO.open(fd)
 f.syswrite("TEMP DATA")
     
 f.close
-```````
+```
 
 # module Fcntl
 

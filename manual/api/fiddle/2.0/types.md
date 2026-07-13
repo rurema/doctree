@@ -8,8 +8,7 @@ C の型の別名を定義するライブラリです。
 実装の問題があるため、 [m:Fiddle::Importer#dlload] を呼びだしてから
 include してください。
 
-例
-`````
+```ruby title="例"
 require 'fiddle/import'
 require 'fiddle/types'
   
@@ -21,7 +20,7 @@ end
   
 # uint は Fiddle::BasicTypes によって定義された型で、unsigned int の別名
 p(M.sizeof("uint") == M.sizeof("unsigned int"))
-`````
+```
   
 # module Fiddle::Win32Types
 Windows 用の型の別名を定義するモジュールです。

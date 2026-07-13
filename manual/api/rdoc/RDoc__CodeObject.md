@@ -15,7 +15,7 @@ RDoc のコードツリーを表現するクラスの基本クラスです。
 
 以下は [c:RDoc::CodeObject] のサブクラスのツリーです。
 
-```
+```text
  * RDoc::Context
    * RDoc::TopLevel
    * RDoc::ClassModule

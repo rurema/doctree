@@ -14,7 +14,7 @@ include:
 
 SSL/TLS サーバに接続して write します。
 
-`````
+```ruby
 require 'socket'
 require 'openssl'
 include OpenSSL
@@ -39,7 +39,7 @@ print ssl.read
   
 ssl.close
 soc.close
-`````
+```
 
 ## Class Methods
 
@@ -112,9 +112,9 @@ true でソケットも close するようになります。
 で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼ぶと nil を返します。
 
 以下の順の配列を返します。
-`````
+```text
 [接続相手の証明書, 下位CAの証明書,... 中間CAの証明書]
-`````
+```
 ルート CA の証明書は含まれないことに注意してください。
 
 - **SEE** [m:OpenSSL::SSL::SSLSocket#peer_cert]
@@ -128,9 +128,9 @@ true でソケットも close するようになります。
 
 返される配列の形式は以下の例のように [暗号名, TLS/SSLのバージョン, 鍵長, アルゴリズムで使われる bit 数] となります。
 
-`````
+```text
 ["DES-CBC3-SHA", "TLSv1/SSLv3", 168, 168]
-`````
+```
 
 [m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept] 
 で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼ぶと nil を返します。

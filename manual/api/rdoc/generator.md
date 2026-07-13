@@ -13,11 +13,11 @@ type: library
 
 [m:RDoc::RDoc.add_generator] を呼び出す事でジェネレータの登録が行えます。
 
-`````
+```ruby
 class My::Awesome::Generator
   RDoc::RDoc.add_generator self
 end
-`````
+```
 #@end
 
 #@since 1.9.3

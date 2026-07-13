@@ -14,7 +14,7 @@ library: psych
 - **param** `tag` -- 対象のクラスに関連付けるタグの文字列
 
 ### Example
-`````
+```ruby
 require 'psych'
   
 class Foo
@@ -45,7 +45,7 @@ p Psych.load(<<EOS)
 x: 8
 EOS
 # => #<Foo:0x0000000130f48 @x=8>
-`````
+```
 
    
  

@@ -10,8 +10,7 @@ HTTP クッキーを利用するためのクラスを定義したライブラリ
 
 クッキーを表すクラスです。
 
-例:
-`````
+```text title="例"
 cookie1 = CGI::Cookie.new("name", "value1", "value2", ...)
 cookie1 = CGI::Cookie.new({"name" => "name", "value" => "value"})
 cookie1 = CGI::Cookie.new({'name'      => 'name',
@@ -40,7 +39,7 @@ cookie1.domain    = 'domain'
 cookie1.expires   = Time.now + 30
 cookie1.secure    = true
 cookie1.httponly  = true
-`````
+```
 
 - **SEE** [rfc:2965]
 
@@ -74,7 +73,7 @@ cookie1.httponly  = true
 
 - **param** `value` -- name が文字列である場合、値のリストを一つ以上指定します。
 
-```````````
+```text
 例：
 cookie1 = CGI::Cookie.new("name", "value1", "value2", ...)
 cookie1 = CGI::Cookie.new({"name" => "name", "value" => "value"})
@@ -104,7 +103,7 @@ cookie1.domain    = 'domain'
 cookie1.expires   = Time.now + 30
 cookie1.secure    = true
 cookie1.httponly  = true
-```````````
+```
 
 ### def parse(raw_cookie) -> Hash
 
@@ -112,11 +111,10 @@ cookie1.httponly  = true
 
 - **param** `raw_cookie` -- 生のクッキーを表す文字列を指定します。
 
-```````````
-例：
+```ruby title="例"
 cookies = CGI::Cookie.parse("raw_cookie_string")
   # { "name1" => cookie1, "name2" => cookie2, ... }
-```````````
+```
 
 ## Instance Methods
 

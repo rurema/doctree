@@ -30,9 +30,9 @@ RbConfig モジュールを Config と同じものとして定義します。
 
 与えられたパスを展開します。
 
-`````
-RbConfig.expand("$(bindir)") # => /home/foobar/all-ruby/ruby19x/bin
-`````
+```ruby
+p RbConfig.expand("$(bindir)") # => /home/foobar/all-ruby/ruby19x/bin
+```
 
 - **param** `val` -- 展開したい変数名を Makefile に書く形式で指定します。
 
@@ -60,7 +60,7 @@ make install するときに指定した DESTDIR を返します。
 
 Ruby がインストールされているディレクトリです。
 
-`````
+```text
 TOPDIR
 ├── bin
 │   ├── ...
@@ -68,7 +68,7 @@ TOPDIR
 ├── include
 ├── lib
 └── share
-`````
+```
   
 ### const CONFIG -> Hash
 
@@ -88,13 +88,13 @@ TOPDIR
 #@end
 と同じですが、その値は以下のような形
 で他の変数への参照を含みます。
-`````
+```text
 MAKEFILE_CONFIG["bindir"] = "$(exec_prefix)/bin"
-`````
+```
 これは、Makefile の変数参照の形式で MAKEFILE_CONFIG は、
 Makefile 作成の際に利用されることを想定しています。
 
-`````
+```text
 require 'rbconfig'
   
 print <<-END_OF_MAKEFILE
@@ -106,7 +106,7 @@ END_OF_MAKEFILE
 => prefix = /usr/local
    exec_prefix = $(prefix)
    bindir = $(exec_prefix)/bin
-`````
+```
 
 #@since 1.9.1
 [m:RbConfig.expand]
@@ -123,8 +123,8 @@ END_OF_MAKEFILE
 #@end
 を使って生成されています)
 
-`````
+```ruby
 require 'rbconfig'
 p Config.expand(RbConfig::MAKEFILE_CONFIG["bindir"])
 # => "/usr/local/bin"
-`````
+```

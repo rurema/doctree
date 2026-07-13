@@ -13,18 +13,18 @@ Access control list は "allow" と "deny" の2つからなります。
 使うことができます。
 
 ACLのエントリーは、以下の例に示すように、
-`````
+```text
 "allow_or_deny", "addr1",
 "allow_or_deny", "addr2",
    :
-`````
+```
 という文字列配列で表現されます。
 
 - **SEE** [m:DRb?.install_acl], [m:DRb?.start_service], [m:DRb::DRbServer.default_acl], [m:DRb::DRbServer.new]
 
 ### 例
 ACL を単独で用いる例。
-`````
+```ruby
 require "drb/acl"
 
 list = %w[
@@ -42,7 +42,7 @@ p acl.allow_addr?(addr) # => true
   
 acl = ACL.new(list, ACL::DENY_ALLOW)
 p acl.allow_addr?(addr) # => true
-`````
+```
 
 
 ## Class Methods
@@ -57,7 +57,7 @@ order に [c:ACL::DENY_ALLOW] を指定するとデフォルトで
 すべてのアドレスを拒否します。[c:ACL::ALLOW_DENY] を指定すると
 デフォルトですべてのアドレスを許可します。
 
-`````
+```ruby
 require "drb/acl"
 
 list = %w[
@@ -68,7 +68,7 @@ list = %w[
 ]
   
 acl = ACL.new(list, ACL::DENY_ALLOW)
-`````
+```
 
 - **param** `list` -- ACLに追加するエントリー
 - **param** `order` -- デフォルトで全アドレスを許可/拒否するかを指定します
@@ -88,11 +88,11 @@ addr が ACL で許可されているならば真を返します。
 ### def install_list(list) -> ()
 ACL に list で指定したエントリーを追加します。
 
-`````
+```ruby
 require "drb/acl"
 acl = ACL.new
 acl.install_list(["deny", "192.168.1.45"])
-`````
+```
 
 - **param** `list` -- 追加するエントリー
 

@@ -39,9 +39,7 @@ pop, all, mail はすべて同じ効果ですが、
 all と mail は obsolete です。
 
 
-使用例:
-
-`````
+```ruby title="使用例"
 require 'net/pop'
 
 Net::POP3.start('pop.example.com', 110,
@@ -50,11 +48,10 @@ Net::POP3.start('pop.example.com', 110,
     puts m.pop
   end
 }
-`````
+```
 
 
-ブロックを利用する例:
-`````
+```ruby title="ブロックを利用する例"
 require 'net/pop'
 
 Net::POP3.start('pop.example.com', 110) {|pop|
@@ -64,7 +61,7 @@ Net::POP3.start('pop.example.com', 110) {|pop|
     end
   end
 }
-`````
+```
 
 - **param** `io` -- メールの内容を書きこむオブジェクト
 - **raise** `TimeoutError` -- 通信がタイムアウトした場合に発生します

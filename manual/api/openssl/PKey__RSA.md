@@ -14,8 +14,7 @@ RSA 暗号鍵のクラスです。
 RSA についてよく理解し、必要な場合のみにすべきです。
 
 
-例:
-`````
+```ruby title="例"
 require 'openssl'
 
 # initialize random seed
@@ -40,7 +39,7 @@ sign = rsa.sign("sha256", data)
 p public_key.verify("sha256", sign, data)
 # 不正なデータを検証
 p public_key.verify("sha256", sign, "foobarbaz")
-`````
+```
 
 ## Class Methods
 

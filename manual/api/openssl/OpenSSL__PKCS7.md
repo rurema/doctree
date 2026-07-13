@@ -62,9 +62,7 @@ flags には以下の定数の or を渡します。
       これは [m:OpenSSL::PKCS7.sign] で
       [m:OpenSSL::PKCS7::DETACHED] を渡した場合にのみ意味を持ちます。
 
-例:
-
-`````
+```ruby title="例"
 require 'openssl'
 
 data = "foobar"
@@ -72,7 +70,7 @@ p7 = OpenSSL::PKCS7.sign( OpenSSL::X509::Certificate.new(File.read('cert.pem')),
                           OpenSSL::PKey::RSA.new(File.read('privkey.pem')),
                           data)
 smime = PKCS7.write_smime(p7)
-`````
+```
 
 - **param** `p7sig` -- PKCS#7 オブジェクト
 - **param** `data` -- 署名されたデータ文字列

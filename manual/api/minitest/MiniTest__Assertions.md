@@ -92,9 +92,9 @@ until: "2.2.0"
 
 言い換えると以下の式が真である場合、検査をパスします。
 
-`````
+```ruby
 [expected, actual].min * epsilon >= (extected - actual).abs
-`````
+```
 
 - **param** `expected` -- 期待値を指定します。
 
@@ -201,12 +201,11 @@ until: "2.2.0"
 
 - **raise** `MiniTest::Assertion` -- 与えられたオブジェクトから作成する式を評価した結果が真でない場合に発生します。
 
-例:
-``````
+```ruby title="例"
 # 以下の二つは同じ
 assert_operator('aaa', :==, 'aaa', 'message')
 assert('aaa'.__send__(:==, 'aaa'), 'message')
-``````
+```
 
 
 ### def assert_raises(*args){ ... } -> true
@@ -266,10 +265,9 @@ assert('aaa'.__send__(:==, 'aaa'), 'message')
 
 - **raise** `MiniTest::Assertion` -- 取り出した式が偽を返す場合に発生します。
 
-例:
-`````
+```ruby title="例"
 assert_send([%w[foo bar baz], :include?, 'baz'])
-`````
+```
 
 ### def assert_throws(tag, message = nil){ ... } -> true
 

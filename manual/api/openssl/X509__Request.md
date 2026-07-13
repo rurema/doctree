@@ -10,8 +10,7 @@ X.509 CSR については [RFC:2986] などを参照してください。
 
 ### 例
 
-CSR を生成する例。
-`````
+```ruby title="CSRを生成する例"
 require 'openssl'
 # ファイルから秘密鍵を読み込む
 rsa = OpenSSL::PKey::RSA.new(File.read("privkey.pem"))
@@ -36,7 +35,7 @@ csr.add_attribute(OpenSSL::X509::Attribute.new("extReq", asn1exts))
 csr.sign(rsa, "sha1")
 # PEM 形式で標準出力に出力
 puts csr.to_pem
-`````
+```
 
 ## Class Methods
 

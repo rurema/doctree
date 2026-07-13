@@ -6,25 +6,25 @@ category: File
 
 ### 使い方
 
-`````
+```text
 require "find"
   
 Find.find('/foo','/bar') {|f| ...}
-`````
+```
 
 または
 
-`````
+```text
 require "find"
   
 include Find
 find('/foo','/bar') {|f| ...}
-`````
+```
 
 以下は、ruby のアーカイブに含まれるサンプルスクリプト
 ([url:https://github.com/ruby/ruby/blob/master/sample/trojan.rb]) をこのモジュールで書き換えたものです。
 
-`````
+```ruby
 #! /usr/bin/env ruby
 require "find"
 # 他人が書き込み可能な危険なコマンドを探す
@@ -36,7 +36,7 @@ for dir in ENV['PATH'].split(File::PATH_SEPARATOR)
     end
   end
 end
-`````
+```
 
 # module Find
 
@@ -70,14 +70,14 @@ end
 
 例:
 
-`````
+```text
 require 'find'
   
 Find.find('/tmp') {|f|
   Find.prune if f == "/tmp/bar"
   ...
 }
-`````
+```
 
 あるディレクトリ配下の探索を省略したい場合は上記のように、
 [m:Find?.prune] を使用します。この例では "/tmp/bar"

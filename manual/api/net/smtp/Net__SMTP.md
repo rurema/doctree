@@ -65,15 +65,13 @@ SMTP AUTH コマンドによって認証を行います。
 authtype は使用する認証のタイプで、
 シンボルで :plain, :login, :cram_md5 を指定します。
 
-Example:
-
-`````
+```ruby title="Example"
 require 'net/smtp'
 
 Net::SMTP.start('smtp.example.com') {|smtp|
   smtp.send_message mail_string, 'from@example.jp', 'to@example.jp'
 }
-`````
+```
 
 - **param** `address` -- 接続するサーバをホスト名もしくはIPアドレスで指定します
 - **param** `port` -- ポート番号、デフォルトは 25 です
@@ -336,7 +334,7 @@ mailsrc は each イテレータを持つ
 from_domain は送り主のメールアドレス ('...@...'のかたち) 、
 to_addrs には送信先メールアドレスを文字列で渡します。
 
-`````
+```ruby
 require 'net/smtp'
 
 Net::SMTP.start('smtp.example.com') {|smtp|
@@ -344,7 +342,7 @@ Net::SMTP.start('smtp.example.com') {|smtp|
                     'from@example.com',
                     'to1@example.net', 'to2@example.net'
 }
-`````
+```
 
 sendmail は obsolete です。
 
@@ -375,7 +373,7 @@ sendmail は obsolete です。
 from_domain は送り主のメールアドレス ('...@...'のかたち) 、
 to_addrs には送信先メールアドレスを文字列で渡します。
 
-`````
+```ruby
 require 'net/smtp'
 
 Net::SMTP.start('smtp.example.com', 25) {|smtp|
@@ -387,7 +385,7 @@ Net::SMTP.start('smtp.example.com', 25) {|smtp|
     f.puts 'This is test mail.'
   }
 }
-`````
+```
 
 ready は obsolete です。
 

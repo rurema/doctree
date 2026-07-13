@@ -191,7 +191,7 @@ obj を width カラムのテキストとして自身に追加します。
 現在のグループで first? に対する最初の呼び出しかどうかを判定する
 述語です。これはカンマで区切られた値を整形するのに有用です。
 
-`````
+```text
 pp.group(1, '[', ']') {
   xxx.each {|yyy|
     unless pp.first?
@@ -201,7 +201,7 @@ pp.group(1, '[', ']') {
     ... pretty printing yyy ...
   }
 }
-`````
+```
 #@end
 
 ### def output    -> object

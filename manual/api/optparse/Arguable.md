@@ -131,8 +131,8 @@ params = ARGV.getopts("ab:", "foo", "bar:", "bufsize:1024")
 p params
 ```
 
-````
+```console
 # 実行結果
 $ ruby t.rb -b 1 --foo  --bar xxx -- -a
 {"bufsize"=>"1024", "a"=>false, "b"=>"1", "foo"=>true, "bar"=>"xxx"}  # "a"=>false であることに注意。
-````
+```

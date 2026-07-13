@@ -84,7 +84,7 @@ interface 文の中で定義した alias は上記の「メソッド」と同様
 
 字下げは任意の位置に行う事ができます。
 
-````````
+```fortran
 ! (Top of file)
 !
 ! このファイルに対するコメントを記述します。
@@ -162,7 +162,7 @@ contains
   end subroutine hide
 
 end module hogehoge
-````````
+```
 
 #@since 1.9.1
 # class RDoc::Parser::F95 < RDoc::Parser

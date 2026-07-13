@@ -39,7 +39,7 @@ OpenSSL は SSL/TLS による通信を提供する高水準なインターフェ
 
 自己署名証明書の作成の例です。自分の秘密鍵で自分の公開鍵に署名しているから自己署名です。
 
-`````
+```ruby
 require 'openssl'
   
 key = OpenSSL::PKey::RSA.new(1024)
@@ -60,7 +60,7 @@ cer.subject = sub
   
 cer.sign(key, digest) # <= 署名するのに使う秘密鍵とハッシュ関数
 print cer.to_text
-`````
+```
 
 ### 参考文献 {#references}
   - [RFC:5246]

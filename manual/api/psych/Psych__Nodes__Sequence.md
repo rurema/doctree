@@ -5,36 +5,36 @@ library: psych
 YAML sequence [url:http://yaml.org/spec/1.1/#sequence/syntax] を表すクラスです。
 
 YAML sequence とは基本的にはリスト、配列です。以下のような例が考えられます。
-`````
+```yaml
 %YAML 1.1
 ---
 - I am
 - a Sequence
-`````
+```
 
 YAML sequence には anchor を付加できます。
 この例では [m:Psych::Nodes::Sequence#anchor] は "A" を返します。
-`````
+```yaml
 %YAML 1.1
 ---
 &A [
   "This sequence",
   "has an anchor"
 ]
-`````
+```
 
 
 tag を付けることもできます。この例では
 [m:Psych::Nodes::Sequence#tag] は "tag:yaml.org,2002:seq" 
 (!seq はこの tag の別名)を返します。
-`````
+```yaml
 %YAML 1.1
 ---
 !!seq [
   "This sequence",
   "has a tag"
 ]
-`````
+```
 
 Psych::Nodes::Sequence は 0 個以上の子ノードを持つことができます。
 子ノードは以下のいずれかクラスのインスタンスでなければなりません。

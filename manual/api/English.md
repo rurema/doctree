@@ -3,15 +3,13 @@ type: library
 ---
 特殊変数 $! などに英語名の別名 ($ERROR_INFO など)をつけます。
 
-例:
-
-`````
+```ruby title="例"
 p $/  #=> "\n"
 p $RS #=> nil
 
 require 'English'
 p $RS #=> "\n"
-`````
+```
 
 
 
@@ -23,7 +21,7 @@ p $RS #=> "\n"
 
 [m:$!] の別名
 
-`````
+```ruby
 require "English"
 class SomethingError < StandardError; end
 
@@ -33,13 +31,13 @@ rescue
   p $ERROR_INFO.backtrace #=> ["sample.rb:5"]
   p $ERROR_INFO.to_s #=> "SomethingError"
 end
-`````
+```
 
 ### gvar $ERROR_POSITION -> [String] | nil
 
 [m:$@] の別名
 
-`````
+```ruby
 require "English"
 class SomethingError < StandardError; end
 
@@ -48,42 +46,42 @@ begin
 rescue
   p $ERROR_POSITION #=> ["sample.rb:5"]
 end
-`````
+```
 
 ### gvar $FS              -> String | nil
 ### gvar $FIELD_SEPARATOR -> String | nil
 
 [m:$;] の別名
 
-`````
+```ruby
 require "English"
 
 str = "hoge,fuga,ugo,bar,foo"
 p str.split #=> ["hoge,fuga,ugo,bar,foo"]
 $FIELD_SEPARATOR = ","
 p str.split #=> ["hoge", "fuga", "ugo", "bar", "foo"]
-`````
+```
 
 ### gvar $OFS                    -> String | nil
 ### gvar $OUTPUT_FIELD_SEPARATOR -> String | nil
 
 [m:$,] の別名
 
-`````
+```ruby
 require "English"
 
 array = %w|hoge fuga ugo bar foo|
 p array.join #=> "hogefugaugobarfoo"
 $OUTPUT_FIELD_SEPARATOR = ","
 p array.join #=> "hoge,fuga,ugo,bar,foo"
-`````
+```
 
 ### gvar $RS                     -> String | nil
 ### gvar $INPUT_RECORD_SEPARATOR -> String | nil
 
 [m:$/] の別名
 
-`````
+```ruby
 require "English"
 
 $INPUT_RECORD_SEPARATOR = '|'
@@ -95,7 +93,7 @@ p array #=> ["ugo|", "ego|", "fogo\n"]
 
 __END__
 ugo|ego|fogo
-`````
+```
 
 
 ### gvar $ORS                     -> String | nil
@@ -103,7 +101,7 @@ ugo|ego|fogo
 
 [m:$\\] の別名
 
-`````
+```console
 require "English"
 
 print "hoge\nhuga\n"
@@ -117,14 +115,14 @@ hoge
 huga
 fuge
 ugo
-`````
+```
 
 ### gvar $INPUT_LINE_NUMBER -> Integer
 ### gvar $NR                -> Integer
 
 [m:$.] の別名
 
-`````
+```console
 1 e
 2 f
 3 g
@@ -142,13 +140,13 @@ p $INPUT_LINE_NUMBER
 
 ruby sample.rb a.txt
 #=> 5
-`````
+```
 
 ### gvar $LAST_READ_LINE -> String | nil
 
 [m:$_] の別名
 
-`````
+```console
 1 e
 2 f
 3 g
@@ -163,13 +161,13 @@ ruby -rEnglish -ne'p $LAST_READ_LINE' a.txt
 "3 g\n"
 "4 h\n"
 "5 i\n"
-`````
+```
 
 ### gvar $DEFAULT_OUTPUT -> IO
 
 [m:$>] の別名
 
-`````
+```ruby
 require "English"
 
 dout = $DEFAULT_OUTPUT.dup
@@ -179,13 +177,13 @@ $DEFAULT_OUTPUT.close
 $DEFAULT_OUTPUT = dout
 p "bar" # => bar
 p File.read("out.txt") #=> foo
-`````
+```
 
 ### gvar $DEFAULT_INPUT -> IO
 
 [m:$<] の別名
 
-`````
+```console
 require "English"
 while line = $DEFAULT_INPUT.gets
   p line
@@ -195,24 +193,24 @@ end
 ruby sample.rb < /etc/passwd
 # => "hoge:x:500:501::/home/hoge:/bin/bash\n"
      ...
-`````
+```
 
 ### gvar $PID        -> Integer
 ### gvar $PROCESS_ID -> Integer
 
 [m:$$] の別名
 
-`````
+```ruby
 require "English"
 
 p sprintf("something%s", $PID) #=> "something5543" など
-`````
+```
 
 ### gvar $CHILD_STATUS -> Process::Status | nil
 
 [m:$?] の別名
 
-`````
+```ruby
 require "English"
 
 out = `wget https://www.ruby-lang.org/en/about/license.txt -O - 2>/dev/null`
@@ -225,14 +223,14 @@ if $CHILD_STATUS.to_i == 0
 else
   print "wget failed\n"
 end
-`````
+```
 
 
 ### gvar $LAST_MATCH_INFO -> MatchData | nil
 
 [m:$~] の別名
 
-`````
+```ruby
 require "English"
 
 str = "<a href=https://www.ruby-lang.org/en/about/license.txt>license</a>"
@@ -242,7 +240,7 @@ if /<a href=(.+?)>/ =~ str
   p $LAST_MATCH_INFO[1] #=> "https://www.ruby-lang.org/en/about/license.txt"
   p $LAST_MATCH_INFO[2] #=> nil
 end
-`````
+```
 
 ### gvar $IGNORECASE -> bool
 
@@ -252,71 +250,71 @@ end
 
 [m:$=] の別名
 
-`````
+```ruby
 require "English"
 
 $IGNORECASE = true # => warning: variable $= is no longer effective; ignored
-$IGNORECASE        # => warning: variable $= is no longer effective
+p $IGNORECASE      # => warning: variable $= is no longer effective
                    #    false
-`````
+```
 
 ### gvar $ARGV -> [String]
 
 [m:$*] の別名
 
-`````
+```console
 require "English"
 p $ARGV
 # end of sample.rb
 
 ruby sample.rb 31 /home/hoge/fuga.txt
 #=> ["31", "/home/hoge/fuga.txt"]
-`````
+```
 
 ### gvar $MATCH -> String | nil
 
 [m:$&] の別名
 
-`````
+```ruby
 require "English"
 
 str = 'hoge,foo,bar,hee,hoo'
 
 /(foo|bar)/ =~ str
 p $MATCH     #=> "foo"
-`````
+```
 
 ### gvar $PREMATCH -> String | nil
 
 [m:$`] の別名
 
-`````
+```ruby
 require "English"
 
 str = 'hoge,foo,bar,hee,hoo'
 
 /foo/ =~ str
 p $PREMATCH  #=> "hoge,"
-`````
+```
 
 ### gvar $POSTMATCH -> String | nil
 
 [m:$'] の別名
 
-`````
+```ruby
 require "English"
 
 str = 'hoge,foo,bar,hee,hoo'
 
 /foo/ =~ str
 p $POSTMATCH #=> ",bar,hee,hoo"
-`````
+```
 
 ### gvar $LAST_PAREN_MATCH -> String | nil
 
 [m:$+] の別名
 
-`````
+```console
 require "English"
 
 r1 = Regexp.compile("<img src=(http:.+?)>")
@@ -335,4 +333,4 @@ __END__
 $ ruby sample.rb
 "http://localhost/a.jpg"
 "link"
-`````
+```

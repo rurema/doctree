@@ -15,9 +15,7 @@ until: "2.2.0"
   3. そのクラスをインスタンス化して start メソッドを呼び出します。
 
 
-例:
-
-`````
+```text title="例"
 class FooApp < Application
   def initialize(foo_app, application_specific, arguments)
     super('FooApp') # Name of the application.
@@ -33,7 +31,7 @@ class FooApp < Application
 end
   
 status = FooApp.new(....).start
-`````
+```
 
 ### 注意
 

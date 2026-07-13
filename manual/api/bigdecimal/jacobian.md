@@ -3,16 +3,14 @@ type: library
 ---
 ヤコビ行列を計算する機能を提供します。
 
-実行例:
-
-`````
+```text title="実行例"
 require "bigdecimal"
 require "bigdecimal/jacobian"
 
 ...
 
 dfdx = Jacobian.jacobian(f,fx,x)
-`````
+```
 
 引数 f には関数を表すオブジェクトを指定します。以下のメソッドに応答でき
 る必要があります。

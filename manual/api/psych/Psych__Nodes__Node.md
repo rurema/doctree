@@ -19,7 +19,7 @@ YAML AST のノードを表す抽象クラスです。
 
 タグが付加されていない場合は nil を返します。
 
-`````
+```ruby
 ast = Psych.parse(<<EOS)
 ---
 - !!str a
@@ -31,7 +31,7 @@ p ast.root.children[0].tag    # => "tag:yaml.org,2002:str"
   
 p ast.root.children[1].value  # => "b"
 p ast.root.children[1].tag    # => nil
-`````
+```
 
 ### def each -> Enumerator
 ### def each{|node| ... } -> ()

@@ -45,9 +45,7 @@ scan メソッドは引数を受け取りません。処理の後は必ず
 を継承し、parse_files_matching メソッドで自身が解析できるファイル名のパ
 ターンを登録しておく必要があります。
 
-例:
-
-`````
+```text title="例"
 require "rdoc/parser"
   
 class RDoc::Parser::Xyz < RDoc::Parser
@@ -61,7 +59,7 @@ class RDoc::Parser::Xyz < RDoc::Parser
     ...
   end
 end
-`````
+```
 
 #@else
 また、[c:RDoc::ParserFactory] はファイル名からパーサクラスを取得する
@@ -69,9 +67,7 @@ end
 [c:RDoc::ParserFactory] を extend し、parse_files_matching メソッドで
 自身が解析できるファイル名のパターンを登録しておく必要があります。
 
-例:
-
-``````
+```text title="例"
 require "rdoc/parsers/parserfactory"
    
 module RDoc
@@ -89,7 +85,7 @@ module RDoc
     end
   end
 end
-``````
+```
 
 #@end
 

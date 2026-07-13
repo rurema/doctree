@@ -31,9 +31,9 @@ SSL 通信での各種バグ回避コードを有効にするフラグです。
 通常は [c:OpenSSL::SSL::OP_ALL] でこれらすべてを有効にします。
 特定のフラグのみ無効にしたい場合は例えば
 
-`````
+```ruby
 ctx.options = OP_ALL & ~OP_DONT_INSERT_EMPTY_FRAGMENTS
-`````
+```
 
 などとします。
 

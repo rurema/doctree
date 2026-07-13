@@ -170,14 +170,12 @@ pattern は Ripper のイベント ID のリストを文字列で記述します
 ただし「.」は任意のトークン 1 つにマッチし、
 その他のメタ文字もすべて文字単位ではなくトークン単位で動作します。
 
-使用例
-
-`````
+```ruby title="使用例"
 require 'ripper'
 p Ripper.slice(%(<<HERE\nstring\#{nil}\nHERE),
                "heredoc_beg .*? nl $(.*?) heredoc_end", 1)
     # => "string\#{nil}\n"
-`````
+```
 
 イベント ID は [m:Ripper::SCANNER_EVENTS] で確認できます。
 

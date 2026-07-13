@@ -20,7 +20,7 @@ Ruby のオブジェクトに変換できます。
 
 以下の例ではスカラを1つ持つリストの AST を構築しています。
 
-`````
+```ruby
 # Create our nodes
 stream = Psych::Nodes::Stream.new
 doc    = Psych::Nodes::Document.new
@@ -31,20 +31,20 @@ scalar = Psych::Nodes::Scalar.new('foo')
 stream.children << doc
 doc.children    << seq
 seq.children    << scalar
-`````
+```
 
 stream は AST のルートです。以下のようにして AST を YAML ドキュメントに
 変換できます。
 
-`````
+```text
 stream.to_yaml => "---\n- foo\n"
-`````
+```
 
 Ruby のオブジェクトに変換するためには以下のようにします。
 
-`````
+```text
 stream.to_ruby => [["foo"]]
-`````
+```
 
 ### YAML AST 仕様
 正しい YAML AST は [c:Psych::Nodes::Stream] ノードが

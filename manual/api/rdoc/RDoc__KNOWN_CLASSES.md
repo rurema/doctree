@@ -13,8 +13,8 @@ library:
 
 Ruby の組み込みクラスの内部的な変数名がキー、クラス名が値のハッシュです。
 
-`````
-RDoc::KNOWN_CLASSES["rb_cObject"] # => "Object"
-`````
+```ruby
+p RDoc::KNOWN_CLASSES["rb_cObject"] # => "Object"
+```
 
 ライブラリの内部で使用します。

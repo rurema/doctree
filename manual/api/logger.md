@@ -56,13 +56,13 @@ end
 例外オブジェクトも記録するメッセージとして使えます。
 下が出力例です。
 
-`````
+```text
 W, [2017-12-07T02:22:53.649000 #11601]  WARN -- : Nothing to do!
 F, [2017-12-07T02:22:53.649172 #11601] FATAL -- : Caught exception; exiting
 F, [2017-12-07T02:22:53.649222 #11601] FATAL -- : No such file or directory @ rb_sysopen - a_non_existent_file (Errno::ENOENT)
 logger_sample.rb:12:in `foreach'
 logger_sample.rb:12:in `<main>'
-`````
+```
 
 これは log.level が [m:Logger::WARN] になっているためです。WARN、
 ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログは無視されま
@@ -171,9 +171,9 @@ logger.debug("This is a " + potentially + " expensive operation")
 
 #### loggerのclose
 
-`````
+```ruby
 logger.close
-`````
+```
 
 #### ログレベル設定
 
@@ -216,17 +216,13 @@ Logger.new(logdev, level: 'INFO')
 ログはデフォルトでは特定のフォーマットで記録されます。デフォルトのフォー
 マットとその場合のログの例は以下のようになります。
 
-フォーマット:
-
-`````
+```text title="フォーマット"
 SeverityID, [DateTime #pid] SeverityLabel -- ProgName: message
-`````
+```
 
-例:
-
-`````
+```text title="例"
 I, [1999-03-03T02:34:24.895701 #19074]  INFO -- Main: info.
-`````
+```
 
 [m:Logger#datetime_format=] を用いてログに記録する時の日時のフォーマッ
 トを変更することもできます。

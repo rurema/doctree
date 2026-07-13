@@ -82,13 +82,12 @@ addr には [m:Fiddle?.malloc] で確保したメモリ領域を渡します。
 
 - **param** `addr` -- [m:Fiddle?.malloc] で確保されたメモリ領域を指す整数を指定します。
 
-例:
-`````
+```ruby title="例"
 require 'fiddle'
 addr = Fiddle.malloc(10)
 p addr               #=> 136942800
 Fiddle.free(addr)
-`````
+```
 
 ### module_function def dlwrap(obj)    -> Integer
 
@@ -96,14 +95,12 @@ Fiddle.free(addr)
 
 - **param** `obj` -- Ruby のオブジェクトを指定します。
 
-例:
-
-`````
+```ruby title="例"
 require 'fiddle'
 s = 'abc'
 p addr = Fiddle.dlwrap(s)   #=> 136122440
 p Fiddle.dlunwrap(addr)     #=> "abc"
-`````
+```
 
 ### module_function def dlunwrap(addr)  -> object
 
@@ -111,14 +108,12 @@ p Fiddle.dlunwrap(addr)     #=> "abc"
 
 - **param** `addr` -- [m:Fiddle?.dlwrap] が返した Ruby オブジェクトのアドレス(整数)を指定します。
 
-例:
-
-`````
+```ruby title="例"
 require 'fiddle'
 s = 'abc'
 p addr = Fiddle.dlwrap(s)   #=> 136122440
 p Fiddle.dlunwrap(addr)     #=> "abc"
-`````
+```
 
 ## Constants
 

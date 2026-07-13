@@ -11,14 +11,13 @@ OpenSSL の設定ファイルは、キーと文字列を対応付けた単純な
 また、キーはセクションによってグループ分けされています。
 どのセクションにも属さないグローバルなキーを作ることもできます。
 
-デフォルトの設定ファイルを読み込む例
-`````
+```ruby title="デフォルトの設定ファイルを読み込む例"
 require 'openssl'
 conf = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 p conf.sections # => ["req_distinguished_name", "req_attributes", "proxy_cert_ext", "policy_anything", "CA_default", ...]
 p conf.get_value("", "HOME") # => "." 
 p conf.get_value("CA_default", "default_days") # => "365" 
-`````
+```
 
 ## Class Methods
 
@@ -112,7 +111,7 @@ section は obsolete です。[] を使ってください。
 渡される値は、セクションを表す文字列、キーを表す文字列、キーに
 割り当てられた値の文字列、の3つです。
 
-`````
+```ruby
 require 'openssl'
 conf = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 conf.each{|section, key, value| p [section, key, value]}
@@ -120,7 +119,7 @@ conf.each{|section, key, value| p [section, key, value]}
 # => ["req_distinguished_name", "countryName_default", "AU"]
 # => ["req_distinguished_name", "countryName_min", "2"]
 # =>       :
-`````
+```
 
 ## Constants
 

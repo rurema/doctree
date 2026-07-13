@@ -8,12 +8,12 @@ DTD 内の宣言でパラメータ実体参照を使って宣言が
 例えば、以下の DTD 宣言における %HTMLsymbol が
 それにあたります。
 
-`````
+```text
 <!ENTITY % HTMLsymbol PUBLIC
    "-//W3C//ENTITIES Symbols for XHTML//EN"
    "xhtml-symbol.ent">
 %HTMLsymbol;
-`````
+```
 
 ```ruby
 require 'rexml/document'

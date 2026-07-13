@@ -10,19 +10,19 @@ DateTime は deprecated とされているため、
 
 ### 簡単なつかいかた
 
-`````
+```ruby
 require 'date'
 
 a = DateTime.new(1993, 2, 24, 12, 30, 45)
 b = DateTime.parse('1993-02-24T12:30:45')
 b += 10
 
-b - a            #=> 10
-b.year           #=> 1993
-b.strftime('%a') #=> "Sat"
+p b - a          #=> 10
+p b.year         #=> 1993
+p b.strftime('%a') #=> "Sat"
 
 yesterday = DateTime.now - 1
-`````
+```
 
 ## Class Methods
 
@@ -199,13 +199,11 @@ complete が真で、年が "00" から "99" の範囲であれば、
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `ArgumentError` -- 正しくない日時になる組み合わせである場合に発生します。
 
-例:
-
-`````
+```ruby title="例"
 require 'date'
 DateTime.parse('2001-02-03T12:13:14Z').to_s
 # => "2001-02-03T12:13:14+00:00"
-`````
+```
 
 - **SEE** [m:Date._parse], [m:Date.parse]
 
@@ -216,13 +214,11 @@ DateTime.parse('2001-02-03T12:13:14Z').to_s
 - **param** `str` -- 日時をあらわす文字列
 - **param** `format` -- 書式
 
-例:
-
-`````
+```ruby title="例"
 require 'date'
 DateTime._strptime('2001-02-03T12:13:14Z')
 # => {:year=>2001, :mon=>2, :mday=>3, :hour=>12, :min=>13, :sec=>14, :zone=>"Z", :offset=>0}
-`````
+```
 
 [m:DateTime.strptime] の内部で使用されています。
 
@@ -238,13 +234,11 @@ DateTime._strptime('2001-02-03T12:13:14Z')
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `ArgumentError` -- 正しくない日時になる組み合わせである場合に発生します。
 
-例:
-
-`````
+```ruby title="例"
 require 'date'
 DateTime.strptime('2001-02-03T12:13:14Z').to_s
 # => "2001-02-03T12:13:14+00:00"
-`````
+```
 
 - **SEE** [m:Date.strptime], [m:DateTime._strptime], [man:strptime(3)], [m:Date#strftime]
 
@@ -267,13 +261,11 @@ strftime('%FT%T%:z') と等価です。
 
 - **param** `n` -- 小数点以下の桁数
 
-例:
-
-`````
+```ruby title="例"
 require 'date'
 DateTime.parse('2001-02-03T04:05:06.123456789+07:00').iso8601(9)
 #=> "2001-02-03T04:05:06.123456789+07:00"
-`````
+```
 
 #@since 1.9.0
 ### def jisx0301(n = 0) -> String
@@ -283,13 +275,11 @@ DateTime.parse('2001-02-03T04:05:06.123456789+07:00').iso8601(9)
 
 - **param** `n` -- 小数点以下の桁数
 
-例:
-
-`````
+```ruby title="例"
 require 'date'
 DateTime.parse('2001-02-03T04:05:06.123456789+07:00').jisx0301(9)
 #=> "H13.02.03T04:05:06.123456789+07:00"
-`````
+```
 
 ### def min -> Integer
 #@since 1.9.1

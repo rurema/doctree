@@ -7,11 +7,11 @@ rdoc ドキュメントの作成を行うクラスです。
 
 以下のようにして、rdoc コマンドを実行するのと同様に実行します。
 
-``````
+```ruby
 require 'rdoc/rdoc'
 rdoc = RDoc::RDoc.new
 rdoc.document(args)
-``````
+```
 
 args には rdoc コマンドに渡すのと同様の引数を文字列の配列で指定します。
 

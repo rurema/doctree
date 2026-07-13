@@ -14,8 +14,8 @@ JSON のオブジェクトから Ruby の文字列を生成して返します。
 
 - **param** `hash` -- キーとして "raw" という文字列を持ち、その値として数値の配列を持つハッシュを指定します。
 
-`````
+```ruby
 require 'json'
-String.json_create({"raw" => [0x41, 0x42, 0x43]}) # => "ABC"
-`````
+p String.json_create({"raw" => [0x41, 0x42, 0x43]}) # => "ABC"
+```
 

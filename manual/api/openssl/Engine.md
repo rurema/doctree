@@ -75,9 +75,9 @@ engine から暗号化/復号化オブジェクトを生成します。
 配列で返します。
 
 配列の各要素は
-`````
+```text
 [コマンド名、コマンドの説明、コマンドのフラグ]
-`````
+```
 という3つの文字列の配列です。
 
 - **SEE** [m:OpenSSL::Engine#ctrl_cmd]
@@ -122,10 +122,9 @@ engine の識別子を文字列で返します。
 ### def name -> String
 engine の(人間に読みやすい)名称を文字列で返します。
 
-例:
-`````
-engine.name # => "Atalla hardware engine support"
-`````
+```ruby title="例"
+p engine.name # => "Atalla hardware engine support"
+```
 
 - **SEE** [m:OpenSSL::Engine#id]
 

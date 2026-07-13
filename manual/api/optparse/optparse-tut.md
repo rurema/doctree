@@ -31,12 +31,12 @@ opt.parse!(ARGV)
 p ARGV
 ```
 ↓
-```````````
+```console
 ruby sample.rb -a foo bar -b baz
 # => true
      true
      ["foo", "bar", "baz"]
-```````````
+```
 
 [m:OptionParser#on] メソッドの引数でオプションを定義し、引数が指定さ
 れた時の処理をブロックで記述します。ブロックの引数にはオプションが指定
@@ -51,11 +51,11 @@ ruby sample.rb -a foo bar -b baz
 して認識されている)。ただし、環境変数 POSIXLY_CORRECT が定義してあると
 この挙動は変更されます。
 
-```````````
+```console
 env POSIXLY_CORRECT=1 ruby ./sample.rb -a foo bar -b baz
 # => true                               # -a はオプションと解釈
      ["foo", "bar", "-b", "baz"]        # -b は非オプションと解釈
-```````````
+```
 
 [m:OptionParser#parse!] により、コマンドライン(ARGV)の解析を行います。
 [m:OptionParser#parse!] では、ARGV からオプションが取り除かれます。
@@ -78,7 +78,7 @@ p argv
 定義していないオプションを指定すると例外
 [c:OptionParser::InvalidOption] が発生します。
 
-```````````
+```console
 ruby ./sample.rb -c
 /usr/local/lib/ruby/1.9/optparse.rb:1428:in `complete': invalid option: -c (OptionParser::InvalidOption)
         from /usr/local/lib/ruby/1.9/optparse.rb:1426:in `catch'
@@ -90,7 +90,7 @@ ruby ./sample.rb -c
         from /usr/local/lib/ruby/1.9/optparse.rb:1363:in `parse!'
         from /usr/local/lib/ruby/1.9/optparse.rb:1356:in `parse'
         from ./sample.rb:9
-```````````
+```
 
 [c:OptionParser] 自体は、どのオプションが指定されたかを記憶しません。
 後の処理の方で、オプションによる条件判断を加えるには、
@@ -110,11 +110,11 @@ p ARGV
 p params
 ```
 ↓
-```````````
+```console
 ruby sample.rb -a foo bar -b baz
 # => ["foo", "bar", "baz"]
      {:a=>true, :b=>true}
-```````````
+```
 
 #@since 2.4.0
 
@@ -138,11 +138,11 @@ p ARGV
 p params
 ```
 ↓
-```````````
+```console
 ruby sample.rb -a foo bar -b baz
 # => ["foo", "bar", "baz"]
      {:a=>true, :bbb=>true}
-```````````
+```
 
 #@end
 
@@ -162,18 +162,18 @@ opt.parse!(ARGV)
 p ARGV
 ```
 
-```````````
+```console
 ruby sample.rb -a foo bar -b baz
 
 # => "foo"
      true
      ["bar", "baz"]
-```````````
+```
 
 オプションの末尾の書き方の基準は、「ヘルプの見栄えが良くなるように書く」です。
 オプションの引数を省略すると例外 [c:OptionParser::MissingArgument] が発生します。
 
-```````````
+```console
 ruby ./sample.rb -a
 /usr/local/lib/ruby/1.9/optparse.rb:455:in `parse': missing argument: -a (OptionParser::MissingArgument)
         from /usr/local/lib/ruby/1.9/optparse.rb:1295:in `order!'
@@ -182,7 +182,7 @@ ruby ./sample.rb -a
         from /usr/local/lib/ruby/1.9/optparse.rb:1336:in `permute!'
         from /usr/local/lib/ruby/1.9/optparse.rb:1363:in `parse!'
         from ./sample.rb:7
-```````````
+```
 
 オプションの引数が必須でないことを示すには、" [" を付けます。
 
@@ -197,12 +197,12 @@ opt.parse!(ARGV)
 p ARGV
 ```
 ↓
-```````````
+```console
 ruby sample.rb -a
 
 # => nil
      []
-```````````
+```
 
 同様に、ヘルプの見栄えが良いように "VAL]" を付加しています。
 
@@ -226,12 +226,12 @@ opt.parse!(ARGV)
 p ARGV
 ```
 ↓
-```````````
+```console
 ruby sample.rb -a foo bar --bar baz
 # => true
      true
      ["foo", "bar", "baz"]
-```````````
+```
 
 --[no-]...などとすることで、否定型のオプションを指定できます。
 
@@ -246,13 +246,13 @@ opt.parse!(ARGV)
 p ARGV
 ```
 ↓
-```````````
+```console
 ruby sample.rb -a foo bar --bar baz --no-bar
 # => true
      true
      false                              # <- --no-bar の指定による。
      ["foo", "bar", "baz"]
-```````````
+```
 
 オプションに対する引数も指定できます。ショートオプションと同じだが、
 GNUの慣習にあわせて
@@ -278,9 +278,9 @@ opt.parse!(ARGV)
 p ARGV
 ```
 ↓
-```````````
+```console
 ruby sample.rb --fo
-```````````
+```
 
 この例では、--fo は、--foo を指定したのと同じになります。この例なら --f
 まで省略できます。
@@ -289,13 +289,13 @@ ruby sample.rb --fo
 
 デフォルトで --help と --version オプションを認識します。
 
-```````````
+```console
 ruby ./sample.rb --help
 # => Usage: sample [options]
 
 ruby ./sample.rb --version
 # => *出力なし*
-```````````
+```
 
 --version は、トップレベルに Version 定数が定義されていると出力されます。
 (優先度は低いが VERSION 定数も参照します。Ruby のバージョンを示す VERSION
@@ -308,10 +308,10 @@ Version = "1.2.3"       # opt.version = "1.2.3"
 opt.parse!(ARGV)
 ```
 ↓
-```````````
+```console
 ruby ./sample.rb --version
 # => sample 1.2.3
-```````````
+```
 
 [m:OptionParser#on] の引数にそのオプションの説明を加えると --help の
 出力に反映されます。
@@ -327,12 +327,12 @@ opt.parse!(ARGV)
 p ARGV
 ```
 ↓
-```````````
+```console
 ruby ./sample.rb --help
 # => Usage: sample [options]
         -a                               description of -a
         -b                               description of -b
-```````````
+```
 
 
 #### サブコマンド {#subcmd}
@@ -362,14 +362,14 @@ subparsers[ARGV.shift].parse!(ARGV) unless ARGV.empty?
 
 実行すると以下のようになります。
 
-```````
+```console
 $ ruby subcom.rb -i add -i
 -i
 add -i
 
 $ ruby subcom.rb list -i
 list -i
-```````
+```
 
 [m:OptionParser#order!] がオプションではない
 コマンドの引数に出会うとそこでパースを中断することを利用しています。
@@ -385,19 +385,19 @@ params = ARGV.getopts("a:b:", "foo", "bar:")
 p params
 ```
 この sample.rb を実行すると
-`````
+```console
 $ ruby sample.rb -a 1 --foo --bar xxx
 {"a"=>"1", "b"=>nil, "foo"=>true, "bar"=>"xxx"}
-`````
+```
 のようになります。
 
 #### '-'で始まるファイル名 {#hyphen_start_file}
 
 '-'で始まるファイル名をコマンドに渡したい場合は以下のように間に"--"を挟みます。
 
-`````````
+```console
 $ ruby sample.rb -- -file
-`````````
+```
 
 "-file" がオプションではない引数として解釈されます。
 これは POSIX.2 の [man:getopt(3)] に由来します。"--" 以降はすべてオプ

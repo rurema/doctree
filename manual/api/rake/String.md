@@ -14,14 +14,13 @@ library: rake
 
 - **param** `newext` -- 新しい拡張子を指定します。
 
-例:
-`````
+```ruby title="例"
 require "rake"
 
-"hoge".ext(".rb")          # => "hoge.rb"
-"hoge.rb".ext(".erb")      # => "hoge.erb"
-"hoge.tar.gz".ext(".bz2")  # => "hoge.tar.bz2"
-`````
+p "hoge".ext(".rb")        # => "hoge.rb"
+p "hoge.rb".ext(".erb")    # => "hoge.erb"
+p "hoge.tar.gz".ext(".bz2")  # => "hoge.tar.bz2"
+```
 
 ### def pathmap(spec = nil){ ... } -> String
 
@@ -51,11 +50,10 @@ require "rake"
 
 %d は数値のプレフィクスを取ることができます。
 
-例:
-``````
-'a/b/c/d/file.txt'.pathmap("%2d")  # => 'a/b'
-'a/b/c/d/file.txt'.pathmap("%-2d") # => 'c/d'
-``````
+```ruby title="例"
+p 'a/b/c/d/file.txt'.pathmap("%2d")  # => 'a/b'
+p 'a/b/c/d/file.txt'.pathmap("%-2d") # => 'c/d'
+```
 
 また、%d, %p, %f, %n, %x, %X には単純な文字列置換を行うための
 置換パターンを表すパラメータを指定することが出来ます。
@@ -67,20 +65,17 @@ require "rake"
 正規表現や後方参照をパターンとして使用することがあるかもしれません。
 中括弧、コンマ、セミコロンはパターンと置換文字列に使用しないでください。
 
-例:
-```````
+```ruby title="例"
 "src/org/onestepback/proj/A.java".pathmap("%{^src,bin}X.class")
 #=> "bin/org/onestepback/proj/A.class"
-```````
+```
 
 置換文字列に '*' を指定した場合は、置換文字列を計算するためにブロックを評価します。
 
-例:
-
-``````
+```ruby title="例"
 "/path/to/file.TXT".pathmap("%X%{.*,*}x") { |ext| ext.downcase }
 #=> "/path/to/file.txt"
-``````
+```
 
 
 ## Protected Instance Methods
