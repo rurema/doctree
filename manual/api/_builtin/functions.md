@@ -1330,39 +1330,9 @@ bar
 #   nil
 ```
 
-以下の関数は、caller の要素から [ファイル名, 行番号, メソッド名]
-を取り出して返します。
-
-```ruby title="例"
-def parse_caller(at)
-#@since 3.4
-  if /^(.+?):(\d+)(?::in '(.*)')?/ =~ at
-#@else
-  if /^(.+?):(\d+)(?::in `(.*)')?/ =~ at
-#@end
-    file = $1
-    line = $2.to_i
-    method = $3
-    [file, line, method]
-  end
-end
-
-def foo
-  p parse_caller(caller.first)
-end
-
-def bar
-  foo
-  p parse_caller(caller.first)
-end
-
-bar
-p parse_caller(caller.first)
-
-#=> ["-", 15, "bar"]
-#   ["-", 19, nil]
-#   nil
-```
+caller の要素から呼び出し元のファイル名や行番号、メソッド名を取り出したい場合は、
+文字列を正規表現でパースするより [m:Kernel?.caller_locations] を使うほうが適切です。
+詳しくは後述の caller_locations の項を参照してください。
 
 以下は、[m:$DEBUG] が真の場合に役に立つ debug 関数
 のサンプルです。

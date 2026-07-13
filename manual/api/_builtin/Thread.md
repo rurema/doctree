@@ -919,19 +919,28 @@ thr.safe_level              # => 1
 
 [m:Thread#alive?] が真を返すなら、このメソッドも真です。
 
-例:
-`````
-a = Thread.new { raise("die now") }
-b = Thread.new { Thread.stop }
-c = Thread.new { Thread.exit }
-d = Thread.new { sleep }
-d.kill                  #=> #<Thread:0x401b3678 aborting>
-a.status                #=> nil
-b.status                #=> "sleep"
-c.status                #=> false
-d.status                #=> "aborting"
+```ruby title="例"
 Thread.current.status   #=> "run"
-`````
+
+a = Thread.new { raise("die now") }
+sleep 0.1
+a.status                #=> nil
+
+b = Thread.new { Thread.stop }
+sleep 0.1
+b.status                #=> "sleep"
+
+c = Thread.new { Thread.exit }
+sleep 0.1
+c.status                #=> false
+
+d = Thread.new { sleep }
+sleep 0.1
+d.status                #=> "sleep"
+d.kill
+sleep 0.1
+d.status                #=> false
+```
 
 - **SEE** [m:Thread#alive?], [m:Thread#stop?]
 
