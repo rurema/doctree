@@ -50,15 +50,15 @@ EOS
 
 a = doc.root.elements[1] # => <a> ... </>
 b1 = REXML::XPath.first(a, "b")
-b1.text # => "b1"
+p b1.text # => "b1"
 
-REXML::XPath.first(doc, "/root/a/x:c") # => <x:c/>
-REXML::XPath.first(a, "x:c") # => <x:c/>
-REXML::XPath.first(a, "y:c") # => nil
-REXML::XPath.first(a, "y:c", {"y" => "1"}) # => <x:c/>
+p REXML::XPath.first(doc, "/root/a/x:c") # => <x:c/>
+p REXML::XPath.first(a, "x:c") # => <x:c/>
+p REXML::XPath.first(a, "y:c") # => nil
+p REXML::XPath.first(a, "y:c", {"y" => "1"}) # => <x:c/>
 b2 = REXML::XPath.first(doc, "/root/a/b[text()=$v]", {}, {"v" => "b2"})
-b2 # => <b> ... </>
-b2.text # => "b2"
+p b2 # => <b> ... </>
+p b2.text # => "b2"
 ```
 
 ### def each(element, path = nil, namespaces = {}, variables = {}) {|e| ... } -> ()
@@ -136,7 +136,7 @@ doc = REXML::Document.new(<<EOS)
 </root>
 EOS
 
-REXML::XPath.match(doc, "/root/a/b") # => [<b> ... </>, <b> ... </>]
+p REXML::XPath.match(doc, "/root/a/b") # => [<b> ... </>, <b> ... </>]
 ```
 
 #@# == Constants

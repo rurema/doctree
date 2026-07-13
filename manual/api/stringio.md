@@ -249,9 +249,9 @@ a.each_byte{|ch| p ch }
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("ho")
-a.getc                   # => "h"
-a.getc                   # => "o"
-a.getc                   # => nil
+p a.getc                 # => "h"
+p a.getc                 # => "o"
+p a.getc                 # => nil
 ```
 #@end
 
@@ -268,9 +268,9 @@ a.getc                   # => nil
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("ho")
-a.getbyte                #=> 104
-a.getbyte                #=> 111
-a.getbyte                #=> nil
+p a.getbyte              #=> 104
+p a.getbyte              #=> 111
+p a.getbyte              #=> nil
 ```
 
 ### def gets(rs = $/)    -> String | nil
@@ -285,10 +285,10 @@ a.getbyte                #=> nil
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("hoge")
-a.gets                  #=> "hoge"
-$_                      #=> "hoge"
-a.gets                  #=> nil
-$_                      #=> nil
+p a.gets                #=> "hoge"
+p $_                    #=> "hoge"
+p a.gets                #=> nil
+p $_                    #=> nil
 ```
 
 - **SEE** [m:$/]
@@ -335,7 +335,7 @@ require "stringio"
 a = StringIO.new("hoge", 'r+')
 a.pos = 10
 a << 'Z'
-a.string                        #=> "hoge\000\000\000\000\000\000Z"
+p a.string                      #=> "hoge\000\000\000\000\000\000Z"
 ```
 
 ### def print()        -> nil
@@ -352,7 +352,7 @@ a.string                        #=> "hoge\000\000\000\000\000\000Z"
 require "stringio"
 a = StringIO.new("", 'r+')
 a.print("hoge", "bar", "foo")
-a.string                     #=> "hogebarfoo"
+p a.string                   #=> "hogebarfoo"
 ```
 
 ### def printf(format, *obj)    -> nil
@@ -369,7 +369,7 @@ a.string                     #=> "hogebarfoo"
 require "stringio"
 a = StringIO.new("", 'r+')
 a.printf("%c%c%c", 97, 98, 99)
-a.string                      #=> "abc"
+p a.string                    #=> "abc"
 ```
 
 ### def putc(ch)    -> object
@@ -394,7 +394,7 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 require "stringio"
 a = StringIO.new("", 'r+')
 a.puts("hoge", "bar", "foo")
-a.string                     #=> "hoge\nbar\nfoo\n"
+p a.string                   #=> "hoge\nbar\nfoo\n"
 ```
 
 ### def read                  -> String
@@ -422,7 +422,7 @@ a.string                     #=> "hoge\nbar\nfoo\n"
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("hoge")
-a.readchar               #=> "h"
+p a.readchar             #=> "h"
 ```
 
 - **raise** `EOFError` -- EOFに達した時発生する
@@ -436,7 +436,7 @@ a.readchar               #=> "h"
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("hoge")
-a.readbyte               #=> 104
+p a.readbyte             #=> 104
 ```
 
 - **raise** `EOFError` -- 文字列の終端に到達した時に発生します。
@@ -457,8 +457,8 @@ a.readbyte               #=> 104
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("hoge\nfoo\nbar\n")
-a.readline                           #=> "hoge\n"
-a.readline(nil)                      #=> "foo\nbar\n"
+p a.readline                         #=> "hoge\n"
+p a.readline(nil)                    #=> "foo\nbar\n"
 a.readline                           #=> EOFError が発生する
 ```
 
@@ -476,8 +476,8 @@ a.readline                           #=> EOFError が発生する
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("hoge\nfoo\nbar\n")
-a.readlines                          #=> ["hoge\n", "foo\n", "bar\n"]
-a.readlines                          #=> []
+p a.readlines                        #=> ["hoge\n", "foo\n", "bar\n"]
+p a.readlines                        #=> []
 ```
 
 - **SEE** [m:$/]
@@ -625,9 +625,9 @@ len を返します。
 require "stringio"
 a = StringIO.new("hoge", 'r+')
 a.truncate(2)
-a.string                       #=> "ho"
+p a.string                     #=> "ho"
 a.truncate(5)
-a.string                       #=> "ho\000\000\000"
+p a.string                     #=> "ho\000\000\000"
 ```
 
 ### def tty?    -> false
@@ -724,8 +724,8 @@ p s.pos        #=> 7
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("hoge", 'r+')
-a.write("aaa")                 #=> 3
-a.string                       #=> "aaae"
+p a.write("aaa")               #=> 3
+p a.string                     #=> "aaae"
 ```
 
 

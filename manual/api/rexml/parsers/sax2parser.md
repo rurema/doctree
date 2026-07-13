@@ -36,9 +36,9 @@ parser.listen(:start_element, ["a"]){|uri, localname, qname, attrs|
 texts = []
 parser.listen(:characters, ["a"]){|c| texts << c }
 parser.parse
-elements # => [["root", {"n"=>"0"}], ["a", {"n"=>"1"}], ["b", {"n"=>"2"}], ["a", {"n"=>"3"}]]
-as # => [["a", {"n"=>"1"}], ["a", {"n"=>"3"}]]
-texts # => ["111", "333"]
+p elements # => [["root", {"n"=>"0"}], ["a", {"n"=>"1"}], ["b", {"n"=>"2"}], ["a", {"n"=>"3"}]]
+p as # => [["a", {"n"=>"1"}], ["a", {"n"=>"3"}]]
+p texts # => ["111", "333"]
 ```
 
 ```ruby title="仕様確認サンプル"

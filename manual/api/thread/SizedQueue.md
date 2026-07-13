@@ -64,7 +64,7 @@ SizedQueue オブジェクトを生成します。
 
 ```ruby title="例"
 q = SizedQueue.new(4)
-q.max # => 4
+p q.max # => 4
 ```
 
 ### def max=(n)
@@ -77,9 +77,9 @@ q.max # => 4
 require 'thread'
 #@end
 q = SizedQueue.new(4)
-q.max # => 4
+p q.max # => 4
 q.max = 5
-q.max # => 5
+p q.max # => 5
 ```
 
 #@since 2.2.0
@@ -202,9 +202,9 @@ q = SizedQueue.new(4)
 
 [:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
 
-q.closed? # => false
+p q.closed? # => false
 q.close
-q.closed? # => true
+p q.closed? # => true
 ```
 
 - **SEE** [m:Thread::Queue#close]

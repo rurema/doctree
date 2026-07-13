@@ -9,9 +9,9 @@ require 'rexml/document'
 begin
   REXML::Document.new("<a>foo\n</b></a> ")
 rescue REXML::ParseException => ex
-  ex.position # => 16
-  ex.line # => 2
-  ex.context # => [16, 2, 2]
+  p ex.position # => 16
+  p ex.line # => 2
+  p ex.context # => [16, 2, 2]
 end
 ```
 

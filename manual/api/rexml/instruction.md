@@ -18,9 +18,9 @@ doc = REXML::Document.new(<<EOS)
 <?xml-stylesheet type="text/css" href="style.css"?>
 <root />
 EOS
-doc[2] # => <?p-i xml-stylesheet ...?>
-doc[2].target # => "xml-stylesheet"
-doc[2].content # => "type=\"text/css\" href=\"style.css\""
+p doc[2] # => <?p-i xml-stylesheet ...?>
+p doc[2].target # => "xml-stylesheet"
+p doc[2].content # => "type=\"text/css\" href=\"style.css\""
 ```
 
 ## Class Methods
@@ -44,9 +44,9 @@ doc = REXML::Document.new(<<EOS)
 <?xml-stylesheet type="text/css" href="style.css"?>
 <root />
 EOS
-doc[2] # => <?p-i xml-stylesheet ...?>
-doc[2].target # => "xml-stylesheet"
-doc[2].content # => "type=\"text/css\" href=\"style.css\""
+p doc[2] # => <?p-i xml-stylesheet ...?>
+p doc[2].target # => "xml-stylesheet"
+p doc[2].content # => "type=\"text/css\" href=\"style.css\""
 ```
 
 ### def target=(value)
@@ -65,11 +65,11 @@ doc = REXML::Document.new(<<EOS)
 <?foobar?>
 <root />
 EOS
-doc[2] # => <?p-i xml-stylesheet ...?>
-doc[2].target # => "xml-stylesheet"
-doc[2].content # => "type=\"text/css\" href=\"style.css\""
-doc[4].target # => "foobar"
-doc[4].content # => nil
+p doc[2] # => <?p-i xml-stylesheet ...?>
+p doc[2].target # => "xml-stylesheet"
+p doc[2].content # => "type=\"text/css\" href=\"style.css\""
+p doc[4].target # => "foobar"
+p doc[4].content # => nil
 ```
 
 ### def content=(value)
