@@ -9,7 +9,7 @@ gzip 形式の圧縮ファイルを読み込むラッパークラスです。
 IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 持つオブジェクト) と関連付けて使用します。
 
-`````
+```ruby
 require 'zlib'
 =begin
 # hoge.gz がない場合は下記で作成できる。
@@ -26,7 +26,7 @@ f = File.open('hoge.gz')
 gz = Zlib::GzipReader.new(f)
 print gz.read
 gz.close
-`````
+```
 
 ## Class Methods
 
@@ -43,7 +43,7 @@ GzipReader オブジェクトは io からデータを逐次リードして
 
 - **raise** `Zlib::GzipFile::Error` -- ヘッダーの解析に失敗した場合発生します。
 
-`````
+```ruby
 require 'zlib'
 
 File.open('hoge.txt', "w") { |fp|
@@ -57,7 +57,7 @@ rescue Zlib::GzipFile::Error => err
   puts "error", err #=> error
                     #=> not in gzip format
 end
-`````
+```
 
 ### def wrap(io) -> Zlib::GzipReader
 ### def wrap(io) {|gz| ... } -> object
@@ -72,7 +72,7 @@ io と関連付けられた GzipReader オブジェクトを作成します。
 
 - **param** `io` -- IO オブジェクトを指定します。
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -94,7 +94,7 @@ Zlib::GzipReader.wrap(f){|gz|
   gz.finish
 }
 p f.closed? #=> false
-`````
+```
 
 ### def open(filename) -> Zlib::GzipReader
 ### def open(filename) {|gz| ... } -> object
@@ -106,7 +106,7 @@ filename で指定されるファイルを gzip ファイルとして
 
 - **param** `filename` -- gzip ファイル名を文字列で指定します。
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -119,7 +119,7 @@ Zlib::GzipWriter.open('hoge.gz') { |gz|
 Zlib::GzipReader.open('hoge.gz'){|gz|
   print gz.read
 }
-`````
+```
 
 ## Instance Methods
 
@@ -129,7 +129,7 @@ Zlib::GzipReader.open('hoge.gz'){|gz|
 圧縮データの終端に達した場合真を返します。
 フッターが読み込まれていなくても真を返すことに注意して下さい。
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -147,7 +147,7 @@ Zlib::GzipReader.open('hoge.gz'){|gz|
   }
   p gz.eof? #=> true
 }
-`````
+```
 
 ### def pos -> Integer
 ### def tell -> Integer
@@ -155,7 +155,7 @@ Zlib::GzipReader.open('hoge.gz'){|gz|
 現在までに展開したデータの長さの合計を返します。
 ファイルポインタの位置ではないことに注意して下さい。
 
-`````
+```ruby
 require 'zlib'
 
 Zlib::GzipWriter.open('hoge.gz') { |gz|
@@ -174,7 +174,7 @@ Zlib::GzipReader.open('hoge.gz'){|gz|
 #=> e, 4
 #=>  
 #=> , 5
-`````
+```
 
 ### def each(rs = $/){|line| ... } -> self
 ### def each_line(rs = $/){|line| ... } -> self
@@ -211,7 +211,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 - **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
 - **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -227,7 +227,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
     puts line
   }
 }
-`````
+```
 
 - **SEE** [m:IO#each], [m:IO#each_line]
 
@@ -262,7 +262,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 - **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
 - **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -282,7 +282,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 #=> 103 -> g
 #=> 101 -> e
 #=> 10 -> 
-`````
+```
 
 - **SEE** [m:IO#each_byte]
 
@@ -316,7 +316,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 - **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
 - **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -334,7 +334,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 }
 #=> hoge
 #=> fuga
-`````
+```
 
 ### def getc -> Integer | nil
 IO クラスの同名メソッド[m:IO#getc]と同じです。
@@ -364,7 +364,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 - **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
 - **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -384,7 +384,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 #=> 103
 #=> 101
 #=> 10
-`````
+```
 
 
 - **SEE** [m:IO#getc]
@@ -417,7 +417,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 - **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
 - **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -440,7 +440,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 #=> o 2
 #=> g 3
 #=> e 4
-`````
+```
 
 - **SEE** [m:IO#lineno]
 
@@ -474,7 +474,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 - **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
 - **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -498,7 +498,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 #=> o 1001
 #=> g 1002
 #=> e 1003
-`````
+```
 
 - **SEE** [m:IO#lineno=]
 
@@ -533,7 +533,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 - **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
 - **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -548,7 +548,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
   p gz.read     #=> "_fuga\n"
   p gz.read(1)  #=> nil
 }
-`````
+```
 
 - **SEE** [m:IO#read]
 
@@ -581,7 +581,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 - **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
 - **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -605,7 +605,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 #=> 101
 #=> 10
 #=> end of file reached
-`````
+```
 
 ### def readline(rs = $/) -> String
 IO クラスの同名メソッド[m:IO#readline]と同じです。
@@ -638,7 +638,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 - **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
 - **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -660,7 +660,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 #=> hoge
 #=> fuga
 #=> end of file reached
-`````
+```
 
 - **SEE** [m:IO#readline]
 
@@ -694,7 +694,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 - **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
 - **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -708,7 +708,7 @@ Zlib::GzipWriter.open('hoge.gz') { |gz|
 Zlib::GzipReader.open('hoge.gz') { |gz|
   p gz.readlines #=>  ["hoge\n", "fuga\n"]
 }
-`````
+```
 
 - **SEE** [m:IO#readlines]
 
@@ -757,7 +757,7 @@ Zlib::GzipFile::LengthError 例外を発生させます。
 - **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
 - **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -784,7 +784,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 #=> f -> u
 #=> u -> g
 #=> g -> a
-`````
+```
   
 - **SEE** [m:IO#ungetc]
 
@@ -794,7 +794,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 時点に戻します。関連付けられている IO オブジェクトに
 seek メソッドが定義されている必要があります。
 
-`````
+```ruby
 require 'zlib'
 
 =begin
@@ -808,10 +808,10 @@ Zlib::GzipWriter.open('hoge.gz') { |gz|
 gz = Zlib::GzipReader.open('hoge.gz')
 puts gz.gets #=> hoge
 puts gz.gets #=> fuga
-gz.rewind  #=> 0
+p gz.rewind  #=> 0
 puts gz.gets #=> hoge
 gz.close
-`````
+```
 
 ### def unused -> String | nil
 

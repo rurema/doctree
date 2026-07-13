@@ -25,19 +25,19 @@ date を [m:Date._parse] によって
 
 ブロック付きで呼ばれた場合、dateの年はブロックによって変換されます。
 
-`````
+```text
 require 'time'
 Time.parse(...) {|y| y < 100 ? (y >= 69 ? y + 1900 : y + 2000) : y}
-`````
+```
 
 与えられた時刻に上位の要素がなかったり壊れていた場合、nowの
 該当要素が使われます。
 
-`````
+```ruby
 require 'time'
 time = Time.local(2019, 5, 1)
-Time.parse("12:00", time)   #=> 2019-05-01 12:00:00 +0900
-`````
+p Time.parse("12:00", time) #=> 2019-05-01 12:00:00 +0900
+```
 
 下位の要素がなかったり壊れていた場合、最小値(1か0)が使われます。
 
@@ -51,15 +51,15 @@ Time.parse("12:00", time)   #=> 2019-05-01 12:00:00 +0900
                      Time のインスタンスを返していました。
 #@end
 
-`````
+```ruby
 require 'time'
 
 # 現在時刻が "Thu Nov 29 14:33:20 GMT 2001" で
 # タイムゾーンがGMTとすると:
-Time.parse("16:30")     #=> Thu Nov 29 16:30:00 GMT 2001
-Time.parse("7/23")      #=> Mon Jul 23 00:00:00 GMT 2001
-Time.parse("2002/1")    #=> Tue Jan 01 00:00:00 GMT 2002
-`````
+p Time.parse("16:30")   #=> Thu Nov 29 16:30:00 GMT 2001
+p Time.parse("7/23")    #=> Mon Jul 23 00:00:00 GMT 2001
+p Time.parse("2002/1")  #=> Tue Jan 01 00:00:00 GMT 2002
+```
 
 [m:Date._parse]がdateから情報を取り出せないとき、
 または [c:Time] クラスが指定された日時を表現できないときに
@@ -68,13 +68,13 @@ Time.parse("2002/1")    #=> Tue Jan 01 00:00:00 GMT 2002
 このメソッドは他のパース用メソッドのフェイルセーフとして
 以下のように使用できます:
 
-`````
+```ruby
 require 'time'
 
 Time.rfc2822(date) rescue Time.parse(date)
 Time.httpdate(date) rescue Time.parse(date)
 Time.xmlschema(date) rescue Time.parse(date)
-`````
+```
 
 従って [m:Time.parse] の失敗はチェックすべきです。
 
@@ -96,8 +96,7 @@ dateが[RFC:2822]に準拠していない、または
                      [c:Time]クラスが指定された日時を表現できないときに
                      発生します。
 
-使用例
-`````
+```ruby title="使用例"
 require 'time'
 
 rfc2822_time = 'Sun, 31 Aug 2008 12:08:19 +0900'
@@ -110,7 +109,7 @@ begin
 rescue ArgumentError => err
   puts "format err: #{err}"
 end
-`````
+```
 
 ### def httpdate(date) -> Time
 
@@ -125,7 +124,7 @@ dateが[RFC:2616]に準拠していない、または
 
 - **raise** `ArgumentError` -- dateが[RFC:2616]に準拠していない、または [c:Time]クラスが指定された日時を表現できないときに発生します。
 
-`````
+```ruby
 require 'time'
 rfc2616_time = 'Sun, 31 Aug 2008 12:34:56 GMT'
 
@@ -138,7 +137,7 @@ begin
 rescue ArgumentError => err
   puts err #=>  not RFC 2616 compliant date: "San, 31 Aug 2008 12:34:56 GMT"
 end
-`````
+```
 
 
 ### def xmlschema(date) -> Time
@@ -161,7 +160,7 @@ date がISO 8601で定義されている形式に準拠していない、
                      または [c:Time] クラスが指定された日時を表現できないとき
                      に発生します。
 使用例
-`````
+```ruby
 require 'time'
 
 iso8601_time = '2008-08-31T12:34:56+09:00'
@@ -175,7 +174,7 @@ begin
 rescue ArgumentError => err
   puts err #=> invalid date: "2008-08-31A12:34:56+09:00"
 end
-`````
+```
 
 - **SEE** [m:Time#xmlschema], [m:Time#iso8601]
 
@@ -185,14 +184,14 @@ end
 文字列を [m:Date._strptime] を用いて [c:Time] オブジェクト
 に変換します。
 
-`````
+```ruby
 require 'time'
 Time.strptime('2001-02-03T04:05:06+09:00', '%Y-%m-%dT%H:%M:%S%z')
 #=> 2001-02-03 06:05:06 +0900
-`````
+```
 
 ブロックを渡すと年の部分をブロックによって変換できます。
-`````
+```ruby
 require 'time'
 Time.strptime('91/5/18 4:13:00', '%Y/%m/%d %T'){|y| 
   if y > 100 then y
@@ -209,7 +208,7 @@ Time.strptime('01/5/18 4:13:00', '%Y/%m/%d %T'){|y|
   end
 }
 #=>  2001-05-18 04:13:00 +0900
-`````
+```
 
 詳しくは [m:DateTime.strptime], [m:Date.strptime] を見てください。
 
@@ -226,20 +225,19 @@ Time.strptime('01/5/18 4:13:00', '%Y/%m/%d %T'){|y|
 返します。
 
 - **return** -- 以下の形式の文字列を返します。
-```
+```text
   day-of-week, DD month-name CCYY hh:mm:ss zone
 ```
         ただし zone は [+-]hhmm です。
         self が UTC time の場合、zone は +0000 になります。
 
-使用例
-`````
+```ruby title="使用例"
 require 'time'
 
 iso8601_time = '2008-08-31T12:34:56+09:00'
 t = Time.iso8601(iso8601_time)
 p t.rfc2822      #=> "Sun, 31 Aug 2008 03:34:56 -0000"
-`````
+```
 
 ### def httpdate -> String
 
@@ -247,19 +245,18 @@ p t.rfc2822      #=> "Sun, 31 Aug 2008 03:34:56 -0000"
 返します。
 
 - **return** -- 以下の形式の文字列を返します。
-```
+```text
   day-of-week, DD month-name CCYY hh:mm:ss GMT
 ```
         注意: 結果はいつも UTC (GMT) です。
 
-使用例
-`````
+```ruby title="使用例"
 require 'time'
 
 iso8601_time = '2008-08-31T12:34:56+09:00'
 t = Time.iso8601(iso8601_time)
 p t.httpdate     #=> "Sun, 31 Aug 2008 03:34:56 GMT"
-`````
+```
 
 
 ### def xmlschema(fractional_seconds = 0) -> String
@@ -276,20 +273,19 @@ XML Schema で定義されている dateTime として
                           省略した場合は0 となります。
 
 - **return** -- 以下の形式の文字列を返します。
-```
+```text
   CCYY-MM-DDThh:mm:ssTZD
   CCYY-MM-DDThh:mm:ss.sssTZD
 ```
         ただし TZD は Z または [+-]hh:mm です。
 
-使用例
-`````
+```ruby title="使用例"
 require 'time'
 
 iso8601_time = '2008-08-31T12:34:56+09:00'
 t = Time.iso8601(iso8601_time)
 p t.xmlschema    #=> "2008-08-31T03:34:56Z"
 p t.xmlschema(9) #=> "2008-08-31T03:34:56.000000000Z"
-`````
+```
 
 - **SEE** [m:Time.iso8601], [m:Time.xmlschema]

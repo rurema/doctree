@@ -15,9 +15,7 @@ Apache の htpasswd 互換のクラスです。
 htpasswd -m (MD5) や -s (SHA) で作成された .htpasswd ファイルには対応していません。
 
 
-例
-
-````
+```ruby title="例"
 require 'webrick'
 include WEBrick
 htpd = HTTPAuth::Htpasswd.new('dot.htpasswd')
@@ -26,7 +24,7 @@ htpd.flush
 htpd2 = HTTPAuth::Htpasswd.new('dot.htpasswd')
 pass = htpd2.get_passwd(nil, 'username', false)
 p pass == 'supersecretpass'.crypt(pass[0,2])
-````
+```
 
 ## Class Methods
 

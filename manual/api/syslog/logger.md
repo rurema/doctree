@@ -22,20 +22,20 @@ require:
 
 ローカルマシンの syslogd にログを保存:
 
-`````
+```ruby
 require 'syslog/logger'
 
 log = Syslog::Logger.new 'my_program'
 log.info 'this line will be logged via syslog(3)'
-`````
+```
 
 環境によっては syslog.conf の設定が必要である可能性があります。FreeBSD
 では、/etc/syslog.conf に以下のような記述が必要です。
 
-````
+```text
 !my_program
 *.*                                             /var/log/my_program.log
-````
+```
 
 この場合、/var/log/my_program.log に touch して syslogd に HUP シグナル
 を送信する必要があります。(Free BSD だと killall -HUP syslogd)

@@ -17,13 +17,13 @@ weak reference を実現するクラスです。
 
 ### サンプルコード
 
-`````
+```ruby
 require 'weakref'
 
 foo = Object.new
 ref = WeakRef.new(foo)
 ref.some_method_of_foo
-`````
+```
 
 
 ## Class Methods

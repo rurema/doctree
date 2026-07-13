@@ -12,7 +12,7 @@ library: socket
 ユーザの入力をそのままサーバに転送するプログラムは以下の
 ようになります。
 
-`````
+```ruby
 require "socket"
   
 port = if ARGV.size > 0 then ARGV.shift else 4444 end
@@ -25,7 +25,7 @@ while gets
   print(s.gets)
 end
 s.close
-`````
+```
 
 ## Class Methods
 
@@ -86,11 +86,9 @@ decimal の文字列 ("127.0.0.1"のような文字列) や IPv6
 
 - **return** -- ホスト名、ホストの別名の配列、ホストのアドレスタイプ、ホストのアドレスを各要素とする配列を返します。
 
-例:
-
-`````
+```ruby title="例"
 require 'socket'
 
 p TCPSocket.gethostbyname("www.ruby-lang.org")
 #=> ["beryllium.ruby-lang.org", [], 2, "210.163.138.100"]
-`````
+```

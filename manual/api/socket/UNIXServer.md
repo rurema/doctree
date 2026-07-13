@@ -23,13 +23,13 @@ path で指定したパス名を用いて接続を受け付けるソケット
 
 - **param** `path` -- 接続を受け付けるパス名文字列
 
-`````
+```ruby
 require 'socket'
 
 serv = UNIXServer.new("/tmp/sock")
 s = serv.accept
 p s.read
-`````
+```
 
 ## Instance Methods
 
@@ -38,9 +38,7 @@ p s.read
 クライアントからの接続要求を [man:accept(2)]で待ち受け、接続した
 [c:UNIXSocket] のインスタンスを返します。
 
-例:
-
-`````
+```ruby title="例"
 require 'socket'
 
 UNIXServer.open("/tmp/s") {|serv|
@@ -51,7 +49,7 @@ UNIXServer.open("/tmp/s") {|serv|
   p c.recv(20)    #=> "from server"
   p s.recv(20)    #=> "from client"
 }
-`````
+```
 
 #@if (version >= "1.8.5")
 ### def accept_nonblock -> UnixSocket
@@ -70,7 +68,7 @@ UNIXServer.open("/tmp/s") {|serv|
 発生した場合は、その例外には [c:IO::WaitReadable] が extend
 されます。それを利用してリトライ可能な例外を掴まえることができます。
 
-`````
+```ruby
 require 'socket'
 serv = UNIXServer.new("/tmp/sock")
 begin # emulate blocking accept
@@ -80,7 +78,7 @@ rescue IO::WaitReadable, Errno::EINTR
   retry
 end
 # sock is an accepted socket.
-`````
+```
 #@end
 
 - **SEE** [m:UNIXServer#accept]
@@ -103,13 +101,11 @@ backlog は、クライアントからの接続要求を保留できる数です
 接続したクライアントのソケットをファイル記述子で返すことを除けば
 [m:UNIXServer#accept] と同じです。
 
-例:
-
-`````
+```ruby title="例"
 require 'socket'
 
 UNIXServer.open("/tmp/s") {|serv|
   c = UNIXSocket.open("/tmp/s")
   p serv.sysaccept        #=> 6
 }
-`````
+```

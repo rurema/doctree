@@ -1,4 +1,4 @@
-```````
+```text
 Common Options:
   -h, --help                       このコマンドのヘルプを表示します
   -V, --[no-]verbose               表示を詳細にします
@@ -6,4 +6,4 @@ Common Options:
       --config-file FILE           指定された設定ファイルを使用します
       --backtrace                  バックトレースを表示します
       --debug                      Ruby 自体のデバッグオプションを有効にします
-```````
+```

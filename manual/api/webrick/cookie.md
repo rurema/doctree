@@ -30,7 +30,7 @@ name にクッキーの名前を、value にクッキーで保持する値を与
 
 - **param** `str` -- Cookie を表す文字列を指定します。
 
-`````
+```ruby
 require 'webrick'
 include WEBrick
 c = Cookie.parse('$Version="1"; Customer="WILE"; $Path="/foo"; P_Number="Rocket"; $Path="/foo/hoge"')
@@ -39,7 +39,7 @@ p c[1].name, c[1].path
 #=> 
 "P_Number"
 "/foo/hoge"
-`````
+```
 
 ### def parse_set_cookie(str)    -> WEBrick::Cookie
 
@@ -48,7 +48,7 @@ p c[1].name, c[1].path
 
 - **param** `str` -- Set-Cookie ヘッダの値を文字列で指定します。
 
-`````
+```ruby
 require 'webrick'
 include WEBrick
 c = Cookie.parse_set_cookie('Shipping="FedEx"; Version="1"; Path="/acme"')
@@ -57,7 +57,7 @@ p c.name, c.value
 #=>
 "Shipping"
 "FedEx"
-`````
+```
 
 
 

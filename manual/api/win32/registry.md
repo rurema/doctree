@@ -5,7 +5,7 @@ category: Windows
 win32/registry は Win32 プラットフォームでレジストリをアクセスするための
 ライブラリです。Win32 API の呼び出しに [c:Win32API] を使います。
 
-```
+```text
 require 'win32/registry'
 
 Win32::Registry::HKEY_CURRENT_USER.open('SOFTWARE\foo') do |reg|
@@ -29,13 +29,13 @@ end
 
 レジストリをアクセスするには [c:WIN32OLE] を使って WScript.Shell オブジェクト経由でアクセスする方法もあります。
 
-`````
+```ruby
 require 'win32ole'
 
 wsh = WIN32OLE.new('WScript.Shell')
 value = wsh.RegRead 'HKLM\Software\Microsoft\Windows\...'
 wsh.RegWrite 'HKCU\Software\foo\barfile\shell\open\command\\', '"C:\..." "%1"', 'REG_SZ'
-`````
+```
 
 ただし，キーを列挙したり，自由なバイナリ値を読み書きできません。
 

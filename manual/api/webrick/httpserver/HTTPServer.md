@@ -7,7 +7,7 @@ HTTP サーバの機能を提供するクラスです。
 
 以下は HTTP サーバとしてちゃんと動作する例です。
 
-````
+```ruby
 require 'webrick'
 srv = WEBrick::HTTPServer.new({:DocumentRoot => '/home/username/public_html/',
                                :BindAddress => '127.0.0.1',
@@ -15,7 +15,7 @@ srv = WEBrick::HTTPServer.new({:DocumentRoot => '/home/username/public_html/',
 srv.mount('/hoge.pl', WEBrick::HTTPServlet::CGIHandler, 'really_executed_script.rb')
 Signal.trap(:INT){ srv.shutdown }
 srv.start
-````
+```
 
 ## Class Methods
 
@@ -76,12 +76,12 @@ HTTPServer オブジェクトを生成して返します。
 
 - **param** `options` -- サーブレットのコンストラクタの引数を指定します。
 
-`````
+```ruby
 require 'webrick'
 include WEBrick
 srv = HTTPServer.new( { :BindAddress => '127.0.0.1', :Port => 10080 } )
 srv.mount('/img', WEBrick::HTTPServlet::FileHandler, '/home/username/images')
-`````
+```
 
 ### def mount_proc(dir, proc)             -> ()
 ### def mount_proc(dir){|req, res| ...}   -> ()
@@ -103,9 +103,9 @@ srv.mount('/img', WEBrick::HTTPServlet::FileHandler, '/home/username/images')
 
 - **param** `dir` -- 対応を解消するディレクトリを指定します。
 
-`````
+```ruby
 srv.mount('/img')
-`````
+```
 
 ### def virtual_host(server)    -> ()
 
@@ -115,7 +115,7 @@ srv.mount('/img')
 - **param** `server` -- バーチャルホストを表す WEBrick::HTTPServer オブジェクトを指定します。
 
 
-`````
+```ruby
 require 'webrick'
 include WEBrick
 srv1 = HTTPServer.new( { :Port => 1080, :ServerName => 'hoge.example.com' } )
@@ -125,7 +125,7 @@ srv  = HTTPServer.new( { :Port => 1080 } )
 srv.virtual_host(srv1)
 srv.virtual_host(srv2)
 srv.start
-`````
+```
 
 # class WEBrick::HTTPServerError < WEBrick::ServerError
 

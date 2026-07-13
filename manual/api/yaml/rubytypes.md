@@ -17,7 +17,7 @@ Ruby の組み込みクラスのいくつかを YAML に変換するためのサ
 
 - **raise** `TypeError` --
 
-`````
+```ruby
 require 'yaml'
   
 begin
@@ -27,7 +27,7 @@ rescue
   p $!
   #=> #<TypeError: can't dump anonymous class Class>
 end
-`````
+```
 
 # reopen Object
 
@@ -63,7 +63,7 @@ end
 #@end
             てください。
 
-`````
+```ruby
 require 'yaml'
   
 h = {
@@ -87,7 +87,7 @@ print c.to_yaml
 #=> --- !ruby/object:MyDog
 #=> age: 3
 #=> name: Pochi
-`````
+```
 
 ### def to_yaml_style -> nil
 
@@ -95,9 +95,7 @@ nilを返します。
 
 - **return** -- nilを返します。
 
-例:
-
-`````
+```ruby title="例"
 require 'yaml'
   
 p to_yaml_style
@@ -105,7 +103,7 @@ p to_yaml_style
 a = []
 p a.to_yaml_style
 #=> nil
-`````
+```
 
 ### def to_yaml_properties -> [String]
 
@@ -113,7 +111,7 @@ p a.to_yaml_style
 
 - **return** -- 自身のインスタンス変数名の配列
 
-`````
+```ruby
 require 'yaml'
   
 h = {
@@ -132,7 +130,7 @@ c.name = "Pochi"
 c.age = 3
 p c.to_yaml_properties
 #=> ["@age", "@name"]
-`````
+```
 
 # reopen Hash
 
@@ -168,12 +166,12 @@ p c.to_yaml_properties
 #@end
             てください。
 
-`````
+```text
 require 'yaml'
 print({"foo" => "bar"}.to_yaml)
 # => ---
 foo: bar
-`````
+```
 
 ### def yaml_initialize(tag, val)
 
@@ -193,13 +191,13 @@ foo: bar
 
 - **return** -- 自身のクラス名から Struct::をのぞいた文字列
 
-`````
+```ruby
 require 'yaml'
   
 YStruct = Struct.new("YStruct", :name)
 p YStruct::yaml_tag_class_name
 #=> "YStruct"
-`````
+```
 
 ### def yaml_tag_subclasses? -> true
 
@@ -215,13 +213,13 @@ p YStruct::yaml_tag_class_name
 
 - **return** -- 引数 name に Struct:: を加えた文字列。
 
-`````
+```ruby
 require 'yaml'
   
 YStruct = Struct.new("YStruct", :name)
 p YStruct::yaml_tag_read_class("YStruct")
 #=> "Struct::YStruct"
-`````
+```
 
 ## Instance Methods
 
@@ -247,14 +245,14 @@ p YStruct::yaml_tag_read_class("YStruct")
 #@end
             てください。
 
-`````
+```text
 require 'yaml'
 Foo = Struct.new(:bar, :baz)
 print Foo.new("bar", "baz").to_yaml
 # => --- !ruby/struct:Foo
 bar: bar
 baz: baz
-`````
+```
 
 # reopen Array
 
@@ -290,14 +288,14 @@ baz: baz
 #@end
             てください。
 
-`````
+```ruby
 require 'yaml'
 print [1, 2, 3].to_yaml
 # => ---
 - 1
 - 2
 - 3
-`````
+```
 
 ### def yaml_initialize(tag, val)
 
@@ -364,7 +362,7 @@ print [1, 2, 3].to_yaml
 
 例: ["Detroit Tigers", "Chicago cubs"] をキーとする場合
 
-`````
+```ruby
 require 'yaml'
 s = <<EOS
 ? 
@@ -375,7 +373,7 @@ s = <<EOS
 EOS
 p s.is_complex_yaml? # => 2
 p YAML.load(s) # => {["Detroit Tigers", "Chicago cubs"]=>[#<Date: 4904227/2,0,2299161>]}
-`````
+```
 
 ### def is_binary_data? -> true | nil
 
@@ -384,12 +382,12 @@ p YAML.load(s) # => {["Detroit Tigers", "Chicago cubs"]=>[#<Date: 4904227/2,0,22
 この値が true になる場合、self.to_yaml した結果、"!binary ..." というよ
 うな文字列を返します。
 
-`````
+```text
 require 'yaml'
 print "テスト".to_yaml
 # => --- !binary |
 44OG44K544OI
-`````
+```
 
 ### def taguri -> String
 
@@ -413,10 +411,10 @@ print "テスト".to_yaml
 #@end
             てください。
 
-`````
+```ruby
 require 'yaml'
 print "foo".to_yaml # => --- foo
-`````
+```
 
 # reopen Symbol
 
@@ -456,10 +454,10 @@ print "foo".to_yaml # => --- foo
 #@end
             てください。
 
-`````
+```ruby
 require 'yaml'
 print :foo.to_yaml # => --- :foo
-`````
+```
 
 # reopen Range
 
@@ -499,14 +497,14 @@ print :foo.to_yaml # => --- :foo
 #@end
             てください。
 
-`````
+```text
 require 'yaml'
 print (1..10).to_yaml
 # => --- !ruby/range
 begin: 1
 end: 10
 excl: false
-`````
+```
 
 # reopen Regexp
 
@@ -546,10 +544,10 @@ excl: false
 #@end
             てください。
 
-`````
+```ruby
 require 'yaml'
 print /foo|bar/.to_yaml # => --- !ruby/regexp /foo|bar/
-`````
+```
 
 # reopen Time
 
@@ -589,10 +587,10 @@ print /foo|bar/.to_yaml # => --- !ruby/regexp /foo|bar/
 #@end
             てください。
 
-`````
+```ruby
 require 'yaml'
 print Time.now.to_yaml # => --- 2011-12-31 02:17:31.192322 +09:00
-`````
+```
 
 # reopen Date
 
@@ -628,10 +626,10 @@ print Time.now.to_yaml # => --- 2011-12-31 02:17:31.192322 +09:00
 #@end
             てください。
 
-`````
+```ruby
 require 'yaml'
 print Date.today.to_yaml # => --- 2011-12-31
-`````
+```
 
 # reopen Integer
 
@@ -667,11 +665,11 @@ print Date.today.to_yaml # => --- 2011-12-31
 #@end
             てください。
 
-`````
+```ruby
 require 'yaml'
 print 1.to_yaml # => --- 1
 print -1.to_yaml # => --- -1
-`````
+```
 
 # reopen Float
 
@@ -707,14 +705,14 @@ print -1.to_yaml # => --- -1
 #@end
             てください。
 
-`````
+```ruby
 require 'yaml'
 print 1.0.to_yaml        # => --- 1.0
 print -1.0.to_yaml       # => --- -1.0
 print (1.0/0.0).to_yaml  # => --- .Inf
 print (-1.0/0.0).to_yaml # => --- -.Inf
 print (0.0/0.0).to_yaml  # => --- .NaN
-`````
+```
 
 # reopen TrueClass
 
@@ -750,10 +748,10 @@ print (0.0/0.0).to_yaml  # => --- .NaN
 #@end
             てください。
 
-`````
+```ruby
 require 'yaml'
 print true.to_yaml # => --- true
-`````
+```
 
 # reopen FalseClass
 
@@ -789,10 +787,10 @@ print true.to_yaml # => --- true
 #@end
             てください。
 
-`````
+```ruby
 require 'yaml'
 print false.to_yaml # => --- false
-`````
+```
 
 # reopen NilClass
 
@@ -828,7 +826,7 @@ print false.to_yaml # => --- false
 #@end
             てください。
 
-`````
+```ruby
 require 'yaml'
 print nil.to_yaml # => ---
-`````
+```

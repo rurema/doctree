@@ -26,9 +26,7 @@ library: socket
 
 - **param** `bool` -- この値が真ならアドレスからホスト名への逆引きを行わなくなります。
 
-例:
-
-`````
+```text title="例"
 require 'socket'
   
 p TCPSocket.new('localhost', 'telnet').addr
@@ -37,19 +35,19 @@ p TCPSocket.new('localhost', 'telnet').addr
   
 => ["AF_INET", 2253, "localhost", "127.0.0.1"]
    ["AF_INET", 2254, "127.0.0.1", "127.0.0.1"]
-`````
+```
 
 ### def for_fd(fd) -> BasicSocket
 
 ファイルディスクリプタ fd に対する新しいソケットを生成します。
 
 返り値のクラスはどのクラスの for_fd を呼びだしたかによって決まります。
-`````
+```ruby
 require 'socket'
   
 BasicSocket.for_fd(fd) # BasicSocket のインスタンスを返す
 TCPSocket.for_fd(fd) # TCPSocket のインスタンスを返す
-`````
+```
 
 - **param**   `fd` -- ファイルディスクリプタ を指定します。
 
@@ -66,7 +64,7 @@ TCPSocket.for_fd(fd) # TCPSocket のインスタンスを返す
 初期値はソケットを生成したときの
 [m:BasicSocket.do_not_reverse_lookup] の値になります。
 
-`````
+```ruby
 require 'socket'
 
 BasicSocket.do_not_reverse_lookup = false
@@ -77,7 +75,7 @@ BasicSocket.do_not_reverse_lookup = true
 TCPSocket.open("www.ruby-lang.org", 80) {|sock|
   p sock.do_not_reverse_lookup      # => true
 }
-`````
+```
 
 - **SEE** [m:BasicSocket#do_not_reverse_lookup=]
 
@@ -92,9 +90,7 @@ TCPSocket.open("www.ruby-lang.org", 80) {|sock|
 接続の相手先のソケットの情報を取得します。sockaddr 構造体をパッ
 クした文字列を返します。[man:getpeername(2)] を参照してください。
 
-例:
-
-`````
+```ruby title="例"
 require 'socket'
 
 serv = TCPServer.open("", 0)
@@ -104,16 +100,14 @@ addr = c.getpeername
 p addr      #=> "\002\000\267\214\177\000\000\001\000\000\000\000\000\000\000\000"
 p Socket.unpack_sockaddr_in(addr)   #=> [46988, "127.0.0.1"]
 p addr == s.getsockname     #=> true
-`````
+```
 
 ### def getsockname -> String
 
 ソケットの情報を取得します。sockaddr 構造体をパックした
 文字列を返します。[man:getsockname(2)] を参照してください。
 
-例:
-
-`````
+```ruby title="例"
 require 'socket'
 
 serv = TCPServer.open("", 0)
@@ -121,7 +115,7 @@ p serv.getsockname        #=> "\002\000\236C\000\000\000\000\000\000\000\000\000
 p Socket.unpack_sockaddr_in(serv.getsockname)     #=> [40515, "0.0.0.0"]
 c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
 s = serv.accept
-`````
+```
 
 ### def getsockopt(level, optname) -> Socket::Option
 
@@ -137,9 +131,7 @@ level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR
 - **param** `optname` --  [man:getsockopt(2)] の 第三引数のoption_name 
 - **SEE** [m:BasicSocket#setsockopt]
 
-例:
-
-`````
+```ruby title="例"
 require 'socket'
 
 serv = Socket.tcp_server_sockets("", 0)[0]
@@ -152,7 +144,7 @@ p opt.bool #=> false (Nagle アルゴリズム有効)
 p opt.unpack("i")[0] #=> 0 (Socket::Option#unpack が互換性のために存在する)
 # 整数値の場合は Socket::Option#int を用いる
 p c.getsockopt(:IP, :TTL).int #=> 64
-`````
+```
 
 ### def recv(maxlen, flags = 0) -> String
 
@@ -175,9 +167,7 @@ UDP では空のパケットを読み込んだことを意味します。
 
 - **raise** `Errno::EXXX` -- [man:recvfrom(2)] がエラーになった場合などに発生します。
 
-例:
-
-`````
+```ruby title="例"
 require 'socket'
 
 s1, s2 = UNIXSocket.pair
@@ -186,7 +176,7 @@ s1.close
 p s2.recv(10, Socket::MSG_PEEK)   #=> "a"
 p s2.recv(10)                     #=> "a"
 p s2.recv(10)                     #=> ""
-`````
+```
 
 ### def recv_nonblock(maxlen, flags = 0) -> String
 
@@ -226,15 +216,13 @@ dest_sockaddr には[ref:lib:socket#pack_string]
 
 - **raise** `Errno::EXXX` -- データの送信に失敗した場合に発生します。
 
-例:
-
-`````
+```ruby title="例"
 require 'socket'
 
 s = UDPSocket.new
 sockaddr = Socket.sockaddr_in("discard", "localhost")
 s.send("The king has donkey ears!", 0, sockaddr)
-`````
+```
 
 ### def setsockopt(level, optname, optval) -> 0
 ### def setsockopt(socketoption) -> 0
@@ -254,7 +242,7 @@ intポインタを渡します。
 
 引数が1つの場合は [c:Socket::Option] で設定値を表現します。
 
-`````
+```ruby
 require 'socket'
   
 # 真偽値の場合
@@ -273,7 +261,7 @@ sock.setsockopt(Socket::Option.int(:INET, :IP, :TTL, 255))
 optval = IPAddr.new("224.0.0.251").hton +
          IPAddr.new(Socket::INADDR_ANY, Socket::AF_INET).hton
 sock.setsockopt(Socket::IPPROTO_IP, Socket::IP_ADD_MEMBERSHIP, optval)
-`````
+```
 
 - **param** `level` --    [man:setsockopt(2)] の level を参照してください。
 - **param** `optname` --  [man:setsockopt(2)] の option_name を参照してください。
@@ -319,7 +307,7 @@ how を省略すると Socket::SHUT_RDWR を指定したことになります。
 BasicSocket#local_address が接続先として不適なアドレスを返す場合は
 例外 [c:SocketError] が発生します。
 
-`````
+```ruby
 require 'socket'
 
 Addrinfo.tcp("0.0.0.0", 0).listen {|serv|
@@ -329,7 +317,7 @@ Addrinfo.tcp("0.0.0.0", 0).listen {|serv|
     p [c, s] #=> [#<Socket:fd 4>, #<Socket:fd 6>]
   }
 }
-`````
+```
 
 
 - **raise** `SocketError` -- アドレスが接続に不適な場合に返します
@@ -344,7 +332,7 @@ Unix ドメインソケットにおいて接続相手の euid と egid を
 ソケットが Unix ドメインソケットでない場合の返り値は
 不定です。
 
-`````
+```ruby
 require 'socket'
 
 Socket.unix_server_loop("/tmp/sock") {|s|
@@ -359,7 +347,7 @@ Socket.unix_server_loop("/tmp/sock") {|s|
     s.close
   end
 }
-`````
+```
   
 
 ### def local_address -> Addrinfo
@@ -369,7 +357,7 @@ Socket.unix_server_loop("/tmp/sock") {|s|
 返されたオブジェクトの [m:Addrinfo#protocol] は 0 を
 返すことに注意してください。
 
-`````
+```ruby
 require 'socket'
 
 TCPSocket.open("www.ruby-lang.org", 80) {|s|
@@ -379,7 +367,7 @@ TCPSocket.open("www.ruby-lang.org", 80) {|s|
 TCPServer.open("127.0.0.1", 1512) {|serv|
   p serv.local_address #=> #<Addrinfo: 127.0.0.1:1512 TCP>
 }
-`````
+```
 
 - **SEE** [m:BasicSocket#getsockname]
 
@@ -418,7 +406,7 @@ Socket::MSG_* 定数の bitwise OR で表現されています。
 
 残りの要素は補助データ([c:Socket::AncillaryData] オブジェクト)です。
 
-`````
+```ruby
 require 'socket'
   
 # UnixSocket#recv_io を recvmsg で実装する例
@@ -428,7 +416,7 @@ controls.each {|ancdata|
     return ancdata.unix_rights[0]
   end
 }
-`````
+```
 
 - **param** `maxmesglen` -- 受け取るメッセージの最大長
 - **param** `flags` -- フラグ
@@ -454,7 +442,7 @@ controls.each {|ancdata|
 返されたオブジェクトの [m:Addrinfo#protocol] は 0 を
 返すことに注意してください。
 
-`````
+```ruby
 require 'socket'
 
 TCPSocket.open("www.ruby-lang.org", 80) {|s|
@@ -466,7 +454,7 @@ TCPServer.open("127.0.0.1", 1728) {|serv|
   s = serv.accept
   p s.remote_address #=> #<Addrinfo: 127.0.0.1:36504 TCP>
 }
-`````
+```
 
 - **SEE** [m:BasicSocket#getpeername]
 
@@ -486,7 +474,7 @@ controls には 補助データ(ancillary data)を渡します。
 
 送ったバイト数を返します。
 
-`````
+```ruby
 # UnixSocket#send_io の実装例
 # use Socket::AncillaryData.
 require 'socket'
@@ -497,7 +485,7 @@ sock.sendmsg("a", 0, nil, ancdata)
 # use 3-element array.
 ancdata = [:SOCKET, :RIGHTS, [io.fileno].pack("i!")]
 sock.sendmsg("\0", 0, nil, ancdata)
-`````
+```
 
 
 - **param** `mesg` -- メッセージ文字列

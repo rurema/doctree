@@ -14,7 +14,7 @@ string を展開します。
 
 ちなみに、このメソッドは以下のコードとほぼ同じです:
 
-`````
+```ruby
 require 'zlib'
 
 def inflate(string)
@@ -24,18 +24,18 @@ def inflate(string)
   zstream.close
   buf
 end
-`````
+```
 
 - **param** `string` -- 展開する文字列を指定します。
 
 - **raise** `Zlib::NeedDict` -- 展開に辞書が必要な場合に発生します。
 
-`````
+```ruby
 require 'zlib'
 
 cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
 p Zlib::Inflate.inflate(cstr) #=> "hoge fuga end"
-`````
+```
 
 ### def new(window_bits = Zlib::MAX_WBITS) -> Zlib::Inflate
 
@@ -45,14 +45,14 @@ p Zlib::Inflate.inflate(cstr) #=> "hoge fuga end"
                    nil の場合はデフォルトの値を使用します。
                    詳細は zlib.h を参照してください。
 
-`````
+```ruby
 require 'zlib'
 
 cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
 inz = Zlib::Inflate.new(15)
 inz << cstr
 p inz.finish #=> "hoge fuga end"
-`````
+```
 
 ## Instance Methods
 
@@ -71,13 +71,13 @@ string が nil の場合はストリームへの入力を
                       [m:Zlib::Inflate#set_dictionary] メソッドで辞書をセットした
                       後で、空文字列と共にこのメソッドを再度呼び出して下さい。
 
-`````
+```ruby
 require 'zlib'
 
 cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
 inz = Zlib::Inflate.new
 p inz.inflate(cstr) #=> "hoge fuga end"
-`````
+```
 
 ### def <<(string) -> self
 
@@ -86,7 +86,7 @@ p inz.inflate(cstr) #=> "hoge fuga end"
 そのものを返します。展開ストリームからの出力は、
 出力バッファに保存されます。
 
-`````
+```ruby
 require 'zlib'
 
 cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
@@ -96,7 +96,7 @@ p inz.flush_next_out #=> "hoge fu"
 
 inz << cstr[10..-1]
 p inz.flush_next_out #=> "ga end"
-`````
+```
 
 ### def finish -> String
 
@@ -112,14 +112,14 @@ p inz.flush_next_out #=> "ga end"
 ありませんが、このメソッドは圧縮データが正しく終了しているかを
 確認するのに便利です。
 
-`````
+```ruby
 require 'zlib'
 
 cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
 inz = Zlib::Inflate.new
 inz << cstr
 p inz.finish #=> "hoge fuga end"
-`````
+```
 
 ### def set_dictionary(string) -> String
 
@@ -129,7 +129,7 @@ p inz.finish #=> "hoge fuga end"
 
 - **param** `string` -- 展開に用いる辞書を文字列で指定します。
 
-`````
+```ruby
 require 'zlib'
 
 def case2(str, dict)
@@ -154,7 +154,7 @@ g = [ 0, 0, 0, 1, 1, 1, 0, 0, 0, 3, 3, 3, 0, 0, 1, 1,
 str = g.collect{|m| sset.at(m)}.join("")
 
 case2(str, dict)
-`````
+```
 
 ### def sync(string) -> bool
 

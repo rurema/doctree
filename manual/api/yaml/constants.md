@@ -22,7 +22,7 @@ YAMLのデフォルトの設定のハッシュです。
 Ruby 1.8.3 以降では変更できません。
 
 下記のオプションがあります。
-````
+```text
 {
  :SortKeys=>false,
  :UseFold=>false,
@@ -37,4 +37,4 @@ Ruby 1.8.3 以降では変更できません。
  :Version=>"1.0",
  :UseBlock=>false
 }
-````
+```

@@ -9,7 +9,7 @@ library: webrick/httpproxy
 
 以下は完全に動作するプロクシサーバの例です。
 
-````
+```ruby
 require 'webrick'
 require 'webrick/httpproxy'
 
@@ -18,7 +18,7 @@ Signal.trap('INT') do
   s.shutdown
 end
 s.start
-````
+```
 
 ## Class Methods
 
@@ -37,7 +37,7 @@ s.start
   認証に失敗した場合 proc は適切な例外を発生させなければいけません。nil を指定した場合すべての接続を
   受け付けます。デフォルトは nil です。通常は [c:WEBrick::HTTPAuth::ProxyBasicAuth] か
   [c:WEBrick::HTTPAuth::ProxyDigestAuth] を使用します。
-```
+```ruby
  require 'webrick'
  require 'webrick/httpproxy'
  auth_proc = proc{|req, res|
@@ -55,7 +55,7 @@ s.start
   レスポンスの内容を書き換えたりする事が出来ます。[c:WEBrick::HTTPResponse] オブジェクトと
   [c:WEBrick::HTTPRequest] オブジェクトを引数として proc.call(req, res) のように呼ばれます。
   nil を指定した場合なにもしません。デフォルトは nil です。
-```
+```ruby
  require 'webrick'
  require 'webrick/httpproxy'
  handler = proc{|req, res|
@@ -73,7 +73,7 @@ s.start
 - **`:ProxyURI`**:
   HTTP サーバへの接続にさらに別の Proxy サーバを使う場合にその Proxy の URI
   を [c:URI] オブジェクトで指定します。
-```
+```ruby
   require 'uri'
   require 'webrick/httpproxy'
   u = URI.parse('http://localhost:18080/')

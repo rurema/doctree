@@ -12,8 +12,7 @@ FTP URI を表すクラスです。
 引数で与えられた URI 構成要素から URI::FTP オブジェクトを生成します。
 引数の正当性を検査します。
 
-例:
-`````
+```ruby title="例"
 require 'uri'
 p URI::FTP.build([nil, "www.example.com", 10020, "/path",  'a'])
 #=> #<URI::FTP:0x201c4f9c URL:ftp://www.example.com:10020/path;type=a>
@@ -23,10 +22,10 @@ p URI::FTP.build({:host => "www.example.com", :path => "/path",  :typecode => 'a
   
 p URI::FTP.build([nil, 'example.com', nil, '/foo', 'i']).to_s
 #=> 'ftp://example.com/%2Ffoo;type=i'
-`````
+```
 
 - **param** `ary` -- 構成要素を表す文字列の配列を与えます。要素は
-```
+```text
       [userinfo, host, port, path, typecode]
 ```
            の順です。typecode は、"a"、"i" あるいは "d" です。"a" はテキスト、"i" はバイナリ、
@@ -34,7 +33,7 @@ p URI::FTP.build([nil, 'example.com', nil, '/foo', 'i']).to_s
            データタイプがFTPのプロトコルで ASCII と IMAGE と呼ばれていたためです。
 
 - **param** `hash` -- 構成要素を表すハッシュを与えます。ハッシュのキーは
-```
+```text
  :scheme, :userinfo, :host, :port, :path, :typecode
 ```
             のいずれかです。ハッシュの値は文字列です。typecode は、
@@ -51,14 +50,13 @@ p URI::FTP.build([nil, 'example.com', nil, '/foo', 'i']).to_s
 汎用的な構成要素から URI::FTP オブジェクトを生成します。build
 と異なり、デフォルトでは引数の正当性を検査しません。
 
-例:
-`````
+```ruby title="例"
 require 'uri'
 p ftp = URI.parse("ftp://ftp.ruby-lang.org/pub/ruby/;type=d")
 p ftp.typecode
 #=> #<URI::FTP:0x2010029c URL:ftp://ftp.ruby-lang.org/pub/ruby/;type=d>
 #=> "d"
-`````
+```
 
 - **param** `scheme` -- 構成要素を表す文字列を与えます。
 

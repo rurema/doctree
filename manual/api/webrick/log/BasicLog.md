@@ -20,10 +20,10 @@ WEBrick::BasicLog オブジェクトを生成して返します。
              ログレベルは重要度の順に FATAL, ERROR, WARN, INFO, DEBUG の5段階があります。
              FATAL の重要度が一番高く DEBUG が一番低いです。
 
-`````
+```ruby
 require 'webrick'
 logger = WEBrick::BasicLog.new('testfile', WEBrick::BasicLog::FATAL)
-`````
+```
 
 ## Instance Methods
 
@@ -52,11 +52,11 @@ logger = WEBrick::BasicLog.new('testfile', WEBrick::BasicLog::FATAL)
 
 - **param** `obj` -- 記録したいオブジェクトを指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
-`````
+```ruby
 require 'webrick'
 logger = WEBrick::BasicLog.new() 
 logger << 'hoge'
-`````
+```
 
 ### def fatal(msg)    -> ()
 
@@ -67,11 +67,11 @@ msg の終端が "\n" でない場合には "\n" を追加します。
 
 - **param** `msg` -- 記録したい文字列を指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
-`````
+```ruby
 require 'webrick'
 logger = WEBrick::BasicLog.new()
-logger.fatal('out of money')       #=> FATAL out of money   (標準エラー出力に出力)
-`````
+p logger.fatal('out of money')     #=> FATAL out of money   (標準エラー出力に出力)
+```
 
 ### def error(msg)    -> ()
 

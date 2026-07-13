@@ -104,12 +104,12 @@ Gem をインストールします。
 
 以下のディレクトリ構造で Gem をインストールします。
 
-``````
+```text
 @gem_home/
   cache/<gem-version>.gem              #=> インストールした Gem のコピー
   gems/<gem-version>/...               #=> インストール時に展開したファイル
   specifications/<gem-version>.gemspec #=> gemspec ファイル
-``````
+```
 
 - **return** -- ロードされた [c:Gem::Specification] のインスタンスを返します。
 

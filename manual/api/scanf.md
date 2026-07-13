@@ -9,7 +9,7 @@ category: I/O
 組み込みクラス [c:String] と [c:IO] を拡張します。
 
 ### 例
-`````
+```ruby
 require 'scanf'
   
 p "a 10  1.2".            scanf("%s %d %f")   # => ["a", 10, 1.2]
@@ -31,7 +31,7 @@ p "a, 10, 1.2".scanf("%1s,%d,%f")
   
 p "a, 10, 1.2".scanf("%[^,],%d,%f")
 # => ["a", 10, 1.2]
-`````
+```
 
 # reopen String
 
@@ -45,43 +45,42 @@ p "a, 10, 1.2".scanf("%[^,],%d,%f")
 format で指定した文字列が見つからない場合は空の配列を
 生成して返します。
 
-`````
+```ruby
 require 'scanf'
 str = "123 abc 456 def 789 ghi"
 p str.scanf("%d%s") #=> [123, "abc"]
-`````
+```
 
 ブロックを指定した場合は scanf を継続して実行し、順次
 見つかった文字列を変換したオブジェクトの配列を引数に、ブロックを
 実行します。このとき、ブロックの実行結果を要素とする配列を返します。
 
-`````
+```ruby
 require 'scanf'
 str = "123 0x45 678 0x90"
 p str.scanf("%d%x"){|n, s| [n, s]}
 #=> [[123, 69], [678, 144]]
-`````
+```
 
 formatに完全にマッチしていなくても、部分的にマッチしていれば、
 ブロックは実行されます。
 
-`````
+```ruby
 require 'scanf'
 str = "123 abc 456 def"
 ret = str.scanf("%s%d") { |s, n| [s, n] }
 p ret #=> [["123", nil], ["abc", 456], ["def", nil]]
-`````
+```
 
 
 - **param** `format` -- スキャンするフォーマットを文字列で指定します。
               詳細は、[ref:m:String#scanf#format] を参照してください。
 
-使用例:
-`````
+```ruby title="使用例"
 require 'scanf'
 str = "123 abc 456 def 789 ghi"
 p str.scanf("%d%s") #=> [123, "abc"]
-`````
+```
 
 ### scanfフォーマット文字列 {#format}
 
@@ -92,32 +91,29 @@ p str.scanf("%d%s") #=> [123, "abc"]
 このフォーマット文字列によるマッチの実行前、多くの場合入力文字列のスペースは読み飛ばされます。
 つまり、スペースは幅の数として数えられない事になります。
 
-動作例;
-`````
+```ruby title="動作例"
 require 'scanf'
 p "a           10".scanf("%s %d")  # => ["a", 10]
 p "a10".scanf("%1s %d")      # => ["a", 10]
-`````
+```
 
 
-使用例；
-`````
+```ruby title="使用例"
 require 'scanf'
 str = "1234"
 p str.scanf("%1s%3d")  #=> ["1", 234]
-`````
+```
 
 #@since 1.9.1
 また、1.9 以降では、スペースには全角文字列が含まれます。
 
-動作例；
-`````
+```ruby title="動作例"
 # encoding: utf-8
 require 'scanf'
 
 str = "1　　　　　aaa"
 p str.scanf("%d %s") #=> [1, "aaa"]
-`````
+```
 #@end
 
 #@# There may be an optional maximum field width, expressed as a decimal
@@ -132,7 +128,7 @@ p str.scanf("%d %s") #=> [1, "aaa"]
 
 - **`space`**:
  フォーマット中の空白は(0個を含む)任意の数の空白にマッチします。
-```
+```ruby
   require 'scanf'
   p "a           10".scanf("%s %d")  # => ["a", 10]
   p "a10".scanf("%1s %d")            # => ["a", 10]

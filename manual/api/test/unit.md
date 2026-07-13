@@ -28,7 +28,7 @@ Test::Unit は以下のように使います。
 
 まずテスト対象のソース(foo.rb)が必要です。
 
-```````
+```ruby
 class Foo
    def foo
      "foo"
@@ -37,13 +37,13 @@ class Foo
      "foo"
    end
 end
-```````
+```
 
 次にユニットテスト(test_foo.rb)を書きます。テストを実行するメソッド(テストメソッド)の名前は
 全て test_ で始まる必要があります。テストメソッドが実行される前には setup メソッドが必ず
 呼ばれます。実行されたあとには、teardown メソッドが必ず呼ばれます。
 
-```````
+```ruby
 require 'test/unit'
 require 'foo'
 
@@ -62,12 +62,12 @@ class TC_Foo < Test::Unit::TestCase
     assert_equal("bar", @obj.bar)
   end
 end
-```````
+```
 
 テストを実行するには上で用意した test_foo.rb を実行します。
 デフォルトではすべてのテストが実行されます。
 
-```````````
+```console
 $ ruby test_foo.rb
 
 Loaded suite test_foo
@@ -81,11 +81,11 @@ test_bar(TC_Foo) [test_foo.rb:16]:
 <"foo">.
 
 2 tests, 2 assertions, 1 failures, 0 errors, 0 skips
-```````````
+```
 
 test_bar だけテストしたい場合は以下のようなオプションを与えます。
 
-```````````
+```console
 $ ruby test_foo.rb --name test_bar
 
 Loaded suite test_foo
@@ -99,13 +99,13 @@ test_bar(TC_Foo) [test_foo.rb:16]:
 <"foo">.
 
 1 tests, 1 assertions, 1 failures, 0 errors, 0 skips
-```````````
+```
 
 --name=test_barのような指定は行えません。
 
 以下のようにすると help も表示されます。
 
-`````
+```console
 $ ruby test_foo.rb --help
 Usage: test_foo [options]
 minitest options:
@@ -122,15 +122,15 @@ minitest options:
     -x, --exclude PATTERN            Exclude test files on pattern.
     -Idirectory                      Add library load path
         --[no-]gc-stress             Set GC.stress as true
-`````
+```
 
 複数のテストを一度に行う場合、以下のように書いただけのファイルを実行します。
 
-````
+```ruby
 require 'test/unit'
 require 'test_foo.rb'
 require 'test_bar.rb'
-````
+```
 
 ### いつテストは実行されるか
 

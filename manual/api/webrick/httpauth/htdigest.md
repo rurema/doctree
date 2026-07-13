@@ -12,9 +12,7 @@ Apache の htdigest 互換機能を提供するライブラリです。
 
 Apache の htdigest 互換のクラス。
 
-例
-
-````
+```ruby title="例"
 require 'webrick'
 include WEBrick
 htd = HTTPAuth::Htdigest.new('dot.htdigest')
@@ -22,7 +20,7 @@ htd.set_passwd('realm', 'username', 'supersecretpass')
 htd.flush
 htd2 = HTTPAuth::Htdigest.new('dot.htdigest')
 p htd2.get_passwd('realm', 'username', false) == '65fe03e5b0a199462186848cc7fda42b'
-````
+```
 
 ## Class Methods
 

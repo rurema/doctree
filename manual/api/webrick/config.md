@@ -99,7 +99,7 @@ WEBrick::Config::HTTP = {
 
 [c:WEBrick::HTTPServlet::FileHandler] の設定のデフォルト値を保持したハッシュです。
 
-```````
+```ruby
 require 'webrick'
 WEBrick::Config::FileHandler = {
   :NondisclosureName => [".ht*", "*~"],
@@ -111,7 +111,7 @@ WEBrick::Config::FileHandler = {
   :UserDir           => nil,  # e.g. "public_html"
   :AcceptableLanguages => []  # ["en", "ja", ... ]
 }
-```````
+```
 
 - **`:AcceptableLanguages`**:
 
@@ -154,18 +154,18 @@ falseならばエラー(403 Forbidden)となる。
 
 [c:WEBrick::HTTPAuth::BasicAuth] の設定のデフォルト値を保持したハッシュです。
 
-```````
+```ruby
 require 'webrick'
 WEBrick::Config::BasicAuth = {
   :AutoReloadUserDB     => true,
 }
-```````
+```
 
 ### const DigestAuth -> Hash
 
 [c:WEBrick::HTTPAuth::DigestAuth] の設定のデフォルト値を保持したハッシュです。
 
-```````
+```ruby
 require 'webrick'
 WEBrick::Config::DigestAuth = {
   :Algorithm            => 'MD5-sess', # or 'MD5'
@@ -181,7 +181,7 @@ WEBrick::Config::DigestAuth = {
   :InternetExplorerHack => true,
   :OperaHack            => true,
 }
-```````
+```
 
 ### const LIBDIR -> String
 
