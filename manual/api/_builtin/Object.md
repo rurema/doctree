@@ -1869,9 +1869,12 @@ class MyClass
   end
 end
 
-a = MyClass.new([])
+a = MyClass.new([1])
 b = a.dup
-p a.data.eql?(b.data)  # => false
+a.data << 2
+
+p a.data  # => [1, 2]
+p b.data  # => [1]
 ```
 
 
