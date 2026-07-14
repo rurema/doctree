@@ -3,7 +3,7 @@ library: psych
 ---
 # class Psych::Nodes::Mapping < Psych::Nodes::Node
 
-YAML の mapping [url:http://yaml.org/spec/1.1/#mapping] を表すクラスです。
+YAML の mapping [url:https://yaml.org/spec/1.1/#mapping] を表すクラスです。
 
 Psych::Nodes::Mapping は 0 個以上の子ノードを持つことができます。
 子ノードの個数は偶数でなければなりません。
@@ -21,7 +21,7 @@ ast = Psych.parse(<<EOS)
 x: y
 u: v
 EOS
-  
+
 p ast.root.children.map{|v| v.value } # => ["x", "y", "u", "v"]
 ```
 
@@ -101,7 +101,7 @@ mapping の style を返します。
 ### def style=(sty)
 mapping の style を設定します。
 
-- **param** `sty` -- 設定する style 
+- **param** `sty` -- 設定する style
 
 - **SEE** [m:Psych::Nodes::Mapping#style],
      [m:Psych::Nodes::Mapping.new]

@@ -2,7 +2,7 @@
 library: psych
 ---
 # class Psych::Nodes::Scalar < Psych::Nodes::Node
-YAML の scalar [url:http://yaml.org/spec/1.1/#id858081] を表すクラスです。
+YAML の scalar [url:https://yaml.org/spec/1.1/#id858081] を表すクラスです。
 
 これは AST の葉にあたるノードであり、子ノードを持ちません。
 
@@ -56,7 +56,7 @@ scalar に付加された anchor を返します。
 - **SEE** [m:Psych::Nodes::Scalar#anchor=],
      [m:Psych::Nodes::Scalar.new]
 
-### def anchor=(a) 
+### def anchor=(a)
 scalar に付加された anchor を変更します。
 
 - **param** `a` -- 設定する anchor

@@ -3,7 +3,7 @@ library: psych
 ---
 # class Psych::Nodes::Alias < Psych::Nodes::Node
 
-YAML の alias [url:http://yaml.org/spec/1.1/#alias] を表すクラス。
+YAML の alias [url:https://yaml.org/spec/1.1/#alias] を表すクラス。
 
 anchor で別の YAML の要素を指します。
 
@@ -28,7 +28,7 @@ alias が指す先の anchor を返します。
 ### def anchor=(val)
 alias が指す先の anchor を変更します。
 
-- **param** `val` -- 設定する anchor 
+- **param** `val` -- 設定する anchor
 - **SEE** [m:Psych::Nodes::Alias#anchor],
      [m:Psych::Nodes::Alias.new]
 

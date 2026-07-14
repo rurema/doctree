@@ -2,7 +2,7 @@
 library: psych
 ---
 # class Psych::Nodes::Sequence < Psych::Nodes::Node
-YAML sequence [url:http://yaml.org/spec/1.1/#sequence/syntax] を表すクラスです。
+YAML sequence [url:https://yaml.org/spec/1.1/#sequence/syntax] を表すクラスです。
 
 YAML sequence とは基本的にはリスト、配列です。以下のような例が考えられます。
 ```yaml
@@ -25,7 +25,7 @@ YAML sequence には anchor を付加できます。
 
 
 tag を付けることもできます。この例では
-[m:Psych::Nodes::Sequence#tag] は "tag:yaml.org,2002:seq" 
+[m:Psych::Nodes::Sequence#tag] は "tag:yaml.org,2002:seq"
 (!seq はこの tag の別名)を返します。
 ```yaml
 %YAML 1.1
@@ -119,7 +119,7 @@ sequence の style を返します。
 ### def style=(sty)
 sequence の style を設定します。
 
-- **param** `sty` -- 設定する style 
+- **param** `sty` -- 設定する style
 
 - **SEE** [m:Psych::Nodes::Sequence#style],
      [m:Psych::Nodes::Sequence.new]
