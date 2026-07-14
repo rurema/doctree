@@ -616,7 +616,7 @@ p %s{foo-bar} #=> :"foo-bar"
 #@since 2.2.0
 ほとんどのシンボルはGC可能です。
 
-- **SEE** [url:https://bugs.ruby-lang.org/issues/9634]
+- **SEE** <https://bugs.ruby-lang.org/issues/9634>
 #@end
 
 ### %記法 {#percent}

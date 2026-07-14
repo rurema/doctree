@@ -45,7 +45,7 @@ XML 文書([c:REXML::Document])ごとの展開回数がこの値を越えると
 デフォルトは 10240 (byte) です。
 
 - **SEE** [m:REXML::Document.entity_expansion_text_limit=],
-     [url:http://www.ruby-lang.org/ja/news/2013/02/22/rexml-dos-2013-02-22/]
+     <http://www.ruby-lang.org/ja/news/2013/02/22/rexml-dos-2013-02-22/>
 
 
 
@@ -62,5 +62,5 @@ XML 文書([c:REXML::Document])ごとの展開回数がこの値を越えると
 デフォルトは 10240 (byte) です。
 
 - **SEE** [m:REXML::Document.entity_expansion_text_limit]
-     [url:http://www.ruby-lang.org/ja/news/2013/02/22/rexml-dos-2013-02-22/]
+     <http://www.ruby-lang.org/ja/news/2013/02/22/rexml-dos-2013-02-22/>
 

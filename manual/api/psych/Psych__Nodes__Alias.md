@@ -3,7 +3,7 @@ library: psych
 ---
 # class Psych::Nodes::Alias < Psych::Nodes::Node
 
-YAML の alias [url:https://yaml.org/spec/1.1/#alias] を表すクラス。
+YAML の alias <https://yaml.org/spec/1.1/#alias> を表すクラス。
 
 anchor で別の YAML の要素を指します。
 

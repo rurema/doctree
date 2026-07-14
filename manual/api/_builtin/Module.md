@@ -1799,8 +1799,8 @@ end
 
 refinements 機能の詳細については以下を参照してください。
 
- - [url:https://magazine.rubyist.net/articles/0041/0041-200Special-refinement.html]
- - [url:https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html]
+ - <https://magazine.rubyist.net/articles/0041/0041-200Special-refinement.html>
+ - <https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html>
 
 定義した機能は [m:main.using], [m:Module#using] を実行した場合のみ
 有効になります。
@@ -1934,7 +1934,7 @@ end
 
 有効にした拡張の有効範囲については以下を参照してください。
 
- - [url:https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope]
+ - <https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope>
 
 - **param** `module` -- 有効にするモジュールを指定します。
 

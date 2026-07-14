@@ -3,7 +3,7 @@ library: socket
 ---
 # class SOCKSSocket < TCPSocket
 
-[c:TCPSocket] を SOCKS([url:http://www.sw.nec.co.jp/middle/socks/]) 対応したクラスです。
+[c:TCPSocket] を SOCKS(<http://www.sw.nec.co.jp/middle/socks/>) 対応したクラスです。
 
 ## Class Methods
 

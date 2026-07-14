@@ -53,7 +53,7 @@
 - **`blade`**:
   Ruby の各種メーリングリストのアーカイブ。
 
-  [url:http://blade.nagaokaut.ac.jp/ruby/]
+  <http://blade.nagaokaut.ac.jp/ruby/>
 
 - **`bundled gem`**:
   標準添付ライブラリーの gem のうち、アンインストールできるもの。
@@ -93,7 +93,7 @@
   Ruby によく似たオブジェクト指向プログラミング言語。
   型推論を持った静的型付け言語であり、処理系はコンパイラーである。
 
-  [url:https://ja.crystal-lang.org/]
+  <https://ja.crystal-lang.org/>
 
 - **CSI 方式**:
   CSI は Code Set Independent の頭字語。
@@ -140,7 +140,7 @@
   となる。これ以外にもサードパーティーのテンプレートエンジンが複数ある。
 
 - **`European Ruby Conference`**:
-  [url:https://euruko.org/]
+  <https://euruko.org/>
 
 ### F {#F}
 
@@ -207,7 +207,7 @@
   Ruby スクリプトから Java のクラスを利用したり、Java プログラムから Ruby を
   呼ぶなど、Ruby と Java が容易に連携できるという特長がある。
 
-  [url:https://www.jruby.org/]
+  <https://www.jruby.org/>
 
 ### M {#M}
 
@@ -227,7 +227,7 @@
   組込み向けの Ruby 仕様および処理系。省メモリー性など、機器組み込みや
   アプリケーションソフト組込みに適した特徴を持つ。
 
-  [url:https://mruby.org/]
+  <https://mruby.org/>
 
 - **`main`**:
   トップレベルにおける self。[c:Object] クラスのインスタンスである。
@@ -246,12 +246,12 @@
 - **`Opal`**:
   Ruby のコードを JavaScript に変換するソフトウェア。
 
-  [url:https://opalrb.com/]
+  <https://opalrb.com/>
 
   ウェブ上で Ruby コードが試せる TryRuby は、バージョン 4 で Opal を
   採用し、ブラウザー上でコードを動作させるようになった。
 
-  [url:https://try.ruby-lang.org/]
+  <https://try.ruby-lang.org/>
 
 ### R {#R}
 
@@ -269,7 +269,7 @@
   複数バージョンの Ruby をインストールし、切り替えて使うための
   ツールの一つ。Linux、macOS などで動作する。
 
-  [url:https://github.com/rbenv/rbenv]
+  <https://github.com/rbenv/rbenv>
 
 - **`RD（Ruby Document format）`**:
   Ruby スクリプト中に記述することを念頭に作られたドキュメントフォーマット。
@@ -291,12 +291,12 @@
   Rubyのサポートと世界の Ruby コミュニティーの支援を専門とする非営利組織。
   RubyConf（International Ruby Conference）と RailsConf を開催している。
 
-  [url:https://rubycentral.org/]
+  <https://rubycentral.org/>
 
 - **`RubyConf`**:
   2001 年から年次開催されている Ruby の祭典。
 
-  [url:https://www.rubyconf.org/]
+  <https://www.rubyconf.org/>
 
 - **`RubyGems`**:
   gem のインストール、アンインストール、アップグレードなどの管理を行う
@@ -308,7 +308,7 @@
 - **`RubyGems.org`**:
   gem のホスティングサービス。
 
-  [url:https://rubygems.org/]
+  <https://rubygems.org/>
 
 - **`Rubyist`**:
   Ruby 使用者。
@@ -317,20 +317,20 @@
   日本 Ruby の会が 2004 年から不定期に刊行する Rubyist のためのウェブマガジン。
   愛称「るびま」。
 
-  [url:https://magazine.rubyist.net/]
+  <https://magazine.rubyist.net/>
 
 - **`RubyKaigi`**:
   2006 年に始まった日本で年次開催されるイベント。
 
-  [url:https://rubykaigi.org/]
+  <https://rubykaigi.org/>
 
 - **Ruby アソシエーション**:
   Ruby の普及と発展のための日本の非営利団体（一般財団法人）。2011 年設立。
 
-  [url:https://www.ruby.or.jp/ja/]
+  <https://www.ruby.or.jp/ja/>
 
 - **Ruby ビジネス・コモンズ**:
-  [url:https://www.facebook.com/rubybizcommons]
+  <https://www.facebook.com/rubybizcommons>
 
 ### S {#S}
 
@@ -356,7 +356,7 @@
 - **`YARD`**:
   Ruby 用ドキュメント生成ツール。
 
-  [url:https://yardoc.org/]
+  <https://yardoc.org/>
 
 
 ### あ {#a}
@@ -1331,12 +1331,12 @@
   「名前重要」は、機能にふさわしい名前を付けることをとりわけ重要視する方針。
   Matz はこれを設計上の座右の銘としている。
 
-  参照：[url:https://ja.wikisource.org/wiki/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%8C%E7%9F%A5%E3%82%8B%E3%81%B9%E3%81%8D97%E3%81%AE%E3%81%93%E3%81%A8/%E5%90%8D%E5%89%8D%E9%87%8D%E8%A6%81]
+  参照：<https://ja.wikisource.org/wiki/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9E%E3%81%8C%E7%9F%A5%E3%82%8B%E3%81%B9%E3%81%8D97%E3%81%AE%E3%81%93%E3%81%A8/%E5%90%8D%E5%89%8D%E9%87%8D%E8%A6%81>
 
 - **日本Rubyの会**:
   Ruby の開発者・利用者の支援を行っている一般社団法人。
 
-  [url:https://ruby-no-kai.org/]
+  <https://ruby-no-kai.org/>
 
 - **ヌル文字**:
 - **`null character`**:

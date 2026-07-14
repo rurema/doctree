@@ -6,7 +6,7 @@ library: _builtin
 MT19937に基づく擬似乱数生成器を提供するクラスです。
 
 ### 参考
-オリジナル版 [url:http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/mt.html]
+オリジナル版 <http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/mt.html>
 
 ## Class Methods
 ### def new(seed = Random.new_seed) -> Random

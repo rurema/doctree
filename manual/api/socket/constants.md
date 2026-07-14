@@ -823,7 +823,7 @@ System error returned in errno
 Multicast group for all systems on this subset。
 IPv4の 244.0.0.1 に対応する整数です。
 
-- **SEE** [url:http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xml], [RFC:5771]
+- **SEE** <http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xml>, [RFC:5771]
 
 ### const INADDR_ANY -> Integer
 A socket bound to INADDR_ANY receives packets from 
@@ -848,7 +848,7 @@ IPv4のループバックアドレス 127.0.0.1 に対応する整数です。
 The last local network multicast group。
 IPv4の 244.0.0.255 に対応する整数です。
 
-- **SEE** [url:http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xml], [RFC:5771]
+- **SEE** <http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xml>, [RFC:5771]
 
 ### const INADDR_NONE -> Integer
 A bitmask for matching no valid IP address。
@@ -858,7 +858,7 @@ A bitmask for matching no valid IP address。
 The reserved multicast group。
 IPv4の 244.0.0.0 に対応する整数です。
 
-- **SEE** [url:http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xml], [RFC:5771]
+- **SEE** <http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xml>, [RFC:5771]
 
 #@since 1.9.1
 ### const INET6_ADDRSTRLEN -> Integer
@@ -1131,7 +1131,7 @@ IPsec security policy。
 の第2引数(optname)に使用します。
 
 - **SEE** [m:Socket::Constants::IPPROTO_IP],
-     [url:http://netbsd.gw.com/cgi-bin/man-cgi?ip++NetBSD-current]
+     <http://netbsd.gw.com/cgi-bin/man-cgi?ip++NetBSD-current>
 
 ### const IP_MINTTL -> Integer
 Minimum TTL allowed for received packets。
@@ -1873,7 +1873,7 @@ Attach socket filter。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [man:socket(7linux)], [url:http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=blob;f=Documentation/networking/filter.txt;hb=HEAD],
+- **SEE** [man:socket(7linux)], <http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=blob;f=Documentation/networking/filter.txt;hb=HEAD>,
      [m:Socket::Constants::SOL_SOCKET]
 
 ### const SO_BINDTODEVICE -> Integer
@@ -1904,7 +1904,7 @@ Detach socket filter。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [man:socket(7linux)], [url:http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=blob;f=Documentation/networking/filter.txt;hb=HEAD],
+- **SEE** [man:socket(7linux)], <http://git.kernel.org/?p=linux/kernel/git/torvalds/linux.git;a=blob;f=Documentation/networking/filter.txt;hb=HEAD>,
      [m:Socket::Constants::SOL_SOCKET]
 
 ### const SO_DONTROUTE -> Integer

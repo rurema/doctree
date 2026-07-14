@@ -4186,7 +4186,7 @@ p "ABC".unpack("C*")  # => [65, 66, 67]
 文字列の書記素クラスタに対して繰り返します。
 
 [m:String#each_char] と違って、
-Unicode Standard Annex #29 ([url:https://unicode.org/reports/tr29/])
+Unicode Standard Annex #29 (<https://unicode.org/reports/tr29/>)
 で定義された書記素クラスタに対して繰り返します。
 
 ```ruby title="例"

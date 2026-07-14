@@ -6,11 +6,11 @@ RSS ParserはRSS 0.9x/1.0/2.0, Atom 1.0 をサポートしていますが、RSS 
 はサポートしてません。ごめんなさい。
 
 RSS のモジュールはそれぞれ、
- - Dublin Core モジュール [url:http://web.resource.org/rss/1.0/modules/dc/] 
- - Syndication モジュール [url:http://web.resource.org/rss/1.0/modules/syndication/]
- - Content モジュール [url:http://web.resource.org/rss/1.0/modules/content/]
- - Trackback モジュール [url:http://madskills.com/public/xml/rss/module/trackback/]
- - Image モジュール [url:http://web.resource.org/rss/1.0/modules/image/]
+ - Dublin Core モジュール <http://web.resource.org/rss/1.0/modules/dc/> 
+ - Syndication モジュール <http://web.resource.org/rss/1.0/modules/syndication/>
+ - Content モジュール <http://web.resource.org/rss/1.0/modules/content/>
+ - Trackback モジュール <http://madskills.com/public/xml/rss/module/trackback/>
+ - Image モジュール <http://web.resource.org/rss/1.0/modules/image/>
 をサポートしています。
 ただし、Content モジュールは content:encoded しかサポートしていません。
 

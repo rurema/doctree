@@ -814,7 +814,7 @@ fred() { |index, position| ... }
   ([ref:lib:rdoc#saved_options] 参照)。
 
   マークアップの形式を追加したい場合は
-  [url:http://docs.seattlerb.org/rdoc/DEVELOPERS_rdoc.html] を参照し
+  <http://docs.seattlerb.org/rdoc/DEVELOPERS_rdoc.html> を参照し
   てください。
 #@end
 

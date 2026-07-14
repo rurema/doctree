@@ -264,7 +264,7 @@ Logger.new(logdev, formatter: proc {|severity, datetime, progname, msg|
 ### 参考
 
 - **`Rubyist Magazine`**:
-  [url:https://magazine.rubyist.net/]
+  <https://magazine.rubyist.net/>
 - **標準添付ライブラリ紹介【第 2 回】**:
-  [url:https://magazine.rubyist.net/articles/0008/0008-BundledLibraries.html]
+  <https://magazine.rubyist.net/articles/0008/0008-BundledLibraries.html>
 

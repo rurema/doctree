@@ -482,7 +482,7 @@ end
 #@end
 
 #@since 2.0.0
-- **SEE** [url:https://magazine.rubyist.net/articles/0041/0041-200Special-kwarg.html]
+- **SEE** <https://magazine.rubyist.net/articles/0041/0041-200Special-kwarg.html>
 #@end
 
 #### 演算子式の定義 {#operator}

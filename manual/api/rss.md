@@ -8,10 +8,10 @@ RSS を扱うためのライブラリです。
 
 ### 参考
 
-  - RSS 0.91 [url:http://backend.userland.com/rss091]
-  - RSS 1.0  [url:http://purl.org/rss/1.0/spec]
-  - RSS 2.0  [url:http://www.rssboard.org/rss-specification]
-  - Atom 1.0 [url:https://www.ietf.org/rfc/rfc4287.txt]
+  - RSS 0.91 <http://backend.userland.com/rss091>
+  - RSS 1.0  <http://purl.org/rss/1.0/spec>
+  - RSS 2.0  <http://www.rssboard.org/rss-specification>
+  - Atom 1.0 <https://www.ietf.org/rfc/rfc4287.txt>
 #@include(rss/Tutorial)
 
 # class RSS::Element < Object

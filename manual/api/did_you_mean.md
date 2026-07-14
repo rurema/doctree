@@ -27,6 +27,6 @@ category: Development
 このライブラリはbundled gem(gemファイルのみを同梱)です。詳しい内容は下
 記のページを参照してください。
 
- - rubygems.org: [url:https://rubygems.org/gems/did_you_mean]
- - プロジェクトページ: [url:https://github.com/ruby/did_you_mean]
- - リファレンス: [url:https://www.rubydoc.info/gems/did_you_mean/]
+ - rubygems.org: <https://rubygems.org/gems/did_you_mean>
+ - プロジェクトページ: <https://github.com/ruby/did_you_mean>
+ - リファレンス: <https://www.rubydoc.info/gems/did_you_mean/>

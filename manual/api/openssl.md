@@ -2,7 +2,7 @@
 type: library
 category: Network
 ---
-OpenSSL([url:https://www.openssl.org/])
+OpenSSL(<https://www.openssl.org/>)
 を Ruby から扱うためのライブラリです。
 
 このドキュメントでは SSL/TLS の一般的事項については
@@ -120,7 +120,7 @@ Ruby/OpenSSL のバージョンです。
 ### const OPENSSL_VERSION_NUMBER -> Integer
 
 システムにインストールされている OpenSSL 本体のバージョンを表した数です。
-[url:https://www.openssl.org/docs/manmaster/man3/OPENSSL_VERSION_NUMBER.html]
+<https://www.openssl.org/docs/manmaster/man3/OPENSSL_VERSION_NUMBER.html>
 も参照してください。
 
 #@since 2.0.0

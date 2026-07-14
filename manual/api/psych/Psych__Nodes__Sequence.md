@@ -2,7 +2,7 @@
 library: psych
 ---
 # class Psych::Nodes::Sequence < Psych::Nodes::Node
-YAML sequence [url:https://yaml.org/spec/1.1/#sequence/syntax] を表すクラスです。
+YAML sequence <https://yaml.org/spec/1.1/#sequence/syntax> を表すクラスです。
 
 YAML sequence とは基本的にはリスト、配列です。以下のような例が考えられます。
 ```yaml

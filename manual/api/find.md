@@ -22,7 +22,7 @@ find('/foo','/bar') {|f| ...}
 ```
 
 以下は、ruby のアーカイブに含まれるサンプルスクリプト
-([url:https://github.com/ruby/ruby/blob/master/sample/trojan.rb]) をこのモジュールで書き換えたものです。
+(<https://github.com/ruby/ruby/blob/master/sample/trojan.rb>) をこのモジュールで書き換えたものです。
 
 ```ruby
 #! /usr/bin/env ruby

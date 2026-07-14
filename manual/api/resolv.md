@@ -251,7 +251,7 @@ IP アドレス address のホスト名をルックアップし、
 DNSについては以下を参照してください。
   - STD0013
   - [RFC:1035]
-  - [url:ftp://ftp.isi.edu/in-notes/iana/assignments/dns-parameters]
+  - <ftp://ftp.isi.edu/in-notes/iana/assignments/dns-parameters>
   - etc.
 
 ## Class Methods

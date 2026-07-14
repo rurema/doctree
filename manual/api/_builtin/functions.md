@@ -856,7 +856,7 @@ mode は以下の三つのうちのいずれかです。
 #@end
 
 ### Universal Newline
-改行をLFに揃えます。一言で言えばPEP:278 [url:https://www.python.org/dev/peps/pep-0278/]のことです。
+改行をLFに揃えます。一言で言えばPEP:278 <https://www.python.org/dev/peps/pep-0278/>のことです。
 
 - **`"rt"`**:
     CR、LF、CRLFのいずれをもLFとして読み込む。

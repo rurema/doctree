@@ -122,8 +122,8 @@ ro.instance_eval("DANGEROUS RUBY CODE!")
 適切なファイアウォールと併用すべきです。
 
 ### リファレンス
-  - [url:http://www2a.biglobe.ne.jp/~seki/ruby/druby.html]
-  - [url:http://www.ruby-doc.org/stdlib/libdoc/drb/rdoc/index.html]
+  - <http://www2a.biglobe.ne.jp/~seki/ruby/druby.html>
+  - <http://www.ruby-doc.org/stdlib/libdoc/drb/rdoc/index.html>
 
 ### Example
 単純なクライアント-サーバシステムの例。

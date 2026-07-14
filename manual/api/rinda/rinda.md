@@ -22,8 +22,8 @@ Rubyで実装されたタプルスペース(Tuple Space)を扱うためのライ
 このライブラリはタプルスペースへのアクセス機能等を提供します。
 
 ### 参考
-  - [url:http://www.druby.org/ilikeruby/rinda.html]
-  - [url:http://www2a.biglobe.ne.jp/~seki/ruby/d208.html]
+  - <http://www.druby.org/ilikeruby/rinda.html>
+  - <http://www2a.biglobe.ne.jp/~seki/ruby/d208.html>
 
 ### タプルのパターンについて {#tuplepattern}
 [m:Rinda::TupleSpace#take] や [m:Rinda::TupleSpaceProxy#take] などでは

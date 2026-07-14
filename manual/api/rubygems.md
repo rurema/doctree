@@ -53,7 +53,7 @@ $ gem help
 
 #### Gem パッケージをインストールする
 
-例えば rak ( [url:https://rubygems.org/gems/rak] ) をインストールするには、以下のいずれかを実行します。
+例えば rak ( <https://rubygems.org/gems/rak> ) をインストールするには、以下のいずれかを実行します。
 
 ```console
 $ gem install rak
@@ -257,9 +257,9 @@ gem: --no-rdoc --no-ri
 
 ### 参考
 - **Rubyist Magazine - シリーズ パッケージマネジメント 【第 1 回】 RubyGems (1)**:
-  [url:https://magazine.rubyist.net/articles/0006/0006-PackageManagement.html]
+  <https://magazine.rubyist.net/articles/0006/0006-PackageManagement.html>
 - **Rubyist Magazine - シリーズ パッケージマネジメント 【第 2 回】 RubyGems (2)**:
-  [url:https://magazine.rubyist.net/articles/0010/0010-PackageManagement.html]
+  <https://magazine.rubyist.net/articles/0010/0010-PackageManagement.html>
 
 
 # reopen Kernel

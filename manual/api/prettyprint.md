@@ -41,10 +41,10 @@ puts p2.output
 
 ### References
 Christian Lindig, Strictly Pretty, March 2000,
-[url:http://www.st.cs.uni-sb.de/~lindig/papers/pretty/strictly-pretty.html]
+<http://www.st.cs.uni-sb.de/~lindig/papers/pretty/strictly-pretty.html>
 
 Philip Wadler, A prettier printer, March 1998,
-[url:https://homepages.inf.ed.ac.uk/wadler/topics/language-design.html#prettier]
+<https://homepages.inf.ed.ac.uk/wadler/topics/language-design.html#prettier>
 
 # class PrettyPrint < Object
 

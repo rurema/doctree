@@ -8,8 +8,8 @@ require:
 Cookie を表すクラスです。[rfc:2109] に準拠しています。
 RFC2109 は [rfc:2965] により破棄されましたが、WEBrick::Cookie クラスは RFC2965 に対応していません。
 
- - [url:http://www.studyinghttp.net/translations#RFC2965]  
- - [url:http://www.studyinghttp.net/cookies] 
+ - <http://www.studyinghttp.net/translations#RFC2965>  
+ - <http://www.studyinghttp.net/cookies> 
 
 ## Class Methods
 

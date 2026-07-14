@@ -22,7 +22,7 @@ key は親のキーを Win32::Registry オブジェクトで指定します。
 desired はアクセスマスクです。opt はキーのオプションです。
 詳細は以下の MSDN Library を参照してください。
 
- - Registry Key Security and Access Rights: [url:http://msdn.microsoft.com/library/en-us/sysinfo/base/registry_key_security_and_access_rights.asp]
+ - Registry Key Security and Access Rights: <http://msdn.microsoft.com/library/en-us/sysinfo/base/registry_key_security_and_access_rights.asp>
 
 ブロックが与えられると，キーは自動的に閉じられます。
 
@@ -48,7 +48,7 @@ REG_EXPAND_SZ で用いられます。
 
 詳細は以下の Win32 API を参照してください。
 
- - ExpandEnvironmentStrings: [url:http://msdn.microsoft.com/library/en-us/sysinfo/base/expandenvironmentstrings.asp]
+ - ExpandEnvironmentStrings: <http://msdn.microsoft.com/library/en-us/sysinfo/base/expandenvironmentstrings.asp>
 
 ### def type2name(type)
 #@todo
@@ -62,7 +62,7 @@ REG_EXPAND_SZ で用いられます。
 
 詳細は以下の MSDN Library を参照してください。
 
- - FILETIME Structure: [url:http://msdn.microsoft.com/library/en-us/sysinfo/base/filetime_str.asp]
+ - FILETIME Structure: <http://msdn.microsoft.com/library/en-us/sysinfo/base/filetime_str.asp>
 
 ### def time2wtime(time)
 #@todo
@@ -272,7 +272,7 @@ subkey の値を返します。
 
 詳細は以下の Win32 API を参照してください。
 
- - RegQueryInfoKey: [url:http://msdn.microsoft.com/library/en-us/sysinfo/base/regqueryinfokey.asp]
+ - RegQueryInfoKey: <http://msdn.microsoft.com/library/en-us/sysinfo/base/regqueryinfokey.asp>
 
 ### def num_keys
 ### def max_key_length
@@ -322,5 +322,5 @@ subkey の値を返します。
 
 詳細は以下の MSDN Library を参照してください。
 
- - Predefined Keys: [url:http://msdn.microsoft.com/library/en-us/sysinfo/base/predefined_keys.asp]
+ - Predefined Keys: <http://msdn.microsoft.com/library/en-us/sysinfo/base/predefined_keys.asp>
 

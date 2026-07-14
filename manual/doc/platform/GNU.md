@@ -12,4 +12,4 @@ GNU is Not Unix なので、敬意を表して [d:platform/Unix] の括りから
 探してみたら、[ruby-dev:6712], [ruby-dev:14603] にパッチの投稿
 がある。きっと今でも動くに違いない。情報求む。
 
-[url:https://www.gnu.org/] 参照
+<https://www.gnu.org/> 参照

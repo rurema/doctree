@@ -295,7 +295,7 @@ p method.return_type_detail # => ["PTR", "USERDEFINED", "Workbooks"]
 返り値の取り得る属性値はCOMのIDL（インターフェイス定義言語）によって規
 定されています。
 
-- **SEE** [url:http://msdn.microsoft.com/en-us/library/aa367042(VS.85).aspx]
+- **SEE** <http://msdn.microsoft.com/en-us/library/aa367042(VS.85).aspx>
 
 ### def return_vtype -> Integer
 メソッドの返り値の型を示す数値を取得します。
