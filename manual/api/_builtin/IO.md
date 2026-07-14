@@ -33,9 +33,6 @@ IO の読み込みメソッドは2種類存在します。
  - [m:IO.foreach]
  - [m:IO.readlines]
  - [m:IO#each_line]
-#@until 3.0
- - [m:IO#lines]
-#@end
  - [m:IO#gets]
  - [m:IO#getc]
  - [m:IO#ungetc]
@@ -207,10 +204,6 @@ IO#readline                   EOFError
 IO#readlines                  []
 IO#readpartial                EOFError
 IO#sysread                    EOFError
-#@until 3.0
-IO#bytes                      通常どおり
-IO#lines                      通常どおり
-#@end
 ```
 
 ## Class Methods
@@ -1127,27 +1120,6 @@ File.open("testfile") do |io|
 end
 ```
 
-#@until 3.0
-### def bytes {|ch| ... }        -> self
-### def bytes                    -> Enumerator
-
-このメソッドは obsolete です。
-代わりに [m:IO#each_byte] を使用してください。
-使用すると警告メッセージが表示されます。
-
-IO の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
-
-ブロックが与えられなかった場合は、自身から生成した
-[c:Enumerator] オブジェクトを返します。
-
-バイナリ読み込みメソッドとして動作します。
-
-- **raise** `IOError` -- 自身が読み込み用にオープンされていなければ発生します。
-
-#@#noexample obsolete
-
-- **SEE** [m:IO#each_byte]
-#@end
 ### def eof     -> bool
 ### def eof?    -> bool
 
@@ -2165,41 +2137,6 @@ end
 p File.read("testfile")   # => "\u0000\u0000\u0000ABCDEF"
 ```
 #@end
-#@until 3.0
-### def lines(rs = $/) {|line| ... }        -> self
-### def lines(limit) {|line| ... }          -> self
-### def lines(rs, limit) {|line| ... }      -> self
-### def lines(rs = $/)                      -> Enumerator
-### def lines(limit)                        -> Enumerator
-### def lines(rs, limit)                    -> Enumerator
-
-このメソッドは obsolete です。
-代わりに [m:IO#each_line] を使用してください。
-
-使用すると警告メッセージが表示されます。
-
-IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として
-与えられたブロックを実行します。
-
-ブロックが与えられなかった場合は、自身から生成した
-[c:Enumerator] オブジェクトを返します。
-
-テキスト読み込みメソッドとして動作します。
-
-limit で最大読み込みバイト数を指定します。ただしマルチバイト文字が途中で
-切れないように余分に読み込む場合があります。
-
-
-- **param** `rs` -- 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
-          空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
-- **param** `limit` -- 最大の読み込みバイト数
-
-- **raise** `IOError` -- 自身が読み込み用にオープンされていなければ発生します。
-
-#@#noexample obsolete
-
-- **SEE** [m:$/], [m:IO#each_line]
-#@end
 ### def getbyte   -> Integer | nil
 
 IO から1バイトを読み込み整数として返します。
@@ -2248,27 +2185,6 @@ f = File.new("testfile")
 f.each_char {|c| print c, ' ' }   #=> #<File:testfile>
 ```
 
-#@until 3.0
-### def chars{|c| ... }         -> self
-### def chars                   -> Enumerator
-
-このメソッドは obsolete です。
-代わりに [m:IO#each_char] を使用してください。
-
-使用すると警告メッセージが表示されます。
-
-self に含まれる文字を一文字ずつブロックに渡して評価します。
-
-self は読み込み用にオープンされていなければなりません。
-
-ブロックを省略した場合は各文字について繰り返す [c:Enumerator] を返します。
-
-- **raise** `IOError` -- self が読み込み用にオープンされていない場合に発生します。
-
-#@#noexample obsolete
-
-- **SEE** [m:IO#each_char]
-#@end
 ### def ungetbyte(c) -> nil
 
 指定したバイト列を書き戻します。
@@ -2470,25 +2386,6 @@ end
 # 12354
 ```
 
-#@until 3.0
-### def codepoints{|c| ... }         -> self
-### def codepoints                   -> Enumerator
-
-このメソッドは obsolete です。
-代わりに [m:IO#each_codepoint] を使用してください。
-
-使用すると警告メッセージが表示されます。
-
-IO の各コードポイントに対して繰り返しブロックを呼びだします。
-
-ブロックの引数にはコードポイントを表す整数が渡されます。
-
-ブロックを省略した場合には、[c:Enumerator] を返します。
-
-#@#noexample obsolete
-
-- **SEE** [m:IO#each_codepoint]
-#@end
 ### def fdatasync -> 0
 
 IO のすべてのバッファされているデータを直ちにディスクに書き込みます。

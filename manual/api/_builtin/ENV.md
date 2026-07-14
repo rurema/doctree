@@ -228,17 +228,9 @@ val を値として持つ環境変数が存在する時、真を返します。
 #@since 1.9.1
 ### def key(val)   -> String | nil
 #@end
-#@until 3.0
-### def index(val) -> String | nil
-#@end
 
 val に対応するキーを返します。対応する要素が存在しない時には
 nil を返します。
-
-#@until 3.0
-[m:ENV.index] は obsolete です。使用すると警告メッセージが表示されます。
-[m:ENV.key] を使用してください。
-#@end
 
 - **param** `val` -- 値を指定します。文字列で指定します。文字
            列以外のオブジェクトを指定した場合は to_str メソッドによる暗

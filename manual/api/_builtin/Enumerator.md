@@ -37,25 +37,6 @@ p a.next
 
 ## Class Methods
 
-#@until 3.0
-### def new(obj, method = :each, *args) -> Enumerator
-
-オブジェクト obj について、 each の代わりに method という
-名前のメソッドを使って繰り返すオブジェクトを生成して返します。
-args を指定すると、 method の呼び出し時に渡されます。
-
-- **param** `obj` -- イテレータメソッドのレシーバとなるオブジェクト
-- **param** `method` -- イテレータメソッドの名前を表すシンボルまたは文字列
-- **param** `args` -- イテレータメソッドの呼び出しに渡す任意個の引数
-
-```ruby title="例"
-str = "xyz"
-
-enum = Enumerator.new(str, :each_byte)
-p enum.map {|b| '%02x' % b }   # => ["78", "79", "7a"]
-```
-#@end
-
 ### def new(size=nil){|y| ... }         -> Enumerator
 
 Enumerator オブジェクトを生成して返します。与えられたブロックは [c:Enumerator::Yielder] オブジェクトを

@@ -258,14 +258,6 @@ p ARGF.each_byte.to_a  # => [35, 32, ... 95, 10]
 
 - **SEE** [m:IO#each_byte]
 
-#@until 3.0
-### def bytes { |byte| ... } -> self
-### def bytes                -> Enumerator
-
-このメソッドは obsolete です。
-代わりに [m:ARGF.class#each_byte] を使用してください。
-使用すると警告メッセージが表示されます。
-#@end
 ### def each_char { |c| ... } -> self
 ### def each_char             -> Enumerator
 
@@ -305,14 +297,6 @@ ARGF.each_char{|e|p e}
 
 - **SEE** [m:IO#each_char]
 
-#@until 3.0
-### def chars { |c| ... } -> self
-### def chars             -> Enumerator
-
-このメソッドは obsolete です。
-代わりに [m:ARGF.class#each_char] を使用してください。
-使用すると警告メッセージが表示されます。
-#@end
 ### def each_codepoint { |c| ... }   -> self
 ### def each_codepoint               -> Enumerator
 
@@ -332,15 +316,6 @@ p ARGF.each_codepoint                # => #<Enumerator: ARGF:each_codepoint>
 p ARGF.each_codepoint{|e|print e, ","} # => 108,105,110,101,49,10,108,105,110,101,50,10,
 ```
 
-#@until 3.0
-#@# 2.0 から追加のメソッドだが IO#codepoints と揃えたと思われる。
-### def codepoints { |c| ... }       -> self
-### def codepoints                   -> Enumerator
-
-このメソッドは obsolete です。
-代わりに [m:ARGF.class#each_codepoint] を使用してください。
-使用すると警告メッセージが表示されます。
-#@end
 ### def eof  -> bool
 ### def eof? -> bool
 
@@ -598,20 +573,6 @@ p ARGF.to_io  # => #<IO:<STDIN>>
 
 - **SEE** [m:ARGF.class#file], [m:ARGF.class#to_write_io]
 
-#@until 3.0
-### def lines(rs = $/) { |line| ... }   -> self
-### def lines(limit) { |line| ... }     -> self
-### def lines(rs, limit) { |line| ... } -> self
-### def lines(rs = $/)                  -> Enumerator
-### def lines(limit)                    -> Enumerator
-### def lines(rs, limit)                -> Enumerator
-
-このメソッドは obsolete です。
-代わりに [m:ARGF.class#each_line] を使用してください。
-使用すると警告メッセージが表示されます。
-
-- **SEE** [m:$/], [m:ARGF.class#each_line]
-#@end
 ### def getbyte   -> Integer | nil
 
 self から 1 バイト(0..255)を読み込み整数として返します。

@@ -995,19 +995,11 @@ p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {:a=>1, :b=>2}:each_value>
 - **SEE** [m:Hash#each_pair],[m:Hash#each_key]
 
 ### def key(val) -> object
-#@until 3.0
-### def index(val) -> object
-#@end
 
 値 val に対応するキーを返します。対応する要素が存在しない時には
 nil を返します。
 
 該当するキーが複数存在する場合、どのキーを返すかは不定です。
-
-#@until 3.0
-Hash#index は obsolete です。
-使用すると警告メッセージが表示されます。
-#@end
 
 - **param** `val` -- 探索に用いる値を指定します。
 

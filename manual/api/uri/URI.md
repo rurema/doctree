@@ -151,57 +151,6 @@ p URI.regexp =~ "http://www.ruby-lang.org/"  #=> 0
 ```
 
 
-#@until 3.0
-### def escape(str, unsafe = URI::UNSAFE)    -> String
-### def encode(str, unsafe = URI::UNSAFE)    -> String
-
-URI 文字列をエンコードした文字列を返します。
-
-このメソッドは obsolete です。
-
-代わりに
-[m:ERB::Util?.url_encode],
-[m:CGI.escape],
-[m:URI.encode_www_form_component],
-[m:WEBrick::HTTPUtils?.escape_form],
-[m:WEBrick::HTTPUtils?.escape]
-などの使用を検討してください。
-詳細は [ruby-core:29293] からのスレッドを参照してください。
-
-```ruby title="例"
-require 'uri'
-p URI.escape('http://images.google.co.jp/images?q=モナリザ&ie=EUC-JP') 
-
-#=> "http://images.google.co.jp/images?q=%A5%E2%A5%CA%A5%EA%A5%B6&ie=EUC-JP"
-```
-
-- **param** `str` -- URI を文字列として与えます。
-
-- **param** `unsafe` -- URI として指定できない文字を正規表現か文字列で指定します。
-
-### def unescape(str)    -> String
-### def decode(str)      -> String
-
-URI 文字列をデコードした文字列を返します。
-
-このメソッドは obsolete です。
-
-代わりに
-[m:CGI.unescape],
-[m:URI.decode_www_form],
-[m:URI.decode_www_form_component]
-などの使用を検討してください。
-
-```ruby title="例"
-require 'uri'
-puts URI.unescape('http://images.google.co.jp/images?q=%A5%E2%A5%CA%A5%EA%A5%B6&ie=EUC-JP')
-
-#=> "http://images.google.co.jp/images?q=モナリザ&ie=EUC-JP"
-```
-
-- **param** `str` -- URI を文字列として与えます。
-
-#@end
 #@since 1.9.2
 ### def decode_www_form(str, enc=Encoding::UTF_8) -> [[String, String]]
 

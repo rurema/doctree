@@ -809,19 +809,6 @@ p Time.local(2000, 1, 1).isdst   # => false
 p Time.now.zone # => "JST"
 ```
 
-#@until 3.0
-### def succ    -> Time
-
-self に 1 秒足した Time オブジェクトを生成して返します。
-
-このメソッドは obsolete です。 self + 1 を代わりに使用してください。
-
-```ruby
-t = Time.local(2000)
-p t       # => 2000-01-01 00:00:00 +0900
-p t.succ  # => 2000-01-01 00:00:01 +0900
-```
-#@end
 ### def utc_offset     -> Integer
 ### def gmt_offset     -> Integer
 ### def gmtoff         -> Integer

@@ -29,61 +29,10 @@ p foo       # => 2
 
 ## Class Methods
 
-#@until 3.0
-### def new -> Proc
-#@end
 ### def new { ... } -> Proc
 
 ブロックをコンテキストとともにオブジェクト化して返します。
 
-#@until 3.0
-ブロックを指定しない場合、Ruby 2.7 では
-[m:$VERBOSE] = true のときには警告メッセージ
-「warning: Capturing the given block using Proc.new is deprecated; use \`&block\` instead」
-が出力され、Ruby 3.0 では
-[c:ArgumentError] (tried to create Proc object without a block)
-が発生します。
-
-ブロックを指定しなければ、このメソッドを呼び出したメソッドが
-ブロックを伴うときに、それを Proc オブジェクトとして生成して返します。
-
-ただし、ブロックを指定しない呼び出しは推奨されていません。呼び出し元のメソッドで指定されたブロック
-を得たい場合は明示的に & 引数でうけるべきです。
-
-- **raise** `ArgumentError` -- スタック上にブロックがないのにブロックを省略した呼び出しを行ったときに発生します。
-
-```ruby title="例"
-def foo
-  pr = Proc.new
-  pr.call(1)
-end
-foo {|arg| p arg }
-# => 1
-```
-
-これは以下と同じです。
-
-```ruby title="例"
-def foo
-  yield(1)
-end
-foo {|arg| p arg }
-# => 1
-```
-
-呼び出し元のメソッドがブロックを伴わなければ、例外
-[c:ArgumentError] が発生します。
-
-```ruby title="例"
-def foo
-  Proc.new
-end
-foo
-# => -:2:in `new': tried to create Proc object without a block (ArgumentError)
-#        from -:2:in `foo'
-#        from -:4:in `<main>'
-```
-#@else
 - **raise** `ArgumentError` -- ブロックを省略した呼び出しを行ったときに発生します。
 
 ```ruby
@@ -98,7 +47,6 @@ Proc.new # => -e:1:in 'new': tried to create Proc object without a block (Argume
 Proc.new # => -e:1:in `new': tried to create Proc object without a block (ArgumentError)
 #@end
 ```
-#@end
 
 Proc.new は、Proc#initialize が定義されていれば
 オブジェクトの初期化のためにこれを呼び出します。このことを

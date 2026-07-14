@@ -172,10 +172,6 @@ p sio.closed?   # => true
 ### def each_line(rs = $/){|line| ... }  -> self
 ### def each(rs = $/)       -> Enumerator
 ### def each_line(rs = $/)  -> Enumerator
-#@until 3.0
-### def lines(rs = $/){|line| ... }      -> self
-### def lines(rs = $/)      -> Enumerator
-#@end
 
 自身から 1 行ずつ読み込み、それを引数として与えられたブロックを実行します。
 
@@ -196,10 +192,6 @@ a.each{|l| p l }
 
 ### def each_byte{|ch| ... }    -> self
 ### def each_byte -> Enumerator
-#@until 3.0
-### def bytes{|ch| ... }        -> self
-### def bytes     -> Enumerator
-#@end
 
 自身から 1 バイトずつ読み込み、整数 ch に変換し、それを引数として与えられたブロックを実行します。
 
@@ -731,10 +723,6 @@ p a.string                     #=> "aaae"
 
 ### def each_char{|c| ... } -> self
 ### def each_char           -> Enumerator
-#@until 3.0
-### def chars{|c| ... }     -> self
-### def chars               -> Enumerator
-#@end
 自身に含まれる文字を一文字ずつブロックに渡して評価します。
 
 自身は読み込み用にオープンされていなければなりません。
@@ -786,10 +774,6 @@ p a.string                     #=> "aaae"
 
 ### def each_codepoint{|codepoint| ... } -> self
 ### def each_codepoint -> Enumerator
-#@until 3.0
-### def codepoints{|codepoint| ... } -> self
-### def codepoints -> Enumerator
-#@end
 
 自身の各コードポイントに対して繰り返します。
 

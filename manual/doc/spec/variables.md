@@ -170,29 +170,6 @@ end
 
 #@end
 
-#@until 3.0
-親クラスに、子クラスで既に定義されている同名のクラス変数を追加した場合には、
-子クラスのクラス変数が上書きされます。
-
-```ruby
-class Foo
-end
-
-class Bar < Foo
-  @@v = :bar
-end
-
-class Foo
-  @@v = :foo
-end
-
-class Bar
-  p @@v       #=> :foo
-end
-```
-
-#@end
-
 #@since 3.0
 親クラスに、子クラスで既に定義されている同名のクラス変数を追加した場合、
 子クラスが、そのクラス変数を参照した際に例外 [c:RuntimeError] が発生します。

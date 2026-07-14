@@ -2596,9 +2596,6 @@ eval('raise RuntimeError', binding, 'XXX.rb', 4)
 
 ### module_function def proc { ... } -> Proc
 ### module_function def lambda { ... } -> Proc
-#@until 3.0
-### module_function def proc -> Proc
-#@end
 #@until 2.7
 ### module_function def lambda -> Proc
 #@end
@@ -2606,29 +2603,6 @@ eval('raise RuntimeError', binding, 'XXX.rb', 4)
 与えられたブロックから手続きオブジェクト ([c:Proc] のインスタンス)
 を生成して返します。[m:Proc.new] に近い働きをします。
 
-#@until 3.0
-ブロックが指定されなければ、呼び出し元のメソッドで指定されたブロック
-を手続きオブジェクトとして返します。呼び出し元のメソッドがブロックなし
-で呼ばれると [c:ArgumentError] 例外が発生します。
-
-ただし、ブロックを指定しない呼び出しは推奨されていません。呼び出し元のメソッドで指定されたブロック
-を得たい場合は明示的に & 引数でうけるべきです。
-
-ブロックを指定しない lambda は Ruby 2.6 までは警告メッセージ
-「warning: tried to create Proc object without a block」
-が出力され、Ruby 2.7 では
-[c:ArgumentError] (tried to create Proc object without a block)
-が発生します。
-
-ブロックを指定しない proc は、Ruby 2.7 では
-[m:$VERBOSE] = true のときには警告メッセージ
-「warning: Capturing the given block using Proc.new is deprecated; use \`&block\` instead」
-が出力され、Ruby 3.0 では
-[c:ArgumentError] (tried to create Proc object without a block)
-が発生します。
-
-- **raise** `ArgumentError` -- スタック上にブロックがないのにブロックを省略した呼び出しを行ったときに発生します。
-#@else
 
 また、lambda に & 引数を渡すのは推奨されません。& 引数ではなくてブロック記法で記述する必要があります。
 
@@ -2637,7 +2611,6 @@ eval('raise RuntimeError', binding, 'XXX.rb', 4)
 を出力します。
 
 - **raise** `ArgumentError` -- ブロックを省略した呼び出しを行ったときに発生します。
-#@end
 
 #@since 3.0
 ```ruby title="例"

@@ -35,10 +35,6 @@ Ruby 2.7 以前は SortedSet が定義されていました)。
 require 'set'
 p [30, 10, 20].to_set
 #=> #<Set: {30, 10, 20}>
-#@until 3.0
-p [30, 10, 20].to_set(SortedSet)
-#=> #<SortedSet: {10, 20, 30}>
-#@end
 MySet = Class.new(Set)
 p [30, 10, 20].to_set(MySet)
 #=> #<MySet: {10, 20, 30}>

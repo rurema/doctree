@@ -886,29 +886,6 @@ a.join
 
 - **SEE** [m:Thread#wakeup], [m:Thread.stop]
 
-#@until 3.0
-### def safe_level    -> Integer
-
-#@since 2.6.0
-セーフレベルを返します。
-#@else
-self のセーフレベルを返します。カレントスレッドの
-safe_level は、[m:$SAFE] と同じです。
-#@end
-
-Ruby 2.6 から[m:$SAFE]がプロセスグローバルになったため、このメソッドは obsolete になりました。
-#@since 2.6.0
-単純に [m:$SAFE] をチェックしてください。
-#@end
-
-セーフレベルについては[d:spec/safelevel]を参照してください。
-
-```ruby title="例"
-thr = Thread.new { $SAFE = 1; sleep }
-Thread.current.safe_level   # => 0
-thr.safe_level              # => 1
-```
-#@end
 ### def status    -> String | false | nil
 
 生きているスレッドの状態を文字列 "run"、"sleep", "aborting" のいず

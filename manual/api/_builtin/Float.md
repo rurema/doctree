@@ -740,16 +740,6 @@ Float が取り得る最小の有限の値は -[m:Float::MAX] です。
 
 指数表現の基数です。
 
-#@until 3.0
-### const ROUNDS -> Integer
-
-この定数は Ruby 2.7 から deprecated です。使わないでください。
-
-#@# https://bugs.ruby-lang.org/issues/16044
-
-丸めモード (-1: 不定、0: 0.0 の方向に丸め、1: 四捨五入、2:正の無限
-大の方向に丸め、3:負の無限大の方向に丸め)です。
-#@end
 ### const INFINITY -> Float
 
 浮動小数点数における正の無限大です。
