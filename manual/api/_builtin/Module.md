@@ -96,7 +96,7 @@ p Module.used_modules
 
 ## Instance Methods
 
-### def <=>(other) -> Integer | nil
+### def <=>(other) -> -1 | 0 | 1 | nil
 
 self と other の継承関係を比較します。
 
