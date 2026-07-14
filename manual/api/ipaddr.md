@@ -244,7 +244,7 @@ IPv4 の場合は例外を発生します。
 
 - **SEE** [c:Socket]
 
-### def <=>(other) -> Integer | nil
+### def <=>(other) -> -1 | 0 | 1 | nil
 
 self と other を比較します。
 

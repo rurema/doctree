@@ -110,12 +110,13 @@ n.to_a
 # => [["C", "JP", 19], ["ST", "Kanagawa", 12], ["L", "Yokohama", 12], ["O", "Example Company", 12], ["OU", "Lab3", 12], ["CN", "foobar", 12], ["emailAddress", "foobar@lab3.example.co.jp", 22]]
 ```
 
-### def cmp(other) ->  -1 | 0 | 1 
-### def <=>(other) ->  -1 | 0 | 1 
+### def cmp(other) ->  -1 | 0 | 1 | nil
+### def <=>(other) ->  -1 | 0 | 1 | nil
 他の [c:OpenSSL::X509::Name] オブジェクトと比較します。
 
 自身が other と一致する場合は 0、otherより大きい場合は1、
 小さい場合は -1 を返します。
+比較できない場合は nil を返します。
 
 - **param** `other` -- 比較するオブジェクト
 
