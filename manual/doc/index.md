@@ -72,6 +72,7 @@ Ruby でのオブジェクト:
 
 Ruby の文法:
   - [d:spec/lexical]
+  - [d:spec/comment]
   - [d:spec/program]
   - [d:spec/variables]
   - [d:spec/literal]
