@@ -11,11 +11,11 @@
 
 - **`!true`**:
 
- not 演算子。[ref:d:spec/operator#not]を参照。
+ not 演算子。[ref:d:spec/operator#not] を参照。
 
 - **`3 != 5`**:
 
- 「等しくない」比較演算子。[ref:d:spec/operator#not]を参照。
+ 「等しくない」比較演算子。[ref:d:spec/operator#not] を参照。
 
 - **`def xxx!`**:
 
@@ -57,7 +57,7 @@
 
 - **`#! ruby -Ks`**:
 
- shebang。[ref:d:spec/rubycmd#shebang]を参照。
+ shebang。[ref:d:spec/rubycmd#shebang] を参照。
 
 - **`# coding: utf-8`**:
 
@@ -81,7 +81,7 @@ p "a is #{a}" # => "a is 10"
 
 - **`10 % 3`**:
 
- 各クラスで定義された「`%`」演算子。整数クラスでは「剰余」を意味するメソッド。[m:Numeric#%]メソッドなどを参照。
+ 各クラスで定義された「`%`」演算子。整数クラスでは「剰余」を意味するメソッド。[m:Numeric#%] メソッドなどを参照。
 
 - **`"%04b" % 10`**:
 
@@ -134,7 +134,7 @@ p( 3 && 5 ) # => 5 ・・ 3 も 5 も真なので右の値を返す。
 
 - **def xxx(&yyy) ・・ &がついた引数**:
 
- メソッド定義のブロック引数。[ref:d:spec/def#method]を参照。
+ メソッド定義のブロック引数。[ref:d:spec/def#method] を参照。
 
 - **`xxx(&b)`**:
 
@@ -334,11 +334,11 @@ end
 
 - **a,b, = [1,2,3] ・・ 代入の左辺の「,」**:
 
- 多重代入。[ref:d:spec/operator#multiassign]を参照。
+ 多重代入。[ref:d:spec/operator#multiassign] を参照。
 
 - **`a = b, c`**:
 
- 多重代入。[ref:d:spec/operator#multiassign]を参照。
+ 多重代入。[ref:d:spec/operator#multiassign] を参照。
 
 - **`def foo(bar, baz)`**:
 
@@ -369,7 +369,7 @@ end
 - **`3 <=> 5`**:
 
  基本的な比較演算子。ほかの比較演算子はこの演算子を元に [c:Comparable] モジュールで定義されています。
- 左が大きければ 1, 等しければ0, 右が大きければ -1 を返すように作ることが期待されています。
+ 左が大きければ 1, 等しければ 0, 右が大きければ -1 を返すように作ることが期待されています。
 
 - **`3 << 1`**:
 
@@ -397,7 +397,7 @@ p a # => 6
 
 - **`class << obj`**:
 
- 特異クラス定義。[ref:d:spec/def#singleton_class]を参照。
+ 特異クラス定義。[ref:d:spec/def#singleton_class] を参照。
 
 ### > {#rangl}
 
@@ -412,7 +412,7 @@ p a # => 6
 - **`3 <=> 3`**:
 
  基本的な比較演算子。ほかの比較演算子はこの演算子を元に [c:Comparable]
- モジュールで定義されています。左が大きければ1, 等しければ0, 右が大きければ -1
+ モジュールで定義されています。左が大きければ 1, 等しければ 0, 右が大きければ -1
  を返すように作ることが期待されています。
 
 - **`3 >> 1`**:
@@ -457,13 +457,13 @@ lambda{|a, b| p [a, b] }
 
 - **`a === 12`**:
 
- 特殊な等号演算子。[m:Object#===]での説明：「このメソッドは case 文での比較に用いられます。
+ 特殊な等号演算子。[m:Object#===] での説明：「このメソッドは case 文での比較に用いられます。
  デフォルトは `Object#==` と同じ働きをしますが、 この挙動はサブクラスで所属性のチェックを実現するため
  適宜再定義されます」。たとえば、[m:Range#===] はother が範囲内に含まれている時に真を返します。
 
 - **a += 12 , a *= 12 , a ||= 12 など・・a 二項演算子 = b**:
 
- 自己代入演算子。[ref:d:spec/operator#selfassign]を参照。
+ 自己代入演算子。[ref:d:spec/operator#selfassign] を参照。
 
 ```ruby
 a = 7
@@ -478,7 +478,7 @@ p a # => 49
 
 - **`=begin ・・ =end`**:
 
- 埋め込みドキュメントです。[ref:d:spec/lexical#embed]を参照。
+ 埋め込みドキュメントです。[ref:d:spec/lexical#embed] を参照。
 
 - **`{ 1 => "11" , 3 => "333" }`**:
 
@@ -518,7 +518,7 @@ p '%04b %04b' % [3, ~ 3] # => "0011 ..100"
 
 - **`$xxx`**:
 
- グローバル変数。[ref:d:spec/variables#global]を参照。
+ グローバル変数。[ref:d:spec/variables#global] を参照。
 
 - **$_ や $! など ・・$<1文字の数字、記号>**:
 
@@ -527,17 +527,17 @@ p '%04b %04b' % [3, ~ 3] # => "0011 ..100"
 - **`/xx$/`**:
 
  正規表現で行末。文字列の末尾や改行文字の直前の位置にマッチします。改行自身は含みません。
- [d:spec/regexp]を参照。
+ [d:spec/regexp] を参照。
 
 ### @ {#at}
 
 - **`@xxx`**:
 
- インスタンス変数。[ref:d:spec/variables#instance]を参照。
+ インスタンス変数。[ref:d:spec/variables#instance] を参照。
 
 - **`@@xxx`**:
 
- クラス変数。[ref:d:spec/variables#class]を参照。
+ クラス変数。[ref:d:spec/variables#class] を参照。
 
 - **def +@ または def -@**:
 
@@ -563,7 +563,7 @@ puts(+:joke) # => JOKE
 
  文字コード以外の数値リテラルには、`_` を含めることができます。 ruby インタプリタは `_` を単に無視し、
  特別な解釈は何もしません。 これは、大きな数値の桁数がひと目でわかるように記述するのに便利です。
- [ref:d:spec/literal#num]を参照。
+ [ref:d:spec/literal#num] を参照。
 
 - **`_1 ~ _9`**:
 
@@ -595,7 +595,7 @@ puts(+:joke) # => JOKE
 
 - **`"a is #{a}"`**:
 
- 式展開。[ref:d:spec/literal#exp]を参照。
+ 式展開。[ref:d:spec/literal#exp] を参照。
 
 ```ruby
 a = 10
@@ -611,7 +611,7 @@ p "a is #{a}" # => "a is 10"
 
 - **`'abcde'[1,2]`**:
 
- []メソッドの実行
+ [] メソッドの実行
 
 ```ruby
 class String
@@ -639,7 +639,7 @@ p( 'abcde'[1,2] ) # => "(^^;"
 - **`"abc"`**:
 
  文字列リテラル。式展開などが可能なタイプの文字列リテラルです。
- [ref:d:spec/literal#string]を参照。
+ [ref:d:spec/literal#string] を参照。
 
 ### ' {#sq}
 
@@ -652,7 +652,7 @@ p( 'abcde'[1,2] ) # => "(^^;"
 - **\`ls\`**:
 
  コマンド出力。バッククォート(\`)で囲まれた文字列は、コマンドとして実行され、
- その標準出力が文字列として与えられます。[ref:d:spec/literal#command]を参照。
+ その標準出力が文字列として与えられます。[ref:d:spec/literal#command] を参照。
 
 ```ruby
 puts `ruby -h`
