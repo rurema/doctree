@@ -260,26 +260,26 @@ p Foo.new.to_yaml # => "--- !example.com,2002/foo {}\n\n"
 
 YAML Specification
 
- - [url:https://yaml.org/spec/]
- - [url:https://yaml.org/type/]
+ - <https://yaml.org/spec/>
+ - <https://yaml.org/type/>
 
 YAML4R
 
- - [url:http://yaml4r.sourceforge.net/]
- - [url:http://yaml4r.sourceforge.net/cookbook/]([url:https://yaml.org/YAML_for_ruby.html])
- - [url:http://yaml4r.sourceforge.net/doc/]
+ - <http://yaml4r.sourceforge.net/>
+ - <http://yaml4r.sourceforge.net/cookbook/>(<https://yaml.org/YAML_for_ruby.html>)
+ - <http://yaml4r.sourceforge.net/doc/>
 
-Rubyist Magazine: [url:https://magazine.rubyist.net/]
+Rubyist Magazine: <https://magazine.rubyist.net/>
 
- - プログラマーのための YAML 入門 (初級編): [url:https://magazine.rubyist.net/articles/0009/0009-YAML.html]
- - プログラマーのための YAML 入門 (中級編): [url:https://magazine.rubyist.net/articles/0010/0010-YAML.html]
- - プログラマーのための YAML 入門 (実践編): [url:https://magazine.rubyist.net/articles/0011/0011-YAML.html]
- - プログラマーのための YAML 入門 (検証編): [url:https://magazine.rubyist.net/articles/0012/0012-YAML.html]
- - プログラマーのための YAML 入門 (探索編): [url:https://magazine.rubyist.net/articles/0013/0013-YAML.html]
+ - プログラマーのための YAML 入門 (初級編): <https://magazine.rubyist.net/articles/0009/0009-YAML.html>
+ - プログラマーのための YAML 入門 (中級編): <https://magazine.rubyist.net/articles/0010/0010-YAML.html>
+ - プログラマーのための YAML 入門 (実践編): <https://magazine.rubyist.net/articles/0011/0011-YAML.html>
+ - プログラマーのための YAML 入門 (検証編): <https://magazine.rubyist.net/articles/0012/0012-YAML.html>
+ - プログラマーのための YAML 入門 (探索編): <https://magazine.rubyist.net/articles/0013/0013-YAML.html>
 
 その他
 
- - Ruby with YAML: [url:http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html]
+ - Ruby with YAML: <http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html>
 
 # module YAML
 

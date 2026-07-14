@@ -1175,7 +1175,7 @@ Thread.new {
 
 - **SEE** [m:Thread#thread_variable_set], [m:Thread#\[\]]
 
-- **SEE** [url:https://magazine.rubyist.net/articles/0041/0041-200Special-note.html]
+- **SEE** <https://magazine.rubyist.net/articles/0041/0041-200Special-note.html>
 
 ### def thread_variable_set(key, value)
 

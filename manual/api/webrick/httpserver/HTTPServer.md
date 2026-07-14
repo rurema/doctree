@@ -33,7 +33,7 @@ HTTPServer オブジェクトを生成して返します。
   アクセスログの出力先とフォーマットを [[io, format], [io, format], ...] のような
   配列で指定します。io は [c:IO] オブジェクトです。format は文字列です。デフォルトでは
   フォーマットの形式は Apache のそれに準拠し標準エラー出力に出力します。
-  [url:http://httpd.apache.org/docs/mod/mod_log_config.html#formats]
+  <http://httpd.apache.org/docs/mod/mod_log_config.html#formats>
   [m:WEBrick::AccessLog::COMMON_LOG_FORMAT] [m:WEBrick::AccessLog::REFERER_LOG_FORMAT]
   も参照して下さい。
 - **`:MimeTypes`**:

@@ -3,7 +3,7 @@
 本マニュアルは Ruby の公式日本語リファレンスマニュアル
 (Ruby Reference Manual、通称「るりま」/ rurema)です。
 
- - Ruby オフィシャルサイト [url:https://www.ruby-lang.org/ja/]
+ - Ruby オフィシャルサイト <https://www.ruby-lang.org/ja/>
 #@since 4.1
  - 開発版対応リファレンス
 #@end
@@ -41,7 +41,7 @@
  - version 2.3 対応リファレンス
 #@end
  - 原著：まつもとゆきひろ
- - 最新版URL: [url:https://www.ruby-lang.org/ja/documentation/]
+ - 最新版URL: <https://www.ruby-lang.org/ja/documentation/>
 
 ### 使用上の注意
 

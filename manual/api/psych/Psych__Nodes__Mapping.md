@@ -3,7 +3,7 @@ library: psych
 ---
 # class Psych::Nodes::Mapping < Psych::Nodes::Node
 
-YAML の mapping [url:https://yaml.org/spec/1.1/#mapping] を表すクラスです。
+YAML の mapping <https://yaml.org/spec/1.1/#mapping> を表すクラスです。
 
 Psych::Nodes::Mapping は 0 個以上の子ノードを持つことができます。
 子ノードの個数は偶数でなければなりません。

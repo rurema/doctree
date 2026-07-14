@@ -179,7 +179,7 @@ Dir.chroot("./")
 p Dir.glob("/*")  #=> ["/file1", "/file2]
 ```
 
-- **SEE** [url:http://opengroup.org/onlinepubs/007908799/xsh/chroot.html]
+- **SEE** <http://opengroup.org/onlinepubs/007908799/xsh/chroot.html>
 
 ### def delete(path)    -> 0
 ### def rmdir(path)     -> 0

@@ -5,7 +5,7 @@ library: openssl
 
 ASN.1 のオブジェクト識別子を表すクラス。
 
-* ITU-T X.660 [url:https://www.itu.int/rec/T-REC-X.660/en]
+* ITU-T X.660 <https://www.itu.int/rec/T-REC-X.660/en>
 
 ## Class Methods
 

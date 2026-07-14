@@ -8,9 +8,9 @@ Telnet プロトコルをクライアント側で扱うライブラリです。
 このライブラリはbundled gem(gemファイルのみを同梱)です。詳しい内容は下
 記のページを参照してください。
 
-  - rubygems.org: [url:https://rubygems.org/gems/net-telnet]
-  - プロジェクトページ: [url:https://github.com/ruby/net-telnet]
-  - リファレンス: [url:https://www.rubydoc.info/gems/net-telnet]
+  - rubygems.org: <https://rubygems.org/gems/net-telnet>
+  - プロジェクトページ: <https://github.com/ruby/net-telnet>
+  - リファレンス: <https://www.rubydoc.info/gems/net-telnet>
 
 #@else
 ### 参考文献

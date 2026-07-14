@@ -5,7 +5,7 @@ library: win32/registry
 
 詳細は以下の MSDN Library を参照してください。
 
- - Registry: [url:http://msdn.microsoft.com/library/en-us/sysinfo/base/registry.asp]
+ - Registry: <http://msdn.microsoft.com/library/en-us/sysinfo/base/registry.asp>
 
 ## Constants
 

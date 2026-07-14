@@ -8,9 +8,9 @@ XML-RPC を扱うためのライブラリです。
 このライブラリはbundled gem(gemファイルのみを同梱)です。詳しい内容は下
 記のページを参照してください。
 
- - rubygems.org: [url:https://rubygems.org/gems/xmlrpc]
- - プロジェクトページ: [url:https://github.com/ruby/xmlrpc]
- - リファレンス: [url:https://www.rubydoc.info/gems/xmlrpc]
+ - rubygems.org: <https://rubygems.org/gems/xmlrpc>
+ - プロジェクトページ: <https://github.com/ruby/xmlrpc>
+ - リファレンス: <https://www.rubydoc.info/gems/xmlrpc>
 #@else
 このページは xmlrpc ライブラリのまとめのページであり、require 'xmlrpc' を実行しても
 エラーになることに注意して下さい。
@@ -126,10 +126,10 @@ You can change the XML-writer by calling method <i>set_writer</i>.
 
 ### 参考
 
-  - [url:http://www.linux.or.jp/JF/JFdocs/XML-RPC-HOWTO/index.html]
-  - [url:http://www.linux.or.jp/JF/JFdocs/XML-RPC-HOWTO/xmlrpc-howto-ruby.html]
-  - [XML-RPC] [url:http://www.xmlrpc.com/spec]
-  - [url:https://magazine.rubyist.net/articles/0007/0007-BundledLibraries.html]
+  - <http://www.linux.or.jp/JF/JFdocs/XML-RPC-HOWTO/index.html>
+  - <http://www.linux.or.jp/JF/JFdocs/XML-RPC-HOWTO/xmlrpc-howto-ruby.html>
+  - [XML-RPC] <http://www.xmlrpc.com/spec>
+  - <https://magazine.rubyist.net/articles/0007/0007-BundledLibraries.html>
 
 ### 注意
 

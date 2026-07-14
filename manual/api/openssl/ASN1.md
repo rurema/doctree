@@ -119,7 +119,7 @@ OpenSSL::ASN1::ASN1Data
 
 ### 参照
 
- - ITU-T Rec. X.680-699 [url:https://www.itu.int/itu-t/recommendations/index.aspx?ser=X]
+ - ITU-T Rec. X.680-699 <https://www.itu.int/itu-t/recommendations/index.aspx?ser=X>
 
 #@#  * [RFC 3279] [[unknown:Algorithms and Identifiers for the Internet X.509 Public Key InfrastructureCertificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3279EN.html]]
 #@#  * [RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and CRL Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-00EN.html]]

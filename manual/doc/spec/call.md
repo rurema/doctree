@@ -413,7 +413,7 @@ p hoge{|a, b, c| p a} #=> [1,2,3]
 ```
 
 
-[url:http://www.a-k-r.org/d/2007-08.html#a2007_08_16_1]
+<http://www.a-k-r.org/d/2007-08.html#a2007_08_16_1>
 #@end
 
 ### 番号指定パラメータ {#numbered_parameters}

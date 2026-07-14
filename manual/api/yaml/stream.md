@@ -10,9 +10,9 @@ YAML ドキュメントを複数保持できるストリームクラスです。
 
 ### 参考
 
-Rubyist Magazine: [url:https://magazine.rubyist.net/]
+Rubyist Magazine: <https://magazine.rubyist.net/>
 
- - プログラマーのための YAML 入門 (中級編): [url:https://magazine.rubyist.net/articles/0010/0010-YAML.html]
+ - プログラマーのための YAML 入門 (中級編): <https://magazine.rubyist.net/articles/0010/0010-YAML.html>
 
 ## class methods
 

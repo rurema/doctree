@@ -18,7 +18,7 @@ Ruby のコードをパースして得られる抽象構文木を扱うモジュ
 また子要素に名前でアクセスする方法は提供されていません。
 
 もし安定したAPIやMRI以外の実装で抽象構文木を扱いたい場合、
-parser gem ([url:https://github.com/whitequark/parser])や
+parser gem (<https://github.com/whitequark/parser>)や
 [c:Ripper]の使用を検討してください。
 もし RubyVM::AbstractSyntaxTree のAPIを安定にしたい場合、[feature:14844] での議論に参加してください。
 

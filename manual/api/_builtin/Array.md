@@ -2777,10 +2777,10 @@ p ary.bsearch {|x| 4 - x / 2 } # => nil
 
 #@end
 #@if("2.0.0" <= version and version < "2.3.0")
-- **SEE** [m:Range#bsearch], [url:https://magazine.rubyist.net/articles/0041/0041-200Special-note.html]
+- **SEE** [m:Range#bsearch], <https://magazine.rubyist.net/articles/0041/0041-200Special-note.html>
 #@end
 #@since 2.3.0
-- **SEE** [m:Array#bsearch_index], [m:Range#bsearch], [url:https://magazine.rubyist.net/articles/0041/0041-200Special-note.html]
+- **SEE** [m:Array#bsearch_index], [m:Range#bsearch], <https://magazine.rubyist.net/articles/0041/0041-200Special-note.html>
 
 ### def bsearch_index { |x| ... } -> Integer | nil
 ### def bsearch_index             -> Enumerator

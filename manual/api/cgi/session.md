@@ -195,9 +195,9 @@ SessionDemo.new
 
 ### 参考URL
 
-  - [url:http://www.shugo.net/article/webdb2/#label:13]
-  - [url:http://www.modruby.net/doc/faq.ja.jis.html#label-13]
-  - [url:http://www.ruby-doc.org/stdlib/libdoc/cgi/rdoc/index.html]
+  - <http://www.shugo.net/article/webdb2/#label:13>
+  - <http://www.modruby.net/doc/faq.ja.jis.html#label-13>
+  - <http://www.ruby-doc.org/stdlib/libdoc/cgi/rdoc/index.html>
 
 # class CGI::Session < Object
 

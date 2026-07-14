@@ -85,7 +85,7 @@ param1 = method.params[0]
 puts param1.input? # => true
 ```
 
-- **SEE** [url:http://msdn.microsoft.com/en-us/library/aa367051(v=VS.85).aspx]
+- **SEE** <http://msdn.microsoft.com/en-us/library/aa367051(v=VS.85).aspx>
 
 ### def name -> String
 ### def to_s -> String
@@ -134,7 +134,7 @@ p param1.ole_type_detail # => ["PTR", "USERDEFINED", "Range"]
 
 パラメータの取り得る属性値はCOMのIDL（インターフェイス定義言語）によって規定されています。
 
-- **SEE** [url:http://msdn.microsoft.com/en-us/library/aa367042(VS.85).aspx]
+- **SEE** <http://msdn.microsoft.com/en-us/library/aa367042(VS.85).aspx>
 
 ### def optional? -> bool
 パラメータがオプションかどうかを取得します。
@@ -177,7 +177,7 @@ The result of above script is following:
   Processed true
 ```
 
-- **SEE** [url:http://msdn.microsoft.com/en-us/library/aa367136(v=VS.85).aspx]
+- **SEE** <http://msdn.microsoft.com/en-us/library/aa367136(v=VS.85).aspx>
 
 ### def retval? -> bool
 パラメータが戻り値かどうかを判定します。
@@ -200,4 +200,4 @@ param = method.params[0]
 puts "#{param.name} #{param.retval?}"  # => name true
 ```
 
-- **SEE** [url:http://msdn.microsoft.com/en-us/library/aa367158(v=VS.85).aspx]
+- **SEE** <http://msdn.microsoft.com/en-us/library/aa367158(v=VS.85).aspx>

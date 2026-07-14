@@ -125,7 +125,7 @@ false となります。
 メタ変数は「The WWW Common Gateway Interface Version 1.1」のバージョン
 3 で定義されています。
 
-- **SEE** [url:http://Web.Golux.Com/coar/cgi/]
+- **SEE** <http://Web.Golux.Com/coar/cgi/>
 
 ### def parse(socket = nil)    -> ()
 

@@ -2,7 +2,7 @@
 library: psych
 ---
 # class Psych::Nodes::Scalar < Psych::Nodes::Node
-YAML の scalar [url:https://yaml.org/spec/1.1/#id858081] を表すクラスです。
+YAML の scalar <https://yaml.org/spec/1.1/#id858081> を表すクラスです。
 
 これは AST の葉にあたるノードであり、子ノードを持ちません。
 

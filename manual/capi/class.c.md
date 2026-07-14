@@ -272,7 +272,7 @@ rb_scan_args(argc, argv, "1*&", &a, &rest, &block);
 def some_method(a, *rest, &block)
 ```
 
-- **SEE** [url:https://github.com/ruby/ruby/blob/master/doc/extension.ja.rdoc]
+- **SEE** <https://github.com/ruby/ruby/blob/master/doc/extension.ja.rdoc>
 
 ### VALUE rb_singleton_class(VALUE obj)
 

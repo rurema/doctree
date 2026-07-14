@@ -1,7 +1,7 @@
 # ReFe
 
 ReFeについては
-[url:http://i.loveruby.net/ja/prog/refe.html]
+<http://i.loveruby.net/ja/prog/refe.html>
 をご覧ください。
 
 ### Gems版
@@ -24,7 +24,7 @@ $ bitclust setup
 最新 Ruby リファレンスマニュアル用に ReFe のデータを構築するには以下の
 手順で行います。(詳細は ReFe の README を参照してください)
 
-(1) [url:http://i.loveruby.net/ja/prog/refe.html] から ReFe の基本セット
+(1) <http://i.loveruby.net/ja/prog/refe.html> から ReFe の基本セット
 ```text
 を取って来てインストールします。
 
@@ -36,7 +36,7 @@ $ bitclust setup
     ruby setup.rb install
 ```
 
-(2) [url:http://www.ruby-lang.org/ja/man/man-rd-ja.tar.gz]
+(2) <http://www.ruby-lang.org/ja/man/man-rd-ja.tar.gz>
 ```text
 にあるのが最新のリファレンスマニュアルの tarball です。
 これを取得します。

@@ -108,7 +108,7 @@ OpenSSL による通信の圧縮を禁止します。
 
 [m:OpenSSL::SSL::SSLContext#options=] で利用します。
 
-- **SEE** [url:https://bugs.ruby-lang.org/issues/5183]
+- **SEE** <https://bugs.ruby-lang.org/issues/5183>
 
 ### const OP_PKCS1_CHECK_1 -> Integer
 #@todo

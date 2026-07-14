@@ -77,7 +77,7 @@ yesterday = Date.today - 1
 英国がグレゴリオ暦をつかい始めた日 (1752年9月14日) をあらわすユリウス日です。
 この "ENGLAND" の名前は、旧い UNIX の [man:cal(1)] の記述に由来します。
 
-- **SEE** [url:https://www.bell-labs.com/usr/dmr/www/pdfs/man61.pdf]
+- **SEE** <https://www.bell-labs.com/usr/dmr/www/pdfs/man61.pdf>
 
 ちなみに、本実装で英国の改暦日を尊重する姿勢がみられるのは前実装からの影響です。
 前実装が英国の改暦日を尊重していたのは、おそらく [man:cal(1)] の影響です。

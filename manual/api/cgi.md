@@ -13,9 +13,9 @@ CGI プログラムの支援ライブラリです。
 
 CGI プロトコルの詳細については以下の文書を参照してください。
 
-  - [url:https://tools.ietf.org/html/draft-coar-cgi-v11-03]
+  - <https://tools.ietf.org/html/draft-coar-cgi-v11-03>
   - [RFC:3875]: The Common Gateway Interface (CGI) Version 1.1
-  - [url:https://www.w3.org/CGI/]
+  - <https://www.w3.org/CGI/>
 
 ### 使用例
 
@@ -190,7 +190,7 @@ value = cgi.accept_charset      # ENV["HTTP_ACCEPT_CHARSET"]
   - HTTP_USER_AGENT
 
 CGI に関連する環境変数に関しては
-[url:https://www.w3.org/CGI/] も参照してください。
+<https://www.w3.org/CGI/> も参照してください。
 
 #### 標準出力に HTTP ヘッダと HTML を出力する
 
