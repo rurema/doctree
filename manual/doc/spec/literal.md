@@ -203,8 +203,10 @@ p 'my name is #{$ruby}' #=> "my name is #{$ruby}"
 式展開中の式は、ダブルクォートなども含めて Ruby の式をそのまま書くこと
 ができます。コメントも許されます。
 
-```text
-p "#{ "string" # comment }"   # => "string"
+ただし次の例は SyntaxError となります。
+
+```text title="式展開中の誤ったコメントの例"
+p "#{ "string" # comment }"
 ```
 
 式展開中のコメントは、# から } まででなく改行までです。上記の例は
