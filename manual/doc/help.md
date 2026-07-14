@@ -40,6 +40,12 @@ CGI#[](name) -> String | [String]
 x オブジェクトと nil で成功・失敗を表す場合は「x | nil」が
 使われています。
 
+### 参考
+
+このマニュアルの読み方をもっとやさしく学びたい方は、
+伊藤淳一 著『[Rubyの公式リファレンスが読めるようになる本](https://zenn.dev/jnchito/books/how-to-read-ruby-reference)』
+(web book、無料) も参考にしてください。
+
 ### お問い合わせ
 
 間違いを見付けた場合は
