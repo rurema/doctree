@@ -232,8 +232,12 @@ src が IO オブジェクトでかつ src_offset が指定されている場合
 src のオフセット(src.pos)は変更されません。
 
 - **param** `src` -- コピー元となる IO オブジェクトかファイル名を指定します。
+                   IO オブジェクトやファイル名に限らず、readpartial または
+                   read に応答するオブジェクトも指定できます。
 
 - **param** `dst` -- コピー先となる IO オブジェクトかファイル名を指定します。
+                   IO オブジェクトやファイル名に限らず、write に応答する
+                   オブジェクトも指定できます。
 
 - **param** `copy_length` -- コピーする長さをバイト単位で指定します。最大 copy_length までコピーされます。
                    nil を指定した場合、コピーする長さに制限はありません。
@@ -246,6 +250,14 @@ p IO.copy_stream("filetest", "filecopy", 2)   # => 2
 p IO.read("filecopy")                         # => "ab"
 p IO.copy_stream("filetest", "filecopy", 3, 4)  # => 3
 p IO.read("filecopy")                         # => "efg"
+```
+
+```ruby title="例: readpartial/read や write に応答するオブジェクトを指定する"
+require "stringio"
+src = StringIO.new("hello world")
+dst = StringIO.new
+p IO.copy_stream(src, dst)   # => 11
+p dst.string                 # => "hello world"
 ```
 
 ### def try_convert(obj) -> IO | nil
@@ -584,8 +596,17 @@ length バイト分読み込んで返します。
 動作します。
 
 [m:Kernel?.open] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
+ただし、この "|コマンド名" の特別扱いはレシーバが [c:IO] である場合のみ有効です。
+[c:File] は [m:IO.read] を継承していますが、`File.read` では
+path の先頭が "|" であっても普通のファイル名として扱われ、コマンドは実行されません。
+
+```ruby title="例: レシーバによる違い"
+IO.read("|echo hello")    # => "hello\n" (コマンドを実行する)
+File.read("|echo hello")  # => Errno::ENOENT ("|echo hello" という名前のファイルを探そうとする)
+```
 
 - **param** `path` -- ファイル名を表す文字列か "|コマンド名" を指定します。
+                   "|コマンド名" はレシーバが [c:IO] の場合のみ有効です。
 
 - **param** `length` -- 読み込む長さを整数で指定します。nil であるか省略した場合には、EOF まで読み込みます。
 
@@ -631,6 +652,8 @@ path で指定したファイルを open し、offset の所まで seek し、
 length バイト読み込みます。
 
 [m:Kernel?.open] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
+[m:IO.read] と同様、この "|コマンド名" の特別扱いはレシーバが [c:IO] である
+場合のみ有効で、`File.binread` では単なるファイル名として扱われます。
 
 length を省略するとファイルの末尾まで読み込みます。
 
@@ -769,7 +792,8 @@ path で指定されるファイルを開き、string を書き込み、
 offset を指定するとその位置までシークします。
 
 offset を指定しないと、書き込みの末尾でファイルを
-切り捨てます。
+切り捨てます。ただし、キーワード引数 mode に "a" (追記モード) を指定した
+場合は、ファイルは切り詰められず、既存の内容の末尾に string が追記されます。
 
 キーワード引数はファイルを開くときに使われ、エンコーディングなどを指定できます。
 詳しくは [m:IO.open] を見てください。
@@ -787,6 +811,13 @@ IO.read("testfile")
 # => "This is line one\nThi0123456789two\nThis is line three\nAnd so on...\n"
 p IO.write("testfile", "0123456789")    #=> 10
 p IO.read("testfile")                   # => "0123456789"
+```
+
+```ruby title="例: mode: \"a\" を指定した場合は切り詰められない"
+IO.write("testfile", "This is line one\n")
+IO.write("testfile", "This is line two\n", mode: "a")
+p IO.read("testfile")
+# => "This is line one\nThis is line two\n"
 ```
 
 - **SEE** [m:IO.binwrite]
