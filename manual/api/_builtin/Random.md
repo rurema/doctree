@@ -1,5 +1,7 @@
 ---
 library: _builtin
+include:
+  - Random::Formatter
 ---
 # class Random < Object
 
