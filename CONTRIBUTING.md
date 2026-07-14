@@ -72,24 +72,26 @@ Ruby でプログラミングができるとサンプルの検証などもでき
 * セキュリティメンテナンス期間が終わってEOLになったもの: そのバージョン特有のものには積極的には対応しないが、既に書いてあるものは消さない。
   * 例: 2.1がEOLになったとき、2.1.x で追加されたけど、2.2.x 以降で消えた機能については残しておく。
 * それ以前: 対応しない(outdatedな記述は消してもよい)
+  * [vars.rb](https://github.com/rurema/generated-documents/blob/main/tool/vars.rb)でFROZEN_VERSIONSに移動したものはdoctreeのmasterから再生成されないので消してよい
   * 例: 2.1がEOLになったとき、2.0.x で追加されたけど、2.1.x 以降で消えた機能については消してもよい。
 * あるバージョンがEOLになったらその時点でタグを打つ
+* **ただし、2026年7月のMarkdown移行から当面の間は3.0以降に対応する**
 
 ### 具体例
 
-例えば2018年9月時点では、
+例えば2026年7月時点では、
 
-* 最新安定版: 2.5 系列
-* 1つ前の安定版: 2.4 系列
-* 2つ前の安定版: 2.3 系列
-* セキュリティメンテナンス期間が終わってEOLになったもの: 2.2 系列
-* それ以前: 2.1 以前
+* 最新安定版: 4.0 系列
+* 1つ前の安定版: 3.4 系列
+* 2つ前の安定版: 3.3 系列
+* セキュリティメンテナンス期間が終わってEOLになったもの: 3.2 系列
+* それ以前: 本来は 3.1 以前だが、当面は 2.7.0 以前
 
 となります。
 
 最新の状況については
 
-* https://bugs.ruby-lang.org/projects/ruby/wiki/ReleaseEngineering
+* https://github.com/ruby/ruby/wiki/Release-Engineering
 * https://github.com/ruby/www.ruby-lang.org/blob/master/_data/branches.yml
 
 などを参照してください。
