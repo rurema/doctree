@@ -77,7 +77,7 @@ yesterday = DateTime.now - 1
 #@since 1.9.0
 #@# exp
 ### def iso8601(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
-いくつかの代表的な [ISO:8601] 書式の日付を解析し、
+いくつかの代表的な ISO 8601 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
 - **param** `str` -- 日付をあらわす文字列
@@ -104,7 +104,7 @@ yesterday = DateTime.now - 1
 #@since 1.9.0
 #@# exp
 ### def jisx0301(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
-いくつかの代表的な [[JIS:X 0301]] 書式の日付を解析し、
+いくつかの代表的な JIS X 0301 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
 [m:Date._jisx0301] も参照してください。
@@ -253,7 +253,7 @@ DateTime.strptime('2001-02-03T12:13:14Z').to_s
 ### def rfc3339(n = 0) -> String
 #@# exp
 ### def xmlschema(n = 0) -> String
-[ISO:8601] 書式の文字列を返します (XML Schema の dateTime 相当)。
+ISO 8601 書式の文字列を返します (XML Schema の dateTime 相当)。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
 
 strftime('%FT%T%:z') と等価です。
@@ -269,7 +269,7 @@ DateTime.parse('2001-02-03T04:05:06.123456789+07:00').iso8601(9)
 
 #@since 1.9.0
 ### def jisx0301(n = 0) -> String
-[[JIS:X 0301]] 書式の文字列を返します。
+JIS X 0301 書式の文字列を返します。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
 #@end
 
