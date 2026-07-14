@@ -385,6 +385,17 @@ req['Content-Range'] = "bytes 1-500/1000"
 p req.range_length # => 500
 ```
 
+1 以外から始まる範囲の場合は、末尾の値との差分に 1 を足した値になります。
+
+```ruby title="例"
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+req['Content-Range'] = "bytes 200-699/1000"
+p req.range_length # => 500
+```
+
 ### def delete(key) -> [String] | nil
 key ヘッダフィールドを削除します。
 

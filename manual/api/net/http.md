@@ -42,6 +42,16 @@ res = Net::HTTP.start(url.host, url.port) {|http|
 puts res.body
 ```
 
+```ruby title="例5: パラメータ付きで GET する"
+require 'net/http'
+require 'uri'
+
+url = URI.parse('http://www.example.com/search')
+url.query = URI.encode_www_form('q'=>'ruby', 'max'=>'50')
+res = Net::HTTP.get_response(url)
+puts res.body
+```
+
 #### フォームの情報を送信する (POST)
 
 ```ruby title="例"
