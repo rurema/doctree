@@ -190,7 +190,7 @@ value = cgi.accept_charset      # ENV["HTTP_ACCEPT_CHARSET"]
   - HTTP_USER_AGENT
 
 CGI に関連する環境変数に関しては
-[url:http://www.w3.org/CGI/] も参照してください。
+[url:https://www.w3.org/CGI/] も参照してください。
 
 #### 標準出力に HTTP ヘッダと HTML を出力する
 
