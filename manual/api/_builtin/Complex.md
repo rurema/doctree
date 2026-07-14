@@ -283,7 +283,7 @@ p Complex(1, 2).conj # => (1-2i)
 
 ```ruby title="例"
 p Complex('1/2+2/3i').denominator # => 6
-p Complex(3).numerator          # => 1
+p Complex(3).denominator          # => 1
 ```
 
 - **SEE** [m:Complex#numerator]
