@@ -100,3 +100,24 @@ ruby: invalid switch in RUBYOPT: -y (RuntimeError)
 - **`RUBY_GC_*`**:
 
   [ref:c:GC#tuning_gc] を参照。
+
+- **`RUBY_THREAD_VM_STACK_SIZE`**:
+
+  スレッド生成時に使用される VM スタックのサイズをバイト数で指定します。
+
+- **`RUBY_THREAD_MACHINE_STACK_SIZE`**:
+
+  スレッド生成時に使用されるマシンスタックのサイズをバイト数で指定します。
+
+- **`RUBY_FIBER_VM_STACK_SIZE`**:
+
+  Fiber 生成時に使用される VM スタックのサイズをバイト数で指定します。
+
+- **`RUBY_FIBER_MACHINE_STACK_SIZE`**:
+
+  Fiber 生成時に使用されるマシンスタックのサイズをバイト数で指定します。
+
+  これらのスタックサイズ関連の環境変数は実装依存であり、Ruby のバージョンによって
+  変更される可能性があります。値を小さくすることでより多くの Fiber や Thread を
+  同時に実行できるようになる場合がありますが、[c:SystemStackError] やセグメンテー
+  ション違反が発生しやすくなります。

@@ -239,6 +239,12 @@ JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
 
 与えられた JSON 形式の文字列を Ruby オブジェクトとしてロードして返します。
 
+[m:JSON?.parse] との違いは、load は信頼できる入力源を読み込むための簡易メソッドである点です。
+source には JSON 形式の文字列だけでなく、to_str, to_io, read のいずれかに応答するオブジェクト
+(File などの IO や、パスを表すオブジェクトなど) も指定でき、その内容を読み込んだ上で
+内部的に [m:JSON?.parse] を呼び出します。また、[m:JSON?.parse] とはデフォルトのオプション
+(特に create_additions) が異なります。
+
 proc として手続きオブジェクトが与えられた場合は、読み込んだオブジェクトを
 引数にその手続きを呼び出します。
 
