@@ -266,7 +266,7 @@ YAML Specification
 YAML4R
 
  - [url:http://yaml4r.sourceforge.net/]
- - [url:http://yaml4r.sourceforge.net/cookbook/]([url:http://yaml.org/YAML_for_ruby.html])
+ - [url:http://yaml4r.sourceforge.net/cookbook/]([url:https://yaml.org/YAML_for_ruby.html])
  - [url:http://yaml4r.sourceforge.net/doc/]
 
 Rubyist Magazine: [url:https://magazine.rubyist.net/]
