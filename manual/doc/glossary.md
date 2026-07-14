@@ -1585,9 +1585,13 @@
   スクリプトエンコーディングを示すもの（encoding）、
   文字列リテラルを凍結するかどうかを指定するもの（frozen_string_literal）、
   インデント不整合の警告を出すかどうかを指定するもの（warn_indent）
-  がある。
+#@since 3.0
+  、定数を Ractor で共有可能にするもの（shareable_constant_value）などがある。
+#@else
+  などがある。
+#@end
 
-  参照：[ref:d:spec/m17n#magic_comment]
+  参照：[ref:d:spec/comment#magic_comment]
 
 - **ミックスイン**:
 - **`mix-in`**:
