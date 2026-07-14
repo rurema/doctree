@@ -1,4 +1,15 @@
-# Rubyで使われる記号の意味（正規表現の複雑な記号は除く）
+# 記号一覧
+
+Ruby スクリプトで使われる記号の一覧です。
+
+以下のようなものはそれぞれ、全く含んでいないか一部のみ含んでいます。
+
+- 正規表現のメタ文字
+- `Date#strftime` の書式指定で使う `%`，`-`，`.` とかの類
+- `Kernel.#format` の書式指定で使う `%`，`#`，`+`，`-` とかの類
+- `String#unpack`，`Array#pack` のテンプレートで使う `!`，`<`，`>`
+- ファイルパスのデリミター
+- CSV，JSON，YAML，XML など特定のファイルフォーマットに使うもの
 
 [ref:ex]　[ref:q]　[ref:num]　[ref:per]　[ref:and]　[ref:or]　
 [ref:plus]　[ref:minus]　[ref:ast]　[ref:slash]　[ref:hat]　[ref:sq]　
