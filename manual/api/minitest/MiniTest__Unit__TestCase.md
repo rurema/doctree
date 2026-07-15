@@ -16,11 +16,7 @@ until: "2.2.0"
 
 ## Public Instance Methods
 
-#@since 1.9.2
 ### def __name__ -> String
-#@else
-### def name -> String
-#@end
 
 自身の名前を返します。
 
@@ -85,7 +81,6 @@ until: "2.2.0"
 
 
 ## Constants
-#@since 1.9.2
 ### const PASSTHROUGH_EXCEPTIONS -> [Class]
 
 システム関連の例外のリストです。内部で使用します。
@@ -95,4 +90,3 @@ until: "2.2.0"
 [c:Signal] が INFO というシグナルをサポートしているかどうかを
 調べるための定数です。内部で使用します。
 
-#@end

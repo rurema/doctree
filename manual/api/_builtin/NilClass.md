@@ -89,7 +89,6 @@ p nil.to_i #=> 0
 p nil.to_s # => ""
 ```
 
-#@since 1.9.1
 ### def to_c -> Complex
 
 0+0i を返します。
@@ -106,9 +105,7 @@ p nil.to_c # => (0+0i)
 p nil.to_r # => (0/1)
 ```
 
-#@end
 
-#@since 1.9.2
 ### def rationalize      -> Rational
 ### def rationalize(eps) -> Rational
 
@@ -124,9 +121,7 @@ p nil.rationalize(100) # => (0/1)
 p nil.rationalize(0.1) # => (0/1)
 ```
 
-#@end
 
-#@since 2.0.0
 ### def to_h -> {}
 
 {} を返します。
@@ -134,8 +129,6 @@ p nil.rationalize(0.1) # => (0/1)
 ```ruby title="例"
 p nil.to_h #=> {}
 ```
-#@end
-#@since 2.6.0
 ### def =~(other) -> nil
 
 右辺に正規表現オブジェクトを置いた正規表現マッチ obj =~ /RE/
@@ -154,4 +147,3 @@ p(obj =~ /re/) #=> nil
 ```
 
 - **SEE** [m:String#=~]
-#@end

@@ -45,11 +45,9 @@ p Time.parse("12:00", time) #=> 2019-05-01 12:00:00 +0900
 - **param** `now` --  現在時刻を[c:Time] オブジェクトで指定します。
             デフォルトは[m:Time.now]となります。
 
-#@since 1.9.2
 - **raise** `ArgumentError` -- dateに空文字列を与えた場合、発生します。
                      なお、1.9.2より前は例外は発生せず、現在時刻を表す
                      Time のインスタンスを返していました。
-#@end
 
 ```ruby
 require 'time'
@@ -178,7 +176,6 @@ end
 
 - **SEE** [m:Time#xmlschema], [m:Time#iso8601]
 
-#@since 1.9.1
 ### def strptime(date, format, now=self.now) -> Time
 ### def strptime(date, format, now=self.now){|y| ... } -> Time
 文字列を [m:Date._strptime] を用いて [c:Time] オブジェクト
@@ -214,7 +211,6 @@ Time.strptime('01/5/18 4:13:00', '%Y/%m/%d %T'){|y|
 
 - **param** `date` -- 時刻を表す文字列
 - **param** `format` -- 書式文字列
-#@end
 
 ## Instance Methods
 

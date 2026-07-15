@@ -146,7 +146,6 @@ p SecureRandom.uuid #=> "62936e70-1815-439b-bf89-8492855a7e6b"
 
 - **SEE** [rfc:4122]
 
-#@since 2.5.0
 ### def alphanumeric(n = nil)    -> String
 
 ランダムな英数字を生成して返します。
@@ -162,4 +161,3 @@ require 'securerandom'
 p SecureRandom.alphanumeric #=> "2BuBuLf3WfSKyQbR"
 p SecureRandom.alphanumeric(10) #=> "i6K93NdqiH"
 ```
-#@end

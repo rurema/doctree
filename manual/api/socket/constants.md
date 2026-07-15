@@ -192,7 +192,6 @@ XEROX NS protocol。
 [m:Socket.open] の第一引数 domain に使用します。
 
 
-#@since 1.9.1
 ### const AF_PACKET -> Integer
 ### const PF_PACKET -> Integer
 
@@ -200,7 +199,6 @@ XEROX NS protocol。
 [m:Socket.open] の第一引数 domain に使用します。
 
 - **SEE** [man:socket(2linux)], [man:packet(7linux)]     
-#@end
 ### const AF_PPP -> Integer
 ### const PF_PPP -> Integer
 #@todo
@@ -351,7 +349,6 @@ Internal key-management function。
 ユーザが自由に利用して良いポート番号の最小値。
 
 
-#@since 1.9.1
 ### const IPPROTO_AH -> Integer
 IPv6 auth header。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
@@ -435,7 +432,6 @@ level 引数に使用します。
 
 - **SEE** [rfc:2292]
 
-#@end
 ### const IPPROTO_BIP -> Integer
 #@todo
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
@@ -636,7 +632,6 @@ Prevent host name resolution。
 
 - **SEE** [man:getaddrinfo(3)]
 
-#@since 1.9.1
 ### const AI_NUMERICSERV -> Integer
 Prevent server name resolution。
 
@@ -645,7 +640,6 @@ Prevent server name resolution。
 
 - **SEE** [man:getaddrinfo(3)]
 
-#@end
 ### const AI_PASSIVE -> Integer
 Get address to use with bind。
 
@@ -764,7 +758,6 @@ Hostname nor servname, or not known
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
-#@since 1.9.1
 ### const EAI_OVERFLOW -> Integer
 Argument buffer overflow
 
@@ -775,7 +768,6 @@ Argument buffer overflow
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
-#@end
 
 ### const EAI_PROTOCOL -> Integer
 Resolved protocol is unknown
@@ -860,7 +852,6 @@ IPv4の 244.0.0.0 に対応する整数です。
 
 - **SEE** <http://www.iana.org/assignments/multicast-addresses/multicast-addresses.xml>, [RFC:5771]
 
-#@since 1.9.1
 ### const INET6_ADDRSTRLEN -> Integer
 IPv6アドレス文字列の最大長。
 
@@ -871,18 +862,13 @@ IPv4アドレス文字列の最大長。
 
 - **SEE** [man:netinet/in.h(header)]
 
-#@end
-#@since 1.9.2
 ### const IFNAMSIZ -> Integer
-#@since 1.9.3
 ### const IF_NAMESIZE -> Integer
-#@end
 
 インターフェース名文字列の最大長さ。
 
 - **SEE** [man:net/if.h(header)]
 
-#@end
 
 ### const NI_DGRAM -> Integer
 The service specified is a datagram service (looks up UDP ports)。
@@ -1077,7 +1063,6 @@ IP time-to-live。
 - **SEE** [m:Socket::Constants::IPPROTO_IP], 
      [man:ip(4freebsd)], [man:ip(7linux)]
 
-#@since 1.9.2
 ### const IP_ADD_SOURCE_MEMBERSHIP -> Integer
 Add a multicast group membership。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
@@ -1258,10 +1243,8 @@ ource address for outgoing UDP datagrams。
 ### const IP_XFRM_POLICY -> Integer
 #@todo
 
-#@end
 
 
-#@since 1.9.1
 ### const IPV6_CHECKSUM -> Integer
 Byte offset into a packet where the checksum is located.
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
@@ -1492,13 +1475,10 @@ Only bind IPv6。
      [man:netinet/in.h(header)], [man:ip6(4freebsd)], [man:ipv6(7linux)],
      [RFC:3493]
 
-#@end
 
-#@since 1.9.1
 ### const IPX_TYPE -> Integer
 #@todo
 
-#@end
 
 ### const MSG_COMPAT -> Integer
 #@todo
@@ -1629,7 +1609,6 @@ flags 引数に用います。
      [man:recv(2linux)],
      [man:recv(2freebsd)]
 
-#@since 1.9.2
 ### const MSG_CONFIRM -> Integer
 Confirm path validity
 
@@ -1675,9 +1654,7 @@ Wait for full request
 ### const MSG_SYN -> Integer
 #@todo
 
-#@end
 
-#@since 1.9.2
 ### const MCAST_BLOCK_SOURCE -> Integer
 Block multicast packets from this source
 
@@ -1760,9 +1737,7 @@ Unblock multicast packets from this source
 - **SEE** [m:Socket::Constants::IPPROTO_IP], [m:Socket::Constants::IPPROTO_IPV6],
      [RFC:3678]
 
-#@end
 
-#@since 1.9.2
 ### const LOCAL_CONNWAIT -> Integer
 Retrieve peer credentials。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
@@ -1783,9 +1758,7 @@ Pass credentials to receiver。
 
 - **SEE** [man:ip(4freebsd)]
 
-#@end
 
-#@since 1.9.2
 ### const SCM_BINTIME -> Integer
 Timestamp (bintime).
 
@@ -1842,7 +1815,6 @@ Timestamp (timespec).
 #@todo
 User credentials。
 
-#@end
 
 ### const SHUT_RD -> Integer
 [m:BasicSocket#shutdown] の how 引数に使用します。
@@ -2100,7 +2072,6 @@ Give a hint when more data is ready。
 #@todo
 OOB data is wanted in MSG_FLAG on receive。
 
-#@since 1.9.2
 ### const SO_ALLZONES -> Integer
 #@todo
 Bypass zone boundaries。
@@ -2130,16 +2101,13 @@ Receive nanosecond timestamp with datagrams (timespec)。
 - **SEE** [m:Socket::Constants::SO_TIMESTAMP],
      [m:Socket::AncillaryData#timestamp]
 
-#@end
 
 
-#@since 1.9.2
 ### const SOMAXCONN -> Integer
 [m:Socket#listen] の backlog の最大長。
 
 - **SEE** [man:sys/socket.h(header)], [man:listen(2)]
 
-#@end
 
 ### const SOL_ATALK -> Integer
 #@todo
@@ -2219,7 +2187,6 @@ Don't delay sending to coalesce packets。
 - **SEE** [man:tcp(4freebsd)],
      [man:tcp(7linux)], [man:netinet/tcp.h(header)]
 
-#@since 1.9.2
 ### const TCP_CORK -> Integer
 Don't send partial frames。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
@@ -2318,9 +2285,7 @@ Don't send partial frames
 
 - **SEE** [man:udp(7linux)]
 
-#@end
 
-#@since 2.1.0
 ### const IFF_802_1Q_VLAN
 
 802.1Q VLAN device
@@ -2552,4 +2517,3 @@ volatile flags
 ### const IFF_CANTCHANGE
 
 flags not changeable
-#@end

@@ -80,12 +80,10 @@ Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で
 リクエストの Content-Type ヘッダを文字列で返します。
 
 
-#@since 1.9.3
 ### def continue
 #@todo 1.9.3
 Generate HTTP/1.1 100 continue response if the client expects it,
 otherwise does nothing.
-#@end
 
 ### def cookies    -> [WEBrick::Cookie]
 
@@ -219,7 +217,6 @@ CGI での環境変数 SCRIPT_NAME を文字列で表すアクセサです。
 
 - **param** `value` -- SCRIPT_NAME を文字列で指定します。
 
-#@since 1.9.1
 ### def server_name -> String
 
 サーバの名前を返します。
@@ -229,7 +226,6 @@ CGI での環境変数 SCRIPT_NAME を文字列で表すアクセサです。
 リクエスト URI のスキームが https であれば真を返します。
 そうでない場合は偽を返します。
 
-#@end
 
 ### def to_s    -> String
 

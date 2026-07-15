@@ -93,24 +93,6 @@ test.rb:1:in `f6': unhandled exception
 
   著作権表示をします。
 
-#@until 1.9.2
-- **`-Kc`**:
-#@since 1.9.1
-  外部エンコーディングとスクリプトエンコーディングをセットします。
-  e(EUC-JP), s(Windows-31J, CP932), u(UTF-8), n(ASCII-8BIT, BINARY) が使用できます。
-#@else
-  Rubyの処理する漢字コードを指定します。 Rubyは指定された文字
-  が `E`または`e`の場合は文字列やアクセスするファイルの内容の
-  コードがEUCであると仮定します。同様に`S`または`s`の場合は
-  SJIS、'U'または'u'の場合はUTF-8として処理します。
-  `N`は漢字を処理しません。デフォルトはN(NONE)です。
-
-  また、このオプションを使用すると [m:$KCODE] にも値をセットします。
-
-  このオプションは将来文字コードの取扱いが変更された場合等には
-  変更される可能性があります。
-#@end
-#@end
 
 - **`-d`**:
 - **`--debug`**:
@@ -199,9 +181,7 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
     * did_you_mean    did_you_mean (default: enabled)
     * rubyopt         RUBYOPT 環境変数 (default: enabled)
     * frozen-string-literal 全ての文字列リテラルをfreeze (default: disabled)
-#@since 2.6.0
     * jit             JIT (default: disabled)
-#@end
 #@since 3.1
     * mjit            MJIT (default: disabled)
     * yjit            YJIT (default: disabled)
@@ -275,11 +255,7 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
   フラグまたは-pフラグが指定されていると
   gets
   で読み込まれた各行の最後に対して
-#@since 2.5.0
   [m:String#chomp!]を行います。
-#@else
-  [m:String#chop!]を行います。
-#@end
 
 - **`-n`**:
 
@@ -364,7 +340,6 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
 
   バージョンの表示を行う事無く冗長モードになります。
 
-#@since 2.7.0
 - **`-W[level]`**:
 - **`-W:category`**:
 
@@ -379,31 +354,14 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
 
     また category には以下の値を設定できます。deprecated と experimental は別々に設定することもできます。
 ```text
-#@since 2.7.2
      * -W:deprecated : 非推奨な機能を使用した際に警告を出力する
      * -W:no-deprecated : 非推奨な機能を使用した際に警告を出力しない(デフォルト)
-#@else
-     * -W:deprecated : 非推奨な機能を使用した際に警告を出力する(デフォルト)
-     * -W:no-deprecated : 非推奨な機能を使用した際に警告を出力しない
-#@end
      * -W:experimental : 実験的な機能を使用した際に警告を出力する(デフォルト)
      * -W:no-experimental : 実験的な機能を使用した際に警告を出力しない
 ```
     ここで設定された値は [m:Warning.\[\]] で参照できます。
 
     NOTE: Ruby 2.7.2 からは `-W:no-deprecated` がデフォルトになります。警告を出力したい場合は `-W:deprecated` を使ってください。
-#@else
-- **`-W[level]`**:
-
-    冗長モードを三段階のレベルで指定します。それぞれ以下の通りです。
-```text
-     * -W0: 警告を出力しない
-     * -W1: 重要な警告のみ出力(デフォルト)
-     * -W2 or -W: すべての警告を出力する
-```
-    組み込み変数 [m:$VERBOSE] はそれぞれ nil, false, true
-    に設定されます。
-#@end
 
 - **`-x[directory]`**:
 
@@ -496,7 +454,7 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
 
   貪欲なバージョニングモードを指定します。(デフォルト: disabled)
 #@end
-#@if ("2.6.0" <= version and version < "3.1")
+#@until 3.1
 #### JIT のオプション (実験的)
 
 - **`--jit`**:
@@ -527,7 +485,6 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
 
   ログレベルがnum以下のログが標準エラー出力に出力されます。(デフォルト: 0)
 
-#@since 2.7.0
 - **`--jit-max-cache=num`**:
 
   キャッシュに残すJITされたメソッドの最大個数を指定します。(デフォルト: 100)
@@ -535,21 +492,10 @@ $ ruby --internal-encoding EUC-JP -e 'p Encoding.default_external; p Encoding.de
 - **`--jit-min-calls=num`**:
 
   JITが起動する呼び出し回数を指定します。(テスト用、デフォルト: 10000)
-#@else
-#@# 2.6 だけデフォルトが違う
-- **`--jit-max-cache=num`**:
-
-  キャッシュに残すJITされたメソッドの最大個数を指定します。(デフォルト: 1000)
-
-- **`--jit-min-calls=num`**:
-
-  JITが起動する呼び出し回数を指定します。(テスト用、デフォルト: 5)
-#@end
 #@end
 
 ### インタプリタ行の解釈 {#shebang}
 
-#@since 1.9.2
 
 コマンドラインに指定したスクリプトが \`#!\` で始まるファイルで、その行に
 \`ruby\` という文字列を含まない場合、その行を読み飛ばします。\`#!\` に続く
@@ -568,31 +514,3 @@ puts "Hello, World!"
 
 これは Ruby をスペースを含むパスにインストールした場合などに有用です。
 
-#@else
-
-コマンドラインに指定したスクリプトが `#!` で始まるファイルで、そ
-の行に `ruby` という文字列を含まない場合、OSに代わって
-`#!` に続く文字列をコマンドラインとみなしてそのインタプリタを起
-動します。このときコマンドラインで指定した引数はそのインタプリタに渡さ
-れます。
-
-例えば、以下のシェルスクリプトを ruby で実行すると sh を起動します。
-
-```sh
-#!/bin/sh -vx
-echo "$@"
-```
-
-この行に `ruby` という文字列が含まれる場合は、その文字列よ
-り左側は無視され、右側に `-`で始まる語があればオプションとして解
-釈します。
-
-ここで指定したオプションは、コマンドラインでの指定に追加されます。これ
-はそのスクリプトで指定すべきオプションを埋め込むために使います。例えば
-以下の行で始まるスクリプトはコマンドラインに -Ke オプションを指
-定したのと同じ効果になります。
-
-```text
-#! ruby -Ke
-```
-#@end

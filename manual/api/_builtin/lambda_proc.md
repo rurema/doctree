@@ -79,11 +79,7 @@ b = lambda{|a,b,c|
   p a,b,c
 }
 b.call(2, 4)
-#@since 2.3.0
 # => wrong number of arguments (given 2, expected 3)
-#@else
-#=> wrong number of arguments (2 for 3) (ArgumentError)
-#@end
 ```
 
 [ref:d:spec/call#block_arg] も参照してください。

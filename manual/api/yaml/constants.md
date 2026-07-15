@@ -1,10 +1,6 @@
 YAML 関連の定数のためのサブライブラリです。
 
-#@since 1.9.2
 # reopen Syck
-#@else
-# reopen YAML
-#@end
 
 ## Constants
 

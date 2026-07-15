@@ -271,13 +271,10 @@ Unicode 系統以外のものは Onigmo の
 
 #@# 「クラス名」という言い方は妥当か？
 
-#@since 2.0.0
 #### オプション {#charclass_opt}
 文字クラスの挙動は [ref:option] で変更できます。
 d, a, u の3つのオプションがあります。
-#@end
 
-#@since 2.0.0
 
 ### 特別な文字列に対するマッチ {#str}
 文字列の中には、CR LF のように、複数の文字一続きで1つの意味を表す
@@ -301,7 +298,6 @@ p /\R/.match("\r\n") # => #<MatchData "\r\n">
 p /[\R]/.match("\r\n") # => nil
 ```
 
-#@end
 
 
 ### 繰り返し {#quantifier}
@@ -664,12 +660,9 @@ Unicode の規格では、単語を成す文字を Word というプロパティ
   - (?!pat) 否定先読み(negative lookahead)
   - (?<=pat) 肯定後読み(positive lookbehind)
   - (?<!pat) 否定後読み(negative lookbehind)
-#@since 2.0.0
   - \K 後読みの別表記、このメタ文字列の手前までを後読みします。
     つまり /pat1\Kpat2/ は /(?<=pat1)pat2/ と同様の意味となります。
-#@end
 
-#@since 2.0.0
 ```ruby
 # 以下の例では、後読みと先読みを使って <b> と
 # </b> に挟まれているという条件を正規表現中に記述しつつ
@@ -680,17 +673,7 @@ Unicode の規格では、単語を成す文字を Word というプロパティ
 /<b>\K\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
 # => #<MatchData "bold">
 ```
-#@else
-```ruby
-# 以下の例では、後読みと先読みを使って <b> と
-# </b> に挟まれているという条件を正規表現中に記述しつつ
-# <b> </b> 自体にはマッチさせていない。
-/(?<=<b>)\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
-# => #<MatchData "bold">
-```
-#@end
 
-#@since 2.0.0
 ### 条件分岐 {#cond}
 (?(cond)pat) もしくは (?(cond)truepat|falsepat) という
 記法で条件分岐を記述できます。
@@ -717,7 +700,6 @@ p re.match("print x") # => #<MatchData "print x" 1:nil 2:"print" 3:"x" 4:nil>
 p re.match("set y") # => nil
 ```
 
-#@end
 ### オプション {#option}
 /pat/という正規表現の直後に以下のアルファベットを
 置くことで、正規表現にオプションを指定できます。
@@ -755,7 +737,6 @@ p Regexp.new("abc # Comment", Regexp::EXTENDED)           # => /abc # Comment/x
 p Regexp.new("abc", Regexp::IGNORECASE | Regexp::MULTILINE) # => /abc/mi
 ```
 
-#@since 2.0.0
 2.0.0以降では、文字クラスの挙動を変更するための d,a,u というオプションを
 (?on:pat)もしくは(?on)の形で指定できます。(?on-off:pat), (?on-off)
 という形式を用いる場合はonの部分にのみ用いることができます(offはできません)。
@@ -769,7 +750,6 @@ p Regexp.new("abc", Regexp::IGNORECASE | Regexp::MULTILINE) # => /abc/mi
     (\w (\W), \d (\D), \s (\S), \b (\B), POSIXブラケット
     は、各エンコーディングのルールに従う)
 d,a,u のオプションは正規表現直後に置く方式では指定ができません。
-#@end
 
 ### エンコーディング {#encoding}
 通常、正規表現のエンコーディングはソースコードエンコーディングと
@@ -848,12 +828,8 @@ p /x\ y/x.match("x y") # => #<MatchData "x y">
 
 \s や \p{Space} のような文字クラスを使うのが良い場合も多いでしょう。
 
-#@since 2.4.0
 ### 非包含オペレータ (absence operator) (実験的) {#absenceop}
 (?~式) という記法で、式にマッチする文字列を含まない任意の文字列にマッチします。
-#@until 2.5.0
-(Ruby 2.4.1 で更新された Onigmo に含まれる機能のため、Ruby 2.4.0 では使えません。)
-#@end
 
 例えば (?~abc) は "", "ab", "aab", "abb", "ccdd" などにはマッチしますが、
 "abc", "aabc", "ccabcdd" などにはマッチしません。
@@ -861,7 +837,6 @@ p /x\ y/x.match("x y") # => #<MatchData "x y">
 /\/\*(?~\*\/)\*\// は C スタイルのコメントにマッチします。
 例えば "/**/", "/* foo bar */" など。
 
-#@end
 ### 一覧 {#list}
 Rubyで利用可能なメタ文字、メタ文字列の一覧です。
 
@@ -882,11 +857,9 @@ Rubyで利用可能なメタ文字、メタ文字列の一覧です。
   - \p{property-name} Unicode プロパティ
   - \p{^property-name} \P{property-name} 否定 Unicode プロパティ
   - [:alnum:] など POSIX文字クラス (文字クラス内のみ)
-#@since 2.0.0
 特別な意味を持つ文字列
   - \R 改行文字 (Linebreak)
   - \X Unicode の結合文字シーケンス
-#@end
 繰り返し
   - * 0回以上 (greedy)
   - + 1回以上 (greedy)
@@ -955,25 +928,19 @@ Rubyで利用可能なメタ文字、メタ文字列の一覧です。
   - (?!pat) 否定先読み
   - (?<=pat) 肯定後読み
   - (?<!pat) 否定後読み
-#@since 2.0.0
   - \K 左側を肯定後読み
-#@end
 条件
   - (?(cond)pat) cond が成立している場合のみ pat
   - (?(cond)truepat|falsepat) condが成立している場合は truepat 、成立していない
     場合は falsepat
 オプション
   - (?on:pat) patの間だけ on オプション(i,m,x)を有効にする
-#@since 2.0.0
     2.0.0以降はd,a,uオプションも使える。
-#@end
   - (?on-off:pat)  patの間だけ on オプションを有効にし、offオプションを無効にする
 コメント
   - (?#comment here) コメント
-#@since 2.4.0
 非包含オペレータ
   - (?~pat) 非包含オペレータ
-#@end
 
 ### 特殊変数 {#specialvar}
 パターンマッチしたときに、以下の特殊変数にマッチの情報をセットします。

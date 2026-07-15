@@ -110,7 +110,6 @@ p Complex(1, 0) == Complex(1) # => true
 p Complex(1, 0) == 1        # => true
 ```
 
-#@since 2.7.0
 ### def <=>(other) -> -1 | 0 | 1 | nil
 
 self の虚部がゼロで other が実数の場合、
@@ -129,7 +128,6 @@ p Complex(2)     <=> 2           #=> 0
 p Complex(2)     <=> 3           #=> -1
 ```
 
-#@end
 
 ### def <(other)    -> bool
 {: undef}
@@ -211,21 +209,12 @@ p Complex(-0.0, 0).arg          #=>  3.141592653589793
 p Complex(-0.0, -0.0).arg       #=> -3.141592653589793
 ```
 
-#@until 1.9.3
-[注意] 1.9.2 以下では 0+0i に対して呼び出すと例外
-([c:Math::DomainError])が発生するバグがあります。
-#@end
 
 - **SEE** [m:Numeric#arg]
 
-#@since 2.4.0
 ### def finite? -> bool
 
-#@since 2.5.0
 実部と虚部の両方が有限値の場合に true を、そうでない場合に false を返します。
-#@else
-自身の絶対値が有限値の場合に true を、そうでない場合に false を返します。
-#@end
 
 ```ruby title="例"
 p (1 + 1i).finite?               # => true
@@ -236,11 +225,7 @@ p (Float::INFINITY + 1i).finite? # => false
 
 ### def infinite? -> nil | 1
 
-#@since 2.5.0
 実部と虚部のどちらも無限大ではない場合に nil を、そうでない場合に 1 を返します。
-#@else
-自身の絶対値が無限大の場合に1を、そうでない場合に nil を返します。
-#@end
 
 ```ruby title="例"
 p (1+1i).infinite?                 # => nil
@@ -248,7 +233,6 @@ p (Float::INFINITY + 1i).infinite? # => 1
 ```
 
 - **SEE** [m:Complex#finite?]
-#@end
 
 ### def coerce(other) -> [Complex, Complex]
 
@@ -330,29 +314,6 @@ p Complex(0, Float::INFINITY).inspect    # => "(0+Infinity*i)"
 p Complex(Float::NAN, Float::NAN).inspect  # => "(NaN+NaN*i)"
 ```
 
-#@until 2.0.0
-### def marshal_dump -> Array
-
-[m:Complex#marshal_load] で復元可能な配列を返します。
-
-[注意] このメソッドは 2.0 で private メソッドに変更されました。
-
-- **SEE** [m:Complex#marshal_load]
-
-### def marshal_load(ary) -> Complex
-
-[m:Complex#marshal_dump] で得られた配列を基に、[c:Complex] オブジェ
-クトを復元します。
-
-- **param** `ary` -- 2 要素の数値の配列を指定します。
-
-- **raise** `ArgumentError` -- 配列の要素数が 2 以外であった場合に発生します。
-
-[注意] このメソッドは 2.0 で Complex::compatible#marshal_load に移動さ
-れました。
-
-- **SEE** [m:Complex#marshal_dump]
-#@end
 
 ### def numerator -> Complex
 
@@ -432,16 +393,12 @@ Complex(3, 2).to_i # => RangeError
 ```
 
 ### def to_r             -> Rational
-#@since 1.9.2
 ### def rationalize      -> Rational
 ### def rationalize(eps) -> Rational
-#@end
 
 自身を [c:Rational] に変換します。
 
-#@since 1.9.2
 - **param** `eps` -- 許容する誤差。常に無視されます。
-#@end
 
 - **raise** `RangeError` -- 虚部が実数か、0 ではない場合に発生します。
 
@@ -465,7 +422,6 @@ p Complex(0, Float::INFINITY).to_s    # => "0+Infinity*i"
 p Complex(Float::NAN, Float::NAN).to_s  # => "NaN+NaN*i"
 ```
 
-#@since 2.0.0
 ### def to_c -> self
 
 self を返します。
@@ -474,7 +430,6 @@ self を返します。
 p Complex(2).to_c    # => (2+0i)
 p Complex(-8, 6).to_c  # => (-8+6i)
 ```
-#@end
 
 ## Class Methods
 
@@ -509,7 +464,6 @@ p Complex.polar(2.0, 0)       # => (2.0+0.0i)
 p Complex.polar(2.0, Math::PI)  # => (-2.0+2.4492127076447545e-16i)
 ```
 
-#@since 2.0.0
 ## Private Instance Methods
 
 ### def marshal_dump -> Array
@@ -523,7 +477,6 @@ Complex::compatible#marshal_load で復元可能な配列を返します。
 [注意] Complex::compatible は通常の方法では参照する事ができません。
 
 #@# #6625 を参照。
-#@end
 
 ## Constants
 

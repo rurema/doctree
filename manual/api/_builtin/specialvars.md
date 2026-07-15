@@ -165,20 +165,13 @@ end
 
 このスレッドで最後に終了した子プロセスのステータスです。
 
-#@if (version >= "1.8.0")
 [c:Process::Status] オブジェクトが入っています。
 子プロセスの終了時ステータスは [m:Process::Status#exitstatus] で得られます。
-#@else
-整数が入っています。この値は wait() システムコールで得られる値そのものなので、
-子プロセスの終了時ステータスを得るには 8 ビット右シフトする必要があります ($? >> 8)。
-#@end
 
 この変数はスレッドローカルで読み取り専用です。
 
 - **SEE** [m:Process?.wait]
-#@since 2.5.0
 - **SEE** [m:Process.last_status]
-#@end
 
 ### gvar $! -> Exception | nil
 
@@ -187,11 +180,7 @@ end
 
 [m:Kernel?.raise] によって設定されます。
 
-#@since 1.9.1
 この変数はスレッドローカル、読み取り専用です。
-#@else
-この変数はスレッドローカルです。
-#@end
 
 
 ### gvar $@ -> [String] | nil
@@ -413,7 +402,6 @@ $ ruby -e 'puts $:'
 
 とします。
 
-#@since 2.7.0
 $LOAD_PATH の特異メソッドとして resolve_feature_path が定義されています。
 require を呼んだときに読み込まれるファイルを特定できます。
 
@@ -421,7 +409,6 @@ require を呼んだときに読み込まれるファイルを特定できます
 p $LOAD_PATH.resolve_feature_path('set')
 # => [:rb, "/build-all-ruby/2.7.0/lib/ruby/2.7.0/set.rb"]
 ```
-#@end
 
 この変数はグローバルスコープです。
 
@@ -465,11 +452,7 @@ p $LOAD_PATH.resolve_feature_path('set')
 ### gvar $FILENAME -> String
 
 仮想ファイル [m:Object::ARGF] で現在読み込み中のファイル名です。
-#@since 1.9.1
 [m:ARGF.class#filename] と同じです。
-#@else
-[m:ARGF.filename] と同じです。
-#@end
 
 この変数はグローバルスコープです。
 
@@ -527,9 +510,6 @@ $stdin はグローバルスコープです。
 
 ### gvar $>      -> object
 ### gvar $stdout -> object
-#@until 1.9.1
-### gvar $defout  -> object
-#@end
 
 標準出力です。
 
@@ -575,9 +555,6 @@ $stdout はグローバルスコープです。
 - **SEE** [d:spec/rubycmd]
 
 ### gvar $stderr -> object
-#@until 1.9.1
-### gvar $deferr -> object
-#@end
 
 標準エラー出力です。
 
@@ -624,7 +601,6 @@ $stderr はグローバルスコープです。
 冗長メッセージフラグです。Rubyインタプリタへの
 コマンドラインオプション -v でセットされます。
 
-#@if (version >= "1.8.0")
 警告レベルは三段階あり、それぞれ以下の通りです。
 
 - **`nil`**:
@@ -643,7 +619,6 @@ $VERBOSE の値はコマンドラインオプション
 -W2, -W オプションで true が設定されます。
 -d, -v, -w の各オプションによっても
 true が設定されます。
-#@end
 
 $VERBOSE はグローバルスコープです。
 
@@ -703,7 +678,6 @@ in-place 置換モードで用いられます。
 
 - **SEE** [d:spec/rubycmd]
 
-#@since 1.9.1
 ### gvar $-W -> 0 | 1 | 2
 コマンドラインオプション -W を指定したとき、
 そのコマンドライン引数の値が設定されます。
@@ -723,4 +697,3 @@ in-place 置換モードで用いられます。
 
 - **SEE** [d:spec/rubycmd]
 
-#@end

@@ -1,9 +1,6 @@
 ---
 library:
   - rdoc/stats
-#@until 1.9.1
-  - rdoc/rdoc
-#@end
 ---
 # class RDoc::Stats
 

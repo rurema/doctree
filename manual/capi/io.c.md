@@ -2,23 +2,6 @@
 
 p の実体。obj を見やすく出力します。
 
-#@until 2.2.0
-### int rb_io_mode_flags(const char *mode)
-
-この関数は deprecated です。[f:rb_io_modestr_fmode] を使用してください。
-
-[man:fopen(3)] のようなモード指定modeをruby内部のモードフラグに
-変換します。
-
-modeは、[rwa][b][+] という文字列です (例: "rb+").
-戻り値は、
-FMODE_READABLE,
-FMODE_WRITABLE,
-FMODE_BINMODE,
-FMODE_READWRITE
-の論理和です。FMODE_READWRITEは、FMODE_READABLEと
-FMODE_WRITEABLEの論理和です。
-#@end
 
 ### static int rb_io_mode_flags2(int mode)
 
@@ -57,8 +40,3 @@ mode に "+" が含まれれば、子プロセスの標準入出力を
 生成した IO オブジェクトを返します。
 pnameが "-" であれば、子プロセスには、nil を返します
 
-#@until 2.2.0
-### void rb_read_check(FILE *fp)
-
-この関数は deprecated です。
-#@end

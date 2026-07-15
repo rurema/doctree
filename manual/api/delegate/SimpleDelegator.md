@@ -50,14 +50,3 @@ obj の間で呼び出せるメソッドに違いがあった場合は、
 - **return** -- 変更後の委譲先オブジェクト
 
 
-#@until 1.9.1
-
-### def clone -> object
-### def dup(obj) -> object
-
-オブジェクトの複製を作成して返します。
-dupの引数objについては、[ruby-list:44914]にて問題があることが報告されています。
-
-- **SEE** [m:Object#clone],[m:Object#dup]
-
-#@end

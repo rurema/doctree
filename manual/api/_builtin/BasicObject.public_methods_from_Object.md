@@ -82,8 +82,4 @@ k = KlassWithSecret.new
 p k.instance_exec(5) {|x| @secret + x } #=> 104
 ```
 
-#@since 1.9.1
 - **SEE** [m:Module#class_exec], [m:Module#module_exec], [m:BasicObject#instance_eval]
-#@else
-- **SEE** [m:Module#class_exec], [m:Module#module_exec], [m:Object#instance_eval]
-#@end

@@ -47,10 +47,8 @@ host で指定したホストの service で指定したポートと接続した
 示す文字列、service は /etc/services (または NIS) に登録されている
 サービス名かポート番号です。
 
-#@if (version >= "1.8.0")
 引数 local_host, local_service を指定した場合、そのアドレス
 に対して [man:bind(2)] します。
-#@end
 
 - **param** `host` --           ホスト名、またはインターネットアドレスを示す文字列を指定します。
 - **param** `service` --        /etc/services (または NIS) に登録されているサービス名かポート番号を指定します。

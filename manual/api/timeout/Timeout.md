@@ -7,12 +7,8 @@ library: timeout
 
 ## Module Functions
 
-#@since 2.4.0
 ### module_function def timeout(sec, exception_class = nil)    {|i| ... }  -> object
 ### module_function def timeout(sec, exception_class, message) {|i| ... }  -> object
-#@else
-### module_function def timeout(sec, exception_class = nil) {|i| ... }  -> object
-#@end
 
 ブロックを sec 秒の期限付きで実行します。
 ブロックの実行時間が制限を過ぎたときは例外
@@ -27,10 +23,8 @@ exception_class を指定した場合には [c:Timeout::Error] の代わりに
 
 - **param** `sec` -- タイムアウトする時間を秒数で指定します.
 - **param** `exception_class` -- タイムアウトした時、発生させる例外を指定します.
-#@since 2.4.0
 - **param** `message` -- エラーメッセージを指定します.省略した場合は
                "execution expired" になります.
-#@end
 
 ```ruby title="例 長い計算のタイムアウト"
 require 'timeout'
@@ -179,11 +173,7 @@ end
 #@# --- THIS_FILE
 #@# --- CALLER_OFFSET
 
-#@since 1.9.1
 # class Timeout::Error < RuntimeError
-#@else
-# class Timeout::Error < Interrupt
-#@end
 #@until 3.1
 alias TimeoutError
 #@end

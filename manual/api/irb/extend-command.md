@@ -8,9 +8,6 @@ require:
   - irb/cmd/subirb
   - irb/ext/history
   - irb/ext/tracer
-#@until 2.5.0
-  - irb/ext/math-mode
-#@end
   - irb/ext/use-loader
   - irb/ext/save-history
 ---

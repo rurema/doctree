@@ -104,7 +104,6 @@ str = "1234"
 p str.scanf("%1s%3d")  #=> ["1", 234]
 ```
 
-#@since 1.9.1
 また、1.9 以降では、スペースには全角文字列が含まれます。
 
 ```ruby title="動作例"
@@ -114,7 +113,6 @@ require 'scanf'
 str = "1　　　　　aaa"
 p str.scanf("%d %s") #=> [1, "aaa"]
 ```
-#@end
 
 #@# There may be an optional maximum field width, expressed as a decimal
 #@# integer, between the % and the conversion. If no width is given, a
@@ -150,18 +148,14 @@ p str.scanf("%d %s") #=> [1, "aaa"]
 - **`%X`**:
  符号付き16進数
 
-#@since 1.9.2
 - **`%e`**:
-#@end
 - **`%f`**:
-#@since 1.9.2
 - **`%g`**:
 - **`%E`**:
 - **`%F`**:
 - **`%G`**:
 - **`%a`**:
 - **`%A`**:
-#@end
  符号付き浮動小数点数
 
 - **`%s`**:

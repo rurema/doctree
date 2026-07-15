@@ -12,11 +12,7 @@ ArithmeticSequenceオブジェクトは、[m:Numeric#step], [m:Range#step] に�
 
 ## Instance Methods
 
-#@since 2.7.0
 ### def begin -> Numeric | nil
-#@else
-### def begin -> Numeric
-#@end
 
 初項 (始端) を返します。
 

@@ -496,7 +496,6 @@ foo, bar, baz = /(foo)(bar)(baz)/.match("foobar").captures
 #@end
 ```
 
-#@since 2.4.0
 - **SEE** [m:Regexp#match?]
 
 ### def match?(str, pos = 0) -> bool
@@ -513,7 +512,6 @@ p $&                     # => nil
 ```
 
 - **SEE** [m:Regexp#match]
-#@end
 
 ### def options -> Integer
 

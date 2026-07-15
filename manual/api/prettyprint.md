@@ -183,26 +183,6 @@ obj を width カラムのテキストとして自身に追加します。
 
 バッファされたデータを出力します。
 
-#@until 2.2.0
-### def first?    -> bool
-
-このメソッドは obsolete です。
-
-現在のグループで first? に対する最初の呼び出しかどうかを判定する
-述語です。これはカンマで区切られた値を整形するのに有用です。
-
-```text
-pp.group(1, '[', ']') {
-  xxx.each {|yyy|
-    unless pp.first?
-      pp.text ','
-      pp.breakable
-    end
-    ... pretty printing yyy ...
-  }
-}
-```
-#@end
 
 ### def output    -> object
 

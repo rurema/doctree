@@ -5,13 +5,8 @@ library: bigdecimal
 
 ## Module Functions
 
-#@since 2.6.0
 ### module_function def BigDecimal(s, exception: true) -> BigDecimal | nil
 ### module_function def BigDecimal(s, n, exception: true) -> BigDecimal | nil
-#@else
-### module_function def BigDecimal(s) -> BigDecimal
-### module_function def BigDecimal(s, n) -> BigDecimal
-#@end
 
 引数で指定した値を表す BigDecimal オブジェクトを生成します。
 
@@ -34,10 +29,8 @@ p BigDecimal("1",10) / BigDecimal("3",10) # => 0.333333333333333333e0
          ただし、個々の演算における最大有効桁数 n の取り扱いは将来のバー
          ジョンで若干変更される可能性があります。
 
-#@since 2.6.0
 - **param** `exception` -- false を指定すると、変換できなかった場合、
                  例外を発生する代わりに nil を返します。
-#@end
 
 - **raise** `ArgumentError` -- s に [c:Float] オブジェクトを指定し、n に
                      [m:Float::DIG] + 2 以上の値を指定した場合に発生します。
@@ -199,29 +192,12 @@ NaN に対応する [m:BigDecimal#sign] の値を返します。
 
 NaN を表す [c:BigDecimal] オブジェクトを返します。
 
-#@since 2.5.0
 ### const VERSION -> String
 
 [lib:bigdecimal] ライブラリのバージョンを文字列で返します。
-#@end
 
 ## Class Methods
 
-#@until 2.7.0
-#@since 2.6.0
-### def new(s, exception: true)    -> BigDecimal | nil
-### def new(s, n, exception: true) -> BigDecimal | nil
-#@else
-### def new(s)    -> BigDecimal
-### def new(s, n) -> BigDecimal
-#@end
-
-このメソッドは Ruby 2.5 から deprecated です。[m:Kernel?.BigDecimal] を使用してください。
-
-新しい BigDecimal オブジェクトを生成します。
-
-詳しくは [m:Kernel?.BigDecimal] を参照してください。
-#@end
 
 ### def mode(s)    -> Integer | nil
 ### def mode(s, v) -> Integer | nil
@@ -362,14 +338,6 @@ while (v + 1.0 > 1.0) {
 - **SEE** [m:BigDecimal#_dump], [m:Marshal?.dump], [m:Marshal?.load]
 
 
-#@until 2.6.0
-### def ver -> String
-
-このメソッドは Ruby 2.5 から deprecated です。
-#@since 2.5.0
-[m:BigDecimal::VERSION] を使用してください。
-#@end
-#@end
 
 ## Instance Methods
 
@@ -794,9 +762,7 @@ self の n 乗を計算します。
 - **param** `prec` -- 有効桁数を整数で指定します。
 
 
-#@since 2.5.0
 - **SEE** [m:Integer#pow]
-#@end
 ### def sqrt(n) -> BigDecimal
 
 self の有効桁 n 桁の平方根 (n の平方根ではありません) をニュートン法で
@@ -976,7 +942,6 @@ self のハッシュ値を返します。
 
 ブロックの評価結果を返します。
 
-#@since 2.5.0
 ### def clone -> self
 
 self を返すように、BigDecimal で定義されています。
@@ -988,4 +953,3 @@ self を返すように、BigDecimal で定義されています。
 self を返すように、BigDecimal で定義されています。
 
 #@#noexample
-#@end

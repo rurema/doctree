@@ -16,7 +16,6 @@ puts excel_app_type.progid # => "Excel.Application.14"
 ```
 
 
-#@since 1.9.1
 
 Ruby-1.9.1以降、[c:WIN32OLE_TYPELIB]オブジェクトの
 [m:WIN32OLE_TYPELIB#ole_types]メソッドを利用して、型情報ライブラリ内
@@ -24,7 +23,6 @@ Ruby-1.9.1以降、[c:WIN32OLE_TYPELIB]オブジェクトの
 得できます。
 
 - **SEE** [c:WIN32OLE_TYPELIB]
-#@end
 
 ## Class Methods
 
@@ -44,14 +42,9 @@ excel_app_type = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Appli
 puts excel_app_type.progid # => "Excel.Application.14"
 ```
 
-#@if (version < "1.9.0")
-TypeLibに定義されているすべての型を取得するには、
-[m:WIN32OLE_TYPE.ole_classes]を利用します。
-#@else
 TypeLibに定義されているすべての型を取得するには、
 [c:WIN32OLE_TYPELIB]オブジェクトの[m:WIN32OLE_TYPELIB#ole_types]メ
 ソッドを利用します。
-#@end
 
 ### def ole_classes(libname) -> [WIN32OLE_TYPE]
 TypeLibで定義されているすべての型情報を取得します。
@@ -68,11 +61,9 @@ types = WIN32OLE_TYPE.ole_classes('Microsoft Excel 14.0 Object Library')
 classes = types.map{|k| k.name} # => ["Adjustments", "CalloutFormat", ...]
 ```
 
-#@since 1.9.1
 Ruby-1.9.1からは、TypeLibに定義されているすべての型を取得するには、
 [c:WIN32OLE_TYPELIB]オブジェクトの[m:WIN32OLE_TYPELIB#ole_types]メ
 ソッドを利用してください。
-#@end
 
 ### def progids -> [String]
 システムに登録されているすべてのコンポーネントクラスのPROGIDを取得します。
@@ -107,7 +98,6 @@ WIN32OLEオブジェクトを生成できます。
 - **return** -- システムに登録されているすべてのTypeLibのドキュメント文字列の配
         列を返します。
 
-#@since 1.9.1
 Ruby-1.9.1からは、すべてのTypeLibのドキュメント文字列を取得するには、
 [c:WIN32OLE_TYPELIB]オブジェクトを利用して、以下のように記述してくだ
 さい。
@@ -116,7 +106,6 @@ Ruby-1.9.1からは、すべてのTypeLibのドキュメント文字列を取得
 WIN32OLE_TYPELIB.typelibs.map {|t| t.name}
 ```
 
-#@end
 
 ## Instance Methods
 
@@ -365,7 +354,6 @@ tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
 p tobj.visible?  # => true
 ```
 
-#@since 1.9.1
 ### def ole_typelib -> WIN32OLE_TYPELIB | nil
 この型を登録してある型情報ライブラリ（TypeLib）を取得します。
 
@@ -552,5 +540,4 @@ puts x.inspect #=> #<WIN32OLE_TYPE:Worksheet>
 ```
 
 - **SEE** [m:WIN32OLE_TYPE#to_s]
-#@end
 

@@ -78,7 +78,6 @@ fib = Enumerator.new { |y|
 p fib.take(10) #=> [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 ```
 
-#@since 2.7.0
 ### def produce(initial = nil) { |prev| ... } -> Enumerator
 
 与えられたブロックを呼び出し続ける、停止しない Enumerator を返します。
@@ -120,11 +119,9 @@ PATTERN = %r{\d+|[-/+*]}
 Enumerator.produce { scanner.scan(PATTERN) }.slice_after { scanner.eos? }.first
 # => ["7", "+", "38", "/", "6"]
 ```
-#@end
 
 ## Methods
 
-#@since 2.6.0
 ### def +(enum) -> Enumerator::Chain
 
 自身と enum 引数を続けて繰り返す [c:Enumerator::Chain] を返します。
@@ -135,7 +132,6 @@ p e.to_a #=> [1, 2, 3, 4, 5]
 ```
 
 - **SEE** [m:Enumerable#chain]
-#@end
 
 ### def each {...}        -> object
 ### def each              -> self

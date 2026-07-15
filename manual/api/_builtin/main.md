@@ -77,9 +77,7 @@ p public_methods(false) - basic_public_methods
 - **SEE** [m:Module#private]
 
 ### def to_s    -> "main"
-#@since 2.0.0
 ### def inspect -> "main"
-#@end
 
 "main" を返します。
 
@@ -130,11 +128,7 @@ p hypot(3, 4)  # => 5.0
 
 有効にした拡張の有効範囲については以下を参照してください。
 
-#@since 2.1.0
  - <https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope>
-#@else
- - <https://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html#label-Scope>
-#@end
 
 - **param** `module` -- 有効にするモジュールを指定します。
 
@@ -154,14 +148,5 @@ using Sloth
 p "ABC".downcase # => "ABC"
 ```
 
-#@since 2.1.0
 - **SEE** [m:Module#refine], [m:Module#using]
-#@else
-- **SEE** [m:Module#refine]
-#@end
 
-#@until 2.1.0
-[注意] refinements は 2.0 現在、実験的な機能として提供されています。以
-降のバージョンで仕様が変更になる可能性があります。使用すると必ず警告が
-表示されます。
-#@end

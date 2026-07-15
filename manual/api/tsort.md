@@ -163,9 +163,7 @@ p TSort.tsort(each_node, each_child) # raises TSort::Cyclic
 - **SEE** [m:TSort#tsort]
 
 ### def tsort_each(each_node, each_child) {|node| ...} -> nil
-#@since 2.2.0
 ### def tsort_each(each_node, each_child) -> Enumerator
-#@end
 
 [m:TSort.tsort] メソッドのイテレータ版です。
 
@@ -227,9 +225,7 @@ p TSort.strongly_connected_components(each_node, each_child)
 - **SEE** [m:TSort#strongly_connected_components]
 
 ### def each_strongly_connected_component(each_node, each_child) {|nodes| ...} -> nil
-#@since 2.2.0
 ### def each_strongly_connected_component(each_node, each_child) -> Enumerator
-#@end
 
 [m:TSort.strongly_connected_components] メソッドのイテレータ版です。
 
@@ -267,9 +263,7 @@ TSort.each_strongly_connected_component(each_node, each_child) {|scc| p scc }
 - **SEE** [m:TSort#each_strongly_connected_component]
 
 ### def each_strongly_connected_component_from(node, each_child, id_map={}, stack=[]) {|nodes| ...} -> ()
-#@since 2.2.0
 ### def each_strongly_connected_component_from(node, each_child, id_map={}, stack=[]) -> Enumerator
-#@end
 
 node から到達可能な強連結成分についてのイテレータです。
 
@@ -327,9 +321,7 @@ p sorted #=> [3, 2, 1, 4]
 - **SEE** [m:TSort.tsort]
 
 ### def tsort_each {|node| ...} -> nil
-#@since 2.2.0
 ### def tsort_each -> Enumerator
-#@end
 
 [m:TSort#tsort] メソッドのイテレータ版です。
 obj.tsort_each は obj.tsort.each と似ていますが、
@@ -394,9 +386,7 @@ p non_sort.strongly_connected_components
 - **SEE** [m:TSort.strongly_connected_components]
 
 ### def each_strongly_connected_component {|nodes| ...} -> nil
-#@since 2.2.0
 ### def each_strongly_connected_component -> Enumerator
-#@end
 
 [m:TSort#strongly_connected_components] メソッドのイテレータ版です。
 obj.each_strongly_connected_component は
@@ -432,9 +422,7 @@ non_sort.each_strongly_connected_component{|nodes|
 - **SEE** [m:TSort.each_strongly_connected_component]
 
 ### def each_strongly_connected_component_from(node, id_map={}, stack=[]) {|nodes| ...} -> ()
-#@since 2.2.0
 ### def each_strongly_connected_component_from(node, id_map={}, stack=[]) -> Enumerator
-#@end
 
 node から到達可能な強連結成分についてのイテレータです。
 

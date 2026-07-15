@@ -25,18 +25,6 @@
 #@until 3.1
  - version 3.0 対応リファレンス
 #@end
-#@if("2.6.0" <= version and version < "2.7.0")
- - version 2.6 対応リファレンス
-#@end
-#@if("2.5.0" <= version and version < "2.6.0")
- - version 2.5 対応リファレンス
-#@end
-#@if("2.4.0" <= version and version < "2.5.0")
- - version 2.4 対応リファレンス
-#@end
-#@if("2.3.0" <= version and version < "2.4.0")
- - version 2.3 対応リファレンス
-#@end
  - 原著：まつもとゆきひろ
  - 最新版URL: <https://www.ruby-lang.org/ja/documentation/>
 

@@ -87,7 +87,6 @@ p Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
 - **param** `index` -- 標準基底の何番目か。0 origin
 
 
-#@since 2.5.0
 ### def Vector.zero(size) -> Vector
 
 零ベクトルを返します。
@@ -98,7 +97,6 @@ p Vector.zero(3) # => Vector[0, 0, 0]
 ```
 
 - **param** `size` -- ベクトルの次元
-#@end
 
 ## Instance Methods
 
@@ -116,7 +114,6 @@ i 番目の要素を返します。インデックスは 0 から開始します
 
 ベクトルの要素数(次元)を返します。
 
-#@since 2.6.0
 ### def []=(index, value)
 
 index 番目の要素を value に変更します。
@@ -139,9 +136,7 @@ p v #=> Vector[0, 2, 0, 0, 3]
 v[99] = 100
 # IndexError: given index 99 is outside of -5...5
 ```
-#@end
 
-#@since 2.6.0
 ### def []=(range, v)
 
 [c:Range] オブジェクト range の範囲にある要素を v の内容に置換します。
@@ -168,7 +163,6 @@ p v #=> Vector[0, 2, 4, 8, 0]
 v[1..-2] = Matrix[[3, 6, 9]]
 p v #=> Vector[0, 3, 6, 9, 0]
 ```
-#@end
 
 ### def ==(v) -> bool
 ### def eql?(v) -> bool
@@ -361,7 +355,6 @@ v2 =  v1.map{|x|
 p v2 # => Vector[-1, -2, -3.5, 10]
 ```
 
-#@since 2.6.0
 ### def collect! {|element| ... } -> self
 ### def map! {|element| ... } -> self
 ### def collect! -> Enumerator
@@ -378,7 +371,6 @@ v = Vector[1, 2, 3]
 p v.map!{ |el| el * 2 }  #=> Vector[2, 4, 6]
 p v                      #=> Vector[2, 4, 6]
 ```
-#@end
 
 ### def each{|e| ... } -> self
 ### def each -> Enumerator
@@ -550,19 +542,12 @@ p v.elements_to_r
 
 自分自身のハッシュ値を返します。
 
-#@until 2.6.0
-### def clone -> Vector
-
-自分自身をコピーしたベクトルを返します。
-#@end
 
 ### def inspect -> String
 
 オブジェクトの内容を文字列化します。
 
-#@since 2.5.0
 ### def zero? -> bool
 
 すべての要素がゼロであれば true を返します。
-#@end
 

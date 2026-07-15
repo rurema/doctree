@@ -32,7 +32,6 @@ end
 #    3
 ```
 
-#@since 2.7.0
 ### def to_proc -> Proc
 
 [m:Enumerator.new] で使うメソッドです。
@@ -57,7 +56,6 @@ end
 # => "Hello\n"
 #    "こんにちは\n"
 ```
-#@end
 
 
 ### def yield(*object) -> ()

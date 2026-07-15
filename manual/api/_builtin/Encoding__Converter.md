@@ -7,9 +7,6 @@ since: "1.9.1"
 
 Encoding::Converter を用いて変換を行う場合は、[m:Encoding::Converter#convert] か、より細かな変換処理が可能な [m:Encoding::Converter#primitive_convert] が利用できます。
 エンコーディングを変換するメソッドはこの他に [m:String#encode], [m:NKF?.nkf]
-#@until 2.0.0
-, [m:Iconv#conv]
-#@end
 などがあります。
 
 ## Class Methods

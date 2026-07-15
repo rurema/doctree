@@ -80,21 +80,6 @@ p :abc.equal?(:abc) #=> true ←同値ならば同一
 複製しても同じ要素へのポインタが使われるだけなので
 メモリ使用量は普通の文字列と比べて少ないです。
 
-#@until 2.2.0
-一方、テーブルに記録された情報はプログラムが動いている間
-はずっと保持しつづけられます。そのため、以下のようなコード
-
-`````
-rng = Random.new
-100000.times { rng.bytes(1000).intern }
-`````
-
-はテーブルのサイズを増大させ、メモリを圧迫します。
-
-例えば web アプリケーションのようなプロセスを動かしつづけるような
-アプリケーションにおいて、ユーザからの入力を [m:String#intern] で
-シンボルに変換するような実装をすると、DoSに弱くなる可能性があります。
-#@else
 2.2.0 以降においては、テーブルに記録された情報は
 Ruby によって GC されます。すなわち、ある使わなくなった
 シンボルのテーブル上の情報はGCによって削除されます。
@@ -106,7 +91,6 @@ Ruby によって GC されます。すなわち、ある使わなくなった
 
 ただし拡張ライブラリ内で rb_intern によって生成された
 シンボルに関するテーブル上の情報はGCされませんので注意してください。
-#@end
 
 ## Class Methods
 
@@ -223,7 +207,6 @@ other が同じシンボルの時に真を返します。
 :aaa == :xxx    #=> false
 `````
 
-#@since 2.7.0
 ### def start_with?(*prefixes)   -> bool
 
 self の先頭が prefixes のいずれかであるとき true を返します。
@@ -244,7 +227,6 @@ p :hello.start_with?(/H/i)               #=> true
 p :hello.start_with?("heaven", "hell")   #=> true
 p :hello.start_with?("heaven", "paradise") #=> false
 ```
-#@end
 
 ### def succ -> Symbol
 ### def next -> Symbol
@@ -283,10 +265,8 @@ p :foo <=> "foo" # => nil
 [m:Symbol#<=>] と同様にシンボルに対応する文字列の順序を比較しますが、
 アルファベットの大文字小文字の違いを無視します。
 
-#@since 2.4.0
 [m:Symbol#casecmp?] と違って大文字小文字の違いを無視するのは
 Unicode 全体ではなく、A-Z/a-z だけです。
-#@end
 
 - **param** `other` -- 比較対象のシンボルを指定します。
 
@@ -307,7 +287,6 @@ p "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp(:"\u{c4 d6 dc}") #=> nil
 
 - **SEE** [m:String#casecmp], [m:Symbol#<=>], [m:Symbol#casecmp?]
 
-#@since 2.4.0
 ### def casecmp?(other) -> bool | nil
 
 大文字小文字の違いを無視しシンボルを比較します。
@@ -331,7 +310,6 @@ p "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp?(:"\u{c4 d6 dc}") #=> nil
 ```
 
 - **SEE** [m:String#casecmp?], [m:Symbol#casecmp]
-#@end
 
 ### def =~(other) -> Integer | nil
 
@@ -351,11 +329,7 @@ p :foo =~ /bar/    # => nil
 
 - **SEE** [m:String#=~]
 
-#@since 2.4.0
 ### def match(other) -> MatchData | nil
-#@else
-### def match(other) -> Integer | nil
-#@end
 
 正規表現 other とのマッチを行います。
 
@@ -363,31 +337,19 @@ p :foo =~ /bar/    # => nil
 
 - **param** `other` -- 比較対象のシンボルを指定します。
 
-#@since 2.4.0
 - **return** -- マッチが成功すれば MatchData オブジェクトを、そうでなければ nil を返します。
 
 `````
 p :foo.match(/foo/)    # => #<MatchData "foo">
 p :foobar.match(/bar/) # => #<MatchData "bar">
 `````
-#@else
-- **return** -- マッチが成功すればマッチした位置を、そうでなければ nil を返します。
-
-`````
-p :foo.match(/foo/)    # => 0
-p :foobar.match(/bar/) # => 3
-`````
-#@end
 `````
 p :foo.match(/bar/)    # => nil
 `````
 
 - **SEE** [m:String#match]
-#@since 2.4.0
 - **SEE** [m:Symbol#match?]
-#@end
 
-#@since 2.4.0
 ### def match?(regexp, pos = 0) -> bool
 
 regexp.match?(self, pos) と同じです。
@@ -406,7 +368,6 @@ $&                      # => nil
 `````
 
 - **SEE** [m:Regexp#match?], [m:String#match?]
-#@end
 
 ### def [](nth) -> String | nil
 ### def slice(nth) -> String | nil
@@ -507,7 +468,6 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を
 
 - **SEE** [m:String#empty?]
 
-#@since 2.7.0
 ### def end_with?(*suffixes)   -> bool
 
 self の末尾が suffixes のいずれかであるとき true を返します。
@@ -527,13 +487,8 @@ p :hello.end_with?("ello")             #=> true
 p :hello.end_with?("heaven", "ello")   #=> true
 p :hello.end_with?("heaven", "paradise") #=> false
 ```
-#@end
 
-#@since 2.4.0
 ### def upcase(*options) -> Symbol
-#@else
-### def upcase -> Symbol
-#@end
 
 小文字を大文字に変換したシンボルを返します。
 
@@ -545,11 +500,7 @@ p :hello.end_with?("heaven", "paradise") #=> false
 
 - **SEE** [m:String#upcase]
 
-#@since 2.4.0
 ### def downcase(*options) -> Symbol
-#@else
-### def downcase -> Symbol
-#@end
 
 大文字を小文字に変換したシンボルを返します。
 
@@ -561,11 +512,7 @@ p :hello.end_with?("heaven", "paradise") #=> false
 
 - **SEE** [m:String#downcase]
 
-#@since 2.4.0
 ### def capitalize(*options) -> Symbol
-#@else
-### def capitalize -> Symbol
-#@end
 
 シンボルに対応する文字列の先頭の文字を大文字に、残りを小文字に変更した
 シンボルを返します。
@@ -581,11 +528,7 @@ p :hello.end_with?("heaven", "paradise") #=> false
 
 - **SEE** [m:String#capitalize]
 
-#@since 2.4.0
 ### def swapcase(*options) -> Symbol
-#@else
-### def swapcase -> Symbol
-#@end
 
 'A' から 'Z' までのアルファベット大文字を小文字に、'a' から 'z' までの
 アルファベット小文字を大文字に変更したシンボルを返します。

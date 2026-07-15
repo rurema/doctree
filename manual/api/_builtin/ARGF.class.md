@@ -169,13 +169,6 @@ ARGF.close
 ARGF.filename  # => "bar"
 ARGF.close
 `````
-#@until 2.3.0
-`````
-ARGF.close     # => closed stream (IOError)
-`````
-
-- **raise** `IOError` -- 処理対象のファイルが既にクローズされていた場合に発生します。
-#@end
 
 - **SEE** [m:ARGF.class#closed?]
 
@@ -374,15 +367,9 @@ ARGF.getc # => nil
 
 - **SEE** [m:ARGF.class#getbyte], [m:ARGF.class#gets]
 
-#@since 2.4.0
 ### def gets(rs = $/, chomp: false)   -> String | nil
 ### def gets(limit, chomp: false)     -> String | nil
 ### def gets(rs, limit, chomp: false) -> String | nil
-#@else
-### def gets(rs = $/)   -> String | nil
-### def gets(limit)     -> String | nil
-### def gets(rs, limit) -> String | nil
-#@end
 
 ARGFの現在位置から一行ずつ文字列として読み込みます。EOF に到達した時に
 は nil を返します。
@@ -393,9 +380,7 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
 
 - **param** `limit` -- 最大の読み込みバイト数
 
-#@since 2.4.0
 - **param** `chomp` -- true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
-#@end
 
 ```ruby title="例"
 # $ echo "line1\nline2\nline3\n\nline4\n" > test.txt
@@ -819,11 +804,7 @@ ch を返します。
 
 - **param** `arg` -- 出力するオブジェクトを任意個指定します。
 
-#@since 2.3.0
 ### def read_nonblock(maxlen, outbuf = nil, exception: true) -> String | Symbol | nil
-#@else
-### def read_nonblock(maxlen, outbuf = nil) -> String
-#@end
 #@# TODO: Windows では使えない？
 
 処理中のファイルからノンブロッキングモードで最大 maxlen バイト読み込みます。
@@ -833,13 +814,11 @@ ch を返します。
 
 - **param** `maxlen` -- 読み込む長さの上限を整数で指定します。
 - **param** `outbuf` -- 読み込んだデータを格納する [c:String] オブジェクトを指定します。
-#@since 2.3.0
 - **param** `exception` -- 読み込み時に [c:Errno::EAGAIN]、
                  [c:Errno::EWOULDBLOCK] が発生する代わりに
                  :wait_readable を返すかどうかを指定します。また、false
                  を指定した場合は既に EOF に達していれば
                  [c:EOFError] の代わりに nil を返します。
-#@end
 
 - **SEE** [m:ARGF.class#readpartial]
 

@@ -12,7 +12,6 @@ since: "2.4.0"
 
 ## Class Methods
 
-#@since 2.7.0
 ### def [](category) -> bool
 
 
@@ -45,7 +44,6 @@ category の警告を表示するかどうかのフラグを設定します。
 - **param** `flag` -- 真、または偽を指定します。
 
 - **SEE** [m:Warning.\[\]]
-#@end
 
 ### def warn(message, category: nil) -> nil
 

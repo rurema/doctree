@@ -205,18 +205,14 @@ ruby -run -e httpd -- [OPTION] [DocumentRoot]
 --request-timeout=SECOND    リクエストがタイムアウトする秒数を指定します
 --http-version=VERSION      HTTP version
 `````
-#@since 2.6.0
 `````
 --server-name=NAME          サーバーのホスト名を指定します
 --server-software=NAME      サーバーの名前とバージョンを指定します
 `````
-#@end
-#@since 2.5.0
 `````
 --ssl-certificate=CERT      サーバーの SSL 証明書ファイルを指定します
 --ssl-private-key=KEY       サーバーの SSL 証明書の秘密鍵を指定します
 `````
-#@end
 `````
 -v                          詳細表示
 `````

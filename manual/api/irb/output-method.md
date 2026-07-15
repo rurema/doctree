@@ -1,9 +1,6 @@
 ---
 type: library
 require:
-#@until 2.7.0
-  - e2mmap
-#@end
 ---
 irb が出力を扱うためのサブライブラリです。
 

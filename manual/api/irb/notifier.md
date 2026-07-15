@@ -1,9 +1,6 @@
 ---
 type: library
 require:
-#@until 2.7.0
-  - e2mmap
-#@end
   - irb/output-method
 ---
 ライブラリ内部で使用します。

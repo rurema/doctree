@@ -123,7 +123,6 @@ Ruby/OpenSSL のバージョンです。
 <https://www.openssl.org/docs/manmaster/man3/OPENSSL_VERSION_NUMBER.html>
 も参照してください。
 
-#@since 2.0.0
 ### const OPENSSL_FIPS -> bool
 
 システムにインストールされている OpenSSL が FIPS を
@@ -133,7 +132,6 @@ Ruby/OpenSSL のバージョンです。
 
 - **SEE** [m:OpenSSL?.fips_mode=]
 
-#@end
 
 #@# = module OpenSSL::SSL::SocketForwarder
 # class OpenSSL::OpenSSLError < StandardError

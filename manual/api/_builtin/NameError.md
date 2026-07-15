@@ -23,9 +23,7 @@ bar
 ## Class Methods
 
 ### def new(error_message = "", name = nil) -> NameError
-#@since 2.6.0
 ### def new(error_message = "", name = nil, receiver:) -> NameError
-#@end
 
 例外オブジェクトを生成して返します。
 
@@ -33,9 +31,7 @@ bar
 
 - **param** `name` -- 未定義だったシンボルです
 
-#@since 2.6.0
 - **param** `receiver` -- 原因となったメソッド呼び出しのレシーバです
-#@end
 
 ```ruby title="例"
 err = NameError.new("message", "foo")
@@ -100,7 +96,6 @@ p err.to_s  # => "undefined local variable or method `foobar' for main:Object"
 end
 `````
 
-#@since 2.3.0
 ### def receiver -> object
 
 self が発生した時のレシーバオブジェクトを返します。
@@ -142,4 +137,3 @@ a = "buz"
 foo
 ```
 
-#@end

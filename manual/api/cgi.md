@@ -2,12 +2,10 @@
 type: library
 category: Network
 require:
-#@since 1.9.1
   - cgi/core
   - cgi/cookie
   - cgi/util
   - cgi/html
-#@end
 ---
 CGI プログラムの支援ライブラリです。
 
@@ -275,8 +273,3 @@ CGI.new("html4Fr")  # html4.0 Frameset
 HTML 生成メソッドの引数としては、基本的に Hash オブジェクトが与えられる（あるいは何も与えられない）べきです。
 ただし以下に列挙されたメソッドでは、各メソッドの引数の形式に従って、 Hash オブジェクト以外のものを渡すこともできます。
 
-#@until 1.9.1
-#@include(cgi/core.rd)
-#@include(cgi/cookie.rd)
-#@include(cgi/html.rd)
-#@end

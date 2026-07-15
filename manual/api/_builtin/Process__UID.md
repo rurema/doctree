@@ -137,7 +137,6 @@ end
 p [uid, euid]           #=> [500, 505]
 ```
 
-#@since 2.0.0
 ### module_function def from_name(name) -> Integer
 
 引数で指定した名前の実ユーザ ID を返します。
@@ -150,4 +149,3 @@ Process::UID.from_name("nosuchuser") # => can't find user for nosuchuser (Argume
 - **param** `name` -- ユーザ名を指定します。
 
 - **raise** `ArgumentError` -- 引数で指定したユーザが存在しない場合に発生します。
-#@end

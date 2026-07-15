@@ -1,21 +1,15 @@
 YAML ドキュメントから特定のデータを検索する機能を提供するサブライブラリ
 です。
 
-#@since 1.9.2
 # class Syck::YPath
-#@else
-# class YAML::YPath
-#@end
 
 YAML ドキュメントから特定のデータを検索する機能を提供するクラスです。
 
 使用例；"name" を含むセグメントを表示する。
 
-#@since 1.9.3
 `````
 require 'syck'
 `````
-#@end
 `````
 require 'yaml'
 
@@ -51,11 +45,7 @@ Rubyist Magazine: <https://magazine.rubyist.net/>
 
 ## class methods
 
-#@since 1.9.2
 ### def new(str) -> Syck::YPath
-#@else
-### def new(str) -> YAML::YPath
-#@end
 
 自身を初期化します。
 
@@ -63,11 +53,9 @@ Rubyist Magazine: <https://magazine.rubyist.net/>
 
 例:
 
-#@since 1.9.3
 `````
 require 'syck'
 `````
-#@end
 `````
 require 'yaml'
 
@@ -80,22 +68,16 @@ p YAML::YPath.new(str)
 
 ### def each_path(str) {|ypath| ...} -> Array
 
-#@since 1.9.2
 引数 str を [c:Syck::YPath] が
-#@else
-引数 str を [c:YAML::YPath] が
-#@end
 検索できる複数のパスに再構築して、その各パスに対してブロックを評価します。
 
 各パスに対してブロックを評価した結果の配列を返します。
 
 例1: YAML::YPath.each_path を使用する場合
 
-#@since 1.9.3
 `````
 require 'syck'
 `````
-#@end
 `````
 require 'yaml'
 
@@ -107,11 +89,9 @@ YAML::YPath.each_path(path) { |ypath|
 
 例2: YAML::YPath.each_path を使用しない場合
 
-#@since 1.9.3
 `````
 require 'syck'
 `````
-#@end
 `````
 require 'yaml'
 

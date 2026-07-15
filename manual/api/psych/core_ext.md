@@ -69,20 +69,6 @@ syck が廃止された場合  psych_to_yaml は廃止
 
 ## Instance Methods
 
-#@until 2.5.0
-### def yaml_as(tag) -> ()
-### def psych_yaml_as(tag) -> ()
-
-クラスと tag の間を関連付けます。
-
-これによって tag 付けされた YAML ドキュメントを Ruby のオブジェクトに
-変換したりその逆をしたりできます。
-
-この method は deprecated です。 [m:Object.yaml_tag] を
-かわりに使ってください。
-
-- **param** `tag` -- 対象のクラスに関連付けるタグの文字列
-#@end
 
 # reopen Kernel
 

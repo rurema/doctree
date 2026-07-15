@@ -25,21 +25,9 @@ require:
 
 ## Class Methods
 
-#@since 2.3.0
 ### def new(basename = '', tempdir = nil, mode: 0, **options) -> Tempfile
 ### def open(basename = '', tempdir = nil, mode: 0, **options) -> Tempfile
 ### def open(basename = '', tempdir = nil, mode: 0, **options){|fp| ...} -> object
-#@else
-#@since 2.2.0
-### def new(basename, tempdir = nil, mode: 0, **options) -> Tempfile
-### def open(basename, tempdir = nil, mode: 0, **options) -> Tempfile
-### def open(basename, tempdir = nil, mode: 0, **options){|fp| ...} -> object
-#@else
-### def new(basename, tempdir = Dir::tmpdir) -> Tempfile
-### def open(basename, tempdir = Dir::tmpdir) -> Tempfile
-### def open(basename, tempdir = Dir::tmpdir){|fp| ...} -> object
-#@end
-#@end
 
 テンポラリファイルを作成し、それを表す Tempfile オブジェクトを生成して返します。
 ファイル名のプレフィクスには指定された basename が使われます。
@@ -55,14 +43,12 @@ new にブロックを指定した場合は無視されます。
 - **param** `tempdir` -- テンポラリファイルが作られるディレクトリです。
                このデフォルト値は、[m:Dir.tmpdir] の値となります。
 
-#@since 2.2.0
 - **param** `mode` -- ファイルのモードを定数の論理和で指定します。[m:IO.open]
             と同じ([m:Kernel?.open]と同じ)ものが指定できます。
 
 - **param** `options` -- ファイルのオプション引数を指定します。[m:IO.open] と同
                じものが指定できます。ただし、:permオプションは無視され
                ます。
-#@end
 
 ```ruby title="例"
 require "tempfile"
@@ -84,37 +70,20 @@ p tf.path
 p File.read(tf.path) #=> "hoge\n"
 ```
 
-#@since 2.1.0
 - **SEE** [m:Tempfile.create]
 
 #@since 3.4
 ### def create(basename="", tmpdir=nil, mode: 0, anonymous: false, **options) -> File
 ### def create(basename="", tmpdir=nil, mode: 0, anonymous: false, **options){|fp| ...} -> object
 #@else
-#@since 2.4.0
 ### def create(basename="", tmpdir=nil, mode: 0, **options) -> File
 ### def create(basename="", tmpdir=nil, mode: 0, **options){|fp| ...} -> object
-#@else
-#@since 2.2.0
-### def create(basename, tmpdir=nil, mode: 0, **options) -> File
-### def create(basename, tmpdir=nil, mode: 0, **options){|fp| ...} -> object
-#@else
-### def create(basename, *rest) -> File
-### def create(basename, *rest){|fp| ...} -> object
-#@end
-#@end
 #@end
 
 テンポラリファイルを作成し、それを表す File オブジェクトを生成して返します(Tempfileではありません)。
 createはopenに似ていますが、finalizerによるファイルの自動unlinkを行いません。
 
-#@since 2.2.0
 ブロックを指定しなかった場合、tmpdirにファイルを作り、Fileオブジェクトを返します。
-#@else
-ブロックを指定しなかった場合、tmpdir(第2引数で指定したディレクトリ。省
-略した場合は[m:Dir.tmpdir])にファイルを作り、Fileオブジェクトを返しま
-す。
-#@end
 このファイルは自動的に削除されません。ファイルを削除する場合は明示的にunlinkすべきです。
 
 ブロックを指定して呼び出した場合、tmpdirにファイルを作り、
@@ -125,25 +94,19 @@ createではファイルのunlinkも自動で行います。
 - **param** `basename` -- ファイル名のプレフィクスを文字列で指定します。
                文字列の配列を指定した場合、先頭の要素がファイル名のプレフィックス、次の要素が
                サフィックスとして使われます。
-#@since 2.2.0
 - **param** `tmpdir` -- ファイルが作られるディレクトリです。
               このデフォルト値は、[m:Dir.tmpdir] の値となります。
 - **param** `mode` -- ファイルのモードを定数の論理和で指定します。[m:IO.open]
             と同じ([m:Kernel?.open]と同じ)ものが指定できます。
-#@end
 
 #@since 3.4
 - **param** `anonymous` -- テンポラリファイルを即時unlinkするかを指定します。
                  デフォルトは false です。
 #@end
 
-#@since 2.2.0
 - **param** `options` -- ファイルのオプション引数を指定します。[m:IO.open] と同
                じものが指定できます。ただし、:permオプションは無視され
                ます。
-#@else
-- **param** `rest` -- [m:Tempfile.new]の第二引数以降と同じように扱われます。
-#@end
 - **SEE** [m:Tempfile.open]
 
 ```ruby title="例"
@@ -157,7 +120,6 @@ end
 p File.exist?(path) #=> false
 ```
 
-#@end
 
 
 ## Instance Methods

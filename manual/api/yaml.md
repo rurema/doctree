@@ -88,48 +88,8 @@ end
 
 [lib:yaml] ライブラリでは、以下のライブラリをバックエンドとして使用します。
 
-#@until 2.0.0
- - [lib:syck] ライブラリ: YAML バージョン 1.0 を扱う事ができます。
-#@end
-#@since 1.9.2
  - [lib:psych] ライブラリ: YAML バージョン 1.1 を扱う事ができます。
 
-#@until 2.0.0
-require "yaml" した場合、特に何もしなければ
-#@since 1.9.3
-[lib:psych] ライブラリを使用します。
-#@else
-[lib:syck] ライブラリを使用します。
-#@end
-
-デフォルト以外のバックエンドを使用したい場合、[lib:yaml] ライブラリを
-require する前に [lib:psych] か [lib:syck] を require してください。
-
-```ruby title="例1: psych を使用する場合"
-require "psych"
-require "yaml"
-YAML.load("...")
-```
-
-```ruby title="例2: syck を使用する場合"
-require "syck"
-require "yaml"
-YAML.load("...")
-```
-
-また、[lib:yaml] を require した後でも、YAML::ENGINE.yamler に
-"psych" を代入する事で [lib:psych] を使用できます。([lib:syck] の場
-合も同様です)
-
-```ruby
-require "yaml"
-require "psych"
-YAML::ENGINE.yamler = "psych"
-YAML.load("...")
-```
-
-#@end
-#@end
 
 ### タグの指定
 
@@ -221,26 +181,6 @@ EOS
 # => #<Foo::Bar:0xf73907b8>
 ```
 
-#@until 2.0.0
-また、YAML 形式に変換する際のタグを変更したい場合、to_yaml_type メソッ
-ドをオーバライドしてください。
-#@since 1.9.2
-([lib:syck] のみ)
-#@end
-
-```ruby title="例"
-#@since 1.9.3
-require "syck"
-#@end
-require "yaml"
-class Foo
-  def to_yaml_type
-    return "!tag:example.com,2002:foo"
-  end
-end
-p Foo.new.to_yaml # => "--- !example.com,2002/foo {}\n\n"
-```
-#@end
 
 ### 注意
 

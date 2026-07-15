@@ -178,10 +178,8 @@ Zlib::GzipReader.open('hoge.gz'){|gz|
 
 ### def each(rs = $/){|line| ... } -> self
 ### def each_line(rs = $/){|line| ... } -> self
-#@since 1.9.1
 ### def each(rs = $/) -> Enumerator
 ### def each_line(rs = $/) -> Enumerator
-#@end
 
 IO クラスの同名メソッド[m:IO#each], [m:IO#each_line]と同じです。
 
@@ -232,9 +230,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 - **SEE** [m:IO#each], [m:IO#each_line]
 
 ### def each_byte{|byte| ... } -> nil
-#@since 1.9.1
 ### def each_byte -> Enumerator
-#@end
 IO クラスの同名メソッド[m:IO#each_byte]と同じです。
 
 但し、gzip ファイル中に
@@ -712,7 +708,6 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 - **SEE** [m:IO#readlines]
 
-#@since 1.9.1
 ### def readpartial(maxlen, outbuf = nil) -> String
 IO クラスの同名メソッド [m:IO#readpartial] と同じです。
 
@@ -726,7 +721,6 @@ IO クラスの同名メソッド [m:IO#readpartial] と同じです。
 
 - **SEE** [m:IO#readpartial]
 
-#@end
 ### def ungetc(char) -> nil
 IO クラスの同名メソッド [m:IO#ungetc] と同じです。
 

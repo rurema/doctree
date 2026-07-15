@@ -17,9 +17,7 @@ Net::HTTPRequest は抽象クラスなので実際にはサブクラスの
   - [c:Net::HTTP::Move]
   - [c:Net::HTTP::Options]
   - [c:Net::HTTP::Propfind]
-#@since 2.0.0
   - [c:Net::HTTP::Patch]
-#@end
   - [c:Net::HTTP::Proppatch]
   - [c:Net::HTTP::Trace]
   - [c:Net::HTTP::Unlock]

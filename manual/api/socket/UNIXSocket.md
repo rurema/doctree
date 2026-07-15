@@ -37,14 +37,9 @@ s.send("hello", 0)
 相互に結合された UNIX ソケットのペアを含む2要素の配列を返します。
 
 type にはソケットタイプを指定します。
-#@until 1.9.1
-Socket::SOCK_STREAM, Socket::SOCK_DGRAM, Socket::SOCK_RAW などが
-指定できます。
-#@else
 Socket::SOCK_STREAM, Socket::SOCK_DGRAM, Socket::SOCK_RAW などの
 整数、:STREAM, :DGRAM, :RAW などのシンボル、
 "STREAM" などの文字列が渡せます。
-#@end
 
 protocol には プロトコルを指定します。0 は Unix domain でのデフォルト値が
 使われます。

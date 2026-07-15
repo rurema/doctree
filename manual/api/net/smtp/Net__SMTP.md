@@ -25,15 +25,10 @@ port は接続するポート番号です。
 
 - **SEE** [m:Net::SMTP.start], [m:Net::SMTP#start]
 
-#@until 1.9.1
-### def start(address, port = Net::SMTP.default_port, helo = 'localhost.localdomain', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
-### def start(address, port = Net::SMTP.default_port, helo = 'localhost.localdomain', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
-#@else
 ### def start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) {|smtp| ... } -> object
 ### def start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
-#@end
 
 新しい SMTP オブジェクトを生成し、サーバに接続し、セッションを開始します。
 
@@ -222,15 +217,10 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 
 - **param** `f` -- デバッグ出力先を [c:IO] (もしくは << というメソッドを持つクラス)で指定します
 
-#@until 1.9.1
-### def start(helo = 'localhost.localdomain', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
-### def start(helo = 'localhost.localdomain', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
-#@else
 ### def start(helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) {|smtp| ... } -> object
 ### def start(helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
-#@end
 サーバにコネクションを張り、同時に SMTP セッションを開始します。
 
 もしすでにセッションが開始していたら IOError が発生します。
@@ -444,11 +434,9 @@ CRAM-MD5 認証を行います。
 - **param** `user` -- 認証で使うアカウント名
 - **param** `secret` -- 認証で使うパスワード
 
-#@since 2.1.0
 ### def rset -> Net::SMTP::Response
 RSET コマンドを送ります。
 
-#@end
 
 ### def starttls -> Net::SMTP::Response
 STARTTLS コマンドを送ります。
@@ -481,17 +469,11 @@ MAILFROM が送られるため利用する必要はないはずです。
 
 - **param** `from_addr` -- 送信元メールアドレス
 
-#@until 1.9.1
-### def rcptto_list(to_addrs) -> ()
-#@else
 ### def rcptto_list(to_addrs){ ... } -> object
-#@end
 RCPTTO コマンドを to_addrs のすべてのメールアドレスに対して送ります。
 
-#@since 1.9.1
 コマンドを送った後、ブロックを呼び出します。
 このメソッドの返り値はブロックの返り値になります。
-#@end
 
 通常は [m:Net::SMTP#send_message], [m:Net::SMTP#open_message_stream] で
 RCPTTO が送られるため利用する必要はないはずです。

@@ -3,7 +3,6 @@ type: library
 include:
   - Gem::UserInteraction
 ---
-#@since 1.9.1
 
 [c:Gem::Specification] のインスタンスから Gem パッケージを作成するためのライブラリです。
 
@@ -32,5 +31,4 @@ include:
 
 Gem の作成に成功したときに表示するメッセージを返します。
 
-#@end
 

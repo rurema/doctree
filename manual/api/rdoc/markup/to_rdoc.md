@@ -13,15 +13,9 @@ RDoc 形式のドキュメントをマークアップ記法を保持したまま
 
 ## Class Methods
 
-#@since 1.9.3
 ### def new(markup = nil) -> RDoc::Markup::ToRdoc
-#@else
-### def new -> RDoc::Markup::ToRdoc
-#@end
 
 自身を初期化します。
 
-#@since 1.9.3
 - **param** `markup` -- [c:RDoc::Markup] オブジェクトを指定します。省略した場合
               は新しく作成します。
-#@end

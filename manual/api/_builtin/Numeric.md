@@ -26,11 +26,7 @@ include:
 ほとんどの数値関連のメソッドはサブクラスで再定義されています。これは、
 効率のためであったり上位抽象クラスで実装を定義できなかったり
 するためです。以下の表は
-#@since 2.4.0
 2.4.2
-#@else
-2.1.2
-#@end
 での一覧です。実際にどのメソッドがどのクラスに定義されているかはそれぞ
 れのクラスを参照してください。
 
@@ -50,7 +46,6 @@ include:
 #@#        op, *mary.collect {|ms| (ms.member?(op) ? "o" : "-").center(10)})
 #@#  }
 
-#@since 2.4.0
 ````
 => ruby 2.4.2p198 (2017-09-14 revision 59899) [x86_64-darwin15]
                             Numeric    Integer     Float     Rational   Complex
@@ -161,113 +156,6 @@ include:
                        | |     -          o          -          -          -
                        ~ |     -          o          -          -          -
 ````
-#@else
-````
-=> ruby 2.1.2p95 (2014-05-08 revision 45877) [x86_64-linux]
-                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
-          -------------------------------------------------------------------------------------------
-                     % |     o          -          o          o          o          -          -
-                     & |     -          -          o          o          -          -          -
-                     * |     -          -          o          o          o          o          o
-                    ** |     -          -          o          o          o          o          o
-                     + |     -          -          o          o          o          o          o
-                    +@ |     o          -          -          -          -          -          -
-                     - |     -          -          o          o          o          o          o
-                    -@ |     o          -          o          o          o          -          o
-                     / |     -          -          o          o          o          o          o
-                     < |     -          -          o          o          o          -          -
-                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
-          -------------------------------------------------------------------------------------------
-                    << |     -          -          o          o          -          -          -
-                    <= |     -          -          o          o          o          -          -
-                   <=> |     o          -          o          o          o          o          -
-                    == |     -          -          o          o          o          o          o
-                   === |     -          -          o          o          o          -          -
-                     > |     -          -          o          o          o          -          -
-                    >= |     -          -          o          o          o          -          -
-                    >> |     -          -          o          o          -          -          -
-                    [] |     -          -          o          o          -          -          -
-                     ^ |     -          -          o          o          -          -          -
-                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
-          -------------------------------------------------------------------------------------------
-                   abs |     o          -          o          o          o          -          o
-                  abs2 |     o          -          -          -          -          -          o
-                 angle |     o          -          -          -          o          -          o
-                   arg |     o          -          -          -          o          -          o
-            bit_length |     -          -          o          o          -          -          -
-                  ceil |     o          o          -          -          o          o          -
-                   chr |     -          o          -          -          -          -          -
-                coerce |     o          -          -          o          o          o          o
-                  conj |     o          -          -          -          -          -          o
-             conjugate |     o          -          -          -          -          -          o
-                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
-          -------------------------------------------------------------------------------------------
-           denominator |     o          o          -          -          o          o          o
-                   div |     o          -          o          o          -          -          -
-                divmod |     o          -          o          o          o          -          -
-                downto |     -          o          -          -          -          -          -
-                  eql? |     o          -          -          o          o          -          o
-                 even? |     -          o          o          o          -          -          -
-                  fdiv |     o          -          o          o          o          o          o
-               finite? |     -          -          -          -          o          -          -
-                 floor |     o          o          -          -          o          o          -
-                   gcd |     -          o          -          -          -          -          -
-                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
-          -------------------------------------------------------------------------------------------
-                gcdlcm |     -          o          -          -          -          -          -
-                  hash |     -          -          -          o          o          o          o
-                     i |     o          -          -          -          -          -          -
-                  imag |     o          -          -          -          -          -          o
-             imaginary |     o          -          -          -          -          -          o
-             infinite? |     -          -          -          -          o          -          -
-               inspect |     -          -          o          o          o          o          o
-              integer? |     o          o          -          -          -          -          -
-                   lcm |     -          o          -          -          -          -          -
-             magnitude |     o          -          o          o          o          -          o
-                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
-          -------------------------------------------------------------------------------------------
-                modulo |     o          -          o          o          o          -          -
-                  nan? |     -          -          -          -          o          -          -
-                  next |     -          o          -          -          -          -          -
-              nonzero? |     o          -          -          -          -          -          -
-             numerator |     o          o          -          -          o          o          o
-                  odd? |     -          o          o          o          -          -          -
-                   ord |     -          o          -          -          -          -          -
-                 phase |     o          -          -          -          o          -          o
-                 polar |     o          -          -          -          -          -          o
-                  pred |     -          o          -          -          -          -          -
-                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
-          -------------------------------------------------------------------------------------------
-                   quo |     o          -          -          -          o          o          o
-           rationalize |     -          o          -          -          o          o          o
-                  real |     o          -          -          -          -          -          o
-                 real? |     o          -          -          -          -          -          o
-                  rect |     o          -          -          -          -          -          o
-           rectangular |     o          -          -          -          -          -          o
-             remainder |     o          -          -          o          -          -          -
-                 round |     o          o          -          -          o          o          -
-singleton_method_added |     o          -          -          -          -          -          -
-                  size |     -          -          o          o          -          -          -
-                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
-          -------------------------------------------------------------------------------------------
-                  step |     o          -          -          -          -          -          -
-                  succ |     -          o          o          -          -          -          -
-                 times |     -          o          -          -          -          -          -
-                  to_c |     o          -          -          -          -          -          o
-                  to_f |     -          -          o          o          o          o          o
-                  to_i |     -          o          -          -          o          o          o
-                to_int |     o          o          -          -          o          -          -
-                  to_r |     -          o          -          -          o          o          o
-                  to_s |     -          -          o          o          o          o          o
-              truncate |     o          o          -          -          o          o          -
-                          Numeric    Integer     Fixnum     Bignum     Float     Rational   Complex
-          -------------------------------------------------------------------------------------------
-                  upto |     -          o          -          -          -          -          -
-                 zero? |     o          -          o          -          o          -          -
-                     | |     -          -          o          o          -          -          -
-                     ~ |     -          -          o          o          -          -          -
-````
-#@end
 
 ### 丸めメソッドの動作一覧
 
@@ -549,29 +437,12 @@ p (-1.5).ceil #=> -1
 
 - **SEE** [m:Numeric#floor], [m:Numeric#round], [m:Numeric#truncate]
 
-#@since 2.4.0
-#@since 2.5.0
 ### def floor(ndigits = 0) -> Integer
-#@else
-### def floor(ndigits = 0) -> Integer | Float
-#@end
-#@else
-### def floor   -> Integer
-#@end
 
 自身と等しいかより小さな整数のうち最大のものを返します。
 
-#@since 2.4.0
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
-#@since 2.5.0
                負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
-#@else
-               正の整数を指定した場合、[c:Float] を返します。
-               小数点以下を、最大 n 桁にします。
-               負の整数を指定した場合、[c:Integer] を返します。
-               小数点位置から左に少なくとも n 個の 0 が並びます。
-#@end
-#@end
 
 ```ruby title="例"
 p 1.floor      #=> 1
@@ -581,9 +452,7 @@ p (-1.5).floor #=> -2
 ```
 
 - **SEE** [m:Numeric#ceil], [m:Numeric#round], [m:Numeric#truncate]
-#@since 2.4.0
 - **SEE** [m:Integer#floor]
-#@end
 
 ### def round   -> Integer
 
@@ -728,21 +597,13 @@ self を other で割った商を返します。
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
-#@if("1.9.3" <= version and version <= "2.0.0")
-なお、割る数が 0 以外の整数の場合の挙動はバグのため Ruby2.1.0 以降では修正されています。詳しくは<https://bugs.ruby-lang.org/issues/5515>を参照して下さい。
-#@end
 
 - **param** `other` -- 自身を割る数を指定します。
 
 ```ruby title="例"
 p 1.quo(3)    #=> (1/3)
 p 1.0.quo(3)  #=> 0.3333333333333333
-#@if("1.9.3" <= version and version <= "2.0.0")
-p 1.quo(3.0)  #=> (1/3)
-              # 割る数が 0 以外の整数なら Float でも結果は Rational になる。
-#@else
 p 1.quo(3.0)  #=> 0.3333333333333333
-#@end
 p 1.quo(0.5)  #=> 2.0
 
 p Complex(1, 1).quo(1)  #=> ((1/1)+(1/1)*i)
@@ -814,7 +675,6 @@ p (-11).modulo(3.5)  #=> 3.0
 
 - **SEE** [m:Numeric#divmod], [m:Numeric#remainder]
 
-#@since 2.3.0
 ### def positive? -> bool
 
 self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
@@ -838,7 +698,6 @@ p 1.negative?  # => false
 ```
 
 - **SEE** [m:Numeric#positive?]
-#@end
 
 ### def remainder(other)    -> Numeric
 
@@ -891,7 +750,6 @@ p b #=> ["A", "a", "AA", "Aa", "aA", "BB", "Bb", "bB", "bb", "z"]
 
 - **SEE** [m:Numeric#zero?]
 
-#@since 2.4.0
 ### def finite? -> bool
 
 self の絶対値が有限値の場合に true を、そうでない場合に false を返します。
@@ -917,7 +775,6 @@ p (3r).infinite? # => nil
 ```
 
 - **SEE** [m:Numeric#finite?]、[m:Float#infinite?]、[m:Complex#infinite?]
-#@end
 
 ### def to_int    -> Integer
 
@@ -942,19 +799,13 @@ p 0.0.zero?             #=> true
 
 ### def step(limit, step = 1) {|n| ... }    -> self
 ### def step(limit, step = 1) -> Enumerator
-#@since 2.6.0
 ### def step(limit, step = 1) -> Enumerator::ArithmeticSequence
-#@end
 ### def step(by: 1, to: Float::INFINITY) {|n| ... } -> self
 ### def step(by: 1, to: Float::INFINITY) -> Enumerator
-#@since 2.6.0
 ### def step(by: 1, to: Float::INFINITY) -> Enumerator::ArithmeticSequence
-#@end
 ### def step(by:, to: -Float::INFINITY) {|n| ... } -> self
 ### def step(by:, to: -Float::INFINITY) -> Enumerator
-#@since 2.6.0
 ### def step(by:, to: -Float::INFINITY) -> Enumerator::ArithmeticSequence
-#@end
 
 self からはじめ step を足しながら limit を越える
 前までブロックを繰り返します。step は負の数も指定できます。また、limit や step には [c:Float] なども
@@ -973,10 +824,8 @@ self からはじめ step を足しながら limit を越える
 
 - **return** -- ブロックが指定された時は self を返します。
 - **return** -- ブロックが指定されなかった時は [c:Enumerator] を返します。
-#@since 2.6.0
 - **return** -- 特に limit (または to) と step の両方が Numeric または nil の時は
         [c:Enumerator::ArithmeticSequence] を返します。
-#@end
 
 - **raise** `ArgumentError` -- step に 0 を指定した場合に発生します。
 

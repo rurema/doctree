@@ -77,9 +77,7 @@ p false.^(1 + 1)   #=> true
 ```
 
 ### def to_s    -> String
-#@since 2.0.0
 ### def inspect -> String
-#@end
 
 常に文字列 "false" を返します。
 

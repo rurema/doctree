@@ -14,18 +14,12 @@ RDoc 形式のドキュメントを整形するための基本クラスです。
 
 ## Class Methods
 
-#@since 1.9.3
 ### def new(markup = nil) -> RDoc::Markup::Formatter
-#@else
-### def new -> RDoc::Markup::Formatter
-#@end
 
 自身を初期化します。
 
-#@since 1.9.3
 - **param** `markup` -- [c:RDoc::Markup] オブジェクトを指定します。省略した場合
               は新しく作成します。
-#@end
 
 ## Instance Methods
 
@@ -35,7 +29,6 @@ content で指定された文字列を変換します。
 
 - **param** `content` -- 変換する文字列を指定します。
 
-#@since 1.9.2
 ### def add_tag(name, start, stop) -> ()
 
 name で登録された規則で取得された文字列を start と stop で囲むように指
@@ -56,4 +49,3 @@ h = RDoc::Markup::ToHtml.new
 h.add_tag(:STRIKE, "<strike>", "</strike>")
 ```
 
-#@end

@@ -120,11 +120,7 @@ end
 します。もしすでにその class 自体に同名のメソッドが定義されている場合
 は、古いメソッドを捨てて新しいメソッドの内容によって定義しなおします。
 
-#@since 2.1.0
 メソッド定義式は、メソッド名を [c:Symbol] にしたオブジェクトを返します。
-#@else
-メソッド定義式は、nil を返します。
-#@end
 
 #### 特異メソッド定義式
 
@@ -141,11 +137,7 @@ end
 特異クラスを (まだ作成されていなければ) 作成します。最後に、その特異
 クラスにメソッド method_name を定義します。
 
-#@since 2.1.0
 特異メソッド定義式は、メソッド名を [c:Symbol] にしたオブジェクトを返します。
-#@else
-特異メソッド定義式は、nil を返します。
-#@end
 
 ただし Fixnum Symbol のインスタンスおよび true false nil には特異メソッド
 は定義できません。
@@ -176,20 +168,12 @@ end
 
 メソッドにブロックを与える場合、そのブロックはメソッドを呼び出す側のブ
 ロックの self と class を継承します。Module#module_eval/class_eval、
-#@since 1.9.1
 BasicObject#instance_eval
-#@else
-Object#instance_eval
-#@end
 の三つだけが例外で、以下のように変更されます。
 
 - **[m:Module#module_eval], [m:Module#class_eval]**:
     self、class ともそのレシーバ
-#@since 1.9.1
 - **`[m:BasicObject#instance_eval]`**:
-#@else
-- **`[m:Object#instance_eval]`**:
-#@end
     self がそのレシーバ、class がそのレシーバの特異クラス
 
 #### eval

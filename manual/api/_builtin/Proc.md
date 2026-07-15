@@ -56,14 +56,11 @@ Proc.new は、Proc#initialize が定義されていれば
 
 ### def [](*arg) -> ()
 ### def call(*arg) -> ()
-#@since 1.9.1
 ### def ===(*arg) -> ()
 ### def yield(*arg) -> ()
-#@end
 
 手続きオブジェクトを実行してその結果を返します。
 
-#@since 1.9.1
 引数の渡され方はオブジェクトの生成方法によって異なります。
 詳しくは [m:Proc#lambda?] を参照してください。
 
@@ -97,9 +94,6 @@ fib = lambda{|n|
 p fib.(10) # => 55
 ```
 
-#@else
-引数はブロックパラメータにそのまま(多重代入のルールに従い)代入されます。
-#@end
 
 
 - **param** `arg` -- 手続きオブジェクトに与える引数を指定します。
@@ -119,7 +113,6 @@ p fib.(10) # => 55
 #@# --- dup -> Proc
 #@# nodoc
 
-#@since 2.6.0
 ### def <<(callable) -> Proc
 
 self と引数を合成した Proc を返します。
@@ -195,7 +188,6 @@ pipeline.call('testfile') # => ["Hello", "World", "Hello", "Ruby"]
 ```
 
 - **SEE** [m:Method#<<], [m:Method#>>]
-#@end
 
 ### def arity -> Integer
 
@@ -210,7 +202,6 @@ Proc オブジェクトが受け付ける引数の数を返します。
 を返します。
 
 ```ruby title="例"
-#@since 1.9.1
 p lambda{           }.arity # => 0
 p lambda{||         }.arity # =>  0
 p lambda{|x|        }.arity # =>  1
@@ -219,16 +210,6 @@ p lambda{|x, y|     }.arity # =>  2
 p lambda{|x, *y|    }.arity # => -2
 p lambda{|(x, y)|   }.arity # =>  1
 p lambda{|(x, y), z|}.arity # =>  2
-#@else
-p lambda{           }.arity # => -1
-p lambda{||         }.arity # =>  0
-p lambda{|x|        }.arity # =>  1
-p lambda{|*x|       }.arity # => -1
-p lambda{|x, y|     }.arity # =>  2
-p lambda{|x, *y|    }.arity # => -2
-p lambda{|(x, y)|   }.arity # =>  2
-p lambda{|(x, y), z|}.arity # =>  2
-#@end
 ```
 
 ### def binding -> Binding
@@ -255,9 +236,7 @@ p pr == pr.to_proc # => true
 ```
 
 ### def to_s    -> String
-#@since 2.0.0
 ### def inspect -> String
-#@end
 
 self の文字列表現を返します。
 
@@ -271,7 +250,6 @@ p Proc.new {
 # => "#<Proc:0x0x401a880c@-:3>"
 ```
 
-#@since 1.9.1
 ### def curry         -> Proc
 ### def curry(arity)  -> Proc
 Procをカリー化します
@@ -380,11 +358,6 @@ p C.new.method(:e).to_proc.lambda? #=> true
 その手続オブジェクトが ruby で定義されていない(つまりネイティブ
 である)場合は nil を返します。
 
-#@until 1.9.2
-[m:Module.attr_reader],
-[m:Module.attr_writer],
-[m:Module.attr_accessor] で定義されたメソッドには対応していません。
-#@end
 
 ```ruby title="例"
 # /path/to/target.rb を実行
@@ -402,7 +375,6 @@ self のハッシュ値を返します。
 
 #@#noexample
 
-#@end
 
 #@since 3.2
 ### def parameters(lambda: nil) -> [object]
@@ -453,7 +425,6 @@ p prc.parameters(lambda: false) # => [[:opt, :x], [:opt, :y], [:rest, :other]]
 #@end
 
 - **SEE** [m:Method#parameters], [m:UnboundMethod#parameters]
-#@since 2.7.0
 ### def ruby2_keywords -> proc
 
 Marks the proc as passing keywords through a normal argument splat. This
@@ -484,4 +455,3 @@ module Mod
   foo.ruby2_keywords if foo.respond_to?(:ruby2_keywords)
 end
 ```
-#@end

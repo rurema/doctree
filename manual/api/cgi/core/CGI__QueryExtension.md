@@ -194,7 +194,6 @@ ENV['SERVER_SOFTWARE'] を返します。
 
 ENV['HTTP_USER_AGENT'] を返します。
 
-#@since 1.9.1
 ### def create_body(is_large) -> StringIO | Tempfile
 #@# nodoc
 
@@ -205,5 +204,4 @@ ENV['HTTP_USER_AGENT'] を返します。
 ### def unescape_filename? -> bool
 #@# nodoc
 
-#@end
 

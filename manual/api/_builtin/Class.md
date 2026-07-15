@@ -21,10 +21,8 @@ library: _builtin
   - [m:Module#module_function]
   - [m:Module#extend_object]
   - [m:Module#append_features]
-#@since 2.0.0
   - [m:Module#prepend_features]
   - [m:Module#refine]
-#@end
 
 は Class では未定義にされています。
 

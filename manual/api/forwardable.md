@@ -122,7 +122,6 @@ q.push 23  # => NoMethodError
 
 - **SEE** [m:Forwardable#def_delegators]
 
-#@since 1.9.1
 ### def instance_delegate(hash) -> ()
 ### def delegate(hash)          -> ()
 
@@ -158,7 +157,6 @@ p zap.last # => "baz"
 ### const FORWARDABLE_VERSION -> String
 
 [lib:forwardable] ライブラリのバージョンを返します。
-#@end
 
 # module SingleForwardable
 
@@ -197,21 +195,12 @@ Facade.service # => serviced!
 `````
 
 もし [c:Forwardable] と [c:SingleForwardable] の両方を使いたい場合、
-#@since 1.9.1
 def_instance_delegator と def_single_delegator メソッドの方を呼び出して
 ください。
-#@else
-def_instance_delegator と def_singleton_delegator メソッドの方を呼び出
-してください。
-#@end
 
 ## Instance Methods
 
-#@since 1.9.1
 ### def def_single_delegators(accessor, *methods)    -> ()
-#@else
-### def def_singleton_delegators(accessor, *methods) -> ()
-#@end
 ### def def_delegators(accessor, *methods)           -> ()
 
 メソッドの委譲先をまとめて設定します。
@@ -237,11 +226,7 @@ def_delegator :@records, :map
 
 - **SEE** [m:SingleForwardable#def_delegator]
 
-#@since 1.9.1
 ### def def_single_delegator(accessor, method, ali = method)    -> ()
-#@else
-### def def_singleton_delegator(accessor, method, ali = method) -> ()
-#@end
 ### def def_delegator(accessor, method, ali = method)           -> ()
 
 メソッドの委譲先を設定します。
@@ -261,7 +246,6 @@ def_delegator は def_singleton_delegator の別名になります。
 
 - **SEE** [m:SingleForwardable#def_delegators]
 
-#@since 1.9.1
 ### def single_delegate(hash) -> ()
 ### def delegate(hash)        -> ()
 
@@ -272,4 +256,3 @@ def_delegator は def_singleton_delegator の別名になります。
             [c:String] かその配列で指定します。
 
 - **SEE** [m:Forwardable#delegate]
-#@end

@@ -824,17 +824,10 @@ end
 
 - **SEE** [m:OptionParser#on], [m:OptionParser#on_head]
 
-#@since 2.4.0
 ### def order(argv, into: nil)            -> [String]
 ### def order(argv, into: nil){|s| ...}   -> [String]
 ### def order(*args, into: nil)           -> [String]
 ### def order(*args, into: nil){|s| ...}  -> [String]
-#@else
-### def order(argv)                     -> [String]
-### def order(argv){|s| ...}            -> [String]
-### def order(*args)                    -> [String]
-### def order(*args){|s| ...}           -> [String]
-#@end
 
 与えられた argv を順番にパースします。
 オプションではないコマンドの引数(下の例で言うと somefile)に出会うと、パースを中断します。
@@ -850,12 +843,10 @@ argv からオプションを取り除いたものを返します。
 
 - **param** `args` -- パースしたい引数を順に文字列として与えます。
 
-#@since 2.4.0
 - **param** `into` -- オプションを格納するハッシュを指定します。
             指定したハッシュにはオプションの名前をキーとして、[m:OptionParser#on]に渡されたブロックの値が格納されます。
             キーの名前はロングオプションが定義されていればロングオプションの値を、
             ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
-#@end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
@@ -878,13 +869,8 @@ $ ruby opt.rb -a foo somefile -b
 ["-a", "foo", "somefile", "-b"]
 `````
 
-#@since 2.4.0
 ### def order!(argv = self.default_argv, into: nil)             -> [String]
 ### def order!(argv = self.default_argv, into: nil) {|s| ...}   -> [String]
-#@else
-### def order!(argv = self.default_argv)             -> [String]
-### def order!(argv = self.default_argv) {|s| ...}   -> [String]
-#@end
 
 与えられた argv を順番に破壊的にパースします。
 argv からオプションがすべて取り除かれます。
@@ -899,12 +885,10 @@ argv を返します。
 
 - **param** `argv` -- パースしたい引数を文字列の配列で指定します。
 
-#@since 2.4.0
 - **param** `into` -- オプションを格納するハッシュを指定します。
             指定したハッシュにはオプションの名前をキーとして、[m:OptionParser#on]に渡されたブロックの値が格納されます。
             キーの名前はロングオプションが定義されていればロングオプションの値を、
             ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
-#@end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
@@ -927,13 +911,8 @@ $ ruby opt.rb -a foo somefile -b
 ["somefile", "-b"]
 `````
 
-#@since 2.4.0
 ### def permute(argv, into: nil)   -> [String]
 ### def permute(*args, into: nil)  -> [String]
-#@else
-### def permute(argv)            -> [String]
-### def permute(*args)           -> [String]
-#@end
 
 与えられた argv をパースします。
 オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
@@ -946,12 +925,10 @@ argv からオプションを取り除いたものを返します。
 
 - **param** `args` -- パースしたい引数を順に文字列として与えます。
 
-#@since 2.4.0
 - **param** `into` -- オプションを格納するハッシュを指定します。
             指定したハッシュにはオプションの名前をキーとして、[m:OptionParser#on]に渡されたブロックの値が格納されます。
             キーの名前はロングオプションが定義されていればロングオプションの値を、
             ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
-#@end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
@@ -975,11 +952,7 @@ $ ruby opt.rb -a foo somefile -b
 ["somefile"]
 `````
 
-#@since 2.4.0
 ### def permute!(argv = self.default_argv, into: nil)    -> [String]
-#@else
-### def permute!(argv = self.default_argv)    -> [String]
-#@end
 
 与えられた argv を破壊的にパースします。argv からオプションがすべて取り除かれます。
 オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
@@ -990,12 +963,10 @@ argv を返します。
 
 - **param** `argv` -- パースしたい引数を文字列の配列で指定します。
 
-#@since 2.4.0
 - **param** `into` -- オプションを格納するハッシュを指定します。
             指定したハッシュにはオプションの名前をキーとして、[m:OptionParser#on]に渡されたブロックの値が格納されます。
             キーの名前はロングオプションが定義されていればロングオプションの値を、
             ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
-#@end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
@@ -1019,13 +990,8 @@ $ ruby opt.rb -a foo somefile -b
 ["somefile"]
 `````
 
-#@since 2.4.0
 ### def parse(argv, into: nil)   -> [String]
 ### def parse(*args, into: nil)  -> [String]
-#@else
-### def parse(argv)           -> [String]
-### def parse(*args)          -> [String]
-#@end
 
 与えられた argv をパースします。
 argv からオプションを取り除いたものを返します。
@@ -1038,12 +1004,10 @@ argv からオプションを取り除いたものを返します。
 
 - **param** `args` -- パースしたい引数を順に文字列として与えます。
 
-#@since 2.4.0
 - **param** `into` -- オプションを格納するハッシュを指定します。
             指定したハッシュにはオプションの名前をキーとして、[m:OptionParser#on]に渡されたブロックの値が格納されます。
             キーの名前はロングオプションが定義されていればロングオプションの値を、
             ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
-#@end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク
@@ -1062,11 +1026,7 @@ p ARGV           # => ["-i", "-u", "-h", "test"]
 p opts.parse(ARGV) # => ["test"]
 ```
 
-#@since 2.4.0
 ### def parse!(argv = self.default_argv, into: nil)   -> [String]
-#@else
-### def parse!(argv = self.default_argv)   -> [String]
-#@end
 
 与えられた argv をパースします。
 
@@ -1076,12 +1036,10 @@ p opts.parse(ARGV) # => ["test"]
 
 - **param** `argv` -- パースしたい引数を文字列の配列で指定します。
 
-#@since 2.4.0
 - **param** `into` -- オプションを格納するハッシュを指定します。
             指定したハッシュにはオプションの名前をキーとして、[m:OptionParser#on]に渡されたブロックの値が格納されます。
             キーの名前はロングオプションが定義されていればロングオプションの値を、
             ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
-#@end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク

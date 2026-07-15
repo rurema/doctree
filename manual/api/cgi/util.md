@@ -1,13 +1,11 @@
 ---
 type: library
 ---
-#@since 1.9.1
 CGI で利用するユーティリティメソッドを定義したライブラリです。
 
 # reopen CGI
 
 ## Class Methods
-#@end
 ### def escape(string) -> String
 
 与えられた文字列を URL エンコードした文字列を新しく作成し返します。
@@ -43,11 +41,7 @@ p CGI.unescape("http%3A%2F%2Fwww.example.com%2Findex.rss")
 ### def escapeHTML(string) -> String
 ### def escape_html(string) -> String
 
-#@since 2.0.0
 与えられた文字列中の '、&、"、<、> を実体参照に置換した文字列を新しく作成し返します。
-#@else
-与えられた文字列中の &、"、<、> を実体参照に置換した文字列を新しく作成し返します。
-#@end
 
 - **param** `string` -- 文字列を指定します。
 
@@ -63,9 +57,7 @@ p CGI.escapeHTML('<script type="text/javascript">alert("警告")</script>')
 ```
 
 ### def unescapeHTML(string) -> String
-#@since 1.9.1
 ### def unescape_html(string) -> String
-#@end
 与えられた文字列中の実体参照のうち、&amp; &gt; &lt; &quot;
 と数値指定がされているもの (&#0ffff など) を元の文字列に置換します。
 
@@ -78,9 +70,7 @@ p CGI.unescapeHTML("3 &gt; 1")   #=> "3 > 1"
 ```
 
 ### def escapeElement(string, *elements) -> String
-#@since 1.9.1
 ### def escape_element(string, *elements) -> String
-#@end
 第二引数以降に指定したエレメントのタグだけを実体参照に置換します。
 
 - **param** `string` -- 文字列を指定します。
@@ -98,9 +88,7 @@ p CGI.escapeElement('<BR><A HREF="url"></A>', ["A", "IMG"])
 ```
 
 ### def unescapeElement(string, *elements) -> String
-#@since 1.9.1
 ### def unescape_element(string, *elements) -> String
-#@end
 
 特定の要素だけをHTMLエスケープから戻す。
 
@@ -155,7 +143,6 @@ print CGI.pretty("<HTML><BODY></BODY></HTML>", "\t")
   # </HTML>
 ```
 
-#@since 1.9.1
 ## Constants
 
 ### const TABLE_FOR_ESCAPE_HTML__ -> Hash
@@ -185,4 +172,3 @@ HTML 上でエスケープする文字列の変換テーブルを返します。
 - **SEE** [rfc:822]
 
 
-#@end

@@ -30,14 +30,12 @@ options には [c:Hash] を与えます。理解するハッシュの
  - :progress_proc
  - :content_length_proc
  - :http_basic_authentication
-#@since 1.9.1
  - :proxy_http_basic_authentication
  - :read_timeout
  - :ssl_ca_cert
  - :ssl_verify_mode
  - :ftp_active_mode
  - :redirect
-#@end
 です。
 「:content_length_proc」と「:progress_proc」はプログレスバーに
 利用されることを想定しています。
@@ -75,7 +73,6 @@ sio = OpenURI.open_uri('http://www.example.com',
  断片が転送されるたびに、その断片のサイズを引数として評価されます。ブロックの返り値は特に
  利用されません。
 
-#@since 1.9.1
 - **`:proxy_http_basic_authentication`**:
  パスワード付きプロクシの設定を与えます。
  設定には3要素の配列を渡します。
@@ -123,7 +120,6 @@ sio = OpenURI.open_uri('http://www.example.com',
 
  HTTP と FTP の間のリダイレクトもこれで指定します。
 
-#@end
 
 - **param** `name` -- オープンしたいリソースを文字列で与えます。
 

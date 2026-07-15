@@ -17,13 +17,8 @@ include:
 ### def new(*args, keyword_init: nil)                     -> Class
 ### def new(*args, keyword_init: nil) {|subclass| block } -> Class
 #@else
-#@since 2.5.0
 ### def new(*args, keyword_init: false)                     -> Class
 ### def new(*args, keyword_init: false) {|subclass| block } -> Class
-#@else
-### def new(*args)                  -> Class
-### def new(*args) {|subclass| block } -> Class
-#@end
 #@end
 
 [c:Struct] クラスに新しいサブクラスを作って、それを返します。
@@ -43,7 +38,6 @@ printf "name:%s age:%d", fred.name, fred.age
 したがって、メンバ名は [c:Symbol] で指定するのが無難です。
 
 - **param** `args` -- 構造体を定義するための可変長引数。[c:String] または [c:Symbol] を指定します。
-#@since 2.5.0
 #@since 3.2
 - **param** `keyword_init` -- 構造体クラスのインスタンスを生成する際に、キーワード引数を使用するかどうかを指定します。値の意味は次のとおりです。
 
@@ -57,7 +51,6 @@ printf "name:%s age:%d", fred.name, fred.age
 #@if (version == "3.1")
                     Ruby 3.1 では互換性に影響のある使い方をしたときに警告が出るため、
                     従来の挙動を期待する構造体には明示的に false を指定してください。
-#@end
 #@end
 
 #@since 3.2
@@ -267,11 +260,7 @@ p joe.zip  #=> "90210"
 ```
 
 ### def each {|value| ... } -> self
-#@since 1.9.1
 ### def each -> Enumerator
-#@else
-### def each -> Enumerable::Enumerator
-#@end
 構造体の各メンバに対して繰り返します。
 
 #@include(Struct.attention)
@@ -287,11 +276,7 @@ joe.each {|x| puts(x) }
 ```
 
 ### def each_pair {|member, value| ... } -> self
-#@since 1.9.1
 ### def each_pair -> Enumerator
-#@else
-### def each_pair -> Enumerable::Enumerator
-#@end
 構造体のメンバ名([c:Symbol])と値の組を引数にブロックを繰り返し実行します。
 
 ```ruby title="例"
@@ -327,9 +312,7 @@ p Foo.new.members  # => [:foo, :bar]
 
 ### def values -> [object]
 ### def to_a -> [object]
-#@since 2.7.0
 ### def deconstruct -> [object]
-#@end
 構造体のメンバの値を配列にいれて返します。
 
 ```ruby title="例"
@@ -340,11 +323,8 @@ Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_a
 
 #@include(Struct.attention)
 
-#@since 2.7.0
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
-#@end
 
-#@since 2.7.0
 ### def deconstruct_keys(array_of_names) -> Hash
 
 self のメンバの名前と値の組を [c:Hash] で返します。
@@ -365,7 +345,6 @@ p h # => {:name=>"Joseph Smith, Jr.", :address=>"123 Maple, Anytown NC", :zip=>1
 #@include(Struct.attention)
 
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
-#@end
 
 ### def inspect -> String
 ### def to_s    -> String
@@ -381,13 +360,9 @@ p joe.inspect # => "#<struct Customer name=\"Joe Smith\", address=\"123 Maple, A
 ```
 
 ### def select {|i| ... } -> [object]
-#@since 1.9.1
 ### def select -> Enumerator
-#@end
-#@since 2.6.0
 ### def filter {|i| ... } -> [object]
 ### def filter -> Enumerator
-#@end
 
 構造体のメンバの値に対してブロックを評価した値が真であった要素を全て含
 む配列を返します。真になる要素がひとつもなかった場合は空の配列を返しま
@@ -420,7 +395,6 @@ p obj.values_at(0, 1, 2)    # => ["FOO", "BAR", "BAZ"]
 
 #@include(Struct.attention)
 
-#@since 2.3.0
 ### def dig(key, ...) -> object | nil
 
 self 以下のネストしたオブジェクトを dig メソッドで再帰的に参照して返し
@@ -437,7 +411,6 @@ p o.dig(:b, 0)                    # => nil
 ```
 
 - **SEE** [m:Array#dig], [m:Hash#dig], [m:OpenStruct#dig]
-#@end
 
 ### def ==(other)    -> bool
 
@@ -507,11 +480,8 @@ p dog.hash                    #=> -38913223
 ```
 
 #@include(Struct.attention)
-#@since 2.0.0
 ### def to_h -> Hash
-#@since 2.6.0
 ### def to_h {|member, value| block } -> Hash
-#@end
 
 self のメンバ名([c:Symbol])と値の組を [c:Hash] にして返します。
 
@@ -521,7 +491,6 @@ Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
 # => {:name=>"Joe Smith", :address=>"123 Maple, Anytown NC", :zip=>12345}
 ```
 
-#@since 2.6.0
 ブロックを指定すると各ペアでブロックを呼び出し、
 その結果をペアとして使います。
 ```ruby title="ブロック付きの例"
@@ -530,7 +499,5 @@ p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value
   [member, value*2]
 } # => {:name=>"Joe SmithJoe Smith", :address=>"123 Maple, Anytown NC123 Maple, Anytown NC", :zip=>24690}
 ```
-#@end
 
 #@include(Struct.attention)
-#@end

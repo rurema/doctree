@@ -104,7 +104,6 @@ TCPServer.open("", 0) {|serv|
 }
 ```
 
-#@if (version >= "1.8.5")
 ### def accept_nonblock -> TCPSocket
 
 ソケットをノンブロッキングモードに設定した後、
@@ -117,9 +116,7 @@ EAGAIN, EINTR を含め例外 [c:Errno::EXXX] が発生します。
 
 - **raise** `Errno::EXXX` -- [man:accept(2)] がエラーになった場合に発生します。
 
-#@end
 
-#@if (version >= "1.8.0")
 ### def listen(backlog) -> 0
 
 [man:listen(2)] を実行します。
@@ -137,9 +134,7 @@ backlog は、クライアントからの接続要求を保留できる数です
 - **return** -- [man:listen(2)] が成功すれば 0 を返します。
 
 
-#@end
 
-#@if (version >= "1.8.0")
 ### def sysaccept -> Integer
 
 接続したクライアントのソケットをファイル記述子で返すことを除けば
@@ -153,4 +148,3 @@ TCPServer.open("", 0) {|serv|
   p serv.sysaccept        #=> 6
 }
 ```
-#@end

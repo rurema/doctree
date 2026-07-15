@@ -51,7 +51,6 @@ UNIXServer.open("/tmp/s") {|serv|
 }
 ```
 
-#@if (version >= "1.8.5")
 ### def accept_nonblock -> UnixSocket
 ソケットをノンブロッキングモードに設定した後、
 [man:accept(2)] を呼び出します。
@@ -62,7 +61,6 @@ UNIXServer.open("/tmp/s") {|serv|
 [man:accept(2)] がエラーになった場合、[m:Socket#accept] と同じ例外が
 発生します。
 
-#@since 1.9.1
 [c:Errno::EWOULDBLOCK], [c:Errno::EAGAIN], 
 [c:Errno::ECONNABORTED], [c:Errno::EPROTO] のいずれかの例外が
 発生した場合は、その例外には [c:IO::WaitReadable] が extend
@@ -79,11 +77,9 @@ rescue IO::WaitReadable, Errno::EINTR
 end
 # sock is an accepted socket.
 ```
-#@end
 
 - **SEE** [m:UNIXServer#accept]
 
-#@end
 
 ### def listen(backlog) -> 0
 

@@ -5,11 +5,7 @@ category: FileFormat
 RDoc は Ruby のドキュメント生成を行うためのライブラリです。rdoc という
 ドキュメント生成のためのコマンドも含んでいます。
 
-#@since 1.9.1
 このパッケージは RDoc と Markup というふたつのコンポーネントを含
-#@else
-このパッケージは RDoc と SimpleMarkup というふたつのコンポーネントを含
-#@end
 んでいます。 RDoc とは Ruby のソースファイルに対するドキュメントを生成
 するアプリケーションです。 JavaDoc と同様に、ソースを解析し、クラス、モ
 ジュール、メソッドの定義を抜き出してきます(include,require もです)。そ
@@ -22,19 +18,10 @@ RDoc は Ruby のドキュメント生成を行うためのライブラリです
 ### ロードマップ
 
  - RDoc で Ruby のソースファイルに対するドキュメントを生成したければ、まずこの文章を読みましょう。
-#@since 1.9.1
  - Cで書かれた拡張ライブラリを含めたければ、[lib:rdoc/parser/c] を参照してください。
  - コメント部で使えるマークアップについて知りたければ、[lib:rdoc/markup] を参照してください。
-#@else
- - Cで書かれた拡張ライブラリを含めたければ、[lib:rdoc/parsers/parse_c] を参照してください。
- - コメント部で使えるマークアップについて知りたければ、[lib:rdoc/markup/simple_markup] を参照してください。
-#@end
  - RDoc をライブラリとして使いたければ、[c:RDoc::RDoc] を参照してください。
-#@since 1.9.1
  - テキスト部を HTML に変換する部分をライブラリとして使いたければ、[c:RDoc::Markup] を参照してください。
-#@else
- - テキスト部を HTML に変換する部分をライブラリとして使いたければ、[c:SM::SimpleMarkup] を参照してください。
-#@end
 #@# * 独自の HTML テンプレートで出力したければ、[[c:RDoc::Page]] を見てください。
 
 ### 概要
@@ -92,20 +79,6 @@ $ rdoc <options> [name...]
 
 options は以下が指定できます。
 
-#@until 1.9.2
-- **`--accessor name`**:
-
-  name で指定したメソッドを attr_xxx と同様なものとして取り扱います。例え
-  ば "--accessor db_opt" とすると、以下のような行も RDoc によって処理さ
-  れドキュメントに含まれるようになります。
-
-```ruby
-    db_opt :name, :age
-```
-
-  それぞれの name には "=flagtext" というオプションを付けることができま
-  す。例えば、"=rw" とすると attr_accessor と同じように取り扱われます。
-#@end
 
 - **`--all`**:
 
@@ -116,11 +89,8 @@ options は以下が指定できます。
 
   生成する HTML の charset を指定します。
 
-#@since 1.9.3
   可能であれば --encoding を使用してください。
-#@end
 
-#@since 1.9.3
 - **`--coverage-report level, --dcov level`**:
 
   ドキュメントが記述されていない要素に関するレポートを出力します。0 以
@@ -132,30 +102,19 @@ options は以下が指定できます。
 - **`--no-coverage-report, --no-dcov`**:
 
   ドキュメントが記述されていない要素に関するレポートを出力しません。
-#@end
 
 - **`--debug`**:
 
   実行時に内部情報を出力します。
 
-#@since 1.9.2
 - **`--no-debug`**:
 
   実行時に内部情報を出力しません。
-#@end
 
 - **`--diagram`**:
 
-#@since 1.9.2
   何もしません。--diagram オプションは廃止されました。
-#@else
-  モジュールやクラスを表示するのに図を使うようになります。この機能は実
-  験的なもので、すべての出力テンプレートに対応しているわけではありません。
-  dot V1.8.6 かそれ以降がなければ "--diagram" オプションは正しい出力が
-  できません(www.research.att.com/sw/tools/graphviz/)。
-#@end
 
-#@since 1.9.3
 - **`--dry-run`**:
 
   ファイルの出力を行わず、表示だけを行います。
@@ -163,16 +122,13 @@ options は以下が指定できます。
 - **`--no-dry-run`**:
 
   ファイルの出力を行います。
-#@end
 
-#@since 1.9.3
 - **`--encoding encoding`**:
 
   出力ファイルの文字エンコーディングを encoding に指定します。rdoc が読
   み込んだ全てのファイルはこの文字エンコーディングに変換されま
   す。--charset オプションもありますが --encoding オプションを使用して
   ください。
-#@end
 
 - **`--exclude pattern`**:
 
@@ -197,11 +153,9 @@ options は以下が指定できます。
   1.9.2 以下では指定しなかった場合は有効になりません。1.9.2 以降は指定
   しなかった場合でも有効になります。
 
-#@since 1.9.2
 - **`--no-force-update`**:
 
   出力済みのファイルの方が新しい場合のみファイルを更新します。
-#@end
 
 
 - **`--fmt fmt`**:
@@ -212,13 +166,7 @@ options は以下が指定できます。
 
   使いかたの概要を表示します。
 
-#@until 1.9.1
-- **`--help-output`**:
 
-  出力に関するオプションを解説します。
-#@end
-
-#@since 1.9.2
 - **`--ignore-invalid`**:
 
   無効なオプションを指定した場合に、そのオプションを無視して処理を続行
@@ -229,7 +177,6 @@ options は以下が指定できます。
 
   無効なオプションを指定した場合に、標準エラーに情報を出力して終了ステー
   タス 1 でプログラムを終了します。
-#@end
 
 - **`--image-format gif/png/jpg/jpeg`**:
 
@@ -266,11 +213,7 @@ options は以下が指定できます。
 
   すべての出力を一つのファイルに書きだします。
 
-#@since 1.9.2
 - **`--output dir, --op dir`**:
-#@else
-- **`--op dir`**:
-#@end
 
   出力先のディレクトリを dir に設定します(デフォルトは "doc" です)。
 
@@ -278,16 +221,10 @@ options は以下が指定できます。
 
   出力の名前をnameにします(HTML を出力する場合には何の効果もありません)
 
-#@since 1.9.2
-#@since 2.0.0
 - **`--pipe, -p`**:
-#@else
-- **`--pipe`**:
-#@end
 
   標準入力を読み込んで HTML に変換し、標準出力に出力します。ファイルへ
   の出力は行わないため、--op などのオプションは無視されます。
-#@end
 
 - **`--promiscuous`**:
 
@@ -326,25 +263,18 @@ options は以下が指定できます。
 - **`--template name`**:
 
   出力生成時に使うテンプレートを指定する(デフォルトは 'html')。実際には
-#@since 1.9.1
   これで [m:$:] の中のディレクトリの rdoc/generators/xxxx_generator が
-#@else
-  これで [m:$:] の中のディレクトリの rdoc/generator/xxxx が
-#@end
   使われる。 (xxxx はフォーマッタによって異なる)。
 
 - **`--title text`**:
 
   出力のタイトルを text に指定します。
 
-#@since 1.9.3
 - **`--visibility visibility`**:
 
   出力するメソッドの可視性を public、protected、private のいずれかから指定します。
   指定しなかった場合は protected です。
-#@end
 
-#@since 2.0.0
 - **`--markup markup`**:
 
   マークアップのフォーマットを指定します。デフォルトは rdoc です。
@@ -375,13 +305,10 @@ options は以下が指定できます。
   カレントディレクトリの .rdoc_options ファイルに指定した設定を YAML 形
   式で保存します。
 
-#@end
 
-#@since 1.9.1
 - **`--verbose`**:
 
   プログラムの解析時に詳細な情報を表示します。
-#@end
 
 - **`--version`**:
 
@@ -393,7 +320,6 @@ options は以下が指定できます。
   を含んでいれば、そこがファイル名が置きかえられます。'\%s' を含んで
   いなければ、ファイル名を指定した URL の後に付けたものを使います。
 
-#@since 2.0.0
 ### オプションの保存 {#saved_options}
 
 .rdoc_options ファイルを gem に含める事で、rdoc のオプションを保存する
@@ -419,7 +345,6 @@ rdoc --markup tomdoc --write-options
  - --quiet
  - --template
  - --verbose
-#@end
 
 ### Markup {#markup}
 
@@ -631,12 +556,9 @@ fred() { |index, position| ... }
   <tt>S</tt>
 ```
 
-#@since 1.9.3
 これらは RDoc バージョン 1 との互換性を保つために、このような動作になっ
 ています。
-#@end
 
-#@since 1.9.3
 #### 置換
 
 文章内の文字列は以下のように置換されます。
@@ -648,7 +570,6 @@ fred() { |index, position| ... }
  - 二重引用符: "text" もしくは \`\`text''
  - 著作権表示: (c)
  - 登録商標: (r)
-#@end
 
 #### 命令
 
@@ -742,7 +663,6 @@ fred() { |index, position| ... }
     # ----------------------------------------
 ```
 
-#@since 1.9.3
 - **`:category: title`**:
 
   記述した要素の :section: を title で指定したものに上書きします。
@@ -772,7 +692,6 @@ fred() { |index, position| ... }
 
   :section: とは異なり、以降のドキュメントには影響しません。直後の要素
   のみに影響します。
-#@end
 
 - **`:call-seq:`**:
 
@@ -780,7 +699,6 @@ fred() { |index, position| ... }
   これを指定した次の行から次の空行までをメソッド呼び出し列と解釈し、出
   力をそこに書かれたように変更します。
 
-#@since 2.0.0
 - **`:markup: type`**:
 
   現在のマークアップの指定を type で指定したフォーマットで上書きします。
@@ -816,15 +734,8 @@ fred() { |index, position| ... }
   マークアップの形式を追加したい場合は
   <http://docs.seattlerb.org/rdoc/DEVELOPERS_rdoc.html> を参照し
   てください。
-#@end
 
-#@since 1.9.1
 また、他にも Ruby スクリプト、Ruby から使用するために書かれた C 言語の
 ソースコードのみで指定できる命令があります。それらについては
 [lib:rdoc/parser/ruby]、[lib:rdoc/parser/c] を参照してください。
-#@else
-また、他にもRuby から使用するために書かれた C 言語のソースコードのみで
-指定できる命令があります。それらについては
-[lib:rdoc/parsers/parse_c] を参照してください。
-#@end
 

@@ -4,25 +4,11 @@ category: Development
 ---
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 
-#@since 1.9.1
 # module RbConfig
-#@until 2.2.0
-alias Config
-#@end
 
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 RbConfig モジュールを定義します。
 
-#@else
-# module Config
-alias RbConfig
-
-Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
-Config モジュールを定義します。
-
-RbConfig モジュールを Config と同じものとして定義します。
-
-#@end
 
 ## Singleton Methods
 
@@ -38,16 +24,10 @@ p RbConfig.expand("$(bindir)") # => /home/foobar/all-ruby/ruby19x/bin
 
 - **param** `config` -- 変数展開に使用する設定を [c:Hash] で指定します。
   
-#@since 1.9.1
 - **SEE** [m:RbConfig::MAKEFILE_CONFIG]
-#@else
-- **SEE** [m:Config::MAKEFILE_CONFIG]
-#@end
-#@since 1.9.2
 ### def ruby -> String
 
 ruby コマンドのフルパスを返します。
-#@end
 
 ## Constants
 
@@ -81,11 +61,7 @@ TOPDIR
 
 ### const MAKEFILE_CONFIG -> Hash
 
-#@since 1.9.1
 [m:RbConfig::CONFIG]
-#@else
-[m:Config::CONFIG]
-#@end
 と同じですが、その値は以下のような形
 で他の変数への参照を含みます。
 ```text
@@ -108,19 +84,11 @@ END_OF_MAKEFILE
    bindir = $(exec_prefix)/bin
 ```
 
-#@since 1.9.1
 [m:RbConfig.expand]
-#@else
-[m:Config.expand]
-#@end
 は、このような参照を解決する
 メソッドとして rbconfig 内部で利用されています。
 (CONFIG 変数は、MAKEFILE_CONFIG の内容から
-#@since 1.9.1
 [m:RbConfig.expand]
-#@else
-[m:Config.expand]
-#@end
 を使って生成されています)
 
 ```ruby

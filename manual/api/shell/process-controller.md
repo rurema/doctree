@@ -26,7 +26,6 @@ until: "2.7.0"
 ### def process_controllers_exclusive -> ()
 #@todo
 
-#@since 1.9.1
 ### def active_process_controllers -> ()
 #@todo
 
@@ -36,7 +35,6 @@ until: "2.7.0"
 ### def wait_to_finish_all_process_controllers -> ()
 #@todo
 
-#@end
 
 ## Instance Methods
 
@@ -127,16 +125,12 @@ until: "2.7.0"
 待機中のジョブが存在する場合は真を返します。
 そうでない場合は偽を返します。
 
-#@since 1.9.1
 ### def shell -> Shell
 #@todo
 
-#@end
 
 ## Constants
 
-#@since 1.9.1
 ### const USING_AT_EXIT_WHEN_PROCESS_EXIT -> true
 #@todo
 
-#@end

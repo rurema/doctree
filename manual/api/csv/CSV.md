@@ -221,12 +221,6 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 
 ライブラリのバージョンを表す文字列です。
 
-#@if (version == "1.9.1")
-2.4.5
-#@end
-#@if (version == "1.9.2")
-2.4.7
-#@end
 
 ## Singleton Methods
 
@@ -461,11 +455,6 @@ CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
 場合は [m:Object#dup] で複製してください。
 
 - **param** `str` -- 文字列を指定します。デフォルトは空文字列です。
-#@if( version >= "2.5.0" and version < "2.6.0" )
-           2.5.0 では不具合により引数 str を与えた場合の動作に問題があ
-           るため、指定したい場合は csv gem を 1.0.1 以上に更新する必
-           要があります。
-#@end
 
 - **param** `options` -- [m:CSV.new] のオプションと同じオプションを指定できます。
                :encoding というキーを使用すると出力のエンコーディングを指定できます。

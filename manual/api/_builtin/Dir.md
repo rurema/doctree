@@ -22,11 +22,6 @@ include:
 
 - **param** `pattern` -- パターンを文字列か配列で指定します。
                配列を指定すると複数のパターンを指定できます。
-#@until 2.7.0
-               パターンを文字列で指定する場合、パターンを "\0" で区切って
-               1 度に複数のパターンを指定することもできます。
-               パターンの区切りには "\0" のみ指定できます。
-#@end
 
 - **param** `flags` -- [m:File.fnmatch] に指定できるフラグと同様のフラグを指定できます。
              このフラグを指定することでマッチの挙動を変更できます。
@@ -40,11 +35,9 @@ p Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
 #@end
 ```
 
-#@since 2.5.0
 - **param** `base` -- カレントディレクトリの代わりに相対パスの基準にするベースディレクトリを指定します。
             指定した場合、結果の頭にはベースディレクトリはつかないので、
             絶対パスが必要な場合はベースディレクトリを追加する必要があるでしょう。
-#@end
 - **param** `sort` -- true ならワイルドカードや文字セット(鈎括弧)にマッチした結果を
             バイナリとして昇順にソートします。
             false を指定するとソートせず2.7以前と同じ挙動になります。
@@ -96,9 +89,6 @@ Dir.glob("b*") {|f| p f }
 # 複数のパターンを指定する例
 p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
 p Dir["f*", "b*"]        # => ["foo", "bar"]
-#@until 2.7.0
-p Dir.glob("f*\0b*")     # => ["foo", "bar"]
-#@end
 
 # ワイルドカードの例
 p Dir.glob("*")          #=> ["foo", "bar"]
@@ -106,7 +96,6 @@ p Dir.glob("fo?")        #=> ["foo"]
 p Dir.glob("[^f]*")      #=> ["bar"]
 p Dir.glob("{b,f}*")     #=> ["bar", "foo"]
 
-#@since 2.5.0
 # ベースディレクトリの例
 rbfiles = File.join("**", "*.rb")
 p Dir.glob(rbfiles)                 #=> ["main.rb",
@@ -114,7 +103,6 @@ p Dir.glob(rbfiles)                 #=> ["main.rb",
                                     #    "lib/song/karaoke.rb"]
 p Dir.glob(rbfiles, base: "lib")    #=> ["song.rb",
                                     #    "song/karaoke.rb"]
-#@end
 ```
 
 ### def chdir           -> 0
@@ -201,7 +189,6 @@ p Dir.entries('.') #=> [".", "..", "bar", "foo"]
 ```
 
 - **SEE** [m:Dir.foreach]
-#@since 2.5.0
 - **SEE** [m:Dir.children]
 ### def children(path)                -> [String]
 ### def children(path, encoding: enc) -> [String]
@@ -221,12 +208,9 @@ p Dir.entries('.') #=> [".", "..", "bar", "foo"]
 p Dir.children('.') #=> ["bar", "foo"]
 ```
 
-#@since 2.6.0
 - **SEE** [m:Dir#children]
-#@end
 - **SEE** [m:Dir.each_child]
 - **SEE** [m:Dir.entries]
-#@end
 ### def foreach(path) {|file| ...}                                        -> nil
 ### def foreach(path, encoding: Encoding.find("filesystem")) {|file| ...} -> nil
 ### def foreach(path)                                                     -> Enumerator
@@ -256,7 +240,6 @@ Dir.foreach('.'){|f|
 ```
 
 - **SEE** [m:Dir.entries]
-#@since 2.5.0
 - **SEE** [m:Dir.each_child]
 ### def each_child(path) {|file| ...}                -> nil
 ### def each_child(path, encoding: enc) {|file| ...} -> nil
@@ -287,10 +270,7 @@ Dir.each_child('.'){|f|
 
 - **SEE** [m:Dir.foreach]
 - **SEE** [m:Dir.children]
-#@since 2.6.0
 - **SEE** [m:Dir#each_child]
-#@end
-#@end
 ### def getwd    -> String
 ### def pwd      -> String
 
@@ -413,7 +393,6 @@ p Dir.home("root")  # => "/root"
 
 - **SEE** [m:File.expand_path]
 
-#@since 2.4.0
 ### def empty?(path_name)    -> bool
 
 path_name で与えられたディレクトリが空の場合に真を返します。
@@ -428,16 +407,12 @@ p Dir.mktmpdir { |dir| Dir.empty?(dir) } #=> true
 
 - **param** `path_name` -- 確認したいディレクトリ名。
 
-#@end
 
 ## Instance Methods
 
 ### def close    -> nil
 
 ディレクトリストリームをクローズします。
-#@until 2.3.0
-以降のディレクトリに対する操作は例外 [c:IOError] を発生させます。
-#@end
 クローズに成功すれば nil を返します。
 
 ```ruby title="例"
@@ -445,9 +420,6 @@ d = Dir.new(".")
 p d.close  # => nil
 ```
 
-#@until 2.3.0
-- **raise** `IOError` -- close に失敗した場合に発生します。また既に自身が close している場合に発生します。
-#@end
 
 ### def each {|item| ... }    -> self
 ### def each                  -> Enumerator
@@ -470,9 +442,7 @@ Dir.open('.').each{|f|
 #   "foo"
 ```
 
-#@since 2.6.0
 - **SEE** [m:Dir#each_child]
-#@end
 ### def path    -> String
 ### def to_path -> String
 
@@ -568,7 +538,6 @@ self の情報を人間に読みやすい文字列にして返します。
 p Dir.open("/") { |d| d.inspect } # => "#<Dir:/>"
 ```
 
-#@since 2.2.0
 ### def fileno -> Integer
 
 self に関連づけられたファイル記述子を表す整数を返します。
@@ -584,8 +553,6 @@ p Dir.open("..") { |d| d.fileno } # => 8
 - **raise** `IOError` -- 既に自身が close している場合に発生します。
 
 - **SEE** [m:IO#fileno]
-#@end
-#@since 2.6.0
 ### def each_child {|item| ... }    -> self
 ### def each_child                  -> Enumerator
 
@@ -621,4 +588,3 @@ Dir.open('.'){|d|
 ```
 
 - **SEE** [m:Dir.children]
-#@end

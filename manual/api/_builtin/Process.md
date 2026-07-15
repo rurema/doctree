@@ -87,7 +87,6 @@ exec "echo", "*"    # echoes an asterisk
 
 - **SEE** [man:fork(2)]
 
-#@since 1.9.1
 ### def spawn(cmd, *arg)    -> Integer
 
 関数 [m:Kernel?.spawn] と同じです。
@@ -98,8 +97,6 @@ exec "echo", "*"    # echoes an asterisk
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-#@end
-#@since 2.5.0
 ### def last_status -> Process::Status | nil
 カレントスレッドで最後に終了した子プロセスのステータスを返します。
 
@@ -118,7 +115,6 @@ Process.last_status   # => nil
 
 - **SEE** [c:Process::Status]
 - **SEE** [m:$?]
-#@end
 ## Module Functions
 
 ### module_function def getrlimit(resource)    -> [Integer]
@@ -463,9 +459,6 @@ pid で指定されたプロセスにシグナルを送ります。signal
 
 - **SEE** [m:Kernel?.trap], [man:kill(2)]
 
-#@if (version < "1.8.0")
-### module_function def setpgrp(pid, pgrp)    -> 0
-#@end
 ### module_function def setpgid(pid, pgrp)    -> 0
 
 プロセス ID が pid であるプロセスのプロセスグループを pgrp に設定します。
@@ -549,7 +542,6 @@ end
 
 - **SEE** [man:setsid(2)]
 
-#@since 2.0.0
 ### module_function def getsid(pid = 0) -> Integer
 
 引数 pid で指定されたプロセスのセッション ID を返します。
@@ -567,7 +559,6 @@ Process.getsid(Process.pid()) # => 27422
 `````
 
 - **SEE** [man:getsid(2)]
-#@end
 
 ### module_function def times    -> Process::Tms
 
@@ -647,7 +638,6 @@ CRubyではメジャーGCを実行し以下のことをします：
  5. 空のmallocページを解放するためにmalloc_trimを呼び出します
 #@end
 
-#@since 1.9.1
 ### module_function def daemon(nochdir = nil, noclose = nil)    -> 0
 
 プロセスから制御端末を切り離し、
@@ -661,10 +651,6 @@ CRubyではメジャーGCを実行し以下のことをします：
 ただし noclose に真を指定したときにはこの動作は抑制され、
 リダイレクトは行なわれません。
 
-#@if (version == "1.9.1")
-[man:daemon(2)] がなくて [man:fork(2)] がある環境では失敗した場合に
-Errno::EXXX が発生せず -1 が返ってきます。
-#@end
 
 - **param** `nochdir` -- true を指定した場合、カレントディレクトリを移動しません。
 
@@ -672,15 +658,10 @@ Errno::EXXX が発生せず -1 が返ってきます。
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 - **raise** `Errno::EXXX` -- 失敗した場合に発生します。
-#@end
 ### module_function def detach(pid)    -> Thread
 
 子プロセス pid の終了を監視するスレッドを生成して返します。
-#@since "1.8.5"
 生成したスレッドは子プロセスが終了した後に終了ステータス ([c:Process::Status]) を返します。
-#@else
-生成したスレッドは子プロセスが終了した後に nil で終了します。
-#@end
 指定した子プロセスが存在しなければ即座に nil で終了します。
 
 - **param** `pid` -- 子スレッドのプロセス ID を整数で指定します。
@@ -694,27 +675,18 @@ pid = fork {
 }
 ```````
 
-#@since "1.8.5"
 ```````
 p pid # => 7762
 ```````
-#@end
 ```````
 th = Process.detach(pid)
 p th.value
 ```````
-#@since "1.8.5"
 ```````
 # => #<Process::Status: pid 7762 exit 0>
 ```````
-#@else
-```````
-# => nil
-```````
-#@end
 
 
-#@since 2.1.0
 ### module_function def argv0 -> String
 
 現在実行中の Ruby スクリプトの名前を表す文字列です。[m:$0] を更新して
@@ -895,11 +867,9 @@ CLOCK_REALTIME よりも [m:Time.now] をおすすめします。
 - **raise** `Errno::EINVAL` -- clock_id がサポートされていない場合に発生します。
 
 - **SEE** [m:Time.now]
-#@end
 
 ## Constants
 
-#@since 2.1.0
 ### const CLOCK_REALTIME -> Integer | Symbol
 
 [m:Process?.clock_gettime] で使われます。
@@ -1041,7 +1011,6 @@ CLOCK_REALTIME よりも [m:Time.now] をおすすめします。
 
 システムによっては定義されていません。
 
-#@end
 ### const PRIO_PROCESS -> Integer
 
 対象とするプライオリティがプロセスプライオリティであることを表す定数です。

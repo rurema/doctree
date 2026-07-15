@@ -1,10 +1,6 @@
 #@#== packテンプレート文字列
 
-#@since 2.4.0
 以下にあげるものは、[m:Array#pack]、[m:String#unpack]、[m:String#unpack1]
-#@else
-以下にあげるものは、[m:Array#pack]、[m:String#unpack]
-#@end
 のテンプレート文字の一覧です。テンプレート文字は後に「長さ」を表す数字
 を続けることができます。「長さ」の代わりに`*`とすることで「残り全て」
 を表すこともできます。
@@ -493,11 +489,7 @@ p "\x00\x00\x00\x00\x01\x00\x00\x00\xFF\xFF\xFF\xFF".unpack("V*") # => [0, 1, 42
   x86_64 (IEEE754 単精度 リトルエンディアン):
 ```ruby
 p [1.0].pack("f")    # => "\x00\x00\x80?"
-#@since 2.6.0
 p [0.0/0.0].pack("f")  # => "\x00\x00\xC0\x7F"      # NaN
-#@else
-p [0.0/0.0].pack("f")  # => "\x00\x00\xC0\xFF"      # NaN
-#@end
 p [1.0/0.0].pack("f")  # => "\x00\x00\x80\x7F"      # +Infinity
 p [-1.0/0.0].pack("f") # => "\x00\x00\x80\xFF"      # -Infinity
 ```
@@ -522,11 +514,7 @@ p [1.0].pack("f") # => "\x80@\x00\x00"
   x86_64 (IEEE754 倍精度 リトルエンディアン):
 ```ruby
 p [1.0].pack("d")    # => "\x00\x00\x00\x00\x00\x00\xF0?"
-#@since 2.6.0
 p [0.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF8\x7F"      # NaN
-#@else
-p [0.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF8\xFF"      # NaN
-#@end
 p [1.0/0.0].pack("d")  # => "\x00\x00\x00\x00\x00\x00\xF0\x7F"      # +Infinity
 p [-1.0/0.0].pack("d") # => "\x00\x00\x00\x00\x00\x00\xF0\xFF"      # -Infinity
 ```

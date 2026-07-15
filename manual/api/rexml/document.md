@@ -140,7 +140,6 @@ XML 文書([c:REXML::Document])ごとの展開回数がこの値を越えると
 - **param** `val` -- 設定する上限値(整数)
 - **SEE** [m:REXML::Document.entity_expansion_limit]
 
-#@since 1.9.3
 
 ### def entity_expansion_text_limit -> Integer
 実体参照の展開による文字列の増分(テキストのバイト数)の
@@ -180,7 +179,6 @@ XML 文書([c:REXML::Document])ごとの展開回数がこの値を越えると
 - **SEE** [m:REXML::Document.entity_expansion_text_limit]
      <http://www.ruby-lang.org/ja/news/2013/02/22/rexml-dos-2013-02-22/>
 
-#@end
 
 ## Instance Methods
 
@@ -272,12 +270,8 @@ EOS
 p doc.stand_alone? # => "yes"
 ```
 
-#@until 2.0.0
-### def write(output = $stdout, indent = -1, transitive = false, ie_hack = false) -> ()
-#@else
 ### def write(output = $stdout, indent = -1, transitive = false, ie_hack = false, encoding=nil) -> ()
 ### def write(output: $stdout, indent: -1, transitive: false, ie_hack: false, encoding: nil) -> ()
-#@end
 
 output に XML 文書を出力します。
 
@@ -291,9 +285,7 @@ REXML は明示しない限り(つまりXML宣言を [m:REXML::Document#add] で
 それをしない、ということである。XML-RPCのような利用法では
 ネットワークバンドを少しでも節約する必要があるためである。
 
-#@since 2.0.0
 2.0.0以降ではキーワード引数による引数指定が可能です。
-#@end
 
 - **param** `output` -- 出力先([c:IO] のように << で書き込めるオブジェクト)
 - **param** `indent` -- インデントのスペースの数(-1 だとインデントしない)

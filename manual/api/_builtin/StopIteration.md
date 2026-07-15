@@ -5,7 +5,6 @@ library: _builtin
 
 イテレーションを止めるときに発生する例外です。
 
-#@since 1.9.2
 ## Instance Methods
 
 ### def result -> object
@@ -32,4 +31,3 @@ rescue StopIteration => error
 end
 ```
 
-#@end

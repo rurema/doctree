@@ -151,7 +151,6 @@ p URI.regexp =~ "http://www.ruby-lang.org/"  #=> 0
 ```
 
 
-#@since 1.9.2
 ### def decode_www_form(str, enc=Encoding::UTF_8) -> [[String, String]]
 
 文字列から URL-encoded form data をデコードします。
@@ -281,7 +280,6 @@ p URI.encode_www_form_component('Ruby リファレンスマニュアル')
 - **param** `str` -- エンコードする文字列
 - **param** `enc` -- 指定された場合、パーセントエンコーディングする前に、strをこのエンコーディングに変換
 - **SEE** [m:URI.decode_www_form_component], [m:URI.encode_www_form]
-#@end
 ## Constants
 
 ### const UNSAFE -> Regexp

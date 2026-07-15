@@ -130,9 +130,6 @@ Here is some text[^1] including an inline footnote ^[for short footnotes]
 ### 制限事項
 
  - リンクタイトルは使用されない
-#@until 2.1.0
- - 画像へのリンクが正しく生成されない
-#@end
  - 脚注は単一の段落にまとめられる
 
 ### 著者

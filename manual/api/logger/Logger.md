@@ -10,11 +10,7 @@ include:
 
 ## Class Methods
 
-#@since 2.4.0
 ### def new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: Formatter.new, datetime_format: nil, binmode: false, shift_period_suffix: '%Y%m%d', reraise_write_errors: [], skip_header: false) -> Logger
-#@else
-### def new(logdev, shift_age = 0, shift_size = 1048576) -> Logger
-#@end
 
 Logger オブジェクトを生成します。
 
@@ -27,7 +23,6 @@ Logger オブジェクトを生成します。
 - **param** `shift_size` -- shift_age を整数で指定した場合のみ有効です。
                   このサイズでログファイルを切り替えます。
 
-#@since 2.4.0
 - **param** `level` -- ログに記録する時のログレベルを指定します。省略した場合は
              [m:Logger::Severity::DEBUG] です。
 
@@ -55,9 +50,7 @@ Logger オブジェクトを生成します。
 - **param** `skip_header` -- ログファイルの先頭にヘッダー行を出力するかどうかを指定します。
                    true の場合は出力しません。省略した場合は false です。
                    Logger v1.7.0 以降で利用可能です。
-#@end
 
-#@since 2.4.0
 
 ```ruby title="例"
 require 'logger'
@@ -73,19 +66,6 @@ logger = Logger.new(file, formatter: formatter)
 logger = Logger.new(file, datetime_format: '%Y-%m-%d %H:%M:%S')
 ```
 
-#@else
-
-```ruby title="例"
-require 'logger'
-logger = Logger.new(STDERR)
-logger = Logger.new(STDOUT)
-logger = Logger.new('logfile.log')
-
-file = File.open('foo.log', File::WRONLY | File::APPEND | File::CREAT)
-logger = Logger.new(file, 'daily')
-```
-
-#@end
 
 ## Instance Methods
 

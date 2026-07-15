@@ -43,7 +43,6 @@ p Coverage.result  # => {"foo.rb"=>[1, 1, 10, nil, nil, 1, 1, nil, 0, nil]}
 
 この Coverage.result["foo.rb"] から得られる配列は各行の実行回数になっています。
 
-#@since 2.5.0
 
 ### カバレッジモードの指定
 
@@ -64,7 +63,6 @@ p Coverage.result  # => {"foo.rb"=>{:lines=>[1, 1, 10, nil, nil, 1, 1, nil, 0, n
 
 なお、空行、コメント、end のような行はカバレッジの計測対象外で、nil となっています。
 
-#@since 2.6.0
 
 #### oneshot_linesカバレッジモード
 
@@ -79,7 +77,6 @@ p Coverage.result  # => {"foo.rb"=>{:oneshot_lines=>[1, 2, 3, 6, 7]}}
 
 oneshot_linesキーの指す値は、実行された行番号を列挙した配列です。
 
-#@end
 
 #### branchesカバレッジモード
 
@@ -152,9 +149,7 @@ pp Coverage.result
 
 このモードでは、全てのカレッジモードを同時に実行できます。
 
-#@since 2.6.0
 ただし、oneshot_linesカバレッジモードは実行されません。これは、linesカバレッジモードにより各行の実行回数が計測され、行が実行されたかどうかわかるためです。
-#@end
 
 ```ruby
 require "coverage"
@@ -169,7 +164,6 @@ pp Coverage.result
 #    :methods=>{}}}
 ```
 
-#@end
 
 # class Coverage
 
@@ -179,12 +173,6 @@ pp Coverage.result
 
 ## Class Methods
 
-#@until 2.5.0
-### def start  -> nil
-
-カバレッジの測定を開始します。既に実行されていた場合には何も起こりません。
-
-#@else
 ### def start(option = {})  -> nil
 カバレッジの測定を開始します。既に実行されていた場合には何も起こりません。
 ただし、カバレッジ計測中に測定対象を変更しようとした場合は、RuntimeError となります。
@@ -224,28 +212,14 @@ bool(0)
 pp Coverage.result  #=> {"bool.rb"=>{:methods=>{[Object, :bool, 1, 0, 7, 3]=>1}}}
 ```
 
-#@end
 
-#@since 2.6.0
 ### def result(stop: true, clear: true)  -> Hash
-#@else
-### def result  -> Hash
-#@end
 
-#@since 2.5.0
 対象ファイル名をキー、測定結果を値したハッシュを返します。
 測定結果の詳細は、[lib:coverage] ライブラリ を参照してください。
-#@else
-測定結果をファイル名をキー、各行の実行回数を配列にした値のハッシュを返
-します。空行やコメントのみの行などの測定結果は nil になります。
-#@end
 
-#@since 2.6.0
 - **param** `stop` -- true であれば、カバレッジの測定を終了します。
 - **param** `clear` -- true であれば、測定記録をクリアします。
-#@else
-resultメソッドが実行された後はカバレッジの測定を行いません。
-#@end
 
 - **return** -- 測定結果を表すハッシュ
 
@@ -271,7 +245,6 @@ bool(0)
 p Coverage.result  # coverage measurement is not enabled (RuntimeError)
 ```
 
-#@since 2.6.0
 Ruby 2.6 以降では、オプションを指定できます。
 Coverage.result(clear: true, stop: false) と指定することで、続けて新しく実行された行だけを記録できます。
 
@@ -288,22 +261,14 @@ p Coverage.result(clear: true, stop: false)  #=> {"bool.rb"=>{:oneshot_lines=>[5
 
 上記のコード例で、bool(0) で実行された2行目の条件式は、測定記録がクリアされたあと bool(nil) で実行されても新しく記録されません。
 測定記録をクリアしても、記録を開始してから実行されたことまでリセットされているわけではないことに注意して下さい。
-#@end
 
 - **SEE** [m:Coverage.peek_result]
 ### def peek_result -> Hash
 
-#@since 2.5.0
 測定を止めることなく、測定中のその時の結果をハッシュで返します。
 測定結果の詳細は、[lib:coverage] ライブラリ を参照してください。
-#@else
-測定途中の結果をファイル名をキー、各行の実行回数を配列にした値のハッシュで返
-します。空行やコメントのみの行などの測定結果は nil になります。
-#@end
 
-#@since 2.6.0
 これは、Coverage.result(stop: false, clear: false) と同じです。
-#@end
 
 - **return** -- 測定途中結果を表すハッシュ
 
@@ -337,7 +302,6 @@ p Coverage.peek_result  #=> {"bool.rb"=>[1, 2, 1, nil, 1, nil, nil]}
 
 - **SEE** [m:Coverage.result]
 
-#@since 2.5.0
 ### def running? -> bool
 
 カバレッジ測定中かどうかを返します。カバレッジの測定中とは、Coverage.start の
@@ -353,9 +317,7 @@ p Coverage.running?    #=> true
 p Coverage.result      #=> {}
 p Coverage.running?    #=> false
 ```
-#@end
 
-#@since 2.6.0
 ### def line_stub(file)  -> Array
 
 行カバレッジの配列のスタブを返します。
@@ -385,4 +347,3 @@ p Coverage.line_stub("foo.rb")  #=> [0, 0, 0, nil, nil, 0, 0, nil, 0, nil]
 この例において、空行, else, end の行は測定対象外であるため、nil となっています。
 
 - **param** `file` -- ファイル名を表す文字列
-#@end

@@ -8,7 +8,6 @@ library: _builtin
 Ruby 1.8 以前では同様の場面で [c:IndexError] が発生していました。
 互換性のため、[c:KeyError] は [c:IndexError] のサブクラスになっています。
 
-#@since 2.6.0
 ## Class Methods
 
 ### def new(error_message = "")                   -> KeyError
@@ -30,8 +29,6 @@ p err.message  # => "Message"
 p err.receiver # => {:foo=>1}
 p err.key      # => :bar
 ```
-#@end
-#@since 2.5.0
 ## Instance Methods
 
 ### def receiver -> object
@@ -65,4 +62,3 @@ rescue KeyError => e
   p 'gumby'*20 == e.key  # => true
 end
 ```
-#@end

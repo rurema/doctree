@@ -1,7 +1,6 @@
 ---
 type: library
 require:
-#@since 1.9.2
   - rdoc/code_object
   - rdoc/context
   - rdoc/top_level
@@ -18,9 +17,6 @@ require:
   - rdoc/constant
   - rdoc/require
   - rdoc/include
-#@else
-  - rdoc/tokenstream
-#@end
 ---
 Ruby のソースコード中にあるクラス、モジュール、メソッドなどの構成要素を
 表現するためのサブライブラリです。

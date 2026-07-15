@@ -125,10 +125,8 @@ GC::Profiler.report
 
 - **SEE** [m:GC::Profiler.result]
 
-#@since 1.9.2
 ### def total_time -> Float
 GC のプロファイル情報から GC の総計時間を計算し、msec 単位で返します。
-#@end
 
 ```ruby title="例"
 GC::Profiler.enable
@@ -136,7 +134,6 @@ GC.start
 p GC::Profiler.total_time # => 0.0011530000000000012
 ```
 
-#@since 2.0.0
 ### def raw_data -> [Hash, ...] | nil
 
 GC のプロファイル情報を GC の発生ごとに [c:Hash] の配列
@@ -201,4 +198,3 @@ GC::Profiler.raw_data
  - :HAVE_FINALIZE
 
 - **SEE** [m:GC::Profiler.report], [m:GC::Profiler.result]
-#@end

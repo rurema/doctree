@@ -9,11 +9,7 @@ library: _builtin
 
 ### module_function def _id2ref(id)    -> object
 
-#@since 1.9.3
 オブジェクト ID([m:BasicObject#__id__])からオブジェクトを得ます。
-#@else
-オブジェクト ID([m:Object#__id__])からオブジェクトを得ます。
-#@end
 
 - **param** `id` -- 取得したいオブジェクトの ID を整数で指定します。
 
@@ -32,12 +28,8 @@ obj が解放されるときに実行されるファイナライザ proc を
 はなく追加登録されます。固定値 0 と proc を配列にして返します。
 
 ブロックを指定した場合は、そのブロックがファイナライザになります。
-#@since 1.9.3
 obj の回収時にブロックは obj の ID ([m:BasicObject#__id__])を引数とし
 て実行されます。
-#@else
-obj の回収時にブロックは obj の ID ([m:Object#__id__])を引数として実行されます。
-#@end
 しかし、後述の問題があるのでブロックでファイナライザを登録するのは難しいでしょう。
 
 - **param** `obj` -- ファイナライザを登録したいオブジェクトを指定します。
@@ -109,13 +101,8 @@ GC.start
 
 ### module_function def each_object        {|object| ...}    -> Integer
 ### module_function def each_object(klass) {|object| ...}    -> Integer
-#@since 1.9.1
 ### module_function def each_object                          -> Enumerator
 ### module_function def each_object(klass)                   -> Enumerator
-#@else
-### module_function def each_object                          -> Enumerable::Enumerator
-### module_function def each_object(klass)                   -> Enumerable::Enumerator
-#@end
 
 指定された klass と [m:Object#kind_of?] の関係にある全ての
 オブジェクトに対して繰り返します。引数が省略された時には全てのオブ
@@ -123,11 +110,7 @@ GC.start
 繰り返した数を返します。
 
 ブロックが与えられなかった場合は、
-#@since 1.9.1
 [c:Enumerator] オブジェクトを返します。
-#@else
-[c:Enumerable::Enumerator] オブジェクトを返します。
-#@end
 
 次のクラスのオブジェクトについては繰り返しません
 
@@ -175,16 +158,11 @@ puts "Total count: #{count}"
 ```
 
 
-#@since 2.1.0
 ### module_function def garbage_collect(full_mark: true, immediate_sweep: true) -> nil
-#@else
-### module_function def garbage_collect -> nil
-#@end
 
 どこからも参照されなくなったオブジェクトを回収します。
 [m:GC.start] と同じです。
 
-#@since 2.1.0
 - **param** `full_mark` -- マイナー GC を動作させる場合は false を、そうでない場
                  合は true を指定します。
 
@@ -194,7 +172,6 @@ puts "Total count: #{count}"
 注意: これらのキーワード引数は Ruby の実装やバージョンによって異なりま
 す。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポー
 トしていない場合はキーワード引数を指定しても無視される可能性があります。
-#@end
 
 #@#noexample 参照先の GC.start と同様の動作のため
 
@@ -236,7 +213,6 @@ GC.start
 
 - **SEE** [m:ObjectSpace?.define_finalizer]
 
-#@since 1.9.1
 ### module_function def count_objects(result_hash = {}) -> Hash
 
 オブジェクトを種類ごとにカウントした結果を [c:Hash] として返します。
@@ -252,4 +228,3 @@ GC.start
 p ObjectSpace.count_objects # => {:TOTAL=>10000, :FREE=>3011, :T_OBJECT=>6, :T_CLASS=>404, ...}
 ```
 
-#@end

@@ -224,29 +224,21 @@ p 3.14.to_f # => 3.14
 ```
 
 ### def to_i -> Integer
-#@since 2.4.0
 ### def truncate(ndigits = 0) -> Integer | Float
-#@else
-### def truncate -> Integer
-#@end
 
 小数点以下を切り捨てて値を整数に変換します。
 
-#@since 2.4.0
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
                正の整数を指定した場合、[c:Float] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[c:Integer] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
-#@end
 
 ```ruby title="例"
 p 2.8.truncate         # => 2
 p (-2.8).truncate      # => -2
-#@since 2.4.0
 p 1.234567.truncate(2) # => 1.23
 p 34567.89.truncate(-2)  # => 34500
-#@end
 ```
 
 - **SEE** [m:Numeric#round], [m:Numeric#ceil], [m:Numeric#floor]
@@ -274,28 +266,21 @@ p 34.56.abs    # => 34.56
 p -34.56.abs   # => 34.56
 ```
 
-#@since 2.4.0
 ### def ceil(ndigits = 0) -> Integer | Float
-#@else
-### def ceil   -> Integer
-#@end
 
 自身と等しいかより大きな整数のうち最小のものを返します。
 
-#@since 2.4.0
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
                正の整数を指定した場合、[c:Float] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[c:Integer] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
-#@end
 
 ```ruby title="例"
 p 1.2.ceil    # => 2
 p 2.0.ceil    # => 2
 p (-1.2).ceil # => -1
 p (-2.0).ceil # => -2
-#@since 2.4.0
 
 p 1.234567.ceil(2) # => 1.24
 p 1.234567.ceil(3) # => 1.235
@@ -311,7 +296,6 @@ p 34567.89.ceil(0) # => 34568
 p 34567.89.ceil(1) # => 34567.9
 p 34567.89.ceil(2) # => 34567.89
 p 34567.89.ceil(3) # => 34567.89
-#@end
 ```
 
 - **SEE** [m:Float#floor], [m:Float#round], [m:Float#truncate]
@@ -344,28 +328,21 @@ p (-11).divmod(3.5)  # => [-4, 3.0]
 
 - **SEE** [m:Numeric#div], [m:Numeric#modulo]
 
-#@since 2.4.0
 ### def floor(ndigits = 0) -> Integer | Float
-#@else
-### def floor  -> Integer
-#@end
 
 自身と等しいかより小さな整数のうち最大のものを返します。
 
-#@since 2.4.0
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
                正の整数を指定した場合、[c:Float] を返します。
                小数点以下を、最大 n 桁にします。
                負の整数を指定した場合、[c:Integer] を返します。
                小数点位置から左に少なくとも n 個の 0 が並びます。
-#@end
 
 ```ruby title="例"
 p 1.2.floor    # => 1
 p 2.0.floor    # => 2
 p (-1.2).floor # => -2
 p (-2.0).floor # => -2
-#@since 2.4.0
 
 p 1.234567.floor(2) # => 1.23
 p 1.234567.floor(3) # => 1.234
@@ -381,7 +358,6 @@ p 34567.89.floor(0) # => 34567
 p 34567.89.floor(1) # => 34567.8
 p 34567.89.floor(2) # => 34567.89
 p 34567.89.floor(3) # => 34567.89
-#@end
 ```
 
 - **SEE** [m:Numeric#ceil], [m:Numeric#round], [m:Float#truncate]
@@ -399,9 +375,7 @@ p 1.0.eql?(1.0) # => true
 ```
 
 ### def round(ndigits = 0)  -> Integer | Float
-#@since 2.4.0
 ### def round(ndigits = 0, half: :up)  -> Integer | Float
-#@end
 
 自身ともっとも近い整数もしくは実数を返します。
 
@@ -412,14 +386,12 @@ p 1.0.eql?(1.0) # => true
        ndigitsが0ならば、小数点以下を四捨五入し、整数を返します。
        ndigitsが0より大きいならば、小数点以下の指定された位で四捨五入されます。
        ndigitsが0より小さいならば、小数点以上の指定された位で四捨五入されます。
-#@since 2.4.0
 - **param** `half` -- ちょうど半分の値の丸め方を指定します。
        サポートされている値は以下の通りです。
 
  - :up or nil: 0から遠い方に丸められます。
  - :even: もっとも近い偶数に丸められます。
  - :down: 0に近い方に丸められます。
-#@end
 
 - **return** -- 指定された引数に応じて、整数もしくは実数を返します。
        ndigitsが0ならば、整数を返します。
@@ -446,7 +418,6 @@ p t.round(-1)  # => 93650
 p t.round(-2)  # => 93600
 p t.round(-3)  # => 94000
 p t.round(-100)  # => 0
-#@since 2.4.0
 
 p 2.5.round(half: :up) # => 3
 p 2.5.round(half: :even) # => 2
@@ -454,7 +425,6 @@ p 2.5.round(half: :down) # => 2
 p 3.5.round(half: :up) # => 4
 p 3.5.round(half: :even) # => 4
 p 3.5.round(half: :down) # => 3
-#@end
 ```
 
 - **SEE** [m:Float#ceil], [m:Float#floor], [m:Float#truncate]
@@ -469,7 +439,6 @@ p 0.zero?             # => true
 p 0.0.zero?           # => true
 ```
 
-#@since 2.3.0
 ### def positive? -> bool
 
 self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
@@ -493,12 +462,9 @@ p 0.1.negative?  # => false
 ```
 
 - **SEE** [m:Float#positive?]
-#@end
 
 ### def to_s -> String
-#@since 2.0.0
 ### def inspect -> String
-#@end
 
 自身を人間が読みやすい形の文字列表現にして返します。
 
@@ -580,7 +546,6 @@ p 1.333.rationalize      # => (1333/1000)
 p 1.333.rationalize(0.01)  # => (4/3)
 ```
 
-#@since 2.2.0
 ### def next_float -> Float
 
 浮動小数点数で表現可能な self の次の値を返します。
@@ -664,7 +629,6 @@ f = 0.01; 20.times { printf "%-20a %s\n", f, f.to_s; f = f.prev_float }
 ```
 
 - **SEE** [m:Float#next_float]
-#@end
 
 ## Constants
 

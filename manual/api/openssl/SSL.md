@@ -84,7 +84,6 @@ TLS v1 の使用を禁止するフラグです。
 
 [m:OpenSSL::SSL::SSLContext#options=] で利用します。
 
-#@since 2.0.0
 ### const OP_NO_TLSv1_1 -> Integer
 TLS v1.1 の使用を禁止するフラグです。
 
@@ -95,7 +94,6 @@ TLS v1.2 の使用を禁止するフラグです。
 
 [m:OpenSSL::SSL::SSLContext#options=] で利用します。
 
-#@end
 
 ### const OP_NO_TICKET -> Integer
 RFC4507bis チケットによる stateless session resumption を

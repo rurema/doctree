@@ -1,13 +1,8 @@
 ---
 library:
   - rdoc/code_object
-#@until 1.9.2
-  - rdoc/code_objects
-#@end
 include:
-#@since 1.9.2
   - RDoc::Text
-#@end
 ---
 # class RDoc::CodeObject
 
@@ -143,7 +138,6 @@ RDoc のコードツリーを表現するクラスの基本クラスです。
 
 - **param** `val` -- [c:RDoc::Context::Section] オブジェクトを指定します。
 
-#@since 1.9.1
 ### def parent_file_name -> String
 
 self.parent のファイル名を返します。
@@ -155,8 +149,6 @@ self.parent のファイル名を返します。
 self.parent の名前を返します。
 
 - **SEE** [m:RDoc::CodeObject#parent]
-#@end
-#@since 1.9.2
 ### def documented? -> bool
 
 出力すべきドキュメントがあるかどうかを返します。
@@ -164,4 +156,3 @@ self.parent の名前を返します。
 ### def metadata -> Hash
 
 自身が持つメタデータ(他から任意の値を設定してもよい)を返します。
-#@end

@@ -256,11 +256,7 @@ DNSについては以下を参照してください。
 
 ## Class Methods
 
-#@if (version <= "1.8.1")
-### def new(resolv_conf = '/etc/resolv.conf') -> Resolv::DNS
-#@else
 ### def new(resolv_conf = nil) -> Resolv::DNS
-#@end
 
 新しい DNS リゾルバを生成します。
 
@@ -285,11 +281,7 @@ Resolv::DNS.new(:nameserver_port => [['8.8.8.8', 53], ['8.8.4.4', 53]],
                 :ndots => 1)
 ```
 
-#@if (version <= "1.8.1")
-- **param** `resolv_conf` -- DNSの設定ファイル名を文字列で与えます
-#@else
 - **param** `resolv_conf` -- DNSの設定を与えます。
-#@end
 
 ### def open(*args) -> Resolv::DNS
 ### def open(*args){|dns| ...} -> object
@@ -452,7 +444,6 @@ DNSリゾルバを閉じます。
 
 #@# [[m:Resolv::DNS.new]] で与えた設定でインスタンスを実際に初期化します。
 
-#@since 2.0.0
 ### def timeouts=(values)
 
 DNSリゾルバのタイムアウト時間を設定します。
@@ -467,7 +458,6 @@ dns.timeouts = 3
               ト値
               ([ 5, second = 5 * 2 / nameserver_count, 2 * second, 4 * second ])
               を使用します。
-#@end
 
 ## Constants
 

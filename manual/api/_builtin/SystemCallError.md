@@ -125,14 +125,7 @@ Rubyのライブラリ内部でシステムコールや一部のC言語関数が
 例えば、[m:File.open] の内部でシステムコール [man:open(2)] がエラーコード ENOENT を返すと、Rubyは例外 Errno::ENOENT を発生させます。
 
 Ruby は処理系がコンパイルされるときに、デフォルトで下記リストのような Errno::EXXX クラスを定義しようとします。
-#@since 1.9.1
 動作環境に EXXX というエラーコードが存在しない場合、Rubyはその Errno::EXXX を Errno::NOERROR の別名として定義します。
-#@else
-Errno::EXXX クラスは、対応するエラー名が動作環境に存在する場合のみ定義されます。
-このため、一部の環境にしか存在しないエラーコードについて rescue 節などで Errno::EXXX を利用すると
-意図せずプログラムの可搬性を損なう場合があります。
-それを避けるには、エラーコードの種類を特定する必要がある場合を除いては [c:SystemCallError] で rescue するようにしてください。
-#@end
 
 
 また、以下の一覧にはないシステムエラーが発生した場合は、
@@ -296,11 +289,9 @@ Microsoft Windows システムにおいては <http://msdn2.microsoft.com/ja-jp/
   - EPROGUNAVAIL
   - ERPCMISMATCH
   - EIPSEC
-#@since 2.2.0
   - EHWPOISON
   - ECAPMODE
   - ENOTCAPABLE
-#@end
 
 ## Class Methods
 
@@ -789,7 +780,6 @@ p Errno::EWOULDBLOCK::Errno       # => 11
 
 システムコールのエラーコードを表す例外クラスです。詳細は [c:Errno::EXXX] を参照してください。
 
-#@since 2.2.0
 # class Errno::EHWPOISON < SystemCallError
 
 システムコールのエラーコードを表す例外クラスです。詳細は [c:Errno::EXXX] を参照してください。
@@ -802,4 +792,3 @@ p Errno::EWOULDBLOCK::Errno       # => 11
 
 システムコールのエラーコードを表す例外クラスです。詳細は [c:Errno::EXXX] を参照してください。
 
-#@end

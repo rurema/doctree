@@ -112,17 +112,13 @@ trace.disable
 
   スレッドの終了。
 
-#@since 2.3.0
 - **`:fiber_switch`**:
 
   ファイバーの切り替え。
-#@end
 
-#@since 2.6.0
 - **`:script_compiled`**:
 
   スクリプトのコンパイル
-#@end
 
 指定イベントに関連しない情報を取得するメソッドを実行した場合には
 [c:RuntimeError] が発生します。
@@ -146,11 +142,7 @@ $tp.lineno # => access from outside (RuntimeError)
 
 他のスレッドから参照する事も禁じられています。
 
-#@since 2.5.0
 - **raise** `ArgumentError` -- ブロックを指定しなかった場合に発生します。
-#@else
-- **raise** `ThreadError` -- ブロックを指定しなかった場合に発生します。
-#@end
 
 ### def trace(*events) {|obj| ... } -> TracePoint
 
@@ -170,7 +162,6 @@ p trace.enabled? # => true
 
 - **raise** `ThreadError` -- ブロックを指定しなかった場合に発生します。
 
-#@since 2.2.0
 ### def stat -> object
 TracePoint の内部情報を返します。
 
@@ -178,7 +169,6 @@ TracePoint の内部情報を返します。
 将来変更される可能性があります。
 
 このメソッドは TracePoint 自身のデバッグ用です。
-#@end
 ## Instance Methods
 
 ### def enable         -> bool
@@ -512,7 +502,6 @@ rescue
 end
 ```
 
-#@since 2.6.0
 ### def parameters -> [object]
 
 現在のフックが属するメソッドまたはブロックのパラメータ定義を返します。
@@ -565,4 +554,3 @@ end
 - **raise** `RuntimeError` -- :script_compiled イベントのための
                     イベントフックの外側で実行した場合に発生します。
 
-#@end
