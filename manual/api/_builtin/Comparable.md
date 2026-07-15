@@ -113,27 +113,19 @@ p 'cat'.between?('ant', 'dog') # => true
 p 'gnu'.between?('ant', 'dog') # => false
 ```
 
-#@since 2.4.0
 ### def clamp(min, max)  -> object
-#@since 2.7.0
 ### def clamp(range)     -> object
-#@end
 
 self を範囲内に収めます。
 
-#@since 2.7.0
 min と max の2つの引数が渡された場合は次のようになります。
-#@end
 self <=> min が負数を返したときは min を、
 self <=> max が正数を返したときは max を、
 それ以外の場合は self を返します。
 
-#@since 3.0
 min が nil の場合、min は self よりも小さい値として扱われます。
 max が nil の場合、max は self よりも大きい値として扱われます。
-#@end
 
-#@since 2.7.0
 range が1つ渡された場合は次のようになります。
 self <=> range.begin が負数を返したときは range.begin を、
 self <=> range.end が正数を返したときは range.end を、
@@ -141,18 +133,15 @@ self <=> range.end が正数を返したときは range.end を、
 
 range.begin が nil の場合、range.begin は self よりも小さい値として扱われます。
 range.end が nil の場合、range.end は self よりも大きい値として扱われます。
-#@end
 
 - **param** `min` -- 範囲の下端を表すオブジェクトを指定します。
 
 - **param** `max` -- 範囲の上端を表すオブジェクトを指定します。
 
-#@since 2.7.0
 - **param** `range` -- 範囲を表す Range オブジェクトを指定します。
 
 - **raise** `ArgumentError` -- rangeが終端を含まない範囲オブジェクトであり、
                      終端が nil でないときに発生します。
-#@end
 
 ```ruby title="例"
 p 12.clamp(0, 100)       #=> 12
@@ -163,15 +152,12 @@ p 'd'.clamp('a', 'f')    #=> 'd'
 p 'z'.clamp('a', 'f')    #=> 'f'
 ```
 
-#@since 3.0
 ```ruby title="nil を渡す例"
 p 5.clamp(0, nil)        #=> 5
 p 5.clamp(nil, 0)        #=> 0
 p 5.clamp(nil, nil)      #=> 5
 ```
-#@end
 
-#@since 2.7.0
 ```ruby title="range を渡す例"
 p 12.clamp(0..100)   #=> 12
 p 523.clamp(0..100)  #=> 100
@@ -187,5 +173,3 @@ p 'z'.clamp('a'..'f')  #=> 'f'
 p -20.clamp(0..) #=> 0
 p 523.clamp(..100) #=> 100
 ```
-#@end
-#@end

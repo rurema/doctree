@@ -192,7 +192,6 @@ puts RubyVM::InstructionSequence.disasm(method(:hello))
 
 - **SEE** [m:RubyVM::InstructionSequence#disasm]
 
-#@since 2.0.0
 ### def of(body) -> RubyVM::InstructionSequence
 
 引数 body で指定した [c:Proc]、[c:Method] オブジェクトを元に
@@ -235,8 +234,6 @@ $a_global_proc = proc { str = 'a' + 'b' }
 > RubyVM::InstructionSequence.of($a_global_proc)
 > # => #<RubyVM::InstructionSequence:0x007fb73d7caf78>
 `````
-#@end
-#@since 2.3.0
 ### def load_from_binary(binary) -> RubyVM::InstructionSequence
 
 [m:RubyVM::InstructionSequence#to_binary]により作られたバイナリフォーマットの文字列からiseqのオブジェクトをロードします。
@@ -264,7 +261,6 @@ p RubyVM::InstructionSequence.load_from_binary_extra_data(binary) # => extra_dat
 ```
 
 - **SEE** [m:RubyVM::InstructionSequence#to_binary]
-#@end
 
 ## Instance Methods
 
@@ -277,10 +273,8 @@ iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
 p iseq.inspect # => "<RubyVM::InstructionSequence:<compiled>@<compiled>>"
 ```
 
-#@since 2.0.0
 - **SEE** [m:RubyVM::InstructionSequence#label],
      [m:RubyVM::InstructionSequence#path]
-#@end
 
 ### def disasm      -> String
 ### def disassemble -> String
@@ -422,7 +416,6 @@ self の命令シーケンスを評価してその結果を返します。
 RubyVM::InstructionSequence.compile("1 + 2").eval # => 3
 ```````
 
-#@since 2.0.0
 ### def path -> String
 
 self が表す命令シーケンスの相対パスを返します。
@@ -591,8 +584,6 @@ end
 RubyVM::InstructionSequence.of(method(:foo)).first_lineno
 # => 2
 `````
-#@end
-#@since 2.3.0
 ### def to_binary(extra_data = nil) -> String
 
 バイナリフォーマットでシリアライズされたiseqのデータを文字列として返します。
@@ -640,4 +631,3 @@ iseq.to_binary("extra_data")
 
 - **SEE** [m:RubyVM::InstructionSequence.load_from_binary]
 - **SEE** [m:RubyVM::InstructionSequence.load_from_binary_extra_data]
-#@end

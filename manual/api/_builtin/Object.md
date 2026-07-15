@@ -588,29 +588,19 @@ self を引数としてブロックを評価し、self を返します。
   .map {|x| x*x }        .tap {|x| puts "squares:  #{x}" }
 ```
 
-#@since 2.5.0
 - **SEE** [m:Object#yield_self]
 
 ### def yield_self {|x| ... } -> object
 ### def yield_self            -> Enumerator
-#@since 2.6.0
 ### def then {|x| ... } -> object
 ### def then            -> Enumerator
-#@end
 
 self を引数としてブロックを評価し、ブロックの結果を返します。
 
-#@since 2.6.0
 ```ruby title="例"
 p 3.next.then {|x| x**x }.to_s           # => "256"
 p "my string".yield_self {|s| s.upcase } # => "MY STRING"
 ```
-#@else
-```ruby title="例"
-p "my string".yield_self {|s| s.upcase } # => "MY STRING"
-p 3.next.yield_self {|x| x**x }.to_s     # => "256"
-```
-#@end
 
 値をメソッドチェインのパイプラインに次々と渡すのは良い使い方です。
 
@@ -634,7 +624,6 @@ p 2.yield_self.detect(&:odd?)          # => nil
 ```
 
 - **SEE** [m:Object#tap]
-#@end
 
 ### def object_id -> Integer
 
@@ -765,15 +754,8 @@ puts check("<Ruby's world>") #=> hit! <Ruby's world>
 
 このメソッドは Ruby 2.6 から deprecated です。
 
-#@since 2.6.0
 意図せずに Array などに対して呼ばれた時にバグの原因になっていたため、
 代わりに [m:NilClass#=~] が定義されています。
-#@else
-この定義により、=~ が再定義されたオブジェクトでは正常にマッチを行い、
-それ以外のものは nil を返すようになります。
-
-#@#obj が文字列なのを期待していたが nil だった場合などにエラーを発生させずに正常に false を返すことができます。
-#@end
 
 - **param** `other` -- 任意のオブジェクトです。結果に影響しません。
 
@@ -1218,11 +1200,7 @@ obj.freeze
 p(obj.equal?(obj))          #=> true
 p(obj == obj)               #=> true
 #@until 3.2
-#@since 2.7.0
 p(obj.tainted?)             #=> false
-#@else
-p(obj.tainted?)             #=> true
-#@end
 #@end
 p(obj.frozen?)              #=> true
 p(obj.respond_to?(:fuga))   #=> true
@@ -1232,11 +1210,7 @@ obj_c = obj.clone
 p(obj.equal?(obj_c))        #=> false
 p(obj == obj_c)             #=> true
 #@until 3.2
-#@since 2.7.0
 p(obj_c.tainted?)           #=> false
-#@else
-p(obj_c.tainted?)           #=> true
-#@end
 #@end
 p(obj_c.frozen?)            #=> true
 p(obj_c.respond_to?(:fuga)) #=> true
@@ -1246,11 +1220,7 @@ obj_d = obj.dup
 p(obj.equal?(obj_d))        #=> false
 p(obj == obj_d)             #=> true
 #@until 3.2
-#@since 2.7.0
 p(obj_d.tainted?)           #=> false
-#@else
-p(obj_d.tainted?)           #=> true
-#@end
 #@end
 p(obj_d.frozen?)            #=> false
 p(obj_d.respond_to?(:fuga)) #=> false
@@ -1292,11 +1262,7 @@ p obj_m #=> ["aPLUS", "bPLUS", "c"]
 オブジェクトを凍結（内容の変更を禁止）します。
 
 凍結されたオブジェクトの変更は
-#@since 2.5.0
 例外 [c:FrozenError] を発生させます。
-#@else
-例外 [c:RuntimeError] を発生させます。
-#@end
 いったん凍結されたオブジェクトを元に戻す方法はありません。
 
 凍結されるのはオブジェクトであり、変数ではありません。代入などで変数の指す
@@ -1312,11 +1278,7 @@ a1 = "bar"
 p a1 #=> "bar"
 
 a2 = "foo".freeze
-#@since 2.5.0
 a2.replace("bar") # can't modify frozen String (FrozenError)
-#@else
-a2.replace("bar") # can't modify frozen String (RuntimeError)
-#@end
 ```
 
 凍結を解除することはできませんが、[m:Object#dup] を使えばほぼ同じ内容の凍結されていない
@@ -1327,11 +1289,7 @@ a = [1].freeze
 p a.frozen?     #=> true
 
 a[0] = "foo"
-#@since 2.5.0
 p a             # can't modify frozen Array (FrozenError)
-#@else
-p a             # can't modify frozen Array (RuntimeError)
-#@end
 
 b = a.dup
 p b             #=> [1]
@@ -1622,59 +1580,17 @@ p Kernel.class #=> Module
 #@until 3.2
 ### def taint -> self
 
-#@since 2.7.0
 何もせずに self を返します。
-#@end
 このメソッドは Ruby 2.7 から deprecated で、Ruby 3.2 で削除予定です。
 
-#@until 2.7.0
-オブジェクトの「汚染マーク」をセットします。
-
-環境変数（[c:ENV]で得られる文字列）など一部のオブジェクトは最初から汚染されています。
-オブジェクトの汚染に関しては[d:spec/safelevel]を参照してください。
-
-```ruby
-$SAFE = 1
-
-some = "puts '@&%&(#!'"
-p some.tainted? #=> false
-p eval(some) #=> @&%&(#!
-
-some.taint
-p some.tainted? #=> true
-eval(some) # Insecure operation - eval (SecurityError)
-
-some.untaint
-p some.tainted? #=> false
-p eval(some) #=> @&%&(#!
-
-p ENV['OS'].tainted? #=> true
-```
-#@end
 
 - **SEE** [m:Object#tainted?],[m:Object#untaint],[m:Object#freeze]
 
-#@since 2.7.0
 ### def tainted? -> false
-#@else
-### def tainted? -> bool
-#@end
 
-#@since 2.7.0
 常に false を返します。
 全てのオブジェクトは常に untainted 扱いになりました。
-#@end
 
-#@until 2.7.0
-オブジェクトの「汚染マーク」がセットされている時真を返します。
-
-オブジェクトの汚染に関しては[d:spec/safelevel]を参照してください。
-
-```ruby
-p String.new.tainted? #=> false
-p ENV['OS'].tainted? #=> true
-```
-#@end
 
 このメソッドは Ruby 2.7から deprecated で、Ruby 3.2 で削除予定です。
 
@@ -1682,23 +1598,7 @@ p ENV['OS'].tainted? #=> true
 
 ### def untaint -> self
 
-#@since 2.7.0
 何もせずに self を返します。
-#@else
-オブジェクトの「汚染マーク」を取り除きます。
-
-汚染マークを取り除くことによる危険性はプログラマが責任を負う必要が
-あります。
-
-オブジェクトの汚染に関しては[d:spec/safelevel]を参照してください。
-
-
-```console
-ruby -e 'p ARGV[0].tainted?;t=+ARGV[0];t.untaint;p t.tainted?' hoge
-# => true
-# false
-```
-#@end
 
 このメソッドは Ruby 2.7 から deprecated で、Ruby 3.2 で削除予定です。
 
@@ -1714,11 +1614,7 @@ ruby -e 'p ARGV[0].tainted?;t=+ARGV[0];t.untaint;p t.tainted?' hoge
 
 - **SEE** [m:Object#untrusted?],[m:Object#untrust]
 
-#@since 2.7.0
 ### def untrusted? -> false
-#@else
-### def untrusted? -> bool
-#@end
 
 このメソッドは Ruby 2.1 から deprecated で、Ruby 3.2 で削除予定です。
 [m:Object#tainted?] と同じ動作をします。

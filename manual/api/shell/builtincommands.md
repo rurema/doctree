@@ -326,83 +326,6 @@
 
 - **SEE** [m:FileTest?.zero?]
 
-#@until 1.9.1
-### def syscopy(from, to) -> bool
-
-[c:File] クラスにある同名のクラスメソッドと同じです.
-
-- **param** `from` -- ファイルの名前を文字列で与えます。
-
-- **param** `to` -- 新しいファイル名を文字列で与えます。
-
-- **SEE** [m:File.syscopy]
-
-### def copy(from, to) -> bool
-### def cp(from, to) -> bool
-
-[c:File] クラスにある同名のクラスメソッドと同じです.
-
-- **param** `from` -- ファイルの名前を文字列で与えます。
-
-- **param** `to` -- 新しいファイル名を文字列で与えます。
-
-- **SEE** [m:File.copy]
-
-### def move(from, to) -> bool
-### def mv(from, to) -> bool
-
-[c:File] クラスにある同名のクラスメソッドと同じです.
-
-- **param** `from` -- ファイルの名前を文字列で与えます。
-
-- **param** `to` -- 新しいファイル名を文字列で与えます。
-
-- **SEE** [m:File.move]
-
-### def compare(file1, file2) -> bool
-### def cmp(file1, file2) -> bool
-
-[c:File] クラスにある同名のクラスメソッドと同じです.
-
-- **param** `file1` -- ファイルの名前を文字列で与えます。
-
-- **param** `file2` -- 新しいファイル名を文字列で与えます。
-
-- **SEE** [m:File.compare]
-
-### def safe_unlink(*filenames) -> Array
-### def rm_f(*filenames) -> Array
-
-[c:File] クラスにある同名のクラスメソッドと同じです.
-
-- **param** `filenames` -- 削除するファイルを指定します。
-
-- **SEE** [m:File.safe_unlink]
-
-### def makedirs(*dirs) -> Array
-### def mkpath(*dirs) -> Array
-
-[c:File] クラスにある同名のクラスメソッドと同じです.
-
-- **param** `dirs` -- 作成するディレクトリを指定します。
-
-- **SEE** [m:File.makedirs]
-
-### def install(from, to, mode = nil, verbose = false) -> () 
-
-[c:File] クラスにある同名のクラスメソッドと同じです.
-
-- **param** `from` -- コピー元のファイル。
-
-- **param** `to` -- コピー先のファイル。
-
-- **param** `mode` -- ファイルのアクセスモード。8進数で指定します。
-
-- **param** `verbose` -- 真を指定すると詳細を表示します。
-
-- **SEE** [m:File.install]
-
-#@end
 
 #@# Shell::CommandProcessor に直接定義されているメソッド
 
@@ -662,7 +585,6 @@ sh.transact {
 #@todo
 
 
-#@since 1.9.1
 
 ### def world_readable?
 #@todo
@@ -670,4 +592,3 @@ sh.transact {
 ### def world_writable?
 #@todo
 
-#@end

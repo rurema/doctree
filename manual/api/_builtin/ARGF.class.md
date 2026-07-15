@@ -169,13 +169,6 @@ ARGF.close
 ARGF.filename  # => "bar"
 ARGF.close
 `````
-#@until 2.3.0
-`````
-ARGF.close     # => closed stream (IOError)
-`````
-
-- **raise** `IOError` -- 処理対象のファイルが既にクローズされていた場合に発生します。
-#@end
 
 - **SEE** [m:ARGF.class#closed?]
 
@@ -258,14 +251,6 @@ p ARGF.each_byte.to_a  # => [35, 32, ... 95, 10]
 
 - **SEE** [m:IO#each_byte]
 
-#@until 3.0
-### def bytes { |byte| ... } -> self
-### def bytes                -> Enumerator
-
-このメソッドは obsolete です。
-代わりに [m:ARGF.class#each_byte] を使用してください。
-使用すると警告メッセージが表示されます。
-#@end
 ### def each_char { |c| ... } -> self
 ### def each_char             -> Enumerator
 
@@ -305,14 +290,6 @@ ARGF.each_char{|e|p e}
 
 - **SEE** [m:IO#each_char]
 
-#@until 3.0
-### def chars { |c| ... } -> self
-### def chars             -> Enumerator
-
-このメソッドは obsolete です。
-代わりに [m:ARGF.class#each_char] を使用してください。
-使用すると警告メッセージが表示されます。
-#@end
 ### def each_codepoint { |c| ... }   -> self
 ### def each_codepoint               -> Enumerator
 
@@ -332,15 +309,6 @@ p ARGF.each_codepoint                # => #<Enumerator: ARGF:each_codepoint>
 p ARGF.each_codepoint{|e|print e, ","} # => 108,105,110,101,49,10,108,105,110,101,50,10,
 ```
 
-#@until 3.0
-#@# 2.0 から追加のメソッドだが IO#codepoints と揃えたと思われる。
-### def codepoints { |c| ... }       -> self
-### def codepoints                   -> Enumerator
-
-このメソッドは obsolete です。
-代わりに [m:ARGF.class#each_codepoint] を使用してください。
-使用すると警告メッセージが表示されます。
-#@end
 ### def eof  -> bool
 ### def eof? -> bool
 
@@ -399,15 +367,9 @@ ARGF.getc # => nil
 
 - **SEE** [m:ARGF.class#getbyte], [m:ARGF.class#gets]
 
-#@since 2.4.0
 ### def gets(rs = $/, chomp: false)   -> String | nil
 ### def gets(limit, chomp: false)     -> String | nil
 ### def gets(rs, limit, chomp: false) -> String | nil
-#@else
-### def gets(rs = $/)   -> String | nil
-### def gets(limit)     -> String | nil
-### def gets(rs, limit) -> String | nil
-#@end
 
 ARGFの現在位置から一行ずつ文字列として読み込みます。EOF に到達した時に
 は nil を返します。
@@ -418,9 +380,7 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
 
 - **param** `limit` -- 最大の読み込みバイト数
 
-#@since 2.4.0
 - **param** `chomp` -- true を指定すると各行の末尾から "\n", "\r", または "\r\n" を取り除きます。
-#@end
 
 ```ruby title="例"
 # $ echo "line1\nline2\nline3\n\nline4\n" > test.txt
@@ -598,20 +558,6 @@ p ARGF.to_io  # => #<IO:<STDIN>>
 
 - **SEE** [m:ARGF.class#file], [m:ARGF.class#to_write_io]
 
-#@until 3.0
-### def lines(rs = $/) { |line| ... }   -> self
-### def lines(limit) { |line| ... }     -> self
-### def lines(rs, limit) { |line| ... } -> self
-### def lines(rs = $/)                  -> Enumerator
-### def lines(limit)                    -> Enumerator
-### def lines(rs, limit)                -> Enumerator
-
-このメソッドは obsolete です。
-代わりに [m:ARGF.class#each_line] を使用してください。
-使用すると警告メッセージが表示されます。
-
-- **SEE** [m:$/], [m:ARGF.class#each_line]
-#@end
 ### def getbyte   -> Integer | nil
 
 self から 1 バイト(0..255)を読み込み整数として返します。
@@ -858,11 +804,7 @@ ch を返します。
 
 - **param** `arg` -- 出力するオブジェクトを任意個指定します。
 
-#@since 2.3.0
 ### def read_nonblock(maxlen, outbuf = nil, exception: true) -> String | Symbol | nil
-#@else
-### def read_nonblock(maxlen, outbuf = nil) -> String
-#@end
 #@# TODO: Windows では使えない？
 
 処理中のファイルからノンブロッキングモードで最大 maxlen バイト読み込みます。
@@ -872,13 +814,11 @@ ch を返します。
 
 - **param** `maxlen` -- 読み込む長さの上限を整数で指定します。
 - **param** `outbuf` -- 読み込んだデータを格納する [c:String] オブジェクトを指定します。
-#@since 2.3.0
 - **param** `exception` -- 読み込み時に [c:Errno::EAGAIN]、
                  [c:Errno::EWOULDBLOCK] が発生する代わりに
                  :wait_readable を返すかどうかを指定します。また、false
                  を指定した場合は既に EOF に達していれば
                  [c:EOFError] の代わりに nil を返します。
-#@end
 
 - **SEE** [m:ARGF.class#readpartial]
 

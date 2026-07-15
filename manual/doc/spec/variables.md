@@ -64,11 +64,6 @@ p defined?(v)  # => "local-variable"
 p v            # => nil
 ```
 
-#@until 1.9.1
-またあまり推奨はされませんが ruby インタプリタの起動時に -K オプションを指定
-すれば日本語文字の識別子も使用でき、それはローカル変数とみなされます。
-起動オプションの詳細に関しては[d:spec/rubycmd] を参照してください。
-#@end
 
 ### インスタンス変数 {#instance}
 
@@ -143,57 +138,7 @@ class Baz
 end
 ```
 
-#@until 1.9.0
-親クラスに、子クラスで既に定義されている同名のクラス変数を追加した場合には、
-子クラスのクラス変数は子クラスで保存されます。上書きされません。
 
-```ruby
-class Foo
-end
-
-class Bar < Foo
-  @@v = :bar
-end
-
-class Foo
-  @@v = :foo
-end
-
-class Bar
-  p @@v       #=> :bar
-end
-
-class Foo
-  p @@v       #=> :foo
-end
-```
-
-#@end
-
-#@until 3.0
-親クラスに、子クラスで既に定義されている同名のクラス変数を追加した場合には、
-子クラスのクラス変数が上書きされます。
-
-```ruby
-class Foo
-end
-
-class Bar < Foo
-  @@v = :bar
-end
-
-class Foo
-  @@v = :foo
-end
-
-class Bar
-  p @@v       #=> :foo
-end
-```
-
-#@end
-
-#@since 3.0
 親クラスに、子クラスで既に定義されている同名のクラス変数を追加した場合、
 子クラスが、そのクラス変数を参照した際に例外 [c:RuntimeError] が発生します。
 
@@ -214,7 +159,6 @@ class Bar
 end
 ```
 
-#@end
 
 #### クラス変数のスコープ {#class_var_scope}
 
@@ -325,23 +269,15 @@ $/
 
 ### 定数 {#const}
 
-#@since 2.6.0
 ```ruby title="例"
 FOOBAR
 ＦＯＯＢＡＲ
 ```
-#@else
-```ruby title="例"
-FOOBAR
-```
-#@end
 
 アルファベット大文字 ([A-Z]) で始まる識別子は定数です。
-#@since 2.6.0
 他にも、ソースエンコーディングが Unicode の時は Unicode の大文字または
 タイトルケース文字から始まる識別子も定数です。
 Unicode 以外の時は小文字に変換できる文字から始まる識別子が定数です。
-#@end
 定数の定義 (と初期化) は代入によって行われますが、メソッドの
 中では定義できません。一度定義された定数に再び代入を行おうと
 すると警告メッセージが出ます。定義されていない定数にアクセス

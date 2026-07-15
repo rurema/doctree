@@ -5,35 +5,22 @@ category: Network
 #@# = open-uri
 
 http/ftp に簡単にアクセスするためのクラスです。
-#@until 2.7.0
-[m:Kernel?.open] を再定義します。
-#@end
 
 ### 使用例
 
 http/ftp の URL を、普通のファイルのように開けます。
 
-#@since 2.7.0
 `````
 require 'open-uri'
 URI.open("http://www.ruby-lang.org/") {|f|
   f.each_line {|line| p line}
 }
 `````
-#@else
-`````
-require 'open-uri'
-open("http://www.ruby-lang.org/") {|f|
-  f.each_line {|line| p line}
-}
-`````
-#@end
 
 開いたファイルオブジェクトは [c:StringIO] もしくは [c:Tempfile] で
 すが [c:OpenURI::Meta] モジュールで拡張されていて、メタ情報を獲得する
 メソッドが使えます。
 
-#@since 2.7.0
 `````
 require 'open-uri'
 URI.open("http://www.ruby-lang.org/en") {|f|
@@ -45,23 +32,9 @@ URI.open("http://www.ruby-lang.org/en") {|f|
   p f.last_modified    # Thu Dec 05 02:45:02 UTC 2002
 }
 `````
-#@else
-`````
-require 'open-uri'
-open("http://www.ruby-lang.org/en") {|f|
-  f.each_line {|line| p line}
-  p f.base_uri         # <URI::HTTP:0x40e6ef2 URL:http://www.ruby-lang.org/en/>
-  p f.content_type     # "text/html"
-  p f.charset          # "iso-8859-1"
-  p f.content_encoding # []
-  p f.last_modified    # Thu Dec 05 02:45:02 UTC 2002
-}
-`````
-#@end
 
 ハッシュ引数で、追加のヘッダフィールドを指定できます。
 
-#@since 2.7.0
 `````
 require 'open-uri'
 URI.open("http://www.ruby-lang.org/en/",
@@ -71,22 +44,10 @@ URI.open("http://www.ruby-lang.org/en/",
   ...
 }
 `````
-#@else
-`````
-require 'open-uri'
-open("http://www.ruby-lang.org/en/",
-  "User-Agent" => "Ruby/#{RUBY_VERSION}",
-  "From" => "foo@bar.invalid",
-  "Referer" => "http://www.ruby-lang.org/") {|f|
-  ...
-}
-`````
-#@end
 
 http_proxy, ftp_proxy, no_proxy などの環境変数は、デフォルトで有効になっています。
 プロキシを無効にするには :proxy => nil とします。
 
-#@since 2.7.0
 `````
 require 'open-uri'
 URI.open("http://www.ruby-lang.org/en/",
@@ -94,15 +55,6 @@ URI.open("http://www.ruby-lang.org/en/",
   ...
 }
 `````
-#@else
-`````
-require 'open-uri'
-open("http://www.ruby-lang.org/en/",
-  :proxy => nil) {|f|
-  ...
-}
-`````
-#@end
 
 また、open-uri を読み込むと [c:URI::HTTP] と [c:URI::FTP] が
 [c:OpenURI::OpenRead] モジュールをインクルードします。ですので、

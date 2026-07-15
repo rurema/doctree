@@ -31,14 +31,12 @@ ssl_method で利用するプロトコルの種類を文字列もしくは
   - 'TLSv1'         TLSv1サーバクライアント両用
   - 'TLSv1_server'  TLSv1サーバ用
   - 'TLSv1_client'  TLSv1クライアント用
-#@since 2.0.0
   - 'TLSv1_1'
   - 'TLSv1_1_server'
   - 'TLSv1_1_client'
   - 'TLSv1_2'
   - 'TLSv1_2_server'
   - 'TLSv1_2_client'
-#@end
   - 'SSLv2'         SSLv2サーバクライアント両用
   - 'SSLv2_server'  SSLv2サーバ用
   - 'SSLv2_client'  SSLv2クライアント用
@@ -715,7 +713,6 @@ time に [c:Time] オブジェクトを渡すと、その
 #@# --- setup -> true
 #@# 内部的に利用されるメソッド
 
-#@since 2.0.0
 ### def renegotiation_cb -> nil | Proc
 
 ハンドシェイク開始時に呼び出されるコールバックを得ます。
@@ -753,7 +750,6 @@ end
 - **param** `cb` -- コールバック(Proc, Method など)もしくは nil
 - **SEE** [m:OpenSSL::SSL::SSLContext#renegotiation_cb]
 
-#@end
 
 ## Constants
 ### const DEFAULT_CERT_STORE -> OpenSSL::X509::Store

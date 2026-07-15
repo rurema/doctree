@@ -54,19 +54,15 @@ object を子ノード列から削除します。
 
 ### def each {|object| ... } -> ()
 ### def each_child {|object| ... } -> ()
-#@since 1.9.1
 ### def each -> Enumerator
 ### def each_child -> Enumerator
-#@end
 
 各子ノードに対しブロックを呼び出します。
 
 ブロックを省略した場合は [c:Enumerator] を返します。
 
 ### def delete_if {|object| ... } -> ()
-#@since 1.9.1
 ### def delete_if -> Enumerator
-#@end
 
 各子ノードに対しブロックを呼び出し、真を返したノードを削除します。
 
@@ -81,9 +77,7 @@ object を子ノード列から削除します。
 nil を返します。
 
 ### def each_index {|index| ... } -> ()
-#@since 1.9.1
 ### def each_index -> Enumerator
-#@end
 
 各子ノードのインデックスに対しブロックを呼び出します。
 

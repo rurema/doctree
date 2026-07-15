@@ -115,11 +115,8 @@ value を持つ要素のキーを返します。
 - **param** `value` -- 検索したい値を指定します。YAML 形式に変換できるオブジェク
              トが指定できます。
 
-#@since 1.9.1
 [注意] 非推奨のメソッドです。代わりに #key を使用してください。
-#@end
 
-#@since 2.0.0
 - **SEE** [m:YAML::DBM#key]
 
 ### def key(value) -> String | nil
@@ -130,7 +127,6 @@ value を持つ要素のキーを返します。
 
 - **param** `value` -- 検索したい値を指定します。YAML 形式に変換できるオブジェク
              トが指定できます。
-#@end
 
 ### def invert -> {object => String}
 

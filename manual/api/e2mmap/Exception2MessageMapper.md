@@ -64,26 +64,6 @@ exception_name という名前の例外クラスを定義します。
 
 - **raise** `Exception2MessageMapper::ErrNotRegisteredException` -- 指定された例外クラスに対応するメッセージが存在しない場合に発生します。
 
-#@until 1.9.1
-### def fail(exception_class = nil, *rest) -> ()
-
-このメソッドは後方互換性のために用意されています。
-
-登録されている情報を使用して、例外を発生させます。
-
-- **param** `exception_class` -- 例外クラス。
-
-- **param** `rest` -- メッセージに埋め込む値。
-
-- **raise** `Exception2MessageMapper::ErrNotRegisteredException` -- 指定された例外クラスに対応するメッセージが存在しない場合に発生します。
-
-### def extend_to(b) -> Class
-
-このメソッドは後方互換性のために用意されています。
-
-- **param** `b` -- [c:Binding] オブジェクト。
-
-#@end
 
 ## Instance Methods
 

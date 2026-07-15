@@ -104,9 +104,7 @@ p Pathname.glob("lib/i*.rb") # => [#<Pathname:lib/ipaddr.rb>, #<Pathname:lib/irb
 ```
 
 - **SEE** [m:Dir.glob]
-#@since 2.5.0
 - **SEE** [m:Pathname#glob]
-#@end
 
 ## Instance Methods
 
@@ -162,15 +160,8 @@ p Pathname.new("foo/../foo/bar") <=> Pathname.new("foo/bar")
 #@#noexample
 
 ### def to_s   -> String
-#@until 1.9.1
-### def to_str -> String
-#@end
 パス名を文字列で返します。
 
-#@until 1.9.1
-to_str は、[m:File.open] などの引数にそのまま Pathname オブジェクトを
-渡せるようにするために用意されています。
-#@end
 
 ```ruby title="例"
 require 'pathname'
@@ -209,9 +200,7 @@ path.cleanpath       # => #<Pathname:bar/bar>
 path.cleanpath(true) # => #<Pathname:bar/foo/../bar>
 ```
 
-#@since 1.9.2
 ### def realpath(basedir = nil) -> Pathname
-#@end
 ### def realpath -> Pathname
 余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返します。
 
@@ -220,9 +209,7 @@ path.cleanpath(true) # => #<Pathname:bar/foo/../bar>
 
 self が指すパスが存在しない場合は例外 [c:Errno::ENOENT] が発生します。
 
-#@since 1.9.2
 - **param** `basedir` -- ベースディレクトリを指定します。省略するとカレントディレクトリになります。
-#@end
 
 ```ruby title="例"
 require 'pathname'
@@ -349,9 +336,7 @@ Pathname.new("/foo/../bar").each_filename {|v| p v}
 ```
 
 ### def +(other) -> Pathname
-#@since 2.2.0
 ### def /(other) -> Pathname
-#@end
 
 パス名を連結します。つまり、other を self からの相対パスとした新しい
 Pathname オブジェクトを生成して返します。
@@ -386,7 +371,6 @@ p Pathname.new("/tmp").children # => [#<Pathname:.X11-unix>, #<Pathname:.iroha_u
 ```
 
 
-#@since 1.9.2
 
 ### def each_child(with_directory = true)                  -> Enumerator
 ### def each_child(with_directory = true) {|pathname| ...} -> [Pathname]
@@ -420,7 +404,6 @@ Pathname("/usr/local").each_child(false) {|f| p f }
 ```
 
 - **SEE** [m:Pathname#children]
-#@end
 
 
 ### def relative_path_from(base_directory) -> Pathname
@@ -449,11 +432,7 @@ path.relative_path_from(base) # => #<Pathname:foo>
 
 
 ### def each_line(*args){|line| ... } -> nil
-#@since 1.9.1
 ### def each_line(*args) -> Enumerator
-#@else
-### def each_line(*args) -> Enumerable::Enumerator
-#@end
 IO.foreach(self.to_s, *args, &block) と同じです。
 
 ```ruby title="例"
@@ -508,7 +487,6 @@ IO.read(self.to_s, *args)と同じです。
 
 - **SEE** [m:IO.read]
 
-#@since 1.9.2
 ### def binread(*args) -> String | nil
 IO.binread(self.to_s, *args)と同じです。
 
@@ -523,7 +501,6 @@ pathname.binread(20, 10)   # => "ne one\nThis is line "
 
 - **SEE** [m:IO.binread]
 
-#@end
 ### def readlines(*args) -> [String]
 IO.readlines(self.to_s, *args)と同じです。
 
@@ -586,7 +563,6 @@ File.mtime(self.to_s) を渡したものと同じです。
 
 - **SEE** [m:File.mtime]
 
-#@since 2.2.0
 ### def birthtime -> Time
 File.birthtime(self.to_s) を渡したものと同じです。
 
@@ -595,7 +571,6 @@ File.birthtime(self.to_s) を渡したものと同じです。
 #@#noexample File.birthtime の例を参照
 
 - **SEE** [m:File.birthtime]
-#@end
 
 ### def chmod(mode) -> Integer
 File.chmod(mode, self.to_s) と同じです。
@@ -966,7 +941,6 @@ FileTest.world_writable?(self.to_s) と同じです。
 - **SEE** [m:FileTest?.world_writable?]
 
 
-#@since 2.1.0
 
 ### def write(string, offset=nil, **opts) -> Integer
 
@@ -984,7 +958,6 @@ IO.binwrite(self.to_s, *args)と同じです。
 
 - **SEE** [m:IO.binwrite]
 
-#@end
 
 ### def writable? -> bool
 FileTest.writable?(self.to_s) と同じです。
@@ -1007,7 +980,6 @@ FileTest.zero?(self.to_s) と同じです。
 #@#noexample FileTest.#zero? の例を参照
 
 - **SEE** [m:FileTest?.zero?]
-#@since 2.4.0
      , [m:Pathname#empty?]
 
 ### def empty? -> bool
@@ -1030,7 +1002,6 @@ p Tempfile.create("tmp") { |tmp| Pathname(tmp).empty? } # => true
 ```
 
 - **SEE** [m:Dir.empty?], [m:FileTest?.empty?], [m:Pathname#zero?]
-#@end
 
 ### def rmdir -> 0
 Dir.rmdir(self.to_s) と同じです。
@@ -1106,15 +1077,8 @@ Dir.open(self.to_s, &block) と同じです。
 
 - **SEE** [m:Dir.open]
 
-#@since 2.2.0
 ### def find(ignore_error: true)                  -> Enumerator
 ### def find(ignore_error: true) {|pathname| ...} -> nil
-#@else
-#@since 2.0.0
-### def find                  -> Enumerator
-#@end
-### def find {|pathname| ...} -> nil
-#@end
 self 配下のすべてのファイルやディレクトリを
 一つずつ引数 pathname に渡してブロックを実行します。
 
@@ -1127,9 +1091,7 @@ Find.find(self.to_s) {|f| yield Pathname.new(f)}
 
 ブロックを省略した場合は [c:Enumerator] を返します。
 
-#@since 2.2.0
 - **param** `ignore_error` -- 探索中に発生した例外を無視するかどうかを指定します。
-#@end
 
 - **SEE** [m:Find?.find]
 
@@ -1233,7 +1195,6 @@ path1.sub('perl', 'ruby') #=> #<Pathname:/usr/bin/ruby>
 - **SEE** [m:String#sub]
 
 
-#@since 1.9.1
 ### def to_path -> String
 File.open などの引数に渡す際に呼ばれるメソッドです。 Pathname オブジェ
 クトにおいては、 to_s と同じです。
@@ -1261,8 +1222,6 @@ p Pathname('/home/user/.test').sub_ext('.pdf')    # => #<Pathname:/home/user/.te
 p Pathname('/home/user/test.tar.gz').sub_ext('.xz') # => #<Pathname:/home/user/test.tar.xz>
 ```
 
-#@end
-#@since 2.5.0
 ### def glob(pattern, flags=0) -> [Pathname]
 ### def glob(pattern, flags=0) {|pathname| ...} -> nil
 
@@ -1288,4 +1247,3 @@ p Pathname("ruby-2.4.2").glob("R*.md") # => [#<Pathname:ruby-2.4.2/README.md>, #
 
 - **SEE** [m:Dir.glob]
 - **SEE** [m:Pathname.glob]
-#@end

@@ -54,14 +54,9 @@ sysclose といった [c:OpenSSL::SSL::SSLSocket] が提供するメソッドを
 
 ### def each_byte{|ch| ... } -> ()
 
-#@until 1.9.1
-現在の読み込み位置から 1 バイトずつ読み込み、
-それを整数としてブロックの引数として呼び出します。
-#@else
 現在の読み込み位置から 1 バイトずつ読み込み、
 それを文字列としてブロックの引数として呼び出します。
 #@# これは each_byte とは異なる。each_byteは 1.9 でも整数をブロックに渡す。
-#@end
 
 [m:IO#each_byte] と同様です。
 
@@ -79,11 +74,7 @@ sysclose といった [c:OpenSSL::SSL::SSLSocket] が提供するメソッドを
 
 バッファがすべて出力されるまでブロックします。
 
-#@until 1.9.1
-### def getc -> Integer | nil
-#@else
 ### def getc -> String | nil
-#@end
 バッファから1文字読み込み、それ返します。
 
 読み込みが終端に到達した場合は nil を返します。

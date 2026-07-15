@@ -259,15 +259,9 @@ end
 
 文法:
 
-#@since 2.1.0
 `````````````
 def メソッド名 ['(' [arg0 ['=' default0]] ... [',' '*' rest_args [, post ...]] [',' key1: [val1]] ... [',' '**'kwrest] [',' '&' block_arg]`)']
 `````````````
-#@else
-`````````````
-def メソッド名 ['(' [arg0 ['=' default0]] ... [',' '*' rest_args [, post ...]] [',' key1: val1] ... [',' '**'kwrest] [',' '&' block_arg]`)']
-`````````````
-#@end
 `````````````
   式.. (body)
 [rescue [error_type,..] [=> evar] [then]
@@ -475,15 +469,9 @@ end
 のrescue, else, ensure 節を指定できます。
 例外処理については[ref:d:spec/control#begin]参照。
 
-#@since 2.1.0
 メソッド定義式は、メソッド名を [c:Symbol] にしたオブジェクトを返します。
-#@else
-メソッド定義式は、nil を返します。
-#@end
 
-#@since 2.0.0
 - **SEE** <https://magazine.rubyist.net/articles/0041/0041-200Special-kwarg.html>
-#@end
 
 #### 演算子式の定義 {#operator}
 
@@ -599,11 +587,7 @@ end
 えればクラスの特異メソッドは他のオブジェクト指向システムにお
 けるクラスメソッドの働きをすることになります。
 
-#@since 2.1.0
 特異メソッド定義式は、メソッド名を [c:Symbol] にしたオブジェクトを返します。
-#@else
-特異メソッド定義式は、nil を返します。
-#@end
 
 ### クラスメソッドの定義 {#class_method}
 
@@ -660,12 +644,8 @@ extend については、[m:Object#extend] を参照して
 呼び出し制限を持ちます。
 
  - public に設定されたメソッドは制限なしに呼び出せます。
-#@since 2.7.0
  - private に設定されたメソッドは関数形式でしか呼び出せません。
    ただし self.foo のように self. と書かれている場合は呼び出すことができます。
-#@else
- - private に設定されたメソッドは関数形式でしか呼び出せません。
-#@end
  - protected に設定されたメソッドは、そのメソッドを持つオブジェクトが
    selfであるコンテキスト(メソッド定義式やinstance_eval)でのみ呼び出せます。
 
@@ -932,7 +912,4 @@ p defined? Foo       # => "constant"
  - "instance-variable"
  - "constant"
  - "class variable"
-#@until 1.9.1
- - "$&", "$\`", "$1", "$2", ...
-#@end
  - "expression"

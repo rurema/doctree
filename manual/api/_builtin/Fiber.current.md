@@ -1,4 +1,3 @@
-#@since 1.9.0
 ### def current -> Fiber
 
 このメソッドが評価されたコンテキストにおける [c:Fiber] のインスタンスを返します。
@@ -15,4 +14,3 @@ p Fiber.current # => #<Fiber:0x91345e4>
 p Fiber.current # => #<Fiber:0x91345e4>
 ```
 
-#@end

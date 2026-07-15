@@ -16,11 +16,6 @@ type 型のメモリを n 個スタックフレームに割り当てる。
 obj の構造体型 ID を返します。
 [f:SPECIAL_CONST_P](obj) が真のオブジェクトに対して使うと落ちます。
 
-#@until 2.2.0
-### void Check_SafeStr(VALUE v)
-
-古い API です。[f:SafeStringValue] を使ってください。
-#@end
 
 ### void Check_Type(VALUE val, int typeflag)
 
@@ -355,7 +350,6 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
 - **raise** `RangeError` -- x が unsigned long 型で表現できる値の範囲外であった場
                   合に発生します。
 
-#@since 2.0.0
 ### MACRO short NUM2SHORT(VALUE x)
 
 x を short 型の整数に変換します。
@@ -381,7 +375,6 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
 
 - **raise** `RangeError` -- x が unsigned short 型で表現できる値の範囲外であった
                   場合に発生します。
-#@end
 
 ### MACRO void OBJ_FREEZE(VALUE x)
 
@@ -402,9 +395,6 @@ x に汚染マークが付いていたら真。
 ### MACRO void OBJSETUP(obj, VALUE klass, int typeflag)
 
 obj をクラス klass とフラグ typeflag で初期化する。
-#@until 2.3.0
-$SAFE >= 3 のときは無条件で汚染する。
-#@end
 
 ### MACRO int POSFIXABLE(long f)
 

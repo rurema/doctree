@@ -4,11 +4,6 @@ type: library
 RDoc 形式のドキュメントをエスケープシーケンスで太字やアンダーラインの効
 果を持たせるように見せるサブライブラリです。
 
-#@until 1.9.3
-`````
-require 'rdoc/markup/formatter'
-`````
-#@end
 `````
 require 'rdoc/markup/to_bs'
 
@@ -32,15 +27,9 @@ RDoc 形式のドキュメントをエスケープシーケンスで太字やア
 
 ## Class Methods
 
-#@since 1.9.3
 ### def new(markup = nil) -> RDoc::Markup::ToBs
-#@else
-### def new -> RDoc::Markup::ToBs
-#@end
 
 自身を初期化します。
 
-#@since 1.9.3
 - **param** `markup` -- [c:RDoc::Markup] オブジェクトを指定します。省略した場合
               は新しく作成します。
-#@end

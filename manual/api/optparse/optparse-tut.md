@@ -116,7 +116,6 @@ ruby sample.rb -a foo bar -b baz
      {:a=>true, :b=>true}
 ```
 
-#@since 2.4.0
 
 明示的にコンテナへ格納する以外に、parse（及びparse!）メソッドの引数に
 :into オプションを指定することでハッシュへ自動的に値を格納できます。
@@ -144,7 +143,6 @@ ruby sample.rb -a foo bar -b baz
      {:a=>true, :bbb=>true}
 ```
 
-#@end
 
 #### オプションの引数 {#optionarg}
 

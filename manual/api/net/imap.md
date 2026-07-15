@@ -208,12 +208,8 @@ IMAP 接続を表現するクラスです。
 
 ## Class Methods
 
-#@since 1.9.1
 ### def new(host, port = 143, usessl = false, certs = nil, verify = true) -> Net::IMAP
 ### def new(host, options) -> Net::IMAP
-#@else
-### def new(host, port = 143, usessl = false, certs = nil, verify = false) -> Net::IMAP
-#@end
 
 新たな Net::IMAP オブジェクトを生成し、指定したホストの
 指定したポートに接続し、接続語の IMAP オブジェクトを返します。
@@ -227,7 +223,6 @@ verify は接続先を検証するかを真偽値で設定します。
 真が [m:OpenSSL::SSL::VERIFY_PEER] に、
 偽が [m:OpenSSL::SSL::VERIFY_NONE] に対応します。
 
-#@since 1.9.1
 パラメータは Hash で渡すこともできます。以下のキーを使うことができます。
   - :port ポート番号
     省略時は SSL/TLS 使用時→993 不使用時→143 となります。
@@ -246,16 +241,13 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
                      :ssl => { :verify_mode => OpenSSL::SSL::VERIFY_PEER,
                                :timeout => 600 } )
 ```
-#@end
 
 - **param** `host` -- 接続するホスト名の文字列
 - **param** `port` -- 接続するポート番号
 - **param** `usessl` -- 真でSSL/TLSを使う
 - **param** `certs` -- 証明書のファイル名/ディレクトリ名の文字列
 - **param** `verify` -- 真で接続先を検証する
-#@since 1.9.1
 - **param** `options` -- 各種接続パラメータのハッシュ
-#@end
 
 ### def debug -> bool
 
@@ -308,7 +300,6 @@ UTF-7 を修正したものです。
 - **param** `str` -- 変換対象の UTF-8 でエンコードされた文字列
 - **SEE** [m:Net::IMAP.decode_utf7]
 
-#@since 1.9.1
 
 ### def format_date(time) -> String
 時刻オブジェクトを IMAP の日付フォーマットでの文字列に変換します。
@@ -352,9 +343,7 @@ Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
 
 - **param** `count` -- 設定する最大値の整数
 - **SEE** [m:Net::IMAP.max_flag_count]
-#@end
 
-#@since 2.0.0
 ### def default_port -> Integer
 ### def default_imap_port -> Integer
 
@@ -370,7 +359,6 @@ Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
 
 - **SEE** [m:Net::IMAP.default_port]
 
-#@end
 
 ## Methods
 
@@ -558,7 +546,6 @@ p imap.list("", "foo/%")
 #=> [#<Net::IMAP::MailboxList attr=[:Noselect], delim="/", name="foo/">, #<Net::IMAP::MailboxList attr=[:Noinferiors, :Marked], delim="/", name="foo/bar">, #<Net::IMAP::MailboxList attr=[:Noinferiors], delim="/", name="foo/baz">]
 ```
 
-#@since 1.9.3
 ### def xlist(refname, mailbox) -> [Net::IMAP::MailboxList]
 
 XLISTコマンドを送り、クライアントから利用可能なメールボックス名の集合から
@@ -583,7 +570,6 @@ p imap.xlist("", "foo/%")
 #    #<Net::IMAP::MailboxList attr=[:Noinferiors], delim="/", name="foo/baz">]
 ```
 
-#@end
 
 ### def lsub(refname, mailbox) -> [Net::IMAP::MailboxList]
 
@@ -864,7 +850,6 @@ mailbox はコピー先のメールボックスです。
 - **param** `mailbox` -- コピー先のメールボックス(文字列)
 - **SEE** [m:Net::IMAP#copy]
 
-#@since 2.3.0
 ### def move(set, mailbox) -> Net::IMAP::TaggedResponse
 MOVEコマンドを送り、set で指定したメッセージを mailbox の
 末尾に移動させます。
@@ -895,7 +880,6 @@ set には UID、UID の配列、もしくは
 - **param** `set` -- 移動するメッセージのUID(整数、整数の配列、整数の Range)
 - **param** `mailbox` -- 移動先のメールボックス(文字列)
 - **SEE** [m:Net::IMAP#move], [RFC:6851]
-#@end
 
 ### def sort(sort_keys, search_keys, charset) -> [Integer]
 ### def uid_sort(sort_keys, search_keys, charset) -> [Integer]
@@ -1044,7 +1028,6 @@ end
 
 - **SEE** [m:Net::IMAP#add_response_handler]
 
-#@since 1.9.1
 ### def starttls(options) -> Net::IMAP::TaggedResponse
 ### def starttls(certs, verify) -> Net::IMAP::TaggedResponse
 
@@ -1062,7 +1045,6 @@ verify で検証するかどうか([m:Net::IMAP::VERIFY_PEER]、
 - **param** `certs` -- 証明書ファイル名、もしくは証明書ディレクトリ名(文字列)
 - **param** `verify` -- 真なら SSL/TLS 接続時に証明書を検証します
 
-#@end
 
 ### def disconnected? -> bool
 
@@ -1110,23 +1092,11 @@ THREADコマンドを送り、メールボックスを検索した結果を
 
 
 ### def client_thread -> Thread
-#@until 1.9.1
-例外が送出されるスレッドを返します。
-
-#@else
 このメソッドは obsolete です。使わないでください。
-#@end
 
 ### def client_thread=(th)
-#@until 1.9.1
-例外が送出されるスレッドを設定します。
-
-- **param** `th` -- 設定するスレッド
-#@else
 このメソッドは obsolete です。使わないでください。
-#@end
 
-#@since 1.9.2
 ### def idle {|resp| ...} -> Net::IMAP::TaggedResponse
 IDLE 命令を送り、メールボックスの非同期的変化を待ち受けます。
 
@@ -1149,7 +1119,6 @@ IDLE 命令を送り、メールボックスの非同期的変化を待ち受け
 ### def idle_done -> ()
 [m:Net::IMAP#idle] で
 停止しているスレッドを1つ起こします。
-#@end
 
 ## Constants
 ### const SEEN -> Symbol
@@ -1398,11 +1367,7 @@ IMAP のレスポンスにはタグ付きのものとタグなしのものがあ
 
 # class Net::IMAP::MailboxList < Struct
 
-#@since 1.9.3
 [m:Net::IMAP#list]、[m:Net::IMAP#xlist]、[m:Net::IMAP#lsub]
-#@else
-[m:Net::IMAP#list]、[m:Net::IMAP#lsub]
-#@end
 で返されるメールボックスのデータを表します。
 
 ## Instance Methods
@@ -2109,7 +2074,6 @@ true を返します。
 これらのクラスの例外が発生します。
 
 ## Instance Methods
-#@since 1.9.2
 ### def response -> Net::IMAP::TaggedResponse | Net::IMAP::UntaggedResponse
 エラーとなったレスポンスを表すオブジェクトを返します。
 
@@ -2117,7 +2081,6 @@ true を返します。
 エラーとなったレスポンスを表すオブジェクトを設定します。
 
 - **param** `resp` -- 設定するレスポンスオブジェクト
-#@end
 
 # class Net::IMAP::NoResponseError < Net::IMAP::ResponseError
 
@@ -2136,12 +2099,10 @@ true を返します。
 ログインが拒否された場合や、クライアントが無反応で
 タイムアウトした場合に発生します。
 
-#@since 1.9.1
 # class Net::IMAP::FlagCountError < Net::IMAP::Error
 
 サーバからのレスポンスに含まれるフラグが多すぎるときに発生する例外です。
 
 この上限は [m:Net::IMAP.max_flag_count=] で設定します。
 
-#@end
 

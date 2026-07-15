@@ -2,10 +2,6 @@
 library: _builtin
 since: "2.7.0"
 ---
-#@since 3.0
 # class NoMatchingPatternError < StandardError
-#@else
-# class NoMatchingPatternError < RuntimeError
-#@end
 
 パターンマッチでどの条件にも一致せず、else節もない場合に発生します。

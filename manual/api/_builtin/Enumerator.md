@@ -37,25 +37,6 @@ p a.next
 
 ## Class Methods
 
-#@until 3.0
-### def new(obj, method = :each, *args) -> Enumerator
-
-オブジェクト obj について、 each の代わりに method という
-名前のメソッドを使って繰り返すオブジェクトを生成して返します。
-args を指定すると、 method の呼び出し時に渡されます。
-
-- **param** `obj` -- イテレータメソッドのレシーバとなるオブジェクト
-- **param** `method` -- イテレータメソッドの名前を表すシンボルまたは文字列
-- **param** `args` -- イテレータメソッドの呼び出しに渡す任意個の引数
-
-```ruby title="例"
-str = "xyz"
-
-enum = Enumerator.new(str, :each_byte)
-p enum.map {|b| '%02x' % b }   # => ["78", "79", "7a"]
-```
-#@end
-
 ### def new(size=nil){|y| ... }         -> Enumerator
 
 Enumerator オブジェクトを生成して返します。与えられたブロックは [c:Enumerator::Yielder] オブジェクトを
@@ -97,7 +78,6 @@ fib = Enumerator.new { |y|
 p fib.take(10) #=> [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 ```
 
-#@since 2.7.0
 ### def produce(initial = nil) { |prev| ... } -> Enumerator
 
 与えられたブロックを呼び出し続ける、停止しない Enumerator を返します。
@@ -139,11 +119,9 @@ PATTERN = %r{\d+|[-/+*]}
 Enumerator.produce { scanner.scan(PATTERN) }.slice_after { scanner.eos? }.first
 # => ["7", "+", "38", "/", "6"]
 ```
-#@end
 
 ## Methods
 
-#@since 2.6.0
 ### def +(enum) -> Enumerator::Chain
 
 自身と enum 引数を続けて繰り返す [c:Enumerator::Chain] を返します。
@@ -154,7 +132,6 @@ p e.to_a #=> [1, 2, 3, 4, 5]
 ```
 
 - **SEE** [m:Enumerable#chain]
-#@end
 
 ### def each {...}        -> object
 ### def each              -> self

@@ -35,16 +35,6 @@ Ruby の 内部情報へのアクセス手段を提供するクラスです。
 #@#
 #@# VM_COLLECT_USAGE_DETAILS を有効にしてコンパイルした時のみ有効
 
-#@if("2.6.0" <= version and version < "2.7.0")
-### def resolve_feature_path
-require を呼んだときに読み込まれるファイルを特定します。
-このメソッドはRuby 2.7 で $LOAD_PATH の特異メソッドに移動しました。
-
-```ruby
-p RubyVM.resolve_feature_path('set')
-# => [:rb, "/build-all-ruby/2.6.0/lib/ruby/2.6.0/set.rb"]
-```
-#@end
 
 ## Constants
 
@@ -63,7 +53,6 @@ p RubyVM.resolve_feature_path('set')
 #@# --- USAGE_ANALYSIS_REGS
 #@# --- USAGE_ANALYSIS_INSN_BIGRAM
 
-#@since 2.0.0
 ### def DEFAULT_PARAMS -> {Symbol => Integer}
 
 [c:RubyVM] のデフォルトのパラメータを返します。
@@ -71,4 +60,3 @@ p RubyVM.resolve_feature_path('set')
 [注意] この値は C Ruby 固有のものです。変更しても [c:RubyVM] の動作に
 は影響しません。また、仕様は変更される場合があるため、この値に依存すべ
 きではありません。
-#@end

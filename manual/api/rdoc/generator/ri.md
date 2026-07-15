@@ -16,17 +16,11 @@ ri のためのファイルを生成するためのクラスです。
 ## Instance Methods
 
 #@# :not-new 指定のため new ではなく、initialize で定義。
-#@since 2.0.0
 ### def initialize(store, options) -> RDoc::Generator::RI
-#@else
-### def initialize(options)        -> RDoc::Generator::RI
-#@end
 
 [c:RDoc::Generator::RI] オブジェクトを初期化します。
 
-#@since 2.0.0
 - **param** `store` -- [c:RDoc::Store] オブジェクトを指定します。
-#@end
 
 - **param** `options` -- [c:RDoc::Options] オブジェクトを指定します。
 

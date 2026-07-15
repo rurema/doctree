@@ -165,7 +165,6 @@ p a  #=> :foo
 #@include(Fiber.transfer)
 #@include(Fiber.alive_p)
 #@end
-#@since 2.7.0
 ### def raise                                            -> object
 ### def raise(message)                                   -> object
 ### def raise(exception, message = nil, backtrace = nil) -> object
@@ -206,18 +205,15 @@ end
 p f.resume              # => :loop
 p f.raise StopIteration # => :exit
 ```
-#@end
 
 ### def resume(*arg = nil)   -> object
 
 自身が表すファイバーへコンテキストを切り替えます。
 自身は resume を呼んだファイバーの子となります。
 
-#@since 2.0.0
 #@# #5526 参照。
 ただし、[m:Fiber#transfer] を呼び出した後に resume を呼び出す事はでき
 ません。
-#@end
 
 - **param** `arg` -- self が表すファイバーに渡したいオブジェクトを指定します。
 
@@ -228,10 +224,8 @@ p f.raise StopIteration # => :exit
 - **raise** `FiberError` -- 自身が既に終了している場合、コンテキストの切替が
                   Thread クラスが表すスレッド間をまたがる場合、自身が resume を
                   呼んだファイバーの親かその祖先である場合に発生します。
-#@since 2.0.0
                   また、[m:Fiber#transfer] を呼び出した後に resume を
                   呼び出した場合に発生します。
-#@end
 
 ```ruby title="例:"
 

@@ -100,7 +100,6 @@ until: "2.2.0"
 
 - **param** `count` -- 件数を指定します。
 
-#@since 1.9.2
 ### def process_args(args = []) -> Hash
 
 [lib:optparse] を使ってコマンドライン引数を解析した結果を返します。
@@ -126,7 +125,6 @@ until: "2.2.0"
 - **param** `io` -- テスト結果の出力先を指定します。
 
 
-#@end
 
 ## Singleton Methods
 

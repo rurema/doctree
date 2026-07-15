@@ -20,7 +20,6 @@ p rp1 =~ str           # => 0
 p Regexp.last_match[0] # => "this is regexp"
 ```
 
-#@since 3.0
 Ruby 3.0.0 から正規表現リテラルは freeze されるようになりました。
 ```ruby
 p /abc/.frozen?
@@ -30,7 +29,6 @@ p /a#{42}bc/.frozen?
 p Regexp.new('abc').frozen?
 # => false
 ```
-#@end
 
 [d:spec/regexp] や [ref:d:spec/literal#regexp] も参照してください。
 
@@ -498,7 +496,6 @@ foo, bar, baz = /(foo)(bar)(baz)/.match("foobar").captures
 #@end
 ```
 
-#@since 2.4.0
 - **SEE** [m:Regexp#match?]
 
 ### def match?(str, pos = 0) -> bool
@@ -515,7 +512,6 @@ p $&                     # => nil
 ```
 
 - **SEE** [m:Regexp#match]
-#@end
 
 ### def options -> Integer
 

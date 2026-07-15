@@ -72,12 +72,7 @@ Options:
 require 'getoptlong'
 ```
 
-#@since 1.9.1
 getoptlong はクラスを提供します。
-#@else
-[lib:getopts] や [lib:parsearg] とは異なり、getoptlong はモジュール
-ではなくクラスを提供します。
-#@end
 クラスの名前は GetoptLong です。
 [c:GetoptLong] クラスのオブジェクトを生成します。
 
@@ -200,11 +195,7 @@ ARGV に残っていないときは、optname, optarg ともに nil に
 に合わない場合は、エラーとなって、以下のいずれかの例外が発生し
 ます。
 
-#@since 1.9.1
  - [c:GetoptLong::AmbiguousOption]
-#@else
- - [c:GetoptLong::AmbigousOption]
-#@end
  - [c:GetoptLong::InvalidOption]
  - [c:GetoptLong::MissingArgument]
  - [c:GetoptLong::NeedlessArgument]
@@ -384,11 +375,7 @@ parser.set_options([GetoptLong::NO_ARGUMENT, '-d', '--debug'],
 
 このライブラリで発生する例外の基底クラスです。
 
-#@until 1.9.1
-# class GetoptLong::AmbigousOption < GetoptLong::Error
-#@else
 # class GetoptLong::AmbiguousOption < GetoptLong::Error
-#@end
 与えられたオプションは名前の後方が省略されていると思われるが、一意に決まらない
 場合に発生する例外です。
 

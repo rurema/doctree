@@ -120,13 +120,8 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 
 - **param** `str` -- スキャン対象の文字列を指定します。
 
-#@if (version <= "1.8.0")
-- **param** `dup` -- dup が true の時は文字列を複製して freeze します。
-           dup が false なら複製せずに freeze します。
-#@else
 - **param** `dup` -- dup は単に無視します。
            引数の文字列は複製も freeze もされず、そのまま使います。
-#@end
 
 ```ruby title="例"
 require 'strscan'
@@ -176,7 +171,6 @@ p s[1]                # => "t"
 p s[2]                # => "ring"
 ```
 
-#@if (version >= "1.8.1")
 ### def <<(str) -> self
 ### def concat(str) -> self
 
@@ -211,9 +205,7 @@ s = StringScanner.new(str) # => #<StringScanner 0/4 @ "test">
 p s << ' string'           # => #<StringScanner 0/11 @ "test ...">
 p str                      # => "test string"
 ```
-#@end
 
-#@if (version >= "1.8.1")
 ### def beginning_of_line? -> bool
 ### def bol? -> bool
 スキャンポインタが行頭を指しているなら true を、
@@ -234,7 +226,6 @@ p s.bol?      # => true
 s.scan(/\w+/)
 p s.bol?      # => false
 ```
-#@end
 
 ### def check(regexp) -> String | nil
 現在位置から regexp とのマッチを試みます。
@@ -295,9 +286,6 @@ p s.eos?      # => true
 代わりに [m:StringScanner#eos?] を使ってください。
 
 ### def exist?(regexp) -> Integer | nil
-#@if (version <= "1.8.5")
-[注意] このメソッドは Ruby 1.8.5 以前では正しく動作しません。
-#@else
 #@#Ruby 1.8.6 以降は以下の記述に沿った仕様に変わります。
 
 スキャンポインタの位置から，次にマッチする文字列の末尾までの長さを返します。
@@ -318,14 +306,12 @@ p s.scan(/\w+/) # => "test"
 p s.exist?(/s/) # => 2
 p s.exist?(/e/) # => nil
 ```
-#@end
 
 ### def getch -> String | nil
 一文字スキャンして文字列で返します。
 スキャンポインタをその後ろに進めます。
 スキャンポインタが文字列の末尾を指すならnilを返します。
 
-#@since 1.9.1
 一文字の定義は、与えた文字列のエンコードに依存します。
 
 ```ruby title="例"
@@ -339,28 +325,11 @@ p s.getch                         # => "い"
 p s.getch                         # => nil
 ```
 
-#@else
-一文字の定義は $KCODE に依存します。
-
-```ruby title="例"
-require 'strscan'
-
-s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
-$KCODE = 'n'                    # 単なるバイト列として認識されます
-p s.getch                       # => "\244"
-p s.getch                       # => "\353"
-$KCODE = "e"                    # EUC-JPの文字列として認識されます
-p s.getch                       # => "び"
-p s.getch                       # => "い"
-p s.getch                       # => nil
-```
-#@end
 
 
 ### def get_byte -> String | nil
 ### def getbyte -> String | nil
 
-#@since 1.9.1
 1 バイトスキャンして文字列で返します。
 スキャンポインタをその後ろに進めます。
 スキャンポインタが文字列の末尾を指すなら nil を返します。
@@ -382,30 +351,6 @@ p s.get_byte       #=> "\xA4"
 p s.get_byte       #=> nil   
 ```
 
-#@else
-$KCODE に関らず 1 バイトスキャンして文字列で返します。
-スキャンポインタをその後ろに進めます。
-スキャンポインタが文字列の末尾を指すなら nil を返します。
-
-[m:StringScanner#getbyte] は将来のバージョンで削除される予定です。
-代わりに [m:StringScanner#get_byte] を使ってください。
-
-```ruby title="例"
-require 'strscan'
-
-s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
-$KCODE = 'n'                    # 単なるバイト列として認識されます
-p s.get_byte                    # => "\244"
-p s.get_byte                    # => "\353"
-$KCODE = 'e'                    # やはり単なるバイト列として認識されます
-p s.get_byte                    # => "\244"
-p s.get_byte                    # => "\323"
-p s.get_byte                    # => "\244"
-p s.get_byte                    # => "\244"
-p s.get_byte                    # => nil
-```
-
-#@end
 
 
 ### def inspect -> String
@@ -440,7 +385,6 @@ p s.inspect                          # => "#<StringScanner fin>"
 マッチしたサイズは文字単位でなくバイト単位となります。
 
 ```ruby
-#@since 1.9.1
 require 'strscan'
 def case1(encode)
   utf8 = "\u{308B 3073 3044}"
@@ -449,14 +393,6 @@ def case1(encode)
 end
 
 p case1("EUC-JP")     #=> 2
-#@else
-
-require 'strscan'
-s = StringScanner.new("るびい") # 文字コードはUTF-8とします
-puts s.string      #=> るびい
-puts s.match?(/る/)  #=> 3
-
-#@end
 ```
 
 - **param** `regexp` -- マッチに用いる正規表現を指定します。
@@ -511,7 +447,6 @@ p s.matched?  # => true
 マッチしたサイズは文字単位でなくバイト単位となります。
 
 ```ruby
-#@since 1.9.1
 require 'strscan'
 
 def run(encode)
@@ -525,16 +460,6 @@ p run("UTF-8")     #=> 3
 p run("EUC-JP")    #=> 2
 p run("Shift_Jis") #=> 2
 
-#@else
-
-require 'strscan'
-
-s = StringScanner.new("るびい") # 文字コードはUTF-8とします
-puts s.string       #=> るびい
-puts s.scan(/る/)   #=> る
-p s.matched_size    #=> 3
-
-#@end
 ```
 
 ```ruby title="例"
@@ -615,7 +540,6 @@ p s.scan(/\s+/) # => " "
 p s.pos       # => 5
 ```
 
-#@since 2.0.0
 - **SEE** [m:StringScanner#charpos]
 
 ### def charpos -> Integer
@@ -633,7 +557,6 @@ p s.charpos         # => 4
 ```
 
 - **SEE** [m:StringScanner#pos]
-#@end
 
 ### def pointer=(n)
 ### def pos=(n)
@@ -664,9 +587,6 @@ p s.pos = -4    # => -4
 p s.scan(/\w+/) # => "ring"
 ```
 
-#@if (version <= "1.8.0")
-このメソッドはマッチ記録を捨てます。
-#@end
 
 ### def post_match -> String | nil
 前回マッチを行った文字列のうち、マッチしたところよりも後ろの
@@ -954,17 +874,6 @@ s = StringScanner.new('test string')
 p s.string # => "test string"
 ```
 
-#@if (version <= "1.8.0")
-#@#Ruby 1.8.0 では
-返り値は freeze されています。
-
-```ruby title="例"
-require 'strscan'
-
-s = StringScanner.new('test string')
-p s.string.frozen? # => true
-```
-#@else
 #@#Ruby 1.8.1 以降では
 返り値は freeze されていません。
 
@@ -974,7 +883,6 @@ require 'strscan'
 s = StringScanner.new('test string')
 p s.string.frozen? # => false
 ```
-#@end
 
 なお、このメソッドは StringScanner.new に渡した
 文字列をそのまま返しますが、この仕様が将来に渡って保証されるわけではありません。

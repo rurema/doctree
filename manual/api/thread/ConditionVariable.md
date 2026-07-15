@@ -1,18 +1,9 @@
 ---
 library:
-#@since 2.3.0
   - _builtin
-#@end
-#@until 2.3.0
-  - thread
-#@end
 ---
-#@since 2.1.0
 # class Thread::ConditionVariable < Object
 alias ConditionVariable
-#@else
-# class ConditionVariable < Object
-#@end
 
 スレッドの同期機構の一つである状態変数を実現するクラスです。
 
@@ -145,11 +136,7 @@ recv Milk
 
 ## Class Methods
 
-#@since 2.1.0
 ### def new -> Thread::ConditionVariable
-#@else
-### def new -> ConditionVariable
-#@end
 状態変数を生成して返します。
 
 #@#noexample Thread::ConditionVariable#signal 等を参照
@@ -159,11 +146,7 @@ recv Milk
 ### def broadcast -> self
 
 状態変数を待っているスレッドをすべて再開します。再開された
-#@since 2.1.0
 スレッドは [m:Thread::ConditionVariable#wait]
-#@else
-スレッドは [m:ConditionVariable#wait]
-#@end
 で指定した mutex のロックを試みます。
 
 - **return** -- 常に self を返します。
@@ -205,11 +188,7 @@ sleep 1
 ### def signal -> self
 
 状態変数を待っているスレッドを1つ再開します。再開された
-#@since 2.1.0
 スレッドは [m:Thread::ConditionVariable#wait]
-#@else
-スレッドは [m:ConditionVariable#wait]
-#@end
 で指定した mutex のロックを試みます。
 
 - **return** -- 常に self を返します。
@@ -246,38 +225,18 @@ sleep 1
 # => a2
 ```
 
-#@since 1.9.2
 ### def wait(mutex, timeout = nil) -> self
-#@else
-### def wait(mutex) -> self
-#@end
 
 mutex のロックを解放し、カレントスレッドを停止します。
-#@since 2.1.0
 [m:Thread::ConditionVariable#signal]または、
 [m:Thread::ConditionVariable#broadcast]で送られたシグナルを
-#@else
-[m:ConditionVariable#signal]または、
-[m:ConditionVariable#broadcast]で送られたシグナルを
-#@end
 受け取ると、mutexのロックを取得し、実行状態となります。
 
-#@since 2.3.0
 - **param** `mutex` -- [c:Mutex] オブジェクトを指定します。
-#@else
-- **param** `mutex` -- [c:Thread::Mutex] オブジェクトを指定します。
-#@end
 
-#@since 1.9.2
 - **param** `timeout` -- スリープする秒数を指定します。この場合はシグナルを受け取
                らなかった場合でも指定した秒数が経過するとスリープを終了
                します。省略するとスリープし続けます。
-#@end
 
-#@since 2.1.0
 #@#noexample Thread::ConditionVariable#signal, Thread::ConditionVariable#broadcast を参照
 - **SEE** [m:Thread::ConditionVariable#signal], [m:Thread::ConditionVariable#broadcast]
-#@else
-#@#noexample ConditionVariable#signal, ConditionVariable#broadcast を参照
-- **SEE** [m:ConditionVariable#signal], [m:ConditionVariable#broadcast]
-#@end

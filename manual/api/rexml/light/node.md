@@ -41,20 +41,12 @@
 
 ### def [](reference, ns = nil)
 #@todo
-#@if (version <= "1.8.0")
-### def _old_get(reference, ns = nil)
-#@todo
-#@end
 
 ### def =~(path)
 #@todo
 
 ### def []=(reference, ns, value = nil)
 #@todo
-#@if (version <= "1.8.0")
-### def _old_put(reference, ns, value = nil)
-#@todo
-#@end
 
 ### def <<(element)
 #@todo
@@ -80,10 +72,6 @@
 ### def to_s
 #@todo
 
-#@if (version <= "1.8.0")
-### def el!
-#@todo
-#@end
 
 ## Constants
 

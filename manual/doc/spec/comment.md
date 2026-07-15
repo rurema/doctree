@@ -6,9 +6,7 @@
   - [ref:encoding]
   - [ref:frozen_string_literal]
   - [ref:warn_indent]
-#@since 3.0
   - [ref:shareable_constant_value]
-#@end
 
 Ruby のコメントには、`#` から行末までを対象とする行コメントと、
 `=begin` から `=end` までの行を対象とする埋め込みドキュメントの
@@ -86,23 +84,15 @@ Ruby インタプリタは埋め込みドキュメントの中身の書式を規
   - エンコーディングの指定([ref:encoding])
   - 文字列リテラルの凍結([ref:frozen_string_literal])
   - インデント不整合の警告([ref:warn_indent])
-#@since 3.0
   - 定数の Ractor 共有可能化([ref:shareable_constant_value])
-#@end
 
 このうち、エンコーディングの指定だけは特別扱いされていて、ファイルの
 1 行目(shebang がある場合は 2 行目)に厳密に書かれている必要があります。
 空行や他のコメント行を挟んだ位置に書いても認識されません。
 
-#@since 3.0
 それ以外のマジックコメント(frozen_string_literal, warn_indent,
 shareable_constant_value)は、実行コードより前であれば、複数のコメント行
 や空行、`=begin`〜`=end` を挟んだ後に書いても認識されます。
-#@else
-それ以外のマジックコメント(frozen_string_literal, warn_indent)は、実行
-コードより前であれば、複数のコメント行や空行、`=begin`〜`=end` を挟んだ
-後に書いても認識されます。
-#@end
 
 ```ruby title="例(frozen_string_literalは複数のコメント行の後でも認識される)"
 # ファイルの説明などの通常のコメント
@@ -205,7 +195,6 @@ indent.rb:6: warning: mismatched indentations at 'end' with 'if' at 4
 場合でもこの警告を抑制できます。意図的に特殊なインデントを使うコード
 (DSL やコード生成物など)で警告を消したい場合に使われます。
 
-#@since 3.0
 ### 定数の Ractor 共有可能化(`shareable_constant_value`) {#shareable_constant_value}
 
 ```ruby title="例"
@@ -239,4 +228,3 @@ FOO = obj
 p Ractor.shareable?(FOO)  #=> true
 p FOO.equal?(obj)         #=> false (コピーされている)
 ```
-#@end

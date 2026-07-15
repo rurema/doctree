@@ -17,11 +17,7 @@ args には rdoc コマンドに渡すのと同様の引数を文字列の配列
 
 rdoc コマンドと同様に変換結果はファイルに出力されるため、テキストを
 HTML に変換する部分をライブラリとして使用したい場合、
-#@since 1.9.1
 [lib:rdoc/markup] を参照してください。
-#@else
-[lib:rdoc/markup/simple_markup] を参照してください。
-#@end
 
 ## Instance Methods
 
@@ -33,11 +29,7 @@ argv で与えられた引数を元にドキュメントをフォーマットし
 - **param** `argv` -- コマンドラインで rdoc コマンドに指定するのと同じ引数を文字
             列の配列で指定します。
 
-#@since 1.9.1
 - **raise** `RDoc::Error` -- ドキュメントの処理中にエラーがあった場合に発生します。
-#@else
-- **raise** `RDoc::RDocError` -- ドキュメントの処理中にエラーがあった場合に発生します。
-#@end
 
 指定できるオプションについては、[ref:lib:rdoc#usage] を参照してくださ
 い。出力ディレクトリが指定されなかった場合はカレントディレクトリ の
@@ -45,7 +37,6 @@ doc 以下に出力します。
 
 ## Class Methods
 
-#@since 1.9.2
 ### def add_generator(klass) -> klass
 
 引数 klass で指定したクラスをジェネレータとして登録します。
@@ -53,4 +44,3 @@ doc 以下に出力します。
 - **param** `klass` -- 登録するクラスを指定します。
 
 - **SEE** [ref:c:RDoc::Options#custom_options]
-#@end

@@ -16,9 +16,7 @@ UNIX のシグナル関連の操作を行うモジュールです。
 p Signal.list   # => {"WINCH"=>28, "PROF"=>27, ...}
 ```
 
-#@since 2.0.0
 - **SEE** [m:Signal?.signame]
-#@end
 
 ### module_function def trap(signal, command)    -> String | Proc | nil
 ### module_function def trap(signal) { ... }     -> String | Proc | nil
@@ -46,18 +44,11 @@ ruby の仕組みの外でシグナルハンドラが登録された場合
                "SIG_DFL" または "DEFAULT" を指定した時は、シグナルハンドラをデフォルトに戻します。
                "EXIT"を指定した時は、シグナルを受け取ると終了処理を
                行ったあとステータス 0 で終了します。
-#@since 1.9.1
                文字列の代わりに [c:Symbol] で指定することも出来ます。
-#@end
 
-#@since 2.0.0
 - **raise** `ArgumentError` -- 引数 signalに SEGV BUS ILL FPE VTALRM を指定した場
                      合に発生します。また、システムに定義されていないシ
                      グナルを引数 signal に指定した場合に発生します。
-#@else
-- **raise** `ArgumentError` -- システムに定義されていないシグナルを引数 signal に
-                     指定した場合に発生します。
-#@end
                      例えばネイティブな Windows システム (mswin32,
                      mingw など) で動く ruby では INT ILL FPE SEGV
                      TERM BREAK ABRT EXIT しか定義されていません。
@@ -97,17 +88,10 @@ fork && Process.wait
 
 - **SEE** [d:spec/terminate]
 
-#@since 2.0.0
-#@since 2.3.0
 ### module_function def signame(signo) -> String | nil
-#@else
-### module_function def signame(signo) -> String
-#@end
 
 引数で指定されたシグナル番号をシグナル名に変換して返します。
-#@since 2.3.0
 対応するシグナル番号が存在しない場合は nil を返します。
-#@end
 
 ```ruby
 Signal.trap("INT") { |signo| puts Signal.signame(signo) }
@@ -116,4 +100,3 @@ Process.kill("INT", 0)
 ```
 
 - **SEE** [m:Signal?.list]
-#@end

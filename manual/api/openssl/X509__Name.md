@@ -124,14 +124,12 @@ n.to_a
 
 DER 形式のバイト列を返します。
 
-#@since 1.9.3
 ### def hash_old -> Integer
 
 OpenSSL 0.9.8 と互換な古い方式のハッシュ関数の
 ハッシュ値を返します。
 
 内部では OpenSSL の X509_NAME_hash_old を呼び出します。
-#@end
 
 ## Constants
 

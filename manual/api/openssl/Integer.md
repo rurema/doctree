@@ -10,9 +10,6 @@ Integer を同じ数を表す [c:OpenSSL::BN] のオブジェクトに
 変換します。
 
 ```ruby
-#@until 2.5.0
-require 'pp'
-#@end
 require 'openssl'
 
 pp 5.to_bn     #=> #<OpenSSL::BN 5>

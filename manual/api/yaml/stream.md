@@ -1,10 +1,6 @@
 複数の YAML ドキュメントを一度に扱うためのサブライブラリです。
 
-#@since 1.9.2
 # class Syck::Stream < Object
-#@else
-# class YAML::Stream < Object
-#@end
 
 YAML ドキュメントを複数保持できるストリームクラスです。
 
@@ -16,26 +12,14 @@ Rubyist Magazine: <https://magazine.rubyist.net/>
 
 ## class methods
 
-#@since 1.9.2
 ### def new(opts = {}) -> Syck::Stream
-#@else
-### def new(opts = {}) -> YAML::Stream
-#@end
 
 ストリームを返します。ストリームはYAMLドキュメントを複数保持できます。
 
 - **param** `opts` -- オプションを指定します。設定可能なオプションは
-#@since 1.9.2
             [m:Syck::DEFAULTS] を参照してください。
-#@else
-            [m:YAML::DEFAULTS] を参照してください。
-#@end
 
-#@since 1.9.2
 - **SEE** [m:Syck::Stream#options], [m:Syck::Stream#options=]
-#@else
-- **SEE** [m:YAML::Stream#options], [m:YAML::Stream#options=]
-#@end
 
 ## instance methods
 
@@ -198,8 +182,4 @@ p ys.documents.pop
 オプションの一覧を設定します。
 
 - **param** `val` -- 設定を [c:Hash] オブジェクトで指定します。設定可能なオプショ
-#@since 1.9.2
            ンは [m:Syck::DEFAULTS] を参照してください。
-#@else
-           ンは [m:YAML::DEFAULTS] を参照してください。
-#@end

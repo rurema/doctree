@@ -1,28 +1,15 @@
 ---
 library:
-#@since 2.3.0
   - _builtin
-#@end
-#@until 2.3.0
-  - thread
-#@end
 ---
-#@since 2.1.0
 # class Thread::Queue < Object
 alias Queue
-#@else
-# class Queue < Object
-#@end
 
 Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 レッドが空のキューを読み出そうとすると停止します。キューになんら
 かの情報が書き込まれると実行は再開されます。
 
-#@since 2.1.0
 最大サイズが指定できる Queue のサブクラス [c:Thread::SizedQueue] も提供されています。
-#@else
-最大サイズが指定できる Queue のサブクラス [c:SizedQueue] も提供されています。
-#@end
 
 ### 例
 
@@ -55,13 +42,9 @@ resource3
 
 ## Class Methods
 
-#@since 2.1.0
 ### def new -> Thread::Queue
 #@since 3.1
 ### def new(items) -> Thread::Queue
-#@end
-#@else
-### def new -> Queue
 #@end
 
 新しいキューオブジェクトを生成します。
@@ -85,9 +68,6 @@ q = Queue.new(items)
 キューを空にします。返り値は不定です。
 
 ```ruby title="例"
-#@until 2.3.0
-require 'thread'
-#@end
 q = Queue.new
 
 [:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
@@ -102,9 +82,6 @@ p q.length # => 0
 キューが空の時、真を返します。
 
 ```ruby title="例"
-#@until 2.3.0
-require 'thread'
-#@end
 q = Queue.new
 p q.empty? # => true
 q.push(:resource)
@@ -117,9 +94,6 @@ p q.empty? # => false
 キューの長さを返します。
 
 ```ruby title="例"
-#@until 2.3.0
-require 'thread'
-#@end
 q = Queue.new
 
 [:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
@@ -208,7 +182,6 @@ end
 
 #@#noexample 要約の例を参照
 
-#@since 2.3.0
 ### def close -> self
 
 キューを close します。close 済みのキューを再度 open することはできません。
@@ -240,9 +213,6 @@ q.close
 キューが close されている時に true を返します。
 
 ```ruby title="例"
-#@until 2.3.0
-require 'thread'
-#@end
 q = Queue.new
 
 [:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
@@ -252,4 +222,3 @@ q.close
 p q.closed? # => true
 ```
 
-#@end

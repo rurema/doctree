@@ -147,9 +147,6 @@ end
 トレースは出力されます。
 
 
-#@if (version < "1.9.1")
-ruby 1.8 ではブロックを与えると警告がでます。
-#@end
 
 フィルタは複数追加でき、
 そのうち一つでも偽を返すとトレースの出力は抑制されます。
@@ -249,7 +246,6 @@ fp.close
 ```
 
 
-#@since 1.9.2
 ### def display_c_call -> bool
 ### def display_c_call? -> bool
 
@@ -289,7 +285,6 @@ fp.close
 ### def stdout_mutex -> Mutex
 #@todo
 
-#@end
 
 ## Instance Methods
 

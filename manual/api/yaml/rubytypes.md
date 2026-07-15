@@ -56,11 +56,7 @@ end
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```ruby
@@ -159,11 +155,7 @@ p c.to_yaml_properties
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```text
@@ -238,11 +230,7 @@ p YStruct::yaml_tag_read_class("YStruct")
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```text
@@ -281,11 +269,7 @@ baz: baz
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```ruby
@@ -332,11 +316,7 @@ print [1, 2, 3].to_yaml
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 # reopen String
@@ -404,11 +384,7 @@ print "テスト".to_yaml
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```ruby
@@ -447,11 +423,7 @@ print "foo".to_yaml # => --- foo
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```ruby
@@ -490,11 +462,7 @@ print :foo.to_yaml # => --- :foo
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```text
@@ -537,11 +505,7 @@ excl: false
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```ruby
@@ -580,11 +544,7 @@ print /foo|bar/.to_yaml # => --- !ruby/regexp /foo|bar/
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```ruby
@@ -619,11 +579,7 @@ print Time.now.to_yaml # => --- 2011-12-31 02:17:31.192322 +09:00
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```ruby
@@ -658,11 +614,7 @@ print Date.today.to_yaml # => --- 2011-12-31
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```ruby
@@ -698,11 +650,7 @@ print -1.to_yaml # => --- -1
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```ruby
@@ -741,11 +689,7 @@ print (0.0/0.0).to_yaml  # => --- .NaN
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```ruby
@@ -780,11 +724,7 @@ print true.to_yaml # => --- true
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```ruby
@@ -819,11 +759,7 @@ print false.to_yaml # => --- false
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-#@since 1.9.2
             オプションの詳細は [m:Syck::Emitter#reset] を参照し
-#@else
-            オプションの詳細は [m:YAML::Syck::Emitter#reset] を参照し
-#@end
             てください。
 
 ```ruby

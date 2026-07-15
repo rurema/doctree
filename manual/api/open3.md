@@ -34,7 +34,6 @@ end
 
 ## Module Functions
 
-#@since 1.9.2
 ### module_function def popen3(*cmd) -> [IO, IO, IO, Thread]
 ### module_function def popen3(*cmd) {|stdin, stdout, stderr, wait_thr| ... } -> ()
 
@@ -70,42 +69,6 @@ Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr
 #    "stderr\n"
 ```
 
-#@else
-### module_function def popen3(*cmd) -> [IO, IO, IO]
-### module_function def popen3(*cmd) {|stdin, stdout, stderr| ... } -> ()
-
-外部プログラム cmd を実行し、そのプロセスの標準入力、
-標準出力、標準エラー出力に接続されたパイプを 3 要素の配列で返します。
-cmd は組み込み関数 [m:Kernel?.exec] と同じ規則で解釈されます。
-
-```ruby
-require 'open3'
-stdin, stdout, stderr = *Open3.popen3("/usr/bin/nroff -man")
-```
-
-- **param** `cmd` -- 実行するコマンドを指定します。
-
-- **return** -- ブロックを指定した場合はブロックの最後に評価された値を返します。
-        ブロックを指定しなかった場合は標準入力、標準出力、標準エラー
-        を返します。
-
-ブロックを指定するとパイプの配列を引数にブロックを実行し、最後にパイプ
-を close します。この場合はブロックの最後の式の結果を返します。
-
-```ruby
-require 'open3'
-
-Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr|
-  stdin.puts "stdin"
-  stdin.close     # または close_write
-  p stdout.read
-  p stderr.read
-}
-# => "stdout\n"
-#    "stderr\n"
-```
-
-#@end
 
 stdin への入力が終わったらできる限り早く close か close_write
 で閉じるべきです。
@@ -113,7 +76,6 @@ stdin への入力が終わったらできる限り早く close か close_write
 [UNIX系OS固有の注意] Open3 で作成した子プロセスは
 [man:wait(2)] しなくてもゾンビになりません。
 
-#@since 1.9.1
 引数 cmd はそのまま [m:Kernel?.spawn] に渡されます。
 [m:Kernel?.spawn]と同様に、引数リストの最初に環境変数をハッシュ形式で
 指定する事ができます。
@@ -150,12 +112,7 @@ Open3.popen3("pwd") {|i,o,e,t|
 ```
 
 - **SEE** [m:Kernel?.spawn]
-#@else
-コマンドは実際には孫プロセスとして動作するため、組み込み変数 [m:$?] でコマンドの終了ステータスを得ることはできません。
-#@#終了ステータスがほしいひとは、((<POpen4|URL:http://popen4.rubyforge.org/>)) を試してみるといいかもしれません。
-#@end
 
-#@since 1.9.2
 
 ### module_function def popen2(*cmd) -> [IO, IO, Thread]
 ### module_function def popen2(*cmd) {|stdin, stdout, wait_thr| ... } -> ()
@@ -474,4 +431,3 @@ Open3.pipeline([{"LANG"=>"C"}, "env"], ["grep", "LANG"], "less")
 
 - **SEE** [m:Open3?.popen3]
 
-#@end

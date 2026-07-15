@@ -32,14 +32,10 @@ p public_methods(false) - basic_public_methods
 # => [:explicit_public_method]
 ```
 
-#@since 3.0
 ### def public() -> nil
 ### def public(name) -> String | Symbol
 ### def public(*name) -> Array
 ### def public(names) -> Array
-#@else
-### def public(*name) -> self
-#@end
 
 メソッドを public に設定します。
 
@@ -50,9 +46,7 @@ p public_methods(false) - basic_public_methods
 定します。
 
 - **param** `name` --  0 個以上の [c:String] または [c:Symbol] を指定します。
-#@since 3.0
 - **param** `names` -- 0 個以上の [c:String] または [c:Symbol] を [c:Array] で指定します。
-#@end
 
 - **raise** `NameError` -- 存在しないメソッド名を指定した場合に発生します。
 
@@ -60,14 +54,10 @@ p public_methods(false) - basic_public_methods
 
 - **SEE** [m:Module#public]
 
-#@since 3.0
 ### def private() -> nil
 ### def private(name) -> String | Symbol
 ### def private(*name) -> Array
 ### def private(names) -> Array
-#@else
-### def private(*name) -> self
-#@end
 
 メソッドを private に設定します。
 
@@ -78,9 +68,7 @@ p public_methods(false) - basic_public_methods
 れるメソッドを関数形式でだけ呼び出せるように(private)設定します。
 
 - **param** `name` --  0 個以上の [c:String] または [c:Symbol] を指定します。
-#@since 3.0
 - **param** `names` -- 0 個以上の [c:String] または [c:Symbol] を [c:Array] で指定します。
-#@end
 
 - **raise** `NameError` -- 存在しないメソッド名を指定した場合に発生します。
 
@@ -89,9 +77,7 @@ p public_methods(false) - basic_public_methods
 - **SEE** [m:Module#private]
 
 ### def to_s    -> "main"
-#@since 2.0.0
 ### def inspect -> "main"
-#@end
 
 "main" を返します。
 
@@ -142,11 +128,7 @@ p hypot(3, 4)  # => 5.0
 
 有効にした拡張の有効範囲については以下を参照してください。
 
-#@since 2.1.0
  - <https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope>
-#@else
- - <https://docs.ruby-lang.org/en/2.0.0/syntax/refinements_rdoc.html#label-Scope>
-#@end
 
 - **param** `module` -- 有効にするモジュールを指定します。
 
@@ -166,14 +148,5 @@ using Sloth
 p "ABC".downcase # => "ABC"
 ```
 
-#@since 2.1.0
 - **SEE** [m:Module#refine], [m:Module#using]
-#@else
-- **SEE** [m:Module#refine]
-#@end
 
-#@until 2.1.0
-[注意] refinements は 2.0 現在、実験的な機能として提供されています。以
-降のバージョンで仕様が変更になる可能性があります。使用すると必ず警告が
-表示されます。
-#@end

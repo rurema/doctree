@@ -1,9 +1,6 @@
 ---
 library: monitor
 include:
-#@until 2.7
-  - MonitorMixin
-#@end
 ---
 # class Monitor < Object
 
@@ -70,16 +67,12 @@ mx.synchronize {
 ## Instance Methods
 
 ### def enter -> ()
-#@since 2.7.0
 ### def mon_enter -> ()
 モニターをロックします。
 
 一度に一つのスレッドだけがモニターをロックできます。
 既にモニターがロックされている場合は、ロックが開放されるまで
 そのスレッドは待ちます。
-#@else
-[m:MonitorMixin#mon_enter] の別名です。
-#@end
 
 [m:Thread::Mutex#lock] に相当します。
 Thread::Mutex#lock と違うのは現在のモニターの所有者が現在実行されているスレッドである場合、
@@ -102,12 +95,8 @@ m.lock # => deadlock; recursive locking (ThreadError)
 ```
 
 ### def exit -> ()
-#@since 2.7.0
 ### def mon_exit -> ()
 モニターのロックを解放します。
-#@else
-[m:MonitorMixin#mon_exit] の別名です。
-#@end
 
 enter でロックした回数だけ exit を呼ばなければモニターは解放されません。
 
@@ -127,7 +116,6 @@ mon.exit # => current thread not owner (ThreadError)
 ```
 
 ### def try_enter     -> bool
-#@since 2.7.0
 ### def try_mon_enter -> bool
 ### def mon_try_enter -> bool
 モニターのロックを取得しようと試みます。
@@ -137,10 +125,6 @@ mon.exit # => current thread not owner (ThreadError)
 
 ロックができなかった場合は偽を返し、実行を継続します。この場合には
 スレッドはブロックしません。
-#@else
-[m:MonitorMixin#mon_try_enter] の別名です。
-#@end
-#@since 2.7.0
 ### def synchronize     { ... } -> object
 ### def mon_synchronize { ... } -> object
 
@@ -183,4 +167,3 @@ m.wait_for_cond(cv, 1)
 
 ### def new_cond -> MonitorMixin::ConditionVariable
 モニターに関連付けられた、新しい [c:MonitorMixin::ConditionVariable] を生成して返します。
-#@end

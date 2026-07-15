@@ -206,10 +206,6 @@ pp メソッドで出力する際に、内部で用いられます。
 - **param** `PP` -- [c::PP] オブジェクトを指定します。
 
 ```ruby
-#@until 2.5.0
-require 'pp'
-
-#@end
 req = Gem::Requirement.new(["< 5.0", ">= 1.9"])
 pp req # => Gem::Requirement.new(["< 5.0", ">= 1.9"])
 ```

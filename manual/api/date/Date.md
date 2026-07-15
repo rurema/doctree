@@ -116,11 +116,7 @@ yesterday = Date.today - 1
 - **param** `mon` -- 月
 - **param** `mday` -- 日
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@since 2.7.0
 - **raise** `Date::Error` -- 正しくない日付になる組み合わせである場合に発生します。
-#@else
-- **raise** `ArgumentError` -- 正しくない日付になる組み合わせである場合に発生します。
-#@end
 
 ```ruby title="例"
 require 'date'
@@ -142,11 +138,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `cweek` -- 週
 - **param** `cwday` -- 週の日 (曜日)
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@since 2.7.0
 - **raise** `Date::Error` -- 正しくない日付になる組み合わせである場合に発生します。
-#@else
-- **raise** `ArgumentError` -- 正しくない日付になる組み合わせである場合に発生します。
-#@end
 
 ### def gregorian_leap? (year) -> bool
 ### def leap? (year) -> bool
@@ -241,11 +233,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `year` -- 年
 - **param** `yday` -- 年の日
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@since 2.7.0
 - **raise** `Date::Error` -- 正しくない日付になる組み合わせである場合に発生します。
-#@else
-- **raise** `ArgumentError` -- 正しくない日付になる組み合わせである場合に発生します。
-#@end
 
 ### def _parse(str, complete = true) -> Hash
 このメソッドは [m:Date.parse] と似ていますが、日付オブジェクトを生成せずに、
@@ -269,11 +257,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `str` -- 日付をあらわす文字列
 - **param** `complete` -- 年を補完するか
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@since 2.7.0
 - **raise** `Date::Error` -- 正しくない日付になる組み合わせである場合に発生します。
-#@else
-- **raise** `ArgumentError` -- 正しくない日付になる組み合わせである場合に発生します。
-#@end
 
 #@# exp
 ### def _rfc2822(str) -> Hash
@@ -379,11 +363,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `str` -- 日付をあらわす文字列
 - **param** `format` -- 書式
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@since 2.7.0
 - **raise** `Date::Error` -- 正しくない日付になる組み合わせである場合に発生します。
-#@else
-- **raise** `ArgumentError` -- 正しくない日付になる組み合わせである場合に発生します。
-#@end
 
 ### def today(start = Date::ITALY) -> Date
 現在の日付に相当する日付オブジェクトを生成します。

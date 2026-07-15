@@ -59,7 +59,6 @@ req.body = "Test Post Data" # => "Test Post Data"
 - **SEE** [m:Net::HTTPGenericRequest#body]
 
 
-#@since 1.9.1
 ### def body_stream -> object
 ### def body_stream=(f)
 
@@ -82,7 +81,6 @@ File.open("/path/to/test", 'rb') do |f|
 end
 ```
 
-#@end
 
 ### def method -> String
 リクエストの HTTP メソッドを文字列で返します。

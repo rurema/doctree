@@ -180,9 +180,7 @@ p Readline::HISTORY.shift #=> "baz"
 - **SEE** [m:Readline::HISTORY.push]、[m:Readline::HISTORY.pop]、
      [m:Readline::HISTORY.delete_at]
 
-#@since 1.9.1
 ### def each -> Enumerator
-#@end
 ### def each {|string| ... }
 
 ヒストリの内容に対してブロックを評価します。
@@ -197,7 +195,6 @@ Readline::HISTORY.each do |s|
 end
 ```
 
-#@since 1.9.1
 例: [c:Enumerator] オブジェクトを返す場合。
 
 ```ruby
@@ -209,7 +206,6 @@ e.each do |s|
   p s #=> "foo", "bar", "baz"
 end
 ```
-#@end
 
 ### def length -> Integer
 ### def size -> Integer
@@ -262,10 +258,8 @@ Readline::HISTORY.delete_at(1)
 p Readline::HISTORY.to_a #=> ["foo", "baz"]
 ```
 
-#@since 1.9.1
 ### def clear -> self
 
 ヒストリの内容をすべて削除して空にします。
 
 - **raise** `NotImplementedError` -- サポートしていない環境で発生します。
-#@end

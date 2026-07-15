@@ -1,22 +1,11 @@
 ---
 library:
-#@since 2.3.0
   - _builtin
-#@end
-#@until 2.3.0
-  - thread
-#@end
 ---
-#@since 2.1.0
 # class Thread::SizedQueue < Thread::Queue
 alias SizedQueue
 
 サイズの最大値を指定できる [c:Thread::Queue] です。
-#@else
-# class SizedQueue < Queue
-
-サイズの最大値を指定できる [c:Queue] です。
-#@end
 
 ### 例
 
@@ -45,13 +34,8 @@ th.join
 
 ## Class Methods
 
-#@since 2.1.0
 ### def new(max) -> Thread::SizedQueue
 Thread::SizedQueue オブジェクトを生成します。
-#@else
-### def new(max) -> SizedQueue
-SizedQueue オブジェクトを生成します。
-#@end
 
 - **param** `max` -- キューのサイズの最大値です。
 
@@ -73,54 +57,28 @@ p q.max # => 4
 - **param** `n` -- キューの最大サイズを指定します。
 
 ```ruby title="例"
-#@until 2.3.0
-require 'thread'
-#@end
 q = SizedQueue.new(4)
 p q.max # => 4
 q.max = 5
 p q.max # => 5
 ```
 
-#@since 2.2.0
 ### def push(obj, non_block = false) -> ()
 ### def enq(obj, non_block = false)  -> ()
 ### def <<(obj)                      -> ()
-#@else
-### def push(obj) -> ()
-### def <<(obj)   -> ()
-### def enq(obj)  -> ()
-#@end
 
 キューに与えられたオブジェクトを追加します。
 
-#@since 2.1.0
 キューのサイズが [m:Thread::SizedQueue#max] に達している場合は、
-#@since 2.2.0
 non_block が真でなければ、キューのサイズが [m:Thread::SizedQueue#max]
 より小さくなるまで他のスレッドに実行を譲ります。
-#@else
-キューのサイズが [m:Thread::SizedQueue#max] より小さくなるまで他のスレッドに実行を譲ります。
-#@end
 その後、キューに与えられたオブジェクトを追加します。
 
 - **param** `obj` -- キューに追加したいオブジェクトを指定します。
-#@since 2.2.0
 - **param** `non_block` -- true を与えると、キューが一杯の時に例外 [c:ThreadError] が発生します。
-#@end
 
 #@#noexample 要約の例を参照
 - **SEE** [m:Thread::Queue#push]
-#@else
-キューのサイズが [m:SizedQueue#max] に達している場合は、
-キューのサイズが [m:SizedQueue#max] より小さくなるまで他のスレッドに実行を譲ります。
-その後、キューに与えられたオブジェクトを追加します。
-
-- **param** `obj` -- キューに追加したいオブジェクトを指定します。
-
-#@#noexample 要約の例を参照
-- **SEE** [m:Queue#push]
-#@end
 
 ### def pop(non_block = false)   -> object
 ### def shift(non_block = false) -> object
@@ -182,13 +140,8 @@ end
 # => "queue empty"
 ```
 
-#@since 2.1.0
 - **SEE** [m:Thread::Queue#pop]
-#@else
-- **SEE** [m:Queue#pop]
-#@end
 
-#@since 2.3.0
 ### def close -> self
 
 キューを close します。詳しくは [m:Thread::Queue#close] を参照してください。
@@ -208,8 +161,6 @@ p q.closed? # => true
 ```
 
 - **SEE** [m:Thread::Queue#close]
-#@end
-#@since 2.5.0
 ### def empty? -> bool
 
 キューが空の時、真を返します。
@@ -218,4 +169,3 @@ p q.closed? # => true
 ### def size -> Integer
 
 キューの長さを返します。
-#@end

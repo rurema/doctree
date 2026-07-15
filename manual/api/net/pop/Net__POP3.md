@@ -361,11 +361,7 @@ POP session started: pop.example.com:110 (POP)
 ### def open_timeout -> Integer
 接続時に待つ最大秒数を返します。
 
-#@until 2.0.0
-この秒数たってもコネクションが開かないときは例外 [c:TimeoutError] を発生します。
-#@else
 この秒数たってもコネクションが開かないときは例外 [c:Net::OpenTimeout] を発生します。
-#@end
 
 デフォルトは30秒です。
 
@@ -380,11 +376,7 @@ POP session started: pop.example.com:110 (POP)
 ### def read_timeout -> Integer
 読み込みでブロックしてよい最大秒数を返します。
 
-#@until 2.0.0
-この秒数たっても読みこめなければ例外 [c:TimeoutError] を発生します。
-#@else
 この秒数たっても読みこめなければ例外 [c:ReadTimeout] を発生します。
-#@end
 
 デフォルトは60秒です。
 
@@ -393,11 +385,7 @@ POP session started: pop.example.com:110 (POP)
 ### def read_timeout=(n)
 読み込みでブロックしてよい最大秒数を設定します。
 
-#@until 2.0.0
-この秒数たっても読みこめなければ例外 [c:TimeoutError] を発生します。
-#@else
 この秒数たっても読みこめなければ例外 [c:ReadTimeout] を発生します。
-#@end
 
 - **param** `n` -- タイムアウトまでの秒数
 - **SEE** [m:Net::POP3#read_timeout]

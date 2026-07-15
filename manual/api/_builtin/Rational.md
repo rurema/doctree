@@ -117,7 +117,6 @@ r / 0                # => ZeroDivisionError
 
 - **SEE** [m:Numeric#quo]
 
-#@since 2.4.0
 ### def -@ -> Rational
 
 単項演算子の - です。
@@ -127,7 +126,6 @@ self の符号を反転させたものを返します。
 r = Rational(3, 4)
 p(- r)        # => (-3/4)
 ```
-#@end
 
 ### def <=>(other) -> -1 | 0 | 1 | nil
 
@@ -164,7 +162,6 @@ p Rational('1/3') == 0.33           # => false
 p Rational('1/2') == '1/2'          # => false
 ```
 
-#@since 2.4.0
 ### def positive? -> bool
 
 self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
@@ -197,7 +194,6 @@ p Rational(1, 2).abs   # => (1/2)
 p Rational(-1, 2).abs  # => (1/2)
 ```
 
-#@end
 
 
 ### def ceil(precision = 0) -> Integer | Rational

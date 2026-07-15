@@ -199,7 +199,6 @@ p IPAddr.new("0000:0000:0000:0000:0000:ffff:c0a8:0001").native
     # => #<IPAddr: IPv4:192.168.0.1/255.255.255.255>
 ```
 
-#@since 2.5.0
 ### def prefix -> Integer
 
 プリフィックス長をビット数で返します。
@@ -212,7 +211,6 @@ p IPAddr.new("0000:0000:0000:0000:0000:ffff:c0a8:0001").native
 
 - **raise** `IPAddr::InvalidPrefixError` -- 引数 prefixlen に整数以外のオブジェクトを指定した場合に発生します。
 
-#@end
 
 ### def reverse -> String
 
@@ -281,7 +279,6 @@ IPAddr.new('::1').to_range
 ```
 
 
-#@since 1.9.2
 ### def eql?(other) -> bool
 
 自身が other と等しい場合は真を返します。
@@ -295,7 +292,6 @@ IPAddr.new('::1').to_range
 
 - **SEE** [m:Object#hash]
 
-#@end
 
 ## Protected Instance Methods
 

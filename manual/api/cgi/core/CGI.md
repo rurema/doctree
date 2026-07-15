@@ -22,7 +22,6 @@ params = CGI.parse("query_string")
   #  "name2" => ["value1", "value2", ...], ... }
 ```
 
-#@since 1.9.1
 ### def accept_charset -> String
 
 受けとることができるキャラクタセットを文字列で返します。
@@ -36,13 +35,8 @@ params = CGI.parse("query_string")
 
 - **SEE** [d:spec/m17n]
 
-#@end
-#@until 1.9.1
-#@include(../util.rd)
-#@end
 ## Instance Methods
 
-#@since 1.9.1
 ### def accept_charset -> String
 
 受けとることができるキャラクタセットを文字列で返します。
@@ -53,7 +47,6 @@ params = CGI.parse("query_string")
 ### def nph? -> bool
 #@#nodoc
 
-#@end
 
 ### def header(options = "text/html") -> String
 
@@ -214,12 +207,10 @@ cgi.print "This line is a part of content body.\r\n"
 #@# --- REVISION -> String
 #@# nodoc
 
-#@since 1.9.2
 ### const NEEDS_BINMODE -> bool
 
 ファイルを開くときにバイナリモードが必要かどうかを表す定数です。
 プラットフォーム依存の定数です。
-#@end
 
 ### const PATH_SEPARATOR -> Hash
 
@@ -229,21 +220,6 @@ cgi.print "This line is a part of content body.\r\n"
 
 HTTP のステータスコードを表すハッシュです。
 
-#@until 1.9.1
-#@# 1.9.1 以降は cgi/util.rd を参照
-### const RFC822_DAYS -> [String]
-
-[rfc:822] で定義されている曜日の略称を返します。
-
-- **SEE** [rfc:822]
-
-### const RFC822_MONTHS -> [String]
-
-[rfc:822] で定義されている月名の略称を返します。
-
-- **SEE** [rfc:822]
-#@end
-#@since 1.9.1
 ### const MAX_MULTIPART_LENGTH -> Integer
 
 Maximum content length of multipart data
@@ -252,4 +228,3 @@ Maximum content length of multipart data
 
 Maximum number of request parameters when multipart
 
-#@end

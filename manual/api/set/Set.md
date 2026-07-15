@@ -157,9 +157,7 @@ p set.to_a # => ["hello", "world"]
 
 ### def include?(o) -> bool
 ### def member?(o) -> bool
-#@since 2.5.0
 ### def ===(o) -> bool
-#@end
 
 オブジェクト o がその集合に属する場合に true を返します。
 
@@ -400,11 +398,7 @@ s2 = Set[10, 30, 50]
 p s1 & s2 #=> #<Set: {10, 30}>
 ```
 
-#@since 2.7.0
 - **SEE** [m:Array#&], [m:Array#intersection]
-#@else
-- **SEE** [m:Array#&]
-#@end
 
 ### def ^(enum) -> Set
 
@@ -511,9 +505,7 @@ p board.divide { |i,j|
 ```
 
 ### def inspect -> String
-#@since 2.5.0
 ### def to_s -> String
-#@end
 
 人間の読みやすい形に表現した文字列を返します。
 
@@ -523,7 +515,6 @@ puts Set.new(['element1', 'element2']).inspect
 # => #<Set: {"element1", "element2"}>
 ```
 
-#@since 2.1.0
 ### def intersect?(set) -> bool
 
 self と set の共通要素がある場合に true を返します。
@@ -556,7 +547,6 @@ p Set[1, 2, 3].disjoint? Set[4, 5] # => true
 ```
 
 - **SEE** [m:Set#intersect?]
-#@end
 
 ### def keep_if {|element| ... } -> self
 
@@ -565,15 +555,12 @@ p Set[1, 2, 3].disjoint? Set[4, 5] # => true
 - **return** -- 常に self を返します。
 
 ### def select! {|element| ... } -> self | nil
-#@since 2.6.0
 ### def filter! {|element| ... } -> self | nil
-#@end
 
 各要素に対してブロックを評価し、その結果が偽であった要素を self から削除します。
 
 - **return** -- 変更があった場合は self を、変更がなかった場合は nil を返します。
 
-#@since 2.5.0
 ### def reset -> self
 
 キーのハッシュ値を再計算します。
@@ -583,5 +570,4 @@ p Set[1, 2, 3].disjoint? Set[4, 5] # => true
 要素はインデックスし直され、重複削除されます。
 
 - **SEE** [m:Hash#rehash]
-#@end
 

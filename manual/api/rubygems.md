@@ -1,7 +1,6 @@
 ---
 type: library
 require:
-#@since 1.9.1
   - rubygems/defaults
   - rubygems/exceptions
   - rubygems/version
@@ -11,13 +10,9 @@ require:
   - rubygems/source_index
   - rubygems/platform
   - rubygems/builder
-#@end
 sublibrary:
-#@since 1.9.1
   - rubygems/gem_runner
-#@end
 ---
-#@since 1.9.1
 RubyGems を扱うためのクラスやモジュールが定義されているライブラリです。
 
 #@# _builtin/ 以下に移動する予定だったが形式が違いすぎるため保留
@@ -108,18 +103,10 @@ $ gem update rak
 パッケージ名から Gem パッケージを探すことができます。
 'active' という文字列をパッケージ名に含むパッケージを探すには以下のようにします。
 
-#@since 2.0.0
 `````
 $ gem search active       # デフォルトではリポジトリから検索します
 $ gem search active -a    # -a オプションをつけると全てのバージョンを表示します
 `````
-#@else
-`````
-$ gem search active       # デフォルトではローカルにインストールされているものから検索します
-$ gem search active -r    # -r オプションをつけるをリポジトリから検索します
-$ gem search active -r -a # -a オプションをつけると全てのバージョンを表示します
-`````
-#@end
 
 より詳細な条件で検索したい場合は query を使用してください。
 
@@ -453,4 +440,3 @@ prelude.c で定義されている内部用の定数です。
 
 prelude.c で定義されている内部用の定数です。
 
-#@end

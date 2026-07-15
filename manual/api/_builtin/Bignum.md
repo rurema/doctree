@@ -97,38 +97,16 @@ self を other で割った商 q と余り r を、 [q, r] という 2 要素の
 
 - **SEE** [m:Numeric#divmod]
 
-#@until 1.9.1
-### def quo(other) -> Float
 
-self を other で割った商を返します。
-整商を得たい場合は [m:Bignum#div] を使ってください。
-
-[m:Bignum#fdiv] との違いについては [m:Numeric#quo] を参照してください。
-
-- **param** `other` -- self を割る数を指定します。
-
-- **SEE** [m:Numeric#quo]
-#@end
-
-#@since 1.9.1
 ### def fdiv(other) -> Float | Complex
-#@else
-### def fdiv(other) -> Float
-#@end
 
 self を other で割った商を [c:Float] で返します。
-#@since 1.9.1
 ただし [c:Complex] が関わる場合は例外です。
 その場合も成分は Float になります。
-#@end
 
 - **param** `other` -- self を割る数を指定します。
 
-#@since 1.9.1
 - **SEE** [m:Numeric#quo]
-#@else
-- **SEE** [m:Bignum#quo]
-#@end
 
 ### def **(other) -> Fixnum | Bignum | Float
 
@@ -158,9 +136,7 @@ p 2 <=> 1 #=> 1
 ```
 
 ### def ==(other) -> bool
-#@since 1.9.1
 ### def ===(other) -> bool
-#@end
 
 比較演算子。数値として等しいか判定します。
 
@@ -266,9 +242,7 @@ self のハッシュ値を返します。
 値を浮動小数点数([c:Float])に変換します。
 
 ### def to_s(base = 10)    -> String
-#@since 2.0.0
 ### def inspect(base = 10) -> String
-#@end
 
 self を引数で指定した基数の文字列表現に変換します。
 
@@ -283,13 +257,10 @@ p 78546939656932.to_s(36)  #=> "rubyrules"
 ```
 
 ### def abs -> Fixnum | Bignum
-#@since 1.9.1
 ### def magnitude -> Fixnum | Bignum
-#@end
 
 self の絶対値を返します。
 
-#@since 1.9.1
 ### def odd? -> bool
 
 self が奇数の場合に true を返します。そうでない場合に false を返します。
@@ -297,9 +268,7 @@ self が奇数の場合に true を返します。そうでない場合に false
 ### def even? -> bool
 
 self が偶数の場合に true を返します。そうでない場合に false を返します。
-#@end
 
-#@since 2.1.0
 ### def bit_length -> Integer
 
 self を表すのに必要なビット数を返します。
@@ -329,4 +298,3 @@ p (2**10000+1).bit_length # => 10001
 ```
 
 - **SEE** [m:Fixnum#bit_length]
-#@end

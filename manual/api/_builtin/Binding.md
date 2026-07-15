@@ -38,7 +38,6 @@ p get_binding("bye").eval("str + ' Fred'")   #=> "bye Fred"
 - **SEE** [m:Kernel?.eval]
 
 
-#@since 2.1.0
 ### def local_variable_get(symbol) -> object
 
 引数 symbol で指定した名前のローカル変数に設定された値を返します。
@@ -116,9 +115,7 @@ binding.eval("defined?(#{symbol}) == 'local-variable'")
 ```
 
 - **SEE** [m:Binding#local_variable_get], [m:Binding#local_variable_set]
-#@end
 
-#@since 2.2.0
 ### def local_variables -> [Symbol]
 
 ローカル変数の一覧を [c:Symbol] の配列で返します。
@@ -148,16 +145,12 @@ binding.eval("local_variables")
 ```ruby
 binding.eval("self")
 ```
-#@end
-#@since 2.4.0
 ### def irb -> object
 REPLのセッションを開始します。
 
 2.5.0 からは require 'irb' せずに直接 binding.irb を呼び出しても使えるようになりました。
 
 - **SEE** [lib:irb]
-#@end
-#@since 2.6.0
 ### def source_location  -> [String, Integer]
 
 self の Ruby のソースファイル名と行番号を返します。
@@ -167,4 +160,3 @@ self の Ruby のソースファイル名と行番号を返します。
 ```ruby title="例"
 p binding.source_location # => ["test.rb", 1]
 ```
-#@end

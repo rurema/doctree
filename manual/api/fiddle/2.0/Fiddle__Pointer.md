@@ -6,11 +6,7 @@ since: "2.0.0"
 
 メモリ領域を表すクラスです。C 言語のポインタに相当します。 
 
-#@since 2.2.0
 2.2.0 で削除された dl の DL::CPtr に対応します。
-#@else
-2.2.0 で削除された [lib:dl] の [c:DL::CPtr] に対応します。
-#@end
 DL::CPtrとほぼ同じインターフェースを持ちます。
 
 ## Singleton Methods

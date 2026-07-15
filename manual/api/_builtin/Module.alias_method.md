@@ -1,22 +1,12 @@
-#@since 3.0
 ### def alias_method(new, original) -> Symbol
-#@else
-### def alias_method(new, original) -> self
-#@end
 
 メソッドの別名を定義します。
 
 ```ruby title="例"
-#@since 3.0
 module Kernel
   p alias_method :hoge, :puts # => :hoge
   p alias_method "foo", :puts # => :foo
 end
-#@else
-module Kernel
-  p alias_method :hoge, :puts # => Kernel
-end
-#@end
 ```
 
 alias との違いは以下の通りです。
@@ -30,11 +20,7 @@ alias との違いは以下の通りです。
 
 - **param** `original` -- 元のメソッド名。[c:String] または [c:Symbol] で指定します。
 
-#@since 3.0
 - **return** -- 作成したエイリアスのメソッド名を表す [c:Symbol] を返します。
-#@else
-- **return** -- self を返します。
-#@end
 
 - **SEE** [ref:d:spec/def#alias]
 

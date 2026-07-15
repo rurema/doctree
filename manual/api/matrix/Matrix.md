@@ -270,7 +270,6 @@ p Matrix.vstack(x, y) # => Matrix[[1, 2], [3, 4], [5, 6], [7, 8]]
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 列数の異なる行列がある場合に発生します
 - **SEE** [m:Matrix.hstack], [m:Matrix#vstack]
 
-#@since 2.5.0
 ### def combine(*matrices) {|*elements| ... } -> Matrix
 ### def combine(*matrices) -> Enumerator
 
@@ -286,7 +285,6 @@ p Matrix.combine(x, y) {|a, b| a - b} # => Matrix[[5, 4], [1, 0]]
 - **param** `matrices` -- 並べる行列。すべての行列の行数と列数が一致していなければならない
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 行や列の要素数が一致しない時に発生します
 - **SEE** [m:Matrix#combine]
-#@end
 ## Instance Methods
 ### def [](i, j) -> ()
 ### def element(i, j) -> ()
@@ -433,7 +431,6 @@ m = Matrix[a1, a2, a3, a4, a5]
 p m.minor(0, 2, 1, 2) # => Matrix[[2, 3], [12, 13]]
 ```
 
-#@since 2.6.0
 ### def []=(row, col, v)
 
 行が row、列が col である範囲を v に変更する。
@@ -466,7 +463,6 @@ p m  # => Matrix[[9, 9, 0], [9, 9, 0], [9, 9, 0]]
 m[1..-1, 0..1] = Matrix[[1, 2], [3, 4]]
 p m  # => Matrix[[9, 9, 0], [1, 2, 0], [3, 4, 0]]
 ```
-#@end
 
 ### def +@ -> self
 
@@ -757,46 +753,30 @@ p x.vstack(y) # => Matrix[[1, 2], [3, 4], [5, 6], [7, 8]]
 
 - **SEE** [m:Matrix.vstack], [m:Matrix#hstack]
 
-#@since 2.6.0
 ### def map(which = :all) {|x| ... } -> Matrix
 ### def collect(which = :all) {|x| ... } -> Matrix
 ### def map(which = :all) -> Enumerator
 ### def collect(which = :all) -> Enumerator
-#@else
-### def map {|x| ... } -> Matrix
-### def collect {|x| ... } -> Matrix
-### def map -> Enumerator
-### def collect -> Enumerator
-#@end
 
 行列の各要素に対してブロックの適用を繰り返した結果を、要素として持つ行列を生成します。
 
 ブロックがない場合、 [c:Enumerator] を返します。
 
-#@since 2.6.0
 - **param** `which` --  which に以下の [c:Symbol] を指定することで、
               引数として使われる要素を限定できます。
               デフォルトは、:all (全ての要素)です。
               指定できる [c:Symbol] の詳細は、 [m:Matrix#each] の項目を参照して下さい。
-#@end
 
 ```ruby title="例"
 require 'matrix'
 
 m = Matrix[[1, 2], [3, 4]]
 p m.map { |x| x + 100 } # => Matrix[[101, 102], [103, 104]]
-#@since 2.6.0
 p m.map(:diagonal) { |x| x * 10 } # => Matrix[[10, 2], [3, 40]]
-#@end
 ```
 
-#@since 2.6.0
 - **SEE** [m:Matrix#each], [m:Matrix#map!]
-#@else
-- **SEE** [m:Matrix#each]
-#@end
 
-#@since 2.6.0
 ### def map!(which = :all) {|element| ... } -> self
 ### def collect!(which = :all) {|element| ... } -> self
 ### def map!(which = :all) -> Enumerator
@@ -822,7 +802,6 @@ p m                                 #=> Matrix[[10, 20], [30, 40]]
 ```
 
 - **SEE** [m:Matrix#each], [m:Matrix#map]
-#@end
 
 ### def empty? -> bool
 行列が要素を持たないならば true を返します。
@@ -1196,12 +1175,7 @@ m = Matrix[a1, a2]
 p m.inspect # => "Matrix[[1, 2], [3, 4.5]]"
 ```
 
-#@until 2.6.0
-### def clone -> Matrix
-自分自身のコピーを返します。
-#@end
 
-#@since 2.5.0
 ### def combine(*matrices) {|*elements| ... } -> Matrix
 
 要素ごとにブロックを呼び出した結果を組み合わせた Matrix を返します。
@@ -1222,8 +1196,6 @@ require 'matrix'
 
 p Matrix[[1,2], [3,4]].hadamard_product(Matrix[[1,2], [3,2]]) # => Matrix[[1, 4], [9, 8]]
 ```
-#@end
-#@since 2.6.0
 ### def antisymmetric? -> bool
 ### def skew_symmetric? -> bool
 
@@ -1244,5 +1216,4 @@ p Matrix[[1, -2, 3], [2, 0, 6], [-3, -6, 0]].antisymmetric? # => false
 p Matrix[[0, 2, -3], [2, 0, 6], [-3, 6, 0]].antisymmetric? # => false
 ```
 
-#@end
 

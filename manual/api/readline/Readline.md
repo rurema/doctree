@@ -168,7 +168,6 @@ end
 
 ## Singleton Methods
 
-#@since 1.9.1
 ### def input=(input)
 
 readline メソッドで使用する入力用の [c:File] オブジェクト input を指定します。
@@ -182,7 +181,6 @@ readline メソッドで使用する出力用の [c:File] オブジェクト out
 戻り値は指定した [c:File] オブジェクト output です。
 
 - **param** `output` -- [c:File] オブジェクトを指定します。
-#@end
 
 ### def completion_proc=(proc)
 
@@ -200,9 +198,7 @@ proc は、次のものを想定しています。
 カーソルがある単語の最初の文字から現在のカーソル位置までの文字列が proc の引数に渡されます。
 
 - **param** `proc` -- ユーザからの入力を補完する時の候補を取得する [c:Proc] オブジェクトを指定します。
-#@since 1.9.2
             nil を指定した場合はデフォルトの動作になります。
-#@end
 
 例: foo、foobar、foobazを補完する。
 
@@ -430,7 +426,6 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 - **SEE** [m:Readline.filename_quote_characters=]
 
-#@since 1.9.2
 ### def Readline.set_screen_size(rows, columns) -> Readline
 
 端末のサイズを引数 row、columns に設定します。
@@ -450,7 +445,6 @@ GNU Readline のデフォルト値は nil(NULL) です。
 - **raise** `NotImplementedError` -- サポートしていない環境で発生します。
 
 - **SEE** GNU Readline ライブラリの rl_get_screen_size 関数
-#@end
 
 ## Constants
 

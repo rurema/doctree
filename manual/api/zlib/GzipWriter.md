@@ -316,11 +316,7 @@ Zlib::GzipReader.wrap(fr){|gz|
 
 - **SEE** [m:IO#printf], [m:Kernel?.printf]
 
-#@since 2.5.0
 ### def write(*str) -> Integer
-#@else
-### def write(str) -> Integer
-#@end
 
 自身に str を出力します。str が文字列でなけ
 れば to_s による文字列化を試みます。

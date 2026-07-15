@@ -1,11 +1,9 @@
 ---
 type: library
 ---
-#@since 1.9.1
 HTML を生成するためのメソッドを提供するモジュールを定義したライブラリです。
 
 様々な DTD に対応しています。
-#@end
 # module CGI::TagMaker
 #@#nodoc
 

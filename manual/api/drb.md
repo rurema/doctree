@@ -106,11 +106,7 @@ ro.instance_eval("DANGEROUS RUBY CODE!")
 ```
 
 このような instance_eval による危険性は [m:$SAFE] を 1
-#@since 2.3.0
 にすることで防げます。
-#@else
-以上にすることで防げます。
-#@end
 [m:DRb?.start_service] の :safe_level オプションで
 リモートからのメソッド呼び出しのコンテキストで指定されるセーフレベルを
 指定できます。

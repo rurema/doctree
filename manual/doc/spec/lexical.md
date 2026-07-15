@@ -64,15 +64,9 @@ alias    defined? for      or       then     yield
 and      do       if       redo     true     __LINE__
 begin    else     in       rescue   undef    __FILE__
 `````````````
-#@since 1.9.1
 `````````````
 break    elsif    module   retry    unless   __ENCODING__
 `````````````
-#@else
-`````````````
-break    elsif    module   retry    unless
-`````````````
-#@end
 `````````````
 case     end      next     return   until
 `````````````
@@ -83,10 +77,8 @@ case     end      next     return   until
 ピリオドのあとなどメソッド名であるとはっきり分かる場所では
 メソッド名として用いることができます。
 
-#@since 3.0
 また、番号指定パラメータは変数名、def で定義するメソッド名に用いることはできません。
 
 ```text
 _1 _2 _3 _4 _5 _6 _7 _8 _9
 ```
-#@end

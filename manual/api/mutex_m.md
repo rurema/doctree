@@ -6,11 +6,7 @@ category: Thread
 
 # module Mutex_m
 
-#@since 2.3.0
 スレッド同期機構である [c:Thread::Mutex] のモジュール版です。クラスに
-#@else
-スレッド同期機構である [c:Mutex] のモジュール版です。クラスに
-#@end
 [m:Module#include] することでそのクラスに Mutex 機能を持たせることができます。
 また、普通のオブジェクトを [m:Object#extend] により Mutex にする事ができます。
 
@@ -81,20 +77,12 @@ self のロックを取得し、ブロックを実行します。実行後に必
 
 ブロックで最後に評価した値を返します。
 
-#@until 1.9.1
-### def mu_lock -> self
-### def lock -> self
-#@else
 ### def mu_lock -> ()
 ### def lock -> ()
-#@end
 self をロックします。一度にひとつのスレッドしかロックできません。
 既にロックされている mutex に対してロックを行おうとしたスレッドは
 ロックが解放されるまで、実行が停止されます。
 
-#@until 1.9.1
-self を返します。
-#@end
 
 ### def mu_locked? -> bool
 ### def locked? -> bool
@@ -106,18 +94,9 @@ self をロックしようとして、成功した場合、真を返し、ロッ
 
 ロックできなかった場合にはブロックせず偽を返します。
 
-#@until 1.9.1
-### def mu_unlock -> self | nil
-### def unlock -> self | nil
-#@else
 ### def mu_unlock -> ()
 ### def unlock -> ()
-#@end
 ロックを解放します。ロック待ちになっていたスレッドの実行は再開されます。
 
-#@until 1.9.1
-self がロックされていなければ nil を返します。そうでなければself を返します。
-#@else
 - **raise** `ThreadError` -- ロックされていない場合に unlock を呼ぶと発生します
-#@end
 

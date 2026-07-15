@@ -55,10 +55,6 @@ Foo.new.foo
 
 self を obj にバインドした [c:Method] オブジェクトを生成して返します。
 
-#@until 1.9.1
-NOTE: Ruby 1.8.xでモジュールのインスタンスメソッドをbindすると不審な挙動を
-するので避けるべきである。
-#@end
 
 - **param** `obj` -- 自身をバインドしたいオブジェクトを指定します。ただしバインドできるのは、
            生成元のクラスかそのサブクラスのインスタンスのみです。
@@ -103,7 +99,6 @@ end
 p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
 ```
 
-#@since 2.7.0
 - **SEE** [m:UnboundMethod#bind_call]
 ### def bind_call(recv, *args) -> object
 ### def bind_call(recv, *args) { ... } -> object
@@ -117,7 +112,6 @@ puts Kernel.instance_method(:inspect).bind_call(BasicObject.new) # => #<BasicObj
 ```
 
 - **SEE** [m:UnboundMethod#bind], [m:Method#call]
-#@end
 ### def arity    -> Integer
 
 メソッドが受け付ける引数の数を返します。
@@ -154,9 +148,7 @@ p String.instance_method(:count).arity   #=> -1
 ```
 
 ### def ==(other)     -> bool
-#@since 1.9.1
 ### def eql?(other)   -> bool
-#@end
 
 自身と other が同じクラスあるいは同じモジュールの同じメソッドを表す場合に
 true を返します。そうでない場合に false を返します。
@@ -196,36 +188,21 @@ p String.instance_method(:count).inspect # => "#<UnboundMethod: String#count>"
 
 - **SEE** [m:Method#inspect]
 
-#@since 1.9.1
 ### def hash    -> Integer
 
 自身のハッシュ値を返します。
 
-#@until 2.0.0
-eql? が真でも hash が一致しない場合があるので [m:Array#uniq] などが意図通り動作しないことがあります。
-この挙動はバグなので Ruby2.0.0 以降では修正済みです。[ruby-core:42755]
-#@end
 
 ```ruby title="例"
 a = method(:==).unbind
 b = method(:eql?).unbind
 p a.eql? b          # => true
-#@since 2.0.0
 p a.hash == b.hash  # => true
 p [a, b].uniq.size  # => 1
-#@else
-p a.hash == b.hash  # => false
-p [a, b].uniq.size  # => 2
-#@end
 ```
 
-#@end
 
-#@until 1.9.1
-### def name    -> String
-#@else
 ### def name    -> Symbol
-#@end
 
 このメソッドの名前を返します。
 
@@ -245,7 +222,6 @@ p Integer.instance_method(:hash).owner # => Kernel
 ```
 
 
-#@since 1.9.1
 ### def source_location -> [String, Integer] | nil
 
 ソースコードのファイル名と行番号を配列で返します。
@@ -261,9 +237,7 @@ p Time.instance_method(:httpdate).source_location # => ["/Users/user/.rbenv/vers
 ```
 
 - **SEE** [m:Proc#source_location], [m:Method#source_location]
-#@end
 
-#@since 1.9.2
 ### def parameters -> [object]
 
 UnboundMethod オブジェクトの引数の情報を返します。
@@ -274,9 +248,7 @@ UnboundMethod オブジェクトの引数の情報を返します。
 
 
 - **SEE** [m:Proc#parameters], [m:Method#parameters]
-#@end
 
-#@since 2.2.0
 ### def super_method -> UnboundMethod | nil
 
 self 内で super を実行した際に実行されるメソッドを [c:UnboundMethod] オブジェ
@@ -285,9 +257,7 @@ self 内で super を実行した際に実行されるメソッドを [c:Unbound
 #@#noexample Method#super_methodを参照
 
 - **SEE** [m:Method#super_method]
-#@end
 
-#@since 2.1.0
 ### def original_name -> Symbol
 
 オリジナルのメソッド名を返します。
@@ -301,7 +271,6 @@ p C.instance_method(:bar).original_name # => :foo
 ```
 
 - **SEE** [m:Method#original_name]
-#@end
 
 #@if (version == "3.1")
 ### def public? -> bool

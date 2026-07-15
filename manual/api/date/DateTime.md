@@ -43,11 +43,7 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `ArgumentError` -- 正しくない日時
 
-#@since 1.9.0
 ### def commercial(cwyear = -4712, cweek = 1, cwday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
-#@else
-### def commercial(cwyear = 1582, cweek = 41, cwday = 5, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
-#@end
 暦週日付に相当する日時オブジェクトを生成します。
 
 [m:DateTime.new] も参照してください。
@@ -62,7 +58,6 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `ArgumentError` -- 正しくない日時
 
-#@since 1.9.0
 #@# exp
 ### def httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> DateTime
 [RFC:2616] で定められた書式の日付を解析し、
@@ -72,9 +67,7 @@ yesterday = DateTime.now - 1
 
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@end
 
-#@since 1.9.0
 #@# exp
 ### def iso8601(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 いくつかの代表的な ISO 8601 書式の日付を解析し、
@@ -86,7 +79,6 @@ yesterday = DateTime.now - 1
 
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@end
 
 ### def jd(jd = 0, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 ユリウス日に相当する日時オブジェクトを生成します。
@@ -101,7 +93,6 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `ArgumentError` -- 正しくない日時
 
-#@since 1.9.0
 #@# exp
 ### def jisx0301(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 いくつかの代表的な JIS X 0301 書式の日付を解析し、
@@ -111,7 +102,6 @@ yesterday = DateTime.now - 1
 
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@end
 
 ### def now(start = Date::ITALY) -> DateTime
 現在の時刻に相当する日時オブジェクトを生成します。
@@ -132,7 +122,6 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `ArgumentError` -- 正しくない日時
 
-#@since 1.9.0
 #@# exp
 ### def rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
 ### def rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
@@ -143,9 +132,7 @@ yesterday = DateTime.now - 1
 
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@end
 
-#@since 1.9.0
 #@# exp
 ### def rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 [RFC:3339] 書式の日付を解析し、
@@ -155,7 +142,6 @@ yesterday = DateTime.now - 1
 
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@end
 
 ### def today(start = Date::ITALY) -> Date
 このクラスでは利用できません。
@@ -164,7 +150,6 @@ yesterday = DateTime.now - 1
 
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.0
 #@# exp
 ### def xmlschema(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 XML Schema による書式の日付を解析し、
@@ -174,25 +159,14 @@ XML Schema による書式の日付を解析し、
 
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
-#@end
 
-#@since 1.9.1
 ### def parse(str = '-4712-01-01T00:00:00+00:00', complete = true, start = Date::ITALY) -> DateTime
-#@else
-### def parse(str = '-4712-01-01T00:00:00+00:00', complete = false, start = Date::ITALY) -> DateTime
-#@end
 与えられた日時表現を解析し、
 その情報に基づいて DateTime オブジェクトを生成します。
 
-#@since 1.9.1
 年が "00" から "99" の範囲であれば、
 年の下2桁表現であるとみなしこれを補います。
 この振舞いを抑止したい場合は、ヒントとして、complete に false を与えます。
-#@else
-complete が真で、年が "00" から "99" の範囲であれば、
-年の下2桁表現であるとみなしこれを補います。
-なお、省略した場合は、偽とみなします。
-#@end
 
 - **param** `str` -- 日時をあらわす文字列
 - **param** `complete` -- 年を補完するか
@@ -248,7 +222,6 @@ DateTime.strptime('2001-02-03T12:13:14Z').to_s
 ### def hour -> Integer
 時間を返します (0-23)。
 
-#@since 1.9.0
 ### def iso8601(n = 0) -> String
 ### def rfc3339(n = 0) -> String
 #@# exp
@@ -257,7 +230,6 @@ ISO 8601 書式の文字列を返します (XML Schema の dateTime 相当)。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
 
 strftime('%FT%T%:z') と等価です。
-#@end
 
 - **param** `n` -- 小数点以下の桁数
 
@@ -267,11 +239,9 @@ DateTime.parse('2001-02-03T04:05:06.123456789+07:00').iso8601(9)
 #=> "2001-02-03T04:05:06.123456789+07:00"
 ```
 
-#@since 1.9.0
 ### def jisx0301(n = 0) -> String
 JIS X 0301 書式の文字列を返します。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
-#@end
 
 - **param** `n` -- 小数点以下の桁数
 
@@ -282,9 +252,7 @@ DateTime.parse('2001-02-03T04:05:06.123456789+07:00').jisx0301(9)
 ```
 
 ### def min -> Integer
-#@since 1.9.1
 ### def minute -> Integer
-#@end
 分を返します (0-59)。
 
 ### def new_offset(offset = 0) -> DateTime
@@ -299,9 +267,7 @@ self を複製して、その時差を設定しなおします。
 時差を返します。
 
 ### def sec -> Integer
-#@since 1.9.1
 ### def second -> Integer
-#@end
 秒を返します (0-59)。
 
 ### def zone -> String
@@ -310,9 +276,7 @@ self を複製して、その時差を設定しなおします。
 これは、正確には時差をあらわす文字列です。
 
 ### def sec_fraction -> Rational
-#@since 1.9.1
 ### def second_fraction -> Rational
-#@end
 秒の小数点以下の部分を表す分数を返します。
 
 ### def to_date -> Date

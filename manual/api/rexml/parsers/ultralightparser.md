@@ -80,12 +80,6 @@ pp parser.parse
 # >>  [:text, "\n"]]
 ```
 
-#@until 2.1.0
-### 注意
-Ruby 2.1.0 以前に添付されている rexml の UltraLightParser は
-doctype の処理にバグがあります。そのため doctype を持つ XML 文書には
-使わないでください。
-#@end
 
 # class REXML::Parsers::UltraLightParser < Object
 パース結果を配列で作られた木構造により返すパーサクラス。

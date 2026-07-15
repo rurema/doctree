@@ -3,11 +3,7 @@
 
 ライブラリ内部で使用する [c:StringIO] と同名のクラスを定義します。
 
-#@since 1.9.2
 # reopen Syck
-#@else
-# reopen YAML
-#@end
 
 ## Class Methods
 

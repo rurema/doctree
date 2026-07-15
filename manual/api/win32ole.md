@@ -149,7 +149,6 @@ OLEオートメーションでは利用できません。代わりにVT_I4を利
 ### const VT_VARIANT -> Integer
 VARIANT型を示します（12）。
 
-#@since 1.9.1
 ### const VT_EMPTY -> Integer
 空（初期化状態）のオブジェクトを示します（0）。
 
@@ -159,5 +158,4 @@ NULL型の値を示します（1）。
 [m:WIN32OLE::VARIANT.VT_EMPTY]と異なり、NULLという値（たとえばSQLパラ
 メータでNULLを指定する場合など）を示します。
 
-#@end
 

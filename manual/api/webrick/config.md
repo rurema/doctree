@@ -33,15 +33,9 @@ WEBrick::Config::General = {
   :StopCallback   => nil,
   :AcceptCallback => nil,
 `````
-#@since 2.4.0
 ```````
 :DoNotReverseLookup => true,
 ```````
-#@else
-```````
-:DoNotReverseLookup => nil,
-```````
-#@end
 `````
 }
 `````
@@ -67,15 +61,9 @@ WEBrick::Config::HTTP = {
   :StopCallback   => nil,
   :AcceptCallback => nil,
 `````
-#@since 2.4.0
 ```````
 :DoNotReverseLookup => true,
 ```````
-#@else
-```````
-:DoNotReverseLookup => nil,
-```````
-#@end
 
 `````
   :RequestTimeout => 30,

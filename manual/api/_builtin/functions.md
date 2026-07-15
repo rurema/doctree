@@ -88,13 +88,8 @@ Ruby プログラムをエラーメッセージ付きで終了します。終了
 [m:Exception#message] に message を設定し
 て標準エラー出力に出力します。
 
-#@since 2.7.0
 引数を省略した呼び出し時に [m:$!] が nil でなければその例外のメッセージと
 バックトレースを表示します。
-#@else
-#@# 1.9.0 から 2.6 では表示されない。
-#@# https://bugs.ruby-lang.org/issues/16424
-#@end
 
 - **param** `message` -- エラーメッセージ文字列です。
 
@@ -126,13 +121,11 @@ puts 'end' #実行されない
 #終了ステータス:1
 #(標準エラー出力)
 #=> error1
-#@since 2.7.0
 #   Traceback (most recent call last):
 #@since 3.4
 #   sample.rb:11:in '<main>': RuntimeError (RuntimeError)
 #@else
 #   sample.rb:11:in `<main>': RuntimeError (RuntimeError)
-#@end
 #@end
 ```
 
@@ -174,10 +167,8 @@ puts $?.inspect #=> #<Process::Status: pid=3580,exited(0)>
 それ以外の終了ステータスの場合は false を返します。
 コマンドを実行できなかった場合は nil を返します。
 
-#@since 2.6.0
 options で :exception に true を指定することで、
 nil や false を返す代わりに例外を発生するようにできます。
-#@end
 
 終了ステータスは変数 [m:$?] で参照できます。
 
@@ -199,23 +190,19 @@ nil や false を返す代わりに例外を発生するようにできます。
 - **param** `command` -- command コマンドを文字列で指定します。
 - **param** `env` -- 更新する環境変数を表す Hash
 - **param** `options` -- オプションパラメータ Hash
-#@since 2.6.0
 - **raise** `Errno::EXXX` -- exception: true が指定されていて、コマンドの実行が失敗したときに発生します。
 - **raise** `RuntimeError` -- exception: true が指定されていて、コマンドの終了ステータスが 0 以外のときに発生します。
-#@end
 
 ```ruby title="シェル経由でコマンドを実行"
 system("echo *") # => true
 # fileA fileB fileC ...
 ```
 
-#@since 2.6.0
 ```ruby title="exceptionオプションを指定"
 system("sad", exception: true)                   # => Errno::ENOENT (No such file or directory - sad)
 system('ruby -e "exit(false)"', exception: true) # => RuntimeError (Command failed with exit 1: ruby -e "exit(false)")
 system('ruby -e "exit(true)"', exception: true)  # => true
 ```
-#@end
 
 - **SEE** [m:Kernel?.`],[m:Kernel?.spawn],[m:Kernel?.exec],[man:system(3)]
 
@@ -228,10 +215,8 @@ system('ruby -e "exit(true)"', exception: true)  # => true
 それ以外の終了ステータスの場合は false を返します。
 コマンドを実行できなかった場合は nil を返します。
 
-#@since 2.6.0
 options で :exception に true を指定することで、
 nil や false を返す代わりに例外を発生するようにできます。
-#@end
 
 終了ステータスは変数 [m:$?] で参照できます。
 
@@ -263,10 +248,8 @@ Hash を options として渡すことで、起動される子プロセスの
 - **param** `env` -- 更新する環境変数を表す Hash
 - **param** `options` -- オプションパラメータ Hash
 - **raise** `ArgumentError` -- 第一引数が配列かつ要素数が 2 でない場合に発生します。
-#@since 2.6.0
 - **raise** `Errno::EXXX` -- exception: true が指定されていて、コマンドの実行が失敗したときに発生します。
 - **raise** `RuntimeError` -- exception: true が指定されていて、コマンドの終了ステータスが 0 以外のときに発生します。
-#@end
 
 ```ruby title="インタプリタから直接コマンドを実行"
 system("echo", "*") # => true
@@ -370,19 +353,12 @@ Hash を options として渡すことで、起動される子プロセスの
   これを true に設定すると
   リダイレクトされていない、0(stdin), 1(stdout), 2(stderr) 以外の
   ファイルデスクリプタをすべて閉じます。
-#@since 2.6.0
   false がデフォルトです。
-#@else
-#@# 2.0.0 から 2.5 までは true がデフォルト
-  true がデフォルトです。
-#@end
 
-#@since 2.6.0
 - **`:exception`**:
   [m:Kernel?.system] のみで指定できます。
   これを true に設定すると、nil や false を返す代わりに例外が発生します。
   false がデフォルトです。
-#@end
 
 ### option引数によるリダイレクトの概要
 Hash のキー(子プロセス側)には以下のいずれかが指定できます。
@@ -522,13 +498,8 @@ io = IO.popen(["sh", "-c", "echo out; echo err >&2", :err=>[:child, :out]])
 p io.read #=> "out\nerr\n
 ```
 
-#@since 2.6.0
 spawn と IO.popen では
 デフォルトでは非標準的なファイルデスクリプタ(3以降)を閉じません。
-#@else
-spawn と IO.popen では
-デフォルトでは非標準的なファイルデスクリプタ(3以降)をすべて閉じます。
-#@end
 「:close_others」オプションでこの挙動を制御できます。
 標準的ファイルデスクリプタ(0,1,2)は :close で明示的に閉じない
 限り、このオプションの影響を受けません。
@@ -538,13 +509,8 @@ spawn と IO.popen では
 閉じられることに注意してください。
 
 ```ruby
-#@since 2.6.0
 pid = spawn(command, :close_others=>true)  # close 3,4,5,...
 pid = spawn(command, :close_others=>false) # don't close 3,4,5,... (default)
-#@else
-pid = spawn(command, :close_others=>true)  # close 3,4,5,... (default)
-pid = spawn(command, :close_others=>false) # don't close 3,4,5,...
-#@end
 ```
 
 これを利用して spawn を [m:IO.popen] のように使うことができます。
@@ -848,12 +814,10 @@ mode は以下の三つのうちのいずれかです。
 します (ただし、DOS/Windowsのようにシステムがテキスト／バイナリでファイルを区別する場
 合に限ります)
 
-#@since 2.6.0
 "w" に対しては "x" フラグを ("wx"や"wb+x"のように) つけることが
 できます (整数なら File::EXCL)。
 この場合、ファイルがすでに存在すると Errno::EEXIST が発生します。
 ただし、全ての種類のストリームでサポートされているとは限りません (例えばパイプ)。
-#@end
 
 ### Universal Newline
 改行をLFに揃えます。一言で言えばPEP:278 <https://www.python.org/dev/peps/pep-0278/>のことです。
@@ -1077,13 +1041,8 @@ rescue LoadError => e
 end
 ```
 
-#@since 1.9.1
 - **SEE** [m:Kernel?.load],[m:Kernel?.autoload],[m:Kernel?.require_relative]
-#@else
-- **SEE** [m:Kernel?.load],[m:Kernel?.autoload]
-#@end
 
-#@since 1.9.1
 ### module_function def require_relative(relative_feature) -> bool
 現在のファイルからの相対パスで require します。
 
@@ -1098,7 +1057,6 @@ require_relative を呼出すと必ず失敗します。
 - **param** `relative_feature` -- ファイル名の文字列です。
 - **raise** `LoadError` -- ロードに失敗した場合に発生します。
 - **SEE** [m:Kernel?.require]
-#@end
 
 ### require と load のスコープ
 
@@ -1592,9 +1550,7 @@ p 50,"50"
 
 - **SEE** [m:Object#inspect],[m:Kernel?.puts],[m:Kernel?.print]
 
-#@since 2.5.0
 #@include(functions_pp)
-#@end
 ### module_function def print(*arg) -> nil
 
 引数を順に標準出力 [m:$stdout] に出力します。引数が与えられない時には変数
@@ -1665,15 +1621,7 @@ puts ["oui", "non"]
 
 - **SEE** [m:Kernel?.print], [m:Kernel?.p], [m:IO#puts]
 
-#@since 3.0
 ### module_function def warn(*message, uplevel: nil, category: nil) -> nil
-#@else
-#@since 2.5.0
-### module_function def warn(*message, uplevel: nil) -> nil
-#@else
-### module_function def warn(*message) -> nil
-#@end
-#@end
 
 message を 標準エラー出力 [m:$stderr] に出力します。 [m:$VERBOSE]
 フラグ が nil のときは何も出力しません。
@@ -1681,9 +1629,7 @@ message を 標準エラー出力 [m:$stderr] に出力します。 [m:$VERBOSE]
 文字列以外のオブジェクトが引数として与えられた場合には、
 to_s メソッドにより文字列に変換してから出力します。
 
-#@since 2.5.0
 uplevel を指定しない場合は、
-#@end
 このメソッドは以下と同じです。
 
 ```ruby
@@ -1692,12 +1638,8 @@ nil
 ```
 
 - **param** `message` -- 出力するオブジェクトを任意個指定します。
-#@since 2.5.0
 - **param** `uplevel` -- いくつ前の呼び出し元のファイル名と行番号を表示するかを0以上の数値で指定します。 nil の場合は表示しません。
-#@end
-#@since 3.0
 - **param** `category` -- 警告のカテゴリを指定します。サポートされている category については [m:Warning.\[\]] を参照してください。
-#@end
 - **raise** `IOError` -- 標準エラー出力が書き込み用にオープンされていなければ発生します。
 - **raise** `Errno::EXXX` -- 出力に失敗した場合に発生します。
 
@@ -1707,7 +1649,6 @@ $VERBOSE = nil
 warn "caution!" # 何もしない
 ```
 
-#@since 2.5.0
 ```ruby title="uplevel の例"
 def foo
   warn("test message", uplevel: 0) # => test.rb:2: warning: test message
@@ -1716,9 +1657,7 @@ def foo
 end
 foo
 ```
-#@end
 
-#@since 3.0
 ```ruby title="category の例"
 Warning[:deprecated] = true # 非推奨の警告を表示する
 warn("deprecated!!", category: :deprecated)
@@ -1728,13 +1667,8 @@ Warning[:deprecated] = false # 非推奨の警告を表示しない
 warn("deprecated!!", category: :deprecated)
 # 警告は出力されない
 ```
-#@end
 
-#@since 2.4.0
 - **SEE** [m:Warning#warn], [m:$stderr],[m:$VERBOSE]
-#@else
-- **SEE** [m:$stderr],[m:$VERBOSE]
-#@end
 
 ### module_function def Array(arg) -> Array
 
@@ -1756,11 +1690,7 @@ p Array("fefe") #=> ["fefe"]
 
 - **SEE** [m:Object#to_a],[m:Object#to_ary],[c:Array]
 
-#@since 2.6.0
 ### module_function def Float(arg, exception: true) -> Float | nil
-#@else
-### module_function def Float(arg) -> Float
-#@end
 
 引数を浮動小数点数([c:Float])に変換した結果を返します。
 
@@ -1770,10 +1700,8 @@ p Array("fefe") #=> ["fefe"]
 メソッド Float は文字列に対し [m:String#to_f] よりも厳密な変換を行います。
 
 - **param** `arg` -- 変換対象のオブジェクトです。
-#@since 2.6.0
 - **param** `exception` -- false を指定すると、変換できなかった場合、
                  例外を発生する代わりに nil を返します。
-#@end
 - **raise** `ArgumentError` -- 整数や浮動小数点数と見なせない文字列を引数に指定した場合に発生します。
 - **raise** `TypeError` -- nil またはメソッド to_f を持たないオブジェクトを引数に指定したか、
                  to_f が浮動小数点数を返さなかった場合に発生します。
@@ -1805,11 +1733,7 @@ p Float("")           # invalid value for Float(): "" (ArgumentError)
 
 - **SEE** [m:String#to_f],[c:Float]
 
-#@since 2.6.0
 ### module_function def Integer(arg, base = 0, exception: true) -> Integer | nil
-#@else
-### module_function def Integer(arg, base = 0) -> Integer
-#@end
 
 引数を整数
 #@until 3.2
@@ -1832,10 +1756,8 @@ p Float("")           # invalid value for Float(): "" (ArgumentError)
             (2 進数)、0 (8 進数)、0o (8 進数)、0d (10 進数)、0x (16 進
             数) です。
 
-#@since 2.6.0
 - **param** `exception` -- false を指定すると、変換できなかった場合、
                  例外を発生する代わりに nil を返します。
-#@end
 
 - **raise** `ArgumentError` -- 整数と見なせない文字列を引数に指定した場合に発生します。
 - **raise** `TypeError` -- メソッド to_int, to_i を持たないオブジェクトを引数に指定したか、to_int, to_i
@@ -1937,7 +1859,6 @@ end
 ```
 
 与えられたブロック内で [c:StopIteration] を [m:Kernel?.raise] すると
-#@since 2.3.0
 ループを終了して [c:Enumerator] が最後に返した値を返します。
 ループを終了させる場合、通常は break を使用してください。
 
@@ -1953,10 +1874,6 @@ result = loop {
 } # => :ok
 ```
 
-#@else
-ループを終了して nil を返します。
-ループを終了させる場合、通常は break を使用してください。
-#@end
 
 - **return** -- break の引数など、ループ脱出時の値を返します。
 
@@ -2061,11 +1978,7 @@ throw は探索時に呼び出しスタックをさかのぼるので、
 
 - **param** `tag` -- catch の引数に対応する任意のオブジェクトです。
 - **param** `value` -- catch の戻り値になります。
-#@since 2.2.0
 - **raise** `UncaughtThrowError` -- 同じ tag で待っている catch が存在しない場合に発生します。
-#@else
-- **raise** `ArgumentError` -- 同じ tag で待っている catch が存在しない場合に発生します。
-#@end
 
 ```ruby title="例"
 def foo
@@ -2103,12 +2016,7 @@ range に含まれる数が無い場合は nil を返します。
 
 まだ [m:Kernel?.srand] が呼ばれていなければ自動的に呼び出します。
 
-#@since 3.0
 擬似乱数生成器として [c:Random] クラスオブジェクトを使用します。
-#@else
-擬似乱数生成器として [m:Random::DEFAULT] を使用します。
-これは [m:Random.rand] と共通です。
-#@end
 
 - **param** `max` --   乱数値の上限を正の整数で指定します。
              max 自体は乱数値の範囲に含まれません。
@@ -2439,9 +2347,7 @@ error_type として例外ではないクラスやオブジェクトを指定し
 - **param** `backtrace` -- 例外発生時のスタックトレースで、[m:Kernel?.caller] の戻り値と同じ
   形式で指定しなければいけません。
 - **param** `cause` -- 現在の例外([m:$!])の代わりに [m:Exception#cause] に設定する例外を指定します。
-#@since 2.6.0
   [c:Exception] オブジェクトまたは nil を指定できます。
-#@end
 - **raise** `TypeError` -- exception メソッドが例外オブジェクトを返さなかった場合に発生します。
 
 例外の捕捉の例を示します。
@@ -2596,39 +2502,10 @@ eval('raise RuntimeError', binding, 'XXX.rb', 4)
 
 ### module_function def proc { ... } -> Proc
 ### module_function def lambda { ... } -> Proc
-#@until 3.0
-### module_function def proc -> Proc
-#@end
-#@until 2.7
-### module_function def lambda -> Proc
-#@end
 
 与えられたブロックから手続きオブジェクト ([c:Proc] のインスタンス)
 を生成して返します。[m:Proc.new] に近い働きをします。
 
-#@until 3.0
-ブロックが指定されなければ、呼び出し元のメソッドで指定されたブロック
-を手続きオブジェクトとして返します。呼び出し元のメソッドがブロックなし
-で呼ばれると [c:ArgumentError] 例外が発生します。
-
-ただし、ブロックを指定しない呼び出しは推奨されていません。呼び出し元のメソッドで指定されたブロック
-を得たい場合は明示的に & 引数でうけるべきです。
-
-ブロックを指定しない lambda は Ruby 2.6 までは警告メッセージ
-「warning: tried to create Proc object without a block」
-が出力され、Ruby 2.7 では
-[c:ArgumentError] (tried to create Proc object without a block)
-が発生します。
-
-ブロックを指定しない proc は、Ruby 2.7 では
-[m:$VERBOSE] = true のときには警告メッセージ
-「warning: Capturing the given block using Proc.new is deprecated; use \`&block\` instead」
-が出力され、Ruby 3.0 では
-[c:ArgumentError] (tried to create Proc object without a block)
-が発生します。
-
-- **raise** `ArgumentError` -- スタック上にブロックがないのにブロックを省略した呼び出しを行ったときに発生します。
-#@else
 
 また、lambda に & 引数を渡すのは推奨されません。& 引数ではなくてブロック記法で記述する必要があります。
 
@@ -2637,9 +2514,7 @@ eval('raise RuntimeError', binding, 'XXX.rb', 4)
 を出力します。
 
 - **raise** `ArgumentError` -- ブロックを省略した呼び出しを行ったときに発生します。
-#@end
 
-#@since 3.0
 ```ruby title="例"
 def foo &block
   proc(&block)
@@ -2648,16 +2523,6 @@ end
 it = foo{p 12}
 it.call #=> 12
 ```
-#@else
-```ruby title="例"
-def foo &block
-  lambda(&block)
-end
-
-it = foo{p 12}
-it.call #=> 12
-```
-#@end
 
 - **SEE** [c:Proc],[m:Proc.new]
 
@@ -2701,13 +2566,8 @@ p __callee__ # => nil
 
 - **SEE** [m:Kernel?.__method__]
 
-#@since 2.6.0
 ### module_function def Complex(r, i = 0, exception: true) -> Complex | nil
 ### module_function def Complex(s, exception: true)        -> Complex | nil
-#@else
-### module_function def Complex(r, i = 0) -> Complex
-### module_function def Complex(s)        -> Complex
-#@end
 
 実部が r、虚部が i である [c:Complex] クラスのオブジェクトを生成します。
 
@@ -2717,10 +2577,8 @@ p __callee__ # => nil
 
 - **param** `s` -- 生成する複素数を表す文字列。
 
-#@since 2.6.0
 - **param** `exception` -- false を指定すると、変換できなかった場合、
                  例外を発生する代わりに nil を返します。
-#@end
 
 - **raise** `ArgumentError` -- 変換できないオブジェクトを指定した場合に発生します。
 
@@ -2747,11 +2605,7 @@ Complex('1+1i') + Complex('2+3i') * Complex('i') # => (-2+3i)
 
 [注意] Complex.new、Complex.new! は 1.9 系では廃止されました。
 
-#@since 2.6.0
 ### module_function def Rational(x, y = 1, exception: true) -> Rational | nil
-#@else
-### module_function def Rational(x, y = 1) -> Rational
-#@end
 
 引数を有理数([c:Rational])に変換した結果を返します。
 
@@ -2760,10 +2614,8 @@ Complex('1+1i') + Complex('2+3i') * Complex('i') # => (-2+3i)
 - **param** `y` -- 変換対象のオブジェクトです。省略した場合は x だけを用いて
          [c:Rational] オブジェクトを作成します。
 
-#@since 2.6.0
 - **param** `exception` -- false を指定すると、変換できなかった場合、
                  例外を発生する代わりに nil を返します。
-#@end
 
 - **raise** `ArgumentError` -- 変換できないオブジェクトを指定した場合に発生します。
 

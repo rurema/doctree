@@ -9,11 +9,7 @@ HTTP のクライアントのためのクラスです。
 
 ## Class Methods
 
-#@until 2.5.0
-### def new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
-#@else
 ### def new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil, no_proxy=nil) -> Net::HTTP
-#@end
 
 新しい [c:Net::HTTP] オブジェクトを生成します。
 
@@ -25,10 +21,8 @@ proxy_addr に :ENV を指定すると自動的に環境変数 http_proxy から
 明示的にプロクシのホスト名とポート番号を指定してプロクシを利用することもできます。
 このときには proxy_addr にホスト名もしくは IP アドレスを渡します。
 このときに proxy_userを指定するとプロクシの認証が行われます。
-#@since 2.5.0
 no_proxy の文字列に address のホスト名やIPアドレスが含まれている場合はプロクシを利用せず
 直接接続します。
-#@end
 
 このメソッドは TCP コネクションを張りません。
 
@@ -39,9 +33,7 @@ no_proxy の文字列に address のホスト名やIPアドレスが含まれて
 - **param** `proxy_port` -- プロクシのポートを指定します。
 - **param** `proxy_user` -- プロクシの認証のユーザ名を指定します。省略した場合には認証はなされません。
 - **param** `proxy_pass` -- プロクシの認証のパスワードを指定します。
-#@since 2.5.0
 - **param** `no_proxy` -- プロクシを経由せずに接続するホストの名前/IPアドレスを文字列で指定します。
-#@end
 
 ### def start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
 ### def start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) {|http| .... } -> object
@@ -557,7 +549,6 @@ nilを設定するとタイムアウトしなくなります。
 - **param** `second` -- 待つ秒数を指定します。
 - **SEE** [m:Net::HTTP#open_timeout], [m:Net::HTTP#read_timeout]
 
-#@since 2.6.0
 ### def write_timeout -> Numeric|nil
 書き込み([man:write(2)]) 一回でブロックしてよい最大秒数
 を返します。
@@ -587,7 +578,6 @@ Windows では Net::WriteTimeout は発生しません。
 
 - **param** `second` -- 待つ秒数を指定します。
 - **SEE** [m:Net::HTTP#open_timeout], [m:Net::HTTP#read_timeout], [m:Net::HTTP#write_timeout]
-#@end
 
 ### def max_retries -> Integer
 冪等なリクエストが失敗した場合に再試行する最大回数を返します。

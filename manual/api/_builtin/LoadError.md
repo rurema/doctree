@@ -7,7 +7,6 @@ library: _builtin
 
 ## Instance Methods
 
-#@since 2.0.0
 ### def path -> String | nil
 
 [m:Kernel?.require] や [m:Kernel?.load] に失敗したパスを返します。
@@ -22,4 +21,3 @@ end
 
 パスが定まらない場合は nil を返します。
 #@# irb 中で [[m:Kernel.#require_relative]] を実行した場合など。
-#@end

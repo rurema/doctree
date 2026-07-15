@@ -1,30 +1,17 @@
 ---
 require:
-#@since 1.9.2
   - syck/basenode
-#@else
-  - yaml/basenode
-#@end
 ---
 YAML のノードを表現するためのサブライブラリです。
 
-#@since 1.9.2
 # class Syck::YamlNode
 include Syck::BaseNode
-#@else
-# class YAML::YamlNode
-include YAML::BaseNode
-#@end
 
 YAML のノードを表現するためのクラスです。
 
 ## class methods
 
-#@since 1.9.2
 ### def new(type, val) -> Syck::YamlNode
-#@else
-### def new(type, val) -> YAML::YamlNode
-#@end
 
 自身を初期化します。
 

@@ -37,13 +37,8 @@ math_mode を有効にするかどうかを指定します。
 
 - **param** `opt` -- math_mode を有効にする場合に true を指定します。
 
-#@since 2.0.0
 - **raise** `IRB::CantReturnToNormalMode` -- 既に math_mode の状態で opt に
                                    false か nil を指定した場合に発生します。
-#@else
-- **raise** `IRB::CantReturnToNormalMode` -- 既に math_mode の状態で opt に
-                                   false を指定した場合に発生します。
-#@end
 
 - **SEE** [m:IRB::Context#math_mode]
 

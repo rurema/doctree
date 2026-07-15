@@ -21,17 +21,11 @@ require:
 Integer や Float に比べ Rational は誤差無しで表現できる範囲が大きいため、
 数値の演算において Rational をシームレスに利用したいことがあります。
 そこで mathn ライブラリは、各数値クラスの間の関係を
-#@until 2.4.0
-ちょうど Bignum と Fixnum とのような
-#@end
 自動的に変換される関係にします。
 
 #### 整数と有理数の相互変換
 
 具体的には、Rational のインスタンスが整数ならば、それは自動的に Integer
-#@until 2.4.0
-(Fixnum または Bignum)
-#@end
 となり、また、整数/整数の結果、
 割り切れない時は Rational が返るようになります。後者は、整数のメソッド「/」が整商(.div)でなく、商(.quo)を返すようになる、ということを意味します。
 
@@ -76,7 +70,6 @@ p Math.sqrt(-1)   #=> Complex(0,1)
 クラス [c:Prime] はRuby 1.8までは [lib:mathn] で定義されていました。
 現在はライブラリ [lib:prime] に移動しています。互換性のため mathn を読み込むと自動的に prime も [m:Kernel?.require] されます。
 
-#@since 2.4.0
 # redefine Integer
 
 ## Instance Methods
@@ -92,25 +85,6 @@ require 'mathn'
 p 10 / 3 # => (10/3)
 ```
 
-#@else
-# redefine Fixnum
-
-## Instance Methods
-
-### def /(other)
-#@todo
-
-Fixnum#quo と同じ働きをします(有理数または整数を返します)。
-
-# redefine Bignum
-
-## Instance Methods
-
-### def /(other)
-#@todo
-
-Bignum#quo と同じ働きをします(有理数または整数を返します)。
-#@end
 
 # redefine Rational
 

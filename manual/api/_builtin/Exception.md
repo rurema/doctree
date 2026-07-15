@@ -27,17 +27,12 @@ p e         # => #<Exception: some message>
 p e.message # => "some message"
 ```
 
-#@since 2.5.0
 ### def to_tty? -> bool
 
 $stderr が変更されておらず、$stderr.tty? が真の場合は true を返します。
 
-#@until 2.6.0
-[注意] 2.5.1 で追加されたメソッドです。
-#@end
 
 - **SEE** [m:Exception#full_message]
-#@end
 
 ## Instance Methods
 
@@ -96,7 +91,6 @@ end
 #@end
 ```
 
-#@since 2.1.0
 - **SEE** [m:Exception#backtrace_locations]
 
 ### def backtrace_locations -> [Thread::Backtrace::Location]
@@ -132,13 +126,9 @@ p e.backtrace_locations
 ```
 
 - **SEE** [m:Exception#backtrace]
-#@end
 
 ### def message    -> String
 ### def to_s       -> String
-#@until 1.9.1
-### def to_str    -> String
-#@end
 
 エラーメッセージをあらわす文字列を返します。
 
@@ -187,20 +177,15 @@ rescue
 end
 ```
 
-#@since 1.9.1
 ### def ==(other)    -> bool
 
-#@since 2.0.0
 自身と指定された other のクラスが同じであり、
-#@end
 message と backtrace が == メソッドで比較して
 等しい場合に true を返します。そうでない場合に false を返します。
 
 - **param** `other` -- 自身と比較したいオブジェクトを指定します。
-#@since 2.0.0
              自身と異なるクラスのオブジェクトを指定した場合は
              [m:Exception#exception] を実行して変換を試みます。
-#@end
 
 ```ruby title="例"
 require "date"
@@ -242,7 +227,6 @@ p results[0] == results[2]    # => false
 #@#:
 #@#: #@end
 
-#@since 2.1.0
 ### def cause -> Exception | nil
 
 self の前の例外(self が rescue 節や ensure 節の中で発生した例外の場合、
@@ -262,10 +246,7 @@ rescue
 end
 ```
 
-#@end
 
-#@end
-#@since 2.5.0
 ### def full_message(highlight: true, order: :bottom)  -> String
 例外の整形された文字列を返します。
 
@@ -274,11 +255,6 @@ end
 そのため、メソッド呼び出し時に $stderr が変更されておらず、$stderr.tty? が真の場合は
 エスケープシーケンスによる文字装飾がついています。
 
-#@until 2.6.0
-[注意] このメソッドは実験的な機能として提供されています。仕様が変更に
-なる可能性があります。
-そして実際に、キーワード引数 highlight と order は 2.5.1 で追加されました。
-#@end
 
 - **param** `highlight` -- エスケープシーケンスによる文字装飾をつけるかどうかを指定します。
                  デフォルト値は [m:Exception.to_tty?] の返り値と同じです。
@@ -312,4 +288,3 @@ end
 ```
 
 - **SEE** [m:Exception.to_tty?]
-#@end

@@ -9,45 +9,12 @@ include:
 すべての Digest::XXX クラスの基底クラスです。
 
 例えば、MD5 値を得るには以下のようにします。
-#@if(version >= "1.8.6")
 `````
 require 'digest/md5'
 
 p Digest::MD5.hexdigest('abc')               #=> '900150983cd24fb0d6963f7d28e17f72'
 p Digest::MD5.file('ruby-1.8.5.tar.gz').to_s #=> '3fbb02294a8ca33d4684055adba5ed6f'
 `````
-#@else
-```````````
-require 'digest/md5'
-p Digest::MD5.hexdigest(File.open('ruby-1.8.5.tar.gz','rb').read)
-
-# => "3fbb02294a8ca33d4684055adba5ed6f"
-```````````
-
-あるいは(大きな文字列を生成しない方法)
-
-```ruby
-require 'digest/md5'
-
-class Digest::Base
-  def self.open(path)
-    obj = new
-
-    File.open(path, 'rb') {|f|
-      buf = ""
-      while f.read(256, buf)
-        obj << buf
-      end
-    }
-    obj
-  end
-end
-
-p Digest::MD5.open("ruby-1.8.5.tar.gz").hexdigest
-
-# => "3fbb02294a8ca33d4684055adba5ed6f"
-```
-#@end
 
 すべての Digest::XXX クラスは以下の共通インタフェースを持ちます。
 
@@ -225,17 +192,9 @@ p digest1 == digest2 # => false
 
 ### def ==(str) -> bool
 
-#@if(version >= "1.8.6")
 与えられた文字列を hexdigest 値と見て、自身の hexdigest 値と比較します。
 
 - **param** `str` -- 比較対象の hexdigest 文字列
-#@else
-与えられた文字列を digest 値、もしくは hexdigest 値と比較します。
-いずれの値と見るかは与えられた文字列の長さによって自動判別
-されます。
-
-- **param** `str` -- 比較対象の(ダイジェストの)文字列です。
-#@end
 
 ```ruby
 require 'digest/md5'

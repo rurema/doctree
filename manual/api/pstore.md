@@ -32,11 +32,7 @@ end
 
 ## Class Methods
 
-#@since 1.9.1
 ### def new(file, thread_safe = false) -> PStore
-#@else
-### def new(file) -> PStore
-#@end
 
 ファイル名 file に対してデータベースを読み書きします。
 
@@ -47,11 +43,7 @@ file のあるディレクトリは書き込み可能である必要がありま
 
 - **param** `file` -- データベースファイル名。
 
-#@since 2.3.0
 - **param** `thread_safe` -- 真を指定すると [c:Thread::Mutex] を用いてスレッドセーフになります。
-#@else
-- **param** `thread_safe` -- 真を指定すると [c:Mutex] を用いてスレッドセーフになります。
-#@end
                    デフォルトは偽です。
 
 ## Instance Methods
@@ -236,34 +228,7 @@ db.transaction do |pstore|
 end
 ```
 
-#@until 1.9.1
-### def dump(table) -> String
-#@# nodoc
-単なる [m:Marshal?.dump] のラッパーメソッドです。
 
-- **param** `table` -- ハッシュを指定します。
-
-- **SEE** [m:Marshal?.load]
-
-### def load(content) -> object
-#@# nodoc 動かないっぽい。
-単なる [m:Marshal?.load] のラッパーメソッドです。
-
-- **param** `content` -- データを指定します。
-
-- **SEE** [m:Marshal?.load]
-
-### def load_file(file) -> object
-#@# nodoc
-
-単なる [m:Marshal?.load] のラッパーメソッドです。
-
-- **param** `file` -- ファイル名か [c:IO] オブジェクトを指定します。
-
-- **SEE** [m:Marshal?.load]
-#@end
-
-#@since 1.9.1
 ### def ultra_safe -> bool
 真であれば、パフォーマンスと引き換えにファイル更新の衝突を避けることができます。
 デフォルトは偽です。
@@ -280,7 +245,6 @@ end
 - **param** `flag` -- 真偽値を指定します。
 
 
-#@end
 
 ## Private Instance Methods
 
@@ -297,7 +261,6 @@ end
 
 ### const WR_ACCESS -> Integer
 内部で利用する定数です。
-#@since 1.9.1
 ### const EMPTY_MARSHAL_CHECKSUM -> String
 内部で利用する定数です。
 
@@ -307,12 +270,10 @@ end
 ### const EMPTY_STRING -> String
 内部で利用する定数です。
 
-#@end
 # class PStore::Error < StandardError
 
 [c:PStore] の中で発生する例外です。
 
-#@since 1.9.1
 # class PStore::DummyMutex < Object
 
 ダミーのミューテックス。このクラスを使ってもスレッドセーフにはなりません。
@@ -323,4 +284,3 @@ end
 
 与えられたブロックを評価するだけで何もしません。
 
-#@end

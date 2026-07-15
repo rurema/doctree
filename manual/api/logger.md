@@ -200,7 +200,6 @@ logger.level = 'INFO'
 # :debug < :info < :warn < :error < :fatal < :unknown
 ```
 
-#@since 2.4.0
 **4.** コンストラクタ
 
 ```ruby
@@ -209,7 +208,6 @@ Logger.new(logdev, level: Logger::INFO)
 Logger.new(logdev, level: :info)
 Logger.new(logdev, level: 'INFO')
 ```
-#@end
 
 ### フォーマット
 
@@ -232,14 +230,12 @@ logger.datetime_format = '%Y-%m-%d %H:%M:%S'
 # e.g. "2004-01-03 00:54:26"
 ```
 
-#@since 2.4.0
 コンストラクタでも同様にできます。
 
 ```ruby
 require 'logger'
 Logger.new(logdev, datetime_format: '%Y-%m-%d %H:%M:%S')
 ```
-#@end
 
 [m:Logger#formatter=] を用いてフォーマットを変更することもできます。
 
@@ -250,7 +246,6 @@ end
 # => "2005-09-22 08:51:08 +0900: hello world"
 ```
 
-#@since 2.4.0
 コンストラクタでも同様にできます。
 
 ```ruby
@@ -259,7 +254,6 @@ Logger.new(logdev, formatter: proc {|severity, datetime, progname, msg|
   "#{datetime}: #{msg}\n"
 })
 ```
-#@end
 
 ### 参考
 

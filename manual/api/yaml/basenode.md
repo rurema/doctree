@@ -1,18 +1,10 @@
 ---
 require:
-#@since 1.9.2
   - syck/ypath
-#@else
-  - yaml/ypath
-#@end
 ---
 YAML のノードを検索するためのサブライブラリです。
 
-#@since 1.9.2
 # module Syck::BaseNode
-#@else
-# module YAML::BaseNode
-#@end
 
 YAML のノードを検索するのためのモジュールです。
 
@@ -60,11 +52,9 @@ YAML のノードを検索するのためのモジュールです。
 
 - **param** `ypath_str` -- 検索するパスを文字列で指定します。
 
-#@since 1.9.3
 `````
 require 'syck'
 `````
-#@end
 `````
 require 'yaml'
   
@@ -88,11 +78,9 @@ dog:
 
 - **param** `ypath_str` -- 検索するパスを文字列で指定します。
 
-#@since 1.9.3
 `````
 require 'syck'
 `````
-#@end
 `````
 require 'yaml'
   
@@ -118,20 +106,14 @@ dog:
 ### def select!(ypath_str) -> [object]
 
 引数で指定したパスのノードを検索します。見つかったノードをそれぞれ
-#@since 1.9.2
 [m:Syck::Node#transform] で Ruby のオブジェクトにした配列を返し
-#@else
-[m:YAML::Syck::Node#transform] で Ruby のオブジェクトにした配列を返し
-#@end
 ます。
 
 - **param** `ypath_str` -- 検索するパスを文字列で指定します。
 
-#@since 1.9.3
 `````
 require 'syck'
 `````
-#@end
 `````
 require 'yaml'
   
@@ -152,8 +134,4 @@ dog:
      age: 23
 `````
 
-#@since 1.9.2
 - **SEE** [m:Syck::Node#transform]
-#@else
-- **SEE** [m:YAML::Syck::Node#transform]
-#@end

@@ -92,38 +92,16 @@ self を other で割った商 q と余り r を、 [q, r] という 2 要素の
 
 - **SEE** [m:Numeric#divmod]
 
-#@until 1.9.1
-### def quo(other) -> Float
 
-self を other で割った商を返します。
-整商を得たい場合は [m:Fixnum#div] を使ってください。
-
-[m:Fixnum#fdiv] との違いについては [m:Numeric#quo] を参照してください。
-
-- **param** `other` -- self を割る数を指定します。
-
-- **SEE** [m:Numeric#quo]
-#@end
-
-#@since 1.9.1
 ### def fdiv(other) -> Float | Complex
-#@else
-### def fdiv(other) -> Float
-#@end
 
 self を other で割った商を [c:Float] で返します。
-#@since 1.9.1
 ただし [c:Complex] が関わる場合は例外です。
 その場合も成分は Float になります。
-#@end
 
 - **param** `other` -- self を割る数を指定します。
 
-#@since 1.9.1
 - **SEE** [m:Numeric#quo]
-#@else
-- **SEE** [m:Fixnum#quo]
-#@end
 
 ### def **(other) -> Fixnum | Bignum | Float
 
@@ -257,34 +235,6 @@ printf("%#b\n", 0b0101 >> 1) #=> 0b10
 p -1 >> 1 #=> -1
 ```
 
-#@until 1.9.1
-### def id2name -> String | nil
-
-オブジェクトの整数値 self を、ある [c:Symbol] オブジェクトに対応する整数値とみなした上で、
-そのシンボルを示す文字列を返します。
-整数に対応するシンボルは必ずしも存在せず、その場合は nil を返します。
-
-[m:Symbol#to_i] の逆変換のようですが、
-返すのはシンボルではなく文字列です。
-
-- **return** -- オブジェクト名を示す文字列か nil
-
-```ruby title="例"
-p :foo.to_i    #=> 14585
-p 14585.id2name  #=> "foo"
-p 1.id2name    #=> nil
-```
-
-[m:Fixnum#to_sym] で得たシンボルに対して
-[m:Symbol#to_s] で文字列にしたものとおおかた一致しますが、
-nil のときの挙動が異なります。
-
-```ruby title="例"
-p 1.id2name   #=> nil
-p 1.to_sym.to_s #=> ""
-```
-
-#@end
 ### def size -> Fixnum
 
 整数の実装上のサイズをバイト数で返します。
@@ -304,9 +254,7 @@ p 0x1_0000_0000.size
 値を浮動小数点数([c:Float])に変換します。
 
 ### def to_s(base = 10)    -> String
-#@since 2.0.0
 ### def inspect(base = 10) -> String
-#@end
 
 self を引数で指定した基数の文字列表現に変換します。
 
@@ -321,24 +269,6 @@ p 12345.to_s(16) #=> "3039"
 p 12345.to_s(36) #=> "9ix"
 ```
 
-#@until 1.9.1
-### def to_sym -> Symbol | nil
-
-オブジェクトの整数値 self に対応する [c:Symbol] オブジェク
-トを返します。整数に対応するシンボルが存在しない時には nil
-を返します。
-
-[m:Symbol#to_i] の逆変換ととらえることができます。
-
-- **return** -- シンボルか nil
-
-```ruby title="例"
-p :foo.to_i   #=> 14585
-p 14585.to_sym  #=> :foo
-p 1.to_sym    #=> nil
-```
-
-#@end
 
 ### def zero? -> bool
 
@@ -353,7 +283,6 @@ self が奇数の場合に true を返します。そうでない場合に false
 self が偶数の場合に true を返します。そうでない場合に false を返します。
 
 
-#@since 1.9.1
 ### def abs -> Fixnum | Bignum
 ### def magnitude -> Fixnum | Bignum
 
@@ -362,9 +291,7 @@ self の絶対値を返します。
 ### def succ -> Fixnum | Bignum
 
 self の次の整数を返します。
-#@end
 
-#@since 2.1.0
 ### def bit_length -> Integer
 
 self を表すのに必要なビット数を返します。
@@ -394,4 +321,3 @@ p (2**12+1).bit_length    # => 13
 ```
 
 - **SEE** [m:Bignum#bit_length]
-#@end

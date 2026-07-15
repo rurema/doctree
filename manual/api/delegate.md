@@ -57,22 +57,7 @@ p a         # => [25]
 
 ## Class Methods
 
-#@if (version <= '1.8.6')
 
-### def new(obj) -> object
-
-委譲を行うメソッドを定義します。
-
-obj のもつインスタンスメソッドのうち、
-自オブジェクトに定義されていないメソッドについて、
-[m:Delegator#__getobj__] が返すオブジェクトへ
-メソッド委譲を行うクラスメソッドを定義します。
-
-- **param** `obj` -- 委譲を行うメソッドを決定するために使用するオブジェクト
-
-#@end
-
-#@since 1.9.1
 
 #@#--- delegation_block
 #@# 見つからない
@@ -80,17 +65,13 @@ obj のもつインスタンスメソッドのうち、
 #@#--- public_api
 #@# nodoc
 
-#@end
-#@since 1.9.2
 
 #@# --- const_missing
 #@# 見つからない
 
-#@end
 
 ## Instance Methods
 
-#@since 1.9.1
 ### def ==(obj) -> bool
 
 自身が与えられたオブジェクトと等しい場合は、真を返します。
@@ -98,9 +79,7 @@ obj のもつインスタンスメソッドのうち、
 
 - **param** `obj` -- 比較対象のオブジェクトを指定します。
 
-#@end
 
-#@since 1.9.2
 
 ### def !=(obj) -> bool
 
@@ -113,17 +92,7 @@ obj のもつインスタンスメソッドのうち、
 
 自身を否定します。
 
-#@end
 
-#@if (version == "1.9.1")
-### def clone -> object
-### def dup -> object
-
-自身の複製を返します。
-
-- **SEE** [m:Object#clone], [m:Object#dup]
-
-#@end
 
 ### def __getobj__ -> object
 
@@ -135,7 +104,6 @@ obj のもつインスタンスメソッドのうち、
 - **raise** `NotImplementedError` -- サブクラスにて本メソッドが再定義されていない場合に発生します。
 
 
-#@since 1.9.1
 ### def __setobj__(obj) -> object
 
 委譲先のオブジェクトをセットします。
@@ -144,7 +112,6 @@ obj のもつインスタンスメソッドのうち、
 
 - **raise** `NotImplementedError` -- サブクラスにて本メソッドが再定義されていない場合に発生します。
 
-#@end
 
 ### def marshal_dump -> object
 
@@ -167,11 +134,7 @@ obj のもつインスタンスメソッドのうち、
 
 - **return** -- 委譲先のメソッドからの返り値
 
-#@since 1.9.1
 - **SEE** [m:BasicObject#method_missing]
-#@else
-- **SEE** [m:Object#method_missing]
-#@end
 
 ### def respond_to?(m) -> bool
 
@@ -182,7 +145,6 @@ obj のもつインスタンスメソッドのうち、
 - **SEE** [m:Object#respond_to?]
 
 
-#@since 1.9.2
 ### def freeze -> self
 
 自身を凍結します。
@@ -218,13 +180,7 @@ obj のもつインスタンスメソッドのうち、
 
 - **param** `include_private` -- 真を指定すると private メソッドも調べます。
 
-#@end
 
 ## Constants
 
-#@until 1.9.1
-### const IgnoreBacktracePat -> Regexp
-
-バックトレースで無視するパターンを返します。
-#@end
 

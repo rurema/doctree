@@ -25,7 +25,6 @@ irb(main):001:0> help String#match
 
 - **param** `names` -- 参照したいクラス名やメソッド名などを文字列で指定します。
 
-#@since 1.9.2
 names を指定しなかった場合は、RI を対話的なモードで起動します。メソッド
 名などを入力する事でドキュメントの検索が行えます。入力のタブ補完をする
 事ができます。また、空行を入力する事で irb のプロンプトに戻る事ができま
@@ -47,6 +46,5 @@ String#match
   str.match(pattern, pos)   -> matchdata or nil
 ...
 ```
-#@end
 
 #@# TODO: RDoc::RI::Driver.new が SystemExit になる場合を追記。

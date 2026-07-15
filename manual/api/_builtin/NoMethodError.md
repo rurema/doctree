@@ -56,14 +56,8 @@ bar
 
 ## Class Methods
 
-#@since 2.4.0
 ### def new(error_message = "", name = nil, args = nil, priv = false) -> NoMethodError
-#@since 2.6.0
 ### def new(error_message = "", name = nil, args = nil, priv = false, receiver:) -> NoMethodError
-#@end
-#@else
-### def new(error_message = "", name = nil, args = nil) -> NoMethodError
-#@end
 
 例外オブジェクトを生成して返します。
 
@@ -73,12 +67,8 @@ bar
 
 - **param** `args` -- メソッド呼び出しに使われた引数です
 
-#@since 2.4.0
 - **param** `priv` -- private なメソッドを呼び出せる形式 (関数形式(レシーバを省略した形式)) で呼ばれたかどうかを指定します
-#@end
-#@since 2.6.0
 - **param** `receiver` -- 原因となったメソッド呼び出しのレシーバです
-#@end
 
 ```ruby title="例"
 nom = NoMethodError.new("message", "foo", [1,2,3])
@@ -121,9 +111,7 @@ end
 [1, 2, 3]
 ``````````
 
-#@since 2.4.0
 ### def private_call? -> bool
 
 メソッド呼び出しが private なメソッドを呼び出せる形式
 (関数形式(レシーバを省略した形式)) で呼ばれたかどうかを返します。
-#@end

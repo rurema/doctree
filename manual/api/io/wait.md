@@ -11,13 +11,11 @@ Socketに対してしか利用できません。
 
 ## Instance Methods
 
-#@since 1.9.1
 ### def nread -> Integer
 ブロックせずに読み込み可能なバイト数を返します。
 ブロックする場合は0を返します。
 
 判別が不可能な場合は0を返します。
-#@end
 
 #@if (version == "3.0")
 ### def ready? -> IO | false | nil
@@ -31,9 +29,7 @@ Socketに対してしか利用できません。
 判定不可能な場合は nil を返します。
 
 ### def wait(timeout = nil)          -> bool | self | nil
-#@since 2.0.0
 ### def wait_readable(timeout = nil) -> bool | self | nil
-#@end
 
 self が読み込み可能になるまでブロックし、読み込み可能になったら
 真値を返します。タイムアウト、もしくはEOFで
@@ -43,13 +39,8 @@ self が読み込み可能になるまでブロックし、読み込み可能に
 selfを返します。
 内部のバッファにデータがある場合には
 ブロックせずに true を返します。
-#@until 1.9.1
-内部のバッファとはCランタイムのFILE構造体内部の
-バッファのことです。
-#@else
 内部のバッファとはRubyの処理系が保持管理している
 バッファのことです。
-#@end
 
 つまり、読み込み可能である場合にはtrueを返す場合と
 selfを返す場合があることに注意してください。
@@ -61,7 +52,6 @@ self が EOF に達していれば false を返します。
 
 - **param** `timeout` -- タイムアウトまでの秒数を指定します。
 
-#@since 2.0.0
 
 - **SEE** [m:IO#wait_writable]
 
@@ -77,4 +67,3 @@ timeout を指定した場合は、指定秒数経過するまでブロックし
 - **param** `timeout` -- タイムアウトまでの秒数を指定します。
 
 - **SEE** [m:IO#wait_readable]
-#@end

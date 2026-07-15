@@ -375,9 +375,7 @@ p FileTest.writable?("testfile")    # => false
 - **SEE** [m:FileTest?.writable?]
 
 ### module_function def zero?(file)    -> bool
-#@since 2.4.0
 ### module_function def empty?(file)   -> bool
-#@end
 
 ファイルが存在して、そのサイズが 0 である時に真を返します。
 そうでない場合、あるいはシステムコールに失敗した場合には false を返します。
@@ -395,7 +393,6 @@ p FileTest.zero?("nonzero.txt")  # => false
 
 - **SEE** [m:FileTest?.size], [m:FileTest?.size?]
 
-#@since 1.9.1
 ### module_function def world_readable?(path)    -> Integer | nil
 
 path が全てのユーザから読めるならばそのファイルのパーミッションを表す
@@ -423,4 +420,3 @@ path が全てのユーザから書き込めるならば、そのファイルの
 m = FileTest.world_writable?("/tmp")
 "%o" % m                               #=> "777"
 ``````
-#@end

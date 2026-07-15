@@ -209,7 +209,6 @@ p mail.__send__ :delete, "gentle", "readers" # => "(Mail#delete) - delete gentle
 
 - **SEE** [m:Object#send]
 
-#@since 1.9.3
 ### def __id__ -> Integer
 
 各オブジェクトに対して一意な整数を返します。あるオブジェクトに対し
@@ -229,7 +228,6 @@ p "hi".freeze.__id__ == "hi".freeze.__id__ # => true
 ```
 
 - **SEE** [m:Object#object_id], [ruby-dev:42840]
-#@end
 
 #@include(BasicObject.public_methods_from_Object)
 
@@ -275,13 +273,11 @@ dic = Foo.new({:English => %w(zero one two), :Esperanto => %w(nulo unu du)})
 p dic.find_2_in :Esperanto #=> "du"
 ```
 
-#@since 1.9.2
 [注意] このメソッドを override する場合は対象のメソッド名に対して
 [m:Object#respond_to?] が真を返すようにしてください。
 そのためには、[m:Object#respond_to_missing?] も同様に override する必
 要があります。
 
 - **SEE** [m:Object#respond_to?], [m:Object#respond_to_missing?]
-#@end
 
 #@include(BasicObject.private_methods_from_Object)

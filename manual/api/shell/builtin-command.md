@@ -104,7 +104,6 @@ until: "2.7.0"
 ### def each(rs = nil){|line| ... }
 #@todo
 
-#@since 1.9.1
 
 # class Shell::Void < Shell::BuiltInCommand
 
@@ -120,4 +119,3 @@ until: "2.7.0"
 
 何もしません。
 
-#@end

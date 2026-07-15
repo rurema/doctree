@@ -21,11 +21,7 @@ end
 #=> singleton method "foo" was added
 ```
 
-#@since 1.9.1
 - **SEE** [m:Module#method_added],[m:BasicObject#singleton_method_removed],[m:BasicObject#singleton_method_undefined]
-#@else
-- **SEE** [m:Module#method_added],[m:Object#singleton_method_removed],[m:Object#singleton_method_undefined]
-#@end
 
 ### def singleton_method_removed(name) -> object
 
@@ -55,11 +51,7 @@ end
 #=> singleton method "foo" was removed
 ```
 
-#@since 1.9.1
 - **SEE** [m:Module#method_removed],[m:BasicObject#singleton_method_added],[m:BasicObject#singleton_method_undefined]
-#@else
-- **SEE** [m:Module#method_removed],[m:Object#singleton_method_added],[m:Object#singleton_method_undefined]
-#@end
 
 ### def singleton_method_undefined(name) -> object
 
@@ -93,8 +85,4 @@ obj.instance_eval {undef bar}
 #   singleton method "bar" was undefined
 ```
 
-#@since 1.9.1
 - **SEE** [m:Module#method_undefined],[m:BasicObject#singleton_method_added],[m:BasicObject#singleton_method_removed] , [ref:d:spec/def#undef]
-#@else
-- **SEE** [m:Module#method_undefined],[m:Object#singleton_method_added],[m:Object#singleton_method_removed] , [ref:d:spec/def#undef]
-#@end

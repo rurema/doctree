@@ -40,7 +40,6 @@ p versions.sort_by{ |v| Gem::Version.new(v) }
 
 ## Singleton Methods
 
-#@since 2.5.0
 ### def correct?(version) -> bool
 
 version が正しいバージョンであれば true を返します。そうでなければ false を返します。
@@ -53,18 +52,6 @@ p Gem::Version.correct?(nil)         # => true
 # nil versions are discouraged and will be deprecated in Rubygems 4
 # version が nil のときは true を返しますが、推奨はされず、Ruby 2.6以降では警告がでます。
 ```
-#@else
-### def correct?(version) -> 0 | nil
-
-version が正しいバージョンであれば 0 を返します。そうでなければ nil を返します。
-
-```ruby
-p Gem::Version.correct?("9.1")       # => 0
-p Gem::Version.correct?("incorrect") # => nil
-
-p Gem::Version.correct?(nil)         # => 0
-```
-#@end
 
 - **param** `version` -- バージョンを文字列か数値で指定します。
 
@@ -180,11 +167,9 @@ p version # => #<Gem::Version "1.2.0a">
 #@#
 #@# :nodoc:
 
-#@since 2.5.0
 #@#--- canonical_segments -> Array
 #@#
 #@# :nodoc:
-#@end
 
 ### def version -> String
 ### def to_s -> String

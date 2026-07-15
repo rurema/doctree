@@ -577,9 +577,6 @@ p 7.to_bn.to_s(0) # => "\x00\x00\x00\x01\a"
 [m:Kernel?.pp] でオブジェクトの内容を出力するときに、内部で呼ばれるメソッドです。
 
 ```ruby
-#@until 2.5.0
-require 'pp'
-#@end
 require 'openssl'
 
 pp 5.to_bn     #=> #<OpenSSL::BN 5>
@@ -606,7 +603,6 @@ p OpenSSL::BN.new(-5).ucmp(OpenSSL::BN.new(2))  # =>  1
 - **raise** `TypeError` -- 比較できないときに発生します。
 - **SEE** [m:OpenSSL::BN#cmp]
 
-#@since 2.5.0
 ### def negative? -> bool
 自身が負である場合に true を返します。Ruby 2.5, OpenSSL 2.1.0 から利用できます。
 
@@ -616,7 +612,6 @@ p 15.to_bn.negative?    # => false
 p  0.to_bn.negative?    # => false
 p (-5).to_bn.negative?  # => true
 ```
-#@end
 
 ### def zero? -> bool
 自身が 0 である場合に true を返します。

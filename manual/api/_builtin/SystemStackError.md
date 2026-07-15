@@ -1,11 +1,7 @@
 ---
 library: _builtin
 ---
-#@since 1.9.1
 # class SystemStackError < Exception
-#@else
-# class SystemStackError < StandardError
-#@end
 
 システムスタックがあふれたときに発生します。
 

@@ -1,20 +1,14 @@
 ---
 type: library
 ---
-#@since 2.6.0
 String、Integer、Float、Rational, NilClass オブジェクトを
-#@else
-String、Integer、Float、Rational オブジェクトを
-#@end
 BigDecimal オブジェクトに変換する機能を提供します。
 
  - [m:String#to_d]
  - [m:Integer#to_d]
  - [m:Float#to_d]
  - [m:Rational#to_d]
-#@since 2.6.0
  - [m:NilClass#to_d]
-#@end
 
 
 これらのメソッドを使うには 'bigdecimal/util' を require する必要があります。
@@ -113,7 +107,6 @@ p Rational(1, 3).to_d(10) # => 0.3333333333e0
 
 - **return** -- [c:BigDecimal] に変換したオブジェクト
 
-#@since 2.6.0
 
 # reopen NilClass
 
@@ -131,4 +124,3 @@ require "bigdecimal/util"
 
 p nil.to_d  # => 0.0
 ```
-#@end

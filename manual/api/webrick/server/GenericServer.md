@@ -45,12 +45,10 @@ GenericServer オブジェクトを生成して返します。
 - **`:AcceptCallback`**:
   クライアントからの接続を accept したときに呼ばれる [c:Proc] オブジェクトを指定します。
   クライアントと接続された [c:TCPSocket] オブジェクトを引数として呼ばれます。
-#@since 1.9.1
 - **`:DoNotReverseLookup`**:
   true の場合、ホスト名への逆引きを行わなくなります。
   [m:BasicSocket#do_not_reverse_lookup]
   も参照して下さい。
-#@end
 
 - **param** `default` -- サーバのデフォルトの設定を保存したハッシュを指定します。指定された config で
                設定がなかった項目に関してはこの default の値が使われます。
@@ -112,19 +110,11 @@ listen している [c:TCPServer] オブジェクトの配列を返します。
 実際にはサーバの状態を :Shutdown にするだけで、サーバがすぐに停止すると
 は限りません。
 
-#@since 2.1.0
 ### def tokens    -> Thread::SizedQueue
 
 MaxClient の設定のために使われる [c:Thread::SizedQueue] オブジェクト
 を返します。[c:Thread::SizedQueue] オブジェクトのサイズは現在受け付け
 ることのできるクライアントの数です。
-#@else
-### def tokens    -> SizedQueue
-
-MaxClient の設定のために使われる [c:SizedQueue] オブジェクトを返しま
-す。[c:SizedQueue] オブジェクトのサイズは現在受け付けることのできるク
-ライアントの数です。
-#@end
 
 MaxClient を知りたい場合は self.tokens.max です。
 self.tokens.max - self.tokens.length が現在のクライアントの接続数です。

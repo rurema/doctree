@@ -3,11 +3,8 @@ type: library
 include:
   - Math
 until: "2.7.0"
-#@since 1.9.1
 category: Math
-#@end
 ---
-#@since 1.9.1
 複素数演算をサポートするライブラリです。
 
 # module CMath
@@ -64,9 +61,7 @@ z の指数関数([m:Math::E] の z 乗)の値を返します。
 
 - **param** `z` -- [m:Math::E] を z 乗する数を指定します。
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
 
 ```ruby title="例"
 require "cmath"
@@ -109,9 +104,7 @@ z の対数を返します。
 
 - **param** `b` -- 底を指定します。省略した場合は自然対数を計算します。
 
-#@since 1.9.3
 - **raise** `TypeError` -- 引数のどちらかに数値以外を指定した場合に発生します。
-#@end
 
 ```ruby title="例"
 require "cmath"
@@ -119,16 +112,8 @@ p CMath.log(Complex(0, 0)) # => -Infinity+0.0i
 p CMath.log(0) # => -Infinity
 ```
 
-#@until 1.9.3
-[注意] 1.9.2 以下では z に 0+0i を与えると [c:Math::DomainError] が発
-生するバグがあります。
-#@end
 
-#@since 1.9.2
 ### module_function def log2!(x) -> Float
-#@else
-### module_function def log2(x) -> Float
-#@end
 
 2 を底とする実数 x の対数 (binary logarithm) を返します。
 [m:Math?.log2]のエイリアスです。
@@ -143,17 +128,13 @@ p CMath.log(0) # => -Infinity
 
 - **SEE** [m:Math?.log2]
 
-#@since 1.9.2
 ### module_function def log2(z) -> Float | Complex
 
 2 を底とする z の対数 (binary logarithm) を返します。
 
 - **param** `z` -- 真数を指定します。
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
-#@end
 
 ### module_function def log10!(x) -> Float
 
@@ -177,11 +158,7 @@ z の常用対数を返します。
 
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
 
-#@since 1.9.2
 ### module_function def cbrt!(x) -> Float
-#@else
-### module_function def cbrt(x) -> Float
-#@end
 
 実数 x の立方根を返します。[m:Math?.cbrt] のエイリアスです。
 
@@ -199,30 +176,22 @@ p CMath.cbrt!(-8.0) # => -2.0
 
 - **SEE** [m:Math?.cbrt]
 
-#@since 1.9.2
 ### module_function def cbrt(z) -> Float | Complex
 
 z の立方根の内、主値を返します。
 
 - **param** `z` -- 数値
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
 
 ```ruby title="例"
 require "cmath"
 p CMath.cbrt(-8) # => (1.0000000000000002+1.7320508075688772i)
 ```
 
-#@until 1.9.3
-[注意] 1.9.2 以下では負の実数を引数に与えると、主値以外の立方根(実数解)を
-返すバグがあります。
-#@end
 
 - **SEE** [m:Complex#**]
 
-#@end
 
 ### module_function def sqrt!(x) -> Float
 
@@ -250,9 +219,7 @@ z の平方根を返します。
 
 - **param** `z` -- 数値
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
 
 ```ruby title="例"
 require "cmath"
@@ -366,9 +333,7 @@ z の双曲線正弦関数の値を返します。
 
 - **param** `z` -- 数値
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
 
 ### module_function def cosh!(x) -> Float
 
@@ -389,9 +354,7 @@ z の双曲線余弦関数の値を返します。
 
 - **param** `z` -- 数値
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
 
 ### module_function def tanh!(x) -> Float
 
@@ -412,9 +375,7 @@ z の双曲線正接関数の値を返します。
 
 - **param** `z` -- 数値
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
 
 ### module_function def asin!(x) -> Float
 
@@ -437,9 +398,7 @@ z の逆正弦関数の値をラジアンで返します。
 
 - **param** `z` -- 数値
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
 
 ### module_function def acos!(x) -> Float
 
@@ -464,9 +423,7 @@ z の逆余弦関数の値をラジアンで返します。
 
 - **param** `z` -- 数値
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
 
 ### module_function def atan!(x) -> Float
 
@@ -489,9 +446,7 @@ z の逆正接関数の値をラジアンで返します。
 
 - **param** `z` -- 数値
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
 
 ### module_function def atan2!(y, x) -> Float
 
@@ -518,9 +473,7 @@ y / x の逆正接関数の値を返します。
 
 - **param** `x` -- 数値
 
-#@since 1.9.3
 - **raise** `TypeError` -- 引数のどちらかに数値以外を指定した場合に発生します。
-#@end
 
 ### module_function def asinh!(x) -> Float
 
@@ -540,9 +493,7 @@ z の逆双曲線正弦関数の値を返します。
 
 - **param** `z` -- 数値
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
 
 ### module_function def acosh!(x) -> Float
 
@@ -564,9 +515,7 @@ z の逆双曲線余弦関数の値を返します。
 
 - **param** `z` -- 数値
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
 
 ### module_function def atanh!(x) -> Float
 
@@ -590,8 +539,5 @@ z の逆双曲線正接関数の値を返します。
 
 - **param** `z` -- 数値
 
-#@since 1.9.3
 - **raise** `TypeError` -- z に数値以外を指定した場合に発生します。
-#@end
 
-#@end

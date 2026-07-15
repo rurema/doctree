@@ -8,7 +8,6 @@ gzip ファイルを処理している間にエラーが生じた時に発生す
 
 ## Instance Methods
 
-#@since 1.9.3
 ### def input -> String | nil
 
 読み込んだ文字列(gzip 形式で圧縮されたもの)を返します。
@@ -16,7 +15,6 @@ gzip ファイルを処理している間にエラーが生じた時に発生す
 ### def inspect -> String
 
 self の情報を人間に読みやすい文字列にして返します。
-#@end
 
 # class Zlib::GzipFile::NoFooter < Zlib::GzipFile::Error
 

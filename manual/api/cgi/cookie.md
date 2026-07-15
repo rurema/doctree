@@ -1,9 +1,7 @@
 ---
 type: library
 ---
-#@since 1.9.1
 HTTP クッキーを利用するためのクラスを定義したライブラリです。
-#@end
 
 #@# = class CGI::Cookie < DelegateClass(Array)
 # class CGI::Cookie < Array
