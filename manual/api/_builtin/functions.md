@@ -1665,15 +1665,7 @@ puts ["oui", "non"]
 
 - **SEE** [m:Kernel?.print], [m:Kernel?.p], [m:IO#puts]
 
-#@since 3.0
 ### module_function def warn(*message, uplevel: nil, category: nil) -> nil
-#@else
-#@since 2.5.0
-### module_function def warn(*message, uplevel: nil) -> nil
-#@else
-### module_function def warn(*message) -> nil
-#@end
-#@end
 
 message を 標準エラー出力 [m:$stderr] に出力します。 [m:$VERBOSE]
 フラグ が nil のときは何も出力しません。
@@ -1695,9 +1687,7 @@ nil
 #@since 2.5.0
 - **param** `uplevel` -- いくつ前の呼び出し元のファイル名と行番号を表示するかを0以上の数値で指定します。 nil の場合は表示しません。
 #@end
-#@since 3.0
 - **param** `category` -- 警告のカテゴリを指定します。サポートされている category については [m:Warning.\[\]] を参照してください。
-#@end
 - **raise** `IOError` -- 標準エラー出力が書き込み用にオープンされていなければ発生します。
 - **raise** `Errno::EXXX` -- 出力に失敗した場合に発生します。
 
@@ -1718,7 +1708,6 @@ foo
 ```
 #@end
 
-#@since 3.0
 ```ruby title="category の例"
 Warning[:deprecated] = true # 非推奨の警告を表示する
 warn("deprecated!!", category: :deprecated)
@@ -1728,7 +1717,6 @@ Warning[:deprecated] = false # 非推奨の警告を表示しない
 warn("deprecated!!", category: :deprecated)
 # 警告は出力されない
 ```
-#@end
 
 #@since 2.4.0
 - **SEE** [m:Warning#warn], [m:$stderr],[m:$VERBOSE]
@@ -2103,12 +2091,7 @@ range に含まれる数が無い場合は nil を返します。
 
 まだ [m:Kernel?.srand] が呼ばれていなければ自動的に呼び出します。
 
-#@since 3.0
 擬似乱数生成器として [c:Random] クラスオブジェクトを使用します。
-#@else
-擬似乱数生成器として [m:Random::DEFAULT] を使用します。
-これは [m:Random.rand] と共通です。
-#@end
 
 - **param** `max` --   乱数値の上限を正の整数で指定します。
              max 自体は乱数値の範囲に含まれません。
@@ -2612,7 +2595,6 @@ eval('raise RuntimeError', binding, 'XXX.rb', 4)
 
 - **raise** `ArgumentError` -- ブロックを省略した呼び出しを行ったときに発生します。
 
-#@since 3.0
 ```ruby title="例"
 def foo &block
   proc(&block)
@@ -2621,16 +2603,6 @@ end
 it = foo{p 12}
 it.call #=> 12
 ```
-#@else
-```ruby title="例"
-def foo &block
-  lambda(&block)
-end
-
-it = foo{p 12}
-it.call #=> 12
-```
-#@end
 
 - **SEE** [c:Proc],[m:Proc.new]
 

@@ -15,9 +15,7 @@ zlib ライブラリに含まれている雑多な機能を提供するモジュ
 zlib ライブラリのバージョンを表す文字列を返します。
 
 ### module_function def adler32(string = nil, adler = nil) -> Integer
-#@since 3.0
 ### module_function def adler32(io, adler = nil) -> Integer
-#@end
 
 string の Adler-32 チェックサムを計算し、adler を
 更新した値を返します。string が省略された場合は
@@ -26,17 +24,13 @@ Adler-32 チェックサムの初期値を返します。adler が
 計算します。
 
 - **param** `string` -- string の Adler-32 チェックサムが計算されます。
-#@since 3.0
 - **param** `io` -- IO が指定された場合は [m:IO#read] で nil を返すまで
        読み込んで、読み込んだデータ全体の Adler-32 チェックサムが
        計算されます。
-#@end
 - **param** `adler` --  adler を整数で指定します。
 
 ### module_function def crc32(string = nil, crc = nil) -> Integer
-#@since 3.0
 ### module_function def crc32(io, crc = nil) -> Integer
-#@end
 
 string の CRC チェックサムを計算し、crc を
 更新した値を返します。string が省略された場合は
@@ -45,11 +39,9 @@ CRC チェックサムの初期値を返します。crc が
 計算します。
 
 - **param** `string` -- string の CRC チェックサムが計算されます。
-#@since 3.0
 - **param** `io` -- IO が指定された場合は [m:IO#read] で nil を返すまで
        読み込んで、読み込んだデータ全体の CRC チェックサムが
        計算されます。
-#@end
 - **param** `crc` --  crc を整数で指定します。
 
 ### module_function def crc_table -> Array

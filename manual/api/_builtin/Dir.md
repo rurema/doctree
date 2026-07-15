@@ -9,21 +9,9 @@ include:
 
 ## Class Methods
 
-#@since 3.0
 ### def [](*pattern, base: nil, sort: true)                            -> [String]
 ### def glob(pattern, flags = 0, base: nil, sort: true)                -> [String]
 ### def glob(pattern, flags = 0, base: nil, sort: true) {|file| ...}   -> nil
-#@else
-#@since 2.5.0
-### def [](*pattern, base: nil)                            -> [String]
-### def glob(pattern, flags = 0, base: nil)                -> [String]
-### def glob(pattern, flags = 0, base: nil) {|file| ...}   -> nil
-#@else
-### def [](*pattern)                            -> [String]
-### def glob(pattern, flags = 0)                -> [String]
-### def glob(pattern, flags = 0) {|file| ...}   -> nil
-#@end
-#@end
 
 ワイルドカードの展開を行い、
 パターンにマッチするファイル名を文字列の配列として返します。
@@ -57,12 +45,10 @@ p Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
             指定した場合、結果の頭にはベースディレクトリはつかないので、
             絶対パスが必要な場合はベースディレクトリを追加する必要があるでしょう。
 #@end
-#@since 3.0
 - **param** `sort` -- true ならワイルドカードや文字セット(鈎括弧)にマッチした結果を
             バイナリとして昇順にソートします。
             false を指定するとソートせず2.7以前と同じ挙動になります。
             true の場合でも、配列で指定した複数のパターンや波括弧での順番は保存されます。
-#@end
 
 ワイルドカードには以下のものがあります。これらはバックスラッシュに
 よりエスケープできます。ダブルクォートの文字列中では 2

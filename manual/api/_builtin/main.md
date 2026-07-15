@@ -32,14 +32,10 @@ p public_methods(false) - basic_public_methods
 # => [:explicit_public_method]
 ```
 
-#@since 3.0
 ### def public() -> nil
 ### def public(name) -> String | Symbol
 ### def public(*name) -> Array
 ### def public(names) -> Array
-#@else
-### def public(*name) -> self
-#@end
 
 メソッドを public に設定します。
 
@@ -50,9 +46,7 @@ p public_methods(false) - basic_public_methods
 定します。
 
 - **param** `name` --  0 個以上の [c:String] または [c:Symbol] を指定します。
-#@since 3.0
 - **param** `names` -- 0 個以上の [c:String] または [c:Symbol] を [c:Array] で指定します。
-#@end
 
 - **raise** `NameError` -- 存在しないメソッド名を指定した場合に発生します。
 
@@ -60,14 +54,10 @@ p public_methods(false) - basic_public_methods
 
 - **SEE** [m:Module#public]
 
-#@since 3.0
 ### def private() -> nil
 ### def private(name) -> String | Symbol
 ### def private(*name) -> Array
 ### def private(names) -> Array
-#@else
-### def private(*name) -> self
-#@end
 
 メソッドを private に設定します。
 
@@ -78,9 +68,7 @@ p public_methods(false) - basic_public_methods
 れるメソッドを関数形式でだけ呼び出せるように(private)設定します。
 
 - **param** `name` --  0 個以上の [c:String] または [c:Symbol] を指定します。
-#@since 3.0
 - **param** `names` -- 0 個以上の [c:String] または [c:Symbol] を [c:Array] で指定します。
-#@end
 
 - **raise** `NameError` -- 存在しないメソッド名を指定した場合に発生します。
 

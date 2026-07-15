@@ -180,13 +180,8 @@ p Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 #@end
 
 #@since 2.6.0
-#@since 3.0
 ### def safe_load(yaml, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false) -> object
 ### def safe_load(yaml, legacy_permitted_classes=[], legacy_permitted_symbols=[], legacy_aliases=false, legacy_filename=nil) -> object
-#@else
-### def safe_load(yaml, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false) -> object
-### def safe_load(yaml, legacy_permitted_classes=[], legacy_permitted_symbols=[], legacy_aliases=false, legacy_filename=nil) -> object
-#@end
 
 安全に YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
 
@@ -238,7 +233,6 @@ p Psych.safe_load("---\n foo: bar")                       # => {"foo"=>"bar"}
 p Psych.safe_load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 ```
 
-#@since 3.0
 キーワード引数 freeze に true を指定した場合は再帰的に
 [m:Object#freeze] したオブジェクトを返します。
 
@@ -258,7 +252,6 @@ p yaml["aaa"].frozen?                 # = true
 p yaml["aaa"]["bbb"].frozen?          # = true
 p yaml["aaa"]["bbb"].first.frozen?    # = true
 ```
-#@end
 
 また legacy_permitted_classes などのオプション引数は非推奨な引数となっています。
 [m:$-w] が true の時にオプション引数を渡すと警告が出力されます。
@@ -280,10 +273,8 @@ Psych.safe_load("", [Date])
                        を [c:Symbol] に変換するかどうかを指定します。
                        true を指定した場合は変換します。デフォルトでは
                        文字列に変換されます。
-#@since 3.0
 - **param** `freeze` -- true を指定すると再帰的に freeze されたオブジェクトを返します。
               デフォルトは false です。
-#@end
 
 #@else
 #@since 2.5.0

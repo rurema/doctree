@@ -3,23 +3,13 @@ type: library
 until: "3.2"
 category: Math
 ---
-#@since 3.0
 集合を表す Set クラスを提供します。
-#@else
-集合を表す Set クラスと、取り出し順序を保証した SortedSet クラスを提供
-します。
-#@end
 
 集合とは重複のないオブジェクトの集まりです。
 [c:Array] の持つ演算機能と [c:Hash] の高速な検索機能を合わせ持ちます。
 
-#@since 3.0
 Set は内部記憶として [c:Hash] を使うため、集合要素の等価性は
 [m:Object#eql?] と [m:Object#hash] を用いて判断されます。
-#@else
-Set および SortedSet は内部記憶として [c:Hash] を使うため、集合要素の
-等価性は [m:Object#eql?] と [m:Object#hash] を用いて判断されます。
-#@end
 したがって、集合の各要素には、これらのメソッドが適切に定義されている
 必要があります。
 

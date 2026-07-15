@@ -1597,24 +1597,18 @@ h.transform_values!.with_index {|v, i| "#{v}.#{i}" }
 - **SEE** [m:Hash#transform_keys]
 - **SEE** [m:Hash#transform_keys!]
 ### def transform_keys {|key| ... } -> Hash
-#@since 3.0
 ### def transform_keys(hash)        -> Hash
-#@end
 ### def transform_keys              -> Enumerator
 
 すべてのキーに対してブロックを呼び出した結果で置き換えたハッシュを返します。
 値は変化しません。
 
-#@since 3.0
 - **param** `hash` -- 置き換え前のキーから置き換え後のキーへのハッシュを指定します。
-#@end
 
 ```ruby title="例"
 h = { a: 1, b: 2, c: 3 }
 p h.transform_keys {|k| k.to_s } # => {"a"=>1, "b"=>2, "c"=>3}
-#@since 3.0
 p h.transform_keys(a: "a", d: "d") # => {"a"=>1, :b=>2, :c=>3}
-#@end
 p h.transform_keys(&:to_s)       # => {"a"=>1, "b"=>2, "c"=>3}
 h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
                                  # => {"a.0"=>1, "b.1"=>2, "c.2"=>3}
@@ -1625,17 +1619,13 @@ h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
 - **SEE** [m:Hash#transform_values!]
 
 ### def transform_keys! {|key| ... } -> self
-#@since 3.0
 ### def transform_keys!(hash)        -> self
-#@end
 ### def transform_keys!                -> Enumerator
 
 すべてのキーに対してブロックを呼び出した結果でハッシュのキーを変更します。
 値は変化しません。
 
-#@since 3.0
 - **param** `hash` -- 置き換え前のキーから置き換え後のキーへのハッシュを指定します。
-#@end
 - **return** -- transform_keys! は常に self を返します。
         ブロックが与えられなかった場合は、[c:Enumerator] オブジェクトを
         返します。
@@ -1645,9 +1635,7 @@ h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
 h = { a: 1, b: 2, c: 3 }
 p h.transform_keys! {|k| k.to_s } # => {"a"=>1, "b"=>2, "c"=>3}
 p h.transform_keys!(&:to_sym)     # => {:a=>1, :b=>2, :c=>3}
-#@since 3.0
 p h.transform_keys!(a: "a", d: "d") # => {"a"=>1, :b=>2, :c=>3}
-#@end
 h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
                                   # => {"a.0"=>1, "b.1"=>2, "c.2"=>3}
 ```
@@ -1667,13 +1655,8 @@ p h.slice(:c, :b)     # => {:c=>300, :b=>200}
 p h.slice(:b, :c, :d) # => {:b=>200, :c=>300}
 ```
 
-#@since 3.0
 - **SEE** [m:Hash#except], [m:ENV.slice]
-#@else
-- **SEE** [m:ENV.slice]
 #@end
-#@end
-#@since 3.0
 ### def except(*keys) -> Hash
 
 引数で指定された以外のキーとその値だけを含む Hash を返します。
@@ -1686,4 +1669,3 @@ p h.except(:a) # => {:b=>200, :c=>300}
 ```
 
 - **SEE** [m:Hash#slice], [m:ENV.except]
-#@end

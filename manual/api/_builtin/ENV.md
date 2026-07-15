@@ -423,17 +423,12 @@ p ENV.slice("unknown")  # => {}
 p ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
 ```
 
-#@since 3.0
 - **SEE** [m:Hash#slice], [m:ENV.except]
-#@else
-- **SEE** [m:Hash#slice]
-#@end
 #@end
 #@since 2.7.0
 ### def freeze -> ()
 ENV.freeze は環境変数の変更を禁止できないため、[c:TypeError]を発生させます。
 #@end
-#@since 3.0
 ### def except(*keys) -> Hash
 
 引数で指定された以外のキーとその値だけを含む Hash を返します。
@@ -444,7 +439,6 @@ p ENV.except("TERM","HOME") #=> {"LANG"=>"en_US.UTF-8"}
 ```
 
 - **SEE** [m:Hash#except], [m:ENV.slice]
-#@end
 ### def clone(freeze: true) -> object
 ENV オブジェクトの複製を作成して返します。
 

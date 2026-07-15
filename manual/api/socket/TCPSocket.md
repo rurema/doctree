@@ -37,13 +37,9 @@ s.close
 ### def open(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, fast_fallback: true) -> TCPSocket
 ### def new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, fast_fallback: true) -> TCPSocket
 #@end
-#@if("3.0" <= version and version < "3.4")
+#@until 3.4
 ### def open(host, service, local_host=nil, local_service=nil, connect_timeout: nil) -> TCPSocket
 ### def new(host, service, local_host=nil, local_service=nil, connect_timeout: nil) -> TCPSocket
-#@end
-#@if(version < "3.0")
-### def open(host, service, local_host=nil, local_service=nil) -> TCPSocket
-### def new(host, service, local_host=nil, local_service=nil) -> TCPSocket
 #@end
 
 host で指定したホストの service で指定したポートと接続したソケッ
@@ -63,9 +59,7 @@ host で指定したホストの service で指定したポートと接続した
 #@if (version >= "3.4")
 - **param** `resolv_timeout` -- 名前解決のタイムアウトを秒数で指定します。
 #@end
-#@if (version >= "3.0")
 - **param** `connect_timeout` -- 接続確立のタイムアウトを秒数で指定します。
-#@end
 #@if (version >= "4.0")
 - **param** `open_timeout` -- 名前解決から接続確立までのタイムアウトを秒数で指定します。
 #@end

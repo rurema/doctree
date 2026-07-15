@@ -29,10 +29,8 @@ port は接続するポート番号です。
 ### def start(address, port = Net::SMTP.default_port, helo = 'localhost.localdomain', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(address, port = Net::SMTP.default_port, helo = 'localhost.localdomain', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
 #@else
-#@since 3.0
 ### def start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) {|smtp| ... } -> object
-#@end
 ### def start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
 #@end
@@ -228,10 +226,8 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 ### def start(helo = 'localhost.localdomain', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(helo = 'localhost.localdomain', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
 #@else
-#@since 3.0
 ### def start(helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) {|smtp| ... } -> object
-#@end
 ### def start(helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
 #@end

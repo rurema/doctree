@@ -9,9 +9,7 @@
 #@since 3.1
   - [d:news/3_1_0]
 #@end
-#@since 3.0
   - [d:news/3_0_0]
-#@end
 #@since 2.7.0
   - [d:news/2_7_0]
 #@end

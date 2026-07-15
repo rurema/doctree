@@ -168,7 +168,6 @@ p :foo.id2name.intern == :foo  # => true
 `````
 
 - **SEE** [m:String#intern]
-#@since 3.0
 - **SEE** [m:Symbol#name]
 ### def name -> String
 
@@ -184,7 +183,6 @@ p :fred.to_s.frozen? # => false
 ```
 
 - **SEE** [m:Symbol#to_s]
-#@end
 ### def to_proc -> Proc
 self に対応する Proc オブジェクトを返します。
 
@@ -192,12 +190,10 @@ self に対応する Proc オブジェクトを返します。
 Proc#callの第一引数をレシーバとして、 self という名前のメソッドを
 残りの引数を渡して呼びだします。
 
-#@since 3.0
 生成される Proc オブジェクトは lambda です。
 ```ruby
 p :object_id.to_proc.lambda? # => true
 ```
-#@end
 
 ```ruby title="明示的に呼ぶ例"
 p :to_i.to_proc["ff", 16]  # => 255 ← "ff".to_i(16)と同じ

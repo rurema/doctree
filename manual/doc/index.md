@@ -22,11 +22,8 @@
 #@if("3.1" <= version and version < "3.2")
  - version 3.1 対応リファレンス
 #@end
-#@if("3.0" <= version and version < "3.1")
+#@until 3.1
  - version 3.0 対応リファレンス
-#@end
-#@if("2.7.0" <= version and version < "3.0")
- - version 2.7 対応リファレンス
 #@end
 #@if("2.6.0" <= version and version < "2.7.0")
  - version 2.6 対応リファレンス

@@ -128,10 +128,8 @@ self <=> min が負数を返したときは min を、
 self <=> max が正数を返したときは max を、
 それ以外の場合は self を返します。
 
-#@since 3.0
 min が nil の場合、min は self よりも小さい値として扱われます。
 max が nil の場合、max は self よりも大きい値として扱われます。
-#@end
 
 #@since 2.7.0
 range が1つ渡された場合は次のようになります。
@@ -163,13 +161,11 @@ p 'd'.clamp('a', 'f')    #=> 'd'
 p 'z'.clamp('a', 'f')    #=> 'f'
 ```
 
-#@since 3.0
 ```ruby title="nil を渡す例"
 p 5.clamp(0, nil)        #=> 5
 p 5.clamp(nil, 0)        #=> 0
 p 5.clamp(nil, nil)      #=> 5
 ```
-#@end
 
 #@since 2.7.0
 ```ruby title="range を渡す例"

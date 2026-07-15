@@ -43,7 +43,6 @@ p son.items       # => ["candy","toy"]
 p son             # => #<OpenStruct name="Thomas", age=4, items=["candy", "toy"]>
 `````
 
-#@since 3.0
 ### 注意事項 {#caveats}
 
 OpenStruct は Ruby のメソッド探索を利用して、プロパティに必要なメソッドを見つけて定義します。これは [m:BasicObject#method_missing] と [m:BasicObject#define_singleton_method] によって実現されます。
@@ -79,7 +78,6 @@ o.class!          # => OpenStruct
 ! で終わるフィールドは使用しないことが推奨されます（ただし、強制ではありません）。サブクラスのメソッドを上書きすることはできませんし、! で終わる OpenStruct 自身のメソッドを上書きすることもできません。
 
 以上の理由から OpenStruct を一切使用しないことを検討してください。
-#@end
 
 ## Class Methods
 ### def new(hash = nil) -> OpenStruct

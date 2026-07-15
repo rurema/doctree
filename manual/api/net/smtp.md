@@ -151,7 +151,6 @@ smtp.start do
 end
 ```
 
-#@since 3.0
 サーバーが STARTTLS をサポートしている場合は自動的に STARTTLS を使用します。
 サーバーが STARTTLS をサポートしているのに STARTTLS を使用したくない場合は [m:Net::SMTP#disable_starttls] を使用します。
 
@@ -186,5 +185,4 @@ Net::SMTP.start('192.168.1.1', 25, tls_hostname: 'smtp.example.com') do |smtp|
   # send messages ...
 end
 ```
-#@end
 

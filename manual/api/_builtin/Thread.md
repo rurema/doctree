@@ -723,7 +723,6 @@ p Thread.current.group == ThreadGroup::Default
 # => true
 ```````
 
-#@since 3.0
 ### def ignore_deadlock -> bool
 
 デッドロック検知を無視する機能のon/offを返します。
@@ -733,9 +732,7 @@ p Thread.current.group == ThreadGroup::Default
 #@#noexample Thread#ignore_deadlock=を参照
 
 - **SEE** [m:Thread#ignore_deadlock=]
-#@end
 
-#@since 3.0
 ### def ignore_deadlock=(bool)
 
 デッドロック検知を無視する機能をon/offします。デフォルト値はfalseです。
@@ -753,7 +750,6 @@ puts queue.pop
 ```
 
 - **SEE** [m:Thread#ignore_deadlock]
-#@end
 
 ### def join           -> self
 ### def join(limit)    -> self | nil

@@ -47,11 +47,7 @@ category の警告を表示するかどうかのフラグを設定します。
 - **SEE** [m:Warning.\[\]]
 #@end
 
-#@since 3.0
 ### def warn(message, category: nil) -> nil
-#@else
-### def warn(message) -> nil
-#@end
 
 引数 message を標準エラー出力 [m:$stderr] に出力します。
 
@@ -60,7 +56,6 @@ category の警告を表示するかどうかのフラグを設定します。
 またオーバーライドしたメソッドからは super を呼び出すことで、デフォルトの動作である [m:$stderr] への出力ができます。
 
 ```ruby
-#@since 3.0
 module Warning
   # 警告メッセージに category を表示し、message 末尾に !!! を追加する
   def self.warn(message, category: nil)
@@ -70,18 +65,6 @@ end
 
 warn("hoge", category: :deprecated)
 # => deprecated warning : hoge!!!
-#@else
-warn "hoge" # => hoge
-
-module Warning
-  # 警告メッセージの末尾に !!! を追加する
-  def self.warn(message)
-    super(message.chomp + "!!!\n")
-  end
-end
-
-warn "hoge" # => hoge!!!
-#@end
 ```
 
 - **param** `message` -- 出力するオブジェクトを指定します。
@@ -103,11 +86,7 @@ p Warning.categories # => [:deprecated, :experimental, :performance, :strict_unu
 
 ## Public Instance Methods
 
-#@since 3.0
 ### def warn(message, category: nil) -> nil
-#@else
-### def warn(message) -> nil
-#@end
 
 引数 message を標準エラー出力 [m:$stderr] に出力します。
 
