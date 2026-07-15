@@ -60,18 +60,18 @@ p a || b && c #=>  a || (b && c)
 #@#  は演算子ではありませんが説明の都合上再定義できる演算子の一覧にあげて
 #@#  います-))
 
-```text
-    |  ^  &  <=>  ==  ===  =~  >   >=  <   <=   <<  >>
-    +  -  *  /    %   **   ~   +@  -@  []  []=  ` ! != !~
-```
+  ```text
+      |  ^  &  <=>  ==  ===  =~  >   >=  <   <=   <<  >>
+      +  -  *  /    %   **   ~   +@  -@  []  []=  ` ! != !~
+  ```
   これらの演算子式の定義方法については[ref:d:spec/def#operator]を参照してください。
 
 - **再定義できない演算子(制御構造)**:
 
   演算子の組合せである自己代入演算子は再定義できません。
-```text
-    =  ?:  ..  ...  not  &&  and  ||  or  ::
-```
+  ```text
+      =  ?:  ..  ...  not  &&  and  ||  or  ::
+  ```
 
 ### 代入 {#assign}
 
@@ -93,67 +93,67 @@ foo.bar = baz
 下のいずれかでなければなりません。
 
 - **変数**:
-```text
-            変数 `=' 式
-```
+  ```text
+              変数 `=' 式
+  ```
   左辺値が変数の場合、式を評価した値が変数に代入されます。
 
 
 - **配列参照**:
-```text
-            式1`[' 式2 ... `]' `=' 式n
-```
+  ```text
+              式1`[' 式2 ... `]' `=' 式n
+  ```
   式1を評価して得られるオブジェクトに対しての、式 2 から式 n までを
   引数とする []= メソッド呼び出しに変換されます。
 
-```ruby title="例"
-class C
-  def initialize
-    @ary = [0,1,2,3,4,5,6,7]
+  ```ruby title="例"
+  class C
+    def initialize
+      @ary = [0,1,2,3,4,5,6,7]
+    end
+    def [](i)
+      @ary[i * 2]
+    end
+    def []=( i, v )
+      @ary[i * 2] = v
+    end
   end
-  def [](i)
-    @ary[i * 2]
-  end
-  def []=( i, v )
-    @ary[i * 2] = v
-  end
-end
-c = C.new
-p c[3]      # c.[]( 3 )  に変換され、その結果は 6
-p c[3] = 1  # c.[]=(3,1) に変換され、その結果は 1
-```
+  c = C.new
+  p c[3]      # c.[]( 3 )  に変換され、その結果は 6
+  p c[3] = 1  # c.[]=(3,1) に変換され、その結果は 1
+  ```
 
 - **属性参照**:
-```text
-            式1 `.' 識別子 `=' 式2
-```
+  ```text
+              式1 `.' 識別子 `=' 式2
+  ```
   式 1 を評価して得られるオブジェクトに対して、
   識別子= というメソッドを、式 2 を引数にして呼び出します。
 
-```ruby title="例"
-class C
-  def foo
-    @foo
+  ```ruby title="例"
+  class C
+    def foo
+      @foo
+    end
+    def foo=( v )
+      @foo = v
+    end
   end
-  def foo=( v )
-    @foo = v
-  end
-end
-c = C.new
-c.foo = 5   # c.foo=( 5 ) のように変換される
-p c.foo     # => 5
-```
+  c = C.new
+  c.foo = 5   # c.foo=( 5 ) のように変換される
+  p c.foo     # => 5
+  ```
 
   属性は [m:Module#attr] を使って同じように定義できます。
 
-```ruby title="例"
-class C
-  attr :foo, true
-end
-c = C.new
-c.foo = 5   # c.foo=( 5 ) のように変換される
-p c.foo     # => 5
-```
+  ```ruby title="例"
+  class C
+    attr :foo, true
+  end
+  c = C.new
+  c.foo = 5   # c.foo=( 5 ) のように変換される
+  p c.foo     # => 5
+  ```
 
 #### 自己代入 {#selfassign}
 
