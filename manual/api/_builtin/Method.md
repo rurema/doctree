@@ -269,6 +269,8 @@ p s.method(:squeeze).arity #=> -1
 p s.method(:count).arity   #=> -1
 ```
 
+- **SEE** [ref:d:glossary#arity]
+
 ### def inspect -> String
 ### def to_s    -> String
 
