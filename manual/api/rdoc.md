@@ -536,25 +536,25 @@ fred() { |index, position| ... }
 
   \{ruby-lang.org}[www.ruby-lang.org] は以下のように変換されます。
 
-```text
-  {ruby-lang.org}[www.ruby-lang.org]
-```
+  ```text
+    {ruby-lang.org}[www.ruby-lang.org]
+  ```
 
 - **クラスやメソッド**:
 
   \RDoc::RDoc#document は以下のように変換されます。
 
-```text
-  RDoc::RDoc#document
-```
+  ```text
+    RDoc::RDoc#document
+  ```
 
 - **タグ内のエスケープ無視(S クラスは定義済み)**:
 
   <tt>\S</tt> は以下のように変換されます。
 
-```text
-  <tt>S</tt>
-```
+  ```text
+    <tt>S</tt>
+  ```
 
 これらは RDoc バージョン 1 との互換性を保つために、このような動作になっ
 ています。
@@ -588,16 +588,16 @@ fred() { |index, position| ... }
   やクラスはドキュメントに 含まれます。これをオフにしたい場合は all 修飾
   子を加えます。
 
-```ruby
-    module SM  #:nodoc:
-      class Input
+  ```ruby
+      module SM  #:nodoc:
+        class Input
+        end
       end
-    end
-    module Markup #:nodoc: all
-      class Output
+      module Markup #:nodoc: all
+        class Output
+        end
       end
-    end
-```
+  ```
 
   以上のコードでは、SM::Input のドキュメントのみが出力されます。
 
@@ -655,40 +655,40 @@ fred() { |index, position| ... }
   の行がブロックの終端にあった場合、それも取り除かれます。そのため、以下
   のような装飾をすることが できます。
 
-```text
-    # ----------------------------------------
-    # :section: My Section
-    # This is the section that I wrote.
-    # See it glisten in the noon-day sun.
-    # ----------------------------------------
-```
+  ```text
+      # ----------------------------------------
+      # :section: My Section
+      # This is the section that I wrote.
+      # See it glisten in the noon-day sun.
+      # ----------------------------------------
+  ```
 
 - **`:category: title`**:
 
   記述した要素の :section: を title で指定したものに上書きします。
 
-```ruby
-    # :category: Utility Methods
-    #
-    # CGI escapes +text+
+  ```ruby
+      # :category: Utility Methods
+      #
+      # CGI escapes +text+
 
-    def convert_string text
-      CGI.escapeHTML text
-    end
-```
+      def convert_string text
+        CGI.escapeHTML text
+      end
+  ```
 
   title を省略した場合は、:section: を指定しなかった場合と同じように扱
   われます。
 
-```ruby
-  # :category:
-  #
-  # This method is in the default category
+  ```ruby
+    # :category:
+    #
+    # This method is in the default category
 
-  def some_method
-    # ...
-  end
-```
+    def some_method
+      # ...
+    end
+  ```
 
   :section: とは異なり、以降のドキュメントには影響しません。直後の要素
   のみに影響します。
@@ -704,27 +704,27 @@ fred() { |index, position| ... }
   現在のマークアップの指定を type で指定したフォーマットで上書きします。
   ファイルの先頭で :markup: を記述した場合、ファイル全体に適用されます。
 
-```text
-    # coding: UTF-8
-    # :markup: tomdoc
+  ```text
+      # coding: UTF-8
+      # :markup: tomdoc
 
-    # tomdoc 形式のコメントを記述 ...
-    class MyClass
-      # ...
-```
+      # tomdoc 形式のコメントを記述 ...
+      class MyClass
+        # ...
+  ```
 
   それ以外では適用が限定されます(以下の例では some_method のみ):
 
-```text
-      # ...
-    end
+  ```text
+        # ...
+      end
 
-    # :markup: rdoc
-    #
-    # rdoc 形式のコメントを記述 ...
-    def some_method
-      # ...
-```
+      # :markup: rdoc
+      #
+      # rdoc 形式のコメントを記述 ...
+      def some_method
+        # ...
+  ```
 
   ただし、異なるマークアップのフォーマット同士を変換するのでもない限
   り、.rdoc_options ファイルでマークアップのフォーマットを指定してプロ

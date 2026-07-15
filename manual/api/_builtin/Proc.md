@@ -406,10 +406,10 @@ Proc オブジェクトが引数を取らなければ空の配列を返します
               扱ったときの引数の情報を返します。
 #@end
 
-```ruby title="例"
-prc = lambda{|x, y=42, *other, k_x:, k_y: 42, **k_other, &b|}
-prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
-```
+  ```ruby title="例"
+  prc = lambda{|x, y=42, *other, k_x:, k_y: 42, **k_other, &b|}
+  prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
+  ```
 
 #@since 3.2
 ```ruby title="lambda: の例"

@@ -430,21 +430,21 @@ sh.transact {
 
 - **param** `block` -- イテレータとして呼ぶ場合, ブロックを指定します。
  
-```ruby title="動作例"
-require 'shell'
-Shell.verbose = false
-sh = Shell.new
-sh.pushd("/tmp")
-p sh.cwd #=> "/tmp"
-sh.pushd("/usr")
-p sh.cwd #=> "/usr"
-sh.popd
-p sh.cwd #=> "/tmp"
-sh.pushd("/usr/local"){
-  p sh.cwd #=> "/usr/local"
-}
-p sh.cwd #=> "/tmp"
-```
+  ```ruby title="動作例"
+  require 'shell'
+  Shell.verbose = false
+  sh = Shell.new
+  sh.pushd("/tmp")
+  p sh.cwd #=> "/tmp"
+  sh.pushd("/usr")
+  p sh.cwd #=> "/usr"
+  sh.popd
+  p sh.cwd #=> "/tmp"
+  sh.pushd("/usr/local"){
+    p sh.cwd #=> "/usr/local"
+  }
+  p sh.cwd #=> "/tmp"
+  ```
 
 ### def popd -> ()
 ### def popdir -> ()

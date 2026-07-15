@@ -21,11 +21,11 @@ library: bigdecimal
          s の有効桁数より n が小さいときもn = 0 のときと同じです。
          self の最大有効桁数は n より若干大きい値が採用されます。最大有
          効桁数は以下のような割り算を実行するとき等に意味を持ちます。
-```ruby
-require "bigdecimal"
-p BigDecimal("1")    / BigDecimal("3")  # => 0.333333333333333333e0
-p BigDecimal("1",10) / BigDecimal("3",10) # => 0.333333333333333333e0
-```
+  ```ruby
+  require "bigdecimal"
+  p BigDecimal("1")    / BigDecimal("3")  # => 0.333333333333333333e0
+  p BigDecimal("1",10) / BigDecimal("3",10) # => 0.333333333333333333e0
+  ```
          ただし、個々の演算における最大有効桁数 n の取り扱いは将来のバー
          ジョンで若干変更される可能性があります。
 

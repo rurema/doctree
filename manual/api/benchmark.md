@@ -182,36 +182,36 @@ end
 - **`%n`**:
   ラベルで置き換えられます(Mnemonic: n of "*n*ame")。[m:Benchmark::Tms#label]
 
-```ruby
-require 'benchmark'
+  ```ruby
+  require 'benchmark'
 
-n = 50000
+  n = 50000
 
-# これは
-#    Benchmark.bm(7, ">total:", ">avg:") do |x| ... end
-# と同じ
-Benchmark.benchmark(" "*7 + Benchmark::CAPTION,
-                    7,
-                    Benchmark::FORMAT,
-                    ">total:",
-                    ">avg:") do |x|
+  # これは
+  #    Benchmark.bm(7, ">total:", ">avg:") do |x| ... end
+  # と同じ
+  Benchmark.benchmark(" "*7 + Benchmark::CAPTION,
+                      7,
+                      Benchmark::FORMAT,
+                      ">total:",
+                      ">avg:") do |x|
 
-  tf = x.report("for:")   { for i in 1..n; a = "1"; end }
-  tt = x.report("times:") { n.times do   ; a = "1"; end }
-  tu = x.report("upto:")  { 1.upto(n) do ; a = "1"; end }
+    tf = x.report("for:")   { for i in 1..n; a = "1"; end }
+    tt = x.report("times:") { n.times do   ; a = "1"; end }
+    tu = x.report("upto:")  { 1.upto(n) do ; a = "1"; end }
 
-  [tf+tt+tu, (tf+tt+tu)/3]
-end
+    [tf+tt+tu, (tf+tt+tu)/3]
+  end
 
-#=>
-#
-#              user     system      total        real
-# for:     1.016667   0.016667   1.033333 (  0.485749)
-# times:   1.450000   0.016667   1.466667 (  0.681367)
-# upto:    1.533333   0.000000   1.533333 (  0.722166)
-# >total:  4.000000   0.033333   4.033333 (  1.889282)
-# >avg:    1.333333   0.011111   1.344444 (  0.629761)
-```
+  #=>
+  #
+  #              user     system      total        real
+  # for:     1.016667   0.016667   1.033333 (  0.485749)
+  # times:   1.450000   0.016667   1.466667 (  0.681367)
+  # upto:    1.533333   0.000000   1.533333 (  0.722166)
+  # >total:  4.000000   0.033333   4.033333 (  1.889282)
+  # >avg:    1.333333   0.011111   1.344444 (  0.629761)
+  ```
 
 
 

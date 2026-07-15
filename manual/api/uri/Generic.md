@@ -53,15 +53,15 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 ます。
 
 - **param** `ary` -- 構成要素を表す文字列の配列を与えます。要素は以下の順です。
-```text
-      [scheme, userinfo, host, port, registry, path, opaque, query, fragment]
-```
+  ```text
+        [scheme, userinfo, host, port, registry, path, opaque, query, fragment]
+  ```
 
 - **param** `hash` --  構成要素を表すハッシュを与えます。ハッシュのキーはシンボルは以下
             のいずれかです。 ハッシュの値は文字列で与えます。
-```text
-      :scheme, :userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment 
-```
+  ```text
+        :scheme, :userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment 
+  ```
 
 ### def build(ary)     -> URI::Generic
 ### def build(hash)    -> URI::Generic
@@ -69,15 +69,15 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 引数で与えられた URI 構成要素から URI::Generic オブジェクトを生成します。
 
 - **param** `ary` -- 構成要素を表す配列を与えます。要素は以下の順です。
-```text
-      [scheme, userinfo, host, port, registry, path, opaque, query, fragment]
-```
+  ```text
+        [scheme, userinfo, host, port, registry, path, opaque, query, fragment]
+  ```
 
 - **param** `hash` --  構成要素を表すハッシュを与えます。ハッシュのキーはシンボルは以下のいずれかです。
              ハッシュの値は文字列で与えます。
-```text
-      :scheme ,:userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment 
-```
+  ```text
+        :scheme ,:userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment 
+  ```
 
 - **raise** `URI::InvalidComponentError` -- 各要素が適合しない場合に発生します。
 

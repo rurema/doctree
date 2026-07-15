@@ -18,13 +18,13 @@ ldap://<host>/<dn>[?<attrs>[?<scope>[?<filter>[?<extensions>]]]]
 引数の正当性を検査します。
 
 - **param** `ary` -- 構成要素を表す配列を与えます。要素は次の順です。
-```text
-      [:host, :port, :dn, :attributes, :scope, :filter, :extensions]
-```
+  ```text
+        [:host, :port, :dn, :attributes, :scope, :filter, :extensions]
+  ```
 - **param** `hash` -- 構成要素を表すハッシュを与えます。ハッシュのキーは 
-```text
-            :host, :port, :dn, :attributes, :scope, :filter, :extensions 
-```
+  ```text
+              :host, :port, :dn, :attributes, :scope, :filter, :extensions 
+  ```
             のいずれかです。
 
 - **raise** `URI::InvalidComponentError` -- 各要素が適合しない場合に発生します。

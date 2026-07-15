@@ -38,13 +38,13 @@ a 要素を生成します。
 
 - **param** `href` -- 文字列を指定します。属性をハッシュで指定することもできます。
        
-```ruby title="例"
-a("http://www.example.com") { "Example" }
-  # => "<A HREF=\"http://www.example.com\">Example</A>"
+  ```ruby title="例"
+  a("http://www.example.com") { "Example" }
+    # => "<A HREF=\"http://www.example.com\">Example</A>"
 
-a("HREF" => "http://www.example.com", "TARGET" => "_top") { "Example" }
-  # => "<A HREF=\"http://www.example.com\" TARGET=\"_top\">Example</A>"
-```
+  a("HREF" => "http://www.example.com", "TARGET" => "_top") { "Example" }
+    # => "<A HREF=\"http://www.example.com\" TARGET=\"_top\">Example</A>"
+  ```
 
 ### def base(href = "") -> String
 
@@ -66,10 +66,10 @@ blockquote 要素を生成します。
 
 - **param** `cite` -- 引用元を指定します。属性をハッシュで指定することもできます。
        
-```ruby title="例"
-blockquote("http://www.example.com/quotes/foo.html") { "Foo!" }
-  #=> "<BLOCKQUOTE CITE=\"http://www.example.com/quotes/foo.html\">Foo!</BLOCKQUOTE>
-```
+  ```ruby title="例"
+  blockquote("http://www.example.com/quotes/foo.html") { "Foo!" }
+    #=> "<BLOCKQUOTE CITE=\"http://www.example.com/quotes/foo.html\">Foo!</BLOCKQUOTE>
+  ```
 
 ### def caption(align = nil) -> String
 ### def caption(align = nil){ ... } -> String
@@ -81,10 +81,10 @@ caption 要素を生成します。
 - **param** `align` -- 配置を文字列で指定します。(top, bottom, left right が指定可能です)
              属性をハッシュで指定することもできます。
        
-```ruby title="例"
-caption("left") { "Capital Cities" }
-  # => <CAPTION ALIGN=\"left\">Capital Cities</CAPTION>
-```
+  ```ruby title="例"
+  caption("left") { "Capital Cities" }
+    # => <CAPTION ALIGN=\"left\">Capital Cities</CAPTION>
+  ```
 
 ### def checkbox(name = "", value = nil, checked = nil) -> String
 

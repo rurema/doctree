@@ -925,12 +925,12 @@ int_encも指定されていた場合、入力された文字列をext_encでエ
 - **`?C`**:
     ファイルの inode 変更時刻を返す -> Time
 
-```ruby title="例"
-IO.write("testfile", "test")
-test("r", "testfile") # => true
-test("s", "testfile") # => 4
-test("M", "testfile") # => 2018-03-31 07:38:40 +0900
-```
+  ```ruby title="例"
+  IO.write("testfile", "test")
+  test("r", "testfile") # => true
+  test("s", "testfile") # => 4
+  test("M", "testfile") # => 2018-03-31 07:38:40 +0900
+  ```
 
 ### module_function def test(cmd, file1, file2) -> bool
 
@@ -953,18 +953,18 @@ test("M", "testfile") # => 2018-03-31 07:38:40 +0900
 - **`?-`**:
     ファイル1とファイル2が同一のファイルである
 
-```ruby title="例"
-IO.write("testfile1", "test1")
-IO.write("testfile2", "test2")
-%w(= < > -).each do |e|
-  result = test(e, "testfile1", "testfile2")
-  puts "#{e}: #{result}"
-end
-# => =: true
-# => <: false
-# => >: false
-# => -: false
-```
+  ```ruby title="例"
+  IO.write("testfile1", "test1")
+  IO.write("testfile2", "test2")
+  %w(= < > -).each do |e|
+    result = test(e, "testfile1", "testfile2")
+    puts "#{e}: #{result}"
+  end
+  # => =: true
+  # => <: false
+  # => >: false
+  # => -: false
+  ```
 ### module_function def load(file, priv = false) -> true
 
 Ruby プログラム file をロードして実行します。再ロード可能です。
@@ -1164,16 +1164,16 @@ proc{|event, file, line, id, binding, klass| "..." }
 
 - **`event`**:
  実行のタイプを表す、以下のいずれかの文字列。
-```
-  "line":      式の評価。
-  "call":      メソッドの呼び出し。
-  "return":    メソッド呼び出しからのリターン。
-  "c-call":    Cで記述されたメソッドの呼び出し。
-  "c-return":  Cで記述されたメソッド呼び出しからのリターン。
-  "class":     クラス定義、特異クラス定義、モジュール定義への突入。
-  "end":       クラス定義、特異クラス定義、モジュール定義の終了。
-  "raise":     例外の発生。
-```
+  ```
+    "line":      式の評価。
+    "call":      メソッドの呼び出し。
+    "return":    メソッド呼び出しからのリターン。
+    "c-call":    Cで記述されたメソッドの呼び出し。
+    "c-return":  Cで記述されたメソッド呼び出しからのリターン。
+    "class":     クラス定義、特異クラス定義、モジュール定義への突入。
+    "end":       クラス定義、特異クラス定義、モジュール定義の終了。
+    "raise":     例外の発生。
+  ```
 - **`file`**:
  実行中のプログラムのソースファイル名 (文字列)。
 
@@ -1183,37 +1183,37 @@ proc{|event, file, line, id, binding, klass| "..." }
 - **`id`**:
  event に応じ、以下のものが渡されます。
  第六ブロック引数の klass と対応しています。
-```
-    line
-        最後に呼び出されたメソッドを表す Symbol オブジェクト。
-        トップレベルでは nil。
-    call/return/c-call/c-return
-        呼び出された/リターンするメソッドを表す Symbol オブジェクト。
-    class/end
-        nil。
-    raise
-        最後に呼び出されたメソッドを表す Symbol オブジェクト。
-        トップレベルでは nil。
-```
+  ```
+      line
+          最後に呼び出されたメソッドを表す Symbol オブジェクト。
+          トップレベルでは nil。
+      call/return/c-call/c-return
+          呼び出された/リターンするメソッドを表す Symbol オブジェクト。
+      class/end
+          nil。
+      raise
+          最後に呼び出されたメソッドを表す Symbol オブジェクト。
+          トップレベルでは nil。
+  ```
 - **`binding`**:
  実行中のプログラムのコンテキストを表す [c:Binding] オブジェクト。
 
 - **`klass`**:
  event に応じ、以下のものが渡されます。
  第四ブロック引数の id と対応しています。
-```
-    line
-        最後に呼び出されたメソッドが属するクラスを表す
-        Class オブジェクト。トップレベルでは nil。
-    call/return/c-call/c-return
-        呼び出された/リターンするメソッドが属するクラス
-        を表す Class オブジェクト。
-    class/end
-        nil。
-    raise
-        最後に呼び出されたメソッドが属するクラスを表す
-        Class オブジェクト。トップレベルでは nil。
-```
+  ```
+      line
+          最後に呼び出されたメソッドが属するクラスを表す
+          Class オブジェクト。トップレベルでは nil。
+      call/return/c-call/c-return
+          呼び出された/リターンするメソッドが属するクラス
+          を表す Class オブジェクト。
+      class/end
+          nil。
+      raise
+          最後に呼び出されたメソッドが属するクラスを表す
+          Class オブジェクト。トップレベルでは nil。
+  ```
 - **param** `proc` -- トレース用 [c:Proc] オブジェクトを指定します。nil を指定した場合、トレースをオフにします。
 
 - **return** -- proc を返します。

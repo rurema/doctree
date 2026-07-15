@@ -283,13 +283,13 @@ d, a, u の3つのオプションがあります。
   - \R 改行 (?>\x0D\x0A|[\x0A-\x0D\u{85}\u{2028}\u{2029}]) (Unicode 以外では (?>\x0D\x0A|[\x0A-\x0D]) になります)
   - \X Unicode 結合文字シーケンス (eXtended grapheme cluster) (?>\P{M}\p{M}*)
 
-```ruby
-# \u{0308} はウムラウト
-p /\X/.match("e\u{0308}") # => #<MatchData "ë">
-p $&.codepoints # => [101, 776]
-p /\w/.match("e\u{0308}") # => #<MatchData "e">
-p $&.codepoints # => [101]
-```
+    ```ruby
+    # \u{0308} はウムラウト
+    p /\X/.match("e\u{0308}") # => #<MatchData "ë">
+    p $&.codepoints # => [101, 776]
+    p /\w/.match("e\u{0308}") # => #<MatchData "e">
+    p $&.codepoints # => [101]
+    ```
 
 ただし、\R は文字クラスの中では使用できません。
 
@@ -622,14 +622,14 @@ p /\w(and|or)\w/.match("dissemblance") # => nil
   - \B 非単語境界にマッチします。
     \bでマッチしない位置にマッチします。
 
-```ruby
-# 文字列中の real にマッチする
-p /real/.match("surrealist") # => #<MatchData "real">
-# 先頭に real とないとマッチしない
-p /\Areal/.match("surrealist") # => nil
-# 単語境界がrealの前にないのでマッチしない
-p /\breal/.match("surrealist") # => nil
-```
+    ```ruby
+    # 文字列中の real にマッチする
+    p /real/.match("surrealist") # => #<MatchData "real">
+    # 先頭に real とないとマッチしない
+    p /\Areal/.match("surrealist") # => nil
+    # 単語境界がrealの前にないのでマッチしない
+    p /\breal/.match("surrealist") # => nil
+    ```
   
 単語を成す文字、成さない文字の定義はエンコードによって
 異なります。以下の例で「全角」括弧は EUC-JP では
@@ -663,16 +663,16 @@ Unicode の規格では、単語を成す文字を Word というプロパティ
   - \K 後読みの別表記、このメタ文字列の手前までを後読みします。
     つまり /pat1\Kpat2/ は /(?<=pat1)pat2/ と同様の意味となります。
 
-```ruby
-# 以下の例では、後読みと先読みを使って <b> と
-# </b> に挟まれているという条件を正規表現中に記述しつつ
-# <b> </b> 自体にはマッチさせていない。
-/(?<=<b>)\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
-# => #<MatchData "bold">
-# 以下は上の正規表現と同じものを表す
-/<b>\K\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
-# => #<MatchData "bold">
-```
+    ```ruby
+    # 以下の例では、後読みと先読みを使って <b> と
+    # </b> に挟まれているという条件を正規表現中に記述しつつ
+    # <b> </b> 自体にはマッチさせていない。
+    /(?<=<b>)\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
+    # => #<MatchData "bold">
+    # 以下は上の正規表現と同じものを表す
+    /<b>\K\w+(?=<\/b>)/.match("Fortune favours the <b>bold</b>")
+    # => #<MatchData "bold">
+    ```
 
 ### 条件分岐 {#cond}
 (?(cond)pat) もしくは (?(cond)truepat|falsepat) という

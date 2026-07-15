@@ -50,14 +50,14 @@ sio = OpenURI.open_uri('http://www.example.com',
 - **`:proxy`**:
  プロクシの設定をします。
  値には以下のいずれかを与えます。
-```text
-   文字列:           "http://proxy.example.com:8000/" のようなプロクシの URI。
-   URI オブジェクト: URI.parse("http://proxy.example.com:8000/") のようなプロクシの URI オブジェクト。
-   true:             Proxy を環境変数などから見つけようとする。使う環境変数は schema に応じて
-                     http_proxy, https_proxy, ftp_proxy, no_proxy が使われる。
-   false:            Proxy を用いない。
-   nil:              Proxy を用いない。
-```
+  ```text
+     文字列:           "http://proxy.example.com:8000/" のようなプロクシの URI。
+     URI オブジェクト: URI.parse("http://proxy.example.com:8000/") のようなプロクシの URI オブジェクト。
+     true:             Proxy を環境変数などから見つけようとする。使う環境変数は schema に応じて
+                       http_proxy, https_proxy, ftp_proxy, no_proxy が使われる。
+     false:            Proxy を用いない。
+     nil:              Proxy を用いない。
+  ```
 
 - **`:http_basic_authentication`**:
   HTTP の Basic 認証のためのユーザ名とパスワードを、文字列の配列 ["user", "password"] として与えます。
@@ -82,12 +82,12 @@ sio = OpenURI.open_uri('http://www.example.com',
  :proxy と :proxy_http_basic_authentication を同時に指定すると
  [c:ArgumentError] が発生します。
 
-```text title="使い方"
-   :proxy_http_basic_authentication =>
-     ["http://proxy.example.com:8000/", "proxy-user", "proxy-password"]
-   :proxy_http_basic_authentication =>
-     [URI.parse("http://proxy.example.com:8000/"), "proxy-user", "proxy-password"]
-```
+  ```text title="使い方"
+     :proxy_http_basic_authentication =>
+       ["http://proxy.example.com:8000/", "proxy-user", "proxy-password"]
+     :proxy_http_basic_authentication =>
+       [URI.parse("http://proxy.example.com:8000/"), "proxy-user", "proxy-password"]
+  ```
 
 - **`:read_timeout`**:
  http コネクションのタイムアウト秒数を指定します。nil でタイムアウトなしを

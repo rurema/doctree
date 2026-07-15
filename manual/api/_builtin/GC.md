@@ -286,11 +286,11 @@ GCのストレスモードを引数 value に設定します。
 - **`0x04`**:
   malloc/calloc/realloc の後でメジャーGCを動作させる場合に指定します。
 
-```ruby title="例"
-p GC.stress # => false
-GC.stress = true
-p GC.stress # => true
-```
+  ```ruby title="例"
+  p GC.stress # => false
+  GC.stress = true
+  p GC.stress # => true
+  ```
 
 - **SEE** [m:GC.stress]
 

@@ -22,16 +22,16 @@ BigDecimalを使った数学的な機能を提供します。
 
   計算結果の精度。
 
-```ruby title="例"
-require "bigdecimal"
-require "bigdecimal/math"
+  ```ruby title="例"
+  require "bigdecimal"
+  require "bigdecimal/math"
 
-include BigMath
+  include BigMath
 
-a = BigDecimal((PI(100)/2).to_s)
-puts sin(a,100)
-#=> 0.99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999998765917571575217785e0
-```
+  a = BigDecimal((PI(100)/2).to_s)
+  puts sin(a,100)
+  #=> 0.99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999998765917571575217785e0
+  ```
 
 # reopen BigMath
 

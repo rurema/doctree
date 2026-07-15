@@ -74,36 +74,36 @@ p Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
     foo/*/*/bar ... (以下無限に続く)に対してそれぞれ
     マッチ判定を行います。
 
-```ruby
-# 一般的な例
-p Dir.glob("*")          #=> ["foo", "bar", "baz"]
-p Dir.glob("./b*")       #=> ["./bar", "./baz"]      先頭に "./" が付いている。
-p Dir.glob("*/")         #=> ["foo/"]                ディレクトリのみにマッチする。
-p Dir.glob("wrong_name") #=> []                      マッチしないと空の配列を返す。
+  ```ruby
+  # 一般的な例
+  p Dir.glob("*")          #=> ["foo", "bar", "baz"]
+  p Dir.glob("./b*")       #=> ["./bar", "./baz"]      先頭に "./" が付いている。
+  p Dir.glob("*/")         #=> ["foo/"]                ディレクトリのみにマッチする。
+  p Dir.glob("wrong_name") #=> []                      マッチしないと空の配列を返す。
 
-Dir.glob("b*") {|f| p f }
+  Dir.glob("b*") {|f| p f }
 
-#=> "bar"
-#   "baz"
+  #=> "bar"
+  #   "baz"
 
-# 複数のパターンを指定する例
-p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
-p Dir["f*", "b*"]        # => ["foo", "bar"]
+  # 複数のパターンを指定する例
+  p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
+  p Dir["f*", "b*"]        # => ["foo", "bar"]
 
-# ワイルドカードの例
-p Dir.glob("*")          #=> ["foo", "bar"]
-p Dir.glob("fo?")        #=> ["foo"]
-p Dir.glob("[^f]*")      #=> ["bar"]
-p Dir.glob("{b,f}*")     #=> ["bar", "foo"]
+  # ワイルドカードの例
+  p Dir.glob("*")          #=> ["foo", "bar"]
+  p Dir.glob("fo?")        #=> ["foo"]
+  p Dir.glob("[^f]*")      #=> ["bar"]
+  p Dir.glob("{b,f}*")     #=> ["bar", "foo"]
 
-# ベースディレクトリの例
-rbfiles = File.join("**", "*.rb")
-p Dir.glob(rbfiles)                 #=> ["main.rb",
-                                    #    "lib/song.rb",
-                                    #    "lib/song/karaoke.rb"]
-p Dir.glob(rbfiles, base: "lib")    #=> ["song.rb",
-                                    #    "song/karaoke.rb"]
-```
+  # ベースディレクトリの例
+  rbfiles = File.join("**", "*.rb")
+  p Dir.glob(rbfiles)                 #=> ["main.rb",
+                                      #    "lib/song.rb",
+                                      #    "lib/song/karaoke.rb"]
+  p Dir.glob(rbfiles, base: "lib")    #=> ["song.rb",
+                                      #    "song/karaoke.rb"]
+  ```
 
 ### def chdir           -> 0
 ### def chdir(path)     -> 0

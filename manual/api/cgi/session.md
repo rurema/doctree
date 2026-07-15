@@ -272,9 +272,9 @@ SessionDemo.new
 - **`no_cookies`**:
   真を指定すると @output_cookies が nil になります。
 
-```ruby title="例"
-CGI::Session.new(cgi, {"new_session" => true})
-```
+  ```ruby title="例"
+  CGI::Session.new(cgi, {"new_session" => true})
+  ```
 
 ### def callback(dbman)
 #@# nodoc

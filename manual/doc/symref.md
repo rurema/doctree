@@ -78,10 +78,10 @@ Ruby スクリプトで使われる記号の一覧です。
 
  [ref:d:spec/literal#exp]
 
-```ruby
-a = 10
-p "a is #{a}" # => "a is 10"
-```
+  ```ruby
+  a = 10
+  p "a is #{a}" # => "a is 10"
+  ```
 
 - **`Range#each`**:
 
@@ -104,18 +104,18 @@ p "a is #{a}" # => "a is 10"
  <文字>によって式の意味が異なります。なお、最初の <区切り文字> が、左側の角括弧 `[`、丸括弧 `(`、
  ブレース `{`、小なり不等号 `<`、の場合は、対応する右側の括弧が終わりの <区切り文字> になります。
 
-```ruby
-p %r{/etc/httpd/logs$} # => /\/etc\/httpd\/logs$/
-p %w[foo bar baz] # => ["foo", "bar", "baz"]
-```
+  ```ruby
+  p %r{/etc/httpd/logs$} # => /\/etc\/httpd\/logs$/
+  p %w[foo bar baz] # => ["foo", "bar", "baz"]
+  ```
 
 - **`%!STRING!`**:
 
  `%` 記法の一種。[ref:d:spec/literal#percent]。ダブルクォート文字列で `%Q!STRING!` と同じ。
 
-```ruby
-p %!nomad! # => "nomad"
-```
+  ```ruby
+  p %!nomad! # => "nomad"
+  ```
 
 - **`% ruby -e "puts 'Hello'"`**:
 
@@ -127,9 +127,9 @@ p %!nomad! # => "nomad"
 
  論理積演算子。または類似の演算を行うメソッド。
 
-```ruby
-p( 3 & 5 ) # => 1 ・・ 二進数で 0011 & 0101 # => 0001
-```
+  ```ruby
+  p( 3 & 5 ) # => 1 ・・ 二進数で 0011 & 0101 # => 0001
+  ```
 
 - **`a &= yyy`**:
 
@@ -139,9 +139,9 @@ p( 3 & 5 ) # => 1 ・・ 二進数で 0011 & 0101 # => 0001
 
  「and」演算子。
 
-```ruby
-p( 3 && 5 ) # => 5 ・・ 3 も 5 も真なので右の値を返す。
-```
+  ```ruby
+  p( 3 && 5 ) # => 5 ・・ 3 も 5 も真なので右の値を返す。
+  ```
 
 - **def xxx(&yyy) ・・ &がついた引数**:
 
@@ -169,12 +169,12 @@ p( 3 && 5 ) # => 5 ・・ 3 も 5 も真なので右の値を返す。
 
  「`||`」演算子の自己代入演算子。`a` が 偽 か 未定義 なら `a` に `xxx` を代入する、という意味になります。
 
-```ruby
-a ||= :some
-p a # => some
-a ||= :sec
-p a # => some
-```
+  ```ruby
+  a ||= :some
+  p a # => some
+  a ||= :sec
+  p a # => some
+  ```
 
 - **`5.times{|n| p n}`**:
 
@@ -259,9 +259,9 @@ p a # => some
 
  「`^`」演算子の自己代入演算子。`a` の論理値の反転。
 
-```ruby
-p(a=true);p(a^=true);p(a^=true) # => true false true
-```
+  ```ruby
+  p(a=true);p(a^=true);p(a^=true) # => true false true
+  ```
 
 - **`/^xxx/`**:
 
@@ -292,9 +292,9 @@ p(a=true);p(a^=true);p(a^=true) # => true false true
 
  ハッシュの新しい記法。以下と同じです。
 
-```ruby
-{ :a => "aaa", :b => "bbb" }
-```
+  ```ruby
+  { :a => "aaa", :b => "bbb" }
+  ```
 
 ### . {#period}
 
@@ -321,10 +321,10 @@ p(a=true);p(a^=true);p(a^=true) # => true false true
 
  範囲式が条件式として書かれたときは、範囲オブジェクトを生成せず、特別にフリップフロップのように働きます。
 
-```ruby
-p '1234543212345'.each_char { |n| print( (n == ?2)..(n == ?4) ? n : '_' ) } # => _234___21234_
-#"2"が出るまではfalse、"2"が出てから"4"が出るまではtrue、"4"から"2"まではfalseを返す。
-```
+  ```ruby
+  p '1234543212345'.each_char { |n| print( (n == ?2)..(n == ?4) ? n : '_' ) } # => _234___21234_
+  #"2"が出るまではfalse、"2"が出てから"4"が出るまではtrue、"4"から"2"まではfalseを返す。
+  ```
 
 - **`/xx.xx/`**:
 
@@ -335,11 +335,11 @@ p '1234543212345'.each_char { |n| print( (n == ?2)..(n == ?4) ? n : '_' ) } # =>
  受け取った引数をそのまま別のメソッドに渡すための記法です。
  受け取る側も渡す側もカッコでくくる必要があります。
 
-```ruby
-def foo(...)
-  bar(...)
-end
-```
+  ```ruby
+  def foo(...)
+    bar(...)
+  end
+  ```
 
 ### , {#comma}
 
@@ -390,11 +390,11 @@ end
 
  「`<<`」演算子の自己代入演算子。
 
-```ruby
-a = 3
-a <<= 1
-p a # => 6
-```
+  ```ruby
+  a = 3
+  a <<= 1
+  p a # => 6
+  ```
 
 - **<<EOS または <<-EOS 、<<"EOS" など。**:
 
@@ -434,11 +434,11 @@ p a # => 6
 
  「`>>`」演算子の自己代入演算子。
 
-```ruby
-a = 3
-a >>= 1
-p a # => 1
-```
+  ```ruby
+  a = 3
+  a >>= 1
+  p a # => 1
+  ```
 
 - **`{ 1 => "11" , 3 => "333" }`**:
 
@@ -448,9 +448,9 @@ p a # => 1
 
  Ruby1.9 で導入された lambda の新しい記法。以下と同じ。
 
-```ruby
-lambda{|a, b| p [a, b] }
-```
+  ```ruby
+  lambda{|a, b| p [a, b] }
+  ```
 
 ### = {#eq}
 
@@ -476,11 +476,11 @@ lambda{|a, b| p [a, b] }
 
  自己代入演算子。[ref:d:spec/operator#selfassign] を参照。
 
-```ruby
-a = 7
-a **= 2
-p a # => 49
-```
+  ```ruby
+  a = 7
+  a **= 2
+  p a # => 49
+  ```
 
 - **`def xx=`**:
 
@@ -509,9 +509,9 @@ p a # => 49
 
  ビット演算の否定。
 
-```ruby
-p '%04b %04b' % [3, ~ 3] # => "0011 ..100"
-```
+  ```ruby
+  p '%04b %04b' % [3, ~ 3] # => "0011 ..100"
+  ```
 
 - **`/xxx/ =~ yyy`**:
 
@@ -554,15 +554,15 @@ p '%04b %04b' % [3, ~ 3] # => "0011 ..100"
 
  単項演算子 `+X` や `-X` を定義するときの表記法。
 
-```ruby
-class Symbol
-  def +@
-    self.upcase
+  ```ruby
+  class Symbol
+    def +@
+      self.upcase
+    end
   end
-end
 
-puts(+:joke) # => JOKE
-```
+  puts(+:joke) # => JOKE
+  ```
 
 ### _ {#under}
 
@@ -580,14 +580,14 @@ puts(+:joke) # => JOKE
 
  番号指定パラメータ。ブロックの仮引数として参照できます。
 
-```ruby
-# 同じ意味
-(1..10).map {|n| n * 2 }
-(1..10).map { _1 * 2 }
+  ```ruby
+  # 同じ意味
+  (1..10).map {|n| n * 2 }
+  (1..10).map { _1 * 2 }
 
-[3, 1, 2].sort {|n, m| m <=> n }
-[3, 1, 2].sort { _2 <=> _1 }
-```
+  [3, 1, 2].sort {|n, m| m <=> n }
+  [3, 1, 2].sort { _2 <=> _1 }
+  ```
 
 ### { {#lbra}
 ### } {#rbra}
@@ -608,10 +608,10 @@ puts(+:joke) # => JOKE
 
  式展開。[ref:d:spec/literal#exp] を参照。
 
-```ruby
-a = 10
-p "a is #{a}" # => "a is 10"
-```
+  ```ruby
+  a = 10
+  p "a is #{a}" # => "a is 10"
+  ```
 
 ### [ {#lbra2}
 ### ] {#rbra2}
@@ -624,14 +624,14 @@ p "a is #{a}" # => "a is 10"
 
  [] メソッドの実行
 
-```ruby
-class String
-  def [](*a)
-    '(^^;'
+  ```ruby
+  class String
+    def [](*a)
+      '(^^;'
+    end
   end
-end
-p( 'abcde'[1,2] ) # => "(^^;"
-```
+  p( 'abcde'[1,2] ) # => "(^^;"
+  ```
 
 - **`/xx[abc]/`**:
 
@@ -665,11 +665,11 @@ p( 'abcde'[1,2] ) # => "(^^;"
  コマンド出力。バッククォート(\`)で囲まれた文字列は、コマンドとして実行され、
  その標準出力が文字列として与えられます。[ref:d:spec/literal#command] を参照。
 
-```ruby
-puts `ruby -h`
-# => Usage: ruby [switches] [--] [programfile] [arguments]
-# => ....
-```
+  ```ruby
+  puts `ruby -h`
+  # => Usage: ruby [switches] [--] [programfile] [arguments]
+  # => ....
+  ```
 
 ### \ {#backslash}
 
@@ -679,18 +679,18 @@ puts `ruby -h`
 
  文字列や正規表現の中のエスケープ。
 
-```ruby
-puts "abc\"def" # => abc"def
-```
+  ```ruby
+  puts "abc\"def" # => abc"def
+  ```
 
 - **xxx \**:
 
  継続行。改行の直前に置かれる。パースの段階で直後の改行が存在しないものとして扱われます。
 
-```ruby
-puts(3 \
-+ 4) # => 7
-```
+  ```ruby
+  puts(3 \
+  + 4) # => 7
+  ```
 
 ### ; {#semicolon}
 

@@ -37,33 +37,33 @@ s.start
   認証に失敗した場合 proc は適切な例外を発生させなければいけません。nil を指定した場合すべての接続を
   受け付けます。デフォルトは nil です。通常は [c:WEBrick::HTTPAuth::ProxyBasicAuth] か
   [c:WEBrick::HTTPAuth::ProxyDigestAuth] を使用します。
-```ruby
- require 'webrick'
- require 'webrick/httpproxy'
- auth_proc = proc{|req, res|
-   unless c = req['proxy-authorization']
-     res['Proxy-Authenticate'] = 'Basic realm="WEBrick Proxy"'
-     raise WEBrick::HTTPStatus::ProxyAuthenticationRequired
-   else
-     # 略
-   end
- }
- s = WEBrick::HTTPProxyServer.new(ProxyAuthProc: auth_proc, Port: 8080)
-```
+  ```ruby
+   require 'webrick'
+   require 'webrick/httpproxy'
+   auth_proc = proc{|req, res|
+     unless c = req['proxy-authorization']
+       res['Proxy-Authenticate'] = 'Basic realm="WEBrick Proxy"'
+       raise WEBrick::HTTPStatus::ProxyAuthenticationRequired
+     else
+       # 略
+     end
+   }
+   s = WEBrick::HTTPProxyServer.new(ProxyAuthProc: auth_proc, Port: 8080)
+  ```
 - **`:ProxyContentHandler`**:
   接続先の HTTP サーバからの内容を処理する [c:Proc] オブジェクトを指定します。
   レスポンスの内容を書き換えたりする事が出来ます。[c:WEBrick::HTTPResponse] オブジェクトと
   [c:WEBrick::HTTPRequest] オブジェクトを引数として proc.call(req, res) のように呼ばれます。
   nil を指定した場合なにもしません。デフォルトは nil です。
-```ruby
- require 'webrick'
- require 'webrick/httpproxy'
- handler = proc{|req, res|
-   res.body.gsub!(/です。/, 'でんがな。')
-   res.body.gsub!(/ます。/, 'まんがな。')
- }
- s = WEBrick::HTTPProxyServer.new(ProxyContentHandler: handler, Port: 8080)
-```
+  ```ruby
+   require 'webrick'
+   require 'webrick/httpproxy'
+   handler = proc{|req, res|
+     res.body.gsub!(/です。/, 'でんがな。')
+     res.body.gsub!(/ます。/, 'まんがな。')
+   }
+   s = WEBrick::HTTPProxyServer.new(ProxyContentHandler: handler, Port: 8080)
+  ```
 - **`:ProxyVia`**:
   true を指定した場合 接続先の HTTP サーバへのリクエストに Via ヘッダを付けます。デフォルトは
   true です。
@@ -73,11 +73,11 @@ s.start
 - **`:ProxyURI`**:
   HTTP サーバへの接続にさらに別の Proxy サーバを使う場合にその Proxy の URI
   を [c:URI] オブジェクトで指定します。
-```ruby
-  require 'uri'
-  require 'webrick/httpproxy'
-  u = URI.parse('http://localhost:18080/')
-  s = WEBrick::HTTPProxyServer.new(ProxyURI: u, Port: 8080)
-```
+  ```ruby
+    require 'uri'
+    require 'webrick/httpproxy'
+    u = URI.parse('http://localhost:18080/')
+    s = WEBrick::HTTPProxyServer.new(ProxyURI: u, Port: 8080)
+  ```
 
 - **param** `default` -- デフォルトは [m:WEBrick::Config::HTTP] です。
