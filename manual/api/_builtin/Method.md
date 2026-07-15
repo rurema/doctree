@@ -128,10 +128,6 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
 - **param** `args` -- self に渡される引数。
 
 - **SEE** [m:UnboundMethod#bind_call]
-#@until 3.2
-- **SEE** [d:spec/safelevel]
-#@# セーフレベルに関するその他の詳細
-#@end
 
 ```ruby title="例"
 class Foo
