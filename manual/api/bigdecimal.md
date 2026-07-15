@@ -333,21 +333,21 @@ c が必要とするメモリー領域は大きくなることに注意して下
 
   これらのメソッドは先頭 (最左) の数字からの桁数を指定できます。
 
-```ruby
-require "bigdecimal"
-p BigDecimal("2").div(3, 12).to_s(10) # 2.0 / 3.0
-# => 0.6666666666 67e0
-```
+  ```ruby
+  require "bigdecimal"
+  p BigDecimal("2").div(3, 12).to_s(10) # 2.0 / 3.0
+  # => 0.6666666666 67e0
+  ```
 
 - **`truncate, round, ceil, floor`**:
 
   これらのメソッドは小数点からの相対位置を指定して桁数を決定します。
 
-```ruby
-require "bigdecimal"
-p BigDecimal("6.66666666666666").round(12).to_s(10)
-# => 0.6666666666 667e1
-```
+  ```ruby
+  require "bigdecimal"
+  p BigDecimal("6.66666666666666").round(12).to_s(10)
+  # => 0.6666666666 667e1
+  ```
 
 #### 自分で精度をコントロールしたい場合
 

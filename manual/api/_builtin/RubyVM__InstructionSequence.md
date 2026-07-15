@@ -111,16 +111,16 @@ options で指定します。
                のオプションも変更しません。また、[c:Hash] を指定した
                場合は以下のキーに対して、true か false を指定する事で個
                別に有効、無効を指定します。
-```
-  * :inline_const_cache
-  * :instructions_unification
-  * :operands_unification
-  * :peephole_optimization
-  * :specialized_instruction
-  * :stack_caching
-  * :tailcall_optimization
-  * :trace_instruction
-```
+  ```
+    * :inline_const_cache
+    * :instructions_unification
+    * :operands_unification
+    * :peephole_optimization
+    * :specialized_instruction
+    * :stack_caching
+    * :tailcall_optimization
+    * :trace_instruction
+  ```
                :debug_level をキーに指定した場合は値を数値で指定します。
 
 .new、.compile、.compile_file メソッドの実行の際に option 引数を指定し
@@ -379,34 +379,34 @@ self の情報を 14 要素の配列にして返します。
   命令シーケンスを構成する命令とオペランドの配列の配列。
 
 
-```ruby title="例"
-require 'pp'
+  ```ruby title="例"
+  require 'pp'
 
-iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
-pp iseq.to_a
-# ※ Ruby 2.5.0 での実行結果
-# => ["YARVInstructionSequence/SimpleDataFormat",
-# 2,
-# 0,
-# 1,
-# {:arg_size=>0, :local_size=>2, :stack_max=>2},
-# "<compiled>",
-# "<compiled>",
-# nil,
-# 1,
-# :top,
-# [:num],
-# 0,
-# [],
-# [1,
-#  [:trace, 1],
-#  [:putobject_OP_INT2FIX_O_1_C_],
-#  [:putobject, 2],
-#  [:opt_plus, {:mid=>:+, :flag=>256, :orig_argc=>1, :blockptr=>nil}],
-#  [:dup],
-#  [:setlocal_OP__WC__0, 2],
-#  [:leave]]]
-```
+  iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
+  pp iseq.to_a
+  # ※ Ruby 2.5.0 での実行結果
+  # => ["YARVInstructionSequence/SimpleDataFormat",
+  # 2,
+  # 0,
+  # 1,
+  # {:arg_size=>0, :local_size=>2, :stack_max=>2},
+  # "<compiled>",
+  # "<compiled>",
+  # nil,
+  # 1,
+  # :top,
+  # [:num],
+  # 0,
+  # [],
+  # [1,
+  #  [:trace, 1],
+  #  [:putobject_OP_INT2FIX_O_1_C_],
+  #  [:putobject, 2],
+  #  [:opt_plus, {:mid=>:+, :flag=>256, :orig_argc=>1, :blockptr=>nil}],
+  #  [:dup],
+  #  [:setlocal_OP__WC__0, 2],
+  #  [:leave]]]
+  ```
 
 ### def eval -> object
 

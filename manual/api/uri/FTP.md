@@ -25,17 +25,17 @@ p URI::FTP.build([nil, 'example.com', nil, '/foo', 'i']).to_s
 ```
 
 - **param** `ary` -- 構成要素を表す文字列の配列を与えます。要素は
-```text
-      [userinfo, host, port, path, typecode]
-```
+  ```text
+        [userinfo, host, port, path, typecode]
+  ```
            の順です。typecode は、"a"、"i" あるいは "d" です。"a" はテキスト、"i" はバイナリ、
            "d" はディレクトリを表します。"a" がテキストで、"i" がバイナリなのは、それぞれの
            データタイプがFTPのプロトコルで ASCII と IMAGE と呼ばれていたためです。
 
 - **param** `hash` -- 構成要素を表すハッシュを与えます。ハッシュのキーは
-```text
- :scheme, :userinfo, :host, :port, :path, :typecode
-```
+  ```text
+   :scheme, :userinfo, :host, :port, :path, :typecode
+  ```
             のいずれかです。ハッシュの値は文字列です。typecode は、
             "a"、"i" あるいは "d" です。"a" はテキスト、"i" はバイナリ、
             "d" はディレクトリを表します。"a" がテキストで、"i" がバイナリなのは、

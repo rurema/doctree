@@ -44,22 +44,22 @@ JSON 形式の文字列を生成するための設定を保持しておくため
 - **`:buffer_initial_length`**:
   sets the initial length of the generator's internal buffer.
 
-```ruby title="例 Hash を指定"
-require "json"
+  ```ruby title="例 Hash を指定"
+  require "json"
 
-json_state = JSON::State.new(indent: "\t")
-json_state.class  # => JSON::Ext::Generator::State
-json_state.indent # => "\t"
-```
+  json_state = JSON::State.new(indent: "\t")
+  json_state.class  # => JSON::Ext::Generator::State
+  json_state.indent # => "\t"
+  ```
 
-```ruby title="例 JSON::State を指定"
-require "json"
+  ```ruby title="例 JSON::State を指定"
+  require "json"
 
-json_state = JSON::State.new(indent: "\t")
-copy = JSON::State.new(json_state)
-copy.class  # => JSON::Ext::Generator::State
-copy.indent # => "\t"
-```
+  json_state = JSON::State.new(indent: "\t")
+  copy = JSON::State.new(json_state)
+  copy.class  # => JSON::Ext::Generator::State
+  copy.indent # => "\t"
+  ```
 
 ### def from_state(options) -> JSON::State
 

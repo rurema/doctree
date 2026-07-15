@@ -36,12 +36,12 @@ opts.parse!(ARGV)                            # 実際にコマンドラインの
  [m:OptionParser#ver] を表示してから exit します。
  [m:OptionParser#ver] が定義されていない場合は、そのようにエラーメッセージを出力して abort します。
  オプション「--version」に「,」で区切られたクラス名かモジュール名を引数として与えた場合は、そのクラスおよびモジュールで定義されている定数「Version」および「Release」を表示して、終了します。
-```
- $ ruby t.rb --version=OptionParser,URI,OpenSSL
- t: OptionParser version 12203 (2007-04-20)
- t: URI version 0.9.11
- t: OpenSSL version 1.0.0
-```
+  ```
+   $ ruby t.rb --version=OptionParser,URI,OpenSSL
+   t: OptionParser version 12203 (2007-04-20)
+   t: URI version 0.9.11
+   t: OpenSSL version 1.0.0
+  ```
 ## Class Methods
 
 ### def new(banner = nil, width = 32, indent = ' ' * 4)              -> OptionParser
@@ -587,30 +587,30 @@ opt.on('--require X', '--need', '--dependon'){|x| ... }
 
 - **param** `short` -- ショートオプションを表す文字列を指定します。
              そのオプションが引数をとらない場合は、
-```
-  on("-x"){|boolean| ...}
-```
+  ```
+    on("-x"){|boolean| ...}
+  ```
              となります。コマンドラインにオプションが存在した場合 true を引数と
              してブロックを評価します。
              ショートオプションが引数をとる場合は、以下のようになります。
-```
-  on("-x MANDATORY"){|val| ...} # " MANDATORY" の部分は任意の文字列で構いません
-  on("-xSTRING"){|val| ...} # スペース無しで任意の文字列を入れても同様
-```
+  ```
+    on("-x MANDATORY"){|val| ...} # " MANDATORY" の部分は任意の文字列で構いません
+    on("-xSTRING"){|val| ...} # スペース無しで任意の文字列を入れても同様
+  ```
              オプションの引数が必須でない場合は [ ] をつけて、
-```
-  on("-x [OPTIONAL]"){|val| ...}
-```
+  ```
+    on("-x [OPTIONAL]"){|val| ...}
+  ```
              となります。
 
 - **param** `long` -- ロングオプションを表す文字列を指定します。ショートオプションの時とほぼ同様に、
-```
-  on("--long"){|boolean| ...}  # オプションが引数をとらない場合。boolean には true が渡されます。
-  on("--long MANDATORY"){|val| ...} # オプションが引数をとる場合。" MANDATORY" の部分は任意の文字列で構いません
-  on("--long=MANDATORY"){|val| ...} # 空白のかわりに = を使って指定することもできます
-  # on("--longSTRING"){|val| ...} # ロングオプションでは、ショートオプションの場合と違って空白が必ず必要です。このようにすると --longSTRING という名前の引数をとらないオプションになります。
-  on("--long [OPTIONAL]"){|val| ...}  # 引数が必須でないオプション
-```
+  ```
+    on("--long"){|boolean| ...}  # オプションが引数をとらない場合。boolean には true が渡されます。
+    on("--long MANDATORY"){|val| ...} # オプションが引数をとる場合。" MANDATORY" の部分は任意の文字列で構いません
+    on("--long=MANDATORY"){|val| ...} # 空白のかわりに = を使って指定することもできます
+    # on("--longSTRING"){|val| ...} # ロングオプションでは、ショートオプションの場合と違って空白が必ず必要です。このようにすると --longSTRING という名前の引数をとらないオプションになります。
+    on("--long [OPTIONAL]"){|val| ...}  # 引数が必須でないオプション
+  ```
             と指定できます。
 
 - **param** `desc` -- オプションの説明を文字列で与えます。サマリに表示されます。

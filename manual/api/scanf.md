@@ -126,11 +126,11 @@ p str.scanf("%d %s") #=> [1, "aaa"]
 
 - **`space`**:
  フォーマット中の空白は(0個を含む)任意の数の空白にマッチします。
-```ruby
-  require 'scanf'
-  p "a           10".scanf("%s %d")  # => ["a", 10]
-  p "a10".scanf("%1s %d")            # => ["a", 10]
-```
+  ```ruby
+    require 'scanf'
+    p "a           10".scanf("%s %d")  # => ["a", 10]
+    p "a10".scanf("%1s %d")            # => ["a", 10]
+  ```
 - **`%%`**:
  % そのもの
 

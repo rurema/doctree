@@ -221,9 +221,9 @@ Time.strptime('01/5/18 4:13:00', '%Y/%m/%d %T'){|y|
 返します。
 
 - **return** -- 以下の形式の文字列を返します。
-```text
-  day-of-week, DD month-name CCYY hh:mm:ss zone
-```
+  ```text
+    day-of-week, DD month-name CCYY hh:mm:ss zone
+  ```
         ただし zone は [+-]hhmm です。
         self が UTC time の場合、zone は +0000 になります。
 
@@ -241,9 +241,9 @@ p t.rfc2822      #=> "Sun, 31 Aug 2008 03:34:56 -0000"
 返します。
 
 - **return** -- 以下の形式の文字列を返します。
-```text
-  day-of-week, DD month-name CCYY hh:mm:ss GMT
-```
+  ```text
+    day-of-week, DD month-name CCYY hh:mm:ss GMT
+  ```
         注意: 結果はいつも UTC (GMT) です。
 
 ```ruby title="使用例"
@@ -269,10 +269,10 @@ XML Schema で定義されている dateTime として
                           省略した場合は0 となります。
 
 - **return** -- 以下の形式の文字列を返します。
-```text
-  CCYY-MM-DDThh:mm:ssTZD
-  CCYY-MM-DDThh:mm:ss.sssTZD
-```
+  ```text
+    CCYY-MM-DDThh:mm:ssTZD
+    CCYY-MM-DDThh:mm:ss.sssTZD
+  ```
         ただし TZD は Z または [+-]hh:mm です。
 
 ```ruby title="使用例"

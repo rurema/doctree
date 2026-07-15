@@ -23,12 +23,12 @@ require:
 - **`PACKAGE_DIR/NAME-VERSION.zip`**:
   [m:Rake::PackageTask#need_zip] が真の場合 zip されたパッケージを作成します。
 
-```ruby title="例"
-Rake::PackageTask.new("rake", "1.2.3") do |t|
-  t.need_tar = true
-  t.package_files.include("lib/**/*.rb")
-end
-```
+  ```ruby title="例"
+  Rake::PackageTask.new("rake", "1.2.3") do |t|
+    t.need_tar = true
+    t.package_files.include("lib/**/*.rb")
+  end
+  ```
 
 # class Rake::PackageTask < Rake::TaskLib
 

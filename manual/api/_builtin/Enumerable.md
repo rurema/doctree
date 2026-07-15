@@ -1242,9 +1242,9 @@ open(filename) {|f|
 
 - **return** -- チャンクごとの配列をブロックパラメータに渡す [c:Enumerator]
         を返します。eachメソッドは以下のように呼び出します。
-```text
-  enum.chunk_while { |elt_before, elt_after| bool }.each { |ary| ... }
-```
+  ```text
+    enum.chunk_while { |elt_before, elt_after| bool }.each { |ary| ... }
+  ```
         to_a や map などのその他の [c:Enumerable] モジュールのメソッ
         ドも有用です。
 
@@ -1434,9 +1434,9 @@ p e.map {|ll| ll[0...-1].map {|l| l.sub(/\\\n\z/, "") }.join + ll.last }
 
 - **return** -- チャンクごとの配列をブロックパラメータに渡す [c:Enumerator]
         を返します。eachメソッドは以下のように呼び出します。
-```text
-  enum.slice_when { |elt_before, elt_after| bool }.each { |ary| ... }
-```
+  ```text
+    enum.slice_when { |elt_before, elt_after| bool }.each { |ary| ... }
+  ```
         to_a や map などのその他の [c:Enumerable] モジュールのメソッ
         ドも有用です。
 

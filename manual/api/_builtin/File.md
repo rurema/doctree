@@ -338,14 +338,14 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
 - **param** `pattern` -- パターンを文字列で指定します。ワイルドカードとして `*`,
                \`**\`, `?`, `[]`, `{}` が使用できます。
-```ruby title="例"
-%w(foo foobar bar).each {|f|
-  p File.fnmatch("foo*", f)
-}
-# => true
-#    true
-#    false
-```
+  ```ruby title="例"
+  %w(foo foobar bar).each {|f|
+    p File.fnmatch("foo*", f)
+  }
+  # => true
+  #    true
+  #    false
+  ```
 
 - **param** `path` -- パスを表す文字列を指定します。
 
@@ -362,46 +362,46 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
  デフォルトでは \ を伴う任意の文字はその文字にマッチしますが、
  このフラグをつけると、\ が普通の文字として扱われます。
-```ruby
-p File.fnmatch('\a', 'a')                       # => true
-p File.fnmatch('\a', '\a', File::FNM_NOESCAPE)  # => true
-```
+  ```ruby
+  p File.fnmatch('\a', 'a')                       # => true
+  p File.fnmatch('\a', '\a', File::FNM_NOESCAPE)  # => true
+  ```
  前者で * は、エスケープされているので "*" そのものにマッチ
  します。
-```ruby
-p File.fnmatch('\*', 'a')                       # => false
-p File.fnmatch('\*', '\a', File::FNM_NOESCAPE)  # => true
-```
+  ```ruby
+  p File.fnmatch('\*', 'a')                       # => false
+  p File.fnmatch('\*', '\a', File::FNM_NOESCAPE)  # => true
+  ```
   単体の \ は、このフラグの有無に関わらず \ にマッチします。
   (シングルクォート文字列中では \\ は、\ であることに注意)
-```ruby
-p File.fnmatch('\\', '\\')                      # => true
-p File.fnmatch('\\', '\\', File::FNM_NOESCAPE)  # => true
-```
+  ```ruby
+  p File.fnmatch('\\', '\\')                      # => true
+  p File.fnmatch('\\', '\\', File::FNM_NOESCAPE)  # => true
+  ```
 
 - **`FNM_PATHNAME`**:
  ワイルドカード `*`, `?`, `[]` が `/` にマッチしなくなります。
  シェルのパターンマッチにはこのフラグが使用されています。
-```ruby
-p File.fnmatch('*', '/', File::FNM_PATHNAME)   # => false
-p File.fnmatch('?', '/', File::FNM_PATHNAME)   # => false
-p File.fnmatch('[/]', '/', File::FNM_PATHNAME) # => false
-```
+  ```ruby
+  p File.fnmatch('*', '/', File::FNM_PATHNAME)   # => false
+  p File.fnmatch('?', '/', File::FNM_PATHNAME)   # => false
+  p File.fnmatch('[/]', '/', File::FNM_PATHNAME) # => false
+  ```
 
 - **`FNM_CASEFOLD`**:
  アルファベットの大小文字を区別せずにパターンマッチを行います。
-```ruby
-p File.fnmatch('A', 'a', File::FNM_CASEFOLD)   # => true
-```
+  ```ruby
+  p File.fnmatch('A', 'a', File::FNM_CASEFOLD)   # => true
+  ```
 
 - **`FNM_DOTMATCH`**:
  ワイルドカード `*`, `?`, `[]` が先頭の `.` にマッチするようになります。
-```ruby
-p File.fnmatch('*', '.', File::FNM_DOTMATCH)           # => true
-p File.fnmatch('?', '.', File::FNM_DOTMATCH)           # => true
-p File.fnmatch('[.]', '.', File::FNM_DOTMATCH)         # => true
-p File.fnmatch('foo/*', 'foo/.', File::FNM_DOTMATCH)   # => true
-```
+  ```ruby
+  p File.fnmatch('*', '.', File::FNM_DOTMATCH)           # => true
+  p File.fnmatch('?', '.', File::FNM_DOTMATCH)           # => true
+  p File.fnmatch('[.]', '.', File::FNM_DOTMATCH)         # => true
+  p File.fnmatch('foo/*', 'foo/.', File::FNM_DOTMATCH)   # => true
+  ```
 
 - **`FNM_EXTGLOB`**:
  {} 内のコンマで区切られた文字列の組合せにマッチするようになります。
@@ -410,10 +410,10 @@ p File.fnmatch('foo/*', 'foo/.', File::FNM_DOTMATCH)   # => true
 
  括弧は入れ子にできます。例えば、 {foo,bar{foo,bar}} は foo,
  barfoo, barbar のそれぞれにマッチします。
-```ruby
-p File.fnmatch('foo{a,b,c}', 'fooa', File::FNM_EXTGLOB)           # => true
-p File.fnmatch('{foo,bar{foo,bar}}', 'barfoo', File::FNM_EXTGLOB) # => true
-```
+  ```ruby
+  p File.fnmatch('foo{a,b,c}', 'fooa', File::FNM_EXTGLOB)           # => true
+  p File.fnmatch('{foo,bar{foo,bar}}', 'barfoo', File::FNM_EXTGLOB) # => true
+  ```
 
 ### def ftype(filename)    -> String
 

@@ -68,9 +68,9 @@ WEBrick::HTTPServer のアクセスログの形式を処理するために内部
 Apache のアクセスログと同じ時刻の形式を表す文字列です。
 
 - **return** -- 以下の文字列を返します。
-```text
-  "[%d/%b/%Y:%H:%M:%S %Z]"
-```
+  ```text
+    "[%d/%b/%Y:%H:%M:%S %Z]"
+  ```
 
 ### const COMMON_LOG_FORMAT -> String
 ### const CLF -> String
@@ -78,36 +78,36 @@ Apache のアクセスログと同じ時刻の形式を表す文字列です。
 Apache のアクセスログで一般的に使われる形式を表す文字列です。
 
 - **return** -- 以下の文字列を返します。
-```text
-  "%h %l %u %t \"%r\" %s %b"
-```
+  ```text
+    "%h %l %u %t \"%r\" %s %b"
+  ```
 
 ### const REFERER_LOG_FORMAT -> String
 
 Apache のアクセスログで一般的に使われるリファラの形式を表す文字列です。
 
 - **return** -- 以下の文字列を返します。
-```text
-  "%{Referer}i -> %U"
-```
+  ```text
+    "%{Referer}i -> %U"
+  ```
 
 ### const AGENT_LOG_FORMAT -> String
 
 Apache のアクセスログで一般的に使われる User-Agent の形式を表す文字列です。
 
 - **return** -- 以下の文字列を返します。
-```text
-  "%{User-Agent}i"
-```
+  ```text
+    "%{User-Agent}i"
+  ```
 
 ### const COMBINED_LOG_FORMAT -> String
 
 Apache のアクセスログで一般的に使われる形式を表す文字列です。
 
 - **return** -- 以下の文字列を返します。
-```text
-  "%h %l %u %t \"%r\" %s %b \"%{Referer}i\" \"%{User-agent}i\""
-```
+  ```text
+    "%h %l %u %t \"%r\" %s %b \"%{Referer}i\" \"%{User-agent}i\""
+  ```
 
 ## Module Functions
 

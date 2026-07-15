@@ -552,21 +552,21 @@ name という属性名を持つ属性を指定できます。
 
 - **param** `name` -- 属性名(文字列)
 - **param** `namespace` -- 名前空間のURI(文字列)
-```ruby
-require 'rexml/document'
+  ```ruby
+  require 'rexml/document'
 
-doc = REXML::Document.new(<<-EOS)
-<root xmlns:foo="http://example.org/foo"
-      xmlns:bar="http://example.org/bar">
-  <a foo:att='1' bar:att='2' att='&lt;'/>
-</root>
-EOS
-a = doc.get_elements("/root/a").first
-p a.attribute("att") # => att='&lt;'
-p a.attribute("att", "http://example.org/bar") # => bar:att='2'
-p a.attribute("bar:att") # => bar:att='2'
-p a.attribute("baz") # => nil
-```
+  doc = REXML::Document.new(<<-EOS)
+  <root xmlns:foo="http://example.org/foo"
+        xmlns:bar="http://example.org/bar">
+    <a foo:att='1' bar:att='2' att='&lt;'/>
+  </root>
+  EOS
+  a = doc.get_elements("/root/a").first
+  p a.attribute("att") # => att='&lt;'
+  p a.attribute("att", "http://example.org/bar") # => bar:att='2'
+  p a.attribute("bar:att") # => bar:att='2'
+  p a.attribute("baz") # => nil
+  ```
 
 ### def has_attributes? -> bool
 要素が属性を1つ以上持っていれば真を返します。
