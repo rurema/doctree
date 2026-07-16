@@ -16,6 +16,11 @@ OLEオートメーションサーバは、定数（[m:WIN32OLE.const_load]）、
 WIN32OLE_VARIABLEのオブジェクトは、[m:WIN32OLE_TYPE#variables]メソッ
 ドを利用して取得します。
 
+Ruby 3.2 から、このクラスは WIN32OLE の名前空間下に移動し、`WIN32OLE::Variable`
+として定義されるようになりました。トップレベル定数 `WIN32OLE_VARIABLE` は後方
+互換のためのエイリアスとして残っていますが、Ruby 3.4 以降は非推奨
+(deprecated)です(`Warning[:deprecated]` が有効なら参照時に警告が表示されます)。
+
 ### サンプルコード
 
 ```ruby
