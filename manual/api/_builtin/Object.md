@@ -176,6 +176,24 @@ p obj.protected_methods(true) - Object.protected_instance_methods(true)
 [:protected_singleton, :protected_foo, :protected_parent]
 ```
 
+メソッド名一覧を取得するメソッド同士の対比は次のとおりです。[m:Object#methods] 系はレシーバ自身が応答できるメソッド（特異メソッドを含む）を対象にするのに対し、[m:Module#instance_methods] 系はクラス・モジュールが持つインスタンスメソッド（特異メソッドは含まない）を対象にします。
+
+| メソッド | 対象 | 含まれる可視性 | 特異メソッド |
+| --- | --- | --- | --- |
+| [m:Object#methods] | レシーバ | public, protected | 含む |
+| [m:Object#public_methods] | レシーバ | public | 含む |
+| [m:Object#private_methods] | レシーバ | private | 含む |
+| [m:Object#protected_methods] | レシーバ | protected | 含む |
+| [m:Object#singleton_methods] | レシーバ | public, protected | 特異メソッドのみ |
+| [m:Module#instance_methods] | self のインスタンス | public, protected | 含まない |
+| [m:Module#public_instance_methods] | self のインスタンス | public | 含まない |
+| [m:Module#private_instance_methods] | self のインスタンス | private | 含まない |
+| [m:Module#protected_instance_methods] | self のインスタンス | protected | 含まない |
+
+継承したメソッドを含めるかどうかなどを引数で制御できますが、引数の意味はメソッドごとに
+異なります（[m:Object#methods] は引数が false のとき特異メソッドのみを返します）。
+詳細は各メソッドの説明を参照してください。
+
 - **SEE** [m:Module#instance_methods],[m:Object#singleton_methods]
 
 ### def public_method(name) -> Method
@@ -1327,6 +1345,18 @@ me = -365.method(:abs)
 p me #=> #<Method: Integer#abs>
 p me.call #=> 365
 ```
+
+[c:Method]・[c:UnboundMethod] オブジェクトを取得するメソッドの対比は次のとおりです。
+
+| メソッド | 対象 | 可視性の制限 | 返り値 |
+| --- | --- | --- | --- |
+| [m:Object#method] | レシーバのメソッド（特異メソッドを含む） | なし | [c:Method] |
+| [m:Object#public_method] | レシーバのメソッド（特異メソッドを含む） | public のみ | [c:Method] |
+| [m:Object#singleton_method] | レシーバの特異メソッドのみ | なし | [c:Method] |
+| [m:Module#instance_method] | self のインスタンスメソッド | なし | [c:UnboundMethod] |
+| [m:Module#public_instance_method] | self のインスタンスメソッド | public のみ | [c:UnboundMethod] |
+
+[c:UnboundMethod] はレシーバに束縛されていない状態のメソッドオブジェクトです。[m:UnboundMethod#bind] でレシーバに束縛すると [c:Method] になり、逆に [m:Method#unbind] で [c:UnboundMethod] に戻せます。
 
 - **SEE** [m:Module#instance_method], [c:Method], [m:BasicObject#__send__], [m:Object#send], [m:Kernel?.eval], [m:Object#singleton_method]
 
