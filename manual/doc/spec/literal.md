@@ -114,6 +114,17 @@ p "foo" "bar"
 
 文字列式は評価されるたびに毎回新しい文字列オブジェクトを生成します。
 
+文字列リテラルから生成される文字列オブジェクトのエンコーディングは、スクリプトエンコー
+ディング(ソースファイルのエンコーディング。マジックコメント `# encoding:` で指定でき、
+指定がなければ UTF-8)になります。
+
+```ruby
+# encoding: utf-8
+p "あ".encoding # => #<Encoding:UTF-8>
+```
+
+[m:String#encoding]、[c:Encoding] を参照してください。
+
 #### バックスラッシュ記法 {#backslash}
 
 文字列中でバックスラッシュ(環境によっては￥記号で表示されます)の後に記
@@ -596,6 +607,20 @@ p %s{foo-bar} #=> :"foo-bar"
 
 シンボルは常に一意のオブジェクトで、(式展開を含んでいてもその結果が同
 じ文字列であれば)何度評価されても同じオブジェクトを返します。
+
+シンボルのエンコーディングは、ASCII文字のみからなる場合はUS-ASCII、そうでなければ
+スクリプトエンコーディングになります。文字列リテラルは中身がASCII文字のみでも常にス
+クリプトエンコーディングになる([ref:string]参照)のに対し、シンボルはASCII文字のみ
+の場合にUS-ASCIIになる点が異なります。
+
+```ruby
+# encoding: utf-8
+p :abc.encoding  # => #<Encoding:US-ASCII>
+p :あ.encoding    # => #<Encoding:UTF-8>
+p "abc".encoding # => #<Encoding:UTF-8> (Symbolと異なりASCII文字のみでもスクリプトエンコーディングになる)
+```
+
+[m:Symbol#encoding]、[m:String#encoding]、[c:Encoding] を参照してください。
 
 ほとんどのシンボルはGC可能です。
 
