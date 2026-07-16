@@ -140,7 +140,7 @@ open(2) で O_TMPFILE が指定できる場合に使えます。
 
 ### const FNM_PATHNAME -> Integer
 ワイルドカード `*`, `?`, `[]` が `/` にマッチしなくなります。
-シェルのパターンマッチにはこのフラグが使用されています。
+シェルのパターンのマッチにはこのフラグが使用されています。
 [m:File.fnmatch], [m:Dir.glob]で使用します。
 
 ### const FNM_DOTMATCH -> Integer
@@ -148,7 +148,7 @@ open(2) で O_TMPFILE が指定できる場合に使えます。
 [m:File.fnmatch], [m:Dir.glob]で使用します。
 
 ### const FNM_CASEFOLD -> Integer
-アルファベットの大小文字を区別せずにパターンマッチを行います。
+アルファベットの大小文字を区別せずにパターンのマッチを行います。
 [m:File.fnmatch], [m:Dir.glob]で使用します。
 
 ### const FNM_SYSCASE -> Integer
