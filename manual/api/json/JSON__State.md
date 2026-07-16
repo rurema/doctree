@@ -42,7 +42,7 @@ JSON 形式の文字列を生成するための設定を保持しておくため
   真を指定した場合、ASCII 文字列のみを用いて JSON 形式の文字列を生成します。
   デフォルトは偽です。
 - **`:buffer_initial_length`**:
-  sets the initial length of the generator's internal buffer.
+  JSON 形式の文字列を生成する際に使用する内部バッファの初期の長さを指定します。デフォルトは 1024 です。
 
   ```ruby title="例 Hash を指定"
   require "json"
@@ -410,44 +410,34 @@ pp json_state.to_h
 ASCII 文字列のみを用いて JSON 形式の文字列を生成する場合に真を返します。
 そうでない場合に偽を返します。
 
-### def quirks_mode? -> bool
-### def quirks_mode  -> bool
-
-Returns true, if quirks mode is enabled. Otherwise returns false.
-
-### def quirks_mode=(enable)
-
-If set to true, enables the quirks_mode mode.
-
 ### def depth -> Integer
 
-This integer returns the current depth of data structure nesting.
+現在のデータ構造のネストの深さを整数で返します。
 
 ### def depth=(depth)
 
-This sets the maximum level of data structure nesting in the generated
-JSON to the integer depth, max_nesting = 0 if no maximum should be
-checked.
+データ構造のネストの深さの現在値を整数 depth にセットします。
+インデントを伴う生成では、この深さを起点として出力されます。
+ネストの深さの上限([m:JSON::State#max_nesting])とは別の値です。
 
 ### def buffer_initial_length -> Integer
 
-This integer returns the current initial length of the buffer.
+現在のバッファの初期の長さを整数で返します。
 
 ### def buffer_initial_length=(length)
 
-This sets the initial length of the buffer to length, if length > 0,
-otherwise its value isn't changed.
+バッファの初期の長さを length にセットします。length が 0 より大きい場合のみ値がセットされ、
+それ以外の場合は値は変更されません。
 
 ### def [](name) -> object
 
-Return the value returned by method name.
+name という名前のメソッドを呼び出し、その戻り値を返します。
 
 ### def []=(name, value)
 
-Set the attribute name to value.
+属性 name に value をセットします。
 
 ### def generate(obj) -> String
 
-Generates a valid JSON document from object obj and returns the
-result. If no valid JSON document can be created this method raises a
-GeneratorError exception.
+オブジェクト obj から有効な JSON 形式の文字列を生成し、その結果を返します。
+有効な JSON 形式の文字列を生成できない場合は、[c:JSON::GeneratorError] 例外が発生します。
