@@ -67,6 +67,8 @@ host で指定したホストの service で指定したポートと接続した
 
 ### def gethostbyname(host) -> Array
 
+このメソッドは deprecated です。[m:Addrinfo.getaddrinfo] を使用してください。
+
 ホスト名または IP アドレス (整数または"127.0.0.1"
 のような文字列)からホストの情報を返します。ホスト情報は、ホ
 スト名、ホストの別名の配列、ホストのアドレスタイプ、ホストの
