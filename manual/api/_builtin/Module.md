@@ -970,7 +970,7 @@ p Class.new.to_s    #=> "#<Class:0x00007fa5c40b41b0>"
 
 - **param** `inherited_too` -- false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
-- **SEE** [m:Object#methods]
+- **SEE** [m:Object#methods], [m:Module#public_instance_methods], [m:Module#private_instance_methods], [m:Module#protected_instance_methods]
 
 ```ruby title="例1"
 class Foo
@@ -1052,7 +1052,7 @@ Kernel.public_instance_method(:p)         #   method `p' for module `Kernel' is 
 
 #@#noexample 参照先のModule#instance_methodsにサンプルが書かれているため
 
-- **SEE** [m:Object#public_methods], [m:Module#instance_methods]
+- **SEE** [m:Object#public_methods], [m:Module#instance_methods], [m:Module#private_instance_methods], [m:Module#protected_instance_methods]
 
 ### def private_instance_methods(inherited_too = true) -> [Symbol]
 
@@ -1061,7 +1061,7 @@ Kernel.public_instance_method(:p)         #   method `p' for module `Kernel' is 
 
 - **param** `inherited_too` -- false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
-- **SEE** [m:Object#private_methods], [m:Module#instance_methods]
+- **SEE** [m:Object#private_methods], [m:Module#instance_methods], [m:Module#public_instance_methods], [m:Module#protected_instance_methods]
 
 ```ruby title="例"
 module Foo
@@ -1089,7 +1089,7 @@ p Bar.private_instance_methods(false) # => [:qux]
 
 #@#noexample 参照先のModule#instance_methodsにサンプルが書かれているため
 
-- **SEE** [m:Object#protected_methods], [m:Module#instance_methods]
+- **SEE** [m:Object#protected_methods], [m:Module#instance_methods], [m:Module#public_instance_methods], [m:Module#private_instance_methods]
 
 ### def private_class_method(*name) -> self
 ### def private_class_method(names) -> self
