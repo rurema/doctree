@@ -286,6 +286,12 @@ IO.new, IO.for_fd はブロックを受け付けません。
   - :textmode 真を渡すと mode の "t" と同じ意味になります。
   - :binmode 真を渡すと mode の "b" と同じ意味になります。
   - :autoclose 偽を渡すと close時/GCでのファイナライザ呼出時に fd を close しません。
+  - :newline 改行の変換方法を指定します。指定するとテキストモードになるため、
+    mode の "b" や :binmode と同時には指定できません(指定すると ArgumentError が発生します)。
+    :universal は読み込み時に "\r\n", "\r", "\n" のいずれの改行も "\n" に変換します。
+    :crlf は書き込み時に "\n" を "\r\n" に変換します。
+    :cr は書き込み時に "\n" を "\r" に変換します。
+    :lf は改行の変換を行いません。
 #@since 3.2
   - :path 文字列を渡すと、[m:IO#path] メソッドがその値を返すようになります。
 #@end
