@@ -399,12 +399,21 @@ TCPServer.open("127.0.0.1", 1512) {|serv|
 
 - **SEE** [m:BasicSocket#getsockname]
 
+#@since 3.3
+### def recvmsg(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData] | nil
+#@else
 ### def recvmsg(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData]
+#@end
 
 [man:recvmsg(2)] を用いてメッセージを受け取ります。
 
 このメソッドはブロックします。ノンブロッキング方式で通信したい
 場合は [m:BasicSocket#recvmsg_nonblock] を用います。
+
+#@since 3.3
+TCP や UNIXSocket のようなストリームソケットで、接続が閉じられている場合 (EOF) は
+nil を返します。
+#@end
 
 maxmesglen, maxcontrollen で受け取るメッセージおよび補助データ
 ([c:Socket::AncillaryData])の最大長をバイト単位で指定します。
@@ -451,17 +460,29 @@ controls.each {|ancdata|
 - **param** `maxcontrollen` -- 受け取る補助データの最大長
 - **param** `opts` -- ハッシュオプション
 
+- **SEE** [bug:19012]
+
+#@since 3.3
+### def recvmsg_nonblock(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData] | nil
+#@else
 ### def recvmsg_nonblock(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData]
+#@end
 
 [man:recvmsg(2)] を用いてノンブロッキング方式でメッセージを受け取ります。
 
 ブロッキングの有無以外は [m:BasicSocket#recvmsg] と同じです。
 詳しくはそちらを参照してください。
+#@since 3.3
+すなわち、TCP や UNIXSocket のようなストリームソケットで接続が閉じられている
+場合 (EOF) は nil を返します。
+#@end
 
 - **param** `maxmesglen` -- 受け取るメッセージの最大長
 - **param** `flags` -- フラグ
 - **param** `maxcontrollen` -- 受け取る補助データの最大長
 - **param** `opts` -- ハッシュオプション
+
+- **SEE** [bug:19012]
 
 ### def remote_address -> Addrinfo
 [man:getpeername(2)] で得られたリモートアドレス情報を
