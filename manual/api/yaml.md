@@ -203,12 +203,6 @@ YAML Specification
  - <https://yaml.org/spec/>
  - <https://yaml.org/type/>
 
-YAML4R
-
- - <http://yaml4r.sourceforge.net/>
- - <http://yaml4r.sourceforge.net/cookbook/>(<https://yaml.org/YAML_for_ruby.html>)
- - <http://yaml4r.sourceforge.net/doc/>
-
 Rubyist Magazine: <https://magazine.rubyist.net/>
 
  - プログラマーのための YAML 入門 (初級編): <https://magazine.rubyist.net/articles/0009/0009-YAML.html>
