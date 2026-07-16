@@ -676,6 +676,23 @@ File.rename(self.to_s, to) と同じです。
 
 #@#noexample File.renameの例を参照
 
+このメソッドはファイルシステム上のファイル名を変更しますが、レシーバの
+[c:Pathname] オブジェクトが保持しているパス文字列は変更されません。
+そのため、rename の呼び出し後も self は変更前のパスを指したままです。
+
+```ruby
+require 'pathname'
+path = Pathname.new("old")
+File.write("old", "")
+path.rename("new")
+path.to_s    # => "old"
+path.exist?  # => false
+Pathname.new("new").exist? # => true
+```
+
+新しいパスを指す [c:Pathname] オブジェクトが必要な場合は、
+Pathname.new(to) などとして新しく作成する必要があります。
+
 - **SEE** [m:File.rename]
 
 ### def stat -> File::Stat
