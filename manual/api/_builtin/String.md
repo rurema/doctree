@@ -195,9 +195,7 @@ p String.try_convert(/re/)    # => nil
 ```
 
 ### def new(string = "")                -> String
-#@# capacityのデフォルトのサイズは STR_BUF_MIN_SIZE。string.c 参照。
-### def new(string = "", encoding: string.encoding, capacity: 63) -> String
-### def new(string = "", encoding: string.encoding, capacity: string.bytesize) -> String
+### def new(string = "", encoding: string.encoding, capacity: Integer) -> String
 
 string と同じ内容の新しい文字列を作成して返します。
 引数を省略した場合は空文字列を生成して返します。
@@ -212,8 +210,12 @@ string と同じ内容の新しい文字列を作成して返します。
                 指定することで、なんども文字列連結する
                 (そしてreallocがなんども呼ばれる)ときの
                 パフォーマンスが改善されるかもしれません。
-                省略した場合、引数stringのバイト数が127未満であれば127、
-                それ以上であればstring.bytesizeになります。
+                capacity を指定しても文字列の内容や
+                [m:String#bytesize] が変わるわけではありません。
+                内部バッファの実際の確保方法は実装依存です。
+                特に短い文字列はオブジェクトに直接埋め込まれる表現に
+                なって独立したバッファを持たないなど、指定が反映され
+                ない場合もあります。
 - **return** --         引数 string と同じ内容の文字列オブジェクト
 
 ```ruby title="例"
