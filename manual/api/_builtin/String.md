@@ -1823,7 +1823,26 @@ p "\x80\u3042".length  # => 2
 p "\x80\u3042".size    # => 2
 ```
 
-- **SEE** [m:String#bytesize]
+ここでの「文字数」は Unicode のコードポイントの数を指しており、見た目上の1文字 (書記素クラスタ) の数とは限りません。たとえば、結合文字 (合成用ダイアクリティカルマーク) を使って NFD (Unicode 正規化形式 D) で表現された文字列は、見た目が同じ NFC (正規化形式 C) の文字列よりも length が大きくなることがあります。また、複数のコードポイントが ZWJ (Zero Width Joiner) で連結されて1つの絵文字として表示される文字列でも、length は連結されたコードポイントの数を返します。
+
+```ruby title="例: コードポイント単位で数えられる例"
+p "\u{1F600}".length                                   # => 1 (絵文字。1コードポイントなら1文字扱い)
+p "\u{1F468}\u{200D}\u{1F469}\u{200D}\u{1F466}".length # => 5 (ZWJ で連結した家族の絵文字。見た目は1つだが5コードポイント)
+
+p "e\u0301"        # => "é" (NFD: e + 合成用アキュートアクセント。2コードポイント)
+p "e\u0301".length # => 2
+p "\u00E9"         # => "é" (NFC: 合成済みの1コードポイント)
+p "\u00E9".length  # => 1
+```
+
+見た目上の1文字 (書記素クラスタ) 単位で数えたい場合は [m:String#grapheme_clusters] や [m:String#each_grapheme_cluster] を使ってください。
+
+```ruby title="例"
+p "e\u0301".grapheme_clusters        # => ["é"]
+p "e\u0301".grapheme_clusters.length # => 1
+```
+
+- **SEE** [m:String#bytesize], [m:String#grapheme_clusters]
 
 ### def match(regexp, pos = 0) -> MatchData | nil
 ### def match(regexp, pos = 0) {|m| ... } -> object
