@@ -489,7 +489,3 @@ p (1..100).drop_while.size # => nil
 ```
 
 - **SEE** [m:Enumerator.new]
-
-#@# 以下のクラスはユーザが直接触れるべきではないのでドキュメントは
-#@# 書かない
-#@# = class Enumerator::Generator
