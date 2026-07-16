@@ -1,4 +1,4 @@
-# メソッド呼び出し(super・ブロック付き・yield)
+# メソッド呼び出し
 
   - [ref:super]
   - [ref:block]
