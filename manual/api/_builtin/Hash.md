@@ -928,6 +928,31 @@ each_pair は each のエイリアスです。
 p({:a=>1, :b=>2}.each_pair)  # => #<Enumerator: {:a=>1, :b=>2}:each_pair>
 ```
 
+Ruby 3.0 から、ブロックには常に `[key, value]` という2要素の配列が1つの引数として
+yield されるようになりました。通常のブロックでは `{|k, v| ... }` のように複数の仮引数を
+書けば配列が自動的に分解されるため、これまでと同様にキーと値を別々の引数として
+受け取れます。
+
+一方、`&` を使って lambda や [c:Method] オブジェクトをブロックとして渡す場合は
+この自動分解が行われません。そのため、2引数の lambda（`->(k, v) { ... }`）を渡すコードは、
+Ruby 2.7 までは動作していましたが、Ruby 3.0 以降は [c:ArgumentError] になります。
+1引数で配列として受け取るか、`->((k, v)) { ... }` のように仮引数を括弧で囲んで
+分解してください。
+
+```ruby title="例"
+# Ruby 2.7 まではこの書き方でも動作していましたが、Ruby 3.0 以降は ArgumentError になります
+{foo: 100}.each(&->(k, v) { p [k, v] })
+# => ArgumentError
+
+# 1引数で配列として受け取る
+{foo: 100}.each(&->(pair) { p pair })
+#=> [:foo, 100]
+
+# 仮引数を括弧で囲んで分解する
+{foo: 100}.each(&->((k, v)) { p [k, v] })
+#=> [:foo, 100]
+```
+
 - **SEE** [m:Hash#each_key],[m:Hash#each_value]
 
 ### def each_key {|key| ... } -> self
