@@ -36,6 +36,7 @@ options には [c:Hash] を与えます。理解するハッシュの
  - :ssl_verify_mode
  - :ftp_active_mode
  - :redirect
+ - :encoding
 です。
 「:content_length_proc」と「:progress_proc」はプログレスバーに
 利用されることを想定しています。
@@ -120,6 +121,17 @@ sio = OpenURI.open_uri('http://www.example.com',
 
  HTTP と FTP の間のリダイレクトもこれで指定します。
 
+- **`:encoding`**:
+ 取得した内容の外部エンコーディングを指定します。
+ "euc-jp" のような文字列か [c:Encoding] オブジェクトを与えます。
+ 指定すると、返り値の StringIO オブジェクトの外部エンコーディングが
+ その値に設定されます。指定しなかった場合は Content-Type ヘッダの
+ charset に基づいて設定されます。いずれの場合も内容の変換(transcode)は
+ 行われず、エンコーディングが設定されるだけです。
+
+ 同じ指定を mode 引数の文字列("r:euc-jp" のように)で行うこともできますが、
+ mode と :encoding の両方でエンコーディングを指定すると
+ [c:ArgumentError] が発生します。
 
 - **param** `name` -- オープンしたいリソースを文字列で与えます。
 
