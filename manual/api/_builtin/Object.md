@@ -1823,14 +1823,21 @@ check obj.clone
 
 - **SEE** [m:Object#initialize_clone], [m:Object#initialize_dup]
 
-### def initialize_clone(obj) -> object
+### def initialize_clone(obj, freeze: nil) -> object
 
 [m:Object#clone] がオブジェクトを複製する際に呼び出すメソッドです。
 
-デフォルトでは [m:Object#initialize_copy] を呼び出します。
+デフォルトの実装は freeze キーワード引数を無視して [m:Object#initialize_copy] を
+呼び出し、self を返します。複製したオブジェクトを freeze するかどうかは、
+このメソッドの呼び出し元である [m:Object#clone] が判断します。
+
+freeze キーワード引数には、[m:Object#clone] に渡された freeze の値がそのまま渡されます。
+clone と dup で挙動を変えたいなどの理由でこのメソッドを再定義する場合は、
+freeze キーワード引数を受け取り、super へそのまま渡すようにしてください。
 
 initialize_clone という名前のメソッドは自動的に private に設定されます。
 
+- **param** `freeze` -- [m:Object#clone] に渡された freeze の値(true, false, nil のいずれか)が渡されます。
 - **SEE** [m:Object#initialize_copy], [m:Object#initialize_dup]
 
 ### def initialize_dup(obj) -> object
