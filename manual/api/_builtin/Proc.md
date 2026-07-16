@@ -212,6 +212,8 @@ p lambda{|(x, y)|   }.arity # =>  1
 p lambda{|(x, y), z|}.arity # =>  2
 ```
 
+- **SEE** [ref:d:glossary#arity]
+
 ### def binding -> Binding
 
 Proc オブジェクトが保持するコンテキストを 
