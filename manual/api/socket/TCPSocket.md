@@ -38,8 +38,8 @@ s.close
 ### def new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, fast_fallback: true) -> TCPSocket
 #@end
 #@until 3.4
-### def open(host, service, local_host=nil, local_service=nil, connect_timeout: nil) -> TCPSocket
-### def new(host, service, local_host=nil, local_service=nil, connect_timeout: nil) -> TCPSocket
+### def open(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil) -> TCPSocket
+### def new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil) -> TCPSocket
 #@end
 
 host で指定したホストの service で指定したポートと接続したソケッ
@@ -54,8 +54,10 @@ host で指定したホストの service で指定したポートと接続した
 - **param** `service` --        /etc/services (または NIS) に登録されているサービス名かポート番号を指定します。
 - **param** `local_host` --     ホスト名、またはインターネットアドレスを示す文字列を指定します。
 - **param** `local_service` --  /etc/services (または NIS) に登録されているサービス名かポート番号を指定します。
-#@if (version >= "3.4")
+#@since 3.4
 - **param** `resolv_timeout` -- 名前解決のタイムアウトを秒数で指定します。
+#@else
+- **param** `resolv_timeout` -- 指定してもエラーにはなりませんが、無視されます。名前解決のタイムアウトとして追加されました([feature:17134])が、対応する実装は Ruby 3.0 のリリース前に取り消され([bug:17220])、Ruby 3.4 で改めて有効になりました。
 #@end
 - **param** `connect_timeout` -- 接続確立のタイムアウトを秒数で指定します。
 #@if (version >= "4.0")
