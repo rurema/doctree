@@ -2617,12 +2617,16 @@ Complex('1+1i') + Complex('2+3i') * Complex('i') # => (-2+3i)
 - **param** `exception` -- false を指定すると、変換できなかった場合、
                  例外を発生する代わりに nil を返します。
 
-- **raise** `ArgumentError` -- 変換できないオブジェクトを指定した場合に発生します。
+- **raise** `ArgumentError` -- 変換できない形式の文字列を指定した場合に発生します。
 
+- **raise** `TypeError` -- 変換できない型のオブジェクトを指定した場合に発生します。
+
+引数 y を省略した場合は、x を [c:Rational] に変換します。
 引数 x、y の両方を指定した場合、x/y した [c:Rational] オブジェクトを
 返します。
 
 ```ruby title="例"
+Rational(5)               # => (5/1)
 Rational("1/3")           # => (1/3)
 Rational(1, 3)            # => (1/3)
 Rational("0.1", "0.3")    # => (1/3)
@@ -2662,20 +2666,26 @@ Rational(" \n10\t ")   # => (10/1) # 空白類は無視される
 Rational("0x10")       # => ArgumentError
 ```
 
-引数に変換できないオブジェクトを指定した場合には [c:ArgumentError] が
-発生します。
+文字列として不正な形式を指定した場合には [c:ArgumentError] が、
+nil や変換できない型のオブジェクトを指定した場合には [c:TypeError]
+が発生します。
 
 ```ruby title="例"
-Rational(Object.new)   # => ArgumentError
 Rational("")           # => ArgumentError
-Rational(nil)          # => ArgumentError
+Rational("10 cents")   # => ArgumentError
+Rational(Object.new)   # => TypeError
+Rational(nil)          # => TypeError
+Rational(1, nil)       # => TypeError
 ```
 
 また、Rational('0.3') と Rational(0.3) は異なるオブジェクトを返す事に注
 意してください。前者は正確に 3/10 ですが、後者はそうではありません。
+ただし、Rational(0.5) のように 2 の累乗を分母とする値であれば、
+[c:Float] を経由しても誤差なく変換されます。
 
 ```ruby title="例"
 Rational('0.3')        # => (3/10)
+Rational(0.5)          # => (1/2)
 Rational(0.3)          # => (5404319552844595/18014398509481984)
 ```
 
