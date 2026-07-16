@@ -146,7 +146,11 @@ p opt.unpack("i")[0] #=> 0 (Socket::Option#unpack が互換性のために存在
 p c.getsockopt(:IP, :TTL).int #=> 64
 ```
 
+#@since 3.3
+### def recv(maxlen, flags = 0) -> String | nil
+#@else
 ### def recv(maxlen, flags = 0) -> String
+#@end
 
 ソケットからデータを受け取り、文字列として返します。
 maxlen は受け取る最大の長さを指定します。
@@ -154,10 +158,18 @@ flags については [man:recv(2)] を参照してください。flags の
 デフォルト値は 0 です。flags の指定に必要な定数は
 Socket クラスで定義されています。(例: Socket::MSG_PEEK)
 
-内部で呼び出す [man:recv(2)] が 0 を返した場合、このメソッドは "" を返します。
-この意味はソケットによって異なります。
-たとえば TCP では EOF を意味しますし、
-UDP では空のパケットを読み込んだことを意味します。
+内部で呼び出す [man:recv(2)] が 0 を返した場合の挙動は、ソケットの種類によって異なります。
+
+UDP のようなデータグラムソケットでは、サイズ 0 のパケットを受信したことを意味し、
+このメソッドは "" を返します。
+
+#@since 3.3
+TCP や UNIXSocket のようなストリームソケットでは、接続が閉じられたこと (EOF) を
+意味し、このメソッドは nil を返します。
+#@else
+TCP や UNIXSocket のようなストリームソケットでは、接続が閉じられたこと (EOF) を
+意味し、このメソッドは "" を返します。
+#@end
 
 - **param** `maxlen` -- 受け取る文字列の最大の長さを指定します。
 
@@ -167,6 +179,8 @@ UDP では空のパケットを読み込んだことを意味します。
 
 - **raise** `Errno::EXXX` -- [man:recvfrom(2)] がエラーになった場合などに発生します。
 
+- **SEE** [bug:19012]
+
 ```ruby title="例"
 require 'socket'
 
@@ -175,15 +189,27 @@ s1.write "a"
 s1.close
 p s2.recv(10, Socket::MSG_PEEK)   #=> "a"
 p s2.recv(10)                     #=> "a"
+#@since 3.3
+p s2.recv(10)                     #=> nil
+#@else
 p s2.recv(10)                     #=> ""
+#@end
 ```
 
+#@since 3.3
+### def recv_nonblock(maxlen, flags = 0) -> String | nil
+#@else
 ### def recv_nonblock(maxlen, flags = 0) -> String
+#@end
 
 ソケットをノンブロッキングモードに設定した後、
 [man:recvfrom(2)] でソケットからデータを受け取ります。
 
 引数、返り値は [m:BasicSocket#recv] と同じです。
+#@since 3.3
+すなわち、TCP や UNIXSocket のようなストリームソケットで接続が閉じられている
+場合 (EOF) は nil を返します。
+#@end
 
 [man:recvfrom(2)] がエラーになった場合、
 EAGAIN, EINTR を含め例外 [c:Errno::EXXX] が発生します。
@@ -195,6 +221,8 @@ EAGAIN, EINTR を含め例外 [c:Errno::EXXX] が発生します。
 - **raise** `IOError` --
 
 - **raise** `Errno::EXXX` -- [man:recvfrom(2)] がエラーになった場合などに発生します。
+
+- **SEE** [bug:19012]
 
 ### def send(mesg, flags, dest_sockaddr = nil) -> Integer
 
