@@ -216,6 +216,8 @@ Socket.getnameinfo([nil, 21,'127.0.0.1'])
 
 ### def gethostbyaddr(host, type = Socket::AF_INET) -> Array
 
+このメソッドは deprecated です。[m:Addrinfo#getnameinfo] を使用してください。
+
 sockaddr 構造体をパックした文字列からホスト情報を返します。
 ホスト情報の構造は [m:Socket.gethostbyname] と同じです。
 type には、アドレスタイプ(デフォルトは
@@ -228,6 +230,8 @@ Socket::AF_INET)を指定します。
 - **raise** `SocketError` -- [man:gethostbyaddr(3)] の呼び出しにエラーがあった場合に発生します。
 
 ### def gethostbyname(host) -> Array
+
+このメソッドは deprecated です。[m:Addrinfo.getaddrinfo] を使用してください。
 
 ホスト名または IP アドレス(指定方法に関しては
 [ref:lib:socket#host_format]を参照)
