@@ -488,9 +488,9 @@ p File.link("testfile", "testlink") # => 0
 p IO.read("testlink")               # => "test"
 ```
 
-### def new(path, mode = "r", perm = 0666)                -> File 
-### def open(path, mode = "r", perm = 0666)               -> File 
-### def open(path, mode = "r", perm = 0666) {|file| ... } -> object
+### def new(path, mode = "r", perm = 0666, **opts)                -> File 
+### def open(path, mode = "r", perm = 0666, **opts)               -> File 
+### def open(path, mode = "r", perm = 0666, **opts) {|file| ... } -> object
 
 path で指定されるファイルをオープンし、[c:File] オブジェクトを生成して
 返します。
@@ -506,6 +506,8 @@ path が整数の場合はファイルディスクリプタとして扱い、そ
 - **param** `mode` -- モードを文字列か定数の論理和で指定します。[m:Kernel?.open] と同じです。
 
 - **param** `perm` -- ファイルを生成する場合のファイルのパーミッションを整数で指定します。[m:Kernel?.open] と同じです。
+
+- **param** `opts` -- キーワード引数でオープン時のオプションを指定します。指定できるオプションは [m:IO.new] を参照してください。
 
 - **raise** `Errno::EXXX` -- ファイルのオープンに失敗した場合に発生します。
 
