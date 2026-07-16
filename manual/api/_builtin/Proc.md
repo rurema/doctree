@@ -249,7 +249,7 @@ p Proc.new {
    true
 }.to_s
 
-# => "#<Proc:0x0x401a880c@-:3>"
+# => "#<Proc:0x401a880c -:3>"
 ```
 
 ### def curry         -> Proc

@@ -69,8 +69,8 @@ end
 ```ruby title="例"
 p Signal.trap(:INT, "p true")     # => "DEFAULT"
 p Signal.trap(:INT) { p false }   # => "p true"
-p Signal.trap(:INT, proc{ p nil })  # => #<Proc:0x8e45ae0@-:2>
-p Signal.trap(:INT, "SIG_IGN")    # => #<Proc:0x8e45914@-:3>
+p Signal.trap(:INT, proc{ p nil })  # => #<Proc:0x8e45ae0 -:2>
+p Signal.trap(:INT, "SIG_IGN")    # => #<Proc:0x8e45914 -:3>
 p Signal.trap(:INT, "DEFAULT")    # => "IGNORE"
 p Signal.trap(:INT, "EXIT")       # => "DEFAULT"
 p Signal.trap(:INT, nil)          # => "EXIT"

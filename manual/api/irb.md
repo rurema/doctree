@@ -289,7 +289,7 @@ IRB::Context オブジェクトを渡して実行します。
 ```console
 $ irb
 irb(main):001:0> IRB.conf[:IRB_RC] = lambda {|conf| conf.prompt_i = "> " }
-=> #<Proc:0x00002a95fa3fd8@(irb):2>
+=> #<Proc:0x00002a95fa3fd8 (irb):2 (lambda)>
 irb(main):002:0> irb
 >
 ```
