@@ -196,9 +196,15 @@ end
 
 または
 
+#@since 3.4
+`````
+"filename:line:in 'methodname'"
+`````
+#@else
 `````
 "filename:line:in `methodname'"
 `````
+#@end
 
 です。これは [m:Kernel?.caller] が返す値と同じ形式です。
 

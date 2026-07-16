@@ -207,7 +207,11 @@ p obj.protected_methods(true) - Object.protected_instance_methods(true)
 
 ```ruby
 p 1.public_method(:to_int) #=> #<Method: Integer#to_int>
+#@since 3.4
+1.public_method(:p)      #   method 'p' for class 'Integer' is private (NameError)
+#@else
 1.public_method(:p)      #   method `p' for class `Integer' is private (NameError)
+#@end
 ```
 
 - **SEE** [m:Object#method],[m:Object#public_send],[m:Module#public_instance_method]

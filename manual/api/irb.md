@@ -246,8 +246,13 @@ irb(main):005:0> x                 # x を表示
 => "OK"
 irb(main):006:0> irb               # サブ irb を起動
 irb#1(main):001:0> x               # x を表示
+#@since 3.4
+NameError: undefined local variable or method 'x' for main:Object
+        from (irb#1):1:in 'Kernel#binding'
+#@else
 NameError: undefined local variable or method `x' for main:Object
         from (irb#1):1:in `Kernel#binding'
+#@end
 ```
 
 起動時のインタプリタでローカル変数 x を定義しましたが、
@@ -606,7 +611,11 @@ foo = 0
 
 ```irb
 irb(main):001:0> eval "foo"
+#@since 3.4
+NameError (undefined local variable or method 'foo' for main:Object)
+#@else
 NameError (undefined local variable or method `foo' for main:Object)
+#@end
 irb(main):002:0> foo = 0
 ```
 

@@ -1345,7 +1345,7 @@ end
 caller_locations # => []
 test3(1, nil)
 #@since 3.4
-# => ["/Users/user/test.rb:9:in 'test2'", "/Users/user/test.rb:13:in 'test3'", "/Users/user/test.rb:17:in '<main>'"]
+# => ["/Users/user/test.rb:9:in 'Object#test2'", "/Users/user/test.rb:13:in 'Object#test3'", "/Users/user/test.rb:17:in '<main>'"]
 #@else
 # => ["/Users/user/test.rb:9:in `test2'", "/Users/user/test.rb:13:in `test3'", "/Users/user/test.rb:17:in `<main>'"]
 #@end
@@ -1353,7 +1353,7 @@ test3(1, nil)
 # => ["/Users/user/test.rb", "/Users/user/test.rb", "/Users/user/test.rb"]
 test3(1, 2)
 #@since 3.4
-# => ["/Users/user/test.rb:9:in 'test2'", "/Users/user/test.rb:13:in 'test3'"]
+# => ["/Users/user/test.rb:9:in 'Object#test2'", "/Users/user/test.rb:13:in 'Object#test3'"]
 #@else
 # => ["/Users/user/test.rb:9:in `test2'", "/Users/user/test.rb:13:in `test3'"]
 #@end
@@ -1361,7 +1361,7 @@ test3(1, 2)
 # => ["/Users/user/test.rb", "/Users/user/test.rb"]
 test3(2, 1)
 #@since 3.4
-# => ["/Users/user/test.rb:13:in 'test3'"]
+# => ["/Users/user/test.rb:13:in 'Object#test3'"]
 #@else
 # => ["/Users/user/test.rb:13:in `test3'"]
 #@end

@@ -31,8 +31,13 @@ Thread.new do
 end.join
 
 p a.next
+#@since 3.4
+#=> t.rb:7:in 'Enumerator#next': fiber called across threads (FiberError)
+#      from t.rb:7:in '<main>'
+#@else
 #=> t.rb:7:in `next': fiber called across threads (FiberError)
 #      from t.rb:7:in `<main>'
+#@end
 ```
 
 ## Class Methods

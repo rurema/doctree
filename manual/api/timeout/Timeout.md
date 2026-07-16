@@ -99,7 +99,11 @@ end
 => ["helium.ruby-lang.org", [], 2, "210.251.121.214"]
    0.689331
    /usr/local/lib/ruby/1.6/timeout.rb:37: execution expired (Timeout::Error)
+#@since 3.4
+         from -:6:in 'timeout'
+#@else
          from -:6:in `timeout'
+#@end
          from -:6
 # gethostbyname が0.1秒かからない場合は例外が発生しないので
 # その場合は、t に小さい数値(0.000001のような)に変える。

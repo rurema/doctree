@@ -34,7 +34,7 @@ sio = StringIO.new("hoge")
 sio.close
 sio.write("a")
 #@since 3.4
-# => in 'write': not opened for writing (IOError)
+# => in 'StringIO#write': not opened for writing (IOError)
 #@else
 # => in `write': not opened for writing (IOError)
 #@end

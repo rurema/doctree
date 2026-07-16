@@ -60,8 +60,13 @@ end
 W, [2017-12-07T02:22:53.649000 #11601]  WARN -- : Nothing to do!
 F, [2017-12-07T02:22:53.649172 #11601] FATAL -- : Caught exception; exiting
 F, [2017-12-07T02:22:53.649222 #11601] FATAL -- : No such file or directory @ rb_sysopen - a_non_existent_file (Errno::ENOENT)
+#@since 3.4
+logger_sample.rb:12:in 'IO.foreach'
+logger_sample.rb:12:in '<main>'
+#@else
 logger_sample.rb:12:in `foreach'
 logger_sample.rb:12:in `<main>'
+#@end
 ```
 
 これは log.level が [m:Logger::WARN] になっているためです。WARN、
