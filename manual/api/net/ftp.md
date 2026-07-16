@@ -76,19 +76,66 @@ FTP を実装したクラスです。
 
 ## Class Methods
 
+### def new(host = nil, options = {}) -> Net::FTP
 ### def new(host = nil, user = nil, passwd = nil, acct = nil) -> Net::FTP
 
 新しい Net::FTP のインスタンスを生成します。
 
 host が指定された場合、生成されたインスタンスに対して 
 [m:Net::FTP#connect] を呼び出し、
-さらに user が指定された場合は [m:Net::FTP#login] 
+さらにログインユーザ名が指定された場合は [m:Net::FTP#login] 
 を呼び出します。
 
+2 番目の引数には、後方互換のためログインに使うユーザ名を表す文字列を
+そのまま渡すこともできますが、各キーがシンボルであるオプションのハッシュを
+渡すこともできます。オプションのハッシュを渡した場合、3 番目・4 番目の
+引数(passwd、acct)は無視され、ユーザ名やパスワードはオプションの
+:username、:password で指定します。
+
 - **param** `host` -- 接続するホストを指定します。
-- **param** `user` -- ログインに使うユーザ名を指定します。
-- **param** `passwd` -- ログインに使うパスワードを指定します。
-- **param** `acct` -- ログイン後に送る ACCT コマンドのパラメータを指定します。
+
+- **param** `options` -- オプションをハッシュで指定します。各キーはシンボルです。
+
+- **`:port`**:
+ 接続するポート番号を指定します。デフォルトは 21 です。
+- **`:ssl`**:
+ 真を指定すると SSL(TLS)を使った接続を試みます。ハッシュを指定した場合は
+ [m:OpenSSL::SSL::SSLContext#set_params] にそのままパラメータとして渡されます。
+- **`:private_data_connection`**:
+ 真ならばデータ転送用のコネクションにも TLS を使います。
+ :ssl が真のときのデフォルトは true です。:ssl が偽のときに true を指定すると
+ [c:ArgumentError] が発生します。
+#@since 3.2
+- **`:implicit_ftps`**:
+ 真ならば接続の確立時点で TLS 接続を開始します(Implicit FTPS)。
+ デフォルトは false です。:ssl が偽のときに true を指定すると [c:ArgumentError] が発生します。
+#@end
+- **`:username`**:
+ ログインに使うユーザ名を指定します。
+- **`:password`**:
+ ログインに使うパスワードを指定します。
+- **`:account`**:
+ ログイン後に送る ACCT コマンドのパラメータを指定します。
+- **`:passive`**:
+ 真ならば接続をパッシブモードにします。デフォルトは true です
+ (既定値は [m:Net::FTP.default_passive=] で変更できます)。
+- **`:open_timeout`**:
+ 接続の確立を待つ秒数を指定します。デフォルトは nil (タイムアウトなし) です。
+- **`:read_timeout`**:
+ 1 ブロックの読み込みを待つ秒数を指定します。デフォルトは 60 です。
+- **`:ssl_handshake_timeout`**:
+ TLS のハンドシェイクを待つ秒数を指定します。デフォルトは nil です。
+#@since 3.1
+- **`:use_pasv_ip`**:
+ 真ならば PASV 応答に含まれる IP アドレスを使用します。偽の場合は制御コネクションと
+ 同じ IP アドレスを使用します。デフォルトは false です。
+#@end
+- **`:debug_mode`**:
+ 真ならば全ての通信内容を $stdout に出力します。デフォルトは false です。
+
+- **param** `user` -- ログインに使うユーザ名を指定します(後方互換のための位置引数です)。
+- **param** `passwd` -- ログインに使うパスワードを指定します(後方互換のための位置引数です)。
+- **param** `acct` -- ログイン後に送る ACCT コマンドのパラメータを指定します(後方互換のための位置引数です)。
 
 - **SEE** [m:Net::FTP.open]
 
