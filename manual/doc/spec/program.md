@@ -96,7 +96,7 @@ end
 
 以下のような式はそのままではメソッドの引数にできません。
 
-- `and`, `or`, `not` 演算子による演算子式
+- `and`, `or` 演算子による演算子式
 - `if`, `unless`, `while`, `until`, `rescue` 修飾子の付いた式
 
 ```text title="SyntaxError になる書き方"
@@ -111,6 +111,8 @@ p("当たり" if rand(10).zero?)
 p((true and nil))
 p(("当たり" if rand(10).zero?))
 ```
+
+なお、`not` 演算子による式は、Ruby 3.3 以前のデフォルトパーサ(parse.y)ではメソッドの引数にできませんが、Ruby 3.4 以降のデフォルトパーサ(Prism)では引数に指定できます。
 
 ### プログラムの終り {#terminate}
 
