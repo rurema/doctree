@@ -7,6 +7,19 @@ alias:
 
 HTTP のクライアントのためのクラスです。
 
+### gzip/deflate の自動展開
+
+Net::HTTP は、リクエストに Accept-Encoding ヘッダも Range ヘッダも
+指定されていない場合、自動的に
+`Accept-Encoding: gzip;q=1.0,deflate;q=0.6,identity;q=0.3` を付与します。
+このとき、応答の Content-Encoding が gzip や deflate であれば応答ボディは
+透過的に展開され、Content-Encoding ヘッダは取り除かれ、Content-Length は
+(存在すれば)展開後のサイズに更新されます。
+
+自分で Accept-Encoding ヘッダや Range ヘッダを指定した場合はこの自動展開は
+行われず、圧縮されたままのボディと Content-Encoding ヘッダがそのまま得られます。
+また、応答に Content-Range ヘッダが含まれる場合も展開は行われません。
+
 ## Class Methods
 
 ### def new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil, no_proxy=nil) -> Net::HTTP
