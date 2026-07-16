@@ -45,14 +45,14 @@ file_list.include %w( math.c lib.h *.o )
 
 例:
 `````
-FileList['a.c', 'b.c'].exclude("a.c") # => ['b.c']
-FileList['a.c', 'b.c'].exclude(/^a/)  # => ['b.c']
+p FileList['a.c', 'b.c'].exclude("a.c") # => ["b.c"]
+p FileList['a.c', 'b.c'].exclude(/^a/)  # => ["b.c"]
 
 # If "a.c" is a file, then ...
-FileList['a.c', 'b.c'].exclude("a.*") # => ['b.c']
+p FileList['a.c', 'b.c'].exclude("a.*") # => ["b.c"]
 
 # If "a.c" is not a file, then ...
-FileList['a.c', 'b.c'].exclude("a.*") # => ['a.c', 'b.c']
+p FileList['a.c', 'b.c'].exclude("a.*") # => ["a.c", "b.c"]
 `````
 
 ### def clear_exclude -> self
@@ -165,7 +165,7 @@ FileList['a.c', 'b.c'].sub(/\.c$/, '.o')  => ['a.o', 'b.o']
 
 例:
 ``````
-FileList['lib/test/file', 'x/y'].gsub(/\//, "\\") # => ['lib\\test\\file', 'x\\y']
+p FileList['lib/test/file', 'x/y'].gsub(/\//, "\\") # => ["lib\\test\\file", "x\\y"]
 ``````
 
 ### def sub!(pattern, replace) -> self
@@ -261,7 +261,7 @@ task :test_rake_app do
   p file_list.egrep(/line/) # => 7
 
   file_list.egrep(/.*/) do |filename, count, line|
-    "filename = #{filename}, count = #{count}, line = #{line}"
+    p "filename = #{filename}, count = #{count}, line = #{line}"
   end
 end
 
