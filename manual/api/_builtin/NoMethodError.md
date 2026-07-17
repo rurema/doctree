@@ -5,54 +5,36 @@ library: _builtin
 
 定義されていないメソッドの呼び出しが行われたときに発生します。
 
-例:
-
-`````
+```ruby title="例"
 self.bar
-`````
 #@since 3.4
-`````
 # => -:1: undefined method 'bar' for #<Object:0x401a6c40> (NoMethodError)
-`````
 #@else
-`````
 # => -:1: undefined method `bar' for #<Object:0x401a6c40> (NoMethodError)
-`````
 #@end
+```
 
 プライベートなインスタンスメソッドを呼び出そうとした場合にも発生します。
 
-例:
-
-`````
+```ruby title="例"
 "".puts
-`````
 #@since 3.4
-`````
 # => -:1:in 'puts': private method 'puts' called for "":String (NoMethodError)
-`````
 #@else
-`````
 # => NoMethodError: private method `puts' called for "":String
-`````
 #@end
+```
 
 メソッド呼び出しの形式でなければ [c:NameError] 例外が発生します。
 
-例:
-
-`````
+```ruby title="例"
 bar
-`````
 #@since 3.4
-`````
 # => -:1: undefined local variable or method 'bar' for #<Object:0x401a6c40> (NameError)
-`````
 #@else
-`````
 # => -:1: undefined local variable or method `bar' for #<Object:0x401a6c40> (NameError)
-`````
 #@end
+```
 
 ## Class Methods
 

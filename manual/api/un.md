@@ -166,30 +166,30 @@ ruby -run -e touch -- [OPTION] FILE
 ### def wait_writable -> ()
 ファイルが書き込み可能になるまで待ちます。
 
-`````
+```console
 ruby -run -e wait_writable -- [OPTION] FILE
 
--n RETRY	リトライ回数
--w SEC	リトライごとに待つ秒数
--v		詳細表示
-`````
+-n RETRY    リトライ回数
+-w SEC      リトライごとに待つ秒数
+-v          詳細表示
+```
 ### def mkmf -> ()
 
 [lib:mkmf] を使って Makefile を作成します。
 
-`````
+```console
 ruby -run -e mkmf -- [OPTION] EXTNAME [OPTION]
 
--d ARGS	run dir_config
--h ARGS	run have_header
--l ARGS	run have_library
--f ARGS	run have_func
--v ARGS	run have_var
--t ARGS	run have_type
--m ARGS	run have_macro
--c ARGS	run have_const
---vendor	install to vendor_ruby
-`````
+-d ARGS     run dir_config
+-h ARGS     run have_header
+-l ARGS     run have_library
+-f ARGS     run have_func
+-v ARGS     run have_var
+-t ARGS     run have_type
+-m ARGS     run have_macro
+-c ARGS     run have_const
+--vendor    install to vendor_ruby
+```
 ### def httpd -> ()
 
 WEBrick HTTP server を起動します。

@@ -5,20 +5,14 @@ library: _builtin
 
 未定義のローカル変数や定数を使用したときに発生します。
 
-例:
-
-`````
+```ruby title="例"
 bar
-`````
 #@since 3.4
-`````
 # => NameError: undefined local variable or method 'bar' for main:Object
-`````
 #@else
-`````
 # => NameError: undefined local variable or method `bar' for main:Object
-`````
 #@end
+```
 
 ## Class Methods
 

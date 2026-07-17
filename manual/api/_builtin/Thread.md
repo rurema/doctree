@@ -42,21 +42,17 @@ Thread.new { 1.times { raise } }
 
 は $stderr に以下のように出力します:
 
-`````
+```text
 #<Thread:...> terminated with exception (report_on_exception is true):
 Traceback (most recent call last):
-`````
 #@since 3.4
-`````````````
 2: from -e:1:in 'block in <main>'
 1: from -e:1:in 'times'
-`````````````
 #@else
-`````````````
 2: from -e:1:in `block in <main>'
 1: from -e:1:in `times'
-`````````````
 #@end
+```
 
 これによってスレッドのエラーを早期に捕捉できるようになります。
 いくつかのケースでは、この出力を望まないかもしれません。
