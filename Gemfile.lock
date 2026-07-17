@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/rurema/bitclust.git
-  revision: 65468f3d8f86231b5bb702ddba4a051f4fbf0269
+  revision: a1e43a5aee2959c8451e65ae31987ad842603a90
   specs:
     bitclust-core (1.5.0)
       drb
