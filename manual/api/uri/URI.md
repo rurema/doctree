@@ -96,7 +96,7 @@ p URI.join('http://www.ruby-lang.org/', '/ja/man-1.6/')
 ### def extract(str) {|uri_str| ... }              -> nil
 ### def extract(str, schemes) {|uri_str| ... }     -> nil
 
-文字列 str に対してパターンマッチングを試み、
+文字列 str に対して正規表現によるマッチを試み、
 絶対URIにマッチした部分文字列からなる配列として返します。
 抽出する URI がなければ空の配列を返します。
 

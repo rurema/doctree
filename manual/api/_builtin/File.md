@@ -333,7 +333,7 @@ p File.extname("foo.")            # => "."
 ### def fnmatch(pattern, path, flags = 0)     -> bool
 ### def fnmatch?(pattern, path, flags = 0)    -> bool
 
-ファイル名のパターンマッチ [man:fnmatch(3)] を行います。
+ファイル名のパターンのマッチ [man:fnmatch(3)] を行います。
 path が pattern にマッチすれば真を返します。そうでない場合には false を返します。
 
 - **param** `pattern` -- パターンを文字列で指定します。ワイルドカードとして `*`,
@@ -349,7 +349,7 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
 - **param** `path` -- パスを表す文字列を指定します。
 
-- **param** `flags` -- パターンマッチの動作を以下で述べる定数の論理和で指定します。
+- **param** `flags` -- パターンのマッチの動作を以下で述べる定数の論理和で指定します。
              flags のデフォルト値は0(フラグ指定なし)です。
 
 引数 flags に指定できる定数は以下のとおりです。
@@ -381,7 +381,7 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
 - **`FNM_PATHNAME`**:
  ワイルドカード `*`, `?`, `[]` が `/` にマッチしなくなります。
- シェルのパターンマッチにはこのフラグが使用されています。
+ シェルのパターンのマッチにはこのフラグが使用されています。
   ```ruby
   p File.fnmatch('*', '/', File::FNM_PATHNAME)   # => false
   p File.fnmatch('?', '/', File::FNM_PATHNAME)   # => false
@@ -389,7 +389,7 @@ path が pattern にマッチすれば真を返します。そうでない場合
   ```
 
 - **`FNM_CASEFOLD`**:
- アルファベットの大小文字を区別せずにパターンマッチを行います。
+ アルファベットの大小文字を区別せずにパターンのマッチを行います。
   ```ruby
   p File.fnmatch('A', 'a', File::FNM_CASEFOLD)   # => true
   ```
