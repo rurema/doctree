@@ -8,6 +8,10 @@ alias:
 Ruby オブジェクトから JSON 形式の文字列を生成する間、
 JSON 形式の文字列を生成するための設定を保持しておくために使用するクラスです。
 
+実体は [c:JSON::Ext::Generator::State] であり、JSON::State はそれを指す別名(定数)です。
+そのため、生成したインスタンスの `class` メソッドや `inspect` の結果には
+`JSON::Ext::Generator::State` と表示されます。
+
 ## Singleton Methods
 
 ### def new(options = {}) -> JSON::State
