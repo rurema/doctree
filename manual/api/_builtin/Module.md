@@ -69,7 +69,7 @@ p m.name          # => nil   # まだ名前は未定
 Utils = m
 # m.name          # ここで m.name を呼べば m の名前は "Utils" に確定する
 Helpers = m
-m.name            # "Utils" か "Helpers" のどちらかに決まる
+p m.name          # "Utils" か "Helpers" のどちらかに決まる
 ```
 
 ### def used_modules -> [Module]
@@ -124,11 +124,11 @@ class Eagle < Bird
 end
 class Fish
 end
-p Bird <=> Flyable     # => -1
-p Eagle <=> Bird     # => -1
+p Bird <=> Flyable      # => -1
+p Eagle <=> Bird        # => -1
 p Eagle <=> Flyable     # => -1
-p Eagle <=> Fish     # => nil
-p Fish <=> Eagle     # => nil
+p Eagle <=> Fish        # => nil
+p Fish <=> Eagle        # => nil
 
 p Eagle <=> Object.new  # => nil
 ```
@@ -156,15 +156,15 @@ class Eagle < Bird
 end
 class Fish
 end
-p Bird < Flyable     # => true
-p Eagle < Bird     # => true
-p Eagle < Flyable     # => true
-p Eagle < Fish     # => nil
-p Eagle > Fish     # => nil
+p Bird < Flyable        # => true
+p Eagle < Bird          # => true
+p Eagle < Flyable       # => true
+p Eagle < Fish          # => nil
+p Eagle > Fish          # => nil
 #@since 3.4
-p Flyable < Object.new # => in '<': compared with non class/module (TypeError)
+Flyable < Object.new    # => in '<': compared with non class/module (TypeError)
 #@else
-p Flyable < Object.new # => in `<': compared with non class/module (TypeError)
+Flyable < Object.new    # => in `<': compared with non class/module (TypeError)
 #@end
 ```
 
@@ -347,7 +347,7 @@ end
 class Zoo
   autoload :Animal, '/tmp/zoo'
 end
-p Zoo::Animal #=> Zoo::Animal
+p Zoo::Animal # => Zoo::Animal
 ```
 
 以下のようにモジュールを明示的にレシーバとして呼び出すこともできます。
@@ -363,7 +363,7 @@ end
 class Zoo
 end
 Zoo.autoload :Animal, '/tmp/zoo'
-p Zoo::Animal #=> Zoo::Animal
+p Zoo::Animal # => Zoo::Animal
 ```
 
 以下のように、autoload したライブラリがネストした定数を定義しない場
@@ -378,11 +378,11 @@ end
 class Zoo
   autoload :Animal, '/tmp/animal.rb'
 end
-p Zoo::Animal
+Zoo::Animal
 #@since 3.4
-#=> -:4:in '<main>': uninitialized constant Zoo::Animal (NameError)
+# => -:4:in '<main>': uninitialized constant Zoo::Animal (NameError)
 #@else
-#=> -:4:in `<main>': uninitialized constant Zoo::Animal (NameError)
+# => -:4:in `<main>': uninitialized constant Zoo::Animal (NameError)
 #@end
 ```
 
@@ -416,7 +416,7 @@ end
 class Child < Parent
 end
 
-p Child.autoload?(:Logger)      # => "logger"
+p Child.autoload?(:Logger)        # => "logger"
 p Child.autoload?(:Logger, false) # => nil
 ```
 
@@ -461,7 +461,7 @@ end
 
 # Object は include したモジュールの定数に対しても
 # true を返す
-p Object.const_defined?(:ANSWER)   # => true
+p Object.const_defined?(:ANSWER)        # => true
 
 module Greeting
   HELLO = 'hello'
@@ -470,14 +470,14 @@ class Object
   include Greeting
 end
 # ユーザ定義のモジュールに対しても同様
-p Object.const_defined?(:HELLO)   # => true
+p Object.const_defined?(:HELLO)         # => true
 
 class Robot
   include Greeting
 end
 # Object 以外でも同様になった
 # 第二引数のデフォルト値が true であるため
-p Robot.const_defined?(:HELLO)      # => true
+p Robot.const_defined?(:HELLO)          # => true
 
 # 第二引数を false にした場合
 p Robot.const_defined?(:HELLO, false)   # => false
@@ -506,19 +506,19 @@ class Object
   include Loggable
 end
 # Object では include されたモジュールに定義された定数を見付ける
-p Object.const_get(:LEVEL)   # => 1
+p Object.const_get(:LEVEL)            # => 1
 
 class Widget
   include Loggable
 end
 # Object以外でも同様
-p Widget.const_get(:LEVEL)      # => 1
+p Widget.const_get(:LEVEL)            # => 1
 # 定義されていない定数
-p Widget.const_get(:NOT_DEFINED) #=> raise NameError
+Widget.const_get(:NOT_DEFINED)        # => raise NameError
 # 第二引数に false を指定すると自分自身に定義された定数から探す
-p Widget.const_get(:LEVEL, false) #=> raise NameError
+Widget.const_get(:LEVEL, false)       # => raise NameError
 # 完全修飾名を指定すると include や自分自身へ定義されていない場合でも参照できる
-p Class.const_get("Loggable::LEVEL") # => 1
+p Class.const_get("Loggable::LEVEL")  # => 1
 ```
 
 ### def const_missing(name)
@@ -1135,9 +1135,9 @@ module Api
 end
 
 p Api::VERSION  # => "1.0"
-p Api::Client  # => Api::Client
-Api::SECRET  # => NameError: private constant Api::SECRET referenced
-Api::Internal # => NameError: private constant Api::Internal referenced
+p Api::Client   # => Api::Client
+Api::SECRET     # => NameError: private constant Api::SECRET referenced
+Api::Internal   # => NameError: private constant Api::Internal referenced
 ```
 
 ### def public_class_method(*name) -> self
@@ -1388,7 +1388,7 @@ p Fred.new.foo    # => 101
 class Counter
   @@count = 1
   p remove_class_variable(:@@count) # => 1
-  p @@count   # => uninitialized class variable @@count in Counter (NameError)
+  @@count     # => uninitialized class variable @@count in Counter (NameError)
 end
 ```
 
@@ -1794,7 +1794,7 @@ name で指定した定数を取り除き、その定数に設定されていた
 class Registry
   VALUE = 1
   p remove_const(:VALUE)    # => 1
-  p VALUE     # => uninitialized constant VALUE at Registry (NameError)
+  VALUE       # => uninitialized constant Registry::VALUE (NameError)
 end
 ```
 
