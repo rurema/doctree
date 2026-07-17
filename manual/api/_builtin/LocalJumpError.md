@@ -16,7 +16,7 @@ return, break, retry のいずれかを実行すると発生します。
 例外 LocalJumpError を発生する原因となった
 break や return に渡した値を返します。
 
-```ruby title="例"
+```ruby title="意図的に LocalJumpError を起こして exit_value を確認"
 def foo
   proc { return 10 }
 end
@@ -24,16 +24,14 @@ end
 begin
   foo.call
 rescue LocalJumpError => err
-  p err              # => #<LocalJumpError: return from block-closure>
-  p err.reason       # => :return
+  p err              # => #<LocalJumpError: unexpected return>
   p err.exit_value   # => 10
 end
 
 begin
-  Block.new { break 5 }.call
+  Proc.new { break 5 }.call
 rescue LocalJumpError => err
-  p err              # => #<LocalJumpError: break from block-closure>
-  p err.reason       # => :break
+  p err              # => #<LocalJumpError: break from proc-closure>
   p err.exit_value   # => 5
 end
 ```
@@ -51,7 +49,7 @@ end
   - :return
   - :noreason
 
-```ruby title="例"
+```ruby title="意図的に LocalJumpError を起こして reason を確認"
 def foo
   proc { return 10 }
 end
@@ -59,17 +57,15 @@ end
 begin
   foo.call
 rescue LocalJumpError => err
-  p err              # => #<LocalJumpError: return from block-closure>
+  p err              # => #<LocalJumpError: unexpected return>
   p err.reason       # => :return
-  p err.exit_value   # => 10
 end
 
 begin
-  Block.new { break 5 }.call
+  Proc.new { break 5 }.call
 rescue LocalJumpError => err
-  p err              # => #<LocalJumpError: break from block-closure>
+  p err              # => #<LocalJumpError: break from proc-closure>
   p err.reason       # => :break
-  p err.exit_value   # => 5
 end
 ```
 
