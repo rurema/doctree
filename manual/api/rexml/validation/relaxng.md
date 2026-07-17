@@ -25,7 +25,7 @@ relaxng_schema = <<RELAXNG
       </optional>
     </element>
   </zeroOrMore>
-<element>
+</element>
 RELAXNG
 
 xml = <<XML
@@ -46,28 +46,28 @@ parser = REXML::Parsers::TreeParser.new(xml)
 parser.add_listener(validator)
 parser.parse
 #@since 3.4
-# ~> /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/validation/validation.rb:22:in 'validate': Validation error.  Expected: :start_element(  ) or :start_element( card ) from < Z.2 #:start_element( card ), :start_element( name ), :text(  ), :end_element(  ), :start_element( email ), :text(  ), :end_element(  ), < O.3 #:start_element( note ), :text(  ), :end_element(  ) >, :end_element(  ) >  but got :text(  (REXML::Validation::ValidationException)
+# ~> /path/to/gems/rexml-3.4.4/lib/rexml/validation/validation.rb:21:in 'REXML::Validation::Validator#validate': Validation error.  Expected: :end_element(  ) or :start_element( card ) from < Z.2 #:start_element( card ), :start_element( name ), :text(  ), :end_element(  ), :start_element( email ), :text(  ), :end_element(  ), < O.3 #:start_element( note ), :text(  ), :end_element(  ) >, :end_element(  ) >  but got :text(  (REXML::Validation::ValidationException)
 #@else
-# ~> /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/validation/validation.rb:22:in `validate': Validation error.  Expected: :start_element(  ) or :start_element( card ) from < Z.2 #:start_element( card ), :start_element( name ), :text(  ), :end_element(  ), :start_element( email ), :text(  ), :end_element(  ), < O.3 #:start_element( note ), :text(  ), :end_element(  ) >, :end_element(  ) >  but got :text(  (REXML::Validation::ValidationException)
+# ~> /path/to/gems/rexml-3.3.9/lib/rexml/validation/validation.rb:21:in `validate': Validation error.  Expected: :end_element(  ) or :start_element( card ) from < Z.2 #:start_element( card ), :start_element( name ), :text(  ), :end_element(  ), :start_element( email ), :text(  ), :end_element(  ), < O.3 #:start_element( note ), :text(  ), :end_element(  ) >, :end_element(  ) >  but got :text(  (REXML::Validation::ValidationException)
 #@end
 # ~>    )
 #@since 3.4
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/validation/relaxng.rb:122:in 'receive'
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:185:in 'block (2 levels) in pull'
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:184:in 'each'
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:184:in 'block in pull'
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:183:in 'tap'
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:183:in 'pull'
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/treeparser.rb:22:in 'parse'
+# ~> 	from /path/to/gems/rexml-3.4.4/lib/rexml/validation/relaxng.rb:123:in 'REXML::Validation::RelaxNG#receive'
+# ~> 	from /path/to/gems/rexml-3.4.4/lib/rexml/parsers/baseparser.rb:251:in 'block (2 levels) in REXML::Parsers::BaseParser#pull'
+# ~> 	from /path/to/gems/rexml-3.4.4/lib/rexml/parsers/baseparser.rb:250:in 'Array#each'
+# ~> 	from /path/to/gems/rexml-3.4.4/lib/rexml/parsers/baseparser.rb:250:in 'block in REXML::Parsers::BaseParser#pull'
+# ~> 	from <internal:kernel>:91:in 'Kernel#tap'
+# ~> 	from /path/to/gems/rexml-3.4.4/lib/rexml/parsers/baseparser.rb:249:in 'REXML::Parsers::BaseParser#pull'
+# ~> 	from /path/to/gems/rexml-3.4.4/lib/rexml/parsers/treeparser.rb:21:in 'REXML::Parsers::TreeParser#parse'
 # ~> 	from -:41:in '<main>'
 #@else
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/validation/relaxng.rb:122:in `receive'
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:185:in `block (2 levels) in pull'
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:184:in `each'
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:184:in `block in pull'
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:183:in `tap'
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:183:in `pull'
-# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/treeparser.rb:22:in `parse'
+# ~> 	from /path/to/gems/rexml-3.3.9/lib/rexml/validation/relaxng.rb:123:in `receive'
+# ~> 	from /path/to/gems/rexml-3.3.9/lib/rexml/parsers/baseparser.rb:245:in `block (2 levels) in pull'
+# ~> 	from /path/to/gems/rexml-3.3.9/lib/rexml/parsers/baseparser.rb:244:in `each'
+# ~> 	from /path/to/gems/rexml-3.3.9/lib/rexml/parsers/baseparser.rb:244:in `block in pull'
+# ~> 	from <internal:kernel>:90:in `tap'
+# ~> 	from /path/to/gems/rexml-3.3.9/lib/rexml/parsers/baseparser.rb:243:in `pull'
+# ~> 	from /path/to/gems/rexml-3.3.9/lib/rexml/parsers/treeparser.rb:21:in `parse'
 # ~> 	from -:41:in `<main>'
 #@end
 ```

@@ -225,13 +225,15 @@ irb(main):004:0> x = "OK"          # ローカル変数 x を定義
 irb(main):005:0> x                 # x を表示
 => "OK"
 irb(main):006:0> irb               # サブ irb を起動
+Multi-irb commands are deprecated and will be removed in IRB 2.0.0. Please use workspace commands instead.
+If you have any use case for multi-irb, please leave a comment at https://github.com/ruby/irb/issues/653
 irb#1(main):001:0> x               # x を表示
 #@since 3.4
-NameError: undefined local variable or method 'x' for main:Object
-        from (irb#1):1:in 'Kernel#binding'
+(irb#1):1:in '<top (required)>': undefined local variable or method 'x' for main (NameError)
+        from <internal:kernel>:168:in 'Kernel#loop'
 #@else
-NameError: undefined local variable or method `x' for main:Object
-        from (irb#1):1:in `Kernel#binding'
+(irb#1):1:in `<top (required)>': undefined local variable or method `x' for main (NameError)
+        from <internal:kernel>:187:in `loop'
 #@end
 ```
 
@@ -239,6 +241,11 @@ NameError: undefined local variable or method `x' for main:Object
 「irb」でサブ irb を起動すると、
 ローカル変数 x が見えなくなっています。
 これが「独立した環境」の意味です。
+
+なお、「irb」コマンドによるサブ irb の起動(multi-irb)は非推奨となっており、
+将来の IRB 2.0.0 で削除される予定です。
+今後は後述の「irb で使用可能なコマンド一覧」にある workspace 関連のコマンド
+(`cws`、`pushws` など)の利用が推奨されています。
 
 ### サブ irb の設定 {#configure_sub_irb}
 
@@ -592,9 +599,9 @@ foo = 0
 ```irb
 irb(main):001:0> eval "foo"
 #@since 3.4
-NameError (undefined local variable or method 'foo' for main:Object)
+NameError (undefined local variable or method 'foo' for main)
 #@else
-NameError (undefined local variable or method `foo' for main:Object)
+NameError (undefined local variable or method `foo' for main)
 #@end
 irb(main):002:0> foo = 0
 ```
