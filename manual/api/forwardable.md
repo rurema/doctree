@@ -189,7 +189,7 @@ module Facade
   def_delegator :Implementation, :service
 end
 
-Facade.service # => serviced!
+p Facade.service # => serviced!
 ```
 
 もし [c:Forwardable] と [c:SingleForwardable] の両方を使いたい場合、

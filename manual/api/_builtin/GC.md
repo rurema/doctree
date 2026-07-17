@@ -462,7 +462,7 @@ p GC.count  # => 4
   - "GC_PROFILE_DETAIL_MEMORY"
 
 ```ruby title="例"
-GC::OPTS # => ["USE_RGENGC", "RGENGC_ESTIMATE_OLDMALLOC", "GC_ENABLE_LAZY_SWEEP"]
+p GC::OPTS # => ["USE_RGENGC", "RGENGC_ESTIMATE_OLDMALLOC", "GC_ENABLE_LAZY_SWEEP"]
 # この場合、GCデバッグ機能やプロファイル機能は無効化されている
 ```
 

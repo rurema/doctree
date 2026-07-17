@@ -51,24 +51,24 @@ OpenStruct は Ruby のメソッド探索を利用して、プロパティに必
 
 ```ruby
 o = OpenStruct.new
-o.then            # => Ruby < 2.6 では nil、Ruby >= 2.6 では Enumerator
+p o.then          # => Ruby < 2.6 では nil、Ruby >= 2.6 では Enumerator
 ```
 
 以下の方法では、組み込みライブラリのメソッドが上書きされる可能性があり、バグやセキュリティ上の問題が発生する可能性があります：
 
 ```ruby
 o = OpenStruct.new
-o.methods         # => [:to_h, :marshal_load, :marshal_dump, :each_pair, ...]
+p o.methods       # => [:to_h, :marshal_load, :marshal_dump, :each_pair, ...]
 o.methods = [:foo, :bar]
-o.methods         # => [:foo, :bar]
+p o.methods       # => [:foo, :bar]
 ```
 
 衝突を避けるために [c:OpenStruct] は ! で終わるメソッドは protected と private でのみ使用し、public な組み込みライブラリの ! で終わるメソッドはエイリアスを定義しています：
 
 ```ruby
 o = OpenStruct.new(make: 'Bentley', class: :luxury)
-o.class           # => :luxury
-o.class!          # => OpenStruct
+p o.class         # => :luxury
+p o.class!        # => OpenStruct
 ```
 
 ! で終わるフィールドは使用しないことが推奨されます（ただし、強制ではありません）。サブクラスのメソッドを上書きすることはできませんし、! で終わる OpenStruct 自身のメソッドを上書きすることもできません。
@@ -159,7 +159,7 @@ self の各要素の名前と要素を引数としてブロックを評価しま
 ```ruby title="例"
 require 'ostruct'
 data = OpenStruct.new("country" => "Australia", :population => 20_000_000)
-data.each_pair.to_a  # => [[:country, "Australia"], [:population, 20000000]]
+p data.each_pair.to_a  # => [[:country, "Australia"], [:population, 20000000]]
 ```
 
 ### def [](name) -> object

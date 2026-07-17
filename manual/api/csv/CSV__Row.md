@@ -313,7 +313,7 @@ require 'csv'
 csv = CSV.new("a,b,c\n1,2,3", headers: true)
 table = csv.read
 row = table.first
-row.values_at("a", 1, 2..3) # => ["1", "2", "3", nil]
+p row.values_at("a", 1, 2..3) # => ["1", "2", "3", nil]
 ```
 
 ### def header?(name) -> bool

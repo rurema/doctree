@@ -61,8 +61,8 @@ Dir.glob("/dev/*") { |file|
 - **param** `file` -- ファイル名を表す文字列を指定します。
 
 ```ruby title="例"
-FileTest.executable?('/bin') # => true
-FileTest.executable?('/bin/bash') # => true
+p FileTest.executable?('/bin') # => true
+p FileTest.executable?('/bin/bash') # => true
 ```
 
 ### module_function def executable_real?(file)    -> bool
@@ -88,10 +88,10 @@ p FileTest.executable_real?("empty.txt")    # => false
 - **raise** `IOError` -- 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
 ```ruby title="例"
-FileTest.exist?('/etc/passwd') # => true
-FileTest.exist?('/etc') # => true
-FileTest.exist?('/etc/no_such_file') # => false
-FileTest.exist?('/etc/no_such_directory') # => false
+p FileTest.exist?('/etc/passwd') # => true
+p FileTest.exist?('/etc') # => true
+p FileTest.exist?('/etc/no_such_file') # => false
+p FileTest.exist?('/etc/no_such_directory') # => false
 ```
 
 #@until 3.2
@@ -125,11 +125,11 @@ p FileTest.grpowned?("testfile")    # => false
 - **raise** `IOError` -- 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
 ```ruby title="例"
-FileTest.directory?('/etc') # => true
-FileTest.directory?('/etc/passwd') # => false
+p FileTest.directory?('/etc') # => true
+p FileTest.directory?('/etc/passwd') # => false
 
 f = File.open('/etc')
-FileTest.directory?(f) # => true
+p FileTest.directory?(f) # => true
 f.close
 FileTest.directory?(f) # => IOError: closed stream
 ```
@@ -143,9 +143,9 @@ FileTest.directory?(f) # => IOError: closed stream
 - **raise** `IOError` -- 指定された IO オブジェクト file が既に close されていた場合に発生します。
 
 ```ruby title="例"
-FileTest.file?('/bin/bash') # => true
-FileTest.file?('/bin') # => false
-FileTest.file?('/no_such_file') # => false
+p FileTest.file?('/bin/bash') # => true
+p FileTest.file?('/bin') # => false
+p FileTest.file?('/no_such_file') # => false
 ```
 
 ### module_function def identical?(file1, file2)    -> bool
@@ -183,8 +183,8 @@ p File.identical?("a", "d")      #=> false
 
 ```ruby title="例"
 r, w = IO.pipe
-FileTest.pipe?(r) # => true
-FileTest.pipe?(w) # => true
+p FileTest.pipe?(r) # => true
+p FileTest.pipe?(w) # => true
 ```
 
 ### module_function def socket?(file)    -> bool
@@ -291,7 +291,7 @@ p FileTest.setgid?("testfile")    # => false
 - **SEE** [m:FileTest?.size?], [m:FileTest?.zero?]
 
 ```ruby title="例"
-FileTest.size('/etc/passwd') # => 5925
+p FileTest.size('/etc/passwd') # => 5925
 ```
 
 ### module_function def size?(file)    -> Integer | nil
@@ -396,7 +396,7 @@ path が全てのユーザから読めるならばそのファイルのパーミ
 
 ```ruby
 m = FileTest.world_readable?("/etc/passwd")
-"%o" % m                               # => "644"
+p "%o" % m                             # => "644"
 ```
 
 ### module_function def world_writable?(path)    -> bool
@@ -410,5 +410,5 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 ```ruby
 m = FileTest.world_writable?("/tmp")
-"%o" % m                               #=> "777"
+p "%o" % m                             #=> "777"
 ```

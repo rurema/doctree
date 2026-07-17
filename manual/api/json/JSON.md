@@ -256,8 +256,8 @@ str=<<JSON
 [1,2,3]
 JSON
   
-JSON.load(str) # => [1,2,3]
-JSON.load(str, proc{|v| p v }) # => [1,2,3]
+p JSON.load(str) # => [1,2,3]
+p JSON.load(str, proc{|v| p v }) # => [1,2,3]
 # 以下が表示される
 # 1
 # 2
@@ -268,8 +268,8 @@ str=<<JSON
 { "a":1, "b":2, "c":3 }
 JSON
   
-JSON.load(str) # => {"a"=>1, "b"=>2, "c"=>3}
-JSON.load(str, proc{|v| p v }) # => {"a"=>1, "b"=>2, "c"=>3}
+p JSON.load(str) # => {"a"=>1, "b"=>2, "c"=>3}
+p JSON.load(str, proc{|v| p v }) # => {"a"=>1, "b"=>2, "c"=>3}
 # 以下が表示される
 # "a"
 # 1

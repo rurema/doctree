@@ -416,8 +416,8 @@ end
 class Child < Parent
 end
 
-Child.autoload?(:Foo)        # => "foo"
-Child.autoload?(:Foo, false) # => nil
+p Child.autoload?(:Foo)      # => "foo"
+p Child.autoload?(:Foo, false) # => nil
 ```
 
 ### def class_variables(inherit = true) -> [Symbol]

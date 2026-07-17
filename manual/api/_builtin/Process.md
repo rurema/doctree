@@ -104,13 +104,13 @@ exec "echo", "*"    # echoes an asterisk
 
 ```ruby
 Process.wait Process.spawn("ruby", "-e", "exit 13")
-Process.last_status   # => #<Process::Status: pid 4825 exit 13>
+p Process.last_status # => #<Process::Status: pid 4825 exit 13>
 ```
 
 カレントスレッドで子プロセスを実行したことがない場合は nil を返します。
 
 ```ruby
-Process.last_status   # => nil
+p Process.last_status # => nil
 ```
 
 - **SEE** [c:Process::Status]
@@ -551,9 +551,9 @@ end
                            いない場合に発生します。
 
 ```ruby
-Process.getsid()              # => 27422
-Process.getsid(0)             # => 27422
-Process.getsid(Process.pid()) # => 27422
+p Process.getsid()            # => 27422
+p Process.getsid(0)           # => 27422
+p Process.getsid(Process.pid()) # => 27422
 ```
 
 - **SEE** [man:getsid(2)]
