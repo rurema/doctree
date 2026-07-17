@@ -34,6 +34,20 @@ new(str).digest と等価です。
 16進数の列を示す文字列にエンコードして返します。
 new(str).hexdigest と等価です。
 
+### def base64digest(str) -> String
+
+与えられた文字列に対するハッシュ値を、Base64 エンコードした文字列にして返します。
+new(str).base64digest と等価です。
+
+返す文字列は '=' でパディングされ、改行は含まれません。
+
+```ruby title="例"
+require 'digest'
+p Digest::MD5.base64digest('ruby') # => "WOU9EyTu9iZf25ewjtmq3w=="
+```
+
+- **SEE** [m:Digest::Base#base64digest]
+
 ### def file(path) -> object
 
 新しいダイジェストオブジェクトを生成し、
@@ -142,6 +156,49 @@ p digest.hexdigest! # => "d41d8cd98f00b204e9800998ecf8427e"
 ```
 
 - **SEE** [m:Digest::Base#hexdigest]、[m:Digest::Base#digest!]
+
+
+### def base64digest(str = nil) -> String
+
+updateや<<によって追加した文字列に対するハッシュ値を、Base64 エンコードした文字列にして返します。
+
+引数 str を省略した場合は、オブジェクトの状態はそのまま保持されます。
+引数 str を指定した場合は、指定した文字列に対するハッシュ値を返し、
+処理の前後でオブジェクトの状態を初期状態(newした直後と同様の状態)に戻します。
+
+返す文字列は '=' でパディングされ、改行は含まれません。
+
+- **param** `str` -- ハッシュ値を計算する対象の文字列です。省略した場合は、updateや<<で追加した内容に対するハッシュ値を返します。
+
+```ruby title="例"
+require 'digest/md5'
+digest = Digest::MD5.new
+digest.update("ruby")
+p digest.base64digest        # => "WOU9EyTu9iZf25ewjtmq3w=="
+p digest.hexdigest           # => "58e53d1324eef6265fdb97b08ed9aadf" (状態は保持される)
+
+p digest.base64digest("abc") # => "kAFQmDzST7DWlj99KOF/cg=="
+p digest.hexdigest           # => "d41d8cd98f00b204e9800998ecf8427e" (初期状態に戻る)
+```
+
+- **SEE** [m:Digest::Base#digest]、[m:Digest::Base#hexdigest]、[m:Digest::Base.base64digest]
+
+### def base64digest! -> String
+
+updateや<<によって追加した文字列に対するハッシュ値を、Base64 エンコードした文字列にして返します。
+[m:Digest::Base#base64digest]と違い、
+メソッドの処理後、
+オブジェクトの状態を初期状態(newした直後と同様の状態)に戻します。
+
+```ruby title="例"
+require 'digest/md5'
+digest = Digest::MD5.new
+digest.update("ruby")
+p digest.base64digest!  # => "WOU9EyTu9iZf25ewjtmq3w=="
+p digest.hexdigest      # => "d41d8cd98f00b204e9800998ecf8427e"
+```
+
+- **SEE** [m:Digest::Base#base64digest]
 
 
 ### def update(str) -> self
