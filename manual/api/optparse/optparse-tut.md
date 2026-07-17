@@ -81,27 +81,11 @@ p argv
 ```console
 ruby ./sample.rb -c
 #@since 3.4
-/usr/local/lib/ruby/1.9/optparse.rb:1428:in 'complete': invalid option: -c (OptionParser::InvalidOption)
-        from /usr/local/lib/ruby/1.9/optparse.rb:1426:in 'catch'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1426:in 'complete'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1287:in 'order!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1256:in 'catch'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1256:in 'order!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1336:in 'permute!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1363:in 'parse!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1356:in 'parse'
-        from ./sample.rb:9
+./sample.rb:7:in '<main>': invalid option: -c (OptionParser::InvalidOption)
+./sample.rb:7:in '<main>': invalid option: c (OptionParser::InvalidOption)
 #@else
-/usr/local/lib/ruby/1.9/optparse.rb:1428:in `complete': invalid option: -c (OptionParser::InvalidOption)
-        from /usr/local/lib/ruby/1.9/optparse.rb:1426:in `catch'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1426:in `complete'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1287:in `order!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1256:in `catch'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1256:in `order!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1336:in `permute!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1363:in `parse!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1356:in `parse'
-        from ./sample.rb:9
+./sample.rb:7:in `<main>': invalid option: -c (OptionParser::InvalidOption)
+./sample.rb:7:in `<main>': invalid option: c (OptionParser::InvalidOption)
 #@end
 ```
 
@@ -187,21 +171,9 @@ ruby sample.rb -a foo bar -b baz
 ```console
 ruby ./sample.rb -a
 #@since 3.4
-/usr/local/lib/ruby/1.9/optparse.rb:455:in 'parse': missing argument: -a (OptionParser::MissingArgument)
-        from /usr/local/lib/ruby/1.9/optparse.rb:1295:in 'order!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1256:in 'catch'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1256:in 'order!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1336:in 'permute!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1363:in 'parse!'
-        from ./sample.rb:7
+./sample.rb:7:in '<main>': missing argument: -a (OptionParser::MissingArgument)
 #@else
-/usr/local/lib/ruby/1.9/optparse.rb:455:in `parse': missing argument: -a (OptionParser::MissingArgument)
-        from /usr/local/lib/ruby/1.9/optparse.rb:1295:in `order!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1256:in `catch'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1256:in `order!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1336:in `permute!'
-        from /usr/local/lib/ruby/1.9/optparse.rb:1363:in `parse!'
-        from ./sample.rb:7
+./sample.rb:7:in `<main>': missing argument: -a (OptionParser::MissingArgument)
 #@end
 ```
 

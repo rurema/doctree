@@ -79,33 +79,52 @@ Socket などは DNSの名前解決に時間がかかった場合割り込めま
 その処理を Ruby で実装しなおすか C 側で Ruby
 のスレッドを意識してあげる必要があります。
 
-以下の例では、gethostbyname(およそ0.6秒処理に時間がかかっている) が終了した直後((A)の箇所)で Timeout::Error 例外があがっています。
+以下の例では、Fiddle 経由で libc の sleep(3) を直接呼び出しています。
+Ruby の sleep と異なり GVL を解放しないため Timeout からの割り込みを受け付けず、
+この呼び出し(1秒かかっている)が終了した直後((A)の箇所)で Timeout::Error 例外があがっています。
 
 ```text title="例 timeout が割り込めない"
 require 'timeout'
-require 'socket'
+require 'fiddle'
+
+libc = Fiddle.dlopen(nil)
+c_sleep = Fiddle::Function.new(libc['sleep'], [Fiddle::TYPE_INT], Fiddle::TYPE_INT)
 
 t = 0.1
 start = Time.now
 begin
   Timeout.timeout(t) {
-    p TCPSocket.gethostbyname("www.ruby-lang.org")
+    p c_sleep.call(1)
     # (A)
   }
 ensure
   p Time.now - start
 end
 # 実行例
-=> ["helium.ruby-lang.org", [], 2, "210.251.121.214"]
-   0.689331
-   /usr/local/lib/ruby/1.6/timeout.rb:37: execution expired (Timeout::Error)
+=> 1.000757509
 #@since 3.4
-         from -:6:in 'timeout'
+   /path/to/gems/timeout-0.6.0/lib/timeout.rb:40:in 'Timeout::Error.handle_timeout': execution expired (Timeout::Error)
+        from /path/to/gems/timeout-0.6.0/lib/timeout.rb:304:in 'Timeout.timeout'
+        from -:10:in '<main>'
+   -:11:in 'Fiddle::Function#call': execution expired (Timeout::ExitException)
+        from -:11:in 'block in <main>'
+        from /path/to/gems/timeout-0.6.0/lib/timeout.rb:295:in 'block in Timeout.timeout'
+        from /path/to/gems/timeout-0.6.0/lib/timeout.rb:38:in 'Timeout::Error.handle_timeout'
+        from /path/to/gems/timeout-0.6.0/lib/timeout.rb:304:in 'Timeout.timeout'
+        from -:10:in '<main>'
 #@else
-         from -:6:in `timeout'
+   /path/to/gems/timeout-0.4.1/lib/timeout.rb:43:in `rescue in handle_timeout': execution expired (Timeout::Error)
+        from /path/to/gems/timeout-0.4.1/lib/timeout.rb:40:in `handle_timeout'
+        from /path/to/gems/timeout-0.4.1/lib/timeout.rb:195:in `timeout'
+        from -:10:in `<main>'
+   -:11:in `call': execution expired (Timeout::ExitException)
+        from -:11:in `block in <main>'
+        from /path/to/gems/timeout-0.4.1/lib/timeout.rb:186:in `block in timeout'
+        from /path/to/gems/timeout-0.4.1/lib/timeout.rb:41:in `handle_timeout'
+        from /path/to/gems/timeout-0.4.1/lib/timeout.rb:195:in `timeout'
+        from -:10:in `<main>'
 #@end
-         from -:6
-# gethostbyname が0.1秒かからない場合は例外が発生しないので
+# c_sleep.call の秒数が t より短い場合は例外が発生しないので
 # その場合は、t に小さい数値(0.000001のような)に変える。
 ```
 
