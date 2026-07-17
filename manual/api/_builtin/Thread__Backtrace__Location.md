@@ -25,21 +25,17 @@ c(0..2).map do |call|
 end
 ```
 
-例1の実行結果:
-
+```text title="例1の実行結果"
 #@since 3.4
-`````
 caller_locations.rb:2:in 'a'
 caller_locations.rb:5:in 'b'
 caller_locations.rb:8:in 'c'
-`````
 #@else
-`````
 caller_locations.rb:2:in `a'
 caller_locations.rb:5:in `b'
 caller_locations.rb:8:in `c'
-`````
 #@end
+```
 
 ```ruby title="例2"
 # foo.rb
@@ -55,21 +51,17 @@ Foo.new(0..2).locations.map do |call|
 end
 ```
 
-例2の実行結果:
-
+```text title="例2の実行結果"
 #@since 3.4
-`````
 init.rb:4:in 'initialize'
 init.rb:8:in 'new'
 init.rb:8:in '<main>'
-`````
 #@else
-`````
 init.rb:4:in `initialize'
 init.rb:8:in `new'
 init.rb:8:in `<main>'
-`````
 #@end
+```
 
 ### 参考
 
