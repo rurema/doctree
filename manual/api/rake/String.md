@@ -51,8 +51,8 @@ p "hoge.tar.gz".ext(".bz2")  # => "hoge.tar.bz2"
 %d は数値のプレフィクスを取ることができます。
 
 ```ruby title="例"
-p 'a/b/c/d/file.txt'.pathmap("%2d")  # => 'a/b'
-p 'a/b/c/d/file.txt'.pathmap("%-2d") # => 'c/d'
+p 'a/b/c/d/file.txt'.pathmap("%2d")  # => "a/b"
+p 'a/b/c/d/file.txt'.pathmap("%-2d") # => "c/d"
 ```
 
 また、%d, %p, %f, %n, %x, %X には単純な文字列置換を行うための
