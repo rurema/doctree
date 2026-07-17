@@ -7,10 +7,14 @@ library: _builtin
 
 ```ruby title="例"
 self.bar
-#@since 3.4
-# => -:1: undefined method 'bar' for #<Object:0x401a6c40> (NoMethodError)
-#@else
-# => -:1: undefined method `bar' for #<Object:0x401a6c40> (NoMethodError)
+#@if("3.4" <= version)
+# => -:1: undefined method 'bar' for main (NoMethodError)
+#@end
+#@if("3.3" <= version and version < "3.4")
+# => -:1: undefined method `bar' for main (NoMethodError)
+#@end
+#@if(version < "3.3")
+# => -:1: undefined method `bar' for main:Object (NoMethodError)
 #@end
 ```
 
@@ -18,10 +22,14 @@ self.bar
 
 ```ruby title="例"
 "".puts
-#@since 3.4
-# => -:1:in 'puts': private method 'puts' called for "":String (NoMethodError)
-#@else
-# => NoMethodError: private method `puts' called for "":String
+#@if("3.4" <= version)
+# => -:1:in '<main>': private method 'puts' called for an instance of String (NoMethodError)
+#@end
+#@if("3.3" <= version and version < "3.4")
+# => -:1:in `<main>': private method `puts' called for an instance of String (NoMethodError)
+#@end
+#@if(version < "3.3")
+# => -:1:in `<main>': private method `puts' called for "":String (NoMethodError)
 #@end
 ```
 
@@ -29,10 +37,14 @@ self.bar
 
 ```ruby title="例"
 bar
-#@since 3.4
-# => -:1: undefined local variable or method 'bar' for #<Object:0x401a6c40> (NameError)
-#@else
-# => -:1: undefined local variable or method `bar' for #<Object:0x401a6c40> (NameError)
+#@if("3.4" <= version)
+# => -:1: undefined local variable or method 'bar' for main (NameError)
+#@end
+#@if("3.3" <= version and version < "3.4")
+# => -:1: undefined local variable or method `bar' for main (NameError)
+#@end
+#@if(version < "3.3")
+# => -:1: undefined local variable or method `bar' for main:Object (NameError)
 #@end
 ```
 
@@ -76,13 +88,17 @@ rescue NoMethodError
   p $!.args
 end
 
-#@since 3.4
-# => #<NoMethodError: undefined method 'foobar' for main:Object>
-#@else
+#@if("3.4" <= version)
+# => #<NoMethodError: undefined method 'foobar' for main>
+#@end
+#@if("3.3" <= version and version < "3.4")
+# => #<NoMethodError: undefined method `foobar' for main>
+#@end
+#@if(version < "3.3")
 # => #<NoMethodError: undefined method `foobar' for main:Object>
 #@end
-:foobar
-[1, 2, 3]
+# => :foobar
+# => [1, 2, 3]
 ```
 
 ### def private_call? -> bool
