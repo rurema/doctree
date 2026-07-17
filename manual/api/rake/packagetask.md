@@ -65,7 +65,7 @@ require:
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.name # => "sample"
+  p package_task.name # => "sample"
 end
 ```
 
@@ -80,9 +80,9 @@ end
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.name # => "sample"
+  p package_task.name # => "sample"
   package_task.name = "update"
-  package_task.name # => "update"
+  p package_task.name # => "update"
 end
 ```
 
@@ -96,7 +96,7 @@ end
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.need_tar # => false
+  p package_task.need_tar # => false
 end
 ```
 
@@ -111,9 +111,9 @@ gzip した tar ファイル (tgz) を作成するかどうかを設定します
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.need_tar # => false
+  p package_task.need_tar # => false
   package_task.need_tar = true
-  package_task.need_tar # => true
+  p package_task.need_tar # => true
 end
 ```
 
@@ -127,7 +127,7 @@ end
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.need_tar_bz2 # => false
+  p package_task.need_tar_bz2 # => false
 end
 ```
 
@@ -142,9 +142,9 @@ bzip2 した tar ファイル (tar.bz2) を作成するかどうかを設定し�
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.need_tar_bz2 # => false
+  p package_task.need_tar_bz2 # => false
   package_task.need_tar_bz2 = true
-  package_task.need_tar_bz2 # => true
+  p package_task.need_tar_bz2 # => true
 end
 ```
 
@@ -158,7 +158,7 @@ end
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.need_tar_gz # => false
+  p package_task.need_tar_gz # => false
 end
 ```
 
@@ -173,9 +173,9 @@ gzip した tar ファイル (tar.gz) を作成するかどうかを設定しま
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.need_tar_gz # => false
+  p package_task.need_tar_gz # => false
   package_task.need_tar_gz = true
-  package_task.need_tar_gz # => true
+  p package_task.need_tar_gz # => true
 end
 ```
 
@@ -189,7 +189,7 @@ end
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.need_zip # => false
+  p package_task.need_zip # => false
 end
 ```
 
@@ -204,9 +204,9 @@ zip ファイル (tgz) を作成するかどうかを設定します。
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.need_zip # => false
+  p package_task.need_zip # => false
   package_task.need_zip = true
-  package_task.need_zip # => true
+  p package_task.need_zip # => true
 end
 ```
 
@@ -219,7 +219,7 @@ end
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.package_dir # => "pkg"
+  p package_task.package_dir # => "pkg"
 end
 ```
 
@@ -234,9 +234,9 @@ end
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.package_dir # => "pkg"
+  p package_task.package_dir # => "pkg"
   package_task.package_dir = "package"
-  package_task.package_dir # => "package"
+  p package_task.package_dir # => "package"
 end
 ```
 
@@ -249,7 +249,7 @@ end
 require 'rake/packagetask'
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.package_dir_path # => "pkg/sample-1.0.0"
+  p package_task.package_dir_path # => "pkg/sample-1.0.0"
 end
 ```
 
@@ -265,9 +265,9 @@ IO.write("test1.rb", "test")
 IO.write("test2.rb", "test")
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.package_files # => []
+  p package_task.package_files # => []
   package_task.package_files.include("*.rb")
-  package_task.package_files # => ["test1.rb", "test2.rb"]
+  p package_task.package_files # => ["test1.rb", "test2.rb"]
 end
 ```
 
@@ -285,9 +285,9 @@ IO.write("test1.rb", "test")
 IO.write("test2.rb", "test")
 
 Rake::PackageTask.new("sample", "1.0.0") do |package_task|
-  package_task.package_files # => []
+  p package_task.package_files # => []
   package_task.package_files = FileList.new("test1.rb", "test2.rb")
-  package_task.package_files # => ["test1.rb", "test2.rb"]
+  p package_task.package_files # => ["test1.rb", "test2.rb"]
 end
 ```
 
