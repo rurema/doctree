@@ -111,7 +111,7 @@ irb コマンドは起動時に以下のパスを上から順番に探索し、
 以下のような (Ruby の) 式を .irbrc に記述すると、
 irb コマンドのオプションを指定したのと同じ効果が得られます。
 
-```text
+```ruby
 IRB.conf[:AUTO_INDENT] = false
 IRB.conf[:BACK_TRACE_LIMIT] = 16
 IRB.conf[:DEBUG_LEVEL] = 1
@@ -123,7 +123,9 @@ IRB.conf[:IGNORE_SIGINT] = true
 IRB.conf[:INSPECT_MODE] = nil
 IRB.conf[:IRB_NAME] = "irb"
 IRB.conf[:IRB_RC] = nil
-IRB.conf[:PROMPT] = {....}
+IRB.conf[:PROMPT] = {
+  # ...(「プロンプトのカスタマイズ」を参照)
+}
 IRB.conf[:PROMPT_MODE] = :DEFAULT
 IRB.conf[:SINGLE_IRB] = false
 IRB.conf[:SAVE_HISTORY] = 1000

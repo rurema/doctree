@@ -295,38 +295,38 @@ end
 
 ### 使い方
 
-```text
+```ruby
 th = Thread.new{
   Thread.handle_interrupt(RuntimeError => :on_blocking){
     while true
-      ...
+      # ...
       # ここまでで割り込みが発生しても安全な状態になった。
       if Thread.pending_interrupt?
         Thread.handle_interrupt(Object => :immediate){}
       end
-      ...
+      # ...
     end
   }
 }
-...
+# ...
 th.raise # スレッド停止。
 ```
 
 この例は以下のように記述する事もできます。
 
-```text
+```ruby
 flag = true
 th = Thread.new{
   Thread.handle_interrupt(RuntimeError => :on_blocking){
     while true
-      ...
+      # ...
       # ここまでで割り込みが発生しても安全な状態になった。
       break if flag == false
-      ...
+      # ...
     end
   }
 }
-...
+# ...
 flag = false # スレッド停止
 ```
 

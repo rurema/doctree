@@ -361,17 +361,15 @@ Rubyライブラリをロードするときの検索パスです。
 
 以下に典型的な UNIX システム上でのロードパスを示します。
 
-```text
--I で指定したパス
-環境変数 RUBYLIB の値
-/usr/local/lib/ruby/site_ruby/VERSION        サイト固有、バージョン依存のライブラリ
-/usr/local/lib/ruby/site_ruby/VERSION/ARCH   サイト固有、システム依存、拡張ライブラリ
-/usr/local/lib/ruby/site_ruby                サイト固有ライブラリ
-/usr/local/lib/ruby/VERSION                  標準ライブラリ
-/usr/local/lib/ruby/VERSION/ARCH             標準、システム依存、拡張ライブラリ
-```
+- `-I` で指定したパス
+- 環境変数 RUBYLIB の値
+- `/usr/local/lib/ruby/site_ruby/VERSION` -- サイト固有、バージョン依存のライブラリ
+- `/usr/local/lib/ruby/site_ruby/VERSION/ARCH` -- サイト固有、システム依存、拡張ライブラリ
+- `/usr/local/lib/ruby/site_ruby` -- サイト固有ライブラリ
+- `/usr/local/lib/ruby/VERSION` -- 標準ライブラリ
+- `/usr/local/lib/ruby/VERSION/ARCH` -- 標準、システム依存、拡張ライブラリ
 
-上記表中の VERSION は Ruby のバージョンを表す文字列で、
+上記の VERSION は Ruby のバージョンを表す文字列で、
 「1.6」や「1.8」です。
 ARCH はハードウェアと OS を表す文字列で、
 「i686-linux」や「alpha-osf5.1」などです。

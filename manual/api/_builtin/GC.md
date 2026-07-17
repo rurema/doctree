@@ -323,34 +323,34 @@ GC 内部の統計情報を [c:Hash] で返します。
 ```ruby
 GC.stat
 # =>
-{
-  :count=>0,
-  :heap_allocated_pages=>24,
-  :heap_sorted_length=>24,
-  :heap_allocatable_pages=>0,
-  :heap_available_slots=>9783,
-  :heap_live_slots=>7713,
-  :heap_free_slots=>2070,
-  :heap_final_slots=>0,
-  :heap_marked_slots=>0,
-  :heap_swept_slots=>0,
-  :heap_eden_pages=>24,
-  :heap_tomb_pages=>0,
-  :total_allocated_pages=>24,
-  :total_freed_pages=>0,
-  :total_allocated_objects=>7796,
-  :total_freed_objects=>83,
-  :malloc_increase_bytes=>2389312,
-  :malloc_increase_bytes_limit=>16777216,
-  :minor_gc_count=>0,
-  :major_gc_count=>0,
-  :remembered_wb_unprotected_objects=>0,
-  :remembered_wb_unprotected_objects_limit=>0,
-  :old_objects=>0,
-  :old_objects_limit=>0,
-  :oldmalloc_increase_bytes=>2389760,
-  :oldmalloc_increase_bytes_limit=>16777216
-}
+# {
+#   :count=>0,
+#   :heap_allocated_pages=>24,
+#   :heap_sorted_length=>24,
+#   :heap_allocatable_pages=>0,
+#   :heap_available_slots=>9783,
+#   :heap_live_slots=>7713,
+#   :heap_free_slots=>2070,
+#   :heap_final_slots=>0,
+#   :heap_marked_slots=>0,
+#   :heap_swept_slots=>0,
+#   :heap_eden_pages=>24,
+#   :heap_tomb_pages=>0,
+#   :total_allocated_pages=>24,
+#   :total_freed_pages=>0,
+#   :total_allocated_objects=>7796,
+#   :total_freed_objects=>83,
+#   :malloc_increase_bytes=>2389312,
+#   :malloc_increase_bytes_limit=>16777216,
+#   :minor_gc_count=>0,
+#   :major_gc_count=>0,
+#   :remembered_wb_unprotected_objects=>0,
+#   :remembered_wb_unprotected_objects_limit=>0,
+#   :old_objects=>0,
+#   :old_objects_limit=>0,
+#   :oldmalloc_increase_bytes=>2389760,
+#   :oldmalloc_increase_bytes_limit=>16777216
+# }
 ```
 
 戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。

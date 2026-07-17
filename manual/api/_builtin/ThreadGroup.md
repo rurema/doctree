@@ -85,18 +85,18 @@ enclose された ThreadGroup に追加や削除を行うと例外 [c:ThreadErro
 ただし、[m:Thread.new] によるスレッドの追加は禁止されません。enclose されたスレッドグループ A に
 属するスレッドが新たにスレッドを生成した場合、生成されたスレッドはスレッドグループ A に属します。
 
-```text title="追加の例"
+```ruby title="追加の例"
 thg = ThreadGroup.new.enclose
 thg.add Thread.new {}
 
 #@since 3.4
-=> -:2:in 'ThreadGroup#add': can't move to the enclosed thread group (ThreadError)
+# => -:2:in 'ThreadGroup#add': can't move to the enclosed thread group (ThreadError)
 #@else
-=> -:2:in `add': can't move to the enclosed thread group (ThreadError)
+# => -:2:in `add': can't move to the enclosed thread group (ThreadError)
 #@end
 ```
 
-```text title="削除の例"
+```ruby title="削除の例"
 thg1 = ThreadGroup.new
 thg2 = ThreadGroup.new
 
@@ -107,9 +107,9 @@ thg1.enclose
 thg2.add th
 
 #@since 3.4
-=> -:8:in 'ThreadGroup#add': can't move from the enclosed thread group (ThreadError)
+# => -:8:in 'ThreadGroup#add': can't move from the enclosed thread group (ThreadError)
 #@else
-=> -:8:in `add': can't move from the enclosed thread group (ThreadError)
+# => -:8:in `add': can't move from the enclosed thread group (ThreadError)
 #@end
 ```
 
