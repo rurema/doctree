@@ -2335,9 +2335,9 @@ begin
   open("nonexist")
 rescue
 #@since 3.4
-  p raise #=> 'open': No such file or directory - "nonexist" (Errno::ENOENT)
+  raise   #=> 'open': No such file or directory - "nonexist" (Errno::ENOENT)
 #@else
-  p raise #=> `open': No such file or directory - "nonexist" (Errno::ENOENT)
+  raise   #=> `open': No such file or directory - "nonexist" (Errno::ENOENT)
 #@end
 end
 ```
