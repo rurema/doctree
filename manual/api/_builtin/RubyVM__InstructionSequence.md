@@ -79,6 +79,41 @@ RubyVM::InstructionSequence.compile_file("/tmp/hello.rb")
 命令シーケンスのコンパイル時のデフォルトの最適化オプションを Hash で返
 します。
 
+#@if("3.4" <= version)
+```ruby title="例"
+require "pp"
+pp RubyVM::InstructionSequence.compile_option
+
+# => {inline_const_cache: true,
+# peephole_optimization: true,
+# tailcall_optimization: false,
+# specialized_instruction: true,
+# operands_unification: true,
+# instructions_unification: false,
+# debug_frozen_string_literal: false,
+# coverage_enabled: true,
+# debug_level: 0,
+# frozen_string_literal: nil}
+```
+#@end
+#@if("3.3" <= version and version < "3.4")
+```ruby title="例"
+require "pp"
+pp RubyVM::InstructionSequence.compile_option
+
+# => {:inline_const_cache=>true,
+# :peephole_optimization=>true,
+# :tailcall_optimization=>false,
+# :specialized_instruction=>true,
+# :operands_unification=>true,
+# :instructions_unification=>false,
+# :frozen_string_literal=>false,
+# :debug_frozen_string_literal=>false,
+# :coverage_enabled=>true,
+# :debug_level=>0}
+```
+#@end
+#@if(version < "3.3")
 ```ruby title="例"
 require "pp"
 pp RubyVM::InstructionSequence.compile_option
@@ -90,12 +125,12 @@ pp RubyVM::InstructionSequence.compile_option
 # :operands_unification=>true,
 # :instructions_unification=>false,
 # :stack_caching=>false,
-# :trace_instruction=>true,
 # :frozen_string_literal=>false,
 # :debug_frozen_string_literal=>false,
 # :coverage_enabled=>true,
 # :debug_level=>0}
 ```
+#@end
 
 - **SEE** [m:RubyVM::InstructionSequence.compile_option=]
 
@@ -117,9 +152,10 @@ options で指定します。
     * :operands_unification
     * :peephole_optimization
     * :specialized_instruction
+#@if(version < "3.3")
     * :stack_caching
+#@end
     * :tailcall_optimization
-    * :trace_instruction
   ```
                :debug_level をキーに指定した場合は値を数値で指定します。
 
