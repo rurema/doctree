@@ -237,9 +237,9 @@ pipeline.call('testfile') # => ["Hello", "World", "Hello", "Ruby"]
 
 ただし、メソッドが可変長引数を受け付ける場合、負の整数
 
-`````
+```text
 -(必要とされる引数の数 + 1)
-`````
+```
 
 を返します。C 言語レベルで実装されたメソッドが可変長引数を
 受け付ける場合、-1 を返します。
@@ -278,9 +278,9 @@ self を読みやすい文字列として返します。
 
 以下の形式の文字列を返します。
 
-`````
+```text
 #<Method: klass1(klass2)#method(arg) foo.rb:2>    (形式1)
-`````
+```
 
 klass1 は、[m:Method#inspect] では、レシーバのクラス名、
 [m:UnboundMethod#inspect] では、[c:UnboundMethod] オブジェクトの生成
@@ -310,15 +310,15 @@ p Bar.new.method(:bar)        # => #<Method: Bar#bar(a, b) test.rb:8>
 ```
 
 klass1 と klass2 が同じ場合は以下の形式になります。
-`````
+```text
 #<Method: klass1#method() foo.rb:2>             (形式2)
-`````
+```
 
 特異メソッドに対しては、
-`````
+```text
 #<Method: obj.method() foo.rb:2>                (形式3)
 #<Method: klass1(klass2).method() foo.rb:2>     (形式4)
-`````
+```
 という形式の文字列を返します。二番目の形式では klass1 はレシーバ、
 klass2 は実際にそのメソッドを定義しているオブジェクトになります。
 

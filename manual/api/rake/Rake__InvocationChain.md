@@ -5,14 +5,13 @@ library: rake
 
 循環したタスクの呼び出しを検出するためのクラスです。
 
-例:
-`````
+```ruby title="例"
 a = Rake::InvocationChain::EMPTY
 b = a.append('task_a').append('task_b')
 p b.to_s  # => "TOP => task_a => task_b"
   
 a.append('task_a').append('task_b').append('task_a') # => 例外発生
-`````
+```
 
 ## Public Instance Methods
 

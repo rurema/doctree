@@ -603,13 +603,13 @@ p doc.root # => <e a='b' x:a='c' b='d'/>
 
 attrs には [c:Hash] もしくは [c:Array] を指定できます。
 Hash の場合は、
-`````
+```text
 { "name1" => "value1", "name2" => "value2", ... }
-`````
+```
 という形で、配列の場合は
-`````
+```text
 [ ["name1", "value1"], ["name2", "value2"], ... }
-`````
+```
 という形で追加/更新する属性を指定します。
 
 - **param** `attrs` -- 追加する属性の属性名と属性値の対の集合(Array or Hash)

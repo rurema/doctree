@@ -8,7 +8,7 @@ require:
 ---
 Gem パッケージの取得元の情報を管理するためのライブラリです。
 
-`````
+```text
 Usage: gem sources [options]
   Options:
     -a, --add SOURCE_URI             取得元を追加します
@@ -16,14 +16,14 @@ Usage: gem sources [options]
     -r, --remove SOURCE_URI          取得元を削除します
     -u, --update                     取得元のキャッシュを更新します
     -c, --clear-all                  全ての取得元を削除し、キャッシュもクリアします
-`````
+```
 #@include(common_options)
-```````
+```text
 Summary:
   Gem パッケージの取得元の情報を管理します
 Defaults:
   --list
-```````
+```
 
 
 

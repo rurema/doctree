@@ -68,9 +68,9 @@ end
 パースエラーが起きた(XML上の)場所を返します。
 
 要素3個の配列で、
-`````
+```text
 [position, lineno, line]
-`````
+```
 という形で返します。
 position, line は
 [m:REXML::ParseException#position]

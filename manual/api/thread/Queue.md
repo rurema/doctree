@@ -13,7 +13,7 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 
 ### 例
 
-`````
+```ruby
 require 'thread'
 
 q = Queue.new
@@ -29,16 +29,16 @@ end
 }
 
 th1.join
-`````
+```
 
 実行すると以下のように出力します。
 
-`````
+```console
 $ ruby que.rb
 resource1
 resource2
 resource3
-`````
+```
 
 ## Class Methods
 
@@ -198,7 +198,7 @@ close する事でループから脱出する事もできます。
 
 例:
 
-`````
+```ruby
 q = Queue.new
 Thread.new{
   while e = q.deq # wait for nil to break loop
@@ -206,7 +206,7 @@ Thread.new{
   end
 }
 q.close
-`````
+```
 
 ### def closed? -> bool
 

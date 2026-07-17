@@ -194,7 +194,7 @@ ruby -run -e mkmf -- [OPTION] EXTNAME [OPTION]
 
 WEBrick HTTP server を起動します。
 
-`````
+```console
 ruby -run -e httpd -- [OPTION] [DocumentRoot]
 
 --bind-address=ADDR         バインドアドレスを指定します
@@ -204,15 +204,9 @@ ruby -run -e httpd -- [OPTION] [DocumentRoot]
 --do-not-reverse-lookup     逆引きを無効にします
 --request-timeout=SECOND    リクエストがタイムアウトする秒数を指定します
 --http-version=VERSION      HTTP version
-`````
-`````
 --server-name=NAME          サーバーのホスト名を指定します
 --server-software=NAME      サーバーの名前とバージョンを指定します
-`````
-`````
 --ssl-certificate=CERT      サーバーの SSL 証明書ファイルを指定します
 --ssl-private-key=KEY       サーバーの SSL 証明書の秘密鍵を指定します
-`````
-`````
 -v                          詳細表示
-`````
+```

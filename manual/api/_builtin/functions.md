@@ -483,13 +483,13 @@ pid = spawn(command, [:out, :err]=>["log", "w"])
 これはファイルデスクリプタを直接指定するのと異なるということに
 注意してください。
 例えば、
-`````
+```text
 :err => :out
-`````
+```
 とすると、子プロセスの stderr を親プロセスの stdout にリダイレクトします。
-`````
+```text
 :err => [:child, :out]
-`````
+```
 とすると、子プロセスの stderr を子プロセスの stdout にリダイレクトします。
 これを用いて、[m:IO.popen] で、子プロセスの
 stderr と stdout を混ぜる例を以下に示します。
@@ -598,12 +598,12 @@ puts '実行後'
 
 上記のスクリプトを実行すると以下のようになります。
 
-`````
+```console
 $ ruby a.rb
 実行前
 実行中
 # '実行後' は表示されない
-`````
+```
 
 ### module_function def exec(program, *args, options={}) -> ()
 ### module_function def exec(env, program, *args, options={}) -> ()
@@ -650,13 +650,13 @@ exec ['sleep', 'mysleep'], '600'
 
 上記スクリプトを実行すると以下のようになります。
 
-`````
+```console
 $ ruby a.rb
 ## sleep してるので制御が戻ってこない。別の仮想端末に切替えて以下を実行
 $ ps aux|grep sleep
 xxxx    32754  0.0  0.0   2580   468 pts/3    S+   22:01   0:00 mysleep 600
 xxxx    32761  0.0  0.0   2824   792 pts/6    S+   22:01   0:00 grep sleep
-`````
+```
 
 - **SEE** [m:Kernel?.system],[m:Kernel?.`],[m:Kernel?.spawn],[m:Kernel?.fork],[m:IO.popen],[m:IO.pipe],[m:Kernel?.open],[man:exec(3)]
 
@@ -1053,9 +1053,9 @@ end
 ### module_function def require_relative(relative_feature) -> bool
 現在のファイルからの相対パスで require します。
 
-`````
+```ruby
 require File.expand_path(relative_feature, File.dirname(__FILE__))
-`````
+```
 とほぼ同じです。
 
 [m:Kernel?.eval] などで文字列を評価した場合に、そこから

@@ -320,11 +320,9 @@ GC 内部の統計情報を [c:Hash] で返します。
 - **return** -- GC 内部の統計情報を[c:Hash] で返します。
         引数 key を指定した場合は数値を返します。
 
-`````
+```ruby
 GC.stat
 # =>
-`````
-``````
 {
   :count=>0,
   :heap_allocated_pages=>24,
@@ -353,7 +351,7 @@ GC.stat
   :oldmalloc_increase_bytes=>2389760,
   :oldmalloc_increase_bytes_limit=>16777216
 }
-``````
+```
 
 戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
 

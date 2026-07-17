@@ -7,15 +7,15 @@ require:
 ローカルにインストールされている Gem パッケージとそのドキュメントを HTTP サーバに
 載せて公開するためのライブラリです。
 
-`````
+```text
 Usage: gem server [options]
   Options:
     -p, --port=PORT                  port to listen on
     -d, --dir=GEMDIR                 directory from which to serve gems
         --[no-]daemon                run as a daemon
-`````
+```
 #@include(common_options)
-```````
+```text
 Summary:
   Documentation and gem repository HTTP server
 Description:
@@ -30,7 +30,7 @@ Description:
   http://gem_server_host:8808`
 Defaults:
   --port 8808 --dir /usr/lib/ruby/gems/1.8 --no-daemon
-```````
+```
 
 
 # class Gem::Commands::ServerCommand < Gem::Command

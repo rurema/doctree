@@ -853,9 +853,9 @@ object を出力します。object が文字列でない時にはメソッ
 
 以下のような << の連鎖を使うことができます。
 
-`````
+```ruby
 STDOUT << 1 << " is a " << Integer << "\n"
-`````
+```
 
 - **param** `object` -- 出力したいオブジェクトを与えます。
 
@@ -1837,29 +1837,23 @@ p outbuf
 
 書き込み用にバッファリングされた IO に対して実行すると警告が出ます。
 
-`````
+```ruby
 File.open("/dev/zero") {|f|
   buf = f.read(3)
   f.sysseek(0)
 }
-`````
 #@since 3.4
-`````
 # => -:3:in 'sysseek': sysseek for buffered IO (IOError)
-`````
 #@else
-`````
 # => -:3:in `sysseek': sysseek for buffered IO (IOError)
-`````
 #@end
   
-`````
 File.open("/dev/null", "w") {|f|
   f.print "foo"
   f.sysseek(0)
 }
 # => -:3: warning: sysseek for buffered IO
-`````
+```
 
 - **param** `offset` -- ファイルポインタを移動させるオフセットを整数で指定します。
 

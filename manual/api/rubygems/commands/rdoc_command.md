@@ -7,7 +7,7 @@ require:
 ---
 RDoc と ri のライブラリを生成するためのライブラリです。
 
-`````
+```text
 Usage: gem rdoc [args] [options]
   Options:
         --all                        インストールされている全ての Gem パッケージの
@@ -15,9 +15,9 @@ Usage: gem rdoc [args] [options]
         --[no-]rdoc                  RDoc を含めます
         --[no-]ri                    RI を含めます
     -v, --version VERSION            指定したバージョンのドキュメントを生成します
-`````
+```
 #@include(common_options)
-```````
+```text
 Arguments:
   GEMNAME       ドキュメントを生成する Gem パッケージを指定します。省略すると全ての
                 Gem パッケージのドキュメントを生成します。
@@ -25,7 +25,7 @@ Summary:
   RDoc/RI ドキュメントを生成します
 Defaults:
   --version '>= 0' --rdoc --ri
-```````
+```
 
 # class Gem::Commands::RdocCommand < Gem::Command
 

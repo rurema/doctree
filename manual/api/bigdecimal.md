@@ -176,9 +176,9 @@ BigDecimal内部で浮動小数点は構造体(Real)で表現されます。
 そのうち仮数部は unsigned long の配列 (以下の構造体要素 frac) で管理されます。
 概念的には、以下のようになります。
 
-`````
+```text
 <浮動小数点数> = 0.xxxxxxxxx * BASE ** n
-`````
+```
 
 ここで、x は仮数部を表す数字、BASE は基数 (10 進表現なら 10)、
 n は指数部を表す整数値です。BASEが大きいほど、大きな数値が表現できます。
@@ -192,7 +192,7 @@ BASE が 10000 のときは、以下の仮数部の配列 (frac) の各要素に
 
 浮動小数点構造体 (Real) は以下のようになっています。
 
-`````
+```c
 typedef struct {
    unsigned long MaxPrec; // 最大精度(frac[]の配列サイズ)
    unsigned long Prec;    // 精度(frac[]の使用サイズ)
@@ -208,13 +208,13 @@ typedef struct {
    int      exponent;     // 指数部の値(仮数部*BASE**exponent)
    unsigned long frac[1]; // 仮数部の配列(可変)
 } Real;
-`````
+```
 
 例えば BASE=10000 のとき 1234.56784321 という数字は、
 
-```````
+```text
 0.1234 5678 4321*(10000)**1
-```````
+```
 
 ですから frac[0] = 1234、frac[1] = 5678、frac[2] = 4321、
 Prec = 3、sign = 2、exponent = 1 となります。

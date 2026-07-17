@@ -305,10 +305,10 @@ p Vector[1, 0].angle_with(Vector[0, 1]) # => Math::PI/2
 
 self とベクトルの列 vectors が線形独立であれば true を返します。
 
-`````
+```ruby
 require 'matrix'
 Vector.independent?(self, *vectors)
-`````
+```
 
 と同じです。
 

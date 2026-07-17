@@ -5,11 +5,11 @@ require:
 ---
 RubyGems の環境に関する情報を表示するためのライブラリです。
 
-`````
+```text
 Usage: gem environment [arg] [options]
-`````
+```
 #@include(common_options)
-```````
+```text
 Arguments:
   packageversion  gem のバージョンを表示します
   gemdir          Gem パッケージのインストール先を表示します
@@ -19,7 +19,7 @@ Arguments:
   <omitted>       省略すると全て表示します
 Summary:
   RubyGems の環境や設定を表示します
-```````
+```
 
 # class Gem::Commands::EnvironmentCommand < Gem::Command
 

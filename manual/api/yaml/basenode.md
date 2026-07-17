@@ -52,10 +52,8 @@ YAML のノードを検索するのためのモジュールです。
 
 - **param** `ypath_str` -- 検索するパスを文字列で指定します。
 
-`````
+```ruby
 require 'syck'
-`````
-`````
 require 'yaml'
   
 node = YAML.parse(DATA)
@@ -70,7 +68,7 @@ dog:
   shiba:
    - name: jiro
      age: 23
-`````
+```
 
 ### def select(ypath_str) -> [YAML::Syck::Node]
 
@@ -78,10 +76,8 @@ dog:
 
 - **param** `ypath_str` -- 検索するパスを文字列で指定します。
 
-`````
+```ruby
 require 'syck'
-`````
-`````
 require 'yaml'
   
 node = YAML.parse(DATA)
@@ -101,7 +97,7 @@ dog:
   shiba:
    - name: jiro
      age: 23
-`````
+```
 
 ### def select!(ypath_str) -> [object]
 
@@ -111,10 +107,8 @@ dog:
 
 - **param** `ypath_str` -- 検索するパスを文字列で指定します。
 
-`````
+```ruby
 require 'syck'
-`````
-`````
 require 'yaml'
   
 node = YAML.parse(DATA)
@@ -132,6 +126,6 @@ dog:
   shiba:
    - name: jiro
      age: 23
-`````
+```
 
 - **SEE** [m:Syck::Node#transform]

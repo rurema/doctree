@@ -989,14 +989,12 @@ class Bar < Foo
 end
 ```
 
-実行結果
-
-````````
+```text title="実行結果"
 [:protected_foo, :public_foo]
 [:public_foo]
 [:private_foo]
 [:protected_foo]
-````````
+```
 
 ```ruby title="例2"
 class Bar
@@ -1014,14 +1012,12 @@ p Bar.private_instance_methods(true)   - Object.private_instance_methods(true)
 p Bar.protected_instance_methods(true) - Object.protected_instance_methods(true)
 ```
 
-実行結果
-
-````````
+```text title="実行結果"
 [:protected_foo, :public_foo]
 [:public_foo]
 [:private_foo]
 [:protected_foo]
-````````
+```
 
 ### def public_instance_method(name) -> UnboundMethod
 
@@ -1599,12 +1595,10 @@ class C
 end
 ```
 
-実行結果:
-
-`````
+```text title="実行結果"
 method C#foo was undefined
 method C#bar was undefined
-`````
+```
 
 ### def module_function() -> nil
 ### def module_function(name) -> String | Symbol

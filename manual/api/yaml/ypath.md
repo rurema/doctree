@@ -7,10 +7,8 @@ YAML ドキュメントから特定のデータを検索する機能を提供す
 
 使用例；"name" を含むセグメントを表示する。
 
-`````
+```ruby
 require 'syck'
-`````
-`````
 require 'yaml'
 
 YAML.parse_documents(DATA){|doc|
@@ -35,7 +33,7 @@ dog:
   - name: rokuro
     age: 1
 # end of sample
-`````
+```
 
 ### 参考
 
@@ -51,19 +49,15 @@ Rubyist Magazine: <https://magazine.rubyist.net/>
 
 - **param** `str` -- YPath でパース可能なパスを文字列で指定します。
 
-例:
-
-`````
+```ruby title="例"
 require 'syck'
-`````
-`````
 require 'yaml'
 
 str = "/ugo[:hoge]/0/name"
 
 p YAML::YPath.new(str)
 #=> #<YAML::YPath:0x3238cc @predicates=[":hoge", nil, nil], @segments=["ugo", "0", "name"], @flags=nil>
-`````
+```
 
 
 ### def each_path(str) {|ypath| ...} -> Array
@@ -75,31 +69,27 @@ p YAML::YPath.new(str)
 
 例1: YAML::YPath.each_path を使用する場合
 
-`````
+```text
 require 'syck'
-`````
-`````
 require 'yaml'
 
 path = "/*/((one|three)/name|place)|//place"
 YAML::YPath.each_path(path) { |ypath|
   ...
 }
-`````
+```
 
 例2: YAML::YPath.each_path を使用しない場合
 
-`````
+```text
 require 'syck'
-`````
-`````
 require 'yaml'
 
 ["/*/one/name", "/*/three/name", "/*/place", "//place"].each do |path|
   ypath = YAML::YPath.new(path)
   ...
 end
-`````
+```
 
 ## instance methods
 ### def segments -> [String]

@@ -28,12 +28,12 @@ DocType オブジェクトを生成します。
 [c:REXML::Source] オブジェクトの場合は、Source オブジェクトが
 保持しているDTDのテキストがパースされ、その内容によって DocType
 オブジェクトが初期化されます。
-`````
+```ruby
 REXML::DocType.new(Source.new(<<EOS))
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 EOS
-`````
+```
 このインターフェースは deprecated です。
 
 このメソッドは他のインターフェースもありますが、内部用なので使わないで

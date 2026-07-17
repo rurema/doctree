@@ -45,36 +45,22 @@ readline ライブラリがインストールされている時には
 
 ### irb のコマンドラインオプション
 
-`````
+```console
 irb [options] file_name opts
 options:
 -f                ~/.irbrc を読み込まない
-`````
-`````
 -d                $DEBUG を true にする (ruby -d と同じ)
-`````
-`````
 -w                ruby -w と同じ
 -W[level=2]       ruby -W と同じ
-`````
-`````
 -r library        ruby -r と同じ
 -I                ruby -I と同じ
-`````
-`````
 -U                ruby -U と同じ
 -E enc            ruby -E と同じ
-`````
-`````
 --verbose         これから実行する行を表示する
 --noverbose       これから実行する行を表示しない (デフォルト)
 --echo            実行結果を表示する (デフォルト)
 --noecho          実行結果を表示しない
-`````
-`````
 --inspect         結果出力にinspectを用いる
-`````
-`````
 --noinspect       結果出力にinspectを用いない
 --readline        readlineライブラリを利用する
 --noreadline      readlineライブラリを利用しない。デフォルトでは
@@ -102,10 +88,8 @@ options:
                   (ユーザは利用すべきではない)
 -v, --version     irb のバージョンを表示する
 -h, --help        irb のヘルプを表示する
-`````
-`````
 --                以降のコマンドライン引数をオプションとして扱わない
-`````
+```
 
 ### irb のカスタマイズ
 
@@ -127,7 +111,7 @@ irb コマンドは起動時に以下のパスを上から順番に探索し、
 以下のような (Ruby の) 式を .irbrc に記述すると、
 irb コマンドのオプションを指定したのと同じ効果が得られます。
 
-`````
+```text
 IRB.conf[:AUTO_INDENT] = false
 IRB.conf[:BACK_TRACE_LIMIT] = 16
 IRB.conf[:DEBUG_LEVEL] = 1
@@ -139,21 +123,15 @@ IRB.conf[:IGNORE_SIGINT] = true
 IRB.conf[:INSPECT_MODE] = nil
 IRB.conf[:IRB_NAME] = "irb"
 IRB.conf[:IRB_RC] = nil
-`````
-`````
 IRB.conf[:PROMPT] = {....}
 IRB.conf[:PROMPT_MODE] = :DEFAULT
 IRB.conf[:SINGLE_IRB] = false
-`````
-`````
 IRB.conf[:SAVE_HISTORY] = 1000
-`````
-`````
 IRB.conf[:USE_LOADER] = true
 IRB.conf[:USE_READLINE] = nil
 IRB.conf[:USE_TRACER] = true
 IRB.conf[:VERBOSE] = true
-`````
+```
 
 それぞれの設定値の詳細については、[c:IRB::Context] を参照してください。
 

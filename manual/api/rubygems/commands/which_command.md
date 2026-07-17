@@ -10,21 +10,21 @@ require:
 
 指定された Gem パッケージに含まれるライブラリのパスを見つけるためのクラスです。
 
-`````
+```text
 Usage: gem which FILE [...] [options]
   Options:
     -a, --[no-]all                   show all matching files
     -g, --[no-]gems-first            search gems before non-gems
-`````
+```
 #@include(common_options)
-```````
+```text
 Arguments:
   FILE          Gem パッケージ名を指定します
 Summary:
   指定された Gem パッケージのライブラリのある場所を表示します
 Defaults:
   --no-gems-first --no-all
-```````
+```
 
 
 ## Public Instance Methods

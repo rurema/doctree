@@ -245,10 +245,10 @@ p trace.enabled? # => true
 [注意] イベントフックのためのメソッドに、ブロックの外側で参照した場合は
 [c:RuntimeError] が発生する事に注意してください。
 
-`````
+```ruby
 trace.enable { p trace.lineno }
 # => RuntimeError: access from outside
-`````
+```
 
 - **SEE** [m:TracePoint#enable], [m:TracePoint#enabled?]
 

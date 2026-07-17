@@ -99,9 +99,9 @@ XML文書を source から読み込み、パースした結果を
 listener にコールバックで伝えます。
 
 このメソッドは
-`````
+```ruby
 Parsers::StreamParser.new( source, listener ).parse
-`````
+```
 と同じ挙動をします。
 
 コールバックの詳しい仕組みなどについては [c:REXML::Parsers::StreamParser]
