@@ -1365,7 +1365,7 @@ self の生成時に headers オプションに偽でない値が指定されて
 require "csv"
 
 csv = CSV.new(DATA.read)
-csv.read
+p csv.read
 # => [["header1", "header2"], ["row1_1", "row1_2"], ["row2_1", "row2_2"]]
 
 __END__
@@ -1378,7 +1378,7 @@ row2_1,row2_2
 require "csv"
 
 csv = CSV.new(DATA.read, headers: true)
-csv.read
+p csv.read
 # => #<CSV::Table mode:col_or_row row_count:3>
 
 __END__

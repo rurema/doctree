@@ -22,7 +22,7 @@ EOS
 pretty_formatter = REXML::Formatters::Pretty.new
 output = StringIO.new
 pretty_formatter.write(doc, output)
-output.string
+p output.string
 # => "<root>\n  <children>\n    <grandchildren foo='bar'/>\n  </children>\n</root>"
 # この出力結果は入力のXMLよりも空白が増えている
 ```

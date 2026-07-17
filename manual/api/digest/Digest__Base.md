@@ -60,7 +60,7 @@ p Digest::MD5.base64digest('ruby') # => "WOU9EyTu9iZf25ewjtmq3w=="
 ```ruby title="使用例(SHA256の場合)"
 require 'digest'
 digest = Digest::SHA256.file("X11R6.8.2-src.tar.bz2")
-digest.hexdigest
+p digest.hexdigest
 # => "f02e3c85572dc9ad7cb77c2a638e3be24cc1b5bea9fdbb0b0299c9668475c534"
 ```
 

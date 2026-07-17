@@ -144,7 +144,7 @@ self を各要素の名前をキー([c:Symbol])、要素が値のハッシュに
 require 'ostruct'
 data = OpenStruct.new("country" => "Australia", :capital => "Canberra")
 p data.to_h # => {:country => "Australia", :capital => "Canberra" }
-data.to_h {|name, value| [name.to_s, value.upcase] }
+p data.to_h {|name, value| [name.to_s, value.upcase] }
             # => {"country" => "AUSTRALIA", "capital" => "CANBERRA" }
 ```
 

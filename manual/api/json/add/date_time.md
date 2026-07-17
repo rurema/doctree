@@ -27,7 +27,7 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 ```ruby title="例"
 require "json/add/core"
 
-DateTime.now.to_json
+p DateTime.now.to_json
 # => "{\"json_class\":\"DateTime\",\"y\":2018,\"m\":12,\"d\":10,\"H\":1,\"M\":28,\"S\":57,\"of\":\"3/8\",\"sg\":2299161.0}"
 ```
 

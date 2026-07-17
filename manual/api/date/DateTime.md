@@ -175,7 +175,7 @@ XML Schema による書式の日付を解析し、
 
 ```ruby title="例"
 require 'date'
-DateTime.parse('2001-02-03T12:13:14Z').to_s
+p DateTime.parse('2001-02-03T12:13:14Z').to_s
 # => "2001-02-03T12:13:14+00:00"
 ```
 
@@ -190,7 +190,7 @@ DateTime.parse('2001-02-03T12:13:14Z').to_s
 
 ```ruby title="例"
 require 'date'
-DateTime._strptime('2001-02-03T12:13:14Z')
+p DateTime._strptime('2001-02-03T12:13:14Z')
 # => {:year=>2001, :mon=>2, :mday=>3, :hour=>12, :min=>13, :sec=>14, :zone=>"Z", :offset=>0}
 ```
 
@@ -210,7 +210,7 @@ DateTime._strptime('2001-02-03T12:13:14Z')
 
 ```ruby title="例"
 require 'date'
-DateTime.strptime('2001-02-03T12:13:14Z').to_s
+p DateTime.strptime('2001-02-03T12:13:14Z').to_s
 # => "2001-02-03T12:13:14+00:00"
 ```
 
@@ -235,7 +235,7 @@ strftime('%FT%T%:z') と等価です。
 
 ```ruby title="例"
 require 'date'
-DateTime.parse('2001-02-03T04:05:06.123456789+07:00').iso8601(9)
+p DateTime.parse('2001-02-03T04:05:06.123456789+07:00').iso8601(9)
 #=> "2001-02-03T04:05:06.123456789+07:00"
 ```
 
@@ -247,7 +247,7 @@ JIS X 0301 書式の文字列を返します。
 
 ```ruby title="例"
 require 'date'
-DateTime.parse('2001-02-03T04:05:06.123456789+07:00').jisx0301(9)
+p DateTime.parse('2001-02-03T04:05:06.123456789+07:00').jisx0301(9)
 #=> "H13.02.03T04:05:06.123456789+07:00"
 ```
 

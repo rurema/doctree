@@ -60,7 +60,7 @@ xml = <<EOS
 EOS
 listener = Listener.new
 REXML::Parsers::StreamParser.new(xml, listener).parse
-listener.events
+p listener.events
 # => ["tag_start[members]",
 #     "text[\n  ]",
 #     "tag_start[member]",

@@ -66,7 +66,7 @@ end
 
 json = JSON.generate(User.new(1, "tanaka"))
 p json # => "{\"json_class\":\"User\",\"id\":1,\"name\":\"tanaka\"}"
-JSON.parse(json, create_additions: true)
+p JSON.parse(json, create_additions: true)
 # => #<User:0x0000557709b269e0 @id=1, @name="tanaka">
 ```
 
@@ -225,10 +225,10 @@ unparse は将来削除される予定です。
 ```ruby title="例"
 require "json"
 
-JSON.generate([1, 2, { name: "tanaka", age: 19 }])
+p JSON.generate([1, 2, { name: "tanaka", age: 19 }])
 # => "[1,2,{\"name\":\"tanaka\",\"age\":19}]"
 json_state = JSON::State.new(space: " ")
-JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
+p JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
 # => "[1,2,{\"name\": \"tanaka\",\"age\": 19}]"
 ```
 

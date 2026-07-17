@@ -68,7 +68,7 @@ SSLv2 は無効化して SSLv3 と TLSv1 の両方を有効化するためには
 ```ruby title="例"
 require 'openssl'
 ctx = OpenSSL::SSL::SSLContext.new('TLSv1')
-ctx.ciphers
+p ctx.ciphers
 # => [["DHE-RSA-AES256-SHA", "TLSv1/SSLv3", 256, 256], 
 #     ["DHE-DSS-AES256-SHA", "TLSv1/SSLv3", 256, 256], ... ]
 ```
@@ -769,7 +769,7 @@ end
 
 ```ruby
 require 'openssl'
-OpenSSL::SSL::SSLContext::METHODS
+p OpenSSL::SSL::SSLContext::METHODS
 # => [:TLSv1, :TLSv1_server, :TLSv1_client, :SSLv2, :SSLv2_server, ...]
 ```
 

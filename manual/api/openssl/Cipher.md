@@ -133,7 +133,7 @@ p decrypted_data
 ```ruby
 require 'openssl'
 
-OpenSSL::Cipher.ciphers 
+p OpenSSL::Cipher.ciphers
 # => ["AES-128-CBC", "AES-128-CFB", "AES-128-CFB1", "AES-128-CFB8", "AES-128-ECB", "AES-128-OFB", "AES-192-CBC", ... ]
 ```
 

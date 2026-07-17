@@ -13,7 +13,7 @@ trace = TracePoint.new(:raise) do |tp|
 end
 # => #<TracePoint:0x007f786a452448>
 
-trace.enable
+p trace.enable
 # => false
 
 0 / 0
@@ -46,7 +46,7 @@ trace = TracePoint.new(:call) do |tp|
 end
 # => #<TracePoint:0x007f17372cdb20>
 
-trace.enable
+p trace.enable
 # => false
 
 puts "Hello, TracePoint!"
@@ -297,7 +297,7 @@ trace = TracePoint.new(:call, :return) do |tp|
   p tp.event
 end
 trace.enable
-foo 1
+p foo 1
 # => :call
 # :return
 ```
@@ -316,7 +316,7 @@ trace = TracePoint.new(:call, :return) do |tp|
   tp.lineno
 end
 trace.enable
-foo 1
+p foo 1
 # => 1
 # 3
 ```

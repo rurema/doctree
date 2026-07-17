@@ -1100,9 +1100,9 @@ h3 = { "b" => 357, "d" => 400 }
 p h1.merge        #=> {"a"=>100, "b"=>200}
 p h1.merge(h2)    #=> {"a"=>100, "b"=>246, "c"=>300}
 p h1.merge(h2, h3)  #=> {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
-h1.merge(h2) {|key, oldval, newval| newval - oldval}
+p h1.merge(h2) {|key, oldval, newval| newval - oldval}
                   #=> {"a"=>100, "b"=>46,  "c"=>300}
-h1.merge(h2, h3) {|key, oldval, newval| newval - oldval}
+p h1.merge(h2, h3) {|key, oldval, newval| newval - oldval}
                   #=> {"a"=>100, "b"=>311, "c"=>300, "d"=>400}
 p h1              #=> {"a"=>100, "b"=>200}
 ```
@@ -1184,7 +1184,7 @@ p h1               #=> {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
 h1 = { "a" => 100, "b" => 200 }
 h2 = { "b" => 246, "c" => 300 }
 h3 = { "b" => 357, "d" => 400 }
-h1.merge!(h2, h3) {|key, v1, v2| v1 }
+p h1.merge!(h2, h3) {|key, v1, v2| v1 }
                    #=> {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
 p h1               #=> {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
 ```
@@ -1451,7 +1451,7 @@ p h2.keep_if { |k, v| true }      # => {0=>"a", 3=>"d", 6=>"g"}
 h = { a: 1, b: 2, c: 3 }
 p h.transform_values {|v| v * v + 1 }  #=> { a: 2, b: 5, c: 10 }
 p h.transform_values(&:to_s)         #=> { a: "1", b: "2", c: "3" }
-h.transform_values.with_index {|v, i| "#{v}.#{i}" }
+p h.transform_values.with_index {|v, i| "#{v}.#{i}" }
                                      #=> { a: "1.0", b: "2.1", c: "3.2" }
 ```
 
@@ -1472,7 +1472,7 @@ h.transform_values.with_index {|v, i| "#{v}.#{i}" }
 h = { a: 1, b: 2, c: 3 }
 p h.transform_values! {|v| v * v + 1 }  #=> { a: 2, b: 5, c: 10 }
 p h.transform_values!(&:to_s)         #=> { a: "2", b: "5", c: "10" }
-h.transform_values!.with_index {|v, i| "#{v}.#{i}" }
+p h.transform_values!.with_index {|v, i| "#{v}.#{i}" }
                                       #=> { a: "2.0", b: "5.1", c: "10.2" }
 ```
 
@@ -1493,7 +1493,7 @@ h = { a: 1, b: 2, c: 3 }
 p h.transform_keys {|k| k.to_s } # => {"a"=>1, "b"=>2, "c"=>3}
 p h.transform_keys(a: "a", d: "d") # => {"a"=>1, :b=>2, :c=>3}
 p h.transform_keys(&:to_s)       # => {"a"=>1, "b"=>2, "c"=>3}
-h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
+p h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
                                  # => {"a.0"=>1, "b.1"=>2, "c.2"=>3}
 ```
 
@@ -1519,7 +1519,7 @@ h = { a: 1, b: 2, c: 3 }
 p h.transform_keys! {|k| k.to_s } # => {"a"=>1, "b"=>2, "c"=>3}
 p h.transform_keys!(&:to_sym)     # => {:a=>1, :b=>2, :c=>3}
 p h.transform_keys!(a: "a", d: "d") # => {"a"=>1, :b=>2, :c=>3}
-h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
+p h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
                                   # => {"a.0"=>1, "b.1"=>2, "c.2"=>3}
 ```
 

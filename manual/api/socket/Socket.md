@@ -207,10 +207,10 @@ Socket::NI_DGRAM
 ```ruby
 require 'socket'
 
-Socket.getnameinfo(Socket.sockaddr_in('21','127.0.0.1'))
+p Socket.getnameinfo(Socket.sockaddr_in('21','127.0.0.1'))
 #=> ["localhost", "ftp"]
   
-Socket.getnameinfo([nil, 21,'127.0.0.1'])
+p Socket.getnameinfo([nil, 21,'127.0.0.1'])
 #=> ["localhost", "ftp"]
 ```
 

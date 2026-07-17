@@ -84,7 +84,7 @@ p /#{place}/.match("Go to 東京都") # => #<MatchData "東京都">
 ```ruby
 number = "(\\d+)"
 operator = "(\\+|-|\\*|/)"
-/#{number}#{operator}#{number}/.match("43+291") 
+p /#{number}#{operator}#{number}/.match("43+291")
 # => #<MatchData "43+291" 1:"43" 2:"+" 3:"291">
 ```
 
@@ -400,7 +400,7 @@ p m[:cents] # => "67"
 名前付きキャプチャは正規表現内で \k<name>、\k'name' という記法で参照できます。
 
 ```ruby
-/(?<vowel>[aeiou]).\k<vowel>.\k<vowel>/.match('ototomy')
+p /(?<vowel>[aeiou]).\k<vowel>.\k<vowel>/.match('ototomy')
 # => #<MatchData "ototo" vowel:"o">
 ```
 
@@ -443,7 +443,7 @@ p /(.)(.)\k<-2>\k<-1>/.match("xyzyz") # => #<MatchData "yzyz" 1:"y" 2:"z">
 p /[aeiou]\w{2}/.match("Caenorhabditis elegans") #=> #<MatchData "aen">
 # Whereas the following pattern matches a vowel followed by a word
 # character, twice, i.e. <tt>[aeiou]\w[aeiou]\w</tt>: 'enor'.
-/([aeiou]\w){2}/.match("Caenorhabditis elegans")
+p /([aeiou]\w){2}/.match("Caenorhabditis elegans")
     #=> #<MatchData "enor" 1:"or">
 ```
 
@@ -453,12 +453,12 @@ p /[aeiou]\w{2}/.match("Caenorhabditis elegans") #=> #<MatchData "aen">
 ```ruby
 # 最初のキャプチャは n で二番目のキャプチャが ti であり、
 # \2 で二番目のキャプチャを後方参照しています
-/I(n)ves(ti)ga\2ons/.match("Investigations")
+p /I(n)ves(ti)ga\2ons/.match("Investigations")
     # => #<MatchData "Investigations" 1:"n" 2:"ti">
 # 最初のグループは (?: ) を使っているのでキャプチャが作られず、
 # 1番目は ti がキャプチャされます。
 # そして ti を \1 で参照しています。
-/I(?:n)ves(ti)ga\1ons/.match("Investigations")
+p /I(?:n)ves(ti)ga\1ons/.match("Investigations")
     # => #<MatchData "Investigations" 1:"ti">
 ```
 
@@ -564,7 +564,7 @@ p /\A(?<paren>\(\g<paren>*\))*\z/ =~ '(())' # => 0
 以下の例は回文にマッチする正規表現です。
 
 ```ruby
-/\A(?<a>|.|(?:(?<b>.)\g<a>\k<b+0>))\z/.match("rekxker")
+p /\A(?<a>|.|(?:(?<b>.)\g<a>\k<b+0>))\z/.match("rekxker")
 # => #<MatchData "rekxker" a:"rekxker" b:"k">
 ```
 
@@ -579,7 +579,7 @@ r = Regexp.compile(<<'__REGEXP__'.strip, Regexp::EXTENDED)
 (?<etag> </ \k<name+1> >){0}
 \g<element>
 __REGEXP__
-r.match('<foo>f<bar>bbb</bar>f</foo>').captures
+p r.match('<foo>f<bar>bbb</bar>f</foo>').captures
 # => ["<foo>f<bar>bbb</bar>f</foo>", "<bar>", "bar", "f<bar>bbb</bar>f", "</foo>"]
 ```
 

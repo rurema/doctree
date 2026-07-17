@@ -30,7 +30,7 @@ p Encoding.aliases
 結合した文字列が取るであろう Encoding オブジェクトを返します。
 
 ```ruby title="例"
-Encoding.compatible?("\xa1".force_encoding("iso-8859-1"), "b")
+p Encoding.compatible?("\xa1".force_encoding("iso-8859-1"), "b")
 #=> #<Encoding:ISO-8859-1>
 
 Encoding.compatible?(
@@ -42,9 +42,9 @@ Encoding.compatible?(
 引数が文字列でない場合でも、両方のオブジェクトが encoding を持つ場合には
 互換性を判定できます。
 ```ruby title="例"
-Encoding.compatible?(Encoding::UTF_8, Encoding::CP932)
+p Encoding.compatible?(Encoding::UTF_8, Encoding::CP932)
 # => nil
-Encoding.compatible?(Encoding::UTF_8, Encoding::US_ASCII)
+p Encoding.compatible?(Encoding::UTF_8, Encoding::US_ASCII)
 # => #<Encoding:UTF-8>
 ```
 - **param** `obj1` -- チェック対象のオブジェクト
@@ -68,15 +68,15 @@ p Encoding.find("utf-8")       #=> #<Encoding:UTF-8>
 現在ロードされているエンコーディングのリストを返します。
 
 ```ruby title="例"
-Encoding.list
+p Encoding.list
 # => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
 #     #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
 #     #<Encoding:ISO-2022-JP (dummy)>]
 
-Encoding.find("US-ASCII")
+p Encoding.find("US-ASCII")
 # => #<Encoding:US-ASCII>
 
-Encoding.list
+p Encoding.list
 # => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
 #     #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
 #     #<Encoding:US-ASCII>, #<Encoding:ISO-2022-JP (dummy)>]
@@ -1276,7 +1276,7 @@ end
 通常エンコーディング変換時に発生します。
 
 ```ruby title="例"
-"\x82\xa0".force_encoding("cp932").encode("UTF-8")
+p "\x82\xa0".force_encoding("cp932").encode("UTF-8")
 #=> "あ"
 "\x82\xa0".force_encoding("EUC-JP").encode("UTF-8")
 #=> Encoding::InvalidByteSequenceError: "\x82" on EUC-JP

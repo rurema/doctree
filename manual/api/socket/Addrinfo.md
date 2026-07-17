@@ -82,7 +82,7 @@ TCP アドレスに対する Addrinfo オブジェクトを返します。
 ```ruby
 require 'socket'
 
-Addrinfo.tcp("localhost", "smtp") 
+p Addrinfo.tcp("localhost", "smtp")
 #=> #<Addrinfo: 127.0.0.1:25 TCP (localhost:smtp)>
 ```
 
@@ -96,7 +96,7 @@ UDP アドレスに対する Addrinfo オブジェクトを返します。
 ```ruby
 require 'socket'
 
-Addrinfo.udp("localhost", "daytime") 
+p Addrinfo.udp("localhost", "daytime")
 #=> #<Addrinfo: 127.0.0.1:13 UDP (localhost:daytime)>
 ```
 
@@ -159,7 +159,7 @@ socktype なしでは曖昧な指定となるためです。
 ```ruby title="例"
 require 'socket'
 
-Addrinfo.getaddrinfo("www.kame.net", 80, nil, :STREAM)
+p Addrinfo.getaddrinfo("www.kame.net", 80, nil, :STREAM)
 #=> [#<Addrinfo: 203.178.141.194:80 TCP (www.kame.net:80)>,
 #    #<Addrinfo: [2001:200:0:8002:203:47ff:fea5:3085]:80 TCP (www.kame.net:80)>]
 ```
@@ -422,7 +422,7 @@ struct sockaddr をパックした形式の文字列に変換します。
 ```ruby
 require 'socket'
 
-Addrinfo.tcp("localhost", 80).to_sockaddr
+p Addrinfo.tcp("localhost", 80).to_sockaddr
 #=> "\x02\x00\x00P\x7F\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00"
 ```
 
@@ -434,9 +434,9 @@ flags には Socket::NI_??? という名前の定数のビット OR を渡しま
 ```ruby
 require 'socket'
 
-Addrinfo.tcp("127.0.0.1", 80).getnameinfo
+p Addrinfo.tcp("127.0.0.1", 80).getnameinfo
 #=> ["localhost", "www"]
-Addrinfo.tcp("127.0.0.1", 80).getnameinfo(Socket::NI_NUMERICSERV)
+p Addrinfo.tcp("127.0.0.1", 80).getnameinfo(Socket::NI_NUMERICSERV)
 #=> ["localhost", "80"]
 ```
 
@@ -456,10 +456,10 @@ Addrinfo.tcp("127.0.0.1", 80).getnameinfo(Socket::NI_NUMERICSERV)
 ```ruby
 require 'socket'
 
-Addrinfo.tcp("0.0.0.0", 4649).family_addrinfo("www.ruby-lang.org", 80)
+p Addrinfo.tcp("0.0.0.0", 4649).family_addrinfo("www.ruby-lang.org", 80)
 #=> #<Addrinfo: 221.186.184.68:80 TCP (www.ruby-lang.org:80)>
   
-Addrinfo.unix("/tmp/sock").family_addrinfo("/tmp/sock2")
+p Addrinfo.unix("/tmp/sock").family_addrinfo("/tmp/sock2")
 #=> #<Addrinfo: /tmp/sock2 SOCK_STREAM>
 ```
 

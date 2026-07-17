@@ -183,7 +183,7 @@ end
 
 ```ruby
 require 'time'
-Time.strptime('2001-02-03T04:05:06+09:00', '%Y-%m-%dT%H:%M:%S%z')
+p Time.strptime('2001-02-03T04:05:06+09:00', '%Y-%m-%dT%H:%M:%S%z')
 #=> 2001-02-03 06:05:06 +0900
 ```
 

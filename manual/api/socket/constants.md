@@ -879,9 +879,9 @@ The service specified is a datagram service (looks up UDP ports)。
 ```ruby
 require 'socket'
   
-Socket.getnameinfo([ Socket::AF_INET, 514, "127.0.0.1"], Socket::NI_DGRAM)
+p Socket.getnameinfo([ Socket::AF_INET, 514, "127.0.0.1"], Socket::NI_DGRAM)
 # => ["localhost", "syslog"]
-Socket.getnameinfo([ Socket::AF_INET, 514, "127.0.0.1"])
+p Socket.getnameinfo([ Socket::AF_INET, 514, "127.0.0.1"])
 # => ["localhost", "shell"]
 ```
 
@@ -910,7 +910,7 @@ A name is required。名前解決できなかった場合にエラーを返す�
 require 'socket'
   
 # ここでは 192.0.2.18 は名前解決できないアドレス
-Addrinfo.tcp("192.0.2.18", 514).getnameinfo()
+p Addrinfo.tcp("192.0.2.18", 514).getnameinfo()
 # =>["192.0.2.18", "shell"] 
 Addrinfo.tcp("192.0.2.18", 514).getnameinfo(Socket::NI_NAMEREQD)
 # SocketError が発生する

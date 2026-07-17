@@ -307,7 +307,7 @@ UTF-7 を修正したものです。
 ```ruby
 require 'net/imap'
 
-Net::IMAP.format_date(Time.new(2011, 6, 20))
+p Net::IMAP.format_date(Time.new(2011, 6, 20))
 # => "20-Jun-2011"
 ```
 
@@ -319,7 +319,7 @@ Net::IMAP.format_date(Time.new(2011, 6, 20))
 ```ruby
 require 'net/imap'
 
-Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
+p Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
 # => "20-Jun-2011 13:20 +0900"
 ```
 
@@ -396,7 +396,7 @@ CAPABILITY コマンドを送ってサーバがサポートしている
 capability は IMAP に関連する RFC などで定義されています。
 
 ```ruby
-imap.capability
+p imap.capability
 # => ["IMAP4REV1", "UNSELECT", "IDLE", "NAMESPACE", "QUOTA", ... ]
 ```
 

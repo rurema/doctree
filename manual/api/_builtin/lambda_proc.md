@@ -68,7 +68,7 @@ Proc.new は引数を多重代入に近い扱い方をします。
 b = Proc.new{|a,b,c|
   p a,b,c
 }
-b.call(2, 4)
+p b.call(2, 4)
 #=> 2
     4
     nil
@@ -78,7 +78,7 @@ b.call(2, 4)
 b = lambda{|a,b,c|
   p a,b,c
 }
-b.call(2, 4)
+p b.call(2, 4)
 # => wrong number of arguments (given 2, expected 3)
 ```
 

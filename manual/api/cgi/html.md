@@ -23,7 +23,7 @@ HTML を生成するためのメソッドを提供するモジュールを定義
 HTML を生成するためのメソッドを提供するモジュールです。
 
 ```ruby title="例"
-cgi.a("http://www.example.com") { "Example" }
+p cgi.a("http://www.example.com") { "Example" }
   # => "<A HREF=\"http://www.example.com\">Example</A>"
 ```
 
@@ -53,7 +53,7 @@ base 要素を生成します。
 - **param** `href` -- 文字列を指定します。属性をハッシュで指定することもできます。
 
 ```ruby title="例"
-base("http://www.example.com/cgi")
+p base("http://www.example.com/cgi")
   # => "<BASE HREF=\"http://www.example.com/cgi\">"
 ```
 
@@ -97,7 +97,7 @@ caption 要素を生成します。
 - **param** `checked` -- checked 属性の値を指定します。
 
 ```ruby title="例"
-checkbox("name", "value", true)
+p checkbox("name", "value", true)
 # => "<INPUT CHECKED NAME=\"name\" TYPE=\"checkbox\" VALUE=\"value\">"
 ```
 
@@ -108,7 +108,7 @@ checkbox("name", "value", true)
 - **param** `attributes` -- 属性をハッシュで指定します。
 
 ```ruby title="例"
-checkbox("name" => "name", "value" => "value", "checked" => true)
+p checkbox("name" => "name", "value" => "value", "checked" => true)
 # => "<INPUT checked name=\"name\" TYPE=\"checkbox\" value=\"value\">"
 ```
 
