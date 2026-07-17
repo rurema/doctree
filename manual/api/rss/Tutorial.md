@@ -251,12 +251,12 @@ RSS Makerが便利です。
 
 以下のように使います。
 
-```text
+```ruby
 require "rss"
 
 rss = RSS::Maker.make("バージョン") do |maker|
   maker.XXX = YYY
-  ...
+  # ...
 end
 ```
 
@@ -586,10 +586,10 @@ RSS::Maker.make の第一引数を"0.91"に変更します。
 ただし、RSS 0.91では言語指定が必須なので、言語を指定する必要
 があります。ここでは日本語であると指定します。
 
-```text
+```ruby
 rss = RSS::Maker.make("0.91") do |maker|
   maker.channel.language = "ja"
-  ...
+  # ...
 end
 ```
 
@@ -599,10 +599,10 @@ RSS 1.0など、/rdf:RDF/channel/language要素がないフィードの場
 だけ言語を指定する」というように書く必要はありません。
 フィードのバージョンに関わらず言語を指定してください。
 
-```text
+```ruby
 rss = RSS::Maker.make("0.91") do |maker|
   maker.channel.language = "ja" if maker.feed_version == "0.91"
-  ...
+  # ...
 end
 ```
 
@@ -611,9 +611,9 @@ end
 もし、Atom 1.0を生成したい場合は、RSS 0.91や2.0の場合と同様に
 RSS::Maker.makeの第一引数を"atom"に変更します。
 
-```text
+```ruby
 rss = RSS::Maker.make("atom") do |maker|
-  ...
+  # ...
 end
 ```
 
@@ -710,10 +710,10 @@ rss20 = rss10.to_feed("rss2.0")
 種類がわからない複数のフィードを扱う場合は以下のようにし、す
 べてのフィードをRSS 2.0のように扱うことができます。
 
-```text
+```ruby
 feeds.each do |xml|
   rss20 = RSS::Parser.parse(xml).to_feed("rss2.0")
-  ...
+  # ...
 end
 ```
 

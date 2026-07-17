@@ -3,11 +3,11 @@ type: library
 ---
 ヤコビ行列を計算する機能を提供します。
 
-```text title="実行例"
+```ruby title="実行例"
 require "bigdecimal"
 require "bigdecimal/jacobian"
 
-...
+# ...
 
 dfdx = Jacobian.jacobian(f,fx,x)
 ```

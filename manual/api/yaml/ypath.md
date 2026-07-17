@@ -69,25 +69,25 @@ p YAML::YPath.new(str)
 
 例1: YAML::YPath.each_path を使用する場合
 
-```text
+```ruby
 require 'syck'
 require 'yaml'
 
 path = "/*/((one|three)/name|place)|//place"
 YAML::YPath.each_path(path) { |ypath|
-  ...
+  # ...
 }
 ```
 
 例2: YAML::YPath.each_path を使用しない場合
 
-```text
+```ruby
 require 'syck'
 require 'yaml'
 
 ["/*/one/name", "/*/three/name", "/*/place", "//place"].each do |path|
   ypath = YAML::YPath.new(path)
-  ...
+  # ...
 end
 ```
 

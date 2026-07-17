@@ -61,12 +61,12 @@ end
 
 例:
 
-```text
+```ruby
 require 'find'
   
 Find.find('/tmp') {|f|
   Find.prune if f == "/tmp/bar"
-  ...
+  # ...
 }
 ```
 

@@ -35,35 +35,35 @@ URI.open("http://www.ruby-lang.org/en") {|f|
 
 ハッシュ引数で、追加のヘッダフィールドを指定できます。
 
-```text
+```ruby
 require 'open-uri'
 URI.open("http://www.ruby-lang.org/en/",
   "User-Agent" => "Ruby/#{RUBY_VERSION}",
   "From" => "foo@bar.invalid",
   "Referer" => "http://www.ruby-lang.org/") {|f|
-  ...
+  # ...
 }
 ```
 
 http_proxy, ftp_proxy, no_proxy などの環境変数は、デフォルトで有効になっています。
 プロキシを無効にするには :proxy => nil とします。
 
-```text
+```ruby
 require 'open-uri'
 URI.open("http://www.ruby-lang.org/en/",
   :proxy => nil) {|f|
-  ...
+  # ...
 }
 ```
 
 また、open-uri を読み込むと [c:URI::HTTP] と [c:URI::FTP] が
 [c:OpenURI::OpenRead] モジュールをインクルードします。ですので、
 URI オブジェクトも似たような方法で開けます。
-```text
+```ruby
 require 'open-uri'
 uri = URI.parse("http://www.ruby-lang.org/en/")
 uri.open {|f|
-  ...
+  # ...
 }
 ```
 URI オブジェクトは直接読み込むことができます。

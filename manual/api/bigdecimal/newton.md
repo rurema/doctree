@@ -12,11 +12,11 @@ require:
 
 本サブライブラリは [c:BigDecimal] に依存しません。
 
-```text title="実行例"
+```ruby title="実行例"
 require "bigdecimal"
 require "bigdecimal/newton"
 
-...
+# ...
 
 n = Newton.nlsolve(f, x)
 ```

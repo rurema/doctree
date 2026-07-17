@@ -21,16 +21,16 @@ category: Thread
 
 ### 例
 クラスに [m:Module#include] する例
-```text
+```ruby
 require "mutex_m"
 class Foo
   include Mutex_m
-  ...
+  # ...
 end
 obj = Foo.new
 obj.synchronize do 
   # 危険領域(critical section)
-  ...
+  # ...
 end
 ```
 

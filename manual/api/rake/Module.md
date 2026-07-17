@@ -12,11 +12,11 @@ library: rake
 
 - **param** `method` -- ブロック内で再定義する予定のメソッド名を指定します。
 
-```text title="例"
+```ruby title="例"
 class String
   rake_extension("xyz") do
     def xyz
-      ...
+      # ...
     end
   end
 end
