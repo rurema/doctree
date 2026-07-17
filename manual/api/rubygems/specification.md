@@ -695,6 +695,37 @@ YAML 形式の gemspec を正しくフォーマットします。
 
 必須属性のリストを返します。
 
+### def stubs -> Array
+
+インストールされている全ての Gem の情報を、Gem::StubSpecification（gemspec ファイルの内容を遅延読み込みする軽量なスタブオブジェクト）の配列として返します。
+
+[m:Gem::Specification.list] とは異なり、gemspec ファイルの内容を実際に読み込まずにスタブを生成するため、高速に動作します。
+
+```ruby title="例"
+p Gem::Specification.stubs.first(3).map(&:class)
+# => [Gem::StubSpecification, Gem::StubSpecification, Gem::StubSpecification]
+
+p Gem::Specification.stubs.first.name
+# => "abbrev"
+```
+
+- **SEE** [m:Gem::Specification.list], [m:Gem::Specification.stubs_for]
+
+### def stubs_for(name) -> Array
+
+指定した名前を持つ Gem の Gem::StubSpecification の配列を返します。
+
+[m:Gem::Specification.stubs] と同様、gemspec ファイルの内容を遅延読み込みするスタブオブジェクトを返すため高速に動作します。
+
+- **param** `name` -- Gem の名前を文字列で指定します。
+
+```ruby title="例"
+p Gem::Specification.stubs_for("abbrev").map(&:name)
+# => ["abbrev"]
+```
+
+- **SEE** [m:Gem::Specification.stubs]
+
 
 ## Constants
 
