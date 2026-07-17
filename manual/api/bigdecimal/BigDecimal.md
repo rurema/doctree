@@ -745,7 +745,7 @@ b = f*(s.to_f)*(y**z)
 
 ```ruby
 require "bigdecimal"
-BigDecimal("1234.5678").inspect
+p BigDecimal("1234.5678").inspect
 # => "0.12345678e4"
 ```
 

@@ -43,7 +43,7 @@ puts "𤘩宮城".to_json(ascii_only: true) # => "\ud851\ude29\u5bae\u57ce"
 
 ```ruby
 require 'json'
-"にほんご".encode("euc-jp").to_json_raw_object
+p "にほんご".encode("euc-jp").to_json_raw_object
 # => {"json_class"=>"String", "raw"=>[164, 203, 164, 219, 164, 243, 164, 180]}
 "にほんご".encode("euc-jp").to_json # source sequence is illegal/malformed (JSON::GeneratorError)
 ```

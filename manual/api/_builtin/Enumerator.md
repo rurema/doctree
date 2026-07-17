@@ -121,7 +121,7 @@ Enumerator.produce(Date.today, &:succ).detect(&:tuesday?)
 require "strscan"
 scanner = StringScanner.new("7+38/6")
 PATTERN = %r{\d+|[-/+*]}
-Enumerator.produce { scanner.scan(PATTERN) }.slice_after { scanner.eos? }.first
+p Enumerator.produce { scanner.scan(PATTERN) }.slice_after { scanner.eos? }.first
 # => ["7", "+", "38", "/", "6"]
 ```
 

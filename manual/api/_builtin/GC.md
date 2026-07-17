@@ -321,7 +321,7 @@ GC 内部の統計情報を [c:Hash] で返します。
         引数 key を指定した場合は数値を返します。
 
 ```ruby
-GC.stat
+p GC.stat
 # =>
 # {
 #   :count=>0,
@@ -471,7 +471,7 @@ p GC::OPTS # => ["USE_RGENGC", "RGENGC_ESTIMATE_OLDMALLOC", "GC_ENABLE_LAZY_SWEE
 GC用内部定数の値を保持するハッシュテーブルです。
 
 ```ruby
-GC::INTERNAL_CONSTANTS
+p GC::INTERNAL_CONSTANTS
 # => {:RVALUE_SIZE=>40, :HEAP_PAGE_OBJ_LIMIT=>408, :HEAP_PAGE_BITMAP_SIZE=>56, :HEAP_PAGE_BITMAP_PLANES=>4}
 ```
 

@@ -787,7 +787,7 @@ offset を指定しないと、書き込みの末尾でファイルを
 text = "This is line one\nThis is line two\nThis is line three\nAnd so on...\n"
 p IO.write("testfile", text)            # => 66
 p IO.write("testfile", "0123456789", 20)  #=> 10
-IO.read("testfile")
+p IO.read("testfile")
 # => "This is line one\nThi0123456789two\nThis is line three\nAnd so on...\n"
 p IO.write("testfile", "0123456789")    #=> 10
 p IO.read("testfile")                   # => "0123456789"

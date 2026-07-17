@@ -193,12 +193,12 @@ row_size 、 column_size のいずれか一方は0である必要があります
 ```ruby title="例"
 require 'matrix'
 m = Matrix.empty(2, 0)
-m == Matrix[ [], [] ]
+p m == Matrix[ [], [] ]
 # => true
 n = Matrix.empty(0, 3)
-n == Matrix.columns([ [], [], [] ])
+p n == Matrix.columns([ [], [], [] ])
 # => true
-m * n
+p m * n
 # => Matrix[[0, 0, 0], [0, 0, 0]]
 ```
 
@@ -1008,10 +1008,10 @@ p m.to_a # => [[1, 2, 3], [10, 15, 20], [-1, -2, 1.5]]
 
 ```ruby title="例"
 require 'matrix'
-Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
+p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
   # => 1+2i   i  0
   #       1   2  3
-Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].conjugate
+p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].conjugate
   # => 1-2i  -i  0
   #       1   2  3
 ```
@@ -1023,10 +1023,10 @@ Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].conjugate
 
 ```ruby title="例"
 require 'matrix'
-Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
+p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
 #  => 1+2i  i  0
 #        1  2  3
-Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].imaginary
+p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].imaginary
 #  =>   2i  i  0
 #        0  0  0
 ```
@@ -1036,10 +1036,10 @@ Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].imaginary
 
 ```ruby title="例"
 require 'matrix'
-Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
+p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
 #  => 1+2i  i  0
 #        1  2  3
-Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].real
+p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].real
 #  =>    1  0  0
 #        1  2  3
 ```

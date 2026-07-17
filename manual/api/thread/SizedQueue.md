@@ -104,7 +104,7 @@ end
   q.push(r)
 }
 
-th1.join
+p th1.join
 # => resource1
 # resource2
 # resource3

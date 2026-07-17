@@ -95,7 +95,7 @@ fork && Process.wait
 
 ```ruby
 Signal.trap("INT") { |signo| puts Signal.signame(signo) }
-Process.kill("INT", 0)
+p Process.kill("INT", 0)
 # => INT
 ```
 

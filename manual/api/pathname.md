@@ -439,7 +439,7 @@ IO.foreach(self.to_s, *args, &block) と同じです。
 require "pathname"
 
 IO.write("testfile", "line1\nline2,\nline3\n")
-Pathname("testfile").each_line
+p Pathname("testfile").each_line
 # => #<Enumerator: IO:foreach("testfile")>
 ```
 

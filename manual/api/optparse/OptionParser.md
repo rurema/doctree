@@ -279,11 +279,11 @@ opts = OptionParser.new do |opts|
 end
 
 p opts.summary_width   # => 32
-opts.summarize
+p opts.summarize
 # => ["    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
 opts.summary_width = 8
 p opts.summary_width   # =>8
-opts.summarize
+p opts.summarize
 # => ["    -i\n", "        --init\n", "    -u\n", "        --update\n", "    -h\n", "        --help\n"]
 ```
 
@@ -303,11 +303,11 @@ opts = OptionParser.new do |opts|
 end
 
 p opts.summary_width   # => 32
-opts.summarize
+p opts.summarize
 # => ["    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
 opts.summary_width = 8 # => 8
 p opts.summary_width   # => 8
-opts.summarize
+p opts.summarize
 # => ["    -i\n", "        --init\n", "    -u\n", "        --update\n", "    -h\n", "        --help\n"]
 ```
 
@@ -327,11 +327,11 @@ opts = OptionParser.new do |opts|
 end
 
 p opts.summary_indent       # => "    "
-opts.summarize
+p opts.summarize
 # => ["    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
 opts.summary_indent = "  "
 p opts.summary_indent       # => "  "
-opts.summarize
+p opts.summarize
 # => ["  -i, --init\n", "  -u, --update\n", "  -h, --help\n"]
 ```
 
@@ -351,11 +351,11 @@ opts = OptionParser.new do |opts|
 end
 
 p opts.summary_indent       # => "    "
-opts.summarize
+p opts.summarize
 # => ["    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
 opts.summary_indent = "  "  # => "  "
 p opts.summary_indent       # => "  "
-opts.summarize
+p opts.summarize
 # => ["  -i, --init\n", "  -u, --update\n", "  -h, --help\n"]
 ```
 
@@ -485,9 +485,9 @@ opts = OptionParser.new do |opts|
   opts.on_tail("-h", "--help")
 end
 
-opts.summarize
+p opts.summarize
 # => ["    -i, --init\n", "    -u, --update\n", "    -h, --help\n"]
-opts.summarize(["description\n"], 10, 8, "  ")
+p opts.summarize(["description\n"], 10, 8, "  ")
 # => ["description\n", "  -i\n", "      --init\n", "  -u\n", "      --update\n", "  -h\n", "      --help\n"]
 ```
 

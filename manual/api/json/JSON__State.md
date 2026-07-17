@@ -179,12 +179,12 @@ require "json"
 
 json_state = JSON::State.new(indent: "\t")
 json_state.indent # => "\t"
-JSON.generate({key1: "value1", key2: "value2"}, json_state)
+p JSON.generate({key1: "value1", key2: "value2"}, json_state)
 # => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
 
 json_state.configure(indent: "  ")
 json_state.indent # => "  "
-JSON.generate({key1: "value1", key2: "value2"}, json_state)
+p JSON.generate({key1: "value1", key2: "value2"}, json_state)
 # => "{  \"key1\":\"value1\",  \"key2\":\"value2\"}"
 ```
 
@@ -199,7 +199,7 @@ require "json"
 
 json_state = JSON::State.new(indent: "\t")
 json_state.indent # => "\t"
-JSON.generate({key1: "value1", key2: "value2"}, json_state)
+p JSON.generate({key1: "value1", key2: "value2"}, json_state)
 # => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
 ```
 
@@ -214,10 +214,10 @@ require "json"
 
 json_state = JSON::State.new(indent: "\t")
 json_state.indent # => "\t"
-JSON.generate({key1: "value1", key2: "value2"}, json_state)
+p JSON.generate({key1: "value1", key2: "value2"}, json_state)
 # => "{\t\"key1\":\"value1\",\t\"key2\":\"value2\"}"
 json_state.indent = "  "
-JSON.generate({key1: "value1", key2: "value2"}, json_state)
+p JSON.generate({key1: "value1", key2: "value2"}, json_state)
 # => "{  \"key1\":\"value1\",  \"key2\":\"value2\"}"
 ```
 

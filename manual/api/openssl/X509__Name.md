@@ -51,7 +51,7 @@ obj が [c:OpenSSL::X509::Name] である場合には内容を複製した
 
 ```ruby title="例"
 require 'openssl'
-OpenSSL::X509::Name.new([["C", "JP"], ["ST", "Kanagawa"], ["L", "Yokohama"], ["O", "Example Company"], ["OU", "Lab3"], ["CN", "foobar"], ["emailAddress", "foobar@lab3.example.co.jp"]])
+p OpenSSL::X509::Name.new([["C", "JP"], ["ST", "Kanagawa"], ["L", "Yokohama"], ["O", "Example Company"], ["OU", "Lab3"], ["CN", "foobar"], ["emailAddress", "foobar@lab3.example.co.jp"]])
 # => OpenSSL::X509::Name object: /C=JP/ST=Kanagawa/L=Yokohama/O=Example Company/OU=Lab3/CN=foobar/emailAddress=foobar@lab3.example.co.jp
 ```
 
@@ -85,15 +85,15 @@ flags には通常は以下のいずれかを渡します。
 ```ruby
 require 'openssl'
 n = OpenSSL::X509::Name.parse('/C=JP/ST=Kanagawa/L=Yokohama/O=Example Company/OU=Lab3/CN=foobar/emailAddress=foobar@lab3.example.co.jp')
-n.to_s 
+p n.to_s
 # => "/C=JP/ST=Kanagawa/L=Yokohama/O=Example Company/OU=Lab3/CN=foobar/emailAddress=foobar@lab3.example.co.jp"
-n.to_s(OpenSSL::X509::Name::COMPAT)
+p n.to_s(OpenSSL::X509::Name::COMPAT)
 # => "C=JP, ST=Kanagawa, L=Yokohama, O=Example Company, OU=Lab3, CN=foobar/emailAddress=foobar@lab3.example.co.jp"
-n.to_s(OpenSSL::X509::Name::RFC2253)
+p n.to_s(OpenSSL::X509::Name::RFC2253)
 # => "emailAddress=foobar@lab3.example.co.jp,CN=foobar,OU=Lab3,O=Example Company,L=Yokohama,ST=Kanagawa,C=JP"
-n.to_s(OpenSSL::X509::Name::ONELINE)
+p n.to_s(OpenSSL::X509::Name::ONELINE)
 # => "C = JP, ST = Kanagawa, L = Yokohama, O = Example Company, OU = Lab3, CN = foobar, emailAddress = foobar@lab3.example.co.jp"
-n.to_s(OpenSSL::X509::Name::MULTILINE)
+p n.to_s(OpenSSL::X509::Name::MULTILINE)
 # => "countryName               = JP\nstateOrProvinceName       = Kanagawa\nlocalityName              = Yokohama\norganizationName          = Example Company\norganizationalUnitName    = Lab3\ncommonName                = foobar\nemailAddress              = foobar@lab3.example.co.jp"
 ```
 
@@ -106,7 +106,7 @@ n.to_s(OpenSSL::X509::Name::MULTILINE)
 ```ruby title="例"
 require 'openssl'
 n = OpenSSL::X509::Name.parse('/C=JP/ST=Kanagawa/L=Yokohama/O=Example Company/OU=Lab3/CN=foobar/emailAddress=foobar@lab3.example.co.jp')
-n.to_a
+p n.to_a
 # => [["C", "JP", 19], ["ST", "Kanagawa", 12], ["L", "Yokohama", 12], ["O", "Example Company", 12], ["OU", "Lab3", 12], ["CN", "foobar", 12], ["emailAddress", "foobar@lab3.example.co.jp", 22]]
 ```
 

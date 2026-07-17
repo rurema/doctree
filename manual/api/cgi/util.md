@@ -115,7 +115,7 @@ print CGI.unescapeElement('&lt;BR&gt;&lt;A HREF="url"&gt;&lt;/A&gt;', %w(A IMG))
 ```ruby title="例"
 require "cgi"
 
-CGI.rfc1123_date(Time.now)
+p CGI.rfc1123_date(Time.now)
   # => Sat, 1 Jan 2000 00:00:00 GMT
 ```
 

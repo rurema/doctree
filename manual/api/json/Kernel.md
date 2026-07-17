@@ -14,7 +14,7 @@ library: json
 ```ruby title="例"
 require "json"
 
-j([1,2,{"name" => "tanaka","age" => 19}])
+p j([1,2,{"name" => "tanaka","age" => 19}])
 # => [1,2,{"name":"tanaka","age":19}]
 ```
 
@@ -29,7 +29,7 @@ j([1,2,{"name" => "tanaka","age" => 19}])
 ```ruby title="例"
 require "json"
 
-jj([1,2,{"name" => "tanaka","age" => 19}])
+p jj([1,2,{"name" => "tanaka","age" => 19}])
 # => [
 #      1,
 #      2,
@@ -56,10 +56,10 @@ jj([1,2,{"name" => "tanaka","age" => 19}])
 ```ruby title="例"
 require "json"
 
-JSON('[1,2,{"name":"tanaka","age":19}]')
+p JSON('[1,2,{"name":"tanaka","age":19}]')
 # => [1, 2, {"name"=>"tanaka", "age"=>19}]
 
-JSON('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
+p JSON('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
 # => [1, 2, {:name=>"tanaka", :age=>19}]
 ```
 

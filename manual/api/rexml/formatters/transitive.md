@@ -23,7 +23,7 @@ EOS
 transitive_formatter = REXML::Formatters::Transitive.new
 output = StringIO.new
 transitive_formatter.write(doc, output)
-output.string
+p output.string
 # => "<root\n><children\n  >\n<grandchildren foo='bar'\n    />\n</children\n  ></root\n>\n"
 print output.string
 # >> <root
@@ -37,7 +37,7 @@ print output.string
 
 output = StringIO.new
 transitive_formatter.write(REXML::XPath.first(doc, "/root/children"), output)
-output.string
+p output.string
 # => "<children\n>\n<grandchildren foo='bar'\n  />\n</children\n>"
 ```
 

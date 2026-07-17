@@ -496,7 +496,7 @@ p m.values_at(:a, :b, :op) # => ["1", "2", "+"]
 self.regexp.names と同じです。
 
 ```ruby title="例"
-/(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").names
+p /(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").names
 # => ["foo", "bar", "baz"]
 
 m = /(?<x>.)(?<y>.)?/.match("a") # => #<MatchData "a" x:"a" y:nil>

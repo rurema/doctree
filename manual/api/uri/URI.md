@@ -222,7 +222,7 @@ enum には通常 [key, value] という形の配列の配列を渡します。
 
 ```ruby
 require 'uri'
-URI.encode_www_form([["a", "1"], ["b", "2"], ["c", "x yz"]])
+p URI.encode_www_form([["a", "1"], ["b", "2"], ["c", "x yz"]])
 # => "a=1&b=2&c=x+yz"
 ```
 
@@ -231,7 +231,7 @@ URI.encode_www_form([["a", "1"], ["b", "2"], ["c", "x yz"]])
 
 ```ruby
 require 'uri'
-URI.encode_www_form({"a"=>"1", "b"=>"2", "c"=>"x yz"})
+p URI.encode_www_form({"a"=>"1", "b"=>"2", "c"=>"x yz"})
 # => "a=1&b=2&c=x+yz"
 ```
 

@@ -934,16 +934,16 @@ p rss.channel.dc_title  # => 「要素の内容を表す文字列」
 p rss.channel.dc_titles # => 「要素を表すオブジェクト」の配列
                       # （[DublinCoreTitleオブジェクト, ...]）
 
-rss.channel.dc_titles.collect {|title| title.value}
+p rss.channel.dc_titles.collect {|title| title.value}
                       # => 「要素の内容を表す文字列」の配列
                       # （["My site", ...]など）
 
-rss.channel.dc_titles.first.value == rss.channel.dc_title
+p rss.channel.dc_titles.first.value == rss.channel.dc_title
                       # => true
 # 厳密にはこう
 first_title = rss.channel.dc_titles.first
 first_title = first_title.value if first_title
-first_title == rss.channel.dc_title
+p first_title == rss.channel.dc_title
                       # => true
 ```
 

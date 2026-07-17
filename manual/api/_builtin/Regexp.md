@@ -626,14 +626,14 @@ Hash のキーは名前付きキャプチャの名前で、値は
 その名前に関連付けられたキャプチャの index のリストを返します。
 
 ```ruby title="例"
-/(?<foo>.)(?<bar>.)/.named_captures
+p /(?<foo>.)(?<bar>.)/.named_captures
 # => {"foo"=>[1], "bar"=>[2]}
 
-/(?<foo>.)(?<foo>.)/.named_captures
+p /(?<foo>.)(?<foo>.)/.named_captures
 # => {"foo"=>[1, 2]}
 
 # 名前付きキャプチャを持たないときは空の Hash を返します。
-/(.)(.)/.named_captures
+p /(.)(.)/.named_captures
 # => {}
 ```
 
@@ -645,10 +645,10 @@ Hash のキーは名前付きキャプチャの名前で、値は
 /(?<foo>.)(?<bar>.)(?<baz>.)/.names
 
 # => ["foo", "bar", "baz"]
-   /(?<foo>.)(?<foo>.)/.names
+   p /(?<foo>.)(?<foo>.)/.names
 # => ["foo"]
 
-/(.)(.)/.names
+p /(.)(.)/.names
 # => []
 ```
 

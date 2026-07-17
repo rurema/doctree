@@ -16,7 +16,7 @@ EC(Ellicptic Curve,楕円曲線)暗号鍵のクラスです。
 ```ruby title="例"
 require 'openssl'
 
-OpenSSL::PKey::EC.builtin_curves
+p OpenSSL::PKey::EC.builtin_curves
 # => [["secp112r1", "SECG/WTLS curve over a 112 bit prime field"],
 #     ["secp112r2", "SECG curve over a 112 bit prime field"], 
 #     ["secp128r1", "SECG curve over a 128 bit prime field"], 

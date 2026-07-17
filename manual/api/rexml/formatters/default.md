@@ -22,18 +22,18 @@ EOS
 default_formatter = REXML::Formatters::Default.new
 output = StringIO.new
 default_formatter.write(doc, output)
-output.string
+p output.string
 # => "<root>\n<children>\n  <grandchildren/>\n</children>\n</root>\n"
 
 output = StringIO.new
 default_formatter.write(REXML::XPath.first(doc, "/root/children"), output)
-output.string
+p output.string
 # => "<children>\n  <grandchildren/>\n</children>"
 
 ie_hack_formatter = REXML::Formatters::Default.new(true)
 output = StringIO.new
 ie_hack_formatter.write(doc, output)
-output.string
+p output.string
 # => "<root>\n<children>\n  <grandchildren />\n</children>\n</root>\n"
 ```
 

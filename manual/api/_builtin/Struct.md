@@ -317,7 +317,7 @@ p Foo.new.members  # => [:foo, :bar]
 
 ```ruby title="例"
 Customer = Struct.new(:name, :address, :zip)
-Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_a
+p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_a
 # => ["Joe Smith", "123 Maple, Anytown NC", 12345]
 ```
 
@@ -487,7 +487,7 @@ self のメンバ名([c:Symbol])と値の組を [c:Hash] にして返します�
 
 ```ruby title="例"
 Customer = Struct.new(:name, :address, :zip)
-Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
+p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
 # => {:name=>"Joe Smith", :address=>"123 Maple, Anytown NC", :zip=>12345}
 ```
 

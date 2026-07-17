@@ -202,7 +202,7 @@ class Sample
 end
 
 Sample.new
-GC.start
+p GC.start
 # => finalize
 
 Sample.new
