@@ -960,4 +960,4 @@ Rubyで利用可能なメタ文字、メタ文字列の一覧です。
   - 『正規表現技術入門――最新エンジン実装と理論的背景』新屋良磨、鈴木勇介、高田謙 著、技術評論社（2015） <https://gihyo.jp/book/2015/978-4-7741-7270-5>
   - 『詳説正規表現　第3版』Jeffrey E. F. Friedl 著、オライリー・ジャパン（2008） <https://www.oreilly.co.jp/books/9784873113593/>
   - Onigmoのドキュメント：<https://github.com/k-takata/Onigmo/blob/master/doc/RE.ja>
-  - Ruby の tarball に含まれている doc/regexp.rdoc：<https://github.com/ruby/ruby/blob/master/doc/regexp.rdoc>
+  - Ruby の tarball に含まれている doc/_regexp.rdoc：<https://github.com/ruby/ruby/blob/master/doc/_regexp.rdoc>

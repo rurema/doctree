@@ -196,7 +196,7 @@ SessionDemo.new
 ### 参考URL
 
   - <http://www.shugo.net/article/webdb2/#label:13>
-  - <http://www.modruby.net/doc/faq.ja.jis.html#label-13>
+  - <https://web.archive.org/web/20060220193743/http://www.modruby.net/doc/faq.ja.jis.html#label-13>
   - <http://www.ruby-doc.org/stdlib/libdoc/cgi/rdoc/index.html>
 
 # class CGI::Session < Object
@@ -309,7 +309,7 @@ MemoryStore の場合は何もしません。
 データベースクラスの close メソッドを呼び出して、
 セッション情報をサーバに保存し、セッションストレージをクローズします。
 #@# mod_ruby などで CGI::Session を利用する場合、明示的に close する必要がある。
-#@# 参照 http://www.modruby.net/doc/faq.ja.jis.html#label-13
+#@# 参照 https://web.archive.org/web/20060220193743/http://www.modruby.net/doc/faq.ja.jis.html#label-13
 
 ### def delete -> ()
 #@# discard

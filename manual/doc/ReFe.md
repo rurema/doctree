@@ -36,7 +36,7 @@ $ bitclust setup
     ruby setup.rb install
 ```
 
-(2) <http://www.ruby-lang.org/ja/man/man-rd-ja.tar.gz>
+(2) <https://web.archive.org/web/20110706181204/http://www.ruby-lang.org/ja/man/man-rd-ja.tar.gz>
 ```text
 にあるのが最新のリファレンスマニュアルの tarball です。
 これを取得します。
