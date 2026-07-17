@@ -509,7 +509,7 @@ p uri.select(:userinfo, :host, :path)
 require 'uri'
 
 uri = URI.parse("http://my.example.com")
-uri.coerce("http://foo.com")
+p uri.coerce("http://foo.com")
 # => [#<URI::HTTP:0x00000000bcb028 URL:http://foo.com/>, #<URI::HTTP:0x00000000d92178 URL:http://my.example.com>]
 ```
 
