@@ -179,8 +179,8 @@ p FileList['lib/test/file', 'x/y'].gsub(/\//, "\\") # => ["lib\\test\\file", "x\
 task default: :test_rake_app
 task :test_rake_app do
   file_list = FileList['a.c', 'b.c']
-  p file_list.sub!(/\.c$/, '.o') # => ['a.o', 'b.o']
-  p file_list                  # => ['a.o', 'b.o']
+  p file_list.sub!(/\.c$/, '.o') # => ["a.o", "b.o"]
+  p file_list                  # => ["a.o", "b.o"]
 end
 ```
 
