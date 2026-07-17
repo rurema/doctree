@@ -6,6 +6,11 @@ library: win32ole
 WIN32OLE_TYPEオブジェクトは、型情報ライブラリ（TypeLib）内に定義された
 1つの型情報を保持します。
 
+Ruby 3.2 から、このクラスは WIN32OLE の名前空間下に移動し、`WIN32OLE::Type`
+として定義されるようになりました。トップレベル定数 `WIN32OLE_TYPE` は後方
+互換のためのエイリアスとして残っていますが、Ruby 3.4 以降は非推奨
+(deprecated)です(`Warning[:deprecated]` が有効なら参照時に警告が表示されます)。
+
 ### サンプルコード
 
 ```ruby
