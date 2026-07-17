@@ -26,13 +26,12 @@ extend:
 
 - **param** `value` -- 真を指定すると詳細を出力します。
 
-例
-```````
+```text title="例"
 verbose              # 現在の状態を返します。
 verbose(v)           # 与えられた状態に変更します。
 verbose(v) { code }  # ブロックを評価する間だけ与えられた状態に変更します。
                      # ブロックの評価が終わると元の値に戻します。
-```````
+```
 
 ### def nowrite(value = nil){ ... }
 
@@ -40,13 +39,12 @@ verbose(v) { code }  # ブロックを評価する間だけ与えられた状態
 
 - **param** `value` -- 真を指定するとファイルを書き込みません。
 
-例:
-```````
+```text title="例"
 nowrite              # 現在の状態を返します。
 nowrite(v)           # 与えられた状態に変更します。
 nowrite(v) { code }  # ブロックを評価する間だけ与えられた状態に変更します。
                      # ブロックの評価が終わると元の値に戻します。
-```````
+```
 
 
 ### def when_writing(msg = nil){ ... }
@@ -58,12 +56,11 @@ nowrite(v) { code }  # ブロックを評価する間だけ与えられた状態
 
 - **param** `msg` -- 表示するメッセージを指定します。
 
-例:
-`````
+```ruby title="例"
 when_writing("Building Project") do
   project.build
 end
-`````
+```
 
 ## Singleton Methods
 

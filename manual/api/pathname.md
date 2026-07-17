@@ -687,7 +687,7 @@ File.write("old", "")
 path.rename("new")
 path.to_s    # => "old"
 path.exist?  # => false
-Pathname.new("new").exist? # => true
+p Pathname.new("new").exist? # => true
 ```
 
 新しいパスを指す [c:Pathname] オブジェクトが必要な場合は、

@@ -26,11 +26,10 @@ alias:
 
 - **param** `filenames` -- 追加するファイル名のパターンを指定します。
 
-例:
-``````
+```ruby title="例"
 file_list.include("*.java", "*.cfg")
 file_list.include %w( math.c lib.h *.o )
-``````
+```
 
 ### def exclude(*patterns){|entry| ... } -> self
 
@@ -43,8 +42,7 @@ file_list.include %w( math.c lib.h *.o )
 もし、ファイルシステムに存在しないファイルを明示的にリストへ追加した場合、
 グロブパターンではそのファイルをリストから削除しません。
 
-例:
-`````
+```ruby title="例"
 p FileList['a.c', 'b.c'].exclude("a.c") # => ["b.c"]
 p FileList['a.c', 'b.c'].exclude(/^a/)  # => ["b.c"]
 
@@ -53,7 +51,7 @@ p FileList['a.c', 'b.c'].exclude("a.*") # => ["b.c"]
 
 # If "a.c" is not a file, then ...
 p FileList['a.c', 'b.c'].exclude("a.*") # => ["a.c", "b.c"]
-`````
+```
 
 ### def clear_exclude -> self
 
@@ -152,10 +150,9 @@ end
 自身に含まれるファイルリストのそれぞれのエントリに対して [m:String#sub] を実行し、
 結果を新しい [c:Rake::FileList] として返します。
 
-例:
-``````
+```text title="例"
 FileList['a.c', 'b.c'].sub(/\.c$/, '.o')  => ['a.o', 'b.o']
-``````
+```
 
 
 ### def gsub(pattern, replace) -> Rake::FileList
@@ -163,10 +160,9 @@ FileList['a.c', 'b.c'].sub(/\.c$/, '.o')  => ['a.o', 'b.o']
 自身に含まれるファイルリストのそれぞれのエントリに対して [m:String#gsub] を実行し、
 結果を新しい [c:Rake::FileList] として返します。
 
-例:
-``````
+```ruby title="例"
 p FileList['lib/test/file', 'x/y'].gsub(/\//, "\\") # => ["lib\\test\\file", "x\\y"]
-``````
+```
 
 ### def sub!(pattern, replace) -> self
 
@@ -377,14 +373,13 @@ end
 
 - **param** `patterns` -- パターンを指定します。
 
-例:
-``````
+```ruby title="例"
 file_list = FileList.new('lib/**/*.rb', 'test/test*.rb')
 
 pkg_files = FileList.new('lib/**/*') do |fl|
   fl.exclude(/\bCVS\b/)
 end
-``````
+```
 
 
 ### def [](*args) -> Rake::FileList

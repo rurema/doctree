@@ -1070,9 +1070,9 @@ p File.open("testfile") { |f| f.mtime } # => 2017-12-21 22:58:17 +0900
 
 - **raise** `NotImplementedError` --  Windows のような birthtime のない環境で発生します。
 
-`````
-File.new("testfile").birthtime   #=> Wed Apr 09 08:53:14 CDT 2003
-`````
+```ruby
+p File.new("testfile").birthtime #=> Wed Apr 09 08:53:14 CDT 2003
+```
 
 - **SEE** [m:File#lstat], [m:File#atime], [m:File#ctime], [m:File#mtime]
 

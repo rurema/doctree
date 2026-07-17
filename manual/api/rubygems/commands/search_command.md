@@ -6,7 +6,7 @@ require:
 ---
 指定された文字列を含む Gem パッケージを全て表示するためのライブラリです。
 
-`````
+```text
 Usage: gem search [STRING] [options]
   Options:
     -i, --[no-]installed             Check for installed gem
@@ -14,17 +14,17 @@ Usage: gem search [STRING] [options]
     -d, --[no-]details               Display detailed information of gem(s)
         --[no-]versions              Display only gem names
     -a, --all                        Display all gem versions
-`````
+```
 #@include(local_remote_options)
 #@include(common_options)
-```````
+```text
 Arguments:
   STRING        検索したい Gem パッケージ名の一部を指定します
 Summary:
   STRING を含む全ての Gem パッケージ名を表示します
 Defaults:
   --local --no-details
-```````
+```
 
 
 # class Gem::Commands::SearchCommand < Gem::Commands::QueryCommand

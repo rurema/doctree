@@ -4,12 +4,12 @@ type: library
 RDoc 形式のドキュメントをエスケープシーケンスで太字やアンダーラインの効
 果を持たせるように見せるサブライブラリです。
 
-`````
+```ruby
 require 'rdoc/markup/to_bs'
 
 h = RDoc::Markup::ToBs.new
 puts h.convert(input_string)
-`````
+```
 
 変換した結果は文字列で取得できます。実際に効果を確認するためにはページャ
 などで出力を確認します。

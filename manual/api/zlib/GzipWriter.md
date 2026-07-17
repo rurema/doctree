@@ -172,7 +172,7 @@ case_close
 現在までに圧縮したデータの長さの合計を返します。
 ファイルポインタの位置ではないことに注意して下さい。
 
-```text
+```ruby
 require 'zlib'
 
 filename='hoge1.gz'
@@ -186,7 +186,7 @@ Zlib::GzipWriter.wrap(f, Zlib::BEST_COMPRESSION){|gz|
 #=> 1
 #=> 2
 #=> 3
-...
+# ...
 ```
 
 ### def <<(str) -> self

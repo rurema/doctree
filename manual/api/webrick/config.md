@@ -16,7 +16,7 @@ require:
 
 [c:WEBrick::GenericServer] の設定のデフォルト値を保持したハッシュです。
 
-`````
+```ruby
 require 'webrick'
 WEBrick::Config::General = {
   :ServerName     => Utils.getservername,
@@ -32,19 +32,15 @@ WEBrick::Config::General = {
   :StartCallback  => nil,
   :StopCallback   => nil,
   :AcceptCallback => nil,
-`````
-```````
 :DoNotReverseLookup => true,
-```````
-`````
 }
-`````
+```
 
 ### const HTTP -> Hash
 
 [c:WEBrick::HTTPServer] の設定のデフォルト値を保持したハッシュです。
 
-`````
+```ruby
 require 'webrick'
 WEBrick::Config::HTTP = {
   :ServerName     => Utils.getservername,
@@ -60,12 +56,8 @@ WEBrick::Config::HTTP = {
   :StartCallback  => nil,
   :StopCallback   => nil,
   :AcceptCallback => nil,
-`````
-```````
 :DoNotReverseLookup => true,
-```````
 
-`````
   :RequestTimeout => 30,
   :HTTPVersion    => HTTPVersion.new("1.1"),
   :AccessLog      => nil,
@@ -81,7 +73,7 @@ WEBrick::Config::HTTP = {
 
   :Escape8bitURI  => false
 }
-`````
+```
 
 ### const FileHandler -> Hash
 

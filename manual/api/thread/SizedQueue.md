@@ -13,7 +13,7 @@ alias SizedQueue
 することによって、入力される行と出力される行が同じ順序になります。
 q = [] にすると入力と違った順序で行が出力されます。
 
-`````
+```ruby
 require 'thread'
 
 q = SizedQueue.new(1)
@@ -30,7 +30,7 @@ end
 q.push(l)
 
 th.join
-`````
+```
 
 ## Class Methods
 

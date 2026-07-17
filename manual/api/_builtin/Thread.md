@@ -24,9 +24,9 @@ Thread を使うことで並行プログラミングが可能になります。
 - **param** `newstate` -- スレッド実行中に例外が発生した場合、その例外をメインスレッドで再度発生させるかどうかを true か false で指定します。
 
 ```ruby title="例"
-Thread.abort_on_exception # => false
+p Thread.abort_on_exception # => false
 Thread.abort_on_exception = true
-Thread.abort_on_exception # => true
+p Thread.abort_on_exception # => true
 ```
 
 ### def report_on_exception             -> bool
@@ -36,9 +36,9 @@ Thread.abort_on_exception # => true
 
 デフォルトは true です。
 
-`````
+```ruby
 Thread.new { 1.times { raise } }
-`````
+```
 
 は $stderr に以下のように出力します:
 
@@ -78,9 +78,9 @@ Traceback (most recent call last):
 
 現在実行中のスレッド(カレントスレッド)を返します。
 
-`````
+```ruby
 p Thread.current #=> #<Thread:0x4022e6fc run>
-`````
+```
 
 ### def exit    -> ()
 
@@ -94,34 +94,34 @@ p Thread.current #=> #<Thread:0x4022e6fc run>
 
 - **param** `thread` -- 終了したい Thread オブジェクトを指定します。
 
-`````
+```ruby
 th = Thread.new do
 end
     
 p Thread.kill(th)     #=> #<Thread:0x40221bc8 dead>
-`````
+```
 
 ### def list    -> [Thread]
 
 全ての生きているスレッドを含む配列を生成して返します。aborting 状態であるスレッド
 も要素に含まれます。
 
-`````
+```ruby
 Thread.new do
   sleep 
 end
 sleep 0.1
   
 p Thread.list   #=> [#<Thread:0x40377a54 sleep>, #<Thread:0x4022e6fc run>]
-`````
+```
 
 ### def main    -> Thread
 
 メインスレッドを返します。
 
-`````
+```ruby
 p Thread.main #=> #<Thread:0x4022e6fc run>
-`````
+```
 
 ### def start(*arg) {|*arg| ... }       -> Thread
 ### def fork(*arg) {|*arg| ... }        -> Thread
@@ -143,19 +143,19 @@ new メソッドと違い initialize メソッドを呼びません。
 例えば、以下のコードは間違いです。スレッドの実行が開始される前に
 変数 i が書き変わる可能性があるからです。
 
-`````
+```ruby
 for i in 1..5
    Thread.start { p i }
 end
-`````
+```
 
 上の例は以下のように書き直すべきです。
 
-`````
+```ruby
 for i in 1..5
    Thread.start(i) {|t| p t }
 end
-`````
+```
 
 ### def new(*arg) {|*arg| ... }         -> Thread
 
@@ -172,19 +172,19 @@ end
 例えば、以下のコードは間違いです。スレッドの実行が開始される前に
 変数 i が書き変わる可能性があるからです。
 
-`````
+```ruby
 for i in 1..5
    Thread.new { p i }
 end
-`````
+```
 
 上の例は以下のように書き直すべきです。
 
-`````
+```ruby
 for i in 1..5
    Thread.new(i) {|t| p t }
 end
-`````
+```
 
 ### def pass    -> nil
 
@@ -193,7 +193,7 @@ end
 えます。実際に切り替わるかどうか、また次にどのスレッドが実行されるかは OS
 やスケジューラの実装に依存するため、保証されません。
 
-````
+```ruby
 Thread.new do
   (1..3).each{|i|
     p i
@@ -214,7 +214,7 @@ end
 :main
 3
 :main
-````
+```
 
 上記の出力は一例です。実行環境によって出力順序は異なり、保証されません。
 
@@ -245,7 +245,7 @@ a.join
 あります。
 
 ```ruby title="例"
-Thread.DEBUG # => 0
+p Thread.DEBUG # => 0
 ```
 
 - **SEE** [m:Thread.DEBUG=]
@@ -260,9 +260,9 @@ val が 真 のときは Integer に変換してから設定します。
 あります。
 
 ```ruby title="例"
-Thread.DEBUG # => 0
+p Thread.DEBUG # => 0
 Thread.DEBUG = 1
-Thread.DEBUG # => 1
+p Thread.DEBUG # => 1
 ```
 
 - **SEE** [m:Thread.DEBUG]
@@ -285,50 +285,50 @@ Thread.DEBUG # => 1
 
 例: 延期させられていた例外をただちに発生させる。
 
-`````
+```ruby
 def Thread.kick_interrupt_immediately
   Thread.handle_interrupt(Object => :immediate) {
     Thread.pass
   }
 end
-`````
+```
 
 ### 使い方
 
-`````
+```ruby
 th = Thread.new{
   Thread.handle_interrupt(RuntimeError => :on_blocking){
     while true
-      ...
+      # ...
       # ここまでで割り込みが発生しても安全な状態になった。
       if Thread.pending_interrupt?
         Thread.handle_interrupt(Object => :immediate){}
       end
-      ...
+      # ...
     end
   }
 }
-...
+# ...
 th.raise # スレッド停止。
-`````
+```
 
 この例は以下のように記述する事もできます。
 
-`````
+```ruby
 flag = true
 th = Thread.new{
   Thread.handle_interrupt(RuntimeError => :on_blocking){
     while true
-      ...
+      # ...
       # ここまでで割り込みが発生しても安全な状態になった。
       break if flag == false
-      ...
+      # ...
     end
   }
 }
-...
+# ...
 flag = false # スレッド停止
-`````
+```
 
 - **SEE** [m:Thread#pending_interrupt?], [m:Thread.handle_interrupt]
 
@@ -378,7 +378,7 @@ flag = false # スレッド停止
 
 例:[c:Thread#raise] 発生のタイミングを制御する例
 
-`````
+```ruby
 th = Thread.new do
   Thread.handle_interrupt(RuntimeError => :never) {
     begin
@@ -394,7 +394,7 @@ end
 Thread.pass
 # ...
 th.raise "stop"
-`````
+```
 
 [c:RuntimeError] を無視(延期)している間はリソースの割り当てや ensure
 節でリソースの解放を安全に行う事ができます。
@@ -403,7 +403,7 @@ th.raise "stop"
 
 例:[c:TimeoutError] 発生のタイミングを制御する例
 
-`````
+```ruby
 require 'timeout'
 Thread.handle_interrupt(TimeoutError => :never) {
   timeout(10){
@@ -414,7 +414,7 @@ Thread.handle_interrupt(TimeoutError => :never) {
     # TimeoutError => :never の指定により、ここでは TimeoutError が発生しない。
   }
 }
-`````
+```
 
 この例を ensure 節での [c:TimeoutError] 発生に応用する事でリソースリー
 クに備える事ができます。[m:Timeout?.timeout] はスレッドを使って実装さ
@@ -425,26 +425,24 @@ Thread.handle_interrupt(TimeoutError => :never) {
 It's possible to stack multiple levels of ::handle_interrupt blocks in order
 to control more than one ExceptionClass and TimingSymbol at a time.
 
-`````
+```ruby
 Thread.handle_interrupt(FooError => :never) {
   Thread.handle_interrupt(BarError => :never) {
      # FooError and BarError are prohibited.
   }
 }
-`````
+```
 
 #### 例外クラスの継承関係
 
 本メソッドでは引数 hash のキーに指定した例外クラスの全てのサブクラスが
 処理の対象になります。
 
-例:
-
-`````
+```ruby title="例"
 Thread.handle_interrupt(Exception => :never) {
   # Exception を継承する全ての例外クラスの例外の発生を延期。
 }
-`````
+```
 
 - **SEE** [m:Thread.pending_interrupt?], [m:Thread#pending_interrupt?]
 
@@ -538,10 +536,10 @@ name に対応するスレッド固有データがない時には、引数 defau
 ```ruby title="例"
 th = Thread.new { Thread.current[:name] = 'A' }
 th.join
-th.fetch(:name)   # => "A"
-th.fetch(:fetch, 'B')   # => "B"
-th.fetch('name')  {|name| "Thread" + name}  # => "A"
-th.fetch('fetch') {|name| "Thread" + name}  # => "Threadfetch"
+p th.fetch(:name) # => "A"
+p th.fetch(:fetch, 'B') # => "B"
+p th.fetch('name')  {|name| "Thread" + name}  # => "A"
+p th.fetch('fetch') {|name| "Thread" + name}  # => "Threadfetch"
 ```
 
 - **SEE** [m:Thread#\[\]]
@@ -561,9 +559,9 @@ th.fetch('fetch') {|name| "Thread" + name}  # => "Threadfetch"
 
 ```ruby title="例"
 thread = Thread.new { sleep 1 }
-thread.abort_on_exception # => false
+p thread.abort_on_exception # => false
 thread.abort_on_exception = true
-thread.abort_on_exception # => true
+p thread.abort_on_exception # => true
 ```
 
 ### def report_on_exception               -> bool
@@ -578,7 +576,7 @@ thread.abort_on_exception # => true
 ```ruby title="例"
 a = Thread.new{ Thread.stop; raise }
 a.report_on_exception = true
-a.report_on_exception   # => true
+p a.report_on_exception # => true
 a.run
 # => #<Thread:0x00007fc3f48c7908 (irb):1 run> terminated with exception (report_on_exception is true):
 #    Traceback (most recent call last):
@@ -590,7 +588,7 @@ a.run
 #    #<Thread:0x00007fc3f48c7908 (irb):1 dead>
 b = Thread.new{ Thread.stop; raise }
 b.report_on_exception = false
-b.run   # => #<Thread:0x00007fc3f48aefc0 (irb):4 dead>
+p b.run # => #<Thread:0x00007fc3f48aefc0 (irb):4 dead>
 ```
 
 - **SEE** [m:Thread.report_on_exception]
@@ -599,13 +597,12 @@ b.run   # => #<Thread:0x00007fc3f48aefc0 (irb):4 dead>
 
 スレッドが「生きている」時、true を返します。
 
-例:
-`````
+```ruby title="例"
 thr = Thread.new { }
-thr.join                # => #<Thread:0x401b3fb0 dead>
-Thread.current.alive?   # => true
-thr.alive?              # => false
-`````
+p thr.join              # => #<Thread:0x401b3fb0 dead>
+p Thread.current.alive? # => true
+p thr.alive?            # => false
+```
 
 [m:Thread#status] が真を返すなら、このメソッドも真です。
 
@@ -625,7 +622,7 @@ thr.alive?              # => false
 
 [m:Kernel?.exit] と違い例外  [c:SystemExit] を発生しません。
 
-`````
+```ruby
 th1 = Thread.new do
   begin
     sleep 10
@@ -638,7 +635,7 @@ sleep 0.1
 th1.kill
 
 #=> "this will be displayed"
-`````
+```
 
 - **SEE** [m:Kernel?.exit], [m:Kernel?.exit!]
 
@@ -647,10 +644,10 @@ th1.kill
 
 スレッドが属している [c:ThreadGroup] オブジェクトを返します。
 
-```````
+```ruby
 p Thread.current.group == ThreadGroup::Default
 # => true
-```````
+```
 
 ### def ignore_deadlock -> bool
 
@@ -695,14 +692,14 @@ limit を指定して、limit 秒過ぎても自身が終了しない場合、ni
 
 以下は、生成したすべてのスレッドの終了を待つ例です。
 
-``````
+```ruby
 threads = []
 threads.push(Thread.new { n = rand(5); sleep n; n })
 threads.push(Thread.new { n = rand(5); sleep n; n })
 threads.push(Thread.new { n = rand(5); sleep n; n })
 
 threads.each {|t| t.join}
-``````
+```
 
 ### def key?(name)     -> bool
 
@@ -714,8 +711,8 @@ true を返します。
 ```ruby title="例"
 me = Thread.current
 me[:oliver] = "a"
-me.key?(:oliver)    # => true
-me.key?(:stanley)   # => false
+p me.key?(:oliver)  # => true
+p me.key?(:stanley) # => false
 ```
 
 ### def keys    -> [Symbol]
@@ -723,14 +720,14 @@ me.key?(:stanley)   # => false
 スレッド固有データに関連づけられたキーの配列を返します。キーは
 [c:Symbol] で返されます。
 
-```````
+```ruby
 th = Thread.current
 th[:foo] = 'FOO'
 th['bar'] = 'BAR'
 p th.keys
 
 #=> [:bar, :foo]
-```````
+```
 
 ### def priority    -> Integer
 ### def priority=(val)
@@ -742,7 +739,7 @@ priority を引き継ぎます。
 - **param** `val` -- スレッドの優先度を指定します。プラットフォームに依存します。
 
 ```ruby title="例"
-Thread.current.priority   # => 0
+p Thread.current.priority # => 0
 
 count1 = count2 = 0
 a = Thread.new do
@@ -755,9 +752,9 @@ b = Thread.new do
     end
 b.priority = -2
 count1 = count2 = 0 # reset
-sleep 1   # => 1
-count1    # => 13809431
-count2    # => 11571921
+p sleep 1 # => 1
+p count1  # => 13809431
+p count2  # => 11571921
 ```
 
 ### def raise(error_type, message, traceback)     -> ()
@@ -770,7 +767,7 @@ count2    # => 11571921
 
 - **param** `traceback` -- [m:Kernel?.raise] を参照してください。
 
-`````
+```text
 Thread.new {
   sleep 1
   Thread.main.raise "foobar"
@@ -784,7 +781,7 @@ end
 
 => #<RuntimeError: foobar>
    ["-:3"]
-`````
+```
 
 ### def run    -> self
 
@@ -818,26 +815,26 @@ a.join
 [m:Thread#alive?] が真を返すなら、このメソッドも真です。
 
 ```ruby title="例"
-Thread.current.status   #=> "run"
+p Thread.current.status #=> "run"
 
 a = Thread.new { raise("die now") }
 sleep 0.1
-a.status                #=> nil
+p a.status              #=> nil
 
 b = Thread.new { Thread.stop }
 sleep 0.1
-b.status                #=> "sleep"
+p b.status              #=> "sleep"
 
 c = Thread.new { Thread.exit }
 sleep 0.1
-c.status                #=> false
+p c.status              #=> false
 
 d = Thread.new { sleep }
 sleep 0.1
-d.status                #=> "sleep"
+p d.status              #=> "sleep"
 d.kill
 sleep 0.1
-d.status                #=> false
+p d.status              #=> false
 ```
 
 - **SEE** [m:Thread#alive?], [m:Thread#stop?]
@@ -849,8 +846,8 @@ d.status                #=> false
 ```ruby title="例"
 a = Thread.new { Thread.stop }
 b = Thread.current
-a.stop?   # => true
-b.stop?   # => false
+p a.stop? # => true
+p b.stop? # => false
 ```
 
 - **SEE** [m:Thread#alive?], [m:Thread#status]
@@ -865,21 +862,21 @@ b.stop?   # => false
 
 以下は、生成したすべてのスレッドの終了を待ち結果を出力する例です。
 
-``````
+```ruby
 threads = []
 threads.push(Thread.new { n = rand(5); sleep n; n })
 threads.push(Thread.new { n = rand(5); sleep n; n })
 threads.push(Thread.new { n = rand(5); sleep n; n })
 
 threads.each {|t| p t.value}
-``````
+```
 
 最後の行で、待ち合わせを行っていることがわかりにくいと思うなら以下
 のように書くこともできます。
 
-``````
+```ruby
 threads.each {|t| p t.join.value}
-``````
+```
 
 ### def wakeup    -> self
 
@@ -904,9 +901,9 @@ c.join
 
 ```ruby title="例"
 a = Thread.current
-a.inspect   # => "#<Thread:0x00007fdbaf07ddb0 run>"
+p a.inspect # => "#<Thread:0x00007fdbaf07ddb0 run>"
 b = Thread.new{}
-b.inspect   # => "#<Thread:0x00007fdbaf8f7d10 (irb):3 dead>"
+p b.inspect # => "#<Thread:0x00007fdbaf8f7d10 (irb):3 dead>"
 ```
 
 ### def add_trace_func(pr) -> Proc
@@ -1006,7 +1003,7 @@ th.backtrace
 #    ]
 
 th.kill
-th.backtrace   # => nil
+p th.backtrace # => nil
 ```
 
 
@@ -1032,9 +1029,9 @@ th.backtrace   # => nil
 thread = Thread.new { sleep 1 }
 thread.run
 #@since 3.4
-thread.backtrace_locations # => ["/path/to/test.rb:1:in 'sleep'", "/path/to/test.rb:1:in 'block in <main>'"]
+p thread.backtrace_locations # => ["/path/to/test.rb:1:in 'sleep'", "/path/to/test.rb:1:in 'block in <main>'"]
 #@else
-thread.backtrace_locations # => ["/path/to/test.rb:1:in `sleep'", "/path/to/test.rb:1:in `block in <main>'"]
+p thread.backtrace_locations # => ["/path/to/test.rb:1:in `sleep'", "/path/to/test.rb:1:in `block in <main>'"]
 #@end
 ```
 
@@ -1047,9 +1044,7 @@ thread.backtrace_locations # => ["/path/to/test.rb:1:in `sleep'", "/path/to/test
 [注意]: [m:Thread#\[\]] でセットしたローカル変数(Fiber ローカル変数)と
 異なり、Fiber を切り替えても同じ変数を返す事に注意してください。
 
-例:
-
-`````
+```ruby title="例"
 Thread.new {
   Thread.current.thread_variable_set("foo", "bar") # スレッドローカル
   Thread.current["foo"] = "bar"                    # Fiber ローカル
@@ -1061,7 +1056,7 @@ Thread.new {
     ]
   }.resume
 }.join.value # => ['bar', nil]
-`````
+```
 
 この例の "bar" は [m:Thread#thread_variable_get] により得られ
 た値で、nil は[m:Thread#\[\]] により得られた値です。
@@ -1084,8 +1079,8 @@ thr = Thread.new do
   Thread.current.thread_variable_set(:cat, 'meow')
   Thread.current.thread_variable_set("dog", 'woof')
 end
-thr.join               # => #<Thread:0x401b3f10 dead>
-thr.thread_variables   # => [:dog, :cat]
+p thr.join             # => #<Thread:0x401b3f10 dead>
+p thr.thread_variables # => [:dog, :cat]
 ```
 
 - **SEE** [m:Thread#thread_variable_get], [m:Thread#\[\]]
@@ -1097,12 +1092,12 @@ thr.thread_variables   # => [:dog, :cat]
 
 - **param** `key` -- 変数名を [c:String] か [c:Symbol] で指定します。
 
-``````
+```ruby
 me = Thread.current
 me.thread_variable_set(:oliver, "a")
-me.thread_variable?(:oliver)    # => true
-me.thread_variable?(:stanley)   # => false
-``````
+p me.thread_variable?(:oliver)  # => true
+p me.thread_variable?(:stanley) # => false
+```
 
 [注意]: [m:Thread#\[\]] でセットしたローカル変数(Fiber ローカル変数)が
 対象ではない事に注意してください。
@@ -1139,8 +1134,8 @@ self の名前を name に設定します。
 ```ruby title="例"
 a = Thread.new{}
 a.name = 'named'
-a.name      # => "named"
-a.inspect   # => "#<Thread:0x00007f85ac8721f0@named (irb):1 dead>"
+p a.name    # => "named"
+p a.inspect # => "#<Thread:0x00007f85ac8721f0@named (irb):1 dead>"
 ```
 
 - **SEE** [m:Thread#name]

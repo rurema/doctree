@@ -143,7 +143,7 @@ end
 ロックが混在している場合、通知されたイベントに対応するブロックがあれば
 そちらだけが呼び出されます。
 
-```text
+```ruby
 ie = WIN32OLE.new('InternetExplorer.Application')
 ev = WIN32OLE_EVENT.new(ie, 'DWebBrowserEvents2')
 ev.on_event("NavigateComplete2") do |browser, url| 
@@ -152,7 +152,7 @@ end
 ev.on_event do |*args|   # <- NavigateComplete2イベント時は実行されない
   puts args[0]
 end
-...
+# ...
 ```
 
 当メソッドはイベント名の大文字小文字を区別するほか、イベント名の存在確
@@ -199,10 +199,10 @@ end
 す。nilの場合、[m:WIN32OLE_EVENT#on_event]に対してnilを指定したブロッ
 クを解除します。
 
-```text
+```ruby
 ev = WIN32OLE_EVENT.new(ie, 'DWebBrowserEvents')
 ev.on_event(:NavigateComplete) {|url| puts url }
-...
+# ...
 ev.off_event(:NavigateComplete)
 ```
 

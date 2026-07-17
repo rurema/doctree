@@ -10,16 +10,16 @@ require:
 ---
 インストールされている Gem パッケージを初期状態にするためのライブラリです。
 
-`````
+```text
 Usage: gem pristine [args] [options]
   Options:
         --all                        インストールされている全ての Gem パッケージを
                                      初期状態に戻します
     -v, --version VERSION            指定したバージョンの Gem パッケージを
                                      初期状態に戻します
-`````
+```
 #@include(common_options)
-```````
+```text
 Arguments:
   GEMNAME       gem to restore to pristine condition (unless --all)
 Summary:
@@ -37,7 +37,7 @@ Description:
   revert the gem.
 Defaults:
   --all
-```````
+```
 
 
 # class Gem::Commands::PristineCommand < Gem::Command

@@ -18,7 +18,7 @@ p FileTest.directory?($0) #=> false
 1.8 以降では、属性メソッドがシステムでサポートされていない場合 nil が返ります。
 なお、1.7 以前では 0 が返っていました。
 
-`````
+```text
 dev         デバイス番号(ファイルシステム)
 dev_major   dev の major 番号部
 dev_minor   dev の minor 番号部
@@ -36,7 +36,7 @@ blocks      割り当てられているブロック数
 atime       最終アクセス時刻
 mtime       最終更新時刻
 ctime       最終状態変更時刻(状態の変更とは chmod などによるもので、Unix では i-node の変更を意味します)
-`````
+```
 
 ## Class Methods
 
@@ -87,7 +87,7 @@ p File::Stat.new(fp1.path) <=> fp2.path #=> nil
 
 文字列は以下のうちのいずれかです。
 
-`````
+```text
 "file"
 "directory"
 "characterSpecial"
@@ -97,7 +97,7 @@ p File::Stat.new(fp1.path) <=> fp2.path #=> nil
 "socket"
 
 "unknown"
-`````
+```
 
 #@# あらい 2002-01-06: 今のところ "unknown" を返すことはないはず。
 #@# もしそのようなことがあれば、バグ報告をした方が良いと思われる。

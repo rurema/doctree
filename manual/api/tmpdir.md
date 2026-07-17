@@ -96,7 +96,7 @@ p FileTest.directory?(dir) #=> false
 文字列として返します。
 [m:$SAFE] によって返す文字列は変わります。
 
-`````
+```ruby
 # WindowsXPの場合
 
 require "tmpdir"
@@ -104,10 +104,8 @@ require "tmpdir"
 p Dir.tmpdir #=> "C:/DOCUME~1/taro3/LOCALS~1/Temp"
 $SAFE = 1
 p Dir.tmpdir #=> "C:/WINDOWS/temp"
-`````
 
-`````
 # Linuxの場合 /tmp に加え、環境変数 ENV['TMPDIR'], ENV['TMP'], ENV['TEMP'], ENV['USERPROFILE']を参照します
-`````
+```
   
 

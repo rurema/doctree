@@ -35,10 +35,10 @@ port は接続するポート番号です。
 
 以下と同じです。
 
-`````
+```ruby
 require 'net/smtp'
 Net::SMTP.new(address, port).start(helo: helo, user: user, password: password, authtype: authtype)
-`````
+```
 
 このメソッドにブロックを与えた場合には、新しく作られた [c:Net::SMTP] オブジェクト
 を引数としてそのブロックを呼び、ブロック終了時に自動的に接続を閉じます。

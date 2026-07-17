@@ -85,9 +85,7 @@ p nom.args
 
 メソッド呼び出しに使われた引数を配列で返します。
 
-例:
-
-`````
+```ruby title="例"
 begin
   foobar(1,2,3)
 rescue NoMethodError
@@ -95,21 +93,15 @@ rescue NoMethodError
   p $!.name
   p $!.args
 end
-`````
 
 #@since 3.4
-`````
 # => #<NoMethodError: undefined method 'foobar' for main:Object>
-`````
 #@else
-`````
 # => #<NoMethodError: undefined method `foobar' for main:Object>
-`````
 #@end
-``````````
 :foobar
 [1, 2, 3]
-``````````
+```
 
 ### def private_call? -> bool
 

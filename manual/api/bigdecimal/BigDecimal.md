@@ -317,14 +317,14 @@ p BigDecimal::double_fig  # ==> 16 (depends on the CPU etc.)
 
 double_figは以下の C プログラムの結果と同じです。
 
-```````
+```c
 double v = 1.0;
 int double_fig = 0;
 while (v + 1.0 > 1.0) {
    ++double_fig;
    v /= 10;
 }
-```````
+```
 
 ### def _load(str) -> BigDecimal
 
@@ -656,15 +656,15 @@ self の有効数字と最大有効数字の配列を返します。
 
 符号が正であれば正の整数を返し、負であれば負の整数を返し、NaN であれば 0 を返します。
 
-`````
-NaN        であれば、 0。 BigDecimal::SIGN_NaN と同じです。
-+0         であれば、 1。 BigDecimal::SIGN_POSITIVE_ZERO と同じです。
--0         であれば、-1。 BigDecimal::SIGN_NEGATIVE_ZERO と同じです。
-有限の正の値 であれば、 2。 BigDecimal::SIGN_POSITIVE_FINITE と同じです。
-有限の負の値 であれば、-2。 BigDecimal::SIGN_NEGATIVE_FINITE と同じです。
-+Infinity  であれば、 3。 BigDecimal::SIGN_POSITIVE_INFINITE と同じです。
--Infinity  であれば、-3。 BigDecimal::SIGN_NEGATIVE_INFINITE と同じです。
-`````
+| 自身の値 | 返り値 | 同じ値の定数 |
+|---|---:|---|
+| NaN | 0 | BigDecimal::SIGN_NaN |
+| +0 | 1 | BigDecimal::SIGN_POSITIVE_ZERO |
+| -0 | -1 | BigDecimal::SIGN_NEGATIVE_ZERO |
+| 有限の正の値 | 2 | BigDecimal::SIGN_POSITIVE_FINITE |
+| 有限の負の値 | -2 | BigDecimal::SIGN_NEGATIVE_FINITE |
+| +Infinity | 3 | BigDecimal::SIGN_POSITIVE_INFINITE |
+| -Infinity | -3 | BigDecimal::SIGN_NEGATIVE_INFINITE |
 
 BigDecimal は、 0 であっても、+ か - の符号を持つことに注意して下さい。
 (「[ref:lib:bigdecimal#internal_structure]」を参照)

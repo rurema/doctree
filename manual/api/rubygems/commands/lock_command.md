@@ -6,13 +6,13 @@ require:
 指定された特定のバージョンの Gem パッケージに依存する Gem を使用するために
 必要な [m:Kernel#gem] メソッドの呼び出し方法を文字列で出力します。
 
-`````
+```text
 Usage: gem lock GEMNAME-VERSION [GEMNAME-VERSION ...] [options]
   Options:
     -s, --[no-]strict                依存関係を満たせない場合に失敗します
-`````
+```
 #@include(common_options)
-```````
+```text
 Arguments:
   GEMNAME       ロックする Gem パッケージの名前を指定します
   VERSION       ロックする Gem パッケージのバージョンを指定します
@@ -50,7 +50,7 @@ Description:
   lock it down to the exact version.
 Defaults:
   --no-strict
-```````
+```
 
 
 # class Gem::Commands::LockCommand < Gem::Command

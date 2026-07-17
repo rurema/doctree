@@ -308,13 +308,13 @@ p row.field_row?      # => true
 
 - **return** -- 引数を与えなかった場合は全ての要素を返します。
 
-`````
+```ruby
 require 'csv'
 csv = CSV.new("a,b,c\n1,2,3", headers: true)
 table = csv.read
 row = table.first
-row.values_at("a", 1, 2..3) # => ["1", "2", "3", nil]
-`````
+p row.values_at("a", 1, 2..3) # => ["1", "2", "3", nil]
+```
 
 ### def header?(name) -> bool
 ### def include?(name) -> bool
@@ -395,9 +395,9 @@ p row.inspect # => "#<CSV::Row \"header1\":1 \"header2\":2 \"header1\":3>"
 複数のフィールドを追加するためのショートカットです。
 
 以下とおなじです:
-`````
+```ruby
 args.each { |arg| csv_row << arg }
-`````
+```
 
 - **return** -- メソッドチェーンのために自身を返します。
 

@@ -9,21 +9,21 @@ require:
 ---
 指定された Gem パッケージをカレントディレクトリに展開するためのライブラリです。
 
-`````
+```text
 Usage: gem unpack GEMNAME [options]
   Options:
         --target                     展開先のディレクトリを指定します
     -v, --version VERSION            展開する Gem パッケージのバージョンを指定します
-`````
+```
 #@include(common_options)
-```````
+```text
 Arguments:
   GEMNAME       展開する Gem パッケージ名を指定します
 Summary:
   Gem パッケージをカレントディレクトリに展開します
 Defaults:
   --version '>= 0'
-```````
+```
 
 
 # class Gem::Commands::UnpackCommand < Gem::Command

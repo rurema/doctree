@@ -155,9 +155,9 @@ p Complex(2)     <=> 3           #=> -1
 
 以下の計算の結果を [c:Float] オブジェクトで返します。
 
-`````
+```text
 sqrt(self.real ** 2 + self.imag ** 2)
-`````
+```
 
 ```ruby title="例"
 p Complex(1, 2).abs       # => 2.23606797749979
@@ -173,9 +173,9 @@ p Complex('1/2', '1/2').abs # => 0.7071067811865476
 
 以下の計算の結果を返します。
 
-`````
+```text
 self.real ** 2 + self.imag ** 2
-`````
+```
 
 ```ruby title="例"
 p Complex(1, 1).abs2       # => 2
@@ -259,11 +259,11 @@ p Complex(1, 2).conj # => (1-2i)
 
 以下のように、実部と虚部の分母の最小公倍数を整数で返します。
 
-`````
+```text
 1   2       3+4i  <-  numerator(分子)
 - + -i  ->  ----
 2   3        6    <-  denominator(分母)
-`````
+```
 
 ```ruby title="例"
 p Complex('1/2+2/3i').denominator # => 6

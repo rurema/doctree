@@ -6,7 +6,7 @@ require:
 ---
 Gem パッケージの証明書や署名の設定を管理するためのライブラリです。
 
-`````
+```console
 Usage: gem cert [options]
   Options:
     -a, --add CERT                   信頼された証明書を追加します
@@ -17,12 +17,12 @@ Usage: gem cert [options]
     -C, --certificate CERT           --sign で使用する証明書を指定します
     -K, --private-key KEY            --sign で使用する秘密鍵を指定します
     -s, --sign NEWCERT               証明書に秘密鍵で署名します
-`````
+```
 #@include(common_options)
-```````
+```console
 Summary:
   Manage RubyGems certificates and signing settings
-```````
+```
 
 
 # class Gem::Commands::CertCommand < Gem::Command

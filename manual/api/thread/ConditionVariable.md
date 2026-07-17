@@ -26,17 +26,17 @@ alias ConditionVariable
 メソッドでスレッド a に対して条件が成立したことを通知します。これが典型的な
 使用例です。
 
-```text
+```ruby
 mutex = Mutex.new
 cv = ConditionVariable.new
 
 a = Thread.start {
     mutex.synchronize {
-      ...
+      # ...
       while (条件が満たされない)
         cv.wait(mutex)
       end
-      ...
+      # ...
     }
 }
 

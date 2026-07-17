@@ -158,7 +158,7 @@ p ARGF.binmode? # => true
 いる場合は次のファイルをオープンします。
 ただし、標準入力はクローズされません。
 
-`````
+```console
 $ echo "foo" > foo
 $ echo "bar" > bar
 
@@ -168,7 +168,7 @@ ARGF.filename  # => "foo"
 ARGF.close
 ARGF.filename  # => "bar"
 ARGF.close
-`````
+```
 
 - **SEE** [m:ARGF.class#closed?]
 

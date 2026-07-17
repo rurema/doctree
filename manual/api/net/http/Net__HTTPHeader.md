@@ -443,9 +443,9 @@ req.each_header { |key,value| puts "#{key} = #{value}" }
 ブロックに渡し、呼びだします。
 
 正規化名は name に対し
-`````
+```ruby
 name.downcase.split(/-/).capitalize.join('-')
-`````
+```
 で求まる文字列です。
 
 ### def each_capitalized_name {|name| .... } -> ()

@@ -73,13 +73,13 @@ def_delegators は def_instance_delegators の別名になります。
 
 また、以下の 2 つの例は同じ意味です。
 
-`````
+```ruby
 def_delegators :@records, :size, :<<, :map
 
 def_delegator :@records, :size
 def_delegator :@records, :<<
 def_delegator :@records, :map
-`````
+```
 
 - **SEE** [m:Forwardable#def_delegator]
 
@@ -166,19 +166,17 @@ p zap.last # => "baz"
 
 オブジェクトに対して extend して使います。
 
-例:
-
-`````
+```ruby title="例"
 require 'forwardable'
 g = Goo.new
 g.extend SingleForwardable
 g.def_delegator("@out", :puts)
 g.puts ...
-`````
+```
 
 また、[c:SingleForwardable] はクラスやモジュールに対して以下のようにする事もできます。
 
-`````
+```ruby
 require 'forwardable'
 class Implementation
   def self.service
@@ -191,8 +189,8 @@ module Facade
   def_delegator :Implementation, :service
 end
 
-Facade.service # => serviced!
-`````
+p Facade.service # => serviced!
+```
 
 もし [c:Forwardable] と [c:SingleForwardable] の両方を使いたい場合、
 def_instance_delegator と def_single_delegator メソッドの方を呼び出して
@@ -216,13 +214,13 @@ def_delegators は def_singleton_delegators の別名になります。
 
 また、以下の 2 つの例は同じ意味です。
 
-`````
+```ruby
 def_delegators :@records, :size, :<<, :map
 
 def_delegator :@records, :size
 def_delegator :@records, :<<
 def_delegator :@records, :map
-`````
+```
 
 - **SEE** [m:SingleForwardable#def_delegator]
 

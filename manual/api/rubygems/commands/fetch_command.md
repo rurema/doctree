@@ -11,7 +11,7 @@ require:
 ---
 Gem パッケージをダウンロードしてカレントディレクトリに保存するためのライブラリです。
 
-`````
+```text
 Usage: gem fetch GEMNAME [GEMNAME ...] [options]
   Options:
     -v, --version VERSION            指定されたバージョンの Gem を取得します
@@ -21,16 +21,16 @@ Usage: gem fetch GEMNAME [GEMNAME ...] [options]
                                      synchronization (default 1000)
     -p, --[no-]http-proxy [URL]      リモートの操作に HTTP プロクシを使用します
         --source URL                 Gem パッケージのリモートリポジトリの URL を指定します
-`````
+```
 #@include(common_options)
-```````
+```text
 Arguments:
   GEMNAME       ダウンロードする Gem パッケージの名前を指定します
 Summary:
   Gem パッケージをダウンロードしてカレントディレクトリに保存します
 Defaults:
   --version '>= 0'
-```````
+```
 
 
 # class Gem::Commands::FetchCommand < Gem::Command

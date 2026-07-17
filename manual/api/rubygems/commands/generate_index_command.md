@@ -6,13 +6,13 @@ require:
 ---
 ある Gem サーバに対するインデックスを作成するためのライブラリです。
 
-`````
+```text
 Usage: gem generate_index [options]
   Options:
     -d, --directory=DIRNAME          repository base dir containing gems subdir
-`````
+```
 #@include(common_options)
-```````
+```text
 Summary:
   Generates the index files for a gem server directory
 Description:
@@ -42,7 +42,7 @@ Description:
   version changes.
 Defaults:
   --directory .
-```````
+```
 
 # class Gem::Commands::GenerateIndexCommand < Gem::Command
 

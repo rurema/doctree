@@ -71,12 +71,12 @@ Net::POP3.start(addr, port, account, password) {|pop|
 ### def APOP(is_apop) -> Class
 bool が真なら [c:Net::APOP] クラス、偽なら [c:Net::POP3] クラスを返します。
 
-```text title="使用例"
+```ruby title="使用例"
 require 'net/pop'
 
 pop = Net::POP3::APOP($isapop).new(addr, port)
 pop.start(account, password) {
-  ....
+  # ....
 }
 ```
 

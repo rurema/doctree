@@ -49,52 +49,36 @@ p err.name  # => "foo"
 シンボルにできない名前が原因のときは文字列で返すことがあります。
 名前が不明な場合は nil を返すこともあります。
 
-例:
-
-`````
+```ruby title="例"
 begin
   foobar
 rescue NameError => err
-`````
 #@since 3.4
-```````
 p err       # => #<NameError: undefined local variable or method 'foobar' for main:Object>
-```````
 #@else
-```````
 p err       # => #<NameError: undefined local variable or method `foobar' for main:Object>
-```````
 #@end
-`````
   p err.name  # => :foobar
 end
-`````
+```
 
 ### def to_s -> String
 
 例外オブジェクトを文字列に変換して返します。
 
-例:
-
-`````
+```ruby title="例"
 begin
   foobar
 rescue NameError => err
-`````
 #@since 3.4
-```````
 p err       # => #<NameError: undefined local variable or method 'foobar' for main:Object>
 p err.to_s  # => "undefined local variable or method 'foobar' for main:Object"
-```````
 #@else
-```````
 p err       # => #<NameError: undefined local variable or method `foobar' for main:Object>
 p err.to_s  # => "undefined local variable or method `foobar' for main:Object"
-```````
 #@end
-`````
 end
-`````
+```
 
 ### def receiver -> object
 

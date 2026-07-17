@@ -234,7 +234,7 @@ start_prefix_mapping, end_prefix_mapping では、その名前空間が導入さ
 - **param** `listener` -- コールバックオブジェクト
 
 ### 例
-`````
+```text
 # CDATAセクションに出会った場合にブロックが呼び出される。
 parser.listen(:cdata){|data| ... }
 
@@ -248,7 +248,7 @@ parser.listen(:start_element, ["h1", "h2"]){|uri, localname, qname, attrs|
 parser.listen(:characters, [/\Ah[1234]\z/]){|data|
   ...
 }
-`````
+```
 
 #@#   require 'rexml/parsers/sax2parser'
 #@#   parser = REXML::Parsers::SAX2Parser.new(<<XML)
