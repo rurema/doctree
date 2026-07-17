@@ -14,9 +14,7 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 ### 例
 
 ```ruby
-require 'thread'
-
-q = Queue.new
+q = Thread::Queue.new
 
 th1 = Thread.start do
   while resource = q.pop
@@ -53,9 +51,9 @@ resource3
 - **param** `items` -- 初期値を Enumerable で指定します。
 
 ```ruby
-q = Queue.new
-q = Queue.new([a, b, c])
-q = Queue.new(items)
+q = Thread::Queue.new
+q = Thread::Queue.new([a, b, c])
+q = Thread::Queue.new(items)
 ```
 #@else
 #@#noexample Thread::Queue#close 等を参照
@@ -68,7 +66,7 @@ q = Queue.new(items)
 キューを空にします。返り値は不定です。
 
 ```ruby title="例"
-q = Queue.new
+q = Thread::Queue.new
 
 [:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
 
@@ -82,7 +80,7 @@ p q.length # => 0
 キューが空の時、真を返します。
 
 ```ruby title="例"
-q = Queue.new
+q = Thread::Queue.new
 p q.empty? # => true
 q.push(:resource)
 p q.empty? # => false
@@ -94,7 +92,7 @@ p q.empty? # => false
 キューの長さを返します。
 
 ```ruby title="例"
-q = Queue.new
+q = Thread::Queue.new
 
 [:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
 
@@ -106,9 +104,7 @@ p q.length # => 4
 キューを待っているスレッドの数を返します。
 
 ```ruby title="例"
-require 'thread'
-
-q = SizedQueue.new(1)
+q = Thread::SizedQueue.new(1)
 q.push(1)
 t = Thread.new { q.push(2) }
 sleep 0.05 until t.stop?
@@ -127,9 +123,7 @@ t.join
 - **param** `non_block` -- true を与えると、キューが空の時に例外 [c:ThreadError] が発生します。
 
 ```ruby title="例"
-require 'thread'
-
-q = Queue.new
+q = Thread::Queue.new
 
 th1 = Thread.start do
   while resource = q.pop
@@ -145,9 +139,7 @@ th1.join
 ```
 
 ```ruby title="例: nonblock = true"
-require 'thread'
-
-q = Queue.new
+q = Thread::Queue.new
 
 th1 = Thread.start do
   while resource = q.pop
@@ -199,7 +191,7 @@ close する事でループから脱出する事もできます。
 例:
 
 ```ruby
-q = Queue.new
+q = Thread::Queue.new
 Thread.new{
   while e = q.deq # wait for nil to break loop
     # ...
@@ -213,7 +205,7 @@ q.close
 キューが close されている時に true を返します。
 
 ```ruby title="例"
-q = Queue.new
+q = Thread::Queue.new
 
 [:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
 

@@ -27,8 +27,8 @@ alias ConditionVariable
 使用例です。
 
 ```ruby
-mutex = Mutex.new
-cv = ConditionVariable.new
+mutex = Thread::Mutex.new
+cv = Thread::ConditionVariable.new
 
 a = Thread.start {
     mutex.synchronize {
@@ -52,14 +52,12 @@ b = Thread.start {
 あるいは満タンになった場合に Condition Variable を使って wait しています。
 
 ```ruby
-require 'thread'
-
 class TinyQueue
   def initialize(max=2)
     @max = max
-    @full = ConditionVariable.new
-    @empty = ConditionVariable.new
-    @mutex = Mutex.new
+    @full = Thread::ConditionVariable.new
+    @empty = Thread::ConditionVariable.new
+    @mutex = Thread::Mutex.new
     @q = []
   end
 
@@ -152,8 +150,8 @@ recv Milk
 - **return** -- 常に self を返します。
 
 ```ruby title="例"
-mutex = Mutex.new
-cv = ConditionVariable.new
+mutex = Thread::Mutex.new
+cv = Thread::ConditionVariable.new
 flg = true
 
 3.times {
@@ -194,8 +192,8 @@ sleep 1
 - **return** -- 常に self を返します。
 
 ```ruby title="例"
-mutex = Mutex.new
-cv = ConditionVariable.new
+mutex = Thread::Mutex.new
+cv = Thread::ConditionVariable.new
 flg = true
 
 3.times {
@@ -232,7 +230,7 @@ mutex のロックを解放し、カレントスレッドを停止します。
 [m:Thread::ConditionVariable#broadcast]で送られたシグナルを
 受け取ると、mutexのロックを取得し、実行状態となります。
 
-- **param** `mutex` -- [c:Mutex] オブジェクトを指定します。
+- **param** `mutex` -- [c:Thread::Mutex] オブジェクトを指定します。
 
 - **param** `timeout` -- スリープする秒数を指定します。この場合はシグナルを受け取
                らなかった場合でも指定した秒数が経過するとスリープを終了

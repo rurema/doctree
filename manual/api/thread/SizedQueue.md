@@ -14,9 +14,7 @@ alias SizedQueue
 q = [] にすると入力と違った順序で行が出力されます。
 
 ```ruby
-require 'thread'
-
-q = SizedQueue.new(1)
+q = Thread::SizedQueue.new(1)
 
 th = Thread.start {
   while line = q.pop
@@ -47,7 +45,7 @@ Thread::SizedQueue オブジェクトを生成します。
 キューの最大サイズを返します。
 
 ```ruby title="例"
-q = SizedQueue.new(4)
+q = Thread::SizedQueue.new(4)
 p q.max # => 4
 ```
 
@@ -57,7 +55,7 @@ p q.max # => 4
 - **param** `n` -- キューの最大サイズを指定します。
 
 ```ruby title="例"
-q = SizedQueue.new(4)
+q = Thread::SizedQueue.new(4)
 p q.max # => 4
 q.max = 5
 p q.max # => 5
@@ -90,9 +88,7 @@ non_block が真でなければ、キューのサイズが [m:Thread::SizedQueue
 - **param** `non_block` -- true を与えると、キューが空の時に例外 [c:ThreadError] が発生します。
 
 ```ruby title="例"
-require 'thread'
-
-q = SizedQueue.new(4)
+q = Thread::SizedQueue.new(4)
 
 th1 = Thread.start do
   while resource = q.pop
@@ -111,9 +107,7 @@ p th1.join
 ```
 
 ```ruby title="例: nonblock = true"
-require 'thread'
-
-q = SizedQueue.new(4)
+q = Thread::SizedQueue.new(4)
 
 th1 = Thread.start do
   while resource = q.pop
@@ -151,7 +145,7 @@ end
 [c:ClosedQueueError] が発生して中断されます。
 
 ```ruby title="例"
-q = SizedQueue.new(4)
+q = Thread::SizedQueue.new(4)
 
 [:resource1, :resource2, :resource3, nil].each { |r| q.push(r) }
 
