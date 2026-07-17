@@ -983,7 +983,7 @@ class C1
 end
 
 th = Thread.new {C1.new.m2; Thread.stop}
-th.backtrace
+p th.backtrace
 # => [
 #@since 3.4
 #      [0] "(irb):3:in 'sleep'",
