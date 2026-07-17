@@ -270,7 +270,11 @@ def foo(ret)
   ret
 end
 trace = TracePoint.new(:call) do |tp|
+#@since 3.4
+  p tp.inspect # "#<TracePoint:call 'foo' /path/to/test.rb:1>"
+#@else
   p tp.inspect # "#<TracePoint:call `foo'@/path/to/test.rb:1>"
+#@end
 end
 trace.enable
 foo 1

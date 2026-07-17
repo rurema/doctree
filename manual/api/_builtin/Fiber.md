@@ -108,8 +108,13 @@ Thread.new do
   f = Fiber.new{}
 end.join
 f.resume
+#@since 3.4
+#=> t.rb:5:in 'Fiber#resume': fiber called across threads (FiberError)
+#      from t.rb:5:in '<main>'
+#@else
 #=> t.rb:5:in `resume': fiber called across threads (FiberError)
 #      from t.rb:5:in `<main>'
+#@end
 ```
 
 ## Class Methods

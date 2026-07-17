@@ -793,7 +793,11 @@ p /abc/.fixed_encoding? # => false
 p /abc/e.fixed_encoding? # => true
 p /abc/ =~ "あいう" # => nil
 /abc/e =~ "あいう" 
+#@since 3.4
+# ~> -:6:in '<main>': incompatible encoding regexp match (EUC-JP regexp with UTF-8 string) (Encoding::CompatibilityError)
+#@else
 # ~> -:6:in `<main>': incompatible encoding regexp match (EUC-JP regexp with UTF-8 string) (Encoding::CompatibilityError)
+#@end
 ```
 
 

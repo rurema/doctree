@@ -140,9 +140,9 @@ end
 
 foo.call
 #@since 3.4
-# => in 'call': return from proc-closure (LocalJumpError)
+# => in 'block in Object#foo': unexpected return (LocalJumpError)
 #@else
-# => in `call': return from proc-closure (LocalJumpError)
+# => in `block in foo': unexpected return (LocalJumpError)
 #@end
 ```
 

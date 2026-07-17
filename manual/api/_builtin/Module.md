@@ -1643,7 +1643,15 @@ module M
 end
 
 p M.foo # => "foo"
-M.bar   # => undefined method `bar' for Foo:Module (NoMethodError)
+#@since 3.4
+M.bar   # => undefined method 'bar' for module M (NoMethodError)
+#@else
+#@since 3.3
+M.bar   # => undefined method `bar' for module M (NoMethodError)
+#@else
+M.bar   # => undefined method `bar' for M:Module (NoMethodError)
+#@end
+#@end
 ```
 
 このコードでは、モジュール関数 foo と

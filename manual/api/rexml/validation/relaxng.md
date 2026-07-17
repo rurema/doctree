@@ -45,8 +45,22 @@ validator = REXML::Validation::RelaxNG.new(relaxng_schema)
 parser = REXML::Parsers::TreeParser.new(xml)
 parser.add_listener(validator)
 parser.parse
+#@since 3.4
+# ~> /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/validation/validation.rb:22:in 'validate': Validation error.  Expected: :start_element(  ) or :start_element( card ) from < Z.2 #:start_element( card ), :start_element( name ), :text(  ), :end_element(  ), :start_element( email ), :text(  ), :end_element(  ), < O.3 #:start_element( note ), :text(  ), :end_element(  ) >, :end_element(  ) >  but got :text(  (REXML::Validation::ValidationException)
+#@else
 # ~> /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/validation/validation.rb:22:in `validate': Validation error.  Expected: :start_element(  ) or :start_element( card ) from < Z.2 #:start_element( card ), :start_element( name ), :text(  ), :end_element(  ), :start_element( email ), :text(  ), :end_element(  ), < O.3 #:start_element( note ), :text(  ), :end_element(  ) >, :end_element(  ) >  but got :text(  (REXML::Validation::ValidationException)
+#@end
 # ~>    )
+#@since 3.4
+# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/validation/relaxng.rb:122:in 'receive'
+# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:185:in 'block (2 levels) in pull'
+# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:184:in 'each'
+# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:184:in 'block in pull'
+# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:183:in 'tap'
+# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:183:in 'pull'
+# ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/treeparser.rb:22:in 'parse'
+# ~> 	from -:41:in '<main>'
+#@else
 # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/validation/relaxng.rb:122:in `receive'
 # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:185:in `block (2 levels) in pull'
 # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:184:in `each'
@@ -55,6 +69,7 @@ parser.parse
 # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/baseparser.rb:183:in `pull'
 # ~> 	from /home/ohai/.rbenv/versions/2.0.0-p247/lib/ruby/2.0.0/rexml/parsers/treeparser.rb:22:in `parse'
 # ~> 	from -:41:in `<main>'
+#@end
 ```
 
 ## Class Methods

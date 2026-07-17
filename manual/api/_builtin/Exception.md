@@ -85,7 +85,7 @@ rescue => e
 end
 
 #@since 3.4
-#=> ["filename.rb:2:in 'methd'", "filename.rb:6"]
+#=> ["filename.rb:2:in 'Object#methd'", "filename.rb:6"]
 #@else
 #=> ["filename.rb:2:in `methd'", "filename.rb:6"]
 #@end

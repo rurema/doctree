@@ -65,11 +65,23 @@ end
 
 => 12964
    12965
+#@since 3.4
+   interrupted by signal 17 at -:27:in 'Kernel#sleep'
+#@else
    interrupted by signal 17 at -:27:in `sleep'
+#@end
       child 12965 was stopped by signal 19
+#@since 3.4
+   interrupted by signal 17 at -:30:in 'Kernel#sleep'
+#@else
    interrupted by signal 17 at -:30:in `sleep'
+#@end
       child 12965 was killed by signal 15
+#@since 3.4
+   interrupted by signal 17 at -:30:in 'Kernel#sleep'
+#@else
    interrupted by signal 17 at -:30:in `sleep'
+#@end
       child 12964 exited normally. status=0
    done
 ```
