@@ -490,7 +490,7 @@ ltsv_formatter = proc { |severity, timestamp, progname, msg|
   "time:#{timestamp}\tlevel:#{severity}\tprogname:#{progname}\tmessage:#{msg}\n"
 }
 logger.formatter = ltsv_formatter
-p logger.formatter # => #<Proc:0x00007fa3048b8e00@/path/to/file:8>
+p logger.formatter # => #<Proc:0x00007fa3048b8e00 /path/to/file:8>
 logger.info("MyApp") { "test" }
 
 # => time:2019-05-09 22:13:56 +0900 level:INFO  progname:MyApp  message:test

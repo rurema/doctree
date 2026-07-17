@@ -428,7 +428,7 @@ f("a", "b", "c", 2, 3, "foo", "bar", "baz", "x", "y", "z", k: 42, u: "unknown") 
   #   z: "z"
   #   k: 42
   #   kwrest: {:u=>"unknown"}
-  #   blk: #<Proc:0x007f7e7d8dd6c0@-:16>
+  #   blk: #<Proc:0x007f7e7d8dd6c0 -:16>
 ```
 
 ```ruby title="例: イテレータの定義"

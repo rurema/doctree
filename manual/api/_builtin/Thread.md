@@ -580,17 +580,17 @@ a = Thread.new{ Thread.stop; raise }
 a.report_on_exception = true
 a.report_on_exception   # => true
 a.run
-# => #<Thread:0x00007fc3f48c7908@(irb):1 run> terminated with exception (report_on_exception is true):
+# => #<Thread:0x00007fc3f48c7908 (irb):1 run> terminated with exception (report_on_exception is true):
 #    Traceback (most recent call last):
 #@since 3.4
 #    (irb):1:in 'block in irb_binding': unhandled exception
 #@else
 #    (irb):1:in `block in irb_binding': unhandled exception
 #@end
-#    #<Thread:0x00007fc3f48c7908@(irb):1 dead>
+#    #<Thread:0x00007fc3f48c7908 (irb):1 dead>
 b = Thread.new{ Thread.stop; raise }
 b.report_on_exception = false
-b.run   # => #<Thread:0x00007fc3f48aefc0@(irb):4 dead>
+b.run   # => #<Thread:0x00007fc3f48aefc0 (irb):4 dead>
 ```
 
 - **SEE** [m:Thread.report_on_exception]
@@ -906,7 +906,7 @@ c.join
 a = Thread.current
 a.inspect   # => "#<Thread:0x00007fdbaf07ddb0 run>"
 b = Thread.new{}
-b.inspect   # => "#<Thread:0x00007fdbaf8f7d10@(irb):3 dead>"
+b.inspect   # => "#<Thread:0x00007fdbaf8f7d10 (irb):3 dead>"
 ```
 
 ### def add_trace_func(pr) -> Proc
@@ -1140,7 +1140,7 @@ self の名前を name に設定します。
 a = Thread.new{}
 a.name = 'named'
 a.name      # => "named"
-a.inspect   # => "#<Thread:0x00007f85ac8721f0@named@(irb):1 dead>"
+a.inspect   # => "#<Thread:0x00007f85ac8721f0@named (irb):1 dead>"
 ```
 
 - **SEE** [m:Thread#name]
