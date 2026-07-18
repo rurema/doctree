@@ -185,10 +185,10 @@ p Foo.a1        #=> :a
 def Foo.a2
   p @@a
 end
-Foo.a2          #=> NameError になります。
+Foo.a2          # ~> RuntimeError: class variable access from toplevel
 
 class << Foo
-  p @@a         #=> NameError になります。
+  p @@a         # ~> RuntimeError: class variable access from toplevel
 end
 ```
 
