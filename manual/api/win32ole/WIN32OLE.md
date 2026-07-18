@@ -116,7 +116,7 @@ OLEオートメーションでは、UNIXで利用される"ja_JP"などの国名
 lcid = WIN32OLE.locale
 ```
 
-### def locale=(lcid) -> nil
+### def locale=(lcid)
 
 WIN32OLEがオートメーション呼び出し時に設定するロケール識別子(LCID)を設
 定します。
@@ -160,7 +160,7 @@ Encoding.default_internalがnilの場合はEncoding.default_externalによって
 p WIN32OLE.codepage # => 932 （日本語Windowsの既定値）
 ```
 
-### def codepage=(cp) -> nil
+### def codepage=(cp)
 
 WIN32OLEがOLEオートメーションのインターフェイスに利用するコードページを
 設定します。
@@ -372,7 +372,7 @@ fsys = WIN32OLE.new('Scripting.FileSystemObject')
 p fsys.Drives[:c].FreeSpace #=> Cドライブの空き容量
 ```
 
-### def []=(key..., value) -> ()
+### def []=(key..., value)
 オブジェクトのデフォルトプロパティを設定します。
 
 OLEオートメーションにはデフォルトプロパティというプロパティ名を指定せず

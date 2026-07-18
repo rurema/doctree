@@ -37,7 +37,7 @@ require:
 
 - **SEE** [m:YAML::DBM#fetch]
 
-### def []=(key, value) -> object
+### def []=(key, value)
 ### def store(key, value) -> object
 
 key に対して value を格納します。
