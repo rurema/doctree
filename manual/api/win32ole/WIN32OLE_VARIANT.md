@@ -141,7 +141,7 @@ p obj[2,0] # => WIN32OLERuntimeError
 p obj[0, -1] # => WIN32OLERuntimeError
 ```
 
-### def []=(i..., val) -> object
+### def []=(i..., val)
 配列型のWIN32OLE_VARIANTの要素を設定します。
 
 selfは、[m:WIN32OLE_VARIANT.array]または引数に配列を指定して
@@ -178,7 +178,7 @@ obj = WIN32OLE_VARIANT.new(1, WIN32OLE::VARIANT::VT_BSTR)
 p obj.value # => "1" (VT_BSTRを指定して生成したので、Stringオブジェクトとなる)
 ```
 
-### def value=(val) -> ()
+### def value=(val)
 WIN32OLE_VARIANTの値を再設定します。
 
 指定した値でselfを再設定します。指定値が元のVARIANT型に合わない場合は元

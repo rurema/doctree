@@ -206,7 +206,7 @@ ev.on_event(:NavigateComplete) {|url| puts url }
 ev.off_event(:NavigateComplete)
 ```
 
-### def handler=(obj) -> ()
+### def handler=(obj)
 イベント処理を実行するオブジェクトを登録します。
 
 イベントハンドラをメソッドとして持つオブジェクトをイベントハンドラとし

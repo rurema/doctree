@@ -1118,7 +1118,7 @@ self の名前を返します。
 
 - **SEE** [m:Thread#name=]
 
-### def name=(name) -> String
+### def name=(name)
 
 self の名前を name に設定します。
 
