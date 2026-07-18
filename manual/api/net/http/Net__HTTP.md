@@ -198,7 +198,7 @@ address が nil のときは Net::HTTP クラスをそのまま返します。
 
 ```ruby title="例1: Net::HTTP.new を使う"
 require 'net/http'
-proxy_class = Net::HTTP::Proxy('proxy.example.com', 8080)
+proxy_class = Net::HTTP.Proxy('proxy.example.com', 8080)
 http = proxy_class.new('www.example.org')
 http.start {|h|
   h.get('/ja/') # proxy.example.com 経由で接続します。
@@ -207,7 +207,7 @@ http.start {|h|
 
 ```ruby title="例2: Net::HTTP.start を使う"
 require 'net/http'
-proxy_class = Net::HTTP::Proxy('proxy.example.com', 8080)
+proxy_class = Net::HTTP.Proxy('proxy.example.com', 8080)
 proxy_class.start('www.example.org') {|h|
   h.get('/ja/') # proxy.example.com 経由で接続します。
 }

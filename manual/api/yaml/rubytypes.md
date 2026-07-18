@@ -187,7 +187,7 @@ foo: bar
 require 'yaml'
   
 YStruct = Struct.new("YStruct", :name)
-p YStruct::yaml_tag_class_name
+p YStruct.yaml_tag_class_name
 #=> "YStruct"
 ```
 
@@ -209,7 +209,7 @@ p YStruct::yaml_tag_class_name
 require 'yaml'
   
 YStruct = Struct.new("YStruct", :name)
-p YStruct::yaml_tag_read_class("YStruct")
+p YStruct.yaml_tag_read_class("YStruct")
 #=> "Struct::YStruct"
 ```
 

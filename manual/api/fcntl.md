@@ -13,7 +13,7 @@ f.fcntl(Fcntl::F_SETFL, Fcntl::O_NONBLOCK|m)
     
 require 'fcntl'
     
-fd = IO::sysopen('/tmp/tempfile', 
+fd = IO.sysopen('/tmp/tempfile', 
      Fcntl::O_WRONLY | Fcntl::O_EXCL | Fcntl::O_CREAT)
 f = IO.open(fd)
 f.syswrite("TEMP DATA")

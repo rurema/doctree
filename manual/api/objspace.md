@@ -210,10 +210,10 @@ objectの元となったソースファイル名を返します。
 ```ruby title="例:test.rbというファイルで下記のスクリプトを実行した場合"
 require 'objspace'
 
-ObjectSpace::trace_object_allocations_start
+ObjectSpace.trace_object_allocations_start
 obj = Object.new
-puts "file:#{ObjectSpace::allocation_sourcefile(obj)}"   # => file:test.rb
-ObjectSpace::trace_object_allocations_stop
+puts "file:#{ObjectSpace.allocation_sourcefile(obj)}"   # => file:test.rb
+ObjectSpace.trace_object_allocations_stop
 ```
 
 - **SEE** [m:ObjectSpace?.trace_object_allocations_start],
@@ -229,10 +229,10 @@ objectの元となったソースファイルの行番号を返します。
 ```ruby title="例"
 require 'objspace'
 
-ObjectSpace::trace_object_allocations_start
+ObjectSpace.trace_object_allocations_start
 obj = Object.new
-puts "line:#{ObjectSpace::allocation_sourceline(obj)}"  # => line:4
-ObjectSpace::trace_object_allocations_stop
+puts "line:#{ObjectSpace.allocation_sourceline(obj)}"  # => line:4
+ObjectSpace.trace_object_allocations_stop
 ```
 
 - **SEE** [m:ObjectSpace?.trace_object_allocations_start],

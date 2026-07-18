@@ -21,7 +21,7 @@ pp (-5).to_bn  #=> #<OpenSSL::BN -5>
 ```ruby
 class Integer
   def to_bn
-    OpenSSL::BN::new(self)
+    OpenSSL::BN.new(self)
   end
 end
 ```
