@@ -1,5 +1,3 @@
-\###nonref
-
 # GNU
 
 FSF (Free Software Foundation) が長い間かけて築き上げて来た OS。GNU ユー
