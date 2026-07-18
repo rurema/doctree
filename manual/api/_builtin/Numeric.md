@@ -616,14 +616,17 @@ self を other で割った商を [c:Float] で返します。
 ただし [c:Complex] が関わる場合は例外です。
 その場合も成分は Float になります。
 
+self が [c:Integer] や [c:Rational] で、other が虚部を持つ [c:Complex]
+の場合は、商を [c:Float] に変換できないため [c:RangeError] が発生します。
+
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 - **param** `other` -- 自身を割る数を指定します。
 
 ```ruby title="例"
-p 1.fdiv(3)          #=> 0.3333333333333333
+p 1.fdiv(3)            #=> 0.3333333333333333
 p Complex(1, 1).fdiv 1 #=> (1.0+1.0i)
-p 1.fdiv Complex(1, 1) #=> (0.5-0.5i)
+1.fdiv Complex(1, 1)   # ~> RangeError: can't convert 0.5-0.5i into Float
 ```
 
 - **SEE** [m:Numeric#quo]
