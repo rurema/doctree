@@ -56,6 +56,7 @@ q = Thread::Queue.new([a, b, c])
 q = Thread::Queue.new(items)
 ```
 #@else
+#@#noexample Thread::Queue#close 等を参照
 使用例は [ref:c:Thread::Queue#example] を参照してください。
 #@end
 
@@ -172,6 +173,7 @@ end
 キューの値を追加します。待っているスレッドがいれば実行を再開
 させます。返り値は不定です。
 
+#@#noexample 要約の例を参照
 使用例は [ref:c:Thread::Queue#example] を参照してください。
 
 ### def close -> self
