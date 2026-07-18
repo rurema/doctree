@@ -93,7 +93,7 @@ port に nil を渡すと、適当なポート(通常は110、SSL利用時には
 使います。
 
 以下のコードと同様の処理をします。
-```text
+```ruby invalid
 require 'net/pop'
 
 Net::POP3.start(address, port, account, password, isapop=false) {|pop|
