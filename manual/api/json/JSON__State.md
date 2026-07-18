@@ -233,7 +233,7 @@ require "json"
 json_state = JSON::State.new(max_nesting: 2)
 json_state.max_nesting            # => 2
 JSON.generate([[]], json_state)
-JSON.generate([[[]]], json_state) # => JSON::NestingError
+JSON.generate([[[]]], json_state) # ~> JSON::NestingError
 ```
 
 ```ruby title="例 ネストの深さチェックを行わない"
@@ -258,7 +258,7 @@ json_state.max_nesting            # => 2
 JSON.generate([[]], json_state)
 json_state.max_nesting = 3
 json_state.max_nesting            # => 3
-JSON.generate([[[[]]]], json_state) # => JSON::NestingError
+JSON.generate([[[[]]]], json_state) # ~> JSON::NestingError
 ```
 
 ### def object_nl -> String

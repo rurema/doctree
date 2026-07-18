@@ -104,7 +104,7 @@ Ruby の Range クラスは immutable です。
 ```ruby
 range = 1..10
 p range.first   # => 1
-range.first = 1 # => NoMethodError
+range.first = 1 # ~> NoMethodError
 ```
 
 また、Ruby 3.0.0 からすべての Range オブジェクトは freeze されるようになりました。
@@ -376,7 +376,7 @@ p (1..0).first # => 1
 
 # 始端を持たない場合
 p (..5).begin #=> nil
-p (..5).first #=> RangeError
+(..5).first   # ~> RangeError
 ```
 
 - **SEE** [m:Range#end]

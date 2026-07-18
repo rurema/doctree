@@ -1197,7 +1197,7 @@ Emacsの多言語化(Mule)で使われているステートレスのエンコー
 
 ```ruby title="例"
 "あ".encode("EUC-JP") + "あ".encode("UTF-8")
-#=> Encoding::CompatibilityError: incompatible character encodings: EUC-JP and UTF-8
+# ~> Encoding::CompatibilityError: incompatible character encodings: EUC-JP and UTF-8
 ```
 
 # class Encoding::UndefinedConversionError < EncodingError
@@ -1207,7 +1207,7 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
 
 ```ruby title="例"
 "\u2603".encode(Encoding::EUC_JP)
-#=> Encoding::UndefinedConversionError: U+2603 from UTF-8 to EUC-JP
+# ~> Encoding::UndefinedConversionError: U+2603 from UTF-8 to EUC-JP
 ```
 
 
@@ -1279,7 +1279,7 @@ end
 p "\x82\xa0".force_encoding("cp932").encode("UTF-8")
 #=> "あ"
 "\x82\xa0".force_encoding("EUC-JP").encode("UTF-8")
-#=> Encoding::InvalidByteSequenceError: "\x82" on EUC-JP
+# ~> Encoding::InvalidByteSequenceError: "\x82" on EUC-JP
 ```
 
 ## Instance Methods
@@ -1363,6 +1363,6 @@ end
 
 ```ruby title="例"
 "あ".encode("Foo")
-#=> Encoding::ConverterNotFoundError: code converter not found (UTF-8 to Foo)
+# ~> Encoding::ConverterNotFoundError: code converter not found (UTF-8 to Foo)
 ```
 

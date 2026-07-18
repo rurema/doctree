@@ -188,8 +188,7 @@ p h                     #=> {}
 
 h = Hash.new([].freeze)
 h[0] += [0] #破壊的でないメソッドはOK
-h[1] << 1
-# エラー: can't modify frozen Array (FrozenError)
+h[1] << 1     # ~> FrozenError: can't modify frozen Array: []
 ```
 
 #@until 3.4
@@ -245,7 +244,7 @@ h = Hash.new {|hash, key|
                 raise(IndexError, "hash[#{key}] has no value")
              }
 h[1]
-# エラー hash[1] has no value (IndexError)
+# ~> IndexError: hash[1] has no value
 ```
 
 - **SEE** [m:Hash#default=],[m:Hash#default],[m:Hash#default_proc]
@@ -417,7 +416,7 @@ fetchはハッシュ自身にデフォルト値が設定されていても単に
 h = {one: nil}
 p h[:one],h[:two]                        #=> nil,nil これではキーが存在するのか判別できない。
 p h.fetch(:one)                          #=> nil
-p h.fetch(:two)                          # エラー key not found (KeyError)
+h.fetch(:two)                            # ~> KeyError: key not found: :two
 p h.fetch(:two,"error")                  #=> "error"
 p h.fetch(:two){|key|"#{key} not exist"} #=> "two not exist"
 p h.fetch(:two, "error"){|key|           #=> "two not exist"
@@ -425,7 +424,7 @@ p h.fetch(:two, "error"){|key|           #=> "two not exist"
   }                                      #  警告が表示される。
 
 h.default = "default"
-p h.fetch(:two)                          # エラー key not found (KeyError)
+h.fetch(:two)                            # ~> KeyError: key not found: :two
 ```
 
 - **SEE** [m:Hash#\[\]]
@@ -942,7 +941,7 @@ Ruby 2.7 までは動作していましたが、Ruby 3.0 以降は [c:ArgumentEr
 ```ruby title="例"
 # Ruby 2.7 まではこの書き方でも動作していましたが、Ruby 3.0 以降は ArgumentError になります
 {foo: 100}.each(&->(k, v) { p [k, v] })
-# => ArgumentError
+# ~> ArgumentError
 
 # 1引数で配列として受け取る
 {foo: 100}.each(&->(pair) { p pair })

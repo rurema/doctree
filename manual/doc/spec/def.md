@@ -301,7 +301,7 @@ def foo(x, y = 1)    # 2番目の引数yにデフォルト値を指定
 end
 p foo(1, 5)  #=> 15
 p foo(3)     #=> 31
-p foo        #=> ArgumentError (wrong number of arguments)
+foo          # ~> ArgumentError: wrong number of arguments (given 0, expected 1..2)
 ```
 
 デフォルト値を指定する引数の位置は、1つの連続した区間になっている必要があります。

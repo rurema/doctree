@@ -126,8 +126,7 @@ trace.disable
 ```ruby title="例"
 TracePoint.trace(:line) do |tp|
     p tp.raised_exception
-end
-# => RuntimeError: 'raised_exception' not supported by this event
+end # ~> RuntimeError: not supported by this event
 ```
 
 イベントフックの外側で、発生したイベントに関連する情報を取得するメソッ
@@ -208,8 +207,7 @@ p trace.enabled? # => false
 [c:RuntimeError] が発生する事に注意してください。
 
 ```ruby title="例"
-trace.enable { p trace.lineno }
-# => RuntimeError: access from outside
+trace.enable { p trace.lineno } # ~> RuntimeError: access from outside
 ```
 
 - **SEE** [m:TracePoint#disable], [m:TracePoint#enabled?]
@@ -246,8 +244,7 @@ p trace.enabled? # => true
 [c:RuntimeError] が発生する事に注意してください。
 
 ```ruby
-trace.enable { p trace.lineno }
-# => RuntimeError: access from outside
+trace.enable { p trace.lineno } # ~> RuntimeError: access from outside
 ```
 
 - **SEE** [m:TracePoint#enable], [m:TracePoint#enabled?]

@@ -424,7 +424,7 @@ n, N, v, V を用います。
   # => "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg=="
 
   p "".unpack("m0")     # => [""]
-  "AA==\n".unpack("m0") # => ArgumentError (invalid base64)
+  "AA==\n".unpack("m0") # ~> ArgumentError: invalid base64
   p "AA==".unpack("m0") # => ["\x00"]
 
   "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg==".unpack("m0")
@@ -664,8 +664,8 @@ n, N, v, V を用います。
   p [nil].pack("P")  # => "\x00\x00\x00\x00\x00\x00\x00\x00"
   p ["abc"].pack("P3") # => "\xA0\xEE\er\x84U\x00\x00"
 
-  ["abc"].pack("P4") # => ArgumentError: too short buffer for P(3 for 4)
-  [""].pack("P")     # => ArgumentError: too short buffer for P(0 for 1)
+  ["abc"].pack("P4") # ~> ArgumentError: too short buffer for P(3 for 4)
+  [""].pack("P")     # ~> ArgumentError: too short buffer for P(0 for 1)
   ```
 
 - **`u`**:
@@ -690,7 +690,7 @@ n, N, v, V を用います。
   p [0x7f].pack("U")                          # => "\u007F"
   p [0x80].pack("U")                          # => "\u0080"
   p [0x7fffffff].pack("U")                    # => "\xFD\xBF\xBF\xBF\xBF\xBF"
-  [0x80000000].pack("U")                      # => RangeError: pack(U): value out of range
+  [0x80000000].pack("U")                      # ~> RangeError: pack(U): value out of range
   p [0,256,65536].pack("U3").b                # => "\x00\xC4\x80\xF0\x90\x80\x80"
 
   p "\x00\xC4\x80\xF0\x90\x80\x80".unpack("U3") # => [0, 256, 65536]
@@ -736,7 +736,7 @@ n, N, v, V を用います。
   p [97, 98].pack("Cx3C") # => "a\x00\x00\x00b"
 
   p "abc".unpack("CxC")  # => [97, 99]
-  "abc".unpack("Cx3C") # => ArgumentError: x outside of string
+  "abc".unpack("Cx3C") # ~> ArgumentError: x outside of string
   ```
 
 - **`X`**:
@@ -925,7 +925,7 @@ pack は暗号になりやすい面があることを考慮し、pack を使い�
   ```ruby
   p ["foo"].pack("p").unpack("p") # => ["foo"]
   "xp\xC2\x85\vV\x00\x00".unpack("p")
-  # => ArgumentError: no associated pointer
+  # ~> ArgumentError: no associated pointer
   ```
   "p" や "P" は、nil を特別に扱い NULL
   ポインタとして解釈します。(以下は、64bitマシンで一般的な結果)

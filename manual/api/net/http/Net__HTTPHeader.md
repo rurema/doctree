@@ -567,7 +567,7 @@ require 'net/http'
 uri = URI.parse('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req['range'] = "invalid"
-req.range # => Net::HTTPHeaderSyntaxError
+req.range # ~> Net::HTTPHeaderSyntaxError
 ```
 
 ### def range=(r)

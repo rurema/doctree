@@ -155,7 +155,7 @@ class Foo
 end
 
 class Bar
-  p @@v       #=> RuntimeError (class variable @@v of Bar is overtaken by Foo)
+  @@v         # ~> RuntimeError: class variable @@v of Bar is overtaken by Foo
 end
 ```
 

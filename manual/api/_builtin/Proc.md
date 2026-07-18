@@ -344,13 +344,13 @@ p method(:m).to_proc.lambda? #=> true
 class C
   define_method(:d) {}
 end
-C.new.d(1,2)       #=> ArgumentError
+C.new.d(1,2)       # ~> ArgumentError
 p C.new.method(:d).to_proc.lambda? #=> true
 
 class C
   define_method(:e, &proc {})
 end
-C.new.e(1,2)       #=> ArgumentError
+C.new.e(1,2)       # ~> ArgumentError
 p C.new.method(:e).to_proc.lambda? #=> true
 ```
 

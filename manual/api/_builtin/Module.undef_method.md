@@ -32,7 +32,7 @@ p B.new.ok # => B
 class B
   undef_method :ok
 end
-B.new.ok   # => NameError
+B.new.ok   # ~> NoMethodError
 
 # remove_method の場合はスーパークラスに同名のメソッドがあると
 # それが呼ばれる

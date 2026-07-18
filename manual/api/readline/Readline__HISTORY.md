@@ -48,7 +48,7 @@ p Readline::HISTORY[-5] #=> 最後から5番目の入力内容
 ```ruby
 require "readline"
 
-Readline::HISTORY[1000000] #=> 例外 IndexError が発生します。
+Readline::HISTORY[1000000] # ~> IndexError
 ```
 
 例: 32 bit のシステムの場合、例外 RangeError が発生します。
@@ -56,7 +56,7 @@ Readline::HISTORY[1000000] #=> 例外 IndexError が発生します。
 ```ruby
 require "readline"
 
-Readline::HISTORY[2 ** 32 + 1] #=> 例外 RangeError が発生します。
+Readline::HISTORY[2 ** 32 + 1] # ~> RangeError
 ```
 
 例: 64 bit のシステムの場合、例外 RangeError が発生します。
@@ -64,7 +64,7 @@ Readline::HISTORY[2 ** 32 + 1] #=> 例外 RangeError が発生します。
 ```ruby
 require "readline"
 
-Readline::HISTORY[2 ** 64 + 1] #=> 例外 RangeError が発生します。
+Readline::HISTORY[2 ** 64 + 1] # ~> RangeError
 ```
 
 ### def []=(index, string)

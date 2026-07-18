@@ -13,7 +13,7 @@ library: _builtin
 p Rational(1, 3)     # => (1/3)
 p Rational('1/3')    # => (1/3)
 p Rational('0.33')   # => (33/100)
-Rational.new(1, 3)   # => NoMethodError
+Rational.new(1, 3)   # ~> NoMethodError
 ```
 
 [c:Rational] オブジェクトは常に既約(それ以上約分できない状態)である
@@ -110,7 +110,7 @@ p r / 2              # => (3/8)
 p r / 2.0            # => 0.375
 p r / 0.5            # => 1.5
 p r / Rational(1, 2) # => (3/2)
-r / 0                # => ZeroDivisionError
+r / 0                # ~> ZeroDivisionError
 ```
 
 - **raise** `ZeroDivisionError` -- other が 0 の時に発生します。
@@ -262,7 +262,7 @@ p Rational(2, 3).fdiv(0.5) # => 1.3333333333333333
 p Rational(2).fdiv(3)    # => 0.6666666666666666
 
 p Rational(1).fdiv(Complex(1, 0))  # => 1.0
-Rational(1).fdiv(Complex(0, 1))  # => RangeError
+Rational(1).fdiv(Complex(0, 1))  # ~> RangeError
 ```
 
 ### def floor(precision = 0) -> Integer | Rational

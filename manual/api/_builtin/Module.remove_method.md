@@ -14,7 +14,7 @@ class C
   end
 
   remove_method :foo
-  remove_method :no_such_method   # 例外 NameError が発生
+  remove_method :no_such_method   # ~> NameError
 end
 ```
 

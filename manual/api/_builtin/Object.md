@@ -1063,7 +1063,7 @@ p 1.public_send(:+, 2)  # => 3
                      した場合に発生します。
 
 ```ruby
-1.public_send(:puts, "hello")  # => NoMethodError
+1.public_send(:puts, "hello")  # ~> NoMethodError
 ```
 
 - **SEE** [m:BasicObject#__send__], [m:Object#send]
@@ -1420,7 +1420,7 @@ def k.hi
 end
 m = k.singleton_method(:hi)    # => #<Method: #<Demo:0xf8b0c3c4 @iv=99>.hi>
 p m.call #=> "Hi, @iv = 99"
-m = k.singleton_method(:hello) # => NameError
+m = k.singleton_method(:hello) # ~> NameError
 ```
 
 - **SEE** [m:Module#instance_method], [c:Method], [m:BasicObject#__send__], [m:Object#send], [m:Kernel?.eval], [m:Object#method]

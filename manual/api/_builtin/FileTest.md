@@ -131,7 +131,7 @@ p FileTest.directory?('/etc/passwd') # => false
 f = File.open('/etc')
 p FileTest.directory?(f) # => true
 f.close
-FileTest.directory?(f) # => IOError: closed stream
+FileTest.directory?(f) # ~> IOError: closed stream
 ```
 
 ### module_function def file?(file)    -> bool

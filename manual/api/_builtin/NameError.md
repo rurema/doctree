@@ -8,13 +8,13 @@ library: _builtin
 ```ruby title="例"
 bar
 #@if("3.4" <= version)
-# => NameError: undefined local variable or method 'bar' for main
+# ~> NameError: undefined local variable or method 'bar' for main
 #@end
 #@if("3.3" <= version and version < "3.4")
-# => NameError: undefined local variable or method `bar' for main
+# ~> NameError: undefined local variable or method `bar' for main
 #@end
 #@if(version < "3.3")
-# => NameError: undefined local variable or method `bar' for main:Object
+# ~> NameError: undefined local variable or method `bar' for main:Object
 #@end
 ```
 

@@ -1173,7 +1173,7 @@ open("/usr/share/dict/words", "r:iso-8859-1") {|f|
 
 ```ruby title="例"
 [1, 2].chunk { |item| :_underscore }.to_a
-# => RuntimeError: symbols beginning with an underscore are reserved
+# ~> RuntimeError: symbols beginning with an underscore are reserved
 
 # 「.to_a」無しだと Enumerator を返すのみで例外は発生しない
 ```
@@ -1531,7 +1531,7 @@ selfが空の場合、initを返します。
 { 1 => 10, 2 => 20 }.sum {|k, v| k * v }  # => 50
 p (1..10).sum                             # => 55
 p (1..10).sum {|v| v * 2 }                # => 110
-('a'..'z').sum                            # => TypeError
+('a'..'z').sum                            # ~> TypeError
 ```
 
 init 引数を明示的に指名すると数値以外のオブジェクトにも使えます。

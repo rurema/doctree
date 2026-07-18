@@ -40,9 +40,9 @@ pp Ripper.lex("def m(a) nil end")
 
 Ripper.lex("def req(true) end", raise_errors: true)
 #@since 3.4
-# => SyntaxError (syntax error, unexpected 'true', expecting ')')
+# ~> SyntaxError: syntax error, unexpected 'true', expecting ')'
 #@else
-# => SyntaxError (syntax error, unexpected `true', expecting ')')
+# ~> SyntaxError: syntax error, unexpected `true', expecting ')'
 #@end
 ```
 
@@ -80,7 +80,11 @@ p Ripper.tokenize("def m(a) nil end")
 # => ["def", " ", "m", "(", "a", ")", " ", "nil", " ", "end"]
 
 Ripper.tokenize("def req(true) end", raise_errors: true)
-# => SyntaxError (syntax error, unexpected `true', expecting ')')
+#@since 3.4
+# ~> SyntaxError: syntax error, unexpected 'true', expecting ')'
+#@else
+# ~> SyntaxError: syntax error, unexpected `true', expecting ')'
+#@end
 ```
 
 Ripper.tokenize は空白やコメントも含め、

@@ -87,8 +87,8 @@ p 12354.chr
 
 p 12354.chr(Encoding::UTF_8)
 # => "あ"
-p 12354.chr(Encoding::EUC_JP)
-# => RangeError: invalid codepoint 0x3042 in EUC-JP
+12354.chr(Encoding::EUC_JP)
+# ~> RangeError: invalid codepoint 0x3042 in EUC-JP
 ```
 
 引数無しで呼ばれた場合は self を US-ASCII、ASCII-8BIT、デフォルト内部エンコーディングの順で優先的に解釈します。

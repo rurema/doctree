@@ -241,6 +241,6 @@ end
   
 p f.resume() #=> :hoge
 p f.resume() #=> :fuga
-p f.resume() #=> FiberError: dead fiber called
+f.resume()   # ~> FiberError: attempt to resume a terminated fiber
 ```
 
