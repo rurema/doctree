@@ -68,8 +68,9 @@ p a <=> b # => nil
 
 ### def eql?(other) -> bool
 
-オブジェクトと other が等しければ真を返します。[c:Hash] で二つのキー
-が等しいかどうかを判定するのに使われます。
+オブジェクトと other が等しければ真を返します。[c:Hash] のキー比較
+をはじめ、[m:Array#uniq] や [c:Set] など、要素の同値性を判定する
+さまざまな場面で [m:Object#hash] とともに使われます。
 
 このメソッドは各クラスの性質に合わせて再定義すべきです。
 多くの場合、 == と同様に同値性の判定をするように再定義されていますが、
@@ -91,7 +92,7 @@ p(4.eql?(4)) #=> true
 p(4.eql?(4.0)) #=> false
 ```
 
-- **SEE** [m:Object#hash],[m:Object#equal?],[m:Object#==]
+- **SEE** [m:Object#hash],[m:Object#equal?],[m:Object#==],[m:Array#uniq],[c:Set]
 
 ### def equal?(other) -> bool
 
