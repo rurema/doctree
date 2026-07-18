@@ -3,9 +3,18 @@ library: _builtin
 ---
 # class LocalJumpError < StandardError
 
-ある [c:Proc] オブジェクトの作成元スコープがすでに終了しているとき、
+ブロックを伴わずに呼び出されたメソッドの中で yield を実行すると発生します。
+
+```ruby
+def call_block
+  yield 42
+end
+call_block  # => no block given (yield) (LocalJumpError)
+```
+
+また、ある [c:Proc] オブジェクトの作成元スコープがすでに終了しているとき、
 その [c:Proc] オブジェクト内で
-return, break, retry のいずれかを実行すると発生します。
+return, break, retry のいずれかを実行した場合にも発生します。
 
 [c:Proc] の例を参照してください。
 
