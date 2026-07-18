@@ -732,7 +732,7 @@ fred() { |index, position| ... }
   ([ref:lib:rdoc#saved_options] 参照)。
 
   マークアップの形式を追加したい場合は
-  <http://docs.seattlerb.org/rdoc/DEVELOPERS_rdoc.html> を参照し
+  <https://web.archive.org/web/20241207231427/http://docs.seattlerb.org/rdoc/DEVELOPERS_rdoc.html> を参照し
   てください。
 
 また、他にも Ruby スクリプト、Ruby から使用するために書かれた C 言語の

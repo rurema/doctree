@@ -141,7 +141,7 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
     利用してGCを計測する
       - GCが性能上のボトルネックではないことも多い。そういう部分も含め計測する。
       - newrelicのような高度なツールを使うことも考慮する
-  - <http://tmm1.net/ruby21-rgengc/> には
+  - <https://web.archive.org/web/20250908211051/http://tmm1.net/ruby21-rgengc/> には
     RUBY_GC_HEAP_INIT_SLOTS や RUBY_GC_HEAP_FREE_SLOTS
     のチューニングに関する簡単な指針が書いてあって参考になる
   - 結局の所トライ&エラーで調整する必要がある。
@@ -172,7 +172,7 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
 #### 参考資料
 
   - <http://www.atdot.net/~ko1/activities/2014_rubyconf_ph_pub.pdf>
-  - <http://tmm1.net/ruby21-rgengc/>
+  - <https://web.archive.org/web/20250908211051/http://tmm1.net/ruby21-rgengc/>
 
 
 - **SEE** [c:ObjectSpace]
