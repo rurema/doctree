@@ -12,5 +12,5 @@ category: Development
   - プロジェクトページ: <https://github.com/seattlerb/minitest>
   - リファレンス: <https://www.rubydoc.info/gems/minitest>
 
-- **SEE** [ref:d:glossary#bundled_gem]
+- **SEE** [ref:d:glossary#bundled-gem]
 

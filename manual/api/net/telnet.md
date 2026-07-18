@@ -11,5 +11,5 @@ Telnet プロトコルをクライアント側で扱うライブラリです。
   - プロジェクトページ: <https://github.com/ruby/net-telnet>
   - リファレンス: <https://www.rubydoc.info/gems/net-telnet>
 
-- **SEE** [ref:d:glossary#bundled_gem]
+- **SEE** [ref:d:glossary#bundled-gem]
 

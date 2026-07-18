@@ -11,4 +11,4 @@ Ruby向けのPower Assertを提供するライブラリです。
  - プロジェクトページ: <https://github.com/k-tsj/power_assert>
  - リファレンス: <https://www.rubydoc.info/gems/power_assert>
 
-- **SEE** [ref:d:glossary#bundled_gem]
+- **SEE** [ref:d:glossary#bundled-gem]

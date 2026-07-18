@@ -10,7 +10,7 @@ require:
 
   - Test::Unit - Ruby用単体テストフレームワーク: <https://test-unit.github.io/>
 
-- **SEE** [ref:d:glossary#bundled_gem]
+- **SEE** [ref:d:glossary#bundled-gem]
 
 なお、2.2.0より前のtest/unit は当時バンドルしていた minitest/unit を使って再実装し
 ていましたが、上記のtest/unitと完全な互換性がある訳ではありません。
