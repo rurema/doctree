@@ -12,11 +12,13 @@ end
 call_block  # => no block given (yield) (LocalJumpError)
 ```
 
-また、ある [c:Proc] オブジェクトの作成元スコープがすでに終了しているとき、
-その [c:Proc] オブジェクト内で
-return, break, retry のいずれかを実行した場合にも発生します。
+また、[c:Proc] オブジェクト内で return や break を実行しようとしたとき、
+その飛び先となるはずのメソッド呼び出しがすでに終了している(またはそもそも
+存在しない)場合にも発生します。例えば、[c:Proc] オブジェクトを生成した
+メソッド呼び出しが終了した後に、その [c:Proc] オブジェクトに対して return を
+実行しようとした場合などです。
 
-[c:Proc] の例を参照してください。
+詳しくは [ref:d:spec/lambda_proc#orphan] を参照してください。
 
 ## Instance Methods
 
