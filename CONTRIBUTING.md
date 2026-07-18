@@ -62,6 +62,12 @@ Ruby でプログラミングができるとサンプルの検証などもでき
 * 既に上がっている Issue へのコメント
 * ブログや勉強会などで「るりま」を紹介する
 
+## 行動規範
+
+本プロジェクトは Ruby コミュニティの
+[行動規範](https://www.ruby-lang.org/ja/conduct/)
+（[Code of Conduct](https://www.ruby-lang.org/en/conduct/)）に従います。
+
 ## 各バージョンの対応方針
 
 以下の方針で対応します。
