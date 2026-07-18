@@ -223,7 +223,7 @@ include Syslog::Constants
 log = '/var/log/ftp.log'
 
 Syslog.open('ftpd', LOG_PID | LOG_NDELAY, LOG_FTP)
-Syslog.mask = Syslog.LOG_UPTO(LOG_ERR)
+Syslog.mask = Syslog::LOG_UPTO(LOG_ERR)
 
 [ LOG_CRIT, LOG_ERR, LOG_WARNING,
   LOG_NOTICE, LOG_INFO, LOG_DEBUG ].each_with_index { |c, i|

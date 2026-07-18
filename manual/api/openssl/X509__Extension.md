@@ -40,7 +40,7 @@ ex = X509::Extension.new(oid, val)
 p ex.value # => "86:CA:A5:22:81:62:EF:AD:0A:89:BC:AD:72:41:2C:29:49:F4:86:56"
 ex2 = X509::Extension.new("2.5.29.19", "0\x03\x01\x01\xFF")
 p ex2.oid # => "basicConstrains"
-ex3 = X509::Extension.new("basicConstraints", ASN1.Sequence([ASN1.Boolean(false)]))
+ex3 = X509::Extension.new("basicConstraints", ASN1.Sequence([ASN1::Boolean(false)]))
 p ex3 # => basicConstraints = CA:FALSE
 ```
 

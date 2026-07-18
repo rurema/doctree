@@ -37,7 +37,7 @@ include Syslog::Constants
 
 ```ruby title="例"
 require 'syslog'
-Syslog.mask = Syslog.LOG_MASK(Syslog::LOG_ERR)
+Syslog.mask = Syslog::LOG_MASK(Syslog::LOG_ERR)
 ```
 
 ### module_function def LOG_UPTO(priority) -> Integer
@@ -49,7 +49,7 @@ priorityまでのすべての優先度のマスクを作成します。
 
 ```ruby title="例"
 require 'syslog'
-Syslog.mask = Syslog.LOG_UPTO(Syslog::LOG_ERR)
+Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
 ```
 
 ## Constants

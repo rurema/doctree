@@ -29,7 +29,7 @@ csr.public_key = rsa.public_key
 # attribute を設定
 factory = OpenSSL::X509::ExtensionFactory.new
 exts = [ factory.create_ext("subjectAltName", "DNS:foo.example.com") ]
-asn1exts = OpenSSL::ASN1.Set([OpenSSL::ASN1.Sequence(exts)])
+asn1exts = OpenSSL::ASN1::Set([OpenSSL::ASN1::Sequence(exts)])
 csr.add_attribute(OpenSSL::X509::Attribute.new("extReq", asn1exts))
 # 署名
 csr.sign(rsa, "sha1")
