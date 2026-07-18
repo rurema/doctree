@@ -60,21 +60,21 @@ p Point1.new(1, 2)           # => #<struct Point1 x=1, y=2>
 p Point1.new(x: 1, y: 2)     # => #<struct Point1 x=1, y=2>
 p Point1.new(x: 1)           # => #<struct Point1 x=1, y=nil>
 p Point1.new(y: 2)           # => #<struct Point1 x=nil, y=2>
-Point1.new(x: 1, y: 2, z: 3) # => ArgumentError (unknown keywords: z)
+Point1.new(x: 1, y: 2, z: 3) # ~> ArgumentError: unknown keywords: z
 
 Point2 = Struct.new(:x, :y, keyword_init: nil)
 p Point2.new(1, 2)           # => #<struct Point2 x=1, y=2>
 p Point2.new(x: 1, y: 2)     # => #<struct Point2 x=1, y=2>
 p Point2.new(x: 1)           # => #<struct Point2 x=1, y=nil>
 p Point2.new(y: 2)           # => #<struct Point2 x=nil, y=2>
-Point2.new(x: 1, y: 2, z: 3) # => ArgumentError (unknown keywords: z)
+Point2.new(x: 1, y: 2, z: 3) # ~> ArgumentError: unknown keywords: z
 
 Point3 = Struct.new(:x, :y, keyword_init: true)
 Point3.new(1, 2)             # => wrong number of arguments (given 2, expected 0) (ArgumentError)
 p Point3.new(x: 1, y: 2)     # => #<struct Point3 x=1, y=2>
 p Point3.new(x: 1)           # => #<struct Point3 x=1, y=nil>
 p Point3.new(y: 2)           # => #<struct Point3 x=nil, y=2>
-Point3.new(x: 1, y: 2, z: 3) # => ArgumentError (unknown keywords: z)
+Point3.new(x: 1, y: 2, z: 3) # ~> ArgumentError: unknown keywords: z
 
 Point4 = Struct.new(:x, :y, keyword_init: false)
 p Point4.new(1, 2)           # => #<struct Point4 x=1, y=2>

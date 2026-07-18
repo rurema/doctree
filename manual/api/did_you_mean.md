@@ -7,10 +7,14 @@ category: Development
 
 ```ruby
 "Yuki".starts_with?("Y")
-#@since 3.4
-# => NoMethodError: undefined method 'starts_with?' for "Yuki":String
-#@else
-# => NoMethodError: undefined method `starts_with?' for "Yuki":String
+#@if("3.4" <= version)
+# ~> NoMethodError: undefined method 'starts_with?' for an instance of String
+#@end
+#@if("3.3" <= version and version < "3.4")
+# ~> NoMethodError: undefined method `starts_with?' for an instance of String
+#@end
+#@if(version < "3.3")
+# ~> NoMethodError: undefined method `starts_with?' for "Yuki":String
 #@end
 #    Did you mean?  start_with?
 ```

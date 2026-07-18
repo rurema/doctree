@@ -50,7 +50,7 @@ p get_binding("bye").eval("str + ' Fred'")   #=> "bye Fred"
 def foo
   a = 1
   p binding.local_variable_get(:a) # => 1
-  binding.local_variable_get(:b) # => NameError
+  binding.local_variable_get(:b) # ~> NameError
 end
 ```
 
@@ -80,7 +80,7 @@ def foo
   p bind.local_variable_get(:a)  # => 2
   p bind.local_variable_get(:b)  # => 3
   p a                            # => 2
-  p b                            # => NameError
+  b                               # ~> NameError
 end
 ```
 

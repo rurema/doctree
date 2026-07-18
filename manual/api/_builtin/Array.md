@@ -223,7 +223,7 @@ a[10] = "x"
 p a  #=> ["a", 1, 2, 3, 4, 5, nil, nil, nil, nil, "x"]
 
 a = [0, 1, 2, 3, 4, 5]
-a[-100] = 1           #=> IndexError
+a[-100] = 1           # ~> IndexError
 ```
 
 ### def []=(range, val)
@@ -273,7 +273,7 @@ p ary   # => [0, 1, 5]
 
 ```ruby title="例"
 a = [0, 1, 2, 3, 4, 5]
-a[-10..10] = 1        #=> RangeError
+a[-10..10] = 1        # ~> RangeError
 ```
 
 ### def []=(start, length, val)
@@ -1254,7 +1254,7 @@ a = [[1, [2, 3]]]
 
 p a.dig(0, 1, 1)               # => 3
 p a.dig(1, 2, 3)               # => nil
-a.dig(0, 0, 0)                 # => TypeError: Integer does not have #dig method
+a.dig(0, 0, 0)                 # ~> TypeError: Integer does not have #dig method
 p [42, {foo: :bar}].dig(1, :foo) # => :bar
 ```
 
@@ -1322,7 +1322,7 @@ join した文字列を連結します。
 ary = [1,2,3]
 ary.push ary
 p ary           # => [1, 2, 3, [...]]
-p ary.join      # => ArgumentError: recursive array join
+ary.join        # ~> ArgumentError: recursive array join
 ```
 
 - **param** `sep` -- 間に挟む文字列を指定します。nil のときは空文字列を使います。
@@ -2651,7 +2651,7 @@ p [].sum(0.0)                      #=> 0.0
 p [1, 2, 3].sum                    #=> 6
 p [3, 5.5].sum                     #=> 8.5
 p [2.5, 3.0].sum(0.0) {|e| e * e } #=> 15.25
-[Object.new].sum                   #=> TypeError
+[Object.new].sum                   # ~> TypeError
 ```
 
 配列の平均値は以下のように求められます。

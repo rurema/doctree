@@ -366,7 +366,7 @@ default_proc が設定されている Hash は dump できません。
 ```ruby
 h = Hash.new { }
 Marshal.dump(h)
-# => TypeError (can't dump hash with default proc)
+# ~> TypeError: can't dump hash with default proc
 ```
 
 ### Struct

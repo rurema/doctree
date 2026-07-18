@@ -31,7 +31,7 @@ p fred.name # => "Fred"
 p Dog.new(name: "Terry", age: 3)
 
 # メンバの値を書き換えることはできない
-fred.age = 6 # => NoMethodError
+fred.age = 6 # ~> NoMethodError
 ```
 
 なお、Ruby 2.7 以前に存在し Ruby 3.0 で削除された Data クラスとは異なります。
@@ -57,7 +57,7 @@ p fred.age  # => 5
 ```ruby title="例"
 Dog = Data.define(:name, :age)
 fred = Dog.new("Fred", 5)
-fred.age = 6 # => NoMethodError
+fred.age = 6 # ~> NoMethodError
 ```
 
 メンバを持たないサブクラスも定義可能です。
@@ -420,7 +420,7 @@ Dog = Data.define(:name, :age)
 dog1 = Dog.new("Fred", 5)  # => #<data Dog name="Fred", age=5>
 dog2 = dog1.with(age: 6)   # => #<data Dog name="Fred", age=6>
 p dog1                     # => #<data Dog name="Fred", age=5>
-dog3 = dog1.with(type: "Terrier")  # => ArgumentError (unknown keyword: :type)
+dog3 = dog1.with(type: "Terrier")  # ~> ArgumentError: unknown keyword: :type
 
 # メンバのオブジェクトはコピーされず、同じオブジェクトを参照する。
 dog1.name.upcase!

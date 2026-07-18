@@ -137,7 +137,7 @@ p a == b                            #=> false
 
 s = "合".encode("EUC-JP")
 p s + "\u{4f53}".encode("EUC-JP")   #=> "合体"
-p s + "\u{4f53}"                    #=> Encoding::CompatibilityError
+s + "\u{4f53}"                      # ~> Encoding::CompatibilityError
 ```
 
 [m:String#eql?] はハッシュのキーの比較に使われますので、
@@ -597,7 +597,7 @@ s = "FooBar"
 p s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/]      # => "FooBar"
 p s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/, "foo"] # => "Foo"
 p s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/, "bar"] # => "Bar"
-s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/, "baz"] # => IndexError
+s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/, "baz"] # ~> IndexError
 ```
 
 ### def [](range) -> String
@@ -3967,7 +3967,7 @@ p "a\u0300".unicode_normalize      # => 'à' ("\u00E0" と同じ)
 p "a\u0300".unicode_normalize(:nfc)  # => 'à' ("\u00E0" と同じ)
 p "\u00E0".unicode_normalize(:nfd) # => 'à' ("a\u0300" と同じ)
 "\xE0".force_encoding('ISO-8859-1').unicode_normalize(:nfd)
-                                   # => Encoding::CompatibilityError raised
+                                   # ~> Encoding::CompatibilityError: Unicode Normalization not appropriate for ISO-8859-1
 ```
 
 - **SEE** [m:String#unicode_normalize!], [m:String#unicode_normalized?]
@@ -4012,7 +4012,7 @@ p "a\u0300".unicode_normalized?(:nfd)  # => true
 p "\u00E0".unicode_normalized?       # => true
 p "\u00E0".unicode_normalized?(:nfd) # => false
 "\xE0".force_encoding('ISO-8859-1').unicode_normalized?
-                                     # => Encoding::CompatibilityError raised
+                                     # ~> Encoding::CompatibilityError: Unicode Normalization not appropriate for ISO-8859-1
 ```
 
 - **SEE** [m:String#unicode_normalize], [m:String#unicode_normalize!]

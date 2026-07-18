@@ -117,7 +117,7 @@ end
 q = MyQueue.new
 q.mypush 42
 p q.queue  # => [42]
-q.push 23  # => NoMethodError
+q.push 23  # ~> NoMethodError
 ```
 
 - **SEE** [m:Forwardable#def_delegators]

@@ -377,7 +377,7 @@ p Complex(3, 2).rect # => [3, 2]
 ```ruby title="例"
 p Complex(3).to_f  # => 3.0
 p Complex(3.5).to_f  # => 3.5
-Complex(3, 2).to_f # => RangeError
+Complex(3, 2).to_f # ~> RangeError
 ```
 
 ### def to_i -> Integer
@@ -389,7 +389,7 @@ Complex(3, 2).to_f # => RangeError
 ```ruby title="例"
 p Complex(3).to_i  # => 3
 p Complex(3.5).to_i  # => 3
-Complex(3, 2).to_i # => RangeError
+Complex(3, 2).to_i # ~> RangeError
 ```
 
 ### def to_r             -> Rational
@@ -404,7 +404,7 @@ Complex(3, 2).to_i # => RangeError
 
 ```ruby title="例"
 p Complex(3).to_r  # => (3/1)
-Complex(3, 2).to_r # => RangeError
+Complex(3, 2).to_r # ~> RangeError
 ```
 
 #@# rationalize メソッドの引数 eps は常に無視されるため、to_r メソッド

@@ -147,7 +147,7 @@ str = "This is Regexp"
 /That is Regexp/ =~ str
 p Regexp.last_match # => nil
 begin
-  p Regexp.last_match[1] # 例外が発生する
+  Regexp.last_match[1] # ~> NoMethodError
 rescue 
 #@since 3.4
   puts $! # => undefined method '[]' for nil:NilClass
@@ -204,7 +204,7 @@ p Regexp.union() # => /(?!)/
 
 ```ruby
 p Regexp.union(/a/e, /b/e) # => /(?-mix:a)|(?-mix:b)/e
-p Regexp.union(/a/e, /b/s) # => ArgumentError
+Regexp.union(/a/e, /b/s)   # ~> ArgumentError
 ```
 
 コードが固定されている Regexp とコードが固定されていない Regexp を混ぜた場合、

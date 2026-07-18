@@ -200,7 +200,7 @@ p system("echo *") # => true
 
 ```ruby title="exceptionオプションを指定"
 p system("sad", exception: true)                 # => Errno::ENOENT (No such file or directory - sad)
-system('ruby -e "exit(false)"', exception: true) # => RuntimeError (Command failed with exit 1: ruby -e "exit(false)")
+system('ruby -e "exit(false)"', exception: true) # ~> RuntimeError: Command failed with exit 1: ruby -e "exit(false)"
 p system('ruby -e "exit(true)"', exception: true)  # => true
 ```
 
@@ -2596,7 +2596,7 @@ p Complex('1+1i')  # => (1+1i)
 p Complex('1+1j')  # => (1+1i)
 # Complex.polar(10, 10) と同一。
 p Complex('10@10') # => (-8.390715290764524-5.440211108893697i)
-Complex('_')     # => ArgumentError
+Complex('_')     # ~> ArgumentError
 ```
 
 r にも i にも複素数と解釈されるオブジェクトを指定した場合には、
@@ -2670,7 +2670,7 @@ p Rational('3.0', '3.0') # => (1/1)
 p Rational('3/3', '3/3') # => (1/1)
 p Rational('1_234_567')  # => (1234567/1)
 p Rational(" \n10\t ") # => (10/1) # 空白類は無視される
-Rational("0x10")       # => ArgumentError
+Rational("0x10")       # ~> ArgumentError
 ```
 
 文字列として不正な形式を指定した場合には [c:ArgumentError] が、
@@ -2678,11 +2678,11 @@ nil や変換できない型のオブジェクトを指定した場合には [c:
 が発生します。
 
 ```ruby title="例"
-Rational("")           # => ArgumentError
-Rational("10 cents")   # => ArgumentError
-Rational(Object.new)   # => TypeError
-Rational(nil)          # => TypeError
-Rational(1, nil)       # => TypeError
+Rational("")           # ~> ArgumentError
+Rational("10 cents")   # ~> ArgumentError
+Rational(Object.new)   # ~> TypeError
+Rational(nil)          # ~> TypeError
+Rational(1, nil)       # ~> TypeError
 ```
 
 また、Rational('0.3') と Rational(0.3) は異なるオブジェクトを返す事に注
@@ -2710,7 +2710,7 @@ p Rational(0.3)        # => (5404319552844595/18014398509481984)
 p Hash([])        # => {}
 p Hash(nil)       # => {}
 p Hash(key: :value) # => {:key => :value}
-Hash([1, 2, 3])   # => TypeError
+Hash([1, 2, 3])   # ~> TypeError
 ```
 
 - **raise** `TypeError` -- 変換できないオブジェクトを指定した場合に発生します。

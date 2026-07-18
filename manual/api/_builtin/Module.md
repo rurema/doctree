@@ -572,7 +572,7 @@ Config.const_set('NAME', '123')
 # => "123"
 
 # 不適切な定数名を指定した場合
-Config.const_set('name', 1) # => NameError: wrong constant name name
+Config.const_set('name', 1) # ~> NameError: wrong constant name name
 ```
 
 ### def const_source_location(name, inherited = true)   -> [String, Integer]
@@ -717,7 +717,7 @@ Settings.freeze
 
 module Settings
   def foo; end
-end # => FrozenError: can't modify frozen module
+end # ~> FrozenError: can't modify frozen module: Settings
 ```
 
 #@include(Module.include)
@@ -1150,8 +1150,8 @@ end
 
 p Api::VERSION  # => "1.0"
 p Api::Client   # => Api::Client
-Api::SECRET     # => NameError: private constant Api::SECRET referenced
-Api::Internal   # => NameError: private constant Api::Internal referenced
+Api::SECRET     # ~> NameError: private constant Api::SECRET referenced
+Api::Internal   # ~> NameError: private constant Api::Internal referenced
 ```
 
 ### def public_class_method(*name) -> self
