@@ -1,5 +1,3 @@
-\###nonref
-
 # Cygwin
 
 Win32 上で [d:platform/Unix] をエミュレートする環境。Windows 上でまさに Unix 
