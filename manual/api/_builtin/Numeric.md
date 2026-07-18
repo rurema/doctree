@@ -604,8 +604,8 @@ p 1.0.quo(3)  #=> 0.3333333333333333
 p 1.quo(3.0)  #=> 0.3333333333333333
 p 1.quo(0.5)  #=> 2.0
 
-p Complex(1, 1).quo(1)  #=> ((1/1)+(1/1)*i)
-p 1.quo(Complex(1, 1))  #=> ((1/2)-(1/2)*i)
+p (1+1i).quo(1)  #=> ((1/1)+(1/1)*i)
+p 1.quo(1+1i)    #=> ((1/2)-(1/2)*i)
 ```
 
 - **SEE** [m:Numeric#fdiv]
@@ -624,9 +624,9 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 - **param** `other` -- 自身を割る数を指定します。
 
 ```ruby title="例"
-p 1.fdiv(3)            #=> 0.3333333333333333
-p Complex(1, 1).fdiv 1 #=> (1.0+1.0i)
-1.fdiv Complex(1, 1)   # ~> RangeError: can't convert 0.5-0.5i into Float
+p 1.fdiv(3)      #=> 0.3333333333333333
+p (1+1i).fdiv 1  #=> (1.0+1.0i)
+1.fdiv(1+1i)   # ~> RangeError: can't convert 0.5-0.5i into Float
 ```
 
 - **SEE** [m:Numeric#quo]
@@ -734,10 +734,10 @@ p (-11).remainder(3.5)  #=> -0.5
 自身がゼロの時 nil を返し、非ゼロの時 self を返します。
 
 ```ruby title="例"
-p 10.nonzero?              #=> 10
-p 0.nonzero?               #=> nil
-p 0.0.nonzero?             #=> nil
-p Rational(0, 2).nonzero?  #=> nil
+p 10.nonzero?   #=> 10
+p 0.nonzero?    #=> nil
+p 0.0.nonzero?  #=> nil
+p 0r.nonzero?   #=> nil
 ```
 
 非ゼロの時に self を返すため、自身が 0 の時に他の処理をさせたい場合に以
@@ -757,7 +757,7 @@ self の絶対値が有限値の場合に true を、そうでない場合に fa
 
 ```ruby title="例"
 p 10.finite?                    # => true
-p Rational(3).finite?           # => true
+p 3r.finite?                    # => true
 
 p Float::INFINITY.finite?       # => false
 p Float::INFINITY.is_a?(Numeric)  # => true
@@ -783,7 +783,7 @@ self.to_i と同じです。
 
 ```ruby title="例"
 p (2+0i).to_int      # => 2
-p Rational(3).to_int # => 3
+p 3r.to_int          # => 3
 ```
 
 ### def zero?    -> bool
@@ -1023,7 +1023,7 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 p 10.real             # => 10
 p -10.real            # => -10
 p 0.1.real            # => 0.1
-p Rational(2, 3).real # => (2/3)
+p (2/3r).real         # => (2/3)
 ```
 
 - **SEE** [m:Numeric#imag]、[m:Complex#real]
@@ -1038,7 +1038,7 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 p 10.real?             # => true
 p -10.real?            # => true
 p 0.1.real?            # => true
-p Rational(2, 3).real? # => true
+p (2/3r).real?         # => true
 ```
 
 - **SEE** [m:Numeric#integer?]、[m:Complex#real?]
@@ -1067,7 +1067,7 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 p 1.to_c            # => (1+0i)
 p -1.to_c           # => (-1+0i)
 p 1.0.to_c          # => (1.0+0i)
-p Rational(1, 2).to_c # => ((1/2)+0i)
+p (1/2r).to_c       # => ((1/2)+0i)
 ```
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
@@ -1082,5 +1082,5 @@ Complex(0, self) を返します。
 p 10.i           # => (0+10i)
 p -10.i          # => (0-10i)
 p (0.1).i        # => (0+0.1i)
-p Rational(1, 2).i # => (0+(1/2)*i)
+p (1/2r).i       # => (0+(1/2)*i)
 ```

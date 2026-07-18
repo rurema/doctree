@@ -540,8 +540,8 @@ other が Float、Rational、Complex の場合、普通の商を other と
 p 7 / 2 # => 3
 p 7 / -2 # => -4
 p 7 / 2.0 # => 3.5
-p 7 / Rational(2, 1) # => (7/2)
-p 7 / Complex(2, 0) # => ((7/2)+0i)
+p 7 / 2r # => (7/2)
+p 7 / (2+0i) # => ((7/2)+0i)
 
 begin
   2 / 0
@@ -568,7 +568,7 @@ div に対応する剰余メソッドは modulo です。
 p 7.div(2) # => 3
 p 7.div(-2) # => -4
 p 7.div(2.0) # => 3
-p 7.div(Rational(2, 1)) # => 3
+p 7.div(2r) # => 3
 
 begin
   2.div(0)

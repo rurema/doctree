@@ -55,7 +55,7 @@
 
   <https://blade.ruby-lang.org/>
 
-- **`bundled gem`**: {#bundled-gem}
+- **`bundled gem`**: {#bundled_gem}
   標準添付ライブラリーの gem のうち、アンインストールできるもの。
 
   → default gem、標準添付ライブラリー
@@ -109,7 +109,7 @@
 
 ### D {#D}
 
-- **`default gem`**: {#default-gem}
+- **`default gem`**: {#default_gem}
   標準添付ライブラリーの gem のうち、アンインストールできないもの。
 
   → bundled gem、標準添付ライブラリー
@@ -1438,7 +1438,7 @@
   また、ブロックを実行することも評価と呼ぶ。
   ブロックの評価で最後に評価された式の値がそのブロックの評価値となる。
 
-- **標準添付ライブラリー**: {#standard-library}
+- **標準添付ライブラリー**: {#standard_library}
   Ruby 本体と一緒に配布される、組込みではないライブラリー。
   インストールせずに使うことができる。
   gem 形式になっているものとなっていないものがあるが、
