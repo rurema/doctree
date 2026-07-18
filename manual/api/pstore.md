@@ -71,7 +71,7 @@ db.transaction do
 end
   
 db.transaction(true) do |pstore|
-  pstore["root"] = 'aaa' # => ここで例外発生
+  pstore["root"] = 'aaa' # ~> PStore::Error
 end
 ```
 
@@ -127,7 +127,7 @@ end
 db.transaction(true) do |pstore|
   pstore.fetch("root")        # => [[1, 1.5], 2, 3, 4]
   pstore.fetch("root", 'aaa') # => [[1, 1.5], 2, 3, 4]
-  pstore.fetch("not_root")    # => 例外発生
+  pstore.fetch("not_root")    # ~> PStore::Error
 end
 ```
 

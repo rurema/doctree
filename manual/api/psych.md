@@ -189,7 +189,7 @@ Psych.safe_load(yaml, permitted_classes: [Date])
 x = []
 x << x
 yaml = Psych.dump x
-Psych.safe_load yaml                # => 例外発生
+Psych.safe_load yaml                # ~> Psych::AliasesNotEnabled
 p Psych.safe_load yaml, aliases: true # => エイリアスが読み込まれる
 ```
 

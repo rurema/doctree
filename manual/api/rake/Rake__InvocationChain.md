@@ -10,7 +10,7 @@ a = Rake::InvocationChain::EMPTY
 b = a.append('task_a').append('task_b')
 p b.to_s  # => "TOP => task_a => task_b"
   
-a.append('task_a').append('task_b').append('task_a') # => 例外発生
+a.append('task_a').append('task_b').append('task_a') # ~> RuntimeError
 ```
 
 ## Public Instance Methods
