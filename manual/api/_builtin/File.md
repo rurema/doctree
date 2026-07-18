@@ -443,7 +443,7 @@ p File.ftype("/tmp/.X11-unix/X0") # => "socket"
 
 ### def join(*item)    -> String
 
-[m:File::SEPARATOR]を間に入れて文字列を連結します。[d:platform/DOSISH-support]で環境依存になる予定です。
+[m:File::SEPARATOR]を間に入れて文字列を連結します。
 
 - **param** `item` -- 連結したいディレクトリ名やファイル名を文字列（もしくは文字列を要素に持つ配列）で与えます。
             文字列AとBを連結する際に、Aの末尾の文字とBの先頭の文字が[m:File::SEPARATOR]であった場合には、
