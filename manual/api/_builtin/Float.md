@@ -529,22 +529,29 @@ p 0.5.numerator         # => 1
 p 0.5.to_r    # => (1/2)
 ```
 
+- **SEE** [m:Float#rationalize]
+
 ### def rationalize      -> Rational
 ### def rationalize(eps) -> Rational
 
-自身から eps で指定した許容誤差の範囲に収まるような [c:Rational] を返
-します。
+自身から eps で指定した許容誤差の範囲に収まるような、できるだけ簡潔
+な [c:Rational] を返します。
 
-eps を省略した場合は誤差が最も小さくなるような [c:Rational] を返しま
-す。
+eps を省略した場合は、self の浮動小数点数としての精度に基づいて許容
+誤差が自動的に決定され、その範囲に収まる簡潔な [c:Rational] を返し
+ます。そのため [m:Float#to_r] が返す厳密な値とは異なります。誤差の
+ない厳密な値が必要な場合は [m:Float#to_r] を使ってください。
 
 - **param** `eps` -- 許容する誤差
 
 ```ruby title="例"
 p 0.3.rationalize        # => (3/10)
+p 0.3.to_r               # => (5404319552844595/18014398509481984)
 p 1.333.rationalize      # => (1333/1000)
 p 1.333.rationalize(0.01)  # => (4/3)
 ```
+
+- **SEE** [m:Float#to_r]
 
 ### def next_float -> Float
 
