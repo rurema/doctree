@@ -9,7 +9,7 @@ since: "2.2.0"
 
 ```ruby
 throw "foo", "bar"
-# => (例外発生) UncaughtThrowError: uncaught throw "foo"
+# ~> UncaughtThrowError: uncaught throw "foo"
 ```
 
 ## Instance Methods

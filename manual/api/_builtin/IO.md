@@ -2051,7 +2051,7 @@ File.open("testfile") do |f|
     p f.readbyte  # => 49
     p f.readbyte  # => 50
     p f.readbyte  # => 51
-    f.readbyte  # => 例外発生
+    f.readbyte  # ~> EOFError
   rescue => e
     e.class # => EOFError
   end
