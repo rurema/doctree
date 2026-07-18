@@ -652,6 +652,21 @@ begin式全体の評価値は、本体／rescue節／else節のうち
 などの定義文では、それぞれ
 begin なしで rescue, ensure 節を定義でき、これにより例外を処理できます。
 
+また、`do ... end` 形式のブロックでも、Ruby 2.6 から begin なしで
+rescue, else, ensure 節を書けるようになりました([feature:12906])。
+`{ }` 形式のブロックではこの書き方はできません。
+
+```ruby title="例"
+[1, 2, 0].each do |item|
+  p 10 / item
+rescue ZeroDivisionError => e
+  p e
+end
+# => 10
+#    5
+#    #<ZeroDivisionError: divided by 0>
+```
+
 #### rescue修飾子
 
 ```ruby title="例"
