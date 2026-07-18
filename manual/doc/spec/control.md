@@ -75,7 +75,7 @@ $_ =~ リテラル
 
 であるかのように評価されます。
 
-#### if 修飾子
+#### if 修飾子 {#if_modifier}
 
 ```ruby title="例"
 print "debug\n" if $DEBUG
@@ -110,7 +110,7 @@ unless は if と反対で、条件式が偽の時に then 以下の
 式を評価します。unless 式にelsif を指定することはできませ
 ん。
 
-#### unless 修飾子
+#### unless 修飾子 {#unless_modifier}
 
 ```ruby title="例"
 print "stop\n" unless valid(passwd)
@@ -275,7 +275,7 @@ end
 while は nil を返します。また、引数を伴った break により
 while 式の戻り値をその値にすることもできます。
 
-#### while 修飾子
+#### while 修飾子 {#while_modifier}
 
 ```ruby title="例"
 sleep(60) while io_not_ready?
@@ -319,7 +319,7 @@ end
 until は nil を返します。また、引数を伴った break により
 until 式の戻り値をその値にすることもできます。
 
-#### until修飾子
+#### until修飾子 {#until_modifier}
 
 ```ruby title="例"
 print(f.gets) until f.eof?
@@ -667,7 +667,7 @@ end
 #    #<ZeroDivisionError: divided by 0>
 ```
 
-#### rescue修飾子
+#### rescue修飾子 {#rescue_modifier}
 
 ```ruby title="例"
 open("nonexistent file") rescue STDERR.puts "Warning: #$!"
