@@ -267,7 +267,7 @@ self の各要素を数 other で割ったベクトルを返します。
 ```ruby title="例"
 require 'matrix'
 p Vector[3, 4].norm # => 5.0
-p Vector[Complex(0, 1), 0].norm # => 1.0
+p Vector[1i, 0].norm # => 1.0
 ```
 
 - **SEE** [m:Vector#normalize]
