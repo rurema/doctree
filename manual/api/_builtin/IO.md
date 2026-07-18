@@ -2053,7 +2053,7 @@ File.open("testfile") do |f|
     p f.readbyte  # => 51
     f.readbyte  # ~> EOFError
   rescue => e
-    e.class # => EOFError
+    p e.class # => EOFError
   end
 end
 ```
