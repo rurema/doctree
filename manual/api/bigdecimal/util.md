@@ -93,8 +93,8 @@ nFig 桁まで計算を行います。
 ```ruby
 require "bigdecimal"
 require "bigdecimal/util"
-p Rational(1, 3).to_d(3)  # => 0.333e0
-p Rational(1, 3).to_d(10) # => 0.3333333333e0
+p (1/3r).to_d(3)  # => 0.333e0
+p (1/3r).to_d(10) # => 0.3333333333e0
 ```
 
 # reopen Integer

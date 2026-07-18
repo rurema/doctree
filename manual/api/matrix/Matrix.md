@@ -818,9 +818,9 @@ Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返し
 ```ruby title="例"
 require 'matrix'
 p Matrix[[1, 0], [0, 1]].real? # => true
-p Matrix[[Complex(0, 1), 0], [0, 1]].real? # => false
+p Matrix[[1i, 0], [0, 1]].real? # => false
 # 要素が実数であっても Complex オブジェクトなら偽を返す。
-p Matrix[[Complex(1, 0), 0], [0, 1]].real? # => false
+p Matrix[[1+0i, 0], [0, 1]].real? # => false
 ```
 
 ### def regular? -> bool
@@ -1008,10 +1008,10 @@ p m.to_a # => [[1, 2, 3], [10, 15, 20], [-1, -2, 1.5]]
 
 ```ruby title="例"
 require 'matrix'
-p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
+p Matrix[[1+2i, 1i, 0], [1, 2, 3]]
   # => 1+2i   i  0
   #       1   2  3
-p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].conjugate
+p Matrix[[1+2i, 1i, 0], [1, 2, 3]].conjugate
   # => 1-2i  -i  0
   #       1   2  3
 ```
@@ -1023,10 +1023,10 @@ p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].conjugate
 
 ```ruby title="例"
 require 'matrix'
-p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
+p Matrix[[1+2i, 1i, 0], [1, 2, 3]]
 #  => 1+2i  i  0
 #        1  2  3
-p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].imaginary
+p Matrix[[1+2i, 1i, 0], [1, 2, 3]].imaginary
 #  =>   2i  i  0
 #        0  0  0
 ```
@@ -1036,10 +1036,10 @@ p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].imaginary
 
 ```ruby title="例"
 require 'matrix'
-p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
+p Matrix[[1+2i, 1i, 0], [1, 2, 3]]
 #  => 1+2i  i  0
 #        1  2  3
-p Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].real
+p Matrix[[1+2i, 1i, 0], [1, 2, 3]].real
 #  =>    1  0  0
 #        1  2  3
 ```
@@ -1067,7 +1067,7 @@ require 'matrix'
 a1 = [1, 2]
 a2 = [-1.25, 2.2]
 m = Matrix[a1, a2]
-r = Rational(1, 2)
+r = 1/2r
 p m.coerce(r) #=> [#<Matrix::Scalar:0x832df18 @value=(1/2)>, Matrix[[1, 2], [-1.25, 2.2]]]
 ```
 
@@ -1206,7 +1206,7 @@ p Matrix[[1,2], [3,4]].hadamard_product(Matrix[[1,2], [3,2]]) # => Matrix[[1, 4]
 ```ruby
 require 'matrix'
 
-p Matrix[[0, -2, Complex(1, 3)], [2, 0, 5], [-Complex(1, 3), -5, 0]].antisymmetric? # => true
+p Matrix[[0, -2, 1+3i], [2, 0, 5], [-(1+3i), -5, 0]].antisymmetric? # => true
 p Matrix.empty.antisymmetric? # => true
 
 p Matrix[[1, 2, 3], [4, 5, 6], [7, 8, 9]].antisymmetric? # => false
