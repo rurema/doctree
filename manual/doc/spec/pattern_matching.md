@@ -376,7 +376,7 @@ end
 #@# Binding to variables currently does NOT work for alternative patterns joined with <code>|</code>:
 変数への束縛は現状、『|』 で結合される Alternative パターン と同時には利用できません。
 
-```text
+```ruby invalid
 case {a: 1, b: 2}
 in {a: } | Array
   "matched: #{a}"

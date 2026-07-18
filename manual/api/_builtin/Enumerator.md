@@ -286,11 +286,11 @@ e.next              # (7)
 [c:StopIteration] 例外を発生させます。
 
 このメソッドは、
-```text
+```ruby invalid
 yield
 ```
 と
-```text
+```ruby invalid
 yield nil
 ```
 を区別するために使えます。
@@ -368,11 +368,11 @@ next と異なり列挙状態を変更しません。
 列挙が既に最後へ到達している場合は、[c:StopIteration] 例外を発生します。
 
 このメソッドは [m:Enumerator#next_values] と同様
-```text
+```ruby invalid
 yield
 ```
 と
-```text
+```ruby invalid
 yield nil
 ```
 を区別するために使えます。

@@ -496,7 +496,7 @@ label[url] の形式でもハイパーリンクが張れます。この場合は
 出力されます。メソッドが yield を呼んでいる場合は、yield に渡されている
 パラメータもそこに出力されます。
 
-```text
+```ruby invalid
 def fred
   ...
   yield line, address
@@ -511,7 +511,7 @@ fred() { |line, address| ... }
 メソッド名の直後に ':yields: …' を含むコメントを書くと、この出力を上書
 きできます。
 
-```text
+```ruby invalid
 def fred      # :yields: index, position
   ...
   yield line, address

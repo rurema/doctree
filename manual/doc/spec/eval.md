@@ -349,7 +349,7 @@ end
 
 次のような操作がまず実行されます。
 
-```text
+```ruby invalid
 a, b = <some_iterator から yield された値>
 ```
 
