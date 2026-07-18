@@ -250,7 +250,7 @@ frac[0]=1234、frac[1]=5678、frac[2]=4321、 exponent=1、sign=2
 
 ```ruby
 require "bigdecimal"
-File::open("digits.txt", "r") do |file|
+File.open("digits.txt", "r") do |file|
   s = BigDecimal("0")
   while line = file.gets
     s = s + BigDecimal(line)
@@ -258,7 +258,7 @@ File::open("digits.txt", "r") do |file|
   puts s  # => 0.3e0
 end
 
-File::open("digits.txt", "r") do |file|
+File.open("digits.txt", "r") do |file|
   s = 0
   while line = file.gets
     s = s + line.to_f
