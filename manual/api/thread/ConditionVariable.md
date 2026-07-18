@@ -139,6 +139,8 @@ recv Milk
 
 #@#noexample Thread::ConditionVariable#signal 等を参照
 
+- **SEE** [m:Thread::ConditionVariable#signal], [m:Thread::ConditionVariable#broadcast]
+
 ## Instance Methods
 
 ### def broadcast -> self

@@ -7,7 +7,7 @@ alias SizedQueue
 
 サイズの最大値を指定できる [c:Thread::Queue] です。
 
-### 例
+### 例 {#example}
 
 [ruby-list:283] より。q をサイズ 1 の SizedQueue オブジェクトに
 することによって、入力される行と出力される行が同じ順序になります。
@@ -38,6 +38,7 @@ Thread::SizedQueue オブジェクトを生成します。
 - **param** `max` -- キューのサイズの最大値です。
 
 #@#noexample 要約の例を参照
+使用例は [ref:c:Thread::SizedQueue#example] を参照してください。
 
 ## Instance Methods
 
@@ -76,6 +77,8 @@ non_block が真でなければ、キューのサイズが [m:Thread::SizedQueue
 - **param** `non_block` -- true を与えると、キューが一杯の時に例外 [c:ThreadError] が発生します。
 
 #@#noexample 要約の例を参照
+使用例は [ref:c:Thread::SizedQueue#example] を参照してください。
+
 - **SEE** [m:Thread::Queue#push]
 
 ### def pop(non_block = false)   -> object

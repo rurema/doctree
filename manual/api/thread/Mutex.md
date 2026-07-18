@@ -32,6 +32,8 @@ m.synchronize {
 
 #@#noexample :Mutex#unlock 等を参照
 
+- **SEE** [m:Thread::Mutex#unlock]
+
 ## Instance Methods
 
 
