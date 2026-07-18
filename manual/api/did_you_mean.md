@@ -29,4 +29,4 @@ category: Development
  - プロジェクトページ: <https://github.com/ruby/did_you_mean>
  - リファレンス: <https://www.rubydoc.info/gems/did_you_mean/>
 
-- **SEE** [ref:d:glossary#bundled_gem]
+- **SEE** [ref:d:glossary#bundled-gem]

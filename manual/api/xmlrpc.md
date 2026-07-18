@@ -11,4 +11,4 @@ XML-RPC を扱うためのライブラリです。
  - プロジェクトページ: <https://github.com/ruby/xmlrpc>
  - リファレンス: <https://www.rubydoc.info/gems/xmlrpc>
 
-- **SEE** [ref:d:glossary#bundled_gem]
+- **SEE** [ref:d:glossary#bundled-gem]
