@@ -53,7 +53,7 @@
 - **`blade`**: {#blade}
   Ruby の各種メーリングリストのアーカイブ。
 
-  <http://blade.nagaokaut.ac.jp/ruby/>
+  <https://blade.ruby-lang.org/>
 
 - **`bundled gem`**: {#bundled-gem}
   標準添付ライブラリーの gem のうち、アンインストールできるもの。

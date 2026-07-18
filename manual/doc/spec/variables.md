@@ -165,7 +165,7 @@ end
 クラス変数は、その場所を囲むもっとも内側の(特異クラスでない) class 式
 または module 式のボディをスコープとして持ちます。
 
-#@# http://blade.nagaokaut.ac.jp/cgi-bin/vframe.rb/ruby/ruby-list/39212?39104-39789
+#@# https://blade.ruby-lang.org/ruby-list/39212
 
 ```ruby
 class Foo
