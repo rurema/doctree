@@ -11,7 +11,7 @@ Queue はスレッド間の FIFO(first in first out) の通信路です。ス
 
 最大サイズが指定できる Queue のサブクラス [c:Thread::SizedQueue] も提供されています。
 
-### 例
+### 例 {#example}
 
 ```ruby
 q = Thread::Queue.new
@@ -56,7 +56,7 @@ q = Thread::Queue.new([a, b, c])
 q = Thread::Queue.new(items)
 ```
 #@else
-#@#noexample Thread::Queue#close 等を参照
+使用例は [ref:c:Thread::Queue#example] を参照してください。
 #@end
 
 ## Instance methods
@@ -172,7 +172,7 @@ end
 キューの値を追加します。待っているスレッドがいれば実行を再開
 させます。返り値は不定です。
 
-#@#noexample 要約の例を参照
+使用例は [ref:c:Thread::Queue#example] を参照してください。
 
 ### def close -> self
 

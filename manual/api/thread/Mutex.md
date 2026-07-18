@@ -30,7 +30,7 @@ m.synchronize {
 ### def new -> Thread::Mutex
 新しい mutex を生成して返します。
 
-#@#noexample :Mutex#unlock 等を参照
+- **SEE** [m:Thread::Mutex#unlock]
 
 ## Instance Methods
 
@@ -45,8 +45,6 @@ mutex オブジェクトをロックします。一度に一つのス
                    生します。
                    また、[m:Signal?.trap] に指定したハンドラ内で実行
                    した場合に発生します。
-
-#@#noexample Thread::Mutex#unlock を参照
 
 - **SEE** [m:Thread::Mutex#unlock]
 

@@ -137,7 +137,7 @@ recv Milk
 ### def new -> Thread::ConditionVariable
 状態変数を生成して返します。
 
-#@#noexample Thread::ConditionVariable#signal 等を参照
+- **SEE** [m:Thread::ConditionVariable#signal], [m:Thread::ConditionVariable#broadcast]
 
 ## Instance Methods
 
@@ -236,5 +236,4 @@ mutex のロックを解放し、カレントスレッドを停止します。
                らなかった場合でも指定した秒数が経過するとスリープを終了
                します。省略するとスリープし続けます。
 
-#@#noexample Thread::ConditionVariable#signal, Thread::ConditionVariable#broadcast を参照
 - **SEE** [m:Thread::ConditionVariable#signal], [m:Thread::ConditionVariable#broadcast]
