@@ -468,9 +468,9 @@ p Addrinfo.unix("/tmp/sock").family_addrinfo("/tmp/sock2")
 - **param** `path` -- Unix domain socket のパス
 
 ### def connect_from(host, port, timeout: nil) -> Socket
-#@# --- connect_from(addrinfo, timeout: nil) -> Socket
+### def connect_from(addrinfo, timeout: nil) -> Socket
 ### def connect_from(host, port, timeout: nil){|sock| ... } -> object
-#@# --- connect_from(addrinfo, timeout: nil){|sock| ... } -> object
+### def connect_from(addrinfo, timeout: nil){|sock| ... } -> object
 
 引数で指定されたアドレスから
 自身のアドレスへソケットを接続します。
@@ -492,20 +492,20 @@ Addrinfo.tcp("www.ruby-lang.org", 80).connect_from("0.0.0.0", 4649) {|s|
   s.print "GET / HTTP/1.0\r\nHost: www.ruby-lang.org\r\n\r\n"
   puts s.read
 }
-```
-#@#  # Addrinfo object can be taken for the argument.
-#@#  Addrinfo.tcp("www.ruby-lang.org", 80).connect_from(Addrinfo.tcp("0.0.0.0", 4649)){|s|
-#@#    s.print "GET / HTTP/1.0\r\nHost: www.ruby-lang.org\r\n\r\n"
-#@#    puts s.read
-#@#  }
 
-#@# @param addrinfo 接続のアドレス情報([[c:Addrinfo]] オブジェクト)
+# Addrinfo オブジェクトで接続元を指定することもできます
+Addrinfo.tcp("www.ruby-lang.org", 80).connect_from(Addrinfo.tcp("0.0.0.0", 4649)) {|s|
+  s.print "GET / HTTP/1.0\r\nHost: www.ruby-lang.org\r\n\r\n"
+  puts s.read
+}
+```
+
 - **param** `host` -- ホスト(IP アドレスもしくはホスト名)
 - **param** `port` -- ポート番号(整数)もしくはサービス名(文字列)
+- **param** `addrinfo` -- 接続元のアドレス情報([c:Addrinfo] オブジェクト)。self とプロトコルファミリ・ソケットタイプが一致している必要があります
 - **param** `timeout` -- 接続確立のタイムアウト秒数
+- **raise** `ArgumentError` -- addrinfo のプロトコルファミリ・ソケットタイプが self と一致しない場合に発生します
 - **raise** `Errno::ETIMEDOUT` -- timeout で指定した時間内に接続が確立しなかった場合に発生します
-
-#@# 2.0.1 では(bugfixのため) addrinfo を引数にとった場合に妥当な動作をする
 
 ### def connect(timeout: nil) -> Socket
 ### def connect(timeout: nil){|sock| ... } -> object
@@ -521,13 +521,13 @@ Addrinfo.tcp("www.ruby-lang.org", 80).connect_from("0.0.0.0", 4649) {|s|
 - **raise** `Errno::ETIMEDOUT` -- timeout で指定した時間内に接続が確立しなかった場合に発生します
 
 ### def connect_to(host, port, timeout: nil) -> Socket
-#@# --- connect_to(addrinfo, timeout: nil) -> Socket
+### def connect_to(addrinfo, timeout: nil) -> Socket
 ### def connect_to(host, port, timeout: nil){|sock| ... } -> object
-#@# --- connect_to(addrinfo, timeout: nil){|sock| ... } -> object
+### def connect_to(addrinfo, timeout: nil){|sock| ... } -> object
 
 自身のアドレスから指定したホストへソケット接続します。
 
-接続元のアドレスは [m:Addrinfo#family_addrinfo] により生成された
+接続先のアドレスは [m:Addrinfo#family_addrinfo] により生成された
 ものが用いられます。
 
 ブロックが渡されたときにはそのブロックに接続済み [c:Socket]
@@ -537,7 +537,9 @@ Addrinfo.tcp("www.ruby-lang.org", 80).connect_from("0.0.0.0", 4649) {|s|
 
 - **param** `host` -- ホスト(IP アドレスもしくはホスト名)
 - **param** `port` -- ポート番号(整数)もしくはサービス名(文字列)
+- **param** `addrinfo` -- 接続先のアドレス情報([c:Addrinfo] オブジェクト)。self とプロトコルファミリ・ソケットタイプが一致している必要があります
 - **param** `timeout` -- 接続確立のタイムアウト秒数
+- **raise** `ArgumentError` -- addrinfo のプロトコルファミリ・ソケットタイプが self と一致しない場合に発生します
 - **raise** `Errno::ETIMEDOUT` -- timeout で指定した時間内に接続が確立しなかった場合に発生します
 
 ### def bind -> Socket
