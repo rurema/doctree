@@ -57,19 +57,18 @@ mod
 
 ブロックを与えた場合も生成したモジュールを返します。
 
-このメソッドで生成されたモジュールは、
-最初に名前が必要になったときに名前が決定します。
-モジュールの名前は、
-そのモジュールが代入されている定数名のいずれかです。
+このメソッドで生成された直後のモジュールは無名で、
+最初にいずれかの定数に代入された時点で名前が確定します
+([m:Module#name] を参照)。
 
 ```ruby title="例"
 m = Module.new
 p m               # => #<Module 0lx40198a54>
 p m.name          # => nil   # まだ名前は未定
 Utils = m
-# m.name          # ここで m.name を呼べば m の名前は "Utils" に確定する
+p m.name          # => "Utils"   # 最初に代入された定数名で確定する
 Helpers = m
-p m.name          # "Utils" か "Helpers" のどちらかに決まる
+p m.name          # => "Utils"   # 一度確定した名前は変わらない
 ```
 
 ### def used_modules -> [Module]
@@ -939,6 +938,12 @@ p t.foo()              #=> 1
 「::」を使って表示した名前のことです。
 クラスパスの例としては「CGI::Session」「Net::HTTP」が挙げられます。
 
+[m:Module.new] や [m:Class.new] で生成した直後の無名のモジュール /
+クラスは、最初にいずれかの定数に代入された時点で名前が確定します。
+一度確定した名前は、その定数を remove_const で取り除いたり、
+そのモジュール / クラスを別の定数へ代入し直したりしても変わりません。
+返り値の文字列は freeze されています。
+
 - **return** -- 名前のないモジュール / クラスに対しては、name は nil を、それ以外はオブジェクト ID の文字列を返します。
 
 ```ruby title="例"
@@ -961,6 +966,15 @@ p Module.new.name   #=> nil
 p Class.new.name    #=> nil
 p Module.new.to_s   #=> "#<Module:0x00007f90b09112c8>"
 p Class.new.to_s    #=> "#<Class:0x00007fa5c40b41b0>"
+
+# 名前は最初に代入された定数で確定し、以後は変わらない
+c = Class.new
+p c.name         #=> nil
+Foo = c
+p c.name         #=> "Foo"
+Bar = c
+p c.name         #=> "Foo"
+p c.name.frozen? #=> true
 ```
 
 ### def instance_methods(inherited_too = true) -> [Symbol]
