@@ -99,6 +99,48 @@ p s2 # => #<Set: {10, 20, 30}>
 
 - **SEE** [m:Object#clone]
 
+### def compare_by_identity -> self
+
+集合の要素の一致判定をオブジェクトの同一性で判定するように変更します。
+
+デフォルトでは、要素の内容が [m:Object#eql?] で等しければ同じ要素とみなされますが、より厳密に
+[m:Object#object_id] が一致しているかどうかを条件とするように self を変更します。
+
+self が変化する破壊的メソッドです。
+
+- **return** -- self を返します。
+
+```ruby title="例"
+s1 = Set["a", "b"]
+a  = "a"
+
+p s1.compare_by_identity? # => false
+p s1.include?(a)          # => true
+
+s1.compare_by_identity
+
+p s1.compare_by_identity? # => true
+p s1.include?(a)          # => false
+p s1.include?("a")        # => false
+```
+
+- **SEE** [m:Set#compare_by_identity?], [m:Hash#compare_by_identity]
+
+### def compare_by_identity? -> bool
+
+集合が要素の一致判定をオブジェクトの同一性を用いて行っているならば真を返します。
+
+```ruby title="例"
+s1 = Set["a", "b"]
+p s1.compare_by_identity? # => false
+
+s1.compare_by_identity
+
+p s1.compare_by_identity? # => true
+```
+
+- **SEE** [m:Set#compare_by_identity], [m:Hash#compare_by_identity?]
+
 ### def size -> Integer
 ### def length -> Integer
 
