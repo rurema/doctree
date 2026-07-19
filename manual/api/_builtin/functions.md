@@ -2516,11 +2516,19 @@ eval('raise RuntimeError', binding, 'XXX.rb', 4)
 
 また、lambda に & 引数を渡すのは推奨されません。& 引数ではなくてブロック記法で記述する必要があります。
 
+#@since 3.3
+& 引数(リテラルでないブロック)を渡して lambda を呼び出すと、[c:ArgumentError]
+「the lambda method requires a literal block」が発生します。
+#@else
 & 引数を渡した lambda は Warning[:deprecated] = true のときに警告メッセージ
 「warning: lambda without a literal block is deprecated; use the proc without lambda instead」
 を出力します。
+#@end
 
 - **raise** `ArgumentError` -- ブロックを省略した呼び出しを行ったときに発生します。
+#@since 3.3
+- **raise** `ArgumentError` -- & 引数(リテラルでないブロック)を渡して呼び出したときに発生します。
+#@end
 
 ```ruby title="例"
 def foo &block
