@@ -425,6 +425,10 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 
 内部で各要素を保持した配列を作ります。ただし、端点が [c:Integer] である場合は、配列を作らないように最適化が行われています。
 
+始端を持たない範囲(beginless range)であっても、終端が [c:Integer] であれば、
+終端から下降しながら反復できます。この場合は要素が無限に生成されるため、
+`first` や `take` で打ち切るか、ブロック内で break してください。
+
 ブロックを省略した場合は、各要素を逆順に辿る
 [c:Enumerator] を返します。
 
@@ -436,6 +440,9 @@ p (1..3).reverse_each # => #<Enumerator: ...>
 # => 3
 #    2
 #    1
+# 始端を持たない範囲は終端から下降しながら反復する(無限に生成される)
+p (..5).reverse_each.first(3) # => [5, 4, 3]
+
 (1..).reverse_each { |v| p v } # raises: TypeError: can't iterate from NilClass
 ```
 
