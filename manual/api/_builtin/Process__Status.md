@@ -98,12 +98,17 @@ other が数値の場合、self.to_i との比較が行われます。こ
 
 - **param** `other` -- 自身と比較したいオブジェクトを指定します。
 
+#@until 4.0
 ### def &(other)    -> Integer
 
 self.to_i & other と同じです。
 このメソッドは後方互換性のためにあります。
+#@since 3.3
+このメソッドは Ruby 3.3 から deprecated であり、Ruby 4.0 で削除されました。
+#@end
 
 - **param** `other` -- 自身との & 演算をしたい整数を指定します。
+#@end
 
 ### def pid    -> Integer
 
@@ -176,9 +181,13 @@ signaled? が真の場合プロセスを終了させたシグナル番号を、
 このメソッドはシステムに依存します。サポートしないプラットフォー
 ムでは常に false を返します。
 
+#@until 4.0
 ### def >>(num)    -> Integer
 
 self.to_i >> num と同じです。
+#@since 3.3
+このメソッドは Ruby 3.3 から deprecated であり、Ruby 4.0 で削除されました。
+#@end
 
 - **param** `num` -- 整数を指定します。
 
@@ -188,6 +197,7 @@ p Process.wait     #=> 26563
 p $?.to_i          #=> 25344
 p $? >> 8          #=> 99
 ```
+#@end
 
 ### def success?    -> bool
 

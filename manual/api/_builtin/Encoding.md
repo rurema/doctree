@@ -211,13 +211,16 @@ p Encoding::UTF_8.ascii_compatible?   #=> true
 p Encoding::UTF_16BE.ascii_compatible?  #=> false
 ```
 
+#@until 3.3
 ### def replicate(name) -> Encoding
 
 レシーバのエンコーディングを複製(replicate)します。
 複製されたエンコーディングは元のエンコーディングと同じバイト構造を持たなければなりません。
 name という名前のエンコーディングが既に存在する場合は [c:ArgumentError] を発生します。
 
-Ruby 3.2 から非推奨となり、Ruby 3.3 で削除予定です。
+#@since 3.2
+このメソッドは Ruby 3.2 から deprecated であり、Ruby 3.3 で削除されました。
+#@end
 
 ```ruby
 encoding = Encoding::UTF_8.replicate("REPLICATED_UTF-8")     #=> #<Encoding:REPLICATED_UTF-8>
@@ -226,6 +229,7 @@ p "\u3042".force_encoding(Encoding::UTF_8).valid_encoding?   #=> true
 p "\u3042".force_encoding(encoding).valid_encoding?          #=> true
 p "\u3042".force_encoding(Encoding::SHIFT_JIS).valid_encoding? #=> false
 ```
+#@end
 
 ## Constants
 
