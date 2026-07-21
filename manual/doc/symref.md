@@ -43,7 +43,7 @@ Ruby スクリプトで使われる記号の一覧です。
 
 - **`?a`**:
 
- [ref:d:spec/literal#string]。長さ 1 の文字列。
+ [ref:d:spec/literal#char]。長さ 1 の文字列。
 
 - **`def xx?`**:
 
