@@ -14,6 +14,7 @@
 - [HowToWriteRequire](HowToWriteRequire.md) — require の書き方
 - [SampleCodeGuideline](SampleCodeGuideline.md) — サンプルコードのガイドライン
 - [WritingRule](WritingRule.md) — 文体・日本語の規約
+- [MarkdownDialect](MarkdownDialect.md) — CommonMark・GFM との違い（独自拡張と非対応記法）
 - [FrequentlyAskedQuestions](FrequentlyAskedQuestions.md) — 執筆FAQ
 - [CapiReferenceManual](CapiReferenceManual.md) — C API リファレンスについて
 - [Tutorial](Tutorial.md) — はじめての Pull Request までのチュートリアル
