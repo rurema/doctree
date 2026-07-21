@@ -191,7 +191,11 @@ message 引数を渡した場合、message 引数をメッセージとした Run
 
 - **param** `message` -- 例外のメッセージとなる文字列です。
 - **param** `exception` -- 発生させる例外です。
+#@since 3.4
+- **param** `backtrace` -- 例外発生時のスタックトレースです。文字列の配列、または [c:Thread::Backtrace::Location] の配列で指定します。
+#@else
 - **param** `backtrace` -- 例外発生時のスタックトレースです。文字列の配列で指定します。
+#@end
 
 ```ruby title="例"
 f = Fiber.new { Fiber.yield }

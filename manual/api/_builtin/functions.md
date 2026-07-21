@@ -2375,6 +2375,10 @@ error_type として例外ではないクラスやオブジェクトを指定し
 - **param** `message` -- 例外のメッセージとなる文字列です。
 - **param** `backtrace` -- 例外発生時のスタックトレースで、[m:Kernel?.caller] の戻り値と同じ
   形式で指定しなければいけません。
+#@since 3.4
+  Ruby 3.4 からは、[m:Kernel?.caller_locations] の戻り値と同じ
+  [c:Thread::Backtrace::Location] の配列も指定できます。
+#@end
 - **param** `cause` -- 現在の例外([m:$!])の代わりに [m:Exception#cause] に設定する例外を指定します。
   [c:Exception] オブジェクトまたは nil を指定できます。
 - **raise** `TypeError` -- exception メソッドが例外オブジェクトを返さなかった場合に発生します。

@@ -145,7 +145,11 @@ end
 バックトレース情報に errinfo を設定し、設定されたバックトレース
 情報を返します。
 
+#@since 3.4
+- **param** `errinfo` -- nil、[c:String]、[c:String] の配列、あるいは [c:Thread::Backtrace::Location] の配列のいずれかを指定します。
+#@else
 - **param** `errinfo` -- nil、[c:String] あるいは [c:String] の配列のいずれかを指定します。
+#@end
 
 ```ruby title="例"
 begin
