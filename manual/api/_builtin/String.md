@@ -4032,6 +4032,10 @@ p "\u00E0".unicode_normalized?(:nfd) # => false
 formatにしたがって文字列をデコードし、展開された1つ目の値を返します。
 unpackは配列を返しますがunpack1は配列の1つ目の要素のみを返します。
 
+#@since 3.3
+未知のテンプレート文字を指定すると [c:ArgumentError] が発生します。
+#@end
+
 ```ruby title="例"
 p "ABC".unpack1("C*") # => 65
 p "ABC".unpack("C*")  # => [65, 66, 67]
