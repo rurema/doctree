@@ -1401,6 +1401,11 @@ p me.call #=> 365
 オブジェクトの特異メソッド name をオブジェクト化した [c:Method] オブ
 ジェクトを返します。
 
+#@since 3.4
+特異クラスに include / prepend されたモジュールのインスタンスメソッド
+（例えば [m:Object#extend] で追加したモジュールのメソッド）も対象になります。
+#@end
+
 - **param** `name` -- メソッド名を[c:Symbol] または[c:String]で指定します。
 - **raise** `NameError` -- 定義されていないメソッド名を引数として与えると発生します。
 
@@ -1422,6 +1427,14 @@ m = k.singleton_method(:hi)    # => #<Method: #<Demo:0xf8b0c3c4 @iv=99>.hi>
 p m.call #=> "Hi, @iv = 99"
 m = k.singleton_method(:hello) # ~> NameError
 ```
+
+#@since 3.4
+```ruby title="例: extend で追加したモジュールのメソッド"
+o = Object.new
+o.extend(Module.new { def a = 1 })
+p o.singleton_method(:a).call # => 1
+```
+#@end
 
 - **SEE** [m:Module#instance_method], [c:Method], [m:BasicObject#__send__], [m:Object#send], [m:Kernel?.eval], [m:Object#method]
 
