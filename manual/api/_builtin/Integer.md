@@ -180,6 +180,7 @@ p 10.to_i # => 10
 ```
 
 ### def floor(ndigits = 0) -> Integer
+{: since=""}
 
 self と等しいかより小さな整数のうち最大のものを返します。
 
@@ -196,6 +197,7 @@ p (-18).floor(-1) # => -20
 - **SEE** [m:Numeric#floor]
 
 ### def ceil(ndigits = 0) -> Integer
+{: since=""}
 
 self と等しいかより大きな整数のうち最小のものを返します。
 
@@ -212,6 +214,7 @@ p (-18).ceil(-1) # => -10
 - **SEE** [m:Numeric#ceil]
 
 ### def round(ndigits = 0, half: :up) -> Integer
+{: since=""}
 
 self ともっとも近い整数を返します。
 
@@ -244,6 +247,7 @@ p (-25).round(-1, half: :even) # => -20
 - **SEE** [m:Numeric#round]
 
 ### def truncate(ndigits = 0) -> Integer
+{: since=""}
 
 0 から self までの整数で、自身にもっとも近い整数を返します。
 

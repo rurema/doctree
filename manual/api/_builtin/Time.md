@@ -865,6 +865,7 @@ p t.strftime("%Y-%m-%d %H:%M:%S UTC")  # => "2000-01-01 18:04:05 UTC"
 戻り値の文字エンコーディングは [m:Encoding::US_ASCII] です。
 
 ### def inspect     -> String
+{: since=""}
 
 時刻を文字列に変換した結果を返します。
 
@@ -887,6 +888,7 @@ p t2.strftime("%Y-%m-%d %H:%M:%S.%N %z")  # => "1970-01-01 09:00:00.100000000 +0
 戻り値の文字エンコーディングは [m:Encoding::US_ASCII] です。
 
 ### def hash -> Integer
+{: since=""}
 
 self のハッシュ値を返します。
 

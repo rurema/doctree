@@ -10,7 +10,9 @@ include:
 ## Public Instance Methods
 
 ### def filename -> String
+{: since=""}
 ### def path -> String
+{: since=""}
 
 現在開いている処理対象のファイル名を返します。
 
@@ -32,11 +34,13 @@ ARGF.filename # => "glark"
 ```
 
 ### def to_s -> String
+{: since=""}
 ### def inspect -> String
 
 常に文字列 "ARGF" を返します。
 
 ### def file -> IO
+{: since=""}
 
 現在開いている処理対象の [c:File] オブジェクト(または [c:IO] オブジェ
 クト)を返します。
@@ -55,6 +59,7 @@ ARGF.file      # => #<File:bar>
 ARGFが現在開いている処理対象が標準入力の場合、$stdin を返します。
 
 ### def lineno -> Integer
+{: since=""}
 
 全引数ファイルを一つのファイルとみなしたときの現在の行番号を返します。
 個々の引数ファイル毎の行番号を得るには ARGF.file.lineno とします。
@@ -70,6 +75,7 @@ p ARGF.lineno # => 1
 - **SEE** [m:ARGF.class#lineno=]
 
 ### def lineno=(number)
+{: since=""}
 
 全引数ファイルを一つのファイルとみなしたときの現在の行番号を number に書き換えます。
 
@@ -88,6 +94,7 @@ p ARGF.lineno    # => 0
 - **SEE** [m:ARGF.class#lineno]
 
 ### def skip -> self
+{: since=""}
 
 現在開いている処理対象のファイルをクローズします。
 次回の読み込みは次の引数が処理対象になります。
@@ -104,6 +111,7 @@ ARGF.filename  # => "bar"
 ```
 
 ### def binmode -> self
+{: since=""}
 
 self をバイナリモードにします。一度バイナリモードになった後は非バイナリ
 モードに戻る事はできません。
@@ -138,6 +146,7 @@ p ARGF.read.size  # => 290
 - **SEE** [m:IO#binmode], [m:ARGF.class#binmode?]
 
 ### def binmode? -> bool
+{: since="1.9.1"}
 
 ARGF の入力ストリームがバイナリモードなら true を返します。
 そうでない場合、false を返します。
@@ -153,6 +162,7 @@ p ARGF.binmode? # => true
 - **SEE** [m:IO#binmode?], [m:ARGF.class#binmode]
 
 ### def close -> self
+{: since=""}
 
 現在開いている処理対象のファイルをクローズします。開くファイルが残って
 いる場合は次のファイルをオープンします。
@@ -173,6 +183,7 @@ ARGF.close
 - **SEE** [m:ARGF.class#closed?]
 
 ### def closed? -> bool
+{: since=""}
 
 現在開いている処理対象のファイルがARGFがcloseされていればtrueを返します。
 
@@ -194,13 +205,21 @@ p ARGF.closed? # => true
 - **SEE** [m:IO#closed?], [m:ARGF.class#close]
 
 ### def each(rs = $/) { |line| ... }             -> self
+{: since=""}
 ### def each_line(rs = $/) { |line| ... }        -> self
+{: since=""}
 ### def each(rs = $/, limit) { |line| ... }      -> self
+{: since=""}
 ### def each_line(rs = $/, limit) { |line| ... } -> self
+{: since=""}
 ### def each(rs = $/)                            -> Enumerator
+{: since=""}
 ### def each_line(rs = $/)                       -> Enumerator
+{: since=""}
 ### def each(rs = $/, limit)                     -> Enumerator
+{: since=""}
 ### def each_line(rs = $/, limit)                -> Enumerator
+{: since=""}
 
 ARGFの現在位置から 1 行ずつ文字列として読み込み、それを引数として与えら
 れたブロックを実行します。
@@ -232,7 +251,9 @@ end
 - **SEE** [m:IO#each], [m:IO#each_line]
 
 ### def each_byte { |byte| ...} -> self
+{: since=""}
 ### def each_byte               -> Enumerator
+{: since=""}
 
 ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
 ブロック引数byteは0..255のいずれかの整数です。
@@ -252,7 +273,9 @@ p ARGF.each_byte.to_a  # => [35, 32, ... 95, 10]
 - **SEE** [m:IO#each_byte]
 
 ### def each_char { |c| ... } -> self
+{: since=""}
 ### def each_char             -> Enumerator
+{: since=""}
 
 レシーバに含まれる文字を一文字ずつブロックに渡して評価します。
 
@@ -310,7 +333,9 @@ p ARGF.each_codepoint{|e|print e, ","} # => 108,105,110,101,49,10,108,105,110,10
 ```
 
 ### def eof  -> bool
+{: since=""}
 ### def eof? -> bool
+{: since=""}
 
 現在開いているファイルがEOFに達したらtrueを返します。そうでない場合は
 falseを返します。
@@ -330,7 +355,9 @@ ARGF.eof?                 # => true
 - **SEE** [m:IO#eof], [m:IO#eof?]
 
 ### def fileno -> Integer
+{: since=""}
 ### def to_i   -> Integer
+{: since=""}
 
 現在オープンしているファイルのファイル記述子を表す整数を返します。
 
@@ -341,6 +368,7 @@ p ARGF.fileno  # => 3
 - **raise** `ArgumentError` -- 現在開いているファイルがない場合に発生します。
 
 ### def getc -> String | nil
+{: since=""}
 
 self から 1 文字読み込んで返します。EOF に到達した時には nil を返します。
 
@@ -368,8 +396,11 @@ ARGF.getc # => nil
 - **SEE** [m:ARGF.class#getbyte], [m:ARGF.class#gets]
 
 ### def gets(rs = $/, chomp: false)   -> String | nil
+{: since=""}
 ### def gets(limit, chomp: false)     -> String | nil
+{: since=""}
 ### def gets(rs, limit, chomp: false) -> String | nil
+{: since=""}
 
 ARGFの現在位置から一行ずつ文字列として読み込みます。EOF に到達した時に
 は nil を返します。
@@ -418,7 +449,9 @@ p ARGF.gets("")                # => "line1\nline2\nline3\n\n"
 - **SEE** [m:Kernel?.gets], [m:IO#gets], [m:ARGF.class#getbyte], [m:ARGF.class#getc]
 
 ### def pos  -> Integer
+{: since=""}
 ### def tell -> Integer
+{: since=""}
 
 ARGFが現在開いているファイルのファイルポインタの現在の位置をバイト単位
 の整数で返します。
@@ -432,6 +465,7 @@ p ARGF.pos  # => 17
 - **SEE** [m:IO#pos], [m:IO#tell], [m:ARGF.class#pos=]
 
 ### def pos=(n)
+{: since=""}
 
 ARGFが開いているファイルのファイルポインタを指定位置に移動します。
 
@@ -445,6 +479,7 @@ p ARGF.gets # => "This is line two\n"
 - **SEE** [m:IO#pos=], [m:ARGF.class#pos]
 
 ### def read(length = nil, str = nil) -> String | nil
+{: since=""}
 
 ARGVに指定されたファイルを先頭のファイルからlengthバイト読み込み、
 その文字列をstrに出力します。読み込んだ文字列を返します。
@@ -468,6 +503,7 @@ ARGF.read(0)   # => ""
 - **SEE** [m:IO#read]
 
 ### def readchar -> String
+{: since=""}
 
 ARGFから 1 文字読み込んで、その文字に対応する String を返します。EOF に
 到達した時には EOFErrorを発生します。
@@ -488,8 +524,11 @@ ARGF.readchar  # => end of file reached (EOFError)
 - **SEE** [m:ARGF.class#getc]
 
 ### def readline(rs = $/)   -> String
+{: since=""}
 ### def readline(limit)     -> String
+{: since=""}
 ### def readline(rs, limit) -> String
+{: since=""}
 
 ARGFの現在位置から一行ずつ文字列として読み込みます。EOF に到達した時に
 は [c:EOFError] を発生します。
@@ -505,11 +544,17 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF 
 - **SEE** [m:Kernel?.readline], [m:ARGF.class#gets]
 
 ### def readlines(rs = $/)   -> Array
+{: since=""}
 ### def readlines(limit)     -> Array
+{: since=""}
 ### def readlines(rs, limit) -> Array
+{: since=""}
 ### def to_a(rs = $/)        -> Array
+{: since=""}
 ### def to_a(limit)          -> Array
+{: since=""}
 ### def to_a(rs, limit)      -> Array
+{: since=""}
 
 ARGFの各行を配列に読み込んで返します。rsがnilの場合は要素に各ファイルを
 すべて読み込んだ配列を返します。
@@ -526,6 +571,7 @@ p lines[0]              # => "This is line one\n"
 - **SEE** [m:$/], [m:Kernel?.readlines], [m:IO#readlines]
 
 ### def rewind -> 0
+{: since=""}
 
 ARGFが現在開いているファイルのファイルポインタを先頭に戻します。
 
@@ -537,6 +583,7 @@ p ARGF.readline # => "This is line one\n"
 ```
 
 ### def seek(offset, whence = IO::SEEK_SET) -> 0
+{: since=""}
 
 ARGFが現在開いているファイルのファイルポインタを whence の位置から
 offset だけ移動させます。 offset 位置への移動が成功すれば 0 を返します。
@@ -547,6 +594,7 @@ offset だけ移動させます。 offset 位置への移動が成功すれば 0
 - **SEE** [m:IO#seek]
 
 ### def to_io -> IO
+{: since=""}
 
 ARGFが現在開いているファイルの[c:File]、または[c:IO]オブジェクトを
 返します。
@@ -559,6 +607,7 @@ p ARGF.to_io  # => #<IO:<STDIN>>
 - **SEE** [m:ARGF.class#file], [m:ARGF.class#to_write_io]
 
 ### def getbyte   -> Integer | nil
+{: since=""}
 
 self から 1 バイト(0..255)を読み込み整数として返します。
 既に EOF に達していれば nil を返します。
@@ -587,6 +636,7 @@ ARGF.getbyte # => nil
 - **SEE** [m:ARGF.class#getc], [m:ARGF.class#gets]
 
 ### def readbyte   -> Integer
+{: since=""}
 
 自身から 1 バイトを読み込み整数として返します。
 既に EOF に達していれば EOFError が発生します。
@@ -615,6 +665,7 @@ ARGF.readbyte  # => end of file reached (EOFError)
 - **SEE** [m:IO#readpartial], [m:ARGF.class#read_nonblock]
 
 ### def argv -> Array
+{: since="1.9.1"}
 
 [m:Object::ARGV] を返します。
 
@@ -629,6 +680,7 @@ ARGF.argv   #=> ["-v", "glark.txt"]
 ```
 
 ### def external_encoding -> Encoding
+{: since="1.9.1"}
 
 ARGF が処理するファイルに対する外部エンコーディングを返します。
 デフォルトは [m:Encoding.default_external] です。
@@ -642,6 +694,7 @@ p ARGF.external_encoding  # =>  #<Encoding:UTF-8>
 - **SEE** [c:IO], [m:ARGF.class#internal_encoding]
 
 ### def internal_encoding -> Encoding | nil
+{: since="1.9.1"}
 
 ARGF から読み込んだ文字列の内部エンコーディングを返します。
 内部エンコーディングが指定されていない場合は nil を返します。
@@ -668,8 +721,11 @@ p ARGF.internal_encoding          # => nil
 - **SEE** [c:IO], [m:ARGF.class#external_encoding]
 
 ### def set_encoding(ext_enc)                        -> self
+{: since="1.9.1"}
 ### def set_encoding(enc_str, options = {})          -> self
+{: since="1.9.1"}
 ### def set_encoding(ext_enc, int_enc, options = {}) -> self
+{: since="1.9.1"}
 
 ARGF の外部／内部エンコーディングを設定します。
 次以降に処理するファイルにも同じ設定が適用されます。
@@ -691,6 +747,7 @@ ARGF の外部／内部エンコーディングを設定します。
 - **SEE** [m:String#encode]
 
 ### def inplace_mode -> String | nil
+{: since="1.9.1"}
 
 [ref:c:ARGF#inplace] で書き換えるファイルのバックアップに付加される拡
 張子を返します。拡張子が設定されていない場合は空文字列を返します。イン
@@ -722,6 +779,7 @@ p ARGF.each_line {|e|print e.upcase}  # => "TEST"
 - **SEE** [ref:d:spec/rubycmd#cmd_option], [m:ARGF.class#inplace_mode=]
 
 ### def inplace_mode=(ext)
+{: since="1.9.1"}
 
 [ref:c:ARGF#inplace]時にバックアップファイルに付加する拡張子を設定します。
 ピリオドも含めて指定する必要があります。
@@ -760,6 +818,7 @@ $ ruby -i.bak -n -e 'print $_.sub("foo","bar")' file.txt
 - **SEE** [ref:d:spec/rubycmd#cmd_option], [m:ARGF.class#inplace_mode]
 
 ### def print(*arg)  -> nil
+{: since="1.9.3"}
 
 引数を順に処理対象のファイルに出力します。
 
@@ -770,6 +829,7 @@ $ ruby -i.bak -n -e 'print $_.sub("foo","bar")' file.txt
 - **param** `arg` -- 出力するオブジェクトを任意個指定します。
 
 ### def printf(format, *arg)  -> nil
+{: since="1.9.3"}
 
 C 言語の printf と同じように、format に従い引数を
 文字列に変換して処理対象のファイルに出力します。
@@ -783,6 +843,7 @@ C 言語の printf と同じように、format に従い引数を
 
 
 ### def putc(ch)  -> object
+{: since="1.9.3"}
 
 文字 ch を処理対象のファイルに出力します。
 ch を返します。
@@ -794,6 +855,7 @@ ch を返します。
 - **param** `ch` -- 出力する文字を [c:String] オブジェクトで指定します。
 
 ### def puts(*arg)  -> nil
+{: since="1.9.3"}
 
 引数と改行を順番に処理対象のファイルに出力します。
 引数がなければ改行のみを出力します。
@@ -805,6 +867,7 @@ ch を返します。
 - **param** `arg` -- 出力するオブジェクトを任意個指定します。
 
 ### def read_nonblock(maxlen, outbuf = nil, exception: true) -> String | Symbol | nil
+{: since="1.9.3"}
 #@# TODO: Windows では使えない？
 
 処理中のファイルからノンブロッキングモードで最大 maxlen バイト読み込みます。
@@ -823,6 +886,7 @@ ch を返します。
 - **SEE** [m:ARGF.class#readpartial]
 
 ### def to_write_io  -> IO
+{: since="1.9.3"}
 
 処理対象のファイルへの書き出し用 [c:IO] オブジェクトを返します。
 
@@ -830,6 +894,7 @@ ch を返します。
 このため [m:ARGF.class#write] などの書き出し用メソッドを呼ぶと [c:IOError] が発生します。
 
 ### def write(str)  -> Integer
+{: since="1.9.3"}
 
 処理対象のファイルに対して str を出力します。
 str が文字列でなければ to_s による文字列化を試みます。
