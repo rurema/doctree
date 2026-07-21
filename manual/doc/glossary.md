@@ -6,13 +6,13 @@
 
 ### 記号・数字
 - **%記法**: {#percent-notation}
-- **`% notation`**:
+- **% notation**:
   「%」記号で始まる多種多様なリテラル記法の総称。
 
   参照：[ref:d:spec/literal#percent]
 
 - **0 オリジン**: {#zero-based}
-- **`zero-based`**:
+- **zero-based**:
   番号が 0 から始まること。
 
   例えば、
@@ -21,7 +21,7 @@
   といったものは 0 オリジンである。
 
 - **1 オリジン**: {#one-based}
-- **`one-based`**:
+- **one-based**:
   番号が 1 から始まること。
 
   例えば、
@@ -32,7 +32,7 @@
 
 ### A {#A}
 
-- **`AWK`**: {#awk}
+- **AWK**: {#awk}
   テキスト処理に適したプログラミング言語。
   名称は、開発者である Aho（エイホ）、Weinberger（ワインバーガー）、Kernighan（カーニハン）
   の頭文字を取ったもので、「オーク」と読む。
@@ -45,22 +45,22 @@
 
 ### B {#B}
 
-- **`Bignum`**: {#bignum}
+- **Bignum**: {#bignum}
   Ruby 2.3 系までは、即値で実装されない絶対値の大きな整数オブジェクトが属す
   クラスだった。Ruby 2.4 で Fixnum と共に [c:Integer] に一本化された。
   このとき Bignum は形式的には残されたが単なる Integer のエイリアスとなった。
 
-- **`blade`**: {#blade}
+- **blade**: {#blade}
   Ruby の各種メーリングリストのアーカイブ。
 
   <https://blade.ruby-lang.org/>
 
-- **`bundled gem`**: {#bundled-gem}
+- **bundled gem**: {#bundled-gem}
   標準添付ライブラリーの gem のうち、アンインストールできるもの。
 
   → default gem、標準添付ライブラリー
 
-- **`Bundler`**: {#bundler}
+- **Bundler**: {#bundler}
   特定の Ruby アプリケーションで使用する gem とそのバージョンを Gemfile
   および Gemfile.lock という
   ファイルで管理するツール。gem を新規作成するときの雛形を生成する機能もある。
@@ -71,7 +71,7 @@
 
 ### C {#C}
 
-- **`Coerce`**: {#coerce}
+- **Coerce**: {#coerce}
   異なるクラスの値同士の演算を効率よく実装するための手法の一つ。
 
   例えば新しい数値クラス N を定義し、Integer と N の演算を可能にしたいとする。
@@ -83,13 +83,13 @@
 
   参照：[m:Numeric#coerce]
 
-- **`CRuby`**: {#cruby}
+- **CRuby**: {#cruby}
   Ruby の処理系の一つ。C で実装されているのでこの名がある。
 
   Matz により開発が始められた。
   Matz Ruby とか MRI（Matz’ Ruby Implementation）とも呼ばれる。
 
-- **`Crystal`**: {#crystal}
+- **Crystal**: {#crystal}
   Ruby によく似たオブジェクト指向プログラミング言語。
   型推論を持った静的型付け言語であり、処理系はコンパイラーである。
 
@@ -109,12 +109,12 @@
 
 ### D {#D}
 
-- **`default gem`**: {#default-gem}
+- **default gem**: {#default-gem}
   標準添付ライブラリーの gem のうち、アンインストールできないもの。
 
   → bundled gem、標準添付ライブラリー
 
-- **`dRuby`**: {#druby}
+- **dRuby**: {#druby}
   標準添付ライブラリー [lib:drb] によって提供される分散オブジェクトプログラミングの
   ための仕組み。
   何らかの通信手段（TCPSocket や UNIXSocket など）を介して異なるプロセスやマシンの
@@ -122,14 +122,14 @@
 
 ### E {#E}
 
-- **`ENV`**: {#env}
+- **ENV**: {#env}
   環境変数にアクセスするためのオブジェクト。
   [c:Hash] に似たインターフェースを持つ。キーも値も文字列である。
   ENV で環境変数を変更すると Ruby の子プロセスにも引き継がれる。
 
   参照：[c:ENV]
 
-- **`eRuby`**: {#eruby}
+- **eRuby**: {#eruby}
   テンプレートシステムおよびそのフォーマットの名称。
   任意のテキストに Ruby のコードを埋め込むことができる。
   名称は embedded Ruby から。
@@ -139,12 +139,12 @@
   標準添付ライブラリー [lib:erb] で提供される [c:ERB] がテンプレートエンジン
   となる。これ以外にもサードパーティーのテンプレートエンジンが複数ある。
 
-- **`European Ruby Conference`**: {#euruko}
+- **European Ruby Conference**: {#euruko}
   <https://euruko.org/>
 
 ### F {#F}
 
-- **`FFI: Foreign function interface`**: {#ffi}
+- **FFI: Foreign function interface**: {#ffi}
 
   他言語関数インターフェース。
   二つのプログラミング言語間で相手の関数を呼び出したりするための仕組み。
@@ -153,24 +153,24 @@
   相手側は、FFI に対応していれば C である必要はなく、例えば Rust で
   書くこともできる。
 
-- **`Fixnum`**: {#fixnum}
+- **Fixnum**: {#fixnum}
   Ruby 2.3 系までは、整数は即値で実装されるものが Finxnum のインスタンスであり、
   そうでないものは Bignum のインスタンスであった。[c:Integer] はこれらをまとめる
   抽象クラスだった。
   Ruby 2.4 でこれらが Integer に統合され、Fixnum と Bignum は Integer の
   単なるエイリアスとなった。
 
-- **`flonum`**: {#flonum}
+- **flonum**: {#flonum}
   CRuby において、[c:Float] が表す浮動小数点数のうち、即値として実装されているもの。
 
   演算が高速で省メモリーという特長がある。
 
 ### G {#G}
 
-- **`GC`**: {#gc}
+- **GC**: {#gc}
   ＝[ガーベジコレクション](#garbage-collection)
 
-- **`gem`**: {#gem}
+- **gem**: {#gem}
   RubyGems の仕組みでパッケージされたライブラリー。
 
   また、RubyGems のコマンドの名前でもある。
@@ -179,7 +179,7 @@
 
 ### I {#I}
 
-- **`irb`**: {#irb}
+- **irb**: {#irb}
   組込みの対話型 Ruby 実行環境およびそのコマンド名。
 
   irb コマンドで起動し、Ruby の式を入力すればその場で評価して結果を表示する。
@@ -193,16 +193,16 @@
   たとえば、配列オブジェクトは [c:Array] クラスや [c:Enumerable] モジュール、[c:Object] クラス
   などに対して is_a? の関係にある。
 
-- **`ISO/IEC 30170`**: {#iso30170}
+- **ISO/IEC 30170**: {#iso30170}
   JIS X 3017 の原規格。
 
 ### J {#J}
 
-- **`JIS X 3017`**: {#jisx3017}
+- **JIS X 3017**: {#jisx3017}
   日本工業規格「プログラム言語 Ruby」。ISO/IEC 30170 を JIS 化したもの。
   2011 年制定、2013 年改正。
 
-- **`JRuby`**: {#jruby}
+- **JRuby**: {#jruby}
   Java で実装された Ruby の処理系。
   Ruby スクリプトから Java のクラスを利用したり、Java プログラムから Ruby を
   呼ぶなど、Ruby と Java が容易に連携できるという特長がある。
@@ -211,30 +211,30 @@
 
 ### M {#M}
 
-- **`Matz`**: {#matz}
+- **Matz**: {#matz}
   Ruby の作者、まつもとゆきひろ（松本行弘）氏。
 
-- **`Matz Ruby`**: {#matz-ruby}
+- **Matz Ruby**: {#matz-ruby}
   ＝[CRuby](#cruby)
 
-- **`mix-in`**:
+- **mix-in**:
   ＝[ミックスイン](#mix-in)
 
-- **`MRI: Matz’ Ruby Implementation`**: {#mri}
+- **MRI: Matz’ Ruby Implementation**: {#mri}
   ＝[CRuby](#cruby)
 
-- **`mruby`**: {#mruby}
+- **mruby**: {#mruby}
   組込み向けの Ruby 仕様および処理系。省メモリー性など、機器組み込みや
   アプリケーションソフト組込みに適した特徴を持つ。
 
   <https://mruby.org/>
 
-- **`main`**: {#main}
+- **main**: {#main}
   トップレベルにおける self。[c:Object] クラスのインスタンスである。
 
 ### N {#N}
 
-- **`nil`**: {#nil}
+- **nil**: {#nil}
   [c:NilClass] の唯一のインスタンス。また、そのオブジェクトを指す擬似変数の名前。
   論理値としては偽である。
 
@@ -243,7 +243,7 @@
 
 ### O {#O}
 
-- **`Opal`**: {#opal}
+- **Opal**: {#opal}
   Ruby のコードを JavaScript に変換するソフトウェア。
 
   <https://opalrb.com/>
@@ -255,7 +255,7 @@
 
 ### R {#R}
 
-- **`Rake`**: {#rake}
+- **Rake**: {#rake}
   Ruby 標準添付のビルドツール。
   Rakefile というファイルにタスクを記述する。
   コマンド名は rake。
@@ -265,16 +265,16 @@
 
   参照：[lib:rake]
 
-- **`rbenv`**: {#rbenv}
+- **rbenv**: {#rbenv}
   複数バージョンの Ruby をインストールし、切り替えて使うための
   ツールの一つ。Linux、macOS などで動作する。
 
   <https://github.com/rbenv/rbenv>
 
-- **`RD（Ruby Document format）`**: {#rd}
+- **RD（Ruby Document format）**: {#rd}
   Ruby スクリプト中に記述することを念頭に作られたドキュメントフォーマット。
 
-- **`RDoc`**: {#rdoc}
+- **RDoc**: {#rdoc}
   Ruby スクリプトからそのスクリプトのドキュメントを生成するシステム。
 
   クラス、モジュール、メソッドの情報を抜き出し、またそこに所定の方法で記述された
@@ -282,44 +282,44 @@
 
   参照：[lib:rdoc]
 
-- **`refinement`**: {#refinement}
+- **refinement**: {#refinement}
   既存のクラスやモジュールを特定のスコープでのみ改変する仕組み。
 
   参照：[m:Module#refine]、[m:Module#using]、[m:main.using]
 
-- **`Ruby Central`**: {#rubycentral}
+- **Ruby Central**: {#rubycentral}
   Rubyのサポートと世界の Ruby コミュニティーの支援を専門とする非営利組織。
   RubyConf（International Ruby Conference）と RailsConf を開催している。
 
   <https://rubycentral.org/>
 
-- **`RubyConf`**: {#rubyconf}
+- **RubyConf**: {#rubyconf}
   2001 年から年次開催されている Ruby の祭典。
 
   <https://www.rubyconf.org/>
 
-- **`RubyGems`**: {#rubygems}
+- **RubyGems**: {#rubygems}
   gem のインストール、アンインストール、アップグレードなどの管理を行う
   ライブラリーであり、ツール。
   Ruby 1.8 までは外部ライブラリーであったが、Ruby 1.9 で取り込まれた。
 
   参照：[lib:rubygems]
 
-- **`RubyGems.org`**: {#rubygems-org}
+- **RubyGems.org**: {#rubygems-org}
   gem のホスティングサービス。
 
   <https://rubygems.org/>
 
-- **`Rubyist`**: {#rubyist}
+- **Rubyist**: {#rubyist}
   Ruby 使用者。
 
-- **`Rubyist Magazine`**: {#rubyist-magazine}
+- **Rubyist Magazine**: {#rubyist-magazine}
   日本 Ruby の会が 2004 年から不定期に刊行する Rubyist のためのウェブマガジン。
   愛称「るびま」。
 
   <https://magazine.rubyist.net/>
 
-- **`RubyKaigi`**: {#rubykaigi}
+- **RubyKaigi**: {#rubykaigi}
   2006 年に始まった日本で年次開催されるイベント。
 
   <https://rubykaigi.org/>
@@ -334,15 +334,15 @@
 
 ### S {#S}
 
-- **`safe navigation operator`**:
+- **safe navigation operator**:
   ＝[安全参照演算子](#safe-navigation-operator)
 
-- **`self`**: {#self}
+- **self**: {#self}
   現在のコンテキストにおいて、暗黙のレシーバーとなるオブジェクト。
 
   また、そのオブジェクトを指す擬似変数の名前。
 
-- **`shebang`**: {#shebang}
+- **shebang**: {#shebang}
   シバンまたはシェバンと読む。
   一般に Unix 系 OS のスクリプトにおいて、第 1 行に配置される #! で始まる行をいう。
   スクリプトを処理すべき処理系やそのコマンドラインオプションを指定するのに
@@ -353,7 +353,7 @@
 
 ### Y {#Y}
 
-- **`YARD`**: {#yard}
+- **YARD**: {#yard}
   Ruby 用ドキュメント生成ツール。
 
   <https://yardoc.org/>
@@ -362,7 +362,7 @@
 ### あ {#a}
 
 - **アクセッサー**: {#accessor}
-- **`accessor`**:
+- **accessor**:
   オブジェクトの特定のインスタンス変数について、その値を読み出すメソッドと
   その値を設定するメソッドの総称。
 
@@ -371,14 +371,14 @@
   メソッドは foo= とする。
 
 - **浅い複製**: {#shallow-copy}
-- **`shallow copy`**:
+- **shallow copy**:
   配列を dup メソッドで複製したとき、配列の要素オブジェクトまでは複製されない。
   ハッシュも同様である。このような複製をいう。
 
   ↔深い複製
 
 - **アリティー**: {#arity}
-- **`arity`**:
+- **arity**:
   メソッドやそれをオブジェクト化した [c:Method] オブジェクトの仮引数の数、および
   ブロックやそれをオブジェクト化した [c:Proc] オブジェクトの
   ブロックパラメーターの数。
@@ -389,13 +389,13 @@
   ternary と呼ぶことから作られた語。
 
 - **アンコメント**: {#uncomment}
-- **`uncomment`**:
+- **uncomment**:
   コメントアウトを解除すること。非コメント化。
 
   →コメントアウト
 
 - **安全参照演算子**: {#safe-navigation-operator}
-- **`safe navigation operator`**:
+- **safe navigation operator**:
   メソッド呼び出し構文においてレシーバーとメソッド名を結ぶ演算子の一つ「&.」。
   「.」と違う点は、レシーバーが nil のとき引数の評価もメソッド呼び出しも行わずに nil を
   返す、ということだけである。
@@ -403,13 +403,13 @@
   俗に「ぼっち演算子」とも呼ばれる。
 
 - **安定ソート**: {#stable-sort}
-- **`stable sort`**:
+- **stable sort**:
   同順位となる二つの要素の順序がソート前後で保たれるソート。
 
   [m:Enumerable#sort] などのメソッドは非安定ソート（unstable sort）である。
 
 - **委譲**: {#delegation}
-- **`delegation`**:
+- **delegation**:
   あるオブジェクトのメソッドの実際の処理を他のオブジェクトに
   ゆだねること。
 
@@ -420,7 +420,7 @@
   [lib:forwardable] がある。
 
 - **イテレーター**: {#iterator}
-- **`iterator`**:
+- **iterator**:
   一般には繰り返し（反復）を抽象化する仕組み全般を指す広い概念であるが、
   Ruby 用語としては、もっぱら繰り返し処理のためのブロック付きメソッドの
   ことを指す。
@@ -434,7 +434,7 @@
   ので外部イテレーターに分類される。
 
 - **インスタンス**: {#instance}
-- **`instance`**:
+- **instance**:
   あるクラスに属すオブジェクトをそのクラスのインスタンスという。
 
   あるオブジェクトがあるクラスのインスタンスであるかどうかは [m:Object#instance_of?] で
@@ -444,7 +444,7 @@
   インスタンスと呼ぶ場合があるので注意が必要である。
 
 - **インスタンス変数**: {#instance-variable}
-- **`instance variable`**:
+- **instance variable**:
   オブジェクト固有の変数。識別子の前に @ が一つだけ付いた形式の名前を持つ。
 
   同じクラスのインスタンスの同名の変数でもインスタンスが異なれば別の変数である。
@@ -458,7 +458,7 @@
   参照：[ref:d:spec/variables#instance]
 
 - **インスタンスメソッド**: {#instance-method}
-- **`instance method`**:
+- **instance method**:
   クラスやモジュールに定義されるメソッドは、定義方法により、そのクラスや
   モジュール自身をレシーバーとするものと、インスタンスをレシーバーとする
   ものに分けられる。
@@ -474,12 +474,12 @@
   モジュールを念頭に置き、そこから見た用語である。
 
 - **宇宙船演算子**: {#spaceship-operator}
-- **`spaceship operator`**:
+- **spaceship operator**:
   [c:Comparable] モジュールが利用する、二つのオブジェクトの順序関係を表す
   演算子 <=> の俗称。
 
 - **埋め込みドキュメント**: {#embedded-document}
-- **`embedded document`**:
+- **embedded document**:
   ソースコード中の =begin 行から =end 行まで。コメントとみなされ実行されない。
 
   その名の通り、この部分にコードのドキュメントを記述することが
@@ -488,11 +488,11 @@
   参照：[ref:d:spec/lexical#embed]
 
 - **エイリアス**:
-- **`alias`**:
+- **alias**:
   ＝[別名](#alias)
 
 - **エンコーディング**: {#encoding}
-- **`encoding`**:
+- **encoding**:
   何らかの情報を何らかの記号体系で表現することを指す非常に広い概念だが、
   Ruby で単に「エンコーディング」と言ったときには文字列のエンコーディングを
   指すことが多い。
@@ -512,7 +512,7 @@
   →文字コード
 
 - **演算子**: {#operator}
-- **`operator`**:
+- **operator**:
   演算子はプログラムの構文上の要素で、項とともに式を構成する。
 
   Ruby の演算子には多様なものが含まれる。
@@ -531,7 +531,7 @@
   参照：[d:spec/operator]
 
 - **汚染**: {#taint}
-- **`taint`**:
+- **taint**:
   Ruby のオブジェクトは「汚染されているか否か」という状態を持ち、
   Ruby のセキュリティー機構はこの汚染状態によってメソッド呼び出し等に
   制限を課していた。
@@ -543,23 +543,23 @@
 #@end
 
 - **鬼雲**: {#onigmo}
-- **`Onigmo`**:
+- **Onigmo**:
   Ruby 2.0 以降採用されている正規表現エンジン。鬼車のフォーク。
 
   参照：[d:spec/regexp]
 
 - **鬼車**: {#oniguruma}
-- **`Oniguruma`**:
+- **Oniguruma**:
   Ruby 1.9.x で採用されていた正規表現エンジン。
 
 - **オーバーライド**: {#override}
-- **`override`**:
+- **override**:
   Ruby では上位クラスや include したモジュールで定義されているメソッドを
   再定義することを「オーバーライドする」という。
   オーバーライドしたメソッドからは super によって元のメソッドを呼び出すことができる。
 
 - **オブジェクト**: {#object}
-- **`object`**:
+- **object**:
   Ruby ではすべてのデータはオブジェクトである。
   すべてのオブジェクトは何らかのクラスに属し、メソッド呼び出しに
   反応する。
@@ -574,14 +574,14 @@
   形の表現は、そのクラスのインスタンスを指す。
 
 - **オブジェクト ID**: {#object-id}
-- **`object id`**:
+- **object id**:
   Ruby ではすべてのオブジェクトは自身を一意に特定する整数を持つ。
   これをオブジェクト ID と呼ぶ。
   [m:Object#object_id] メソッドで得られる。
   オブジェクトが同一であることとオブジェクト ID が一致していることは等価である。
 
 - **オブジェクト空間**: {#object-space}
-- **`object space`**:
+- **object space**:
   オブジェクトが漂っている仮想的な空間。処理系の実装に関する概念ではなく、
   そういうメモリー空間があるわけではない。
   即値で実装されたオブジェクトも、概念的にはオブジェクト空間内に存在する。
@@ -590,7 +590,7 @@
   できる。
 
 - **オープンクラス**: {#open-class}
-- **`open class`**:
+- **open class**:
   組込みのクラスが再定義可能であること。
   Ruby は String や Integer といった基本的なクラスも自由に改変できる。
 
@@ -601,7 +601,7 @@
   → refinement
 
 - **オペランド**: {#operand}
-- **`operand`**:
+- **operand**:
   演算子式において演算の対象となる式。式 a + b * c において、+ の
   オペランドは a と b * c の二つである。
 
@@ -619,17 +619,17 @@
 ### か {#ka}
 
 - **下位クラス**:
-- **`subclass`**:
+- **subclass**:
   ＝[サブクラス](#subclass)
 
 - **返り値**: {#return-value}
-- **`return value`**:
+- **return value**:
   メソッドが呼び出し側に返すオブジェクトのこと。戻り値ともいう。
 
   また、式の評価値のことを式の返り値と呼ぶこともある。
 
 - **可視性（メソッドの）**: {#method-visibility}
-- **`method visibility`**:
+- **method visibility**:
   メソッドの呼び出し可能性。Ruby のメソッド可視性は public、private、protected の
   三種類があるが、Java における private、protected とは全く異なるので注意が
   必要である。
@@ -637,11 +637,11 @@
   参照：[ref:d:spec/def#limit]
 
 - **型**: {#type}
-- **`type`**:
+- **type**:
   →データ型
 
 - **ガーベジコレクション**: {#garbage-collection}
-- **`garbage collection`**:
+- **garbage collection**:
   オブジェクトがどこからも参照されなくなったとき、そのオブジェクトが占める
   メモリー領域はガーベジ、つまりゴミと呼ばれる。
   ガーベジがたまると、やがて新たなオブジェクトが生成できなくなってしまう。
@@ -651,7 +651,7 @@
   [c:GC] モジュールでガーベジコレクションが制御できる。
 
 - **可変長引数**: {#variadic}
-- **`variadic`**:
+- **variadic**:
   メソッドに与えられる実引数の数が固定でないこと。
   「可変個引数」と呼ぶほうが内容に合っているが、「可変長引数」という用語の
   ほうが普及している。
@@ -659,7 +659,7 @@
   英語の variadic は形容詞である。
 
 - **空**: {#empty}
-- **`empty`**:
+- **empty**:
   [c:Array] や [c:Hash]、[c:Struct] のような要素を持つクラスでは、要素が無いことを
   「空（から）」と呼ぶ。
 
@@ -668,7 +668,7 @@
   空であることを確認するメソッドの名前にしばしば empty? が使われる。
 
 - **仮引数**: {#formal-argument}
-- **`formal argument`**:
+- **formal argument**:
   メソッド定義において、メソッド呼び出しで与えられた実引数を
   受け取る一種の変数。
 
@@ -680,7 +680,7 @@
   →実引数
 
 - **環境変数**: {#environment-variable}
-- **`environment variable`**:
+- **environment variable**:
   OS がその上で動作するプロセスに対して提供する文字列型のデータ共有機能。
   名前と値の組からなる。
 
@@ -690,29 +690,29 @@
   → ENV
 
 - **関数**: {#function}
-- **`function`**:
+- **function**:
   Ruby には文法上、関数という概念は無い。
   ただし、①レシーバーの状態に依らずに動作し、かつ②レシーバーを変更しないメソッドを「関数的」と呼ぶことがある。
 
   →モジュール関数
 
 - **キーワード引数**: {#keyword-argument}
-- **`keyword argument`**:
+- **keyword argument**:
   記述順ではなくキーワードによって特定される引数。
 
 - **組み込みクラス**: {#built-in-class}
-- **`built-in class`**:
+- **built-in class**:
   [c:Array]、[c:String] など Ruby 処理系に組み込まれているクラス。
   ライブラリーを require することなく使うことができる。
 
   参照：[lib:_builtin]
 
 - **組み込みライブラリー**: {#built-in-library}
-- **`built-in library`**:
+- **built-in library**:
   Ruby 本体に組み込まれているライブラリー。require せずに使うことができる。
 
 - **クラス**: {#class}
-- **`class`**:
+- **class**:
   オブジェクトを生み出し、そのオブジェクトの振る舞いを規定するもの。
   Ruby ではクラスも [c:Class] クラスのオブジェクトである。
 
@@ -722,14 +722,14 @@
   つまり、Module と Class の間にはリスコフの置換原則は成り立っていない。
 
 - **クラスインスタンス変数**: {#class-instance-variable}
-- **`class instance variable`**:
+- **class instance variable**:
   クラスもオブジェクトであるから、当然インスタンス変数を持ちうる。
   これがクラスインスタンス変数である。
 
   クラス変数とは異なる。
 
 - **クラス変数**: {#class-variable}
-- **`class variable`**:
+- **class variable**:
   識別子の前に「@@」が付いた形式の名前を持つ変数。
 
   クラスに属し、サブクラスや include したモジュールと共有される。
@@ -743,18 +743,18 @@
   参照：[ref:d:spec/variables#class]
 
 - **クラス名**: {#class-name}
-- **`class name`**:
+- **class name**:
   クラスの名前。クラスを定義すると、同名の定数が定義され、そのクラスが
   代入される。
 
 - **クラスメソッド**: {#class-method}
-- **`class method`**:
+- **class method**:
   クラスの特異メソッドをそのクラスのクラスメソッドと呼ぶ。
 
   →特異メソッド
 
 - **グローバル変数**: {#global-variable}
-- **`global variable`**:
+- **global variable**:
   グローバルスコープを持つ変数。
   $ で始まる名前を持つ。
 
@@ -764,7 +764,7 @@
   参照：[ref:d:spec/variables#global]
 
 - **継承**: {#inheritance}
-- **`inheritance`**:
+- **inheritance**:
   クラスの機能（メソッドなど）が下位クラスに受け継がれること。
   Ruby のクラスはただ一つのスーパークラスしか持ち得ないため、とくに
   「単一継承」と呼ばれる。
@@ -776,25 +776,25 @@
   →サブクラス、ミックスイン
 
 - **ゲッター**: {#getter}
-- **`getter`**:
+- **getter**:
   インスタンス変数の値を取り出すメソッド。
   インスタンス変数名から「@」を削除したメソッド名とする習慣がある。
 
   →アクセッサー
 
 - **子クラス**:
-- **`subclass`**:
+- **subclass**:
   ＝[サブクラス](#subclass)
 
 - **コーディング規約**: {#coding-convention}
-- **`coding convention`**:
+- **coding convention**:
   プログラムの書き方についての取り決め。
   複数人での開発ではコーディング規約を設けることが多い。
   スペースや改行の入れ方、1 行の最大文字数、コメントの記法、プログラム要素の配列順、といった
   見た目に関すること、変数・メソッドなどの命名方針、ファイルパスなど。
 
 - **コメントアウト**: {#comment-out}
-- **`comment out`**:
+- **comment out**:
   コメント化。プログラムの一部分を（コメント化記号の挿入により）コメントにすること。
   不要になった処理を記録して残しておきたい場合や、デバッグ目的などで行われる。
   元に戻すことはアンコメントと呼ばれる。
@@ -802,7 +802,7 @@
   →アンコメント
 
 - **コレクション**: {#collection}
-- **`collection`**:
+- **collection**:
   配列、ハッシュ、集合（[c:Set] オブジェクト）など、
   要素の集まりを表すオブジェクト。コンテナーとも呼ばれる。
 
@@ -815,17 +815,17 @@
   →ロケット演算子
 
 - **コンテナー**: {#container}
-- **`container`**:
+- **container**:
   ＝[コレクション](#collection)
 
 ### さ {#sa}
 
 - **再定義**: {#redefinition}
-- **`redefinition`**:
+- **redefinition**:
   既に定義されているメソッドなどを改めて定義すること。
 
 - **サブクラス**: {#subclass}
-- **`subclass`**:
+- **subclass**:
   クラス A から継承によって新しいクラス B が作られたとき、
   B を A のサブクラスと呼ぶ。
   「子クラス」「下位クラス」「派生クラス」と呼ぶこともある。
@@ -838,7 +838,7 @@
   →継承
 
 - **式展開**: {#string-interpolation}
-- **`string interpolation`**:
+- **string interpolation**:
   文字列などのリテラルの中に決まった書式で式を記述すると、式を評価した値が
   文字列化されて埋め込まれること。
 
@@ -848,18 +848,18 @@
   参照：[d:spec/literal]
 
 - **識別子**: {#identifier}
-- **`identifier`**:
+- **identifier**:
   プログラム中に書かれる変数・定数・メソッド・クラス・モジュールなどの名前。
 
 - **自己代入**: {#self-assignment}
-- **`self assignment`**:
+- **self assignment**:
   代入の一種で、他の値との演算結果を代入するもの。
   自己代入式 a += 1 における += のように、演算子と = をつなげた形の
   自己代入演算子を使う。
   変数・定数などへの代入のほか、代入メソッドでも自己代入が書ける。
 
 - **実引数**: {#actual-argument}
-- **`actual argument`**:
+- **actual argument**:
   メソッド呼び出しにおいてメソッドに与えられる値。
 
   「引数」は「いんすう」よりも「ひきすう」と読まれることが多い。
@@ -872,7 +872,7 @@
   [c:Set] クラスのインスタンス。
 
 - **述語メソッド**: {#predicate-method}
-- **`predicate method`**:
+- **predicate method**:
   返り値を真偽値として用いるためのメソッド。
   メソッド名の末尾に ? を付ける習慣がある。
 
@@ -880,11 +880,11 @@
   返すことで、単なる真偽を越えた情報を与えるものもある。
 
 - **上位クラス**:
-- **`superclass`**:
+- **superclass**:
   ＝[スーパークラス](#superclass)
 
 - **条件演算子**: {#conditional-operator}
-- **`conditional operator`**:
+- **conditional operator**:
   条件式・真式・偽式の三つの項を取り、条件式の値が真のときは真式を評価して
   その値を返し、条件式の値が偽のときは偽式を評価してその値を返す。
 
@@ -897,7 +897,7 @@
   値を真偽値として用いる式。if、unless、while、until のあとなどに書かれる。
 
 - **初期化**: {#initialize}
-- **`initialize`**:
+- **initialize**:
   オブジェクトが生成されるとき、initialize という名の private メソッドが
   呼ばれる。このメソッドで行う処理をオブジェクトの初期化と呼ぶ。
 
@@ -910,7 +910,7 @@
   Ruby の処理系は CRuby を代表として、いくつかある。
 
 - **真偽値**: {#boolean-value}
-- **`Boolean value`**:
+- **Boolean value**:
   Ruby ではどんなオブジェクトも真または偽である。
   nil と false だけが偽であり、空文字列、空配列も含め、他のすべての
   オブジェクトは真である。
@@ -922,7 +922,7 @@
   必要である。
 
 - **シンタックスシュガー**: {#syntax-sugar}
-- **`syntax sugar`**:
+- **syntax sugar**:
   ある構文に対し、プログラムの意味論上同じものを、より分かりやすい（あるいは読み書き
   しやすい、あるいは簡素な）別の構文で記述できるようにしたとき、元の構文のシンタックス
   シュガーと呼ぶ。
@@ -934,7 +934,7 @@
   構文糖衣、構文糖、糖衣構文とも呼ばれる。
 
 - **シンボル**: {#symbol}
-- **`symbol`**:
+- **symbol**:
   文字列と一対一に対応する、Ruby の処理系内部で整数により管理されるオブジェクト。
 
   イミュータブルであり、同じ内容であれば必ず同一である。
@@ -956,7 +956,7 @@
   [c:Numeric] クラスのサブクラスのインスタンス。
 
 - **スクリプト**: {#script}
-- **`script`**:
+- **script**:
   いわゆる軽量言語のプログラムをこう呼ぶことが多い。
 
   また、平仮名、片仮名、漢字、ラテン文字、アラビア文字、といった
@@ -964,7 +964,7 @@
   使われる。
 
 - **スクリプト言語**: {#scripting-language}
-- **`scripting language`**:
+- **scripting language**:
   最近は境界が曖昧になっているが、簡易なテキスト処理などを念頭において
   作られたプログラミング言語のことをこう呼んだ。
   Ruby は現代ではさまざまな用途に使われているが、当初は AWK や Perl などの
@@ -973,7 +973,7 @@
   『オブジェクト指向スクリプト言語Ruby』にも表れている。
 
 - **スクリプトエンコーディング**: {#script-encoding}
-- **`script encoding`**:
+- **script encoding**:
   そのスクリプトファイル自体のエンコーディング。
 
   →エンコーディング
@@ -982,7 +982,7 @@
   ＝[ロードパス](#load-path)
 
 - **スコープ**: {#scope}
-- **`scope`**:
+- **scope**:
   変数・定数・メソッドなどが参照（・代入）可能な、コード上の範囲。
 
   Ruby の定数やグローバル変数はプログラムのどこからでも参照・代入
@@ -995,7 +995,7 @@
   →レキシカルスコープ
 
 - **スタックトレース**: {#stack-trace}
-- **`stack trace`**:
+- **stack trace**:
   プログラム実行のある時点において、そこに至るメソッド呼び出し元情報を遡るデータ。
   バックトレースともいう。
 
@@ -1007,7 +1007,7 @@
   取り出すことができる。
 
 - **スーパークラス**: {#superclass}
-- **`superclass`**:
+- **superclass**:
   クラス B がクラス A のサブクラスであるとき、A を B のスーパークラス
   と呼ぶ。
   「親クラス」「上位クラス」と呼ぶこともある。
@@ -1025,17 +1025,17 @@
   →継承
 
 - **スレッド**: {#thread}
-- **`thread`**:
+- **thread**:
   同時に存在して並行的に実行されうる制御の流れ。スレッド間でメモリーは共有される。
 
   参照：[d:spec/thread]
 
 - **スレッドセーフ**: {#thread-safe}
-- **`thread safe`**:
+- **thread safe**:
   複数のスレッドが並行に実行されても問題が起きないこと。
 
 - **スレッドローカル**: {#thread-local}
-- **`thread local`**:
+- **thread local**:
   変数のスコープなどがスレッドごとに別々であること。
 
   例えば特殊変数のうち $0（現在実行中のスクリプトのファイル名）は
@@ -1045,7 +1045,7 @@
   であり、スレッドごとに別である。
 
 - **正規表現**: {#regular-expression}
-- **`regular expression`**:
+- **regular expression**:
   文字列のパターンを表現する言語。
   また、その言語で記述されたもの。
 
@@ -1054,7 +1054,7 @@
   参照：[d:spec/regexp]
 
 - **整数**: {#integer}
-- **`integer`**:
+- **integer**:
   Ruby の用語として「整数」を使うときは、数学用語の整数ではなく [c:Integer]
   クラスのインスタンスを指すことが多いので注意。
 
@@ -1074,12 +1074,12 @@
 #@end
 
 - **セッター**: {#setter}
-- **`setter`**:
+- **setter**:
   オブジェクトのインスタンス変数に値を代入するためのメソッド。
   インスタンス変数名から「@」を削除し、末尾に「=」を付けたメソッド名とする習慣がある。
 
 - **即値**: {#immediate-value}
-- **`immediate value`**:
+- **immediate value**:
   オブジェクトの実装方法上の概念。参照でなく値そのものをビット列で表現する。
   CRuby では nil、true、false のほか Integer の一部、Float の一部の値が
   即値で実装されている。
@@ -1087,7 +1087,7 @@
   なお、言語によっては「即値」という用語を「リテラル」の意味で使うので注意されたい。
 
 - **ソフトウェアテスト**: {#software-testing}
-- **`software testing`**:
+- **software testing**:
   プログラムの正しさや性能を調べること。単に「テスト」ともいう。
   狭義にはテスト用プログラム（テストコード）によって行う自動テストを指す。
   さらに、性能ではなく正しさの検証に限って使われることもある。
@@ -1097,7 +1097,7 @@
 ### た {#ta}
 
 - **大域脱出**: {#non-local-exit}
-- **`non-local exit`**:
+- **non-local exit**:
   Ruby においては、例外の発生もしくは [m:Kernel?.throw] によって
   処理の実行が中断されること。
   例外の場合は begin/rescue によって、throw の場合は
@@ -1112,7 +1112,7 @@
   キュー（FIFO）などの機能を兼ね備えており、大クラス主義的と言える。
 
 - **ダイナミックローカル変数**: {#dynamic-local-variable}
-- **`dynamic local variable`**:
+- **dynamic local variable**:
   定義箇所（最初の代入式の出現箇所）で作成されるローカル変数。
 
   ローカル変数は静的スコープであり、プログラムの実行前にスコープが
@@ -1123,7 +1123,7 @@
   なっている。後者がダイナミックローカル変数である。
 
 - **代入**: {#assignment}
-- **`assignment`**:
+- **assignment**:
   Ruby では、変数への代入はオブジェクトを変数に割り当てること。
   一つのオブジェクトを複数の変数に代入することもできる。
   しかし、逆に一つの変数に複数のオブジェクトを同時に割り当てる
@@ -1137,19 +1137,19 @@
   オブジェクトが割り当てられることも代入と呼ぶ。
 
 - **代入演算子**: {#assignment-operator}
-- **`assignment operator`**:
+- **assignment operator**:
   Ruby では代入も式であり、= は代入演算子と呼ばれる。
 
 - **代入式**: {#assignment-expression}
-- **`assignment expression`**:
+- **assignment expression**:
   Ruby では代入も式であり、代入された値がその評価値となる。
 
 - **代入メソッド**: {#assignment-method}
-- **`assignment method`**:
+- **assignment method**:
   メソッド名の末尾に = が付いたメソッド。メソッド呼び出しが代入式として書ける。
 
 - **多重継承**: {#multiple-inheritance}
-- **`multiple inheritance`**:
+- **multiple inheritance**:
   あるクラスが複数のクラスの下位クラスになっていること。
   Ruby ではこれを禁止し、多重継承にまつわる問題が起きないようになっている。
   代わりにモジュールの mix-in という仕組みがある。
@@ -1157,15 +1157,15 @@
   →ミックスイン
 
 - **単項演算子**: {#unary-operator}
-- **`unary operator`**:
+- **unary operator**:
   単一の項に働く演算子。+ - ! not などが該当する。
 
 - **単体テスト**: {#unit-testing}
-- **`unit testing`**:
+- **unit testing**:
   ＝[ユニットテスト](#unit-test)
 
 - **短絡評価**: {#short-circuit-evaluation}
-- **`short-circuit evaluation`**:
+- **short-circuit evaluation**:
   論理式の評価において、真偽を確定するための最小限の項の評価しか
   行わないやり方。
   例えば ex1 and ex2 の場合、ex1 の評価値が偽のとき ex2 を評価
@@ -1176,7 +1176,7 @@
   参照：[ref:d:spec/operator#and]、[ref:d:spec/operator#or]
 
 - **抽象クラス**: {#abstract-class}
-- **`abstract class`**:
+- **abstract class**:
   Ruby には言語仕様として抽象クラスはないが、
   直接のインスタンスを持つことを目的とせず、自身のサブクラスに
   インスタンスを持たせるようなクラスを抽象クラスと呼ぶことがある。
@@ -1186,7 +1186,7 @@
   Numeric のサブクラスのインスタンスである。
 
 - **定数**: {#constant}
-- **`constant`**:
+- **constant**:
   Ruby における定数は、クラスかモジュールに属し、変数のようにオブジェクトを
   指すもの。
   再代入すると警告が出るため定数と呼ばれる。
@@ -1200,19 +1200,19 @@
   参照：[d:spec/variables]
 
 - **テスト**: {#testing}
-- **`testing`**:
+- **testing**:
   →ソフトウェアテスト
 
 - **テスト駆動開発**: {#tdd}
-- **`TDD: test-driven development`**:
+- **TDD: test-driven development**:
   テストコードを先に記述してから機能を実装するプログラミング手法。
 
 - **テストファースト**: {#test-first-programming}
-- **`test-first programming`**:
+- **test-first programming**:
   テスト駆動開発において、まず最初にテストコードを記述すること。
 
 - **データ型**: {#data-type}
-- **`data type`**:
+- **data type**:
   一般には「データがどのようなものであるか」というデータの種類をいう。
   プログラミング言語によるが、整数型、文字列型、配列型といったものが
   考えられる。
@@ -1260,7 +1260,7 @@
   このオブジェクトのパターンも一種の型であると考えられる。
 
 - **デバッガー**: {#debugger}
-- **`debugger`**:
+- **debugger**:
   プログラムのデバッグを支援するツール。
 
   あらかじめ設定した地点（ブレークポイント）でプログラムの実行を
@@ -1270,7 +1270,7 @@
   →ブレークポイント
 
 - **同一性**: {#identity}
-- **`identity`**:
+- **identity**:
   Ruby における値の同一性は、それらの値が同じオブジェクトである（つまり
   オブジェクト ID が一致する）ことを意味する。
   [m:Object#equal?] メソッドで判定できる。
@@ -1301,19 +1301,19 @@
   →同一性
 
 - **特異クラス**: {#singleton-class}
-- **`singleton class`**:
+- **singleton class**:
   すべてのオブジェクトには自身が属すクラスとは別に、オブジェクト固有の
   クラスがあり、特異クラスと呼ばれる。
 
   参照：[m:Object#singleton_class]
 
 - **特異メソッド**: {#singleton-method}
-- **`singleton method`**:
+- **singleton method**:
   オブジェクト固有のメソッド。
   オブジェクトの特異クラスのインスタンスメソッドである。
 
 - **トップレベル**: {#top-level}
-- **`top level`**:
+- **top level**:
   スクリプトの一番外側のコンテキスト。つまり、すべてのモジュール定義、
   クラス定義、メソッド定義の外側である。
 
@@ -1322,7 +1322,7 @@
 ### な {#na}
 
 - **名前空間**: {#namespace}
-- **`namespace`**:
+- **namespace**:
   メソッドや定数の名前の衝突を避ける仕組み。
   クラスやモジュールは一つの名前空間を作る。
 
@@ -1339,7 +1339,7 @@
   <https://ruby-no-kai.org/>
 
 - **ヌル文字**: {#null-character}
-- **`null character`**:
+- **null character**:
   ASCII（ISO/IEC 646）や Unicode などに含まれる制御文字の一つ。
   ASCII では 0x00 が、Unicode では U+0000 がこれに当たる。
   「ナル文字」とか、ASCII での略号を用いた「NUL」「NUL 文字」とも表現される。
@@ -1354,13 +1354,13 @@
   するうえで注意が必要である。
 
 - **ネスト**: {#nesting}
-- **`nesting`**:
+- **nesting**:
   制御構造、ブロックや、クラス・モジュール・メソッドなどの定義の入れ子。
 
 ### は {#ha}
 
 - **破壊的**: {#destructive}
-- **`destructive`**:
+- **destructive**:
   レシーバーに影響を与えるメソッドは「破壊的」であると呼ばれる。
 
   例えば文字列オブジェクトについて、そのオブジェクト自身の文字の
@@ -1375,11 +1375,11 @@
   ＝[サブクラス](#subclass)
 
 - **バックトレース**: {#backtrace}
-- **`backtrace`**:
+- **backtrace**:
   ＝[スタックトレース](#stack-trace)
 
 - **ハッシュ**: {#hash}
-- **`hash`**:
+- **hash**:
   キーに値を対応させたコレクション。言語によっては連想配列とか辞書などと呼ばれる。
 
   キーとそれに対応する値の組をハッシュの要素と呼ぶ。
@@ -1389,7 +1389,7 @@
   参照：[c:Hash]
 
 - **ハッシュ値**: {#hash-value}
-- **`hash value`**:
+- **hash value**:
   一般に、データの同一性検証や検索などを目的として、任意のデータからハッシュ関数によって
   作られる小さなデータを元のデータのハッシュ値と呼ぶ。
 
@@ -1403,7 +1403,7 @@
   一種のハッシュ関数である。
 
 - **パラダイム**: {#paradigm}
-- **`paradigm`**:
+- **paradigm**:
   プログラムやその動作をどのように捉えるかという思考の枠組み。
   とくにプログラミングパラダイムともいう。
   プログラミング言語はしばしば何かしら一つ以上のパラダイムに基づいて
@@ -1412,13 +1412,13 @@
   Ruby はオブジェクト指向プログラミングのパラダイムをよりどころとしている。
 
 - **番号指定ブロックパラメーター**: {#numbered-block-parameter}
-- **`numbered block parameter`**:
+- **numbered block parameter**:
   Ruby 2.7 で導入されたブロックパラメーターの記法。
   ブロックパラメーターの宣言をせずに _1、_2 などで第一、第二ブロック
   パラメーターを参照する。
 
 - **ヒアドキュメント**: {#here-document}
-- **`here document`**:
+- **here document**:
   文字列リテラルの一種で、「<<識別子」のような形の式を含む行の次行から、その
   識別子だけの行の直前までに記述された文字列を「<<識別子」の値とする。
   書き方によって、式展開、バックスラッシュ表記なども可能で、終端の識別子の
@@ -1427,11 +1427,11 @@
   参照：[ref:d:spec/literal#here]
 
 - **引数**: {#argument}
-- **`argument`**:
+- **argument**:
   →仮引数、実引数
 
 - **評価**: {#evaluation}
-- **`evaluation`**:
+- **evaluation**:
   式の値を実際に求めること。
   得られた値をとくに評価値ともいう。
 
@@ -1450,20 +1450,20 @@
   →gem
 
 - **ファイバー**: {#fiber}
-- **`fiber`**:
+- **fiber**:
   [c:Fiber] オブジェクトで表す軽量スレッド。
   外部からのメソッド呼び出しで実行の継続を制御する。
   ファイバーを用いて外部イテレーターを構成できる。
 
 - **深い複製**: {#deep-copy}
-- **`deep copy`**:
+- **deep copy**:
   配列、ハッシュなどのコンテナーオブジェクトの複製で、その要素についても
   再帰的に複製するような複製。
 
   ↔浅い複製
 
 - **浮動小数点数**: {#floating-point-number}
-- **`floating point number`**:
+- **floating point number**:
   実数を符号・仮数部・指数部によって表す表現形式。
   仮数部が表す小数の小数点の位置を指数部の値によって動かしていることに
   なるのでこの名がある。
@@ -1472,7 +1472,7 @@
   実装されている。
 
 - **振舞い駆動開発（ビヘイビア駆動開発）**: {#bdd}
-- **`BDD: behavior driven development`**:
+- **BDD: behavior driven development**:
   テスト駆動開発から派生したプログラミング手法。
   プログラムの仕様を表現したテストコードを元に開発を進める。
 
@@ -1480,14 +1480,14 @@
   RSpec がある。
 
 - **ブレークポイント**: {#breakpoint}
-- **`breakpoint`**:
+- **breakpoint**:
   デバッガーを用いる際、プログラムの実行を一時停止するよう設定
   されたコード上の地点。
 
   →デバッガー
 
 - **ブロック**: {#block}
-- **`block`**:
+- **block**:
   メソッドに与えられるコードの塊。
 
   メソッドを呼び出す際、オブジェクトは実引数として与え、処理は
@@ -1516,13 +1516,13 @@
   このようなメソッド呼び出しをいう。
 
 - **ブロックパラメーター**: {#block-parameter}
-- **`block parameter`**:
+- **block parameter**:
   ブロックが持つ一種の仮引数。JIS X 3017 では「ブロック仮引数」と呼ぶ。
 
   ブロック引数とは全くの別物である。
 
 - **ブロック引数**: {#block-argument}
-- **`block argument`**:
+- **block argument**:
   メソッドに与えられたブロックを [c:Proc] オブジェクトとして受け取るため & 付きで
   記述された仮引数。
 
@@ -1535,7 +1535,7 @@
   評価のたびに nil で初期化される。
 
 - **別名**: {#alias}
-- **`alias`**:
+- **alias**:
   メソッドやグローバル変数は別名を持つことができる。
 
   Ruby の組み込みメソッドには、[m:Enumerable#map] と [m:Enumerable#collect] の
@@ -1544,7 +1544,7 @@
   参照：[ref:d:spec/def#alias]
 
 - **変数**: {#variable}
-- **`variable`**:
+- **variable**:
   Ruby の変数はオブジェクトに紐付けられた名札のようなもの。
   オブジェクトを入れる箱ではない。
   変数にオブジェクトを紐付けることを代入という。
@@ -1558,7 +1558,7 @@
   →代入
 
 - **ベンチマークテスト**: {#benchmark-test}
-- **`benchmark test`**:
+- **benchmark test**:
   プログラムの速度性能を調べるソフトウェアテスト。
   ベンチマークテストを行うため、各種の専用ライブラリーがある。
 
@@ -1566,7 +1566,7 @@
   ＝[安全参照演算子](#safe-navigation-operator)
 
 - **ポリモルフィズム**: {#polymorphism}
-- **`polymorphism`**:
+- **polymorphism**:
   Ruby においては、同じ名前のメソッドの呼び出しでもレシーバーの属す
   クラスなどによって実行されるメソッドが違いうること。
 
@@ -1576,7 +1576,7 @@
 ### ま {#ma}
 
 - **マジックコメント**: {#magic-comment}
-- **`magic comment`**:
+- **magic comment**:
   スクリプトの先頭に（shebang があればそれに続けて）記述し、Ruby の処理系
   に何かを伝えるもの。
   記述したスクリプトのみで有効であり、そこからロードされたスクリプトには
@@ -1590,7 +1590,7 @@
   参照：[ref:d:spec/comment#magic_comment]
 
 - **ミックスイン**: {#mix-in}
-- **`mix-in`**:
+- **mix-in**:
   モジュールやクラスに対し、他のモジュールの機能を組み込むこと。
 
   参照：[m:Module#include]
@@ -1603,14 +1603,14 @@
   異なることに注意。
 
 - **メソッド**: {#method}
-- **`method`**:
+- **method**:
   クラスやモジュールに定義され、名前を持ち、引数やブロックを与えられて
   呼び出され、一連の処理を行って値を返すもの。
   メソッド自体はオブジェクトではないが、[c:Method] オブジェクトとして
   オブジェクト化できる。
 
 - **メソッドシグネチャ**: {#method-signature}
-- **`method signature`**:
+- **method signature**:
   メソッドの名前や取りうる引数などについての情報。
 
 - **メソッド探索**: {#method-lookup}
@@ -1618,18 +1618,18 @@
   メソッド定義を探索すること。
 
 - **メソッド・チェーン**: {#method-chaining}
-- **`method chaining`**:
+- **method chaining**:
   メソッドの返り値に対しさらにメソッド呼び出しをつなげること。
 
 - **メタプログラミング**: {#metaprogramming}
-- **`metaprogramming`**:
+- **metaprogramming**:
   実行中にクラスやメソッドなどを作成・変更するようなプログラミング手法。
   柔軟な処理が書ける反面、デバッグしづらくなる恐れもある。
 
   →リフレクション
 
 - **文字コード**: {#character-code}
-- **`character code`**:
+- **character code**:
   文字の集合の各要素（文字）に番号やビット列などの記号を割り振る体系。
   文字符号とか符号化文字集合（coded character set）ともいう。
   具体的なビット列の与え方は符号化方式（encoding）と呼ぶ。
@@ -1638,7 +1638,7 @@
   →エンコーディング
 
 - **モジュール**: {#module}
-- **`module`**:
+- **module**:
   大まかにはクラスからインスタンス生成の機能を省いたもの。
   また、クラスと違い、ミックスインによって他のモジュールやクラスに自身の
   機能を提供することもできる。
@@ -1646,14 +1646,14 @@
   →クラス、ミックスイン
 
 - **モジュール関数**: {#module-function}
-- **`module function`**:
+- **module function**:
   モジュールのインスタンスメソッドおよび特異メソッドとして二重に定義されている
   メソッド。Math モジュールのメソッドなどがこれにあたる。
 
   [m:Module#module_function] を使って簡単に定義できる。
 
 - **文字列**: {#string}
-- **`string`**:
+- **string**:
   [c:String] クラスのインスタンス。
   Ruby の文字列は自分自身のエンコーディングを知っている。
 
@@ -1666,21 +1666,21 @@
   参照：[ref:d:spec/literal#percent]
 
 - **戻り値**:
-- **`return value`**:
+- **return value**:
   ＝[返り値](#return-value)
 
 
 ### や {#ya}
 
 - **優先順位（演算子の）**: {#operator-precedence}
-- **`operator precedence`**:
+- **operator precedence**:
   たとえば 2 + 3 * 4 という式は 2 + (3 * 4) と解釈されることになっている。これは
   演算子に結合の優先順位があり、+ よりも * のほうが順位が上だからである。
 
   参照：[d:spec/operator]
 
 - **有理数**: {#rational-number}
-- **`rational number`**:
+- **rational number**:
   数学的には「整数分の整数」の形の分数（分母は非零）で表せる数のことだが、
   Ruby で「有理数」といった
   場合、[c:Rational] クラスのインスタンスを指すことが多い。
@@ -1689,7 +1689,7 @@
   表しており、有理数である（整数でもある）が、Rational オブジェクトではない。
 
 - **ユニットテスト**: {#unit-test}
-- **`unit test`**:
+- **unit test**:
   メソッドなど、プログラムの小さな単位で行われるソフトウェアテスト。
   単体テストともいう。
   コードの中身には立ち入らず、入力に対する振る舞いをテストコードによって検証する。
@@ -1697,7 +1697,7 @@
   →ソフトウェアテスト
 
 - **予約語**: {#reserved-word}
-- **`reserved word`**:
+- **reserved word**:
   識別名の形を持ちながら、構文上特別な意味を持つため、
   変数・定数・メソッドなどの名前として自由に使えない文字列。
   if、do、begin、end、nil、__FILE__ といったものが該当する。
@@ -1713,7 +1713,7 @@
 ### ら {#ra}
 
 - **ラッパーライブラリー**: {#wrapper-library}
-- **`wrapper library`**:
+- **wrapper library**:
   C 言語などで作られたライブラリーを Ruby から使えるようにするために
   作られた拡張ライブラリーを、元のライブラリーのラッパーライブラリーと呼ぶ。
   単にラッパーと呼ぶことも多い。
@@ -1726,7 +1726,7 @@
   問わない。
 
 - **リスコフの置換原則**: {#liskov-substitution-principle}
-- **`Liskov substitution principle`**:
+- **Liskov substitution principle**:
   オブジェクト指向プログラミングにおいては、「下位クラスのインスタンスは上位クラスの
   インスタンスの持つ性質をすべて持っていなければならない」とする規則。
   Barbara Liskov らによって提唱された。
@@ -1736,7 +1736,7 @@
   いくつかは未定義にされている。
 
 - **リテラル**: {#literal}
-- **`literal`**:
+- **literal**:
   プログラム中に直接記述された値のこと。3.14 や "foo" や /\d+/ はリテラル
   だが、1 + 2 はリテラルではない。
   [m:Math::PI] も定数参照なのでリテラルではない。
@@ -1750,7 +1750,7 @@
   参照：[d:spec/literal]
 
 - **リフレクション**: {#reflection}
-- **`reflection`**:
+- **reflection**:
   プログラムの実行中にプログラムについての情報（クラス、モジュール、メソッド、
   変数などについての情報）を得たり、プログラムやその動作を変化させたりすること。
   Ruby では [m:Object#methods] でメソッド名の一覧を得たり、
@@ -1765,16 +1765,16 @@
   →Rubyist Magazine
 
 - **るりま**: {#rurema}
-- **`rurema`**:
+- **rurema**:
   Ruby の公式日本語リファレンスマニュアルである Ruby Reference
   Manual の愛称。
 
 - **例外**: {#exception}
-- **`exception`**:
+- **exception**:
   [c:Exception] クラス（やその子孫クラス）のインスタンス。
 
 - **レキシカルスコープ**: {#lexical-scope}
-- **`lexical scope`**:
+- **lexical scope**:
   ソースコード上の見た目だけで決まるスコープ。静的スコープとも言う。
 
   ローカル変数のスコープはレキシカルスコープであるが、インスタンス
@@ -1782,20 +1782,20 @@
   変数が読み書きできるため、レキシカルスコープではない。
 
 - **レシーバー**: {#receiver}
-- **`receiver`**:
+- **receiver**:
   メソッドは何らかの特定のオブジェクトについて呼び出される。
   このオブジェクトをそのメソッド呼び出しのレシーバーと呼ぶ。
   メソッド呼び出しには、レシーバーを明示的に書くやり方と書かないやり方がある。
   後者では、そのコンテキストの self がレシーバーとなる。
 
 - **連想配列**: {#associative-array}
-- **`associative array`**:
+- **associative array**:
   Ruby ではこの用語は使われず、もっぱら「ハッシュ」と呼ばれる。
 
   ＝[ハッシュ](#hash)
 
 - **ローカル変数**: {#local-variable}
-- **`local variable`**:
+- **local variable**:
   ローカル変数スコープと呼ばれるスコープを持つ変数。
   ローカル変数の参照は、見た目では、引数が無く ( ) も伴わないメソッド呼び出し
   と区別が付かない。
@@ -1807,7 +1807,7 @@
   参照：[ref:d:spec/variables#local]
 
 - **ロケット演算子**: {#rocket-operator}
-- **`rocket operator`**:
+- **rocket operator**:
   演算子「=>」の俗称。
   ハッシュ式の記法でキーと値をつないだり、rescue で
   例外オブジェクトを捉えたりするのに用いる。
@@ -1832,7 +1832,7 @@
 ### わ {#wa}
 
 - **ワンライナー**: {#one-liner}
-- **`one-liner`**:
+- **one-liner**:
   コマンドライン上で、プログラムを処理系の呼び出しまで含めて 1 行で
   表現したもの。
 
