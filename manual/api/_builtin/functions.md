@@ -1706,6 +1706,10 @@ p Array("fefe") #=> ["fefe"]
 
 メソッド Float は文字列に対し [m:String#to_f] よりも厳密な変換を行います。
 
+#@since 3.4
+Ruby 3.4 以降は "1." のように小数点以下を省略した表記も受け付けます。
+#@end
+
 - **param** `arg` -- 変換対象のオブジェクトです。
 - **param** `exception` -- false を指定すると、変換できなかった場合、
                  例外を発生する代わりに nil を返します。
@@ -1727,6 +1731,12 @@ p Float("10e2")       #=> 1000.0
 p Float("1e-2")       #=> 0.01
 p Float(".1")         #=> 0.1
 p Float("0xa")        #=> 10.0
+#@since 3.4
+p Float("1.")         #=> 1.0
+p Float("1.e2")       #=> 100.0
+#@else
+p Float("1.")         # invalid value for Float(): "1." (ArgumentError)
+#@end
 
 p Float("nan")        # invalid value for Float(): "nan" (ArgumentError)
 p Float("INF")        # invalid value for Float(): "INF" (ArgumentError)
