@@ -32,6 +32,7 @@ ruby -run -e help [COMMAND]
 # reopen Kernel
 ## Private Instance Methods
 ### def chmod -> ()
+
 ファイルのアクセス権を変更します。
 
 Change the mode of each FILE to OCTAL-MODE.
@@ -45,8 +46,8 @@ ruby -run -e chmod -- [OPTION] OCTAL-MODE FILE
 - **SEE** [man:chmod(1)]
 
 ### def cp -> ()
-ファイルやディレクトリをコピーします。
 
+ファイルやディレクトリをコピーします。
 
 ```console
 ruby -run -e cp -- [OPTION] SOURCE DEST
@@ -59,16 +60,16 @@ ruby -run -e cp -- [OPTION] SOURCE DEST
 - **SEE** [man:cp(1)]
 
 ### def help -> ()
-ヘルプメッセージを表示します。
 
+ヘルプメッセージを表示します。
 
 ```console
 ruby -run -e help [COMMAND]
 ```
 
 ### def install -> ()
-ファイルをコピーし、その属性を設定します。
 
+ファイルをコピーし、その属性を設定します。
 
 ```console
 ruby -run -e install -- [OPTION] SOURCE DEST
@@ -81,6 +82,7 @@ ruby -run -e install -- [OPTION] SOURCE DEST
 - **SEE** [man:install(1)]
 
 ### def ln -> ()
+
 ファイルへのリンクを作成します。
 
 ```console
@@ -94,8 +96,8 @@ ruby -run -e ln -- [OPTION] TARGET LINK_NAME
 - **SEE** [man:ln(1)]
 
 ### def mkdir -> ()
-ディレクトリを作成します。
 
+ディレクトリを作成します。
 
 ```console
 ruby -run -e mkdir -- [OPTION] DIR
@@ -111,7 +113,6 @@ ruby -run -e mkdir -- [OPTION] DIR
 
 ファイルを移動します (ファイル名を変更します)。
 
-
 ```console
 ruby -run -e mv -- [OPTION] SOURCE DEST
 
@@ -123,7 +124,6 @@ ruby -run -e mv -- [OPTION] SOURCE DEST
 ### def rm -> ()
 
 ファイルやディレクトリを削除します。
-
 
 ```console
 ruby -run -e rm -- [OPTION] FILE
@@ -152,7 +152,6 @@ ruby -run -e rmdir -- [OPTION] DIR
 
 ファイルのアクセス時刻と修正時刻を現在の時刻に変更します。
 
-
 ```console
 ruby -run -e touch -- [OPTION] FILE
 
@@ -164,6 +163,7 @@ ruby -run -e touch -- [OPTION] FILE
 #@# 内部的に使用するだけ
 #@# --- setup(options = "", * long_options) -> ()
 ### def wait_writable -> ()
+
 ファイルが書き込み可能になるまで待ちます。
 
 ```console
@@ -173,6 +173,7 @@ ruby -run -e wait_writable -- [OPTION] FILE
 -w SEC      リトライごとに待つ秒数
 -v          詳細表示
 ```
+
 ### def mkmf -> ()
 
 [lib:mkmf] を使って Makefile を作成します。
@@ -190,6 +191,7 @@ ruby -run -e mkmf -- [OPTION] EXTNAME [OPTION]
 -c ARGS     run have_const
 --vendor    install to vendor_ruby
 ```
+
 ### def httpd -> ()
 
 WEBrick HTTP server を起動します。

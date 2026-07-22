@@ -63,6 +63,7 @@ Openを実行します。
 ## Class Methods
 
 ### def array(dims, vt) -> WIN32OLE_VARIANT
+
 配列用のVARIANTオブジェクトを生成します。
 
 オートメーションメソッド呼び出し用の配列を生成します。なお、OLEオートメー
@@ -84,6 +85,7 @@ ruby_ary = ole_ary.value # => [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 - **SEE** [m:WIN32OLE_VARIANT#value], [c:WIN32OLE::VARIANT]
 
 ### def new(val, vartype = nil) -> WIN32OLE_VARIANT
+
 指定したオブジェクトを値とするWIN32OLE_VARIANTオブジェクトを生成します。
 
 - **param** `val` -- ラップするRubyオブジェクトを指定します。
@@ -119,6 +121,7 @@ p bytes.value.encoding #=> #<Encoding:ASCII-8BIT>
 ## Instance Methods
 
 ### def [](i...) -> object
+
 配列型のWIN32OLE_VARIANTの要素を取得します。
 
 selfは、[m:WIN32OLE_VARIANT.array]または引数に配列を指定して
@@ -142,6 +145,7 @@ p obj[0, -1] # => WIN32OLERuntimeError
 ```
 
 ### def []=(i..., val)
+
 配列型のWIN32OLE_VARIANTの要素を設定します。
 
 selfは、[m:WIN32OLE_VARIANT.array]または引数に配列を指定して
@@ -169,6 +173,7 @@ obj[0, -1] = 9 # => WIN32OLERuntimeError
 ```
 
 ### def value -> object
+
 値に対応するRubyオブジェクトを取得します。
 
 - **return** -- 値に対応するRubyのオブジェクトを返します。
@@ -179,6 +184,7 @@ p obj.value # => "1" (VT_BSTRを指定して生成したので、Stringオブジ
 ```
 
 ### def value=(val)
+
 WIN32OLE_VARIANTの値を再設定します。
 
 指定した値でselfを再設定します。指定値が元のVARIANT型に合わない場合は元
@@ -201,6 +207,7 @@ selfが配列型のWIN32OLE_VARIANTの場合、バイト配列かつ引数が文
 [m:WIN32OLE_VARIANT#\[\]=]を利用してください。
 
 ### def vartype -> Integer
+
 selfの型情報を取得します。
 
 型情報は、[c:WIN32OLE::VARIANT]の定数値の組み合わせです。
@@ -215,6 +222,7 @@ p bytes.vartype # => 8209 (WIN32OLE::VARIANT::VT_ARRAY | VT_UI1)
 ## Constants
 
 ### const Empty -> WIN32OLE_VARIANT
+
 EMPTY型のWIN32OLE_VARIANTオブジェクトです。
 
 このオブジェクトは、VOID型の戻り値や、値が空なことを明示しなければなら
@@ -223,6 +231,7 @@ EMPTY型のWIN32OLE_VARIANTオブジェクトです。
 - **SEE** [m:WIN32OLE::VARIANT::VT_EMPTY]
 
 ### const Null -> WIN32OLE_VARIANT
+
 NULL型のWIN32OLE_VARIANTオブジェクトです。
 
 このオブジェクトは、ADOなどのデータベースインターフェイスでNULLを指定す
@@ -231,6 +240,7 @@ NULL型のWIN32OLE_VARIANTオブジェクトです。
 - **SEE** [m:WIN32OLE::VARIANT::VT_NULL]
 
 ### const Nothing -> WIN32OLE_VARIANT
+
 DISPATCH型の空のオブジェクトです。
 
 - **SEE** [m:WIN32OLE::VARIANT::VT_DISPATCH]

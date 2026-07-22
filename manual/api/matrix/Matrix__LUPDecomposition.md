@@ -2,6 +2,7 @@
 library: matrix
 ---
 # class Matrix::LUPDecomposition
+
 行列のLUP分解の情報を保持するクラスです。
 
 [m:Matrix#lup_decomposition] の返り値のクラスです。
@@ -16,29 +17,36 @@ LUP 分解の結果を利用して計算します。
 - **SEE** [m:Matrix#determinant]
 
 ### def l -> Matrix
+
 LUP分解の下半行列部分を返します。
 
 ### def u -> Matrix
+
 LUP分解の上半行列部分を返します。
 
 ### def p -> Matrix
+
 LUP分解の置換行列部分を返します。
 
 ### def to_ary -> [Matrix, Matrix, Matrix]
 ### def to_a -> [Matrix, Matrix, Matrix]
+
 分解した行列を [下半行列, 上半行列, 置換行列] という3要素の配列で
 返します。
 
 ### def pivots -> [Integer]
+
 ピボッティングを表す配列を返します。
 
 ### def singular? -> bool
+
 元の行列が正方で特異なら true を、正則なら false を返します。
 LUP 分解の結果を利用して判定します。
 
 - **SEE** [m:Matrix#singular?]
 
 ### def solve(b) -> Vector | Matrix
+
 self が正方行列 A の LUP 分解の時、一次方程式 Ax = b の解を返します。
 b には [c:Vector], [c:Matrix], 数値の配列を指定出来ます。
 

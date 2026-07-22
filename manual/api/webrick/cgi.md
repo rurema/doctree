@@ -87,7 +87,6 @@ MyCGI.new.start()
 query メソッドが返す Hash オブジェクトのキーと値のうち値は [c:WEBrick::HTTPUtils::FormData] クラスの
 インスタンスになります。FormData クラスは String クラスのサブクラスです。
 
-
 #### マルチパートフィールドの値を取得する（ファイル送信）
 
 ```ruby
@@ -103,7 +102,6 @@ class MyCGI < WEBrick::CGI
 end
 MyCGI.new.start()
 ```
-
 
 #### クライアントにクッキーを渡す
 
@@ -135,7 +133,6 @@ class MyCGI < WEBrick::CGI
 end
 MyCGI.new.start()
 ```
-
 
 #### CGI に関連する環境変数の値を取得する
 
@@ -209,7 +206,6 @@ config で有効なキーとその値は以下のとおりです。
 指定された key に対応した自身の設定値を返します。
 
 - **param** `key` -- 設定名を Symbol オブジェクトで指定します。
-
 
 ### def config     -> Hash
 

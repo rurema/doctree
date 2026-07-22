@@ -8,7 +8,9 @@ require:
 ```text
 Usage: gem mirror [options]
 ```
+
 #@include(common_options)
+
 ```text
 Summary:
   Gem リポジトリをミラーします
@@ -22,7 +24,6 @@ Description:
       
   複数の取得元と配置先を指定できます。
 ```
-
 
 # class Gem::Commands::MirrorCommand < Gem::Command
 

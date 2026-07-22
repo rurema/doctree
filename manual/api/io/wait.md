@@ -12,6 +12,7 @@ Socketに対してしか利用できません。
 ## Instance Methods
 
 ### def nread -> Integer
+
 ブロックせずに読み込み可能なバイト数を返します。
 ブロックする場合は0を返します。
 
@@ -19,9 +20,11 @@ Socketに対してしか利用できません。
 
 #@if (version == "3.0")
 ### def ready? -> IO | false | nil
+
 ブロックせずに読み込み可能なら真を、
 #@else
 ### def ready? -> bool | nil
+
 ブロックせずに読み込み可能ならtrueを、
 #@end
 ブロックしてしまう可能性があるならfalseを返します。
@@ -51,7 +54,6 @@ timeout を指定した場合は、指定秒数経過するまでブロックし
 self が EOF に達していれば false を返します。
 
 - **param** `timeout` -- タイムアウトまでの秒数を指定します。
-
 
 - **SEE** [m:IO#wait_writable]
 

@@ -39,6 +39,7 @@ p output.string
 
 ## Class Method
 ### def new(ie_hack=false) -> REXML::Formatter::Default
+
 フォーマッタオブジェクトを生成して返します。
 
 このフォーマッタによる出力は基本的にテキストの空白や改行を変化させません。
@@ -50,6 +51,7 @@ ie_hack に真を渡すと、空のタグを閉じる前で空白を挿入しま
 
 ## Instance Method
 ### def write(node, output) -> ()
+
 XML のノード node を output に出力します。
 
 node には任意のXMLノードを指定できます。

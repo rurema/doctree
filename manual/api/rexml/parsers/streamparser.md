@@ -75,6 +75,7 @@ p listener.events
 ```
 
 ### コールバック仕様確認サンプル
+
 以下の例では様々なXMLの構成要素を含むXML文書を
 StreamParser で処理したときに、どのコールバックメソッドがどのような
 引数で呼び出されるかを示すためのサンプルです。
@@ -149,6 +150,7 @@ REXML::Parsers::StreamParser.new(xml, Listener.new).parse
 ## Class Methods
 
 ### def new(source, listener) -> REXML::Parsers::StreamParser
+
 ストリームパーサオブジェクトを生成します。
 
 - **param** `source` -- 入力(文字列、IO、IO互換オブジェクト(StringIOなど))
@@ -162,6 +164,7 @@ REXML::Parsers::StreamParser.new(xml, Listener.new).parse
 #@# #@end
 
 ### def parse -> ()
+
 入力をパースします。
 
 このメソッドの中からコールバックが呼び出されます。

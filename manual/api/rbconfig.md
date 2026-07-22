@@ -9,7 +9,6 @@ Ruby インタプリタ作成時に設定された情報を格納したライブ
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 RbConfig モジュールを定義します。
 
-
 ## Singleton Methods
 
 ### def expand(val, config = CONFIG) -> String
@@ -25,6 +24,7 @@ p RbConfig.expand("$(bindir)") # => /home/foobar/all-ruby/ruby19x/bin
 - **param** `config` -- 変数展開に使用する設定を [c:Hash] で指定します。
   
 - **SEE** [m:RbConfig::MAKEFILE_CONFIG]
+
 ### def ruby -> String
 
 ruby コマンドのフルパスを返します。
@@ -64,9 +64,11 @@ TOPDIR
 [m:RbConfig::CONFIG]
 と同じですが、その値は以下のような形
 で他の変数への参照を含みます。
+
 ```text
 MAKEFILE_CONFIG["bindir"] = "$(exec_prefix)/bin"
 ```
+
 これは、Makefile の変数参照の形式で MAKEFILE_CONFIG は、
 Makefile 作成の際に利用されることを想定しています。
 

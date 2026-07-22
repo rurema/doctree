@@ -14,29 +14,37 @@ library: _builtin
 ## Instance Methods
 
 ### def cstime -> Float
+
 終了した子プロセスのシステム CPU 時間の合計(秒)を返します。
 
 Windows 上では常に 0 を返します。
 
 ### def cstime=(n)
+
 終了した子プロセスのシステム CPU 時間の合計(秒)をセットします。
 
 ### def cutime -> Float
+
 終了した子プロセスのユーザー CPU 時間の合計(秒)を返します。
 
 Windows 上では常に 0 を返します。
 
 ### def cutime=(n)
+
 終了した子プロセスのユーザー CPU 時間の合計(秒)をセットします。
 
 ### def stime -> Float
+
 システム CPU 時間を返します。
 
 ### def stime=(n)
+
 システム CPU 時間をセットします。
 
 ### def utime -> Float
+
 ユーザー CPU 時間を返します。
 
 ### def utime=(n)
+
 ユーザー CPU 時間をセットします。

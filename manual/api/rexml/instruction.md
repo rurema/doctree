@@ -26,15 +26,16 @@ p doc[2].content # => "type=\"text/css\" href=\"style.css\""
 ## Class Methods
 
 ### def new(target, content = nil) -> REXML::Instruction
+
 新たな Instruction オブジェクトを生成します。
 
 - **param** `target` -- ターゲット
 - **param** `content` -- 内容
 
-
 ## Instance Methods
 
 ### def target -> String
+
 XML 処理命令のターゲットを返します。
 
 ```ruby
@@ -50,11 +51,13 @@ p doc[2].content # => "type=\"text/css\" href=\"style.css\""
 ```
 
 ### def target=(value)
+
 XML 処理命令のターゲットを value に変更します。
 
 - **param** `value` -- 新たなターゲット(文字列)
 
 ### def content -> String | nil
+
 XML 処理命令の内容を返します。
 
 ```ruby
@@ -73,11 +76,13 @@ p doc[4].content # => nil
 ```
 
 ### def content=(value)
+
 XML 処理命令の内容を変更します。
 
 - **param** `value` -- 新たなデータ(文字列)
 
 ### def clone -> REXML::Instruction
+
 self を複製します。
 
 #@# obsolete
@@ -85,6 +90,7 @@ self を複製します。
 #@# #@todo
 
 ### def ==(other) -> bool
+
 other と self が同じ 処理命令である場合に真を返します。
 
 同じとは、 [m:REXML::Instruction#target] と [m:REXML::Instruction#content]
@@ -93,6 +99,7 @@ other と self が同じ 処理命令である場合に真を返します。
 - **param** `other` -- 比較対象
 
 ### def node_type -> Symbol
+
 Symbol :processing_instruction を返します。
 
 #@# #@since 1.8.3

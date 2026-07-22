@@ -57,7 +57,6 @@ library: win32/registry
 
 セキュリティアクセスマスク。
 
-
 ### const REG_CREATED_NEW_KEY
 ### const REG_OPENED_EXISTING_KEY
 #@todo

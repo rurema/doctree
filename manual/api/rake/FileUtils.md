@@ -13,7 +13,6 @@ library: rake
 
 - **param** `cmd` -- 引数の解釈に関しては [m:Kernel?.exec] を参照してください。
 
-
 ```ruby title="例"
 sh %{ls -ltr}
    
@@ -28,7 +27,6 @@ end
 ```
 
 - **SEE** [m:Kernel?.exec], [m:Kernel?.system]
-
 
 ### def ruby(*args){|result, status| ... }
 

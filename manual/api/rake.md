@@ -91,5 +91,3 @@ task 'test_all' => (1..8).to_a.map{|n| "test_step#{n}"}
 
 #@include(rake/glossary.rd)
 
-
-

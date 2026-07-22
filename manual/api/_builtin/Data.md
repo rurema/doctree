@@ -394,6 +394,7 @@ p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
 
 ブロックを指定すると各ペアでブロックを呼び出し、
 その結果をペアとして使います。
+
 ```ruby title="ブロック付きの例"
 Customer = Data.define(:name, :address, :zip)
 p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value|

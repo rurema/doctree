@@ -124,8 +124,6 @@ until: "2.2.0"
 
 - **param** `io` -- テスト結果の出力先を指定します。
 
-
-
 ## Singleton Methods
 
 ### def autorun -> true
@@ -143,6 +141,4 @@ until: "2.2.0"
 ### const VERSION -> String
 
 このライブラリのバージョンを返します。
-
-
 

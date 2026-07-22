@@ -9,6 +9,7 @@ category: I/O
 組み込みクラス [c:String] と [c:IO] を拡張します。
 
 ### 例
+
 ```ruby
 require 'scanf'
   
@@ -72,7 +73,6 @@ ret = str.scanf("%s%d") { |s, n| [s, n] }
 p ret #=> [["123", nil], ["abc", 456], ["def", nil]]
 ```
 
-
 - **param** `format` -- スキャンするフォーマットを文字列で指定します。
               詳細は、[ref:m:String#scanf#format] を参照してください。
 
@@ -96,7 +96,6 @@ require 'scanf'
 p "a           10".scanf("%s %d")  # => ["a", 10]
 p "a10".scanf("%1s %d")      # => ["a", 10]
 ```
-
 
 ```ruby title="使用例"
 require 'scanf'
@@ -122,7 +121,6 @@ p str.scanf("%d %s") #=> [1, "aaa"]
 #@# that conversion.  Before conversion begins, most conversions skip
 #@# white space in the input string; this white space is not counted
 #@# against the field width.
-
 
 - **`space`**:
   フォーマット中の空白は(0個を含む)任意の数の空白にマッチします。

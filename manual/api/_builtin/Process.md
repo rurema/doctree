@@ -21,18 +21,18 @@ Process がプロセスを表現するクラスではなく、プロセスに対
 
 - **param** `message` -- 終了時のメッセージを文字列で指定します。
 
-
 ### def exec(command, *args) -> ()
 
 カレントプロセスを与えられた外部コマンドで置き換えます。
 
-
 ### 引数の解釈
 
 引数が一つだけ与えられた場合、command が shell のメタ文字
+
 ```text
   * ? {} [] <> () ~ & | \ $ ; ' ` " \n
 ```
+
 を含む場合、shell 経由で実行されます。
 そうでなければインタプリタから直接実行されます。
 
@@ -59,8 +59,6 @@ exec "echo", "*"    # echoes an asterisk
 # never get here
 ```
 
-
-
 ### def exit(status = true)    -> ()
 
 プロセスを終了します。関数 [m:Kernel?.exit] と同じです。
@@ -68,7 +66,6 @@ exec "echo", "*"    # echoes an asterisk
 - **param** `status` -- 終了ステータスを boolean か整数で指定します。true の場合は成功を、false は失敗を意味します。
 
 - **SEE** [man:exit(3)]
-
 
 ### def exit!(status = false)    -> ()
 
@@ -98,6 +95,7 @@ exec "echo", "*"    # echoes an asterisk
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 ### def last_status -> Process::Status | nil
+
 カレントスレッドで最後に終了した子プロセスのステータスを返します。
 
 変数 [m:$?] の値と同じです。
@@ -115,6 +113,7 @@ p Process.last_status # => nil
 
 - **SEE** [c:Process::Status]
 - **SEE** [m:$?]
+
 ## Module Functions
 
 ### module_function def getrlimit(resource)    -> [Integer]
@@ -221,7 +220,6 @@ Process.setrlimit(Process::RLIMIT_CORE,
 ```
 
 - **SEE** [man:setrlimit(2)]
-
 
 ### module_function def egid    -> Integer
 
@@ -428,7 +426,6 @@ user が属するグループのリストを更新し、group をそのリスト
 - **param** `group` -- ユーザグループ ID を整数で指定します。
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
-
 
 ### module_function def kill(signal, pid, *rest)    -> Integer
 
@@ -649,13 +646,13 @@ CRubyではメジャーGCを実行し以下のことをします：
 ただし noclose に真を指定したときにはこの動作は抑制され、
 リダイレクトは行なわれません。
 
-
 - **param** `nochdir` -- true を指定した場合、カレントディレクトリを移動しません。
 
 - **param** `noclose` -- true を指定した場合、標準入力・標準出力・標準エラー出力を変更しません。
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 - **raise** `Errno::EXXX` -- 失敗した場合に発生します。
+
 ### module_function def detach(pid)    -> Thread
 
 子プロセス pid の終了を監視するスレッドを生成して返します。
@@ -677,7 +674,6 @@ th = Process.detach(pid)
 p th.value
 # => #<Process::Status: pid 7762 exit 0>
 ```
-
 
 ### module_function def argv0 -> String
 
@@ -1102,7 +1098,6 @@ CLOCK_REALTIME よりも [m:Time.now] をおすすめします。
 リソースに制限がないことを意味する定数です。
 
 [m:Process?.getrlimit]、[m:Process?.setrlimit] で使われます。
-
 
 ### const RLIM_SAVED_CUR -> Integer
 

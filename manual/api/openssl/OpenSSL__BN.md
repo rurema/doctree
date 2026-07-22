@@ -72,6 +72,7 @@ p OpenSSL::BN.new(1209) # => 1209
 - **SEE** [m:Integer#to_bn]
 
 ### def generate_prime(bits, safe=true, add=nil, rem=nil) -> OpenSSL::BN
+
 ランダム(擬似乱数的)な bits ビットの素数を返します。
 
 暗号的に意味のある素数は十分大きくないといけないので、
@@ -90,6 +91,7 @@ add に整数を渡すと、 p % add == rem であるような
 - **raise** `OpenSSL::BNError` -- 素数の生成に失敗した場合に発生します
 
 ### def pseudo_rand(bits, fill=0, odd=false) -> OpenSSL::BN
+
 乱数を生成し、返します。
 
 乱数系列に暗号論的な強さはないため、暗号関連でない場合や、
@@ -113,6 +115,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 - **SEE** [m:OpenSSL::BN.rand], [m:OpenSSL::BN.pseudo_rand_range]
 
 ### def pseudo_rand_range(range) -> OpenSSL::BN
+
 乱数を 0 から range-1 までの間で生成し、返します。
 
 乱数系列に暗号論的な強さはありません。
@@ -121,8 +124,8 @@ odd が真なら、生成される整数は奇数のみとなります。
 - **raise** `OpenSSL::BNError` -- 乱数の生成に失敗した場合に発生します
 - **SEE** [m:OpenSSL::BN.pseudo_rand], [m:OpenSSL::BN.rand_range]
 
-
 ### def rand(bits, fill=0, odd=false) -> OpenSSL::BN
+
 暗号論的に強い擬似乱数を生成し、返します。
 
 bits ビットの長さの正の整数を生成します。
@@ -142,6 +145,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 - **SEE** [m:OpenSSL::BN.pseudo_rand], [m:OpenSSL::BN.rand_range]
 
 ### def rand_range(range) -> OpenSSL::BN
+
 暗号論的に強い擬似乱数を 0 から range-1 までの間で生成し、返します。
 
 - **param** `range` -- 生成する乱数の範囲
@@ -151,12 +155,14 @@ odd が真なら、生成される整数は奇数のみとなります。
 ## Instance Methods
 
 ### def %(other) -> OpenSSL::BN
+
 自身を other で割り算した余りを返します。
 
 - **param** `other` -- 除数
 - **raise** `OpenSSL::BNError` -- 計算時エラー
 
 ### def *(other) -> OpenSSL::BN
+
 自身と other の積を返します。
 
 - **param** `other` -- かける数
@@ -164,6 +170,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 - **SEE** [m:OpenSSL::BN#mod_mul]
 
 ### def **(other) -> OpenSSL::BN
+
 自身の other 乗を返します。
 
 - **param** `other` -- 指数
@@ -171,6 +178,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 - **SEE** [m:OpenSSL::BN#mod_exp]
 
 ### def +(other) -> OpenSSL::BN
+
 自身と other の和を返します。
 
 - **param** `other` -- 足す整数
@@ -178,6 +186,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 - **SEE** [m:OpenSSL::BN#mod_add]
 
 ### def -(other) -> OpenSSL::BN
+
 自身から other を引いた値を返します。
 
 - **param** `other` -- 引く整数
@@ -185,6 +194,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 - **SEE** [m:OpenSSL::BN#mod_sub]
 
 ### def /(other) -> [OpenSSL::BN, OpenSSL::BN]
+
 自身を other で割った商と余りを配列で返します。
 
 - **param** `other` -- 除数
@@ -192,6 +202,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 - **SEE** [m:OpenSSL::BN#mod_inverse]
 
 ### def <<(other) -> OpenSSL::BN
+
 自身を other ビット左シフトした値を返します。
 
 ```ruby
@@ -206,6 +217,7 @@ pp bn         # => #<OpenSSL::BN 1>
 
 ### def <=>(other) -> -1 | 0 | 1
 ### def cmp(other) -> -1 | 0 | 1
+
 自身と other を比較し、自身が小さいときには -1、
 等しいときには 0、大きいときには 1 を返します。
 
@@ -226,11 +238,13 @@ p OpenSSL::BN.new(5) <=> OpenSSL::BN.new(-5)  # =>  1
 ### def ==(other) -> bool
 ### def ===(other) -> bool
 ### def eql?(other) -> bool
+
 自身と other が等しい場合に true を返します。
 
 - **param** `other` -- 比較する数
 
 ### def >>(other) -> OpenSSL::BN
+
 自身を other ビット右シフトした値を返します。
 
 ```ruby
@@ -246,6 +260,7 @@ p bn       # => #<OpenSSL::BN 2>
 - **SEE** [m:OpenSSL::BN#rshift!]
 
 ### def lshift!(n) -> self
+
 自身を n ビット左シフトします。
 [m:OpenSSL::BN#<<]と異なり、破壊的メソッドです。
 
@@ -262,6 +277,7 @@ p bn            # => #<OpenSSL::BN 4>
 - **SEE** [m:OpenSSL::BN#<<]
 
 ### def rshift!(n) -> self
+
 自身を n ビット右シフトします。
 [[m:OpenSSL::BN#>>]と異なり、破壊的メソッドです。
 
@@ -278,6 +294,7 @@ p bn             # => #<OpenSSL::BN 4>
 - **SEE** [m:OpenSSL::BN#>>]
 
 ### def bit_set?(n) -> bool
+
 自身の n ビット目が立っているなら true を返します。
 
 ```ruby
@@ -291,6 +308,7 @@ p OpenSSL::BN.new("129").bit_set?(1) # => false
 - **SEE** [m:OpenSSL::set_bit!]
 
 ### def clear_bit!(n) -> self
+
 自身の n ビット目を0にします。
 
 ```ruby
@@ -306,6 +324,7 @@ p a # => 128
 - **SEE** [m:OpenSSL::set_bit!]
 
 ### def coerce(other) -> Array
+
 自身と other が同じクラスになるよう、自身か other を変換し
 [other, self] という配列にして返します。
 
@@ -324,20 +343,22 @@ p 1.to_bn.coerce(2)  # => [2, 1]
 coerce メソッドの詳細な説明は、[m:Numeric#coerce] にあります。
 - **SEE** [m:Numeric#coerce]
 
-
 ### def copy(other) -> self
+
 other の内容を自身にコピーします。
 
 - **param** `other` -- コピーする [c:OpenSSL::BN] のオブジェクト
 - **raise** `OpenSSL::BNError` -- コピーに失敗
 
 ### def gcd(other) -> OpenSSL::BN
+
 GCD(最大公約数)を返します。
 
 - **param** `other` -- 自身との GCD を計算する数
 - **raise** `OpenSSL::BNError` -- 計算時エラー
 
 ### def mask_bits!(n) -> self
+
 自身を下位 n ビットでマスクし、破壊的に変更します。
 
 n が自身のビット数より大きい場合は例外 [c:OpenSSL::BNError]
@@ -359,6 +380,7 @@ p "%b" % bn      # =>     "111"
 - **raise** `OpenSSL::BNError` -- 計算時エラー
 
 ### def mod_add(other, m) -> OpenSSL::BN
+
 (self + other) % m を返します。
 
 ```ruby
@@ -372,6 +394,7 @@ p OpenSSL::BN.new("7").mod_add(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 
 - **raise** `OpenSSL::BNError` -- 計算時エラー
 
 ### def mod_exp(other, m) -> OpenSSL::BN
+
 (self ** other) % m を返します。
 
 ```ruby
@@ -385,6 +408,7 @@ p OpenSSL::BN.new("7").mod_exp(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 
 - **raise** `OpenSSL::BNError` -- 計算時エラー
 
 ### def mod_inverse(m) -> OpenSSL::BN
+
 自身の mod m における逆元を返します。
 
 (self * r) % m == 1 となる r を返します。
@@ -401,6 +425,7 @@ p (3 * 2) % 5            # => 1
 - **raise** `OpenSSL::BNError` -- 計算時エラー
 
 ### def mod_mul(other, m) -> OpenSSL::BN
+
 (self * other) % m を返します。
 
 ```ruby
@@ -414,6 +439,7 @@ p OpenSSL::BN.new("7").mod_mul(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 
 - **raise** `OpenSSL::BNError` -- 計算時エラー
 
 ### def mod_sqr(m) -> OpenSSL::BN
+
 (self ** 2) % m を返します。
 
 - **param** `m` -- mod を取る数
@@ -421,6 +447,7 @@ p OpenSSL::BN.new("7").mod_mul(OpenSSL::BN.new("3"), OpenSSL::BN.new("6")) # => 
 - **SEE** [m:OpenSSL::BN#sqr]
 
 ### def mod_sub(other, m) -> OpenSSL::BN
+
 (self - other) % m を返します。
 
 ```ruby
@@ -433,8 +460,8 @@ p OpenSSL::BN.new("27").mod_sub(OpenSSL::BN.new("3"), OpenSSL::BN.new("5")) # =>
 - **param** `m` -- 剰余を取る数
 - **raise** `OpenSSL::BNError` -- 計算時エラー
 
-
 ### def num_bits -> Integer
+
 自身を表現するのに使っているビット数を返します。
 
 符号は無視されます。
@@ -448,6 +475,7 @@ p OpenSSL::BN.new("128").num_bits # => 8
 ```
 
 ### def num_bytes -> Integer
+
 自身を表現するのに使っているバイト数を返します。
 
 ```ruby
@@ -462,13 +490,16 @@ p 0b1000_00000.to_bn.num_bytes # => 2
 ```
 
 ### def odd? -> bool
+
 自身が奇数である場合に true を返します。
 
 ### def one? -> bool
+
 自身が1である場合に true を返します。
 
 ### def prime? -> bool
 ### def prime?(checks) -> bool
+
 自身が素数であるなら true を返します。
 
 Miller-Rabin 法により確率的に判定します。
@@ -481,6 +512,7 @@ checkで指定した回数だけ繰り返します。
 - **SEE** [m:OpenSSL::BN#prime_fasttest?]
 
 ### def prime_fasttest?(checks=nil, vtrivdiv=true) -> bool
+
 自身が素数であるなら true を返します。
 
 vtrivdiv が真である場合には、 Miller-Rabin 法での
@@ -508,6 +540,7 @@ p OpenSSL::BN.new("181").prime_fasttest?(nil, false) # => true
 - **SEE** [m:OpenSSL::BN#prime?]
 
 ### def set_bit!(n) -> self
+
 自身の n ビット目を1にします。
 
 ```ruby
@@ -523,21 +556,25 @@ p a # => 129
 - **SEE** [m:OpenSSL::clear_bit!], [m:OpenSSL::bit_set?]
 
 ### def sqr -> OpenSSL::BN
+
 自身の2乗を計算します。
 
 - **raise** `OpenSSL::BNError` -- 計算時エラー
 - **SEE** [m:OpenSSL::BN#mod_sqr]
 
 ### def to_bn -> self
+
 自分自身を返します。
 
 ### def to_i -> Integer
 ### def to_int -> Integer
+
 自身を Integer のインスタンスに変換します。
 
 - **raise** `OpenSSL::BNError` -- 変換に失敗した場合に発生します
 
 ### def to_s(base=10) -> String
+
 自身を表す文字列を返します。
 
 base で、変換方法(基数)を指定します。
@@ -580,7 +617,6 @@ p 7.to_bn.to_s(0) # => "\x00\x00\x00\x01\a"
 
 - **SEE** [m:OpenSSL::BN.new]
 
-
 ### def pretty_print(pp)
 
 [m:Kernel?.pp] でオブジェクトの内容を出力するときに、内部で呼ばれるメソッドです。
@@ -595,6 +631,7 @@ pp (-5).to_bn  #=> #<OpenSSL::BN -5>
 - **param** `pp` -- [c:PP] クラスのインスタンスオブジェクト
 
 ### def ucmp(other) -> -1 | 0 | 1
+
 自身と other の絶対値を比較し、自身の絶対値が小さいときには -1、
 等しいときには 0、 大きいときには 1 を返します。
 
@@ -613,6 +650,7 @@ p OpenSSL::BN.new(-5).ucmp(OpenSSL::BN.new(2))  # =>  1
 - **SEE** [m:OpenSSL::BN#cmp]
 
 ### def negative? -> bool
+
 自身が負である場合に true を返します。Ruby 2.5, OpenSSL 2.1.0 から利用できます。
 
 ```ruby
@@ -623,5 +661,6 @@ p (-5).to_bn.negative?  # => true
 ```
 
 ### def zero? -> bool
+
 自身が 0 である場合に true を返します。
 

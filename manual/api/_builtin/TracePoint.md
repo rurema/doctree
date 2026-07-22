@@ -162,12 +162,14 @@ p trace.enabled? # => true
 - **raise** `ThreadError` -- ブロックを指定しなかった場合に発生します。
 
 ### def stat -> object
+
 TracePoint の内部情報を返します。
 
 返り値の内容は実装依存です。
 将来変更される可能性があります。
 
 このメソッドは TracePoint 自身のデバッグ用です。
+
 ## Instance Methods
 
 ### def enable         -> bool

@@ -103,6 +103,7 @@ p (1..3).collect { "cat" } # => ["cat", "cat", "cat"]
 ```
 
 - **SEE** [m:Hash#to_h], [m:Array#collect], [m:Array#map]
+
 ### def each_with_index(*args)                      -> Enumerator
 ### def each_with_index(*args) {|item, index| ... } -> self
 
@@ -281,7 +282,6 @@ p [1, 2, 3, 4, 5].inject(:+)                    #=> 15
 p ["b", "c", "d"].inject("abbccddde", :squeeze) #=> "abcde"
 ```
 
-
 ### def member?(val)  -> bool
 ### def include?(val) -> bool
 
@@ -437,7 +437,6 @@ h = a.group_by {|x| x }
 
 - **SEE** [m:Enumerable#sort_by]
 
-
 ### def min    -> object | nil
 ### def min(n) -> Array
 
@@ -470,7 +469,6 @@ a < b のとき負の整数を、期待しています。
 該当する要素が複数存在する場合、どの要素を返すかは不定です。
 
 - **param** `n` -- 取得する要素数。
-
 
 ```ruby title="例"
 class Person
@@ -534,7 +532,6 @@ p a.min_by(2) {|x| x.length } # => ["dog", "horse"]
 ```
 
 - **SEE** [m:Enumerable#sort_by]
-
 
 ### def partition               -> Enumerator
 ### def partition {|item| ... } -> [[object], [object]]
@@ -664,7 +661,6 @@ ary.sort_by {|v| [v, i += 1] }
 
 ブロックを省略した場合は [c:Enumerator] を返します。
 
-
 - **SEE** [m:Enumerable#sort]
 
 ### def to_a(*args)    -> [object]
@@ -746,7 +742,6 @@ n 要素ずつブロックに渡して繰り返します。
 
 要素数が n で割り切れないときは、最後の回だけ要素数が減ります。
 
-
 ブロックを省略した場合は
 n 要素ずつ繰り返す [c:Enumerator] を返します。
 
@@ -772,7 +767,6 @@ n 要素ずつ繰り返す [c:Enumerator] を返します。
 要素を重複ありで n 要素ずつに区切り、
 ブロックに渡して繰り返します。
 
-
 ブロックを省略した場合は重複ありで
 n 要素ずつ繰り返す [c:Enumerator] を返します。
 
@@ -792,8 +786,6 @@ n 要素ずつ繰り返す [c:Enumerator] を返します。
 ```
 
 - **SEE** [m:Enumerable#each_slice]
-
-
 
 ### def count                   -> Integer
 ### def count(item)             -> Integer
@@ -823,6 +815,7 @@ p enum.count{|x|x%2==0}     # => 3
 
 ### def cycle(n=nil)       -> Enumerator
 ### def cycle(n=nil) {|obj| ... } -> object | nil
+
 Enumerable オブジェクトの各要素を n 回 or 無限回(n=nil)繰り返し
 ブロックを呼びだします。
 
@@ -871,7 +864,6 @@ p e.drop(3)           # => [4, 5, 0]
 a = [1, 2, 3, 4, 5, 0]
 p a.drop_while {|i| i < 3 } # => [3, 4, 5, 0]
 ```
-
 
 ### def find_index(val)               -> Integer | nil
 ### def find_index {|obj| ... }       -> Integer | nil
@@ -924,7 +916,6 @@ p e.first(2) #=> []
 ### def group_by {|obj| ... }  -> Hash
 
 ブロックを評価した結果をキー、対応する要素の配列を値とするハッシュを返します。
-
 
 ```ruby title="例"
 p (1..6).group_by {|i| i%3} #=> {0=>[3, 6], 1=>[1, 4], 2=>[2, 5]}
@@ -979,6 +970,7 @@ p [].minmax_by{} # => [nil, nil]
 ### def none?               -> bool
 ### def none?{|obj| ... }   -> bool
 ### def none?(pattern)      -> bool
+
 ブロックを指定しない場合は、 Enumerable オブジェクトのすべての
 要素が偽であれば真を返します。そうでなければ偽を返します。
 
@@ -1096,6 +1088,7 @@ evens = (1..10).each_with_object([]) {|i, a| a << i*2 }
 ### def collect_concat -> Enumerator
 ### def flat_map       {| obj | block }  -> Array
 ### def collect_concat {| obj | block }  -> Array
+
 各要素をブロックに渡し、その返り値を連結した配列を返します。
 
 ブロックの返り値は基本的に配列を返すべきです。
@@ -1372,7 +1365,6 @@ p a.slice_before {|e|
 #=> "0,2-4,6,7,9"
 ```
 
-
 - **SEE** [m:Enumerable#chunk], [m:Enumerable#slice_after]
 
 ### def slice_after(pattern) -> Enumerator
@@ -1518,6 +1510,7 @@ p pythagorean_triples.take_while { |*, z| z < 100 }.force
 ```
 
 - **SEE** [c:Enumerator::Lazy]
+
 ### def sum(init=0)                    -> object
 ### def sum(init=0) {|e| expr }        -> object
 
@@ -1629,7 +1622,6 @@ Ruby 2.7 以前は SortedSet が定義されていました)。
 
 引数 args およびブロックは、集合オブジェクトを生成するための new
 メソッドに渡されます。
-
 
 - **param** `klass` -- 生成する集合クラスを指定します。
 - **param** `args` -- 集合クラスのオブジェクト初期化メソッドに渡す引数を指定します。

@@ -2,6 +2,7 @@
 library: rexml
 ---
 # class REXML::ParseException < RuntimeError
+
 XML のパースに失敗したときに生じる例外です。
 
 ```ruby
@@ -54,23 +55,28 @@ end
 #@# このメソッドは通常 nil を返すはずです。
 #@# --- continued_exception=(value)
 
-
 ### def to_s -> String
+
 例外情報を文字列化して返します。
 
 ### def position -> Integer
+
 パースエラーが起きた(XML上の)場所を先頭からのバイト数で返します。
 
 ### def line -> Integer
+
 パースエラーが起きた(XML上の)場所を行数で返します。
 
 ### def context -> [Integer, Integer, Integer]
+
 パースエラーが起きた(XML上の)場所を返します。
 
 要素3個の配列で、
+
 ```text
 [position, lineno, line]
 ```
+
 という形で返します。
 position, line は
 [m:REXML::ParseException#position]

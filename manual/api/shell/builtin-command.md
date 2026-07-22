@@ -40,7 +40,6 @@ until: "2.7.0"
 ### def input=(filter)
 #@todo
 
-
 # class Shell::Cat < Shell::BuiltInCommand
 
 ## Singleton Methods
@@ -65,9 +64,7 @@ until: "2.7.0"
 ### def each(rs = nil){|job| ... }
 #@todo
 
-
 # class Shell::Echo < Shell::BuiltInCommand
-
 
 ## Singleton Methods
 
@@ -78,7 +75,6 @@ until: "2.7.0"
 
 ### def each(rs = nil){|str| ... }
 #@todo
-
 
 # class Shell::Glob < Shell::BuiltInCommand
 
@@ -103,7 +99,6 @@ until: "2.7.0"
 
 ### def each(rs = nil){|line| ... }
 #@todo
-
 
 # class Shell::Void < Shell::BuiltInCommand
 

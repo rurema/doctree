@@ -16,7 +16,6 @@ require:
 - **`rerdoc`**:
   既に存在する RDoc が古くなくても RDoc を作成します。
 
-
   ```ruby title="例"
   Rake::RDocTask.new do |rd|
     rd.main = "README.rdoc"

@@ -11,6 +11,7 @@ ASN.1 のオブジェクト識別子を表すクラス。
 
 ### def new(value) -> OpenSSL::ASN1::ObjectId
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::ObjectId
+
 ASN.1 のオブジェクト識別子を表わす OpenSSL::ASN1::ObjectId の
 オブジェクトを生成します。
 
@@ -33,6 +34,7 @@ p ASN1::ObjectId.new("dsaWithSHA1").oid             # => "1.2.840.10040.4.3"
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 ### def register(oid, short_name, long_name) -> true
+
 オブジェクト識別子に対応する名前(short name と long name)を
 OpenSSLの内部テーブルに登録します。
 
@@ -54,6 +56,7 @@ p OpenSSL::ASN1::ObjectId.new("2.5.29.9").long_name
 ## Instance Methods
 
 ### def oid -> String
+
 オブジェクト識別子のドット区切り数値を文字列で返します。
 
 ```ruby title="例"
@@ -66,6 +69,7 @@ p oid.oid   #=> "2.5.29.17"
 
 ### def sn -> String | nil
 ### def short_name -> String | nil
+
 オブジェクト識別子に対応する short name を返します。
 
 ```ruby title="例"

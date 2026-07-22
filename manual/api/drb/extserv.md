@@ -15,10 +15,10 @@ include:
 
 [c:DRb::ExtServManager] で使われるサービスを定義しているクラスです。
 
-
 ## Class Methods
 
 ### def new(there, name, server=nil) -> DRb::ExtServ
+
 DRb::ExtServ オブジェクトを生成し、サービスを 
 [c:DRb::ExtServManager] オブジェクトに登録します。
 
@@ -40,6 +40,7 @@ server には drb の通信に用いる [c:DRb::DRbServer] オブジェクトを
 ## Instance Methods
 
 ### def front -> object
+
 サービスの窓口となるオブジェクトを返します。
 
 実際には、[m:DRb::ExtServ.new] の server で指定した
@@ -47,6 +48,7 @@ server には drb の通信に用いる [c:DRb::DRbServer] オブジェクトを
 が返されます。
 
 ### def stop_service -> true
+
 サービスを停止します。
 
 [m:DRb::ExtServManager] オブジェクトにサービスの停止を伝達し、
@@ -62,12 +64,14 @@ server には drb の通信に用いる [c:DRb::DRbServer] オブジェクトを
 別のプロセスが起動します。
 
 ### def alive? -> bool
+
 サービスが起動しているならば真を返します。
 
 リモート側からこのメソッドを呼ぶのはあまり意味がありません。
 サービスを停止するとリモートメソッド呼び出しができなくなるためです。
 
 ### def server -> DRb::DRbServer
+
 通信に利用しているサーバを返します。
 
 [m:DRb::ExtServ.new] で指定した [c:DRb::DRbServer] を返します。

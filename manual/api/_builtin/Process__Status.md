@@ -86,7 +86,6 @@ end
    done
 ```
 
-
 ## Instance Methods
 
 ### def ==(other)    -> bool
@@ -197,6 +196,7 @@ p Process.wait     #=> 26563
 p $?.to_i          #=> 25344
 p $? >> 8          #=> 99
 ```
+
 #@end
 
 ### def success?    -> bool

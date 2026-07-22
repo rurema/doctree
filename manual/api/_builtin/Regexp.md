@@ -21,6 +21,7 @@ p Regexp.last_match[0] # => "this is regexp"
 ```
 
 Ruby 3.0.0 から正規表現リテラルは freeze されるようになりました。
+
 ```ruby
 p /abc/.frozen?
 # => true
@@ -216,7 +217,6 @@ p Regexp.union(/a/e, /b/) # => /(?-mix:a)|(?-mix:b)/e
 
 - **param** `pattern` -- | で連結したい正規表現を指定します
 
-
 ```ruby title="例"
 # オプションは合成されない
 p Regexp.union(/foo/i, /bar/x, /hoge/m) # => /(?i-mx:foo)|(?x-mi:bar)|(?m-ix:hoge)/
@@ -288,6 +288,7 @@ end
 ```
 
 ### def ===(string) -> bool
+
 文字列 string との正規表現マッチを行います。
 マッチした場合は真を返します。
 
@@ -350,7 +351,6 @@ end
 # => match
 # reg は nil でも false でも無いので常にtrue
 ```
-
 
 ### def casefold? -> bool
 
@@ -420,15 +420,18 @@ p(/(.).(.)/.match("foobar", -3).captures)  # => ["b", "r"]
 
 pos を指定しても [m:MatchData#offset] 等の結果
 には影響しません。つまり、
+
 ```ruby
 re.match(str[pos..-1])
 ```
+
 と
+
 ```ruby
 re.match(str, pos)
 ```
-は異なります。
 
+は異なります。
 
 ブロックを渡すと、マッチした場合に限り MatchData オブジェクトがブロック引数に渡されて実行されます。
 マッチした場合はブロックの値を返し、マッチしなかった場合は nil を返します。
@@ -459,6 +462,7 @@ p /(foo)(bar)(baz)/.match("foobarbaz").to_a.values_at(1,2,3) # => ["foo", "bar",
 ```
 
 ### 便利な使いかた
+
 正規表現にマッチした部分文字列だけが必要な場合に、
 
 ```ruby
@@ -580,6 +584,7 @@ p /#{re}+/o     # => /(?i-mx:foo|bar|baz)+/
 
 ### def ==(other) -> bool
 ### def eql?(other) -> bool
+
 otherが同じパターン、オプション、文字コードの正規表現であったらtrueを返します。
 
 - **param** `other` -- 正規表現を指定します。
@@ -593,6 +598,7 @@ p /^eee$/.eql?(/^eee$/)          # => true
 ```
 
 ### def hash -> Integer
+
 正規表現のオプションやテキストに基づいたハッシュ値を返します。
 
 ```ruby title="例"
@@ -601,6 +607,7 @@ p /abc/.hash  # => 4856055
 ```
 
 ### def inspect -> String
+
 [m:Regexp#to_s] より自然な文字列を返します。
 
 ```ruby title="例"
@@ -611,6 +618,7 @@ p /^ugou.*?/i.inspect # => "/^ugou.*?/i"
 - **SEE** [m:Regexp#to_s]
 
 ### def encoding   -> Encoding
+
 正規表現オブジェクトのエンコーディングを表す [c:Encoding] オブジェクト
 を返します。
 
@@ -619,6 +627,7 @@ p /^ugou.*?/i.inspect # => "/^ugou.*?/i"
 - **SEE** [ref:d:spec/regexp#encoding]
 
 ### def named_captures -> { String => [Integer] }
+
 正規表現に含まれる名前付きキャプチャ(named capture)の情報を
 [c:Hash] で返します。
 
@@ -638,6 +647,7 @@ p /(.)(.)/.named_captures
 ```
 
 ### def names -> [String]
+
 正規表現に含まれる名前付きキャプチャ(named capture)の名前を
 文字列の配列で返します。
 

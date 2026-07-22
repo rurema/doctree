@@ -56,15 +56,12 @@ p c.name, c.value
 "FedEx"
 ```
 
-
-
 ### def parse_set_cookies(str)    -> [WEBrick::Cookie]
 
 サーバから送られてくる Set-Cookie ヘッダの値 str をパースし、
 新しく [c:WEBrick::Cookie] オブジェクトの配列を生成し返します。
 
 - **param** `str` -- Set-Cookie ヘッダの値を文字列で指定します。
-
 
 ## Instance Methods
 

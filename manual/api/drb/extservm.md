@@ -14,14 +14,11 @@ DRb::ExtServManager
 このライブラリは簡易的なもので、あまりメンテナンスもされていないので、
 本格的な用途にはこのライブラリを参考にして実装してください。
 
-
 ### Example
 
 以下の例を実行するためには、まず server.rb を起動し、その後 client.rb を
 動かします。service.rb は server.rb が client.rb からサービスを要求された
 時に起動されます。また、stop.rbを用いて 
-
-
 
 ```ruby title="server.rb"
 require 'drb/drb'
@@ -109,8 +106,8 @@ s.service(ARGV[0]).stop_service
 ```
 
 # class DRb::ExtServManager < Object
-[c:DRb::ExtServ] で作られたサービスを管理するクラスです。
 
+[c:DRb::ExtServ] で作られたサービスを管理するクラスです。
 
 ## Class Methods
 ### def command -> { String => String|[String] }
@@ -129,6 +126,7 @@ Hash のキーがサービス名で、値がそのサービスを起動するた
 文字列の配列で指定すると shell を経由せずに起動されます。
 
 ### def command=(cmd)
+
 サービスを起動するためのコマンドを指定するための [c:Hash] を
 設定します。
 
@@ -136,6 +134,7 @@ Hash のキーがサービス名で、値がそのサービスを起動するた
 - **SEE** [m:DRb::ExtServManager.command]
 
 ### def new -> DRb::ExtServManager
+
 DRb::ExtServManager オブジェクトを生成して返します。
 
 これで生成したオブジェクトの [m:DRb::ExtServManager#service] を
@@ -146,6 +145,7 @@ DRb::ExtServManager オブジェクトを生成して返します。
 #@# used internally
 
 ### def service(name) -> DRb::ExtServ
+
 name で指定したサービスに関連付けられた [c:DRb::ExtServ] 
 オブジェクトを返します。
 
@@ -166,6 +166,7 @@ DRb::ExtServ は削除され、プロセスは停止します。
 #@# used internally
 
 ### def uri -> String|nil
+
 サービス起動時にプロセスを spawn する時に渡す URI を返します。
 
 デフォルトは nil で、これは [m:DRb?.uri] を用いることを意味します。
@@ -173,6 +174,7 @@ DRb::ExtServ は削除され、プロセスは停止します。
 - **SEE** [m:DRb::ExtServManager#uri=]
 
 ### def uri=(uri)
+
 サービス起動時にプロセスを spawn する時に渡す URI を設定します。
 
 - **SEE** [m:DRb::ExtServManager#uri]

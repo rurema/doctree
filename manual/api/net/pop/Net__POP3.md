@@ -11,6 +11,7 @@ POP3 のセッションを表すクラスです。
 ## Class Methods
 
 ### def new(address, port = nil, apop = false) -> Net::POP3
+
 [c:Net::POP3] オブジェクトを生成します。
 
 このメソッドではサーバの接続は行いません。
@@ -24,6 +25,7 @@ port に nil を渡すと、適当なポート(通常は110、SSL利用時には
 - **param** `apop` -- 真の場合にはAPOPで認証します
 
 - **SEE** [m:Net::POP3#start]
+
 ### def start(address, port = nil, account=nil, password=nil, isapop=false) -> Net::POP3
 ### def start(address, port = nil, account=nil, password=nil, isapop=false) {|pop| .... } -> object
 
@@ -39,6 +41,7 @@ port に nil を渡すと、適当なポート(通常は110、SSL利用時には
 使います。
 
 以下のコードと同じ動作をします。
+
 ```ruby
 require 'net/pop'
 
@@ -68,7 +71,9 @@ Net::POP3.start(addr, port, account, password) {|pop|
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 
 - **SEE** [m:Net::POP3#start]
+
 ### def APOP(is_apop) -> Class
+
 bool が真なら [c:Net::APOP] クラス、偽なら [c:Net::POP3] クラスを返します。
 
 ```ruby title="使用例"
@@ -83,6 +88,7 @@ pop.start(account, password) {
 - **param** `is_apop` -- 真の場合に Net::APOP を返します。
 
 ### def foreach(address, port = nil, account, password, isapop=false) {|mail| .... } -> ()
+
 POP セッションを開始し、
 サーバ上のすべてのメールを取りだし、
 個々のメールを引数としてブロックを呼びだします。
@@ -93,6 +99,7 @@ port に nil を渡すと、適当なポート(通常は110、SSL利用時には
 使います。
 
 以下のコードと同様の処理をします。
+
 ```ruby invalid
 require 'net/pop'
 
@@ -127,6 +134,7 @@ end
 
 ### def delete_all(address, port = nil, account, password, isapop=false) -> ()
 ### def delete_all(address, port = nil, account, password, isapop=false) {|mail| .... } -> ()
+
 POP セッションを開始し、サーバ上のメールを全て消去します。
 
 ブロックを与えられたときは消去する前に各メールを引数としてブロックを呼びだします。
@@ -156,10 +164,10 @@ end
 - **SEE** [m:Net::POP3.start], [m:Net::POP3#delete_all]
 
 ### def auth_only(address, port = nil, account, password, isapop=false)
+
 POP セッションを開き、認証だけを行って接続を切ります。
 
 主に POP before SMTP のために用意されています。
-
 
 ```ruby title="使用例"
 require 'net/pop'
@@ -180,12 +188,15 @@ Net::POP3.auth_only('pop.example.com', nil,     # using default port (110)
 
 ### def default_port -> Integer
 ### def default_pop3_port -> Integer
+
 POP3 のデフォルトのポート番号(110)を返します。
 
 ### def default_pop3s_port -> Integer
+
 デフォルトのPOP3Sのポート番号(995)を返します。
 
 ### def certs -> String|nil
+
 SSL のパラメータの ca_file (なければ ca_path) を返します。
 
 どちらも設定されていない場合は nil を返します。
@@ -193,6 +204,7 @@ SSL のパラメータの ca_file (なければ ca_path) を返します。
 - **SEE** [m:OpenSSL::SSL::SSLContext#ca_file], [m:OpenSSL::SSL::SSLContext#ca_path]
 
 ### def verify -> Integer|nil
+
 SSL のパラメータの verify_mode を返します。
 
 設定されていない場合は nil を返します。
@@ -200,11 +212,12 @@ SSL のパラメータの verify_mode を返します。
 - **SEE** [m:OpenSSL::SSL::SSLContext#verify_mode]
 
 ### def use_ssl? -> bool
+
 新しく生成する [c:Net::POP3] オブジェクトが
 SSL による通信利用するならば真を返します。
 
-
 ### def enable_ssl(verify_or_params={}, certs=nil) -> ()
+
 新しく生成する [c:Net::POP3] オブジェクトが
 SSL による通信利用するように設定します。
 
@@ -216,9 +229,11 @@ certs は無視されます。
 verify_or_params がハッシュでない場合には、接続時に生成される
 [c:OpenSSL::SSL::SSLContext] オブジェクトの
 [m:OpenSSL::SSL::SSLContext#set_params] に
+
 ```text
 { :verify_mode => verify_or_params, :ca_path => certs }
 ```
+
 というハッシュが渡されます。
 
 - **param** `verify_or_params` -- SSLの設定のハッシュ、もしくは SSL の verify_mode
@@ -227,6 +242,7 @@ verify_or_params がハッシュでない場合には、接続時に生成され
 - **SEE** [m:Net::POP3.disable_ssl], [m:Net::POP3.use_ssl?]
 
 ### def ssl_params -> Hash|nil
+
 SSL での接続を有効にしている場合には、
 SSL の設定のハッシュを返します。
 
@@ -243,11 +259,11 @@ SSL を有効にしていない場合には nil を返します。
 #@# 
 
 ### def disable_ssl -> ()
+
 新しく生成する [c:Net::POP3] オブジェクトが
 SSL を利用しないように設定します。
 
 - **SEE** [m:Net::POP3.enable_ssl], [m:Net::POP3.use_ssl?]
-
 
 ### def socket_type -> Class
 
@@ -256,13 +272,14 @@ SSL を利用しないように設定します。
 
 ## Instance Methods
 
-
 ### def use_ssl? -> bool
+
 このインスタンスが SSL を使って接続するなら真を返します。
 
 - **SEE** [m:Net::POP3#enable_ssl], [m:Net::POP3#disable_ssl]
 
 ### def enable_ssl(verify_or_params={}, certs=nil) -> ()
+
 このインスタンスが SSL による通信を利用するように設定します。
 
 verify_or_params にハッシュを渡した場合には、接続時に生成される
@@ -273,9 +290,11 @@ certs は無視されます。
 verify_or_params がハッシュでない場合には、接続時に生成される
 [c:OpenSSL::SSL::SSLContext] オブジェクトの
 [m:OpenSSL::SSL::SSLContext#set_params] に
+
 ```text
 { :verify_mode => verify_or_params, :ca_path => certs }
 ```
+
 というハッシュが渡されます。
 
 - **param** `verify_or_params` -- SSLの設定のハッシュ、もしくは SSL の設定の verify_mode
@@ -283,12 +302,11 @@ verify_or_params がハッシュでない場合には、接続時に生成され
 
 - **SEE** [m:Net::POP3.enable_ssl], [m:Net::POP3#disable_ssl], [m:Net::POP3#use_ssl?]
 
-
 ### def disable_ssl -> ()
+
 このインスタンスが SSL による通信を利用しないように設定します。
 
 - **SEE** [m:Net::POP3#enable_ssl], [m:Net::POP3#disable_ssl], [m:Net::POP3#use_ssl?], [m:Net::POP3.enable_ssl]
-
 
 #@# --- inspect
 
@@ -296,6 +314,7 @@ verify_or_params がハッシュでない場合には、接続時に生成され
 
 ### def start(account, password) -> self
 ### def start(account, password) {|pop| .... } -> object
+
 サーバへ接続し、POP3のセッションを開始します。
 
 ブロックが渡された場合にはセッション開始後
@@ -304,7 +323,6 @@ verify_or_params がハッシュでない場合には、接続時に生成され
 
 ブロックが渡されなかった場合にはそのオブジェクト自身を返します。
 この場合セッションを終了させるのはユーザの責任となります。
-
 
 - **param** `account` -- アカウント名文字列
 - **param** `password` -- パスワード文字列
@@ -318,17 +336,21 @@ verify_or_params がハッシュでない場合には、接続時に生成され
 
 ### def started? -> bool
 ### def active? -> bool
+
 POP3 セッションが開始されていたら真を返します。
 
 active? は obsolete です。
 
 ### def address -> String
+
 接続するアドレスです。
 
 ### def port -> Integer
+
 接続するポート番号です。
 
 ### def set_debug_output(f) -> ()
+
 デバッグ用の出力 f をセットします。
 
 このメソッドは深刻なセキュリティホールの原因となりえます。
@@ -359,6 +381,7 @@ POP session started: pop.example.com:110 (POP)
 ```
 
 ### def open_timeout -> Integer
+
 接続時に待つ最大秒数を返します。
 
 この秒数たってもコネクションが開かないときは例外 [c:Net::OpenTimeout] を発生します。
@@ -368,12 +391,14 @@ POP session started: pop.example.com:110 (POP)
 - **SEE** [m:Net::POP3#open_timeout=]
 
 ### def open_timeout=(n)
+
 接続時に待つ最大秒数を設定します。
 
 - **param** `n` -- タイムアウトまでの秒数
 - **SEE** [m:Net::POP3#open_timeout]
 
 ### def read_timeout -> Integer
+
 読み込みでブロックしてよい最大秒数を返します。
 
 この秒数たっても読みこめなければ例外 [c:ReadTimeout] を発生します。
@@ -383,6 +408,7 @@ POP session started: pop.example.com:110 (POP)
 - **SEE** [m:Net::POP3#read_timeout=]
 
 ### def read_timeout=(n)
+
 読み込みでブロックしてよい最大秒数を設定します。
 
 この秒数たっても読みこめなければ例外 [c:ReadTimeout] を発生します。
@@ -391,14 +417,17 @@ POP session started: pop.example.com:110 (POP)
 - **SEE** [m:Net::POP3#read_timeout]
 
 ### def finish -> ()
+
 POP3 セッションを終了し、接続を閉じます。
 
 - **raise** `IOError` -- セッション開始前にこのメソッドを呼ぶと発生します
 
 ### def apop? -> bool
+
 このインスタンスが APOP を使ってサーバに接続するなら true を返します。
 
 ### def n_bytes -> Integer
+
 サーバにあるメールの総バイト数を返します。
 
 - **SEE** [m:Net::POP3#n_mails]
@@ -407,6 +436,7 @@ POP3 セッションを終了し、接続を閉じます。
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 
 ### def n_mails -> Integer
+
 サーバにあるメールの数を返します。
 
 - **SEE** [m:Net::POP3#n_bytes]
@@ -415,6 +445,7 @@ POP3 セッションを終了し、接続を閉じます。
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 
 ### def mails -> [Net::POPMail]
+
 サーバ上の全てのメールを、[c:Net::POPMail]オブジェクトの配列として返します。
 
 この配列はメールを最初に取得しようとしたときに生成され、セッションの間
@@ -424,9 +455,9 @@ POP3 セッションを終了し、接続を閉じます。
 - **raise** `Net::POPError` -- サーバがエラーを報告した場合に発生します
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 
-
 ### def each_mail {|popmail| .... } -> [Net::POPMail]
 ### def each {|popmail| .... } -> [Net::POPMail]
+
 サーバ上の各メールを引数としてブロックを呼びだします。
 
 メールは [c:Net::POPMail] のインスタンスとして渡されます。
@@ -439,6 +470,7 @@ pop3.mails.each と同じです。
 
 ### def delete_all -> ()
 ### def delete_all {|popmail| .... } -> ()
+
 サーバ上のメールを全て消去します。
 
 ブロックを与えられたときは消去する前に各メールを引数としてブロックを呼びだします。
@@ -455,6 +487,7 @@ end
 ```
 
 ### def auth_only(account, password) -> ()
+
 POP セッションを開き、認証だけを行って接続を切ります。
 
 主に POP before SMTP のために用意されています。
@@ -474,6 +507,7 @@ pop.auth_only 'YourAccount', 'YourPassword'
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 
 ### def reset -> ()
+
 セッションをリセットします。
 
 リセットによって [m:Net::POPMail#delete] で付けた削除マークがすべて
@@ -486,8 +520,7 @@ POP3 ではメール一個だけを復活する方法はありません。
 ## Constants
 
 ### const Revision -> String
+
 ライブラリ(ファイル)のリビジョンです。
 使わないでください。
-
-
 

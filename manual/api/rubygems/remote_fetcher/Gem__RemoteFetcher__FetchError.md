@@ -15,7 +15,6 @@ library: rubygems/remote_fetcher
 
 - **param** `uri` -- 問題が発生した URI を指定します。
 
-
 ## Instance Methods
 
 ### def uri -> URI

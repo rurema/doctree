@@ -51,7 +51,6 @@ Accept-Encoding  ヘッダの内容をコーディングを表す文字列の配
 Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で返します。
 配列は品質係数(qvalue)でソートされています。
 
-
 ### def addr    -> Array
 
 クライアントと接続されているソケットの [m:IPSocket#addr] を返します。
@@ -78,7 +77,6 @@ Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で
 ### def content_type    -> String | nil
 
 リクエストの Content-Type ヘッダを文字列で返します。
-
 
 ### def continue
 #@todo 1.9.3
@@ -189,6 +187,7 @@ p h['upfile']                  #=>  "hoge hoge hoge"
 - **param** `value` -- クエリーを表す文字列を指定します。
 
 ### def raw_header -> String
+
 生のヘッダを返します。
 
 ### def request_line -> String
@@ -225,7 +224,6 @@ CGI での環境変数 SCRIPT_NAME を文字列で表すアクセサです。
 
 リクエスト URI のスキームが https であれば真を返します。
 そうでない場合は偽を返します。
-
 
 ### def to_s    -> String
 

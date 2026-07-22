@@ -39,7 +39,6 @@ no_proxy の文字列に address のホスト名やIPアドレスが含まれて
 
 このメソッドは TCP コネクションを張りません。
 
-
 - **param** `address` -- 接続するホスト名を文字列で指定します。
 - **param** `port` -- 接続するポート番号を指定します。
 - **param** `proxy_addr` -- プロクシのホスト名もしくはアドレスを文字列で指定します。:ENV を指定すると環境変数 http_proxy を利用してプロクシの設定をします。省略した場合には直接接続します。
@@ -83,6 +82,7 @@ Net::HTTP.new(address, port, proxy_addr, proxy_port, proxy_user, proxy_pass).sta
 
 ### def get(uri) -> String
 ### def get(host, path, port = 80) -> String
+
 指定した対象に GET リクエストを送り、そのボディを
 文字列として返します。
 
@@ -97,6 +97,7 @@ Net::HTTP.new(address, port, proxy_addr, proxy_port, proxy_user, proxy_pass).sta
 
 ### def get_print(uri) -> ()
 ### def get_print(host, path, port = 80) -> ()
+
 指定した対象から HTTP でエンティティボディを取得し、
 [m:$stdout] に出力します。
 
@@ -126,6 +127,7 @@ Net::HTTP.get_print 'www.example.com', '/index.html'
 
 ### def get_response(uri) -> Net::HTTPResponse
 ### def get_response(host, path = nil, port = nil) -> Net::HTTPResponse
+
 指定した対象に GET リクエストを送り、そのレスポンスを
 [c:Net::HTTPResponse] として返します。
 
@@ -139,6 +141,7 @@ Net::HTTP.get_print 'www.example.com', '/index.html'
 - **SEE** [m:Net::HTTP#get]
 
 ### def post_form(uri, params) -> Net::HTTPResponse
+
 [c:URI] で指定した対象に フォームのデータを HTTP で 
 POST します。
 
@@ -148,8 +151,8 @@ POST します。
 - **param** `uri` -- POST する対象を [c:URI] で指定します。
 - **param** `params` -- POST するデータです。
 
-
 ### def proxy_address -> String|nil
+
 自身が ([m:Net::HTTP.Proxy] によって作成された) 
 プロクシ用のクラスならばプロクシのアドレスを返します。
 
@@ -158,6 +161,7 @@ POST します。
 - **SEE** [m:Net::HTTP.Proxy]
 
 ### def proxy_port -> Integer|nil
+
 自身が ([m:Net::HTTP.Proxy] によって作成された) 
 プロクシ用のクラスならばプロクシのポート番号を返します。
 
@@ -166,6 +170,7 @@ POST します。
 - **SEE** [m:Net::HTTP.Proxy]
 
 ### def proxy_pass -> String|nil
+
 自身が ([m:Net::HTTP.Proxy] によって作成された) 
 プロクシ用のクラスならばプロクシ認証のパスワードを返します。
 
@@ -174,6 +179,7 @@ POST します。
 - **SEE** [m:Net::HTTP.Proxy]
 
 ### def proxy_user -> String|nil
+
 自身が ([m:Net::HTTP.Proxy] によって作成された)
 プロクシ用のクラスで、かつプロクシの認証を利用する場合は
 プロクシ認証のユーザ名を返します。
@@ -224,30 +230,32 @@ proxy_class.start('www.example.org') {|h|
 
 ### def http_default_port -> Integer
 ### def default_port -> Integer
+
 HTTP のデフォルトポート (80) を返します。
 
 ### def https_default_port -> Integer
+
 HTTPS のデフォルトポート (443) を返します。
 
 ### def version_1_1? -> false
 ### def is_version_1_1? -> false
+
 何もしません。互換性のために残されており、常に false を返します。
 
 - **SEE** [m:Net::HTTP.version_1_2], [m:Net::HTTP.version_1_2?]
 
-
 ### def version_1_2 -> true
+
 何もしません。互換性のために残されており、常に true を返します。
 
 - **SEE** [m:Net::HTTP.version_1_1?], [m:Net::HTTP.version_1_2?]
 
-
 ### def version_1_2? -> true
 ### def is_version_1_2? -> true
+
 何もしません。互換性のために残されており、常に true を返します。
 
 - **SEE** [m:Net::HTTP.version_1_2], [m:Net::HTTP.version_1_1?]
-
 
 ## Instance Methods
 
@@ -266,7 +274,6 @@ TCP コネクションを張り、HTTP セッションを開始します。
 
 - **raise** `IOError` -- すでにセッションが開始していた場合に発生します。
 - **raise** `Net::OpenTimeout` -- 接続がタイムアウトしたときに発生します
-
 
 ### def started? -> bool
 ### def active? -> bool
@@ -290,8 +297,8 @@ io に nil を指定するとデバッグ出力を止めます。
 http.set_debug_output($stderr)
 ```
 
-
 ### def close_on_empty_response -> bool
+
 レスポンスがボディを持っていない場合にコネクションを
 閉じるかどうかを返します。
 
@@ -300,9 +307,9 @@ http.set_debug_output($stderr)
 - **SEE** [m:Net::HTTP#close_on_empty_response=]
 
 ### def close_on_empty_response=(bool)
+
 レスポンスがボディを持っていない場合にコネクションを
 閉じるかどうかを設定します。
-
 
 - **param** `bool` -- レスポンスがボディを持っていない場合にコネクションを
             閉じるかどうか指定します。
@@ -314,6 +321,7 @@ http.set_debug_output($stderr)
 接続するアドレスを返します。
 
 - **SEE** [m:Net::HTTP.new]
+
 ### def port -> Integer
 
 接続するポート番号を返します。
@@ -326,7 +334,6 @@ nil の場合システムが適当にローカルホストを
 決めます。
 
 デフォルトは nil です。
-
 
 - **SEE** [m:Net::HTTP#local_host=], [m:Net::HTTP#local_port]
 
@@ -356,6 +363,7 @@ end
 - **SEE** [m:Net::HTTP#local_host=], [m:Net::HTTP#local_port]
 
 ### def local_port -> nil | Integer | String
+
 接続に用いるローカルポートを返します。
 
 nil の場合システムが適当にローカルポートを
@@ -366,6 +374,7 @@ nil の場合システムが適当にローカルポートを
 - **SEE** [m:Net::HTTP#local_port=], [m:Net::HTTP#local_host]
 
 ### def local_port=(port)
+
 接続に用いるローカルポートを設定します。
 
 nil の場合システムが適当にローカルポートを
@@ -389,8 +398,8 @@ end
 
 - **SEE** [m:Net::HTTP#local_port=], [m:Net::HTTP#local_host]
 
-
 - **SEE** [m:Net::HTTP.new]
+
 ### def proxy? -> bool
 
 プロクシを介して接続するなら真を返します。
@@ -409,7 +418,6 @@ proxyaddr は時代遅れのメソッドです。
 
 - **SEE** [m:Net::HTTP#proxy_address=], [m:Net::HTTP#proxy_port], [m:Net::HTTP.new]
 
-
 ### def proxy_address=(address)
 
 プロクシのアドレス(ホスト名、IPアドレス)を指定します。
@@ -419,7 +427,6 @@ proxyaddr は時代遅れのメソッドです。
 - **param** `address` -- プロクシのホスト名、もしくはIPアドレスを表す文字列
 
 - **SEE** [m:Net::HTTP#proxy_address=], [m:Net::HTTP#proxy_port], [m:Net::HTTP.new]
-
 
 ### def proxy_port -> Integer|nil
 ### def proxyport -> Integer|nil
@@ -432,7 +439,6 @@ proxyport は時代遅れのメソッドです。
 
 - **SEE** [m:Net::HTTP#proxy_port=], [m:Net::HTTP#proxy_address], [m:Net::HTTP.new]
 
-
 ### def proxy_port=(port)
 
 プロクシのポート番号を設定します。
@@ -442,8 +448,8 @@ proxyport は時代遅れのメソッドです。
 - **param** `port` -- ポート番号(整数、文字列)
 - **SEE** [m:Net::HTTP#proxy_port], [m:Net::HTTP#proxy_address], [m:Net::HTTP.new]
 
-
 ### def proxy_pass -> String|nil
+
 プロクシ経由で接続し、さらにプロクシのユーザ認証を
 する HTTP オブジェクトなら認証のパスワードを返します。
 
@@ -451,6 +457,7 @@ proxyport は時代遅れのメソッドです。
 - **SEE** [m:Net::HTTP#proxy_pass=], [m:Net::HTTP#proxy_user], [m:Net::HTTP.new]
 
 ### def proxy_pass=(pass)
+
 プロクシのユーザ認証のパスワードを設定します。
 
 [m:Net::HTTP#start] で接続する前に設定する必要があります。
@@ -458,8 +465,8 @@ proxyport は時代遅れのメソッドです。
 - **param** `pass` -- パスワード文字列
 - **SEE** [m:Net::HTTP#proxy_pass], [m:Net::HTTP#proxy_user], [m:Net::HTTP.new]
 
-
 ### def proxy_user -> String|nil
+
 プロクシ経由で接続し、さらにプロクシのユーザ認証を
 する HTTP オブジェクトなら認証のユーザ名を返します。
 
@@ -467,15 +474,14 @@ proxyport は時代遅れのメソッドです。
 
 - **SEE** [m:Net::HTTP#proxy_pass], [m:Net::HTTP#proxy_user=], [m:Net::HTTP.new]
 
-
 ### def proxy_user=(user)
+
 プロクシのユーザ認証のユーザ名を設定します。
 
 [m:Net::HTTP#start] で接続する前に設定する必要があります。
 
 - **param** `user` -- ユーザ名文字列
 - **SEE** [m:Net::HTTP#proxy_pass], [m:Net::HTTP#proxy_user], [m:Net::HTTP.new]
-
 
 ### def proxy_uri -> String|nil
 
@@ -505,8 +511,8 @@ proxyport は時代遅れのメソッドです。
 
 - **SEE** [m:Net::HTTP#proxy_from_env?] 
 
-
 ### def open_timeout -> Integer|nil
+
 接続時に待つ最大秒数を返します。
 
 この秒数たってもコネクションが
@@ -517,6 +523,7 @@ proxyport は時代遅れのメソッドです。
 - **SEE** [m:Net::HTTP#read_timeout], [m:Net::HTTP#open_timeout=]
 
 ### def open_timeout=(seconds)
+
 接続時に待つ最大秒数を設定します。
 
 この秒数たってもコネクションが
@@ -528,11 +535,11 @@ nilを設定するとタイムアウトしなくなります。
   - [m:Net::HTTP.open]
   - [m:Net::HTTP#start]
 
-
 - **param** `second` -- 待つ秒数を指定します。
 - **SEE** [m:Net::HTTP#read_timeout], [m:Net::HTTP#open_timeout]
 
 ### def read_timeout -> Integer|nil
+
 読みこみ([man:read(2)]) 一回でブロックしてよい最大秒数
 を返します。
 
@@ -563,6 +570,7 @@ nilを設定するとタイムアウトしなくなります。
 - **SEE** [m:Net::HTTP#open_timeout], [m:Net::HTTP#read_timeout]
 
 ### def write_timeout -> Numeric|nil
+
 書き込み([man:write(2)]) 一回でブロックしてよい最大秒数
 を返します。
 
@@ -593,6 +601,7 @@ Windows では Net::WriteTimeout は発生しません。
 - **SEE** [m:Net::HTTP#open_timeout], [m:Net::HTTP#read_timeout], [m:Net::HTTP#write_timeout]
 
 ### def max_retries -> Integer
+
 冪等なリクエストが失敗した場合に再試行する最大回数を返します。
 
 デフォルトは 1 です。
@@ -600,6 +609,7 @@ Windows では Net::WriteTimeout は発生しません。
 - **SEE** [m:Net::HTTP#max_retries=]
 
 ### def max_retries=(times)
+
 冪等なリクエストが [c:Net::ReadTimeout]、[c:IOError]、[c:EOFError]、
 [c:Errno::ECONNRESET]、[c:Errno::ECONNABORTED]、[c:Errno::EPIPE]、
 [c:OpenSSL::SSL::SSLError]、[c:Timeout::Error] のいずれかで失敗した場合に
@@ -619,6 +629,7 @@ http.max_retries       # => 2
 - **SEE** [m:Net::HTTP#max_retries]
 
 ### def keep_alive_timeout -> Integer
+
 以前のリクエストで使ったコネクションの再利用(keep-alive)を許可する秒数を
 返します。
 
@@ -627,6 +638,7 @@ http.max_retries       # => 2
 - **SEE** [m:Net::HTTP#keep_alive_timeout=]
 
 ### def keep_alive_timeout=(seconds)
+
 以前のリクエストで使ったコネクションの再利用(keep-alive)を許可する秒数を
 設定します。
 
@@ -639,6 +651,7 @@ http.max_retries       # => 2
 - **SEE** [m:Net::HTTP#keep_alive_timeout]
 
 ### def continue_timeout -> Integer | nil
+
 「100 Continue」レスポンスを待つ秒数を返します。
 
 この秒数待ってもレスポンスが来ない場合は
@@ -649,6 +662,7 @@ http.max_retries       # => 2
 - **SEE** [m:Net::HTTP#continue_timeout=]
 
 ### def continue_timeout=(seconds)
+
 「100 Continue」レスポンスを待つ秒数を指定します。
 
 この秒数待ってもレスポンスが来ない場合は
@@ -852,7 +866,6 @@ body は空です。そのためこの動作はそれほど意味はありませ
             文字列で指定します。
 - **param** `header` -- リクエストの HTTP ヘッダをハッシュで指定します。
 
-
 head2 は時代遅れなので使わないでください。
 
 ```ruby title="例"
@@ -908,9 +921,8 @@ http.request_post('/cgi-bin/nice.rb', 'datadatadata...') {|response|
 
 - **SEE** [m:Net::HTTP#post], [m:Net::HTTPResponse#read_body]
 
-
-
 ### def put(path, data, initheader = nil) -> Net::HTTPResponse
+
 サーバ上の path にあるエンティティに対し文字列 data を
 PUT で送ります。
 
@@ -928,6 +940,7 @@ PUT で送ります。
 ### def request_put(path, data, initheader = nil) {|response| .... } -> Net::HTTPResponse
 ### def put2(path, data, initheader = nil) -> Net::HTTPResponse
 ### def put2(path, data, initheader = nil) {|response| .... } -> Net::HTTPResponse
+
 サーバ上の path にあるエンティティに対し文字列 data を
 PUT で送ります。
 
@@ -946,8 +959,8 @@ put2 は時代遅れなので使わないでください。
 
 - **SEE** [m:Net::HTTP#put]
 
-
 ### def send_request(name, path, data = nil, header = nil) -> Net::HTTPResponse
+
 HTTP リクエストをサーバに送り、そのレスポンスを
 [c:Net::HTTPResponse] のインスタンスとして返します。
 
@@ -987,6 +1000,7 @@ POST/PUT の時は data も与えられます
 #@# 
 
 ### def copy(path, initheader = nil) -> Net::HTTPResponse
+
 サーバの path に COPY リクエストを
 ヘッダを initheader として送ります。
 
@@ -1000,6 +1014,7 @@ POST/PUT の時は data も与えられます
 - **SEE** [c:Net::HTTP::Copy]
 
 ### def delete(path, initheader = nil) -> Net::HTTPResponse
+
 サーバの path に DELETE リクエストを
 ヘッダを initheader として送ります。
 
@@ -1013,6 +1028,7 @@ POST/PUT の時は data も与えられます
 - **SEE** [c:Net::HTTP::Delete]
 
 ### def lock(path, body, initheader = nil) -> Net::HTTPResponse
+
 サーバの path に LOCK リクエストを
 ヘッダを initheader, ボディを body として送ります。
 
@@ -1027,6 +1043,7 @@ POST/PUT の時は data も与えられます
 - **SEE** [c:Net::HTTP::Lock]
 
 ### def mkcol(path, body, initheader = nil) -> Net::HTTPResponse
+
 サーバの path に MKCOL リクエストを
 ヘッダが initheader, ボディを body として送ります。
 
@@ -1041,6 +1058,7 @@ POST/PUT の時は data も与えられます
 - **SEE** [c:Net::HTTP::Mkcol]
 
 ### def move(path, body, initheader = nil) -> Net::HTTPResponse
+
 サーバの path に MOVE リクエストを
 ヘッダが initheader, ボディを body として送ります。
 
@@ -1055,6 +1073,7 @@ POST/PUT の時は data も与えられます
 - **SEE** [c:Net::HTTP::Move]
 
 ### def options(path, initheader = nil) -> Net::HTTPResponse
+
 サーバの path に OPTIONS リクエストを
 ヘッダが initheader として送り、
 レスポンスを [c:Net::HTTPResponse] のオブジェクト
@@ -1067,6 +1086,7 @@ POST/PUT の時は data も与えられます
 - **SEE** [c:Net::HTTP::Options]
 
 ### def propfind(path, body, initheader = {'Depth' => '0'}) -> Net::HTTPResponse
+
 サーバの path に PROPFIND リクエストを
 ヘッダを initheader, ボディを body として送ります。
 
@@ -1106,6 +1126,7 @@ dest を指定した場合には
 - **param** `dest` -- 利用しないでください。
 
 ### def proppatch(path, body, initheader = nil) -> Net::HTTPResponse
+
 サーバの path に PROPPATCH リクエストを
 ヘッダを initheader, ボディを body として送ります。
 
@@ -1120,6 +1141,7 @@ dest を指定した場合には
 - **SEE** [c:Net::HTTP::Proppatch]
 
 ### def trace(path, initheader = nil) -> Net::HTTPResponse
+
 サーバの path に TRACE リクエストを
 ヘッダを initheader として送ります。
 
@@ -1132,8 +1154,8 @@ dest を指定した場合には
 
 - **SEE** [c:Net::HTTP::Trace]
 
-
 ### def unlock(path, body, initheader = nil) -> Net::HTTPResponse
+
 サーバの path に UNLOCK リクエストを
 ヘッダを initheader, ボディを body として送ります。
 
@@ -1146,14 +1168,14 @@ dest を指定した場合には
                   ハッシュで与えます。
 - **SEE** [c:Net::HTTP::Unlock]
 
-
 ### def use_ssl? -> bool
+
 SSLを利用して接続する場合に真を返します。
 
 - **SEE** [lib:net/https], [lib:openssl] 
 
-
 ### def use_ssl=(bool)
+
 HTTP で SSL/TLS を使うかどうかを設定します。
 
 HTTPS 使う場合は true を設定します。
@@ -1166,6 +1188,7 @@ HTTPS 使う場合は true を設定します。
 - **raise** `IOError` -- セッション開始後に設定を変更しようとすると発生します
 
 ### def ssl_timeout -> Integer | nil
+
 SSL/TLS のタイムアウト秒数を返します。
 
 設定されていない場合は nil を返します。
@@ -1189,6 +1212,7 @@ HTTP セッション開始時([m:Net::HTTP#start] など)に
      [m:OpenSSL::SSL::SSLContext#ssl_timeout=]
 
 ### def peer_cert -> OpenSSL::X509::Certificate | nil
+
 サーバの証明書を返します。
 
 SSL/TLS が有効でなかったり、接続前である場合には nil
@@ -1197,11 +1221,13 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 - **SEE** [m:OpenSSL::SSL::SSLSocket#peer_cert]
 
 ### def key -> OpenSSL::PKey::PKey | nil
+
 クライアント証明書の秘密鍵を返します。
 
 - **SEE** [m:Net::HTTP#key=], [m:OpenSSL::SSL::SSLContext#key]
 
 ### def key=(key)
+
 クライアント証明書の秘密鍵を設定します。
 
 [c:OpenSSL::PKey::RSA] オブジェクトか
@@ -1214,11 +1240,13 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
      [m:OpenSSL::SSL::SSLContext#key=]
 
 ### def cert -> OpenSSL::X509::Certificate | nil
+
 クライアント証明書を返します。
 
 - **SEE** [m:Net::HTTP#cert=], [m:OpenSSL::SSL::SSLContext#cert]
 
 ### def cert=(certificate)
+
 クライアント証明書を設定します。
 
 デフォルトは nil (クライアント証明書による認証をしない)です。
@@ -1227,11 +1255,13 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 - **SEE** [m:Net::HTTP#cert], [m:OpenSSL::SSL::SSLContext#cert=]
 
 ### def ca_file -> String | nil
+
 信頼する CA 証明書ファイルのパスを返します。
 
 - **SEE** [m:Net::HTTP#ca_file=], [m:OpenSSL::SSL::SSLContext#ca_file]
 
 ### def ca_file=(path)
+
 信頼する CA 証明書ファイルのパスを文字列で設定します。
 
 ファイルには複数の証明書を含んでいても構いません。
@@ -1243,11 +1273,13 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 - **SEE** [m:Net::HTTP#ca_file], [m:OpenSSL::SSL::SSLContext#ca_file=]
 
 ### def ca_path -> String | nil
+
 信頼する CA 証明書ファイルが存在するディレクトリを設定します。
 
 - **SEE** [m:Net::HTTP#ca_path=], [m:OpenSSL::SSL::SSLContext#ca_path]
 
 ### def ca_path=(path)
+
 信頼する CA 証明書ファイルが存在するディレクトリを設定します。
 
 ファイル名はハッシュ値の文字列にしなければなりません。
@@ -1259,11 +1291,13 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 - **SEE** [m:Net::HTTP#ca_path], [m:OpenSSL::SSL::SSLContext#ca_path=]
 
 ### def verify_mode -> Integer | nil
+
 検証モードを返します。
 
 デフォルトは nil です。
 
 ### def verify_mode=(mode)
+
 検証モードを設定します。
 
 詳しくは [m:OpenSSL::SSL::SSLContext#verify_mode] を見てください。
@@ -1274,6 +1308,7 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 デフォルトは nil で、VERIFY_NONE を意味します。
 
 ### def verify_callback -> Proc
+
 自身に設定されている検証をフィルタするコールバックを
 返します。
 
@@ -1284,6 +1319,7 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
      [m:OpenSSL::SSL::SSLContext#verify_callback]
 
 ### def verify_callback=(proc)
+
 検証をフィルタするコールバックを設定します。
 
 詳しくは [m:OpenSSL::X509::Store#verify_callback=] や
@@ -1295,11 +1331,13 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
      [m:OpenSSL::SSL::SSLContext#verify_callback=]
 
 ### def verify_depth -> Integer
+
 証明書チェイン上の検証する最大の深さを返します。
 
 - **SEE** [m:Net::HTTP#verify_depth=], [m:OpenSSL::SSL::SSLContext#verify_depth]
 
 ### def verify_depth=(depth)
+
 証明書チェイン上の検証する最大の深さを設定します。
 
 デフォルトは nil で、この場合 OpenSSL のデフォルト値(9)が使われます。
@@ -1308,12 +1346,14 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 - **SEE** [m:Net::HTTP#verify_depth], [m:OpenSSL::SSL::SSLContext#verify_depth=]
 
 ### def cert_store -> OpenSSL::X509::Store | nil
+
 接続相手の証明書の検証のために使う、信頼している CA 証明書を
 含む証明書ストアを返します。
 
 - **SEE** [m:Net::HTTP#cert_store], [m:OpenSSL::SSL::SSLContext#cert_store=]
 
 ### def cert_store=(store)
+
 接続相手の証明書の検証のために使う、信頼している CA 証明書を
 含む証明書ストアを設定します。
 
@@ -1325,11 +1365,13 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 - **SEE** [m:Net::HTTP#cert_store=], [m:OpenSSL::SSL::SSLContext#cert_store]
 
 ### def ssl_version -> String | Symbol | nil
+
 利用するプロトコルの種類を返します。
 
 - **SEE** [m:Net::HTTP#ssl_version=]
 
 ### def ssl_version=(ver)
+
 利用するプロトコルの種類を指定します。
 
 [m:OpenSSL::SSL::SSLContext.new] で指定できるものと同じです。
@@ -1337,8 +1379,8 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 - **param** `ver` -- 利用するプロトコルの種類(文字列 or シンボル)
 - **SEE** [m:Net::HTTP#ssl_version], [m:OpenSSL::SSL::SSLContext#ssl_version=]
 
-
 ### def ciphers -> String | [String] | nil
+
 [m:Net::HTTP#ciphers] で設定した値を返します。
 
 [m:OpenSSL::SSL::SSLContext#ciphers] が返す値とは
@@ -1347,6 +1389,7 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 - **SEE** [m:Net::HTTP#ciphers=]
 
 ### def ciphers=(ciphers)
+
 利用可能な共通鍵暗号を設定します。
 
 [m:OpenSSL::SSL::SSLContext#ciphers=] と同じ形式で
@@ -1354,5 +1397,4 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 
 - **param** `ciphers` -- 利用可能にする共通鍵暗号の種類
 - **SEE** [m:Net::HTTP#ciphers]
-
 

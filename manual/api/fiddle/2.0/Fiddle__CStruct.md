@@ -2,6 +2,7 @@
 library: fiddle/import
 ---
 # class Fiddle::CStruct
+
 C の構造体を表すクラスです。
 
 このクラスは直接は使わず、[m:Fiddle::Importer#struct] を用いて
@@ -11,11 +12,13 @@ C の構造体を表すクラスです。
 構造体の各メンバへのアクセサが定義されています。
 このアクセサはシグネチャの型とメンバ名に従って定義されます。
 例えば 
+
 ```ruby
 require 'fiddle/import'
 include Fiddle::Importer
 S = struct(["long foo", "void* bar"])
 ```
+
 とすると、 S#foo, S#foo= というアクセサが Integer とやりとり
 するように定義され、 S#bar, S#bar= というアクセサが Fiddle::Pointer
 でやりとりするように定義されます。
@@ -26,28 +29,35 @@ S = struct(["long foo", "void* bar"])
 
 ## Class Methods
 ### def new(addr) -> Fiddle::CStruct
+
 addr のアドレスが指すメモリを構造体のアドレスとみなし、
 構造体を作ります。
 
 C におけるキャストと似ています。
+
 ```c
 return (struct foo*)addr;
 ```
+
 というコードと対応していると言えます。
 
 - **param** `addr` -- アドレス
 
 ### def malloc -> Fiddle::CStruct
+
 構造体のためのメモリを確保し、Fiddle::CStruct の(子孫クラスの)
 オブジェクトで返します。
 
 C における
+
 ```c
 return (struct foo*)malloc(sizeof(struct foo));
 ```
+
 というコードと対応していると言えます。
 
 ### def size -> Integer
+
 構造体のサイズをバイト数で返します。
 
 このメソッドが返す値は C の構造体としてのサイズです。
@@ -55,9 +65,11 @@ Ruby のオブジェクトとしてはより大きなメモリを消費してい
 
 ## Instance Methods
 ### def to_i -> Integer
+
 保持している構造体の先頭アドレスを整数で返します。
 
 ### def to_ptr -> Fiddle::Pointer
+
 保持している構造体へのポインタを返します。
 
 # class Fiddle::CUnion

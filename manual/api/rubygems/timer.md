@@ -3,7 +3,6 @@ type: library
 ---
 このライブラリは、ログ取得のために $log というグローバル変数を定義します。
 
-
 # reopen Kernel
 
 ## Private Instance Methods

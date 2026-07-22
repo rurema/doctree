@@ -21,12 +21,14 @@ SPKI オブジェクトを生成します。
 ## Instance Methods
 
 ### def challenge -> String
+
 SPKI オブジェクトに設定されたチャレンジ文字列を返します。
 
 - **raise** `OpenSSL::Netscape::SPKIError` -- 文字列が設定されていない場合に発生します
 - **SEE** [m:OpenSSL::Netscape::SPKI#challenge=]
 
 ### def challenge=(chg)
+
 SPKI オブジェクトにチャレンジ文字列を設定します。
 
 - **param** `chg` -- 設定する文字列
@@ -34,12 +36,14 @@ SPKI オブジェクトにチャレンジ文字列を設定します。
 - **SEE** [m:OpenSSL::Netscape::SPKI#challenge]
 
 ### def public_key -> OpenSSL::PKey::PKey
+
 SPKI オブジェクトに設定された公開鍵を返します。
 
 - **raise** `OpenSSL::Netscape::SPKIError` -- 公開鍵が設定されていない場合に発生します
 - **SEE** [m:OpenSSL::Netscape::SPKI#public_key=]
 
 ### def public_key=(pubkey)
+
 SPKI オブジェクトに公開鍵を設定します。
 
 - **param** `pubkey` -- 設定する公開鍵([c:OpenSSL::PKey::PKey] オブジェクト)
@@ -47,6 +51,7 @@ SPKI オブジェクトに公開鍵を設定します。
 - **SEE** [m:OpenSSL::Netscape::SPKI#public_key]
 
 ### def sign(key, digest) -> self
+
 SPKI オブジェクトに署名をします。
 
 - **param** `key` -- 署名に使う秘密鍵([c:OpenSSL::PKey::PKey] オブジェクト)
@@ -55,20 +60,22 @@ SPKI オブジェクトに署名をします。
 - **SEE** [m:OpenSSL::Netscape::SPKI#verify]
 
 ### def to_der -> String
-SPKI オブジェクトを DER 形式の文字列に変換します。
 
+SPKI オブジェクトを DER 形式の文字列に変換します。
 
 ### def to_pem -> String
 ### def to_s -> String
+
 SPKI オブジェクトを PEM 形式の文字列に変換します。
 
 - **raise** `OpenSSL::Netscape::SPKIError` -- 変換に失敗した場合に発生します
 
-
 ### def to_text -> String
+
 SPKI オブジェクトを人間が読める形式の文字列に変換します。
 
 ### def verify(key) -> bool
+
 署名を検証します。
 
 検証に成功した場合は true を返し、失敗した場合は false を返します。
@@ -78,5 +85,6 @@ SPKI オブジェクトを人間が読める形式の文字列に変換します
 - **SEE** [m:OpenSSL::Netscape::SPKI#sign]
 
 # class OpenSSL::Netscape::SPKIError < OpenSSL::OpenSSLError
+
 Netscape SPKI 関連のエラーが生じた場合に発生する例外です。
 

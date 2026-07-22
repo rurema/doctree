@@ -58,6 +58,7 @@ p CGI.escapeHTML('<script type="text/javascript">alert("警告")</script>')
 
 ### def unescapeHTML(string) -> String
 ### def unescape_html(string) -> String
+
 与えられた文字列中の実体参照のうち、&amp; &gt; &lt; &quot;
 と数値指定がされているもの (&#0ffff など) を元の文字列に置換します。
 
@@ -71,6 +72,7 @@ p CGI.unescapeHTML("3 &gt; 1")   #=> "3 > 1"
 
 ### def escapeElement(string, *elements) -> String
 ### def escape_element(string, *elements) -> String
+
 第二引数以降に指定したエレメントのタグだけを実体参照に置換します。
 
 - **param** `string` -- 文字列を指定します。
@@ -170,5 +172,4 @@ HTML 上でエスケープする文字列の変換テーブルを返します。
 [rfc:822] で定義されている月名の略称を返します。
 
 - **SEE** [rfc:822]
-
 

@@ -65,6 +65,7 @@ Tracer.off
 [m:Kernel?.set_trace_func]
 
 # class Tracer < Object
+
 実行トレース出力をとる機能を提供するクラスです。
 
 ## Class Methods
@@ -146,8 +147,6 @@ end
 与えられた手続き(ブロックまたはProcオブジェクト)が真を返せば
 トレースは出力されます。
 
-
-
 フィルタは複数追加でき、
 そのうち一つでも偽を返すとトレースの出力は抑制されます。
 
@@ -190,7 +189,6 @@ end
 
 - **`klass`**:
   現在呼び出されているメソッドのクラスオブジェクト。
-
 
 ### def verbose -> bool
 ### def verbose? -> bool
@@ -245,7 +243,6 @@ Tracer.on {
 fp.close
 ```
 
-
 ### def display_c_call -> bool
 ### def display_c_call? -> bool
 
@@ -284,7 +281,6 @@ fp.close
 
 ### def stdout_mutex -> Mutex
 #@todo
-
 
 ## Instance Methods
 
@@ -326,9 +322,7 @@ fp.close
 ### def trace_func(event, file, line, id, binding, klass, *) -> object | nil
 #@todo
 
-
 ## Constants
-
 
 ### const EVENT_SYMBOL
   
@@ -348,7 +342,6 @@ EVENT_SYMBOL = {
 ```
 
 - **SEE** [m:Tracer.add_filter]
-
 
 ### const Single -> Tracer
 #@todo

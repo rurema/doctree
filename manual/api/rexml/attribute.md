@@ -18,6 +18,7 @@ include:
 
 ### def new(attribute_to_clone, parent = nil) -> REXML::Attribute
 ### def new(attribute, value, parent = nil) -> REXML::Attribute
+
 新たな属性オブジェクトを生成します。
 
 2種類の初期化が可能です。
@@ -41,14 +42,14 @@ parent を省略した場合は nil が設定されます。
 - **param** `value` -- 属性の値
 - **param** `parent` -- 生成される属性が所属する要素([c:REXML::Element])
 
-
 ## Instance Methods
 
 ### def element -> REXML::Element
+
 その属性が属する要素を返します。
 
-
 ### def normalized=(value)
+
 正規化された属性値を設定します。
 
 通常はライブラリが自動的にこの値を設定するので
@@ -57,6 +58,7 @@ parent を省略した場合は nil が設定されます。
 - **param** `value` -- 正規化された属性値
 
 ### def prefix -> String
+
 属性の名前空間を返します。
 
 ```ruby
@@ -71,6 +73,7 @@ p a.prefix                                   # -> ""
 ```
 
 ### def namespace(arg = nil) -> String | nil
+
 属性の名前空間の URI を返します。
 
 URI が定義されていない場合は nil を返します。
@@ -88,8 +91,8 @@ p e.attributes.get_attribute("r").prefix  # => "ns"
 p e.attributes.get_attribute("r").namespace # => "http://www.example.com/ns"
 ```
 
-
 ### def ==(other) -> bool
+
 属性の名前と値が other と一致する場合に真を返します。
 
 #@# hash が定義されているのに eql? が定義されていない
@@ -97,6 +100,7 @@ p e.attributes.get_attribute("r").namespace # => "http://www.example.com/ns"
 #@# #@todo
 
 ### def to_string -> String
+
 "name='value'" という形式の文字列を返します。
 
 ```ruby
@@ -107,28 +111,33 @@ p e.attributes.get_attribute("r").to_string # => "ns:r='rval'"
 ```
 
 ### def to_s -> String
+
 正規化された属性値を返します。
 
 属性値の正規化については XML の仕様を参考にしてください。
 
-
 ### def value -> String
+
 正規化されていない属性値を返します。
 
 属性値の正規化については XML の仕様を参考にしてください。
 
 ### def clone -> REXML::Element
+
 self を複製し返します。
 
 ### def element=(element)
+
 self が属する要素を変更します。
 
 - **param** `element` -- 変更先の要素([c:REXML::Element])
 
 ### def remove -> ()
+
 self を所属する要素から取り除きます。
 
 ### def write(output, indent = -1)  -> object
+
 output に self の情報を name='value' という形式で書き込みます。
 
 output が返ります。
@@ -137,10 +146,11 @@ output が返ります。
 - **param** `indent` -- インデントレベル、ここでは無視される
 
 ### def node_type -> Symbol
+
 「:attribute」というシンボルを返します。
 
-
 ### def xpath -> String
+
 その属性を指定する xpath 文字列を返します。
 
 例えば "/foo/bar/@ns:r" という文字列を返します。

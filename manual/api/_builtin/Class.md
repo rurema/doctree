@@ -95,7 +95,6 @@ end
 p klass.allocate.initialized? #=> false
 ```
 
-
 ### def new(*args, &block)    -> object
 
 自身のインスタンスを生成して返します。

@@ -144,10 +144,13 @@ mon_enter でロックした回数だけ mon_exit を
 スレッドはブロックしません。
 
 ### def new_cond -> MonitorMixin::ConditionVariable
+
 モニターに関連付けられた、新しい [c:MonitorMixin::ConditionVariable] を生成して返します。
 
 ### def mon_locked? -> bool
+
 モニターがロックされているときに true を返します。
 
 ### def mon_owned? -> bool
+
 カレントスレッドがモニターをロックしているときに true を返します。

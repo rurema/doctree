@@ -6,7 +6,6 @@ library: openssl
 [c:OpenSSL::X509::Extension] を簡便に生成するための
 クラスです。
 
-
 ```ruby title="例"
 require 'openssl'
 # ca_cert: CA の証明書オブジェクト
@@ -38,10 +37,10 @@ p factory.create_extension("authorityKeyIdentifier", "keyid,issuer:always")
 newcert.add_extension(factory.create_extension("basicConstraints", "CA:FALSE"))
 ```
 
-
 ## Class Methods
 
 ### def new(issuer_cert=nil, subject_cert=nil, subject_req=nil, crl=nil) -> OpenSSL::X509::ExtensionFactory
+
 ExtensionFactory オブジェクトを生成します。
 
 証明書の発行者や所有者の [c:OpenSSL::X509::Certificate] オブジェクトや
@@ -72,6 +71,7 @@ ExtensionFactory オブジェクトを生成します。
 ## Instance Methods
 
 ### def create_ext(oid, value, critical = false)  -> OpenSSL::X509::Extension
+
 [c:OpenSSL::X509::Extension] のインスタンスを生成して返します。
 
 - **param** `oid` -- 拡張領域の識別子を表す文字列
@@ -80,6 +80,7 @@ ExtensionFactory オブジェクトを生成します。
 
 ### def create_extension(obj)  -> OpenSSL::X509::Extension
 ### def create_extension(oid, value, critical=false)  -> OpenSSL::X509::Extension
+
 [c:OpenSSL::X509::Extension] のインスタンスを生成して返します。
 
 引数の個数が1個である場合、それが配列、ハッシュ、文字列のいずれかである
@@ -99,52 +100,63 @@ ExtensionFactory オブジェクトを生成します。
 - **param** `critical` -- 重要度(真偽値)
 
 ### def issuer_certificate -> OpenSSL::X509::Certificate | nil
+
 自身に設定されている発行者(issuer)の証明書オブジェクトを返します。
 
 証明書が設定されていない場合は nil を返します。
 
-
 ### def issuer_certificate=(cert)
+
 自身に発行者(issuer)の証明書オブジェクトを設定します。
 
 - **param** `cert` -- 設定する証明書([c:OpenSSL::X509::Certificate])オブジェクト
 - **SEE** [m:OpenSSL::X509::ExtensionFactory.new]
+
 ### def subject_certificate -> OpenSSL::X509::Certificate | nil
+
 自身に設定されている所有者(subject)の証明書オブジェクトを返します。
 
 証明書が設定されていない場合は nil を返します。
 
 ### def subject_certificate=(name)
+
 自身に所有者(subject)の証明書オブジェクトを設定します。
 
 - **param** `cert` -- 設定する証明書([c:OpenSSL::X509::Certificate])オブジェクト
 - **SEE** [m:OpenSSL::X509::ExtensionFactory.new]
 
 ### def subject_request -> OpenSSL::X509::Request | nil
+
 自身に設定されている証明書署名要求オブジェクトを返します。
 
 設定されていない場合は nil を返します。
 
 ### def subject_request=(req)
+
 自身に証明書署名要求オブジェクトを設定します。
 
 - **param**  `req` -- 設定する証明書署名要求([c:OpenSSL::X509::Request])オブジェクト
 - **SEE** [m:OpenSSL::X509::ExtensionFactory.new]
 
 ### def crl -> OpenSSL::X509::CRL | nil
+
 自身に設定された証明書失効リストオブジェクトを返します。
 
 設定されていない場合は nil を返します。
+
 ### def crl=(crl)
+
 自身に証明書失効リストオブジェクトを設定します。
 
 - **param** `crl` -- 設定する証明書失効リスト([c:OpenSSL::X509::CRL])オブジェクト
 - **SEE** [m:OpenSSL::X509::ExtensionFactory.new]
 
 ### def config -> OpenSSL::Config
+
 自身に設定されているコンフィグファイルオブジェクトを設定します。
 
 ### def config=(config) 
+
 自身にコンフィグファイルオブジェクトを設定します。
 
 ```ruby title="例"
@@ -155,6 +167,7 @@ factory.config = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 - **param** `config` -- 設定ファイル([c:OpenSSL::Config] オブジェクト)
 
 ### def create_ext_from_array(ary) -> OpenSSL::X509::Extension
+
 [oid, value, critical] もしくは [oid, value] という配列から
 [c:OpenSSL::X509::Extension] オブジェクトを生成します。
 
@@ -162,12 +175,15 @@ factory.config = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 - **SEE** [m:OpenSSL::X509::ExtensionFactory#create_ext]
 
 ### def create_ext_from_hash(hash)  -> OpenSSL::X509::Extension
+
 ハッシュから [c:OpenSSL::X509::Extension] オブジェクトを生成します。
 
 渡すハッシュテーブルは 
+
 ```text
 {"oid" => OID文字列, "value" => value文字列, "critical" => 真偽値 }
 ```
+
 という内容が必要です。"critical" を省略した場合は false が
 渡されるのと同じになります。
 
@@ -175,6 +191,7 @@ factory.config = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 - **SEE** [m:OpenSSL::X509::ExtensionFactory#create_ext]
 
 ### def create_ext_from_string(str)  -> OpenSSL::X509::Extension
+
 文字列から [c:OpenSSL::X509::Extension] オブジェクトを生成します。
 
 文字列は "oid = value" もしくは "oid = critical, value" という
@@ -182,7 +199,4 @@ factory.config = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 
 - **param** `str` -- 生成する拡張領域のデータの文字列
 - **SEE** [m:OpenSSL::X509::ExtensionFactory#create_ext]
-
-
-
 

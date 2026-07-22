@@ -20,13 +20,11 @@ Ruby の Fixnum クラスは immutable です。
 つまり、オブジェクト自体を破壊的に変更することはできません。
 [c:Bignum] も同様です。
 
-
 ```ruby title="例"
 p 100000.class           # => Fixnum
 p 100000 * 100000        # => 100000000
 p (100000 * 100000).class  # => Bignum
 ```
-
 
 ## Instance Methods
 
@@ -91,7 +89,6 @@ self を other で割った商 q と余り r を、 [q, r] という 2 要素の
 - **param** `other` -- self を割る数。
 
 - **SEE** [m:Numeric#divmod]
-
 
 ### def fdiv(other) -> Float | Complex
 
@@ -173,6 +170,7 @@ p 2 <=> 1 #=> 1
              そうでなければ false を返します。
 
 ### def ~        -> Fixnum | Bignum
+
 ビット演算子。否定を計算します。
 
 ```ruby
@@ -182,6 +180,7 @@ p ~-4 #=> 3
 ```
 
 ### def |(other) -> Fixnum | Bignum
+
 ビット二項演算子。論理和を計算します。
 
 - **param** `other` -- 数値
@@ -192,6 +191,7 @@ p 2 | 3 #=> 3
 ```
 
 ### def &(other) -> Fixnum | Bignum
+
 ビット二項演算子。論理積を計算します。
 
 - **param** `other` -- 数値
@@ -202,6 +202,7 @@ p 2 & 3 #=> 2
 ```
 
 ### def ^(other) -> Fixnum | Bignum
+
 ビット二項演算子。排他的論理和を計算します。
 
 - **param** `other` -- 数値
@@ -223,6 +224,7 @@ p -1 << 1 #=> -2
 ```
 
 ### def >>(bits) -> Fixnum | Bignum
+
 シフト演算子。bits だけビットを右にシフトします。
 
 右シフトは、符号ビット(最上位ビット(MSB))が保持されます。
@@ -269,7 +271,6 @@ p 12345.to_s(16) #=> "3039"
 p 12345.to_s(36) #=> "9ix"
 ```
 
-
 ### def zero? -> bool
 
 self が 0 の場合に true を返します。そうでない場合に false を返します。
@@ -281,7 +282,6 @@ self が奇数の場合に true を返します。そうでない場合に false
 ### def even? -> bool
 
 self が偶数の場合に true を返します。そうでない場合に false を返します。
-
 
 ### def abs -> Fixnum | Bignum
 ### def magnitude -> Fixnum | Bignum

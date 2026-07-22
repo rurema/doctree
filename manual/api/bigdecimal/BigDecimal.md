@@ -198,7 +198,6 @@ NaN を表す [c:BigDecimal] オブジェクトを返します。
 
 ## Class Methods
 
-
 ### def mode(s)    -> Integer | nil
 ### def mode(s, v) -> Integer | nil
 
@@ -336,8 +335,6 @@ while (v + 1.0 > 1.0) {
 - **raise** `TypeError` -- 引数に不正な文字が含まれる場合に発生します。
 
 - **SEE** [m:BigDecimal#_dump], [m:Marshal?.dump], [m:Marshal?.load]
-
-
 
 ## Instance Methods
 
@@ -683,7 +680,6 @@ p BigDecimal("-Infinity").sign # => -3
 p BigDecimal("0").sign == BigDecimal::SIGN_POSITIVE_ZERO  # => true
 ```
 
-
 ### def nan? -> bool
 
 self が NaN のときに true を返します。それ以外のときに false を返します。
@@ -761,8 +757,8 @@ self の n 乗を計算します。
 
 - **param** `prec` -- 有効桁数を整数で指定します。
 
-
 - **SEE** [m:Integer#pow]
+
 ### def sqrt(n) -> BigDecimal
 
 self の有効桁 n 桁の平方根 (n の平方根ではありません) をニュートン法で

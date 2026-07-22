@@ -167,7 +167,6 @@ row["header1", 1] = "updated"
 p row  # => #<CSV::Row "header1":"row1_1" "header2":"row1_2" "header1":"updated">
 ```
 
-
 - **SEE** [m:CSV::Row#field]
 
 ### def []=(header, offset, value)
@@ -283,6 +282,7 @@ p row.field?(5) # => false
 ```
 
 ### def field_row? -> bool
+
 フィールド行であれば真を返します。そうでなければ偽を返します。
 
 ```ruby title="例"
@@ -318,6 +318,7 @@ p row.values_at("a", 1, 2..3) # => ["1", "2", "3", nil]
 
 ### def header?(name) -> bool
 ### def include?(name) -> bool
+
 自身のヘッダに与えられた値が含まれている場合は真を返します。
 そうでない場合は偽を返します。
 
@@ -332,6 +333,7 @@ p row.header?("header3") # => false
 ```
 
 ### def header_row? -> bool
+
 ヘッダ行であれば真を返します。そうでなければ偽を返します。
 
 ```ruby title="例"
@@ -344,6 +346,7 @@ p row.header_row?      # => false
 ```
 
 ### def headers -> Array
+
 この行のヘッダのリストを返します。
 
 ```ruby title="例"
@@ -373,6 +376,7 @@ p row.index("header1", 1) # => 2
 - **SEE** [m:CSV::Row#field]
 
 ### def inspect -> String
+
 ASCII 互換であるエンコーディングの文字列で自身の情報を返します。
 
 ```ruby title="例"
@@ -392,9 +396,11 @@ p row.inspect # => "#<CSV::Row \"header1\":1 \"header2\":2 \"header1\":3>"
 - **SEE** [m:Array#size]
 
 ### def push(*args) -> self
+
 複数のフィールドを追加するためのショートカットです。
 
 以下とおなじです:
+
 ```ruby
 args.each { |arg| csv_row << arg }
 ```

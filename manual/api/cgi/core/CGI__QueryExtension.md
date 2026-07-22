@@ -121,7 +121,6 @@ p cgi.params['']            # => nil
 
 - **param** `hash` -- ハッシュを指定します。
 
-
 ### def path_info -> String
 
 ENV['PATH_INFO'] を返します。
@@ -203,5 +202,4 @@ ENV['HTTP_USER_AGENT'] を返します。
 
 ### def unescape_filename? -> bool
 #@# nodoc
-
 

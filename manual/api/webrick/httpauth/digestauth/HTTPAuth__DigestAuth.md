@@ -86,4 +86,3 @@ digest_auth = WEBrick::HTTPAuth::DigestAuth.new config
 
 Qop キーの値を返します。
 
-

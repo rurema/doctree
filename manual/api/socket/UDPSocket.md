@@ -9,6 +9,7 @@ UDP/IPデータグラム型ソケットのクラス。
 
 ### def open(address_family=Socket::AF_INET) -> UDPSocket
 ### def new(address_family=Socket::AF_INET) -> UDPSocket
+
 新しい UDP ソケットを返します。
 
 address_family には Socket::AF_INET のような整数、:INET のような
@@ -22,9 +23,11 @@ p UDPSocket.new(Socket::AF_INET6) # => #<UDPSocket:fd 4>
 ```
 
 - **param** `address_family` -- ソケットのアドレスファミリー
+
 ## Instance Methods
 
 ### def bind(host, port) -> 0
+
 ソケットを host の port に [man:bind(2)] します。
 
 bind したポートから [m:BasicSocket#recv] でデータを受け取ることができます。
@@ -91,6 +94,7 @@ host, port に関しては [ref:lib:socket#host_format]、
 - **param** `sockaddr_to` -- 送り先のアドレス情報
 
 ### def recvfrom_nonblock(maxlen, flags=0) -> [String, Array]
+
 ソケットをノンブロッキングモードに設定した後、
 [man:recvfrom(2)] でソケットからデータを受け取ります。
 

@@ -38,7 +38,6 @@ POP サーバー上のメール一通を表現するクラス。
 pop, all, mail はすべて同じ効果ですが、
 all と mail は obsolete です。
 
-
 ```ruby title="使用例"
 require 'net/pop'
 
@@ -49,7 +48,6 @@ Net::POP3.start('pop.example.com', 110,
   end
 }
 ```
-
 
 ```ruby title="ブロックを利用する例"
 require 'net/pop'
@@ -69,6 +67,7 @@ Net::POP3.start('pop.example.com', 110) {|pop|
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 
 ### def header(dest='') -> String
+
 メールヘッダを受信し、文字列として返します。
 
 destを渡すとそのオブジェクトにデータを書き込みますが、これは
@@ -80,6 +79,7 @@ obsolete なので使わないでください。
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 
 ### def top(lines, dest='') -> String
+
 メールヘッダと本文 lines 行を受信し、文字列として返します。
 
 destを渡すとそのオブジェクトにデータを書き込みますが、これは
@@ -91,9 +91,9 @@ obsolete なので使わないでください。
 - **raise** `Net::POPError` -- サーバが認証失敗以外のエラーを報告した場合に発生します
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 
-
 ### def delete -> ()
 ### def delete! -> ()
+
 メールに削除マークを付けます。
 
 削除マークを付けたメールは読み出せなくなります。
@@ -106,16 +106,20 @@ delete! は obsolete です。
 - **raise** `Net::POPError` -- サーバが認証失敗以外のエラーを報告した場合に発生します
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 - **SEE** [m:Net::POPMail#deleted?]
+
 ### def deleted? -> bool
+
 メールに削除マークが付けられている場合に真を返します。
 
 - **SEE** [m:Net::POPMail#delete]
 
 ### def size -> Integer
 ### def length -> Integer
+
 メールのサイズ (単位はバイト) をかえします。
 
 ### def number -> Integer
+
 メールに対して振られた、そのメールボックスで一意な番号を返します。
 
 サーバに接続しなおすとこの番号は変化する場合があります。
@@ -124,6 +128,7 @@ delete! は obsolete です。
 
 ### def uidl -> String
 ### def unique_id -> String
+
 メールに対して振られた、サーバ上で一意な識別子 (UIDL) をかえします。
 
 [m:Net::POPMail#number] と違い、

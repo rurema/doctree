@@ -29,7 +29,6 @@ db.transaction do
 end
 ```
 
-
 ## Class Methods
 
 ### def new(file, thread_safe = false) -> PStore
@@ -74,8 +73,6 @@ db.transaction(true) do |pstore|
   pstore["root"] = 'aaa' # ~> PStore::Error
 end
 ```
-
-
 
 ### def [](name) -> object
 
@@ -228,8 +225,8 @@ db.transaction do |pstore|
 end
 ```
 
-
 ### def ultra_safe -> bool
+
 真であれば、パフォーマンスと引き換えにファイル更新の衝突を避けることができます。
 デフォルトは偽です。
 
@@ -237,14 +234,13 @@ end
 (e.g. all POSIX platforms: Linux, Mac OS X, FreeBSD, etc)
 
 ### def ultra_safe=(flag)
+
 真をセットすると、パフォーマンスと引き換えにファイル更新の衝突を避けることができます。
 
 このフラグの効果があるのは一部のプラットフォームだけです。
 (e.g. all POSIX platforms: Linux, Mac OS X, FreeBSD, etc)
 
 - **param** `flag` -- 真偽値を指定します。
-
-
 
 ## Private Instance Methods
 
@@ -254,20 +250,27 @@ end
 
 ## Constants
 ### const RDWR_ACCESS -> Integer
+
 内部で利用する定数です。
 
 ### const RD_ACCESS -> Integer
+
 内部で利用する定数です。
 
 ### const WR_ACCESS -> Integer
+
 内部で利用する定数です。
+
 ### const EMPTY_MARSHAL_CHECKSUM -> String
+
 内部で利用する定数です。
 
 ### const EMPTY_MARSHAL_DATA -> String
+
 内部で利用する定数です。
 
 ### const EMPTY_STRING -> String
+
 内部で利用する定数です。
 
 # class PStore::Error < StandardError

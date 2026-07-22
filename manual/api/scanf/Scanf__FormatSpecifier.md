@@ -12,17 +12,11 @@ until: "2.7.0"
 ### def count_space?
 #@todo
 
-
-
 ### def letter
 #@todo
 
-
-
 ### def match(str)
 #@todo
-
-
 
 ### def matched
 #@todo
@@ -33,23 +27,15 @@ until: "2.7.0"
 ### def mid_match?
 #@todo
 
-
-
 ### def re_string
 #@todo
 
 ### def to_re
 #@todo
 
-
-
 ### def to_s
 #@todo
 
-
-
 ### def width
 #@todo
-
-
 

@@ -124,7 +124,6 @@ RubyGems ライブラリの結合テストをするのに便利です。
 
 - **return** -- 第一要素を [c:Gem::Specification]、第二要素を取得元の URL とする配列を要素とする配列を返します。
 
-
 ### def set_cache_data(hash) -> true
 
 直接キャッシュデータをセットします。

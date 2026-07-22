@@ -12,10 +12,12 @@ library: continuation
 とでいつでも記憶した状態を継続できます。
 
 C 言語の setjmp()/longjmp() がわかる人は
+
 ```text
 setjmp() == callcc {|c| }
 longjmp() == c.call
 ```
+
 と考えれば、わかりやすいかも知れません(ただし、callcc はスタックが深く
 なる方向にもジャンプ出来るという違いがあります)
 

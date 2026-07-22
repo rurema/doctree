@@ -23,7 +23,6 @@
 ### def new(event_type, event_arg = nil)
 #@todo
 
-
 ## Instance Methods
 
 ### def event_type

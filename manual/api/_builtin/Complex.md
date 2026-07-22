@@ -128,7 +128,6 @@ p Complex(2)     <=> 2           #=> 0
 p Complex(2)     <=> 3           #=> -1
 ```
 
-
 ### def <(other)    -> bool
 {: undef}
 
@@ -143,7 +142,6 @@ p Complex(2)     <=> 3           #=> -1
 
 ### def between?(min, max)    -> bool
 {: undef}
-
 
 ### def clamp(range)     -> object
 {: undef}
@@ -208,7 +206,6 @@ p Complex(0, -0.0).arg          #=> -0.0
 p Complex(-0.0, 0).arg          #=>  3.141592653589793
 p Complex(-0.0, -0.0).arg       #=> -3.141592653589793
 ```
-
 
 - **SEE** [m:Numeric#arg]
 
@@ -313,7 +310,6 @@ p Complex('1/2i').inspect                # => "(0+(1/2)*i)"
 p Complex(0, Float::INFINITY).inspect    # => "(0+Infinity*i)"
 p Complex(Float::NAN, Float::NAN).inspect  # => "(NaN+NaN*i)"
 ```
-
 
 ### def numerator -> Complex
 

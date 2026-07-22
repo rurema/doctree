@@ -13,4 +13,3 @@ include:
 hourはhourリストの最後
 に追加されています．
 
-

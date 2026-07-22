@@ -44,19 +44,23 @@ YAML の AST を構築できます。
 ## Constants
 
 ### const ANY -> Integer
+
 「任意の」エンコーディングを意味します。
 
 ### const UTF8 -> Integer
+
 UTF-8 エンコーディングを表します。
 
 - **SEE** [m:Psych::Handler#start_stream]
 
 ### const UTF16LE -> Integer
+
 UTF-16LE エンコーディングを表します。
 
 - **SEE** [m:Psych::Handler#start_stream]
 
 ### const UTF16BE -> Integer
+
 UTF-16BE エンコーディングを表します。
 
 - **SEE** [m:Psych::Handler#start_stream]
@@ -64,6 +68,7 @@ UTF-16BE エンコーディングを表します。
 ## Class Methods
 
 ### def new(handler = Handler.new) -> Psych::Parser
+
 新たなパーサオブジェクトを生成して返します。
 
 handler で YAML のイベントを処理するハンドラを指定します。
@@ -89,11 +94,13 @@ YAML ドキュメントをパースし、イベントハンドラに
 #@# --- external_encoding=(encoding)
 
 ### def handler -> Psych::Handler
+
 セットされているイベントハンドラを返します。
 
 - **SEE** [m:Psych::Parser#handler=]
 
 ### def handler=(val)
+
 イベントハンドラをセットします。
 
 - **param** `val` -- セットするハンドラ
@@ -106,10 +113,13 @@ YAML document の位置を表現するクラスです。
 ## Instance Methods
 
 ### def index -> Integer
+
 先頭からの文字数。
 
 ### def line -> Integer
+
 先頭からの行数。
 
 ### def column -> Integer
+
 行の先頭からの文字数。

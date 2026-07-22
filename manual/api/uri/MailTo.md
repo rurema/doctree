@@ -17,6 +17,7 @@ mailto URI を表すクラスです。[RFC:2368]。
       [to, headers]
 という文字列の配列で与えます。headers は、以下のような文字列か配列で
 与えます。
+
 ```text
 "subject=subscribe&cc=addr"
   

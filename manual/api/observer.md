@@ -19,6 +19,7 @@ Observable モジュールを include したクラスは
 そのままオブザーバの update メソッドに渡されます。
 
 ### サンプルコード
+
 ```ruby
 require "observer"
 

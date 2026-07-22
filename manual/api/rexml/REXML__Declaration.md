@@ -2,6 +2,7 @@
 library: rexml/document
 ---
 # class REXML::Declaration < REXML::Child
+
 DTD に含まれる各種宣言ノードを表すクラスです。
 
 このクラス自体は直接はインスタンスを作りません。
@@ -10,9 +11,11 @@ DTD に含まれる各種宣言ノードを表すクラスです。
 ## Instance Methods
 
 ### def to_s -> String
+
 ノードを文字列化します。
 
 ### def write(output, indent) -> ()
+
 output にノードを出力します。
 
 このメソッドは deprecated です。[c:REXML::Formatter] で

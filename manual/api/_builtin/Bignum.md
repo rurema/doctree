@@ -97,7 +97,6 @@ self を other で割った商 q と余り r を、 [q, r] という 2 要素の
 
 - **SEE** [m:Numeric#divmod]
 
-
 ### def fdiv(other) -> Float | Complex
 
 self を other で割った商を [c:Float] で返します。
@@ -145,6 +144,7 @@ p 2 <=> 1 #=> 1
              そうでなければ false を返します。
 
 ### def ~        -> Fixnum | Bignum
+
 ビット演算子。否定を計算します。
 
 ```ruby
@@ -154,6 +154,7 @@ p ~-4 #=> 3
 ```
 
 ### def |(other) -> Fixnum | Bignum
+
 ビット二項演算子。論理和を計算します。
 
 - **param** `other` -- 数値
@@ -164,6 +165,7 @@ p 2 | 3 #=> 3
 ```
 
 ### def &(other) -> Fixnum | Bignum
+
 ビット二項演算子。論理積を計算します。
 
 - **param** `other` -- 数値
@@ -174,6 +176,7 @@ p 2 & 3 #=> 2
 ```
 
 ### def ^(other) -> Fixnum | Bignum
+
 ビット二項演算子。排他的論理和を計算します。
 
 - **param** `other` -- 数値
@@ -195,6 +198,7 @@ p -1 << 1 #=> -2
 ```
 
 ### def >>(bits) -> Fixnum | Bignum
+
 シフト演算子。bits だけビットを右にシフトします。
 
 右シフトは、符号ビット(最上位ビット(MSB))が保持されます。

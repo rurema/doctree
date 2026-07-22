@@ -50,7 +50,6 @@ class RDoc::Parser::Xyz < RDoc::Parser
 end
 ```
 
-
 # class RDoc::Parser
 
 ソースコードを解析するパーサを生成するための基本クラスです。

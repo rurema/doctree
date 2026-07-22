@@ -42,6 +42,7 @@ opts.parse!(ARGV)                            # 実際にコマンドラインの
    t: URI version 0.9.11
    t: OpenSSL version 1.0.0
   ```
+
 ## Class Methods
 
 ### def new(banner = nil, width = 32, indent = ' ' * 4)              -> OptionParser
@@ -156,7 +157,6 @@ parse(opts2) # => unsupported argument type: Time (ArgumentError)
 #@#noexample OptionParser#getopts を参照
 
 - **SEE** [m:OptionParser#getopts]
-
 
 ## Instance Methods
 
@@ -569,10 +569,13 @@ end
 ブロックはコマンドラインのパース時に、オプションが指定されていれば呼ばれます。
 
 ショートオプションとロングオプションを同時に登録することもできます。
+
 ```text
 opts.on("-r", "--require LIBRARY"){|lib| ...}
 ```
+
 これは以下と同値です。
+
 ```text
 opts.on("-r LIBRARY"){|lib| ...}
 opts.on("--require LIBRARY"){|lib| ...}
@@ -862,7 +865,9 @@ opt.on('-b') {|v| p :b }
 opt.order(ARGV)
 p ARGV
 ```
+
 ↓
+
 ```console
 $ ruby opt.rb -a foo somefile -b
 :a
@@ -904,7 +909,9 @@ opt.on('-b') {|v| p :b }
 opt.order!(ARGV)
 p ARGV
 ```
+
 ↓
+
 ```console
 $ ruby opt.rb -a foo somefile -b
 :a
@@ -944,7 +951,9 @@ opt.on('-b ') {|v| p :b }
 opt.permute!(ARGV)
 p ARGV
 ```
+
 ↓
+
 ```console
 $ ruby opt.rb -a foo somefile -b
 :a
@@ -982,7 +991,9 @@ opt.on('-b ') {|v| p :b }
 opt.permute!(ARGV)
 p ARGV
 ```
+
 ↓
+
 ```console
 $ ruby opt.rb -a foo somefile -b
 :a
@@ -1111,6 +1122,7 @@ ENV['HOGE_OPT'] = %q{--require lib1 'remain data'}
 p opts.environment('HOGE_OPT') # => ["remain data"]
 p config                           # => {:lib=>"lib1"}
 ```
+
 ### def default_argv    -> [String]
 
 自身がデフォルトでパースする引数を文字列の配列で返します。

@@ -20,7 +20,6 @@ p Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
 p Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
 ```
 
-
 ### def each_prime(upper_bound){|prime| ... } -> object
 ### def each_prime(upper_bound) -> Enumerator
 

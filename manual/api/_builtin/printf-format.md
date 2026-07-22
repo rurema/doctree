@@ -243,7 +243,6 @@ p sprintf("%.*s", 5, "foobar") #=> "fooba"
   p sprintf("%p", /e+/)  #=> "/e+/"
   ```
 
-
 - **`d`**:
 - **`i`**:
 
@@ -328,7 +327,6 @@ p sprintf("%.*s", 5, "foobar") #=> "fooba"
   p sprintf("%a", 729.0/10)        # => "0x1.239999999999ap+6"
   p sprintf("%a", Float::INFINITY) # => "Inf"
   ```
-
 
   大文字の指示子(E, G)は出力のアルファベットを大文字にします。
   ```ruby

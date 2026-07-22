@@ -26,6 +26,7 @@ srv.start # http://127.0.0.1:10080/basic_auth
 ## Class Methods
 
 ### def make_passwd(realm, user, pass) -> String
+
 pass をランダムなソルトで crypt した文字列を返します。
 
 - **param** `realm` -- レルムを指定します。
@@ -60,6 +61,7 @@ reload_db に渡す引数を与えます。
 ## Instance Methods
 
 ### def authenticate(request, response) -> bool
+
 クライアントから送られてきたユーザ名とパスワードを認証します。
 認証に失敗した場合は challenge を呼びます。
 

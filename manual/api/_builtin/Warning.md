@@ -14,7 +14,6 @@ since: "2.4.0"
 
 ### def [](category) -> bool
 
-
 category の種類の警告を表示するかどうかのフラグを返します。
 
 - **param** `category` -- 警告の種類を指定します。

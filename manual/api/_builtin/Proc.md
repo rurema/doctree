@@ -94,8 +94,6 @@ fib = lambda{|n|
 p fib.(10) # => 55
 ```
 
-
-
 - **param** `arg` -- 手続きオブジェクトに与える引数を指定します。
 
 - **raise** `LocalJumpError` -- Procを生成したメソッドからリターンしてしまった場合に発生します。
@@ -254,6 +252,7 @@ p Proc.new {
 
 ### def curry         -> Proc
 ### def curry(arity)  -> Proc
+
 Procをカリー化します
 
 カリー化したProcはいくつかの引数をとります。十分な数の引数が与えられると、元のProcに引数を渡し
@@ -295,8 +294,8 @@ p b.curry[]                  #=> :foo
 ```
 
 ### def lambda? -> bool
-手続きオブジェクトの引数の取扱が厳密であるならば true を返します。
 
+手続きオブジェクトの引数の取扱が厳密であるならば true を返します。
 
 引数の取扱の厳密さの意味は以下の例を参考にしてください。
 
@@ -355,11 +354,11 @@ p C.new.method(:e).to_proc.lambda? #=> true
 ```
 
 ### def source_location -> [String, Integer] | nil
+
 ソースコードのファイル名と行番号を配列で返します。
 
 その手続オブジェクトが ruby で定義されていない(つまりネイティブ
 である)場合は nil を返します。
-
 
 ```ruby title="例"
 # /path/to/target.rb を実行
@@ -376,7 +375,6 @@ p method(:p).to_proc.source_location # => nil
 self のハッシュ値を返します。
 
 #@#noexample
-
 
 #@since 3.2
 ### def parameters(lambda: nil) -> [object]
@@ -414,6 +412,7 @@ Proc オブジェクトが引数を取らなければ空の配列を返します
   ```
 
 #@since 3.2
+
 ```ruby title="lambda: の例"
 prc = proc{|x, y=42, *other|}
 p prc.parameters  # => [[:opt, :x], [:opt, :y], [:rest, :other]]
@@ -424,9 +423,11 @@ p prc.parameters(lambda: true)  # => [[:req, :x], [:opt, :y], [:rest, :other]]
 prc = lambda{|x, y=42, *other|}
 p prc.parameters(lambda: false) # => [[:opt, :x], [:opt, :y], [:rest, :other]]
 ```
+
 #@end
 
 - **SEE** [m:Method#parameters], [m:UnboundMethod#parameters]
+
 ### def ruby2_keywords -> proc
 
 Marks the proc as passing keywords through a normal argument splat. This

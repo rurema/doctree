@@ -17,7 +17,6 @@ dRuby サーバは
 複数のサーバを起動することもできますが、通常は
 [m:DRb?.start_service] でサーバを起動します。
 
-
 ## Class Methods
 
 ### def default_acl(acl) -> ()
@@ -29,6 +28,7 @@ dRuby サーバは
 - **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service], [c:ACL]
 
 ### def default_argc_limit(argc) -> ()
+
 サーバ起動時の :argc_limit オプションのデフォルト値を指定します。
 
 初期値は 256 です。
@@ -36,6 +36,7 @@ dRuby サーバは
 - **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
 
 ### def default_id_conv(idconv) -> ()
+
 サーバ起動時の :id_conv オプションのデフォルト値を指定します。
 
 初期値は [c:DRb::DRbIdConv] のインスタンスです。
@@ -43,6 +44,7 @@ dRuby サーバは
 - **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
 
 ### def default_load_limit(sz) -> ()
+
 サーバ起動時の :load_limit オプションのデフォルト値を指定します。
 
 初期値は25MBです。
@@ -61,12 +63,14 @@ dRuby サーバを起動し、DRbServerのインスタンスを返します。
 - **SEE** [m:DRb?.start_service]
 
 ### def verbose -> bool
+
 サーバ起動時の :verbose オプションのデフォルト値を返します。
 
 - **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service], 
      [m:DRb::DRbServer.verbose=]
 
 ### def verbose=(on)
+
 サーバ起動時の :verbose オプションのデフォルト値を指定します。
 
 初期値は false です。
@@ -76,6 +80,7 @@ dRuby サーバを起動し、DRbServerのインスタンスを返します。
 ## Instance Methods
 
 ### def alive? -> bool
+
 サーバが生存しているならば真を返します。
 
 - **SEE** [m:DRb::DRbServer#stop_service]
@@ -89,6 +94,7 @@ dRuby サーバを起動し、DRbServerのインスタンスを返します。
 #@# If the method is an insecure method (see insecure_method?) a SecurityError is thrown. If the method is private or undefined, a [[c:NameError]] is thrown. 
 
 ### def stop_service -> ()
+
 サーバを停止します。
 
 - **SEE** [m:DRb::DRbServer#alive?]
@@ -104,11 +110,13 @@ dRuby サーバを起動し、DRbServerのインスタンスを返します。
 #@# Convert a dRuby reference to the local object it refers to.
 
 ### def verbose -> bool
+
 サーバが verbose mode ならば真を返します。
 
 - **SEE** [m:DRb::DRbObject#verbose=]
 
 ### def verbose=(on) 
+
 サーバの verbose mode を真偽値で設定します。
 
 verbose mode が on の場合は失敗したメソッド呼出のログが標準出力に出力
@@ -119,33 +127,38 @@ verbose mode が on の場合は失敗したメソッド呼出のログが標準
 - **SEE** [m:DRb::DRbObject#verbose]
 
 ### def config  -> Hash
+
 サーバの設定を返します。
 
 - **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
 
 ### def front -> object
+
 サーバに設定されたフロントオブジェクトを返します。
 
 - **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
 
 ### def thread -> Thread
+
 サーバのメインスレッドを返します。
 
 このスレッドはクライアントからの接続を受け付けるスレッドであって、
 クライアントへの応答をするスレッドではありません。
 
 ### def uri -> String|nil
+
 サーバに紐付けられた URI を返します。
 
 ### def here?(uri) -> bool
+
 uri がサーバに紐付けられたものであれば真を返します。
 
 - **param** `uri` -- URI 文字列
 
-
 ## Constants
 
 ### const INSECURE_METHOD -> [Symbol]
+
 セキュアでないメソッドのリスト。
 
 これに含まれるメソッドは dRuby 経由では呼び出せません。

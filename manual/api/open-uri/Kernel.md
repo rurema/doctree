@@ -61,4 +61,3 @@ sio = open('http://www.example.com') { |sio|
 
 - **SEE** [m:OpenURI.open_uri], [m:URI.open]
 
-

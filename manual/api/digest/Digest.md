@@ -32,4 +32,3 @@ p Digest::SHA1.hexdigest("ruby")         # => "18e40e1401eef67e1ae69efab09afb71f
 
 - **SEE** [m:Digest::Base.hexdigest], [m:Digest::Base#hexdigest]
 
-

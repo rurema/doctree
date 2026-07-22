@@ -2,6 +2,7 @@
 library: open-uri
 ---
 # module OpenURI::Meta
+
 サーバから取得したデータの属性を扱うために使われるモジュールです。
 データを表す文字列や [c:StringIO] が extend します。
 
@@ -13,6 +14,7 @@ library: open-uri
 Last-Modified ヘッダがない場合は nil を返します。
 
 例:
+
 ```ruby title="例"
 require 'open-uri'
 URI.open('http://www.rubyist.net/') {|f|

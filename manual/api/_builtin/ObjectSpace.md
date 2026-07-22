@@ -157,7 +157,6 @@ puts "Total count: #{count}"
 # => Total count: 2
 ```
 
-
 ### module_function def garbage_collect(full_mark: true, immediate_sweep: true) -> nil
 
 どこからも参照されなくなったオブジェクトを回収します。

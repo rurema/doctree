@@ -22,7 +22,9 @@ Usage: gem fetch GEMNAME [GEMNAME ...] [options]
     -p, --[no-]http-proxy [URL]      リモートの操作に HTTP プロクシを使用します
         --source URL                 Gem パッケージのリモートリポジトリの URL を指定します
 ```
+
 #@include(common_options)
+
 ```text
 Arguments:
   GEMNAME       ダウンロードする Gem パッケージの名前を指定します
@@ -31,7 +33,6 @@ Summary:
 Defaults:
   --version '>= 0'
 ```
-
 
 # class Gem::Commands::FetchCommand < Gem::Command
 

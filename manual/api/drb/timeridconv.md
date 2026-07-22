@@ -28,6 +28,7 @@ to_id でオブジェクトを識別子に変換してから
 
 ## Class Methods
 ### def new(timeout=600) -> DRb::TimerIdConv
+
 TimerIdConv のインスタンスを生成して返します。
 
 - **param** `timeout` -- to_id で識別子に変換してからオブジェクトがGCされないことが保証される秒数
@@ -41,7 +42,4 @@ TimerIdConv のインスタンスを生成して返します。
 ### def to_obj(ref) -> Object
 
 識別子をオブジェクトに変換します。
-
-
-
 

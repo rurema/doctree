@@ -19,8 +19,10 @@ Usage: gem dependency GEMNAME [options]
     -R, --[no-]reverse-dependencies  この Gem を使用している Gem を表示します
     -p, --pipe                       Pipe Format (name --version ver)
 ```
+
 #@include(local_remote_options)
 #@include(common_options)
+
 ```text
 Arguments:
   GEMNAME       依存関係を表示する Gem の名前を指定します
@@ -30,11 +32,9 @@ Defaults:
   --local --version '>= 0' --no-reverse-dependencies
 ```
 
-
 # class Gem::Commands::DependencyCommand < Gem::Command
 
 インストールされている Gem パッケージの依存関係を表示するためのクラスです。
-
 
 ## Public Instance Methods
 

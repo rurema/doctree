@@ -15,8 +15,10 @@ Usage: gem search [STRING] [options]
         --[no-]versions              Display only gem names
     -a, --all                        Display all gem versions
 ```
+
 #@include(local_remote_options)
 #@include(common_options)
+
 ```text
 Arguments:
   STRING        検索したい Gem パッケージ名の一部を指定します
@@ -25,7 +27,6 @@ Summary:
 Defaults:
   --local --no-details
 ```
-
 
 # class Gem::Commands::SearchCommand < Gem::Commands::QueryCommand
 

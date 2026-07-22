@@ -132,6 +132,7 @@ p thg.enclosed?         # => false
 ```
 
 - **SEE** [m:ThreadGroup#enclose]
+
 ### def list    -> [Thread] 
 
 self に属するスレッドの配列を返します。

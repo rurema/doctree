@@ -2,11 +2,11 @@
 library: rexml/document
 ---
 # class REXML::IOSource < REXML::Source
+
 内部用なのでユーザは使わないでください。
 
 [c:IO]、もしくは [c:StringIO] のような
 IO likeなオブジェクトを wrap するクラス。
-
 
 #@# == Class Methods
 #@#

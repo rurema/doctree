@@ -52,6 +52,7 @@ UNIXServer.open("/tmp/s") {|serv|
 ```
 
 ### def accept_nonblock -> UnixSocket
+
 ソケットをノンブロッキングモードに設定した後、
 [man:accept(2)] を呼び出します。
 
@@ -80,7 +81,6 @@ end
 
 - **SEE** [m:UNIXServer#accept]
 
-
 ### def listen(backlog) -> 0
 
 [man:listen(2)] を実行します。
@@ -94,6 +94,7 @@ backlog は、クライアントからの接続要求を保留できる数です
 - **param** `backlog` -- バックログの最大数(接続要求を保留できる数)
 
 ### def sysaccept -> Integer
+
 接続したクライアントのソケットをファイル記述子で返すことを除けば
 [m:UNIXServer#accept] と同じです。
 

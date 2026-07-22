@@ -12,9 +12,11 @@ YAML AST のノードを表す抽象クラスです。
 
 ## Instance Methods
 ### def children -> [Psych::Nodes::Node]
+
 子ノードの集合を配列で返します。
 
 ### def tag -> String | nil
+
 ノードに付加されたタグを返します。
 
 タグが付加されていない場合は nil を返します。

@@ -41,4 +41,3 @@ generator.rewind
 p generator.next #=> 2
 ```
 
-

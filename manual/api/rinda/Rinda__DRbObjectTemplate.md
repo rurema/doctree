@@ -11,7 +11,6 @@ library: rinda/rinda
 Creates a new DRbObjectTemplate that will match against +uri+ and
 +ref+.
 
-
 ## Instance Methods
 
 ### def ===(ro)
@@ -19,5 +18,4 @@ Creates a new DRbObjectTemplate that will match against +uri+ and
 
 This DRbObjectTemplate matches +ro+ if the remote object's drburi
 and drbref are the same. +nil+ is used as a wildcard.
-
 

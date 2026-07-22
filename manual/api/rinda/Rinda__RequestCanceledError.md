@@ -6,4 +6,3 @@ library: rinda/rinda
 rinda で take などのリクエストが何らかの理由でキャンセルされた
 ことを意味する例外クラス。
 
-

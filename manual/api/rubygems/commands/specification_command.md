@@ -20,8 +20,10 @@ Usage: gem specification [GEMFILE] [options]
         --all                        Output specifications for all versions of
                                      the gem
 ```
+
 #@include(local_remote_options)
 #@include(common_options)
+
 ```text
 Arguments:
   GEMFILE       gemspec を表示する Gem パッケージ名を指定します
@@ -30,7 +32,6 @@ Summary:
 Defaults:
   --local --version '>= 0'
 ```
-
 
 # class Gem::Commands::SpecificationCommand < Gem::Command
 

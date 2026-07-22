@@ -207,7 +207,6 @@ assert_operator('aaa', :==, 'aaa', 'message')
 assert('aaa'.__send__(:==, 'aaa'), 'message')
 ```
 
-
 ### def assert_raises(*args){ ... } -> true
 
 与えられたブロックを評価中に与えられた例外が発生する場合、検査にパスしたことになります。
@@ -218,7 +217,6 @@ assert('aaa'.__send__(:==, 'aaa'), 'message')
 - **raise** `MiniTest::Assertion` -- 与えられたブロックを評価した結果、例外が発生しない場合に発生します。
                            また、与えられたブロックを評価中に発生した例外が、与えられた例外
                            またはそのサブクラスでない場合に発生します。
-
 
 ### def assert_respond_to(object, method_name, message = nil) -> true
 

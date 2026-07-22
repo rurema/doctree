@@ -30,7 +30,9 @@ opt.on('-b') {|v| p v }
 opt.parse!(ARGV)
 p ARGV
 ```
+
 ↓
+
 ```console
 ruby sample.rb -a foo bar -b baz
 # => true
@@ -106,13 +108,14 @@ opt.parse!(ARGV)
 p ARGV
 p params
 ```
+
 ↓
+
 ```console
 ruby sample.rb -a foo bar -b baz
 # => ["foo", "bar", "baz"]
      {:a=>true, :b=>true}
 ```
-
 
 明示的にコンテナへ格納する以外に、parse（及びparse!）メソッドの引数に
 :into オプションを指定することでハッシュへ自動的に値を格納できます。
@@ -133,13 +136,14 @@ opt.parse!(ARGV, into: params) # intoオプションにハッシュを渡す
 p ARGV
 p params
 ```
+
 ↓
+
 ```console
 ruby sample.rb -a foo bar -b baz
 # => ["foo", "bar", "baz"]
      {:a=>true, :bbb=>true}
 ```
-
 
 #### オプションの引数 {#optionarg}
 
@@ -189,7 +193,9 @@ opt.on('-b') {|v| p v }
 opt.parse!(ARGV)
 p ARGV
 ```
+
 ↓
+
 ```console
 ruby sample.rb -a
 
@@ -218,7 +224,9 @@ opt.on('--bar') {|v| p v }
 opt.parse!(ARGV)
 p ARGV
 ```
+
 ↓
+
 ```console
 ruby sample.rb -a foo bar --bar baz
 # => true
@@ -238,7 +246,9 @@ opt.on('--[no-]bar') {|v| p v }
 opt.parse!(ARGV)
 p ARGV
 ```
+
 ↓
+
 ```console
 ruby sample.rb -a foo bar --bar baz --no-bar
 # => true
@@ -270,7 +280,9 @@ opt.on('--[no-]bar') {|v| p v }
 opt.parse!(ARGV)
 p ARGV
 ```
+
 ↓
+
 ```console
 ruby sample.rb --fo
 ```
@@ -300,7 +312,9 @@ opt = OptionParser.new
 Version = "1.2.3"       # opt.version = "1.2.3"
 opt.parse!(ARGV)
 ```
+
 ↓
+
 ```console
 ruby ./sample.rb --version
 # => sample 1.2.3
@@ -319,7 +333,9 @@ opt.on('-b', 'description of -b') {|v| p v }
 opt.parse!(ARGV)
 p ARGV
 ```
+
 ↓
+
 ```console
 ruby ./sample.rb --help
 # => Usage: sample [options]
@@ -327,8 +343,8 @@ ruby ./sample.rb --help
         -b                               description of -b
 ```
 
-
 #### サブコマンド {#subcmd}
+
 以下は cvs や svn のようにサブコマンドを解釈する例です。
 
 ```ruby title="subcom.rb"
@@ -368,6 +384,7 @@ list -i
 コマンドの引数に出会うとそこでパースを中断することを利用しています。
 
 #### ARGV の機能 {#argv}
+
 optparse を require すると ARGV に [c:OptionParser::Arguable] の機能
 が加わります。以下の書き方ができるようになります。
 [m:OptionParser::Arguable#getopts] はオプションを保持した Hash を返します。
@@ -377,11 +394,14 @@ require 'optparse'
 params = ARGV.getopts("a:b:", "foo", "bar:")
 p params
 ```
+
 この sample.rb を実行すると
+
 ```console
 $ ruby sample.rb -a 1 --foo --bar xxx
 {"a"=>"1", "b"=>nil, "foo"=>true, "bar"=>"xxx"}
 ```
+
 のようになります。
 
 #### '-'で始まるファイル名 {#hyphen_start_file}

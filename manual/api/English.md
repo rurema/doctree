@@ -11,8 +11,6 @@ require 'English'
 p $RS #=> "\n"
 ```
 
-
-
 # reopen Kernel
 
 ## Special Variables
@@ -94,7 +92,6 @@ p array #=> ["ugo|", "ego|", "fogo\n"]
 __END__
 ugo|ego|fogo
 ```
-
 
 ### gvar $ORS                     -> String | nil
 ### gvar $OUTPUT_RECORD_SEPARATOR -> String | nil
@@ -224,7 +221,6 @@ else
   print "wget failed\n"
 end
 ```
-
 
 ### gvar $LAST_MATCH_INFO -> MatchData | nil
 

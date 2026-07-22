@@ -57,6 +57,7 @@ res['last-modified'] = Time.now.httpdate
      [m:WEBrick::HTTPResponse#content_type]
 
 ### def body        -> String | IO
+
 クライアントに返す内容(エンティティボディ)を返します。
 
 自身が chunked であっても body の値はチャンク形式ではありません。
@@ -89,6 +90,7 @@ hoge
 ```
 
 ### def chunked?     -> bool
+
 真であればクライアントに返す内容(エンティティボディ)を chunk に分けます。
 
 ### def chunked=(flag)
@@ -120,6 +122,7 @@ hoge
   
 #
 ```
+
 ### def config    -> Hash
 
 自身が生成される時に指定されたハッシュを返します。
@@ -162,6 +165,7 @@ ho
 ```
 
 ### def content_type         -> String | nil
+
 Content-Type ヘッダの値を返します。
 
 ### def content_type=(val)
@@ -232,6 +236,7 @@ p res.http_version.to_s                                         #=> "1.1"
 - **param** `flag` -- 真を指定すると Keep-Alive を有効にします。
 
 ### def reason_phrase         -> String | nil
+
 HTTP のレスポンスの最初の行の reason phrase を返します。
 この値が nil の場合 reason phrase は status から生成されます。
 デフォルトは nil です。
@@ -253,6 +258,7 @@ p res.reason_phrase    #=> "Not Found"
 ```
 
 ### def request_http_version           -> WEBrick::HTTPVersion
+
 リクエストの HTTP バージョンを返します。
 デフォルトでは自身の [m:WEBrick::HTTPResponse#http_version] が使われます。
 
@@ -263,6 +269,7 @@ p res.reason_phrase    #=> "Not Found"
 - **param** `ver` -- リクエストの HTTP バージョンを [c:WEBrick::HTTPVersion] オブジェクトで指定します。
 
 ### def request_method          -> String | nil
+
 リクエストの HTTP メソッドを返します。
 
 ### def request_method=(method)
@@ -273,6 +280,7 @@ p res.reason_phrase    #=> "Not Found"
 - **param** `method` -- リクエストの HTTP メソッドを文字列で指定します。
 
 ### def request_uri        -> URI | nil
+
 リクエストの URI を返します。
 
 ### def request_uri=(uri)

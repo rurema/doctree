@@ -248,7 +248,6 @@ rss.xml_stylesheets << RSS::XMLStyleSheet.new({:href => "sample.xsl"})
 既存のRSS/Atomをパースせずに、一から新しくRSS/Atomを作成するには
 RSS Makerが便利です。
 
-
 以下のように使います。
 
 ```ruby

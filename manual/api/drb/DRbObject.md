@@ -14,7 +14,6 @@ alias:
 内部的には [m:BasicObject#method_missing] でメソッド呼び出しを
 hook して、それを転送します。
 
-
 ## Class Methods
 #@# #@# bc-rdoc: detected missing name: _load
 #@# --- _load(s)
@@ -37,6 +36,7 @@ hook して、それを転送します。
 #@# be a stub for.
 
 ### def new_with_uri(uri) -> DRb::DRbObject
+
 URI から新しい DRbObject を生成します。
 
 別プロセスの [m:DRb?.start_service] で指定したフロントオブジェクトを
@@ -57,15 +57,18 @@ URI から新しい DRbObject を生成します。
 
 ### def ==(other) -> bool
 ### def eql?(other) -> bool
+
 [c:DRb::DRbObject] オブジェクト同士が同じであるなら真を返します。
 
 この同値判定は、
 オブジェクトが参照している URI と識別子が等しいかどうかでします。
 
 ### def __drburi -> String|nil
+
 リモートオブジェクトの URI を返します。
 
 ### def __drbref -> Integer|nil
+
 リモートオブジェクトの識別子を返します。
 
 [m:DRb::DRbObject.new_with_uri] で取り出したフロントオブジェクトは

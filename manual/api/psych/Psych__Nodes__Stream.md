@@ -24,11 +24,13 @@ encoding には stream に使われるエンコーディングを指定します
 
 ## Instance Methods
 ### def encoding -> Integer
+
 stream に使われるエンコーディングを返します。
 
 - **SEE** [m:Psych::Nodes::Stream#encoding=]
 
 ### def encoding=(enc)
+
 stream に使われるエンコーディングを指定します。
 
 以下のいずれかを指定します。
@@ -41,11 +43,13 @@ stream に使われるエンコーディングを指定します。
 
 ## Constants
 ### const ANY -> Integer
+
 任意のエンコーディングを表す値。
 
 [m:Psych::Parser::ANY] と同じ値です。
 
 ### const UTF8 -> Integer
+
 UTF8 エンコーディングを表します。
 
 [m:Psych::Parser::UTF8] と同じ値です。
@@ -53,6 +57,7 @@ UTF8 エンコーディングを表します。
 - **SEE** [m:Psych::Nodes::Stream.new]
 
 ### const UTF16LE -> Integer
+
 UTF16LE エンコーディングを表します。
 
 [m:Psych::Parser::UTF16LE] と同じ値です。
@@ -60,6 +65,7 @@ UTF16LE エンコーディングを表します。
 - **SEE** [m:Psych::Nodes::Stream.new]
 
 ### const UTF16BE -> Integer
+
 UTF16BE エンコーディングを表します。
 
 [m:Psych::Parser::UTF16BE] と同じ値です。

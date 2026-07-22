@@ -14,7 +14,6 @@ until: "2.2.0"
   2. ユーザ定義のクラスでメイン処理を行う run メソッドを定義します。
   3. そのクラスをインスタンス化して start メソッドを呼び出します。
 
-
 ```text title="例"
 class FooApp < Application
   def initialize(foo_app, application_specific, arguments)

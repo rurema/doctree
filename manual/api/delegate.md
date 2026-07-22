@@ -8,10 +8,8 @@ category: DesignPattern
 [c:Delegator] クラスを利用する場合はこれを継承して
 [m:Delegator#__getobj__] メソッドを再定義して委譲先のオブジェクトを指定します。
 
-
 [c:SimpleDelegator] は [c:Delegator] の利用例の一つであり、
 コンストラクタに渡されたオブジェクトにメソッドの実行を委譲します。
-
 
 [m:Kernel#DelegateClass] は 引数で渡されたクラスのインスタンスをひとつとり、
 そのオブジェクトにインスタンスメソッドを委譲するクラスを定義して返します。
@@ -19,7 +17,6 @@ category: DesignPattern
 ### 参考
 
   - Rubyist Magazine - 標準添付ライブラリ紹介【第 6 回】委譲 <https://magazine.rubyist.net/articles/0012/0012-BundledLibraries.html>
-
 
 # reopen Kernel
 
@@ -46,7 +43,6 @@ a.push 25
 p a         # => [25]
 ```
 
-
 # class Delegator < Object
 
 サブクラスにメソッド委譲の仕組みを提供する抽象クラス。
@@ -57,18 +53,14 @@ p a         # => [25]
 
 ## Class Methods
 
-
-
 #@#--- delegation_block
 #@# 見つからない
 
 #@#--- public_api
 #@# nodoc
 
-
 #@# --- const_missing
 #@# 見つからない
-
 
 ## Instance Methods
 
@@ -78,8 +70,6 @@ p a         # => [25]
 そうでない場合は、偽を返します。
 
 - **param** `obj` -- 比較対象のオブジェクトを指定します。
-
-
 
 ### def !=(obj) -> bool
 
@@ -92,8 +82,6 @@ p a         # => [25]
 
 自身を否定します。
 
-
-
 ### def __getobj__ -> object
 
 委譲先のオブジェクトを返します。
@@ -103,7 +91,6 @@ p a         # => [25]
 
 - **raise** `NotImplementedError` -- サブクラスにて本メソッドが再定義されていない場合に発生します。
 
-
 ### def __setobj__(obj) -> object
 
 委譲先のオブジェクトをセットします。
@@ -111,7 +98,6 @@ p a         # => [25]
 - **param** `obj` -- 委譲先のオブジェクトを指定します。
 
 - **raise** `NotImplementedError` -- サブクラスにて本メソッドが再定義されていない場合に発生します。
-
 
 ### def marshal_dump -> object
 
@@ -122,7 +108,6 @@ p a         # => [25]
 シリアライズされたオブジェクトから、[m:Delegator#__getobj__] が返すオブジェクトを再現します。
 
 - **param** `obj` -- [m:Delegator#marshal_dump]の戻り値のコピー
-
 
 ### def method_missing(m, *args) -> object
 
@@ -143,7 +128,6 @@ p a         # => [25]
 - **param** `m` -- メソッド名
 
 - **SEE** [m:Object#respond_to?]
-
 
 ### def freeze -> self
 
@@ -180,7 +164,5 @@ p a         # => [25]
 
 - **param** `include_private` -- 真を指定すると private メソッドも調べます。
 
-
 ## Constants
-
 

@@ -4,6 +4,7 @@
 
 #@# from File
 ### def atime(filename) -> Time
+
 [c:File] クラスにある同名のクラスメソッドと同じです.
 
 - **param** `filename` -- ファイル名を表す文字列か IO オブジェクトを指定します。
@@ -11,6 +12,7 @@
 - **SEE** [m:File.atime]
 
 ### def basename(filename, suffix = "")     -> String
+
 [c:File] クラスにある同名のクラスメソッドと同じです.
 
 - **param** `filename` -- ファイル名を表す文字列を指定します。
@@ -19,7 +21,6 @@
               '.' を含まない任意の文字列にマッチします。
 
 - **SEE** [m:File.basename]
-
 
 ### def chmod(mode, *filename)    -> Integer
 
@@ -32,6 +33,7 @@
 - **SEE** [m:File.chmod]
 
 ### def chown(owner, group, *filename)    -> Integer
+
 [c:File] クラスにある同名のクラスメソッドと同じです.
 
 - **param** `owner` -- [man:chown(2)] と同様に数値で指定します。nil または -1 を指定することで、オーナーを維持できます。
@@ -43,6 +45,7 @@
 - **SEE** [m:File.chown]
 
 ### def ctime(filename)    -> Time
+
 [c:File] クラスにある同名のクラスメソッドと同じです.
 
 - **param** `filename` -- ファイル名を表す文字列か IO オブジェクトを指定します。
@@ -51,6 +54,7 @@
 
 ### def delete(*filename)    -> Integer
 ### def rm(*filename)        -> Integer
+
 [c:File] クラスにある同名のクラスメソッドと同じです.
 
 - **param** `filename` -- ファイル名を表す文字列を指定します。
@@ -74,6 +78,7 @@
 - **SEE** [m:File.ftype]
 
 ### def join(*item)    -> String
+
 [c:File] クラスにある同名のクラスメソッドと同じです.
 
 - **param** `item` -- 連結したいディレクトリ名やファイル名を文字列で与えます。
@@ -89,7 +94,6 @@
 - **param** `new` -- ファイル名を表す文字列を指定します。
 
 - **SEE** [m:File.link]
-
 
 ### def lstat(filename)   -> File::Stat
 
@@ -108,6 +112,7 @@
 - **SEE** [m:File.mtime]
 
 ### def readlink(path)    -> String
+
 [c:File] クラスにある同名のクラスメソッドと同じです.
 
 - **param** `path` -- シンボリックリンクを表す文字列を指定します。
@@ -115,6 +120,7 @@
 - **SEE** [m:File.readlink]
 
 ### def rename(from, to)    -> 0
+
 [c:File] クラスにある同名のクラスメソッドと同じです.
 
 - **param** `from` -- ファイルの名前を文字列で与えます。
@@ -139,8 +145,8 @@
 
 - **SEE** [m:File.stat]
 
-
 ### def symlink(old, new)    -> 0
+
 [c:File] クラスにある同名のクラスメソッドと同じです.
 
 - **param** `old` -- ファイル名を表す文字列を指定します。
@@ -148,7 +154,6 @@
 - **param** `new` -- シンボリックリンクを表す文字列を指定します。
 
 - **SEE** [m:File.symlink]
-
 
 ### def truncate(path, length)    -> 0
 
@@ -161,6 +166,7 @@
 - **SEE** [m:File.truncate]
 
 ### def utime(atime, mtime, *filename)    -> Integer
+
 [c:File] クラスにある同名のクラスメソッドと同じです.
 
 - **param** `filename` -- ファイル名を表す文字列を指定します。
@@ -174,6 +180,7 @@
 #@# from FileTest
 
 ### def blockdev?(file)    -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列か IO オブジェクトを指定します。
@@ -181,6 +188,7 @@
 - **SEE** [m:FileTest?.blockdev?]
 
 ### def chardev?(file)    -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列か IO オブジェクトを指定します。
@@ -188,6 +196,7 @@
 - **SEE** [m:FileTest?.chardev?]
 
 ### def directory?(file)    -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列か IO オブジェクトを指定します。
@@ -195,6 +204,7 @@
 - **SEE** [m:FileTest?.directory?]
 
 ### def executable?(file)    -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列を指定します。
@@ -202,6 +212,7 @@
 - **SEE** [m:FileTest?.executable?]
 
 ### def executable_real?(file)    -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列を指定します。
@@ -210,6 +221,7 @@
 
 ### def exist?(file) -> bool
 ### def exists?(file) -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列か IO オブジェクトを指定します。
@@ -217,6 +229,7 @@
 - **SEE** [m:FileTest?.exist?] [m:FileTest?.exists?]
 
 ### def file?(file)    -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列か IO オブジェクトを指定します。
@@ -224,6 +237,7 @@
 - **SEE** [m:FileTest?.file?]
 
 ### def grpowned?(file)    -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列か IO オブジェクトを指定します。
@@ -231,6 +245,7 @@
 - **SEE** [m:FileTest?.grpowned?]
 
 ### def owned?(file)    -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列か IO オブジェクトを指定します。
@@ -238,6 +253,7 @@
 - **SEE** [m:FileTest?.owned?]
 
 ### def pipe?(file)    -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列か IO オブジェクトを指定します。
@@ -245,6 +261,7 @@
 - **SEE** [m:FileTest?.pipe?]
 
 ### def readable?(file)    -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列を指定します。
@@ -252,6 +269,7 @@
 - **SEE** [m:FileTest?.readable?]
 
 ### def readable_real?(file)    -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列を指定します。
@@ -267,6 +285,7 @@
 - **SEE** [m:FileTest?.setgid?]
 
 ### def setuid?(file)    -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列を指定します。
@@ -290,8 +309,8 @@
 
 - **SEE** [m:FileTest?.socket?]
 
-
 ### def sticky?(file) -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列を指定します。
@@ -299,6 +318,7 @@
 - **SEE** [m:FileTest?.sticky?]
 
 ### def symlink?(file) -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列を指定します。
@@ -306,6 +326,7 @@
 - **SEE** [m:FileTest?.symlink?]
 
 ### def writable?(file) -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列を指定します。
@@ -313,6 +334,7 @@
 - **SEE** [m:FileTest?.writable?]
 
 ### def writable_real?(file) -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列を指定します。
@@ -320,12 +342,12 @@
 - **SEE** [m:FileTest?.writable_real?]
 
 ### def zero?(file) -> bool
+
 [c:FileTest] モジュールにある同名のクラスメソッドと同じです.
 
 - **param** `file` -- ファイル名を表す文字列を指定します。
 
 - **SEE** [m:FileTest?.zero?]
-
 
 #@# Shell::CommandProcessor に直接定義されているメソッド
 
@@ -393,7 +415,6 @@ p sh["exists?", "foo"]  # => true
 
 - **SEE** [m:Kernel?.test], [c:FileTest]
 
-
 ### def mkdir(*path) -> Array
 
 Dir.mkdirと同じです。 (複数可)
@@ -437,7 +458,6 @@ Shell.def_system_command("head")
 sh.system("ls", "-l") | sh.head("-n 3") > STDOUT
 ```
 
-
 ### def rehash -> {}
 
 登録されているシステムコマンドの情報をクリアします。
@@ -470,7 +490,6 @@ sh.transact{
 
 - **param** `block` -- transact 内部で実行するシェルを指定します。
 
-
 ```ruby title="使用例"
 require 'shell'
 Shell.def_system_command("head")
@@ -482,8 +501,8 @@ File.open("out.txt", "w"){ |fp|
 }
 ```
 
-
 ### def echo(*strings) -> Shell::Filter
+
 実行すると, それらを内容とする Filter オブジェクトを返します.
 
 - **param** `strings` -- シェルコマンド echo に与える引数を文字列で指定します。
@@ -502,8 +521,8 @@ sh.transact {
 }
 ```
 
-
 ### def cat(*files) -> Shell::Filter
+
 実行すると, それらを内容とする Filter オブジェクトを返します.
 
 - **param** `files` -- シェルコマンド cat に与えるファイル名を文字列で指定します。
@@ -522,8 +541,8 @@ sh.transact {
 }
 ```
 
-
 ### def glob(pattern) -> Shell::Filter
+
 実行すると, それらを内容とする Filter オブジェクトを返します.
 
 - **param** `pattern` -- シェルコマンド glob に与えるパターンを指定します。
@@ -583,8 +602,6 @@ sh.transact {
 
 ### def identical?
 #@todo
-
-
 
 ### def world_readable?
 #@todo

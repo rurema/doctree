@@ -16,7 +16,9 @@ Usage: gem contents GEMNAME [options]
     -l, --[no-]lib-only              Gem パッケージの lib ディレクトリ以下にある
                                      ファイルのみを表示します
 ```
+
 #@include(common_options)
+
 ```console
 Arguments:
   GEMNAME       Gem パッケージの名前を指定します

@@ -231,6 +231,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 ### def each_byte{|byte| ... } -> nil
 ### def each_byte -> Enumerator
+
 IO クラスの同名メソッド[m:IO#each_byte]と同じです。
 
 但し、gzip ファイル中に
@@ -283,6 +284,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 - **SEE** [m:IO#each_byte]
 
 ### def gets(rs = $/) -> String | nil
+
 IO クラスの同名メソッド[m:IO#gets]と同じです。
 
 但し、gzip ファイル中に
@@ -333,6 +335,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 ```
 
 ### def getc -> Integer | nil
+
 IO クラスの同名メソッド[m:IO#getc]と同じです。
 
 但し、gzip ファイル中に
@@ -382,10 +385,10 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 #=> 10
 ```
 
-
 - **SEE** [m:IO#getc]
 
 ### def lineno -> Integer
+
 IO クラスの同名メソッド[m:IO#lineno]と同じです。
 
 但し、gzip ファイル中に
@@ -441,6 +444,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 - **SEE** [m:IO#lineno]
 
 ### def lineno=(num)
+
 IO クラスの同名メソッド[m:IO#lineno=]と同じです。
 
 但し、gzip ファイル中に
@@ -499,6 +503,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 - **SEE** [m:IO#lineno=]
 
 ### def read(length = nil) -> String | nil
+
 IO クラスの同名メソッド[m:IO#read]と同じです。
 
 但し、gzip ファイル中に
@@ -549,6 +554,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 - **SEE** [m:IO#read]
 
 ### def readchar -> Integer
+
 IO クラスの同名メソッド[m:IO#readchar]と同じです。
 
 但し、gzip ファイル中に
@@ -604,6 +610,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 ```
 
 ### def readline(rs = $/) -> String
+
 IO クラスの同名メソッド[m:IO#readline]と同じです。
 
 但し、gzip ファイル中に
@@ -661,6 +668,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 - **SEE** [m:IO#readline]
 
 ### def readlines(rs = $/) -> Array
+
 IO クラスの同名メソッド[m:IO#readlines]と同じです。
 
 但し、gzip ファイル中に
@@ -709,6 +717,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 - **SEE** [m:IO#readlines]
 
 ### def readpartial(maxlen, outbuf = nil) -> String
+
 IO クラスの同名メソッド [m:IO#readpartial] と同じです。
 
 - **param** `maxlen` -- 読み込む長さの上限を整数で指定します。
@@ -722,6 +731,7 @@ IO クラスの同名メソッド [m:IO#readpartial] と同じです。
 - **SEE** [m:IO#readpartial]
 
 ### def ungetc(char) -> nil
+
 IO クラスの同名メソッド [m:IO#ungetc] と同じです。
 
 IO クラスの同名メソッドと同じですが、gzip ファイル中に

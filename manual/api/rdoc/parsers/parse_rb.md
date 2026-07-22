@@ -85,8 +85,8 @@ def regular_method() end
 
 ライブラリの内部で使用します。
 
-
 # class RDoc::Parser::Ruby < RDoc::Parser
+
 include RDoc::RubyToken
 include RDoc::TokenStream
 include RDoc::Parser::RubyTools
@@ -102,7 +102,6 @@ RDoc::NormalClass type
 ### const SINGLE -> "<<"
 
 RDoc::SingleClass type
-
 
 ## Class Methods
 

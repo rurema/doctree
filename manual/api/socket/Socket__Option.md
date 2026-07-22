@@ -70,6 +70,7 @@ p Socket::Option.bool(:INET, :SOCKET, :KEEPALIVE, false)
 ```
 
 ### def linger(onoff, secs) -> Socket::Option
+
 SOL_SOCKET/SO_LINGER 用の Socket::Option オブジェクト
 を新たに生成し返します。
 
@@ -78,12 +79,15 @@ SOL_SOCKET/SO_LINGER 用の Socket::Option オブジェクト
 
 ## Instance Methods
 ### def family -> Integer
+
 ソケットファミリを表す整数を返します。
 
 ### def level -> Integer
+
 ソケットオプションレベルを表す整数を返します。
 
 ### def optname -> Integer
+
 ソケットのオプション名を表す整数を返します。
 
 ### def data -> String
@@ -98,18 +102,21 @@ SOL_SOCKET/SO_LINGER 用の Socket::Option オブジェクト
 to_s は過去との互換性のために存在します。
 
 ### def int -> Integer
+
 オプションのデータ(内容)を整数に変換して返します。
 
 - **raise** `TypeError` -- dataのバイト数が不適切である(sizeof(int)と異なる)場合に発生します
 - **SEE** [m:Socket::Option#data]
 
 ### def bool -> bool
+
 オプションのデータ(内容)を真偽値に変換して返します。
 
 - **raise** `TypeError` -- dataのバイト数が不適切である(sizeof(int)と異なる)場合に発生します
 - **SEE** [m:Socket::Option#data]
 
 ### def linger -> [bool, Integer]
+
 オプションが SOL_SOCKET/SO_LINGER である場合に、
 オプションのデータ(内容)を真偽値と整数のペアとして返します。
 
@@ -118,6 +125,7 @@ to_s は過去との互換性のために存在します。
 - **SEE** [m:Socket::Option#data]
 
 ### def unpack(template) -> Array
+
 data に対し [m:String#unpack] を呼び出し、その結果を返します。
 
 このメソッドは過去との互換性のために存在します。

@@ -10,11 +10,12 @@ library: _builtin
 FileTest で定義された各メソッドは、システムコールに失敗しても例外を発生させません。
 真を返した時のみ、返り値は意味をもちます。
 例えば、
+
 ```ruby
 File.exist?('/root/.bashrc')
 ```
-が false を返しても、それはファイルが存在しないことを保証しません。
 
+が false を返しても、それはファイルが存在しないことを保証しません。
 
 ## Module Functions
 

@@ -33,4 +33,3 @@ puts [2, ""].to_csv(write_empty_value: "BLANK")  # => 2,BLANK
 
 - **SEE** [m:CSV.generate_line]
 
-

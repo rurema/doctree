@@ -127,7 +127,6 @@ p 1 / BigDecimal("0.0") # =>  Infinity
 p 1 / BigDecimal("-0.0")  # => -Infinity
 ```
 
-
 ### 他の数値オブジェクトとの変換 (coerce)
 
 BigDecimal オブジェクトが算術演算子の左にあるときは、

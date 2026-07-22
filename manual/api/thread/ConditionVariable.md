@@ -3,6 +3,7 @@ library:
   - _builtin
 ---
 # class Thread::ConditionVariable < Object
+
 alias ConditionVariable
 
 スレッドの同期機構の一つである状態変数を実現するクラスです。
@@ -135,6 +136,7 @@ recv Milk
 ## Class Methods
 
 ### def new -> Thread::ConditionVariable
+
 状態変数を生成して返します。
 
 #@#noexample Thread::ConditionVariable#signal 等を参照

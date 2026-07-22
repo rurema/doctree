@@ -22,6 +22,7 @@ rb_str_new(ptr, strlen(ptr))
 文字列 str の複製を作成し返します。
 
 ### VALUE rb_str_substr(VALUE str, long beg, long len)
+
 str[beg, len]
 
 ### VALUE rb_str_cat(VALUE str, const char *ptr, long len)

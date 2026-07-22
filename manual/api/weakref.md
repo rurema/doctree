@@ -25,7 +25,6 @@ ref = WeakRef.new(foo)
 ref.some_method_of_foo
 ```
 
-
 ## Class Methods
 
 ### def new(orig) -> WeakRef

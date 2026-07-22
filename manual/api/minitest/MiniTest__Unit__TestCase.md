@@ -79,7 +79,6 @@ until: "2.2.0"
 
 テストクラス名のリストを返します。
 
-
 ## Constants
 ### const PASSTHROUGH_EXCEPTIONS -> [Class]
 

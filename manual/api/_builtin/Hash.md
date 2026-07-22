@@ -39,7 +39,6 @@ include:
 ハッシュに含まれる要素の順序が保持されるようになりました。
 ハッシュにキーが追加された順序で列挙します。
 
-
 ## Class Methods
 
 ### def try_convert(obj) -> Hash | nil
@@ -268,6 +267,7 @@ p foo({k: 1}) # => false
 ```
 
 - **SEE** [m:Module#ruby2_keywords], [m:Proc#ruby2_keywords]
+
 ## Instance Methods
 
 ### def values -> [object]
@@ -335,6 +335,7 @@ p my_hash.to_h.class  # => Hash
 
 ブロックを指定すると各ペアでブロックを呼び出し、
 その結果をペアとして使います。
+
 ```ruby title="ブロック付きの例"
 hash = { "a" => 97, "b" => 98 }
 p hash.to_h {|key, value| [key.upcase, value-32] } # => {"A"=>65, "B"=>66}
@@ -385,6 +386,7 @@ p h.invert   #=> {0=>"a", 100=>"b", 200=>"c", 300=>"e"}
 ```
 
 ### 参考
+
 値が重複していたときに備えて、変換後の値を配列として保持するには、次のようにします。
 
 ```ruby
@@ -494,7 +496,6 @@ key に対して value を関連づけます。value を返し
 - **param** `key` -- キーを指定します。
 - **param** `value` -- 値を指定します。
 
-
 ```ruby title="例"
 h = {}
 
@@ -527,7 +528,6 @@ p h.default #=> "default value"
 
 compact は自身から value が nil のもの取り除いた Hash を生成して返します。 compact! は自身から破壊的に value が nil のものを取り除き、変更が行われた場合は self を、そうでなければ nil を返します。
 
-
 ```ruby title="例"
 hash = {a: 1, b: nil, c: 3}
 p hash.compact  #=> {:a=>1, :c=>3}
@@ -538,7 +538,6 @@ p hash.compact! #=>  nil
 ```
 
 - **SEE** [m:Array#compact]
-
 
 ### def compare_by_identity -> self
 
@@ -670,6 +669,7 @@ p h #=> {:japan=>"kyoto"}
 - **SEE** [m:Hash#dup],[m:Hash#merge],[m:Object#to_hash]
 
 ### def [](key) -> object | nil
+
 key に関連づけられた値を返します。
 
 該当するキーが登録されていない時には、デフォルト値を返します。
@@ -695,6 +695,7 @@ p h2[:non]             #=> [{}, :non]
 
 ### def default -> object | nil
 ### def default(key) -> object | nil
+
 ハッシュのデフォルト値を返します。
 
 ハッシュのデフォルト値がブロックで与えられている場合、 1 番目の形式だと
@@ -1310,7 +1311,6 @@ a[1] = :x
 p a.hash     #=> 329543
 ```
 
-
 ### def assoc(key)   ->  Array | nil
 
 ハッシュが key をキーとして持つとき、見つかった要素のキーと値のペア
@@ -1328,10 +1328,7 @@ p h.assoc("letters")  #=> ["letters", ["a", "b", "c"]]
 p h.assoc("foo")    #=> nil
 ```
 
-
-
 - **SEE** [m:Array#assoc]
-
 
 ### def flatten(level = 1) -> Array
 
@@ -1389,7 +1386,6 @@ h = { "a" => 100, "b" => 200, "c" => 300 }
 p h.select {|k,v| k > "a"}  #=> {"b" => 200, "c" => 300}
 p h.select {|k,v| v < 200}  #=> {"a" => 100}
 ```
-
 
 - **SEE** [m:Hash#select!], [m:Hash#reject]
 
@@ -1457,6 +1453,7 @@ p h.transform_values.with_index {|v, i| "#{v}.#{i}" }
 - **SEE** [m:Hash#transform_values!]
 - **SEE** [m:Hash#transform_keys]
 - **SEE** [m:Hash#transform_keys!]
+
 ### def transform_values! {|value| ... } -> self
 ### def transform_values!                -> Enumerator
 
@@ -1478,6 +1475,7 @@ p h.transform_values!.with_index {|v, i| "#{v}.#{i}" }
 - **SEE** [m:Hash#transform_values]
 - **SEE** [m:Hash#transform_keys]
 - **SEE** [m:Hash#transform_keys!]
+
 ### def transform_keys {|key| ... } -> Hash
 ### def transform_keys(hash)        -> Hash
 ### def transform_keys              -> Enumerator
@@ -1512,7 +1510,6 @@ p h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
         ブロックが与えられなかった場合は、[c:Enumerator] オブジェクトを
         返します。
 
-
 ```ruby title="例"
 h = { a: 1, b: 2, c: 3 }
 p h.transform_keys! {|k| k.to_s } # => {"a"=>1, "b"=>2, "c"=>3}
@@ -1538,6 +1535,7 @@ p h.slice(:b, :c, :d) # => {:b=>200, :c=>300}
 ```
 
 - **SEE** [m:Hash#except], [m:ENV.slice]
+
 ### def except(*keys) -> Hash
 
 引数で指定された以外のキーとその値だけを含む Hash を返します。

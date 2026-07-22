@@ -9,6 +9,7 @@ category: Network
 ## Class Methods
 
 ### def getaddress(host) -> String
+
 [m:IPSocket.getaddress] を置きかえ、
 [lib:resolv] ライブラリを使い名前解決します。
 
@@ -21,6 +22,7 @@ category: Network
 
 ### def open(host, serv, local_host=nil, local_service=nil) -> TCPSocket
 ### def new(host, serv, local_host=nil, local_service=nil) -> TCPSocket
+
 [m:TCPSocket.new] のパラメータ host と local_host 
 の名前解決に [lib:resolv] ライブラリを使います。
 
@@ -35,6 +37,7 @@ category: Network
 ## Instance Methods
 
 ### def bind(host, port) -> Integer
+
 [m:UDPSocket#bind]のパラメータ host の名前解決に [lib:resolv] 
 ライブラリを使います。
 
@@ -43,6 +46,7 @@ category: Network
 - **raise** `SocketError` -- 名前解決に失敗した場合に発生します。
 
 ### def connect(host, port) -> Integer
+
 [m:UDPSocket#connect] のパラメータ host の名前解決に 
 [lib:resolv] ライブラリを使います。
 
@@ -52,6 +56,7 @@ category: Network
 
 ### def send(mesg, flags , dest_sockaddr=nil) -> Integer
 ### def send(mesg, flags, host, port) -> Integer
+
 4 引数の形式で [m:UDPSocket#send] 実行したとき、
 パラメータ host の名前解決に
 [lib:resolv] ライブラリを使います。
@@ -67,11 +72,11 @@ category: Network
 ## Class Methods
 
 ### def new(host, serv) -> SOCKSSocket
+
 [m:SOCKSSocket.new]のパラメータ host の名前解決に [lib:resolv] 
 ライブラリを使います。
 
 - **param** `host` -- ホスト名を文字列で指定します。
 - **param** `serv` -- ホスト名を文字列で指定します。
 - **raise** `SocketError` -- 名前解決に失敗した場合に発生します。
-
 

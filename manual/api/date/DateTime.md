@@ -28,6 +28,7 @@ yesterday = DateTime.now - 1
 
 ### def civil(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 ### def new(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
+
 暦日付に相当する日時オブジェクトを生成します。
 
 時差の単位は日です。
@@ -44,6 +45,7 @@ yesterday = DateTime.now - 1
 - **raise** `ArgumentError` -- 正しくない日時
 
 ### def commercial(cwyear = -4712, cweek = 1, cwday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
+
 暦週日付に相当する日時オブジェクトを生成します。
 
 [m:DateTime.new] も参照してください。
@@ -60,6 +62,7 @@ yesterday = DateTime.now - 1
 
 #@# exp
 ### def httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> DateTime
+
 [RFC:2616] で定められた書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
@@ -70,6 +73,7 @@ yesterday = DateTime.now - 1
 
 #@# exp
 ### def iso8601(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
+
 いくつかの代表的な ISO 8601 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
@@ -81,6 +85,7 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 ### def jd(jd = 0, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
+
 ユリウス日に相当する日時オブジェクトを生成します。
 
 [m:DateTime.new] も参照してください。
@@ -95,6 +100,7 @@ yesterday = DateTime.now - 1
 
 #@# exp
 ### def jisx0301(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
+
 いくつかの代表的な JIS X 0301 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
@@ -104,11 +110,13 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 ### def now(start = Date::ITALY) -> DateTime
+
 現在の時刻に相当する日時オブジェクトを生成します。
 
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 ### def ordinal(year = -4712, yday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
+
 年日付に相当する日時オブジェクトを生成します。
 
 [m:DateTime.new] も参照してください。
@@ -125,6 +133,7 @@ yesterday = DateTime.now - 1
 #@# exp
 ### def rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
 ### def rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
+
 [RFC:2822] で定められた書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
@@ -135,6 +144,7 @@ yesterday = DateTime.now - 1
 
 #@# exp
 ### def rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
+
 [RFC:3339] 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
@@ -144,6 +154,7 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 ### def today(start = Date::ITALY) -> Date
+
 このクラスでは利用できません。
 
 [m:DateTime.now] を参照してください。
@@ -152,6 +163,7 @@ yesterday = DateTime.now - 1
 
 #@# exp
 ### def xmlschema(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
+
 XML Schema による書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
@@ -161,6 +173,7 @@ XML Schema による書式の日付を解析し、
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 ### def parse(str = '-4712-01-01T00:00:00+00:00', complete = true, start = Date::ITALY) -> DateTime
+
 与えられた日時表現を解析し、
 その情報に基づいて DateTime オブジェクトを生成します。
 
@@ -216,16 +229,17 @@ p DateTime.strptime('2001-02-03T12:13:14Z').to_s
 
 - **SEE** [m:Date.strptime], [m:DateTime._strptime], [man:strptime(3)], [m:Date#strftime]
 
-
 ## Instance Methods
 
 ### def hour -> Integer
+
 時間を返します (0-23)。
 
 ### def iso8601(n = 0) -> String
 ### def rfc3339(n = 0) -> String
 #@# exp
 ### def xmlschema(n = 0) -> String
+
 ISO 8601 書式の文字列を返します (XML Schema の dateTime 相当)。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
 
@@ -240,6 +254,7 @@ p DateTime.parse('2001-02-03T04:05:06.123456789+07:00').iso8601(9)
 ```
 
 ### def jisx0301(n = 0) -> String
+
 JIS X 0301 書式の文字列を返します。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
 
@@ -253,9 +268,11 @@ p DateTime.parse('2001-02-03T04:05:06.123456789+07:00').jisx0301(9)
 
 ### def min -> Integer
 ### def minute -> Integer
+
 分を返します (0-59)。
 
 ### def new_offset(offset = 0) -> DateTime
+
 self を複製して、その時差を設定しなおします。
 引数を省略した場合は、零 (協定世界時) になります。
 
@@ -264,28 +281,35 @@ self を複製して、その時差を設定しなおします。
 - **param** `offset` -- 時差
 
 ### def offset -> Rational
+
 時差を返します。
 
 ### def sec -> Integer
 ### def second -> Integer
+
 秒を返します (0-59)。
 
 ### def zone -> String
+
 タイムゾーンを返します。
 
 これは、正確には時差をあらわす文字列です。
 
 ### def sec_fraction -> Rational
 ### def second_fraction -> Rational
+
 秒の小数点以下の部分を表す分数を返します。
 
 ### def to_date -> Date
+
 対応する [c:Date] オブジェクトを返します。
 
 ### def to_datetime -> self
+
 self を返します。
 
 ### def to_time -> Time
+
 対応する [c:Time] オブジェクトを返します。
 #@since 3.2
 ### def deconstruct_keys(array_of_names_or_nil) -> Hash

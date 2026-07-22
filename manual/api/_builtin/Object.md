@@ -119,11 +119,11 @@ p(:foo.equal? :foo) #=> true
 - **SEE** [m:Object#object_id],[m:Object#==],[m:Object#eql?],[c:Symbol]
 
 ### def methods(include_inherited = true) -> [Symbol]
+
 そのオブジェクトに対して呼び出せるメソッド名の一覧を返します。
 このメソッドは public メソッドおよび protected メソッドの名前を返します。
 
 ただし特別に、引数が偽の時は [m:Object#singleton_methods](false) と同じになっています。
-
 
 - **param** `include_inherited` -- 引数が偽の時は [m:Object#singleton_methods](false) と同じになります。
 
@@ -159,7 +159,6 @@ p obj.protected_methods(false)
 [:private_singleton, :private_foo]
 [:protected_singleton, :protected_foo]
 ```
-
 
 ```ruby title="例2"
 # あるオブジェクトの応答できるメソッドの一覧を得る。
@@ -248,6 +247,7 @@ p 1.public_method(:to_int) #=> #<Method: Integer#to_int>
 - **SEE** [m:Module#protected_instance_methods],[m:Object#methods],[m:Object#singleton_methods]
 
 ### def singleton_methods(inherited_too = true) -> [Symbol]
+
 そのオブジェクトに対して定義されている特異メソッド名
 (public あるいは protected メソッド) の一覧を返します。
 
@@ -302,7 +302,6 @@ p Foo.singleton_methods(false)
 [:protected_self, :public_self]
 [:protected_class_foo, :public_class_foo]
 ```
-
 
 ```ruby title="例2"
 # あるオブジェクトの特異メソッドの一覧を得る。
@@ -366,6 +365,7 @@ puts it #=> Class:Foo Number:40
 ```
 
 - **SEE** [m:Object#to_str],[m:Kernel?.String]
+
 ### def to_str -> String
 {: nomethod}
 
@@ -393,6 +393,7 @@ p('Second' + it) #=> "SecondEdition"
 ```
 
 - **SEE** [m:Object#to_s],[m:Kernel?.String]
+
 ### def to_ary -> Array
 {: nomethod}
 
@@ -474,6 +475,7 @@ p(ary[Foo.new]) # => :b
 ```
 
 - **SEE** [m:Kernel?.Integer]
+
 ### def to_proc -> Proc
 {: nomethod}
 
@@ -514,7 +516,6 @@ p doing(&it) #=> "ok"
 - IOオブジェクトそのものとみなせるようなもの
 という厳しいものになっています。
 
-
 #@#例
 
 ### def to_regexp -> Regexp
@@ -552,7 +553,6 @@ p Regexp.union(/^at/, it) #=> /(?-mix:^at)|(?-mix:[\d]+)/
 
 ブロックを指定した場合は [m:Enumerator#size] がブロックの評価結果を返
 します。ブロックパラメータは引数 args です。
-
 
 - **param** `method` -- メソッド名の文字列かシンボルです。
 - **param** `args` -- 呼び出すメソッドに渡される引数です。
@@ -595,7 +595,6 @@ p enum.size # => 42
 ```
 
 - **SEE** [c:Enumerator], [m:Enumerator#size]
-
 
 ### def tap{|x| ... } -> self
 
@@ -935,6 +934,7 @@ class Foo
 end
 p Foo.new.inspect                # => "#<Foo:0x0300c868 @a=1, @b=2>"
 ```
+
 #@end
 
 - **SEE** [m:Kernel?.p]
@@ -982,6 +982,7 @@ p obj.instance_variable_get(:@foo)      #=> 2
 - **SEE** [m:Object#instance_variable_get],[m:Object#instance_variables],[m:Object#instance_variable_defined?]
 
 ### def instance_variables -> [Symbol]
+
 オブジェクトのインスタンス変数名をシンボルの配列として返します。
 
 ```ruby
@@ -1210,7 +1211,6 @@ marshal_dump/marshal_load を使うべきです。
 
 - **SEE** [m:Object#marshal_dump], [c:Marshal]
 
-
 ### def clone(freeze: nil) -> object
 
 オブジェクトの複製を作成して返します。
@@ -1267,9 +1267,11 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェ
 
 深い(deep)コピーが必要な場合には、
 [c:Marshal]モジュールを利用して
+
 ```ruby
 Marshal.load(Marshal.dump(obj))
 ```
+
 このように複製を作成する方法があります。ただしMarshal出来ないオブジェクトが
 含まれている場合には使えません。
 
@@ -1450,11 +1452,13 @@ m = k.singleton_method(:hello) # ~> NameError
 ```
 
 #@since 3.4
+
 ```ruby title="例: extend で追加したモジュールのメソッド"
 o = Object.new
 o.extend(Module.new { def a = 1 })
 p o.singleton_method(:a).call # => 1
 ```
+
 #@end
 
 - **SEE** [m:Module#instance_method], [c:Method], [m:BasicObject#__send__], [m:Object#send], [m:Kernel?.eval], [m:Object#method]
@@ -1597,7 +1601,6 @@ Foo.new.foo
 
 - **SEE** [m:Module#remove_class_variable],[m:Module#remove_const]
 
-
 ### def instance_of?(klass) -> bool
 
 オブジェクトがクラス klass の直接のインスタンスである時真を返します。
@@ -1683,14 +1686,12 @@ p Kernel.class #=> Module
 何もせずに self を返します。
 このメソッドは Ruby 2.7 から deprecated で、Ruby 3.2 で削除予定です。
 
-
 - **SEE** [m:Object#tainted?],[m:Object#untaint],[m:Object#freeze]
 
 ### def tainted? -> false
 
 常に false を返します。
 全てのオブジェクトは常に untainted 扱いになりました。
-
 
 このメソッドは Ruby 2.7から deprecated で、Ruby 3.2 で削除予定です。
 
@@ -1701,7 +1702,6 @@ p Kernel.class #=> Module
 何もせずに self を返します。
 
 このメソッドは Ruby 2.7 から deprecated で、Ruby 3.2 で削除予定です。
-
 
 - **SEE** [m:Object#taint],[m:Object#tainted?]
 
@@ -1749,7 +1749,6 @@ p nil.singleton_class       #=> NilClass
 ```
 
 - **SEE** [m:Object#class]
-
 
 #@# #6373 を参照。
 ### def itself -> object
@@ -1849,7 +1848,6 @@ obj.clone は initialize_clone 経由で initialize_copy を呼びます。
 
 最後に obj.clone は、 obj が freeze されているか、引数に freeze: true を指定した場合、新しいオブジェクトを freeze します。
 
-
 ```ruby title="例: ユーザ定義クラスに追加のコピー処理を定義する"
 class MyClass
   attr_reader :data
@@ -1872,7 +1870,6 @@ a.data << 2
 p a.data  # => [1, 2]
 p b.data  # => [1]
 ```
-
 
 ```ruby
 obj = Object.new
@@ -1989,7 +1986,5 @@ p s.respond_to?(:sample)  # => false
 ```
 
 - **SEE** [m:Object#respond_to?], [m:BasicObject#method_missing]
-
-
 
 #@include(constants)

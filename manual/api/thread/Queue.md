@@ -3,6 +3,7 @@ library:
   - _builtin
 ---
 # class Thread::Queue < Object
+
 alias Queue
 
 Queue はスレッド間の FIFO(first in first out) の通信路です。ス
@@ -55,6 +56,7 @@ q = Thread::Queue.new
 q = Thread::Queue.new([a, b, c])
 q = Thread::Queue.new(items)
 ```
+
 #@else
 #@#noexample Thread::Queue#close 等を参照
 使用例は [ref:c:Thread::Queue#example] を参照してください。

@@ -116,7 +116,6 @@ EAGAIN, EINTR を含め例外 [c:Errno::EXXX] が発生します。
 
 - **raise** `Errno::EXXX` -- [man:accept(2)] がエラーになった場合に発生します。
 
-
 ### def listen(backlog) -> 0
 
 [man:listen(2)] を実行します。
@@ -132,8 +131,6 @@ backlog は、クライアントからの接続要求を保留できる数です
 - **raise** `Errno::EXXX` -- [man:listen(2)] が失敗すれば 例外 [c:Errno::EXXX] が発生します。
 
 - **return** -- [man:listen(2)] が成功すれば 0 を返します。
-
-
 
 ### def sysaccept -> Integer
 

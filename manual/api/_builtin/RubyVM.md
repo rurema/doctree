@@ -35,7 +35,6 @@ Ruby の 内部情報へのアクセス手段を提供するクラスです。
 #@#
 #@# VM_COLLECT_USAGE_DETAILS を有効にしてコンパイルした時のみ有効
 
-
 ## Constants
 
 ### const OPTS -> [String]

@@ -2,6 +2,7 @@
 library: uri
 ---
 # class URI::FTP < URI::Generic
+
 FTP URI を表すクラスです。
 
 ## Class Methods

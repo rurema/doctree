@@ -148,7 +148,6 @@ klass のクラス変数 name に val を代入します。
 
 ### void rb_define_hooked_variable(const char *name, VALUE *var, VALUE (*getter)(), VALUE (*setter)())
 
-
 ### void rb_define_readonly_variable(const char *name, VALUE *var)
 
 ### void rb_define_variable(const char *name, VALUE *var)

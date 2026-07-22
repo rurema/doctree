@@ -15,8 +15,10 @@ Usage: gem list [STRING] [options]
         --[no-]versions              Gem パッケージの名前のみ表示します
     -a, --all                        全ての Gem パッケージを表示します
 ```
+
 #@include(local_remote_options)
 #@include(common_options)
+
 ```text
 Arguments:
   STRING        探したい Gem の名前を前方一致で指定します
@@ -25,7 +27,6 @@ Summary:
 Defaults:
   --local --no-details
 ```
-
 
 # class Gem::Commands::ListCommand < Gem::Commands::QueryCommand
 

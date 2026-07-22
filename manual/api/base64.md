@@ -24,8 +24,6 @@ plain = Base64.decode64(enc)
                     # => "Send reinforcements"
 ```
 
-
 データをエンコードするために Base64 エンコードを使用するのは、あらゆるバイナリデータを
 表示可能な文字列に変換するためです。
-
 

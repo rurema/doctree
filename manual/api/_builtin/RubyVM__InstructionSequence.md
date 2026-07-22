@@ -80,6 +80,7 @@ p RubyVM::InstructionSequence.compile_file("/tmp/hello.rb")
 します。
 
 #@if("3.4" <= version)
+
 ```ruby title="例"
 require "pp"
 pp RubyVM::InstructionSequence.compile_option
@@ -95,8 +96,10 @@ pp RubyVM::InstructionSequence.compile_option
 # debug_level: 0,
 # frozen_string_literal: nil}
 ```
+
 #@end
 #@if("3.3" <= version and version < "3.4")
+
 ```ruby title="例"
 require "pp"
 pp RubyVM::InstructionSequence.compile_option
@@ -112,8 +115,10 @@ pp RubyVM::InstructionSequence.compile_option
 # :coverage_enabled=>true,
 # :debug_level=>0}
 ```
+
 #@end
 #@if(version < "3.3")
+
 ```ruby title="例"
 require "pp"
 pp RubyVM::InstructionSequence.compile_option
@@ -130,6 +135,7 @@ pp RubyVM::InstructionSequence.compile_option
 # :coverage_enabled=>true,
 # :debug_level=>0}
 ```
+
 #@end
 
 - **SEE** [m:RubyVM::InstructionSequence.compile_option=]
@@ -266,6 +272,7 @@ $a_global_proc = proc { str = 'a' + 'b' }
 > RubyVM::InstructionSequence.of($a_global_proc)
 > # => #<RubyVM::InstructionSequence:0x007fb73d7caf78>
 ```
+
 ### def load_from_binary(binary) -> RubyVM::InstructionSequence
 
 [m:RubyVM::InstructionSequence#to_binary]により作られたバイナリフォーマットの文字列からiseqのオブジェクトをロードします。
@@ -407,7 +414,6 @@ self の情報を 14 要素の配列にして返します。
 - **`bytecode`**:
 
   命令シーケンスを構成する命令とオペランドの配列の配列。
-
 
   ```ruby title="例"
   require 'pp'
@@ -612,6 +618,7 @@ end
 p RubyVM::InstructionSequence.of(method(:foo)).first_lineno
 # => 2
 ```
+
 ### def to_binary(extra_data = nil) -> String
 
 バイナリフォーマットでシリアライズされたiseqのデータを文字列として返します。

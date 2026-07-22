@@ -345,7 +345,6 @@ zip コマンドとして使用するコマンドを設定します。
 
 zip ファイル用のファイル名を返します。
 
-
 ## Singleton Methods
 
 ### def new(name = nil, version = nil){|t| ... } -> Rake::PackageTask

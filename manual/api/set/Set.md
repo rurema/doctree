@@ -191,6 +191,7 @@ p s         # => #<Set: {1, 2, 3}>
 - **SEE** [m:Array#flatten]
 
 ### def to_a -> Array
+
 self を配列に変換します。要素の順序は不定です。
 
 ```ruby

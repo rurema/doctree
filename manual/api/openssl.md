@@ -63,6 +63,7 @@ print cer.to_text
 ```
 
 ### 参考文献 {#references}
+
   - [RFC:5246]
   - Eric Rescorla. SSL and TLS : Designing and Building Secure Systems.
     邦訳, Eric Rescorla 著 齋藤孝道・鬼頭利之・古森貞監訳.
@@ -73,21 +74,25 @@ print cer.to_text
     OpenSSL -暗号・PKI・SSL/TLSライブラリの詳細-
 
 # module OpenSSL
+
 OpenSSL のすべてのクラス、モジュール、メソッド、定数を
 保持しているモジュールです。
 
 ## Module functions
 ### module_function def debug -> bool
+
 デバッグモードが on ならば true を返します。
 
 - **SEE** [m:OpenSSL?.debug=]
 
 ### module_function def debug=(b)
+
 デバッグモードを on/off します。
 
 - **SEE** [m:OpenSSL?.debug]
 
 ### module_function def errors -> [String]
+
 OpenSSL のエラーキューに残っているエラー文字列を返します。
 
 通常、エラーキューはこの拡張ライブラリが空にするため、
@@ -132,8 +137,8 @@ Ruby/OpenSSL のバージョンです。
 
 - **SEE** [m:OpenSSL?.fips_mode=]
 
-
 #@# = module OpenSSL::SSL::SocketForwarder
 # class OpenSSL::OpenSSLError < StandardError
+
 すべての OpenSSL 関連の例外クラスのベースとなる例外クラスです。
 

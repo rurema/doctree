@@ -2,12 +2,14 @@
 library: openssl
 ---
 # class OpenSSL::Digest::Digest < OpenSSL::Digest
+
 このクラスは互換性のために存在します。
 
 [c:OpenSSL::Digest] を代わりに利用してください。
 
 ## Class Methods
 ### def new(*args) -> OpenSSL::Digest::Digest
+
 互換性のためのメソッドです。
 
 [m:OpenSSL::Digest.new] で返されるオブジェクトと同じ働きをする

@@ -66,7 +66,6 @@ s.scan(/\w+/)
 # This is an example string_     s.eos? = true
 ```
 
-
 現在のスキャンポインタがさす地点以外でもマッチしたい場合は、[m:StringScanner#scan_until]など
 を使ってください。
 
@@ -111,7 +110,6 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 セットしません。代わりに [m:StringScanner#\[\]], [m:StringScanner#matched?] などの
 マッチデータ関連メソッドを使ってください。
 
-
 ## Class Methods
 
 ### def new(str, dup = false) -> StringScanner 
@@ -135,6 +133,7 @@ p s.scan(/\s+/)   #=> " "
 ```
 
 ### def  must_C_version -> self
+
 このメソッドは後方互換性のために定義されています。
 
 ## Instance Methods
@@ -147,7 +146,6 @@ p s.scan(/\s+/)   #=> " "
 
 - **param** `nth` -- 前回マッチした正規表現の nth 番目のかっこに対応する部分文字列を
            返します。
-
 
 ```ruby title="例"
 require 'strscan'
@@ -208,6 +206,7 @@ p str                      # => "test string"
 
 ### def beginning_of_line? -> bool
 ### def bol? -> bool
+
 スキャンポインタが行頭を指しているなら true を、
 行頭以外を指しているなら false を返します。
 
@@ -228,6 +227,7 @@ p s.bol?      # => false
 ```
 
 ### def check(regexp) -> String | nil
+
 現在位置から regexp とのマッチを試みます。
 マッチに成功したらマッチした部分文字列を返します。
 マッチに失敗したら nil を返します。
@@ -248,6 +248,7 @@ p s.matched    # => nil
 ```
 
 ### def check_until(regexp) -> String | nil
+
 regexp が一致するまで文字列をスキャンします。
 マッチに成功したらスキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
 マッチに失敗したら nil を返します。
@@ -268,6 +269,7 @@ p s.pre_match        # => "test "
 
 ### def eos? -> bool
 ### def empty? -> bool
+
 スキャンポインタが文字列の末尾を指しているなら true を、
 末尾以外を指しているなら false を返します。
 
@@ -308,6 +310,7 @@ p s.exist?(/e/) # => nil
 ```
 
 ### def getch -> String | nil
+
 一文字スキャンして文字列で返します。
 スキャンポインタをその後ろに進めます。
 スキャンポインタが文字列の末尾を指すならnilを返します。
@@ -324,8 +327,6 @@ p s.getch                         # => "び"
 p s.getch                         # => "い"
 p s.getch                         # => nil
 ```
-
-
 
 ### def get_byte -> String | nil
 ### def getbyte -> String | nil
@@ -351,9 +352,8 @@ p s.get_byte       #=> "\xA4"
 p s.get_byte       #=> nil   
 ```
 
-
-
 ### def inspect -> String
+
 StringScannerオブジェクトを表す文字列を返します。
 
 文字列にはクラス名の他、以下の情報が含まれます。
@@ -375,8 +375,8 @@ p s.scan(/\w+/)                      # => "string"
 p s.inspect                          # => "#<StringScanner fin>"
 ```
 
-
 ### def match?(regexp) -> Integer | nil
+
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
 マッチしたら、スキャンポインタは進めずにマッチした
 部分文字列の長さを返します。マッチしなかったら nil を
@@ -407,6 +407,7 @@ p s.match?(/\s+/)   #=> nil
 ```
 
 ### def matched -> String | nil
+
 前回マッチした部分文字列を返します。
 前回のマッチに失敗していると nil を返します。
 
@@ -424,6 +425,7 @@ p s.matched   # => " "
 ```
 
 ### def matched? -> bool
+
 前回のマッチが成功していたら true を、
 失敗していたら false を返します。
 
@@ -441,6 +443,7 @@ p s.matched?  # => true
 ```
 
 ### def matched_size -> Integer | nil
+
 前回マッチした部分文字列の長さを返します。
 前回マッチに失敗していたら nil を返します。
 
@@ -473,9 +476,9 @@ p s.scan(/\w+/)  # => nil
 p s.matched_size # => nil
 ```
 
-
 ### def peek(bytes) -> String
 ### def peep(bytes) -> String
+
 スキャンポインタから長さ bytes バイト分だけ文字列を返します。
 
 ```ruby title="例"
@@ -525,6 +528,7 @@ p s.peek(4)     # => " str"
 
 ### def pointer -> Integer
 ### def pos -> Integer
+
 現在のスキャンポインタのインデックスを返します。
 
 ```ruby title="例"
@@ -560,6 +564,7 @@ p s.charpos         # => 4
 
 ### def pointer=(n)
 ### def pos=(n)
+
 スキャンポインタのインデックスを n にセットします。
 
 - **param** `n` -- 整数で、バイト単位で指定します。
@@ -587,8 +592,8 @@ p s.pos = -4    # => -4
 p s.scan(/\w+/) # => "ring"
 ```
 
-
 ### def post_match -> String | nil
+
 前回マッチを行った文字列のうち、マッチしたところよりも後ろの
 部分文字列を返します。前回のマッチが失敗していると常に nil を
 返します。
@@ -611,6 +616,7 @@ p s.post_match  # => nil
 ```
 
 ### def pre_match -> String | nil
+
 前回マッチを行った文字列のうち、マッチしたところよりも前の
 部分文字列を返します。前回のマッチが失敗していると常に nil を
 返します。
@@ -633,6 +639,7 @@ p s.pre_match # => nil
 ```
 
 ### def reset -> self
+
 スキャンポインタを文字列の先頭 (インデックス 0) に戻し、
 マッチ記録を捨てます。
 
@@ -655,6 +662,7 @@ p s.pos       # => 0
 ```
 
 ### def rest -> String
+
 文字列の残り (rest) を返します。
 具体的には、スキャンポインタが指す位置からの文字列を返します。
 
@@ -674,6 +682,7 @@ p s.rest       # => ""
 ```
 
 ### def rest? -> bool
+
 文字列が残っているならば trueを、
 残っていないならば false を返します。
 
@@ -697,6 +706,7 @@ p s.rest?       # => false
 
 ### def rest_size -> Integer
 ### def restsize -> Integer
+
 文字列の残りの長さを返します。
 stringscanner.rest.size と同じです。
 
@@ -712,6 +722,7 @@ p s.rest.size # => 11
 ```
 
 ### def scan(regexp) -> String | nil
+
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
 マッチしたら、スキャンポインタを進めて正規表現にマッチした
 部分文字列を返します。マッチしなかったら nil を返します。
@@ -730,6 +741,7 @@ p s.scan(/./)     #=> nil
 ```
 
 ### def scan_full(regexp, s, f) -> object
+
 スキャンポインタの位置から regexp と文字列のマッチを試します。
 
 マッチに成功すると、s と f の値によって以下のように動作します。
@@ -771,6 +783,7 @@ p s.scan_full(/\w+/, true, true)     #=> "string"
 - **SEE** [m:StringScanner#scan] [m:StringScanner#skip] [m:StringScanner#check]  [m:StringScanner#match?] 
 
 ### def scan_until(regexp) -> String | nil
+
 regexp で指定された正規表現とマッチするまで文字列をスキャンします。
 マッチに成功したらスキャンポインタを進めて、
 スキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
@@ -789,6 +802,7 @@ p s.pre_match       # => "test "
 ```
 
 ### def search_full(regexp, s, f) -> object
+
 regexp で指定された正規表現とマッチするまで文字列をスキャンします。
 
 マッチに成功すると、s と f の値によって以下のように動作します。
@@ -825,10 +839,10 @@ p s.search_full(/str/, false, true)    #=> "est str"
 p s.search_full(/string/, true, true)  #=> "est string"
 ```
 
-
 - **SEE** [m:StringScanner#scan_until] [m:StringScanner#skip_until] [m:StringScanner#check_until] [m:StringScanner#exist?]
 
 ### def skip(regexp) -> Integer | nil
+
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
 マッチしたらスキャンポインタを進めマッチした部分文字列の
 長さを返します。マッチしなかったら nil を返します。
@@ -847,6 +861,7 @@ p s.skip(/./)     #=> nil
 ```
 
 ### def skip_until(regexp) -> Integer | nil
+
 regexp が一致するまで文字列をスキャンします。
 マッチに成功したらスキャンポインタを進めて、
 スキャン開始位置からマッチ部分の末尾までの部分文字列の長さを返します。
@@ -865,6 +880,7 @@ p s.pre_match       # => "test "
 ```
 
 ### def string -> String
+
 スキャン対象にしている文字列を返します。
 
 ```ruby title="例"
@@ -912,6 +928,7 @@ p str             # => "0123" (将来は "test string" が返る可能性あり)
 ```
 
 ### def string=(str)
+
 スキャン対象の文字列を str に変更して、マッチ記録を捨てます。
 
 - **param** `str` -- スキャン対象の文字列を str に変更して、マッチ記録を捨てます。
@@ -929,6 +946,7 @@ p s.scan(/\w+/)    # => "0123"
 
 ### def terminate -> self
 ### def clear -> self
+
 スキャンポインタを文字列末尾後まで進め、マッチ記録を捨てます。
 
 - **return** -- self を返します。
@@ -953,6 +971,7 @@ p s.pos       # => 11
 代わりに [m:StringScanner#terminate] を使ってください。
 
 ### def unscan -> self
+
 スキャンポインタを前回のマッチの前の位置に戻します。
 
 ```ruby title="例"
@@ -963,7 +982,6 @@ p s.scan(/\w+/) # => "test"
 s.unscan
 p s.scan(/\w+/) # => "test"
 ```
-
 
 - **return** -- selfを返します。
 
@@ -1010,7 +1028,6 @@ rescue => err
 end
 ```
 
-
 #@# bc-rdoc: detected missing name: matchedsize
 ### def matchedsize -> Integer | nil
 
@@ -1024,6 +1041,7 @@ end
 ## Constants
 
 ### const Version -> String
+
 [c:StringScanner] クラスのバージョンを文字列で返します。
 この文字列は [m:Object#freeze] されています。
 
@@ -1038,7 +1056,6 @@ p StringScanner::Version.frozen? # => true
 
 [c:StringScanner] クラスの詳しいバージョンを文字列で返します。
 この文字列は [m:Object#freeze] されています。
-
 
 # class StringScanner::Error
 

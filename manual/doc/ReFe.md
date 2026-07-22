@@ -25,6 +25,7 @@ $ bitclust setup
 手順で行います。(詳細は ReFe の README を参照してください)
 
 (1) <http://i.loveruby.net/ja/prog/refe.html> から ReFe の基本セット
+
 ```text
 を取って来てインストールします。
 
@@ -37,12 +38,14 @@ $ bitclust setup
 ```
 
 (2) <https://web.archive.org/web/20110706181204/http://www.ruby-lang.org/ja/man/man-rd-ja.tar.gz>
+
 ```text
 にあるのが最新のリファレンスマニュアルの tarball です。
 これを取得します。
 ```
 
 (3) 取得した man-rd-ja.tar.gz を展開し、ReFeデータベースを構築します。
+
 ```text
 /usr/local/share/refe は適宜環境に応じて変更してください(変更した場合は
 refe を実行するのに環境変数 REFE_DATA_DIR を設定する必要があります)
@@ -75,6 +78,7 @@ IO#puts
 ### ReFe の Emacs インタフェースのインストール方法
 
 (1) refe.el を取って来て
+
 ```text
 /usr/local/share/emacs/site-lisp などの Emacs Lisp ライブラリの置き場所
 に置きます。

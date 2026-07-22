@@ -323,7 +323,6 @@ Init_foo(void)
 }
 ```
 
-
 ### void rb_clear_cache(void)
 
 メソッドキャッシュをすべて消去します。
@@ -789,7 +788,6 @@ void *arg;
 
 Thread#pass の実体。
 
-
 ### static VALUE rb_thread_priority(VALUE thread)
 
 ### static VALUE rb_thread_priority_set(VALUE thread, VALUE prio)
@@ -832,7 +830,6 @@ Thread#pass の実体。
 対象の特定はできません。
 
 - **SEE** [f:rb_thread_wait_fd], [f:rb_thread_wait_for]
-
 
 ### void rb_thread_signal_raise(char *sig)
 

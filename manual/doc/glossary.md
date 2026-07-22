@@ -5,6 +5,7 @@
 [ref:a]　[ref:ka]　[ref:sa]　[ref:ta]　[ref:na]　[ref:ha]　[ref:ma]　[ref:ya]　[ref:ra]　[ref:wa]
 
 ### 記号・数字
+
 - **%記法**: {#percent-notation}
 - **% notation**:
   「%」記号で始まる多種多様なリテラル記法の総称。
@@ -357,7 +358,6 @@
   Ruby 用ドキュメント生成ツール。
 
   <https://yardoc.org/>
-
 
 ### あ {#a}
 
@@ -1668,7 +1668,6 @@
 - **戻り値**:
 - **return value**:
   ＝[返り値](#return-value)
-
 
 ### や {#ya}
 

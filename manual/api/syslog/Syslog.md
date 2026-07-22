@@ -127,7 +127,6 @@ Syslog.log(Syslog::LOG_WARNING, "the sky is falling in %d seconds!", 100)
 p Syslog.opened? #=> true
 ```
 
-
 ### module_function def ident -> String | nil
 ### module_function def options -> Integer | nil
 ### module_function def facility -> Integer | nil
@@ -172,7 +171,6 @@ Syslog.open("syslogtest") {|syslog|
   syslog.log(Syslog::LOG_CRIT, "the sky is falling in %d seconds!", 10)
 }
 ```
-
 
 ### module_function def emerg(message, *arg) -> self
 ### module_function def alert(message, *arg) -> self

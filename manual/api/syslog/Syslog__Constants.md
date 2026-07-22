@@ -2,6 +2,7 @@
 library: syslog
 ---
 # module Syslog::Constants
+
 include Syslog::Option
 include Syslog::Facility
 include Syslog::Level

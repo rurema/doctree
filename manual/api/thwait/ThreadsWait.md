@@ -74,7 +74,6 @@ thall.all_waits{|th|
 #=> end #<Thread:0x21430 dead>
 ```
 
-
 ## Instance Methods
 
 ### def threads -> Array
@@ -82,6 +81,7 @@ thall.all_waits{|th|
 同期されるスレッドの一覧を配列で返します。
 
 使用例
+
 ```ruby
 require 'thwait'
 
@@ -100,6 +100,7 @@ p thall.threads
 同期されるスレッドが存在するならば true をかえします。
 
 使用例
+
 ```ruby
 require 'thwait'
 
@@ -119,6 +120,7 @@ p thall.threads.empty? #=> false
 すでに終了したスレッドが存在すれば true を返します。
 
 使用例
+
 ```ruby
 require 'thwait'
 

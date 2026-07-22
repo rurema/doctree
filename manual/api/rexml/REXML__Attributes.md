@@ -2,6 +2,7 @@
 library: rexml/document
 ---
 # class REXML::Attributes < Hash
+
 属性の集合を表すクラスです。
 
 [m:REXML::Element#attributes] はこのクラスのオブジェクトを返します。
@@ -10,6 +11,7 @@ library: rexml/document
 ## Class Methods
 
 ### def new(element) -> REXML::Attributes
+
 空の Attributes オブジェクトを生成します。
 
 どの要素の属性であるかを element で指定します。
@@ -22,6 +24,7 @@ library: rexml/document
 ## Instance Methods
 
 ### def [](name) -> String | nil
+
 属性名nameの属性値を返します。
 
 属性値ではなく [c:REXML::Attribute] オブジェクトが必要な場合は
@@ -57,11 +60,10 @@ doc = REXML::Document.new("<a x='1' y='2' z='3' />")
 p doc.root.attributes.to_a # => [x='1', y='2', z='3']
 ```
 
-
 ### def length -> Integer
 ### def size -> Integer
-属性の個数を返します。
 
+属性の個数を返します。
 
 ```ruby
 require 'rexml/document'
@@ -78,6 +80,7 @@ p a.attributes.length # => 3
 ```
 
 ### def each_attribute {|attribute| ... } -> ()
+
 各属性に対しブロックを呼び出します。
 
 個々の属性は [c:REXML::Attribute] オブジェクトで渡されます。
@@ -102,6 +105,7 @@ end
 ```
 
 ### def each {|name, value| ... } -> ()
+
 各属性の名前と値に対しブロックを呼び出します。
 
 名前には expanded_name([m:REXML::Namespace#exapnded_name])が
@@ -128,6 +132,7 @@ end
 ```
 
 ### def get_attribute(name) -> Attribute | nil
+
 name という名前の属性を取得します。
 
 name という名前を持つ属性がない場合は nil を返します。
@@ -149,7 +154,6 @@ a = doc.get_elements("/root/a").first
 p a.attributes.get_attribute("att") # => att='&lt;'
 p a.attributes.get_attribute("foo:att") # => foo:att='1'
 ```
-
 
 ### def []=(name, value)
 
@@ -178,6 +182,7 @@ p a # => <a foo:att='1' bar:att='2' att='9' foo:attt='8'/>
 - **SEE** [m:REXML::Attributes#add]
 
 ### def prefixes -> [String]
+
 self の中で宣言されている prefix の集合を
 文字列の配列で返します。
 
@@ -199,6 +204,7 @@ p a.attributes.prefixes # => []
 ```
 
 ### def namespaces -> { String => String }
+
 self の中で宣言されている名前空間の集合を返します。
 
 返り値は名前空間の prefix をキーとし、URI を値とする
@@ -285,6 +291,7 @@ p a # => <a foo:att='1' bar:att='2'/>
 ```
 
 ### def get_attribute_ns(namespace, name) -> REXML::Attribute | nil
+
 namespace と name で特定される属性を返します。
 
 namespace で名前空間を、 name で prefix を含まない属性名を

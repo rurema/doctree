@@ -5,7 +5,6 @@ include:
 ---
 # class Logger < Object
 
-
 ログを記録するためのクラスです。
 
 ## Class Methods
@@ -51,7 +50,6 @@ Logger オブジェクトを生成します。
                    true の場合は出力しません。省略した場合は false です。
                    Logger v1.7.0 以降で利用可能です。
 
-
 ```ruby title="例"
 require 'logger'
 logger = Logger.new(STDERR)
@@ -65,7 +63,6 @@ logger = Logger.new(file, progname: 'progname')
 logger = Logger.new(file, formatter: formatter)
 logger = Logger.new(file, datetime_format: '%Y-%m-%d %H:%M:%S')
 ```
-
 
 ## Instance Methods
 
@@ -83,7 +80,6 @@ logger << "add message"
 
 # => add message
 ```
-
 
 ### def add(severity, message = nil, progname = nil) -> true
 ### def add(severity, message = nil, progname = nil){ ... } -> true
@@ -158,7 +154,6 @@ logger.debug("test")
 ```
 
 - **SEE** [m:Time#strftime], [m:Logger#datetime_format=]
-
 
 ### def datetime_format=(format)
 
@@ -514,9 +509,11 @@ logger.formatter = proc{|severity, datetime, progname, message|
 ## Constants
 
 ### const ProgName -> String
+
 ログファイル作成時に使うプログラム名。
 
 ### const VERSION -> String
+
 このライブラリのバージョンを表す文字列。
 
 ### const SEV_LABEL -> Array

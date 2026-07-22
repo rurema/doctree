@@ -279,7 +279,6 @@ SessionDemo.new
 ### def callback(dbman)
 #@# nodoc
 
-
 ## Instance Methods
 
 ### def [](key) -> object
@@ -328,12 +327,9 @@ FileStore の場合はセッションファイルを削除します。
 
 真であれば新しいセッション ID を生成します。
 
-
 # class CGI::Session::NoSession < RuntimeError
 
 セッションが初期化されていない場合に発生する例外です。
-
-
 
 # class CGI::Session::FileStore < Object
 
@@ -372,7 +368,6 @@ FileStore の場合はセッションファイルを削除します。
 - **raise** `CGI::Session::NoSession` -- セッションが初期化されていない場合に発生します。
 
 ## Instance Methods
-
 
 ### def close -> ()
 #@# discard

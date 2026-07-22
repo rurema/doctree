@@ -190,6 +190,7 @@ p Dir.entries('.') #=> [".", "..", "bar", "foo"]
 
 - **SEE** [m:Dir.foreach]
 - **SEE** [m:Dir.children]
+
 ### def children(path)                -> [String]
 ### def children(path, encoding: enc) -> [String]
 
@@ -211,6 +212,7 @@ p Dir.children('.') #=> ["bar", "foo"]
 - **SEE** [m:Dir#children]
 - **SEE** [m:Dir.each_child]
 - **SEE** [m:Dir.entries]
+
 ### def foreach(path) {|file| ...}                                        -> nil
 ### def foreach(path, encoding: Encoding.find("filesystem")) {|file| ...} -> nil
 ### def foreach(path)                                                     -> Enumerator
@@ -241,6 +243,7 @@ Dir.foreach('.'){|f|
 
 - **SEE** [m:Dir.entries]
 - **SEE** [m:Dir.each_child]
+
 ### def each_child(path) {|file| ...}                -> nil
 ### def each_child(path, encoding: enc) {|file| ...} -> nil
 ### def each_child(path)                             -> Enumerator
@@ -271,6 +274,7 @@ Dir.each_child('.'){|f|
 - **SEE** [m:Dir.foreach]
 - **SEE** [m:Dir.children]
 - **SEE** [m:Dir#each_child]
+
 ### def getwd    -> String
 ### def pwd      -> String
 
@@ -408,7 +412,6 @@ p Dir.mktmpdir { |dir| Dir.empty?(dir) } #=> true
 
 - **param** `path_name` -- 確認したいディレクトリ名。
 
-
 ## Instance Methods
 
 ### def close    -> nil
@@ -420,7 +423,6 @@ p Dir.mktmpdir { |dir| Dir.empty?(dir) } #=> true
 d = Dir.new(".")
 p d.close  # => nil
 ```
-
 
 ### def each {|item| ... }    -> self
 ### def each                  -> Enumerator
@@ -444,6 +446,7 @@ Dir.open('.').each{|f|
 ```
 
 - **SEE** [m:Dir#each_child]
+
 ### def path    -> String
 ### def to_path -> String
 
@@ -554,6 +557,7 @@ p Dir.open("..") { |d| d.fileno } # => 8
 - **raise** `IOError` -- 既に自身が close している場合に発生します。
 
 - **SEE** [m:IO#fileno]
+
 ### def each_child {|item| ... }    -> self
 ### def each_child                  -> Enumerator
 
@@ -576,7 +580,9 @@ Dir.open('.').each_child{|f|
 
 - **SEE** [m:Dir#each]
 - **SEE** [m:Dir.each_child]
+
 ### def children -> [String]
+
 ディレクトリのファイルエントリ名のうち、
 "." と ".." をのぞいた配列を返します。
 

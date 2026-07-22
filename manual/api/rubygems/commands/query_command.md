@@ -9,6 +9,7 @@ require:
 Gem パッケージの情報を検索するためのライブラリです。
 
 Usage: gem query [options]
+
 ```text
 Options:
   -i, --[no-]installed             Check for installed gem
@@ -19,15 +20,16 @@ Options:
       --[no-]versions              Gem パッケージ名のみ表示します
   -a, --all                        見つかった Gem パッケージの全てのバージョンを表示します
 ```
+
 #@include(local_remote_options)
 #@include(common_options)
+
 ```text
 Summary:
   Gem パッケージの情報を検索します
 Defaults:
   --local --name-matches // --no-details --versions --no-installed
 ```
-
 
 # class Gem::Commands::QueryCommand < Gem::Command
 

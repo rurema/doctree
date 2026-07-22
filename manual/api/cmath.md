@@ -112,7 +112,6 @@ p CMath.log(Complex(0, 0)) # => -Infinity+0.0i
 p CMath.log(0) # => -Infinity
 ```
 
-
 ### module_function def log2!(x) -> Float
 
 2 を底とする実数 x の対数 (binary logarithm) を返します。
@@ -189,9 +188,7 @@ require "cmath"
 p CMath.cbrt(-8) # => (1.0000000000000002+1.7320508075688772i)
 ```
 
-
 - **SEE** [m:Complex#**]
-
 
 ### module_function def sqrt!(x) -> Float
 

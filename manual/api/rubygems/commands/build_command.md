@@ -6,18 +6,18 @@ require:
 ---
 Gem パッケージをビルドするためのライブラリです。
 
-
 ```console
 Usage: gem build GEMSPEC_FILE [options]
 ```
+
 #@include(common_options)
+
 ```console
 Arguments:
   GEMSPEC_FILE  Gem パッケージをビルドするのに必要な gemspec ファイル名を指定します
 Summary:
   gemspec ファイルから Gem パッケージをビルドします
 ```
-
 
 # class Gem::Commands::BuildCommand < Gem::Command
 

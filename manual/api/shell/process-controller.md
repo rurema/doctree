@@ -35,7 +35,6 @@ until: "2.7.0"
 ### def wait_to_finish_all_process_controllers -> ()
 #@todo
 
-
 ## Instance Methods
 
 ### def active_job?(job) -> bool
@@ -90,7 +89,6 @@ until: "2.7.0"
 
 - **return** -- [PID, 入力用 IO, 出力用 IO] からなる配列を返します。
 
-
 ### def start_job(command = nil)
 
 指定されたコマンドの実行を開始します。
@@ -127,7 +125,6 @@ until: "2.7.0"
 
 ### def shell -> Shell
 #@todo
-
 
 ## Constants
 

@@ -2,12 +2,15 @@
 library: openssl
 ---
 # class OpenSSL::ASN1::Primitive < OpenSSL::ASN1::ASN1Data
+
 ASN.1 の単純型を表すクラスです。
 
 通常はこのクラス自身は用いず、各サブクラスを利用します。
+
 ## Instance Methods
 
 ### def tagging -> Symbol | nil
+
 タグ付けの方式を返します。
 
 :IMPLICIT、:EXPLICIT、nil のいずれかを返します。
@@ -18,18 +21,22 @@ ASN.1 の単純型を表すクラスです。
 nil は :IMPLICIT と同義です。
 
 - **SEE** [m:OpenSSL::ASN1::Primitive#tagging=]
+
 ### def tagging=(tagging)
+
 タグ付けの方式を設定します。
 
 - **param** `tagging` -- タグ付けの方式(:IMPLICIT または :EXPLICIT)
 - **SEE** [m:OpenSSL::ASN1::Primitive#tagging=]
 
 # class OpenSSL::ASN1::Boolean < OpenSSL::ASN1::Primitive
+
 ASN.1 の Boolean 型(Universal タグのタグ番号1)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::Boolean
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Boolean
+
 ASN.1 の Boolean 型の値を表現する OpenSSL::ASN1::Boolean オブジェクトを
 生成します。
 
@@ -42,11 +49,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::Integer < OpenSSL::ASN1::Primitive
+
 ASN.1 の Integer 型(Universal タグのタグ番号2)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::Integer
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Integer
+
 ASN.1 の Integer 型の値を表現する OpenSSL::ASN1::Integer オブジェクトを
 生成します。
 
@@ -58,13 +67,14 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tagging` -- タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
-
 # class OpenSSL::ASN1::Enumerated < OpenSSL::ASN1::Primitive
+
 ASN.1 の Enumerated 型(Universal タグのタグ番号10)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::Boolean
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Boolean
+
 ASN.1 の Enumerated 型の値を表現する OpenSSL::ASN1::Enumerated オブジェクトを
 生成します。
 
@@ -77,11 +87,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::BitString < OpenSSL::ASN1::Primitive
+
 ASN.1 の Bit String 型(Universal タグのタグ番号3)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::BitString
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::BitString
+
 ASN.1 の Bit String 型の値を表現する OpenSSL::ASN1::BitString オブジェクトを
 生成します。
 
@@ -94,22 +106,26 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 ### def unused_bits -> Integer | nil
+
 Bit Stringに設定されたフラグを返します。
 
 - **SEE** [m:OpenSSL::ASN1::BitString#unused_bits=]
 #@# フラグの意味を追加する
 ### def unused_bits=(b)
+
 Bit Stringにフラグを設定します。
 
 - **param** `b` -- フラグ(整数)
 - **SEE** [m:OpenSSL::ASN1::BitString#unused_bits]
 
 # class OpenSSL::ASN1::OctetString < OpenSSL::ASN1::Primitive
+
 ASN.1 の Octet String 型(Universal タグのタグ番号4)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::OctetString
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::OctetString
+
 ASN.1 の Octet String 型の値を表現する OpenSSL::ASN1::OctetString オブジェクトを
 生成します。
 
@@ -122,11 +138,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::UTF8String < OpenSSL::ASN1::Primitive
+
 ASN.1 の UTF8String 型(Universal タグのタグ番号12)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::UTF8String
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UTF8String
+
 ASN.1 の UTF8String 型の値を表現する OpenSSL::ASN1::UTF8String オブジェクトを
 生成します。
 
@@ -139,11 +157,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::NumericString < OpenSSL::ASN1::Primitive
+
 ASN.1 の NumericString 型(Universal タグのタグ番号18)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::NumericString
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::NumericString
+
 ASN.1 の NumericString 型の値を表現する OpenSSL::ASN1::NumericString オブジェクトを
 生成します。
 
@@ -156,11 +176,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::PrintableString < OpenSSL::ASN1::Primitive
+
 ASN.1 の PrintableString 型(Universal タグのタグ番号19)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::PrintableString
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::PrintableString
+
 ASN.1 の PrintableString 型の値を表現する OpenSSL::ASN1::PrintableString オブジェクトを
 生成します。
 
@@ -173,11 +195,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::T61String < OpenSSL::ASN1::Primitive
+
 ASN.1 の T61String 型(Universal タグのタグ番号20)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::T61String
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::T61String
+
 ASN.1 の T61String 型の値を表現する OpenSSL::ASN1::T61String オブジェクトを
 生成します。
 
@@ -189,13 +213,14 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tagging` -- タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
-
 # class OpenSSL::ASN1::VideotexString < OpenSSL::ASN1::Primitive
+
 ASN.1 の VideotexString 型(Universal タグのタグ番号21)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::VideotexString
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::VideotexString
+
 ASN.1 の VideotexString 型の値を表現する OpenSSL::ASN1::VideotexString オブジェクトを
 生成します。
 
@@ -208,11 +233,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::IA5String < OpenSSL::ASN1::Primitive
+
 ASN.1 の IA5String 型(Universal タグのタグ番号22)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::IA5String
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::IA5String
+
 ASN.1 の IA5String 型の値を表現する OpenSSL::ASN1::IA5String オブジェクトを
 生成します。
 
@@ -225,11 +252,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::GraphicString < OpenSSL::ASN1::Primitive
+
 ASN.1 の GraphicString 型(Universal タグのタグ番号25)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::GraphicString
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GraphicString
+
 ASN.1 の GraphicString 型の値を表現する OpenSSL::ASN1::GraphicString オブジェクトを
 生成します。
 
@@ -242,11 +271,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::ISO64String < OpenSSL::ASN1::Primitive
+
 ASN.1 の ISO64String 型(Universal タグのタグ番号26)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::ISO64String
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::ISO64String
+
 ASN.1 の ISO64String 型の値を表現する OpenSSL::ASN1::ISO64String オブジェクトを
 生成します。
 
@@ -259,11 +290,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::GeneralString < OpenSSL::ASN1::Primitive
+
 ASN.1 の GeneralString 型(Universal タグのタグ番号27)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::GeneralString
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GeneralString
+
 ASN.1 の GeneralString 型の値を表現する OpenSSL::ASN1::GeneralString オブジェクトを
 生成します。
 
@@ -276,11 +309,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::UniversalString < OpenSSL::ASN1::Primitive
+
 ASN.1 の UniversalString 型(Universal タグのタグ番号28)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::UniversalString
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UniversalString
+
 ASN.1 の UniversalString 型の値を表現する OpenSSL::ASN1::UniversalString オブジェクトを
 生成します。
 
@@ -293,11 +328,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::BMPString < OpenSSL::ASN1::Primitive
+
 ASN.1 の BMPString 型(Universal タグのタグ番号30)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::BMPString
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::BMPString
+
 ASN.1 の BMPString 型の値を表現する OpenSSL::ASN1::BMPString オブジェクトを
 生成します。
 
@@ -310,11 +347,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::Null < OpenSSL::ASN1::Primitive
+
 ASN.1 の Null 型(Universal タグのタグ番号5)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::Null
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Null
+
 ASN.1 の Null 型の値を表現する OpenSSL::ASN1::Null オブジェクトを
 生成します。
 
@@ -327,11 +366,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::UTCTime < OpenSSL::ASN1::Primitive
+
 ASN.1 の UTCTime 型(Universal タグのタグ番号23)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::UTCTime
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UTCTime
+
 ASN.1 の UTCTime 型の値を表現する OpenSSL::ASN1::UTCTime オブジェクトを
 生成します。
 
@@ -344,11 +385,13 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
 # class OpenSSL::ASN1::GeneralizedTime < OpenSSL::ASN1::Primitive
+
 ASN.1 の GeneralizedTime 型(Universal タグのタグ番号23)を表すクラスです。
 
 ## Class Methods
 ### def new(value) ->  OpenSSL::ASN1::GeneralizedTime
 ### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GeneralizedTime
+
 ASN.1 の GeneralizedTime 型の値を表現する OpenSSL::ASN1::GeneralizedTime オブジェクトを
 生成します。
 

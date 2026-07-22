@@ -17,7 +17,6 @@ library: _builtin
 場合に向くと言えます。また内包するコードの大きさという点では
 [c:Proc] は小規模、[c:Method] は大規模コードに向くと言えます。
 
-
 既存のメソッドを [c:Method] オブジェクト化する。
 
 ```ruby title="例"
@@ -123,7 +122,6 @@ p m.clone.call # => "foo"
 self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
 近付けるためだけに用意されたもので、Array#[]のような
 他の [] メソッドとの意味的な関連性はありません。
-
 
 - **param** `args` -- self に渡される引数。
 
@@ -310,15 +308,18 @@ p Bar.new.method(:bar)        # => #<Method: Bar#bar(a, b) test.rb:8>
 ```
 
 klass1 と klass2 が同じ場合は以下の形式になります。
+
 ```text
 #<Method: klass1#method() foo.rb:2>             (形式2)
 ```
 
 特異メソッドに対しては、
+
 ```text
 #<Method: obj.method() foo.rb:2>                (形式3)
 #<Method: klass1(klass2).method() foo.rb:2>     (形式4)
 ```
+
 という形式の文字列を返します。二番目の形式では klass1 はレシーバ、
 klass2 は実際にそのメソッドを定義しているオブジェクトになります。
 
@@ -409,7 +410,6 @@ p a == b                            #=> true
 
 自身のハッシュ値を返します。
 
-
 ```ruby title="例"
 a = method(:==)
 b = method(:eql?)
@@ -417,7 +417,6 @@ p a.eql? b          # => true
 p a.hash == b.hash  # => true
 p [a, b].uniq.size  # => 1
 ```
-
 
 ### def name    -> Symbol
 
@@ -468,8 +467,8 @@ p m.receiver # => #<Foo:0x007fb39203eb78>
 p m.receiver.foo(1) # => "foo called with arg 1"
 ```
 
-
 ### def source_location -> [String, Integer] | nil
+
 ソースコードのファイル名と行番号を配列で返します。
 
 その手続オブジェクトが ruby で定義されていない(つまりネイティブ
@@ -492,8 +491,8 @@ p m.source_location # => ["/tmp/foo.rb", 2]
 p method(:puts).source_location # => nil
 ```
 
-
 ### def parameters -> [object]
+
 Method オブジェクトの引数の情報を返します。
 
 Method オブジェクトが引数を取らなければ空の配列を返します。引数を取る場合は、配列の配列を返し、
@@ -581,7 +580,6 @@ p m.call # => "subclass method"
 p m.super_method # => #<Method: Super#foo>
 p m.super_method.call # => "superclass method"
 ```
-
 
 ### def original_name -> Symbol
 

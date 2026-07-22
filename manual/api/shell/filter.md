@@ -108,11 +108,13 @@ sh.transact {
 ```
 
 ### def +(filter)
+
 執筆者募集
 
 filter1 + filter2 は filter1の出力の後, filter2の出力を行う。
 
 ### def to_a -> [String]
+
 実行結果を文字列の配列で返します。
 
 ```ruby
@@ -123,6 +125,7 @@ puts sh.cat("/etc/passwd").to_a
 ```
 
 ### def to_s -> String
+
 実行結果を文字列で返します。
 
 ```ruby
@@ -142,6 +145,7 @@ sh.transact {
 - **SEE** [m:Object#inspect]
 
 ### def input -> Shell::Filter | nil
+
 現在のフィルターを返します。
 
 ### def input=(filter)
@@ -149,7 +153,6 @@ sh.transact {
 フィルターを設定します。
 
 - **param** `filter` -- フィルターを指定します。
-
 
 #@include(builtincommands)
 

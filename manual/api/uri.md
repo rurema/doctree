@@ -32,7 +32,6 @@ URI (Uniform Resource Identifier) のためのライブラリです。
 
 - **SEE** [m:URI.parse]
 
-
 # class URI::Error < StandardError
 
 すべての URI 例外クラスの基底クラスです。

@@ -47,7 +47,6 @@ params = CGI.parse("query_string")
 ### def nph? -> bool
 #@#nodoc
 
-
 ### def header(options = "text/html") -> String
 
 HTTP ヘッダを options に従って生成します。 [m:CGI#out] と違い、標準出力には出力しません。

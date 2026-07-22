@@ -2,6 +2,7 @@
 library: openssl
 ---
 # class OpenSSL::X509::Attribute < Object
+
 X.509 証明書署名要求の attribute を表すクラスです。
 
 [m:OpenSSL::X509::Request#attributes] で取り出すことや、
@@ -11,6 +12,7 @@ X.509 証明書署名要求の attribute を表すクラスです。
 
 ### def new(der) -> OpenSSL::X509::Attribute
 ### def new(oid, value) -> OpenSSL::X509::Attribute
+
 attribute オブジェクトを生成します。
 
 引数が1個で、文字列であるならば、それを DER 形式の
@@ -30,16 +32,17 @@ attribute オブジェクトを生成します。
        発生します。DER 形式文字列が不正であった場合、oid, value が不正であった
        場合などに発生します。
 
-
 ## Instance Methods
 
 ### def oid -> String
+
 attribute の Object ID(識別子)を文字列で返します。
 
 - **raise** `OpenSSL::X509::AttributeError` -- Object ID の取得に失敗した場合に発生します
 - **SEE** [m:OpenSSL::X509::Attribute#oid=]
 
 ### def oid=(oid)
+
 attribute の Object ID(識別子)を文字列で設定します。
 
 - **param** `oid` -- 設定する Object ID 文字列
@@ -47,12 +50,15 @@ attribute の Object ID(識別子)を文字列で設定します。
 - **SEE** [m:OpenSSL::X509::Attribute#oid]
 
 ### def value -> OpenSSL::ASN1::ASN1Data
+
 attribute の値を [c:OpenSSL::ASN1::ASN1Data] のオブジェクトで
 返します。
 
 - **raise** `OpenSSL::X509::AttributeError` -- 値の取得に失敗した場合に発生します
 - **SEE** [m:OpenSSL::X509::Attribute#value=]
+
 ### def value=(val)
+
 attribute の値を設定します。
 
 引数には [c:OpenSSL::ASN1::ASN1Data] のオブジェクトを渡さなければなりません。
@@ -62,10 +68,12 @@ attribute の値を設定します。
 - **SEE** [m:OpenSSL::X509::Attribute#value]
 
 ### def to_der -> String
+
 自身を DER 形式のバイト列に変換します。
 
 - **raise** `OpenSSL::X509::AttributeError` -- 変換に失敗した場合に発生します
 
 # class OpenSSL::X509::AttributeError < OpenSSL::OpenSSLError
+
 [c:OpenSSL::X509::Attribute] 関連のエラーが起きた場合に
 発生する例外です。

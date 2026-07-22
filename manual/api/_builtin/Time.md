@@ -110,6 +110,7 @@ p Time.at(946684800, 123456.789, :usec).nsec       # => 123456789
 p Time.at(946684800, 123456.789, :microsecond).nsec  # => 123456789
 p Time.at(946684800, 123456789, :nsec).nsec        # => 123456789
 ```
+
 ### def gm(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)             -> Time
 ### def utc(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)            -> Time
 
@@ -289,6 +290,7 @@ p Time.new(2008, 6, 21, 13, 30, 0, "+09:00") # => 2008-06-21 13:30:00 +0900
 
 #@since 3.2
 ### def new(iso8601, in: nil)       -> Time
+
 引数で指定した地方時の Time オブジェクトを返します。
 
 - **param** `iso8601` -- Time#inspectの結果や制限されたISO-8601形式などの文字列を指定します。
@@ -305,6 +307,7 @@ p Time.new("2024-02-15 10:20:30")                  # => 2024-02-15 10:20:30 +090
 p Time.new("2024-02-15 10:20:30 UTC", in: "+0800") # => 2024-02-15 10:20:30 UTC
 p Time.new("2024-02-15 10:20:30", in: "+0800")     # => 2024-02-15 10:20:30 +0800
 ```
+
 #@end
 
 ## Instance Methods
