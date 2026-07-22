@@ -916,6 +916,27 @@ end
 p Bar.new.inspect                # => "#<Bar:0x0300c868 @bar=1>"
 ```
 
+#@since 4.0
+inspect をオーバーライドしていない場合、
+instance_variables_to_inspect を定義することで、inspect の出力に含める
+インスタンス変数を制御できます。このメソッドは、表示したいインスタンス変数名を
+[c:Symbol] の配列で返すようにします（デフォルトの実装は nil を返し、その場合は
+全てのインスタンス変数が表示されます）。パスワードなどの機密情報を持つ
+インスタンス変数を inspect の出力（ログなど）に含めたくない場合に利用できます。
+
+```ruby
+class Foo
+  def initialize
+    @a = 1
+    @password = "secret"
+    @b = 2
+  end
+  private def instance_variables_to_inspect = [:@a, :@b]
+end
+p Foo.new.inspect                # => "#<Foo:0x0300c868 @a=1, @b=2>"
+```
+#@end
+
 - **SEE** [m:Kernel?.p]
 
 ### def instance_variable_get(var) -> object | nil
