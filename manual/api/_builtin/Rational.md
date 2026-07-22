@@ -64,6 +64,29 @@ p r ** 2.0           # => 0.5625
 p r ** Rational(1, 2)  # => 0.866025403784439
 ```
 
+#@until 3.4
+計算結果の分母・分子が巨大になりすぎるとき、警告を出したうえで Float::INFINITY（基数によっては NaN）を返します。
+
+```ruby title="計算を放棄して Float::INFINITY を返す例"
+p Rational(2) ** 100000000
+# => warning: in a**b, b may be too big
+#    Infinity
+```
+
+判定の閾値は変わりえます。
+#@end
+
+#@since 3.4
+計算結果の分母・分子が巨大すぎるときは ArgumentError が発生します。
+
+```ruby title="計算結果が巨大すぎる例"
+p Rational(2) ** 10000000000000000000
+# => exponent is too large (ArgumentError)
+```
+
+判定の閾値は変わりえます。
+#@end
+
 ### def +(other) -> Rational | Float
 
 和を計算します。
