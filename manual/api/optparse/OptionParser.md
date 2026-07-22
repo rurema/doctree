@@ -34,8 +34,8 @@ opts.parse!(ARGV)                            # 実際にコマンドラインの
 - **`--version`**:
 
   [m:OptionParser#ver] を表示してから exit します。
- [m:OptionParser#ver] が定義されていない場合は、そのようにエラーメッセージを出力して abort します。
- オプション「--version」に「,」で区切られたクラス名かモジュール名を引数として与えた場合は、そのクラスおよびモジュールで定義されている定数「Version」および「Release」を表示して、終了します。
+  [m:OptionParser#ver] が定義されていない場合は、そのようにエラーメッセージを出力して abort します。
+  オプション「--version」に「,」で区切られたクラス名かモジュール名を引数として与えた場合は、そのクラスおよびモジュールで定義されている定数「Version」および「Release」を表示して、終了します。
   ```
    $ ruby t.rb --version=OptionParser,URI,OpenSSL
    t: OptionParser version 12203 (2007-04-20)
