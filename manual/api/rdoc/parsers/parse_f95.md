@@ -170,7 +170,6 @@ Fortran95 のソースコードを解析するためのクラスです。
 
 ライブラリの内部で使用します。
 
-
 ## Instance Methods
 
 ### def scan -> RDoc::TopLevel

@@ -15,12 +15,13 @@ Usage: gem check [options]
     -t, --test                       Gem パッケージのユニットテストを実行します
     -v, --version VERSION            特定のバージョンのテストを実行します
 ```
+
 #@include(common_options)
+
 ```console
 Summary:
   インストールされている Gem パッケージをチェックします
 ```
-
 
 # class Gem::Commands::CheckCommand < Gem::Command
 

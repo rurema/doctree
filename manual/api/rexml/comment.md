@@ -48,6 +48,7 @@ Comment オブジェクトを生成します。
 コメント文字列を返します。
 
 ### def string=(value)
+
 コメント文字列を設定します。
 
 - **param** `value` -- 設定する文字列
@@ -61,12 +62,15 @@ Comment オブジェクトを生成します。
 #@# #@todo
 
 ### def <=>(other) -> -1 | 0 | 1
+
 other と内容([m:REXML::Comment#string])を比較します。
 
 ### def ==(other) -> bool
+
 other と内容([m:REXML::Comment#string])が同じならば真を返します。
 
 ### def node_type -> Symbol
+
 シンボル :comment を返します。
 
 ## Constants

@@ -10,6 +10,7 @@ until: "2.7.0"
 
 ## Singleton Methods
 ### def def_e2message(klass, exception_class, message_format) -> Class
+
 すでに存在する例外クラス exception_class に、
 エラーメッセージ用フォーマット message_format を関連づけます。
 
@@ -64,7 +65,6 @@ exception_name という名前の例外クラスを定義します。
 
 - **raise** `Exception2MessageMapper::ErrNotRegisteredException` -- 指定された例外クラスに対応するメッセージが存在しない場合に発生します。
 
-
 ## Instance Methods
 
 ### def bind(cl) -> ()
@@ -74,6 +74,7 @@ exception_name という名前の例外クラスを定義します。
 
 ### def Raise(exception_class = nil, *rest) -> ()
 ### def Fail(exception_class = nil, *rest)  -> ()
+
 登録されている情報を使用して、例外を発生させます。
 
 - **param** `exception_class` -- 例外クラス。
@@ -100,6 +101,7 @@ p Foo.Raise Foo::NewExceptionClass, 1, 3, 5  #=> in `Raise': message...1, 3 and 
 ```
 
 ### def fail(exception_class = nil, *rest) -> ()
+
 登録されている情報を使用して、例外を発生させます。
 
 - **param** `exception_class` -- 例外クラス。
@@ -123,7 +125,6 @@ p Foo.Raise Foo::NewExceptionClass, 1, 3, 5  #=> in `Raise': message...1, 3 and 
 
 - **return** -- exception_class を返します。
 
-
 ### def def_exception(exception_name, message_format, superclass = StandardError) -> Class
 
 exception_name という名前の例外クラスを定義します。
@@ -134,5 +135,4 @@ exception_name という名前の例外クラスを定義します。
 
 - **param** `superclass` -- 定義する例外のスーパークラスを指定します。
                   省略すると [c:StandardError] を使用します。
-
 

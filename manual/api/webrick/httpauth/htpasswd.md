@@ -14,7 +14,6 @@ Apache の htpasswd 互換のクラスです。
 .htpasswd ファイルを新しく作成することも出来ます。
 htpasswd -m (MD5) や -s (SHA) で作成された .htpasswd ファイルには対応していません。
 
-
 ```ruby title="例"
 require 'webrick'
 include WEBrick
@@ -57,7 +56,6 @@ Htpasswd オブジェクトを生成します。
 - **param** `user` -- ユーザ名を指定します。
 
 - **param** `reload_db` -- 真を指定すると [m:WEBrick::HTTPAuth::Htpasswd#reload] を呼んでから値を返します。
-
 
 ### def flush(path = nil)
 #@# -> discard

@@ -83,6 +83,7 @@ p File::Stat.new(fp1.path) <=> fp2.path #=> nil
 ```
 
 ### def ftype -> String
+
 ファイルのタイプを表す文字列を返します。
 
 文字列は以下のうちのいずれかです。
@@ -109,11 +110,11 @@ p fs.ftype #=> "file"
 p File::Stat.new($:[0]).ftype #=> "directory"
 ```
 
-
 1.8 以降では、属性メソッドがシステムでサポートされていない場合 nil が返ります。
 なお、1.7 以前では 0 が返っていました。
 
 ### def dev -> String
+
 デバイス番号(ファイルシステム)を返します。
 
 ```ruby
@@ -122,9 +123,11 @@ p fs.dev
 #例
 #=> 2
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def dev_major -> Integer
+
 dev の major 番号部を返します。
 
 ```ruby
@@ -133,9 +136,11 @@ p fs.dev_major
 #例
 #=> nil #この場合ではシステムでサポートされていないため
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def dev_minor -> Integer
+
 dev の minor 番号部を返します。
 
 ```ruby
@@ -144,10 +149,11 @@ p fs.dev_minor
 #例
 #=> nil
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
-
 ### def ino -> Integer
+
 i-node 番号を返します。
 
 ```ruby
@@ -155,9 +161,11 @@ fs = File::Stat.new($0)
 #例
 p fs.ino      #=> 0
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def mode -> Integer
+
 ファイルモードを返します。
 
 ```ruby
@@ -166,9 +174,11 @@ printf "%o\n", fs.mode
 #例
 #=> 100644
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def nlink -> Integer
+
 ハードリンクの数を返します。
 
 ```ruby
@@ -176,9 +186,11 @@ fs = File::Stat.new($0)
 #例
 p fs.nlink    #=> 1
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def uid -> Integer
+
 オーナーのユーザIDを返します。
 
 ```ruby
@@ -186,9 +198,11 @@ fs = File::Stat.new($0)
 #例
 p fs.uid    #=> 0
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def gid -> Integer
+
 オーナーのグループIDを返します。
 
 ```ruby
@@ -196,9 +210,11 @@ fs = File::Stat.new($0)
 #例
 p fs.gid      #=> 0
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def rdev -> Integer
+
 デバイスタイプ(スペシャルファイルのみ)を返します。
 
 ```ruby
@@ -206,9 +222,11 @@ fs = File::Stat.new($0)
 #例
 p fs.rdev     #=> 2
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def rdev_major -> Integer
+
 rdev の major 番号部を返します。
 
 ```ruby
@@ -216,9 +234,11 @@ fs = File::Stat.new($0)
 #例
 p fs.rdev_major #=> nil
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def rdev_minor -> Integer
+
 rdev の minor 番号部を返します。
 
 ```ruby
@@ -226,9 +246,11 @@ fs = File::Stat.new($0)
 #例
 p fs.rdev_minor #=> nil
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def size -> Integer
+
 ファイルサイズ(バイト単位)を返します。
 
 ```ruby
@@ -236,9 +258,11 @@ fs = File::Stat.new($0)
 #例
 p fs.size    #=> 1548
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def blksize -> Integer
+
 望ましいI/Oのブロックサイズを返します。
 
 ```ruby
@@ -246,9 +270,11 @@ fs = File::Stat.new($0)
 #例
 p fs.blksize #=> nil
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def blocks -> Integer
+
 割り当てられているブロック数を返します。
 
 ```ruby
@@ -256,9 +282,11 @@ fs = File::Stat.new($0)
 #例
 p fs.blocks  #=> nil
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 ### def atime -> Time
+
 最終アクセス時刻を返します。
 
 ```ruby
@@ -266,11 +294,13 @@ fs = File::Stat.new($0)
 #例
 p fs.atime.to_a  #=> [45, 5, 21, 5, 9, 2007, 3, 248, false, "\223\214\213\236 (\225W\217\200\216\236) "]
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 - **SEE** [c:Time]
 
 ### def mtime -> Time
+
 最終更新時刻を返します。
 
 ```ruby
@@ -278,11 +308,13 @@ fs = File::Stat.new($0)
 #例
 p fs.mtime   #=> Wed Sep 05 20:42:18 +0900 2007
 ```
+
 #@# WindowsXP ruby1.8.6 でテスト
 
 - **SEE** [c:Time]
 
 ### def ctime -> Time
+
 最終状態変更時刻を返します。
 (状態の変更とは chmod などによるもので、Unix では i-node の変更を意味します)
 
@@ -317,6 +349,7 @@ p File.stat("testfile").atime     #=> 2014-02-24 11:19:47 +0900
 ```
 
 ### def directory? -> bool
+
 ディレクトリの時に真を返します。
 
 ```ruby
@@ -326,6 +359,7 @@ p File::Stat.new($0).directory? #=> false
 - **SEE** [m:FileTest?.directory?]
 
 ### def readable? -> bool
+
 読み込み可能な時に真を返します。
 
 ```ruby
@@ -333,6 +367,7 @@ p File::Stat.new($0).readable? #=> true
 ```
 
 ### def readable_real? -> bool
+
 実ユーザ/実グループによって読み込み可能な時に真を返します。
 
 ```ruby
@@ -340,6 +375,7 @@ p File::Stat.new($0).readable_real? #=> true
 ```
 
 ### def writable? -> bool
+
 書き込み可能な時に真を返します。
 
 ```ruby
@@ -347,6 +383,7 @@ p File::Stat.new($0).writable? #=> true
 ```
 
 ### def writable_real? -> bool
+
 実ユーザ/実グループによって書き込み可能な時に真を返します。
 
 ```ruby
@@ -354,6 +391,7 @@ p File::Stat.new($0).writable_real? #=> true
 ```
 
 ### def executable? -> bool
+
 実効ユーザ/グループIDで実行できる時に真を返します。
 
 ```ruby
@@ -363,6 +401,7 @@ p File::Stat.new($0).executable?
 ```
 
 ### def executable_real? -> bool
+
 実ユーザ/グループIDで実行できる時に真を返します。
 
 ```ruby
@@ -372,6 +411,7 @@ p File::Stat.new($0).executable_real?
 ```
 
 ### def file? -> bool
+
 通常ファイルの時に真を返します。
 
 ```ruby
@@ -379,6 +419,7 @@ p File::Stat.new($0).file? #=> true
 ```
 
 ### def zero? -> bool
+
 サイズが0である時に真を返します。
 
 ```ruby
@@ -386,6 +427,7 @@ p File::Stat.new($0).zero? #=> false
 ```
 
 ### def size? -> Integer | nil
+
 サイズが0の時にはnil、それ以外の場合はファイルサイズを返します。
 
 ```ruby
@@ -401,6 +443,7 @@ p File::Stat.new(fp.path).size? #=> 6
 ```
 
 ### def owned? -> bool
+
 自分のものである時に真を返します。
 
 ```ruby
@@ -410,6 +453,7 @@ printf "%s %s\n", $:[0], File::Stat.new($:[0]).owned?
 ```
 
 ### def grpowned? -> bool
+
 グループIDが実効グループIDと等しい時に真を返します。
 
 補助グループIDは考慮されません。
@@ -424,20 +468,24 @@ printf "%s %s\n", $0, File::Stat.new($0).grpowned?
 ```
 
 ### def pipe? -> bool
+
 無名パイプおよび名前つきパイプ(FIFO)の時に真を返します。
 
 #@#linux のみ？
+
 ```ruby
 system("mkfifo /tmp/pipetest")
 p File::Stat.new("/tmp/pipetest").pipe? #=> true
 ```
 
 ### def symlink? -> false
+
 シンボリックリンクである時に真を返します。
 ただし、File::Statは自動的にシンボリックリンクをたどっていくので
 常にfalseを返します。
 
 #@# ソースにそう書いてあったので
+
 ```ruby
 require 'fileutils'
 outfile = $0 + ".ln"
@@ -450,6 +498,7 @@ p FileTest.symlink?(outfile)       #=> true
 - **SEE** [m:File.lstat]
 
 ### def socket? -> bool
+
 ソケットの時に真を返します。
 
 ```ruby
@@ -464,6 +513,7 @@ Dir.glob("/tmp/*"){|file|
 ```
 
 ### def blockdev? -> bool
+
 ブロックスペシャルファイルの時に真を返します。
 
 ```ruby
@@ -480,6 +530,7 @@ Dir.glob("/dev/*") {|bd|
 ```
 
 ### def chardev? -> bool
+
 キャラクタスペシャルファイルの時に真を返します。
 
 ```ruby
@@ -496,6 +547,7 @@ Dir.glob("/dev/*") {|bd|
 ```
 
 ### def setuid? -> bool
+
 setuidされている時に真を返します。
 
 ```ruby
@@ -512,6 +564,7 @@ Dir.glob("/bin/*") {|bd|
 ```
 
 ### def setgid? -> bool
+
 setgidされている時に真を返します。
 
 ```ruby
@@ -527,6 +580,7 @@ Dir.glob("/usr/sbin/*") {|bd|
 ```
 
 ### def sticky? -> bool
+
 stickyビットが立っている時に真を返します。
 
 ```ruby

@@ -55,11 +55,13 @@ OpenSSL::PKey::EC オブジェクトを生成します。
 
 ## Instance methods
 ### def group -> OpenSSL::PKey::EC::Group
+
 鍵パラメータとなる群を表すオブジェクトを返します。
 
 - **SEE** [m:OpenSSL::PKey::EC#group=]
 
 ### def group=(gr)
+
 鍵パラメータとなる群を表すオブジェクトを設定します。
 
 通常このメソッドで値を変更することはありません。
@@ -70,6 +72,7 @@ OpenSSL::PKey::EC オブジェクトを生成します。
 - **SEE** [m:OpenSSL::PKey::EC#group]
 
 ### def private_key -> OpenSSL::BN|nil
+
 秘密鍵となる整数を返します。
 
 鍵が設定されていない場合は nil を返します。
@@ -77,6 +80,7 @@ OpenSSL::PKey::EC オブジェクトを生成します。
 - **SEE** [m:OpenSSL::PKey::EC#private_key=]
 
 ### def private_key=(privkey)
+
 秘密鍵となる整数を設定します。
 
 nil を渡すことで EC オブジェクトが公開鍵のみを持つ状態に変更できます。
@@ -86,6 +90,7 @@ nil を渡すことで EC オブジェクトが公開鍵のみを持つ状態に
 - **SEE** [m:OpenSSL::PKey::EC#private_key]
 
 ### def public_key -> OpenSSL::PKey::EC::Point|nil
+
 公開鍵となる楕円曲線上の点を表すオブジェクトを返します。
 
 鍵が設定されていない場合は nil を返します。
@@ -94,6 +99,7 @@ nil を渡すことで EC オブジェクトが公開鍵のみを持つ状態に
 - **SEE** [m:OpenSSL::PKey::EC#public_key=]
 
 ### def public_key=(pubkey)
+
 公開鍵となる楕円曲線上の点を表すオブジェクトを設定します。
 
 通常このメソッドで値を変更することはありません。
@@ -104,9 +110,11 @@ nil を渡すことで EC オブジェクトが公開鍵のみを持つ状態に
 - **SEE** [m:OpenSSL::PKey::EC#public_key]
 
 ### def private_key? -> bool
+
 EC オブジェクトが秘密鍵を保持していれば真を返します。
 
 ### def public_key? -> bool
+
 EC オブジェクトが公開鍵を保持していれば真を返します。
 
 [c:OpenSSL::PKey::RSA] や [c:OpenSSL::PKey::DSA] と
@@ -120,6 +128,7 @@ EC オブジェクトが公開鍵を保持していれば真を返します。
 よって乱数が適切に初期化されている必要があります。
 
 ### def generate_key -> self
+
 鍵ペアを乱数で生成します。
 
 - **raise** `OpenSSL::PKey::ECError` -- 鍵ペアの生成に失敗した場合に発生します
@@ -133,6 +142,7 @@ EC オブジェクトが公開鍵を保持していれば真を返します。
 - **raise** `OpenSSL::PKey::ECError` -- 鍵に問題がある場合に発生します
 
 ### def dh_compute_key(pubkey) -> String
+
 自分の秘密鍵と相手の公開鍵から ECDH によって鍵文字列を計算し、返します。
 
 相手の公開鍵は [c:OpenSSL::PKey::EC::Point] オブジェクトである必要があります。
@@ -141,6 +151,7 @@ EC オブジェクトが公開鍵を保持していれば真を返します。
 - **raise** `OpenSSL::PKey::ECError` -- 鍵交換に失敗した場合に発生します
 
 ### def dsa_sign_asn1(data) -> String
+
 秘密鍵を用い、data に ECDSA で署名します。
 
 結果は文字列として返します。
@@ -154,6 +165,7 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
 - **SEE** [m:OpenSSL::PKey::EC#dsa_verify_asn1]
 
 ### def dsa_verify_asn1(data, sig) -> bool
+
 公開鍵を用い、署名を ECDSA で検証します。
 
 data のダイジェストを取る処理はこのメソッドに含まれていません。
@@ -167,6 +179,7 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
 - **SEE** [m:OpenSSL::PKey::EC#dsa_sign_asn1]
 
 ### def to_pem -> String
+
 鍵を PEM 形式の文字列に変換します。
 
 現在の仕様では [m:OpenSSL::PKey::RSA#to_pem] のように
@@ -176,12 +189,14 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
        公開鍵が含まれていない場合や、鍵が妥当でない場合などに失敗します。
 
 ### def to_der -> String
+
 鍵を DER 形式の文字列に変換します。
 
 - **raise** `OpenSSL::PKey::ECError` -- 文字列への変換に失敗した場合に発生します。
        公開鍵が含まれていない場合や、鍵が妥当でない場合などに失敗します。
 
 ### def to_text -> String
+
 鍵を人間が読める形式に変換します。
 
 - **raise** `OpenSSL::PKey::ECError` -- 文字列への変換に失敗した場合に発生します。
@@ -189,14 +204,17 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
 
 ## Constants
 ### const NAMED_CURVE -> Integer
+
 その群が名前を持つ曲線から定義されていることを意味するフラグです。
 
 [m:OpenSSL::PKey::EC::Group#asn1_flag=] で利用されます。
 
 # class OpenSSL::PKey::ECError < OpenSSL::PKey::PKeyError
+
 楕円曲線暗号関連のエラーが生じた場合に発生する例外です。
 
 # class OpenSSL::PKey::EC::Group
+
 楕円曲線から定義される群を表すクラスです。
 
 楕円曲線暗号のパラメータとしての役割をはたします。
@@ -243,9 +261,11 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
 
 ## Instance methods
 ### def generator -> OpenSSL::PKey::EC::Point
+
 群の生成元を返します。
 
 ### def set_generator(generator, order, cofactor) -> self
+
 群のパラメータを設定します。
 
 - **param** `generator` -- 生成元([c:OpenSSL::PKey::EC::Point] オブジェクト)
@@ -254,33 +274,40 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
 - **raise** `OpenSSL::PKey::EC::Group::Error` -- 設定に失敗した場合に発生します
 
 ### def order -> OpenSSL::BN
+
 生成元の位数を返します。
 
 - **raise** `OpenSSL::PKey::EC::Group::Error` -- 位数の取得に失敗した場合に発生します
 
 ### def cofactor -> OpenSSL::BN
+
 余因子を返します。
 
 - **raise** `OpenSSL::PKey::EC::Group::Error` -- 余因子の取得に失敗した場合に発生します
 
 ### def curve_name -> String | nil
+
 曲線の名前を文字列で返します。
 
 名前がない場合は nil を返します。
 
 ### def asn1_flag -> Integer
+
 自身に設定された ASN1 フラグを返します。
 
 - **SEE** [m:OpenSSL::PKey::EC::Group#asn1_flag=]
 
 ### def asn1_flag=(flags)
+
 自身に ASN1 フラグを設定します。
 
 現在利用可能なフラグは以下の通りです。
   - [m:OpenSSL::PKey::EC::NAMED_CURVE]
 
 - **SEE** [m:OpenSSL::PKey::EC::Group#asn1_flag]
+
 ### def point_conversion_form -> Symbol
+
 点のエンコーディング方式を返します。
 
 以下のいずれかを返します。
@@ -294,6 +321,7 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
 - **SEE** [m:OpenSSL::PKey::EC::Group#point_conversion_form=]
 
 ### def point_conversion_form=(sym)
+
 点のエンコーディング方式を設定します。
 
 以下のいずれかを設定します。
@@ -306,12 +334,15 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
 - **SEE** [m:OpenSSL::PKey::EC::Group#point_conversion_form]
 
 ### def seed -> String | nil
+
 seed を返します。
 
 seed が設定されていない場合は nil を返します。
 
 - **SEE** [m:OpenSSL::PKey::EC::Group#seed]
+
 ### def seed=(s)
+
 seed を設定します。
 
 - **param** `s` -- seed(文字列)
@@ -319,28 +350,37 @@ seed を設定します。
 - **SEE** [m:OpenSSL::PKey::EC::Group#seed]
 
 ### def degree -> Integer
+
 群の定義の元となっている体の要素を
 表現するのに必要なビット数を返します。
 
 ### def to_pem -> String
+
 自身を PEM 形式の文字列に変換します。
 
 - **raise** `OpenSSL::PKey::EC::Group::Error` -- 変換に失敗した場合に発生します。
+
 ### def to_der -> String
+
 自身を DER 形式の文字列に変換します。
 
 - **raise** `OpenSSL::PKey::EC::Group::Error` -- 変換に失敗した場合に発生します。
+
 ### def to_text -> String
+
 自身を人間に可読な形式の文字列に変換します。
 
 - **raise** `OpenSSL::PKey::EC::Group::Error` -- 変換に失敗した場合に発生します。
+
 ### def ==(other) -> bool
 ### def eql?(other) -> bool
+
 自身が other と等しいときは true を返します。
 
 - **param** `other` -- 比較対象の [c:OpenSSL::PKey::EC::Group] オブジェクト
 
 # class OpenSSL::PKey::EC::Point
+
 楕円曲線暗号の公開鍵となる曲線上の点を表します。
 
 ## Class methods
@@ -372,16 +412,20 @@ Point オブジェクトを生成します。
 
 ### def eql?(other) -> bool
 ### def ==(other) -> bool
+
 自身が other と等しいならば true を返します。
 
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- エラーが生じた場合に発生します
+
 ### def infinity? -> bool
+
 自身が無限遠点であるならば true を返します。
 
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- エラーが生じた場合に発生します
 - **SEE** [m:OpenSSL::PKey::EC::Point#set_to_infinity!]
 
 ### def on_curve? -> bool
+
 点が曲線上にあるならば真を返します。
 
 [m:OpenSSL::PKey::EC::Group] で得られる群と関連付けられた
@@ -394,23 +438,28 @@ Point オブジェクトを生成します。
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- エラーが生じた場合に発生します
 
 ### def invert! -> self
+
 自身をその逆元に設定します。
 
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- エラーが生じた場合に発生します
 
 ### def set_to_infinity! -> self
+
 自身を無限遠点に設定します。
 
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- エラーが生じた場合に発生します
 - **SEE** [m:OpenSSL::PKey::EC::Point#infinity!]
 
 ### def to_bn -> OpenSSL::BN
+
 点を整数に変換します。
 
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- 変換に失敗した場合に発生します
 
 # class OpenSSL::PKey::EC::Group::Error < OpenSSL::OpenSSLError
+
 [c:OpenSSL::PKey::EC::Group] 関連のエラーを表す例外クラスです。
 
 # class OpenSSL::PKey::EC::Point::Error < OpenSSL::OpenSSLError
+
 [c:OpenSSL::PKey::EC::Point] 関連のエラーを表す例外クラスです。

@@ -36,13 +36,11 @@ m=nの行列をm次の正方行列(square matrix)といいます。
 i=jの要素a(i,j)を対角要素(diagonal element)、
 それ以外の要素を非対角要素(nondiagonal element)といいます。
 
-
 #@#使い方 Usage
 
 #@# [[c:Matrix]]クラスを使うためには、require 'matrix'する必要がある。
 
 #@#  require 'matrix'
-
 
 ## Class Methods
 ### def [](*rows) -> Matrix
@@ -112,7 +110,6 @@ p m # => Matrix[[1, 4, -1], [2, 5, -2], [3, 6, -3]]
     #                          [3, 6, -3]
 ```
 
-
 ### def diagonal(*values) -> Matrix
 
 対角要素がvaluesで、非対角要素が全て0であるような
@@ -134,14 +131,12 @@ m = Matrix.diagonal(a)
 p m # => Matrix[[[1, 2, 3]]]
 ```
 
-
 ### def scalar(n, value) -> Matrix
 
 対角要素が全てvalue(数)で、非対角要素が全て0であるようなn次の正方行列を生成します。
 
 - **param** `n` --     生成する行列の次元
 - **param** `value` -- 生成する行列の対角要素の値
-
 
 ```ruby title="例"
 require 'matrix'
@@ -184,6 +179,7 @@ p Matrix.zero(2, 3) #=> Matrix[[0, 0, 0], [0, 0, 0]]
 - **param** `column` -- 生成する行列の列数
 
 ### def empty(row_size=0, column_size=0) -> Matrix
+
 要素を持たない行列を返します。
 
 「要素を持たない」とは、行数もしくは列数が0の行列のことです。
@@ -205,7 +201,6 @@ p m * n
 - **param** `row_size` -- 行列の行数
 - **param** `column_size` -- 行列の列数
 - **raise** `ArgumentError` -- row_size, column_size が両方とも0でない場合に発生します
-
 
 ### def row_vector(row) -> Matrix
 
@@ -238,7 +233,6 @@ m = Matrix.build(3) { rand }
 
 - **param** `row_size` -- 行列の行数
 - **param** `column_size` -- 行列の列数
-
 
 ### def hstack(*matrices) -> Matrix
 
@@ -285,6 +279,7 @@ p Matrix.combine(x, y) {|a, b| a - b} # => Matrix[[5, 4], [1, 0]]
 - **param** `matrices` -- 並べる行列。すべての行列の行数と列数が一致していなければならない
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 行や列の要素数が一致しない時に発生します
 - **SEE** [m:Matrix#combine]
+
 ## Instance Methods
 ### def [](i, j) -> ()
 ### def element(i, j) -> ()
@@ -295,8 +290,6 @@ p Matrix.combine(x, y) {|a, b| a - b} # => Matrix[[5, 4], [1, 0]]
 
 - **param** `i` -- 要素の行成分を0オリジンで指定します。
 - **param** `j` -- 要素の列成分を0オリジンで指定します。
-
-
 
 ```ruby title="例"
 require 'matrix'
@@ -350,7 +343,6 @@ value を指定せず、さらにブロックを省略した場合、
 
 - **param** `value` -- 探索する値
 - **param** `selector` -- 探索範囲
-
 
 ### def each(which = :all) {|e| ... } -> self
 ### def each(which = :all) -> Enumerator
@@ -471,7 +463,6 @@ p m  # => Matrix[[9, 9, 0], [1, 2, 0], [3, 4, 0]]
 ### def -@ -> Matrix
 
 単項 -。各要素の符号を反転させた行列を返します。
-
 
 ### def *(m) -> Matrix | Vector
 
@@ -644,7 +635,6 @@ j 番目の列を [c:Vector] オブジェクトで返します。
 j 番目の列が存在しない場合は nil を返します。
 ブロックが与えられた場合はその列の各要素についてブロックを繰り返します。
 
-
 - **param** `j` -- 列の位置を指定します。
          先頭の列が 0 番目になります。j の値が負の時には末尾から
          のインデックスと見倣します。末尾の列が -1 番目になります。
@@ -666,8 +656,8 @@ m.column(-1) { |x|
 p cnt # => 24.5
 ```
 
-
 ### def adjugate -> Matrix
+
 余因子行列を返します。
 
 ```ruby title="例"
@@ -791,7 +781,6 @@ p m.map(:diagonal) { |x| x * 10 } # => Matrix[[10, 2], [3, 40]]
               デフォルトは、:all (全ての要素)です。
               指定できる [c:Symbol] の詳細は、 [m:Matrix#each] の項目を参照して下さい。
 
-
 ```ruby title="例"
 require 'matrix'
 
@@ -804,6 +793,7 @@ p m                                 #=> Matrix[[10, 20], [30, 40]]
 - **SEE** [m:Matrix#each], [m:Matrix#map]
 
 ### def empty? -> bool
+
 行列が要素を持たないならば true を返します。
 
 要素を持たないとは、行数か列数のいずれかが0であることを意味します。
@@ -811,6 +801,7 @@ p m                                 #=> Matrix[[10, 20], [30, 40]]
 - **SEE** [m:Matrix.empty]
 
 ### def real? -> bool
+
 行列の全要素が実([m:Numeric#real?])であれば true を返します。
 
 Complexオブジェクトを要素に持つ場合は虚部が0でも偽を返します。
@@ -832,7 +823,6 @@ p Matrix[[1+0i, 0], [0, 1]].real? # => false
 
 正方行列でない場合には例外 ExceptionForMatrix::ErrDimensionMismatch を
 発生させます。
-
 
 ```ruby title="例"
 require 'matrix'
@@ -883,49 +873,58 @@ p m.regular? # => raise ExceptionForMatrix::ErrDimensionMismatch
 - **param** `other` -- 比較対象のオブジェクト
 
 ### def diagonal? -> bool
+
 行列が対角行列ならば true を返します。
 
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 行列が正方行列でない場合に発生します
 
 ### def hermitian? -> bool
+
 行列がエルミートならば true を返します。
 
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 行列が正方行列でない場合に発生します
 
 ### def lower_triangular? -> bool
+
 行列が下三角行列ならば true を返します。
 
 ### def normal? -> bool
+
 行列が正規行列ならば true を返します。
 
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 行列が正方行列でない場合に発生します
 
 ### def orthogonal? -> bool
+
 行列が直交行列ならば true を返します。
 
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 行列が正方行列でない場合に発生します
 
 ### def permutation? -> bool
+
 行列が置換行列ならば true を返します。
 
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 行列が正方行列でない場合に発生します
 
 ### def symmetric? -> bool
+
 行列が対称ならば true を返します。
 
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 行列が正方行列でない場合に発生します
 
 ### def unitary? -> bool
+
 行列がユニタリならば true を返します。
 
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 行列が正方行列でない場合に発生します
 
 ### def upper_triangular? -> bool
+
 行列が上三角行列ならば true を返します。
 
 ### def zero? -> bool
-行列が零行列ならば true を返します。
 
+行列が零行列ならば true を返します。
 
 ### def row_vectors -> [Vector]
 
@@ -971,19 +970,20 @@ m = Matrix[a1, a2, a3]
 p m.to_a # => [[1, 2, 3], [10, 15, 20], [-1, -2, 1.5]]
 ```
 
-
-
 ### def elements_to_f -> Matrix
+
 各要素を浮動小数点数 [c:Float] に変換した行列を返します。
 
 このメソッドは deprecated です。 map(&:to_f) を使ってください。
 
 ### def elements_to_i -> Matrix
+
 各要素を整数 [c:Integer] に変換した行列を返します。
 
 このメソッドは deprecated です。 map(&:to_i) を使ってください。
 
 ### def elements_to_r -> Matrix
+
 各要素を有理数 [c:Rational] に変換した行列を返します。
 
 このメソッドは deprecated です。 map(&:to_r) を使ってください。
@@ -996,10 +996,10 @@ p m.to_a # => [[1, 2, 3], [10, 15, 20], [-1, -2, 1.5]]
 #@# bc-methods -r matrix Matrix で見つからなかった。okkez
 
 ### def round(ndigits = 0) -> Matrix
+
 行列の各要素を指定した桁数で丸めた行列を返します。
 
 - **SEE** [m:Float#round]
-
 
 ### def conjugate -> Matrix
 ### def conj -> Matrix
@@ -1030,6 +1030,7 @@ p Matrix[[1+2i, 1i, 0], [1, 2, 3]].imaginary
 #  =>   2i  i  0
 #        0  0  0
 ```
+
 ### def real -> Matrix
 
 行列の実部を返します。
@@ -1046,8 +1047,8 @@ p Matrix[[1+2i, 1i, 0], [1, 2, 3]].real
 
 ### def rectangular -> [Matrix, Matrix]
 ### def rect -> [Matrix, Matrix]
-行列を実部と虚部に分解したものを返します。
 
+行列を実部と虚部に分解したものを返します。
 
 ```ruby title="例"
 m.rect == [m.real, m.imag]  # ==> true for all matrices m
@@ -1056,6 +1057,7 @@ m.rect == [m.real, m.imag]  # ==> true for all matrices m
 - **SEE** [m:Matrix#imaginary], [m:Matrix#real]
 
 ### def coerce(other) -> Array
+
 他の数値オブジェクトとの変換を行います。
 
 他の数値オブジェクトを[c:Matrix::Scalar]のオブジェクトに変換し、selfとの組を配列として返します。
@@ -1070,8 +1072,6 @@ m = Matrix[a1, a2]
 r = 1/2r
 p m.coerce(r) #=> [#<Matrix::Scalar:0x832df18 @value=(1/2)>, Matrix[[1, 2], [-1.25, 2.2]]]
 ```
-
-
 
 #@# bc-rdoc: detected missing name: inverse_from
 #@# このメソッドは 1.9.2 以降では public でないが、1.9.1以前でも
@@ -1103,6 +1103,7 @@ p m.coerce(r) #=> [#<Matrix::Scalar:0x832df18 @value=(1/2)>, Matrix[[1, 2], [-1.
 
 ### def eigen -> Matrix::EigenvalueDecomposition
 ### def eigensystem -> Matrix::EigenvalueDecomposition
+
 行列の固有値と左右の固有ベクトルを保持したオブジェクトを返します。
 
 [c:Matrix::EigenvalueDecomposition] は to_ary を定義しているため、
@@ -1127,6 +1128,7 @@ p (v * d * v_inv).round(5) == m # => true
 
 ### def lup -> Matrix::LUPDecomposition
 ### def lup_decomposition -> Matrix::LUPDecomposition
+
 行列の LUP 分解を保持したオブジェクトを返します。
 
 [c:Matrix::LUPDecomposition] は to_ary を定義しているため、
@@ -1147,11 +1149,12 @@ p a.lup.solve([2, 5]) # => Vector[(1/1), (1/2)]
 
 - **SEE** [c:Matrix::LUPDecomposition]
 
-
 ### def hash -> Integer
+
 行列のHash値を返します。
 
 ### def to_s -> String
+
 行列を文字列化し、その文字列を返します。
 
 ```ruby title="例"
@@ -1164,6 +1167,7 @@ p m.to_s # => "Matrix[[1, 2], [3, 4.5]]"
 ```
 
 ### def inspect -> String
+
 自分自身を見やすい形式に文字列化し、その文字列を返します。
 
 ```ruby title="例"
@@ -1174,7 +1178,6 @@ m = Matrix[a1, a2]
 
 p m.inspect # => "Matrix[[1, 2], [3, 4.5]]"
 ```
-
 
 ### def combine(*matrices) {|*elements| ... } -> Matrix
 
@@ -1196,6 +1199,7 @@ require 'matrix'
 
 p Matrix[[1,2], [3,4]].hadamard_product(Matrix[[1,2], [3,2]]) # => Matrix[[1, 4], [9, 8]]
 ```
+
 ### def antisymmetric? -> bool
 ### def skew_symmetric? -> bool
 
@@ -1215,5 +1219,4 @@ p Matrix[[1, -2, 3], [2, 0, 6], [-3, -6, 0]].antisymmetric? # => false
 # 符号が違う
 p Matrix[[0, 2, -3], [2, 0, 6], [-3, 6, 0]].antisymmetric? # => false
 ```
-
 

@@ -6,6 +6,7 @@ alias:
 #@end
 ---
 # class Etc::Passwd < Struct
+
 [m:Etc?.getpwent] で得られる構造体。
 
 この構造体の値を変更してもシステムには反映されません。

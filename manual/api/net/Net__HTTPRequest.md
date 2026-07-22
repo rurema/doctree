@@ -2,6 +2,7 @@
 library: net/http
 ---
 # class Net::HTTPRequest < Net::HTTPGenericRequest
+
 HTTP リクエストを抽象化するクラスです。
 
 Net::HTTPRequest は抽象クラスなので実際にはサブクラスの
@@ -36,6 +37,7 @@ print res.body
 
 ## Class Methods
 ### def new(path, initheader = nil) -> Net::HTTPRequest
+
 HTTP リクエストオブジェクトを生成します。
 
 initheader でリクエストヘッダを指定できます。

@@ -409,7 +409,6 @@ p u.to_s                                   #=> http://example.com/foo/bar.html
 [RFC:3986] の Section 5.2 の仕様に従います。
 rel が文字列の場合は URI.parse(rel) によって、URI に変換してから連結します。
 
-
 - **param** `rel` -- 連結したいパスを文字列か URI オブジェクトで与えます。
 
 ```ruby title="例"

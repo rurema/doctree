@@ -114,15 +114,14 @@ UI4 [UI4] reserved
 体は、必ずしもOLEオートメーション互換データというわけではありません。こ
 のようなデータはWIN32OLEからは利用できません。
 
-
 ### def value -> object | nil
+
 変数の値を取得します。
 
 変数情報によってはenum値のように定数値を持つものがあります。valueメソッ
 ドはこのような定数値を返します。
 
 - **return** -- この変数が持つ定数値。値を持たない場合はnilを返します。
-
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'XlSheetType')
@@ -143,6 +142,7 @@ xlWorksheet=-4167
 ```
 
 ### def variable_kind -> String
+
 変数の種類（VARKIND）を取得します。
 
 この変数の種類を示す文字列を返します。
@@ -168,6 +168,7 @@ puts tobj.variables.map {|v| v.variable_kind}.uniq # => CONSTANT
 - **SEE** [m:WIN32OLE_VARIABLE#varkind]
 
 ### def varkind -> Integer
+
 変数の種類（VARKIND）を取得します。
 
 この変数の種類を示す数値を返します。
@@ -191,6 +192,4 @@ puts tobj.variables.map {|v| v.varkind}.uniq # => 2
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'XlSheetType')
 puts tobj.variables.map {|v| v.visible?}.uniq # => true
 ```
-
-
 

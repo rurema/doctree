@@ -110,7 +110,6 @@ ie = WIN32OLE.new('InternetExplorer.Application')
 ev = WIN32OLE_EVENT.new(ie, '{34A715A0-6587-11D0-924A-0020AFC7AC4D}')
 ```
 
-
 ## Instance Methods
 
 ### def on_event(event = nil) {|*args| ... } -> ()
@@ -160,6 +159,7 @@ end
 単にイベントを受け取れなくなります。
 
 ### def on_event_with_outargs(event = nil) {|*args| ... } -> ()
+
 イベント通知を受けて結果を呼び出し元へ返すブロックを登録します。
 
 引数にはイベントのメソッド名を指定します。引数を省略した場合は、すべて
@@ -191,8 +191,8 @@ end
 認を行いません。このため、誤ったイベント名を記述してもエラーとはならず、
 単にイベントを受け取れなくなります。
 
-
 ### def off_event(event = nil) -> ()
+
 [m:WIN32OLE_EVENT#on_event]で登録したブロックを解除します。
 
 - **param** `event` -- 文字列またはシンボルで登録時に指定したイベント名を指定しま
@@ -207,6 +207,7 @@ ev.off_event(:NavigateComplete)
 ```
 
 ### def handler=(obj)
+
 イベント処理を実行するオブジェクトを登録します。
 
 イベントハンドラをメソッドとして持つオブジェクトをイベントハンドラとし
@@ -251,12 +252,14 @@ ie.Quit
 合、そちらが優先されます。
 
 ### def handler -> object
+
 [m:WIN32OLE_EVENT#handler=]メソッドで登録したイベントハンドラオブジェ
 クトを返します。
 
 - **return** -- イベントハンドラオブジェクト。未登録ならばnil。
 
 ### def unadvise -> ()
+
 イベント通知元をオブジェクトから切断します。
 
 当メソッド実行後は、イベント通知を受けられなくなります。また、このオブ

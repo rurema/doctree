@@ -2,8 +2,8 @@
 library: rexml/document
 ---
 # class REXML::NotationDecl < REXML::Child
-DTD の記法宣言を表すクラスです。
 
+DTD の記法宣言を表すクラスです。
 
 ```ruby
 require 'rexml/document'
@@ -39,6 +39,7 @@ p foobar.system # => "http://example.org/foobar.dtd"
 ## Class Methods
 
 ### def new(name, middle, pub, sys) -> REXML::NotationDecl
+
 NotationDecl オブジェクトを生成します。
 
 - **param** `name` -- 記法名(文字列)
@@ -49,29 +50,35 @@ NotationDecl オブジェクトを生成します。
 ## Instance Methods
 
 ### def public -> String | nil
+
 公開識別子を返します。
 
 宣言が公開識別子を含まない場合は nil を返します。
 
 ### def public=(value)
+
 公開識別子を value に変更します。
 
 - **param** `value` -- 設定する公開識別子(文字列)
 
 ### def system -> String | nil
+
 システム識別子(URI)を返します。
 
 宣言がシステム識別子を含まない場合は nil を返します。
 
 ### def system=(value)
+
 システム識別子を変更します。
 
 - **param** `value` -- 設定するシステム識別子
 
 ### def to_s -> String
+
 self を文字列化したものを返します。
 
 ### def write(output, indent = -1)
+
 output へ self を文字列化して出力します。
 
 このメソッドは deprecated です。[c:REXML::Formatter] で
@@ -81,4 +88,5 @@ output へ self を文字列化して出力します。
 - **param** `indent` -- インデントの大きさ。無視されます。
 
 ### def name -> String
+
 記法宣言の名前を返します。

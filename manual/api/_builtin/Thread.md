@@ -133,7 +133,6 @@ new メソッドと違い initialize メソッドを呼びません。
 
 - **raise** `ThreadError` -- 現在のスレッドが属する [c:ThreadGroup] が freeze されている場合に発生します。またブロックを与えられずに呼ばれた場合にも発生します。
 
-
 注意:
 
 例えば、以下のコードは間違いです。スレッドの実行が開始される前に
@@ -505,6 +504,7 @@ Fiber を切り替えても同じ変数を返したい場合は
 を使用してください。
 
 - **SEE** [m:Thread#fetch], [m:Thread#\[\]=]
+
 ### def []=(name,val)
 
 val を name に対応するスレッド固有のデータとして格納します。
@@ -634,7 +634,6 @@ th1.kill
 ```
 
 - **SEE** [m:Kernel?.exit], [m:Kernel?.exit!]
-
 
 ### def group    -> ThreadGroup
 
@@ -968,6 +967,7 @@ th.join
 - **SEE** [m:Thread#add_trace_func] [m:Kernel?.set_trace_func]
 
 ### def backtrace    -> [String] | nil
+
 スレッドの現在のバックトレースを返します。
 
 スレッドがすでに終了している場合は nil を返します。
@@ -1001,7 +1001,6 @@ p th.backtrace
 th.kill
 p th.backtrace # => nil
 ```
-
 
 ### def backtrace_locations(start = 0, length = nil) -> [Thread::Backtrace::Location] | nil
 ### def backtrace_locations(range)                   -> [Thread::Backtrace::Location] | nil

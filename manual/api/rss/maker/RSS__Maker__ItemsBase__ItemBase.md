@@ -3,7 +3,6 @@ library: rss
 ---
 # class RSS::Maker::ItemsBase::ItemBase < Object
 
-
 itemはmaker.items.new_itemで作成されたオブジェク
 トとします．
 
@@ -52,5 +51,4 @@ item.date=の別名です．
 ### def source
 ### def categories
 #@todo
-
 

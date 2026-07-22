@@ -9,7 +9,6 @@ include:
 
 各種入力を wrap するクラス。
 
-
 #@# == Class Methods
 #@#
 #@# --- new(arg)

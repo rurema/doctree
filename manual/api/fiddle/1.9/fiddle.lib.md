@@ -10,14 +10,13 @@ Ruby 1.9.x ではこのライブラリは単体では利用できません。
 DL を経由して利用してください。
 #@# 2.0 以降では DL が obsolete となり fiddle 単体で利用できるようになる
 
-
-
-
 # module Fiddle
+
 fiddle ライブラリの名前空間をなすモジュール
 
 ## Singleton Methods
 ### def win32_last_error -> Integer
+
 最後に [m:Fiddle::Function#call] で C の関数を呼び出した
 結果設定された errno を返します。
 
@@ -26,6 +25,7 @@ fiddle ライブラリの名前空間をなすモジュール
 この値はスレッドローカルです。
 
 ### def win32_last_error=(errno)
+
 [m:Fiddle.win32_last_error] で返される値を設定します。
 
 errno は fiddle が設定するのでユーザはこのメソッドを使わないでください。
@@ -35,12 +35,14 @@ errno は fiddle が設定するのでユーザはこのメソッドを使わな
 - **param** `errno` -- 設定する errno
 
 ### def last_error -> Integer
+
 最後に [m:Fiddle::Function#call] で C の関数を呼び出した
 結果設定された errno を返します。
 
 この値はスレッドローカルです。
 
 ### def last_error=(errno)
+
 [m:Fiddle.last_error] で返される値を設定します。
 
 errno は fiddle が設定するのでユーザはこのメソッドを使わないでください。
@@ -49,11 +51,13 @@ errno は fiddle が設定するのでユーザはこのメソッドを使わな
 
 ## Constants
 ### const TYPE_VOID -> Integer
+
 C の void 型を表します。
 
 - **SEE** [m:Fiddle::Function.new]
 
 ### const TYPE_VOIDP -> Integer
+
 C の void* 型を表します。
 
 fiddle や dl 上では、すべてのポインタは void* であると
@@ -62,51 +66,62 @@ fiddle や dl 上では、すべてのポインタは void* であると
 - **SEE** [m:Fiddle::Function.new]
 
 ### const TYPE_CHAR -> Integer
+
 C の char 型を表します。
 
 - **SEE** [m:Fiddle::Function.new]
 
 ### const TYPE_SHORT -> Integer
+
 C の short 型を表します。
 
 - **SEE** [m:Fiddle::Function.new]
 
 ### const TYPE_INT -> Integer
+
 C の int 型を表します。
 
 - **SEE** [m:Fiddle::Function.new]
 
 ### const TYPE_LONG -> Integer
+
 C の long 型を表します。
 
 - **SEE** [m:Fiddle::Function.new]
 
 ### const TYPE_LONG_LONG -> Integer
+
 C の long long 型を表します。
 
 - **SEE** [m:Fiddle::Function.new]
 
 ### const TYPE_FLOAT -> Integer
+
 C の float 型を表します。
 
 - **SEE** [m:Fiddle::Function.new]
 
 ### const TYPE_DOUBLE -> Integer
+
 C の double 型を表します。
 
 - **SEE** [m:Fiddle::Function.new]
 
 ### const WINDOWS -> bool
+
 Windows 環境下では true、それ以外では false です。
 
 ### const Pointer -> Class
+
 [c:DL::CPtr] の別名です。
 
 # class Fiddle::Function < Object
+
 C の関数を表すクラスです。
 
 ## Class Methods
 ### def new(ptr, args, ret_type, abi=Fiddle::Function::DEFAULT) -> Fiddle::Function
+
 ptr (関数ポインタを表す整数)から Fiddle::Function オブジェクトを
 生成します。
 
@@ -141,7 +156,6 @@ libc = DL.dlopen("/lib/libc.so.6")
 f = Fiddle::Function.new(libc["strcpy"], [TYPE_VOIDP, TYPE_VOIDP], TYPE_VOIDP)
 ```
 
-
 - **param** `ptr` -- C の関数を指す [c:DL::Handle] オブジェクト
 - **param** `args` -- 引数の型を表す配列
 - **param** `ret_type` -- 返り値の型
@@ -149,6 +163,7 @@ f = Fiddle::Function.new(libc["strcpy"], [TYPE_VOIDP, TYPE_VOIDP], TYPE_VOIDP)
 
 ## Instance Methods
 ### def call(*args) -> Integer|DL::CPtr|nil
+
 関数を呼び出します。
 
 [m:Fiddle::Function.new] で指定した引数と返り値の型に基いて
@@ -188,22 +203,26 @@ Ruby のオブジェクトを適切に C のデータに変換して C の関数
 - **SEE** [m:Fiddle::Function.new]
 
 ### def abi -> Integer
+
 呼出規約を返します。
 
 - **SEE** [m:Fiddle::Function.new]
 
 ## Constants
 ### const DEFAULT -> Integer
+
 デフォルトの呼出規約を表します。
 
 - **SEE** [m:Fiddle::Function.new]
 
 ### const STDCALL -> Integer
+
 Windows の stdcall 呼出規約を表します。
 
 - **SEE** [m:Fiddle::Function.new]
 
 # class Fiddle::Closure < Object
+
 コールバック関数を表すクラスです。
 
 Ruby のメソッド(call)を C の関数ポインタとして表現するためのクラスです。
@@ -239,6 +258,7 @@ p s # =>  "()07Uabcqx"
 
 [m:Class.new] を使うことで、サブクラスを明示的に作ることなしに
 コールバックオブジェクトを作ることができます。
+
 ```ruby
 require 'fiddle'
 include Fiddle # TYPE_* を使うために include する
@@ -272,12 +292,15 @@ args、ret で関数の引数と返り値の型を指定します。
 C の関数ポインタのアドレスを返します。
 
 ### def ctype -> Integer 
+
 返り値の型を返します。
 
 ### def args -> [Integer]
+
 引数の型を表す配列を返します。
 
 # class Fiddle::Closure::BlockCaller < Fiddle::Closure
+
 Ruby のブロックをラップしたコールバック関数を表すクラスです。
 
 Ruby のブロックを C の関数ポインタとして表現するためのクラスです。
@@ -306,7 +329,6 @@ p s # =>  "()07Uabcqx"
 ### def new(ret, args, abi=Fiddle::Function::DEFAULT){ ... } -> Fiddle::Closure::BlockCaller
 
 Ruby のブロックを呼び出す Fiddle::Closure オブジェクトを返します。
-
 
 args、ret で関数の引数と返り値の型を指定します。
 指定は [m:Fiddle::Function.new] と同様なので、そちら

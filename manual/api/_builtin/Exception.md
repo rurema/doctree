@@ -31,7 +31,6 @@ p e.message # => "some message"
 
 $stderr が変更されておらず、$stderr.tty? が真の場合は true を返します。
 
-
 - **SEE** [m:Exception#full_message]
 
 ## Instance Methods
@@ -250,15 +249,14 @@ rescue
 end
 ```
 
-
 ### def full_message(highlight: true, order: :bottom)  -> String
+
 例外の整形された文字列を返します。
 
 返される文字列は Ruby が捕捉されなかった例外を標準エラー出力に出力するときと
 同じ形式です。
 そのため、メソッド呼び出し時に $stderr が変更されておらず、$stderr.tty? が真の場合は
 エスケープシーケンスによる文字装飾がついています。
-
 
 - **param** `highlight` -- エスケープシーケンスによる文字装飾をつけるかどうかを指定します。
                  デフォルト値は [m:Exception.to_tty?] の返り値と同じです。

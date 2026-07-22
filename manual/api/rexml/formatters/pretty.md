@@ -29,6 +29,7 @@ p output.string
 
 ## Class Method
 ### def new(indentation=2, ie_hack=false) -> REXML::Formatter::Pretty
+
 フォーマッタオブジェクトを生成して返します。
 
 このフォーマッタによる出力はテキストの空白や改行を調整し、
@@ -45,6 +46,7 @@ ie_hack に真を渡すと、空のタグを閉じる前で空白を挿入しま
 ## Instance Method
 
 ### def compact -> bool
+
 出力をコンパクトにするかどうかを返します。
 
 これが真の場合、出力の空白をできる限り削除しようとします。
@@ -54,12 +56,14 @@ ie_hack に真を渡すと、空のタグを閉じる前で空白を挿入しま
 - **SEE** [m:REXML::Formatters::Pretty#compact=]
 
 ### def compact=(c)
+
 出力をコンパクトにするかどうかを設定します。
 
 - **param** `c` -- コンパクトな出力をするかどうかを指定します。
 - **SEE** [m:REXML::Formatters::Pretty#compact]
 
 ### def width -> Integer
+
 出力のページ幅を返します。
 
 デフォルトは80です。
@@ -67,6 +71,7 @@ ie_hack に真を渡すと、空のタグを閉じる前で空白を挿入しま
 - **SEE** [m:REXML::Formatters::Pretty#width=]
 
 ### def width=(w)
+
 出力のページ幅を設定します。
 
 - **param** `w` -- ページ幅の設定値

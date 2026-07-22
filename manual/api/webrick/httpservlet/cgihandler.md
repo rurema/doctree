@@ -21,7 +21,6 @@ CGI を扱うためのサーブレットです。
 
 - **param** `name` -- 実行したい CGI のファイルを文字列で与えます。
 
-
 ## Instance Methods
 
 ### def do_GET(request, response) -> ()

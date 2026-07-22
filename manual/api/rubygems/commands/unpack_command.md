@@ -15,7 +15,9 @@ Usage: gem unpack GEMNAME [options]
         --target                     展開先のディレクトリを指定します
     -v, --version VERSION            展開する Gem パッケージのバージョンを指定します
 ```
+
 #@include(common_options)
+
 ```text
 Arguments:
   GEMNAME       展開する Gem パッケージ名を指定します
@@ -24,7 +26,6 @@ Summary:
 Defaults:
   --version '>= 0'
 ```
-
 
 # class Gem::Commands::UnpackCommand < Gem::Command
 
@@ -39,5 +40,4 @@ Defaults:
 - **param** `gemname` -- Gem パッケージの名前を指定します。
 
 - **param** `version_req` -- バージョンの満たすべき条件を文字列で指定します。
-
 

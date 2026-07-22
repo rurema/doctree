@@ -4,7 +4,6 @@ category: Network
 ---
 socket はプロセス外部との通信 (プロセス間通信、ホスト間通信) を実現します。
 
-
 ### ソケットアドレス
 
 ソケットというのは通信路の末端です。
@@ -65,7 +64,6 @@ p Socket.pack_sockaddr_in("echo", "127.0.0.1")
 => "\002\000\000\a\177\000\000\001\000\000\000\000\000\000\000\000"
 ```
 
-
 ### ホスト名と IP アドレスの変換
 
 ホスト名から IP アドレスへの変換 (正引き) を行うメソッドは以下のものが用意されています。
@@ -83,7 +81,6 @@ p Socket.pack_sockaddr_in("echo", "127.0.0.1")
 #@#* [[m:Socket.getnameinfo]]([Socket::AF_INET, "http", "210.163.138.100"]) => ["beryllium.ruby-lang.org", "www"]
   - [m:Socket.getnameinfo]([nil, nil, nil, "210.163.138.100"]) => ["beryllium.ruby-lang.org", 0]
   - [m:Addrinfo#getnameinfo] Addrinfo.ip("127.0.0.1").getnameinfo => ["localhost", "0"]
-
 
 また、[lib:resolv] ライブラリも使用できます。
 

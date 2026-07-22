@@ -14,7 +14,9 @@ Usage: gem server [options]
     -d, --dir=GEMDIR                 directory from which to serve gems
         --[no-]daemon                run as a daemon
 ```
+
 #@include(common_options)
+
 ```text
 Summary:
   Documentation and gem repository HTTP server
@@ -31,7 +33,6 @@ Description:
 Defaults:
   --port 8808 --dir /usr/lib/ruby/gems/1.8 --no-daemon
 ```
-
 
 # class Gem::Commands::ServerCommand < Gem::Command
 

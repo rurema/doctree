@@ -6,6 +6,7 @@ library: psych
 ## Class Methods
  
 ### def yaml_tag(tag) -> ()
+
 クラスと tag の間を関連付けます。
 
 これによって tag 付けされた YAML ドキュメントを Ruby のオブジェクトに
@@ -14,6 +15,7 @@ library: psych
 - **param** `tag` -- 対象のクラスに関連付けるタグの文字列
 
 ### Example
+
 ```ruby
 require 'psych'
   
@@ -47,11 +49,10 @@ EOS
 # => #<Foo:0x0000000130f48 @x=8>
 ```
 
-   
- 
 ## Instance Method
 ### def to_yaml(options = {}) -> String
 ### def psych_to_yaml(options = {}) -> String
+
 オブジェクトを YAML document に変換します。
 
 options でオプションを指定できます。
@@ -69,12 +70,12 @@ syck が廃止された場合  psych_to_yaml は廃止
 
 ## Instance Methods
 
-
 # reopen Kernel
 
 ## Instance Methods
 
 ### def y(*objects) -> nil
+
 objects を YAML document として標準出力に出力します。
 
 このメソッドは irb 上でのみ定義されます。

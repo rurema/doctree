@@ -11,7 +11,9 @@ Usage: gem lock GEMNAME-VERSION [GEMNAME-VERSION ...] [options]
   Options:
     -s, --[no-]strict                依存関係を満たせない場合に失敗します
 ```
+
 #@include(common_options)
+
 ```text
 Arguments:
   GEMNAME       ロックする Gem パッケージの名前を指定します
@@ -52,7 +54,6 @@ Defaults:
   --no-strict
 ```
 
-
 # class Gem::Commands::LockCommand < Gem::Command
 
 指定された特定のバージョンの Gem パッケージに依存する Gem を使用するために
@@ -73,5 +74,4 @@ Defaults:
 指定された Gem パッケージの gemspec ファイルのフルパスを返します。
 
 - **param** `gem_full_name` -- Gem パッケージの名前を指定します。
-
 

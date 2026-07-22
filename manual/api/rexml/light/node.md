@@ -72,7 +72,6 @@
 ### def to_s
 #@todo
 
-
 ## Constants
 
 ### const NAMESPLIT

@@ -2,6 +2,7 @@
 library: _builtin
 ---
 # module IO::WaitWritable
+
 例外が書き込み待ちで発生したことを意味します。
 
 例外オブジェクトに extend されます。詳しくは

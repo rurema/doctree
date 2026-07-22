@@ -4,6 +4,7 @@ library: rexml/document
 #@# xpath_parser.rb と quickpath.rb でのみ使われているので
 #@# 内部的な関数を保持するクラスであると思われる
 # module REXML::Functions
+
 内部用なのでユーザは使わないでください。
 
 xpath のパースに使う関数を保持するモジュールです。

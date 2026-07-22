@@ -5,7 +5,6 @@ Ruby は様々な環境で動作するよう各方面の有志によって移植
 
 インストールやコンパイルに関しては、「Rubyのインストール」(<https://www.ruby-lang.org/ja/documentation/installation/>)を参照。
 
-
   - [d:platform/Unix]
   - [d:platform/Win32]
     - [d:platform/Win32-native]

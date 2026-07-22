@@ -55,7 +55,6 @@ Foo.new.foo
 
 self を obj にバインドした [c:Method] オブジェクトを生成して返します。
 
-
 - **param** `obj` -- 自身をバインドしたいオブジェクトを指定します。ただしバインドできるのは、
            生成元のクラスかそのサブクラスのインスタンスのみです。
 
@@ -100,6 +99,7 @@ p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
 ```
 
 - **SEE** [m:UnboundMethod#bind_call]
+
 ### def bind_call(recv, *args) -> object
 ### def bind_call(recv, *args) { ... } -> object
 
@@ -112,14 +112,17 @@ puts Kernel.instance_method(:inspect).bind_call(BasicObject.new) # => #<BasicObj
 ```
 
 - **SEE** [m:UnboundMethod#bind], [m:Method#call]
+
 ### def arity    -> Integer
 
 メソッドが受け付ける引数の数を返します。
 
 ただし、メソッドが可変長引数を受け付ける場合、負の整数
+
 ```text
 -(必要とされる引数の数 + 1)
 ```
+
 を返します。C 言語レベルで実装されたメソッドが可変長引数を
 受け付ける場合、-1 を返します。
 
@@ -192,7 +195,6 @@ p String.instance_method(:count).inspect # => "#<UnboundMethod: String#count>"
 
 自身のハッシュ値を返します。
 
-
 ```ruby title="例"
 a = method(:==).unbind
 b = method(:eql?).unbind
@@ -200,7 +202,6 @@ p a.eql? b          # => true
 p a.hash == b.hash  # => true
 p [a, b].uniq.size  # => 1
 ```
-
 
 ### def name    -> Symbol
 
@@ -220,7 +221,6 @@ p Integer.instance_method(:to_s).owner # => Integer
 p Integer.instance_method(:to_c).owner # => Numeric
 p Integer.instance_method(:hash).owner # => Kernel
 ```
-
 
 ### def source_location -> [String, Integer] | nil
 
@@ -245,7 +245,6 @@ UnboundMethod オブジェクトの引数の情報を返します。
 詳しくは [m:Method#parameters] を参照してください。
 
 #@#noexample Method#parametersを参照
-
 
 - **SEE** [m:Proc#parameters], [m:Method#parameters]
 

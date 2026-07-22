@@ -11,7 +11,9 @@ Usage: gem generate_index [options]
   Options:
     -d, --directory=DIRNAME          repository base dir containing gems subdir
 ```
+
 #@include(common_options)
+
 ```text
 Summary:
   Generates the index files for a gem server directory

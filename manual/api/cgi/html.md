@@ -4,6 +4,7 @@ type: library
 HTML を生成するためのメソッドを提供するモジュールを定義したライブラリです。
 
 様々な DTD に対応しています。
+
 # module CGI::TagMaker
 #@#nodoc
 
@@ -195,7 +196,6 @@ file_field({ "NAME" => "name", "SIZE" => 40 })
   # <INPUT TYPE="file" NAME="name" SIZE="40">
 ```
 
-
 ### def form(method = "post", action = nil, enctype = "application/x-www-form-urlencoded") -> String
 ### def form(method = "post", action = nil, enctype = "application/x-www-form-urlencoded"){ ... } -> String
 
@@ -219,7 +219,6 @@ form("get", "url"){ "string" }
   # <FORM METHOD="get" ACTION="url" ENCTYPE="application/x-www-form-urlencoded">string</FORM>
 ```
 
-
 ### def form(attributes) -> String
 ### def form(attributes){ ... } -> String
 
@@ -236,6 +235,7 @@ form({"METHOD" => "post", ENCTYPE => "enctype"}){ "string" }
 - **SEE** [m:CGI::HtmlExtension#multipart_form]
 
 ### def hidden(name = "", value = nil) -> String
+
 タイプが hidden である input 要素を生成します。
 
 - **param** `name` -- name 属性の値を指定します。
@@ -251,6 +251,7 @@ hidden("name", "value")
 ```
 
 ### def hidden(attributes) -> String
+
 タイプが hidden である input 要素を生成します。
 
 - **param** `attributes` -- 属性をハッシュで指定します。
@@ -262,6 +263,7 @@ hidden({ "NAME" => "name", "VALUE" => "reset", "ID" => "foo" })
 
 ### def html(attributes = {}) -> String
 ### def html(attributes = {}){ ... } -> String
+
 トップレベルの html 要素を生成します。
 ブロックを与えると、ブロックを評価した結果が内容になります。
 
@@ -303,6 +305,7 @@ html(if $VERBOSE then "PRETTY" end){ "HTML string" }
 ```
 
 ### def image_button(src = "", name = nil, alt = nil) -> String
+
 タイプが image の input 要素を生成します。
 
 - **param** `src` -- src 属性の値を指定します。
@@ -320,6 +323,7 @@ image_button("url", "name", "string")
 ```
 
 ### def image_button(attributes) -> String
+
 タイプが image の input 要素を生成します。
 
 - **param** `attributes` -- 属性をハッシュで指定します。
@@ -330,6 +334,7 @@ image_button({ "SRC" => "url", "ALT" => "string" })
 ```
 
 ### def img(src = "", alt = "", width = nil, height = nil) -> String
+
 img 要素を生成します。
 
 - **param** `src` -- src 属性の値を指定します。
@@ -346,6 +351,7 @@ img("src", "alt", 100, 50)
 ```
 
 ### def img(attributes) -> String
+
 img 要素を生成します。
 
 - **param** `attributes` -- 属性をハッシュで指定します。
@@ -384,6 +390,7 @@ multipart_form("url"){ "string" }
 ```
 
 ### def password_field(name = "", value = nil, size = 40, maxlength = nil) -> String
+
 タイプが password である input 要素を生成します。
 
 - **param** `name` -- name 属性の値を指定します。
@@ -406,6 +413,7 @@ password_field("password", "value", 80, 200)
 ```
 
 ### def password_field(attributes) -> String
+
 タイプが password である input 要素を生成します。
 
 - **param** `attributes` -- 属性をハッシュで指定します。
@@ -499,6 +507,7 @@ radio_button({ "NAME" => "name", "VALUE" => "value", "ID" => "foo" })
 ```
 
 ### def radio_group(name = "", *values) -> String
+
 タイプが radio である input 要素のリストを生成します。
 
 生成される input 要素の name 属性はすべて同じになり、
@@ -529,6 +538,7 @@ radio_group("name", ["1", "Foo"], ["2", "Bar", true], "Baz")
 ```
   
 ### def radio_group(attributes) -> String
+
 タイプが radio である input 要素のリストを生成します。
 
 生成される input 要素の name 属性はすべて同じになり、
@@ -548,6 +558,7 @@ radio_group({ "NAME" => "name",
 ```
 
 ### def reset(value = nil, name = nil) -> String
+
 タイプが reset である input 要素を生成します。
 
 - **param** `value` -- value 属性の値を指定します。
@@ -563,6 +574,7 @@ reset("reset")
 ```
   
 ### def reset(attributes) -> String
+
 タイプが reset である input 要素を生成します。
 
 - **param** `attributes` -- 属性をハッシュで指定します。
@@ -573,6 +585,7 @@ reset({ "VALUE" => "reset", "ID" => "foo" })
 ```
 
 ### def submit(value = nil, name = nil) -> String
+
 タイプが submit である input 要素を生成します。
 
 - **param** `value` -- value 属性の値を指定します。
@@ -591,6 +604,7 @@ submit("ok", "button1")
 ```
   
 ### def submit(attributes) -> String
+
 タイプが submit である input 要素を生成します。
 
 - **param** `attributes` -- 属性をハッシュで指定します。
@@ -601,6 +615,7 @@ submit({ "VALUE" => "ok", "NAME" => "button1", "ID" => "foo" })
 ```
 
 ### def text_field(name = "", value = nil, size = 40, maxlength = nil) -> String
+
 タイプが text である input 要素を生成します。
 
 - **param** `name` -- name 属性の値を指定します。
@@ -626,6 +641,7 @@ text_field("name", "value", 80, 200)
 ```
   
 ### def text_field(attributes) -> String
+
 タイプが text である input 要素を生成します。
 
 - **param** `attributes` -- 属性をハッシュで指定します。
@@ -636,6 +652,7 @@ text_field({ "NAME" => "name", "VALUE" => "value" })
 ```
 
 ### def textarea(name = "", cols = 70, rows = 10) -> String
+
 textarea 要素を生成します。
 
 - **param** `name` -- name 属性の値を指定します。
@@ -650,6 +667,7 @@ textarea("name")
 ```
 
 ### def textarea(attributes) -> String
+
 textarea 要素を生成します。
 
 - **param** `attributes` -- 属性をハッシュで指定します。

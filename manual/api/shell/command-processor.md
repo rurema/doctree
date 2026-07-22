@@ -48,8 +48,6 @@ require:
 - **param** `commands_specs` -- コマンドの仕様を文字列の配列で指定します。
                       [[コマンド名, [引数1, 引数2, ...]], ...]
 
-
-
 ### def def_system_command(command, path = command) -> ()
 #@todo
 
@@ -103,7 +101,6 @@ require:
 
 - **param** `command` -- 削除したいコマンド名を指定します。
 
-
 ## Instance Methods
 
 ### def expand_path(path) -> String
@@ -114,9 +111,7 @@ Fileクラスにある同名のクラスメソッドと同じです.
 
 - **SEE** [m:File.expand_path]
 
-
 #@include(builtincommands)
-
 
 ## Constants
 

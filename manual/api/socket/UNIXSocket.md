@@ -81,7 +81,9 @@ UNIXServer.open("/tmp/s") {|serv|
 ```
 
 - **SEE** [m:UNIXSocket#peeraddr]
+
 ### def path -> String
+
 UNIX ソケットのパスを返します。
 
 クライアント側はパスを持たないため空文字列となります。
@@ -112,6 +114,7 @@ UNIXServer.open("/tmp/s") {|serv|
 - **SEE** [m:UNIXSocket#addr]
 
 ### def recvfrom(maxlen, flags = 0) -> [String [String, String]]
+
 [man:recvfrom(2)] を用いてソケットからメッセージを受け取ります。
 
 maxlen で受け取るメッセージの最大長をバイト数で指定します。
@@ -155,7 +158,9 @@ p File.identical?(io, STDOUT)     #=> true
 
 - **param** `klass` -- 受け取ったファイルディスクリプタを変換するためのクラス
 - **param** `mode` -- for_fd に渡すファイルモード
+
 ### def send_io(io) -> nil
+
 引数 io に対応するファイルディスクリプタをソケットの接続先に送ります。
 
 ```ruby

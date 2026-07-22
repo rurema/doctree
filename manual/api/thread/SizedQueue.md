@@ -3,6 +3,7 @@ library:
   - _builtin
 ---
 # class Thread::SizedQueue < Thread::Queue
+
 alias SizedQueue
 
 サイズの最大値を指定できる [c:Thread::Queue] です。
@@ -33,6 +34,7 @@ th.join
 ## Class Methods
 
 ### def new(max) -> Thread::SizedQueue
+
 Thread::SizedQueue オブジェクトを生成します。
 
 - **param** `max` -- キューのサイズの最大値です。
@@ -43,6 +45,7 @@ Thread::SizedQueue オブジェクトを生成します。
 ## Instance Methods
 
 ### def max -> Integer
+
 キューの最大サイズを返します。
 
 ```ruby title="例"
@@ -51,6 +54,7 @@ p q.max # => 4
 ```
 
 ### def max=(n)
+
 キューの最大サイズを設定します。
 
 - **param** `n` -- キューの最大サイズを指定します。
@@ -158,6 +162,7 @@ p q.closed? # => true
 ```
 
 - **SEE** [m:Thread::Queue#close]
+
 ### def empty? -> bool
 
 キューが空の時、真を返します。

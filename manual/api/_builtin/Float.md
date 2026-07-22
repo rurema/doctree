@@ -21,6 +21,7 @@ printf("%.50f\n", 1.0/3)
 ## Instance Methods
 
 ### def +(other) -> Float
+
 算術演算子。和を計算します。
 
 - **param** `other` -- 二項演算の右側の引数(対象)
@@ -31,6 +32,7 @@ p 3.0 + 4.5 # => 7.5
 ```
 
 ### def -(other) -> Float
+
 算術演算子。差を計算します。
 
 - **param** `other` -- 二項演算の右側の引数(対象)
@@ -51,6 +53,7 @@ p(- -1.2)  # => 1.2
 ```
 
 ### def *(other) -> Float
+
 算術演算子。積を計算します。
 
 - **param** `other` -- 二項演算の右側の引数(対象)
@@ -60,8 +63,8 @@ p(- -1.2)  # => 1.2
 p 2.4 * 3 # => 7.2
 ```
 
-
 ### def /(other) -> Float
+
 算術演算子。商を計算します。
 
 - **param** `other` -- 二項演算の右側の引数(対象)
@@ -74,6 +77,7 @@ p 1.0 / 0 # => Infinity
 
 ### def %(other) -> Float
 ### def modulo(other) -> Float
+
 算術演算子。剰余を計算します。
 
 - **param** `other` -- 二項演算の右側の引数(対象)
@@ -85,6 +89,7 @@ p 3.0 % 1.2 # => 0.6000000000000001
 ```
 
 ### def **(other) -> Float
+
 算術演算子。冪を計算します。
 
 - **param** `other` -- 二項演算の右側の引数(対象)
@@ -97,6 +102,7 @@ p 0.0 ** 0 # => 1.0
 ```
 
 ### def <=>(other) -> -1 | 0 | 1 | nil
+
 self と other を比較して、self が大きい時に正、
 等しい時に 0、小さい時に負の整数を返します。
 比較できない場合はnilを返します
@@ -124,6 +130,7 @@ p 3.14 == 3.1415  # => false
 ```
 
 NaNどうしの比較は、未定義です。
+
 ```ruby title="例"
 p Float::NAN == Float::NAN    # => false
 p [Float::NAN] == [Float::NAN]  # => true
@@ -131,6 +138,7 @@ p [Float::NAN] == [0.0 / 0.0] # => false
 ```
 
 ### def <(other)  -> bool
+
 比較演算子。数値として小さいか判定します。
 
 - **param** `other` -- 比較対象の数値
@@ -143,6 +151,7 @@ p 3.14 <= 3.1415  # => true
 ```
 
 ### def <=(other) -> bool
+
 比較演算子。数値として等しいまたは小さいか判定します。
 
 - **param** `other` -- 比較対象の数値
@@ -156,6 +165,7 @@ p 3.14 <= 3.1415  # => true
 ```
 
 ### def >(other)  -> bool
+
 比較演算子。数値として大きいか判定します。
 
 - **param** `other` -- 比較対象の数値
@@ -168,6 +178,7 @@ p 3.14 >= 3.1415  # => false
 ```
 
 ### def >=(other) -> bool
+
 比較演算子。数値として等しいまたは大きいか判定します。
 
 - **param** `other` -- 比較対象の数値
@@ -217,6 +228,7 @@ p nan.nan?  # => true
 ```
 
 ### def to_f -> self
+
 self を返します。
 
 ```ruby title="例"
@@ -244,6 +256,7 @@ p 34567.89.truncate(-2)  # => 34500
 - **SEE** [m:Numeric#round], [m:Numeric#ceil], [m:Numeric#floor]
 
 ### def hash -> Integer
+
 ハッシュ値を返します。
 
 ```ruby title="例"

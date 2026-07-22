@@ -9,7 +9,6 @@ until: "2.7.0"
 ### def new(str)
 #@todo
 
-
 ## Instance Methods
 
 ### def last_match_tried
@@ -18,15 +17,11 @@ until: "2.7.0"
 ### def last_spec
 #@todo
 
-
-
 ### def last_spec_tried
 #@todo
 
 ### def match(str)
 #@todo
-
-
 
 ### def matched_count
 #@todo
@@ -34,15 +29,11 @@ until: "2.7.0"
 ### def prune(n=matched_count)
 #@todo
 
-
-
 ### def space
 #@todo
 
 ### def spec_count
 #@todo
-
-
 
 ### def string_left
 #@todo

@@ -9,7 +9,6 @@ obj = ''
 DRb::DRbServer.new('drbunix:/tmp/hoge', obj)
 ```
 
-
 [m:DRb::DRbServer.new] や [m:DRb?.start_service] が 
 "drbunix" スキームを受け入れるようになります。
 また、[m:DRb::DRbObject.new_with_uri] でも drbunix スキームが使えるようになります。

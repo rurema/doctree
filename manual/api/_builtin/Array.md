@@ -19,6 +19,7 @@ include:
 ## Class Methods
 
 ### def try_convert(obj) -> Array | nil
+
 to_ary メソッドを用いて obj を配列に変換しようとします。
 
 何らかの理由で変換できないときには nil を返します。
@@ -88,7 +89,6 @@ a.each{|s| s.capitalize! }
 p a                        #=> ["A", "B", "C"]
 p b                        #=> ["A", "B", "C"]   (b は a と要素を共有する)
 ```
-
 
 ### def new(size) {|index| ... }    -> Array
 
@@ -407,8 +407,8 @@ p [1, 2, 1, 3, 1, 4] - [4, 2]  # => [1, 1, 3, 1]
 p [1, 2, 1, 3, 1, 4] - [1, 4]  # => [2, 3]
 ```
 
-
 - **SEE** [m:Array#difference]
+
 ### def difference(*other_arrays) -> Array
 
 自身から other_arrays の要素を取り除いた配列を生成して返します。
@@ -425,6 +425,7 @@ p [ 1, 'c', :s, 'yep' ].difference([ 1 ], [ 'a', 'c' ])  # => [:s, "yep"]
 集合のような振る舞いが必要なら [c:Set] も参照してください。
 
 - **SEE** [m:Array#-]
+
 ### def &(other)    -> Array
 
 集合の積演算です。両方の配列に含まれる要素からなる新しい配列を返
@@ -486,6 +487,7 @@ p ["a"].union # => ["a"]
 ```
 
 - **SEE** [m:Array#|]
+
 ### def <<(obj)    -> self
 
 指定された obj を自身の末尾に破壊的に追加します。
@@ -520,7 +522,6 @@ other に配列以外のオブジェクトを指定した場合は nil を返し
 - **param** `other` -- 自身と比較したい配列を指定します。
              配列以外のオブジェクトを指定した場合は to_ary メソッドによ
              る暗黙の型変換を試みます。
-
 
 ```ruby title="例"
 p [ 1, 2, 3 ] <=> [ 1, 3, 2 ]     #=> -1
@@ -599,7 +600,6 @@ p [].any?                       # => false
 ```
 
 - **SEE** [m:Enumerable#any?]
-
 
 ### def assoc(key)    -> Array | nil
 
@@ -1079,6 +1079,7 @@ p a #=> ["A", "A", "A", "A", "A"]
 範囲の始点が自身の末尾を越える時には配列の長さを自動的に拡張し、拡張した領域を nil で初期化します。
 範囲の終点が自身の末尾を越える時は長さを自動的に拡張し、拡張した部分を val で初期化します。
 このメソッドが val のコピーでなく val 自身をセットすることに注意してください。
+
 ```ruby title="例"
 a = [0, 1, 2]
 a.fill("x", 5..10)
@@ -1249,7 +1250,6 @@ p [0, 0, 0, 0, 0].index(1)   #=> nil
 p [0, 1, 0, 1, 0].index {|v| v > 0}   #=> 1
 ```
 
-
 引数、ブロックのどちらも与えられなかった場合は、
 [c:Enumerator] のインスタンスを返します。
 
@@ -1402,7 +1402,6 @@ p ary.last(4)
 ```ruby title="例"
 p [1, nil, 3, nil].size    #=> 4
 ```
-
 
 ### def none?               -> bool
 ### def none?{|obj| ... }   -> bool
@@ -1674,8 +1673,6 @@ p [0, 1, 0, 1, 0].rindex {|v| v > 0}   #=> 3
 
 - **raise** `ArgumentError` -- 引数に負の数を指定した場合に発生します。
 
-
-
 ```ruby title="例"
 a = [0, 1, 2, 3, 4]
 p a.shift            #=> 0
@@ -1796,6 +1793,7 @@ p ary2.sort_by{|x| x.to_i }             #=> ["7", "8", "9", "10", "11"]
 
 ### def sort_by!               -> Enumerator
 ### def sort_by! {|item| ... } -> self
+
 sort_by の破壊的バージョンです。
 
 ブロックを省略した場合は [c:Enumerator] を返します。
@@ -1890,7 +1888,6 @@ p [1, 2, 3, 4].to_s  # => "[1, 2, 3, 4]"
 p [1, 2, 3, 4].inspect # => "[1, 2, 3, 4]"
 ```
 
-
 ### def to_h -> Hash
 ### def to_h { block } -> Hash
 
@@ -1907,7 +1904,6 @@ p [[:foo, :bar], [1, 2]].to_h # => {:foo => :bar, 1 => 2}
 ```ruby title="ブロック付きの例"
 p ["foo", "bar"].to_h {|s| [s.ord, s]} # => {102=>"foo", 98=>"bar"}
 ```
-
 
 ### def transpose    -> Array
 
@@ -2016,7 +2012,6 @@ p ary.values_at( 0, 3..5 )          #=> ["a", "d", "e", nil]
 
 #@# ([[m:Array#indexes]], [[m:Array#indices]] と同じです)
 
-
 ### def zip(*lists)  -> [[object]]
 ### def zip(*lists) {|v1, v2, ...| ...} -> nil
 
@@ -2033,7 +2028,6 @@ self と引数に渡した配列の各要素を順番にブロックに渡しま
 
 - **raise** `TypeError` -- 引数に配列以外の(暗黙の型変換が行えない)オブジェクトを
                  指定した場合に発生します。
-
 
 ```ruby title="例"
 p [1,2,3].zip([4,5,6], [7,8,9])
@@ -2052,7 +2046,6 @@ p [1,2,3].zip([4,5,6], [7,8,9]) { |ary| p ary }
 #    [3, 6, 9]
 #    nil
 ```
-
 
 ### def sample        -> object | nil
 ### def sample(n)     -> Array
@@ -2141,6 +2134,7 @@ rng2 = rng.dup # RNGを複製
 ```
 
 - **SEE** [m:Array#shuffle!]
+
 ### def shuffle!        -> self
 ### def shuffle!(random: Random) -> self
 
@@ -2249,7 +2243,6 @@ p result # => [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
 返される配列の長さは，レシーバと引数で与えられた配列の長さのすべての積にな
 ります。
 
-
 - **param** `lists` -- 配列。複数指定可能。
 
 ```ruby title="例"
@@ -2269,7 +2262,6 @@ a = []
 p [1,2,3].product([4,5]) {|e| a << e} # => [1,2,3]
 p a # => [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
 ```
-
 
 ### def repeated_combination(n) { |c| ... } -> self
 ### def repeated_combination(n)             -> Enumerator
@@ -2311,6 +2303,7 @@ p result  #=> [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3],
 ```
 
 - **SEE** [m:Array#repeated_permutation], [m:Array#combination]
+
 ### def repeated_permutation(n) { |p| ... } -> self
 ### def repeated_permutation(n)             -> Enumerator
 
@@ -2347,6 +2340,7 @@ p result  #=> [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
 ```
 
 - **SEE** [m:Array#repeated_combination], [m:Array#permutation]
+
 ### def keep_if {|item| ... } -> self
 ### def keep_if -> Enumerator
 
@@ -2388,6 +2382,7 @@ p a # => ["a", "b", "c", "d", "e", "f"]
 p [1,2,3,4,5].select                    # => #<Enumerator: [1, 2, 3, 4, 5]:select>
 p [1,2,3,4,5].select { |num| num.even? }  # => [2, 4]
 ```
+
 - **SEE** [m:Enumerable#select]
 - **SEE** [m:Array#select!]
 
@@ -2435,6 +2430,7 @@ p a.rotate(-3)   # => ["b", "c", "d", "a"]
 ```
 
 - **SEE** [m:Array#rotate!]
+
 ### def rotate!(cnt = 1) -> self
 
 cnt で指定したインデックスの要素が先頭になるように自身の順番を変更しま
@@ -2655,7 +2651,6 @@ p [].minmax # => [nil, nil]
 
 - **SEE** [m:Enumerable#minmax]
 
-
 ### def sum(init=0)                    -> object
 ### def sum(init=0) {|e| expr }        -> object
 
@@ -2709,4 +2704,5 @@ c = [ 5, 6, 7 ]
 p a.intersect?(b) # => true
 p a.intersect?(c) # => false
 ```
+
 #@end

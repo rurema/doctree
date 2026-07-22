@@ -19,7 +19,6 @@ category: Date/Time
 ### def parse(date, now = Time.now) -> Time
 ### def parse(date, now = Time.now) {|year| year } -> Time
 
-
 date を [m:Date._parse] によって
 パースして [c:Time]オブジェクトに変換します。
 
@@ -137,7 +136,6 @@ rescue ArgumentError => err
 end
 ```
 
-
 ### def xmlschema(date) -> Time
 ### def iso8601(date) -> Time
 
@@ -158,6 +156,7 @@ date がISO 8601で定義されている形式に準拠していない、
                      または [c:Time] クラスが指定された日時を表現できないとき
                      に発生します。
 使用例
+
 ```ruby
 require 'time'
 
@@ -178,6 +177,7 @@ end
 
 ### def strptime(date, format, now=self.now) -> Time
 ### def strptime(date, format, now=self.now){|y| ... } -> Time
+
 文字列を [m:Date._strptime] を用いて [c:Time] オブジェクト
 に変換します。
 
@@ -188,6 +188,7 @@ p Time.strptime('2001-02-03T04:05:06+09:00', '%Y-%m-%dT%H:%M:%S%z')
 ```
 
 ブロックを渡すと年の部分をブロックによって変換できます。
+
 ```ruby
 require 'time'
 Time.strptime('91/5/18 4:13:00', '%Y/%m/%d %T'){|y| 
@@ -253,7 +254,6 @@ iso8601_time = '2008-08-31T12:34:56+09:00'
 t = Time.iso8601(iso8601_time)
 p t.httpdate     #=> "Sun, 31 Aug 2008 03:34:56 GMT"
 ```
-
 
 ### def xmlschema(fractional_seconds = 0) -> String
 ### def iso8601(fractional_seconds = 0) -> String

@@ -19,7 +19,6 @@ OpenSSL が使用可能でない場合は例外を発生させます。
 
 - **raise** `Gem::Exception` -- OpenSSL が有効でない場合に発生します。
 
-
 # module Gem::SSL
 #@todo
 

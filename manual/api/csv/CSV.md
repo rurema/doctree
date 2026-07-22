@@ -221,7 +221,6 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 
 ライブラリのバージョンを表す文字列です。
 
-
 ## Singleton Methods
 
 ### def new(data, options = Hash.new) -> CSV
@@ -1593,5 +1592,4 @@ p result # => "header1,header2\nrow1_1,row1_2\n"
 ```
 
 - **SEE** [m:CSV.new]
-
 

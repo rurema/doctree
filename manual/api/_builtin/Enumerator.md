@@ -20,6 +20,7 @@ Enumerator を生成するには [m:Enumerator.new]あるいは
 enumerator を生成して返します。
 
 ### 注意
+
 外部イテレータとしての機能は [c:Fiber] を用いて実装されているため Fiber と同じ制限があります。
 例えば以下のようなスレッドをまたいだ呼び出しはエラーになります。
 
@@ -191,6 +192,7 @@ p enum.each(:y, :z) { |elm| elm } # => :method_returned
 ```
 
 ### def next -> object
+
 「次」のオブジェクトを返します。
 
 現在までの列挙状態に応じて「次」のオブジェクトを返し、列挙状態を1つ分進めます。
@@ -277,7 +279,6 @@ e.next              # (7)
 - **param** `obj` -- Enumerator 内部の yield が返す値
 - **raise** `TypeError` -- すでに値をこのメソッドでセットしている場合に発生します
 
-
 ### def next_values -> Array
 
 「次」のオブジェクトを配列で返します。
@@ -286,13 +287,17 @@ e.next              # (7)
 [c:StopIteration] 例外を発生させます。
 
 このメソッドは、
+
 ```ruby invalid
 yield
 ```
+
 と
+
 ```ruby invalid
 yield nil
 ```
+
 を区別するために使えます。
 
 next メソッドによる外部列挙の状態は他のイテレータメソッドによる
@@ -334,6 +339,7 @@ p e.next
 - **SEE** [m:Enumerator#next], [m:Enumerator#peek], [m:Enumerator#peek_values]
 
 ### def peek -> object
+
 「次」のオブジェクトを返しますが、列挙状態を変化させません。
 
 [m:Enumerator#next] のように
@@ -356,6 +362,7 @@ p e.next   #raises StopIteration
 
 - **raise** `StopIteration` -- 列挙状態が既に最後へ到達しているとき
 - **SEE** [m:Enumerator#next], [m:Enumerator#next_values], [m:Enumerator#peek_values]
+
 ### def peek_values -> Array
 
 [m:Enumerator#next_values] のように「次」のオブジェクトを
@@ -368,13 +375,17 @@ next と異なり列挙状態を変更しません。
 列挙が既に最後へ到達している場合は、[c:StopIteration] 例外を発生します。
 
 このメソッドは [m:Enumerator#next_values] と同様
+
 ```ruby invalid
 yield
 ```
+
 と
+
 ```ruby invalid
 yield nil
 ```
+
 を区別するために使えます。
 
 ```ruby title="例"
@@ -399,6 +410,7 @@ p e.peek_values    # raises StopIteration
 - **SEE** [m:Enumerator#next], [m:Enumerator#next_values], [m:Enumerator#peek_values]
 
 ### def rewind -> self
+
 列挙状態を巻き戻します。
 
 next メソッドによる外部列挙の状態を最初まで巻き戻します。 self を返します。
@@ -441,7 +453,6 @@ StringIO.new("foo|bar|baz").each("|").with_index(1) {|s, i| p [s, i] }
     #    ["bar|", 2]
     #    ["baz", 3]
 ```
-
 
 生成時のパラメータに従って、要素にインデックスを添えてブロックを繰り返します。
 インデックスは 0 から始まります。

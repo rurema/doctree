@@ -12,6 +12,7 @@ alias は YAML の AST の葉のノードであり、子ノードを持ちませ
 ## Class Methods
 
 ### def new(anchor) -> Psych::Nodes::Alias
+
 新たな Alias オブジェクトを生成します。
 
 anchor で指す先の anchor を指定します。
@@ -21,11 +22,14 @@ anchor で指す先の anchor を指定します。
 ## Instance Methods
 
 ### def anchor -> String
+
 alias が指す先の anchor を返します。
 
 - **SEE** [m:Psych::Nodes::Alias#anchor=],
      [m:Psych::Nodes::Alias.new]
+
 ### def anchor=(val)
+
 alias が指す先の anchor を変更します。
 
 - **param** `val` -- 設定する anchor

@@ -19,8 +19,8 @@ include:
 
 #@# --- inspect
 
-
 ### def body_exist? -> bool
+
 このメソッドは obsolete です。
 
 #@#noexample obsolete のため不要
@@ -29,6 +29,7 @@ include:
 の別名です。
 
 ### def body -> String
+
 サーバに送るリクエストのエンティティボディを返します。
 
 ```ruby title="例"
@@ -58,7 +59,6 @@ req.body = "Test Post Data" # => "Test Post Data"
 
 - **SEE** [m:Net::HTTPGenericRequest#body]
 
-
 ### def body_stream -> object
 ### def body_stream=(f)
 
@@ -81,8 +81,8 @@ File.open("/path/to/test", 'rb') do |f|
 end
 ```
 
-
 ### def method -> String
+
 リクエストの HTTP メソッドを文字列で返します。
 
 ```ruby title="例"

@@ -21,7 +21,6 @@ end
 
 - **SEE** [m:Rake::Task.define_task]
 
-
 ### def file(*args){ ... } -> Rake::FileTask
 
 ファイルタスクを定義します。
@@ -57,7 +56,6 @@ end
 ```ruby title="例"
 directory 'testdata/doc'
 ```
-
 
 ### def multitask(args){ ... } -> Rake::MultiTask
 
@@ -125,5 +123,4 @@ end
 ```ruby title="例"
 import ".depend", "my_rules"
 ```
-
 

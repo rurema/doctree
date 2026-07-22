@@ -154,7 +154,6 @@ end
 FileList['a.c', 'b.c'].sub(/\.c$/, '.o')  => ['a.o', 'b.o']
 ```
 
-
 ### def gsub(pattern, replace) -> Rake::FileList
 
 自身に含まれるファイルリストのそれぞれのエントリに対して [m:String#gsub] を実行し、
@@ -381,7 +380,6 @@ pkg_files = FileList.new('lib/**/*') do |fl|
 end
 ```
 
-
 ### def [](*args) -> Rake::FileList
 
 与えられたパターンをもとにして自身を初期化します。
@@ -418,7 +416,6 @@ p file_list1 == file_list2 # => true
 ### const MUST_DEFINE -> Array
 
 必ず委譲しなければならない付加的なメソッドのリストです。
-
 
 ### const MUST_NOT_DEFINE -> Array
 

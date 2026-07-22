@@ -2,6 +2,7 @@
 library: psych
 ---
 # class Psych::Nodes::Scalar < Psych::Nodes::Node
+
 YAML の scalar <https://yaml.org/spec/1.1/#id858081> を表すクラスです。
 
 これは AST の葉にあたるノードであり、子ノードを持ちません。
@@ -38,12 +39,14 @@ style は次の値のいずれかです。
 
 ## Instance Methods
 ### def value -> String
+
 scalar の値を返します。
 
 - **SEE** [m:Psych::Nodes::Scalar#value=],
      [m:Psych::Nodes::Scalar.new]
 
 ### def value=(v)
+
 scalar の値を設定します。
 
 - **param** `v` -- 設定する値
@@ -51,12 +54,14 @@ scalar の値を設定します。
      [m:Psych::Nodes::Scalar.new]
 
 ### def anchor -> String|nil
+
 scalar に付加された anchor を返します。
 
 - **SEE** [m:Psych::Nodes::Scalar#anchor=],
      [m:Psych::Nodes::Scalar.new]
 
 ### def anchor=(a)
+
 scalar に付加された anchor を変更します。
 
 - **param** `a` -- 設定する anchor
@@ -64,12 +69,14 @@ scalar に付加された anchor を変更します。
      [m:Psych::Nodes::Scalar.new]
 
 ### def tag -> String|nil
+
 scalar に付加された tag を返します。
 
 - **SEE** [m:Psych::Nodes::Scalar#tag=],
      [m:Psych::Nodes::Scalar.new]
 
 ### def tag=(t)
+
 scalar に付加された tag を変更します。
 
 - **param** `t` -- 設定する tag
@@ -77,13 +84,14 @@ scalar に付加された tag を変更します。
      [m:Psych::Nodes::Scalar.new]
 
 ### def plain -> bool
-scalar が plain style であるかどうかを返します。
 
+scalar が plain style であるかどうかを返します。
 
 - **SEE** [m:Psych::Nodes::Scalar#plain=],
      [m:Psych::Nodes::Scalar.new]
 
 ### def plain=(bool)
+
 scalar が plain style であるかどうかを変更します。
 
 - **param** `bool` -- 設定する真偽値
@@ -91,12 +99,14 @@ scalar が plain style であるかどうかを変更します。
      [m:Psych::Nodes::Scalar.new]
 
 ### def quoted -> bool
+
 scalar が quoted であるかどうかを返します。
 
 - **SEE** [m:Psych::Nodes::Scalar#quoted=],
      [m:Psych::Nodes::Scalar.new]
 
 ### def quoted=(bool)
+
 scalar が quoted であるかどうかを変更します。
 
 - **param** `bool` -- 設定する真偽値
@@ -104,12 +114,14 @@ scalar が quoted であるかどうかを変更します。
      [m:Psych::Nodes::Scalar.new]
 
 ### def style -> Integer
+
 scalar の style を返します。
 
 - **SEE** [m:Psych::Nodes::Scalar#style=],
      [m:Psych::Nodes::Scalar.new]
 
 ### def style=(sty)
+
 scalar の style を変更します。
 
 - **param** `sty` -- 設定する style
@@ -118,6 +130,7 @@ scalar の style を変更します。
 
 ## Constants
 ### const ANY -> Integer
+
 「任意」のスタイルを意味します。
 
 emitter が適当に style を決めます。
@@ -126,6 +139,7 @@ emitter が適当に style を決めます。
      [m:Psych::Nodes::Scalar#style]
 
 ### const PLAIN -> Integer
+
 plain scalar style を表します。
 
 - **SEE** [m:Psych::Nodes::Scalar.new],
@@ -133,6 +147,7 @@ plain scalar style を表します。
      [m:Psych::Handler#scalar]
 
 ### const SINGLE_QUOTED -> Integer
+
 single quoted style を表します。
 
 - **SEE** [m:Psych::Nodes::Scalar.new],
@@ -140,6 +155,7 @@ single quoted style を表します。
      [m:Psych::Handler#scalar]
 
 ### const DOUBLE_QUOTED -> Integer
+
 double quoted style を表します。
 
 - **SEE** [m:Psych::Nodes::Scalar.new],
@@ -147,6 +163,7 @@ double quoted style を表します。
      [m:Psych::Handler#scalar]
 
 ### const LITERAL -> Integer
+
 literal style を表します。
 
 - **SEE** [m:Psych::Nodes::Scalar.new],
@@ -154,6 +171,7 @@ literal style を表します。
      [m:Psych::Handler#scalar]
 
 ### const FOLDED -> Integer
+
 folded style を表します。
 
 - **SEE** [m:Psych::Nodes::Scalar.new],

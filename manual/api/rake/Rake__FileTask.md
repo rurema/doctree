@@ -8,7 +8,6 @@ library: rake
 このタスクの事前タスクのいずれか一つのタイムスタンプがこのタスクの
 タイムスタンプよりも新しければ、与えられたアクションを用いてファイルを再作成します。
 
-
 ## Public Instance Methods
 
 ### def needed? -> bool

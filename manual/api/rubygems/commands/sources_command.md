@@ -17,7 +17,9 @@ Usage: gem sources [options]
     -u, --update                     取得元のキャッシュを更新します
     -c, --clear-all                  全ての取得元を削除し、キャッシュもクリアします
 ```
+
 #@include(common_options)
+
 ```text
 Summary:
   Gem パッケージの取得元の情報を管理します
@@ -25,10 +27,7 @@ Defaults:
   --list
 ```
 
-
-
 # class Gem::Commands::SourcesCommand < Gem::Command
 
 Gem パッケージの取得元の情報を管理するためのクラスです。
-
 

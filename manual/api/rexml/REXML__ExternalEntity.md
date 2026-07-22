@@ -2,6 +2,7 @@
 library: rexml/document
 ---
 # class REXML::ExternalEntity < REXML::Child
+
 DTD 内の宣言でパラメータ実体参照を使って宣言が
 されているものを表わすクラスです。
 
@@ -34,6 +35,7 @@ p doctype.children.find_all{|child| REXML::ExternalEntity === child }.map(&:to_s
 ## Class Methods
 
 ### def new(src) -> REXML::ExternalEntity
+
 新たな ExternalEntity オブジェクトを生成します。
 
 - **param** `src` -- 宣言文字列
@@ -41,9 +43,11 @@ p doctype.children.find_all{|child| REXML::ExternalEntity === child }.map(&:to_s
 ## Instance Methods
 
 ### def to_s -> String
+
 宣言を文字列化します。
 
 ### def write(output, indent) -> ()
+
 output へ self を文字列化して出力します。
 
 このメソッドは deprecated です。[c:REXML::Formatter] で
@@ -51,5 +55,4 @@ output へ self を文字列化して出力します。
 
 - **param** `output` -- 出力先の IO オブジェクト
 - **param** `indent` -- インデントの大きさ。無視されます。
-
 

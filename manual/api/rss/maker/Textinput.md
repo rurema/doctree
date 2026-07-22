@@ -28,7 +28,6 @@ name，linkを設定する必要があります．
 ### def link=()
 #@todo
 
-
 # class RSS::Maker::RSS09::Textinput < RSS::Maker::TextinputBase
 # class RSS::Maker::RSS10::Textinput < RSS::Maker::TextinputBase
 # class RSS::Maker::RSS20::Textinput < RSS::Maker::RSS09::Textinput

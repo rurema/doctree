@@ -12,7 +12,9 @@ Usage: gem cleanup [GEMNAME ...] [options]
   Options:
     -d, --dryrun
 ```
+
 #@include(common_options)
+
 ```console
 Arguments:
   GEMNAME       削除する Gem パッケージの名前を指定します
@@ -22,7 +24,6 @@ Summary:
 Defaults:
   --no-dryrun
 ```
-
 
 # class Gem::Commands::CleanupCommand < Gem::Command
 

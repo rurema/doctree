@@ -42,7 +42,6 @@ p Gem::Requirement::OPS["="].call(Gem::Version.new('3.1'), Gem::Version.new('3.0
 p Gem::Requirement::OPS["~>"].call(Gem::Version.new('3.1'), Gem::Version.new('3.0'))  # => true
 ```
 
-
 ## Singleton Methods
 
 ### def create(input) -> Gem::Requirement
@@ -119,7 +118,6 @@ p req.as_list  # => ["< 5.0", ">= 1.9"]
 #@#自身に含まれる必要条件の配列を返します。
 #@#
 #@#配列に含まれる各要素は、比較演算子と [[c:Gem::Version]] のインスタンスを要素とする二要素の配列です。
-
 
 ### def satisfied_by?(version) -> bool
 ### def ===(version) -> bool

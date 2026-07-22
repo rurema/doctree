@@ -3,6 +3,7 @@ library: _builtin
 since: "1.9.1"
 ---
 # class FiberError < StandardError
+
 Fiber に関するエラーが起きると発生します。
 
 # class Fiber
@@ -58,6 +59,7 @@ end
 生成したファイバーに対して [m:Fiber#resume] を呼ぶことによりコンテキストを切り替えます。
 子ファイバーのブロック中で [m:Fiber.yield] を呼ぶと親にコンテキストを切り替えます。
 Fiber.yield の引数が、親での Fiber#resume の返り値になります。
+
 ```ruby title="例:"
 f = Fiber.new do
   n = 0
@@ -151,7 +153,6 @@ p b  #=> :hoge
 - **param** `arg` -- 現在のファイバーの親に渡したいオブジェクトを指定します。
 
 - **raise** `FiberError` -- Fiber でのルートファイバーで呼ばれた場合に発生します。
-
 
 ```ruby title="例:"
 a = nil

@@ -16,8 +16,8 @@ pull は [c:REXML::Parsers::PullEvent] オブジェクトを返します。
 [m:REXML::Parsers::PullEvent#\[\]] でそのイベントのパラメータ
 (例えば開始タグなら要素名と属性)を得ることができます。
 
-
 ### イベントの種類とパラメータ {#event_type}
+
 [m:REXML::Parsers::PullEvent#event_type] で得られるイベントの種類の
 シンボルを列挙しています。
 

@@ -13,17 +13,21 @@ Access control list は "allow" と "deny" の2つからなります。
 使うことができます。
 
 ACLのエントリーは、以下の例に示すように、
+
 ```text
 "allow_or_deny", "addr1",
 "allow_or_deny", "addr2",
    :
 ```
+
 という文字列配列で表現されます。
 
 - **SEE** [m:DRb?.install_acl], [m:DRb?.start_service], [m:DRb::DRbServer.default_acl], [m:DRb::DRbServer.new]
 
 ### 例
+
 ACL を単独で用いる例。
+
 ```ruby
 require "drb/acl"
 
@@ -44,10 +48,10 @@ acl = ACL.new(list, ACL::DENY_ALLOW)
 p acl.allow_addr?(addr) # => true
 ```
 
-
 ## Class Methods
 
 ### def new(list=nil, order = DENY_ALLOW) -> ACL
+
 新たな ACL オブジェクトを返します。
 
 list で許可/拒否するアドレスのリストを指定し、
@@ -75,17 +79,20 @@ acl = ACL.new(list, ACL::DENY_ALLOW)
 
 ## Instance Methods
 ### def allow_addr?(addr) -> bool
+
 addr が ACL で許可されているならば真を返します。
 
 - **param** `addr` -- 判定対象のアドレス
 
 ### def allow_socket?(soc) -> bool
+
 ソケットに関連付けられたアドレスが ACL で許可されているならば
 真を返します。
 
 - **param** `soc` -- 判定対象のソケット
 
 ### def install_list(list) -> ()
+
 ACL に list で指定したエントリーを追加します。
 
 ```ruby
@@ -96,18 +103,20 @@ acl.install_list(["deny", "192.168.1.45"])
 
 - **param** `list` -- 追加するエントリー
 
-
 ## Constants
 ### const DENY_ALLOW -> Integer
+
 デフォルトですべてのアドレスを拒否することを意味します。
 
 - **SEE** [m:ACL.new]
 
 ### const ALLOW_DENY -> Integer
+
 デフォルトですべてのアドレスを許可することを意味します。
 - **SEE** [m:ACL.new]
 
 ### const VERSION -> [String]
+
 ACL のバージョン。
 
 #@# 何故配列なのかは不明

@@ -16,7 +16,9 @@ Usage: gem which FILE [...] [options]
     -a, --[no-]all                   show all matching files
     -g, --[no-]gems-first            search gems before non-gems
 ```
+
 #@include(common_options)
+
 ```text
 Arguments:
   FILE          Gem パッケージ名を指定します
@@ -25,7 +27,6 @@ Summary:
 Defaults:
   --no-gems-first --no-all
 ```
-
 
 ## Public Instance Methods
 ### def find_paths(package_name, dirs) -> Array

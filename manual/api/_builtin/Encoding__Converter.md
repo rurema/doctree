@@ -3,6 +3,7 @@ library: _builtin
 since: "1.9.1"
 ---
 # class Encoding::Converter
+
 文字エンコーディング(文字符号化方式)の変換器のクラスです。既存の変換器より一段細かな処理が可能となります。
 
 Encoding::Converter を用いて変換を行う場合は、[m:Encoding::Converter#convert] か、より細かな変換処理が可能な [m:Encoding::Converter#primitive_convert] が利用できます。
@@ -13,6 +14,7 @@ Encoding::Converter を用いて変換を行う場合は、[m:Encoding::Converte
 ### def new(source_encoding, destination_encoding) -> Encoding::Converter
 ### def new(source_encoding, destination_encoding, options) -> Encoding::Converter
 ### def new(convpath) -> Encoding::Converter
+
 Encoding::Converter オブジェクトを作成します。
 
 - **param** `source_encoding` -- 変換元のエンコーディング
@@ -56,6 +58,7 @@ p ec.convpath #=> ["universal_newline",
 
 ### def asciicompat_encoding(string) -> Encoding | nil
 ### def asciicompat_encoding(encoding) -> Encoding | nil
+
 同じ文字集合を持つ ASCII 互換エンコーディングを返します。
 
 - **param** `string` -- エンコーディング名
@@ -72,6 +75,7 @@ p Encoding::Converter.asciicompat_encoding("UTF-8") #=> nil
 ```
 
 ### def search_convpath(source_encoding, destination_encoding, options) -> Array
+
 引数で指定した文字エンコーディングの変換の経路を配列にして返します。
 
 - **param** `source_encoding` -- 変換元の文字エンコーディングを [c:Encoding] オ
@@ -109,11 +113,13 @@ p Encoding::Converter.search_convpath("ISO-8859-1", "UTF-32BE", newline: :univer
 
 ## Instance Methods
 ### def inspect -> String
+
 Encoding::Converter オブジェクトの情報を簡単に表示します。
 
 - **return** -- 変換器の情報を簡単に可視化した文字列です。
 
 ### def source_encoding -> Encoding
+
 変換元のエンコーディングを返します。
 
 - **return** -- 変換元のエンコーディング
@@ -124,6 +130,7 @@ p ec.source_encoding #=> #<Encoding:UTF-8>
 ```
 
 ### def destination_encoding -> Encoding
+
 変換先のエンコーディングを返します。
 
 - **return** -- 変換先のエンコーディング
@@ -134,6 +141,7 @@ p ec.destination_encoding #=> #<Encoding:EUC-JP>
 ```
 
 ### def convpath -> Array
+
 変換器が行う変換の経路を配列にして返します。
 
 - **return** -- 変換器が行う変換の経路の配列
@@ -149,6 +157,7 @@ p ec.convpath
 - **SEE** [m:Encoding::Converter.search_convpath]
 
 ### def replacement -> String
+
 変換器に設定されている置換文字を返します。
 
 - **return** -- 変換器に設定されている置換文字
@@ -162,6 +171,7 @@ p ec.replacement    #=> "\uFFFD"
 ```
 
 ### def replacement=(string)
+
 置換文字を設定します。
 
 - **param** `string` -- 変換器に設定する置換文字
@@ -173,6 +183,7 @@ p ec.convert("a \u3042 b")      #=> "a <undef> b"
 ```
 
 ### def convert(source_string) -> String
+
 与えられた文字列を変換して、変換できた結果を返します。
 引数の末尾の文字がバイト列の途中で終わっている場合、そのバイト列は変換器内に取り置かれます。
 変換を終了させるには [m:Encoding::Converter#finish] を呼びます。
@@ -204,6 +215,7 @@ puts ec.finish.dump                #=> "\e(B".force_encoding("ISO-2022-JP")
 ```
 
 ### def last_error -> Exception | nil
+
 直前に変換器で発生した例外に相当する例外オブジェクトを返します。
 直前の変換で例外が発生していない場合は nil を返します。
 
@@ -216,6 +228,7 @@ p ec.last_error      #=> nil
 ```
 
 ### def finish -> String
+
 変換処理を終了し、結果文字列の末尾を返します。
 変換元の文字列の末尾がバイト列の途中で終わっていた場合、保持しているバイト列全てを返します。
 
@@ -291,6 +304,7 @@ end while nil
 不正なバイトや変換先で未定義なバイトをエスケープしつつ変換する例です。以上のように、戻り値で分岐させつつ、[m:Encoding::Converter#primitive_errinfo] の情報を参照して処理していくことになります。
 
 ### def primitive_errinfo -> Array
+
 直前の [m:Encoding::Converter#primitive_convert] による変換の結果を保持する五要素の配列を返します。
 
 - **return** -- [result, enc1, enc2, error_bytes, readagain_bytes] という五要素の配列
@@ -354,6 +368,7 @@ p src
 ```
 
 ### def insert_output(string) -> nil
+
 変換器内のバッファに文字列を挿入します。
 バッファに保持された文字列は、次の変換時の変換結果と一緒に返されます。
 
@@ -386,6 +401,7 @@ puts "[#{dst.dump}, #{src.dump}]"   #=> ["\e$B$O$!$H\e(B?\e$B!#\e(B".force_encod
 
 ### def putback -> String
 ### def putback(max_numbytes) -> String
+
 後の変換用に変換器内部で保持しているバイト列を max_numbytes で指定した
 バイト数だけ返します。max_numbytes を指定しなかった場合は保持しているバ
 イト列の全てを返します。

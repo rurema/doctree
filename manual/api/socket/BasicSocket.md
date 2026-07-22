@@ -42,6 +42,7 @@ p TCPSocket.new('localhost', 'telnet').addr
 ファイルディスクリプタ fd に対する新しいソケットを生成します。
 
 返り値のクラスはどのクラスの for_fd を呼びだしたかによって決まります。
+
 ```ruby
 require 'socket'
   
@@ -80,6 +81,7 @@ TCPSocket.open("www.ruby-lang.org", 80) {|sock|
 - **SEE** [m:BasicSocket#do_not_reverse_lookup=]
 
 ### def do_not_reverse_lookup=(bool)
+
 アドレスからホスト名への逆引きの設定をソケットごとに設定します。
 
 - **param** `bool` -- この値が真ならアドレスからホスト名への逆引きを行わなくなります。
@@ -347,11 +349,11 @@ Addrinfo.tcp("0.0.0.0", 0).listen {|serv|
 }
 ```
 
-
 - **raise** `SocketError` -- アドレスが接続に不適な場合に返します
 - **SEE** [m:BasicSocket#local_address]
 
 ### def getpeereid -> [Integer, Integer]
+
 Unix ドメインソケットにおいて接続相手の euid と egid を
 返します。
 
@@ -376,9 +378,9 @@ Socket.unix_server_loop("/tmp/sock") {|s|
   end
 }
 ```
-  
 
 ### def local_address -> Addrinfo
+
 [man:getsockname(2)] で得られたローカルアドレス情報を
 [c:Addrinfo] オブジェクトとして返します。
 
@@ -485,6 +487,7 @@ controls.each {|ancdata|
 - **SEE** [bug:19012]
 
 ### def remote_address -> Addrinfo
+
 [man:getpeername(2)] で得られたリモートアドレス情報を
 [c:Addrinfo] オブジェクトとして返します。
 
@@ -508,6 +511,7 @@ TCPServer.open("127.0.0.1", 1728) {|serv|
 - **SEE** [m:BasicSocket#getpeername]
 
 ### def sendmsg(mesg, flags=0, dest_sockaddr=nil, *controls) -> Integer
+
 [man:sendmsg(2)] を用いてメッセージを送ります。
 
 このメソッドはブロックします。ノンブロッキング方式で通信したい
@@ -536,12 +540,12 @@ ancdata = [:SOCKET, :RIGHTS, [io.fileno].pack("i!")]
 sock.sendmsg("\0", 0, nil, ancdata)
 ```
 
-
 - **param** `mesg` -- メッセージ文字列
 - **param** `flags` -- フラグ(Socket::MSG_* という定数の bitwise OR を取ったもの)
 - **param** `dest_sockaddr` -- 通信先のアドレス
 - **param** `controls` -- 補助データの配列
 - **SEE** [m:BasicSocket#sendmsg_nonblock]
+
 ### def sendmsg_nonblock(mesg, flags=0, dest_sockaddr=nil, *controls) -> Integer
 
 [man:sendmsg(2)] を用いてノンブロッキング方式でメッセージを送ります。

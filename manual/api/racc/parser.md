@@ -36,6 +36,5 @@ type: library
 ### def token_to_str(t)
 #@todo
 
-
 # class Racc::ParseError < StandardError
 #@# alias ParseError

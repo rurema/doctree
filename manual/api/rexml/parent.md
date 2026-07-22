@@ -12,6 +12,7 @@ include:
 ## Class Methods
 
 ### def new(parent = nil) -> REXML::Parent
+
 REXML::Parent オブジェクトを生成します。
 
 子ノード列は空列に初期化されます。
@@ -30,6 +31,7 @@ parent で親ノードを指定します。
 ### def add(object) -> ()
 ### def push(object) -> ()
 ### def <<(object) -> ()
+
 object を子ノード列の最後に追加します。
 
 object の親ノードには self が設定されます。
@@ -37,6 +39,7 @@ object の親ノードには self が設定されます。
 - **param** `object` -- 追加するノード
 
 ### def unshift(object) -> ()
+
 object を子ノード列の最初に追加します。
 
 object の親ノードには self が設定されます。
@@ -44,6 +47,7 @@ object の親ノードには self が設定されます。
 - **param** `object` -- 追加するノード
 
 ### def delete(object) -> REXML::Child | nil
+
 object を子ノード列から削除します。
 
 削除されたノードの親は nil に設定されます。
@@ -68,7 +72,6 @@ object を子ノード列から削除します。
 
 ブロックを省略した場合は [c:Enumerator] を返します。
 
-
 ### def delete_at(index) -> REXML::Child | nil
 
 子ノード列上の index で指定された場所の要素を取り除きます。
@@ -84,8 +87,8 @@ nil を返します。
 ブロックが省略された場合は上のような繰り返しをする
 [c:Enumerator] オブジェクトを返します。
 
-
 ### def [](index) -> REXML::Child | nil
+
 子ノード列上の index で指定された場所のノードを返します。
 
 範囲外を指定した場合は nil を返します。
@@ -93,6 +96,7 @@ nil を返します。
 ### def []=(index, node)
 ### def []=(range, node)
 ### def []=(start, length, node)
+
 子ノード列上の指定した場所を node で置き換えます。
 
 [m:Array#\[\]=] と同じ指定が可能です。
@@ -104,6 +108,7 @@ nil を返します。
 - **param** `node` -- 置き換えるノード
 
 ### def insert_before(child1, child2) -> self
+
 child2 を child1 で指定したノードの前に挿入します。
 
 child1 が REXML::Child のインスタンスであるならば、その
@@ -118,6 +123,7 @@ child1 が 文字列であるならば、XPath で場所を指定します。
 - **param** `child2` -- 挿入されるノード
 
 ### def insert_after(child1, child2) -> self
+
 child2 を child1 で指定したノードの後ろに挿入します。
 
 child1 が REXML::Child のインスタンスであるならば、その
@@ -131,13 +137,13 @@ child1 が 文字列であるならば、XPath で場所を指定します。
 - **param** `child1` -- 挿入場所の指定
 - **param** `child2` -- 挿入されるノード
 
-
 ### def to_a -> [REXML::Child]
 ### def children -> [REXML::Child]
+
 子ノード列の配列を返します。
 
-
 ### def index(child) -> Integer | nil
+
 child の子ノード列上での位置を返します。
 
 child が子ノードでない場合には nil を返します。
@@ -148,6 +154,7 @@ child が子ノードでない場合には nil を返します。
 保持している子ノードの数を返します。
 
 ### def replace_child(to_replace, replacement) -> ()
+
 子ノード列上の to_replace を replacement に置き換えます。
 
 to_replace の parent は nil に、
@@ -157,11 +164,13 @@ replacement の parent は selfに変更されます。
 - **param** `replacement` -- 置き換え先のノード
 
 ### def deep_clone -> REXML::Parent
+
 ノードを複製し、複製されたノードを返します。
 
 子ノードも複製されます。
 
 ### def parent? -> bool
+
 true を返します。
 
 - **SEE** [m:REXML::Node#parent]

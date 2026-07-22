@@ -5,7 +5,6 @@ library: _builtin
 
 [m:Enumerator.new] で使われるクラスで、直接使うものではありません。
 
-
 ## Instance Methods
 
 ### def <<(object) -> ()
@@ -57,7 +56,6 @@ end
 # => "Hello\n"
 #    "こんにちは\n"
 ```
-
 
 ### def yield(*object) -> ()
 {: since="1.9.1"}

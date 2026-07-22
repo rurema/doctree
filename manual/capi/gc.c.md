@@ -107,7 +107,6 @@ GC を起動します。
 
 ポインタ addr が指す変数を GC の対象から外します。
 
-
 ### void rb_global_variable(VALUE *var)
 
 [f:rb_gc_register_address] と同じです。

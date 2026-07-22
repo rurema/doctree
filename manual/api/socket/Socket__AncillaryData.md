@@ -58,7 +58,6 @@ p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "")
 - **param** `cmsg_type` -- 補助データの種類
 - **param** `cmsg_data` -- データ内容
 
-
 ### def int(family, cmsg_level, cmsg_type, integer) -> Socket::AncillaryData
 
 データとして整数を保持する
@@ -81,6 +80,7 @@ p Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, STDERR.fileno)
 - **SEE** [m:Socket::AncillaryData.new]
 
 ### def unix_rights(*ios) -> Socket::AncillaryData
+
 ios で指定したファイルのファイルデスクリプタを
 データとして持つ family=AF_UNIX, level=SOL_SOCKET, type=SCM_RIGHTS
 という Socket::AncillaryData オブジェクトを生成して返します。
@@ -142,6 +142,7 @@ p Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
 
 ## Instance Methods
 ### def family -> Integer
+
 自身が保持している socket family を返します。
 
 ```ruby
@@ -154,6 +155,7 @@ p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").family
 - **SEE** [m:Socket::AncillaryData.new]
 
 ### def level -> Integer
+
 自身が保持している cmsg level (元プロトコル) を返します。
 
 ```ruby
@@ -166,6 +168,7 @@ p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").level
 - **SEE** [m:Socket::AncillaryData.new]
 
 ### def type -> Integer
+
 自身が保持している cmsg type (種類) を返します。
 
 ```ruby
@@ -178,6 +181,7 @@ p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").type
 - **SEE** [m:Socket::AncillaryData.new]
 
 ### def data -> String
+
 自身が保持している cmsg data (データ) を返します。
 
 ```ruby
@@ -190,6 +194,7 @@ p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").type
 - **SEE** [m:Socket::AncillaryData.new]
 
 ### def cmsg_is?(level, type) -> bool
+
 自身の level と type が引数のものと一致している場合に真を返します。
 
 ```ruby
@@ -207,6 +212,7 @@ p ancdata.cmsg_is?(:SOCKET, :RIGHTS)    #=> false
 - **SEE** [m:Socket::AncillaryData#level], [m:Socket::AncillaryData#type]
 
 ### def int -> Integer
+
 自身が保持している cmsg data (データ) を整数の形で返します。
 
 整数データのサイズおよびエンディアンは実行するホストによって異なります。
@@ -230,9 +236,11 @@ Unix domain socket の SCM_RIGHTS 制御メッセージに含まれる
 
 この配列は [c:Socket::AncillaryData] が初期化されたときに
 作られます。例えば [m:BasicSocket#recvmsg] を :scm_rights => true
+
 ```text
 オプションを付けて呼びだし、
 ```
+
 SCM_RIGHTS な 制御メッセージを受け取ったときに配列が作られます。
 適切なオプションを指定しなかった場合は配列は生成されず、
 このメソッドは nil を返します。
@@ -258,7 +266,6 @@ _, _, _, ctl = s2.recvmsg
 p ctl #=> #<Socket::AncillaryData: UNIX SOCKET RIGHTS 6 7>
 p ctl.unix_rights #=> nil
 ```
-  
 
 - **raise** `TypeError` -- family/level/type が AF_UNIX/SOL_SOCKET/SCM_RIGHTS でない場合
        に発生します。
@@ -300,6 +307,7 @@ Addrinfo.udp("127.0.0.1", 0).bind {|s1|
      [m:Socket::Constants::SO_BINTIME]
 
 ### def ip_pktinfo -> [Addrinfo, Integer, Addrinfo]
+
 自身の type が IP_PKTINFO である場合、保持しているデータ
 (アドレス、インターフェースのインデックス、ローカルアドレス)
 を3要素の配列で返します。
@@ -323,6 +331,7 @@ p ancdata.ip_pktinfo
      [m:Socket::Constants::IP_PKTINFO]
 
 ### def ipv6_pktinfo -> [Addrinfo, Integer]
+
 自身の type が IPV6_PKTINFO である場合、保持しているデータ
 (アドレス、インターフェースのインデックス)
 を2要素の配列で返します。
@@ -344,6 +353,7 @@ p ancdata.ipv6_pktinfo #=> [#<Addrinfo: ::1>, 0]
      [m:Socket::Constants::IPV6_PKTINFO]
 
 ### def ipv6_pktinfo_addr -> Addrinfo
+
 自身の type が IPV6_PKTINFO である場合、保持しているデータ
 (アドレス、インターフェースのインデックス)
 のアドレスを返します。
@@ -363,6 +373,7 @@ p ancdata.ipv6_pktinfo_addr #=> #<Addrinfo: ::1>
      [m:Socket::Constants::IPV6_PKTINFO]
 
 ### def ipv6_pktinfo_ifindex -> Integer
+
 自身の type が IPV6_PKTINFO である場合、保持しているデータ
 (アドレス、インターフェースのインデックス)
 のインデックスを返します。

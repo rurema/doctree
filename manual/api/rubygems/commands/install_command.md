@@ -37,8 +37,10 @@ Usage: gem install GEMNAME [GEMNAME ...] [options] -- --build-flags [options]
                                      If ruby is ruby18, foo_exec will be
                                      foo_exec18
 ```
+
 #@include(local_remote_options)
 #@include(common_options)
+
 ```text
 Arguments:
   GEMNAME       インストールする Gem パッケージ名を指定します
@@ -48,7 +50,6 @@ Defaults:
   --both --version '>= 0' --rdoc --ri --no-force
   --no-test --install-dir /usr/lib/ruby/gems/1.8
 ```
-
 
 # class Gem::Commands::InstallCommand < Gem::Command
 

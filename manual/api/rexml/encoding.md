@@ -5,7 +5,6 @@ library: rexml/document
 
 rexml ライブラリでエンコーディングを取り扱うための内部的なモジュールです。
 
-
 #@# == Class Methods
 #@#
 #@# #@since 1.8.3

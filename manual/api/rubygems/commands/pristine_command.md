@@ -18,7 +18,9 @@ Usage: gem pristine [args] [options]
     -v, --version VERSION            指定したバージョンの Gem パッケージを
                                      初期状態に戻します
 ```
+
 #@include(common_options)
+
 ```text
 Arguments:
   GEMNAME       gem to restore to pristine condition (unless --all)
@@ -38,7 +40,6 @@ Description:
 Defaults:
   --all
 ```
-
 
 # class Gem::Commands::PristineCommand < Gem::Command
 

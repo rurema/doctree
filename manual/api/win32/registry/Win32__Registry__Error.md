@@ -13,4 +13,3 @@ library: win32/registry
 ### const FormatMessageA
 #@todo
 
-

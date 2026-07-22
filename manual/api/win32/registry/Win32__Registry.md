@@ -281,7 +281,6 @@ subkey の値を返します。
 
 キー情報の個々の値を返します。
 
-
 ### def []=(name, rtype, value = nil)
 #@todo
 
@@ -299,7 +298,6 @@ subkey の値を返します。
 
 ### def open?
 #@todo
-
 
 ## Constants
 

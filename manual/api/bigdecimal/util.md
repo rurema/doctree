@@ -10,7 +10,6 @@ BigDecimal オブジェクトに変換する機能を提供します。
 - [m:Rational#to_d]
 - [m:NilClass#to_d]
 
-
 これらのメソッドを使うには 'bigdecimal/util' を require する必要があります。
 
 なお、Ruby 2.6.0 以降では、'bigdecimal/util' を require すると、
@@ -67,7 +66,6 @@ p ((1.0 / 3) / (2.0 / 3)).to_d     # => 0.5e0
 
 このメソッドは非推奨です。[m:BigDecimal#to_s]("F") を使用してください。
 
-
 ### def to_d -> BigDecimal
 
 自身を返します。
@@ -106,7 +104,6 @@ p (1/3r).to_d(10) # => 0.3333333333e0
 自身を [c:BigDecimal] に変換します。BigDecimal(self) と同じです。
 
 - **return** -- [c:BigDecimal] に変換したオブジェクト
-
 
 # reopen NilClass
 

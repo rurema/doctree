@@ -122,6 +122,7 @@ GC::Profiler.report
 - **SEE** [m:GC::Profiler.result]
 
 ### def total_time -> Float
+
 GC のプロファイル情報から GC の総計時間を計算し、msec 単位で返します。
 
 ```ruby title="例"

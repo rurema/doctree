@@ -235,7 +235,6 @@ obj がクラス klass およびそのサブクラスの
 
 [m:Object#untaint]
 
-
 ### double rb_str_to_dbl(VALUE str, int badcheck)
 
 ### VALUE rb_String(VALUE val)

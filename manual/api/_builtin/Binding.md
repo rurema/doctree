@@ -37,7 +37,6 @@ p get_binding("bye").eval("str + ' Fred'")   #=> "bye Fred"
 
 - **SEE** [m:Kernel?.eval]
 
-
 ### def local_variable_get(symbol) -> object
 
 引数 symbol で指定した名前のローカル変数に設定された値を返します。
@@ -145,12 +144,15 @@ binding.eval("local_variables")
 ```ruby
 binding.eval("self")
 ```
+
 ### def irb -> object
+
 REPLのセッションを開始します。
 
 2.5.0 からは require 'irb' せずに直接 binding.irb を呼び出しても使えるようになりました。
 
 - **SEE** [lib:irb]
+
 ### def source_location  -> [String, Integer]
 
 self の Ruby のソースファイル名と行番号を返します。

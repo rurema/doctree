@@ -7,10 +7,10 @@ alias:
 
 SMTP のセッションを表現したクラスです。
 
-
 ## Singleton Methods
 
 ### def new(address, port = Net::SMTP.default_port) -> Net::SMTP
+
 新しい SMTP オブジェクトを生成します。
 address はSMTPサーバーのFQDNで、
 port は接続するポート番号です。
@@ -31,7 +31,6 @@ port は接続するポート番号です。
 ### def start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
 
 新しい SMTP オブジェクトを生成し、サーバに接続し、セッションを開始します。
-
 
 以下と同じです。
 
@@ -75,30 +74,36 @@ Net::SMTP.start('smtp.example.com') {|smtp|
 - **raise** `Net::SMTPFatalError` -- SMTPエラーコード5xxの場合に発生します
 
 - **SEE** [m:Net::SMTP#start], [m:Net::SMTP.new]
+
 ### def default_port -> Integer
+
 SMTPのデフォルトのポート番号(25)を返します。
 
 ### def default_submission_port -> Integer
+
 デフォルトのサブミッションポート番号(587)を返します。
 
 ### def default_ssl_context -> OpenSSL::SSL::SSLContext
+
 SSL 通信に使われる SSL のコンテキストのデフォルト値を返します。
 
 ### def default_tls_port -> Integer
 ### def default_ssl_port -> Integer
-デフォルトのSMTPSのポート番号(465)を返します。
 
+デフォルトのSMTPSのポート番号(465)を返します。
 
 ## Instance Methods
 
 ### def esmtp? -> bool
 ### def esmtp -> bool
+
 その Net::SMTP オブジェクトが ESMTP を使う場合に真を返します。
 デフォルトは真です。
 
 - **SEE** [m:Net::SMTP#esmtp=]
 
 ### def esmtp=(bool)
+
 その Net::SMTP オブジェクトが ESMTP を使うかどうかを指定します。
 
 この指定は [m:Net::SMTP#start] を呼ぶ前にする必要があります。
@@ -106,36 +111,38 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 場合には 普通の SMTP モードに切り替えてやりなおします
 (逆はしません)。
 
-
 - **SEE** [m:Net::SMTP#esmtp?]
 
 ### def capable_starttls? -> bool
+
 サーバが STARTTLS を広告してきた場合に真を返します。
 
 このメソッドは [m:Net::SMTP#start] などでセッションを開始
 した以降にしか正しい値を返しません。
 
-
 ### def capable_cram_md5_auth? -> bool
+
 サーバが AUTH CRAM-MD5 を広告してきた場合に真を返します。
 
 このメソッドは [m:Net::SMTP#start] などでセッションを開始
 した以降にしか正しい値を返しません。
 
-
 ### def capable_login_auth? -> bool
+
 サーバが AUTH LOGIN を広告してきた場合に真を返します。
 
 このメソッドは [m:Net::SMTP#start] などでセッションを開始
 した以降にしか正しい値を返しません。
 
 ### def capable_plain_auth? -> bool
+
 サーバが AUTH PLAIN を広告してきた場合に真を返します。
 
 このメソッドは [m:Net::SMTP#start] などでセッションを開始
 した以降にしか正しい値を返しません。
 
 ### def capable_auth_types -> [String]
+
 接続したサーバで利用可能な認証を配列で返します。
 
 返り値の配列の要素は、 'PLAIN', 'LOGIN', 'CRAM-MD5' です。
@@ -145,12 +152,14 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 
 ### def tls? -> bool
 ### def ssl? -> bool
+
 その Net::SMTP オブジェクトが SMTPS を利用するならば真を返します。
 
 - **SEE** [m:Net::SMTP#enable_tls], [m:Net::SMTP#disable_tls], [m:Net::SMTP#start]
 
 ### def enable_ssl(context = Net::SMTP.default_ssl_context) -> ()
 ### def enable_tls(context = Net::SMTP.default_ssl_context) -> ()
+
 その Net::SMTP オブジェクトが SMTPS を利用するよう設定します。
 
 このメソッドは [m:Net::SMTP#start] を呼ぶ前に呼ぶ必要があります。
@@ -158,6 +167,7 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 - **param** `context` -- SSL接続で利用する [c:OpenSSL::SSL::SSLContext] 
 
 - **SEE** [m:Net::SMTP#tls?], [m:Net::SMTP#disable_tls]
+
 ### def disable_ssl -> ()
 ### def disable_tls -> ()
 
@@ -166,6 +176,7 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 - **SEE** [m:Net::SMTP#disable_tls], [m:Net::SMTP#tls?]
 
 ### def starttls? -> Symbol/nil
+
 その Net::SMTP オブジェクトが STARTTLSを利用するかどうかを返します。
 
 常に利用する(利用できないときは [m:Net::SMTP#start] で例外 
@@ -176,6 +187,7 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 - **SEE** [m:Net::SMTP#start]
 
 ### def starttls_always? -> bool
+
 その Net::SMTP オブジェクトが 常にSTARTTLSを利用する
 (利用できない場合には例外を発生する)ならば
 真を返します。
@@ -183,12 +195,14 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 - **SEE** [m:Net::SMTP#starttls?], [m:Net::SMTP#starttls_auto?], [m:Net::SMTP#enable_starttls]
 
 ### def starttls_auto? -> bool
+
 その Net::SMTP オブジェクトが利用可能な場合にのみにSTARTTLSを利用するならば
 真を返します。
 
 - **SEE** [m:Net::SMTP#starttls?], [m:Net::SMTP#starttls_always?], [m:Net::SMTP#enable_starttls_auto]
 
 ### def enable_starttls(context = Net::SMTP.default_ssl_context) -> ()
+
 その Net::SMTP オブジェクトが 常にSTARTTLSを利用する
 (利用できない場合には例外を発生する)ように設定します。
 
@@ -196,6 +210,7 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 - **SEE** [m:Net::SMTP#starttls?], [m:Net::SMTP#starttls_always?], [m:Net::SMTP#enable_starttls_auto]
 
 ### def enable_starttls_auto(context = Net::SMTP.default_ssl_context) -> ()
+
 その Net::SMTP オブジェクトがSTARTTLSが利用可能な場合
 (つまりサーバがSTARTTLSを広告した場合)のみにSTARTTLSを利用する
 ように設定します。
@@ -205,12 +220,14 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 - **SEE** [m:Net::SMTP#starttls?], [m:Net::SMTP#starttls_auto?], [m:Net::SMTP#enable_starttls]
 
 ### def disable_starttls -> ()
+
 その Net::SMTP オブジェクトがSTARTTLSを常に使わないよう設定します。
 
 - **SEE** [m:Net::SMTP#starttls?], [m:Net::SMTP#enable_starttls], [m:Net::SMTP#enable_starttls_auto]
 
 ### def set_debug_output(f) -> ()
 ### def debug_output=(f)
+
 デバッグ出力の出力先を指定します。
 このメソッドは深刻なセキュリティホールの原因となりえます。
 デバッグ用にのみ利用してください。
@@ -221,6 +238,7 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 ### def start(helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) {|smtp| ... } -> object
 ### def start(helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
+
 サーバにコネクションを張り、同時に SMTP セッションを開始します。
 
 もしすでにセッションが開始していたら IOError が発生します。
@@ -249,6 +267,7 @@ authtype は使用する認証のタイプで、
 - **raise** `Net::SMTPFatalError` -- SMTPエラーコード5xxの場合に発生します
 
 ### def started? -> bool
+
 SMTP セッションが開始されていたら真を返します。
 
 セッションがまだ開始していない、もしくは終了している場合には偽を返します。
@@ -256,6 +275,7 @@ SMTP セッションが開始されていたら真を返します。
 - **SEE** [m:Net::SMTP#start], [m:Net::SMTP#finish]
 
 ### def inspect -> String
+
 - **SEE** [m:Object#inspect]
 
 ### def address -> String
@@ -283,17 +303,22 @@ SMTP セッションが開始されていたら真を返します。
 - **SEE** [m:Net::SMTP#open_timeout]
 
 ### def read_timeout -> Integer
+
 読みこみ ([man:read(2)] 一回) でブロックしてよい最大秒数を返します。
 
 デフォルトは60(秒)です。
 この秒数たっても読みこめなければ例外 TimeoutError を発生します。
 
 - **SEE** [m:Net::SMTP#read_timeout=]
+
 ### def read_timeout=(n)
+
 読み込みでブロックしてよい最大秒数を設定します。
 
 - **SEE** [m:Net::SMTP#read_timeout]
+
 ### def finish -> ()
+
 SMTP セッションを終了します。
 
 - **raise** `IOError` -- セッション開始前にこのメソッドが呼ばれた場合に発生します
@@ -338,6 +363,7 @@ sendmail は obsolete です。
 
 ### def open_message_stream(from_addr, *to_addrs) {|f| .... } -> ()
 ### def ready(from_addr, *to_addrs) {|f| .... } -> ()
+
 メール書き込みの準備をし、書き込み先のストリームオブジェクトを
 ブロックに渡します。ブロック終了後、書きこんだ結果が
 送られます。
@@ -381,8 +407,8 @@ ready は obsolete です。
 
 - **SEE** [m:Net::SMTP#send_message]
 
-
 ### def authenticate(user, secret, authtype) -> ()
+
 認証を行います。
 
 このメソッドはセッション開始([m:Net::SMTP#start])後、
@@ -398,6 +424,7 @@ ready は obsolete です。
 - **SEE** [m:Net::SMTP.start], [m:Net::SMTP#start], [m:Net::SMTP#auth_plain], [m:Net::SMTP#auth_login], [m:Net::SMTP#auth_cram_md5]
 
 ### def auth_plain(user, secret) -> ()
+
 PLAIN 認証を行います。
 
 このメソッドはセッション開始([m:Net::SMTP#start])後、
@@ -410,6 +437,7 @@ PLAIN 認証を行います。
 - **param** `secret` -- 認証で使うパスワード
 
 ### def auth_login(user, secret) -> ()
+
 LOGIN 認証を行います。
 
 このメソッドはセッション開始([m:Net::SMTP#start])後、
@@ -421,8 +449,8 @@ LOGIN 認証を行います。
 - **param** `user` -- 認証で使うアカウント名
 - **param** `secret` -- 認証で使うパスワード
 
-
 ### def auth_cram_md5(user, secret) -> ()
+
 CRAM-MD5 認証を行います。
 
 このメソッドはセッション開始([m:Net::SMTP#start])後、
@@ -435,25 +463,27 @@ CRAM-MD5 認証を行います。
 - **param** `secret` -- 認証で使うパスワード
 
 ### def rset -> Net::SMTP::Response
+
 RSET コマンドを送ります。
 
-
 ### def starttls -> Net::SMTP::Response
+
 STARTTLS コマンドを送ります。
 
 通常は [m:Net::SMTP#start] で STARTTLS が送られるため
 利用する必要はないはずです。
 
 ### def helo(domain) -> Net::SMTP::Response
+
 HELO コマンドを送ります(標準的な SMTP を使います)。
 
 通常は [m:Net::SMTP.start], [m:Net::SMTP#start] で HELO が
 送られるため利用する必要はないはずです。
 
-
 - **param** `domain` -- HELOで送るドメイン名
 
 ### def ehlo(domain) -> Net::SMTP::Response
+
 EHLO コマンドを送ります(ESMTP を使います)。
 
 通常は [m:Net::SMTP.start], [m:Net::SMTP#start] で EHLO が
@@ -462,6 +492,7 @@ EHLO コマンドを送ります(ESMTP を使います)。
 - **param** `domain` -- EHLOで送るドメイン名
 
 ### def mailfrom(from_addr) -> Net::SMTP::Response
+
 MAILFROM コマンドを送ります。
 
 通常は [m:Net::SMTP#send_message], [m:Net::SMTP#open_message_stream] で
@@ -470,6 +501,7 @@ MAILFROM が送られるため利用する必要はないはずです。
 - **param** `from_addr` -- 送信元メールアドレス
 
 ### def rcptto_list(to_addrs){ ... } -> object
+
 RCPTTO コマンドを to_addrs のすべてのメールアドレスに対して送ります。
 
 コマンドを送った後、ブロックを呼び出します。
@@ -481,6 +513,7 @@ RCPTTO が送られるため利用する必要はないはずです。
 - **param** `to_addrs` -- 送信先メールアドレスの配列
 
 ### def rcptto(to_addr) -> Net::SMTP::Response
+
 RCPTTO コマンドを送ります。
 
 通常は [m:Net::SMTP#send_message], [m:Net::SMTP#open_message_stream] で
@@ -490,6 +523,7 @@ RCPTTO が送られるため利用する必要はないはずです。
 
 ### def data(message) -> Net::SMTP::Response
 ### def data {|f| .... } -> Net::SMTP::Response
+
 DATA コマンドを送ります。
 
 文字列を引数に与えた場合はそれを本文として送ります。
@@ -502,15 +536,16 @@ DATA が送られるため利用する必要はないはずです。
 - **param** `message` -- メールの本文
 
 ### def quit -> Net::SMTP::Response
+
 QUIT コマンドを送ります。
 
 通常は [m:Net::SMTP#finish] で
 QUIT が送られるため利用する必要はないはずです。
 
-
 ## Constants
 
 ### const DEFAULT_AUTH_TYPE -> Symbol
+
 デフォルトの認証スキーム(:plain)です。
 
 #@# internal constants for CRAM-MD5 authentication
@@ -519,5 +554,6 @@ QUIT が送られるため利用する必要はないはずです。
 #@# --- CRAM_BUFSIZE
 
 ### const Revision -> String
+
 ファイルのリビジョンです。使わないでください。
 

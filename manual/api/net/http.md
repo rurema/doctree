@@ -106,8 +106,8 @@ Net::HTTP.new('example.com', nil, proxy_addr, proxy_port).start { |http|
 プロクシの認証をユーザ名とパスワードですることもできます。
 詳しくは [m:Net::HTTP.new] を参照してください。
 
-
 #### リダイレクトに対応する
+
 以下の例の fetch はリダイレクトに対応しています。
 limit 回数以上リダイレクトしたらエラーにします。
 
@@ -148,7 +148,6 @@ Net::HTTP.start('www.example.com') {|http|
   print response.body
 }
 ```
-
 
 #@# === 例外
 
@@ -194,5 +193,4 @@ CGIやサーバの実装者に対し `&` の代わりに
 なお Ruby 標準の [lib:cgi] ライブラリでは '&' と ';' の両方サポートしていますので、
 [lib:cgi] ライブラリを使って CGI スクリプトを書く場合はこれらの違いを気にする
 必要はありません。
-
 

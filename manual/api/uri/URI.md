@@ -2,6 +2,7 @@
 library: uri
 ---
 # module URI
+
 URI を扱うためのモジュールです。
 
 #@#== Class Variables
@@ -150,7 +151,6 @@ require 'uri'
 p URI.regexp =~ "http://www.ruby-lang.org/"  #=> 0
 ```
 
-
 ### def decode_www_form(str, enc=Encoding::UTF_8) -> [[String, String]]
 
 文字列から URL-encoded form data をデコードします。
@@ -181,6 +181,7 @@ p Hash[ary]           #=> {"a"=>"2", "b"=>"3"}
 - **SEE** [m:URI.decode_www_form_component], [m:URI.encode_www_form]
 
 ### def decode_www_form_component(str, enc=Encoding::UTF_8) -> String
+
 URL-encoded form data の文字列の各コンポーネント
 をデコードした文字列を返します。
 
@@ -212,6 +213,7 @@ p URI.decode_www_form_component(enc)
 - **SEE** [m:URI.encode_www_form_component], [m:URI.decode_www_form]
 
 ### def encode_www_form(enum, enc=nil) -> String
+
 enum から URL-encoded form data を生成します。
 
 HTML5 で定義されている application/x-www-form-urlencoded 形式の
@@ -259,6 +261,7 @@ UTF-8 に変換する場合など)。
 - **SEE** [m:URI.encode_www_form_component], [m:URI.decode_www_form]
 
 ### def encode_www_form_component(str, enc=nil) -> String
+
 文字列を URL-encoded form data の1コンポーネント
 としてエンコードした文字列を返します。
 
@@ -280,11 +283,15 @@ p URI.encode_www_form_component('Ruby リファレンスマニュアル')
 - **param** `str` -- エンコードする文字列
 - **param** `enc` -- 指定された場合、パーセントエンコーディングする前に、strをこのエンコーディングに変換
 - **SEE** [m:URI.decode_www_form_component], [m:URI.encode_www_form]
+
 ## Constants
 
 ### const UNSAFE -> Regexp
+
 URIとして指定できない文字にマッチする正規表現
+
 ```text
 /[^-_.!~*'()a-zA-Z\d;\/?:@&=+$,\[\]]/n
 ```
+
 です。

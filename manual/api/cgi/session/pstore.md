@@ -34,7 +34,6 @@ require:
 
 ## Instance Methods
 
-
 ### def close -> ()
 #@# discard
 セッションの状態をファイルに保存してファイルを閉じます。

@@ -55,7 +55,6 @@ require "bigdecimal/math"
 puts BigMath::sqrt(BigDecimal('2'), 10) #=> 0.1414213562373095048666666667e1
 ```
 
-
 ### module_function def sin(x, prec) -> BigDecimal
 
 x の正弦関数を prec で指定した精度で計算します。単位はラジアンです。x
@@ -73,7 +72,6 @@ require "bigdecimal/math"
 puts BigMath::sin(BigDecimal('0.5'), 10) #=> 0.479425538604203000273287935689073955184741e0
 ```
 
-
 ### module_function def cos(x, prec) -> BigDecimal
 
 x の余弦関数を prec で指定した精度で計算します。単位はラジアンです。x
@@ -90,7 +88,6 @@ require "bigdecimal/math"
 
 puts BigMath::cos(BigDecimal('0.5'), 10) #=> 0.8775825618903727161162815826327690580439923e0
 ```
-
 
 ### module_function def atan(x, prec) -> BigDecimal
 
@@ -131,7 +128,6 @@ puts BigMath::PI(2)  #=> 0.31415926535897932384671233672993238432e1
 puts BigMath::PI(5)  #=> 0.31415926535897932384627534923029509162e1
 puts BigMath::PI(10) #=> 0.3141592653589793238462643388813853786957412e1
 ```
-
 
 ### module_function def E(prec) -> BigDecimal
 

@@ -5,6 +5,7 @@ require:
 YAML のノードを表現するためのサブライブラリです。
 
 # class Syck::YamlNode
+
 include Syck::BaseNode
 
 YAML のノードを表現するためのクラスです。

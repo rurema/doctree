@@ -15,6 +15,7 @@ X.509 v3 証明書の拡張領域のためのクラスです。
 インスタンスの生成を簡便に行うことができます。
 
 ### 参照
+
   - [RFC:5280]
 #@# *[RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-04EN.html#42]]
 
@@ -22,6 +23,7 @@ X.509 v3 証明書の拡張領域のためのクラスです。
 
 ### def new(der) -> OpenSSL::X509::Extension
 ### def new(oid, value, critical=false) -> OpenSSL::X509::Extension
+
 [c:OpenSSL::X509::Extension] オブジェクトを生成します。
 
 引数が1つの場合は DER 形式の文字列を渡します。
@@ -52,16 +54,20 @@ p ex3 # => basicConstraints = CA:FALSE
 ## Instance Methods
 
 ### def critical? -> bool
+
 その拡張領域の重要度(critical)を返します。
 
 - **SEE** [c:OpenSSL::X509::Extension#critical=]
+
 ### def critical=(bool)
+
 その拡張領域の重要度(critical)を真偽値で設定します。
 
 - **param** `bool` -- 設定する重要度の真偽値
 - **SEE** [c:OpenSSL::X509::Extension#critical?]
 
 ### def oid -> String
+
 拡張領域の識別子(extnID)をOIDの文字列で返します。
 
 - **SEE** [c:OpenSSL::X509::Extension#oid=]
@@ -93,20 +99,26 @@ DER 形式のバイト列に変換して返します。
 - **param** `value` -- 設定する値の文字列
 - **raise** `OpenSSL::X509::Extension` -- 値の設定に失敗した場合に発生します
 - **SEE** [c:OpenSSL::X509::Extension#value]
+
 ### def to_a -> [String, String, bool]
 
 拡張領域の内容を、[識別子(extnID), 値(extnValue), 重要度(critical)] という
 形で返します。
 
 ### def to_h -> Hash
+
 拡張領域の内容を、
+
 ```text
 { "oid" => 識別子(extnID), "value" => 値(extnValue), "critical" => 重要度(critical) }
 ```
+
 というハッシュで返します。
 
 ### def to_s -> String
+
 拡張領域の内容を、文字列表現で返します。
 
 # class OpenSSL::X509::ExtensionError < OpenSSL::OpenSSLError
+
 [c:OpenSSL::X509::Extension] 関連のエラーが起きたときに発生します。

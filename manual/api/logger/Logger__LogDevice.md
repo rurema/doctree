@@ -22,7 +22,6 @@ library: logger
 
 - **SEE** [m:Logger.new]
 
-
 ## Instance Methods
 
 ### def close -> nil

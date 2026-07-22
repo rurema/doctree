@@ -32,7 +32,6 @@ require "bigdecimal/math"
 puts BigMath::exp(BigDecimal('1'), 10) #=> 0.2718281828e1
 ```
 
-
 ### module_function def log(x, prec) -> BigDecimal
 
 x の自然対数を prec で指定した精度で計算します。

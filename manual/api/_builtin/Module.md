@@ -388,6 +388,7 @@ Zoo::Animal
 - **SEE** [m:Kernel?.autoload]
 
 ### def autoload?(const_name, inherit = true) -> String | nil
+
 autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します。
 また、ロード済みなら nil を返します。
 
@@ -521,13 +522,13 @@ p Class.const_get("Loggable::LEVEL")  # => 1
 ```
 
 ### def const_missing(name)
+
 定義されていない定数を参照したときに Ruby インタプリタが
 このメソッドを呼びます。
 
 - **param** `name` -- 参照した定数名の [c:Symbol]
 
 - **raise** `NameError` -- このメソッドを呼び出した場合、デフォルトで発生する例外
-
 
 ```ruby title="例"
 class Application
@@ -666,7 +667,6 @@ class Shape
 end
 ```
 
-
 ### def deprecate_constant(*name) -> self
 
 name で指定した定数を deprecate に設定します。
@@ -699,7 +699,6 @@ FOO
 Object.deprecate_constant(:BAR)
 # NameError: constant Object::BAR not defined
 ```
-
 
 ### def freeze -> self
 
@@ -848,7 +847,6 @@ p C.method_defined? "private_method2"   #=> false
 文字列が与えられた場合には、定数とクラス変数のスコープは自身のモジュール定義式内と同じスコープになります。
 ブロックが与えられた場合には、定数とクラス変数のスコープはブロックの外側のスコープになります。
 
-
 - **param** `expr` -- 評価される文字列。
 
 - **param** `fname` -- 文字列を指定します。ファイル fname に文字列 expr が書かれているかのように実行されます。
@@ -902,7 +900,6 @@ p C::X #=> 2
 ローカル変数、定数とクラス変数のスコープはブロックの外側のスコープになります。
 
 - **param** `args` -- ブロックに渡す引数を指定します。
-
 
 ```ruby title="例"
 class Thing
@@ -1119,7 +1116,6 @@ p Gadget.singleton_class.private_method_defined?(:foo) # => false
 p Gadget.private_class_method(:foo) # => Gadget
 p Gadget.singleton_class.private_method_defined?(:foo) # => true
 ```
-
 
 ### def private_constant(*name) -> self
 
@@ -1362,7 +1358,6 @@ end
 p Fred.foo #=> 99
 ```
 
-
 ### def class_variable_set(name, val) -> object
 
 クラス／モジュールにクラス変数 name を定義して、その値として
@@ -1386,7 +1381,6 @@ p Fred.foo(101)   # => 101
 p Fred.new.foo    # => 101
 ```
 
-
 ### def remove_class_variable(name) -> object
 
 引数で指定したクラス変数を取り除き、そのクラス変数に設定さ
@@ -1407,7 +1401,6 @@ end
 ```
 
 - **SEE** [m:Module#remove_const], [m:Object#remove_instance_variable]
-
 
 ### def singleton_class? -> bool
 
@@ -1496,7 +1489,6 @@ Object.new.extend Debuggable
 
 - **SEE** [m:Module#extend_object]
 
-
 ### def included(class_or_module) -> ()
 
 self が [m:Module#include] されたときに対象のクラスまたはモジュー
@@ -1533,6 +1525,7 @@ module Chatty
 end
 # => Added :FOO
 ```
+
 #@end
 ### def method_added(name) -> ()
 
@@ -1583,7 +1576,6 @@ end
 
 # => method "foo" was removed
 ```
-
 
 ### def method_undefined(name) -> ()
 
@@ -1640,6 +1632,7 @@ method C#bar was undefined
 - **param** `name` -- [c:String] または [c:Symbol] を 0 個以上指定します。
 
 ### 注意
+
 module_function はメソッドに「モジュール関数」という属性をつけるメ
 ソッドではなく、プライベートメソッドとモジュールの特異メソッドの 2
 つを同時に定義するメソッドです。
@@ -1819,7 +1812,6 @@ end
 
 - **SEE** [m:Module#remove_class_variable], [m:Object#remove_instance_variable]
 
-
 ### def refine(klass) { ... } -> Module
 
 引数 klass で指定したクラスまたはモジュールだけに対して、ブロックで指定した機能を提供で
@@ -1866,6 +1858,7 @@ p x.foo # => "C#foo in M"
 - **SEE** [m:main.using]
 
 ### def prepend_features(mod) -> self
+
 [m:Module#prepend] から呼び出されるメソッドで、
 prepend の処理の実体です。このメソッド自体は mod で指定した
 モジュール/クラスの継承チェインの先頭に self を追加します。

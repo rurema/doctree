@@ -2,6 +2,7 @@
 library: net/http
 ---
 # module Net::HTTPExceptions
+
 HTTP 例外クラスです。
 
 実際にはこれを include した以下のサブクラスの

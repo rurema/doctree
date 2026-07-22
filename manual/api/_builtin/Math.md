@@ -86,7 +86,6 @@ y / x の逆正接関数（arctangent）の値をラジアンで返します。
 
 - **return** -- 返される値の範囲は [-π, π] です。
 
-
 ```ruby title="例"
 p Math.atan2(1,0) #=>  1.5707963267949
 p Math.atan2(-1,0)  #=> -1.5707963267949
@@ -284,6 +283,7 @@ tanh(x) = sinh(x) / cosh(x)
 - **SEE** [m:Math?.atanh]
 
 ### module_function def erf(x) -> Float
+
 x の誤差関数（error function）の値を返します。
 
 - **param** `x` -- 実数
@@ -299,6 +299,7 @@ p Math.erf(0) # => 0.0
 - **SEE** [m:Math?.erfc]
 
 ### module_function def erfc(x) -> Float
+
 x の相補誤差関数（complementary error function）の値を返します。
 
 - **param** `x` -- 実数
@@ -371,7 +372,6 @@ sqrt(x*x + y*y) を返します。
 ```ruby title="例"
 p Math.hypot(3, 4) #=> 5.0
 ```
-
 
 ### module_function def ldexp(x, exp) -> Float
 

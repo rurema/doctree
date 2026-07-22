@@ -2,6 +2,7 @@
 library: open-uri
 ---
 # module OpenURI::OpenRead
+
 [c:URI::HTTP] と [c:URI::FTP] を拡張するために用意されたモジュールです。
 
 ## Instance Methods

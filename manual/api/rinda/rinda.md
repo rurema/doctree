@@ -22,10 +22,12 @@ Rubyで実装されたタプルスペース(Tuple Space)を扱うためのライ
 このライブラリはタプルスペースへのアクセス機能等を提供します。
 
 ### 参考
+
   - <http://www.druby.org/ilikeruby/rinda.html>
   - <http://www2a.biglobe.ne.jp/~seki/ruby/d208.html>
 
 ### タプルのパターンについて {#tuplepattern}
+
 [m:Rinda::TupleSpace#take] や [m:Rinda::TupleSpaceProxy#take] などでは
 取り出したいタプルを指定するため、パターンをメソッドの引数に渡す必要があります。
 
@@ -51,6 +53,7 @@ Rubyで実装されたタプルスペース(Tuple Space)を扱うためのライ
 ハッシュテーブルのキーとしては文字列のみ使えます。
 
 ### 例
+
 この例では、rinda_ts.rb を起動したプロセスがタプルスペースを提供します。
 
 rindas.rb はタプルスペースに書き込まれたクエリ('sum' というキーのタプル)
@@ -61,6 +64,7 @@ rindas.rb はタプルスペースに書き込まれたクエリ('sum' という
 その応答('ans'というキーのタプル)をタプルスペースから取り出して表示します。
 
 例の動かしかたは以下の通りです。
+
 ```console
 # まず、rinda_ts.rb を動かす
 ruby rinda_ts.rb druby://localhost:40121
@@ -157,7 +161,7 @@ end
 この例は ruby の配布物の sample/drb/rinda{_ts,s,c}.rb と同じものです。
 
 # module Rinda
+
 [lib:rinda/rinda] および [lib:rinda/tuplespace] の名前空間を提供する
 モジュール。
-
 

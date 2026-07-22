@@ -58,6 +58,7 @@ RTLD_NEXT を見てください。
 - **SEE** [man:dlclose(3)]
 
 ### def enable_close     -> nil
+
 GC によるオブジェクトの回収時に self をクローズする([m:Fiddle::Handle#close])
 ように設定します。
 
@@ -78,7 +79,6 @@ GC によるオブジェクトの回収時に self をクローズしない([m:F
 
 GC によるオブジェクトの回収時に self をクローズする([m:Fiddle::Handle#close])
 かどうかを真偽値で返します。
-
 
 - **SEE** [m:Fiddle::Handle#enable_close], [m:Fiddle::Handle#disable_close]
 
@@ -104,16 +104,19 @@ p h.sym('strlen') # 関数ポインタのアドレスを整数で表示
 
 ## Constants
 ### const NEXT -> Fiddle::Handle
+
 RTLD_NEXT で表わされる擬似ハンドルを表します。
 
 詳しくは [man:dlsym(3)] を参照してください。
 
 ### const DEFAULT -> Fiddle::Handle
+
 RTLD_DEFAULT で表わされる擬似ハンドルを表します。
 
 詳しくは [man:dlsym(3)] を参照してください。
 
 ### const RTLD_GLOBAL -> Integer
+
 dlopen のフラグ RTLD_GLOBAL を表す定数です。
 
 [m:DL::Handle.new] の flags として用います。
@@ -121,6 +124,7 @@ dlopen のフラグ RTLD_GLOBAL を表す定数です。
 詳しくは [man:dlopen(3)] を見てください。
 
 ### const RTLD_LAZY -> Integer
+
 dlopen のフラグ RTLD_LAZY を表す定数です。
 
 [m:DL::Handle.new] の flags として用います。
@@ -128,6 +132,7 @@ dlopen のフラグ RTLD_LAZY を表す定数です。
 詳しくは [man:dlopen(3)] を見てください。
 
 ### const RTLD_NOW -> Integer
+
 dlopen のフラグ RTLD_NOW を表す定数です。
 
 [m:DL::Handle.new] の flags として用います。

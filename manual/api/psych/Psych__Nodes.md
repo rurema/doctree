@@ -47,6 +47,7 @@ stream.to_ruby => [["foo"]]
 ```
 
 ### YAML AST 仕様
+
 正しい YAML AST は [c:Psych::Nodes::Stream] ノードが
 木のルートでなければなりません。Psych::Nodes::Stream ノードは
 1つ以上の [c:Psych::Nodes::Document] ノードを子として

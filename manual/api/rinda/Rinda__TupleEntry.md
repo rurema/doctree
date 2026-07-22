@@ -33,6 +33,7 @@ include:
 ## Instance Methods
 
 ### def [](key)
+
 タプルの key に対応する要素を返します。
 
 [m:Rinda::TupleEntry#value][key] を返します。
@@ -42,11 +43,14 @@ include:
 - **SEE** [m:Rinda::TupleEntry#fetch]
 
 ### def alive? -> bool
+
 タプルが有効である(期限切れでもなく、キャンセルされていない)ならば
 真を返します。
 
 - **SEE** [m:Rinda::TupleEntry#canceled?], [m:Rinda::TupleEntry#expired?]
+
 ### def cancel -> ()
+
 タプルをキャンセルし、タプルスペースから取り除きます。
 
 すでにタプルスペースから取り除かれている場合には何もしません。
@@ -60,10 +64,13 @@ include:
 - **SEE** [m:Rinda::TupleEntry#cancel]
 
 ### def expired? -> bool
+
 タプルが既に期限切れになっているならば真を返します。
 
 - **SEE** [m:Rinda::TupleEntry#expires], @see [m:Rinda::TupleEntry#renew]
+
 ### def expires -> Time
+
 タプルの期限切れの時刻を返します。
 
 有効期限を無限に指定した場合、この時刻は Time.at(2**31-1)、つまり
@@ -72,6 +79,7 @@ Tue Jan 19 03:14:07 GMT Standard Time 2038 を返します。
 - **SEE** [m:Rinda::TupleEntry#expire]
 
 ### def expires=(expires) 
+
 タプルの期限切れの時刻を指定します。
 
 - **param** `expires` -- 期限切れの時刻([c:Time])
@@ -79,6 +87,7 @@ Tue Jan 19 03:14:07 GMT Standard Time 2038 を返します。
 - **SEE** [m:Rinda::TupleEntry#expires]
 
 ### def fetch(key) -> object
+
 タプルの key に対応する要素を返します。
 
 [m:Rinda::TupleEntry#value].fetch(key) を返します。
@@ -107,6 +116,7 @@ Tue Jan 19 03:14:07 GMT Standard Time 2038 を返します。
 #@# Creates a Rinda::Tuple for +ary+.
 
 ### def renew(sec_or_renewer) -> ()
+
 タプルの有効期限を更新します。
 
 sec_or_renewer によって以下のように更新されます。
@@ -116,13 +126,13 @@ sec_or_renewer によって以下のように更新されます。
   - それ以外 : renew メソッドを持っていると仮定され、そのメソッドの呼び出し結果を用います。
     renew メソッドは nil, true, 数値のいずれかを上のルールに従って返さなければなりません。
 
-
 ### def size -> Integer
+
 タプルのサイズ(配列の要素数/ハッシュテーブルのエントリー数)を返します
 
 - **SEE** [m:Rinda::TupleEntry#value]
 
 ### def value -> Array | Hash
-管理対象のタプルを返します。
 
+管理対象のタプルを返します。
 

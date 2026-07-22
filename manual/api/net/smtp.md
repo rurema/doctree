@@ -124,6 +124,7 @@ Net::SMTP.start('smtp.example.com', 25,
 ```
 
 ### TLSを用いたSMTP通信
+
 [c:Net::SMTP] は [RFC:3207] に基づいた STARTTLS を用いる
 方法、もしくは [RFC:8314] に基づいた方法
 (ポート465を用い、通信全体をTLSで包む)

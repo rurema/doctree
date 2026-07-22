@@ -112,7 +112,6 @@ OpenSSL::ASN1::ASN1Data
         `-> OpenSSL::ASN1::Sequence
 ```
 
-
 #@# このドキュメントで「ASN.1 の値」、もしくは「ASN.1 値」と言った場合、
 #@# ASN.1 で定義された型によって表現される値を意味していていることに注意
 #@# つまり「値」という単語はここでは ASN.1 特有の概念を指している。
@@ -128,6 +127,7 @@ OpenSSL::ASN1::ASN1Data
 ## Module Functions
 
 ### module_function def decode(der) -> OpenSSL::ASN1::ASN1Data
+
 DER 表現の文字列を解析し、そこにエンコードされている ASN.1 の値を
 [c:OpenSSL::ASN1::ASN1Data] のサブクラスのインスタンスとして返します。
 
@@ -170,6 +170,7 @@ pp OpenSSL::ASN1.decode(cert.to_der)
 - **raise** `OpenSSL::ASN1::ASN1Error` -- 解析に失敗した場合に発生します
 
 ### module_function def decode_all(der) -> [OpenSSL::ASN1::ASN1Data]
+
 DER 表現の文字列を解析し、そこにエンコードされている ASN.1 の値を全て
 [c:OpenSSL::ASN1::ASN1Data] のサブクラスのインスタンスの配列として
 返します。
@@ -179,6 +180,7 @@ DER 表現の文字列を解析し、そこにエンコードされている ASN
 - **SEE** [m:OpenSSL::ASN1?.decode]
 
 ### module_function def traverse(der) {|depth, off, hlen, len, constructed, tag_class, tag| ...} -> nil
+
 DER形式の文字列を解析し、そこに含まれる ASN.1 の値
 のプロパティを引数として与えられたブロックを呼びだします。
 
@@ -201,6 +203,7 @@ DER形式の文字列を解析し、そこに含まれる ASN.1 の値
 
 ### module_function def Boolean(value) -> OpenSSL::ASN1::Boolean
 ### module_function def Boolean(value , tag , tagging , tag_class) -> OpenSSL::ASN1::Boolean
+
 ASN.1 の Boolean 型の値を表現する OpenSSL::ASN1::Boolean オブジェクトを
 生成します。
 
@@ -213,6 +216,7 @@ ASN.1 の Boolean 型の値を表現する OpenSSL::ASN1::Boolean オブジェ�
 
 ### module_function def Integer(value) -> OpenSSL::ASN1::Integer
 ### module_function def Integer(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Integer
+
 ASN.1 の Integer 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -225,6 +229,7 @@ ASN.1 の Integer 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def Enumerated(value) -> OpenSSL::ASN1::Enumerated
 ### module_function def Enumerated(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Enumerated
+
 ASN.1 の Enumerated 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -237,6 +242,7 @@ ASN.1 の Enumerated 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def BitString(value) -> OpenSSL::ASN1::BitString -> OpenSSL::ASN1::BitString
 ### module_function def BitString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::BitString
+
 ASN.1 の BitString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -249,6 +255,7 @@ ASN.1 の BitString 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def OctetString(value) -> OpenSSL::ASN1::OctetString -> OpenSSL::ASN1::OctetString
 ### module_function def OctetString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::OctetString
+
 ASN.1 の OctetString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -261,6 +268,7 @@ ASN.1 の OctetString 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def UTF8String(value) -> OpenSSL::ASN1::UTF8String -> OpenSSL::ASN1::UTF8String
 ### module_function def UTF8String(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UTF8String
+
 ASN.1 の UTF8String 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -273,6 +281,7 @@ ASN.1 の UTF8String 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def NumericString(value) -> OpenSSL::ASN1::NumericString -> OpenSSL::ASN1::NumericString
 ### module_function def NumericString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::NumericString
+
 ASN.1 の NumericString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -285,6 +294,7 @@ ASN.1 の NumericString 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def PrintableString(value) -> OpenSSL::ASN1::PrintableString -> OpenSSL::ASN1::PrintableString
 ### module_function def PrintableString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::PrintableString
+
 ASN.1 の PrintableString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -297,6 +307,7 @@ ASN.1 の PrintableString 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def T61String(value) -> OpenSSL::ASN1::T61String -> OpenSSL::ASN1::T61String
 ### module_function def T61String(value, tag, tagging, tag_class) -> OpenSSL::ASN1::T61String
+
 ASN.1 の T61String 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -309,6 +320,7 @@ ASN.1 の T61String 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def VideotexString(value) -> OpenSSL::ASN1::VideotexString -> OpenSSL::ASN1::VideotexString
 ### module_function def VideotexString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::VideotexString
+
 ASN.1 の VideotexString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -321,6 +333,7 @@ ASN.1 の VideotexString 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def IA5String(value) -> OpenSSL::ASN1::IA5String -> OpenSSL::ASN1::IA5String
 ### module_function def IA5String(value, tag, tagging, tag_class) -> OpenSSL::ASN1::IA5String
+
 ASN.1 の IA5String 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -333,6 +346,7 @@ ASN.1 の IA5String 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def GraphicString(value) -> OpenSSL::ASN1::GraphicString -> OpenSSL::ASN1::GraphicString
 ### module_function def GraphicString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GraphicString
+
 ASN.1 の GraphicString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -345,6 +359,7 @@ ASN.1 の GraphicString 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def ISO64String(value) -> OpenSSL::ASN1::ISO64String -> OpenSSL::ASN1::ISO64String
 ### module_function def ISO64String(value, tag, tagging, tag_class) -> OpenSSL::ASN1::ISO64String
+
 ASN.1 の ISO64String 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -357,6 +372,7 @@ ASN.1 の ISO64String 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def GeneralString(value) -> OpenSSL::ASN1::GeneralString -> OpenSSL::ASN1::GeneralString
 ### module_function def GeneralString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GeneralString
+
 ASN.1 の GeneralString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -369,6 +385,7 @@ ASN.1 の GeneralString 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def UniversalString(value) -> OpenSSL::ASN1::UniversalString -> OpenSSL::ASN1::UniversalString
 ### module_function def UniversalString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UniversalString
+
 ASN.1 の UniversalString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -381,6 +398,7 @@ ASN.1 の UniversalString 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def BMPString(value) -> OpenSSL::ASN1::BMPString -> OpenSSL::ASN1::BMPString
 ### module_function def BMPString(value, tag, tagging, tag_class) -> OpenSSL::ASN1::BMPString
+
 ASN.1 の BMPString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -393,6 +411,7 @@ ASN.1 の BMPString 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def Null(value) -> OpenSSL::ASN1::Null -> OpenSSL::ASN1::Null
 ### module_function def Null(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Null
+
 ASN.1 の Null 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -405,6 +424,7 @@ ASN.1 の Null 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def ObjectId(value) -> OpenSSL::ASN1::ObjectId -> OpenSSL::ASN1::ObjectId
 ### module_function def ObjectId(value, tag, tagging, tag_class) -> OpenSSL::ASN1::ObjectId
+
 ASN.1 の ObjectId 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -417,6 +437,7 @@ ASN.1 の ObjectId 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def UTCTime(value) -> OpenSSL::ASN1::UTCTime -> OpenSSL::ASN1::UTCTime
 ### module_function def UTCTime(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UTCTime
+
 ASN.1 の UTCTime 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -429,6 +450,7 @@ ASN.1 の UTCTime 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def GeneralizedTime(value) -> OpenSSL::ASN1::GeneralizedTime -> OpenSSL::ASN1::GeneralizedTime
 ### module_function def GeneralizedTime(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GeneralizedTime
+
 ASN.1 の GeneralizedTime 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -441,6 +463,7 @@ ASN.1 の GeneralizedTime 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def Sequence(value) -> OpenSSL::ASN1::Sequence -> OpenSSL::ASN1::Sequence
 ### module_function def Sequence(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Sequence
+
 ASN.1 の Sequence 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -453,6 +476,7 @@ ASN.1 の Sequence 型の値を表現する Ruby のオブジェクトを
 
 ### module_function def Set(value) -> OpenSSL::ASN1::Set -> OpenSSL::ASN1::Set
 ### module_function def Set(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Set
+
 ASN.1 の Set 型の値を表現する Ruby のオブジェクトを
 生成します。
 
@@ -466,6 +490,7 @@ ASN.1 の Set 型の値を表現する Ruby のオブジェクトを
 ## Constants
 
 ### const UNIVERSAL_TAG_NAME -> [String]
+
 タグ番号が表す ASN.1 オブジェクト名を収録した配列です。
 
 ```ruby title="例"
@@ -629,5 +654,4 @@ BMPSTRING のタグ番号 30 を表す定数です。
 # class OpenSSL::ASN1::ASN1Error < OpenSSL::OpenSSLError
 
 OpenSSLの ASN.1 関連のエラーが起きたときに発生する例外です。
-
 

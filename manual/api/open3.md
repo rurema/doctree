@@ -69,7 +69,6 @@ Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr
 #    "stderr\n"
 ```
 
-
 stdin への入力が終わったらできる限り早く close か close_write
 で閉じるべきです。
 
@@ -112,7 +111,6 @@ Open3.popen3("pwd") {|i,o,e,t|
 ```
 
 - **SEE** [m:Kernel?.spawn]
-
 
 ### module_function def popen2(*cmd) -> [IO, IO, Thread]
 ### module_function def popen2(*cmd) {|stdin, stdout, wait_thr| ... } -> ()

@@ -20,7 +20,9 @@ category: Thread
 [ruby-list:1991]
 
 ### 例
+
 クラスに [m:Module#include] する例
+
 ```ruby
 require "mutex_m"
 class Foo
@@ -35,6 +37,7 @@ end
 ```
 
 オブジェクトに [m:Object#extend] する例
+
 ```ruby
 require "mutex_m"
 obj = Object.new
@@ -79,23 +82,26 @@ self のロックを取得し、ブロックを実行します。実行後に必
 
 ### def mu_lock -> ()
 ### def lock -> ()
+
 self をロックします。一度にひとつのスレッドしかロックできません。
 既にロックされている mutex に対してロックを行おうとしたスレッドは
 ロックが解放されるまで、実行が停止されます。
 
-
 ### def mu_locked? -> bool
 ### def locked? -> bool
+
 self がロックされている時、真を返します。
 
 ### def mu_try_lock -> bool
 ### def try_lock -> bool
+
 self をロックしようとして、成功した場合、真を返し、ロックを得ます。
 
 ロックできなかった場合にはブロックせず偽を返します。
 
 ### def mu_unlock -> ()
 ### def unlock -> ()
+
 ロックを解放します。ロック待ちになっていたスレッドの実行は再開されます。
 
 - **raise** `ThreadError` -- ロックされていない場合に unlock を呼ぶと発生します

@@ -20,7 +20,6 @@ p Prime.instance.prime?(2)  #=> true
 p Prime.prime?(2)         #=> true
 ```
 
-
 ## Class Methods
 
 ### def instance -> Prime
@@ -114,9 +113,11 @@ Prime.each(30).each_cons(2).select{|p,r| r-p == 2}
 ```
 
 ### 注
+
 このメソッドに、真の素数列でない擬似素数を与えるべきではありません。
 
 このメソッドは、素数列の外部イテレータを内部イテレータに変換してRubyらしいプログラミングを提供することが責務です。独自に素数性の保障するのはメソッドの責務ではありません。従って、次のように精度の低い素数生成器を与えると、真に素数とは限らない数列が発生します。
+
 ```ruby title="例"
 require 'prime'
 Prime.each(50, Prime::Generator23.new) do |n|

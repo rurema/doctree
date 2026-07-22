@@ -25,6 +25,7 @@ p htd2.get_passwd('realm', 'username', false) == '65fe03e5b0a199462186848cc7fda4
 ## Class Methods
 
 ### def new(path) -> WEBrick::HTTPAuth::Htdigest
+
 Htdigest オブジェクトを生成します。
 
 - **param** `path` -- パスワードを保存するファイルのパスを与えます。
@@ -72,5 +73,4 @@ realm に属するユーザ user のパスワードを削除します。
 - **param** `user` -- ユーザ名を指定します。
 
 - **param** `pass` -- パスワードを指定します。
-
 

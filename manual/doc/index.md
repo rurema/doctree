@@ -73,13 +73,16 @@ Ruby の文法:
   - [d:spec/lambda_proc]
 
 #### ライブラリ
+
   - [lib:/]
     - [lib:_builtin]
 
 #### C API
+
   - [f:/]
 
 #### その他
+
   - [d:news/index]
 #@#* 付録
 #@##@# 使い方

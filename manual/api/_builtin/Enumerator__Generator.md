@@ -5,7 +5,6 @@ library: _builtin
 
 [m:Enumerator.new] で内部的に使われるクラスで、直接使うものではありません。
 
-
 ## Instance Methods
 
 ### def each(*args) { ... } -> object

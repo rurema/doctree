@@ -6,4 +6,3 @@ library: rinda/rinda
 rinda で take などのリクエストがタイムアウトしたことを
 意味する例外クラス。
 
-

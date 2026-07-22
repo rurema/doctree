@@ -59,7 +59,6 @@ p YAML::YPath.new(str)
 #=> #<YAML::YPath:0x3238cc @predicates=[":hoge", nil, nil], @segments=["ugo", "0", "name"], @flags=nil>
 ```
 
-
 ### def each_path(str) {|ypath| ...} -> Array
 
 引数 str を [c:Syck::YPath] が

@@ -40,7 +40,6 @@ require 'benchmark'
 puts Benchmark.realtime { [0] * (10**8) } # => 1.0929416846483946
 ```
 
-
 ### module_function def bm(label_width = 0, *labels) {|rep| ... } -> [Benchmark::Tms]
 
 [m:Benchmark?.benchmark] メソッドの引数を簡略化したものです。
@@ -213,8 +212,6 @@ end
   # >avg:    1.333333   0.011111   1.344444 (  0.629761)
   ```
 
-
-
 ## Constants
 
 ### const CAPTION -> String
@@ -257,7 +254,6 @@ end
 
 benchmark ライブラリのバージョンを表します。
 
-
 # class Benchmark::Tms < Object
 
 ベンチマークの計測に関連する各種時間を表現するクラスです。
@@ -274,7 +270,6 @@ benchmark ライブラリのバージョンを表します。
 - **param** `cstime` -- 子プロセスの System CPU time
 - **param** `real` --   実経過時間
 - **param** `label` --  ラベル
-
 
 ## Instance Methods
 
@@ -333,7 +328,6 @@ self と x の除算を計算します。
 
 - **SEE** [m:Benchmark?.measure]
 
-
 ### def format(fmtstr = nil, *args) -> String
 
 self を指定されたフォーマットで整形して返します。
@@ -376,7 +370,6 @@ self を指定されたフォーマットで整形して返します。
 
 引数を省略して [m:Benchmark::Tms#format] を呼び出すのと同じです。
 
-
 ### def utime -> Float
 
 User CPU time
@@ -405,7 +398,6 @@ System CPU time
 
 ラベル。
 
-
 ## Protected Instance Methods
 
 ### def memberwise(op, x) -> Benchmark::Tms
@@ -416,7 +408,6 @@ System CPU time
 - **param** `x` -- [c:Benchmark::Tms] のオブジェクトか [c:Float] に暗黙の変換ができるオブジェクトです。
 
 - **return** -- 計算結果は新しい [c:Benchmark::Tms] オブジェクトです。
-
 
 ## Constants
 
@@ -454,7 +445,6 @@ System CPU time
 
 - **SEE** [m:Benchmark?.benchmark], [m:Benchmark::FORMAT]
 
-
 # class Benchmark::Job < Object
 
 [m:Benchmark?.bmbm] メソッドの内部で使用されるクラスです。
@@ -489,7 +479,6 @@ System CPU time
 ### def width -> Integer
 
 [m:Benchmark::Job#list] のサイズ。
-
 
 # class Benchmark::Report < Object
 

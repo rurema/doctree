@@ -18,16 +18,15 @@ Usage: gem cert [options]
     -K, --private-key KEY            --sign で使用する秘密鍵を指定します
     -s, --sign NEWCERT               証明書に秘密鍵で署名します
 ```
+
 #@include(common_options)
+
 ```console
 Summary:
   Manage RubyGems certificates and signing settings
 ```
 
-
 # class Gem::Commands::CertCommand < Gem::Command
 
 Gem パッケージの証明書や書名の設定を管理するためのクラスです。
-
-
 

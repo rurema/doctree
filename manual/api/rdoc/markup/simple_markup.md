@@ -43,7 +43,6 @@ puts h.convert(input_string)
 
 独自のフォーマットを行うようにパーサを拡張する事もできます。
 
-
 ```ruby title="例"
 require 'rdoc/markup'
 require 'rdoc/markup/to_html'

@@ -6,7 +6,6 @@ since: "2.5.0"
 
 [m:Object#freeze]されたオブジェクトを変更しようとした時に発生します。
 
-
 ```ruby title="例"
 [1, 2, 3].freeze << 4 # FrozenError: can't modify frozen Array
 ```

@@ -23,6 +23,7 @@ p(M.sizeof("uint") == M.sizeof("unsigned int"))
 ```
   
 # module Fiddle::Win32Types
+
 Windows 用の型の別名を定義するモジュールです。
 
 include すると 以下の型が定義されます。
@@ -49,6 +50,7 @@ include すると 以下の型が定義されます。
   - "HWND"
 
 # module Fiddle::BasicTypes
+
 よく使われる型の別名を定義するモジュールです。
 
 include すると 以下の型が定義されます。

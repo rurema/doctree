@@ -90,7 +90,6 @@ RubyGems 1.2 未満で作成されたリポジトリの配列を返します。
 
 キャッシュされている全ての gemspec を返します。
 
-
 ### def warn_legacy(exception){ ... } -> bool
 
 [m:Gem::SpecFetcher#fetch] で例外が発生した場合に呼び出されます。

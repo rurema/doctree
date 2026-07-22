@@ -41,9 +41,9 @@ p output.string
 # => "<children\n>\n<grandchildren foo='bar'\n  />\n</children\n>"
 ```
 
-
 ## Class Method
 ### def new(indentation=2, ie_hack=false) -> REXML::Formatter::Transitive
+
 フォーマッタオブジェクトを生成して返します。
 
 このフォーマッタによる出力は基本的にテキストの空白や改行を変化させないと

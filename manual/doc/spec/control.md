@@ -443,7 +443,6 @@ break によりループを抜けた for やイテレータは nil
 を返します。
 ただし、引数を指定した場合はループの戻り値はその引数になります。
 
-
 #### next {#next}
 
 ```ruby title="例"
@@ -460,7 +459,6 @@ next
 next val
 ```
 
-
 nextはもっとも内側のループの次の繰り返しにジャンプします。
 イテレータでは、yield 呼び出しの脱出になります。
 
@@ -472,7 +470,6 @@ next により抜けた yield 式は nil を返します。
 ```text title="例"
 redo
 ```
-
 
 ```text title="文法"
 redo
@@ -621,6 +618,7 @@ end
 #    #<RuntimeError: error message>
 
 ```
+
 例外の一致判定は，発生した例外が rescue 節で指定した
 クラスのインスタンスであるかどうかで行われます。
 

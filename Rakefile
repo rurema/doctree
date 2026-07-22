@@ -141,7 +141,7 @@ def generate_statichtml(version)
   raise "Failed to generate static html" unless succeeded
 end
 
-task :default => [:check_filename_case_conflicts, :check_indent_in_samplecode, :check_single_space_indent, :generate, :check_format]
+task :default => [:check_filename_case_conflicts, :check_indent_in_samplecode, :check_single_space_indent, :check_blank_lines, :generate, :check_format]
 
 namespace :generate do
   ALL_VERSIONS.each do |version|
@@ -308,6 +308,117 @@ task :check_single_space_indent do
         errors << "#{path}:#{lineno}: 半角スペース1個だけのインデントです。0個(リストマーカー等)か2個以上(dlist/リスト項目の継続)にしてください"
       end
     end
+  end
+
+  unless errors.empty?
+    puts errors
+    fail
+  end
+end
+
+# #3261 対応（c-normalize-blank-lines）で manual/ 全体の空行を markdownlint
+# MD012/MD022/MD031 に合わせて機械的に正規化した。以後の回帰を防ぐため、
+# 同じ3規則を（doctree 固有の例外つきで）検査する:
+#
+#   MD012: 空行が2個以上連続してはいけない
+#   MD022: 見出しの前後に空行が必要。ただし次の場合は隣接を許容する
+#          （見出し同士が連続=ママ許容／`{: ...}` メソッド属性行との隣接=
+#          崩すと since/until/nomethod が見出しから切り離されて失われる／
+#          `#@...` プリプロセッサディレクティブ行との隣接=`#@since` 等は
+#          プリプロセッサで取り除かれるため、見出しと属性行を直接つなげる
+#          構造を保つ必要がある）
+#   MD031: フェンスコードブロックの前後に空行が必要。ただし列0でない
+#          （リスト項目・定義リストの継続行にネストした）フェンスは対象外。
+#          正規化時のレンダリング検証で、インデント済みフェンスの前後に
+#          空行を入れると MDCompiler の dd/dl 継続判定が変わり HTML が
+#          変化するケース（`- **return** -- ...` 等のメタデータリスト内で
+#          dl が早期に閉じる／後続段落が `<p>` で包まれる）が実測されたため、
+#          意図的にチェック対象から外している
+#
+# フェンス内・フロントマター（先頭の --- で挟まれた部分）は対象外。
+desc 'Check blank lines against markdownlint MD012/MD022/MD031 (with doctree-specific exceptions)'
+task :check_blank_lines do
+  fence_re = /\A[ \t]*(`{3,}|~{3,})/
+  heading_re = /\A\#{1,6}(\s|\z)/
+  attr_re = /\A\{:\s/
+  directive_re = /\A#@/
+  skip_heading_neighbor = lambda do |line|
+    line.nil? || line.strip.empty? || heading_re.match?(line) || attr_re.match?(line) || directive_re.match?(line)
+  end
+
+  errors = []
+  Dir.glob('manual/**/*.md').sort.each do |path|
+    lines = File.read(path).lines(chomp: true)
+
+    fm_end = nil
+    if lines[0] == '---'
+      (1...lines.length).each do |i|
+        if lines[i] == '---'
+          fm_end = i
+          break
+        end
+      end
+    end
+    body_start = fm_end ? fm_end + 1 : 0
+
+    in_fence = false
+    fence_char = nil
+    fence_len = 0
+    blank_run = 0
+    blank_run_start = nil
+
+    flush_blank_run = lambda do
+      if blank_run > 1
+        errors << "#{path}:#{blank_run_start}: 空行が#{blank_run}個連続しています。1個にしてください(MD012)"
+      end
+      blank_run = 0
+      blank_run_start = nil
+    end
+
+    (body_start...lines.length).each do |i|
+      line = lines[i]
+      lineno = i + 1
+      indented = line.start_with?(' ') || line.start_with?("\t")
+
+      if (m = fence_re.match(line))
+        char, len = m[1][0], m[1].length
+        flush_blank_run.call
+        if !in_fence
+          if !indented && i > body_start && !lines[i - 1].strip.empty?
+            errors << "#{path}:#{lineno}: フェンスコードブロックの前に空行がありません(MD031)"
+          end
+          in_fence = true
+          fence_char = char
+          fence_len = len
+        elsif char == fence_char && len >= fence_len
+          in_fence = false
+          if !indented && (nxt = lines[i + 1]) && !nxt.strip.empty?
+            errors << "#{path}:#{lineno}: フェンスコードブロックの後に空行がありません(MD031)"
+          end
+        end
+        next
+      end
+      next if in_fence
+
+      if line.strip.empty?
+        blank_run += 1
+        blank_run_start ||= lineno
+        next
+      end
+      flush_blank_run.call
+
+      next unless heading_re.match?(line)
+
+      prev = i > body_start ? lines[i - 1] : nil
+      unless skip_heading_neighbor.call(prev)
+        errors << "#{path}:#{lineno}: 見出しの前に空行がありません(MD022)"
+      end
+      nxt = lines[i + 1]
+      unless skip_heading_neighbor.call(nxt)
+        errors << "#{path}:#{lineno}: 見出しの後に空行がありません(MD022)"
+      end
+    end
+    flush_blank_run.call
   end
 
   unless errors.empty?

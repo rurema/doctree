@@ -114,7 +114,6 @@ srv.mount('/img')
 
 - **param** `server` -- バーチャルホストを表す WEBrick::HTTPServer オブジェクトを指定します。
 
-
 ```ruby
 require 'webrick'
 include WEBrick

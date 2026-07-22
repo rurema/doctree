@@ -2,6 +2,7 @@
 library: fiddle/import
 ---
 # module Fiddle::Importer
+
 C の関数をモジュールにインポートするためのモジュールです。
 
 対象となるモジュールに [m:Object#extend] することで、
@@ -12,6 +13,7 @@ C の関数をモジュールにインポートするためのモジュールで
 ## Instance Methods
 
 ### def [](name) -> Fiddle::Function|nil
+
 [m:Fiddle::Importer#extern] でインポートした関数の 
 [c:Fiddle::Function] オブジェクト
 を返します。
@@ -21,6 +23,7 @@ name という名前の関数が存在しない場合は nil を返します。
 - **param** `name` -- 関数の名前の文字列
 
 ### def bind(signature, *opts){ ... } -> Fiddle::Function
+
 Ruby のブロックを C の関数で wrap し、その関数をモジュールに
 インポートします。
 
@@ -60,7 +63,6 @@ data = [32, 180001, -13, -1, 0, 49].pack("i!*")
 M.qsort(Fiddle::Pointer[data], 6, Fiddle::SIZEOF_INT, M["compare"])
 p data.unpack("i!*") # => [-13, -1, 0, 32, 49, 180001]
 ```
-
 
 ### def dlload(*libs) -> ()
 
@@ -146,20 +148,25 @@ end
 ```
 
 ### def struct(signature) -> Class
+
 C の構造体型に対応する Ruby のクラスを構築して返します。
 
 構造体の各要素は C と似せた表記ができます。そしてそれを
 配列で signature に渡してデータを定義します。例えば C における
+
 ```c
 struct timeval {
   long tv_sec;
   long tv_usec;
 };
 ```
+
 という構造体型に対応して
+
 ```ruby
 Timeval = struct(["long tv_sec", "long tv_usec"])
 ```
+
 として構造体に対応するクラスを生成します。
 
 このメソッドが返すクラスには以下のメソッドが定義されています
@@ -192,6 +199,7 @@ p time.tv_usec
 ```
 
 ### def typealias(new, orig) -> ()
+
 extern や struct で利用する型の別名を定義します。
 
 - **param** `new` -- 別名(文字列)
@@ -200,10 +208,12 @@ extern や struct で利用する型の別名を定義します。
      [m:Fiddle::Importer#struct], [m:Fiddle::Importer#union]
 
 ### def union(signature) -> Class
+
 C の共用体型に対応する Ruby のクラスを構築して返します。
 
 共用体型を Ruby 上で定義する方法は [m:Fiddle::Importer#struct] と
 ほぼ同様です。C における
+
 ```c
 typedef union epoll_data
 {
@@ -213,7 +223,9 @@ typedef union epoll_data
   uint64_t u64;
 } epoll_data_t;
 ```
+
 は、Ruby上では
+
 ```ruby
 require 'fiddle/import'
   
@@ -230,6 +242,7 @@ module M
                     ])
 end
 ```
+
 となります。
 
 返されるクラスは [c:Fiddle::CUnion] を継承しています。
@@ -241,6 +254,7 @@ end
 
 ### def create_value(type, val = nil) -> Fiddle::CStruct
 ### def value(type, val = nil) -> Fiddle::CStruct
+
 型が type で要素名が "value" であるような構造体を
 定義([m:Fiddle::Importer#struct])し、
 その構造体のメモリを [m:Fiddle::CStruct#malloc] で確保し、
@@ -267,6 +281,7 @@ p v.value # => 48
 ```
 
 ### def import_symbol(name) -> Fiddle::Pointer
+
 取り込んだライブラリからシンボルをインポートします。
 
 返り値はシンボルがロードされたメモリのアドレスを持つ [c:Fiddle::Pointer] 

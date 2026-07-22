@@ -3,6 +3,7 @@ library:
   - _builtin
 ---
 # class Thread::Mutex < Object
+
 alias Mutex
 
 Mutex(Mutal Exclusion = 相互排他ロック)は共有データを並行アクセスから保護する
@@ -28,6 +29,7 @@ m.synchronize {
 ## Class Methods
 
 ### def new -> Thread::Mutex
+
 新しい mutex を生成して返します。
 
 #@#noexample :Mutex#unlock 等を参照
@@ -36,8 +38,8 @@ m.synchronize {
 
 ## Instance Methods
 
-
 ### def lock -> self
+
 mutex オブジェクトをロックします。一度に一つのス
 レッドだけが mutex をロックできます。既にロックされている mutex
 に対してロックを行おうとしたスレッドは mutex のロックが解放さ
@@ -53,6 +55,7 @@ mutex オブジェクトをロックします。一度に一つのス
 - **SEE** [m:Thread::Mutex#unlock]
 
 ### def locked? -> bool
+
 mutex がロックされている時、真を返します。
 
 ```ruby title="例"
@@ -85,6 +88,7 @@ p result # => "result"
 ```
 
 ### def try_lock -> bool
+
 mutex をロックしようとして、ロックが成功した場合、真を返します。
 ロックできなかった場合にはブロックせず偽を返します。
 
@@ -95,6 +99,7 @@ p m.try_lock # => false
 ```
 
 ### def unlock     -> self
+
 mutex のロックを解放します。mutex のロック待ちになっていたスレッドの実行は再開されます。
 
 - **return** -- self を返します。
@@ -155,12 +160,10 @@ sleep 1
 p th.status # => false
 ```
 
-
 ### def owned? -> bool
 
 self がカレントスレッドによってロックされている場合に true を返します。
 そうでない場合に false を返します。
-
 
 ```ruby title="例"
 m = Thread::Mutex.new

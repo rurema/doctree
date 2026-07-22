@@ -2,7 +2,6 @@
 
 p の実体。obj を見やすく出力します。
 
-
 ### static int rb_io_mode_flags2(int mode)
 
 [man:open(2)] のようなモード指定modeをruby内部のモードフラグに変換します。

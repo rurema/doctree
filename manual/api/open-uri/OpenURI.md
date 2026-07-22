@@ -2,6 +2,7 @@
 library: open-uri
 ---
 # module OpenURI
+
 http/ftp に簡単にアクセスするためのモジュールです。
 
 ## Singleton Methods

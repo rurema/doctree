@@ -5,4 +5,3 @@ library: rinda/rinda
 
 rinda ライブラリの基底例外クラス
 
-

@@ -29,6 +29,7 @@ p err.message  # => "Message"
 p err.receiver # => {:foo=>1}
 p err.key      # => :bar
 ```
+
 ## Instance Methods
 
 ### def receiver -> object

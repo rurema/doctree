@@ -9,10 +9,12 @@ IO のノンブロックモードを扱うライブラリです。
 ## Instance Methods
 
 ### def nonblock? -> bool
+
 self がノンブロックモードならば true を、
 ブロックモードなら false を返します。
 
 ### def nonblock=(bool)
+
 bool が真なら self をノンブロックモードに、偽ならブロックモー
 ドにします。
 

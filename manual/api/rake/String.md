@@ -47,7 +47,6 @@ p "hoge.tar.gz".ext(".bz2")  # => "hoge.tar.bz2"
 - **`%%`**:
   パーセント自身を表します。
 
-
 %d は数値のプレフィクスを取ることができます。
 
 ```ruby title="例"
@@ -77,7 +76,6 @@ p "/path/to/file.TXT".pathmap("%X%{.*,*}x") { |ext| ext.downcase }
 #=> "/path/to/file.txt"
 ```
 
-
 ## Protected Instance Methods
 
 ### def pathmap_explode -> Array
@@ -98,5 +96,4 @@ p "/path/to/file.TXT".pathmap("%X%{.*,*}x") { |ext| ext.downcase }
 与えられたパスを前もって置き換えます。
 
 - **param** `patterns` -- 'pat1,rep1;pat2,rep2;...' のような形式で置換パターンを指定します。
-
 

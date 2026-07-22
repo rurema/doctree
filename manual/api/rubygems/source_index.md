@@ -47,7 +47,6 @@ Gem パッケージのフルネームと それぞれの [c:Gem::Specification] 
 
 自身に登録されているそれぞれの Gem についてブロックを評価します。
 
-
 ### def find_name(gem_name, version_requirement = Gem::Requirement.default) -> Gem::Specification
 
 短い名前で正確にマッチする Gem を返します。

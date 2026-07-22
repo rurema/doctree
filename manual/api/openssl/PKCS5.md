@@ -2,11 +2,12 @@
 library: openssl
 ---
 # module OpenSSL::PKCS5
-OpenSSL PKCS#5 関連の機能を集めたモジュール
 
+OpenSSL PKCS#5 関連の機能を集めたモジュール
 
 ## Module Functions
 ### module_function def pbkdf2_hmac(pass, salt, iter, keylen, digest) -> String
+
 pass と salt から共通鍵暗号の鍵および IV(Initialization Vector)
 を生成します。
 
@@ -26,6 +27,7 @@ pass と salt から共通鍵暗号の鍵および IV(Initialization Vector)
 - **SEE** [m:OpenSSL::PKCS5?.pbkdf2_hmac_sha1]
 
 ### module_function def pbkdf2_hmac_sha1(pass, salt, iter, keylen) -> String
+
 pass と salt から共通鍵暗号の鍵および IV(Initialization Vector)
 を生成します。
 
@@ -46,4 +48,5 @@ iter は鍵生成時のハッシュ関数の繰り返し回数で、大きな値
 - **raise** `OpenSSL::PKCS5::PKCS5Error` -- 鍵、IV の生成に失敗した場合に発生します
 
 # class OpenSSL::PKCS5::PKCS5Error < OpenSSL::OpenSSLError
+
 OpenSSL PKCS#5 関連のエラーが起きた場合に発生する例外

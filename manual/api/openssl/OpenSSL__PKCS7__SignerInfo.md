@@ -4,11 +4,12 @@ alias:
   - OpenSSL::PKCS7::Signer
 ---
 # class OpenSSL::PKCS7::SignerInfo < Object
-署名者の情報を表すクラスです。
 
+署名者の情報を表すクラスです。
 
 ## Class Methods
 ### def new(cert, key, digest) -> OpenSSL::PKCS7::SignerInfo
+
 署名者オブジェクトを証明書、秘密鍵、ダイジェスト方式から生成します。
 
 証明書、秘密鍵、ダイジェスト方式は署名をするために利用します。
@@ -28,11 +29,13 @@ alias:
 署名者を一意に識別します。
 
 ### def serial -> Integer
+
 署名者の証明書の識別番号を返します。
 
 これと [m:OpenSSL::PKCS7::SignerInfo#issuer] で
 署名者を一意に識別します。
 
 ### def signed_time -> Time
+
 その署名者が署名した時刻を返します。
 

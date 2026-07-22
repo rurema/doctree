@@ -16,7 +16,6 @@ type 型のメモリを n 個スタックフレームに割り当てる。
 obj の構造体型 ID を返します。
 [f:SPECIAL_CONST_P](obj) が真のオブジェクトに対して使うと落ちます。
 
-
 ### void Check_Type(VALUE val, int typeflag)
 
 val の構造体型フラグが typeflag でなければ

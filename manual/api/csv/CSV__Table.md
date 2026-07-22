@@ -443,7 +443,6 @@ table = csv.read
 p table.inspect # => "#<CSV::Table mode:col_or_row row_count:2>"
 ```
 
-
 ### def length -> Integer
 ### def size -> Integer
 
@@ -479,6 +478,7 @@ p table.mode  # => :col
 複数の行を追加するためのショートカットです。
 
 以下と同じです。
+
 ```ruby
 rows.each {|row| self << row }
 ```

@@ -28,7 +28,6 @@ category: File
 - **param** `tmpdir` -- nil の場合は [m:Dir.tmpdir] を使用します。
               そうでない場合は、そのディレクトリを使用します。
 
-
 ```ruby title="使用例"
 require 'tmpdir'
 
@@ -89,7 +88,6 @@ p FileTest.directory?(dir) #=> false
                      アプリケーションは一時ディレクトリを他のユーザか
                      ら書き込める権限に変更すべきではありません。
 
-
 ### def tmpdir    -> String
 
 テンポラリファイルを作成するのに使うディレクトリ(テンポラリディレクトリ)の絶対パスを
@@ -107,5 +105,4 @@ p Dir.tmpdir #=> "C:/WINDOWS/temp"
 
 # Linuxの場合 /tmp に加え、環境変数 ENV['TMPDIR'], ENV['TMP'], ENV['TEMP'], ENV['USERPROFILE']を参照します
 ```
-  
 

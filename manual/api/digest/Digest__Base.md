@@ -5,10 +5,10 @@ include:
 ---
 # class Digest::Base < Digest::Class
 
-
 すべての Digest::XXX クラスの基底クラスです。
 
 例えば、MD5 値を得るには以下のようにします。
+
 ```ruby
 require 'digest/md5'
 
@@ -21,6 +21,7 @@ p Digest::MD5.file('ruby-1.8.5.tar.gz').to_s #=> '3fbb02294a8ca33d4684055adba5ed
 ## Class Methods
 
 ### def new            -> Digest::Base
+
 新しいダイジェストオブジェクトを生成します。
 
 ### def digest(str) -> String
@@ -109,7 +110,6 @@ p digest.digest! # => "\324\035\214\331\217\000\262\004\351\200\t\230\354\370B~"
 
 - **SEE** [m:Digest::Base#digest]、[m:Digest::Base#hexdigest!]
 
-
 ### def hexdigest -> String
 ### def to_s -> String
 
@@ -157,7 +157,6 @@ p digest.hexdigest! # => "d41d8cd98f00b204e9800998ecf8427e"
 
 - **SEE** [m:Digest::Base#hexdigest]、[m:Digest::Base#digest!]
 
-
 ### def base64digest(str = nil) -> String
 
 updateや<<によって追加した文字列に対するハッシュ値を、Base64 エンコードした文字列にして返します。
@@ -199,7 +198,6 @@ p digest.hexdigest      # => "d41d8cd98f00b204e9800998ecf8427e"
 ```
 
 - **SEE** [m:Digest::Base#base64digest]
-
 
 ### def update(str) -> self
 ### def <<(str)     -> self
@@ -306,7 +304,6 @@ p ["MD5", "SHA1", "SHA512"].map{|a| Digest(a).new().block_length } # => [64, 128
 require 'digest'
 p ["MD5", "SHA1", "SHA512"].map{|a| Digest(a).new().digest_length } # => [16, 20, 64]
 ```
-
 
 ### def reset -> self
 

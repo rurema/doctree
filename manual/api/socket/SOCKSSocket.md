@@ -18,7 +18,6 @@ host で指定したホストの service で指定したポートと接続した
 - **param** `host` --  ホスト名、またはインターネットアドレスを示す文字列を指定します。
 - **param** `service` -- /etc/services (または NIS) に登録されているサービス名かポート番号です。
 
-
 ## Instance Methods
 
 ### def close -> nil

@@ -21,6 +21,7 @@ parser.handler.root # => #<Psych::Nodes::Stream:0x00000001400000 ... >
 ## Class Methods
 
 ### def new -> Psych::TreeBuilder
+
 TreeBuilder オブジェクトを生成します。
 
 ## Instance Methods

@@ -43,7 +43,6 @@ Gem がインストールされているディレクトリを返します。
 
 - **param** `spec` -- [c:Gem::Specification] を指定します。
 
-
 ### def remove(spec, list)
 #@# -> discard
 
@@ -94,7 +93,6 @@ Gem をアンインストールします。
 
 - **param** `specs` -- アンインストールする Gem のリストを指定します。
              このパラメータは破壊的に変更されます。
-
 
 ## Singleton Methods
 

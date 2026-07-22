@@ -36,7 +36,6 @@ newstring = string.toeuc
 newstring = string.tosjis
 ```
 
-
 # reopen String
 
 ## Instance Methods
@@ -67,6 +66,7 @@ self のエンコーディングを iso-2022-jp に変換した文字列を
 を使ってください。
 
 - **SEE** [m:Kconv?.tojis]
+
 ### def toeuc -> String
 
 self のエンコーディングを EUC-JP に変換した文字列を
@@ -78,6 +78,7 @@ self のエンコーディングを EUC-JP に変換した文字列を
 を使ってください。
 
 - **SEE** [m:Kconv?.toeuc]
+
 ### def tosjis -> String
 
 self のエンコーディングを shift_jis に変換した文字列を
@@ -114,7 +115,6 @@ self のエンコーディングを UTF-16BE に変換した文字列を
 
 - **SEE** [m:Kconv?.toutf16]
 
-
 ### def toutf32 -> String
 
 self のエンコーディングを UTF-32 に変換した文字列を
@@ -128,6 +128,7 @@ self のエンコーディングを UTF-32 に変換した文字列を
 - **SEE** [m:Kconv?.toutf32]
 
 ### def tolocale -> String
+
 self のエンコーディングをロケールエンコーディングに変換した文字列を
 返します。変換元のエンコーディングは文字列の内容から推測します。
 
@@ -139,8 +140,6 @@ self のエンコーディングをロケールエンコーディングに変換
 を使ってください。
 
 - **SEE** [m:Kconv?.tolocale]
-
-
 
 ### def iseuc -> bool
 
@@ -165,14 +164,11 @@ p euc_str.iseuc  # => true
 p sjis_str.iseuc # => false
 ```
 
-
 ### def issjis -> bool
 
 self が Shift_JIS なバイト列として正当であるかどうかを判定します。
 
-
 [m:Kconv?.issjis] と同じです。
-
 
 ### def isutf8 -> bool
 
@@ -225,6 +221,7 @@ Kconv.kconv(str, Kconv::JIS) と同じです。
 - **param** `str` -- 変換元の文字列
 
 - **SEE** [m:Kconv?.kconv], [m:String#tojis]
+
 ### module_function def toeuc(str) -> String
 
 文字列 str のエンコーディングを EUC-JP に変換して返します。
@@ -273,7 +270,6 @@ Kconv の定数です。
 
 - **param** `str` -- エンコーディング判定対象の文字列
 
-
 ### module_function def toutf8(str) -> String
 
 文字列 str のエンコーディングを UTF-8 に変換して返します。
@@ -287,7 +283,6 @@ Kconv.kconv(str, Kconv::UTF8)と同じです。
 
 - **param** `str` -- 変換元の文字列
 - **SEE** [m:String#toutf8]
-
 
 ### module_function def toutf16(str) -> String
 
@@ -303,7 +298,6 @@ Kconv.kconv(str, Kconv::UTF16)と同じです。
 - **param** `str` -- 変換元の文字列
 - **SEE** [m:String#toutf16]
 
-
 ### module_function def toutf32(str) -> String
 
 文字列 str のエンコーディングを UTF-32 に変換して返します。
@@ -317,7 +311,6 @@ Kconv.kconv(str, Kconv::UTF32)と同じです。
 
 - **param** `str` -- 変換元の文字列
 - **SEE** [m:String#toutf32]
-
 
 ### module_function def tolocale(str) -> String
 
@@ -335,28 +328,29 @@ Kconv.kconv(str, Encoding.locale_charmap)と同じです。
 - **param** `str` -- 変換元の文字列
 - **SEE** [m:String#tolocale]
 
-
 ### module_function def iseuc(str) -> bool
+
 文字列 str が EUC-JP なバイト列として正当であるかどうかを判定します。
 
 - **param** `str` -- 判定対象の文字列
 - **SEE** [m:String#iseuc]
 
-
 ### module_function def issjis(str) -> bool
+
 文字列 str が Shift_JIS なバイト列として正当であるかどうかを判定します。
 
 - **param** `str` -- 判定対象の文字列
 - **SEE** [m:String#issjis]
 
-
 ### module_function def isutf8(str) -> bool
+
 文字列 str が UTF-8 なバイト列として正当であるかどうかを判定します。
 
 - **param** `str` -- 判定対象の文字列
 - **SEE** [m:String#isutf8]
 
 ### module_function def isjis(str) -> bool
+
 文字列 str が ISO-2022-JP なバイト列として正当であるかどうかを判定します。
 
 - **param** `str` -- 判定対象の文字列
@@ -429,5 +423,4 @@ UTF16 を表します。
 ### const UTF32 -> Encoding
 
 UTF32 を表します。
-
 

@@ -437,7 +437,6 @@ p ARGF.gets(2)                # => "li"
 p ARGF.gets("e")                # => "line"
 ```
 
-
 ```ruby title="例"
 # $ echo "line1\nline2\nline3\n\nline4\n" > test.txt
 # $ ruby test.rb test.txt
@@ -703,7 +702,6 @@ ARGF から読み込んだ文字列の内部エンコーディングを返しま
 
 [m:ARGF.class#set_encoding] で設定します。
 
-
 ```ruby title="例"
 # $ ruby -Eutf-8 test.rb
 
@@ -840,7 +838,6 @@ C 言語の printf と同じように、format に従い引数を
 
 - **param** `format` -- フォーマット文字列です。
 - **param** `arg` -- フォーマットされる引数です。
-
 
 ### def putc(ch)  -> object
 {: since="1.9.3"}

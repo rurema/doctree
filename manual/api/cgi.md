@@ -91,8 +91,6 @@ value.original_filename               # 元の名前
 value.content_type                    # content_type
 ```
 
-
-
 #### クライアントにクッキーを渡す
 
 ```ruby
@@ -248,8 +246,8 @@ q=hoge&v=foo
 
 なお、Windows 環境の場合、ただ値を入力して Enter を押すだけでは実行されません。キーボードから Ctrl + Z を入力する必要があります。
 
-
 ### HTMLエレメント出力用メソッド
+
 新たな CGI オブジェクトを生成する際、引数として特定の文字列を与えることによって、そのオブジェクトに HTML 生成用のメソッドを追加できます。これらのメソッドを利用することにより、「よりRuby的に」HTML 文書を出力することが可能になります。
 
 ```ruby title="例"
@@ -268,7 +266,6 @@ CGI.new("html4")    # html4.0 (Strict)
 CGI.new("html4Tr")  # html4.0 Transitional
 CGI.new("html4Fr")  # html4.0 Frameset
 ```
-
 
 HTML 生成メソッドの引数としては、基本的に Hash オブジェクトが与えられる（あるいは何も与えられない）べきです。
 ただし以下に列挙されたメソッドでは、各メソッドの引数の形式に従って、 Hash オブジェクト以外のものを渡すこともできます。

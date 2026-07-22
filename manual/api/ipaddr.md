@@ -40,7 +40,6 @@ p ipaddr3   # => #<IPAddr: IPv4:192.168.2.0/255.255.255.0>
 
 - **raise** `ArgumentError` -- family にサポートされていない address family を指定した場合に発生します。
 
-
 ### def new_ntoh(addr) -> IPAddr
 
 ネットワークバイトオーダーのバイト列から IPAddr オブジェクトを生成します。
@@ -57,7 +56,6 @@ p IPAddr.new_ntoh("\300\250\001\001")   # => <IPAddr: IPv4:192.168.1.1/255.255.2
 ネットワークバイトオーダーのバイト列で表現された IP アドレスを人間の読める形式に変換します。
 
 - **param** `addr` -- ネットワークバイトオーダーのバイト列。
-
 
 ## Instance Methods
 
@@ -92,7 +90,6 @@ p IPAddr.new_ntoh("\300\250\001\001")   # => <IPAddr: IPv4:192.168.1.1/255.255.2
 ビットごとの左シフト演算により、新しい IPAddr オブジェクトを生成します。
 
 - **param** `num` -- 左シフトする桁数。
-
 
 ### def ==(ipaddr) -> bool
 
@@ -211,7 +208,6 @@ p IPAddr.new("0000:0000:0000:0000:0000:ffff:c0a8:0001").native
 
 - **raise** `IPAddr::InvalidPrefixError` -- 引数 prefixlen に整数以外のオブジェクトを指定した場合に発生します。
 
-
 ### def reverse -> String
 
 DNS 逆引きのための文字列を返します。
@@ -278,7 +274,6 @@ p IPAddr.new('::1').to_range
 #   #<IPAddr: IPv6:0000:0000:0000:0000:0000:0000:0000:0001/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff>
 ```
 
-
 ### def eql?(other) -> bool
 
 自身が other と等しい場合は真を返します。
@@ -291,7 +286,6 @@ p IPAddr.new('::1').to_range
 ハッシュ値を返します。
 
 - **SEE** [m:Object#hash]
-
 
 ## Protected Instance Methods
 

@@ -43,7 +43,6 @@ p Coverage.result  # => {"foo.rb"=>[1, 1, 10, nil, nil, 1, 1, nil, 0, nil]}
 
 この Coverage.result["foo.rb"] から得られる配列は各行の実行回数になっています。
 
-
 ### カバレッジモードの指定
 
 Ruby 2.5 以降では、Coverage.start の引数で、計測対象の種類を変更するモード機能があります。
@@ -63,7 +62,6 @@ p Coverage.result  # => {"foo.rb"=>{:lines=>[1, 1, 10, nil, nil, 1, 1, nil, 0, n
 
 なお、空行、コメント、end のような行はカバレッジの計測対象外で、nil となっています。
 
-
 #### oneshot_linesカバレッジモード
 
 oneshot_linesカバレッジモードでは、カバレッジの計測中に実行された行を記録します。実行回数は計測せず、実行されたこと行番号を記録します。
@@ -76,7 +74,6 @@ p Coverage.result  # => {"foo.rb"=>{:oneshot_lines=>[1, 2, 3, 6, 7]}}
 ```
 
 oneshot_linesキーの指す値は、実行された行番号を列挙した配列です。
-
 
 #### branchesカバレッジモード
 
@@ -164,7 +161,6 @@ pp Coverage.result
 #    :methods=>{}}}
 ```
 
-
 # class Coverage
 
 カバレッジを測定する機能を提供するクラスです。
@@ -174,6 +170,7 @@ pp Coverage.result
 ## Class Methods
 
 ### def start(option = {})  -> nil
+
 カバレッジの測定を開始します。既に実行されていた場合には何も起こりません。
 ただし、カバレッジ計測中に測定対象を変更しようとした場合は、RuntimeError となります。
 
@@ -211,7 +208,6 @@ load "bool.rb"
 bool(0)
 pp Coverage.result  #=> {"bool.rb"=>{:methods=>{[Object, :bool, 1, 0, 7, 3]=>1}}}
 ```
-
 
 ### def result(stop: true, clear: true)  -> Hash
 
@@ -263,6 +259,7 @@ p Coverage.result(clear: true, stop: false)  #=> {"bool.rb"=>{:oneshot_lines=>[5
 測定記録をクリアしても、記録を開始してから実行されたことまでリセットされているわけではないことに注意して下さい。
 
 - **SEE** [m:Coverage.peek_result]
+
 ### def peek_result -> Hash
 
 測定を止めることなく、測定中のその時の結果をハッシュで返します。

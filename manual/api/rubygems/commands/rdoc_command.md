@@ -16,7 +16,9 @@ Usage: gem rdoc [args] [options]
         --[no-]ri                    RI を含めます
     -v, --version VERSION            指定したバージョンのドキュメントを生成します
 ```
+
 #@include(common_options)
+
 ```text
 Arguments:
   GEMNAME       ドキュメントを生成する Gem パッケージを指定します。省略すると全ての

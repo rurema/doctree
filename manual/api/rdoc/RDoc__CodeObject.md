@@ -149,6 +149,7 @@ self.parent のファイル名を返します。
 self.parent の名前を返します。
 
 - **SEE** [m:RDoc::CodeObject#parent]
+
 ### def documented? -> bool
 
 出力すべきドキュメントがあるかどうかを返します。

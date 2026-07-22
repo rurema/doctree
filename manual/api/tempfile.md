@@ -8,6 +8,7 @@ require:
 テンポラリファイルを操作するためのクラスです
 
 ### 参考
+
 標準添付ライブラリ紹介 【第 15 回】 tmpdir, tempfile  <https://magazine.rubyist.net/articles/0029/0029-BundledLibraries.html>
 
 # class Tempfile < Delegator
@@ -120,8 +121,6 @@ end
 p File.exist?(path) #=> false
 ```
 
-
-
 ## Instance Methods
 
 ### def close(real = false) -> nil
@@ -138,6 +137,7 @@ tf = Tempfile.open("bar")
 tf.close
 p FileTest.exist?(tf.path) # => true
 ```
+
 ### def open -> self
 
 クローズしたテンポラリファイルを再オープンします。
@@ -170,6 +170,7 @@ p tf.path # => nil
 
 ### def length -> Integer
 ### def size -> Integer
+
 テンポラリファイルのサイズを返します。
 
 ```ruby

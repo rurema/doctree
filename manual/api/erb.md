@@ -13,7 +13,6 @@ eRuby スクリプトを処理するクラス。
 
 - <https://magazine.rubyist.net/articles/0017/0017-BundledLibraries.html>
 
-
 ### 使い方
 
 ERB クラスを使うためには require 'erb' する必要があります。
@@ -29,7 +28,6 @@ ERB.new($<.read).run
 trim_mode は整形の挙動を変更するオプションです。次の振舞いを指定できます。
   - 改行の扱い
   - %ではじまる行の扱い (ERB 2.0 から追加されました)
-
 
 trim_mode に指定できる値は次の通りです。
 
@@ -146,7 +144,6 @@ template = ERB.new <<EOF
 EOF
 puts template.result # => __ENCODING__ is Big5
 ```
-
 
 ## Class Methods
 
@@ -380,7 +377,6 @@ ERBでeRubyスクリプトの出力をためていく変数を設定するため
 - **param** `compiler` -- eRubyコンパイラ
 
 - **param** `eoutvar` -- eRubyスクリプトの中で出力をためていく変数
-
 
 ### def filename -> String
 

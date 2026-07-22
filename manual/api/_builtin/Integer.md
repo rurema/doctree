@@ -40,6 +40,7 @@ p Integer.try_convert(1)  # => 1
 p Integer.try_convert(1.25) # => 1
 p Integer.try_convert([]) # => nil
 ```
+
 #@end
 
 ### def sqrt(n) -> Integer
@@ -66,8 +67,8 @@ p Integer.sqrt(10**46)   #=> 100000000000000000000000
 p Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
 ```
 
-
 - **SEE** [m:Math?.sqrt]
+
 ## Instance Methods
 
 ### def chr -> String
@@ -327,6 +328,7 @@ p 10.odd?  # => false
 ```
 
 ### def ord    -> Integer
+
 自身を返します。
 
 ```ruby
@@ -440,7 +442,6 @@ p -10.numerator # => -10
 p 1.to_r      # => (1/1)
 p (1<<64).to_r  # => (18446744073709551616/1)
 ```
-
 
 ### def rationalize      -> Rational
 ### def rationalize(eps) -> Rational
@@ -649,6 +650,7 @@ self を other で割った商を [c:Float] で返します。
 -1234567890987654321.fdiv(13731)      # => -89910996357705.52
 -1234567890987654321.fdiv(13731.24)   # => -89909424858035.72
 ```
+
 - **SEE** [m:Numeric#quo], [m:Numeric#div], [m:Integer#div]
 
 #@since 3.2
@@ -804,6 +806,7 @@ p 1 >= 2  # => false
 ```
 
 ### def ~        -> Integer
+
 ビット演算子。否定を計算します。
 
 ```ruby
@@ -813,6 +816,7 @@ p ~-4 # => 3
 ```
 
 ### def |(other) -> Integer
+
 ビット二項演算子。論理和を計算します。
 
 - **param** `other` -- 数値
@@ -823,6 +827,7 @@ p 2 | 3  # => 3
 ```
 
 ### def &(other) -> Integer
+
 ビット二項演算子。論理積を計算します。
 
 - **param** `other` -- 数値
@@ -833,6 +838,7 @@ p 2 & 3  # => 2
 ```
 
 ### def ^(other) -> Integer
+
 ビット二項演算子。排他的論理和を計算します。
 
 - **param** `other` -- 数値
@@ -900,6 +906,7 @@ p -1 << 1 # => -2
 ```
 
 ### def >>(bits) -> Integer
+
 シフト演算子。bits だけビットを右にシフトします。
 
 右シフトは、符号ビット(最上位ビット(MSB))が保持されます。
@@ -922,6 +929,7 @@ p 0x1_0000_0000.size  # => 8
 ```
 
 - **SEE** [m:Integer#bit_length]
+
 ### def bit_length -> Integer
 
 self を表すのに必要なビット数を返します。
@@ -949,7 +957,9 @@ p (2**12+1).bit_length    # => 13
 ```
 
 - **SEE** [m:Integer#size]
+
 ### def allbits?(mask) -> bool
+
 mask で 1 が立っているビットがすべて self でも 1 なら true を返します。
 
 self & mask == mask と等価です。
@@ -965,7 +975,9 @@ p 0b1000_0010.allbits?(0b1010_1010) # => false
 
 - **SEE** [m:Integer#anybits?]
 - **SEE** [m:Integer#nobits?]
+
 ### def anybits?(mask) -> bool
+
 self & mask のいずれかのビットが 1 なら true を返します。
 
 self & mask != 0 と等価です。
@@ -981,7 +993,9 @@ p 0b1000_0010.anybits?(0b0010_1100) # => false
 
 - **SEE** [m:Integer#allbits?]
 - **SEE** [m:Integer#nobits?]
+
 ### def nobits?(mask) -> bool
+
 self & mask のすべてのビットが 0 なら true を返します。
 
 self & mask == 0 と等価です。

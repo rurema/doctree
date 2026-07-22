@@ -94,6 +94,7 @@ tsort という名前は正確ではありません。なぜなら
 とはいえ strongly_connected_components という正確な名前は長過ぎます。
 
 ### References
+
 R. E. Tarjan,
 Depth First Search and Linear Graph Algorithms,
 SIAM Journal on Computing, Vol. 1, No. 2, pp. 146-160, June 1972.

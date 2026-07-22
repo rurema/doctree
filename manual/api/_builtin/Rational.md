@@ -194,8 +194,6 @@ p Rational(1, 2).abs   # => (1/2)
 p Rational(-1, 2).abs  # => (1/2)
 ```
 
-
-
 ### def ceil(precision = 0) -> Integer | Rational
 
 自身と等しいかより大きな整数のうち最小のものを返します。

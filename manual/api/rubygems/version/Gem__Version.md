@@ -55,7 +55,6 @@ p Gem::Version.correct?(nil)         # => true
 
 - **param** `version` -- バージョンを文字列か数値で指定します。
 
-
 ### def create(input) -> Gem::Version | nil
 
 [c:Gem::Version] のインスタンスを作成するためのファクトリメソッドです。
@@ -71,7 +70,6 @@ ver3 = Gem::Version.create(nil)        # => nil
 - **raise** `ArgumentError` -- input がバージョンとして不正なオブジェクトである場合に発生します。
 
 - **SEE** [m:Gem::Version.correct?]
-
 
 ### def new(version) -> Gem::Version
 
@@ -89,7 +87,6 @@ p Gem::Version.new(' ') #=> #<Gem::Version "0">
 - **param** `version` --
 - **raise** `ArgumentError` -- input がバージョンとして不正なオブジェクトである場合に発生します。
                      これは Gem::Version.correct? により、判定されます。
-
 
 ## Public Instance Methods
 
@@ -157,7 +154,6 @@ p version # => #<Gem::Version "1.2.0a">
 ```
 
 - **param** `array` -- バージョン情報を含む配列を指定します。
-
 
 #@#--- to_yaml_properties -> [String]
 #@#

@@ -618,7 +618,6 @@ p have_framework('Ruby') # => true
 
 - **param** `framework` -- フレームワークの名前を指定します。
 
-
 ### def check_sizeof(type, headers = nil) -> Integer | nil
 ### def check_sizeof(type, headers = nil){ ... } -> Integer | nil
 
@@ -687,7 +686,6 @@ macros:
   #define FOOBART2NUM ULONG2NUM
   #define NUM2FOOBART NUM2ULONG
 ```
-
 
 ### def arg_config(config, default) { ... } -> object | String | true | nil
 
@@ -1106,6 +1104,7 @@ $VERBOSE が真のときは何もしません。
 ## Constants
 
 ### const CONFIG -> Hash
+
 [m:RbConfig::MAKEFILE_CONFIG] と同じです。
 
 #@# --- INSTALL_DIRS
