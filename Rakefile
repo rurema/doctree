@@ -141,7 +141,7 @@ def generate_statichtml(version)
   raise "Failed to generate static html" unless succeeded
 end
 
-task :default => [:check_filename_case_conflicts, :check_indent_in_samplecode, :generate, :check_format]
+task :default => [:check_filename_case_conflicts, :check_indent_in_samplecode, :check_single_space_indent, :generate, :check_format]
 
 namespace :generate do
   ALL_VERSIONS.each do |version|
@@ -262,6 +262,55 @@ task :check_indent_in_samplecode do
       next unless lines[lineno].start_with?(' ')
 
       errors << "#{path}:#{lineno}: \#@samplecode の中に不要なインデントがあります。削除してください"
+    end
+  end
+
+  unless errors.empty?
+    puts errors
+    fail
+  end
+end
+
+# #3246 で dlist（`- **term**:` の説明文）の継続行インデントを CommonMark
+# 準拠の2スペースに統一したが、同一段落内で折り返された物理行（直前行が
+# 2スペースインデントの本文で、その次の行）だけ半角スペース1個のまま
+# 取り残される回帰が #3255 で見つかった。直前行が2スペースの本文なのに
+# 当該行が1スペースなのは、ほぼ確実に同じ段落の折り返しが2スペースに
+# 揃え損ねたものなので、その形だけを対象に検出する（`- item` のような
+# リストマーカー行や、`- **term**:` 直後1行だけの説明のような、1スペース
+# のままでも正しく描画される既存の書き方は対象外）。
+desc 'Check dlist continuation lines use 2-space indent (not 1)'
+task :check_single_space_indent do
+  fence_re = /\A[ \t]*(`{3,}|~{3,})/
+  errors = []
+  Dir.glob('manual/**/*.md').sort.each do |path|
+    lines = File.read(path).lines(chomp: true)
+    in_fence = false
+    fence_char = nil
+    fence_len = 0
+    prev_line = nil
+    prev_was_fence = false
+    lines.each.with_index(1) do |line, lineno|
+      if (m = fence_re.match(line))
+        char, len = m[1][0], m[1].length
+        if !in_fence
+          in_fence = true
+          fence_char = char
+          fence_len = len
+        elsif char == fence_char && len >= fence_len
+          in_fence = false
+        end
+        prev_line = line
+        prev_was_fence = true
+        next
+      end
+      next if in_fence
+
+      if line =~ /\A [^ ]/ && !prev_was_fence && prev_line && prev_line =~ /\A {2}[^ ]/
+        errors << "#{path}:#{lineno}: dlist 継続行のインデントが半角スペース1個です。直前行と同じ2個にしてください"
+      end
+      prev_line = line
+      prev_was_fence = false
     end
   end
 
