@@ -5,9 +5,16 @@
 - **size -> Integer の「-> Integer」って何?**:
   size メソッドは整数を返すという意味です。
 
+#@since 4.0
+- **Kernel?.require の ?. って何?**:
+  「?.」はモジュール関数であることを表します。「Kernel?.require」は
+  「Kernel のモジュール関数である require 」という意味です。
+  Ruby 4.0 より前のバージョンのドキュメントでは「.#」と表示されています。
+#@else
 - **Kernel.#require の .# って何?**:
   「.#」はモジュール関数であることを表します。「Kernel.#require」は
   「Kernel のモジュール関数である require 」という意味です。
+#@end
 
 - **String#size の # って何?**:
   「#」はインスタンスメソッドであることを表します。
