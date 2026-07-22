@@ -326,6 +326,7 @@ p :foo =~ /bar/    # => nil
 - **SEE** [m:String#=~]
 
 ### def match(other) -> MatchData | nil
+{: since="1.9.1"}
 
 正規表現 other とのマッチを行います。
 

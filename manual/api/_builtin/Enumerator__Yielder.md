@@ -9,6 +9,7 @@ library: _builtin
 ## Instance Methods
 
 ### def <<(object) -> ()
+{: since="1.9.1"}
 
 [m:Enumerator.new] で使うメソッドです。
 
@@ -59,6 +60,7 @@ end
 
 
 ### def yield(*object) -> ()
+{: since="1.9.1"}
 
 [m:Enumerator.new] で使うメソッドです。
 

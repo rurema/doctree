@@ -374,6 +374,7 @@ p File.directory?(".") # => true
 
 #@until 3.2
 ### def exists?(file_name)    -> bool
+{: since="1.9.1"}
 
 このメソッドは Ruby 2.1 から deprecated です。[m:Dir.exist?] を使用してください。
 #@end

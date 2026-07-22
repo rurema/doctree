@@ -571,8 +571,11 @@ p [1, 2, 3.0].all?(Integer)      # => false
 - **SEE** [m:Enumerable#all?]
 
 ### def any?               -> bool
+{: since=""}
 ### def any? {|item| ... } -> bool
+{: since=""}
 ### def any?(pattern)      -> bool
+{: since=""}
 
 すべての要素が偽である場合に false を返します。
 真である要素があれば、ただちに true を返します。
@@ -646,9 +649,13 @@ p copy            #=> ["ing"]
 ```
 
 ### def collect  -> Enumerator
+{: since=""}
 ### def map      -> Enumerator
+{: since=""}
 ### def collect {|item| ... } -> [object]
+{: since=""}
 ### def map {|item| ... }     -> [object]
+{: since=""}
 
 各要素に対してブロックを評価した結果を全て含む配列を返します。
 
@@ -737,8 +744,11 @@ p a.concat(a, a)                  #=> [1, 2, 1, 2, 1, 2]
 - **SEE** [m:Array#+]
 
 ### def count                   -> Integer
+{: since=""}
 ### def count(item)             -> Integer
+{: since=""}
 ### def count {|obj| ... }  -> Integer
+{: since=""}
 
 レシーバの要素数を返します。
 
@@ -834,6 +844,7 @@ p a                    #=> [1, 3, 5]  もとの配列から削除されている
 - **SEE** [m:Array#select!], [m:Array#keep_if]
 
 ### def drop(n)               -> Array
+{: since=""}
 
 配列の先頭の n 要素を捨てて、
 残りの要素を配列として返します。
@@ -852,7 +863,9 @@ p a                   # => [1, 2, 3, 4, 5, 0]
 - **SEE** [m:Enumerable#drop], [m:Array#drop_while], [m:Array#shift]
 
 ### def drop_while                    -> Enumerator
+{: since=""}
 ### def drop_while {|element| ... }   -> Array
+{: since=""}
 
 ブロックを評価して最初に偽となった要素の手前の要素まで捨て、
 残りの要素を配列として返します。
@@ -1547,7 +1560,9 @@ p a.rassoc(2)    # => [25, 2]
 - **SEE** [m:Array#assoc]
 
 ### def reject               -> Enumerator
+{: since=""}
 ### def reject {|item| ... } -> [object]
+{: since=""}
 
 各要素に対してブロックを評価し、
 その値が偽であった要素を集めた新しい配列を返します。
@@ -1796,6 +1811,7 @@ p fruits # => ["fig", "pear", "apple"]
 - **SEE** [m:Enumerable#sort_by]
 
 ### def take(n)               -> Array
+{: since=""}
 
 配列の先頭から n 要素を配列として返します。
 このメソッドは自身を破壊的に変更しません。
@@ -1810,7 +1826,9 @@ p a.take(3)           # => [1, 2, 3]
 - **SEE** [m:Enumerable#take]
 
 ### def take_while                    -> Enumerator
+{: since=""}
 ### def take_while {|element| ... }   -> Array
+{: since=""}
 
 配列の要素を順に偽になるまでブロックで評価します。
 最初に偽になった要素の手前の要素までを配列として返します。
@@ -2355,8 +2373,10 @@ p a # => ["a", "b", "c", "d", "e", "f"]
 - **SEE** [m:Array#select!], [m:Array#delete_if]
 
 ### def select    -> Enumerator
+{: since=""}
 ### def filter    -> Enumerator
 ### def select {|item| ... }   -> [object]
+{: since=""}
 ### def filter {|item| ... }   -> [object]
 
 各要素に対してブロックを評価した値が真であった要素を全て含む配列を
