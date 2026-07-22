@@ -44,6 +44,9 @@ p get_binding("bye").eval("str + ' Fred'")   #=> "bye Fred"
 - **param** `symbol` -- ローカル変数名を [c:Symbol] オブジェクトで指定します。
 
 - **raise** `NameError` -- 引数 symbol で指定したローカル変数が未定義の場合に発生します。
+#@since 4.0
+- **raise** `NameError` -- 番号指定パラメータ（_1 など）を指定した場合に発生します。
+#@end
 
 ```ruby title="例"
 def foo
@@ -68,6 +71,9 @@ binding.eval("#{symbol}")
 - **param** `symbol` -- ローカル変数名を [c:Symbol] オブジェクトで指定します。
 
 - **param** `obj` -- 引数 symbol で指定したローカル変数に設定するオブジェクトを指定します。
+#@since 4.0
+- **raise** `NameError` -- 番号指定パラメータ（_1 など）を symbol に指定した場合に発生します。
+#@end
 
 ```ruby title="例"
 def foo
@@ -98,6 +104,9 @@ binding.eval("#{symbol} = #{obj}")
 そうでない場合に false を返します。
 
 - **param** `symbol` -- ローカル変数名を [c:Symbol] オブジェクトで指定します。
+#@since 4.0
+- **raise** `NameError` -- 番号指定パラメータ（_1 など）を指定した場合に発生します。
+#@end
 
 ```ruby title="例"
 def foo
@@ -127,6 +136,20 @@ def foo
   end
 end
 ```
+
+#@since 4.0
+番号指定パラメータ（_1 など）は 4.0 からローカル変数として扱われなくなり、
+返り値に含まれなくなりました。
+
+```ruby
+[1].each do
+  p _1                      # => 1
+  p binding.local_variables # => []（Ruby 3.4 以前は [:_1]）
+end
+```
+
+番号指定パラメータ自体は従来どおり参照できます（[ref:d:spec/call#numbered_parameters]）。
+#@end
 
 このメソッドは以下のコードと同様の動作をします。
 
