@@ -3,29 +3,29 @@
 Rubyインタプリタは以下の環境変数を参照します。
 
 - **`RUBYOPT`**:
- Rubyインタプリタにデフォルトで渡すオプションを指定します。
+  Rubyインタプリタにデフォルトで渡すオプションを指定します。
 
- 指定できないオプションを指定した場合、例外が発生します。
+  指定できないオプションを指定した場合、例外が発生します。
 
   ```console
   $ RUBYOPT=-y ruby -e ""
   ruby: invalid switch in RUBYOPT: -y (RuntimeError)
   ```
 
- sh系
+  sh系
 
   ```console
         RUBYOPT='-Ke -rkconv'
         export RUBYOPT
   ```
 
- csh系
+  csh系
 
   ```console
         setenv RUBYOPT '-Ke -rkconv'
   ```
 
- MS-DOS系
+  MS-DOS系
 
   ```console
         set RUBYOPT=-Ke -rkconv

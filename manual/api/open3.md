@@ -258,11 +258,11 @@ p s #=> #<Process::Status: pid 20574 exit 0>
             cmdname にはコマンド名を表す [c:String] を指定します。
             1、2、3 は shell 経由で実行されます。
 
- 1. commandline
- 2. [commandline, options]
- 3. [env, commandline, options]
- 4. [env, cmdname, arg1, arg2, ..., options]
- 5. [env, [cmdname, argv0], arg1, ..., options]
+1. commandline
+2. [commandline, options]
+3. [env, commandline, options]
+4. [env, cmdname, arg1, arg2, ..., options]
+5. [env, [cmdname, argv0], arg1, ..., options]
 
 - **return** -- ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は最初に実行するコマンドの標準入力
@@ -303,11 +303,11 @@ Open3.pipeline_rw("sort", "cat -n") {|stdin, stdout, wait_thrs|
             cmdname にはコマンド名を表す [c:String] を指定します。
             1、2、3 は shell 経由で実行されます。
 
- 1. commandline
- 2. [commandline, options]
- 3. [env, commandline, options]
- 4. [env, cmdname, arg1, arg2, ..., options]
- 5. [env, [cmdname, argv0], arg1, ..., options]
+1. commandline
+2. [commandline, options]
+3. [env, commandline, options]
+4. [env, cmdname, arg1, arg2, ..., options]
+5. [env, [cmdname, argv0], arg1, ..., options]
 
 - **return** -- ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は最後に実行するコマンドの標準出力、
@@ -340,11 +340,11 @@ Open3.pipeline_r("yes", "head -10") {|r, ts|
             cmdname にはコマンド名を表す [c:String] を指定します。
             1、2、3 は shell 経由で実行されます。
 
- 1. commandline
- 2. [commandline, options]
- 3. [env, commandline, options]
- 4. [env, cmdname, arg1, arg2, ..., options]
- 5. [env, [cmdname, argv0], arg1, ..., options]
+1. commandline
+2. [commandline, options]
+3. [env, commandline, options]
+4. [env, cmdname, arg1, arg2, ..., options]
+5. [env, [cmdname, argv0], arg1, ..., options]
 
 - **return** -- ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は最初に実行するコマンドの標準入力、
@@ -374,11 +374,11 @@ Open3.pipeline_w("bzip2 -c", :out=>"/tmp/hello.bz2") {|w, ts|
             cmdname にはコマンド名を表す [c:String] を指定します。
             1、2、3 は shell 経由で実行されます。
 
- 1. commandline
- 2. [commandline, options]
- 3. [env, commandline, options]
- 4. [env, cmdname, arg1, arg2, ..., options]
- 5. [env, [cmdname, argv0], arg1, ..., options]
+1. commandline
+2. [commandline, options]
+3. [env, commandline, options]
+4. [env, cmdname, arg1, arg2, ..., options]
+5. [env, [cmdname, argv0], arg1, ..., options]
 
 - **return** -- ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は実行したプロセスを待つためのスレッ
@@ -411,11 +411,11 @@ Open3.pipeline_start("xeyes") {|ts|
             cmdname にはコマンド名を表す [c:String] を指定します。
             1、2、3 は shell 経由で実行されます。
 
- 1. commandline
- 2. [commandline, options]
- 3. [env, commandline, options]
- 4. [env, cmdname, arg1, arg2, ..., options]
- 5. [env, [cmdname, argv0], arg1, ..., options]
+1. commandline
+2. [commandline, options]
+3. [env, commandline, options]
+4. [env, cmdname, arg1, arg2, ..., options]
+5. [env, [cmdname, argv0], arg1, ..., options]
 
 - **return** -- 実行したコマンドの終了ステータスを配列で返します。
 

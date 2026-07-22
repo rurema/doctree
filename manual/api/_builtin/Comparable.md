@@ -8,10 +8,10 @@ library: _builtin
 る必要があります。
 
 self <=> other は
- - self が other より大きいなら正の整数
- - self と other が等しいなら 0
- - self が other より小さいなら負の整数
- - self と other が比較できない場合は nil
+- self が other より大きいなら正の整数
+- self と other が等しいなら 0
+- self が other より小さいなら負の整数
+- self と other が比較できない場合は nil
 をそれぞれ返すことが期待されています。
 
 他の比較演算子は、 <=> 演算子を利用して定義されます。

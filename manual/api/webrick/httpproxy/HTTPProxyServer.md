@@ -5,7 +5,7 @@ library: webrick/httpproxy
 
 プロクシの機能を提供するクラスです。CONNECT メソッドにも対応しています。
 
- - <https://magazine.rubyist.net/articles/0002/0002-WEBrickProxy.html>
+- <https://magazine.rubyist.net/articles/0002/0002-WEBrickProxy.html>
 
 以下は完全に動作するプロクシサーバの例です。
 

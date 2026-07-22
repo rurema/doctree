@@ -72,12 +72,12 @@ URI 文字列をデコードした文字列を返します。
 
 ここでチェックしている環境変数は以下の通りです。
 
- - http_proxy
- - http_proxy_user
- - http_proxy_pass
- - HTTP_PROXY
- - HTTP_PROXY_USER
- - HTTP_PROXY_PASS
+- http_proxy
+- http_proxy_user
+- http_proxy_pass
+- HTTP_PROXY
+- HTTP_PROXY_USER
+- HTTP_PROXY_PASS
 
 ### def normalize_uri(uri) -> String
 

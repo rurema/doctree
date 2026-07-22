@@ -10,12 +10,12 @@ require:
 
 #### 目次
 
- - 概要
- - 解説
- - コマンドラインオプション
- - OpenSSL リファレンス
- - Bugs / TODO
- - 作者について
+- 概要
+- 解説
+- コマンドラインオプション
+- OpenSSL リファレンス
+- Bugs / TODO
+- 作者について
 
 #### 概要
 
@@ -245,11 +245,11 @@ s.cert_chain  = ['/home/alf/doc/seattlerb-public_cert.pem',
 Rails とその依存している Gem をインストールしている最中でなければ)。
 ここでは、学んだことと興味深いことをおさらいしておきましょう。
 
- - 署名と証明書を用いて Gem をビルドすること
- - 署名をサポートするように既に存在する Gem を修正すること
- - セキュリティポリシーを調整すること
- - 信頼済みの証明書のリストを編集すること
- - 証明書に署名すること
+- 署名と証明書を用いて Gem をビルドすること
+- 署名をサポートするように既に存在する Gem を修正すること
+- セキュリティポリシーを調整すること
+- 信頼済みの証明書のリストを編集すること
+- 証明書に署名すること
 
 #### コマンドラインオプション
 
@@ -459,11 +459,11 @@ Note: しばらくの間 OPT[:trust_dir] に保存されますが、今後変更
 
 使用可能なポリシーの一覧を返します。
 
- - [m:Gem::Security::NoSecurity]
- - [m:Gem::Security::AlmostNoSecurity]
- - [m:Gem::Security::LowSecurity]
- - [m:Gem::Security::MediumSecurity]
- - [m:Gem::Security::HighSecurity]
+- [m:Gem::Security::NoSecurity]
+- [m:Gem::Security::AlmostNoSecurity]
+- [m:Gem::Security::LowSecurity]
+- [m:Gem::Security::MediumSecurity]
+- [m:Gem::Security::HighSecurity]
 
 # class Gem::Security::Policy
 

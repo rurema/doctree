@@ -143,13 +143,13 @@ exited? が真の場合プロセスが返した終了ステータスの整数を
 プロセスの状態を以下のフォーマットで返します。
 
 - **正常終了のとき**:
- #<Process::Status: pid=18262,exited(nnn)>
+  #<Process::Status: pid=18262,exited(nnn)>
 - **シグナルによる停止のとき**:
- #<Process::Status: pid=18262,stopped(SIGxxx=nnn)>
+  #<Process::Status: pid=18262,stopped(SIGxxx=nnn)>
 - **シグナルによる終了のとき**:
- #<Process::Status: pid=18262,signaled(SIGxxx=nnn)>
+  #<Process::Status: pid=18262,signaled(SIGxxx=nnn)>
 - **コアダンプしたとき(このステータスの表示はシステムに依存します)**:
- #<Process::Status: pid=18262,coredumped>
+  #<Process::Status: pid=18262,coredumped>
 
 ### def stopped?    -> bool
 

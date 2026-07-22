@@ -10,7 +10,7 @@ WEBrick::HTTPServer のアクセスログの形式を処理するために内部
 アクセスログの形式は Apache の mod_log_config の形式に準拠しますが、HTTP ステータスコードを
 指定することは出来ません。最後のステータスを表す %>s は %s と同じように解釈されます。
 
- - <http://httpd.apache.org/docs/mod/mod_log_config.html#formats>
+- <http://httpd.apache.org/docs/mod/mod_log_config.html#formats>
 
 ```text
 "%h %l %u %t \"%r\" %s %b"

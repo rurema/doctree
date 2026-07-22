@@ -22,16 +22,16 @@ obj を指定された出力先に再帰的に出力します。
 例外 [c:TypeError] が発生します。
 ファイルに書き出せないオブジェクトは以下の通りです。
 
- - 名前のついてない [c:Class]/[c:Module] オブジェクト。(この場
+- 名前のついてない [c:Class]/[c:Module] オブジェクト。(この場
    合は、例外 [c:ArgumentError] が発生します。無名クラスについて
    は、[m:Module.new] を参照。)
- - システムがオブジェクトの状態を保持するもの。具体的には以下のイン
+- システムがオブジェクトの状態を保持するもの。具体的には以下のイン
    スタンス。[c:Dir], [c:File::Stat], [c:IO] とそのサブクラス
    [c:File], [c:Socket] など。
- - [c:MatchData], [c:Data], [c:Method], [c:UnboundMethod],
+- [c:MatchData], [c:Data], [c:Method], [c:UnboundMethod],
    [c:Proc], [c:Thread], [c:ThreadGroup], [c:Continuation]
    のインスタンス。
- - 特異メソッドを定義したオブジェクト
+- 特異メソッドを定義したオブジェクト
 
 また、これらのオブジェクトを間接的に指すオブジェクトなども書き出せ
 ません。例えば、デフォルト値を求めるブロックを持った [c:Hash] は

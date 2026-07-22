@@ -128,7 +128,7 @@ p hypot(3, 4)  # => 5.0
 
 有効にした拡張の有効範囲については以下を参照してください。
 
- - <https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope>
+- <https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html#label-Scope>
 
 - **param** `module` -- 有効にするモジュールを指定します。
 

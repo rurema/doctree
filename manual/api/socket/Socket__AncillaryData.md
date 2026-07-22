@@ -21,25 +21,25 @@ since: "1.9.2"
 
 family はソケットファミリーを指定します。
 整数、文字列、シンボルを渡します。
- - Socket::AF_INET, "AF_INET", "INET", :AF_INET, :INET
- - Socket::AF_UNIX, "AF_UNIX", "UNIX", :AF_UNIX, :UNIX
- - など
+- Socket::AF_INET, "AF_INET", "INET", :AF_INET, :INET
+- Socket::AF_UNIX, "AF_UNIX", "UNIX", :AF_UNIX, :UNIX
+- など
 
 cmsg_level にはメッセージの元となるプロトコルを指定します。
 整数、文字列、シンボルを渡します。
- - Socket::SOL_SOCKET, "SOL_SOCKET", "SOCKET", :SOL_SOCKET and :SOCKET
- - Socket::IPPROTO_IP, "IP" and :IP
- - Socket::IPPROTO_IPV6, "IPV6" and :IPV6
- - Socket::IPPROTO_TCP, "TCP" and :TCP
- - など
+- Socket::SOL_SOCKET, "SOL_SOCKET", "SOCKET", :SOL_SOCKET and :SOCKET
+- Socket::IPPROTO_IP, "IP" and :IP
+- Socket::IPPROTO_IPV6, "IPV6" and :IPV6
+- Socket::IPPROTO_TCP, "TCP" and :TCP
+- など
 
 cmsg_type は補助データの種類を指定します。
 cmsg_level で指定したプロトコルによってこの部分の解釈は異なります。
 整数、文字列、シンボルを渡します。
- - Socket::SCM_RIGHTS, "SCM_RIGHTS", "RIGHTS", :SCM_RIGHTS, :RIGHTS for SOL_SOCKET
- - Socket::IP_RECVTTL, "RECVTTL" and :RECVTTL for IPPROTO_IP
- - Socket::IPV6_PKTINFO, "PKTINFO" and :PKTINFO for IPPROTO_IPV6
- - など
+- Socket::SCM_RIGHTS, "SCM_RIGHTS", "RIGHTS", :SCM_RIGHTS, :RIGHTS for SOL_SOCKET
+- Socket::IP_RECVTTL, "RECVTTL" and :RECVTTL for IPPROTO_IP
+- Socket::IPV6_PKTINFO, "PKTINFO" and :PKTINFO for IPPROTO_IPV6
+- など
 
 cmsg_data には補助データの内容となる文字列を渡します
 

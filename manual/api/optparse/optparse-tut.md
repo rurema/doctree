@@ -2,19 +2,19 @@
 
 optparse を使う場合、基本的には
 
- 1. OptionParser オブジェクト opt を生成する。
- 2. オプションを取り扱うブロックを opt に登録する。
- 3. opt.parse(ARGV) でコマンドラインを実際に parse する。
+1. OptionParser オブジェクト opt を生成する。
+2. オプションを取り扱うブロックを opt に登録する。
+3. opt.parse(ARGV) でコマンドラインを実際に parse する。
 
 というような流れになります。
 
- - [ref:optiondef]
- - [ref:optionarg]
- - [ref:longoption]
- - [ref:help]
- - [ref:subcmd]
- - [ref:argv]
- - [ref:hyphen_start_file]
+- [ref:optiondef]
+- [ref:optionarg]
+- [ref:longoption]
+- [ref:help]
+- [ref:subcmd]
+- [ref:argv]
+- [ref:hyphen_start_file]
 
 #### オプションの定義 {#optiondef}
 

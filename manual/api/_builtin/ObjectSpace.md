@@ -114,11 +114,11 @@ GC.start
 
 次のクラスのオブジェクトについては繰り返しません
 
- - [c:Fixnum]
- - [c:Symbol]
- - [c:TrueClass]
- - [c:FalseClass]
- - [c:NilClass]
+- [c:Fixnum]
+- [c:Symbol]
+- [c:TrueClass]
+- [c:FalseClass]
+- [c:NilClass]
 
 とくに、klass に [c:Fixnum] や [c:Symbol] などのクラスを指定した場合は、
 何も繰り返さないことになります。

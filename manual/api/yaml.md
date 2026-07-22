@@ -88,7 +88,7 @@ end
 
 [lib:yaml] ライブラリでは、以下のライブラリをバックエンドとして使用します。
 
- - [lib:psych] ライブラリ: YAML バージョン 1.1 を扱う事ができます。
+- [lib:psych] ライブラリ: YAML バージョン 1.1 を扱う事ができます。
 
 
 ### タグの指定
@@ -107,18 +107,18 @@ EOS
 
 [lib:yaml] では、Ruby 向けに以下のローカルタグを扱えます。
 
- - !ruby/array: [c:Array] オブジェクト
- - !ruby/class: [c:Class] オブジェクト
- - !ruby/hash:  [c:Hash] オブジェクト
- - !ruby/module:  [c:Module] オブジェクト
- - !ruby/regexp:  [c:Regexp] オブジェクト
- - !ruby/range: [c:Range] オブジェクト
- - !ruby/string: [c:String] オブジェクト
- - !ruby/struct: [c:Struct] オブジェクト
- - !ruby/sym(もしくは !ruby/symbol): [c:Symbol] オブジェクト
- - !ruby/encoding: [c:Encoding] オブジェクト
- - !ruby/exception: 例外オブジェクト
- - !ruby/object:<クラス名>: 上記以外のオブジェクト
+- !ruby/array: [c:Array] オブジェクト
+- !ruby/class: [c:Class] オブジェクト
+- !ruby/hash:  [c:Hash] オブジェクト
+- !ruby/module:  [c:Module] オブジェクト
+- !ruby/regexp:  [c:Regexp] オブジェクト
+- !ruby/range: [c:Range] オブジェクト
+- !ruby/string: [c:String] オブジェクト
+- !ruby/struct: [c:Struct] オブジェクト
+- !ruby/sym(もしくは !ruby/symbol): [c:Symbol] オブジェクト
+- !ruby/encoding: [c:Encoding] オブジェクト
+- !ruby/exception: 例外オブジェクト
+- !ruby/object:<クラス名>: 上記以外のオブジェクト
 
 ```ruby title="例"
 require 'yaml'
@@ -193,27 +193,27 @@ EOS
 ります。標準添付ライブラリ以外で yaml を扱うライブラリを使用する場合な
 どに注意してください。
 
- - ":foo" のような文字列はそのまま [c:Symbol] として扱える
- - "y" や "n" は真偽値として扱われない
+- ":foo" のような文字列はそのまま [c:Symbol] として扱える
+- "y" や "n" は真偽値として扱われない
 
 ### 参考
 
 YAML Specification
 
- - <https://yaml.org/spec/>
- - <https://yaml.org/type/>
+- <https://yaml.org/spec/>
+- <https://yaml.org/type/>
 
 Rubyist Magazine: <https://magazine.rubyist.net/>
 
- - プログラマーのための YAML 入門 (初級編): <https://magazine.rubyist.net/articles/0009/0009-YAML.html>
- - プログラマーのための YAML 入門 (中級編): <https://magazine.rubyist.net/articles/0010/0010-YAML.html>
- - プログラマーのための YAML 入門 (実践編): <https://magazine.rubyist.net/articles/0011/0011-YAML.html>
- - プログラマーのための YAML 入門 (検証編): <https://magazine.rubyist.net/articles/0012/0012-YAML.html>
- - プログラマーのための YAML 入門 (探索編): <https://magazine.rubyist.net/articles/0013/0013-YAML.html>
+- プログラマーのための YAML 入門 (初級編): <https://magazine.rubyist.net/articles/0009/0009-YAML.html>
+- プログラマーのための YAML 入門 (中級編): <https://magazine.rubyist.net/articles/0010/0010-YAML.html>
+- プログラマーのための YAML 入門 (実践編): <https://magazine.rubyist.net/articles/0011/0011-YAML.html>
+- プログラマーのための YAML 入門 (検証編): <https://magazine.rubyist.net/articles/0012/0012-YAML.html>
+- プログラマーのための YAML 入門 (探索編): <https://magazine.rubyist.net/articles/0013/0013-YAML.html>
 
 その他
 
- - Ruby with YAML: <http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html>
+- Ruby with YAML: <http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html>
 
 # module YAML
 

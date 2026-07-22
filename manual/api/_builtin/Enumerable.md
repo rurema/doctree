@@ -1485,15 +1485,15 @@ p lines.slice_when {|l1, l2| /\A\s*\z/ =~ l1 && /\S/ =~ l2 }.to_a
 この Enumerator は、以下のメソッドが遅延評価を行う (つまり、配列ではな
 くEnumeratorを返す) ように再定義されています。
 
- - map/collect
- - flat_map/collect_concat
- - select/find_all
- - reject
- - grep
- - take, take_while
- - drop, drop_while
- - zip (※一貫性のため、ブロックを渡さないケースのみlazy)
- - cycle (※一貫性のため、ブロックを渡さないケースのみlazy)
+- map/collect
+- flat_map/collect_concat
+- select/find_all
+- reject
+- grep
+- take, take_while
+- drop, drop_while
+- zip (※一貫性のため、ブロックを渡さないケースのみlazy)
+- cycle (※一貫性のため、ブロックを渡さないケースのみlazy)
 
 以下はピタゴラス数 (a**2 + b**2 = c**2 を満たす自然数 a, b, c の組) を
 列挙するプログラムです。

@@ -24,11 +24,11 @@
 
 返り値の型の仕様は以下のようになっています。
 
- - 真偽値を返す場合は「bool」です
- - 返り値が不定の場合は、「-> ()」です
- - 任意の型を返す場合は 「object」 です
- - 配列を返す場合は 「[クラス名]」 か 「Array」 です
- - 代入式の場合には省略されます
+- 真偽値を返す場合は「bool」です
+- 返り値が不定の場合は、「-> ()」です
+- 任意の型を返す場合は 「object」 です
+- 配列を返す場合は 「[クラス名]」 か 「Array」 です
+- 代入式の場合には省略されます
 
 複数の型の値を返すときは "|" を使って記述されています。
 
@@ -75,7 +75,7 @@ end
 各ページの上部にある検索ボックスでは、表示しているバージョンのリファレンス内を検索できます。
 
 全バージョンを横断して検索したい場合は
- - <https://docs.ruby-lang.org/ja/search/>
+- <https://docs.ruby-lang.org/ja/search/>
 の検索ページを利用してください。
 
 ### 参考
@@ -87,13 +87,13 @@ end
 ### お問い合わせ
 
 間違いを見付けた場合は
- - <https://github.com/rurema>
+- <https://github.com/rurema>
 へお願いします。
 
 それ以外の意見なども
- - <https://github.com/rurema>
+- <https://github.com/rurema>
 へお願いします。
 
 GitHub の使い方は
- - <https://github.com/rurema/doctree/wiki/HowToReport>
+- <https://github.com/rurema/doctree/wiki/HowToReport>
 を参照してください。

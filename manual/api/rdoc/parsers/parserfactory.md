@@ -15,16 +15,16 @@ rdoc で解析できるファイルの種類を追加するためのサブライ
 以下のメソッドを定義したクラスを作成する事で、新しいパーサクラスを作成
 する事ができます。
 
- - #initialize(top_level, file_name, body, options, stats)
- - #scan
+- #initialize(top_level, file_name, body, options, stats)
+- #scan
 
 initialize メソッドは以下の引数を受け取ります。
 
- - top_level [c:RDoc::TopLevel] オブジェクトを指定します。
- - file_name: file_name ファイル名を文字列で指定します。
- - body: ソースコードの内容を文字列で指定します。
- - options: [c:RDoc::Options] オブジェクトを指定します。
- - stats: [c:RDoc::Stats] オブジェクトを指定します。
+- top_level [c:RDoc::TopLevel] オブジェクトを指定します。
+- file_name: file_name ファイル名を文字列で指定します。
+- body: ソースコードの内容を文字列で指定します。
+- options: [c:RDoc::Options] オブジェクトを指定します。
+- stats: [c:RDoc::Stats] オブジェクトを指定します。
 
 scan メソッドは引数を受け取りません。処理の後は必ず
 [c:RDoc::TopLevel] オブジェクトを返す必要があります。

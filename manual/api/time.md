@@ -7,10 +7,10 @@ category: Date/Time
 逆に [c:Time] オブジェクトを RFC などで定められた文字列に
 変換する機能を提供します。
 
- - date-time は [RFC:2822] で定義されています。
- - HTTP-date は [RFC:2616] で定義されています。
- - dateTime は XML Schema Part 2: Datatypes (ISO 8601) で定義されています。
- - 文字列から [c:Time] オブジェクトへの変換では [m:Date._parse] により様々な形式を扱えます。
+- date-time は [RFC:2822] で定義されています。
+- HTTP-date は [RFC:2616] で定義されています。
+- dateTime は XML Schema Part 2: Datatypes (ISO 8601) で定義されています。
+- 文字列から [c:Time] オブジェクトへの変換では [m:Date._parse] により様々な形式を扱えます。
 
 # reopen Time
 

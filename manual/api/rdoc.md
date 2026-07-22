@@ -17,11 +17,11 @@ RDoc は Ruby のドキュメント生成を行うためのライブラリです
 
 ### ロードマップ
 
- - RDoc で Ruby のソースファイルに対するドキュメントを生成したければ、まずこの文章を読みましょう。
- - Cで書かれた拡張ライブラリを含めたければ、[lib:rdoc/parser/c] を参照してください。
- - コメント部で使えるマークアップについて知りたければ、[lib:rdoc/markup] を参照してください。
- - RDoc をライブラリとして使いたければ、[c:RDoc::RDoc] を参照してください。
- - テキスト部を HTML に変換する部分をライブラリとして使いたければ、[c:RDoc::Markup] を参照してください。
+- RDoc で Ruby のソースファイルに対するドキュメントを生成したければ、まずこの文章を読みましょう。
+- Cで書かれた拡張ライブラリを含めたければ、[lib:rdoc/parser/c] を参照してください。
+- コメント部で使えるマークアップについて知りたければ、[lib:rdoc/markup] を参照してください。
+- RDoc をライブラリとして使いたければ、[c:RDoc::RDoc] を参照してください。
+- テキスト部を HTML に変換する部分をライブラリとして使いたければ、[c:RDoc::Markup] を参照してください。
 #@# * 独自の HTML テンプレートで出力したければ、[[c:RDoc::Page]] を見てください。
 
 ### 概要
@@ -336,15 +336,15 @@ rdoc --markup tomdoc --write-options
 ただし、以下のオプションはユーザの指定するオプションや [c:RDoc] の通
 常の動作と干渉するため、保存する事ができません。
 
- - --coverage-report
- - --dry-run
- - --encoding
- - --force-update
- - --format
- - --pipe
- - --quiet
- - --template
- - --verbose
+- --coverage-report
+- --dry-run
+- --encoding
+- --force-update
+- --format
+- --pipe
+- --quiet
+- --template
+- --verbose
 
 ### Markup {#markup}
 
@@ -455,9 +455,9 @@ cat::   small domestic animal
 
 文中で以下のようなマークアップもできます。
 
- - イタリック体 italic: _word_ もしくは <em>text</em>
- - ボールド体 bold:  *word* もしくは <b>text</b>
- - タイプライター体 typewriter:  +word+ もしくは <tt>text</tt>
+- イタリック体 italic: _word_ もしくは <em>text</em>
+- ボールド体 bold:  *word* もしくは <b>text</b>
+- タイプライター体 typewriter:  +word+ もしくは <tt>text</tt>
 
 それぞれ2つ形式がありますが、word の方は単語を囲うことしかできません。
 単語というのは、アルファベットの大文字および小文字とアンダースコアーの
@@ -563,13 +563,13 @@ fred() { |index, position| ... }
 
 文章内の文字列は以下のように置換されます。
 
- - 全角ダッシュ:  ---
- - 半角ダッシュ:  --
- - 省略符号: ...
- - 引用符: 'text' もしくは `text` もしくは &quot;text&quot;
- - 二重引用符: "text" もしくは \`\`text''
- - 著作権表示: (c)
- - 登録商標: (r)
+- 全角ダッシュ:  ---
+- 半角ダッシュ:  --
+- 省略符号: ...
+- 引用符: 'text' もしくは `text` もしくは &quot;text&quot;
+- 二重引用符: "text" もしくは \`\`text''
+- 著作権表示: (c)
+- 登録商標: (r)
 
 #### 命令
 
