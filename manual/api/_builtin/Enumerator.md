@@ -84,7 +84,11 @@ fib = Enumerator.new { |y|
 p fib.take(10) #=> [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 ```
 
+#@since 4.0
+### def produce(initial = nil, size: nil) { |prev| ... } -> Enumerator
+#@else
 ### def produce(initial = nil) { |prev| ... } -> Enumerator
+#@end
 
 与えられたブロックを呼び出し続ける、停止しない Enumerator を返します。
 ブロックの戻り値が、次にブロックを呼び出す時に引数として渡されます。
@@ -95,6 +99,12 @@ initial 引数が渡された場合、最初にブロックを呼び出す時に
 ブロックが例外 [c:StopIteration]を投げた場合、繰り返しが終了します。
 
 - **param** `initial` -- ブロックに最初に渡される値です。任意のオブジェクトを渡せます。
+#@since 4.0
+- **param** `size` -- 生成する Enumerator の要素数（[m:Enumerator#size] で取得できる値）を
+             指定します。整数、[m:Float::INFINITY]、[c:Proc] などの呼び出し可能な
+             オブジェクト、または要素数が不明であることを表す nil を指定できます。
+             省略した場合は [m:Float::INFINITY] になります。
+#@end
 
 ```ruby title="例"
 # 1, 2, 3, 4, ... と続く Enumerator
@@ -125,6 +135,29 @@ PATTERN = %r{\d+|[-/+*]}
 p Enumerator.produce { scanner.scan(PATTERN) }.slice_after { scanner.eos? }.first
 # => ["7", "+", "38", "/", "6"]
 ```
+
+#@since 4.0
+生成する Enumerator の要素数を size: で指定できます。
+
+```ruby title="size: を指定する例"
+# 整数を渡すと Enumerator#size がその値を返す
+enum = Enumerator.produce(1, size: 5, &:succ)
+p enum.size     # => 5
+
+# Float::INFINITY（size: を省略した場合のデフォルトと同じ）
+inf = Enumerator.produce(1, size: Float::INFINITY, &:succ)
+p inf.size      # => Infinity
+
+# 呼び出し可能オブジェクト（size を参照するたびに評価される）
+callable = Enumerator.produce(1, size: -> { 42 }, &:succ)
+p callable.size # => 42
+
+# nil は要素数が不明であることを表す
+unknown = Enumerator.produce(1, size: nil, &:succ)
+p unknown.size  # => nil
+```
+
+#@end
 
 ## Methods
 
