@@ -17,10 +17,10 @@ include Syslog::Constants
 
 それぞれの定数、モジュール関数は以下のモジュールに分けて定義されています。
 
- - [c:Syslog::Option]
- - [c:Syslog::Facility]
- - [c:Syslog::Level]
- - [c:Syslog::Macros]
+- [c:Syslog::Option]
+- [c:Syslog::Facility]
+- [c:Syslog::Level]
+- [c:Syslog::Macros]
 
 # module Syslog::Macros
 

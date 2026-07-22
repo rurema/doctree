@@ -39,7 +39,7 @@ dog:
 
 Rubyist Magazine: <https://magazine.rubyist.net/>
 
- - プログラマーのための YAML 入門 (探索編): <https://magazine.rubyist.net/articles/0013/0013-YAML.html>
+- プログラマーのための YAML 入門 (探索編): <https://magazine.rubyist.net/articles/0013/0013-YAML.html>
 
 ## class methods
 

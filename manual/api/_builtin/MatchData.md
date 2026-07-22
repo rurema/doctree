@@ -6,9 +6,9 @@ library: _builtin
 正規表現のマッチに関する情報を扱うためのクラス。
 
 このクラスのインスタンスは、
- - [m:Regexp.last_match]
- - [m:Regexp#match], [m:String#match]
- - [m:$~]
+- [m:Regexp.last_match]
+- [m:Regexp#match], [m:String#match]
+- [m:$~]
 などにより得られます。
 
 ## Instance Methods

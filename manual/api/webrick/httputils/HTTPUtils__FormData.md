@@ -18,8 +18,8 @@ library: webrick/httputils
 
 ### リンク
 
- - [rfc:1867] Form-based File Upload in HTML.
- - [rfc:2388] multipart/form-data の説明。
+- [rfc:1867] Form-based File Upload in HTML.
+- [rfc:2388] multipart/form-data の説明。
 
 ## Class Methods
 

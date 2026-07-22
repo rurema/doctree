@@ -26,17 +26,17 @@ OpenURI.open_uri('http://www.example.com'){|sio| sio.read }
 
 options には [c:Hash] を与えます。理解するハッシュの
 キーは以下のシンボル、
- - :proxy
- - :progress_proc
- - :content_length_proc
- - :http_basic_authentication
- - :proxy_http_basic_authentication
- - :read_timeout
- - :ssl_ca_cert
- - :ssl_verify_mode
- - :ftp_active_mode
- - :redirect
- - :encoding
+- :proxy
+- :progress_proc
+- :content_length_proc
+- :http_basic_authentication
+- :proxy_http_basic_authentication
+- :read_timeout
+- :ssl_ca_cert
+- :ssl_verify_mode
+- :ftp_active_mode
+- :redirect
+- :encoding
 です。
 「:content_length_proc」と「:progress_proc」はプログレスバーに
 利用されることを想定しています。
@@ -49,8 +49,8 @@ sio = OpenURI.open_uri('http://www.example.com',
 ```
 
 - **`:proxy`**:
- プロクシの設定をします。
- 値には以下のいずれかを与えます。
+  プロクシの設定をします。
+  値には以下のいずれかを与えます。
   ```text
      文字列:           "http://proxy.example.com:8000/" のようなプロクシの URI。
      URI オブジェクト: URI.parse("http://proxy.example.com:8000/") のようなプロクシの URI オブジェクト。
@@ -64,24 +64,24 @@ sio = OpenURI.open_uri('http://www.example.com',
   HTTP の Basic 認証のためのユーザ名とパスワードを、文字列の配列 ["user", "password"] として与えます。
 
 - **`:content_length_proc`**:
- 値にはブロックを与えます。ブロックは対象となる URI の
- Content-Length ヘッダの値を引数として、実際の転送が始まる前に評価されます。Redirect された場合は、
- 実際に転送されるリソースの HTTP ヘッダを利用します。Content-Length ヘッダがない場合は、nil を
- 引数としてブロックを評価します。ブロックの返り値は特に利用されません。
+  値にはブロックを与えます。ブロックは対象となる URI の
+  Content-Length ヘッダの値を引数として、実際の転送が始まる前に評価されます。Redirect された場合は、
+  実際に転送されるリソースの HTTP ヘッダを利用します。Content-Length ヘッダがない場合は、nil を
+  引数としてブロックを評価します。ブロックの返り値は特に利用されません。
 
 - **`:progress_proc`**:
- 値にはブロックを与えます。ブロックは対象となる URI からデータの
- 断片が転送されるたびに、その断片のサイズを引数として評価されます。ブロックの返り値は特に
- 利用されません。
+  値にはブロックを与えます。ブロックは対象となる URI からデータの
+  断片が転送されるたびに、その断片のサイズを引数として評価されます。ブロックの返り値は特に
+  利用されません。
 
 - **`:proxy_http_basic_authentication`**:
- パスワード付きプロクシの設定を与えます。
- 設定には3要素の配列を渡します。
- 最初の要素はプロクシのURIで、文字列かURIオブジェクトを指定します。
- 2番目にはプロクシのユーザ名、3番目にはプロクシのパスワードを指定します。
+  パスワード付きプロクシの設定を与えます。
+  設定には3要素の配列を渡します。
+  最初の要素はプロクシのURIで、文字列かURIオブジェクトを指定します。
+  2番目にはプロクシのユーザ名、3番目にはプロクシのパスワードを指定します。
 
- :proxy と :proxy_http_basic_authentication を同時に指定すると
- [c:ArgumentError] が発生します。
+  :proxy と :proxy_http_basic_authentication を同時に指定すると
+  [c:ArgumentError] が発生します。
 
   ```text title="使い方"
      :proxy_http_basic_authentication =>
@@ -91,47 +91,47 @@ sio = OpenURI.open_uri('http://www.example.com',
   ```
 
 - **`:read_timeout`**:
- http コネクションのタイムアウト秒数を指定します。nil でタイムアウトなしを
- 指定できます。
+  http コネクションのタイムアウト秒数を指定します。nil でタイムアウトなしを
+  指定できます。
 
 - **`:ssl_ca_cert`**:
- SSL の CA 証明書を指定します。これを指定した場合は OpenSSL がデフォルトで使う
- CA 証明書は使われません。
+  SSL の CA 証明書を指定します。これを指定した場合は OpenSSL がデフォルトで使う
+  CA 証明書は使われません。
 
- 証明書のファイル名、証明書のディレクトリ名を指定できます。
- 詳しくは
- [m:OpenSSL::X509::Store#add_file]、
- [m:OpenSSL::X509::Store#add_path]
- を参照してください。デフォルトの証明書については
- [m:OpenSSL::X509::Store#set_default_paths]
- を参照してください。
+  証明書のファイル名、証明書のディレクトリ名を指定できます。
+  詳しくは
+  [m:OpenSSL::X509::Store#add_file]、
+  [m:OpenSSL::X509::Store#add_path]
+  を参照してください。デフォルトの証明書については
+  [m:OpenSSL::X509::Store#set_default_paths]
+  を参照してください。
 
 - **`:ssl_verify_mode`**:
- SSL の証明書の検証のモードを指定します。
- 詳しくは [m:OpenSSL::SSL::SSLContext#verify_mode=] を参照してください。
+  SSL の証明書の検証のモードを指定します。
+  詳しくは [m:OpenSSL::SSL::SSLContext#verify_mode=] を参照してください。
 
 - **`:ftp_active_mode`**:
- ftp を active mode で使うかどうかを指定します。
- デフォルトは false (passive mode) です。
+  ftp を active mode で使うかどうかを指定します。
+  デフォルトは false (passive mode) です。
 
 - **`:redirect`**:
- HTTP でサーバがリダイレクトを指示してきたとき、
- 対応するかどうかを指定します。
- デフォルトは true (リダイレクトする) です。
+  HTTP でサーバがリダイレクトを指示してきたとき、
+  対応するかどうかを指定します。
+  デフォルトは true (リダイレクトする) です。
 
- HTTP と FTP の間のリダイレクトもこれで指定します。
+  HTTP と FTP の間のリダイレクトもこれで指定します。
 
 - **`:encoding`**:
- 取得した内容の外部エンコーディングを指定します。
- "euc-jp" のような文字列か [c:Encoding] オブジェクトを与えます。
- 指定すると、返り値の StringIO オブジェクトの外部エンコーディングが
- その値に設定されます。指定しなかった場合は Content-Type ヘッダの
- charset に基づいて設定されます。いずれの場合も内容の変換(transcode)は
- 行われず、エンコーディングが設定されるだけです。
+  取得した内容の外部エンコーディングを指定します。
+  "euc-jp" のような文字列か [c:Encoding] オブジェクトを与えます。
+  指定すると、返り値の StringIO オブジェクトの外部エンコーディングが
+  その値に設定されます。指定しなかった場合は Content-Type ヘッダの
+  charset に基づいて設定されます。いずれの場合も内容の変換(transcode)は
+  行われず、エンコーディングが設定されるだけです。
 
- 同じ指定を mode 引数の文字列("r:euc-jp" のように)で行うこともできますが、
- mode と :encoding の両方でエンコーディングを指定すると
- [c:ArgumentError] が発生します。
+  同じ指定を mode 引数の文字列("r:euc-jp" のように)で行うこともできますが、
+  mode と :encoding の両方でエンコーディングを指定すると
+  [c:ArgumentError] が発生します。
 
 - **param** `name` -- オープンしたいリソースを文字列で与えます。
 

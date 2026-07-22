@@ -5,12 +5,12 @@ BigDecimalを使った数学的な機能を提供します。
 
 以下の計算が行えます。
 
- - sqrt(x, prec)
- - sin (x, prec)
- - cos (x, prec)
- - atan(x, prec)
- - PI  (prec)
- - E   (prec)
+- sqrt(x, prec)
+- sin (x, prec)
+- cos (x, prec)
+- atan(x, prec)
+- PI  (prec)
+- E   (prec)
 
 引数:
 

@@ -4,8 +4,8 @@
 
 このメソッドが真を返すのは以下の場合です。
 
- - まだ [m:Fiber#resume] されていない
- - ブロック内の評価が終了していない ([m:Fiber.yield] が呼ばれていない)
+- まだ [m:Fiber#resume] されていない
+- ブロック内の評価が終了していない ([m:Fiber.yield] が呼ばれていない)
 
 ```ruby title="例:"
 fr = Fiber.new{

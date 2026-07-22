@@ -59,7 +59,7 @@ n = Newton.nlsolve(f, x)
 
 Ruby のソースコード中の以下のサンプルスクリプトも参考にしてください。
 
- - <https://github.com/ruby/bigdecimal/blob/master/sample/nlsolve.rb>
+- <https://github.com/ruby/bigdecimal/blob/master/sample/nlsolve.rb>
 
 # module Newton
 

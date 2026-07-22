@@ -5,8 +5,8 @@ type: library
 
 以下の定数が定義されます。
 
- - Task = Rake::Task
- - FileTask = Rake::FileTask
- - FileCreationTask = Rake::FileCreationTask
- - RakeApp = Rake::Application
+- Task = Rake::Task
+- FileTask = Rake::FileTask
+- FileCreationTask = Rake::FileCreationTask
+- RakeApp = Rake::Application
 

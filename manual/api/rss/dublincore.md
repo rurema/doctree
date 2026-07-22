@@ -3,7 +3,7 @@ library: rss
 ---
 # module DublinCoreModel
 
- - <http://purl.org/dc/elements/1.1/>
+- <http://purl.org/dc/elements/1.1/>
 
 ## Instance Methods
 ### def dc_contributor

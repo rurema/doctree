@@ -6,11 +6,11 @@ RSS ParserはRSS 0.9x/1.0/2.0, Atom 1.0 をサポートしていますが、RSS 
 はサポートしてません。ごめんなさい。
 
 RSS のモジュールはそれぞれ、
- - Dublin Core モジュール <http://web.resource.org/rss/1.0/modules/dc/> 
- - Syndication モジュール <http://web.resource.org/rss/1.0/modules/syndication/>
- - Content モジュール <http://web.resource.org/rss/1.0/modules/content/>
- - Trackback モジュール <http://madskills.com/public/xml/rss/module/trackback/>
- - Image モジュール <http://web.resource.org/rss/1.0/modules/image/>
+- Dublin Core モジュール <http://web.resource.org/rss/1.0/modules/dc/> 
+- Syndication モジュール <http://web.resource.org/rss/1.0/modules/syndication/>
+- Content モジュール <http://web.resource.org/rss/1.0/modules/content/>
+- Trackback モジュール <http://madskills.com/public/xml/rss/module/trackback/>
+- Image モジュール <http://web.resource.org/rss/1.0/modules/image/>
 をサポートしています。
 ただし、Content モジュールは content:encoded しかサポートしていません。
 
@@ -19,9 +19,9 @@ RSS のモジュールはそれぞれ、
 RSS をパースしたい場合は RSS::Parser クラスを使います。
 RSS::Parser.parse は String の RSSを パースします(使用するXMLパー
 サによっては File や IO オブジェクトなどでもパース可能です)。
- - RSS 1.0をパースした場合は [c:RSS::RDF] オブジェクト
- - RSS 0.9x/2.0をパースした場合は [c:RSS::Rss] オブジェクト
- - Atom をパースした場合は [c:RSS::Atom::Feed] オブジェクト
+- RSS 1.0をパースした場合は [c:RSS::RDF] オブジェクト
+- RSS 0.9x/2.0をパースした場合は [c:RSS::Rss] オブジェクト
+- Atom をパースした場合は [c:RSS::Atom::Feed] オブジェクト
 をそれぞれ返します。パースした
 String が well formed な XML で無い場合は、
 例外 [c:RSS::NotWellFormedError] が発生します。well formed な

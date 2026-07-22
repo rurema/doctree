@@ -134,27 +134,27 @@ p Process.last_status # => nil
 引数 resource で有効な定数は以下のとおりです。
 
 - **`[m:Process::RLIMIT_CORE]`**:
- core ファイルのサイズ (バイト) (SUSv3)
+  core ファイルのサイズ (バイト) (SUSv3)
 - **`[m:Process::RLIMIT_CPU]`**:
- プロセスの CPU 時間 (秒) (SUSv3)
+  プロセスの CPU 時間 (秒) (SUSv3)
 - **`[m:Process::RLIMIT_DATA]`**:
- プロセスのデータ領域のサイズ (バイト) (SUSv3)
+  プロセスのデータ領域のサイズ (バイト) (SUSv3)
 - **`[m:Process::RLIMIT_FSIZE]`**:
- プロセスが生成するファイルのサイズ (バイト) (SUSv3)
+  プロセスが生成するファイルのサイズ (バイト) (SUSv3)
 - **`[m:Process::RLIMIT_NOFILE]`**:
- プロセスがオープンできるファイルの数 (SUSv3)
+  プロセスがオープンできるファイルの数 (SUSv3)
 - **`[m:Process::RLIMIT_STACK]`**:
- プロセスのスタック領域のサイズ (バイト) (SUSv3)
+  プロセスのスタック領域のサイズ (バイト) (SUSv3)
 - **`[m:Process::RLIMIT_AS]`**:
- プロセスの仮想メモリサイズ (バイト) (SUSv3, NetBSD, FreeBSD, OpenBSD but 4.4BSD-Lite))
+  プロセスの仮想メモリサイズ (バイト) (SUSv3, NetBSD, FreeBSD, OpenBSD but 4.4BSD-Lite))
 - **`[m:Process::RLIMIT_MEMLOCK]`**:
- [man:mlock(2)] でロックできるトータルのサイズ (バイト) (4.4BSD, GNU/Linux)
+  [man:mlock(2)] でロックできるトータルのサイズ (バイト) (4.4BSD, GNU/Linux)
 - **`[m:Process::RLIMIT_NPROC]`**:
- そのユーザのプロセスの最大数 (4.4BSD, GNU/Linux)
+  そのユーザのプロセスの最大数 (4.4BSD, GNU/Linux)
 - **`[m:Process::RLIMIT_RSS]`**:
- 使用できる実メモリの最大サイズ (バイト) (4.2BSD, GNU/Linux)
+  使用できる実メモリの最大サイズ (バイト) (4.2BSD, GNU/Linux)
 - **`[m:Process::RLIMIT_SBSIZE]`**:
- ソケットバッファのサイズ (バイト) (NetBSD, FreeBSD)
+  ソケットバッファのサイズ (バイト) (NetBSD, FreeBSD)
 
 ```ruby title="例"
 include Process
@@ -185,33 +185,33 @@ p lim.map{|i| i == RLIM_INFINITY ? "unlimited" : "#{i/(1024**2)}MB" }  #=> ["8MB
 引数 resource で有効な定数は以下のとおりです。
 
 - **`[m:Process::RLIMIT_CORE]`**:
- core ファイルのサイズ (バイト) (SUSv3)
+  core ファイルのサイズ (バイト) (SUSv3)
 - **`[m:Process::RLIMIT_CPU]`**:
- プロセスの CPU 時間 (秒) (SUSv3)
+  プロセスの CPU 時間 (秒) (SUSv3)
 - **`[m:Process::RLIMIT_DATA]`**:
- プロセスのデータ領域のサイズ (バイト) (SUSv3)
+  プロセスのデータ領域のサイズ (バイト) (SUSv3)
 - **`[m:Process::RLIMIT_FSIZE]`**:
- プロセスが生成するファイルのサイズ (バイト) (SUSv3)
+  プロセスが生成するファイルのサイズ (バイト) (SUSv3)
 - **`[m:Process::RLIMIT_NOFILE]`**:
- プロセスがオープンできるファイルの数 (SUSv3)
+  プロセスがオープンできるファイルの数 (SUSv3)
 - **`[m:Process::RLIMIT_STACK]`**:
- プロセスのスタック領域のサイズ (バイト) (SUSv3)
+  プロセスのスタック領域のサイズ (バイト) (SUSv3)
 - **`[m:Process::RLIMIT_AS]`**:
- プロセスの仮想メモリサイズ (バイト) (SUSv3, NetBSD, FreeBSD, OpenBSD but 4.4BSD-Lite))
+  プロセスの仮想メモリサイズ (バイト) (SUSv3, NetBSD, FreeBSD, OpenBSD but 4.4BSD-Lite))
 - **`[m:Process::RLIMIT_MEMLOCK]`**:
- [man:mlock(2)] でロックできるトータルのサイズ (バイト) (4.4BSD, GNU/Linux)
+  [man:mlock(2)] でロックできるトータルのサイズ (バイト) (4.4BSD, GNU/Linux)
 - **`[m:Process::RLIMIT_NPROC]`**:
- そのユーザのプロセスの最大数 (4.4BSD, GNU/Linux)
+  そのユーザのプロセスの最大数 (4.4BSD, GNU/Linux)
 - **`[m:Process::RLIMIT_RSS]`**:
- 使用できる実メモリの最大サイズ (バイト) (4.2BSD, GNU/Linux)
+  使用できる実メモリの最大サイズ (バイト) (4.2BSD, GNU/Linux)
 - **`[m:Process::RLIMIT_SBSIZE]`**:
- ソケットバッファのサイズ (バイト) (NetBSD, FreeBSD)
+  ソケットバッファのサイズ (バイト) (NetBSD, FreeBSD)
 
 引数 limit, cur_limit, max_limit で有効な定数は以下のとおりです。
 
- - [m:Process::RLIM_INFINITY] リソースに制限を設けないことを意味します。
- - [m:Process::RLIM_SAVED_CUR]
- - [m:Process::RLIM_SAVED_MAX]
+- [m:Process::RLIM_INFINITY] リソースに制限を設けないことを意味します。
+- [m:Process::RLIM_SAVED_CUR]
+- [m:Process::RLIM_SAVED_MAX]
 
 以下の例は RLIMIT_CORE の制限を hard limit (max limit) まで引き上げ、可能なら core を残すようにします。
 
@@ -295,9 +295,9 @@ Process.setrlimit(Process::RLIMIT_CORE,
 このメソッドは [man:getgroups(2)] の単純なラッパーです。
 このことは以下の特徴がプラットフォームに依存することを意味します。
 
- - 結果がソートされているかどうか
- - 結果が実効グループ ID を含むかどうか
- - グループ ID が重複している可能性があるかどうか
+- 結果がソートされているかどうか
+- 結果が実効グループ ID を含むかどうか
+- グループ ID が重複している可能性があるかどうか
 
 ソート済みで重複のないグループ ID の配列の取得は以下のようにできます:
 
@@ -440,9 +440,9 @@ pid で指定されたプロセスにシグナルを送ります。signal
 
 - **param** `pid` -- シグナルを送りたいプロセスのプロセス ID を整数で指定します。ただし、0 以下の場合は以下のような意味になります。
 
- - 0 の場合はカレントプロセスのプロセスグループにシグナルを送ります。
- - -1 の場合はシステム上の全てのプロセスにシグナルを送ります。
- - それ以外の負の整数を与えるとプロセスではなくプロセスグループにシグナルを送ります。
+- 0 の場合はカレントプロセスのプロセスグループにシグナルを送ります。
+- -1 の場合はシステム上の全てのプロセスにシグナルを送ります。
+- それ以外の負の整数を与えるとプロセスではなくプロセスグループにシグナルを送ります。
    負の整数はプロセスグループ ID にマイナスを付けたものと見なされます。
 
 - **param** `rest` -- プロセス ID を整数で指定します。
@@ -504,9 +504,9 @@ Process.wait
 
 - **param** `which` -- プライオリティを設定する対象の種類を以下の定数のいずれかで指定します。
 
- - [m:Process::PRIO_PROCESS]
- - [m:Process::PRIO_PGRP]
- - [m:Process::PRIO_USER] 
+- [m:Process::PRIO_PROCESS]
+- [m:Process::PRIO_PGRP]
+- [m:Process::PRIO_USER] 
 
 - **param** `who` -- which の値にしたがってプロセス ID、プロセスグループ ID、ユーザ ID のいずれかを整数で指定します。
 
@@ -629,11 +629,11 @@ p Process.waitall
 本メソッドが行う最適化は実装依存であり、将来的に予告なく変更される可能性があります。
 
 CRubyではメジャーGCを実行し以下のことをします：
- 1. ヒープを圧縮します
- 2. GCされなかった全ての新世代オブジェクトを古い世代に昇格します
- 3. 全ての文字列のcoderange([m:String#valid_encoding]などで使われる文字列の内容とエンコーディングとの整合性の情報)を事前計算します
- 4. すべての空のヒープページを解放し、解放したページ数だけ割当可能なページカウンター(heap_allocatable_pages)を増分します
- 5. 空のmallocページを解放するためにmalloc_trimを呼び出します
+1. ヒープを圧縮します
+2. GCされなかった全ての新世代オブジェクトを古い世代に昇格します
+3. 全ての文字列のcoderange([m:String#valid_encoding]などで使われる文字列の内容とエンコーディングとの整合性の情報)を事前計算します
+4. すべての空のヒープページを解放し、解放したページ数だけ割当可能なページカウンター(heap_allocatable_pages)を増分します
+5. 空のmallocページを解放するためにmalloc_trimを呼び出します
 #@end
 
 ### module_function def daemon(nochdir = nil, noclose = nil)    -> 0
@@ -720,51 +720,51 @@ p Process.clock_gettime(Process::CLOCK_MONOTONIC) #=> 896053.968060096
                 サポートされている定数は OS やバージョンに依存します。
 
 - **`[m:Process::CLOCK_REALTIME]`**:
- SUSv2 to 4, Linux 2.5.63, FreeBSD 3.0, NetBSD 2.0, OpenBSD 2.1, macOS 10.12
+  SUSv2 to 4, Linux 2.5.63, FreeBSD 3.0, NetBSD 2.0, OpenBSD 2.1, macOS 10.12
 - **`[m:Process::CLOCK_MONOTONIC]`**:
- SUSv3 to 4, Linux 2.5.63, FreeBSD 3.0, NetBSD 2.0, OpenBSD 3.4, macOS 10.12
+  SUSv3 to 4, Linux 2.5.63, FreeBSD 3.0, NetBSD 2.0, OpenBSD 3.4, macOS 10.12
 - **`[m:Process::CLOCK_PROCESS_CPUTIME_ID]`**:
- SUSv3 to 4, Linux 2.5.63, OpenBSD 5.4, macOS 10.12
+  SUSv3 to 4, Linux 2.5.63, OpenBSD 5.4, macOS 10.12
 - **`[m:Process::CLOCK_THREAD_CPUTIME_ID]`**:
- SUSv3 to 4, Linux 2.5.63, FreeBSD 7.1, OpenBSD 5.4, macOS 10.12
+  SUSv3 to 4, Linux 2.5.63, FreeBSD 7.1, OpenBSD 5.4, macOS 10.12
 - **`[m:Process::CLOCK_VIRTUAL]`**:
- FreeBSD 3.0, OpenBSD 2.1
+  FreeBSD 3.0, OpenBSD 2.1
 - **`[m:Process::CLOCK_PROF]`**:
- FreeBSD 3.0, OpenBSD 2.1
+  FreeBSD 3.0, OpenBSD 2.1
 - **`[m:Process::CLOCK_REALTIME_FAST]`**:
- FreeBSD 8.1
+  FreeBSD 8.1
 - **`[m:Process::CLOCK_REALTIME_PRECISE]`**:
- FreeBSD 8.1
+  FreeBSD 8.1
 - **`[m:Process::CLOCK_REALTIME_COARSE]`**:
- Linux 2.6.32
+  Linux 2.6.32
 - **`[m:Process::CLOCK_REALTIME_ALARM]`**:
- Linux 3.0
+  Linux 3.0
 - **`[m:Process::CLOCK_MONOTONIC_FAST]`**:
- FreeBSD 8.1
+  FreeBSD 8.1
 - **`[m:Process::CLOCK_MONOTONIC_PRECISE]`**:
- FreeBSD 8.1
+  FreeBSD 8.1
 - **`[m:Process::CLOCK_MONOTONIC_COARSE]`**:
- Linux 2.6.32
+  Linux 2.6.32
 - **`[m:Process::CLOCK_MONOTONIC_RAW]`**:
- Linux 2.6.28, macOS 10.12
+  Linux 2.6.28, macOS 10.12
 - **`[m:Process::CLOCK_MONOTONIC_RAW_APPROX]`**:
- macOS 10.12
+  macOS 10.12
 - **`[m:Process::CLOCK_BOOTTIME]`**:
- Linux 2.6.39
+  Linux 2.6.39
 - **`[m:Process::CLOCK_BOOTTIME_ALARM]`**:
- Linux 3.0
+  Linux 3.0
 - **`[m:Process::CLOCK_UPTIME]`**:
- FreeBSD 7.0, OpenBSD 5.5
+  FreeBSD 7.0, OpenBSD 5.5
 - **`[m:Process::CLOCK_UPTIME_FAST]`**:
- FreeBSD 8.1
+  FreeBSD 8.1
 - **`[m:Process::CLOCK_UPTIME_RAW]`**:
- macOS 10.12
+  macOS 10.12
 - **`[m:Process::CLOCK_UPTIME_RAW_APPROX]`**:
- macOS 10.12
+  macOS 10.12
 - **`[m:Process::CLOCK_UPTIME_PRECISE]`**:
- FreeBSD 8.1
+  FreeBSD 8.1
 - **`[m:Process::CLOCK_SECOND]`**:
- FreeBSD 8.1
+  FreeBSD 8.1
 
 SUS は Single Unix Specification を意味しており、
 SUS は POSIX と POSIX の一部で定義されている clock_gettime を含みます。
@@ -779,69 +779,69 @@ CLOCK_THREAD_CPUTIME_ID は任意です。
 CLOCK_REALTIME のエミュレーション:
 
 - **`:GETTIMEOFDAY_BASED_CLOCK_REALTIME`**:
- SUS で定義されている gettimeofday() を使います。 (しかし SUSv4 で obsoleted になっています)
- 精度は1マイクロ秒です。
+  SUS で定義されている gettimeofday() を使います。 (しかし SUSv4 で obsoleted になっています)
+  精度は1マイクロ秒です。
 - **`:TIME_BASED_CLOCK_REALTIME`**:
- ISO C で定義されている time() を使います。
- 精度は1秒です。
+  ISO C で定義されている time() を使います。
+  精度は1秒です。
 
 CLOCK_MONOTONIC のエミュレーション:
 
 - **:MACH_ABSOLUTE_TIME_BASED_CLOCK_MONOTONIC**:
- Darwin で利用可能な mach_absolute_time() を使います。
- 精度は CPU に依存します。
+  Darwin で利用可能な mach_absolute_time() を使います。
+  精度は CPU に依存します。
 - **`:TIMES_BASED_CLOCK_MONOTONIC`**:
- POSIX で定義されている times() の結果を使います。
- POSIX では「times() は過去のある時点 (例えばシステムの起動時刻) からの経過クロック数 (clock tick) で実際に経過時間を返します」と定義されています。
- 例えば GNU/Linux では jiffies に基づいた値を返し、monotonic (単調増加が保証されていて、巻き戻ったりしない) です。
- しかし 4.4BSD では gettimeofday() を使い、monotonic ではありません。
- (ただし FreeBSD では clock_gettime(CLOCK_MONOTONIC) を代わりに使います。)
- 精度はクロック数 (clock tick) です。
- 「getconf CLK_TCK」コマンドで1秒あたりのクロック数を表示できます。
- (古いシステムでは、1秒あたりのクロック数は HZ マクロで定義されています。)
- もし1秒あたりのクロック数が 100 かつ clock_t が32ビット整数型の場合、精度は10ミリ秒で497日以上を表すことはできません。
+  POSIX で定義されている times() の結果を使います。
+  POSIX では「times() は過去のある時点 (例えばシステムの起動時刻) からの経過クロック数 (clock tick) で実際に経過時間を返します」と定義されています。
+  例えば GNU/Linux では jiffies に基づいた値を返し、monotonic (単調増加が保証されていて、巻き戻ったりしない) です。
+  しかし 4.4BSD では gettimeofday() を使い、monotonic ではありません。
+  (ただし FreeBSD では clock_gettime(CLOCK_MONOTONIC) を代わりに使います。)
+  精度はクロック数 (clock tick) です。
+  「getconf CLK_TCK」コマンドで1秒あたりのクロック数を表示できます。
+  (古いシステムでは、1秒あたりのクロック数は HZ マクロで定義されています。)
+  もし1秒あたりのクロック数が 100 かつ clock_t が32ビット整数型の場合、精度は10ミリ秒で497日以上を表すことはできません。
 
 CLOCK_PROCESS_CPUTIME_ID のエミュレーション:
 
 - **:GETRUSAGE_BASED_CLOCK_PROCESS_CPUTIME_ID**:
- SUS で定義されている getrusage() を使います。
- getrusage() を RUSAGE_SELF と一緒に使うと、(子プロセスの時間をのぞいた)
- getrusage() を呼び出したプロセスだけの CPU 時間が得られます。
- ユーザー時間 (ru_utime) とシステム時間 (ru_stime) を足した結果を返します。
- 精度は1マイクロ秒です。
+  SUS で定義されている getrusage() を使います。
+  getrusage() を RUSAGE_SELF と一緒に使うと、(子プロセスの時間をのぞいた)
+  getrusage() を呼び出したプロセスだけの CPU 時間が得られます。
+  ユーザー時間 (ru_utime) とシステム時間 (ru_stime) を足した結果を返します。
+  精度は1マイクロ秒です。
 - **`:TIMES_BASED_CLOCK_PROCESS_CPUTIME_ID`**:
- POSIX で定義されている times() を使います。
- ユーザー時間 (tms_utime) と システム時間 (tms_stime) を足した結果を返します。
- tms_cutime と tms_cstime は子プロセスの時間を含みません。
- 精度はクロック数 (clock tick) です。
- 「getconf CLK_TCK」コマンドで1秒あたりのクロック数を表示できます。
- (古いシステムでは、1秒あたりのクロック数は HZ マクロで定義されています。)
- もし1秒あたりのクロック数が100なら、精度は10ミリ秒です。
+  POSIX で定義されている times() を使います。
+  ユーザー時間 (tms_utime) と システム時間 (tms_stime) を足した結果を返します。
+  tms_cutime と tms_cstime は子プロセスの時間を含みません。
+  精度はクロック数 (clock tick) です。
+  「getconf CLK_TCK」コマンドで1秒あたりのクロック数を表示できます。
+  (古いシステムでは、1秒あたりのクロック数は HZ マクロで定義されています。)
+  もし1秒あたりのクロック数が100なら、精度は10ミリ秒です。
 - **`:CLOCK_BASED_CLOCK_PROCESS_CPUTIME_ID`**:
- ISO C で定義されている clock() を使います。
- 精度は 1/CLOCKS_PER_SEC です。
- CLOCKS_PER_SEC は time.h で定義されているC言語のマクロです。
- SUS では CLOCKS_PER_SEC は 1000000 と定義されています。
- ただし、Unix 以外のシステムでは異なる値に定義されているかもしれません。
- SUS で定義されているように CLOCKS_PER_SEC が 1000000 なら、精度は1マイクロ秒です。
- CLOCKS_PER_SEC が 1000000 かつ clock_t が32ビット整数型の場合、72分以上を表すことはできません。
+  ISO C で定義されている clock() を使います。
+  精度は 1/CLOCKS_PER_SEC です。
+  CLOCKS_PER_SEC は time.h で定義されているC言語のマクロです。
+  SUS では CLOCKS_PER_SEC は 1000000 と定義されています。
+  ただし、Unix 以外のシステムでは異なる値に定義されているかもしれません。
+  SUS で定義されているように CLOCKS_PER_SEC が 1000000 なら、精度は1マイクロ秒です。
+  CLOCKS_PER_SEC が 1000000 かつ clock_t が32ビット整数型の場合、72分以上を表すことはできません。
 
 - **param** `unit` -- 返値の型を指定します。
 
 - **`:float_second`**:
- Float の秒 (デフォルト)
+  Float の秒 (デフォルト)
 - **`:float_millisecond`**:
- Float のミリ秒
+  Float のミリ秒
 - **`:float_microsecond`**:
- Float のマイクロ秒
+  Float のマイクロ秒
 - **`:second`**:
- Integer の秒
+  Integer の秒
 - **`:millisecond`**:
- Integer のミリ秒
+  Integer のミリ秒
 - **`:microsecond`**:
- Integer のマイクロ秒
+  Integer のマイクロ秒
 - **`:nanosecond`**:
- Integer のナノ秒
+  Integer のナノ秒
 
 基になる関数 clock_gettime() はナノ秒を返します。
 Float オブジェクト (IEEE 754 double) は CLOCK_REALTIME の結果を表すには不十分です。

@@ -518,11 +518,11 @@ p Foo.new.bar      # => :bar  (他のインスタンスでも定義済み)
 
 メソッドが呼び出されると、以下の順で式が評価されます。
 
- - 指定されていれば引数のデフォルト式
- - メソッドの本体 body
- - 指定されていれば例外の発生の有無によりメソッド定義式の rescue
+- 指定されていれば引数のデフォルト式
+- メソッドの本体 body
+- 指定されていれば例外の発生の有無によりメソッド定義式の rescue
    節または else 節
- - 指定されていれば ensure 節
+- 指定されていれば ensure 節
 
 引数のデフォルト式も含め、すべてそのメソッドのコンテキストで評価されます。
 
@@ -636,10 +636,10 @@ extend については、[m:Object#extend] を参照して
 メソッドは public、private、protected の三通りの
 呼び出し制限を持ちます。
 
- - public に設定されたメソッドは制限なしに呼び出せます。
- - private に設定されたメソッドは関数形式でしか呼び出せません。
+- public に設定されたメソッドは制限なしに呼び出せます。
+- private に設定されたメソッドは関数形式でしか呼び出せません。
    ただし self.foo のように self. と書かれている場合は呼び出すことができます。
- - protected に設定されたメソッドは、そのメソッドを持つオブジェクトが
+- protected に設定されたメソッドは、そのメソッドを持つオブジェクトが
    selfであるコンテキスト(メソッド定義式やinstance_eval)でのみ呼び出せます。
 
 ```ruby title="例: protected の可視性"
@@ -889,18 +889,18 @@ p defined? Foo       # => "constant"
 
 以下は、defined? が返す値の一覧です。
 
- - "super"
- - "method"
- - "yield"
- - "self"
- - "nil"
- - "true"
- - "false"
- - "assignment"
- - "local-variable"
- - "local-variable(in-block)"
- - "global-variable"
- - "instance-variable"
- - "constant"
- - "class variable"
- - "expression"
+- "super"
+- "method"
+- "yield"
+- "self"
+- "nil"
+- "true"
+- "false"
+- "assignment"
+- "local-variable"
+- "local-variable(in-block)"
+- "global-variable"
+- "instance-variable"
+- "constant"
+- "class variable"
+- "expression"

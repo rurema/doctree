@@ -506,9 +506,9 @@ p sio.read                      #=> "foo"
 
 - **param** `whence` -- 以下のいずれかの定数を指定します。
 
- - IO::SEEK_SET: ファイルの先頭から (デフォルト)
- - IO::SEEK_CUR: 現在のファイルポインタから
- - IO::SEEK_END: ファイルの末尾から
+- IO::SEEK_SET: ファイルの先頭から (デフォルト)
+- IO::SEEK_CUR: 現在のファイルポインタから
+- IO::SEEK_END: ファイルの末尾から
 
 - **raise** `Errno::EINVAL` -- offset + whence がマイナスである場合に発生します。
 

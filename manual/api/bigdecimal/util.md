@@ -4,11 +4,11 @@ type: library
 String、Integer、Float、Rational, NilClass オブジェクトを
 BigDecimal オブジェクトに変換する機能を提供します。
 
- - [m:String#to_d]
- - [m:Integer#to_d]
- - [m:Float#to_d]
- - [m:Rational#to_d]
- - [m:NilClass#to_d]
+- [m:String#to_d]
+- [m:Integer#to_d]
+- [m:Float#to_d]
+- [m:Rational#to_d]
+- [m:NilClass#to_d]
 
 
 これらのメソッドを使うには 'bigdecimal/util' を require する必要があります。

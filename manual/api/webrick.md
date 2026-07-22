@@ -54,10 +54,10 @@ view.rb がCGIスクリプトとして実行されます。http://127.0.0.1:2008
 
 上のスクリプトでは以下のような流れで view.rb は実行されます。
 
- 1. サーバのパス /view.cgi と CGIHandler がマウントにより結びつけられます。
- 2. パス /view.cgi にアクセスがあるたびにサーバは 'view.rb' を引数として CGIHandler オブジェクトを生成します。
- 3. サーバはリクエストオブジェクトを引数として CGIHandler#service メソッドを呼びます。
- 4. CGIHandler オブジェクトは view.rb を CGI スクリプトとして実行します。
+1. サーバのパス /view.cgi と CGIHandler がマウントにより結びつけられます。
+2. パス /view.cgi にアクセスがあるたびにサーバは 'view.rb' を引数として CGIHandler オブジェクトを生成します。
+3. サーバはリクエストオブジェクトを引数として CGIHandler#service メソッドを呼びます。
+4. CGIHandler オブジェクトは view.rb を CGI スクリプトとして実行します。
 
 このように WEBrick では Web サーバの機能の大部分がサーブレットの形で提供されています。
 またサーブレットを作成することにより新たな機能を Web サーバに追加することもできます。

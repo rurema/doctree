@@ -163,13 +163,13 @@ p Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 
 デフォルトでは以下のクラスのオブジェクトしか変換しません。
 
- - TrueClass
- - FalseClass
- - NilClass
- - Numeric
- - String
- - Array
- - Hash
+- TrueClass
+- FalseClass
+- NilClass
+- Numeric
+- String
+- Array
+- Hash
 
 再帰的なデータ構造はデフォルトでは許可されていません。
 

@@ -1,11 +1,11 @@
 # 手続きオブジェクトの挙動の詳細
 
- - [ref:def]
- - [ref:proc_generation]
- - [ref:should_use_next]
- - [ref:block]
- - [ref:lambda_proc]
- - [ref:orphan]
+- [ref:def]
+- [ref:proc_generation]
+- [ref:should_use_next]
+- [ref:block]
+- [ref:lambda_proc]
+- [ref:orphan]
 
 ### 手続きオブジェクトとは {#def}
 

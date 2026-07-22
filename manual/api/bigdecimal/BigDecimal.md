@@ -56,11 +56,11 @@ library: bigdecimal
 
 以下の例外全てが対象です。
 
- - [m:BigDecimal::EXCEPTION_INFINITY]
- - [m:BigDecimal::EXCEPTION_NaN]
- - [m:BigDecimal::EXCEPTION_OVERFLOW]
- - [m:BigDecimal::EXCEPTION_UNDERFLOW]
- - [m:BigDecimal::EXCEPTION_ZERODIVIDE]
+- [m:BigDecimal::EXCEPTION_INFINITY]
+- [m:BigDecimal::EXCEPTION_NaN]
+- [m:BigDecimal::EXCEPTION_OVERFLOW]
+- [m:BigDecimal::EXCEPTION_UNDERFLOW]
+- [m:BigDecimal::EXCEPTION_ZERODIVIDE]
 
 [m:BigDecimal.mode] の第 1 引数に指定します。
 

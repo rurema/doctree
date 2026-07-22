@@ -181,13 +181,13 @@ CRL に関するフラグを設定します。
 
 以下のいずれかの定数の値を指定します。
 
- - [m:OpenSSL::X509::TRUST_COMPAT]
- - [m:OpenSSL::X509::TRUST_EMAIL]
- - [m:OpenSSL::X509::TRUST_OBJECT_SIGN]
- - [m:OpenSSL::X509::TRUST_SSL_CLIENT]
- - [m:OpenSSL::X509::TRUST_SSL_SERVER]
- - [m:OpenSSL::X509::TRUST_OCSP_REQUEST]
- - [m:OpenSSL::X509::TRUST_OCSP_SIGN]
+- [m:OpenSSL::X509::TRUST_COMPAT]
+- [m:OpenSSL::X509::TRUST_EMAIL]
+- [m:OpenSSL::X509::TRUST_OBJECT_SIGN]
+- [m:OpenSSL::X509::TRUST_SSL_CLIENT]
+- [m:OpenSSL::X509::TRUST_SSL_SERVER]
+- [m:OpenSSL::X509::TRUST_OCSP_REQUEST]
+- [m:OpenSSL::X509::TRUST_OCSP_SIGN]
 
 - **param** `trust` -- 整数値
 - **SEE** [m:OpenSSL::X509::Store#trust=]

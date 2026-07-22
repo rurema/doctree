@@ -271,15 +271,17 @@ task :check_indent_in_samplecode do
   end
 end
 
-# #3246 で dlist（`- **term**:` の説明文）の継続行インデントを CommonMark
-# 準拠の2スペースに統一したが、同一段落内で折り返された物理行（直前行が
-# 2スペースインデントの本文で、その次の行）だけ半角スペース1個のまま
-# 取り残される回帰が #3255 で見つかった。直前行が2スペースの本文なのに
-# 当該行が1スペースなのは、ほぼ確実に同じ段落の折り返しが2スペースに
-# 揃え損ねたものなので、その形だけを対象に検出する（`- item` のような
-# リストマーカー行や、`- **term**:` 直後1行だけの説明のような、1スペース
-# のままでも正しく描画される既存の書き方は対象外）。
-desc 'Check dlist continuation lines use 2-space indent (not 1)'
+# #3246/#3255 で dlist（`- **term**:` の説明文）の継続行インデントを
+# CommonMark 準拠の2スペースに統一し、#3257 でその時点の取りこぼしを
+# 修正した。当初のチェックは「直前行が2スペースの本文で、その次の行だけ
+# 半角スペース1個」という狭い形だけを検出する暫定版だったが、#3255 の
+# 続きとして RD→Markdown 変換由来の残り約970行（113ファイル）を全て
+# 2スペース化・0スペース化（リストマーカー）したことで、manual 以下から
+# 半角スペース1個インデントの行そのものが無くなった。以後の回帰を防ぐため、
+# フェンス外で半角スペース1個だけのインデントを持つ行を無条件に禁止する
+# （2スペース以上や0スペースは対象外。フェンスはインデント済みのものも
+# 含めて `check_indent_in_samplecode` 同様に追跡する）。
+desc 'Check for legacy single-space-indent lines outside fenced code'
 task :check_single_space_indent do
   fence_re = /\A[ \t]*(`{3,}|~{3,})/
   errors = []
@@ -288,8 +290,6 @@ task :check_single_space_indent do
     in_fence = false
     fence_char = nil
     fence_len = 0
-    prev_line = nil
-    prev_was_fence = false
     lines.each.with_index(1) do |line, lineno|
       if (m = fence_re.match(line))
         char, len = m[1][0], m[1].length
@@ -300,17 +300,13 @@ task :check_single_space_indent do
         elsif char == fence_char && len >= fence_len
           in_fence = false
         end
-        prev_line = line
-        prev_was_fence = true
         next
       end
       next if in_fence
 
-      if line =~ /\A [^ ]/ && !prev_was_fence && prev_line && prev_line =~ /\A {2}[^ ]/
-        errors << "#{path}:#{lineno}: dlist 継続行のインデントが半角スペース1個です。直前行と同じ2個にしてください"
+      if line =~ /\A [^ ]/
+        errors << "#{path}:#{lineno}: 半角スペース1個だけのインデントです。0個(リストマーカー等)か2個以上(dlist/リスト項目の継続)にしてください"
       end
-      prev_line = line
-      prev_was_fence = false
     end
   end
 

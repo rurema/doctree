@@ -8,7 +8,7 @@ YAML ドキュメントを複数保持できるストリームクラスです。
 
 Rubyist Magazine: <https://magazine.rubyist.net/>
 
- - プログラマーのための YAML 入門 (中級編): <https://magazine.rubyist.net/articles/0010/0010-YAML.html>
+- プログラマーのための YAML 入門 (中級編): <https://magazine.rubyist.net/articles/0010/0010-YAML.html>
 
 ## class methods
 
