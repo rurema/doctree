@@ -149,6 +149,19 @@ p :foo.id2name  # => "foo"
 p :foo.id2name.intern == :foo  # => true
 ```
 
+#@since 3.4
+返り値の文字列を破壊的に変更すると、Warning[:deprecated] が真のとき
+「この文字列は将来のバージョンで freeze される」という趣旨の警告が出る
+ようになりました。将来のバージョンでは返り値が freeze される予定です。
+freeze された文字列が必要なときは [m:Symbol#name] を使用してください。
+
+```ruby
+s = :foo.to_s
+s << "bar"
+# warning: string returned by :foo.to_s will be frozen in the future
+```
+#@end
+
 - **SEE** [m:String#intern]
 - **SEE** [m:Symbol#name]
 ### def name -> String
