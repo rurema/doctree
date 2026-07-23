@@ -1623,6 +1623,12 @@ Ruby 2.7 以前は SortedSet が定義されていました)。
 引数 args およびブロックは、集合オブジェクトを生成するための new
 メソッドに渡されます。
 
+#@since 4.0
+Ruby 4.0 から、引数 klass や args を渡す呼び出しは deprecated です。
+引数を渡すと「passing arguments to Enumerable#to_set is deprecated」という
+警告を出力します（ブロックのみを渡す呼び出しは deprecated ではありません）。
+#@end
+
 - **param** `klass` -- 生成する集合クラスを指定します。
 - **param** `args` -- 集合クラスのオブジェクト初期化メソッドに渡す引数を指定します。
 - **param** `block` -- 集合クラスのオブジェクト初期化メソッドに渡すブロックを指定します。
@@ -1630,12 +1636,23 @@ Ruby 2.7 以前は SortedSet が定義されていました)。
 
 ```ruby
 p [30, 10, 20].to_set
+#@since 4.0
+#=> Set[30, 10, 20]
+#@else
 #=> #<Set: {30, 10, 20}>
+#@end
 MySet = Class.new(Set)
 p [30, 10, 20].to_set(MySet)
-#=> #<MySet: {10, 20, 30}>
+#@since 4.0
+# warning: passing arguments to Enumerable#to_set is deprecated
+#@end
+#=> #<MySet: {30, 10, 20}>
 p [30, 10, 20].to_set {|num| num / 10}
+#@since 4.0
+#=> Set[3, 1, 2]
+#@else
 #=> #<Set: {3, 1, 2}>
+#@end
 ```
 
 - **SEE** [m:Set.new]
