@@ -11,6 +11,23 @@ library: _builtin
 
 オブジェクト ID([m:BasicObject#__id__])からオブジェクトを得ます。
 
+#@since 4.0
+このメソッドは Ruby 4.0 から deprecated です。Warning[:deprecated] が真のとき
+「ObjectSpace._id2ref is deprecated」という警告を出力します。
+将来のバージョンでは削除される予定です。
+
+オブジェクト ID からオブジェクトを引く必要がある場合は、[m:Object#object_id]
+をキーとして [c:ObjectSpace::WeakMap] にオブジェクトを保持しておく方法があります。
+
+```ruby
+map = ObjectSpace::WeakMap.new
+a = "hoge"
+map[a.object_id] = a
+p map[a.object_id] # => "hoge"
+```
+
+#@end
+
 - **param** `id` -- 取得したいオブジェクトの ID を整数で指定します。
 
 - **raise** `RangeError` -- 対応するオブジェクトが存在しなければ発生します。
