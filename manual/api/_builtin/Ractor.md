@@ -18,6 +18,7 @@ Ractor を生成して、ブロックの評価を開始します。
             コピーできない値であった場合は例外が発生します。
 - **param** `name` -- Ractor の名前を指定します。
 
+#@since 3.4
 ### def [](sym) -> object | nil
 
 このメソッドを呼び出した Ractor の Ractor-local storage の sym に対応するデータを取り出します。
@@ -30,6 +31,7 @@ sym に対応するデータがなければ nil を返します。
 
 - **param** `sym` -- Ractor-local storage のキーを指定します。
 - **param** `val` -- 格納するデータを指定します。
+#@end
 
 ### def count -> Integer
 
@@ -43,9 +45,11 @@ sym に対応するデータがなければ nil を返します。
 
 main Ractor（プログラムの実行が開始された Ractor）を返します。
 
+#@since 3.4
 ### def main? -> bool
 
 このメソッドを呼び出した Ractor が main Ractor であるとき、true を返します。
+#@end
 
 ### def make_shareable(obj, copy: false) -> object
 
@@ -98,6 +102,7 @@ obj が shareable である場合、true を返します。
 
 - **param** `obj` -- Shareable であるか判定したいオブジェクトを指定します。
 
+#@since 3.4
 ### def store_if_absent(key) { ... } -> object
 
 このメソッドを呼び出した Ractor の Ractor-local storage の key データがない場合、
@@ -105,6 +110,7 @@ obj が shareable である場合、true を返します。
 格納した値を返します。
 
 - **param** `key` -- Ractor-local storage のキーを指定します。
+#@end
 
 #@until 4.0
 ### def yield(obj, move: false) -> object
