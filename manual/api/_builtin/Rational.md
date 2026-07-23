@@ -486,6 +486,17 @@ p Rational(0.5).to_s # => "1/2"
 
 ## Private Instance Methods
 
+### def marshal_dump -> Array
+
+[m:Marshal?.load] のためのメソッドです。
+Rational::compatible#marshal_load で復元可能な配列を返します。
+
+[注意] Rational::compatible は通常の方法では参照する事ができません。
+
+#@# #6625 を参照。
+
+## Private Singleton Methods
+
 ### def convert(*arg) -> Rational
 
 引数を有理数([c:Rational])に変換した結果を返します。
@@ -495,12 +506,3 @@ p Rational(0.5).to_s # => "1/2"
 [m:Kernel?.Rational] の本体です。
 
 - **SEE** [m:Kernel?.Rational]
-
-### def marshal_dump -> Array
-
-[m:Marshal?.load] のためのメソッドです。
-Rational::compatible#marshal_load で復元可能な配列を返します。
-
-[注意] Rational::compatible は通常の方法では参照する事ができません。
-
-#@# #6625 を参照。

@@ -70,6 +70,36 @@ Traceback (most recent call last):
 
 - **param** `newstate` -- スレッド実行中に例外発生した場合、その内容を報告するかどうかを true か false で指定します。
 
+#@since 3.0
+### def ignore_deadlock -> bool
+
+デッドロック検知を無視する機能のon/offを返します。
+
+デフォルト値はfalseで、デッドロックが検知されます。
+
+#@#noexample Thread.ignore_deadlock=を参照
+
+- **SEE** [m:Thread.ignore_deadlock=]
+
+### def ignore_deadlock=(bool)
+
+デッドロック検知を無視する機能をon/offします。デフォルト値はfalseです。
+
+trueを渡すとデッドロックを検知しなくなります。
+
+```ruby
+Thread.ignore_deadlock = true
+queue = Thread::Queue.new
+
+trap(:SIGUSR1){queue.push "Received signal"}
+
+# ignore_deadlockがfalseだとエラーが発生する
+puts queue.pop
+```
+
+- **SEE** [m:Thread.ignore_deadlock]
+#@end
+
 ### def current    -> Thread
 
 現在実行中のスレッド(カレントスレッド)を返します。
@@ -643,34 +673,6 @@ th1.kill
 p Thread.current.group == ThreadGroup::Default
 # => true
 ```
-
-### def ignore_deadlock -> bool
-
-デッドロック検知を無視する機能のon/offを返します。
-
-デフォルト値はfalseで、デッドロックが検知されます。
-
-#@#noexample Thread#ignore_deadlock=を参照
-
-- **SEE** [m:Thread#ignore_deadlock=]
-
-### def ignore_deadlock=(bool)
-
-デッドロック検知を無視する機能をon/offします。デフォルト値はfalseです。
-
-trueを渡すとデッドロックを検知しなくなります。
-
-```ruby
-Thread.ignore_deadlock = true
-queue = Thread::Queue.new
-
-trap(:SIGUSR1){queue.push "Received signal"}
-
-# ignore_deadlockがfalseだとエラーが発生する
-puts queue.pop
-```
-
-- **SEE** [m:Thread#ignore_deadlock]
 
 ### def join           -> self
 ### def join(limit)    -> self | nil
