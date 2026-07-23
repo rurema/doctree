@@ -149,6 +149,7 @@ end
 ```
 
 番号指定パラメータ自体は従来どおり参照できます（[ref:d:spec/call#numbered_parameters]）。
+[c:Binding] から番号指定パラメータを扱うには [m:Binding#implicit_parameters] を使用してください。
 #@end
 
 このメソッドは以下のコードと同様の動作をします。
@@ -158,6 +159,88 @@ binding.eval("local_variables")
 ```
 
 #@# #8779 を参照。
+#@since 4.0
+### def implicit_parameters -> [Symbol]
+
+self のスコープで定義されている番号指定パラメータおよび it パラメータの名前を
+[c:Symbol] の配列で返します。定義されていない場合は空の配列を返します。
+
+これらは [m:Binding#local_variables] の返り値には含まれません。
+
+```ruby
+[42].each do
+  it
+  p binding.implicit_parameters # => [:it]
+end
+
+{ k: 42 }.each do
+  _2
+  p binding.implicit_parameters # => [:_1, :_2]
+end
+
+# どちらも使っていない場合
+p binding.implicit_parameters   # => []
+```
+
+- **SEE** [m:Binding#implicit_parameter_get], [m:Binding#implicit_parameter_defined?], [m:Binding#local_variables]
+
+### def implicit_parameter_get(symbol) -> object
+
+引数 symbol で指定した番号指定パラメータまたは it パラメータの値を返します。
+
+- **param** `symbol` -- 番号指定パラメータまたは it パラメータの名前を [c:Symbol] で指定します。
+
+- **raise** `NameError` -- 指定した名前が番号指定パラメータでも it パラメータでもない場合に発生します。
+
+- **raise** `NameError` -- 指定したパラメータが self のスコープで定義されていない場合に発生します。
+
+```ruby
+[42].each do
+  it
+  p binding.implicit_parameter_get(:it) # => 42
+end
+
+{ k: 42 }.each do
+  _2
+  p binding.implicit_parameter_get(:_1) # => :k
+  p binding.implicit_parameter_get(:_2) # => 42
+end
+```
+
+- **SEE** [m:Binding#implicit_parameters], [m:Binding#implicit_parameter_defined?]
+
+### def implicit_parameter_defined?(symbol) -> bool
+
+引数 symbol で指定した番号指定パラメータまたは it パラメータが self のスコープで
+定義されている場合に true を、そうでない場合に false を返します。
+
+定義されていない場合に false を返すのは、symbol が番号指定パラメータまたは
+it パラメータの名前である場合だけです。それ以外の名前を指定した場合は
+[c:NameError] が発生します。
+
+- **param** `symbol` -- 番号指定パラメータまたは it パラメータの名前を [c:Symbol] で指定します。
+
+- **raise** `NameError` -- 指定した名前が番号指定パラメータでも it パラメータでもない場合に発生します。
+
+```ruby
+[42].each do
+  it
+  p binding.implicit_parameter_defined?(:it) # => true
+  p binding.implicit_parameter_defined?(:_1) # => false
+end
+
+{ k: 42 }.each do
+  _2
+  p binding.implicit_parameter_defined?(:_1) # => true
+  p binding.implicit_parameter_defined?(:_3) # => false
+  p binding.implicit_parameter_defined?(:it) # => false
+end
+```
+
+- **SEE** [m:Binding#implicit_parameters], [m:Binding#implicit_parameter_get]
+
+#@end
+
 ### def receiver -> object
 
 保持するコンテキスト内での self を返します。
