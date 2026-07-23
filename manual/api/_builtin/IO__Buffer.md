@@ -1,12 +1,13 @@
 ---
 library: _builtin
-since: "3.3"
+since: "3.1"
 include:
   - Comparable
 ---
 # class IO::Buffer < Object
 
 メモリ領域を直接読み書きするための低レベルなバッファを表すクラスです。
+Ruby 3.1 で導入されました。
 
 [c:String] を経由せずにメモリ領域を扱えるため、コピーを避けた入出力
 (zero-copy IO)を実現するために使われます。主に [c:Fiber::Scheduler] の
@@ -23,6 +24,8 @@ include:
 change in the future!」という警告が出力されます。
 将来のバージョンで Ruby と C の双方のインターフェースが変更される可能性があります。
 
+この警告は `Warning[:experimental] = false` を指定すると抑止できます。
+
 ```ruby
 buf = IO::Buffer.new(8)
 p buf.size          # => 8
@@ -31,6 +34,28 @@ buf.set_string("Ruby")
 p buf.get_string    # => "Ruby\x00\x00\x00\x00"
 p buf.get_string(0, 4)  # => "Ruby"
 ```
+
+## Constants
+
+### const DEFAULT_SIZE -> Integer
+
+[m:IO::Buffer.new] で size を省略した場合に使われる既定のバイト数です。
+
+値は環境依存です。
+
+### const PAGE_SIZE -> Integer
+
+OS のページサイズをバイト数で表した値です。
+
+[m:IO::Buffer.new] は、size がこの値より大きい場合に仮想メモリ機構を用いて
+バッファを確保します。
+
+値は環境依存です。
+
+### const MAPPED -> Integer
+
+バッファを仮想メモリ機構(Unix では匿名 mmap、Windows では VirtualAlloc)で
+確保することを表すフラグです。[m:IO::Buffer.new] の flags に指定します。
 
 ## Class Methods
 
