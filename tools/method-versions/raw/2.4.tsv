@@ -1,0 +1,2623 @@
+V	2.4.10	364	ruby 2.4.10p364 (2020-03-31 revision 67879) [x86_64-linux]
+P	ArgumentError	ArgumentError
+P	Array	Array
+P	BasicObject	BasicObject
+P	BasicObject::BasicObject	BasicObject
+P	Bignum	Integer
+P	Binding	Binding
+P	Class	Class
+P	ClosedQueueError	ClosedQueueError
+P	Comparable	Comparable
+P	Complex	Complex
+P	ConditionVariable	Thread::ConditionVariable
+P	Data	Data
+P	DidYouMean	DidYouMean
+P	Dir	Dir
+P	EOFError	EOFError
+P	Encoding	Encoding
+P	Encoding::CompatibilityError	Encoding::CompatibilityError
+P	Encoding::Converter	Encoding::Converter
+P	Encoding::ConverterNotFoundError	Encoding::ConverterNotFoundError
+P	Encoding::InvalidByteSequenceError	Encoding::InvalidByteSequenceError
+P	Encoding::UndefinedConversionError	Encoding::UndefinedConversionError
+P	EncodingError	EncodingError
+P	Enumerable	Enumerable
+P	Enumerator	Enumerator
+P	Enumerator::Generator	Enumerator::Generator
+P	Enumerator::Lazy	Enumerator::Lazy
+P	Enumerator::Yielder	Enumerator::Yielder
+P	Errno	Errno
+P	Errno::E2BIG	Errno::E2BIG
+P	Errno::EACCES	Errno::EACCES
+P	Errno::EADDRINUSE	Errno::EADDRINUSE
+P	Errno::EADDRNOTAVAIL	Errno::EADDRNOTAVAIL
+P	Errno::EADV	Errno::EADV
+P	Errno::EAFNOSUPPORT	Errno::EAFNOSUPPORT
+P	Errno::EAGAIN	Errno::EAGAIN
+P	Errno::EALREADY	Errno::EALREADY
+P	Errno::EAUTH	Errno::NOERROR
+P	Errno::EBADE	Errno::EBADE
+P	Errno::EBADF	Errno::EBADF
+P	Errno::EBADFD	Errno::EBADFD
+P	Errno::EBADMSG	Errno::EBADMSG
+P	Errno::EBADR	Errno::EBADR
+P	Errno::EBADRPC	Errno::NOERROR
+P	Errno::EBADRQC	Errno::EBADRQC
+P	Errno::EBADSLT	Errno::EBADSLT
+P	Errno::EBFONT	Errno::EBFONT
+P	Errno::EBUSY	Errno::EBUSY
+P	Errno::ECANCELED	Errno::ECANCELED
+P	Errno::ECAPMODE	Errno::NOERROR
+P	Errno::ECHILD	Errno::ECHILD
+P	Errno::ECHRNG	Errno::ECHRNG
+P	Errno::ECOMM	Errno::ECOMM
+P	Errno::ECONNABORTED	Errno::ECONNABORTED
+P	Errno::ECONNREFUSED	Errno::ECONNREFUSED
+P	Errno::ECONNRESET	Errno::ECONNRESET
+P	Errno::EDEADLK	Errno::EDEADLK
+P	Errno::EDEADLOCK	Errno::EDEADLK
+P	Errno::EDESTADDRREQ	Errno::EDESTADDRREQ
+P	Errno::EDOM	Errno::EDOM
+P	Errno::EDOOFUS	Errno::NOERROR
+P	Errno::EDOTDOT	Errno::EDOTDOT
+P	Errno::EDQUOT	Errno::EDQUOT
+P	Errno::EEXIST	Errno::EEXIST
+P	Errno::EFAULT	Errno::EFAULT
+P	Errno::EFBIG	Errno::EFBIG
+P	Errno::EFTYPE	Errno::NOERROR
+P	Errno::EHOSTDOWN	Errno::EHOSTDOWN
+P	Errno::EHOSTUNREACH	Errno::EHOSTUNREACH
+P	Errno::EHWPOISON	Errno::EHWPOISON
+P	Errno::EIDRM	Errno::EIDRM
+P	Errno::EILSEQ	Errno::EILSEQ
+P	Errno::EINPROGRESS	Errno::EINPROGRESS
+P	Errno::EINTR	Errno::EINTR
+P	Errno::EINVAL	Errno::EINVAL
+P	Errno::EIO	Errno::EIO
+P	Errno::EIPSEC	Errno::NOERROR
+P	Errno::EISCONN	Errno::EISCONN
+P	Errno::EISDIR	Errno::EISDIR
+P	Errno::EISNAM	Errno::EISNAM
+P	Errno::EKEYEXPIRED	Errno::EKEYEXPIRED
+P	Errno::EKEYREJECTED	Errno::EKEYREJECTED
+P	Errno::EKEYREVOKED	Errno::EKEYREVOKED
+P	Errno::EL2HLT	Errno::EL2HLT
+P	Errno::EL2NSYNC	Errno::EL2NSYNC
+P	Errno::EL3HLT	Errno::EL3HLT
+P	Errno::EL3RST	Errno::EL3RST
+P	Errno::ELIBACC	Errno::ELIBACC
+P	Errno::ELIBBAD	Errno::ELIBBAD
+P	Errno::ELIBEXEC	Errno::ELIBEXEC
+P	Errno::ELIBMAX	Errno::ELIBMAX
+P	Errno::ELIBSCN	Errno::ELIBSCN
+P	Errno::ELNRNG	Errno::ELNRNG
+P	Errno::ELOOP	Errno::ELOOP
+P	Errno::EMEDIUMTYPE	Errno::EMEDIUMTYPE
+P	Errno::EMFILE	Errno::EMFILE
+P	Errno::EMLINK	Errno::EMLINK
+P	Errno::EMSGSIZE	Errno::EMSGSIZE
+P	Errno::EMULTIHOP	Errno::EMULTIHOP
+P	Errno::ENAMETOOLONG	Errno::ENAMETOOLONG
+P	Errno::ENAVAIL	Errno::ENAVAIL
+P	Errno::ENEEDAUTH	Errno::NOERROR
+P	Errno::ENETDOWN	Errno::ENETDOWN
+P	Errno::ENETRESET	Errno::ENETRESET
+P	Errno::ENETUNREACH	Errno::ENETUNREACH
+P	Errno::ENFILE	Errno::ENFILE
+P	Errno::ENOANO	Errno::ENOANO
+P	Errno::ENOATTR	Errno::NOERROR
+P	Errno::ENOBUFS	Errno::ENOBUFS
+P	Errno::ENOCSI	Errno::ENOCSI
+P	Errno::ENODATA	Errno::ENODATA
+P	Errno::ENODEV	Errno::ENODEV
+P	Errno::ENOENT	Errno::ENOENT
+P	Errno::ENOEXEC	Errno::ENOEXEC
+P	Errno::ENOKEY	Errno::ENOKEY
+P	Errno::ENOLCK	Errno::ENOLCK
+P	Errno::ENOLINK	Errno::ENOLINK
+P	Errno::ENOMEDIUM	Errno::ENOMEDIUM
+P	Errno::ENOMEM	Errno::ENOMEM
+P	Errno::ENOMSG	Errno::ENOMSG
+P	Errno::ENONET	Errno::ENONET
+P	Errno::ENOPKG	Errno::ENOPKG
+P	Errno::ENOPROTOOPT	Errno::ENOPROTOOPT
+P	Errno::ENOSPC	Errno::ENOSPC
+P	Errno::ENOSR	Errno::ENOSR
+P	Errno::ENOSTR	Errno::ENOSTR
+P	Errno::ENOSYS	Errno::ENOSYS
+P	Errno::ENOTBLK	Errno::ENOTBLK
+P	Errno::ENOTCAPABLE	Errno::NOERROR
+P	Errno::ENOTCONN	Errno::ENOTCONN
+P	Errno::ENOTDIR	Errno::ENOTDIR
+P	Errno::ENOTEMPTY	Errno::ENOTEMPTY
+P	Errno::ENOTNAM	Errno::ENOTNAM
+P	Errno::ENOTRECOVERABLE	Errno::ENOTRECOVERABLE
+P	Errno::ENOTSOCK	Errno::ENOTSOCK
+P	Errno::ENOTSUP	Errno::EOPNOTSUPP
+P	Errno::ENOTTY	Errno::ENOTTY
+P	Errno::ENOTUNIQ	Errno::ENOTUNIQ
+P	Errno::ENXIO	Errno::ENXIO
+P	Errno::EOPNOTSUPP	Errno::EOPNOTSUPP
+P	Errno::EOVERFLOW	Errno::EOVERFLOW
+P	Errno::EOWNERDEAD	Errno::EOWNERDEAD
+P	Errno::EPERM	Errno::EPERM
+P	Errno::EPFNOSUPPORT	Errno::EPFNOSUPPORT
+P	Errno::EPIPE	Errno::EPIPE
+P	Errno::EPROCLIM	Errno::NOERROR
+P	Errno::EPROCUNAVAIL	Errno::NOERROR
+P	Errno::EPROGMISMATCH	Errno::NOERROR
+P	Errno::EPROGUNAVAIL	Errno::NOERROR
+P	Errno::EPROTO	Errno::EPROTO
+P	Errno::EPROTONOSUPPORT	Errno::EPROTONOSUPPORT
+P	Errno::EPROTOTYPE	Errno::EPROTOTYPE
+P	Errno::ERANGE	Errno::ERANGE
+P	Errno::EREMCHG	Errno::EREMCHG
+P	Errno::EREMOTE	Errno::EREMOTE
+P	Errno::EREMOTEIO	Errno::EREMOTEIO
+P	Errno::ERESTART	Errno::ERESTART
+P	Errno::ERFKILL	Errno::ERFKILL
+P	Errno::EROFS	Errno::EROFS
+P	Errno::ERPCMISMATCH	Errno::NOERROR
+P	Errno::ESHUTDOWN	Errno::ESHUTDOWN
+P	Errno::ESOCKTNOSUPPORT	Errno::ESOCKTNOSUPPORT
+P	Errno::ESPIPE	Errno::ESPIPE
+P	Errno::ESRCH	Errno::ESRCH
+P	Errno::ESRMNT	Errno::ESRMNT
+P	Errno::ESTALE	Errno::ESTALE
+P	Errno::ESTRPIPE	Errno::ESTRPIPE
+P	Errno::ETIME	Errno::ETIME
+P	Errno::ETIMEDOUT	Errno::ETIMEDOUT
+P	Errno::ETOOMANYREFS	Errno::ETOOMANYREFS
+P	Errno::ETXTBSY	Errno::ETXTBSY
+P	Errno::EUCLEAN	Errno::EUCLEAN
+P	Errno::EUNATCH	Errno::EUNATCH
+P	Errno::EUSERS	Errno::EUSERS
+P	Errno::EWOULDBLOCK	Errno::EAGAIN
+P	Errno::EXDEV	Errno::EXDEV
+P	Errno::EXFULL	Errno::EXFULL
+P	Errno::NOERROR	Errno::NOERROR
+P	Exception	Exception
+P	FalseClass	FalseClass
+P	Fiber	Fiber
+P	FiberError	FiberError
+P	File	File
+P	File::Constants	File::Constants
+P	File::Stat	File::Stat
+P	FileTest	FileTest
+P	Fixnum	Integer
+P	Float	Float
+P	FloatDomainError	FloatDomainError
+P	GC	GC
+P	GC::Profiler	GC::Profiler
+P	Hash	Hash
+P	IO	IO
+P	IO::EAGAINWaitReadable	IO::EAGAINWaitReadable
+P	IO::EAGAINWaitWritable	IO::EAGAINWaitWritable
+P	IO::EINPROGRESSWaitReadable	IO::EINPROGRESSWaitReadable
+P	IO::EINPROGRESSWaitWritable	IO::EINPROGRESSWaitWritable
+P	IO::EWOULDBLOCKWaitReadable	IO::EAGAINWaitReadable
+P	IO::EWOULDBLOCKWaitWritable	IO::EAGAINWaitWritable
+P	IO::WaitReadable	IO::WaitReadable
+P	IO::WaitWritable	IO::WaitWritable
+P	IOError	IOError
+P	IndexError	IndexError
+P	Integer	Integer
+P	Interrupt	Interrupt
+P	Kernel	Kernel
+P	KeyError	KeyError
+P	LoadError	LoadError
+P	LocalJumpError	LocalJumpError
+P	Marshal	Marshal
+P	MatchData	MatchData
+P	Math	Math
+P	Math::DomainError	Math::DomainError
+P	Method	Method
+P	Module	Module
+P	Mutex	Thread::Mutex
+P	NameError	NameError
+P	NilClass	NilClass
+P	NoMemoryError	NoMemoryError
+P	NoMethodError	NoMethodError
+P	NotImplementedError	NotImplementedError
+P	Numeric	Numeric
+P	Object	Object
+P	ObjectSpace	ObjectSpace
+P	ObjectSpace::WeakMap	ObjectSpace::WeakMap
+P	Proc	Proc
+P	Process	Process
+P	Process::GID	Process::GID
+P	Process::Status	Process::Status
+P	Process::Sys	Process::Sys
+P	Process::Tms	Process::Tms
+P	Process::UID	Process::UID
+P	Process::Waiter	Process::Waiter
+P	Queue	Thread::Queue
+P	Random	Random
+P	Random::Formatter	Random::Formatter
+P	Range	Range
+P	RangeError	RangeError
+P	Rational	Rational
+P	Regexp	Regexp
+P	RegexpError	RegexpError
+P	RubyVM	RubyVM
+P	RubyVM::InstructionSequence	RubyVM::InstructionSequence
+P	RuntimeError	RuntimeError
+P	ScriptError	ScriptError
+P	SecurityError	SecurityError
+P	Signal	Signal
+P	SignalException	SignalException
+P	SizedQueue	Thread::SizedQueue
+P	StandardError	StandardError
+P	StopIteration	StopIteration
+P	String	String
+P	Struct	Struct
+P	Struct::Tms	Process::Tms
+P	Symbol	Symbol
+P	SyntaxError	SyntaxError
+P	SystemCallError	SystemCallError
+P	SystemExit	SystemExit
+P	SystemStackError	SystemStackError
+P	Thread	Thread
+P	Thread::Backtrace	Thread::Backtrace
+P	Thread::Backtrace::Location	Thread::Backtrace::Location
+P	Thread::ConditionVariable	Thread::ConditionVariable
+P	Thread::Mutex	Thread::Mutex
+P	Thread::Queue	Thread::Queue
+P	Thread::SizedQueue	Thread::SizedQueue
+P	ThreadError	ThreadError
+P	ThreadGroup	ThreadGroup
+P	Time	Time
+P	TracePoint	TracePoint
+P	TrueClass	TrueClass
+P	TypeError	TypeError
+P	UnboundMethod	UnboundMethod
+P	UncaughtThrowError	UncaughtThrowError
+P	Warning	Warning
+P	ZeroDivisionError	ZeroDivisionError
+A	ARGF.class	class	Object	ARGF.class,Enumerable,Object,Kernel,BasicObject
+M	ARGF.class	i	pub	argv
+M	ARGF.class	i	pub	binmode
+M	ARGF.class	i	pub	binmode?
+M	ARGF.class	i	pub	bytes
+M	ARGF.class	i	pub	chars
+M	ARGF.class	i	pub	close
+M	ARGF.class	i	pub	closed?
+M	ARGF.class	i	pub	codepoints
+M	ARGF.class	i	pub	each
+M	ARGF.class	i	pub	each_byte
+M	ARGF.class	i	pub	each_char
+M	ARGF.class	i	pub	each_codepoint
+M	ARGF.class	i	pub	each_line
+M	ARGF.class	i	pub	eof
+M	ARGF.class	i	pub	eof?
+M	ARGF.class	i	pub	external_encoding
+M	ARGF.class	i	pub	file
+M	ARGF.class	i	pub	filename
+M	ARGF.class	i	pub	fileno
+M	ARGF.class	i	pub	getbyte
+M	ARGF.class	i	pub	getc
+M	ARGF.class	i	pub	gets
+M	ARGF.class	i	pub	inplace_mode
+M	ARGF.class	i	pub	inplace_mode=
+M	ARGF.class	i	pub	inspect
+M	ARGF.class	i	pub	internal_encoding
+M	ARGF.class	i	pub	lineno
+M	ARGF.class	i	pub	lineno=
+M	ARGF.class	i	pub	lines
+M	ARGF.class	i	pub	path
+M	ARGF.class	i	pub	pos
+M	ARGF.class	i	pub	pos=
+M	ARGF.class	i	pub	print
+M	ARGF.class	i	pub	printf
+M	ARGF.class	i	pub	putc
+M	ARGF.class	i	pub	puts
+M	ARGF.class	i	pub	read
+M	ARGF.class	i	pub	read_nonblock
+M	ARGF.class	i	pub	readbyte
+M	ARGF.class	i	pub	readchar
+M	ARGF.class	i	pub	readline
+M	ARGF.class	i	pub	readlines
+M	ARGF.class	i	pub	readpartial
+M	ARGF.class	i	pub	rewind
+M	ARGF.class	i	pub	seek
+M	ARGF.class	i	pub	set_encoding
+M	ARGF.class	i	pub	skip
+M	ARGF.class	i	pub	tell
+M	ARGF.class	i	pub	to_a
+M	ARGF.class	i	pub	to_i
+M	ARGF.class	i	pub	to_io
+M	ARGF.class	i	pub	to_s
+M	ARGF.class	i	pub	to_write_io
+M	ARGF.class	i	pub	write
+M	ARGF.class	i	priv	initialize
+M	ARGF.class	i	priv	initialize_copy
+A	ArgumentError	class	StandardError	ArgumentError,StandardError,Exception,Object,Kernel,BasicObject
+A	Array	class	Object	Array,Enumerable,Object,Kernel,BasicObject
+M	Array	s	pub	[]
+M	Array	s	pub	try_convert
+M	Array	i	pub	&
+M	Array	i	pub	*
+M	Array	i	pub	+
+M	Array	i	pub	-
+M	Array	i	pub	<<
+M	Array	i	pub	<=>
+M	Array	i	pub	==
+M	Array	i	pub	[]
+M	Array	i	pub	[]=
+M	Array	i	pub	any?
+M	Array	i	pub	assoc
+M	Array	i	pub	at
+M	Array	i	pub	bsearch
+M	Array	i	pub	bsearch_index
+M	Array	i	pub	clear
+M	Array	i	pub	collect
+M	Array	i	pub	collect!
+M	Array	i	pub	combination
+M	Array	i	pub	compact
+M	Array	i	pub	compact!
+M	Array	i	pub	concat
+M	Array	i	pub	count
+M	Array	i	pub	cycle
+M	Array	i	pub	delete
+M	Array	i	pub	delete_at
+M	Array	i	pub	delete_if
+M	Array	i	pub	dig
+M	Array	i	pub	drop
+M	Array	i	pub	drop_while
+M	Array	i	pub	each
+M	Array	i	pub	each_index
+M	Array	i	pub	empty?
+M	Array	i	pub	eql?
+M	Array	i	pub	fetch
+M	Array	i	pub	fill
+M	Array	i	pub	find_index
+M	Array	i	pub	first
+M	Array	i	pub	flatten
+M	Array	i	pub	flatten!
+M	Array	i	pub	frozen?
+M	Array	i	pub	hash
+M	Array	i	pub	include?
+M	Array	i	pub	index
+M	Array	i	pub	insert
+M	Array	i	pub	inspect
+M	Array	i	pub	join
+M	Array	i	pub	keep_if
+M	Array	i	pub	last
+M	Array	i	pub	length
+M	Array	i	pub	map
+M	Array	i	pub	map!
+M	Array	i	pub	max
+M	Array	i	pub	min
+M	Array	i	pub	pack
+M	Array	i	pub	permutation
+M	Array	i	pub	pop
+M	Array	i	pub	product
+M	Array	i	pub	push
+M	Array	i	pub	rassoc
+M	Array	i	pub	reject
+M	Array	i	pub	reject!
+M	Array	i	pub	repeated_combination
+M	Array	i	pub	repeated_permutation
+M	Array	i	pub	replace
+M	Array	i	pub	reverse
+M	Array	i	pub	reverse!
+M	Array	i	pub	reverse_each
+M	Array	i	pub	rindex
+M	Array	i	pub	rotate
+M	Array	i	pub	rotate!
+M	Array	i	pub	sample
+M	Array	i	pub	select
+M	Array	i	pub	select!
+M	Array	i	pub	shift
+M	Array	i	pub	shuffle
+M	Array	i	pub	shuffle!
+M	Array	i	pub	size
+M	Array	i	pub	slice
+M	Array	i	pub	slice!
+M	Array	i	pub	sort
+M	Array	i	pub	sort!
+M	Array	i	pub	sort_by!
+M	Array	i	pub	sum
+M	Array	i	pub	take
+M	Array	i	pub	take_while
+M	Array	i	pub	to_a
+M	Array	i	pub	to_ary
+M	Array	i	pub	to_h
+M	Array	i	pub	to_s
+M	Array	i	pub	transpose
+M	Array	i	pub	uniq
+M	Array	i	pub	uniq!
+M	Array	i	pub	unshift
+M	Array	i	pub	values_at
+M	Array	i	pub	zip
+M	Array	i	pub	|
+M	Array	i	priv	initialize
+M	Array	i	priv	initialize_copy
+A	BasicObject	class		BasicObject
+M	BasicObject	i	pub	!
+M	BasicObject	i	pub	!=
+M	BasicObject	i	pub	==
+M	BasicObject	i	pub	__id__
+M	BasicObject	i	pub	__send__
+M	BasicObject	i	pub	equal?
+M	BasicObject	i	pub	instance_eval
+M	BasicObject	i	pub	instance_exec
+M	BasicObject	i	priv	initialize
+M	BasicObject	i	priv	method_missing
+M	BasicObject	i	priv	singleton_method_added
+M	BasicObject	i	priv	singleton_method_removed
+M	BasicObject	i	priv	singleton_method_undefined
+A	Binding	class	Object	Binding,Object,Kernel,BasicObject
+M	Binding	i	pub	clone
+M	Binding	i	pub	dup
+M	Binding	i	pub	eval
+M	Binding	i	pub	local_variable_defined?
+M	Binding	i	pub	local_variable_get
+M	Binding	i	pub	local_variable_set
+M	Binding	i	pub	local_variables
+M	Binding	i	pub	receiver
+A	Class	class	Module	Class,Module,Object,Kernel,BasicObject
+M	Class	i	pub	allocate
+M	Class	i	pub	new
+M	Class	i	pub	superclass
+M	Class	i	priv	inherited
+M	Class	i	priv	initialize
+A	ClosedQueueError	class	StopIteration	ClosedQueueError,StopIteration,IndexError,StandardError,Exception,Object,Kernel,BasicObject
+A	Comparable	module		Comparable
+M	Comparable	i	pub	<
+M	Comparable	i	pub	<=
+M	Comparable	i	pub	==
+M	Comparable	i	pub	>
+M	Comparable	i	pub	>=
+M	Comparable	i	pub	between?
+M	Comparable	i	pub	clamp
+A	Complex	class	Numeric	Complex,Numeric,Comparable,Object,Kernel,BasicObject
+M	Complex	s	pub	polar
+M	Complex	s	pub	rect
+M	Complex	s	pub	rectangular
+M	Complex	s	priv	convert
+M	Complex	i	pub	*
+M	Complex	i	pub	**
+M	Complex	i	pub	+
+M	Complex	i	pub	-
+M	Complex	i	pub	-@
+M	Complex	i	pub	/
+M	Complex	i	pub	==
+M	Complex	i	pub	abs
+M	Complex	i	pub	abs2
+M	Complex	i	pub	angle
+M	Complex	i	pub	arg
+M	Complex	i	pub	coerce
+M	Complex	i	pub	conj
+M	Complex	i	pub	conjugate
+M	Complex	i	pub	denominator
+M	Complex	i	pub	eql?
+M	Complex	i	pub	fdiv
+M	Complex	i	pub	finite?
+M	Complex	i	pub	hash
+M	Complex	i	pub	imag
+M	Complex	i	pub	imaginary
+M	Complex	i	pub	infinite?
+M	Complex	i	pub	inspect
+M	Complex	i	pub	magnitude
+M	Complex	i	pub	numerator
+M	Complex	i	pub	phase
+M	Complex	i	pub	polar
+M	Complex	i	pub	quo
+M	Complex	i	pub	rationalize
+M	Complex	i	pub	real
+M	Complex	i	pub	real?
+M	Complex	i	pub	rect
+M	Complex	i	pub	rectangular
+M	Complex	i	pub	to_c
+M	Complex	i	pub	to_f
+M	Complex	i	pub	to_i
+M	Complex	i	pub	to_r
+M	Complex	i	pub	to_s
+M	Complex	i	priv	marshal_dump
+A	Data	class	Object	Data,Object,Kernel,BasicObject
+A	DidYouMean	module		DidYouMean
+A	Dir	class	Object	Dir,Enumerable,Object,Kernel,BasicObject
+M	Dir	s	pub	[]
+M	Dir	s	pub	chdir
+M	Dir	s	pub	chroot
+M	Dir	s	pub	delete
+M	Dir	s	pub	empty?
+M	Dir	s	pub	entries
+M	Dir	s	pub	exist?
+M	Dir	s	pub	exists?
+M	Dir	s	pub	foreach
+M	Dir	s	pub	getwd
+M	Dir	s	pub	glob
+M	Dir	s	pub	home
+M	Dir	s	pub	mkdir
+M	Dir	s	pub	open
+M	Dir	s	pub	pwd
+M	Dir	s	pub	rmdir
+M	Dir	s	pub	unlink
+M	Dir	i	pub	close
+M	Dir	i	pub	each
+M	Dir	i	pub	fileno
+M	Dir	i	pub	inspect
+M	Dir	i	pub	path
+M	Dir	i	pub	pos
+M	Dir	i	pub	pos=
+M	Dir	i	pub	read
+M	Dir	i	pub	rewind
+M	Dir	i	pub	seek
+M	Dir	i	pub	tell
+M	Dir	i	pub	to_path
+M	Dir	i	priv	initialize
+A	EOFError	class	IOError	EOFError,IOError,StandardError,Exception,Object,Kernel,BasicObject
+A	Encoding	class	Object	Encoding,Object,Kernel,BasicObject
+M	Encoding	s	pub	_load
+M	Encoding	s	pub	aliases
+M	Encoding	s	pub	compatible?
+M	Encoding	s	pub	default_external
+M	Encoding	s	pub	default_external=
+M	Encoding	s	pub	default_internal
+M	Encoding	s	pub	default_internal=
+M	Encoding	s	pub	find
+M	Encoding	s	pub	list
+M	Encoding	s	pub	locale_charmap
+M	Encoding	s	pub	name_list
+M	Encoding	i	pub	_dump
+M	Encoding	i	pub	ascii_compatible?
+M	Encoding	i	pub	dummy?
+M	Encoding	i	pub	inspect
+M	Encoding	i	pub	name
+M	Encoding	i	pub	names
+M	Encoding	i	pub	replicate
+M	Encoding	i	pub	to_s
+A	Encoding::CompatibilityError	class	EncodingError	Encoding::CompatibilityError,EncodingError,StandardError,Exception,Object,Kernel,BasicObject
+A	Encoding::Converter	class	Data	Encoding::Converter,Data,Object,Kernel,BasicObject
+M	Encoding::Converter	s	pub	asciicompat_encoding
+M	Encoding::Converter	s	pub	search_convpath
+M	Encoding::Converter	i	pub	==
+M	Encoding::Converter	i	pub	convert
+M	Encoding::Converter	i	pub	convpath
+M	Encoding::Converter	i	pub	destination_encoding
+M	Encoding::Converter	i	pub	finish
+M	Encoding::Converter	i	pub	insert_output
+M	Encoding::Converter	i	pub	inspect
+M	Encoding::Converter	i	pub	last_error
+M	Encoding::Converter	i	pub	primitive_convert
+M	Encoding::Converter	i	pub	primitive_errinfo
+M	Encoding::Converter	i	pub	putback
+M	Encoding::Converter	i	pub	replacement
+M	Encoding::Converter	i	pub	replacement=
+M	Encoding::Converter	i	pub	source_encoding
+M	Encoding::Converter	i	priv	initialize
+A	Encoding::ConverterNotFoundError	class	EncodingError	Encoding::ConverterNotFoundError,EncodingError,StandardError,Exception,Object,Kernel,BasicObject
+A	Encoding::InvalidByteSequenceError	class	EncodingError	Encoding::InvalidByteSequenceError,EncodingError,StandardError,Exception,Object,Kernel,BasicObject
+M	Encoding::InvalidByteSequenceError	i	pub	destination_encoding
+M	Encoding::InvalidByteSequenceError	i	pub	destination_encoding_name
+M	Encoding::InvalidByteSequenceError	i	pub	error_bytes
+M	Encoding::InvalidByteSequenceError	i	pub	incomplete_input?
+M	Encoding::InvalidByteSequenceError	i	pub	readagain_bytes
+M	Encoding::InvalidByteSequenceError	i	pub	source_encoding
+M	Encoding::InvalidByteSequenceError	i	pub	source_encoding_name
+A	Encoding::UndefinedConversionError	class	EncodingError	Encoding::UndefinedConversionError,EncodingError,StandardError,Exception,Object,Kernel,BasicObject
+M	Encoding::UndefinedConversionError	i	pub	destination_encoding
+M	Encoding::UndefinedConversionError	i	pub	destination_encoding_name
+M	Encoding::UndefinedConversionError	i	pub	error_char
+M	Encoding::UndefinedConversionError	i	pub	source_encoding
+M	Encoding::UndefinedConversionError	i	pub	source_encoding_name
+A	EncodingError	class	StandardError	EncodingError,StandardError,Exception,Object,Kernel,BasicObject
+A	Enumerable	module		Enumerable
+M	Enumerable	i	pub	all?
+M	Enumerable	i	pub	any?
+M	Enumerable	i	pub	chunk
+M	Enumerable	i	pub	chunk_while
+M	Enumerable	i	pub	collect
+M	Enumerable	i	pub	collect_concat
+M	Enumerable	i	pub	count
+M	Enumerable	i	pub	cycle
+M	Enumerable	i	pub	detect
+M	Enumerable	i	pub	drop
+M	Enumerable	i	pub	drop_while
+M	Enumerable	i	pub	each_cons
+M	Enumerable	i	pub	each_entry
+M	Enumerable	i	pub	each_slice
+M	Enumerable	i	pub	each_with_index
+M	Enumerable	i	pub	each_with_object
+M	Enumerable	i	pub	entries
+M	Enumerable	i	pub	find
+M	Enumerable	i	pub	find_all
+M	Enumerable	i	pub	find_index
+M	Enumerable	i	pub	first
+M	Enumerable	i	pub	flat_map
+M	Enumerable	i	pub	grep
+M	Enumerable	i	pub	grep_v
+M	Enumerable	i	pub	group_by
+M	Enumerable	i	pub	include?
+M	Enumerable	i	pub	inject
+M	Enumerable	i	pub	lazy
+M	Enumerable	i	pub	map
+M	Enumerable	i	pub	max
+M	Enumerable	i	pub	max_by
+M	Enumerable	i	pub	member?
+M	Enumerable	i	pub	min
+M	Enumerable	i	pub	min_by
+M	Enumerable	i	pub	minmax
+M	Enumerable	i	pub	minmax_by
+M	Enumerable	i	pub	none?
+M	Enumerable	i	pub	one?
+M	Enumerable	i	pub	partition
+M	Enumerable	i	pub	reduce
+M	Enumerable	i	pub	reject
+M	Enumerable	i	pub	reverse_each
+M	Enumerable	i	pub	select
+M	Enumerable	i	pub	slice_after
+M	Enumerable	i	pub	slice_before
+M	Enumerable	i	pub	slice_when
+M	Enumerable	i	pub	sort
+M	Enumerable	i	pub	sort_by
+M	Enumerable	i	pub	sum
+M	Enumerable	i	pub	take
+M	Enumerable	i	pub	take_while
+M	Enumerable	i	pub	to_a
+M	Enumerable	i	pub	to_h
+M	Enumerable	i	pub	uniq
+M	Enumerable	i	pub	zip
+A	Enumerator	class	Object	Enumerator,Enumerable,Object,Kernel,BasicObject
+M	Enumerator	i	pub	each
+M	Enumerator	i	pub	each_with_index
+M	Enumerator	i	pub	each_with_object
+M	Enumerator	i	pub	feed
+M	Enumerator	i	pub	inspect
+M	Enumerator	i	pub	next
+M	Enumerator	i	pub	next_values
+M	Enumerator	i	pub	peek
+M	Enumerator	i	pub	peek_values
+M	Enumerator	i	pub	rewind
+M	Enumerator	i	pub	size
+M	Enumerator	i	pub	with_index
+M	Enumerator	i	pub	with_object
+M	Enumerator	i	priv	initialize
+M	Enumerator	i	priv	initialize_copy
+A	Enumerator::Generator	class	Object	Enumerator::Generator,Enumerable,Object,Kernel,BasicObject
+M	Enumerator::Generator	i	pub	each
+M	Enumerator::Generator	i	priv	initialize
+M	Enumerator::Generator	i	priv	initialize_copy
+A	Enumerator::Lazy	class	Enumerator	Enumerator::Lazy,Enumerator,Enumerable,Object,Kernel,BasicObject
+M	Enumerator::Lazy	i	pub	chunk
+M	Enumerator::Lazy	i	pub	chunk_while
+M	Enumerator::Lazy	i	pub	collect
+M	Enumerator::Lazy	i	pub	collect_concat
+M	Enumerator::Lazy	i	pub	drop
+M	Enumerator::Lazy	i	pub	drop_while
+M	Enumerator::Lazy	i	pub	enum_for
+M	Enumerator::Lazy	i	pub	find_all
+M	Enumerator::Lazy	i	pub	flat_map
+M	Enumerator::Lazy	i	pub	force
+M	Enumerator::Lazy	i	pub	grep
+M	Enumerator::Lazy	i	pub	grep_v
+M	Enumerator::Lazy	i	pub	lazy
+M	Enumerator::Lazy	i	pub	map
+M	Enumerator::Lazy	i	pub	reject
+M	Enumerator::Lazy	i	pub	select
+M	Enumerator::Lazy	i	pub	slice_after
+M	Enumerator::Lazy	i	pub	slice_before
+M	Enumerator::Lazy	i	pub	slice_when
+M	Enumerator::Lazy	i	pub	take
+M	Enumerator::Lazy	i	pub	take_while
+M	Enumerator::Lazy	i	pub	to_enum
+M	Enumerator::Lazy	i	pub	uniq
+M	Enumerator::Lazy	i	pub	zip
+M	Enumerator::Lazy	i	priv	initialize
+A	Enumerator::Yielder	class	Object	Enumerator::Yielder,Object,Kernel,BasicObject
+M	Enumerator::Yielder	i	pub	<<
+M	Enumerator::Yielder	i	pub	yield
+M	Enumerator::Yielder	i	priv	initialize
+A	Errno	module		Errno
+A	Errno::E2BIG	class	SystemCallError	Errno::E2BIG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EACCES	class	SystemCallError	Errno::EACCES,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EADDRINUSE	class	SystemCallError	Errno::EADDRINUSE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EADDRNOTAVAIL	class	SystemCallError	Errno::EADDRNOTAVAIL,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EADV	class	SystemCallError	Errno::EADV,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EAFNOSUPPORT	class	SystemCallError	Errno::EAFNOSUPPORT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EAGAIN	class	SystemCallError	Errno::EAGAIN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EALREADY	class	SystemCallError	Errno::EALREADY,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADE	class	SystemCallError	Errno::EBADE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADF	class	SystemCallError	Errno::EBADF,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADFD	class	SystemCallError	Errno::EBADFD,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADMSG	class	SystemCallError	Errno::EBADMSG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADR	class	SystemCallError	Errno::EBADR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADRQC	class	SystemCallError	Errno::EBADRQC,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADSLT	class	SystemCallError	Errno::EBADSLT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBFONT	class	SystemCallError	Errno::EBFONT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBUSY	class	SystemCallError	Errno::EBUSY,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECANCELED	class	SystemCallError	Errno::ECANCELED,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECHILD	class	SystemCallError	Errno::ECHILD,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECHRNG	class	SystemCallError	Errno::ECHRNG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECOMM	class	SystemCallError	Errno::ECOMM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECONNABORTED	class	SystemCallError	Errno::ECONNABORTED,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECONNREFUSED	class	SystemCallError	Errno::ECONNREFUSED,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECONNRESET	class	SystemCallError	Errno::ECONNRESET,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EDEADLK	class	SystemCallError	Errno::EDEADLK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EDESTADDRREQ	class	SystemCallError	Errno::EDESTADDRREQ,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EDOM	class	SystemCallError	Errno::EDOM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EDOTDOT	class	SystemCallError	Errno::EDOTDOT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EDQUOT	class	SystemCallError	Errno::EDQUOT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EEXIST	class	SystemCallError	Errno::EEXIST,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EFAULT	class	SystemCallError	Errno::EFAULT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EFBIG	class	SystemCallError	Errno::EFBIG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EHOSTDOWN	class	SystemCallError	Errno::EHOSTDOWN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EHOSTUNREACH	class	SystemCallError	Errno::EHOSTUNREACH,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EHWPOISON	class	SystemCallError	Errno::EHWPOISON,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EIDRM	class	SystemCallError	Errno::EIDRM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EILSEQ	class	SystemCallError	Errno::EILSEQ,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EINPROGRESS	class	SystemCallError	Errno::EINPROGRESS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EINTR	class	SystemCallError	Errno::EINTR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EINVAL	class	SystemCallError	Errno::EINVAL,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EIO	class	SystemCallError	Errno::EIO,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EISCONN	class	SystemCallError	Errno::EISCONN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EISDIR	class	SystemCallError	Errno::EISDIR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EISNAM	class	SystemCallError	Errno::EISNAM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EKEYEXPIRED	class	SystemCallError	Errno::EKEYEXPIRED,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EKEYREJECTED	class	SystemCallError	Errno::EKEYREJECTED,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EKEYREVOKED	class	SystemCallError	Errno::EKEYREVOKED,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EL2HLT	class	SystemCallError	Errno::EL2HLT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EL2NSYNC	class	SystemCallError	Errno::EL2NSYNC,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EL3HLT	class	SystemCallError	Errno::EL3HLT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EL3RST	class	SystemCallError	Errno::EL3RST,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELIBACC	class	SystemCallError	Errno::ELIBACC,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELIBBAD	class	SystemCallError	Errno::ELIBBAD,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELIBEXEC	class	SystemCallError	Errno::ELIBEXEC,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELIBMAX	class	SystemCallError	Errno::ELIBMAX,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELIBSCN	class	SystemCallError	Errno::ELIBSCN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELNRNG	class	SystemCallError	Errno::ELNRNG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELOOP	class	SystemCallError	Errno::ELOOP,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EMEDIUMTYPE	class	SystemCallError	Errno::EMEDIUMTYPE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EMFILE	class	SystemCallError	Errno::EMFILE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EMLINK	class	SystemCallError	Errno::EMLINK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EMSGSIZE	class	SystemCallError	Errno::EMSGSIZE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EMULTIHOP	class	SystemCallError	Errno::EMULTIHOP,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENAMETOOLONG	class	SystemCallError	Errno::ENAMETOOLONG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENAVAIL	class	SystemCallError	Errno::ENAVAIL,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENETDOWN	class	SystemCallError	Errno::ENETDOWN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENETRESET	class	SystemCallError	Errno::ENETRESET,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENETUNREACH	class	SystemCallError	Errno::ENETUNREACH,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENFILE	class	SystemCallError	Errno::ENFILE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOANO	class	SystemCallError	Errno::ENOANO,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOBUFS	class	SystemCallError	Errno::ENOBUFS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOCSI	class	SystemCallError	Errno::ENOCSI,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENODATA	class	SystemCallError	Errno::ENODATA,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENODEV	class	SystemCallError	Errno::ENODEV,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOENT	class	SystemCallError	Errno::ENOENT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOEXEC	class	SystemCallError	Errno::ENOEXEC,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOKEY	class	SystemCallError	Errno::ENOKEY,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOLCK	class	SystemCallError	Errno::ENOLCK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOLINK	class	SystemCallError	Errno::ENOLINK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOMEDIUM	class	SystemCallError	Errno::ENOMEDIUM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOMEM	class	SystemCallError	Errno::ENOMEM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOMSG	class	SystemCallError	Errno::ENOMSG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENONET	class	SystemCallError	Errno::ENONET,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOPKG	class	SystemCallError	Errno::ENOPKG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOPROTOOPT	class	SystemCallError	Errno::ENOPROTOOPT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOSPC	class	SystemCallError	Errno::ENOSPC,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOSR	class	SystemCallError	Errno::ENOSR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOSTR	class	SystemCallError	Errno::ENOSTR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOSYS	class	SystemCallError	Errno::ENOSYS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTBLK	class	SystemCallError	Errno::ENOTBLK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTCONN	class	SystemCallError	Errno::ENOTCONN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTDIR	class	SystemCallError	Errno::ENOTDIR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTEMPTY	class	SystemCallError	Errno::ENOTEMPTY,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTNAM	class	SystemCallError	Errno::ENOTNAM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTRECOVERABLE	class	SystemCallError	Errno::ENOTRECOVERABLE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTSOCK	class	SystemCallError	Errno::ENOTSOCK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTTY	class	SystemCallError	Errno::ENOTTY,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTUNIQ	class	SystemCallError	Errno::ENOTUNIQ,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENXIO	class	SystemCallError	Errno::ENXIO,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EOPNOTSUPP	class	SystemCallError	Errno::EOPNOTSUPP,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EOVERFLOW	class	SystemCallError	Errno::EOVERFLOW,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EOWNERDEAD	class	SystemCallError	Errno::EOWNERDEAD,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EPERM	class	SystemCallError	Errno::EPERM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EPFNOSUPPORT	class	SystemCallError	Errno::EPFNOSUPPORT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EPIPE	class	SystemCallError	Errno::EPIPE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EPROTO	class	SystemCallError	Errno::EPROTO,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EPROTONOSUPPORT	class	SystemCallError	Errno::EPROTONOSUPPORT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EPROTOTYPE	class	SystemCallError	Errno::EPROTOTYPE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ERANGE	class	SystemCallError	Errno::ERANGE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EREMCHG	class	SystemCallError	Errno::EREMCHG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EREMOTE	class	SystemCallError	Errno::EREMOTE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EREMOTEIO	class	SystemCallError	Errno::EREMOTEIO,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ERESTART	class	SystemCallError	Errno::ERESTART,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ERFKILL	class	SystemCallError	Errno::ERFKILL,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EROFS	class	SystemCallError	Errno::EROFS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESHUTDOWN	class	SystemCallError	Errno::ESHUTDOWN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESOCKTNOSUPPORT	class	SystemCallError	Errno::ESOCKTNOSUPPORT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESPIPE	class	SystemCallError	Errno::ESPIPE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESRCH	class	SystemCallError	Errno::ESRCH,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESRMNT	class	SystemCallError	Errno::ESRMNT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESTALE	class	SystemCallError	Errno::ESTALE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESTRPIPE	class	SystemCallError	Errno::ESTRPIPE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ETIME	class	SystemCallError	Errno::ETIME,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ETIMEDOUT	class	SystemCallError	Errno::ETIMEDOUT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ETOOMANYREFS	class	SystemCallError	Errno::ETOOMANYREFS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ETXTBSY	class	SystemCallError	Errno::ETXTBSY,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EUCLEAN	class	SystemCallError	Errno::EUCLEAN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EUNATCH	class	SystemCallError	Errno::EUNATCH,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EUSERS	class	SystemCallError	Errno::EUSERS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EXDEV	class	SystemCallError	Errno::EXDEV,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EXFULL	class	SystemCallError	Errno::EXFULL,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::NOERROR	class	SystemCallError	Errno::NOERROR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Exception	class	Object	Exception,Object,Kernel,BasicObject
+M	Exception	s	pub	exception
+M	Exception	i	pub	==
+M	Exception	i	pub	backtrace
+M	Exception	i	pub	backtrace_locations
+M	Exception	i	pub	cause
+M	Exception	i	pub	exception
+M	Exception	i	pub	inspect
+M	Exception	i	pub	message
+M	Exception	i	pub	respond_to?
+M	Exception	i	pub	set_backtrace
+M	Exception	i	pub	to_s
+M	Exception	i	priv	initialize
+M	Exception	i	priv	method_missing
+M	Exception	i	priv	respond_to_missing?
+A	FalseClass	class	Object	FalseClass,Object,Kernel,BasicObject
+M	FalseClass	i	pub	&
+M	FalseClass	i	pub	===
+M	FalseClass	i	pub	^
+M	FalseClass	i	pub	inspect
+M	FalseClass	i	pub	to_s
+M	FalseClass	i	pub	|
+A	Fiber	class	Object	Fiber,Object,Kernel,BasicObject
+M	Fiber	s	pub	yield
+M	Fiber	i	pub	resume
+M	Fiber	i	priv	initialize
+A	FiberError	class	StandardError	FiberError,StandardError,Exception,Object,Kernel,BasicObject
+A	File	class	IO	File,IO,File::Constants,Enumerable,Object,Kernel,BasicObject
+M	File	s	pub	absolute_path
+M	File	s	pub	atime
+M	File	s	pub	basename
+M	File	s	pub	birthtime
+M	File	s	pub	blockdev?
+M	File	s	pub	chardev?
+M	File	s	pub	chmod
+M	File	s	pub	chown
+M	File	s	pub	ctime
+M	File	s	pub	delete
+M	File	s	pub	directory?
+M	File	s	pub	dirname
+M	File	s	pub	empty?
+M	File	s	pub	executable?
+M	File	s	pub	executable_real?
+M	File	s	pub	exist?
+M	File	s	pub	exists?
+M	File	s	pub	expand_path
+M	File	s	pub	extname
+M	File	s	pub	file?
+M	File	s	pub	fnmatch
+M	File	s	pub	fnmatch?
+M	File	s	pub	ftype
+M	File	s	pub	grpowned?
+M	File	s	pub	identical?
+M	File	s	pub	join
+M	File	s	pub	lchmod
+M	File	s	pub	lchown
+M	File	s	pub	link
+M	File	s	pub	lstat
+M	File	s	pub	mkfifo
+M	File	s	pub	mtime
+M	File	s	pub	owned?
+M	File	s	pub	path
+M	File	s	pub	pipe?
+M	File	s	pub	readable?
+M	File	s	pub	readable_real?
+M	File	s	pub	readlink
+M	File	s	pub	realdirpath
+M	File	s	pub	realpath
+M	File	s	pub	rename
+M	File	s	pub	setgid?
+M	File	s	pub	setuid?
+M	File	s	pub	size
+M	File	s	pub	size?
+M	File	s	pub	socket?
+M	File	s	pub	split
+M	File	s	pub	stat
+M	File	s	pub	sticky?
+M	File	s	pub	symlink
+M	File	s	pub	symlink?
+M	File	s	pub	truncate
+M	File	s	pub	umask
+M	File	s	pub	unlink
+M	File	s	pub	utime
+M	File	s	pub	world_readable?
+M	File	s	pub	world_writable?
+M	File	s	pub	writable?
+M	File	s	pub	writable_real?
+M	File	s	pub	zero?
+M	File	i	pub	atime
+M	File	i	pub	birthtime
+M	File	i	pub	chmod
+M	File	i	pub	chown
+M	File	i	pub	ctime
+M	File	i	pub	flock
+M	File	i	pub	lstat
+M	File	i	pub	mtime
+M	File	i	pub	path
+M	File	i	pub	size
+M	File	i	pub	to_path
+M	File	i	pub	truncate
+M	File	i	priv	initialize
+A	File::Constants	module		File::Constants
+A	File::Stat	class	Object	File::Stat,Comparable,Object,Kernel,BasicObject
+M	File::Stat	i	pub	<=>
+M	File::Stat	i	pub	atime
+M	File::Stat	i	pub	birthtime
+M	File::Stat	i	pub	blksize
+M	File::Stat	i	pub	blockdev?
+M	File::Stat	i	pub	blocks
+M	File::Stat	i	pub	chardev?
+M	File::Stat	i	pub	ctime
+M	File::Stat	i	pub	dev
+M	File::Stat	i	pub	dev_major
+M	File::Stat	i	pub	dev_minor
+M	File::Stat	i	pub	directory?
+M	File::Stat	i	pub	executable?
+M	File::Stat	i	pub	executable_real?
+M	File::Stat	i	pub	file?
+M	File::Stat	i	pub	ftype
+M	File::Stat	i	pub	gid
+M	File::Stat	i	pub	grpowned?
+M	File::Stat	i	pub	ino
+M	File::Stat	i	pub	inspect
+M	File::Stat	i	pub	mode
+M	File::Stat	i	pub	mtime
+M	File::Stat	i	pub	nlink
+M	File::Stat	i	pub	owned?
+M	File::Stat	i	pub	pipe?
+M	File::Stat	i	pub	rdev
+M	File::Stat	i	pub	rdev_major
+M	File::Stat	i	pub	rdev_minor
+M	File::Stat	i	pub	readable?
+M	File::Stat	i	pub	readable_real?
+M	File::Stat	i	pub	setgid?
+M	File::Stat	i	pub	setuid?
+M	File::Stat	i	pub	size
+M	File::Stat	i	pub	size?
+M	File::Stat	i	pub	socket?
+M	File::Stat	i	pub	sticky?
+M	File::Stat	i	pub	symlink?
+M	File::Stat	i	pub	uid
+M	File::Stat	i	pub	world_readable?
+M	File::Stat	i	pub	world_writable?
+M	File::Stat	i	pub	writable?
+M	File::Stat	i	pub	writable_real?
+M	File::Stat	i	pub	zero?
+M	File::Stat	i	priv	initialize
+M	File::Stat	i	priv	initialize_copy
+A	FileTest	module		FileTest
+M	FileTest	s	pub	blockdev?
+M	FileTest	s	pub	chardev?
+M	FileTest	s	pub	directory?
+M	FileTest	s	pub	empty?
+M	FileTest	s	pub	executable?
+M	FileTest	s	pub	executable_real?
+M	FileTest	s	pub	exist?
+M	FileTest	s	pub	exists?
+M	FileTest	s	pub	file?
+M	FileTest	s	pub	grpowned?
+M	FileTest	s	pub	identical?
+M	FileTest	s	pub	owned?
+M	FileTest	s	pub	pipe?
+M	FileTest	s	pub	readable?
+M	FileTest	s	pub	readable_real?
+M	FileTest	s	pub	setgid?
+M	FileTest	s	pub	setuid?
+M	FileTest	s	pub	size
+M	FileTest	s	pub	size?
+M	FileTest	s	pub	socket?
+M	FileTest	s	pub	sticky?
+M	FileTest	s	pub	symlink?
+M	FileTest	s	pub	world_readable?
+M	FileTest	s	pub	world_writable?
+M	FileTest	s	pub	writable?
+M	FileTest	s	pub	writable_real?
+M	FileTest	s	pub	zero?
+M	FileTest	i	priv	blockdev?
+M	FileTest	i	priv	chardev?
+M	FileTest	i	priv	directory?
+M	FileTest	i	priv	empty?
+M	FileTest	i	priv	executable?
+M	FileTest	i	priv	executable_real?
+M	FileTest	i	priv	exist?
+M	FileTest	i	priv	exists?
+M	FileTest	i	priv	file?
+M	FileTest	i	priv	grpowned?
+M	FileTest	i	priv	identical?
+M	FileTest	i	priv	owned?
+M	FileTest	i	priv	pipe?
+M	FileTest	i	priv	readable?
+M	FileTest	i	priv	readable_real?
+M	FileTest	i	priv	setgid?
+M	FileTest	i	priv	setuid?
+M	FileTest	i	priv	size
+M	FileTest	i	priv	size?
+M	FileTest	i	priv	socket?
+M	FileTest	i	priv	sticky?
+M	FileTest	i	priv	symlink?
+M	FileTest	i	priv	world_readable?
+M	FileTest	i	priv	world_writable?
+M	FileTest	i	priv	writable?
+M	FileTest	i	priv	writable_real?
+M	FileTest	i	priv	zero?
+A	Float	class	Numeric	Float,Numeric,Comparable,Object,Kernel,BasicObject
+M	Float	i	pub	%
+M	Float	i	pub	*
+M	Float	i	pub	**
+M	Float	i	pub	+
+M	Float	i	pub	-
+M	Float	i	pub	-@
+M	Float	i	pub	/
+M	Float	i	pub	<
+M	Float	i	pub	<=
+M	Float	i	pub	<=>
+M	Float	i	pub	==
+M	Float	i	pub	===
+M	Float	i	pub	>
+M	Float	i	pub	>=
+M	Float	i	pub	abs
+M	Float	i	pub	angle
+M	Float	i	pub	arg
+M	Float	i	pub	ceil
+M	Float	i	pub	coerce
+M	Float	i	pub	denominator
+M	Float	i	pub	divmod
+M	Float	i	pub	eql?
+M	Float	i	pub	fdiv
+M	Float	i	pub	finite?
+M	Float	i	pub	floor
+M	Float	i	pub	hash
+M	Float	i	pub	infinite?
+M	Float	i	pub	inspect
+M	Float	i	pub	magnitude
+M	Float	i	pub	modulo
+M	Float	i	pub	nan?
+M	Float	i	pub	negative?
+M	Float	i	pub	next_float
+M	Float	i	pub	numerator
+M	Float	i	pub	phase
+M	Float	i	pub	positive?
+M	Float	i	pub	prev_float
+M	Float	i	pub	quo
+M	Float	i	pub	rationalize
+M	Float	i	pub	round
+M	Float	i	pub	to_f
+M	Float	i	pub	to_i
+M	Float	i	pub	to_int
+M	Float	i	pub	to_r
+M	Float	i	pub	to_s
+M	Float	i	pub	truncate
+M	Float	i	pub	zero?
+A	FloatDomainError	class	RangeError	FloatDomainError,RangeError,StandardError,Exception,Object,Kernel,BasicObject
+A	GC	module		GC
+M	GC	s	pub	count
+M	GC	s	pub	disable
+M	GC	s	pub	enable
+M	GC	s	pub	latest_gc_info
+M	GC	s	pub	start
+M	GC	s	pub	stat
+M	GC	s	pub	stress
+M	GC	s	pub	stress=
+M	GC	s	pub	verify_internal_consistency
+M	GC	i	pub	garbage_collect
+A	GC::Profiler	module		GC::Profiler
+M	GC::Profiler	s	pub	clear
+M	GC::Profiler	s	pub	disable
+M	GC::Profiler	s	pub	enable
+M	GC::Profiler	s	pub	enabled?
+M	GC::Profiler	s	pub	raw_data
+M	GC::Profiler	s	pub	report
+M	GC::Profiler	s	pub	result
+M	GC::Profiler	s	pub	total_time
+A	Hash	class	Object	Hash,Enumerable,Object,Kernel,BasicObject
+M	Hash	s	pub	[]
+M	Hash	s	pub	try_convert
+M	Hash	i	pub	<
+M	Hash	i	pub	<=
+M	Hash	i	pub	==
+M	Hash	i	pub	>
+M	Hash	i	pub	>=
+M	Hash	i	pub	[]
+M	Hash	i	pub	[]=
+M	Hash	i	pub	any?
+M	Hash	i	pub	assoc
+M	Hash	i	pub	clear
+M	Hash	i	pub	compact
+M	Hash	i	pub	compact!
+M	Hash	i	pub	compare_by_identity
+M	Hash	i	pub	compare_by_identity?
+M	Hash	i	pub	default
+M	Hash	i	pub	default=
+M	Hash	i	pub	default_proc
+M	Hash	i	pub	default_proc=
+M	Hash	i	pub	delete
+M	Hash	i	pub	delete_if
+M	Hash	i	pub	dig
+M	Hash	i	pub	each
+M	Hash	i	pub	each_key
+M	Hash	i	pub	each_pair
+M	Hash	i	pub	each_value
+M	Hash	i	pub	empty?
+M	Hash	i	pub	eql?
+M	Hash	i	pub	fetch
+M	Hash	i	pub	fetch_values
+M	Hash	i	pub	flatten
+M	Hash	i	pub	has_key?
+M	Hash	i	pub	has_value?
+M	Hash	i	pub	hash
+M	Hash	i	pub	include?
+M	Hash	i	pub	index
+M	Hash	i	pub	inspect
+M	Hash	i	pub	invert
+M	Hash	i	pub	keep_if
+M	Hash	i	pub	key
+M	Hash	i	pub	key?
+M	Hash	i	pub	keys
+M	Hash	i	pub	length
+M	Hash	i	pub	member?
+M	Hash	i	pub	merge
+M	Hash	i	pub	merge!
+M	Hash	i	pub	rassoc
+M	Hash	i	pub	rehash
+M	Hash	i	pub	reject
+M	Hash	i	pub	reject!
+M	Hash	i	pub	replace
+M	Hash	i	pub	select
+M	Hash	i	pub	select!
+M	Hash	i	pub	shift
+M	Hash	i	pub	size
+M	Hash	i	pub	store
+M	Hash	i	pub	to_a
+M	Hash	i	pub	to_h
+M	Hash	i	pub	to_hash
+M	Hash	i	pub	to_proc
+M	Hash	i	pub	to_s
+M	Hash	i	pub	transform_values
+M	Hash	i	pub	transform_values!
+M	Hash	i	pub	update
+M	Hash	i	pub	value?
+M	Hash	i	pub	values
+M	Hash	i	pub	values_at
+M	Hash	i	priv	initialize
+M	Hash	i	priv	initialize_copy
+A	IO	class	Object	IO,File::Constants,Enumerable,Object,Kernel,BasicObject
+M	IO	s	pub	binread
+M	IO	s	pub	binwrite
+M	IO	s	pub	copy_stream
+M	IO	s	pub	for_fd
+M	IO	s	pub	foreach
+M	IO	s	pub	new
+M	IO	s	pub	open
+M	IO	s	pub	pipe
+M	IO	s	pub	popen
+M	IO	s	pub	read
+M	IO	s	pub	readlines
+M	IO	s	pub	select
+M	IO	s	pub	sysopen
+M	IO	s	pub	try_convert
+M	IO	s	pub	write
+M	IO	i	pub	<<
+M	IO	i	pub	advise
+M	IO	i	pub	autoclose=
+M	IO	i	pub	autoclose?
+M	IO	i	pub	binmode
+M	IO	i	pub	binmode?
+M	IO	i	pub	bytes
+M	IO	i	pub	chars
+M	IO	i	pub	close
+M	IO	i	pub	close_on_exec=
+M	IO	i	pub	close_on_exec?
+M	IO	i	pub	close_read
+M	IO	i	pub	close_write
+M	IO	i	pub	closed?
+M	IO	i	pub	codepoints
+M	IO	i	pub	each
+M	IO	i	pub	each_byte
+M	IO	i	pub	each_char
+M	IO	i	pub	each_codepoint
+M	IO	i	pub	each_line
+M	IO	i	pub	eof
+M	IO	i	pub	eof?
+M	IO	i	pub	external_encoding
+M	IO	i	pub	fcntl
+M	IO	i	pub	fdatasync
+M	IO	i	pub	fileno
+M	IO	i	pub	flush
+M	IO	i	pub	fsync
+M	IO	i	pub	getbyte
+M	IO	i	pub	getc
+M	IO	i	pub	gets
+M	IO	i	pub	inspect
+M	IO	i	pub	internal_encoding
+M	IO	i	pub	ioctl
+M	IO	i	pub	isatty
+M	IO	i	pub	lineno
+M	IO	i	pub	lineno=
+M	IO	i	pub	lines
+M	IO	i	pub	pid
+M	IO	i	pub	pos
+M	IO	i	pub	pos=
+M	IO	i	pub	print
+M	IO	i	pub	printf
+M	IO	i	pub	putc
+M	IO	i	pub	puts
+M	IO	i	pub	read
+M	IO	i	pub	read_nonblock
+M	IO	i	pub	readbyte
+M	IO	i	pub	readchar
+M	IO	i	pub	readline
+M	IO	i	pub	readlines
+M	IO	i	pub	readpartial
+M	IO	i	pub	reopen
+M	IO	i	pub	rewind
+M	IO	i	pub	seek
+M	IO	i	pub	set_encoding
+M	IO	i	pub	stat
+M	IO	i	pub	sync
+M	IO	i	pub	sync=
+M	IO	i	pub	sysread
+M	IO	i	pub	sysseek
+M	IO	i	pub	syswrite
+M	IO	i	pub	tell
+M	IO	i	pub	to_i
+M	IO	i	pub	to_io
+M	IO	i	pub	tty?
+M	IO	i	pub	ungetbyte
+M	IO	i	pub	ungetc
+M	IO	i	pub	write
+M	IO	i	pub	write_nonblock
+M	IO	i	priv	__read_nonblock
+M	IO	i	priv	__write_nonblock
+M	IO	i	priv	initialize
+M	IO	i	priv	initialize_copy
+A	IO::EAGAINWaitReadable	class	Errno::EAGAIN	IO::EAGAINWaitReadable,IO::WaitReadable,Errno::EAGAIN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::EAGAINWaitWritable	class	Errno::EAGAIN	IO::EAGAINWaitWritable,IO::WaitWritable,Errno::EAGAIN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::EINPROGRESSWaitReadable	class	Errno::EINPROGRESS	IO::EINPROGRESSWaitReadable,IO::WaitReadable,Errno::EINPROGRESS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::EINPROGRESSWaitWritable	class	Errno::EINPROGRESS	IO::EINPROGRESSWaitWritable,IO::WaitWritable,Errno::EINPROGRESS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::WaitReadable	module		IO::WaitReadable
+A	IO::WaitWritable	module		IO::WaitWritable
+A	IOError	class	StandardError	IOError,StandardError,Exception,Object,Kernel,BasicObject
+A	IndexError	class	StandardError	IndexError,StandardError,Exception,Object,Kernel,BasicObject
+A	Integer	class	Numeric	Integer,Numeric,Comparable,Object,Kernel,BasicObject
+M	Integer	i	pub	%
+M	Integer	i	pub	&
+M	Integer	i	pub	*
+M	Integer	i	pub	**
+M	Integer	i	pub	+
+M	Integer	i	pub	-
+M	Integer	i	pub	-@
+M	Integer	i	pub	/
+M	Integer	i	pub	<
+M	Integer	i	pub	<<
+M	Integer	i	pub	<=
+M	Integer	i	pub	<=>
+M	Integer	i	pub	==
+M	Integer	i	pub	===
+M	Integer	i	pub	>
+M	Integer	i	pub	>=
+M	Integer	i	pub	>>
+M	Integer	i	pub	[]
+M	Integer	i	pub	^
+M	Integer	i	pub	abs
+M	Integer	i	pub	bit_length
+M	Integer	i	pub	ceil
+M	Integer	i	pub	chr
+M	Integer	i	pub	coerce
+M	Integer	i	pub	denominator
+M	Integer	i	pub	digits
+M	Integer	i	pub	div
+M	Integer	i	pub	divmod
+M	Integer	i	pub	downto
+M	Integer	i	pub	even?
+M	Integer	i	pub	fdiv
+M	Integer	i	pub	floor
+M	Integer	i	pub	gcd
+M	Integer	i	pub	gcdlcm
+M	Integer	i	pub	inspect
+M	Integer	i	pub	integer?
+M	Integer	i	pub	lcm
+M	Integer	i	pub	magnitude
+M	Integer	i	pub	modulo
+M	Integer	i	pub	next
+M	Integer	i	pub	numerator
+M	Integer	i	pub	odd?
+M	Integer	i	pub	ord
+M	Integer	i	pub	pred
+M	Integer	i	pub	rationalize
+M	Integer	i	pub	remainder
+M	Integer	i	pub	round
+M	Integer	i	pub	size
+M	Integer	i	pub	succ
+M	Integer	i	pub	times
+M	Integer	i	pub	to_f
+M	Integer	i	pub	to_i
+M	Integer	i	pub	to_int
+M	Integer	i	pub	to_r
+M	Integer	i	pub	to_s
+M	Integer	i	pub	truncate
+M	Integer	i	pub	upto
+M	Integer	i	pub	|
+M	Integer	i	pub	~
+A	Interrupt	class	SignalException	Interrupt,SignalException,Exception,Object,Kernel,BasicObject
+M	Interrupt	i	priv	initialize
+A	Kernel	module		Kernel
+M	Kernel	s	pub	Array
+M	Kernel	s	pub	Complex
+M	Kernel	s	pub	Float
+M	Kernel	s	pub	Hash
+M	Kernel	s	pub	Integer
+M	Kernel	s	pub	Rational
+M	Kernel	s	pub	String
+M	Kernel	s	pub	__callee__
+M	Kernel	s	pub	__dir__
+M	Kernel	s	pub	__method__
+M	Kernel	s	pub	`
+M	Kernel	s	pub	abort
+M	Kernel	s	pub	at_exit
+M	Kernel	s	pub	autoload
+M	Kernel	s	pub	autoload?
+M	Kernel	s	pub	binding
+M	Kernel	s	pub	block_given?
+M	Kernel	s	pub	caller
+M	Kernel	s	pub	caller_locations
+M	Kernel	s	pub	catch
+M	Kernel	s	pub	eval
+M	Kernel	s	pub	exec
+M	Kernel	s	pub	exit
+M	Kernel	s	pub	exit!
+M	Kernel	s	pub	fail
+M	Kernel	s	pub	fork
+M	Kernel	s	pub	format
+M	Kernel	s	pub	gets
+M	Kernel	s	pub	global_variables
+M	Kernel	s	pub	iterator?
+M	Kernel	s	pub	lambda
+M	Kernel	s	pub	load
+M	Kernel	s	pub	local_variables
+M	Kernel	s	pub	loop
+M	Kernel	s	pub	open
+M	Kernel	s	pub	p
+M	Kernel	s	pub	print
+M	Kernel	s	pub	printf
+M	Kernel	s	pub	proc
+M	Kernel	s	pub	putc
+M	Kernel	s	pub	puts
+M	Kernel	s	pub	raise
+M	Kernel	s	pub	rand
+M	Kernel	s	pub	readline
+M	Kernel	s	pub	readlines
+M	Kernel	s	pub	require
+M	Kernel	s	pub	require_relative
+M	Kernel	s	pub	select
+M	Kernel	s	pub	set_trace_func
+M	Kernel	s	pub	sleep
+M	Kernel	s	pub	spawn
+M	Kernel	s	pub	sprintf
+M	Kernel	s	pub	srand
+M	Kernel	s	pub	syscall
+M	Kernel	s	pub	system
+M	Kernel	s	pub	test
+M	Kernel	s	pub	throw
+M	Kernel	s	pub	trace_var
+M	Kernel	s	pub	trap
+M	Kernel	s	pub	untrace_var
+M	Kernel	s	pub	warn
+M	Kernel	i	pub	!~
+M	Kernel	i	pub	<=>
+M	Kernel	i	pub	===
+M	Kernel	i	pub	=~
+M	Kernel	i	pub	class
+M	Kernel	i	pub	clone
+M	Kernel	i	pub	define_singleton_method
+M	Kernel	i	pub	display
+M	Kernel	i	pub	dup
+M	Kernel	i	pub	enum_for
+M	Kernel	i	pub	eql?
+M	Kernel	i	pub	extend
+M	Kernel	i	pub	freeze
+M	Kernel	i	pub	frozen?
+M	Kernel	i	pub	hash
+M	Kernel	i	pub	inspect
+M	Kernel	i	pub	instance_of?
+M	Kernel	i	pub	instance_variable_defined?
+M	Kernel	i	pub	instance_variable_get
+M	Kernel	i	pub	instance_variable_set
+M	Kernel	i	pub	instance_variables
+M	Kernel	i	pub	is_a?
+M	Kernel	i	pub	itself
+M	Kernel	i	pub	kind_of?
+M	Kernel	i	pub	method
+M	Kernel	i	pub	methods
+M	Kernel	i	pub	nil?
+M	Kernel	i	pub	object_id
+M	Kernel	i	pub	private_methods
+M	Kernel	i	pub	protected_methods
+M	Kernel	i	pub	public_method
+M	Kernel	i	pub	public_methods
+M	Kernel	i	pub	public_send
+M	Kernel	i	pub	remove_instance_variable
+M	Kernel	i	pub	respond_to?
+M	Kernel	i	pub	send
+M	Kernel	i	pub	singleton_class
+M	Kernel	i	pub	singleton_method
+M	Kernel	i	pub	singleton_methods
+M	Kernel	i	pub	taint
+M	Kernel	i	pub	tainted?
+M	Kernel	i	pub	tap
+M	Kernel	i	pub	to_enum
+M	Kernel	i	pub	to_s
+M	Kernel	i	pub	trust
+M	Kernel	i	pub	untaint
+M	Kernel	i	pub	untrust
+M	Kernel	i	pub	untrusted?
+M	Kernel	i	priv	Array
+M	Kernel	i	priv	Complex
+M	Kernel	i	priv	Float
+M	Kernel	i	priv	Hash
+M	Kernel	i	priv	Integer
+M	Kernel	i	priv	Rational
+M	Kernel	i	priv	String
+M	Kernel	i	priv	__callee__
+M	Kernel	i	priv	__dir__
+M	Kernel	i	priv	__method__
+M	Kernel	i	priv	`
+M	Kernel	i	priv	abort
+M	Kernel	i	priv	at_exit
+M	Kernel	i	priv	autoload
+M	Kernel	i	priv	autoload?
+M	Kernel	i	priv	binding
+M	Kernel	i	priv	block_given?
+M	Kernel	i	priv	caller
+M	Kernel	i	priv	caller_locations
+M	Kernel	i	priv	catch
+M	Kernel	i	priv	eval
+M	Kernel	i	priv	exec
+M	Kernel	i	priv	exit
+M	Kernel	i	priv	exit!
+M	Kernel	i	priv	fail
+M	Kernel	i	priv	fork
+M	Kernel	i	priv	format
+M	Kernel	i	priv	gets
+M	Kernel	i	priv	global_variables
+M	Kernel	i	priv	initialize_clone
+M	Kernel	i	priv	initialize_copy
+M	Kernel	i	priv	initialize_dup
+M	Kernel	i	priv	iterator?
+M	Kernel	i	priv	lambda
+M	Kernel	i	priv	load
+M	Kernel	i	priv	local_variables
+M	Kernel	i	priv	loop
+M	Kernel	i	priv	open
+M	Kernel	i	priv	p
+M	Kernel	i	priv	print
+M	Kernel	i	priv	printf
+M	Kernel	i	priv	proc
+M	Kernel	i	priv	putc
+M	Kernel	i	priv	puts
+M	Kernel	i	priv	raise
+M	Kernel	i	priv	rand
+M	Kernel	i	priv	readline
+M	Kernel	i	priv	readlines
+M	Kernel	i	priv	require
+M	Kernel	i	priv	require_relative
+M	Kernel	i	priv	respond_to_missing?
+M	Kernel	i	priv	select
+M	Kernel	i	priv	set_trace_func
+M	Kernel	i	priv	sleep
+M	Kernel	i	priv	spawn
+M	Kernel	i	priv	sprintf
+M	Kernel	i	priv	srand
+M	Kernel	i	priv	syscall
+M	Kernel	i	priv	system
+M	Kernel	i	priv	test
+M	Kernel	i	priv	throw
+M	Kernel	i	priv	trace_var
+M	Kernel	i	priv	trap
+M	Kernel	i	priv	untrace_var
+M	Kernel	i	priv	warn
+A	KeyError	class	IndexError	KeyError,IndexError,StandardError,Exception,Object,Kernel,BasicObject
+A	LoadError	class	ScriptError	LoadError,ScriptError,Exception,Object,Kernel,BasicObject
+M	LoadError	i	pub	path
+A	LocalJumpError	class	StandardError	LocalJumpError,StandardError,Exception,Object,Kernel,BasicObject
+M	LocalJumpError	i	pub	exit_value
+M	LocalJumpError	i	pub	reason
+A	Marshal	module		Marshal
+M	Marshal	s	pub	dump
+M	Marshal	s	pub	load
+M	Marshal	s	pub	restore
+M	Marshal	i	priv	dump
+M	Marshal	i	priv	load
+M	Marshal	i	priv	restore
+A	MatchData	class	Object	MatchData,Object,Kernel,BasicObject
+M	MatchData	i	pub	==
+M	MatchData	i	pub	[]
+M	MatchData	i	pub	begin
+M	MatchData	i	pub	captures
+M	MatchData	i	pub	end
+M	MatchData	i	pub	eql?
+M	MatchData	i	pub	hash
+M	MatchData	i	pub	inspect
+M	MatchData	i	pub	length
+M	MatchData	i	pub	named_captures
+M	MatchData	i	pub	names
+M	MatchData	i	pub	offset
+M	MatchData	i	pub	post_match
+M	MatchData	i	pub	pre_match
+M	MatchData	i	pub	regexp
+M	MatchData	i	pub	size
+M	MatchData	i	pub	string
+M	MatchData	i	pub	to_a
+M	MatchData	i	pub	to_s
+M	MatchData	i	pub	values_at
+M	MatchData	i	priv	initialize_copy
+A	Math	module		Math
+M	Math	s	pub	acos
+M	Math	s	pub	acosh
+M	Math	s	pub	asin
+M	Math	s	pub	asinh
+M	Math	s	pub	atan
+M	Math	s	pub	atan2
+M	Math	s	pub	atanh
+M	Math	s	pub	cbrt
+M	Math	s	pub	cos
+M	Math	s	pub	cosh
+M	Math	s	pub	erf
+M	Math	s	pub	erfc
+M	Math	s	pub	exp
+M	Math	s	pub	frexp
+M	Math	s	pub	gamma
+M	Math	s	pub	hypot
+M	Math	s	pub	ldexp
+M	Math	s	pub	lgamma
+M	Math	s	pub	log
+M	Math	s	pub	log10
+M	Math	s	pub	log2
+M	Math	s	pub	sin
+M	Math	s	pub	sinh
+M	Math	s	pub	sqrt
+M	Math	s	pub	tan
+M	Math	s	pub	tanh
+M	Math	i	priv	acos
+M	Math	i	priv	acosh
+M	Math	i	priv	asin
+M	Math	i	priv	asinh
+M	Math	i	priv	atan
+M	Math	i	priv	atan2
+M	Math	i	priv	atanh
+M	Math	i	priv	cbrt
+M	Math	i	priv	cos
+M	Math	i	priv	cosh
+M	Math	i	priv	erf
+M	Math	i	priv	erfc
+M	Math	i	priv	exp
+M	Math	i	priv	frexp
+M	Math	i	priv	gamma
+M	Math	i	priv	hypot
+M	Math	i	priv	ldexp
+M	Math	i	priv	lgamma
+M	Math	i	priv	log
+M	Math	i	priv	log10
+M	Math	i	priv	log2
+M	Math	i	priv	sin
+M	Math	i	priv	sinh
+M	Math	i	priv	sqrt
+M	Math	i	priv	tan
+M	Math	i	priv	tanh
+A	Math::DomainError	class	StandardError	Math::DomainError,StandardError,Exception,Object,Kernel,BasicObject
+A	Method	class	Object	Method,Object,Kernel,BasicObject
+M	Method	i	pub	==
+M	Method	i	pub	[]
+M	Method	i	pub	arity
+M	Method	i	pub	call
+M	Method	i	pub	clone
+M	Method	i	pub	curry
+M	Method	i	pub	eql?
+M	Method	i	pub	hash
+M	Method	i	pub	inspect
+M	Method	i	pub	name
+M	Method	i	pub	original_name
+M	Method	i	pub	owner
+M	Method	i	pub	parameters
+M	Method	i	pub	receiver
+M	Method	i	pub	source_location
+M	Method	i	pub	super_method
+M	Method	i	pub	to_proc
+M	Method	i	pub	to_s
+M	Method	i	pub	unbind
+A	Module	class	Object	Module,Object,Kernel,BasicObject
+M	Module	s	pub	constants
+M	Module	s	pub	nesting
+M	Module	s	pub	used_modules
+M	Module	i	pub	<
+M	Module	i	pub	<=
+M	Module	i	pub	<=>
+M	Module	i	pub	==
+M	Module	i	pub	===
+M	Module	i	pub	>
+M	Module	i	pub	>=
+M	Module	i	pub	ancestors
+M	Module	i	pub	autoload
+M	Module	i	pub	autoload?
+M	Module	i	pub	class_eval
+M	Module	i	pub	class_exec
+M	Module	i	pub	class_variable_defined?
+M	Module	i	pub	class_variable_get
+M	Module	i	pub	class_variable_set
+M	Module	i	pub	class_variables
+M	Module	i	pub	const_defined?
+M	Module	i	pub	const_get
+M	Module	i	pub	const_missing
+M	Module	i	pub	const_set
+M	Module	i	pub	constants
+M	Module	i	pub	deprecate_constant
+M	Module	i	pub	freeze
+M	Module	i	pub	include
+M	Module	i	pub	include?
+M	Module	i	pub	included_modules
+M	Module	i	pub	inspect
+M	Module	i	pub	instance_method
+M	Module	i	pub	instance_methods
+M	Module	i	pub	method_defined?
+M	Module	i	pub	module_eval
+M	Module	i	pub	module_exec
+M	Module	i	pub	name
+M	Module	i	pub	prepend
+M	Module	i	pub	private_class_method
+M	Module	i	pub	private_constant
+M	Module	i	pub	private_instance_methods
+M	Module	i	pub	private_method_defined?
+M	Module	i	pub	protected_instance_methods
+M	Module	i	pub	protected_method_defined?
+M	Module	i	pub	public_class_method
+M	Module	i	pub	public_constant
+M	Module	i	pub	public_instance_method
+M	Module	i	pub	public_instance_methods
+M	Module	i	pub	public_method_defined?
+M	Module	i	pub	remove_class_variable
+M	Module	i	pub	singleton_class?
+M	Module	i	pub	to_s
+M	Module	i	priv	alias_method
+M	Module	i	priv	append_features
+M	Module	i	priv	attr
+M	Module	i	priv	attr_accessor
+M	Module	i	priv	attr_reader
+M	Module	i	priv	attr_writer
+M	Module	i	priv	define_method
+M	Module	i	priv	extend_object
+M	Module	i	priv	extended
+M	Module	i	priv	included
+M	Module	i	priv	initialize
+M	Module	i	priv	initialize_clone
+M	Module	i	priv	initialize_copy
+M	Module	i	priv	method_added
+M	Module	i	priv	method_removed
+M	Module	i	priv	method_undefined
+M	Module	i	priv	module_function
+M	Module	i	priv	prepend_features
+M	Module	i	priv	prepended
+M	Module	i	priv	private
+M	Module	i	priv	protected
+M	Module	i	priv	public
+M	Module	i	priv	refine
+M	Module	i	priv	remove_const
+M	Module	i	priv	remove_method
+M	Module	i	priv	undef_method
+M	Module	i	priv	using
+A	NameError	class	StandardError	NameError,StandardError,Exception,Object,Kernel,BasicObject
+M	NameError	i	pub	local_variables
+M	NameError	i	pub	name
+M	NameError	i	pub	receiver
+M	NameError	i	priv	initialize
+A	NilClass	class	Object	NilClass,Object,Kernel,BasicObject
+M	NilClass	i	pub	&
+M	NilClass	i	pub	===
+M	NilClass	i	pub	^
+M	NilClass	i	pub	inspect
+M	NilClass	i	pub	nil?
+M	NilClass	i	pub	rationalize
+M	NilClass	i	pub	to_a
+M	NilClass	i	pub	to_c
+M	NilClass	i	pub	to_f
+M	NilClass	i	pub	to_h
+M	NilClass	i	pub	to_i
+M	NilClass	i	pub	to_r
+M	NilClass	i	pub	to_s
+M	NilClass	i	pub	|
+A	NoMemoryError	class	Exception	NoMemoryError,Exception,Object,Kernel,BasicObject
+A	NoMethodError	class	NameError	NoMethodError,NameError,StandardError,Exception,Object,Kernel,BasicObject
+M	NoMethodError	i	pub	args
+M	NoMethodError	i	pub	private_call?
+M	NoMethodError	i	priv	initialize
+A	NotImplementedError	class	ScriptError	NotImplementedError,ScriptError,Exception,Object,Kernel,BasicObject
+A	Numeric	class	Object	Numeric,Comparable,Object,Kernel,BasicObject
+M	Numeric	i	pub	%
+M	Numeric	i	pub	+@
+M	Numeric	i	pub	-@
+M	Numeric	i	pub	<=>
+M	Numeric	i	pub	abs
+M	Numeric	i	pub	abs2
+M	Numeric	i	pub	angle
+M	Numeric	i	pub	arg
+M	Numeric	i	pub	ceil
+M	Numeric	i	pub	coerce
+M	Numeric	i	pub	conj
+M	Numeric	i	pub	conjugate
+M	Numeric	i	pub	denominator
+M	Numeric	i	pub	div
+M	Numeric	i	pub	divmod
+M	Numeric	i	pub	eql?
+M	Numeric	i	pub	fdiv
+M	Numeric	i	pub	finite?
+M	Numeric	i	pub	floor
+M	Numeric	i	pub	i
+M	Numeric	i	pub	imag
+M	Numeric	i	pub	imaginary
+M	Numeric	i	pub	infinite?
+M	Numeric	i	pub	integer?
+M	Numeric	i	pub	magnitude
+M	Numeric	i	pub	modulo
+M	Numeric	i	pub	negative?
+M	Numeric	i	pub	nonzero?
+M	Numeric	i	pub	numerator
+M	Numeric	i	pub	phase
+M	Numeric	i	pub	polar
+M	Numeric	i	pub	positive?
+M	Numeric	i	pub	quo
+M	Numeric	i	pub	real
+M	Numeric	i	pub	real?
+M	Numeric	i	pub	rect
+M	Numeric	i	pub	rectangular
+M	Numeric	i	pub	remainder
+M	Numeric	i	pub	round
+M	Numeric	i	pub	singleton_method_added
+M	Numeric	i	pub	step
+M	Numeric	i	pub	to_c
+M	Numeric	i	pub	to_int
+M	Numeric	i	pub	truncate
+M	Numeric	i	pub	zero?
+M	Numeric	i	priv	initialize_copy
+A	Object	class	BasicObject	Object,Kernel,BasicObject
+A	ObjectSpace	module		ObjectSpace
+M	ObjectSpace	s	pub	_id2ref
+M	ObjectSpace	s	pub	count_objects
+M	ObjectSpace	s	pub	define_finalizer
+M	ObjectSpace	s	pub	each_object
+M	ObjectSpace	s	pub	garbage_collect
+M	ObjectSpace	s	pub	undefine_finalizer
+M	ObjectSpace	i	priv	_id2ref
+M	ObjectSpace	i	priv	count_objects
+M	ObjectSpace	i	priv	define_finalizer
+M	ObjectSpace	i	priv	each_object
+M	ObjectSpace	i	priv	garbage_collect
+M	ObjectSpace	i	priv	undefine_finalizer
+A	ObjectSpace::WeakMap	class	Object	ObjectSpace::WeakMap,Enumerable,Object,Kernel,BasicObject
+M	ObjectSpace::WeakMap	i	pub	[]
+M	ObjectSpace::WeakMap	i	pub	[]=
+M	ObjectSpace::WeakMap	i	pub	each
+M	ObjectSpace::WeakMap	i	pub	each_key
+M	ObjectSpace::WeakMap	i	pub	each_pair
+M	ObjectSpace::WeakMap	i	pub	each_value
+M	ObjectSpace::WeakMap	i	pub	include?
+M	ObjectSpace::WeakMap	i	pub	inspect
+M	ObjectSpace::WeakMap	i	pub	key?
+M	ObjectSpace::WeakMap	i	pub	keys
+M	ObjectSpace::WeakMap	i	pub	length
+M	ObjectSpace::WeakMap	i	pub	member?
+M	ObjectSpace::WeakMap	i	pub	size
+M	ObjectSpace::WeakMap	i	pub	values
+M	ObjectSpace::WeakMap	i	priv	finalize
+A	Proc	class	Object	Proc,Object,Kernel,BasicObject
+M	Proc	s	pub	new
+M	Proc	i	pub	===
+M	Proc	i	pub	[]
+M	Proc	i	pub	arity
+M	Proc	i	pub	binding
+M	Proc	i	pub	call
+M	Proc	i	pub	clone
+M	Proc	i	pub	curry
+M	Proc	i	pub	dup
+M	Proc	i	pub	hash
+M	Proc	i	pub	inspect
+M	Proc	i	pub	lambda?
+M	Proc	i	pub	parameters
+M	Proc	i	pub	source_location
+M	Proc	i	pub	to_proc
+M	Proc	i	pub	to_s
+M	Proc	i	pub	yield
+A	Process	module		Process
+M	Process	s	pub	abort
+M	Process	s	pub	argv0
+M	Process	s	pub	clock_getres
+M	Process	s	pub	clock_gettime
+M	Process	s	pub	daemon
+M	Process	s	pub	detach
+M	Process	s	pub	egid
+M	Process	s	pub	egid=
+M	Process	s	pub	euid
+M	Process	s	pub	euid=
+M	Process	s	pub	exec
+M	Process	s	pub	exit
+M	Process	s	pub	exit!
+M	Process	s	pub	fork
+M	Process	s	pub	getpgid
+M	Process	s	pub	getpgrp
+M	Process	s	pub	getpriority
+M	Process	s	pub	getrlimit
+M	Process	s	pub	getsid
+M	Process	s	pub	gid
+M	Process	s	pub	gid=
+M	Process	s	pub	groups
+M	Process	s	pub	groups=
+M	Process	s	pub	initgroups
+M	Process	s	pub	kill
+M	Process	s	pub	maxgroups
+M	Process	s	pub	maxgroups=
+M	Process	s	pub	pid
+M	Process	s	pub	ppid
+M	Process	s	pub	setpgid
+M	Process	s	pub	setpgrp
+M	Process	s	pub	setpriority
+M	Process	s	pub	setproctitle
+M	Process	s	pub	setrlimit
+M	Process	s	pub	setsid
+M	Process	s	pub	spawn
+M	Process	s	pub	times
+M	Process	s	pub	uid
+M	Process	s	pub	uid=
+M	Process	s	pub	wait
+M	Process	s	pub	wait2
+M	Process	s	pub	waitall
+M	Process	s	pub	waitpid
+M	Process	s	pub	waitpid2
+M	Process	i	priv	argv0
+M	Process	i	priv	clock_getres
+M	Process	i	priv	clock_gettime
+M	Process	i	priv	daemon
+M	Process	i	priv	detach
+M	Process	i	priv	egid
+M	Process	i	priv	egid=
+M	Process	i	priv	euid
+M	Process	i	priv	euid=
+M	Process	i	priv	getpgid
+M	Process	i	priv	getpgrp
+M	Process	i	priv	getpriority
+M	Process	i	priv	getrlimit
+M	Process	i	priv	getsid
+M	Process	i	priv	gid
+M	Process	i	priv	gid=
+M	Process	i	priv	groups
+M	Process	i	priv	groups=
+M	Process	i	priv	initgroups
+M	Process	i	priv	kill
+M	Process	i	priv	maxgroups
+M	Process	i	priv	maxgroups=
+M	Process	i	priv	pid
+M	Process	i	priv	ppid
+M	Process	i	priv	setpgid
+M	Process	i	priv	setpgrp
+M	Process	i	priv	setpriority
+M	Process	i	priv	setproctitle
+M	Process	i	priv	setrlimit
+M	Process	i	priv	setsid
+M	Process	i	priv	times
+M	Process	i	priv	uid
+M	Process	i	priv	uid=
+M	Process	i	priv	wait
+M	Process	i	priv	wait2
+M	Process	i	priv	waitall
+M	Process	i	priv	waitpid
+M	Process	i	priv	waitpid2
+A	Process::GID	module		Process::GID
+M	Process::GID	s	pub	change_privilege
+M	Process::GID	s	pub	eid
+M	Process::GID	s	pub	eid=
+M	Process::GID	s	pub	from_name
+M	Process::GID	s	pub	grant_privilege
+M	Process::GID	s	pub	re_exchange
+M	Process::GID	s	pub	re_exchangeable?
+M	Process::GID	s	pub	rid
+M	Process::GID	s	pub	sid_available?
+M	Process::GID	s	pub	switch
+M	Process::GID	i	priv	change_privilege
+M	Process::GID	i	priv	eid
+M	Process::GID	i	priv	from_name
+M	Process::GID	i	priv	grant_privilege
+M	Process::GID	i	priv	re_exchange
+M	Process::GID	i	priv	re_exchangeable?
+M	Process::GID	i	priv	rid
+M	Process::GID	i	priv	sid_available?
+M	Process::GID	i	priv	switch
+A	Process::Status	class	Object	Process::Status,Object,Kernel,BasicObject
+M	Process::Status	i	pub	&
+M	Process::Status	i	pub	==
+M	Process::Status	i	pub	>>
+M	Process::Status	i	pub	coredump?
+M	Process::Status	i	pub	exited?
+M	Process::Status	i	pub	exitstatus
+M	Process::Status	i	pub	inspect
+M	Process::Status	i	pub	pid
+M	Process::Status	i	pub	signaled?
+M	Process::Status	i	pub	stopped?
+M	Process::Status	i	pub	stopsig
+M	Process::Status	i	pub	success?
+M	Process::Status	i	pub	termsig
+M	Process::Status	i	pub	to_i
+M	Process::Status	i	pub	to_s
+A	Process::Sys	module		Process::Sys
+M	Process::Sys	s	pub	getegid
+M	Process::Sys	s	pub	geteuid
+M	Process::Sys	s	pub	getgid
+M	Process::Sys	s	pub	getuid
+M	Process::Sys	s	pub	issetugid
+M	Process::Sys	s	pub	setegid
+M	Process::Sys	s	pub	seteuid
+M	Process::Sys	s	pub	setgid
+M	Process::Sys	s	pub	setregid
+M	Process::Sys	s	pub	setresgid
+M	Process::Sys	s	pub	setresuid
+M	Process::Sys	s	pub	setreuid
+M	Process::Sys	s	pub	setrgid
+M	Process::Sys	s	pub	setruid
+M	Process::Sys	s	pub	setuid
+M	Process::Sys	i	priv	getegid
+M	Process::Sys	i	priv	geteuid
+M	Process::Sys	i	priv	getgid
+M	Process::Sys	i	priv	getuid
+M	Process::Sys	i	priv	issetugid
+M	Process::Sys	i	priv	setegid
+M	Process::Sys	i	priv	seteuid
+M	Process::Sys	i	priv	setgid
+M	Process::Sys	i	priv	setregid
+M	Process::Sys	i	priv	setresgid
+M	Process::Sys	i	priv	setresuid
+M	Process::Sys	i	priv	setreuid
+M	Process::Sys	i	priv	setrgid
+M	Process::Sys	i	priv	setruid
+M	Process::Sys	i	priv	setuid
+A	Process::Tms	class	Struct	Process::Tms,Struct,Enumerable,Object,Kernel,BasicObject
+M	Process::Tms	s	pub	[]
+M	Process::Tms	s	pub	members
+M	Process::Tms	s	pub	new
+M	Process::Tms	i	pub	cstime
+M	Process::Tms	i	pub	cstime=
+M	Process::Tms	i	pub	cutime
+M	Process::Tms	i	pub	cutime=
+M	Process::Tms	i	pub	stime
+M	Process::Tms	i	pub	stime=
+M	Process::Tms	i	pub	utime
+M	Process::Tms	i	pub	utime=
+A	Process::UID	module		Process::UID
+M	Process::UID	s	pub	change_privilege
+M	Process::UID	s	pub	eid
+M	Process::UID	s	pub	eid=
+M	Process::UID	s	pub	from_name
+M	Process::UID	s	pub	grant_privilege
+M	Process::UID	s	pub	re_exchange
+M	Process::UID	s	pub	re_exchangeable?
+M	Process::UID	s	pub	rid
+M	Process::UID	s	pub	sid_available?
+M	Process::UID	s	pub	switch
+M	Process::UID	i	priv	change_privilege
+M	Process::UID	i	priv	eid
+M	Process::UID	i	priv	from_name
+M	Process::UID	i	priv	grant_privilege
+M	Process::UID	i	priv	re_exchange
+M	Process::UID	i	priv	re_exchangeable?
+M	Process::UID	i	priv	rid
+M	Process::UID	i	priv	sid_available?
+M	Process::UID	i	priv	switch
+A	Process::Waiter	class	Thread	Process::Waiter,Thread,Object,Kernel,BasicObject
+M	Process::Waiter	i	pub	pid
+A	Random	class	Object	Random,Random::Formatter,Object,Kernel,BasicObject
+M	Random	s	pub	new_seed
+M	Random	s	pub	rand
+M	Random	s	pub	raw_seed
+M	Random	s	pub	srand
+M	Random	s	priv	left
+M	Random	s	priv	state
+M	Random	i	pub	==
+M	Random	i	pub	bytes
+M	Random	i	pub	rand
+M	Random	i	pub	seed
+M	Random	i	priv	initialize
+M	Random	i	priv	initialize_copy
+M	Random	i	priv	left
+M	Random	i	priv	marshal_dump
+M	Random	i	priv	marshal_load
+M	Random	i	priv	state
+A	Random::Formatter	module		Random::Formatter
+M	Random::Formatter	i	pub	rand
+M	Random::Formatter	i	pub	random_number
+A	Range	class	Object	Range,Enumerable,Object,Kernel,BasicObject
+M	Range	i	pub	==
+M	Range	i	pub	===
+M	Range	i	pub	begin
+M	Range	i	pub	bsearch
+M	Range	i	pub	cover?
+M	Range	i	pub	each
+M	Range	i	pub	end
+M	Range	i	pub	eql?
+M	Range	i	pub	exclude_end?
+M	Range	i	pub	first
+M	Range	i	pub	hash
+M	Range	i	pub	include?
+M	Range	i	pub	inspect
+M	Range	i	pub	last
+M	Range	i	pub	max
+M	Range	i	pub	member?
+M	Range	i	pub	min
+M	Range	i	pub	size
+M	Range	i	pub	step
+M	Range	i	pub	to_s
+M	Range	i	priv	initialize
+M	Range	i	priv	initialize_copy
+A	RangeError	class	StandardError	RangeError,StandardError,Exception,Object,Kernel,BasicObject
+A	Rational	class	Numeric	Rational,Numeric,Comparable,Object,Kernel,BasicObject
+M	Rational	s	priv	convert
+M	Rational	i	pub	*
+M	Rational	i	pub	**
+M	Rational	i	pub	+
+M	Rational	i	pub	-
+M	Rational	i	pub	-@
+M	Rational	i	pub	/
+M	Rational	i	pub	<=>
+M	Rational	i	pub	==
+M	Rational	i	pub	abs
+M	Rational	i	pub	ceil
+M	Rational	i	pub	coerce
+M	Rational	i	pub	denominator
+M	Rational	i	pub	fdiv
+M	Rational	i	pub	floor
+M	Rational	i	pub	hash
+M	Rational	i	pub	inspect
+M	Rational	i	pub	magnitude
+M	Rational	i	pub	negative?
+M	Rational	i	pub	numerator
+M	Rational	i	pub	positive?
+M	Rational	i	pub	quo
+M	Rational	i	pub	rationalize
+M	Rational	i	pub	round
+M	Rational	i	pub	to_f
+M	Rational	i	pub	to_i
+M	Rational	i	pub	to_r
+M	Rational	i	pub	to_s
+M	Rational	i	pub	truncate
+M	Rational	i	priv	marshal_dump
+A	Regexp	class	Object	Regexp,Object,Kernel,BasicObject
+M	Regexp	s	pub	compile
+M	Regexp	s	pub	escape
+M	Regexp	s	pub	last_match
+M	Regexp	s	pub	quote
+M	Regexp	s	pub	try_convert
+M	Regexp	s	pub	union
+M	Regexp	i	pub	==
+M	Regexp	i	pub	===
+M	Regexp	i	pub	=~
+M	Regexp	i	pub	casefold?
+M	Regexp	i	pub	encoding
+M	Regexp	i	pub	eql?
+M	Regexp	i	pub	fixed_encoding?
+M	Regexp	i	pub	hash
+M	Regexp	i	pub	inspect
+M	Regexp	i	pub	match
+M	Regexp	i	pub	match?
+M	Regexp	i	pub	named_captures
+M	Regexp	i	pub	names
+M	Regexp	i	pub	options
+M	Regexp	i	pub	source
+M	Regexp	i	pub	to_s
+M	Regexp	i	pub	~
+M	Regexp	i	priv	initialize
+M	Regexp	i	priv	initialize_copy
+A	RegexpError	class	StandardError	RegexpError,StandardError,Exception,Object,Kernel,BasicObject
+A	RubyVM	class	Object	RubyVM,Object,Kernel,BasicObject
+M	RubyVM	s	pub	stat
+A	RubyVM::InstructionSequence	class	Object	RubyVM::InstructionSequence,Object,Kernel,BasicObject
+M	RubyVM::InstructionSequence	s	pub	compile
+M	RubyVM::InstructionSequence	s	pub	compile_file
+M	RubyVM::InstructionSequence	s	pub	compile_option
+M	RubyVM::InstructionSequence	s	pub	compile_option=
+M	RubyVM::InstructionSequence	s	pub	disasm
+M	RubyVM::InstructionSequence	s	pub	disassemble
+M	RubyVM::InstructionSequence	s	pub	load_from_binary
+M	RubyVM::InstructionSequence	s	pub	load_from_binary_extra_data
+M	RubyVM::InstructionSequence	s	pub	new
+M	RubyVM::InstructionSequence	s	pub	of
+M	RubyVM::InstructionSequence	i	pub	absolute_path
+M	RubyVM::InstructionSequence	i	pub	base_label
+M	RubyVM::InstructionSequence	i	pub	disasm
+M	RubyVM::InstructionSequence	i	pub	disassemble
+M	RubyVM::InstructionSequence	i	pub	eval
+M	RubyVM::InstructionSequence	i	pub	first_lineno
+M	RubyVM::InstructionSequence	i	pub	inspect
+M	RubyVM::InstructionSequence	i	pub	label
+M	RubyVM::InstructionSequence	i	pub	path
+M	RubyVM::InstructionSequence	i	pub	to_a
+M	RubyVM::InstructionSequence	i	pub	to_binary
+A	RuntimeError	class	StandardError	RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
+A	ScriptError	class	Exception	ScriptError,Exception,Object,Kernel,BasicObject
+A	SecurityError	class	Exception	SecurityError,Exception,Object,Kernel,BasicObject
+A	Signal	module		Signal
+M	Signal	s	pub	list
+M	Signal	s	pub	signame
+M	Signal	s	pub	trap
+M	Signal	i	priv	list
+M	Signal	i	priv	signame
+M	Signal	i	priv	trap
+A	SignalException	class	Exception	SignalException,Exception,Object,Kernel,BasicObject
+M	SignalException	i	pub	signm
+M	SignalException	i	pub	signo
+M	SignalException	i	priv	initialize
+A	StandardError	class	Exception	StandardError,Exception,Object,Kernel,BasicObject
+A	StopIteration	class	IndexError	StopIteration,IndexError,StandardError,Exception,Object,Kernel,BasicObject
+M	StopIteration	i	pub	result
+A	String	class	Object	String,Comparable,Object,Kernel,BasicObject
+M	String	s	pub	try_convert
+M	String	i	pub	%
+M	String	i	pub	*
+M	String	i	pub	+
+M	String	i	pub	+@
+M	String	i	pub	-@
+M	String	i	pub	<<
+M	String	i	pub	<=>
+M	String	i	pub	==
+M	String	i	pub	===
+M	String	i	pub	=~
+M	String	i	pub	[]
+M	String	i	pub	[]=
+M	String	i	pub	ascii_only?
+M	String	i	pub	b
+M	String	i	pub	bytes
+M	String	i	pub	bytesize
+M	String	i	pub	byteslice
+M	String	i	pub	capitalize
+M	String	i	pub	capitalize!
+M	String	i	pub	casecmp
+M	String	i	pub	casecmp?
+M	String	i	pub	center
+M	String	i	pub	chars
+M	String	i	pub	chomp
+M	String	i	pub	chomp!
+M	String	i	pub	chop
+M	String	i	pub	chop!
+M	String	i	pub	chr
+M	String	i	pub	clear
+M	String	i	pub	codepoints
+M	String	i	pub	concat
+M	String	i	pub	count
+M	String	i	pub	crypt
+M	String	i	pub	delete
+M	String	i	pub	delete!
+M	String	i	pub	downcase
+M	String	i	pub	downcase!
+M	String	i	pub	dump
+M	String	i	pub	each_byte
+M	String	i	pub	each_char
+M	String	i	pub	each_codepoint
+M	String	i	pub	each_line
+M	String	i	pub	empty?
+M	String	i	pub	encode
+M	String	i	pub	encode!
+M	String	i	pub	encoding
+M	String	i	pub	end_with?
+M	String	i	pub	eql?
+M	String	i	pub	force_encoding
+M	String	i	pub	freeze
+M	String	i	pub	getbyte
+M	String	i	pub	gsub
+M	String	i	pub	gsub!
+M	String	i	pub	hash
+M	String	i	pub	hex
+M	String	i	pub	include?
+M	String	i	pub	index
+M	String	i	pub	insert
+M	String	i	pub	inspect
+M	String	i	pub	intern
+M	String	i	pub	length
+M	String	i	pub	lines
+M	String	i	pub	ljust
+M	String	i	pub	lstrip
+M	String	i	pub	lstrip!
+M	String	i	pub	match
+M	String	i	pub	match?
+M	String	i	pub	next
+M	String	i	pub	next!
+M	String	i	pub	oct
+M	String	i	pub	ord
+M	String	i	pub	partition
+M	String	i	pub	prepend
+M	String	i	pub	replace
+M	String	i	pub	reverse
+M	String	i	pub	reverse!
+M	String	i	pub	rindex
+M	String	i	pub	rjust
+M	String	i	pub	rpartition
+M	String	i	pub	rstrip
+M	String	i	pub	rstrip!
+M	String	i	pub	scan
+M	String	i	pub	scrub
+M	String	i	pub	scrub!
+M	String	i	pub	setbyte
+M	String	i	pub	size
+M	String	i	pub	slice
+M	String	i	pub	slice!
+M	String	i	pub	split
+M	String	i	pub	squeeze
+M	String	i	pub	squeeze!
+M	String	i	pub	start_with?
+M	String	i	pub	strip
+M	String	i	pub	strip!
+M	String	i	pub	sub
+M	String	i	pub	sub!
+M	String	i	pub	succ
+M	String	i	pub	succ!
+M	String	i	pub	sum
+M	String	i	pub	swapcase
+M	String	i	pub	swapcase!
+M	String	i	pub	to_c
+M	String	i	pub	to_f
+M	String	i	pub	to_i
+M	String	i	pub	to_r
+M	String	i	pub	to_s
+M	String	i	pub	to_str
+M	String	i	pub	to_sym
+M	String	i	pub	tr
+M	String	i	pub	tr!
+M	String	i	pub	tr_s
+M	String	i	pub	tr_s!
+M	String	i	pub	unicode_normalize
+M	String	i	pub	unicode_normalize!
+M	String	i	pub	unicode_normalized?
+M	String	i	pub	unpack
+M	String	i	pub	unpack1
+M	String	i	pub	upcase
+M	String	i	pub	upcase!
+M	String	i	pub	upto
+M	String	i	pub	valid_encoding?
+M	String	i	priv	initialize
+M	String	i	priv	initialize_copy
+A	Struct	class	Object	Struct,Enumerable,Object,Kernel,BasicObject
+M	Struct	s	pub	new
+M	Struct	i	pub	==
+M	Struct	i	pub	[]
+M	Struct	i	pub	[]=
+M	Struct	i	pub	dig
+M	Struct	i	pub	each
+M	Struct	i	pub	each_pair
+M	Struct	i	pub	eql?
+M	Struct	i	pub	hash
+M	Struct	i	pub	inspect
+M	Struct	i	pub	length
+M	Struct	i	pub	members
+M	Struct	i	pub	select
+M	Struct	i	pub	size
+M	Struct	i	pub	to_a
+M	Struct	i	pub	to_h
+M	Struct	i	pub	to_s
+M	Struct	i	pub	values
+M	Struct	i	pub	values_at
+M	Struct	i	priv	initialize
+M	Struct	i	priv	initialize_copy
+A	Symbol	class	Object	Symbol,Comparable,Object,Kernel,BasicObject
+M	Symbol	s	pub	all_symbols
+M	Symbol	i	pub	<=>
+M	Symbol	i	pub	==
+M	Symbol	i	pub	===
+M	Symbol	i	pub	=~
+M	Symbol	i	pub	[]
+M	Symbol	i	pub	capitalize
+M	Symbol	i	pub	casecmp
+M	Symbol	i	pub	casecmp?
+M	Symbol	i	pub	downcase
+M	Symbol	i	pub	empty?
+M	Symbol	i	pub	encoding
+M	Symbol	i	pub	id2name
+M	Symbol	i	pub	inspect
+M	Symbol	i	pub	intern
+M	Symbol	i	pub	length
+M	Symbol	i	pub	match
+M	Symbol	i	pub	match?
+M	Symbol	i	pub	next
+M	Symbol	i	pub	size
+M	Symbol	i	pub	slice
+M	Symbol	i	pub	succ
+M	Symbol	i	pub	swapcase
+M	Symbol	i	pub	to_proc
+M	Symbol	i	pub	to_s
+M	Symbol	i	pub	to_sym
+M	Symbol	i	pub	upcase
+A	SyntaxError	class	ScriptError	SyntaxError,ScriptError,Exception,Object,Kernel,BasicObject
+M	SyntaxError	i	priv	initialize
+A	SystemCallError	class	StandardError	SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+M	SystemCallError	s	pub	===
+M	SystemCallError	i	pub	errno
+M	SystemCallError	i	priv	initialize
+A	SystemExit	class	Exception	SystemExit,Exception,Object,Kernel,BasicObject
+M	SystemExit	i	pub	status
+M	SystemExit	i	pub	success?
+M	SystemExit	i	priv	initialize
+A	SystemStackError	class	Exception	SystemStackError,Exception,Object,Kernel,BasicObject
+A	Thread	class	Object	Thread,Object,Kernel,BasicObject
+M	Thread	s	pub	abort_on_exception
+M	Thread	s	pub	abort_on_exception=
+M	Thread	s	pub	current
+M	Thread	s	pub	exclusive
+M	Thread	s	pub	exit
+M	Thread	s	pub	fork
+M	Thread	s	pub	handle_interrupt
+M	Thread	s	pub	kill
+M	Thread	s	pub	list
+M	Thread	s	pub	main
+M	Thread	s	pub	new
+M	Thread	s	pub	pass
+M	Thread	s	pub	pending_interrupt?
+M	Thread	s	pub	report_on_exception
+M	Thread	s	pub	report_on_exception=
+M	Thread	s	pub	start
+M	Thread	s	pub	stop
+M	Thread	i	pub	[]
+M	Thread	i	pub	[]=
+M	Thread	i	pub	abort_on_exception
+M	Thread	i	pub	abort_on_exception=
+M	Thread	i	pub	add_trace_func
+M	Thread	i	pub	alive?
+M	Thread	i	pub	backtrace
+M	Thread	i	pub	backtrace_locations
+M	Thread	i	pub	exit
+M	Thread	i	pub	group
+M	Thread	i	pub	inspect
+M	Thread	i	pub	join
+M	Thread	i	pub	key?
+M	Thread	i	pub	keys
+M	Thread	i	pub	kill
+M	Thread	i	pub	name
+M	Thread	i	pub	name=
+M	Thread	i	pub	pending_interrupt?
+M	Thread	i	pub	priority
+M	Thread	i	pub	priority=
+M	Thread	i	pub	raise
+M	Thread	i	pub	report_on_exception
+M	Thread	i	pub	report_on_exception=
+M	Thread	i	pub	run
+M	Thread	i	pub	safe_level
+M	Thread	i	pub	set_trace_func
+M	Thread	i	pub	status
+M	Thread	i	pub	stop?
+M	Thread	i	pub	terminate
+M	Thread	i	pub	thread_variable?
+M	Thread	i	pub	thread_variable_get
+M	Thread	i	pub	thread_variable_set
+M	Thread	i	pub	thread_variables
+M	Thread	i	pub	value
+M	Thread	i	pub	wakeup
+M	Thread	i	priv	initialize
+A	Thread::Backtrace	class	Object	Thread::Backtrace,Object,Kernel,BasicObject
+A	Thread::Backtrace::Location	class	Object	Thread::Backtrace::Location,Object,Kernel,BasicObject
+M	Thread::Backtrace::Location	i	pub	absolute_path
+M	Thread::Backtrace::Location	i	pub	base_label
+M	Thread::Backtrace::Location	i	pub	inspect
+M	Thread::Backtrace::Location	i	pub	label
+M	Thread::Backtrace::Location	i	pub	lineno
+M	Thread::Backtrace::Location	i	pub	path
+M	Thread::Backtrace::Location	i	pub	to_s
+A	Thread::ConditionVariable	class	Object	Thread::ConditionVariable,Object,Kernel,BasicObject
+M	Thread::ConditionVariable	i	pub	broadcast
+M	Thread::ConditionVariable	i	pub	marshal_dump
+M	Thread::ConditionVariable	i	pub	signal
+M	Thread::ConditionVariable	i	pub	wait
+M	Thread::ConditionVariable	i	priv	initialize
+A	Thread::Mutex	class	Object	Thread::Mutex,Object,Kernel,BasicObject
+M	Thread::Mutex	i	pub	lock
+M	Thread::Mutex	i	pub	locked?
+M	Thread::Mutex	i	pub	owned?
+M	Thread::Mutex	i	pub	sleep
+M	Thread::Mutex	i	pub	synchronize
+M	Thread::Mutex	i	pub	try_lock
+M	Thread::Mutex	i	pub	unlock
+M	Thread::Mutex	i	priv	initialize
+A	Thread::Queue	class	Object	Thread::Queue,Object,Kernel,BasicObject
+M	Thread::Queue	i	pub	<<
+M	Thread::Queue	i	pub	clear
+M	Thread::Queue	i	pub	close
+M	Thread::Queue	i	pub	closed?
+M	Thread::Queue	i	pub	deq
+M	Thread::Queue	i	pub	empty?
+M	Thread::Queue	i	pub	enq
+M	Thread::Queue	i	pub	length
+M	Thread::Queue	i	pub	marshal_dump
+M	Thread::Queue	i	pub	num_waiting
+M	Thread::Queue	i	pub	pop
+M	Thread::Queue	i	pub	push
+M	Thread::Queue	i	pub	shift
+M	Thread::Queue	i	pub	size
+M	Thread::Queue	i	priv	initialize
+A	Thread::SizedQueue	class	Thread::Queue	Thread::SizedQueue,Thread::Queue,Object,Kernel,BasicObject
+M	Thread::SizedQueue	i	pub	<<
+M	Thread::SizedQueue	i	pub	clear
+M	Thread::SizedQueue	i	pub	close
+M	Thread::SizedQueue	i	pub	deq
+M	Thread::SizedQueue	i	pub	enq
+M	Thread::SizedQueue	i	pub	max
+M	Thread::SizedQueue	i	pub	max=
+M	Thread::SizedQueue	i	pub	num_waiting
+M	Thread::SizedQueue	i	pub	pop
+M	Thread::SizedQueue	i	pub	push
+M	Thread::SizedQueue	i	pub	shift
+M	Thread::SizedQueue	i	priv	initialize
+A	ThreadError	class	StandardError	ThreadError,StandardError,Exception,Object,Kernel,BasicObject
+A	ThreadGroup	class	Object	ThreadGroup,Object,Kernel,BasicObject
+M	ThreadGroup	i	pub	add
+M	ThreadGroup	i	pub	enclose
+M	ThreadGroup	i	pub	enclosed?
+M	ThreadGroup	i	pub	list
+A	Time	class	Object	Time,Comparable,Object,Kernel,BasicObject
+M	Time	s	pub	at
+M	Time	s	pub	gm
+M	Time	s	pub	local
+M	Time	s	pub	mktime
+M	Time	s	pub	now
+M	Time	s	pub	utc
+M	Time	s	priv	_load
+M	Time	i	pub	+
+M	Time	i	pub	-
+M	Time	i	pub	<=>
+M	Time	i	pub	asctime
+M	Time	i	pub	ctime
+M	Time	i	pub	day
+M	Time	i	pub	dst?
+M	Time	i	pub	eql?
+M	Time	i	pub	friday?
+M	Time	i	pub	getgm
+M	Time	i	pub	getlocal
+M	Time	i	pub	getutc
+M	Time	i	pub	gmt?
+M	Time	i	pub	gmt_offset
+M	Time	i	pub	gmtime
+M	Time	i	pub	gmtoff
+M	Time	i	pub	hash
+M	Time	i	pub	hour
+M	Time	i	pub	inspect
+M	Time	i	pub	isdst
+M	Time	i	pub	localtime
+M	Time	i	pub	mday
+M	Time	i	pub	min
+M	Time	i	pub	mon
+M	Time	i	pub	monday?
+M	Time	i	pub	month
+M	Time	i	pub	nsec
+M	Time	i	pub	round
+M	Time	i	pub	saturday?
+M	Time	i	pub	sec
+M	Time	i	pub	strftime
+M	Time	i	pub	subsec
+M	Time	i	pub	succ
+M	Time	i	pub	sunday?
+M	Time	i	pub	thursday?
+M	Time	i	pub	to_a
+M	Time	i	pub	to_f
+M	Time	i	pub	to_i
+M	Time	i	pub	to_r
+M	Time	i	pub	to_s
+M	Time	i	pub	tuesday?
+M	Time	i	pub	tv_nsec
+M	Time	i	pub	tv_sec
+M	Time	i	pub	tv_usec
+M	Time	i	pub	usec
+M	Time	i	pub	utc
+M	Time	i	pub	utc?
+M	Time	i	pub	utc_offset
+M	Time	i	pub	wday
+M	Time	i	pub	wednesday?
+M	Time	i	pub	yday
+M	Time	i	pub	year
+M	Time	i	pub	zone
+M	Time	i	priv	_dump
+M	Time	i	priv	initialize
+M	Time	i	priv	initialize_copy
+A	TracePoint	class	Object	TracePoint,Object,Kernel,BasicObject
+M	TracePoint	s	pub	new
+M	TracePoint	s	pub	stat
+M	TracePoint	s	pub	trace
+M	TracePoint	i	pub	binding
+M	TracePoint	i	pub	callee_id
+M	TracePoint	i	pub	defined_class
+M	TracePoint	i	pub	disable
+M	TracePoint	i	pub	enable
+M	TracePoint	i	pub	enabled?
+M	TracePoint	i	pub	event
+M	TracePoint	i	pub	inspect
+M	TracePoint	i	pub	lineno
+M	TracePoint	i	pub	method_id
+M	TracePoint	i	pub	path
+M	TracePoint	i	pub	raised_exception
+M	TracePoint	i	pub	return_value
+M	TracePoint	i	pub	self
+A	TrueClass	class	Object	TrueClass,Object,Kernel,BasicObject
+M	TrueClass	i	pub	&
+M	TrueClass	i	pub	===
+M	TrueClass	i	pub	^
+M	TrueClass	i	pub	inspect
+M	TrueClass	i	pub	to_s
+M	TrueClass	i	pub	|
+A	TypeError	class	StandardError	TypeError,StandardError,Exception,Object,Kernel,BasicObject
+A	UnboundMethod	class	Object	UnboundMethod,Object,Kernel,BasicObject
+M	UnboundMethod	i	pub	==
+M	UnboundMethod	i	pub	arity
+M	UnboundMethod	i	pub	bind
+M	UnboundMethod	i	pub	clone
+M	UnboundMethod	i	pub	eql?
+M	UnboundMethod	i	pub	hash
+M	UnboundMethod	i	pub	inspect
+M	UnboundMethod	i	pub	name
+M	UnboundMethod	i	pub	original_name
+M	UnboundMethod	i	pub	owner
+M	UnboundMethod	i	pub	parameters
+M	UnboundMethod	i	pub	source_location
+M	UnboundMethod	i	pub	super_method
+M	UnboundMethod	i	pub	to_s
+A	UncaughtThrowError	class	ArgumentError	UncaughtThrowError,ArgumentError,StandardError,Exception,Object,Kernel,BasicObject
+M	UncaughtThrowError	i	pub	tag
+M	UncaughtThrowError	i	pub	to_s
+M	UncaughtThrowError	i	pub	value
+M	UncaughtThrowError	i	priv	initialize
+A	Warning	module		Warning
+M	Warning	i	pub	warn
+A	ZeroDivisionError	class	StandardError	ZeroDivisionError,StandardError,Exception,Object,Kernel,BasicObject
+A	ARGF	object	ARGF.class	
+A	ENV	object	Object	
+M	ENV	s	pub	[]
+M	ENV	s	pub	[]=
+M	ENV	s	pub	assoc
+M	ENV	s	pub	clear
+M	ENV	s	pub	delete
+M	ENV	s	pub	delete_if
+M	ENV	s	pub	each
+M	ENV	s	pub	each_key
+M	ENV	s	pub	each_pair
+M	ENV	s	pub	each_value
+M	ENV	s	pub	empty?
+M	ENV	s	pub	fetch
+M	ENV	s	pub	has_key?
+M	ENV	s	pub	has_value?
+M	ENV	s	pub	include?
+M	ENV	s	pub	index
+M	ENV	s	pub	inspect
+M	ENV	s	pub	invert
+M	ENV	s	pub	keep_if
+M	ENV	s	pub	key
+M	ENV	s	pub	key?
+M	ENV	s	pub	keys
+M	ENV	s	pub	length
+M	ENV	s	pub	member?
+M	ENV	s	pub	rassoc
+M	ENV	s	pub	rehash
+M	ENV	s	pub	reject
+M	ENV	s	pub	reject!
+M	ENV	s	pub	replace
+M	ENV	s	pub	select
+M	ENV	s	pub	select!
+M	ENV	s	pub	shift
+M	ENV	s	pub	size
+M	ENV	s	pub	store
+M	ENV	s	pub	to_a
+M	ENV	s	pub	to_h
+M	ENV	s	pub	to_hash
+M	ENV	s	pub	to_s
+M	ENV	s	pub	update
+M	ENV	s	pub	value?
+M	ENV	s	pub	values
+M	ENV	s	pub	values_at
+A	main	object	Object	
+M	main	s	pub	inspect
+M	main	s	pub	to_s
+M	main	s	priv	define_method
+M	main	s	priv	include
+M	main	s	priv	private
+M	main	s	priv	public
+M	main	s	priv	using
