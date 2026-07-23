@@ -769,9 +769,16 @@ POST で送ります。
 ブロックに与えます。このとき戻り値の HTTPResponse オブジェクトは有効な body を
 持ちません。
 
+#@since 4.0
+POST する場合にはヘッダに Content-Type: を指定する必要があります。
+Ruby 4.0 から、header に指定しなかった場合に Content-Type を
+"application/x-www-form-urlencoded" として補う挙動は削除されました。
+指定しなかった場合、Content-Type ヘッダは送信されません。
+#@else
 POST する場合にはヘッダに Content-Type: を指定する必要があります。
 もし header に指定しなかったならば、 Content-Type として
 "application/x-www-form-urlencoded" を用います。
+#@end
 
 dest は時代遅れの引数です。利用しないでください。
 dest を指定した場合には
@@ -894,9 +901,16 @@ header が nil
 接続を維持した状態で [c:Net::HTTPResponse]
 オブジェクトをブロックに渡します。
 
+#@since 4.0
+POST する場合にはヘッダに Content-Type: を指定する必要があります。
+Ruby 4.0 から、header に指定しなかった場合に Content-Type を
+"application/x-www-form-urlencoded" として補う挙動は削除されました。
+指定しなかった場合、Content-Type ヘッダは送信されません。
+#@else
 POST する場合にはヘッダに Content-Type: を指定する必要があります。
 もし header に指定しなかったならば、 Content-Type として
 "application/x-www-form-urlencoded" を用います。
+#@end
 
 - **param** `path` -- POST先のエンティティのパスを文字列で指定します。
 - **param** `data` -- POSTするデータを与えます。
