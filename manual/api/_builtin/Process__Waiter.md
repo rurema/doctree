@@ -14,5 +14,6 @@ library: _builtin
 ## Instance Methods
 
 ### def pid -> Integer
+{: since="2.2.0"}
 
 監視している子プロセスのプロセス ID を返します。

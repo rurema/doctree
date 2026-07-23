@@ -363,6 +363,7 @@ p ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
 - **SEE** [m:Hash#slice], [m:ENV.except]
 
 ### def freeze -> ()
+{: since=""}
 
 ENV.freeze は環境変数の変更を禁止できないため、[c:TypeError]を発生させます。
 
@@ -378,6 +379,7 @@ p ENV.except("TERM","HOME") #=> {"LANG"=>"en_US.UTF-8"}
 - **SEE** [m:Hash#except], [m:ENV.slice]
 
 ### def clone(freeze: true) -> object
+{: since=""}
 
 ENV オブジェクトの複製を作成して返します。
 

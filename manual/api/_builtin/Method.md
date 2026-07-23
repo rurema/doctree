@@ -114,6 +114,7 @@ p m.clone.call # => "foo"
 ### def call(*args) -> object
 ### def call(*args) { ... } -> object
 ### def ===(*args) -> object
+{: since=""}
 
 メソッドオブジェクトに封入されているメソッドを起動します。
 
@@ -393,6 +394,7 @@ p unbound_method.bind(Foo.new) # => #<Method: Foo#foo>
 
 ### def ==(other)     -> bool
 ### def eql?(other)   -> bool
+{: since=""}
 
 自身と other が同じインスタンスの同じメソッドを表す場合に
 true を返します。そうでない場合に false を返します。
@@ -407,6 +409,7 @@ p a == b                            #=> true
 ```
 
 ### def hash    -> Integer
+{: since=""}
 
 自身のハッシュ値を返します。
 

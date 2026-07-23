@@ -545,8 +545,11 @@ p [ "a", "c", 7 ] == [ "a", "d", "f" ] #=> false
 ```
 
 ### def all?               -> bool
+{: since=""}
 ### def all? {|item| ... } -> bool
+{: since=""}
 ### def all?(pattern)      -> bool
+{: since=""}
 
 すべての要素が真である場合に true を返します。
 偽である要素があれば、ただちに false を返します。
@@ -1404,8 +1407,11 @@ p [1, nil, 3, nil].size    #=> 4
 ```
 
 ### def none?               -> bool
+{: since=""}
 ### def none?{|obj| ... }   -> bool
+{: since=""}
 ### def none?(pattern)      -> bool
+{: since=""}
 
 すべての要素が偽である場合に true を返します。真である要素があれば、ただちに false を返します。
 
@@ -1427,8 +1433,11 @@ p [nil, false, true].none?                        # => false
 - **SEE** [m:Enumerable#none?]
 
 ### def one?                -> bool
+{: since=""}
 ### def one?{|obj| ... }    -> bool
+{: since=""}
 ### def one?(pattern)       -> bool
+{: since=""}
 
 ブロックを指定しない場合は、 配列の要素のうち
 ちょうど一つだけが真であれば、真を返します。
@@ -2546,7 +2555,9 @@ p ary.bsearch_index { |x| 4 - x / 2 } # => nil
 - **SEE** [m:Array#bsearch]
 
 ### def max    -> object | nil
+{: since=""}
 ### def max(n) -> Array
+{: since=""}
 
 最大の要素、もしくは最大の n 要素が降順に入った配列を返します。
 全要素が互いに <=> メソッドで比較できることを仮定しています。
@@ -2566,7 +2577,9 @@ p [2, 5, 3].max(2) #=> [5, 3]
 - **SEE** [m:Enumerable#max]
 
 ### def max {|a, b| ... }    -> object | nil
+{: since=""}
 ### def max(n) {|a, b| ... } -> Array
+{: since=""}
 
 ブロックの評価結果で各要素の大小判定を行い、最大の要素、もしくは最大の
 n 要素が降順に入った配列を返します。
@@ -2590,7 +2603,9 @@ p ary.max(2) {|a, b| a.length <=> b.length } #=> ["albatross", "horse"]
 - **SEE** [m:Enumerable#max]
 
 ### def min    -> object | nil
+{: since=""}
 ### def min(n) -> Array
+{: since=""}
 
 最小の要素、もしくは最小の n 要素が昇順で入った配列を返します。
 全要素が互いに <=> メソッドで比較できることを仮定しています。
@@ -2610,7 +2625,9 @@ p [2, 5, 3].min(2) #=> [2, 3]
 - **SEE** [m:Enumerable#min]
 
 ### def min {|a, b| ... }    -> object | nil
+{: since=""}
 ### def min(n) {|a, b| ... } -> Array
+{: since=""}
 
 ブロックの評価結果で各要素の大小判定を行い、最小の要素、もしくは最小の
 n 要素が昇順で入った配列を返します。
@@ -2634,7 +2651,9 @@ p ary.min(2) {|a, b| a.length <=> b.length } #=> ["dog", "horse"]
 - **SEE** [m:Enumerable#min]
 
 ### def minmax                 -> [object, object]
+{: since=""}
 ### def minmax{|a, b| ... }    -> [object, object]
+{: since=""}
 
 自身の各要素のうち最小の要素と最大の要素を
 要素とするサイズ 2 の配列を返します。

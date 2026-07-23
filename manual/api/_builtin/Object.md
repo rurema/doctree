@@ -1938,6 +1938,7 @@ initialize_clone という名前のメソッドは自動的に private に設定
 - **SEE** [m:Object#clone], [m:Object#initialize_copy], [m:Object#initialize_dup]
 
 ### def initialize_dup(obj) -> object
+{: since="1.9.2"}
 
 [m:Object#dup] がオブジェクトを複製する際に呼び出すメソッドです。
 

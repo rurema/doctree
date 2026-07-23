@@ -891,6 +891,7 @@ c.join
 
 ### def inspect -> String
 ### def to_s -> String
+{: since=""}
 
 自身を人間が読める形式に変換した文字列を返します。
 
@@ -931,6 +932,7 @@ th.join
 - **SEE** [m:Thread#set_trace_func] [m:Kernel?.set_trace_func]
 
 ### def set_trace_func(pr) -> Proc | nil
+{: since="1.9.2"}
 
 スレッドにトレース用ハンドラを設定します。
 

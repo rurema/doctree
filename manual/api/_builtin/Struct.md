@@ -328,6 +328,7 @@ p Foo.new.members  # => [:foo, :bar]
 ### def values -> [object]
 ### def to_a -> [object]
 ### def deconstruct -> [object]
+{: since="2.7.0"}
 
 構造体のメンバの値を配列にいれて返します。
 
@@ -342,6 +343,7 @@ p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_a
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
 
 ### def deconstruct_keys(array_of_names) -> Hash
+{: since="2.7.0"}
 
 self のメンバの名前と値の組を [c:Hash] で返します。
 

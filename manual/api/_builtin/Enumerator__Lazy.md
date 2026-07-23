@@ -432,6 +432,7 @@ p r.lazy.map{|n| n**2}.repeat(2).first(5)
 ```
 
 ### def chunk_while {|elt_before, elt_after| ... } -> Enumerator::Lazy
+{: since="2.3.0"}
 
 [m:Enumerable#chunk_while] と同じですが、Enumerator ではなく Enumerator::Lazy を返します。
 
@@ -443,7 +444,9 @@ p r.lazy.map{|n| n**2}.repeat(2).first(5)
 [m:Enumerable#uniq] と同じですが、配列ではなく Enumerator::Lazy を返します。
 
 ### def with_index(offset = 0) {|(*args), idx| ... } -> Enumerator::Lazy
+{: since="2.0.0"}
 ### def with_index(offset = 0) -> Enumerator::Lazy
+{: since="2.0.0"}
 
 生成時のパラメータに従って、要素にインデックスを添えて繰り返します。
 インデックスは offset から始まります。

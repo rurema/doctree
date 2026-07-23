@@ -513,12 +513,15 @@ p m.regexp # => /a.*b/
 ```
 
 ### def hash -> Integer
+{: since=""}
 
 self のマッチ対象になった文字列、元になった正規表現オブジェクト、マッチ
 した位置を元にハッシュ値を計算して返します。
 
 ### def eql?(other) -> bool
+{: since=""}
 ### def ==(other)   -> bool
+{: since=""}
 
 self と other のマッチ対象になった文字列、元になった正規表現オブジェク
 ト、マッチした位置が等しければ true を返します。そうでない場合には

@@ -266,6 +266,7 @@ p (-18).truncate(-1) # => -10
 
 ### def to_s(base=10)    -> String
 ### def inspect(base=10) -> String
+{: since=""}
 
 整数を 10 進文字列表現に変換します。
 
@@ -737,6 +738,7 @@ p -1234567890987654321.abs # => 1234567890987654321
 
 ### def ==(other) -> bool
 ### def ===(other) -> bool
+{: since=""}
 
 比較演算子。数値として等しいか判定します。
 

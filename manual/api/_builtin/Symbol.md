@@ -213,6 +213,7 @@ p (1..3).select(&:odd?) # => [1, 3]
 - **SEE** [ref:d:spec/call#block]
 
 ### def ==(other)        -> true | false
+{: since=""}
 
 other が同じシンボルの時に真を返します。
 そうでない場合は偽を返します。
@@ -329,6 +330,7 @@ p "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp?(:"\u{c4 d6 dc}") #=> nil
 - **SEE** [m:String#casecmp?], [m:Symbol#casecmp]
 
 ### def =~(other) -> Integer | nil
+{: since=""}
 
 正規表現 other とのマッチを行います。
 

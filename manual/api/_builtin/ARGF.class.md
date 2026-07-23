@@ -36,6 +36,7 @@ ARGF.filename # => "glark"
 ### def to_s -> String
 {: since=""}
 ### def inspect -> String
+{: since=""}
 
 常に文字列 "ARGF" を返します。
 
@@ -314,7 +315,9 @@ ARGF.each_char{|e|p e}
 - **SEE** [m:IO#each_char]
 
 ### def each_codepoint { |c| ... }   -> self
+{: since="1.9.3"}
 ### def each_codepoint               -> Enumerator
+{: since="1.9.3"}
 
 self の各コードポイントに対して繰り返しブロックを呼びだします。
 

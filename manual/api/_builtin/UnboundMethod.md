@@ -152,6 +152,7 @@ p String.instance_method(:count).arity   #=> -1
 
 ### def ==(other)     -> bool
 ### def eql?(other)   -> bool
+{: since=""}
 
 自身と other が同じクラスあるいは同じモジュールの同じメソッドを表す場合に
 true を返します。そうでない場合に false を返します。
@@ -192,6 +193,7 @@ p String.instance_method(:count).inspect # => "#<UnboundMethod: String#count>"
 - **SEE** [m:Method#inspect]
 
 ### def hash    -> Integer
+{: since=""}
 
 自身のハッシュ値を返します。
 
