@@ -762,6 +762,23 @@ File.utime(atime, mtime, self.to_s) と同じです。
 
 - **SEE** [m:File.utime]
 
+#@since 3.2
+### def lutime(atime, mtime) -> Integer
+
+File.lutime(atime, mtime, self.to_s) と同じです。
+
+[m:Pathname#utime] と違い、シンボリックリンクそのものの時刻を変更します
+（リンク先をたどりません）。
+
+- **param** `atime` -- 最終アクセス時刻を [c:Time] か、起算時からの経過秒数を数値で指定します。
+
+- **param** `mtime` -- 更新時刻を [c:Time] か、起算時からの経過秒数を数値で指定します。
+
+#@#noexample File.lutime の例を参照
+
+- **SEE** [m:File.lutime], [m:Pathname#utime]
+#@end
+
 ### def basename(suffix = "") -> Pathname
 
 Pathname.new(File.basename(self.to_s, suffix)) と同じです。
