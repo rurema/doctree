@@ -174,7 +174,11 @@ Ruby スクリプトで使われる記号の一覧です。
 
   ```ruby
   require 'set'
+#@since 4.0
+  p Set[1, 2] | Set[2, 3] # => Set[1, 2, 3]
+#@else
   p Set[1, 2] | Set[2, 3] # => #<Set: {1, 2, 3}>
+#@end
   ```
 
 - **`3 || 5`**:
