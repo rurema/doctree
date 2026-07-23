@@ -406,6 +406,25 @@ Proc オブジェクトが引数を取らなければ空の配列を返します
               扱ったときの引数の情報を返します。
 #@end
 
+分割代入を使った `|(a, b)|` のように引数名を持たない引数の場合は、引数の種類を表す
+Symbol だけの 1 要素の配列になります。
+#@since 4.0
+これは必須の引数でもオプショナルな引数でも同様です。
+#@else
+ただし、オプショナルな引数の場合は引数名が nil の 2 要素の配列になります。
+#@end
+
+```ruby title="引数名を持たない引数の例"
+p lambda { |(a, b)| }.parameters  # => [[:req]]
+#@since 4.0
+p proc { |(a, b)| }.parameters    # => [[:opt]]
+p proc { |x, (a, b)| }.parameters # => [[:opt, :x], [:opt]]
+#@else
+p proc { |(a, b)| }.parameters    # => [[:opt, nil]]
+p proc { |x, (a, b)| }.parameters # => [[:opt, :x], [:opt, nil]]
+#@end
+```
+
   ```ruby title="例"
   prc = lambda{|x, y=42, *other, k_x:, k_y: 42, **k_other, &b|}
   prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
