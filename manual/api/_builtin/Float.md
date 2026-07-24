@@ -3,7 +3,7 @@ library: _builtin
 ---
 # class Float < Numeric
 
-浮動小数点数のクラス。Float の実装は C 言語の double で、その精度は環
+浮動小数点数のクラス。`Float` の実装は C 言語の double で、その精度は環
 境に依存します。
 
 一般にはせいぜい15桁です。詳しくは多くのシステムで採用されている
@@ -569,9 +569,9 @@ p 1.333.rationalize(0.01)  # => (4/3)
 
 浮動小数点数で表現可能な `self` の次の値を返します。
 
-[m:Float::MAX]`.next_float`、[m:Float::INFINITY]`.next_float` は
-[m:Float::INFINITY] を返します。[m:Float::NAN]`.next_float` は
-[m:Float::NAN] を返します。
+`Float::MAX.next_float`、`Float::INFINITY.next_float` は
+`Float::INFINITY` を返します。`Float::NAN.next_float` は
+`Float::NAN` を返します。
 
 ```ruby title="例"
 p 0.01.next_float  # => 0.010000000000000002
@@ -609,7 +609,7 @@ f = 0.01; 20.times { printf "%-20a %s\n", f, f.to_s; f = f.next_float }
 
 ### def prev_float -> Float
 
-浮動小数点数で表現可能な self の前の値を返します。
+浮動小数点数で表現可能な `self` の前の値を返します。
 
 `(-Float::MAX).prev_float` と `(-Float::INFINITY).prev_float`
 は `-Float::INFINITY` を返します。`Float::NAN.prev_float` は
@@ -653,25 +653,25 @@ f = 0.01; 20.times { printf "%-20a %s\n", f, f.to_s; f = f.prev_float }
 
 ### const DIG -> Integer
 
-Float が表現できる最大の 10 進桁数です。
+`Float` が表現できる最大の 10 進桁数です。
 
 通常はデフォルトで 15 です。
 
 ### const EPSILON -> Float
 
-1.0 + Float::EPSILON != 1.0 となる最小の正の値です。
+`1.0 + Float::EPSILON != 1.0` となる最小の正の値です。
 
 通常はデフォルトで 2.2204460492503131e-16 です。
 
 ### const MANT_DIG -> Integer
 
-仮数部の Float::RADIX 進法での桁数です。
+仮数部の `Float::RADIX` 進法での桁数です。
 
 通常はデフォルトで 53 です。
 
 ### const MAX -> Float
 
-Float が取り得る最大の有限の値です。
+`Float` が取り得る最大の有限の値です。
 
 通常はデフォルトで 1.7976931348623157e+308 です。
 
@@ -679,11 +679,11 @@ Float が取り得る最大の有限の値です。
 
 ### const MIN -> Float
 
-Float が取り得る最小の正の値です。
+`Float` が取り得る最小の正の値です。
 
 通常はデフォルトで 2.2250738585072014e-308 です。
 
-Float が取り得る最小の有限の値は -[m:Float::MAX] です。
+`Float` が取り得る最小の有限の値は `-Float::MAX` です。
 
 - **SEE** [m:Float::MAX]
 
@@ -705,7 +705,7 @@ Float が取り得る最小の有限の値は -[m:Float::MAX] です。
 
 ### const MAX_EXP -> Integer
 
-最大の Float::RADIX 進の指数です。
+最大の `Float::RADIX` 進の指数です。
 
 通常はデフォルトで 1024 です。
 
@@ -713,7 +713,7 @@ Float が取り得る最小の有限の値は -[m:Float::MAX] です。
 
 ### const MIN_EXP -> Integer
 
-最小の Float::RADIX 進の指数です。
+最小の `Float::RADIX` 進の指数です。
 
 通常はデフォルトで -1021 です。
 
@@ -727,7 +727,7 @@ Float が取り得る最小の有限の値は -[m:Float::MAX] です。
 
 浮動小数点数における正の無限大です。
 
-負の無限大は -Float::INFINITY です。
+負の無限大は `-Float::INFINITY` です。
 
 - **SEE** [m:Float#finite?], [m:Float#infinite?]
 
