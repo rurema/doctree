@@ -341,6 +341,41 @@ p Math.exp(-Float::INFINITY)  # => 0.0
 
 - **SEE** [man:exp(3)], [m:Math?.log]
 
+#@since 4.0
+### module_function def expm1(x) -> Float
+
+e の x 乗から 1 を引いた値、すなわち `exp(x) - 1` を返します（e は自然対数の底）。
+
+x が 0 に近いとき、[m:Math?.exp] の結果から 1 を引くと桁落ちによって精度が
+失われますが、このメソッドはそれを避けて計算します。
+
+- **param** `x` -- 実数
+
+- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+
+- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+
+```ruby title="例"
+p Math.expm1(0)    # => 0.0
+p Math.expm1(-1.0) # => -0.6321205588285577
+p Math.expm1(0.5)  # => 0.6487212707001282
+```
+
+```ruby title="例: 0 に近い値での精度"
+p Math.exp(1e-16) - 1 # => 0.0     （桁落ちして 0 になる）
+p Math.expm1(1e-16)   # => 1.0e-16
+```
+
+x に負の無限大を渡した場合は -1.0 を返します。
+
+```ruby title="例: 無限大を渡す"
+p Math.expm1(-Float::INFINITY) # => -1.0
+p Math.expm1(Float::INFINITY)  # => Infinity
+```
+
+- **SEE** [man:expm1(3)], [m:Math?.exp], [m:Math?.log1p]
+#@end
+
 ### module_function def frexp(x) -> [Float, Integer]
 
 実数 x の仮数部と指数部の配列を返します。
@@ -457,6 +492,40 @@ p Math.log10(10**100) # => 100.0
 ```
 
 - **SEE** [m:Math?.log], [m:Math?.log2]
+
+#@since 4.0
+### module_function def log1p(x) -> Float
+
+1 に x を足した値の自然対数、すなわち `log(x + 1)` を返します。
+
+x が 0 に近いとき、1 に x を足してから [m:Math?.log] を取ると桁落ちによって
+精度が失われますが、このメソッドはそれを避けて計算します。
+
+- **param** `x` -- -1 以上の実数
+
+- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+
+- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+
+- **raise** `Math::DomainError` -- x に -1 未満の実数を指定した場合に発生します。
+
+```ruby title="例"
+p Math.log1p(0)             # => 0.0
+p Math.log1p(Math::E - 1)   # => 1.0
+p Math.log1p(-1.0)          # => -Infinity
+```
+
+```ruby title="例: 0 に近い値での精度"
+p Math.log(1 + 1e-16) # => 0.0     （桁落ちして 0 になる）
+p Math.log1p(1e-16)   # => 1.0e-16
+```
+
+```ruby title="例: 定義域外"
+Math.log1p(-2.0) # ~> Math::DomainError
+```
+
+- **SEE** [man:log1p(3)], [m:Math?.log], [m:Math?.expm1]
+#@end
 
 ### module_function def sqrt(x) -> Float
 
