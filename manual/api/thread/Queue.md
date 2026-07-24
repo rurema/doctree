@@ -159,6 +159,7 @@ begin
   q.pop(true)
 rescue => e
   p e
+  p e.message
 end
 
 # => resource1
