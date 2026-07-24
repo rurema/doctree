@@ -38,6 +38,43 @@ p CGI.unescape("http%3A%2F%2Fwww.example.com%2Findex.rss")
 #=> "http://www.example.com/index.rss"
 ```
 
+#@since 3.2
+### def escapeURIComponent(string) -> String
+
+与えられた文字列を [RFC:3986] に従って URL エンコードした文字列を新しく作成し返します。
+
+[m:CGI.escape] と異なり、空白文字を `+` ではなく `%20` に変換します。
+[JavaScript の encodeURIComponent 関数](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) と同じ結果になります。
+
+- **param** `string` -- URL エンコードしたい文字列を指定します。
+
+```ruby
+require "cgi"
+
+p CGI.escapeURIComponent("'Stop!' said Fred") #=> "%27Stop%21%27%20said%20Fred"
+
+# CGI.escape は空白を + にするが、escapeURIComponent は %20 にする
+p CGI.escape("a b")             #=> "a+b"
+p CGI.escapeURIComponent("a b") #=> "a%20b"
+```
+
+- **SEE** [m:CGI.escape], [m:CGI.unescapeURIComponent]
+
+### def unescapeURIComponent(string) -> String
+
+与えられた文字列を [m:CGI.escapeURIComponent] でエンコードされたものとして URL デコードした文字列を新しく作成し返します。
+
+- **param** `string` -- URL エンコードされている文字列を指定します。
+
+```ruby
+require "cgi"
+
+p CGI.unescapeURIComponent("%27Stop%21%27%20said%20Fred") #=> "'Stop!' said Fred"
+```
+
+- **SEE** [m:CGI.unescape], [m:CGI.escapeURIComponent]
+#@end
+
 ### def escapeHTML(string) -> String
 ### def escape_html(string) -> String
 
