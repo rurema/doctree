@@ -380,8 +380,13 @@ p ENV.except("TERM","HOME") #=> {"LANG"=>"en_US.UTF-8"}
 
 - **SEE** [m:Hash#except], [m:ENV.slice]
 
+#@since 3.2
+### def clone(freeze: true) -> ()
+{: since=""}
+#@else
 ### def clone(freeze: true) -> object
 {: since=""}
+#@end
 
 ENV オブジェクトの複製を作成して返します。
 

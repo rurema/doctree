@@ -1921,6 +1921,7 @@ check obj.clone
 - **SEE** [m:Object#initialize_clone], [m:Object#initialize_dup]
 
 ### def initialize_clone(obj, freeze: nil) -> object
+{: since="1.9.2"}
 
 [m:Object#clone] がオブジェクトを複製する際に呼び出すメソッドです。
 
