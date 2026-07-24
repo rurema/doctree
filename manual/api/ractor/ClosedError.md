@@ -12,12 +12,20 @@ since: "3.0"
 
 ```ruby
 r = Ractor.new do
+#@since 4.0
   Ractor.current.close
+#@else
+  Ractor.current.close_incoming
+#@end
   Ractor.receive # ここで Ractor::ClosedError が発生する
 end
 
 begin
+#@since 4.0
   r.value
+#@else
+  r.take
+#@end
 rescue Ractor::RemoteError => e
   # 他の Ractor で発生した例外は Ractor::RemoteError に包まれて伝わる
   p e.cause.class # => Ractor::ClosedError

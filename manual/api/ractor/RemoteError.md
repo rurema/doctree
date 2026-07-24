@@ -12,9 +12,13 @@ since: "3.0"
 ```ruby
 r = Ractor.new { raise "boom" }
 begin
+#@since 4.0
   r.value
+#@else
+  r.take
+#@end
 rescue Ractor::RemoteError => e
-  p e.message      # => "thrown by remote Ractor."
+  p e.message       # => "thrown by remote Ractor."
   p e.cause.message # => "boom"
 end
 ```
