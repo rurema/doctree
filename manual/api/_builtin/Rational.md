@@ -493,7 +493,7 @@ Rational::compatible#marshal_load で復元可能な配列を返します。
 
 [注意] Rational::compatible は通常の方法では参照する事ができません。
 
-#@# #6625 を参照。
+#@# https://bugs.ruby-lang.org/issues/6625 を参照。
 
 ## Private Singleton Methods
 
