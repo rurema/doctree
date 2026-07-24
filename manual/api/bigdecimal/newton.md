@@ -89,4 +89,4 @@ Ruby のソースコード中の以下のサンプルスクリプトも参考に
 
 - **raise** `RuntimeError` -- 解が収束しない場合に発生します。
 
-#@# TODO: #7321 が解決した後で引数 x について修正する。
+#@# TODO: https://bugs.ruby-lang.org/issues/7321 が解決した後で引数 x について修正する。

@@ -158,7 +158,7 @@ end
 binding.eval("local_variables")
 ```
 
-#@# #8779 を参照。
+#@# https://bugs.ruby-lang.org/issues/8779 を参照。
 #@since 4.0
 ### def implicit_parameters -> [Symbol]
 

@@ -221,7 +221,7 @@ p f.raise StopIteration # => :exit
 自身が表すファイバーへコンテキストを切り替えます。
 自身は resume を呼んだファイバーの子となります。
 
-#@# #5526 参照。
+#@# https://bugs.ruby-lang.org/issues/5526 参照。
 ただし、[m:Fiber#transfer] を呼び出した後に resume を呼び出す事はでき
 ません。
 

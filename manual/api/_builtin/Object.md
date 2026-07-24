@@ -1750,7 +1750,7 @@ p nil.singleton_class       #=> NilClass
 
 - **SEE** [m:Object#class]
 
-#@# #6373 を参照。
+#@# https://bugs.ruby-lang.org/issues/6373 を参照。
 ### def itself -> object
 
 self を返します。
