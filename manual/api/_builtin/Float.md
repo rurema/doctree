@@ -7,8 +7,9 @@ library: _builtin
 境に依存します。
 
 一般にはせいぜい15桁です。詳しくは多くのシステムで採用されている
-浮動小数点標準規格、IEEE (Institute of Electrical and
-Electronics Engineers: 米国電気電子技術者協会) 754 を参照してください。
+浮動小数点標準規格、IEEE 754 を参照してください。
+
+- **SEE** <https://ja.wikipedia.org/wiki/IEEE_754>
 
 ```ruby title="あるシステムでの 1/3(=0.333...) の結果"
 printf("%.50f\n", 1.0/3)
