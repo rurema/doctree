@@ -3,6 +3,12 @@ type: library
 ---
 HTTP クッキーを利用するためのクラスを定義したライブラリです。
 
+#@since 4.0
+Ruby 4.0 から cgi ライブラリは default gems から削除されたため、
+このライブラリを利用するには cgi gem をインストールしてください。
+詳細は [lib:cgi] を参照してください。
+#@end
+
 #@# = class CGI::Cookie < DelegateClass(Array)
 # class CGI::Cookie < Array
 

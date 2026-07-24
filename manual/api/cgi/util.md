@@ -108,6 +108,7 @@ print CGI.unescapeElement('&lt;BR&gt;&lt;A HREF="url"&gt;&lt;/A&gt;', %w(A IMG))
   # => "&lt;BR&gt;<A HREF="url"></A>"
 ```
 
+#@until 4.0
 ### def rfc1123_date(time) -> String
 
 与えられた時刻を [RFC:1123] フォーマットに準拠した文字列に変換します。
@@ -144,6 +145,8 @@ print CGI.pretty("<HTML><BODY></BODY></HTML>", "\t")
   #         </BODY>
   # </HTML>
 ```
+
+#@end
 
 ## Constants
 
