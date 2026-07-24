@@ -194,8 +194,8 @@ p 3.14 >= 3.1415  # => false
 
 ### def finite? -> bool
 
-数値が ∞, -∞, あるいは NaN でない場合に `true` を返します。
-そうでない場合に `false` を返します。
+`self` が ∞, -∞, NaN のどれでもない場合に `true` を返します。
+それ以外の場合に `false` を返します。
 
 ```ruby title="例"
 p 3.14.finite? # => true
@@ -203,9 +203,11 @@ inf = 1.0/0
 p inf.finite? # => false
 ```
 
+- **SEE** [m:Float#infinite?]
+
 ### def infinite? -> 1 | -1 | nil
 
-数値が +∞ のとき `1`、-∞のとき `-1` を返します。それ以外は `nil` を返します。
+`self` が +∞ のとき `1`、-∞のとき `-1` を返します。それ以外は `nil` を返します。
 
 ```ruby title="例"
 inf = 1.0/0
@@ -217,9 +219,11 @@ p inf            # => -Infinity
 p inf.infinite?  # => -1
 ```
 
+- **SEE** [m:Float#finite?]
+
 ### def nan? -> bool
 
-数値が NaN(Not a number)のとき真を返します。
+`self` が NaN(Not a number)のとき `true` を返し、そうでないとき `false` を返します。
 
 ```ruby title="例"
 nan = 0.0/0.0
