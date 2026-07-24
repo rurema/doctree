@@ -617,7 +617,11 @@ storage= は実験的な機能です。呼び出すと実験的な機能であ�
 
 ```ruby title="例: 取得"
 Fiber[:key] = 1
+#@since 3.4
 p Fiber.current.storage # => {key: 1}
+#@else
+p Fiber.current.storage # => {:key=>1}
+#@end
 
 # 返り値は複製なので、変更しても fiber storage には影響しない
 Fiber.current.storage[:key] = 2
