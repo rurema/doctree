@@ -257,6 +257,7 @@ p 0x1_0000_0000.size
 
 ### def to_s(base = 10)    -> String
 ### def inspect(base = 10) -> String
+{: since=""}
 
 self を引数で指定した基数の文字列表現に変換します。
 

@@ -419,6 +419,7 @@ p Complex(Float::NAN, Float::NAN).to_s  # => "NaN+NaN*i"
 ```
 
 ### def to_c -> self
+{: since="1.9.1"}
 
 self を返します。
 

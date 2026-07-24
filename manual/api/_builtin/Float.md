@@ -478,6 +478,7 @@ p 0.1.negative?  # => false
 
 ### def to_s -> String
 ### def inspect -> String
+{: since=""}
 
 自身を人間が読みやすい形の文字列表現にして返します。
 

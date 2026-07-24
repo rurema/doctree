@@ -363,8 +363,11 @@ p ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
 - **SEE** [m:Hash#slice], [m:ENV.except]
 
 ### def freeze -> ()
+{: since="2.7.0"}
 
 ENV.freeze は環境変数の変更を禁止できないため、[c:TypeError]を発生させます。
+
+Ruby 2.7 で追加された挙動です。それより前のバージョンでは例外を発生させませんでした。
 
 ### def except(*keys) -> Hash
 
@@ -377,12 +380,19 @@ p ENV.except("TERM","HOME") #=> {"LANG"=>"en_US.UTF-8"}
 
 - **SEE** [m:Hash#except], [m:ENV.slice]
 
+#@since 3.2
+### def clone(freeze: true) -> ()
+{: since=""}
+#@else
 ### def clone(freeze: true) -> object
+{: since=""}
+#@end
 
 ENV オブジェクトの複製を作成して返します。
 
 ENV は OS のプロセス全体で共有される環境変数を操作するラッパーオブジェクトなので、複製は有用ではありません。
 そのため、3.1 からは複製で環境変数を操作するときに deprecated 警告がでます。
+さらに Ruby 3.2 からは複製自体ができなくなり、[c:TypeError] が発生します。
 
 テスト実行中に環境変数を退避する用途には [m:ENV.to_h] を使用してください。
 

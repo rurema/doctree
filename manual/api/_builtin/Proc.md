@@ -57,6 +57,7 @@ Proc.new は、Proc#initialize が定義されていれば
 ### def [](*arg) -> ()
 ### def call(*arg) -> ()
 ### def ===(*arg) -> ()
+{: since=""}
 ### def yield(*arg) -> ()
 
 手続きオブジェクトを実行してその結果を返します。
@@ -237,6 +238,7 @@ p pr == pr.to_proc # => true
 
 ### def to_s    -> String
 ### def inspect -> String
+{: since=""}
 
 self の文字列表現を返します。
 
@@ -371,6 +373,7 @@ p method(:p).to_proc.source_location # => nil
 - **SEE** [m:Method#source_location]
 
 ### def hash -> Integer
+{: since=""}
 
 self のハッシュ値を返します。
 

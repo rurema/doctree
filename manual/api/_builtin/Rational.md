@@ -141,6 +141,7 @@ r / 0                # ~> ZeroDivisionError
 - **SEE** [m:Numeric#quo]
 
 ### def -@ -> Rational
+{: since="1.9.1"}
 
 単項演算子の - です。
 self の符号を反転させたものを返します。
@@ -186,6 +187,7 @@ p Rational('1/2') == '1/2'          # => false
 ```
 
 ### def positive? -> bool
+{: since="2.3.0"}
 
 self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
 
@@ -197,6 +199,7 @@ p Rational(-1, 2).positive? # => false
 - **SEE** [m:Rational#negative?]
 
 ### def negative? -> bool
+{: since="2.3.0"}
 
 self が 0 未満の場合に true を返します。そうでない場合に false を返します。
 
@@ -208,7 +211,9 @@ p Rational(-1, 2).negative? # => true
 - **SEE** [m:Rational#positive?]
 
 ### def abs       -> Rational
+{: since="1.9.1"}
 ### def magnitude -> Rational
+{: since="1.9.1"}
 
 自身の絶対値を返します。
 

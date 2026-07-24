@@ -78,6 +78,7 @@ p public_methods(false) - basic_public_methods
 
 ### def to_s    -> "main"
 ### def inspect -> "main"
+{: since=""}
 
 "main" を返します。
 

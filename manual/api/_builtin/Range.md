@@ -588,7 +588,9 @@ p (1...2).hash   # => 16782863
 ```
 
 ### def to_a -> Array
+{: since=""}
 ### def entries -> Array
+{: since=""}
 
 self を配列に変換します。
 
@@ -631,7 +633,9 @@ p ("1".."5").inspect  # => "\"1\"..\"5\""
 ```
 
 ### def min               -> object | nil
+{: since=""}
 ### def min(n)            -> [object]
+{: since=""}
 
 範囲内の最小の値、もしくは最小の n 要素が昇順で入った配列を返します。
 
@@ -660,7 +664,9 @@ p (1...1).min(3) # => []
 ```
 
 ### def min {|a, b| ... } -> object | nil
+{: since=""}
 ### def min(n) {|a, b| ... } -> [object]
+{: since=""}
 
 ブロックの評価結果で範囲内の各要素の大小判定を行い、最小の要素、もしくは
 最小の n 要素を返します。引数を指定しない形式では、範囲内に要素が存在しなければ
@@ -685,7 +691,9 @@ p (1..3).min(2) { |a, b| h[a].length <=> h[b].length } # => [1, 2]
 ```
 
 ### def minmax                      -> [object, object]
+{: since=""}
 ### def minmax {|a, b| ... }        -> [object, object]
+{: since=""}
 
 範囲内の要素のうち、最小の要素と最大の要素を要素とするサイズ 2 の配列を返します。
 
@@ -702,7 +710,9 @@ p (1..3).minmax { |a, b| h[a].length <=> h[b].length } # => [1, 3]
 ```
 
 ### def max               -> object | nil
+{: since=""}
 ### def max(n) -> [object]
+{: since=""}
 
 範囲内の最大の値、もしくは最大の n 要素が降順で入った配列を返します。
 
@@ -731,7 +741,9 @@ p (1...1).max(3) # => []
 ```
 
 ### def max {|a, b| ... } -> object | nil
+{: since=""}
 ### def max(n) {|a, b| ... } -> [object]
+{: since=""}
 
 ブロックの評価結果で範囲内の各要素の大小判定を行い、最大の要素、もしくは
 最大の n 要素を返します。引数を指定しない形式では、

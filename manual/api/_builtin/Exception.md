@@ -181,6 +181,7 @@ end
 ```
 
 ### def ==(other)    -> bool
+{: since=""}
 
 自身と指定された other のクラスが同じであり、
 message と backtrace が == メソッドで比較して

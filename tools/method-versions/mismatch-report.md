@@ -136,7 +136,7 @@ MISMATCH_UNTIL の note 内訳:
 `Ractor` 4件は doctree PR 1本で `{: since="3.4"}` 追加すれば完結する
 軽微な修正。
 
-### explicit-wrong(4件)
+### explicit-wrong(4件)——【訂正 2026-07-24: 全件誤検出・修正不要】
 
 **意味**: doctree に明示 `since="X"` 属性が書かれているが、その値自体が
 実測と食い違っている(著者記載ミス)。
@@ -148,8 +148,15 @@ MISMATCH_UNTIL の note 内訳:
 | ARGF.class | i | putc | 1.9.3 | 1.9.1 |
 | ARGF.class | i | puts | 1.9.3 | 1.9.1 |
 
-**推奨アクション**: `ARGF.md` の該当4箇所を `{: since="1.9.1"}` へ修正。
-実測ベースの単純な訂正であり、他のカテゴリと違って解釈の余地がない。
+~~**推奨アクション**: `ARGF.md` の該当4箇所を `{: since="1.9.1"}` へ修正。~~
+
+**【訂正】** 4件とも誤検出だった。real_first=1.9.1 は compare.rb の継承解決が
+**Kernel の private な print/printf/putc/puts** を拾ったもので、private 継承
+メソッドはレシーバ付きの `ARGF.print` では呼べない(ruby 1.9.1-p431 実機で
+`private method 'print' called for ARGF` を確認。ARGF 自身の public な print 系は
+1.9.3 から=matrix.tsv の `ARGF.class i print` 直接行とも一致)。つまり doctree の
+明示 `since="1.9.3"` が正しく、修正は不要。compare.rb の既知の限界
+(検証メモ参照)として記録する。
 
 ### until-mismatch(6件)——査読の結果、全件アクション不要
 
@@ -200,7 +207,7 @@ MISMATCH_UNTIL の note 内訳:
 **結論: until 側に本物のドキュメント/DBバグは0件**。今回の突き合わせで
 修正対象になるのは since 側のみ。
 
-### db-late(92件)
+### db-late(92件)——【トリアージ完了 2026-07-24: 実施内訳は末尾】
 
 **意味**: `db_first > real_first`。実際にはもっと早くから存在した
 メソッドなのに、本番バッジは実装よりも遅い版から存在するかのように
@@ -478,6 +485,42 @@ awk -F'\t' 'NR>1 && $17=="MISMATCH_SINCE" && $18 ~ /ladder-gap-1\.9\.1-1\.9\.3/{
 # real-autoload-gap:Set の対象クラス確認
 awk -F'\t' 'NR>1 && $18 ~ /real-autoload-gap:Set/{print $1}' mismatches.tsv | sort -u
 ```
+
+### db-late トリアージ結果(2026-07-24 実施)
+
+WeakMap 12件(別 PR)・BasicObject 10件・Data 6件を除く 64件を、実測データ+
+doctree ソース精査+旧版 docker 実機で全件トリアージした。結果:
+
+- **A: 明示属性で補正 = 56件**(`{: since=""}` 41エントリ相当+実値付き 15)。
+  補正 PR 参照。値はすべて旧版実機で呼び出し可能性を確認済み。
+  ARGF.class#inspect は入力の 1.9.1 でなく既存の to_s と同じ `since=""` を採用
+  (1.8 系でも ARGF.inspect は成功する)。Thread#set_trace_func は 1.9.2 に再導出
+  (1.9.1 は private、1.9.2 で public 化)。
+- **B: 修正不要 = 8件**
+  - private 継承の誤検出(現バッジが既に正しい): Binding#local_variables(2.2.0)・
+    Fiber#raise(2.7.0)・NameError#local_variables(2.3.0)
+  - 既存の #@since ゲートの意図した帰結: ENV.dup(3.1)・Range#reverse_each(3.3)
+  - undef の見落とし(fable 査読で B に降格): **Complex#<=> は 2.6 まで undef されており**
+    (1.9.3/2.6.10 実機で NoMethodError)、2.7 の実装追加が真の初出=現バッジ 2.7.0 が正当。
+    継承解決は Numeric#<=> を拾っていた
+  - 要人間判断(単純な属性付与では正確に直せない): KeyError.new(`{: since=}` は
+    メソッド名単位で全オーバーロードに共有されるため、基本形 1.9.1 と receiver:/key:
+    キーワード形 2.6.0 を属性だけでは切り分けられない=エントリ分割等が必要)・
+    Object#initialize_clone(フックとしては 1.9.2 からだが署名の freeze: キーワードは
+    3.0 新設=本文のバージョン分岐が必要)
+
+### compare.rb の既知の限界(次回改良候補)
+
+1. **継承解決が可視性を無視する**: private なメソッドを継承していても「存在」扱いに
+   なり、explicit-wrong 4件(ARGF print 系)や db-late の一部(local_variables/raise 等)の
+   誤検出を生んだ。matrix.tsv は可視性を持っているので、tier4 で priv を除外(または
+   note に明示)する改良が可能
+2. **undef は `{: undef}` フラグ頼み**: doctree 側にフラグが無い undef(Complex#<=>)は
+   検出できない
+3. **`{: nomethod}` が real 解決を抑制しない**: Object#to_a の until 誤検出の原因
+   (until-mismatch 節参照)
+4. **明示 `{: since=}` はメソッド名単位で共有**: オーバーロードごとに導入版が異なる
+   ケース(KeyError.new)は表現できない(bitclust 側の仕様)
 
 ## 検証メモ
 

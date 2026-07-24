@@ -8,6 +8,7 @@ library: _builtin
 ## Instance Methods
 
 ### def each(*args) { ... } -> object
+{: since="1.9.1"}
 
 [m:Enumerator.new] で使われるメソッドです。
 

@@ -364,6 +364,7 @@ p "stringAA" <=> "string"  # => 1
 
 ### def ==(other) -> bool
 ### def ===(other) -> bool
+{: since=""}
 
 other が文字列の場合、[m:String#eql?] と同様に文字列の内容を比較します。
 

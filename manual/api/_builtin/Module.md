@@ -926,6 +926,7 @@ p t.foo()              #=> 1
 ### def name -> String | nil
 ### def to_s -> String
 ### def inspect -> String
+{: since=""}
 
 モジュールやクラスの名前を文字列で返します。
 

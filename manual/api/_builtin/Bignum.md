@@ -136,6 +136,7 @@ p 2 <=> 1 #=> 1
 
 ### def ==(other) -> bool
 ### def ===(other) -> bool
+{: since=""}
 
 比較演算子。数値として等しいか判定します。
 
@@ -247,6 +248,7 @@ self のハッシュ値を返します。
 
 ### def to_s(base = 10)    -> String
 ### def inspect(base = 10) -> String
+{: since=""}
 
 self を引数で指定した基数の文字列表現に変換します。
 

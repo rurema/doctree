@@ -78,6 +78,7 @@ p false.^(1 + 1)   #=> true
 
 ### def to_s    -> String
 ### def inspect -> String
+{: since=""}
 
 常に文字列 "false" を返します。
 
