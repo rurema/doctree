@@ -205,3 +205,167 @@ IO::Buffer.new(2).set_string("TOOLONG") # ~> ArgumentError
 ```
 
 - **SEE** [m:IO::Buffer#get_string]
+
+#@since 3.2
+### def slice(offset = 0, length = nil) -> IO::Buffer
+#@else
+### def slice(offset, length) -> IO::Buffer
+#@end
+
+バッファの一部を指す新しい [c:IO::Buffer] を返します。
+
+メモリのコピーは行わず、返されるバッファは元のバッファと同じメモリ領域を参照します。
+そのため、一方への書き込みはもう一方からも見えます。
+元のバッファが文字列やファイルに由来する場合、その関連も引き継がれます。
+
+- **param** `offset` -- 参照を開始する位置をバッファの先頭からのバイト数で指定します。
+#@since 3.2
+           省略した場合は 0 になります。
+#@end
+- **param** `length` -- 参照するバイト数を指定します。
+#@since 3.2
+           省略した場合はバッファの末尾までになります。
+#@end
+- **raise** `ArgumentError` -- offset や length が負の場合、
+             または offset と length の合計がバッファのバイト数を超える場合に発生します。
+
+```ruby
+buf = IO::Buffer.new(8)
+buf.set_string("Ruby")
+
+part = buf.slice(0, 4)
+p part.get_string # => "Ruby"
+
+# 同じメモリ領域を参照しているので、変更は元のバッファにも反映される
+part.set_string("Xy")
+p buf.get_string  # => "Xyby\x00\x00\x00\x00"
+```
+
+- **SEE** [m:IO::Buffer#copy]
+
+### def copy(source, offset = 0, length = nil, source_offset = 0) -> Integer
+
+別の [c:IO::Buffer] の内容を自身へコピーします。コピーしたバイト数を返します。
+
+[c:String] の内容を書き込む場合は [m:IO::Buffer#set_string] を使用してください。
+
+- **param** `source` -- コピー元を [c:IO::Buffer] で指定します。
+- **param** `offset` -- 書き込みを開始する位置をバッファの先頭からのバイト数で指定します。
+- **param** `length` -- コピーするバイト数を指定します。省略した場合は source 全体をコピーします。
+- **param** `source_offset` -- source のどの位置から読み出すかをバイト数で指定します。
+- **raise** `ArgumentError` -- offset と length の合計がバッファのバイト数を超える場合に発生します。
+- **raise** `IO::Buffer::AccessError` -- 書き込みできないバッファに対して呼び出した場合に発生します。
+
+```ruby
+buf = IO::Buffer.new(8)
+
+p buf.copy(IO::Buffer.for("test"), 2) # => 4
+p buf.get_string                      # => "\x00\x00test\x00\x00"
+
+# 長さを指定して先頭 3 バイトだけコピーする
+other = IO::Buffer.new(8)
+p other.copy(IO::Buffer.for("abcdef"), 0, 3) # => 3
+p other.get_string(0, 3)                     # => "abc"
+```
+
+- **SEE** [m:IO::Buffer#set_string], [m:IO::Buffer#slice]
+
+### def clear(value = 0, offset = 0, length = nil) -> self
+
+バッファを value で埋めます。
+
+- **param** `value` -- 埋める値を 0 から 255 の [c:Integer] で指定します。
+- **param** `offset` -- 埋め始める位置をバッファの先頭からのバイト数で指定します。
+- **param** `length` -- 埋めるバイト数を指定します。省略した場合はバッファの末尾までを埋めます。
+- **raise** `IO::Buffer::AccessError` -- 書き込みできないバッファに対して呼び出した場合に発生します。
+
+```ruby
+buf = IO::Buffer.new(4)
+buf.set_string("test")
+
+buf.clear
+p buf.get_string # => "\x00\x00\x00\x00"
+
+# 位置と長さを指定して "A" (0x41) で埋める
+buf.clear(0x41, 1, 2)
+p buf.get_string # => "\x00AA\x00"
+```
+
+### def resize(size) -> self
+
+バッファの大きさを size バイトに変更します。
+
+変更前の内容は保持されます。
+変更後の大きさによっては、メモリ領域が別の場所に確保しなおされ、
+内容がそこへコピーされます。
+
+[m:IO::Buffer.for] で作った外部バッファや、ロックされたバッファは大きさを変更できません。
+
+- **param** `size` -- 変更後の大きさをバイト数で指定します。
+- **raise** `IO::Buffer::AccessError` -- 大きさを変更できないバッファに対して呼び出した場合に発生します。
+
+```ruby
+buf = IO::Buffer.new(4)
+buf.set_string("test")
+
+buf.resize(8)
+p buf.size             # => 8
+p buf.get_string(0, 4) # => "test"
+
+IO::Buffer.for("abc").resize(8) # ~> IO::Buffer::AccessError
+```
+
+### def transfer -> IO::Buffer
+
+メモリ領域の所有権を新しい [c:IO::Buffer] へ移し、その新しいバッファを返します。
+
+所有権を手放した自身は、どのメモリ領域も指さない状態になります。
+この状態は [m:IO::Buffer#null?] で調べられます。
+
+```ruby
+buf = IO::Buffer.new(4)
+buf.set_string("Ruby")
+
+other = buf.transfer
+p other.get_string # => "Ruby"
+
+p buf.null? # => true
+p buf.size  # => 0
+```
+
+- **SEE** [m:IO::Buffer#free], [m:IO::Buffer#null?]
+
+### def free -> self
+
+バッファが確保しているメモリ領域を解放します。
+
+解放の内容はバッファの種類によって異なります。
+
+  - 内部(internal) -- 確保したメモリを解放します。
+  - 外部(external) -- 元のオブジェクトとの関連を解消します。
+  - マップ(mapped) -- マッピングを解除します。
+
+解放後は、どのメモリ領域も指さない状態になります。
+#@since 3.3
+この状態のバッファは大きさ 0 のバッファとして扱われます。
+#@else
+この状態のバッファを読み書きしようとすると
+[c:IO::Buffer::AllocationError] が発生します。
+#@end
+
+解放したバッファでも [m:IO::Buffer#resize] を呼べば、あらためてメモリ領域を確保できます。
+
+```ruby
+buf = IO::Buffer.new(4)
+buf.set_string("Ruby")
+
+buf.free
+p buf.null? # => true
+p buf.size  # => 0
+
+# resize すれば再び使える
+buf.resize(4)
+p buf.size  # => 4
+```
+
+- **SEE** [m:IO::Buffer#transfer], [m:IO::Buffer#null?]
