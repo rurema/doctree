@@ -272,7 +272,7 @@ pi3.hash # => 420540030
 ### def abs        -> Float
 ### def magnitude  -> Float
 
-自身の絶対値を返します。
+`self` の絶対値を返します。
 
 ```ruby title="例"
 p 34.56.abs    # => 34.56
@@ -281,7 +281,7 @@ p -34.56.abs   # => 34.56
 
 ### def ceil(ndigits = 0) -> Integer | Float
 
-自身と等しいかより大きな整数のうち最小のものを返します。
+`self` と等しいかより大きな整数のうち最小のものを返します。
 
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
                正の整数を指定した場合、[c:Float] を返します。
@@ -329,7 +329,7 @@ self を other で割った商 q と余り r を、
 をみたす数です。
 このメソッドは、メソッド / と % によって定義されています。
 
-- **param** `other` -- 自身を割る数を指定します。
+- **param** `other` -- `self` を割る数を指定します。
 
 ```ruby title="例"
 p 11.divmod(3)       # => [3, 2]
@@ -343,7 +343,7 @@ p (-11).divmod(3.5)  # => [-4, 3.0]
 
 ### def floor(ndigits = 0) -> Integer | Float
 
-自身と等しいかより小さな整数のうち最大のものを返します。
+`self` と等しいかより小さな整数のうち最大のものを返します。
 
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
                正の整数を指定した場合、[c:Float] を返します。
@@ -377,10 +377,10 @@ p 34567.89.floor(3) # => 34567.89
 
 ### def eql?(other)   -> bool
 
-自身と other のクラスが等しくかつ == メソッドで比較して等しい場合に true を返します。
+`self` と other のクラスが等しくかつ == メソッドで比較して等しい場合に true を返します。
 そうでない場合に false を返します。
 
-- **param** `other` -- 自身と比較したい数値を指定します。
+- **param** `other` -- `self` と比較したい数値を指定します。
 
 ```ruby title="例"
 p 1.0.eql?(1) # => false
@@ -390,7 +390,7 @@ p 1.0.eql?(1.0) # => true
 ### def round(ndigits = 0)  -> Integer | Float
 ### def round(ndigits = 0, half: :up)  -> Integer | Float
 
-自身ともっとも近い整数もしくは実数を返します。
+`self` ともっとも近い整数もしくは実数を返します。
 
 中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。
 いわゆる四捨五入ですが、偶数丸めではありません。
@@ -444,7 +444,7 @@ p 3.5.round(half: :down) # => 3
 
 ### def zero?  -> bool
 
-自身がゼロの時、trueを返します。そうでない場合は false を返します。
+`self` がゼロの時、trueを返します。そうでない場合は false を返します。
 
 ```ruby title="例"
 p 10.0.zero?          # => false
@@ -479,7 +479,7 @@ p 0.1.negative?  # => false
 ### def to_s -> String
 ### def inspect -> String
 
-自身を人間が読みやすい形の文字列表現にして返します。
+`self` を人間が読みやすい形の文字列表現にして返します。
 
 固定小数点、浮動小数点の形式か、 "Infinity"、"-Infinity"、"NaN" のいず
 れかを返します。
@@ -499,18 +499,18 @@ p (0.0/0.0).to_s         # => "NaN"
 ### def angle -> 0 | Float
 ### def phase -> 0 | Float
 
-自身の偏角(正の数なら 0、負の数なら [m:Math::PI])を返します。
+`self` の偏角(正の数なら 0、負の数なら [m:Math::PI])を返します。
 
 ```ruby title="例"
 p 1.arg  # => 0
 p -1.arg # => 3.141592653589793
 ```
 
-ただし、自身が NaN(Not a number) であった場合は、NaN を返します。
+ただし、`self` が NaN(Not a number) であった場合は、NaN を返します。
 
 ### def denominator -> Integer
 
-自身を [c:Rational] に変換した時の分母を返します。
+`self` を [c:Rational] に変換した時の分母を返します。
 
 - **return** -- 分母を返します。
 
@@ -523,7 +523,7 @@ p 0.5.denominator       # => 2
 
 ### def numerator -> Integer
 
-自身を [c:Rational] に変換した時の分子を返します。
+`self` を [c:Rational] に変換した時の分子を返します。
 
 - **return** -- 分子を返します。
 
@@ -536,7 +536,7 @@ p 0.5.numerator         # => 1
 
 ### def to_r -> Rational
 
-自身を [c:Rational] に変換します。
+`self` を [c:Rational] に変換します。
 
 ```ruby title="例"
 p 0.5.to_r    # => (1/2)
@@ -547,7 +547,7 @@ p 0.5.to_r    # => (1/2)
 ### def rationalize      -> Rational
 ### def rationalize(eps) -> Rational
 
-自身から eps で指定した許容誤差の範囲に収まるような、できるだけ簡潔
+`self` から eps で指定した許容誤差の範囲に収まるような、できるだけ簡潔
 な [c:Rational] を返します。
 
 eps を省略した場合は、self の浮動小数点数としての精度に基づいて許容
