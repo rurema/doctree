@@ -178,8 +178,8 @@ p v #=> Vector[0, 3, 6, 9, 0]
 
 ```ruby title="例"
 require 'matrix'
-a = [1, 2, 3.5, 100]
-v1 = Vector.elements(a)
+
+v1 = Vector[1, 2, 3.5, 100]
 p v1.*(2)     # => Vector[2, 4, 7.0, 200]
 p v1.*(-1.5)  # => Vector[-1.5, -3.0, -5.25, -150.0]
 ```
@@ -344,8 +344,8 @@ n次元ベクトルでなければなりません。
 
 ```ruby title="例"
 require 'matrix'
-a = [1, 2, 3.5, -10]
-v1 = Vector.elements(a)
+
+v1 = Vector[1, 2, 3.5, -10]
 p v1 # => Vector[1, 2, 3.5, -10]
 v2 =  v1.map{|x|
   x * -1
@@ -509,7 +509,7 @@ p v.to_s
 ```ruby title="例"
 require 'matrix'
 
-v = Vector.elements([2, 3, 5, 7, 9])
+v = Vector[2, 3, 5, 7, 9]
 p v.elements_to_f
 # => Vector[2.0, 3.0, 5.0, 7.0, 9.0]
 ```
@@ -522,7 +522,8 @@ p v.elements_to_f
 
 ```ruby title="例"
 require 'matrix'
-v = Vector.elements([2.5, 3.0, 5.01, 7])
+
+v = Vector[2.5, 3.0, 5.01, 7]
 p v.elements_to_i
 # => Vector[2, 3, 5, 7]
 ```
@@ -536,7 +537,7 @@ p v.elements_to_i
 ```ruby title="例"
 require 'matrix'
 
-v = Vector.elements([2.5, 3.0, 5.75, 7])
+v = Vector[2.5, 3.0, 5.75, 7]
 p v.elements_to_r
 # => Vector[(5/2), (3/1), (23/4), (7/1)]
 ```
