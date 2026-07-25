@@ -10,7 +10,8 @@ include:
 Ruby 3.1 で導入されました。
 
 [c:String] を経由せずにメモリ領域を扱えるため、コピーを避けた入出力
-(zero-copy IO)を実現するために使われます。主に [c:Fiber::Scheduler] の
+(zero-copy IO)を実現するために使われます。主に
+[Fiber::Scheduler](https://docs.ruby-lang.org/en/4.0/Fiber/Scheduler.html) の
 実装のような、低レベルな入出力を扱う場面で利用します。
 
 バッファは以下のいずれかの方法で確保されたメモリ領域を指します。
@@ -78,7 +79,8 @@ OS のページサイズをバイト数で表した値です。
 バッファがロックされていることを表すフラグです。
 
 ロックされている間はバッファの解放やリサイズができません。
-[m:IO::Buffer#locked] を参照してください。
+バッファがロックされているかどうかは [m:IO::Buffer#locked?] で調べられます。
+#@# locked を収録したら、ブロックの間ロックする IO::Buffer#locked への言及も足す
 
 ### const PRIVATE -> Integer
 
@@ -118,7 +120,7 @@ p IO::Buffer::HOST_ENDIAN == IO::Buffer::LITTLE_ENDIAN # => true
 size バイトの、0 で埋められた新しいバッファを作成して返します。
 
 既定では内部(internal)バッファ、すなわち Ruby が直接確保したメモリ領域に
-なります。ただし size が OS 依存の [m:IO::Buffer::PAGE_SIZE] より大きい場合は、
+なります。ただし size が OS 依存の [m:IO::Buffer::PAGE_SIZE] 以上の場合は、
 仮想メモリ機構(Unix では匿名 mmap、Windows では VirtualAlloc)を用いて
 確保されます。flags に [m:IO::Buffer::MAPPED] を指定すると、
 size によらず後者の方法で確保されます。
@@ -299,7 +301,8 @@ p buf.get_string # => "\x00AA\x00"
 変更後の大きさによっては、メモリ領域が別の場所に確保しなおされ、
 内容がそこへコピーされます。
 
-[m:IO::Buffer.for] で作った外部バッファや、ロックされたバッファは大きさを変更できません。
+#@# for を収録したらリンクに戻す
+`IO::Buffer.for` で作った外部バッファや、ロックされたバッファは大きさを変更できません。
 
 - **param** `size` -- 変更後の大きさをバイト数で指定します。
 - **raise** `IO::Buffer::AccessError` -- 大きさを変更できないバッファに対して呼び出した場合に発生します。
@@ -374,8 +377,9 @@ p buf.size  # => 4
 
 バッファの大きさが 0 の場合に true を返します。
 
+#@# for を収録したらリンクに戻す
 大きさ 0 のバッファは、[m:IO::Buffer.new] に 0 を渡すか、
-空文字列から [m:IO::Buffer.for] で作った場合などにできます。
+空文字列から `IO::Buffer.for` で作った場合などにできます。
 
 ```ruby
 p IO::Buffer.new(0).empty? # => true
@@ -426,7 +430,8 @@ p IO::Buffer.new(4).internal? # => true
 バッファが外部(external)バッファである場合に true を返します。
 
 外部バッファは、バッファ自身が確保・マップしたのではないメモリ領域を参照します。
-[m:IO::Buffer.for] で作ったバッファは、文字列のメモリを外部参照します。
+#@# for を収録したらリンクに戻す
+`IO::Buffer.for` で作ったバッファは、文字列のメモリを外部参照します。
 外部バッファは大きさを変更できません。
 
 ```ruby
@@ -440,9 +445,10 @@ p IO::Buffer.new(4).external?      # => false
 
 バッファが読み取り専用の場合に true を返します。
 
-読み取り専用のバッファは、[m:IO::Buffer#set_value] や [m:IO::Buffer#set_string]、
+#@# set_value / for を収録したらリンクに戻す
+読み取り専用のバッファは、`IO::Buffer#set_value` や [m:IO::Buffer#set_string]、
 [m:IO::Buffer#copy] などで変更できません。
-[m:IO::Buffer.for] で作ったバッファや、読み取り専用のファイルから作ったバッファが
+`IO::Buffer.for` で作ったバッファや、読み取り専用のファイルから作ったバッファが
 これにあたります。
 
 ```ruby
@@ -457,7 +463,8 @@ p IO::Buffer.new(4).readonly?      # => false
 マップバッファは、仮想メモリ機構でマップされたメモリ領域を参照します。
 [m:IO::Buffer.new] に [m:IO::Buffer::MAPPED] を指定した場合や、
 大きさが [m:IO::Buffer::PAGE_SIZE] 以上の場合は匿名のマップになります。
-[m:IO::Buffer.map] で作った場合はファイルに紐づいたマップになります。
+#@# map を収録したらリンクに戻す
+`IO::Buffer.map` で作った場合はファイルに紐づいたマップになります。
 
 ### def locked? -> bool
 
