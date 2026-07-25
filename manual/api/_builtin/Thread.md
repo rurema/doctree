@@ -259,6 +259,34 @@ a.join
 
 - **SEE** [m:Thread#run], [m:Thread#wakeup]
 
+#@since 3.4
+### def each_caller_location(start = 1, length = nil) {|location| ... } -> nil
+### def each_caller_location(range) {|location| ... } -> nil
+
+現在の実行スタックの各フレームを、[c:Thread::Backtrace::Location] オブジェクトと
+してブロックに渡します。
+
+[m:Kernel#caller_locations] と似ていますが、配列を作らずにブロックへ順に
+渡すため、目的のフレームが見つかった時点で処理を打ち切るような用途で
+無駄な生成を避けられます。
+引数の意味は [m:Kernel#caller_locations] と同じで、渡すフレームの範囲を指定できます。
+
+nil を返します。
+
+```ruby title="例"
+def foo
+  Thread.each_caller_location do |location|
+    p location.class # => Thread::Backtrace::Location
+    break
+  end
+end
+
+foo
+```
+
+- **SEE** [m:Kernel#caller_locations]
+#@end
+
 ### def DEBUG -> Integer
 
 スレッドのデバッグレベルを返します。
@@ -1079,10 +1107,10 @@ thr = Thread.new do
   Thread.current.thread_variable_set("dog", 'woof')
 end
 p thr.join             # => #<Thread:0x401b3f10 dead>
-p thr.thread_variables # => [:dog, :cat]
+p thr.thread_variables # => [:cat, :dog]
 ```
 
-- **SEE** [m:Thread#thread_variable_get], [m:Thread#\[\]]
+- **SEE** [m:Thread#thread_variable_get], [m:Thread#thread_variables], [m:Thread#\[\]]
 
 ### def thread_variable?(key) -> bool
 
@@ -1102,6 +1130,50 @@ p me.thread_variable?(:stanley) # => false
 対象ではない事に注意してください。
 
 - **SEE** [m:Thread#thread_variable_get], [m:Thread#\[\]]
+
+### def thread_variables -> [Symbol]
+
+スレッドローカル変数の名前を [c:Symbol] の配列で返します。
+
+[注意]: [m:Thread#\[\]] でセットしたローカル変数(Fiber ローカル変数)は
+対象ではない事に注意してください。
+
+```ruby title="例"
+thr = Thread.new do
+  Thread.current.thread_variable_set(:cat, 'meow')
+  Thread.current.thread_variable_set("dog", 'woof')
+end
+thr.join
+p thr.thread_variables # => [:cat, :dog]
+```
+
+- **SEE** [m:Thread#thread_variable_get], [m:Thread#thread_variable?], [m:Thread#\[\]]
+
+#@since 3.1
+### def native_thread_id -> Integer | nil
+
+self に対応するネイティブスレッドの ID を返します。
+
+ID は OS に依存します(pthread_self(3) が返す POSIX スレッド ID とは異なります)。
+
+  * Linux では gettid(2) が返す TID です。
+  * macOS では pthread_threadid_np(3) が返すシステム全体で一意な整数の ID です。
+  * FreeBSD では pthread_getthreadid_np(3) が返すスレッド固有の整数の ID です。
+  * Windows では GetThreadId() が返すスレッド識別子です。
+  * その他のプラットフォームでは [c:NotImplementedError] が発生します。
+
+スレッドがまだネイティブスレッドと結びついていない場合や、すでに切り離された
+場合は nil を返します。
+
+```ruby title="例"
+p Thread.current.native_thread_id.class # => Integer
+
+thr = Thread.new {}
+thr.join
+p thr.native_thread_id                  # => nil
+```
+
+#@end
 
 ### def pending_interrupt?(error = nil) -> bool
 
