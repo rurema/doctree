@@ -9,7 +9,7 @@ library: _builtin
 
 [c:Array], [c:Hash], [c:Range], [c:Enumerator]等のクラスで、
 Enumerableモジュールはインクルードされています。ただし、効率化のため、
-そのクラスでEnumerableと同名･同等の機能を再定義(オーバーライド)しているケースも少なくなく、
+そのクラスでEnumerableと同名・同等の機能を再定義(オーバーライド)しているケースも少なくなく、
 特にArrayクラスでは同名のメソッドを再定義していることが多いです。
 
 ## Instance Methods
