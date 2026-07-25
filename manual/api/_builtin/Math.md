@@ -627,7 +627,7 @@ def fact(n) (1..n).inject(1) {|r,i| r*i } end
 ```
 
 `x` に符号付きゼロを渡した場合も `+0.0` と `-0.0` は区別され、符号付きの無限大を返します。
-これは `x` に負の整数を渡した場合に Math::DomainError が発生するのとは別の挙動です。
+これは `x` に負の整数を渡した場合に [c:Math::DomainError] が発生するのとは別の挙動です。
 
 ```ruby title="例: 符号付きゼロ"
 p Math.gamma(0.0)   # =>  Infinity
@@ -678,5 +678,5 @@ p Math::PI
 
 # class Math::DomainError < StandardError
 
-数学関数（module Math のモジュール関数）に与えた引数が定義域
+数学関数（[c:Math] のモジュール関数）に与えた引数が定義域
 に含まれていない場合に発生します。
