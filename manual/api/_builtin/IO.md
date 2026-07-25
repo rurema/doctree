@@ -2471,20 +2471,6 @@ r.read # ~> IO::TimeoutError
 
 - **SEE** [m:IO#timeout], [c:IO::TimeoutError]
 
-### def wait_priority(timeout = nil) -> bool | self | nil
-
-self が優先データを受信して読み込み可能になるまで待ちます。
-
-優先データ(緊急データ)は [m:Socket::Constants::MSG_OOB] フラグを用いて
-送受信され、通常はストリーム型のソケットに限られます。
-
-- **param** `timeout` -- タイムアウトを秒単位の数値で指定します。
-             nil を指定すると読み込み可能になるまで待ち続けます。
-- **return** -- 読み込み可能になった場合は真を、timeout で指定した時間が経過した
-        場合は nil を返します。
-
-- **SEE** [m:IO#wait_readable], [m:IO#wait_writable]
-
 #@end
 
 ## Constants
