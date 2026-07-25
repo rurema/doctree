@@ -369,3 +369,118 @@ p buf.size  # => 4
 ```
 
 - **SEE** [m:IO::Buffer#transfer], [m:IO::Buffer#null?]
+
+### def empty? -> bool
+
+バッファの大きさが 0 の場合に true を返します。
+
+大きさ 0 のバッファは、[m:IO::Buffer.new] に 0 を渡すか、
+空文字列から [m:IO::Buffer.for] で作った場合などにできます。
+
+```ruby
+p IO::Buffer.new(0).empty? # => true
+p IO::Buffer.new(4).empty? # => false
+```
+
+### def null? -> bool
+
+バッファがどのメモリ領域も指していない場合に true を返します。
+
+[m:IO::Buffer#free] で解放したバッファ、[m:IO::Buffer#transfer] で所有権を手放した
+バッファ、および最初からメモリ領域を確保していないバッファがこれにあたります。
+
+```ruby
+p IO::Buffer.new(0).null? # => true
+
+buf = IO::Buffer.new(4)
+p buf.null? # => false
+buf.free
+p buf.null? # => true
+```
+
+- **SEE** [m:IO::Buffer#free], [m:IO::Buffer#transfer]
+
+### def valid? -> bool
+
+バッファがアクセス可能な場合に true を返します。
+
+別のバッファや文字列の一部を参照している([m:IO::Buffer#slice] で作った)バッファは、
+参照元が解放されたり別のアドレスに再確保されたりすると、アクセスできなくなります。
+
+### def internal? -> bool
+
+バッファが内部(internal)バッファである場合に true を返します。
+
+内部バッファは、バッファ自身が確保したメモリ領域を参照します。
+文字列などの外部のメモリやファイルのマッピングとは結び付いていません。
+[m:IO::Buffer.new] で作られるバッファは既定で内部バッファです。
+
+```ruby
+p IO::Buffer.new(4).internal? # => true
+```
+
+- **SEE** [m:IO::Buffer#external?]
+
+### def external? -> bool
+
+バッファが外部(external)バッファである場合に true を返します。
+
+外部バッファは、バッファ自身が確保・マップしたのではないメモリ領域を参照します。
+[m:IO::Buffer.for] で作ったバッファは、文字列のメモリを外部参照します。
+外部バッファは大きさを変更できません。
+
+```ruby
+p IO::Buffer.for("test").external? # => true
+p IO::Buffer.new(4).external?      # => false
+```
+
+- **SEE** [m:IO::Buffer#internal?]
+
+### def readonly? -> bool
+
+バッファが読み取り専用の場合に true を返します。
+
+読み取り専用のバッファは、[m:IO::Buffer#set_value] や [m:IO::Buffer#set_string]、
+[m:IO::Buffer#copy] などで変更できません。
+[m:IO::Buffer.for] で作ったバッファや、読み取り専用のファイルから作ったバッファが
+これにあたります。
+
+```ruby
+p IO::Buffer.for("test").readonly? # => true
+p IO::Buffer.new(4).readonly?      # => false
+```
+
+### def mapped? -> bool
+
+バッファがマップ(mapped)バッファである場合に true を返します。
+
+マップバッファは、仮想メモリ機構でマップされたメモリ領域を参照します。
+[m:IO::Buffer.new] に [m:IO::Buffer::MAPPED] を指定した場合や、
+大きさが [m:IO::Buffer::PAGE_SIZE] 以上の場合は匿名のマップになります。
+[m:IO::Buffer.map] で作った場合はファイルに紐づいたマップになります。
+
+### def locked? -> bool
+
+バッファがロックされている場合に true を返します。
+
+ロックされたバッファは大きさの変更や解放ができず、
+さらにロックを取得することもできません。
+システムコールでバッファを使っている間に、そのバッファが移動しないことを
+保証するための仕組みです。
+
+#@since 3.2
+### def shared? -> bool
+
+バッファが共有(shared)バッファである場合に true を返します。
+
+共有バッファは、他のプロセスと共有できるメモリ領域を参照します。
+そのため、このプロセスで変更しなくても内容が変わることがあります。
+#@end
+
+#@since 3.3
+### def private? -> bool
+
+バッファがプライベート(private)バッファである場合に true を返します。
+
+プライベートバッファに加えた変更は、元になったファイルのマッピングには反映されません。
+#@end
