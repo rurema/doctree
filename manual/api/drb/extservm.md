@@ -157,7 +157,7 @@ name で指定したサービスに関連付けられた [c:DRb::ExtServ]
 すでにプロセスが起動していた場合は、登録されている DRb::ExtServ オブジェクトを
 返します。
 
-[c:DRb::ExtServ#stop_service] でサービスを停止すると、登録されている
+[m:DRb::ExtServ#stop_service] でサービスを停止すると、登録されている
 DRb::ExtServ は削除され、プロセスは停止します。
 
 - **param** `name` -- サービス名文字列

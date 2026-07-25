@@ -44,9 +44,9 @@ math_mode を有効にするかどうかを指定します。
 
 ### def inspect? -> bool
 
-[c:IRB::Context#inspect_mode] が有効かどうかを返します。
+[m:IRB::Context#inspect_mode] が有効かどうかを返します。
 
-ただし、[c:IRB::Context#inspect_mode] が未設定で math_mode が有効な場
+ただし、[m:IRB::Context#inspect_mode] が未設定で math_mode が有効な場
 合には false を返します。
 
 - **SEE** [m:IRB::Context#math?]

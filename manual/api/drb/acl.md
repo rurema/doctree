@@ -57,8 +57,8 @@ p acl.allow_addr?(addr) # => true
 list で許可/拒否するアドレスのリストを指定し、
 order でデフォルトの挙動を指定します。
 
-order に [c:ACL::DENY_ALLOW] を指定するとデフォルトで
-すべてのアドレスを拒否します。[c:ACL::ALLOW_DENY] を指定すると
+order に [m:ACL::DENY_ALLOW] を指定するとデフォルトで
+すべてのアドレスを拒否します。[m:ACL::ALLOW_DENY] を指定すると
 デフォルトですべてのアドレスを許可します。
 
 ```ruby

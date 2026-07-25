@@ -70,7 +70,7 @@ p OpenSSL::X509::Name.new([["C", "JP"], ["ST", "Kanagawa"], ["L", "Yokohama"], [
 
 - **param** `oid` -- 属性型文字列
 - **param** `value` -- 属性値文字列
-- **param** `type` -- 属性値の(ASN.1の)型、省略時は [c:OpenSSL::X509::Name::OBJECT_TYPE_TEMPLATE] と oid から型が決まる
+- **param** `type` -- 属性値の(ASN.1の)型、省略時は [m:OpenSSL::X509::Name::OBJECT_TYPE_TEMPLATE] と oid から型が決まる
 - **raise** `OpenSSL::X509::NameError` -- 属性の追加に失敗した場合に発生します
 
 ### def to_s(flags=nil) -> String

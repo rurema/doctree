@@ -769,7 +769,7 @@ time に [c:Time] オブジェクトを渡すと、その
 時刻で時間切れになるキャッシュを破棄します。
 
 - **param** `time` -- キャッシュ破棄の基準時刻
-- **SEE** [c:OpenSSL::SSL::SSLContext#session_cache_mode=]
+- **SEE** [m:OpenSSL::SSL::SSLContext#session_cache_mode=]
 
 #@# --- setup -> true
 #@# 内部的に利用されるメソッド
@@ -912,7 +912,7 @@ p OpenSSL::SSL::SSLContext::METHODS
 渡すフラグとして用います。
 
 このフラグを ON にすると、キャッシュの探索が必要になった
-場合必ずコールバック([c:OpenSSL::SSL::SSLContext#session_get_cb=]
+場合必ずコールバック([m:OpenSSL::SSL::SSLContext#session_get_cb=]
 で設定したもの)を呼ぶようになります。
 
 ### const SESSION_CACHE_NO_INTERNAL_STORE -> Integer
