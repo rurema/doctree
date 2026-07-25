@@ -116,9 +116,7 @@ p Math.atan(1.0 / -0.0)  # => -1.5707963267948966
 
 `x` の逆双曲線余弦関数（area hyperbolic cosine）の値を返します。
 
-### 定義
-
-```text
+```text title="定義"
 acosh(x) = log(x + sqrt(x * x - 1)) [x >= 1]
 ```
 
@@ -136,9 +134,7 @@ acosh(x) = log(x + sqrt(x * x - 1)) [x >= 1]
 
 `x` の逆双曲線正弦関数（area hyperbolic sine）の値を返します。
 
-### 定義
-
-```text
+```text title="定義"
 asinh(x) = log(x + sqrt(x * x + 1))
 ```
 
@@ -154,9 +150,7 @@ asinh(x) = log(x + sqrt(x * x + 1))
 
 `x` の逆双曲線正接関数（area hyperbolic tangent）の値を返します。
 
-### 定義
-
-```text
+```text title="定義"
 atanh(x) = log((1+x)/(1-x)) / 2     [-1 < x < 1]
 ```
 
@@ -230,9 +224,7 @@ p Math.tan(0) # => 0.0
 
 `x` の双曲線余弦関数（hyperbolic cosine）の値を返します。
 
-### 定義
-
-```text
+```text title="定義"
 cosh(x) = (exp(x) + exp(-x)) / 2
 ```
 
@@ -248,9 +240,7 @@ cosh(x) = (exp(x) + exp(-x)) / 2
 
 `x` の双曲線正弦関数（hyperbolic sine）の値を返します。
 
-### 定義
-
-```text
+```text title="定義"
 sinh(x) = (exp(x) - exp(-x)) / 2
 ```
 
@@ -266,9 +256,7 @@ sinh(x) = (exp(x) - exp(-x)) / 2
 
 `x` の双曲線正接関数（hyperbolic tangent）の値を返します。
 
-### 定義
-
-```text
+```text title="定義"
 tanh(x) = sinh(x) / cosh(x)
 ```
 
