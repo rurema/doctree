@@ -93,6 +93,35 @@ p Module.used_modules
 #=> [B, A]
 ```
 
+#@since 3.2
+### def used_refinements -> [Refinement]
+
+現在のスコープで using されているすべての [c:Refinement] を配列で返します。
+配列内の順番は未定義です。
+
+[m:Module.used_modules] が refinement を定義しているモジュール自体を返すのに対し、
+このメソッドは refinement そのものを返します。
+
+```ruby title="例"
+module A
+  refine Object do
+  end
+end
+
+module B
+  refine Object do
+  end
+end
+
+using A
+using B
+p Module.used_refinements
+#=> [#<refinement:Object@B>, #<refinement:Object@A>]
+```
+
+- **SEE** [m:Module.used_modules], [m:Module#refinements]
+#@end
+
 ## Instance Methods
 
 ### def <=>(other) -> -1 | 0 | 1 | nil
@@ -975,6 +1004,61 @@ p c.name         #=> "Foo"
 p c.name.frozen? #=> true
 ```
 
+#@since 3.3
+### def set_temporary_name(string) -> self
+### def set_temporary_name(nil) -> self
+
+モジュール / クラスに一時的な名前を設定します。self を返します。
+
+設定した名前は [m:Module#name] や [m:Module#inspect] の結果に反映され、
+そのモジュール / クラスのインスタンスや定数、メソッドの表示にも使われます。
+定数に代入せずに、動的に生成したモジュール / クラスを区別したい場合に便利です。
+
+引数に nil を指定すると、再び無名の状態に戻ります。
+
+定数に代入されて永続的な名前が付くと、一時的な名前は破棄されます。
+また、既に永続的な名前を持つモジュール / クラスには設定できません。
+
+- **param** `string` -- 一時的な名前を文字列で指定します。
+             永続的な名前と紛らわしくならないよう、クラスパスとして
+             有効な文字列は指定できません。nil を指定すると無名に戻ります。
+
+- **raise** `ArgumentError` -- string がクラスパスとして有効な文字列(`Foo` や
+             `Foo::Bar` など)である場合や、空文字列である場合に発生します。
+
+- **raise** `RuntimeError` -- 既に永続的な名前を持つモジュール / クラスに対して
+             呼び出した場合に発生します。
+
+```ruby title="例"
+m = Module.new
+p m.name                          # => nil
+
+m.set_temporary_name("<my temp>")
+p m.name                          # => "<my temp>"
+
+m.set_temporary_name(nil)
+p m.name                          # => nil
+```
+
+```ruby title="例: 定数に代入すると永続的な名前になる"
+m = Module.new
+m.set_temporary_name("<my temp>")
+p m.name # => "<my temp>"
+
+MyModule = m
+p m.name # => "MyModule"
+```
+
+```ruby title="例: 設定できない名前"
+Module.new.set_temporary_name("Foo")      # ~> ArgumentError
+Module.new.set_temporary_name("Foo::Bar") # ~> ArgumentError
+Module.new.set_temporary_name("")         # ~> ArgumentError
+String.set_temporary_name("<x>")          # ~> RuntimeError
+```
+
+- **SEE** [m:Module#name]
+#@end
+
 ### def instance_methods(inherited_too = true) -> [Symbol]
 
 そのモジュールで定義されている public および protected メソッド名
@@ -1030,6 +1114,53 @@ p Dog.protected_instance_methods(true) - Object.protected_instance_methods(true)
 [:private_foo]
 [:protected_foo]
 ```
+
+#@since 3.2
+### def undefined_instance_methods -> [Symbol]
+
+そのモジュールで [m:Module#undef_method] によって未定義にされた
+インスタンスメソッド名の一覧を配列で返します。
+
+祖先で未定義にされたメソッドは含まれません。
+
+```ruby title="例"
+class Foo
+  def bar; end
+  def baz; end
+end
+
+class Sub < Foo
+  undef bar
+end
+
+p Sub.undefined_instance_methods # => [:bar]
+p Foo.undefined_instance_methods # => []
+```
+
+- **SEE** [m:Module#undef_method], [m:Module#instance_methods]
+#@end
+
+#@since 3.2
+### def refinements -> [Refinement]
+
+self の中で [m:Module#refine] によって定義された [c:Refinement] の
+一覧を配列で返します。
+
+```ruby title="例"
+module A
+  refine Integer do
+  end
+
+  refine String do
+  end
+end
+
+p A.refinements
+#=> [#<refinement:Integer@A>, #<refinement:String@A>]
+```
+
+- **SEE** [m:Module#refine], [m:Module.used_refinements]
+#@end
 
 ### def public_instance_method(name) -> UnboundMethod
 
