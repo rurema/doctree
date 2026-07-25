@@ -69,7 +69,7 @@ p v2        # => Vector[-1, 2, 3]
 
 ### def independent?(*vectors) -> bool
 
-ベクトルの列 `vectors` が線形独立であれば `true` を返します。
+ベクトルの列 `vectors` が線形独立であれば `true` を返し、そうでなければ `false` を返します。
 
 - **param** `vectors` -- 線形独立性を判定するベクトル列
 
@@ -307,7 +307,7 @@ p Vector[1, 0].angle_with(Vector[0, 1]) # => Math::PI/2
 
 ### def independent?(*vectors) -> bool
 
-`self` とベクトルの列 `vectors` が線形独立であれば `true` を返します。
+`self` とベクトルの列 `vectors` が線形独立であれば `true` を返し、そうでなければ `false` を返します。
 
 `Vector.independent?(self, *vectors)` と同じです。
 
@@ -543,4 +543,4 @@ p Vector[2.5, 3.0, 5.75].elements_to_r
 
 ### def zero? -> bool
 
-すべての要素がゼロであれば `true` を返します。
+すべての要素がゼロであれば `true` を返し、そうでなければ `false` を返します。
