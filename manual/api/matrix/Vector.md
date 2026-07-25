@@ -42,10 +42,8 @@ include:
 
 ```ruby title="例"
 require 'matrix'
-v1 = Vector[1, 3, 5, 7]
-v2 = Vector[5.25, 10.5]
-p v1   # => Vector[1, 3, 5, 7]
-p v2   # => Vector[5.25, 10.5]
+
+p Vector[1, 3, 4.0] # => Vector[1, 3, 4.0]
 ```
 
 ### def elements(a, copy = true) -> Vector
@@ -58,14 +56,15 @@ p v2   # => Vector[5.25, 10.5]
 
 ```ruby title="例"
 require 'matrix'
-a = [1, 2, 3, 4]
+
+a = [1, 2, 3]
 v1 = Vector.elements(a, true)
 v2 = Vector.elements(a, false)
-p v1        # => Vector[1, 2, 3, 4]
-p v2        # => Vector[1, 2, 3, 4]
+p v1        # => Vector[1, 2, 3]
+p v2        # => Vector[1, 2, 3]
 a[0] = -1
-p v1        # => Vector[1, 2, 3, 4]
-p v2        # => Vector[-1, 2, 3, 4]
+p v1        # => Vector[1, 2, 3]
+p v2        # => Vector[-1, 2, 3]
 ```
 
 ### def independent?(*vectors) -> bool
@@ -80,6 +79,7 @@ p v2        # => Vector[-1, 2, 3, 4]
 
 ```ruby title="例"
 require 'matrix'
+
 p Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
 ```
 
@@ -92,6 +92,7 @@ p Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
 
 ```ruby title="例"
 require 'matrix'
+
 p Vector.zero(3) # => Vector[0, 0, 0]
 ```
 
@@ -265,6 +266,7 @@ p v * m # => Matrix[[4, 5, 6], [8, 10, 12]]
 
 ```ruby title="例"
 require 'matrix'
+
 p Vector[3, 4].norm # => 5.0
 p Vector[1i, 0].norm # => 1.0
 ```
@@ -279,6 +281,7 @@ p Vector[1i, 0].norm # => 1.0
 
 ```ruby title="例"
 require 'matrix'
+
 v = Vector[2, 6, 9].normalize
 # => Vector[0.18181818181818182, 0.5454545454545454, 0.8181818181818182]
 p v.norm # => 1.0
@@ -292,6 +295,7 @@ p v.norm # => 1.0
 
 ```ruby title="例"
 require 'matrix'
+
 p Vector[1, 0].angle_with(Vector[0, 1]) # => Math::PI/2
 ```
 
@@ -307,6 +311,7 @@ p Vector[1, 0].angle_with(Vector[0, 1]) # => Math::PI/2
 
 ```ruby
 require 'matrix'
+
 Vector.independent?(self, *vectors)
 ```
 
@@ -345,12 +350,9 @@ n次元ベクトルでなければなりません。
 ```ruby title="例"
 require 'matrix'
 
-v1 = Vector[1, 2, 3.5, -10]
-p v1 # => Vector[1, 2, 3.5, -10]
-v2 =  v1.map{|x|
-  x * -1
-}
-p v2 # => Vector[-1, -2, -3.5, 10]
+v = Vector[1, 2, 3.5]
+p v.map{ |x| x * -1 }
+# => Vector[-1, -2, -3.5]
 ```
 
 ### def collect! {|element| ... } -> self
@@ -366,8 +368,8 @@ p v2 # => Vector[-1, -2, -3.5, 10]
 require 'matrix'
 
 v = Vector[1, 2, 3]
-p v.map!{ |el| el * 2 }  #=> Vector[2, 4, 6]
-p v                      #=> Vector[2, 4, 6]
+v.map!{ |el| el * 2 }
+p v # => Vector[2, 4, 6]
 ```
 
 ### def each{|e| ... } -> self
@@ -469,9 +471,9 @@ p z # => Vector[14, 27, 55]
 require 'matrix'
 
 v = Vector[2, 3, 5]
-p v # => Vector[2, 3, 5]
-m = v.covector
-p m # => Matrix[[2, 3, 5]]
+
+p v.covector
+# => Matrix[[2, 3, 5]]
 ```
 
 - **SEE** [m:Matrix.row_vector]
@@ -483,9 +485,8 @@ p m # => Matrix[[2, 3, 5]]
 ```ruby title="例"
 require 'matrix'
 
-v = Vector[2, 3, 5, 7, 9]
-p v.to_a
-# => [2, 3, 5, 7, 9]
+p Vector[2, 3, 5].to_a
+# => [2, 3, 5]
 ```
 
 ### def to_s -> String
@@ -495,9 +496,8 @@ p v.to_a
 ```ruby title="例"
 require 'matrix'
 
-v = Vector[2, 3, 5, 7, 9]
-p v.to_s
-# => "Vector[2, 3, 5, 7, 9]"
+p Vector[2, 3, 5].to_s
+# => "Vector[2, 3, 5]"
 ```
 
 ### def elements_to_f -> Vector
@@ -509,9 +509,8 @@ p v.to_s
 ```ruby title="例"
 require 'matrix'
 
-v = Vector[2, 3, 5, 7, 9]
-p v.elements_to_f
-# => Vector[2.0, 3.0, 5.0, 7.0, 9.0]
+p Vector[2, 3, 5].elements_to_f
+# => Vector[2.0, 3.0, 5.0]
 ```
 
 ### def elements_to_i -> Vector
@@ -523,9 +522,8 @@ p v.elements_to_f
 ```ruby title="例"
 require 'matrix'
 
-v = Vector[2.5, 3.0, 5.01, 7]
-p v.elements_to_i
-# => Vector[2, 3, 5, 7]
+p Vector[2.5, 3.0, 5.01].elements_to_i
+# => Vector[2, 3, 5]
 ```
 
 ### def elements_to_r -> Vector
@@ -537,9 +535,8 @@ p v.elements_to_i
 ```ruby title="例"
 require 'matrix'
 
-v = Vector[2.5, 3.0, 5.75, 7]
-p v.elements_to_r
-# => Vector[(5/2), (3/1), (23/4), (7/1)]
+p Vector[2.5, 3.0, 5.75].elements_to_r
+# => Vector[(5/2), (3/1), (23/4)]
 ```
 
 ### def hash -> Integer
