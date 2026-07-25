@@ -68,6 +68,60 @@ p /\$(?<dollars>\d+)\.(?<cents>\d+)/.match("$3.67")[:cents] # => "67"
 p /(?<alpha>[a-zA-Z]+)|(?<num>\d+)/.match("aZq")[:num] # => nil
 ```
 
+#@since 3.1
+### def match(n) -> String | nil
+### def match(name) -> String | nil
+
+n 番目、または name という名前のグループにマッチした部分文字列を返します。
+
+[m:MatchData#\[\]] と似ていますが、範囲や複数要素の指定はできず、
+単一のグループに対応する部分文字列だけを返します。
+マッチしていないグループを指定した場合は nil を返します。
+
+- **param** `n` -- 返す部分文字列のインデックスを 0 以上の整数で指定します。
+           0 はマッチ全体を意味します。
+- **param** `name` -- 名前付きグループの名前を [c:String] か [c:Symbol] で指定します。
+- **raise** `IndexError` -- 範囲外の n や、存在しない name を指定した場合に発生します。
+
+```ruby title="例"
+m = /(.)(.)(\d+)(\d)(\w)?/.match("THX1138.")
+p m.match(0) # => "HX1138"
+p m.match(4) # => "8"
+p m.match(5) # => nil
+
+m = /(?<foo>.)(.)(?<bar>.+)/.match("hoge")
+p m.match(:foo) # => "h"
+p m.match(:bar) # => "ge"
+```
+
+- **SEE** [m:MatchData#\[\]], [m:MatchData#match_length]
+
+### def match_length(n) -> Integer | nil
+### def match_length(name) -> Integer | nil
+
+n 番目、または name という名前のグループにマッチした部分文字列の長さを
+文字数で返します。
+
+マッチしていないグループを指定した場合は nil を返します。
+
+- **param** `n` -- 対象の部分文字列のインデックスを 0 以上の整数で指定します。
+           0 はマッチ全体を意味します。
+- **param** `name` -- 名前付きグループの名前を [c:String] か [c:Symbol] で指定します。
+- **raise** `IndexError` -- 範囲外の n や、存在しない name を指定した場合に発生します。
+
+```ruby title="例"
+m = /(.)(.)(\d+)(\d)(\w)?/.match("THX1138.")
+p m.match_length(0) # => 6
+p m.match_length(4) # => 1
+p m.match_length(5) # => nil
+
+# 長さは文字数で数える
+p /(\p{Hiragana}+)/.match("あいう").match_length(1) # => 3
+```
+
+- **SEE** [m:MatchData#match]
+#@end
+
 ### def begin(n) -> Integer | nil
 
 n 番目の部分文字列先頭のオフセットを返します。
