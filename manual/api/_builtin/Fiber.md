@@ -362,7 +362,10 @@ Fiber.schedule { }  # ~> RuntimeError: No scheduler is available!
 p Fiber.scheduler # => nil
 ```
 
-- **SEE** [m:Fiber.set_scheduler], [m:Fiber.current_scheduler]
+- **SEE** [m:Fiber.set_scheduler]
+#@since 3.1
+- **SEE** [m:Fiber.current_scheduler]
+#@end
 
 ### def set_scheduler(scheduler) -> object
 
@@ -477,7 +480,7 @@ f.resume()   # ~> FiberError: attempt to resume a terminated fiber
 `self` が表すファイバーの現在の実行スタックを返します。
 
 引数を指定すると、返すスタックの範囲を指定できます。
-引数の意味は [m:Kernel#caller] と同じです。
+引数の意味は [m:Kernel?.caller] と同じです。
 
 ファイバーの実行が開始される前と、終了した後は空の配列を返します。
 
@@ -517,7 +520,7 @@ f.resume
 p f.backtrace # => []
 ```
 
-- **SEE** [m:Fiber#backtrace_locations], [m:Kernel#caller]
+- **SEE** [m:Fiber#backtrace_locations], [m:Kernel?.caller]
 
 ### def backtrace_locations                -> [Thread::Backtrace::Location]
 ### def backtrace_locations(start)         -> [Thread::Backtrace::Location]
@@ -538,7 +541,7 @@ p loc.class  # => Thread::Backtrace::Location
 p loc.lineno # => 1
 ```
 
-- **SEE** [m:Fiber#backtrace], [m:Kernel#caller_locations]
+- **SEE** [m:Fiber#backtrace], [m:Kernel?.caller_locations]
 
 ### def blocking? -> bool
 
