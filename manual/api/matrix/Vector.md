@@ -543,4 +543,4 @@ p Vector[2.5, 3.0, 5.75].elements_to_r
 
 ### def zero? -> bool
 
-すべての要素がゼロであれば `true` を返し、そうでなければ `false` を返します。
+`self` が零ベクトルであれば `true` を返し、そうでなければ `false` を返します。
