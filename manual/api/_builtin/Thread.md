@@ -259,17 +259,30 @@ a.join
 
 - **SEE** [m:Thread#run], [m:Thread#wakeup]
 
+#@since 3.2
 #@since 3.4
 ### def each_caller_location(start = 1, length = nil) {|location| ... } -> nil
 ### def each_caller_location(range) {|location| ... } -> nil
+#@else
+### def each_caller_location {|location| ... } -> nil
+#@end
 
 現在の実行スタックの各フレームを、[c:Thread::Backtrace::Location] オブジェクトと
 してブロックに渡します。
 
-[m:Kernel#caller_locations] と似ていますが、配列を作らずにブロックへ順に
+[m:Kernel?.caller_locations] と似ていますが、配列を作らずにブロックへ順に
 渡すため、目的のフレームが見つかった時点で処理を打ち切るような用途で
 無駄な生成を避けられます。
-引数の意味は [m:Kernel#caller_locations] と同じで、渡すフレームの範囲を指定できます。
+#@since 3.4
+引数の意味は [m:Kernel?.caller_locations] と同じで、ブロックに渡すフレームの
+範囲を指定できます。引数を渡せるのは Ruby 3.4 以降です。
+
+- **param** `start` -- 開始フレームの位置を数値で指定します。
+
+- **param** `length` -- ブロックに渡すフレームの個数を指定します。
+
+- **param** `range` -- ブロックに渡したいフレームの範囲を示す [c:Range] オブジェクトを指定します。
+#@end
 
 nil を返します。
 
@@ -284,7 +297,7 @@ end
 foo
 ```
 
-- **SEE** [m:Kernel#caller_locations]
+- **SEE** [m:Kernel?.caller_locations]
 #@end
 
 ### def DEBUG -> Integer
