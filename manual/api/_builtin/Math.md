@@ -87,8 +87,8 @@ p Math.atan(0) # => 0.0
 - **return** -- 返される値の範囲は [-π, π] です。
 
 ```ruby title="例"
-p Math.atan2(1,0) #=>  1.5707963267949
-p Math.atan2(-1,0)  #=> -1.5707963267949
+p Math.atan2(1,0)  # =>  1.5707963267949
+p Math.atan2(-1,0) # => -1.5707963267949
 ```
 
 `y` に符号付きゼロを渡した場合、`+0.0` と `-0.0` は区別され、結果の符号が変わります。
@@ -393,7 +393,7 @@ p fraction * 2**exponent                # => 1234.0
 - **raise** `RangeError` -- 引数のどちらかに実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
-p Math.hypot(3, 4) #=> 5.0
+p Math.hypot(3, 4) # => 5.0
 ```
 
 ### module_function def ldexp(x, exp) -> Float
