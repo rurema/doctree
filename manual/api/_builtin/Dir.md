@@ -135,6 +135,41 @@ p Dir.pwd                    #=> "/var/spool/mail"
 p Dir.chdir("~/.ssh")        # => Errno::ENOENT
 ```
 
+- **SEE** [m:Dir.fchdir]
+
+#@since 3.3
+### def fchdir(fd)    -> 0
+### def fchdir(fd) { ... }    -> object
+
+カレントディレクトリを、整数のファイルディスクリプタ fd が指す
+ディレクトリに変更します。
+
+ファイルディスクリプタを UNIX ソケット経由で渡したり子プロセスに渡したりする
+場合、[m:Dir.chdir] の代わりに fchdir を使うと TOCTOU (time-of-check to
+time-of-use) 脆弱性を避けられます。
+
+ブロックを指定しない場合、カレントディレクトリを fd の指すディレクトリに変更し、
+0 を返します。
+
+ブロックを指定した場合、カレントディレクトリの変更はブロックの実行中に限られます。
+ブロックの実行結果を返します。
+
+- **param** `fd` -- ディレクトリを指すファイルディスクリプタを整数で指定します。
+
+- **raise** `Errno::EXXX` -- 失敗した場合に発生します。
+
+```ruby title="例"
+Dir.chdir("/var/spool/mail")
+p Dir.pwd            # => "/var/spool/mail"
+
+dir = Dir.new("/usr")
+Dir.fchdir(dir.fileno)
+p Dir.pwd            # => "/usr"
+```
+
+- **SEE** [m:Dir.chdir], [m:Dir#fileno]
+#@end
+
 ### def chroot(path)    -> 0
 
 ルートディレクトリを path に変更します。
@@ -361,6 +396,38 @@ Dir.mktmpdir do |tmpdir|
   end
 end
 ```
+
+#@since 3.3
+### def for_fd(fd)    -> Dir
+
+整数のディレクトリファイルディスクリプタ fd が指すディレクトリを表す、
+新しい [c:Dir] オブジェクトを返します。
+
+返される [c:Dir] オブジェクトには対応するパスがないため、
+[m:Dir#path] は nil を返します。
+
+このメソッドは POSIX 2008 で定義された fdopendir() を使用します。
+POSIX 非対応のプラットフォームでは実装されておらず、
+[c:NotImplementedError] が発生します。
+
+- **param** `fd` -- ディレクトリを指すファイルディスクリプタを整数で指定します。
+
+```ruby title="例"
+require 'tmpdir'
+
+Dir.mktmpdir do |tmpdir|
+  d0 = Dir.new(tmpdir)
+  d1 = Dir.for_fd(d0.fileno)
+
+  p d1.class  # => Dir
+  p d0.path   # => tmpdir のパス
+  p d1.path   # => nil
+  d0.close
+end
+```
+
+- **SEE** [m:Dir#fileno], [m:Dir#path]
+#@end
 
 ### def exist?(file_name)    -> bool
 
