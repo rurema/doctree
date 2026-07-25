@@ -21,17 +21,17 @@ pi2 = atan2(1, 1)*4
 
 ### module_function def acos(x) -> Float
 
-x の逆余弦関数（arccosine）の値をラジアンで返します。
+`x` の逆余弦関数（arccosine）の値をラジアンで返します。
 
 - **param** `x` -- -1.0 <= x <= 1 の範囲内の実数
 
 - **return** -- 返される値の範囲は [0, +π] です。
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `Math::DomainError` -- x に範囲外の実数を指定した場合に発生します。
+- **raise** `Math::DomainError` -- `x` に範囲外の実数を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.acos(0) == Math::PI/2  # => true
@@ -41,17 +41,17 @@ p Math.acos(0) == Math::PI/2  # => true
 
 ### module_function def asin(x) -> Float
 
-x の逆正弦関数（arcsine）の値をラジアンで返します。
+`x` の逆正弦関数（arcsine）の値をラジアンで返します。
 
 - **param** `x` -- -1.0 <= x <= 1 の範囲内の実数
 
 - **return** -- 返される値の範囲は[-π/2, +π/2] です。
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `Math::DomainError` -- x に範囲外の実数を指定した場合に発生します。
+- **raise** `Math::DomainError` -- `x` に範囲外の実数を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.asin(1) == Math::PI/2  # => true
@@ -61,15 +61,15 @@ p Math.asin(1) == Math::PI/2  # => true
 
 ### module_function def atan(x) -> Float
 
-x の逆正接関数（arctangent）の値をラジアンで返します。
+`x` の逆正接関数（arctangent）の値をラジアンで返します。
 
 - **param** `x` -- 実数
 
 - **return** -- 返される値の範囲は [-π/2, +π/2] です。
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.atan(0) # => 0.0
@@ -79,7 +79,7 @@ p Math.atan(0) # => 0.0
 
 ### module_function def atan2(y, x) -> Float
 
-y / x の逆正接関数（arctangent）の値をラジアンで返します。
+`y / x` の逆正接関数（arctangent）の値をラジアンで返します。
 
 - **param** `y` -- 実数
 - **param** `x` -- 実数
@@ -91,14 +91,14 @@ p Math.atan2(1,0) #=>  1.5707963267949
 p Math.atan2(-1,0)  #=> -1.5707963267949
 ```
 
-y に符号付きゼロを渡した場合、+0.0 と -0.0 は区別され、結果の符号が変わります。
+`y` に符号付きゼロを渡した場合、`+0.0` と `-0.0` は区別され、結果の符号が変わります。
 
 ```ruby title="例: 符号付きゼロ"
 p Math.atan2(0.0, -1)   # =>  3.141592653589793
 p Math.atan2(-0.0, -1)  # => -3.141592653589793
 ```
 
-x に符号付きゼロを渡した場合も +0.0 と -0.0 は区別されます。そのため、`atan2(y, x)` は
+`x` に符号付きゼロを渡した場合も `+0.0` と `-0.0` は区別されます。そのため、`atan2(y, x)` は
 `atan(y / x)` とは異なる結果になることがあります。
 
 ```ruby title="例: x が符号付きゼロの場合の atan との違い"
@@ -106,15 +106,15 @@ p Math.atan2(1.0, -0.0)  # =>  1.5707963267948966
 p Math.atan(1.0 / -0.0)  # => -1.5707963267948966
 ```
 
-- **raise** `TypeError` -- y, x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `y`, `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- y, x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `y`, `x` に実数以外の数値を指定した場合に発生します。
 
 - **SEE** [m:Math?.atan], [m:Math?.tan]
 
 ### module_function def acosh(x) -> Float
 
-x の逆双曲線余弦関数（area hyperbolic cosine）の値を返します。
+`x` の逆双曲線余弦関数（area hyperbolic cosine）の値を返します。
 
 ### 定義
 
@@ -124,17 +124,17 @@ acosh(x) = log(x + sqrt(x * x - 1)) [x >= 1]
 
 - **param** `x` -- x >= 1 の範囲の実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `Math::DomainError` -- x に範囲外の実数を指定した場合に発生します。
+- **raise** `Math::DomainError` -- `x` に範囲外の実数を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 - **SEE** [m:Math?.cosh]
 
 ### module_function def asinh(x) -> Float
 
-x の逆双曲線正弦関数（area hyperbolic sine）の値を返します。
+`x` の逆双曲線正弦関数（area hyperbolic sine）の値を返します。
 
 ### 定義
 
@@ -144,15 +144,15 @@ asinh(x) = log(x + sqrt(x * x + 1))
 
 - **param** `x` -- 実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 - **SEE** [m:Math?.sinh]
 
 ### module_function def atanh(x) -> Float
 
-x の逆双曲線正接関数（area hyperbolic tangent）の値を返します。
+`x` の逆双曲線正接関数（area hyperbolic tangent）の値を返します。
 
 ### 定義
 
@@ -164,25 +164,25 @@ atanh(x) = log((1+x)/(1-x)) / 2     [-1 < x < 1]
 
 - **return** -- 実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `Math::DomainError` -- x に範囲外の実数を指定した場合に発生します。
+- **raise** `Math::DomainError` -- `x` に範囲外の実数を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 - **SEE** [m:Math?.tanh]
 
 ### module_function def cos(x) -> Float
 
-x の余弦関数（cosine）の値を返します。
+`x` の余弦関数（cosine）の値を返します。
 
 - **param** `x` -- 実数（ラジアンで与えます）
 
 - **return** -- [-1, 1] の実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.cos(Math::PI) # => -1.0
@@ -192,15 +192,15 @@ p Math.cos(Math::PI) # => -1.0
 
 ### module_function def sin(x) -> Float
 
-x の正弦関数（sine）の値を返します。
+`x` の正弦関数（sine）の値を返します。
 
 - **param** `x` -- 実数（ラジアンで与えます）
 
 - **return** -- [-1, 1] の実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.sin(Math::PI/2) # => 1.0
@@ -210,15 +210,15 @@ p Math.sin(Math::PI/2) # => 1.0
 
 ### module_function def tan(x) -> Float
 
-x の正接関数（tangent）の値を返します。
+`x` の正接関数（tangent）の値を返します。
 
 - **param** `x` -- 実数（ラジアンで与えます）
 
 - **return** -- 実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.tan(0) # => 0.0
@@ -228,7 +228,7 @@ p Math.tan(0) # => 0.0
 
 ### module_function def cosh(x) -> Float
 
-x の双曲線余弦関数（hyperbolic cosine）の値を返します。
+`x` の双曲線余弦関数（hyperbolic cosine）の値を返します。
 
 ### 定義
 
@@ -238,15 +238,15 @@ cosh(x) = (exp(x) + exp(-x)) / 2
 
 - **param** `x` -- 実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 - **SEE** [m:Math?.acosh]
 
 ### module_function def sinh(x) -> Float
 
-x の双曲線正弦関数（hyperbolic sine）の値を返します。
+`x` の双曲線正弦関数（hyperbolic sine）の値を返します。
 
 ### 定義
 
@@ -256,15 +256,15 @@ sinh(x) = (exp(x) - exp(-x)) / 2
 
 - **param** `x` -- 実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 - **SEE** [m:Math?.asinh]
 
 ### module_function def tanh(x) -> Float
 
-x の双曲線正接関数（hyperbolic tangent）の値を返します。
+`x` の双曲線正接関数（hyperbolic tangent）の値を返します。
 
 ### 定義
 
@@ -276,21 +276,21 @@ tanh(x) = sinh(x) / cosh(x)
 
 - **return** -- [-1, 1] の範囲の実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 - **SEE** [m:Math?.atanh]
 
 ### module_function def erf(x) -> Float
 
-x の誤差関数（error function）の値を返します。
+`x` の誤差関数（error function）の値を返します。
 
 - **param** `x` -- 実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.erf(0) # => 0.0
@@ -300,13 +300,13 @@ p Math.erf(0) # => 0.0
 
 ### module_function def erfc(x) -> Float
 
-x の相補誤差関数（complementary error function）の値を返します。
+`x` の相補誤差関数（complementary error function）の値を返します。
 
 - **param** `x` -- 実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.erfc(0) # => 1.0
@@ -316,15 +316,15 @@ p Math.erfc(0) # => 1.0
 
 ### module_function def exp(x) -> Float
 
-x の指数関数（exponential）の値を返します。
+`x` の指数関数（exponential）の値を返します。
 
-すなわち e の x 乗の値を返します（e は自然対数の底）。
+すなわち e の `x` 乗の値を返します（e は自然対数の底）。
 
 - **param** `x` -- 実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.exp(0)     # => 1.0
@@ -332,7 +332,7 @@ p Math.exp(1)     # => 2.718281828459045
 p Math.exp(1.5)   # => 4.4816890703380645
 ```
 
-x に負の無限大を渡した場合は 0.0 を返します。これは [m:Math?.log] が 0 に対して
+`x` に負の無限大を渡した場合は `0.0` を返します。これは [m:Math?.log] が `0` に対して
 `-Infinity` を返すことと対応しています。
 
 ```ruby title="例: 無限大を渡す"
@@ -344,16 +344,16 @@ p Math.exp(-Float::INFINITY)  # => 0.0
 #@since 4.0
 ### module_function def expm1(x) -> Float
 
-e の x 乗から 1 を引いた値、すなわち `exp(x) - 1` を返します（e は自然対数の底）。
+e の `x` 乗から 1 を引いた値、すなわち `exp(x) - 1` を返します（e は自然対数の底）。
 
-x が 0 に近いとき、[m:Math?.exp] の結果から 1 を引くと桁落ちによって精度が
+`x` が 0 に近いとき、[m:Math?.exp] の結果から 1 を引くと桁落ちによって精度が
 失われますが、このメソッドはそれを避けて計算します。
 
 - **param** `x` -- 実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.expm1(0)    # => 0.0
@@ -366,7 +366,7 @@ p Math.exp(1e-16) - 1 # => 0.0     （桁落ちして 0 になる）
 p Math.expm1(1e-16)   # => 1.0e-16
 ```
 
-x に負の無限大を渡した場合は -1.0 を返します。
+`x` に負の無限大を渡した場合は `-1.0` を返します。
 
 ```ruby title="例: 無限大を渡す"
 p Math.expm1(-Float::INFINITY) # => -1.0
@@ -378,13 +378,13 @@ p Math.expm1(Float::INFINITY)  # => Infinity
 
 ### module_function def frexp(x) -> [Float, Integer]
 
-実数 x の仮数部と指数部の配列を返します。
+実数 `x` の仮数部と指数部の配列を返します。
 
 - **param** `x` -- 実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 fraction, exponent = Math.frexp(1234)   # => [0.6025390625, 11]
@@ -393,9 +393,9 @@ p fraction * 2**exponent                # => 1234.0
 
 ### module_function def hypot(x, y) -> Float
 
-sqrt(x*x + y*y) を返します。
+`sqrt(x*x + y*y)` を返します。
 
-この値は x, y を直交する 2 辺とする直角三角形の斜辺（hypotenuse）の長さです。
+この値は `x`, `y` を直交する 2 辺とする直角三角形の斜辺（hypotenuse）の長さです。
 
 - **param** `x` -- 実数
 - **param** `y` -- 実数
@@ -410,7 +410,7 @@ p Math.hypot(3, 4) #=> 5.0
 
 ### module_function def ldexp(x, exp) -> Float
 
-実数 x に 2 の exp 乗をかけた数を返します。
+実数 `x` に 2 の `exp` 乗をかけた数を返します。
 
 - **param** `x` -- 実数
 - **param** `exp` -- 整数。小数点以下切捨て。
@@ -427,9 +427,9 @@ p Math.ldexp(fraction, exponent) # => 1234.0
 ### module_function def log(x) -> Float
 ### module_function def log(x, b) -> Float
 
-x の対数（logarithm）を返します。
+`x` の対数（logarithm）を返します。
 
-引数 x, b の両方に 0 を指定した場合は [m:Float::NAN] を返します。
+引数 `x`, `b` の両方に `0` を指定した場合は [m:Float::NAN] を返します。
 
 - **param** `x` -- 正の実数を指定します。
 
@@ -453,16 +453,16 @@ p Math.log(12, 3)    # => 2.2618595071429146
 
 ### module_function def log2(x) -> Float
 
-2 を底とする x の対数（binary logarithm）を返します。
+2 を底とする `x` の対数（binary logarithm）を返します。
 #@# Returns the base 2 logarithm of numeric.
 
 - **param** `x` -- 正の実数
 
-- **raise** `TypeError` -- xに数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `Math::DomainError` -- x に範囲外の実数を指定した場合に発生します。
+- **raise** `Math::DomainError` -- `x` に範囲外の実数を指定した場合に発生します。
 
-- **raise** `RangeError` -- xに実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.log2(1)    # => 0.0
@@ -475,15 +475,15 @@ p Math.log2(65536)  # => 16.0
 
 ### module_function def log10(x) -> Float
 
-x の常用対数（common logarithm）を返します。
+`x` の常用対数（common logarithm）を返します。
 
 - **param** `x` -- 正の実数
 
-- **raise** `TypeError` -- xに数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `Math::DomainError` -- x に範囲外の実数を指定した場合に発生します。
+- **raise** `Math::DomainError` -- `x` に範囲外の実数を指定した場合に発生します。
 
-- **raise** `RangeError` -- xに実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.log10(1)     # => 0.0
@@ -496,18 +496,18 @@ p Math.log10(10**100) # => 100.0
 #@since 4.0
 ### module_function def log1p(x) -> Float
 
-1 に x を足した値の自然対数、すなわち `log(x + 1)` を返します。
+1 に `x` を足した値の自然対数、すなわち `log(x + 1)` を返します。
 
-x が 0 に近いとき、1 に x を足してから [m:Math?.log] を取ると桁落ちによって
+`x` が 0 に近いとき、1 に x を足してから [m:Math?.log] を取ると桁落ちによって
 精度が失われますが、このメソッドはそれを避けて計算します。
 
 - **param** `x` -- -1 以上の実数
 
-- **raise** `TypeError` -- x に数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- x に実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
-- **raise** `Math::DomainError` -- x に -1 未満の実数を指定した場合に発生します。
+- **raise** `Math::DomainError` -- `x` に -1 未満の実数を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.log1p(0)             # => 0.0
@@ -529,15 +529,15 @@ Math.log1p(-2.0) # ~> Math::DomainError
 
 ### module_function def sqrt(x) -> Float
 
-x の非負の平方根（principal square root）を返します。
+`x` の非負の平方根（principal square root）を返します。
 
 - **param** `x` -- 0または正の実数
 
-- **raise** `TypeError` -- xに数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `Math::DomainError` -- x に範囲外の実数を指定した場合に発生します。
+- **raise** `Math::DomainError` -- `x` に範囲外の実数を指定した場合に発生します。
 
-- **raise** `RangeError` -- xに実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 0.upto(10) {|x|
@@ -560,13 +560,13 @@ x の非負の平方根（principal square root）を返します。
 
 ### module_function def cbrt(x) -> Float
 
-x の立方根（cubic root）を返します。
+`x` の立方根（cubic root）を返します。
 
 - **param** `x` -- 実数
 
-- **raise** `TypeError` -- xに数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `RangeError` -- xに実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 -9.upto(9) {|x|
@@ -597,15 +597,15 @@ x の立方根（cubic root）を返します。
 
 ### module_function def gamma(x) -> Float
 
-x のガンマ関数の値を返します。
+`x` のガンマ関数の値を返します。
 
 - **param** `x` -- 実数
 
-- **raise** `TypeError` -- xに数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `Math::DomainError` -- x に負の整数、もしくは -∞ を渡した場合に発生します。
+- **raise** `Math::DomainError` -- `x` に負の整数、もしくは -∞ を渡した場合に発生します。
 
-- **raise** `RangeError` -- xに実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 def fact(n) (1..n).inject(1) {|r,i| r*i } end
@@ -638,8 +638,8 @@ def fact(n) (1..n).inject(1) {|r,i| r*i } end
 #   [26, 1.5511210043330954e+25, 15511210043330985984000000]
 ```
 
-x に符号付きゼロを渡した場合も +0.0 と -0.0 は区別され、符号付きの無限大を返します。
-これは x に負の整数を渡した場合に Math::DomainError が発生するのとは別の挙動です。
+`x` に符号付きゼロを渡した場合も `+0.0` と `-0.0` は区別され、符号付きの無限大を返します。
+これは `x` に負の整数を渡した場合に Math::DomainError が発生するのとは別の挙動です。
 
 ```ruby title="例: 符号付きゼロ"
 p Math.gamma(0.0)   # =>  Infinity
@@ -652,15 +652,15 @@ p Math.gamma(-0.0)  # => -Infinity
 
 log(|gamma(x)|) と、gamma(x) の符号を返します。
 
-符号は +1 もしくは -1 で返されます。
+符号は `+1` もしくは `-1` で返されます。
 
 - **param** `x` -- 実数
 
-- **raise** `TypeError` -- xに数値以外を指定した場合に発生します。
+- **raise** `TypeError` -- `x` に数値以外を指定した場合に発生します。
 
-- **raise** `Math::DomainError` -- x に -∞ を渡した場合に発生します。
+- **raise** `Math::DomainError` -- `x` に -∞ を渡した場合に発生します。
 
-- **raise** `RangeError` -- xに実数以外の数値を指定した場合に発生します。
+- **raise** `RangeError` -- `x` に実数以外の数値を指定した場合に発生します。
 
 ```ruby title="例"
 p Math.lgamma(0) # => [Infinity, 1]
