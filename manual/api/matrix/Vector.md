@@ -153,7 +153,7 @@ v[99] = 100
 - **raise** `TypeError` -- ベクトルの範囲外にある `range` を指定したときに、発生します。
 - **raise** `ArgumentError` -- 引数の個数が異なるときの他に、
                      `v` に [c:Vector] を指定し、`range` と `v` のサイズが一致しないときに発生します。
-- **raise** `Matrix::ErrDimensionMismatch` -- `v` に [c:Matrix] を指定し、次元が合わないときに発生します。
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `v` に [c:Matrix] を指定し、次元が合わないときに発生します。
 
 ```ruby
 require 'matrix'
@@ -306,7 +306,7 @@ p Vector[1, 0].angle_with(Vector[0, 1]) # => Math::PI/2
 ```
 
 - **param** `v` -- このベクトルと `self` とがなす角度を計算します
-- **raise** `ZeroVectorError` -- `self` もしくは `v` のどちらかが零ベクトルである場合に
+- **raise** `Vector::ZeroVectorError` -- `self` もしくは `v` のどちらかが零ベクトルである場合に
        発生します
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `v` と `self` の
        ベクトルの次元が異なる場合に発生します。
