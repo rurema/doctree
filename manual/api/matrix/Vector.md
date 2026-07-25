@@ -167,7 +167,7 @@ p v #=> Vector[0, 3, 6, 9, 0]
 ### def ==(v) -> bool
 ### def eql?(v) -> bool
 
-自分自身と引数 `v` を比較し、`true`/`false` を返します。
+`self` と引数 `v` を比較し、`true`/`false` を返します。
 
 - **param** `v` -- 比較対象ベクトル
 
@@ -187,14 +187,14 @@ p v1.*(-1.5)  # => Vector[-1.5, -3.0, -5.25, -150.0]
 
 ### def *(m) -> Matrix
 
-自分自身を列ベクトル(行列)に変換して (実際には `Matrix.column_vector(self)` を適用) から、行列 `m` を右から乗じた行列 ([c:Matrix] クラス) を返します。
+`self` を列ベクトル(行列)に変換して (実際には `Matrix.column_vector(self)` を適用) から、行列 `m` を右から乗じた行列 ([c:Matrix] クラス) を返します。
 
 - **param** `m` -- 右から乗算を行う行列
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 次元が合わない場合に発生します
 
 ### 注意
 
-引数の行列 `m` は自分自身を列ベクトルとした場合に乗算が定義できる行列である必要があります。
+引数の行列 `m` は `self` を列ベクトルとした場合に乗算が定義できる行列である必要があります。
 
 ```ruby title="例"
 require 'matrix'
@@ -217,7 +217,7 @@ p v * m # => Matrix[[4, 5, 6], [8, 10, 12]]
 
 - **param** `v` -- 加算するベクトル。加算可能な行列やベクトルを指定します。
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 自分自身と引数のベクト
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
 ### def -(v) -> Vector | Matrix
@@ -229,7 +229,7 @@ p v * m # => Matrix[[4, 5, 6], [8, 10, 12]]
 
 - **param** `v` -- 減算するベクトル。減算可能な行列やベクトルを指定します。
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 自分自身と引数のベクト
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
 ### def +@ -> self
@@ -247,7 +247,7 @@ p v * m # => Matrix[[4, 5, 6], [8, 10, 12]]
 
 - **param** `v` -- 内積を求めるベクトル
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 自分自身と引数のベクト
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
 ### def /(other) -> Vector
@@ -275,7 +275,7 @@ p Vector[1i, 0].norm # => 1.0
 
 ### def normalize -> Vector
 
-自身を [m:Vector#norm] で正規化したベクトルを返します。
+`self` を [m:Vector#norm] で正規化したベクトルを返します。
 
 - **raise** `Vector::ZeroVectorError` -- ベクトルが0である場合に発生します。
 
@@ -356,7 +356,7 @@ p v.map{ |x| x * -1 }
 
 ベクトルの各要素を順番にブロックに渡して評価し、その結果で要素を置き換えます。
 
-ブロックのない場合は、自身と `map!` から生成した [c:Enumerator] オブジェクトを返します。
+ブロックのない場合は、`self` と `map!` から生成した [c:Enumerator] オブジェクトを返します。
 
 ```ruby title="例"
 require 'matrix'
@@ -387,7 +387,7 @@ p v # => Vector[2, 4, 6]
 ブロックを省略した場合は [c:Enumerator] を返します。
 
 - **param** `v` -- 各要素と組を取るためのオブジェクト
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 自分自身と引数のベクト
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 - **SEE** [m:Array#zip]
 
@@ -402,7 +402,7 @@ p v # => Vector[2, 4, 6]
 
 - **param** `v` -- ブロック内で評価される(ベクトル or 配列)
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 自分自身と引数のベクト
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
 - **SEE** [m:Vector#map2]
@@ -433,7 +433,7 @@ p z # => [14, 27, 55]
 
 - **param** `v` -- ブロック内で評価される(ベクトル or 配列)
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 自分自身と引数のベクト
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
 - **SEE** [m:Vector#collect2]
@@ -535,7 +535,7 @@ p Vector[2.5, 3.0, 5.75].elements_to_r
 
 ### def hash -> Integer
 
-自分自身のハッシュ値を返します。
+`self` のハッシュ値を返します。
 
 ### def inspect -> String
 
