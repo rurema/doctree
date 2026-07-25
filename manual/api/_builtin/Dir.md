@@ -135,7 +135,9 @@ p Dir.pwd                    #=> "/var/spool/mail"
 p Dir.chdir("~/.ssh")        # => Errno::ENOENT
 ```
 
+#@since 3.3
 - **SEE** [m:Dir.fchdir]
+#@end
 
 #@since 3.3
 ### def fchdir(fd)    -> 0
@@ -167,7 +169,7 @@ Dir.fchdir(dir.fileno)
 p Dir.pwd            # => "/usr"
 ```
 
-- **SEE** [m:Dir.chdir], [m:Dir#fileno]
+- **SEE** [m:Dir.chdir], [m:Dir#fileno], [m:Dir.for_fd]
 #@end
 
 ### def chroot(path)    -> 0
@@ -426,7 +428,7 @@ Dir.mktmpdir do |tmpdir|
 end
 ```
 
-- **SEE** [m:Dir#fileno], [m:Dir#path]
+- **SEE** [m:Dir#fileno], [m:Dir#path], [m:Dir.fchdir]
 #@end
 
 ### def exist?(file_name)    -> bool
