@@ -560,10 +560,24 @@ p 0.5.numerator         # => 1
 
 ### def to_r -> Rational
 
-`self` を [c:Rational] に変換します。
+`self` を [c:Rational] オブジェクトに変換したものを返します。
+
+浮動小数点数は、`Float::INFINITY`, `-Float::INFINITY`, `Float::NAN` を除けば数学的には有理数を表しています。その値を得るメソッドです。
+
+- **raise** `FloatDomainError` -- `self` が `Float::INFINITY`, `-Float::INFINITY`, `Float::NAN` の場合に発生します。
 
 ```ruby title="例"
-p 0.5.to_r    # => (1/2)
+p 0.0.to_r  # => (0/1)
+p 0.75.to_r # => (3/4)
+```
+
+```ruby title="リテラルで得られるFloatの厳密値を知る例"
+p 0.1.to_r # => (3602879701896397/36028797018963968)
+p 0.1r     # => (1/10)
+# 浮動小数点数リテラル `0.1` によって生成される Float オブジェクトは
+# 数学的には 0.1 とはわずかに異なる数を表しており、
+# 有理数リテラル `0.1r` で生成される Rational オブジェクトとは
+# 値が一致しない
 ```
 
 - **SEE** [m:Float#rationalize]
