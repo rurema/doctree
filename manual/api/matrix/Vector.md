@@ -463,7 +463,7 @@ p z # => Vector[14, 27, 55]
 [c:Matrix] オブジェクトへ変換します。
 
 列ベクトル (行列)、すなわち、(n, 1) 型の行列に変換します。
-実際には [m:Matrix.row_vector](self) を適用します。
+実際には `Matrix.row_vector(self)` を適用します。
 
 ```ruby title="例"
 require 'matrix'
@@ -473,6 +473,8 @@ p v # => Vector[2, 3, 5]
 m = v.covector
 p m # => Matrix[[2, 3, 5]]
 ```
+
+- **SEE** [m:Matrix.row_vector]
 
 ### def to_a -> Array
 
