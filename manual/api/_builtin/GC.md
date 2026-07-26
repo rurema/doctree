@@ -201,6 +201,45 @@ true を設定するとフルGCのタイミングででヒープをコンパク�
 
 - **SEE** [m:GC.compact] [m:GC.auto_compact]
 
+#@since 3.4
+### def config -> {Symbol => object}
+### def config(hash) -> {Symbol => object}
+
+GC の設定を取得、変更します。
+
+引数を省略すると現在の設定を返します。
+hash を指定すると、その内容を現在の設定にマージしてから設定を返します。
+設定に無いキーは無視されます。
+
+hash を指定したときの返り値は、Ruby 3.4 では指定したキーだけを含む [c:Hash] で、
+Ruby 4.0 以降では設定全体を含む [c:Hash] です。
+
+このメソッドは処理系依存 (CRuby 特有) です。
+設定できる項目は GC の実装ごとに異なり、予告なく変更される可能性があります。
+
+すべての実装に共通する項目は `:implementation` だけです。
+これは実装の名前を表す読み取り専用の項目で、Ruby の既定の実装では `"default"` です。
+
+既定の実装では `:rgengc_allow_full_mark` を設定できます。
+false を指定すると、フルマークを行う GC (major GC) が実行されなくなります。
+
+- **param** `hash` -- 変更する設定を [c:Hash] で指定します。キーは [c:Symbol] で指定します。
+- **return** -- 設定を [c:Hash] で返します。
+- **raise** `ArgumentError` -- hash が [c:Hash] でない場合に発生します。
+
+```ruby
+p GC.config # => {rgengc_allow_full_mark: true, implementation: "default"}
+
+GC.config(rgengc_allow_full_mark: false)
+p GC.config # => {rgengc_allow_full_mark: false, implementation: "default"}
+
+# 設定に無いキーは無視される
+GC.config(unknown_key: 1)
+p GC.config # => {rgengc_allow_full_mark: false, implementation: "default"}
+```
+
+#@end
+
 ### def disable -> bool
 
 ガーベージコレクトを禁止します。
@@ -352,6 +391,42 @@ p GC.stat
 
 本メソッドは C Ruby 以外では動作しません。
 
+#@since 3.2
+### def stat_heap                     -> {Integer => Hash}
+### def stat_heap(heap_id)            -> {Symbol => Integer}
+### def stat_heap(heap_id, key)       -> Integer
+### def stat_heap(heap_id, result_hash) -> {Symbol => Integer}
+### def stat_heap(nil, result_hash)   -> {Integer => Hash}
+
+サイズプールごとの GC の統計情報を [c:Hash] で返します。
+
+引数を省略すると、すべてのサイズプールの統計情報を、
+サイズプールの番号をキーとしたハッシュで返します。
+heap_id を指定すると、そのサイズプールの統計情報だけを返します。
+
+- **param** `heap_id` -- サイズプールの番号を [c:Integer] で指定します。
+           nil を指定すると、すべてのサイズプールが対象になります。
+- **param** `key` -- 特定の情報だけを取得したい場合にキーを [c:Symbol] で指定します。
+- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新
+                   しくハッシュを作成します。result_hash の内容は上書き
+                   されます。
+- **raise** `ArgumentError` -- 存在しないサイズプールの番号を指定した場合に発生します。
+
+```ruby
+# サイズプールごとの統計情報を返す
+p GC.stat_heap.keys # => [0, 1, 2, 3, 4]
+
+# サイズプール 0 が扱うオブジェクトの大きさ (バイト)
+p GC.stat_heap(0, :slot_size) # => 40
+```
+
+戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
+
+本メソッドは C Ruby 以外では動作しません。
+
+- **SEE** [m:GC.stat]
+#@end
+
 ### def latest_gc_info(result_hash = {}) -> Hash
 ### def latest_gc_info(key)              -> object
 
@@ -374,6 +449,56 @@ p merged == latest.merge(stat) # => true
 
 p GC.latest_gc_info(:gc_by)  # => :newobj
 ```
+
+#@since 3.1
+### def total_time -> Integer
+
+プロセス開始から GC にかかった時間の合計をナノ秒で返します。
+
+時間が積算されるのは [m:GC.measure_total_time] が true の間だけです。
+計測を無効にしている間に GC が実行されても、返り値は変化しません。
+
+```ruby
+p GC.measure_total_time # => true
+p GC.total_time         # => 625000
+
+GC.start
+p GC.total_time         # => 937500
+
+GC.measure_total_time = false
+GC.start
+p GC.total_time         # => 937500  計測が無効なので増えない
+```
+
+返り値は実行環境や実行状況によって異なります。
+
+- **SEE** [m:GC.measure_total_time]
+
+### def measure_total_time -> bool
+### def measure_total_time=(flag)
+
+GC にかかった時間を計測するかどうかを取得、設定します。
+既定では計測が有効です。
+
+計測を有効にすると GC のたびに時間を測るため、わずかに実行速度が落ちます。
+
+- **param** `flag` -- nil または false を指定すると計測を無効にします。
+           それ以外の値を指定すると有効にします。
+- **return** -- measure_total_time は計測が有効なら true を、
+        無効なら false を返します。
+
+```ruby
+p GC.measure_total_time # => true
+
+GC.measure_total_time = false
+p GC.measure_total_time # => false
+
+GC.measure_total_time = nil
+p GC.measure_total_time # => false
+```
+
+- **SEE** [m:GC.total_time]
+#@end
 
 ### def compact -> Hash
 
