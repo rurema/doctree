@@ -250,7 +250,7 @@ p (-25).round(-1, half: :even) # => -20
 ### def truncate(ndigits = 0) -> Integer
 {: since=""}
 
-`0` から `self` までの整数で、自身にもっとも近い整数を返します。
+`0` から `self` までの整数で、`self` にもっとも近い整数を返します。
 
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
                負の整数を指定した場合、小数点位置から左に少なくとも `n` 個の `0` が並びます。
@@ -310,7 +310,7 @@ p 1.0.integer? # => false
 
 ### def even? -> bool
 
-自身が偶数であれば真を返します。
+`self` が偶数であれば真を返します。
 そうでない場合は偽を返します。
 
 ```ruby
@@ -320,7 +320,7 @@ p 5.even?   # => false
 
 ### def odd? -> bool
 
-自身が奇数であれば真を返します。
+`self` が奇数であれば真を返します。
 そうでない場合は偽を返します。
 
 ```ruby
@@ -330,7 +330,7 @@ p 10.odd?  # => false
 
 ### def ord    -> Integer
 
-自身を返します。
+`self` を返します。
 
 ```ruby
 p 10.ord  #=> 10
@@ -366,7 +366,7 @@ p -10.denominator # => 1
 
 ### def gcd(n) -> Integer
 
-自身と整数 `n` の最大公約数を返します。
+`self` と整数 `n` の最大公約数を返します。
 
 - **raise** `ArgumentError` -- `n` に整数以外のものを指定すると発生します。
 
@@ -388,7 +388,7 @@ p 0.gcd(-7)                 # => 7
 
 ### def gcdlcm(n) -> [Integer]
 
-自身と整数 `n` の最大公約数と最小公倍数の配列 `[self.gcd(n), self.lcm(n)]`
+`self` と整数 `n` の最大公約数と最小公倍数の配列 `[self.gcd(n), self.lcm(n)]`
 を返します。
 
 - **raise** `ArgumentError` -- `n` に整数以外のものを指定すると発生します。
@@ -403,7 +403,7 @@ p ((1<<31)-1).gcdlcm((1<<61)-1)  # => [1, 4951760154835678088235319297]
 
 ### def lcm(n) -> Integer
 
-自身と整数 `n` の最小公倍数を返します。
+`self` と整数 `n` の最小公倍数を返します。
 
 - **raise** `ArgumentError` -- `n` に整数以外のものを指定すると発生します。
 
@@ -424,7 +424,7 @@ p 0.lcm(-7)                 # => 0
 
 ### def numerator -> Integer
 
-分子(常に自身)を返します。
+分子(常に `self`)を返します。
 
 - **return** -- 分子を返します。
 
@@ -437,7 +437,7 @@ p -10.numerator # => -10
 
 ### def to_r -> Rational
 
-自身を [c:Rational] に変換します。
+`self` を [c:Rational] に変換します。
 
 ```ruby
 p 1.to_r      # => (1/1)
@@ -447,7 +447,7 @@ p (1<<64).to_r  # => (18446744073709551616/1)
 ### def rationalize      -> Rational
 ### def rationalize(eps) -> Rational
 
-自身を [c:Rational] に変換します。
+`self` を [c:Rational] に変換します。
 
 - **param** `eps` -- 許容する誤差
 
