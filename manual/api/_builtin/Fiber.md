@@ -119,18 +119,66 @@ f.resume
 #@end
 ```
 
+#@since 3.0
+### ノンブロッキングファイバーとスケジューラ {#nonblocking}
+
+Ruby 3.0 から、ファイバーはブロッキングとノンブロッキングのどちらかの
+実行コンテキストを持ちます。
+[m:Fiber.new] は既定でノンブロッキングなファイバーを生成します。
+`blocking: true` を指定するとブロッキングなファイバーになります。
+
+ノンブロッキングファイバーの中でブロックしうる操作を行うと、
+その操作はスケジューラに委譲されます。
+ブロックしうる操作とは、IO 待ちやスリープなどです。
+スケジューラは [m:Fiber.set_scheduler] でスレッドごとに設定します。
+
+スケジューラを設定していない場合、ノンブロッキングファイバーは
+ブロッキングファイバーと同じ動作になります。
+つまりノンブロッキングファイバーであること自体は実行の挙動を変えません。
+
+スケジューラは Ruby 本体では提供されていません。
+フックメソッドを実装したオブジェクトを利用者が用意します。
+実装すべきメソッドは [Ruby 本体の Fiber::Scheduler のドキュメント](https://docs.ruby-lang.org/en/4.0/Fiber/Scheduler.html)で説明されています。
+
+現在の実行コンテキストがどちらであるかは [m:Fiber.blocking?] で調べられます。
+また [m:Fiber.schedule] を使うと、スケジューラ経由でノンブロッキングファイバーを
+生成できます。
+#@end
+
 ## Class Methods
 #@since 3.1
 #@include(Fiber.current)
 #@end
 
+#@since 3.2
+### def new(blocking: false, storage: true) {|obj| ... } -> Fiber
+#@else
+#@since 3.0
+### def new(blocking: false) {|obj| ... } -> Fiber
+#@else
 ### def new{|obj| ... } -> Fiber
+#@end
+#@end
 
 与えられたブロックとともにファイバーを生成して返します。
 ブロックは [m:Fiber#resume] に与えられた引数をその引数として実行されます。
 
 ブロックが終了した場合は親にコンテキストが切り替わります。
 その時ブロックの評価値が返されます。
+
+#@since 3.0
+- **param** `blocking` -- 偽を指定するとノンブロッキングなファイバーを生成します。
+  真を指定するとブロッキングなファイバーを生成します。
+  詳しくは [ref:c:Fiber#nonblocking] を参照してください。
+#@end
+#@since 3.2
+- **param** `storage` -- 生成するファイバーの fiber storage を指定します。
+  true を指定すると呼び出し元のファイバーの fiber storage を複製して引き継ぎます。
+  複製なので、生成後の変更は互いに影響しません。
+  nil を指定すると引き継ぎません。この場合、最初に書き込んだ時点で空の状態から作られます。
+  [c:Hash] を指定するとその内容で初期化します。キーは [c:Symbol] で指定します。
+  fiber storage については [m:Fiber#storage] を参照してください。
+#@end
 
 ```ruby title="例:"
 a = nil
@@ -143,6 +191,18 @@ b = f.resume(:foo)
 p a  #=> :foo
 p b  #=> :hoge
 ```
+
+#@since 3.2
+
+```ruby title="例: fiber storage の引き継ぎ"
+Fiber[:key] = 1
+
+p Fiber.new { Fiber[:key] }.resume                    # => 1
+p Fiber.new(storage: nil) { Fiber[:key] }.resume      # => nil
+p Fiber.new(storage: {key: 2}) { Fiber[:key] }.resume # => 2
+```
+
+#@end
 
 ### def yield(*arg = nil)   -> object
 
@@ -165,6 +225,168 @@ f.resume(:foo)
 
 p a  #=> :foo
 ```
+
+#@since 3.2
+### def [](key) -> object | nil
+
+現在のファイバーの fiber storage から key に対応する値を返します。
+対応する値がない場合は nil を返します。
+
+fiber storage については [m:Fiber#storage] を参照してください。
+
+- **param** `key` -- キーを [c:Symbol] で指定します。
+- **raise** `TypeError` -- key を [c:Symbol] として扱えない場合に発生します。
+
+#@since 3.4
+key には [c:String] も指定できます。この場合 [c:Symbol] に変換されて扱われます。
+#@end
+
+```ruby
+Fiber[:key] = 1
+
+p Fiber[:key]     # => 1
+p Fiber[:unknown] # => nil
+```
+
+- **SEE** [m:Fiber.\[\]=], [m:Fiber#storage]
+
+### def []=(key, value)
+
+現在のファイバーの fiber storage の key に対応する値を value に設定します。
+key に対応する値がまだない場合は追加します。
+
+このファイバーから生成したファイバーには、設定した値が引き継がれます。
+逆に、生成後の変更は互いに影響しません。
+
+- **param** `key` -- キーを [c:Symbol] で指定します。
+- **param** `value` -- 格納する値を指定します。
+- **raise** `TypeError` -- key を [c:Symbol] として扱えない場合に発生します。
+
+#@since 3.4
+key には [c:String] も指定できます。この場合 [c:Symbol] に変換されて扱われます。
+#@end
+
+```ruby
+Fiber[:key] = 1
+
+Fiber.new do
+  p Fiber[:key] # => 1
+  Fiber[:key] = 2
+  p Fiber[:key] # => 2
+end.resume
+
+# 生成したファイバー側での変更は生成元に影響しない
+p Fiber[:key]   # => 1
+```
+
+- **SEE** [m:Fiber.\[\]], [m:Fiber#storage]
+
+### def blocking {|fiber| ... } -> object
+
+ブロックを実行している間だけ、現在のファイバーをブロッキングにします。
+
+ブロックには現在のファイバーが渡されます。
+現在のファイバーがすでにブロッキングである場合は、単にブロックを実行します。
+
+- **return** -- ブロックの評価結果を返します。
+
+```ruby
+f = Fiber.new do
+  p Fiber.blocking?   # => false
+  Fiber.blocking do
+    p Fiber.blocking? # => 1
+  end
+  p Fiber.blocking?   # => false
+end
+f.resume
+```
+
+- **SEE** [m:Fiber.blocking?], [ref:c:Fiber#nonblocking]
+#@end
+
+#@since 3.0
+### def blocking? -> false | 1
+
+現在の実行コンテキストがブロッキングである場合に 1 を返します。
+ノンブロッキングである場合は false を返します。
+
+将来のバージョンで、1 以外のブロッキングレベルを表す値が
+返るようになる可能性があります。
+
+```ruby
+p Fiber.blocking?                                      # => 1
+p Fiber.new { Fiber.blocking? }.resume                 # => false
+p Fiber.new(blocking: true) { Fiber.blocking? }.resume # => 1
+```
+
+- **SEE** [m:Fiber#blocking?], [ref:c:Fiber#nonblocking]
+#@end
+
+#@since 3.1
+### def current_scheduler -> object | nil
+
+現在のスレッドに設定されているスケジューラを返します。
+ただし現在のファイバーがブロッキングである場合は nil を返します。
+
+現在のファイバーがブロッキングかどうかに関わらずスケジューラを取得したい場合は
+[m:Fiber.scheduler] を使用してください。
+
+- **SEE** [m:Fiber.scheduler], [m:Fiber.set_scheduler]
+#@end
+
+#@since 3.0
+### def schedule(*args) {|*args| ... } -> Fiber
+
+現在のスレッドに設定されているスケジューラを使って、
+ブロックをノンブロッキングなファイバーで実行します。
+
+ファイバーの生成はスケジューラのフックメソッドに委譲されます。
+そのため、ブロックがただちに実行されるかどうかはスケジューラの実装に依存します。
+
+- **param** `args` -- ブロックの引数として渡されます。
+- **return** -- 生成されたファイバーを返します。
+- **raise** `RuntimeError` -- スケジューラが設定されていない場合に発生します。
+
+```ruby title="例: スケジューラが設定されていない場合"
+Fiber.schedule { }  # ~> RuntimeError: No scheduler is available!
+```
+
+- **SEE** [m:Fiber.set_scheduler], [ref:c:Fiber#nonblocking]
+
+### def scheduler -> object | nil
+
+現在のスレッドに設定されているスケジューラを返します。
+設定されていない場合は nil を返します。
+
+```ruby
+p Fiber.scheduler # => nil
+```
+
+- **SEE** [m:Fiber.set_scheduler]
+#@since 3.1
+- **SEE** [m:Fiber.current_scheduler]
+#@end
+
+### def set_scheduler(scheduler) -> object
+
+現在のスレッドにスケジューラを設定します。
+
+スケジューラを設定すると、ノンブロッキングファイバーの中でブロックしうる操作を
+行った際に、スケジューラのフックメソッドが呼ばれるようになります。
+またスレッドの終了時にスケジューラの close メソッドが呼ばれ、
+終了していないファイバーの後始末ができるようになっています。
+
+- **param** `scheduler` -- スケジューラとして振る舞うオブジェクトを指定します。
+  nil を指定するとスケジューラを解除します。
+- **return** -- `scheduler` をそのまま返します。
+- **raise** `ArgumentError` -- scheduler が必要なフックメソッドを実装していない場合に発生します。
+
+```ruby
+Fiber.set_scheduler(Object.new) # ~> ArgumentError: Scheduler must implement #block
+```
+
+- **SEE** [m:Fiber.scheduler], [m:Fiber.schedule], [ref:c:Fiber#nonblocking]
+#@end
 
 ## Instance Methods
 #@since 3.1
@@ -249,3 +471,173 @@ p f.resume() #=> :fuga
 f.resume()   # ~> FiberError: attempt to resume a terminated fiber
 ```
 
+#@since 3.0
+### def backtrace                -> [String]
+### def backtrace(start)         -> [String]
+### def backtrace(start, length) -> [String]
+### def backtrace(range)         -> [String]
+
+`self` が表すファイバーの現在の実行スタックを返します。
+
+引数を指定すると、返すスタックの範囲を指定できます。
+引数の意味は [m:Kernel?.caller] と同じです。
+
+ファイバーの実行が開始される前と、終了した後は空の配列を返します。
+
+- **param** `start` -- 開始フレームの位置を数値で指定します。
+- **param** `length` -- 取得するフレームの個数を指定します。
+- **param** `range` -- 取得したいフレームの範囲を [c:Range] で指定します。
+
+```ruby
+def level3 = Fiber.yield
+def level2 = level3
+def level1 = level2
+
+f = Fiber.new { level1 }
+
+# 開始前は空
+p f.backtrace # => []
+
+f.resume
+
+#@since 3.4
+p f.backtrace
+# => ["t.rb:1:in 'Fiber.yield'", "t.rb:1:in 'Object#level3'", "t.rb:2:in 'Object#level2'",
+#     "t.rb:3:in 'Object#level1'", "t.rb:5:in 'block in <main>'"]
+p f.backtrace(1, 2)
+# => ["t.rb:1:in 'Object#level3'", "t.rb:2:in 'Object#level2'"]
+#@else
+p f.backtrace
+# => ["t.rb:1:in `yield'", "t.rb:1:in `level3'", "t.rb:2:in `level2'",
+#     "t.rb:3:in `level1'", "t.rb:5:in `block in <main>'"]
+p f.backtrace(1, 2)
+# => ["t.rb:1:in `level3'", "t.rb:2:in `level2'"]
+#@end
+
+f.resume
+
+# 終了後も空
+p f.backtrace # => []
+```
+
+- **SEE** [m:Fiber#backtrace_locations], [m:Kernel?.caller]
+
+### def backtrace_locations                -> [Thread::Backtrace::Location]
+### def backtrace_locations(start)         -> [Thread::Backtrace::Location]
+### def backtrace_locations(start, length) -> [Thread::Backtrace::Location]
+### def backtrace_locations(range)         -> [Thread::Backtrace::Location]
+
+[m:Fiber#backtrace] と同じですが、実行スタックの各行を
+[c:Thread::Backtrace::Location] の配列で返します。
+
+引数の意味は [m:Fiber#backtrace] と同じです。
+
+```ruby
+f = Fiber.new { Fiber.yield }
+f.resume
+
+loc = f.backtrace_locations.first
+p loc.class  # => Thread::Backtrace::Location
+p loc.lineno # => 1
+```
+
+- **SEE** [m:Fiber#backtrace], [m:Kernel?.caller_locations]
+
+### def blocking? -> bool
+
+`self` がブロッキングなファイバーである場合に true を返します。
+ノンブロッキングである場合は false を返します。
+
+[m:Fiber.new] に `blocking: true` を指定して生成したファイバーがブロッキングです。
+
+```ruby
+p Fiber.new { }.blocking?                 # => false
+p Fiber.new(blocking: true) { }.blocking? # => true
+```
+
+- **SEE** [m:Fiber.blocking?], [ref:c:Fiber#nonblocking]
+#@end
+
+#@since 3.3
+### def kill -> self | false
+
+`self` が表すファイバーを終了させます。
+
+捕捉できない例外を発生させて終了させるため、ensure 節は実行されます。
+
+まだ開始されていないファイバーに対して呼んだ場合は、
+ブロックを実行せずに終了状態にします。
+すでに終了しているファイバーに対して呼んだ場合は何もしません。
+
+`self` 以外のファイバーを終了させられるのは、
+そのファイバーが [m:Fiber.yield] で停止している場合だけです。
+`self` に対して呼んだ場合は、kill を呼んだ場所で例外が発生します。
+
+- **return** -- `self` を返します。すでに kill 済みの場合は false を返します。
+- **raise** `FiberError` -- 他のスレッドに属するファイバーに対して呼んだ場合に発生します。
+
+```ruby
+f = Fiber.new do
+  begin
+    Fiber.yield :a
+    Fiber.yield :b
+  ensure
+    puts "ensure は実行される"
+  end
+end
+
+p f.resume # => :a
+f.kill     # "ensure は実行される" が出力される
+p f.alive? # => false
+```
+
+- **SEE** [m:Thread#kill]
+#@end
+
+#@since 3.2
+### def storage -> Hash | nil
+### def storage=(hash)
+
+`self` が表すファイバーの fiber storage を取得、設定します。
+
+fiber storage はファイバーごとに持てる記憶領域です。
+[m:Fiber.new] で生成したファイバーには複製が引き継がれます。
+スレッドローカル変数がすべてのファイバーで共有されるのに対し、
+fiber storage はファイバーを起点とする実行単位の中だけで共有されます。
+リクエスト ID やロガーの設定のように、暗黙のうちに引き回したい状態に向いています。
+
+個々の値の読み書きには [m:Fiber.\[\]] と [m:Fiber.\[\]=] を使います。
+storage が返すのは複製なので、返り値を変更しても fiber storage には反映されません。
+まだ fiber storage を持たない場合は nil を返します。
+
+storage= は実験的な機能です。呼び出すと実験的な機能である旨の警告が出ます。
+警告は `-W:no-experimental` オプションで抑制できます。
+
+- **param** `hash` -- 設定する [c:Hash] を指定します。キーは [c:Symbol] で指定します。
+  nil を指定すると fiber storage を空にします。
+- **return** -- storage は fiber storage の複製を返します。
+- **raise** `ArgumentError` -- [m:Fiber.current] 以外のファイバーに対して呼んだ場合に発生します。
+
+```ruby title="例: 取得"
+Fiber[:key] = 1
+#@since 3.4
+p Fiber.current.storage # => {key: 1}
+#@else
+p Fiber.current.storage # => {:key=>1}
+#@end
+
+# 返り値は複製なので、変更しても fiber storage には影響しない
+Fiber.current.storage[:key] = 2
+p Fiber[:key]           # => 1
+```
+
+```ruby title="例: 設定"
+Fiber[:key] = 1
+
+Fiber.current.storage = {other: 2} # 実験的な機能である旨の警告が出る
+p Fiber[:key]   # => nil
+p Fiber[:other] # => 2
+```
+
+- **SEE** [m:Fiber.new]
+#@end
