@@ -252,6 +252,7 @@ binding.eval("self")
 ```
 
 ### def irb -> object
+{: since="2.5.0"}
 
 REPLのセッションを開始します。
 
