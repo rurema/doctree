@@ -30,7 +30,7 @@ p Rational(1, 3) * 3 # => (1/1)
 
 積を計算します。
 
-- **param** `other` -- 自身に掛ける数
+- **param** `other` -- `self` に掛ける数
 
 `other` に [c:Float] を指定した場合は、計算結果を [c:Float] で返します。
 
@@ -46,7 +46,7 @@ p r * Rational(1, 2) # => (3/8)
 
 冪(べき)乗を計算します。
 
-- **param** `other` -- 自身を `other` 乗する数
+- **param** `other` -- `self` を `other` 乗する数
 #%since 3.4
 - **raise** `ArgumentError` -- 計算結果の分母・分子が巨大すぎる場合に発生します。
 #%end
@@ -89,7 +89,7 @@ p Rational(2) ** 10000000000000000000
 
 和を計算します。
 
-- **param** `other` -- 自身に足す数
+- **param** `other` -- `self` に足す数
 
 `other` に [c:Float] を指定した場合は、計算結果を [c:Float] で返します。
 
@@ -104,7 +104,7 @@ p r + 0.5              # => 1.25
 
 差を計算します。
 
-- **param** `other` -- 自身から引く数
+- **param** `other` -- `self` から引く数
 
 `other` に [c:Float] を指定した場合は、計算結果を [c:Float] で返します。
 
@@ -119,7 +119,7 @@ p r - 0.5            # => 0.25
 
 商を計算します。
 
-- **param** `other` -- 自身を割る数
+- **param** `other` -- `self` を割る数
 
 `other` に [c:Float] を指定した場合は、計算結果を [c:Float] で返します。
 
@@ -152,7 +152,7 @@ p(- r)        # => (-3/4)
 `self` と `other` を比較して、`self` が大きい時に `1`、等しい時に `0`、小さい時に
 `-1` を返します。比較できない場合は `nil` を返します。
 
-- **param** `other` -- 自身と比較する数値
+- **param** `other` -- `self` と比較する数値
 
 - **return** --      `-1` か `0` か `1` か `nil` を返します。
 
@@ -169,7 +169,7 @@ p Rational(1, 3)  <=> nil           # => nil
 
 数値として等しいか判定します。
 
-- **param** `other` -- 自身と比較する数値
+- **param** `other` -- `self` と比較する数値
 
 - **return** --      `self` と `other` が等しい場合 `true` を返します。
              そうでなければ `false` を返します。
@@ -211,7 +211,7 @@ p Rational(-1, 2).negative? # => true
 ### def magnitude -> Rational
 {: since="1.9.1"}
 
-自身の絶対値を返します。
+`self` の絶対値を返します。
 
 ```ruby title="例"
 p Rational(1, 2).abs   # => (1/2)
@@ -220,7 +220,7 @@ p Rational(-1, 2).abs  # => (1/2)
 
 ### def ceil(precision = 0) -> Integer | Rational
 
-自身と等しいかより大きな整数のうち最小のものを返します。
+`self` と等しいかより大きな整数のうち最小のものを返します。
 
 - **param** `precision` -- 計算結果の精度
 
@@ -245,7 +245,7 @@ p Rational('-123.456').ceil(-1)     # => -120
 
 ### def coerce(other) -> Array
 
-自身と `other` が同じクラスになるよう、自身か `other` を変換し `[other, self]` という
+`self` と `other` が同じクラスになるよう、`self` か `other` を変換し `[other, self]` という
 配列にして返します。
 
 - **param** `other` -- 比較または変換するオブジェクト
@@ -275,7 +275,7 @@ p Rational(-2, -10).denominator # => 5
 `self` を `other` で割った商を [c:Float] で返します。
 `other` に虚数を指定することは出来ません。
 
-- **param** `other` -- 自身を割る数
+- **param** `other` -- `self` を割る数
 
 ```ruby title="例"
 p Rational(2, 3).fdiv(1) # => 0.6666666666666666
@@ -288,7 +288,7 @@ Rational(1).fdiv(Complex(0, 1))  # ~> RangeError
 
 ### def floor(precision = 0) -> Integer | Rational
 
-自身と等しいかより小さな整数のうち最大のものを返します。
+`self` と等しいかより小さな整数のうち最大のものを返します。
 
 - **param** `precision` -- 計算結果の精度
 
@@ -323,7 +323,7 @@ p Rational('-123.456').floor(-1)     # => -130
 
 ### def hash -> Integer
 
-自身のハッシュ値を返します。
+`self` のハッシュ値を返します。
 
 - **return** -- ハッシュ値を返します。
 
@@ -333,7 +333,7 @@ p Rational('-123.456').floor(-1)     # => -130
 
 ### def inspect -> String
 
-自身を人間が読みやすい形の文字列表現にして返します。
+`self` を人間が読みやすい形の文字列表現にして返します。
 
 "(3/5)", "(-17/7)" のように10進数の表記を返します。
 
@@ -365,7 +365,7 @@ p Rational(-2, -10).numerator # => 1
 
 ### def rationalize(eps = 0) -> Rational
 
-自身から `eps` で指定した許容誤差の範囲に収まるような [c:Rational] を返します。
+`self` から `eps` で指定した許容誤差の範囲に収まるような [c:Rational] を返します。
 
 `eps` を省略した場合は `self` を返します。
 
@@ -380,7 +380,7 @@ p r.rationalize(Rational(0.1))  # => (1/3)
 
 ### def round(precision = 0) -> Integer | Rational
 
-自身ともっとも近い整数を返します。
+`self` ともっとも近い整数を返します。
 
 中央値 `0.5`, `-0.5` はそれぞれ `1`, `-1` に切り上げされます。
 
@@ -409,7 +409,7 @@ p Rational('-123.456').round(-2)    # => -100
 
 ### def to_f -> Float
 
-自身の値を最も良く表現する [c:Float] に変換します。
+`self` の値を最も良く表現する [c:Float] に変換します。
 
 絶対値が極端に小さい、または大きい場合にはゼロや無限大が返ることがあります。
 
@@ -457,9 +457,9 @@ p Rational('-123.456').truncate(-1)     # => -120
 
 ### def to_r -> Rational
 
-自身を返します。
+`self` を返します。
 
-- **return** -- 自身を返します。
+- **return** -- `self` を返します。
 
 ```ruby title="例"
 p Rational(3, 4).to_r  # => (3/4)
@@ -468,7 +468,7 @@ p Rational(8).to_r   # => (8/1)
 
 ### def to_s -> String
 
-自身を人間が読みやすい形の文字列表現にして返します。
+`self` を人間が読みやすい形の文字列表現にして返します。
 
 "3/5", "-17/7" のように10進数の表記を返します。
 
