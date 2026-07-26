@@ -14,10 +14,10 @@ alias:
 [c:TypeError] が発生します。
 
 #@since 3.2
-かつて Integer クラスのエイリアスであった Fixnum と Bignum は 3.2 で削除されました。
+かつて `Integer` クラスのエイリアスであった `Fixnum` と `Bignum` は 3.2 で削除されました。
 #@else
-2.4.0 から [c:Fixnum], [c:Bignum] は Integerに統合されました。
-2.4.0 からはどちらも Integer クラスのエイリアスとなっています。
+2.4.0 から [c:Fixnum], [c:Bignum] は `Integer` に統合されました。
+2.4.0 からはどちらも `Integer` クラスのエイリアスとなっています。
 #@end
 
 ## Class Methods
@@ -25,15 +25,15 @@ alias:
 #@since 3.1
 ### def try_convert(obj) -> Integer | nil
 
-obj を Integer に変換しようと試みます。変換には [m:Object#to_int]
+`obj` を `Integer` に変換しようと試みます。変換には [m:Object#to_int]
 メソッドが使われます。
 
-Integer ならそのままobjを返します。
-そうでなければ obj.to_int の結果を返すか、nil が返されます。
+`Integer` ならそのまま `obj` を返します。
+そうでなければ `obj.to_int` の結果を返すか、`nil` が返されます。
 
 - **param** `obj` --   変換する任意のオブジェクト
-- **return** --      Integer または nil
-- **raise** `TypeError` -- to_int が Integer を返さなかった場合に発生します。
+- **return** --      `Integer` または `nil`
+- **raise** `TypeError` -- `to_int` が `Integer` を返さなかった場合に発生します。
 
 ```ruby title="例"
 p Integer.try_convert(1)  # => 1
@@ -45,11 +45,11 @@ p Integer.try_convert([]) # => nil
 
 ### def sqrt(n) -> Integer
 
-非負整数 n の整数の平方根を返します。すなわち n の平方根以下の
+非負整数 `n` の整数の平方根を返します。すなわち `n` の平方根以下の
 最大の非負整数を返します。
 
-- **param** `n` -- 非負整数。Integer ではない場合は、最初に Integer に変換されます。
-- **raise** `Math::DomainError` -- n が負の整数の時に発生します。
+- **param** `n` -- 非負整数。`Integer` ではない場合は、最初に `Integer` に変換されます。
+- **raise** `Math::DomainError` -- `n` が負の整数の時に発生します。
 
 ```ruby
 p Integer.sqrt(0)      # => 0
@@ -74,7 +74,7 @@ p Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
 ### def chr -> String
 ### def chr(encoding) -> String
 
-self を文字コードとして見た時に、引数で与えたエンコーディング encoding に対応する文字を返します。
+`self` を文字コードとして見た時に、引数で与えたエンコーディング `encoding` に対応する文字を返します。
 
 ```ruby
 p 65.chr
@@ -92,30 +92,30 @@ p 12354.chr(Encoding::UTF_8)
 # ~> RangeError: invalid codepoint 0x3042 in EUC-JP
 ```
 
-引数無しで呼ばれた場合は self を US-ASCII、ASCII-8BIT、デフォルト内部エンコーディングの順で優先的に解釈します。
+引数無しで呼ばれた場合は `self` を US-ASCII、ASCII-8BIT、デフォルト内部エンコーディングの順で優先的に解釈します。
 
 ```ruby
 p 0x79.chr.encoding # => #<Encoding:US_ASCII>
 p 0x80.chr.encoding # => #<Encoding:ASCII_8BIT>
 ```
 
-- **param** `encoding` -- エンコーディングを表すオブジェクト。Encoding::UTF_8、'shift_jis' など。
+- **param** `encoding` -- エンコーディングを表すオブジェクト。[m:Encoding::UTF_8]、`"shift_jis"` など。
 - **return** --     一文字からなる文字列
-- **raise** `RangeError` -- self を与えられたエンコーディングで正しく解釈できない場合に発生します。
+- **raise** `RangeError` -- `self` を与えられたエンコーディングで正しく解釈できない場合に発生します。
 - **SEE** [m:String#ord] [m:Encoding.default_internal]
 
 ### def digits -> [Integer]
 ### def digits(base) -> [Integer]
 
-base を基数として self を位取り記数法で表記した数値を配列で返します。
-base を指定しない場合の基数は 10 です。
+`base` を基数として `self` を位取り記数法で表記した数値を配列で返します。
+`base` を指定しない場合の基数は `10` です。
 
 ```ruby
 p 16.digits   # => [6, 1]
 p 16.digits(16) # => [0, 1]
 ```
 
-self は非負整数でなければいけません。非負整数でない場合は、Math::DomainErrorが発生します。
+`self` は非負整数でなければいけません。非負整数でない場合は、[c:Math::DomainError] が発生します。
 
 ```ruby
 -10.digits  # Math::DomainError: out of domain が発生
@@ -123,17 +123,17 @@ self は非負整数でなければいけません。非負整数でない場合
 
 - **return** --     位取り記数法で表した時の数値の配列
 - **param** `base` -- 基数となる数値。
-- **raise** `ArgumentError` -- base に正の整数以外を指定した場合に発生します。
+- **raise** `ArgumentError` -- `base` に正の整数以外を指定した場合に発生します。
 - **raise** `Math::DomainError` -- 非負整数以外に対して呼び出した場合に発生します。
 
 ### def downto(min) {|n| ... } -> self
 ### def downto(min) -> Enumerator
 
-self から min まで 1 ずつ減らしながらブロックを繰り返し実行します。
-self < min であれば何もしません。
+`self` から `min` まで `1` ずつ減らしながらブロックを繰り返し実行します。
+`self < min` であれば何もしません。
 
 - **param** `min` --   数値
-- **return** --      self を返します。
+- **return** --      `self` を返します。
 
 ```ruby
 p 5.downto(1) {|i| print i, " " } # => 5 4 3 2 1
@@ -144,7 +144,7 @@ p 5.downto(1) {|i| print i, " " } # => 5 4 3 2 1
 ### def next -> Integer
 ### def succ -> Integer
 
-self の次の整数を返します。
+`self` の次の整数を返します。
 
 ```ruby
 p 1.next    #=> 2
@@ -158,10 +158,10 @@ p (-1).succ #=> 0
 ### def times {|n| ... } -> self
 ### def times -> Enumerator
 
-self 回だけ繰り返します。
-self が正の整数でない場合は何もしません。
+`self` 回だけ繰り返します。
+`self` が正の整数でない場合は何もしません。
 
-またブロックパラメータには 0 から self - 1 までの数値が渡されます。
+またブロックパラメータには `0` から `self - 1` までの数値が渡されます。
 
 ```ruby
 3.times { puts "Hello, World!" }  # Hello, World! と3行続いて表示される。
@@ -174,7 +174,7 @@ self が正の整数でない場合は何もしません。
 ### def to_i   -> self
 ### def to_int -> self
 
-self を返します。
+`self` を返します。
 
 ```ruby
 p 10.to_i # => 10
@@ -183,10 +183,10 @@ p 10.to_i # => 10
 ### def floor(ndigits = 0) -> Integer
 {: since=""}
 
-self と等しいかより小さな整数のうち最大のものを返します。
+`self` と等しいかより小さな整数のうち最大のものを返します。
 
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
-               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+               負の整数を指定した場合、小数点位置から左に少なくとも `n` 個の `0` が並びます。
 
 ```ruby
 p 1.floor         # => 1
@@ -200,10 +200,10 @@ p (-18).floor(-1) # => -20
 ### def ceil(ndigits = 0) -> Integer
 {: since=""}
 
-self と等しいかより大きな整数のうち最小のものを返します。
+`self` と等しいかより大きな整数のうち最小のものを返します。
 
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
-               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+               負の整数を指定した場合、小数点位置から左に少なくとも `n` 個の `0` が並びます。
 
 ```ruby
 p 1.ceil         # => 1
@@ -217,16 +217,16 @@ p (-18).ceil(-1) # => -10
 ### def round(ndigits = 0, half: :up) -> Integer
 {: since=""}
 
-self ともっとも近い整数を返します。
+`self` ともっとも近い整数を返します。
 
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
-               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+               負の整数を指定した場合、小数点位置から左に少なくとも `n` 個の `0` が並びます。
 - **param** `half` -- ちょうど半分の値の丸め方を指定します。
        サポートされている値は以下の通りです。
 
-- :up or nil: 0から遠い方に丸められます。
-- :even: もっとも近い偶数に丸められます。
-- :down: 0に近い方に丸められます。
+- `:up` or `nil`: 0から遠い方に丸められます。
+- `:even`: もっとも近い偶数に丸められます。
+- `:down`: 0に近い方に丸められます。
 
 ```ruby
 p 1.round       # => 1
@@ -250,10 +250,10 @@ p (-25).round(-1, half: :even) # => -20
 ### def truncate(ndigits = 0) -> Integer
 {: since=""}
 
-0 から self までの整数で、自身にもっとも近い整数を返します。
+`0` から `self` までの整数で、自身にもっとも近い整数を返します。
 
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
-               負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
+               負の整数を指定した場合、小数点位置から左に少なくとも `n` 個の `0` が並びます。
 
 ```ruby
 p 1.truncate         # => 1
@@ -282,16 +282,16 @@ p 35.to_s(36)   # => "z"
 
 - **return** --     数値の文字列表現
 - **param** `base` -- 基数となる 2 - 36 の数値。
-- **raise** `ArgumentError` -- base に 2 - 36 以外の数値を指定した場合に発生します。
+- **raise** `ArgumentError` -- `base` に 2 - 36 以外の数値を指定した場合に発生します。
 
 ### def upto(max) {|n| ... } -> Integer
 ### def upto(max) -> Enumerator
 
-self から max まで 1 ずつ増やしながら繰り返します。
-self > max であれば何もしません。
+`self` から `max` まで `1` ずつ増やしながら繰り返します。
+`self > max` であれば何もしません。
 
 - **param** `max` --   数値
-- **return** --      self を返します。
+- **return** --      `self` を返します。
 
 ```ruby
 p 5.upto(10) {|i| print i, " " } # => 5 6 7 8 9 10
@@ -342,7 +342,7 @@ p ?a.ord  #=> 97
 
 ### def pred    -> Integer
 
-self から -1 した値を返します。
+`self` から `-1` した値を返します。
 
 ```ruby
 p 1.pred    #=> 0
@@ -366,9 +366,9 @@ p -10.denominator # => 1
 
 ### def gcd(n) -> Integer
 
-自身と整数 n の最大公約数を返します。
+自身と整数 `n` の最大公約数を返します。
 
-- **raise** `ArgumentError` -- n に整数以外のものを指定すると発生します。
+- **raise** `ArgumentError` -- `n` に整数以外のものを指定すると発生します。
 
 ```ruby
 p 2.gcd(2)                  # => 2
@@ -377,7 +377,7 @@ p 3.gcd(-7)                 # => 1
 p ((1<<31)-1).gcd((1<<61)-1)  # => 1
 ```
 
-また、self や n が 0 だった場合は、0 ではない方の整数の絶対値を返します。
+また、`self` や `n` が `0` だった場合は、`0` ではない方の整数の絶対値を返します。
 
 ```ruby
 p 3.gcd(0)                  # => 3
@@ -388,10 +388,10 @@ p 0.gcd(-7)                 # => 7
 
 ### def gcdlcm(n) -> [Integer]
 
-自身と整数 n の最大公約数と最小公倍数の配列 [self.gcd(n), self.lcm(n)]
+自身と整数 `n` の最大公約数と最小公倍数の配列 `[self.gcd(n), self.lcm(n)]`
 を返します。
 
-- **raise** `ArgumentError` -- n に整数以外のものを指定すると発生します。
+- **raise** `ArgumentError` -- `n` に整数以外のものを指定すると発生します。
 
 ```ruby
 p 2.gcdlcm(2)                  # => [2, 2]
@@ -403,9 +403,9 @@ p ((1<<31)-1).gcdlcm((1<<61)-1)  # => [1, 4951760154835678088235319297]
 
 ### def lcm(n) -> Integer
 
-自身と整数 n の最小公倍数を返します。
+自身と整数 `n` の最小公倍数を返します。
 
-- **raise** `ArgumentError` -- n に整数以外のものを指定すると発生します。
+- **raise** `ArgumentError` -- `n` に整数以外のものを指定すると発生します。
 
 ```ruby
 p 2.lcm(2)                  # => 2
@@ -413,7 +413,7 @@ p 3.lcm(-7)                 # => 21
 p ((1<<31)-1).lcm((1<<61)-1)  # => 4951760154835678088235319297
 ```
 
-また、self や n が 0 だった場合は、0 を返します。
+また、`self` や `n` が `0` だった場合は、`0` を返します。
 
 ```ruby
 p 3.lcm(0)                  # => 0
@@ -451,7 +451,7 @@ p (1<<64).to_r  # => (18446744073709551616/1)
 
 - **param** `eps` -- 許容する誤差
 
-引数 eps は常に無視されます。
+引数 `eps` は常に無視されます。
 
 ```ruby
 p 2.rationalize    # => (2/1)
@@ -461,9 +461,9 @@ p 2.rationalize(0.1) # => (2/1)
 
 ### def to_f -> Float
 
-self を浮動小数点数([c:Float])に変換します。
+`self` を浮動小数点数([c:Float])に変換します。
 
-self が [c:Float] の範囲に収まらない場合、[m:Float::INFINITY] を返します。
+`self` が [c:Float] の範囲に収まらない場合、[m:Float::INFINITY] を返します。
 
 ```ruby
 p 1.to_f                     # => 1.0
@@ -473,11 +473,11 @@ p (-Float::MAX.to_i * 2).to_f  # => -Infinity
 
 ### def <=>(other) -> -1 | 0 | 1 | nil
 
-self と other を比較して、self が大きい時に1、等しい時に 0、小さい時
-に-1、比較できない時に nil を返します。
+`self` と `other` を比較して、`self` が大きい時に `1`、等しい時に `0`、小さい時
+に `-1`、比較できない時に `nil` を返します。
 
 - **param** `other` -- 比較対象の数値
-- **return** --      -1 か 0 か 1 か nil のいずれか
+- **return** --      `-1` か `0` か `1` か `nil` のいずれか
 
 ```ruby
 p 1 <=> 2  # => -1
@@ -489,7 +489,7 @@ p 2 <=> '' # => nil
 ### def -@ -> Integer
 
 単項演算子の - です。
-self の符号を反転させたものを返します。
+`self` の符号を反転させたものを返します。
 
 ```ruby
 p(- 10) # => -10
@@ -533,10 +533,10 @@ p 2 * 3 # => 6
 
 除算の算術演算子。
 
-other が Integer の場合、整商（整数の商）を Integer で返します。
+`other` が `Integer` の場合、整商（整数の商）を `Integer` で返します。
 普通の商（剰余を考えない商）を越えない最大の整数をもって整商とします。
 
-other が Float、Rational、Complex の場合、普通の商を other と
+`other` が [c:Float]、[c:Rational]、[c:Complex] の場合、普通の商を `other` と
 同じクラスのインスタンスで返します。
 
 - **param** `other` -- 二項演算の右側の引数(対象)
@@ -563,9 +563,9 @@ end
 整商（整数の商）を返します。
 普通の商（剰余を考えない商）を越えない最大の整数をもって整商とします。
 
-other が Integer オブジェクトの場合、[m:Integer#/] の結果と一致します。
+`other` が `Integer` オブジェクトの場合、[m:Integer#/] の結果と一致します。
 
-div に対応する剰余メソッドは modulo です。
+`div` に対応する剰余メソッドは `modulo` です。
 
 - **param** `other` -- 二項演算の右側の引数(対象)
 - **return** -- 計算結果
@@ -609,11 +609,11 @@ p -13 % -4  # => -1
 
 ### def remainder(other) -> Numeric
 
-self を other で割った余り r を返します。
+`self` を `other` で割った余り `r` を返します。
 
-r の符号は self と同じになります。
+`r` の符号は `self` と同じになります。
 
-- **param** `other` -- self を割る数。
+- **param** `other` -- `self` を割る数。
 
 ```ruby
 p 5.remainder(3)  # =>  2
@@ -629,20 +629,20 @@ p -1234567890987654321.remainder(13731.24) # => -9906.22531493148
 
 ### def divmod(other) -> [Integer, Numeric]
 
-self を other で割った商 q と余り r を、 [q, r] という 2 要素の配列にし
-て返します。 商 q は常に整数ですが、余り r は整数であるとは限りません。
+`self` を `other` で割った商 `q` と余り `r` を、`[q, r]` という 2 要素の配列にし
+て返します。 商 `q` は常に整数ですが、余り `r` は整数であるとは限りません。
 
-- **param** `other` -- self を割る数。
+- **param** `other` -- `self` を割る数。
 
 - **SEE** [m:Numeric#divmod]
 
 ### def fdiv(other) -> Numeric
 
-self を other で割った商を [c:Float] で返します。
+`self` を `other` で割った商を [c:Float] で返します。
 ただし [c:Complex] が関わる場合は例外です。
-その場合も成分は Float になります。
+その場合も成分は `Float` になります。
 
-- **param** `other` -- self を割る数を指定します。
+- **param** `other` -- `self` を割る数を指定します。
 
 ```ruby title="例"
 654321.fdiv(13731)      # => 47.652829364212366
@@ -657,10 +657,10 @@ self を other で割った商を [c:Float] で返します。
 #@since 3.2
 ### def ceildiv(other) -> Integer
 
-self を other で割り、その(剰余を考えない)商を整数に切り上げたものを返します。
-すなわち、self を other で割った商を q とすると、q 以上で最小の整数を返します。
+`self` を `other` で割り、その(剰余を考えない)商を整数に切り上げたものを返します。
+すなわち、`self` を `other` で割った商を `q` とすると、`q` 以上で最小の整数を返します。
 
-- **param** `other` -- self を割る数を指定します。
+- **param** `other` -- `self` を割る数を指定します。
 
 ```ruby
 p 3.ceildiv(3)  # => 1
@@ -680,10 +680,10 @@ p -5.ceildiv(-3)  # => 2
 算術演算子。冪(べき乗)を計算します。
 
 - **param** `other` -- 二項演算の右側の引数(対象)
-- **param** `modulo` -- 指定すると、計算途中に巨大な値を生成せずに (self**other) % modulo と同じ結果を返します。
+- **param** `modulo` -- 指定すると、計算途中に巨大な値を生成せずに `(self**other) % modulo` と同じ結果を返します。
 - **return** -- 計算結果
-- **raise** `TypeError` -- 2引数 pow で Integer 以外を指定した場合に発生します。
-- **raise** `RangeError` -- 2引数 pow で other に負の数を指定した場合に発生します。
+- **raise** `TypeError` -- 2引数 `pow` で `Integer` 以外を指定した場合に発生します。
+- **raise** `RangeError` -- 2引数 `pow` で `other` に負の数を指定した場合に発生します。
 #@since 3.4
 - **raise** `ArgumentError` -- 計算結果が巨大になりすぎる場合に発生します。
 #@end
@@ -701,7 +701,7 @@ p 5.pow(2, -8)  # => -7
 ```
 
 #@until 3.4
-結果が巨大すぎる整数になりそうなとき、警告を出したうえで Float::INFINITY を返します。
+結果が巨大すぎる整数になりそうなとき、警告を出したうえで [m:Float::INFINITY] を返します。
 
 ```ruby title="計算を放棄して Float::INFINITY を返す例"
 p 100**9999999
@@ -713,7 +713,7 @@ p 100**9999999
 #@end
 
 #@since 3.4
-計算結果が巨大すぎるときは ArgumentError が発生します。
+計算結果が巨大すぎるときは [c:ArgumentError] が発生します。
 
 ```ruby title="計算結果が巨大すぎる例"
 p 100**9999999999999999999
@@ -728,7 +728,7 @@ p 100**9999999999999999999
 ### def abs -> Integer
 ### def magnitude -> Integer
 
-self の絶対値を返します。
+`self` の絶対値を返します。
 
 ```ruby
 p -12345.abs # => 12345
@@ -743,8 +743,8 @@ p -1234567890987654321.abs # => 1234567890987654321
 比較演算子。数値として等しいか判定します。
 
 - **param** `other` -- 比較対象の数値
-- **return** --      self と other が等しい場合 true を返します。
-             そうでなければ false を返します。
+- **return** --      `self` と `other` が等しい場合 `true` を返します。
+             そうでなければ `false` を返します。
 
 ```ruby
 p 1 == 2    # => false
@@ -756,8 +756,8 @@ p 1 == 1.0  # => true
 比較演算子。数値として小さいか判定します。
 
 - **param** `other` -- 比較対象の数値
-- **return** --      self よりも other が大きい場合 true を返します。
-             そうでなければ false を返します。
+- **return** --      `self` よりも `other` が大きい場合 `true` を返します。
+             そうでなければ `false` を返します。
 
 ```ruby
 p 1 < 1  # => false
@@ -769,9 +769,9 @@ p 1 < 2  # => true
 比較演算子。数値として等しいまたは小さいか判定します。
 
 - **param** `other` -- 比較対象の数値
-- **return** --      self よりも other の方が大きい場合か、
-             両者が等しい場合 true を返します。
-             そうでなければ false を返します。
+- **return** --      `self` よりも `other` の方が大きい場合か、
+             両者が等しい場合 `true` を返します。
+             そうでなければ `false` を返します。
 
 ```ruby
 p 1 <= 0  # => false
@@ -784,8 +784,8 @@ p 1 <= 2  # => true
 比較演算子。数値として大きいか判定します。
 
 - **param** `other` -- 比較対象の数値
-- **return** --      self よりも other の方が小さい場合 true を返します。
-             そうでなければ false を返します。
+- **return** --      `self` よりも `other` の方が小さい場合 `true` を返します。
+             そうでなければ `false` を返します。
 
 ```ruby
 p 1 > 0  # => true
@@ -797,9 +797,9 @@ p 1 > 1  # => false
 比較演算子。数値として等しいまたは大きいか判定します。
 
 - **param** `other` -- 比較対象の数値
-- **return** --      self よりも other の方が小さい場合か、
-             両者が等しい場合 true を返します。
-             そうでなければ false を返します。
+- **return** --      `self` よりも `other` の方が小さい場合か、
+             両者が等しい場合 `true` を返します。
+             そうでなければ `false` を返します。
 
 ```ruby
 p 1 >= 0  # => true
@@ -854,21 +854,21 @@ p 2 ^ 3  # => 1
 ### def [](nth, len) -> Integer
 ### def [](range) -> Integer
 
-nth 番目のビット(最下位ビット(LSB)が 0 番目)が立っている時 1
-を、そうでなければ 0 を返します。
+`nth` 番目のビット(最下位ビット(LSB)が 0 番目)が立っている時 `1`
+を、そうでなければ `0` を返します。
 
 - **param** `nth` --   何ビット目を指すかの数値
 - **param** `len` --   何ビット分を返すか
 - **param** `range` -- 返すビットの範囲
-- **return** --     self[nth] は 1 か 0
-- **return** --     self[i, len] は (n >> i) & ((1 << len) - 1) と同じ
-- **return** --     self[i..j] は (n >> i) & ((1 << (j - i + 1)) - 1) と同じ
-- **return** --     self[i...j] は (n >> i) & ((1 << (j - i)) - 1) と同じ
-- **return** --     self[i..] は (n >> i) と同じ
-- **return** --     self[..j] は n & ((1 << (j + 1)) - 1) が 0 なら 0
-- **return** --     self[...j] は n & ((1 << j) - 1) が 0 なら 0
-- **raise** `ArgumentError` -- self[..j] で n & ((1 << (j + 1)) - 1) が 0 以外のとき
-- **raise** `ArgumentError` -- self[...j] で n & ((1 << j) - 1) が 0 以外のとき
+- **return** --     `self[nth]` は `1` か `0`
+- **return** --     `self[i, len]` は `(n >> i) & ((1 << len) - 1)` と同じ
+- **return** --     `self[i..j]` は `(n >> i) & ((1 << (j - i + 1)) - 1)` と同じ
+- **return** --     `self[i...j]` は `(n >> i) & ((1 << (j - i)) - 1)` と同じ
+- **return** --     `self[i..]` は `(n >> i)` と同じ
+- **return** --     `self[..j]` は `n & ((1 << (j + 1)) - 1)` が `0` なら `0`
+- **return** --     `self[...j]` は `n & ((1 << j) - 1)` が `0` なら `0`
+- **raise** `ArgumentError` -- `self[..j]` で `n & ((1 << (j + 1)) - 1)` が `0` 以外のとき
+- **raise** `ArgumentError` -- `self[...j]` で `n & ((1 << j) - 1)` が `0` 以外のとき
 
 ```ruby
 a = 0b11001100101010
@@ -880,7 +880,7 @@ a = 9**15
 # => 000101110110100000111000011110010100111100010111001
 ```
 
-n[i] は (n >> i) & 1 と等価なので、負のインデックスは常に 0 を返します。
+`n[i]` は `(n >> i) & 1` と等価なので、負のインデックスは常に `0` を返します。
 
 ```ruby
 p 255[-1] # => 0
@@ -893,12 +893,12 @@ p 0b01001100[2...6] #=> 0b0011
 #   ^^^^
 ```
 
-self[nth]=bit (つまりビットの修正) がないのは、Numeric 関連クラスが
+`self[nth]=bit` (つまりビットの修正) がないのは、`Numeric` 関連クラスが
 immutable であるためです。
 
 ### def <<(bits) -> Integer
 
-シフト演算子。bits だけビットを左にシフトします。
+シフト演算子。`bits` だけビットを左にシフトします。
 
 - **param** `bits` -- シフトさせるビット数
 
@@ -909,10 +909,10 @@ p -1 << 1 # => -2
 
 ### def >>(bits) -> Integer
 
-シフト演算子。bits だけビットを右にシフトします。
+シフト演算子。`bits` だけビットを右にシフトします。
 
 右シフトは、符号ビット(最上位ビット(MSB))が保持されます。
-bitsが実数の場合、小数点以下を切り捨てた値でシフトします。
+`bits` が実数の場合、小数点以下を切り捨てた値でシフトします。
 
 - **param** `bits` -- シフトさせるビット数
 
@@ -934,11 +934,10 @@ p 0x1_0000_0000.size  # => 8
 
 ### def bit_length -> Integer
 
-self を表すのに必要なビット数を返します。
+`self` を表すのに必要なビット数を返します。
 
-「必要なビット数」とは符号ビットを除く最上位ビットの位置の事を意味しま
-す。2**n の場合は n+1 になります。self にそのようなビットがない(0 や
--1 である)場合は 0 を返します。
+「必要なビット数」とは符号ビットを除く最上位ビットの位置の事を意味します。
+`2**n` の場合は `n+1` になります。`self` にそのようなビットがない(`0` や `-1` である)場合は `0` を返します。
 
 ```ruby title="例: ceil(log2(int < 0 ? -int : int+1)) と同じ結果"
 p (-2**12-1).bit_length   # => 13
@@ -962,9 +961,8 @@ p (2**12+1).bit_length    # => 13
 
 ### def allbits?(mask) -> bool
 
-mask で 1 が立っているビットがすべて self でも 1 なら true を返します。
-
-self & mask == mask と等価です。
+z`mask` で `1` が立っているビットがすべて `self` でも `1` なら `true` を返します。
+`self & mask == mask` と等価です。
 
 - **param** `mask` -- ビットマスクを整数で指定します。
 
@@ -980,9 +978,9 @@ p 0b1000_0010.allbits?(0b1010_1010) # => false
 
 ### def anybits?(mask) -> bool
 
-self & mask のいずれかのビットが 1 なら true を返します。
+`self & mask` のいずれかのビットが `1` なら `true` を返します。
 
-self & mask != 0 と等価です。
+`self & mask != 0` と等価です。
 
 - **param** `mask` -- ビットマスクを整数で指定します。
 
@@ -998,9 +996,9 @@ p 0b1000_0010.anybits?(0b0010_1100) # => false
 
 ### def nobits?(mask) -> bool
 
-self & mask のすべてのビットが 0 なら true を返します。
+`self & mask` のすべてのビットが `0` なら `true` を返します。
 
-self & mask == 0 と等価です。
+`self & mask == 0` と等価です。
 
 - **param** `mask` -- ビットマスクを整数で指定します。
 
