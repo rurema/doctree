@@ -14,10 +14,10 @@ alias:
 [c:TypeError] が発生します。
 
 #@since 3.2
-かつて `Integer` クラスのエイリアスであった `Fixnum` と `Bignum` は 3.2 で削除されました。
+かつて `Integer` クラスのエイリアスであった `Fixnum` と `Bignum` は Ruby 3.2 で削除されました。
 #@else
-2.4.0 から [c:Fixnum], [c:Bignum] は `Integer` に統合されました。
-2.4.0 からはどちらも `Integer` クラスのエイリアスとなっています。
+Ruby 2.4.0 から [c:Fixnum], [c:Bignum] は `Integer` に統合されました。
+Ruby 2.4.0 からはどちらも `Integer` クラスのエイリアスとなっています。
 #@end
 
 ## Class Methods
@@ -281,8 +281,8 @@ p 35.to_s(36)   # => "z"
 ```
 
 - **return** --     数値の文字列表現
-- **param** `base` -- 基数となる 2 - 36 の数値。
-- **raise** `ArgumentError` -- `base` に 2 - 36 以外の数値を指定した場合に発生します。
+- **param** `base` -- 基数となる 2〜36 の数値。
+- **raise** `ArgumentError` -- `base` に 2〜36 以外の数値を指定した場合に発生します。
 
 ### def upto(max) {|n| ... } -> Integer
 ### def upto(max) -> Enumerator
@@ -301,7 +301,7 @@ p 5.upto(10) {|i| print i, " " } # => 5 6 7 8 9 10
 
 ### def integer? -> true
 
-常に真を返します。
+常に `true` を返します。
 
 ```ruby
 p 1.integer?   # => true
@@ -310,8 +310,7 @@ p 1.0.integer? # => false
 
 ### def even? -> bool
 
-`self` が偶数であれば真を返します。
-そうでない場合は偽を返します。
+`self` が偶数なら `true` を返し、そうでないなら `false` を返します。
 
 ```ruby
 p 10.even?  # => true
@@ -320,8 +319,7 @@ p 5.even?   # => false
 
 ### def odd? -> bool
 
-`self` が奇数であれば真を返します。
-そうでない場合は偽を返します。
+`self` が奇数なら `true` を返し、そうでないなら `false` を返します。
 
 ```ruby
 p 5.odd?   # => true
