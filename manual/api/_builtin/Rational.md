@@ -32,8 +32,7 @@ p Rational(1, 3) * 3 # => (1/1)
 
 - **param** `other` -- 自身に掛ける数
 
-other に [c:Float] を指定した場合は、計算結果を [c:Float] で返しま
-す。
+`other` に [c:Float] を指定した場合は、計算結果を [c:Float] で返します。
 
 ```ruby title="例"
 r = Rational(3, 4)
@@ -47,14 +46,13 @@ p r * Rational(1, 2) # => (3/8)
 
 冪(べき)乗を計算します。
 
-- **param** `other` -- 自身を other 乗する数
+- **param** `other` -- 自身を `other` 乗する数
 #%since 3.4
 - **raise** `ArgumentError` -- 計算結果の分母・分子が巨大すぎる場合に発生します。
 #%end
 
-other に [c:Float] を指定した場合は、計算結果を [c:Float] で返しま
-す。other が有理数であっても、計算結果が無理数だった場合は [c:Float]
-を返します。
+`other` に [c:Float] を指定した場合は、計算結果を [c:Float] で返します。
+`other` が有理数であっても、計算結果が無理数だった場合は [c:Float] を返します。
 
 ```ruby title="例"
 r = Rational(3, 4)
@@ -65,7 +63,7 @@ p r ** Rational(1, 2)  # => 0.866025403784439
 ```
 
 #%until 3.4
-計算結果の分母・分子が巨大になりすぎるとき、警告を出したうえで Float::INFINITY（基数によっては NaN）を返します。
+計算結果の分母・分子が巨大になりすぎるとき、警告を出したうえで [m:Float::INFINITY]（基数によっては [m:Float::NaN]）を返します。
 
 ```ruby title="計算を放棄して Float::INFINITY を返す例"
 p Rational(2) ** 100000000
@@ -77,11 +75,11 @@ p Rational(2) ** 100000000
 #%end
 
 #%since 3.4
-計算結果の分母・分子が巨大すぎるときは ArgumentError が発生します。
+計算結果の分母・分子が巨大すぎるときは [c:ArgumentError] が発生します。
 
 ```ruby title="計算結果が巨大すぎる例"
 p Rational(2) ** 10000000000000000000
-# => exponent is too large (ArgumentError)
+# ~> exponent is too large (ArgumentError)
 ```
 
 判定の閾値は変わりえます。
@@ -93,8 +91,7 @@ p Rational(2) ** 10000000000000000000
 
 - **param** `other` -- 自身に足す数
 
-other に [c:Float] を指定した場合は、計算結果を [c:Float] で返しま
-す。
+`other` に [c:Float] を指定した場合は、計算結果を [c:Float] で返します。
 
 ```ruby title="例"
 r = Rational(3, 4)
@@ -109,8 +106,7 @@ p r + 0.5              # => 1.25
 
 - **param** `other` -- 自身から引く数
 
-other に [c:Float] を指定した場合は、計算結果を [c:Float] で返しま
-す。
+`other` に [c:Float] を指定した場合は、計算結果を [c:Float] で返します。
 
 ```ruby title="例"
 r = Rational(3, 4)
@@ -125,7 +121,7 @@ p r - 0.5            # => 0.25
 
 - **param** `other` -- 自身を割る数
 
-other に [c:Float] を指定した場合は、計算結果を [c:Float] で返します。
+`other` に [c:Float] を指定した場合は、計算結果を [c:Float] で返します。
 
 ```ruby title="例"
 r = Rational(3, 4)
@@ -136,7 +132,7 @@ p r / Rational(1, 2) # => (3/2)
 r / 0                # ~> ZeroDivisionError
 ```
 
-- **raise** `ZeroDivisionError` -- other が 0 の時に発生します。
+- **raise** `ZeroDivisionError` -- `other` が `0` の時に発生します。
 
 - **SEE** [m:Numeric#quo]
 
@@ -144,7 +140,7 @@ r / 0                # ~> ZeroDivisionError
 {: since="1.9.1"}
 
 単項演算子の - です。
-self の符号を反転させたものを返します。
+`self` の符号を反転させたものを返します。
 
 ```ruby title="例"
 r = Rational(3, 4)
@@ -153,12 +149,12 @@ p(- r)        # => (-3/4)
 
 ### def <=>(other) -> -1 | 0 | 1 | nil
 
-self と other を比較して、self が大きい時に 1、等しい時に 0、小さい時に
--1 を返します。比較できない場合はnilを返します。
+`self` と `other` を比較して、`self` が大きい時に `1`、等しい時に `0`、小さい時に
+`-1` を返します。比較できない場合は `nil` を返します。
 
 - **param** `other` -- 自身と比較する数値
 
-- **return** --      -1 か 0 か 1 か nil を返します。
+- **return** --      `-1` か `0` か `1` か `nil` を返します。
 
 ```ruby title="例"
 p Rational(2, 3)  <=> Rational(2, 3)  # => 0
@@ -175,8 +171,8 @@ p Rational(1, 3)  <=> nil           # => nil
 
 - **param** `other` -- 自身と比較する数値
 
-- **return** --      self と other が等しい場合 true を返します。
-             そうでなければ false を返します。
+- **return** --      `self` と `other` が等しい場合 `true` を返します。
+             そうでなければ `false` を返します。
 
 ```ruby title="例"
 p Rational(2, 3)  == Rational(2, 3) # => true
@@ -189,7 +185,7 @@ p Rational('1/2') == '1/2'          # => false
 ### def positive? -> bool
 {: since="2.3.0"}
 
-self が 0 より大きい場合に true を返します。そうでない場合に false を返します。
+`self` が `0` より大きい場合に `true` を返します。そうでない場合に `false` を返します。
 
 ```ruby title="例"
 p Rational(1, 2).positive?  # => true
@@ -201,7 +197,7 @@ p Rational(-1, 2).positive? # => false
 ### def negative? -> bool
 {: since="2.3.0"}
 
-self が 0 未満の場合に true を返します。そうでない場合に false を返します。
+`self` が `0` 未満の場合に `true` を返します。そうでない場合に `false` を返します。
 
 ```ruby title="例"
 p Rational(1, 2).negative?  # => false
@@ -228,7 +224,7 @@ p Rational(-1, 2).abs  # => (1/2)
 
 - **param** `precision` -- 計算結果の精度
 
-- **raise** `TypeError` -- precision に整数以外のものを指定すると発生します。
+- **raise** `TypeError` -- `precision` に整数以外のものを指定すると発生します。
 
 ```ruby title="例"
 p Rational(3).ceil    # => 3
@@ -236,8 +232,7 @@ p Rational(2, 3).ceil # => 1
 p Rational(-3, 2).ceil  # => -1
 ```
 
-precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
-数か [c:Rational] を返します。
+`precision` を指定した場合は指定した桁数の数値と、上述の性質に最も近い整数か [c:Rational] を返します。
 
 ```ruby title="例"
 p Rational('-123.456').ceil(+1)     # => (-617/5)
@@ -250,7 +245,7 @@ p Rational('-123.456').ceil(-1)     # => -120
 
 ### def coerce(other) -> Array
 
-自身と other が同じクラスになるよう、自身か other を変換し [other, self] という
+自身と `other` が同じクラスになるよう、自身か `other` を変換し `[other, self]` という
 配列にして返します。
 
 - **param** `other` -- 比較または変換するオブジェクト
@@ -277,8 +272,8 @@ p Rational(-2, -10).denominator # => 5
 
 ### def fdiv(other) -> Float
 
-self を other で割った商を [c:Float] で返します。
-other に虚数を指定することは出来ません。
+`self` を `other` で割った商を [c:Float] で返します。
+`other` に虚数を指定することは出来ません。
 
 - **param** `other` -- 自身を割る数
 
@@ -370,10 +365,9 @@ p Rational(-2, -10).numerator # => 1
 
 ### def rationalize(eps = 0) -> Rational
 
-自身から eps で指定した許容誤差の範囲に収まるような [c:Rational] を返
-します。
+自身から `eps` で指定した許容誤差の範囲に収まるような [c:Rational] を返します。
 
-eps を省略した場合は self を返します。
+`eps` を省略した場合は `self` を返します。
 
 - **param** `eps` -- 許容する誤差
 
@@ -388,7 +382,7 @@ p r.rationalize(Rational(0.1))  # => (1/3)
 
 自身ともっとも近い整数を返します。
 
-中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。
+中央値 `0.5`, `-0.5` はそれぞれ `1`, `-1` に切り上げされます。
 
 - **param** `precision` -- 計算結果の精度
 
@@ -494,9 +488,9 @@ p Rational(0.5).to_s # => "1/2"
 ### def marshal_dump -> Array
 
 [m:Marshal?.load] のためのメソッドです。
-Rational::compatible#marshal_load で復元可能な配列を返します。
+`Rational::compatible#marshal_load` で復元可能な配列を返します。
 
-[注意] Rational::compatible は通常の方法では参照する事ができません。
+[注意] `Rational::compatible` は通常の方法では参照する事ができません。
 
 #%# https://bugs.ruby-lang.org/issues/6625 を参照。
 
