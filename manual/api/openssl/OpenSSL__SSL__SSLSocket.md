@@ -251,7 +251,7 @@ IO が読み込み待ち、もしくは書き込み待ちになった場合は�
 - **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で
        証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
        場合に発生します
-       (実際は [m:OpenSSL::SSL::SSLError] をこのモジュールで extend した
+       (実際は [c:OpenSSL::SSL::SSLError] をこのモジュールで extend した
        例外オブジェクトが生成されます)
 - **raise** `OpenSSL::SSL::SSLError` -- ソケットが読み込み/書き込み可能状態になるのを
        待つ必要がある場合に発生します。
