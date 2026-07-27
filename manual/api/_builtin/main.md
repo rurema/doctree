@@ -103,6 +103,7 @@ p hypot(3, 4)  # => 5.0
 
 ### def define_method(name, method) -> Symbol
 ### def define_method(name) { ... } -> Symbol
+{: since="2.0.0"}
 
 インスタンスメソッド name を [c:Object] に定義します。
 
@@ -124,6 +125,7 @@ p hypot(3, 4)  # => 5.0
 - **SEE** [m:Module#define_method]
 
 ### def using(module) -> self
+{: since="2.0.0"}
 
 引数で指定したモジュールで定義された拡張を有効にします。
 

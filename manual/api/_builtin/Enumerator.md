@@ -553,6 +553,7 @@ end
 - **SEE** [m:Enumerable#each_with_object]
 
 ### def size -> Integer | Float::INFINITY | nil
+{: since="2.0.0"}
 
 self の要素数を返します。
 

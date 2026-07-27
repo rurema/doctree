@@ -377,6 +377,7 @@ p 1.step.lazy.slice_when { |i, j| (i + j) % 5 == 0 }.take(5).force
 - **SEE** [m:Enumerable#slice_when]
 
 ### def force(*args) -> [object]
+{: since="2.3.0"}
 
 全ての要素を含む配列を返します。Lazy から実際に値を取り出すのに使います。
 
