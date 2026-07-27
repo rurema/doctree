@@ -16,8 +16,8 @@ S/MIME などに使用されています。
 ### S/MIME メッセージの種類
 
 S/MIME には以下の種類のメッセージがあります
-  - enveloped-only 
-  - signed-only 
+  - enveloped-only
+  - signed-only
     - signedData フォーマット
     - multipart/signed フォーマット
   - Certificate-only
@@ -88,7 +88,7 @@ cert に署名に使う証明書を、key にその証明書に対応する秘�
 渡すと [c:OpenSSL::PKCS7] オブジェクトにそれらの証明書が追加で保持されます。
 例えば中間 CA 証明書などを渡します。
 flags は以下の値の OR を渡します。
-  - [m:OpenSSL::PKCS7::TEXT] 
+  - [m:OpenSSL::PKCS7::TEXT]
       text/plain 用の MIME ヘッダをデータに付け加える。
   - [m:OpenSSL::PKCS7::NOCERTS]
       署名者の証明書を署名に含めません。送り先がすでに証明書をもっている場合
@@ -133,10 +133,10 @@ nil を渡すと適当な方式が選ばれます。互換性を気にするの�
 triple DES を使うとよいでしょう。多くのクライアントで利用可能なはずです。
 
 flags には以下のフラグを渡すことができます。
-  - [c:OpenSSL::PKCS7::TEXT]
+  - [m:OpenSSL::PKCS7::TEXT]
       暗号化するデータに text/plain タイプの MIME ヘッダを追加します。
       MIME形式のデータを渡すときにはこれを使ってはいけません。
-  - [c:OpenSSL::PKCS7::BINARY]
+  - [m:OpenSSL::PKCS7::BINARY]
       data に MIME 正規化をほどこしません。
 
 - **param** `certs` -- 公開鍵を含む証明書([c:OpenSSL::X509::Certificate] オブジェクト)の配列
@@ -226,7 +226,7 @@ PKCS7 オブジェクトのタイプを [c:Symbol] オブジェクトで設定�
 
 署名に添付する証明書を追加します。
 
-通常は [c:OpenSSL::PKCS7.sign] の引数で添付する証明書を指定した
+通常は [m:OpenSSL::PKCS7.sign] の引数で添付する証明書を指定した
 ほうがよいでしょう。
 
 - **param** `cert` -- 追加する証明書([c:OpenSSL::X509::Certificate] オブジェクト)
@@ -241,7 +241,7 @@ PKCS7 オブジェクトのタイプを [c:Symbol] オブジェクトで設定�
 署名に付ける証明書を指定します。
 
 PKCS7 オブジェクトに元々つけられていた証明書はクリアされます。
-通常は [c:OpenSSL::PKCS7.sign] の引数で添付する証明書を指定した
+通常は [m:OpenSSL::PKCS7.sign] の引数で添付する証明書を指定した
 ほうがよいでしょう。
 
 - **param** `certificates` -- 証明書([c:OpenSSL::X509::Certificate] オブジェクト)の配列
@@ -393,7 +393,7 @@ DER 形式のバイナリ列に変換します。
 
 ### const DETACHED -> Integer
 
-平文に署名を付ける形式 (multipart/signed) で行います。 
+平文に署名を付ける形式 (multipart/signed) で行います。
 
 [m:OpenSSL::PKCS7.sign]、[m:OpenSSL::PKCS7.write_smime]
 で利用可能なフラグです。
@@ -402,11 +402,11 @@ DER 形式のバイナリ列に変換します。
 
 text/plain タイプの MIME ヘッダーを取り扱います。
 
-[m:OpenSSL::PKCS7.sign], [m:OpenSSL::PKCS7.write_smime], 
-[m:OpenSSL::PKCS7#verify], 
+[m:OpenSSL::PKCS7.sign], [m:OpenSSL::PKCS7.write_smime],
+[m:OpenSSL::PKCS7#verify],
 [m:OpenSSL::PKCS7.encrypt], [m:OpenSSL::PKCS7#decrypt]
 で利用可能なフラグです。
-  
+
 ### const BINARY -> Integer
 
 MIME canonical format への変換を行いません。

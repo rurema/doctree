@@ -18,8 +18,8 @@ require 'openssl'
 
 p OpenSSL::PKey::EC.builtin_curves
 # => [["secp112r1", "SECG/WTLS curve over a 112 bit prime field"],
-#     ["secp112r2", "SECG curve over a 112 bit prime field"], 
-#     ["secp128r1", "SECG curve over a 128 bit prime field"], 
+#     ["secp112r2", "SECG curve over a 112 bit prime field"],
+#     ["secp128r1", "SECG curve over a 128 bit prime field"],
 #     ["secp128r2", "SECG curve over a 128 bit prime field"],
 #     ... ]
 ```
@@ -428,7 +428,7 @@ Point オブジェクトを生成します。
 
 点が曲線上にあるならば真を返します。
 
-[m:OpenSSL::PKey::EC::Group] で得られる群と関連付けられた
+[c:OpenSSL::PKey::EC::Group] で得られる群と関連付けられた
 曲線を考えます。
 
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- エラーが生じた場合に発生します

@@ -320,7 +320,7 @@ Ctrl-C が入力された時に irb を終了するかどうかを val に設定
 - **return** -- 出力結果に to_s したものを表示する場合は false を返します。それ
         以外の場合は true を返します。
 
-- **SEE** [c:IRB::Context#inspect_mode], [c:IRB::Context#inspect_mode=]
+- **SEE** [m:IRB::Context#inspect_mode], [m:IRB::Context#inspect_mode=]
 
 ### def inspect_mode -> object | nil
 

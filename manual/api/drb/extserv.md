@@ -5,7 +5,7 @@ include:
 ---
 [c:DRb::ExtServ] を定義しているライブラリ。
 
-[lib:drb/extservm] で定義されている [c:DRb::ExtServManager] 
+[lib:drb/extservm] で定義されている [c:DRb::ExtServManager]
 によって管理されるサービスを実現する [c:DRb::ExtServ] を
 定義しています。
 
@@ -19,7 +19,7 @@ include:
 
 ### def new(there, name, server=nil) -> DRb::ExtServ
 
-DRb::ExtServ オブジェクトを生成し、サービスを 
+DRb::ExtServ オブジェクトを生成し、サービスを
 [c:DRb::ExtServManager] オブジェクトに登録します。
 
 there で指定した
@@ -44,14 +44,14 @@ server には drb の通信に用いる [c:DRb::DRbServer] オブジェクトを
 サービスの窓口となるオブジェクトを返します。
 
 実際には、[m:DRb::ExtServ.new] の server で指定した
-[c:DRb::DRbServer] オブジェクトの [m:DRb::DRbServer#front] 
+[c:DRb::DRbServer] オブジェクトの [m:DRb::DRbServer#front]
 が返されます。
 
 ### def stop_service -> true
 
 サービスを停止します。
 
-[m:DRb::ExtServManager] オブジェクトにサービスの停止を伝達し、
+[c:DRb::ExtServManager] オブジェクトにサービスの停止を伝達し、
 [m:DRb::DRbServer#stop_service] でサーバを停止します。
 
 このメソッドはリモートから起動できます。

@@ -73,7 +73,7 @@ SSLv2 は無効化して SSLv3 と TLSv1 の両方を有効化するためには
 require 'openssl'
 ctx = OpenSSL::SSL::SSLContext.new('TLSv1')
 p ctx.ciphers
-# => [["DHE-RSA-AES256-SHA", "TLSv1/SSLv3", 256, 256], 
+# => [["DHE-RSA-AES256-SHA", "TLSv1/SSLv3", 256, 256],
 #     ["DHE-DSS-AES256-SHA", "TLSv1/SSLv3", 256, 256], ... ]
 ```
 
@@ -183,7 +183,7 @@ SSL_CTX_set_cipher_list の項を見てください。
 
 - **SEE** [m:OpenSSL::SSL::SSLContext#cert_store=]
 
-### def cert_store=(store) 
+### def cert_store=(store)
 
 接続相手の証明書の検証のために使う、信頼している CA 証明書を
 含む証明書ストアを設定します。
@@ -465,7 +465,7 @@ proc{|sslsocket, is_export, keylen| ... }
   - sslsocket 通信に使われる [c:OpenSSL::SSL::SSLSocket] オブジェクト
   - is_export 輸出規制のある暗号を利用するかどうかを0か0以外かで指定
   - keylen 鍵長
-となります。ブロックの返り値には適切な鍵パラメータを含む 
+となります。ブロックの返り値には適切な鍵パラメータを含む
 [c:OpenSSL::PKey::DH] オブジェクトを返します。鍵パラメータは
 keylen で指定された鍵長に対応したものでなければなりません。
 
@@ -540,7 +540,7 @@ cb に nil を指定するとデフォルトのパラメータが利用されま
   - :session_new_cb ([m:OpenSSL::SSL::SSLContext#session_new_cb=])
   - :session_remove_cb ([m:OpenSSL::SSL::SSLContext#session_remove_cb=])
   - :servername_cb ([m:OpenSSL::SSL::SSLContext#servername_cb=])
-指定されなかったパラメータは [m:OpenSSL::SSL::SSLContext::DEFAULT_PARAMS] 
+指定されなかったパラメータは [m:OpenSSL::SSL::SSLContext::DEFAULT_PARAMS]
 の値で初期化されます。
 
 ### def ssl_version=(ver)
@@ -581,7 +581,7 @@ proc{|sslsocket, hostname| ... }
 2つで、1つ目は認証および暗号化通信に使われる [c:OpenSSL::SSL::SSLSocket]
 オブジェクトで、2つ目がクライアント側から伝えられてきたホスト名です。
 
-コールバックの返り値には認証と暗号化の設定を含んだ 
+コールバックの返り値には認証と暗号化の設定を含んだ
 [c:OpenSSL::SSL::SSLContext] オブジェクト、もしくは
 nil を返さなければなりません。
 これで得られたコンテキストオブジェクトが sslsocket に設定され、
@@ -746,7 +746,7 @@ size に 0 を渡すと制限なしを意味します。
 コールバックオブジェクトを call するときの引数は
 
 ```text
-[ SSLContextオブジェクト(OpenSSL::SSL::SSLContext), 
+[ SSLContextオブジェクト(OpenSSL::SSL::SSLContext),
   破棄されるセッション(OpenSSL::SSL::Session)]
 ```
 
@@ -769,7 +769,7 @@ time に [c:Time] オブジェクトを渡すと、その
 時刻で時間切れになるキャッシュを破棄します。
 
 - **param** `time` -- キャッシュ破棄の基準時刻
-- **SEE** [c:OpenSSL::SSL::SSLContext#session_cache_mode=]
+- **SEE** [m:OpenSSL::SSL::SSLContext#session_cache_mode=]
 
 #@# --- setup -> true
 #@# 内部的に利用されるメソッド
@@ -860,7 +860,7 @@ p OpenSSL::SSL::SSLContext::METHODS
 [m:OpenSSL::SSL::SSLContext#session_cache_mode=] に
 渡すフラグとして用います。
 
-このフラグが立っているとサーバ側の [c:OpenSSL::SSL::SSLContext] 
+このフラグが立っているとサーバ側の [c:OpenSSL::SSL::SSLContext]
 でセッションキャッシュの保持と管理、再利用が
 行われます。
 
@@ -912,7 +912,7 @@ p OpenSSL::SSL::SSLContext::METHODS
 渡すフラグとして用います。
 
 このフラグを ON にすると、キャッシュの探索が必要になった
-場合必ずコールバック([c:OpenSSL::SSL::SSLContext#session_get_cb=]
+場合必ずコールバック([m:OpenSSL::SSL::SSLContext#session_get_cb=]
 で設定したもの)を呼ぶようになります。
 
 ### const SESSION_CACHE_NO_INTERNAL_STORE -> Integer

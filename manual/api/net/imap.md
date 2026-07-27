@@ -39,7 +39,7 @@ message sequence number は
 message sequence number が付け替えられます。
 
 一方、UID はセッションを越えて恒久的に保持されます。
-あるメールボックス内の異なる2つのメッセージが同じ  UID 
+あるメールボックス内の異なる2つのメッセージが同じ  UID
 を持つことはありません。
 これは、メッセージがメールボックスから削除された後でも成立します。
 
@@ -269,7 +269,7 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
 
 ### def add_authenticator(auth_type, authenticator) -> ()
 
-[m:Net::IMAP#authenticate] で使う 
+[m:Net::IMAP#authenticate] で使う
 認証用クラスを設定します。
 
 imap ライブラリに新たな認証方式を追加するために用います。
@@ -633,7 +633,7 @@ imap.append("inbox", <<EOF.gsub(/\n/, "\r\n"), [:Seen], Time.now)
 Subject: hello
 From: someone@example.com
 To: somebody@example.com
-  
+
 hello world
 EOF
 ```
@@ -736,7 +736,7 @@ set で対象とするメッセージを指定します。
 これには sequence number、sequence number の配列、もしくは
 [c:Range] オブジェクトを渡します。
 attr には取得するアトリビュートを文字列の配列で渡してください。
-指定可能なアトリビュートについては [m:Net::IMAP::FetchData#attr] 
+指定可能なアトリビュートについては [m:Net::IMAP::FetchData#attr]
 を見てください。
 
 ```ruby title="例"
@@ -771,7 +771,7 @@ set で対象とするメッセージを指定します。
 これには UID、UID の配列、もしくは
 [c:Range] オブジェクトを渡します。
 attr には取得するアトリビュートを文字列の配列で渡してください。
-指定可能なアトリビュートについては [m:Net::IMAP::FetchData#attr] 
+指定可能なアトリビュートについては [m:Net::IMAP::FetchData#attr]
 を見てください。
 
 - **param** `set` -- 処理対象のメッセージの UID
@@ -956,7 +956,7 @@ quota が整数なら STORAGE をその値に変更します。
 
 - **param** `mailbox` -- quota を設定するメールボックス名(文字列)
 - **param** `quota` -- quotaの値(ストレージのサイズ、もしくは nil)
-- **raise** `Net::IMAP::NoResponseError` -- 指定したメールボックスが quota root 
+- **raise** `Net::IMAP::NoResponseError` -- 指定したメールボックスが quota root
        でない場合、もしくは権限が存在しない場合に発生します。
 
 ### def getquota(mailbox) -> [Net::IMAP::MailboxQuota]
@@ -1008,7 +1008,7 @@ rights に nil を渡すと、空文字列を指定したのと同様、つま�
 
 ### def getacl(mailbox) -> [Net::IMAP::MailboxACLItem]
 
-GETACL コマンドを送り、メールボックスの 
+GETACL コマンドを送り、メールボックスの
 ACL(Access Control List) を取得します。
 
 [m:Net::IMAP#getacl] で指定したメールボックスに
@@ -1284,7 +1284,7 @@ LIST応答の属性
 IMAP の continuation request (命令継続要求) を表すクラスです。
 
 通常このクラスを直接扱うことはありません。
-レスポンスハンドラ([c:Net::IMAP#add_response_handler])
+レスポンスハンドラ([m:Net::IMAP#add_response_handler])
 に渡されます。
 
 詳しくは [RFC:2060] の 7.5 を参照してください。
@@ -1369,7 +1369,7 @@ IMAP のレスポンスにはタグ付きのものとタグなしのものがあ
   - "NO"
   - "BAD"
 
-### def data -> Net::IMAP::ResponseText 
+### def data -> Net::IMAP::ResponseText
 
 レスポンスを解析したオブジェクトを返します。
 
@@ -1410,7 +1410,7 @@ IMAP のレスポンスにはタグ付きのものとタグなしのものがあ
 ### def name -> String
 
 レスポンスコードを表す文字列を返します。
- 
+
 "ALERT"、"PERMANENTFLAGS"、"UIDVALIDITY" などを返します。
 
 ### def data -> object | nil
@@ -1785,7 +1785,7 @@ MIME のメディアタイプを返します。
 ### def media_subtype -> String
 
 MIME のメディアタイプのサブタイプを返します。
- 
+
 media_subtype は obsolete です。
 
 - **SEE** [m:Net::IMAP::BodyTypeBasic#media_type]
@@ -1867,7 +1867,7 @@ MIME のメディアタイプを返します。
 ### def media_subtype -> String
 
 MIME のメディアタイプのサブタイプを返します。
- 
+
 media_subtype は obsolete です。
 
 - **SEE** [m:Net::IMAP::BodyTypeText#media_type]
@@ -1953,7 +1953,7 @@ MIME のメディアタイプを返します。
 ### def media_subtype -> String
 
 MIME のメディアタイプのサブタイプを返します。
- 
+
 media_subtype は obsolete です。
 
 - **SEE** [m:Net::IMAP::BodyTypeMessage#media_type]
@@ -2046,7 +2046,7 @@ MIME のメディアタイプを返します。
 ### def media_subtype -> String
 
 MIME のメディアタイプのサブタイプを返します。
- 
+
 media_subtype は obsolete です。
 
 - **SEE** [RFC:2045], [m:Net::IMAP::BodyTypeText#media_type]
@@ -2094,69 +2094,69 @@ true を返します。
 
 #@# internal classes for authentication
 #@# = class Net::IMAP::LoginAuthenticator
-#@# 
+#@#
 #@# Authenticator for the "LOGIN" authentication type.
 #@# See [[m:Net::IMAP#authenticate]].
-#@# 
+#@#
 #@# == Class Methods
-#@# 
+#@#
 #@# --- new(user, password)
 #@# #@todo
-#@# 
+#@#
 #@# == Instance Methods
-#@# 
+#@#
 #@# --- process(data)
 #@# #@todo
-#@# 
-#@# 
-#@# 
+#@#
+#@#
+#@#
 #@# = class Net::IMAP::CramMD5Authenticator
-#@# 
+#@#
 #@# Authenticator for the "CRAM-MD5" authentication type.
 #@# See [[m:Net::IMAP#authenticate]].
-#@# 
+#@#
 #@# == Class Methods
-#@# 
+#@#
 #@# --- new(user, password)
 #@# #@todo
-#@# 
+#@#
 #@# == Instance Methods
-#@# 
+#@#
 #@# --- process(challenge)
 #@# #@todo
-#@# 
-#@# 
-#@# 
+#@#
+#@#
+#@#
 #@# #@since 1.9.1
 #@# = class Net::IMAP::PlainAuthenticator
-#@# 
+#@#
 #@# Authenticator for the "PLAIN" authentication type.
 #@# See [[m:Net::IMAP#authenticate]].
-#@# 
+#@#
 #@# == Class Methods
-#@# 
+#@#
 #@# --- new(user, password)
 #@# #@todo
-#@# 
+#@#
 #@# == Instance Methods
-#@# 
+#@#
 #@# --- process(data)
 #@# #@todo
-#@# 
-#@# 
-#@# 
+#@#
+#@#
+#@#
 #@# = class Net::IMAP::DigestMD5Authenticator
-#@# 
+#@#
 #@# Authenticator for the "DIGEST-MD5" authentication type.
 #@# See [[m:Net::IMAP#authenticate]].
-#@# 
+#@#
 #@# == Class Methods
-#@# 
+#@#
 #@# --- new(user, password, authname = nil)
 #@# #@todo
-#@# 
+#@#
 #@# == Instance Methods
-#@# 
+#@#
 #@# --- process(challenge)
 #@# #@todo
 #@# #@end

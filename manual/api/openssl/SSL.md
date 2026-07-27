@@ -7,7 +7,7 @@ library: openssl
   - [c:OpenSSL::SSL::SSLServer]
   - [c:OpenSSL::SSL::SSLSocket]
 
-#@# internal 
+#@# internal
 #@# == Module functions
 #@# --- verify_certificate_identity(cert, hostname)
 
@@ -28,7 +28,7 @@ SSL 通信での各種バグ回避コードを有効にするフラグです。
 
 [m:OpenSSL::SSL::SSLContext#options=] で利用します。
 
-通常は [c:OpenSSL::SSL::OP_ALL] でこれらすべてを有効にします。
+通常は [m:OpenSSL::SSL::OP_ALL] でこれらすべてを有効にします。
 特定のフラグのみ無効にしたい場合は例えば
 
 ```ruby
@@ -173,7 +173,7 @@ OpenSSL による通信の圧縮を禁止します。
 
 サーバーモードであるかクライアントモードであるかによって意味がことなります。
 
-サーバーモード: クライアントが証明書を返さない場合に 
+サーバーモード: クライアントが証明書を返さない場合に
 TLS/SSL ハンドシェイクを即座に終了させます。
 このフラグは VERIFY_PEER フラグとともに使われなければなりません。
 
@@ -223,5 +223,5 @@ anonymous cipher が有効であるかどうかは
 
 [c:OpenSSL::SSL] 関連のエラーが生じたときに発生する例外です。
 
-#@# internal 
+#@# internal
 #@# = class OpenSSL::SSL::Nonblock

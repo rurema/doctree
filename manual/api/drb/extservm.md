@@ -18,12 +18,12 @@ DRb::ExtServManager
 
 以下の例を実行するためには、まず server.rb を起動し、その後 client.rb を
 動かします。service.rb は server.rb が client.rb からサービスを要求された
-時に起動されます。また、stop.rbを用いて 
+時に起動されます。また、stop.rbを用いて
 
 ```ruby title="server.rb"
 require 'drb/drb'
 require 'drb/extservm'
-  
+
 Dir.chdir(File.dirname(__FILE__))
 # サービスを起動するコマンドを指定する
 # コマンドは文字列配列、もしくは文字列で指定できる
@@ -33,12 +33,12 @@ Dir.chdir(File.dirname(__FILE__))
 # さらに2つのパラメータ(サーバの druby URI とサービス名)が渡されます
 DRb::ExtServManager.command["No1"] = %w(ruby service.rb service1)
 DRb::ExtServManager.command["No2"] = %w(ruby service.rb service2)
-  
+
 # ExtServManager オブジェクトを生成して
 # drb の front object に指定する
 s = DRb::ExtServManager.new
 DRb.start_service("druby://localhost:10234", s)
-  
+
 # drb のプロセスの終了を待つ
 DRb.thread.join
 ```
@@ -46,35 +46,35 @@ DRb.thread.join
 ```ruby title="service.rb"
 require 'drb/drb'
 require 'drb/extserv'
-  
+
 # サービスを表すクラス
 class Service
   include DRb::DRbUndumped
-  
+
   def initialize(service_name)
     @service_name = service_name
   end
-    
+
   def hello
     "You invoke #{@service_name}"
   end
 end
-  
+
 puts "Start #{ARGV[0]}"
 # ARGV の最後2つを除いた部分は ExtServManager.command で
 # 指定した引数が渡される
 front = Service.new(ARGV[0])
-  
+
 # 通信のため drb を起動する
 # ポート番号に 0 を指定すると ephemeral port から適当なポート番号が
-# 選ばれる 
+# 選ばれる
 server = DRb::DRbServer.new("druby://localhost:0", front)
-  
+
 # ARGV の最後の2つと DRbServer オブジェクトを ExtServ.new に渡す。
 # これによってブローカープロセスにサービスの
 # 窓口となる ExtServ オブジェクトを渡す
 es = DRb::ExtServ.new(ARGV[1], ARGV[2], server)
-  
+
 # サーバスレッドの停止を待つ
 DRb.thread.join
 # サービスを DRb::ExtServ#stop_service で止めると、サーバスレッドが
@@ -84,14 +84,14 @@ puts "Stop #{ARGV[0]}"
 
 ```ruby title="client.rb"
 require 'drb/drb'
-  
+
 DRb.start_service
 s = DRbObject.new_with_uri("druby://localhost:10234")
-  
+
 # No1 と名付けられたサービスを呼び出す
 service1 = s.service("No1").front
 p service1.hello # => "service1"
-  
+
 # No2 と名付けられたサービスを呼び出す
 service2 = s.service("No2").front
 p service2.hello # => "service2"
@@ -99,7 +99,7 @@ p service2.hello # => "service2"
 
 ```ruby title="stop.rb"
 require 'drb/drb'
-  
+
 DRb.start_service
 s = DRbObject.new_with_uri("druby://localhost:10234")
 s.service(ARGV[0]).stop_service
@@ -146,10 +146,10 @@ DRb::ExtServManager オブジェクトを生成して返します。
 
 ### def service(name) -> DRb::ExtServ
 
-name で指定したサービスに関連付けられた [c:DRb::ExtServ] 
+name で指定したサービスに関連付けられた [c:DRb::ExtServ]
 オブジェクトを返します。
 
-サービスを提供するプロセスが起動していない場合は、[m:DRb::ExtServManager.command] 
+サービスを提供するプロセスが起動していない場合は、[m:DRb::ExtServManager.command]
 で指定したプロセスを起動し、そのプロセスが [c:DRb::ExtServ] オブジェクトが
 [m:DRb::ExtServ.new] によって ExtServManager に登録されるのを待ちます。
 その後、登録されたオブジェクトを返します。
@@ -157,7 +157,7 @@ name で指定したサービスに関連付けられた [c:DRb::ExtServ]
 すでにプロセスが起動していた場合は、登録されている DRb::ExtServ オブジェクトを
 返します。
 
-[c:DRb::ExtServ#stop_service] でサービスを停止すると、登録されている
+[m:DRb::ExtServ#stop_service] でサービスを停止すると、登録されている
 DRb::ExtServ は削除され、プロセスは停止します。
 
 - **param** `name` -- サービス名文字列

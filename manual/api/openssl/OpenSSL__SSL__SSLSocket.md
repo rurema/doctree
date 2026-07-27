@@ -17,10 +17,10 @@ SSL/TLS サーバに接続して write します。
 require 'socket'
 require 'openssl'
 include OpenSSL
-  
+
 ctx = SSL::SSLContext.new
 ctx.set_params(verify_mode: OpenSSL::SSL::VERIFY_PEER, verify_hostname: true)
-  
+
 soc = TCPSocket.new('www.example.com', 443)
 ssl = SSL::SSLSocket.new(soc, ctx)
 ssl.hostname = 'www.example.com' # SNI
@@ -28,14 +28,14 @@ ssl.connect
 ssl.post_connection_check('www.example.com')
 raise "verification error" if ssl.verify_result != OpenSSL::X509::V_OK
 print ssl.peer_cert.to_text
-  
+
 # HTTP リクエストを送信
 ssl.write("GET / HTTP/1.1\r\n")
 ssl.write("Host: www.example.com\r\n")
 ssl.write("Connection: close\r\n")
 ssl.write("\r\n")
 print ssl.read
-  
+
 ssl.close
 soc.close
 ```
@@ -94,7 +94,7 @@ true でソケットも close するようになります。
 自分自身を証明する証明書を返します。
 
 自分自身を証明する証明書を使わなかった場合は nil を返します。
-[m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept] 
+[m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept]
 で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼んだ
 場合も nil を返します。
 
@@ -104,7 +104,7 @@ true でソケットも close するようになります。
 
 接続相手の証明書オブジェクトを返します。
 
-[m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept] 
+[m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept]
 で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼ぶと nil を返します。
 
 - **SEE** [m:OpenSSL::SSL::SSLSocket#peer_cert_chain]
@@ -114,7 +114,7 @@ true でソケットも close するようになります。
 接続相手の証明書チェインを [c:OpenSSL::X509::Certificate] オブジェクト
 の配列で返します。
 
-[m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept] 
+[m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept]
 で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼ぶと nil を返します。
 
 以下の順の配列を返します。
@@ -141,7 +141,7 @@ true でソケットも close するようになります。
 ["DES-CBC3-SHA", "TLSv1/SSLv3", 168, 168]
 ```
 
-[m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept] 
+[m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept]
 で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼ぶと nil を返します。
 
 ### def pending -> Integer | nil
@@ -177,11 +177,11 @@ TLS/SSl 通信をクライアントモードとして開始し、
 
 接続後検証を行います。
 
-検証に成功した場合は true を返し、失敗した場合は例外 
+検証に成功した場合は true を返し、失敗した場合は例外
 [c:OpenSSL::SSL::SSLError] を発生させます。
 
 OpenSSL の API では、
-[m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept] 
+[m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept]
 での検証は実用的には不完全です。
 CA が証明書に署名してそれが失効していないことしか確認しません。
 実用上は証明書に記載されている事項を見て、接続先が妥当であるかを確認する
@@ -251,7 +251,7 @@ IO が読み込み待ち、もしくは書き込み待ちになった場合は�
 - **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で
        証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
        場合に発生します
-       (実際は [m:OpenSSL::SSL::SSLError] をこのモジュールで extend した
+       (実際は [c:OpenSSL::SSL::SSLError] をこのモジュールで extend した
        例外オブジェクトが生成されます)
 - **raise** `OpenSSL::SSL::SSLError` -- ソケットが読み込み/書き込み可能状態になるのを
        待つ必要がある場合に発生します。
