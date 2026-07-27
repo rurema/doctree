@@ -257,7 +257,7 @@ end
 
 型が type で要素名が "value" であるような構造体を
 定義([m:Fiddle::Importer#struct])し、
-その構造体のメモリを [m:Fiddle::CStruct#malloc] で確保し、
+その構造体のメモリを [m:Fiddle::CStruct.malloc] で確保し、
 確保したメモリを保持しているオブジェクトを返します。
 
 type は "int", "void*" といった文字列で型を指定します。

@@ -20,7 +20,7 @@ ri のためのファイルを生成するためのクラスです。
 
 [c:RDoc::Generator::RI] オブジェクトを初期化します。
 
-- **param** `store` -- [c:RDoc::Store] オブジェクトを指定します。
+- **param** `store` -- `RDoc::Store` オブジェクトを指定します。
 
 - **param** `options` -- [c:RDoc::Options] オブジェクトを指定します。
 

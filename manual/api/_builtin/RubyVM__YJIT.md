@@ -9,7 +9,11 @@ YJIT (Yet Another Ruby JIT) の制御・情報取得のためのモジュール�
 YJIT は CRuby に組み込まれた JIT (Just-in-time compiler) コンパイラで、
 Ruby 3.1 で実験的機能として導入されました([feature:18229])。
 Ruby 3.2 で「実験的」の位置づけが外れ、Ruby 3.3 では実行時に有効化する
+#%since 3.3
 [m:RubyVM::YJIT.enable] が追加されるなど、以降のバージョンでも
+#%else
+`RubyVM::YJIT.enable` が追加されるなど、以降のバージョンでも
+#%end
 統計収集(`--yjit-stats`)やコンパイルログ(`--yjit-log`)まわりの
 機能追加が続いています。
 
@@ -17,7 +21,11 @@ Ruby 3.2 で「実験的」の位置づけが外れ、Ruby 3.3 では実行時�
 
 * コマンドラインオプション `--yjit`
 * 環境変数 `RUBY_YJIT_ENABLE`
+#%since 3.3
 * (Ruby 3.3 以降) [m:RubyVM::YJIT.enable] による実行時の有効化
+#%else
+* (Ruby 3.3 以降) `RubyVM::YJIT.enable` による実行時の有効化
+#%end
 
 このモジュールは、YJIT が対応していないプラットフォームでは
 定義されないことがあります。
@@ -43,13 +51,19 @@ RubyVM::YJIT.enabled? # => false
 JIT の有効・無効はコマンドラインオプションや環境変数など実行環境に依存するため、
 実行結果は環境によって異なります。
 
+#%since 3.3
 - **SEE** [m:RubyVM::YJIT.enable]
+#%end
 
 ### def stats_enabled? -> bool
 
 `--yjit-stats` が指定されているなど、統計情報の収集が有効かどうかを返します。
 
+#%since 3.3
 - **SEE** [m:RubyVM::YJIT.runtime_stats], [m:RubyVM::YJIT.reset_stats!], [m:RubyVM::YJIT.enable]
+#%else
+- **SEE** [m:RubyVM::YJIT.runtime_stats], [m:RubyVM::YJIT.reset_stats!]
+#%end
 
 #%since 3.4
 ### def log_enabled? -> bool

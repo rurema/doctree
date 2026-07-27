@@ -11,7 +11,7 @@ category: Thread
 また、普通のオブジェクトを [m:Object#extend] により Mutex にする事ができます。
 
 このモジュールによるロックは再入不可能です。再入可能な同等品が必要な場合は
-[c:Sync_m] の利用を考えてください。
+`Sync_m` の利用を考えてください。
 
 「mu_」の付かないメソッド([m:Mutex_m#lock], [m:Mutex_m#synchronize], 
 [m:Mutex_m#locked?], [m:Mutex_m#try_lock], [m:Mutex_m#unlock])

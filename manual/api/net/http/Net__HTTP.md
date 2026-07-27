@@ -532,7 +532,7 @@ nilを設定するとタイムアウトしなくなります。
 
 以下のコネクションを開くメソッドで有効です。
 
-  - [m:Net::HTTP.open]
+  - [m:Net::HTTP.start]
   - [m:Net::HTTP#start]
 
 - **param** `second` -- 待つ秒数を指定します。

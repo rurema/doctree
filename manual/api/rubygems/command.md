@@ -29,7 +29,7 @@ $HOME/.gemrc から読み込んだ引数を追加します。
 
 - **param** `opts` -- オプションを指定します。
 
-- **SEE** [m:OptionParser#make_switch]
+- **SEE** `OptionParser#make_switch`
 
 ### def arguments -> String
 

@@ -163,7 +163,7 @@ p ObjectSpace.reachable_objects_from(['a', 'a', 'a'])
 ```
 
 obj にマーク不能なオブジェクト(true、false、nil、[c:Symbol]、
-[c:Fixnum]、Flonum(即値の [c:Float] オブジェクト))を指定した場合は
+`Fixnum`、Flonum(即値の [c:Float] オブジェクト))を指定した場合は
 nil を返します。
 
 ```ruby title="例"

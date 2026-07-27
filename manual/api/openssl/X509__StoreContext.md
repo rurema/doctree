@@ -9,7 +9,7 @@ library: openssl
 実際の検証を行う機能を持ちます。
 
 また、検証の途中の状態を保持するためにも使われます。
-検証フィルター([m:OpenSSL::X509::Store#verify_proc])の
+検証フィルター([m:OpenSSL::X509::Store#verify_callback])の
 引数として渡されます。
 
 検証結果の詳細情報を保持するためにも使われます。

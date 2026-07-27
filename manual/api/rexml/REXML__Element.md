@@ -696,7 +696,7 @@ p e.delete_attribute("x"); e # => <E y:x='bar'/>
 
 ### def write(output = $stdout, indent = -1, transitive = false, ie_hack = false)
 
-このメソッドは deprecated です。 [c:REXML::Formatter] を代わりに
+このメソッドは deprecated です。 [c:REXML::Formatters::Default] を代わりに
 使ってください。
 
 output にその要素を文字列化したものを(子要素を含め)出力します。

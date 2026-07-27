@@ -256,7 +256,7 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
 
 デバッグモードが on になっていれば真を返します。
 
-- **SEE** [m:Net::IMAP#debug=]
+- **SEE** [m:Net::IMAP.debug=]
 
 ### def debug=(val)
 
@@ -265,7 +265,7 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
 真を渡すと on になります。
 
 - **param** `val` -- 設定するデバッグモードの on/off の真偽値
-- **SEE** [m:Net::IMAP#debug]
+- **SEE** [m:Net::IMAP.debug]
 
 ### def add_authenticator(auth_type, authenticator) -> ()
 
@@ -1073,8 +1073,8 @@ options で [lib:openssl] に渡すオプションを指定します。
 [m:OpenSSL::SSL::SSLContext#set_params] の引数と同じ意味です。
 
 互換性のため、certs で証明書or証明書ディレクトリのファイル名(文字列)、
-verify で検証するかどうか([m:Net::IMAP::VERIFY_PEER]、
-[m:Net::IMAP::VERIFY_NONE]に対応します)を
+verify で検証するかどうか([m:OpenSSL::SSL::VERIFY_PEER]、
+[m:OpenSSL::SSL::VERIFY_NONE]に対応します)を
 指定できます。
 
 - **param** `options` -- SSL/TLS のオプション([c:Hash] オブジェクト)

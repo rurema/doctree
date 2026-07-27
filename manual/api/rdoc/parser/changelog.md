@@ -7,7 +7,7 @@ require:
 ---
 ChangeLog ファイルを解析するためのサブライブラリです。
 
-ChangeLog ファイルを解析して、[c:RDoc::Markup::Document] オブジェクト
+ChangeLog ファイルを解析して、`RDoc::Markup::Document` オブジェクト
 に変換します。出力される HTML はサイドバーに日ごとに分けられます。
 
 このサブライブラリは主に MRI の ChangeLog を解析するために使われますが、

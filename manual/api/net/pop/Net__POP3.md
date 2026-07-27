@@ -401,7 +401,7 @@ POP session started: pop.example.com:110 (POP)
 
 読み込みでブロックしてよい最大秒数を返します。
 
-この秒数たっても読みこめなければ例外 [c:ReadTimeout] を発生します。
+この秒数たっても読みこめなければ例外 [c:Net::ReadTimeout] を発生します。
 
 デフォルトは60秒です。
 
@@ -411,7 +411,7 @@ POP session started: pop.example.com:110 (POP)
 
 読み込みでブロックしてよい最大秒数を設定します。
 
-この秒数たっても読みこめなければ例外 [c:ReadTimeout] を発生します。
+この秒数たっても読みこめなければ例外 [c:Net::ReadTimeout] を発生します。
 
 - **param** `n` -- タイムアウトまでの秒数
 - **SEE** [m:Net::POP3#read_timeout]

@@ -21,7 +21,7 @@ RSS::Parser.parse は String の RSSを パースします(使用するXMLパー
 サによっては File や IO オブジェクトなどでもパース可能です)。
 - RSS 1.0をパースした場合は [c:RSS::RDF] オブジェクト
 - RSS 0.9x/2.0をパースした場合は [c:RSS::Rss] オブジェクト
-- Atom をパースした場合は [c:RSS::Atom::Feed] オブジェクト
+- Atom をパースした場合は `RSS::Atom::Feed` オブジェクト
 をそれぞれ返します。パースした
 String が well formed な XML で無い場合は、
 例外 [c:RSS::NotWellFormedError] が発生します。well formed な
@@ -70,7 +70,7 @@ end
 生させたければ、RSS::Parser.parse の第三引数に false を指定して
 ください。こうすると、パース中に知らない要素に遭遇した時に
 [c:RSS::UnknownTagError] 例外が発生します。RSS::UnknownTagError
-クラスは [c:RSS::InvalidError] クラスのサブクラスです。
+クラスは [c:RSS::InvalidRSSError] クラスのサブクラスです。
 
 以下のようにすると、より厳密にパースできます。
 
@@ -81,7 +81,7 @@ RSS::Parser.parse(rss_source, true, false)
 ### パースされたフィード
 
 フィードをパースすると  [c:RSS::RDF], [c:RSS::RDF::Channel],
-[c:RSS::Rss], [c:RSS::Atom::Feed] 等のオブジェクトになります。
+[c:RSS::Rss], `RSS::Atom::Feed` 等のオブジェクトになります。
 各オブジェクトで子要素オブジェクトにアクセスするために、要素名と
 同じ名前のアクセサがあります。
 

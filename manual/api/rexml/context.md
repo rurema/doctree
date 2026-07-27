@@ -17,7 +17,7 @@
   文字列の配列で指定します。
   すべての要素で無視して欲しい場合は :all を指定します。
   これが設定された場合、空白のみからなる text node は追加されません。
-  [m:REXML::Element#ignore_whitespace_nodes] も参照してください。
+  `REXML::Element#ignore_whitespace_nodes` も参照してください。
 - **`:raw`**:
   raw mode で取り扱いをして欲しい要素の名前の集合を
   文字列の配列で指定します。

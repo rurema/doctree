@@ -1060,7 +1060,7 @@ m.rect == [m.real, m.imag]  # ==> true for all matrices m
 
 他の数値オブジェクトとの変換を行います。
 
-他の数値オブジェクトを[c:Matrix::Scalar]のオブジェクトに変換し、selfとの組を配列として返します。
+他の数値オブジェクトを`Matrix::Scalar`のオブジェクトに変換し、selfとの組を配列として返します。
 
 - **param** `other` -- 変換する数値オブジェクト
 

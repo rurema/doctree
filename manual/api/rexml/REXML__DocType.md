@@ -126,7 +126,7 @@ DTD 内の属性リスト宣言で、 element という名前の要素に対し�
 属性の名前とデフォルト値を REXML::Attribute の配列で返します。
 
 名前とデフォルト値のペアは、各 Attribute オブジェクトの
-[m:REXML::Attribute#name] と
+[m:REXML::Namespace#name] と
 [m:REXML::Attribute#value] で表現されます。
 
 ```ruby
@@ -193,7 +193,7 @@ external_id ([m:REXML::DocType#external_id]) と
 
 output に DTD を出力します。
 
-このメソッドは deprecated です。[c:REXML::Formatter] で
+このメソッドは deprecated です。[c:REXML::Formatters::Default] で
 出力してください。
 
 - **param** `output` -- 出力先の IO オブジェクト

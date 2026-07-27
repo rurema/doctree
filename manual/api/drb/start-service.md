@@ -38,7 +38,7 @@ config で Hash で設定を渡します。以下の項目が利用できます�
   - [m:DRb::DRbServer.default_argc_limit]
   - [m:DRb::DRbServer.default_id_conv]
   - [m:DRb::DRbServer.default_load_limit]
-  - [m:DRb::DRbServer.default_safe_level]
+  - `DRb::DRbServer.default_safe_level`
   - [m:DRb::DRbServer.verbose=]
 
 config に Hash以外を渡すと、ACL(Access Control List)として取り扱われます。

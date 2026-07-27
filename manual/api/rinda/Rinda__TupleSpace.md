@@ -68,8 +68,8 @@ event で指定した種類のイベントの監視を開始します。
 イベントを生じさせたタプルがpattern にマッチした場合にのみ報告されます。
 
 イベントが生じた場合、
-このメソッドの返り値の [c:Rinda::NotifyTemplateEntry] を経由し、
-[m:Rinda::NotifyTemplateEntry#each] を用いて報告を受け取ります。
+このメソッドの返り値の `Rinda::NotifyTemplateEntry` を経由し、
+`Rinda::NotifyTemplateEntry#each` を用いて報告を受け取ります。
 
 sec で監視期間を秒数で指定できます。 nil で無限に監視し続けます。
 

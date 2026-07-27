@@ -3,7 +3,7 @@ type: library
 category: Windows
 ---
 win32/registry は Win32 プラットフォームでレジストリをアクセスするための
-ライブラリです。Win32 API の呼び出しに [c:Win32API] を使います。
+ライブラリです。Win32 API の呼び出しに `Win32API` を使います。
 
 ```text
 require 'win32/registry'

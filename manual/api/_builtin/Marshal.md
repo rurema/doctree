@@ -28,7 +28,7 @@ obj を指定された出力先に再帰的に出力します。
 - システムがオブジェクトの状態を保持するもの。具体的には以下のイン
    スタンス。[c:Dir], [c:File::Stat], [c:IO] とそのサブクラス
    [c:File], [c:Socket] など。
-- [c:MatchData], [c:Data], [c:Method], [c:UnboundMethod],
+- [c:MatchData], [c:Method], [c:UnboundMethod],
    [c:Proc], [c:Thread], [c:ThreadGroup], [c:Continuation]
    のインスタンス。
 - 特異メソッドを定義したオブジェクト

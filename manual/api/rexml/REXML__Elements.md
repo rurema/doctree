@@ -106,7 +106,7 @@ element が子要素でない場合は -1 を返します。
 返り値は 1-origin です。
 
 - **param** `element` -- インデックスを知りたい要素([c:REXML::Element] オブジェクト)
-- **SEE** [m:REXML::Element#\[\]]
+- **SEE** [m:REXML::Elements#\[\]]
 
 ### def delete(element) -> Element
 

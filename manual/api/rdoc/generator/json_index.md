@@ -96,7 +96,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 - **param** `parent_generator` -- 親となるジェネレータオブジェクトを指定します。
                         RDoc::Generator::JsonIndex#class_dir や
                         #file_dir を決めるのに使用します。
-                        他のジェネレータとは異なり、[c:RDoc::Store]
+                        他のジェネレータとは異なり、`RDoc::Store`
                         オブジェクトではない点に注意してください。
 
 - **param** `options` -- [c:RDoc::Options] オブジェクトを指定します。

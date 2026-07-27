@@ -27,7 +27,7 @@ type: library
 
 - **param** `pass` -- パスワードを指定します。
 
-- **SEE** [m:WEBrick::HTTPAuth::BasicAuth#make_passwd], [m:WEBrick::HTTPAuth::DigestAuth#make_passwd]
+- **SEE** [m:WEBrick::HTTPAuth::BasicAuth.make_passwd], [m:WEBrick::HTTPAuth::DigestAuth.make_passwd]
 
 ### def set_passwd(realm, user, pass)
 #%# -> discard

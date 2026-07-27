@@ -113,7 +113,7 @@ dRuby サーバを起動し、DRbServerのインスタンスを返します。
 
 サーバが verbose mode ならば真を返します。
 
-- **SEE** [m:DRb::DRbObject#verbose=]
+- **SEE** [m:DRb::DRbServer#verbose=]
 
 ### def verbose=(on) 
 
@@ -124,7 +124,7 @@ verbose mode が on の場合は失敗したメソッド呼出のログが標準
 
 - **param** `on` -- 真を渡すと verbose mode が on になります
 
-- **SEE** [m:DRb::DRbObject#verbose]
+- **SEE** [m:DRb::DRbServer#verbose]
 
 ### def config  -> Hash
 

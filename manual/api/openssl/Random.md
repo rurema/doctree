@@ -73,7 +73,7 @@ EGD(Entropy Gathering Daemon) からエントロピーを得、
 
 filename で指定した Unix domain socket から EGD に問い合わせ、
 255 バイト分のエントロピーを取得します。
-[m:OpenSSL::Random.egd_bytes](filename, 255) と同じです。
+[m:OpenSSL::Random?.egd_bytes](filename, 255) と同じです。
 
 - **param** `filename` -- EGD のソケットのファイル名
 - **raise** `OpenSSL::Random::RandomError` -- EGD からのエントロピー取得に失敗した場合に発生します。

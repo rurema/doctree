@@ -119,7 +119,7 @@ RTLD_DEFAULT で表わされる擬似ハンドルを表します。
 
 dlopen のフラグ RTLD_GLOBAL を表す定数です。
 
-[m:DL::Handle.new] の flags として用います。
+[m:Fiddle::Handle.new] の flags として用います。
 
 詳しくは [man:dlopen(3)] を見てください。
 
@@ -127,7 +127,7 @@ dlopen のフラグ RTLD_GLOBAL を表す定数です。
 
 dlopen のフラグ RTLD_LAZY を表す定数です。
 
-[m:DL::Handle.new] の flags として用います。
+[m:Fiddle::Handle.new] の flags として用います。
 
 詳しくは [man:dlopen(3)] を見てください。
 
@@ -135,6 +135,6 @@ dlopen のフラグ RTLD_LAZY を表す定数です。
 
 dlopen のフラグ RTLD_NOW を表す定数です。
 
-[m:DL::Handle.new] の flags として用います。
+[m:Fiddle::Handle.new] の flags として用います。
 
 詳しくは [man:dlopen(3)] を見てください。

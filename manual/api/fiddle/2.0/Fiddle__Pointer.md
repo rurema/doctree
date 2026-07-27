@@ -252,15 +252,15 @@ p cptr.to_s         #=> "aAA"
 
 ### def free     -> Fiddle::CFunc
 
-GC がメモリを解放するのに使用する [c:Fiddle::CFunc] オブジェクトを返します。
+GC がメモリを解放するのに使用する `Fiddle::CFunc` オブジェクトを返します。
 
 これは普通 [m:Fiddle::Pointer#free=] や [m:Fiddle::Pointer.new] によって設定されます。
 
 ### def free=(cfunc)
 
-GC が自身を解放するのに使う関数を [c:Fiddle::CFunc] で指定します。
+GC が自身を解放するのに使う関数を `Fiddle::CFunc` で指定します。
 
-- **param** `cfunc` -- 自身を解放するのに使われる関数を [c:Fiddle::CFunc] か整数で指定します。
+- **param** `cfunc` -- 自身を解放するのに使われる関数を `Fiddle::CFunc` か整数で指定します。
 
 ### def null?    -> bool
 

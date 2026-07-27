@@ -207,7 +207,7 @@ DER形式の文字列を解析し、そこに含まれる ASN.1 の値
 ASN.1 の Boolean 型の値を表現する OpenSSL::ASN1::Boolean オブジェクトを
 生成します。
 
-[m:OpenSSL::ASN::Boolean.new] と同じです。
+[m:OpenSSL::ASN1::Boolean.new] と同じです。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(true もしくは false)
 - **param** `tag` -- タグ番号

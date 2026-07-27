@@ -16,9 +16,9 @@ Psych::Nodes::Stream オブジェクトを生成して返します。
 
 encoding には stream に使われるエンコーディングを指定します。
 以下のいずれかを指定します。
-  - [m:Psych::Nodes::Node::UTF8]
-  - [m:Psych::Nodes::Node::UTF16BE]
-  - [m:Psych::Nodes::Node::UTF16LE]
+  - [m:Psych::Nodes::Stream::UTF8]
+  - [m:Psych::Nodes::Stream::UTF16BE]
+  - [m:Psych::Nodes::Stream::UTF16LE]
 
 - **param** `encoding` -- エンコーディング
 
@@ -34,9 +34,9 @@ stream に使われるエンコーディングを返します。
 stream に使われるエンコーディングを指定します。
 
 以下のいずれかを指定します。
-  - [m:Psych::Nodes::Node::UTF8]
-  - [m:Psych::Nodes::Node::UTF16BE]
-  - [m:Psych::Nodes::Node::UTF16LE]
+  - [m:Psych::Nodes::Stream::UTF8]
+  - [m:Psych::Nodes::Stream::UTF16BE]
+  - [m:Psych::Nodes::Stream::UTF16LE]
 
 - **param** `enc` -- 設定するエンコーディング
 - **SEE** [m:Psych::Nodes::Stream#encoding]

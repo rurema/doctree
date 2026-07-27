@@ -48,7 +48,7 @@ Gem Spec ファイルを元にして Gem パッケージを作成するタスク
 
 タスクを定義します。
 
-[m:GemPackageTask.new] にブロックが与えられている場合に、自動的に呼び出されます。
+[m:Rake::GemPackageTask.new] にブロックが与えられている場合に、自動的に呼び出されます。
 
 ### def gem_file -> String
 

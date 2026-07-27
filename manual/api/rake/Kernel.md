@@ -45,7 +45,7 @@ end
 
 ファイルを作成するタスクを定義します。
 
-主に [m:Kernel?.directory] を定義するために使用します。
+主に [m:Kernel#directory] を定義するために使用します。
 
 ### def directory(dir) -> ()
 

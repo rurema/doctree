@@ -415,7 +415,7 @@ module M1::M2
 end
 ```
 
-ネストしているクラスの一覧は [m:Class.nesting]（あるいは[m:Module.nesting]）で取得できます。
+ネストしているクラスの一覧は `Class.nesting`（あるいは[m:Module.nesting]）で取得できます。
 
 ```ruby
 module M1

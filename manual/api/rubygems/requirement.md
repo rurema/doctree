@@ -15,7 +15,7 @@ Gem の必要条件を扱うクラスです。
 
 このクラスのインスタンスには複数の必要条件を含めることができます。
 
-[c::Gem::Dependency] の内部で使われています。
+[c:Gem::Dependency] の内部で使われています。
 
 ## Constants
 
@@ -80,7 +80,7 @@ pp Gem::Requirement.new("~> 3.2.1")
 # => Gem::Requirement.new(["~> 3.2.1"])
 ```
 
-- **SEE** [m:Gem::Requirement#parse], [m:Gem::Requirement.create]
+- **SEE** [m:Gem::Requirement.parse], [m:Gem::Requirement.create]
 
 ### def parse(obj) -> Array
 
@@ -201,7 +201,7 @@ p req.to_s # => "< 5.0, >= 1.9"
 わかりやすい形で、条件を表す文字列を返します。
 pp メソッドで出力する際に、内部で用いられます。
 
-- **param** `PP` -- [c::PP] オブジェクトを指定します。
+- **param** `PP` -- [c:PP] オブジェクトを指定します。
 
 ```ruby
 req = Gem::Requirement.new(["< 5.0", ">= 1.9"])

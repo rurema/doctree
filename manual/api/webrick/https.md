@@ -34,7 +34,7 @@ require:
 
 クライアント証明書を表すオブジェクトを返します。
 
-- **SEE** [m:OpenSSL::X509::Certificate]
+- **SEE** [c:OpenSSL::X509::Certificate]
 
 # redefine WEBrick::HTTPRequest
 

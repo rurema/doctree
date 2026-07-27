@@ -75,9 +75,9 @@ Ruby オブジェクトから YAML AST への変換のための準備をしま�
 メソッドを呼び出し、変換の準備をします。
 
 encoding には以下のいずれかを指定できます。
-  - [m:Psych::Nodes::Node::UTF8]
-  - [m:Psych::Nodes::Node::UTF16BE]
-  - [m:Psych::Nodes::Node::UTF16LE]
+  - [m:Psych::Nodes::Stream::UTF8]
+  - [m:Psych::Nodes::Stream::UTF16BE]
+  - [m:Psych::Nodes::Stream::UTF16LE]
 
 - **param** `encoding` -- YAML AST に設定するエンコーディング
 

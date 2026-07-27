@@ -50,7 +50,7 @@ p doctype.children.find_all{|child| REXML::ExternalEntity === child }.map(&:to_s
 
 output へ self を文字列化して出力します。
 
-このメソッドは deprecated です。[c:REXML::Formatter] で
+このメソッドは deprecated です。[c:REXML::Formatters::Default] で
 出力してください。
 
 - **param** `output` -- 出力先の IO オブジェクト

@@ -13,7 +13,7 @@ library: socket
 
 ### def do_not_reverse_lookup -> bool
 
-[m:Socket#do_not_reverse_lookup] の Socket オブジェクト生成時の
+[m:BasicSocket#do_not_reverse_lookup] の Socket オブジェクト生成時の
 デフォルト値を返します。
 
 この設定は大域的に作用します。
