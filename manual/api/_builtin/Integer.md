@@ -959,7 +959,8 @@ p (2**12+1).bit_length    # => 13
 
 ### def allbits?(mask) -> bool
 
-z`mask` で `1` が立っているビットがすべて `self` でも `1` なら `true` を返します。
+`mask` で `1` が立っているビットがすべて `self` でも `1` なら `true` を返します。
+
 `self & mask == mask` と等価です。
 
 - **param** `mask` -- ビットマスクを整数で指定します。
