@@ -51,7 +51,7 @@ server には drb の通信に用いる [c:DRb::DRbServer] オブジェクトを
 
 サービスを停止します。
 
-[m:DRb::ExtServManager] オブジェクトにサービスの停止を伝達し、
+[c:DRb::ExtServManager] オブジェクトにサービスの停止を伝達し、
 [m:DRb::DRbServer#stop_service] でサーバを停止します。
 
 このメソッドはリモートから起動できます。
