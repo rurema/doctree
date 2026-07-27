@@ -59,11 +59,11 @@ r = Rational(3, 4)
 p r ** Rational(2, 1)  # => (9/16)
 p r ** 2             # => (9/16)
 p r ** 2.0           # => 0.5625
-p r ** Rational(1, 2)  # => 0.866025403784439
+p r ** Rational(1, 2)  # => 0.8660254037844386
 ```
 
 #%until 3.4
-計算結果の分母・分子が巨大になりすぎるとき、警告を出したうえで [m:Float::INFINITY]（基数によっては [m:Float::NaN]）を返します。
+計算結果の分母・分子が巨大になりすぎるとき、警告を出したうえで [m:Float::INFINITY]（基数によっては [m:Float::NAN]）を返します。
 
 ```ruby title="計算を放棄して Float::INFINITY を返す例"
 p Rational(2) ** 100000000
@@ -292,7 +292,7 @@ Rational(1).fdiv(Complex(0, 1))  # ~> RangeError
 
 - **param** `precision` -- 計算結果の精度
 
-- **raise** `TypeError` -- precision に整数以外のものを指定すると発生します。
+- **raise** `TypeError` -- `precision` に整数以外のものを指定すると発生します。
 
 ```ruby title="例"
 p Rational(3).floor   # => 3
@@ -309,7 +309,7 @@ p Rational(-7, 4).to_i  # => -1
 p Rational(-7, 4).floor # => -2
 ```
 
-precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
+`precision` を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
 数か [c:Rational] を返します。
 
 ```ruby title="例"
@@ -386,7 +386,7 @@ p r.rationalize(Rational(0.1))  # => (1/3)
 
 - **param** `precision` -- 計算結果の精度
 
-- **raise** `TypeError` -- precision に整数以外のものを指定すると発生します。
+- **raise** `TypeError` -- `precision` に整数以外のものを指定すると発生します。
 
 ```ruby title="例"
 p Rational(3).round   # => 3
@@ -394,7 +394,7 @@ p Rational(2, 3).round  # => 1
 p Rational(-3, 2).round # => -2
 ```
 
-precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
+`precision` を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
 数か [c:Rational] を返します。
 
 ```ruby title="例"
@@ -433,7 +433,7 @@ p Rational(-10**1000).to_f   # => -Infinity
 
 - **param** `precision` -- 計算結果の精度
 
-- **raise** `TypeError` -- precision に整数以外のものを指定すると発生します。
+- **raise** `TypeError` -- `precision` に整数以外のものを指定すると発生します。
 
 ```ruby title="例"
 p Rational(2, 3).to_i # => 0
@@ -443,7 +443,7 @@ p Rational(98, 71).to_i # => 1
 p Rational(-31, 2).to_i # => -15
 ```
 
-precision を指定した場合は指定した桁数で切り捨てた整数か
+`precision` を指定した場合は指定した桁数で切り捨てた整数か
 [c:Rational] を返します。
 
 ```ruby title="例"
