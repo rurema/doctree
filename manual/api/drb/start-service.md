@@ -49,5 +49,5 @@ config に Hash以外を渡すと、ACL(Access Control List)として取り扱�
 - **param** `front` -- フロントオブジェクト
 - **param** `config` -- オプション設定の [c:Hash]
 
-- **raise** `DRb::DRbBadURI` -- URI の schema が不正(サポートされていないものである)場合に
+- **raise** `DRb::DRbBadURI` -- URI の scheme が不正(サポートされていないものである)場合に
        発生します

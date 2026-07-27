@@ -18,7 +18,7 @@ URI を指定することで TCP/IP で通信します。
 例としては [lib:drb/unix] で定義している [c:DRb::DRbUNIXSocket] や
 サンプルの sample/drb/http0.rb、 sample/drb/http0serv.rb などを見てください。
 
-これらの例を見てわかるように、通信クラスでは取り扱えない URI が open 
+これらの例を見てわかるように、通信クラスでは取り扱えない URI が open
 や open_server に渡された場合は例外 [c:DRb::DRbBadScheme] を
 raise することで、その URI が取り扱えないことを drb ライブラリに
 伝えます。
@@ -49,7 +49,7 @@ open/open_server を呼び出して、接続を確立しようとします。
 [c:DRb::DRbBadScheme] を発生させなければなりません。
 DRbProtocol module に登録されたクラスでは URI を取り扱えない
 場合は [c:DRb::DRbBadURI] が発生します。
-URI は妥当であるが、通信に問題が発生した場合は [c:DRb::DRbConnError] 
+URI は妥当であるが、通信に問題が発生した場合は [c:DRb::DRbConnError]
 を発生させる必要があります。
 
 #### open_server
@@ -98,7 +98,7 @@ URI は妥当であるが、通信に問題が発生した場合は [c:DRb::DRbC
 があります。
 
 - **`recv_request`**:
-  クライアントからのリクエストを受け取り 
+  クライアントからのリクエストを受け取り
   [object, message, args, block] という配列を返します。
   DRbMessage#recv_request を呼び出してストリームから
   メッセージを読み取る、というのが最も簡単な
@@ -127,14 +127,14 @@ URI は妥当であるが、通信に問題が発生した場合は [c:DRb::DRbC
 
 通信エラーが発生したことを意味する例外クラス。
 
-# class DRb::DRbBadScheme < DRb::DRbError 
+# class DRb::DRbBadScheme < DRb::DRbError
 
-プロトコルクラスが受け取った URI の schema が
+プロトコルクラスが受け取った URI の scheme が
 そのクラスでサポートされていないことを、伝えるための例外。
 
 - **SEE** [c:DRb::DRbProtocol]
 
-# class DRb::DRbBadURI < DRb::DRbError 
+# class DRb::DRbBadURI < DRb::DRbError
 
-URI に含まれている schema をサポートしているプロトコルが見付からない
+URI に含まれている scheme をサポートしているプロトコルが見付からない
 ことを意味する例外クラス。
