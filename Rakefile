@@ -191,6 +191,33 @@ end
 desc "Generate static html"
 multitask :statichtml => CI_VERSIONS.map {|version| "statichtml:#{version}" }
 
+# 参照リンク切れの検査(bitclust checklink)。[c:]/[m:]/[lib:]/[d:]/[f:]
+# 参照の指す先が同じ版の DB に存在するかを、実際の描画経路で検証する。
+# 既知のリンク切れが残っているため default タスクにはまだ入れていない
+# (棚卸しが済んでゼロになったら default 入りさせて回帰を防ぐ)
+def check_links(version)
+  check_bitclust_version!
+  db = "/tmp/db-#{version}"
+  generate_database(version) unless File.exist?(db)
+  puts "check links of #{version}"
+  # capi は generate_database で同じ prefix に構築されるので [f:] も検証する
+  succeeded = system("bundle", "exec", "bitclust", "--database=#{db}",
+                     "checklink", "--capi-database=#{db}")
+  raise "Broken links found in #{version} (see above)" unless succeeded
+end
+
+namespace :check_links do
+  ALL_VERSIONS.each do |version|
+    desc "Check broken cross references of #{version}"
+    task version do
+      check_links(version)
+    end
+  end
+end
+
+desc "Check broken cross references (CI versions)"
+task :check_links => CI_VERSIONS.map {|version| "check_links:#{version}" }
+
 desc "Create index"
 task :create_index do
   links = []
