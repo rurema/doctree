@@ -48,7 +48,7 @@ p buf.get_string(0, 4)  # => "Ruby"
 
 OS のページサイズをバイト数で表した値です。
 
-[m:IO::Buffer.new] は、size がこの値より大きい場合に仮想メモリ機構を用いて
+[m:IO::Buffer.new] は、size がこの値以上の場合に仮想メモリ機構を用いて
 バッファを確保します。
 
 値は環境依存です。
@@ -115,6 +115,90 @@ p IO::Buffer::HOST_ENDIAN == IO::Buffer::LITTLE_ENDIAN # => true
 
 ## Class Methods
 
+### def for(string) -> IO::Buffer
+### def for(string) {|buffer| ... } -> object
+
+文字列 string のメモリ領域を参照する、コピーを伴わないバッファを作成します。
+
+ブロックを渡さない場合は、string の内容を複製した凍結済みの文字列を
+バッファの元として使い、読み取り専用のバッファを返します。
+元の文字列とは切り離されるため、あとから元の文字列を変更してもバッファの
+内容は変わりません。
+
+ブロックを渡した場合は、string 自身のメモリ領域を参照するバッファを
+ブロックに渡し、ブロックの評価結果を返します。バッファへの書き込みは
+string に反映されます。ブロックの実行中、string は変更できません。
+string が freeze されている場合は読み取り専用のバッファになります。
+
+- **param** `string` -- バッファの元にする [c:String] を指定します。
+
+```ruby title="例: ブロックを渡さない場合"
+buffer = IO::Buffer.for("test")
+p buffer.get_string # => "test"
+p buffer.external?  # => true
+p buffer.readonly?  # => true
+
+# 元の文字列を変更してもバッファには影響しない
+str = +"test"
+buffer = IO::Buffer.for(str)
+str << "XY"
+p str               # => "testXY"
+p buffer.get_string # => "test"
+```
+
+```ruby title="例: ブロックを渡した場合"
+str = +"test"
+IO::Buffer.for(str) do |buffer|
+  p buffer.readonly? # => false
+  buffer.set_string("Ruby")
+end
+p str # => "Ruby"
+```
+
+- **SEE** [m:IO::Buffer.new], [m:IO::Buffer.map]
+
+### def map(file, size = nil, offset = 0, flags = 0) -> IO::Buffer
+
+ファイルをメモリにマップしたバッファを作成して返します。
+
+既定では書き込み可能かつ共有(shared)のマップになるため、file は書き込み
+可能な状態で開いておく必要があります。読み込み専用で開いたファイルを
+マップするには、flags に [m:IO::Buffer::READONLY] を指定します。
+[m:IO::Buffer::PRIVATE] を指定するとコピーオンライトのマップになり、
+バッファへの変更はファイルにも他のプロセスにも反映されません。
+
+- **param** `file` -- マップする [c:File] を指定します。
+
+- **param** `size` -- マップするバイト数を指定します。省略するとファイル全体を
+             マップします。0 を指定した場合と空のファイルを指定した場合は
+             エラーになります。
+
+- **param** `offset` -- マップを開始する位置をファイルの先頭からのバイト数で
+             指定します。指定できる値はシステム依存で、多くの環境では
+             ページサイズの倍数である必要があります。
+
+- **param** `flags` -- [m:IO::Buffer::READONLY] や [m:IO::Buffer::PRIVATE] を
+             指定します。
+
+```ruby title="例: 読み込み専用でマップする"
+File.write("test.txt", "hello world")
+
+buffer = IO::Buffer.map(File.open("test.txt"), nil, 0, IO::Buffer::READONLY)
+p buffer.get_string # => "hello world"
+p buffer.mapped?    # => true
+p buffer.readonly?  # => true
+```
+
+```ruby title="例: 書き込み可能なマップ"
+File.write("test.txt", "hello world")
+
+buffer = IO::Buffer.map(File.open("test.txt", "r+"))
+buffer.set_string("HELLO")
+p File.read("test.txt") # => "HELLO world"
+```
+
+- **SEE** [m:IO::Buffer.new], [m:IO::Buffer.for]
+
 ### def new(size = IO::Buffer::DEFAULT_SIZE, flags = 0) -> IO::Buffer
 
 size バイトの、0 で埋められた新しいバッファを作成して返します。
@@ -136,6 +220,32 @@ p buf.size       # => 4
 p buf.internal?  # => true
 p buf.get_string # => "\x00\x00\x00\x00"
 ```
+
+- **SEE** [m:IO::Buffer.for], [m:IO::Buffer.map]
+
+#@since 3.3
+### def string(length) {|buffer| ... } -> String
+
+length バイトの文字列を新しく作り、それを元にしたコピーを伴わないバッファを
+ブロックに渡します。ブロックの実行後、その文字列を返します。
+
+ブロックの中でバッファに書き込んだ内容が、そのまま返される文字列の内容に
+なります。返される文字列のエンコーディングは [m:Encoding::BINARY] です。
+
+- **param** `length` -- 作成する文字列のバイト数を整数で指定します。
+
+- **raise** `LocalJumpError` -- ブロックを渡さなかった場合に発生します。
+
+```ruby
+str = IO::Buffer.string(4) do |buffer|
+  buffer.set_string("Ruby")
+end
+p str                 # => "Ruby"
+p str.encoding.name   # => "ASCII-8BIT"
+```
+
+- **SEE** [m:IO::Buffer.for]
+#@end
 
 ## Instance Methods
 
@@ -169,8 +279,8 @@ p buf.get_string        # => "Ruby\x00\x00\x00\x00"
 p buf.get_string(0, 4)  # => "Ruby"
 p buf.get_string(1, 3)  # => "uby"
 
-p buf.get_string(0, 4).encoding                   # => #<Encoding:BINARY (ASCII-8BIT)>
-p buf.get_string(0, 4, Encoding::UTF_8).encoding  # => #<Encoding:UTF-8>
+p buf.get_string(0, 4).encoding.name                   # => "ASCII-8BIT"
+p buf.get_string(0, 4, Encoding::UTF_8).encoding.name  # => "UTF-8"
 
 buf.get_string(0, 99)   # ~> ArgumentError
 ```
@@ -301,8 +411,7 @@ p buf.get_string # => "\x00AA\x00"
 変更後の大きさによっては、メモリ領域が別の場所に確保しなおされ、
 内容がそこへコピーされます。
 
-#@# for を収録したらリンクに戻す
-`IO::Buffer.for` で作った外部バッファや、ロックされたバッファは大きさを変更できません。
+[m:IO::Buffer.for] で作った外部バッファや、ロックされたバッファは大きさを変更できません。
 
 - **param** `size` -- 変更後の大きさをバイト数で指定します。
 - **raise** `IO::Buffer::AccessError` -- 大きさを変更できないバッファに対して呼び出した場合に発生します。
@@ -377,9 +486,8 @@ p buf.size  # => 4
 
 バッファの大きさが 0 の場合に true を返します。
 
-#@# for を収録したらリンクに戻す
 大きさ 0 のバッファは、[m:IO::Buffer.new] に 0 を渡すか、
-空文字列から `IO::Buffer.for` で作った場合などにできます。
+空文字列から [m:IO::Buffer.for] で作った場合などにできます。
 
 ```ruby
 p IO::Buffer.new(0).empty? # => true
@@ -430,8 +538,7 @@ p IO::Buffer.new(4).internal? # => true
 バッファが外部(external)バッファである場合に true を返します。
 
 外部バッファは、バッファ自身が確保・マップしたのではないメモリ領域を参照します。
-#@# for を収録したらリンクに戻す
-`IO::Buffer.for` で作ったバッファは、文字列のメモリを外部参照します。
+[m:IO::Buffer.for] で作ったバッファは、文字列のメモリを外部参照します。
 外部バッファは大きさを変更できません。
 
 ```ruby
@@ -445,11 +552,11 @@ p IO::Buffer.new(4).external?      # => false
 
 バッファが読み取り専用の場合に true を返します。
 
-#@# set_value / for を収録したらリンクに戻す
+#@# set_value を収録したらリンクに戻す
 読み取り専用のバッファは、`IO::Buffer#set_value` や [m:IO::Buffer#set_string]、
 [m:IO::Buffer#copy] などで変更できません。
 
-`IO::Buffer.for` にブロックを渡さずに作ったバッファは、元の文字列が freeze
+[m:IO::Buffer.for] にブロックを渡さずに作ったバッファは、元の文字列が freeze
 されているかどうかによらず、常に読み取り専用になります。内部で作った文字列の
 複製をバッファの元として使うためです。
 ブロックを渡した場合は元の文字列のメモリを直接参照するため、
@@ -474,8 +581,7 @@ p IO::Buffer.new(4).readonly?                       # => false
 マップバッファは、仮想メモリ機構でマップされたメモリ領域を参照します。
 [m:IO::Buffer.new] に [m:IO::Buffer::MAPPED] を指定した場合や、
 大きさが [m:IO::Buffer::PAGE_SIZE] 以上の場合は匿名のマップになります。
-#@# map を収録したらリンクに戻す
-`IO::Buffer.map` で作った場合はファイルに紐づいたマップになります。
+[m:IO::Buffer.map] で作った場合はファイルに紐づいたマップになります。
 
 ### def locked? -> bool
 
