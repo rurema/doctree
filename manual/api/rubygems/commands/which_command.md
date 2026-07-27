@@ -17,7 +17,7 @@ Usage: gem which FILE [...] [options]
     -g, --[no-]gems-first            search gems before non-gems
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Arguments:

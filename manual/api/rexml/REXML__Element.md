@@ -30,7 +30,7 @@ parent で親ノードを指定します。
 context には hash table で要素のコンテキストを指定します。
 基本的には text node ([c:REXML::Text]) での特別な文字、特に空白について
 の取り扱いを指定できます。
-#@include(context)
+#%include(context)
 
 - **param** `arg` -- 要素の名前(String)もしくは初期化に使う [c:REXML::Element]
        オブジェクト
@@ -54,7 +54,7 @@ context には hash table で要素のコンテキストを指定します。
 
 コンテキストとは text node ([c:REXML::Text]) での特別な文字、特に空白について
 の取り扱いについての設定です。
-#@include(context)
+#%include(context)
 
 - **SEE** [m:REXML::Element.new], [m:REXML::Element#context=]
 
@@ -64,17 +64,17 @@ context には hash table で要素のコンテキストを指定します。
 
 コンテキストとは、 text node ([c:REXML::Text]) での特別な文字、特に空白について
 の取り扱いについての設定です。
-#@include(context)
+#%include(context)
 
 nil を渡すことでデフォルト値を使うよう指示できます。
 
 - **param** `value` -- 設定値
 - **SEE** [m:REXML::Element.new], [m:REXML::Element#context]
 
-#@# #@since 1.8.2
-#@# --- inspect
-#@# #@todo
-#@# #@end
+#%# #@since 1.8.2
+#%# --- inspect
+#%# #@todo
+#%# #@end
 
 ### def clone -> REXML::Element
 
@@ -155,10 +155,10 @@ self が属する文書([c:REXML::Document])オブジェクトを返します。
 要素名として [m:REXML::Namespace#expanded_name] が使われるので、
 名前空間の prefix は判定に影響します。
 
-#@# --- ignore_whitespace_nodes -> bool
-#@# buggy?
-#@#
-#@# #@todo
+#%# --- ignore_whitespace_nodes -> bool
+#%# buggy?
+#%#
+#%# #@todo
 
 ### def raw -> bool
 
@@ -518,25 +518,25 @@ doc.root.text = "Baz"; doc.to_s # => "<a><b/>Baz<c/></a>"
 doc.root.text = nil; doc.to_s # => "<a><b/><c/></a>"
 ```
 
-#@# いまいち buggy なのでとりあえず comment out する
-#@# REXML::Text#<< の問題
-#@# --- add_text(text) -> self
-#@# テキストノードを子ノードとして追加します。
-#@#
-#@# text には文字列もしくは [[c:REXML::Text]] を指定できます。
-#@#
-#@# @param text
-#@# @see [[m:REXML::Element#add]]
-#@#
-#@# ==== 例
-#@#   require 'rexml/document'
-#@#   doc = REXML::Document.new("<e/>")
-#@#   doc.to_s # => "<e/>"
-#@#   doc.root.add_text("Foo"); doc.to_s # => "<e>Foo</e>"
-#@#   doc.root.add_text(REXML::Text.new("Bar")); doc.to_s # => "<e>FooBar</e>"
-#@#   doc.to_s # => "<e>FooBar</e>"
-#@#   # Foo と Bar の2つのノードがある
-#@#   REXML::XPath.match(doc.root, "child::node()") # => ["Foo", "Bar"]
+#%# いまいち buggy なのでとりあえず comment out する
+#%# REXML::Text#<< の問題
+#%# --- add_text(text) -> self
+#%# テキストノードを子ノードとして追加します。
+#%#
+#%# text には文字列もしくは [[c:REXML::Text]] を指定できます。
+#%#
+#%# @param text
+#%# @see [[m:REXML::Element#add]]
+#%#
+#%# ==== 例
+#%#   require 'rexml/document'
+#%#   doc = REXML::Document.new("<e/>")
+#%#   doc.to_s # => "<e/>"
+#%#   doc.root.add_text("Foo"); doc.to_s # => "<e>Foo</e>"
+#%#   doc.root.add_text(REXML::Text.new("Bar")); doc.to_s # => "<e>FooBar</e>"
+#%#   doc.to_s # => "<e>FooBar</e>"
+#%#   # Foo と Bar の2つのノードがある
+#%#   REXML::XPath.match(doc.root, "child::node()") # => ["Foo", "Bar"]
 
 ### def node_type -> Symbol
 

@@ -10,36 +10,36 @@ include:
 ## Instance Methods
 ### def channel
 ### def channel=
-#@todo
+#%todo
 
 ### def encoding
 ### def encoding=
-#@todo
+#%todo
 
 ### def image
 ### def image=
-#@todo
+#%todo
 
 ### def item
 ### def item=
-#@todo
+#%todo
 
 ### def items
-#@todo
+#%todo
 
 ### def rss_version
 ### def rss_version=
-#@todo
+#%todo
 
 ### def standalone
 ### def standalone=
-#@todo
+#%todo
 
 ### def textinput
 ### def textinput=
-#@todo
+#%todo
 
 ### def version
 ### def version=
-#@todo
+#%todo
 

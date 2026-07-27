@@ -12,7 +12,7 @@ extconf.rb を元にして拡張ライブラリをビルドするためのクラ
 ## Singleton Methods
 
 ### def build(extension, directory, dest_path, results) -> Array
-#@todo
+#%todo
 
 Makefile が存在しない場合は、extconf.rb を実行して
 Makefile を作成してから make を実行します。

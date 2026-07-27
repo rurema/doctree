@@ -15,7 +15,7 @@ OpenSSL(<https://www.openssl.org/>)
   - 公開鍵基盤(PKI, Public Key Infrastructure)
   - X.509 証明書
   - 暗号と乱数について
-#@# 要追加
+#%# 要追加
 SSLのようなセキュリティ技術は、その利用者に無条件に安全性を
 提供することはできません。利用者、とくにSSLでソフトウェアを実装する
 プログラマは、 SSL/TLS の技術、それが基づいている概念を理解し、
@@ -32,8 +32,8 @@ OpenSSL は SSL/TLS による通信を提供する高水準なインターフェ
 
 低水準なインターフェースを利用する場合には、利用したい機能に
 関する十分な知識と注意深さが必要となります。
-#@# どれが高水準インターフェースでどれが低水準かの
-#@# リストが必要
+#%# どれが高水準インターフェースでどれが低水準かの
+#%# リストが必要
 
 ### 例
 
@@ -137,7 +137,7 @@ Ruby/OpenSSL のバージョンです。
 
 - **SEE** [m:OpenSSL?.fips_mode=]
 
-#@# = module OpenSSL::SSL::SocketForwarder
+#%# = module OpenSSL::SSL::SocketForwarder
 # class OpenSSL::OpenSSLError < StandardError
 
 すべての OpenSSL 関連の例外クラスのベースとなる例外クラスです。

@@ -78,11 +78,11 @@ p Random.rand(10.0)  #=> 1.9151945037889229  (0.0 以上 10.0 未満の実数)
 p rand(10.0)       #=> 6                   (rand(10) と同じ)
 ```
 
-#@since 3.2
+#%since 3.2
 - **SEE** [m:Random.srand], [m:Random#rand]
-#@else
+#%else
 - **SEE** [m:Random.srand], [m:Random#rand], [m:Random::DEFAULT]
-#@end
+#%end
 
 ### def srand -> Integer
 ### def srand(number) -> Integer
@@ -92,13 +92,13 @@ p rand(10.0)       #=> 6                   (rand(10) と同じ)
 
 - **param** `number` -- 擬似乱数発生器の種を整数で指定します。
 
-#@#noexample 詳しくは Kernel.#srand を参照
+#%#noexample 詳しくは Kernel.#srand を参照
 
-#@since 3.2
+#%since 3.2
 - **SEE** [m:Kernel?.rand]
-#@else
+#%else
 - **SEE** [m:Kernel?.rand], [m:Random::DEFAULT]
-#@end
+#%end
 ### def bytes(size) -> String
 
 ランダムなバイナリー文字列を返します。結果の文字列のサイズを指定できます。
@@ -249,13 +249,13 @@ p Random.new(3).seed # => 3
 
 C言語レベルで定義されている構造体MTの状態を参照します。詳しくはrandom.c を参照してください。
 
-#@#noexample 詳しくはrandom.c を参照
+#%#noexample 詳しくはrandom.c を参照
 
 ### def left -> Integer
 
 C言語レベルで定義されている構造体MTの変数leftを参照します。詳しくはrandom.c を参照してください。
 
-#@#noexample 詳しくはrandom.c を参照
+#%#noexample 詳しくはrandom.c を参照
 
 ### def marshal_dump -> Array
 
@@ -299,17 +299,17 @@ p r1 == r3 # => true
 
 C言語レベルで定義されている構造体MTの静的変数default_randの状態を参照します。詳しくはrandom.c を参照してください。
 
-#@#noexample 詳しくはrandom.c を参照
+#%#noexample 詳しくはrandom.c を参照
 
 ### def left -> Integer
 
 C言語レベルで定義されている構造体MTの静的変数default_randの変数leftを参照します。詳しくはrandom.c を参照してください。
 
-#@#noexample 詳しくはrandom.c を参照
+#%#noexample 詳しくはrandom.c を参照
 
 ## Constants
 
-#@until 3.2
+#%until 3.2
 ### const DEFAULT -> Class
 
 Ruby 3.0 から非推奨で，3.2で廃止されます。代わりに Random クラスオブジェクトを擬似乱数生成器として使用してください。
@@ -321,4 +321,4 @@ p Random::DEFAULT == Random # => true
 p Random.rand(10) # => 4
 ```
 
-#@end
+#%end

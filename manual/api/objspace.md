@@ -50,7 +50,7 @@ obj が消費するメモリ使用量をバイト単位で返します。
 require 'objspace'
 
 p ObjectSpace.memsize_of(10)          # => 0
-#@# todo 0 になる理由
+#%# todo 0 になる理由
 p ObjectSpace.memsize_of("12345" * 10)  # => 91
 ```
 

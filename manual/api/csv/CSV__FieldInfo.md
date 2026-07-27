@@ -35,7 +35,7 @@ p csv.first
 
 - **param** `val` -- インデックスの値を指定します。
 
-#@#noexample
+#%#noexample
 
 ### def line -> Integer
 
@@ -64,7 +64,7 @@ p csv.to_a
 
 - **param** `val` -- 行番号を指定します。
 
-#@#noexample
+#%#noexample
 
 ### def header -> String | nil
 
@@ -91,5 +91,5 @@ p csv.first
 
 - **param** `val` -- ヘッダを表す文字列を指定します。
 
-#@#noexample
+#%#noexample
 

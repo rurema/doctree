@@ -120,8 +120,8 @@ URI は妥当であるが、通信に問題が発生した場合は [c:DRb::DRbC
 
 - **param** `prot` -- プロトコル定義クラス
 
-#@# auto_load, open, open_server, uri_option is used internally
-#@# and users should not use these methods directly
+#%# auto_load, open, open_server, uri_option is used internally
+#%# and users should not use these methods directly
 
 # class DRb::DRbConnError < DRb::DRbError
 

@@ -732,11 +732,11 @@ p [1,2,3].zip([4,5,6], [7,8,9]) {|ary|
 ```
 
 ### def each_slice(n)               -> Enumerator
-#@since 3.1
+#%since 3.1
 ### def each_slice(n) {|list| ... } -> self
-#@else
+#%else
 ### def each_slice(n) {|list| ... } -> nil
-#@end
+#%end
 
 n 要素ずつブロックに渡して繰り返します。
 
@@ -758,11 +758,11 @@ n 要素ずつ繰り返す [c:Enumerator] を返します。
 - **SEE** [m:Enumerable#each_cons]
 
 ### def each_cons(n)               -> Enumerator
-#@since 3.1
+#%since 3.1
 ### def each_cons(n) {|list| ... } -> self
-#@else
+#%else
 ### def each_cons(n) {|list| ... } -> nil
-#@end
+#%end
 
 要素を重複ありで n 要素ずつに区切り、
 ブロックに渡して繰り返します。
@@ -1540,9 +1540,9 @@ p [[1], [[2]], [3]].sum([])        #=> [1, [2], 3]
 - **SEE** [m:Array#sum]
 
 ### def tally        ->   Hash
-#@since 3.1
+#%since 3.1
 ### def tally(hash)  ->   Hash
-#@end
+#%end
 
 self に含まれる要素を数え上げた結果を Hash で返します。
 Hash のキーは self に含まれる要素で、Hash の値は対応する要素が出現する回数です。
@@ -1550,20 +1550,20 @@ Hash のキーは self に含まれる要素で、Hash の値は対応する要�
 返り値は Hash であり、内部でも Hash と同等に要素を区別し数えます。
 そのため、独自で定義するクラスでも [m:Object#hash] と [m:Object#eql?] を適切に定義することで数えることができます。
 
-#@since 3.1
+#%since 3.1
 - **param** `hash` -- 結果を加算していく Hash を指定します。更新される値は Integer である必要があります。
-#@end
+#%end
 
 ```ruby title="例"
 p ["a", "b", "c", "b"].tally  #=> {"a"=>1, "b"=>2, "c"=>1}
 
-#@since 3.1
+#%since 3.1
 h = {}
 [:a, :b, :c].tally(h)
 [:a, :b, :d].tally(h)
 
 p h # => {:a=>2, :b=>2, :c=>1, :d=>1}
-#@end
+#%end
 ```
 
 ### def uniq                -> Array
@@ -1588,7 +1588,7 @@ p (1..100).uniq{|x| (x**2) % 10 } # => [1, 2, 3, 4, 5, 10]
 ```
 
 - **SEE** [m:Array#uniq]
-#@since 3.1
+#%since 3.1
 ### def compact -> Array
 
 self から nil を取り除いた配列を生成して返します。
@@ -1605,9 +1605,9 @@ p to_enum(:with_nils).compact # => [1, 2, 3]
 ```
 
 - **SEE** [m:Array#compact]
-#@end
+#%end
 
-#@since 3.2
+#%since 3.2
 ### def to_set(klass = Set, *args) -> Set
 ### def to_set(klass = Set, *args) {|o| ... } -> Set
 
@@ -1623,11 +1623,11 @@ Ruby 2.7 以前は SortedSet が定義されていました)。
 引数 args およびブロックは、集合オブジェクトを生成するための new
 メソッドに渡されます。
 
-#@since 4.0
+#%since 4.0
 Ruby 4.0 から、引数 klass や args を渡す呼び出しは deprecated です。
 引数を渡すと「passing arguments to Enumerable#to_set is deprecated」という
 警告を出力します（ブロックのみを渡す呼び出しは deprecated ではありません）。
-#@end
+#%end
 
 - **param** `klass` -- 生成する集合クラスを指定します。
 - **param** `args` -- 集合クラスのオブジェクト初期化メソッドに渡す引数を指定します。
@@ -1636,24 +1636,24 @@ Ruby 4.0 から、引数 klass や args を渡す呼び出しは deprecated で�
 
 ```ruby
 p [30, 10, 20].to_set
-#@since 4.0
+#%since 4.0
 #=> Set[30, 10, 20]
-#@else
+#%else
 #=> #<Set: {30, 10, 20}>
-#@end
+#%end
 MySet = Class.new(Set)
 p [30, 10, 20].to_set(MySet)
-#@since 4.0
+#%since 4.0
 # warning: passing arguments to Enumerable#to_set is deprecated
-#@end
+#%end
 #=> #<MySet: {30, 10, 20}>
 p [30, 10, 20].to_set {|num| num / 10}
-#@since 4.0
+#%since 4.0
 #=> Set[3, 1, 2]
-#@else
+#%else
 #=> #<Set: {3, 1, 2}>
-#@end
+#%end
 ```
 
 - **SEE** [m:Set.new]
-#@end
+#%end

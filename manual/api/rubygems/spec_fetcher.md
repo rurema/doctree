@@ -19,10 +19,10 @@ require:
 
 このクラスの唯一のインスタンスを返します。
 
-#@# singleton ?
+#%# singleton ?
 
 ### def fetcher=(fetcher)
-#@todo
+#%todo
 
 ## Instance Methods
 
@@ -47,7 +47,7 @@ uri の内容を書き込むローカルのディレクトリ名を返します�
 - **SEE** [c:Gem::Dependency]
 
 ### def fetch_spec(spec, source_uri) -> object
-#@todo
+#%todo
 
 - **param** `spec` -- 
 - **param** `source_uri` --

@@ -19,7 +19,7 @@ library: win32/registry
 ### module_function def packqw(qw)
 ### module_function def unpackdw(dw)
 ### module_function def unpackqw(qw)
-#@todo
+#%todo
 
 ## Constants
 ### const RegCloseKey
@@ -33,5 +33,5 @@ library: win32/registry
 ### const RegQueryInfoKey
 ### const RegQueryValueExA
 ### const RegSetValueExA
-#@todo
+#%todo
 

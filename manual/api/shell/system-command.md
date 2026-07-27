@@ -7,7 +7,7 @@ until: "2.7.0"
 ## Singleton Methods
 
 ### def new(sh, command, *opts)
-#@todo
+#%todo
 
 - **param** `sh` --
 
@@ -18,24 +18,24 @@ until: "2.7.0"
 ## Instance Methods
 
 ### def active? -> bool
-#@todo
+#%todo
 
 ### def command -> String
 ### def name    -> String
-#@todo
+#%todo
 
 コマンド名を返します。
 
 ### def each(rs = nil){|line| ... }
-#@todo
+#%todo
 
 - **param** `rs` --
 
 ### def flush -> ()
-#@todo
+#%todo
 
 ### def input=(inp)
-#@todo
+#%todo
 
 ### def kill(signal) -> Integer
 
@@ -49,29 +49,29 @@ until: "2.7.0"
 
 ### def notify(*opts) -> String
 ### def notify(*opts){|message| ... } -> String
-#@todo
+#%todo
 
 - **param** `opts` --
 
 - **SEE** [m:Shell#notify]
 
 ### def start -> ()
-#@todo
+#%todo
 
 ### def start_export
-#@todo
+#%todo
 
 ### def start_import -> ()
-#@todo
+#%todo
 
 ### def super_each -> ()
-#@todo
+#%todo
 
 [m:Shell::Filter#each] です。
 
 ### def terminate -> ()
-#@todo
+#%todo
 
 ### def wait? -> bool
-#@todo
+#%todo
 

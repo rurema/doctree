@@ -39,7 +39,7 @@ Prime.instance.each と同じです。
 - **return** -- ブロックの最後に評価された値を返します。
         ブロックが与えられなかった場合は、[c:Enumerator] と互換性のある外部イテレータを返します。
 
-#@#noexample リンク先のサンプルを参照。
+#%#noexample リンク先のサンプルを参照。
 
 - **SEE** [m:Prime#each]
 
@@ -50,7 +50,7 @@ Prime.instance.int_from_prime_division と同じです。
 - **param** `pd` -- 整数のペアの配列を指定します。含まれているペアの第一要素は素因数を、
           第二要素はその素因数の指数をあらわします。
 
-#@#noexample リンク先のサンプルを参照。
+#%#noexample リンク先のサンプルを参照。
 
 - **SEE** [m:Prime#int_from_prime_division]
 
@@ -65,7 +65,7 @@ Prime.instance.prime? と同じです。
 - **return** -- 素数かどうかを返します。
         引数 value に負の数を指定した場合は常に false を返します。
 
-#@#noexample リンク先のサンプルを参照。
+#%#noexample リンク先のサンプルを参照。
 
 - **SEE** [m:Prime#prime?]
 

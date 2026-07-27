@@ -17,7 +17,7 @@ X.509 v3 証明書の拡張領域のためのクラスです。
 ### 参照
 
   - [RFC:5280]
-#@# *[RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-04EN.html#42]]
+#%# *[RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-04EN.html#42]]
 
 ## Class Methods
 

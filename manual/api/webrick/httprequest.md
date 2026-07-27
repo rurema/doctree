@@ -56,7 +56,7 @@ Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で
 クライアントと接続されているソケットの [m:IPSocket#addr] を返します。
 
 ### def attributes    -> Hash
-#@todo ???
+#%todo ???
 
 ### def body                 -> String | nil
 ### def body {|chunk| ... }  -> String | nil
@@ -79,7 +79,7 @@ Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で
 リクエストの Content-Type ヘッダを文字列で返します。
 
 ### def continue
-#@todo 1.9.3
+#%todo 1.9.3
 Generate HTTP/1.1 100 continue response if the client expects it,
 otherwise does nothing.
 
@@ -243,10 +243,10 @@ REMOTE_USER を文字列で表したものに値をセットします。
 
 - **param** `value` -- ユーザ名を文字列で指定します。
 
-#@#== Constants
+#%#== Constants
 
-#@#--- BODY_CONTAINABLE_METHODS
-#@#todo
+#%#--- BODY_CONTAINABLE_METHODS
+#%#todo
 
-#@#--- BUFSIZE
-#@#todo
+#%#--- BUFSIZE
+#%#todo

@@ -19,7 +19,7 @@ spec = Gem::Specification.new do |s|
 end
 ```
 
-#@# @see 
+#%# @see 
 
 # class Gem::Specification
 
@@ -113,10 +113,10 @@ s.add_runtime_dependency "progressbar", ">= 1.9.0", "< 2.0"
 - **param** `dir` -- 実行ファイルを格納するディレクトリを指定します。デフォルトは "bin" です。
 
 ### def cert_chain -> Array
-#@todo
+#%todo
 
 ### def cert_chain=(arr)
-#@todo
+#%todo
 
 - **param** `arr` -- デフォルトは空の配列です。
 
@@ -551,7 +551,7 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオ�
 - **param** `version` -- バージョンを文字列か [c:Gem::Version] のインスタンスで指定します。
 
 ### def yaml_initialize
-#@todo
+#%todo
 
 ## Singleton Methods
 
@@ -605,7 +605,7 @@ s.require_path = 'mylib'
 - **param** `plural` -- 属性名の複数形を指定します。
 
 ### def attribute_defaults -> Array
-#@todo
+#%todo
 
 @@attributes の複製を返します。
 
@@ -728,7 +728,7 @@ p Gem::Specification.stubs_for("abbrev").map(&:name)
 現在の gemspec のバージョンを表す定数です。
 
 ### const MARSHAL_FIELDS -> Hash
-#@todo
+#%todo
 
 ### const NONEXISTENT_SPECIFICATION_VERSION -> -1
 

@@ -25,7 +25,7 @@ callcc() は、ブロックの戻り値を返しますが、Continuation#call(ar
 が呼び出されたときは args を返します。
 
 例:
-#@# よりコアな例は [[ruby-list:34943]] を参照のこと
+#%# よりコアな例は [[ruby-list:34943]] を参照のこと
 
 ```text
 以下は、Continuationによる無限ループの例

@@ -87,7 +87,7 @@ IOの場合は、XML文書を読み出してパースします。
 
 context で「コンテキスト」を指定します。テキストノードの空白や
 特殊文字の取り扱いを [c:Hash] で指定します。
-#@include(context)
+#%include(context)
 
 - **param** `source` -- XML文書(文字列, IO)もしくは REXML::Document オブジェクト
 - **param** `context` -- コンテキスト
@@ -214,11 +214,11 @@ XMLの仕様上、このオブジェクトはexpanded name名前を持ちえま�
   - ルート要素
 のいずれかです。
 
-#@# REXML::Element#add_element と同じ、ただしルート要素が2つになると例外を発生させる
-#@#
-#@# --- add_element(arg = nil, arg2 = nil)
-#@# #@todo
-#@#
+#%# REXML::Element#add_element と同じ、ただしルート要素が2つになると例外を発生させる
+#%#
+#%# --- add_element(arg = nil, arg2 = nil)
+#%# #@todo
+#%#
 
 ### def root -> REXML::Element | nil
 
@@ -317,4 +317,4 @@ REXML は明示しない限り(つまりXML宣言を [m:REXML::Document#add] で
 
 デフォルトとして使えるXML宣言オブジェクト。
 
-#@# internal files
+#%# internal files

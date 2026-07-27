@@ -76,9 +76,9 @@ p Socket.pack_sockaddr_in("echo", "127.0.0.1")
 
 逆に IP アドレスからホスト名への変換 (逆引き) を行うメソッドは以下のものが用意されています。
 
-#@#* TCPSocket.gethostbyname("210.163.138.100") => ["210.163.138.100", [], 2, "210.163.138.100"]
-#@#* Socket.gethostbyaddr(host[, type])
-#@#* [[m:Socket.getnameinfo]]([Socket::AF_INET, "http", "210.163.138.100"]) => ["beryllium.ruby-lang.org", "www"]
+#%#* TCPSocket.gethostbyname("210.163.138.100") => ["210.163.138.100", [], 2, "210.163.138.100"]
+#%#* Socket.gethostbyaddr(host[, type])
+#%#* [[m:Socket.getnameinfo]]([Socket::AF_INET, "http", "210.163.138.100"]) => ["beryllium.ruby-lang.org", "www"]
   - [m:Socket.getnameinfo]([nil, nil, nil, "210.163.138.100"]) => ["beryllium.ruby-lang.org", 0]
   - [m:Addrinfo#getnameinfo] Addrinfo.ip("127.0.0.1").getnameinfo => ["localhost", "0"]
 

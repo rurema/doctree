@@ -160,10 +160,10 @@ SAX2 パーサオブジェクトを生成します。
 
 ## Instance Methods
 
-#@# #@since 1.8.2
-#@# --- add_listener(listener)
-#@# #@todo
-#@# #@end
+#%# #@since 1.8.2
+#%# --- add_listener(listener)
+#%# #@todo
+#%# #@end
 
 ### def listen(sym, ary) { ... } -> ()
 ### def listen(sym) { ... } -> ()
@@ -251,21 +251,21 @@ parser.listen(:characters, [/\Ah[1234]\z/]){|data|
 }
 ```
 
-#@#   require 'rexml/parsers/sax2parser'
-#@#   parser = REXML::Parsers::SAX2Parser.new(<<XML)
-#@#   <root>
-#@#     <a xmlns:foo="foo"><b xmlns:bar="bar"> </b></a>
-#@#     <a></a>
-#@#   </root>
-#@#   XML
-#@#   # "a" という要素名を持つ要素で新たな名前空間が導入された場合に
-#@#   # ブロックが呼び出される
-#@#   parser.listen(:start_prefix_mapping, ["a"]){|prefix, uri| p prefix}
-#@#   parser.parse
-#@#   # >> "foo"
+#%#   require 'rexml/parsers/sax2parser'
+#%#   parser = REXML::Parsers::SAX2Parser.new(<<XML)
+#%#   <root>
+#%#     <a xmlns:foo="foo"><b xmlns:bar="bar"> </b></a>
+#%#     <a></a>
+#%#   </root>
+#%#   XML
+#%#   # "a" という要素名を持つ要素で新たな名前空間が導入された場合に
+#%#   # ブロックが呼び出される
+#%#   parser.listen(:start_prefix_mapping, ["a"]){|prefix, uri| p prefix}
+#%#   parser.parse
+#%#   # >> "foo"
 
 ### def deafen(listener) -> ()
-#@# --- deafen { ... } -> ()
+#%# --- deafen { ... } -> ()
 
 [m:REXML::Parsers::SAX2Parser#listen] で指定した listener を
 取り除きます。
@@ -282,7 +282,7 @@ parser.listen(:characters, [/\Ah[1234]\z/]){|data|
 - **raise** `REXML::UndefinedNamespaceException` -- XML文書のパース中に、定義されていない名前空間
        が現れた場合に発生します
 
-#@# #@since 1.8.6
-#@# --- source
-#@# #@todo
-#@# #@end
+#%# #@since 1.8.6
+#%# --- source
+#%# #@todo
+#%# #@end

@@ -9,7 +9,7 @@ include:
 ジェクト(キー)から任意の種類のオブジェクト(値)への関連づけを行うことができます。
 
 ハッシュ生成は多くの場合以下のようなリテラル ([ref:d:spec/literal#hash]) で行われます。
-#@#リテラル-ハッシュ式へのリンクつける
+#%#リテラル-ハッシュ式へのリンクつける
 
 ```text
 {a => b, ... }   # aはキー、bは値となる
@@ -133,12 +133,12 @@ alist = [[1,["a"]], [2,["b"]], [3,["c"]], [[4,5], ["a", "b"]]]
 hash = Hash[alist] # => {1=>["a"], 2=>["b"], 3=>["c"], [4, 5]=>["a", "b"]}
 ```
 
-#@until 3.4
+#%until 3.4
 ### def new(ifnone = nil) -> Hash
-#@end
-#@since 3.4
+#%end
+#%since 3.4
 ### def new(ifnone = nil, capacity: 0) -> Hash
-#@end
+#%end
 
 空の新しいハッシュを生成します。ifnone はキーに対
 応する値が存在しない時のデフォルト値です。設定したデフォルト値は[m:Hash#default]で参照できます。
@@ -158,18 +158,18 @@ p h.default #=> [0, 1]
 これを避けるには、破壊的でないメソッドで再代入する必要が有ります。
 また、このようなミスを防ぐためにもifnoneは freeze して破壊的操作を禁止しておくのが無難です。
 
-#@#デフォルト値の扱いには注意が必要です( [[trap:Hash]] )
+#%#デフォルト値の扱いには注意が必要です( [[trap:Hash]] )
 
-#@since 3.4
+#%since 3.4
 capacity を指定すると、指定した要素数を格納するのに充分なメモリをあらかじめ確保します。
 要素数の多いハッシュを構築する際にメモリの再配置やハッシュテーブルの再構築が不要となるため、
 パフォーマンスの改善が期待できます。
-#@end
+#%end
 
 - **param** `ifnone` -- キーに対応する値が存在しない時のデフォルト値です。
-#@since 3.4
+#%since 3.4
 - **param** `capacity` -- 指定した要素数に相当するメモリをあらかじめ確保します。
-#@end
+#%end
 
 ```ruby title="例"
 h = Hash.new([])
@@ -190,12 +190,12 @@ h[0] += [0] #破壊的でないメソッドはOK
 h[1] << 1     # ~> FrozenError: can't modify frozen Array: []
 ```
 
-#@until 3.4
+#%until 3.4
 ### def new {|hash, key| ... } -> Hash
-#@end
-#@since 3.4
+#%end
+#%since 3.4
 ### def new(capacity: 0) {|hash, key| ... } -> Hash
-#@end
+#%end
 空の新しいハッシュを生成します。ブロックの評価結果がデフォルト値になりま
 す。設定したデフォルト値は[m:Hash#default_proc]で参照できます。
 
@@ -203,9 +203,9 @@ h[1] << 1     # ~> FrozenError: can't modify frozen Array: []
 実行し、その結果を返します。
 ブロックにはそのハッシュとハッシュを参照したときのキーが渡されます。
 
-#@since 3.4
+#%since 3.4
 - **param** `capacity` -- 指定した要素数に相当するメモリをあらかじめ確保します。
-#@end
+#%end
 
 - **raise** `ArgumentError` -- ifnone などの位置引数とブロックを同時に与えると発生します。
 
@@ -586,7 +586,7 @@ p h1.compare_by_identity? #=> true
 
 shiftは破壊的メソッドです。selfは要素を取り除かれた残りのハッシュに変更されます。
 
-#@until 3.2
+#%until 3.2
 Ruby 3.2以前は、ハッシュが空の場合、デフォルト値（[m:Hash#default]または[m:Hash#default_proc]のブロックの値か、どちらもnilならばnil）
 を返します(このとき、[key,value] という形式の値を返すわけではないことに注意)。
 
@@ -608,7 +608,7 @@ p h2                    #=> {}
 p h2.shift              #=> [{}, nil]
 ```
 
-#@else
+#%else
 
 ハッシュが空の場合、デフォルト値に関わらず nil を返します。
 
@@ -628,7 +628,7 @@ p h2                    #=> {}
 p h2.shift              #=> nil
 ```
 
-#@end
+#%end
 
 - **SEE** [m:Array#shift]
 

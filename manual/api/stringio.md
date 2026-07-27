@@ -8,7 +8,7 @@ category: Text
 
 # class StringIO < Object
 
-#@# IO::generic_writable, IO::generic_readable は内部的なもののようなのでここでは省略
+#%# IO::generic_writable, IO::generic_readable は内部的なもののようなのでここでは省略
 
 文字列に [c:IO] と同じインタフェースを持たせるためのクラスです。
 
@@ -33,11 +33,11 @@ require "stringio"
 sio = StringIO.new("hoge")
 sio.close
 sio.write("a")
-#@since 3.4
+#%since 3.4
 # => in 'StringIO#write': not opened for writing (IOError)
-#@else
+#%else
 # => in `write': not opened for writing (IOError)
-#@end
+#%end
 ```
 
 ## Class Methods

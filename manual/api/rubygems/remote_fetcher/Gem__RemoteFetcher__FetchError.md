@@ -21,6 +21,6 @@ library: rubygems/remote_fetcher
 
 問題が発生した URI を返します。
 
-#@#--- to_s -> String
-#@# nodoc
-#@#例外の情報を文字列として返します。
+#%#--- to_s -> String
+#%# nodoc
+#%#例外の情報を文字列として返します。

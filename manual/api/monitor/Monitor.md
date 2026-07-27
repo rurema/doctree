@@ -152,21 +152,21 @@ mon.exit # => current thread not owner (ThreadError)
 ### def mon_owned? -> bool
 
 カレントスレッドがモニターをロックしているときに true を返します。
-#@since 3.1
+#%since 3.1
 ### def wait_for_cond(cond, timeout) -> bool
-#@else
+#%else
 ### def wait_for_cond(cond, timeout) -> true
-#@end
+#%end
 [c:MonitorMixin::ConditionVariable] 用の内部メソッドです。
 
 - **param** `cond` -- [c:Thread::ConditionVariable] を指定します。
 - **param** `timeout` -- タイムアウトまでの秒数。指定しなかった場合はタイムアウトしません。
 
-#@since 3.1
+#%since 3.1
 - **return** -- タイムアウトしたときは false を返します。それ以外は true を返します。
-#@else
+#%else
 - **return** -- Ruby 1.9 の頃からのバグで常に true を返します。([bug:16608])
-#@end
+#%end
 
 ```ruby title="例"
 require 'monitor'

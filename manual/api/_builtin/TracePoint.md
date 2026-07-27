@@ -256,7 +256,7 @@ trace.enable { p trace.lineno } # ~> RuntimeError: access from outside
 self のトレースが有効な場合に true を、そうでない場合に false を返しま
 す。
 
-#@#noexample TracePoint#enable, TracePoint#disable  の例を参照
+#%#noexample TracePoint#enable, TracePoint#disable  の例を参照
 
 - **SEE** [m:TracePoint#enable], [m:TracePoint#disable]
 
@@ -269,11 +269,11 @@ def foo(ret)
   ret
 end
 trace = TracePoint.new(:call) do |tp|
-#@since 3.4
+#%since 3.4
   p tp.inspect # "#<TracePoint:call 'foo' /path/to/test.rb:1>"
-#@else
+#%else
   p tp.inspect # "#<TracePoint:call `foo'@/path/to/test.rb:1>"
-#@end
+#%end
 end
 trace.enable
 foo 1
@@ -429,18 +429,18 @@ end
 
 - **SEE** [ruby-core:50864]
 
-#@since 3.2
+#%since 3.2
 ### def binding -> Binding | nil
-#@else
+#%else
 ### def binding -> Binding
-#@end
+#%end
 
 発生したイベントによって生成された [c:Binding] オブジェクトを返します。
 
-#@since 3.2
+#%since 3.2
 C で記述されたメソッドは binding を生成しないため、
 :c_call および :c_return イベントに対しては nil を返すことに注意してください。
-#@end
+#%end
 
 ```ruby title="例"
 def foo(ret)
@@ -459,9 +459,9 @@ foo 1
 
 以下のようにする事で同じ値を取得できます。
 
-#@since 3.2
+#%since 3.2
 なお、self メソッドは binding が nil になる :c_call および :c_return イベントに対しても正しく動作します。
-#@end
+#%end
 
 ```ruby title="例"
 trace.binding.eval('self')

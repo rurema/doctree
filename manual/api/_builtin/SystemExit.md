@@ -4,7 +4,7 @@ library: _builtin
 # class SystemExit < Exception
 
 Ruby インタプリタを終了させるときに発生します。
-#@# exit と raise SystemExit の違い： [[ruby-dev:12785]]
+#%# exit と raise SystemExit の違い： [[ruby-dev:12785]]
 
 ## Class Methods
 

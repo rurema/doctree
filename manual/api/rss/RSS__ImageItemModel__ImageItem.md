@@ -9,25 +9,25 @@ include:
 
 ### def about
 ### def about=
-#@todo
+#%todo
 
 ### def date
 ### def date=
-#@todo
+#%todo
 
 ### def image_height
 ### def image_height=
 ### def height
 ### def height=
-#@todo
+#%todo
 
 ### def image_width
 ### def image_width=
 ### def width
 ### def width=
-#@todo
+#%todo
 
 ### def resource
 ### def resource=
-#@todo
+#%todo
 

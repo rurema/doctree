@@ -246,7 +246,7 @@ UnboundMethod オブジェクトの引数の情報を返します。
 
 詳しくは [m:Method#parameters] を参照してください。
 
-#@#noexample Method#parametersを参照
+#%#noexample Method#parametersを参照
 
 - **SEE** [m:Proc#parameters], [m:Method#parameters]
 
@@ -255,7 +255,7 @@ UnboundMethod オブジェクトの引数の情報を返します。
 self 内で super を実行した際に実行されるメソッドを [c:UnboundMethod] オブジェ
 クトにして返します。
 
-#@#noexample Method#super_methodを参照
+#%#noexample Method#super_methodを参照
 
 - **SEE** [m:Method#super_method]
 
@@ -273,7 +273,7 @@ p C.instance_method(:bar).original_name # => :foo
 
 - **SEE** [m:Method#original_name]
 
-#@if (version == "3.1")
+#%if (version == "3.1")
 ### def public? -> bool
 
 self が public であるかどうかを返します。
@@ -285,4 +285,4 @@ self が protected であるかどうかを返します。
 ### def private? -> bool
 
 self が private であるかどうかを返します。
-#@end
+#%end

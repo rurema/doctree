@@ -33,7 +33,7 @@ require:
 ## Singleton Methods
 
 ### def open(io, mode = 'r', signer = nil){|tar_io| ... }
-#@todo ???
+#%todo ???
 
 io を開いて与えられたブロックに渡してブロックを評価します。
 
@@ -44,7 +44,7 @@ io を開いて与えられたブロックに渡してブロックを評価し�
 - **param** `signer` -- ???
 
 ### def pack(src, destname, signer = nil)
-#@todo
+#%todo
 
 ???
 

@@ -23,82 +23,82 @@ RSS::NotSetError例外が発生します．どの値も設定していな
 
 ### def about
 ### def about=()
-#@todo
+#%todo
 
 ### def title
 ### def title=()
-#@todo
+#%todo
 
 ### def link
 ### def link=()
-#@todo
+#%todo
 
 ### def description
 ### def description=()
-#@todo
+#%todo
 
 ### def language
 ### def language=()
-#@todo
+#%todo
 
 ### def copyright
 ### def copyright=()
-#@todo
+#%todo
 
 ### def managingEditor
 ### def managingEditor=()
-#@todo
+#%todo
 
 ### def webMaster
 ### def webMaster=()
-#@todo
+#%todo
 
 ### def rating
 ### def rating=()
-#@todo
+#%todo
 
 ### def docs
 ### def docs=()
-#@todo
+#%todo
 
 ### def date
 ### def date=()
-#@todo
+#%todo
 
 ### def pubDate
-#@todo
+#%todo
 maker.channel.dateの別名です．
 
 ### def pubDate=()
-#@todo
+#%todo
 maker.channel.date=の別名です．
 
 ### def lastBuildDate
 ### def lastBuildDate=()
-#@todo
+#%todo
 
 ### def generator
 ### def generator=()
-#@todo
+#%todo
 
 ### def ttl
 ### def ttl=()
-#@todo
+#%todo
 
 ### def categories
-#@todo
+#%todo
 categoriesを返します．
 
 ### def cloud
-#@todo
+#%todo
 cloudを返します．
 
 ### def skipDays
-#@todo
+#%todo
 skipDaysを返します．
 
 ### def skipHours
-#@todo
+#%todo
 skipHoursを返します．
 
 # class RSS::Maker::RSS09::Channel < RSS::Maker::ChannelBase

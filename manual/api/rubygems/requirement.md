@@ -105,19 +105,19 @@ req = Gem::Requirement.new("< 5.0", ">= 1.9")
 p req.as_list  # => ["< 5.0", ">= 1.9"]
 ```
 
-#@#--- marshal_dump -> Array
-#@# nodoc
-#@#必要条件のみを [[m:Marshal.#dump]] で使用するために返します。
+#%#--- marshal_dump -> Array
+#%# nodoc
+#%#必要条件のみを [[m:Marshal.#dump]] で使用するために返します。
 
-#@#--- marshal_load(array) -> Gem::Requirement
-#@# nodoc
-#@#必要条件をロードします。
+#%#--- marshal_load(array) -> Gem::Requirement
+#%# nodoc
+#%#必要条件をロードします。
 
-#@#--- requirements -> Array
-#@# nodoc
-#@#自身に含まれる必要条件の配列を返します。
-#@#
-#@#配列に含まれる各要素は、比較演算子と [[c:Gem::Version]] のインスタンスを要素とする二要素の配列です。
+#%#--- requirements -> Array
+#%# nodoc
+#%#自身に含まれる必要条件の配列を返します。
+#%#
+#%#配列に含まれる各要素は、比較演算子と [[c:Gem::Version]] のインスタンスを要素とする二要素の配列です。
 
 ### def satisfied_by?(version) -> bool
 ### def ===(version) -> bool

@@ -8,105 +8,105 @@ library: rss
 ## Instance Methods
 ### def dc_contributor
 ### def dc_contributor=
-#@todo
+#%todo
 
 ### def dc_contributors
-#@todo
+#%todo
 
 ### def dc_coverage
 ### def dc_coverage=
-#@todo
+#%todo
 
 ### def dc_coverages
-#@todo
+#%todo
 
 ### def dc_creator
 ### def dc_creator=
-#@todo
+#%todo
 
 ### def dc_creators
-#@todo
+#%todo
 
 ### def dc_date
 ### def dc_date=
-#@todo
+#%todo
 
 ### def dc_dates
-#@todo
+#%todo
 
 ### def dc_description
 ### def dc_description=
-#@todo
+#%todo
 
 ### def dc_descriptions
-#@todo
+#%todo
 
 ### def dc_format
 ### def dc_format=
-#@todo
+#%todo
 
 ### def dc_formats
-#@todo
+#%todo
 
 ### def dc_identifier
 ### def dc_identifier=
-#@todo
+#%todo
 
 ### def dc_identifiers
-#@todo
+#%todo
 
 ### def dc_language
 ### def dc_language=
-#@todo
+#%todo
 
 ### def dc_languages
-#@todo
+#%todo
 
 ### def dc_publisher
 ### def dc_publisher=
-#@todo
+#%todo
 
 ### def dc_publishers
-#@todo
+#%todo
 
 ### def dc_relation
 ### def dc_relation=
-#@todo
+#%todo
 
 ### def dc_relations
-#@todo
+#%todo
 
 ### def dc_rights
 ### def dc_rights=
-#@todo
+#%todo
 
 ### def dc_rightses
-#@todo
+#%todo
 
 ### def dc_source
 ### def dc_source=
-#@todo
+#%todo
 
 ### def dc_sources
-#@todo
+#%todo
 
 ### def dc_subject
 ### def dc_subject=
-#@todo
+#%todo
 
 ### def dc_subjects
-#@todo
+#%todo
 
 ### def dc_title
 ### def dc_title=
-#@todo
+#%todo
 
 ### def dc_titles
-#@todo
+#%todo
 
 ### def dc_type
 ### def dc_type=
-#@todo
+#%todo
 
 ### def dc_types
-#@todo
+#%todo

@@ -89,11 +89,11 @@ enclose された ThreadGroup に追加や削除を行うと例外 [c:ThreadErro
 thg = ThreadGroup.new.enclose
 thg.add Thread.new {}
 
-#@since 3.4
+#%since 3.4
 # => -:2:in 'ThreadGroup#add': can't move to the enclosed thread group (ThreadError)
-#@else
+#%else
 # => -:2:in `add': can't move to the enclosed thread group (ThreadError)
-#@end
+#%end
 ```
 
 ```ruby title="削除の例"
@@ -106,11 +106,11 @@ thg1.add th
 thg1.enclose
 thg2.add th
 
-#@since 3.4
+#%since 3.4
 # => -:8:in 'ThreadGroup#add': can't move from the enclosed thread group (ThreadError)
-#@else
+#%else
 # => -:8:in `add': can't move from the enclosed thread group (ThreadError)
-#@end
+#%end
 ```
 
 ### def enclosed?    -> bool

@@ -17,43 +17,43 @@ end
 ```
 
 ## Class Methods
-#@#
-#@# --- new(message source = nil, parser = nil, exception = nil)
-#@# #@todo
-#@#
+#%#
+#%# --- new(message source = nil, parser = nil, exception = nil)
+#%# #@todo
+#%#
 
 ## Instance Methods
 
-#@# --- source
-#@# --- source=(value)
-#@# #@todo
-#@#
+#%# --- source
+#%# --- source=(value)
+#%# #@todo
+#%#
 
-#@# --- parser -> REXML::Parsers::BaseParser | nil
-#@# 例外を発生させたパーサオブジェクトを返します。
-#@#
-#@# そのようなオブジェクトが設定されていない場合は nil を返します。
-#@#
-#@# この値は適切に設定されていない場合もあるので、
-#@# 直接は利用しないでください。
-#@#
-#@# --- parser=(value)
-#@#
-#@#
+#%# --- parser -> REXML::Parsers::BaseParser | nil
+#%# 例外を発生させたパーサオブジェクトを返します。
+#%#
+#%# そのようなオブジェクトが設定されていない場合は nil を返します。
+#%#
+#%# この値は適切に設定されていない場合もあるので、
+#%# 直接は利用しないでください。
+#%#
+#%# --- parser=(value)
+#%#
+#%#
 
-#@# このメソッドは使い物にならない
-#@# --- continued_exception -> Exception|nil
-#@# パーサ内部で実際に生じた例外を返します。
-#@#
-#@# パーサ内の例外は [[c:REXML::ParseException]] と
-#@# その子孫クラスの例外以外は ParseException に変換されます。
-#@# このメソッドは内部で実際に生じた例外を返します。
-#@# そのような例外が存在しない場合は nil を返します。
-#@#
-#@# 通常はそのような事態は発生しないはずです(発生したならば
-#@# なんらかのバグである可能性が高いです)。そのため
-#@# このメソッドは通常 nil を返すはずです。
-#@# --- continued_exception=(value)
+#%# このメソッドは使い物にならない
+#%# --- continued_exception -> Exception|nil
+#%# パーサ内部で実際に生じた例外を返します。
+#%#
+#%# パーサ内の例外は [[c:REXML::ParseException]] と
+#%# その子孫クラスの例外以外は ParseException に変換されます。
+#%# このメソッドは内部で実際に生じた例外を返します。
+#%# そのような例外が存在しない場合は nil を返します。
+#%#
+#%# 通常はそのような事態は発生しないはずです(発生したならば
+#%# なんらかのバグである可能性が高いです)。そのため
+#%# このメソッドは通常 nil を返すはずです。
+#%# --- continued_exception=(value)
 
 ### def to_s -> String
 

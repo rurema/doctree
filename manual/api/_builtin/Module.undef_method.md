@@ -43,7 +43,7 @@ end
 p B.new.ok # => A
 ```
 
-#@#see [ruby-dev:17894]
+#%#see [ruby-dev:17894]
 また、undef 文と undef_method の違いは、
 メソッド名を [c:String] または [c:Symbol] で与えられることです。
 

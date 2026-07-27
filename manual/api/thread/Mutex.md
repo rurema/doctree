@@ -32,7 +32,7 @@ m.synchronize {
 
 新しい mutex を生成して返します。
 
-#@#noexample :Mutex#unlock 等を参照
+#%#noexample :Mutex#unlock 等を参照
 
 - **SEE** [m:Thread::Mutex#unlock]
 
@@ -50,7 +50,7 @@ mutex オブジェクトをロックします。一度に一つのス
                    また、[m:Signal?.trap] に指定したハンドラ内で実行
                    した場合に発生します。
 
-#@#noexample Thread::Mutex#unlock を参照
+#%#noexample Thread::Mutex#unlock を参照
 
 - **SEE** [m:Thread::Mutex#unlock]
 
@@ -136,11 +136,11 @@ end.join
 
 - **param** `timeout` -- スリープする秒数を指定します。省略するとスリープし続けます。
 
-#@since 3.1
+#%since 3.1
 - **return** -- タイムアウトした時は nil を、それ以外はスリープしていた秒数を返します。
-#@else
+#%else
 - **return** -- スリープしていた秒数を返します。
-#@end
+#%end
 
 - **raise** `ThreadError` -- 自身がカレントスレッドによってロックされていない場合に発生します。
 

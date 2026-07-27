@@ -16,11 +16,11 @@ JSON のオブジェクトから [c:BigDecimal] のオブジェクトを生成�
 
 ## Public Instance Methods
 
-#@# --- as_json(*args) -> Hash
-#@#
-#@# Marshal the object to JSON.
-#@#
-#@# method used for JSON marshalling support.
+#%# --- as_json(*args) -> Hash
+#%#
+#%# Marshal the object to JSON.
+#%#
+#%# method used for JSON marshalling support.
 
 ### def to_json(*args) -> String
 

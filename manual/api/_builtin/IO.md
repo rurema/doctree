@@ -8,7 +8,7 @@ include:
 
 基本的な入出力機能のためのクラスです。
 
-#@#  * [[unknown:Traps: IO ポートのオープンに関わる問題|trap::IO]]
+#%#  * [[unknown:Traps: IO ポートのオープンに関わる問題|trap::IO]]
 
 File::Constants は、[c:File] から IO へ移動しました。
 
@@ -168,7 +168,7 @@ puts s.dump                           #=> "\x8A\xBF\x8E\x9A"
 エンコーディングは暗黙に変換されます(予定)。UNIX では変換されずそのままシステムコールに渡されます。
 
 [m:Dir.glob], [m:Dir.foreach] などが返すファイル名のエンコーディングも同様にプラットフォーム依存です。
-#@#Win, Mac では UTF-8 です(予定)。
+#%#Win, Mac では UTF-8 です(予定)。
 UNIX では ASCII-8BIT です。
 
 #### バイナリモード {#io_binmode}
@@ -294,9 +294,9 @@ IO.new, IO.for_fd はブロックを受け付けません。
     :crlf は書き込み時に "\n" を "\r\n" に変換します。
     :cr は書き込み時に "\n" を "\r" に変換します。
     :lf は改行の変換を行いません。
-#@since 3.2
+#%since 3.2
   - :path 文字列を渡すと、[m:IO#path] メソッドがその値を返すようになります。
-#@end
+#%end
 また、[m:String#encode] で説明されている :invalid => :replace などの
 変換オプションも指定できます。外部エンコーディングから
 内部エンコーディングへの変換をするときに用いられます。
@@ -344,21 +344,21 @@ path のオープンに成功すれば nil を返します。
 テキスト読み込みメソッドとして動作します。
 
 path が空ファイルの場合、何もせずに nil を返します。
-#@since 4.0
+#%since 4.0
 Ruby 3.x までは path の先頭が "|" のとき "|" に続くコマンドの出力を読み取れましたが、
 この機能は Ruby 4.0 で削除され、"|" で始まる path も通常のファイル名として扱われます。
-#@else
+#%else
 [m:Kernel?.open] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
-#@since 3.3
+#%since 3.3
 なお、この "|" によるコマンド起動は Ruby 3.3 から deprecated であり、Ruby 4.0 で削除されました。[m:IO.popen] を使用してください。
-#@end
-#@end
+#%end
+#%end
 
-#@since 4.0
+#%since 4.0
 - **param** `path` -- ファイル名を表す文字列を指定します。
-#@else
+#%else
 - **param** `path` -- ファイル名を表す文字列か "|コマンド名" を指定します。
-#@end
+#%end
 
 - **param** `rs` -- 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
@@ -597,7 +597,7 @@ length バイト分読み込んで返します。
 引数 length が指定された場合はバイナリ読み込みメソッド、そうでない場合はテキスト読み込みメソッドとして
 動作します。
 
-#@since 4.0
+#%since 4.0
 Ruby 3.x までは path の先頭が "|" のとき "|" に続くコマンドの出力を読み取れましたが
 (この特別扱いはレシーバが [c:IO] の場合のみ有効で、`File.read` では無効でした)、
 この機能は Ruby 4.0 で削除されました。
@@ -609,7 +609,7 @@ IO.read("|echo hello")    # ~> Errno::ENOENT
 File.read("|echo hello")  # ~> Errno::ENOENT
 ```
 
-#@else
+#%else
 [m:Kernel?.open] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 ただし、この "|コマンド名" の特別扱いはレシーバが [c:IO] である場合のみ有効です。
 [c:File] は [m:IO.read] を継承していますが、`File.read` では
@@ -620,17 +620,17 @@ p IO.read("|echo hello")  # => "hello\n" (コマンドを実行する)
 p File.read("|echo hello")  # => Errno::ENOENT ("|echo hello" という名前のファイルを探そうとする)
 ```
 
-#@since 3.3
+#%since 3.3
 なお、この "|" によるコマンド起動は Ruby 3.3 から deprecated であり、Ruby 4.0 で削除されました。[m:IO.popen] を使用してください。
-#@end
-#@end
+#%end
+#%end
 
-#@since 4.0
+#%since 4.0
 - **param** `path` -- ファイル名を表す文字列を指定します。
-#@else
+#%else
 - **param** `path` -- ファイル名を表す文字列か "|コマンド名" を指定します。
                    "|コマンド名" はレシーバが [c:IO] の場合のみ有効です。
-#@end
+#%end
 
 - **param** `length` -- 読み込む長さを整数で指定します。nil であるか省略した場合には、EOF まで読み込みます。
 
@@ -676,18 +676,18 @@ p IO.read(one_byte_file, 1, 10) #=> nil
 path で指定したファイルを open し、offset の所まで seek し、
 length バイト読み込みます。
 
-#@since 4.0
+#%since 4.0
 Ruby 3.x までは path の先頭が "|" のとき "|" に続くコマンドの出力を読み取れましたが
 ([m:IO.read] と同様、レシーバが [c:IO] の場合のみ)、この機能は Ruby 4.0 で削除され、
 [m:IO.binread]・`File.binread` のいずれでも "|" で始まる path は通常のファイル名として扱われます。
-#@else
+#%else
 [m:Kernel?.open] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 [m:IO.read] と同様、この "|コマンド名" の特別扱いはレシーバが [c:IO] である
 場合のみ有効で、`File.binread` では単なるファイル名として扱われます。
-#@since 3.3
+#%since 3.3
 なお、この "|" によるコマンド起動は Ruby 3.3 から deprecated であり、Ruby 4.0 で削除されました。[m:IO.popen] を使用してください。
-#@end
-#@end
+#%end
+#%end
 
 length を省略するとファイルの末尾まで読み込みます。
 
@@ -708,15 +708,15 @@ p IO.binread("testfile", 20, 10) # => "ne one\nThis is line "
 
 path で指定されたファイルを全て読み込んで、その各行を要素としてもつ配列を返します。
 
-#@since 4.0
+#%since 4.0
 Ruby 3.x までは path の先頭が "|" のとき "|" に続くコマンドの出力を読み取れましたが、
 この機能は Ruby 4.0 で削除され、"|" で始まる path も通常のファイル名として扱われます。
-#@else
+#%else
 [m:Kernel?.open] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
-#@since 3.3
+#%since 3.3
 なお、この "|" によるコマンド起動は Ruby 3.3 から deprecated であり、Ruby 4.0 で削除されました。[m:IO.popen] を使用してください。
-#@end
-#@end
+#%end
+#%end
 
 テキスト読み込みメソッドとして動作します。
 
@@ -727,11 +727,11 @@ opts でファイルを開くときのオプションを指定します。エン
 を指定できます。
 [m:File.open] と同様なのでそちらを参照してください。
 
-#@since 4.0
+#%since 4.0
 - **param** `path` -- ファイル名を表す文字列を指定します。
-#@else
+#%else
 - **param** `path` -- ファイル名を表す文字列か "|コマンド名" を指定します。
-#@end
+#%end
 
 - **param** `rs` -- 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 - **param** `limit` -- 最大の読み込みバイト数
@@ -824,15 +824,15 @@ p IO.sysopen("testfile", "w+") # => 3
 path で指定されるファイルを開き、string を書き込み、
 閉じます。
 
-#@since 4.0
+#%since 4.0
 Ruby 3.x までは path の先頭が "|" のとき "|" に続くコマンドを実行しましたが、
 この機能は Ruby 4.0 で削除され、"|" で始まる path も通常のファイル名として扱われます。
-#@else
+#%else
 [m:Kernel?.open] と同様 path の先頭が "|" ならば、"|" に続くコマンドを実行し、コマンドの出力を標準出力に書き込みます。
-#@since 3.3
+#%since 3.3
 なお、この "|" によるコマンド起動は Ruby 3.3 から deprecated であり、Ruby 4.0 で削除されました。[m:IO.popen] を使用してください。
-#@end
-#@end
+#%end
+#%end
 
 offset を指定するとその位置までシークします。
 
@@ -875,15 +875,15 @@ path で指定されるファイルを開き、string を書き込み、
 ファイルを開くときの mode が "wb:ASCII-8BIT" で、バイナリモードが有効
 である点以外は [m:IO.write] と同じです。
 
-#@since 4.0
+#%since 4.0
 Ruby 3.x までは path の先頭が "|" のとき "|" に続くコマンドを実行しましたが、
 この機能は Ruby 4.0 で削除され、"|" で始まる path も通常のファイル名として扱われます。
-#@else
+#%else
 [m:Kernel?.open] と同様 path の先頭が "|" ならば、"|" に続くコマンドを実行し、コマンドの出力を標準出力に書き込みます。
-#@since 3.3
+#%since 3.3
 なお、この "|" によるコマンド起動は Ruby 3.3 から deprecated であり、Ruby 4.0 で削除されました。[m:IO.popen] を使用してください。
-#@end
-#@end
+#%end
+#%end
 
 offset を指定するとその位置までシークします。
 
@@ -894,7 +894,7 @@ offset を指定しないと、書き込みの末尾でファイルを
 - **param** `string` -- 書き込む文字列
 - **param** `offset` -- 書き込み開始位置
 
-#@# TODO: 2.4以上のみを対象できる状況になったらString#unpack1でunpack('m').firstを置き換える。
+#%# TODO: 2.4以上のみを対象できる状況になったらString#unpack1でunpack('m').firstを置き換える。
 
 ```ruby title="例"
 # 8x8の真っ白なPNG画像データ。
@@ -984,7 +984,7 @@ clone_io.close
 以後このポートに対して入出力を行うと例外 [c:IOError] が発生しま
 す。ガーベージコレクトの際にはクローズされていない IO ポートはクロー
 ズされます。
-#@# [[unknown:Traps:closeをGCにまかせる|trap::IO]]
+#%# [[unknown:Traps:closeをGCにまかせる|trap::IO]]
 self がパイプでプロセスにつながっていれば、そのプロセスの終
 了を待ち合わせます。
 
@@ -1462,7 +1462,7 @@ C 言語の printf と同じように、format に従い引数
 
 - **raise** `Errno::EXXX` -- 出力に失敗した場合に発生します。
 
-#@#noexample Kernel.#printf を参照
+#%#noexample Kernel.#printf を参照
 
 - **SEE** [m:Kernel?.printf]
 
@@ -1918,11 +1918,11 @@ File.open("/dev/zero") {|f|
   buf = f.read(3)
   f.sysseek(0)
 }
-#@since 3.4
+#%since 3.4
 # => -:3:in 'sysseek': sysseek for buffered IO (IOError)
-#@else
+#%else
 # => -:3:in `sysseek': sysseek for buffered IO (IOError)
-#@end
+#%end
   
 File.open("/dev/null", "w") {|f|
   f.print "foo"
@@ -1977,7 +1977,7 @@ p File.read("testfile") # => "ABCDEABC"
 
 self を返します。
 
-#@#noexample
+#%#noexample
 
 ### def ungetc(char)     -> nil
 
@@ -2004,11 +2004,11 @@ IOポートに対して str を出力します。str が文字列でなけ
 [m:IO#syswrite] を除く全ての出力メソッドは、最終的に
 "write" という名のメソッドを呼び出すので、このメソッドを置き換える
 ことで出力関数の挙動を変更できます。
-#@##@since 1.8.0
-#@#以前は [[m:Kernel.#putc]], 
-#@#[[m:IO#putc]] に対してだけこのことは適用されませんでした
-#@#([[ruby-dev:16305]])が、修正されました([[ruby-dev:18038]])。
-#@##@end
+#%##@since 1.8.0
+#%#以前は [[m:Kernel.#putc]], 
+#%#[[m:IO#putc]] に対してだけこのことは適用されませんでした
+#%#([[ruby-dev:16305]])が、修正されました([[ruby-dev:18038]])。
+#%##@end
 
 - **param** `str` -- 自身に書き込みたい文字列を指定します。
 
@@ -2176,7 +2176,7 @@ p f.getbyte                #=> 0x38
 
 自身がバイナリモードなら true を返します。そうでない場合、false を返します。
 
-#@#noexample binmode を参照
+#%#noexample binmode を参照
 
 - **SEE** [ref:c:IO#io_binmode], [m:IO#binmode]
 
@@ -2417,7 +2417,7 @@ posix_fadvise をサポートしていないプラットフォーム上では
 p File.open("testfile") { |f| p f.advise(:sequential) } # => nil
 ```
 
-#@since 3.2
+#%since 3.2
 ### def path -> String | nil
 ### def to_path -> String | nil
 
@@ -2471,7 +2471,7 @@ r.read # ~> IO::TimeoutError
 
 - **SEE** [m:IO#timeout], [c:IO::TimeoutError]
 
-#@end
+#%end
 
 ## Constants
 

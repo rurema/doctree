@@ -17,7 +17,7 @@ Usage: gem contents GEMNAME [options]
                                      ファイルのみを表示します
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```console
 Arguments:

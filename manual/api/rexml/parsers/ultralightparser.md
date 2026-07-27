@@ -44,7 +44,7 @@ XML宣言、DTD、ルート要素、テキストノードの配列です。例�
   DTDの実体宣言
 - **[:notationdecl, 記法名文字列, "PUBLIC" | "SYSTEM" | nil, 公開識別子文字列 | nil, URI文字列 | nil]**:
   DTDの記法宣言
-#@# : entity 使われない
+#%# : entity 使われない
 - **[:cdata, テキスト文字列]**:
   cdata セクション
 - **[:xmldecl, バージョン文字列, エンコーディング文字列 | nil, standalone ("yes" | "no" | nil)]**:
@@ -96,10 +96,10 @@ pp parser.parse
 
 ## Instance Methods
 
-#@# #@since 1.8.2
-#@# --- add_listener(listener)
-#@# #@todo
-#@# #@end
+#%# #@since 1.8.2
+#%# --- add_listener(listener)
+#%# #@todo
+#%# #@end
 
 ### def rewind -> ()
 

@@ -9,7 +9,7 @@ RubyGems の環境に関する情報を表示するためのライブラリで�
 Usage: gem environment [arg] [options]
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Arguments:

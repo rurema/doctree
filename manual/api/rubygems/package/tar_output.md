@@ -22,27 +22,27 @@ gem-format な tar ファイル内の data.tar.gz にファイルを追加する
 異メソッドが追加されています。
 
 ### def add_metadata
-#@# -> discard
+#%# -> discard
 gem-format な tar ファイルに metadata.gz を追加します。
 
 前回の [m:Gem::Package::TarOutput#add_gem_contents] の呼び出し以降に
 変更したメタデータを書き込みます。
 
 ### def add_signatures
-#@# -> discard
+#%# -> discard
 gem-format な tar ファイルに data.tar.gz.sig, metadata.gz.sig を追加します。
 
 - **SEE** [c:Gem::Security::Signer]
 
 ### def close
-#@# -> discard
+#%# -> discard
 
 自身に関連付けられた IO を close します。
 
 ## Singleton Methods
 
 ### def open(io, signer = nil){|data_tar_writer| ... }
-#@# -> discard
+#%# -> discard
 
 gem-format な tar ファイル内の data.tar.gz にファイルを追加するためのメ
 ソッドです。

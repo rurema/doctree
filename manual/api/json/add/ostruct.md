@@ -16,10 +16,10 @@ JSON のオブジェクトから [c:OpenStruct] のオブジェクトを生成�
 
 ## Public Instance Methods
 
-#@# --- as_json(*args) -> Hash
-#@#
-#@# Returns a hash, that will be turned into a JSON object and
-#@# represent this object.
+#%# --- as_json(*args) -> Hash
+#%#
+#%# Returns a hash, that will be turned into a JSON object and
+#%# represent this object.
 
 ### def to_json(*args) -> String
 

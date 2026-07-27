@@ -4,7 +4,7 @@ include:
   - Enumerable
 ---
 # class Matrix < Object
-#@#[2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#%#[2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
 数[c:Numeric]を要素とする行列を扱うクラスです。
 
@@ -36,11 +36,11 @@ m=nの行列をm次の正方行列(square matrix)といいます。
 i=jの要素a(i,j)を対角要素(diagonal element)、
 それ以外の要素を非対角要素(nondiagonal element)といいます。
 
-#@#使い方 Usage
+#%#使い方 Usage
 
-#@# [[c:Matrix]]クラスを使うためには、require 'matrix'する必要がある。
+#%# [[c:Matrix]]クラスを使うためには、require 'matrix'する必要がある。
 
-#@#  require 'matrix'
+#%#  require 'matrix'
 
 ## Class Methods
 ### def [](*rows) -> Matrix
@@ -988,12 +988,12 @@ p m.to_a # => [[1, 2, 3], [10, 15, 20], [-1, -2, 1.5]]
 
 このメソッドは deprecated です。 map(&:to_r) を使ってください。
 
-#@# bc-rdoc: detected missing name: new
-#@# --- new(init_method, *argv)
-#@#
-#@# This method is used by the other methods that create matrices,
-#@# and is of no use to general users.
-#@# bc-methods -r matrix Matrix で見つからなかった。okkez
+#%# bc-rdoc: detected missing name: new
+#%# --- new(init_method, *argv)
+#%#
+#%# This method is used by the other methods that create matrices,
+#%# and is of no use to general users.
+#%# bc-methods -r matrix Matrix で見つからなかった。okkez
 
 ### def round(ndigits = 0) -> Matrix
 
@@ -1073,33 +1073,33 @@ r = 1/2r
 p m.coerce(r) #=> [#<Matrix::Scalar:0x832df18 @value=(1/2)>, Matrix[[1, 2], [-1.25, 2.2]]]
 ```
 
-#@# bc-rdoc: detected missing name: inverse_from
-#@# このメソッドは 1.9.2 以降では public でないが、1.9.1以前でも
-#@# 見せないほうがよいか？
-#@# --- inverse_from(src) -> Matrix
-#@#
-#@# 行列1次方程式の解(の行列)を返します。
-#@#
-#@# 行列1次方程式の解(の行列)を返します。
-#@# 行列の関として src * X = self となるような行列Xを返します。
-#@# #@# srcが正則行列ではないでは場合には、ExceptionForMatrix::ErrNotRegularの例外が発生します。
-#@#
-#@# ===== 注意
-#@#
-#@# inverse_fromメソッドは破壊的なメソッドです。
-#@#
-#@# 例:
-#@#   a1 = [1, 2]
-#@#   a2 = [3, 4.5]
-#@#   m = Matrix[a1, a2]
-#@#
-#@#   b1 = [1, 0]
-#@#   b2 = [-1, 1]
-#@#   n = Matrix[b1, b2]
-#@#
-#@#   p x = m.inverse_from(n) #=> Matrix[[1, 2.0], [4, 6.5]]
-#@#   p m #=> Matrix[[1, 2.0], [4, 6.5]]
-#@#   p n * x #=> Matrix[[1, 2.0], [3, 4.5]]
+#%# bc-rdoc: detected missing name: inverse_from
+#%# このメソッドは 1.9.2 以降では public でないが、1.9.1以前でも
+#%# 見せないほうがよいか？
+#%# --- inverse_from(src) -> Matrix
+#%#
+#%# 行列1次方程式の解(の行列)を返します。
+#%#
+#%# 行列1次方程式の解(の行列)を返します。
+#%# 行列の関として src * X = self となるような行列Xを返します。
+#%# #@# srcが正則行列ではないでは場合には、ExceptionForMatrix::ErrNotRegularの例外が発生します。
+#%#
+#%# ===== 注意
+#%#
+#%# inverse_fromメソッドは破壊的なメソッドです。
+#%#
+#%# 例:
+#%#   a1 = [1, 2]
+#%#   a2 = [3, 4.5]
+#%#   m = Matrix[a1, a2]
+#%#
+#%#   b1 = [1, 0]
+#%#   b2 = [-1, 1]
+#%#   n = Matrix[b1, b2]
+#%#
+#%#   p x = m.inverse_from(n) #=> Matrix[[1, 2.0], [4, 6.5]]
+#%#   p m #=> Matrix[[1, 2.0], [4, 6.5]]
+#%#   p n * x #=> Matrix[[1, 2.0], [3, 4.5]]
 
 ### def eigen -> Matrix::EigenvalueDecomposition
 ### def eigensystem -> Matrix::EigenvalueDecomposition

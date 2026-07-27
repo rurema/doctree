@@ -59,7 +59,7 @@ sysclose といった [c:OpenSSL::SSL::SSLSocket] が提供するメソッドを
 
 現在の読み込み位置から 1 バイトずつ読み込み、
 それを文字列としてブロックの引数として呼び出します。
-#@# これは each_byte とは異なる。each_byteは 1.9 でも整数をブロックに渡す。
+#%# これは each_byte とは異なる。each_byteは 1.9 でも整数をブロックに渡す。
 
 [m:IO#each_byte] と同様です。
 

@@ -1,4 +1,4 @@
 ---
 type: library
 ---
-#@include(../parsers/parse_c.rd)
+#%include(../parsers/parse_c.rd)

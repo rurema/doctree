@@ -23,7 +23,7 @@ include:
 実行ファイルをインストールするディレクトリを返します。
 
 ### def build_extensions
-#@# -> discard
+#%# -> discard
 拡張ライブラリをビルドします。
 
 拡張ライブラリをビルドするためのファイルタイプとして有効であるのは、
@@ -42,7 +42,7 @@ extconf.rb, configure script, Rakefile, mkmf_files です。
 - **raise** `Gem::InstallError` -- 依存関係を満たしていない場合に発生します。
 
 ### def extract_files
-#@# -> discard
+#%# -> discard
 ファイルのインデックスを読み取って、それぞれのファイルを Gem のディレクトリに展開します。
 
 また、ファイルを Gem ディレクトリにインストールしないようにします。
@@ -62,13 +62,13 @@ Ruby のコマンドと同じプレフィックスとサフィックスを付け
 Gem のインストール先を返します。
 
 ### def generate_bin
-#@# -> discard
+#%# -> discard
 Gem でインストールされる実行ファイルを作成します。
 
 - **raise** `Gem::FilePermissionError` -- インストール先に書込み出来ない場合に発生します。
 
 ### def generate_bin_script(filename, bindir)
-#@# -> discard
+#%# -> discard
 Gem に入っているアプリケーションを実行するためのスクリプトを作成します。
 
 - **param** `filename` -- ファイル名を指定します。
@@ -76,7 +76,7 @@ Gem に入っているアプリケーションを実行するためのスクリ�
 - **param** `bindir` -- 実行ファイルを配置するディレクトリを指定します。
 
 ### def generate_bin_symlink(filename, bindir)
-#@# -> discard
+#%# -> discard
 Gem に入っているアプリケーションを実行するためのシンボリックリンクを作成します。
 
 現在インストールされている Gem よりも新しい Gem をインストールするときは、
@@ -87,7 +87,7 @@ Gem に入っているアプリケーションを実行するためのシンボ�
 - **param** `bindir` -- 実行ファイルを配置するディレクトリを指定します。
 
 ### def generate_windows_script(filename, bindir)
-#@# -> discard
+#%# -> discard
 コマンドの実行を容易にするために Windows 向けのバッチファイルを作成します。
 
 - **param** `bindir` -- 実行ファイルを配置するディレクトリを指定します。
@@ -133,7 +133,7 @@ Gem をインストールします。
 インストールしようとしている Gem に対応する [c:Gem::Specification] のインスタンスを返します。
 
 ### def unpack(directory)
-#@# -> discard
+#%# -> discard
 与えられたディレクトリに Gem を展開します。
 
 - **param** `directory` -- Gem を展開するディレクトリを指定します。
@@ -144,13 +144,13 @@ Gem をインストールします。
 文字列として返します。
 
 ### def write_spec
-#@# -> discard
+#%# -> discard
 Ruby スクリプト形式で .gemspec ファイルを作成します。
 
 ## Singleton Methods
 
 ### def new(gem, options = {}) -> Gem::Installer
-#@todo 書いてないオプションがいっぱいある
+#%todo 書いてないオプションがいっぱいある
 
 与えられた引数で自身を初期化します。
 

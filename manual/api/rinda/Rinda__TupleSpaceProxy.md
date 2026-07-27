@@ -31,7 +31,7 @@ event で指定した種類のイベントの監視を開始します。
 - **param** `sec` -- 監視期間の長さ(秒数)
 
 ### def read(tuple, sec=nil) -> [Array|Hash]
-#@# --- read(tuple, sec = nil){|template| ... }
+#%# --- read(tuple, sec = nil){|template| ... }
 
 タプルスペース内の tuple にマッチするタプルを一つコピーして返します。
 

@@ -548,10 +548,10 @@ QUIT が送られるため利用する必要はないはずです。
 
 デフォルトの認証スキーム(:plain)です。
 
-#@# internal constants for CRAM-MD5 authentication
-#@# --- IMASK
-#@# --- OMASK
-#@# --- CRAM_BUFSIZE
+#%# internal constants for CRAM-MD5 authentication
+#%# --- IMASK
+#%# --- OMASK
+#%# --- CRAM_BUFSIZE
 
 ### const Revision -> String
 

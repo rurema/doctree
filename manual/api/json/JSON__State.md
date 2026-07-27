@@ -437,19 +437,19 @@ ASCII 文字列のみを用いて JSON 形式の文字列を生成する場合�
 
 name という名前のメソッドを呼び出し、その戻り値を返します。
 
-#@since 4.0
+#%since 4.0
 このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除される
 予定で、代わりの手段として JSON::Coder が挙げられています。
-#@end
+#%end
 
 ### def []=(name, value)
 
 属性 name に value をセットします。
 
-#@since 4.0
+#%since 4.0
 このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除される
 予定で、代わりの手段として JSON::Coder が挙げられています。
-#@end
+#%end
 
 ### def generate(obj) -> String
 

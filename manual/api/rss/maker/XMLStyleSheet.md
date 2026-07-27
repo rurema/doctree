@@ -15,24 +15,24 @@ typeを指定する必要はありません．自動で推測します．
 
 ### def href
 ### def href=()
-#@todo
+#%todo
 
 ### def type
 ### def type=()
-#@todo
+#%todo
 
 ### def title
 ### def title=()
-#@todo
+#%todo
 
 ### def media
 ### def media=()
-#@todo
+#%todo
 
 ### def charset
 ### def charset=()
-#@todo
+#%todo
 
 ### def alternate
 ### def alternate=()
-#@todo
+#%todo

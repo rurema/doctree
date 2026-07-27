@@ -11,9 +11,9 @@ url，contentを設定する必要があります．
 
 ### def url
 ### def url=()
-#@todo
+#%todo
 
 ### def content
 ### def content=()
-#@todo
+#%todo
 

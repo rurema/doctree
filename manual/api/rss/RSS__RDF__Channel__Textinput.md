@@ -5,5 +5,5 @@ library: rss
 ## Instance Methods
 ### def resource
 ### def resource=
-#@todo
+#%todo
 

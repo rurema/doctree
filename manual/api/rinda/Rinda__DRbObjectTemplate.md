@@ -6,7 +6,7 @@ library: rinda/rinda
 ## Class Methods
 
 ### def new(uri = nil, ref = nil)
-#@todo
+#%todo
 
 Creates a new DRbObjectTemplate that will match against +uri+ and
 +ref+.
@@ -14,7 +14,7 @@ Creates a new DRbObjectTemplate that will match against +uri+ and
 ## Instance Methods
 
 ### def ===(ro)
-#@todo
+#%todo
 
 This DRbObjectTemplate matches +ro+ if the remote object's drburi
 and drbref are the same. +nil+ is used as a wildcard.

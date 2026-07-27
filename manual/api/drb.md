@@ -199,8 +199,8 @@ drb ライブラリの名前空間となるモジュール。
 - **raise** `DRb::DRbServerNotFound` -- カレントサーバが存在しない場合に発生します
 - **SEE** [m:DRb?.primary_server]
 
-#@# --- fetch_server(uri)
-#@# #@todo
+#%# --- fetch_server(uri)
+#%# #@todo
 
 ### module_function def front -> object
 
@@ -229,10 +229,10 @@ uri がカレントサーバに紐付けられたものであれば真を返し�
 
 内部的には [m:DRb::DRbServer.default_id_conv] を呼び出すだけです。
 
-#@# --- regist_server(server) -> ()
-#@# #@todo
-#@# --- remove_server(server)
-#@# #@todo
+#%# --- regist_server(server) -> ()
+#%# #@todo
+#%# --- remove_server(server)
+#%# #@todo
 
 ### module_function def primary_server -> DRb::DRbServer|nil
 
@@ -260,7 +260,7 @@ dRuby のサービス(サーバ)を起動します。
 これで起動したサーバはプロセスのプライマリサーバとなります。
 すでにプライマリサーバが存在する場合は上書きされます。
 
-#@include(drb/start-service)
+#%include(drb/start-service)
 
 - **SEE** [m:DRb?.primary_server], [m:DRb::DRbServer.new]
 
@@ -278,21 +278,21 @@ dRuby のサービス(サーバ)を起動します。
 
 - **SEE** [m:DRb?.primary_server]
 
-#@# --- to_id(obj)
-#@# #@todo
-#@#
-#@# Get a reference id for an object using the current server.
-#@#
-#@# This raises a DRbServerNotFound error if there is no current
-#@# server. See #current_server.
-#@#
-#@# --- to_obj(ref)
-#@# #@todo
-#@#
-#@# Convert a reference into an object using the current server.
-#@#
-#@# This raises a DRbServerNotFound error if there is no current
-#@# server. See #current_server.
+#%# --- to_id(obj)
+#%# #@todo
+#%#
+#%# Get a reference id for an object using the current server.
+#%#
+#%# This raises a DRbServerNotFound error if there is no current
+#%# server. See #current_server.
+#%#
+#%# --- to_obj(ref)
+#%# #@todo
+#%#
+#%# Convert a reference into an object using the current server.
+#%#
+#%# This raises a DRbServerNotFound error if there is no current
+#%# server. See #current_server.
 
 ### module_function def uri -> String
 

@@ -5,7 +5,7 @@ category: FileFormat
 [lib:yaml] のバックエンドライブラリです。libyaml ベースで作成されてお
 り、YAML バージョン 1.1 を扱う事ができます。
 
-#@# 上記、libyaml が更新される事があれば、記述の変更をお願いします。
+#%# 上記、libyaml が更新される事があれば、記述の変更をお願いします。
 
 ### 概要
 
@@ -114,9 +114,9 @@ libyaml のバージョンを返します。
 - **SEE** [m:Psych::LIBYAML_VERSION]
 
 ### def load(yaml, filename: nil, fallback: false, symbolize_names: false) -> object
-#@until 3.1
+#%until 3.1
 ### def load(yaml, filename = nil, fallback: false, symbolize_names: false) -> object
-#@end
+#%end
 
 YAML ドキュメントを Ruby のデータ構造(オブジェクト)に変換します。
 
@@ -320,7 +320,7 @@ io に IO オブジェクトを指定した場合は、変換されたドキュ�
 
 options で出力に関するオプションを以下の指定できます。
 
-#@include(psych/dump_options)
+#%include(psych/dump_options)
 
 - **param** `o` -- 変換するオブジェクト
 - **param** `io` -- 出力先
@@ -392,26 +392,26 @@ Ruby のオブジェクトに変換します。
 - **param** `filename` -- ファイル名
 - **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
 
-#@# Deprecated methods, no documents in psych lib
-#@# --- quick_emit
-#@# --- detect_implicit
-#@# --- add_ruby_type
-#@# --- add_private_type
-#@# --- tagurize
-#@# --- read_type_class
-#@# --- object_maker
+#%# Deprecated methods, no documents in psych lib
+#%# --- quick_emit
+#%# --- detect_implicit
+#%# --- add_ruby_type
+#%# --- add_private_type
+#%# --- tagurize
+#%# --- read_type_class
+#%# --- object_maker
 
-#@# For internal use, :nodoc:
-#@# --- add_domain_type(domain, type_tag, &block)
-#@# --- add_builtin_type(type_tag, &block)
-#@# --- remove_type(type_tag)
-#@# --- add_tag(tag, klass)
-#@# --- load_tags
-#@# --- load_tags=(val)
-#@# --- dump_tags
-#@# --- dump_tags=(val)
-#@# --- domain_types
-#@# --- domain_types=(val)
+#%# For internal use, :nodoc:
+#%# --- add_domain_type(domain, type_tag, &block)
+#%# --- add_builtin_type(type_tag, &block)
+#%# --- remove_type(type_tag)
+#%# --- add_tag(tag, klass)
+#%# --- load_tags
+#%# --- load_tags=(val)
+#%# --- dump_tags
+#%# --- dump_tags=(val)
+#%# --- domain_types
+#%# --- domain_types=(val)
 
 # class Psych::Exception < RuntimeError
 

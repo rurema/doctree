@@ -13,9 +13,9 @@ contentを指定する必要があります．
 
 ### def domain
 ### def domain=()
-#@todo
+#%todo
 
 ### def content
 ### def content=()
-#@todo
+#%todo
 

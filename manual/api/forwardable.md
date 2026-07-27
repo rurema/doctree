@@ -4,12 +4,12 @@ category: DesignPattern
 ---
 クラスやオブジェクトに、メソッドの委譲機能を追加するためのライブラリです。
 
-#@#以下のモジュールが定義されます。
+#%#以下のモジュールが定義されます。
 
-#@#  * [[c:Forwardable]]
-#@#  * [[c:SingleForwardable]]
+#%#  * [[c:Forwardable]]
+#%#  * [[c:SingleForwardable]]
 
-#@#詳細は [[unknown:"ruby-src:doc/forwardable.rd.ja"]] を参照してください。
+#%#詳細は [[unknown:"ruby-src:doc/forwardable.rd.ja"]] を参照してください。
 
 ### 参考
 
@@ -129,7 +129,7 @@ q.push 23  # ~> NoMethodError
             [c:Hash] を指定します。キーは [c:Symbol]、
             [c:String] かその配列で指定します。
 
-#@# ruby-core:05899 のパッチに付いてたテストコードより。
+#%# ruby-core:05899 のパッチに付いてたテストコードより。
 
 ```ruby title="例"
 require 'forwardable'

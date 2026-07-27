@@ -90,8 +90,8 @@ YAML ドキュメントをパースし、イベントハンドラに
 パーサが現在読み込んでいる入力上の位置を [c:Psych::Parser::Mark] オブジェクト
 で返します。
 
-#@# This function have no effect
-#@# --- external_encoding=(encoding)
+#%# This function have no effect
+#%# --- external_encoding=(encoding)
 
 ### def handler -> Psych::Handler
 

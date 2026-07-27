@@ -35,7 +35,8 @@ GitHub 上のプレビューと生成される HTML は、以下の点で異な�
 - **YAML front matter**(ファイル先頭の `---` ブロック)。CommonMark 本体には無く、
   Jekyll など静的サイトジェネレータの慣行に倣ったものです。
   ファイルの先頭に隙間なく置いたときだけ front matter として処理されます。
-- **プリプロセッサ行** `#@since` / `#@until` / `#@end` / `#@include` / `#@#`(コメント)。
+- **プリプロセッサ行** `#%since` / `#%until` / `#%end` / `#%include` / `#%#`(コメント。
+  旧 prefix `#@` も後方互換で受理されます)。
   bitclust がパース前に処理する独自機構です(汎用ビューアでは本文テキストに見えます)。
 - **コードフェンスの属性** ```` ```ruby title="例" ```` や ```` ```ruby invalid ````。
   info string 自体は CommonMark として合法ですが、`title=`(キャプション表示)と

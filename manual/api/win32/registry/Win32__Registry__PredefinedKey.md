@@ -6,13 +6,13 @@ library: win32/registry
 ## Class Methods
 
 ### def new(hkey, keyname)
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def class
-#@todo
+#%todo
 
 ### def close
-#@todo
+#%todo
 

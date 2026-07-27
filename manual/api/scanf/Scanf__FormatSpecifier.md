@@ -7,35 +7,35 @@ until: "2.7.0"
 ## Instance Methods
 
 ### def conversion
-#@todo
+#%todo
 
 ### def count_space?
-#@todo
+#%todo
 
 ### def letter
-#@todo
+#%todo
 
 ### def match(str)
-#@todo
+#%todo
 
 ### def matched
-#@todo
+#%todo
 
 ### def matched_string
-#@todo
+#%todo
 
 ### def mid_match?
-#@todo
+#%todo
 
 ### def re_string
-#@todo
+#%todo
 
 ### def to_re
-#@todo
+#%todo
 
 ### def to_s
-#@todo
+#%todo
 
 ### def width
-#@todo
+#%todo
 

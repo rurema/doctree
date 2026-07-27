@@ -2,7 +2,7 @@
 type: library
 category: Thread
 ---
-#@# = monitor
+#%# = monitor
 
 スレッドの同期機構としてのモニター機能を提供するクラスです。
 また同じスレッドから何度も lock できる Mutex としての機能も提供します。

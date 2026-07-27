@@ -44,7 +44,7 @@ Gem Spec ファイルを元にして Gem パッケージを作成するタスク
 ## Public Instance Methods
 
 ### def define
-#@# discard
+#%# discard
 
 タスクを定義します。
 
@@ -68,7 +68,7 @@ gemspec をセットします。
 - **param** `gem_spec` -- [c:Gem::Specification] のインスタンスを指定します。
 
 ### def init(gem_spec)
-#@# discard
+#%# discard
 
 自身の各属性に初期値をセットします。
 

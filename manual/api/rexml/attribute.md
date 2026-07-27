@@ -95,9 +95,9 @@ p e.attributes.get_attribute("r").namespace # => "http://www.example.com/ns"
 
 属性の名前と値が other と一致する場合に真を返します。
 
-#@# hash が定義されているのに eql? が定義されていない
-#@# --- hash
-#@# #@todo
+#%# hash が定義されているのに eql? が定義されていない
+#%# --- hash
+#%# #@todo
 
 ### def to_string -> String
 
@@ -154,10 +154,10 @@ output が返ります。
 その属性を指定する xpath 文字列を返します。
 
 例えば "/foo/bar/@ns:r" という文字列を返します。
-#@# 完全な例題をここに書く
+#%# 完全な例題をここに書く
 
 ## Constants
 
-#@# 内部的に使う正規表現
-#@# --- PATTERN
-#@# --- NEEDS_A_SECOND_CHECK
+#%# 内部的に使う正規表現
+#%# --- PATTERN
+#%# --- NEEDS_A_SECOND_CHECK

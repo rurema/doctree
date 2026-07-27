@@ -11,11 +11,11 @@ library: _builtin
 Ruby 1.8 以降では、[c:File] ではなく、[c:IO] でインクルード
 されるようになりました。
 
-#@# 情報源: RUBY/ext/fcntl/fcntl.c
+#%# 情報源: RUBY/ext/fcntl/fcntl.c
 
 ## Constants
 
-#@# [[m:File#flock]] で使われる定数 ----------------------------------
+#%# [[m:File#flock]] で使われる定数 ----------------------------------
 
 ### const LOCK_SH -> Integer
 
@@ -36,7 +36,7 @@ Ruby 1.8 以降では、[c:File] ではなく、[c:IO] でインクルード
 ロックの際にブロックしない。他の指定と or することで指定します。
 [m:File#flock] で使用します。
 
-#@# [[m:File.open]] で使われる定数 -----------------------------------
+#%# [[m:File.open]] で使われる定数 -----------------------------------
 
 ### const RDONLY -> Integer
 
@@ -71,7 +71,7 @@ CREATと併用し、もしファイルが既にある場合には失敗します
 ### const NONBLOCK -> Integer
 
 ファイルが利用可能じゃなくてもブロックしません。
-#@# IO.open で使用、かも...
+#%# IO.open で使用、かも...
 [m:File.open]で使用します。
 
 ### const TRUNC -> Integer
@@ -151,7 +151,7 @@ atime が更新されないのは確実ではないということに注意し�
 open(2) で O_TMPFILE が指定できる場合に使えます。
 [m:File.open]で使用します。
 
-#@# [[m:File.fnmatch]], [[m:Dir.glob で使われる定数 ------------------
+#%# [[m:File.fnmatch]], [[m:Dir.glob で使われる定数 ------------------
 
 ### const FNM_NOESCAPE -> Integer
 

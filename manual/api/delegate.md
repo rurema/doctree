@@ -53,14 +53,14 @@ p a         # => [25]
 
 ## Class Methods
 
-#@#--- delegation_block
-#@# 見つからない
+#%#--- delegation_block
+#%# 見つからない
 
-#@#--- public_api
-#@# nodoc
+#%#--- public_api
+#%# nodoc
 
-#@# --- const_missing
-#@# 見つからない
+#%# --- const_missing
+#%# 見つからない
 
 ## Instance Methods
 

@@ -30,7 +30,7 @@ end
 
 基本的な仕組みは [c:Psych::Visitors::YAMLTree] と似ています。
 
-#@# Psych::Streaming のメソッドはここに記述しています。
+#%# Psych::Streaming のメソッドはここに記述しています。
 ## Class Methods
 ### def new(io) -> Psych::Stream
 
@@ -62,12 +62,12 @@ finish を呼び出すことで出力が完了します(finish を呼び出さ�
 
 YAML document への変換を完了し、io への出力を完了します。
 
-#@# このメソッドは実際には存在しない。YAMLTree から継承されている。
-#@# 説明のためここに書いている。
+#%# このメソッドは実際には存在しない。YAMLTree から継承されている。
+#%# 説明のためここに書いている。
 
-#@# 以下のメソッドについては、nodoc が指定されているため、省略。
-#@# = class Psych::Stream::Emitter < Psych::Emitter
-#@# include Psych::Streaming
-#@# == Instance Methods
-#@# --- end_document implicit_end = !streaming?
-#@# --- streaming?
+#%# 以下のメソッドについては、nodoc が指定されているため、省略。
+#%# = class Psych::Stream::Emitter < Psych::Emitter
+#%# include Psych::Streaming
+#%# == Instance Methods
+#%# --- end_document implicit_end = !streaming?
+#%# --- streaming?

@@ -14,22 +14,22 @@ Gem パッケージの RDoc, RI を生成するためのクラスです。
 ## Public Instance Methods
 
 ### def generate_rdoc
-#@# -> discard
+#%# -> discard
 
 自身にセットされている [c:Gem::Specification] の情報をもとに RDoc のドキュメントを生成します。
 
 ### def generate_ri
-#@# -> discard
+#%# -> discard
 
 自身にセットされている [c:Gem::Specification] の情報をもとに RI 用のデータを生成します。
 
 ### def install_rdoc
-#@# -> discard
+#%# -> discard
 
 RDoc を生成してインストールします。
 
 ### def install_ri
-#@# -> discard
+#%# -> discard
 
 RI のデータを生成してインストールします。
 
@@ -39,7 +39,7 @@ RDoc がインストール済みの場合は、真を返します。
 そうでない場合は偽を返します。
 
 ### def run_rdoc(*args)
-#@# -> discard
+#%# -> discard
 
 与えられた引数を使用して RDoc を実行します。
 
@@ -48,14 +48,14 @@ RDoc がインストール済みの場合は、真を返します。
 - **raise** `Gem::FilePermissionError` -- RDoc でドキュメント生成中にファイルにアクセス出来なかった場合に発生します。
 
 ### def setup_rdoc
-#@# -> discard
+#%# -> discard
 
 RDoc を実行するための準備を行います。
 
 - **raise** `Gem::FilePermissionError` -- RDoc を保存するディレクトリにアクセスする権限がない場合に発生します。
 
 ### def uninstall_doc
-#@# -> discard
+#%# -> discard
 
 RDoc と RI 用のデータを削除します。
 
@@ -80,7 +80,7 @@ RDoc に渡す引数をセットします。
 - **param** `args` -- 文字列の配列か空白区切りの文字列を指定します。
 
 ### def load_rdoc
-#@# -> discard
+#%# -> discard
 
 Gem の RDoc が使用可能な場合は使用します。
 そうでない場合は、標準添付の RDoc を使用します。
@@ -88,7 +88,7 @@ Gem の RDoc が使用可能な場合は使用します。
 - **raise** `Gem::DocumentError` -- RDoc が使用できない場合に発生します。
 
 ### def update_ri_cache
-#@# -> discard
+#%# -> discard
 
 RDoc 2 がインストールされている場合は RI のキャッシュを更新します。
 そうでない場合は何もしません。

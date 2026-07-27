@@ -2,7 +2,7 @@
 type: library
 category: Network
 ---
-#@# = open-uri
+#%# = open-uri
 
 http/ftp に簡単にアクセスするためのクラスです。
 

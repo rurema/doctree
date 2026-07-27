@@ -26,15 +26,15 @@ end
 ```
 
 ```text title="例1の実行結果"
-#@since 3.4
+#%since 3.4
 caller_locations.rb:2:in 'a'
 caller_locations.rb:5:in 'b'
 caller_locations.rb:8:in 'c'
-#@else
+#%else
 caller_locations.rb:2:in `a'
 caller_locations.rb:5:in `b'
 caller_locations.rb:8:in `c'
-#@end
+#%end
 ```
 
 ```ruby title="例2"
@@ -52,15 +52,15 @@ end
 ```
 
 ```text title="例2の実行結果"
-#@since 3.4
+#%since 3.4
 init.rb:4:in 'initialize'
 init.rb:8:in 'new'
 init.rb:8:in '<main>'
-#@else
+#%else
 init.rb:4:in `initialize'
 init.rb:8:in `new'
 init.rb:8:in `<main>'
-#@end
+#%end
 ```
 
 ### 参考
@@ -175,15 +175,15 @@ Foo.new(0..2).locations.map do |call|
   puts call.to_s
 end
 
-#@since 3.4
+#%since 3.4
 # => path/to/foo.rb:5:in 'initialize'
 # path/to/foo.rb:9:in 'new'
 # path/to/foo.rb:9:in '<main>'
-#@else
+#%else
 # => path/to/foo.rb:5:in `initialize'
 # path/to/foo.rb:9:in `new'
 # path/to/foo.rb:9:in `<main>'
-#@end
+#%end
 ```
 
 ### def inspect -> String
@@ -204,13 +204,13 @@ Foo.new(0..2).locations.map do |call|
   puts call.inspect
 end
 
-#@since 3.4
+#%since 3.4
 # => "path/to/foo.rb:5:in 'initialize'"
 # "path/to/foo.rb:9:in 'new'"
 # "path/to/foo.rb:9:in '<main>'"
-#@else
+#%else
 # => "path/to/foo.rb:5:in `initialize'"
 # "path/to/foo.rb:9:in `new'"
 # "path/to/foo.rb:9:in `<main>'"
-#@end
+#%end
 ```

@@ -6,9 +6,9 @@ library: rss
 
 ### def resource
 ### def resource=
-#@todo
+#%todo
 
 ### def value
 ### def value=
-#@todo
+#%todo
 

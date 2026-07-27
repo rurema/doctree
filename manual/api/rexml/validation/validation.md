@@ -3,49 +3,49 @@
 ## Instance Methods
 
 ### def reset
-#@todo
+#%todo
 
 ### def dump
-#@todo
+#%todo
 
 ### def validate(event)
-#@todo
+#%todo
 
 ## Constants
 
 ### const NILEVENT
-#@todo
+#%todo
 
 # class REXML::Validation::Event < Object
 
 ## Class Methods
 
 ### def new(event_type, event_arg = nil)
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def event_type
-#@todo
+#%todo
 
 ### def event_arg
 ### def event_arg=(value)
-#@todo
+#%todo
 
 ### def done?
-#@todo
+#%todo
 
 ### def single?
-#@todo
+#%todo
 
 ### def matches?(event)
-#@todo
+#%todo
 
 ### def ==(other)
-#@todo
+#%todo
 
 ### def to_s
-#@todo
+#%todo
 
 ### def inspect
-#@todo
+#%todo

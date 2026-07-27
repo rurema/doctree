@@ -48,9 +48,9 @@ p r * Rational(1, 2) # => (3/8)
 冪(べき)乗を計算します。
 
 - **param** `other` -- 自身を other 乗する数
-#@since 3.4
+#%since 3.4
 - **raise** `ArgumentError` -- 計算結果の分母・分子が巨大すぎる場合に発生します。
-#@end
+#%end
 
 other に [c:Float] を指定した場合は、計算結果を [c:Float] で返しま
 す。other が有理数であっても、計算結果が無理数だった場合は [c:Float]
@@ -64,7 +64,7 @@ p r ** 2.0           # => 0.5625
 p r ** Rational(1, 2)  # => 0.866025403784439
 ```
 
-#@until 3.4
+#%until 3.4
 計算結果の分母・分子が巨大になりすぎるとき、警告を出したうえで Float::INFINITY（基数によっては NaN）を返します。
 
 ```ruby title="計算を放棄して Float::INFINITY を返す例"
@@ -74,9 +74,9 @@ p Rational(2) ** 100000000
 ```
 
 判定の閾値は変わりえます。
-#@end
+#%end
 
-#@since 3.4
+#%since 3.4
 計算結果の分母・分子が巨大すぎるときは ArgumentError が発生します。
 
 ```ruby title="計算結果が巨大すぎる例"
@@ -85,7 +85,7 @@ p Rational(2) ** 10000000000000000000
 ```
 
 判定の閾値は変わりえます。
-#@end
+#%end
 
 ### def +(other) -> Rational | Float
 
@@ -332,7 +332,7 @@ p Rational('-123.456').floor(-1)     # => -130
 
 - **return** -- ハッシュ値を返します。
 
-#@#noexample
+#%#noexample
 
 - **SEE** [m:Object#hash]
 
@@ -498,7 +498,7 @@ Rational::compatible#marshal_load で復元可能な配列を返します。
 
 [注意] Rational::compatible は通常の方法では参照する事ができません。
 
-#@# https://bugs.ruby-lang.org/issues/6625 を参照。
+#%# https://bugs.ruby-lang.org/issues/6625 を参照。
 
 ## Private Singleton Methods
 

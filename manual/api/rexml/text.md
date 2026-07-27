@@ -81,11 +81,11 @@ p REXML::Text.new("&quzz", false, doc.root, false).to_s # => "&amp;&q;"
 p REXML::Text.new("quzz", false, doc.root, true).to_s # => "quzz"
 ```
 
-#@# entity_filter を使う場合
-#@# todo
+#%# entity_filter を使う場合
+#%# todo
 
-#@# --- read_with_substitution(input, illegal = nil)
-#@# #@todo
+#%# --- read_with_substitution(input, illegal = nil)
+#%# #@todo
 
 ### def normalize(input, doctype = nil, entity_filter = nil) -> String
 
@@ -114,16 +114,16 @@ p REXML::Text.unnormalize("&amp; &foobar; &lt;") # => "& &foobar; <"
 p REXML::Text.unnormalize("&lt; &gt;", nil, ["lt"]) # => "&lt; >"
 ```
 
-#@# used internally, 不正な文字が含まれていないかチェックして例外を出す
-#@# #@since 1.9.1
-#@# --- check(string, pattern, doctype)
-#@# #@end
-#@#
-#@# used internally by unnormalize
-#@# #@since 2.0.0
-#@# --- expand(ref, doctype, filter)
-#@# #@end
-#@#
+#%# used internally, 不正な文字が含まれていないかチェックして例外を出す
+#%# #@since 1.9.1
+#%# --- check(string, pattern, doctype)
+#%# #@end
+#%#
+#%# used internally by unnormalize
+#%# #@since 2.0.0
+#%# --- expand(ref, doctype, filter)
+#%# #@end
+#%#
 ## Instance Methods
 
 ### def raw -> bool
@@ -155,9 +155,9 @@ raw モードについては [m:REXML::Text.new] を参考にしてください�
 
 self を複製します。
 
-#@# buggy
-#@# --- <<(to_append)
-#@# #@todo
+#%# buggy
+#%# --- <<(to_append)
+#%# #@todo
 
 ### def <=>(other) -> -1 | 0 | 1
 
@@ -182,10 +182,10 @@ p t.to_s # => "&lt; &amp; foobar"
 p t.value # => "< & foobar"
 ```
 
-#@# #@since 1.8.3
-#@# --- inspect
-#@# #@todo
-#@# #@end
+#%# #@since 1.8.3
+#%# --- inspect
+#%# #@todo
+#%# #@end
 
 ### def value -> String
 
@@ -202,9 +202,9 @@ p t.to_s # => "&lt; &amp; foobar"
 p t.value # => "< & foobar"
 ```
 
-#@# テキストの内容を指定した幅で折り返した文字列を返す。内部用。
-#@# --- wrap(string, width, addnewline = false)
-#@# #@todo
+#%# テキストの内容を指定した幅で折り返した文字列を返す。内部用。
+#%# --- wrap(string, width, addnewline = false)
+#%# #@todo
 
 ### def value=(val)
 
@@ -223,24 +223,24 @@ e[0].value = "<a>"
 p e.to_s # => "<a>&lt;a&gt;</a>"
 ```
 
-#@# テキストをインデントした文字列を返す。内部用。
-#@# #@since 1.8.2
-#@# --- indent_text(string, level = 1, style = "\t", indentfirstline = true)
-#@# #@todo
-#@# #@end
+#%# テキストをインデントした文字列を返す。内部用。
+#%# #@since 1.8.2
+#%# --- indent_text(string, level = 1, style = "\t", indentfirstline = true)
+#%# #@todo
+#%# #@end
 
-#@# obsoleteだし使わない
-#@# --- write(writer, indent = -1, transitive = false, ie_hack = false)
-#@# #@todo
+#%# obsoleteだし使わない
+#%# --- write(writer, indent = -1, transitive = false, ie_hack = false)
+#%# #@todo
 
-#@# #@since 1.8.2
-#@# --- xpath
-#@# 正しく動かないので使わないでください。
-#@# #@todo
-#@# #@end
+#%# #@since 1.8.2
+#%# --- xpath
+#%# 正しく動かないので使わないでください。
+#%# #@todo
+#%# #@end
 
-#@# --- write_with_substitution(out, input)
-#@# #@todo
+#%# --- write_with_substitution(out, input)
+#%# #@todo
 
 ### def doctype -> REXML::DocType | nil
 
@@ -252,32 +252,32 @@ p e.to_s # => "<a>&lt;a&gt;</a>"
 
 - **SEE** [c:REXML::DocType]
 
-#@# 意味は REXML::Child と同じ
-#@# --- parent=
-#@#
+#%# 意味は REXML::Child と同じ
+#%# --- parent=
+#%#
 ## Constants
 
-#@# Internally used regexps
-#@# --- SPECIALS
-#@# #@todo
-#@#
-#@# --- SUBSTITUTES
-#@# #@todo
-#@#
-#@# --- SLAICEPS
-#@# #@todo
-#@#
-#@# --- SETUTITSBUS
-#@# #@todo
-#@#
-#@# --- ILLEGAL
-#@# #@todo
-#@#
-#@# --- NUMERICENTITY
-#@# #@todo
-#@#
-#@# --- REFERENCE
-#@# #@todo
-#@#
-#@# --- EREFERENCE
-#@# #@todo
+#%# Internally used regexps
+#%# --- SPECIALS
+#%# #@todo
+#%#
+#%# --- SUBSTITUTES
+#%# #@todo
+#%#
+#%# --- SLAICEPS
+#%# #@todo
+#%#
+#%# --- SETUTITSBUS
+#%# #@todo
+#%#
+#%# --- ILLEGAL
+#%# #@todo
+#%#
+#%# --- NUMERICENTITY
+#%# #@todo
+#%#
+#%# --- REFERENCE
+#%# #@todo
+#%#
+#%# --- EREFERENCE
+#%# #@todo

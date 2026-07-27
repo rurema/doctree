@@ -1,9 +1,9 @@
 ---
 library: etc
 alias:
-#@until 3.2
+#%until 3.2
   - Struct::Group
-#@end
+#%end
 ---
 # class Etc::Group < Struct
 

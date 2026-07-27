@@ -188,9 +188,9 @@ POST します。
 
 - **SEE** [m:Net::HTTP.Proxy]
 
-#@# --- socket_type -> Net::BufferedIO
-#@#
-#@# このメソッドは obsolete です。
+#%# --- socket_type -> Net::BufferedIO
+#%#
+#%# このメソッドは obsolete です。
 
 ### def Proxy(address, port = 80) -> Class
 
@@ -769,16 +769,16 @@ POST で送ります。
 ブロックに与えます。このとき戻り値の HTTPResponse オブジェクトは有効な body を
 持ちません。
 
-#@since 4.0
+#%since 4.0
 POST する場合にはヘッダに Content-Type: を指定する必要があります。
 Ruby 4.0 から、header に指定しなかった場合に Content-Type を
 "application/x-www-form-urlencoded" として補う挙動は削除されました。
 指定しなかった場合、Content-Type ヘッダは送信されません。
-#@else
+#%else
 POST する場合にはヘッダに Content-Type: を指定する必要があります。
 もし header に指定しなかったならば、 Content-Type として
 "application/x-www-form-urlencoded" を用います。
-#@end
+#%end
 
 dest は時代遅れの引数です。利用しないでください。
 dest を指定した場合には
@@ -901,16 +901,16 @@ header が nil
 接続を維持した状態で [c:Net::HTTPResponse]
 オブジェクトをブロックに渡します。
 
-#@since 4.0
+#%since 4.0
 POST する場合にはヘッダに Content-Type: を指定する必要があります。
 Ruby 4.0 から、header に指定しなかった場合に Content-Type を
 "application/x-www-form-urlencoded" として補う挙動は削除されました。
 指定しなかった場合、Content-Type ヘッダは送信されません。
-#@else
+#%else
 POST する場合にはヘッダに Content-Type: を指定する必要があります。
 もし header に指定しなかったならば、 Content-Type として
 "application/x-www-form-urlencoded" を用います。
-#@end
+#%end
 
 - **param** `path` -- POST先のエンティティのパスを文字列で指定します。
 - **param** `data` -- POSTするデータを与えます。
@@ -1010,8 +1010,8 @@ POST/PUT の時は data も与えられます
                      与えた場合に発生します。
 - **SEE** [m:Net::HTTP#send_request]
 
-#@# --- inspect
-#@# 
+#%# --- inspect
+#%# 
 
 ### def copy(path, initheader = nil) -> Net::HTTPResponse
 
@@ -1126,9 +1126,9 @@ PATCH リクエストで送ります。
 ブロックに与えます。このとき戻り値の HTTPResponse オブジェクトは有効な body を
 持ちません。
 
-#@# POST する場合にはヘッダに Content-Type: を指定する必要があります。
-#@# もし header に指定しなかったならば、 Content-Type として
-#@# "application/x-www-form-urlencoded" を用います。
+#%# POST する場合にはヘッダに Content-Type: を指定する必要があります。
+#%# もし header に指定しなかったならば、 Content-Type として
+#%# "application/x-www-form-urlencoded" を用います。
 
 Dest は時代遅れの引数です。利用しないでください。
 dest を指定した場合には

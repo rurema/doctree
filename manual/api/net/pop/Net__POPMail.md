@@ -134,5 +134,5 @@ delete! は obsolete です。
 [m:Net::POPMail#number] と違い、
 この UIDL は接続しなおしても変化しません。
 
-#@# internal use
-#@# --- uid=
+#%# internal use
+#%# --- uid=

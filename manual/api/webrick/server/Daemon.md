@@ -7,8 +7,8 @@ library: webrick/server
 [m:WEBrick::GenericServer.new] の設定の :ServerType の値として指定した場合
 サーバはデーモンとして動作します。
 
-#@#== Singleton Methods
+#%#== Singleton Methods
 
-#@#--- start
-#@#--- start { ... }
-#@#todo
+#%#--- start
+#%#--- start { ... }
+#%#todo

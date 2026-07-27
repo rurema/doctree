@@ -1,4 +1,4 @@
 ---
 type: library
 ---
-#@include(parsers/parserfactory.rd)
+#%include(parsers/parserfactory.rd)

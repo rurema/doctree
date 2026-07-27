@@ -93,7 +93,7 @@ p Module.used_modules
 #=> [B, A]
 ```
 
-#@since 3.2
+#%since 3.2
 ### def used_refinements -> [Refinement]
 
 現在のスコープで using されているすべての [c:Refinement] を配列で返します。
@@ -120,7 +120,7 @@ p Module.used_refinements
 ```
 
 - **SEE** [m:Module.used_modules], [m:Module#refinements]
-#@end
+#%end
 
 ## Instance Methods
 
@@ -165,7 +165,7 @@ p Eagle <=> Object.new  # => nil
 
 比較演算子。self が other の子孫である場合、 true を返します。
 self が other の先祖か同一のクラス／モジュールである場合、false を返します。
-#@# self < other が成立します。
+#%# self < other が成立します。
 
 継承関係にないクラス同士の比較では
 nil を返します。
@@ -189,11 +189,11 @@ p Eagle < Bird          # => true
 p Eagle < Flyable       # => true
 p Eagle < Fish          # => nil
 p Eagle > Fish          # => nil
-#@since 3.4
+#%since 3.4
 Flyable < Object.new    # => in '<': compared with non class/module (TypeError)
-#@else
+#%else
 Flyable < Object.new    # => in `<': compared with non class/module (TypeError)
-#@end
+#%end
 ```
 
 ### def <=(other) -> bool | nil
@@ -348,7 +348,7 @@ end
 
 - **SEE** [m:Module#included_modules]
 
-#@include(Module.attr)
+#%include(Module.attr)
 
 ### def autoload(const_name, feature) -> nil
 
@@ -407,11 +407,11 @@ class Zoo
   autoload :Animal, '/tmp/animal.rb'
 end
 Zoo::Animal
-#@since 3.4
+#%since 3.4
 # => -:4:in '<main>': uninitialized constant Zoo::Animal (NameError)
-#@else
+#%else
 # => -:4:in `<main>': uninitialized constant Zoo::Animal (NameError)
-#@end
+#%end
 ```
 
 - **SEE** [m:Kernel?.autoload]
@@ -748,7 +748,7 @@ module Settings
 end # ~> FrozenError: can't modify frozen module: Settings
 ```
 
-#@include(Module.include)
+#%include(Module.include)
 
 ### def include?(mod) -> bool
 
@@ -1004,7 +1004,7 @@ p c.name         #=> "Foo"
 p c.name.frozen? #=> true
 ```
 
-#@since 3.3
+#%since 3.3
 ### def set_temporary_name(string) -> self
 ### def set_temporary_name(nil) -> self
 
@@ -1057,7 +1057,7 @@ String.set_temporary_name("<x>")          # ~> RuntimeError
 ```
 
 - **SEE** [m:Module#name]
-#@end
+#%end
 
 ### def instance_methods(inherited_too = true) -> [Symbol]
 
@@ -1115,7 +1115,7 @@ p Dog.protected_instance_methods(true) - Object.protected_instance_methods(true)
 [:protected_foo]
 ```
 
-#@since 3.2
+#%since 3.2
 ### def undefined_instance_methods -> [Symbol]
 
 そのモジュールで [m:Module#undef_method] によって未定義にされた
@@ -1138,9 +1138,9 @@ p Foo.undefined_instance_methods # => []
 ```
 
 - **SEE** [m:Module#undef_method], [m:Module#instance_methods]
-#@end
+#%end
 
-#@since 3.2
+#%since 3.2
 ### def refinements -> [Refinement]
 
 self の中で [m:Module#refine] によって定義された [c:Refinement] の
@@ -1160,7 +1160,7 @@ p A.refinements
 ```
 
 - **SEE** [m:Module#refine], [m:Module.used_refinements]
-#@end
+#%end
 
 ### def public_instance_method(name) -> UnboundMethod
 
@@ -1173,11 +1173,11 @@ self の public インスタンスメソッド name をオブジェクト化し�
 
 ```ruby title="例"
 p Kernel.public_instance_method(:object_id) #=> #<UnboundMethod: Kernel#object_id>
-#@since 3.4
+#%since 3.4
 Kernel.public_instance_method(:p)         #   method 'p' for module 'Kernel' is private (NameError)
-#@else
+#%else
 Kernel.public_instance_method(:p)         #   method `p' for module `Kernel' is private (NameError)
-#@end
+#%end
 ```
 
 - **SEE** [m:Module#instance_method],[m:Object#public_method]
@@ -1189,7 +1189,7 @@ Kernel.public_instance_method(:p)         #   method `p' for module `Kernel' is 
 
 - **param** `inherited_too` -- false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
-#@#noexample 参照先のModule#instance_methodsにサンプルが書かれているため
+#%#noexample 参照先のModule#instance_methodsにサンプルが書かれているため
 
 - **SEE** [m:Object#public_methods], [m:Module#instance_methods], [m:Module#private_instance_methods], [m:Module#protected_instance_methods]
 
@@ -1226,7 +1226,7 @@ p Sortable.private_instance_methods(false) # => [:qux]
 
 - **param** `inherited_too` -- false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
-#@#noexample 参照先のModule#instance_methodsにサンプルが書かれているため
+#%#noexample 参照先のModule#instance_methodsにサンプルが書かれているため
 
 - **SEE** [m:Object#protected_methods], [m:Module#instance_methods], [m:Module#public_instance_methods], [m:Module#private_instance_methods]
 
@@ -1259,11 +1259,11 @@ name で指定した定数の可視性を private に変更します。
 
 - **return** -- self を返します。
 
-#@since 3.2
+#%since 3.2
 - **SEE** [m:Module#public_constant]
-#@else
+#%else
 - **SEE** [m:Module#public_constant], [m:Object#untrusted?]
-#@end
+#%end
 
 ```ruby title="例"
 module Api
@@ -1300,15 +1300,15 @@ class Factory
   private_class_method :foo
 end
 
-#@if("3.4" <= version)
+#%if("3.4" <= version)
 Factory.foo # NoMethodError: private method 'foo' called for class Factory
-#@end
-#@if("3.3" <= version and version < "3.4")
+#%end
+#%if("3.3" <= version and version < "3.4")
 Factory.foo # NoMethodError: private method `foo' called for class Factory
-#@end
-#@if(version < "3.3")
+#%end
+#%if(version < "3.3")
 Factory.foo # NoMethodError: private method `foo' called for Factory:Class
-#@end
+#%end
 
 p Factory.public_class_method(:foo) # => Factory
 p Factory.foo # => "foo"
@@ -1347,11 +1347,11 @@ end
 p SampleModule::SampleInnerClass # => SampleModule::SampleInnerClass
 ```
 
-#@since 3.2
+#%since 3.2
 - **SEE** [m:Module#private_constant]
-#@else
+#%else
 - **SEE** [m:Module#private_constant], [m:Object#untrusted?]
-#@end
+#%end
 
 ### def private_method_defined?(name, inherit=true) -> bool
 
@@ -1456,7 +1456,7 @@ p C.method_defined? "method2"              #=> true
 
 name で与えられた名前のクラス変数がモジュールに存在する場合 true を
 返します。
-#@# Returns true if the given class variable is defined in obj.
+#%# Returns true if the given class variable is defined in obj.
 
 - **param** `name` -- [c:Symbol] か [c:String] を指定します。
 
@@ -1546,11 +1546,11 @@ p C.singleton_class?                # => false
 p C.singleton_class.singleton_class?  # => true
 ```
 
-#@include(Module.prepend)
-#@include(Module.alias_method)
-#@include(Module.define_method)
-#@include(Module.remove_method)
-#@include(Module.undef_method)
+#%include(Module.prepend)
+#%include(Module.alias_method)
+#%include(Module.define_method)
+#%include(Module.remove_method)
+#%include(Module.undef_method)
 
 ## Private Instance Methods
 
@@ -1642,7 +1642,7 @@ end
 
 - **SEE** [m:Module#append_features]
 
-#@since 3.2
+#%since 3.2
 ### def const_added(name) -> ()
 
 定数 name が追加された時にインタプリタがこのメソッドを呼び出します。
@@ -1658,7 +1658,7 @@ end
 # => Added :FOO
 ```
 
-#@end
+#%end
 ### def method_added(name) -> ()
 
 メソッド name が追加された時にインタプリタがこのメソッドを呼び出します。
@@ -1780,15 +1780,15 @@ module M
 end
 
 p M.foo # => "foo"
-#@since 3.4
+#%since 3.4
 M.bar   # => undefined method 'bar' for module M (NoMethodError)
-#@else
-#@since 3.3
+#%else
+#%since 3.3
 M.bar   # => undefined method `bar' for module M (NoMethodError)
-#@else
+#%else
 M.bar   # => undefined method `bar' for M:Module (NoMethodError)
-#@end
-#@end
+#%end
+#%end
 ```
 
 このコードでは、モジュール関数 foo と
@@ -1841,15 +1841,15 @@ end
 
 account = Account.new
 p account.foo1          # => 1
-#@if("3.4" <= version)
+#%if("3.4" <= version)
 account.foo2            # => private method 'foo2' called for an instance of Account (NoMethodError)
-#@end
-#@if("3.3" <= version and version < "3.4")
+#%end
+#%if("3.3" <= version and version < "3.4")
 account.foo2            # => private method `foo2' called for an instance of Account (NoMethodError)
-#@end
-#@if(version < "3.3")
+#%end
+#%if(version < "3.3")
 account.foo2            # => private method `foo2' called for #<Account:0x401b7628> (NoMethodError)
-#@end
+#%end
 ```
 
 ### def protected() -> nil
@@ -1872,7 +1872,7 @@ account.foo2            # => private method `foo2' called for #<Account:0x401b76
 
 - **raise** `NameError` -- 存在しないメソッド名を指定した場合に発生します。
 
-#@#noexample 参照先の Module#protected_method_defined? にサンプルが書かれているため
+#%#noexample 参照先の Module#protected_method_defined? にサンプルが書かれているため
 
 - **SEE** [m:Module#protected_method_defined?]
 
@@ -1902,15 +1902,15 @@ p foo             # => 1
 # the toplevel default is private
 # (Ruby 2.7 以降、レシーバが self そのものの呼び出しは private でも可能なため
 #  self.foo はエラーにならない。別のオブジェクトをレシーバにすると呼び出せない)
-#@if("3.4" <= version)
+#%if("3.4" <= version)
 Object.new.foo    # => private method 'foo' called for an instance of Object (NoMethodError)
-#@end
-#@if("3.3" <= version and version < "3.4")
+#%end
+#%if("3.3" <= version and version < "3.4")
 Object.new.foo    # => private method `foo' called for an instance of Object (NoMethodError)
-#@end
-#@if(version < "3.3")
+#%end
+#%if(version < "3.3")
 Object.new.foo    # => private method `foo' called for #<Object:0x401c83b0> (NoMethodError)
-#@end
+#%end
 
 def bar() 2 end
 public :bar       # visibility changed (all access allowed)

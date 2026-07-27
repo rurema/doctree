@@ -72,9 +72,9 @@ RSA 鍵ペアの生成には時間がかかるため、鍵生成の途中経過�
 - **param** `size` -- 鍵のサイズ
 - **param** `exponent` -- public exponent
 
-#@until 4.0
+#%until 4.0
 ### def new -> OpenSSL::PKey::RSA
-#@end
+#%end
 ### def new(size, exponent = 65537) -> OpenSSL::PKey::RSA
 ### def new(size, exponent = 65537){|u,n| ... }  -> OpenSSL::PKey::RSA
 ### def new(obj, pass = nil) -> OpenSSL::PKey::RSA
@@ -82,13 +82,13 @@ RSA 鍵ペアの生成には時間がかかるため、鍵生成の途中経過�
 
 RSA 暗号鍵オブジェクトを生成します。
 
-#@until 4.0
+#%until 4.0
 引数なしの場合は空の RSA オブジェクトを返します。
-#@end
-#@since 4.0
+#%end
+#%since 4.0
 引数なしでの呼び出しは [c:ArgumentError] が発生するため使用できません。
 新しい鍵を生成する場合は [m:OpenSSL::PKey::RSA.generate] を使用してください。
-#@end
+#%end
 
 第一引数に整数を指定した場合には、[m:OpenSSL::PKey::RSA.generate] により
 公開鍵と秘密鍵のペアを生成し、それを返します。
@@ -113,9 +113,9 @@ pass が指定された場合は、秘密鍵を pass を使って復号化しま
 - **param** `exponent` -- public exponent
 - **param** `obj` -- 鍵データ
 - **param** `pass` -- 鍵データに設定したパスフレーズ
-#@since 4.0
+#%since 4.0
 - **raise** `ArgumentError` -- 引数なしで呼び出した場合に発生します。
-#@end
+#%end
 - **raise** `OpenSSL::PKey::RSAError` -- 鍵の読み込みに失敗した場合に発生します。
 
 ## Instance Methods

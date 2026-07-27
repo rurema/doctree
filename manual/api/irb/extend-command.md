@@ -11,7 +11,7 @@ require:
   - irb/ext/use-loader
   - irb/ext/save-history
 ---
-#@# irb/cmd/fork.rb はどこからも require されないため省略しました。
+#%# irb/cmd/fork.rb はどこからも require されないため省略しました。
 
 irb を拡張するためのサブライブラリです。
 
@@ -116,8 +116,8 @@ irb を終了します。ret で指定したオブジェクトを返します。
 
 ## Constants
 
-#@# 内部用の定数
-#@# --- EXCB
+#%# 内部用の定数
+#%# --- EXCB
 
 ### const NO_OVERRIDE -> 0
 
@@ -180,15 +180,15 @@ irb でコマンドのエイリアスを定義する際に、既にこれから�
 
 - **param** `aliases` -- cmd_name の別名を [c:Symbol] で指定します。複数指定する事ができます。
 
-#@# == Constants
-#@# 内部用の定数
-#@# --- CE
-#@#
-#@# 使用されていないようなので省略しました。
-#@# = module IRB::MethodExtender
-#@#
-#@# == Instance Methods
-#@#
-#@# --- def_pre_proc(base_method, extend_method)
-#@# --- def_post_proc(base_method, extend_method)
-#@# --- new_alias_name(name, prefix = "__alias_of__", postfix = "__")
+#%# == Constants
+#%# 内部用の定数
+#%# --- CE
+#%#
+#%# 使用されていないようなので省略しました。
+#%# = module IRB::MethodExtender
+#%#
+#%# == Instance Methods
+#%#
+#%# --- def_pre_proc(base_method, extend_method)
+#%# --- def_post_proc(base_method, extend_method)
+#%# --- new_alias_name(name, prefix = "__alias_of__", postfix = "__")

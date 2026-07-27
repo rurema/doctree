@@ -3,11 +3,11 @@ type: library
 ---
 CGI のセッション管理を行うライブラリ。
 
-#@since 4.0
+#%since 4.0
 Ruby 4.0 から cgi ライブラリは default gems から削除されたため、
 このライブラリを利用するには cgi gem をインストールしてください。
 詳細は [lib:cgi] を参照してください。
-#@end
+#%end
 
 セッションとは、HTTP の一連のリクエストとレスポンスが属するべき
 コンテクスト (状況) のことをいいます。
@@ -283,7 +283,7 @@ SessionDemo.new
   ```
 
 ### def callback(dbman)
-#@# nodoc
+#%# nodoc
 
 ## Instance Methods
 
@@ -303,21 +303,21 @@ SessionDemo.new
 - **param** `val` -- 値を指定します。
 
 ### def update -> ()
-#@# discard
+#%# discard
 データベースクラスの update メソッドを呼び出して、
 セッション情報をサーバに保存します。
 
 MemoryStore の場合は何もしません。
 
 ### def close -> ()
-#@# discard
+#%# discard
 データベースクラスの close メソッドを呼び出して、
 セッション情報をサーバに保存し、セッションストレージをクローズします。
-#@# mod_ruby などで CGI::Session を利用する場合、明示的に close する必要がある。
-#@# 参照 https://web.archive.org/web/20060220193743/http://www.modruby.net/doc/faq.ja.jis.html#label-13
+#%# mod_ruby などで CGI::Session を利用する場合、明示的に close する必要がある。
+#%# 参照 https://web.archive.org/web/20060220193743/http://www.modruby.net/doc/faq.ja.jis.html#label-13
 
 ### def delete -> ()
-#@# discard
+#%# discard
 
 データベースクラスの delete メソッドを呼び出して、
 セッションをストレージから削除します。
@@ -376,11 +376,11 @@ FileStore の場合はセッションファイルを削除します。
 ## Instance Methods
 
 ### def close -> ()
-#@# discard
+#%# discard
 セッションの状態をファイルに保存してファイルを閉じます。
 
 ### def delete -> ()
-#@# discard
+#%# discard
 
 セッションを削除してファイルも削除します。
 
@@ -389,7 +389,7 @@ FileStore の場合はセッションファイルを削除します。
 セッションの状態をファイルから復元したハッシュを返します。
 
 ### def update -> ()
-#@# discard
+#%# discard
 
 セッションの状態をファイルに保存します。
 
@@ -417,12 +417,12 @@ FileStore の場合はセッションファイルを削除します。
 ## Instance Methods
 
 ### def close -> ()
-#@# discard
+#%# discard
 セッションの状態をファイルに保存してファイルを閉じます。
 このクラスでは何もしません。
 
 ### def delete -> ()
-#@# discard
+#%# discard
 
 セッションを削除します。
 
@@ -431,7 +431,7 @@ FileStore の場合はセッションファイルを削除します。
 セッションの状態を復元したハッシュを返します。
 
 ### def update -> ()
-#@# discard
+#%# discard
 
 セッションの状態を保存します。
 このクラスでは何もしません。
@@ -457,12 +457,12 @@ FileStore の場合はセッションファイルを削除します。
 
 ## Instance Methods
 ### def close -> ()
-#@# discard
+#%# discard
 セッションの状態をファイルに保存してファイルを閉じます。
 このクラスでは何もしません。
 
 ### def delete -> ()
-#@# discard
+#%# discard
 
 セッションを削除します。
 このクラスでは何もしません。
@@ -473,7 +473,7 @@ FileStore の場合はセッションファイルを削除します。
 このクラスでは何もしません。
 
 ### def update -> ()
-#@# discard
+#%# discard
 
 セッションの状態を保存します。
 このクラスでは何もしません。

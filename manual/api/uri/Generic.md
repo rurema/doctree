@@ -547,6 +547,6 @@ HTTP_PROXY(環境変数が大文字小文字を区別しない場合は http_pro
 
 [c:URI::Generic] のデフォルトポート(nil)です。
 
-#@# --- USE_REGISTRY -> false
-#@#
-#@# 2.2.0からnodoc
+#%# --- USE_REGISTRY -> false
+#%#
+#%# 2.2.0からnodoc

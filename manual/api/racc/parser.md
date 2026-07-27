@@ -8,33 +8,33 @@ type: library
 ## Class Methods
 
 ### def racc_runtime_type
-#@todo
+#%todo
 
 ## Private Instance Methods
 
 ### def next_token
-#@todo
+#%todo
 
 ### def do_parse
-#@todo
+#%todo
 
 ### def yyparse(recv, mid)
-#@todo
+#%todo
 
 ### def yyerror
-#@todo
+#%todo
 
 ### def yyerrok
-#@todo
+#%todo
 
 ### def yyaccept
-#@todo
+#%todo
 
 ### def on_error(t, val, vstack)
-#@todo
+#%todo
 
 ### def token_to_str(t)
-#@todo
+#%todo
 
 # class Racc::ParseError < StandardError
-#@# alias ParseError
+#%# alias ParseError

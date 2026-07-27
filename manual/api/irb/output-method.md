@@ -24,10 +24,10 @@ irb が出力を扱うためのサブライブラリです。
 
 - **param** `objs` -- 任意のオブジェクトを指定します。
 
-#@# parse_printf_format は  %%%%%I のような format にマッチする?
-#@# また、%I を削らないと、printf が ArgumentError を raise するのでは?
-#@# --- printf(format, *opts) -> nil
-#@# --- parse_printf_format(format, opts) -> [String, Array]
+#%# parse_printf_format は  %%%%%I のような format にマッチする?
+#%# また、%I を削らないと、printf が ArgumentError を raise するのでは?
+#%# --- printf(format, *opts) -> nil
+#%# --- parse_printf_format(format, opts) -> [String, Array]
 
 ### def puts(*objs) -> object
 
@@ -50,8 +50,8 @@ irb が出力を扱うためのサブライブラリです。
 
 - **param** `objs` -- 任意のオブジェクトを指定します。
 
-#@# 使用されていない事、1.9.1 で削除されている事から省略しました。
-#@# --- foo(format)
+#%# 使用されていない事、1.9.1 で削除されている事から省略しました。
+#%# --- foo(format)
 
 # class IRB::StdioOutputMethod < IRB::OutputMethod
 

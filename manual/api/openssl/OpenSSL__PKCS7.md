@@ -11,7 +11,7 @@ S/MIME などに使用されています。
 
 [RFC:2315] を参照してください。
 
-#@# CRL 関連をどう使えばよいのかわからない
+#%# CRL 関連をどう使えばよいのかわからない
 
 ### S/MIME メッセージの種類
 
@@ -103,9 +103,9 @@ flags は以下の値の OR を渡します。
   - [m:OpenSSL::PKCS7::NOSMIMECAP]
       署名者が使用可能な暗号アルゴリズムの情報など(SMIMECapabilities)を省略する。
 
-#@# * PARTSIGN
-#@# application/x-pkcs7-mime
-#@# application/x-pkcs7-signature
+#%# * PARTSIGN
+#%# application/x-pkcs7-mime
+#%# application/x-pkcs7-signature
 
 返り値は署名結果を含む [c:OpenSSL::PKCS7] オブジェクトを返します。
 

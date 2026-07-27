@@ -8,33 +8,33 @@ include:
 ## Instance Methods
 
 ### def categories
-#@todo
+#%todo
 
 ### def category
 ### def category=
-#@todo
+#%todo
 
 ### def date
 ### def date=
-#@todo
+#%todo
 
 ### def description
 ### def description=
-#@todo
+#%todo
 
 ### def enclosure
 ### def enclosure=
-#@todo
+#%todo
 
 ### def link
 ### def link=
-#@todo
+#%todo
 
 ### def source
 ### def source=
-#@todo
+#%todo
 
 ### def title
 ### def title=
-#@todo
+#%todo
 

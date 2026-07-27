@@ -87,17 +87,17 @@ p JSON.create_id                 # => "my_json_class"
 puts (1..5).to_json              # => {"my_json_class":"Range","a":[1,5,false]}
 ```
 
-#@# nodoc
-#@# --- deep_const_get
+#%# nodoc
+#%# --- deep_const_get
 
 ### def generator -> JSON::Ext::Generator
 
 JSON ライブラリがジェネレータとして使用するモジュールを返します。
 
-#@#noexample
+#%#noexample
 
-#@# nodoc
-#@# --- generator=(generator)
+#%# nodoc
+#%# --- generator=(generator)
 
 ### def parser -> JSON::Ext::Parser
 
@@ -109,8 +109,8 @@ require "json"
 p JSON.parser # => JSON::Ext::Parser
 ```
 
-#@# nodoc
-#@# --- parser=(parser)
+#%# nodoc
+#%# --- parser=(parser)
 
 ### def state -> JSON::Ext::Generator::State
 
@@ -122,8 +122,8 @@ require "json"
 p JSON.state # => JSON::Ext::Generator::State
 ```
 
-#@# 他のメソッドから考えると nodoc のはず。
-#@# --- state=(state)
+#%# 他のメソッドから考えると nodoc のはず。
+#%# --- state=(state)
 
 ## Module Functions
 
@@ -425,8 +425,8 @@ puts JSON.pretty_generate(hash, space: "\t")
 
 - **SEE** [m:JSON?.generate]
 
-#@# nodoc?
-#@# --- recurse_proc(result, &proc) -> object
+#%# nodoc?
+#%# --- recurse_proc(result, &proc) -> object
 
 ## Constants
 
@@ -439,15 +439,15 @@ puts JSON.pretty_generate(hash, space: "\t")
 
 このライブラリのバージョンを表す文字列です。
 
-#@# nodoc
-#@# --- JSON::VERSION_ARRAY -> Array
-#@# 
-#@# --- JSON::VERSION_BUILD -> Fixnum
-#@# 
-#@# --- JSON::VERSION_MAJOR -> Fixnum
-#@# 
-#@# --- JSON::VERSION_MINOR -> Fixnum
-#@#
+#%# nodoc
+#%# --- JSON::VERSION_ARRAY -> Array
+#%# 
+#%# --- JSON::VERSION_BUILD -> Fixnum
+#%# 
+#%# --- JSON::VERSION_MAJOR -> Fixnum
+#%# 
+#%# --- JSON::VERSION_MINOR -> Fixnum
+#%#
 
 ### const Infinity -> Float
 

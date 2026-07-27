@@ -24,66 +24,66 @@ ITU-T X.25 / ISO-8208。
 
 ### const AF_CCITT -> Integer
 ### const PF_CCITT -> Integer
-#@todo
+#%todo
 CCITT プロトコル。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_CHAOS -> Integer
 ### const PF_CHAOS -> Integer
-#@todo
+#%todo
 MIT CHAOS プロトコル。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_CNT -> Integer
 ### const PF_CNT -> Integer
-#@todo
+#%todo
 Computer Network Technology。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_COIP -> Integer
 ### const PF_COIP -> Integer
-#@todo
+#%todo
 connection-oriented IP。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_DATAKIT -> Integer
 ### const PF_DATAKIT -> Integer
-#@todo
+#%todo
 datakit protocol。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_DEC -> Integer
 ### const PF_DEC -> Integer
-#@todo
+#%todo
 DECnet protocol。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_DLI -> Integer
 ### const PF_DLI -> Integer
-#@todo
+#%todo
 DEC Direct data link interface。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_E164 -> Integer
-#@todo
+#%todo
 CCITT E.164 recommendation。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_ECMA -> Integer
 ### const PF_ECMA -> Integer
-#@todo
+#%todo
 European computer manufacturers。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_HYLINK -> Integer
 ### const PF_HYLINK -> Integer
-#@todo
+#%todo
 NSC Hyperchannel。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_IMPLINK -> Integer
 ### const PF_IMPLINK -> Integer
-#@todo
+#%todo
 ARPANET IMP。
 [m:Socket.open] の第一引数 domain に使用します。
 
@@ -113,7 +113,7 @@ IPX(Novell Internet Packet eXchange protocol)。
 
 ### const AF_ISDN -> Integer
 ### const PF_ISDN -> Integer
-#@todo
+#%todo
 Integrated Services Digital Network。
 [m:Socket.open] の第一引数 domain に使用します。
 
@@ -121,19 +121,19 @@ Integrated Services Digital Network。
 ### const AF_OSI -> Integer
 ### const PF_ISO -> Integer
 ### const PF_OSI -> Integer
-#@todo
+#%todo
 ISO Open Systems Interconnection protocols。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_LAT -> Integer
 ### const PF_LAT -> Integer
-#@todo
+#%todo
 Local Area Transport protocol。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_LINK -> Integer
 ### const PF_LINK -> Integer
-#@todo
+#%todo
 Link layer interface。
 [m:Socket.open] の第一引数 domain に使用します。
 
@@ -145,19 +145,19 @@ Link layer interface。
 
 ### const AF_NATM -> Integer
 ### const PF_NATM -> Integer
-#@todo
+#%todo
 Native ATM access。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_NDRV -> Integer
 ### const PF_NDRV -> Integer
-#@todo
+#%todo
 Network driver raw access。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_NETBIOS -> Integer
 ### const PF_NETBIOS -> Integer
-#@todo
+#%todo
 NetBIOS。
 [m:Socket.open] の第一引数 domain に使用します。
 
@@ -171,7 +171,7 @@ Netgraph sockets。
 
 ### const AF_NS -> Integer
 ### const PF_NS -> Integer
-#@todo
+#%todo
 XEROX NS protocol。
 [m:Socket.open] の第一引数 domain に使用します。
 
@@ -185,7 +185,7 @@ XEROX NS protocol。
 
 ### const AF_PPP -> Integer
 ### const PF_PPP -> Integer
-#@todo
+#%todo
 Point-to-Point Protocol。
 [m:Socket.open] の第一引数 domain に使用します。
 
@@ -199,28 +199,28 @@ PUP(PARC Universal Packet)。
 
 ### const AF_ROUTE -> Integer
 ### const PF_ROUTE -> Integer
-#@todo
+#%todo
 Internal Routing protocol。
 [m:Socket.open] の第一引数 domain に使用します。
 
-#@todo
+#%todo
 
 ### const AF_SIP -> Integer
 ### const PF_SIP -> Integer
-#@todo
+#%todo
 Simple Internet Protocol。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_SNA -> Integer
 ### const PF_SNA -> Integer
-#@todo
+#%todo
 IBM SNA protocol。
 [m:Socket.open] の第一引数 domain に使用します。
 
 ### const AF_SYSTEM -> Integer
 ### const PF_SYSTEM -> Integer
 
-#@todo
+#%todo
 
 [m:Socket.open] の第一引数 domain に使用します。
 
@@ -267,7 +267,7 @@ Help Identify RTIP packets。
 - **SEE** [m:Socket::Constants::AF_UNSPEC], [m:Socket.open]
 
 ### const PF_XTP -> Integer
-#@todo
+#%todo
 eXpress Transfer Protocol。
 
 ### const SOCK_DGRAM -> Integer
@@ -422,14 +422,14 @@ level 引数に使用します。
 - **SEE** [rfc:2292]
 
 ### const IPPROTO_BIP -> Integer
-#@todo
+#%todo
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
 
 ### const IPPROTO_EGP -> Integer
-#@todo
+#%todo
 Exterior Gateway Protocol。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
 level 引数に使用します。
@@ -437,7 +437,7 @@ level 引数に使用します。
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
 
 ### const IPPROTO_EON -> Integer
-#@todo
+#%todo
 ISO cnlp。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
 level 引数に使用します。
@@ -445,7 +445,7 @@ level 引数に使用します。
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
 
 ### const IPPROTO_GGP -> Integer
-#@todo
+#%todo
 Gateway to Gateway Protocol。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
 level 引数に使用します。
@@ -453,7 +453,7 @@ level 引数に使用します。
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
 
 ### const IPPROTO_HELLO -> Integer
-#@todo
+#%todo
 "hello" routing protocol。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
 level 引数に使用します。
@@ -472,7 +472,7 @@ level 引数に使用します。
      [man:icmp(4freebsd)], [man:icmp(7linux)]
 
 ### const IPPROTO_IDP -> Integer
-#@todo
+#%todo
 XNS IDP。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
 level 引数に使用します。
@@ -480,7 +480,7 @@ level 引数に使用します。
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
 
 ### const IPPROTO_IGMP -> Integer
-#@todo
+#%todo
 Group Management Protocol。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
 level 引数に使用します。
@@ -503,7 +503,7 @@ level 引数に使用します。
 IPPROTO 定数の最大値。
 
 ### const IPPROTO_ND -> Integer
-#@todo
+#%todo
 Sun net disk protocol
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
 level 引数に使用します。
@@ -511,7 +511,7 @@ level 引数に使用します。
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
 
 ### const IPPROTO_PUP -> Integer
-#@todo
+#%todo
 PARC Universal Packet protocol。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
 level 引数に使用します。
@@ -541,7 +541,7 @@ level 引数に使用します。
      [man:tcp(4freebsd)], [man:tcp(7linux)]
 
 ### const IPPROTO_TP -> Integer
-#@todo
+#%todo
 ISO transport protocol class 4。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
 level 引数に使用します。
@@ -560,25 +560,25 @@ level 引数に使用します。
      [man:udp(4freebsd)], [man:udp(7linux)]
 
 ### const IPPROTO_XTP -> Integer
-#@todo
+#%todo
 Xpress Transport Protocol。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
 
-#@# IPプロトコル:
-#@# [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の level 引数に
-#@# 使用します。
-#@# 
-#@# また、[[m:Socket.open]] の
-#@# 第一引数 domain に AF_INET もしくは AF_INET6,
-#@# 第二引数 type に SOCK_RAW を指定した場合の、
-#@# 第三引数 protocol にも使用します。
-#@# 
-#@# なお、AF_INET で SOCK_STREAM な場合には IPPROTO_TCP を使用できますが、
-#@# その場合は 0 を指定しても同じ結果を得られますので通常は使用されません。
-#@# AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
+#%# IPプロトコル:
+#%# [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の level 引数に
+#%# 使用します。
+#%# 
+#%# また、[[m:Socket.open]] の
+#%# 第一引数 domain に AF_INET もしくは AF_INET6,
+#%# 第二引数 type に SOCK_RAW を指定した場合の、
+#%# 第三引数 protocol にも使用します。
+#%# 
+#%# なお、AF_INET で SOCK_STREAM な場合には IPPROTO_TCP を使用できますが、
+#%# その場合は 0 を指定しても同じ結果を得られますので通常は使用されません。
+#%# AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 
 ### const AI_ADDRCONFIG -> Integer
 
@@ -617,7 +617,7 @@ Default flags for getaddrinfo。
 - **SEE** [man:getipnodebyname(3freebsd)]
 
 ### const AI_MASK -> Integer
-#@todo
+#%todo
 
 ### const AI_NUMERICHOST -> Integer
 
@@ -706,7 +706,7 @@ Invalid value for hints
 対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
 エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
-#@# 非標準的定数、KAMEで使われているらしい
+#%# 非標準的定数、KAMEで使われているらしい
 
 ### const EAI_FAIL -> Integer
 
@@ -976,11 +976,11 @@ Add a multicast group membership
      [man:ip(4freebsd)], [man:ip(7linux)]
      
 ### const IP_DEFAULT_MULTICAST_LOOP -> Integer
-#@todo
+#%todo
 Default multicast loopback
 
 ### const IP_DEFAULT_MULTICAST_TTL -> Integer
-#@todo
+#%todo
 Default multicast TTL
 
 ### const IP_DROP_MEMBERSHIP -> Integer
@@ -1065,7 +1065,7 @@ Receive IP destination address with datagram。
      [man:ip(7linux)]
 
 ### const IP_RECVRETOPTS -> Integer
-#@todo
+#%todo
 Receive all IP options for response
 
 ### const IP_RETOPTS -> Integer
@@ -1166,7 +1166,7 @@ Minimum TTL allowed for received packets。
 - **SEE** [m:Socket::Constants::IPPROTO_IP], [man:ip(4freebsd)]
 
 ### const IP_MSFILTER -> Integer
-#@todo
+#%todo
 Multicast source filtering
 
 ### const IP_MTU -> Integer
@@ -1194,7 +1194,7 @@ Force outgoing broadcast datagrams to have the undirected broadcast address。
 - **SEE** [m:Socket::Constants::IPPROTO_IP], [man:ip(4freebsd)]
 
 ### const IP_PASSSEC -> Integer
-#@todo
+#%todo
 Retrieve security context with datagram。
 
 ### const IP_PKTINFO -> Integer
@@ -1206,7 +1206,7 @@ Receive packet information with datagrams。
 - **SEE** [m:Socket::Constants::IPPROTO_IP], [man:ip(7linux)]
 
 ### const IP_PKTOPTIONS -> Integer
-#@todo
+#%todo
 Receive packet options with datagrams
 
 ### const IP_PMTUDISC_DO -> Integer
@@ -1258,7 +1258,7 @@ Receive interface information with datagrams。
 - **SEE** [m:Socket::Constants::IPPROTO_IP], [man:ip(4freebsd)]
 
 ### const IP_RECVSLLA -> Integer
-#@todo
+#%todo
 Receive link-layer address with datagrams
 
 ### const IP_RECVTOS -> Integer
@@ -1294,7 +1294,7 @@ ource address for outgoing UDP datagrams。
 - **SEE** [m:Socket::Constants::IPPROTO_IP], [man:ip(4freebsd)]
 
 ### const IP_XFRM_POLICY -> Integer
-#@todo
+#%todo
 
 ### const IPV6_CHECKSUM -> Integer
 
@@ -1555,10 +1555,10 @@ Only bind IPv6。
      [RFC:3493]
 
 ### const IPX_TYPE -> Integer
-#@todo
+#%todo
 
 ### const MSG_COMPAT -> Integer
-#@todo
+#%todo
 End of record
 
 ### const MSG_CTRUNC -> Integer
@@ -1620,23 +1620,23 @@ flags 引数に用います。
      [man:send(2freebsd)], [man:recv(2freebsd)]
 
 ### const MSG_FLUSH -> Integer
-#@todo
+#%todo
 Start of a hold sequence.  Dumps to so_temp
 
 ### const MSG_HAVEMORE -> Integer
-#@todo
+#%todo
 Data ready to be read
 
 ### const MSG_HOLD -> Integer
-#@todo
+#%todo
 Hold fragment in so_temp
 
 ### const MSG_RCVMORE -> Integer
-#@todo
+#%todo
 Data remains in the current packet
 
 ### const MSG_SEND -> Integer
-#@todo
+#%todo
 Send the packet in so_temp
 
 ### const MSG_OOB -> Integer
@@ -1710,7 +1710,7 @@ flags 引数に用います。
 - **SEE** [man:recv(2linux)]
 
 ### const MSG_FIN -> Integer
-#@todo
+#%todo
 
 ### const MSG_MORE -> Integer
 
@@ -1731,14 +1731,14 @@ flags 引数に用います。
 - **SEE** [man:send(2linux)], [man:send(2freebsd)]
 
 ### const MSG_PROXY -> Integer
-#@todo
+#%todo
 Wait for full request
 
 ### const MSG_RST -> Integer
-#@todo
+#%todo
 
 ### const MSG_SYN -> Integer
-#@todo
+#%todo
 
 ### const MCAST_BLOCK_SOURCE -> Integer
 
@@ -1811,7 +1811,7 @@ Leave a multicast source group
      [RFC:3678]
 
 ### const MCAST_MSFILTER -> Integer
-#@todo
+#%todo
 Multicast source filtering
 
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
@@ -1913,7 +1913,7 @@ Timestamp (timespec).
      [m:BasicSocket#sendmsg], [m:BasicSocket#recvmsg]
 
 ### const SCM_UCRED -> Integer
-#@todo
+#%todo
 User credentials。
 
 ### const SHUT_RD -> Integer
@@ -1999,7 +1999,7 @@ Send without using the routing tables。
      [man:socket(7linux)], [m:Socket::Constants::SOL_SOCKET]
 
 ### const SO_DONTTRUNC -> Integer
-#@todo
+#%todo
 Retain unread data
 
 ### const SO_ERROR -> Integer
@@ -2030,9 +2030,9 @@ Linger on close if data is present。
      [man:socket(7linux)],[m:Socket::Constants::SOL_SOCKET]
 
 ### const SO_NKE -> Integer
-#@todo
+#%todo
 socket-level Network Kernel Extension。
-#@# OS X socket option?
+#%# OS X socket option?
 
 ### const SO_NOSIGPIPE -> Integer
 
@@ -2043,11 +2043,11 @@ Don't SIGPIPE on EPIPE。
 - **SEE** [man:getsockopt(2freebsd)], [m:Socket::Constants::SOL_SOCKET]
 
 ### const SO_NO_CHECK -> Integer
-#@todo
+#%todo
 Disable checksums。
 
 ### const SO_NREAD -> Integer
-#@todo
+#%todo
 Get first packet byte count。
 
 ### const SO_OOBINLINE -> Integer
@@ -2078,7 +2078,7 @@ The credentials of the foreign process connected to this socket。
      [m:Socket::Constants::SOL_SOCKET]
 
 ### const SO_PEERNAME -> Integer
-#@todo
+#%todo
 Name of the connecting user。
 
 ### const SO_PRIORITY -> Integer
@@ -2135,13 +2135,13 @@ Allow local address and port reuse。
 - **SEE** [man:getsockopt(2freebsd)], [m:Socket::Constants::SOL_SOCKET]
      
 ### const SO_SECURITY_AUTHENTICATION -> Integer
-#@todo
+#%todo
 
 ### const SO_SECURITY_ENCRYPTION_NETWORK -> Integer
-#@todo
+#%todo
 
 ### const SO_SECURITY_ENCRYPTION_TRANSPORT -> Integer
-#@todo
+#%todo
 
 ### const SO_SNDBUF -> Integer
 
@@ -2190,21 +2190,21 @@ Get the socket type。
      [man:socket(7linux)], [m:Socket::Constants::SOL_SOCKET]
 
 ### const SO_USELOOPBACK -> Integer
-#@todo
+#%todo
 Bypass hardware when possible。
 
 ### const SO_WANTMORE -> Integer
-#@todo
+#%todo
 Give a hint when more data is ready。
 
 ### const SO_WANTOOBFLAG -> Integer
-#@todo
+#%todo
 OOB data is wanted in MSG_FLAG on receive。
 
 ### const SO_ALLZONES -> Integer
-#@todo
+#%todo
 Bypass zone boundaries。
-#@# Solaris?
+#%# Solaris?
 
 ### const SO_BINTIME -> Integer
 
@@ -2217,15 +2217,15 @@ Timestamp (bintime)。
      [m:Socket::AncillaryData#timestamp]
 
 ### const SO_MAC_EXEMPT -> Integer
-#@todo
+#%todo
 Mandatory Access Control exemption for unlabeled peers。
 
 ### const SO_RECVUCRED -> Integer
-#@todo
+#%todo
 Receive user credentials with datagram。
 
 ### const SO_TIMESTAMPNS -> Integer
-#@todo
+#%todo
 Receive nanosecond timestamp with datagrams (timespec)。
 
 - **SEE** [m:Socket::Constants::SO_TIMESTAMP],
@@ -2238,13 +2238,13 @@ Receive nanosecond timestamp with datagrams (timespec)。
 - **SEE** [man:sys/socket.h(header)], [man:listen(2)]
 
 ### const SOL_ATALK -> Integer
-#@todo
+#%todo
 AppleTalk socket options。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第一引数(level)に使用します。
 
 ### const SOL_AX25 -> Integer
-#@todo
+#%todo
 AX.25 socket options。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第一引数(level)に使用します。
@@ -2261,7 +2261,7 @@ SOL_IP はポータブルではありません。 IPPROTO_IP のほうがより�
      [m:Socket::Constants::IPPROTO_IP]
 
 ### const SOL_IPX -> Integer
-#@todo
+#%todo
 IPX socket options。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第一引数(level)に使用します。
@@ -2293,17 +2293,17 @@ UDP socket options。
 - **SEE** [m:Socket::Constants::IPPROTO_UDP]
 
 ### const SOPRI_BACKGROUND -> Integer
-#@todo
+#%todo
 Background socket priority
 
 ### const SOPRI_INTERACTIVE -> Integer
-#@todo
+#%todo
 Interactive socket priority
 
 ### const SOPRI_NORMAL -> Integer
 
 Normal socket priority
-#@todo
+#%todo
 
 ### const TCP_MAXSEG -> Integer
 

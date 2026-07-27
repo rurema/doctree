@@ -68,7 +68,7 @@ p /\$(?<dollars>\d+)\.(?<cents>\d+)/.match("$3.67")[:cents] # => "67"
 p /(?<alpha>[a-zA-Z]+)|(?<num>\d+)/.match("aZq")[:num] # => nil
 ```
 
-#@since 3.1
+#%since 3.1
 ### def match(n) -> String | nil
 ### def match(name) -> String | nil
 
@@ -120,7 +120,7 @@ p /(\p{Hiragana}+)/.match("あいう").match_length(1) # => 3
 ```
 
 - **SEE** [m:MatchData#match]
-#@end
+#%end
 
 ### def begin(n) -> Integer | nil
 
@@ -139,11 +139,11 @@ p $~.begin(0)   # => 0
 p $~.begin(1)   # => 0
 p $~.begin(2)   # => 3
 p $~.begin(3)   # => nil
-#@since 3.4
+#%since 3.4
 p $~.begin(4)   # => 'begin': index 4 out of matches (IndexError)
-#@else
+#%else
 p $~.begin(4)   # => `begin': index 4 out of matches (IndexError)
-#@end
+#%end
 ```
 
 - **SEE** [m:MatchData#end]
@@ -165,11 +165,11 @@ p $~.begin(:year)     # => 0
 p $~.begin('month')   # => 5
 p $~.begin(:month)    # => 5
 p $~.begin('day')     # => nil
-#@since 3.4
+#%since 3.4
 p $~.begin('century') # => 'begin': undefined group name reference: century (IndexError)
-#@else
+#%else
 p $~.begin('century') # => `begin': undefined group name reference: century (IndexError)
-#@end
+#%end
 ```
 
 - **SEE** [m:MatchData#end]
@@ -191,11 +191,11 @@ p $~.end(0)   # => 6
 p $~.end(1)   # => 3
 p $~.end(2)   # => 6
 p $~.end(3)   # => nil
-#@since 3.4
+#%since 3.4
 p $~.end(4)   # => 'end': index 4 out of matches (IndexError)
-#@else
+#%else
 p $~.end(4)   # => `end': index 4 out of matches (IndexError)
-#@end
+#%end
 ```
 
 - **SEE** [m:MatchData#begin]
@@ -217,19 +217,19 @@ p $~.end(:year)     # => 4
 p $~.end('month')   # => 6
 p $~.end(:month)    # => 6
 p $~.end('day')     # => nil
-#@since 3.4
+#%since 3.4
 p $~.end('century') # => 'end': undefined group name reference: century (IndexError)
-#@else
+#%else
 p $~.end('century') # => `end': undefined group name reference: century (IndexError)
-#@end
+#%end
 ```
 
 - **SEE** [m:MatchData#begin]
 
 ### def captures -> [String]
-#@since 3.2
+#%since 3.2
 ### def deconstruct -> [String]
-#@end
+#%end
 
 [m:$1], [m:$2], ... を格納した配列を返します。
 
@@ -242,13 +242,13 @@ p $~.to_a       # => ["foobar", "foo", "bar", nil]
 p $~.captures   # => ["foo", "bar", nil]
 ```
 
-#@since 3.2
+#%since 3.2
 - **SEE** [m:MatchData#to_a], [m:MatchData#named_captures], [ref:d:spec/pattern_matching#matching_non_primitive_objects]
-#@else
+#%else
 - **SEE** [m:MatchData#to_a], [m:MatchData#named_captures]
-#@end
+#%end
 
-#@since 3.2
+#%since 3.2
 ### def deconstruct_keys(array_of_names) -> Hash
 
 引数で指定された名前の名前付きキャプチャを [c:Hash] で返します。
@@ -268,7 +268,7 @@ p m.deconstruct_keys(nil) # => {}
 ```
 
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
-#@end
+#%end
 
 ### def length -> Integer
 ### def size -> Integer
@@ -296,11 +296,11 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
 
 - **raise** `IndexError` -- 範囲外の n を指定した場合に発生します。
 
-#@since 3.2
+#%since 3.2
 - **SEE** [m:MatchData#begin], [m:MatchData#end], [m:MatchData#byteoffset]
-#@else
+#%else
 - **SEE** [m:MatchData#begin], [m:MatchData#end]
-#@end
+#%end
 ### def offset(name) -> [Integer, Integer] | [nil, nil]
 
 name という名前付きグループに対応する部分文字列のオフセットの配列 [start, end] を返
@@ -324,19 +324,19 @@ p $~.offset(:year)     # => [0, 4]
 p $~.offset('month')   # => [5, 6]
 p $~.offset(:month)    # => [5, 6]
 p $~.offset('day')     # => [nil, nil]
-#@since 3.4
+#%since 3.4
 p $~.offset('century') # => 'offset': undefined group name reference: century (IndexError)
-#@else
+#%else
 p $~.offset('century') # => `offset': undefined group name reference: century (IndexError)
-#@end
+#%end
 ```
 
-#@since 3.2
+#%since 3.2
 - **SEE** [m:MatchData#begin], [m:MatchData#end], [m:MatchData#byteoffset]
-#@else
+#%else
 - **SEE** [m:MatchData#begin], [m:MatchData#end]
-#@end
-#@since 3.2
+#%end
+#%since 3.2
 ### def byteoffset(n) -> [Integer, Integer] | [nil, nil]
 
 n 番目の部分文字列のバイト単位のオフセットの
@@ -369,17 +369,17 @@ p $~.byteoffset(:year)     # => [0, 4]
 p $~.byteoffset('month')   # => [7, 8]
 p $~.byteoffset(:month)    # => [7, 8]
 p $~.byteoffset('day')     # => [nil, nil]
-#@since 3.4
+#%since 3.4
 p $~.byteoffset('century') # => 'offset': undefined group name reference: century (IndexError)
-#@else
+#%else
 p $~.byteoffset('century') # => `offset': undefined group name reference: century (IndexError)
-#@end
+#%end
 ```
 
 - **SEE** [m:MatchData#offset]
-#@end
+#%end
 
-#@since 3.4
+#%since 3.4
 ### def bytebegin(n) -> Integer | nil
 ### def bytebegin(name) -> Integer | nil
 
@@ -448,7 +448,7 @@ p $~.byteend(:value) # => 10
 $~.byteend(:foo)   # => undefined group name reference: foo (IndexError)
 ```
 
-#@end
+#%end
 
 ### def post_match -> String
 
@@ -610,11 +610,11 @@ m2 = r.match("abcabc", 0) # => #<MatchData "abc">
 p m1 == m2  # => true
 ```
 
-#@since 3.3
+#%since 3.3
 ### def named_captures(symbolize_names: false) -> Hash
-#@else
+#%else
 ### def named_captures -> Hash
-#@end
+#%end
 
 名前付きキャプチャをHashで返します。
 
@@ -634,15 +634,15 @@ p m.named_captures # => {"a" => "1"}
 
 m = /(?<a>x)|(?<a>y)/.match("x")
 p m.named_captures # => {"a" => "x"}
-#@since 3.3
+#%since 3.3
 
 m = /(?<a>.)(?<a>.)/.match("01")
 p m.named_captures(symbolize_names: true) #=> {:a => "1"}
-#@end
+#%end
 ```
 
-#@since 3.2
+#%since 3.2
 - **SEE** [m:MatchData#captures], [m:MatchData#deconstruct_keys]
-#@else
+#%else
 - **SEE** [m:MatchData#captures]
-#@end
+#%end

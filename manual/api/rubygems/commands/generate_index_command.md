@@ -12,7 +12,7 @@ Usage: gem generate_index [options]
     -d, --directory=DIRNAME          repository base dir containing gems subdir
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Summary:

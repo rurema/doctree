@@ -10,7 +10,7 @@ library: matrix
 ## Instance Methods
 ### def det         -> Numeric
 ### def determinant -> Numeric
-#@# サイズが (1, 1) なら型の変換は起こらないので何でも返す可能性が有る。
+#%# サイズが (1, 1) なら型の変換は起こらないので何でも返す可能性が有る。
 元の行列の行列式の値を返します。
 LUP 分解の結果を利用して計算します。
 
@@ -65,15 +65,15 @@ p lup.solve(Vector[3, 0])           #=> Vector[(2/1), (-1/1)]
 p lup.solve(Matrix[[1, 3], [-1, 0]])  #=> Matrix[[(1/1), (2/1)], [(-1/1), (-1/1)]]
 ```
 
-#@#== ChangeLog
-#@#
-#@#*[2004-04-23] by [[unknown:坂野|URL:mailto:mas@star.le.ac.uk]]
-#@#    * Matrix.diagonalに注意書を加える。
-#@#*[2002-04-03] by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
-#@#    * 使い方の節を追加
-#@#    * Working with Complex classの節を追加
-#@#    * []=メソッドを追加
-#@#    * イテレータ関係を同じ節にまとめた
-#@#    * 誤りを訂正し、説明を直した。
-#@#    * 他クラスへのリンクを追加 Numeric, Vector
-#@#*[2002-04-02] 初版 by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#%#== ChangeLog
+#%#
+#%#*[2004-04-23] by [[unknown:坂野|URL:mailto:mas@star.le.ac.uk]]
+#%#    * Matrix.diagonalに注意書を加える。
+#%#*[2002-04-03] by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#%#    * 使い方の節を追加
+#%#    * Working with Complex classの節を追加
+#%#    * []=メソッドを追加
+#%#    * イテレータ関係を同じ節にまとめた
+#%#    * 誤りを訂正し、説明を直した。
+#%#    * 他クラスへのリンクを追加 Numeric, Vector
+#%#*[2002-04-02] 初版 by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]

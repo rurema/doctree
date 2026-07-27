@@ -28,4 +28,4 @@ end
 p foo       # => 2
 ```
 
-#@include(../../api/_builtin/lambda_proc)
+#%include(../../api/_builtin/lambda_proc)

@@ -20,8 +20,8 @@ Usage: gem dependency GEMNAME [options]
     -p, --pipe                       Pipe Format (name --version ver)
 ```
 
-#@include(local_remote_options)
-#@include(common_options)
+#%include(local_remote_options)
+#%include(common_options)
 
 ```text
 Arguments:

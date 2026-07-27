@@ -18,7 +18,7 @@ Ractor を生成して、ブロックの評価を開始します。
             コピーできない値であった場合は例外が発生します。
 - **param** `name` -- Ractor の名前を指定します。
 
-#@since 3.4
+#%since 3.4
 ### def [](sym) -> object | nil
 
 このメソッドを呼び出した Ractor の Ractor-local storage の sym に対応するデータを取り出します。
@@ -31,7 +31,7 @@ sym に対応するデータがなければ nil を返します。
 
 - **param** `sym` -- Ractor-local storage のキーを指定します。
 - **param** `val` -- 格納するデータを指定します。
-#@end
+#%end
 
 ### def count -> Integer
 
@@ -45,11 +45,11 @@ sym に対応するデータがなければ nil を返します。
 
 main Ractor（プログラムの実行が開始された Ractor）を返します。
 
-#@since 3.4
+#%since 3.4
 ### def main? -> bool
 
 このメソッドを呼び出した Ractor が main Ractor であるとき、true を返します。
-#@end
+#%end
 
 ### def make_shareable(obj, copy: false) -> object
 
@@ -63,30 +63,30 @@ obj が shareable でない場合、obj と obj が参照する shareable でな
 ### def receive -> object
 ### def recv -> object
 
-#@since 4.0
+#%since 4.0
 このメソッドを呼び出した Ractor の default port からメッセージを受信します。
 
 - **SEE** [m:Ractor::Port#receive]
-#@else
+#%else
 このメソッドを呼び出した Ractor が受信したメッセージを取り出して返します。
 メッセージが届くまでブロックします。
 
 他の Ractor から [m:Ractor#send] で送られたメッセージを受信します。
-#@end
+#%end
 
-#@until 4.0
+#%until 4.0
 ### def receive_if {|msg| ... } -> object
 
 このメソッドを呼び出した Ractor が受信したメッセージのうち、
 ブロックの評価結果が真になる最初のメッセージを受信して返します。
-#@end
+#%end
 
-#@since 4.0
+#%since 4.0
 ### def select(*ports) -> [object, object]
 
 引数で指定した Ractor または [c:Ractor::Port] のいずれかが受信可能になるまで待ち、
 受信可能になったものと受信した値の配列を返します。
-#@else
+#%else
 ### def select(*ractors, yield_value: nil, move: false) -> [object, object]
 
 引数で指定した Ractor のいずれかが [m:Ractor.yield] などで送信可能になるまで待ち、
@@ -94,7 +94,7 @@ obj が shareable でない場合、obj と obj が参照する shareable でな
 受信したのが現在の Ractor 自身であった場合は、Ractor の代わりに :receive シンボルが返ります。
 yield_value を指定すると、他の Ractor が [m:Ractor#take] を呼んだときにその値が yield され、
 [:yield, nil] が返ります。move が真のとき yield_value は移動されます。
-#@end
+#%end
 
 ### def shareable?(obj) -> bool
 
@@ -102,7 +102,7 @@ obj が shareable である場合、true を返します。
 
 - **param** `obj` -- Shareable であるか判定したいオブジェクトを指定します。
 
-#@since 4.0
+#%since 4.0
 ### def shareable_proc { ... } -> Proc
 
 与えられたブロックから shareable な [c:Proc] を作成して返します。
@@ -135,9 +135,9 @@ p l.lambda?            # => true
 ```
 
 - **SEE** [m:Ractor.shareable_proc]
-#@end
+#%end
 
-#@since 3.4
+#%since 3.4
 ### def store_if_absent(key) { ... } -> object
 
 このメソッドを呼び出した Ractor の Ractor-local storage の key データがない場合、
@@ -145,9 +145,9 @@ p l.lambda?            # => true
 格納した値を返します。
 
 - **param** `key` -- Ractor-local storage のキーを指定します。
-#@end
+#%end
 
-#@until 4.0
+#%until 4.0
 ### def yield(obj, move: false) -> object
 
 現在の Ractor の outgoing port に obj を送信します。
@@ -155,35 +155,35 @@ p l.lambda?            # => true
 
 - **param** `obj` -- 送信するオブジェクトを指定します。
 - **param** `move` -- obj を「移動」する場合は true を指定します。
-#@end
+#%end
 
 ## Instance Methods
 
-#@since 4.0
+#%since 4.0
 ### def close -> bool
 
 Default port を閉じます。
 
 self がこのメソッドを呼び出した Ractor ではない場合、Ractor::Error が発生します。
 
-#@end
+#%end
 
-#@since 4.0
+#%since 4.0
 ### def default_port -> Ractor::Port
 
 self の default port を返します。
 
-#@end
+#%end
 
-#@since 4.0
+#%since 4.0
 ### def join -> Ractor
 
 self が終了するまで待ちます。
 Ractor の実行が例外で終了した場合には、 [m:Ractor#value]を呼び出し、その例外を再発生させます。
 
-#@end
+#%end
 
-#@since 4.0
+#%since 4.0
 ### def monitor(port) -> bool
 
 port を self の監視ポートとして登録します。
@@ -193,7 +193,7 @@ self が終了すると、port は :exited（例外なく終了した場合）�
 監視を登録できた（self がまだ終了していない）場合は true を返します。
 self が既に終了していた場合は false を返し、port は直ちに終了を表すシンボルを受信します。
 
-#@end
+#%end
 
 ### def name -> String
 
@@ -204,39 +204,39 @@ self の名前を返します。
 ### def <<(msg, move: false) -> self
 ### def send(msg, move: false) -> self
 
-#@since 4.0
+#%since 4.0
 Ractor の default port に対してメッセージを送信します。
-#@else
+#%else
 self にメッセージを送信します。
 送られたメッセージは self が [m:Ractor.receive] で受信できます。
-#@end
+#%end
 
 - **param** `msg` -- 送信するメッセージを指定します。
 - **param** `move` -- msg を「移動」する場合は true を指定します。
 
-#@since 4.0
+#%since 4.0
 - **SEE** [m:Ractor::Port#send]
-#@end
+#%end
 
-#@until 4.0
+#%until 4.0
 ### def take -> object
 
 self の outgoing port からメッセージを受信します。
 self が [m:Ractor.yield] で送ったメッセージ、または self のブロックが返した値を受け取ります。
 メッセージが届くまでブロックします。
-#@end
+#%end
 
-#@since 4.0
+#%since 4.0
 ### def unmonitor(port) -> self
 
 [m:Ractor#monitor] で登録した port の監視を解除します。
 
-#@end
+#%end
 
-#@since 4.0
+#%since 4.0
 ### def value -> object
 
 self が終了するまで待ち、その Ractor のブロックが返した値を返します。
 Ractor の実行が例外で終了した場合には、その例外を再発生させます。
 
-#@end
+#%end

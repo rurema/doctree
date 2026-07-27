@@ -141,22 +141,22 @@ verify を一度も呼びだしていない場合は nil を返します。
 - **param** `purpose` -- 証明書の使用目的を表す整数値
 - **SEE** [m:OpenSSL::X509::StoreContext#purpose=]
 
-#@# memo: 
-#@# purpose は
-#@# どうやら X509v3 拡張領域のkeyUsage拡張領域
-#@# やextKeyKeyUsage拡張領域をチェックするらしい。
-#@# 検証している証明書や、それに証明している中間CAなどが
-#@# 目的外使用していないかどうかを判定するらしい。
-#@# SMIME_SIGN ならば、「証明書が S/MIME として使えるか」& 
-#@# 「CA 証明書が S/MIME CA として使えるか」の2つを判定しているようである。
-#@# 「Network Security with OpenSSL:Cryptography for Secure Communications」
-#@# によると、この拡張領域は
-#@# 「利用法の定義が明確でない」「既存ソフトウェアでは概ね無視される」
-#@# 「実装方法はベンダーによってまちまち」「殆ど役に立たない」とか
+#%# memo: 
+#%# purpose は
+#%# どうやら X509v3 拡張領域のkeyUsage拡張領域
+#%# やextKeyKeyUsage拡張領域をチェックするらしい。
+#%# 検証している証明書や、それに証明している中間CAなどが
+#%# 目的外使用していないかどうかを判定するらしい。
+#%# SMIME_SIGN ならば、「証明書が S/MIME として使えるか」& 
+#%# 「CA 証明書が S/MIME CA として使えるか」の2つを判定しているようである。
+#%# 「Network Security with OpenSSL:Cryptography for Secure Communications」
+#%# によると、この拡張領域は
+#%# 「利用法の定義が明確でない」「既存ソフトウェアでは概ね無視される」
+#%# 「実装方法はベンダーによってまちまち」「殆ど役に立たない」とか
 
 ### def trust=(trust)
 
-#@todo
+#%todo
 
 以下のいずれかの定数の値を指定します。
 
@@ -170,10 +170,10 @@ verify を一度も呼びだしていない場合は nil を返します。
 - **param** `trust` -- 整数値
 - **SEE** [m:OpenSSL::X509::StoreContext#trust=]
 
-#@# TRUST_COMPAT を指定すると root ca が self signed されているかを
-#@# 判定する
-#@# それ以外は 0.9.8o のコード上では結局何もしていない(OCSP以外は
-#@# COMPATと同じ)ように見える
+#%# TRUST_COMPAT を指定すると root ca が self signed されているかを
+#%# 判定する
+#%# それ以外は 0.9.8o のコード上では結局何もしていない(OCSP以外は
+#%# COMPATと同じ)ように見える
 
 ### def add_path(path) -> self
 

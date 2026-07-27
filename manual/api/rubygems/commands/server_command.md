@@ -15,7 +15,7 @@ Usage: gem server [options]
         --[no-]daemon                run as a daemon
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Summary:

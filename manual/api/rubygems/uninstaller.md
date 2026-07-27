@@ -44,7 +44,7 @@ Gem がインストールされているディレクトリを返します。
 - **param** `spec` -- [c:Gem::Specification] を指定します。
 
 ### def remove(spec, list)
-#@# -> discard
+#%# -> discard
 
 指定された Gem を削除します。
 
@@ -60,14 +60,14 @@ Gem がインストールされているディレクトリを返します。
                                   ディレクトリにそんないしない場合に発生します。
 
 ### def remove_all(list)
-#@# -> discard
+#%# -> discard
 
 list で与えられた Gem を全てアンインストールします。
 
 - **param** `list` -- アンインストールする Gem のリストを指定します。
 
 ### def remove_executables(gemspec)
-#@# -> discard
+#%# -> discard
 
 与えられた [c:Gem::Specification] に対応する実行ファイルを削除します。
 
@@ -78,14 +78,14 @@ list で与えられた Gem を全てアンインストールします。
 [m:Gem::Uninstaller#uninstall_gem] の実行中のみセットされます。
 
 ### def uninstall
-#@# -> discard
+#%# -> discard
 
 Gem をアンインストールします。
 
 スペックファイルやキャッシュも削除します。
 
 ### def uninstall_gem(spec, specs)
-#@# -> discard
+#%# -> discard
 
 与えられた spec に対応する Gem をアンインストールします。
 

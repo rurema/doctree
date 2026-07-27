@@ -32,13 +32,13 @@ Thread.new do
 end.join
 
 p a.next
-#@since 3.4
+#%since 3.4
 #=> t.rb:7:in 'Enumerator#next': fiber called across threads (FiberError)
 #      from t.rb:7:in '<main>'
-#@else
+#%else
 #=> t.rb:7:in `next': fiber called across threads (FiberError)
 #      from t.rb:7:in `<main>'
-#@end
+#%end
 ```
 
 ## Class Methods
@@ -55,7 +55,7 @@ each に渡されたブロックが繰り返されます。
 new に渡されたブロックが終了した時点で each の繰り返しが終わります。
 このときのブロックの返り値が each の返り値となります。
 
-#@# http://d.hatena.ne.jp/nagachika/20121107/ruby_trunk_changes_37495_37541 参照
+#%# http://d.hatena.ne.jp/nagachika/20121107/ruby_trunk_changes_37495_37541 参照
 - **param** `size` -- 生成する Enumerator オブジェクトの要素数を指定します。
             [c:Integer]、[m:Float::INFINITY]、[c:Proc] オブジェク
             ト、nil のいずれかを指定します。[m:Enumerator#size] の実
@@ -84,11 +84,11 @@ fib = Enumerator.new { |y|
 p fib.take(10) #=> [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 ```
 
-#@since 4.0
+#%since 4.0
 ### def produce(initial = nil, size: nil) { |prev| ... } -> Enumerator
-#@else
+#%else
 ### def produce(initial = nil) { |prev| ... } -> Enumerator
-#@end
+#%end
 
 与えられたブロックを呼び出し続ける、停止しない Enumerator を返します。
 ブロックの戻り値が、次にブロックを呼び出す時に引数として渡されます。
@@ -99,12 +99,12 @@ initial 引数が渡された場合、最初にブロックを呼び出す時に
 ブロックが例外 [c:StopIteration]を投げた場合、繰り返しが終了します。
 
 - **param** `initial` -- ブロックに最初に渡される値です。任意のオブジェクトを渡せます。
-#@since 4.0
+#%since 4.0
 - **param** `size` -- 生成する Enumerator の要素数（[m:Enumerator#size] で取得できる値）を
              指定します。整数、[m:Float::INFINITY]、[c:Proc] などの呼び出し可能な
              オブジェクト、または要素数が不明であることを表す nil を指定できます。
              省略した場合は [m:Float::INFINITY] になります。
-#@end
+#%end
 
 ```ruby title="例"
 # 1, 2, 3, 4, ... と続く Enumerator
@@ -136,7 +136,7 @@ p Enumerator.produce { scanner.scan(PATTERN) }.slice_after { scanner.eos? }.firs
 # => ["7", "+", "38", "/", "6"]
 ```
 
-#@since 4.0
+#%since 4.0
 生成する Enumerator の要素数を size: で指定できます。
 
 ```ruby title="size: を指定する例"
@@ -157,9 +157,9 @@ unknown = Enumerator.produce(1, size: nil, &:succ)
 p unknown.size  # => nil
 ```
 
-#@end
+#%end
 
-#@since 3.2
+#%since 3.2
 ### def product(*enums) -> Enumerator::Product
 ### def product(*enums) { |elts| ... } -> nil
 
@@ -187,7 +187,7 @@ end
 ```
 
 - **SEE** [c:Enumerator::Product]
-#@end
+#%end
 
 ## Methods
 

@@ -109,7 +109,7 @@ end
 
 自分自身を返します。
 
-#@#noexample
+#%#noexample
 
 ### def body -> String | () | nil
 ### def entity -> String | () | nil

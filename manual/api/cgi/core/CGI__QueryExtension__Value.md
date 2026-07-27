@@ -2,21 +2,21 @@
 library: cgi/core
 ---
 # module CGI::QueryExtension::Value
-#@# nodoc
+#%# nodoc
 
 ## Instance Methods
 
 ### def [](idx, *args)
-#@todo
+#%todo
 
 ### def first -> self
 ### def last  -> self
-#@todo
+#%todo
 
 ### def set_params(params)
-#@todo
+#%todo
 
 ### def to_a -> Array
 ### def to_ary -> Array
-#@todo
+#%todo
 

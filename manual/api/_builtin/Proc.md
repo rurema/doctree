@@ -25,7 +25,7 @@ end
 p foo       # => 2
 ```
 
-#@include(lambda_proc)
+#%include(lambda_proc)
 
 ## Class Methods
 
@@ -41,11 +41,11 @@ pr.call(1) # => 1
 ```
 
 ```ruby
-#@since 3.4
+#%since 3.4
 Proc.new # => -e:1:in 'new': tried to create Proc object without a block (ArgumentError)
-#@else
+#%else
 Proc.new # => -e:1:in `new': tried to create Proc object without a block (ArgumentError)
-#@end
+#%end
 ```
 
 Proc.new は、Proc#initialize が定義されていれば
@@ -99,18 +99,18 @@ p fib.(10) # => 55
 
 - **raise** `LocalJumpError` -- Procを生成したメソッドからリターンしてしまった場合に発生します。
 
-#@# 2.0 では削除されている事、実装に依存する内容である事から省略。
-#@# 参照: プログラミング言語 Ruby p203
-#@##until 2.0.0
-#@#--- ==(other)   -> bool
-#@##@since 1.9.1
-#@#--- eql?(other) -> bool
-#@##@end
-#@#
-#@# --- clone -> Proc
-#@# nodoc
-#@# --- dup -> Proc
-#@# nodoc
+#%# 2.0 では削除されている事、実装に依存する内容である事から省略。
+#%# 参照: プログラミング言語 Ruby p203
+#%##until 2.0.0
+#%#--- ==(other)   -> bool
+#%##@since 1.9.1
+#%#--- eql?(other) -> bool
+#%##@end
+#%#
+#%# --- clone -> Proc
+#%# nodoc
+#%# --- dup -> Proc
+#%# nodoc
 
 ### def <<(callable) -> Proc
 
@@ -377,13 +377,13 @@ p method(:p).to_proc.source_location # => nil
 
 self のハッシュ値を返します。
 
-#@#noexample
+#%#noexample
 
-#@since 3.2
+#%since 3.2
 ### def parameters(lambda: nil) -> [object]
-#@else
+#%else
 ### def parameters -> [object]
-#@end
+#%end
 Proc オブジェクトの引数の情報を返します。
 
 Proc オブジェクトが引数を取らなければ空の配列を返します。引数を取る場合は、配列の配列を返し、
@@ -404,28 +404,28 @@ Proc オブジェクトが引数を取らなければ空の配列を返します
 - **`:block`**:
   & で指定されたブロック引数
 
-#@since 3.2
+#%since 3.2
 - **param** `lambda` -- true なら lambda として扱ったとき、false なら lambda ではない Proc として
               扱ったときの引数の情報を返します。
-#@end
+#%end
 
 分割代入を使った `|(a, b)|` のように引数名を持たない引数の場合は、引数の種類を表す
 Symbol だけの 1 要素の配列になります。
-#@since 4.0
+#%since 4.0
 これは必須の引数でもオプショナルな引数でも同様です。
-#@else
+#%else
 ただし、オプショナルな引数の場合は引数名が nil の 2 要素の配列になります。
-#@end
+#%end
 
 ```ruby title="引数名を持たない引数の例"
 p lambda { |(a, b)| }.parameters  # => [[:req]]
-#@since 4.0
+#%since 4.0
 p proc { |(a, b)| }.parameters    # => [[:opt]]
 p proc { |x, (a, b)| }.parameters # => [[:opt, :x], [:opt]]
-#@else
+#%else
 p proc { |(a, b)| }.parameters    # => [[:opt, nil]]
 p proc { |x, (a, b)| }.parameters # => [[:opt, :x], [:opt, nil]]
-#@end
+#%end
 ```
 
   ```ruby title="例"
@@ -433,7 +433,7 @@ p proc { |x, (a, b)| }.parameters # => [[:opt, :x], [:opt, nil]]
   prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
   ```
 
-#@since 3.2
+#%since 3.2
 
 ```ruby title="lambda: の例"
 prc = proc{|x, y=42, *other|}
@@ -446,7 +446,7 @@ prc = lambda{|x, y=42, *other|}
 p prc.parameters(lambda: false) # => [[:opt, :x], [:opt, :y], [:rest, :other]]
 ```
 
-#@end
+#%end
 
 - **SEE** [m:Method#parameters], [m:UnboundMethod#parameters]
 

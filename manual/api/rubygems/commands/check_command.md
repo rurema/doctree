@@ -16,7 +16,7 @@ Usage: gem check [options]
     -v, --version VERSION            特定のバージョンのテストを実行します
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```console
 Summary:

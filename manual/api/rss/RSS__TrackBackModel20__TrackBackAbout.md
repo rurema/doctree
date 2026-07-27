@@ -5,8 +5,8 @@ library: rss
 ## Instance Methods
 ### def content
 ### def content=
-#@todo
+#%todo
 
 ### def value
 ### def value=
-#@todo
+#%todo

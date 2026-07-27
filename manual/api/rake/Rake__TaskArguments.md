@@ -30,7 +30,7 @@ end
 
 自身に含まれるパラメータ名とそれに対応する値をブロックパラメータとしてブロックを評価します。
 
-#@#noexample Hash#each を参照
+#%#noexample Hash#each を参照
 
 - **SEE** [m:Hash#each]
 
@@ -39,7 +39,7 @@ end
 
 自身を人間に読みやすい文字列にして返します。
 
-#@#noexample Hash#inspect を参照
+#%#noexample Hash#inspect を参照
 
 - **SEE** [m:Hash#inspect]
 
@@ -115,7 +115,7 @@ end
 
 - **param** `name` -- パラメータ名を指定します。
 
-#@#noexample
+#%#noexample
 
 ## Singleton Methods
 

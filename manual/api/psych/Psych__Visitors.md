@@ -106,36 +106,36 @@ encoding には以下のいずれかを指定できます。
 
 - **param** `object` -- YAML AST へ変換する Ruby オブジェクト
 
-#@# accept and visit_* is used internally. Not documented here.
-#@# --- accept(target)
-#@# #@todo
+#%# accept and visit_* is used internally. Not documented here.
+#%# --- accept(target)
+#%# #@todo
 
-#@# = class Psych::Visitors::ToRuby
-#@# YAML AST を traverse して Ruby オブジェクトを生成するクラス
-#@# Psych::Nodes::Node#to_ruby を使うべきなのでこれに関するドキュメントはなし
+#%# = class Psych::Visitors::ToRuby
+#%# YAML AST を traverse して Ruby オブジェクトを生成するクラス
+#%# Psych::Nodes::Node#to_ruby を使うべきなのでこれに関するドキュメントはなし
 
-#@# = class Psych::Visitors::DepthFirst
-#@# YAML AST を traverse して block を call するクラス
-#@# Psych::Nodes::Node#each を使うべき
+#%# = class Psych::Visitors::DepthFirst
+#%# YAML AST を traverse して block を call するクラス
+#%# Psych::Nodes::Node#each を使うべき
 
-#@# = class Psych::Visitors::Emitter
-#@# YAML AST を traverse して Psych::Emitter に適切なイベントを
-#@# 送ることで YAML document を生成するクラス
-#@# Psych::Nodes::Node#to_yaml を使うべき
+#%# = class Psych::Visitors::Emitter
+#%# YAML AST を traverse して Psych::Emitter に適切なイベントを
+#%# 送ることで YAML document を生成するクラス
+#%# Psych::Nodes::Node#to_yaml を使うべき
 
-#@# = class Psych::Visitors::JSONTree < Psych::Visitors::YAMLTree
-#@# Ruby オブジェクトから JSON 用の AST を構築するためのクラスです。
-#@# 
-#@# AST は YAML 用の AST と同様 [[c:Psych::Nodes::Node]] のサブクラスに
-#@# よって表現されます。しかし JSON と YAML の仕様の違い(基本的に
-#@# YAML のほうが rich なデータ型を持っています。例えば JSON には
-#@# Symbol を表現する方法がなく、文字列ど同一視されます)を
-#@# ごまかすための仕組みが含まれています。
-#@# 
-#@# 実際問題としてこれを直接は使わない気がするのでドキュメントは書きません。
-#@# 
-#@# == Class Methods
-#@# --- new(options = {}, emitter = Psych::JSON::TreeBuilder.new)
-#@#
-#@# JSON の仕様は YAML の仕様の subset と見なせることを使って
-#@# JSON の処理をしている。
+#%# = class Psych::Visitors::JSONTree < Psych::Visitors::YAMLTree
+#%# Ruby オブジェクトから JSON 用の AST を構築するためのクラスです。
+#%# 
+#%# AST は YAML 用の AST と同様 [[c:Psych::Nodes::Node]] のサブクラスに
+#%# よって表現されます。しかし JSON と YAML の仕様の違い(基本的に
+#%# YAML のほうが rich なデータ型を持っています。例えば JSON には
+#%# Symbol を表現する方法がなく、文字列ど同一視されます)を
+#%# ごまかすための仕組みが含まれています。
+#%# 
+#%# 実際問題としてこれを直接は使わない気がするのでドキュメントは書きません。
+#%# 
+#%# == Class Methods
+#%# --- new(options = {}, emitter = Psych::JSON::TreeBuilder.new)
+#%#
+#%# JSON の仕様は YAML の仕様の subset と見なせることを使って
+#%# JSON の処理をしている。

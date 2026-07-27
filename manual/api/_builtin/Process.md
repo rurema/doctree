@@ -448,9 +448,9 @@ pid で指定されたプロセスにシグナルを送ります。signal
 
 - **raise** `Errno::EXXX` -- シグナル送信に失敗した場合に発生します。
 
-#@#なお、Windows ([[unknown:mswin32]], [[unknown:mingw32]])では、INT
-#@#ILL FPE SEGV TERM BREAK ABRT しか指定できません。((<ruby 1.7 feature>))
-#@#KILL も指定できます
+#%#なお、Windows ([[unknown:mswin32]], [[unknown:mingw32]])では、INT
+#%#ILL FPE SEGV TERM BREAK ABRT しか指定できません。((<ruby 1.7 feature>))
+#%#KILL も指定できます
 
 - **SEE** [m:Kernel?.trap], [man:kill(2)]
 
@@ -617,7 +617,7 @@ p Process.waitall
 #=> [[2766, #<Process::Status: pid=2766,exited(1)>], [2765, #<Process::Status: pid=2765,exited(1)>]]
 ```
 
-#@since 3.3
+#%since 3.3
 ### module_function def warmup    -> true
 
 [c:RubyVM]にアプリケーションの起動が終了したこと及び、アプリケーションの最適化に適したタイミングであることを通知します。
@@ -631,7 +631,7 @@ CRubyではメジャーGCを実行し以下のことをします：
 3. 全ての文字列のcoderange([m:String#valid_encoding?]などで使われる文字列の内容とエンコーディングとの整合性の情報)を事前計算します
 4. すべての空のヒープページを解放し、解放したページ数だけ割当可能なページカウンター(heap_allocatable_pages)を増分します
 5. 空のmallocページを解放するためにmalloc_trimを呼び出します
-#@end
+#%end
 
 ### module_function def daemon(nochdir = nil, noclose = nil)    -> 0
 

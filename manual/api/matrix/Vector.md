@@ -4,7 +4,7 @@ include:
   - Enumerable
 ---
 # class Vector < Object
-#@# [2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#%# [2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
 数ベクトルを表すクラスです。要素は [c:Numeric] オブジェクトで表します。
 
@@ -17,24 +17,24 @@ include:
 [c:Vector] オブジェクトは [c:Matrix] オブジェクトとの演算においては列ベクトルとして扱われます。
 行ベクトルとして演算を行いたいときは、1行の行列に変換してから行います。
 
-#@# ((-Vectorクラスには英語のドキュメントがほとんどないので、英語の方も補ってみました。とりあえず対訳にしておいて、そのうち、英語版を分離します。-))
+#%# ((-Vectorクラスには英語のドキュメントがほとんどないので、英語の方も補ってみました。とりあえず対訳にしておいて、そのうち、英語版を分離します。-))
 
-#@#=== 使い方　Usage
+#%#=== 使い方　Usage
 
-#@#Vectorクラスを使うためには、require 'matrix'する必要があります。
+#%#Vectorクラスを使うためには、require 'matrix'する必要があります。
 
-#@#  require 'matrix'
+#%#  require 'matrix'
 
-#@#=== ChangeLog
-#@#
-#@#  *[2002-04-03] by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
-#@#    * 使い方の節を追加
-#@#    * Working with Complex classの節を追加
-#@#    * []=メソッドを追加
-#@#    * イテレータ関係を同じ節にまとめた collect, map, each2, collect2, map2
-#@#    * 誤りを訂正し、説明を直した。 とくにeach2, collect2, map2
-#@#    * 他クラスへのリンクを追加 Numeric, Matrix
-#@#  *[2002-04-02] 初版 by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#%#=== ChangeLog
+#%#
+#%#  *[2002-04-03] by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#%#    * 使い方の節を追加
+#%#    * Working with Complex classの節を追加
+#%#    * []=メソッドを追加
+#%#    * イテレータ関係を同じ節にまとめた collect, map, each2, collect2, map2
+#%#    * 誤りを訂正し、説明を直した。 とくにeach2, collect2, map2
+#%#    * 他クラスへのリンクを追加 Numeric, Matrix
+#%#  *[2002-04-02] 初版 by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
 ## Class Methods
 

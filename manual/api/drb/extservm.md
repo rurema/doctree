@@ -141,8 +141,8 @@ DRb::ExtServManager オブジェクトを生成して返します。
 リモートプロセスから呼び出すことでサービスの仲介を実現します。
 
 ## Instance Methods
-#@# --- regist(name, ro) -> ()
-#@# used internally
+#%# --- regist(name, ro) -> ()
+#%# used internally
 
 ### def service(name) -> DRb::ExtServ
 
@@ -162,8 +162,8 @@ DRb::ExtServ は削除され、プロセスは停止します。
 
 - **param** `name` -- サービス名文字列
 
-#@# --- unregist(name) -> ()
-#@# used internally
+#%# --- unregist(name) -> ()
+#%# used internally
 
 ### def uri -> String|nil
 

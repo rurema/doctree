@@ -33,8 +33,8 @@ https://docs.ruby-lang.org/ja/ の各ページ下部の編集リンクから、
 （`### def each {|item| ... } -> self`）やクロスリファレンス（`[m:Array#each]`）
 などの独自拡張の仕様は、bitclust の
 [MARKUP_SPEC.md](https://github.com/rurema/bitclust/blob/master/doc/markdown-samples/MARKUP_SPEC.md)
-を参照してください。バージョン別の記述に使う `#@since` / `#@until` などの
-プリプロセッサ指令は従来どおり使えます。
+を参照してください。バージョン別の記述に使う `#%since` / `#%until` などの
+プリプロセッサ指令は従来どおり使えます（旧 `#@` prefix も後方互換で受理されます）。
 
 ローカルでのビルド・確認:
 

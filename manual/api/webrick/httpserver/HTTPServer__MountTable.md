@@ -38,7 +38,7 @@ library: webrick/httpserver
 - **return** -- [c:WEBrick::HTTPServlet::AbstractServlet] のサブクラスのインタンスを返します。
 
 ### def scan(path) -> Array
-#@# 自信ない
+#%# 自信ない
 与えられたパスをスクリプトの名前と PATH_INFO に分割します。
 
 - **param** `path` -- パスを指定します。

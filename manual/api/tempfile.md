@@ -12,7 +12,7 @@ require:
 標準添付ライブラリ紹介 【第 15 回】 tmpdir, tempfile  <https://magazine.rubyist.net/articles/0029/0029-BundledLibraries.html>
 
 # class Tempfile < Delegator
-#@#= class Tempfile < DelegateClass(File)
+#%#= class Tempfile < DelegateClass(File)
 
 テンポラリファイルを操作するためのクラスです。
 
@@ -73,13 +73,13 @@ p File.read(tf.path) #=> "hoge\n"
 
 - **SEE** [m:Tempfile.create]
 
-#@since 3.4
+#%since 3.4
 ### def create(basename="", tmpdir=nil, mode: 0, anonymous: false, **options) -> File
 ### def create(basename="", tmpdir=nil, mode: 0, anonymous: false, **options){|fp| ...} -> object
-#@else
+#%else
 ### def create(basename="", tmpdir=nil, mode: 0, **options) -> File
 ### def create(basename="", tmpdir=nil, mode: 0, **options){|fp| ...} -> object
-#@end
+#%end
 
 テンポラリファイルを作成し、それを表す File オブジェクトを生成して返します(Tempfileではありません)。
 createはopenに似ていますが、finalizerによるファイルの自動unlinkを行いません。
@@ -100,10 +100,10 @@ createではファイルのunlinkも自動で行います。
 - **param** `mode` -- ファイルのモードを定数の論理和で指定します。[m:IO.open]
             と同じ([m:Kernel?.open]と同じ)ものが指定できます。
 
-#@since 3.4
+#%since 3.4
 - **param** `anonymous` -- テンポラリファイルを即時unlinkするかを指定します。
                  デフォルトは false です。
-#@end
+#%end
 
 - **param** `options` -- ファイルのオプション引数を指定します。[m:IO.open] と同
                じものが指定できます。ただし、:permオプションは無視され
@@ -203,10 +203,10 @@ UNIXライクなシステムでは、
 テンポラリファイルを作成しオープンした後、
 すぐに削除するということがしばしばおこなわれます。
 
-#@# Unlinks the file. On UNIX-like systems, it is often a good idea
-#@# to unlink a temporary file immediately after creating and opening
-#@# it, because it leaves other programs zero chance to access the
-#@# file.
+#%# Unlinks the file. On UNIX-like systems, it is often a good idea
+#%# to unlink a temporary file immediately after creating and opening
+#%# it, because it leaves other programs zero chance to access the
+#%# file.
 
 ```ruby
 require "tempfile"

@@ -1,8 +1,8 @@
-#@# -*- mode: rd; -*-
-#@# Shell::CommandProcessor.install_builtin_commands で定義されるメソッド
-#@# Shell, Shell::Filter, Shell::CommandProcessor に定義される
+#%# -*- mode: rd; -*-
+#%# Shell::CommandProcessor.install_builtin_commands で定義されるメソッド
+#%# Shell, Shell::Filter, Shell::CommandProcessor に定義される
 
-#@# from File
+#%# from File
 ### def atime(filename) -> Time
 
 [c:File] クラスにある同名のクラスメソッドと同じです.
@@ -177,7 +177,7 @@
 
 - **SEE** [m:File.utime]
 
-#@# from FileTest
+#%# from FileTest
 
 ### def blockdev?(file)    -> bool
 
@@ -349,7 +349,7 @@
 
 - **SEE** [m:FileTest?.zero?]
 
-#@# Shell::CommandProcessor に直接定義されているメソッド
+#%# Shell::CommandProcessor に直接定義されているメソッド
 
 ### def foreach(path = nil, &block) -> ()
 
@@ -465,7 +465,7 @@ sh.system("ls", "-l") | sh.head("-n 3") > STDOUT
 
 ### def check_point
 ### def finish_all_jobs
-#@todo
+#%todo
 
 ### def transact { ... } -> object
 
@@ -565,7 +565,7 @@ sh.transact {
 - **SEE** [m:Dir.\[\]]
 
 ### def append(to, filter) -> Shell::AppendFile | Shell::AppendIO
-#@todo
+#%todo
 
 - **param** `to` -- 文字列か [c:IO] を指定します。
 
@@ -592,20 +592,20 @@ sh.transact {
 ```
 
 ### def concat(*jobs) -> Shell::Concat
-#@todo
+#%todo
 
 ### def notify(*opts){ ... } -> ()
-#@todo
+#%todo
 
 ### def find_system_command(command)
-#@todo
+#%todo
 
 ### def identical?
-#@todo
+#%todo
 
 ### def world_readable?
-#@todo
+#%todo
 
 ### def world_writable?
-#@todo
+#%todo
 

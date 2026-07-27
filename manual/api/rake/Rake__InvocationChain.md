@@ -122,7 +122,7 @@ end
 
 偽を返します。
 
-#@#noexample
+#%#noexample
 
 ### def append(task_name) -> Rake::InvocationChain
 
@@ -130,10 +130,10 @@ end
 
 - **param** `task_name` -- 追加する値を指定します。
 
-#@#noexample
+#%#noexample
 
 ### def to_s -> String
 
 'TOP' という文字列を返します。
 
-#@#noexample
+#%#noexample

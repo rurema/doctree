@@ -1,3 +1,3 @@
-#@# nodoc
-#@#
-#@# = class Rational::compatible
+#%# nodoc
+#%#
+#%# = class Rational::compatible

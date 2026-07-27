@@ -6,7 +6,7 @@ library: _builtin
 スレッドを表すクラスです。スレッドとはメモリ空間を共有して同時に実行される制御の流れです。
 Thread を使うことで並行プログラミングが可能になります。
 
-#@include(thread.inc)
+#%include(thread.inc)
 
 ## Class Methods
 ### def abort_on_exception             -> bool
@@ -45,13 +45,13 @@ Thread.new { 1.times { raise } }
 ```text
 #<Thread:...> terminated with exception (report_on_exception is true):
 Traceback (most recent call last):
-#@since 3.4
+#%since 3.4
 2: from -e:1:in 'block in <main>'
 1: from -e:1:in 'times'
-#@else
+#%else
 2: from -e:1:in `block in <main>'
 1: from -e:1:in `times'
-#@end
+#%end
 ```
 
 これによってスレッドのエラーを早期に捕捉できるようになります。
@@ -70,14 +70,14 @@ Traceback (most recent call last):
 
 - **param** `newstate` -- スレッド実行中に例外発生した場合、その内容を報告するかどうかを true か false で指定します。
 
-#@since 3.0
+#%since 3.0
 ### def ignore_deadlock -> bool
 
 デッドロック検知を無視する機能のon/offを返します。
 
 デフォルト値はfalseで、デッドロックが検知されます。
 
-#@#noexample Thread.ignore_deadlock=を参照
+#%#noexample Thread.ignore_deadlock=を参照
 
 - **SEE** [m:Thread.ignore_deadlock=]
 
@@ -98,7 +98,7 @@ puts queue.pop
 ```
 
 - **SEE** [m:Thread.ignore_deadlock]
-#@end
+#%end
 
 ### def current    -> Thread
 
@@ -112,7 +112,7 @@ p Thread.current #=> #<Thread:0x4022e6fc run>
 
 カレントスレッドに対して [m:Thread#exit] を呼びます。
 
-#@#noexample Thread#exitを参照
+#%#noexample Thread#exitを参照
 
 ### def kill(thread)    -> Thread
 
@@ -259,13 +259,13 @@ a.join
 
 - **SEE** [m:Thread#run], [m:Thread#wakeup]
 
-#@since 3.2
-#@since 3.4
+#%since 3.2
+#%since 3.4
 ### def each_caller_location(start = 1, length = nil) {|location| ... } -> nil
 ### def each_caller_location(range) {|location| ... } -> nil
-#@else
+#%else
 ### def each_caller_location {|location| ... } -> nil
-#@end
+#%end
 
 現在の実行スタックの各フレームを、[c:Thread::Backtrace::Location] オブジェクトと
 してブロックに渡します。
@@ -273,7 +273,7 @@ a.join
 [m:Kernel?.caller_locations] と似ていますが、配列を作らずにブロックへ順に
 渡すため、目的のフレームが見つかった時点で処理を打ち切るような用途で
 無駄な生成を避けられます。
-#@since 3.4
+#%since 3.4
 引数の意味は [m:Kernel?.caller_locations] と同じで、ブロックに渡すフレームの
 範囲を指定できます。引数を渡せるのは Ruby 3.4 以降です。
 
@@ -282,7 +282,7 @@ a.join
 - **param** `length` -- ブロックに渡すフレームの個数を指定します。
 
 - **param** `range` -- ブロックに渡したいフレームの範囲を示す [c:Range] オブジェクトを指定します。
-#@end
+#%end
 
 nil を返します。
 
@@ -298,7 +298,7 @@ foo
 ```
 
 - **SEE** [m:Kernel?.caller_locations]
-#@end
+#%end
 
 ### def DEBUG -> Integer
 
@@ -333,7 +333,7 @@ p Thread.DEBUG # => 1
 
 - **SEE** [m:Thread.DEBUG]
 
-#@# 参考: [[ruby-dev:45341]]
+#%# 参考: [[ruby-dev:45341]]
 ### def pending_interrupt?(error = nil) -> bool
 
 非同期割り込みのキューが空かどうかを返します。
@@ -584,7 +584,7 @@ val を name に対応するスレッド固有のデータとして格納しま�
 
 - **param** `val` -- スレッド固有データを指定します。nil を指定するとそのスレッド固有データは削除されます。
 
-#@#noexample Thread#[]を参照
+#%#noexample Thread#[]を参照
 
 - **SEE** [m:Thread#\[\]]
 
@@ -647,11 +647,11 @@ p a.report_on_exception # => true
 a.run
 # => #<Thread:0x00007fc3f48c7908 (irb):1 run> terminated with exception (report_on_exception is true):
 #    Traceback (most recent call last):
-#@since 3.4
+#%since 3.4
 #    (irb):1:in 'block in irb_binding': unhandled exception
-#@else
+#%else
 #    (irb):1:in `block in irb_binding': unhandled exception
-#@end
+#%end
 #    #<Thread:0x00007fc3f48c7908 (irb):1 dead>
 b = Thread.new{ Thread.stop; raise }
 b.report_on_exception = false
@@ -847,8 +847,8 @@ a.join
 生きているスレッドの状態を文字列 "run"、"sleep", "aborting" のいず
 れかで返します。正常終了したスレッドに対して false、例外によ
 り終了したスレッドに対して nil を返します。
-#@#((-((<ruby 1.6 feature>)): version 1.6.5 までは、終了処理中
-#@#(aborting)のスレッドに対しては "run" を返していました-))
+#%#((-((<ruby 1.6 feature>)): version 1.6.5 までは、終了処理中
+#%#(aborting)のスレッドに対しては "run" を返していました-))
 
 [m:Thread#alive?] が真を返すなら、このメソッドも真です。
 
@@ -1030,17 +1030,17 @@ end
 th = Thread.new {C1.new.m2; Thread.stop}
 p th.backtrace
 # => [
-#@since 3.4
+#%since 3.4
 #      [0] "(irb):3:in 'sleep'",
 #      [1] "(irb):3:in 'm1'",
 #      [2] "(irb):6:in 'm2'",
 #      [3] "(irb):10:in 'block in irb_binding'"
-#@else
+#%else
 #      [0] "(irb):3:in `sleep'",
 #      [1] "(irb):3:in `m1'",
 #      [2] "(irb):6:in `m2'",
 #      [3] "(irb):10:in `block in irb_binding'"
-#@end
+#%end
 #    ]
 
 th.kill
@@ -1068,11 +1068,11 @@ p th.backtrace # => nil
 ```ruby title="例"
 thread = Thread.new { sleep 1 }
 thread.run
-#@since 3.4
+#%since 3.4
 p thread.backtrace_locations # => ["/path/to/test.rb:1:in 'sleep'", "/path/to/test.rb:1:in 'block in <main>'"]
-#@else
+#%else
 p thread.backtrace_locations # => ["/path/to/test.rb:1:in `sleep'", "/path/to/test.rb:1:in `block in <main>'"]
-#@end
+#%end
 ```
 
 - **SEE** [c:Thread::Backtrace::Location]
@@ -1162,7 +1162,7 @@ p thr.thread_variables # => [:cat, :dog]
 
 - **SEE** [m:Thread#thread_variable_get], [m:Thread#thread_variable?], [m:Thread#\[\]]
 
-#@since 3.1
+#%since 3.1
 ### def native_thread_id -> Integer | nil
 
 self に対応するネイティブスレッドの ID を返します。
@@ -1186,7 +1186,7 @@ thr.join
 p thr.native_thread_id                  # => nil
 ```
 
-#@end
+#%end
 
 ### def pending_interrupt?(error = nil) -> bool
 
@@ -1194,7 +1194,7 @@ self の非同期例外のキューが空かどうかを返します。
 
 - **param** `error` -- 対象の例外クラスを指定します。
 
-#@#noexample Thread.pending_interrupt? を参照
+#%#noexample Thread.pending_interrupt? を参照
 
 - **SEE** [m:Thread.pending_interrupt?]
 
@@ -1202,7 +1202,7 @@ self の非同期例外のキューが空かどうかを返します。
 
 self の名前を返します。
 
-#@#noexample Thread#name=を参照
+#%#noexample Thread#name=を参照
 
 - **SEE** [m:Thread#name=]
 

@@ -119,13 +119,13 @@ Here is some text[^1] including an inline footnote ^[for short footnotes]
 [^1]: With the footnote text down at the bottom
 ```
 
-#@# bitclust の表現力の関係で省略。
-#@#
-#@# 出力例:
-#@#
-#@# Here is some text[^1] including an inline footnote ^[for short footnotes]
-#@#
-#@# [^1]: With the footnote text down at the bottom
+#%# bitclust の表現力の関係で省略。
+#%#
+#%# 出力例:
+#%#
+#%# Here is some text[^1] including an inline footnote ^[for short footnotes]
+#%#
+#%# [^1]: With the footnote text down at the bottom
 
 ### 制限事項
 
@@ -288,43 +288,43 @@ HTML を記述した場合にそのまま出力するかどうかを設定しま
 - **param** `enable` -- 有効にする場合は true を、無効にする場合は false を指定し
               ます。
 
-#@# 内部で使用するメソッドのため省略。
-#@#
-#@# --- emphasis(text)
-#@#
-#@# Wraps `text` in emphasis for rdoc inline formatting
-#@#
-#@# --- link_to(content, label = content, text = nil)
-#@#
-#@# Finds a link reference for `label` and creates a new link to it with
-#@# `content` as the link text.  If `label` was not encountered in the
-#@# reference-gathering parser pass the label and content are
-#@# reconstructed with the linking `text` (usually whitespace).
-#@#
-#@# --- list_item_from(unparsed)
-#@#
-#@# Creates an RDoc::Markup::ListItem by parsing the `unparsed` content
-#@# from the first parsing pass.
-#@#
-#@# --- note(label)
-#@#
-#@# Stores `label` as a note and fills in previously unknown note references.
-#@#
-#@# --- note_for(ref)
-#@#
-#@# Creates a new link for the footnote `reference` and adds the reference
-#@# to the note order list for proper display at the end of the document.
-#@#
-#@# --- paragraph parts
-#@#
-#@# Creates an RDoc::Markup::Paragraph from `parts` and including
-#@# extension-specific behavior
-#@#
-#@# --- reference(label, link)
-#@#
-#@# Stores `label` as a reference to `link` and fills in previously
-#@# unknown link references.
-#@#
-#@# --- strong(text)
-#@#
-#@# Wraps `text` in strong markup for rdoc inline formatting
+#%# 内部で使用するメソッドのため省略。
+#%#
+#%# --- emphasis(text)
+#%#
+#%# Wraps `text` in emphasis for rdoc inline formatting
+#%#
+#%# --- link_to(content, label = content, text = nil)
+#%#
+#%# Finds a link reference for `label` and creates a new link to it with
+#%# `content` as the link text.  If `label` was not encountered in the
+#%# reference-gathering parser pass the label and content are
+#%# reconstructed with the linking `text` (usually whitespace).
+#%#
+#%# --- list_item_from(unparsed)
+#%#
+#%# Creates an RDoc::Markup::ListItem by parsing the `unparsed` content
+#%# from the first parsing pass.
+#%#
+#%# --- note(label)
+#%#
+#%# Stores `label` as a note and fills in previously unknown note references.
+#%#
+#%# --- note_for(ref)
+#%#
+#%# Creates a new link for the footnote `reference` and adds the reference
+#%# to the note order list for proper display at the end of the document.
+#%#
+#%# --- paragraph parts
+#%#
+#%# Creates an RDoc::Markup::Paragraph from `parts` and including
+#%# extension-specific behavior
+#%#
+#%# --- reference(label, link)
+#%#
+#%# Stores `label` as a reference to `link` and fills in previously
+#%# unknown link references.
+#%#
+#%# --- strong(text)
+#%#
+#%# Wraps `text` in strong markup for rdoc inline formatting

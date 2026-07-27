@@ -85,9 +85,9 @@ XML 処理命令の内容を変更します。
 
 self を複製します。
 
-#@# obsolete
-#@# --- write(writer, indent = -1, transitive = false, ie_hack = false)
-#@# #@todo
+#%# obsolete
+#%# --- write(writer, indent = -1, transitive = false, ie_hack = false)
+#%# #@todo
 
 ### def ==(other) -> bool
 
@@ -102,15 +102,15 @@ other と self が同じ 処理命令である場合に真を返します。
 
 Symbol :processing_instruction を返します。
 
-#@# #@since 1.8.3
-#@# --- inspect
-#@# #@todo
-#@# #@end
+#%# #@since 1.8.3
+#%# --- inspect
+#%# #@todo
+#%# #@end
 
-#@# == Constants
-#@#
-#@# --- START
-#@# #@todo
-#@#
-#@# --- STOP
-#@# #@todo
+#%# == Constants
+#%#
+#%# --- START
+#%# #@todo
+#%#
+#%# --- STOP
+#%# #@todo

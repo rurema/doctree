@@ -21,7 +21,7 @@ library: rubygems/user_interaction
 - **param** `new_ui` -- 新しい UI を指定します。
 
 ### def use_ui(new_ui){ ... }
-#@# -> discard
+#%# -> discard
 
 与えられたブロックを評価している間だけ UI として new_ui を使用します。
 
@@ -44,7 +44,7 @@ library: rubygems/user_interaction
 - **SEE** [m:Gem::DefaultUserInteraction.ui=]
 
 ### def use_ui(new_ui){ ... }
-#@# -> discard
+#%# -> discard
 
 与えられたブロックを評価している間だけ UI として new_ui を使用します。
 

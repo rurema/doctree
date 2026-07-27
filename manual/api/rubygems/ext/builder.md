@@ -13,12 +13,12 @@ require:
 ## Singleton Methods
 
 ### def class_name -> String
-#@todo
+#%todo
 
 ビルダーのクラス名を返します。
 
 ### def make(dest_path, results)
-#@todo
+#%todo
 
 Makefile を編集して make, make install を実行します。
 
@@ -31,12 +31,12 @@ Makefile を編集して make, make install を実行します。
 - **raise** `Gem::InstallError` -- make の実行に失敗した場合に発生します。
 
 ### def redirector -> String
-#@todo
+#%todo
 
 '2>&1' という文字列を返します。
 
 ### def run(command, results)
-#@todo
+#%todo
 
 与えられたコマンドを実行します。
 

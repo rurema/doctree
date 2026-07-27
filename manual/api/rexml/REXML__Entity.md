@@ -182,43 +182,43 @@ p e.to_s # => "<!ENTITY w \"wee\">"
 
 ## Constants
 
-#@# Internally used strings and regexps
-#@# --- PUBIDCHAR
-#@# #@todo
-#@#
-#@# --- SYSTEMLITERAL
-#@# #@todo
-#@#
-#@# --- PUBIDLITERAL
-#@# #@todo
-#@#
-#@# --- EXTERNALID
-#@# #@todo
-#@#
-#@# --- NDATADECL
-#@# #@todo
-#@#
-#@# --- PEREFERENCE
-#@# #@todo
-#@#
-#@# --- ENTITYVALUE
-#@# #@todo
-#@#
-#@# --- PEDEF
-#@# #@todo
-#@#
-#@# --- ENTITYDEF
-#@# #@todo
-#@#
-#@# --- PEDECL
-#@# #@todo
-#@#
-#@# --- GEDECL
-#@# #@todo
-#@#
-#@# --- ENTITYDECL
-#@# #@todo
-#@#
-#@# --- PEREFERENCE_RE
-#@# #@todo
+#%# Internally used strings and regexps
+#%# --- PUBIDCHAR
+#%# #@todo
+#%#
+#%# --- SYSTEMLITERAL
+#%# #@todo
+#%#
+#%# --- PUBIDLITERAL
+#%# #@todo
+#%#
+#%# --- EXTERNALID
+#%# #@todo
+#%#
+#%# --- NDATADECL
+#%# #@todo
+#%#
+#%# --- PEREFERENCE
+#%# #@todo
+#%#
+#%# --- ENTITYVALUE
+#%# #@todo
+#%#
+#%# --- PEDEF
+#%# #@todo
+#%#
+#%# --- ENTITYDEF
+#%# #@todo
+#%#
+#%# --- PEDECL
+#%# #@todo
+#%#
+#%# --- GEDECL
+#%# #@todo
+#%#
+#%# --- ENTITYDECL
+#%# #@todo
+#%#
+#%# --- PEREFERENCE_RE
+#%# #@todo
 

@@ -38,7 +38,7 @@ p CGI.unescape("http%3A%2F%2Fwww.example.com%2Findex.rss")
 #=> "http://www.example.com/index.rss"
 ```
 
-#@since 3.2
+#%since 3.2
 ### def escapeURIComponent(string) -> String
 
 与えられた文字列を [RFC:3986] に従って URL エンコードした文字列を新しく作成し返します。
@@ -73,7 +73,7 @@ p CGI.unescapeURIComponent("%27Stop%21%27%20said%20Fred") #=> "'Stop!' said Fred
 ```
 
 - **SEE** [m:CGI.unescape], [m:CGI.escapeURIComponent]
-#@end
+#%end
 
 ### def escapeHTML(string) -> String
 ### def escape_html(string) -> String
@@ -145,7 +145,7 @@ print CGI.unescapeElement('&lt;BR&gt;&lt;A HREF="url"&gt;&lt;/A&gt;', %w(A IMG))
   # => "&lt;BR&gt;<A HREF="url"></A>"
 ```
 
-#@until 4.0
+#%until 4.0
 ### def rfc1123_date(time) -> String
 
 与えられた時刻を [RFC:1123] フォーマットに準拠した文字列に変換します。
@@ -183,7 +183,7 @@ print CGI.pretty("<HTML><BODY></BODY></HTML>", "\t")
   # </HTML>
 ```
 
-#@end
+#%end
 
 ## Constants
 

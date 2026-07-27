@@ -29,20 +29,20 @@ Set クラスでは、集合要素を取り出す際の順序は保証されま�
 ```ruby
 set1 = Set.new ["foo", "bar", "baz", "foo"]
 
-#@since 4.0
+#%since 4.0
 p set1                  # => Set["foo", "bar", "baz"]
-#@else
+#%else
 p set1                  # => #<Set: {"foo", "bar", "baz"}>
-#@end
+#%end
 p set1.include?("bar")  # => true
 
 set1.add("heh")
 set1.delete("foo")
-#@since 4.0
+#%since 4.0
 p set1                  # => Set["bar", "baz", "heh"]
-#@else
+#%else
 p set1                  # => #<Set: {"bar", "baz", "heh"}>
-#@end
+#%end
 ```
 
 ## Class Methods
@@ -66,15 +66,15 @@ p set1                  # => #<Set: {"bar", "baz", "heh"}>
        定義されていない場合に発生します。
 
 ```ruby
-#@since 4.0
+#%since 4.0
 p Set.new                      # => Set[]
 p Set.new([1, 2])              # => Set[1, 2]
 p Set.new([1, 2]) {|o| o * 2}  # => Set[2, 4]
-#@else
+#%else
 p Set.new                      # => #<Set: {}>
 p Set.new([1, 2])              # => #<Set: {1, 2}>
 p Set.new([1, 2]) {|o| o * 2}  # => #<Set: {2, 4}>
-#@end
+#%end
 ```
 
 ### def [](*ary) -> Set
@@ -84,11 +84,11 @@ p Set.new([1, 2]) {|o| o * 2}  # => #<Set: {2, 4}>
 - **param** `ary` -- 新しい集合の要素を指定します。
 
 ```ruby
-#@since 4.0
+#%since 4.0
 p Set[1, 2] # => Set[1, 2]
-#@else
+#%else
 p Set[1, 2] # => #<Set: {1, 2}>
-#@end
+#%end
 ```
 
 ## Instance Methods
@@ -112,13 +112,13 @@ Set クラスでは、dup と clone に共通して、内部記憶として
 s1 = Set[10, 20]
 s2 = s1.dup
 s2 << 30
-#@since 4.0
+#%since 4.0
 p s1 # => Set[10, 20]
 p s2 # => Set[10, 20, 30]
-#@else
+#%else
 p s1 # => #<Set: {10, 20}>
 p s2 # => #<Set: {10, 20, 30}>
-#@end
+#%end
 ```
 
 - **SEE** [m:Object#clone]
@@ -188,17 +188,17 @@ p Set[].empty?       # => true
 集合の要素をすべて削除し、空にした後の self を返します。
 
 ```ruby
-#@since 4.0
+#%since 4.0
 p s = Set[10, 20, 30] # => Set[10, 20, 30]
-#@else
+#%else
 p s = Set[10, 20, 30] # => #<Set: {10, 20, 30}>
-#@end
+#%end
 s.clear
-#@since 4.0
+#%since 4.0
 p s # => Set[]
-#@else
+#%else
 p s # => #<Set: {}>
-#@end
+#%end
 ```
 
 ### def replace(enum) -> self
@@ -212,17 +212,17 @@ p s # => #<Set: {}>
        発生します。
 
 ```ruby
-#@since 4.0
+#%since 4.0
 p s = Set[10, 20, 30] # => Set[10, 20, 30]
-#@else
+#%else
 p s = Set[10, 20, 30] # => #<Set: {10, 20, 30}>
-#@end
+#%end
 s.replace([15, 25])
-#@since 4.0
+#%since 4.0
 p s # => Set[15, 25]
-#@else
+#%else
 p s # => #<Set: {15, 25}>
-#@end
+#%end
 ```
 
 ### def flatten -> Set
@@ -240,19 +240,19 @@ flatten! は、元の集合を破壊的に平坦化します。集合の要素�
 
 ```ruby
 s = Set[Set[1,2], 3]
-#@since 4.0
+#%since 4.0
 p s.flatten # => Set[1, 2, 3]
 p s         # => Set[Set[1, 2], 3]
-#@else
+#%else
 p s.flatten # => #<Set: {1, 2, 3}>
 p s         # => #<Set: {#<Set: {1, 2}>, 3}>
-#@end
+#%end
 s.flatten!
-#@since 4.0
+#%since 4.0
 p s         # => Set[1, 2, 3]
-#@else
+#%else
 p s         # => #<Set: {1, 2, 3}>
-#@end
+#%end
 ```
 
 - **SEE** [m:Array#flatten]
@@ -348,11 +348,11 @@ p ary # => [11, 21]
 ```ruby
 set = Set['hello', 'world']
 set.map! {|str| str.capitalize}
-#@since 4.0
+#%since 4.0
 p set  # => Set["Hello", "World"]
-#@else
+#%else
 p set  # => #<Set: {"Hello", "World"}>
-#@end
+#%end
 ```
 
 - **SEE** [m:Enumerable#collect]
@@ -373,13 +373,13 @@ nil を返します。
 ```ruby
 s = Set[1, 2]
 s << 10
-#@since 4.0
+#%since 4.0
 p s           # => Set[1, 2, 10]
 p s.add?(20)  # => Set[1, 2, 10, 20]
-#@else
+#%else
 p s           # => #<Set: {1, 2, 10}>
 p s.add?(20)  # => #<Set: {1, 2, 10, 20}>
-#@end
+#%end
 p s.add?(2)   # => nil
 ```
 
@@ -398,13 +398,13 @@ delete? は、集合の要素が削除された場合には self を、変化が
 ```ruby
 s = Set[10, 20, 30]
 s.delete(10)
-#@since 4.0
+#%since 4.0
 p s              # => Set[20, 30]
 p s.delete?(20)  # => Set[30]
-#@else
+#%else
 p s              # => #<Set: {20, 30}>
 p s.delete?(20)  # => #<Set: {30}>
-#@end
+#%end
 p s.delete?(10)  # => nil
 ```
 
@@ -422,18 +422,18 @@ nil を返します。
 ```ruby
 s1 = Set['hello.rb', 'test.rb', 'hello.rb.bak']
 s1.delete_if {|str| str =~ /\.bak\z/}
-#@since 4.0
+#%since 4.0
 p s1 # => Set["hello.rb", "test.rb"]
-#@else
+#%else
 p s1 # => #<Set: {"hello.rb", "test.rb"}>
-#@end
+#%end
 
 s2 = Set['hello.rb', 'test.rb', 'hello.rb.bak']
-#@since 4.0
+#%since 4.0
 p s2.reject! {|str| str =~ /\.bak\z/} # => Set["hello.rb", "test.rb"]
-#@else
+#%else
 p s2.reject! {|str| str =~ /\.bak\z/} # => #<Set: {"hello.rb", "test.rb"}>
-#@end
+#%end
 p s2.reject! {|str| str =~ /\.o\z/}   # => nil
 ```
 
@@ -452,11 +452,11 @@ p s2.reject! {|str| str =~ /\.o\z/}   # => nil
 ```ruby
 set = Set[10, 20]
 set.merge([10, 30])
-#@since 4.0
+#%since 4.0
 p set # => Set[10, 20, 30]
-#@else
+#%else
 p set # => #<Set: {10, 20, 30}>
-#@end
+#%end
 ```
 
 ### def subtract(enum) -> self
@@ -472,11 +472,11 @@ p set # => #<Set: {10, 20, 30}>
 ```ruby
 set = Set[10, 20, 40]
 set.subtract([10, 20, 30])
-#@since 4.0
+#%since 4.0
 p set # => Set[40]
-#@else
+#%else
 p set # => #<Set: {40}>
-#@end
+#%end
 ```
 
 ### def union(enum) -> Set
@@ -492,11 +492,11 @@ p set # => #<Set: {40}>
 
 ```ruby
 p Set[10, 20, 30] + Set[10, 20, 40]
-#@since 4.0
+#%since 4.0
 # => Set[10, 20, 30, 40]
-#@else
+#%else
 # => #<Set: {10, 20, 30, 40}>
-#@end
+#%end
 ```
 
 ### def difference(enum) -> Set
@@ -511,11 +511,11 @@ p Set[10, 20, 30] + Set[10, 20, 40]
 
 ```ruby
 p Set[10, 20, 30] - Set[10, 20, 40]
-#@since 4.0
+#%since 4.0
 # => Set[30]
-#@else
+#%else
 # => #<Set: {30}>
-#@end
+#%end
 ```
 
 ### def intersection(enum) -> Set
@@ -531,11 +531,11 @@ p Set[10, 20, 30] - Set[10, 20, 40]
 ```ruby
 s1 = Set[10, 20, 30]
 s2 = Set[10, 30, 50]
-#@since 4.0
+#%since 4.0
 p s1 & s2 #=> Set[10, 30]
-#@else
+#%else
 p s1 & s2 #=> #<Set: {10, 30}>
-#@end
+#%end
 ```
 
 - **SEE** [m:Array#&], [m:Array#intersection]
@@ -552,11 +552,11 @@ p s1 & s2 #=> #<Set: {10, 30}>
 ```ruby
 s1 = Set[10, 20, 30]
 s2 = Set[10, 30, 50]
-#@since 4.0
+#%since 4.0
 p s1 ^ s2 # => Set[20, 50]
-#@else
+#%else
 p s1 ^ s2 # => #<Set: {50, 20}>
-#@end
+#%end
 ```
 
 ### def ==(set) -> bool
@@ -591,11 +591,11 @@ p s1 == s3 # => true
 ```ruby
 numbers = Set[10, 4.5, 20, 30, 31.2]
 p numbers.classify {|o| o.class}
-#@since 4.0
+#%since 4.0
 # => {Integer => Set[10, 20, 30], Float => Set[4.5, 31.2]}
-#@else
+#%else
 # => {Integer=>#<Set: {10, 20, 30}>, Float=>#<Set: {4.5, 31.2}>}
-#@end
+#%end
 ```
 
 ### def divide {|o| ... } -> Set
@@ -615,24 +615,24 @@ o1 と o2 は同じ分割に属します。
 numbers = Set.new(1..6)
 set = numbers.divide {|i| i % 3}
 p set
-#@since 4.0
+#%since 4.0
 # => Set[Set[1, 4], Set[2, 5], Set[3, 6]]
-#@else
+#%else
 # => #<Set: {#<Set: {1, 4}>, #<Set: {2, 5}>, #<Set: {3, 6}>}>
-#@end
+#%end
 ```
 
 ```ruby title="例2"
 numbers = Set[1, 3, 4, 6, 9, 10, 11]
 set = numbers.divide {|i, j| (i - j).abs == 1}
-#@since 4.0
+#%since 4.0
 p set     # => Set[Set[1], Set[3, 4], Set[6], Set[9, 10, 11]]
-#@else
+#%else
 p set     # => #<Set: {#<Set: {1}>,
           #            #<Set: {3, 4}>,
           #            #<Set: {6}>,
           #            #<Set: {9, 10, 11}>}>
-#@end
+#%end
 ```
 
 ```ruby title="応用例: 8x2 のチェス盤上で、ナイトが到達できる位置に関する分類を作成します。"
@@ -647,17 +647,17 @@ knight_move = Set[1,2]
 p board.divide { |i,j|
   Set[(i[0] - j[0]).abs, (i[1] - j[1]).abs] == knight_move
 }
-#@since 4.0
+#%since 4.0
 # => Set[Set[[1, 1], [3, 2], [5, 1], [7, 2]],
 #        Set[[1, 2], [3, 1], [5, 2], [7, 1]],
 #        Set[[2, 1], [4, 2], [6, 1], [8, 2]],
 #        Set[[2, 2], [4, 1], [6, 2], [8, 1]]]
-#@else
+#%else
 # => #<Set: {#<Set: {[1, 1], [3, 2], [5, 1], [7, 2]}>,
 #            #<Set: {[1, 2], [3, 1], [5, 2], [7, 1]}>,
 #            #<Set: {[2, 1], [4, 2], [6, 1], [8, 2]}>,
 #            #<Set: {[2, 2], [4, 1], [6, 2], [8, 1]}>}>
-#@end
+#%end
 ```
 
 ### def inspect -> String
@@ -667,11 +667,11 @@ p board.divide { |i,j|
 
 ```ruby
 puts Set.new(['element1', 'element2']).inspect
-#@since 4.0
+#%since 4.0
 # => Set["element1", "element2"]
-#@else
+#%else
 # => #<Set: {"element1", "element2"}>
-#@end
+#%end
 ```
 
 ### def intersect?(set) -> bool

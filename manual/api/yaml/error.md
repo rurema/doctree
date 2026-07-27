@@ -1,6 +1,6 @@
 YAML 関連のエラーを扱うためのサブライブラリです。
 
-#@# YAML::ERROR_NO_HEADER_NODE などは使用されていないため、省略した。
+#%# YAML::ERROR_NO_HEADER_NODE などは使用されていないため、省略した。
 
 # class Syck::Error < StandardError
 

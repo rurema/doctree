@@ -19,7 +19,7 @@ Usage: gem cert [options]
     -s, --sign NEWCERT               証明書に秘密鍵で署名します
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```console
 Summary:

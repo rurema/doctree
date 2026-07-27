@@ -39,7 +39,7 @@ Thread::SizedQueue オブジェクトを生成します。
 
 - **param** `max` -- キューのサイズの最大値です。
 
-#@#noexample 要約の例を参照
+#%#noexample 要約の例を参照
 使用例は [ref:c:Thread::SizedQueue#example] を参照してください。
 
 ## Instance Methods
@@ -80,7 +80,7 @@ non_block が真でなければ、キューのサイズが [m:Thread::SizedQueue
 - **param** `obj` -- キューに追加したいオブジェクトを指定します。
 - **param** `non_block` -- true を与えると、キューが一杯の時に例外 [c:ThreadError] が発生します。
 
-#@#noexample 要約の例を参照
+#%#noexample 要約の例を参照
 使用例は [ref:c:Thread::SizedQueue#example] を参照してください。
 
 - **SEE** [m:Thread::Queue#push]

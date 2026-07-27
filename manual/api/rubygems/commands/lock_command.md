@@ -12,7 +12,7 @@ Usage: gem lock GEMNAME-VERSION [GEMNAME-VERSION ...] [options]
     -s, --[no-]strict                依存関係を満たせない場合に失敗します
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Arguments:

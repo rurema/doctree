@@ -13,13 +13,13 @@ include:
 
 ## Class Methods
 
-#@since 3.1
+#%since 3.1
 ### def new(*args, keyword_init: nil)                     -> Class
 ### def new(*args, keyword_init: nil) {|subclass| block } -> Class
-#@else
+#%else
 ### def new(*args, keyword_init: false)                     -> Class
 ### def new(*args, keyword_init: false) {|subclass| block } -> Class
-#@end
+#%end
 
 [c:Struct] クラスに新しいサブクラスを作って、それを返します。
 
@@ -38,22 +38,22 @@ printf "name:%s age:%d", fred.name, fred.age
 したがって、メンバ名は [c:Symbol] で指定するのが無難です。
 
 - **param** `args` -- 構造体を定義するための可変長引数。[c:String] または [c:Symbol] を指定します。
-#@since 3.2
+#%since 3.2
 - **param** `keyword_init` -- 構造体クラスのインスタンスを生成する際に、キーワード引数を使用するかどうかを指定します。値の意味は次のとおりです。
 
   - nil: キーワード引数と位置引数のどちらを使用してもよい
   - true: キーワード引数のみ使用できる
   - false: キーワード引数は使用できず、位置引数のみ使用できる
 
-#@else
+#%else
 - **param** `keyword_init` -- true を指定すると、キーワード引数で初期化する構造体を定義します。
-#@end
-#@if (version == "3.1")
+#%end
+#%if (version == "3.1")
                     Ruby 3.1 では互換性に影響のある使い方をしたときに警告が出るため、
                     従来の挙動を期待する構造体には明示的に false を指定してください。
-#@end
+#%end
 
-#@since 3.2
+#%since 3.2
 
 ```ruby title="例"
 Point1 = Struct.new(:x, :y)
@@ -86,7 +86,7 @@ p Point4.new(y: 2)           # => #<struct Point4 x={:y=>2}, y=nil>
 p Point4.new(x: 1, y: 2, z: 3) # => #<struct Point4 x={:x=>1, :y=>2, :z=>3}, y=nil>
 ```
 
-#@else
+#%else
 
 ```ruby title="例"
 Point = Struct.new(:x, :y, keyword_init: true) # => Point(keyword_init: true)
@@ -96,7 +96,7 @@ p Point.new(y: 2)     # => #<struct Point x=nil, y=2>
 Point.new(z: 3)       # ArgumentError (unknown keywords: z)
 ```
 
-#@if (version == "3.1")
+#%if (version == "3.1")
 
 ```ruby title="警告が出る例"
 Point = Struct.new(:x, :y)
@@ -108,8 +108,8 @@ Point2 = Struct.new(:x, :y, keyword_init: false)
 p Point2.new(x: 1, y: 2)  # => #<struct Point2 x={:x=>1, :y=>2}, y=nil>
 ```
 
-#@end
-#@end
+#%end
+#%end
 
 ### 第一引数が String の場合
 
@@ -118,11 +118,11 @@ args[0] が [c:String] の場合、クラス名になるので、大文字で始
 
 ```ruby title="例"
 p Struct.new('foo', 'bar')
-#@since 3.4
+#%since 3.4
 # => -:1:in 'new': identifier foo needs to be constant (NameError)
-#@else
+#%else
 # => -:1:in `new': identifier foo needs to be constant (NameError)
-#@end
+#%end
 ```
 
 また args[1..-1] は、[c:Symbol] か [c:String] で指定します。
@@ -191,7 +191,7 @@ Foo = Struct.new(:foo, :bar)
 p Foo.members      # => [:foo, :bar]
 ```
 
-#@since 3.1
+#%since 3.1
 ### def keyword_init? -> bool | nil
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
@@ -208,7 +208,7 @@ Baz = Struct.new(:a, keyword_init: false)
 p Baz.keyword_init? # => false
 ```
 
-#@end
+#%end
 ## Instance Methods
 
 ### def [](member) -> object
@@ -227,22 +227,22 @@ Foo = Struct.new(:foo, :bar)
 obj = Foo.new('FOO', 'BAR')
 p obj[:foo]     # => "FOO"
 p obj['bar']    # => "BAR"
-#@since 3.4
+#%since 3.4
 # p obj[:baz]     # => in '[]': no member 'baz' in struct (NameError)
-#@else
+#%else
 # p obj[:baz]     # => in `[]': no member 'baz' in struct (NameError)
-#@end
+#%end
 p obj[0]        # => "FOO"
 p obj[1]        # => "BAR"
 p obj[-1]       # => "BAR"    # Array のように負のインデックスも指定できます。
-#@since 3.4
+#%since 3.4
 # p obj[2]        # => in '[]': offset 2 too large for struct(size:2) (IndexError)
-#@else
+#%else
 # p obj[2]        # => in `[]': offset 2 too large for struct(size:2) (IndexError)
-#@end
+#%end
 ```
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 ### def []=(member, value)
 
@@ -257,7 +257,7 @@ p obj[-1]       # => "BAR"    # Array のように負のインデックスも指
 
 - **raise** `NameError` -- member が [c:String], [c:Symbol] で存在しないメンバを指定した場合に発生します。
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 ```ruby title="例"
 Customer = Struct.new(:name, :address, :zip)
@@ -275,7 +275,7 @@ p joe.zip  #=> "90210"
 
 構造体の各メンバに対して繰り返します。
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 ```ruby title="例"
 Customer = Struct.new(:name, :address, :zip)
@@ -299,14 +299,14 @@ Foo.new('FOO', 'BAR').each_pair {|m, v| p [m,v]}
 #    [:bar, "BAR"]
 ```
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 ### def length -> Integer
 ### def size -> Integer
 
 構造体のメンバの数を返します。
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 ```ruby title="例"
 Customer = Struct.new(:name, :address, :zip)
@@ -323,7 +323,7 @@ Foo = Struct.new(:foo, :bar)
 p Foo.new.members  # => [:foo, :bar]
 ```
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 ### def values -> [object]
 ### def to_a -> [object]
@@ -338,7 +338,7 @@ p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_a
 # => ["Joe Smith", "123 Maple, Anytown NC", 12345]
 ```
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
 
@@ -360,7 +360,7 @@ h = joe.deconstruct_keys(nil)
 p h # => {:name=>"Joseph Smith, Jr.", :address=>"123 Maple, Anytown NC", :zip=>12345}
 ```
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
 
@@ -369,7 +369,7 @@ p h # => {:name=>"Joseph Smith, Jr.", :address=>"123 Maple, Anytown NC", :zip=>1
 
 self の内容を人間に読みやすい文字列にして返します。
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 ```ruby title="例"
 Customer = Struct.new(:name, :address, :zip)
@@ -394,7 +394,7 @@ l = Lots.new(11, 22, 33, 44, 55, 66)
 p l.select {|v| (v % 2).zero? } #=> [22, 44, 66]
 ```
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 - **SEE** [m:Enumerable#select]
 
@@ -412,7 +412,7 @@ obj = Foo.new('FOO', 'BAR', 'BAZ')
 p obj.values_at(0, 1, 2)    # => ["FOO", "BAR", "BAZ"]
 ```
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 ### def dig(key, ...) -> object | nil
 
@@ -448,7 +448,7 @@ p dog1.eql?(dog2)             #=> true
 p dog1.equal?(dog2)           #=> false
 ```
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 - **SEE** [m:Struct#eql?]
 
@@ -469,7 +469,7 @@ p dog1.eql?(dog2)             #=> true
 p dog1.equal?(dog2)           #=> false
 ```
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
 - **SEE** [m:Struct#==]
 
@@ -479,9 +479,9 @@ p dog1.equal?(dog2)           #=> false
 これは [c:Object] クラスで定義されたデフォルトの動作で
 す。
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
-#@#noexample Object#equal? のデフォルトの動作と変わらないため
+#%#noexample Object#equal? のデフォルトの動作と変わらないため
 
 - **SEE** [m:Struct#eql?], [m:Struct#==]
 
@@ -498,7 +498,7 @@ dog.name = "john"
 p dog.hash                    #=> -38913223
 ```
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 ### def to_h -> Hash
 ### def to_h {|member, value| block } -> Hash
 
@@ -520,4 +520,4 @@ p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value
 } # => {:name=>"Joe SmithJoe Smith", :address=>"123 Maple, Anytown NC123 Maple, Anytown NC", :zip=>24690}
 ```
 
-#@include(Struct.attention)
+#%include(Struct.attention)

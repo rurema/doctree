@@ -3,15 +3,15 @@
 ## Class Methods
 
 ### def new(match)
-#@todo
+#%todo
 
 ## Constants
 
 ### const START
-#@todo
+#%todo
 
 ### const START_RE
-#@todo
+#%todo
 
 ### const PATTERN_RE
-#@todo
+#%todo

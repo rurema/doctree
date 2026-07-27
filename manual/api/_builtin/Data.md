@@ -166,17 +166,17 @@ Point.new に渡した位置引数の数が多い場合(上から2番目)のみ 
 ```ruby title="例"
 Point = Data.define(:x, :y)
 
-#@since 3.4
+#%since 3.4
 Point.new(1)                 # => in 'initialize': missing keyword: :y (ArgumentError)
 Point.new(1, 2, 3)           # => in 'new': wrong number of arguments (given 3, expected 0..2) (ArgumentError)
 Point.new(x: 1)              # => in 'initialize': missing keyword: :y (ArgumentError)
 Point.new(x: 1, y: 2, z: 3)  # => in 'initialize': unknown keyword: :z (ArgumentError)
-#@else
+#%else
 Point.new(1)                 # => in `initialize': missing keyword: :y (ArgumentError)
 Point.new(1, 2, 3)           # => in `new': wrong number of arguments (given 3, expected 0..2) (ArgumentError)
 Point.new(x: 1)              # => in `initialize': missing keyword: :y (ArgumentError)
 Point.new(x: 1, y: 2, z: 3)  # => in `initialize': unknown keyword: :z (ArgumentError)
-#@end
+#%end
 ```
 
 下の例のように、initialize メソッドをオーバーライドすることで new のオプション引数を実現できます。
@@ -236,7 +236,7 @@ p dog1.eql?(dog2)     # => false
 p dog1.equal?(dog2)   # => false
 ```
 
-#@include(Data.attention)
+#%include(Data.attention)
 
 - **SEE** [m:Object#==], [m:Data#eql?]
 
@@ -273,7 +273,7 @@ in Measure(n, 'km')
 end
 ```
 
-#@include(Data.attention)
+#%include(Data.attention)
 
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
 
@@ -313,7 +313,7 @@ end
 
 - **param** `array_of_names_or_nil` -- 返り値に含めるメンバの名前の配列を指定します。nil の場合は全てのメンバを意味します。
 
-#@include(Data.attention)
+#%include(Data.attention)
 
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
 
@@ -334,7 +334,7 @@ p dog1.eql?(dog2)             # => true
 p dog1.equal?(dog2)           # => false
 ```
 
-#@include(Data.attention)
+#%include(Data.attention)
 
 - **SEE** [m:Object#eql?], [m:Data#==]
 
@@ -353,7 +353,7 @@ dog3 = Dog.new("Fred", 6)
 p dog3.hash # => -4469132459285820530
 ```
 
-#@include(Data.attention)
+#%include(Data.attention)
 
 - **SEE** [m:Object#hash]
 
@@ -368,7 +368,7 @@ joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
 p joe.inspect # => "#<data Customer name=\"Joe Smith\", address=\"123 Maple, Anytown NC\", zip=12345>"
 ```
 
-#@include(Data.attention)
+#%include(Data.attention)
 
 ### def members -> [Symbol]
 
@@ -379,7 +379,7 @@ Foo = Data.define(:foo, :bar)
 p Foo.new(1, 2).members      # => [:foo, :bar]
 ```
 
-#@include(Data.attention)
+#%include(Data.attention)
 
 ### def to_h -> Hash
 ### def to_h {|member, value| block } -> Hash
@@ -402,7 +402,7 @@ p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value
 } # => {:name=>"Joe SmithJoe Smith", :address=>"123 Maple, Anytown NC123 Maple, Anytown NC", :zip=>24690}
 ```
 
-#@include(Data.attention)
+#%include(Data.attention)
 
 ### def with(**kwargs) -> Data
 
@@ -429,4 +429,4 @@ p dog1 # => #<data Dog name="FRED", age=5>
 p dog2 # => #<data Dog name="FRED", age=6>
 ```
 
-#@include(Data.attention)
+#%include(Data.attention)

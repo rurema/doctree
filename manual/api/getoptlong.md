@@ -5,9 +5,9 @@ category: CommandLine
 getoptlong は、GNU の getopt_long() とまったく同じ方式でコマンド
 行オプションの解析を行う Ruby のライブラリです。
 
-#@# Author: 笠原 基之 (m-kasahr@sra.co.jp)
-#@# 
-#@# Copyright 1998, 1999  Motoyuki Kasahara
+#%# Author: 笠原 基之 (m-kasahr@sra.co.jp)
+#%# 
+#%# Copyright 1998, 1999  Motoyuki Kasahara
 
 ### GNU getopt_long() とは?
 

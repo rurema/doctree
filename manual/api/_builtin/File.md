@@ -82,7 +82,7 @@ p File.basename("ruby/y.tab.c", ".*")   #=> "y.tab"
 ```
 
 File.basename の動作は [man:basename(3)] 
-#@#[[url:http://www.unix-systems.org/version3/online.html]]
+#%#[[url:http://www.unix-systems.org/version3/online.html]]
 に従います。
 
 ```ruby title="例"
@@ -200,11 +200,11 @@ rescue
 end
 ```
 
-#@since 3.1
+#%since 3.1
 ### def dirname(filename, level=1)    -> String
-#@else
+#%else
 ### def dirname(filename)    -> String
-#@end
+#%end
 
 filename の一番後ろのスラッシュより前を文
 字列として返します。スラッシュを含まないファイル名に対しては
@@ -216,7 +216,7 @@ p File.dirname("file.ext")        # => "."
 ```
 
 File.dirname の動作は [man:dirname(3)]
-#@#[[url:http://www.unix-systems.org/version3/online.html]] 
+#%#[[url:http://www.unix-systems.org/version3/online.html]] 
 に従います。
 
 ```ruby title="例"
@@ -224,7 +224,7 @@ p File.dirname("foo/bar/")      # => "foo"
 p File.dirname("foo//bar")      # => "foo"
 ```
 
-#@since 3.1
+#%since 3.1
 level が指定されたときは、最後のlevel個を取り除いた文字列を返します。
 
 ```ruby title="levelを指定する例"
@@ -232,14 +232,14 @@ p File.dirname("/home/gumby/work/ruby.rb", 2) # => "/home/gumby"
 p File.dirname("/home/gumby/work/ruby.rb", 4) # => "/"
 ```
 
-#@end
+#%end
 
 - **param** `filename` -- ファイル名を表す文字列を指定します。
-#@since 3.1
+#%since 3.1
 - **param** `level` -- 末尾からいくつ取り除くかを指定します。
 
 - **raise** `ArgumentError` -- level が負の場合に発生します。
-#@end
+#%end
 
 - **SEE** [m:File.basename], [m:File.extname]
 
@@ -782,7 +782,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 - **SEE** [m:FileTest?.blockdev?]
 
@@ -792,7 +792,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def directory?(path)    -> bool
 
@@ -800,7 +800,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def executable?(path)    -> bool
 
@@ -808,7 +808,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列を指定します。
 
-#@#noexample
+#%#noexample
 
 ### def executable_real?(path)    -> bool
 
@@ -816,7 +816,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列を指定します。
 
-#@#noexample
+#%#noexample
 
 ### def exist?(path)    -> bool
 
@@ -824,22 +824,22 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
-#@until 3.2
+#%until 3.2
 ### def exists?(path)    -> bool
 
 このメソッドは Ruby 2.1 から deprecated です。[m:File.exist?] を使用してください。
 
-#@#noexample
-#@end
+#%#noexample
+#%end
 ### def file?(path)    -> bool
 
 [m:FileTest?.file?] と同じです。
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def grpowned?(path)    -> bool
 
@@ -847,7 +847,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def owned?(path)    -> bool
 
@@ -855,7 +855,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def identical?(filename1, filename2)    -> bool
 
@@ -865,7 +865,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `filename2` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def pipe?(path)    -> bool
 
@@ -873,7 +873,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def readable?(path)    -> bool
 
@@ -881,7 +881,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def readable_real?(path)    -> bool
 
@@ -889,7 +889,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def setgid?(path)    -> bool
 
@@ -897,7 +897,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def setuid?(path)    -> bool
 
@@ -905,7 +905,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def size(path)    -> Integer
 
@@ -919,7 +919,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def socket?(path)    -> bool
 
@@ -927,7 +927,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def sticky?(path)    -> bool
 
@@ -935,7 +935,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def symlink?(path)    -> bool
 
@@ -943,7 +943,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def writable?(path)    -> bool
 
@@ -951,7 +951,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列を指定します。
 
-#@#noexample
+#%#noexample
 
 ### def writable_real?(path)    -> bool
 
@@ -959,7 +959,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列を指定します。
 
-#@#noexample
+#%#noexample
 
 ### def zero?(path)    -> bool
 ### def empty?(path)   -> bool
@@ -968,7 +968,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def world_readable?(path)    -> Integer | nil
 

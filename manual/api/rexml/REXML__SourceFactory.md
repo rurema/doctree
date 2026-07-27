@@ -7,8 +7,8 @@ library: rexml/document
 
 各種入力に対する wrapper を作成するクラス。
 
-#@# == Class Methods
-#@#
-#@# --- create_from(arg)
-#@# #@todo
+#%# == Class Methods
+#%#
+#%# --- create_from(arg)
+#%# #@todo
 

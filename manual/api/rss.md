@@ -2,7 +2,7 @@
 type: library
 category: FileFormat
 ---
-#@# = rss
+#%# = rss
 
 RSS を扱うためのライブラリです。
 
@@ -12,26 +12,26 @@ RSS を扱うためのライブラリです。
   - RSS 1.0  <http://purl.org/rss/1.0/spec>
   - RSS 2.0  <http://www.rssboard.org/rss-specification>
   - Atom 1.0 <https://www.ietf.org/rfc/rfc4287.txt>
-#@include(rss/Tutorial)
+#%include(rss/Tutorial)
 
 # class RSS::Element < Object
 ## Instance Methods
 
 ### def full_name
-#@todo
+#%todo
 
 ### def tag_name
-#@todo
+#%todo
 
 # module RSS::RootElementMixin
 ## Instance Methods
 
 ### def output_encoding
 ### def output_encoding=
-#@todo
+#%todo
 
 ### def to_xml
-#@todo
+#%todo
 
 # class RSS::Error < StandardError
 

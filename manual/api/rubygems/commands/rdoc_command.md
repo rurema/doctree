@@ -17,7 +17,7 @@ Usage: gem rdoc [args] [options]
     -v, --version VERSION            指定したバージョンのドキュメントを生成します
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Arguments:

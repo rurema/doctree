@@ -110,7 +110,7 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 Bit Stringに設定されたフラグを返します。
 
 - **SEE** [m:OpenSSL::ASN1::BitString#unused_bits=]
-#@# フラグの意味を追加する
+#%# フラグの意味を追加する
 ### def unused_bits=(b)
 
 Bit Stringにフラグを設定します。

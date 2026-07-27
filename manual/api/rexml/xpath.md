@@ -142,7 +142,7 @@ EOS
 p REXML::XPath.match(doc, "/root/a/b") # => [<b> ... </>, <b> ... </>]
 ```
 
-#@# == Constants
-#@#
-#@# --- EMPTY_HASH
-#@# #@todo
+#%# == Constants
+#%#
+#%# --- EMPTY_HASH
+#%# #@todo

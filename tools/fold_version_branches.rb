@@ -158,7 +158,7 @@ def strip_outer_parens(text)
 end
 
 def parse_if_expr(node, line, path, lineno)
-  text = line.sub(/\A\#@if/, '').strip
+  text = line.sub(/\A\#[@%]if/, '').strip
   text = strip_outer_parens(text)
   parts = text.split(/\s+(and|or)\s+/)
   atom_texts = parts.values_at(*0.step(parts.size - 1, 2).to_a)
@@ -191,30 +191,30 @@ def parse_file(path)
   lines.each_with_index do |line, idx|
     lineno = idx + 1
     case line
-    when /\A\#@since\b/
+    when /\A\#[@%]since\b/
       node = CondNode.new(kind: :since, directive_line: line, lineno: lineno)
-      lit = extract_bare_version_literal(line.sub(/\A\#@\w+/, '').strip, path, lineno)
+      lit = extract_bare_version_literal(line.sub(/\A\#[@%]\w+/, '').strip, path, lineno)
       node.atoms = [Atom.new('>=', lit)]
       node.connective = nil
       current_target(stack) << node
       stack.push({ type: :cond, node: node, in_else: false })
-    when /\A\#@until\b/
+    when /\A\#[@%]until\b/
       node = CondNode.new(kind: :until, directive_line: line, lineno: lineno)
-      lit = extract_bare_version_literal(line.sub(/\A\#@\w+/, '').strip, path, lineno)
+      lit = extract_bare_version_literal(line.sub(/\A\#[@%]\w+/, '').strip, path, lineno)
       node.atoms = [Atom.new('<', lit)]
       node.connective = nil
       current_target(stack) << node
       stack.push({ type: :cond, node: node, in_else: false })
-    when /\A\#@if\b/
+    when /\A\#[@%]if\b/
       node = CondNode.new(kind: :if, directive_line: line, lineno: lineno)
       parse_if_expr(node, line, path, lineno)
       current_target(stack) << node
       stack.push({ type: :cond, node: node, in_else: false })
-    when /\A\#@samplecode\b/
+    when /\A\#[@%]samplecode\b/
       node = SamplecodeNode.new(begin_line: line, lineno: lineno)
       current_target(stack) << node
       stack.push({ type: :samplecode, node: node })
-    when /\A\#@else\s*\z/
+    when /\A\#[@%]else\s*\z/
       frame = stack.last
       if frame[:type] != :cond
         raise ParseError, "#{path}:#{lineno}: \#@else with no matching \#@if/\#@since/\#@until"
@@ -227,7 +227,7 @@ def parse_file(path)
       frame[:node].else_line = line
       frame[:node].else_lineno = lineno
       frame[:node].else_body = []
-    when /\A\#@end\s*\z/
+    when /\A\#[@%]end\s*\z/
       frame = stack.pop
       if frame.nil? || frame[:type] == :root
         raise ParseError, "#{path}:#{lineno}: \#@end with no matching open block"
@@ -236,8 +236,8 @@ def parse_file(path)
       frame[:node].end_line = line
       frame[:node].end_lineno = lineno
     else
-      if line.start_with?('#@') &&
-         !(line =~ /\A\#@\#/ || line =~ /\A\#@todo\b/i || line =~ /\A\#@include\s*\(/)
+      if line.start_with?('#@', '#%') &&
+         !(line =~ /\A\#[@%]\#/ || line =~ /\A\#[@%]todo\b/i || line =~ /\A\#[@%]include\s*\(/)
         raise ParseError, "#{path}:#{lineno}: unknown preprocessor directive: #{line.chomp.inspect}"
       end
       current_target(stack) << TextNode.new(line)
@@ -312,15 +312,16 @@ def classify_cond(node, min_version)
 end
 
 def build_partial_line(node, residual, notes)
+  # 書き換え後の指令は新 prefix #% で出力する(bitclust#285)
   eol = node.directive_line.end_with?("\n") ? "\n" : ''
   if residual.size == 1 && residual[0].op == '<'
-    "\#@until #{residual[0].literal}#{eol}"
+    "#%until #{residual[0].literal}#{eol}"
   elsif residual.size == 1 && residual[0].op == '>='
-    "\#@since #{residual[0].literal}#{eol}"
+    "#%since #{residual[0].literal}#{eol}"
   else
     expr = residual.map { |a| "version #{a.op} \"#{a.literal}\"" }.join(' and ')
     notes << :unusual_residual_form
-    "\#@if (#{expr})#{eol}"
+    "#%if (#{expr})#{eol}"
   end
 end
 

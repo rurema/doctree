@@ -15,7 +15,7 @@ require:
 ## Public Instance Methods
 
 ### def add_install_update_options
-#@# -> discard
+#%# -> discard
 
 インストールとアップデートに関するオプションを追加します。
 

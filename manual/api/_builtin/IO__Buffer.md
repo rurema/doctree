@@ -68,11 +68,11 @@ OS のページサイズをバイト数で表した値です。
 バッファが内部(internal)のメモリ領域、すなわち Ruby が直接確保したメモリ領域を
 指していることを表すフラグです。
 
-#@since 3.2
+#%since 3.2
 ### const SHARED -> Integer
 
 バッファが他のプロセスと共有されるメモリ領域を指していることを表すフラグです。
-#@end
+#%end
 
 ### const LOCKED -> Integer
 
@@ -80,7 +80,7 @@ OS のページサイズをバイト数で表した値です。
 
 ロックされている間はバッファの解放やリサイズができません。
 バッファがロックされているかどうかは [m:IO::Buffer#locked?] で調べられます。
-#@# locked を収録したら、ブロックの間ロックする IO::Buffer#locked への言及も足す
+#%# locked を収録したら、ブロックの間ロックする IO::Buffer#locked への言及も足す
 
 ### const PRIVATE -> Integer
 
@@ -223,7 +223,7 @@ p buf.get_string # => "\x00\x00\x00\x00"
 
 - **SEE** [m:IO::Buffer.for], [m:IO::Buffer.map]
 
-#@since 3.3
+#%since 3.3
 ### def string(length) {|buffer| ... } -> String
 
 length バイトの文字列を新しく作り、それを元にしたコピーを伴わないバッファを
@@ -245,7 +245,7 @@ p str.encoding.name   # => "ASCII-8BIT"
 ```
 
 - **SEE** [m:IO::Buffer.for]
-#@end
+#%end
 
 ## Instance Methods
 
@@ -318,11 +318,11 @@ IO::Buffer.new(2).set_string("TOOLONG") # ~> ArgumentError
 
 - **SEE** [m:IO::Buffer#get_string]
 
-#@since 3.2
+#%since 3.2
 ### def slice(offset = 0, length = nil) -> IO::Buffer
-#@else
+#%else
 ### def slice(offset, length) -> IO::Buffer
-#@end
+#%end
 
 バッファの一部を指す新しい [c:IO::Buffer] を返します。
 
@@ -331,13 +331,13 @@ IO::Buffer.new(2).set_string("TOOLONG") # ~> ArgumentError
 元のバッファが文字列やファイルに由来する場合、その関連も引き継がれます。
 
 - **param** `offset` -- 参照を開始する位置をバッファの先頭からのバイト数で指定します。
-#@since 3.2
+#%since 3.2
            省略した場合は 0 になります。
-#@end
+#%end
 - **param** `length` -- 参照するバイト数を指定します。
-#@since 3.2
+#%since 3.2
            省略した場合はバッファの末尾までになります。
-#@end
+#%end
 - **raise** `ArgumentError` -- offset や length が負の場合、
              または offset と length の合計がバッファのバイト数を超える場合に発生します。
 
@@ -458,12 +458,12 @@ p buf.size  # => 0
   - マップ(mapped) -- マッピングを解除します。
 
 解放後は、どのメモリ領域も指さない状態になります。
-#@since 3.3
+#%since 3.3
 この状態のバッファは大きさ 0 のバッファとして扱われます。
-#@else
+#%else
 この状態のバッファを読み書きしようとすると
 [c:IO::Buffer::AllocationError] が発生します。
-#@end
+#%end
 
 解放したバッファでも [m:IO::Buffer#resize] を呼べば、あらためてメモリ領域を確保できます。
 
@@ -552,7 +552,7 @@ p IO::Buffer.new(4).external?      # => false
 
 バッファが読み取り専用の場合に true を返します。
 
-#@# set_value を収録したらリンクに戻す
+#%# set_value を収録したらリンクに戻す
 読み取り専用のバッファは、`IO::Buffer#set_value` や [m:IO::Buffer#set_string]、
 [m:IO::Buffer#copy] などで変更できません。
 
@@ -592,19 +592,19 @@ p IO::Buffer.new(4).readonly?                       # => false
 システムコールでバッファを使っている間に、そのバッファが移動しないことを
 保証するための仕組みです。
 
-#@since 3.2
+#%since 3.2
 ### def shared? -> bool
 
 バッファが共有(shared)バッファである場合に true を返します。
 
 共有バッファは、他のプロセスと共有できるメモリ領域を参照します。
 そのため、このプロセスで変更しなくても内容が変わることがあります。
-#@end
+#%end
 
-#@since 3.3
+#%since 3.3
 ### def private? -> bool
 
 バッファがプライベート(private)バッファである場合に true を返します。
 
 プライベートバッファに加えた変更は、元になったファイルのマッピングには反映されません。
-#@end
+#%end

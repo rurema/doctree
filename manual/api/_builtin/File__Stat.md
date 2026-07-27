@@ -100,9 +100,9 @@ p File::Stat.new(fp1.path) <=> fp2.path #=> nil
 "unknown"
 ```
 
-#@# あらい 2002-01-06: 今のところ "unknown" を返すことはないはず。
-#@# もしそのようなことがあれば、バグ報告をした方が良いと思われる。
-#@# Solaris の Door とかは unknown になる？
+#%# あらい 2002-01-06: 今のところ "unknown" を返すことはないはず。
+#%# もしそのようなことがあれば、バグ報告をした方が良いと思われる。
+#%# Solaris の Door とかは unknown になる？
 
 ```ruby title="例"
 fs = File::Stat.new($0)
@@ -124,7 +124,7 @@ p fs.dev
 #=> 2
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def dev_major -> Integer
 
@@ -137,7 +137,7 @@ p fs.dev_major
 #=> nil #この場合ではシステムでサポートされていないため
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def dev_minor -> Integer
 
@@ -150,7 +150,7 @@ p fs.dev_minor
 #=> nil
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def ino -> Integer
 
@@ -162,7 +162,7 @@ fs = File::Stat.new($0)
 p fs.ino      #=> 0
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def mode -> Integer
 
@@ -175,7 +175,7 @@ printf "%o\n", fs.mode
 #=> 100644
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def nlink -> Integer
 
@@ -187,7 +187,7 @@ fs = File::Stat.new($0)
 p fs.nlink    #=> 1
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def uid -> Integer
 
@@ -199,7 +199,7 @@ fs = File::Stat.new($0)
 p fs.uid    #=> 0
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def gid -> Integer
 
@@ -211,7 +211,7 @@ fs = File::Stat.new($0)
 p fs.gid      #=> 0
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def rdev -> Integer
 
@@ -223,7 +223,7 @@ fs = File::Stat.new($0)
 p fs.rdev     #=> 2
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def rdev_major -> Integer
 
@@ -235,7 +235,7 @@ fs = File::Stat.new($0)
 p fs.rdev_major #=> nil
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def rdev_minor -> Integer
 
@@ -247,7 +247,7 @@ fs = File::Stat.new($0)
 p fs.rdev_minor #=> nil
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def size -> Integer
 
@@ -259,7 +259,7 @@ fs = File::Stat.new($0)
 p fs.size    #=> 1548
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def blksize -> Integer
 
@@ -271,7 +271,7 @@ fs = File::Stat.new($0)
 p fs.blksize #=> nil
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def blocks -> Integer
 
@@ -283,7 +283,7 @@ fs = File::Stat.new($0)
 p fs.blocks  #=> nil
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 ### def atime -> Time
 
@@ -295,7 +295,7 @@ fs = File::Stat.new($0)
 p fs.atime.to_a  #=> [45, 5, 21, 5, 9, 2007, 3, 248, false, "\223\214\213\236 (\225W\217\200\216\236) "]
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 - **SEE** [c:Time]
 
@@ -309,7 +309,7 @@ fs = File::Stat.new($0)
 p fs.mtime   #=> Wed Sep 05 20:42:18 +0900 2007
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 - **SEE** [c:Time]
 
@@ -324,7 +324,7 @@ fs = File::Stat.new($0)
 p fs.ctime.to_f   #=> 1188719843.0
 ```
 
-#@# WindowsXP ruby1.8.6 でテスト
+#%# WindowsXP ruby1.8.6 でテスト
 
 - **SEE** [c:Time]
 
@@ -471,7 +471,7 @@ printf "%s %s\n", $0, File::Stat.new($0).grpowned?
 
 無名パイプおよび名前つきパイプ(FIFO)の時に真を返します。
 
-#@#linux のみ？
+#%#linux のみ？
 
 ```ruby
 system("mkfifo /tmp/pipetest")
@@ -484,7 +484,7 @@ p File::Stat.new("/tmp/pipetest").pipe? #=> true
 ただし、File::Statは自動的にシンボリックリンクをたどっていくので
 常にfalseを返します。
 
-#@# ソースにそう書いてあったので
+#%# ソースにそう書いてあったので
 
 ```ruby
 require 'fileutils'

@@ -903,39 +903,39 @@ end
 #   3
 ```
 
-#@#
-#@#each により(また、標準のメソッドで)複数の値を取得しながら繰り返す
-#@#ことはできません。現在のところ以下のようなメソッドを定義する必要が
-#@#あります。
-#@#
-#@#    class Array
-#@#      def every(&block)
-#@#        arity = block.arity
-#@#        return self.each(&block) if arity <= 0
-#@#
-#@#        i = 0
-#@#        while i < self.size
-#@#          yield(*self[i, arity])
-#@#          i += arity
-#@#        end
-#@#        self
-#@#      end
-#@#    end
-#@#
-#@#    ary = [1,2,3]
-#@#    ary.every {|i| p i}
-#@#    # => 1
-#@#    #    2
-#@#    #    3
-#@#    ary.every {|i,j| p [i,j]}
-#@#    # => [1, 2]
-#@#    #    [3, nil]
-#@#    ary.every {|i,j,k| p [i,j,k]}
-#@#    # => [1, 2, 3]
-#@#    ary.every {|*i| p *i}
-#@#    # => 1
-#@#    #    2
-#@#    #    3
+#%#
+#%#each により(また、標準のメソッドで)複数の値を取得しながら繰り返す
+#%#ことはできません。現在のところ以下のようなメソッドを定義する必要が
+#%#あります。
+#%#
+#%#    class Array
+#%#      def every(&block)
+#%#        arity = block.arity
+#%#        return self.each(&block) if arity <= 0
+#%#
+#%#        i = 0
+#%#        while i < self.size
+#%#          yield(*self[i, arity])
+#%#          i += arity
+#%#        end
+#%#        self
+#%#      end
+#%#    end
+#%#
+#%#    ary = [1,2,3]
+#%#    ary.every {|i| p i}
+#%#    # => 1
+#%#    #    2
+#%#    #    3
+#%#    ary.every {|i,j| p [i,j]}
+#%#    # => [1, 2]
+#%#    #    [3, nil]
+#%#    ary.every {|i,j,k| p [i,j,k]}
+#%#    # => [1, 2, 3]
+#%#    ary.every {|*i| p *i}
+#%#    # => 1
+#%#    #    2
+#%#    #    3
 
 - **SEE** [m:Array#each_index], [m:Array#reverse_each]
 
@@ -1022,7 +1022,7 @@ result = a.fetch(10){|nth|
 p result #=> 999
 ```
 
-#@since 3.4
+#%since 3.4
 ### def fetch_values(*indexes)                 -> Array
 ### def fetch_values(*indexes) { |index| ... } -> Array
 
@@ -1047,7 +1047,7 @@ p ary.fetch_values(0, 10) { |i| i.to_s } # => ["a", "10"]
 ```
 
 - **SEE** [m:Array#values_at], [m:Array#fetch]
-#@end
+#%end
 
 ### def fill(val)            -> self
 ### def fill {|index| ... }  -> self
@@ -1110,16 +1110,16 @@ p ary.collect {|v| v.object_id } # => [537770124, 537770112, 537770100]
 
 - **param** `range` -- val を設定する範囲を [c:Range] オブジェクトで指定します。
 
-#@##@since 1.8.0
-#@#version 1.8.0 には、ブロックに渡されるパラ
-#@#メータが仕様と異なる不具合がありました。
-#@#
-#@#    ary = []
-#@#    p ary.fill(1..2) {|i| i}         # => [2, 4, 6]  <- bug
-#@#    p ary.fill(0,3) {|i| i}          # => [1, 3, 5]  <- bug
-#@#    p ary.fill { "foo" }             # => ["foo", "foo", "foo"]
-#@#    p ary.collect {|v| v.object_id } # => [537770124, 537770112, 537770100]
-#@##@end
+#%##@since 1.8.0
+#%#version 1.8.0 には、ブロックに渡されるパラ
+#%#メータが仕様と異なる不具合がありました。
+#%#
+#%#    ary = []
+#%#    p ary.fill(1..2) {|i| i}         # => [2, 4, 6]  <- bug
+#%#    p ary.fill(0,3) {|i| i}          # => [1, 3, 5]  <- bug
+#%#    p ary.fill { "foo" }             # => ["foo", "foo", "foo"]
+#%#    p ary.collect {|v| v.object_id } # => [537770124, 537770112, 537770100]
+#%##@end
 
 ### def first       -> object | nil
 
@@ -1492,7 +1492,7 @@ p ['!'].pack('@5a', buffer: 'abc')  # => "abc\u0000\u0000!"
 - **param** `buffer` --   結果を詰めるバッファとして使う文字列オブジェクトを指定します。
                 指定した場合は返値も指定した文字列オブジェクトになります。
 
-#@include(pack-template)
+#%include(pack-template)
 
 - **SEE** [m:String#unpack], [m:String#unpack1]
 
@@ -1636,7 +1636,7 @@ a.reverse_each {|x| print x, " " }
 
 - **SEE** [m:Array#each]
 
-#@since 4.0
+#%since 4.0
 ### def rfind(if_none_proc = nil) {|item| ... } -> object | nil
 ### def rfind(if_none_proc = nil)               -> Enumerator
 
@@ -1670,7 +1670,7 @@ p a.rfind                      # => #<Enumerator: [1, 2, 3, 4, 5, 6]:rfind>
 ```
 
 - **SEE** [m:Enumerable#find], [m:Array#reverse_each], [m:Array#rindex]
-#@end
+#%end
 
 ### def rindex(val)           -> Integer | nil
 ### def rindex {|item| ... }  -> Integer | nil
@@ -1971,21 +1971,21 @@ p [].transpose
 
 p [1,2,3].transpose
 
-#@since 3.4
+#%since 3.4
 # => -:1:in 'transpose': cannot convert Fixnum into Array (TypeError)
-#@else
+#%else
 # => -:1:in `transpose': cannot convert Fixnum into Array (TypeError)
-#@end
+#%end
 #       from -:1
 
 p [[1,2],
    [3,4,5],
    [6,7]].transpose
-#@since 3.4
+#%since 3.4
 # => -:3:in 'transpose': element size differ (3 should be 2) (IndexError)
-#@else
+#%else
 # => -:3:in `transpose': element size differ (3 should be 2) (IndexError)
-#@end
+#%end
 ```
 
 ### def uniq     -> Array
@@ -2055,7 +2055,7 @@ p ary.values_at( 6..7 )             #=> [nil, nil]
 p ary.values_at( 0, 3..5 )          #=> ["a", "d", "e", nil]
 ```
 
-#@# ([[m:Array#indexes]], [[m:Array#indices]] と同じです)
+#%# ([[m:Array#indexes]], [[m:Array#indices]] と同じです)
 
 ### def zip(*lists)  -> [[object]]
 ### def zip(*lists) {|v1, v2, ...| ...} -> nil
@@ -2747,7 +2747,7 @@ p [[1], [[2]], [3]].flatten(1)     #=> [1, [2], 3]
 "+" メソッドが再定義されている場合、[m:Array#sum] は再定義を無視することがあります(例えば [m:Integer#+])。
 
 - **SEE** [m:Enumerable#sum]
-#@since 3.1
+#%since 3.1
 ### def intersect?(other)   -> bool
 
 other と共通の要素が少なくとも1個あれば true を、なければ false を返します。
@@ -2760,4 +2760,4 @@ p a.intersect?(b) # => true
 p a.intersect?(c) # => false
 ```
 
-#@end
+#%end

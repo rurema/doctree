@@ -16,21 +16,21 @@ Ruby 1.8.6 以降ではこのライブラリは使用されません。
 ## Public Instance Methods
 
 ### def digest(string) -> String
-#@todo
+#%todo
 
 与えられた文字列のダイジェストを返します。
 
 - **param** `string` -- ダイジェストを取得したい文字列を指定します。
 
 ### def hexdigest(string) -> String
-#@todo
+#%todo
 
 与えられた文字列のヘックスダイジェストを返します。
 
 - **param** `string` -- ダイジェストを取得したい文字列を指定します。
 
 ### def new -> self
-#@todo
+#%todo
 
 ## Singleton Methods
 

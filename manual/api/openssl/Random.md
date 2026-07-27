@@ -18,7 +18,7 @@ OpenSSL では、鍵を生成するためなどに乱数を用いています。
   - [m:OpenSSL::PKey::DSA.generate]
   - [m:OpenSSL::PKey::DH.generate]
   - [m:OpenSSL::Cipher#random_key]
-#@# * [[m:OpenSSL::PKey::EC.generate]]
+#%# * [[m:OpenSSL::PKey::EC.generate]]
 そのような乱数は適切な実装を持つ擬似乱数生成器に適切なシードを渡す
 ことによって実現できます。
 
@@ -114,7 +114,7 @@ OpenSSL::Random.seed(File.read(filename)) と同じです。
 暗号論的な予測不可能性を持つ乱数生成器によって、 len バイトの
 ランダムなバイト列を返します。
 
-#@# OpenSSLはバッファの内容をエントロピーソースとして使うらしい
+#%# OpenSSLはバッファの内容をエントロピーソースとして使うらしい
 - **param** `len` -- 必要なランダムバイト列の長さ
 
 ### module_function def random_add(str, entropy) -> self

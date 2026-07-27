@@ -25,8 +25,8 @@ extend:
 
 - **SEE** [m:REXML::Parsers::PullParser#empty?]
 
-#@# --- entity
-#@# #@todo
+#%# --- entity
+#%# #@todo
 
 ### def empty? -> bool
 
@@ -34,12 +34,12 @@ extend:
 
 - **SEE** [m:REXML::Parsers::PullParser#has_next?]
 
-#@# --- source
-#@# #@todo
+#%# --- source
+#%# #@todo
 
-#@# 使い道がない
-#@# --- add_listener(listener)
-#@# #@todo
+#%# 使い道がない
+#%# --- add_listener(listener)
+#%# #@todo
 
 ### def each {|event| ... } -> ()
 

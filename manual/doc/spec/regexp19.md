@@ -277,7 +277,7 @@ Ruby/Oniguruma/Onigmo独自のものです。
 Unicode 系統以外のものは Onigmo の
 ドキュメントを参照してください。
 
-#@# 「クラス名」という言い方は妥当か？
+#%# 「クラス名」という言い方は妥当か？
 
 #### オプション {#charclass_opt}
 
@@ -627,7 +627,7 @@ p /\w(and|or)\w/.match("dissemblance") # => nil
   - \Z 文字列の末尾にマッチします。
     ただし文字列の最後の文字が改行ならばそれの手前にマッチします。
   - \z 文字列の末尾にマッチします。
-#@#  * \G 照合開始位置にマッチします。
+#%#  * \G 照合開始位置にマッチします。
   - \b 単語境界にマッチします。
     単語を成す文字と単語を成さない文字の間にマッチします。
     文字列の先頭の文字が単語成す文字であれば、文字列の先頭
@@ -812,11 +812,11 @@ p /abc/.fixed_encoding? # => false
 p /abc/e.fixed_encoding? # => true
 p /abc/ =~ "あいう" # => nil
 /abc/e =~ "あいう" 
-#@since 3.4
+#%since 3.4
 # ~> -:6:in '<main>': incompatible encoding regexp match (EUC-JP regexp with UTF-8 string) (Encoding::CompatibilityError)
-#@else
+#%else
 # ~> -:6:in `<main>': incompatible encoding regexp match (EUC-JP regexp with UTF-8 string) (Encoding::CompatibilityError)
-#@end
+#%end
 ```
 
 ### コメント {#comment}
@@ -963,7 +963,7 @@ Rubyで利用可能なメタ文字、メタ文字列の一覧です。
   - \Z 文字列の末尾にマッチします。ただし文字列の最後の文字が改行ならば
     それの手前にマッチします。
   - \z 文字列の末尾にマッチします。
-#@#  * \G 照合開始位置にマッチします。
+#%#  * \G 照合開始位置にマッチします。
   - \b 単語境界にマッチします。
   - \B 非単語境界にマッチします。
   - (?=pat) 肯定先読み

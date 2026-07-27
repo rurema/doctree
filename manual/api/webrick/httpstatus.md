@@ -93,11 +93,11 @@ true を返します。そうでない場合に false を返します。
 
 ## Constants
 
-#@#--- StatusMessage
-#@#todo
+#%#--- StatusMessage
+#%#todo
 
-#@#--- CodeToError
-#@#todo
+#%#--- CodeToError
+#%#todo
 
 ### const RC_CONTINUE
 ### const RC_SWITCHING_PROTOCOLS

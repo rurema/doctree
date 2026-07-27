@@ -254,9 +254,9 @@ SSL の設定のハッシュを返します。
 
 SSL を有効にしていない場合には nil を返します。
 
-#@# internal use
-#@# --- create_ssl_params(verify_or_params = {}, certs = nil)
-#@# 
+#%# internal use
+#%# --- create_ssl_params(verify_or_params = {}, certs = nil)
+#%# 
 
 ### def disable_ssl -> ()
 
@@ -308,9 +308,9 @@ verify_or_params がハッシュでない場合には、接続時に生成され
 
 - **SEE** [m:Net::POP3#enable_ssl], [m:Net::POP3#disable_ssl], [m:Net::POP3#use_ssl?], [m:Net::POP3.enable_ssl]
 
-#@# --- inspect
+#%# --- inspect
 
-#@# --- logging   # internal use only
+#%# --- logging   # internal use only
 
 ### def start(account, password) -> self
 ### def start(account, password) {|pop| .... } -> object
@@ -332,7 +332,7 @@ verify_or_params がハッシュでない場合には、接続時に生成され
 - **raise** `Net::POPError` -- サーバが認証失敗以外のエラーを報告した場合に発生します
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 
-#@# TLS利用時にはそれに関する例外が発生する可能性があります
+#%# TLS利用時にはそれに関する例外が発生する可能性があります
 
 ### def started? -> bool
 ### def active? -> bool
@@ -515,7 +515,7 @@ pop.auth_only 'YourAccount', 'YourPassword'
 
 POP3 ではメール一個だけを復活する方法はありません。
 
-#@# --- set_all_uids   # internal use only
+#%# --- set_all_uids   # internal use only
 
 ## Constants
 

@@ -41,14 +41,14 @@ exception_name という名前の例外クラスを定義します。
 
 ### def e2mm_message(klass, exp) -> String | nil
 ### def message(klass, exp) -> String | nil
-#@todo
+#%todo
 
 - **param** `klass` --
 
 - **param** `exp` --
 
 ### def extend_object(cl) -> ()
-#@todo
+#%todo
 
 - **param** `cl` --
 
@@ -68,7 +68,7 @@ exception_name という名前の例外クラスを定義します。
 ## Instance Methods
 
 ### def bind(cl) -> ()
-#@todo
+#%todo
 
 - **param** `cl` -- xxx
 

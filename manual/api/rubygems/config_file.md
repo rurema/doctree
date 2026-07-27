@@ -132,7 +132,7 @@ Gem を探索するパスをセットします。
 - **param** `verbose_level` -- 真偽値またはシンボルを指定します。
 
 ### def write
-#@# -> discard
+#%# -> discard
 
 自身を読み込んだ設定ファイルを書き換えます。
 

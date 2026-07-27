@@ -18,7 +18,7 @@ library: logger
            ハッシュのキーには :shift_age, :shift_size を指定します。
            省略すると、それぞれ 7, 1048756 (1 MByte) が使用されます。
 
-#@#noexample 内部利用向けのクラスのため
+#%#noexample 内部利用向けのクラスのため
 
 - **SEE** [m:Logger.new]
 
@@ -30,7 +30,7 @@ library: logger
 
 このメソッドは同期されます。
 
-#@#noexample 内部利用向けのクラスのため
+#%#noexample 内部利用向けのクラスのため
 
 - **SEE** [m:IO#close]
 
@@ -38,7 +38,7 @@ library: logger
 
 出力先の IO オブジェクトを取得します。
 
-#@#noexample 内部利用向けのクラスのため
+#%#noexample 内部利用向けのクラスのため
 
 ### def filename -> String | nil
 
@@ -46,7 +46,7 @@ library: logger
 
 出力先がファイルではない場合は nil を返します。
 
-#@#noexample 内部利用向けのクラスのため
+#%#noexample 内部利用向けのクラスのため
 
 ### def write(message) -> Integer
 
@@ -54,7 +54,7 @@ library: logger
 
 このメソッドは同期されます。
 
-#@#noexample 内部利用向けのクラスのため
+#%#noexample 内部利用向けのクラスのため
 
 - **SEE** [m:IO#write]
 

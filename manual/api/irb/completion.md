@@ -1,6 +1,6 @@
 ---
 type: library
-#@# Author: Keiju ISHITSUKA
+#%# Author: Keiju ISHITSUKA
 require:
   - readline
 ---

@@ -1,4 +1,4 @@
 ---
 type: library
 ---
-#@include(tokenstream.rd)
+#%include(tokenstream.rd)

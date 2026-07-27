@@ -187,7 +187,7 @@ Kconv.isjis(self) と同じです。
 文字コードエンコーディングを変換するためのモジュール。
 [c:Kconv] は [lib:nkf] のラッパーです。
 
-#@#[[trap:Kconv]]
+#%#[[trap:Kconv]]
 
 ## Module Functions
 

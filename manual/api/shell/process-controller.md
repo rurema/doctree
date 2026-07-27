@@ -15,25 +15,25 @@ until: "2.7.0"
 - **param** `shell` -- [c:Shell] のインスタンスを指定します。
 
 ### def activate(pc) -> ()
-#@todo
+#%todo
 
 ### def each_active_object{|ref| ... } -> ()
-#@todo
+#%todo
 
 ### def inactivate(pc) -> ()
-#@todo
+#%todo
 
 ### def process_controllers_exclusive -> ()
-#@todo
+#%todo
 
 ### def active_process_controllers -> ()
-#@todo
+#%todo
 
 ### def block_output_synchronize{ ... } -> ()
-#@todo
+#%todo
 
 ### def wait_to_finish_all_process_controllers -> ()
-#@todo
+#%todo
 
 ## Instance Methods
 
@@ -124,10 +124,10 @@ until: "2.7.0"
 そうでない場合は偽を返します。
 
 ### def shell -> Shell
-#@todo
+#%todo
 
 ## Constants
 
 ### const USING_AT_EXIT_WHEN_PROCESS_EXIT -> true
-#@todo
+#%todo
 

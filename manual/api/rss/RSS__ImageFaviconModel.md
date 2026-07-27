@@ -5,5 +5,5 @@ library: rss
 ## Instance Methods
 ### def image_favicon
 ### def image_favicon=
-#@todo
+#%todo
 

@@ -7,13 +7,13 @@ library: _builtin
 
 ```console title="例"
 $ ruby -e 'Regexp.compile("*")'
-#@since 3.4
+#%since 3.4
 -e:1:in 'initialize': target of repeat operator is not specified: /*/ (RegexpError)
         from -e:1:in 'Regexp#compile'
-#@else
+#%else
 -e:1:in `initialize': target of repeat operator is not specified: /*/ (RegexpError)
         from -e:1:in `Regexp#compile'
-#@end
+#%end
 from -e:1
 ```
 

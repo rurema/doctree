@@ -160,7 +160,7 @@ p Pathname.new("foo/../foo/bar") <=> Pathname.new("foo/bar")
 
 ハッシュ値を返します。
 
-#@#noexample
+#%#noexample
 
 ### def to_s   -> String
 
@@ -492,7 +492,7 @@ Pathname("testfile").each_line(",") {|f| p f }
 
 IO.read(self.to_s, *args)と同じです。
 
-#@#noexample IO.readの例を参照
+#%#noexample IO.readの例を参照
 
 - **SEE** [m:IO.read]
 
@@ -515,7 +515,7 @@ pathname.binread(20, 10)   # => "ne one\nThis is line "
 
 IO.readlines(self.to_s, *args)と同じです。
 
-#@#noexample IO.readlines の例を参照
+#%#noexample IO.readlines の例を参照
 
 - **SEE** [m:IO.readlines]
 
@@ -523,7 +523,7 @@ IO.readlines(self.to_s, *args)と同じです。
 
 IO.sysopen(self.to_s, *args)と同じです。
 
-#@#noexample IO.sysopen の例を参照
+#%#noexample IO.sysopen の例を参照
 
 - **SEE** [m:IO.sysopen]
 
@@ -531,7 +531,7 @@ IO.sysopen(self.to_s, *args)と同じです。
 
 File.link(old, self.to_s) と同じです。
 
-#@#noexample File.linkの例を参照
+#%#noexample File.linkの例を参照
 
 - **SEE** [m:File.link]
 
@@ -539,7 +539,7 @@ File.link(old, self.to_s) と同じです。
 
 File.symlink(old, self.to_s) と同じです。
 
-#@#noexample File.symlinkの例を参照
+#%#noexample File.symlinkの例を参照
 
 - **SEE** [m:File.symlink]
 
@@ -577,7 +577,7 @@ pathname.ctime # => 2019-01-14 00:39:52 +0900
 
 File.mtime(self.to_s) を渡したものと同じです。
 
-#@#noexample File.mtime の例を参照
+#%#noexample File.mtime の例を参照
 
 - **SEE** [m:File.mtime]
 
@@ -587,7 +587,7 @@ File.birthtime(self.to_s) を渡したものと同じです。
 
 - **raise** `NotImplementedError` --  Windows のような birthtime のない環境で発生します。
 
-#@#noexample File.birthtime の例を参照
+#%#noexample File.birthtime の例を参照
 
 - **SEE** [m:File.birthtime]
 
@@ -597,7 +597,7 @@ File.chmod(mode, self.to_s) と同じです。
 
 - **param** `mode` -- ファイルのアクセス権限を整数で指定します。
 
-#@#noexample File.chmod の例を参照
+#%#noexample File.chmod の例を参照
 
 - **SEE** [m:File.chmod]
 
@@ -607,7 +607,7 @@ File.lchmod(mode, self.to_s) と同じです。
 
 - **param** `mode` -- ファイルのアクセス権限を整数で指定します。
 
-#@#noexample File.lchmod の例を参照
+#%#noexample File.lchmod の例を参照
 
 - **SEE** [m:File.lchmod]
 
@@ -637,7 +637,7 @@ File.lchown(owner, group, self.to_s) と同じです。
 
 - **param** `group` -- グループを指定します。
 
-#@#noexample File.lchown の例を参照
+#%#noexample File.lchown の例を参照
 
 - **SEE** [m:File.lchown]
 
@@ -676,7 +676,7 @@ File.fnmatch?(pattern, self.to_s, *args) と同じです。
 
 File.ftype(self.to_s) と同じです。
 
-#@#noexample File.ftype の例を参照
+#%#noexample File.ftype の例を参照
 
 - **SEE** [m:File.ftype]
 
@@ -685,7 +685,7 @@ File.ftype(self.to_s) と同じです。
 
 File.open(self.to_s, *args, &block) と同じです。
 
-#@#noexample File.open の例を参照
+#%#noexample File.open の例を参照
 
 - **SEE** [m:File.open]
 
@@ -693,7 +693,7 @@ File.open(self.to_s, *args, &block) と同じです。
 
 Pathname.new(File.readlink(self.to_s)) と同じです。
 
-#@#noexample File.readlink の例を参照
+#%#noexample File.readlink の例を参照
 
 - **SEE** [m:File.readlink]
 
@@ -703,7 +703,7 @@ File.rename(self.to_s, to) と同じです。
 
 - **param** `to` -- ファイル名を表す文字列を指定します。
 
-#@#noexample File.renameの例を参照
+#%#noexample File.renameの例を参照
 
 このメソッドはファイルシステム上のファイル名を変更しますが、レシーバの
 [c:Pathname] オブジェクトが保持しているパス文字列は変更されません。
@@ -728,7 +728,7 @@ Pathname.new(to) などとして新しく作成する必要があります。
 
 File.stat(self.to_s) と同じです。
 
-#@#noexample File.stat の例を参照
+#%#noexample File.stat の例を参照
 
 - **SEE** [m:File.stat]
 
@@ -736,7 +736,7 @@ File.stat(self.to_s) と同じです。
 
 File.lstat(self.to_s) と同じです。
 
-#@#noexample File.lstat の例を参照
+#%#noexample File.lstat の例を参照
 
 - **SEE** [m:File.lstat]
 
@@ -744,7 +744,7 @@ File.lstat(self.to_s) と同じです。
 
 File.truncate(self.to_s, length) と同じです。
 
-#@#noexample File.truncate の例を参照
+#%#noexample File.truncate の例を参照
 
 - **param** `length` -- 変更したいサイズを整数で与えます。
 
@@ -758,11 +758,11 @@ File.utime(atime, mtime, self.to_s) と同じです。
 
 - **param** `mtime` -- 更新時刻を [c:Time] か、起算時からの経過秒数を数値で指定します。
 
-#@#noexample File.utimeの例を参照
+#%#noexample File.utimeの例を参照
 
 - **SEE** [m:File.utime]
 
-#@since 3.2
+#%since 3.2
 ### def lutime(atime, mtime) -> Integer
 
 File.lutime(atime, mtime, self.to_s) と同じです。
@@ -774,10 +774,10 @@ File.lutime(atime, mtime, self.to_s) と同じです。
 
 - **param** `mtime` -- 更新時刻を [c:Time] か、起算時からの経過秒数を数値で指定します。
 
-#@#noexample File.lutime の例を参照
+#%#noexample File.lutime の例を参照
 
 - **SEE** [m:File.lutime], [m:Pathname#utime]
-#@end
+#%end
 
 ### def basename(suffix = "") -> Pathname
 
@@ -814,7 +814,7 @@ p Pathname('/usr/bin/shutdown').dirname # => #<Pathname:/usr/bin>
 
 File.extname(self.to_s) と同じです。
 
-#@#noexample File.extname の例を参照
+#%#noexample File.extname の例を参照
 
 - **SEE** [m:File.extname]
 
@@ -868,7 +868,7 @@ pathname.split # => [#<Pathname:/path/to>, #<Pathname:sample>]
 
 FileTest.blockdev?(self.to_s) と同じです。
 
-#@#noexample FileTest.#blockdev? の例を参照
+#%#noexample FileTest.#blockdev? の例を参照
 
 - **SEE** [m:FileTest?.blockdev?]
 
@@ -876,7 +876,7 @@ FileTest.blockdev?(self.to_s) と同じです。
 
 FileTest.chardev?(self.to_s) と同じです。
 
-#@#noexample FileTest.chardev? の例を参照
+#%#noexample FileTest.chardev? の例を参照
 
 - **SEE** [m:FileTest?.chardev?]
 
@@ -884,7 +884,7 @@ FileTest.chardev?(self.to_s) と同じです。
 
 FileTest.executable?(self.to_s) と同じです。
 
-#@#noexample FileTest.#executable? の例を参照
+#%#noexample FileTest.#executable? の例を参照
 
 - **SEE** [m:FileTest?.executable?]
 
@@ -892,7 +892,7 @@ FileTest.executable?(self.to_s) と同じです。
 
 FileTest.executable_real?(self.to_s) と同じです。
 
-#@#noexample FileTest.#executable_real? の例を参照
+#%#noexample FileTest.#executable_real? の例を参照
 
 - **SEE** [m:FileTest?.executable_real?]
 
@@ -900,7 +900,7 @@ FileTest.executable_real?(self.to_s) と同じです。
 
 FileTest.exist?(self.to_s) と同じです。
 
-#@#noexample FileTest.#exist? の例を参照
+#%#noexample FileTest.#exist? の例を参照
 
 - **SEE** [m:FileTest?.exist?]
 
@@ -908,7 +908,7 @@ FileTest.exist?(self.to_s) と同じです。
 
 FileTest.grpowned?(self.to_s) と同じです。
 
-#@#noexample FileTest.#grpowned? の例を参照
+#%#noexample FileTest.#grpowned? の例を参照
 
 - **SEE** [m:FileTest?.grpowned?]
 
@@ -916,7 +916,7 @@ FileTest.grpowned?(self.to_s) と同じです。
 
 FileTest.directory?(self.to_s) と同じです。
 
-#@#noexample FileTest.#directory? の例を参照
+#%#noexample FileTest.#directory? の例を参照
 
 - **SEE** [m:FileTest?.directory?]
 
@@ -924,7 +924,7 @@ FileTest.directory?(self.to_s) と同じです。
 
 FileTest.file?(self.to_s) と同じです。
 
-#@#noexample FileTest.#file? の例を参照
+#%#noexample FileTest.#file? の例を参照
 
 - **SEE** [m:FileTest?.file?]
 
@@ -932,7 +932,7 @@ FileTest.file?(self.to_s) と同じです。
 
 FileTest.pipe?(self.to_s) と同じです。
 
-#@#noexample FileTest.#pipe?の例を参照
+#%#noexample FileTest.#pipe?の例を参照
 
 - **SEE** [m:FileTest?.pipe?]
 
@@ -940,7 +940,7 @@ FileTest.pipe?(self.to_s) と同じです。
 
 FileTest.socket?(self.to_s) と同じです。
 
-#@#noexample FileTest.#socket? の例を参照
+#%#noexample FileTest.#socket? の例を参照
 
 - **SEE** [m:FileTest?.socket?]
 
@@ -948,7 +948,7 @@ FileTest.socket?(self.to_s) と同じです。
 
 FileTest.owned?(self.to_s) と同じです。
 
-#@#noexample FileTest.#owned?の例を参照
+#%#noexample FileTest.#owned?の例を参照
 
 - **SEE** [m:FileTest?.owned?]
 
@@ -956,7 +956,7 @@ FileTest.owned?(self.to_s) と同じです。
 
 FileTest.readable?(self.to_s) と同じです。
 
-#@#noexample FileTest.#readable?の例を参照
+#%#noexample FileTest.#readable?の例を参照
 
 - **SEE** [m:FileTest?.readable?]
 
@@ -964,7 +964,7 @@ FileTest.readable?(self.to_s) と同じです。
 
 FileTest.readable_real?(self.to_s) と同じです。
 
-#@#noexample FileTest.#readable_real?の例を参照
+#%#noexample FileTest.#readable_real?の例を参照
 
 - **SEE** [m:FileTest?.readable_real?]
 
@@ -972,7 +972,7 @@ FileTest.readable_real?(self.to_s) と同じです。
 
 FileTest.setuid?(self.to_s) と同じです。
 
-#@#noexample FileTest.#setuid? の例を参照
+#%#noexample FileTest.#setuid? の例を参照
 
 - **SEE** [m:FileTest?.setuid?]
 
@@ -980,7 +980,7 @@ FileTest.setuid?(self.to_s) と同じです。
 
 FileTest.setgid?(self.to_s) と同じです。
 
-#@#noexample FileTest.#setgid? の例を参照
+#%#noexample FileTest.#setgid? の例を参照
 
 - **SEE** [m:FileTest?.setgid?]
 
@@ -988,7 +988,7 @@ FileTest.setgid?(self.to_s) と同じです。
 
 FileTest.size(self.to_s) と同じです。
 
-#@#noexample FileTest.#size の例を参照
+#%#noexample FileTest.#size の例を参照
 
 - **SEE** [m:FileTest?.size]
 
@@ -996,7 +996,7 @@ FileTest.size(self.to_s) と同じです。
 
 FileTest.size?(self.to_s) と同じです。
 
-#@#noexample FileTest.#size? の例を参照
+#%#noexample FileTest.#size? の例を参照
 
 - **SEE** [m:FileTest?.size?]
 
@@ -1004,7 +1004,7 @@ FileTest.size?(self.to_s) と同じです。
 
 FileTest.sticky?(self.to_s) と同じです。
 
-#@#noexample FileTest.#sticky? の例を参照
+#%#noexample FileTest.#sticky? の例を参照
 
 - **SEE** [m:FileTest?.sticky?]
 
@@ -1012,7 +1012,7 @@ FileTest.sticky?(self.to_s) と同じです。
 
 FileTest.symlink?(self.to_s) と同じです。
 
-#@#noexample FileTest.#symlink? の例を参照
+#%#noexample FileTest.#symlink? の例を参照
 
 - **SEE** [m:FileTest?.symlink?]
 
@@ -1020,7 +1020,7 @@ FileTest.symlink?(self.to_s) と同じです。
 
 FileTest.world_readable?(self.to_s) と同じです。
 
-#@#noexample FileTest.#world_readable? の例を参照
+#%#noexample FileTest.#world_readable? の例を参照
 
 - **SEE** [m:FileTest?.world_readable?]
 
@@ -1028,13 +1028,13 @@ FileTest.world_readable?(self.to_s) と同じです。
 
 FileTest.world_writable?(self.to_s) と同じです。
 
-#@#noexample FileTest.#world_writable? の例を参照
+#%#noexample FileTest.#world_writable? の例を参照
 
 - **SEE** [m:FileTest?.world_writable?]
 
 ### def write(string, offset=nil, **opts) -> Integer
 
-#@#noexample IO.write の例を参照
+#%#noexample IO.write の例を参照
 
 IO.write(self.to_s, string, offset, **opts)と同じです。
 
@@ -1044,7 +1044,7 @@ IO.write(self.to_s, string, offset, **opts)と同じです。
 
 IO.binwrite(self.to_s, *args)と同じです。
 
-#@#noexample IO.binwrite の例を参照
+#%#noexample IO.binwrite の例を参照
 
 - **SEE** [m:IO.binwrite]
 
@@ -1052,7 +1052,7 @@ IO.binwrite(self.to_s, *args)と同じです。
 
 FileTest.writable?(self.to_s) と同じです。
 
-#@#noexample FileTest.#writable? の例を参照
+#%#noexample FileTest.#writable? の例を参照
 
 - **SEE** [m:FileTest?.writable?]
 
@@ -1060,7 +1060,7 @@ FileTest.writable?(self.to_s) と同じです。
 
 FileTest.writable_real?(self.to_s) と同じです。
 
-#@#noexample FileTest.#writable_real? の例を参照
+#%#noexample FileTest.#writable_real? の例を参照
 
 - **SEE** [m:FileTest?.writable_real?]
 
@@ -1068,7 +1068,7 @@ FileTest.writable_real?(self.to_s) と同じです。
 
 FileTest.zero?(self.to_s) と同じです。
 
-#@#noexample FileTest.#zero? の例を参照
+#%#noexample FileTest.#zero? の例を参照
 
 - **SEE** [m:FileTest?.zero?]
      , [m:Pathname#empty?]
@@ -1099,7 +1099,7 @@ p Tempfile.create("tmp") { |tmp| Pathname(tmp).empty? } # => true
 
 Dir.rmdir(self.to_s) と同じです。
 
-#@#noexample Dir.rmdirの例を参照
+#%#noexample Dir.rmdirの例を参照
 
 - **SEE** [m:Dir.rmdir]
 
@@ -1129,14 +1129,14 @@ pp Pathname('/usr/local').entries
 - **SEE** [m:Dir.entries]
 
 ### def each_entry {|pathname| ... } -> nil
-#@since 3.2
+#%since 3.2
 ### def each_entry -> Enumerator
-#@end
+#%end
 Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
 
-#@since 3.2
+#%since 3.2
 ブロックを省略した場合は [c:Enumerator] を返します。
-#@end
+#%end
 
 ```ruby title="例"
 require "pathname"
@@ -1158,7 +1158,7 @@ Pathname("/usr/local").each_entry {|f| p f }
 
 Dir.mkdir(self.to_s, *args) と同じです。
 
-#@#noexample Dir.mkdir の例を参照
+#%#noexample Dir.mkdir の例を参照
 
 - **SEE** [m:Dir.mkdir]
 
@@ -1167,7 +1167,7 @@ Dir.mkdir(self.to_s, *args) と同じです。
 
 Dir.open(self.to_s, &block) と同じです。
 
-#@#noexample Dir.open の例を参照
+#%#noexample Dir.open の例を参照
 
 - **SEE** [m:Dir.open]
 
@@ -1194,7 +1194,7 @@ Find.find(self.to_s) {|f| yield Pathname.new(f)}
 
 FileUtils.mkpath(self.to_s) と同じです。
 
-#@#noexample FileUtils.#mkpath の例を参照
+#%#noexample FileUtils.#mkpath の例を参照
 
 - **SEE** [m:FileUtils?.mkpath]
 
@@ -1202,7 +1202,7 @@ FileUtils.mkpath(self.to_s) と同じです。
 
 FileUtils.rm_r(self.to_s) と同じです。
 
-#@#noexample FileUtils.#rmtree の例を参照
+#%#noexample FileUtils.#rmtree の例を参照
 
 - **SEE** [m:FileUtils?.rm_r]
 
@@ -1297,7 +1297,7 @@ path1.sub('perl', 'ruby') #=> #<Pathname:/usr/bin/ruby>
 File.open などの引数に渡す際に呼ばれるメソッドです。 Pathname オブジェ
 クトにおいては、 to_s と同じです。
 
-#@#noexample
+#%#noexample
 
 - **SEE** [m:Pathname#to_s]
 

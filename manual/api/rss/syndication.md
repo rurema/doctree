@@ -9,12 +9,12 @@ library: rss
 
 ### def sy_updateBase
 ### def sy_updateBase=
-#@todo
+#%todo
 
 ### def sy_updateFrequency
 ### def sy_updateFrequency=
-#@todo
+#%todo
 
 ### def sy_updatePeriod
 ### def sy_updatePeriod=
-#@todo
+#%todo

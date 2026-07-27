@@ -115,7 +115,7 @@ C = Class.new   # => C
 p C.new         # => #<C:0x00005623f8b4e458>
 ```
 
-#@since 3.1
+#%since 3.1
 ### def subclasses    -> [Class]
 
 自身が直接のスーパークラスになっている(特異クラスを除く)クラスの配列を返します。
@@ -133,7 +133,7 @@ p C.subclasses      # => []
 ```
 
 - **SEE** [m:Class#superclass]
-#@end
+#%end
 ### def superclass    -> Class | nil
 
 自身のスーパークラスを返します。
@@ -153,9 +153,9 @@ p Object.superclass      #=> BasicObject
 p BasicObject.superclass #=> nil
 ```
 
-#@since 3.1
+#%since 3.1
 - **SEE** [m:Class#subclasses]
-#@end
+#%end
 ### def _load(str)    -> Class
 
 [m:Object#_dump] を参照して下さい。

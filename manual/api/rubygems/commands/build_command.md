@@ -10,7 +10,7 @@ Gem パッケージをビルドするためのライブラリです。
 Usage: gem build GEMSPEC_FILE [options]
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```console
 Arguments:

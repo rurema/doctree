@@ -12,7 +12,7 @@ require:
   - shell/process-controller
 ---
 Ruby 上で sh/csh のようにコマンドの実行及びフィルタリングを手軽に行うためのライブラリです。
-#@# Author: Keiju ISHITSUKA
+#%# Author: Keiju ISHITSUKA
 
 sh/csh の制御文は Ruby の機能を用いて実現します。
 
@@ -244,7 +244,7 @@ sh.cd("/tmp")
 
 ### def debug -> bool | Integer
 ### def debug? -> bool | Integer
-#@todo
+#%todo
 
 デバッグ用フラグを参照します。
 
@@ -289,7 +289,7 @@ p Shell.default_system_path
 
 ### def verbose -> bool  
 ### def verbose? -> bool
-#@todo
+#%todo
 
 ### def verbose=(flag)
 
@@ -298,41 +298,41 @@ true ならば冗長な出力の設定を行います。
 - **param** `flag` -- true ならば冗長な出力の設定を行います。
 
 ### def cascade -> bool
-#@todo
+#%todo
 
 ### def cascade=(flag)
-#@todo
+#%todo
 
 ### def notify(*opts){|message| ... } -> String
-#@todo
+#%todo
 
 ### def debug_output_lock -> Mutex
-#@todo
+#%todo
 
 - **SEE** [m:Thread::Mutex#lock]
 
 ### def debug_output_locked? -> bool
-#@todo
+#%todo
 
 - **SEE** [m:Thread::Mutex#locked?]
 
 ### def debug_output_synchronize
-#@todo
+#%todo
 
 - **SEE** [m:Thread::Mutex#synchronize]
 
 ### def debug_output_try_lock -> bool
-#@todo
+#%todo
 
 - **SEE** [m:Thread::Mutex#try_lock]
 
 ### def debug_output_unlock -> Mutex | nil
-#@todo
+#%todo
 
 - **SEE** [m:Thread::Mutex#unlock]
 
 ## Instance Methods
-#@#=== プロセス管理
+#%#=== プロセス管理
 
 ### def cwd -> String
 ### def dir -> String
@@ -364,19 +364,19 @@ p sh.system_path #=> ["./"]
 ```
 
 ### def umask -> object
-#@todo
+#%todo
 
 umaskを返します。
 
 ### def umask=(umask)
-#@todo
+#%todo
 
 ### def jobs -> Array
 
 スケジューリングされているjobの一覧を返します。
 
 ### def kill(signal, job) -> Integer
-#@todo
+#%todo
 
 ジョブにシグナルを送ります。
 
@@ -384,7 +384,7 @@ umaskを返します。
 
 - **param** `job` --
 
-#@#=== カレントディレクトリ操作
+#%#=== カレントディレクトリ操作
 
 ### def cd(path, &block) -> self
 ### def chdir(path, &block) -> self
@@ -452,8 +452,8 @@ sh.popd
 p sh.cwd #=> "/tmp"
 ```
 
-#@# 組込みコマンド
-#@include(shell/builtincommands)
+#%# 組込みコマンド
+#%include(shell/builtincommands)
 
 ### def expand_path(path) -> String
 
@@ -465,31 +465,31 @@ Fileクラスにある同名のクラスメソッドと同じです.
 
 ### def verbose -> bool  
 ### def verbose? -> bool
-#@todo
+#%todo
 
 ### def verbose=(flag)
-#@todo
+#%todo
 
 ### def debug -> bool | Integer
 ### def debug? -> bool | Integer
-#@todo
+#%todo
 
 ### def debug=(flag)
-#@todo
+#%todo
 
 ### def dirs -> [String]
 ### def dir_stack -> [String]
-#@todo
+#%todo
 
 ### def command_processor -> Shell::CommandProcessor
-#@todo
+#%todo
 
 ### def process_controller -> Shell::ProcessController
-#@todo
+#%todo
 
 ### def record_separator -> String
-#@todo
+#%todo
 
 ### def record_separator=(rs)
-#@todo
+#%todo
 

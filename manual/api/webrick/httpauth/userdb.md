@@ -30,7 +30,7 @@ type: library
 - **SEE** [m:WEBrick::HTTPAuth::BasicAuth#make_passwd], [m:WEBrick::HTTPAuth::DigestAuth#make_passwd]
 
 ### def set_passwd(realm, user, pass)
-#@# -> discard
+#%# -> discard
 与えられた情報をもとに、パスワードをハッシュ化して保存します。
 
 - **param** `realm` -- レルムを指定します。

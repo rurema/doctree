@@ -13,5 +13,5 @@ contentを指定する必要があります．
 
 ### def content
 ### def content=()
-#@todo
+#%todo
 

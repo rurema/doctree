@@ -167,7 +167,7 @@ true を返し、残りのデータは入力バッファ内に保持されます
 - **param** `string` -- 入力バッファの末尾に追加する文字列を指定します。
 
 ### def sync_point? -> bool
-#@todo zlib.h にもドキュメントが無い？
+#%todo zlib.h にもドキュメントが無い？
 
 What is this?
 

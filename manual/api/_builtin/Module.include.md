@@ -18,13 +18,13 @@ end
 ```
 
 ```text title="実行結果"
-#@since 3.4
+#%since 3.4
 -:3:in 'append_features': cyclic include detected (ArgumentError)
         from -:3:in 'include'
-#@else
+#%else
 -:3:in `append_features': cyclic include detected (ArgumentError)
         from -:3:in `include'
-#@end
+#%end
 from -:3
 ```
 

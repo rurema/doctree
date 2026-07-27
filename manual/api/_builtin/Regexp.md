@@ -35,7 +35,7 @@ p Regexp.new('abc').frozen?
 
 ## Class Methods
 
-#@since 3.3
+#%since 3.3
 ### def compile(string, option = nil) -> Regexp
 ### def new(string, option = nil) -> Regexp
 
@@ -51,7 +51,7 @@ p Regexp.new('abc').frozen?
               [c:Integer] 以外であれば真偽値の指定として見なされ
               、真(nil, false 以外)であれば
               [m:Regexp::IGNORECASE] の指定と同じになります。
-#@else
+#%else
 ### def compile(string, option = nil, code = nil) -> Regexp
 ### def new(string, option = nil, code = nil) -> Regexp
 
@@ -70,7 +70,7 @@ p Regexp.new('abc').frozen?
 
 - **param** `code` -- "n", "N" が与えられた時には、生成された正規表現のエンコーディングは ASCII-8BIT になります。
             それ以外の指定は警告を出力します。
-#@end
+#%end
 
 - **raise**  `RegexpError` -- 正規表現のコンパイルに失敗した場合発生します。
 
@@ -150,11 +150,11 @@ p Regexp.last_match # => nil
 begin
   Regexp.last_match[1] # ~> NoMethodError
 rescue 
-#@since 3.4
+#%since 3.4
   puts $! # => undefined method '[]' for nil:NilClass
-#@else
+#%else
   puts $! # => undefined method `[]' for nil:NilClass
-#@end
+#%end
 end
 p Regexp.last_match(1) # => nil
 ```
@@ -244,7 +244,7 @@ p Regexp.try_convert(/re/)    # => /re/
 p Regexp.try_convert("re")    # => nil
 ```
 
-#@since 3.2
+#%since 3.2
 ### def timeout -> Float | nil
 
 正規表現のマッチにかける時間の上限を秒数で返します。
@@ -305,7 +305,7 @@ p Regexp.linear_time?(/^((a|a)+)\1$/) # => false （後方参照があるため�
 ```
 
 - **SEE** [m:Regexp.timeout=]
-#@end
+#%end
 
 ## Instance Methods
 
@@ -556,11 +556,11 @@ nil.captures を呼び出そうとして例外 [c:NoMethodError] が発生して
 ```ruby title="例"
 foo, bar, baz = /(foo)(bar)(baz)/.match("foobar").captures
 
-#@since 3.4
+#%since 3.4
 # => -:1: undefined method 'captures' for nil:NilClass (NoMethodError)
-#@else
+#%else
 # => -:1: undefined method `captures' for nil:NilClass (NoMethodError)
-#@end
+#%end
 ```
 
 - **SEE** [m:Regexp#match?]
@@ -607,7 +607,7 @@ p Regexp.new("foo", Regexp::MULTILINE | Regexp::EXTENDED).options # =>6
 p Regexp.new("foo", Regexp::IGNORECASE | Regexp::MULTILINE | Regexp::EXTENDED).options # => 7
 ```
 
-#@since 3.2
+#%since 3.2
 ### def timeout -> Float | nil
 
 その正規表現のマッチにかける時間の上限を秒数で返します。
@@ -626,7 +626,7 @@ p /^(a|a)*$/.timeout # => nil
 ```
 
 - **SEE** [m:Regexp.timeout], [m:Regexp.timeout=]
-#@end
+#%end
 
 ### def source -> String
 
@@ -706,7 +706,7 @@ p /^ugou.*?/i.inspect # => "/^ugou.*?/i"
 正規表現オブジェクトのエンコーディングを表す [c:Encoding] オブジェクト
 を返します。
 
-#@#noexample 正規表現ページのエンコーディングを参照
+#%#noexample 正規表現ページのエンコーディングを参照
 
 - **SEE** [ref:d:spec/regexp#encoding]
 
@@ -778,7 +778,7 @@ p /(.)(.)/.names
 
 正規表現リテラルの n オプションに対応します。
 
-#@since 3.2
+#%since 3.2
 # class Regexp::TimeoutError < RegexpError
 
 正規表現のマッチが、設定された時間の上限を超えた場合に発生します。
@@ -794,4 +794,4 @@ Regexp.timeout = 0.5
 ```
 
 - **SEE** [m:Regexp.timeout=], [m:Regexp#timeout]
-#@end
+#%end

@@ -286,9 +286,9 @@ ctx.client_cert_cb = proc{|sslsocket|
 これによって接続相手はチェインを辿ることでその相手が信頼していない証明書の
 信頼性を順に確認し、自分自身を証明する証明書の信頼性を確認します。
 
-#@# これを指定しない場合、ca_file や ca_path で指定した信頼されている
-#@# 証明書のストレージから証明書チェーンを構成しようとします。 順序は以下の通りです。
-#@#   [所有している証明書, 下位 CA 証明書, ... 中間 CA 証明書]
+#%# これを指定しない場合、ca_file や ca_path で指定した信頼されている
+#%# 証明書のストレージから証明書チェーンを構成しようとします。 順序は以下の通りです。
+#%#   [所有している証明書, 下位 CA 証明書, ... 中間 CA 証明書]
 - **param** `certificates` -- 設定する証明書チェイン([c:OpenSSL::X509::Certificate] の
        配列)
 - **SEE** [m:OpenSSL::SSL::SSLContext#extra_chain_cert]
@@ -771,8 +771,8 @@ time に [c:Time] オブジェクトを渡すと、その
 - **param** `time` -- キャッシュ破棄の基準時刻
 - **SEE** [m:OpenSSL::SSL::SSLContext#session_cache_mode=]
 
-#@# --- setup -> true
-#@# 内部的に利用されるメソッド
+#%# --- setup -> true
+#%# 内部的に利用されるメソッド
 
 ### def renegotiation_cb -> nil | Proc
 
@@ -781,7 +781,7 @@ time に [c:Time] オブジェクトを渡すと、その
 - **SEE** [m:OpenSSL::SSL::SSLContext#renegotiation_cb=]
 
 ### def renegotiation_cb=(cb)
-#@todo
+#%todo
 
 ハンドシェイク開始時に呼び出されるコールバックを設定します。
 

@@ -99,21 +99,21 @@ R. E. Tarjan,
 Depth First Search and Linear Graph Algorithms,
 SIAM Journal on Computing, Vol. 1, No. 2, pp. 146-160, June 1972.
 
-#@#@Article{Tarjan:1972:DFS,
-#@#  author =       "R. E. Tarjan",
-#@#  key =          "Tarjan",
-#@#  title =        "Depth First Search and Linear Graph Algorithms",
-#@#  journal =      j-SIAM-J-COMPUT,
-#@#  volume =       "1",
-#@#  number =       "2",
-#@#  pages =        "146--160",
-#@#  month =        jun,
-#@#  year =         "1972",
-#@#  CODEN =        "SMJCAT",
-#@#  ISSN =         "0097-5397 (print), 1095-7111 (electronic)",
-#@#  bibdate =      "Thu Jan 23 09:56:44 1997",
-#@#  bibsource =    "Parallel/Multi.bib, Misc/Reverse.eng.bib",
-#@#}
+#%#@Article{Tarjan:1972:DFS,
+#%#  author =       "R. E. Tarjan",
+#%#  key =          "Tarjan",
+#%#  title =        "Depth First Search and Linear Graph Algorithms",
+#%#  journal =      j-SIAM-J-COMPUT,
+#%#  volume =       "1",
+#%#  number =       "2",
+#%#  pages =        "146--160",
+#%#  month =        jun,
+#%#  year =         "1972",
+#%#  CODEN =        "SMJCAT",
+#%#  ISSN =         "0097-5397 (print), 1095-7111 (electronic)",
+#%#  bibdate =      "Thu Jan 23 09:56:44 1997",
+#%#  bibsource =    "Parallel/Multi.bib, Misc/Reverse.eng.bib",
+#%#}
 
 # module TSort
 

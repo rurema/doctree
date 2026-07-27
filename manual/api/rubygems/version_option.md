@@ -13,7 +13,7 @@ require:
 ## Public Instance Methods
 
 ### def add_platform_option(task = command, *wrap)
-#@# -> discard
+#%# -> discard
 
 option parser に対して --platform オプションを追加します。
 
@@ -22,7 +22,7 @@ option parser に対して --platform オプションを追加します。
 - **param** `wrap` -- [m:Gem::Command#add_option] に渡すその他のオプションを指定します。
 
 ### def add_version_option(task = command, *wrap)
-#@# -> discard
+#%# -> discard
 
 option parser に対して --version オプションを追加します。
 

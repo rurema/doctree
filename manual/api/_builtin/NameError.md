@@ -7,15 +7,15 @@ library: _builtin
 
 ```ruby title="例"
 bar
-#@if("3.4" <= version)
+#%if("3.4" <= version)
 # ~> NameError: undefined local variable or method 'bar' for main
-#@end
-#@if("3.3" <= version and version < "3.4")
+#%end
+#%if("3.3" <= version and version < "3.4")
 # ~> NameError: undefined local variable or method `bar' for main
-#@end
-#@if(version < "3.3")
+#%end
+#%if(version < "3.3")
 # ~> NameError: undefined local variable or method `bar' for main:Object
-#@end
+#%end
 ```
 
 ## Class Methods
@@ -51,15 +51,15 @@ p err.name  # => "foo"
 begin
   foobar
 rescue NameError => err
-#@if("3.4" <= version)
+#%if("3.4" <= version)
 p err       # => #<NameError: undefined local variable or method 'foobar' for main>
-#@end
-#@if("3.3" <= version and version < "3.4")
+#%end
+#%if("3.3" <= version and version < "3.4")
 p err       # => #<NameError: undefined local variable or method `foobar' for main>
-#@end
-#@if(version < "3.3")
+#%end
+#%if(version < "3.3")
 p err       # => #<NameError: undefined local variable or method `foobar' for main:Object>
-#@end
+#%end
   p err.name  # => :foobar
 end
 ```
@@ -72,18 +72,18 @@ end
 begin
   foobar
 rescue NameError => err
-#@if("3.4" <= version)
+#%if("3.4" <= version)
 p err       # => #<NameError: undefined local variable or method 'foobar' for main>
 p err.to_s  # => "undefined local variable or method 'foobar' for main"
-#@end
-#@if("3.3" <= version and version < "3.4")
+#%end
+#%if("3.3" <= version and version < "3.4")
 p err       # => #<NameError: undefined local variable or method `foobar' for main>
 p err.to_s  # => "undefined local variable or method `foobar' for main"
-#@end
-#@if(version < "3.3")
+#%end
+#%if(version < "3.3")
 p err       # => #<NameError: undefined local variable or method `foobar' for main:Object>
 p err.to_s  # => "undefined local variable or method `foobar' for main:Object"
-#@end
+#%end
 end
 ```
 

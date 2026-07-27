@@ -14,10 +14,10 @@ require:
 ## Singleton Methods
 
 ### def new(shell)
-#@todo
+#%todo
 
 ### def add_delegate_command_to_shell(id)
-#@todo
+#%todo
 
 [c:Shell] 自体を初期化する時に呼び出されるメソッドです。
 ユーザが使用することはありません。
@@ -26,7 +26,7 @@ require:
 
 ### def alias_command(alias, command, *opts) -> self
 ### def alias_command(alias, command, *opts){ ... } -> self
-#@todo
+#%todo
 
 - **param** `alias` -- エイリアスの名前を指定します。
 
@@ -41,7 +41,7 @@ require:
 [m:Shell::CommandProcessor.alias_command] で定義したエイリアスの一覧を返します。
 
 ### def def_builtin_commands(delegation_class, commands_specs) -> ()
-#@todo
+#%todo
 
 - **param** `delegation_class` -- 処理を委譲したいクラスかモジュールを指定します。
 
@@ -49,7 +49,7 @@ require:
                       [[コマンド名, [引数1, 引数2, ...]], ...]
 
 ### def def_system_command(command, path = command) -> ()
-#@todo
+#%todo
 
 与えられたコマンドをメソッドとして定義します。
 
@@ -58,7 +58,7 @@ require:
 - **param** `path` -- command のパスを指定します。省略すると環境変数 PATH から command を探します。
 
 ### def initialize -> ()
-#@todo
+#%todo
 
 このクラスを初期化します。
 
@@ -78,7 +78,7 @@ require:
 - **param** `prefix` -- プレフィクスを指定します。
 
 ### def method_added(id)
-#@todo
+#%todo
 このクラスに定義されたメソッドを [c:Shell] にも定義するためのフックです。
 
 - **param** `id` -- メソッド名を指定します。
@@ -111,7 +111,7 @@ Fileクラスにある同名のクラスメソッドと同じです.
 
 - **SEE** [m:File.expand_path]
 
-#@include(builtincommands)
+#%include(builtincommands)
 
 ## Constants
 

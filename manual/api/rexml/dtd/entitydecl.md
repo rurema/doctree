@@ -3,35 +3,35 @@
 ## Class Methods
 
 ### def new(src)
-#@todo
+#%todo
 
 ### def parse_source(source, listener)
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def to_s
-#@todo
+#%todo
 
 ### def write(output, indent)
-#@todo
+#%todo
 
 ## Constants
 
 ### const START
-#@todo
+#%todo
 
 ### const START_RE
-#@todo
+#%todo
 
 ### const PUBLIC
-#@todo
+#%todo
 
 ### const SYSTEM
-#@todo
+#%todo
 
 ### const PLAIN
-#@todo
+#%todo
 
 ### const PERCENT
-#@todo
+#%todo

@@ -13,27 +13,27 @@ require:
 ## Public Instance Methods
 
 ### def accept_uri_http
-#@# -> discard
+#%# -> discard
 HTTP の URI を扱えるようにするためのメソッドです。
 
 ### def add_bulk_threshold_option
-#@# -> discard
+#%# -> discard
 オプション --bulk-threshold を追加します。
 
 ### def add_local_remote_options
-#@# -> discard
+#%# -> discard
 オプション --local, --remote, --both を追加します。
 
 ### def add_proxy_option
-#@# -> discard
+#%# -> discard
 オプション --http-proxy を追加します。
 
 ### def add_source_option
-#@# -> discard
+#%# -> discard
 オプション --source を追加します。
 
 ### def add_update_sources_option
-#@# -> discard
+#%# -> discard
 オプション --update-source を追加します。
 
 ### def both? -> bool

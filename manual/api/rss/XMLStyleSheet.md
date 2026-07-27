@@ -6,30 +6,30 @@ library: rss
 
 ### def alternate
 ### def alternate=
-#@todo
+#%todo
 
 ### def charset
 ### def charset=
-#@todo
+#%todo
 
 ### def href
 ### def href=
-#@todo
+#%todo
 
 ### def media
 ### def media=
-#@todo
+#%todo
 
 ### def title
 ### def title=
-#@todo
+#%todo
 
 ### def type
 ### def type=
-#@todo
+#%todo
 
 # module RSS::XMLStyleSheetMixin 
 ## Instance Methods
 ### def xml_stylesheets
 ### def xml_stylesheets=
-#@todo
+#%todo

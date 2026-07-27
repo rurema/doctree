@@ -95,8 +95,8 @@ rake test TESTOPTS="--runner=fox"   # use the fox test runner
 
 テストファイルにマッチする glob パターンを指定します。
 
-#@# --- rake_loader
-#@# nodoc
+#%# --- rake_loader
+#%# nodoc
 
 ### def ruby_opts -> Array
 

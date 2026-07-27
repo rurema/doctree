@@ -155,17 +155,17 @@ p version # => #<Gem::Version "1.2.0a">
 
 - **param** `array` -- バージョン情報を含む配列を指定します。
 
-#@#--- to_yaml_properties -> [String]
-#@#
-#@# :nodoc:
+#%#--- to_yaml_properties -> [String]
+#%#
+#%# :nodoc:
 
-#@#--- segments -> Array
-#@#
-#@# :nodoc:
+#%#--- segments -> Array
+#%#
+#%# :nodoc:
 
-#@#--- canonical_segments -> Array
-#@#
-#@# :nodoc:
+#%#--- canonical_segments -> Array
+#%#
+#%# :nodoc:
 
 ### def version -> String
 ### def to_s -> String
@@ -178,9 +178,9 @@ p version.to_s     # => "1.2.3a"
 p version.version  # => "1.2.3a"
 ```
 
-#@#--- yaml_initialize(tag, values) -> String
-#@#
-#@# :nodoc:
+#%#--- yaml_initialize(tag, values) -> String
+#%#
+#%# :nodoc:
 
 ### def prerelease? -> bool
 
@@ -216,10 +216,10 @@ p Gem::Version.new('1.2.0').release  # => #<Gem::Version "1.2.0">
 p Gem::Version::Requirement == Gem::Requirement  # => true
 ```
 
-#@#--- VERSION_PATTERN -> String
-#@#
-#@# :nodoc:
-#@#
-#@#--- ANCHORED_VERSION_PATTERN -> Regexp
-#@#
-#@# :nodoc:
+#%#--- VERSION_PATTERN -> String
+#%#
+#%# :nodoc:
+#%#
+#%#--- ANCHORED_VERSION_PATTERN -> Regexp
+#%#
+#%# :nodoc:

@@ -113,14 +113,14 @@ str = "1　　　　　aaa"
 p str.scanf("%d %s") #=> [1, "aaa"]
 ```
 
-#@# There may be an optional maximum field width, expressed as a decimal
-#@# integer, between the % and the conversion. If no width is given, a
-#@# default of `infinity' is used (with the exception of the %c specifier;
-#@# see below).  Otherwise, given a field width of <em>n</em> for a given
-#@# conversion, at most <em>n</em> characters are scanned in processing
-#@# that conversion.  Before conversion begins, most conversions skip
-#@# white space in the input string; this white space is not counted
-#@# against the field width.
+#%# There may be an optional maximum field width, expressed as a decimal
+#%# integer, between the % and the conversion. If no width is given, a
+#%# default of `infinity' is used (with the exception of the %c specifier;
+#%# see below).  Otherwise, given a field width of <em>n</em> for a given
+#%# conversion, at most <em>n</em> characters are scanned in processing
+#%# that conversion.  Before conversion begins, most conversions skip
+#%# white space in the input string; this white space is not counted
+#%# against the field width.
 
 - **`space`**:
   フォーマット中の空白は(0個を含む)任意の数の空白にマッチします。
@@ -176,33 +176,33 @@ p str.scanf("%d %s") #=> [1, "aaa"]
 - **param** `format` -- スキャンするフォーマットを文字列で指定します。
               詳細は、[ref:m:String#scanf#format] を参照してください。
 
-#@#The trick here is doing a match where you grab one line of input at a time. 
-#@#The linebreak may or may not occur at the boundary where the string matches 
-#@#a format specifier. And if it does, some rule about whitespace may or may not 
-#@#be in effect...
-#@#
-#@#That’s why this is much more elaborate than the string version.
-#@#
-#@#For each line: 
-#@#
-#@#Match succeeds (non-emptily) 
-#@#
-#@#a) and the last attempted spec/string sub-match succeeded:
-#@#
-#@#  a-1) could the last spec keep matching?
-#@#    yes: save interim results and continue (next line)
-#@#
-#@#b) The last attempted spec/string did not match:
-#@#
-#@#  b-1)are we on the next-to-last spec in the string?
-#@#
-#@#  yes:
-#@#    is fmt_string.string_left all spaces?
-#@#      yes: does current spec care about input space?
-#@#        yes: fatal failure
-#@#        no: save interim results and continue
-#@#  no: continue  [this state could be analyzed further]
-#@#
+#%#The trick here is doing a match where you grab one line of input at a time. 
+#%#The linebreak may or may not occur at the boundary where the string matches 
+#%#a format specifier. And if it does, some rule about whitespace may or may not 
+#%#be in effect...
+#%#
+#%#That’s why this is much more elaborate than the string version.
+#%#
+#%#For each line: 
+#%#
+#%#Match succeeds (non-emptily) 
+#%#
+#%#a) and the last attempted spec/string sub-match succeeded:
+#%#
+#%#  a-1) could the last spec keep matching?
+#%#    yes: save interim results and continue (next line)
+#%#
+#%#b) The last attempted spec/string did not match:
+#%#
+#%#  b-1)are we on the next-to-last spec in the string?
+#%#
+#%#  yes:
+#%#    is fmt_string.string_left all spaces?
+#%#      yes: does current spec care about input space?
+#%#        yes: fatal failure
+#%#        no: save interim results and continue
+#%#  no: continue  [this state could be analyzed further]
+#%#
 
 # reopen Kernel
 ## Private Instance Methods

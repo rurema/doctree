@@ -7,7 +7,7 @@ extend:
 ---
 # class CSV < Object
 
-#@# 説明を記述する
+#%# 説明を記述する
 
 このクラスは CSV ファイルやデータに対する完全なインターフェイスを提供します。
 
@@ -351,7 +351,7 @@ p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "a
 ### def filter(options = Hash.new){|row| ... }
 ### def filter(input, options = Hash.new){|row| ... }
 ### def filter(input, output, options = Hash.new){|row| ... }
-#@# -> discard
+#%# -> discard
 
 このメソッドは CSV データに対して Unix のツール群のようなフィルタを構築
 するのに便利です。
@@ -435,11 +435,11 @@ require 'csv'
 CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
 ```
 
-#@since 3.4
+#%since 3.4
 - **param** `path` -- CSV ファイルのパス(文字列)、または [c:StringIO] オブジェクトを指定します。[c:StringIO] を渡した場合はその内容から読み込みます。
-#@else
+#%else
 - **param** `path` -- CSV ファイルのパスを指定します。
-#@end
+#%end
 
 - **param** `options` -- [m:CSV.new] のオプションと同じオプションを指定できます。
                :encoding というキーを使用すると入出力のエンコーディングを指定できます。
@@ -610,11 +610,11 @@ CSV オブジェクトは多くのメソッドを [c:IO] や [c:File] に委譲�
   - [m:File#truncate]
   - [m:IO#tty?]
 
-#@since 3.4
+#%since 3.4
 - **param** `filename` -- ファイル名、または [c:StringIO] オブジェクトを指定します。[c:StringIO] を渡した場合は、読み込み・書き込みともにその [c:StringIO] に対して行われます。
-#@else
+#%else
 - **param** `filename` -- ファイル名を指定します。
-#@end
+#%end
 
 - **param** `mode` -- [m:IO.open] に指定できるものと同じものを指定できます。
 
@@ -748,11 +748,11 @@ p CSV.parse_line("1,\"ta,ro\",\"tana\nka\", 20")
 CSV ファイルを配列の配列にするために使います。
 headers オプションに偽でない値を指定した場合は [c:CSV::Table] オブジェクトを返します。
 
-#@since 3.4
+#%since 3.4
 - **param** `path` -- CSV ファイルのパス(文字列)、または [c:StringIO] オブジェクトを指定します。[c:StringIO] を渡した場合はその内容から読み込みます。
-#@else
+#%else
 - **param** `path` -- CSV ファイルのパスを指定します。
-#@end
+#%end
 
 - **param** `options` -- [m:CSV.new] のオプションと同じオプションを指定できます。
                :encoding というキーを使用すると入力のエンコーディングを指定できます。
@@ -808,15 +808,15 @@ CSV.read( path, { headers:           true,
                   header_converters: :symbol }.merge(options) )
 ```
 
-#@since 3.4
+#%since 3.4
 - **param** `path` -- CSV ファイルのパス(文字列)、または [c:StringIO] オブジェクトを指定します。[c:StringIO] を渡した場合はその内容から読み込みます。
-#@else
+#%else
 - **param** `path` -- CSV ファイルのパスを指定します。
-#@end
+#%end
 
 - **param** `options` -- [m:CSV.new] のオプションと同じオプションを指定できます。
 
-#@#noexample CSV.readを参照。
+#%#noexample CSV.readを参照。
 
 - **SEE** [m:CSV.read]
 
@@ -885,7 +885,7 @@ print File.read("test.csv")
 
 [m:IO#binmode] に委譲します。
 
-#@#noexample IO#binmode の例を参照
+#%#noexample IO#binmode の例を参照
 
 - **SEE** [m:IO#binmode]
 
@@ -893,7 +893,7 @@ print File.read("test.csv")
 
 [m:IO#binmode?] に委譲します。
 
-#@#noexample IO#binmode? の例を参照
+#%#noexample IO#binmode? の例を参照
 
 - **SEE** [m:IO#binmode?]
 
@@ -901,7 +901,7 @@ print File.read("test.csv")
 
 [m:IO#close] に委譲します。
 
-#@#noexample IO#close の例を参照
+#%#noexample IO#close の例を参照
 
 - **SEE** [m:IO#close]
 
@@ -909,7 +909,7 @@ print File.read("test.csv")
 
 [m:IO#close_read] に委譲します。
 
-#@#noexample IO#close_read の例を参照
+#%#noexample IO#close_read の例を参照
 
 - **SEE** [m:IO#close_read]
 
@@ -917,7 +917,7 @@ print File.read("test.csv")
 
 [m:IO#close_write] に委譲します。
 
-#@#noexample IO#close_write の例を参照
+#%#noexample IO#close_write の例を参照
 
 - **SEE** [m:IO#close_write]
 
@@ -925,7 +925,7 @@ print File.read("test.csv")
 
 [m:IO#closed?] に委譲します。
 
-#@#noexample IO#closed? の例を参照
+#%#noexample IO#closed? の例を参照
 
 - **SEE** [m:IO#closed?]
 
@@ -958,7 +958,7 @@ p csv.first.to_a # => [["id|first name|last name|age", "1|taro|tanaka|20"]]
 ### def convert(name)
 ### def convert{|field| ... }
 ### def convert{|field, field_info| ... }
-#@# discard
+#%# discard
 
 引数 name で指定した変換器かブロックに各フィールドを渡して文字列から別
 のオブジェクトへと変換します。
@@ -1081,7 +1081,7 @@ p csv.encoding # => #<Encoding:UTF-8>
 
 [m:IO#eof], [m:IO#eof?] に委譲します。
 
-#@#noexample IO#eof, IO#eof? の例を参照
+#%#noexample IO#eof, IO#eof? の例を参照
 
 - **SEE** [m:IO#eof], [m:IO#eof?]
 
@@ -1265,7 +1265,7 @@ p csv.inspect # => "<#CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:\",\"
 
 [m:IO#internal_encoding] に委譲します。
 
-#@#noexample IO#internal_encoding の例を参照
+#%#noexample IO#internal_encoding の例を参照
 
 - **SEE** [m:IO#internal_encoding]
 
@@ -1273,7 +1273,7 @@ p csv.inspect # => "<#CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:\",\"
 
 [m:IO#ioctl] に委譲します。
 
-#@#noexample IO#ioctl の例を参照
+#%#noexample IO#ioctl の例を参照
 
 - **SEE** [m:IO#ioctl]
 
@@ -1282,7 +1282,7 @@ p csv.inspect # => "<#CSV io_type:StringIO encoding:UTF-8 lineno:0 col_sep:\",\"
 
 [m:IO#isatty], [m:IO#tty?] に委譲します。
 
-#@#noexample IO#isatty, IO#tty? の例を参照
+#%#noexample IO#isatty, IO#tty? の例を参照
 
 - **SEE** [m:IO#isatty], [m:IO#tty?]
 
@@ -1302,23 +1302,23 @@ p csv.lineno # => 1
 
 ### def path    -> String
 
-#@since 3.2
+#%since 3.2
 [m:IO#path] に委譲します。
 
-#@#noexample IO#path の例を参照
+#%#noexample IO#path の例を参照
 
 - **SEE** [m:IO#path]
-#@end
-#@until 3.2
+#%end
+#%until 3.2
 保持している IO(または [c:StringIO] 等)オブジェクトが `path` に応答する場合、その `path` を返します。
-#@#noexample IO#path の例を参照
-#@end
+#%#noexample IO#path の例を参照
+#%end
 
 ### def pid    -> Integer | nil
 
 [m:IO#pid] に委譲します。
 
-#@#noexample IO#pid の例を参照
+#%#noexample IO#pid の例を参照
 
 - **SEE** [m:IO#pid]
 
@@ -1327,7 +1327,7 @@ p csv.lineno # => 1
 
 [m:IO#pos], [m:IO#tell] に委譲します。
 
-#@#noexample IO#pos, IO#tell  の例を参照
+#%#noexample IO#pos, IO#tell  の例を参照
 
 - **SEE** [m:IO#pos], [m:IO#tell]
 
@@ -1335,7 +1335,7 @@ p csv.lineno # => 1
 
 [m:IO#pos=] に委譲します。
 
-#@#noexample IO#pos= の例を参照
+#%#noexample IO#pos= の例を参照
 
 - **SEE** [m:IO#pos=]
 
@@ -1390,7 +1390,7 @@ row2_1,row2_2
 
 [m:IO#reopen] に委譲します。
 
-#@#noexample IO#reopen の例を参照
+#%#noexample IO#reopen の例を参照
 
 - **SEE** [m:IO#reopen]
 
@@ -1448,7 +1448,7 @@ p csv.read  # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 [m:IO#seek] に委譲します。
 
-#@#noexample IO#seek の例を参照
+#%#noexample IO#seek の例を参照
 
 - **SEE** [m:IO#seek]
 
@@ -1497,7 +1497,7 @@ p csv.read       # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 [m:IO#stat] に委譲します。
 
-#@#noexample IO#stat の例を参照
+#%#noexample IO#stat の例を参照
 
 - **SEE** [m:IO#stat]
 
@@ -1505,7 +1505,7 @@ p csv.read       # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 [m:StringIO#string] に委譲します。
 
-#@#noexample StringIO#string の例を参照
+#%#noexample StringIO#string の例を参照
 
 - **SEE** [m:StringIO#string]
 
@@ -1513,7 +1513,7 @@ p csv.read       # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 [m:IO#sync] に委譲します。
 
-#@#noexample IO#sync の例を参照
+#%#noexample IO#sync の例を参照
 
 - **SEE** [m:IO#sync]
 
@@ -1521,7 +1521,7 @@ p csv.read       # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 [m:IO#sync=] に委譲します。
 
-#@#noexample IO#sync= の例を参照
+#%#noexample IO#sync= の例を参照
 
 - **SEE** [m:IO#sync=]
 
@@ -1529,7 +1529,7 @@ p csv.read       # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 [m:IO#to_io] に委譲します。
 
-#@#noexample IO#to_io の例を参照
+#%#noexample IO#to_io の例を参照
 
 - **SEE** [m:IO#to_io]
 
@@ -1537,7 +1537,7 @@ p csv.read       # => [["header1", "header2"], ["row1_1", "row1_2"]]
 
 [m:File#truncate] に委譲します。
 
-#@#noexample File#truncate の例を参照
+#%#noexample File#truncate の例を参照
 
 - **SEE** [m:File#truncate]
 
@@ -1546,7 +1546,7 @@ p csv.read       # => [["header1", "header2"], ["row1_1", "row1_2"]]
 パースした結果が unconverted_fields というメソッドを持つ場合に真を返します。
 そうでない場合は、偽を返します。
 
-#@# Array, CSV::Row に動的に追加される
+#%# Array, CSV::Row に動的に追加される
 
 ```ruby title="例"
 require "csv"

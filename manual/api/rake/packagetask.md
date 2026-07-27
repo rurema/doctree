@@ -43,10 +43,10 @@ require:
 - **raise** `RuntimeError` -- バージョン情報をセットしていない場合に発生します。
                     初期化時に :noversion が指定されている場合は発生しません。
 
-#@#noexample
+#%#noexample
 
 ### def init(name, version)
-#@# discard
+#%# discard
 
 自身の各属性にデフォルト値をセットします。
 
@@ -54,7 +54,7 @@ require:
 
 - **param** `version` -- パッケージのバージョンを指定します。
 
-#@#noexample
+#%#noexample
 
 ### def name -> String
 

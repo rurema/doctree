@@ -47,4 +47,4 @@ String#match
 ...
 ```
 
-#@# TODO: RDoc::RI::Driver.new が SystemExit になる場合を追記。
+#%# TODO: RDoc::RI::Driver.new が SystemExit になる場合を追記。
