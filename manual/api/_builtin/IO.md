@@ -2431,6 +2431,46 @@ p IO.new(IO.sysopen("/")).path               # => "/"
 p IO.new(IO.sysopen("/"), path: "foo").path  # => "foo"
 ```
 
+### def timeout -> Numeric | nil
+
+self に設定されている入出力のタイムアウトを返します。
+設定されていない場合は nil を返します。
+
+タイムアウトの設定については [m:IO#timeout=] を参照してください。
+
+```ruby title="例"
+r, w = IO.pipe
+p r.timeout      # => nil
+r.timeout = 0.5
+p r.timeout      # => 0.5
+```
+
+- **SEE** [m:IO#timeout=]
+
+### def timeout=(numeric) -> Numeric
+### def timeout=(nil) -> nil
+
+self に入出力のタイムアウトを秒単位で設定します。
+
+設定すると、可能な限りすべてのブロッキング操作にこのタイムアウトが適用されます。
+操作が設定した時間を超えると [c:IO::TimeoutError] が発生します。
+
+影響を受けるのは [m:IO#gets]、[m:IO#puts]、[m:IO#read]、[m:IO#write]、
+[m:IO#wait_readable]、[m:IO#wait_writable] などです
+([c:Socket] のブロッキング操作にも影響します)。
+
+- **param** `numeric` -- タイムアウトの秒数を数値で指定します。
+             nil を指定するとタイムアウトを解除します。
+
+```ruby title="例"
+r, w = IO.pipe
+r.timeout = 0.1
+
+r.read # ~> IO::TimeoutError
+```
+
+- **SEE** [m:IO#timeout], [c:IO::TimeoutError]
+
 #@end
 
 ## Constants
