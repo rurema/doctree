@@ -6,10 +6,16 @@ include:
 # class Vector < Object
 #@# [2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
-数 [c:Numeric] を要素とするベクトルを扱うクラスです。
-[c:Vector] オブジェクトは [c:Matrix] オブジェクトとの演算においては列ベクトルとして扱われます。
+数ベクトルを表すクラスです。要素は [c:Numeric] オブジェクトで表します。
+
+複素ベクトルも表せます。
 
 ベクトルの要素のインデックスは 0 から始まることに注意してください。
+
+全ての要素がゼロのベクトルを零ベクトルといいます。
+
+[c:Vector] オブジェクトは [c:Matrix] オブジェクトとの演算においては列ベクトルとして扱われます。
+行ベクトルとして演算を行いたいときは、1行の行列に変換してから行います。
 
 #@# ((-Vectorクラスには英語のドキュメントがほとんどないので、英語の方も補ってみました。とりあえず対訳にしておいて、そのうち、英語版を分離します。-))
 
@@ -36,50 +42,50 @@ include:
 
 可変個引数を要素とするベクトルを生成します。
 
-Vector[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とするベクトルを生成します。
+`Vector[a1, a2, a3, ... ]` としたとき、 引数 `a1`, `a2`, `a3`, ... を要素とするベクトルを生成します。
 
 - **param** `a` -- ベクトルの要素
 
 ```ruby title="例"
 require 'matrix'
-v1 = Vector[1, 3, 5, 7]
-v2 = Vector[5.25, 10.5]
-p v1   # => Vector[1, 3, 5, 7]
-p v2   # => Vector[5.25, 10.5]
+
+p Vector[1, 3, 4.0] # => Vector[1, 3, 4.0]
 ```
 
 ### def elements(a, copy = true) -> Vector
 
-配列 a を要素とするベクトルを生成します。
-ただし、オプション引数 copy が偽 (false) ならば、複製を行いません。
+配列 `a` を要素とするベクトルを生成します。
+ただし、オプション引数 `copy` が偽 (`false`) ならば、複製を行いません。
 
 - **param** `a` --     [c:Vector]を生成する際の要素の配列
-- **param** `copy` --  引数の配列 a のコピーをするかどうかのフラグ
+- **param** `copy` --  引数の配列 `a` のコピーをするかどうかのフラグ
 
 ```ruby title="例"
 require 'matrix'
-a = [1, 2, 3, 4]
+
+a = [1, 2, 3]
 v1 = Vector.elements(a, true)
 v2 = Vector.elements(a, false)
-p v1        # => Vector[1, 2, 3, 4]
-p v2        # => Vector[1, 2, 3, 4]
+p v1        # => Vector[1, 2, 3]
+p v2        # => Vector[1, 2, 3]
 a[0] = -1
-p v1        # => Vector[1, 2, 3, 4]
-p v2        # => Vector[-1, 2, 3, 4]
+p v1        # => Vector[1, 2, 3]
+p v2        # => Vector[-1, 2, 3]
 ```
 
 ### def independent?(*vectors) -> bool
 
-ベクトルの列 vectors が線形独立であれば true を返します。
+ベクトルの列 `vectors` が線形独立であれば `true` を返し、そうでなければ `false` を返します。
 
 - **param** `vectors` -- 線形独立性を判定するベクトル列
 
 ### def basis(size:, index:) -> Vector
 
-size 次元ベクトル空間の index 番目の標準基底を返します。
+`size` 次元ベクトル空間の `index` 番目の標準基底を返します。
 
 ```ruby title="例"
 require 'matrix'
+
 p Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
 ```
 
@@ -92,6 +98,7 @@ p Vector.basis(size: 3, index: 1) # => Vector[0, 1, 0]
 
 ```ruby title="例"
 require 'matrix'
+
 p Vector.zero(3) # => Vector[0, 0, 0]
 ```
 
@@ -103,8 +110,8 @@ p Vector.zero(3) # => Vector[0, 0, 0]
 ### def element(i) -> object | nil
 ### def component(i) -> object | nil
 
-i 番目の要素を返します。インデックスは 0 から開始します。
-要素が存在しないインデックスを指定した時には nil を返します。
+`i` 番目の要素を返します。インデックスは 0 から開始します。
+要素が存在しないインデックスを指定した時には `nil` を返します。
 
 - **param** `i` -- 取得する要素のインデックスを整数値で指定します。
          インデックスは 0 から始めます。
@@ -115,11 +122,11 @@ i 番目の要素を返します。インデックスは 0 から開始します
 
 ### def []=(index, value)
 
-index 番目の要素を value に変更します。
+`index` 番目の要素を `value` に変更します。
 
 - **param** `index` -- インデックスを整数で指定します。
 - **param** `value` -- 設定したい要素の値を指定します。
-- **raise** `TypeError` -- ベクトルの範囲外にある整数を指定したときに、発生します。
+- **raise** `IndexError` -- ベクトルの範囲外にある整数を指定したときに、発生します。
 
 ```ruby
 require 'matrix'
@@ -138,15 +145,15 @@ v[99] = 100
 
 ### def []=(range, v)
 
-[c:Range] オブジェクト range の範囲にある要素を v の内容に置換します。
+[c:Range] オブジェクト `range` の範囲にある要素を `v` の内容に置換します。
 
 - **param** `range` -- 設定したい配列の範囲を [c:Range] オブジェクトで指定します。
-- **param** `v` -- range の範囲に設定したい要素を指定します。
+- **param** `v` -- `range` の範囲に設定したい要素を指定します。
          [c:Vector] や 1行の [c:Matrix] での指定もできます。
-- **raise** `TypeError` -- ベクトルの範囲外にある range を指定したときに、発生します。
+- **raise** `IndexError` -- ベクトルの範囲外にある `range` を指定したときに、発生します。
 - **raise** `ArgumentError` -- 引数の個数が異なるときの他に、
-                     v に [c:Vector] を指定し、range と v のサイズが一致しないときに発生します。
-- **raise** `Matrix::ErrDimensionMismatch` -- v に [c:Matrix] を指定し、次元が合わないときに発生します。
+                     `v` に [c:Vector] を指定し、`range` と `v` のサイズが一致しないときに発生します。
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `v` に [c:Matrix] を指定し、次元が合わないときに発生します。
 
 ```ruby
 require 'matrix'
@@ -166,34 +173,34 @@ p v #=> Vector[0, 3, 6, 9, 0]
 ### def ==(v) -> bool
 ### def eql?(v) -> bool
 
-自分自身と引数 v を比較し、true/false を返します。
+`self` と引数 `v` を比較し、`true`/`false` を返します。
 
 - **param** `v` -- 比較対象ベクトル
 
 ### def *(other) -> Vector
 
-self の各要素に数 other を乗じたベクトルを返します。
+`self` の各要素に数 `other` を乗じたベクトルを返します。
 
-- **param** `other` -- self の各要素に掛ける [c:Numeric] オブジェクトを指定します。
+- **param** `other` -- `self` の各要素に掛ける [c:Numeric] オブジェクトを指定します。
 
 ```ruby title="例"
 require 'matrix'
-a = [1, 2, 3.5, 100]
-v1 = Vector.elements(a)
+
+v1 = Vector[1, 2, 3.5, 100]
 p v1.*(2)     # => Vector[2, 4, 7.0, 200]
 p v1.*(-1.5)  # => Vector[-1.5, -3.0, -5.25, -150.0]
 ```
 
 ### def *(m) -> Matrix
 
-自分自身を列ベクトル(行列)に変換して (実際には [m:Matrix.column_vector](self) を適用) から、行列 m を右から乗じた行列 ([c:Matrix] クラス) を返します。
+`self` を列ベクトル(行列)に変換して (実際には `Matrix.column_vector(self)` を適用) から、行列 `m` を右から乗じた行列 ([c:Matrix] クラス) を返します。
 
 - **param** `m` -- 右から乗算を行う行列
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 次元が合わない場合に発生します
 
 ### 注意
 
-引数の行列 m は自分自身を列ベクトルとした場合に乗算が定義できる行列である必要があります。
+引数の行列 `m` は `self` を列ベクトルとした場合に乗算が定義できる行列である必要があります。
 
 ```ruby title="例"
 require 'matrix'
@@ -205,54 +212,56 @@ m = Matrix[a]
 p v * m # => Matrix[[4, 5, 6], [8, 10, 12]]
 ```
 
+- **SEE** [m:Matrix.column_vector]
+
 ### def +(v) -> Vector | Matrix
 
-self にベクトル v を加えたベクトルを返します。
+`self` にベクトル `v` を加えたベクトルを返します。
 
-v には column_size が 1 の [c:Matrix] オブジェクトも指定できます。
+`v` には column_size が 1 の [c:Matrix] オブジェクトも指定できます。
 その場合は返り値も [c:Matrix] オブジェクトになります。
 
 - **param** `v` -- 加算するベクトル。加算可能な行列やベクトルを指定します。
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 自分自身と引数のベクト
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
 ### def -(v) -> Vector | Matrix
 
-self からベクトル v を減じたベクトルを返します。
+`self` からベクトル `v` を減じたベクトルを返します。
 
-v には column_size が 1 の [c:Matrix] オブジェクトも指定できます。
+`v` には column_size が 1 の [c:Matrix] オブジェクトも指定できます。
 その場合は返り値も [c:Matrix] オブジェクトになります。
 
 - **param** `v` -- 減算するベクトル。減算可能な行列やベクトルを指定します。
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 自分自身と引数のベクト
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
 ### def +@ -> self
 
-単項演算子の + です。 self を返します。
+単項演算子の `+` です。 `self` を返します。
 
 ### def -@ -> self
 
-単項演算子の - です。 各要素の符号を反転したベクトルを返します。
+単項演算子の `-` です。`self` の逆ベクトル（各要素に `-1` を乗じたベクトル）を返します。
 
 ### def inner_product(v) -> Float
 ### def dot(v) -> Float
 
-ベクトル v との内積を返します。
+ベクトル `v` との内積を返します。
 
 - **param** `v` -- 内積を求めるベクトル
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 自分自身と引数のベクト
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
 ### def /(other) -> Vector
 
-self の各要素を数 other で割ったベクトルを返します。
+`self` の各要素を数 `other` で割ったベクトルを返します。
 
-- **param** `other` -- self の各要素を割る [c:Numeric] オブジェクトを指定します。
-- **raise** `ExceptionForMatrix::ErrOperationNotDefined` -- other が Vector や Matrix
+- **param** `other` -- `self` の各要素を割る [c:Numeric] オブジェクトを指定します。
+- **raise** `ExceptionForMatrix::ErrOperationNotDefined` -- `other` が [c:Vector] や [c:Matrix]
        の場合に発生します
 
 ### def r -> Float
@@ -263,6 +272,7 @@ self の各要素を数 other で割ったベクトルを返します。
 
 ```ruby title="例"
 require 'matrix'
+
 p Vector[3, 4].norm # => 5.0
 p Vector[1i, 0].norm # => 1.0
 ```
@@ -271,12 +281,13 @@ p Vector[1i, 0].norm # => 1.0
 
 ### def normalize -> Vector
 
-自身を [m:Vector#norm] で正規化したベクトルを返します。
+`self` を [m:Vector#norm] で正規化したベクトルを返します。
 
 - **raise** `Vector::ZeroVectorError` -- ベクトルが0である場合に発生します。
 
 ```ruby title="例"
 require 'matrix'
+
 v = Vector[2, 6, 9].normalize
 # => Vector[0.18181818181818182, 0.5454545454545454, 0.8181818181818182]
 p v.norm # => 1.0
@@ -286,50 +297,46 @@ p v.norm # => 1.0
 
 ### def angle_with(v) -> Float
 
-v と self がなす角度を返します。
+`v` と `self` がなす角度を返します。
 
 ```ruby title="例"
 require 'matrix'
+
 p Vector[1, 0].angle_with(Vector[0, 1]) # => Math::PI/2
 ```
 
-- **param** `v` -- このベクトルと self とがなす角度を計算します
-- **raise** `ZeroVectorError` -- self もしくは v のどちらかが零ベクトルである場合に
+- **param** `v` -- このベクトルと `self` とがなす角度を計算します
+- **raise** `Vector::ZeroVectorError` -- `self` もしくは `v` のどちらかが零ベクトルである場合に
        発生します
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- v と self の
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `v` と `self` の
        ベクトルの次元が異なる場合に発生します。
 
 ### def independent?(*vectors) -> bool
 
-self とベクトルの列 vectors が線形独立であれば true を返します。
+`self` とベクトルの列 `vectors` が線形独立であれば `true` を返し、そうでなければ `false` を返します。
 
-```ruby
-require 'matrix'
-Vector.independent?(self, *vectors)
-```
-
-と同じです。
+`Vector.independent?(self, *vectors)` と同じです。
 
 - **param** `vectors` -- 線形独立性を判定するベクトル列
 
 ### def cross_product(*vs) -> Vector
 ### def cross(*vs) -> Vector
 
-self とベクトル vs とのクロス積を返します。
+`self` とベクトル `vs` とのクロス積を返します。
 
-self が3次元ベクトル空間のときは
+`self` が3次元ベクトル空間のときは
 普通のクロス積です。
 それ以外の場合は拡張されたクロス積で
 n-1個のn次元ベクトルが張る空間と
 直交するベクトルを返します。
 
-self の次元が n であるとき、 vs は n-2 個の
+`self` の次元が n であるとき、 `vs` は n-2 個の
 n次元ベクトルでなければなりません。
 
 - **param** `vs` -- クロス積を取るベクトルの集合
-- **raise** `ExceptionForMatrix::ErrOperationNotDefined` -- self の
+- **raise** `ExceptionForMatrix::ErrOperationNotDefined` -- `self` の
         次元が1以下であるときに発生します。
-- **raise** `ArgumentError` -- vs のベクトルの個数が n-2 以外である場合に発生します。
+- **raise** `ArgumentError` -- `vs` のベクトルの個数が n-2 以外である場合に発生します。
 
 ### def collect {|x| ... } -> Vector
 ### def map {|x| ... } -> Vector
@@ -342,13 +349,10 @@ n次元ベクトルでなければなりません。
 
 ```ruby title="例"
 require 'matrix'
-a = [1, 2, 3.5, -10]
-v1 = Vector.elements(a)
-p v1 # => Vector[1, 2, 3.5, -10]
-v2 =  v1.map{|x|
-  x * -1
-}
-p v2 # => Vector[-1, -2, -3.5, 10]
+
+v = Vector[1, 2, 3.5]
+p v.map{ |x| x * -1 }
+# => Vector[-1, -2, -3.5]
 ```
 
 ### def collect! {|element| ... } -> self
@@ -358,14 +362,14 @@ p v2 # => Vector[-1, -2, -3.5, 10]
 
 ベクトルの各要素を順番にブロックに渡して評価し、その結果で要素を置き換えます。
 
-ブロックのない場合は、自身と map! から生成した [c:Enumerator] オブジェクトを返します。
+ブロックのない場合は、`self` と `map!` から生成した [c:Enumerator] オブジェクトを返します。
 
 ```ruby title="例"
 require 'matrix'
 
 v = Vector[1, 2, 3]
-p v.map!{ |el| el * 2 }  #=> Vector[2, 4, 6]
-p v                      #=> Vector[2, 4, 6]
+v.map!{ |el| el * 2 }
+p v # => Vector[2, 4, 6]
 ```
 
 ### def each{|e| ... } -> self
@@ -381,35 +385,35 @@ p v                      #=> Vector[2, 4, 6]
 ### def each2(v) {|x, y| ... } -> self
 ### def each2(v) -> Enumerator
 
-ベクトルの各要素と、それに対応するインデックスを持つ引数 v の要素との組に対して (2引数の) ブロックを繰返し評価します。
+ベクトルの各要素と、それに対応するインデックスを持つ引数 `v` の要素との組に対して (2引数の) ブロックを繰返し評価します。
 
-v は配列互換(size メソッドと [] メソッドを持つ)オブジェクトです。
+`v` は配列互換(`size` メソッドと `[]` メソッドを持つ)オブジェクトです。
 [c:Vector] も使えます。
 
 ブロックを省略した場合は [c:Enumerator] を返します。
 
 - **param** `v` -- 各要素と組を取るためのオブジェクト
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 自分自身と引数のベクト
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 - **SEE** [m:Array#zip]
 
 ### def collect2(v) {|x, y| ... } -> Array
 ### def collect2(v) -> Enumerator
 
-ベクトルの各要素と引数 v の要素との組に対してブロックを評価し、その結果を要素として持つ配列を返します。
+ベクトルの各要素と引数 `v` の要素との組に対してブロックを評価し、その結果を要素として持つ配列を返します。
 
-ベクトルの各要素と、それに対応するインデックスを持つ引数 v (ベクトル or 配列)の要素との組に対して (2引数の) ブロックを評価し、その結果を要素として持つ配列を返します。
+ベクトルの各要素と、それに対応するインデックスを持つ引数 `v` (ベクトル or 配列)の要素との組に対して (2引数の) ブロックを評価し、その結果を要素として持つ配列を返します。
 
 ブロックを省略した場合は [c:Enumerator] を返します。
 
 - **param** `v` -- ブロック内で評価される(ベクトル or 配列)
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 自分自身と引数のベクト
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
 - **SEE** [m:Vector#map2]
 
-次の例は、２つのベクトルの要素毎の積を要素とする配列を生成します。
+次の例は、2つのベクトルの要素毎の積を要素とする配列を生成します。
 
 ```ruby title="例"
 require 'matrix'
@@ -427,7 +431,7 @@ p z # => [14, 27, 55]
 
 ### def map2(v) {|x, y| ... } -> Vector
 
-ベクトルの各要素と引数 v の要素との組に対してブロックを評価し、その結果を要素として持つベクトルを返します。
+ベクトルの各要素と引数 `v` の要素との組に対してブロックを評価し、その結果を要素として持つベクトルを返します。
 
 ベクトルの各要素と、それに対応するインデックスを持つ引数 (ベクトル or 配列) の要素との組に対して (2引数の) ブロックを評価した結果を、要素として持つベクトルを返します。
 
@@ -435,12 +439,12 @@ p z # => [14, 27, 55]
 
 - **param** `v` -- ブロック内で評価される(ベクトル or 配列)
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 自分自身と引数のベクト
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
        ルの要素の数(次元)が異なっていたときに発生します。
 
 - **SEE** [m:Vector#collect2]
 
-次の例は、２つのベクトルの要素毎の積を要素として持つベクトルを生成します。
+次の例は、2つのベクトルの要素毎の積を要素として持つベクトルを生成します。
 
 ```ruby title="例"
 require 'matrix'
@@ -460,17 +464,19 @@ p z # => Vector[14, 27, 55]
 
 [c:Matrix] オブジェクトへ変換します。
 
-列ベクトル (行列)、すなわち、(n, 1) 型の行列に変換します。
-実際には [m:Matrix.row_vector](self) を適用します。
+行ベクトル (行列)、すなわち、(1, n) 型の行列に変換します。
+実際には `Matrix.row_vector(self)` を適用します。
 
 ```ruby title="例"
 require 'matrix'
 
 v = Vector[2, 3, 5]
-p v # => Vector[2, 3, 5]
-m = v.covector
-p m # => Matrix[[2, 3, 5]]
+
+p v.covector
+# => Matrix[[2, 3, 5]]
 ```
+
+- **SEE** [m:Matrix.row_vector]
 
 ### def to_a -> Array
 
@@ -479,9 +485,8 @@ p m # => Matrix[[2, 3, 5]]
 ```ruby title="例"
 require 'matrix'
 
-v = Vector[2, 3, 5, 7, 9]
-p v.to_a
-# => [2, 3, 5, 7, 9]
+p Vector[2, 3, 5].to_a
+# => [2, 3, 5]
 ```
 
 ### def to_s -> String
@@ -491,55 +496,52 @@ p v.to_a
 ```ruby title="例"
 require 'matrix'
 
-v = Vector[2, 3, 5, 7, 9]
-p v.to_s
-# => "Vector[2, 3, 5, 7, 9]"
+p Vector[2, 3, 5].to_s
+# => "Vector[2, 3, 5]"
 ```
 
 ### def elements_to_f -> Vector
 
 ベクトルの各成分を[c:Float]に変換したベクトルを返します。
 
-このメソッドは deprecated です。 map(&:to_f) を使ってください。
+このメソッドは deprecated です。`map(&:to_f)` を使ってください。
 
 ```ruby title="例"
 require 'matrix'
 
-v = Vector.elements([2, 3, 5, 7, 9])
-p v.elements_to_f
-# => Vector[2.0, 3.0, 5.0, 7.0, 9.0]
+p Vector[2, 3, 5].elements_to_f
+# => Vector[2.0, 3.0, 5.0]
 ```
 
 ### def elements_to_i -> Vector
 
 ベクトルの各成分を[c:Integer]に変換したベクトルを返します。
 
-このメソッドは deprecated です。 map(&:to_i) を使ってください。
+このメソッドは deprecated です。`map(&:to_i)` を使ってください。
 
 ```ruby title="例"
 require 'matrix'
-v = Vector.elements([2.5, 3.0, 5.01, 7])
-p v.elements_to_i
-# => Vector[2, 3, 5, 7]
+
+p Vector[2.5, 3.0, 5.01].elements_to_i
+# => Vector[2, 3, 5]
 ```
 
 ### def elements_to_r -> Vector
 
 ベクトルの各成分を[c:Rational]に変換したベクトルを返します。
 
-このメソッドは deprecated です。 map(&:to_r) を使ってください。
+このメソッドは deprecated です。`map(&:to_r)` を使ってください。
 
 ```ruby title="例"
 require 'matrix'
 
-v = Vector.elements([2.5, 3.0, 5.75, 7])
-p v.elements_to_r
-# => Vector[(5/2), (3/1), (23/4), (7/1)]
+p Vector[2.5, 3.0, 5.75].elements_to_r
+# => Vector[(5/2), (3/1), (23/4)]
 ```
 
 ### def hash -> Integer
 
-自分自身のハッシュ値を返します。
+`self` のハッシュ値を返します。
 
 ### def inspect -> String
 
@@ -547,5 +549,4 @@ p v.elements_to_r
 
 ### def zero? -> bool
 
-すべての要素がゼロであれば true を返します。
-
+`self` が零ベクトルであれば `true` を返し、そうでなければ `false` を返します。
