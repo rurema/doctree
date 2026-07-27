@@ -159,6 +159,36 @@ p unknown.size  # => nil
 
 #@end
 
+#@since 3.2
+### def product(*enums) -> Enumerator::Product
+### def product(*enums) { |elts| ... } -> nil
+
+与えた [c:Enumerable] なオブジェクトの直積(デカルト積)を列挙する Enumerator を作って返します。
+
+[m:Enumerator::Product.new] と同じです。
+ブロックを与えた場合は、各要素の配列をブロックに渡して繰り返し、nil を返します。
+
+- **param** `enums` -- 直積を取る [c:Enumerable] なオブジェクトを指定します。
+
+```ruby
+e = Enumerator.product(1..3, [4, 5])
+p e.to_a # => [[1, 4], [1, 5], [2, 4], [2, 5], [3, 4], [3, 5]]
+p e.size # => 6
+```
+
+```ruby title="例: ブロックを与えた場合"
+Enumerator.product(1..2, ["a", "b"]) do |i, s|
+  p [i, s]
+end
+# => [1, "a"]
+#    [1, "b"]
+#    [2, "a"]
+#    [2, "b"]
+```
+
+- **SEE** [c:Enumerator::Product]
+#@end
+
 ## Methods
 
 ### def +(enum) -> Enumerator::Chain
