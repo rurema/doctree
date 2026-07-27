@@ -126,7 +126,7 @@ p Vector.zero(3) # => Vector[0, 0, 0]
 
 - **param** `index` -- インデックスを整数で指定します。
 - **param** `value` -- 設定したい要素の値を指定します。
-- **raise** `TypeError` -- ベクトルの範囲外にある整数を指定したときに、発生します。
+- **raise** `IndexError` -- ベクトルの範囲外にある整数を指定したときに、発生します。
 
 ```ruby
 require 'matrix'
@@ -150,7 +150,7 @@ v[99] = 100
 - **param** `range` -- 設定したい配列の範囲を [c:Range] オブジェクトで指定します。
 - **param** `v` -- `range` の範囲に設定したい要素を指定します。
          [c:Vector] や 1行の [c:Matrix] での指定もできます。
-- **raise** `TypeError` -- ベクトルの範囲外にある `range` を指定したときに、発生します。
+- **raise** `IndexError` -- ベクトルの範囲外にある `range` を指定したときに、発生します。
 - **raise** `ArgumentError` -- 引数の個数が異なるときの他に、
                      `v` に [c:Vector] を指定し、`range` と `v` のサイズが一致しないときに発生します。
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `v` に [c:Matrix] を指定し、次元が合わないときに発生します。
