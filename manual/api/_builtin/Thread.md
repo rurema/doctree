@@ -442,7 +442,7 @@ flag = false # スレッド停止
 
 ### 使い方
 
-例:[c:Thread#raise] 発生のタイミングを制御する例
+例:[m:Thread#raise] 発生のタイミングを制御する例
 
 ```ruby
 th = Thread.new do
@@ -465,24 +465,24 @@ th.raise "stop"
 [c:RuntimeError] を無視(延期)している間はリソースの割り当てや ensure
 節でリソースの解放を安全に行う事ができます。
 
-#### TimeoutError 対策
+#### Timeout::Error 対策
 
-例:[c:TimeoutError] 発生のタイミングを制御する例
+例:[c:Timeout::Error] 発生のタイミングを制御する例
 
 ```ruby
 require 'timeout'
-Thread.handle_interrupt(TimeoutError => :never) {
-  timeout(10){
-    # TimeoutError => :never の指定により、ここでは TimeoutError が発生しない。
-    Thread.handle_interrupt(TimeoutError => :on_blocking) {
-      # :on_blocking な処理は TimeoutError が発生し得る。
+Thread.handle_interrupt(Timeout::Error => :never) {
+  Timeout.timeout(10){
+    # Timeout::Error => :never の指定により、ここでは Timeout::Error が発生しない。
+    Thread.handle_interrupt(Timeout::Error => :on_blocking) {
+      # :on_blocking な処理は Timeout::Error が発生し得る。
     }
-    # TimeoutError => :never の指定により、ここでは TimeoutError が発生しない。
+    # Timeout::Error => :never の指定により、ここでは Timeout::Error が発生しない。
   }
 }
 ```
 
-この例を ensure 節での [c:TimeoutError] 発生に応用する事でリソースリー
+この例を ensure 節での [c:Timeout::Error] 発生に応用する事でリソースリー
 クに備える事ができます。[m:Timeout?.timeout] はスレッドを使って実装さ
 れているため、Thread.handle_interrupt による制御が有効です。
 
