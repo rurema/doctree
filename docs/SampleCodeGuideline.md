@@ -293,7 +293,7 @@ t2 = t + 0.1       # => 2017-11-10 04:42:19 +0900
 * サンプルを書く意義があまりないケース
 * 他のサンプルへの参照で十分なケース
 
-など、意図的にサンプルを書かない場合は `#@#noexample <サンプルを書かない理由>` を記載してください。
+など、意図的にサンプルを書かない場合は `#%#noexample <サンプルを書かない理由>` を記載してください。
 
 例: https://docs.ruby-lang.org/ja/latest/method/Struct/i/equal=3f.html の例
 
@@ -304,9 +304,9 @@ t2 = t + 0.1       # => 2017-11-10 04:42:19 +0900
 これは [c:Object] クラスで定義されたデフォルトの動作で
 す。
 
-#@include(Struct.attention)
+#%include(Struct.attention)
 
-#@#noexample Object#equal? のデフォルトの動作と変わらないため
+#%#noexample Object#equal? のデフォルトの動作と変わらないため
 
 - **SEE** [m:Struct#eql?], [m:Struct#==]
 ```

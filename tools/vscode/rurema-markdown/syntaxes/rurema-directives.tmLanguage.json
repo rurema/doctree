@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-  "name": "Rurema #@ directives (Markdown injection)",
+  "name": "Rurema #% directives (Markdown injection)",
   "scopeName": "markdown.rurema.injection",
   "injectionSelector": "L:text.html.markdown",
   "patterns": [
@@ -30,7 +30,7 @@
         },
         {
           "comment": "#@# プリプロセッサコメント（#@#todo 等も含む）",
-          "match": "^(#@#).*$",
+          "match": "^(#[@%]#).*$",
           "name": "comment.line.number-sign.rurema",
           "captures": {
             "1": {
@@ -40,7 +40,7 @@
         },
         {
           "comment": "#@todo（大文字小文字不問。ビルド出力に @todo として残る作業メモ）",
-          "match": "^((?i:#@todo))(.*)$",
+          "match": "^((?i:#[@%]todo))(.*)$",
           "name": "meta.directive.todo.rurema",
           "captures": {
             "1": {
@@ -53,7 +53,7 @@
         },
         {
           "comment": "#@include(path) 共有断片の展開",
-          "match": "^(#@include)[ \\t]*(\\()([^)]*)(\\)).*$",
+          "match": "^(#[@%]include)[ \\t]*(\\()([^)]*)(\\)).*$",
           "name": "meta.directive.include.rurema",
           "captures": {
             "1": {
@@ -72,7 +72,7 @@
         },
         {
           "comment": "#@since / #@until バージョンゲート（バージョンは 1.9.1 形式、クォートも可）",
-          "match": "^(#@(?:since|until))[ \\t]+(?:(\"[0-9][0-9.]*\")|([0-9][0-9.]*))[ \\t]*$",
+          "match": "^(#[@%](?:since|until))[ \\t]+(?:(\"[0-9][0-9.]*\")|([0-9][0-9.]*))[ \\t]*$",
           "name": "meta.directive.version-gate.rurema",
           "captures": {
             "1": {
@@ -88,7 +88,7 @@
         },
         {
           "comment": "#@samplecode [説明] （Ruby サンプルコードブロック。#@end で閉じる。md では版ゲートを含むコード例など fence で表現できない場合に残る）",
-          "match": "^(#@samplecode)\\b[ \\t]*(.*)$",
+          "match": "^(#[@%]samplecode)\\b[ \\t]*(.*)$",
           "name": "meta.directive.samplecode.rurema",
           "captures": {
             "1": {
@@ -101,7 +101,7 @@
         },
         {
           "comment": "#@if (条件式) — version 変数と比較・論理演算子",
-          "match": "^(#@if)\\b(.*)$",
+          "match": "^(#[@%]if)\\b(.*)$",
           "name": "meta.directive.conditional.rurema",
           "captures": {
             "1": {
@@ -131,12 +131,12 @@
         },
         {
           "comment": "#@else / #@end（後続テキストは許されない）",
-          "match": "^(#@(?:else|end))[ \\t]*$",
+          "match": "^(#[@%](?:else|end))[ \\t]*$",
           "name": "keyword.control.conditional.rurema"
         },
         {
           "comment": "上記のいずれでもない行頭 #@ はビルドで parse error（タイポ検出）",
-          "match": "^#@.*$",
+          "match": "^#[@%].*$",
           "name": "invalid.illegal.directive.rurema"
         }
       ]

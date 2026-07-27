@@ -180,7 +180,7 @@ end
 def extract_pp_version(line)
   # "#@since 3.4" / "#@since \"3.4\"" / "#@until 2.7.0" のいずれも受理する
   # (rrdparser.rb build_cond_by_value と同じ2形式)
-  line.sub(/\A\#@\w+/, '').strip.sub(/\A"(.*)"\z/, '\1')
+  line.sub(/\A\#[@%]\w+/, '').strip.sub(/\A"(.*)"\z/, '\1')
 end
 
 def extract_name(line)
@@ -287,9 +287,9 @@ def process_lines(lines, file, start_index, ctx, pp_stack, class_since, class_un
     lineno = i + 1
 
     case line
-    when /\A\#@\#/ # プリプロセッサコメント
+    when /\A\#[@%]\#/ # プリプロセッサコメント
       i += 1
-    when /\A\#@include\s*\(\s*(.*?)\s*\)/
+    when /\A\#[@%]include\s*\(\s*(.*?)\s*\)/
       name = $1
       frag_lines = load_fragment_lines(name)
       if frag_lines
@@ -300,32 +300,32 @@ def process_lines(lines, file, start_index, ctx, pp_stack, class_since, class_un
         warn_entry(file, lineno, "\#@include target not found: #{name}.md")
       end
       i += 1
-    when /\A\#@since\b/
+    when /\A\#[@%]since\b/
       pp_stack.push("since:#{extract_pp_version(line)}")
       i += 1
-    when /\A\#@until\b/
+    when /\A\#[@%]until\b/
       pp_stack.push("until:#{extract_pp_version(line)}")
       i += 1
-    when /\A\#@if\b/
-      expr = line.sub(/\A\#@if/, '').strip
+    when /\A\#[@%]if\b/
+      expr = line.sub(/\A\#[@%]if/, '').strip
       pp_stack.push("if:#{expr}")
       i += 1
-    when /\A\#@else\s*\z/
+    when /\A\#[@%]else\s*\z/
       if pp_stack.empty?
         warn_entry(file, lineno, '#@else with no matching #@if/#@since/#@until')
       else
         pp_stack.push(invert_label(pp_stack.pop))
       end
       i += 1
-    when /\A\#@end\s*\z/
+    when /\A\#[@%]end\s*\z/
       warn_entry(file, lineno, '#@end with no matching #@if/#@since/#@until') if pp_stack.empty?
       pp_stack.pop
       i += 1
-    when /\A\#@todo/i
+    when /\A\#[@%]todo/i
       i += 1
-    when /\A\#@samplecode\b/
+    when /\A\#[@%]samplecode\b/
       i += 1 # 見出し検出に影響しないので構造上は無視してよい
-    when /\A\#@/
+    when /\A\#[@%]/
       warn_entry(file, lineno, "unrecognized preprocessor directive: #{line.strip.inspect}")
       i += 1
     else
@@ -389,7 +389,7 @@ included_names = {}
 all_files.each do |file|
   lines = read_lines(File.join(DIR, file))
   lines.each do |line|
-    if (m = /\A\#@include\s*\(\s*(.*?)\s*\)/.match(line))
+    if (m = /\A\#[@%]include\s*\(\s*(.*?)\s*\)/.match(line))
       included_names[m[1]] = true
     end
   end

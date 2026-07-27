@@ -255,13 +255,13 @@ end
 desc 'Check unnecessary indentation in samplecode'
 task :check_indent_in_samplecode do
   errors = []
-  `grep -rlF '\#@samplecode' manual refm`.lines(chomp: true).each do |path|
+  `grep -rlE '\#[@%]samplecode' manual refm`.lines(chomp: true).each do |path|
     lines = File.read(path).lines(chomp: true)
     lines.each.with_index(1) do |line, lineno|
-      next unless line.start_with?('#@samplecode')
+      next unless line.start_with?('#@samplecode', '#%samplecode')
       next unless lines[lineno].start_with?(' ')
 
-      errors << "#{path}:#{lineno}: \#@samplecode の中に不要なインデントがあります。削除してください"
+      errors << "#{path}:#{lineno}: samplecode の中に不要なインデントがあります。削除してください"
     end
   end
 
@@ -341,7 +341,7 @@ task :check_blank_lines do
   fence_re = /\A[ \t]*(`{3,}|~{3,})/
   heading_re = /\A\#{1,6}(\s|\z)/
   attr_re = /\A\{:\s/
-  directive_re = /\A#@/
+  directive_re = /\A#[@%]/
   skip_heading_neighbor = lambda do |line|
     line.nil? || line.strip.empty? || heading_re.match?(line) || attr_re.match?(line) || directive_re.match?(line)
   end
