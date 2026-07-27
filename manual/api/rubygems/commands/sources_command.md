@@ -18,7 +18,7 @@ Usage: gem sources [options]
     -c, --clear-all                  全ての取得元を削除し、キャッシュもクリアします
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Summary:

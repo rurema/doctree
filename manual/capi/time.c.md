@@ -19,4 +19,4 @@
 - **raise** `ArgumentError` -- offset に上述の範囲以外の値を指定した場合に発生し
                      ます。
 
-#@# c.f. https://bugs.ruby-lang.org/issues/11558
+#%# c.f. https://bugs.ruby-lang.org/issues/11558

@@ -29,17 +29,17 @@ C ではそれを元のオブジェクトに復元できます。
 
 ## Class Methods
 
-#@# このクラスのインスタンスは通常drb内で変換に失敗した場合に作られる
-#@# ものなので、ユーザは new を使わないはず。
-#@# --- new(err, buf)
-#@# #@todo
-#@# 
-#@# Create a new DRbUnknown object.
-#@# 
-#@# buf is a string containing a marshalled object that could not be
-#@# unmarshalled. err is the error message that was raised when the
-#@# unmarshalling failed. It is used to determine the name of the
-#@# unmarshalled object.
+#%# このクラスのインスタンスは通常drb内で変換に失敗した場合に作られる
+#%# ものなので、ユーザは new を使わないはず。
+#%# --- new(err, buf)
+#%# #@todo
+#%# 
+#%# Create a new DRbUnknown object.
+#%# 
+#%# buf is a string containing a marshalled object that could not be
+#%# unmarshalled. err is the error message that was raised when the
+#%# unmarshalling failed. It is used to determine the name of the
+#%# unmarshalled object.
 
 ## Instance Methods
 

@@ -17,9 +17,9 @@ library: irb/input-method
 
 ファイル名を文字列で返します。
 
-#@# 使用されていないようなので省略。
-#@# --- prompt -> String
-#@# --- prompt=(val)
+#%# 使用されていないようなので省略。
+#%# --- prompt -> String
+#%# --- prompt=(val)
 
 ### def gets
 

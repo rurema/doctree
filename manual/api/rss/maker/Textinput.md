@@ -14,19 +14,19 @@ name，linkを設定する必要があります．
 
 ### def title
 ### def title=()
-#@todo
+#%todo
 
 ### def description
 ### def description=()
-#@todo
+#%todo
 
 ### def name
 ### def name=()
-#@todo
+#%todo
 
 ### def link
 ### def link=()
-#@todo
+#%todo
 
 # class RSS::Maker::RSS09::Textinput < RSS::Maker::TextinputBase
 # class RSS::Maker::RSS10::Textinput < RSS::Maker::TextinputBase

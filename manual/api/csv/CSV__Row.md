@@ -264,7 +264,7 @@ row.each { |header, field| puts "#{header} - #{field}" }
 
 内部で保持している @row へ委譲します。
 
-#@#noexample
+#%#noexample
 
 ### def field?(data) -> bool
 
@@ -391,7 +391,7 @@ p row.inspect # => "#<CSV::Row \"header1\":1 \"header2\":2 \"header1\":3>"
 
 [m:Array#length], [m:Array#size] に委譲します。
 
-#@#noexample Array#size の例を参照
+#%#noexample Array#size の例を参照
 
 - **SEE** [m:Array#size]
 
@@ -434,7 +434,7 @@ row = CSV::Row.new(["header2", "header1", "header2"], [1, 2, 3])
 p row.to_hash # => {"header2"=>3, "header1"=>2}
 ```
 
-#@since 3.1
+#%since 3.1
 ### def deconstruct -> [object]
 
 パターンマッチに使用する行の値の配列を返します。
@@ -475,7 +475,7 @@ end
 ```
 
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
-#@end
+#%end
 
 ## Protected Instance Methods
 
@@ -483,4 +483,4 @@ end
 
 同値性を比較するために使用する内部的なデータです。
 
-#@#noexample
+#%#noexample

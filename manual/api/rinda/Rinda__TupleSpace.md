@@ -54,12 +54,12 @@ period で掃除用スレッドが動く周期を指定します。
 
 ## Instance Methods
 
-#@# --- move(port, tuple, sec = nil)
-#@# #@todo
-#@# 
-#@# Moves +tuple+ to +port+.
-#@# 
-#@# タプルを「安全に」移動させるメソッド、基本的に内部的にのみ使われる
+#%# --- move(port, tuple, sec = nil)
+#%# #@todo
+#%# 
+#%# Moves +tuple+ to +port+.
+#%# 
+#%# タプルを「安全に」移動させるメソッド、基本的に内部的にのみ使われる
 
 ### def notify(event, pattern, sec = nil) -> Rinda::NotifyTemplateEntry
 
@@ -104,7 +104,7 @@ tuplespace.write(["xyz", 4, 2])
 ```
 
 ### def read(tuple, sec=nil) -> [Array|Hash]
-#@# --- read(tuple, sec=nil){|template| ... } -> [Array|Hash]
+#%# --- read(tuple, sec=nil){|template| ... } -> [Array|Hash]
 タプルスペース内の tuple にマッチするタプルを一つコピーして返します。
 
 このメソッド呼び出しが終了しても、タプルスペースからタプルは取り除かれません。
@@ -141,8 +141,8 @@ tuple で指定できるパターンについては [ref:lib:rinda/rinda#tuplepa
 - **param** `tuple` -- タプルのパターン
 
 ### def take(tuple, sec = nil) -> Array | Hash
-#@# --- take(tuple, sec = nil) {|template| ... } -> Array
-#@# ブロック版は普通使わない。デバッグ用？
+#%# --- take(tuple, sec = nil) {|template| ... } -> Array
+#%# ブロック版は普通使わない。デバッグ用？
 
 tuple にマッチするタプルをタプルスペースから取り出して返します。
 

@@ -13,33 +13,33 @@ include:
 
 ### def about
 ### def about=
-#@todo
+#%todo
 
 ### def date
 ### def date=
-#@todo
+#%todo
 
 ### def description
 ### def description=
-#@todo
+#%todo
 
 ### def image
 ### def image=
-#@todo
+#%todo
 
 ### def items
 ### def items=
-#@todo
+#%todo
 
 ### def link
 ### def link=
-#@todo
+#%todo
 
 ### def textinput
 ### def textinput=
-#@todo
+#%todo
 
 ### def title
 ### def title=
-#@todo
+#%todo
 

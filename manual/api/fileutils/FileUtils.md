@@ -434,14 +434,14 @@ FileUtils.cp_lr 'src/.', 'dest'
 # FileUtils.cp_lr('src', 'dest') は dest ディレクトリが存在すれば dest/src を作成しますが、この例はしません。
 ```
 
-#@until 3.2
+#%until 3.2
 ### module_function def ln_s(src, dest, force: nil, noop: nil, verbose: nil)    -> ()
 ### module_function def symlink(src, dest, force: nil, noop: nil, verbose: nil) -> ()
-#@end
-#@since 3.2
+#%end
+#%since 3.2
 ### module_function def ln_s(src, dest, force: nil, relative: false, target_directory: true, noop: nil, verbose: nil)    -> ()
 ### module_function def symlink(src, dest, force: nil, relative: false, target_directory: true, noop: nil, verbose: nil) -> ()
-#@end
+#%end
 
 src へのシンボリックリンク dest を作成します。
 
@@ -455,10 +455,10 @@ src[0] へのシンボリックリンク dest/src[0]、src[1] への
 シンボリックリンク dest/src[1] …を作成します。
 dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
 
-#@since 3.2
+#%since 3.2
 relative オプションを指定すると、dest からの相対パスによるシンボリックリンクを作成します。
 [m:FileUtils?.ln_sr] を使うのと同じです。
-#@end
+#%end
 
 - **param** `src` -- リンク元。一つの場合は文字列でも指定可能です。
            二つ以上指定する場合は配列で指定します。
@@ -466,12 +466,12 @@ relative オプションを指定すると、dest からの相対パスによる
 - **param** `dest` -- リンク作成先のファイルかディレクトリです。
 
 - **param** `force` -- 真を指定すると dest を上書きします。
-#@since 3.2
+#%since 3.2
 
 - **param** `relative` -- 真を指定すると dest からの相対パスでシンボリックリンクを作成します。
 
 - **param** `target_directory` -- dest をディレクトリとして扱うかどうかを指定します(真がデフォルトです)。
-#@end
+#%end
 
 - **param** `noop` -- 真を指定すると実際の処理は行いません。
 
@@ -487,7 +487,7 @@ FileUtils.ln_s('verylongsourcefilename.c', 'c', force: true)
 FileUtils.ln_s(Dir.glob('bin/*.rb'), '/home/aamine/bin')
 ```
 
-#@since 3.2
+#%since 3.2
 ### module_function def ln_sr(src, dest, target_directory: true, force: nil, noop: nil, verbose: nil) -> ()
 
 src へのシンボリックリンク dest を、dest からの相対パスで作成します。
@@ -526,7 +526,7 @@ p FileUtils.ln_sr('/usr/local/src/ruby/ruby.c', '/usr/local/bin/ruby.c')
 ```
 
 - **SEE** [m:FileUtils?.ln_s]
-#@end
+#%end
 
 ### module_function def ln_sf(src, dest, noop: nil, verbose: nil) -> ()
 
@@ -901,12 +901,12 @@ require 'fileutils'
 p FileUtils.options_of(:rm)  # => ["noop", "verbose", "force"]
 ```
 
-#@# --- private_module_function(name) -> self
-#@# nodoc
-#@# name で指定されたメソッドをモジュール関数にします。
-#@# また、可視性を private にします。
-#@#
-#@# @see [[m:Module#module_function]], [[m:Module#private_class_method]]
+#%# --- private_module_function(name) -> self
+#%# nodoc
+#%# name で指定されたメソッドをモジュール関数にします。
+#%# また、可視性を private にします。
+#%#
+#%# @see [[m:Module#module_function]], [[m:Module#private_class_method]]
 
 ## Constants
 

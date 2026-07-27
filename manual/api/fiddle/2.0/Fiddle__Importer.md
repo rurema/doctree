@@ -78,7 +78,7 @@ C の動的ライブラリをモジュールにインポートします。
 
 このメソッドは同じモジュールで2回呼ばないでください。
 
-#@# Fiddle::Importer#handler の返り値を使えるように見えるがたぶん駄目
+#%# Fiddle::Importer#handler の返り値を使えるように見えるがたぶん駄目
 
 - **param** `libs` -- インポートするライブラリ
 - **raise** `Fiddle::DLError` -- ライブラリのインポートができなかった場合に発生します
@@ -178,7 +178,7 @@ Timeval = struct(["long tv_sec", "long tv_usec"])
 返されるクラスは [c:Fiddle::CStruct] を継承しています。詳しくは
 そちらを参照してください。
 
-#@# これで定義したクラスについては Fiddle::CStruct を参照せよ
+#%# これで定義したクラスについては Fiddle::CStruct を参照せよ
 
 - **param** `signature` -- 構造体の各要素を文字列で表現したものの配列
 
@@ -289,8 +289,8 @@ p v.value # => 48
 
 - **param** `name` -- シンボル名(文字列)
 
-#@# For internal use from Importer#bind
-#@# --- bind_function(name, ctype, argtype, call_type){ ... } -> Fiddle::Function
+#%# For internal use from Importer#bind
+#%# --- bind_function(name, ctype, argtype, call_type){ ... } -> Fiddle::Function
 
-#@# --- create_temp_function
-#@# --- create_carried_function
+#%# --- create_temp_function
+#%# --- create_carried_function

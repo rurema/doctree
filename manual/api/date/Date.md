@@ -153,7 +153,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 
 - **param** `year` -- 年
 
-#@# exp
+#%# exp
 ### def _httpdate(str) -> Hash
 
 このメソッドは [m:Date.httpdate] と似ていますが、日付オブジェクトを生成せずに、
@@ -173,7 +173,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@# exp
+#%# exp
 ### def _iso8601(str) -> Hash
 
 このメソッドは [m:Date.iso8601] と似ていますが、日付オブジェクトを生成せずに、
@@ -195,7 +195,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@# exp
+#%# exp
 ### def _jisx0301(str) -> Hash
 
 このメソッドは [m:Date.jisx0301] と似ていますが、日付オブジェクトを生成せずに、
@@ -277,7 +277,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `Date::Error` -- 正しくない日付になる組み合わせである場合に発生します。
 
-#@# exp
+#%# exp
 ### def _rfc2822(str) -> Hash
 ### def _rfc822(str) -> Hash
 
@@ -299,7 +299,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@# exp
+#%# exp
 ### def _rfc3339(str) -> Hash
 
 このメソッドは [m:Date.rfc3339] と似ていますが、日付オブジェクトを生成せずに、
@@ -444,7 +444,7 @@ p Date.today  # => #<Date: 2017-09-20 ...>
 - **param** `yday` -- 年の日
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@# exp
+#%# exp
 ### def _xmlschema(str) -> Hash
 
 このメソッドは [m:Date.xmlschema] と似ていますが、日付オブジェクトを生成せずに、
@@ -633,7 +633,7 @@ p Date.new(2001,1,31) >> 1 >> -1 #=> #<Date: 2001-01-28 ...>
 
 グレゴリオ暦なら真を返します。
 
-#@# exp
+#%# exp
 ### def httpdate -> String
 
 [RFC:2616] ([RFC:1123]) で定められた書式の文字列を返します。
@@ -834,7 +834,7 @@ limit は日付オブジェクトでなければなりません、
 %x, %Y, %y, %Z, %z, %:z, %::z, %:::z, %%, %+
 
 GNU 版にあるような幅指定などもできます。
-#@# %[123]?
+#%# %[123]?
 
 [man:strftime(3)]、および [m:Date.strptime] も参照してください。
 
@@ -886,7 +886,7 @@ ISO 8601 書式の文字列を返します (拡大表記 ('%Y-%m-%d') を使い�
 
 水曜日なら真を返します。
 
-#@# exp
+#%# exp
 ### def xmlschema -> String
 
 XML Scheme (date) による書式の文字列を返します。
@@ -899,7 +899,7 @@ XML Scheme (date) による書式の文字列を返します。
 
 年を返します。
 
-#@since 3.2
+#%since 3.2
 ### def deconstruct_keys(array_of_names_or_nil) -> Hash
 
 パターンマッチに使用する名前と値の [c:Hash] を返します。
@@ -939,5 +939,5 @@ end
 ```
 
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
-#@end
+#%end
 

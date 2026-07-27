@@ -9,7 +9,7 @@ require:
 ---
 CGI プログラムの支援ライブラリです。
 
-#@since 4.0
+#%since 4.0
 Ruby 4.0 から、cgi ライブラリは default gems から削除されました。
 標準で利用できるのは cgi/escape が提供する以下のエスケープ用のメソッドだけです。
 
@@ -26,7 +26,7 @@ Ruby 4.0 から、cgi ライブラリは default gems から削除されまし�
 そのため、フォームを扱うメソッドの呼び出しが [c:NoMethodError] になるまで
 問題に気付きにくい点に注意してください。
 
-#@end
+#%end
 CGI プロトコルの詳細については以下の文書を参照してください。
 
   - <https://tools.ietf.org/html/draft-coar-cgi-v11-03>
@@ -42,10 +42,10 @@ require "cgi"
 cgi = CGI.new
 values = cgi['field_name']   # <== 'field_name' の配列
 # 'field_name' が指定されていなかったら、 ""を返す。
-#@#
+#%#
 fields = cgi.keys            # <== field nameの配列
 
-#@# returns true if form has 'field_name'
+#%# returns true if form has 'field_name'
 # フォームに 'field_name' というfield nameがあるときに真
 cgi.has_key?('field_name')
 cgi.include?('field_name')
@@ -277,7 +277,7 @@ cgi.h1{ "content" }
 cgi.h1({ "class" => "foo", "attr" => "bar" }){ "content" }
   # <H1 class="foo" attr="bar">content</H1>
 
-#@#  # add HTML generation methods
+#%#  # add HTML generation methods
 # HTML生成メソッドを追加
 CGI.new("html3")    # html3.2
 CGI.new("html4")    # html4.0 (Strict)

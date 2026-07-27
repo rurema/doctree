@@ -55,7 +55,7 @@ dRuby サーバは
 
 dRuby サーバを起動し、DRbServerのインスタンスを返します。
 
-#@include(start-service)
+#%include(start-service)
 
 プライマリサーバが存在しない場合は、これで起動したサーバがプライマリ
 サーバとなります。
@@ -85,13 +85,13 @@ dRuby サーバを起動し、DRbServerのインスタンスを返します。
 
 - **SEE** [m:DRb::DRbServer#stop_service]
 
-#@# --- check_insecure_method(obj, msg_id)
-#@# #@todo
-#@# 
-#@# Check that a method is callable via dRuby.
-#@# obj is the object we want to invoke the method on. msg_id is the method name
-#@# as a Symbol.
-#@# If the method is an insecure method (see insecure_method?) a SecurityError is thrown. If the method is private or undefined, a [[c:NameError]] is thrown. 
+#%# --- check_insecure_method(obj, msg_id)
+#%# #@todo
+#%# 
+#%# Check that a method is callable via dRuby.
+#%# obj is the object we want to invoke the method on. msg_id is the method name
+#%# as a Symbol.
+#%# If the method is an insecure method (see insecure_method?) a SecurityError is thrown. If the method is private or undefined, a [[c:NameError]] is thrown. 
 
 ### def stop_service -> ()
 
@@ -99,15 +99,15 @@ dRuby サーバを起動し、DRbServerのインスタンスを返します。
 
 - **SEE** [m:DRb::DRbServer#alive?]
 
-#@# --- to_id(obj)
-#@# #@todo
-#@# 
-#@# Convert a local object to a dRuby reference. 
-#@# 
-#@# --- to_obj(ref)
-#@# #@todo
-#@# 
-#@# Convert a dRuby reference to the local object it refers to.
+#%# --- to_id(obj)
+#%# #@todo
+#%# 
+#%# Convert a local object to a dRuby reference. 
+#%# 
+#%# --- to_obj(ref)
+#%# #@todo
+#%# 
+#%# Convert a dRuby reference to the local object it refers to.
 
 ### def verbose -> bool
 

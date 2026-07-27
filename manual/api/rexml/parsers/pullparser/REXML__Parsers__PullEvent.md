@@ -10,14 +10,14 @@ library: rexml/parsers/pullparser
 
 ## Class Methods
 
-#@# Called by PullParser, Users should not use this method
-#@# --- new(arg)
-#@# #@todo
+#%# Called by PullParser, Users should not use this method
+#%# --- new(arg)
+#%# #@todo
 
 ## Instance Methods
 
 ### def [](nth) -> object
-#@# --- [](range) -> [object]
+#%# --- [](range) -> [object]
 ### def [](start, len) -> [object]
 
 イベントのパラメータを取り出します。
@@ -25,7 +25,7 @@ library: rexml/parsers/pullparser
 [m:Array#\[\]] と同様の引数を取ります。
 
 - **param** `nth` -- nth番目のイベントパラメータを取り出します
-#@# @param range
+#%# @param range
 - **param** `start` -- start番目から len 個のイベントを取り出します
 - **param** `len` -- start番目から len 個のイベントを取り出します
 
@@ -75,9 +75,9 @@ DTDの実体宣言なら真を返します。
 
 DTDの記法宣言なら真を返します。
 
-#@# --- entity? -> bool
-#@# deprecated, always returns false
-#@# #@todo
+#%# --- entity? -> bool
+#%# deprecated, always returns false
+#%# #@todo
 
 ### def cdata? -> bool
 
@@ -87,7 +87,7 @@ cdata セクションなら真を返します。
 
 XML宣言なら真を返します。
 
-#@# --- error? -> false
-#@# deprecated, always returns false
+#%# --- error? -> false
+#%# deprecated, always returns false
 
-#@# --- inspect
+#%# --- inspect

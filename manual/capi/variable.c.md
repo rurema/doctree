@@ -171,7 +171,7 @@ klass のクラス変数 name に val を代入します。
 ### struct global_entry *rb_global_entry(ID id)
 
 ### VALUE rb_gv_get(const char *name)
-#@# [1.5 feature]
+#%# [1.5 feature]
 
 Ruby のグローバル変数の値を取得します。
 
@@ -180,7 +180,7 @@ VALUE v = rb_gv_get("$!")
 ```
 
 ### VALUE rb_gv_set(const char *name, VALUE val)
-#@# [1.5 feature]
+#%# [1.5 feature]
 
 Ruby のグローバル変数 name に val を代入します。
 val を返します。

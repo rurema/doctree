@@ -48,7 +48,7 @@ pull は [c:REXML::Parsers::PullEvent] オブジェクトを返します。
   DTDの実体宣言
 - **notationdecl (記法名文字列, "PUBLIC" | "SYSTEM" | nil, 公開識別子文字列 | nil, URI文字列 | nil)**:
   DTDの記法宣言
-#@# : entity 使われない
+#%# : entity 使われない
 - **cdata (テキスト文字列)**:
   cdata セクション
 - **xmldecl (バージョン文字列, エンコーディング文字列 | nil, standalone ("yes" | "no" | nil))**:

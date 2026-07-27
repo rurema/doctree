@@ -1,3 +1,3 @@
-#@# nodoc
-#@#
-#@# = class Complex::compatible
+#%# nodoc
+#%#
+#%# = class Complex::compatible

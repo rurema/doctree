@@ -28,11 +28,11 @@ include:
 
 ```ruby
 p Dir.glob("*")                    #=> ["bar", "foo"]
-#@since 3.1
+#%since 3.1
 p Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "bar", "foo"]
-#@else
+#%else
 p Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
-#@end
+#%end
 ```
 
 - **param** `base` -- カレントディレクトリの代わりに相対パスの基準にするベースディレクトリを指定します。
@@ -135,11 +135,11 @@ p Dir.pwd                    #=> "/var/spool/mail"
 p Dir.chdir("~/.ssh")        # => Errno::ENOENT
 ```
 
-#@since 3.3
+#%since 3.3
 - **SEE** [m:Dir.fchdir]
-#@end
+#%end
 
-#@since 3.3
+#%since 3.3
 ### def fchdir(fd)    -> 0
 ### def fchdir(fd) { ... }    -> object
 
@@ -170,7 +170,7 @@ p Dir.pwd            # => "/usr"
 ```
 
 - **SEE** [m:Dir.chdir], [m:Dir#fileno], [m:Dir.for_fd]
-#@end
+#%end
 
 ### def chroot(path)    -> 0
 
@@ -399,7 +399,7 @@ Dir.mktmpdir do |tmpdir|
 end
 ```
 
-#@since 3.3
+#%since 3.3
 ### def for_fd(fd)    -> Dir
 
 整数のディレクトリファイルディスクリプタ fd が指すディレクトリを表す、
@@ -429,7 +429,7 @@ end
 ```
 
 - **SEE** [m:Dir#fileno], [m:Dir#path], [m:Dir.fchdir]
-#@end
+#%end
 
 ### def exist?(file_name)    -> bool
 
@@ -445,12 +445,12 @@ p File.directory?(".") # => true
 
 - **SEE** [m:File.directory?]
 
-#@until 3.2
+#%until 3.2
 ### def exists?(file_name)    -> bool
 {: since="1.9.1"}
 
 このメソッドは Ruby 2.1 から deprecated です。[m:Dir.exist?] を使用してください。
-#@end
+#%end
 ### def home          -> String | nil
 ### def home(user)    -> String | nil
 

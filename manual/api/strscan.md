@@ -288,7 +288,7 @@ p s.eos?      # => true
 代わりに [m:StringScanner#eos?] を使ってください。
 
 ### def exist?(regexp) -> Integer | nil
-#@#Ruby 1.8.6 以降は以下の記述に沿った仕様に変わります。
+#%#Ruby 1.8.6 以降は以下の記述に沿った仕様に変わります。
 
 スキャンポインタの位置から，次にマッチする文字列の末尾までの長さを返します。
 
@@ -890,7 +890,7 @@ s = StringScanner.new('test string')
 p s.string # => "test string"
 ```
 
-#@#Ruby 1.8.1 以降では
+#%#Ruby 1.8.1 以降では
 返り値は freeze されていません。
 
 ```ruby title="例"
@@ -1028,7 +1028,7 @@ rescue => err
 end
 ```
 
-#@# bc-rdoc: detected missing name: matchedsize
+#%# bc-rdoc: detected missing name: matchedsize
 ### def matchedsize -> Integer | nil
 
 [m:StringScanner#matched_size] と同じです。

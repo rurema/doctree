@@ -786,7 +786,7 @@ p ARGF.each_line {|e|print e.upcase}  # => "TEST"
 ピリオドも含めて指定する必要があります。
 
 バックアップを残さない場合は空文字列を指定します。
-#@# 要確認。分岐はないように見える。
+#%# 要確認。分岐はないように見える。
 この機能は Windows では使用出来ません。
 
 設定が有効になるのは次のファイルの処理に移った時です。
@@ -868,7 +868,7 @@ ch を返します。
 
 ### def read_nonblock(maxlen, outbuf = nil, exception: true) -> String | Symbol | nil
 {: since="1.9.3"}
-#@# TODO: Windows では使えない？
+#%# TODO: Windows では使えない？
 
 処理中のファイルからノンブロッキングモードで最大 maxlen バイト読み込みます。
 詳しくは [m:IO#read_nonblock] を参照してください。

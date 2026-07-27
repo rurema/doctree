@@ -15,7 +15,7 @@ gem-format な tar ファイルを読み込む [c:Gem::Package::TarReader] の�
 ## Singleton Methods
 
 ### def open(io, security_policy = nil){|is| ... }
-#@todo ???
+#%todo ???
 ブロックに [c:Gem::Package::TarInput] のインスタンスを与えて評価します。
 
 - **param** `io` -- 自身に関連付ける IO を指定します。
@@ -25,7 +25,7 @@ gem-format な tar ファイルを読み込む [c:Gem::Package::TarReader] の�
 ## Private Singleton Methods
 
 ### def new(io, security_policy = nil)
-#@todo ???
+#%todo ???
 このクラスを初期化します。
 
 - **param** `io` -- 自身に関連付ける IO を指定します。
@@ -35,17 +35,17 @@ gem-format な tar ファイルを読み込む [c:Gem::Package::TarReader] の�
 ## Public Instance Methods
 
 ### def close
-#@# -> discard
+#%# -> discard
 自身と自身に関連付けられた IO を close します。
 
 ### def each{|entry| ... }
-#@# -> discard
+#%# -> discard
 data.tar.gz の各エントリをブロックに渡してブロックを評価します。
 
 - **SEE** [m:Gem::Package::TarReader#each]
 
 ### def extract_entry(destdir, entry, expected_md5sum = nil)
-#@# -> discard
+#%# -> discard
 指定された destdir に entry を展開します。
 
 - **param** `destdir` -- 展開先のディレクトリを指定します。

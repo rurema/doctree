@@ -45,7 +45,7 @@ params = CGI.parse("query_string")
 - **SEE** [m:CGI.accept_charset], [m:CGI.accept_charset=]
 
 ### def nph? -> bool
-#@#nodoc
+#%#nodoc
 
 ### def header(options = "text/html") -> String
 
@@ -179,7 +179,7 @@ cgi.out({"nph"        => true,
 - **SEE** [m:CGI#header]
 
 ### def print(*strings)
-#@todo
+#%todo
 
 引数の文字列を標準出力に出力します。
 cgi.print は $DEFAULT_OUTPUT.print と等価です。
@@ -203,8 +203,8 @@ cgi.print "This line is a part of content body.\r\n"
 
 改行文字です。
 
-#@# --- REVISION -> String
-#@# nodoc
+#%# --- REVISION -> String
+#%# nodoc
 
 ### const NEEDS_BINMODE -> bool
 

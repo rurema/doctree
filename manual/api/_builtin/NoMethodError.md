@@ -7,45 +7,45 @@ library: _builtin
 
 ```ruby title="例"
 self.bar
-#@if("3.4" <= version)
+#%if("3.4" <= version)
 # => -:1: undefined method 'bar' for main (NoMethodError)
-#@end
-#@if("3.3" <= version and version < "3.4")
+#%end
+#%if("3.3" <= version and version < "3.4")
 # => -:1: undefined method `bar' for main (NoMethodError)
-#@end
-#@if(version < "3.3")
+#%end
+#%if(version < "3.3")
 # => -:1: undefined method `bar' for main:Object (NoMethodError)
-#@end
+#%end
 ```
 
 プライベートなインスタンスメソッドを呼び出そうとした場合にも発生します。
 
 ```ruby title="例"
 "".puts
-#@if("3.4" <= version)
+#%if("3.4" <= version)
 # => -:1:in '<main>': private method 'puts' called for an instance of String (NoMethodError)
-#@end
-#@if("3.3" <= version and version < "3.4")
+#%end
+#%if("3.3" <= version and version < "3.4")
 # => -:1:in `<main>': private method `puts' called for an instance of String (NoMethodError)
-#@end
-#@if(version < "3.3")
+#%end
+#%if(version < "3.3")
 # => -:1:in `<main>': private method `puts' called for "":String (NoMethodError)
-#@end
+#%end
 ```
 
 メソッド呼び出しの形式でなければ [c:NameError] 例外が発生します。
 
 ```ruby title="例"
 bar
-#@if("3.4" <= version)
+#%if("3.4" <= version)
 # => -:1: undefined local variable or method 'bar' for main (NameError)
-#@end
-#@if("3.3" <= version and version < "3.4")
+#%end
+#%if("3.3" <= version and version < "3.4")
 # => -:1: undefined local variable or method `bar' for main (NameError)
-#@end
-#@if(version < "3.3")
+#%end
+#%if(version < "3.3")
 # => -:1: undefined local variable or method `bar' for main:Object (NameError)
-#@end
+#%end
 ```
 
 ## Class Methods
@@ -88,15 +88,15 @@ rescue NoMethodError
   p $!.args
 end
 
-#@if("3.4" <= version)
+#%if("3.4" <= version)
 # => #<NoMethodError: undefined method 'foobar' for main>
-#@end
-#@if("3.3" <= version and version < "3.4")
+#%end
+#%if("3.3" <= version and version < "3.4")
 # => #<NoMethodError: undefined method `foobar' for main>
-#@end
-#@if(version < "3.3")
+#%end
+#%if(version < "3.3")
 # => #<NoMethodError: undefined method `foobar' for main:Object>
-#@end
+#%end
 # => :foobar
 # => [1, 2, 3]
 ```

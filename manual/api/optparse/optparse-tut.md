@@ -82,13 +82,13 @@ p argv
 
 ```console
 ruby ./sample.rb -c
-#@since 3.4
+#%since 3.4
 ./sample.rb:7:in '<main>': invalid option: -c (OptionParser::InvalidOption)
 ./sample.rb:7:in '<main>': invalid option: c (OptionParser::InvalidOption)
-#@else
+#%else
 ./sample.rb:7:in `<main>': invalid option: -c (OptionParser::InvalidOption)
 ./sample.rb:7:in `<main>': invalid option: c (OptionParser::InvalidOption)
-#@end
+#%end
 ```
 
 [c:OptionParser] 自体は、どのオプションが指定されたかを記憶しません。
@@ -174,11 +174,11 @@ ruby sample.rb -a foo bar -b baz
 
 ```console
 ruby ./sample.rb -a
-#@since 3.4
+#%since 3.4
 ./sample.rb:7:in '<main>': missing argument: -a (OptionParser::MissingArgument)
-#@else
+#%else
 ./sample.rb:7:in `<main>': missing argument: -a (OptionParser::MissingArgument)
-#@end
+#%end
 ```
 
 オプションの引数が必須でないことを示すには、" [" を付けます。

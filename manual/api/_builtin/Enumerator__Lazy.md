@@ -20,9 +20,9 @@ map や select などのメソッドの遅延評価版を提供するための�
 - slice_before, slice_after, slice_when
 - chunk, chunk_while
 - uniq
-#@since 3.1
+#%since 3.1
 - compact
-#@end
+#%end
 - zip (※互換性のため、ブロックを渡さないケースのみlazy)
 
 Lazyオブジェクトは、[m:Enumerable#lazy]メソッドによって生成されます。
@@ -462,8 +462,8 @@ p r.lazy.map{|n| n**2}.repeat(2).first(5)
 ```
 
 - **SEE** [m:Enumerator#with_index]
-#@since 3.1
+#%since 3.1
 ### def compact -> Enumerator::Lazy
 
 [m:Enumerable#compact] と同じですが、配列ではなく Enumerator::Lazy を返します。
-#@end
+#%end

@@ -66,7 +66,7 @@ p func.name # => "strlen"
 Ruby のオブジェクトを適切に C のデータに変換して C の関数を呼び出し、
 その返り値を Ruby のオブジェクトに変換して返します。
 
-#@include(callargs)
+#%include(callargs)
 
 - **param** `args` -- 関数の引数
 - **SEE** [m:Fiddle::Function.new]

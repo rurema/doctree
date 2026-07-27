@@ -95,11 +95,11 @@ p FileTest.exist?('/etc/no_such_file') # => false
 p FileTest.exist?('/etc/no_such_directory') # => false
 ```
 
-#@until 3.2
+#%until 3.2
 ### module_function def exists?(file)    -> bool
 
 このメソッドは Ruby 2.1 から deprecated です。[m:FileTest?.exist?] を使用してください。
-#@end
+#%end
 ### module_function def grpowned?(file)    -> bool
 
 ファイルのグループ ID がカレントプロセスの実効グループ ID と等しい時に真を返
@@ -241,7 +241,7 @@ p FileTest.readable?("testfile")    # => false
 
 - **param** `file` -- ファイル名を表す文字列を指定します。
 
-#@#noexample FileTest.#readable? を参照
+#%#noexample FileTest.#readable? を参照
 
 - **SEE** [m:FileTest?.readable?]
 
@@ -363,7 +363,7 @@ p FileTest.writable?("testfile")    # => false
 
 - **param** `file` -- ファイル名を表す文字列を指定します。
 
-#@#noexample FileTest.#writable? を参照
+#%#noexample FileTest.#writable? を参照
 
 - **SEE** [m:FileTest?.writable?]
 

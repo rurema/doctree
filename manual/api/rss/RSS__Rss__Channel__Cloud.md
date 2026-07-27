@@ -6,21 +6,21 @@ library: rss
 
 ### def domain
 ### def domain=
-#@todo
+#%todo
 
 ### def path
 ### def path=
-#@todo
+#%todo
 
 ### def port
 ### def port=
-#@todo
+#%todo
 
 ### def protocol
 ### def protocol=
-#@todo
+#%todo
 
 ### def registerProcedure
 ### def registerProcedure=
-#@todo
+#%todo
 

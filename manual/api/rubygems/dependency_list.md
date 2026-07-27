@@ -12,7 +12,7 @@ Gem の依存関係を扱うためのクラスです。
 ## Public Instance Methods
 
 ### def add(*gemspecs)
-#@# -> discard
+#%# -> discard
 
 与えられた [c:Gem::Specification] のインスタンスを自身に追加します。
 
@@ -70,14 +70,14 @@ returned in dependency order again.
 - **SEE** [m:Gem::Specification#full_name], [m:Array#delete_if]
 
 ### def spec_predecessors -> Hash
-#@todo ???
+#%todo ???
 
 Return a hash of predecessors.  <tt>result[spec]</tt> is an
 Array of gemspecs that have a dependency satisfied by the named
 spec.
 
-#@# よくわからない。
-#@# [[c:Gem::Specification]] => Array of [[c:Gem::Specification]]
+#%# よくわからない。
+#%# [[c:Gem::Specification]] => Array of [[c:Gem::Specification]]
 
 ## Singleton Methods
 

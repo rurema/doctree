@@ -129,5 +129,5 @@ fiddle でインポートした C の関数を呼び出すとき、
 その引数と返り値はインポートする際に指定した型と
 Ruby のオブジェクトの種類によって変換されます。
 
-#@include(callargs)
+#%include(callargs)
 

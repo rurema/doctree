@@ -7,7 +7,7 @@ library: _builtin
 
 以下の例外クラスのスーパークラスです。
 
-#@# list child classes automatically
+#%# list child classes automatically
   - [c:LoadError]
   - [c:NotImplementedError]
   - [c:SyntaxError]

@@ -446,7 +446,7 @@ self の整数部分を新しい [c:BigDecimal] オブジェクトにして返�
 
 self の小数部分を新しい [c:BigDecimal] オブジェクトにして返します。
 
-#@# see https://bugs.ruby-lang.org/issues/2662
+#%# see https://bugs.ruby-lang.org/issues/2662
 ### def floor    -> Integer
 ### def floor(n) -> BigDecimal
 
@@ -942,10 +942,10 @@ self のハッシュ値を返します。
 
 self を返すように、BigDecimal で定義されています。
 
-#@#noexample
+#%#noexample
 
 ### def dup -> BigDecimal
 
 self を返すように、BigDecimal で定義されています。
 
-#@#noexample
+#%#noexample

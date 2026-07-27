@@ -109,37 +109,37 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 解析した情報を [m:RDoc::Generator::JsonIndex::SEARCH_INDEX_FILE] に出
 力します。
 
-#@# --- build_index
-#@#
-#@# Builds the JSON index as a Hash.
-#@#
-#@# --- debug_msg(*msg)
-#@#
-#@# Output progress information if debugging is enabled
-#@#
-#@# --- index_classes
-#@#
-#@# Adds classes and modules to the index
-#@#
-#@# --- index_methods
-#@#
-#@# Adds methods to the index
-#@#
-#@# --- index_pages
-#@#
-#@# Adds pages to the index
-#@#
-#@# --- class_dir
-#@#
-#@# The directory classes are written to
-#@#
-#@# --- file_dir
-#@#
-#@# The directory files are written to
-#@#
-#@# --- search_string(string)
-#@#
-#@# Removes whitespace and downcases +string+
+#%# --- build_index
+#%#
+#%# Builds the JSON index as a Hash.
+#%#
+#%# --- debug_msg(*msg)
+#%#
+#%# Output progress information if debugging is enabled
+#%#
+#%# --- index_classes
+#%#
+#%# Adds classes and modules to the index
+#%#
+#%# --- index_methods
+#%#
+#%# Adds methods to the index
+#%#
+#%# --- index_pages
+#%#
+#%# Adds pages to the index
+#%#
+#%# --- class_dir
+#%#
+#%# The directory classes are written to
+#%#
+#%# --- file_dir
+#%#
+#%# The directory files are written to
+#%#
+#%# --- search_string(string)
+#%#
+#%# Removes whitespace and downcases +string+
 
 ## Constants
 

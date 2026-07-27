@@ -16,7 +16,7 @@ Usage: gem unpack GEMNAME [options]
     -v, --version VERSION            展開する Gem パッケージのバージョンを指定します
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Arguments:

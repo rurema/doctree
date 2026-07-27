@@ -65,23 +65,23 @@ end
 
 => 12964
    12965
-#@since 3.4
+#%since 3.4
    interrupted by signal 17 at -:27:in 'Kernel#sleep'
-#@else
+#%else
    interrupted by signal 17 at -:27:in `sleep'
-#@end
+#%end
       child 12965 was stopped by signal 19
-#@since 3.4
+#%since 3.4
    interrupted by signal 17 at -:30:in 'Kernel#sleep'
-#@else
+#%else
    interrupted by signal 17 at -:30:in `sleep'
-#@end
+#%end
       child 12965 was killed by signal 15
-#@since 3.4
+#%since 3.4
    interrupted by signal 17 at -:30:in 'Kernel#sleep'
-#@else
+#%else
    interrupted by signal 17 at -:30:in `sleep'
-#@end
+#%end
       child 12964 exited normally. status=0
    done
 ```
@@ -97,17 +97,17 @@ other が数値の場合、self.to_i との比較が行われます。こ
 
 - **param** `other` -- 自身と比較したいオブジェクトを指定します。
 
-#@until 4.0
+#%until 4.0
 ### def &(other)    -> Integer
 
 self.to_i & other と同じです。
 このメソッドは後方互換性のためにあります。
-#@since 3.3
+#%since 3.3
 このメソッドは Ruby 3.3 から deprecated であり、Ruby 4.0 で削除されました。
-#@end
+#%end
 
 - **param** `other` -- 自身との & 演算をしたい整数を指定します。
-#@end
+#%end
 
 ### def pid    -> Integer
 
@@ -180,13 +180,13 @@ signaled? が真の場合プロセスを終了させたシグナル番号を、
 このメソッドはシステムに依存します。サポートしないプラットフォー
 ムでは常に false を返します。
 
-#@until 4.0
+#%until 4.0
 ### def >>(num)    -> Integer
 
 self.to_i >> num と同じです。
-#@since 3.3
+#%since 3.3
 このメソッドは Ruby 3.3 から deprecated であり、Ruby 4.0 で削除されました。
-#@end
+#%end
 
 - **param** `num` -- 整数を指定します。
 
@@ -197,7 +197,7 @@ p $?.to_i          #=> 25344
 p $? >> 8          #=> 99
 ```
 
-#@end
+#%end
 
 ### def success?    -> bool
 

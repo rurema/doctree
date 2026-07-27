@@ -9,21 +9,21 @@ include:
 
 ### def about
 ### def about=
-#@todo
+#%todo
 
 ### def date
 ### def date=
-#@todo
+#%todo
 
 ### def link
 ### def link=
-#@todo
+#%todo
 
 ### def title
 ### def title=
-#@todo
+#%todo
 
 ### def url
 ### def url=
-#@todo
+#%todo
  

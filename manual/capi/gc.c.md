@@ -93,7 +93,7 @@ v が Ruby のオブジェクトであればマークします。
 
 ### void rb_gc_register_address(VALUE *addr)
 
-#@# 初出: [ruby-list:20488] 1.5 feature
+#%# 初出: [ruby-list:20488] 1.5 feature
 
 ポインタ addr が指す変数を GC の対象にします。
 
@@ -103,7 +103,7 @@ GC を起動します。
 
 ### void rb_gc_unregister_address(VALUE *addr)
 
-#@# 初出: [ruby-list:20488] [1.5 feature]
+#%# 初出: [ruby-list:20488] [1.5 feature]
 
 ポインタ addr が指す変数を GC の対象から外します。
 

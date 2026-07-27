@@ -47,8 +47,8 @@ require:
 
 - **param** `socket` -- クライアントに接続された IO オブジェクトを指定します。
 
-#@#--- parse_uri(str, scheme = "https")
-#@#todo should be private
+#%#--- parse_uri(str, scheme = "https")
+#%#todo should be private
 
 ### def meta_vars -> Hash
 

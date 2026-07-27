@@ -22,7 +22,7 @@ Gem リポジトリのインデックスを作成するためのクラスです�
 - **param** `spec` -- [c:Gem::Specification] を指定します。
 
 ### def build_indices
-#@# -> discard
+#%# -> discard
 
 インデックスを構築します。
 
@@ -38,7 +38,7 @@ Gem のキャッシュディレクトリ内の *.gem ファイルから [c:Gem::
 - **param** `specs` -- [c:Gem::Specification] の配列を指定します。
 
 ### def compress(filename, extension)
-#@# -> discard
+#%# -> discard
 
 与えられたファイルを圧縮して保存します。
 
@@ -59,24 +59,24 @@ Gem のキャッシュディレクトリ内の *.gem ファイルから [c:Gem::
 インデックスを作成するために使用する Gem ファイルのリストを返します。
 
 ### def generate_index
-#@# -> discard
+#%# -> discard
 インデックスを構築して保存します。
 
 ### def gzip(filename)
-#@# -> discard
+#%# -> discard
 [m:Zlib::GzipWriter.open] へのラッパーです。
 与えられたファイル名を圧縮して保存します。
 
 ### def install_indices
-#@# -> discard
+#%# -> discard
 作成済みのインデックスを所定のディレクトリに保存します。
 
 ### def make_temp_directories
-#@# -> discard
+#%# -> discard
 一時的に使用するディレクトリを作成します。
 
 ### def paranoid(path, extension)
-#@# -> discard
+#%# -> discard
 圧縮されたデータと圧縮されていないデータを比較して一致しなければ例外を発生させます。
 
 - **param** `path` -- 圧縮されていないファイルのパスを指定します。

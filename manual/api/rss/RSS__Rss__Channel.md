@@ -5,78 +5,78 @@ library: rss
 ## Instance Methods
 
 ### def categories
-#@todo
+#%todo
 
 ### def category
 ### def category=
-#@todo
+#%todo
 
 ### def copyright
 ### def copyright=
-#@todo
+#%todo
 
 ### def date
 ### def pubDate
 ### def date=
 ### def pubDate=
-#@todo
+#%todo
 
 ### def description
 ### def description=
-#@todo
+#%todo
 
 ### def docs
 ### def docs=
-#@todo
+#%todo
 
 ### def image
 ### def image=
-#@todo
+#%todo
 
 ### def items
-#@todo
+#%todo
 
 ### def item
 ### def item=
-#@todo
+#%todo
 
 ### def language
 ### def language=
-#@todo
+#%todo
 
 ### def lastBuildDate
 ### def lastBuildDate=
-#@todo
+#%todo
 
 ### def link
 ### def link=
-#@todo
+#%todo
 
 ### def managingEditor
 ### def managingEditor=
-#@todo
+#%todo
 
 ### def rating
 ### def rating=
-#@todo
+#%todo
 
 ### def skipDays
 ### def skipDays=
-#@todo
+#%todo
 
 ### def skipHours
 ### def skipHours=
-#@todo
+#%todo
 
 ### def textInput
 ### def textInput=
-#@todo
+#%todo
 
 ### def title
 ### def title=
-#@todo
+#%todo
 
 ### def webMaster
 ### def webMaster=
-#@todo
+#%todo
 

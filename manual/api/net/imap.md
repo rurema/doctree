@@ -2085,81 +2085,81 @@ Content-Dispotition の値を返します。
 マルチパートかどうかを返します。
 true を返します。
 
-#@# internal classes:
-#@# = class Net::IMAP::Atom
-#@# = class Net::IMAP::Literal
-#@# = class Net::IMAP::QuotedString
-#@# = class Net::IMAP::MessageSet
-#@# = class Net::IMAP::RawData
+#%# internal classes:
+#%# = class Net::IMAP::Atom
+#%# = class Net::IMAP::Literal
+#%# = class Net::IMAP::QuotedString
+#%# = class Net::IMAP::MessageSet
+#%# = class Net::IMAP::RawData
 
-#@# internal classes for authentication
-#@# = class Net::IMAP::LoginAuthenticator
-#@# 
-#@# Authenticator for the "LOGIN" authentication type.
-#@# See [[m:Net::IMAP#authenticate]].
-#@# 
-#@# == Class Methods
-#@# 
-#@# --- new(user, password)
-#@# #@todo
-#@# 
-#@# == Instance Methods
-#@# 
-#@# --- process(data)
-#@# #@todo
-#@# 
-#@# 
-#@# 
-#@# = class Net::IMAP::CramMD5Authenticator
-#@# 
-#@# Authenticator for the "CRAM-MD5" authentication type.
-#@# See [[m:Net::IMAP#authenticate]].
-#@# 
-#@# == Class Methods
-#@# 
-#@# --- new(user, password)
-#@# #@todo
-#@# 
-#@# == Instance Methods
-#@# 
-#@# --- process(challenge)
-#@# #@todo
-#@# 
-#@# 
-#@# 
-#@# #@since 1.9.1
-#@# = class Net::IMAP::PlainAuthenticator
-#@# 
-#@# Authenticator for the "PLAIN" authentication type.
-#@# See [[m:Net::IMAP#authenticate]].
-#@# 
-#@# == Class Methods
-#@# 
-#@# --- new(user, password)
-#@# #@todo
-#@# 
-#@# == Instance Methods
-#@# 
-#@# --- process(data)
-#@# #@todo
-#@# 
-#@# 
-#@# 
-#@# = class Net::IMAP::DigestMD5Authenticator
-#@# 
-#@# Authenticator for the "DIGEST-MD5" authentication type.
-#@# See [[m:Net::IMAP#authenticate]].
-#@# 
-#@# == Class Methods
-#@# 
-#@# --- new(user, password, authname = nil)
-#@# #@todo
-#@# 
-#@# == Instance Methods
-#@# 
-#@# --- process(challenge)
-#@# #@todo
-#@# #@end
+#%# internal classes for authentication
+#%# = class Net::IMAP::LoginAuthenticator
+#%# 
+#%# Authenticator for the "LOGIN" authentication type.
+#%# See [[m:Net::IMAP#authenticate]].
+#%# 
+#%# == Class Methods
+#%# 
+#%# --- new(user, password)
+#%# #@todo
+#%# 
+#%# == Instance Methods
+#%# 
+#%# --- process(data)
+#%# #@todo
+#%# 
+#%# 
+#%# 
+#%# = class Net::IMAP::CramMD5Authenticator
+#%# 
+#%# Authenticator for the "CRAM-MD5" authentication type.
+#%# See [[m:Net::IMAP#authenticate]].
+#%# 
+#%# == Class Methods
+#%# 
+#%# --- new(user, password)
+#%# #@todo
+#%# 
+#%# == Instance Methods
+#%# 
+#%# --- process(challenge)
+#%# #@todo
+#%# 
+#%# 
+#%# 
+#%# #@since 1.9.1
+#%# = class Net::IMAP::PlainAuthenticator
+#%# 
+#%# Authenticator for the "PLAIN" authentication type.
+#%# See [[m:Net::IMAP#authenticate]].
+#%# 
+#%# == Class Methods
+#%# 
+#%# --- new(user, password)
+#%# #@todo
+#%# 
+#%# == Instance Methods
+#%# 
+#%# --- process(data)
+#%# #@todo
+#%# 
+#%# 
+#%# 
+#%# = class Net::IMAP::DigestMD5Authenticator
+#%# 
+#%# Authenticator for the "DIGEST-MD5" authentication type.
+#%# See [[m:Net::IMAP#authenticate]].
+#%# 
+#%# == Class Methods
+#%# 
+#%# --- new(user, password, authname = nil)
+#%# #@todo
+#%# 
+#%# == Instance Methods
+#%# 
+#%# --- process(challenge)
+#%# #@todo
+#%# #@end
 
 # class Net::IMAP::Error < StandardError
 

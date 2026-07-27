@@ -207,8 +207,8 @@ person.dig(:business_address, 'zip') # => nil
 
 self のハッシュ値を返します。
 
-#@# Two hashes with the same content will have the same hash code
-#@# (and will be eql?).
+#%# Two hashes with the same content will have the same hash code
+#%# (and will be eql?).
 
 ## Protected Instance Methods
 

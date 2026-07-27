@@ -150,11 +150,11 @@ def foo
 end
 
 foo.call
-#@since 3.4
+#%since 3.4
 # => in 'block in Object#foo': unexpected return (LocalJumpError)
-#@else
+#%else
 # => in `block in foo': unexpected return (LocalJumpError)
-#@end
+#%end
 ```
 
 以下の表は、手続きオブジェクトの実行を上の例と同じように、手続きオブジェクトが定義されたメソッドを

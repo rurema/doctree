@@ -10,10 +10,10 @@ until: "3.1"
 
 ## Singleton Methods
 
-#@include(_builtin/Fiber.current)
+#%include(_builtin/Fiber.current)
 
 ## Public Instance Methods
 
-#@include(_builtin/Fiber.transfer)
-#@include(_builtin/Fiber.alive_p)
+#%include(_builtin/Fiber.transfer)
+#%include(_builtin/Fiber.alive_p)
 

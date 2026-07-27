@@ -5,7 +5,7 @@ type: library
 
 このライブラリで定義されているメソッドはユーザが直接使用するものではありません。
 
-#@# Author: Keiju ISHITSUKA
+#%# Author: Keiju ISHITSUKA
 
 # class IRB::Frame
 

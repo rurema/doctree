@@ -51,7 +51,7 @@ HTTP ヘッダの値を分割して返します。
 - **param** `str` -- HTTP ヘッダの値を返します。
 
 ### module_function def parse_range_header(ranges_specifier)
-#@todo ???
+#%todo ???
 
 - **param** `ranges_specifier` -- 
 
@@ -116,11 +116,11 @@ unreserved = num + lowalpha + upalpha + mark
 
 - **param** `str` -- 文字列を指定します。
 
-#@#--- normalize_path(path)
-#@#todo
+#%#--- normalize_path(path)
+#%#todo
 
-#@#--- parse_qvalues(value)
-#@#todo
+#%#--- parse_qvalues(value)
+#%#todo
 
 ### module_function def escape_form(str) -> String
 
@@ -150,23 +150,23 @@ p WEBrick::HTTPUtils.unescape_form('foo+bar%2Bbaz')  # => "foo bar+baz"
 
 - **SEE** [m:WEBrick::HTTPUtils?.escape_form]
 
-#@#--- _make_regex!(str)
-#@#todo
+#%#--- _make_regex!(str)
+#%#todo
 
-#@#--- _escape(str, regex)
-#@#todo
+#%#--- _escape(str, regex)
+#%#todo
 
-#@#--- _unescape(str, regex)
-#@#todo
+#%#--- _unescape(str, regex)
+#%#todo
 
-#@#--- parse_query(str)
-#@#todo
+#%#--- parse_query(str)
+#%#todo
 
-#@#--- parse_form_data(io, boundary)
-#@#todo
+#%#--- parse_form_data(io, boundary)
+#%#todo
 
-#@#--- _make_regex(str)
-#@#todo
+#%#--- _make_regex(str)
+#%#todo
 
 ## Constants
 

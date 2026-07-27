@@ -6,13 +6,13 @@ library: rss
 
 ### def length
 ### def length=
-#@todo
+#%todo
 
 ### def type
 ### def type=
 ### def url
-#@todo
+#%todo
 
 ### def url=
-#@todo
+#%todo
 

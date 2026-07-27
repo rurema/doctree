@@ -36,7 +36,7 @@ tar ファイルを書き込むためのクラスです。
 - **param** `size` -- 追加するファイルのサイズを指定します。
 
 ### def check_closed
-#@# -> discard
+#%# -> discard
 自身に関連付けられた IO が既に close されているかどうかチェックします。
 
 - **raise** `IOError` -- 自身に関連付けられた IO が既に close されている場合に発
@@ -52,7 +52,7 @@ tar ファイルを書き込むためのクラスです。
 そうでない場合は、偽を返します。
 
 ### def flush
-#@# -> discard
+#%# -> discard
 自身に関連付けられた IO をフラッシュします。
 
 ### def mkdir(name, mode) -> self
@@ -63,8 +63,8 @@ tar ファイルを書き込むためのクラスです。
 
 - **param** `mode` -- 追加するディレクトリのパーミッションを指定します。
 
-#@#--- split_name
-#@# nodoc
+#%#--- split_name
+#%# nodoc
 
 ## Singleton Methods
 

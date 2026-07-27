@@ -89,5 +89,5 @@ task 'test_all' => (1..8).to_a.map{|n| "test_step#{n}"}
 
 ### 用語集
 
-#@include(rake/glossary.rd)
+#%include(rake/glossary.rd)
 

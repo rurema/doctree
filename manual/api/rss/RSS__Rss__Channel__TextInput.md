@@ -6,17 +6,17 @@ library: rss
 
 ### def description
 ### def description=
-#@todo
+#%todo
 
 ### def link
 ### def link=
-#@todo
+#%todo
 
 ### def name
 ### def name=
-#@todo
+#%todo
 
 ### def title
 ### def title=
-#@todo
+#%todo
 

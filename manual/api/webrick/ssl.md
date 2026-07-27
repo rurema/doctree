@@ -105,7 +105,7 @@ config で有効な項目が増えます。以下は増える項目とそのデ�
   オプションフラグです。
   [m:OpenSSL::SSL::SSLContext#options] を参照してください。
 - **`:SSLStartImmediately`**:
-#@# よくわからない
+#%# よくわからない
 - **`:SSLCertName`**:
   自己署名証明書を作成する場合の証明書の CN を文字列で設定する。
 - **`:SSLCertComment`**:

@@ -39,11 +39,11 @@ obj を指定された出力先に再帰的に出力します。
 
 ```ruby title="例"
 p Marshal.dump(Hash.new {})
-#@since 3.4
+#%since 3.4
 # => -:1:in 'dump': cannot dump hash with default proc (TypeError)
-#@else
+#%else
 # => -:1:in `dump': cannot dump hash with default proc (TypeError)
-#@end
+#%end
 ```
 
 マーシャルの動作を任意に定義することもできます。
@@ -70,13 +70,13 @@ p Marshal.dump(Hash.new {})
 
 - **SEE** [m:Object#marshal_dump], [m:Object#marshal_load]
 
-#@since 3.1
+#%since 3.1
 ### module_function def load(port, proc = nil, options = {})      -> object
 ### module_function def restore(port, proc = nil, options = {})   -> object
-#@else
+#%else
 ### module_function def load(port, proc = nil)      -> object
 ### module_function def restore(port, proc = nil)   -> object
-#@end
+#%end
 
 port からマーシャルデータを読み込んで、元のオブジェクトと同
 じ状態をもつオブジェクトを生成します。
@@ -84,10 +84,10 @@ port からマーシャルデータを読み込んで、元のオブジェクト
 proc として手続きオブジェクトが与えられた場合には読み込んだ
 オブジェクトを引数にその手続きを呼び出します。
 
-#@since 3.1
+#%since 3.1
 options の :freeze キーに真が指定された場合、読み込んだオブジェクトを freeze して返します。
 同一の文字列が freeze されているときオブジェクトは一つしか生まれないため、この指定によりメモリ使用効率が向上する場合があります。
-#@end
+#%end
 
 ```ruby title="例"
 str = Marshal.dump(["a", 1, 10 ** 10, 1.0, :foo])
@@ -107,13 +107,13 @@ p Marshal.load(str, proc {|obj| p obj})
 
 - **param** `proc` -- 手続きオブジェクト。[c:Proc]
 
-#@since 3.1
+#%since 3.1
 - **param** `options` -- オプションをハッシュで指定します。指定可能なオプションは以下の通りです。
 
 - **`:freeze`**:
   真偽値を指定します。真を指定すると読み込んだオブジェクトを freeze して返します。
   デフォルトは偽です。
-#@end
+#%end
 
 - **raise** `TypeError` -- メジャーバージョンが異なるか、バージョンの大きな
                  マーシャルデータを読み込んだ場合に発生します。

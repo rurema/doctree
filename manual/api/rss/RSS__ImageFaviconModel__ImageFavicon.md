@@ -8,14 +8,14 @@ include:
 
 ### def about
 ### def about=
-#@todo
+#%todo
 
 ### def date
 ### def date=
-#@todo
+#%todo
 
 ### def image_size
 ### def size
 ### def image_size=
 ### def size=
-#@todo
+#%todo

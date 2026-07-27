@@ -14,8 +14,8 @@ Usage: gem outdated [options]
         --platform PLATFORM          指定されたプラットフォームに関する情報を表示します
 ```
 
-#@include(local_remote_options)
-#@include(common_options)
+#%include(local_remote_options)
+#%include(common_options)
 
 ```text
 Summary:

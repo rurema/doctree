@@ -24,7 +24,7 @@ Options:
       --platform PLATFORM          Specify the platform of gem to uninstall
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Arguments:

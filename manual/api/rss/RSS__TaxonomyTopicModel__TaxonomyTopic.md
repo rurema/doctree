@@ -10,13 +10,13 @@ include:
 
 ### def about
 ### def about=
-#@todo
+#%todo
 
 ### def date
 ### def date=
-#@todo
+#%todo
 
 ### def taxo_link
 ### def taxo_link=
-#@todo
+#%todo
 

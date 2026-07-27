@@ -25,7 +25,7 @@ Gem ディレクトリ内に存在するかもしれない以下のような問�
 このメソッドは検証に失敗しても例外を発生させません。
 
 ### def remove_leading_dot_dir(path) -> String
-#@# should be private ?
+#%# should be private ?
 
 与えられたパスの先頭のドットを取り除いた文字列を返します。
 
@@ -56,7 +56,7 @@ Gem ディレクトリ内に存在するかもしれない以下のような問�
 ## Constants
 
 ### const ErrorData
-#@todo
+#%todo
 
 エラー情報を記録するための構造体です。
 以下の属性を持っています。

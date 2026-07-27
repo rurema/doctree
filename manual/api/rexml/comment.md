@@ -27,7 +27,7 @@ p doc.root[3].string # => " zz "
 
 ## Class Methods
 
-#@# --- new(source) -> REXML::Comment
+#%# --- new(source) -> REXML::Comment
 ### def new(string, parent = nil) -> REXML::Comment
 ### def new(comment, parent = nil) -> REXML::Comment
 
@@ -58,8 +58,8 @@ Comment オブジェクトを生成します。
 内容が複製された Comment オブジェクトを返します。
 (親ノードの情報は複製されません)。
 
-#@# --- write(output, indent = -1, transitive = false, ie_hack = false)
-#@# #@todo
+#%# --- write(output, indent = -1, transitive = false, ie_hack = false)
+#%# #@todo
 
 ### def <=>(other) -> -1 | 0 | 1
 
@@ -75,8 +75,8 @@ other と内容([m:REXML::Comment#string])が同じならば真を返します�
 
 ## Constants
 
-#@# --- START
-#@# #@todo
-#@#
-#@# --- STOP
-#@# #@todo
+#%# --- START
+#%# #@todo
+#%#
+#%# --- STOP
+#%# #@todo

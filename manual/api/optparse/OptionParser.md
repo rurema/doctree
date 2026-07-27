@@ -154,7 +154,7 @@ parse(opts2) # => unsupported argument type: Time (ArgumentError)
                                 実際は OptionParser::ParseError のサブク
                                 ラスになります。
 
-#@#noexample OptionParser#getopts を参照
+#%#noexample OptionParser#getopts を参照
 
 - **SEE** [m:OptionParser#getopts]
 
@@ -399,7 +399,7 @@ end
 
 - **return** -- プログラムのバージョンを文字列で返します。
 
-#@#noexample OptionParser#verを参照
+#%#noexample OptionParser#verを参照
 
 - **SEE** [m:OptionParser#ver]
 
@@ -409,7 +409,7 @@ end
 
 - **param** `ver` -- プログラムのバージョンを文字列で指定します。
 
-#@#noexample OptionParser#verを参照
+#%#noexample OptionParser#verを参照
 
 - **SEE** [m:OptionParser#ver]
 
@@ -433,7 +433,7 @@ end
 
 - **param** `rel` -- プログラムのリリースを文字列で指定します。
 
-#@#noexample OptionParser#verを参照
+#%#noexample OptionParser#verを参照
 
 - **SEE** [m:OptionParser#ver]
 

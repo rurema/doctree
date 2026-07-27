@@ -35,11 +35,11 @@ require:
 ## Instance Methods
 
 ### def close -> ()
-#@# discard
+#%# discard
 セッションの状態をファイルに保存してファイルを閉じます。
 
 ### def delete -> ()
-#@# discard
+#%# discard
 
 セッションを削除してファイルも削除します。
 
@@ -48,7 +48,7 @@ require:
 セッションの状態をファイルから復元したハッシュを返します。
 
 ### def update -> ()
-#@# discard
+#%# discard
 
 セッションの状態をファイルに保存します。
 

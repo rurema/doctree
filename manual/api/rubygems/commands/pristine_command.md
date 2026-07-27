@@ -19,7 +19,7 @@ Usage: gem pristine [args] [options]
                                      初期状態に戻します
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Arguments:

@@ -21,7 +21,7 @@ Apache で証認に使用するユーザグループの一覧が格納されて�
 ## Instance Methods
 
 ### def reload
-#@# -> discard
+#%# -> discard
 ファイルから再度読み込みます。
 
 ### def flush(path = nil) -> ()
@@ -37,7 +37,7 @@ Apache で証認に使用するユーザグループの一覧が格納されて�
 - **param** `group` -- グループ名を指定します。
 
 ### def add(group, members)
-#@# -> discard
+#%# -> discard
 
 与えられたグループにメンバを追加します。
 

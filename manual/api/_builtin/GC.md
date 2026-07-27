@@ -201,7 +201,7 @@ true を設定するとフルGCのタイミングででヒープをコンパク�
 
 - **SEE** [m:GC.compact] [m:GC.auto_compact]
 
-#@since 3.4
+#%since 3.4
 ### def config -> {Symbol => object}
 ### def config(hash) -> {Symbol => object}
 
@@ -238,7 +238,7 @@ GC.config(unknown_key: 1)
 p GC.config # => {rgengc_allow_full_mark: false, implementation: "default"}
 ```
 
-#@end
+#%end
 
 ### def disable -> bool
 
@@ -391,7 +391,7 @@ p GC.stat
 
 本メソッドは C Ruby 以外では動作しません。
 
-#@since 3.2
+#%since 3.2
 ### def stat_heap                     -> {Integer => Hash}
 ### def stat_heap(heap_id)            -> {Symbol => Integer}
 ### def stat_heap(heap_id, key)       -> Integer
@@ -425,7 +425,7 @@ p GC.stat_heap(0, :slot_size) # => 40
 本メソッドは C Ruby 以外では動作しません。
 
 - **SEE** [m:GC.stat]
-#@end
+#%end
 
 ### def latest_gc_info(result_hash = {}) -> Hash
 ### def latest_gc_info(key)              -> object
@@ -450,7 +450,7 @@ p merged == latest.merge(stat) # => true
 p GC.latest_gc_info(:gc_by)  # => :newobj
 ```
 
-#@since 3.1
+#%since 3.1
 ### def total_time -> Integer
 
 プロセス開始から GC にかかった時間の合計をナノ秒で返します。
@@ -498,7 +498,7 @@ p GC.measure_total_time # => false
 ```
 
 - **SEE** [m:GC.total_time]
-#@end
+#%end
 
 ### def compact -> Hash
 

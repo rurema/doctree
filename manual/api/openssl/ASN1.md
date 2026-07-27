@@ -37,7 +37,7 @@ UNIVERSAL以外のタグクラスを付けられた型は、
 でタグ付けられた型のデータは、[c:OpenSSL::ASN1::ASN1Data]のオブジェクトで
 表現され、その値として文字列(IMPLICITなタグ付けの場合)もしくは
 配列(EXPLICITなタグ付けの場合)として表現されます。
-#@# この配列な表現は構造型と同じ取り扱いをしている
+#%# この配列な表現は構造型と同じ取り扱いをしている
 [c:OpenSSL::ASN1::Primitive] のタグ付けの情報を使うことで、
 IMPLICIT or EXPLICIT なタグ付けを実現することもできます。
 
@@ -112,17 +112,17 @@ OpenSSL::ASN1::ASN1Data
         `-> OpenSSL::ASN1::Sequence
 ```
 
-#@# このドキュメントで「ASN.1 の値」、もしくは「ASN.1 値」と言った場合、
-#@# ASN.1 で定義された型によって表現される値を意味していていることに注意
-#@# つまり「値」という単語はここでは ASN.1 特有の概念を指している。
+#%# このドキュメントで「ASN.1 の値」、もしくは「ASN.1 値」と言った場合、
+#%# ASN.1 で定義された型によって表現される値を意味していていることに注意
+#%# つまり「値」という単語はここでは ASN.1 特有の概念を指している。
 
 ### 参照
 
 - ITU-T Rec. X.680-699 <https://www.itu.int/itu-t/recommendations/index.aspx?ser=X>
 
-#@#  * [RFC 3279] [[unknown:Algorithms and Identifiers for the Internet X.509 Public Key InfrastructureCertificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3279EN.html]]
-#@#  * [RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and CRL Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-00EN.html]]
-#@#  * [ASN.1:2002] [[unknown:"Abstract Syntax Notation One (ASN.1) Specification of Basic Notation ITU-T Rec. X.680 (2002) | ISO/IEC 8824-1:2002"|URL:http://asn1.elibel.tm.fr/en/standards/index.htm#asn1]]
+#%#  * [RFC 3279] [[unknown:Algorithms and Identifiers for the Internet X.509 Public Key InfrastructureCertificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3279EN.html]]
+#%#  * [RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and CRL Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-00EN.html]]
+#%#  * [ASN.1:2002] [[unknown:"Abstract Syntax Notation One (ASN.1) Specification of Basic Notation ITU-T Rec. X.680 (2002) | ISO/IEC 8824-1:2002"|URL:http://asn1.elibel.tm.fr/en/standards/index.htm#asn1]]
 
 ## Module Functions
 

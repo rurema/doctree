@@ -9,7 +9,7 @@ require:
 Usage: gem mirror [options]
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Summary:

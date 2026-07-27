@@ -1,6 +1,6 @@
 ---
 type: library
-#@# Author: Keiju ISHITSUKA
+#%# Author: Keiju ISHITSUKA
 category: Development
 require:
   - irb/init
@@ -9,7 +9,7 @@ require:
   - irb/ruby-lex
   - irb/input-method
   - irb/locale
-#@# IRB.conf[:VERSION] を設定していない場合のみ。
+#%# IRB.conf[:VERSION] を設定していない場合のみ。
   - irb/version
 ---
 irb は Interactive Ruby の略です。
@@ -228,13 +228,13 @@ irb(main):006:0> irb               # サブ irb を起動
 Multi-irb commands are deprecated and will be removed in IRB 2.0.0. Please use workspace commands instead.
 If you have any use case for multi-irb, please leave a comment at https://github.com/ruby/irb/issues/653
 irb#1(main):001:0> x               # x を表示
-#@since 3.4
+#%since 3.4
 (irb#1):1:in '<top (required)>': undefined local variable or method 'x' for main (NameError)
         from <internal:kernel>:168:in 'Kernel#loop'
-#@else
+#%else
 (irb#1):1:in `<top (required)>': undefined local variable or method `x' for main (NameError)
         from <internal:kernel>:187:in `loop'
-#@end
+#%end
 ```
 
 起動時のインタプリタでローカル変数 x を定義しましたが、
@@ -367,7 +367,7 @@ irb のコマンドは、簡単な名前と頭に「irb_」をつけた名前と
   irb を終了します。
   サブ irb で呼び出した場合は、そのサブ irb だけを終了します。
 
-#@# ret は使用されていないようなので、削除しました。
+#%# ret は使用されていないようなので、削除しました。
 
 - **`conf`**:
 - **`context`**:
@@ -598,11 +598,11 @@ foo = 0
 
 ```irb
 irb(main):001:0> eval "foo"
-#@since 3.4
+#%since 3.4
 NameError (undefined local variable or method 'foo' for main)
-#@else
+#%else
 NameError (undefined local variable or method `foo' for main)
-#@end
+#%end
 irb(main):002:0> foo = 0
 ```
 

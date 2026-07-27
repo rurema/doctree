@@ -8,7 +8,7 @@ library: webrick/httpservlet/filehandler
 ## Class Methods
 
 ### def add_handler(suffix, handler)
-#@# -> discard
+#%# -> discard
 与えられた拡張子のファイルを処理するためのサーブレットを登録します。
 
 - **param** `suffix` -- 拡張子を指定します。

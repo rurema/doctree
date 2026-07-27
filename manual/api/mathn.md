@@ -91,7 +91,7 @@ p 10 / 3 # => (10/3)
 ## Instance Methods
 
 ### def **(rhs) -> Numeric
-#@todo
+#%todo
 
 self のべき乗を返します。 Rational になるようであれば Rational で返します。
 
@@ -100,7 +100,7 @@ self のべき乗を返します。 Rational になるようであれば Rationa
 ## Module Functions
 
 ### module_function def sqrt(a) -> Numeric
-#@todo
+#%todo
 
 a の正の平方根を返します。
 a が Complex の時は、Complex を返します。
@@ -108,7 +108,7 @@ a が負の時は、a を正にして、その平方根を Complex の虚数部�
 それ以外は、Math.rsqrt の結果を返します。
 
 ### module_function def rsqrt(a) -> Numeric
-#@todo
+#%todo
 
 複素数を考慮しないので、負の数や Complex をあたえないでください。
 

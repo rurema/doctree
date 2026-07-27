@@ -4,7 +4,7 @@ category: CommandLine
 ---
 コマンドラインのオプションを取り扱うためのライブラリです。
 
-#@include(optparse/optparse-tut)
+#%include(optparse/optparse-tut)
 
 # class OptionParser::ParseError < StandardError
 

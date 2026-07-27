@@ -60,7 +60,7 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `ArgumentError` -- 正しくない日時
 
-#@# exp
+#%# exp
 ### def httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> DateTime
 
 [RFC:2616] で定められた書式の日付を解析し、
@@ -71,7 +71,7 @@ yesterday = DateTime.now - 1
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@# exp
+#%# exp
 ### def iso8601(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 
 いくつかの代表的な ISO 8601 書式の日付を解析し、
@@ -98,7 +98,7 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `ArgumentError` -- 正しくない日時
 
-#@# exp
+#%# exp
 ### def jisx0301(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 
 いくつかの代表的な JIS X 0301 書式の日付を解析し、
@@ -130,7 +130,7 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `ArgumentError` -- 正しくない日時
 
-#@# exp
+#%# exp
 ### def rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
 ### def rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
 
@@ -142,7 +142,7 @@ yesterday = DateTime.now - 1
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@# exp
+#%# exp
 ### def rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 
 [RFC:3339] 書式の日付を解析し、
@@ -161,7 +161,7 @@ yesterday = DateTime.now - 1
 
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@# exp
+#%# exp
 ### def xmlschema(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 
 XML Schema による書式の日付を解析し、
@@ -237,7 +237,7 @@ p DateTime.strptime('2001-02-03T12:13:14Z').to_s
 
 ### def iso8601(n = 0) -> String
 ### def rfc3339(n = 0) -> String
-#@# exp
+#%# exp
 ### def xmlschema(n = 0) -> String
 
 ISO 8601 書式の文字列を返します (XML Schema の dateTime 相当)。
@@ -311,7 +311,7 @@ self を返します。
 ### def to_time -> Time
 
 対応する [c:Time] オブジェクトを返します。
-#@since 3.2
+#%since 3.2
 ### def deconstruct_keys(array_of_names_or_nil) -> Hash
 
 パターンマッチに使用する名前と値の [c:Hash] を返します。
@@ -356,4 +356,4 @@ end
 ```
 
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
-#@end
+#%end

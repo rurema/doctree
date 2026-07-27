@@ -11,7 +11,7 @@ library: _builtin
 
 オブジェクト ID([m:BasicObject#__id__])からオブジェクトを得ます。
 
-#@since 4.0
+#%since 4.0
 このメソッドは Ruby 4.0 から deprecated です。Warning[:deprecated] が真のとき
 「ObjectSpace._id2ref is deprecated」という警告を出力します。
 将来のバージョンでは削除される予定です。
@@ -26,7 +26,7 @@ map[a.object_id] = a
 p map[a.object_id] # => "hoge"
 ```
 
-#@end
+#%end
 
 - **param** `id` -- 取得したいオブジェクトの ID を整数で指定します。
 
@@ -189,7 +189,7 @@ puts "Total count: #{count}"
 す。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポー
 トしていない場合はキーワード引数を指定しても無視される可能性があります。
 
-#@#noexample 参照先の GC.start と同様の動作のため
+#%#noexample 参照先の GC.start と同様の動作のため
 
 - **SEE** [m:GC.start]
 

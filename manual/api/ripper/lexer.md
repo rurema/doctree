@@ -37,11 +37,11 @@ pp Ripper.lex("def m(a) nil end")
 #     [[1, 13], :on_kw, "end", END]]
 
 Ripper.lex("def req(true) end", raise_errors: true)
-#@since 3.4
+#%since 3.4
 # ~> SyntaxError: syntax error, unexpected 'true', expecting ')'
-#@else
+#%else
 # ~> SyntaxError: syntax error, unexpected `true', expecting ')'
-#@end
+#%end
 ```
 
 Ripper.lex は分割したトークンを詳しい情報とともに返します。
@@ -78,11 +78,11 @@ p Ripper.tokenize("def m(a) nil end")
 # => ["def", " ", "m", "(", "a", ")", " ", "nil", " ", "end"]
 
 Ripper.tokenize("def req(true) end", raise_errors: true)
-#@since 3.4
+#%since 3.4
 # ~> SyntaxError: syntax error, unexpected 'true', expecting ')'
-#@else
+#%else
 # ~> SyntaxError: syntax error, unexpected `true', expecting ')'
-#@end
+#%end
 ```
 
 Ripper.tokenize は空白やコメントも含め、

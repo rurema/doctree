@@ -253,9 +253,9 @@ p original_text.equal?(unfrozen_text) # => false
 - **SEE** [m:String#-@]
 
 ### def -@ -> String | self
-#@since 3.2
+#%since 3.2
 ### def dedup -> String | self
-#@end
+#%end
 
 self が freeze されている文字列の場合、self を返します。
 freeze されていない場合は元の文字列の freeze された (できる限り既存の) 複製を返します。
@@ -336,7 +336,7 @@ p "%d" % 10           # => "10"
 p "%d,%o" % [10, 10]  # => "10,12"
 ```
 
-#@include(printf-format)
+#%include(printf-format)
 
 ### def <=>(other) -> -1 | 0 | 1 | nil
 
@@ -442,11 +442,11 @@ str.concat("!", 33, 33)
 p str    # => "foo!!!"
 ```
 
-#@since 3.4
+#%since 3.4
 - **SEE** [m:String#append_as_bytes]
-#@end
+#%end
 
-#@since 3.4
+#%since 3.4
 ### def append_as_bytes(*objects) -> self
 
 引数で与えたオブジェクトをバイト列として、self に破壊的に連結します。
@@ -473,7 +473,7 @@ p t.append_as_bytes(0x3062) # => "ab"
 
 - **SEE** [m:String#<<], [m:String#concat]
 
-#@end
+#%end
 
 ### def =~(other) -> Integer | nil
 
@@ -1083,16 +1083,16 @@ str.clear
 p str   # => ""
 ```
 
-#@#--- clone
-#@#--- dup
-#@#
-#@#文字列と同じ内容を持つ新しい文字列を返します。
-#@#フリーズ [[m:Object#freeze]] した文字列の
-#@#clone はフリーズされた文字列を返しますが、
-#@#dup は内容の等しいフリーズされていない文字列を返します。
-#@#すなわち dup と [[m:String#new]] は等価です。
-#@#
-#@# [[m:Object#clone]],[[m:Object#dup]]を参照するべき
+#%#--- clone
+#%#--- dup
+#%#
+#%#文字列と同じ内容を持つ新しい文字列を返します。
+#%#フリーズ [[m:Object#freeze]] した文字列の
+#%#clone はフリーズされた文字列を返しますが、
+#%#dup は内容の等しいフリーズされていない文字列を返します。
+#%#すなわち dup と [[m:String#new]] は等価です。
+#%#
+#%# [[m:Object#clone]],[[m:Object#dup]]を参照するべき
 
 ### def count(*chars) -> Integer
 
@@ -1731,7 +1731,7 @@ p "foobarfoobar".index("bar", -6)       # => 9
 ```
 
 - **SEE** [m:String#rindex]
-#@since 3.2
+#%since 3.2
 - **SEE** [m:String#byteindex]
 
 ### def byteindex(pattern, offset = 0) -> Integer | nil
@@ -1776,7 +1776,7 @@ p 'あいう'.byteindex('う', -3) # => 6
 ```
 
 - **SEE** [m:String#index], [m:String#byterindex]
-#@end
+#%end
 ### def insert(pos, other) -> self
 
 文字列 other を self に挿入して self を返します。
@@ -2116,7 +2116,7 @@ p "foobarfoobar".rindex("bar", -6)      # => 3
 ```
 
 - **SEE** [m:String#index]
-#@since 3.2
+#%since 3.2
 ### def byterindex(pattern, offset = self.bytesize) -> Integer | nil
 
 文字列のバイト単位のインデックス offset から左に向かって pattern を探索します。
@@ -2185,7 +2185,7 @@ p 'foo'.byterindex('o', -4) # => nil
 ```
 
 - **SEE** [m:String#rindex], [m:String#byteindex]
-#@end
+#%end
 ### def scan(pattern) -> [String] | [[String]]
 
 self に対して pattern を繰り返しマッチし、
@@ -2418,16 +2418,16 @@ p str.squeeze! # => nil
 p str        # =>"123456789"
 ```
 
-#@since 4.0
+#%since 4.0
 ### def strip(*selectors) -> String
-#@else
+#%else
 ### def strip -> String
-#@end
+#%end
 
 文字列先頭と末尾の空白文字を全て取り除いた文字列を生成して返します。
 空白文字の定義は " \t\r\n\f\v\0" です。
 
-#@since 4.0
+#%since 4.0
 selectors を与えた場合、空白文字として selectors で指定された文字を取り除きます。
 
 selectors の形式は [man:tr(1)] と同じです。
@@ -2444,7 +2444,7 @@ selectors の形式は [man:tr(1)] と同じです。
 すべての引数にマッチした文字だけを数えます。
 
 - **param** `selectors` --    取り除く文字。
-#@end
+#%end
 
 ```ruby title="例"
 p "  abc  \r\n".strip    #=> "abc"
@@ -2458,7 +2458,7 @@ p str.strip              #=> "abc"
 p str                    #=> "\tabc\n" (元の文字列は変化しない)
 ```
 
-#@since 4.0
+#%since 4.0
 
 ```ruby title="取り除く文字を指定"
 p "---abc+++".strip("-+") # => "abc"
@@ -2470,15 +2470,15 @@ p "---abc+++".strip("+-") # => "abc"
 "01234abc56789".strip("0-9", "^4-6") # "4abc56"
 ```
 
-#@end
+#%end
 
 - **SEE** [m:String#lstrip], [m:String#rstrip]
 
-#@since 4.0
+#%since 4.0
 ### def strip!(*selectors) -> self | nil
-#@else
+#%else
 ### def strip! -> self | nil
-#@end
+#%end
 
 先頭と末尾の空白文字を全て破壊的に取り除きます。
 空白文字の定義は " \t\r\n\f\v\0" です。
@@ -2486,7 +2486,7 @@ p "---abc+++".strip("+-") # => "abc"
 strip! は、内容を変更した self を返します。
 ただし取り除く空白がなかったときは nil を返します。
 
-#@since 4.0
+#%since 4.0
 selectors を与えた場合、空白文字として selectors で指定された文字を取り除きます。
 
 selectors の形式は [man:tr(1)] と同じです。
@@ -2503,7 +2503,7 @@ selectors の形式は [man:tr(1)] と同じです。
 すべての引数にマッチした文字だけを数えます。
 
 - **param** `selectors` --    取り除く文字。
-#@end
+#%end
 
 ```ruby title="例"
 str = "  abc\r\n"
@@ -2519,7 +2519,7 @@ str.strip!
 p str            #=> "abc"
 ```
 
-#@since 4.0
+#%since 4.0
 
 ```ruby title="取り除く文字を指定"
 p "---abc+++".strip!("-+") # => "abc"
@@ -2531,20 +2531,20 @@ p "---abc+++".strip!("+-") # => "abc"
 "01234abc56789".strip!("0-9", "^4-6") # "4abc56"
 ```
 
-#@end
+#%end
 
 - **SEE** [m:String#strip], [m:String#lstrip]
 
-#@since 4.0
+#%since 4.0
 ### def lstrip(*selectors) -> String
-#@else
+#%else
 ### def lstrip -> String
-#@end
+#%end
 
 文字列の先頭にある空白文字を全て取り除いた新しい文字列を返します。
 空白文字の定義は " \t\r\n\f\v\0" です。
 
-#@since 4.0
+#%since 4.0
 selectors を与えた場合、空白文字として selectors で指定された文字を取り除きます。
 
 selectors の形式は [man:tr(1)] と同じです。
@@ -2561,7 +2561,7 @@ selectors の形式は [man:tr(1)] と同じです。
 すべての引数にマッチした文字だけを数えます。
 
 - **param** `selectors` --    取り除く文字。
-#@end
+#%end
 
 ```ruby title="例"
 p "  abc\n".lstrip     #=> "abc\n"
@@ -2569,7 +2569,7 @@ p "\t abc\n".lstrip    #=> "abc\n"
 p "abc\n".lstrip       #=> "abc\n"
 ```
 
-#@since 4.0
+#%since 4.0
 
 ```ruby title="取り除く文字を指定"
 p "---abc+++".lstrip("-") # => "abc+++"
@@ -2580,15 +2580,15 @@ p "---abc+++".lstrip("-") # => "abc+++"
 "01234abc56789".lstrip("0-9", "^4-6") # "4abc56789"
 ```
 
-#@end
+#%end
 
 - **SEE** [m:String#strip], [m:String#rstrip]
 
-#@since 4.0
+#%since 4.0
 ### def lstrip!(*selectors) -> self | nil
-#@else
+#%else
 ### def lstrip! -> self | nil
-#@end
+#%end
 
 文字列の先頭にある空白文字を全て破壊的に取り除きます。
 空白文字の定義は " \t\r\n\f\v\0" です。
@@ -2596,7 +2596,7 @@ p "---abc+++".lstrip("-") # => "abc+++"
 lstrip! は self を変更して返します。
 ただし取り除く空白がなかったときは nil を返します。
 
-#@since 4.0
+#%since 4.0
 selectors を与えた場合、空白文字として selectors で指定された文字を取り除きます。
 
 selectors の形式は [man:tr(1)] と同じです。
@@ -2613,7 +2613,7 @@ selectors の形式は [man:tr(1)] と同じです。
 すべての引数にマッチした文字だけを数えます。
 
 - **param** `selectors` --    取り除く文字。
-#@end
+#%end
 
 ```ruby title="例"
 str = "  abc"
@@ -2625,7 +2625,7 @@ p str.lstrip!   # => nil
 p str           # => "abc"
 ```
 
-#@since 4.0
+#%since 4.0
 
 ```ruby title="取り除く文字を指定"
 p "---abc+++".lstrip!("-+") # => "abc+++"
@@ -2636,18 +2636,18 @@ p "---abc+++".lstrip!("-+") # => "abc+++"
 "01234abc56789".lstrip!("0-9", "^4-6") # "4abc56789"
 ```
 
-#@end
+#%end
 
-#@since 4.0
+#%since 4.0
 ### def rstrip(*selectors) -> String
-#@else
+#%else
 ### def rstrip -> String
-#@end
+#%end
 
 文字列の末尾にある空白文字を全て取り除いた新しい文字列を返します。
 空白文字の定義は " \t\r\n\f\v\0" です。
 
-#@since 4.0
+#%since 4.0
 selectors を与えた場合、空白文字として selectors で指定された文字を取り除きます。
 
 selectors の形式は [man:tr(1)] と同じです。
@@ -2664,7 +2664,7 @@ selectors の形式は [man:tr(1)] と同じです。
 すべての引数にマッチした文字だけを数えます。
 
 - **param** `selectors` --    取り除く文字。
-#@end
+#%end
 
 ```ruby title="例"
 p "  abc\n".rstrip          #=> "  abc"
@@ -2677,7 +2677,7 @@ p str.rstrip    #=> "abc"
 p str           #=> "abc\n"  (元の文字列は変化しない)
 ```
 
-#@since 4.0
+#%since 4.0
 
 ```ruby title="取り除く文字を指定"
 p "---abc+++".rstrip("+") # => "---abc"
@@ -2688,20 +2688,20 @@ p "---abc+++".rstrip("+") # => "---abc"
 "01234abc56789".rstrip("0-9", "^4-6") # "01234abc56"
 ```
 
-#@end
+#%end
 
 - **SEE** [m:String#lstrip],[m:String#strip]
 
-#@since 4.0
+#%since 4.0
 ### def rstrip!(*selectors) -> self | nil
-#@else
+#%else
 ### def rstrip! -> self | nil
-#@end
+#%end
 
 文字列の末尾にある空白文字を全て破壊的に取り除きます。
 空白文字の定義は " \t\r\n\f\v\0" です。
 
-#@since 4.0
+#%since 4.0
 selectors を与えた場合、空白文字として selectors で指定された文字を取り除きます。
 
 selectors の形式は [man:tr(1)] と同じです。
@@ -2718,7 +2718,7 @@ selectors の形式は [man:tr(1)] と同じです。
 すべての引数にマッチした文字だけを数えます。
 
 - **param** `selectors` --    取り除く文字。
-#@end
+#%end
 
 ```ruby title="例"
 str = "  abc\n"
@@ -2730,7 +2730,7 @@ p str.rstrip!   # => "  abc"
 p str           # => "  abc"
 ```
 
-#@since 4.0
+#%since 4.0
 
 ```ruby title="取り除く文字を指定"
 p "---abc+++".rstrip!("+") # => "---abc"
@@ -2741,7 +2741,7 @@ p "---abc+++".rstrip!("+") # => "---abc"
 "01234abc56789".rstrip!("0-9", "^4-6") # "01234abc56"
 ```
 
-#@end
+#%end
 
 - **SEE** [m:String#rstrip], [m:String#lstrip]
 
@@ -2999,7 +2999,7 @@ p " \n10".to_f # => 10.0   # 先頭の空白・改行は無視される
 p "7xa.5".to_f # => 7.0
 ```
 
-#@since 3.4
+#%since 3.4
 "1." のように小数点以下を省略した表記も浮動小数点数として扱います。
 このため指数付きの表記では Ruby 3.3 以前と結果が変わることがあります
 (3.3 以前は "1." で解釈を打ち切っていましたが、3.4 以降は指数まで解釈します)。
@@ -3009,7 +3009,7 @@ p "1.".to_f     # => 1.0
 p "1.e2".to_f   # => 100.0  # Ruby 3.3 以前は 1.0
 ```
 
-#@end
+#%end
 
 以下の例は、先頭に浮動小数点数とみなせるものがないため、0.0 を返します。
 変換対象が空文字列のケースでも、0.0 を返します。
@@ -3278,7 +3278,7 @@ p str   # => "f"
 - **param** `template` --    pack テンプレート文字列
 - **return** --            オブジェクトの配列
 
-#@include(pack-template)
+#%include(pack-template)
 
 - **SEE** [m:String#unpack1], [m:Array#pack]
 
@@ -3838,9 +3838,9 @@ p "\u3042\u3044\u3046".byteslice(0, 3) # => "\u3042"
 ```
 
 - **SEE** [m:String#slice]
-#@since 3.2
+#%since 3.2
 - **SEE** [m:String#bytesplice]
-#@end
+#%end
 ### def byteslice(range)          -> String | nil
 
 range で指定したバイトの範囲に含まれる部分文字列を返します。引数が範囲
@@ -3857,24 +3857,24 @@ p "\x03\u3042\xff".byteslice(1..3) # => "\u3042"
 ```
 
 - **SEE** [m:String#slice]
-#@since 3.2
+#%since 3.2
 - **SEE** [m:String#bytesplice]
 
 ### def bytesplice(index, length, str) -> String
-#@since 3.3
+#%since 3.3
 ### def bytesplice(index, length, str, str_index, str_length) -> String
-#@end
+#%end
 ### def bytesplice(range, str)         -> String
-#@since 3.3
+#%since 3.3
 ### def bytesplice(range, str, str_range) -> String
-#@end
+#%end
 
 self の一部または全部を str で置き換えて self を返します。
 
-#@since 3.3
+#%since 3.3
 str_index と str_length もしくは str_range が与えられたとき、self の一部または全部を str.byteslice(str_index, str_length) もしくは str.byteslice(str_range) で置き換えます。
 ただし、str の部分文字列は新しい文字列オブジェクトとして生成されません。
-#@end
+#%end
 
 置き換え範囲の指定は、長さの指定が省略できないこと以外は
 [m:String#byteslice] と同じです。
@@ -3883,20 +3883,20 @@ str_index と str_length もしくは str_range が与えられたとき、self 
 
 - **param** `index` -- 置換したい文字列の範囲の始端
 - **param** `length` -- 置換したい文字列の範囲の長さ
-#@since 3.3
+#%since 3.3
 - **param** `str_index` -- str の範囲の始端
 - **param** `str_length` -- str の範囲の長さ
-#@end
+#%end
 - **param** `range` -- 置換したい文字列の範囲を示す Range オブジェクト
-#@since 3.3
+#%since 3.3
 - **param** `str_range` -- str の範囲を示す Range オブジェクト
-#@end
+#%end
 - **raise** `IndexError` -- index や length が範囲外の場合に発生
 - **raise** `RangeError` -- range が範囲外の場合に発生
 - **raise** `IndexError` -- 指定した始端や終端が文字列の境界と一致しない場合に発生
 
 - **SEE** [m:String#byteslice]
-#@end
+#%end
 ### def prepend(other_str) -> String
 
 文字列 other_str を先頭に破壊的に追加します。
@@ -4056,9 +4056,9 @@ p "\u00E0".unicode_normalized?(:nfd) # => false
 formatにしたがって文字列をデコードし、展開された1つ目の値を返します。
 unpackは配列を返しますがunpack1は配列の1つ目の要素のみを返します。
 
-#@since 3.3
+#%since 3.3
 未知のテンプレート文字を指定すると [c:ArgumentError] が発生します。
-#@end
+#%end
 
 ```ruby title="例"
 p "ABC".unpack1("C*") # => 65

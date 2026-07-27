@@ -207,11 +207,11 @@ p obj.protected_methods(true) - Object.protected_instance_methods(true)
 
 ```ruby
 p 1.public_method(:to_int) #=> #<Method: Integer#to_int>
-#@since 3.4
+#%since 3.4
 1.public_method(:p)      #   method 'p' for class 'Integer' is private (NameError)
-#@else
+#%else
 1.public_method(:p)      #   method `p' for class `Integer' is private (NameError)
-#@end
+#%end
 ```
 
 - **SEE** [m:Object#method],[m:Object#public_send],[m:Module#public_instance_method]
@@ -222,7 +222,7 @@ p 1.public_method(:to_int) #=> #<Method: Integer#to_int>
 
 - **param** `include_inherited` -- 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 
-#@#noexample 参照先の Object#methodsにサンプルが書かれているため
+#%#noexample 参照先の Object#methodsにサンプルが書かれているため
 
 - **SEE** [m:Module#public_instance_methods],[m:Object#methods],[m:Object#singleton_methods]
 
@@ -232,7 +232,7 @@ p 1.public_method(:to_int) #=> #<Method: Integer#to_int>
 
 - **param** `include_inherited` -- 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 
-#@#noexample 参照先の Object#methodsにサンプルが書かれているため
+#%#noexample 参照先の Object#methodsにサンプルが書かれているため
 
 - **SEE** [m:Module#private_instance_methods],[m:Object#methods],[m:Object#singleton_methods]
 
@@ -242,7 +242,7 @@ p 1.public_method(:to_int) #=> #<Method: Integer#to_int>
 
 - **param** `include_inherited` -- 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 
-#@#noexample 参照先の Object#methodsにサンプルが書かれているため
+#%#noexample 参照先の Object#methodsにサンプルが書かれているため
 
 - **SEE** [m:Module#protected_instance_methods],[m:Object#methods],[m:Object#singleton_methods]
 
@@ -516,7 +516,7 @@ p doing(&it) #=> "ok"
 - IOオブジェクトそのものとみなせるようなもの
 という厳しいものになっています。
 
-#@#例
+#%#例
 
 ### def to_regexp -> Regexp
 {: nomethod}
@@ -768,7 +768,7 @@ puts check("<Ruby's world>") #=> hit! <Ruby's world>
 
 - **SEE** [m:Object#==], [m:Range#===], [m:Module#===], [m:Regexp#===], [m:Enumerable#grep]
 
-#@until 3.2
+#%until 3.2
 ### def =~(other) -> nil
 
 右辺に正規表現オブジェクトを置いた正規表現マッチ obj =~ /RE/
@@ -790,7 +790,7 @@ p(obj =~ /re/) #=> nil
 ```
 
 - **SEE** [m:String#=~]
-#@end
+#%end
 ### def !~(other) -> bool
 
 自身が other とマッチしない事を判定します。
@@ -915,7 +915,7 @@ end
 p Bar.new.inspect                # => "#<Bar:0x0300c868 @bar=1>"
 ```
 
-#@since 4.0
+#%since 4.0
 inspect をオーバーライドしていない場合、
 instance_variables_to_inspect を定義することで、inspect の出力に含める
 インスタンス変数を制御できます。このメソッドは、表示したいインスタンス変数名を
@@ -935,7 +935,7 @@ end
 p Foo.new.inspect                # => "#<Foo:0x0300c868 @a=1, @b=2>"
 ```
 
-#@end
+#%end
 
 - **SEE** [m:Kernel?.p]
 
@@ -1207,7 +1207,7 @@ marshal_dump/marshal_load を使うべきです。
 
 - **return** --   返り値は無視されます。
 
-#@#noexample 参照先の Object#marshal_dump にサンプルが書かれているため
+#%#noexample 参照先の Object#marshal_dump にサンプルが書かれているため
 
 - **SEE** [m:Object#marshal_dump], [c:Marshal]
 
@@ -1215,11 +1215,11 @@ marshal_dump/marshal_load を使うべきです。
 
 オブジェクトの複製を作成して返します。
 
-#@since 3.2
+#%since 3.2
 clone は、オブジェクトの内容に加えて freeze の状態や特異メソッドなどの情報も含めた完全な複製を作成します。
-#@else
+#%else
 clone は、オブジェクトの内容や taint 情報に加えて freeze の状態や特異メソッドなどの情報も含めた完全な複製を作成します。
-#@end
+#%end
 
 clone や dup は浅い(shallow)コピーであることに注意してください。後述。
 
@@ -1232,18 +1232,18 @@ clone や dup は浅い(shallow)コピーであることに注意してくださ
 
 ```ruby
 obj = "string"
-#@until 3.2
+#%until 3.2
 obj.taint
-#@end
+#%end
 def obj.fuga
 end
 obj.freeze
 
 p(obj.equal?(obj))          #=> true
 p(obj == obj)               #=> true
-#@until 3.2
+#%until 3.2
 p(obj.tainted?)             #=> false
-#@end
+#%end
 p(obj.frozen?)              #=> true
 p(obj.respond_to?(:fuga))   #=> true
 
@@ -1251,9 +1251,9 @@ obj_c = obj.clone
 
 p(obj.equal?(obj_c))        #=> false
 p(obj == obj_c)             #=> true
-#@until 3.2
+#%until 3.2
 p(obj_c.tainted?)           #=> false
-#@end
+#%end
 p(obj_c.frozen?)            #=> true
 p(obj_c.respond_to?(:fuga)) #=> true
 ```
@@ -1295,29 +1295,29 @@ p obj_m #=> ["aPLUS", "bPLUS", "c"]
 
 オブジェクトの複製を作成して返します。
 
-#@since 3.2
+#%since 3.2
 dup は、オブジェクトの内容をコピーします。
-#@else
+#%else
 dup は、オブジェクトの内容と taint 情報をコピーします。
-#@end
+#%end
 [m:Object#clone] と異なり、freeze の状態や特異メソッドはコピーされません。
 
 浅いコピー・複製の詳細は [m:Object#clone] を参照してください。
 
 ```ruby
 obj = "string"
-#@until 3.2
+#%until 3.2
 obj.taint
-#@end
+#%end
 def obj.fuga
 end
 obj.freeze
 
 p(obj.equal?(obj))          #=> true
 p(obj == obj)               #=> true
-#@until 3.2
+#%until 3.2
 p(obj.tainted?)             #=> false
-#@end
+#%end
 p(obj.frozen?)              #=> true
 p(obj.respond_to?(:fuga))   #=> true
 
@@ -1325,9 +1325,9 @@ obj_d = obj.dup
 
 p(obj.equal?(obj_d))        #=> false
 p(obj == obj_d)             #=> true
-#@until 3.2
+#%until 3.2
 p(obj_d.tainted?)           #=> false
-#@end
+#%end
 p(obj_d.frozen?)            #=> false # clone と異なり freeze はコピーされない
 p(obj_d.respond_to?(:fuga)) #=> false # 特異メソッドもコピーされない
 ```
@@ -1424,10 +1424,10 @@ p me.call #=> 365
 オブジェクトの特異メソッド name をオブジェクト化した [c:Method] オブ
 ジェクトを返します。
 
-#@since 3.4
+#%since 3.4
 特異クラスに include / prepend されたモジュールのインスタンスメソッド
 （例えば [m:Object#extend] で追加したモジュールのメソッド）も対象になります。
-#@end
+#%end
 
 - **param** `name` -- メソッド名を[c:Symbol] または[c:String]で指定します。
 - **raise** `NameError` -- 定義されていないメソッド名を引数として与えると発生します。
@@ -1451,7 +1451,7 @@ p m.call #=> "Hi, @iv = 99"
 m = k.singleton_method(:hello) # ~> NameError
 ```
 
-#@since 3.4
+#%since 3.4
 
 ```ruby title="例: extend で追加したモジュールのメソッド"
 o = Object.new
@@ -1459,7 +1459,7 @@ o.extend(Module.new { def a = 1 })
 p o.singleton_method(:a).call # => 1
 ```
 
-#@end
+#%end
 
 - **SEE** [m:Module#instance_method], [c:Method], [m:BasicObject#__send__], [m:Object#send], [m:Kernel?.eval], [m:Object#method]
 
@@ -1680,7 +1680,7 @@ p Kernel.class #=> Module
 
 - **SEE** [m:Class#superclass],[m:Object#kind_of?],[m:Object#instance_of?]
 
-#@until 3.2
+#%until 3.2
 ### def taint -> self
 
 何もせずに self を返します。
@@ -1710,7 +1710,7 @@ p Kernel.class #=> Module
 このメソッドは Ruby 2.1 から deprecated で、Ruby 3.2 で削除予定です。
 [m:Object#untaint] と同じ動作をします。
 
-#@#noexample deprecated
+#%#noexample deprecated
 
 - **SEE** [m:Object#untrusted?],[m:Object#untrust]
 
@@ -1719,7 +1719,7 @@ p Kernel.class #=> Module
 このメソッドは Ruby 2.1 から deprecated で、Ruby 3.2 で削除予定です。
 [m:Object#tainted?] と同じ動作をします。
 
-#@#noexample deprecated
+#%#noexample deprecated
 
 - **SEE** [m:Object#trust],[m:Object#untrust]
 
@@ -1728,10 +1728,10 @@ p Kernel.class #=> Module
 このメソッドは Ruby 2.1 から deprecated で、Ruby 3.2 で削除予定です。
 [m:Object#taint] と同じ動作をします。
 
-#@#noexample deprecated
+#%#noexample deprecated
 
 - **SEE** [m:Object#trust],[m:Object#untrusted?]
-#@end
+#%end
 ### def singleton_class -> Class
 
 レシーバの特異クラスを返します。
@@ -1750,7 +1750,7 @@ p nil.singleton_class       #=> NilClass
 
 - **SEE** [m:Object#class]
 
-#@# https://bugs.ruby-lang.org/issues/6373 を参照。
+#%# https://bugs.ruby-lang.org/issues/6373 を参照。
 ### def itself -> object
 
 self を返します。
@@ -1835,11 +1835,11 @@ dup や clone は以下の手順でオブジェクトを複製します。
 
 obj.dup は、 obj.class のアロケータを呼び出して新しいオブジェクトを生成します。
 新たに生成したオブジェクトに対して
-#@since 3.2
+#%since 3.2
 obj のインスタンス変数、ファイナライザを
-#@else
+#%else
 obj の汚染状態、インスタンス変数、ファイナライザを
-#@end
+#%end
 コピーします。
 obj.clone は、さらに特異メソッドもコピーします。
 
@@ -1882,9 +1882,9 @@ end
 
 def check(obj)
   puts "instance variables: #{obj.inspect}"
-#@until 3.2
+#%until 3.2
   puts "tainted?: #{obj.tainted?}"
-#@end
+#%end
   print "singleton methods: "
   begin
     p obj.bar
@@ -1894,27 +1894,27 @@ def check(obj)
 end
 
 obj.foo = 1
-#@until 3.2
+#%until 3.2
 obj.taint
-#@end
+#%end
 
 check Object.new.send(:initialize_copy, obj)
         #=> instance variables: #<Object:0x4019c9d4>
-#@until 3.2
+#%until 3.2
         #   tainted?: false
-#@end
+#%end
         #   singleton methods: #<NoMethodError: ...>
 check obj.dup
         #=> instance variables: #<Object:0x4019c9c0 @foo=1>
-#@until 3.2
+#%until 3.2
         #   tainted?: true
-#@end
+#%end
         #   singleton methods: #<NoMethodError: ...>
 check obj.clone
         #=> instance variables: #<Object:0x4019c880 @foo=1>
-#@until 3.2
+#%until 3.2
         #   tainted?: true
-#@end
+#%end
         #   singleton methods: :bar
 ```
 
@@ -1989,4 +1989,4 @@ p s.respond_to?(:sample)  # => false
 
 - **SEE** [m:Object#respond_to?], [m:BasicObject#method_missing]
 
-#@include(constants)
+#%include(constants)

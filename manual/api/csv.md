@@ -4,8 +4,8 @@ category: FileFormat
 ---
 CSV (Comma Separated Values) を扱うライブラリです。
 
-#@# 説明を記述する
-#@# 単なる翻訳ではないものを書く
+#%# 説明を記述する
+#%# 単なる翻訳ではないものを書く
 
 このバージョンの CSV ライブラリは FasterCSV から始まりました。
 FasterCSV は Ruby1.8 に標準添付されている CSV ライブラリの置き換えとして開発されました。

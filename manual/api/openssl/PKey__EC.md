@@ -434,7 +434,7 @@ Point オブジェクトを生成します。
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- エラーが生じた場合に発生します
 
 ### def make_affine! -> self
-#@todo
+#%todo
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- エラーが生じた場合に発生します
 
 ### def invert! -> self

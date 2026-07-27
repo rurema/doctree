@@ -7,9 +7,9 @@ X.500の識別名(DN, Distinguished Name)を表わすクラス。
 
 eql? と hash が定義されているため、[c:Hash] のキーとして
 利用できます。
-#@# ITU-T が策定した X.500 というディレクトリサービスにおける
-#@# 一意識別子。 X.509 はこのディレクトリサービスと関連がある。
-#@# インターネットにおけるドメイン名のように、階層的な識別子である。
+#%# ITU-T が策定した X.500 というディレクトリサービスにおける
+#%# 一意識別子。 X.509 はこのディレクトリサービスと関連がある。
+#%# インターネットにおけるドメイン名のように、階層的な識別子である。
 ## Class Methods
 
 ### def parse(str, template=OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
@@ -186,8 +186,8 @@ template に指定されなかった属性はこの型であると仮定して�
 
 複数行でフォーマットされます。
 
-#@# internal use only
-#@# = module RFC2253DN
+#%# internal use only
+#%# = module RFC2253DN
 # class OpenSSL::X509::NameError < OpenSSL::OpenSSLError
 
 [c:OpenSSL::X509::Name] 固有のエラーの場合に発生する例外です。

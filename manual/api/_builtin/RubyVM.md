@@ -10,30 +10,30 @@ Ruby の 内部情報へのアクセス手段を提供するクラスです。
 
 ## Singleton Methods
 
-#@# :nodoc:
-#@# --- SDR
-#@#
-#@# VMDEBUG を有効にしてコンパイルした時のみ有効
-#@#
-#@# :nodoc:
-#@# --- NSDR
-#@#
-#@# VMDEBUG を有効にしてコンパイルした時のみ有効
-#@#
-#@# :nodoc:
-#@# --- USAGE_ANALYSIS_INSN_STOP
-#@#
-#@# VM_COLLECT_USAGE_DETAILS を有効にしてコンパイルした時のみ有効
-#@#
-#@# :nodoc:
-#@# --- USAGE_ANALYSIS_OPERAND_STOP
-#@#
-#@# VM_COLLECT_USAGE_DETAILS を有効にしてコンパイルした時のみ有効
-#@#
-#@# :nodoc:
-#@# --- USAGE_ANALYSIS_REGISTER_STOP
-#@#
-#@# VM_COLLECT_USAGE_DETAILS を有効にしてコンパイルした時のみ有効
+#%# :nodoc:
+#%# --- SDR
+#%#
+#%# VMDEBUG を有効にしてコンパイルした時のみ有効
+#%#
+#%# :nodoc:
+#%# --- NSDR
+#%#
+#%# VMDEBUG を有効にしてコンパイルした時のみ有効
+#%#
+#%# :nodoc:
+#%# --- USAGE_ANALYSIS_INSN_STOP
+#%#
+#%# VM_COLLECT_USAGE_DETAILS を有効にしてコンパイルした時のみ有効
+#%#
+#%# :nodoc:
+#%# --- USAGE_ANALYSIS_OPERAND_STOP
+#%#
+#%# VM_COLLECT_USAGE_DETAILS を有効にしてコンパイルした時のみ有効
+#%#
+#%# :nodoc:
+#%# --- USAGE_ANALYSIS_REGISTER_STOP
+#%#
+#%# VM_COLLECT_USAGE_DETAILS を有効にしてコンパイルした時のみ有効
 
 ## Constants
 
@@ -47,10 +47,10 @@ Ruby の 内部情報へのアクセス手段を提供するクラスです。
 
 - **SEE** [c:RubyVM::InstructionSequence]
 
-#@# :nodoc: に関連する定数のため、コメントアウト。
-#@# --- USAGE_ANALYSIS_INSN
-#@# --- USAGE_ANALYSIS_REGS
-#@# --- USAGE_ANALYSIS_INSN_BIGRAM
+#%# :nodoc: に関連する定数のため、コメントアウト。
+#%# --- USAGE_ANALYSIS_INSN
+#%# --- USAGE_ANALYSIS_REGS
+#%# --- USAGE_ANALYSIS_INSN_BIGRAM
 
 ### def DEFAULT_PARAMS -> {Symbol => Integer}
 

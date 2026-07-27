@@ -121,7 +121,7 @@ end
 
 [m:Array#*] と動作を合わせるために再定義しています。
 
-#@#noexample
+#%#noexample
 
 - **SEE** [m:Array#*]
 

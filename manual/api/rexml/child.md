@@ -129,4 +129,4 @@ p a.to_s # => "<a><d/><b/><c/></a>"
 属する document が存在しない場合は nil を返します。
 
 ### def bytes
-#@todo
+#%todo

@@ -194,12 +194,12 @@ ENV['SERVER_SOFTWARE'] を返します。
 ENV['HTTP_USER_AGENT'] を返します。
 
 ### def create_body(is_large) -> StringIO | Tempfile
-#@# nodoc
+#%# nodoc
 
 ### def files -> Hash
 
 アップロードされたファイルの名前とその内容を表すオブジェクトをペアとする要素を持つハッシュを返します。
 
 ### def unescape_filename? -> bool
-#@# nodoc
+#%# nodoc
 

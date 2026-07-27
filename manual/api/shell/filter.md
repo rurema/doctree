@@ -154,5 +154,5 @@ sh.transact {
 
 - **param** `filter` -- フィルターを指定します。
 
-#@include(builtincommands)
+#%include(builtincommands)
 

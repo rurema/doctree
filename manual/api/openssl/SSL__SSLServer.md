@@ -52,8 +52,8 @@ ctx には SSL サーバが用いる  [c:OpenSSL::SSL::SSLContext]
 - **param** `svr` -- 利用する [c:TCPServer] オブジェクト
 - **param** `ctx` -- SSL サーバとして用いる [c:OpenSSL::SSL::SSLContext] オブジェクト
 
-#@# ctx に session_id_context が設定されていない場合は $0 から
-#@# 設定する
+#%# ctx に session_id_context が設定されていない場合は $0 から
+#%# 設定する
 
 ## Instance Methods
 

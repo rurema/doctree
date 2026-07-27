@@ -6,10 +6,10 @@ library: win32/registry
 ## Instance Methods
 
 ### def code
-#@todo
+#%todo
 
 ## Constants
 
 ### const FormatMessageA
-#@todo
+#%todo
 

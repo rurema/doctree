@@ -160,8 +160,8 @@ ruby -run -e touch -- [OPTION] FILE
 
 - **SEE** [man:touch(1)]
 
-#@# 内部的に使用するだけ
-#@# --- setup(options = "", * long_options) -> ()
+#%# 内部的に使用するだけ
+#%# --- setup(options = "", * long_options) -> ()
 ### def wait_writable -> ()
 
 ファイルが書き込み可能になるまで待ちます。

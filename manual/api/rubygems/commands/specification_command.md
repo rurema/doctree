@@ -21,8 +21,8 @@ Usage: gem specification [GEMFILE] [options]
                                      the gem
 ```
 
-#@include(local_remote_options)
-#@include(common_options)
+#%include(local_remote_options)
+#%include(common_options)
 
 ```text
 Arguments:

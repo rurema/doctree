@@ -5,14 +5,14 @@ library: uri
 
 URI を扱うためのモジュールです。
 
-#@#== Class Variables
+#%#== Class Variables
 
-#@#--- @@schemes
+#%#--- @@schemes
 
-#@#    モジュール関数 parse によって生成可能なクラスを値とするハッシュ。
-#@#    キーはスキームを大文字だけで表した文字列。
-#@#    URI::Genericを継承する場合にこのハッシュにエントリを追加すると
-#@#    そのクラスが URI.parse によってサポートされます。
+#%#    モジュール関数 parse によって生成可能なクラスを値とするハッシュ。
+#%#    キーはスキームを大文字だけで表した文字列。
+#%#    URI::Genericを継承する場合にこのハッシュにエントリを追加すると
+#%#    そのクラスが URI.parse によってサポートされます。
 
 ## Singleton Methods
 
@@ -196,8 +196,8 @@ enc で指定したエンコーディングの文字列が URL エンコード�
 <https://www.w3.org/TR/html5/sec-forms.html#urlencoded-form-data>
 にもとづいて実装されています。
 
-#@# コンポーネントとは "X=Y&U=V&P=Q" という URL エンコード文字列における
-#@# X, Y, U, V, P, Q のこと
+#%# コンポーネントとは "X=Y&U=V&P=Q" という URL エンコード文字列における
+#%# X, Y, U, V, P, Q のこと
 
 ```ruby
 require 'uri'

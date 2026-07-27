@@ -1,4 +1,4 @@
 ---
 type: library
 ---
-#@include(2.0/types.rd)
+#%include(2.0/types.rd)

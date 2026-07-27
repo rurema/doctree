@@ -12,7 +12,7 @@ include:
 ### def new(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) {|reg| ... }
 ### def open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
 ### def open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) {|reg| ... }
-#@todo
+#%todo
 
 レジストリキー key 下のキー subkey を開き，
 開いたキーを表す Win32::Registry オブジェクトを返します。
@@ -28,7 +28,7 @@ desired はアクセスマスクです。opt はキーのオプションです�
 
 ### def create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
 ### def create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED) {|reg| ... }
-#@todo
+#%todo
 
 レジストリキー key 下にキー subkey を作成し，
 開いたキーを表す Win32::Registry オブジェクトを返します。
@@ -41,7 +41,7 @@ key は親のキーを Win32::Registry オブジェクトで指定します。
 ブロックが与えられると，キーは自動的に閉じられます。
 
 ### def expand_environ(str)
-#@todo
+#%todo
 
 str の %\w+% という並びを環境変数に置換します。
 REG_EXPAND_SZ で用いられます。
@@ -51,12 +51,12 @@ REG_EXPAND_SZ で用いられます。
 - ExpandEnvironmentStrings: <http://msdn.microsoft.com/library/en-us/sysinfo/base/expandenvironmentstrings.asp>
 
 ### def type2name(type)
-#@todo
+#%todo
 
 レジストリ値の型を整数から可読文字列に変換します。
 
 ### def wtime2time(wtime)
-#@todo
+#%todo
 
 64bit の FILETIME を Time オブジェクトに変換します。
 
@@ -65,7 +65,7 @@ REG_EXPAND_SZ で用いられます。
 - FILETIME Structure: <http://msdn.microsoft.com/library/en-us/sysinfo/base/filetime_str.asp>
 
 ### def time2wtime(time)
-#@todo
+#%todo
 
 Time オブジェクトまたは Integer オブジェクトを受け取り，
 64bit の FILETIME に変換します。
@@ -73,24 +73,24 @@ Time オブジェクトまたは Integer オブジェクトを受け取り，
 ## Instance Methods
 
 ### def open(subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
-#@todo
+#%todo
 
 [m:Win32::Registry.open](self, subkey, desired, opt) と同じです。
 
 ### def create(subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
-#@todo
+#%todo
 
 [m:Win32::Registry.create](self, subkey, desired, opt) と同じです。
 
 ### def close
-#@todo
+#%todo
 
 開かれているキーを閉じます。
 
 閉じられた後では，多くのメソッドは例外を発生します。
 
 ### def read(name, *rtype)
-#@todo
+#%todo
 
 レジストリ値 name を読み，[ type, data ]
 の配列で返します。
@@ -112,7 +112,7 @@ data はレジストリ値のデータで，クラスは以下の通りです:
 [c:TypeError] が発生します。
 
 ### def [](name, *rtype)
-#@todo
+#%todo
 
 レジストリ値 name を読み，その値を返します。クラスは
 [m:Win32::Registry#read] に準じます。
@@ -126,7 +126,7 @@ REG_DWORD_BIG_ENDIAN, REG_QWORD 以外だった場合は TypeError が発生し�
 ### def read_s(name)
 ### def read_i(name)
 ### def read_bin(name)
-#@todo
+#%todo
 
 型がそれぞれ REG_SZ(read_s), REG_DWORD(read_i), REG_BINARY(read_bin)
 であるレジストリ値 name を読み，その値を返します。
@@ -134,7 +134,7 @@ REG_DWORD_BIG_ENDIAN, REG_QWORD 以外だった場合は TypeError が発生し�
 型がマッチしなかった場合，TypeError が発生します。
 
 ### def read_s_expand(name)
-#@todo
+#%todo
 
 型が REG_SZ または REG_EXPAND_SZ であるレジストリ値 name を読み，
 その値を返します。
@@ -143,7 +143,7 @@ REG_DWORD_BIG_ENDIAN, REG_QWORD 以外だった場合は TypeError が発生し�
 REG_SZ または REG_EXPAND_SZ 以外だった場合，TypeError が発生します。
 
 ### def write(name, type, data)
-#@todo
+#%todo
 
 レジストリ値 name に型 type で data を書き込みます。
 name が nil の場合，(標準) レジストリ値に書き込みます。
@@ -153,7 +153,7 @@ data のクラスは [m:Win32::Registry#read]
 メソッドに準じていなければなりません。
 
 ### def [](name, wtype = nil)
-#@todo
+#%todo
 
 レジストリ値 name に value を書き込みます。
 
@@ -169,7 +169,7 @@ data のクラスは [m:Win32::Registry#read]
 ### def write_s(name, value)
 ### def write_i(name, value)
 ### def write_bin(name, value)
-#@todo
+#%todo
 
 レジストリ値 name に value を書き込みます。
 
@@ -178,12 +178,12 @@ REG_BINARY(write_bin) です。
 
 ### def each {|name, type, value| ... }
 ### def each_value {|name, type, value| ... }
-#@todo
+#%todo
 
 キーが持つレジストリ値を列挙します。
 
 ### def each_key {|subkey, wtime| ... }
-#@todo
+#%todo
 
 キーのサブキーを列挙します。
 
@@ -193,13 +193,13 @@ wtime は最終更新時刻を表す FILETIME (64-bit 整数) です。
 
 ### def delete(name)
 ### def delete_value(name)
-#@todo
+#%todo
 
 レジストリ値 name を削除します。
 (標準) レジストリ値を削除することはできません。
 
 ### def delete_key(name, recursive = false)
-#@todo
+#%todo
 
 サブキー name とそのキーが持つすべての値を削除します。
 
@@ -207,48 +207,48 @@ recursive が false の場合，そのサブキーはサブキーを持ってい
 true の場合，キーは再帰的に削除されます。
 
 ### def flush
-#@todo
+#%todo
 
 キーの全てのデータをレジストリファイルに書き込みます。
 
 ### def created?
-#@todo
+#%todo
 
 キーが新しく作成された場合，真を返します。
 (⇒[m:Win32::Registry.create])
 
 ### def opened?
-#@todo
+#%todo
 
 キーがまだ閉じられていない場合，真を返します。
 
 ### def parent
-#@todo
+#%todo
 
 親のキーを表す Win32::Registry オブジェクトを返します。
 定義済キーでは nil を返します。
 
 ### def keyname
-#@todo
+#%todo
 
 [m:Win32::Registry.open] または [m:Win32::Registry.create] に指定された
 subkey の値を返します。
 
 ### def disposition
-#@todo
+#%todo
 
 キーの disposition 値を返します。
 (REG_CREATED_NEW_KEY または REG_OPENED_EXISTING_KEY)
 
 ### def name
 ### def to_s
-#@todo
+#%todo
 
 キーのフルパスを 'HKEY_CURRENT_USER\SOFTWARE\foo\bar'
 のような形で返します。
 
 ### def info
-#@todo
+#%todo
 
 キー情報を以下の値の配列で返します:
   - num_keys
@@ -277,27 +277,27 @@ subkey の値を返します。
 ### def max_value_length
 ### def descriptor_length
 ### def wtime
-#@todo
+#%todo
 
 キー情報の個々の値を返します。
 
 ### def []=(name, rtype, value = nil)
-#@todo
+#%todo
 
 ### def _dump
-#@todo
+#%todo
 
 ### def hkey
-#@todo
+#%todo
 
 ### def inspect
-#@todo
+#%todo
 
 ### def keys
-#@todo
+#%todo
 
 ### def open?
-#@todo
+#%todo
 
 ## Constants
 
@@ -310,7 +310,7 @@ subkey の値を返します。
 ### const HKEY_PERFORMANCE_NLSTEXT -> Win32::Registry
 ### const HKEY_CURRENT_CONFIG      -> Win32::Registry
 ### const HKEY_DYN_DATA            -> Win32::Registry
-#@todo
+#%todo
 
 それぞれの定義済キーを表す Win32::Registry オブジェクトです。
 

@@ -33,7 +33,7 @@ Htdigest オブジェクトを生成します。
 ## Instance Methods
 
 ### def delete_passwd(realm, user)
-#@# -> discard
+#%# -> discard
 realm に属するユーザ user のパスワードを削除します。
 
 - **param** `realm` -- レルムを指定します。
@@ -61,11 +61,11 @@ realm に属するユーザ user のパスワードを削除します。
 - **param** `reload_db` -- 真を指定すると [m:WEBrick::HTTPAuth::Htdigest#reload] を呼んでから値を返します。
 
 ### def reload
-#@# -> discard
+#%# -> discard
 ファイルから再度読み込みます。
 
 ### def set_passwd(realm, user, pass)
-#@# -> discard
+#%# -> discard
 与えられた情報をもとに、パスワードをハッシュ化して保存します。
 
 - **param** `realm` -- レルムを指定します。

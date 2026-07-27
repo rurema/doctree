@@ -21,13 +21,13 @@ library: logger
 
 - **param** `msg` -- メッセージ。
 
-#@#noexample
+#%#noexample
 
 ### def datetime_format -> String
 
 ログの日時フォーマットを取得します。
 
-#@#noexample
+#%#noexample
 
 - **SEE** [m:Time#strftime]
 

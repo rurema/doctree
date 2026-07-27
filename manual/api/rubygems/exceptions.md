@@ -56,17 +56,17 @@ Gem が見つからなかった場合の例外です。
 サポートされていない操作を行った場合に使用する例外です。
 
 # class Gem::RemoteError < Gem::Exception
-#@# 現在使用されていない
+#%# 現在使用されていない
 
 リモートで問題が発生した場合に使用する例外です。
 
 # class Gem::RemoteInstallationCancelled < Gem::Exception
-#@# 現在使用されていない
+#%# 現在使用されていない
 
 ???
 
 # class Gem::RemoteInstallationSkipped < Gem::Exception
-#@# 現在使用されていない
+#%# 現在使用されていない
 
 ???
 

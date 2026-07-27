@@ -14,8 +14,8 @@ tar アーカイブ中のそれぞれのエントリを扱うためのクラス�
 
 自身から読み込んだバイト数を返します。
 
-#@#--- check_closed
-#@# nodoc
+#%#--- check_closed
+#%# nodoc
 
 ### def close -> true
 

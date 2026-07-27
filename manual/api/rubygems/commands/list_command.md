@@ -16,8 +16,8 @@ Usage: gem list [STRING] [options]
     -a, --all                        全ての Gem パッケージを表示します
 ```
 
-#@include(local_remote_options)
-#@include(common_options)
+#%include(local_remote_options)
+#%include(common_options)
 
 ```text
 Arguments:

@@ -14,7 +14,7 @@ gem コマンドを実行するためのクラスです。
 ## Public Instance Methods
 
 ### def run(args) -> ()
-#@todo
+#%todo
 
 与えられた引数を元にして gem のコマンドを実行します。
 

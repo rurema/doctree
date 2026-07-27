@@ -20,7 +20,7 @@ $HOME/.gemrc から読み込んだ引数を追加します。
 - **param** `args` -- 追加する引数を配列で指定します。
 
 ### def add_option(*opts){|value, options| ... }
-#@# -> discard
+#%# -> discard
 
 コマンドに対するコマンドラインオプションとハンドラを追加します。
 
@@ -98,7 +98,7 @@ long が short で始まる文字列である場合真を返します。そう�
 - **return** -- 一つ以上、指定した場合は最初の値を返します。一つも指定していない場合は nil を返します。
 
 ### def handle_options(args)
-#@# -> discard
+#%# -> discard
 与えられた引数のリストをパースして結果を記録します。
 
 - **param** `args` -- 引数のリストを指定します。
@@ -110,7 +110,7 @@ long が short で始まる文字列である場合真を返します。そう�
 - **param** `args` -- 引数リストを指定子明日。
 
 ### def invoke(*args)
-#@# -> discard
+#%# -> discard
 与えられた引数を使用してコマンドを呼び出します。
 
 - **param** `args` -- 引数のリストです。
@@ -182,14 +182,14 @@ Gem が見つからなかった場合、メッセージを表示するために�
 ## Singleton Methods
 
 ### def add_common_option(*args){|value, options| ... }
-#@# -> discard
+#%# -> discard
 
 全てのコマンドに共通するオプションを登録するためのメソッドです。
 
 - **param** `args` -- 追加するオプションの情報を指定します。
 
 ### def add_specific_extra_args(cmd, args)
-#@# -> discard
+#%# -> discard
 
 与えられたコマンドに対応する追加の引数を追加します。
 

@@ -123,9 +123,9 @@ IP のバージョンに依存しないプログラムを書くための標準�
 
 例:
 
-#@# Linuxではservnameにポート番号(0や21や"0"や"21"など)は
-#@# getaddrinfo: Servname not supported for ai_socktype (SocketError)に
-#@# なって使えないようです。
+#%# Linuxではservnameにポート番号(0や21や"0"や"21"など)は
+#%# getaddrinfo: Servname not supported for ai_socktype (SocketError)に
+#%# なって使えないようです。
 
 ```ruby
 require 'socket'
@@ -180,13 +180,13 @@ nil を指定することは Socket::AF_UNSPEC を指定すること
 
 要素が3つの場合でも、ホストにはアドレスを指定できますが、要素が4つ
 の場合には、最後の要素を名前解決しないことが保証されます。
-#@# 4つの
-#@# 場合の3番目の引数ってなんだか変なインタフェースですね。4番目の引数
-#@# が nil の場合は要素3つと同じ扱いになるんですね。どういうわけでこう
-#@# なってるのかがよくわかりません。ホスト指定は常に3番目の要素にして
-#@# [アドレスファミリー, サービス, ホスト, フラグ] として4番目の要素で
-#@# 名前解決うんぬんを指定するんじゃダメだったんでしょうかね？-あらい
-#@#2002-01-01
+#%# 4つの
+#%# 場合の3番目の引数ってなんだか変なインタフェースですね。4番目の引数
+#%# が nil の場合は要素3つと同じ扱いになるんですね。どういうわけでこう
+#%# なってるのかがよくわかりません。ホスト指定は常に3番目の要素にして
+#%# [アドレスファミリー, サービス, ホスト, フラグ] として4番目の要素で
+#%# 名前解決うんぬんを指定するんじゃダメだったんでしょうかね？-あらい
+#%#2002-01-01
 
 ### 引数flagsについて
 
@@ -376,7 +376,7 @@ p Socket.unpack_sockaddr_un(Socket.sockaddr_un("/tmp/.X11-unix/X0"))
 ### def getservbyport(port, protocol_name="tcp") -> String
 
 ポート番号に対応するサービスの正式名を返します。
-#@#rdoc の Obtains the port number for _port_. って変?
+#%#rdoc の Obtains the port number for _port_. って変?
 
 - **param** `port` -- ポート番号
 - **param** `protocol_name` -- "tcp" や "udp" などのプロトコル名
@@ -413,18 +413,18 @@ sockets でサーバソケットを受け取り、接続を待ち受け、
 
 ローカルの IP アドレスを配列で返します。
 
-#@if("4.0" <= version)
+#%if("4.0" <= version)
 ### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, open_timeout: nil, fast_fallback: true) -> Socket
 ### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, open_timeout: nil, fast_fallback: true) {|socket| ... } -> object
-#@end
-#@if("3.4" <= version and version < "4.0")
+#%end
+#%if("3.4" <= version and version < "4.0")
 ### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, fast_fallback: true) -> Socket
 ### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, fast_fallback: true) {|socket| ... } -> object
-#@end
-#@until 3.4
+#%end
+#%until 3.4
 ### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil) -> Socket
 ### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil) {|socket| ... } -> object
-#@end
+#%end
 TCP/IP で host:port に接続するソケットオブジェクトを作成します。
 
 local_host や local_port を指定した場合、ソケットをそこにバインドします。
@@ -438,12 +438,12 @@ local_host や local_port を指定した場合、ソケットをそこにバイ
 - **param** `local_port` -- 接続元のポート番号
 - **param** `connect_timeout` -- 接続確立のタイムアウトを秒数で指定します。
 - **param** `resolv_timeout` -- 名前解決のタイムアウトを秒数で指定します。
-#@if (version >= "4.0")
+#%if (version >= "4.0")
 - **param** `open_timeout` -- 名前解決から接続確立までのタイムアウトを秒数で指定します。
-#@end
-#@if (version >= "3.4")
+#%end
+#%if (version >= "3.4")
 - **param** `fast_fallback` -- Happy Eyeballs Version 2 ([RFC 8305](https://datatracker.ietf.org/doc/html/rfc8305)) を有効にします。
-#@end
+#%end
 - **return** -- ブロック付きで呼ばれた場合はブロックが返した値です。
         ブロックなしで呼ばれた場合はソケットオブジェクトを返します。
 
@@ -933,4 +933,4 @@ IPV6_V6ONLY オプションが使えない場合はこのメソッドは何も�
 
 ## Constants
 
-#@include(constants)
+#%include(constants)

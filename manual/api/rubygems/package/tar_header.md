@@ -88,7 +88,7 @@ tar のヘッダに含まれる uid を返します。
 tar のヘッダに含まれるユーザ名を返します。
 
 ### def update_checksum
-#@# -> discard
+#%# -> discard
 チェックサムを更新します。
 
 ### def version -> Integer

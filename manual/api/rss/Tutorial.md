@@ -1,4 +1,4 @@
-#@# Author: kou
+#%# Author: kou
 
 ### 注意
 
@@ -999,10 +999,10 @@ def print_items(items)
 end
 ```
 
-#@# ==== サンプル3 - 複数のRSSをブレンド
-#@#
-#@# TODO: sample/blend.rbを元にしたサンプルを書く。
+#%# ==== サンプル3 - 複数のRSSをブレンド
+#%#
+#%# TODO: sample/blend.rbを元にしたサンプルを書く。
 
-#@# ==== サンプル4 - フィードを変換する
-#@#
-#@# TODO: sample/convert.rbを元にしたサンプルを書く。
+#%# ==== サンプル4 - フィードを変換する
+#%#
+#%# TODO: sample/convert.rbを元にしたサンプルを書く。

@@ -20,4 +20,4 @@ end
 ```
 
 パスが定まらない場合は nil を返します。
-#@# irb 中で [[m:Kernel.#require_relative]] を実行した場合など。
+#%# irb 中で [[m:Kernel.#require_relative]] を実行した場合など。

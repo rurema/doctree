@@ -16,9 +16,9 @@ VM の命令シーケンスの一覧はRuby のソースコード中の insns.de
 
 - <https://github.com/ruby/ruby/blob/master/insns.def>
 
-#@# The instruction sequence results will almost certainly change as Ruby
-#@# changes, so example output in this documentation may be different from what
-#@# you see.
+#%# The instruction sequence results will almost certainly change as Ruby
+#%# changes, so example output in this documentation may be different from what
+#%# you see.
 
 ## Singleton Methods
 
@@ -79,7 +79,7 @@ p RubyVM::InstructionSequence.compile_file("/tmp/hello.rb")
 命令シーケンスのコンパイル時のデフォルトの最適化オプションを Hash で返
 します。
 
-#@if("3.4" <= version)
+#%if("3.4" <= version)
 
 ```ruby title="例"
 require "pp"
@@ -97,8 +97,8 @@ pp RubyVM::InstructionSequence.compile_option
 # frozen_string_literal: nil}
 ```
 
-#@end
-#@if("3.3" <= version and version < "3.4")
+#%end
+#%if("3.3" <= version and version < "3.4")
 
 ```ruby title="例"
 require "pp"
@@ -116,8 +116,8 @@ pp RubyVM::InstructionSequence.compile_option
 # :debug_level=>0}
 ```
 
-#@end
-#@if(version < "3.3")
+#%end
+#%if(version < "3.3")
 
 ```ruby title="例"
 require "pp"
@@ -136,7 +136,7 @@ pp RubyVM::InstructionSequence.compile_option
 # :debug_level=>0}
 ```
 
-#@end
+#%end
 
 - **SEE** [m:RubyVM::InstructionSequence.compile_option=]
 
@@ -158,9 +158,9 @@ options で指定します。
     * :operands_unification
     * :peephole_optimization
     * :specialized_instruction
-#@if(version < "3.3")
+#%if(version < "3.3")
     * :stack_caching
-#@end
+#%end
     * :tailcall_optimization
   ```
                :debug_level をキーに指定した場合は値を数値で指定します。

@@ -29,16 +29,16 @@ category の種類の警告を表示するかどうかのフラグを返しま�
 
     例: パターンマッチング
 
-#@since 3.3
+#%since 3.3
 - **`:performance`**:
   パフォーマンスに関する警告。
-#@end
+#%end
 
-#@since 3.4
+#%since 3.4
 - **`:strict_unused_block`**:
   ブロックを使わないメソッドに渡される無駄なブロックを、
   「別クラスの同名メソッドがブロックを使う」場合を含めて、常に警告します。
-#@end
+#%end
 
 ### def []=(category, flag)
 
@@ -76,7 +76,7 @@ warn("hoge", category: :deprecated)
 
 - **SEE** [m:Kernel?.warn], [m:Warning#warn]
 
-#@since 3.4
+#%since 3.4
 ### def categories -> Array
 
 警告カテゴリの一覧を返します。
@@ -85,7 +85,7 @@ warn("hoge", category: :deprecated)
 p Warning.categories # => [:deprecated, :experimental, :performance, :strict_unused_block]
 ```
 
-#@end
+#%end
 
 ## Public Instance Methods
 
@@ -99,7 +99,7 @@ p Warning.categories # => [:deprecated, :experimental, :performance, :strict_unu
 
 - **param** `category` -- 警告のカテゴリを指定します。サポートされている category については [m:Warning.\[\]] を参照してください。
 
-#@# TODO: messageに改行を渡さないとそのまま出力されるように見えるため、確認してから記載する。
-#@# Writes warning message msg to $stderr, followed by a newline if the message does not end in a newline.
+#%# TODO: messageに改行を渡さないとそのまま出力されるように見えるため、確認してから記載する。
+#%# Writes warning message msg to $stderr, followed by a newline if the message does not end in a newline.
 
 - **SEE** [m:Kernel?.warn], [m:Warning.warn]

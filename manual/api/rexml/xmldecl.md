@@ -106,8 +106,8 @@ XML宣言内の encoding の宣言を出力時に省略するならば真を返�
 
 self を複製します。
 
-#@# --- write(writer, indent = -1, transitive = false, ie_hack = false) -> ()
-#@# #@todo
+#%# --- write(writer, indent = -1, transitive = false, ie_hack = false) -> ()
+#%# #@todo
 
 ### def ==(other) -> bool
 
@@ -130,10 +130,10 @@ self と other が同じであるならば真を返します。
 
 シンボル :xmldecl を返します。
 
-#@# for internal use
-#@# #@since 1.8.1
-#@# --- old_enc=(enc)
-#@# #@todo
+#%# for internal use
+#%# #@since 1.8.1
+#%# --- old_enc=(enc)
+#%# #@todo
 
 ### def encoding -> String | nil
 
@@ -142,7 +142,7 @@ self と other が同じであるならば真を返します。
 エンコーディングが指定されていない(デフォルトの UTF-8 とみなされます)
 場合は nil を返します。
 
-#@# このメソッドは実際は REXML::Encoding にあります
+#%# このメソッドは実際は REXML::Encoding にあります
 
 ### def encoding=(enc)
 
@@ -176,8 +176,8 @@ enc に nil を渡すと XML 宣言では encoding が
 
 - **SEE** [m:REXML::XMLDecl#dowrite], [m:REXML::XMLDecl#nowrite]
 
-#@# --- inspect
-#@# #@todo
+#%# --- inspect
+#%# #@todo
 
 ## Constants
 
@@ -186,18 +186,18 @@ enc に nil を渡すと XML 宣言では encoding が
 [m:REXML::XMLDecl.new] や [m:REXML::XMLDecl.default] で
 の使われるデフォルトのXMLバージョン。
 
-#@# #@todo
-#@#
-#@# 以下の利用法は？
-#@# --- DEFAULT_ENCODING
-#@# #@todo
-#@#
-#@# --- DEFAULT_STANDALONE
-#@# #@todo
+#%# #@todo
+#%#
+#%# 以下の利用法は？
+#%# --- DEFAULT_ENCODING
+#%# #@todo
+#%#
+#%# --- DEFAULT_STANDALONE
+#%# #@todo
 
-#@# 以下2つは内部用
-#@# --- START
-#@# #@todo
-#@#
-#@# --- STOP
-#@# #@todo
+#%# 以下2つは内部用
+#%# --- START
+#%# #@todo
+#%#
+#%# --- STOP
+#%# #@todo

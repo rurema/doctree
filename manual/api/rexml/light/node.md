@@ -1,81 +1,81 @@
 # class REXML::Light::Node
-#@# DOMより軽量なのを目指したと思われる、がこのクラスのオブジェクトを
-#@# 出力する XML パーサが存在しないのであまり利用価値がないように思われる。
+#%# DOMより軽量なのを目指したと思われる、がこのクラスのオブジェクトを
+#%# 出力する XML パーサが存在しないのであまり利用価値がないように思われる。
 
 ## Class Methods
 
 ### def new(node = nil)
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def size
-#@todo
+#%todo
 
 ### def each {|x| ... }
-#@todo
+#%todo
 
 ### def name
-#@todo
+#%todo
 
 ### def name=(name_str, ns = nil)
-#@todo
+#%todo
 
 ### def parent=(node)
-#@todo
+#%todo
 
 ### def local_name
-#@todo
+#%todo
 
 ### def local_name=(name_str)
-#@todo
+#%todo
 
 ### def prefix(namespace = nil)
-#@todo
+#%todo
 
 ### def namespace(prefix = prefix())
-#@todo
+#%todo
 
 ### def namespace=(namespace)
-#@todo
+#%todo
 
 ### def [](reference, ns = nil)
-#@todo
+#%todo
 
 ### def =~(path)
-#@todo
+#%todo
 
 ### def []=(reference, ns, value = nil)
-#@todo
+#%todo
 
 ### def <<(element)
-#@todo
+#%todo
 
 ### def node_type
-#@todo
+#%todo
 
 ### def text=(foo)
-#@todo
+#%todo
 
 ### def root
-#@todo
+#%todo
 
 ### def has_name?
-#@todo
+#%todo
 
 ### def children
-#@todo
+#%todo
 
 ### def parent
-#@todo
+#%todo
 
 ### def to_s
-#@todo
+#%todo
 
 ## Constants
 
 ### const NAMESPLIT
-#@todo
+#%todo
 
 ### const PARENTS
-#@todo
+#%todo

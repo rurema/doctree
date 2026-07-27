@@ -8,16 +8,16 @@ library: rexml/document
 XML 文書から DOMオブジェクトを組み立てるパーサです。
 REXML::Document.new などから使われます。
 
-#@# == Class Methods
-#@#
-#@# --- new(source, build_context = REXML::Document.new)
-#@# #@todo
-#@#
-#@# == Instance Methods
-#@#
-#@# --- add_listener(listener)
-#@# #@todo
-#@#
-#@# --- parse
-#@# #@todo
-#@#
+#%# == Class Methods
+#%#
+#%# --- new(source, build_context = REXML::Document.new)
+#%# #@todo
+#%#
+#%# == Instance Methods
+#%#
+#%# --- add_listener(listener)
+#%# #@todo
+#%#
+#%# --- parse
+#%# #@todo
+#%#

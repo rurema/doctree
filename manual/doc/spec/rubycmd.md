@@ -4,8 +4,8 @@
   - [ref:shebang]
 
 Rubyインタプリタの起動は以下の書式のコマンドラインにより行います。
-#@#((-[[c:Win32ネイティブ版]] には、コマンドプロンプトを使用しない
-#@#rubyw.exe コマンドがあります-))
+#%#((-[[c:Win32ネイティブ版]] には、コマンドプロンプトを使用しない
+#%#rubyw.exe コマンドがあります-))
 
 ```console
 ruby [ option ...] [ -- ] [ programfile ] [ argument ...]
@@ -73,19 +73,19 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
 
   ```console
   % ruby --backtrace-limit=3 test.rb
-#@since 3.4
+#%since 3.4
   test.rb:1:in 'Object#f6': unhandled exception
     from test.rb:2:in 'Object#f5'
     from test.rb:3:in 'Object#f4'
     from test.rb:4:in 'Object#f3'
      ... 3 levels...
-#@else
+#%else
   test.rb:1:in `f6': unhandled exception
     from test.rb:2:in `f5'
     from test.rb:3:in `f4'
     from test.rb:4:in `f3'
      ... 3 levels...
-#@end
+#%end
   ```
 
 - **`-C directory`**:
@@ -182,17 +182,17 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
   指定した feature を有効にします。以下のいずれかを指定できます。
   ```text
       * gems            rubygems (無効にするのはデバッグ専用、default: enabled)
-#@since 3.1
+#%since 3.1
       * error_highlight error_highlight (default: enabled)
-#@end
+#%end
       * did_you_mean    did_you_mean (default: enabled)
       * rubyopt         RUBYOPT 環境変数 (default: enabled)
       * frozen-string-literal 全ての文字列リテラルをfreeze (default: disabled)
       * jit             JIT (default: disabled)
-#@since 3.1
+#%since 3.1
       * mjit            MJIT (default: disabled)
       * yjit            YJIT (default: disabled)
-#@end
+#%end
   ```
 
 - **`--disable`**:
@@ -365,14 +365,14 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
        * -W:no-deprecated : 非推奨な機能を使用した際に警告を出力しない(デフォルト)
        * -W:experimental : 実験的な機能を使用した際に警告を出力する(デフォルト)
        * -W:no-experimental : 実験的な機能を使用した際に警告を出力しない
-#@since 3.3
+#%since 3.3
        * -W:performance : パフォーマンスに関する警告を出力する
        * -W:no-performance : パフォーマンスに関する警告を出力しない(デフォルト)
-#@end
-#@since 3.4
+#%end
+#%since 3.4
        * -W:strict_unused_block : ブロックを使わないメソッドに渡される無駄なブロックを、別クラスの同名メソッドがブロックを使う場合を含めて常に警告する
        * -W:no-strict_unused_block : 上記の警告を出力しない(デフォルト)
-#@end
+#%end
   ```
     ここで設定された値は [m:Warning.\[\]] で参照できます。
 
@@ -396,7 +396,7 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
   る時の構文解析の過程を表示します。この表示は非常に冗長なので,
   コンパイラそのものをデバッグする人以外には必要ないと思います。
 
-#@since 3.1
+#%since 3.1
 #### JIT のオプション (実験的)
 
 - **`--jit`**:
@@ -468,8 +468,8 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
 - **`--yjit-greedy-versioning`**:
 
   貪欲なバージョニングモードを指定します。(デフォルト: disabled)
-#@end
-#@until 3.1
+#%end
+#%until 3.1
 #### JIT のオプション (実験的)
 
 - **`--jit`**:
@@ -507,7 +507,7 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
 - **`--jit-min-calls=num`**:
 
   JITが起動する呼び出し回数を指定します。(テスト用、デフォルト: 10000)
-#@end
+#%end
 
 ### インタプリタ行の解釈 {#shebang}
 

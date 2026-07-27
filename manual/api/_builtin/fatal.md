@@ -15,13 +15,13 @@ library: _builtin
 通常の手段では、
 Ruby プログラムからは fatal クラスにはアクセスできません。
 
-#@# 以下のようにすれば見えます
-#@#
-#@#    begin
-#@#      Thread.start { Thread.stop }
-#@#      Thread.stop
-#@#    rescue Exception
-#@#      Fatal = $!.class
-#@#    end
-#@#
-#@#    p Fatal    # => fatal
+#%# 以下のようにすれば見えます
+#%#
+#%#    begin
+#%#      Thread.start { Thread.stop }
+#%#      Thread.stop
+#%#    rescue Exception
+#%#      Fatal = $!.class
+#%#    end
+#%#
+#%#    p Fatal    # => fatal

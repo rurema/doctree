@@ -329,7 +329,7 @@ p Math.exp(-Float::INFINITY)  # => 0.0
 
 - **SEE** [man:exp(3)], [m:Math?.log]
 
-#@since 4.0
+#%since 4.0
 ### module_function def expm1(x) -> Float
 
 e の `x` 乗から 1 を引いた値、すなわち `exp(x) - 1` を返します（e は自然対数の底）。
@@ -362,7 +362,7 @@ p Math.expm1(Float::INFINITY)  # => Infinity
 ```
 
 - **SEE** [man:expm1(3)], [m:Math?.exp], [m:Math?.log1p]
-#@end
+#%end
 
 ### module_function def frexp(x) -> [Float, Integer]
 
@@ -442,7 +442,7 @@ p Math.log(12, 3)    # => 2.2618595071429146
 ### module_function def log2(x) -> Float
 
 2 を底とする `x` の対数（binary logarithm）を返します。
-#@# Returns the base 2 logarithm of numeric.
+#%# Returns the base 2 logarithm of numeric.
 
 - **param** `x` -- 正の実数
 
@@ -481,7 +481,7 @@ p Math.log10(10**100) # => 100.0
 
 - **SEE** [m:Math?.log], [m:Math?.log2]
 
-#@since 4.0
+#%since 4.0
 ### module_function def log1p(x) -> Float
 
 1 に `x` を足した値の自然対数、すなわち `log(x + 1)` を返します。
@@ -513,7 +513,7 @@ Math.log1p(-2.0) # ~> Math::DomainError
 ```
 
 - **SEE** [man:log1p(3)], [m:Math?.log], [m:Math?.expm1]
-#@end
+#%end
 
 ### module_function def sqrt(x) -> Float
 

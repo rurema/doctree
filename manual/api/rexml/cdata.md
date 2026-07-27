@@ -60,16 +60,16 @@ p doc.root[0].class # => REXML::CData
 p doc.root[0].value # => "foobar  baz"
 ```
 
-#@# --- write(output = $stdout, indent = -1, transitive = false, ie_hack = false)
-#@# #@todo
+#%# --- write(output = $stdout, indent = -1, transitive = false, ie_hack = false)
+#%# #@todo
 
-#@# == Constants
-#@#
-#@# --- START
-#@# #@todo
-#@#
-#@# --- STOP
-#@# #@todo
-#@#
-#@# --- ILLEGAL
-#@# #@todo
+#%# == Constants
+#%#
+#%# --- START
+#%# #@todo
+#%#
+#%# --- STOP
+#%# #@todo
+#%#
+#%# --- ILLEGAL
+#%# #@todo

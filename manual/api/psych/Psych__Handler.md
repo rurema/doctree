@@ -41,7 +41,7 @@ implicit にはドキュメントが implicit に始まっているかどうか�
 
 必要に応じてこのメソッドを override してください。
 
-#@# implicit というのは "---" がドキュメントの先頭にないこと
+#%# implicit というのは "---" がドキュメントの先頭にないこと
 
 - **param** `version` -- バージョン
 - **param** `tag_directives` -- tag directive の配列

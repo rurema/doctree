@@ -11,94 +11,94 @@ until: "2.7.0"
 ## Instance Methods
 
 ### def active? -> true
-#@todo
+#%todo
 
 ### def wait?   -> false
-#@todo
+#%todo
 
 # class Shell::AppendFile < Shell::AppendIO
 
 ## Singleton Methods
 
 ### def new(sh, filename)
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def input=(filter)
-#@todo
+#%todo
 
 # class Shell::AppendIO < Shell::BuiltInCommand
 
 ## Singleton Methods
 
 ### def new(sh, filename)
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def input=(filter)
-#@todo
+#%todo
 
 # class Shell::Cat < Shell::BuiltInCommand
 
 ## Singleton Methods
 
 ### def new(sh, *filenames)
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def each(rs = nil){|line| ... }
-#@todo
+#%todo
 
 # class Shell::Concat < Shell::BuiltInCommand
 
 ## Singleton Methods
 
 ### def new(sh, *jobs)
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def each(rs = nil){|job| ... }
-#@todo
+#%todo
 
 # class Shell::Echo < Shell::BuiltInCommand
 
 ## Singleton Methods
 
 ### def new(sh, *strings)
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def each(rs = nil){|str| ... }
-#@todo
+#%todo
 
 # class Shell::Glob < Shell::BuiltInCommand
 
 ## Singleton Methods
 
 ### def new(sh, pattern)
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def each(rs = nil){|file| ... }
-#@todo
+#%todo
 
 # class Shell::Tee < Shell::BuiltInCommand
 
 ## Singleton Methods
 
 ### def new(sh, filename)
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def each(rs = nil){|line| ... }
-#@todo
+#%todo
 
 # class Shell::Void < Shell::BuiltInCommand
 

@@ -37,8 +37,8 @@ irb_require)を使うように設定する機能を提供するサブライブ�
 load または require 時に irb のファイル読み込み機能(irb_load、
 irb_require)を使うかどうかを返します。
 
-#@# 以下、どれもそうなので省略。サブ irb までは反映されなかった。
-#@# use_loader の値は irb 全体に反映されます。
+#%# 以下、どれもそうなので省略。サブ irb までは反映されなかった。
+#%# use_loader の値は irb 全体に反映されます。
 
 - **SEE** [m:IRB::Context#use_loader=]
 
@@ -50,7 +50,7 @@ irb_require)を使うかどうかを設定します。
 .irbrc ファイル中で IRB.conf[:USE_LOADER] を設定する事でも同様の事が行
 えます。
 
-#@# use_loader の値は irb 全体に反映されます。
+#%# use_loader の値は irb 全体に反映されます。
 
 デフォルト値は false です。
 

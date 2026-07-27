@@ -60,13 +60,13 @@ end
 
 デフォルトでは
 
-#@since 3.4
+#%since 3.4
   - "#{sourcefile}:#{sourceline}:in '#{method}'"
     (メソッド内の場合)
-#@else
+#%else
   - "#{sourcefile}:#{sourceline}:in `#{method}`"
     (メソッド内の場合)
-#@end
+#%end
   - "#{sourcefile}:#{sourceline}"
     (トップレベルの場合)
 
@@ -83,11 +83,11 @@ rescue => e
   p e.backtrace
 end
 
-#@since 3.4
+#%since 3.4
 #=> ["filename.rb:2:in 'Object#methd'", "filename.rb:6"]
-#@else
+#%else
 #=> ["filename.rb:2:in `methd'", "filename.rb:6"]
-#@end
+#%end
 ```
 
 - **SEE** [m:Exception#backtrace_locations]
@@ -117,11 +117,11 @@ end
 
 e = get_exception { check_long_month(2) }
 p e.backtrace_locations
-#@since 3.4
+#%since 3.4
 # => ["test.rb:4:in 'check_long_month'", "test.rb:15:in 'block in <main>'", "test.rb:9:in 'get_exception'", "test.rb:15:in '<main>'"]
-#@else
+#%else
 # => ["test.rb:4:in `check_long_month'", "test.rb:15:in `block in <main>'", "test.rb:9:in `get_exception'", "test.rb:15:in `<main>'"]
-#@end
+#%end
 ```
 
 - **SEE** [m:Exception#backtrace]
@@ -144,11 +144,11 @@ end
 バックトレース情報に errinfo を設定し、設定されたバックトレース
 情報を返します。
 
-#@since 3.4
+#%since 3.4
 - **param** `errinfo` -- nil、[c:String]、[c:String] の配列、あるいは [c:Thread::Backtrace::Location] の配列のいずれかを指定します。
-#@else
+#%else
 - **param** `errinfo` -- nil、[c:String] あるいは [c:String] の配列のいずれかを指定します。
-#@end
+#%end
 
 ```ruby title="例"
 begin
@@ -158,11 +158,11 @@ begin
     raise "outer"
   end
 rescue
-#@since 3.4
+#%since 3.4
   p $!.backtrace # => ["/path/to/test.rb:5:in 'rescue in <main>'", "/path/to/test.rb:2:in '<main>'"]
-#@else
+#%else
   p $!.backtrace # => ["/path/to/test.rb:5:in `rescue in <main>'", "/path/to/test.rb:2:in `<main>'"]
-#@end
+#%end
   $!.set_backtrace(["dummy1", "dummy2"])
   p $!.backtrace # => ["dummy1", "dummy2"]
 end
@@ -219,17 +219,17 @@ p results[0] == results[1]    # => true
 p results[0] == results[2]    # => false
 ```
 
-#@#: rdoc でも表示していないため省略。
-#@#: #@since 2.0.0
-#@#: --- respond_to? -> bool
-#@#:
-#@#: nodoc
-#@#:
-#@#: --- respond_to_missing? -> bool
-#@#:
-#@#: nodoc
-#@#:
-#@#: #@end
+#%#: rdoc でも表示していないため省略。
+#%#: #@since 2.0.0
+#%#: --- respond_to? -> bool
+#%#:
+#%#: nodoc
+#%#:
+#%#: --- respond_to_missing? -> bool
+#%#:
+#%#: nodoc
+#%#:
+#%#: #@end
 
 ### def cause -> Exception | nil
 
@@ -270,23 +270,23 @@ end
 begin
   raise "test"
 rescue => e
-#@since 3.4
+#%since 3.4
   p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in '<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
-#@else
+#%else
   p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in `<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
-#@end
+#%end
   $stderr = $stdout
-#@since 3.4
+#%since 3.4
   p e.full_message   # => "test.rb:2:in '<main>': test (RuntimeError)\n"
-#@else
+#%else
   p e.full_message   # => "test.rb:2:in `<main>': test (RuntimeError)\n"
-#@end
+#%end
   $stderr = STDERR
-#@since 3.4
+#%since 3.4
   p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in '<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
-#@else
+#%else
   p e.full_message   # => "\e[1mTraceback \e[m(most recent call last):\ntest.rb:2:in `<main>': \e[1mtest (\e[4;1mRuntimeError\e[m\e[1m)\n\e[m"
-#@end
+#%end
 end
 ```
 

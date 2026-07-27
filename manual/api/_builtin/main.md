@@ -50,7 +50,7 @@ p public_methods(false) - basic_public_methods
 
 - **raise** `NameError` -- 存在しないメソッド名を指定した場合に発生します。
 
-#@#noexample Module#public を参照
+#%#noexample Module#public を参照
 
 - **SEE** [m:Module#public]
 
@@ -72,7 +72,7 @@ p public_methods(false) - basic_public_methods
 
 - **raise** `NameError` -- 存在しないメソッド名を指定した場合に発生します。
 
-#@#noexample 明示的に呼び出される機会がないため
+#%#noexample 明示的に呼び出される機会がないため
 
 - **SEE** [m:Module#private]
 
@@ -82,7 +82,7 @@ p public_methods(false) - basic_public_methods
 
 "main" を返します。
 
-#@#noexample
+#%#noexample
 
 ### def include(*modules) -> self
 
@@ -120,7 +120,7 @@ p hypot(3, 4)  # => 5.0
 - **raise** `TypeError` -- method に同じクラス、サブクラス以外のメソッドを指定し
                  た場合に発生します。
 
-#@#noexample Module#define_method を参照
+#%#noexample Module#define_method を参照
 
 - **SEE** [m:Module#define_method]
 

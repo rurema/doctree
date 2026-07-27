@@ -8,7 +8,7 @@ category: Math
 サブクラス、[c:Float], [c:Integer], [c:Complex], [c:Rational] など)
 が使えます。
 
-#@# [2002-04-02]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#%# [2002-04-02]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
 # class ExceptionForMatrix::ErrDimensionMismatch < StandardError
 

@@ -22,9 +22,9 @@ library: prime
 
 列挙状態を巻き戻します。
 
-#@# = class Prime::EratosthenesSieve < Object
-#@# internal use
+#%# = class Prime::EratosthenesSieve < Object
+#%# internal use
 
-#@# = class Prime::TrialDivision < Object
-#@# internal use
+#%# = class Prime::TrialDivision < Object
+#%# internal use
 

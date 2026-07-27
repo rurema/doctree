@@ -11,9 +11,9 @@ contentを設定する必要があります．
 
 ### def isPermaLink
 ### def isPermaLink=()
-#@todo
+#%todo
 
 ### def content
 ### def content=()
-#@todo
+#%todo
 

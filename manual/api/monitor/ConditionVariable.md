@@ -79,6 +79,6 @@ true を返します。timeout が与えられていて待ち時間が timeout �
 
 - **SEE** [m:MonitorMixin::ConditionVariable#wait]
 
-#@# = class MonitorMixin::ConditionVariable::Timeout < Exception
-#@# このクラスは内部でタイムアウトを実装するためのクラス
-#@# ユーザは利用してはならない
+#%# = class MonitorMixin::ConditionVariable::Timeout < Exception
+#%# このクラスは内部でタイムアウトを実装するためのクラス
+#%# ユーザは利用してはならない

@@ -98,11 +98,11 @@ ARGV.parse!
 p o                                #=> true
 ```
 
-#@since 3.3
+#%since 3.3
 ### def getopts(short_opt, *long_opt, symbolize_names: false)    -> Hash
-#@else
+#%else
 ### def getopts(short_opt, *long_opt)    -> Hash
-#@end
+#%end
 
 指定された short_opt や long_opt に応じて自身をパースし、結果を Hash として返します。
 
@@ -117,9 +117,9 @@ p o                                #=> true
                 オプションの引数のデフォルト値を ":" の直後に指定できます。
                 例えば、"bufsize:1024" となります。
 
-#@since 3.3
+#%since 3.3
 - **param** `symbolize_names` -- true を指定すると、戻り値の Hash はキーがシンボルになります。false を指定した場合、戻り値の Hash はキーが文字列になります。
-#@end
+#%end
 
 - **raise** `OptionParser::ParseError` -- 自身のパースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブク

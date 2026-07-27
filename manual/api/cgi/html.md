@@ -5,25 +5,25 @@ HTML を生成するためのメソッドを提供するモジュールを定義
 
 様々な DTD に対応しています。
 
-#@since 4.0
+#%since 4.0
 Ruby 4.0 から cgi ライブラリは default gems から削除されたため、
 このライブラリを利用するには cgi gem をインストールしてください。
 詳細は [lib:cgi] を参照してください。
-#@end
+#%end
 
 # module CGI::TagMaker
-#@#nodoc
+#%#nodoc
 
 ## Instance Methods
 
 ### def nn_element_def(element)
-#@todo
+#%todo
 
 ### def nOE_element_def(element, append = nil)
-#@todo
+#%todo
 
 ### def nO_element_def(element)
-#@todo
+#%todo
 
 # module CGI::HtmlExtension
 
@@ -684,45 +684,45 @@ textarea("name", 40, 5)
 ```
 
 # module CGI::Html3
-#@# nodoc
+#%# nodoc
 
 ## Instance Methods
 
 ### def doctype
-#@todo
+#%todo
 
 ### def element_init
-#@todo
+#%todo
 
 # module CGI::Html4
-#@# nodoc
+#%# nodoc
 
 ## Instance Methods
 
 ### def doctype
-#@todo
+#%todo
 
 ### def element_init
-#@todo
+#%todo
 
 # module CGI::Html4Fr
-#@# nodoc
+#%# nodoc
 
 ## Instance Methods
 
 ### def doctype
-#@todo
+#%todo
 
 ### def element_init
-#@todo
+#%todo
 
 # module CGI::Html4Tr
-#@# nodoc
+#%# nodoc
 
 ## Instance Methods
 
 ### def doctype
-#@todo
+#%todo
 
 ### def element_init
-#@todo
+#%todo

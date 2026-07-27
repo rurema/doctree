@@ -98,30 +98,30 @@ p decrypted_data
 さまざまな方式がありますが、2006年現在 aes256 (aes-256-cbc) 
 を用いるのが安心でしょう。
 
-#@# 参考: [[unknown:UNIXの部屋 検索結果: openssl|URL:http://x68000.q-e-d.net/~68user/unix/pickup?openssl]]
-#@#  require 'openssl'
-#@#  include OpenSSL::Cipher
-#@#
-#@#  # Triple DES
-#@#  c1 = Cipher.new("DES-EDE3-CBC")
-#@#  c2 = DES.new(:EDE3, "CBC")
-#@#  pass = "open sesame!"
-#@#  data = "Hello world!"
-#@#  c1.pkcs5_keyivgen(pass)
-#@#  s1 = c1.encrypt.update(data) + c1.final
-#@#  c2.pkcs5_keyivgen(pass)
-#@#  s2 = c2.decrypt.update(s1) + c2.final
-#@#  p(data == s2) #=> true
-#@#
-#@#  c1 = Cipher.new("AES256")
-#@#  c2 = Cipher.new("AES-256-CBC")
-#@#  pass = "open sesame!"
-#@#  data = "Hello world!"
-#@#  c1.pkcs5_keyivgen(pass)
-#@#  s1 = c1.encrypt.update(data) + c1.final
-#@#  c2.pkcs5_keyivgen(pass)
-#@#  s2 = c2.decrypt.update(s1) + c2.final
-#@#  p(data == s2) #=> true
+#%# 参考: [[unknown:UNIXの部屋 検索結果: openssl|URL:http://x68000.q-e-d.net/~68user/unix/pickup?openssl]]
+#%#  require 'openssl'
+#%#  include OpenSSL::Cipher
+#%#
+#%#  # Triple DES
+#%#  c1 = Cipher.new("DES-EDE3-CBC")
+#%#  c2 = DES.new(:EDE3, "CBC")
+#%#  pass = "open sesame!"
+#%#  data = "Hello world!"
+#%#  c1.pkcs5_keyivgen(pass)
+#%#  s1 = c1.encrypt.update(data) + c1.final
+#%#  c2.pkcs5_keyivgen(pass)
+#%#  s2 = c2.decrypt.update(s1) + c2.final
+#%#  p(data == s2) #=> true
+#%#
+#%#  c1 = Cipher.new("AES256")
+#%#  c2 = Cipher.new("AES-256-CBC")
+#%#  pass = "open sesame!"
+#%#  data = "Hello world!"
+#%#  c1.pkcs5_keyivgen(pass)
+#%#  s1 = c1.encrypt.update(data) + c1.final
+#%#  c2.pkcs5_keyivgen(pass)
+#%#  s2 = c2.decrypt.update(s1) + c2.final
+#%#  p(data == s2) #=> true
 
 - **param** `name` -- 暗号化方式の名前
 - **raise** `RuntimeError` -- 利用可能でない暗号化方式名を指定した場合に発生します

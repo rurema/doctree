@@ -16,8 +16,8 @@ Usage: gem search [STRING] [options]
     -a, --all                        Display all gem versions
 ```
 
-#@include(local_remote_options)
-#@include(common_options)
+#%include(local_remote_options)
+#%include(common_options)
 
 ```text
 Arguments:

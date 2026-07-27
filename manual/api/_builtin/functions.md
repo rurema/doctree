@@ -122,11 +122,11 @@ puts 'end' #実行されない
 #(標準エラー出力)
 #=> error1
 #   Traceback (most recent call last):
-#@since 3.4
+#%since 3.4
 #   sample.rb:11:in '<main>': RuntimeError (RuntimeError)
-#@else
+#%else
 #   sample.rb:11:in `<main>': RuntimeError (RuntimeError)
-#@end
+#%end
 ```
 
 - **SEE** [m:Kernel?.exit],[m:Kernel?.exit!]
@@ -662,12 +662,12 @@ Hash を options として渡すことで、この挙動を変更できます。
 - **raise** `ArgumentError` -- 第一引数が配列かつ要素数が 2 でない場合に発生します。
 - **raise** `Errno::EXXX` -- 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
 
-#@#例...
+#%#例...
 
-#@# コマンドの引数がない場合も含めて shell を経由せずにプログラムを実行させたい場合、
-#@# 以下のように exec を呼び出します。
-#@#
-#@#   exec [program, program], *args
+#%# コマンドの引数がない場合も含めて shell を経由せずにプログラムを実行させたい場合、
+#%# 以下のように exec を呼び出します。
+#%#
+#%#   exec [program, program], *args
 
 ```ruby title="例"
 # a.rb
@@ -775,13 +775,13 @@ file をオープンして、[c:IO]（[c:File]を含む）クラスのインス�
 ブロックの終了時や例外によりブロックを脱出するとき、
 ファイルをクローズします。ブロックを評価した結果を返します。
 
-#@since 4.0
+#%since 4.0
 `|` に続く文字列をコマンドとして起動してパイプラインを生成する機能
 ("|-" による Ruby の子プロセス生成を含む)は Ruby 4.0 で削除されました。
 ファイル名 file が `|` で始まっていても、通常のファイル名として扱われます
 (該当するファイルが存在しなければ [c:Errno::ENOENT] が発生します)。
 コマンドを起動してその標準入出力をパイプで扱うには [m:IO.popen] を使用してください。
-#@else
+#%else
 ファイル名 file が `|` で始まる時には続く文字列をコマンドとして起動し、
 コマンドの標準入出力に対してパイプラインを生成します
 
@@ -791,11 +791,11 @@ file をオープンして、[c:IO]（[c:File]を含む）クラスのインス�
 [m:File.open] にはパイプラインを生成する機能はありません)。
 
 Perlと異なりコマンドは常に `|` で始まります。
-#@since 3.3
+#%since 3.3
 なお、`|` で始まる file によるコマンド起動は Ruby 3.3 から deprecated であり、
 Ruby 4.0 で削除されました。コマンドの起動には [m:IO.popen] を使用してください。
-#@end
-#@end
+#%end
+#%end
 
 - **param** `file` -- ファイルを文字列で指定します。整数を指定した場合はファイルディスクリプタとして扱います。
 - **param** `mode_enc` -- モード・エンコーディングを文字列か定数の論理和で指定します。後述。
@@ -803,7 +803,7 @@ Ruby 4.0 で削除されました。コマンドの起動には [m:IO.popen] を
   ファイルのパーミッションを整数で指定します。
 - **raise** `Errno::EXXX` -- ファイルのオープンに失敗した場合に発生します。
 
-#@#例...
+#%#例...
 
 - **SEE** [m:File.open],[m:IO.popen],[m:IO.open]
 
@@ -827,9 +827,9 @@ mode は以下の三つのうちのいずれかです。
     出力は 常に ファイルの末尾に追加されます。
     例えば、ファイルオープン中にファイルのサイズが小さ
     くなってもその末尾に出力されます。
-#@#    このことはログ出力な
-#@#    どでプログラムを実行したままそのログを小さくしたい場合
-#@#    に利用されます。
+#%#    このことはログ出力な
+#%#    どでプログラムを実行したままそのログを小さくしたい場合
+#%#    に利用されます。
 
 以上の3つの後に "+" があれば、ファイルは読み書き両用モード (RDWR)
 でオープンされます。
@@ -899,7 +899,7 @@ int_encも指定されていた場合、入力された文字列をext_encでエ
 - **param** `excepts` -- [m:IO.select] 参照
 - **param** `timeout` -- [m:IO.select] 参照
 
-#@#noexample IO.select を参照
+#%#noexample IO.select を参照
 
 - **SEE** [m:IO.select]
 
@@ -1127,11 +1127,11 @@ require 'some'
 p $a #=> 1
 p @a #=> 1
 p A #=> 1
-#@since 3.4
+#%since 3.4
 p a # undefined local variable or method 'a' for #<Object:0x294f9ec @a=1> (NameError)
-#@else
+#%else
 p a # undefined local variable or method `a' for #<Object:0x294f9ec @a=1> (NameError)
-#@end
+#%end
 ```
 
 ### module_function def autoload(const_name, feature) -> nil
@@ -1327,15 +1327,15 @@ end
 
 bar
 
-#@since 3.4
+#%since 3.4
 #=> ["-:2:in 'foo'", "-:10:in 'bar'", "-:13:in '<main>'"]
 #   ["-:10:in 'bar'", "-:13:in '<main>'"]
 #   ["-:13:in '<main>'"]
-#@else
+#%else
 #=> ["-:2:in `foo'", "-:10:in `bar'", "-:13:in `<main>'"]
 #   ["-:10:in `bar'", "-:13:in `<main>'"]
 #   ["-:13:in `<main>'"]
-#@end
+#%end
 #   []
 #   nil
 ```
@@ -1389,27 +1389,27 @@ end
 
 p caller_locations # => []
 test3(1, nil)
-#@since 3.4
+#%since 3.4
 # => ["/Users/user/test.rb:9:in 'Object#test2'", "/Users/user/test.rb:13:in 'Object#test3'", "/Users/user/test.rb:17:in '<main>'"]
-#@else
+#%else
 # => ["/Users/user/test.rb:9:in `test2'", "/Users/user/test.rb:13:in `test3'", "/Users/user/test.rb:17:in `<main>'"]
-#@end
+#%end
 # => [9, 13, 17]
 # => ["/Users/user/test.rb", "/Users/user/test.rb", "/Users/user/test.rb"]
 test3(1, 2)
-#@since 3.4
+#%since 3.4
 # => ["/Users/user/test.rb:9:in 'Object#test2'", "/Users/user/test.rb:13:in 'Object#test3'"]
-#@else
+#%else
 # => ["/Users/user/test.rb:9:in `test2'", "/Users/user/test.rb:13:in `test3'"]
-#@end
+#%end
 # => [9, 13]
 # => ["/Users/user/test.rb", "/Users/user/test.rb"]
 test3(2, 1)
-#@since 3.4
+#%since 3.4
 # => ["/Users/user/test.rb:13:in 'Object#test3'"]
-#@else
+#%else
 # => ["/Users/user/test.rb:13:in `test3'"]
-#@end
+#%end
 # => [13]
 # => ["/Users/user/test.rb"]
 ```
@@ -1547,7 +1547,7 @@ ch が文字列なら、その先頭1文字を出力します。
 - **raise** `TypeError` -- [c:Integer] に変換できないオブジェクトを引数に
                  指定した場合に発生します。
 
-#@#1.9でもいまのところ同じ結果
+#%#1.9でもいまのところ同じ結果
 
 ```ruby title="例"
 putc("ch")
@@ -1557,11 +1557,11 @@ putc(355)
 #=> cccc
 
 putc(99.00) #=> c
-#@since 3.4
+#%since 3.4
 putc(33333333333333333333333333333333333) # bignum too big to convert into 'long' (RangeError)
-#@else
+#%else
 putc(33333333333333333333333333333333333) # bignum too big to convert into `long' (RangeError)
-#@end
+#%end
 ```
 
 - **SEE** [m:IO#putc]
@@ -1582,7 +1582,7 @@ print arg[0].inspect, "\n", arg[1].inspect, "\n" #, ...
 p に引数を与えずに呼び出した場合は特に何もしません。
 
 - **param** `arg` -- 出力するオブジェクトを任意個指定します。
-#@#inspectが定義されているオブジェクトである必要があります（実質任意のオブジェクト）。
+#%#inspectが定義されているオブジェクトである必要があります（実質任意のオブジェクト）。
 - **raise** `IOError` -- 標準出力が書き込み用にオープンされていなければ発生します。
 - **raise** `Errno::EXXX` -- 出力に失敗した場合に発生します。
 - **return** -- 指定された引数 arg を返します。複数の引数が指定された場合はそれらを要素とする配列を返します。
@@ -1601,7 +1601,7 @@ p 50,"50"
 
 - **SEE** [m:Object#inspect],[m:Kernel?.puts],[m:Kernel?.print]
 
-#@include(functions_pp)
+#%include(functions_pp)
 ### module_function def print(*arg) -> nil
 
 引数を順に標準出力 [m:$stdout] に出力します。引数が与えられない時には変数
@@ -1616,7 +1616,7 @@ to_s メソッドにより文字列に変換してから出力します。
 い値がセットされている時には、最後にそれを出力します。
 
 - **param** `arg` -- 出力するオブジェクトを任意個指定します。
-#@#to_s が定義されているオブジェクトである必要があります（実質任意のオブジェクト）。
+#%#to_s が定義されているオブジェクトである必要があります（実質任意のオブジェクト）。
 - **raise** `IOError` -- 標準出力が書き込み用にオープンされていなければ発生します。
 - **raise** `Errno::EXXX` -- 出力に失敗した場合に発生します。
 
@@ -1750,9 +1750,9 @@ p Array("fefe") #=> ["fefe"]
 
 メソッド Float は文字列に対し [m:String#to_f] よりも厳密な変換を行います。
 
-#@since 3.4
+#%since 3.4
 Ruby 3.4 以降は "1." のように小数点以下を省略した表記も受け付けます。
-#@end
+#%end
 
 - **param** `arg` -- 変換対象のオブジェクトです。
 - **param** `exception` -- false を指定すると、変換できなかった場合、
@@ -1775,12 +1775,12 @@ p Float("10e2")       #=> 1000.0
 p Float("1e-2")       #=> 0.01
 p Float(".1")         #=> 0.1
 p Float("0xa")        #=> 10.0
-#@since 3.4
+#%since 3.4
 p Float("1.")         #=> 1.0
 p Float("1.e2")       #=> 100.0
-#@else
+#%else
 p Float("1.")         # invalid value for Float(): "1." (ArgumentError)
-#@end
+#%end
 
 p Float("nan")        # invalid value for Float(): "nan" (ArgumentError)
 p Float("INF")        # invalid value for Float(): "INF" (ArgumentError)
@@ -1797,9 +1797,9 @@ p Float("")           # invalid value for Float(): "" (ArgumentError)
 ### module_function def Integer(arg, base = 0, exception: true) -> Integer | nil
 
 引数を整数
-#@until 3.2
+#%until 3.2
 ([c:Fixnum],[c:Bignum])
-#@end
+#%end
 に変換した結果を返します。
 
 引数が数値の場合は直接変換し（小数点以下切り落とし）、
@@ -1841,15 +1841,15 @@ p Integer("0o10")     #=> 8
 p Integer("0x10")     #=> 16
 p Integer("0b10")     #=> 2
 p Integer(" \n10\t ") #=> 10 # 先頭と末尾の空白類は無視される
-#@since 3.4
+#%since 3.4
 p Integer("1\n0")     # 'Integer': invalid value for Integer: "1\n0" (ArgumentError)
 p Integer("hoge")     # 'Integer': invalid value for Integer: "hoge" (ArgumentError)
 p Integer("")         # 'Integer': invalid value for Integer: "" (ArgumentError)
-#@else
+#%else
 p Integer("1\n0")     # `Integer': invalid value for Integer: "1\n0" (ArgumentError)
 p Integer("hoge")     # `Integer': invalid value for Integer: "hoge" (ArgumentError)
 p Integer("")         # `Integer': invalid value for Integer: "" (ArgumentError)
-#@end
+#%end
 ```
 
 - **SEE** [m:String#hex],[m:String#oct],[m:String#to_i],[c:Integer]
@@ -2148,11 +2148,11 @@ seeds << srand
 p seeds #=> [455675, 2995620310703489221660585195204777696, 455675]
 ```
 
-#@since 3.2
+#%since 3.2
 - **SEE** [m:Kernel?.rand]
-#@else
+#%else
 - **SEE** [m:Kernel?.rand], [m:Random::DEFAULT]
-#@end
+#%end
 
 ### module_function def global_variables -> [Symbol]
 
@@ -2174,7 +2174,7 @@ yuyu = 0
 p local_variables #=> [:yuyu]
 ```
 
-#@since 4.0
+#%since 4.0
 番号指定パラメータ（_1 など）は 4.0 からローカル変数として扱われなくなり、
 返り値に含まれなくなりました。
 
@@ -2186,7 +2186,7 @@ end
 ```
 
 番号指定パラメータ自体は従来どおり参照できます（[ref:d:spec/call#numbered_parameters]）。
-#@end
+#%end
 
 - **SEE** [m:Kernel?.global_variables],[m:Object#instance_variables],[m:Module.constants],[m:Module#constants],[m:Module#class_variables]
 
@@ -2309,7 +2309,7 @@ command を登録します。[m:Signal?.trap]と同じです。
 - **param** `signal` -- [m:Signal?.trap] 参照
 - **param** `command` -- [m:Signal?.trap] 参照
 
-#@#noexample Signal.#trap を参照
+#%#noexample Signal.#trap を参照
 
 - **SEE** [m:Signal?.trap],[c:Signal]
 
@@ -2401,11 +2401,11 @@ $v = 'str'        # なにも出力されない
 begin
   open("nonexist")
 rescue
-#@since 3.4
+#%since 3.4
   raise   #=> 'open': No such file or directory - "nonexist" (Errno::ENOENT)
-#@else
+#%else
   raise   #=> `open': No such file or directory - "nonexist" (Errno::ENOENT)
-#@end
+#%end
 end
 ```
 
@@ -2420,10 +2420,10 @@ error_type として例外ではないクラスやオブジェクトを指定し
 - **param** `message` -- 例外のメッセージとなる文字列です。
 - **param** `backtrace` -- 例外発生時のスタックトレースで、[m:Kernel?.caller] の戻り値と同じ
   形式で指定しなければいけません。
-#@since 3.4
+#%since 3.4
   Ruby 3.4 からは、[m:Kernel?.caller_locations] の戻り値と同じ
   [c:Thread::Backtrace::Location] の配列も指定できます。
-#@end
+#%end
 - **param** `cause` -- 現在の例外([m:$!])の代わりに [m:Exception#cause] に設定する例外を指定します。
   [c:Exception] オブジェクトまたは nil を指定できます。
 - **raise** `TypeError` -- exception メソッドが例外オブジェクトを返さなかった場合に発生します。
@@ -2518,7 +2518,7 @@ format 文字列を C 言語の sprintf と同じように解釈し、
 - **param** `arg` -- フォーマットされる引数です。
 - **SEE** [m:Kernel?.printf],[m:Time#strftime],[m:Date.strptime]
 
-#@include(printf-format)
+#%include(printf-format)
 
 ### module_function def binding -> Binding
 
@@ -2576,7 +2576,7 @@ eval('raise RuntimeError', binding, 'XXX.rb', 4)
 
 - **SEE** [m:Kernel?.binding],[m:Module#module_eval],[m:BasicObject#instance_eval],[m:Object#method],[m:Object#send]
 
-#@#==== リフレクション
+#%#==== リフレクション
 
 ### module_function def proc { ... } -> Proc
 ### module_function def lambda { ... } -> Proc
@@ -2586,19 +2586,19 @@ eval('raise RuntimeError', binding, 'XXX.rb', 4)
 
 また、lambda に & 引数を渡すのは推奨されません。& 引数ではなくてブロック記法で記述する必要があります。
 
-#@since 3.3
+#%since 3.3
 & 引数(リテラルでないブロック)を渡して lambda を呼び出すと、[c:ArgumentError]
 「the lambda method requires a literal block」が発生します。
-#@else
+#%else
 & 引数を渡した lambda は Warning[:deprecated] = true のときに警告メッセージ
 「warning: lambda without a literal block is deprecated; use the proc without lambda instead」
 を出力します。
-#@end
+#%end
 
 - **raise** `ArgumentError` -- ブロックを省略した呼び出しを行ったときに発生します。
-#@since 3.3
+#%since 3.3
 - **raise** `ArgumentError` -- & 引数(リテラルでないブロック)を渡して呼び出したときに発生します。
-#@end
+#%end
 
 ```ruby title="例"
 def foo &block
@@ -2611,7 +2611,7 @@ p it.call #=> 12
 
 - **SEE** [c:Proc],[m:Proc.new]
 
-#@include(lambda_proc)
+#%include(lambda_proc)
 
 ### module_function def __method__ -> Symbol | nil
 

@@ -262,7 +262,7 @@ ENV.to_h {|name, value| [name, value.size] }
 
 環境変数を文字列化します。 Hash#to_s と同じように動作します。
 
-#@since 3.2
+#%since 3.2
 ### def merge!(*others) -> ENV
 ### def merge!(*others) {|key, self_val, other_val| ... } -> ENV
 ### def update(*others) -> ENV
@@ -277,7 +277,7 @@ self と others に同じキーがあった場合はブロック付きか否か�
 場合は常に others の値を使います。
 
 - **param** `others` -- マージ用のハッシュです。
-#@else
+#%else
 ### def update(other) -> ENV
 ### def update(other) {|key, self_val, other_val| ... } -> ENV
 ### def merge!(other) -> ENV
@@ -292,7 +292,7 @@ self と other に同じキーがあった場合はブロック付きか否か�
 場合は常に other の値を使います。
 
 - **param** `other` --  上書きするハッシュを指定します。
-#@end
+#%end
 ### def values -> [String]
 
 環境変数の全値の配列を返します。
@@ -380,13 +380,13 @@ p ENV.except("TERM","HOME") #=> {"LANG"=>"en_US.UTF-8"}
 
 - **SEE** [m:Hash#except], [m:ENV.slice]
 
-#@since 3.2
+#%since 3.2
 ### def clone(freeze: true) -> ()
 {: since=""}
-#@else
+#%else
 ### def clone(freeze: true) -> object
 {: since=""}
-#@end
+#%end
 
 ENV オブジェクトの複製を作成して返します。
 
@@ -403,7 +403,7 @@ ENV.replace(saved_env)
 ```
 
 - **SEE** [m:Object#clone]
-#@since 3.1
+#%since 3.1
 - **SEE** [m:ENV.dup]
 
 ### def dup -> ()
@@ -414,4 +414,4 @@ ENV.replace(saved_env)
 詳細は[m:ENV.clone]を参照してください。
 
 - **SEE** [m:ENV.clone]
-#@end
+#%end

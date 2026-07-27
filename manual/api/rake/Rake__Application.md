@@ -11,12 +11,12 @@ Rake で使用するメインのクラスです。
 
 ## Public Instance Methods
 
-#@# --- add_import(file_name)
-#@#
-#@# 与えられたファイルをロード予定ファイルのリストに追加します。
-#@#
-#@# @param file_name ロード予定のファイル名を指定します。
-#@# :nodoc:
+#%# --- add_import(file_name)
+#%#
+#%# 与えられたファイルをロード予定ファイルのリストに追加します。
+#%#
+#%# @param file_name ロード予定のファイル名を指定します。
+#%# :nodoc:
 
 ### def add_loader(ext, loader)
 
@@ -48,56 +48,56 @@ Rake.application.load_imports
 p Rake::Task.task_defined?("a") # => true
 ```
 
-#@# --- collect_command_line_tasks(argv) -> Array
-#@#
-#@# コマンドライン引数を解析して実行するタスクのリストを返します。
-#@#
-#@# 実行するタスクが指定されていない場合はデフォルトのタスクのみ返します。
-#@# また、このとき環境変数の解析も行います。
-#@# :nodoc:
+#%# --- collect_command_line_tasks(argv) -> Array
+#%#
+#%# コマンドライン引数を解析して実行するタスクのリストを返します。
+#%#
+#%# 実行するタスクが指定されていない場合はデフォルトのタスクのみ返します。
+#%# また、このとき環境変数の解析も行います。
+#%# :nodoc:
 
-#@# --- display_prerequisites
-#@#
-#@# タスクとそのタスクに依存しているタスクを表示します。
-#@# :nodoc:
+#%# --- display_prerequisites
+#%#
+#%# タスクとそのタスクに依存しているタスクを表示します。
+#%# :nodoc:
 
-#@# --- display_tasks_and_comments
-#@#
-#@# タスクとコメントを表示します。
-#@# :nodoc:
+#%# --- display_tasks_and_comments
+#%#
+#%# タスクとコメントを表示します。
+#%# :nodoc:
 
-#@# --- dynamic_width -> Integer
-#@#
-#@# ターミナルの幅を計算します。
-#@# :nodoc:
+#%# --- dynamic_width -> Integer
+#%#
+#%# ターミナルの幅を計算します。
+#%# :nodoc:
 
-#@# --- dynamic_width_stty
-#@#
-#@# [[man:stty(1)]] を用いてターミナルの幅を計算します。
-#@# :nodoc:
+#%# --- dynamic_width_stty
+#%#
+#%# [[man:stty(1)]] を用いてターミナルの幅を計算します。
+#%# :nodoc:
 
-#@# --- dynamic_width_tput
-#@#
-#@# [[man:tput(1)]] を用いてターミナルの幅を計算します。
-#@# :nodoc:
+#%# --- dynamic_width_tput
+#%#
+#%# [[man:tput(1)]] を用いてターミナルの幅を計算します。
+#%# :nodoc:
 
-#@# --- find_rakefile_location -> Array | nil
-#@#
-#@# Rakefile とそのファイルがあったディレクトリのペアを返します。
-#@# :nodoc:
+#%# --- find_rakefile_location -> Array | nil
+#%#
+#%# Rakefile とそのファイルがあったディレクトリのペアを返します。
+#%# :nodoc:
 
-#@# --- handle_options
-#@#
-#@# コマンドラインオプションを [[c:OptionParser]] に登録します。
-#@# :nodoc:
+#%# --- handle_options
+#%#
+#%# コマンドラインオプションを [[c:OptionParser]] に登録します。
+#%# :nodoc:
 
-#@# --- have_rakefile -> String | nil
-#@#
-#@# Rakefile がカレントディレクトリに存在する場合はそのファイル名を返します。
-#@# そうでない場合は nil を返します。
-#@#
-#@# @see [[m:Rake::Application::DEFAULT_RAKEFILES]]
-#@# :nodoc:
+#%# --- have_rakefile -> String | nil
+#%#
+#%# Rakefile がカレントディレクトリに存在する場合はそのファイル名を返します。
+#%# そうでない場合は nil を返します。
+#%#
+#%# @see [[m:Rake::Application::DEFAULT_RAKEFILES]]
+#%# :nodoc:
 
 ### def init(app_name = 'rake')
 
@@ -114,27 +114,27 @@ p Rake.application.init("MyApp") # => ["default"]
 p Rake.application.name # => "MyApp"
 ```
 
-#@# --- invoke_task(task_string)
-#@#
-#@# private?
-#@#
-#@# 与えられた文字列を解析してタスクを実行します。
-#@#
-#@# @param task_string タスク名とそれに与えるパラメータをあらわす文字列を指定します。
-#@# :nodoc:
+#%# --- invoke_task(task_string)
+#%#
+#%# private?
+#%#
+#%# 与えられた文字列を解析してタスクを実行します。
+#%#
+#%# @param task_string タスク名とそれに与えるパラメータをあらわす文字列を指定します。
+#%# :nodoc:
 
-#@# --- load_imports
-#@#
-#@# ロード予定のファイルを全てロードします。
-#@#
-#@# 既にロード済みのファイルはロードしません。
-#@# :nodoc:
+#%# --- load_imports
+#%#
+#%# ロード予定のファイルを全てロードします。
+#%#
+#%# 既にロード済みのファイルはロードしません。
+#%# :nodoc:
 
 ### def load_rakefile
 
 Rakefile を探してロードします。
 
-#@#noexample
+#%#noexample
 
 ### def name -> String
 
@@ -175,25 +175,25 @@ task :test_rake_app do
 end
 ```
 
-#@# --- parse_task_string(string) -> [String, Array]
-#@#
-#@# 与えられた文字列を解析して、タスク名とそれに与えるパラメータのペアを返します。
-#@#
-#@# @param string タスク名とそれに与えるパラメータのペアを返します。
-#@# :nodoc:
+#%# --- parse_task_string(string) -> [String, Array]
+#%#
+#%# 与えられた文字列を解析して、タスク名とそれに与えるパラメータのペアを返します。
+#%#
+#%# @param string タスク名とそれに与えるパラメータのペアを返します。
+#%# :nodoc:
 
-#@# --- rake_require(file_name, paths = $LOAD_PATH, loaded = $") -> bool
-#@#
-#@# [[m:Kernel#require]] に似ていますが、*.rb ファイルではなく *.rake ファイルを探索します。
-#@#
-#@# @param file_name ロードするファイル名を指定します。
-#@#
-#@# @param paths ロードパスを指定します。
-#@#
-#@# @param loaded ロード済みのファイルリストを指定します。
-#@#
-#@# @raise LoadError 指定されたファイルが見つからなかった場合に発生します。
-#@# :nodoc:
+#%# --- rake_require(file_name, paths = $LOAD_PATH, loaded = $") -> bool
+#%#
+#%# [[m:Kernel#require]] に似ていますが、*.rb ファイルではなく *.rake ファイルを探索します。
+#%#
+#%# @param file_name ロードするファイル名を指定します。
+#%#
+#%# @param paths ロードパスを指定します。
+#%#
+#%# @param loaded ロード済みのファイルリストを指定します。
+#%#
+#%# @raise LoadError 指定されたファイルが見つからなかった場合に発生します。
+#%# :nodoc:
 
 ### def rakefile -> String
 
@@ -208,17 +208,17 @@ task :test_rake_app do
 end
 ```
 
-#@# --- rakefile_location -> String
-#@#
-#@# Rakefile のパスを返します。
-#@# :nodoc:
+#%# --- rakefile_location -> String
+#%#
+#%# Rakefile のパスを返します。
+#%# :nodoc:
 
-#@# --- raw_load_rakefile
-#@#
-#@# Rakefile をロードします。
-#@#
-#@# @raise RuntimeError Rakefile が見つからなかった場合に発生します。
-#@# :nodoc:
+#%# --- raw_load_rakefile
+#%#
+#%# Rakefile をロードします。
+#%#
+#%# @raise RuntimeError Rakefile が見つからなかった場合に発生します。
+#%# :nodoc:
 
 ### def run
 
@@ -230,30 +230,30 @@ Rake アプリケーションを実行します。
 - タスクを定義します。[m:Rake::Application#load_rakefile]
 - コマンドラインで指定されたタスクを実行します。[m:Rake::Application#top_level]
 
-#@# --- standard_exception_handling{ ... }
-#@#
-#@# 与えられたブロックを評価する際に発生する標準的な例外を捕捉して
-#@# アプリケーションを終了させます。
-#@# :nodoc:
+#%# --- standard_exception_handling{ ... }
+#%#
+#%# 与えられたブロックを評価する際に発生する標準的な例外を捕捉して
+#%# アプリケーションを終了させます。
+#%# :nodoc:
 
-#@# --- standard_rake_options -> Array
-#@#
-#@# Rake コマンドで使用する標準的なコマンドラインオプションのリストを返します。
-#@# :nodoc:
+#%# --- standard_rake_options -> Array
+#%#
+#%# Rake コマンドで使用する標準的なコマンドラインオプションのリストを返します。
+#%# :nodoc:
 
-#@# --- system_dir -> String
-#@#
-#@# システム全体の Rakefile が格納されているディレクトリを返します。
-#@#
-#@# 環境変数 RAKE_SYSTEM で設定できます。
-#@# :nodoc:
+#%# --- system_dir -> String
+#%#
+#%# システム全体の Rakefile が格納されているディレクトリを返します。
+#%#
+#%# 環境変数 RAKE_SYSTEM で設定できます。
+#%# :nodoc:
 
-#@# --- terminal_width -> Integer
-#@#
-#@# ターミナルの幅を返します。
-#@#
-#@# 環境変数 RAKE_COLUMNS で指定することが出来ます。
-#@# :nodoc:
+#%# --- terminal_width -> Integer
+#%#
+#%# ターミナルの幅を返します。
+#%#
+#%# 環境変数 RAKE_COLUMNS で指定することが出来ます。
+#%# :nodoc:
 
 ### def top_level
 
@@ -288,13 +288,13 @@ task :test_rake_app do
 end
 ```
 
-#@# --- truncate(string, width) -> String
-#@#
-#@# 与えられた文字列を与えられた幅で切り詰めます。
-#@# :nodoc:
+#%# --- truncate(string, width) -> String
+#%#
+#%# 与えられた文字列を与えられた幅で切り詰めます。
+#%# :nodoc:
 
-#@# --- truncate_output?
-#@# :nodoc:
+#%# --- truncate_output?
+#%# :nodoc:
 
 ### def tty_output=(tty_output_state)
 
@@ -315,22 +315,22 @@ task :test_rake_app do
 end
 ```
 
-#@# --- tty_output? -> bool
-#@#
-#@# TTY に出力している場合は真を返します。そうでない場合は偽を返します。
-#@# :nodoc:
+#%# --- tty_output? -> bool
+#%#
+#%# TTY に出力している場合は真を返します。そうでない場合は偽を返します。
+#%# :nodoc:
 
-#@# --- unix? -> bool
-#@#
-#@# 現在のプラットフォームが UNIX 系である場合、真を返します。
-#@# そうでない場合は偽を返します。
-#@# :nodoc:
+#%# --- unix? -> bool
+#%#
+#%# 現在のプラットフォームが UNIX 系である場合、真を返します。
+#%# そうでない場合は偽を返します。
+#%# :nodoc:
 
-#@# --- windows? -> bool
-#@#
-#@# 現在のプラットフォームが Windows 系である場合、真を返します。
-#@# そうでない場合は偽を返します。
-#@# :nodoc:
+#%# --- windows? -> bool
+#%#
+#%# 現在のプラットフォームが Windows 系である場合、真を返します。
+#%# そうでない場合は偽を返します。
+#%# :nodoc:
 
 ## Constants
 

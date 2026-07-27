@@ -5,16 +5,16 @@ since: "2.0.0"
 # class ObjectSpace::WeakMap
 
 GC の対象になるオブジェクトへの weak reference を持つクラスです。
-#@since 4.0
+#%since 4.0
 [c:WeakRef] クラスの内部で使用されているほか、[m:ObjectSpace?._id2ref] が
 deprecated になった Ruby 4.0 以降では、オブジェクト ID からオブジェクトを
 引く用途([m:Object#object_id] をキーとしてオブジェクトを保持しておく方法)
 の代替としても案内されています。詳しくは [m:ObjectSpace?._id2ref] を参照
 してください。
-#@else
+#%else
 主に [c:WeakRef] クラスの内部で使用されるため、[lib:weakref] ライブラリ
 経由で使用してください。
-#@end
+#%end
 
 ## Public Instance Methods
 
@@ -55,7 +55,7 @@ weak_map[key] = "test" # => test
 p weak_map[key] # => test
 ```
 
-#@since 3.3
+#%since 3.3
 ### def delete(key) -> object | nil
 ### def delete(key) {|key| ... } -> object
 
@@ -82,7 +82,7 @@ p weak_map.delete("bar") { |k| "#{k} not found" } # => "bar not found"
 ```
 
 - **SEE** [m:ObjectSpace::WeakMap#\[\]=]
-#@end
+#%end
 
 ### def key?(key)     -> bool
 {: since="2.1.0"}

@@ -158,10 +158,10 @@ REXML::Parsers::StreamParser.new(xml, Listener.new).parse
 
 ## Instance Methods
 
-#@# #@since 1.8.2
-#@# --- add_listener(listener) -> ()
-#@#
-#@# #@end
+#%# #@since 1.8.2
+#%# --- add_listener(listener) -> ()
+#%#
+#%# #@end
 
 ### def parse -> ()
 

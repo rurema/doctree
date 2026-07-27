@@ -6,11 +6,11 @@ Ruby スクリプトで使われる記号の一覧です。
 
 - 正規表現のメタ文字
 - `Date#strftime` の書式指定で使う `%`，`-`，`.` とかの類
-#@since 4.0
+#%since 4.0
 - `Kernel?.format` の書式指定で使う `%`，`#`，`+`，`-` とかの類
-#@else
+#%else
 - `Kernel.#format` の書式指定で使う `%`，`#`，`+`，`-` とかの類
-#@end
+#%end
 - `String#unpack`，`Array#pack` のテンプレートで使う `!`，`<`，`>`
 - ファイルパスのデリミター
 - CSV，JSON，YAML，XML など特定のファイルフォーマットに使うもの
@@ -174,11 +174,11 @@ Ruby スクリプトで使われる記号の一覧です。
 
   ```ruby
   require 'set'
-#@since 4.0
+#%since 4.0
   p Set[1, 2] | Set[2, 3] # => Set[1, 2, 3]
-#@else
+#%else
   p Set[1, 2] | Set[2, 3] # => #<Set: {1, 2, 3}>
-#@end
+#%end
   ```
 
 - **`3 || 5`**:

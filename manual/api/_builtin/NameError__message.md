@@ -1,3 +1,3 @@
-#@# nodoc
-#@#
-#@# = class NameError::message < Data
+#%# nodoc
+#%#
+#%# = class NameError::message < Data

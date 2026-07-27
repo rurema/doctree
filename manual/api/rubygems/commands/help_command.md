@@ -9,7 +9,7 @@ Gem コマンドに関するヘルプを提供するためのライブラリで�
 Usage: gem help ARGUMENT [options]
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Arguments:

@@ -38,7 +38,7 @@ SSL/TLS セッションを表すクラスです。
 前に [m:OpenSSL::SSL::SSLSocket#session=] で再利用するセッションを
 設定してやることでセッションを再利用します。
 
-#@# ここにコード例を書く
+#%# ここにコード例を書く
 
 ### サーバ側のセッションキャッシュ
 
@@ -69,7 +69,7 @@ SSL/TLS ハンドシェイク終了時に [c:OpenSSL::SSL::SSLContext] 内の
 [m:OpenSSL::SSL::SSLContext#session_cache_mode=]に渡すことで
 変更できます。
 
-#@# ここにコード例を書く
+#%# ここにコード例を書く
 
 ## Class Methods
 ### def new(obj) -> OpenSSL::SSL::Session

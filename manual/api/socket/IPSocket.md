@@ -30,7 +30,7 @@ p IPSocket.getaddress("www.ruby-lang.org")        #=> "210.163.138.100"
 素が文字列 "AF_INET", "AF_INET6" など、第2要素が port 番号、第3要素がホストを表
 す文字列、第4要素がホストの IP アドレスを表す文字列 (octet
 decimal や hexadecimal) です。
-#@# 接続先の情報はaddrではなくpeeraddrです。注意。[[trap:Socket]]
+#%# 接続先の情報はaddrではなくpeeraddrです。注意。[[trap:Socket]]
 
 - **raise** `Errno::EXXX` -- [man:getsockname(2)] が 0 未満の値を返した場合に発生します。
 

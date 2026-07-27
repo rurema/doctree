@@ -7,9 +7,9 @@ library: openssl
   - [c:OpenSSL::SSL::SSLServer]
   - [c:OpenSSL::SSL::SSLSocket]
 
-#@# internal 
-#@# == Module functions
-#@# --- verify_certificate_identity(cert, hostname)
+#%# internal 
+#%# == Module functions
+#%# --- verify_certificate_identity(cert, hostname)
 
 ## Constants
 
@@ -65,7 +65,7 @@ Netscape の CA の DN のエンコーディングバグを
 [m:OpenSSL::SSL::SSLContext#options=] で利用します。
 
 ### const OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG -> Integer
-#@todo
+#%todo
 [m:OpenSSL::SSL::SSLContext#options=] で利用します。
 
 ### const OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION -> Integer
@@ -120,11 +120,11 @@ OpenSSL による通信の圧縮を禁止します。
 - **SEE** <https://bugs.ruby-lang.org/issues/5183>
 
 ### const OP_PKCS1_CHECK_1 -> Integer
-#@todo
+#%todo
 [m:OpenSSL::SSL::SSLContext#options=] で利用します。
 
 ### const OP_PKCS1_CHECK_2 -> Integer
-#@todo
+#%todo
 [m:OpenSSL::SSL::SSLContext#options=] で利用します。
 
 ### const OP_SINGLE_DH_USE -> Integer
@@ -139,7 +139,7 @@ OpenSSL による通信の圧縮を禁止します。
 [m:OpenSSL::SSL::SSLContext#options=] で利用します。
 
 ### const OP_SINGLE_ECDH_USE -> Integer
-#@todo
+#%todo
 [m:OpenSSL::SSL::SSLContext#options=] で利用します。
 
 ### const OP_TLS_ROLLBACK_BUG -> Integer
@@ -195,7 +195,7 @@ TLS/SSL ハンドシェイクを即座に終了させます。
 
 このフラグは単独で用いられるべきです。
 
-#@# クライアントモード: anonymous cipher を用いない場合にサーバーは証明書を送ってきます。TLS/SSL ハンドシェイクの結果は SSL_get_verify_result を使ってチェックできます。証明書の検証の結果によらずハンドシェイクは継続します。
+#%# クライアントモード: anonymous cipher を用いない場合にサーバーは証明書を送ってきます。TLS/SSL ハンドシェイクの結果は SSL_get_verify_result を使ってチェックできます。証明書の検証の結果によらずハンドシェイクは継続します。
 
 ### const VERIFY_PEER -> Integer
 
@@ -223,5 +223,5 @@ anonymous cipher が有効であるかどうかは
 
 [c:OpenSSL::SSL] 関連のエラーが生じたときに発生する例外です。
 
-#@# internal 
-#@# = class OpenSSL::SSL::Nonblock
+#%# internal 
+#%# = class OpenSSL::SSL::Nonblock

@@ -204,8 +204,8 @@ command を表示してから [m:IO.popen] の実行します。
 
 - **param** `src` -- C プログラムのソースコードを指定します。
 
-#@# --- try_link0(src[, opt])
-#@# nodoc
+#%# --- try_link0(src[, opt])
+#%# nodoc
 
 ### def have_devel? -> bool
 
@@ -264,7 +264,7 @@ command を表示してから [m:IO.popen] の実行します。
 
 ### def with_werror(opt, opts = nil){|opt| ... } -> object
 ### def with_werror(opt, opts = nil){|opt, opts| ... } -> object
-#@todo 内部用？
+#%todo 内部用？
 
 ???
 
@@ -302,7 +302,7 @@ target が times の全ての要素よりも新しい場合は target の更新�
 - **param** `times` -- [c:Time] の配列か [c:Time] を一つ指定します。
 
 ### def merge_libs(*libs) -> [String]
-#@todo 使われてない
+#%todo 使われてない
 
 - **param** `libs` -- ???
 
@@ -403,24 +403,24 @@ srcdir/lib のディレクトリ構造はそのまま dest 配下に反映され
 
 - **param** `srcdir` -- ソースディレクトリを指定します。
 
-#@# --- append_library(libs, lib)
-#@#  nodoc
-#@# 
-#@# ライブラリのリスト libs の先頭にライブラリ lib を追加し、
-#@# その結果を返します。
-#@# 
-#@# 引数 libs とこのメソッドの戻り値は
-#@# リンカに渡す引数形式の文字列です。
-#@# すなわち、UNIX 系 OS では
-#@# 
-#@#   "-lfoo -lbar"
-#@# 
-#@# であり、MS Windows などでは
-#@# 
-#@#   "foo.lib bar.lib"
-#@# 
-#@# です。
-#@# 第 2 引数 lib は、この例での "foo" や "bar" にあたります。
+#%# --- append_library(libs, lib)
+#%#  nodoc
+#%# 
+#%# ライブラリのリスト libs の先頭にライブラリ lib を追加し、
+#%# その結果を返します。
+#%# 
+#%# 引数 libs とこのメソッドの戻り値は
+#%# リンカに渡す引数形式の文字列です。
+#%# すなわち、UNIX 系 OS では
+#%# 
+#%#   "-lfoo -lbar"
+#%# 
+#%# であり、MS Windows などでは
+#%# 
+#%#   "foo.lib bar.lib"
+#%# 
+#%# です。
+#%# 第 2 引数 lib は、この例での "foo" や "bar" にあたります。
 
 ### def have_macro(macro, headers = nil, opt = "") -> bool
 ### def have_macro(macro, headers = nil, opt = ""){ ... } -> bool
@@ -824,7 +824,7 @@ xml2_dirs = dir_config('xml2', '/opt/local/include/libxml2', '/opt/local/lib')
 ```
 
 ### def create_makefile(target, srcprefix = nil) -> true
-#@todo
+#%todo
 
 [m:Kernel#have_library] などの各種検査の結果を元に、拡張ライブラリを
 ビルドするための Makefile を生成します。
@@ -913,46 +913,46 @@ create_makefile('foo') {|conf|
 
 - **return** -- 見つかった依存関係を Makefile 形式で返します。
 
-#@# --- init_mkmf(config = CONFIG, rbconfig = RbConfig::CONFIG)
-#@# nodoc
-#@# --- mkmf_failed(path
-#@# nodoc
-#@# --- pkg_config(pkg)
-#@# nodoc
-#@# --- with_destdir
-#@# nodoc
-#@# --- winsep
-#@# nodoc
-#@# --- mkintpath
-#@# nodoc
-#@# --- configuration(srcdir)
-#@# nodoc
-#@# --- scalar_ptr_type?(type, member = nil, headers = nil)
-#@# --- scalar_ptr_type?(type, member = nil, headers = nil){ ... }
-#@# nodoc
-#@# --- scalar_type?(type, member = nil, headers = nil)
-#@# --- scalar_type?(type, member = nil, headers = nil){ ... }
-#@# nodoc
-#@# --- have_typeof?
-#@# nodoc
-#@# --- what_type?(type, member = nil, headers = nil)
-#@# --- what_type?(type, member = nil, headers = nil){ ... }
-#@# nodoc
-#@# --- find_executable0(bin, path = nil)
-#@# nodoc
+#%# --- init_mkmf(config = CONFIG, rbconfig = RbConfig::CONFIG)
+#%# nodoc
+#%# --- mkmf_failed(path
+#%# nodoc
+#%# --- pkg_config(pkg)
+#%# nodoc
+#%# --- with_destdir
+#%# nodoc
+#%# --- winsep
+#%# nodoc
+#%# --- mkintpath
+#%# nodoc
+#%# --- configuration(srcdir)
+#%# nodoc
+#%# --- scalar_ptr_type?(type, member = nil, headers = nil)
+#%# --- scalar_ptr_type?(type, member = nil, headers = nil){ ... }
+#%# nodoc
+#%# --- scalar_type?(type, member = nil, headers = nil)
+#%# --- scalar_type?(type, member = nil, headers = nil){ ... }
+#%# nodoc
+#%# --- have_typeof?
+#%# nodoc
+#%# --- what_type?(type, member = nil, headers = nil)
+#%# --- what_type?(type, member = nil, headers = nil){ ... }
+#%# nodoc
+#%# --- find_executable0(bin, path = nil)
+#%# nodoc
 
-#@# --- checking_for(message, format = nil){ ... } -> object
-#@# 内部用
-#@# have_*, find_* 系メソッドの実行結果を標準出力に出力するためのメソッドです。
-#@# 
-#@# @param message メッセージを指定します。
-#@# 
-#@# @param format フォーマット文字列を指定します。
+#%# --- checking_for(message, format = nil){ ... } -> object
+#%# 内部用
+#%# have_*, find_* 系メソッドの実行結果を標準出力に出力するためのメソッドです。
+#%# 
+#%# @param message メッセージを指定します。
+#%# 
+#%# @param format フォーマット文字列を指定します。
 
-#@# #@since 1.8.6
-#@# --- checking_message(target, place = nil, opt = nil) -> String
-#@# 内部用
-#@# #@end
+#%# #@since 1.8.6
+#%# --- checking_message(target, place = nil, opt = nil) -> String
+#%# 内部用
+#%# #@end
 
 ### def try_run(src, opt = "") -> bool | nil
 ### def try_run(src, opt = ""){ ... } -> bool | nil
@@ -994,7 +994,7 @@ create_makefile('foo') {|conf|
 
 ### def try_static_assert(expr, headers = nil, opt = "") -> bool
 ### def try_static_assert(expr, headers = nil, opt = ""){ ... } -> bool
-#@todo ???
+#%todo ???
 
 ...
 
@@ -1081,25 +1081,25 @@ $VERBOSE が真のときは何もしません。
 
 - **SEE** [m:Kernel?.printf]
 
-#@# --- typedef_expr(type, headers)
-#@# nodoc
-#@# --- try_signedness(type, member, headers = nil, opts = nil)
-#@# --- try_signedness(type, member, headers = nil, opts = nil){ ... }
-#@# nodoc
+#%# --- typedef_expr(type, headers)
+#%# nodoc
+#%# --- try_signedness(type, member, headers = nil, opts = nil)
+#%# --- try_signedness(type, member, headers = nil, opts = nil){ ... }
+#%# nodoc
 
-#@# --- macro_defined?(macro, src, opt = "") -> bool
-#@# --- macro_defined?(macro, src, opt = ""){ ... } -> bool
-#@# internal use Only
-#@# --- config_string
-#@# nodoc
-#@# --- dir_re
-#@# nodoc
-#@# --- relative_from
-#@# nodoc
-#@# --- install_dirs
-#@# nodoc
-#@# --- map_dir
-#@# nodoc
+#%# --- macro_defined?(macro, src, opt = "") -> bool
+#%# --- macro_defined?(macro, src, opt = ""){ ... } -> bool
+#%# internal use Only
+#%# --- config_string
+#%# nodoc
+#%# --- dir_re
+#%# nodoc
+#%# --- relative_from
+#%# nodoc
+#%# --- install_dirs
+#%# nodoc
+#%# --- map_dir
+#%# nodoc
 
 ## Constants
 
@@ -1107,18 +1107,18 @@ $VERBOSE が真のときは何もしません。
 
 [m:RbConfig::MAKEFILE_CONFIG] と同じです。
 
-#@# --- INSTALL_DIRS
-#@# nodoc
-#@# --- OUTFLAG
-#@# nodoc
-#@# --- COUTFLAG
-#@# nodoc
-#@# --- CPPOUTFILE
-#@# nodoc
-#@# --- CONFTEST_C
-#@# nodoc
-#@# --- STRING_OR_FAILED_FORMAT
-#@# internal use only
+#%# --- INSTALL_DIRS
+#%# nodoc
+#%# --- OUTFLAG
+#%# nodoc
+#%# --- COUTFLAG
+#%# nodoc
+#%# --- CPPOUTFILE
+#%# nodoc
+#%# --- CONFTEST_C
+#%# nodoc
+#%# --- STRING_OR_FAILED_FORMAT
+#%# internal use only
 
 ## Special Variables
 
@@ -1208,33 +1208,33 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 [m:Kernel#find_library] または [m:Kernel#dir_config]
 の検査が成功すると、$LDFLAGS の値に "-Ldir" を追加します。
 
-#@# おそらくユーザに解放されていない変数
-#@# --- $LOCAL_LIBS
-#@#     ライブラリを指定する文字列です。
-#@# 
-#@# --- $local_flags
-#@#     リンカオプションを指定する文字列です。
+#%# おそらくユーザに解放されていない変数
+#%# --- $LOCAL_LIBS
+#%#     ライブラリを指定する文字列です。
+#%# 
+#%# --- $local_flags
+#%#     リンカオプションを指定する文字列です。
 
-#@# = reopen String
-#@# 内部用
-#@# == Instance Methods
-#@# 
-#@# --- quote -> String
-#@# 
-#@# スペースを含む文字列をクオートして返します。
-#@# 
-#@# --- tr_cpp -> String
-#@# 
-#@# C プリプロセッサに使用できる名前を生成して返します。
-#@# 
-#@# = reopen Array
-#@# 内部用
-#@# == Instance Methods
-#@# 
-#@# --- quote -> Array
-#@# 
-#@# 全ての要素を [[m:String#quote]] して返します。
-#@# 
-#@# = module Logging
-#@# 内部利用のみ
+#%# = reopen String
+#%# 内部用
+#%# == Instance Methods
+#%# 
+#%# --- quote -> String
+#%# 
+#%# スペースを含む文字列をクオートして返します。
+#%# 
+#%# --- tr_cpp -> String
+#%# 
+#%# C プリプロセッサに使用できる名前を生成して返します。
+#%# 
+#%# = reopen Array
+#%# 内部用
+#%# == Instance Methods
+#%# 
+#%# --- quote -> Array
+#%# 
+#%# 全ての要素を [[m:String#quote]] して返します。
+#%# 
+#%# = module Logging
+#%# 内部利用のみ
 

@@ -62,10 +62,10 @@ exts.each{|ext| p ext}
 
 このフラグ定数は使われていません。
 
-#@# 意味は
-#@# don't allow an OCSP response to be signed by the issuing
-#@# CA certificate. 
-#@# とのこと
+#%# 意味は
+#%# don't allow an OCSP response to be signed by the issuing
+#%# CA certificate. 
+#%# とのこと
 
 ### const NOCERTS -> Integer
 
@@ -235,11 +235,11 @@ CRL からの削除を意味します。
 [m:OpenSSL::OCSP::BasicResponse#status] 
 のステータスコードで証明書の有効性が不明であることを意味します。
 
-#@# 以下の2つの定数はおそらく使い道がない
-#@# --- V_RESPID_KEY -> Integer
-#@# #@todo
-#@# --- V_RESPID_NAME -> Integer
-#@# #@todo 
+#%# 以下の2つの定数はおそらく使い道がない
+#%# --- V_RESPID_KEY -> Integer
+#%# #@todo
+#%# --- V_RESPID_NAME -> Integer
+#%# #@todo 
 
 # class OpenSSL::OCSP::OCSPError < OpenSSL::OpenSSLError
 

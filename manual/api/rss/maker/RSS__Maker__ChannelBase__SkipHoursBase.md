@@ -7,7 +7,7 @@ include:
 
 ## Instance Methods
 ### def new_hour
-#@todo
+#%todo
 
 新しくhourを作成し，返します．作成された
 hourはhourリストの最後

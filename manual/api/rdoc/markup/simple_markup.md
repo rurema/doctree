@@ -19,7 +19,7 @@ FAQ などを想定したプレインテキストから様々なフォーマッ�
 - [ref:lib:rdoc#italic_bold_typewriter]
 - [ref:lib:rdoc#escape]
 
-#@# TODO: 1.9.3 では =begin rdoc ... なども使用できる事を追記する。
+#%# TODO: 1.9.3 では =begin rdoc ... なども使用できる事を追記する。
 
 ### 出力可能な形式 {#output_format}
 

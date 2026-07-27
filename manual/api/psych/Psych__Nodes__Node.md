@@ -65,7 +65,7 @@ io を省略した(nil を指定した)場合には変換後のドキュメン�
 
 options には以下が指定できます。
 
-#@include(dump_options)
+#%include(dump_options)
 
 - **param** `io` -- 書き込み先の IO
 - **param** `options` -- オプション

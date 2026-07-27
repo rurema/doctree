@@ -500,7 +500,7 @@ p /[[:alpha:]]/e =~ "Ａ"        # => nil
 
 ### バックトラック {#backtrack}
 
-#@#((-[[unknown:ruby-list:28084]] 以下のスレッドも参照してください。-))
+#%#((-[[unknown:ruby-list:28084]] 以下のスレッドも参照してください。-))
 
 (?> ) という特殊な括弧で正規表現をかこむと、その括弧の中の表現に
 マッチした部分ではバックトラックが起こりません。その意味を例を挙げて
@@ -537,7 +537,7 @@ p /(a*)ab/ === 'aaab'
 
 ### サンプル {#sample}
 
-#@#((-このサンプルは「詳説正規表現第二版」から引用あるいは参考にさせて頂いた-))
+#%#((-このサンプルは「詳説正規表現第二版」から引用あるいは参考にさせて頂いた-))
 
 ここにあげるサンプルは流用しやすいように $re_ で始まるグローバル
 変数に設定することにしている。
@@ -562,13 +562,13 @@ p $&.to_f                # => 0.123
 #### 数字を 3 桁ずつコンマで区切る
 
 方法1: 戻り読みと先読みを利用する方法 (戻り読み(lookbehind)は Oniguruma
-#@#  ((-Oniguruma は小迫氏が開発している正規表現ライブラリで、
-#@#  将来 Ruby の正規表現エンジンになる予定で 1.9.0 には既に取り込まれています。
-#@#  [[m:URL:ftp:#/ftp.ruby-lang.org/pub/ruby/contrib/]]onigd* か、
-#@#  CVS [[unknown:ruby-cvs:oniguruma]]
-#@#  から入手できる。Oniguruma の正規表現については
-#@#  [[unknown:"ruby-cvs:oniguruma/doc/RE"]]を参照。
-#@#  [[m:URL:http:#/www.geocities.jp/kosako3/oniguruma/]]-))
+#%#  ((-Oniguruma は小迫氏が開発している正規表現ライブラリで、
+#%#  将来 Ruby の正規表現エンジンになる予定で 1.9.0 には既に取り込まれています。
+#%#  [[m:URL:ftp:#/ftp.ruby-lang.org/pub/ruby/contrib/]]onigd* か、
+#%#  CVS [[unknown:ruby-cvs:oniguruma]]
+#%#  から入手できる。Oniguruma の正規表現については
+#%#  [[unknown:"ruby-cvs:oniguruma/doc/RE"]]を参照。
+#%#  [[m:URL:http:#/www.geocities.jp/kosako3/oniguruma/]]-))
 が必要)
 
 ```text

@@ -103,4 +103,4 @@ p Thread.new {sleep 1} # => #<Thread:0xa039de0 sleep>
   この状態のスレッドは「死んで」います。
 
 ### デッドロックの検出
-#@todo
+#%todo

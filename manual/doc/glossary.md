@@ -538,9 +538,9 @@
   しかし、Ruby 2.7 でこの機構は実質的に無効化されて、
   Ruby 3.2 で削除された。
 
-#@until 3.2
+#%until 3.2
   参照：[d:spec/safelevel]
-#@end
+#%end
 
 - **鬼雲**: {#onigmo}
 - **Onigmo**:
@@ -1069,9 +1069,9 @@
   しかし、Ruby 2.7 でこの機構は実質的に無効化されて、
   Ruby 3.2 で削除された。
 
-#@until 3.2
+#%until 3.2
   参照：[d:spec/safelevel]
-#@end
+#%end
 
 - **セッター**: {#setter}
 - **setter**:

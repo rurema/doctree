@@ -16,4 +16,4 @@ rdoc コマンドが処理するファイル名の一覧が書かれたファイ
 
 RDoc のバージョンを表す文字列を返します。
 
-#@include(RDoc__constants)
+#%include(RDoc__constants)

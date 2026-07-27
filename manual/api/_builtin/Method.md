@@ -127,10 +127,10 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
 - **param** `args` -- self に渡される引数。
 
 - **SEE** [m:UnboundMethod#bind_call]
-#@until 3.2
+#%until 3.2
 - **SEE** [d:spec/safelevel]
-#@# セーフレベルに関するその他の詳細
-#@end
+#%# セーフレベルに関するその他の詳細
+#%end
 
 ```ruby title="例"
 class Foo
@@ -598,7 +598,7 @@ p C.new.method(:bar).original_name # => :foo
 
 - **SEE** [m:UnboundMethod#original_name]
 
-#@if (version == "3.1")
+#%if (version == "3.1")
 ### def public? -> bool
 
 self が public であるかどうかを返します。
@@ -610,4 +610,4 @@ self が protected であるかどうかを返します。
 ### def private? -> bool
 
 self が private であるかどうかを返します。
-#@end
+#%end

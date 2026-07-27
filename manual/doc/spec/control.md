@@ -233,8 +233,8 @@ case は、条件が成立した when 節、(あるいは else 節)
 の最後に評価した式の結果を返します。いずれの条件も成り立たなければ
 nil を返します。
 
-#@# Since Ruby 2.7, +case+ expressions also provide a more powerful experimental
-#@# pattern matching feature via the +in+ keyword:
+#%# Since Ruby 2.7, +case+ expressions also provide a more powerful experimental
+#%# pattern matching feature via the +in+ keyword:
 Ruby 2.7 からは case 式は in キーワードを通じてより強力なパターンマッチ構文を提供しています。
 
 ```ruby
@@ -247,8 +247,8 @@ end
 # => "matched: 1"
 ```
 
-#@# The pattern matching syntax is described on
-#@# {its own page}[rdoc-ref:syntax/pattern_matching.rdoc].
+#%# The pattern matching syntax is described on
+#%# {its own page}[rdoc-ref:syntax/pattern_matching.rdoc].
 パターンマッチ構文については[d:spec/pattern_matching]で説明しています。
 
 ### 繰り返し
@@ -811,7 +811,7 @@ end
 ```
 
 END をメソッド定義式中に書くと警告が出ます。
-#@#((-((<ruby 1.8 feature>)): これは 1.8.1 から [[unknown:ruby-dev:21513]]-))。
+#%#((-((<ruby 1.8 feature>)): これは 1.8.1 から [[unknown:ruby-dev:21513]]-))。
 意図的にこのようなことを行いたい場合は [m:Kernel?.at_exit] を使
 います。
 

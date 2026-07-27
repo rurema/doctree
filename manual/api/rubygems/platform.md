@@ -87,10 +87,10 @@ OS の種類をセットします。
 ## Singleton Methods
 
 ### def local -> Gem::Platform
-#@todo ???
+#%todo ???
 
 ### def match(platform) -> bool
-#@todo ???
+#%todo ???
 
 ### def new(arch)-> Gem::Platform
 

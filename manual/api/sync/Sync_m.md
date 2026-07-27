@@ -85,38 +85,38 @@ includeしたクラスではinitializeでsuperを呼び出しておく必要が�
             通常、 [m:Sync_m::UN], [m:Sync_m::EX], [m:Sync_m::SH] のどれかを指定します。
 
 ### def sync_waiting -> [Thread]
-#@todo
+#%todo
 
 ### def sync_waiting=(arr)
-#@todo
+#%todo
 
 ### def sync_upgrade_waiting -> [Thread]
-#@todo
+#%todo
 
 ### def sync_upgrade_waiting=(arr)
-#@todo
+#%todo
 
 ### def sync_sh_locker -> Hash
-#@todo
+#%todo
 
 ### def sync_sh_locker=(hash)
-#@todo
+#%todo
 
 ### def sync_ex_locker -> Thread | nil
-#@todo
+#%todo
 
 ### def sync_ex_locker=(thread)
-#@todo
+#%todo
 
 ### def sync_ex_count -> Integer
-#@todo
+#%todo
 
 ### def sync_ex_count=(count)
-#@todo
+#%todo
 
 ### def sync_extend
-#@todo
+#%todo
 
 ### def sync_inspect
-#@todo
+#%todo
 

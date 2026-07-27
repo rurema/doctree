@@ -114,7 +114,7 @@ p doctype.entities["gt"].to_s # => "<!ENTITY gt \">\">"
 ### def namespaces -> nil
 
 nil を返します。
-#@# 用途不明
+#%# 用途不明
 
 ### def node_type -> Symbol
 
@@ -324,17 +324,17 @@ name という名前を持つ記法宣言が存在しない場合は nil を返�
 
 ## Constants
 
-#@# --- START
-#@# #@todo
-#@#
-#@# --- STOP
-#@# #@todo
-#@#
-#@# --- SYSTEM
-#@# #@todo
-#@#
-#@# --- PUBLIC
-#@# #@todo
+#%# --- START
+#%# #@todo
+#%#
+#%# --- STOP
+#%# #@todo
+#%#
+#%# --- SYSTEM
+#%# #@todo
+#%#
+#%# --- PUBLIC
+#%# #@todo
 
 ### def DEFAULT_ENTITIES -> { String => REXML::Entity }
 

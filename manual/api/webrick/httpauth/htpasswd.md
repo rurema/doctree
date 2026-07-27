@@ -58,17 +58,17 @@ Htpasswd オブジェクトを生成します。
 - **param** `reload_db` -- 真を指定すると [m:WEBrick::HTTPAuth::Htpasswd#reload] を呼んでから値を返します。
 
 ### def flush(path = nil)
-#@# -> discard
+#%# -> discard
 ファイルに書き込みます。ファイル名を与えた場合は、そこに書き込みます。
 
 - **param** `path` -- ファイル名を指定します。
 
 ### def reload
-#@# -> discard
+#%# -> discard
 ファイルから再度読み込みます。
 
 ### def set_passwd(realm, user, pass)
-#@# -> discard
+#%# -> discard
 与えられた情報をもとに、パスワードをハッシュ化して保存します。
 
 - **param** `realm` -- レルムは無視されます。

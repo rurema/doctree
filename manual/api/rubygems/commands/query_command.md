@@ -21,8 +21,8 @@ Options:
   -a, --all                        見つかった Gem パッケージの全てのバージョンを表示します
 ```
 
-#@include(local_remote_options)
-#@include(common_options)
+#%include(local_remote_options)
+#%include(common_options)
 
 ```text
 Summary:

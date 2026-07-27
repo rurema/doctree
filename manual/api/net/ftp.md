@@ -107,11 +107,11 @@ host が指定された場合、生成されたインスタンスに対して
   真ならばデータ転送用のコネクションにも TLS を使います。
   :ssl が真のときのデフォルトは true です。:ssl が偽のときに true を指定すると
   [c:ArgumentError] が発生します。
-#@since 3.2
+#%since 3.2
 - **`:implicit_ftps`**:
   真ならば接続の確立時点で TLS 接続を開始します(Implicit FTPS)。
   デフォルトは false です。:ssl が偽のときに true を指定すると [c:ArgumentError] が発生します。
-#@end
+#%end
 - **`:username`**:
   ログインに使うユーザ名を指定します。
 - **`:password`**:
@@ -127,11 +127,11 @@ host が指定された場合、生成されたインスタンスに対して
   1 ブロックの読み込みを待つ秒数を指定します。デフォルトは 60 です。
 - **`:ssl_handshake_timeout`**:
   TLS のハンドシェイクを待つ秒数を指定します。デフォルトは nil です。
-#@since 3.1
+#%since 3.1
 - **`:use_pasv_ip`**:
   真ならば PASV 応答に含まれる IP アドレスを使用します。偽の場合は制御コネクションと
   同じ IP アドレスを使用します。デフォルトは false です。
-#@end
+#%end
 - **`:debug_mode`**:
   真ならば全ての通信内容を $stdout に出力します。デフォルトは false です。
 
@@ -690,16 +690,16 @@ FTP のセッションからログアウトします。
 決めます。
 
 - **SEE** [m:Net::FTP#resume=]
-#@# リジュームモードとは途中で中断された
-#@# データ転送を再開するためのものです。デフォルトの値は false です。
-#@# この値が真であるとき、いくつかの転送メソッドは事前に REST コマンドを
-#@# 発行することによって転送元と転送元のオフセットをセットします。
-#@# これにより、すでに転送されたデータは転送されなくなります。
-#@# 具体的には以下のメソッドが影響を受けます。
+#%# リジュームモードとは途中で中断された
+#%# データ転送を再開するためのものです。デフォルトの値は false です。
+#%# この値が真であるとき、いくつかの転送メソッドは事前に REST コマンドを
+#%# 発行することによって転送元と転送元のオフセットをセットします。
+#%# これにより、すでに転送されたデータは転送されなくなります。
+#%# 具体的には以下のメソッドが影響を受けます。
 
-#@# getbinaryfile はローカルファイルのサイズをオフセットとします。
+#%# getbinaryfile はローカルファイルのサイズをオフセットとします。
 
-#@# putbinaryfile はリモートファイルのサイズをオフセットとします。
+#%# putbinaryfile はリモートファイルのサイズをオフセットとします。
 
 ### def resume=(boolean)
 
@@ -973,8 +973,8 @@ FTP の MLST コマンド [rfc:3659] を使います。
 
 ## Constants
 
-#@# --- CRLF
-#@# nodoc
+#%# --- CRLF
+#%# nodoc
 
 ### const DEFAULT_BLOCKSIZE -> Integer
 
@@ -984,15 +984,15 @@ get, put をするときのデフォルトのブロックサイズです。
 
 FTPのデフォルトのポート番号(21)です。
 
-#@# --- MDTM_REGEXP
-#@# nodoc
+#%# --- MDTM_REGEXP
+#%# nodoc
 
-#@# #@since 1.9.2
-#@# = class Net::FTP::NullSocket < Object
-#@# 
-#@# 全てのメソッド呼び出しに対して [[c:Net::FTPConnectionError]] を発生させます。
-#@# 
-#@# #@end
+#%# #@since 1.9.2
+#%# = class Net::FTP::NullSocket < Object
+#%# 
+#%# 全てのメソッド呼び出しに対して [[c:Net::FTPConnectionError]] を発生させます。
+#%# 
+#%# #@end
 
 # class Net::FTPError < StandardError
 

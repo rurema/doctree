@@ -18,15 +18,15 @@ Socketに対してしか利用できません。
 
 判別が不可能な場合は0を返します。
 
-#@if (version == "3.0")
+#%if (version == "3.0")
 ### def ready? -> IO | false | nil
 
 ブロックせずに読み込み可能なら真を、
-#@else
+#%else
 ### def ready? -> bool | nil
 
 ブロックせずに読み込み可能ならtrueを、
-#@end
+#%end
 ブロックしてしまう可能性があるならfalseを返します。
 
 判定不可能な場合は nil を返します。
@@ -70,7 +70,7 @@ timeout を指定した場合は、指定秒数経過するまでブロックし
 
 - **SEE** [m:IO#wait_readable]
 
-#@since 3.0
+#%since 3.0
 ### def wait_priority(timeout = nil) -> bool | self | nil
 
 self が優先データを受信して読み込み可能になるまでブロックし、
@@ -91,4 +91,4 @@ timeout を指定した場合は、指定秒数経過するまでブロックし
              nil を指定すると読み込み可能になるまで待ち続けます。
 
 - **SEE** [m:IO#wait_readable], [m:IO#wait_writable]
-#@end
+#%end

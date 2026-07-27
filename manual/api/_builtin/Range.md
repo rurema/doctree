@@ -306,7 +306,7 @@ p ('aaaaa'..'zzzzy').cover?('aaaaa'...'zzzzz') # => true
 
 - **SEE** [m:Range#include?], [m:Range#===]
 
-#@since 3.3
+#%since 3.3
 ### def overlap?(range) -> bool
 
 self と range に重なりがある場合は true を、そうでない場合は false を返します。
@@ -357,7 +357,7 @@ p (0..2).overlap?(2..0)  #=> false
 p (...-Float::INFINITY).overlap?(...-Float::INFINITY) #=> true
 ```
 
-#@end
+#%end
 
 ### def begin -> object
 ### def first -> object
@@ -414,7 +414,7 @@ Range#each は各要素の succ メソッドを使用してイテレーション
 # raises: TypeError: can't iterate from Float
 ```
 
-#@since 3.3
+#%since 3.3
 ### def reverse_each -> Enumerator
 ### def reverse_each {|element| ... } -> self
 
@@ -443,7 +443,7 @@ p (..5).reverse_each.first(3) # => [5, 4, 3]
 (1..).reverse_each { |v| p v } # raises: TypeError: can't iterate from NilClass
 ```
 
-#@end
+#%end
 
 ### def end -> object
 ### def last -> object
@@ -481,7 +481,7 @@ p (10...20).last(3)  # => [17, 18, 19]
 
 - **SEE** [m:Range#first]
 
-#@# [[ruby-core:12697]]
+#%# [[ruby-core:12697]]
 
 ### def exclude_end? -> bool
 
@@ -500,11 +500,11 @@ p (1...5).exclude_end?  # => true
 
 範囲内の要素を s おきに繰り返します。
 
-#@since 3.4
+#%since 3.4
 - **param** `s` -- 次のステップへ遷移するたびに加算されるものを指定します。
-#@else
+#%else
 - **param** `s` -- 各ステップの大きさを数値で指定します。負の数を指定することもできます。
-#@end
+#%end
 - **return** -- ブロックを指定した時は self を返します。
 - **return** -- ブロックを指定しなかった時かつ数値の Range の時は [c:Enumerator::ArithmeticSequence] を返します。
 - **return** -- ブロックを指定しなかったその他の Range の時は [c:Enumerator] を返します。(例: String の Range)
@@ -528,7 +528,7 @@ p (1...5).exclude_end?  # => true
 #     1
 ```
 
-#@since 3.4
+#%since 3.4
 
 非数値の Range では、イテレーションに「要素 + s」を使用します。
 （文字列またはシンボルの Range で s に数値を指定した場合を除きます）
@@ -548,7 +548,7 @@ p (1...5).exclude_end?  # => true
 p ("a"..).step("*").take(3) # => ["a", "a*", "a**"]
 ```
 
-#@end
+#%end
 
 ### def ==(other)     -> bool
 
@@ -830,7 +830,7 @@ p (0..4).bsearch {|i|  50 - ary[i] } # => nil
 
 ### def size -> Integer | Float::INFINITY | nil
 
-#@since 3.4
+#%since 3.4
 範囲内の要素数を返します。
 
 始端が整数でない場合は、始端が succ メソッドを持つ場合は nil を返し、始端が succ メソッドを持たない場合は TypeError が発生します。
@@ -844,7 +844,7 @@ p (1..).size     # => Infinity
 (-Float::INFINITY..Float::INFINITY).size # => can't iterate from Float (TypeError)
 ```
 
-#@else
+#%else
 
 範囲内の要素数を返します。始端、終端のいずれかのオブジェクトが
 [c:Numeric] のサブクラスのオブジェクトではない場合には nil を返します。
@@ -855,4 +855,4 @@ p ("a".."z").size  # => nil
 p (-Float::INFINITY..Float::INFINITY).size # => Infinity
 ```
 
-#@end
+#%end

@@ -6,12 +6,12 @@ library: rss
 
 ### def trackback_about
 ### def trackback_about=
-#@todo
+#%todo
 
 ### def trackback_abouts
-#@todo
+#%todo
 
 ### def trackback_ping
 ### def trackback_ping=
-#@todo
+#%todo
 

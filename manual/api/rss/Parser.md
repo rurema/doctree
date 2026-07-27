@@ -4,34 +4,34 @@ library: rss
 # class RSS::Parser < Object
 ## Class Methods
 ### def parse
-#@todo
+#%todo
 
 ### def new
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def do_validate
 ### def do_validate=
-#@todo
+#%todo
 
 ### def ignore_unknown_element
 ### def ignore_unknown_element=
-#@todo
+#%todo
 
 ### def parse
-#@todo
+#%todo
 
 ### def rss
-#@todo
+#%todo
 
 # class RSS::NotWellFormedError < RSS::Error
 ## Instance Methods
 ### def line 
-#@todo
+#%todo
 
 ### def element
-#@todo
+#%todo
 
 # class RSS::XMLParserNotFound < RSS::Error
 
@@ -40,10 +40,10 @@ library: rss
 # class RSS::NSError < RSS::Error
 ## Instance Methods
 ### def tag
-#@todo
+#%todo
 
 ### def prefix
-#@todo
+#%todo
 
 ### def uri
-#@todo
+#%todo

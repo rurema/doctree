@@ -6,9 +6,9 @@ library: rss
 
 ### def content
 ### def content=
-#@todo
+#%todo
 
 ### def url
 ### def url=
-#@todo
+#%todo
 

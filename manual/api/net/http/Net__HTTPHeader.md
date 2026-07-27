@@ -12,13 +12,13 @@ HTTP ヘッダのためのモジュールです。
 
 ## Instance Methods
 
-#@# --- initialize_http_header(initheader) -> ()
-#@# このモジュールを mix-in したクラスの
-#@# 初期化時に呼びだし、 このモジュールの各メソッド
-#@# を利用可能にします。 
-#@# @param initheader 初期化時のヘッダの内容を
-#@#                   {ヘッダフィールド名(文字列)=>その中身(文字列)}
-#@#                   というハッシュで与えます。
+#%# --- initialize_http_header(initheader) -> ()
+#%# このモジュールを mix-in したクラスの
+#%# 初期化時に呼びだし、 このモジュールの各メソッド
+#%# を利用可能にします。 
+#%# @param initheader 初期化時のヘッダの内容を
+#%#                   {ヘッダフィールド名(文字列)=>その中身(文字列)}
+#%#                   というハッシュで与えます。
 
 ### def [](key) -> String|nil
 
@@ -179,7 +179,7 @@ p req.fetch("content-length") { |e| 99 } # => 99
 
 ヘッダフィールドの数を返します。
 
-#@#noexample
+#%#noexample
 
 ### def basic_auth(account, password) -> [String]
 
@@ -620,7 +620,7 @@ x が負ならば最初から x バイト目までの範囲を表します。
 - **param** `len` -- 範囲の長さを整数で与えます。
 - **param** `n` -- 0からの長さを整数で与えます。
 
-#@# この仕様はどこまで意図的なのだろうか？
+#%# この仕様はどこまで意図的なのだろうか？
 
-#@# internal classes
-#@# = module Net::HTTP::ProxyDelta
+#%# internal classes
+#%# = module Net::HTTP::ProxyDelta

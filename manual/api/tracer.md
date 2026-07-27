@@ -280,26 +280,26 @@ fp.close
 - **param** `flag` -- スレッド ID を表示するならば、真を指定します。
 
 ### def stdout_mutex -> Mutex
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def add_filter(p = proc)
-#@todo
+#%todo
 
 フィルターを追加します。
 
 - **param** `p` -- [c:Proc] オブジェクトを指定します。
 
 ### def get_line(file, line) -> String
-#@todo
+#%todo
 
 - **param** `file` --
 
 - **param** `line` --
 
 ### def get_thread_no -> Integer
-#@todo
+#%todo
 
 ### def off -> ()
 
@@ -313,14 +313,14 @@ fp.close
 ブロックを与えるとブロックの実行中のみトレースを出力します。
 
 ### def set_get_line_procs(file, p = proc)
-#@todo
+#%todo
 
 ### def stdout -> IO
 
 - **SEE** [m:Tracer.stdout]
 
 ### def trace_func(event, file, line, id, binding, klass, *) -> object | nil
-#@todo
+#%todo
 
 ## Constants
 
@@ -344,5 +344,5 @@ EVENT_SYMBOL = {
 - **SEE** [m:Tracer.add_filter]
 
 ### const Single -> Tracer
-#@todo
+#%todo
 

@@ -236,7 +236,7 @@ p "hi".freeze.__id__ == "hi".freeze.__id__ # => true
 
 - **SEE** [m:Object#object_id], [ruby-dev:42840]
 
-#@include(BasicObject.public_methods_from_Object)
+#%include(BasicObject.public_methods_from_Object)
 
 ## Private Instance Methods
 
@@ -250,11 +250,11 @@ p "hi".freeze.__id__ == "hi".freeze.__id__ # => true
 
 デフォルトではこのメソッドは例外 [c:NoMethodError] を発生させます。
 
-#@#このメソッドは強力ですが、反面扱いが難しいので乱用は避けるべきです。
+#%#このメソッドは強力ですが、反面扱いが難しいので乱用は避けるべきです。
 
 - **param** `name` -- 未定義メソッドの名前（シンボル）です。
 - **param** `args` -- 未定義メソッドに渡された引数です。
-#@#@param block 未定義メソッドに渡されたブロックです。
+#%#@param block 未定義メソッドに渡されたブロックです。
 - **return** -- ユーザー定義の method_missing メソッドの返り値が未定義メソッドの返り値で
   あるかのように見えます。
 
@@ -287,4 +287,4 @@ p dic.find_2_in :Esperanto #=> "du"
 
 - **SEE** [m:Object#respond_to?], [m:Object#respond_to_missing?]
 
-#@include(BasicObject.private_methods_from_Object)
+#%include(BasicObject.private_methods_from_Object)

@@ -30,21 +30,21 @@ include:
 での一覧です。実際にどのメソッドがどのクラスに定義されているかはそれぞ
 れのクラスを参照してください。
 
-#@#  cary = [Numeric, Integer, Float, Rational, Complex]
-#@#  mary = cary.collect {|c| c.instance_methods(false)}
-#@#  methods = mary.flatten.uniq.sort
-#@#  
-#@#  methods.each_with_index {|op, i|
-#@#  if i % 10 == 0
-#@#    heading = sprintf("%23s   %10s %10s %10s %10s %10s",
-#@#                "", *cary.collect {|klass| klass.name.center(10)})
-#@#    puts heading
-#@#    puts "-" * heading.size
-#@#  end
-#@#
-#@#  printf("%23s | %10s %10s %10s %10s %10s\n",
-#@#        op, *mary.collect {|ms| (ms.member?(op) ? "o" : "-").center(10)})
-#@#  }
+#%#  cary = [Numeric, Integer, Float, Rational, Complex]
+#%#  mary = cary.collect {|c| c.instance_methods(false)}
+#%#  methods = mary.flatten.uniq.sort
+#%#  
+#%#  methods.each_with_index {|op, i|
+#%#  if i % 10 == 0
+#%#    heading = sprintf("%23s   %10s %10s %10s %10s %10s",
+#%#                "", *cary.collect {|klass| klass.name.center(10)})
+#%#    puts heading
+#%#    puts "-" * heading.size
+#%#  end
+#%#
+#%#  printf("%23s | %10s %10s %10s %10s %10s\n",
+#%#        op, *mary.collect {|ms| (ms.member?(op) ? "o" : "-").center(10)})
+#%#  }
 
 ```text
 => ruby 2.4.2p198 (2017-09-14 revision 59899) [x86_64-darwin15]
@@ -159,19 +159,19 @@ include:
 
 ### 丸めメソッドの動作一覧
 
-#@#         numbers=[1.9, 1.1, -1.1, -1.9]
-#@#         methods=%w(ceil floor round truncate)
-#@#
-#@#         fmt = "%5s |" + " %10s" * methods.size + "\n"
-#@#
-#@#         heading = sprintf(fmt, "", *methods)
-#@#         puts heading
-#@#         puts "-" * heading.size
-#@#
-#@#         numbers.each {|n|
-#@#           printf(fmt, n,
-#@#                  *methods.collect {|m| sprintf("%s", n.send(m))})
-#@#         }
+#%#         numbers=[1.9, 1.1, -1.1, -1.9]
+#%#         methods=%w(ceil floor round truncate)
+#%#
+#%#         fmt = "%5s |" + " %10s" * methods.size + "\n"
+#%#
+#%#         heading = sprintf(fmt, "", *methods)
+#%#         puts heading
+#%#         puts "-" * heading.size
+#%#
+#%#         numbers.each {|n|
+#%#           printf(fmt, n,
+#%#                  *methods.collect {|m| sprintf("%s", n.send(m))})
+#%#         }
 
 [m:Numeric#ceil], [m:Numeric#floor], [m:Numeric#round], [m:Numeric#truncate]
 のふるまいの違いの表です。左の実数に対して各メソッドを呼ぶと表のような数を
@@ -230,28 +230,28 @@ class Numeric
 end
 ```
 
-#@#        numbers=[0.19, 0.15, 0.11, -0.11, -0.15, -0.19]
-#@#        methods=%w(roundup rounddown roundoff)
-#@#        arg=1
-#@#
-#@#        fmt = "%5s |" + " %10s" * methods.size + "\n"
-#@#
-#@#        heading = sprintf(fmt, "", *methods)
-#@#        puts heading
-#@#        puts "-" * heading.size
-#@#
-#@#        numbers.each {|n|
-#@#          printf(fmt, n,
-#@#                 *methods.collect {|m| sprintf("%s", n.send(m, arg))})
-#@#        }
-#@#              |    roundup  rounddown   roundoff
-#@#        -----------------------------------------
-#@#         0.19 |        0.2        0.1        0.2
-#@#         0.15 |        0.2        0.1        0.2
-#@#         0.11 |        0.2        0.1        0.1
-#@#        -0.11 |       -0.2       -0.1       -0.1
-#@#        -0.15 |       -0.2       -0.1       -0.2
-#@#        -0.19 |       -0.2       -0.1       -0.2
+#%#        numbers=[0.19, 0.15, 0.11, -0.11, -0.15, -0.19]
+#%#        methods=%w(roundup rounddown roundoff)
+#%#        arg=1
+#%#
+#%#        fmt = "%5s |" + " %10s" * methods.size + "\n"
+#%#
+#%#        heading = sprintf(fmt, "", *methods)
+#%#        puts heading
+#%#        puts "-" * heading.size
+#%#
+#%#        numbers.each {|n|
+#%#          printf(fmt, n,
+#%#                 *methods.collect {|m| sprintf("%s", n.send(m, arg))})
+#%#        }
+#%#              |    roundup  rounddown   roundoff
+#%#        -----------------------------------------
+#%#         0.19 |        0.2        0.1        0.2
+#%#         0.15 |        0.2        0.1        0.2
+#%#         0.11 |        0.2        0.1        0.1
+#%#        -0.11 |       -0.2       -0.1       -0.1
+#%#        -0.15 |       -0.2       -0.1       -0.2
+#%#        -0.19 |       -0.2       -0.1       -0.2
 
 ### 除法と商・剰余 {#division}
 
@@ -359,7 +359,7 @@ x と y の符号が同じとき、modulo と remainder は一致します。
 これは被除数・除数のクラスによって挙動が異なります。例えば Integer 同士なら div と同じ、Integer や Rational と Float なら quo と同じ、といった具合です。
 被除数のクラスの / メソッドの説明をご覧ください。
 
-#@since 3.2
+#%since 3.2
 Ruby 3.2 では整商を得るメソッドとして [m:Integer#ceildiv] が導入されました。
 
 ceildiv は普通の商を正の無限大に向かって丸めた整商を返します。
@@ -372,7 +372,7 @@ p n.ceildiv(m)
 ```
 
 ceildiv に対応した剰余を返すメソッドはありません。
-#@end
+#%end
 
 ## Instance Methods
 
@@ -396,7 +396,7 @@ self の符号を反転させたものを返します。
 
 このメソッドは、二項演算子 - で 0 - self によって定義されています。
 
-#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+#%#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
 
 - **SEE** [m:Integer#-@]、[m:Float#-@]、[m:Rational#-@]、[m:Complex#-@]
 
@@ -407,7 +407,7 @@ self を other で割った商を返します。
 
 Numeric では定義されておらず、サブクラスの実装によります。
 
-#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+#%#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
 
 - **SEE** [m:Integer#/], [m:Float#/], [m:Rational#/], [m:Complex#/]
 
@@ -828,8 +828,8 @@ self からはじめ step を足しながら limit を越える
 
 - **raise** `ArgumentError` -- step に 0 を指定した場合に発生します。
 
-#@#このメソッドは、[[c:Fixnum]], [[c:Integer]] から移動しまし
-#@#た。これにより [[c:Float]] も step できるようになりました。
+#%#このメソッドは、[[c:Fixnum]], [[c:Integer]] から移動しまし
+#%#た。これにより [[c:Float]] も step できるようになりました。
 
 ```ruby title="例"
 2.step(5){|n| p n}
@@ -963,7 +963,7 @@ p (2/3r).conj # => (2/3)
 
 - **return** -- 分母を返します。
 
-#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+#%#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
 
 - **SEE** [m:Numeric#numerator]、[m:Integer#denominator]、[m:Float#denominator]、[m:Rational#denominator]、[m:Complex#denominator]
 
@@ -989,7 +989,7 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 
 - **return** -- 分子を返します。
 
-#@#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
+#%#noexample Integer、Float、Rational、Complex 各クラスに実装されているため
 
 - **SEE** [m:Numeric#denominator]、[m:Integer#numerator]、[m:Float#numerator]、[m:Rational#numerator]、[m:Complex#numerator]
 

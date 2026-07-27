@@ -11,13 +11,13 @@ url，length，typeを設定する必要があります．
 
 ### def url
 ### def url=()
-#@todo
+#%todo
 
 ### def length
 ### def length=()
-#@todo
+#%todo
 
 ### def type
 ### def type=()
-#@todo
+#%todo
 

@@ -141,7 +141,7 @@ Ruby は処理系がコンパイルされるときに、デフォルトで下記
 システムのマニュアル [man:errno(3)] を参照してください。
 Microsoft Windows システムにおいては <http://msdn2.microsoft.com/ja-jp/library/5814770t.aspx> を参照してください。
 
-#@# defs/known_errors.def 参照。
+#%# defs/known_errors.def 参照。
 
   - EPERM
   - ENOENT

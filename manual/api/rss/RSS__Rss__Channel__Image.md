@@ -6,25 +6,25 @@ library: rss
 
 ### def description
 ### def description=
-#@todo
+#%todo
 
 ### def height
 ### def height=
-#@todo
+#%todo
 
 ### def link
 ### def link=
-#@todo
+#%todo
 
 ### def title
 ### def title=
-#@todo
+#%todo
 
 ### def url
 ### def url=
-#@todo
+#%todo
 
 ### def width
 ### def width=
-#@todo
+#%todo
 

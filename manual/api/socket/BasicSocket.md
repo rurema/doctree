@@ -148,11 +148,11 @@ p opt.unpack("i")[0] #=> 0 (Socket::Option#unpack が互換性のために存在
 p c.getsockopt(:IP, :TTL).int #=> 64
 ```
 
-#@since 3.3
+#%since 3.3
 ### def recv(maxlen, flags = 0) -> String | nil
-#@else
+#%else
 ### def recv(maxlen, flags = 0) -> String
-#@end
+#%end
 
 ソケットからデータを受け取り、文字列として返します。
 maxlen は受け取る最大の長さを指定します。
@@ -165,13 +165,13 @@ Socket クラスで定義されています。(例: Socket::MSG_PEEK)
 UDP のようなデータグラムソケットでは、サイズ 0 のパケットを受信したことを意味し、
 このメソッドは "" を返します。
 
-#@since 3.3
+#%since 3.3
 TCP や UNIXSocket のようなストリームソケットでは、接続が閉じられたこと (EOF) を
 意味し、このメソッドは nil を返します。
-#@else
+#%else
 TCP や UNIXSocket のようなストリームソケットでは、接続が閉じられたこと (EOF) を
 意味し、このメソッドは "" を返します。
-#@end
+#%end
 
 - **param** `maxlen` -- 受け取る文字列の最大の長さを指定します。
 
@@ -191,27 +191,27 @@ s1.write "a"
 s1.close
 p s2.recv(10, Socket::MSG_PEEK)   #=> "a"
 p s2.recv(10)                     #=> "a"
-#@since 3.3
+#%since 3.3
 p s2.recv(10)                     #=> nil
-#@else
+#%else
 p s2.recv(10)                     #=> ""
-#@end
+#%end
 ```
 
-#@since 3.3
+#%since 3.3
 ### def recv_nonblock(maxlen, flags = 0) -> String | nil
-#@else
+#%else
 ### def recv_nonblock(maxlen, flags = 0) -> String
-#@end
+#%end
 
 ソケットをノンブロッキングモードに設定した後、
 [man:recvfrom(2)] でソケットからデータを受け取ります。
 
 引数、返り値は [m:BasicSocket#recv] と同じです。
-#@since 3.3
+#%since 3.3
 すなわち、TCP や UNIXSocket のようなストリームソケットで接続が閉じられている
 場合 (EOF) は nil を返します。
-#@end
+#%end
 
 [man:recvfrom(2)] がエラーになった場合、
 EAGAIN, EINTR を含め例外 [c:Errno::EXXX] が発生します。
@@ -301,7 +301,7 @@ sock.setsockopt(Socket::IPPROTO_IP, Socket::IP_ADD_MEMBERSHIP, optval)
 - **raise** `Errno::EXXX` --  オプションの設定に失敗した場合発生します。
 - **SEE** [m:BasicSocket#getsockopt]
 
-#@# より高レベルなものとして[[c:RAA:Sockopt]]があります
+#%# より高レベルなものとして[[c:RAA:Sockopt]]があります
 
 ### def shutdown(how = Socket::SHUT_RDWR) -> 0
 
@@ -401,21 +401,21 @@ TCPServer.open("127.0.0.1", 1512) {|serv|
 
 - **SEE** [m:BasicSocket#getsockname]
 
-#@since 3.3
+#%since 3.3
 ### def recvmsg(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData] | nil
-#@else
+#%else
 ### def recvmsg(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData]
-#@end
+#%end
 
 [man:recvmsg(2)] を用いてメッセージを受け取ります。
 
 このメソッドはブロックします。ノンブロッキング方式で通信したい
 場合は [m:BasicSocket#recvmsg_nonblock] を用います。
 
-#@since 3.3
+#%since 3.3
 TCP や UNIXSocket のようなストリームソケットで、接続が閉じられている場合 (EOF) は
 nil を返します。
-#@end
+#%end
 
 maxmesglen, maxcontrollen で受け取るメッセージおよび補助データ
 ([c:Socket::AncillaryData])の最大長をバイト単位で指定します。
@@ -464,20 +464,20 @@ controls.each {|ancdata|
 
 - **SEE** [bug:19012]
 
-#@since 3.3
+#%since 3.3
 ### def recvmsg_nonblock(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData] | nil
-#@else
+#%else
 ### def recvmsg_nonblock(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData]
-#@end
+#%end
 
 [man:recvmsg(2)] を用いてノンブロッキング方式でメッセージを受け取ります。
 
 ブロッキングの有無以外は [m:BasicSocket#recvmsg] と同じです。
 詳しくはそちらを参照してください。
-#@since 3.3
+#%since 3.3
 すなわち、TCP や UNIXSocket のようなストリームソケットで接続が閉じられている
 場合 (EOF) は nil を返します。
-#@end
+#%end
 
 - **param** `maxmesglen` -- 受け取るメッセージの最大長
 - **param** `flags` -- フラグ

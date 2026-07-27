@@ -3,4 +3,4 @@
 ## Class Methods
 
 ### def new(msg)
-#@todo
+#%todo

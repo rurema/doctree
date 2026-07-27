@@ -7,45 +7,45 @@ until: "2.7.0"
 ## Singleton Methods
 
 ### def new(str)
-#@todo
+#%todo
 
 ## Instance Methods
 
 ### def last_match_tried
-#@todo
+#%todo
 
 ### def last_spec
-#@todo
+#%todo
 
 ### def last_spec_tried
-#@todo
+#%todo
 
 ### def match(str)
-#@todo
+#%todo
 
 ### def matched_count
-#@todo
+#%todo
 
 ### def prune(n=matched_count)
-#@todo
+#%todo
 
 ### def space
-#@todo
+#%todo
 
 ### def spec_count
-#@todo
+#%todo
 
 ### def string_left
-#@todo
+#%todo
 
 ### def to_s
-#@todo
+#%todo
 
 ## Constants
 
 ### const REGEX
-#@todo
+#%todo
 
 ### const SPECIFIERS
-#@todo
+#%todo
 

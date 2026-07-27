@@ -1,10 +1,10 @@
 ---
 library: _builtin
 alias:
-#@until 3.2
+#%until 3.2
   - Fixnum
   - Bignum
-#@end
+#%end
 ---
 # class Integer < Numeric
 
@@ -13,16 +13,16 @@ alias:
 整数オブジェクトに特異メソッドを追加する事はできません。追加した場合、
 [c:TypeError] が発生します。
 
-#@since 3.2
+#%since 3.2
 かつて `Integer` クラスのエイリアスであった `Fixnum` と `Bignum` は Ruby 3.2 で削除されました。
-#@else
+#%else
 Ruby 2.4.0 から [c:Fixnum], [c:Bignum] は `Integer` に統合されました。
 Ruby 2.4.0 からはどちらも `Integer` クラスのエイリアスとなっています。
-#@end
+#%end
 
 ## Class Methods
 
-#@since 3.1
+#%since 3.1
 ### def try_convert(obj) -> Integer | nil
 
 `obj` を `Integer` に変換しようと試みます。変換には [m:Object#to_int]
@@ -41,7 +41,7 @@ p Integer.try_convert(1.25) # => 1
 p Integer.try_convert([]) # => nil
 ```
 
-#@end
+#%end
 
 ### def sqrt(n) -> Integer
 
@@ -80,11 +80,11 @@ p Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
 p 65.chr
 # => "A"
 p 12354.chr
-#@since 3.4
+#%since 3.4
 # => 'chr': 12354 out of char range (RangeError)
-#@else
+#%else
 # => `chr': 12354 out of char range (RangeError)
-#@end
+#%end
 
 p 12354.chr(Encoding::UTF_8)
 # => "あ"
@@ -652,7 +652,7 @@ p -1234567890987654321.remainder(13731.24) # => -9906.22531493148
 
 - **SEE** [m:Numeric#quo], [m:Numeric#div], [m:Integer#div]
 
-#@since 3.2
+#%since 3.2
 ### def ceildiv(other) -> Integer
 
 `self` を `other` で割り、その(剰余を考えない)商を整数に切り上げたものを返します。
@@ -669,7 +669,7 @@ p -5.ceildiv(3) # => -1
 p -5.ceildiv(-3)  # => 2
 ```
 
-#@end
+#%end
 
 ### def **(other) -> Numeric
 ### def pow(other) -> Numeric
@@ -682,9 +682,9 @@ p -5.ceildiv(-3)  # => 2
 - **return** -- 計算結果
 - **raise** `TypeError` -- 2引数 `pow` で `Integer` 以外を指定した場合に発生します。
 - **raise** `RangeError` -- 2引数 `pow` で `other` に負の数を指定した場合に発生します。
-#@since 3.4
+#%since 3.4
 - **raise** `ArgumentError` -- 計算結果が巨大になりすぎる場合に発生します。
-#@end
+#%end
 
 ```ruby
 p 2 ** 3 # => 8
@@ -698,7 +698,7 @@ p -3.pow(3, -8) # => -3
 p 5.pow(2, -8)  # => -7
 ```
 
-#@until 3.4
+#%until 3.4
 結果が巨大すぎる整数になりそうなとき、警告を出したうえで [m:Float::INFINITY] を返します。
 
 ```ruby title="計算を放棄して Float::INFINITY を返す例"
@@ -708,9 +708,9 @@ p 100**9999999
 ```
 
 判定の閾値は変わりえます。
-#@end
+#%end
 
-#@since 3.4
+#%since 3.4
 計算結果が巨大すぎるときは [c:ArgumentError] が発生します。
 
 ```ruby title="計算結果が巨大すぎる例"
@@ -719,7 +719,7 @@ p 100**9999999999999999999
 ```
 
 判定の閾値は変わりえます。
-#@end
+#%end
 
 - **SEE** [m:BigDecimal#power]
 

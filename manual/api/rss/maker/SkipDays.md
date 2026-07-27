@@ -8,7 +8,7 @@ RSS 0.91/2.0を生成するときだけ利用されます．
 ## Instance Methods
 
 ### def new_day
-#@todo
+#%todo
 新しくdayを作成し，返します．作成された
 dayはdayリストの最後
 に追加されています．
@@ -28,7 +28,7 @@ contentを指定する必要があります．
 
 ### def content
 ### def content=()
-#@todo
+#%todo
 
 # class RSS::Maker::RSS09::Channel::SkipDays::Day < RSS::Maker::ChannelBase::SkipDaysBase::DayBase
 # class RSS::Maker::RSS20::Channel::SkipDays::Day < RSS::Maker::RSS09::Channel::SkipDays::Day

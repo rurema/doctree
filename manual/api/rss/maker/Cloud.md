@@ -8,23 +8,23 @@ RSS 2.0を生成するときだけ利用されます．
 
 ### def domain
 ### def domain=()
-#@todo
+#%todo
 
 ### def port
 ### def port=()
-#@todo
+#%todo
 
 ### def path
 ### def path=()
-#@todo
+#%todo
 
 ### def registerProcedure
 ### def registerProcedure=()
-#@todo
+#%todo
 
 ### def protocol
 ### def protocol=()
-#@todo
+#%todo
 
 # class RSS::Maker::RSS09::Channel::Cloud < RSS::Maker::ChannelBase::CloudBase
 

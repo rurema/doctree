@@ -18,7 +18,7 @@ library: win32/registry
 ### const HKEY_PERFORMANCE_NLSTEXT
 ### const HKEY_CURRENT_CONFIG
 ### const HKEY_DYN_DATA
-#@todo
+#%todo
 
 定義済キー値。
 これらは Integer で、Win32::Registry オブジェクトではありません。
@@ -37,7 +37,7 @@ library: win32/registry
 ### const REG_RESOURCE_REQUIREMENTS_LIST
 ### const REG_QWORD
 ### const REG_QWORD_LITTLE_ENDIAN
-#@todo
+#%todo
 
 レジストリ値の型。
 
@@ -53,13 +53,13 @@ library: win32/registry
 ### const KEY_WRITE
 ### const KEY_EXECUTE
 ### const KEY_ALL_ACCESS
-#@todo
+#%todo
 
 セキュリティアクセスマスク。
 
 ### const REG_CREATED_NEW_KEY
 ### const REG_OPENED_EXISTING_KEY
-#@todo
+#%todo
 
 キーが新しく作られたか、既存キーが開かれたか。
 [m:Win32::Registry#disposition] メソッドも参照してください。
@@ -71,15 +71,15 @@ library: win32/registry
 ### const REG_OPTION_BACKUP_RESTORE
 ### const REG_OPTION_OPEN_LINK
 ### const REG_LEGAL_OPTION
-#@todo
+#%todo
 
 ### const REG_WHOLE_HIVE_VOLATILE
 ### const REG_REFRESH_HIVE
 ### const REG_NO_LAZY_FLUSH
 ### const REG_FORCE_RESTORE
-#@todo
+#%todo
 
 ### const MAX_KEY_LENGTH
 ### const MAX_VALUE_LENGTH
-#@todo
+#%todo
 

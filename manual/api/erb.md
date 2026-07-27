@@ -147,28 +147,28 @@ puts template.result # => __ENCODING__ is Big5
 
 ## Class Methods
 
-#@since 3.2
+#%since 3.2
 ### def new(str, trim_mode: nil, eoutvar: '_erbout') -> ERB
-#@else
+#%else
 ### def new(str, safe_level=NOT_GIVEN, trim_mode=NOT_GIVEN, eoutvar=NOT_GIVEN, trim_mode: nil, eoutvar: '_erbout') -> ERB
-#@end
+#%end
 eRubyスクリプト から ERB オブジェクトを生成して返します。
 
 - **param** `str` -- eRubyスクリプトを表す文字列
-#@until 3.2
+#%until 3.2
 - **param** `safe_level` -- eRubyスクリプトが実行されるときのセーフレベル
-#@end
+#%end
 - **param** `trim_mode` -- 整形の挙動を変更するオプション
 
 - **param** `eoutvar` -- eRubyスクリプトの中で出力をためていく変数の名前を表す文
                字列。eRuby スクリプトの中でさらに ERB を使うときに変更
                します。通常は指定する必要はありません。
 
-#@until 3.2
+#%until 3.2
 Ruby 2.6.0 から位置引数での safe_level, trim_mode, eoutvar の指定は非推奨です。
 Ruby 3.2 で削除されました。
 trim_mode と eoutvar の指定はキーワード引数に移行してください。
-#@end
+#%end
 
 ```ruby title="例"
 require "erb"
@@ -338,7 +338,7 @@ print MyClass.new.render("foo", 123)
 
 変換した Ruby スクリプトをメソッドとして定義した無名のクラスを返します。
 
-#@# 使い途がなさそうだ…。
+#%# 使い途がなさそうだ…。
  
 - **param** `superklass` -- 無名クラスのスーパークラス
 

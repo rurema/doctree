@@ -121,14 +121,14 @@ p Fiddle.dlunwrap(addr)     #=> "abc"
 
 ## Constants
 
-#@# Constants for internal use
-#@# --- CdeclCallbackProcs
-#@# 
-#@# --- CdeclCallbackAddrs
-#@# 
-#@# --- StdcallCallbackProcs
-#@# 
-#@# --- StdcallCallbackAddrs
+#%# Constants for internal use
+#%# --- CdeclCallbackProcs
+#%# 
+#%# --- CdeclCallbackAddrs
+#%# 
+#%# --- StdcallCallbackProcs
+#%# 
+#%# --- StdcallCallbackAddrs
 
 ### const ALIGN_CHAR -> Integer
 
@@ -192,10 +192,10 @@ C の構造体における uintptr_t のアライメントの値。
 
 C の NULL ポインタ
 
-#@# nodoc
-#@# --- RTLD_GLOBAL -> Integer
-#@# --- RTLD_LAZY -> Integer
-#@# --- RTLD_NOW -> Integer
+#%# nodoc
+#%# --- RTLD_GLOBAL -> Integer
+#%# --- RTLD_LAZY -> Integer
+#%# --- RTLD_NOW -> Integer
 
 ### const RUBY_FREE -> Integer
 

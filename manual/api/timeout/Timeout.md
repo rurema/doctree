@@ -102,7 +102,7 @@ ensure
 end
 # 実行例
 => 1.000757509
-#@since 3.4
+#%since 3.4
    /path/to/gems/timeout-0.6.0/lib/timeout.rb:40:in 'Timeout::Error.handle_timeout': execution expired (Timeout::Error)
         from /path/to/gems/timeout-0.6.0/lib/timeout.rb:304:in 'Timeout.timeout'
         from -:10:in '<main>'
@@ -112,7 +112,7 @@ end
         from /path/to/gems/timeout-0.6.0/lib/timeout.rb:38:in 'Timeout::Error.handle_timeout'
         from /path/to/gems/timeout-0.6.0/lib/timeout.rb:304:in 'Timeout.timeout'
         from -:10:in '<main>'
-#@else
+#%else
    /path/to/gems/timeout-0.4.1/lib/timeout.rb:43:in `rescue in handle_timeout': execution expired (Timeout::Error)
         from /path/to/gems/timeout-0.4.1/lib/timeout.rb:40:in `handle_timeout'
         from /path/to/gems/timeout-0.4.1/lib/timeout.rb:195:in `timeout'
@@ -123,13 +123,13 @@ end
         from /path/to/gems/timeout-0.4.1/lib/timeout.rb:41:in `handle_timeout'
         from /path/to/gems/timeout-0.4.1/lib/timeout.rb:195:in `timeout'
         from -:10:in `<main>'
-#@end
+#%end
 # c_sleep.call の秒数が t より短い場合は例外が発生しないので
 # その場合は、t に小さい数値(0.000001のような)に変える。
 ```
 
-#@#[[unknown:timeoutの落し穴|trap::timeout]]も参照
-#@# unknown なので、ここに少し変えてコピペした。
+#%#[[unknown:timeoutの落し穴|trap::timeout]]も参照
+#%# unknown なので、ここに少し変えてコピペした。
 
 timeout による割り込みは [m:Kernel?.system] によって呼び出された外部プログラムを
 タイムアウトさせる事はできないので、[m:IO.popen]、[m:Kernel?.open]を使用するなどの工夫が必要です。
@@ -185,21 +185,21 @@ rescue Timeout::Error => err
   printf "[result]\t%s", com.read
   com.close unless com.nil?
 end
-#@# もっといい止め方があるかもしれない。
+#%# もっといい止め方があるかもしれない。
 
 #止まっているか確認する。
 #system("ps au")
 ```
 
-#@# 内部用なのでコメントアウト
-#@# == Constants
-#@# --- THIS_FILE
-#@# --- CALLER_OFFSET
+#%# 内部用なのでコメントアウト
+#%# == Constants
+#%# --- THIS_FILE
+#%# --- CALLER_OFFSET
 
 # class Timeout::Error < RuntimeError
-#@until 3.1
+#%until 3.1
 alias TimeoutError
-#@end
+#%end
 
 [lib:timeout] で定義される例外クラスです。
 関数 timeout がタイムアウトすると発生します。
@@ -207,8 +207,8 @@ alias TimeoutError
 [lib:timeout] を使うライブラリを作成する場合は、ユーザが指定した
 timeout を捕捉しないようにライブラリ内で Timeout::Error のサブクラスを
 定義して使用した方が無難です。
-#@#((-注: version 1.6 では、[[unknown:ruby-list:33352]] のパッチが必要です。
-#@#このパッチは 1.7 に取り込まれました[[unknown:ruby-list:33391]]-))
+#%#((-注: version 1.6 では、[[unknown:ruby-list:33352]] のパッチが必要です。
+#%#このパッチは 1.7 に取り込まれました[[unknown:ruby-list:33391]]-))
 
 ```text
 ==> foo.rb <==
@@ -229,5 +229,5 @@ Timeout.timeout(5) {
 }
 ```
 
-#@# nodoc
-#@# = class Timeout::ExitException < Exception
+#%# nodoc
+#%# = class Timeout::ExitException < Exception

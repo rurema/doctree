@@ -23,7 +23,7 @@ Usage: gem fetch GEMNAME [GEMNAME ...] [options]
         --source URL                 Gem パッケージのリモートリポジトリの URL を指定します
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```text
 Arguments:

@@ -1,2 +1,2 @@
 # sprintf フォーマット
-#@include(../api/_builtin/printf-format)
+#%include(../api/_builtin/printf-format)

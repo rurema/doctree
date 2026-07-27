@@ -42,13 +42,13 @@ resource3
 ## Class Methods
 
 ### def new -> Thread::Queue
-#@since 3.1
+#%since 3.1
 ### def new(items) -> Thread::Queue
-#@end
+#%end
 
 新しいキューオブジェクトを生成します。
 
-#@since 3.1
+#%since 3.1
 - **param** `items` -- 初期値を Enumerable で指定します。
 
 ```ruby
@@ -57,10 +57,10 @@ q = Thread::Queue.new([a, b, c])
 q = Thread::Queue.new(items)
 ```
 
-#@else
-#@#noexample Thread::Queue#close 等を参照
+#%else
+#%#noexample Thread::Queue#close 等を参照
 使用例は [ref:c:Thread::Queue#example] を参照してください。
-#@end
+#%end
 
 ## Instance methods
 
@@ -176,7 +176,7 @@ end
 キューの値を追加します。待っているスレッドがいれば実行を再開
 させます。返り値は不定です。
 
-#@#noexample 要約の例を参照
+#%#noexample 要約の例を参照
 使用例は [ref:c:Thread::Queue#example] を参照してください。
 
 ### def close -> self

@@ -13,7 +13,7 @@ Usage: gem cleanup [GEMNAME ...] [options]
     -d, --dryrun
 ```
 
-#@include(common_options)
+#%include(common_options)
 
 ```console
 Arguments:

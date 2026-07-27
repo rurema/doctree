@@ -283,10 +283,10 @@ p Complex(11, 22).quo(3)  # => ((11/3)+(22/3)*i)
 
 - **SEE** [m:Complex#quo]
 
-#@# --- hash -> Integer
+#%# --- hash -> Integer
 
-#@# 自身のハッシュ値を返します。
-#@# Complex#hashはnodocのため
+#%# 自身のハッシュ値を返します。
+#%# Complex#hashはnodocのため
 
 ### def imag      -> Numeric
 ### def imaginary -> Numeric
@@ -403,8 +403,8 @@ p Complex(3).to_r  # => (3/1)
 Complex(3, 2).to_r # ~> RangeError
 ```
 
-#@# rationalize メソッドの引数 eps は常に無視されるため、to_r メソッド
-#@# と同じエントリとしました(sho-h)。
+#%# rationalize メソッドの引数 eps は常に無視されるため、to_r メソッド
+#%# と同じエントリとしました(sho-h)。
 
 ### def to_s -> String
 
@@ -473,7 +473,7 @@ Complex::compatible#marshal_load で復元可能な配列を返します。
 
 [注意] Complex::compatible は通常の方法では参照する事ができません。
 
-#@# https://bugs.ruby-lang.org/issues/6625 を参照。
+#%# https://bugs.ruby-lang.org/issues/6625 を参照。
 
 ## Constants
 

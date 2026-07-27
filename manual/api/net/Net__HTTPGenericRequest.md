@@ -12,18 +12,18 @@ include:
 
 ## Class Methods
 
-#@# 
-#@# --- new(m, reqbody, resbody, path, initheader = nil)
+#%# 
+#%# --- new(m, reqbody, resbody, path, initheader = nil)
 
 ## Instance Methods
 
-#@# --- inspect
+#%# --- inspect
 
 ### def body_exist? -> bool
 
 このメソッドは obsolete です。
 
-#@#noexample obsolete のため不要
+#%#noexample obsolete のため不要
 
 [m:Net::HTTPGenericRequest#response_body_permitted?]
 の別名です。

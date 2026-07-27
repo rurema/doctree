@@ -16,39 +16,39 @@ RSS 2.0の場合はtitleまたはdescriptionを設定する
 
 ### def title
 ### def title=()
-#@todo
+#%todo
 
 ### def link
 ### def link=()
-#@todo
+#%todo
 
 ### def description
 ### def description=()
-#@todo
+#%todo
 
 ### def date
 ### def date=()
-#@todo
+#%todo
 
 ### def pubDate
-#@todo
+#%todo
 item.dateの別名です．
 
 ### def pubDate=()
-#@todo
+#%todo
 item.date=の別名です．
 
 ### def author
 ### def author=()
-#@todo
+#%todo
 
 ### def comments
 ### def comments=()
-#@todo
+#%todo
 
 ### def guid
 ### def enclosure
 ### def source
 ### def categories
-#@todo
+#%todo
 

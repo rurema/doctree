@@ -40,15 +40,15 @@ class RDoc::Generator::Spellcheck
 end
 ```
 
-#@# Path や Template などには Object.new したものが入っているため、全て
-#@# のオブジェクトが通るように見えるため除外。
-#@#
-#@# === オプションの検証
-#@#
-#@# OptionParser validators will validate and cast user input values.  In
-#@# addition to the validators that ship with OptionParser (String, Integer,
-#@# Float, TrueClass, FalseClass, Array, Regexp, Date, Time, URI, etc.),
-#@# RDoc::Options adds Path, PathArray and Template.
+#%# Path や Template などには Object.new したものが入っているため、全て
+#%# のオブジェクトが通るように見えるため除外。
+#%#
+#%# === オプションの検証
+#%#
+#%# OptionParser validators will validate and cast user input values.  In
+#%# addition to the validators that ship with OptionParser (String, Integer,
+#%# Float, TrueClass, FalseClass, Array, Regexp, Date, Time, URI, etc.),
+#%# RDoc::Options adds Path, PathArray and Template.
 
 ## Instance Methods
 
@@ -269,8 +269,8 @@ attr_accessor に対応します。
 
 使用されていません。常に nil を返します。
 
-#@# 少なくとも --fmt オプションは @generator_name に値を代入する。参照
-#@# もない。
+#%# 少なくとも --fmt オプションは @generator_name に値を代入する。参照
+#%# もない。
 
 ### def formatter=(val)
 
@@ -360,12 +360,12 @@ val に true を指定した場合、コマンドライン引数の --force_outp
 - **param** `val` -- --force_output オプションと同じ指定を行う場合は true、そうで
            ない場合は false を指定します。
 
-#@# 特に使用していないようなので、記述しない。
-#@#
-#@#--- generator_options
-#@#
-#@#--- generator_options=(val)
-#@#
+#%# 特に使用していないようなので、記述しない。
+#%#
+#%#--- generator_options
+#%#
+#%#--- generator_options=(val)
+#%#
 
 ### def hyperlink_all -> bool
 
@@ -411,12 +411,12 @@ val に true を指定した場合、コマンドライン引数の --line-numbe
 
 - **param** `val` -- 数値オブジェクトか false を指定します。
 
-#@# 特に使用していないようなので、記述しない。
-#@#
-#@#--- option_parser
-#@#
-#@#--- option_parser=(val)
-#@#
+#%# 特に使用していないようなので、記述しない。
+#%#
+#%#--- option_parser
+#%#
+#%#--- option_parser=(val)
+#%#
 
 ### def template_dir -> String | nil
 
@@ -432,13 +432,13 @@ val に true を指定した場合、コマンドライン引数の --line-numbe
 
 - **param** `val` -- パスを文字列で指定します。
 
-#@# initialize 時に true が指定してあるのみで、他に影響しないため、記述
-#@# しない。
-#@#
-#@#--- update_output_dir -> bool
-#@#
-#@#--- update_output_dir=(val)
-#@#
+#%# initialize 時に true が指定してあるのみで、他に影響しないため、記述
+#%# しない。
+#%#
+#%#--- update_output_dir -> bool
+#%#
+#%#--- update_output_dir=(val)
+#%#
 
 ### def visibility -> :public | :protected | :private
 
@@ -463,8 +463,8 @@ val に true を指定した場合、コマンドライン引数の --line-numbe
 
 - **param** `val` -- [c:OptionParser] オブジェクトを指定します。
 
-#@# 1.8 系の Options::OptionList については、内部だけで使用しているため、
-#@# 記述しない。
+#%# 1.8 系の Options::OptionList については、内部だけで使用しているため、
+#%# 記述しない。
 
 ### def markup -> String
 
@@ -539,32 +539,32 @@ $stderr に出力します。
 
 非推奨のオプションの一覧を返します。
 
-#@# #@since 2.0.0
-#@# --- Template -> Object
-#@# #@else
-#@# --- Template -> nil
-#@# #@end
-#@#
-#@# Option validator for OptionParser that matches a template directory for an
-#@# installed generator that lives in
-#@# <tt>"rdoc/generator/template/#{template_name}"</tt>
+#%# #@since 2.0.0
+#%# --- Template -> Object
+#%# #@else
+#%# --- Template -> nil
+#%# #@end
+#%#
+#%# Option validator for OptionParser that matches a template directory for an
+#%# installed generator that lives in
+#%# <tt>"rdoc/generator/template/#{template_name}"</tt>
 
 ### const SPECIAL -> [String]
 
 --write-options を指定した際に .rdoc_options ファイルに保存されないオプ
 ションの一覧を返します。
 
-#@# --- Directory -> Object
-#@#
-#@# Option validator for OptionParser that matches a directory that exists on
-#@# the filesystem.
-#@#
-#@# --- Path -> Object
-#@#
-#@# Option validator for OptionParser that matches a comma-separated list of
-#@# files or directories that exist on the filesystem.
-#@#
-#@# --- PathArray -> Object
-#@#
-#@# Option validator for OptionParser that matches a comma-separated list of
-#@# files or directories that exist on the filesystem.
+#%# --- Directory -> Object
+#%#
+#%# Option validator for OptionParser that matches a directory that exists on
+#%# the filesystem.
+#%#
+#%# --- Path -> Object
+#%#
+#%# Option validator for OptionParser that matches a comma-separated list of
+#%# files or directories that exist on the filesystem.
+#%#
+#%# --- PathArray -> Object
+#%#
+#%# Option validator for OptionParser that matches a comma-separated list of
+#%# files or directories that exist on the filesystem.

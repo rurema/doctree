@@ -244,18 +244,18 @@ p Time.now # => 2009-06-24 12:39:54 +0900
 ```
 
 ### def new(year, mon = nil, day = nil, hour = nil, min = nil, sec = nil, zone = nil)    -> Time
-#@since 3.1
+#%since 3.1
 ### def new(year, mon = nil, day = nil, hour = nil, min = nil, sec = nil, in: nil)       -> Time
-#@end
+#%end
 
 引数で指定した地方時の Time オブジェクトを返します。
 
 mon day hour min sec に nil を指定した場合の値は、その引数がとり得る最小の値です。
-#@since 3.1
+#%since 3.1
 zone と in に nil を指定した場合の値は、現在のタイムゾーンに従います。
-#@else
+#%else
 zone に nil を指定した場合の値は、現在のタイムゾーンに従います。
-#@end
+#%end
 
 - **param** `year` -- 年を整数か文字列で指定します。例えば 1998 年に対して 1998 を指定します。
 
@@ -273,22 +273,22 @@ zone に nil を指定した場合の値は、現在のタイムゾーンに従�
 - **param** `zone` -- 協定世界時との時差を、秒を単位とする整数か、
             "UTC" かミリタリータイムゾーンの文字列または
             "+HH:MM" "-HH:MM" 形式の文字列で指定します。
-#@since 3.1
+#%since 3.1
 - **param** `in` -- 協定世界時との時差を、秒を単位とする整数か、
           "UTC" かミリタリータイムゾーンの文字列または
           "+HH:MM" "-HH:MM" 形式の文字列で指定します。
-#@end
+#%end
 
 - **raise** `ArgumentError` -- 与えられた引数が無効である場合に発生します。
-#@since 3.1
+#%since 3.1
 - **raise** `ArgumentError` -- zone と in を同時に指定した場合に発生します。
-#@end
+#%end
 
 ```ruby
 p Time.new(2008, 6, 21, 13, 30, 0, "+09:00") # => 2008-06-21 13:30:00 +0900
 ```
 
-#@since 3.2
+#%since 3.2
 ### def new(iso8601, in: nil)       -> Time
 
 引数で指定した地方時の Time オブジェクトを返します。
@@ -308,7 +308,7 @@ p Time.new("2024-02-15 10:20:30 UTC", in: "+0800") # => 2024-02-15 10:20:30 UTC
 p Time.new("2024-02-15 10:20:30", in: "+0800")     # => 2024-02-15 10:20:30 +0800
 ```
 
-#@end
+#%end
 
 ## Instance Methods
 
@@ -576,7 +576,7 @@ p t.utc?                                   # => false
   - %Y: 西暦を表す数
   - %y: 西暦の下2桁(00-99)
   - %Z: タイムゾーン (環境依存)
-#@#  * %Z: タイムゾーン  [[unknown:trap|trap::Time]]
+#%#  * %Z: タイムゾーン  [[unknown:trap|trap::Time]]
   - %z: タイムゾーン。UTCからのオフセット (例 +0900)
   - %:z: タイムゾーン。コロンが入ったUTCからのオフセット (例 +09:00)
   - %::z: タイムゾーン。コロンが入った秒まで含むUTCからのオフセット (例 +09:00:00)
@@ -897,7 +897,7 @@ self のハッシュ値を返します。
 
 - **return** -- ハッシュ値を返します。
 
-#@#noexample
+#%#noexample
 
 - **SEE** [m:Object#hash]
 
@@ -1073,7 +1073,7 @@ to_f の値と subsec の値の下のほうの桁の値は異なる場合があ�
 というのは IEEE 754 double はそれを表すのに十分な精度を
 持たないからです。subsec で得られる値が正確です。
 
-#@since 3.2
+#%since 3.2
 ### def deconstruct_keys(array_of_names_or_nil) -> Hash
 
 パターンマッチに使用する名前と値の [c:Hash] を返します。
@@ -1119,4 +1119,4 @@ end
 ```
 
 - **SEE** [ref:d:spec/pattern_matching#matching_non_primitive_objects]
-#@end
+#%end
