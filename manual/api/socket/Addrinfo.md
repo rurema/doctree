@@ -222,7 +222,7 @@ p Addrinfo.tcp("localhost", 80).protocol == Socket::IPPROTO_TCP #=> true
 
 カノニカル名が存在しない場合には nil を返します。
 
-カノニカル名は [m:Addrinfo.getaddrinfo] に [m:Socket::AI_CANONINAME]
+カノニカル名は [m:Addrinfo.getaddrinfo] に [m:Socket::AI_CANONNAME]
 を指定した場合にセットされます。
 
 ```ruby

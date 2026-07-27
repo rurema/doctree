@@ -265,7 +265,7 @@ flag が真なら、静粛 (quiet) モードが有効になります。
 ション (例: --debug) を表した文字列のいずれかでなければなり
 ません。配列の中の一番左端のオプション名が、オプションの正式名
 になります。配列中の引数のフラグは、[m:GetoptLong::NO_ARGUMENT],
-[m:GetoptLong::REQUIRE_ARGUMENT], [m:GetoptLong::OPTIONAL_ARGUMENT]
+[m:GetoptLong::REQUIRED_ARGUMENT], [m:GetoptLong::OPTIONAL_ARGUMENT]
 のいずれかでなくてはなりません。
 
 オプションを設定できるのは、get, get_option, each,
@@ -348,7 +348,7 @@ parser.set_options([GetoptLong::NO_ARGUMENT, '-d', '--debug'],
 
 内部で使用する定数です。
 
-[m:GetoptLong::NO_ARGUMENT], [m:GetoptLong::REQUIRE_ARGUMENT],
+[m:GetoptLong::NO_ARGUMENT], [m:GetoptLong::REQUIRED_ARGUMENT],
 [m:GetoptLong::OPTIONAL_ARGUMENT] がセットされています。
 
 ### const NO_ARGUMENT -> 0

@@ -7,7 +7,7 @@ X.509 v3 証明書の拡張領域のためのクラスです。
 
 [c:OpenSSL::X509::Certificate] オブジェクトは
 その拡張領域を Extension オブジェクトの配列として保持し、
-[c:OpenSSL::X509::Certificate#extensions] でその配列が得られます。
+[m:OpenSSL::X509::Certificate#extensions] でその配列が得られます。
 
 このクラスのインスタンス生成は [c:OpenSSL::ASN1::ASN1Data] を
 取り扱う必要があり面倒です。
@@ -57,20 +57,20 @@ p ex3 # => basicConstraints = CA:FALSE
 
 その拡張領域の重要度(critical)を返します。
 
-- **SEE** [c:OpenSSL::X509::Extension#critical=]
+- **SEE** [m:OpenSSL::X509::Extension#critical=]
 
 ### def critical=(bool)
 
 その拡張領域の重要度(critical)を真偽値で設定します。
 
 - **param** `bool` -- 設定する重要度の真偽値
-- **SEE** [c:OpenSSL::X509::Extension#critical?]
+- **SEE** [m:OpenSSL::X509::Extension#critical?]
 
 ### def oid -> String
 
 拡張領域の識別子(extnID)をOIDの文字列で返します。
 
-- **SEE** [c:OpenSSL::X509::Extension#oid=]
+- **SEE** [m:OpenSSL::X509::Extension#oid=]
 
 ### def oid=(oid)
 
@@ -78,7 +78,7 @@ p ex3 # => basicConstraints = CA:FALSE
 
 - **param** `oid` -- OIDの文字列
 - **raise** `OpenSSL::X509::Extension` -- 識別子の設定に失敗した場合に発生します
-- **SEE** [c:OpenSSL::X509::Extension#oid]
+- **SEE** [m:OpenSSL::X509::Extension#oid]
 
 ### def to_der -> String
 
@@ -90,7 +90,7 @@ DER 形式のバイト列に変換して返します。
 
 拡張領域の値(extnValue)を返します。
 
-- **SEE** [c:OpenSSL::X509::Extension#value=]
+- **SEE** [m:OpenSSL::X509::Extension#value=]
 
 ### def value=(value)
 
@@ -98,7 +98,7 @@ DER 形式のバイト列に変換して返します。
 
 - **param** `value` -- 設定する値の文字列
 - **raise** `OpenSSL::X509::Extension` -- 値の設定に失敗した場合に発生します
-- **SEE** [c:OpenSSL::X509::Extension#value]
+- **SEE** [m:OpenSSL::X509::Extension#value]
 
 ### def to_a -> [String, String, bool]
 

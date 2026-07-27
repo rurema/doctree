@@ -28,7 +28,7 @@ SSL 通信での各種バグ回避コードを有効にするフラグです。
 
 [m:OpenSSL::SSL::SSLContext#options=] で利用します。
 
-通常は [c:OpenSSL::SSL::OP_ALL] でこれらすべてを有効にします。
+通常は [m:OpenSSL::SSL::OP_ALL] でこれらすべてを有効にします。
 特定のフラグのみ無効にしたい場合は例えば
 
 ```ruby

@@ -1284,7 +1284,7 @@ LIST応答の属性
 IMAP の continuation request (命令継続要求) を表すクラスです。
 
 通常このクラスを直接扱うことはありません。
-レスポンスハンドラ([c:Net::IMAP#add_response_handler])
+レスポンスハンドラ([m:Net::IMAP#add_response_handler])
 に渡されます。
 
 詳しくは [RFC:2060] の 7.5 を参照してください。

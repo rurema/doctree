@@ -11,7 +11,7 @@ YAML ドキュメントを表すクラスです。
   - [c:Psych::Nodes::Sequence]
   - [c:Psych::Nodes::Mapping]
   - [c:Psych::Nodes::Scalar]
-この唯一の子ノードは「ルート」とも呼ばれ、[c:Psych::Nodes::Document#root] で
+この唯一の子ノードは「ルート」とも呼ばれ、[m:Psych::Nodes::Document#root] で
 アクセスできます。
 
 ## Class Methods

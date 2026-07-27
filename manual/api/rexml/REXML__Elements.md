@@ -221,7 +221,7 @@ p doc.root.elements.size # => 3
 xpath を指定した場合は、その XPath 文字列に
 マッチする要素の配列を返します。
 
-[m:REXML::Elements#each] と同様、[c:REXML::XPath.match] などと
+[m:REXML::Elements#each] と同様、[m:REXML::XPath.match] などと
 異なり、要素以外の子ノードは無視されます。
 
 - **param** `xpath` -- XPath文字列

@@ -38,4 +38,4 @@ p "Matz,   Ruby\n".parse_csv               # => ["Matz", "   Ruby"]
 p "Matz,   Ruby\n".parse_csv(strip: true)  # => ["Matz", "Ruby"]
 ```
 
-- **SEE** [m:CSV.new], [c:CSV.parse_line]
+- **SEE** [m:CSV.new], [m:CSV.parse_line]

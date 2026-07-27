@@ -133,10 +133,10 @@ nil を渡すと適当な方式が選ばれます。互換性を気にするの�
 triple DES を使うとよいでしょう。多くのクライアントで利用可能なはずです。
 
 flags には以下のフラグを渡すことができます。
-  - [c:OpenSSL::PKCS7::TEXT]
+  - [m:OpenSSL::PKCS7::TEXT]
       暗号化するデータに text/plain タイプの MIME ヘッダを追加します。
       MIME形式のデータを渡すときにはこれを使ってはいけません。
-  - [c:OpenSSL::PKCS7::BINARY]
+  - [m:OpenSSL::PKCS7::BINARY]
       data に MIME 正規化をほどこしません。
 
 - **param** `certs` -- 公開鍵を含む証明書([c:OpenSSL::X509::Certificate] オブジェクト)の配列
@@ -226,7 +226,7 @@ PKCS7 オブジェクトのタイプを [c:Symbol] オブジェクトで設定�
 
 署名に添付する証明書を追加します。
 
-通常は [c:OpenSSL::PKCS7.sign] の引数で添付する証明書を指定した
+通常は [m:OpenSSL::PKCS7.sign] の引数で添付する証明書を指定した
 ほうがよいでしょう。
 
 - **param** `cert` -- 追加する証明書([c:OpenSSL::X509::Certificate] オブジェクト)
@@ -241,7 +241,7 @@ PKCS7 オブジェクトのタイプを [c:Symbol] オブジェクトで設定�
 署名に付ける証明書を指定します。
 
 PKCS7 オブジェクトに元々つけられていた証明書はクリアされます。
-通常は [c:OpenSSL::PKCS7.sign] の引数で添付する証明書を指定した
+通常は [m:OpenSSL::PKCS7.sign] の引数で添付する証明書を指定した
 ほうがよいでしょう。
 
 - **param** `certificates` -- 証明書([c:OpenSSL::X509::Certificate] オブジェクト)の配列
