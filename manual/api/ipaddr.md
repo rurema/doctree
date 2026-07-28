@@ -6,7 +6,7 @@ IPアドレスを扱うライブラリです。
 
 # class IPAddr < Object
 
-IP アドレスを扱うのためのクラスです。
+IP アドレスを表すクラスです。IPv4 と IPv6 のどちらのアドレスも表せます。
 
 ```ruby title="例"
 require 'ipaddr'
