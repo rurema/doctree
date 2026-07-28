@@ -200,6 +200,25 @@ set = Set['hello', 'world']
 p set.to_a # => ["hello", "world"]
 ```
 
+### def join(separator = nil) -> String
+
+各要素を文字列に変換し、separator を間に挟んで連結した文字列を返します。
+
+[m:Set#to_a] してから [m:Array#join] を呼ぶのと同じです。
+要素の順序は不定なので、連結される順序も不定です。
+
+- **param** `separator` -- 間に挟む文字列を指定します。nil を指定した場合と
+                 省略した場合は、間に何も挟まずに連結します。
+
+```ruby
+require 'set'
+p Set[1, 2, 3].join       # => "123"
+p Set[1, 2, 3].join(", ") # => "1, 2, 3"
+p Set[].join(", ")        # => ""
+```
+
+- **SEE** [m:Array#join], [m:Set#to_a]
+
 ### def include?(o) -> bool
 ### def member?(o) -> bool
 ### def ===(o) -> bool
