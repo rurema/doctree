@@ -129,17 +129,15 @@ GC.start
 ブロックが与えられなかった場合は、
 [c:Enumerator] オブジェクトを返します。
 
-次のクラスのオブジェクトについては繰り返しません
+次のオブジェクトについては繰り返しません
 
-- `Fixnum`
-- [c:Symbol]
+- 即値の [c:Integer](ヒープ上に確保される大きな整数は繰り返します)
+- 静的な [c:Symbol](動的に生成されたシンボルは繰り返します)
 - [c:TrueClass]
 - [c:FalseClass]
 - [c:NilClass]
 
-とくに、klass に `Fixnum` や [c:Symbol] などのクラスを指定した場合は、
-何も繰り返さないことになります。
-なお、[c:Symbol] については、かわりに [m:Symbol.all_symbols] が使用できます。
+なお、[c:Symbol] をすべて列挙するには、かわりに [m:Symbol.all_symbols] が使用できます。
 
 - **param** `klass` -- クラスかモジュールを指定します。
 
