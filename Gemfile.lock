@@ -1,5 +1,6 @@
-PATH
-  remote: ../bitclust
+GIT
+  remote: https://github.com/rurema/bitclust.git
+  revision: 0a7f6c7386f5a8587bba0b37d436fb79075276ab
   specs:
     bitclust-core (1.5.0)
       drb
