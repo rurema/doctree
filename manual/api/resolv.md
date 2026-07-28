@@ -1554,9 +1554,9 @@ DNSクエリを表す抽象クラスです。
 ### def new(labels, absolute = true) -> Resolv::DNS::Name
 
 Resolv::DNS::Nameのインスタンスを生成します。
-labels は [c:Resolv::DNS::Label::Str] の配列を与えます。
+labels は `Resolv::DNS::Label::Str` の配列を与えます。
 
-- **param** `labels` -- ドメイン名を [c:Resolv::DNS::Label::Str] の配列として与えます。
+- **param** `labels` -- ドメイン名を `Resolv::DNS::Label::Str` の配列として与えます。
 - **param** `absolute` -- ドメイン名が絶対パスであるかどうかを 真偽値で与えます。
 
 - **SEE** [m:Resolv::DNS::Name.create]

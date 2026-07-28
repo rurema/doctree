@@ -305,7 +305,7 @@ p OpenSSL::BN.new("129").bit_set?(1) # => false
 ```
 
 - **param** `n` -- 調べるビットの位置
-- **SEE** [m:OpenSSL::set_bit!]
+- **SEE** [m:OpenSSL::BN#set_bit!]
 
 ### def clear_bit!(n) -> self
 
@@ -321,7 +321,7 @@ p a # => 128
 
 - **param** `n` -- 0にするビットの位置
 - **raise** `OpenSSL::BNError` -- 計算時エラー
-- **SEE** [m:OpenSSL::set_bit!]
+- **SEE** [m:OpenSSL::BN#set_bit!]
 
 ### def coerce(other) -> Array
 
@@ -553,7 +553,7 @@ p a # => 129
 
 - **param** `n` -- 1にするビットの位置
 - **raise** `OpenSSL::BNError` -- 計算時エラー
-- **SEE** [m:OpenSSL::clear_bit!], [m:OpenSSL::bit_set?]
+- **SEE** [m:OpenSSL::BN#clear_bit!], [m:OpenSSL::BN#bit_set?]
 
 ### def sqr -> OpenSSL::BN
 

@@ -49,7 +49,7 @@ collection に name で指定したクラス、モジュールを追加します
                   ブジェクトで指定します。
 
 既に登録済みであった場合は、引数で指定した情報で内容を更新します。ただ
-し、[m:RDoc::CodeObject#done_documenting] が true を返す場合、何も行
+し、`RDoc::CodeObject#done_documenting` が true を返す場合、何も行
 われません。
 
 ### def find_local_symbol(name) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule | RDoc::AnyMethod | RDoc::Alias | RDoc::Attr | RDoc::Constant

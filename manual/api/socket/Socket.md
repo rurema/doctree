@@ -108,7 +108,7 @@ IP のバージョンに依存しないプログラムを書くための標準�
     [m:Socket::Constants::IPPROTO_IP] など、IPPROTO_ で始まる定数を指
     定します。
   - flags - [man:getaddrinfo(3)] の第3引数に指定する addrinfo 構造体の
-    ai_flags メンバに相当する Fixnum。
+    ai_flags メンバに相当する整数。
     Socket::AI_PASSIVE、
     Socket::AI_CANONNAME、
     Socket::AI_NUMERICHOST
@@ -148,7 +148,7 @@ pp Socket.getaddrinfo(Socket.gethostname, nil)
 
 - **param** `sa` -- 文字列か配列を与えます。
 
-- **param** `flags` -- 省略可能な第2引数 flags には [man:getnameinfo(3)] の第7番目の引数に指定する flags に相当する [c:Fixnum] を与えます。
+- **param** `flags` -- 省略可能な第2引数 flags には [man:getnameinfo(3)] の第7番目の引数に指定する flags に相当する [c:Integer] を与えます。
 
 - **return** -- 配列を返し、その要素はアドレスとポートを表す文字列です。
 
@@ -191,7 +191,7 @@ nil を指定することは Socket::AF_UNSPEC を指定すること
 ### 引数flagsについて
 
 省略可能な第2引数 flags には [man:getnameinfo(3)]
-の第7番目の引数に指定する flags に相当する [c:Fixnum] を与えます。
+の第7番目の引数に指定する flags に相当する [c:Integer] を与えます。
 
 引数flagsを構成するための定数として
 Socket::NI_MAXHOST、
@@ -299,10 +299,10 @@ service, protoに対応するポート番号を返
 ### def pack_sockaddr_in(port, host) -> String
 
 指定したアドレスを[ref:lib:socket#pack_string]
-で返します。port は、ポート番号を表す [c:Fixnum] あるいは、ポート
+で返します。port は、ポート番号を表す [c:Integer] あるいは、ポート
 番号、サービス名を表す文字列です。
 
-- **param** `port` --  ポート番号を表す [c:Fixnum] あるいは、ポート番号、サービス名を表す文字列を指定します。
+- **param** `port` --  ポート番号を表す [c:Integer] あるいは、ポート番号、サービス名を表す文字列を指定します。
 
 - **param** `host` -- ホストを文字列で指定します。
 

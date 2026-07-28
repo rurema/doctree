@@ -56,7 +56,7 @@ URI 文字列をエンコードした文字列を返します。
 
 - **param** `str` -- 文字列を指定します。
 
-- **SEE** [m:URI.escape]
+- **SEE** `URI.escape`
 
 ### def unescape(str) -> String
 
@@ -64,7 +64,7 @@ URI 文字列をデコードした文字列を返します。
 
 - **param** `str` -- 文字列を指定します。
 
-- **SEE** [m:URI.unescape]
+- **SEE** `URI.unescape`
 
 ### def get_proxy_from_env -> URI | nil
 

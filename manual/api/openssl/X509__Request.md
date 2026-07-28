@@ -70,8 +70,8 @@ DER 形式の文字列に変換してからオブジェクトを生成します�
 - **param** `attr` -- 追加する attribute([c:OpenSSL::X509::Attribute] の
        インスタンス)
 - **return** -- 渡した attribute オブジェクトを返します
-- **SEE** [m:OpenSSL::X509::Request#attribute], 
-     [m:OpenSSL::X509::Request#attribute=]
+- **SEE** [m:OpenSSL::X509::Request#attributes], 
+     [m:OpenSSL::X509::Request#attributes=]
 
 ### def attributes -> [OpenSSL::X509::Attribute]
 
@@ -83,7 +83,7 @@ attribute とは X.509 証明書署名要求 に含まれる申請者に関す�
 CSR に含めるときは "reqExt" という oid の attribute を追加
 します。
 
-- **SEE** [m:OpenSSL::X509::Request#attribute=], 
+- **SEE** [m:OpenSSL::X509::Request#attributes=], 
      [m:OpenSSL::X509::Request#add_attribute]
 
 ### def attributes=(attrs)
@@ -92,7 +92,7 @@ CSR の attribute をクリアして新しい attribute を設定します。
 
 - **param** `attrs` -- 新たに設定する attribute([c:OpenSSL::X509::Attribute] の
        インスタンス)の配列
-- **SEE** [m:OpenSSL::X509::Request#attribute]
+- **SEE** [m:OpenSSL::X509::Request#attributes]
      [m:OpenSSL::X509::Request#add_attribute]
 
 ### def public_key -> OpenSSL::PKey::PKey

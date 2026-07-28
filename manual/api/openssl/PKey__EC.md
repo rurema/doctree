@@ -448,7 +448,7 @@ Point オブジェクトを生成します。
 自身を無限遠点に設定します。
 
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- エラーが生じた場合に発生します
-- **SEE** [m:OpenSSL::PKey::EC::Point#infinity!]
+- **SEE** [m:OpenSSL::PKey::EC::Point#infinity?]
 
 ### def to_bn -> OpenSSL::BN
 

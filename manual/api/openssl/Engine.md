@@ -15,7 +15,7 @@ OpenSSL の Engine (プラグイン)を表すオブジェクトです。
 
 id で指定した engine をロードします。
 
-[m:OpenSSL::Engine#load] ではコンパイル時に決められた engine しか
+[m:OpenSSL::Engine.load] ではコンパイル時に決められた engine しか
 読み込めませんが、これは動的なロードが可能です。
 
 - **param** `id` -- engine の名前(文字列)
@@ -56,7 +56,7 @@ name で指定した engine をロードします。以下が指定可能です�
   - "openssl"
 引数を省略した場合はロード可能なすべての engine をロードします。
 
-動的な読み込みをしたい場合は [m:OpenSSL::Engine#by_id] を
+動的な読み込みをしたい場合は [m:OpenSSL::Engine.by_id] を
 用います。
 
 ロードに成功した場合は true を返します。

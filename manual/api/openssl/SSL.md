@@ -217,7 +217,7 @@ VERIFY_PEER は無視されます。ただし、anonymous cipher はデフォル
 無効になっています。
 
 anonymous cipher が有効であるかどうかは
-[m:OpenSSL::SSLContext#cipher=] で設定できます。
+[m:OpenSSL::SSL::SSLContext#ciphers=] で設定できます。
 
 # class OpenSSL::SSL::SSLError < OpenSSL::OpenSSLError
 

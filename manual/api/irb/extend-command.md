@@ -31,7 +31,7 @@ irb に cmd_name で指定したメソッドが実行できるように拡張し
 
 - **param** `cmd_class` -- 指定した拡張が定義されたクラス名を [c:Symbol]、
                  [c:String]、[c:Class] のいずれかで指定します。
-                 なお、このクラスは [c:IRB::ExtendCommand] 以下で定義
+                 なお、このクラスは `IRB::ExtendCommand` 以下で定義
                  する必要があります。
 
 - **param** `load_file` -- 指定したメソッドが定義されたファイル名を指

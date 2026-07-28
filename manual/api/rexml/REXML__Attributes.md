@@ -108,7 +108,7 @@ end
 
 各属性の名前と値に対しブロックを呼び出します。
 
-名前には expanded_name([m:REXML::Namespace#exapnded_name])が
+名前には expanded_name([m:REXML::Namespace#expanded_name])が
 渡されます。
 
 ```ruby
@@ -261,7 +261,7 @@ p a.attributes.delete(attr)    # => <a/>
 属性を追加/更新します。
 
 attribute で更新する属性([c:REXML::Attribute] オブジェクト)を
-指定します。既に同じ名前([c:REXML::Attribute#name])のオブジェクトが
+指定します。既に同じ名前([m:REXML::Namespace#name])のオブジェクトが
 存在する場合は属性が上書きされ、ない場合は追加されます。
 
 - **param** `attribute` -- 追加(更新)する属性([c:REXML::Attribute] オブジェクト)

@@ -189,7 +189,7 @@ Markdown 形式で記述されたドキュメントを [lib:rdoc] 上で解析�
 ### def parse(markdown) -> RDoc::Markup::Document
 
 引数 markdown で指定したドキュメントを解析して
-[c:RDoc::Markup::Document] オブジェクトを返します。
+`RDoc::Markup::Document` オブジェクトを返します。
 
 - **param** `markdown` -- 解析の対象になるドキュメントを文字列で指定します。
 
@@ -269,7 +269,7 @@ HTML を記述した場合にそのまま出力するかどうかを設定しま
 ### def parse(markdown) -> RDoc::Markup::Document
 
 引数 markdown で指定したドキュメントを解析して
-[c:RDoc::Markup::Document] オブジェクトを返します。
+`RDoc::Markup::Document` オブジェクトを返します。
 
 - **param** `markdown` -- 解析の対象になるドキュメントを文字列で指定します。
 

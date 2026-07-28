@@ -38,7 +38,7 @@ end
 ruby %{-pe '$_.upcase!' <README}
 ```
 
-- **SEE** [m:Kernel?.sh]
+- **SEE** [m:FileUtils#sh]
 
 ### def safe_ln(*args)
 

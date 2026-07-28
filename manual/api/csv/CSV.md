@@ -279,10 +279,10 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   換を試みます。エンコーディング変換に失敗した場合はフィールドは変換さ
   れません。
 - **`:unconverted_fields`**:
-  真をセットすると [m:CSV::Row#unconverted_fields] という変換前のフィー
+  真をセットすると `CSV::Row#unconverted_fields` という変換前のフィー
   ルドを返すメソッドを全ての行に追加します。headers オプションによって
   追加したヘッダはフィールドではないので
-  [m:CSV::Row#unconverted_fields] は空の配列を返します。
+  `CSV::Row#unconverted_fields` は空の配列を返します。
 - **`:headers`**:
   :first_row というシンボルか真を指定すると、CSV ファイルの一行目をヘッダとして扱います。
   配列を指定するとそれをヘッダとして扱います。文字列を指定すると [m:CSV.parse_line] を

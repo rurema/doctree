@@ -38,7 +38,7 @@ sockaddr には文字列もしくは配列を指定します。
 
 配列で AF_INET/AF_INET6 を指定した場合、配列の4番目の要素
 が実際のIPアドレスとして使われます。配列の3番目の要素は
-ホスト名ですが [m:Addrinfo#inspect] 
+ホスト名ですが `Addrinfo#inspect` 
 での表示にしか用いられません。
 
 family は [m:Socket::PF_INET] のようなプロコルファミリーを指定します。

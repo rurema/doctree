@@ -28,18 +28,18 @@ end
 
 ### ジェネレータのインストール
 
-ソースコードを解析した後は [c:RDoc:RDoc] オブジェクトはジェネレータの
-コンストラクタの引数に [c:RDoc::Store] オブジェクトと
+ソースコードを解析した後は [c:RDoc::RDoc] オブジェクトはジェネレータの
+コンストラクタの引数に `RDoc::Store` オブジェクトと
 [c:RDoc::Options] オブジェクトを渡して初期化します。
 
-[c:RDoc::Store] オブジェクトは解析したソースコードに関する情報を保持
+`RDoc::Store` オブジェクトは解析したソースコードに関する情報を保持
 しています。[c:RDoc] 3 以前は [c:RDoc::TopLevel] オブジェクトがこの
 情報を保持しています。ジェネレータを [c:RDoc] 3 以前のものから更新す
 る際には、[c:RDoc::TopLevel] を使って記述された処理を置き換える必要が
 あります。
 
 [c:RDoc] は出力を行う際にジェネレータの generate メソッドを呼び出しま
-す。[c:RDoc::Store] や [c:RDoc::CodeObject] のツリーのメソッドを使っ
+す。`RDoc::Store` や [c:RDoc::CodeObject] のツリーのメソッドを使っ
 て要求される形式のフォーマットを出力してください。
 
 # module RDoc::Generator

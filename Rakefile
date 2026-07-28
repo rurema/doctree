@@ -141,7 +141,7 @@ def generate_statichtml(version)
   raise "Failed to generate static html" unless succeeded
 end
 
-task :default => [:check_filename_case_conflicts, :check_indent_in_samplecode, :check_single_space_indent, :check_blank_lines, :generate, :check_format]
+task :default => [:check_filename_case_conflicts, :check_indent_in_samplecode, :check_single_space_indent, :check_blank_lines, :generate, :check_links, :check_format]
 
 namespace :generate do
   ALL_VERSIONS.each do |version|
@@ -193,8 +193,7 @@ multitask :statichtml => CI_VERSIONS.map {|version| "statichtml:#{version}" }
 
 # 参照リンク切れの検査(bitclust checklink)。[c:]/[m:]/[lib:]/[d:]/[f:]
 # 参照の指す先が同じ版の DB に存在するかを、実際の描画経路で検証する。
-# 既知のリンク切れが残っているため default タスクにはまだ入れていない
-# (棚卸しが済んでゼロになったら default 入りさせて回帰を防ぐ)
+# 棚卸し(#3324)で全 CI 版ゼロになったため default タスクに含めている
 def check_links(version)
   check_bitclust_version!
   db = "/tmp/db-#{version}"

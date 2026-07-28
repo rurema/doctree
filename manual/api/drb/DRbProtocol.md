@@ -15,7 +15,7 @@ drb に登録することで、追加ができます。
 URI を指定することで TCP/IP で通信します。
 
 通信プロトコルを追加する例としては、
-例としては [lib:drb/unix] で定義している [c:DRb::DRbUNIXSocket] や
+例としては [lib:drb/unix] で定義している `DRb::DRbUNIXSocket` や
 サンプルの sample/drb/http0.rb、 sample/drb/http0serv.rb などを見てください。
 
 これらの例を見てわかるように、通信クラスでは取り扱えない URI が open

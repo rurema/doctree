@@ -41,7 +41,7 @@ p son             # => #<OpenStruct name="Thomas", age=4, items=["candy", "toy"]
 
 ### 注意事項 {#caveats}
 
-OpenStruct は Ruby のメソッド探索を利用して、プロパティに必要なメソッドを見つけて定義します。これは [m:BasicObject#method_missing] と [m:BasicObject#define_singleton_method] によって実現されます。
+OpenStruct は Ruby のメソッド探索を利用して、プロパティに必要なメソッドを見つけて定義します。これは [m:BasicObject#method_missing] と [m:Object#define_singleton_method] によって実現されます。
 
 作成されるオブジェクトのパフォーマンスに懸念がある場合は、この点を考慮する必要があります。[c:Hash] や [c:Struct] を使用する場合と比較して、これらのプロパティの設定にははるかに多くのオーバーヘッドがあるためです。小規模な [c:Hash] から [c:OpenStruct] を作成し、いくつかの要素にアクセスした場合、直接ハッシュテーブルにアクセスするよりも 200 倍遅くなることがあります。
 

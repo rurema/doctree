@@ -58,7 +58,7 @@ EOS
 options でオプションを指定できます。
 [m:Psych.dump] と同じなので詳しくはそちらを参照してください。
 
-[lib:syck] に to_yaml メソッドがあるため、
+`syck` に to_yaml メソッドがあるため、
 psych_to_yaml が別名として定義されています。将来的に
 syck が廃止された場合  psych_to_yaml は廃止
 される予定であるため、特別の事情がない限り to_yaml を用いてください。

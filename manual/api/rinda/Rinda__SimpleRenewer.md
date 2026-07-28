@@ -9,7 +9,7 @@ include:
 
 [c:Rinda::TupleSpace] が保持するタプルの有効期限を更新するクラスです。
 このクラスはタプルの寿命をプロセスの寿命と一致させることができます。
-詳しくは [c:Rinda::TupleSpace#renewer] を見てください。
+詳しくは [ref:c:Rinda::TupleSpace#renewer] を見てください。
 
 ## Class Methods
 
@@ -24,7 +24,7 @@ sec で [m:Rinda::SimpleRenewer#renew] が返す秒数を指定します。
 
 ### def renew -> Integer
 
-[c:TupleSpace] からオブジェクトの寿命を問合せるために呼び出されます。
+[c:Rinda::TupleSpace] からオブジェクトの寿命を問合せるために呼び出されます。
 
 このメソッド自体は [m:Rinda::SimpleRenewer.new] で指定した秒数を
 返します。

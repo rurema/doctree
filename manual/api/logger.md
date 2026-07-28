@@ -69,7 +69,7 @@ logger_sample.rb:12:in `<main>'
 #%end
 ```
 
-これは log.level が [m:Logger::WARN] になっているためです。WARN、
+これは log.level が [m:Logger::Severity::WARN] になっているためです。WARN、
 ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログは無視されま
 す。
 

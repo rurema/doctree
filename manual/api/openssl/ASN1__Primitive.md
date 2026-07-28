@@ -105,6 +105,8 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 - **param** `tagging` -- タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
+## Instance Methods
+
 ### def unused_bits -> Integer | nil
 
 Bit Stringに設定されたフラグを返します。

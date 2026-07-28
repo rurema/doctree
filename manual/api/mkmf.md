@@ -333,7 +333,7 @@ end
 
 C プログラムのソースコード src をプリプロセスします。
 
-[m:$CPPFLAGS], [m:$CFLAGS] の値もプリプロセッサにコマンドライン引数
+`$CPPFLAGS`, [m:$CFLAGS] の値もプリプロセッサにコマンドライン引数
 として渡します。
 
 このメソッドはヘッダファイルの存在チェックなどに使用します。
@@ -1009,7 +1009,7 @@ create_makefile('foo') {|conf|
 ### def try_constant(const, headers = nil, opt = ""){ ... } -> Integer | nil
 
 定数 const がシステムに存在するかどうか検査します。
-[m:Kernel#have_const] を使ってください。
+`Kernel#have_const` を使ってください。
 
 - **param** `const` -- C 言語の定数名を指定します。
 

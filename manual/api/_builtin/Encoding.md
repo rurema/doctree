@@ -135,7 +135,7 @@ default_external を変更する前に作成した文字列と、default_externa
 
 文字列リテラルを作成した場合、エンコーディングには default_internal ではなく `__ENCODING__` 特殊変数で参照できるスクリプトエンコーディングが使用されます。
 
-default_internal は、ソースファイルの [m:IO.internal_encoding] または -E オプションで初期化されます。
+default_internal は、ソースファイルの [m:IO#internal_encoding] または -E オプションで初期化されます。
 
 - **SEE** [d:spec/rubycmd] [m:Encoding.default_external]
 

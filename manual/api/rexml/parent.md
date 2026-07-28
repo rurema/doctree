@@ -173,4 +173,4 @@ replacement の parent は selfに変更されます。
 
 true を返します。
 
-- **SEE** [m:REXML::Node#parent]
+- **SEE** [m:REXML::Child#parent]

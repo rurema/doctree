@@ -104,7 +104,7 @@ RDoc のコードツリーを表現するクラスの基本クラスです。
 [m:RDoc::CodeObject#document_self] と
 [m:RDoc::CodeObject#document_children] を true に設定します。
 
-- **SEE** [m:RDoc::CodeObject#end_doc]
+- **SEE** [m:RDoc::CodeObject#stop_doc]
 
 ### def stop_doc -> ()
 

@@ -62,7 +62,7 @@ WIN32OLE::VARIANTは、[c:WIN32OLE_VARIANT]オブジェクトの作成時や、
 文字列（BSTR）を示します（8）。
 
 OLEオートメーションのBSTRはUnicodeで表現された長さ付き文字列です。Ruby
-のStringとBSTRの相互変換は、WIN32OLEが[m:WIN32OLE#codepage]に基づいて
+のStringとBSTRの相互変換は、WIN32OLEが[m:WIN32OLE.codepage]に基づいて
 自動的に行います。
 
 ### const VT_BYREF -> Integer
@@ -185,6 +185,6 @@ VARIANT型を示します（12）。
 
 NULL型の値を示します（1）。
 
-[m:WIN32OLE::VARIANT.VT_EMPTY]と異なり、NULLという値（たとえばSQLパラ
+[m:WIN32OLE::VARIANT::VT_EMPTY]と異なり、NULLという値（たとえばSQLパラ
 メータでNULLを指定する場合など）を示します。
 
