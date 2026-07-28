@@ -7,19 +7,19 @@
 #%since 4.1
 - 開発版対応リファレンス
 #%end
-#%if("4.0" <= version and version < "4.1")
+#%version 4.0...4.1
 - version 4.0 対応リファレンス
 #%end
-#%if("3.4" <= version and version < "4.0")
+#%version 3.4...4.0
 - version 3.4 対応リファレンス
 #%end
-#%if("3.3" <= version and version < "3.4")
+#%version 3.3...3.4
 - version 3.3 対応リファレンス
 #%end
-#%if("3.2" <= version and version < "3.3")
+#%version 3.2...3.3
 - version 3.2 対応リファレンス
 #%end
-#%if("3.1" <= version and version < "3.2")
+#%version 3.1...3.2
 - version 3.1 対応リファレンス
 #%end
 #%until 3.1

@@ -34,7 +34,7 @@ Ruby 3.2 で「実験的」の位置づけが外れ、Ruby 3.3 では実行時�
 `RubyVM::ZJIT` という別のモジュールで提供されており、
 `RubyVM::YJIT` とは別物です。
 
-#%if(version < "3.3")
+#%version ...3.3
 - **SEE** [c:RubyVM::MJIT]
 #%end
 
@@ -80,13 +80,13 @@ JIT の有効・無効はコマンドラインオプションや環境変数な�
 - **SEE** [m:RubyVM::YJIT.runtime_stats], [m:RubyVM::YJIT.stats_enabled?]
 
 #%since 3.3
-#%if("4.0" <= version)
+#%version 4.0...
 ### def enable(stats: false, log: false, mem_size: nil, call_threshold: nil) -> bool
 #%end
-#%if("3.4" <= version and version < "4.0")
+#%version 3.4...4.0
 ### def enable(stats: false, log: false) -> bool
 #%end
-#%if(version < "3.4")
+#%version ...3.4
 ### def enable(stats: false) -> bool
 #%end
 
@@ -134,13 +134,13 @@ Marshal 形式で `filename` にダンプします。ダンプしたファイル
 #%#noexample 実行環境に依存するため
 #%end
 
-#%if("3.4" <= version)
+#%version 3.4...
 ### def runtime_stats(key = nil) -> Hash | object | nil
 #%end
-#%if("3.3" <= version and version < "3.4")
+#%version 3.3...3.4
 ### def runtime_stats(context: false) -> Hash | nil
 #%end
-#%if(version < "3.3")
+#%version ...3.3
 ### def runtime_stats -> Hash | nil
 #%end
 
@@ -153,7 +153,7 @@ Marshal 形式で `filename` にダンプします。ダンプしたファイル
   対応する値を返します。統計収集が無効な場合は `nil` を返します。
 - **raise** `TypeError` -- `key` に Symbol 以外(`nil` を除く)を指定した場合に発生します。
 #%else
-#%if("3.3" <= version and version < "3.4")
+#%version 3.3...3.4
 - **param** `context` -- true を指定すると、コンパイルコンテキストに関する統計も含めます。
 #%end
 - **return** -- 統計情報のハッシュを返します。統計収集が無効な場合は `nil` を返します。

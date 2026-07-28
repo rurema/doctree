@@ -1,7 +1,7 @@
 {
   "name": "rurema-markdown",
   "displayName": "Rurema Markdown (#% directives)",
-  "description": "るりま（Ruby リファレンスマニュアル）manual/ の Markdown で使う #% プリプロセッサ指令（#%since / #%until / #%if / #%else / #%end / #%include / #%samplecode / #%todo / #%#。旧 prefix #@ も同様に受理）をハイライトします",
+  "description": "るりま（Ruby リファレンスマニュアル）manual/ の Markdown で使う #% プリプロセッサ指令（#%since / #%until / #%version / #%if / #%else / #%end / #%include / #%samplecode / #%todo / #%#。旧 prefix #@ も同様に受理）をハイライトします",
   "version": "0.1.0",
   "publisher": "rurema",
   "engines": {

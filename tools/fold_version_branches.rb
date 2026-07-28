@@ -157,6 +157,22 @@ def strip_outer_parens(text)
   text
 end
 
+# #%version A...B / A... / ...B を原子式の配列に脱糖する
+VERSION_RANGE_LIT = /"(\d+(?:\.\d+)*)"|(\d+(?:\.\d+)*)/
+def parse_version_range(line, path, lineno)
+  raw = line.sub(/\A\#[@%]version\b/, '').strip
+  case raw
+  when /\A#{VERSION_RANGE_LIT}\.\.\.#{VERSION_RANGE_LIT}\z/o
+    [Atom.new('>=', $1 || $2), Atom.new('<', $3 || $4)]
+  when /\A#{VERSION_RANGE_LIT}\.\.\.\z/o
+    [Atom.new('>=', $1 || $2)]
+  when /\A\.\.\.#{VERSION_RANGE_LIT}\z/o
+    [Atom.new('<', $1 || $2)]
+  else
+    raise ParseError, "#{path}:#{lineno}: wrong version range: #{raw.inspect}"
+  end
+end
+
 def parse_if_expr(node, line, path, lineno)
   text = line.sub(/\A\#[@%]if/, '').strip
   text = strip_outer_parens(text)
@@ -208,6 +224,14 @@ def parse_file(path)
     when /\A\#[@%]if\b/
       node = CondNode.new(kind: :if, directive_line: line, lineno: lineno)
       parse_if_expr(node, line, path, lineno)
+      current_target(stack) << node
+      stack.push({ type: :cond, node: node, in_else: false })
+    when /\A\#[@%]version\b/
+      # 版範囲の省略記法(bitclust#285): A...B は [A, B) の半開区間、
+      # A... は A 以上、...B は B 未満。#%if と同じ条件ノードとして扱う
+      node = CondNode.new(kind: :version, directive_line: line, lineno: lineno)
+      node.atoms = parse_version_range(line, path, lineno)
+      node.connective = node.atoms.size > 1 ? 'and' : nil
       current_target(stack) << node
       stack.push({ type: :cond, node: node, in_else: false })
     when /\A\#[@%]samplecode\b/
