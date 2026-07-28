@@ -87,6 +87,19 @@
           }
         },
         {
+          "comment": "#%version A...B バージョン範囲ゲート（半開区間 [A, B)。A.../...B も可。bitclust#285）",
+          "match": "^(#[@%]version)[ \\t]+((?:\"[0-9][0-9.]*\"|[0-9][0-9.]*)?\\.\\.\\.(?:\"[0-9][0-9.]*\"|[0-9][0-9.]*)?)[ \\t]*$",
+          "name": "meta.directive.version-range.rurema",
+          "captures": {
+            "1": {
+              "name": "keyword.control.conditional.rurema"
+            },
+            "2": {
+              "name": "constant.numeric.version.rurema"
+            }
+          }
+        },
+        {
           "comment": "#@samplecode [説明] （Ruby サンプルコードブロック。#@end で閉じる。md では版ゲートを含むコード例など fence で表現できない場合に残る）",
           "match": "^(#[@%]samplecode)\\b[ \\t]*(.*)$",
           "name": "meta.directive.samplecode.rurema",

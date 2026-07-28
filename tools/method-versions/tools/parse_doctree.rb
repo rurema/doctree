@@ -310,6 +310,23 @@ def process_lines(lines, file, start_index, ctx, pp_stack, class_since, class_un
       expr = line.sub(/\A\#[@%]if/, '').strip
       pp_stack.push("if:#{expr}")
       i += 1
+    when /\A\#[@%]version\b/
+      # bitclust#285 の版範囲記法。単一境界は since/until と同義なので同じ
+      # ラベルに、半開区間 A...B は従来書かれていた #@if 相当の式ラベルに
+      # する(本ツールの解析上の扱いを記法変換の前後で一致させるため)
+      raw = line.sub(/\A\#[@%]version/, '').strip
+      case raw
+      when /\A"?(\d[\d.]*)"?\.\.\."?(\d[\d.]*)"?\z/
+        pp_stack.push(%(if:("#{$1}" <= version and version < "#{$2}")))
+      when /\A"?(\d[\d.]*)"?\.\.\.\z/
+        pp_stack.push("since:#{$1}")
+      when /\A\.\.\."?(\d[\d.]*)"?\z/
+        pp_stack.push("until:#{$1}")
+      else
+        warn_entry(file, lineno, "wrong version range: #{raw.inspect}")
+        pp_stack.push("if:#{raw}")
+      end
+      i += 1
     when /\A\#[@%]else\s*\z/
       if pp_stack.empty?
         warn_entry(file, lineno, '#@else with no matching #@if/#@since/#@until')
