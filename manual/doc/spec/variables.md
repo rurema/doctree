@@ -161,6 +161,13 @@ end
 クラス変数は、その場所を囲むもっとも内側の(特異クラスでない) class 式
 または module 式のボディをスコープとして持ちます。
 
+class 式にも module 式にも囲まれていないトップレベルでクラス変数を参照・
+代入すると、例外 [c:RuntimeError] が発生します。
+
+```ruby
+@@foo = 1   # ~> RuntimeError: class variable access from toplevel
+```
+
 #%# https://blade.ruby-lang.org/ruby-list/39212
 
 ```ruby
