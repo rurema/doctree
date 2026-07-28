@@ -825,3 +825,85 @@ p IO::Buffer.new(4).readonly?                       # => false
 
 プライベートバッファに加えた変更は、元になったファイルのマッピングには反映されません。
 #%end
+
+#%since 3.2
+### def &(mask) -> IO::Buffer
+### def |(mask) -> IO::Buffer
+### def ^(mask) -> IO::Buffer
+
+バッファの各バイトと mask の各バイトのビット演算(AND / OR / XOR)を行い、
+結果を格納した新しいバッファを返します。
+
+返されるバッファの大きさは元のバッファと同じです。
+mask が元のバッファより短い場合は、mask を先頭から繰り返し使います。
+
+- **param** `mask` -- マスクを [c:IO::Buffer] で指定します。
+
+- **raise** `IO::Buffer::MaskError` -- mask の大きさが 0 の場合に発生します。
+
+```ruby
+# 4 バイトのマスクが 10 バイトに繰り返し適用される
+buf = IO::Buffer.for("1234567890") & IO::Buffer.for("\xFF\x00\x00\xFF")
+p buf.size                                              # => 10
+p buf.get_string.bytes.map {|b| "%02x" % b }.join(" ")  # => "31 00 00 34 35 00 00 38 39 00"
+```
+
+- **SEE** [m:IO::Buffer#and!], [m:IO::Buffer#or!], [m:IO::Buffer#xor!]
+
+### def ~ -> IO::Buffer
+
+バッファの各バイトのビットを反転した、新しいバッファを返します。
+
+返されるバッファの大きさは元のバッファと同じです。
+
+```ruby
+buf = ~IO::Buffer.for("1234567890")
+p buf.size                                              # => 10
+p buf.get_string.bytes.map {|b| "%02x" % b }.join(" ")  # => "ce cd cc cb ca c9 c8 c7 c6 cf"
+```
+
+- **SEE** [m:IO::Buffer#not!]
+
+### def and!(mask) -> self
+### def or!(mask) -> self
+### def xor!(mask) -> self
+
+[m:IO::Buffer#&] などと同じビット演算を、新しいバッファを作らずに
+自身に対して行います。`self` を返します。
+
+mask が自身より短い場合は、mask を先頭から繰り返し使います。
+
+- **param** `mask` -- マスクを [c:IO::Buffer] で指定します。
+
+- **raise** `IO::Buffer::MaskError` -- mask の大きさが 0 の場合に発生します。
+
+- **raise** `IO::Buffer::AccessError` -- 読み取り専用のバッファに対して
+             呼び出した場合に発生します。
+
+```ruby
+# IO::Buffer.for はブロックを渡さないと読み取り専用になるので、dup で複製する
+buf = IO::Buffer.for("1234567890").dup
+buf.and!(IO::Buffer.for("\xFF\x00\x00\xFF"))
+p buf.get_string.bytes.map {|b| "%02x" % b }.join(" ")  # => "31 00 00 34 35 00 00 38 39 00"
+
+IO::Buffer.for("1234").and!(IO::Buffer.for("\xFF")) # ~> IO::Buffer::AccessError
+```
+
+- **SEE** [m:IO::Buffer#&], [m:IO::Buffer#|], [m:IO::Buffer#^]
+
+### def not! -> self
+
+[m:IO::Buffer#~] と同じビット反転を、新しいバッファを作らずに
+自身に対して行います。`self` を返します。
+
+- **raise** `IO::Buffer::AccessError` -- 読み取り専用のバッファに対して
+             呼び出した場合に発生します。
+
+```ruby
+buf = IO::Buffer.for("1234567890").dup
+buf.not!
+p buf.get_string.bytes.map {|b| "%02x" % b }.join(" ")  # => "ce cd cc cb ca c9 c8 c7 c6 cf"
+```
+
+- **SEE** [m:IO::Buffer#~]
+#%end
