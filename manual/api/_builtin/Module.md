@@ -1300,13 +1300,13 @@ class Factory
   private_class_method :foo
 end
 
-#%if("3.4" <= version)
+#%version 3.4...
 Factory.foo # NoMethodError: private method 'foo' called for class Factory
 #%end
-#%if("3.3" <= version and version < "3.4")
+#%version 3.3...3.4
 Factory.foo # NoMethodError: private method `foo' called for class Factory
 #%end
-#%if(version < "3.3")
+#%version ...3.3
 Factory.foo # NoMethodError: private method `foo' called for Factory:Class
 #%end
 
@@ -1841,13 +1841,13 @@ end
 
 account = Account.new
 p account.foo1          # => 1
-#%if("3.4" <= version)
+#%version 3.4...
 account.foo2            # => private method 'foo2' called for an instance of Account (NoMethodError)
 #%end
-#%if("3.3" <= version and version < "3.4")
+#%version 3.3...3.4
 account.foo2            # => private method `foo2' called for an instance of Account (NoMethodError)
 #%end
-#%if(version < "3.3")
+#%version ...3.3
 account.foo2            # => private method `foo2' called for #<Account:0x401b7628> (NoMethodError)
 #%end
 ```
@@ -1902,13 +1902,13 @@ p foo             # => 1
 # the toplevel default is private
 # (Ruby 2.7 以降、レシーバが self そのものの呼び出しは private でも可能なため
 #  self.foo はエラーにならない。別のオブジェクトをレシーバにすると呼び出せない)
-#%if("3.4" <= version)
+#%version 3.4...
 Object.new.foo    # => private method 'foo' called for an instance of Object (NoMethodError)
 #%end
-#%if("3.3" <= version and version < "3.4")
+#%version 3.3...3.4
 Object.new.foo    # => private method `foo' called for an instance of Object (NoMethodError)
 #%end
-#%if(version < "3.3")
+#%version ...3.3
 Object.new.foo    # => private method `foo' called for #<Object:0x401c83b0> (NoMethodError)
 #%end
 

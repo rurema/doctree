@@ -79,7 +79,7 @@ p RubyVM::InstructionSequence.compile_file("/tmp/hello.rb")
 命令シーケンスのコンパイル時のデフォルトの最適化オプションを Hash で返
 します。
 
-#%if("3.4" <= version)
+#%version 3.4...
 
 ```ruby title="例"
 require "pp"
@@ -98,7 +98,7 @@ pp RubyVM::InstructionSequence.compile_option
 ```
 
 #%end
-#%if("3.3" <= version and version < "3.4")
+#%version 3.3...3.4
 
 ```ruby title="例"
 require "pp"
@@ -117,7 +117,7 @@ pp RubyVM::InstructionSequence.compile_option
 ```
 
 #%end
-#%if(version < "3.3")
+#%version ...3.3
 
 ```ruby title="例"
 require "pp"
@@ -158,7 +158,7 @@ options で指定します。
     * :operands_unification
     * :peephole_optimization
     * :specialized_instruction
-#%if(version < "3.3")
+#%version ...3.3
     * :stack_caching
 #%end
     * :tailcall_optimization

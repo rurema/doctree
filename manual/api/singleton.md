@@ -31,13 +31,13 @@ end
 a = SomeSingletonClass.instance
 b = SomeSingletonClass.instance # a and b are same object
 p [a,b] # => [#<SomeSingletonClass:0x0000562e6e18ddd0>, #<SomeSingletonClass:0x0000562e6e18ddd0>]
-#%if("3.4" <= version)
+#%version 3.4...
 a = SomeSingletonClass.new  # ~> NoMethodError: private method 'new' called for class SomeSingletonClass
 #%end
-#%if("3.3" <= version and version < "3.4")
+#%version 3.3...3.4
 a = SomeSingletonClass.new  # ~> NoMethodError: private method `new' called for class SomeSingletonClass
 #%end
-#%if(version < "3.3")
+#%version ...3.3
 a = SomeSingletonClass.new  # ~> NoMethodError: private method `new' called for SomeSingletonClass:Class
 #%end
 ```
