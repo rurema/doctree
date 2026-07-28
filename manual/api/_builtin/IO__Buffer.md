@@ -318,6 +318,224 @@ IO::Buffer.new(2).set_string("TOOLONG") # ~> ArgumentError
 
 - **SEE** [m:IO::Buffer#get_string]
 
+### def get_value(buffer_type, offset) -> Integer | Float
+
+バッファの offset の位置から、buffer_type で指定した型の値を読み出して返します。
+
+buffer_type には以下のシンボルを指定します。
+小文字で始まるものはリトルエンディアン、大文字で始まるものはビッグエンディアンです
+(1 バイトの `:U8` と `:S8` にバイトオーダーの区別はありません)。
+
+- **整数**: `:U8` `:S8` (1 バイト)、`:u16` `:U16` `:s16` `:S16` (2 バイト)、
+  `:u32` `:U32` `:s32` `:S32` (4 バイト)、`:u64` `:U64` `:s64` `:S64` (8 バイト)
+#%since 4.0
+  、`:u128` `:U128` `:s128` `:S128` (16 バイト)
+#%end
+- **浮動小数点数**: `:f32` `:F32` (4 バイト)、`:f64` `:F64` (8 バイト)
+
+小文字の `u` `s` `f` で始まるものが符号なし整数・符号付き整数・浮動小数点数を表し、
+`u` と `s` の対応する大文字はビッグエンディアンを意味します。
+
+- **param** `buffer_type` -- 読み出す値の型を上記のシンボルで指定します。
+
+- **param** `offset` -- 読み出す位置をバッファの先頭からのバイト数で指定します。
+
+- **raise** `ArgumentError` -- buffer_type が上記以外の場合や、読み出す範囲が
+             バッファの外にはみ出す場合に発生します。
+
+```ruby
+buf = IO::Buffer.for([1.5].pack("f"))
+p buf.get_value(:f32, 0) # => 1.5
+
+buf = IO::Buffer.for("\x01\x02")
+p buf.get_value(:u16, 0) # => 513
+p buf.get_value(:U16, 0) # => 258
+```
+
+#%since 3.2
+- **SEE** [m:IO::Buffer#set_value], [m:IO::Buffer#get_values], [m:IO::Buffer#values]
+#%else
+- **SEE** [m:IO::Buffer#set_value]
+#%end
+
+#%since 3.2
+### def get_values(buffer_types, offset) -> [Integer | Float]
+
+[m:IO::Buffer#get_value] と同じですが、複数の型をまとめて読み出し、
+値の配列を返します。
+
+- **param** `buffer_types` -- 読み出す値の型のシンボルの配列を指定します。
+             指定できるシンボルは [m:IO::Buffer#get_value] を参照してください。
+
+- **param** `offset` -- 読み出しを開始する位置をバッファの先頭からのバイト数で指定します。
+
+- **raise** `ArgumentError` -- 型が不正な場合や、読み出す範囲がバッファの外に
+             はみ出す場合に発生します。
+
+```ruby
+buf = IO::Buffer.for([1.5, 2.5].pack("ff"))
+p buf.get_values([:f32, :f32], 0) # => [1.5, 2.5]
+```
+
+- **SEE** [m:IO::Buffer#get_value], [m:IO::Buffer#set_values]
+#%end
+
+### def set_value(buffer_type, offset, value) -> Integer
+
+バッファの offset の位置に、buffer_type で指定した型で value を書き込みます。
+
+指定できる型は [m:IO::Buffer#get_value] を参照してください。
+整数の型に [c:Float] を渡した場合は、小数点以下が切り捨てられます。
+
+#%since 3.2
+書き込んだ値の次の位置を返します。
+#%else
+offset をそのまま返します。
+#%end
+
+- **param** `buffer_type` -- 書き込む値の型をシンボルで指定します。
+
+- **param** `offset` -- 書き込む位置をバッファの先頭からのバイト数で指定します。
+
+- **param** `value` -- 書き込む値を数値で指定します。
+
+- **raise** `ArgumentError` -- buffer_type が不正な場合や、書き込む範囲が
+             バッファの外にはみ出す場合に発生します。
+
+- **raise** `IO::Buffer::AccessError` -- 読み取り専用のバッファに対して
+             呼び出した場合に発生します。
+
+```ruby
+buf = IO::Buffer.new(8)
+buf.set_value(:U8, 1, 111)
+p buf.get_string # => "\x00o\x00\x00\x00\x00\x00\x00"
+
+# 整数の型に Float を渡すと小数点以下は切り捨てられる
+buf = IO::Buffer.new(8)
+buf.set_value(:U32, 0, 2.5)
+p buf.get_value(:U32, 0) # => 2
+```
+
+- **SEE** [m:IO::Buffer#get_value]
+
+#%since 3.2
+### def set_values(buffer_types, offset, values) -> Integer
+
+[m:IO::Buffer#set_value] と同じですが、複数の値をまとめて書き込みます。
+書き込んだ値の次の位置を返します。
+
+- **param** `buffer_types` -- 書き込む値の型のシンボルの配列を指定します。
+
+- **param** `offset` -- 書き込みを開始する位置をバッファの先頭からのバイト数で指定します。
+
+- **param** `values` -- 書き込む値の配列を指定します。
+
+- **raise** `ArgumentError` -- 型が不正な場合や、書き込む範囲がバッファの外に
+             はみ出す場合に発生します。
+
+- **raise** `IO::Buffer::AccessError` -- 読み取り専用のバッファに対して
+             呼び出した場合に発生します。
+
+```ruby
+buf = IO::Buffer.new(8)
+p buf.set_values([:U8, :U16], 0, [1, 2]) # => 3
+p buf.get_string(0, 3)                   # => "\x01\x00\x02"
+```
+
+- **SEE** [m:IO::Buffer#set_value], [m:IO::Buffer#get_values]
+
+### def values(buffer_type, offset = 0, count = nil) -> [Integer | Float]
+
+バッファの offset の位置から、buffer_type で指定した型の値を順に読み出し、
+配列にして返します。
+
+指定できる型は [m:IO::Buffer#get_value] を参照してください。
+
+- **param** `buffer_type` -- 読み出す値の型をシンボルで指定します。
+
+- **param** `offset` -- 読み出しを開始する位置をバッファの先頭からのバイト数で指定します。
+
+- **param** `count` -- 読み出す個数を指定します。省略した場合はバッファの末尾まで
+             読み出します。
+
+```ruby
+buf = IO::Buffer.for("Hello World")
+p buf.values(:U8, 2, 2) # => [108, 108]
+p buf.values(:U8, 9)    # => [108, 100]
+```
+
+- **SEE** [m:IO::Buffer#each], [m:IO::Buffer#get_values]
+
+### def each(buffer_type, offset = 0, count = nil) {|offset, value| ... } -> self
+### def each(buffer_type, offset = 0, count = nil) -> Enumerator
+
+バッファの offset の位置から、buffer_type で指定した型の値を順に読み出し、
+その位置と値をブロックに渡して繰り返します。
+
+指定できる型は [m:IO::Buffer#get_value] を参照してください。
+ブロックを省略した場合は [c:Enumerator] を返します。
+
+- **param** `buffer_type` -- 読み出す値の型をシンボルで指定します。
+
+- **param** `offset` -- 読み出しを開始する位置をバッファの先頭からのバイト数で指定します。
+
+- **param** `count` -- 読み出す個数を指定します。省略した場合はバッファの末尾まで
+             読み出します。
+
+```ruby
+IO::Buffer.for("Hello World").each(:U8, 2, 2) do |offset, value|
+  p [offset, value]
+end
+# => [2, 108]
+#    [3, 108]
+```
+
+- **SEE** [m:IO::Buffer#values], [m:IO::Buffer#each_byte]
+
+### def each_byte(offset = 0, count = nil) {|byte| ... } -> self
+### def each_byte(offset = 0, count = nil) -> Enumerator
+
+バッファの offset の位置から 1 バイトずつ読み出し、ブロックに渡して繰り返します。
+
+ブロックを省略した場合は [c:Enumerator] を返します。
+
+- **param** `offset` -- 読み出しを開始する位置をバッファの先頭からのバイト数で指定します。
+
+- **param** `count` -- 読み出すバイト数を指定します。省略した場合はバッファの末尾まで
+             読み出します。
+
+#%until 4.0
+Ruby 3.4 以前では引数が正しく扱われません。引数を 1 つだけ渡した場合は無視されて
+先頭から末尾まで読み出し、2 つ渡した場合は 2 番目の引数が読み出しの開始位置として
+使われます。位置や個数を指定するには Ruby 4.0 以降が必要です。
+#%end
+
+```ruby
+IO::Buffer.for("Hello").each_byte do |byte|
+  p byte
+end
+# => 72
+#    101
+#    108
+#    108
+#    111
+```
+
+#%since 4.0
+
+```ruby title="例: 位置と個数を指定する"
+IO::Buffer.for("Hello World").each_byte(2, 2) do |byte|
+  p byte
+end
+# => 108
+#    108
+```
+
+#%end
+
+- **SEE** [m:IO::Buffer#each]
+#%end
+
 #%since 3.2
 ### def slice(offset = 0, length = nil) -> IO::Buffer
 #%else
@@ -552,8 +770,7 @@ p IO::Buffer.new(4).external?      # => false
 
 バッファが読み取り専用の場合に true を返します。
 
-#%# set_value を収録したらリンクに戻す
-読み取り専用のバッファは、`IO::Buffer#set_value` や [m:IO::Buffer#set_string]、
+読み取り専用のバッファは、[m:IO::Buffer#set_value] や [m:IO::Buffer#set_string]、
 [m:IO::Buffer#copy] などで変更できません。
 
 [m:IO::Buffer.for] にブロックを渡さずに作ったバッファは、元の文字列が freeze
