@@ -907,3 +907,136 @@ p buf.get_string.bytes.map {|b| "%02x" % b }.join(" ")  # => "ce cd cc cb ca c9 
 
 - **SEE** [m:IO::Buffer#~]
 #%end
+
+### def to_s -> String
+
+バッファの状態を短く表した文字列を返します。
+
+メモリ領域のアドレスと大きさ、状態を表すフラグが含まれます。
+この表示形式は将来変更される可能性があります。
+
+```ruby
+p IO::Buffer.new(4).to_s # => "#<IO::Buffer 0x0000600002d10000+4 INTERNAL>"
+```
+
+アドレスの部分は実行するたびに変わります。
+
+- **SEE** [m:IO::Buffer#inspect]
+
+### def inspect -> String
+
+バッファの状態と内容を表した文字列を返します。
+
+[m:IO::Buffer#to_s] と同じ 1 行に続けて、バッファの内容を
+[m:IO::Buffer#hexdump] と同じ 16 進ダンプ形式で表示します。
+この表示形式は将来変更される可能性があります。
+
+#%since 3.3
+ダンプするのは先頭 256 バイトまでです。
+これを超える分は表示されず、代わりに残りのバイト数が示されます。
+#%else
+内容をダンプするのは、バッファの大きさが 256 バイト以下の場合だけです。
+256 バイトを超える場合、内容は表示されません。
+#%end
+
+```ruby
+buf = IO::Buffer.for("Hello World")
+puts buf.inspect
+# => #<IO::Buffer 0x0000000100e726b8+11 EXTERNAL READONLY SLICE>
+#    0x00000000  48 65 6c 6c 6f 20 57 6f 72 6c 64                Hello World
+```
+
+#%since 3.3
+
+```ruby title="例: 256 バイトを超えるバッファ"
+puts IO::Buffer.new(300).inspect.lines.last
+# => (and 44 more bytes not printed)
+```
+
+#%end
+- **SEE** [m:IO::Buffer#to_s], [m:IO::Buffer#hexdump]
+
+#%since 3.3
+### def hexdump(offset = 0, length = nil, width = 16) -> String | nil
+#%else
+### def hexdump -> String | nil
+#%end
+
+バッファの内容を 16 進ダンプ形式の文字列で返します。
+
+各行は、バッファの先頭からの位置、16 進数で表したバイト列、
+印字できる文字による表現の順に並びます。
+この表示形式は将来変更される可能性があります。
+
+メモリ領域を指していないバッファでは nil を返します。
+これは [m:IO::Buffer#null?] が真の場合です。
+#%since 3.3
+
+- **param** `offset` -- ダンプを開始する位置をバイト単位の整数で指定します。
+- **param** `length` -- ダンプする長さをバイト単位の整数で指定します。
+             省略した場合は offset からバッファの終わりまでです。
+- **param** `width` -- 1 行に表示するバイト数を整数で指定します。
+
+- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを
+             超える場合に発生します。
+- **raise** `ArgumentError` -- width に 1 未満を指定した場合に発生します。
+#%end
+
+```ruby
+buf = IO::Buffer.for("Hello World")
+puts buf.hexdump
+# => 0x00000000  48 65 6c 6c 6f 20 57 6f 72 6c 64                Hello World
+```
+
+```ruby title="例: メモリ領域を指していないバッファ"
+buf = IO::Buffer.new(4)
+buf.free
+p buf.hexdump # => nil
+```
+
+#%since 3.3
+
+```ruby title="例: 位置と長さを指定する"
+buf = IO::Buffer.for("Hello World")
+puts buf.hexdump(6, 5)
+# => 0x00000006  57 6f 72 6c 64                                  World
+```
+
+```ruby title="例: 1 行に表示するバイト数を指定する"
+buf = IO::Buffer.for("Hello World")
+puts buf.hexdump(0, 11, 4)
+# => 0x00000000  48 65 6c 6c Hell
+#    0x00000004  6f 20 57 6f o Wo
+#    0x00000008  72 6c 64    rld
+```
+
+#%end
+- **SEE** [m:IO::Buffer#inspect], [m:IO::Buffer#null?]
+
+### def <=>(other) -> Integer
+
+バッファの大きさと内容を other と比較します。
+
+まず大きさを比較し、大きさが同じ場合に内容をバイト列として比較します。
+`self` の方が小さければ負の整数を、等しければ 0 を、大きければ正の整数を返します。
+
+大きさが同じ場合の比較には C の `memcmp` を使い、その結果をそのまま返します。
+このため返る整数の絶対値に意味はありません。0 との大小だけを見てください。
+
+[c:Comparable] を include しているため、`<` や `==` などの比較演算子も使えます。
+
+- **param** `other` -- 比較対象のバッファを [c:IO::Buffer] で指定します。
+
+- **raise** `TypeError` -- other が [c:IO::Buffer] でない場合に発生します。
+
+```ruby
+buf = IO::Buffer.for("abc")
+
+p(buf <=> IO::Buffer.for("abc")) # => 0
+p(buf <=> IO::Buffer.for("ab"))  # => 1
+p buf < IO::Buffer.for("abd")    # => true
+```
+
+```ruby title="例: 大きさが同じ場合は memcmp の結果がそのまま返る"
+p(IO::Buffer.for("abc") <=> IO::Buffer.for("abz")) # => -23
+```
