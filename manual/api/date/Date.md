@@ -889,7 +889,7 @@ ISO 8601 書式の文字列を返します (拡大表記 ('%Y-%m-%d') を使い�
 #%# exp
 ### def xmlschema -> String
 
-XML Scheme (date) による書式の文字列を返します。
+XML Schema (date) による書式の文字列を返します。
 
 ### def yday -> Integer
 
