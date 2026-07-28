@@ -15,6 +15,12 @@ deprecated になった Ruby 4.0 以降では、オブジェクト ID からオ�
 主に [c:WeakRef] クラスの内部で使用されるため、[lib:weakref] ライブラリ
 経由で使用してください。
 #%end
+#%since 3.3
+
+キーだけを弱参照にし、値は強参照で保持するものとして
+[c:ObjectSpace::WeakKeyMap] があります。
+このクラスと違い、キーは同一性ではなく等値性で比較されます。
+#%end
 
 ## Public Instance Methods
 
