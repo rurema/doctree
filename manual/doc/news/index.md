@@ -1,5 +1,11 @@
 # Ruby変更履歴
 
+#%since 4.0
+  - [d:news/4_0_0]
+#%end
+#%since 3.4
+  - [d:news/3_4_0]
+#%end
 #%since 3.3
   - [d:news/3_3_0]
 #%end
