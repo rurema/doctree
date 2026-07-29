@@ -118,7 +118,7 @@ generated-documents の Import コミットに記録された生成日と、
 - 旧時点のソースを Markdown に変換したい場合は、サルベージ対応後の bitclust の
   `bin/rrd2md --graph --scope LO,HI` をスコープを合わせて使えます
   （検証ツールも `--scope` 対応。bitclust の doc/markdown-operations.md 参照）。
-  ただし 2015〜2019 年時点の RRD には現在の変換器が想定しない記法が
+  ただし 2015〜2019 年時点の RD には現在の変換器が想定しない記法が
   残っている可能性があり、roundtrip 検証を必ず通してください。
 - 現在の `manual/` は HEAD の refm から `--scope 1.8.7,4.2` で変換したもので、
   「HEAD に残っている範囲の」全バージョン情報を含みます（rake の全対象版を

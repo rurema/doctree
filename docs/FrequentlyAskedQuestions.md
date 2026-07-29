@@ -1,7 +1,7 @@
 マニュアル執筆上でのありがちな疑問とその答え。
 
 回答中の記法は 2026年7月の Markdown 移行後のものに更新してあります。
-出典としてリンクしているメーリングリストの議論は旧記法（RRD）時代のものです。
+出典としてリンクしているメーリングリストの議論は旧記法（RD）時代のものです。
 
 ## クラスリファレンスマニュアル関連
 
@@ -39,7 +39,7 @@
 [[ruby-reference-manual:143](http://www.fdiary.net/ml/ruby-reference-manual/msg/143)]
 
 モジュール関数（クラスメソッドとしてもインスタンスメソッドとしても呼べるメソッド）を
-表す記号です。旧記法（RRD）では「.#」を使って「CLASSNAME.#METHODNAME」と表記して
+表す記号です。旧記法（RD）では「.#」を使って「CLASSNAME.#METHODNAME」と表記して
 いましたが、Markdown 記法では「?.」を使って `CLASSNAME?.METHODNAME` と表記します
 （`?` は RBS の `self?` に由来します）。
 また、BitClust だとモジュール関数は c.singleton_methods と
