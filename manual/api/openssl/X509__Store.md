@@ -167,6 +167,7 @@ verify を一度も呼びだしていない場合は nil を返します。
 - [m:OpenSSL::X509::TRUST_SSL_SERVER]
 - [m:OpenSSL::X509::TRUST_OCSP_REQUEST]
 - [m:OpenSSL::X509::TRUST_OCSP_SIGN]
+
 - **param** `trust` -- 整数値
 - **SEE** [m:OpenSSL::X509::StoreContext#trust=]
 
