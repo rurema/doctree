@@ -79,8 +79,8 @@ OS のページサイズをバイト数で表した値です。
 バッファがロックされていることを表すフラグです。
 
 ロックされている間はバッファの解放やリサイズができません。
-バッファがロックされているかどうかは [m:IO::Buffer#locked?] で調べられます。
-#%# locked を収録したら、ブロックの間ロックする IO::Buffer#locked への言及も足す
+バッファは [m:IO::Buffer#locked] のブロックを実行している間ロックされます。
+ロックされているかどうかは [m:IO::Buffer#locked?] で調べられます。
 
 ### const PRIVATE -> Integer
 
@@ -245,6 +245,34 @@ p str.encoding.name   # => "ASCII-8BIT"
 ```
 
 - **SEE** [m:IO::Buffer.for]
+#%end
+
+#%since 3.2
+### def size_of(buffer_type) -> Integer
+### def size_of(buffer_types) -> Integer
+
+数値の型が占めるバイト数を返します。
+
+型の配列を渡した場合は、それぞれのバイト数の合計を返します。
+指定できる型については [m:IO::Buffer#get_value] を参照してください。
+
+- **param** `buffer_type` -- 型を表すシンボルを指定します。
+- **param** `buffer_types` -- 型を表すシンボルの配列を指定します。
+
+- **raise** `ArgumentError` -- 型として使えないシンボルを指定した場合に発生します。
+
+- **raise** `TypeError` -- シンボルでも配列でもないオブジェクトを指定した場合に発生します。
+
+```ruby
+p IO::Buffer.size_of(:U8)          # => 1
+p IO::Buffer.size_of(:u32)         # => 4
+p IO::Buffer.size_of(:f64)         # => 8
+
+# 配列を渡すと合計を返す
+p IO::Buffer.size_of([:u32, :u32]) # => 8
+```
+
+- **SEE** [m:IO::Buffer#get_value], [m:IO::Buffer#get_values]
 #%end
 
 ## Instance Methods
@@ -808,6 +836,61 @@ p IO::Buffer.new(4).readonly?                       # => false
 さらにロックを取得することもできません。
 システムコールでバッファを使っている間に、そのバッファが移動しないことを
 保証するための仕組みです。
+
+- **SEE** [m:IO::Buffer#locked]
+
+### def locked { ... } -> object
+
+ブロックを実行する間、バッファをロックします。ブロックの値を返します。
+
+ロックされている間、そのバッファに対して [m:IO::Buffer#resize] や
+[m:IO::Buffer#free]、さらに [m:IO::Buffer#locked] を呼ぶと
+[c:IO::Buffer::LockedError] が発生します。
+バッファへの読み書き自体はロック中も行えます。
+
+システムコールでバッファを使っている間に、そのバッファが移動したり
+解放されたりしないことを保証するための仕組みです。
+スレッド安全ではないため、複数のスレッドでバッファを共有する場合は
+別に同期の手段が必要です。
+
+#%until 3.4
+ブロックの実行中に例外が発生すると、ロックは解除されずに残ります。
+そのバッファは以降も大きさの変更や解放ができません。
+#%end
+#%version 3.4...4.0
+ブロックの実行中に例外が発生した場合、3.4.10 以降ではロックが解除されます。
+3.4.9 以前では解除されずに残ります。
+#%end
+#%version 4.0...4.1
+ブロックの実行中に例外が発生した場合、4.0.6 以降ではロックが解除されます。
+4.0.5 以前では解除されずに残ります。
+#%end
+#%since 4.1
+ブロックの実行中に例外が発生した場合もロックは解除されます。
+#%end
+
+- **raise** `LocalJumpError` -- ブロックを渡さなかった場合に発生します。
+
+- **raise** `IO::Buffer::LockedError` -- すでにロックされているバッファに対して
+             呼び出した場合に発生します。
+
+```ruby
+buf = IO::Buffer.new(4)
+
+p buf.locked?                # => false
+p buf.locked { buf.locked? } # => true
+p buf.locked?                # => false
+
+# ブロックの値がそのまま返る
+p buf.locked { "done" }      # => "done"
+```
+
+```ruby title="例: ロック中は大きさの変更や解放ができない"
+buf = IO::Buffer.new(4)
+buf.locked { buf.resize(8) } # ~> IO::Buffer::LockedError
+```
+
+- **SEE** [m:IO::Buffer#locked?], [m:IO::Buffer::LOCKED]
 
 #%since 3.2
 ### def shared? -> bool
