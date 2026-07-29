@@ -86,6 +86,48 @@ end
    done
 ```
 
+## Class Methods
+
+### def wait(pid = -1, flags = 0) -> Process::Status | nil
+
+[m:Process?.wait] と同じですが、プロセス ID ではなく
+[c:Process::Status] を返します。
+
+pid と flags の意味は [m:Process?.wait] と同じです。
+
+子プロセスがない場合は、実在しないプロセスを表す「空の」
+[c:Process::Status] を返します。この場合 [m:Process::Status#pid] は -1 になります。
+
+[m:Process?.wait] と異なり、[m:$?] は更新されません。
+
+すべてのプラットフォームで使えるわけではありません。
+
+- **param** `pid` -- 待機する子プロセスのプロセス ID を指定します。
+       指定できる値は [m:Process?.wait] と同じです。
+
+- **param** `flags` -- [m:Process::WNOHANG] などを指定します。
+             指定できる値は [m:Process?.wait] と同じです。
+
+- **return** -- flags に [m:Process::WNOHANG] を指定していて、
+             子プロセスがまだ終了していない場合は nil を返します。
+
+```ruby
+pid = fork { exit 1 }
+
+status = Process::Status.wait(pid)
+p status.class      # => Process::Status
+p status.exitstatus # => 1
+
+# Process.wait と違い $? は更新されない
+p $?                # => nil
+```
+
+```ruby title="例: 子プロセスがない場合"
+p Process::Status.wait # => #<Process::Status: pid -1 exit 0>
+```
+
+- **SEE** [m:Process?.wait], [m:Process?.wait2]
+
 ## Instance Methods
 
 ### def ==(other)    -> bool
