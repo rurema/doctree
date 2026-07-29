@@ -17,7 +17,7 @@ library: rubygems/remote_fetcher
 
 ## Instance Methods
 
-### def uri -> URI
+### def uri -> String
 
 問題が発生した URI を返します。
 
