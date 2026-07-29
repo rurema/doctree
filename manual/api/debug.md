@@ -2,6 +2,18 @@
 type: library
 category: Development
 ---
+#%since 3.1
+Ruby デバッガです。このライブラリは Ruby 3.1 で標準添付ライブラリから
+削除されました。
+
+Ruby 3.1 以降には、同名の debug gem(TracePoint ベースの新しいデバッガ。
+bundled gem)が同梱されています。これは本ライブラリとは別物です。
+詳しい内容は下記のページを参照してください。
+
+- rubygems.org: <https://rubygems.org/gems/debug>
+- プロジェクトページ: <https://github.com/ruby/debug>
+- リファレンス: <https://www.rubydoc.info/gems/debug>
+#%else
 Ruby デバッガです。Ruby スクリプトのソースコードデバッグに使用します。
 
 また、Emacs を使用したインタフェース rubydb3x.el が
@@ -198,3 +210,4 @@ M-x rubydb
 # class DEBUGGER__
 
 ライブラリの内部で使用します。
+#%end
