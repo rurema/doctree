@@ -220,7 +220,7 @@ bufに文字列を指定するとその文字列のメモリ領域にデータ�
 
 - **param** `length` -- 読み込むバイト数を指定します
 - **param** `buf` -- データを書き込むバッファ
-- **raise** `EOFError` -- 入力が終端に逹した場合に発生します
+- **raise** `EOFError` -- 入力が終端に達した場合に発生します
 - **raise** `OpenSSL::SSL::SSLError` -- 読み込みに失敗した場合に発生します
 
 ### def syswrite(string) -> Integer
