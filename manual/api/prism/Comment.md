@@ -17,7 +17,7 @@ library: prism
 
 ### def location -> Prism::Location
 
-コメントのソースコード上の位置を表す `Prism::Location` を返します。
+コメントのソースコード上の位置を表す [c:Prism::Location] を返します。
 コメントの文字列そのものは `location.slice` で取得できます。
 
 ```ruby title="例"

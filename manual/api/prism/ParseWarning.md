@@ -33,7 +33,7 @@ p warning.message # => "ambiguous `*` has been interpreted as an argument prefix
 
 ### def location -> Prism::Location
 
-警告の対象となったソースコード上の位置を表す `Prism::Location` を
+警告の対象となったソースコード上の位置を表す [c:Prism::Location] を
 返します。
 
 #%since 3.4
