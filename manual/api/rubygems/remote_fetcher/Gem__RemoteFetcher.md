@@ -50,22 +50,6 @@ source_uri から取得した Gem パッケージをキャッシュディレク�
 
 - **param** `uri` -- データ取得先の URI を指定します。
 
-### def escape(str) -> String
-
-URI 文字列をエンコードした文字列を返します。
-
-- **param** `str` -- 文字列を指定します。
-
-- **SEE** `URI.escape`
-
-### def unescape(str) -> String
-
-URI 文字列をデコードした文字列を返します。
-
-- **param** `str` -- 文字列を指定します。
-
-- **SEE** `URI.unescape`
-
 ### def get_proxy_from_env -> URI | nil
 
 環境変数にセットされている HTTP proxy の情報を取得して返します。

@@ -1201,8 +1201,11 @@ Ruby インタプリタがプログラムを実行する過程で、メソッド
 式の評価などのイベントが発生する度に、以下で説明する6個の引数とともに
 登録された [c:Proc] オブジェクトを実行します。
 
-標準添付の [lib:debug]、[lib:tracer]、
-`profile` はこの組み込み関数を利用して実現されています。
+かつて標準添付の [lib:debug]、`tracer`、`profile` はこの組み込み関数を利用
+して実現されていました。ただし `tracer` は Ruby 3.1 で、`profile` は Ruby
+2.7 でそれぞれ標準添付ライブラリから削除されています。また debug も
+Ruby 3.1 以降は TracePoint を使った新しい実装(debug gem)に置き換えられて
+おり、現在この組み込み関数を使用してはいません。
 
 ### ブロックパラメータの意味
 
@@ -1279,15 +1282,19 @@ end
 43.to_s
 
 # ----結果----
-# ["c-return", "..", 1, :set_trace_func, #<Binding:0xf6ceb8>, Kernel]
-# ["line", "..", 4, nil, #<Binding:0x10cbcd8>, nil]
-# ["c-call", "..", 4, :inherited, #<Binding:0x10cba98>, Class]
-# ["c-return", "..", 4, :inherited, #<Binding:0x10cb858>, Class]
-# ["class", "..", 4, nil, #<Binding:0x10cb600>, nil]
-# ["end", "..", 5, nil, #<Binding:0x10cb3f0>, nil]
-# ["line", "..", 6, nil, #<Binding:0x10cb1e0>, nil]
-# ["c-call", "..", 6, :to_s, #<Binding:0x10cafd0>, Fixnum]
-# ["c-return", "..", 6, :to_s, #<Binding:0x10cad78>, Fixnum]
+# ["c-return", "..", 1, :set_trace_func, nil, Kernel]
+# ["line", "..", 4, nil, #<Binding:0x00007f9a2c0a1f38>, nil]
+#%since 3.2
+# ["c-call", "..", 4, :const_added, nil, Module]
+# ["c-return", "..", 4, :const_added, nil, Module]
+#%end
+# ["c-call", "..", 4, :inherited, nil, Class]
+# ["c-return", "..", 4, :inherited, nil, Class]
+# ["class", "..", 4, nil, #<Binding:0x00007f9a2c0a1e18>, nil]
+# ["end", "..", 5, nil, #<Binding:0x00007f9a2c0a1cf8>, nil]
+# ["line", "..", 6, nil, #<Binding:0x00007f9a2c0a1a70>, nil]
+# ["c-call", "..", 6, :to_s, nil, Integer]
+# ["c-return", "..", 6, :to_s, nil, Integer]
 ```
 
 - **SEE** [m:Kernel?.caller]
