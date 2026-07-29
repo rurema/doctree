@@ -63,9 +63,8 @@ p Prism.parse("1 +").failure?   # => true
 
 ### def errors -> Array
 
-構文解析中に発生したエラー(`Prism::ParseError` のインスタンス)の
-配列を返します。エラーがなければ空配列です。それぞれの要素は
-`type`、`message`、`location`、`level` といったメソッドを持ちます。
+構文解析中に発生したエラー([c:Prism::ParseError] のインスタンス)の
+配列を返します。エラーがなければ空配列です。
 
 ```ruby title="例"
 require "prism"
@@ -81,9 +80,8 @@ p errors.first.level     # => :syntax
 
 ### def warnings -> Array
 
-構文解析中に発生した警告(`Prism::ParseWarning` のインスタンス)の
-配列を返します。警告がなければ空配列です。要素が持つメソッドの
-インターフェースは [m:Prism::ParseResult#errors] と同様です。
+構文解析中に発生した警告([c:Prism::ParseWarning] のインスタンス)の
+配列を返します。警告がなければ空配列です。
 
 ```ruby title="例"
 require "prism"
@@ -100,7 +98,7 @@ p warnings.first.level    # => :verbose
 
 ### def comments -> Array
 
-構文解析中に見つかったコメント(`Prism::InlineComment` などの
+構文解析中に見つかったコメント([c:Prism::Comment] のサブクラスの
 インスタンス)の配列を返します。[m:Prism?.parse_comments] を
 呼び出した場合と同じ内容です。
 
@@ -117,7 +115,7 @@ p comments.first.location.slice  # => "# hello"
 
 ### def magic_comments -> Array
 
-構文解析中に見つかったマジックコメント(`Prism::MagicComment` の
+構文解析中に見つかったマジックコメント([c:Prism::MagicComment] の
 インスタンス)の配列を返します。`# frozen_string_literal: true` の
 ような、Ruby の動作に影響を与える特別な形式のコメントが対象です。
 各要素は `key`(項目名)と `value`(値)を持ちます。
