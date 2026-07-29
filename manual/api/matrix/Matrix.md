@@ -178,13 +178,13 @@ p Matrix.zero(2, 3) #=> Matrix[[0, 0, 0], [0, 0, 0]]
 - **param** `row` -- 生成する行列の行数
 - **param** `column` -- 生成する行列の列数
 
-### def empty(row_size=0, column_size=0) -> Matrix
+### def empty(row_count=0, column_count=0) -> Matrix
 
 要素を持たない行列を返します。
 
 「要素を持たない」とは、行数もしくは列数が0の行列のことです。
 
-row_size 、 column_size のいずれか一方は0である必要があります。
+`row_count`、`column_count` のいずれか一方は0である必要があります。
 
 ```ruby title="例"
 require 'matrix'
@@ -198,9 +198,9 @@ p m * n
 # => Matrix[[0, 0, 0], [0, 0, 0]]
 ```
 
-- **param** `row_size` -- 行列の行数
-- **param** `column_size` -- 行列の列数
-- **raise** `ArgumentError` -- row_size, column_size が両方とも0でない場合に発生します
+- **param** `row_count` -- 行列の行数
+- **param** `column_count` -- 行列の列数
+- **raise** `ArgumentError` -- `row_count`, `column_count` が両方とも0でない場合に発生します
 
 ### def row_vector(row) -> Matrix
 
@@ -214,10 +214,10 @@ p m * n
 
 - **param** `column` -- (n,1)型の行列として生成する[c:Vector] [c:Array] オブジェクト
 
-### def build(row_size, column_size = row_size) {|row, col| ... } -> Matrix
-### def build(row_size, column_size = row_size) -> Enumerable
+### def build(row_count, column_count = row_count) {|row, col| ... } -> Matrix
+### def build(row_count, column_count = row_count) -> Enumerable
 
-row_size×column_sizeの行列をブロックの返り値から生成します。
+`row_count`×`column_count` の行列をブロックの返り値から生成します。
 
 行列の各要素の位置がブロックに渡され、それの返り値が行列の要素となります。
 
@@ -231,8 +231,8 @@ m = Matrix.build(3) { rand }
   # => a 3x3 matrix with random elements
 ```
 
-- **param** `row_size` -- 行列の行数
-- **param** `column_size` -- 行列の列数
+- **param** `row_count` -- 行列の行数
+- **param** `column_count` -- 行列の列数
 
 ### def hstack(*matrices) -> Matrix
 
@@ -308,12 +308,28 @@ p m[1, 3] # => nil
 ### def row_size -> Integer
 ### def row_count -> Integer
 
-行列の行数を返します。
+`self` の行数を返します。
+
+`row_size` というメソッド名は「行（row）のサイズ（列数に同じ）」を連想しますが、行の数です。まぎらわしいので `row_count` のほうを使ってください。
+
+```ruby
+require "matrix"
+
+p Matrix[[1, 2, 3], [4, 5, 6]].row_count # => 2
+```
 
 ### def column_size -> Integer
 ### def column_count -> Integer
 
-行列の列数を返します。
+`self` の列数を返します。
+
+`column_size` というメソッド名は「列（column）のサイズ（行数に同じ）」を連想しますが、列の数です。まぎらわしいので `column_count` のほうを使ってください。
+
+```ruby
+require "matrix"
+
+p Matrix[[1, 2, 3], [4, 5, 6]].column_count # => 3
+```
 
 ### def index(value, selector = :all) -> [Integer, Integer] | nil
 ### def index(selector = :all){|e| ... } -> [Integer, Integer] | nil
@@ -482,8 +498,8 @@ self の各成分に数 other を掛けた行列を返します。
 
 ### def +(m) -> Matrix
 
-self に行列 m を加算した行列を返します。
-self の column_size が 1 なら [c:Vector] オブジェクトも指定出来ます。
+`self` に行列 `m` を加算した行列を返します。
+`self` の列数が 1 なら [c:Vector] オブジェクトも指定できます。
 
 - **param** `m` -- 加算する行列。加算可能な行列やベクトルを指定します。
 
@@ -491,8 +507,8 @@ self の column_size が 1 なら [c:Vector] オブジェクトも指定出来�
 
 ### def -(m) -> Matrix
 
-self から行列mを減算した行列を返します。
-self の column_size が 1 なら [c:Vector] オブジェクトも指定出来ます。
+`self` から行列 `m` を減算した行列を返します。
+`self` の列数が 1 なら [c:Vector] オブジェクトも指定できます。
 
 - **param** `m` -- 減算する行列。減算可能な行列やベクトルを指定します。
 
