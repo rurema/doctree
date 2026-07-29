@@ -119,7 +119,6 @@ f.resume
 #%end
 ```
 
-#%since 3.0
 ### ノンブロッキングファイバーとスケジューラ {#nonblocking}
 
 Ruby 3.0 から、ファイバーはブロッキングとノンブロッキングのどちらかの
@@ -143,7 +142,6 @@ Ruby 3.0 から、ファイバーはブロッキングとノンブロッキン�
 現在の実行コンテキストがどちらであるかは [m:Fiber.blocking?] で調べられます。
 また [m:Fiber.schedule] を使うと、スケジューラ経由でノンブロッキングファイバーを
 生成できます。
-#%end
 
 ## Class Methods
 #%since 3.1
@@ -153,11 +151,8 @@ Ruby 3.0 から、ファイバーはブロッキングとノンブロッキン�
 #%since 3.2
 ### def new(blocking: false, storage: true) {|obj| ... } -> Fiber
 #%else
-#%since 3.0
 ### def new(blocking: false) {|obj| ... } -> Fiber
 #%else
-### def new{|obj| ... } -> Fiber
-#%end
 #%end
 
 与えられたブロックとともにファイバーを生成して返します。
@@ -166,11 +161,9 @@ Ruby 3.0 から、ファイバーはブロッキングとノンブロッキン�
 ブロックが終了した場合は親にコンテキストが切り替わります。
 その時ブロックの評価値が返されます。
 
-#%since 3.0
 - **param** `blocking` -- 偽を指定するとノンブロッキングなファイバーを生成します。
   真を指定するとブロッキングなファイバーを生成します。
   詳しくは [ref:c:Fiber#nonblocking] を参照してください。
-#%end
 #%since 3.2
 - **param** `storage` -- 生成するファイバーの fiber storage を指定します。
   true を指定すると呼び出し元のファイバーの fiber storage を複製して引き継ぎます。
@@ -304,7 +297,6 @@ f.resume
 - **SEE** [m:Fiber.blocking?], [ref:c:Fiber#nonblocking]
 #%end
 
-#%since 3.0
 ### def blocking? -> false | 1
 
 現在の実行コンテキストがブロッキングである場合に 1 を返します。
@@ -320,7 +312,6 @@ p Fiber.new(blocking: true) { Fiber.blocking? }.resume # => 1
 ```
 
 - **SEE** [m:Fiber#blocking?], [ref:c:Fiber#nonblocking]
-#%end
 
 #%since 3.1
 ### def current_scheduler -> object | nil
@@ -334,7 +325,6 @@ p Fiber.new(blocking: true) { Fiber.blocking? }.resume # => 1
 - **SEE** [m:Fiber.scheduler], [m:Fiber.set_scheduler]
 #%end
 
-#%since 3.0
 ### def schedule(*args) {|*args| ... } -> Fiber
 
 現在のスレッドに設定されているスケジューラを使って、
@@ -386,7 +376,6 @@ Fiber.set_scheduler(Object.new) # ~> ArgumentError: Scheduler must implement #bl
 ```
 
 - **SEE** [m:Fiber.scheduler], [m:Fiber.schedule], [ref:c:Fiber#nonblocking]
-#%end
 
 ## Instance Methods
 #%since 3.1
@@ -471,7 +460,6 @@ p f.resume() #=> :fuga
 f.resume()   # ~> FiberError: attempt to resume a terminated fiber
 ```
 
-#%since 3.0
 ### def backtrace                -> [String]
 ### def backtrace(start)         -> [String]
 ### def backtrace(start, length) -> [String]
@@ -556,7 +544,6 @@ p Fiber.new(blocking: true) { }.blocking? # => true
 ```
 
 - **SEE** [m:Fiber.blocking?], [ref:c:Fiber#nonblocking]
-#%end
 
 #%since 3.3
 ### def kill -> self | false

@@ -70,7 +70,6 @@ Traceback (most recent call last):
 
 - **param** `newstate` -- スレッド実行中に例外発生した場合、その内容を報告するかどうかを true か false で指定します。
 
-#%since 3.0
 ### def ignore_deadlock -> bool
 
 デッドロック検知を無視する機能のon/offを返します。
@@ -98,7 +97,6 @@ puts queue.pop
 ```
 
 - **SEE** [m:Thread.ignore_deadlock]
-#%end
 
 ### def current    -> Thread
 
