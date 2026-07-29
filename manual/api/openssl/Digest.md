@@ -7,7 +7,7 @@ library: openssl
 
 このインターフェースには2通りの利用法が存在します。
 一方は文字列から直接ハッシュを計算する ([m:OpenSSL::Digest.digest],
-`Digest::Instance#hexdigest`) 方法です。短い文字列の
+[m:Digest::Base.hexdigest]) 方法です。短い文字列の
 ダイジェストを取るときにはこちらを使えばよいでしょう。
 
 もう一つはダイジェストオブジェクトを作成して、文字列を順次
