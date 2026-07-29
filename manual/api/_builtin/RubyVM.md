@@ -35,6 +35,33 @@ Ruby の 内部情報へのアクセス手段を提供するクラスです。
 #%#
 #%# VM_COLLECT_USAGE_DETAILS を有効にしてコンパイルした時のみ有効
 
+### def stat -> Hash
+### def stat(hsh) -> Hash
+### def stat(sym) -> Integer
+
+VM 内部のキャッシュなどに関する統計情報を返します。
+
+引数なしで呼び出すと、統計名のシンボルをキーとするハッシュを返します。
+ハッシュを渡すとその内容が統計情報で上書きされ、そのハッシュを返します
+(プローブ効果を避けるために使用します)。シンボルを渡すと、その統計名の
+値のみを返します。
+
+- **param** `hsh` -- 結果を格納するハッシュを指定します。内容は上書きされます。
+- **param** `sym` -- 取得したい統計名をシンボルで指定します。
+
+- **raise** `ArgumentError` -- 未知の統計名をシンボルで指定した場合に発生します。
+
+```ruby title="例"
+p RubyVM.stat
+# => {:constant_cache_invalidations=>2, :constant_cache_misses=>14,
+#     :global_cvar_state=>27, :next_shape_id=>225, :shape_cache_size=>1024}
+p RubyVM.stat(:next_shape_id)
+# => 225
+```
+
+含まれる統計名と値は処理系の実装の詳細であり、バージョンによって変わり
+ます。この値に依存すべきではありません。
+
 ## Constants
 
 ### const OPTS -> [String]

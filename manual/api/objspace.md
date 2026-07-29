@@ -461,7 +461,7 @@ Ruby のヒープの内容を JSON 形式でダンプします。1行につき1�
 #%since 3.2
 - **param** `shapes` -- 真偽値または 0 以上の整数を指定します。正の整数
   を指定した場合、指定した shape_id 以降のシェイプのみをダンプします。
-  現在の shape_id は `RubyVM.stat(:next_shape_id)` で取得できます。false
+  現在の shape_id は [`RubyVM.stat(:next_shape_id)`](m:RubyVM.stat) で取得できます。false
   を指定するとシェイプをダンプしません。デフォルトは true です。
 #%end
 

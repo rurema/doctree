@@ -1,6 +1,7 @@
 ---
 type: library
 category: Development
+until: "3.1"
 ---
 実行トレース出力をとる機能を提供します。
 
