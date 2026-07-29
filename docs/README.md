@@ -58,8 +58,8 @@ wiki 取り込み時の全40ページの棚卸しの記録です。**表の処�
 
 | ページ | 提案 | 理由・備考 |
 |--------|------|-----------|
-| [ReferenceManualFormatDigest](ReferenceManualFormatDigest.md) | 書き直し | 記法まとめの中心ページだが全編 RRD 記法。[MARKUP_SPEC.md](https://github.com/rurema/bitclust/blob/master/doc/markdown-samples/MARKUP_SPEC.md) ベースの Markdown 版に |
-| [ClassReferenceManualFormat](ClassReferenceManualFormat.md) | 書き直し | RRD の詳細仕様（499行）。仕様の正は MARKUP_SPEC.md に移ったので、執筆者向けの平易なガイドとして再構成 |
+| [ReferenceManualFormatDigest](ReferenceManualFormatDigest.md) | 書き直し | 記法まとめの中心ページだが全編 RD 記法。[MARKUP_SPEC.md](https://github.com/rurema/bitclust/blob/master/doc/markdown-samples/MARKUP_SPEC.md) ベースの Markdown 版に |
+| [ClassReferenceManualFormat](ClassReferenceManualFormat.md) | 書き直し | RD の詳細仕様（499行）。仕様の正は MARKUP_SPEC.md に移ったので、執筆者向けの平易なガイドとして再構成 |
 | [HowToWriteMethodEntry](HowToWriteMethodEntry.md) | 書き直し | メソッドエントリの書き方。`---` シグネチャ・`@param` 等すべて旧記法 |
 | [Tutorial](Tutorial.md) | 書き直し | 執筆チュートリアル。`refm/api/src` 前提のディレクトリ説明・RD 前提。`manual/` 前提に |
 | [DirectoryTree](DirectoryTree.md) | 書き直し | `refm/` 構成の説明。`manual/{api,doc,capi}` 構成に（短いので容易） |

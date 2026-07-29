@@ -5,7 +5,7 @@ manual/          リファレンスマニュアル本体（Markdown。編集は�
   manual/api         クラスリファレンス（組み込み・標準添付ライブラリ）
   manual/capi        C API リファレンス
   manual/doc         Ruby言語仕様・NEWS などの文書
-refm/            旧 RRD ソース（2026年7月に凍結。編集しない）
+refm/            旧 RD ソース（2026年7月に凍結。編集しない）
 docs/            プロジェクト文書（この文書。旧 GitHub wiki を移設）
 ```
 
