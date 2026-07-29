@@ -145,18 +145,35 @@ p SecureRandom.uuid #=> "62936e70-1815-439b-bf89-8492855a7e6b"
 
 - **SEE** [rfc:4122]
 
+#%since 3.3
+### def alphanumeric(n = nil, chars: Random::Formatter::ALPHANUMERIC)    -> String
+#%else
 ### def alphanumeric(n = nil)    -> String
+#%end
 
 ランダムな英数字を生成して返します。
 
 - **param** `n` -- 生成される文字列のサイズを整数で指定します。
          nil を指定した場合 n として 16 が使われます。
+#%since 3.3
+- **param** `chars` -- 生成に使う文字の配列を指定します。
+         省略した場合は A-Z, a-z, 0-9 が使われます。
+#%end
 - **return** -- A-Z, a-z, 0-9 からなる文字列が返されます。
+#%since 3.3
+         (chars を指定した場合は、chars に含まれる文字からなる文字列が返されます)
+#%end
 
 - **raise** `NotImplementedError` -- 安全な乱数発生器が使えない場合に発生します。
 
 ```ruby
 require 'securerandom'
-p SecureRandom.alphanumeric #=> "2BuBuLf3WfSKyQbR"
-p SecureRandom.alphanumeric(10) #=> "i6K93NdqiH"
+p SecureRandom.alphanumeric # => "2BuBuLf3WfSKyQbR"
+p SecureRandom.alphanumeric(10) # => "i6K93NdqiH"
+#%since 3.3
+
+p SecureRandom.alphanumeric(4, chars: [*"0".."9"]) # => "2952"
+#%end
 ```
+
+- **SEE** [m:Random::Formatter#alphanumeric]

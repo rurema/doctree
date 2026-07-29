@@ -186,6 +186,38 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 - **SEE** <https://www.atdot.net/~ko1/diary/201212.html#d8>,
      <https://www.atdot.net/~ko1/diary/201212.html#d9>
 
+### module_function def reachable_objects_from_root -> Hash
+
+VM のルート(仮想マシンやグローバル変数テーブルなど、ガベージコレクタが
+生存しているオブジェクトをマークする際に辿る起点)から直接到達可能なオブ
+ジェクトを、ルートごとにグループ分けしたハッシュを返します。戻り値の
+キーはルートの名前を表す文字列、値はそのルートから到達可能なオブジェク
+トの配列です。
+
+```ruby title="例"
+require 'objspace'
+
+reachable = ObjectSpace.reachable_objects_from_root
+p reachable.keys
+# => ["vm", "global_tbl", "machine_context"]
+# (内容やキーの構成は処理系やバージョン、実行時の状態に依存します)
+```
+
+戻り値のハッシュはキーを同一性で比較するため、文字列リテラルを使ってキー
+を指定して参照することはできません。[m:Hash#keys] や [m:Hash#values] な
+どで取得してください。
+
+内部オブジェクトへの参照は ObjectSpace::InternalObjectWrapper オブジェ
+クトでラップされます。詳しくは [m:ObjectSpace?.reachable_objects_from]
+を参照してください。
+
+本メソッドはメモリリークの原因を調査するなど、オブジェクトグラフのデバッ
+グに役立ちます。
+
+本メソッドは C Ruby 以外では動作しません。
+
+- **SEE** [m:ObjectSpace?.reachable_objects_from]
+
 ### module_function def trace_object_allocations_start -> nil
 
 オブジェクト割り当てのトレースを開始します。
@@ -200,7 +232,31 @@ obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合�
 
 - **SEE** [m:ObjectSpace?.trace_object_allocations_start]
 
-### module_function def allocation_sourcefile(object) -> String
+### module_function def trace_object_allocations_clear -> nil
+
+記録されているオブジェクト割り当てのトレース情報をクリアします。
+
+トレースの有効/無効の状態には触れません。トレースを
+有効にしたまま呼び出すと、それ以降のオブジェクト割り当てが引き続き記録
+されます。
+
+```ruby title="例"
+require 'objspace'
+
+ObjectSpace.trace_object_allocations_start
+obj = Object.new
+p ObjectSpace.allocation_sourceline(obj)
+ObjectSpace.trace_object_allocations_clear
+p ObjectSpace.allocation_sourceline(obj)
+ObjectSpace.trace_object_allocations_stop
+# => 4
+#    nil
+```
+
+- **SEE** [m:ObjectSpace?.trace_object_allocations_start],
+     [m:ObjectSpace?.trace_object_allocations_stop]
+
+### module_function def allocation_sourcefile(object) -> String | nil
 
 objectの元となったソースファイル名を返します。
 
@@ -219,7 +275,7 @@ ObjectSpace.trace_object_allocations_stop
 - **SEE** [m:ObjectSpace?.trace_object_allocations_start],
      [m:ObjectSpace?.trace_object_allocations_stop]
 
-### module_function def allocation_sourceline(object) -> Integer
+### module_function def allocation_sourceline(object) -> Integer | nil
 
 objectの元となったソースファイルの行番号を返します。
 
@@ -233,6 +289,89 @@ ObjectSpace.trace_object_allocations_start
 obj = Object.new
 puts "line:#{ObjectSpace.allocation_sourceline(obj)}"  # => line:4
 ObjectSpace.trace_object_allocations_stop
+```
+
+- **SEE** [m:ObjectSpace?.trace_object_allocations_start],
+     [m:ObjectSpace?.trace_object_allocations_stop]
+
+### module_function def allocation_class_path(object) -> String | nil
+
+objectの元となったクラスのパス(クラス名)を返します。
+
+- **param** `object` -- 元となるクラスのパスを取得したいobjectを指定します。
+- **return** -- objectの元となるクラスのパスを返します。存在しない場合はnilを返します。
+
+```ruby title="例"
+require 'objspace'
+
+class A
+  def foo
+    ObjectSpace.trace_object_allocations do
+      obj = Object.new
+      p ObjectSpace.allocation_class_path(obj)
+    end
+  end
+end
+
+A.new.foo
+# => "Class"
+```
+
+- **SEE** [m:ObjectSpace?.trace_object_allocations_start],
+     [m:ObjectSpace?.trace_object_allocations_stop]
+
+### module_function def allocation_method_id(object) -> Symbol | nil
+
+objectの元となったメソッド名を返します。
+
+- **param** `object` -- 元となるメソッド名を取得したいobjectを指定します。
+- **return** -- objectの元となるメソッド名を返します。存在しない場合はnilを返します。
+
+```ruby title="例"
+require 'objspace'
+
+class A
+  include ObjectSpace
+
+  def foo
+    trace_object_allocations do
+      obj = Object.new
+      p "#{allocation_class_path(obj)}##{allocation_method_id(obj)}"
+    end
+  end
+end
+
+A.new.foo
+# => "Class#new"
+```
+
+- **SEE** [m:ObjectSpace?.trace_object_allocations_start],
+     [m:ObjectSpace?.trace_object_allocations_stop]
+
+### module_function def allocation_generation(object) -> Integer | nil
+
+objectが生成されたときのガベージコレクタの実行回数([m:GC.count] が返
+す値と同じもの)を返します。
+
+- **param** `object` -- 生成時のガベージコレクタの実行回数を取得したいobjectを指定します。
+- **return** -- objectが生成されたときのガベージコレクタの実行回数を返します。存在しない場合はnilを返します。
+
+```ruby title="例"
+require 'objspace'
+
+class B
+  include ObjectSpace
+
+  def foo
+    trace_object_allocations do
+      obj = Object.new
+      p "Generation is #{allocation_generation(obj)}"
+    end
+  end
+end
+
+B.new.foo
+# => "Generation is 4"
 ```
 
 - **SEE** [m:ObjectSpace?.trace_object_allocations_start],
@@ -258,3 +397,114 @@ end
 
 p C.new.foo #=> "objtrace.rb:8"
 ```
+
+### module_function def dump(obj, output: :string) -> String | File | IO | nil
+
+obj の内容を JSON 形式でダンプします。
+
+- **param** `obj` -- ダンプ対象のオブジェクトを指定します。
+- **param** `output` -- ダンプ結果の出力先を以下のいずれかで指定します(デフォルトは `:string`)。
+
+- **`:string`**:
+  文字列としてダンプ結果を返します。
+- **`:file`**:
+  一時ファイルにダンプし、その [c:File] オブジェクトを返します。
+- **`:stdout`**:
+  標準出力にダンプし、nil を返します。
+- **IO オブジェクト**:
+  指定した IO オブジェクトにダンプし、その IO オブジェクトを返します。
+  (StringIO のような IO のサブクラスでないオブジェクトは指定できません)
+
+```ruby title="例"
+require 'objspace'
+
+p ObjectSpace.dump(5)
+# => "5"
+
+p ObjectSpace.dump("hello")
+# => "{\"address\":\"0x...\", \"type\":\"STRING\", \"shape_id\":0, \"slot_size\":40,
+#     \"class\":\"0x...\", \"embedded\":true, \"chilled\":true, \"bytesize\":5,
+#     \"value\":\"hello\", \"encoding\":\"UTF-8\", \"coderange\":\"7bit\",
+#     \"memsize\":40, \"flags\":{\"wb_protected\":true}}"
+# (address の値は実行するたびに変わります)
+```
+
+- **raise** `ArgumentError` -- output に上記のいずれでもない値を指定した場合に発生します。
+
+戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒ
+ントとして扱う必要があります。
+
+本メソッドは C Ruby 以外では動作しない、実験的なメソッドです。出力の
+フォーマットは将来のバージョンで変更される可能性があります。
+
+- **SEE** [m:ObjectSpace?.dump_all]
+
+#%since 3.2
+### module_function def dump_all(output: :file, full: false, since: nil, shapes: true) -> String | File | IO | nil
+#%else
+### module_function def dump_all(output: :file, full: false, since: nil) -> String | File | IO | nil
+#%end
+
+Ruby のヒープの内容を JSON 形式でダンプします。1行につき1オブジェクト
+(または1ルート、1シェイプ)分の JSON が出力されます。
+
+- **param** `output` -- ダンプ結果の出力先を指定します。指定できる値は
+  [m:ObjectSpace?.dump] の output と同じです(デフォルトは `:file`)。
+- **param** `full` -- 真を指定すると、空きスロット(`T_NONE`)も含めたすべ
+  てのヒープスロットをダンプします。偽の場合(デフォルト)は使用中のスロッ
+  トのみダンプします。
+- **param** `since` -- 0 以上の整数または nil を指定します。正の整数を指
+  定した場合、その世代以降に割り当てられたオブジェクトのみをダンプしま
+  す。現在の世代は [m:GC.count] で取得できます。[m:ObjectSpace?.trace_object_allocations_start]
+  などでオブジェクト割り当てのトレースを有効にしていないオブジェクトは
+  割り当て世代が記録されないため無視されます。nil を指定した場合(デフォ
+  ルト)はすべてのオブジェクトをダンプします。
+#%since 3.2
+- **param** `shapes` -- 真偽値または 0 以上の整数を指定します。正の整数
+  を指定した場合、指定した shape_id 以降のシェイプのみをダンプします。
+  現在の shape_id は `RubyVM.stat(:next_shape_id)` で取得できます。false
+  を指定するとシェイプをダンプしません。デフォルトは true です。
+#%end
+
+```ruby title="例"
+require 'objspace'
+
+str = ObjectSpace.dump_all(output: :string)
+puts str.lines.size
+# => 18369 (ヒープの状態に依存するため実行するたびに変わります)
+```
+
+```ruby title="例:sinceで割り当て世代を絞り込む"
+require 'objspace'
+
+ObjectSpace.trace_object_allocations_start
+GC.start
+gen = GC.count
+obj = "new string"
+str = ObjectSpace.dump_all(output: :string, since: gen)
+puts str.lines.size
+ObjectSpace.trace_object_allocations_stop
+# => 234 (実行するたびに変わります)
+```
+
+#%since 3.2
+
+```ruby title="例:shapesを無効にする"
+require 'objspace'
+
+str = ObjectSpace.dump_all(output: :string, shapes: false)
+p str.lines.grep(/"type":"SHAPE"/).size
+# => 0
+```
+
+#%end
+
+- **raise** `ArgumentError` -- output に [m:ObjectSpace?.dump] で指定できる値以外を指定した場合に発生します。
+
+戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒ
+ントとして扱う必要があります。
+
+本メソッドは C Ruby 以外では動作しない、実験的なメソッドです。出力の
+フォーマットは将来のバージョンで変更される可能性があります。
+
+- **SEE** [m:ObjectSpace?.dump], [m:ObjectSpace?.trace_object_allocations_start]

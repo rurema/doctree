@@ -333,7 +333,7 @@ end
 
 C プログラムのソースコード src をプリプロセスします。
 
-`$CPPFLAGS`, [m:$CFLAGS] の値もプリプロセッサにコマンドライン引数
+[m:$CPPFLAGS], [m:$CFLAGS] の値もプリプロセッサにコマンドライン引数
 として渡します。
 
 このメソッドはヘッダファイルの存在チェックなどに使用します。
@@ -573,6 +573,41 @@ p have_type('foo') # => true
 - **param** `headers` -- 追加のヘッダを指定します。
 
 - **SEE** [m:Kernel#have_type] 
+
+### def have_const(const, headers = nil, opt = "") -> bool
+### def have_const(const, headers = nil, opt = ""){ ... } -> bool
+
+定数 const がシステムに存在するかどうか検査します。
+
+定数 const がシステムに存在する場合は、グローバル変数 [m:$defs] に
+"-DHAVE_CONST_const" (const は大文字に変換されます) を追加し、真を返します。
+定数 const がシステムに存在しない場合は、偽を返します。
+
+const には [定数名, 型] という形式の配列を指定して、定数の型を明示すること
+もできます。
+
+例えば、
+
+```ruby
+require 'mkmf'
+p have_const('FOO') # => true
+```
+
+である場合、HAVE_CONST_FOO というプリプロセッサマクロをコンパイラに渡します。
+
+型を指定する場合は、以下のように呼び出します。
+
+```ruby
+require 'mkmf'
+have_const(%w[PTHREAD_MUTEX_INITIALIZER pthread_mutex_t], "pthread.h")
+```
+
+- **param** `const` -- 検査したい定数の名前を指定します。[定数名, 型] という
+              形式の配列も指定できます。
+
+- **param** `headers` -- 追加のヘッダを指定します。
+
+- **param** `opt` -- コンパイラに渡す追加のオプションを指定します。
 
 ### def have_var(var, headers = nil) -> bool
 ### def have_var(var, headers = nil){ ... } -> bool
@@ -1194,7 +1229,12 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 
 ### gvar $CFLAGS -> String
 
-拡張ライブラリをコンパイルするときの C コンパイラのオプションや、
+拡張ライブラリをコンパイルするときの C コンパイラのオプションを
+指定する文字列です。
+
+### gvar $CPPFLAGS -> String
+
+拡張ライブラリをコンパイルするときに C プリプロセッサに渡すオプションや、
 ヘッダファイルのディレクトリを指定する文字列です。
 
 [m:Kernel#dir_config] の検査が成功すると、

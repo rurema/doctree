@@ -756,6 +756,37 @@ opts.on("-c", "--charset VALUE", {"jis" => "iso-2022-jp", "sjis" => "shift_jis"}
 # ruby command --charset=jis #=> "iso-2022-jp"
 ```
 
+### def make_switch(opts, block = nil) -> Array
+
+[m:OptionParser#on] や [m:OptionParser#on_head]、[m:OptionParser#on_tail]
+などがオプションを登録する際に内部で使う、下請けのメソッドです。
+opts からオプションの短縮形・完全形・引数の変換方法・説明文などを解析し、
+その結果をまとめた配列を返します。
+
+戻り値は以下の要素からなる配列です。
+
+  - オプションの引数を解析するオブジェクト(OptionParser::Switch のインスタンス)
+  - ショートオプション名の配列("-" を除いた文字列)
+  - ロングオプション名の配列("--" を除いた文字列)
+  - "--[no-]xxx" 形式のオプションを指定した場合の、否定形を扱う同様のオブジェクト(それ以外は nil)
+  - 否定形のロングオプション名の配列(例: "no-xxx")
+
+- **param** `opts` -- [m:OptionParser#on] に指定するのと同じ形式の引数の配列を指定します。
+
+- **param** `block` -- オプションが指定されたときに呼ばれるブロックを指定します。
+             opts の要素として Proc や Method を含めることでも指定できます。
+
+```ruby
+require 'optparse'
+
+parser = OptionParser.new
+switch, short, long, = parser.make_switch(["-x", "--example VALUE", "説明"])
+p short # => ["x"]
+p long  # => ["example"]
+```
+
+- **SEE** [m:OptionParser#on]
+
 ### def on_head(*arg, &block) -> self
 
 オプションを取り扱うためのブロックを自身の持つリストの最初に登録します。
