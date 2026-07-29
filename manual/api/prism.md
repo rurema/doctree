@@ -128,7 +128,7 @@ p result.success?      # => true
 
 `source` を字句解析し、`Prism::LexResult` のインスタンスを返します。
 `value` は `[トークン, 直前からの字句解析器の状態(Integer)]` という
-2 要素配列の配列です。これは [c:Ripper] の `Ripper.lex` の戻り値の
+2 要素配列の配列です。これは [c:Ripper] の [m:Ripper.lex] の戻り値の
 形式に近いものになっています。オプションは [m:Prism?.parse] と同じです。
 
 - **param** `source` -- 解析する Ruby プログラムの文字列を指定します。
@@ -205,7 +205,7 @@ p tokens.size  # => 4
 ### module_function def parse_success?(source, **options) -> bool
 
 `source` を構文解析し、エラーなく解析できた場合に true を返します。
-[m:Prism?.parse] を呼び出して `.success?` を確認するのとほぼ同じ
+[m:Prism?.parse] を呼び出して [`.success?`](m:Prism::ParseResult#success?) を確認するのとほぼ同じ
 結果になりますが、構文木を Ruby オブジェクトとして構築しないぶん
 高速です。オプションは [m:Prism?.parse] と同じです。
 
