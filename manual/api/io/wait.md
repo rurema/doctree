@@ -70,7 +70,6 @@ timeout を指定した場合は、指定秒数経過するまでブロックし
 
 - **SEE** [m:IO#wait_readable]
 
-#%since 3.0
 ### def wait_priority(timeout = nil) -> bool | self | nil
 
 self が優先データを受信して読み込み可能になるまでブロックし、
@@ -91,4 +90,3 @@ timeout を指定した場合は、指定秒数経過するまでブロックし
              nil を指定すると読み込み可能になるまで待ち続けます。
 
 - **SEE** [m:IO#wait_readable], [m:IO#wait_writable]
-#%end
