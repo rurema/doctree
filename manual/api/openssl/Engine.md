@@ -209,5 +209,5 @@ engine をデフォルトに設定しないことを意味します。
 
 # class OpenSSL::Engine::EngineError < OpenSSL::OpenSSLError
 
-Engine([c:OpenSSL::Engine]) 関連のエラーが生じたときに発生する例外です。
+[`Engine`](c:OpenSSL::Engine) 関連のエラーが生じたときに発生する例外です。
 
