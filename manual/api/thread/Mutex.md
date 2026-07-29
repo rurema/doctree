@@ -39,6 +39,7 @@ m.synchronize {
 ## Instance Methods
 
 ### def lock -> self
+{: since="1.9.1"}
 
 mutex オブジェクトをロックします。一度に一つのス
 レッドだけが mutex をロックできます。既にロックされている mutex
@@ -66,6 +67,7 @@ p m.locked? # => true
 ```
 
 ### def synchronize { ... } -> object
+{: since="1.9.1"}
 
 mutex をロックし、ブロックを実行します。実行後に必ず mutex のロックを解放します。
 
@@ -88,6 +90,7 @@ p result # => "result"
 ```
 
 ### def try_lock -> bool
+{: since="1.9.1"}
 
 mutex をロックしようとして、ロックが成功した場合、真を返します。
 ロックできなかった場合にはブロックせず偽を返します。
@@ -99,6 +102,7 @@ p m.try_lock # => false
 ```
 
 ### def unlock     -> self
+{: since="1.9.1"}
 
 mutex のロックを解放します。mutex のロック待ちになっていたスレッドの実行は再開されます。
 
@@ -131,6 +135,7 @@ end.join
                    した場合に発生します。
 
 ### def sleep(timeout = nil)    -> Integer
+{: since="1.9.1"}
 
 与えられた秒数の間ロックを解除してスリープして、実行後にまたロックします。
 
@@ -161,6 +166,7 @@ p th.status # => false
 ```
 
 ### def owned? -> bool
+{: since="2.0.0"}
 
 self がカレントスレッドによってロックされている場合に true を返します。
 そうでない場合に false を返します。
