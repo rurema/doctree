@@ -14,6 +14,7 @@ library: prism
 ハッシュキーの警告などは検出されません。
 
 #%end
+
 ```ruby title="例"
 require "prism"
 
