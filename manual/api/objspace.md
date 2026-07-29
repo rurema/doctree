@@ -207,7 +207,7 @@ p reachable.keys
 を指定して参照することはできません。[m:Hash#keys] や [m:Hash#values] な
 どで取得してください。
 
-内部オブジェクトへの参照は ObjectSpace::InternalObjectWrapper オブジェ
+内部オブジェクトへの参照は `ObjectSpace::InternalObjectWrapper` オブジェ
 クトでラップされます。詳しくは [m:ObjectSpace?.reachable_objects_from]
 を参照してください。
 
@@ -245,12 +245,11 @@ require 'objspace'
 
 ObjectSpace.trace_object_allocations_start
 obj = Object.new
-p ObjectSpace.allocation_sourceline(obj)
+p ObjectSpace.allocation_sourceline(obj) # => 4
 ObjectSpace.trace_object_allocations_clear
-p ObjectSpace.allocation_sourceline(obj)
+p ObjectSpace.allocation_sourceline(obj) # => nil
+
 ObjectSpace.trace_object_allocations_stop
-# => 4
-#    nil
 ```
 
 - **SEE** [m:ObjectSpace?.trace_object_allocations_start],
@@ -418,14 +417,14 @@ obj の内容を JSON 形式でダンプします。
 ```ruby title="例"
 require 'objspace'
 
-p ObjectSpace.dump(5)
-# => "5"
+puts ObjectSpace.dump(5)
+# => 5
 
-p ObjectSpace.dump("hello")
-# => "{\"address\":\"0x...\", \"type\":\"STRING\", \"shape_id\":0, \"slot_size\":40,
-#     \"class\":\"0x...\", \"embedded\":true, \"chilled\":true, \"bytesize\":5,
-#     \"value\":\"hello\", \"encoding\":\"UTF-8\", \"coderange\":\"7bit\",
-#     \"memsize\":40, \"flags\":{\"wb_protected\":true}}"
+puts ObjectSpace.dump("hello")
+# => {"address":"0x...", "type":"STRING", "shape_id":0, "slot_size":40,
+#    "class":"0x...", "embedded":true, "chilled":true, "bytesize":5,
+#    "value":"hello", "encoding":"UTF-8", "coderange":"7bit",
+#    "memsize":40, "flags":{"wb_protected":true}}
 # (address の値は実行するたびに変わります)
 ```
 
