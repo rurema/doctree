@@ -84,6 +84,48 @@ exec "echo", "*"    # echoes an asterisk
 
 - **SEE** [man:fork(2)]
 
+#%since 3.1
+### def _fork    -> Integer
+
+fork のための内部 API です。このメソッドを直接呼び出してはいけません。
+
+[m:Kernel?.fork]、[m:Process.fork]、[m:IO.popen] に "-" を渡した場合に、
+その内部から呼び出されます。
+
+通常のプログラムのためではなく、アプリケーションを監視するライブラリのために
+用意されています。このメソッドを上書きすると、fork の前後に独自の処理を
+挟めます。
+
+[m:Process?.daemon] も fork(2) を用いて実装されることがありますが、
+そちらはこのメソッドを経由しません。fork を捕捉する目的によっては、
+[m:Process?.daemon] も併せて上書きする必要があります。
+
+- **return** -- 子プロセスでは 0 を、親プロセスでは生成した子プロセスの
+             プロセス ID を返します。
+
+```ruby
+module ForkMonitor
+  def _fork
+    pid = super
+    if pid.zero?
+      puts "子プロセスです"
+    else
+      puts "親プロセスです。子は #{pid} です"
+    end
+    pid
+  end
+end
+Process.singleton_class.prepend(ForkMonitor)
+
+pid = fork { exit }
+Process.waitpid(pid)
+# => 子プロセスです
+#    親プロセスです。子は 70024 です
+```
+
+- **SEE** [m:Process.fork], [m:Kernel?.fork], [m:Process?.daemon]
+#%end
+
 ### def spawn(cmd, *arg)    -> Integer
 
 関数 [m:Kernel?.spawn] と同じです。
