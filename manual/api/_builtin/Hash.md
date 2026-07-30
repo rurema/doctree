@@ -248,6 +248,45 @@ h[1]
 
 - **SEE** [m:Hash#default=],[m:Hash#default],[m:Hash#default_proc]
 
+### def ruby2_keywords_hash(hash) -> Hash
+
+hash を複製し、[m:Module#ruby2_keywords]や[m:Proc#ruby2_keywords]による
+ruby2_keywords フラグを立てたハッシュを返します。
+
+このメソッドはデバッグや調査、引数のデシリアライズのように本当に必要な場合の
+ために用意されていて、普通のプログラムで使うことは想定されていません。
+
+複製を返すため、元の hash にフラグは立ちません。
+
+ruby 2.7.1 で追加されたため、ruby 2.7.0 では定義されていません。
+
+- **param** `hash` -- ruby2_keywords フラグを立てる [c:Hash] を指定します。
+
+- **raise** `TypeError` -- hash が [c:Hash] でない場合に発生します。
+
+```ruby
+h = {k: 1}
+p Hash.ruby2_keywords_hash?(h)       # => false
+
+flagged = Hash.ruby2_keywords_hash(h)
+p Hash.ruby2_keywords_hash?(flagged) # => true
+
+# 元のハッシュにはフラグが立たない
+p Hash.ruby2_keywords_hash?(h)       # => false
+```
+
+```ruby title="例: フラグを立てたハッシュは配列で渡してもキーワード引数になる"
+def foo(k: 42)
+  k
+end
+
+p foo(*[Hash.ruby2_keywords_hash({k: 1})]) # => 1
+
+foo(*[{k: 1}])                             # ~> ArgumentError
+```
+
+- **SEE** [m:Hash.ruby2_keywords_hash?], [m:Module#ruby2_keywords], [m:Proc#ruby2_keywords]
+
 ### def ruby2_keywords_hash?(hash) -> bool
 
 [m:Module#ruby2_keywords]や[m:Proc#ruby2_keywords]による
