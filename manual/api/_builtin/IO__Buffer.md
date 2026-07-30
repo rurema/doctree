@@ -1123,3 +1123,234 @@ p buf < IO::Buffer.for("abd")    # => true
 ```ruby title="例: 大きさが同じ場合は memcmp の結果がそのまま返る"
 p(IO::Buffer.for("abc") <=> IO::Buffer.for("abz")) # => -23
 ```
+
+#%since 3.2
+### def read(io, length = nil, offset = 0) -> Integer
+#%else
+### def read(io, length) -> Integer
+#%end
+
+io から読み込んだ内容をバッファに書き込みます。
+
+読み込むのは、少なくとも length バイトです。バッファに空きがあれば、
+それより多く読み込むことがあります。
+
+読み込みは io の現在の位置から行われ、io の位置は読み込んだ分だけ進みます。
+
+- **param** `io` -- 読み込み元の [c:IO] を指定します。
+
+#%since 3.2
+- **param** `length` -- 読み込む最小のバイト数を整数で指定します。
+             省略するか nil を指定した場合は、バッファの大きさから offset を
+             引いた値、つまりバッファの残り全体になります。
+             0 を指定した場合は read(2) をちょうど 1 回呼びます。
+
+- **param** `offset` -- 読み込んだ内容を書き込む位置を、バッファの先頭からの
+             バイト数で指定します。
+#%else
+- **param** `length` -- 読み込む最小のバイト数を整数で指定します。
+#%end
+
+- **return** -- 読み込んだバイト数を返します。読み込みに失敗した場合は
+             errno を負にした整数を返します。例外は発生しません。
+
+- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを
+             超える場合に発生します。
+
+```ruby
+File.write("test.txt", "Hello World")
+
+buf = IO::Buffer.new(11)
+File.open("test.txt") do |io|
+  p buf.read(io, 11) # => 11
+end
+p buf.get_string     # => "Hello World"
+```
+
+```ruby title="例: 読み込みに失敗した場合は -errno を返す"
+File.write("test.txt", "Hello World")
+
+buf = IO::Buffer.new(4)
+# 書き込み専用で開いたファイルからは読み込めない
+File.open("test.txt", "w") do |io|
+  p buf.read(io, 4)      # => -9
+end
+p(-Errno::EBADF::Errno)  # => -9
+```
+
+- **SEE** [m:IO::Buffer#pread], [m:IO::Buffer#write]
+
+#%since 3.2
+### def write(io, length = nil, offset = 0) -> Integer
+#%else
+### def write(io, length) -> Integer
+#%end
+
+バッファの内容を io に書き込みます。
+
+書き込むのは、少なくとも length バイトです。バッファに続きがあれば、
+それより多く書き込むことがあります。
+
+書き込みは io の現在の位置から行われ、io の位置は書き込んだ分だけ進みます。
+
+- **param** `io` -- 書き込み先の [c:IO] を指定します。
+
+#%since 3.2
+- **param** `length` -- 書き込む最小のバイト数を整数で指定します。
+             省略するか nil を指定した場合は、バッファの大きさから offset を
+             引いた値、つまりバッファの残り全体になります。
+             0 を指定した場合は write(2) をちょうど 1 回呼びます。
+
+- **param** `offset` -- 書き込む内容の開始位置を、バッファの先頭からの
+             バイト数で指定します。
+#%else
+- **param** `length` -- 書き込む最小のバイト数を整数で指定します。
+#%end
+
+- **return** -- 書き込んだバイト数を返します。書き込みに失敗した場合は
+             errno を負にした整数を返します。例外は発生しません。
+
+- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを
+             超える場合に発生します。
+
+```ruby
+buf = IO::Buffer.for("Ruby!")
+File.open("test.txt", "w") do |io|
+  p buf.write(io, 5) # => 5
+end
+p File.read("test.txt") # => "Ruby!"
+```
+
+- **SEE** [m:IO::Buffer#pwrite], [m:IO::Buffer#read]
+
+#%since 3.2
+### def pread(io, from, length = nil, offset = 0) -> Integer
+#%else
+### def pread(io, length, from) -> Integer
+#%end
+
+io の指定した位置から読み込んだ内容をバッファに書き込みます。
+
+[m:IO::Buffer#read] と異なり、読み込む位置を io の中で直接指定します。
+io の現在の位置は変わりません。
+
+- **param** `io` -- 読み込み元の [c:IO] を指定します。
+
+#%since 3.2
+- **param** `from` -- 読み込みを開始する位置を、io の先頭からのバイト数で
+             指定します。
+
+- **param** `length` -- 読み込む最小のバイト数を整数で指定します。
+             省略するか nil を指定した場合は、バッファの大きさから offset を
+             引いた値、つまりバッファの残り全体になります。
+             0 を指定した場合は pread(2) をちょうど 1 回呼びます。
+
+- **param** `offset` -- 読み込んだ内容を書き込む位置を、バッファの先頭からの
+             バイト数で指定します。
+#%else
+- **param** `length` -- 読み込む最小のバイト数を整数で指定します。
+
+- **param** `from` -- 読み込みを開始する位置を、io の先頭からのバイト数で
+             指定します。
+#%end
+
+- **return** -- 読み込んだバイト数を返します。読み込みに失敗した場合は
+             errno を負にした整数を返します。例外は発生しません。
+
+- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを
+             超える場合に発生します。
+
+#%since 3.2
+
+```ruby
+File.write("test.txt", "Hello World")
+
+buf = IO::Buffer.new(5)
+File.open("test.txt") do |io|
+  p buf.pread(io, 6, 5) # => 5
+  p io.pos              # => 0
+end
+p buf.get_string        # => "World"
+```
+
+#%else
+
+```ruby
+File.write("test.txt", "Hello World")
+
+buf = IO::Buffer.new(5)
+File.open("test.txt") do |io|
+  p buf.pread(io, 5, 6) # => 5
+  p io.pos              # => 0
+end
+p buf.get_string        # => "World"
+```
+
+#%end
+
+- **SEE** [m:IO::Buffer#read], [m:IO::Buffer#pwrite], [man:pread(2)]
+
+#%since 3.2
+### def pwrite(io, from, length = nil, offset = 0) -> Integer
+#%else
+### def pwrite(io, length, from) -> Integer
+#%end
+
+バッファの内容を io の指定した位置に書き込みます。
+
+[m:IO::Buffer#write] と異なり、書き込む位置を io の中で直接指定します。
+io の現在の位置は変わりません。
+
+- **param** `io` -- 書き込み先の [c:IO] を指定します。
+
+#%since 3.2
+- **param** `from` -- 書き込みを開始する位置を、io の先頭からのバイト数で
+             指定します。
+
+- **param** `length` -- 書き込む最小のバイト数を整数で指定します。
+             省略するか nil を指定した場合は、バッファの大きさから offset を
+             引いた値、つまりバッファの残り全体になります。
+             0 を指定した場合は pwrite(2) をちょうど 1 回呼びます。
+
+- **param** `offset` -- 書き込む内容の開始位置を、バッファの先頭からの
+             バイト数で指定します。
+#%else
+- **param** `length` -- 書き込む最小のバイト数を整数で指定します。
+
+- **param** `from` -- 書き込みを開始する位置を、io の先頭からのバイト数で
+             指定します。
+#%end
+
+- **return** -- 書き込んだバイト数を返します。書き込みに失敗した場合は
+             errno を負にした整数を返します。例外は発生しません。
+
+- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを
+             超える場合に発生します。
+
+#%since 3.2
+
+```ruby
+File.write("test.txt", "Hello World")
+
+buf = IO::Buffer.for("RUBY!")
+File.open("test.txt", "r+") do |io|
+  p buf.pwrite(io, 6, 5) # => 5
+end
+p File.read("test.txt")  # => "Hello RUBY!"
+```
+
+#%else
+
+```ruby
+File.write("test.txt", "Hello World")
+
+buf = IO::Buffer.for("RUBY!")
+File.open("test.txt", "r+") do |io|
+  p buf.pwrite(io, 5, 6) # => 5
+end
+p File.read("test.txt")  # => "Hello RUBY!"
+```
+
+#%end
+
+- **SEE** [m:IO::Buffer#write], [m:IO::Buffer#pread], [man:pwrite(2)]
