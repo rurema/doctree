@@ -454,6 +454,14 @@ m = Foo.new.method(:puts) # => #<Method: Foo(Kernel)#puts>
 p m.owner # => Kernel
 ```
 
+#%since 4.0
+### def box -> Ruby::Box | nil
+
+self が定義されている [c:Ruby::Box] を返します。
+
+Ruby::Box が無効なときは nil を返します。
+#%end
+
 ### def receiver    -> object
 
 このメソッドオブジェクトのレシーバを返します。
