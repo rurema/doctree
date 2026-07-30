@@ -4,13 +4,13 @@ library: rss
 # class RSS::Maker::ItemsBase::ItemBase < Object
 
 itemはmaker.items.new_itemで作成されたオブジェク
-トとします．
+トとします。
 
-RSS 1.0/0.91の場合はtitle，linkを設定する必要があ
-ります．
+RSS 1.0/0.91の場合はtitle、linkを設定する必要があ
+ります。
 
 RSS 2.0の場合はtitleまたはdescriptionを設定する
-必要があります．
+必要があります。
 
 ## Instance Methods
 
@@ -32,11 +32,11 @@ RSS 2.0の場合はtitleまたはdescriptionを設定する
 
 ### def pubDate
 #%todo
-item.dateの別名です．
+item.dateの別名です。
 
 ### def pubDate=()
 #%todo
-item.date=の別名です．
+item.date=の別名です。
 
 ### def author
 ### def author=()

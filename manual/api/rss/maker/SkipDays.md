@@ -3,15 +3,15 @@ library: rss
 ---
 # class RSS::Maker::ChannelBase::SkipDaysBase < Object
 
-RSS 0.91/2.0を生成するときだけ利用されます．
+RSS 0.91/2.0を生成するときだけ利用されます。
 
 ## Instance Methods
 
 ### def new_day
 #%todo
-新しくdayを作成し，返します．作成された
+新しくdayを作成し、返します。作成された
 dayはdayリストの最後
-に追加されています．
+に追加されています。
 
 # class RSS::Maker::RSS09::Channel::SkipDays < RSS::Maker::ChannelBase::SkipDaysBase
 # class RSS::Maker::RSS20::Channel::SkipDays < RSS::Maker::RSS09::Channel::SkipDays
@@ -20,9 +20,9 @@ dayはdayリストの最後
 
 dayは
 maker.channel.skipDays.new_dayで作成されたオ
-ブジェクトとします．
+ブジェクトとします。
 
-contentを指定する必要があります．
+contentを指定する必要があります。
 
 ## Instance Methods
 

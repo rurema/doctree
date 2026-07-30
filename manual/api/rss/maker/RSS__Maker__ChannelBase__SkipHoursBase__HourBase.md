@@ -5,9 +5,9 @@ library: rss
 
 hourは
 maker.channel.skipHours.new_hourで作成されたオ
-ブジェクトとします．
+ブジェクトとします。
 
-contentを指定する必要があります．
+contentを指定する必要があります。
 
 ## Instance Methods
 

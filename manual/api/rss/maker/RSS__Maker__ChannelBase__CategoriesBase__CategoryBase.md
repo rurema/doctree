@@ -5,9 +5,9 @@ library: rss
 
 categoryは
 maker.channel.categories.new_categoryで作成されたオ
-ブジェクトとします．
+ブジェクトとします。
 
-contentを指定する必要があります．
+contentを指定する必要があります。
 
 ## Instance Methods
 

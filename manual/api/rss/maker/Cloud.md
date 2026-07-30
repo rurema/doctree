@@ -1,8 +1,8 @@
 # class RSS::Maker::ChannelBase::CloudBase < Object
 
-RSS 2.0を生成するときだけ利用されます．
+RSS 2.0を生成するときだけ利用されます。
 
-全ての属性を設定する必要があります．
+全ての属性を設定する必要があります。
 
 ## Instance Methods
 

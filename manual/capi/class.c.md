@@ -119,11 +119,11 @@ void Init_func() {
 
 クラスklassのインスタンスメソッドnameを定義します。
 
-argcはCの関数へ渡される引数の数(と形式)を決めます．
+argcはCの関数へ渡される引数の数(と形式)を決めます。
 
 - **argcが0以上の時**:
     argcで指定した値がそのメソッドの引数の数になります。
-    16個以上の引数は使えません，
+    16個以上の引数は使えません、
 
         VALUE func(VALUE self, VALUE arg1, ... VALUE argN)
 
