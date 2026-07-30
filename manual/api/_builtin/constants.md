@@ -214,6 +214,17 @@ Ruby のリリース日を表す文字列。
 
 プラットフォームを表す文字列。
 
+#%since 4.0
+### const RUBY_PATCHLEVEL -> 0
+
+Ruby のパッチレベルを表す [c:Integer] オブジェクトです。
+
+Ruby 4.0 以降はパッチレベルの増分をやめたため、リリース版では常に 0 になります
+（master などの開発版では -1 になります）。
+
+パッチレベルという概念および RUBY_PATCHLEVEL 定数は、 Ruby 1.8.5-p1 以降、 1.8.6 以降で導入されました。
+1.8.5やそれ以前のバージョンでは定義されていません。
+#%else
 ### const RUBY_PATCHLEVEL -> Integer
 
 Ruby のパッチレベルを表す [c:Integer] オブジェクトです。
@@ -224,6 +235,7 @@ teeny リリースのそれぞれについてパッチレベルは 0 から始�
 
 パッチレベルという概念および RUBY_PATCHLEVEL 定数は、 Ruby 1.8.5-p1 以降、 1.8.6 以降で導入されました。
 1.8.5やそれ以前のバージョンでは定義されていません。
+#%end
 
 ### const RUBY_REVISION -> String
 
