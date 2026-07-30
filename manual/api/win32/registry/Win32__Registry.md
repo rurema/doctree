@@ -14,7 +14,7 @@ include:
 ### def open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) {|reg| ... }
 #%todo
 
-レジストリキー key 下のキー subkey を開き，
+レジストリキー key 下のキー subkey を開き、
 開いたキーを表す Win32::Registry オブジェクトを返します。
 key は親のキーを Win32::Registry オブジェクトで指定します。
 親のキーには定義済キー HKEY_* を使用できます (⇒[c:Win32::Registry::Constants])
@@ -24,21 +24,21 @@ desired はアクセスマスクです。opt はキーのオプションです�
 
 - Registry Key Security and Access Rights: <http://msdn.microsoft.com/library/en-us/sysinfo/base/registry_key_security_and_access_rights.asp>
 
-ブロックが与えられると，キーは自動的に閉じられます。
+ブロックが与えられると、キーは自動的に閉じられます。
 
 ### def create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
 ### def create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED) {|reg| ... }
 #%todo
 
-レジストリキー key 下にキー subkey を作成し，
+レジストリキー key 下にキー subkey を作成し、
 開いたキーを表す Win32::Registry オブジェクトを返します。
 key は親のキーを Win32::Registry オブジェクトで指定します。
 親のキーには定義済キー HKEY_* を使用できます (⇒[c:Win32::Registry::Constants])
 
-サブキーが既に存在していればキーはただ開かれ，[m:Win32::Registry#created?]
+サブキーが既に存在していればキーはただ開かれ、[m:Win32::Registry#created?]
 メソッドが false を返します。
 
-ブロックが与えられると，キーは自動的に閉じられます。
+ブロックが与えられると、キーは自動的に閉じられます。
 
 ### def expand_environ(str)
 #%todo
@@ -67,7 +67,7 @@ REG_EXPAND_SZ で用いられます。
 ### def time2wtime(time)
 #%todo
 
-Time オブジェクトまたは Integer オブジェクトを受け取り，
+Time オブジェクトまたは Integer オブジェクトを受け取り、
 64bit の FILETIME に変換します。
 
 ## Instance Methods
@@ -87,17 +87,17 @@ Time オブジェクトまたは Integer オブジェクトを受け取り，
 
 開かれているキーを閉じます。
 
-閉じられた後では，多くのメソッドは例外を発生します。
+閉じられた後では、多くのメソッドは例外を発生します。
 
 ### def read(name, *rtype)
 #%todo
 
-レジストリ値 name を読み，[ type, data ]
+レジストリ値 name を読み、[ type, data ]
 の配列で返します。
-name が nil の場合，(標準) レジストリ値が読み込まれます。
+name が nil の場合、(標準) レジストリ値が読み込まれます。
 
 type はレジストリ値の型です。(⇒[c:Win32::Registry::Constants])
-data はレジストリ値のデータで，クラスは以下の通りです:
+data はレジストリ値のデータで、クラスは以下の通りです:
   - REG_SZ, REG_EXPAND_SZ
     String
   - REG_MULTI_SZ
@@ -107,17 +107,17 @@ data はレジストリ値のデータで，クラスは以下の通りです:
   - REG_BINARY, REG_NONE
     String (バイナリデータを含みます)
 
-オプション引数 rtype が指定されていた場合，レジストリ値の型が
-与えられた rtype の配列に存在するかチェックされ，存在しない場合に
+オプション引数 rtype が指定されていた場合、レジストリ値の型が
+与えられた rtype の配列に存在するかチェックされ、存在しない場合に
 [c:TypeError] が発生します。
 
 ### def [](name, *rtype)
 #%todo
 
-レジストリ値 name を読み，その値を返します。クラスは
+レジストリ値 name を読み、その値を返します。クラスは
 [m:Win32::Registry#read] に準じます。
 
-レジストリ値の型が REG_EXPAND_SZ だった場合，環境変数が置換されます。
+レジストリ値の型が REG_EXPAND_SZ だった場合、環境変数が置換されます。
 レジストリ値の型が REG_SZ, REG_EXPAND_SZ, REG_MULTI_SZ, REG_DWORD,
 REG_DWORD_BIG_ENDIAN, REG_QWORD 以外だった場合は TypeError が発生します。
 
@@ -129,24 +129,24 @@ REG_DWORD_BIG_ENDIAN, REG_QWORD 以外だった場合は TypeError が発生し�
 #%todo
 
 型がそれぞれ REG_SZ(read_s), REG_DWORD(read_i), REG_BINARY(read_bin)
-であるレジストリ値 name を読み，その値を返します。
+であるレジストリ値 name を読み、その値を返します。
 
-型がマッチしなかった場合，TypeError が発生します。
+型がマッチしなかった場合、TypeError が発生します。
 
 ### def read_s_expand(name)
 #%todo
 
-型が REG_SZ または REG_EXPAND_SZ であるレジストリ値 name を読み，
+型が REG_SZ または REG_EXPAND_SZ であるレジストリ値 name を読み、
 その値を返します。
 
-型が REG_EXPAND_SZ だった場合，環境変数が置換された値が返ります。
-REG_SZ または REG_EXPAND_SZ 以外だった場合，TypeError が発生します。
+型が REG_EXPAND_SZ だった場合、環境変数が置換された値が返ります。
+REG_SZ または REG_EXPAND_SZ 以外だった場合、TypeError が発生します。
 
 ### def write(name, type, data)
 #%todo
 
 レジストリ値 name に型 type で data を書き込みます。
-name が nil の場合，(標準) レジストリ値に書き込みます。
+name が nil の場合、(標準) レジストリ値に書き込みます。
 
 type はレジストリ値の型です。(⇒[c:Win32::Registry::Constants])
 data のクラスは [m:Win32::Registry#read]
@@ -157,8 +157,8 @@ data のクラスは [m:Win32::Registry#read]
 
 レジストリ値 name に value を書き込みます。
 
-オプション引数 wtype を指定した場合は，その型で書き込みます。
-指定しなかった場合，value のクラスに応じて次の型で書き込みます:
+オプション引数 wtype を指定した場合は、その型で書き込みます。
+指定しなかった場合、value のクラスに応じて次の型で書き込みます:
   - Integer
     REG_DWORD
   - String
@@ -203,8 +203,8 @@ wtime は最終更新時刻を表す FILETIME (64-bit 整数) です。
 
 サブキー name とそのキーが持つすべての値を削除します。
 
-recursive が false の場合，そのサブキーはサブキーを持っていてはなりません。
-true の場合，キーは再帰的に削除されます。
+recursive が false の場合、そのサブキーはサブキーを持っていてはなりません。
+true の場合、キーは再帰的に削除されます。
 
 ### def flush
 #%todo
@@ -214,13 +214,13 @@ true の場合，キーは再帰的に削除されます。
 ### def created?
 #%todo
 
-キーが新しく作成された場合，真を返します。
+キーが新しく作成された場合、真を返します。
 (⇒[m:Win32::Registry.create])
 
 ### def opened?
 #%todo
 
-キーがまだ閉じられていない場合，真を返します。
+キーがまだ閉じられていない場合、真を返します。
 
 ### def parent
 #%todo

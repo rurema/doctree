@@ -20,13 +20,13 @@ MT19937に基づく擬似乱数生成器を提供するクラスです。
 - **param** `seed` -- 擬似乱数生成器の種を整数で指定します。
 
 ```ruby title="例： 種が同じなら同じ乱数列を発生できる。"
-prng = Random.new(1234)                                
+prng = Random.new(1234)
 p [ prng.rand, prng.rand ] #=> [0.1915194503788923, 0.6221087710398319]
-p [ prng.rand(10), prng.rand(1000) ]  #=> [4, 664] 
+p [ prng.rand(10), prng.rand(1000) ]  #=> [4, 664]
 # 同じ乱数列を発生する。
-prng = Random.new(1234)                                
+prng = Random.new(1234)
 p [ prng.rand, prng.rand ] #=> [0.1915194503788923, 0.6221087710398319]
-p [ prng.rand(10), prng.rand(1000) ]  #=> [4, 664] 
+p [ prng.rand(10), prng.rand(1000) ]  #=> [4, 664]
 ```
 
 ### def new_seed -> Integer
@@ -312,7 +312,7 @@ C言語レベルで定義されている構造体MTの静的変数default_rand�
 #%until 3.2
 ### const DEFAULT -> Class
 
-Ruby 3.0 から非推奨で，3.2で廃止されます。代わりに Random クラスオブジェクトを擬似乱数生成器として使用してください。
+Ruby 3.0 から非推奨で、3.2で廃止されます。代わりに Random クラスオブジェクトを擬似乱数生成器として使用してください。
 
 また、 Random::DEFAULT は Random クラスオブジェクトが返ります。
 

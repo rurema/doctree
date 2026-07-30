@@ -112,7 +112,7 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 
 ## Class Methods
 
-### def new(str, dup = false) -> StringScanner 
+### def new(str, dup = false) -> StringScanner
 
 新しい StringScanner オブジェクトを生成します。
 
@@ -290,7 +290,7 @@ p s.eos?      # => true
 ### def exist?(regexp) -> Integer | nil
 #%#Ruby 1.8.6 以降は以下の記述に沿った仕様に変わります。
 
-スキャンポインタの位置から，次にマッチする文字列の末尾までの長さを返します。
+スキャンポインタの位置から、次にマッチする文字列の末尾までの長さを返します。
 
 マッチに失敗したら nil を返します。
 
@@ -321,7 +321,7 @@ p s.exist?(/e/) # => nil
 require 'strscan'
 
 utf8 = "\u{308B 3073 3044}"
-s = StringScanner.new(utf8.encode("UTF-8")) 
+s = StringScanner.new(utf8.encode("UTF-8"))
 p s.getch                         # => "る"
 p s.getch                         # => "び"
 p s.getch                         # => "い"
@@ -349,7 +349,7 @@ p s.get_byte       #=> "\xA4"
 p s.get_byte       #=> "\xD3"
 p s.get_byte       #=> "\xA4"
 p s.get_byte       #=> "\xA4"
-p s.get_byte       #=> nil   
+p s.get_byte       #=> nil
 ```
 
 ### def inspect -> String
@@ -780,7 +780,7 @@ p s.scan_full(/\w+/, false, false)   #=> 6
 p s.scan_full(/\w+/, true, true)     #=> "string"
 ```
 
-- **SEE** [m:StringScanner#scan] [m:StringScanner#skip] [m:StringScanner#check]  [m:StringScanner#match?] 
+- **SEE** [m:StringScanner#scan] [m:StringScanner#skip] [m:StringScanner#check]  [m:StringScanner#match?]
 
 ### def scan_until(regexp) -> String | nil
 
@@ -833,7 +833,7 @@ regexp で指定された正規表現とマッチするまで文字列をスキ�
 ```ruby title="例"
 require 'strscan'
 
-s = StringScanner.new('test string')   
+s = StringScanner.new('test string')
 p s.search_full(/t/, true, true)       #=> "t"
 p s.search_full(/str/, false, true)    #=> "est str"
 p s.search_full(/string/, true, true)  #=> "est string"
@@ -1036,7 +1036,7 @@ end
 このメソッドは は将来のバージョンで削除される予定です。
 代わりに [m:StringScanner#matched_size] を使ってください。
 
-- **SEE** [m:StringScanner#matched_size] 
+- **SEE** [m:StringScanner#matched_size]
 
 ## Constants
 

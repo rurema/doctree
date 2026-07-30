@@ -90,7 +90,7 @@ p (1...5).cover?(5) # => false
 繰り返しの範囲を表す範囲オブジェクトは、始端が「次の値」を返す succ メソッドを
 持たなければなりません。
 
-Range クラスには [c:Enumerable] が include してあるので，[m:Range#each] に
+Range クラスには [c:Enumerable] が include してあるので、[m:Range#each] に
 基づき、Enumerable モジュールが提供する多様なメソッドを使うことができます。
 
 ### 破壊的な変更

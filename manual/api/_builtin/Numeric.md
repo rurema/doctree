@@ -33,7 +33,7 @@ include:
 #%#  cary = [Numeric, Integer, Float, Rational, Complex]
 #%#  mary = cary.collect {|c| c.instance_methods(false)}
 #%#  methods = mary.flatten.uniq.sort
-#%#  
+#%#
 #%#  methods.each_with_index {|op, i|
 #%#  if i % 10 == 0
 #%#    heading = sprintf("%23s   %10s %10s %10s %10s %10s",
@@ -364,7 +364,7 @@ Ruby 3.2 では整商を得るメソッドとして [m:Integer#ceildiv] が導�
 
 ceildiv は普通の商を正の無限大に向かって丸めた整商を返します。
 
-n 個の物を m 個ずつまとめたとき，（半端をまとめたものも含めて）いくつのグループが
+n 個の物を m 個ずつまとめたとき、（半端をまとめたものも含めて）いくつのグループが
 できるかは以下のようにして得られます。
 
 ```ruby title="例: n 個を m 個ずつまとめて出来るグループの数"
@@ -534,7 +534,7 @@ self を other で割った整数の商 q を返します。
 
 ここで、商 q と余り r は、それぞれ
 
-  - self == other * q + r  
+  - self == other * q + r
 と
   - other > 0 のとき:  0     <= r < other
   - other < 0 のとき:  other <  r <= 0
@@ -561,7 +561,7 @@ self を other で割った商 q と余り r を、
 
 ここで、商 q と余り r は、
 
-  - self == other * q + r  
+  - self == other * q + r
 と
   - other > 0 のとき:  0     <= r < other
   - other < 0 のとき:  other <  r <= 0
@@ -650,7 +650,7 @@ self を other で割った余り r を返します。
 
 ここで、商 q と余り r は、
 
-  - self == other * q + r  
+  - self == other * q + r
 と
   - other > 0 のとき  0 <= r < other
   - other < 0 のとき other < r <= 0
@@ -704,7 +704,7 @@ self を other で割った余り r を返します。
 
 ここで、商 q と余り r は、
 
-  - self == other * q + r  
+  - self == other * q + r
 と
 
   - self > 0 のとき  0 <= r < |other|

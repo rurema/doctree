@@ -38,5 +38,4 @@ value = wsh.RegRead 'HKLM\Software\Microsoft\Windows\...'
 wsh.RegWrite 'HKCU\Software\foo\barfile\shell\open\command\\', '"C:\..." "%1"', 'REG_SZ'
 ```
 
-ただし，キーを列挙したり，自由なバイナリ値を読み書きできません。
-
+ただし、キーを列挙したり、自由なバイナリ値を読み書きできません。
