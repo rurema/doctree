@@ -45,6 +45,31 @@ p set1                  # => #<Set: {"bar", "baz", "heh"}>
 #%end
 ```
 
+#%since 4.0
+### Set のサブクラスを作る {#subclass}
+
+Ruby 4.0 で Set は C で再実装され、一部のメソッドの振る舞いが変わりました。
+Set を継承してサブクラスを作る場合、互換性を必要とするかどうかで
+継承元を選べます。
+
+古い実装との互換性が必要な場合は、Set を直接継承します。
+この場合は互換レイヤが自動的に組み込まれ、振る舞いが古い実装に近くなります。
+
+```ruby
+class MySet < Set; end
+p MySet[[1, 2, 3]]      # => #<MySet: {[1, 2, 3]}>
+```
+
+互換性が不要な場合は、[c:Set::CoreSet] を継承します。
+互換レイヤを挟まないぶん効率的です。
+
+```ruby
+class MyCoreSet < Set::CoreSet; end
+p MyCoreSet[[1, 2, 3]]  # => MyCoreSet[[1, 2, 3]]
+```
+
+#%end
+
 ## Class Methods
 ### def new(enum = nil) -> Set
 ### def new(enum = nil) {|o| ... } -> Set
