@@ -1,7 +1,11 @@
 ---
 library: prism
 ---
+#%since 3.4
+# class Prism::ParseResult < Prism::Result
+#%else
 # class Prism::ParseResult < Object
+#%end
 
 [m:Prism?.parse] や [m:Prism?.parse_file] などの戻り値のクラスです。
 構文解析によって得られた構文木そのものに加えて、解析中に見つかった
@@ -78,6 +82,14 @@ p errors.first.level     # => :syntax
 
 - **SEE** [m:Prism::ParseResult#success?], [m:Prism::ParseResult#warnings]
 
+#%since 3.4
+### def errors_format -> String
+
+ソースコードに [m:Prism::ParseResult#errors] の位置(`^~` の下線)と
+エラーメッセージの注釈を付けた、人間が読みやすい形式の文字列を
+返します。構文エラーの内容をまとめて表示したいときに使えます。
+
+#%end
 ### def warnings -> Array
 
 構文解析中に発生した警告([c:Prism::ParseWarning] のインスタンス)の

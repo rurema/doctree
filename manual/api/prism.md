@@ -124,9 +124,18 @@ p result.success?      # => true
 
 - **SEE** [m:Prism?.parse]
 
+#%since 3.4
 ### module_function def lex(source, **options) -> Prism::LexResult
+#%else
+### module_function def lex(source, **options) -> Prism::ParseResult
+#%end
 
-`source` を字句解析し、`Prism::LexResult` のインスタンスを返します。
+#%since 3.4
+`source` を字句解析し、[c:Prism::LexResult] のインスタンスを返します。
+#%else
+`source` を字句解析します。Ruby 3.3 の prism には字句解析専用の
+結果クラスがないため、戻り値は [c:Prism::ParseResult] のインスタンスです。
+#%end
 `value` は `[トークン, 直前からの字句解析器の状態(Integer)]` という
 2 要素配列の配列です。これは [c:Ripper] の [m:Ripper.lex] の戻り値の
 形式に近いものになっています。オプションは [m:Prism?.parse] と同じです。
@@ -139,7 +148,9 @@ p result.success?      # => true
 require "prism"
 
 result = Prism.lex("1 + 2")
+#%since 3.4
 p result.class   # => Prism::LexResult
+#%end
 result.value.each { |token, state| p [token.type, token.value, state] }
 # => [:INTEGER, "1", 2]
 # => [:PLUS, "+", 1]
@@ -149,9 +160,14 @@ result.value.each { |token, state| p [token.type, token.value, state] }
 
 - **SEE** [m:Prism?.parse], [c:Ripper]
 
+#%since 3.4
 ### module_function def lex_file(filepath, **options) -> Prism::LexResult
+#%else
+### module_function def lex_file(filepath, **options) -> Prism::ParseResult
+#%end
 
-`filepath` で指定したファイルを字句解析します。
+`filepath` で指定したファイルを字句解析します。戻り値の形式は
+[m:Prism?.lex] と同じです。
 オプションは [m:Prism?.parse] と同じです。
 
 - **param** `filepath` -- 解析する Ruby プログラムのファイルパスを指定します。
@@ -164,8 +180,10 @@ require "prism"
 File.write("sample.rb", "def foo(a, b) = a + b\n")
 
 result = Prism.lex_file("sample.rb")
+#%since 3.4
 p result.class
 # => Prism::LexResult
+#%end
 p result.value.map { |token, _state| token.type }
 # => [:KEYWORD_DEF, :IDENTIFIER, :PARENTHESIS_LEFT, :IDENTIFIER, :COMMA,
 #     :IDENTIFIER, :PARENTHESIS_RIGHT, :EQUAL, :IDENTIFIER, :PLUS,
@@ -174,11 +192,22 @@ p result.value.map { |token, _state| token.type }
 
 - **SEE** [m:Prism?.lex]
 
+#%since 3.4
 ### module_function def parse_lex(source, **options) -> Prism::ParseLexResult
+#%else
+### module_function def parse_lex(source, **options) -> Prism::ParseResult
+#%end
 
+#%since 3.4
 `source` に対して構文解析と字句解析の両方を行い、
-`Prism::ParseLexResult` のインスタンスを返します。`value` は
+[c:Prism::ParseLexResult] のインスタンスを返します。`value` は
 `[構文木, トークンの配列]` という 2 要素配列です。
+#%else
+`source` に対して構文解析と字句解析の両方を行います。Ruby 3.3 の
+prism には専用の結果クラスがないため、戻り値は
+[c:Prism::ParseResult] のインスタンスで、`value` が
+`[構文木, トークンの配列]` という 2 要素配列になります。
+#%end
 
 構文木とトークン列の両方が必要な場合、[m:Prism?.parse] と [m:Prism?.lex]
 を個別に呼び出すよりも効率的です。片方だけが必要な場合はそれぞれ
@@ -193,7 +222,9 @@ p result.value.map { |token, _state| token.type }
 require "prism"
 
 result = Prism.parse_lex("1 + 2")
+#%since 3.4
 p result.class # => Prism::ParseLexResult
+#%end
 
 ast, tokens = result.value
 p ast.class    # => Prism::ProgramNode
