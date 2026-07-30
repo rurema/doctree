@@ -259,6 +259,8 @@ ruby2_keywords フラグを立てたハッシュを返します。
 
 複製を返すため、元の hash にフラグは立ちません。
 
+ruby 2.7.1 で追加されたため、ruby 2.7.0 では定義されていません。
+
 - **param** `hash` -- ruby2_keywords フラグを立てる [c:Hash] を指定します。
 
 - **raise** `TypeError` -- hash が [c:Hash] でない場合に発生します。
@@ -287,6 +289,7 @@ foo(*[{k: 1}])                             # ~> ArgumentError
 - **SEE** [m:Hash.ruby2_keywords_hash?], [m:Module#ruby2_keywords], [m:Proc#ruby2_keywords]
 
 ### def ruby2_keywords_hash?(hash) -> bool
+{: since="2.7.1"}
 
 [m:Module#ruby2_keywords]や[m:Proc#ruby2_keywords]による
 ruby2_keywords フラグが設定されているかどうかを返します。
