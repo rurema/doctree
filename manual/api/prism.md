@@ -233,6 +233,33 @@ p tokens.size  # => 4
 
 - **SEE** [m:Prism?.parse], [m:Prism?.lex]
 
+#%since 3.4
+### module_function def parse_lex_file(filepath, **options) -> Prism::ParseLexResult
+#%else
+### module_function def parse_lex_file(filepath, **options) -> Prism::ParseResult
+#%end
+
+`filepath` で指定したファイルに対して構文解析と字句解析の両方を
+行います。戻り値の形式は [m:Prism?.parse_lex] と同じです。
+オプションは [m:Prism?.parse] と同じです。
+
+- **param** `filepath` -- 解析する Ruby プログラムのファイルパスを指定します。
+
+- **param** `options` -- [m:Prism?.parse] を参照してください。
+
+```ruby title="例"
+require "prism"
+
+File.write("sample.rb", "1 + 2\n")
+
+ast, tokens = Prism.parse_lex_file("sample.rb").value
+p ast.class # => Prism::ProgramNode
+p tokens.map { |token, _state| token.type }
+# => [:INTEGER, :PLUS, :INTEGER, :NEWLINE, :EOF]
+```
+
+- **SEE** [m:Prism?.parse_lex]
+
 ### module_function def parse_success?(source, **options) -> bool
 
 `source` を構文解析し、エラーなく解析できた場合に true を返します。

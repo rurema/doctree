@@ -4,14 +4,14 @@ since: "3.4"
 ---
 # class Prism::ParseLexResult < Prism::Result
 
-[m:Prism?.parse_lex] などの戻り値のクラスです。
+[m:Prism?.parse_lex] や [m:Prism?.parse_lex_file] の戻り値のクラスです。
 構文解析と字句解析の両方の結果と、付随情報(コメント・エラー・
 警告など。[c:Prism::Result] を参照)を保持します。
 
 Ruby 3.3 の prism にはこのクラスはなく、[c:Prism::ParseResult] が
 使われていました(`value` の形式は同じです)。
 
-- **SEE** [m:Prism?.parse_lex], [c:Prism::Result]
+- **SEE** [m:Prism?.parse_lex], [m:Prism?.parse_lex_file], [c:Prism::Result]
 
 ## Instance Methods
 
