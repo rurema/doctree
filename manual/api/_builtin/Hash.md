@@ -249,6 +249,7 @@ h[1]
 - **SEE** [m:Hash#default=],[m:Hash#default],[m:Hash#default_proc]
 
 ### def ruby2_keywords_hash(hash) -> Hash
+{: since="2.7.1"}
 
 hash を複製し、[m:Module#ruby2_keywords]や[m:Proc#ruby2_keywords]による
 ruby2_keywords フラグを立てたハッシュを返します。
@@ -288,6 +289,7 @@ foo(*[{k: 1}])                             # ~> ArgumentError
 - **SEE** [m:Hash.ruby2_keywords_hash?], [m:Module#ruby2_keywords], [m:Proc#ruby2_keywords]
 
 ### def ruby2_keywords_hash?(hash) -> bool
+{: since="2.7.1"}
 
 [m:Module#ruby2_keywords]や[m:Proc#ruby2_keywords]による
 ruby2_keywords フラグが設定されているかどうかを返します。
