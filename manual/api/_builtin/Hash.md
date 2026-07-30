@@ -249,6 +249,7 @@ h[1]
 - **SEE** [m:Hash#default=],[m:Hash#default],[m:Hash#default_proc]
 
 ### def ruby2_keywords_hash(hash) -> Hash
+{: since="2.7.1"}
 
 hash を複製し、[m:Module#ruby2_keywords]や[m:Proc#ruby2_keywords]による
 ruby2_keywords フラグを立てたハッシュを返します。
@@ -257,8 +258,6 @@ ruby2_keywords フラグを立てたハッシュを返します。
 ために用意されていて、普通のプログラムで使うことは想定されていません。
 
 複製を返すため、元の hash にフラグは立ちません。
-
-ruby 2.7.1 で追加されたため、ruby 2.7.0 では定義されていません。
 
 - **param** `hash` -- ruby2_keywords フラグを立てる [c:Hash] を指定します。
 

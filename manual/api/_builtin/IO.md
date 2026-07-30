@@ -2056,7 +2056,7 @@ EAGAIN, EINTR などは例外 [c:Errno::EXXX] として呼出元に報告され�
 
 ### def pread(maxlen, offset, outbuf = "")    -> string
 
-preadシステムコールを使ってファイルポインタを変更せずに、また現在のファイルポインタに
+[man:pread(2)] システムコールを使ってファイルポインタを変更せずに、また現在のファイルポインタに
 依存せずにmaxlenバイト読み込みます。
 
 [m:IO#seek]と[m:IO#read]の組み合わせと比べて、アトミックな操作に
@@ -2083,7 +2083,7 @@ end
 
 ### def pwrite(string, offset) -> Integer
 
-stringをoffsetの位置にpwrite()システムコールを使って書き込みます。
+string を offset の位置に [man:pwrite(2)] システムコールを使って書き込みます。
 
 [m:IO#seek]と[m:IO#write]の組み合わせと比べて、アトミックな操作に
 なるという点が優れていて、複数スレッド/プロセスから同じIOオブジェクトを
