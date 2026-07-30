@@ -185,8 +185,7 @@ p Prism.parse("puts 1").data_loc # => nil
 扱うための補助的なメソッドを持ちます。
 
 #%since 3.4
-実際にはサブクラス `Prism::ASCIISource` のインスタンスであることも
-あります。
+実際にはサブクラス `Prism::ASCIISource` のインスタンスの場合があります。
 
 #%end
 

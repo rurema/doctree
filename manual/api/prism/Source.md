@@ -9,7 +9,7 @@ library: prism
 
 #%since 3.4
 実際に得られるインスタンスは、ASCII のみのソース向けに最適化された
-サブクラス `Prism::ASCIISource` であることがあります。クラスの判定を
+サブクラス `Prism::ASCIISource` の場合があります。クラスの判定を
 する場合は `instance_of?` ではなく `is_a?(Prism::Source)` を使って
 ください。
 
