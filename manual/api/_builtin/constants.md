@@ -206,13 +206,25 @@ Ruby のバージョンを表す文字列。
 
 Ruby のバージョンは、major.minor.teeny という形式です。
 
+#%since 4.0
+- **SEE** [m:Ruby::VERSION]
+#%end
+
 ### const RUBY_RELEASE_DATE -> String
 
 Ruby のリリース日を表す文字列。
 
+#%since 4.0
+- **SEE** [m:Ruby::RELEASE_DATE]
+#%end
+
 ### const RUBY_PLATFORM -> String
 
 プラットフォームを表す文字列。
+
+#%since 4.0
+- **SEE** [m:Ruby::PLATFORM]
+#%end
 
 #%since 4.0
 ### const RUBY_PATCHLEVEL -> 0
@@ -224,6 +236,8 @@ Ruby 4.0 以降はパッチレベルの増分をやめたため、リリース�
 
 パッチレベルという概念および RUBY_PATCHLEVEL 定数は、 Ruby 1.8.5-p1 以降、 1.8.6 以降で導入されました。
 1.8.5やそれ以前のバージョンでは定義されていません。
+
+- **SEE** [m:Ruby::PATCHLEVEL]
 #%else
 ### const RUBY_PATCHLEVEL -> Integer
 
@@ -241,9 +255,17 @@ teeny リリースのそれぞれについてパッチレベルは 0 から始�
 
 Ruby の GIT コミットハッシュを表す [c:String] オブジェクトです。
 
+#%since 4.0
+- **SEE** [m:Ruby::REVISION]
+#%end
+
 ### const RUBY_COPYRIGHT -> String
 
 Ruby のコピーライトを表す文字列。
+
+#%since 4.0
+- **SEE** [m:Ruby::COPYRIGHT]
+#%end
 
 ### const RUBY_ENGINE -> String
 
@@ -258,15 +280,27 @@ jruby 1.2.0 (ruby 1.8.6 patchlevel 287) (2009-03-16 rev 9419) [i386-java]
 "jruby"
 ```
 
+#%since 4.0
+- **SEE** [m:Ruby::ENGINE]
+#%end
+
 ### const RUBY_ENGINE_VERSION -> String
 
 Ruby処理系実装のバージョンを表す文字列。
+
+#%since 4.0
+- **SEE** [m:Ruby::ENGINE_VERSION]
+#%end
 
 ### const RUBY_DESCRIPTION -> String
 
 Ruby の詳細を表す文字列。
 
 ruby -v で表示される内容が格納されています。
+
+#%since 4.0
+- **SEE** [m:Ruby::DESCRIPTION]
+#%end
 
 ### const SCRIPT_LINES__ -> Hash
 
