@@ -3,12 +3,12 @@ library: rss
 ---
 # class RSS::Maker::TextinputBase
 
-RSS 1.0の場合はtitle，description，name，
-link，maker.channelを適切に設定する必要がありま
-す．
+RSS 1.0の場合はtitle、description、name、
+link、maker.channelを適切に設定する必要がありま
+す。
 
-RSS 0.91/2.0の場合はtitle，description，
-name，linkを設定する必要があります．
+RSS 0.91/2.0の場合はtitle、description、
+name、linkを設定する必要があります。
 
 ## Instance Methods
 

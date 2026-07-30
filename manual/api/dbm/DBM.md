@@ -321,25 +321,25 @@ p db1.to_hash #=> {"a"=>"aaa", "b"=>"bbbbbb"}
 
 ### const READER -> Integer
 
-読み込みモードでオープンします．
+読み込みモードでオープンします。
 
 - **SEE** [m:DBM.open]
 
 ### const WRITER -> Integer
 
-書き込みモードでオープンします．
+書き込みモードでオープンします。
 
 - **SEE** [m:DBM.open]
 
 ### const WRCREAT -> Integer
 
-書き込みモードで、すでにファイルが存在しなかったら作ります．
+書き込みモードで、すでにファイルが存在しなかったら作ります。
 
 - **SEE** [m:DBM.open]
 
 ### const NEWDB -> Integer
 
-書き込みモードで、すでにファイルが存在したら削除して作り直します．
+書き込みモードで、すでにファイルが存在したら削除して作り直します。
 
 - **SEE** [m:DBM.open]
 

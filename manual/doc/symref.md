@@ -5,15 +5,15 @@ Ruby スクリプトで使われる記号の一覧です。
 以下のようなものはそれぞれ、全く含んでいないか一部のみ含んでいます。
 
 - 正規表現のメタ文字
-- `Date#strftime` の書式指定で使う `%`，`-`，`.` とかの類
+- `Date#strftime` の書式指定で使う `%`、`-`、`.` とかの類
 #%since 4.0
-- `Kernel?.format` の書式指定で使う `%`，`#`，`+`，`-` とかの類
+- `Kernel?.format` の書式指定で使う `%`、`#`、`+`、`-` とかの類
 #%else
-- `Kernel.#format` の書式指定で使う `%`，`#`，`+`，`-` とかの類
+- `Kernel.#format` の書式指定で使う `%`、`#`、`+`、`-` とかの類
 #%end
-- `String#unpack`，`Array#pack` のテンプレートで使う `!`，`<`，`>`
+- `String#unpack`、`Array#pack` のテンプレートで使う `!`、`<`、`>`
 - ファイルパスのデリミター
-- CSV，JSON，YAML，XML など特定のファイルフォーマットに使うもの
+- CSV、JSON、YAML、XML など特定のファイルフォーマットに使うもの
 
 [ref:ex]　[ref:q]　[ref:num]　[ref:per]　[ref:and]　[ref:or]　
 [ref:plus]　[ref:minus]　[ref:ast]　[ref:slash]　[ref:hat]　[ref:sq]　

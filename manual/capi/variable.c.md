@@ -67,7 +67,7 @@ RSTRING(rb_class_path(klass))->ptr
 
 ### VALUE rb_class_path(VALUE klass)
 
-klass の名前を返します．klassが無名クラス、無名モジュー
+klass の名前を返します。klassが無名クラス、無名モジュー
 ルの場合 #<Class 0xXXXX>, #<Module 0xXXXX> の形式で返します。
 
 [m:Module#to_s] の定義は

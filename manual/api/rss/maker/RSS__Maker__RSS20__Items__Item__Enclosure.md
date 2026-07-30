@@ -3,9 +3,9 @@ library: rss
 ---
 # class RSS::Maker::RSS20::Items::Item::Enclosure < RSS::Maker::RSS09::Items::Item::Enclosure
 
-RSS 2.0を生成するときだけ利用されます．
+RSS 2.0を生成するときだけ利用されます。
 
-url，length，typeを設定する必要があります．
+url、length、typeを設定する必要があります。
 
 ## Instance Methods
 

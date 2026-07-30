@@ -47,7 +47,7 @@ case/in 式は 「網羅的」 です。もし case 式の値がどの節にも�
 #%# Therefore, the +case+ expression might be used for conditional matching and unpacking:
 そのため、条件付きのマッチや展開に case 式が使われることがあります。
 
-#%# doc.ruby-lang.org のファイルを生成している ruby のバージョンの問題で，workaroundとして新しいバージョン用のサンプルをemlistにしている
+#%# doc.ruby-lang.org のファイルを生成している ruby のバージョンの問題で、workaroundとして新しいバージョン用のサンプルをemlistにしている
 
 ```ruby
 config = {db: {user: 'admin', password: 'abc123'}}

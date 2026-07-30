@@ -392,7 +392,7 @@ state が NULL でなければそれに値が代入され Qnil を返します�
 
 ### VALUE rb_eval_string_wrap(const char *str, int *state)
 
-[f:rb_eval_string_protect] と同じですが，スクリプトの評価を
+[f:rb_eval_string_protect] と同じですが、スクリプトの評価を
 無名のモジュールのもとで行います。
 
 ### void rb_exc_fatal(VALUE err)
@@ -525,7 +525,7 @@ break の C 用インターフェイスです。
 
 ### VALUE rb_iterate(VALUE (*call_proc)(), VALUE date1, VALUE (*block_proc)(), date2)
 
-ブロック付きメソッド(イテレータ)呼び出しを行う関数です．
+ブロック付きメソッド(イテレータ)呼び出しを行う関数です。
 
 まず call_proc(data1) を実行します。そしてその関数か
 その直下のメソッドで yield が発生すると以下が実行されます。
@@ -905,11 +905,11 @@ rb_catch も参照してください。
 
 ### VALUE rb_yield(VALUE val)
 
-yield の C 版です．val を引数にブロックを実行します．
+yield の C 版です。val を引数にブロックを実行します。
 複数の引数を与えたいときは配列に格納して渡します。
 
-この関数を呼び出したメソッドがブロックを伴わない場合は，例外
-[c:LocalJumpError] が発生します．
+この関数を呼び出したメソッドがブロックを伴わない場合は、例外
+[c:LocalJumpError] が発生します。
 
 ### static VALUE rb_yield_0(VALUE val, VALUE self, VALUE klass, int pcall)
 
