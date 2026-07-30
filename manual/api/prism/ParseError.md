@@ -30,7 +30,7 @@ p error.location.start_line # => 1
 
 ### def location -> Prism::Location
 
-エラーが発生したソースコード上の位置を表す `Prism::Location` を
+エラーが発生したソースコード上の位置を表す [c:Prism::Location] を
 返します。該当箇所の文字列そのものは `location.slice` で取得できます。
 
 #%since 3.4

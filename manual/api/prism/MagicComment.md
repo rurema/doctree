@@ -38,11 +38,11 @@ p magic.value # => "true"
 
 ### def key_loc -> Prism::Location
 
-キーのソースコード上の位置を表す `Prism::Location` を返します。
+キーのソースコード上の位置を表す [c:Prism::Location] を返します。
 
 ### def value_loc -> Prism::Location
 
-値のソースコード上の位置を表す `Prism::Location` を返します。
+値のソースコード上の位置を表す [c:Prism::Location] を返します。
 
 ```ruby title="例"
 require "prism"

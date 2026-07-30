@@ -132,10 +132,33 @@ p result.magic_comments.first.key   # => "frozen_string_literal"
 p result.magic_comments.first.value # => "true"
 ```
 
+### def attach_comments! -> Array
+
+[m:Prism::ParseResult#comments] の各コメントを、前後の位置関係から
+構文木の各ノードの位置情報([c:Prism::Location])に関連付けます。
+#%since 3.4
+関連付けた結果は [m:Prism::Location#leading_comments]・
+[m:Prism::Location#trailing_comments]・[m:Prism::Location#comments] で
+参照できます。
+#%else
+関連付けた結果は [m:Prism::Location#comments] で参照できます。
+#%end
+
+戻り値は [m:Prism::ParseResult#comments] と同じ配列です。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.parse("# leading\na = 1\n")
+result.attach_comments!
+loc = result.value.statements.body[0].location
+p loc.comments.map { |c| c.location.slice } # => ["# leading"]
+```
+
 ### def data_loc -> Prism::Location | nil
 
 ソースコード中に `__END__` 行が存在する場合、その行からファイル末尾
-までの範囲を表す `Prism::Location` を返します。`__END__` 以降の内容は
+までの範囲を表す [c:Prism::Location] を返します。`__END__` 以降の内容は
 組み込み定数 `DATA` に読み込まれる部分に対応します。`__END__` が
 存在しない場合は nil を返します。
 
@@ -157,15 +180,18 @@ p Prism.parse("puts 1").data_loc # => nil
 
 ### def source -> Prism::Source
 
-解析したソースコードそのものを表す `Prism::Source`
-(またはそのサブクラス `Prism::ASCIISource`)のインスタンスを返し
-ます。バイトオフセットから行番号・カラム番号を求めるなど、位置情報を
-扱うための補助的なメソッドを持っていますが、詳細はこのリファレンス
-では扱いません。
+解析したソースコードそのものを表す [c:Prism::Source] のインスタンスを
+返します。バイトオフセットから行番号・桁位置を求めるなど、位置情報を
+扱うための補助的なメソッドを持ちます。
+
+#%since 3.4
+実際にはサブクラス `Prism::ASCIISource` のインスタンスの場合があります。
+
+#%end
 
 ```ruby title="例"
 require "prism"
 
 result = Prism.parse("1 + 2")
-p result.source.class # => Prism::ASCIISource
+p result.source.is_a?(Prism::Source) # => true
 ```
