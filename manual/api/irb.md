@@ -707,7 +707,7 @@ IRB のバージョンを文字列で返します。
 ~/.irbrc などの設定ファイル内で IRB.conf[:VERSION] を設定していた場合は
 任意のバージョンを返すように設定できます。
 
-### const CurrentContext -> IRB::Context
+### def IRB.CurrentContext -> IRB::Context
 
 現在の irb に関する [c:IRB::Context] を返します。
 

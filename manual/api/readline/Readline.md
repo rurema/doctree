@@ -438,7 +438,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 - **SEE** GNU Readline ライブラリの rl_set_screen_size 関数
 
-### const Readline.get_screen_size -> [Integer, Integer]
+### def Readline.get_screen_size -> [Integer, Integer]
 
 端末のサイズを [rows, columns] で返します。
 
