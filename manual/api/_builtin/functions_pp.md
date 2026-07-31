@@ -1,4 +1,4 @@
-### def pp(*obj)    -> object
+### module_function def pp(*obj)    -> object
 
 指定されたオブジェクト obj を標準出力に見やすい形式(プリティプリント)で出力します。
 obj それぞれを引数として [m:PP.pp] を呼ぶことと同等です。

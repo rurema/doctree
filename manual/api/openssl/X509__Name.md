@@ -139,7 +139,7 @@ OpenSSL 0.9.8 と互換な古い方式のハッシュ関数の
 
 ## Constants
 
-### def OBJECT_TYPE_TEMPLATE -> { String => Integer }
+### const OBJECT_TYPE_TEMPLATE -> { String => Integer }
 
 属性型に対応する ASN.1の型を格納したハッシュです。
 

@@ -147,7 +147,7 @@ ripper の扱う全てのイベント ID (シンボル) のリストを返しま
 
 パーサイベントのイベント ID (シンボル) のリストを返します。
 
-### def PARSER_EVENT_TABLE -> {Symbol => Integer}
+### const PARSER_EVENT_TABLE -> {Symbol => Integer}
 
 パーサイベントのイベント ID (シンボル) と対応するハンドラの引数の個数の
 リストをハッシュで返します。
@@ -156,7 +156,7 @@ ripper の扱う全てのイベント ID (シンボル) のリストを返しま
 
 スキャナイベントのイベント ID (シンボル) のリストを返します。
 
-### def SCANNER_EVENT_TABLE -> {Symbol => Integer}
+### const SCANNER_EVENT_TABLE -> {Symbol => Integer}
 
 スキャナイベントのイベント ID (シンボル) と対応するハンドラの引数の個数
 のリストをハッシュで返します。

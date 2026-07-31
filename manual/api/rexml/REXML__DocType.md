@@ -336,7 +336,7 @@ name という名前を持つ記法宣言が存在しない場合は nil を返�
 #%# --- PUBLIC
 #%# #@todo
 
-### def DEFAULT_ENTITIES -> { String => REXML::Entity }
+### const DEFAULT_ENTITIES -> { String => REXML::Entity }
 
 XML の仕様上デフォルトで定義されている実体の Hash table。
 

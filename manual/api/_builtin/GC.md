@@ -586,7 +586,7 @@ p GC::OPTS # => ["USE_RGENGC", "RGENGC_ESTIMATE_OLDMALLOC", "GC_ENABLE_LAZY_SWEE
 # この場合、GCデバッグ機能やプロファイル機能は無効化されている
 ```
 
-### def INTERNAL_CONSTANTS -> {Symbol => Integer}
+### const INTERNAL_CONSTANTS -> {Symbol => Integer}
 
 GC用内部定数の値を保持するハッシュテーブルです。
 

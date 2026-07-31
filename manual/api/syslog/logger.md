@@ -265,7 +265,7 @@ call メソッドは文字列を返す必要があります。
 
 [c:Syslog::Logger] のバージョンを表す文字列です。
 
-### def LEVEL_MAP -> {Integer => Integer}
+### const LEVEL_MAP -> {Integer => Integer}
 
 [c:Logger] のログレベルと [man:syslog(3)] のログレベルのマッピング
 を表す [c:Hash] オブジェクトです。

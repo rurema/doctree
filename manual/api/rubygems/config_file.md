@@ -164,13 +164,13 @@ Gem を探索するパスをセットします。
 
 ログレベルのデフォルト値です。
 
-### def OPERATING_SYSTEM_DEFAULTS -> {}
+### const OPERATING_SYSTEM_DEFAULTS -> {}
 
 Ruby をパッケージングしている人がデフォルトの設定値をセットするために使用します。
 
 使用するファイルは rubygems/defaults/operating_system.rb です。
 
-### def PLATFORM_DEFAULTS -> {}
+### const PLATFORM_DEFAULTS -> {}
 
 Ruby の実装者がデフォルトの設定値をセットするために使用します。
 

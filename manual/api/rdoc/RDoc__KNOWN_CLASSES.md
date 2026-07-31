@@ -6,7 +6,7 @@ library:
 
 ## Constants
 
-### def KNOWN_CLASSES -> {String => String}
+### const KNOWN_CLASSES -> {String => String}
 
 Ruby の組み込みクラスの内部的な変数名がキー、クラス名が値のハッシュです。
 

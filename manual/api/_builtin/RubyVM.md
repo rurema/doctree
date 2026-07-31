@@ -79,7 +79,7 @@ p RubyVM.stat(:next_shape_id)
 #%# --- USAGE_ANALYSIS_REGS
 #%# --- USAGE_ANALYSIS_INSN_BIGRAM
 
-### def DEFAULT_PARAMS -> {Symbol => Integer}
+### const DEFAULT_PARAMS -> {Symbol => Integer}
 
 [c:RubyVM] のデフォルトのパラメータを返します。
 

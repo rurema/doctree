@@ -819,7 +819,7 @@ end
 [m:OpenSSL::X509::Store#set_default_paths] でシステムが提供する
 証明書を利用するように設定されています。
 
-### def DEFAULT_PARAMS -> { Symbol -> object }
+### const DEFAULT_PARAMS -> { Symbol -> object }
 
 [m:OpenSSL::SSL::SSLContext#set_params] でデフォルト値として使われる
 パラメータです。
