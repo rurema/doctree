@@ -326,7 +326,7 @@ p set.include?('bye')   # => false
 ### def superset?(set) -> bool
 ### def >=(set) -> bool
 ### def proper_superset?(set) -> bool
-### def >(set) -> Set
+### def >(set) -> bool
 
 self が集合 set の上位集合 (スーパーセット) である場合に true を
 返します。
