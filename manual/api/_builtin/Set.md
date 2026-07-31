@@ -351,7 +351,7 @@ p s.proper_superset?(Set[1, 2, 3])  # => false
 - **SEE** [m:Set#subset?]
 
 ### def subset?(set) -> bool
-### def <=(set) -> Set
+### def <=(set) -> bool
 ### def proper_subset?(set) -> bool
 ### def <(set) -> Set
 
