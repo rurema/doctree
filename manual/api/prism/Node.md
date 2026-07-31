@@ -5,10 +5,10 @@ library: prism
 
 構文解析の結果得られる構文木の各ノードを表す抽象基底クラスです。
 [m:Prism?.parse] などが返す構文木は、このクラスのサブクラス
-(150 種類以上)のインスタンスで構成されます。Prism::Node 自身の
+(150 種類以上)のインスタンスで構成されます。`Prism::Node` 自身の
 インスタンスが生成されることはありません。
 
-個々のノードクラス(Prism::ProgramNode・Prism::CallNode など)に
+個々のノードクラス(`Prism::ProgramNode`・`Prism::CallNode` など)に
 固有のフィールド(子ノードや値を取得するアクセサ)はこのリファレンス
 では扱いません。このページで扱うのは、すべてのノードクラスに共通する
 API です。個々のノードクラスの詳細は公式ドキュメントを参照して
@@ -42,9 +42,10 @@ p call.compact_child_nodes.size # => 2
 ノードクラス自体からノードの種類を表すシンボルを得られます。
 
 #%since 3.4
-### def fields -> Array
+### def fields -> [Prism::Reflection::Field]
 
-このノードクラスが持つフィールドの一覧を返します。構文木の各ノード・
+このノードクラスが持つフィールド(子ノードや属性)を表す
+`Prism::Reflection::Field` の配列を返します。構文木の各ノード・
 各フィールドを再帰的に処理するツールを書くときのリフレクション用途に
 使えます。
 
@@ -67,7 +68,7 @@ p call.compact_child_nodes.size # => 2
 ### def slice -> String
 
 ノードの位置に対応するソースコードの文字列を返します。
-`location.slice` と同じです。
+[`location.slice`](m:Prism::Location#slice) と同じです。
 
 ### def accept(visitor) -> object
 
@@ -77,19 +78,19 @@ Visitor パターンの受け入れメソッドです。ノードの種類に応
 - **param** `visitor` -- `Prism::Visitor` (またはそのサブクラス)の
        インスタンスを指定します。
 
-### def child_nodes -> Array
+### def child_nodes -> [Prism::Node | nil]
 
 子ノードの配列を返します。存在しないオプショナルな子ノードの位置
 には nil が入ります。
 
 - **SEE** [m:Prism::Node#compact_child_nodes]
 
-### def compact_child_nodes -> Array
+### def compact_child_nodes -> [Prism::Node]
 
 子ノードの配列を返します。[m:Prism::Node#child_nodes] と異なり、
 存在しないオプショナルな子ノードは含まれません(nil を含みません)。
 
-### def comment_targets -> Array
+### def comment_targets -> [Prism::Node | Prism::Location]
 
 コメントの関連付け先になりうる子ノードや位置情報の配列を返します。
 [m:Prism::ParseResult#attach_comments!] が内部で使用します。
@@ -109,7 +110,7 @@ p copied.class        # => Prism::CallNode
 p copied.equal?(call) # => false
 ```
 
-### def deconstruct -> Array
+### def deconstruct -> [Prism::Node | nil]
 
 [m:Prism::Node#child_nodes] のエイリアスです。パターンマッチの
 配列パターン(`case node; in [a, b]`)で使われます。
@@ -158,7 +159,7 @@ p dot.start_with?("digraph") # => true
 
 ### def newline? -> bool
 
-このノードが、TracePoint の `:line` イベントを発生させる行の位置
+このノードが、[c:TracePoint] の `:line` イベントを発生させる行の位置
 としてマークされているかどうかを返します。
 
 #%since 3.4
@@ -171,36 +172,36 @@ p dot.start_with?("digraph") # => true
 
 ### def start_offset -> Integer
 
-開始位置のバイトオフセットを返します。`location.start_offset` と
+開始位置のバイトオフセットを返します。[`location.start_offset`](m:Prism::Location#start_offset) と
 同じです。
 
 ### def end_offset -> Integer
 
-終了位置のバイトオフセットを返します。`location.end_offset` と
+終了位置のバイトオフセットを返します。[`location.end_offset`](m:Prism::Location#end_offset) と
 同じです。
 
-### def source_lines -> Array
+### def source_lines -> [String]
 
 ソースコード全体を行ごとに分割した配列を返します。
-`location.source_lines` と同じです。
+[`location.source_lines`](m:Prism::Location#source_lines) と同じです。
 
-### def script_lines -> Array
+### def script_lines -> [String]
 
 [m:Prism::Node#source_lines] のエイリアスです。
-`RubyVM::AbstractSyntaxTree` の API に合わせた名前で、そこからの
+[c:RubyVM::AbstractSyntaxTree] の API に合わせた名前で、そこからの
 移行を容易にするためのものです。
 
 ### def slice_lines -> String
 
 ノードの位置を含む行全体(開始行の行頭から終端行の行末まで)の
-文字列を返します。`location.slice_lines` と同じです。
+文字列を返します。[`location.slice_lines`](m:Prism::Location#slice_lines) と同じです。
 
 ### def static_literal? -> bool
 
 このノードに静的リテラル(構文解析の時点で値が確定するリテラル)
 のフラグが立っているかどうかを返します。
 
-### def tunnel(line, column) -> Array
+### def tunnel(line, column) -> [Prism::Node]
 
 指定した行・桁を位置に含むノードを、自分自身から子孫の方向へ順に
 並べた配列で返します。エディタ上のカーソル位置に対応するノードを
@@ -258,41 +259,41 @@ p a === b # => true
 #%since 4.0
 ### def start_line -> Integer
 
-開始位置の行番号を返します。`location.start_line` と同じです。
+開始位置の行番号を返します。[`location.start_line`](m:Prism::Location#start_line) と同じです。
 
 ### def end_line -> Integer
 
-終了位置の行番号を返します。`location.end_line` と同じです。
+終了位置の行番号を返します。[`location.end_line`](m:Prism::Location#end_line) と同じです。
 
 ### def start_character_offset -> Integer
 
 開始位置の、ソースコード先頭からの文字単位のオフセットを返します。
-`location.start_character_offset` と同じです。
+[`location.start_character_offset`](m:Prism::Location#start_character_offset) と同じです。
 
 ### def end_character_offset -> Integer
 
 終了位置の、ソースコード先頭からの文字単位のオフセットを返します。
-`location.end_character_offset` と同じです。
+[`location.end_character_offset`](m:Prism::Location#end_character_offset) と同じです。
 
 ### def start_column -> Integer
 
 開始位置の、行頭からのバイト単位の桁位置を返します。
-`location.start_column` と同じです。
+[`location.start_column`](m:Prism::Location#start_column) と同じです。
 
 ### def end_column -> Integer
 
 終了位置の、行頭からのバイト単位の桁位置を返します。
-`location.end_column` と同じです。
+[`location.end_column`](m:Prism::Location#end_column) と同じです。
 
 ### def start_character_column -> Integer
 
 開始位置の、行頭からの文字単位の桁位置を返します。
-`location.start_character_column` と同じです。
+[`location.start_character_column`](m:Prism::Location#start_character_column) と同じです。
 
 ### def end_character_column -> Integer
 
 終了位置の、行頭からの文字単位の桁位置を返します。
-`location.end_character_column` と同じです。
+[`location.end_character_column`](m:Prism::Location#end_character_column) と同じです。
 
 ### def cached_start_code_units_offset(cache) -> Integer
 
@@ -326,33 +327,33 @@ p a === b # => true
 - **param** `cache` -- [m:Prism::Result#code_units_cache] で得た
        キャッシュを指定します。
 
-### def leading_comments -> Array
+### def leading_comments -> [Prism::Comment]
 
 このノードの前に付くコメントの配列を返します。
-`location.leading_comments` と同じです。
+[`location.leading_comments`](m:Prism::Location#leading_comments) と同じです。
 [m:Prism::ParseResult#attach_comments!] を呼び出す前は空配列です。
 
-### def trailing_comments -> Array
+### def trailing_comments -> [Prism::Comment]
 
 このノードの後ろに付くコメントの配列を返します。
-`location.trailing_comments` と同じです。
+[`location.trailing_comments`](m:Prism::Location#trailing_comments) と同じです。
 
-### def comments -> Array
+### def comments -> [Prism::Comment]
 
 このノードに関連付けられた前後両方のコメントの配列を返します。
-`location.comments` と同じです。
+[`location.comments`](m:Prism::Location#comments) と同じです。
 
 ### def each_child_node -> Enumerator
 ### def each_child_node {|node| ... } -> ()
 {: since="4.0.1"}
 
 ブロックを指定した場合、[m:Prism::Node#compact_child_nodes] の
-各要素を順に yield します。ブロックを指定しない場合は Enumerator を
+各要素を順に yield します。ブロックを指定しない場合は [c:Enumerator] を
 返します。
 #%end
 
 #%since 4.1
-### def breadth_first_search_all {|node| ... } -> Array
+### def breadth_first_search_all {|node| ... } -> [Prism::Node]
 
 自身を含めて構文木を幅優先で探索し、ブロックが真を返したノードを
 すべて集めた配列を返します。
@@ -363,7 +364,7 @@ p a === b # => true
 
 [m:Prism::Node#breadth_first_search] の別名です。
 
-### def find_all {|node| ... } -> Array
+### def find_all {|node| ... } -> [Prism::Node]
 
 [m:Prism::Node#breadth_first_search_all] の別名です。
 #%end
