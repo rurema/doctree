@@ -324,7 +324,7 @@ p set.include?('bye')   # => false
 ```
 
 ### def superset?(set) -> bool
-### def >=(set) -> Set
+### def >=(set) -> bool
 ### def proper_superset?(set) -> bool
 ### def >(set) -> Set
 
