@@ -114,7 +114,7 @@ p rp # => "\\$bc\\^"
 
 ```ruby title="例"
 /(.)(.)/ =~ "ab"
-p Regexp.last_match      # => #<MatchData:0x4599e58>
+p Regexp.last_match      # => #<MatchData "ab" 1:"a" 2:"b">
 p Regexp.last_match[0]   # => "ab"
 p Regexp.last_match[1]   # => "a"
 p Regexp.last_match[2]   # => "b"
@@ -131,7 +131,6 @@ p Regexp.last_match[3]   # => nil
 
 ```ruby title="例"
 /(.)(.)/ =~ "ab"
-p Regexp.last_match      # => #<MatchData:0x4599e58>
 p Regexp.last_match(0)   # => "ab"
 p Regexp.last_match(1)   # => "a"
 p Regexp.last_match(2)   # => "b"
@@ -149,7 +148,7 @@ str = "This is Regexp"
 p Regexp.last_match # => nil
 begin
   Regexp.last_match[1] # ~> NoMethodError
-rescue 
+rescue
 #%since 3.4
   puts $! # => undefined method '[]' for nil:NilClass
 #%else
@@ -222,12 +221,12 @@ p Regexp.union(/a/e, /b/) # => /(?-mix:a)|(?-mix:b)/e
 p Regexp.union(/foo/i, /bar/x, /hoge/m) # => /(?i-mx:foo)|(?x-mi:bar)|(?m-ix:hoge)/
 
 # 文字列そのものにマッチする
-rep1 = [ "foo", "bar", "hoge"] 
+rep1 = [ "foo", "bar", "hoge"]
 p Regexp.union(*rep1) # => /foo|bar|hoge/
 p Regexp.union(rep1)  # => /foo|bar|hoge/
 
 # 下記の場合オプションがつくのは最初だけ
-rep2 = [ /foo/x, "bar", "hoge"] 
+rep2 = [ /foo/x, "bar", "hoge"]
 p Regexp.union(*rep2) # => /(?x-mi:foo)|bar|hoge/
 p Regexp.union(rep2)  # => /(?x-mi:foo)|bar|hoge/
 ```
@@ -400,14 +399,14 @@ end
 reg = Regexp.compile("foo")
 
 if ~ reg
-  puts "match" 
+  puts "match"
 else
-  puts "no match" 
+  puts "no match"
 end
 # => no match
 
 if reg
-  puts "match" 
+  puts "match"
 else
   puts "no match"
 end
@@ -501,7 +500,7 @@ re.match(str, pos)
 
 ```ruby title="例"
 results = []
-p /((.)\2)/.match("foo") {|m| results << m[0] } # => ["oo"] 
+p /((.)\2)/.match("foo") {|m| results << m[0] } # => ["oo"]
 p /((.)\2)/.match("bar") {|m| results << m[0] } # => nil
 p results # => ["oo"]
 ```
@@ -518,7 +517,7 @@ if reg.match("foobar")
 end
 # => match
 
-p reg.match("foobar") # => #<MatchData:0x29403fc>
+p reg.match("foobar") # => #<MatchData "foo">
 p reg.match("bar")    # => nil
 
 p /(foo)(bar)(baz)/.match("foobarbaz").to_a.values_at(1,2,3) # => ["foo", "bar", "baz"]

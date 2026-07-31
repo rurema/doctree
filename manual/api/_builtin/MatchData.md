@@ -500,7 +500,6 @@ p $~.to_a       # => ["foobar", "foo", "bar", nil]
 
 ```ruby title="例"
 /bar/ =~ "foobarbaz"
-p $~            # => #<MatchData:0x401b1be4>
 p $~.to_s       # => "bar"
 ```
 
