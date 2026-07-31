@@ -8,13 +8,13 @@ since: "4.0"
 モンキーパッチを互いに隔離するための機能です。
 Ruby 4.0 で導入されました。
 
-Ruby::Box は [c:Module] のサブクラスで、その各インスタンスは 1 つの隔離された
+`Ruby::Box` は [c:Module] のサブクラスで、その各インスタンスは 1 つの隔離された
 名前空間（ボックス）を表します。あるボックスの中で新しく定義したり変更したりした
 クラス・モジュール・定数・グローバル変数は、そのボックスの外や他のボックスからは
 見えません。
 
-Ruby::Box は実験的な機能です。既定では無効で、このとき [m:Ruby::Box.enabled?] は
-false を返し、[m:Ruby::Box.new] は [c:RuntimeError] を発生させます。
+`Ruby::Box` は実験的な機能です。既定では無効で、このとき [m:Ruby::Box.enabled?] は
+`false` を返し、[m:Ruby::Box.new] は [c:RuntimeError] を発生させます。
 利用するには、ruby プロセスの起動時に環境変数 `RUBY_BOX` に `1` を設定します。
 `1` 以外の値や未設定は無効を意味します。また、プロセスの起動後に設定しても
 有効にはなりません。
@@ -59,28 +59,28 @@ p box::Something.new.x # => 1
 他のボックスには影響しません。グローバル変数やトップレベルの定数・メソッドの変更も
 同様にボックスごとに隔離されます。
 
-## Class methods
+## Class Methods
 
 ### def new -> Ruby::Box
 
 他のボックスから独立した新しいボックスを返します。
 
-Ruby::Box が無効なとき（環境変数 `RUBY_BOX` に `1` を設定せずに起動したとき）は
+`Ruby::Box` が無効なとき（環境変数 `RUBY_BOX` に `1` を設定せずに起動したとき）は
 [c:RuntimeError] が発生します。
 
 ### def enabled? -> bool
 
-Ruby::Box が有効なら true を、無効なら false を返します。
+`Ruby::Box` が有効なら `true` を、無効なら `false` を返します。
 
-環境変数 `RUBY_BOX` に `1` を設定して ruby を起動したときに true になります。
+環境変数 `RUBY_BOX` に `1` を設定して ruby を起動したときに `true` になります。
 
 ### def current -> Ruby::Box | nil
 
 現在実行中のコードが属しているボックスを返します。
 
-Ruby::Box が無効なときは nil を返します。
+`Ruby::Box` が無効なときは `nil` を返します。
 
-## Instance methods
+## Instance Methods
 
 ### def eval(code) -> object
 
@@ -100,7 +100,7 @@ Ruby::Box が無効なときは nil を返します。
 `feature` を self（レシーバのボックス）の中に読み込みます。
 
 [m:Kernel?.require] と同様ですが、読み込まれたファイルは self の中で実行されます。
-まだ読み込まれていなければ true を、すでに読み込み済みなら false を返します。
+まだ読み込まれていなければ `true` を、すでに読み込み済みなら `false` を返します。
 
 ### def require_relative(relative_feature) -> bool
 

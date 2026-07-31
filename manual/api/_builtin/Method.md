@@ -459,7 +459,7 @@ p m.owner # => Kernel
 
 self が定義されている [c:Ruby::Box] を返します。
 
-Ruby::Box が無効なときは nil を返します。
+`Ruby::Box` が無効なときは `nil` を返します。
 #%end
 
 ### def receiver    -> object
