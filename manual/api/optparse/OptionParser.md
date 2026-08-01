@@ -45,8 +45,8 @@ opts.parse!(ARGV)                            # 実際にコマンドラインの
 
 ## Class Methods
 
-### def new(banner = nil, width = 32, indent = ' ' * 4)              -> OptionParser
-### def new(banner = nil, width = 32, indent = ' ' * 4) {|opt| ...}  -> OptionParser
+### def OptionParser.new(banner = nil, width = 32, indent = ' ' * 4)              -> OptionParser
+### def OptionParser.new(banner = nil, width = 32, indent = ' ' * 4) {|opt| ...}  -> OptionParser
 
 OptionParser オブジェクトを生成して返します。
 
@@ -70,7 +70,7 @@ end
 
 - **param** `indent` -- サマリのインデントを文字列で与えます。
 
-### def accept(klass, pat = /.*/){|str| ...}    -> ()
+### def OptionParser.accept(klass, pat = /.*/){|str| ...}    -> ()
 
 オプションの引数を文字列から Ruby のオブジェクトに変換するための
 ブロックを登録します。すべての OptionParser インスタンスに共通です。
@@ -109,7 +109,7 @@ opts.parse!(ARGV)
 
 - **param** `pat` -- match メソッドを持ったオブジェクト([c:Regexp] オブジェクトなど)を与えます。
 
-### def reject(klass)    -> ()
+### def OptionParser.reject(klass)    -> ()
 
 [m:OptionParser.accept] メソッドで登録したブロックを削除します。
 
@@ -141,8 +141,8 @@ opts2 = OptionParser.new
 parse(opts2) # => unsupported argument type: Time (ArgumentError)
 ```
 
-### def getopts(argv, *opts)   -> Hash
-### def getopts(*opts)         -> Hash
+### def OptionParser.getopts(argv, *opts)   -> Hash
+### def OptionParser.getopts(*opts)         -> Hash
 
 引数をパースした結果を、Hash として返します。(self.new.getopts と同じです)
 

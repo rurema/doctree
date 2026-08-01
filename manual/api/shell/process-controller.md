@@ -8,31 +8,31 @@ until: "2.7.0"
 
 ## Singleton Methods
 
-### def new(shell)
+### def Shell::ProcessController.new(shell)
 
 自身を初期化します。
 
 - **param** `shell` -- [c:Shell] のインスタンスを指定します。
 
-### def activate(pc) -> ()
+### def Shell::ProcessController.activate(pc) -> ()
 #%todo
 
-### def each_active_object{|ref| ... } -> ()
+### def Shell::ProcessController.each_active_object{|ref| ... } -> ()
 #%todo
 
-### def inactivate(pc) -> ()
+### def Shell::ProcessController.inactivate(pc) -> ()
 #%todo
 
-### def process_controllers_exclusive -> ()
+### def Shell::ProcessController.process_controllers_exclusive -> ()
 #%todo
 
-### def active_process_controllers -> ()
+### def Shell::ProcessController.active_process_controllers -> ()
 #%todo
 
-### def block_output_synchronize{ ... } -> ()
+### def Shell::ProcessController.block_output_synchronize{ ... } -> ()
 #%todo
 
-### def wait_to_finish_all_process_controllers -> ()
+### def Shell::ProcessController.wait_to_finish_all_process_controllers -> ()
 #%todo
 
 ## Instance Methods

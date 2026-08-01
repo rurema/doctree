@@ -14,7 +14,7 @@ RDoc 形式のドキュメントを HTML に整形するクラスです。
 
 ## Class Methods
 
-### def new(path, context, show_hash) -> RDoc::Markup::ToHtmlCrossref
+### def RDoc::Markup::ToHtmlCrossref.new(path, context, show_hash) -> RDoc::Markup::ToHtmlCrossref
 
 自身を初期化します。
 

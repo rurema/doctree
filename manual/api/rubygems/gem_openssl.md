@@ -8,12 +8,12 @@ OpenSSL が使えるかどうかを確認するためのライブラリです。
 
 ## Singleton Methods
 
-### def ssl_available? -> bool
+### def Gem.ssl_available? -> bool
 
 現在実行中のプラットフォームで OpenSSL が有効である場合は真を返します。
 そうでない場合は偽を返します。
 
-### def ensure_ssl_available
+### def Gem.ensure_ssl_available
 
 OpenSSL が使用可能でない場合は例外を発生させます。
 

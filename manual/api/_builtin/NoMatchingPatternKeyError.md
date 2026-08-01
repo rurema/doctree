@@ -23,7 +23,7 @@ end
 
 ## Class Methods
 
-### def new(message = nil, matchee: nil, key: nil) -> NoMatchingPatternKeyError
+### def NoMatchingPatternKeyError.new(message = nil, matchee: nil, key: nil) -> NoMatchingPatternKeyError
 
 例外オブジェクトを生成して返します。
 

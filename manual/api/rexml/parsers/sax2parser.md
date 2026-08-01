@@ -152,7 +152,7 @@ SAX2 と同等の API を持つストリーム式の XML パーサクラス。
 
 ## Class Methods
 
-### def new(source) -> REXML::Parsers::SAX2Parser
+### def REXML::Parsers::SAX2Parser.new(source) -> REXML::Parsers::SAX2Parser
 
 SAX2 パーサオブジェクトを生成します。
 

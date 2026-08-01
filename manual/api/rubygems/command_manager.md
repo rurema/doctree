@@ -58,7 +58,7 @@ gem コマンドによってサポートされているサブコマンドを管�
 
 ## Singleton Methods
 
-### def instance -> Gem::CommandManager
+### def Gem::CommandManager.instance -> Gem::CommandManager
 
 自身をインスタンス化します。
 

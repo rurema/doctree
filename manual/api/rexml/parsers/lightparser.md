@@ -4,7 +4,7 @@
 
 ## Class Methods
 
-### def new(stream)
+### def REXML::Parsers::LightParser.new(stream)
 #%todo
 
 ## Instance Methods

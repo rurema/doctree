@@ -46,6 +46,6 @@ end
 
 ## Singleton Methods
 
-### def scope_name(scope, task_name) -> String
+### def Rake::FileTask.scope_name(scope, task_name) -> String
 
 ファイルタスクはスコープを無視します。

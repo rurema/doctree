@@ -5,8 +5,8 @@ library: webrick/httpproxy
 
 空のソケットのふりをするオブジェクトです。
 
-### def read(*args) -> nil
-### def gets(*args) -> nil
+### def WEBrick::NullReader.read(*args) -> nil
+### def WEBrick::NullReader.gets(*args) -> nil
 
 常に nil を返します。
 

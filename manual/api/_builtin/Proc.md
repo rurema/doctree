@@ -29,7 +29,7 @@ p foo       # => 2
 
 ## Class Methods
 
-### def new { ... } -> Proc
+### def Proc.new { ... } -> Proc
 
 ブロックをコンテキストとともにオブジェクト化して返します。
 

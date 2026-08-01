@@ -10,7 +10,7 @@ POP3 のセッションを表すクラスです。
 
 ## Class Methods
 
-### def new(address, port = nil, apop = false) -> Net::POP3
+### def Net::POP3.new(address, port = nil, apop = false) -> Net::POP3
 
 [c:Net::POP3] オブジェクトを生成します。
 
@@ -26,8 +26,8 @@ port に nil を渡すと、適当なポート(通常は110、SSL利用時には
 
 - **SEE** [m:Net::POP3#start]
 
-### def start(address, port = nil, account=nil, password=nil, isapop=false) -> Net::POP3
-### def start(address, port = nil, account=nil, password=nil, isapop=false) {|pop| .... } -> object
+### def Net::POP3.start(address, port = nil, account=nil, password=nil, isapop=false) -> Net::POP3
+### def Net::POP3.start(address, port = nil, account=nil, password=nil, isapop=false) {|pop| .... } -> object
 
 [c:Net::POP3] オブジェクトを生成し、サーバへ接続します。
 
@@ -72,7 +72,7 @@ Net::POP3.start(addr, port, account, password) {|pop|
 
 - **SEE** [m:Net::POP3#start]
 
-### def APOP(is_apop) -> Class
+### def Net::POP3.APOP(is_apop) -> Class
 
 bool が真なら [c:Net::APOP] クラス、偽なら [c:Net::POP3] クラスを返します。
 
@@ -87,7 +87,7 @@ pop.start(account, password) {
 
 - **param** `is_apop` -- 真の場合に Net::APOP を返します。
 
-### def foreach(address, port = nil, account, password, isapop=false) {|mail| .... } -> ()
+### def Net::POP3.foreach(address, port = nil, account, password, isapop=false) {|mail| .... } -> ()
 
 POP セッションを開始し、
 サーバ上のすべてのメールを取りだし、
@@ -132,8 +132,8 @@ end
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 - **SEE** [m:Net::POP3.start], [m:Net::POP3#each_mail]
 
-### def delete_all(address, port = nil, account, password, isapop=false) -> ()
-### def delete_all(address, port = nil, account, password, isapop=false) {|mail| .... } -> ()
+### def Net::POP3.delete_all(address, port = nil, account, password, isapop=false) -> ()
+### def Net::POP3.delete_all(address, port = nil, account, password, isapop=false) {|mail| .... } -> ()
 
 POP セッションを開始し、サーバ上のメールを全て消去します。
 
@@ -163,7 +163,7 @@ end
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 - **SEE** [m:Net::POP3.start], [m:Net::POP3#delete_all]
 
-### def auth_only(address, port = nil, account, password, isapop=false)
+### def Net::POP3.auth_only(address, port = nil, account, password, isapop=false)
 
 POP セッションを開き、認証だけを行って接続を切ります。
 
@@ -186,16 +186,16 @@ Net::POP3.auth_only('pop.example.com', nil,     # using default port (110)
 - **raise** `Net::POPError` -- サーバが認証失敗以外のエラーを報告した場合に発生します
 - **raise** `Net::POPBadResponse` -- サーバからの応答がプロトコル上不正であった場合に発生します
 
-### def default_port -> Integer
-### def default_pop3_port -> Integer
+### def Net::POP3.default_port -> Integer
+### def Net::POP3.default_pop3_port -> Integer
 
 POP3 のデフォルトのポート番号(110)を返します。
 
-### def default_pop3s_port -> Integer
+### def Net::POP3.default_pop3s_port -> Integer
 
 デフォルトのPOP3Sのポート番号(995)を返します。
 
-### def certs -> String|nil
+### def Net::POP3.certs -> String|nil
 
 SSL のパラメータの ca_file (なければ ca_path) を返します。
 
@@ -203,7 +203,7 @@ SSL のパラメータの ca_file (なければ ca_path) を返します。
 
 - **SEE** [m:OpenSSL::SSL::SSLContext#ca_file], [m:OpenSSL::SSL::SSLContext#ca_path]
 
-### def verify -> Integer|nil
+### def Net::POP3.verify -> Integer|nil
 
 SSL のパラメータの verify_mode を返します。
 
@@ -211,12 +211,12 @@ SSL のパラメータの verify_mode を返します。
 
 - **SEE** [m:OpenSSL::SSL::SSLContext#verify_mode]
 
-### def use_ssl? -> bool
+### def Net::POP3.use_ssl? -> bool
 
 新しく生成する [c:Net::POP3] オブジェクトが
 SSL による通信利用するならば真を返します。
 
-### def enable_ssl(verify_or_params={}, certs=nil) -> ()
+### def Net::POP3.enable_ssl(verify_or_params={}, certs=nil) -> ()
 
 新しく生成する [c:Net::POP3] オブジェクトが
 SSL による通信利用するように設定します。
@@ -241,7 +241,7 @@ verify_or_params がハッシュでない場合には、接続時に生成され
 
 - **SEE** [m:Net::POP3.disable_ssl], [m:Net::POP3.use_ssl?]
 
-### def ssl_params -> Hash|nil
+### def Net::POP3.ssl_params -> Hash|nil
 
 SSL での接続を有効にしている場合には、
 SSL の設定のハッシュを返します。
@@ -258,14 +258,14 @@ SSL を有効にしていない場合には nil を返します。
 #%# --- create_ssl_params(verify_or_params = {}, certs = nil)
 #%# 
 
-### def disable_ssl -> ()
+### def Net::POP3.disable_ssl -> ()
 
 新しく生成する [c:Net::POP3] オブジェクトが
 SSL を利用しないように設定します。
 
 - **SEE** [m:Net::POP3.enable_ssl], [m:Net::POP3.use_ssl?]
 
-### def socket_type -> Class
+### def Net::POP3.socket_type -> Class
 
 このメソッドは obsolete です。
 使わないでください。

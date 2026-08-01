@@ -157,29 +157,29 @@ RubyGems ライブラリの結合テストをするのに便利です。
 
 ## Singleton Methods
 
-### def cache(all = false) -> Gem::SourceInfoCache
+### def Gem::SourceInfoCache.cache(all = false) -> Gem::SourceInfoCache
 
 自身のインスタンスを生成するためのメソッドです。
 
 - **param** `all` -- 真を指定すると、インスタンス生成時に全てのキャッシュを再作成します。
 
-### def cache_data -> Hash
+### def Gem::SourceInfoCache.cache_data -> Hash
 
 キャッシュしているデータを返します。
 
-### def latest_system_cache_file -> String
+### def Gem::SourceInfoCache.latest_system_cache_file -> String
 
 最新のシステムキャッシュのファイル名を返します。
 
-### def latest_user_cache_file -> String
+### def Gem::SourceInfoCache.latest_user_cache_file -> String
 
 最新のユーザーキャッシュのファイル名を返します。
 
-### def reset -> nil
+### def Gem::SourceInfoCache.reset -> nil
 
 自身の内容をクリアします。
 
-### def search(*args) -> [Gem::Specification]
+### def Gem::SourceInfoCache.search(*args) -> [Gem::Specification]
 
 与えられた条件を満たす [c:Gem::Specification] のリストを返します。
 
@@ -187,7 +187,7 @@ RubyGems ライブラリの結合テストをするのに便利です。
 
 - **SEE** [m:Gem::SourceInfoCache#search]
 
-### def search_with_source(*args) -> Array
+### def Gem::SourceInfoCache.search_with_source(*args) -> Array
 
 与えられた条件を満たす [c:Gem::Specification] と URL のリストを返します。
 
@@ -195,10 +195,10 @@ RubyGems ライブラリの結合テストをするのに便利です。
 
 - **SEE** [m:Gem::SourceInfoCache#search_with_source]
 
-### def system_cache_file -> String
+### def Gem::SourceInfoCache.system_cache_file -> String
 
 システムキャッシュのファイル名を返します。
 
-### def user_cache_file -> String
+### def Gem::SourceInfoCache.user_cache_file -> String
 
 ユーザーキャッシュのファイル名を返します。

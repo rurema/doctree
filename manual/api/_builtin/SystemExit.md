@@ -8,7 +8,7 @@ Ruby インタプリタを終了させるときに発生します。
 
 ## Class Methods
 
-### def new(status = 0, error_message = "") -> SystemExit
+### def SystemExit.new(status = 0, error_message = "") -> SystemExit
 
 SystemExit オブジェクトを生成して返します。
 

@@ -22,7 +22,7 @@ Net::HTTP は、リクエストに Accept-Encoding ヘッダも Range ヘッダ�
 
 ## Class Methods
 
-### def new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil, no_proxy=nil) -> Net::HTTP
+### def Net::HTTP.new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil, no_proxy=nil) -> Net::HTTP
 
 新しい [c:Net::HTTP] オブジェクトを生成します。
 
@@ -47,8 +47,8 @@ no_proxy の文字列に address のホスト名やIPアドレスが含まれて
 - **param** `proxy_pass` -- プロクシの認証のパスワードを指定します。
 - **param** `no_proxy` -- プロクシを経由せずに接続するホストの名前/IPアドレスを文字列で指定します。
 
-### def start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
-### def start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) {|http| .... } -> object
+### def Net::HTTP.start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
+### def Net::HTTP.start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) {|http| .... } -> object
 
 新しい [c:Net::HTTP] オブジェクトを生成し、
 TCP コネクション、 HTTP セッションを開始します。
@@ -80,8 +80,8 @@ Net::HTTP.new(address, port, proxy_addr, proxy_port, proxy_user, proxy_pass).sta
 - **raise** `Net::OpenTimeout` -- 接続がタイムアウトしたときに発生します
 - **SEE** [m:Net::HTTP.new], [m:Net::HTTP#start]
 
-### def get(uri) -> String
-### def get(host, path, port = 80) -> String
+### def Net::HTTP.get(uri) -> String
+### def Net::HTTP.get(host, path, port = 80) -> String
 
 指定した対象に GET リクエストを送り、そのボディを
 文字列として返します。
@@ -95,8 +95,8 @@ Net::HTTP.new(address, port, proxy_addr, proxy_port, proxy_user, proxy_pass).sta
 - **param** `port` -- 接続するポートを整数で指定します。
 - **SEE** [m:Net::HTTP#get]
 
-### def get_print(uri) -> ()
-### def get_print(host, path, port = 80) -> ()
+### def Net::HTTP.get_print(uri) -> ()
+### def Net::HTTP.get_print(host, path, port = 80) -> ()
 
 指定した対象から HTTP でエンティティボディを取得し、
 [m:$stdout] に出力します。
@@ -125,8 +125,8 @@ require 'net/http'
 Net::HTTP.get_print 'www.example.com', '/index.html'
 ```
 
-### def get_response(uri) -> Net::HTTPResponse
-### def get_response(host, path = nil, port = nil) -> Net::HTTPResponse
+### def Net::HTTP.get_response(uri) -> Net::HTTPResponse
+### def Net::HTTP.get_response(host, path = nil, port = nil) -> Net::HTTPResponse
 
 指定した対象に GET リクエストを送り、そのレスポンスを
 [c:Net::HTTPResponse] として返します。
@@ -140,7 +140,7 @@ Net::HTTP.get_print 'www.example.com', '/index.html'
 - **param** `port` -- 接続するポートを整数で指定します。
 - **SEE** [m:Net::HTTP#get]
 
-### def post_form(uri, params) -> Net::HTTPResponse
+### def Net::HTTP.post_form(uri, params) -> Net::HTTPResponse
 
 [c:URI] で指定した対象に フォームのデータを HTTP で 
 POST します。
@@ -151,7 +151,7 @@ POST します。
 - **param** `uri` -- POST する対象を [c:URI] で指定します。
 - **param** `params` -- POST するデータです。
 
-### def proxy_address -> String|nil
+### def Net::HTTP.proxy_address -> String|nil
 
 自身が ([m:Net::HTTP.Proxy] によって作成された) 
 プロクシ用のクラスならばプロクシのアドレスを返します。
@@ -160,7 +160,7 @@ POST します。
 
 - **SEE** [m:Net::HTTP.Proxy]
 
-### def proxy_port -> Integer|nil
+### def Net::HTTP.proxy_port -> Integer|nil
 
 自身が ([m:Net::HTTP.Proxy] によって作成された) 
 プロクシ用のクラスならばプロクシのポート番号を返します。
@@ -169,7 +169,7 @@ POST します。
 
 - **SEE** [m:Net::HTTP.Proxy]
 
-### def proxy_pass -> String|nil
+### def Net::HTTP.proxy_pass -> String|nil
 
 自身が ([m:Net::HTTP.Proxy] によって作成された) 
 プロクシ用のクラスならばプロクシ認証のパスワードを返します。
@@ -178,7 +178,7 @@ POST します。
 
 - **SEE** [m:Net::HTTP.Proxy]
 
-### def proxy_user -> String|nil
+### def Net::HTTP.proxy_user -> String|nil
 
 自身が ([m:Net::HTTP.Proxy] によって作成された)
 プロクシ用のクラスで、かつプロクシの認証を利用する場合は
@@ -192,7 +192,7 @@ POST します。
 #%#
 #%# このメソッドは obsolete です。
 
-### def Proxy(address, port = 80) -> Class
+### def Net::HTTP.Proxy(address, port = 80) -> Class
 
 Proxy 経由で http サーバに接続するためのクラスを作成し返します。
 
@@ -222,36 +222,36 @@ proxy_class.start('www.example.org') {|h|
 - **param** `address` -- プロクシのホスト名を文字列で与えます。
 - **param** `port` -- プロクシのポート番号を与えます。
 
-### def proxy_class? -> bool
+### def Net::HTTP.proxy_class? -> bool
 
 自身が ([m:Net::HTTP.Proxy] によって作成された) プロクシ用のクラスならば真を返し、そうでなければ偽を返します。
 
 - **SEE** [m:Net::HTTP.Proxy]
 
-### def http_default_port -> Integer
-### def default_port -> Integer
+### def Net::HTTP.http_default_port -> Integer
+### def Net::HTTP.default_port -> Integer
 
 HTTP のデフォルトポート (80) を返します。
 
-### def https_default_port -> Integer
+### def Net::HTTP.https_default_port -> Integer
 
 HTTPS のデフォルトポート (443) を返します。
 
-### def version_1_1? -> false
-### def is_version_1_1? -> false
+### def Net::HTTP.version_1_1? -> false
+### def Net::HTTP.is_version_1_1? -> false
 
 何もしません。互換性のために残されており、常に false を返します。
 
 - **SEE** [m:Net::HTTP.version_1_2], [m:Net::HTTP.version_1_2?]
 
-### def version_1_2 -> true
+### def Net::HTTP.version_1_2 -> true
 
 何もしません。互換性のために残されており、常に true を返します。
 
 - **SEE** [m:Net::HTTP.version_1_1?], [m:Net::HTTP.version_1_2?]
 
-### def version_1_2? -> true
-### def is_version_1_2? -> true
+### def Net::HTTP.version_1_2? -> true
+### def Net::HTTP.is_version_1_2? -> true
 
 何もしません。互換性のために残されており、常に true を返します。
 

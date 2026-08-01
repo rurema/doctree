@@ -14,7 +14,7 @@ PKCS#12 (秘密鍵、証明書、関連するCA証明書を1つのファイル�
 
 ## Class methods
 
-### def create(pass, name, pkey, cert, ca=nil, key_nid=nil, cert_nid=nil, key_iter=nil, mac_iter=nil, keytype=nil) -> OpenSSL::PKCS12
+### def OpenSSL::PKCS12.create(pass, name, pkey, cert, ca=nil, key_nid=nil, cert_nid=nil, key_iter=nil, mac_iter=nil, keytype=nil) -> OpenSSL::PKCS12
 
 PKCS#12 オブジェクトを生成します。
 
@@ -47,7 +47,7 @@ mac_iter がデフォルトで1なのは古いソフトウェアとの互換性�
 - **param** `keytype` -- 鍵の種類(整数)
 - **raise** `OpenSSL::PKCS12::PKCS12Error` -- オブジェクト生成に失敗した場合に発生します
 
-### def new(obj=nil, pass=nil) -> OpenSSL::PKCS12
+### def OpenSSL::PKCS12.new(obj=nil, pass=nil) -> OpenSSL::PKCS12
 
 文字列もしくは [c:IO] オブジェクトから PKCS#12 オブジェクトを生成します。
 

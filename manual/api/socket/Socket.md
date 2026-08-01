@@ -22,8 +22,8 @@ library: socket
 
 ## Class Methods
 
-### def open(domain, type, protocol=0) -> Socket
-### def new(domain, type, protocol=0) -> Socket
+### def Socket.open(domain, type, protocol=0) -> Socket
+### def Socket.new(domain, type, protocol=0) -> Socket
 
 新しいソケットを生成します。domain、type、
 protocol はインクルードファイルにある定数で指定しま
@@ -50,7 +50,7 @@ Stevens の「UNIX ネットワークプログラミング第2版 Vol.1」4.2節
 - **param** `type` --   例えば、<sys/socket.h> のようなインクルードファイルに定義されている定数を指定します。
 - **param** `protocol` -- プロトコルに使用する数値を指定します。
 
-### def getaddrinfo(nodename, servname, family=nil, socktype=nil, protocol=nil, flags=nil) -> Array
+### def Socket.getaddrinfo(nodename, servname, family=nil, socktype=nil, protocol=nil, flags=nil) -> Array
 
 [RFC:2553]で定義された
 getaddrinfo() の機能を提供するクラスメソッド。この関数は
@@ -139,7 +139,7 @@ pp Socket.getaddrinfo(Socket.gethostname, nil)
 #    ["AF_INET", 0, "helium.ruby-lang.org", "210.251.121.214", 2, 3, 0]]
 ```
 
-### def getnameinfo(sa, flags = 0) -> Array
+### def Socket.getnameinfo(sa, flags = 0) -> Array
 
 [RFC:2553] で定義された getnameinfo() の機能を提供するク
 ラスメソッド。 gethostbyaddr() や getservbyport() の代
@@ -218,7 +218,7 @@ p Socket.getnameinfo([nil, 21,'127.0.0.1'])
 #=> ["localhost", "ftp"]
 ```
 
-### def gethostbyaddr(host, type = Socket::AF_INET) -> Array
+### def Socket.gethostbyaddr(host, type = Socket::AF_INET) -> Array
 
 このメソッドは deprecated です。[m:Addrinfo#getnameinfo] を使用してください。
 
@@ -233,7 +233,7 @@ Socket::AF_INET)を指定します。
 
 - **raise** `SocketError` -- [man:gethostbyaddr(3)] の呼び出しにエラーがあった場合に発生します。
 
-### def gethostbyname(host) -> Array
+### def Socket.gethostbyname(host) -> Array
 
 このメソッドは deprecated です。[m:Addrinfo.getaddrinfo] を使用してください。
 
@@ -271,7 +271,7 @@ irb(main):009:0> Socket.unpack_sockaddr_in(Socket.gethostbyname("210.251.121.214
 "210.251.121.214"
 ```
 
-### def gethostname -> String
+### def Socket.gethostname -> String
 
 システムの標準のホスト名を取得します。
 
@@ -285,7 +285,7 @@ require 'socket'
 p Socket.gethostname   #=> "helium.ruby-lang.org"
 ```
 
-### def getservbyname(service, proto = "tcp") -> Integer
+### def Socket.getservbyname(service, proto = "tcp") -> Integer
 
 service, protoに対応するポート番号を返
 します。protoの省略値は"tcp"です。
@@ -295,8 +295,8 @@ service, protoに対応するポート番号を返
 
 - **return** -- ポート番号を整数で返します。
 
-### def sockaddr_in(port, host) -> String
-### def pack_sockaddr_in(port, host) -> String
+### def Socket.sockaddr_in(port, host) -> String
+### def Socket.pack_sockaddr_in(port, host) -> String
 
 指定したアドレスを[ref:lib:socket#pack_string]
 で返します。port は、ポート番号を表す [c:Integer] あるいは、ポート
@@ -316,8 +316,8 @@ p Socket.sockaddr_in("echo", "::1")
 => "\n\000\000\a\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\001\000\000\000\000"
 ```
 
-### def sockaddr_un(path) -> String
-### def pack_sockaddr_un(path) -> String
+### def Socket.sockaddr_un(path) -> String
+### def Socket.pack_sockaddr_un(path) -> String
 
 指定したアドレスを[ref:lib:socket#pack_string]
 で返します。
@@ -330,8 +330,8 @@ p Socket.sockaddr_un("/tmp/.X11-unix/X0")
 => "\001\000/tmp/.X11-unix/X0\000...."
 ```
 
-### def pair(domain, type, protocol=0) -> Array
-### def socketpair(domain, type, protocol=0) -> Array
+### def Socket.pair(domain, type, protocol=0) -> Array
+### def Socket.socketpair(domain, type, protocol=0) -> Array
 
 相互に結合されたソケットのペアを含む2要素の配列を返します。
 引数の指定は [m:Socket.open] と同じです。
@@ -344,7 +344,7 @@ p Socket.sockaddr_un("/tmp/.X11-unix/X0")
 
 - **SEE** [m:Socket.open]
 
-### def unpack_sockaddr_in(sockaddr) -> Array
+### def Socket.unpack_sockaddr_in(sockaddr) -> Array
 
 [ref:lib:socket#pack_string]を
 unpack したアドレスを返します。返される値は [port, ipaddr]
@@ -360,7 +360,7 @@ p Socket.unpack_sockaddr_in(Socket.sockaddr_in("echo", "::1"))
 => [7, "::1"]
 ```
 
-### def unpack_sockaddr_un(sockaddr) -> String
+### def Socket.unpack_sockaddr_un(sockaddr) -> String
 
 [ref:lib:socket#pack_string]を
 unpack したソケットパス名を返します。
@@ -373,7 +373,7 @@ p Socket.unpack_sockaddr_un(Socket.sockaddr_un("/tmp/.X11-unix/X0"))
 => "/tmp/.X11-unix/X0"
 ```
 
-### def getservbyport(port, protocol_name="tcp") -> String
+### def Socket.getservbyport(port, protocol_name="tcp") -> String
 
 ポート番号に対応するサービスの正式名を返します。
 #%#rdoc の Obtains the port number for _port_. って変?
@@ -390,7 +390,7 @@ p Socket.getservbyport(514, "tcp") #=> "shell"
 p Socket.getservbyport(514, "udp") #=> "syslog"
 ```
 
-### def accept_loop(sockets) {|sock, client_addrinfo| ...} -> ()
+### def Socket.accept_loop(sockets) {|sock, client_addrinfo| ...} -> ()
 
 sockets でサーバソケットを受け取り、接続を待ち受け、
 クライアントとの接続が確立するたびにブロックにその接続
@@ -409,21 +409,21 @@ sockets でサーバソケットを受け取り、接続を待ち受け、
 
 - **SEE** [m:Socket.tcp_server_loop], [m:Socket.unix_server_loop]
 
-### def ip_address_list -> [Addrinfo]
+### def Socket.ip_address_list -> [Addrinfo]
 
 ローカルの IP アドレスを配列で返します。
 
 #%version 4.0...
-### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, open_timeout: nil, fast_fallback: true) -> Socket
-### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, open_timeout: nil, fast_fallback: true) {|socket| ... } -> object
+### def Socket.tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, open_timeout: nil, fast_fallback: true) -> Socket
+### def Socket.tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, open_timeout: nil, fast_fallback: true) {|socket| ... } -> object
 #%end
 #%version 3.4...4.0
-### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, fast_fallback: true) -> Socket
-### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, fast_fallback: true) {|socket| ... } -> object
+### def Socket.tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, fast_fallback: true) -> Socket
+### def Socket.tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, fast_fallback: true) {|socket| ... } -> object
 #%end
 #%until 3.4
-### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil) -> Socket
-### def tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil) {|socket| ... } -> object
+### def Socket.tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil) -> Socket
+### def Socket.tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil) {|socket| ... } -> object
 #%end
 TCP/IP で host:port に接続するソケットオブジェクトを作成します。
 
@@ -457,8 +457,8 @@ Socket.tcp("www.ruby-lang.org", 80) {|sock|
 }
 ```
 
-### def tcp_server_loop(port){|sock,addr| ...} -> ()
-### def tcp_server_loop(host, port){|sock,addr| ...} -> ()
+### def Socket.tcp_server_loop(port){|sock,addr| ...} -> ()
+### def Socket.tcp_server_loop(host, port){|sock,addr| ...} -> ()
 
 TCP/IP で host:port で待ち受けるサーバ側のソケットを作成し、
 新しい接続を受け入れるごとにブロックを呼び出します。
@@ -517,10 +517,10 @@ Socket.tcp_server_loop(16807) {|sock, client_addrinfo|
 - **param** `port` -- 割り当てるポート番号
 - **SEE** [m:Socket.tcp_server_sockets], [m:Socket.accept_loop]
 
-### def tcp_server_sockets(port) -> [Socket]
-### def tcp_server_sockets(host, port) -> [Socket]
-### def tcp_server_sockets(port){|sockets| ...}  -> object
-### def tcp_server_sockets(host, port){|sockets| ...}  -> object
+### def Socket.tcp_server_sockets(port) -> [Socket]
+### def Socket.tcp_server_sockets(host, port) -> [Socket]
+### def Socket.tcp_server_sockets(port){|sockets| ...}  -> object
+### def Socket.tcp_server_sockets(host, port){|sockets| ...}  -> object
 
 TCP/IP で host:port で待ち受けるサーバ側のソケットを
 作成します。
@@ -562,8 +562,8 @@ Socket.tcp_server_sockets(0) {|sockets|
 - **param** `port` -- 割り当てるポート番号
 - **SEE** [m:Socket.tcp_server_loop]
 
-### def udp_server_loop(port) {|msg, msg_src| ... } -> ()
-### def udp_server_loop(host, port) {|msg, msg_src| ... } -> ()
+### def Socket.udp_server_loop(port) {|msg, msg_src| ... } -> ()
+### def Socket.udp_server_loop(host, port) {|msg, msg_src| ... } -> ()
 
 UDP のサーバを起動して、メッセージが来るごとに
 ブロックを呼び出します。
@@ -576,7 +576,7 @@ msg は受け取ったメッセージ文字列で、 msg_src は
 - **param** `port` -- 割り当てるポート番号
 - **SEE** [m:Socket.udp_server_sockets], [m:Socket.udp_server_loop_on]
 
-### def udp_server_loop_on(sockets) {|msg, msg_src| ... } -> ()
+### def Socket.udp_server_loop_on(sockets) {|msg, msg_src| ... } -> ()
 
 sockets (UDP のソケット)に対し、通信を待ち受けます。
 
@@ -592,7 +592,7 @@ msg は受け取ったメッセージ文字列で、 msg_src は
 - **param** `sockets` -- 通信を待ち受けるソケットの配列
 - **SEE** [m:Socket.udp_server_recv], [m:Socket.udp_server_loop]
 
-### def udp_server_recv(sockets){|msg, msg_src| ... } -> ()
+### def Socket.udp_server_recv(sockets){|msg, msg_src| ... } -> ()
 
 socketsで与えられた各 UDP ソケットからデータを読み取ります。
 
@@ -617,10 +617,10 @@ udp_server_sockets(host, port) {|sockets|
 
 - **param** `sockets` -- 読み込むソケットの配列
 
-### def udp_server_sockets(port) -> [Sockets]
-### def udp_server_sockets(host, port) -> [Sockets]
-### def udp_server_sockets(port) {|sockets| ... } -> object
-### def udp_server_sockets(host, port) {|sockets| ... } -> object
+### def Socket.udp_server_sockets(port) -> [Sockets]
+### def Socket.udp_server_sockets(host, port) -> [Sockets]
+### def Socket.udp_server_sockets(port) {|sockets| ... } -> object
+### def Socket.udp_server_sockets(host, port) {|sockets| ... } -> object
 
 UDP で host:port を待ち受けるサーバ側のソケットを作成します。
 
@@ -647,8 +647,8 @@ Socket.udp_server_sockets(0) {|sockets|
 - **param** `host` -- 割り当てるホスト名
 - **param** `port` -- 割り当てるポート番号
 
-### def unix(path) -> Socket
-### def unix(path){|sock| ... } -> object
+### def Socket.unix(path) -> Socket
+### def Socket.unix(path){|sock| ... } -> object
 
 Unix クライアントソケットを生成します。
 
@@ -672,7 +672,7 @@ Socket.unix("/tmp/sock") {|sock|
 
 - **param** `path` -- 接続対象のパス(文字列)
 
-### def unix_server_loop(path) {|socket, client_addrinfo| ... } -> ()
+### def Socket.unix_server_loop(path) {|socket, client_addrinfo| ... } -> ()
 
 Unix サーバソケットを生成し、
 新しい接続を受け入れるごとにブロックを呼び出します。
@@ -693,8 +693,8 @@ path という名前のファイルが既に存在するときは、
 
 - **param** `path` -- 接続を待ち受けるパス(文字列)
 
-### def unix_server_socket(path) -> Socket
-### def unix_server_socket(path){|sock| ... } -> object
+### def Socket.unix_server_socket(path) -> Socket
+### def Socket.unix_server_socket(path){|sock| ... } -> object
 
 Unix サーバソケットを生成します。
 
@@ -720,7 +720,7 @@ Socket.unix_server_socket("/tmp/sock") {|s|
 
 - **param** `path` -- 接続を待ち受けるパス(文字列)
 
-### def getifaddrs -> [Socket::Ifaddr]
+### def Socket.getifaddrs -> [Socket::Ifaddr]
 
 インターフェイスのアドレスを [c:Socket::Ifaddr] の配列で返します。
 

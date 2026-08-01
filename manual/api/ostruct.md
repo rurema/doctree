@@ -76,7 +76,7 @@ p o.class!        # => OpenStruct
 以上の理由から OpenStruct を一切使用しないことを検討してください。
 
 ## Class Methods
-### def new(hash = nil) -> OpenStruct
+### def OpenStruct.new(hash = nil) -> OpenStruct
 
 OpenStruct オブジェクトを生成します。
 

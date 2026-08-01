@@ -63,8 +63,8 @@ end
 
 ## Class Methods
 
-### def new(host=nil, service) -> TCPServer
-### def open(host=nil, service) -> TCPServer
+### def TCPServer.new(host=nil, service) -> TCPServer
+### def TCPServer.open(host=nil, service) -> TCPServer
 
 新しいサーバー接続をオープンします。service は
 /etc/services (または NIS) に登録されているサービ

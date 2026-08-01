@@ -5,7 +5,7 @@ library: win32/registry
 
 ## Class Methods
 
-### def new(hkey, keyname)
+### def Win32::Registry::PredefinedKey.new(hkey, keyname)
 #%todo
 
 ## Instance Methods

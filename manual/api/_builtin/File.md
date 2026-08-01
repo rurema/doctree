@@ -13,7 +13,7 @@ include:
 
 ## Class Methods
 
-### def atime(filename)    -> Time
+### def File.atime(filename)    -> Time
 
 最終アクセス時刻を返します。
 
@@ -25,7 +25,7 @@ include:
 p File.atime(__FILE__) # => 2017-11-28 22:38:44 +0900
 ```
 
-### def ctime(filename)    -> Time
+### def File.ctime(filename)    -> Time
 
 状態が最後に変更された時刻を返します。
 状態の変更とは chmod などによるものです。
@@ -41,7 +41,7 @@ File.chmod(0755, "testfile")
 p File.ctime("testfile") # => 2017-11-30 22:42:12 +0900
 ```
 
-### def mtime(filename)    -> Time
+### def File.mtime(filename)    -> Time
 
 最終更新時刻を返します。
 
@@ -53,7 +53,7 @@ p File.ctime("testfile") # => 2017-11-30 22:42:12 +0900
 p File.mtime(__FILE__) # => 2017-12-03 03:16:22 +0900
 ```
 
-### def birthtime(filename) -> Time
+### def File.birthtime(filename) -> Time
 
 作成された時刻を返します。
 
@@ -67,7 +67,7 @@ p File.mtime(__FILE__) # => 2017-12-03 03:16:22 +0900
 p File.birthtime("testfile") #=> Wed Apr 09 08:53:13 CDT 2003
 ```
 
-### def basename(filename, suffix = "")     -> String
+### def File.basename(filename, suffix = "")     -> String
 
 filename の一番後ろのスラッシュに続く要素を返します。もし、
 引数 suffix が与えられて、かつそれが filename の末尾に
@@ -96,7 +96,7 @@ p File.basename("foo/bar/")      # => "bar"
 
 - **SEE** [m:File.dirname], [m:File.extname]
 
-### def chmod(mode, *filename)    -> Integer
+### def File.chmod(mode, *filename)    -> Integer
 
 ファイルのモードを mode に変更します。モードを変更したファイ
 ルの数を返します。
@@ -107,7 +107,7 @@ p File.basename("foo/bar/")      # => "bar"
 
 - **raise** `Errno::EXXX` -- モードの変更に失敗した場合に発生します。
 
-### def lchmod(mode, *filename)    -> Integer
+### def File.lchmod(mode, *filename)    -> Integer
 
 [m:File.chmod] と同様ですが、シンボリックリンクに関してリンクそのものの
 モードを変更します。
@@ -129,7 +129,7 @@ p File.stat("testlink").mode.to_s(8)    # => "100644"
 p File.lstat("testlink").mode.to_s(8)   # => "120744"
 ```
 
-### def chown(owner, group, *filename)    -> Integer
+### def File.chown(owner, group, *filename)    -> Integer
 
 ファイルのオーナーとグループを変更します。スーパーユーザだけがファ
 イルのオーナーとグループを変更できます。変更を行ったファイルの数を
@@ -151,7 +151,7 @@ p File.stat("test.txt").uid # => 502
 
 - **SEE** [m:File#chown]
 
-### def lchown(owner, group, *filename)    -> Integer
+### def File.lchown(owner, group, *filename)    -> Integer
 
 [m:File#chown] と同様ですが、
 シンボリックリンクに関してリンクそのもののオーナー、
@@ -175,8 +175,8 @@ p File.stat("testlink").uid     # => 501
 p File.lstat("testlink").uid    # => 0
 ```
 
-### def delete(*filename)    -> Integer
-### def unlink(*filename)    -> Integer
+### def File.delete(*filename)    -> Integer
+### def File.unlink(*filename)    -> Integer
 
 ファイルを削除します。削除したファイルの数を返します。
 削除に失敗した場合は例外 [c:Errno::EXXX] が発生します。
@@ -201,9 +201,9 @@ end
 ```
 
 #%since 3.1
-### def dirname(filename, level=1)    -> String
+### def File.dirname(filename, level=1)    -> String
 #%else
-### def dirname(filename)    -> String
+### def File.dirname(filename)    -> String
 #%end
 
 filename の一番後ろのスラッシュより前を文
@@ -243,7 +243,7 @@ p File.dirname("/home/gumby/work/ruby.rb", 4) # => "/"
 
 - **SEE** [m:File.basename], [m:File.extname]
 
-### def expand_path(path, default_dir = '.')    -> String
+### def File.expand_path(path, default_dir = '.')    -> String
 
 path を絶対パスに展開した文字列を返します。
 path が相対パスであれば default_dir を基準にします。
@@ -264,7 +264,7 @@ p File.expand_path("~foo")       #=> "/home/foo"
 
 - **param** `default_dir` -- path が相対パスであれば default_dir を基準に展開されます。
 
-### def absolute_path(file_name, dir_string=nil) -> String
+### def File.absolute_path(file_name, dir_string=nil) -> String
 
 file_name を絶対パスに変換した文字列を返します。
 
@@ -285,7 +285,7 @@ p File.absolute_path("~foo")       #=> "/home/matz/work/bar/~foo"
 
 - **SEE** [m:File.expand_path]
 
-### def absolute_path?(file_name) -> bool
+### def File.absolute_path?(file_name) -> bool
 
 file_name が絶対パスなら true を、そうでなければ false を返します。
 
@@ -307,7 +307,7 @@ p File.absolute_path?("C:\\foo\\bar") # => false
 p File.absolute_path?("/foo/bar\\baz")  # => true
 ```
 
-### def extname(filename)    -> String
+### def File.extname(filename)    -> String
 
 ファイル名 filename の拡張子部分(最後の "." に続く文字列)を
 返します。ディレクトリ名に含まれる "." や、ファイル名先頭の "."
@@ -332,8 +332,8 @@ p File.extname("foo.")            # => "."
 
 - **SEE** [m:File.basename], [m:File.dirname]
 
-### def fnmatch(pattern, path, flags = 0)     -> bool
-### def fnmatch?(pattern, path, flags = 0)    -> bool
+### def File.fnmatch(pattern, path, flags = 0)     -> bool
+### def File.fnmatch?(pattern, path, flags = 0)    -> bool
 
 ファイル名のパターンのマッチ [man:fnmatch(3)] を行います。
 path が pattern にマッチすれば真を返します。そうでない場合には false を返します。
@@ -417,7 +417,7 @@ path が pattern にマッチすれば真を返します。そうでない場合
   p File.fnmatch('{foo,bar{foo,bar}}', 'barfoo', File::FNM_EXTGLOB) # => true
   ```
 
-### def ftype(filename)    -> String
+### def File.ftype(filename)    -> String
 
 ファイルのタイプを表す文字列を返します。
 
@@ -443,7 +443,7 @@ p File.ftype("/dev/tty")          # => "characterSpecial"
 p File.ftype("/tmp/.X11-unix/X0") # => "socket"
 ```
 
-### def join(*item)    -> String
+### def File.join(*item)    -> String
 
 [m:File::SEPARATOR]を間に入れて文字列を連結します。
 
@@ -470,7 +470,7 @@ p File.join([])                           # => ""
 p File.join                               # => ""
 ```
 
-### def link(old, new)    -> 0
+### def File.link(old, new)    -> 0
 
 old を指す new という名前のハードリンクを
 生成します。old はすでに存在している必要があります。
@@ -490,9 +490,9 @@ p File.link("testfile", "testlink") # => 0
 p IO.read("testlink")               # => "test"
 ```
 
-### def new(path, mode = "r", perm = 0666, **opts)                -> File 
-### def open(path, mode = "r", perm = 0666, **opts)               -> File 
-### def open(path, mode = "r", perm = 0666, **opts) {|file| ... } -> object
+### def File.new(path, mode = "r", perm = 0666, **opts)                -> File 
+### def File.open(path, mode = "r", perm = 0666, **opts)               -> File 
+### def File.open(path, mode = "r", perm = 0666, **opts) {|file| ... } -> object
 
 path で指定されるファイルをオープンし、[c:File] オブジェクトを生成して
 返します。
@@ -530,7 +530,7 @@ File.open("testfile", "w", 0755) { |f| f.print "test" }
 p File.read("testfile")  # => "test"
 ```
 
-### def path(filename)    -> String
+### def File.path(filename)    -> String
 
 指定されたファイル名を文字列で返します。filename が文字列でない場合は、to_path メソッドを呼びます。
 
@@ -553,7 +553,7 @@ p File.path(Pathname("/tmp"))   # => "/tmp"
 p File.path(MyPath.new("."))    # => "/Users/user/projects/txt"
 ```
 
-### def readlink(path)    -> String
+### def File.readlink(path)    -> String
 
 シンボリックリンクのリンク先のパスを文字列で返します。
 
@@ -567,7 +567,7 @@ p File.symlink("testfile", "testlink") # => 0
 p File.readlink("testlink")            # => "testfile"
 ```
 
-### def realpath(pathname, basedir = nil) -> String
+### def File.realpath(pathname, basedir = nil) -> String
 
 与えられた pathname に対応する絶対パスを返します。
 
@@ -587,7 +587,7 @@ p File.realpath("testlink")     # => "/home/matz/testfile"
 p File.realpath("..", "/tmp")   # => "/"
 ```
 
-### def realdirpath(pathname, basedir = nil) -> String
+### def File.realdirpath(pathname, basedir = nil) -> String
 
 与えられた pathname に対応する絶対パスを返します。
 
@@ -599,7 +599,7 @@ pathname の最後のコンポーネントは存在していなくても例外�
 
 - **raise** `Errno::ENOENT` -- ファイルが存在しない場合に発生します。
 
-### def rename(from, to)    -> 0
+### def File.rename(from, to)    -> 0
 
 ファイルの名前を変更します。ディレクトリが異なる場合には移動も行い
 ます。[man:rename(2)] を参照してください。移動先のファ
@@ -624,7 +624,7 @@ rescue
 end
 ```
 
-### def split(pathname)    -> [String]
+### def File.split(pathname)    -> [String]
 
 pathname を dirname とbasename に分割して、2 要
 素の配列を返します。
@@ -637,7 +637,7 @@ pathname を dirname とbasename に分割して、2 要
 
 - **param** `pathname` -- パス名を表す文字列を指定します。 
 
-### def stat(filename)    -> File::Stat
+### def File.stat(filename)    -> File::Stat
 
 filename の情報を含む [c:File::Stat] オブジェクトを生成し
 て返します。
@@ -653,7 +653,7 @@ p File.stat("testfile").mtime # => 2017-12-10 01:13:56 +0900
 
 - **SEE** [m:IO#stat], [m:File#lstat]
 
-### def lstat(filename)   -> File::Stat
+### def File.lstat(filename)   -> File::Stat
 
 [m:File.stat]と同様ですが、シンボリックリンクに関してリンクそのものの
 情報を File::Stat として返します。[man:lstat(2)] を実装していないシステムでは、File.stat と同じです。
@@ -670,7 +670,7 @@ p File.stat("link.rb")  == File.stat("t.rb") # => true
 
 - **SEE** [m:IO#stat], [m:File#lstat]
 
-### def symlink(old, new)    -> 0
+### def File.symlink(old, new)    -> 0
 
 old への new という名前のシンボリックリンクを生成します。
 
@@ -687,7 +687,7 @@ old への new という名前のシンボリックリンクを生成します�
 p File.symlink("testfile", "testlink") # => 0
 ```
 
-### def truncate(path, length)    -> 0
+### def File.truncate(path, length)    -> 0
 
 path で指定されたファイルのサイズを最大 length バイト
 にします。
@@ -707,13 +707,13 @@ p File.truncate("testfile", 5) # => 0
 p File.size("testfile")        # => 5
 ```
 
-### def umask           -> Integer
+### def File.umask           -> Integer
 
 現在の umask の値を返します。
 
 - **SEE** [man:umask(2)]
 
-### def umask(umask)    -> Integer
+### def File.umask(umask)    -> Integer
 
 umask を変更します。変更前の umask の値を返します。
 
@@ -726,7 +726,7 @@ p File.umask       # => 6
 
 - **SEE** [man:umask(2)]
 
-### def utime(atime, mtime, *filename)    -> Integer
+### def File.utime(atime, mtime, *filename)    -> Integer
 
 ファイルの最終アクセス時刻と更新時刻を変更します。
 シンボリックリンクに対しては [m:File.lutime]　と違って、
@@ -758,7 +758,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **SEE** [m:File.lutime]
 
-### def lutime(atime, mtime, *filename)    -> Integer
+### def File.lutime(atime, mtime, *filename)    -> Integer
 
 ファイルの最終アクセス時刻と更新時刻を変更します。
 シンボリックリンクに対しては [m:File.utime]　と違って、
@@ -776,7 +776,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **SEE** [m:File.utime]
 
-### def blockdev?(path)    -> bool
+### def File.blockdev?(path)    -> bool
 
 [m:FileTest?.blockdev?] と同じです。
 
@@ -786,7 +786,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 - **SEE** [m:FileTest?.blockdev?]
 
-### def chardev?(path)    -> bool
+### def File.chardev?(path)    -> bool
 
 [m:FileTest?.chardev?] と同じです。
 
@@ -794,7 +794,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def directory?(path)    -> bool
+### def File.directory?(path)    -> bool
 
 [m:FileTest?.directory?] と同じです。
 
@@ -802,7 +802,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def executable?(path)    -> bool
+### def File.executable?(path)    -> bool
 
 [m:FileTest?.executable?] と同じです。
 
@@ -810,7 +810,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def executable_real?(path)    -> bool
+### def File.executable_real?(path)    -> bool
 
 [m:FileTest?.executable_real?] と同じです。
 
@@ -818,7 +818,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def exist?(path)    -> bool
+### def File.exist?(path)    -> bool
 
 [m:FileTest?.exist?] と同じです。
 
@@ -827,13 +827,13 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 #%#noexample
 
 #%until 3.2
-### def exists?(path)    -> bool
+### def File.exists?(path)    -> bool
 
 このメソッドは Ruby 2.1 から deprecated です。[m:File.exist?] を使用してください。
 
 #%#noexample
 #%end
-### def file?(path)    -> bool
+### def File.file?(path)    -> bool
 
 [m:FileTest?.file?] と同じです。
 
@@ -841,7 +841,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def grpowned?(path)    -> bool
+### def File.grpowned?(path)    -> bool
 
 [m:FileTest?.grpowned?] と同じです。
 
@@ -849,7 +849,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def owned?(path)    -> bool
+### def File.owned?(path)    -> bool
 
 [m:FileTest?.owned?] と同じです。
 
@@ -857,7 +857,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def identical?(filename1, filename2)    -> bool
+### def File.identical?(filename1, filename2)    -> bool
 
 [m:FileTest?.identical?] と同じです。
 
@@ -867,7 +867,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def pipe?(path)    -> bool
+### def File.pipe?(path)    -> bool
 
 [m:FileTest?.pipe?] と同じです。
 
@@ -875,7 +875,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def readable?(path)    -> bool
+### def File.readable?(path)    -> bool
 
 [m:FileTest?.readable?] と同じです。
 
@@ -883,7 +883,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def readable_real?(path)    -> bool
+### def File.readable_real?(path)    -> bool
 
 [m:FileTest?.readable_real?] と同じです。
 
@@ -891,7 +891,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def setgid?(path)    -> bool
+### def File.setgid?(path)    -> bool
 
 [m:FileTest?.setgid?] と同じです。
 
@@ -899,7 +899,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def setuid?(path)    -> bool
+### def File.setuid?(path)    -> bool
 
 [m:FileTest?.setuid?] と同じです。
 
@@ -907,13 +907,13 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def size(path)    -> Integer
+### def File.size(path)    -> Integer
 
 [m:FileTest?.size] と同じです。
 
 - **param** `path` -- パスを表す文字列か IO オブジェクトを指定します。
 
-### def size?(path)    -> Integer | nil
+### def File.size?(path)    -> Integer | nil
 
 [m:FileTest?.size?] と同じです。
 
@@ -921,7 +921,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def socket?(path)    -> bool
+### def File.socket?(path)    -> bool
 
 [m:FileTest?.socket?] と同じです。
 
@@ -929,7 +929,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def sticky?(path)    -> bool
+### def File.sticky?(path)    -> bool
 
 [m:FileTest?.sticky?] と同じです。
 
@@ -937,7 +937,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def symlink?(path)    -> bool
+### def File.symlink?(path)    -> bool
 
 [m:FileTest?.symlink?] と同じです。
 
@@ -945,7 +945,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def writable?(path)    -> bool
+### def File.writable?(path)    -> bool
 
 [m:FileTest?.writable?] と同じです。
 
@@ -953,7 +953,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def writable_real?(path)    -> bool
+### def File.writable_real?(path)    -> bool
 
 [m:FileTest?.writable_real?] と同じです。
 
@@ -961,8 +961,8 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def zero?(path)    -> bool
-### def empty?(path)   -> bool
+### def File.zero?(path)    -> bool
+### def File.empty?(path)   -> bool
 
 [m:FileTest?.zero?] と同じです。
 
@@ -970,7 +970,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 #%#noexample
 
-### def world_readable?(path)    -> Integer | nil
+### def File.world_readable?(path)    -> Integer | nil
 
 path が全てのユーザから読めるならばそのファイルのパーミッションを表す
 整数を返します。そうでない場合は nil を返します。
@@ -984,7 +984,7 @@ m = File.world_readable?("/etc/passwd")
 p "%o" % m                             # => "644"
 ```
 
-### def world_writable?(path)    -> bool
+### def File.world_writable?(path)    -> bool
 
 path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
 整数を返します。そうでない場合は nil を返します。
@@ -998,7 +998,7 @@ m = File.world_writable?("/tmp")
 p "%o" % m                             #=> "777"
 ```
 
-### def mkfifo(file_name, mode = 0666) -> 0
+### def File.mkfifo(file_name, mode = 0666) -> 0
 
 引数 file_name で指定した名前の FIFO スペシャルファイルを作成します。
 

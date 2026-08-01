@@ -67,7 +67,7 @@ end
 
 ## Singleton Methods
 
-### def new(task_name, tail)
+### def Rake::InvocationChain.new(task_name, tail)
 
 与えられたタスク名と一つ前の [c:Rake::InvocationChain] を用いて自身を初期化します。
 
@@ -87,7 +87,7 @@ task :test_rake_app do
 end
 ```
 
-### def append(task_name, chain) -> Rake::InvocationChain
+### def Rake::InvocationChain.append(task_name, chain) -> Rake::InvocationChain
 
 与えられたタスク名を第二引数の [c:Rake::InvocationChain] に追加します。
 

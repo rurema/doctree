@@ -27,7 +27,7 @@ RDoc 形式のドキュメントをエスケープシーケンスで太字やア
 
 ## Class Methods
 
-### def new(markup = nil) -> RDoc::Markup::ToBs
+### def RDoc::Markup::ToBs.new(markup = nil) -> RDoc::Markup::ToBs
 
 自身を初期化します。
 

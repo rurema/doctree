@@ -168,21 +168,21 @@ end
 
 ## Singleton Methods
 
-### def input=(input)
+### def Readline.input=(input)
 
 readline メソッドで使用する入力用の [c:File] オブジェクト input を指定します。
 戻り値は指定した [c:File] オブジェクト input です。
 
 - **param** `input` -- [c:File] オブジェクトを指定します。
 
-### def output=(output)
+### def Readline.output=(output)
 
 readline メソッドで使用する出力用の [c:File] オブジェクト output を指定します。
 戻り値は指定した [c:File] オブジェクト output です。
 
 - **param** `output` -- [c:File] オブジェクトを指定します。
 
-### def completion_proc=(proc)
+### def Readline.completion_proc=(proc)
 
 ユーザからの入力を補完する時の候補を取得する [c:Proc] オブジェクト
 proc を指定します。
@@ -218,14 +218,14 @@ end
 
 - **SEE** [m:Readline.completion_proc]
 
-### def completion_proc -> Proc
+### def Readline.completion_proc -> Proc
 
 ユーザからの入力を補完する時の候補を取得する [c:Proc] オブジェクト
 proc を取得します。
 
 - **SEE** [m:Readline.completion_proc=]
 
-### def completion_case_fold=(bool)
+### def Readline.completion_case_fold=(bool)
 
 ユーザの入力を補完する際、大文字と小文字を同一視する／しないを指定します。
 bool が真ならば同一視します。bool が偽ならば同一視しません。
@@ -234,7 +234,7 @@ bool が真ならば同一視します。bool が偽ならば同一視しませ�
 
 - **SEE** [m:Readline.completion_case_fold]
 
-### def completion_case_fold -> bool
+### def Readline.completion_case_fold -> bool
 
 ユーザの入力を補完する際、大文字と小文字を同一視する／しないを取得します。
 bool が真ならば同一視します。bool が偽ならば同一視しません。
@@ -250,7 +250,7 @@ p Readline.completion_case_fold # => "This is a String."
 
 - **SEE** [m:Readline.completion_case_fold=]
 
-### def vi_editing_mode -> nil
+### def Readline.vi_editing_mode -> nil
 
 編集モードを vi モードにします。
 vi モードの詳細は、GNU Readline のマニュアルを参照してください。
@@ -259,7 +259,7 @@ vi モードの詳細は、GNU Readline のマニュアルを参照してくだ�
 
 - **raise** `NotImplementedError` -- サポートしていない環境で発生します。
 
-### def emacs_editing_mode -> nil
+### def Readline.emacs_editing_mode -> nil
 
 編集モードを Emacs モードにします。デフォルトは Emacs モードです。
 
@@ -269,7 +269,7 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してく
 
 - **raise** `NotImplementedError` -- サポートしていない環境で発生します。
 
-### def completion_append_character=(string)
+### def Readline.completion_append_character=(string)
 
 ユーザの入力の補完が完了した場合に、最後に付加する文字 string を指定します。
 
@@ -302,7 +302,7 @@ p Readline.completion_append_character # => "s"
 
 - **SEE** [m:Readline.completion_append_character]
 
-### def completion_append_character -> String
+### def Readline.completion_append_character -> String
 
 ユーザの入力の補完が完了した場合に、最後に付加する文字を取得します。
 
@@ -310,7 +310,7 @@ p Readline.completion_append_character # => "s"
 
 - **SEE** [m:Readline.completion_append_character=]
 
-### def basic_word_break_characters=(string)
+### def Readline.basic_word_break_characters=(string)
 
 ユーザの入力の補完を行う際、
 単語の区切りを示す複数の文字で構成される文字列 string を指定します。
@@ -324,7 +324,7 @@ GNU Readline のデフォルト値は、Bash の補完処理で使用してい�
 
 - **SEE** [m:Readline.basic_word_break_characters]
 
-### def basic_word_break_characters -> String
+### def Readline.basic_word_break_characters -> String
 
 ユーザの入力の補完を行う際、
 単語の区切りを示す複数の文字で構成される文字列を取得します。
@@ -333,7 +333,7 @@ GNU Readline のデフォルト値は、Bash の補完処理で使用してい�
 
 - **SEE** [m:Readline.basic_word_break_characters=]
 
-### def completer_word_break_characters=(string)
+### def Readline.completer_word_break_characters=(string)
 
 ユーザの入力の補完を行う際、
 単語の区切りを示す複数の文字で構成される文字列 string を指定します。
@@ -349,7 +349,7 @@ GNU Readline のデフォルトの値は、
 
 - **SEE** [m:Readline.completer_word_break_characters]
 
-### def completer_word_break_characters -> String
+### def Readline.completer_word_break_characters -> String
 
 ユーザの入力の補完を行う際、
 単語の区切りを示す複数の文字で構成された文字列を取得します。
@@ -360,7 +360,7 @@ GNU Readline の rl_complete_internal 関数で使用されることです。
 
 - **SEE** [m:Readline.completer_word_break_characters=]
 
-### def basic_quote_characters=(string)
+### def Readline.basic_quote_characters=(string)
 
 スペースなどの単語の区切りをクオートするための
 複数の文字で構成される文字列 string を指定します。
@@ -373,7 +373,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 - **SEE** [m:Readline.basic_quote_characters]
 
-### def basic_quote_characters -> String
+### def Readline.basic_quote_characters -> String
 
 スペースなどの単語の区切りをクオートするための
 複数の文字で構成される文字列を取得します。
@@ -382,7 +382,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 - **SEE** [m:Readline.basic_quote_characters=]
 
-### def completer_quote_characters=(string)
+### def Readline.completer_quote_characters=(string)
 
 ユーザの入力の補完を行う際、スペースなどの単語の区切りを
 クオートするための複数の文字で構成される文字列 string を指定します。
@@ -395,7 +395,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 - **SEE** [m:Readline.completer_quote_characters]
 
-### def completer_quote_characters -> String
+### def Readline.completer_quote_characters -> String
 
 ユーザの入力の補完を行う際、スペースなどの単語の区切りを
 クオートするための複数の文字で構成される文字列を取得します。
@@ -404,7 +404,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 - **SEE** [m:Readline.completer_quote_characters=]
 
-### def filename_quote_characters=(string)
+### def Readline.filename_quote_characters=(string)
 
 ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りを
 クオートするための複数の文字で構成される文字列 string を指定します。
@@ -417,7 +417,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 - **SEE** [m:Readline.filename_quote_characters]
 
-### def filename_quote_characters -> String
+### def Readline.filename_quote_characters -> String
 
 ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りを
 クオートするための複数の文字で構成される文字列を取得します。

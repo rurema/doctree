@@ -24,7 +24,7 @@ end
 
 ## Class Methods
 
-### def new(*enums) -> Enumerator::Product
+### def Enumerator::Product.new(*enums) -> Enumerator::Product
 
 与えた [c:Enumerable] なオブジェクトの直積を列挙する Enumerator を作って返します。
 

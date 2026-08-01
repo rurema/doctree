@@ -17,7 +17,7 @@ section に関する情報を保持するクラスです。
 
 ## Class Methods
 
-### def new(parent, title, comment) -> RDoc::Context::Section
+### def RDoc::Context::Section.new(parent, title, comment) -> RDoc::Context::Section
 
 自身を初期化します。
 

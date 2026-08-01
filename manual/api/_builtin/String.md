@@ -180,7 +180,7 @@ p a + b                            #=> "abcabc"
 
 ## Class Methods
 
-### def try_convert(obj) -> String | nil
+### def String.try_convert(obj) -> String | nil
 
 obj を String に変換しようと試みます。変換には [m:Object#to_str] メソッ
 ドが使われます。変換後の文字列を返すか、何らかの理由により変換できなかっ
@@ -194,8 +194,8 @@ p String.try_convert("str")   # => "str"
 p String.try_convert(/re/)    # => nil
 ```
 
-### def new(string = "")                -> String
-### def new(string = "", encoding: string.encoding, capacity: Integer) -> String
+### def String.new(string = "")                -> String
+### def String.new(string = "", encoding: string.encoding, capacity: Integer) -> String
 
 string と同じ内容の新しい文字列を作成して返します。
 引数を省略した場合は空文字列を生成して返します。

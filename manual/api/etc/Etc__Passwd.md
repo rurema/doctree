@@ -30,8 +30,8 @@ alias:
 
 ## Class Methods
 
-### def each {|entry| ... } -> Etc::Passwd
-### def each                -> Enumerator
+### def Etc::Passwd.each {|entry| ... } -> Etc::Passwd
+### def Etc::Passwd.each                -> Enumerator
 
 /etc/passwd に含まれるエントリを一つずつブロックに渡して評価します。
 ブロックを省略した場合は [c:Enumerator] を返します。

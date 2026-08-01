@@ -28,8 +28,8 @@ p doc.root[3].string # => " zz "
 ## Class Methods
 
 #%# --- new(source) -> REXML::Comment
-### def new(string, parent = nil) -> REXML::Comment
-### def new(comment, parent = nil) -> REXML::Comment
+### def REXML::Comment.new(string, parent = nil) -> REXML::Comment
+### def REXML::Comment.new(comment, parent = nil) -> REXML::Comment
 
 Comment オブジェクトを生成します。
 

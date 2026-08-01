@@ -364,7 +364,7 @@ end
 
 ## Singleton Methods
 
-### def new(*patterns){|self| ... }
+### def Rake::FileList.new(*patterns){|self| ... }
 
 与えられたパターンをもとにして自身を初期化します。
 
@@ -380,7 +380,7 @@ pkg_files = FileList.new('lib/**/*') do |fl|
 end
 ```
 
-### def [](*args) -> Rake::FileList
+### def Rake::FileList.[](*args) -> Rake::FileList
 
 与えられたパターンをもとにして自身を初期化します。
 

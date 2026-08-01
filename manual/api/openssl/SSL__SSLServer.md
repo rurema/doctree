@@ -37,7 +37,7 @@ end
 
 ## Class Methods
 
-### def new(svr, ctx) -> OpenSSL::SSL::SSLServer
+### def OpenSSL::SSL::SSLServer.new(svr, ctx) -> OpenSSL::SSL::SSLServer
 
 [c:TCPServer] オブジェクトをラップする SSLServer オブジェクトを生成します。
 

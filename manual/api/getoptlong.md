@@ -153,7 +153,7 @@ parser.quiet = true
 GNU getopt_long() を Ruby で模したクラスです。
 
 ## Class Methods
-### def new(*arguments)
+### def GetoptLong.new(*arguments)
 
 GetoptLong のオブジェクトを生成します。引数が与えられ
 たときは、それを [m:GetoptLong#set_options] メソッドに渡します。

@@ -19,8 +19,8 @@ p dsa512.verify('dss1', sign, data)
 
 ## Class Methods
 
-### def generate(size) -> OpenSSL::PKey::DSA
-### def generate(size){|u,n| ... } -> OpenSSL::PKey::DSA
+### def OpenSSL::PKey::DSA.generate(size) -> OpenSSL::PKey::DSA
+### def OpenSSL::PKey::DSA.generate(size){|u,n| ... } -> OpenSSL::PKey::DSA
 
 乱数により DSA 公開鍵と秘密鍵のペアを生成して、DSA オブジェクトとして
 返します。
@@ -48,10 +48,10 @@ size は DSA パラメータの素数のビット数を指定します。最大 
 DSA パラメータの生成には時間がかかるため、生成の途中経過を
 ユーザに表示したい場合にこの機能を使います。
 
-### def new -> OpenSSL::PKey::DSA
-### def new(size) -> OpenSSL::PKey::DSA
-### def new(obj, pass=nil) -> OpenSSL::PKey::DSA
-### def new(obj, pass=nil){|flag| ... } -> OpenSSL::PKey::DSA
+### def OpenSSL::PKey::DSA.new -> OpenSSL::PKey::DSA
+### def OpenSSL::PKey::DSA.new(size) -> OpenSSL::PKey::DSA
+### def OpenSSL::PKey::DSA.new(obj, pass=nil) -> OpenSSL::PKey::DSA
+### def OpenSSL::PKey::DSA.new(obj, pass=nil){|flag| ... } -> OpenSSL::PKey::DSA
 
 DSA オブジェクトを生成します。
 

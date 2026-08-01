@@ -209,8 +209,8 @@ IO#sysread                    EOFError
 
 ## Class Methods
 
-### def copy_stream(src, dst, copy_length = nil)             -> Integer
-### def copy_stream(src, dst, copy_length, src_offset) -> Integer
+### def IO.copy_stream(src, dst, copy_length = nil)             -> Integer
+### def IO.copy_stream(src, dst, copy_length, src_offset) -> Integer
 
 指定された src から dst へコピーします。
 コピーしたバイト数を返します。
@@ -254,7 +254,7 @@ p IO.copy_stream(src, dst)   # => 11
 p dst.string                 # => "hello world"
 ```
 
-### def try_convert(obj) -> IO | nil
+### def IO.try_convert(obj) -> IO | nil
 
 obj を to_io メソッドによって [c:IO] オブジェクトに変換します。
 変換できなかった場合は nil を返します。
@@ -264,10 +264,10 @@ p IO.try_convert(STDOUT)   # => STDOUT
 p IO.try_convert("STDOUT") # => nil
 ```
 
-### def new(fd, mode = "r", **opts)                -> IO
-### def for_fd(fd, mode = "r", **opts)             -> IO
-### def open(fd, mode = "r", **opts)               -> IO
-### def open(fd, mode = "r", **opts) {|io| ... }   -> object
+### def IO.new(fd, mode = "r", **opts)                -> IO
+### def IO.for_fd(fd, mode = "r", **opts)             -> IO
+### def IO.open(fd, mode = "r", **opts)               -> IO
+### def IO.open(fd, mode = "r", **opts) {|io| ... }   -> object
 
 オープン済みのファイルディスクリプタ fd に対する新しい
 IO オブジェクトを生成して返します。
@@ -332,8 +332,8 @@ io.close
 p IO.open(IO.sysopen("testfile")) { |io| p io.class } # => IO
 ```
 
-### def foreach(path, rs = $/, chomp: false, **opts) {|line| ... }    -> nil
-### def foreach(path, rs = $/, chomp: false, **opts)                  -> Enumerator
+### def IO.foreach(path, rs = $/, chomp: false, **opts) {|line| ... }    -> nil
+### def IO.foreach(path, rs = $/, chomp: false, **opts)                  -> Enumerator
 
 path で指定されたファイルの各行を引数としてブロックを繰り返し実行します。
 path のオープンに成功すれば nil を返します。
@@ -405,14 +405,14 @@ IO.foreach("testfile", encoding: "UTF-8") { |x| p x.encoding }
 
 - **SEE** [m:$/]
 
-### def pipe                    -> [IO]
-### def pipe(ext_enc)           -> [IO]
-### def pipe(enc_str, **opts)           -> [IO]
-### def pipe(ext_enc, int_enc, **opts)  -> [IO]
-### def pipe{|read_io, write_io| ... } -> object
-### def pipe(ext_enc){|read_io, write_io| ... } -> object
-### def pipe(enc_str, **opts){|read_io, write_io| ... }           -> object
-### def pipe(ext_enc, int_enc, **opts){|read_io, write_io| ... }  -> object
+### def IO.pipe                    -> [IO]
+### def IO.pipe(ext_enc)           -> [IO]
+### def IO.pipe(enc_str, **opts)           -> [IO]
+### def IO.pipe(ext_enc, int_enc, **opts)  -> [IO]
+### def IO.pipe{|read_io, write_io| ... } -> object
+### def IO.pipe(ext_enc){|read_io, write_io| ... } -> object
+### def IO.pipe(enc_str, **opts){|read_io, write_io| ... }           -> object
+### def IO.pipe(ext_enc, int_enc, **opts){|read_io, write_io| ... }  -> object
 
 [man:pipe(2)] を実行して、相互につながった2つの
 [c:IO] オブジェクトを要素とする配列を返します。
@@ -447,16 +447,16 @@ end
 p r.gets           # => "foo\n"
 ```
 
-### def popen(env = {}, command, mode = "r", opt={}) -> IO
-### def popen(env = {}, command, mode = "r", opt={}){|f| ... } -> object
-### def popen([env = {}, cmdname, *args, execopt={}], mode = "r", opt={}) -> IO
-### def popen([env = {}, cmdname, *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
-### def popen([env = {}, [cmdname, arg0], *args, execopt={}], mode = "r", opt={}) -> IO
-### def popen([env = {}, [cmdname, arg0], *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
-### def popen(env = {}, [cmdname, *args, execopt={}], mode = "r", opt={}) -> IO
-### def popen(env = {}, [cmdname, *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
-### def popen(env = {}, [[cmdname, arg0], *args, execopt={}], mode = "r", opt={}) -> IO
-### def popen(env = {}, [[cmdname, arg0], *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
+### def IO.popen(env = {}, command, mode = "r", opt={}) -> IO
+### def IO.popen(env = {}, command, mode = "r", opt={}){|f| ... } -> object
+### def IO.popen([env = {}, cmdname, *args, execopt={}], mode = "r", opt={}) -> IO
+### def IO.popen([env = {}, cmdname, *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
+### def IO.popen([env = {}, [cmdname, arg0], *args, execopt={}], mode = "r", opt={}) -> IO
+### def IO.popen([env = {}, [cmdname, arg0], *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
+### def IO.popen(env = {}, [cmdname, *args, execopt={}], mode = "r", opt={}) -> IO
+### def IO.popen(env = {}, [cmdname, *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
+### def IO.popen(env = {}, [[cmdname, arg0], *args, execopt={}], mode = "r", opt={}) -> IO
+### def IO.popen(env = {}, [[cmdname, arg0], *args, execopt={}], mode = "r", opt={}){|f| ... } -> object
 
 サブプロセスを実行し、そのプロセスの標準入出力
 との間にパイプラインを確立します。生成したパイプを [c:IO] オブジェクトとして返します。
@@ -534,10 +534,10 @@ IO.popen(["ls", "/"], :err=>[:child, :out]) {|ls_io|
 
 - **raise** `Errno::EXXX` -- パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
 
-### def popen("-", mode = "r", opt={})                -> IO
-### def popen("-", mode = "r", opt={}) {|io| ... }    -> object
-### def popen(env, "-", mode = "r", opt={})            -> IO
-### def popen(env, "-", mode = "r", opt={}){|io| ... } -> object
+### def IO.popen("-", mode = "r", opt={})                -> IO
+### def IO.popen("-", mode = "r", opt={}) {|io| ... }    -> object
+### def IO.popen(env, "-", mode = "r", opt={})            -> IO
+### def IO.popen(env, "-", mode = "r", opt={}){|io| ... } -> object
 
 第一引数に文字列 "-" が指定された時、[man:fork(2)] を
 行い子プロセスの標準入出力との間にパイプラインを確立します。
@@ -585,9 +585,9 @@ opt ではエンコーディングの設定やプロセス起動のためのオ�
 
 - **raise** `Errno::EXXX` -- パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
 
-### def read(path, **opt)     -> String | nil
-### def read(path, length = nil, **opt)     -> String | nil
-### def read(path, length = nil, offset = 0, **opt)     -> String | nil
+### def IO.read(path, **opt)     -> String | nil
+### def IO.read(path, length = nil, **opt)     -> String | nil
+### def IO.read(path, length = nil, offset = 0, **opt)     -> String | nil
 
 path で指定されたファイルを offset 位置から
 length バイト分読み込んで返します。
@@ -671,7 +671,7 @@ p IO.read(one_byte_file, nil, 10) #=> ""
 p IO.read(one_byte_file, 1, 10) #=> nil
 ```
 
-### def binread(path, length = nil, offset = 0)     -> String | nil
+### def IO.binread(path, length = nil, offset = 0)     -> String | nil
 
 path で指定したファイルを open し、offset の所まで seek し、
 length バイト読み込みます。
@@ -702,9 +702,9 @@ p IO.binread("testfile", 20, 10) # => "ne one\nThis is line "
 
 - **SEE** [m:IO.read]
 
-### def readlines(path, rs = $/, chomp: false, opts={})    -> [String]
-### def readlines(path, limit, chomp: false, opts={})      -> [String]
-### def readlines(path, rs, limit, chomp: false, opts={})  -> [String]
+### def IO.readlines(path, rs = $/, chomp: false, opts={})    -> [String]
+### def IO.readlines(path, limit, chomp: false, opts={})      -> [String]
+### def IO.readlines(path, rs, limit, chomp: false, opts={})  -> [String]
 
 path で指定されたファイルを全て読み込んで、その各行を要素としてもつ配列を返します。
 
@@ -752,7 +752,7 @@ p IO.readlines("testfile", chomp: true)      # => ["line1,\rline2,", "line3,"]
 p IO.readlines("testfile", "\r", chomp: true)  # => ["line1,", "line2,", "\nline3,\n"]
 ```
 
-### def select(reads, writes = [], excepts = [], timeout = nil)    -> [[IO]] | nil
+### def IO.select(reads, writes = [], excepts = [], timeout = nil)    -> [[IO]] | nil
 
 [man:select(2)] を実行します。
 
@@ -795,7 +795,7 @@ mesg = "ping "
 
 - **SEE** [m:Kernel?.select]
 
-### def sysopen(path, mode = "r", perm = 0666)     -> Integer
+### def IO.sysopen(path, mode = "r", perm = 0666)     -> Integer
 
 path で指定されるファイルをオープンし、ファイル記述子を返しま
 す。
@@ -818,8 +818,8 @@ p IO.sysopen("testfile", "w+") # => 3
 
 - **SEE** [m:Kernel?.open]
 
-### def write(path, string, **opts) -> Integer
-### def write(path, string, offset=nil, **opts) -> Integer
+### def IO.write(path, string, **opts) -> Integer
+### def IO.write(path, string, offset=nil, **opts) -> Integer
 
 path で指定されるファイルを開き、string を書き込み、
 閉じます。
@@ -867,7 +867,7 @@ p IO.read("testfile")
 
 - **SEE** [m:IO.binwrite]
 
-### def binwrite(path, string, offset=nil) -> Integer
+### def IO.binwrite(path, string, offset=nil) -> Integer
 
 path で指定されるファイルを開き、string を書き込み、
 閉じます。

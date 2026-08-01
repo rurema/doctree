@@ -33,7 +33,7 @@ require:
 
 ## Singleton Methods
 
-### def new(si, size) -> Gem::SourceInfoCacheEntry
+### def Gem::SourceInfoCacheEntry.new(si, size) -> Gem::SourceInfoCacheEntry
 
 キャッシュのエントリを作成します。
 

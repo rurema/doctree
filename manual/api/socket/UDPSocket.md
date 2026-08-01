@@ -7,8 +7,8 @@ UDP/IPデータグラム型ソケットのクラス。
 
 ## Class Methods
 
-### def open(address_family=Socket::AF_INET) -> UDPSocket
-### def new(address_family=Socket::AF_INET) -> UDPSocket
+### def UDPSocket.open(address_family=Socket::AF_INET) -> UDPSocket
+### def UDPSocket.new(address_family=Socket::AF_INET) -> UDPSocket
 
 新しい UDP ソケットを返します。
 

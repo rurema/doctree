@@ -8,7 +8,7 @@ library: openssl
 [c:OpenSSL::Digest] を代わりに利用してください。
 
 ## Class Methods
-### def new(*args) -> OpenSSL::Digest::Digest
+### def OpenSSL::Digest::Digest.new(*args) -> OpenSSL::Digest::Digest
 
 互換性のためのメソッドです。
 

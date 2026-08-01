@@ -73,7 +73,7 @@ excel.Quit
 
 ## Class Methods
 
-### def create_guid -> String
+### def WIN32OLE.create_guid -> String
 
 GUID(グローバル一意識別子：Global Unique Identifier)を生成します。
 
@@ -94,7 +94,7 @@ FFはGUIDの先頭からのバイト位置を示します。これはレジス�
 p WIN32OLE.create_guid # => "{????????-????-????-????-????????????}"
 ```
 
-### def locale -> Integer
+### def WIN32OLE.locale -> Integer
 
 WIN32OLEがオートメーション呼び出し時に設定するロケール識別子(LCID)を取
 得します。
@@ -113,7 +113,7 @@ OLEオートメーションでは、UNIXで利用される"ja_JP"などの国名
 lcid = WIN32OLE.locale
 ```
 
-### def locale=(lcid)
+### def WIN32OLE.locale=(lcid)
 
 WIN32OLEがオートメーション呼び出し時に設定するロケール識別子(LCID)を設
 定します。
@@ -135,7 +135,7 @@ obj = WIN32OLE_VARIANT.new("$100,000", WIN32OLE::VARIANT::VT_CY)
 
 オブジェクトがサポートしていないロケールを設定した場合、オブジェクトのメソッド呼び出し時にDISP_E_UNKNOWNLCID(HRESULT error code:0x8002000C)や、TYPE_E_INVDATAREAD(HRESULT error code:0x80028018)などを理由としたWIN32OLERuntimeError例外となります。ほとんどすべての場合において、既定値を変更する必要はありません。
 
-### def codepage -> Integer
+### def WIN32OLE.codepage -> Integer
 
 WIN32OLEがOLEオートメーションのインターフェイスに利用するコードページを
 取得します。
@@ -156,7 +156,7 @@ Encoding.default_internalがnilの場合はEncoding.default_externalによって
 p WIN32OLE.codepage # => 932 （日本語Windowsの既定値）
 ```
 
-### def codepage=(cp)
+### def WIN32OLE.codepage=(cp)
 
 WIN32OLEがOLEオートメーションのインターフェイスに利用するコードページを
 設定します。
@@ -175,7 +175,7 @@ Encoding.default_internalまたはEncoding.default_externalから適切なコー
 WIN32OLE.codepage = WIN32OLE::CP_UTF8
 ```
 
-### def connect(ole) -> WIN32OLE
+### def WIN32OLE.connect(ole) -> WIN32OLE
 
 現在実行中のOLEオートメーションサーバに接続します。
 
@@ -207,7 +207,7 @@ p WIN32OLE.connect('Excel.Application') # => WIN32OLE object which represents ru
   <http://msdn.microsoft.com/en-us/library/ms691261(v=VS.85).aspx>
   を参照してください。
 
-### def const_load(ole, mod = WIN32OLE) -> ()
+### def WIN32OLE.const_load(ole, mod = WIN32OLE) -> ()
 
 OLEオートメーションサーバが保持する定数を読み込み、指定されたモジュール
 に組み込みます。
@@ -256,7 +256,7 @@ WIN32OLE.const_load('Microsoft Office 9.0 Object Library', MSO)
 puts MSO::MsoLineSingle # => 1
 ```
 
-### def new(server, host=nil) -> WIN32OLE
+### def WIN32OLE.new(server, host=nil) -> WIN32OLE
 
 OLEオートメーションサーバを生成します。
 
@@ -285,7 +285,7 @@ p WIN32OLE.new('Excel.Application') # => Excel OLE Automation WIN32OLE object.
 p WIN32OLE.new('{00024500-0000-0000-C000-000000000046}') # => Excel OLE Automation WIN32OLE object.
 ```
 
-### def ole_free(aWIN32OLE) -> Integer
+### def WIN32OLE.ole_free(aWIN32OLE) -> Integer
 
 引数で指定したオブジェクトを解放します。
 
@@ -299,7 +299,7 @@ p WIN32OLE.new('{00024500-0000-0000-C000-000000000046}') # => Excel OLE Automati
 - **return** -- Releaseの戻り値。COMの仕様上は現在のオブジェクトの参照カウント
         値を示します。
 
-### def ole_reference_count(aWIN32OLE) -> Integer
+### def WIN32OLE.ole_reference_count(aWIN32OLE) -> Integer
 
 引数で指定したオブジェクトの現在の参照カウント値を返します。
 
@@ -313,7 +313,7 @@ p WIN32OLE.new('{00024500-0000-0000-C000-000000000046}') # => Excel OLE Automati
 - **return** -- AddRef呼び出し後のReleaseの戻り値。COMの仕様上は現在のオブジェ
         クトの参照カウント値を示します。
 
-### def ole_show_help(obj, helpcontext = nil) -> ()
+### def WIN32OLE.ole_show_help(obj, helpcontext = nil) -> ()
 
 WIN32OLEオブジェクトのヘルプファイルを表示します。
 

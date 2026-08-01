@@ -6,7 +6,7 @@ type: library
 # reopen Time
 ## Singleton Methods
 
-### def json_create(hash) -> Time
+### def Time.json_create(hash) -> Time
 
 JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 

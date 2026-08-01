@@ -8,7 +8,7 @@ PKCS7 の送信先を表すクラスです。
 S/MIME 暗号化する場合に指定した送信先を意味します。
 
 ## Class Methods
-### def new(cert) -> RecipientInfo
+### def OpenSSL::PKCS7::RecipientInfo.new(cert) -> RecipientInfo
 
 送信先オブジェクトを証明書から生成します。
 

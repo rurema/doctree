@@ -4,7 +4,7 @@ library: rss
 # module RSS::Maker
 
 ## Singleton Methods
-### def make(version, &block)
+### def RSS::Maker.make(version, &block)
 #%todo
 versionには"1.0"または"0.9"または
 "0.91"または"2.0"を指定します。"0.9"

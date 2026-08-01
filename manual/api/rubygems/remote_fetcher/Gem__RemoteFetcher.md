@@ -9,7 +9,7 @@ include:
 
 ## Singleton Methods
 
-### def fetcher -> Gem::RemoteFetcher
+### def Gem::RemoteFetcher.fetcher -> Gem::RemoteFetcher
 
 このクラスの唯一のインスタンスを返します。
 

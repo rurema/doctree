@@ -26,9 +26,9 @@ require:
 
 ## Class Methods
 
-### def new(basename = '', tempdir = nil, mode: 0, **options) -> Tempfile
-### def open(basename = '', tempdir = nil, mode: 0, **options) -> Tempfile
-### def open(basename = '', tempdir = nil, mode: 0, **options){|fp| ...} -> object
+### def Tempfile.new(basename = '', tempdir = nil, mode: 0, **options) -> Tempfile
+### def Tempfile.open(basename = '', tempdir = nil, mode: 0, **options) -> Tempfile
+### def Tempfile.open(basename = '', tempdir = nil, mode: 0, **options){|fp| ...} -> object
 
 テンポラリファイルを作成し、それを表す Tempfile オブジェクトを生成して返します。
 ファイル名のプレフィクスには指定された basename が使われます。
@@ -74,11 +74,11 @@ p File.read(tf.path) #=> "hoge\n"
 - **SEE** [m:Tempfile.create]
 
 #%since 3.4
-### def create(basename="", tmpdir=nil, mode: 0, anonymous: false, **options) -> File
-### def create(basename="", tmpdir=nil, mode: 0, anonymous: false, **options){|fp| ...} -> object
+### def Tempfile.create(basename="", tmpdir=nil, mode: 0, anonymous: false, **options) -> File
+### def Tempfile.create(basename="", tmpdir=nil, mode: 0, anonymous: false, **options){|fp| ...} -> object
 #%else
-### def create(basename="", tmpdir=nil, mode: 0, **options) -> File
-### def create(basename="", tmpdir=nil, mode: 0, **options){|fp| ...} -> object
+### def Tempfile.create(basename="", tmpdir=nil, mode: 0, **options) -> File
+### def Tempfile.create(basename="", tmpdir=nil, mode: 0, **options){|fp| ...} -> object
 #%end
 
 テンポラリファイルを作成し、それを表す File オブジェクトを生成して返します(Tempfileではありません)。

@@ -41,7 +41,7 @@ gem-format な tar ファイルに data.tar.gz.sig, metadata.gz.sig を追加し
 
 ## Singleton Methods
 
-### def open(io, signer = nil){|data_tar_writer| ... }
+### def Gem::Package::TarOutput.open(io, signer = nil){|data_tar_writer| ... }
 #%# -> discard
 
 gem-format な tar ファイル内の data.tar.gz にファイルを追加するためのメ
@@ -53,7 +53,7 @@ gem-format な tar ファイル内の data.tar.gz にファイルを追加する
 
 - **SEE** [m:Gem::Package::TarOutput#add_gem_contents]
 
-### def new(io, signer) -> Gem::Package::TarOutput
+### def Gem::Package::TarOutput.new(io, signer) -> Gem::Package::TarOutput
 
 gem-format な tar ファイル内の data.tar.gz にファイルを追加するために
 自身を初期化します。

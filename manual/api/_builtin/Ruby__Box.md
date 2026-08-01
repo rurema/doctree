@@ -61,20 +61,20 @@ p box::Something.new.x # => 1
 
 ## Class Methods
 
-### def new -> Ruby::Box
+### def Ruby::Box.new -> Ruby::Box
 
 他のボックスから独立した新しいボックスを返します。
 
 `Ruby::Box` が無効なとき（環境変数 `RUBY_BOX` に `1` を設定せずに起動したとき）は
 [c:RuntimeError] が発生します。
 
-### def enabled? -> bool
+### def Ruby::Box.enabled? -> bool
 
 `Ruby::Box` が有効なら `true` を、無効なら `false` を返します。
 
 環境変数 `RUBY_BOX` に `1` を設定して ruby を起動したときに `true` になります。
 
-### def current -> Ruby::Box | nil
+### def Ruby::Box.current -> Ruby::Box | nil
 
 現在実行中のコードが属しているボックスを返します。
 

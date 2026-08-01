@@ -40,7 +40,7 @@ ctime       最終状態変更時刻(状態の変更とは chmod などによる
 
 ## Class Methods
 
-### def new(path)    -> File::Stat
+### def File::Stat.new(path)    -> File::Stat
 
 path に関する File::Stat オブジェクトを生成して返します。
 [m:File.stat] と同じです。

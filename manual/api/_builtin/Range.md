@@ -117,7 +117,7 @@ p Range.new(1, 10).frozen?
 
 ## Class Methods
 
-### def new(first, last, exclude_end = false) -> Range
+### def Range.new(first, last, exclude_end = false) -> Range
 
 first から last までの範囲オブジェクトを生成して返しま
 す。

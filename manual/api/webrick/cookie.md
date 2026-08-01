@@ -10,7 +10,7 @@ RFC2109 は [rfc:2965] により破棄されましたが、WEBrick::Cookie ク�
 
 ## Class Methods
 
-### def new(name, value)    -> WEBrick::Cookie
+### def WEBrick::Cookie.new(name, value)    -> WEBrick::Cookie
 
 新しい [c:WEBrick::Cookie] オブジェクトを生成して返します。
 name にクッキーの名前を、value にクッキーで保持する値を与える。
@@ -19,7 +19,7 @@ name にクッキーの名前を、value にクッキーで保持する値を与
 
 - **param** `value` -- Cookie の値を文字列で指定します。
 
-### def parse(str)    -> [WEBrick::Cookie]
+### def WEBrick::Cookie.parse(str)    -> [WEBrick::Cookie]
 
 ユーザーエージェントから送られてきた Cookie ヘッダの値 str をパースし、
 新しく [c:WEBrick::Cookie] オブジェクトを生成しその配列を返します。
@@ -38,7 +38,7 @@ p c[1].name, c[1].path
 "/foo/hoge"
 ```
 
-### def parse_set_cookie(str)    -> WEBrick::Cookie
+### def WEBrick::Cookie.parse_set_cookie(str)    -> WEBrick::Cookie
 
 サーバから送られてくる Set-Cookie ヘッダの値 str をパースし、
 新しく [c:WEBrick::Cookie] オブジェクトを生成し返します。
@@ -56,7 +56,7 @@ p c.name, c.value
 "FedEx"
 ```
 
-### def parse_set_cookies(str)    -> [WEBrick::Cookie]
+### def WEBrick::Cookie.parse_set_cookies(str)    -> [WEBrick::Cookie]
 
 サーバから送られてくる Set-Cookie ヘッダの値 str をパースし、
 新しく [c:WEBrick::Cookie] オブジェクトの配列を生成し返します。

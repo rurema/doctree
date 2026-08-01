@@ -35,7 +35,7 @@ hook して、それを転送します。
 #%# this is nil. uri is the URI of the remote object that this will
 #%# be a stub for.
 
-### def new_with_uri(uri) -> DRb::DRbObject
+### def DRb::DRbObject.new_with_uri(uri) -> DRb::DRbObject
 
 URI から新しい DRbObject を生成します。
 

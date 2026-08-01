@@ -88,7 +88,7 @@ pp parser.parse
 
 ## Class Methods
 
-### def new(stream) -> REXML::Parsers::UltraLightParser
+### def REXML::Parsers::UltraLightParser.new(stream) -> REXML::Parsers::UltraLightParser
 
 パーサオブジェクトを返します。
 

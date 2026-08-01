@@ -33,7 +33,7 @@ gem-format な tar ファイルを読むためのクラスです。
 
 ## Singleton Methods
 
-### def new(io) -> Gem::Package::TarReader
+### def Gem::Package::TarReader.new(io) -> Gem::Package::TarReader
 
 io に関連付けて [c:Gem::Package::TarReader] を初期化します。
 

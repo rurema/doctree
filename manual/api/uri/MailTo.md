@@ -7,8 +7,8 @@ mailto URI を表すクラスです。[RFC:2368]。
 
 ## Class Methods
 
-### def build(ary)     -> URI::MailTo 
-### def build(hash)    -> URI::MailTo 
+### def URI::MailTo.build(ary)     -> URI::MailTo 
+### def URI::MailTo.build(hash)    -> URI::MailTo 
 
 引数で与えられた URI 構成要素から URI::MailTo オブジェクトを生成します。
 引数の正当性をチェックします。
@@ -28,7 +28,7 @@ mailto URI を表すクラスです。[RFC:2368]。
 
 - **raise** `URI::InvalidComponentError` -- 不正な引数に対して発生します。
 
-### def new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)    -> URI::MailTo
+### def URI::MailTo.new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)    -> URI::MailTo
 
 汎用的な構成要素から URI::MailTo オブジェクトを生成します。
 build と異なり、デフォルトでは引数の正当性を検査しません。

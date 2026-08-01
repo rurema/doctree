@@ -10,7 +10,7 @@ include:
 
 ## Class Methods
 
-### def extended(obj) -> object
+### def IRB::HistorySavingAbility.extended(obj) -> object
 
 obj に irb のヒストリの読み込み、保存の機能を提供します。
 

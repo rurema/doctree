@@ -149,7 +149,7 @@ REXML::Parsers::StreamParser.new(xml, Listener.new).parse
 
 ## Class Methods
 
-### def new(source, listener) -> REXML::Parsers::StreamParser
+### def REXML::Parsers::StreamParser.new(source, listener) -> REXML::Parsers::StreamParser
 
 ストリームパーサオブジェクトを生成します。
 

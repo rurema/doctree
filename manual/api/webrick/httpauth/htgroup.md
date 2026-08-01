@@ -12,7 +12,7 @@ Apache で証認に使用するユーザグループの一覧が格納されて�
 
 ## Class Methods
 
-### def new(path) -> WEBrick::HTTPAuth::Htgroup
+### def WEBrick::HTTPAuth::Htgroup.new(path) -> WEBrick::HTTPAuth::Htgroup
 
 自身を初期化します。
 

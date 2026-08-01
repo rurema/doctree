@@ -6,7 +6,7 @@ CGI で利用するユーティリティメソッドを定義したライブラ�
 # reopen CGI
 
 ## Class Methods
-### def escape(string) -> String
+### def CGI.escape(string) -> String
 
 与えられた文字列を URL エンコードした文字列を新しく作成し返します。
 
@@ -23,7 +23,7 @@ p url
 #=> "http://www.example.com/register?url=http%3A%2F%2Fwww.example.com%2Findex.rss"
 ```
 
-### def unescape(string) -> String
+### def CGI.unescape(string) -> String
 
 与えられた文字列を URL デコードした文字列を新しく作成し返します。
 
@@ -39,7 +39,7 @@ p CGI.unescape("http%3A%2F%2Fwww.example.com%2Findex.rss")
 ```
 
 #%since 3.2
-### def escapeURIComponent(string) -> String
+### def CGI.escapeURIComponent(string) -> String
 
 与えられた文字列を [RFC:3986] に従って URL エンコードした文字列を新しく作成し返します。
 
@@ -60,7 +60,7 @@ p CGI.escapeURIComponent("a b") #=> "a%20b"
 
 - **SEE** [m:CGI.escape], [m:CGI.unescapeURIComponent]
 
-### def unescapeURIComponent(string) -> String
+### def CGI.unescapeURIComponent(string) -> String
 
 与えられた文字列を [m:CGI.escapeURIComponent] でエンコードされたものとして URL デコードした文字列を新しく作成し返します。
 
@@ -75,8 +75,8 @@ p CGI.unescapeURIComponent("%27Stop%21%27%20said%20Fred") #=> "'Stop!' said Fred
 - **SEE** [m:CGI.unescape], [m:CGI.escapeURIComponent]
 #%end
 
-### def escapeHTML(string) -> String
-### def escape_html(string) -> String
+### def CGI.escapeHTML(string) -> String
+### def CGI.escape_html(string) -> String
 
 与えられた文字列中の '、&、"、<、> を実体参照に置換した文字列を新しく作成し返します。
 
@@ -93,8 +93,8 @@ p CGI.escapeHTML('<script type="text/javascript">alert("警告")</script>')
 #=> "&lt;script type=&quot;text/javascript&quot;&gt;alert(&quot;警告&quot;)&lt;/script&gt;"
 ```
 
-### def unescapeHTML(string) -> String
-### def unescape_html(string) -> String
+### def CGI.unescapeHTML(string) -> String
+### def CGI.unescape_html(string) -> String
 
 与えられた文字列中の実体参照のうち、&amp; &gt; &lt; &quot;
 と数値指定がされているもの (&#0ffff など) を元の文字列に置換します。
@@ -107,8 +107,8 @@ require "cgi"
 p CGI.unescapeHTML("3 &gt; 1")   #=> "3 > 1"
 ```
 
-### def escapeElement(string, *elements) -> String
-### def escape_element(string, *elements) -> String
+### def CGI.escapeElement(string, *elements) -> String
+### def CGI.escape_element(string, *elements) -> String
 
 第二引数以降に指定したエレメントのタグだけを実体参照に置換します。
 
@@ -126,8 +126,8 @@ p CGI.escapeElement('<BR><A HREF="url"></A>', ["A", "IMG"])
      # => "<BR>&lt;A HREF="url"&gt;&lt;/A&gt"
 ```
 
-### def unescapeElement(string, *elements) -> String
-### def unescape_element(string, *elements) -> String
+### def CGI.unescapeElement(string, *elements) -> String
+### def CGI.unescape_element(string, *elements) -> String
 
 特定の要素だけをHTMLエスケープから戻す。
 
@@ -146,7 +146,7 @@ print CGI.unescapeElement('&lt;BR&gt;&lt;A HREF="url"&gt;&lt;/A&gt;', %w(A IMG))
 ```
 
 #%until 4.0
-### def rfc1123_date(time) -> String
+### def CGI.rfc1123_date(time) -> String
 
 与えられた時刻を [RFC:1123] フォーマットに準拠した文字列に変換します。
 
@@ -159,7 +159,7 @@ p CGI.rfc1123_date(Time.now)
   # => Sat, 1 Jan 2000 00:00:00 GMT
 ```
 
-### def pretty(string, shift = "  ") -> String
+### def CGI.pretty(string, shift = "  ") -> String
 
 HTML を人間に見やすく整形した文字列を返します。
 

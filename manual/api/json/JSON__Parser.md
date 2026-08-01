@@ -7,7 +7,7 @@ alias:
 
 ## Singleton Methods
 
-### def new(source, options => {}) -> JSON::Parser
+### def JSON::Parser.new(source, options => {}) -> JSON::Parser
 
 パーサを初期化します。
 

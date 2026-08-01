@@ -12,12 +12,12 @@ NDBM ファイルをアクセスするクラス。
 
 ## Class Methods
 
-### def new(dbname, mode = 0666, flags = nil) -> DBM
+### def DBM.new(dbname, mode = 0666, flags = nil) -> DBM
 
 dbname で指定したデータベースをモードを mode に設定してオープンします。
 
-### def open(dbname, mode = 0666, flags = nil) -> DBM
-### def open(dbname, mode = 0666, flags = nil) {|db| ... } -> ()
+### def DBM.open(dbname, mode = 0666, flags = nil) -> DBM
+### def DBM.open(dbname, mode = 0666, flags = nil) {|db| ... } -> ()
 
 dbname で指定したデータベースをモードを mode に設定してオープンします。
 

@@ -97,7 +97,7 @@ tar のヘッダに含まれる version を返します。
 
 ## Singleton Methods
 
-### def from(stream) -> Gem::Package::TarHeader
+### def Gem::Package::TarHeader.from(stream) -> Gem::Package::TarHeader
 
 stream から先頭 512 バイトを読み込んで [c:Gem::Package::TarHeader] の
 インスタンスを作成して返します。

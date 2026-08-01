@@ -61,7 +61,7 @@ RDoc と RI 用のデータを削除します。
 
 ## Singleton Methods
 
-### def new(spec, rdoc_args = "") -> Gem::DocManager
+### def Gem::DocManager.new(spec, rdoc_args = "") -> Gem::DocManager
 
 自身を初期化します。
 
@@ -69,17 +69,17 @@ RDoc と RI 用のデータを削除します。
 
 - **param** `rdoc_args` -- RDoc に渡すオプションを指定します。
 
-### def configured_args -> Array
+### def Gem::DocManager.configured_args -> Array
 
 RDoc に渡す引数を返します。
 
-### def configured_args=(args)
+### def Gem::DocManager.configured_args=(args)
 
 RDoc に渡す引数をセットします。
 
 - **param** `args` -- 文字列の配列か空白区切りの文字列を指定します。
 
-### def load_rdoc
+### def Gem::DocManager.load_rdoc
 #%# -> discard
 
 Gem の RDoc が使用可能な場合は使用します。
@@ -87,7 +87,7 @@ Gem の RDoc が使用可能な場合は使用します。
 
 - **raise** `Gem::DocumentError` -- RDoc が使用できない場合に発生します。
 
-### def update_ri_cache
+### def Gem::DocManager.update_ri_cache
 #%# -> discard
 
 RDoc 2 がインストールされている場合は RI のキャッシュを更新します。

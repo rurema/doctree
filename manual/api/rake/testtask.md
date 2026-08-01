@@ -139,7 +139,7 @@ rake test TESTOPTS="--runner=fox"   # use the fox test runner
 
 ## Singleton Methods
 
-### def new(name = :test){|t| ... } -> Rake::TestTask
+### def Rake::TestTask.new(name = :test){|t| ... } -> Rake::TestTask
 
 自身を初期化します。
 

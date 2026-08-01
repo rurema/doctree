@@ -119,7 +119,7 @@ end
 
 ## Singleton Methods
 
-### def new(names, values, parent = nil)
+### def Rake::TaskArguments.new(names, values, parent = nil)
 
 自身を初期化します。
 

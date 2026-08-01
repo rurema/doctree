@@ -15,7 +15,7 @@ since: "1.9.2"
 といった要素を持ちます。
 
 ## Class Methods
-### def new(family, cmsg_level, cmsg_type, cmsg_data) -> Socket::AncillaryData
+### def Socket::AncillaryData.new(family, cmsg_level, cmsg_type, cmsg_data) -> Socket::AncillaryData
 
 新たな Socket::AncillaryData オブジェクトを生成します。
 
@@ -58,7 +58,7 @@ p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "")
 - **param** `cmsg_type` -- 補助データの種類
 - **param** `cmsg_data` -- データ内容
 
-### def int(family, cmsg_level, cmsg_type, integer) -> Socket::AncillaryData
+### def Socket::AncillaryData.int(family, cmsg_level, cmsg_type, integer) -> Socket::AncillaryData
 
 データとして整数を保持する
 Socket::AncillaryData オブジェクトを生成します。
@@ -79,7 +79,7 @@ p Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, STDERR.fileno)
 
 - **SEE** [m:Socket::AncillaryData.new]
 
-### def unix_rights(*ios) -> Socket::AncillaryData
+### def Socket::AncillaryData.unix_rights(*ios) -> Socket::AncillaryData
 
 ios で指定したファイルのファイルデスクリプタを
 データとして持つ family=AF_UNIX, level=SOL_SOCKET, type=SCM_RIGHTS
@@ -96,7 +96,7 @@ p Socket::AncillaryData.unix_rights(STDERR)
 - **SEE** [m:Socket::AncillaryData#unix_rights],
      [m:Socket::Constants::SCM_RIGHTS]
 
-### def ip_pktinfo(addr, ifindex, spec_dst=addr) -> Socket::AncillaryData
+### def Socket::AncillaryData.ip_pktinfo(addr, ifindex, spec_dst=addr) -> Socket::AncillaryData
 
 type が IP_PKTINFO である AncillaryData を生成します。
 
@@ -119,7 +119,7 @@ p Socket::AncillaryData.ip_pktinfo(addr, ifindex, spec_dst)
 - **SEE** [m:Socket::AncillaryData#ip_pktinfo],
      [m:Socket::Constants::IP_PKTINFO]
 
-### def ipv6_pktinfo(addr, ifindex) -> Socket::AncillaryData
+### def Socket::AncillaryData.ipv6_pktinfo(addr, ifindex) -> Socket::AncillaryData
 
 type が IPV6_PKTINFO である AncillaryData を生成します。
 

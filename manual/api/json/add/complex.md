@@ -6,7 +6,7 @@ type: library
 # reopen Complex
 ## Singleton Methods
 
-### def json_create(hash) -> Complex
+### def Complex.json_create(hash) -> Complex
 
 JSON のオブジェクトから [c:Complex] のオブジェクトを生成して返します。
 

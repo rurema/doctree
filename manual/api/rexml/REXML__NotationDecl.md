@@ -38,7 +38,7 @@ p foobar.system # => "http://example.org/foobar.dtd"
 
 ## Class Methods
 
-### def new(name, middle, pub, sys) -> REXML::NotationDecl
+### def REXML::NotationDecl.new(name, middle, pub, sys) -> REXML::NotationDecl
 
 NotationDecl オブジェクトを生成します。
 

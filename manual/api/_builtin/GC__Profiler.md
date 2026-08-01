@@ -12,7 +12,7 @@ GC の起動回数や起動したタイミング、処理時間などの GC に�
 
 ## Singleton Methods 
 
-### def enabled? -> bool
+### def GC::Profiler.enabled? -> bool
 
 GC のプロファイラを起動中であれば true、停止中であれば false を返します。
 
@@ -26,7 +26,7 @@ p GC::Profiler.enabled? #=> false
 
 - **SEE** [m:GC::Profiler.enable], [m:GC::Profiler.disable]
 
-### def enable -> nil
+### def GC::Profiler.enable -> nil
 
 GC のプロファイラを起動します。
 
@@ -40,7 +40,7 @@ p GC::Profiler.enabled? #=> true
 
 - **SEE** [m:GC::Profiler.disable], [m:GC::Profiler.enabled?]
 
-### def disable -> nil
+### def GC::Profiler.disable -> nil
 
 GC のプロファイラを停止します。
 
@@ -54,7 +54,7 @@ p GC::Profiler.enabled? #=> false
 
 - **SEE** [m:GC::Profiler.enable], [m:GC::Profiler.enabled?]
 
-### def clear -> nil
+### def GC::Profiler.clear -> nil
 
 蓄積している GC のプロファイル情報をすべて削除します。
 
@@ -68,7 +68,7 @@ GC.start
 p GC::Profiler.report #=> 1 回分の GC のプロファイル情報出力する。
 ```
 
-### def result -> String
+### def GC::Profiler.result -> String
 
 GC のプロファイル情報をフォーマットし、文字列として返します。
 
@@ -103,7 +103,7 @@ Index    Invoke Time(sec)       Use Size(byte)     Total Size(byte)         Tota
 
 - **SEE** [m:GC::Profiler.report]
 
-### def report(out = $stdout) -> nil
+### def GC::Profiler.report(out = $stdout) -> nil
 
 [m:GC::Profiler.result] の結果を out に出力します。
 
@@ -121,7 +121,7 @@ GC::Profiler.report
 
 - **SEE** [m:GC::Profiler.result]
 
-### def total_time -> Float
+### def GC::Profiler.total_time -> Float
 
 GC のプロファイル情報から GC の総計時間を計算し、msec 単位で返します。
 
@@ -131,7 +131,7 @@ GC.start
 p GC::Profiler.total_time # => 0.0011530000000000012
 ```
 
-### def raw_data -> [Hash, ...] | nil
+### def GC::Profiler.raw_data -> [Hash, ...] | nil
 
 GC のプロファイル情報を GC の発生ごとに [c:Hash] の配列
 (:GC_INVOKE_TIME が早いもの順)で返します。[c:GC::Profiler] が有効になっ

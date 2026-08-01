@@ -209,7 +209,7 @@ SessionDemo.new
 
 ## Class Methods
 
-### def new(request, option = {}) -> CGI::Session
+### def CGI::Session.new(request, option = {}) -> CGI::Session
 
 セッションオブジェクトを新しく作成し返します。
 
@@ -282,7 +282,7 @@ SessionDemo.new
   CGI::Session.new(cgi, {"new_session" => true})
   ```
 
-### def callback(dbman)
+### def CGI::Session.callback(dbman)
 #%# nodoc
 
 ## Instance Methods
@@ -346,7 +346,7 @@ FileStore の場合はセッションファイルを削除します。
 
 ## Class Methods
 
-### def new(session, option = {}) -> CGI::Session::FileStore
+### def CGI::Session::FileStore.new(session, option = {}) -> CGI::Session::FileStore
 
 自身を初期化します。
 
@@ -401,7 +401,7 @@ FileStore の場合はセッションファイルを削除します。
 
 ## Class Methods
 
-### def new(session, option = nil) -> CGI::Session::MemoryStore
+### def CGI::Session::MemoryStore.new(session, option = nil) -> CGI::Session::MemoryStore
 
 自身を初期化します。
 
@@ -444,7 +444,7 @@ FileStore の場合はセッションファイルを削除します。
 
 ## Class Methods
 
-### def new(session, option = nil) -> CGI::Session::NullStore
+### def CGI::Session::NullStore.new(session, option = nil) -> CGI::Session::NullStore
 
 自身を初期化します。
 

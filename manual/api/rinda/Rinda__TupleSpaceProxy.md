@@ -11,7 +11,7 @@ library: rinda/rinda
 
 ## Class Methods
 
-### def new(ts) -> Rinda::TupleSpaceProxy
+### def Rinda::TupleSpaceProxy.new(ts) -> Rinda::TupleSpaceProxy
 
 ts を wrap した新たな TupleSpaceProxy オブジェクトを生成します。
 

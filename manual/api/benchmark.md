@@ -260,7 +260,7 @@ benchmark ライブラリのバージョンを表します。
 
 ## Class Methods
 
-### def new(utime = 0.0, stime = 0.0, cutime = 0.0, cstime = 0.0, real = 0.0, label = nil) -> Benchmark::Tms
+### def Benchmark::Tms.new(utime = 0.0, stime = 0.0, cutime = 0.0, cstime = 0.0, real = 0.0, label = nil) -> Benchmark::Tms
 
 新しい [c:Benchmark::Tms] オブジェクトを生成して返します。
 
@@ -453,7 +453,7 @@ System CPU time
 
 ## Class Methods
 
-### def new(width) -> Benchmark::Job
+### def Benchmark::Job.new(width) -> Benchmark::Job
 
 [c:Benchmark::Job] のインスタンスを初期化して返します。
 
@@ -489,7 +489,7 @@ System CPU time
 
 ## Class Methods
 
-### def new(width = 0, fmtstr = nil) -> Benchmark::Report
+### def Benchmark::Report.new(width = 0, fmtstr = nil) -> Benchmark::Report
 
 [c:Benchmark::Report] のインスタンスを初期化して返します。
 

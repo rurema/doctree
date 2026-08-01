@@ -181,14 +181,14 @@ Gem が見つからなかった場合、メッセージを表示するために�
 
 ## Singleton Methods
 
-### def add_common_option(*args){|value, options| ... }
+### def Gem::Command.add_common_option(*args){|value, options| ... }
 #%# -> discard
 
 全てのコマンドに共通するオプションを登録するためのメソッドです。
 
 - **param** `args` -- 追加するオプションの情報を指定します。
 
-### def add_specific_extra_args(cmd, args)
+### def Gem::Command.add_specific_extra_args(cmd, args)
 #%# -> discard
 
 与えられたコマンドに対応する追加の引数を追加します。
@@ -197,31 +197,31 @@ Gem が見つからなかった場合、メッセージを表示するために�
 
 - **param** `args` -- 追加の引数を配列か、空白で区切った文字列で指定します。
 
-### def build_args -> Array
+### def Gem::Command.build_args -> Array
 
 Gem をビルドするときに使用するパラメータを返します。
 
-### def build_args=(value)
+### def Gem::Command.build_args=(value)
 
 Gem をビルドするときに使用するパラメータをセットします。
 
 - **param** `value` -- Gem をビルドするときに使用するパラメータを指定します。
 
-### def common_options -> Array
+### def Gem::Command.common_options -> Array
 
 共通の引数を返します。
 
-### def extra_args -> Array
+### def Gem::Command.extra_args -> Array
 
 追加の引数を返します。
 
-### def extra_args=(value)
+### def Gem::Command.extra_args=(value)
 
 追加の引数をセットします。
 
 - **param** `value` -- 配列を指定します。
 
-### def specific_extra_args(cmd) -> Array
+### def Gem::Command.specific_extra_args(cmd) -> Array
 
 与えられたコマンドに対応する追加の引数を返します。
 
@@ -229,7 +229,7 @@ Gem をビルドするときに使用するパラメータをセットします�
 
 - **param** `cmd` -- コマンド名を指定します。
 
-### def specific_extra_args_hash -> Hash
+### def Gem::Command.specific_extra_args_hash -> Hash
 
 特別な追加引数へのアクセスを提供します。
 

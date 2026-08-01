@@ -10,7 +10,7 @@ Enumerator::Chain のオブジェクトは、[m:Enumerable#chain] や [m:Enumera
 
 ## Class Methods
 
-### def new(*enums) -> Enumerator::Chain
+### def Enumerator::Chain.new(*enums) -> Enumerator::Chain
 
 複数の Enumerable から、1つの新しい Enumerator を作って返します。
 

@@ -20,8 +20,8 @@ bar
 
 ## Class Methods
 
-### def new(error_message = "", name = nil) -> NameError
-### def new(error_message = "", name = nil, receiver:) -> NameError
+### def NameError.new(error_message = "", name = nil) -> NameError
+### def NameError.new(error_message = "", name = nil, receiver:) -> NameError
 
 例外オブジェクトを生成して返します。
 

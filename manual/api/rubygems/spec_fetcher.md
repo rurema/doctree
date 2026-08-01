@@ -15,13 +15,13 @@ require:
 
 ## Singleton Methods
 
-### def fetcher -> Gem::SpecFetcher
+### def Gem::SpecFetcher.fetcher -> Gem::SpecFetcher
 
 このクラスの唯一のインスタンスを返します。
 
 #%# singleton ?
 
-### def fetcher=(fetcher)
+### def Gem::SpecFetcher.fetcher=(fetcher)
 #%todo
 
 ## Instance Methods

@@ -8,7 +8,7 @@ irb コマンドで実行結果の出力方式(inspect_mode)を定義するた�
 
 ## Singleton Methods
 
-### def Inspector(inspect, init = nil) -> IRB::Inspector
+### def IRB.Inspector(inspect, init = nil) -> IRB::Inspector
 
 [c:IRB::Inspector] オブジェクトを生成します。
 
@@ -34,7 +34,7 @@ irb コマンドで実行結果の出力方式(inspect_mode)を定義するた�
 
 ## Singleton Methods
 
-### def def_inspector(key, arg = nil) { |v| ... } -> object
+### def IRB::Inspector.def_inspector(key, arg = nil) { |v| ... } -> object
 
 新しい実行結果の出力方式を定義します。
 
@@ -58,7 +58,7 @@ irb(main):001:0> :abc # => abcabc
 
 - **SEE** [ref:lib:irb#inspect_mode]
 
-### def keys_with_inspector(inspector) -> Array
+### def IRB::Inspector.keys_with_inspector(inspector) -> Array
 
 引数で指定した [c:IRB::Inspector] に対応する key の配列を返します。
 

@@ -17,7 +17,7 @@ HTTP リクエストのためのクラスです。
 
 ## Class Methods
 
-### def new(config) -> WEBrick::HTTPRequest
+### def WEBrick::HTTPRequest.new(config) -> WEBrick::HTTPRequest
 
 WEBrick::HTTPRequest を生成して返します。
 

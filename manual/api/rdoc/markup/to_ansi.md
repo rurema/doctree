@@ -20,7 +20,7 @@ RDoc 形式のドキュメントを ANSI エスケープシーケンスで色付
 
 ## Class Methods
 
-### def new(markup = nil) -> RDoc::Markup::ToAnsi
+### def RDoc::Markup::ToAnsi.new(markup = nil) -> RDoc::Markup::ToAnsi
 
 自身を初期化します。
 

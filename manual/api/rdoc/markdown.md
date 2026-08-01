@@ -179,21 +179,21 @@ Markdown 形式で記述されたドキュメントを [lib:rdoc] 上で解析�
 
 ## Class Methods
 
-### def extension(name) -> nil
+### def RDoc::Markdown.extension(name) -> nil
 
 引数 name で指定した拡張を有効/無効にするためのインスタンスメソッドを定
 義します。
 
 ライブラリ内部で使用します。
 
-### def parse(markdown) -> RDoc::Markup::Document
+### def RDoc::Markdown.parse(markdown) -> RDoc::Markup::Document
 
 引数 markdown で指定したドキュメントを解析して
 `RDoc::Markup::Document` オブジェクトを返します。
 
 - **param** `markdown` -- 解析の対象になるドキュメントを文字列で指定します。
 
-### def new(extensions = DEFAULT_EXTENSIONS, debug = false)
+### def RDoc::Markdown.new(extensions = DEFAULT_EXTENSIONS, debug = false)
 
 引数 extensions で与えられた拡張を有効にした [c:RDoc::Markdown] オブ
 ジェクトを初期化します。

@@ -258,7 +258,7 @@ OCSP レスポンダからのレスポンス自体は
 BasicResponse のオブジェクトを得ます。
 
 ## Class Methods
-### def new -> OpenSSL::OCSP::BasicResponse
+### def OpenSSL::OCSP::BasicResponse.new -> OpenSSL::OCSP::BasicResponse
 
 空の BasicResponse オブジェクトを生成します。
 
@@ -406,7 +406,7 @@ CertificateId オブジェクトを複数 [c:OpenSSL::OCSP::Request] に含め�
 同時に問い合わせることができます。
 
 ## Class Methods
-### def new(subject, issuer, digest=nil) -> OpenSSL::OCSP::CertificateId
+### def OpenSSL::OCSP::CertificateId.new(subject, issuer, digest=nil) -> OpenSSL::OCSP::CertificateId
 
 CertificateId オブジェクトを生成します。
 
@@ -451,8 +451,8 @@ OCSP リクエストを表すクラスです。
 形で複数持つことができます。
 
 ## Class Methods
-### def new -> OpenSSL::OCSP::Request
-### def new(der) -> OpenSSL::OCSP::Request
+### def OpenSSL::OCSP::Request.new -> OpenSSL::OCSP::Request
+### def OpenSSL::OCSP::Request.new(der) -> OpenSSL::OCSP::Request
 
 Request オブジェクトを生成します。
 引数なしの場合は、中身が空のオブジェクトを生成します。
@@ -560,8 +560,8 @@ OCSP レスポンダからのレスポンスを表わすオブジェクトです
 
 ## Class Methods
 
-### def new -> OpenSSL::OCSP::Response
-### def new(der) -> OpenSSL::OCSP::Response
+### def OpenSSL::OCSP::Response.new -> OpenSSL::OCSP::Response
+### def OpenSSL::OCSP::Response.new(der) -> OpenSSL::OCSP::Response
 
 Response オブジェクトを生成します。
 
@@ -571,7 +571,7 @@ DER 形式の文字列を渡した場合はその内容を
 - **param** `der` -- DER 形式の文字列
 - **SEE** [m:OpenSSL::OCSP::Response.create]
 
-### def create(status, basic_resp) -> OpenSSL::OCSP::Response
+### def OpenSSL::OCSP::Response.create(status, basic_resp) -> OpenSSL::OCSP::Response
 
 Response オブジェクトを [c:OpenSSL::OCSP::BasicResponse] オブジェクト
 から生成します。

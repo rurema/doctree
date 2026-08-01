@@ -13,7 +13,7 @@ YAML の scalar 型を読み込んで Ruby の built-in 型に変換するクラ
 
 ## Class Methods
 
-### def new
+### def Psych::ScalarScanner.new
 
 新たな ScalarScanner オブジェクトを生成します。
 

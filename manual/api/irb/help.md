@@ -7,6 +7,6 @@ irb コマンドのヘルプを表示するためのライブラリです。
 
 ## Singleton Methods
 
-### def print_usage -> ()
+### def IRB.print_usage -> ()
 
 irb コマンドのヘルプを表示します。

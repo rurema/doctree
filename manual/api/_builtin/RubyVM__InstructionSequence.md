@@ -22,8 +22,8 @@ VM の命令シーケンスの一覧はRuby のソースコード中の insns.de
 
 ## Singleton Methods
 
-### def compile(source, file = nil, path = nil, line = 1, options = nil) -> RubyVM::InstructionSequence
-### def new(source, file = nil, path = nil, line = 1, options = nil) -> RubyVM::InstructionSequence
+### def RubyVM::InstructionSequence.compile(source, file = nil, path = nil, line = 1, options = nil) -> RubyVM::InstructionSequence
+### def RubyVM::InstructionSequence.new(source, file = nil, path = nil, line = 1, options = nil) -> RubyVM::InstructionSequence
 
 引数 source で指定した Ruby のソースコードを元にコンパイル済みの
 [c:RubyVM::InstructionSequence] オブジェクトを作成して返します。
@@ -48,7 +48,7 @@ p RubyVM::InstructionSequence.compile("a = 1 + 2")
 
 - **SEE** [m:RubyVM::InstructionSequence.compile_file]
 
-### def compile_file(file, options = nil) -> RubyVM::InstructionSequence
+### def RubyVM::InstructionSequence.compile_file(file, options = nil) -> RubyVM::InstructionSequence
 
 引数 file で指定した Ruby のソースコードを元にコンパイル済みの
 [c:RubyVM::InstructionSequence] オブジェクトを作成して返します。
@@ -74,7 +74,7 @@ p RubyVM::InstructionSequence.compile_file("/tmp/hello.rb")
 
 - **SEE** [m:RubyVM::InstructionSequence.compile]
 
-### def compile_option -> Hash
+### def RubyVM::InstructionSequence.compile_option -> Hash
 
 命令シーケンスのコンパイル時のデフォルトの最適化オプションを Hash で返
 します。
@@ -140,7 +140,7 @@ pp RubyVM::InstructionSequence.compile_option
 
 - **SEE** [m:RubyVM::InstructionSequence.compile_option=]
 
-### def compile_option=(options)
+### def RubyVM::InstructionSequence.compile_option=(options)
 
 命令シーケンスのコンパイル時のデフォルトの最適化オプションを引数
 options で指定します。
@@ -172,8 +172,8 @@ options で指定します。
      [m:RubyVM::InstructionSequence.compile],
      [m:RubyVM::InstructionSequence.compile_file]
 
-### def disasm(body)      -> String
-### def disassemble(body) -> String
+### def RubyVM::InstructionSequence.disasm(body)      -> String
+### def RubyVM::InstructionSequence.disassemble(body) -> String
 
 引数 body で指定したオブジェクトから作成した
 [c:RubyVM::InstructionSequence] オブジェクトを人間が読める形式の文字
@@ -230,7 +230,7 @@ puts RubyVM::InstructionSequence.disasm(method(:hello))
 
 - **SEE** [m:RubyVM::InstructionSequence#disasm]
 
-### def of(body) -> RubyVM::InstructionSequence
+### def RubyVM::InstructionSequence.of(body) -> RubyVM::InstructionSequence
 
 引数 body で指定した [c:Proc]、[c:Method] オブジェクトを元に
 [c:RubyVM::InstructionSequence] オブジェクトを作成して返します。
@@ -273,7 +273,7 @@ $a_global_proc = proc { str = 'a' + 'b' }
 > # => #<RubyVM::InstructionSequence:0x007fb73d7caf78>
 ```
 
-### def load_from_binary(binary) -> RubyVM::InstructionSequence
+### def RubyVM::InstructionSequence.load_from_binary(binary) -> RubyVM::InstructionSequence
 
 [m:RubyVM::InstructionSequence#to_binary]により作られたバイナリフォーマットの文字列からiseqのオブジェクトをロードします。
 
@@ -289,7 +289,7 @@ p RubyVM::InstructionSequence.load_from_binary(binary).eval # => 3
 
 - **SEE** [m:RubyVM::InstructionSequence#to_binary]
 
-### def load_from_binary_extra_data(binary) -> String
+### def RubyVM::InstructionSequence.load_from_binary_extra_data(binary) -> String
 
 バイナリフォーマットの文字列から埋め込まれたextra_dataを取り出します。
 

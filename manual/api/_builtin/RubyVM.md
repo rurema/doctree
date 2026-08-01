@@ -35,9 +35,9 @@ Ruby の 内部情報へのアクセス手段を提供するクラスです。
 #%#
 #%# VM_COLLECT_USAGE_DETAILS を有効にしてコンパイルした時のみ有効
 
-### def stat -> Hash
-### def stat(hsh) -> Hash
-### def stat(sym) -> Integer
+### def RubyVM.stat -> Hash
+### def RubyVM.stat(hsh) -> Hash
+### def RubyVM.stat(sym) -> Integer
 
 VM 内部のキャッシュなどに関する統計情報を返します。
 

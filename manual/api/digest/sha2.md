@@ -31,7 +31,7 @@ Standards and Technology) の SHA-512 Secure Hash Algorithmを
 
 # class Digest::SHA2 < Digest::Class
 ## Class Methods
-### def new(bitlen = 256) -> Digest::SHA2
+### def Digest::SHA2.new(bitlen = 256) -> Digest::SHA2
 
 与えられた bitlen に対応する SHA2 ハッシュを生成するためのオブジェクト
 を内部で設定して自身を初期化します。

@@ -131,7 +131,7 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
 これは TSort が内部でハッシュを用いているからです。
 
 ## Class Methods
-### def tsort(each_node, each_child) -> Array
+### def TSort.tsort(each_node, each_child) -> Array
 
 頂点をトポロジカルソートして得られる配列を返します。
 この配列は子から親に向かってソートされています。
@@ -163,8 +163,8 @@ p TSort.tsort(each_node, each_child) # raises TSort::Cyclic
 
 - **SEE** [m:TSort#tsort]
 
-### def tsort_each(each_node, each_child) {|node| ...} -> nil
-### def tsort_each(each_node, each_child) -> Enumerator
+### def TSort.tsort_each(each_node, each_child) {|node| ...} -> nil
+### def TSort.tsort_each(each_node, each_child) -> Enumerator
 
 [m:TSort.tsort] メソッドのイテレータ版です。
 
@@ -193,7 +193,7 @@ TSort.tsort_each(each_node, each_child) {|n| p n }
 
 - **SEE** [m:TSort#tsort_each]
 
-### def strongly_connected_components(each_node, each_child) -> Array
+### def TSort.strongly_connected_components(each_node, each_child) -> Array
 
 強連結成分の集まりを配列の配列として返します。
 この配列は子から親に向かってソートされています。
@@ -225,8 +225,8 @@ p TSort.strongly_connected_components(each_node, each_child)
 
 - **SEE** [m:TSort#strongly_connected_components]
 
-### def each_strongly_connected_component(each_node, each_child) {|nodes| ...} -> nil
-### def each_strongly_connected_component(each_node, each_child) -> Enumerator
+### def TSort.each_strongly_connected_component(each_node, each_child) {|nodes| ...} -> nil
+### def TSort.each_strongly_connected_component(each_node, each_child) -> Enumerator
 
 [m:TSort.strongly_connected_components] メソッドのイテレータ版です。
 
@@ -263,8 +263,8 @@ TSort.each_strongly_connected_component(each_node, each_child) {|scc| p scc }
 
 - **SEE** [m:TSort#each_strongly_connected_component]
 
-### def each_strongly_connected_component_from(node, each_child, id_map={}, stack=[]) {|nodes| ...} -> ()
-### def each_strongly_connected_component_from(node, each_child, id_map={}, stack=[]) -> Enumerator
+### def TSort.each_strongly_connected_component_from(node, each_child, id_map={}, stack=[]) {|nodes| ...} -> ()
+### def TSort.each_strongly_connected_component_from(node, each_child, id_map={}, stack=[]) -> Enumerator
 
 node から到達可能な強連結成分についてのイテレータです。
 

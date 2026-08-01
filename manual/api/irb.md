@@ -696,11 +696,11 @@ irb のメインモジュールです。
 
 ## Class Methods
 
-### def conf -> Hash
+### def IRB.conf -> Hash
 
 irb の設定をハッシュで返します。
 
-### def version -> String
+### def IRB.version -> String
 
 IRB のバージョンを文字列で返します。
 
@@ -711,19 +711,19 @@ IRB のバージョンを文字列で返します。
 
 現在の irb に関する [c:IRB::Context] を返します。
 
-### def start(ap_path = nil) -> ()
+### def IRB.start(ap_path = nil) -> ()
 
 [c:IRB] を初期化して、トップレベルの irb を開始します。
 
 - **param** `ap_path` -- irb コマンドのパスを指定します。
 
-### def irb_at_exit -> ()
+### def IRB.irb_at_exit -> ()
 
 at_exit で登録された処理を実行します。
 
 ユーザが直接使用するものではありません。
 
-### def irb_exit(irb, ret) -> object
+### def IRB.irb_exit(irb, ret) -> object
 
 irb を終了します。ret で指定したオブジェクトを返します。
 
@@ -733,7 +733,7 @@ irb を終了します。ret で指定したオブジェクトを返します。
 
 ユーザが直接使用するものではありません。
 
-### def irb_abort(irb, exception = Abort)
+### def IRB.irb_abort(irb, exception = Abort)
 
 実行中の処理を中断します。必ず例外が発生するため、何も返しません。
 

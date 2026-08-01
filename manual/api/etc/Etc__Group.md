@@ -13,8 +13,8 @@ alias:
 
 ## Class Methods
 
-### def each {|entry| ... } -> Etc::Group
-### def each                -> Enumerator
+### def Etc::Group.each {|entry| ... } -> Etc::Group
+### def Etc::Group.each                -> Enumerator
 
 /etc/group に含まれるエントリを一つずつブロックに渡して評価します。
 ブロックを省略した場合は [c:Enumerator] を返します。

@@ -17,7 +17,7 @@ XML の要素(エレメント、element)を表すクラス。
 
 ## Class Methods
 
-### def new(arg = UNDEFINED, parent = nil, context = nil) -> REXML::Element
+### def REXML::Element.new(arg = UNDEFINED, parent = nil, context = nil) -> REXML::Element
 
 要素オブジェクトを生成します。
 

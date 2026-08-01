@@ -198,8 +198,8 @@ NaN を表す [c:BigDecimal] オブジェクトを返します。
 
 ## Class Methods
 
-### def mode(s)    -> Integer | nil
-### def mode(s, v) -> Integer | nil
+### def BigDecimal.mode(s)    -> Integer | nil
+### def BigDecimal.mode(s, v) -> Integer | nil
 
 [c:BigDecimal] の計算処理の制御方法を設定、確認します。
 
@@ -281,7 +281,7 @@ f = BigDecimal::mode(BigDecimal::ROUND_MODE,flag)
 
 戻り値は指定後の flag の値です。第2引数に nil を指定すると、現状の設定値が返ります。 mode メソッドでは丸め操作の位置をユーザが指定することはできません。丸め操作と位置を自分で制御したい場合は BigDecimal::limit や truncate/round/ceil/floor、 add/sub/mult/div といったインスタンスメソッドを使用して下さい。
 
-### def limit(n = nil) -> Integer
+### def BigDecimal.limit(n = nil) -> Integer
 
 生成されるBigDecimalオブジェクトの最大桁数をn桁に制限します。
 n を指定しない、または n が nil の場合は、現状の最大桁数が返ります。
@@ -305,7 +305,7 @@ mf = BigDecimal::limit(n)
 
 - **raise** `ArgumentError` -- n に負の数を指定した場合に発生します。
 
-### def double_fig -> Integer
+### def BigDecimal.double_fig -> Integer
 
 Ruby の [c:Float] クラスが保持できる有効数字の数を返します。
 
@@ -325,7 +325,7 @@ while (v + 1.0 > 1.0) {
 }
 ```
 
-### def _load(str) -> BigDecimal
+### def BigDecimal._load(str) -> BigDecimal
 
 引数で指定された文字列を元に [c:BigDecimal] オブジェクトを復元します。
 [m:Marshal?.load] から呼び出されます。

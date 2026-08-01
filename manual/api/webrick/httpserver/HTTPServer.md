@@ -19,7 +19,7 @@ srv.start
 
 ## Class Methods
 
-### def new(config = {}, default = WEBrick::Config::HTTP)    -> WEBrick::HTTPServer
+### def WEBrick::HTTPServer.new(config = {}, default = WEBrick::Config::HTTP)    -> WEBrick::HTTPServer
 
 HTTPServer オブジェクトを生成して返します。
 

@@ -38,7 +38,7 @@ p output.string
 ```
 
 ## Class Method
-### def new(ie_hack=false) -> REXML::Formatter::Default
+### def REXML::Formatters::Default.new(ie_hack=false) -> REXML::Formatter::Default
 
 フォーマッタオブジェクトを生成して返します。
 

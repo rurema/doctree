@@ -100,7 +100,7 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する�
 
 ## Class Methods
 
-### def new(irb, workspace = nil, input_method = nil, output_method = nil) -> IRB::Context
+### def IRB::Context.new(irb, workspace = nil, input_method = nil, output_method = nil) -> IRB::Context
 
 自身を初期化します。
 

@@ -34,7 +34,7 @@ p doctype.children.find_all{|child| REXML::ExternalEntity === child }.map(&:to_s
 
 ## Class Methods
 
-### def new(src) -> REXML::ExternalEntity
+### def REXML::ExternalEntity.new(src) -> REXML::ExternalEntity
 
 新たな ExternalEntity オブジェクトを生成します。
 

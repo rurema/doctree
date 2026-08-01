@@ -31,7 +31,7 @@ end
 
 ## Class Methods
 
-### def new(file, thread_safe = false) -> PStore
+### def PStore.new(file, thread_safe = false) -> PStore
 
 ファイル名 file に対してデータベースを読み書きします。
 

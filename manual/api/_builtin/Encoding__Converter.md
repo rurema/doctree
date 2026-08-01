@@ -11,9 +11,9 @@ Encoding::Converter を用いて変換を行う場合は、[m:Encoding::Converte
 などがあります。
 
 ## Class Methods
-### def new(source_encoding, destination_encoding) -> Encoding::Converter
-### def new(source_encoding, destination_encoding, options) -> Encoding::Converter
-### def new(convpath) -> Encoding::Converter
+### def Encoding::Converter.new(source_encoding, destination_encoding) -> Encoding::Converter
+### def Encoding::Converter.new(source_encoding, destination_encoding, options) -> Encoding::Converter
+### def Encoding::Converter.new(convpath) -> Encoding::Converter
 
 Encoding::Converter オブジェクトを作成します。
 
@@ -56,8 +56,8 @@ p ec.convpath #=> ["universal_newline",
               #    [#<Encoding:UTF-8>, #<Encoding:UTF-16BE>]]
 ```
 
-### def asciicompat_encoding(string) -> Encoding | nil
-### def asciicompat_encoding(encoding) -> Encoding | nil
+### def Encoding::Converter.asciicompat_encoding(string) -> Encoding | nil
+### def Encoding::Converter.asciicompat_encoding(encoding) -> Encoding | nil
 
 同じ文字集合を持つ ASCII 互換エンコーディングを返します。
 
@@ -74,7 +74,7 @@ p Encoding::Converter.asciicompat_encoding("UTF-16BE") #=> #<Encoding:UTF-8>
 p Encoding::Converter.asciicompat_encoding("UTF-8") #=> nil
 ```
 
-### def search_convpath(source_encoding, destination_encoding, options) -> Array
+### def Encoding::Converter.search_convpath(source_encoding, destination_encoding, options) -> Array
 
 引数で指定した文字エンコーディングの変換の経路を配列にして返します。
 

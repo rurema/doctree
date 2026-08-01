@@ -16,7 +16,7 @@ URI を扱うためのモジュールです。
 
 ## Singleton Methods
 
-### def split(url)    -> [String | nil]
+### def URI.split(url)    -> [String | nil]
 
 URI を要素に分割した文字列の配列を返します。
 
@@ -42,7 +42,7 @@ p URI.split("http://www.ruby-lang.org/")
 #=> ["http", nil, "www.ruby-lang.org", nil, nil, "/", nil, nil, nil]
 ```
 
-### def parse(uri_str)    -> object
+### def URI.parse(uri_str)    -> object
 
 与えられた URI から該当する [c:URI::Generic] のサブクラスのインスタンスを生成して
 返します。scheme が指定されていない場合は、[c:URI::Generic] オブジェクトを返します。
@@ -64,7 +64,7 @@ p uri.port      # => 80
 p uri.path      # => "/"
 ```
 
-### def join(uri_str, *path)    -> object
+### def URI.join(uri_str, *path)    -> object
 
 文字列 uri_str と path ... を URI として連結して得られる
 URI オブジェクトを返します。
@@ -92,10 +92,10 @@ p URI.join('http://www.ruby-lang.org/', '/ja/man-1.6/')
 => #<URI::HTTP:0x2010017a URL:http://www.ruby-lang.org/ja/man-1.6/>
 ```
 
-### def extract(str)                               -> [String]
-### def extract(str, schemes)                      -> [String]
-### def extract(str) {|uri_str| ... }              -> nil
-### def extract(str, schemes) {|uri_str| ... }     -> nil
+### def URI.extract(str)                               -> [String]
+### def URI.extract(str, schemes)                      -> [String]
+### def URI.extract(str) {|uri_str| ... }              -> nil
+### def URI.extract(str, schemes) {|uri_str| ... }     -> nil
 
 文字列 str に対して正規表現によるマッチを試み、
 絶対URIにマッチした部分文字列からなる配列として返します。
@@ -125,8 +125,8 @@ p URI.extract(str, ["http"])
 => ["http://www.ruby-lang.org/", "http://www.ruby-lang.org/man-1.6/"]
 ```
 
-### def regexp             -> Regexp
-### def regexp(schemes)    -> Regexp
+### def URI.regexp             -> Regexp
+### def URI.regexp(schemes)    -> Regexp
 
 URIにマッチする正規表現を返します。
 
@@ -151,7 +151,7 @@ require 'uri'
 p URI.regexp =~ "http://www.ruby-lang.org/"  #=> 0
 ```
 
-### def decode_www_form(str, enc=Encoding::UTF_8) -> [[String, String]]
+### def URI.decode_www_form(str, enc=Encoding::UTF_8) -> [[String, String]]
 
 文字列から URL-encoded form data をデコードします。
 
@@ -180,7 +180,7 @@ p Hash[ary]           #=> {"a"=>"2", "b"=>"3"}
 - **raise** `ArgumentError` -- str のフォーマットが不正である場合に発生します
 - **SEE** [m:URI.decode_www_form_component], [m:URI.encode_www_form]
 
-### def decode_www_form_component(str, enc=Encoding::UTF_8) -> String
+### def URI.decode_www_form_component(str, enc=Encoding::UTF_8) -> String
 
 URL-encoded form data の文字列の各コンポーネント
 をデコードした文字列を返します。
@@ -212,7 +212,7 @@ p URI.decode_www_form_component(enc)
 - **raise** `ArgumentError` -- str のフォーマットが不正である場合に発生します
 - **SEE** [m:URI.encode_www_form_component], [m:URI.decode_www_form]
 
-### def encode_www_form(enum, enc=nil) -> String
+### def URI.encode_www_form(enum, enc=nil) -> String
 
 enum から URL-encoded form data を生成します。
 
@@ -260,7 +260,7 @@ UTF-8 に変換する場合など)。
 - **param** `enc` -- 指定された場合、パーセントエンコーディングする前に、このエンコーディングに変換
 - **SEE** [m:URI.encode_www_form_component], [m:URI.decode_www_form]
 
-### def encode_www_form_component(str, enc=nil) -> String
+### def URI.encode_www_form_component(str, enc=nil) -> String
 
 文字列を URL-encoded form data の1コンポーネント
 としてエンコードした文字列を返します。

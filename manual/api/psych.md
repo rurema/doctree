@@ -105,7 +105,7 @@ libyaml のバージョン。
 
 ## Class Methods
 
-### def libyaml_version -> [Integer, Integer, Integer]
+### def Psych.libyaml_version -> [Integer, Integer, Integer]
 
 libyaml のバージョンを返します。
 
@@ -113,9 +113,9 @@ libyaml のバージョンを返します。
 
 - **SEE** [m:Psych::LIBYAML_VERSION]
 
-### def load(yaml, filename: nil, fallback: false, symbolize_names: false) -> object
+### def Psych.load(yaml, filename: nil, fallback: false, symbolize_names: false) -> object
 #%until 3.1
-### def load(yaml, filename = nil, fallback: false, symbolize_names: false) -> object
+### def Psych.load(yaml, filename = nil, fallback: false, symbolize_names: false) -> object
 #%end
 
 YAML ドキュメントを Ruby のデータ構造(オブジェクト)に変換します。
@@ -155,8 +155,8 @@ p Psych.load("---\n foo: bar")                       # => {"foo"=>"bar"}
 p Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 ```
 
-### def safe_load(yaml, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false) -> object
-### def safe_load(yaml, legacy_permitted_classes=[], legacy_permitted_symbols=[], legacy_aliases=false, legacy_filename=nil) -> object
+### def Psych.safe_load(yaml, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false) -> object
+### def Psych.safe_load(yaml, legacy_permitted_classes=[], legacy_permitted_symbols=[], legacy_aliases=false, legacy_filename=nil) -> object
 
 安全に YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
 
@@ -251,7 +251,7 @@ Psych.safe_load("", [Date])
 - **param** `freeze` -- true を指定すると再帰的に freeze されたオブジェクトを返します。
               デフォルトは false です。
 
-### def parse(yaml, filename = nil) -> Psych::Nodes::Document
+### def Psych.parse(yaml, filename = nil) -> Psych::Nodes::Document
 
 YAML ドキュメントをパースし、YAML の AST を返します。
 
@@ -278,19 +278,19 @@ rescue Psych::SyntaxError => ex
 end
 ```
 
-### def parse_file(filename) -> Psych::Nodes::Document
+### def Psych.parse_file(filename) -> Psych::Nodes::Document
 
 filename で指定したファイルをパースして YAML の AST を返します。
 
 - **param** `filename` -- パースするファイルの名前
 - **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
 
-### def parser -> Psych::Parser
+### def Psych.parser -> Psych::Parser
 
 デフォルトで使われるのパーサを返します。
 
-### def parse_stream(yaml) -> Psych::Nodes::Stream
-### def parse_stream(yaml){|node| ... } -> ()
+### def Psych.parse_stream(yaml) -> Psych::Nodes::Stream
+### def Psych.parse_stream(yaml){|node| ... } -> ()
 
 YAML ドキュメントをパースします。
 yaml が 複数の YAML ドキュメントを含む場合を取り扱うことができます。
@@ -308,8 +308,8 @@ yaml が 複数の YAML ドキュメントを含む場合を取り扱うこと�
 p Psych.parse_stream("---\n - a\n - b") # => #<Psych::Nodes::Stream:0x00>
 ```
 
-### def dump(o, options = {}) -> String
-### def dump(o, io, options = {}) -> ()
+### def Psych.dump(o, options = {}) -> String
+### def Psych.dump(o, io, options = {}) -> ()
 
 Ruby のオブジェクト o を YAML ドキュメントに変換します。
 
@@ -340,7 +340,7 @@ p Psych.dump(['a', ['b']], :indentation => 3) # => "---\n- a\n-  - b\n"
 Psych.dump(['a', ['b']], StringIO.new, :indentation => 3)
 ```
 
-### def dump_stream(*objects) -> String
+### def Psych.dump_stream(*objects) -> String
 
 オブジェクト列を YAML ドキュメント列に変換します。
 
@@ -350,14 +350,14 @@ Psych.dump(['a', ['b']], StringIO.new, :indentation => 3)
 p Psych.dump_stream("foo\n  ", {}) # => "--- ! \"foo\\n  \"\n--- {}\n"
 ```
 
-### def to_json(o) -> String
+### def Psych.to_json(o) -> String
 
 Ruby のオブジェクト o を JSON の文字列に変換します。
 
 - **param** `o` -- 変換対象となるオブジェクト
 
-### def load_stream(yaml, filename=nil) -> [object]
-### def load_stream(yaml, filename=nil){|obj| ... } -> ()
+### def Psych.load_stream(yaml, filename=nil) -> [object]
+### def Psych.load_stream(yaml, filename=nil){|obj| ... } -> ()
 
 複数の YAML ドキュメントを含むデータを
 Ruby のオブジェクトに変換します。
@@ -384,7 +384,7 @@ filename はパース中に発生した例外のメッセージに用います�
 - **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列。
 - **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
 
-### def load_file(filename) -> object
+### def Psych.load_file(filename) -> object
 
 filename で指定したファイルを YAML ドキュメントとして
 Ruby のオブジェクトに変換します。

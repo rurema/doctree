@@ -11,7 +11,7 @@ ruby 1.8.3 以降では単に require するだけでは SSL/TLS は有効では
 
 ## Class Methods
 
-### def new(config = {}, default = WEBrick::Config::General) -> WEBrick::GenericServer
+### def WEBrick::GenericServer.new(config = {}, default = WEBrick::Config::General) -> WEBrick::GenericServer
 
 GenericServer オブジェクトを生成して返します。
 

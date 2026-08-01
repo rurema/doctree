@@ -67,7 +67,7 @@ UTF-16BE エンコーディングを表します。
 
 ## Class Methods
 
-### def new(handler = Handler.new) -> Psych::Parser
+### def Psych::Parser.new(handler = Handler.new) -> Psych::Parser
 
 新たなパーサオブジェクトを生成して返します。
 

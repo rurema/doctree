@@ -12,12 +12,12 @@ require:
 
 ## Singleton Methods
 
-### def class_name -> String
+### def Gem::Ext::Builder.class_name -> String
 #%todo
 
 ビルダーのクラス名を返します。
 
-### def make(dest_path, results)
+### def Gem::Ext::Builder.make(dest_path, results)
 #%todo
 
 Makefile を編集して make, make install を実行します。
@@ -30,12 +30,12 @@ Makefile を編集して make, make install を実行します。
 
 - **raise** `Gem::InstallError` -- make の実行に失敗した場合に発生します。
 
-### def redirector -> String
+### def Gem::Ext::Builder.redirector -> String
 #%todo
 
 '2>&1' という文字列を返します。
 
-### def run(command, results)
+### def Gem::Ext::Builder.run(command, results)
 #%todo
 
 与えられたコマンドを実行します。

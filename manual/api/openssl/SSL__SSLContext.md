@@ -23,8 +23,8 @@ verify_mode= と options= で指定できる定数に関しては [c:OpenSSL::SS
 
 ## Class Methods
 
-### def new(ssl_method) -> OpenSSL::SSL::SSLContext
-### def new -> OpenSSL::SSL::SSLContext
+### def OpenSSL::SSL::SSLContext.new(ssl_method) -> OpenSSL::SSL::SSLContext
+### def OpenSSL::SSL::SSLContext.new -> OpenSSL::SSL::SSLContext
 
 SSL コンテキストオブジェクトを生成します。
 

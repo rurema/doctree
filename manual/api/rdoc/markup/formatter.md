@@ -14,7 +14,7 @@ RDoc 形式のドキュメントを整形するための基本クラスです。
 
 ## Class Methods
 
-### def new(markup = nil) -> RDoc::Markup::Formatter
+### def RDoc::Markup::Formatter.new(markup = nil) -> RDoc::Markup::Formatter
 
 自身を初期化します。
 

@@ -45,7 +45,7 @@ Gem の [c:Gem::Specification] をセットします。
 
 ## Singleton Methods
 
-### def from_file_by_path(file_path, security_policy = nil) -> Gem::Format
+### def Gem::Format.from_file_by_path(file_path, security_policy = nil) -> Gem::Format
 #%todo security_policy
 
 Gem ファイルのパスからデータを読み込んで、自身を初期化して返します。
@@ -54,7 +54,7 @@ Gem ファイルのパスからデータを読み込んで、自身を初期化�
 
 - **param** `security_policy` -- ???
 
-### def from_io(io, gem_path = '(io)', security_policy = nil) -> Gem::Format
+### def Gem::Format.from_io(io, gem_path = '(io)', security_policy = nil) -> Gem::Format
 #%todo security_policy
 
 Gem ファイルからデータを読み込んだ IO を受け取り、自身を初期化して返します。
@@ -65,7 +65,7 @@ Gem ファイルからデータを読み込んだ IO を受け取り、自身を
 
 - **param** `security_policy` -- ???
 
-### def new(gem_path)
+### def Gem::Format.new(gem_path)
 
 自身を初期化します。
 

@@ -40,7 +40,7 @@ Ruby 3.2 で「実験的」の位置づけが外れ、Ruby 3.3 では実行時�
 
 ## Singleton Methods
 
-### def enabled? -> bool
+### def RubyVM::YJIT.enabled? -> bool
 
 YJIT が有効かどうかを返します。
 
@@ -55,7 +55,7 @@ JIT の有効・無効はコマンドラインオプションや環境変数な�
 - **SEE** [m:RubyVM::YJIT.enable]
 #%end
 
-### def stats_enabled? -> bool
+### def RubyVM::YJIT.stats_enabled? -> bool
 
 `--yjit-stats` が指定されているなど、統計情報の収集が有効かどうかを返します。
 
@@ -66,14 +66,14 @@ JIT の有効・無効はコマンドラインオプションや環境変数な�
 #%end
 
 #%since 3.4
-### def log_enabled? -> bool
+### def RubyVM::YJIT.log_enabled? -> bool
 
 `--yjit-log` が指定されているなど、コンパイルログの収集が有効かどうかを返します。
 
 - **SEE** [m:RubyVM::YJIT.log], [m:RubyVM::YJIT.enable]
 #%end
 
-### def reset_stats! -> nil
+### def RubyVM::YJIT.reset_stats! -> nil
 
 `--yjit-stats` で収集した統計情報を破棄します。
 
@@ -81,13 +81,13 @@ JIT の有効・無効はコマンドラインオプションや環境変数な�
 
 #%since 3.3
 #%version 4.0...
-### def enable(stats: false, log: false, mem_size: nil, call_threshold: nil) -> bool
+### def RubyVM::YJIT.enable(stats: false, log: false, mem_size: nil, call_threshold: nil) -> bool
 #%end
 #%version 3.4...4.0
-### def enable(stats: false, log: false) -> bool
+### def RubyVM::YJIT.enable(stats: false, log: false) -> bool
 #%end
 #%version ...3.4
-### def enable(stats: false) -> bool
+### def RubyVM::YJIT.enable(stats: false) -> bool
 #%end
 
 実行時に YJIT を有効化します。
@@ -122,7 +122,7 @@ JIT の有効・無効はビルドオプションや実行環境に依存する�
 #%end
 
 #%since 3.2
-### def dump_exit_locations(filename) -> Integer
+### def RubyVM::YJIT.dump_exit_locations(filename) -> Integer
 
 `--yjit-trace-exits` を指定して収集した、サイドイグジット(exit)が発生した位置の情報を
 Marshal 形式で `filename` にダンプします。ダンプしたファイルは Stackprof で読み込んで解析できます。
@@ -135,13 +135,13 @@ Marshal 形式で `filename` にダンプします。ダンプしたファイル
 #%end
 
 #%version 3.4...
-### def runtime_stats(key = nil) -> Hash | object | nil
+### def RubyVM::YJIT.runtime_stats(key = nil) -> Hash | object | nil
 #%end
 #%version 3.3...3.4
-### def runtime_stats(context: false) -> Hash | nil
+### def RubyVM::YJIT.runtime_stats(context: false) -> Hash | nil
 #%end
 #%version ...3.3
-### def runtime_stats -> Hash | nil
+### def RubyVM::YJIT.runtime_stats -> Hash | nil
 #%end
 
 `--yjit-stats` コマンドラインオプションを指定して収集した統計情報を返します。
@@ -167,7 +167,7 @@ Marshal 形式で `filename` にダンプします。ダンプしたファイル
 - **SEE** [m:RubyVM::YJIT.stats_enabled?], [m:RubyVM::YJIT.reset_stats!]
 
 #%since 3.3
-### def stats_string -> String
+### def RubyVM::YJIT.stats_string -> String
 
 [m:RubyVM::YJIT.runtime_stats] の内容を人が読める形式に整形した文字列を返します。
 `--yjit-stats` が有効なとき以外は空文字列を返します。
@@ -178,7 +178,7 @@ Marshal 形式で `filename` にダンプします。ダンプしたファイル
 #%end
 
 #%since 3.4
-### def log -> [[Time, String]] | nil
+### def RubyVM::YJIT.log -> [[Time, String]] | nil
 
 `--yjit-log` で収集したコンパイルログを返します。配列の各要素は、
 コンパイルした日時とコンパイル対象を表す文字列との組です。
@@ -190,7 +190,7 @@ Marshal 形式で `filename` にダンプします。ダンプしたファイル
 #%end
 
 #%since 3.2
-### def code_gc -> nil
+### def RubyVM::YJIT.code_gc -> nil
 
 コンパイル済みのコードを破棄してメモリを解放します。以降、必要に応じて再度コンパイルが行われます。
 #%end

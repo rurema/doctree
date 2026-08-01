@@ -6,7 +6,7 @@ type: library
 # reopen Rational
 ## Singleton Methods
 
-### def json_create(hash) -> Rational
+### def Rational.json_create(hash) -> Rational
 
 JSON のオブジェクトから [c:Rational] のオブジェクトを生成して返します。
 

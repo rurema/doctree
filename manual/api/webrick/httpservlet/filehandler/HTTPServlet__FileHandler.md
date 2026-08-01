@@ -7,7 +7,7 @@ library: webrick/httpservlet/filehandler
 
 ## Class Methods
 
-### def add_handler(suffix, handler)
+### def WEBrick::HTTPServlet::FileHandler.add_handler(suffix, handler)
 #%# -> discard
 与えられた拡張子のファイルを処理するためのサーブレットを登録します。
 
@@ -15,13 +15,13 @@ library: webrick/httpservlet/filehandler
 
 - **param** `handler` -- サーブレットを指定します。
 
-### def remove_handler(suffix) -> Class
+### def WEBrick::HTTPServlet::FileHandler.remove_handler(suffix) -> Class
 
 与えられた拡張子に対応するサーブレットを削除します。
 
 - **param** `suffix` -- 拡張子を指定します。
 
-### def new(server, root, options = {}, default = WEBrick::Config::FileHandler)
+### def WEBrick::HTTPServlet::FileHandler.new(server, root, options = {}, default = WEBrick::Config::FileHandler)
 
 FileHandler サーブレットを生成します。ユーザが直接使うことはあまりあり
 ません。

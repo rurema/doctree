@@ -10,7 +10,7 @@ Readline::HISTORY を使用してヒストリにアクセスできます。
 [c:Array] クラスのように振る舞うことができます。
 例えば、HISTORY[4] により 5 番目に入力した内容を取り出すことができます。
 
-### def to_s -> "HISTORY"
+### def Readline::HISTORY.to_s -> "HISTORY"
 
 文字列"HISTORY"を返します。
 
@@ -19,7 +19,7 @@ require 'readline'
 p Readline::HISTORY.to_s #=> "HISTORY"
 ```
 
-### def [](index) -> String
+### def Readline::HISTORY.[](index) -> String
 
 ヒストリから index で指定したインデックスの内容を取得します。
 例えば index に 0 を指定すると最初の入力内容が取得できます。
@@ -67,7 +67,7 @@ require "readline"
 Readline::HISTORY[2 ** 64 + 1] # ~> RangeError
 ```
 
-### def []=(index, string)
+### def Readline::HISTORY.[]=(index, string)
 
 ヒストリの index で指定したインデックスの内容を string で指定した文字列で書き換えます。
 例えば index に 0 を指定すると最初の入力内容が書き換えます。
@@ -86,7 +86,7 @@ Readline::HISTORY[2 ** 64 + 1] # ~> RangeError
 
 - **raise** `NotImplementedError` -- サポートしていない環境で発生します。
 
-### def <<(string) -> self
+### def Readline::HISTORY.<<(string) -> self
 
 ヒストリの最後に string で指定した文字列を追加します。
 self を返します。
@@ -114,7 +114,7 @@ p Readline::HISTORY[-2] #=> "foo"
 
 - **SEE** [m:Readline::HISTORY.push]
 
-### def push(*string) -> self
+### def Readline::HISTORY.push(*string) -> self
 
 ヒストリの最後に string で指定した文字列を追加します。複数の string を指定できます。
 self を返します。
@@ -142,7 +142,7 @@ p Readline::HISTORY[-2] #=> "foo"
 
 - **SEE** [m:Readline::HISTORY.<<]
 
-### def pop -> String
+### def Readline::HISTORY.pop -> String
 
 ヒストリの最後の内容を取り出します。
 最後の内容は、ヒストリから取り除かれます。
@@ -161,7 +161,7 @@ p Readline::HISTORY.pop #=> "foo"
 - **SEE** [m:Readline::HISTORY.push]、[m:Readline::HISTORY.shift]、
      [m:Readline::HISTORY.delete_at]
 
-### def shift -> String
+### def Readline::HISTORY.shift -> String
 
 ヒストリの最初の内容を取り出します。
 最初の内容は、ヒストリから取り除かれます。
@@ -180,8 +180,8 @@ p Readline::HISTORY.shift #=> "baz"
 - **SEE** [m:Readline::HISTORY.push]、[m:Readline::HISTORY.pop]、
      [m:Readline::HISTORY.delete_at]
 
-### def each -> Enumerator
-### def each {|string| ... }
+### def Readline::HISTORY.each -> Enumerator
+### def Readline::HISTORY.each {|string| ... }
 
 ヒストリの内容に対してブロックを評価します。
 ブロックパラメータにはヒストリの最初から最後までの内容を順番に渡します。
@@ -207,8 +207,8 @@ e.each do |s|
 end
 ```
 
-### def length -> Integer
-### def size -> Integer
+### def Readline::HISTORY.length -> Integer
+### def Readline::HISTORY.size -> Integer
 
 ヒストリに格納された内容の数を取得します。
 
@@ -221,7 +221,7 @@ p Readline::HISTORY.length #=> 3
 
 - **SEE** [m:Readline::HISTORY.empty?]
 
-### def empty? -> bool
+### def Readline::HISTORY.empty? -> bool
 
 ヒストリに格納された内容の数が 0 の場合は true を、
 そうでない場合は false を返します。
@@ -236,7 +236,7 @@ p Readline::HISTORY.empty? #=> false
 
 - **SEE** [m:Readline::HISTORY.length]
 
-### def delete_at(index) -> String | nil
+### def Readline::HISTORY.delete_at(index) -> String | nil
 
 index で指定したインデックスの内容をヒストリから削除し、その内容を返します。
 該当する index の内容がヒストリになければ、 nil を返します。
@@ -258,7 +258,7 @@ Readline::HISTORY.delete_at(1)
 p Readline::HISTORY.to_a #=> ["foo", "baz"]
 ```
 
-### def clear -> self
+### def Readline::HISTORY.clear -> self
 
 ヒストリの内容をすべて削除して空にします。
 

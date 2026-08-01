@@ -6,8 +6,8 @@ library: openssl
 ASN.1 の Set 型(Universal タグのタグ番号17)を表すクラスです。
 
 ## Class method
-### def new(value) ->  OpenSSL::ASN1::Set
-### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Set
+### def OpenSSL::ASN1::Set.new(value) ->  OpenSSL::ASN1::Set
+### def OpenSSL::ASN1::Set.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Set
 
 ASN.1 の Set 型の値を表現する OpenSSL::ASN1::Set オブジェクトを
 生成します。

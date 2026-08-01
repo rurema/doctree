@@ -94,7 +94,7 @@ Gem パッケージを配布したり Gem パッケージに同梱されてい�
 
 ## Singleton Methods
 
-### def new(gem_dirs, port, daemon, addresses = nil) -> Gem::Server
+### def Gem::Server.new(gem_dirs, port, daemon, addresses = nil) -> Gem::Server
 
 サーバーを初期化します。
 
@@ -107,7 +107,7 @@ Gem パッケージを配布したり Gem パッケージに同梱されてい�
 
 - **param** `addresses` -- 
 
-### def run(options) -> Gem::Server
+### def Gem::Server.run(options) -> Gem::Server
 
 与えられたオプションを使用してサーバを起動します。
 

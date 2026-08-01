@@ -135,7 +135,7 @@ pp h
 オブジェクトなどを見やすく出力するためのクラスです。
 
 ## Class Methods
-### def pp(obj, out = $>, width = 79)    -> object
+### def PP.pp(obj, out = $>, width = 79)    -> object
 
 指定されたオブジェクト obj を出力先 out に幅 width で出力します。
 出力先 out を返します。
@@ -161,8 +161,8 @@ puts str
 
 - **SEE** [m:$>]
 
-### def sharing_detection                 -> bool
-### def sharing_detection=(boolean)
+### def PP.sharing_detection                 -> bool
+### def PP.sharing_detection=(boolean)
 
 共有検出フラグを表すアクセサです。
 デフォルトは false です。true である場合、
@@ -181,7 +181,7 @@ PP.sharing_detection = true
 pp a                        #=> [[1, 2, 3], [...]]
 ```
 
-### def singleline_pp(obj, out=$>)    -> object
+### def PP.singleline_pp(obj, out=$>)    -> object
 
 指定されたオブジェクト obj を出力先 out に出力します。
 ただし、インデントも改行もしません。

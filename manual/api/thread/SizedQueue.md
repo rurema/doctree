@@ -33,7 +33,7 @@ th.join
 
 ## Class Methods
 
-### def new(max) -> Thread::SizedQueue
+### def Thread::SizedQueue.new(max) -> Thread::SizedQueue
 
 Thread::SizedQueue オブジェクトを生成します。
 

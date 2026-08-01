@@ -6,7 +6,7 @@ type: library
 # reopen Range
 ## Singleton Methods
 
-### def json_create(hash) -> Range
+### def Range.json_create(hash) -> Range
 
 JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 

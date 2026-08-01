@@ -27,7 +27,7 @@ ref.some_method_of_foo
 
 ## Class Methods
 
-### def new(orig) -> WeakRef
+### def WeakRef.new(orig) -> WeakRef
 
 与えられたオブジェクトを使って自身を初期化します。
 

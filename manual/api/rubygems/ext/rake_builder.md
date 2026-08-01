@@ -11,7 +11,7 @@ Rake を使用して拡張ライブラリをビルドするためのクラスで
 
 ## Singleton Methods
 
-### def build(extension, directory, dest_path, results) -> Array
+### def Gem::Ext::RakeBuilder.build(extension, directory, dest_path, results) -> Array
 #%todo
 
 mkrf_conf が存在する場合は、それを実行してから Rake を実行します。

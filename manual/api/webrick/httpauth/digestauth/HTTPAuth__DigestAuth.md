@@ -30,7 +30,7 @@ digest_auth = WEBrick::HTTPAuth::DigestAuth.new config
 
 ## Class Methods
 
-### def make_passwd(realm, user, pass) -> String
+### def WEBrick::HTTPAuth::DigestAuth.make_passwd(realm, user, pass) -> String
 
 与えられた情報を使用してハッシュ化したパスワードを生成します。
 
@@ -40,7 +40,7 @@ digest_auth = WEBrick::HTTPAuth::DigestAuth.new config
 
 - **param** `pass` -- パスワードを指定します。
 
-### def new(config, default = WEBrick::Config::DigestAuth) -> WEBrick::HTTPAuth::DigestAuth
+### def WEBrick::HTTPAuth::DigestAuth.new(config, default = WEBrick::Config::DigestAuth) -> WEBrick::HTTPAuth::DigestAuth
 
 自身を初期化します。
 

@@ -42,7 +42,7 @@ p output.string
 ```
 
 ## Class Method
-### def new(indentation=2, ie_hack=false) -> REXML::Formatter::Transitive
+### def REXML::Formatters::Transitive.new(indentation=2, ie_hack=false) -> REXML::Formatter::Transitive
 
 フォーマッタオブジェクトを生成して返します。
 

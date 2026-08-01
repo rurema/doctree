@@ -13,7 +13,7 @@ include:
 
 ## Class Methods
 
-### def new(sec = 180) -> Rinda::SimpleRenewer
+### def Rinda::SimpleRenewer.new(sec = 180) -> Rinda::SimpleRenewer
 
 新たな SimpleRenewer オブジェクトを生成します。
 

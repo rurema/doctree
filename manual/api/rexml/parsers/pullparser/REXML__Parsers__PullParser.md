@@ -11,7 +11,7 @@ extend:
 
 ## Class Methods
 
-### def new(stream) -> REXML::Parsers::PullParser
+### def REXML::Parsers::PullParser.new(stream) -> REXML::Parsers::PullParser
 
 新たな PullParser オブジェクトを生成して返します。
 

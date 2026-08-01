@@ -41,9 +41,9 @@ resource3
 
 ## Class Methods
 
-### def new -> Thread::Queue
+### def Thread::Queue.new -> Thread::Queue
 #%since 3.1
-### def new(items) -> Thread::Queue
+### def Thread::Queue.new(items) -> Thread::Queue
 #%end
 
 新しいキューオブジェクトを生成します。

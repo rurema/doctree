@@ -44,7 +44,7 @@ a = SomeSingletonClass.new  # ~> NoMethodError: private method `new' called for 
 
 ## Singleton Methods
 
-### def instance -> object
+### def Singleton.instance -> object
 
 そのクラスの唯一のインスタンスを返します。
 最初に呼ばれたときはそのインスタンスを生成します。

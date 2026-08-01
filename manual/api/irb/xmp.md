@@ -105,7 +105,7 @@ Ruby のソースコードとその実行結果を、行ごとに交互に表示
 
 ## Class Methods
 
-### def new(bind = nil) -> XMP
+### def XMP.new(bind = nil) -> XMP
 
 自身を初期化します。
 

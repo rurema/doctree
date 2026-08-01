@@ -68,7 +68,7 @@ tar ファイルを書き込むためのクラスです。
 
 ## Singleton Methods
 
-### def new(io) -> Gem::Package::TarWriter
+### def Gem::Package::TarWriter.new(io) -> Gem::Package::TarWriter
 
 自身を初期化します。
 
@@ -80,7 +80,7 @@ tar ファイルを書き込むためのクラスです。
 
 ## Singleton Methods
 
-### def new(io, limit) -> Gem::Package::TarWriter::BoundedStream
+### def Gem::Package::TarWriter::BoundedStream.new(io, limit) -> Gem::Package::TarWriter::BoundedStream
 
 自身を初期化します。
 
@@ -115,7 +115,7 @@ write メソッドのみを提供する [c:IO] のラッパークラスです。
 
 ## Singleton Methods
 
-### def new(io) -> Gem::Package::TarWriter::RestrictedStream
+### def Gem::Package::TarWriter::RestrictedStream.new(io) -> Gem::Package::TarWriter::RestrictedStream
 
 自身を初期化します。
 

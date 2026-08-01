@@ -20,7 +20,7 @@ until: "2.7.0"
 
 ## Singleton Methods
 
-### def new(sh, filename)
+### def Shell::AppendFile.new(sh, filename)
 #%todo
 
 ## Instance Methods
@@ -32,7 +32,7 @@ until: "2.7.0"
 
 ## Singleton Methods
 
-### def new(sh, filename)
+### def Shell::AppendIO.new(sh, filename)
 #%todo
 
 ## Instance Methods
@@ -44,7 +44,7 @@ until: "2.7.0"
 
 ## Singleton Methods
 
-### def new(sh, *filenames)
+### def Shell::Cat.new(sh, *filenames)
 #%todo
 
 ## Instance Methods
@@ -56,7 +56,7 @@ until: "2.7.0"
 
 ## Singleton Methods
 
-### def new(sh, *jobs)
+### def Shell::Concat.new(sh, *jobs)
 #%todo
 
 ## Instance Methods
@@ -68,7 +68,7 @@ until: "2.7.0"
 
 ## Singleton Methods
 
-### def new(sh, *strings)
+### def Shell::Echo.new(sh, *strings)
 #%todo
 
 ## Instance Methods
@@ -80,7 +80,7 @@ until: "2.7.0"
 
 ## Singleton Methods
 
-### def new(sh, pattern)
+### def Shell::Glob.new(sh, pattern)
 #%todo
 
 ## Instance Methods
@@ -92,7 +92,7 @@ until: "2.7.0"
 
 ## Singleton Methods
 
-### def new(sh, filename)
+### def Shell::Tee.new(sh, filename)
 #%todo
 
 ## Instance Methods
@@ -106,7 +106,7 @@ until: "2.7.0"
 
 ## Singleton Methods
 
-### def new(sh, *opts)
+### def Shell::Void.new(sh, *opts)
 
 ## Instance Methods
 

@@ -9,8 +9,8 @@ X509 証明書クラス
 
 ## Class Methods
 
-### def new -> OpenSSL::X509::Certificate
-### def new(obj) -> OpenSSL::X509::Certificate
+### def OpenSSL::X509::Certificate.new -> OpenSSL::X509::Certificate
+### def OpenSSL::X509::Certificate.new(obj) -> OpenSSL::X509::Certificate
 
 証明書オブジェクトを生成します。
 

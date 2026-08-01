@@ -9,7 +9,7 @@ DTD の属性リスト宣言を表すクラスです。
 
 ## Class Methods
 
-### def new(source) -> REXML::AttlistDecl
+### def REXML::AttlistDecl.new(source) -> REXML::AttlistDecl
 
 このメソッドは内部用なので使わないでください。
 

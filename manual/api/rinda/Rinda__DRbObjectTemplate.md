@@ -5,7 +5,7 @@ library: rinda/rinda
 
 ## Class Methods
 
-### def new(uri = nil, ref = nil)
+### def Rinda::DRbObjectTemplate.new(uri = nil, ref = nil)
 #%todo
 
 Creates a new DRbObjectTemplate that will match against +uri+ and

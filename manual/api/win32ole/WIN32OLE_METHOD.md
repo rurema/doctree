@@ -33,7 +33,7 @@ SIGNATURE
 
 ## Class Methods
 
-### def new(ole_type,  method) -> WIN32OLE_METHOD
+### def WIN32OLE_METHOD.new(ole_type,  method) -> WIN32OLE_METHOD
 
 [c:WIN32OLE_TYPE]とメソッド名を指定してWIN32OLE_METHODのインスタンス
 を生成します。

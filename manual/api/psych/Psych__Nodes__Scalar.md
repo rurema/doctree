@@ -8,7 +8,7 @@ YAML の scalar <https://yaml.org/spec/1.1/#id858081> を表すクラスです�
 これは AST の葉にあたるノードであり、子ノードを持ちません。
 
 ## Class Methods
-### def new(value, anchor=nil, tag=nil, plain=true, quoted=false, style=ANY) -> Psych::Nodes:Scalar
+### def Psych::Nodes::Scalar.new(value, anchor=nil, tag=nil, plain=true, quoted=false, style=ANY) -> Psych::Nodes:Scalar
 
 Scalar オブジェクトを生成します。
 

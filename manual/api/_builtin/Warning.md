@@ -12,7 +12,7 @@ since: "2.4.0"
 
 ## Class Methods
 
-### def [](category) -> bool
+### def Warning.[](category) -> bool
 
 category の種類の警告を表示するかどうかのフラグを返します。
 
@@ -40,7 +40,7 @@ category の種類の警告を表示するかどうかのフラグを返しま�
   「別クラスの同名メソッドがブロックを使う」場合を含めて、常に警告します。
 #%end
 
-### def []=(category, flag)
+### def Warning.[]=(category, flag)
 
 category の警告を表示するかどうかのフラグを設定します。
 サポートされている category については [m:Warning.\[\]] を参照してください。
@@ -50,7 +50,7 @@ category の警告を表示するかどうかのフラグを設定します。
 
 - **SEE** [m:Warning.\[\]]
 
-### def warn(message, category: nil) -> nil
+### def Warning.warn(message, category: nil) -> nil
 
 引数 message を標準エラー出力 [m:$stderr] に出力します。
 
@@ -77,7 +77,7 @@ warn("hoge", category: :deprecated)
 - **SEE** [m:Kernel?.warn], [m:Warning#warn]
 
 #%since 3.4
-### def categories -> Array
+### def Warning.categories -> Array
 
 警告カテゴリの一覧を返します。
 

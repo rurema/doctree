@@ -8,7 +8,7 @@ alias:
 署名者の情報を表すクラスです。
 
 ## Class Methods
-### def new(cert, key, digest) -> OpenSSL::PKCS7::SignerInfo
+### def OpenSSL::PKCS7::SignerInfo.new(cert, key, digest) -> OpenSSL::PKCS7::SignerInfo
 
 署名者オブジェクトを証明書、秘密鍵、ダイジェスト方式から生成します。
 

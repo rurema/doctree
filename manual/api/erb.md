@@ -148,9 +148,9 @@ puts template.result # => __ENCODING__ is Big5
 ## Class Methods
 
 #%since 3.2
-### def new(str, trim_mode: nil, eoutvar: '_erbout') -> ERB
+### def ERB.new(str, trim_mode: nil, eoutvar: '_erbout') -> ERB
 #%else
-### def new(str, safe_level=NOT_GIVEN, trim_mode=NOT_GIVEN, eoutvar=NOT_GIVEN, trim_mode: nil, eoutvar: '_erbout') -> ERB
+### def ERB.new(str, safe_level=NOT_GIVEN, trim_mode=NOT_GIVEN, eoutvar=NOT_GIVEN, trim_mode: nil, eoutvar: '_erbout') -> ERB
 #%end
 eRubyスクリプト から ERB オブジェクトを生成して返します。
 
@@ -213,7 +213,7 @@ puts listings.product + "\n" + listings.price
 # A well messages pattie, breaded and fried.
 ```
 
-### def version -> String
+### def ERB.version -> String
 
 erb.rbのリビジョン情報を返します。
 

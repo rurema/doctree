@@ -36,7 +36,7 @@ print res.body
 ```
 
 ## Class Methods
-### def new(path, initheader = nil) -> Net::HTTPRequest
+### def Net::HTTPRequest.new(path, initheader = nil) -> Net::HTTPRequest
 
 HTTP リクエストオブジェクトを生成します。
 

@@ -30,7 +30,7 @@ puts tree.to_yaml
 ```
 
 ## Class Methods
-### def new(options = {}, emitter = Psych::TreeBuilder.new, ss = Psych::ScalarScanner.new) -> Psych::Visitors::YAMLTree
+### def Psych::Visitors::YAMLTree.new(options = {}, emitter = Psych::TreeBuilder.new, ss = Psych::ScalarScanner.new) -> Psych::Visitors::YAMLTree
 
 YAMLTree オブジェクトを生成します。
 

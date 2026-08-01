@@ -24,8 +24,8 @@ S/MIME には以下の種類のメッセージがあります
 
 ## Class Methods
 
-### def new -> OpenSSL::PKCS7
-### def new(obj) -> OpenSSL::PKCS7
+### def OpenSSL::PKCS7.new -> OpenSSL::PKCS7
+### def OpenSSL::PKCS7.new(obj) -> OpenSSL::PKCS7
 
 PKCS7 オブジェクトを生成します。
 
@@ -37,7 +37,7 @@ PKCS7 オブジェクトを生成します。
 
 - **param** `obj` -- データを読みこむ文字列もしくは IO オブジェクト
 
-### def read_smime(obj) -> OpenSSL::PKCS7
+### def OpenSSL::PKCS7.read_smime(obj) -> OpenSSL::PKCS7
 
 S/MIME 形式のデータを読み込み、PKCS7 オブジェクトを返します。
 
@@ -47,7 +47,7 @@ S/MIME 形式のデータを読み込み、PKCS7 オブジェクトを返しま�
 - **param** `obj` -- データを読み出すオブジェクト
 - **raise** `OpenSSL::PKCS7::PKCS7Error` -- 読み込みに失敗した場合に発生します
 
-### def write_smime(p7sig, data=nil, flags = 0) -> String
+### def OpenSSL::PKCS7.write_smime(p7sig, data=nil, flags = 0) -> String
 
 PKCS7 オブジェクトから S/MIME 形式の文字列を返します。
 
@@ -79,7 +79,7 @@ smime = PKCS7.write_smime(p7)
 - **param** `flags` -- フラグ(整数値)
 - **raise** `OpenSSL::PKCS::PKCS7Error` -- S/MIME形式への変換に失敗した場合に発生します
 
-### def sign(cert, key, data, certs = [], flags = 0) -> OpenSSL::PKCS7
+### def OpenSSL::PKCS7.sign(cert, key, data, certs = [], flags = 0) -> OpenSSL::PKCS7
 
 data に証明書と秘密鍵で署名します。
 
@@ -116,7 +116,7 @@ flags は以下の値の OR を渡します。
 - **param** `flags` -- フラグ(整数値)
 - **raise** `OpenSSL::PKCS7::PKCS7Error` -- 署名に失敗した場合に発生します
 
-### def encrypt(certs, data, cipher=nil, flags=0) -> OpenSSL::PKCS7
+### def OpenSSL::PKCS7.encrypt(certs, data, cipher=nil, flags=0) -> OpenSSL::PKCS7
 
 data を証明書の公開鍵で暗号化します。
 

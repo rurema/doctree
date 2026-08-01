@@ -23,7 +23,7 @@ Ruby 2.4.0 からはどちらも `Integer` クラスのエイリアスとなっ�
 ## Class Methods
 
 #%since 3.1
-### def try_convert(obj) -> Integer | nil
+### def Integer.try_convert(obj) -> Integer | nil
 
 `obj` を `Integer` に変換しようと試みます。変換には [m:Object#to_int]
 メソッドが使われます。
@@ -43,7 +43,7 @@ p Integer.try_convert([]) # => nil
 
 #%end
 
-### def sqrt(n) -> Integer
+### def Integer.sqrt(n) -> Integer
 
 非負整数 `n` の整数の平方根を返します。すなわち `n` の平方根以下の
 最大の非負整数を返します。

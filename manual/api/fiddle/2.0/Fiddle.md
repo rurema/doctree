@@ -10,7 +10,7 @@ UNIX の [man:dlopen(3)] や Windows の LoadLibrary()
 などのダイナミックリンカへの低レベルなインターフェースを提供するモジュールです。
 
 ## Singleton Methods
-### def win32_last_error -> Integer
+### def Fiddle.win32_last_error -> Integer
 
 最後に [m:Fiddle::Function#call] で C の関数を呼び出した
 結果設定された errno を返します。
@@ -19,7 +19,7 @@ UNIX の [man:dlopen(3)] や Windows の LoadLibrary()
 
 この値はスレッドローカルです。
 
-### def win32_last_error=(errno)
+### def Fiddle.win32_last_error=(errno)
 
 [m:Fiddle.win32_last_error] で返される値を設定します。
 
@@ -29,14 +29,14 @@ errno は fiddle が設定するのでユーザはこのメソッドを使わな
 
 - **param** `errno` -- 設定する errno
 
-### def last_error -> Integer
+### def Fiddle.last_error -> Integer
 
 最後に [m:Fiddle::Function#call] で C の関数を呼び出した
 結果設定された errno を返します。
 
 この値はスレッドローカルです。
 
-### def last_error=(errno)
+### def Fiddle.last_error=(errno)
 
 [m:Fiddle.last_error] で返される値を設定します。
 

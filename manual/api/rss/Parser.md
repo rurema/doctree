@@ -3,10 +3,10 @@ library: rss
 ---
 # class RSS::Parser < Object
 ## Class Methods
-### def parse
+### def RSS::Parser.parse
 #%todo
 
-### def new
+### def RSS::Parser.new
 #%todo
 
 ## Instance Methods

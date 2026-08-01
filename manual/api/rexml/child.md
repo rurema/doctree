@@ -12,7 +12,7 @@ include:
 
 ## Class Methods
 
-### def new(parent = nil) -> REXML::Child
+### def REXML::Child.new(parent = nil) -> REXML::Child
 
 REXML::Child オブジェクトを生成します。
 

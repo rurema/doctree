@@ -203,7 +203,7 @@ M-x rubydb
 
 ## class Methods
 
-### def trace_func(*vars) -> object | nil
+### def Tracer.trace_func(*vars) -> object | nil
 
 [lib:debug] ライブラリの内部で使用します。
 

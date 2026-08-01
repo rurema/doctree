@@ -11,7 +11,7 @@ include:
 このクラスのメソッドは上書きしたり未定義にしない限り、すべてのオブジェクトで使用できます。
 
 ## Class Methods
-### def new -> Object
+### def Object.new -> Object
 
 Objectクラスのインスタンスを生成して返します。
 

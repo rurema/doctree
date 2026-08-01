@@ -11,7 +11,7 @@ OpenSSL の Engine (プラグイン)を表すオブジェクトです。
 
 ## Class Methods
 
-### def by_id(id) -> OpenSSL::Engine
+### def OpenSSL::Engine.by_id(id) -> OpenSSL::Engine
 
 id で指定した engine をロードします。
 
@@ -21,7 +21,7 @@ id で指定した engine をロードします。
 - **param** `id` -- engine の名前(文字列)
 - **raise** `OpenSSL::Engine::EngineError` -- ロードが失敗した場合に発生します。
 
-### def cleanup -> nil
+### def OpenSSL::Engine.cleanup -> nil
 
 ロードされている engine を全て破棄します。
 
@@ -29,13 +29,13 @@ engine が利用していたリソースを開放します。
 
 - **SEE** [m:OpenSSL::Engine.load]
 
-### def engines -> [OpenSSL::Engine]
+### def OpenSSL::Engine.engines -> [OpenSSL::Engine]
 
 ロードされていて利用可能な engine を配列で返します。
 
 - **SEE** [m:OpenSSL::Engine.load]
 
-### def load(name = nil) -> true | nil
+### def OpenSSL::Engine.load(name = nil) -> true | nil
 
 Engine をロードします。
 

@@ -496,7 +496,7 @@ p Rational(0.5).to_s # => "1/2"
 
 ## Private Singleton Methods
 
-### def convert(*arg) -> Rational
+### def Rational.convert(*arg) -> Rational
 
 引数を有理数([c:Rational])に変換した結果を返します。
 

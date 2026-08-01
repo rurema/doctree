@@ -27,7 +27,7 @@ p pass == 'supersecretpass'.crypt(pass[0,2])
 
 ## Class Methods
 
-### def new(path) -> WEBrick::HTTPAuth::Htpasswd
+### def WEBrick::HTTPAuth::Htpasswd.new(path) -> WEBrick::HTTPAuth::Htpasswd
 
 Htpasswd オブジェクトを生成します。
 

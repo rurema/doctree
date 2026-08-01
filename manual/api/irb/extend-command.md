@@ -21,7 +21,7 @@ irb のコマンドを拡張するためのモジュールです。
 
 ## Singleton Methods
 
-### def def_extend_command(cmd_name, cmd_class, load_file = nil, *aliases) -> object
+### def IRB::ExtendCommandBundle.def_extend_command(cmd_name, cmd_class, load_file = nil, *aliases) -> object
 
 irb に cmd_name で指定したメソッドが実行できるように拡張します。
 
@@ -44,14 +44,14 @@ irb に cmd_name で指定したメソッドが実行できるように拡張し
                [m:IRB::ExtendCommandBundle::OVERRIDE_ALL] のいずれか
                を指定します。
 
-### def extend_object(obj) -> IRB::ExtendCommandBundle
+### def IRB::ExtendCommandBundle.extend_object(obj) -> IRB::ExtendCommandBundle
 
 [c:IRB::ExtendCommandBundle] で定義済みの拡張に指定されたエイリアスを
 obj に定義します。
 
 - **param** `obj` -- [c:IRB::ExtendCommandBundle] を extend したオブジェクト
 
-### def install_extend_commands -> object
+### def IRB::ExtendCommandBundle.install_extend_commands -> object
 
 定義済みの拡張を読み込みます。
 
@@ -76,7 +76,7 @@ irb で以下のメソッドが利用できるようになります。(それぞ
 
 - **SEE** [m:IRB::ExtendCommandBundle.install_extend_commands]
 
-### def irb_original_method_name(method_name) -> String
+### def IRB::ExtendCommandBundle.irb_original_method_name(method_name) -> String
 
 method_name で指定したメソッドの irb 中でのエイリアスを返します。ライブ
 ラリ内部で使用します。
@@ -149,7 +149,7 @@ irb でコマンドのエイリアスを定義する際に、既にこれから�
 
 ## Singleton Methods
 
-### def install_extend_commands -> object
+### def IRB::ContextExtender.install_extend_commands -> object
 
 定義済みの拡張を読み込みます。
 
@@ -166,7 +166,7 @@ irb でコマンドのエイリアスを定義する際に、既にこれから�
 
 - **SEE** [m:IRB::ContextExtender.def_extend_command]
 
-### def def_extend_command(cmd_name, load_file, *aliases) -> object
+### def IRB::ContextExtender.def_extend_command(cmd_name, load_file, *aliases) -> object
 
 [c:IRB::Context] に cmd_name で指定したメソッドが実行できるように拡張
 します。

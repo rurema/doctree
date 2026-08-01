@@ -29,7 +29,7 @@ Ruby-1.9.1以降、[c:WIN32OLE_TYPELIB]オブジェクトの
 
 ## Class Methods
 
-### def new(libname, ole_class) -> WIN32OLE_TYPE
+### def WIN32OLE_TYPE.new(libname, ole_class) -> WIN32OLE_TYPE
 
 WIN32OLE_TYPEオブジェクトを生成します。
 
@@ -50,7 +50,7 @@ TypeLibに定義されているすべての型を取得するには、
 [c:WIN32OLE_TYPELIB]オブジェクトの[m:WIN32OLE_TYPELIB#ole_types]メ
 ソッドを利用します。
 
-### def ole_classes(libname) -> [WIN32OLE_TYPE]
+### def WIN32OLE_TYPE.ole_classes(libname) -> [WIN32OLE_TYPE]
 
 TypeLibで定義されているすべての型情報を取得します。
 
@@ -70,7 +70,7 @@ Ruby-1.9.1からは、TypeLibに定義されているすべての型を取得す
 [c:WIN32OLE_TYPELIB]オブジェクトの[m:WIN32OLE_TYPELIB#ole_types]メ
 ソッドを利用してください。
 
-### def progids -> [String]
+### def WIN32OLE_TYPE.progids -> [String]
 
 システムに登録されているすべてのコンポーネントクラスのPROGIDを取得します。
 
@@ -98,7 +98,7 @@ PROGIDは、生成可能なOLEオートメーションサーバのCoClass（コ�
 クラス）が持つレジストリ登録名です。[m:WIN32OLE.new]の引数に指定して
 WIN32OLEオブジェクトを生成できます。
 
-### def typelibs -> [String]
+### def WIN32OLE_TYPE.typelibs -> [String]
 
 システムに登録されているすべてのTypeLibのドキュメント文字列を取得します。
 

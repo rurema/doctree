@@ -41,7 +41,7 @@ include:
 
 ## Class Methods
 
-### def try_convert(obj) -> Hash | nil
+### def Hash.try_convert(obj) -> Hash | nil
 
 to_hash メソッドを用いて obj をハッシュに変換しようとします。
 
@@ -53,7 +53,7 @@ p Hash.try_convert({1=>2}) # => {1=>2}
 p Hash.try_convert("1=>2") # => nil
 ```
 
-### def [](other) -> Hash
+### def Hash.[](other) -> Hash
 
 新しいハッシュを生成します。
 引数otherと同一のキーと値を持つ新たなハッシュを生成して返します。
@@ -86,7 +86,7 @@ p h #=> {1=>"valueplus", :add=>"some"}
 p g #=> {1=>"valueplus"}
 ```
 
-### def [](*key_and_value)  -> Hash
+### def Hash.[](*key_and_value)  -> Hash
 
 新しいハッシュを生成します。
 引数は必ず偶数個指定しなければなりません。奇数番目がキー、偶数番目が値になります。
@@ -134,10 +134,10 @@ hash = Hash[alist] # => {1=>["a"], 2=>["b"], 3=>["c"], [4, 5]=>["a", "b"]}
 ```
 
 #%until 3.4
-### def new(ifnone = nil) -> Hash
+### def Hash.new(ifnone = nil) -> Hash
 #%end
 #%since 3.4
-### def new(ifnone = nil, capacity: 0) -> Hash
+### def Hash.new(ifnone = nil, capacity: 0) -> Hash
 #%end
 
 空の新しいハッシュを生成します。ifnone はキーに対
@@ -191,10 +191,10 @@ h[1] << 1     # ~> FrozenError: can't modify frozen Array: []
 ```
 
 #%until 3.4
-### def new {|hash, key| ... } -> Hash
+### def Hash.new {|hash, key| ... } -> Hash
 #%end
 #%since 3.4
-### def new(capacity: 0) {|hash, key| ... } -> Hash
+### def Hash.new(capacity: 0) {|hash, key| ... } -> Hash
 #%end
 空の新しいハッシュを生成します。ブロックの評価結果がデフォルト値になりま
 す。設定したデフォルト値は[m:Hash#default_proc]で参照できます。
@@ -248,7 +248,7 @@ h[1]
 
 - **SEE** [m:Hash#default=],[m:Hash#default],[m:Hash#default_proc]
 
-### def ruby2_keywords_hash(hash) -> Hash
+### def Hash.ruby2_keywords_hash(hash) -> Hash
 {: since="2.7.1"}
 
 hash を複製し、[m:Module#ruby2_keywords]や[m:Proc#ruby2_keywords]による
@@ -288,7 +288,7 @@ foo(*[{k: 1}])                             # ~> ArgumentError
 
 - **SEE** [m:Hash.ruby2_keywords_hash?], [m:Module#ruby2_keywords], [m:Proc#ruby2_keywords]
 
-### def ruby2_keywords_hash?(hash) -> bool
+### def Hash.ruby2_keywords_hash?(hash) -> bool
 {: since="2.7.1"}
 
 [m:Module#ruby2_keywords]や[m:Proc#ruby2_keywords]による

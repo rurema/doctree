@@ -134,20 +134,20 @@ Gem パッケージのフルネームと それぞれの [c:Gem::Specification] 
 
 ## Singleton Methods
 
-### def new(specifications = {}) -> Gem::SourceIndex
+### def Gem::SourceIndex.new(specifications = {}) -> Gem::SourceIndex
 
 与えられたハッシュを元に自身を初期化します。
 
 - **param** `specifications` -- キーを Gem の名前、値を [c:Gem::Specification] のインスタンスとするハッシュを指定します。
 
-### def from_gems_in(*spec_dirs) -> Gem::SourceIndex
+### def Gem::SourceIndex.from_gems_in(*spec_dirs) -> Gem::SourceIndex
 
 引数で与えられたディレクトリに置かれている Ruby スクリプト形式の gemspec ファイルを使用して
 新しいインスタンスを作成します。
 
 - **param** `spec_dirs` -- gemspec ファイルが置かれているディレクトリを一つ以上指定します。
 
-### def from_installed_gems(*deprecated) -> Gem::SourceIndex
+### def Gem::SourceIndex.from_installed_gems(*deprecated) -> Gem::SourceIndex
 
 与えられたパスをもとに、インスタンスを作成するファクトリメソッドです。
 
@@ -155,13 +155,13 @@ Gem パッケージのフルネームと それぞれの [c:Gem::Specification] 
 
 - **SEE** [m:Gem::SourceIndex.from_gems_in]
 
-### def installed_spec_directories -> [String]
+### def Gem::SourceIndex.installed_spec_directories -> [String]
 
 gemspec ファイルがインストールされているディレクトリのリストを返します。
 
 - **SEE** [m:Gem?.path]
 
-### def load_specification(file_name) -> Gem::Specification | nil
+### def Gem::SourceIndex.load_specification(file_name) -> Gem::Specification | nil
 
 与えられたファイル名から Ruby スクリプト形式の gemspec をロードして
 [c:Gem::Specification] のインスタンスを返します。

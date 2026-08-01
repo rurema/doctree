@@ -75,7 +75,7 @@ DTD(文書型定義、Document Type Definition)、
 
 ## Class Methods
 
-### def new(source = nil, context = {}) -> REXML::Document
+### def REXML::Document.new(source = nil, context = {}) -> REXML::Document
 
 Document オブジェクトを生成します。
 
@@ -95,7 +95,7 @@ context で「コンテキスト」を指定します。テキストノードの
 - **raise** `REXML::UndefinedNamespaceException` -- XML文書のパース中に、定義されていない名前空間
        が現れた場合に発生します
 
-### def parse_stream(source, listener) -> ()
+### def REXML::Document.parse_stream(source, listener) -> ()
 
 XML文書を source から読み込み、パースした結果を
 listener にコールバックで伝えます。
@@ -114,7 +114,7 @@ Parsers::StreamParser.new( source, listener ).parse
 - **param** `source` -- 入力(文字列、IO、IO互換オブジェクト(StringIOなど))
 - **param** `listener` -- コールバックオブジェクト
 
-### def entity_expansion_limit -> Integer
+### def REXML::Document.entity_expansion_limit -> Integer
 
 実体参照の展開回数の上限を返します。
 
@@ -131,7 +131,7 @@ XML 文書([c:REXML::Document])ごとの展開回数がこの値を越えると
 
 - **SEE** [m:REXML::Document.entity_expansion_limit=]
 
-### def entity_expansion_limit=(val)
+### def REXML::Document.entity_expansion_limit=(val)
 
 実体参照の展開回数の上限を指定します。
 
@@ -146,7 +146,7 @@ XML 文書([c:REXML::Document])ごとの展開回数がこの値を越えると
 - **param** `val` -- 設定する上限値(整数)
 - **SEE** [m:REXML::Document.entity_expansion_limit]
 
-### def entity_expansion_text_limit -> Integer
+### def REXML::Document.entity_expansion_text_limit -> Integer
 
 実体参照の展開による文字列の増分(テキストのバイト数)の
 最大値を指定します。
@@ -165,7 +165,7 @@ XML 文書([c:REXML::Document])ごとの展開回数がこの値を越えると
 - **SEE** [m:REXML::Document.entity_expansion_text_limit=],
      <http://www.ruby-lang.org/ja/news/2013/02/22/rexml-dos-2013-02-22/>
 
-### def entity_expansion_text_limit=(val)
+### def REXML::Document.entity_expansion_text_limit=(val)
 
 実体参照の展開による文字列の増分(テキストのバイト数)の
 最大値を指定します。

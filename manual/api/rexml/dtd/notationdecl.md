@@ -2,10 +2,10 @@
 
 ## Class Methods
 
-### def new(src)
+### def REXML::DTD::NotationDecl.new(src)
 #%todo
 
-### def parse_source(source, listener)
+### def REXML::DTD::NotationDecl.parse_source(source, listener)
 #%todo
 
 ## Instance Methods

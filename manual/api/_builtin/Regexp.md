@@ -36,8 +36,8 @@ p Regexp.new('abc').frozen?
 ## Class Methods
 
 #%since 3.3
-### def compile(string, option = nil) -> Regexp
-### def new(string, option = nil) -> Regexp
+### def Regexp.compile(string, option = nil) -> Regexp
+### def Regexp.new(string, option = nil) -> Regexp
 
 文字列 string をコンパイルして正規表現オブジェクトを生成して返します。
 
@@ -52,8 +52,8 @@ p Regexp.new('abc').frozen?
               、真(nil, false 以外)であれば
               [m:Regexp::IGNORECASE] の指定と同じになります。
 #%else
-### def compile(string, option = nil, code = nil) -> Regexp
-### def new(string, option = nil, code = nil) -> Regexp
+### def Regexp.compile(string, option = nil, code = nil) -> Regexp
+### def Regexp.new(string, option = nil, code = nil) -> Regexp
 
 文字列 string をコンパイルして正規表現オブジェクトを生成して返します。
 
@@ -93,8 +93,8 @@ t2 = Regexp.compile("ふる.*?と", Regexp::MULTILINE)
 p t2.match(str)[0]  # => "ふるいけや\nかわずと"
 ```
 
-### def escape(string) -> String
-### def quote(string) -> String
+### def Regexp.escape(string) -> String
+### def Regexp.quote(string) -> String
 
 string の中で正規表現において特別な意味を持つ文字の直前にエ
 スケープ文字(バックスラッシュ)を挿入した文字列を返します。
@@ -106,7 +106,7 @@ rp = Regexp.escape("$bc^")
 p rp # => "\\$bc\\^"
 ```
 
-### def last_match -> MatchData
+### def Regexp.last_match -> MatchData
 
 カレントスコープで最後に行った正規表現マッチの [c:MatchData] オ
 ブジェクトを返します。このメソッドの呼び出しは [m:$~]
@@ -121,7 +121,7 @@ p Regexp.last_match[2]   # => "b"
 p Regexp.last_match[3]   # => nil
 ```
 
-### def last_match(nth) -> String | nil
+### def Regexp.last_match(nth) -> String | nil
 
 整数 nth が 0 の場合、マッチした文字列を返します
 ([m:$&])。それ以外では、nth 番目の括弧にマッチ
@@ -161,7 +161,7 @@ p Regexp.last_match(1) # => nil
 - **param** `nth` -- 整数を指定します。
 	整数 nth が 0 の場合、マッチした文字列を返します。それ以外では、nth 番目の括弧にマッチした部分文字列を返します。
 
-### def union(*pattern) -> Regexp
+### def Regexp.union(*pattern) -> Regexp
 
 引数として与えた pattern を選択 | で連結し、Regexp として返します。
 結果の Regexp は与えた pattern のどれかにマッチする場合にマッチするものになります。
@@ -231,7 +231,7 @@ p Regexp.union(*rep2) # => /(?x-mi:foo)|bar|hoge/
 p Regexp.union(rep2)  # => /(?x-mi:foo)|bar|hoge/
 ```
 
-### def try_convert(obj) -> Regexp | nil
+### def Regexp.try_convert(obj) -> Regexp | nil
 
 obj を to_regexp メソッドで Regexp オブジェクトに変換しようと
 試みます。
@@ -244,7 +244,7 @@ p Regexp.try_convert("re")    # => nil
 ```
 
 #%since 3.2
-### def timeout -> Float | nil
+### def Regexp.timeout -> Float | nil
 
 正規表現のマッチにかける時間の上限を秒数で返します。
 
@@ -259,7 +259,7 @@ p Regexp.timeout # => nil
 
 - **SEE** [m:Regexp.timeout=], [m:Regexp#timeout]
 
-### def timeout=(seconds)
+### def Regexp.timeout=(seconds)
 
 正規表現のマッチにかける時間の上限を秒数で設定します。
 
@@ -282,8 +282,8 @@ p Regexp.timeout # => 0.5
 
 - **SEE** [m:Regexp.timeout], [m:Regexp#timeout], [c:Regexp::TimeoutError]
 
-### def linear_time?(re) -> bool
-### def linear_time?(string, options = 0) -> bool
+### def Regexp.linear_time?(re) -> bool
+### def Regexp.linear_time?(string, options = 0) -> bool
 
 正規表現 re が入力文字列の長さに対して線形時間でマッチできる場合に true を、
 そうでない場合に false を返します。

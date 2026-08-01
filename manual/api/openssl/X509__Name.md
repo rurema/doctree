@@ -12,8 +12,8 @@ eql? と hash が定義されているため、[c:Hash] のキーとして
 #%# インターネットにおけるドメイン名のように、階層的な識別子である。
 ## Class Methods
 
-### def parse(str, template=OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
-### def parse_openssl(str, template=OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
+### def OpenSSL::X509::Name.parse(str, template=OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
+### def OpenSSL::X509::Name.parse_openssl(str, template=OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
 
 文字列をパースして [c:OpenSSL::X509::Name] オブジェクトを返します。
 
@@ -25,7 +25,7 @@ OpenSSL::X509::Name.parse('/C=JP/ST=Kanagawa/L=Yokohama/O=Example Company/OU=Lab
 - **param** `str` -- パースする文字列
 - **param** `template` -- 属性型に対応するデータ型を表わすハッシュ
 
-### def parse_rfc2253(str, template=OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
+### def OpenSSL::X509::Name.parse_rfc2253(str, template=OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
 
 RFC2253形式の文字列を
 パースして [c:OpenSSL::X509::Name] オブジェクトを返します。
@@ -33,9 +33,9 @@ RFC2253形式の文字列を
 - **param** `str` -- パースする文字列
 - **param** `template` -- 属性型に対応するデータ型を表わすハッシュ
 
-### def new -> OpenSSL::X509::Name
-### def new(ary, template = OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
-### def new(obj) -> OpenSSL::X509::Name
+### def OpenSSL::X509::Name.new -> OpenSSL::X509::Name
+### def OpenSSL::X509::Name.new(ary, template = OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
+### def OpenSSL::X509::Name.new(obj) -> OpenSSL::X509::Name
 
 [c:OpenSSL::X509::Name] オブジェクトを生成します。
 

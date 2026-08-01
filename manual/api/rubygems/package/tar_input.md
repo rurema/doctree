@@ -14,7 +14,7 @@ gem-format な tar ファイルを読み込む [c:Gem::Package::TarReader] の�
 
 ## Singleton Methods
 
-### def open(io, security_policy = nil){|is| ... }
+### def Gem::Package::TarInput.open(io, security_policy = nil){|is| ... }
 #%todo ???
 ブロックに [c:Gem::Package::TarInput] のインスタンスを与えて評価します。
 
@@ -24,7 +24,7 @@ gem-format な tar ファイルを読み込む [c:Gem::Package::TarReader] の�
 
 ## Private Singleton Methods
 
-### def new(io, security_policy = nil)
+### def Gem::Package::TarInput.new(io, security_policy = nil)
 #%todo ???
 このクラスを初期化します。
 

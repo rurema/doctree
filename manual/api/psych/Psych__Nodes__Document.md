@@ -15,7 +15,7 @@ YAML ドキュメントを表すクラスです。
 アクセスできます。
 
 ## Class Methods
-### def new(version=[], tag_directives=[], implicit=false) -> Psych::Nodes::Document
+### def Psych::Nodes::Document.new(version=[], tag_directives=[], implicit=false) -> Psych::Nodes::Document
 
 Document オブジェクトを生成します。
 

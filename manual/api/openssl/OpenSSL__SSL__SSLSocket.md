@@ -42,8 +42,8 @@ soc.close
 
 ## Class Methods
 
-### def new(socket) -> OpenSSL::SSL::SSLSocket
-### def new(socket, context) -> OpenSSL::SSL::SSLSocket
+### def OpenSSL::SSL::SSLSocket.new(socket) -> OpenSSL::SSL::SSLSocket
+### def OpenSSL::SSL::SSLSocket.new(socket, context) -> OpenSSL::SSL::SSLSocket
 
 socket をラップして SSLSocket オブジェクトを生成します。
 

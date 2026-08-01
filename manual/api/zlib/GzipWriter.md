@@ -27,7 +27,7 @@ gz.close
 
 ## Class Methods
 
-### def new(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
+### def Zlib::GzipWriter.new(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
 
 io と関連付けられた GzipWriter オブジェクトを作成します。
 level, strategy は [m:Zlib::Deflate.new] と同じです。
@@ -52,8 +52,8 @@ p gz.closed? #=> true
 p FileTest.size(filename) #=> 32
 ```
 
-### def wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
-### def wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
+### def Zlib::GzipWriter.wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
+### def Zlib::GzipWriter.wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
 
 io と関連付けられた GzipWriter オブジェクトを作成します。
 ブロックが与えられた場合、
@@ -98,8 +98,8 @@ case1
 case2
 ```
 
-### def open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
-### def open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
+### def Zlib::GzipWriter.open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
+### def Zlib::GzipWriter.open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
 
 filename で指定されるファイルを gzip 圧縮データの
 書き出し用にオープンします。GzipWriter オブジェクトを返します。

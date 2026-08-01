@@ -39,8 +39,8 @@ puts csr.to_pem
 
 ## Class Methods
 
-### def new -> OpenSSL::X509::Request
-### def new(obj) -> OpenSSL::X509::Request
+### def OpenSSL::X509::Request.new -> OpenSSL::X509::Request
+### def OpenSSL::X509::Request.new(obj) -> OpenSSL::X509::Request
 
 新しい OpenSSL::X509::Request オブジェクトを生成します。
 

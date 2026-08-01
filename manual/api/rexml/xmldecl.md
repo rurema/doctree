@@ -52,7 +52,7 @@ p xml_decl.writethis # => true
 
 ## Class Methods
 
-### def new(version = REXML::XMLDecl::DEFAULT_VERSION, encoding = nil, standalone = nil)
+### def REXML::XMLDecl.new(version = REXML::XMLDecl::DEFAULT_VERSION, encoding = nil, standalone = nil)
 
 新たな XMLDecl オブジェクトを生成して返します。
 
@@ -62,7 +62,7 @@ version 以外は省略可能です。
 - **param** `encoding` -- エンコーディング(文字列 or nil)
 - **param** `standalone` -- スタンドアロン文章かどうか("yes", "no", nil)
 
-### def default -> REXML::XMLDecl
+### def REXML::XMLDecl.default -> REXML::XMLDecl
 
 XML宣言を含まない文章でデフォルトで使うための
 XMLDecl オブジェクトを生成して返します。

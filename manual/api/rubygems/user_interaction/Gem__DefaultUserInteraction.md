@@ -7,11 +7,11 @@ library: rubygems/user_interaction
 
 ## Singleton Methods
 
-### def ui -> Gem::ConsoleUI
+### def Gem::DefaultUserInteraction.ui -> Gem::ConsoleUI
 
 デフォルトの UI を返します。
 
-### def ui=(new_ui)
+### def Gem::DefaultUserInteraction.ui=(new_ui)
 
 デフォルトの UI を新しくセットします。
 
@@ -20,7 +20,7 @@ library: rubygems/user_interaction
 
 - **param** `new_ui` -- 新しい UI を指定します。
 
-### def use_ui(new_ui){ ... }
+### def Gem::DefaultUserInteraction.use_ui(new_ui){ ... }
 #%# -> discard
 
 与えられたブロックを評価している間だけ UI として new_ui を使用します。

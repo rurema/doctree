@@ -10,7 +10,7 @@ readline を用いた標準入力からの入力を表すクラスです。ラ�
 
 ## Class Methods
 
-### def new -> IRB::ReadlineInputMethod
+### def IRB::ReadlineInputMethod.new -> IRB::ReadlineInputMethod
 
 自身を初期化します。
 

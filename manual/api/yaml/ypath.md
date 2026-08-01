@@ -43,7 +43,7 @@ Rubyist Magazine: <https://magazine.rubyist.net/>
 
 ## class methods
 
-### def new(str) -> Syck::YPath
+### def Syck::YPath.new(str) -> Syck::YPath
 
 自身を初期化します。
 
@@ -59,7 +59,7 @@ p YAML::YPath.new(str)
 #=> #<YAML::YPath:0x3238cc @predicates=[":hoge", nil, nil], @segments=["ugo", "0", "name"], @flags=nil>
 ```
 
-### def each_path(str) {|ypath| ...} -> Array
+### def Syck::YPath.each_path(str) {|ypath| ...} -> Array
 
 引数 str を [c:Syck::YPath] が
 検索できる複数のパスに再構築して、その各パスに対してブロックを評価します。

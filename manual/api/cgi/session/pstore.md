@@ -9,7 +9,7 @@ require:
 
 ## Class Methods
 
-### def new(session, option = {}) -> CGI::Session::FileStore
+### def CGI::Session::PStore.new(session, option = {}) -> CGI::Session::FileStore
 
 自身を初期化します。
 

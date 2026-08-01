@@ -7,7 +7,7 @@ library: rubygems/user_interaction
 
 ## Singleton Methods
 
-### def new(in_stream, out_stream, err_stream = STDERR)
+### def Gem::StreamUI.new(in_stream, out_stream, err_stream = STDERR)
 
 このクラスを初期化します。
 

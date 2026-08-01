@@ -24,7 +24,7 @@ p ipaddr3   # => #<IPAddr: IPv4:192.168.2.0/255.255.255.0>
 
 ## Class Methods
 
-### def new(addr = '::', family = Socket::AF_UNSPEC) -> IPAddr
+### def IPAddr.new(addr = '::', family = Socket::AF_UNSPEC) -> IPAddr
 
 新しい IPAddr オブジェクトを生成します。
 
@@ -40,7 +40,7 @@ p ipaddr3   # => #<IPAddr: IPv4:192.168.2.0/255.255.255.0>
 
 - **raise** `ArgumentError` -- family にサポートされていない address family を指定した場合に発生します。
 
-### def new_ntoh(addr) -> IPAddr
+### def IPAddr.new_ntoh(addr) -> IPAddr
 
 ネットワークバイトオーダーのバイト列から IPAddr オブジェクトを生成します。
 
@@ -51,7 +51,7 @@ require 'ipaddr'
 p IPAddr.new_ntoh("\300\250\001\001")   # => <IPAddr: IPv4:192.168.1.1/255.255.255.255>
 ```
 
-### def ntop(addr) -> String
+### def IPAddr.ntop(addr) -> String
 
 ネットワークバイトオーダーのバイト列で表現された IP アドレスを人間の読める形式に変換します。
 

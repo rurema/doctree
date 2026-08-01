@@ -8,7 +8,7 @@ library: webrick/server
 
 ## Class Methods
 
-### def new(config = {}, default = WEBrick::Config::General) -> WEBrick::GenericServer
+### def WEBrick::GenericServer.new(config = {}, default = WEBrick::Config::General) -> WEBrick::GenericServer
 
 GenericServer オブジェクトを生成して返します。
 

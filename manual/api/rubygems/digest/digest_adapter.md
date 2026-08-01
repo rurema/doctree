@@ -34,6 +34,6 @@ Ruby 1.8.6 以降ではこのライブラリは使用されません。
 
 ## Singleton Methods
 
-### def new(digest_class)
+### def Gem::DigestAdapter.new(digest_class)
 
 自身を初期化します。

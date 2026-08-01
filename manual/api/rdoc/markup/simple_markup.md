@@ -91,7 +91,7 @@ puts "<body>#{wh.convert ARGF.read}</body>"
 
 ## Class Methods
 
-### def new(attribute_manager = nil) -> RDoc::Markup
+### def RDoc::Markup.new(attribute_manager = nil) -> RDoc::Markup
 
 自身を初期化します。
 

@@ -47,21 +47,21 @@ until: "2.2.0"
 
 ## Singleton Methods
 
-### def new(name)
+### def MiniTest::Unit::TestCase.new(name)
 
 自身を初期化します。
 
 - **param** `name` -- 自身の名前を指定します。
 
-### def inherited(klass)
+### def MiniTest::Unit::TestCase.inherited(klass)
 
 テストクラス名をテストスイート登録します。
 
-### def reset
+### def MiniTest::Unit::TestCase.reset
 
 テストスイートをクリアします。
 
-### def test_methods -> Array
+### def MiniTest::Unit::TestCase.test_methods -> Array
 
 テストメソッドのリストを返します。
 
@@ -69,13 +69,13 @@ until: "2.2.0"
 返されるメソッドリストの順番はランダムです。
 そうでない場合は、文字コード順にソートされます。
 
-### def test_order -> Symbol
+### def MiniTest::Unit::TestCase.test_order -> Symbol
 
 テストの実行順序を返します。
 
 デフォルトはランダムです。
 
-### def test_suites -> Array
+### def MiniTest::Unit::TestCase.test_suites -> Array
 
 テストクラス名のリストを返します。
 

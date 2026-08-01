@@ -12,7 +12,7 @@ hash と eql? が再定義されているため、[c:Hash] のキーとして
 
 ## Class Methods
 
-### def default_port    -> Integer | nil
+### def URI::Generic.default_port    -> Integer | nil
 
 スキームに対応するデフォルトのポート番号を整数で返します。
 
@@ -27,7 +27,7 @@ p URI::LDAPS.default_port     # => 636
 p URI::MailTo.default_port    # => nil
 ```
 
-### def component     -> [Symbol]
+### def URI::Generic.component     -> [Symbol]
 
 URI の構成要素を表すシンボルの配列を返します。
 
@@ -40,13 +40,13 @@ p URI::MailTo.component
 # => [:scheme, :to, :headers]
 ```
 
-### def use_registry    -> bool
+### def URI::Generic.use_registry    -> bool
 
 構成要素 registry を受け付けるなら true を返します。
 URI::Generic クラスでは false です。
 
-### def build2(ary)     -> URI::Generic
-### def build2(hash)    -> URI::Generic
+### def URI::Generic.build2(ary)     -> URI::Generic
+### def URI::Generic.build2(hash)    -> URI::Generic
 
 URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 が発生した場合に、引数の各要素を URI.escape して再度 build を試み
@@ -63,8 +63,8 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
         :scheme, :userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment 
   ```
 
-### def build(ary)     -> URI::Generic
-### def build(hash)    -> URI::Generic
+### def URI::Generic.build(ary)     -> URI::Generic
+### def URI::Generic.build(hash)    -> URI::Generic
 
 引数で与えられた URI 構成要素から URI::Generic オブジェクトを生成します。
 
@@ -81,7 +81,7 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 
 - **raise** `URI::InvalidComponentError` -- 各要素が適合しない場合に発生します。
 
-### def new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, parser = URI::DEFAULT_PARSER, arg_check = false)    -> URI::Generic
+### def URI::Generic.new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, parser = URI::DEFAULT_PARSER, arg_check = false)    -> URI::Generic
 
 各引数を成分とする URI::Generic オブジェクトを生成して返します。
 

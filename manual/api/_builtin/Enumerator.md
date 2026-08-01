@@ -43,7 +43,7 @@ p a.next
 
 ## Class Methods
 
-### def new(size=nil){|y| ... }         -> Enumerator
+### def Enumerator.new(size=nil){|y| ... }         -> Enumerator
 
 Enumerator オブジェクトを生成して返します。与えられたブロックは [c:Enumerator::Yielder] オブジェクトを
 引数として実行されます。
@@ -85,9 +85,9 @@ p fib.take(10) #=> [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 ```
 
 #%since 4.0
-### def produce(initial = nil, size: nil) { |prev| ... } -> Enumerator
+### def Enumerator.produce(initial = nil, size: nil) { |prev| ... } -> Enumerator
 #%else
-### def produce(initial = nil) { |prev| ... } -> Enumerator
+### def Enumerator.produce(initial = nil) { |prev| ... } -> Enumerator
 #%end
 
 与えられたブロックを呼び出し続ける、停止しない Enumerator を返します。
@@ -160,8 +160,8 @@ p unknown.size  # => nil
 #%end
 
 #%since 3.2
-### def product(*enums) -> Enumerator::Product
-### def product(*enums) { |elts| ... } -> nil
+### def Enumerator.product(*enums) -> Enumerator::Product
+### def Enumerator.product(*enums) { |elts| ... } -> nil
 
 与えた [c:Enumerable] なオブジェクトの直積(デカルト積)を列挙する Enumerator を作って返します。
 

@@ -12,7 +12,7 @@ include:
 
 ## Singleton Methods
 
-### def new(spec) -> Gem::Builder
+### def Gem::Builder.new(spec) -> Gem::Builder
 
 与えられた [c:Gem::Specification] のインスタンスによって
 [c:Gem::Builder] のインスタンスを生成します。

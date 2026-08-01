@@ -2,7 +2,7 @@
 
 ## Class Methods
 
-### def new(match)
+### def REXML::DTD::ElementDecl.new(match)
 #%todo
 
 ## Constants

@@ -22,7 +22,7 @@ XML schema や RELAX NG などを使ってください。
 
 ## Class Methods
 
-### def new(source, parent = nil) -> REXML::DocType
+### def REXML::DocType.new(source, parent = nil) -> REXML::DocType
 
 DocType オブジェクトを生成します。
 

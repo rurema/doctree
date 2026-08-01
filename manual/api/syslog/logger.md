@@ -50,7 +50,7 @@ log.info 'this line will be logged via syslog(3)'
 
 ## Class Methods
 
-### def new(program_name = 'ruby') -> Syslog::Logger
+### def Syslog::Logger.new(program_name = 'ruby') -> Syslog::Logger
 
 [c:Syslog::Logger] オブジェクトを初期化します。
 
@@ -60,20 +60,20 @@ log.info 'this line will be logged via syslog(3)'
                     トされます(syslog の仕様で 1 つのプログラム名のみが
                     採用されます)。
 
-### def syslog -> Syslog
+### def Syslog::Logger.syslog -> Syslog
 
 内部の [c:Syslog] オブジェクトを返します。
 
 デフォルトでは、最初の [c:Syslog::Logger] オブジェクトの作成時に作ら
 れたものを返します。
 
-### def syslog=(syslog)
+### def Syslog::Logger.syslog=(syslog)
 
 内部の [c:Syslog] オブジェクトを引数 syslog で指定したものに設定します。
 
 - **param** `syslog` -- [c:Syslog] オブジェクトを指定します。
 
-### def make_methods(meth)
+### def Syslog::Logger.make_methods(meth)
 
 ライブラリ内部で使用します。
 

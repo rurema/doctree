@@ -39,7 +39,7 @@ newcert.add_extension(factory.create_extension("basicConstraints", "CA:FALSE"))
 
 ## Class Methods
 
-### def new(issuer_cert=nil, subject_cert=nil, subject_req=nil, crl=nil) -> OpenSSL::X509::ExtensionFactory
+### def OpenSSL::X509::ExtensionFactory.new(issuer_cert=nil, subject_cert=nil, subject_req=nil, crl=nil) -> OpenSSL::X509::ExtensionFactory
 
 ExtensionFactory オブジェクトを生成します。
 

@@ -169,7 +169,7 @@ MyCGI.new.start()
 
 ## Class Methods
 
-### def new(config = {}, *options)    -> WEBrick::CGI
+### def WEBrick::CGI.new(config = {}, *options)    -> WEBrick::CGI
 
 WEBrick::CGI オブジェクトを生成してかえします。
 

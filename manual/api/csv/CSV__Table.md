@@ -34,7 +34,7 @@ extend:
 
 ## Singleton Methods
 
-### def new(array_of_rows) -> CSV::Table
+### def CSV::Table.new(array_of_rows) -> CSV::Table
 
 自身を初期化します。
 

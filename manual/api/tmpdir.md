@@ -8,8 +8,8 @@ category: File
 
 ## Class Methods
 
-### def mktmpdir(prefix_suffix = nil, tmpdir = nil)             -> String
-### def mktmpdir(prefix_suffix = nil, tmpdir = nil){|dir| ... } -> object
+### def Dir.mktmpdir(prefix_suffix = nil, tmpdir = nil)             -> String
+### def Dir.mktmpdir(prefix_suffix = nil, tmpdir = nil){|dir| ... } -> object
 
 一時ディレクトリを作成します。
 
@@ -88,7 +88,7 @@ p FileTest.directory?(dir) #=> false
                      アプリケーションは一時ディレクトリを他のユーザか
                      ら書き込める権限に変更すべきではありません。
 
-### def tmpdir    -> String
+### def Dir.tmpdir    -> String
 
 テンポラリファイルを作成するのに使うディレクトリ(テンポラリディレクトリ)の絶対パスを
 文字列として返します。

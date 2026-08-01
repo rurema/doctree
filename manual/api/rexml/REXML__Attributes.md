@@ -10,7 +10,7 @@ library: rexml/document
 
 ## Class Methods
 
-### def new(element) -> REXML::Attributes
+### def REXML::Attributes.new(element) -> REXML::Attributes
 
 空の Attributes オブジェクトを生成します。
 

@@ -10,10 +10,10 @@ Ruby 1.8 以前では同様の場面で [c:IndexError] が発生していまし�
 
 ## Class Methods
 
-### def new(error_message = "")                   -> KeyError
-### def new(error_message = "", receiver:)        -> KeyError
-### def new(error_message = "", key:)             -> KeyError
-### def new(error_message = "", receiver:, key:)  -> KeyError
+### def KeyError.new(error_message = "")                   -> KeyError
+### def KeyError.new(error_message = "", receiver:)        -> KeyError
+### def KeyError.new(error_message = "", key:)             -> KeyError
+### def KeyError.new(error_message = "", receiver:, key:)  -> KeyError
 {: since="1.9.1"}
 
 例外オブジェクトを生成して返します。

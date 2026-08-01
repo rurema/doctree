@@ -22,7 +22,7 @@ require:
 
 ## Singleton Methods
 
-### def new(logger = nil) -> Gem::FileOperations
+### def Gem::FileOperations.new(logger = nil) -> Gem::FileOperations
 
 このクラスを初期化します。
 
@@ -32,7 +32,7 @@ require:
 
 ## Singleton Methods
 
-### def open(io, mode = 'r', signer = nil){|tar_io| ... }
+### def Gem::Package.open(io, mode = 'r', signer = nil){|tar_io| ... }
 #%todo ???
 
 io を開いて与えられたブロックに渡してブロックを評価します。
@@ -43,7 +43,7 @@ io を開いて与えられたブロックに渡してブロックを評価し�
 
 - **param** `signer` -- ???
 
-### def pack(src, destname, signer = nil)
+### def Gem::Package.pack(src, destname, signer = nil)
 #%todo
 
 ???

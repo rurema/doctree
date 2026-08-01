@@ -11,7 +11,7 @@ ERB を扱うためのサーブレットです。
 
 ## Class Methods
 
-### def new(server, name) -> WEBrick::HTTPServlet::ERBHandler
+### def WEBrick::HTTPServlet::ERBHandler.new(server, name) -> WEBrick::HTTPServlet::ERBHandler
 
 自身を初期化します。
 

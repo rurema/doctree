@@ -51,7 +51,7 @@ creatable classes:
 
 ## Class Methods
 
-### def new(libname, mjv = nil, miv = nil) -> WIN32OLE_TYPELIB
+### def WIN32OLE_TYPELIB.new(libname, mjv = nil, miv = nil) -> WIN32OLE_TYPELIB
 
 WIN32OLE_TYPELIBオブジェクトを生成します。
 
@@ -89,7 +89,7 @@ TypeLibは、レジストリのHKEY_CLASS_ROOT\TypeLibキーの下にGUIDをキ�
 ドキュメント文字列は、コンテキストヘルプなどに利用可能なTypeLibの簡単な
 説明文で、通常バージョン番号を含みます。
 
-### def typelibs -> [WIN32OLE_TYPELIB]
+### def WIN32OLE_TYPELIB.typelibs -> [WIN32OLE_TYPELIB]
 
 システムに登録されているすべてのTypeLibを取得します。
 

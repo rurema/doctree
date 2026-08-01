@@ -38,7 +38,7 @@ end
 
 ## Class Methods
 
-### def message_loop -> ()
+### def WIN32OLE_EVENT.message_loop -> ()
 
 Windowsのメッセージポンプを実行します。
 
@@ -75,7 +75,7 @@ end
 い。message_loopメソッドの呼び出し中はRubyのスレッドの切り替えは行われ
 ません。
 
-### def new(ole, event = nil) -> WIN32OLE_EVENT
+### def WIN32OLE_EVENT.new(ole, event = nil) -> WIN32OLE_EVENT
 
 OLEオートメーションサーバのイベント受信機構をオブジェクト化して返します。
 

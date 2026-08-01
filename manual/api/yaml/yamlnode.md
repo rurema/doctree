@@ -12,7 +12,7 @@ YAML のノードを表現するためのクラスです。
 
 ## class methods
 
-### def new(type, val) -> Syck::YamlNode
+### def Syck::YamlNode.new(type, val) -> Syck::YamlNode
 
 自身を初期化します。
 

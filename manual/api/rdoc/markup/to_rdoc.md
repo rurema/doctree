@@ -13,7 +13,7 @@ RDoc 形式のドキュメントをマークアップ記法を保持したまま
 
 ## Class Methods
 
-### def new(markup = nil) -> RDoc::Markup::ToRdoc
+### def RDoc::Markup::ToRdoc.new(markup = nil) -> RDoc::Markup::ToRdoc
 
 自身を初期化します。
 

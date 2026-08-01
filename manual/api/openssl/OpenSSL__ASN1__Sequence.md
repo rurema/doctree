@@ -6,8 +6,8 @@ library: openssl
 ASN.1 の Sequence 型(Universal タグのタグ番号16)を表すクラスです。
 
 ## Class method
-### def new(value) ->  OpenSSL::ASN1::Sequence
-### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Sequence
+### def OpenSSL::ASN1::Sequence.new(value) ->  OpenSSL::ASN1::Sequence
+### def OpenSSL::ASN1::Sequence.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Sequence
 
 ASN.1 の Sequence 型の値を表現する OpenSSL::ASN1::Sequence オブジェクトを
 生成します。

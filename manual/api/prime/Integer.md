@@ -5,7 +5,7 @@ library: prime
 
 ## Class Methods
 
-### def from_prime_division(pd) -> Integer
+### def Integer.from_prime_division(pd) -> Integer
 
 素因数分解された結果を元の数値に戻します。
 
@@ -20,8 +20,8 @@ p Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
 p Prime.int_from_prime_division([[2,2], [3,2]])  #=> 36
 ```
 
-### def each_prime(upper_bound){|prime| ... } -> object
-### def each_prime(upper_bound) -> Enumerator
+### def Integer.each_prime(upper_bound){|prime| ... } -> object
+### def Integer.each_prime(upper_bound) -> Enumerator
 
 全ての素数を列挙し、それぞれの素数をブロックに渡して評価します。
 

@@ -46,7 +46,7 @@ end
 
 ## Singleton Methods
 
-### def new(task_manager, scope_list)
+### def Rake::NameSpace.new(task_manager, scope_list)
 
 自身を初期化します。
 

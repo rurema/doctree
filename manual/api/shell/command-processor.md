@@ -13,10 +13,10 @@ require:
 
 ## Singleton Methods
 
-### def new(shell)
+### def Shell::CommandProcessor.new(shell)
 #%todo
 
-### def add_delegate_command_to_shell(id)
+### def Shell::CommandProcessor.add_delegate_command_to_shell(id)
 #%todo
 
 [c:Shell] 自体を初期化する時に呼び出されるメソッドです。
@@ -24,8 +24,8 @@ require:
 
 - **param** `id` -- メソッド名を指定します。
 
-### def alias_command(alias, command, *opts) -> self
-### def alias_command(alias, command, *opts){ ... } -> self
+### def Shell::CommandProcessor.alias_command(alias, command, *opts) -> self
+### def Shell::CommandProcessor.alias_command(alias, command, *opts){ ... } -> self
 #%todo
 
 - **param** `alias` -- エイリアスの名前を指定します。
@@ -36,11 +36,11 @@ require:
 
 - **raise** `SyntaxError` -- コマンドのエイリアス作成に失敗した時に発生します。
 
-### def alias_map -> Hash
+### def Shell::CommandProcessor.alias_map -> Hash
 
 [m:Shell::CommandProcessor.alias_command] で定義したエイリアスの一覧を返します。
 
-### def def_builtin_commands(delegation_class, commands_specs) -> ()
+### def Shell::CommandProcessor.def_builtin_commands(delegation_class, commands_specs) -> ()
 #%todo
 
 - **param** `delegation_class` -- 処理を委譲したいクラスかモジュールを指定します。
@@ -48,7 +48,7 @@ require:
 - **param** `commands_specs` -- コマンドの仕様を文字列の配列で指定します。
                       [[コマンド名, [引数1, 引数2, ...]], ...]
 
-### def def_system_command(command, path = command) -> ()
+### def Shell::CommandProcessor.def_system_command(command, path = command) -> ()
 #%todo
 
 与えられたコマンドをメソッドとして定義します。
@@ -57,16 +57,16 @@ require:
 
 - **param** `path` -- command のパスを指定します。省略すると環境変数 PATH から command を探します。
 
-### def initialize -> ()
+### def Shell::CommandProcessor.initialize -> ()
 #%todo
 
 このクラスを初期化します。
 
-### def install_builtin_commands -> ()
+### def Shell::CommandProcessor.install_builtin_commands -> ()
 
 ビルトインコマンドを定義します。
 
-### def install_system_commands(prefix = "sys_") -> ()
+### def Shell::CommandProcessor.install_system_commands(prefix = "sys_") -> ()
 
 全てのシステムコマンドをメソッドとして定義します。
 
@@ -77,25 +77,25 @@ require:
 
 - **param** `prefix` -- プレフィクスを指定します。
 
-### def method_added(id)
+### def Shell::CommandProcessor.method_added(id)
 #%todo
 このクラスに定義されたメソッドを [c:Shell] にも定義するためのフックです。
 
 - **param** `id` -- メソッド名を指定します。
 
-### def run_config -> ()
+### def Shell::CommandProcessor.run_config -> ()
 
 ユーザのホームディレクトリに "~/.rb_shell" というファイルが存在すれば、それを [m:Kernel?.load] します。
 
 存在しない時は何もしません。
 
-### def unalias_command(alias) -> self
+### def Shell::CommandProcessor.unalias_command(alias) -> self
 
 エイリアスを削除します。
 
 - **param** `alias` -- 削除したいエイリアスを指定します。
 
-### def undef_system_command(command) -> self
+### def Shell::CommandProcessor.undef_system_command(command) -> self
 
 与えられたコマンドを削除します。
 

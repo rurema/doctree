@@ -9,10 +9,10 @@ UNIX ドメインのストリーム型ソケットのクラス。
 
 ## Class Methods
 
-### def open(path) -> UNIXSocket
-### def new(path)  -> UNIXSocket
-### def open(path){|sock| ...} -> object
-### def new(path){|sock| ...} -> object
+### def UNIXSocket.open(path) -> UNIXSocket
+### def UNIXSocket.new(path)  -> UNIXSocket
+### def UNIXSocket.open(path){|sock| ...} -> object
+### def UNIXSocket.new(path){|sock| ...} -> object
 
 path で指定したパス名を用いてソケットを接続します。
 
@@ -31,8 +31,8 @@ s = UNIXSocket.new("/tmp/sock")
 s.send("hello", 0)
 ```
 
-### def pair(type=Socket::SOCK_STREAM, protocol=0) -> [UNIXSocket, UNIXSocket]
-### def socketpair(type=Socket::SOCK_STREAM, protocol=0) -> [UNIXSocket, UNIXSocket]
+### def UNIXSocket.pair(type=Socket::SOCK_STREAM, protocol=0) -> [UNIXSocket, UNIXSocket]
+### def UNIXSocket.socketpair(type=Socket::SOCK_STREAM, protocol=0) -> [UNIXSocket, UNIXSocket]
 
 相互に結合された UNIX ソケットのペアを含む2要素の配列を返します。
 

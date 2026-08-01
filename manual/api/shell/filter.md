@@ -12,7 +12,7 @@ until: "2.7.0"
 
 ## Class Methods
 
-### def new(sh) -> Shell::Filter
+### def Shell::Filter.new(sh) -> Shell::Filter
 
 [c:Shell::Filter] クラスのインスタンスを返します。
 通常このメソッドを直接使う機会は少ないでしょう。

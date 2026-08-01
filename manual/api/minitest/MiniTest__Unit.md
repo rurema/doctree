@@ -126,11 +126,11 @@ until: "2.2.0"
 
 ## Singleton Methods
 
-### def autorun -> true
+### def MiniTest::Unit.autorun -> true
 
 プロセスの終了時にテストを実行するように登録します。
 
-### def output=(stream)
+### def MiniTest::Unit.output=(stream)
 
 出力先をセットします。
 

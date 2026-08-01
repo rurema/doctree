@@ -40,7 +40,7 @@ p versions.sort_by{ |v| Gem::Version.new(v) }
 
 ## Singleton Methods
 
-### def correct?(version) -> bool
+### def Gem::Version.correct?(version) -> bool
 
 version が正しいバージョンであれば true を返します。そうでなければ false を返します。
 
@@ -55,7 +55,7 @@ p Gem::Version.correct?(nil)         # => true
 
 - **param** `version` -- バージョンを文字列か数値で指定します。
 
-### def create(input) -> Gem::Version | nil
+### def Gem::Version.create(input) -> Gem::Version | nil
 
 [c:Gem::Version] のインスタンスを作成するためのファクトリメソッドです。
 
@@ -71,7 +71,7 @@ ver3 = Gem::Version.create(nil)        # => nil
 
 - **SEE** [m:Gem::Version.correct?]
 
-### def new(version) -> Gem::Version
+### def Gem::Version.new(version) -> Gem::Version
 
 バージョンを表す文字列から、Gem::Version インスタンスを作成します。
 

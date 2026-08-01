@@ -11,7 +11,7 @@ since: "1.9.2"
 自身の使っているシステムのドキュメントを見てください。
 
 ## Class Methods
-### def new(family, level, optname, data) -> Socket::Option
+### def Socket::Option.new(family, level, optname, data) -> Socket::Option
 
 Socket::Option オブジェクト新たに生成し返します。
 
@@ -33,7 +33,7 @@ sockopt = Socket::Option.new(:INET, :SOCKET, :KEEPALIVE, [1].pack("i"))
 p sockopt #=> #<Socket::Option: INET SOCKET KEEPALIVE 1>
 ```
 
-### def int(family, level, optname, integer) -> Socket::Option
+### def Socket::Option.int(family, level, optname, integer) -> Socket::Option
 
 整数をデータとして持つ Socket::Option オブジェクト新たに生成し返します。
 
@@ -46,7 +46,7 @@ family, level, optname には Socket::SOL_SOCKET のような整数の他、
 - **param** `optname` -- オプションの名前
 - **param** `integer` -- データ(整数)
 
-### def bool(family, level, optname, boolean) -> Socket::Option
+### def Socket::Option.bool(family, level, optname, boolean) -> Socket::Option
 
 整数をデータとして持つ Socket::Option オブジェクト新たに生成し返します。
 
@@ -69,7 +69,7 @@ p Socket::Option.bool(:INET, :SOCKET, :KEEPALIVE, false)
 # => #<Socket::Option: AF_INET SOCKET KEEPALIVE 0>
 ```
 
-### def linger(onoff, secs) -> Socket::Option
+### def Socket::Option.linger(onoff, secs) -> Socket::Option
 
 SOL_SOCKET/SO_LINGER 用の Socket::Option オブジェクト
 を新たに生成し返します。

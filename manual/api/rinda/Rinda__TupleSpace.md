@@ -42,7 +42,7 @@ sec には秒数の代わりに renewer を指定することもできます。
 
 ## Class Methods
 
-### def new(period = 60) -> Rinda::TupleSpace
+### def Rinda::TupleSpace.new(period = 60) -> Rinda::TupleSpace
 
 [c:Rinda::TupleSpace] オブジェクトを生成します。
 
