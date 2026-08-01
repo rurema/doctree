@@ -47,7 +47,7 @@ _foo
 ```ruby
 # (A) の部分はスコープに入らない
 2.times do
-  p defined?(2v)    # (A)
+  p defined?(v)    # (A)
   v = 1            # ここ（宣言開始）から
   p v              # ここ（ブロックの終り）までが v のスコープ
 end
