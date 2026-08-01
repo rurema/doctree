@@ -32,10 +32,10 @@ p public_methods(false) - basic_public_methods
 # => [:explicit_public_method]
 ```
 
-### def public() -> nil
-### def public(name) -> String | Symbol
-### def public(*name) -> Array
-### def public(names) -> Array
+### def self.public() -> nil
+### def self.public(name) -> String | Symbol
+### def self.public(*name) -> Array
+### def self.public(names) -> Array
 
 メソッドを public に設定します。
 
@@ -54,10 +54,10 @@ p public_methods(false) - basic_public_methods
 
 - **SEE** [m:Module#public]
 
-### def private() -> nil
-### def private(name) -> String | Symbol
-### def private(*name) -> Array
-### def private(names) -> Array
+### def self.private() -> nil
+### def self.private(name) -> String | Symbol
+### def self.private(*name) -> Array
+### def self.private(names) -> Array
 
 メソッドを private に設定します。
 
@@ -76,15 +76,15 @@ p public_methods(false) - basic_public_methods
 
 - **SEE** [m:Module#private]
 
-### def to_s    -> "main"
-### def inspect -> "main"
+### def self.to_s    -> "main"
+### def self.inspect -> "main"
 {: since=""}
 
 "main" を返します。
 
 #%#noexample
 
-### def include(*modules) -> self
+### def self.include(*modules) -> self
 
 引数 modules で指定したモジュールを後ろから順番に [c:Object] にインクルードします。
 
@@ -101,8 +101,8 @@ p hypot(3, 4)  # => 5.0
 
 - **SEE** [m:Module#include]
 
-### def define_method(name, method) -> Symbol
-### def define_method(name) { ... } -> Symbol
+### def self.define_method(name, method) -> Symbol
+### def self.define_method(name) { ... } -> Symbol
 {: since="2.0.0"}
 
 インスタンスメソッド name を [c:Object] に定義します。
@@ -124,7 +124,7 @@ p hypot(3, 4)  # => 5.0
 
 - **SEE** [m:Module#define_method]
 
-### def using(module) -> self
+### def self.using(module) -> self
 {: since="2.0.0"}
 
 引数で指定したモジュールで定義された拡張を有効にします。
