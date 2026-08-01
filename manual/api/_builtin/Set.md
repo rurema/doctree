@@ -353,7 +353,7 @@ p s.proper_superset?(Set[1, 2, 3])  # => false
 ### def subset?(set) -> bool
 ### def <=(set) -> bool
 ### def proper_subset?(set) -> bool
-### def <(set) -> Set
+### def <(set) -> bool
 
 self が集合 set の部分集合である場合に true を返します。
 
