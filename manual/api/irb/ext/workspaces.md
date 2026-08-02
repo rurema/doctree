@@ -5,4 +5,7 @@ type: library
 ブラリです。
 
 このライブラリで定義されているメソッドはユーザが直接使用するものではあ
-りません。[lib:irb/cmd/pushws] から呼び出されます。
+りません。
+#%until 3.4
+[lib:irb/cmd/pushws] から呼び出されます。
+#%end
