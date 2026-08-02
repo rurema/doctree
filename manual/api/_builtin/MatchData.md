@@ -139,11 +139,7 @@ p $~.begin(0)   # => 0
 p $~.begin(1)   # => 0
 p $~.begin(2)   # => 3
 p $~.begin(3)   # => nil
-#%since 3.4
-p $~.begin(4)   # ~> IndexError: 'begin': index 4 out of matches
-#%else
-p $~.begin(4)   # ~> IndexError: `begin': index 4 out of matches
-#%end
+p $~.begin(4)   # ~> IndexError: index 4 out of matches
 ```
 
 - **SEE** [m:MatchData#end]
@@ -165,11 +161,7 @@ p $~.begin(:year)     # => 0
 p $~.begin('month')   # => 5
 p $~.begin(:month)    # => 5
 p $~.begin('day')     # => nil
-#%since 3.4
-p $~.begin('century') # ~> IndexError: 'begin': undefined group name reference: century
-#%else
-p $~.begin('century') # ~> IndexError: `begin': undefined group name reference: century
-#%end
+p $~.begin('century') # ~> IndexError: undefined group name reference: century
 ```
 
 - **SEE** [m:MatchData#end]
@@ -191,11 +183,7 @@ p $~.end(0)   # => 6
 p $~.end(1)   # => 3
 p $~.end(2)   # => 6
 p $~.end(3)   # => nil
-#%since 3.4
-p $~.end(4)   # ~> IndexError: 'end': index 4 out of matches
-#%else
-p $~.end(4)   # ~> IndexError: `end': index 4 out of matches
-#%end
+p $~.end(4)   # ~> IndexError: index 4 out of matches
 ```
 
 - **SEE** [m:MatchData#begin]
@@ -217,11 +205,7 @@ p $~.end(:year)     # => 4
 p $~.end('month')   # => 6
 p $~.end(:month)    # => 6
 p $~.end('day')     # => nil
-#%since 3.4
-p $~.end('century') # ~> IndexError: 'end': undefined group name reference: century
-#%else
-p $~.end('century') # ~> IndexError: `end': undefined group name reference: century
-#%end
+p $~.end('century') # ~> IndexError: undefined group name reference: century
 ```
 
 - **SEE** [m:MatchData#begin]
@@ -324,11 +308,7 @@ p $~.offset(:year)     # => [0, 4]
 p $~.offset('month')   # => [5, 6]
 p $~.offset(:month)    # => [5, 6]
 p $~.offset('day')     # => [nil, nil]
-#%since 3.4
-p $~.offset('century') # ~> IndexError: 'offset': undefined group name reference: century
-#%else
-p $~.offset('century') # ~> IndexError: `offset': undefined group name reference: century
-#%end
+p $~.offset('century') # ~> IndexError: undefined group name reference: century
 ```
 
 #%since 3.2
@@ -369,11 +349,7 @@ p $~.byteoffset(:year)     # => [0, 4]
 p $~.byteoffset('month')   # => [7, 8]
 p $~.byteoffset(:month)    # => [7, 8]
 p $~.byteoffset('day')     # => [nil, nil]
-#%since 3.4
-p $~.byteoffset('century') # ~> IndexError: 'offset': undefined group name reference: century
-#%else
-p $~.byteoffset('century') # ~> IndexError: `offset': undefined group name reference: century
-#%end
+p $~.byteoffset('century') # ~> IndexError: undefined group name reference: century
 ```
 
 - **SEE** [m:MatchData#offset]
