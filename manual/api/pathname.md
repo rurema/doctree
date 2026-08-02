@@ -6,9 +6,9 @@ category: File
 
 # reopen Kernel
 
-## Private Instance Methods
+## Module Functions
 
-### def Pathname(path) -> Pathname
+### module_function def Pathname(path) -> Pathname
 
 文字列 path を元に [c:Pathname] オブジェクトを生成します。
 
@@ -32,7 +32,7 @@ Pathname のインスタンスメソッドには、ディレクトリのパス�
 文字列操作だけで結果を返すものもあれば、ファイルの中身を読み出す [m:Pathname#read] のように
 ファイルシステムにアクセスするものもあります。
 
-Pathname オブジェクトの生成には、[m:Pathname.new] のほかに [m:Kernel#Pathname] も使えます。
+Pathname オブジェクトの生成には、[m:Pathname.new] のほかに [m:Kernel?.Pathname] も使えます。
 
 ```ruby title="例"
 require 'pathname'
