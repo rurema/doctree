@@ -8,7 +8,7 @@ alias:
 [c:String] に JSON で使用する特異メソッドを追加するためのモジュールです。
 
 ## Class Methods
-### def json_create(hash) -> String
+### def JSON::Generator::GeneratorMethods::String::Extend.json_create(hash) -> String
 
 JSON のオブジェクトから Ruby の文字列を生成して返します。
 

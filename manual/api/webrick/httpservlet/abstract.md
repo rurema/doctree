@@ -41,7 +41,7 @@ srv.start
 
 ## Class Methods
 
-### def new(server, *options)    -> WEBrick::HTTPServlet::AbstractServlet
+### def WEBrick::HTTPServlet::AbstractServlet.new(server, *options)    -> WEBrick::HTTPServlet::AbstractServlet
 
 サーブレットを生成して返します。
 [c:WEBrick::HTTPServer] オブジェクトは server に自身を指定してサーブレットを生成します。
@@ -50,7 +50,7 @@ srv.start
 
 - **param** `options` -- [m:WEBrick::HTTPServer#mount] 第3引数以降に指定された値がそのまま与えられます。
 
-### def get_instance(server, *options)    -> WEBrick::HTTPServlet::AbstractServlet
+### def WEBrick::HTTPServlet::AbstractServlet.get_instance(server, *options)    -> WEBrick::HTTPServlet::AbstractServlet
 
 new(server, *options) を呼び出してサーブレットを生成して返します。
 [c:WEBrick::HTTPServer] オブジェクトは実際にはこの get_instance メソッドを呼び出して

@@ -1,4 +1,4 @@
-### def current -> Fiber
+### def Fiber.current -> Fiber
 
 このメソッドが評価されたコンテキストにおける [c:Fiber] のインスタンスを返します。
 

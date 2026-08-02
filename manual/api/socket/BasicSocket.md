@@ -11,7 +11,7 @@ library: socket
 
 ## Class Methods
 
-### def do_not_reverse_lookup -> bool
+### def BasicSocket.do_not_reverse_lookup -> bool
 
 [m:BasicSocket#do_not_reverse_lookup] の Socket オブジェクト生成時の
 デフォルト値を返します。
@@ -20,7 +20,7 @@ library: socket
 
 デフォルトは true です。
 
-### def do_not_reverse_lookup=(bool)
+### def BasicSocket.do_not_reverse_lookup=(bool)
 
 [m:BasicSocket#do_not_reverse_lookup] の値を変更します。
 
@@ -37,7 +37,7 @@ p TCPSocket.new('localhost', 'telnet').addr
    ["AF_INET", 2254, "127.0.0.1", "127.0.0.1"]
 ```
 
-### def for_fd(fd) -> BasicSocket
+### def BasicSocket.for_fd(fd) -> BasicSocket
 
 ファイルディスクリプタ fd に対する新しいソケットを生成します。
 

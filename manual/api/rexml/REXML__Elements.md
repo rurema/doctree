@@ -15,7 +15,7 @@ XPath で相対パスを指定した場合は、この REXML::Element#elements �
 
 ## Class Methods
 
-### def new(parent) -> REXML::Elements
+### def REXML::Elements.new(parent) -> REXML::Elements
 
 空の要素の集合を表すオブジェクトを生成します。
 

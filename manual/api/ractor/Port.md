@@ -8,7 +8,7 @@ Ractor 間でメッセージを交換するための仕組みを提供するク�
 
 ## Class Methods
 
-### def new -> Ractor::Port
+### def Ractor::Port.new -> Ractor::Port
 
 ## Instance Methods
 

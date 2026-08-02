@@ -102,7 +102,7 @@ non-ASCII の文字列を XML エンティティに置換します。
 
 ## Singleton Methods
 
-### def new(directory) -> Gem::Indexer
+### def Gem::Indexer.new(directory) -> Gem::Indexer
 
 与えられたディレクトリに Gem リポジトリのインデックスを作成するために
 自身を初期化します。

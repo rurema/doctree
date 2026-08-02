@@ -28,8 +28,8 @@ library: _builtin
 
 ## Class Methods
 
-### def new(superclass = Object)                -> Class
-### def new(superclass = Object) {|klass| ... } -> Class
+### def Class.new(superclass = Object)                -> Class
+### def Class.new(superclass = Object) {|klass| ... } -> Class
 
 新しく名前の付いていない superclass のサブクラスを生成します。
 

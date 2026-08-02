@@ -11,7 +11,7 @@ DL::CPtrとほぼ同じインターフェースを持ちます。
 
 ## Singleton Methods
 
-### def new(addr, size = 0, free = nil)   -> Fiddle::Pointer
+### def Fiddle::Pointer.new(addr, size = 0, free = nil)   -> Fiddle::Pointer
 
 与えられた addr が指すメモリ領域を表す Pointer オブジェクトを生成して返します。
 
@@ -25,7 +25,7 @@ size であると仮定されます。GC は free 関数を使用してメモリ
 - **param** `free` -- GC 時に呼ばれる free 関数を [c:Fiddle::Function] オブジェクトか
        整数で指定します。
 
-### def malloc(size, free = nil)   -> Fiddle::Pointer
+### def Fiddle::Pointer.malloc(size, free = nil)   -> Fiddle::Pointer
 
 与えられた長さ size のメモリ領域を確保し、それを表す Pointer オブジェクトを生成して返します。
 
@@ -34,8 +34,8 @@ size であると仮定されます。GC は free 関数を使用してメモリ
 - **param** `free` -- GC 時に呼ばれる Pointer オブジェクトの free 関数を 
        [c:Fiddle::Function] オブジェクトか整数で指定します。
 
-### def [](val)       -> Fiddle::Pointer
-### def to_ptr(val)   -> Fiddle::Pointer
+### def Fiddle::Pointer.[](val)       -> Fiddle::Pointer
+### def Fiddle::Pointer.to_ptr(val)   -> Fiddle::Pointer
 
 与えられた val と関連した Pointer オブジェクトを生成して返します。
 

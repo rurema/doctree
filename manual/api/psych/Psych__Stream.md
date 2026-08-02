@@ -32,7 +32,7 @@ end
 
 #%# Psych::Streaming のメソッドはここに記述しています。
 ## Class Methods
-### def new(io) -> Psych::Stream
+### def Psych::Stream.new(io) -> Psych::Stream
 
 新たな Stream オブジェクトを生成します。
 

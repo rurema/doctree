@@ -7,7 +7,7 @@ library: webrick/log
 
 ## Class Methods
 
-### def new(log_file = nil, level = WEBrick::BasicLog::INFO)    -> WEBrick::BasicLog
+### def WEBrick::BasicLog.new(log_file = nil, level = WEBrick::BasicLog::INFO)    -> WEBrick::BasicLog
 
 WEBrick::BasicLog オブジェクトを生成して返します。
 

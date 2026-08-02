@@ -7,8 +7,8 @@ http/ftp に簡単にアクセスするためのモジュールです。
 
 ## Singleton Methods
 
-### def open_uri(name, mode = 'r', perm = nil, options = {})                  -> StringIO
-### def open_uri(name, mode = 'r', perm = nil, options = {}){|sio| ... }     -> nil
+### def OpenURI.open_uri(name, mode = 'r', perm = nil, options = {})                  -> StringIO
+### def OpenURI.open_uri(name, mode = 'r', perm = nil, options = {}){|sio| ... }     -> nil
 
 URI である文字列 name のリソースを取得して [c:StringIO] オブジェクト
 として返します。

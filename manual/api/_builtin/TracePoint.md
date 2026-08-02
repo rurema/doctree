@@ -35,7 +35,7 @@ p trace.enable
 
 ## Singleton Methods
 
-### def new(*events) {|obj| ... } -> TracePoint
+### def TracePoint.new(*events) {|obj| ... } -> TracePoint
 
 新しい [c:TracePoint] オブジェクトを作成して返します。トレースを有効
 にするには [m:TracePoint#enable] を実行してください。
@@ -143,7 +143,7 @@ $tp.lineno # => access from outside (RuntimeError)
 
 - **raise** `ArgumentError` -- ブロックを指定しなかった場合に発生します。
 
-### def trace(*events) {|obj| ... } -> TracePoint
+### def TracePoint.trace(*events) {|obj| ... } -> TracePoint
 
 新しい [c:TracePoint] オブジェクトを作成して自動的にトレースを開始し
 ます。[m:TracePoint.new] のコンビニエンスメソッドです。
@@ -161,7 +161,7 @@ p trace.enabled? # => true
 
 - **raise** `ThreadError` -- ブロックを指定しなかった場合に発生します。
 
-### def stat -> object
+### def TracePoint.stat -> object
 
 TracePoint の内部情報を返します。
 
@@ -171,7 +171,7 @@ TracePoint の内部情報を返します。
 このメソッドは TracePoint 自身のデバッグ用です。
 
 #%since 3.1
-### def allow_reentry { ... } -> object
+### def TracePoint.allow_reentry { ... } -> object
 
 ブロックの中に限って、TracePoint の再入を許可します。
 

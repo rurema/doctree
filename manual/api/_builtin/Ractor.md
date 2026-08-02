@@ -8,7 +8,7 @@ since: "3.0"
 
 ## Class Methods
 
-### def new(*args, name: nil) {|*args| ... } -> Ractor
+### def Ractor.new(*args, name: nil) {|*args| ... } -> Ractor
 
 Ractor を生成して、ブロックの評価を開始します。
 生成した Ractor を返します。
@@ -19,7 +19,7 @@ Ractor を生成して、ブロックの評価を開始します。
 - **param** `name` -- Ractor の名前を指定します。
 
 #%since 3.4
-### def [](sym) -> object | nil
+### def Ractor.[](sym) -> object | nil
 
 このメソッドを呼び出した Ractor の Ractor-local storage の sym に対応するデータを取り出します。
 sym に対応するデータがなければ nil を返します。
@@ -27,31 +27,31 @@ sym に対応するデータがなければ nil を返します。
 - **param**  `sym` -- Ractor-local storage のキーを指定します。
 - **return** --     Ractor-local storage に格納されている値を返します。
 
-### def []=(sym, val)
+### def Ractor.[]=(sym, val)
 
 - **param** `sym` -- Ractor-local storage のキーを指定します。
 - **param** `val` -- 格納するデータを指定します。
 #%end
 
-### def count -> Integer
+### def Ractor.count -> Integer
 
 実行中の Ractor の数を返します。
 
-### def current -> Ractor
+### def Ractor.current -> Ractor
 
 このメソッドを呼び出された Ractor を返します。
 
-### def main -> Ractor
+### def Ractor.main -> Ractor
 
 main Ractor（プログラムの実行が開始された Ractor）を返します。
 
 #%since 3.4
-### def main? -> bool
+### def Ractor.main? -> bool
 
 このメソッドを呼び出した Ractor が main Ractor であるとき、true を返します。
 #%end
 
-### def make_shareable(obj, copy: false) -> object
+### def Ractor.make_shareable(obj, copy: false) -> object
 
 obj が shareable になるよう変換します。
 
@@ -60,8 +60,8 @@ obj が shareable でない場合、obj と obj が参照する shareable でな
 - **param** `obj` -- Shareable にしたいオブジェクトを指定します。
 - **param** `copy` -- true の場合、obj を変更する代わりに obj のコピーを作成し shareable にします。
 
-### def receive -> object
-### def recv -> object
+### def Ractor.receive -> object
+### def Ractor.recv -> object
 
 #%since 4.0
 このメソッドを呼び出した Ractor の default port からメッセージを受信します。
@@ -75,19 +75,19 @@ obj が shareable でない場合、obj と obj が参照する shareable でな
 #%end
 
 #%until 4.0
-### def receive_if {|msg| ... } -> object
+### def Ractor.receive_if {|msg| ... } -> object
 
 このメソッドを呼び出した Ractor が受信したメッセージのうち、
 ブロックの評価結果が真になる最初のメッセージを受信して返します。
 #%end
 
 #%since 4.0
-### def select(*ports) -> [object, object]
+### def Ractor.select(*ports) -> [object, object]
 
 引数で指定した Ractor または [c:Ractor::Port] のいずれかが受信可能になるまで待ち、
 受信可能になったものと受信した値の配列を返します。
 #%else
-### def select(*ractors, yield_value: nil, move: false) -> [object, object]
+### def Ractor.select(*ractors, yield_value: nil, move: false) -> [object, object]
 
 引数で指定した Ractor のいずれかが [m:Ractor.yield] などで送信可能になるまで待ち、
 その Ractor と受信したオブジェクトの配列 [Ractor, obj] を返します。
@@ -96,14 +96,14 @@ yield_value を指定すると、他の Ractor が [m:Ractor#take] を呼んだ�
 [:yield, nil] が返ります。move が真のとき yield_value は移動されます。
 #%end
 
-### def shareable?(obj) -> bool
+### def Ractor.shareable?(obj) -> bool
 
 obj が shareable である場合、true を返します。
 
 - **param** `obj` -- Shareable であるか判定したいオブジェクトを指定します。
 
 #%since 4.0
-### def shareable_proc { ... } -> Proc
+### def Ractor.shareable_proc { ... } -> Proc
 
 与えられたブロックから shareable な [c:Proc] を作成して返します。
 
@@ -124,7 +124,7 @@ p Ractor.new(pr) {|p| p.call }.value # => 42
 
 - **SEE** [m:Ractor.shareable_lambda], [m:Ractor.make_shareable]
 
-### def shareable_lambda { ... } -> Proc
+### def Ractor.shareable_lambda { ... } -> Proc
 
 [m:Ractor.shareable_proc] と同じですが、lambda である [c:Proc] を返します。
 
@@ -138,7 +138,7 @@ p l.lambda?            # => true
 #%end
 
 #%since 3.4
-### def store_if_absent(key) { ... } -> object
+### def Ractor.store_if_absent(key) { ... } -> object
 
 このメソッドを呼び出した Ractor の Ractor-local storage の key データがない場合、
 ブロックを評価した結果を格納します。
@@ -148,7 +148,7 @@ p l.lambda?            # => true
 #%end
 
 #%until 4.0
-### def yield(obj, move: false) -> object
+### def Ractor.yield(obj, move: false) -> object
 
 現在の Ractor の outgoing port に obj を送信します。
 別の Ractor が [m:Ractor#take] でこのメッセージを受信するまでブロックします。

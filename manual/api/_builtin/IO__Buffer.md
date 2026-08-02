@@ -115,8 +115,8 @@ p IO::Buffer::HOST_ENDIAN == IO::Buffer::LITTLE_ENDIAN # => true
 
 ## Class Methods
 
-### def for(string) -> IO::Buffer
-### def for(string) {|buffer| ... } -> object
+### def IO::Buffer.for(string) -> IO::Buffer
+### def IO::Buffer.for(string) {|buffer| ... } -> object
 
 文字列 string のメモリ領域を参照する、コピーを伴わないバッファを作成します。
 
@@ -157,7 +157,7 @@ p str # => "Ruby"
 
 - **SEE** [m:IO::Buffer.new], [m:IO::Buffer.map]
 
-### def map(file, size = nil, offset = 0, flags = 0) -> IO::Buffer
+### def IO::Buffer.map(file, size = nil, offset = 0, flags = 0) -> IO::Buffer
 
 ファイルをメモリにマップしたバッファを作成して返します。
 
@@ -199,7 +199,7 @@ p File.read("test.txt") # => "HELLO world"
 
 - **SEE** [m:IO::Buffer.new], [m:IO::Buffer.for]
 
-### def new(size = IO::Buffer::DEFAULT_SIZE, flags = 0) -> IO::Buffer
+### def IO::Buffer.new(size = IO::Buffer::DEFAULT_SIZE, flags = 0) -> IO::Buffer
 
 size バイトの、0 で埋められた新しいバッファを作成して返します。
 
@@ -224,7 +224,7 @@ p buf.get_string # => "\x00\x00\x00\x00"
 - **SEE** [m:IO::Buffer.for], [m:IO::Buffer.map]
 
 #%since 3.3
-### def string(length) {|buffer| ... } -> String
+### def IO::Buffer.string(length) {|buffer| ... } -> String
 
 length バイトの文字列を新しく作り、それを元にしたコピーを伴わないバッファを
 ブロックに渡します。ブロックの実行後、その文字列を返します。
@@ -248,8 +248,8 @@ p str.encoding.name   # => "ASCII-8BIT"
 #%end
 
 #%since 3.2
-### def size_of(buffer_type) -> Integer
-### def size_of(buffer_types) -> Integer
+### def IO::Buffer.size_of(buffer_type) -> Integer
+### def IO::Buffer.size_of(buffer_types) -> Integer
 
 数値の型が占めるバイト数を返します。
 

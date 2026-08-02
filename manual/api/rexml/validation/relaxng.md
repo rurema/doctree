@@ -75,7 +75,7 @@ parser.parse
 
 ## Class Methods
 
-### def new(source)
+### def REXML::Validation::RelaxNG.new(source)
 #%todo
 
 ## Instance Methods
@@ -109,7 +109,7 @@ parser.parse
 
 ## Class Methods
 
-### def new(context)
+### def REXML::Validation::State.new(context)
 #%todo
 
 ## Instance Methods
@@ -180,7 +180,7 @@ parser.parse
 
 ## Class Methods
 
-### def new(context)
+### def REXML::Validation::OneOrMore.new(context)
 #%todo
 
 ## Instance Methods
@@ -201,7 +201,7 @@ parser.parse
 
 ## Class Methods
 
-### def new(context)
+### def REXML::Validation::Choice.new(context)
 #%todo
 
 ## Instance Methods
@@ -233,7 +233,7 @@ parser.parse
 
 ## Class methods
 
-### def new(context)
+### def REXML::Validation::Interleave.new(context)
 #%todo
 
 ## Instance Methods
@@ -260,7 +260,7 @@ parser.parse
 
 ## Class Methods
 
-### def new(value)
+### def REXML::Validation::Ref.new(value)
 #%todo
 
 ## Instance Methods

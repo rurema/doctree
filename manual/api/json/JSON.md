@@ -7,7 +7,7 @@ JSON (JavaScript Object Notation) を扱うためのモジュールです。
 
 ## Singleton Methods
 
-### def [](object, options) -> object
+### def JSON.[](object, options) -> object
 
 文字列のように扱えるデータを受け取った場合は Ruby のオブジェクトに変換して返します。
 そうでない場合は JSON に変換して返します。
@@ -32,7 +32,7 @@ p JSON[hash]                         # => "{\"a\":1,\"b\":2,\"c\":3}"
 
 - **SEE** [m:JSON?.parse], [m:JSON?.generate]
 
-### def create_id -> String
+### def JSON.create_id -> String
 
 json_create メソッドで使用するクラスを決定するために使用する値を返します。
 
@@ -70,7 +70,7 @@ p JSON.parse(json, create_additions: true)
 # => #<User:0x0000557709b269e0 @id=1, @name="tanaka">
 ```
 
-### def create_id=(identifier)
+### def JSON.create_id=(identifier)
 
 json_create メソッドで使用するクラスを決定するために使用する値をセットします。
 
@@ -90,7 +90,7 @@ puts (1..5).to_json              # => {"my_json_class":"Range","a":[1,5,false]}
 #%# nodoc
 #%# --- deep_const_get
 
-### def generator -> JSON::Ext::Generator
+### def JSON.generator -> JSON::Ext::Generator
 
 JSON ライブラリがジェネレータとして使用するモジュールを返します。
 
@@ -99,7 +99,7 @@ JSON ライブラリがジェネレータとして使用するモジュールを
 #%# nodoc
 #%# --- generator=(generator)
 
-### def parser -> JSON::Ext::Parser
+### def JSON.parser -> JSON::Ext::Parser
 
 JSON ライブラリがパーサとして使用するクラスを返します。
 
@@ -112,7 +112,7 @@ p JSON.parser # => JSON::Ext::Parser
 #%# nodoc
 #%# --- parser=(parser)
 
-### def state -> JSON::Ext::Generator::State
+### def JSON.state -> JSON::Ext::Generator::State
 
 JSON ライブラリがジェネレータの状態を表すクラスとして使用するクラスを返します。
 

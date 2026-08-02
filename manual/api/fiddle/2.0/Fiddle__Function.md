@@ -7,7 +7,7 @@ since: "2.0.0"
 C の関数を表すクラスです。
 
 ## Class Methods
-### def new(ptr, args, ret_type, abi=Fiddle::Function::DEFAULT, name: nil) -> Fiddle::Function
+### def Fiddle::Function.new(ptr, args, ret_type, abi=Fiddle::Function::DEFAULT, name: nil) -> Fiddle::Function
 
 ptr (関数ポインタ)から Fiddle::Function オブジェクトを
 生成します。
@@ -164,7 +164,7 @@ compare = Class.new(Fiddle::Closure){
 [c:Fiddle::Closure::BlockCaller] を使うほうが簡単です。
 
 ## Class Methods
-### def new(ret, args, abi=Fiddle::Function::DEFAULT) -> Fiddle::Closure
+### def Fiddle::Closure.new(ret, args, abi=Fiddle::Function::DEFAULT) -> Fiddle::Closure
 
 そのクラスの call メソッドを呼びだすような
 Fiddle::Closure オブジェクトを返します。
@@ -217,7 +217,7 @@ p s # =>  "()07Uabcqx"
 ```
 
 ## Class Methods
-### def new(ret, args, abi=Fiddle::Function::DEFAULT){ ... } -> Fiddle::Closure::BlockCaller
+### def Fiddle::Closure::BlockCaller.new(ret, args, abi=Fiddle::Function::DEFAULT){ ... } -> Fiddle::Closure::BlockCaller
 
 Ruby のブロックを呼び出す Fiddle::Closure オブジェクトを返します。
 

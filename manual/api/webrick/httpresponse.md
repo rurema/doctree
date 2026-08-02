@@ -17,7 +17,7 @@ HTTP のレスポンスを表すためのクラスです。
 
 ## Class Methods
 
-### def new(config) -> WEBrick::HTTPResponse
+### def WEBrick::HTTPResponse.new(config) -> WEBrick::HTTPResponse
 
 HTTPResponse オブジェクトを生成して返します。
 

@@ -149,9 +149,9 @@ Ruby 3.0 から、ファイバーはブロッキングとノンブロッキン�
 #%end
 
 #%since 3.2
-### def new(blocking: false, storage: true) {|obj| ... } -> Fiber
+### def Fiber.new(blocking: false, storage: true) {|obj| ... } -> Fiber
 #%else
-### def new(blocking: false) {|obj| ... } -> Fiber
+### def Fiber.new(blocking: false) {|obj| ... } -> Fiber
 #%else
 #%end
 
@@ -197,7 +197,7 @@ p Fiber.new(storage: {key: 2}) { Fiber[:key] }.resume # => 2
 
 #%end
 
-### def yield(*arg = nil)   -> object
+### def Fiber.yield(*arg = nil)   -> object
 
 現在のファイバーの親にコンテキストを切り替えます。
 
@@ -220,7 +220,7 @@ p a  #=> :foo
 ```
 
 #%since 3.2
-### def [](key) -> object | nil
+### def Fiber.[](key) -> object | nil
 
 現在のファイバーの fiber storage から key に対応する値を返します。
 対応する値がない場合は nil を返します。
@@ -243,7 +243,7 @@ p Fiber[:unknown] # => nil
 
 - **SEE** [m:Fiber.\[\]=], [m:Fiber#storage]
 
-### def []=(key, value)
+### def Fiber.[]=(key, value)
 
 現在のファイバーの fiber storage の key に対応する値を value に設定します。
 key に対応する値がまだない場合は追加します。
@@ -274,7 +274,7 @@ p Fiber[:key]   # => 1
 
 - **SEE** [m:Fiber.\[\]], [m:Fiber#storage]
 
-### def blocking {|fiber| ... } -> object
+### def Fiber.blocking {|fiber| ... } -> object
 
 ブロックを実行している間だけ、現在のファイバーをブロッキングにします。
 
@@ -297,7 +297,7 @@ f.resume
 - **SEE** [m:Fiber.blocking?], [ref:c:Fiber#nonblocking]
 #%end
 
-### def blocking? -> false | 1
+### def Fiber.blocking? -> false | 1
 
 現在の実行コンテキストがブロッキングである場合に 1 を返します。
 ノンブロッキングである場合は false を返します。
@@ -314,7 +314,7 @@ p Fiber.new(blocking: true) { Fiber.blocking? }.resume # => 1
 - **SEE** [m:Fiber#blocking?], [ref:c:Fiber#nonblocking]
 
 #%since 3.1
-### def current_scheduler -> object | nil
+### def Fiber.current_scheduler -> object | nil
 
 現在のスレッドに設定されているスケジューラを返します。
 ただし現在のファイバーがブロッキングである場合は nil を返します。
@@ -325,7 +325,7 @@ p Fiber.new(blocking: true) { Fiber.blocking? }.resume # => 1
 - **SEE** [m:Fiber.scheduler], [m:Fiber.set_scheduler]
 #%end
 
-### def schedule(*args) {|*args| ... } -> Fiber
+### def Fiber.schedule(*args) {|*args| ... } -> Fiber
 
 現在のスレッドに設定されているスケジューラを使って、
 ブロックをノンブロッキングなファイバーで実行します。
@@ -343,7 +343,7 @@ Fiber.schedule { }  # ~> RuntimeError: No scheduler is available!
 
 - **SEE** [m:Fiber.set_scheduler], [ref:c:Fiber#nonblocking]
 
-### def scheduler -> object | nil
+### def Fiber.scheduler -> object | nil
 
 現在のスレッドに設定されているスケジューラを返します。
 設定されていない場合は nil を返します。
@@ -357,7 +357,7 @@ p Fiber.scheduler # => nil
 - **SEE** [m:Fiber.current_scheduler]
 #%end
 
-### def set_scheduler(scheduler) -> object
+### def Fiber.set_scheduler(scheduler) -> object
 
 現在のスレッドにスケジューラを設定します。
 

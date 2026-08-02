@@ -16,7 +16,7 @@ DRbTCPSocket のサブクラスとして実装されています。
 
 ## Class Methods
 
-### def open(uri, config) -> DRb::DRbUNIXSocket
+### def DRb::DRbUNIXSocket.open(uri, config) -> DRb::DRbUNIXSocket
 
 uri で指定した UNIX ドメインソケットに接続します。
 
@@ -26,7 +26,7 @@ uri で指定した UNIX ドメインソケットに接続します。
 
 - **raise** `DRb::DRbBadScheme` -- uri が "drbunix:" で始まらない場合に発生します。
 
-### def open_server(uri, config) -> DRb::DRbUNIXSocket
+### def DRb::DRbUNIXSocket.open_server(uri, config) -> DRb::DRbUNIXSocket
 
 uri で指定したパスに UNIX ドメインソケットを作成し、接続を待ち受けます。
 
@@ -38,7 +38,7 @@ uri で指定したパスに UNIX ドメインソケットを作成し、接続�
              `:UNIXFileMode`、`:UNIXFileOwner`、`:UNIXFileGroup` を指定できます。
              詳細は [lib:drb/unix] を参照してください。
 
-### def uri_option(uri, config) -> [String, String | nil]
+### def DRb::DRbUNIXSocket.uri_option(uri, config) -> [String, String | nil]
 
 uri をパースして [uri, option] という配列を返します。
 

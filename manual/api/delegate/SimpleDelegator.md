@@ -20,7 +20,7 @@ p foo2.test # => 25
 
 ## Class Methods
 
-### def new(obj) -> object
+### def SimpleDelegator.new(obj) -> object
 
 メソッドを委譲するオブジェクトの設定と、
 メソッド委譲を行うためのクラスメソッドの定義を行います。

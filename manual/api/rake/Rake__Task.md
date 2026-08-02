@@ -138,7 +138,7 @@ library: rake
 
 ## Singleton Methods
 
-### def new(task_name, app)
+### def Rake::Task.new(task_name, app)
 
 与えられたタスク名とアプリケーションで自身を初期化します。
 
@@ -147,7 +147,7 @@ library: rake
 
 - **SEE** [m:Rake::Task#enhance]
 
-### def [](task_name) -> Rake::Task
+### def Rake::Task.[](task_name) -> Rake::Task
 
 与えられた名前のタスクを返します。
 
@@ -157,17 +157,17 @@ library: rake
 
 - **param** `task_name` -- タスクの名前を指定します。
 
-### def clear
+### def Rake::Task.clear
 
 タスクリストをクリアします。
 
 このメソッドはユニットテスト用です。
 
-### def create_rule(*args){ ... } -> Rake::Task
+### def Rake::Task.create_rule(*args){ ... } -> Rake::Task
 
 タスクを合成するためのルールを作成します。
 
-### def define_task(*args){ ... } -> Rake::Task
+### def Rake::Task.define_task(*args){ ... } -> Rake::Task
 
 与えられたパラメータと省略可能なブロックを用いてタスクを定義します。
 
@@ -175,17 +175,17 @@ library: rake
 
 - **param** `args` -- パラメータを指定します。
 
-### def scope_name(scope, task_name) -> String
+### def Rake::Task.scope_name(scope, task_name) -> String
 
 与えられたスコープとタスク名をコロンで連結して返します。
 
-### def task_defined?(task_name) -> bool
+### def Rake::Task.task_defined?(task_name) -> bool
 
 与えられたタスク名が既に定義されている場合は真を返します。
 そうでない場合は偽を返します。
 
 - **param** `task_name` -- タスク名を指定します。
 
-### def tasks -> Array
+### def Rake::Task.tasks -> Array
 
 定義されているタスクのリストを返します。

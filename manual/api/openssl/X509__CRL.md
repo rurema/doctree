@@ -17,8 +17,8 @@ CRL とは、危殆化した等なんらかの理由で失効した証明書の�
 
 ## Class Methods
 
-### def new -> OpenSSL::X509::CRL
-### def new(obj) -> OpenSSL::X509::CRL
+### def OpenSSL::X509::CRL.new -> OpenSSL::X509::CRL
+### def OpenSSL::X509::CRL.new(obj) -> OpenSSL::X509::CRL
 
 CRL(証明書失効リスト)オブジェクトを生成します。
 

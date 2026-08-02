@@ -103,8 +103,8 @@ yesterday = Date.today - 1
 
 ## Class Methods
 
-### def civil(year = -4712, mon = 1, mday = 1, start = Date::ITALY) -> Date
-### def new(year = -4712, mon = 1, mday = 1, start = Date::ITALY) -> Date
+### def Date.civil(year = -4712, mon = 1, mday = 1, start = Date::ITALY) -> Date
+### def Date.new(year = -4712, mon = 1, mday = 1, start = Date::ITALY) -> Date
 
 暦日付に相当する日付オブジェクトを生成します。
 
@@ -130,7 +130,7 @@ require 'date'
 p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 ```
 
-### def commercial(cwyear = -4712, cweek = 1, cwday = 1, start = Date::ITALY) -> Date
+### def Date.commercial(cwyear = -4712, cweek = 1, cwday = 1, start = Date::ITALY) -> Date
 
 暦週日付に相当する日付オブジェクトを生成します。
 
@@ -148,15 +148,15 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `Date::Error` -- 正しくない日付になる組み合わせである場合に発生します。
 
-### def gregorian_leap? (year) -> bool
-### def leap? (year) -> bool
+### def Date.gregorian_leap? (year) -> bool
+### def Date.leap? (year) -> bool
 
 グレゴリオ暦の閏年なら真を返します。
 
 - **param** `year` -- 年
 
 #%# exp
-### def _httpdate(str) -> Hash
+### def Date._httpdate(str) -> Hash
 
 このメソッドは [m:Date.httpdate] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
@@ -165,7 +165,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 
 - **param** `str` -- 日付をあらわす文字列
 
-### def httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> Date
+### def Date.httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> Date
 
 [RFC:2616] で定められた書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -176,7 +176,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #%# exp
-### def _iso8601(str) -> Hash
+### def Date._iso8601(str) -> Hash
 
 このメソッドは [m:Date.iso8601] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
@@ -185,7 +185,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 
 - **param** `str` -- 日付をあらわす文字列
 
-### def iso8601(str = '-4712-01-01', start = Date::ITALY) -> Date
+### def Date.iso8601(str = '-4712-01-01', start = Date::ITALY) -> Date
 
 いくつかの代表的な ISO 8601 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -198,7 +198,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #%# exp
-### def _jisx0301(str) -> Hash
+### def Date._jisx0301(str) -> Hash
 
 このメソッドは [m:Date.jisx0301] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
@@ -207,7 +207,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 
 - **param** `str` -- 日付をあらわす文字列
 
-### def jisx0301(str = '-4712-01-01', start = Date::ITALY) -> Date
+### def Date.jisx0301(str = '-4712-01-01', start = Date::ITALY) -> Date
 
 いくつかの代表的な JIS X 0301 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -217,7 +217,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-### def jd(jd = 0, start = Date::ITALY) -> Date
+### def Date.jd(jd = 0, start = Date::ITALY) -> Date
 
 ユリウス日に相当する日付オブジェクトを生成します。
 
@@ -229,7 +229,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `jd` -- ユリウス日
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-### def julian_leap? (year) -> bool
+### def Date.julian_leap? (year) -> bool
 
 ユリウス暦の閏年なら真を返します。
 
@@ -238,7 +238,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 
 - **param** `year` -- 年
 
-### def ordinal(year = -4712, yday = 1, start = Date::ITALY) -> Date
+### def Date.ordinal(year = -4712, yday = 1, start = Date::ITALY) -> Date
 
 年間通算日 (年日付) に相当する日付オブジェクトを生成します。
 
@@ -253,7 +253,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `Date::Error` -- 正しくない日付になる組み合わせである場合に発生します。
 
-### def _parse(str, complete = true) -> Hash
+### def Date._parse(str, complete = true) -> Hash
 
 このメソッドは [m:Date.parse] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
@@ -263,7 +263,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `str` -- 日付をあらわす文字列
 - **param** `complete` -- 年を補完するか
 
-### def parse(str = '-4712-01-01', complete = true, start = Date::ITALY) -> Date
+### def Date.parse(str = '-4712-01-01', complete = true, start = Date::ITALY) -> Date
 
 与えられた日付表現を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -280,8 +280,8 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **raise** `Date::Error` -- 正しくない日付になる組み合わせである場合に発生します。
 
 #%# exp
-### def _rfc2822(str) -> Hash
-### def _rfc822(str) -> Hash
+### def Date._rfc2822(str) -> Hash
+### def Date._rfc822(str) -> Hash
 
 このメソッドは [m:Date.rfc2822] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
@@ -290,8 +290,8 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 
 - **param** `str` -- 日付をあらわす文字列
 
-### def rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> Date
-### def rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> Date
+### def Date.rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> Date
+### def Date.rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> Date
 
 [RFC:2822] で定められた書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -302,7 +302,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #%# exp
-### def _rfc3339(str) -> Hash
+### def Date._rfc3339(str) -> Hash
 
 このメソッドは [m:Date.rfc3339] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
@@ -311,7 +311,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 
 - **param** `str` -- 日付をあらわす文字列
 
-### def rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> Date
+### def Date.rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> Date
 
 [RFC:3339] 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -321,7 +321,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-### def _strptime(str, format = '%F') -> Hash
+### def Date._strptime(str, format = '%F') -> Hash
 
 このメソッドは [m:Date.strptime] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
@@ -378,7 +378,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
   - %%: %自身
   - %+: [man:date(1)]の形式 (%a %b %e %H:%M:%S %Z %Y)
 
-### def strptime(str = '-4712-01-01', format = '%F', start = Date::ITALY) -> Date
+### def Date.strptime(str = '-4712-01-01', format = '%F', start = Date::ITALY) -> Date
 
 与えられた雛型で日付表現を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -391,7 +391,7 @@ p Date.new(2017, 9, 20)  # => #<Date: 2017-09-20 ...>
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `Date::Error` -- 正しくない日付になる組み合わせである場合に発生します。
 
-### def today(start = Date::ITALY) -> Date
+### def Date.today(start = Date::ITALY) -> Date
 
 現在の日付に相当する日付オブジェクトを生成します。
 
@@ -402,8 +402,8 @@ require 'date'
 p Date.today  # => #<Date: 2017-09-20 ...>
 ```
 
-### def valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> bool
-### def valid_date? (year, mon, mday, start = Date::GREGORIAN) -> bool
+### def Date.valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> bool
+### def Date.valid_date? (year, mon, mday, start = Date::GREGORIAN) -> bool
 
 正しい暦日付であれば真、そうでないなら偽を返します。
 
@@ -414,7 +414,7 @@ p Date.today  # => #<Date: 2017-09-20 ...>
 - **param** `mday` -- 日
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-### def valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> bool
+### def Date.valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> bool
 
 正しい暦週日付であれば真、そうでないなら偽を返します。
 
@@ -425,7 +425,7 @@ p Date.today  # => #<Date: 2017-09-20 ...>
 - **param** `cwday` -- 週の日 (曜日)
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-### def valid_jd? (jd, start = Date::GREGORIAN) -> bool
+### def Date.valid_jd? (jd, start = Date::GREGORIAN) -> bool
 
 真を返します。
 
@@ -436,7 +436,7 @@ p Date.today  # => #<Date: 2017-09-20 ...>
 - **param** `jd` -- ユリウス日
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-### def valid_ordinal? (year, yday, start = Date::GREGORIAN) -> bool
+### def Date.valid_ordinal? (year, yday, start = Date::GREGORIAN) -> bool
 
 正しい年間通算日 (年日付) であれば真、そうでないなら偽を返します。
 
@@ -447,7 +447,7 @@ p Date.today  # => #<Date: 2017-09-20 ...>
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #%# exp
-### def _xmlschema(str) -> Hash
+### def Date._xmlschema(str) -> Hash
 
 このメソッドは [m:Date.xmlschema] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
@@ -456,7 +456,7 @@ p Date.today  # => #<Date: 2017-09-20 ...>
 
 - **param** `str` -- 日付をあらわす文字列
 
-### def xmlschema(str = '-4712-01-01', start = Date::ITALY) -> Date
+### def Date.xmlschema(str = '-4712-01-01', start = Date::ITALY) -> Date
 
 XML Schema による書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。

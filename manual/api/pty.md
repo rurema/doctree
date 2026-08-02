@@ -31,7 +31,7 @@ category: CUI
 - **SEE** [m:Kernel?.spawn], [m:Kernel?.system], [m:IO.popen], [man:signal(2)]
 
 ## Singleton Methods
-### def check(pid, raise = false) -> Process::Status | nil
+### def PTY.check(pid, raise = false) -> Process::Status | nil
 
 pid で指定された子プロセスの状態をチェックし、変化があれば変化したステータスを
 返します。実行中、あるいは変化なしであれば nil を返します。
@@ -49,8 +49,8 @@ pid で指定された子プロセスの状態をチェックし、変化があ�
              (なお、バグにより、1.9.2 pXXX より古い ruby では、終了または停止して
              いなくても、ただちに例外が発生します)
 
-### def open -> [IO, File]
-### def open{|master_io, slave_file| ... } -> object
+### def PTY.open -> [IO, File]
+### def PTY.open{|master_io, slave_file| ... } -> object
 
 仮想 tty を確保し、マスター側に対応する [c:IO] オブジェクトとスレーブ側に
 対応する [c:File] オブジェクトの配列を返します。

@@ -11,7 +11,7 @@ alias は YAML の AST の葉のノードであり、子ノードを持ちませ
 
 ## Class Methods
 
-### def new(anchor) -> Psych::Nodes::Alias
+### def Psych::Nodes::Alias.new(anchor) -> Psych::Nodes::Alias
 
 新たな Alias オブジェクトを生成します。
 

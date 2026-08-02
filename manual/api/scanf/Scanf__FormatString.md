@@ -6,7 +6,7 @@ until: "2.7.0"
 
 ## Singleton Methods
 
-### def new(str)
+### def Scanf::FormatString.new(str)
 #%todo
 
 ## Instance Methods

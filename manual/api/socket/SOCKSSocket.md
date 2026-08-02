@@ -7,8 +7,8 @@ library: socket
 
 ## Class Methods
 
-### def open(host, service) -> SOCKSSocket
-### def new(host, service) -> SOCKSSocket
+### def SOCKSSocket.open(host, service) -> SOCKSSocket
+### def SOCKSSocket.new(host, service) -> SOCKSSocket
 
 host で指定したホストの service で指定したポートと接続したソケッ
 トを返します。host はホスト名、またはインターネットアドレスを

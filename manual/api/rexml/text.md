@@ -11,7 +11,7 @@ XML のテキストノードを表すクラスです。
 
 ## Class Methods
 
-### def new(arg, respect_whitespace = false, parent = nil, raw = nil, entity_filter = nil, illegal = REXML::Text::NEEDS_A_SECOND_CHECK)
+### def REXML::Text.new(arg, respect_whitespace = false, parent = nil, raw = nil, entity_filter = nil, illegal = REXML::Text::NEEDS_A_SECOND_CHECK)
 
 テキストノードオブジェクトを生成します。
 
@@ -87,7 +87,7 @@ p REXML::Text.new("quzz", false, doc.root, true).to_s # => "quzz"
 #%# --- read_with_substitution(input, illegal = nil)
 #%# #@todo
 
-### def normalize(input, doctype = nil, entity_filter = nil) -> String
+### def REXML::Text.normalize(input, doctype = nil, entity_filter = nil) -> String
 
 input を正規化(すべての entity をエスケープ)したものを
 返します。
@@ -96,7 +96,7 @@ input を正規化(すべての entity をエスケープ)したものを
 - **param** `doctype` -- DTD([c:REXML::DocType] オブジェクト)
 - **param** `entity_filter` -- 置換したい実体の名前の配列
 
-### def unnormalize(string, doctype = nil, filter = nil, illegal = nil) -> String
+### def REXML::Text.unnormalize(string, doctype = nil, filter = nil, illegal = nil) -> String
 
 string を非正規化(すべての entity をアンエスケープ)したものを
 返します。

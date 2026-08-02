@@ -4,7 +4,7 @@
 
 ## Class Methods
 
-### def new(node = nil)
+### def REXML::Light::Node.new(node = nil)
 #%todo
 
 ## Instance Methods

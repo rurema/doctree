@@ -7,7 +7,7 @@ library: zlib
 
 ## Class Methods
 
-### def deflate(string, level = Zlib::DEFAULT_COMPRESSION ) -> String
+### def Zlib::Deflate.deflate(string, level = Zlib::DEFAULT_COMPRESSION ) -> String
 
 string を圧縮します。level の有効な値は
 [m:Zlib::NO_COMPRESSION], [m:Zlib::BEST_SPEED],
@@ -58,7 +58,7 @@ p str.size #=> 500
 #=> 194
 ```
 
-### def new(level = Zlib::DEFAULT_COMPRESSION, windowBits = Zlib::MAX_WBITS, memlevel = Zlib::DEF_MEM_LEVEL, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::Deflate
+### def Zlib::Deflate.new(level = Zlib::DEFAULT_COMPRESSION, windowBits = Zlib::MAX_WBITS, memlevel = Zlib::DEF_MEM_LEVEL, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::Deflate
 
 圧縮ストリームを作成します。各引数の詳細は zlib.h を
 参照して下さい。nil の場合はデフォルトの値を使用します。

@@ -89,7 +89,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## Class Methods
 
-### def new(parent_generator, options) -> RDoc::Generator::JsonIndex
+### def RDoc::Generator::JsonIndex.new(parent_generator, options) -> RDoc::Generator::JsonIndex
 
 [c:RDoc::Generator::JsonIndex] オブジェクトを初期化します。
 

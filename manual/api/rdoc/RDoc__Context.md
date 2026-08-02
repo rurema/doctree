@@ -21,7 +21,7 @@ include:
 
 ## Class Methods
 
-### def new -> RDoc::Context
+### def RDoc::Context.new -> RDoc::Context
 
 自身を初期化します。
 

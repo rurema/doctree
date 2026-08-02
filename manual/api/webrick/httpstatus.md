@@ -23,7 +23,7 @@ StandardError
 
 ## Singleton Methods
 
-### def [](code)    -> Class
+### def WEBrick::HTTPStatus.[](code)    -> Class
 
 指定された整数が表すステータスコードに対応する WEBrick::HTTPStatus::Status
 のサブクラスを返します。

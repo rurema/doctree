@@ -3,8 +3,8 @@
 #%# ちゃんと使えるものではないように思われる
 ## Class Methods
 
-### def parse(input)
+### def REXML::DTD::Parser.parse(input)
 #%todo
 
-### def parse_helper(input)
+### def REXML::DTD::Parser.parse_helper(input)
 #%todo

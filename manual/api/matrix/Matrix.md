@@ -43,7 +43,7 @@ i=jの要素a(i,j)を対角要素(diagonal element)、
 #%#  require 'matrix'
 
 ## Class Methods
-### def [](*rows) -> Matrix
+### def Matrix.[](*rows) -> Matrix
 
 rows[i] を第 i 行とする行列を生成します。
 
@@ -57,7 +57,7 @@ p m  # => Matrix[[11, 12], [21, 22]]
      #    [21, 22]
 ```
 
-### def rows(rows, copy = true) -> Matrix
+### def Matrix.rows(rows, copy = true) -> Matrix
 
 引数 rows を行ベクトルの列とする行列を生成します。
 
@@ -78,7 +78,7 @@ p m # => Matrix[[1, 2, 3], [10, 1000, 20]]
 - **param** `rows` -- 配列の配列
 - **param** `copy` -- 配列を複製するかどうかを真偽値で指定
 
-### def columns(columns) -> Matrix
+### def Matrix.columns(columns) -> Matrix
 
 引数 columns を列ベクトルの集合とする行列を生成します。
 
@@ -110,7 +110,7 @@ p m # => Matrix[[1, 4, -1], [2, 5, -2], [3, 6, -3]]
     #                          [3, 6, -3]
 ```
 
-### def diagonal(*values) -> Matrix
+### def Matrix.diagonal(*values) -> Matrix
 
 対角要素がvaluesで、非対角要素が全て0であるような
 正方行列を生成します。
@@ -131,7 +131,7 @@ m = Matrix.diagonal(a)
 p m # => Matrix[[[1, 2, 3]]]
 ```
 
-### def scalar(n, value) -> Matrix
+### def Matrix.scalar(n, value) -> Matrix
 
 対角要素が全てvalue(数)で、非対角要素が全て0であるようなn次の正方行列を生成します。
 
@@ -145,9 +145,9 @@ m = Matrix.scalar(3, 2.5)
 p m # => Matrix[[2.5, 0, 0], [0, 2.5, 0], [0, 0, 2.5]]
 ```
 
-### def identity(n) -> Matrix
-### def unit(n) -> Matrix
-### def I(n) -> Matrix
+### def Matrix.identity(n) -> Matrix
+### def Matrix.unit(n) -> Matrix
+### def Matrix.I(n) -> Matrix
 
 n次の単位行列を生成します。
 
@@ -155,7 +155,7 @@ n次の単位行列を生成します。
 
 単位行列とは、対角要素が全て1で非対角要素が全て0であるような行列のことです。
 
-### def zero(n) -> Matrix
+### def Matrix.zero(n) -> Matrix
 
 n × n の零行列（要素が全て 0 の行列）を生成して返します。
 
@@ -166,7 +166,7 @@ p Matrix.zero(2) #=> Matrix[[0, 0], [0, 0]]
 
 - **param** `n` -- 生成する正方零行列の次数
 
-### def zero(row, column) -> Matrix
+### def Matrix.zero(row, column) -> Matrix
 
 row × column の零行列（要素が全て 0 の行列）を生成して返します。
 
@@ -178,7 +178,7 @@ p Matrix.zero(2, 3) #=> Matrix[[0, 0, 0], [0, 0, 0]]
 - **param** `row` -- 生成する行列の行数
 - **param** `column` -- 生成する行列の列数
 
-### def empty(row_count=0, column_count=0) -> Matrix
+### def Matrix.empty(row_count=0, column_count=0) -> Matrix
 
 要素を持たない行列を返します。
 
@@ -202,20 +202,20 @@ p m * n
 - **param** `column_count` -- 行列の列数
 - **raise** `ArgumentError` -- `row_count`, `column_count` が両方とも0でない場合に発生します
 
-### def row_vector(row) -> Matrix
+### def Matrix.row_vector(row) -> Matrix
 
 要素がrowの(1,n)型の行列(行ベクトル)を生成します。
 
 - **param** `row` -- (1,n)型の行列として生成する[c:Vector] [c:Array] オブジェクト
 
-### def column_vector(column) -> Matrix
+### def Matrix.column_vector(column) -> Matrix
 
 要素がcolumnの(n,1)型の行列(列ベクトル)を生成します。
 
 - **param** `column` -- (n,1)型の行列として生成する[c:Vector] [c:Array] オブジェクト
 
-### def build(row_count, column_count = row_count) {|row, col| ... } -> Matrix
-### def build(row_count, column_count = row_count) -> Enumerable
+### def Matrix.build(row_count, column_count = row_count) {|row, col| ... } -> Matrix
+### def Matrix.build(row_count, column_count = row_count) -> Enumerable
 
 `row_count`×`column_count` の行列をブロックの返り値から生成します。
 
@@ -234,7 +234,7 @@ m = Matrix.build(3) { rand }
 - **param** `row_count` -- 行列の行数
 - **param** `column_count` -- 行列の列数
 
-### def hstack(*matrices) -> Matrix
+### def Matrix.hstack(*matrices) -> Matrix
 
 行列 matrices を横に並べた行列を生成します。
 
@@ -249,7 +249,7 @@ p Matrix.hstack(x, y) # => Matrix[[1, 2, 5, 6], [3, 4, 7, 8]]
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 行数の異なる行列がある場合に発生します
 - **SEE** [m:Matrix.vstack], [m:Matrix#hstack]
 
-### def vstack(*matrices) -> Matrix
+### def Matrix.vstack(*matrices) -> Matrix
 
 行列 matrices を縦に並べた行列を生成します。
 
@@ -264,8 +264,8 @@ p Matrix.vstack(x, y) # => Matrix[[1, 2], [3, 4], [5, 6], [7, 8]]
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 列数の異なる行列がある場合に発生します
 - **SEE** [m:Matrix.hstack], [m:Matrix#vstack]
 
-### def combine(*matrices) {|*elements| ... } -> Matrix
-### def combine(*matrices) -> Enumerator
+### def Matrix.combine(*matrices) {|*elements| ... } -> Matrix
+### def Matrix.combine(*matrices) -> Enumerator
 
 要素ごとにブロックを呼び出した結果を組み合わせた Matrix を返します。
 

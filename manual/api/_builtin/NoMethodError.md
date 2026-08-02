@@ -50,8 +50,8 @@ bar
 
 ## Class Methods
 
-### def new(error_message = "", name = nil, args = nil, priv = false) -> NoMethodError
-### def new(error_message = "", name = nil, args = nil, priv = false, receiver:) -> NoMethodError
+### def NoMethodError.new(error_message = "", name = nil, args = nil, priv = false) -> NoMethodError
+### def NoMethodError.new(error_message = "", name = nil, args = nil, priv = false, receiver:) -> NoMethodError
 
 例外オブジェクトを生成して返します。
 

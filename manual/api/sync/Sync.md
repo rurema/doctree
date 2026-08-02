@@ -13,7 +13,7 @@ until: "2.7.0"
 
 ## Class Methods
 #%# bc-rdoc: detected missing name: new
-### def new -> Sync
+### def Sync.new -> Sync
 
 [c:Sync_m]をincludeしたクラスのオブジェクトを返します。
 使い方は[c:Sync_m]を参照してください。

@@ -9,7 +9,7 @@ cdata とは <![CDATA[ と ]]> で囲まれたテキストデータのことで�
 
 ## Class Methods
 
-### def new(text, respect_whitespace = true, parent = nil) -> REXML::CData
+### def REXML::CData.new(text, respect_whitespace = true, parent = nil) -> REXML::CData
 
 text をテキストとして持つ CData オブジェクトを生成します。
 

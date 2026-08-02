@@ -6,7 +6,7 @@ until: "2.7.0"
 
 ## Singleton Methods
 
-### def new(sh, command, *opts)
+### def Shell::SystemCommand.new(sh, command, *opts)
 #%todo
 
 - **param** `sh` --

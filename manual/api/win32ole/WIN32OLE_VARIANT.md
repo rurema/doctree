@@ -62,7 +62,7 @@ Openを実行します。
 
 ## Class Methods
 
-### def array(dims, vt) -> WIN32OLE_VARIANT
+### def WIN32OLE_VARIANT.array(dims, vt) -> WIN32OLE_VARIANT
 
 配列用のVARIANTオブジェクトを生成します。
 
@@ -84,7 +84,7 @@ ruby_ary = ole_ary.value # => [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 
 - **SEE** [m:WIN32OLE_VARIANT#value], [c:WIN32OLE::VARIANT]
 
-### def new(val, vartype = nil) -> WIN32OLE_VARIANT
+### def WIN32OLE_VARIANT.new(val, vartype = nil) -> WIN32OLE_VARIANT
 
 指定したオブジェクトを値とするWIN32OLE_VARIANTオブジェクトを生成します。
 

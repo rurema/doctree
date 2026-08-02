@@ -9,13 +9,13 @@ HTTP のバージョンのための小さなクラスです。
 バージョン同士の比較のために使います。
 
 ## Class Methods
-### def new(version)    -> WEBrick::HTTPVersion
+### def WEBrick::HTTPVersion.new(version)    -> WEBrick::HTTPVersion
 
 HTTPVersion オブジェクトを生成します。version は文字列か HTTPVersion オブジェクトです。
 
 - **param** `version` -- HTTP のバージョンを WEBrick::HTTPVersion オブジェクトか文字列で指定します。
 
-### def convert(version)    -> WEBrick::HTTPVersion
+### def WEBrick::HTTPVersion.convert(version)    -> WEBrick::HTTPVersion
 
 指定された version を HTTPVersion オブジェクトに変換して返します。
 version が HTTPVersion オブジェクトの場合はそのまま version を返します。

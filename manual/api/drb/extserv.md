@@ -17,7 +17,7 @@ include:
 
 ## Class Methods
 
-### def new(there, name, server=nil) -> DRb::ExtServ
+### def DRb::ExtServ.new(there, name, server=nil) -> DRb::ExtServ
 
 DRb::ExtServ オブジェクトを生成し、サービスを 
 [c:DRb::ExtServManager] オブジェクトに登録します。

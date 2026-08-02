@@ -54,17 +54,17 @@ obj.unlock
 
 ## Singleton Methods
 
-### def append_features(klass) -> Class | nil
+### def Mutex_m.append_features(klass) -> Class | nil
 
 ユーザが直接、使うことはありません。
 
 - **SEE** [m:Module#append_features]
 
-### def define_aliases(klass) -> Class
+### def Mutex_m.define_aliases(klass) -> Class
 
 ユーザが直接、使うことはありません。
 
-### def extend_object(module) -> Module
+### def Mutex_m.extend_object(module) -> Module
 
 ユーザが直接、使うことはありません。
 

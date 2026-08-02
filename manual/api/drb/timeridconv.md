@@ -27,7 +27,7 @@ to_id でオブジェクトを識別子に変換してから
 基本的にはオブジェクトをリモートに送る直前に変換されます。
 
 ## Class Methods
-### def new(timeout=600) -> DRb::TimerIdConv
+### def DRb::TimerIdConv.new(timeout=600) -> DRb::TimerIdConv
 
 TimerIdConv のインスタンスを生成して返します。
 

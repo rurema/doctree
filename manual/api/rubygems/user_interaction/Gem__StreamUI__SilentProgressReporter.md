@@ -7,7 +7,7 @@ library: rubygems/user_interaction
 
 ## Singleton Methods
 
-### def new(out_stream, size, initial_message, terminal_message = nil)
+### def Gem::StreamUI::SilentProgressReporter.new(out_stream, size, initial_message, terminal_message = nil)
 
 何もしません。
 

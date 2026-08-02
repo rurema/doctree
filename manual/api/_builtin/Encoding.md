@@ -12,7 +12,7 @@ since: "1.9.1"
 
 ## Class Methods
 
-### def aliases    -> Hash
+### def Encoding.aliases    -> Hash
 
 エンコーディングの別名に対して元の名前を対応づけるハッシュを返します。
 
@@ -22,7 +22,7 @@ p Encoding.aliases
 #   "SJIS"=>"Windows-31J", "eucJP"=>"EUC-JP", "CP932"=>"Windows-31J"}
 ```
 
-### def compatible?(obj1, obj2) -> Encoding | nil
+### def Encoding.compatible?(obj1, obj2) -> Encoding | nil
 
 2つのオブジェクトのエンコーディングに関する互換性をチェックします。
 互換性がある場合はそのエンコーディングを、
@@ -55,7 +55,7 @@ p Encoding.compatible?(Encoding::UTF_8, Encoding::US_ASCII)
 - **param** `obj1` -- チェック対象のオブジェクト
 - **param** `obj2` -- チェック対象のオブジェクト
 
-### def find(name) -> Encoding
+### def Encoding.find(name) -> Encoding
 
 指定された name という名前を持つ Encoding オブジェクトを返します。
 
@@ -69,7 +69,7 @@ p Encoding.compatible?(Encoding::UTF_8, Encoding::US_ASCII)
 p Encoding.find("utf-8")       #=> #<Encoding:UTF-8>
 ```
 
-### def list -> [Encoding]
+### def Encoding.list -> [Encoding]
 
 現在ロードされているエンコーディングのリストを返します。
 
@@ -88,7 +88,7 @@ p Encoding.list
 #     #<Encoding:US-ASCII>, #<Encoding:ISO-2022-JP (dummy)>]
 ```
 
-### def name_list    -> [String]
+### def Encoding.name_list    -> [String]
 
 利用可能なエンコーディングの名前を文字列の配列で返します。
 
@@ -100,7 +100,7 @@ p Encoding.name_list
 #    "BINARY", "CP932", "eucJP", ...]
 ```
 
-### def default_external -> Encoding
+### def Encoding.default_external -> Encoding
 
 既定の外部エンコーディングを返します。
 
@@ -115,7 +115,7 @@ default_external は必ず設定されます。[m:Encoding.locale_charmap] が n
 
 - **SEE** [d:spec/rubycmd] [man:locale(1)], [m:Encoding.locale_charmap] [m:Encoding.default_internal]
 
-### def default_external=(encoding)
+### def Encoding.default_external=(encoding)
 
 既定の外部エンコーディングを設定します。
 
@@ -125,7 +125,7 @@ default_external を変更する前に作成した文字列と、default_externa
 
 - **SEE** [d:spec/rubycmd] [m:Encoding.default_external]
 
-### def default_internal -> Encoding | nil
+### def Encoding.default_internal -> Encoding | nil
 
 既定の内部エンコーディングを返します。デフォルトでは nil です。
 
@@ -139,7 +139,7 @@ default_internal は、ソースファイルの [m:IO#internal_encoding] また�
 
 - **SEE** [d:spec/rubycmd] [m:Encoding.default_external]
 
-### def default_internal=(encoding)
+### def Encoding.default_internal=(encoding)
 
 既定の内部エンコーディングを設定します。
 
@@ -149,7 +149,7 @@ default_internal を変更する前に作成した文字列と、default_interna
 
 - **SEE** [d:spec/rubycmd] [m:Encoding.default_internal]
 
-### def locale_charmap -> String | nil
+### def Encoding.locale_charmap -> String | nil
 
 ロケールエンコーディングを決定するために用いる、locale charmap 名を返します。nl_langinfo 等がない環境では nil を、miniruby では ASCII_8BIT を返します。
 

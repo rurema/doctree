@@ -41,7 +41,7 @@ status = FooApp.new(....).start
 
 ## Class Methods
 
-### def new(appname = nil) -> Logger::Application
+### def Logger::Application.new(appname = nil) -> Logger::Application
 
 このクラスを初期化します。
 

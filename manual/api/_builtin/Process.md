@@ -14,14 +14,14 @@ Process がプロセスを表現するクラスではなく、プロセスに対
 
 ## Singleton Methods
 
-### def abort            -> ()
-### def abort(message)   -> ()
+### def Process.abort            -> ()
+### def Process.abort(message)   -> ()
 
 関数 [m:Kernel?.abort] と同じです。
 
 - **param** `message` -- 終了時のメッセージを文字列で指定します。
 
-### def exec(command, *args) -> ()
+### def Process.exec(command, *args) -> ()
 
 カレントプロセスを与えられた外部コマンドで置き換えます。
 
@@ -59,7 +59,7 @@ exec "echo", "*"    # echoes an asterisk
 # never get here
 ```
 
-### def exit(status = true)    -> ()
+### def Process.exit(status = true)    -> ()
 
 プロセスを終了します。関数 [m:Kernel?.exit] と同じです。
 
@@ -67,7 +67,7 @@ exec "echo", "*"    # echoes an asterisk
 
 - **SEE** [man:exit(3)]
 
-### def exit!(status = false)    -> ()
+### def Process.exit!(status = false)    -> ()
 
 関数 [m:Kernel?.exit!] と同じです。
 
@@ -75,8 +75,8 @@ exec "echo", "*"    # echoes an asterisk
 
 - **SEE** [man:_exit(2)]
 
-### def fork            -> Integer | nil
-### def fork { ... }    -> Integer | nil
+### def Process.fork            -> Integer | nil
+### def Process.fork { ... }    -> Integer | nil
 
 子プロセスを生成します。関数 [m:Kernel?.fork] と同じです。
 
@@ -85,7 +85,7 @@ exec "echo", "*"    # echoes an asterisk
 - **SEE** [man:fork(2)]
 
 #%since 3.1
-### def _fork    -> Integer
+### def Process._fork    -> Integer
 
 fork のための内部 API です。このメソッドを直接呼び出してはいけません。
 
@@ -126,7 +126,7 @@ Process.waitpid(pid)
 - **SEE** [m:Process.fork], [m:Kernel?.fork], [m:Process?.daemon]
 #%end
 
-### def spawn(cmd, *arg)    -> Integer
+### def Process.spawn(cmd, *arg)    -> Integer
 
 関数 [m:Kernel?.spawn] と同じです。
 
@@ -136,7 +136,7 @@ Process.waitpid(pid)
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
-### def last_status -> Process::Status | nil
+### def Process.last_status -> Process::Status | nil
 
 カレントスレッドで最後に終了した子プロセスのステータスを返します。
 

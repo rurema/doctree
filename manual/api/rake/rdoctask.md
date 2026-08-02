@@ -139,7 +139,7 @@ RDoc のタイトルをセットします。
 
 ## Singleton Methods
 
-### def new(name = :rdoc){|pkg| ... } -> Rake::RDocTask
+### def Rake::RDocTask.new(name = :rdoc){|pkg| ... } -> Rake::RDocTask
 
 自身を初期化して RDoc タスクを定義します。
 

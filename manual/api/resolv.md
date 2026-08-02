@@ -36,7 +36,7 @@ NIS はサポートされていません。
 問い合わせをしません。
 
 ## Class Methods
-### def new(resolvers = [Hosts.new, DNS.new]) -> Resolv
+### def Resolv.new(resolvers = [Hosts.new, DNS.new]) -> Resolv
 
 resolvers に与えたリゾルバの配列を先頭から順に
 名前解決を試すような、新しいリゾルバオブジェクトを返します。
@@ -46,7 +46,7 @@ resolvers の各要素は each_address と each_name という
 
 - **param** `resolvers` -- リゾルバの配列
 
-### def getaddress(name) -> String
+### def Resolv.getaddress(name) -> String
 
 ホスト名 name の IP アドレスをルックアップし、
 ルックアップ結果の最初のアドレスを返します。
@@ -62,7 +62,7 @@ p Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
 - **param** `name` -- ホスト名を文字列で与えます。
 - **raise** `Resolv::ResolvError` -- ルックアップに失敗したときに発生します。
 
-### def getaddresses(name) -> [String]
+### def Resolv.getaddresses(name) -> [String]
 
 ホスト名 name の IP アドレスをルックアップし、
 ルックアップ結果のアドレスリストを返します。
@@ -72,7 +72,7 @@ p Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
 
 - **param** `name` -- ホスト名を文字列で与えます。
 
-### def each_address(name) {|address| ...} -> ()
+### def Resolv.each_address(name) {|address| ...} -> ()
 
 ホスト名 name の IP アドレスをルックアップし、
 各ルックアップ結果のアドレスに対してブロックを評価します。
@@ -81,7 +81,7 @@ p Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
 
 - **param** `name` -- ホスト名を文字列で与えます。
 
-### def getname(address) -> String
+### def Resolv.getname(address) -> String
 
 IP アドレス address のホスト名をルックアップし、
 ルックアップ結果の最初のホスト名を文字列で返します。
@@ -96,7 +96,7 @@ p Resolv.getname("221.186.184.68") #=> "carbon.ruby-lang.org"
 - **param** `address` -- IPアドレスを文字列で与えます。
 - **raise** `Resolv::ResolvError` -- ルックアップに失敗したときに発生します。
 
-### def getnames(address) -> [String]
+### def Resolv.getnames(address) -> [String]
 
 IP アドレス address のホスト名をルックアップし、
 ルックアップ結果のホスト名リストを返します。
@@ -105,7 +105,7 @@ IP アドレス address のホスト名をルックアップし、
 
 - **param** `address` -- IPアドレスを文字列で与えます。
 
-### def each_name(address) {|name| ...} -> ()
+### def Resolv.each_name(address) {|name| ...} -> ()
 
 IP アドレス address のホスト名をルックアップし、
 各ルックアップ結果のホスト名に対してブロックを評価します。
@@ -192,7 +192,7 @@ IPアドレスにマッチする正規表現です。
 
 ## Class Methods
 
-### def new(hosts = DefaultFileName) -> Resolv::Hosts
+### def Resolv::Hosts.new(hosts = DefaultFileName) -> Resolv::Hosts
 
 hosts というファイル名のファイルを情報源とする
 リゾルバを生成し、返します。
@@ -278,7 +278,7 @@ DNSについては以下を参照してください。
 
 ## Class Methods
 
-### def new(resolv_conf = nil) -> Resolv::DNS
+### def Resolv::DNS.new(resolv_conf = nil) -> Resolv::DNS
 
 新しい DNS リゾルバを生成します。
 
@@ -305,8 +305,8 @@ Resolv::DNS.new(:nameserver_port => [['8.8.8.8', 53], ['8.8.4.4', 53]],
 
 - **param** `resolv_conf` -- DNSの設定を与えます。
 
-### def open(*args) -> Resolv::DNS
-### def open(*args){|dns| ...} -> object
+### def Resolv::DNS.open(*args) -> Resolv::DNS
+### def Resolv::DNS.open(*args){|dns| ...} -> object
 
 新しい DNS リゾルバを生成します。
 ブロックを与えた場合は生成したリゾルバでブロックを呼びだし、
@@ -713,7 +713,7 @@ DNS リソースの SOA (Start Of Authority) レコード
 
 ## Class Methods
 
-### def new(mname, rname, serial, refresh, retry_, expire, minimum) -> Resolv::DNS::Resource::SOA
+### def Resolv::DNS::Resource::SOA.new(mname, rname, serial, refresh, retry_, expire, minimum) -> Resolv::DNS::Resource::SOA
 
 Resolv::DNS::Resource::SOA のインスタンスを生成して返します。
 
@@ -804,7 +804,7 @@ DNS リソースの HINFO レコード
 
 ## Class Methods
 
-### def new(cpu, os) -> Resolv::DNS::Resource::HINFO
+### def Resolv::DNS::Resource::HINFO.new(cpu, os) -> Resolv::DNS::Resource::HINFO
 
 Resolv::DNS::Resource::HINFO のインスタンスを生成します。
 
@@ -847,7 +847,7 @@ DNS リソースの MINFO レコード
 
 ## Class Methods
 
-### def new(rmailbx, emailbx) -> Resolv::DNS::Resource::MINFO
+### def Resolv::DNS::Resource::MINFO.new(rmailbx, emailbx) -> Resolv::DNS::Resource::MINFO
 
 Resolv::DNS::Resource::MINFO のインスタンスを生成します。
 
@@ -892,7 +892,7 @@ DNS リソースの MX レコード
 
 ## Class Methods
 
-### def new(preference, exchange) -> Resolv::DNS::Resource::MX
+### def Resolv::DNS::Resource::MX.new(preference, exchange) -> Resolv::DNS::Resource::MX
 
 Resolv::DNS::Resource::MX のインスタンスを返します。
 
@@ -934,7 +934,7 @@ DNS リソースの TXT レコード
 
 ## Class Methods
 
-### def new(first_string, *rest_strings) -> Resolv::DNS::Resource::TXT
+### def Resolv::DNS::Resource::TXT.new(first_string, *rest_strings) -> Resolv::DNS::Resource::TXT
 
 Resolv::DNS::Resource::TXTのインスタンスを生成します。
 
@@ -1051,7 +1051,7 @@ IPv4アドレスリソースを表します。
 
 ## Class Methods
 
-### def new(address) -> Resolv::DNS::Resource::IN::A
+### def Resolv::DNS::Resource::IN::A.new(address) -> Resolv::DNS::Resource::IN::A
 
 Resolv::DNS::Resource::IN::A のインスタンスを
 生成します。
@@ -1086,7 +1086,7 @@ DNS リソースのクラス IN、タイプ WKS に対応する
 
 ## Class Methods
 
-### def new(address, protocol, bitmap) -> Resolv::DNS::Resource::IN::WKS
+### def Resolv::DNS::Resource::IN::WKS.new(address, protocol, bitmap) -> Resolv::DNS::Resource::IN::WKS
 
 Resolv::DNS::Resource::IN::WKS のインスタンスを生成します。
 
@@ -1141,7 +1141,7 @@ IPv6アドレスリソースを表します。
 
 ## Class Methods
 
-### def new(address) -> Resolv::DNS::Resource::IN::AAAA
+### def Resolv::DNS::Resource::IN::AAAA.new(address) -> Resolv::DNS::Resource::IN::AAAA
 
 Resolv::DNS::Resource::IN::AAAA のインスタンスを
 生成します。
@@ -1177,7 +1177,7 @@ DNS リソースのクラス IN、タイプ SRV に対応する
 
 ## Class Methods
 
-### def new(priority, weight, port, target) -> Resolv::DNS::Resource::IN::SRV
+### def Resolv::DNS::Resource::IN::SRV.new(priority, weight, port, target) -> Resolv::DNS::Resource::IN::SRV
 
 Resolv::DNS::Resource::IN::SRV のインスタンスを生成します。
 
@@ -1545,13 +1545,13 @@ DNSクエリを表す抽象クラスです。
 
 ## Class Methods
 
-### def create(name) -> Resolv::DNS::Name
+### def Resolv::DNS::Name.create(name) -> Resolv::DNS::Name
 
 文字列 name から Resolv::DNS::Name のインスタンスを生成します。
 
 - **param** `name` -- ドメイン名の文字列。最後に"."を置くと絶対パス形式、そうでなければ相対パス形式とみなされます。
 
-### def new(labels, absolute = true) -> Resolv::DNS::Name
+### def Resolv::DNS::Name.new(labels, absolute = true) -> Resolv::DNS::Name
 
 Resolv::DNS::Nameのインスタンスを生成します。
 labels は `Resolv::DNS::Label::Str` の配列を与えます。
@@ -1632,14 +1632,14 @@ IPv4のアドレスを表すクラスです。
 
 ## Class Methods
 
-### def create(address) -> Resolv::IPv4
+### def Resolv::IPv4.create(address) -> Resolv::IPv4
 
 "192.168.0.1" のように "." で区切られた IPv4 表記の文字列 address から
 Resolv::IPv4 のインスタンスを生成します。
 
 - **param** `address` -- IPv4 表記の文字列
 
-### def new(address) -> Resolv::IPv4
+### def Resolv::IPv4.new(address) -> Resolv::IPv4
 
 4 byte の文字列 address から Resolv::IPv4 のインスタンスを生成します。
 
@@ -1672,7 +1672,7 @@ IPv6 のアドレスを表すクラスです。
 
 ## Class Methods
 
-### def create(address) -> Resolv::IPv6
+### def Resolv::IPv6.create(address) -> Resolv::IPv6
 
 引数 address で指定した文字列から Resolv::IPv6 のインスタンスを生成しま
 す。
@@ -1685,7 +1685,7 @@ IPv6 のアドレスを表すクラスです。
   - 6Hex4Dec
   - CompressedHex4Dec
 
-### def new(address) -> Resolv::IPv6
+### def Resolv::IPv6.new(address) -> Resolv::IPv6
 
 16 byte の文字列 address から Resolv::IPv6 のインスタンスを生成します。
 

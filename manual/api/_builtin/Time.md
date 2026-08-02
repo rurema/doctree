@@ -45,8 +45,8 @@ yday は 1 から数えます。
 
 ## Class Methods
 
-### def at(time)         -> Time
-### def at(time, in:)    -> Time
+### def Time.at(time)         -> Time
+### def Time.at(time, in:)    -> Time
 
 time で指定した時刻の Time オブジェクトを返します。
 
@@ -71,8 +71,8 @@ p Time.at(1582721899, in: "UTC")          # => 2020-02-26 12:58:19 UTC
 p Time.at(1582721899, in: "C")            # => 2020-02-26 13:58:19 +0300
 ```
 
-### def at(time, usec)         -> Time
-### def at(time, usec, in:)    -> Time
+### def Time.at(time, usec)         -> Time
+### def Time.at(time, usec, in:)    -> Time
 
 time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
 浮動小数点の精度では不十分な場合に使用します。
@@ -92,8 +92,8 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します�
 p Time.at(946684800, 123456.789).nsec  # => 123456789
 ```
 
-### def at(seconds, xseconds, unit)      -> Time
-### def at(seconds, xseconds, unit, in:) -> Time
+### def Time.at(seconds, xseconds, unit)      -> Time
+### def Time.at(seconds, xseconds, unit, in:) -> Time
 
 unit に応じて seconds + xseconds ミリ秒などの時刻を表す Time オブジェクトを返します。
 
@@ -111,8 +111,8 @@ p Time.at(946684800, 123456.789, :microsecond).nsec  # => 123456789
 p Time.at(946684800, 123456789, :nsec).nsec        # => 123456789
 ```
 
-### def gm(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)             -> Time
-### def utc(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)            -> Time
+### def Time.gm(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)             -> Time
+### def Time.utc(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)            -> Time
 
 引数で指定した協定世界時の Time オブジェクトを返します。
 
@@ -139,8 +139,8 @@ p Time.at(946684800, 123456789, :nsec).nsec        # => 123456789
 p Time.gm(2000, 1, 1)  # => 2000-01-01 00:00:00 UTC
 ```
 
-### def gm(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
-### def utc(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
+### def Time.gm(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
+### def Time.utc(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
 
 引数で指定した協定世界時の Time オブジェクトを返します。
 
@@ -172,8 +172,8 @@ p Time.gm(2000, 1, 1)  # => 2000-01-01 00:00:00 UTC
 
 - **raise** `ArgumentError` -- 与えられた引数の範囲が valid でない場合に発生します。
 
-### def local(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)      -> Time
-### def mktime(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)     -> Time
+### def Time.local(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)      -> Time
+### def Time.mktime(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)     -> Time
 
 引数で指定した地方時の Time オブジェクトを返します。
 
@@ -200,8 +200,8 @@ p Time.gm(2000, 1, 1)  # => 2000-01-01 00:00:00 UTC
 p Time.local(2000, 1, 1) # => 2000-01-01 00:00:00 +0900
 ```
 
-### def local(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
-### def mktime(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
+### def Time.local(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
+### def Time.mktime(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
 
 引数で指定した地方時の Time オブジェクトを返します。
 
@@ -233,8 +233,8 @@ p Time.local(2000, 1, 1) # => 2000-01-01 00:00:00 +0900
 
 - **raise** `ArgumentError` -- 与えられた引数の範囲が valid でない場合に発生します。
 
-### def new    -> Time
-### def now    -> Time
+### def Time.new    -> Time
+### def Time.now    -> Time
 
 現在時刻の Time オブジェクトを生成して返します。
 タイムゾーンは地方時となります。
@@ -243,9 +243,9 @@ p Time.local(2000, 1, 1) # => 2000-01-01 00:00:00 +0900
 p Time.now # => 2009-06-24 12:39:54 +0900
 ```
 
-### def new(year, mon = nil, day = nil, hour = nil, min = nil, sec = nil, zone = nil)    -> Time
+### def Time.new(year, mon = nil, day = nil, hour = nil, min = nil, sec = nil, zone = nil)    -> Time
 #%since 3.1
-### def new(year, mon = nil, day = nil, hour = nil, min = nil, sec = nil, in: nil)       -> Time
+### def Time.new(year, mon = nil, day = nil, hour = nil, min = nil, sec = nil, in: nil)       -> Time
 #%end
 
 引数で指定した地方時の Time オブジェクトを返します。
@@ -289,7 +289,7 @@ p Time.new(2008, 6, 21, 13, 30, 0, "+09:00") # => 2008-06-21 13:30:00 +0900
 ```
 
 #%since 3.2
-### def new(iso8601, in: nil)       -> Time
+### def Time.new(iso8601, in: nil)       -> Time
 
 引数で指定した地方時の Time オブジェクトを返します。
 

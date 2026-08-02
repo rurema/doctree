@@ -6,7 +6,7 @@ type: library
 # reopen Exception
 ## Singleton Methods
 
-### def json_create(hash) -> Exception
+### def Exception.json_create(hash) -> Exception
 
 JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 

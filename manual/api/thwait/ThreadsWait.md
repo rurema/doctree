@@ -12,8 +12,8 @@ until: "2.7.0"
 
 ## Class Methods
 
-### def all_waits(*threads) -> ()
-### def all_waits(*threads){|thread| ...} -> ()
+### def ThreadsWait.all_waits(*threads) -> ()
+### def ThreadsWait.all_waits(*threads){|thread| ...} -> ()
 
 指定されたスレッドすべてが終了するまで待ちます。
 ブロックが与えられた場合、スレッド終了時にブロックを評価します。
@@ -42,7 +42,7 @@ ThreadsWait.all_waits(*threads) {|th| printf("end %s\n", th.inspect) }
 #=> end #<Thread:0x214f8 dead>
 ```
 
-### def new(*threads) -> ThreadsWait
+### def ThreadsWait.new(*threads) -> ThreadsWait
 
 指定されたスレッドの終了をまつための、スレッド同期オブジェクトをつくります。
 

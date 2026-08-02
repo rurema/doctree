@@ -38,8 +38,8 @@ fred.age = 6 # ~> NoMethodError
 
 ## Class Methods
 
-### def define(*args)       -> Class
-### def define(*args) {|subclass| block } -> Class
+### def Data.define(*args)       -> Class
+### def Data.define(*args) {|subclass| block } -> Class
 
 [c:Data] クラスに新しいサブクラスを作って、それを返します。
 
@@ -126,10 +126,10 @@ p Point.new(x: 1)        # => #<data Point x=1, y=0>
 p Point.new(x: 1, y: 2)  # => #<data Point x=1, y=2>
 ```
 
-### def new(*args) -> Data
-### def new(**kwargs) -> Data
-### def [](*args) -> Data
-### def [](**kwargs) -> Data
+### def Data.new(*args) -> Data
+### def Data.new(**kwargs) -> Data
+### def Data.[](*args) -> Data
+### def Data.[](**kwargs) -> Data
 
 (このメソッドは Data のサブクラスにのみ定義されています)
 値オブジェクトを生成して返します。
@@ -205,7 +205,7 @@ p Point.new(x: 1, y: 2)                # => #<data Point x=1, y=2>
 p Point.new(x: 1, y: 2, multiplier: 10)  # => #<data Point x=10, y=20>
 ```
 
-### def members -> [Symbol]
+### def Data.members -> [Symbol]
 
 値オブジェクトのメンバの名前([c:Symbol])の配列を返します。
 

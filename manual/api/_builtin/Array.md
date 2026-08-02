@@ -18,7 +18,7 @@ include:
 
 ## Class Methods
 
-### def try_convert(obj) -> Array | nil
+### def Array.try_convert(obj) -> Array | nil
 
 to_ary メソッドを用いて obj を配列に変換しようとします。
 
@@ -36,7 +36,7 @@ elsif tmp = String.try_convert(arg)
 end
 ```
 
-### def [](*item)    -> Array
+### def Array.[](*item)    -> Array
 
 引数 item を要素として持つ配列を生成して返します。
 
@@ -54,7 +54,7 @@ end
 p SubArray[1, 2, 3] # => [1, 2, 3]
 ```
 
-### def new(size = 0, val = nil)    -> Array
+### def Array.new(size = 0, val = nil)    -> Array
 
 長さ size の配列を生成し、各要素を val で初期化して返します。
 
@@ -73,7 +73,7 @@ ary[0].capitalize!
 p ary                     #=> ["Foo", "Foo", "Foo"]  (各要素は同一のオブジェクトである)
 ```
 
-### def new(ary)    -> Array
+### def Array.new(ary)    -> Array
 
 指定された配列 ary を複製して返します。
 [m:Array#dup] 同様 要素を複製しない浅い複製です。
@@ -90,7 +90,7 @@ p a                        #=> ["A", "B", "C"]
 p b                        #=> ["A", "B", "C"]   (b は a と要素を共有する)
 ```
 
-### def new(size) {|index| ... }    -> Array
+### def Array.new(size) {|index| ... }    -> Array
 
 長さ size の配列を生成し、各要素のインデックスを引数としてブロックを実行し、
 各要素の値をブロックの評価結果に設定します。

@@ -7,7 +7,7 @@ Rake の主要なモジュールです。
 
 ## Singleton Methods
 
-### def application -> Rake::Application
+### def Rake.application -> Rake::Application
 
 現在の Rake アプリケーションを返します。
 
@@ -45,7 +45,7 @@ end
 #     @tty_output=false>
 ```
 
-### def application=(app)
+### def Rake.application=(app)
 
 現在の Rake アプリケーションをセットします。
 
@@ -87,7 +87,7 @@ end
 #     @tty_output=true>
 ```
 
-### def original_dir -> String
+### def Rake.original_dir -> String
 
 Rake アプリケーションを開始したディレクトリを返します。
 

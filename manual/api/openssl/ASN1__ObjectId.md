@@ -9,8 +9,8 @@ ASN.1 のオブジェクト識別子を表すクラス。
 
 ## Class Methods
 
-### def new(value) -> OpenSSL::ASN1::ObjectId
-### def new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::ObjectId
+### def OpenSSL::ASN1::ObjectId.new(value) -> OpenSSL::ASN1::ObjectId
+### def OpenSSL::ASN1::ObjectId.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::ObjectId
 
 ASN.1 のオブジェクト識別子を表わす OpenSSL::ASN1::ObjectId の
 オブジェクトを生成します。
@@ -33,7 +33,7 @@ p ASN1::ObjectId.new("dsaWithSHA1").oid             # => "1.2.840.10040.4.3"
 - **param** `tagging` -- タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
-### def register(oid, short_name, long_name) -> true
+### def OpenSSL::ASN1::ObjectId.register(oid, short_name, long_name) -> true
 
 オブジェクト識別子に対応する名前(short name と long name)を
 OpenSSLの内部テーブルに登録します。

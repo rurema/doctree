@@ -7,8 +7,8 @@ library: _builtin
 
 ## Class Methods
 
-### def new(error_message = nil)       -> Exception
-### def exception(error_message = nil) -> Exception
+### def Exception.new(error_message = nil)       -> Exception
+### def Exception.exception(error_message = nil) -> Exception
 
 例外オブジェクトを生成して返します。
 
@@ -27,7 +27,7 @@ p e         # => #<Exception: some message>
 p e.message # => "some message"
 ```
 
-### def to_tty? -> bool
+### def Exception.to_tty? -> bool
 
 $stderr が変更されておらず、$stderr.tty? が真の場合は true を返します。
 

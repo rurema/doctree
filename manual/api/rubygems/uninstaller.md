@@ -96,7 +96,7 @@ Gem をアンインストールします。
 
 ## Singleton Methods
 
-### def new(gem, options = {})
+### def Gem::Uninstaller.new(gem, options = {})
 
 自身を初期化します。
 

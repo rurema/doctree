@@ -5,7 +5,7 @@ library: psych
 
 ## Class Methods
  
-### def yaml_tag(tag) -> ()
+### def Object.yaml_tag(tag) -> ()
 
 クラスと tag の間を関連付けます。
 

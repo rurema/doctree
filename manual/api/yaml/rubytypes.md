@@ -33,7 +33,7 @@ end
 
 ## Class Methods
 
-### def yaml_tag_subclasses? -> true
+### def Object.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -132,7 +132,7 @@ p c.to_yaml_properties
 
 ## Class Methods
 
-### def yaml_tag_subclasses? -> true
+### def Hash.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -173,11 +173,11 @@ foo: bar
 
 ## Class Methods
 
-### def yaml_new(klass, tag, val)
+### def Struct.yaml_new(klass, tag, val)
 
 ライブラリ内部で使用します。
 
-### def yaml_tag_class_name -> String
+### def Struct.yaml_tag_class_name -> String
 
 自身のクラス名から Struct:: をのぞいた文字列を返します。
 
@@ -191,13 +191,13 @@ p YStruct::yaml_tag_class_name
 #=> "YStruct"
 ```
 
-### def yaml_tag_subclasses? -> true
+### def Struct.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
 ライブラリ内部で使用します。
 
-### def yaml_tag_read_class(name) -> String
+### def Struct.yaml_tag_read_class(name) -> String
 
 引数 name に Struct:: を加えた文字列を返します。
 
@@ -246,7 +246,7 @@ baz: baz
 
 ## Class Methods
 
-### def yaml_tag_subclasses? -> true
+### def Array.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -289,11 +289,11 @@ print [1, 2, 3].to_yaml
 
 ## Class Methods
 
-### def yaml_new(klass, tag, val)
+### def Exception.yaml_new(klass, tag, val)
 
 ライブラリ内部で使用します。
 
-### def yaml_tag_subclasses? -> true
+### def Exception.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -323,11 +323,11 @@ print [1, 2, 3].to_yaml
 
 ## Class Methods
 
-### def yaml_new(klass, tag, val)
+### def String.yaml_new(klass, tag, val)
 
 ライブラリ内部で使用します。
 
-### def yaml_tag_subclasses? -> true
+### def String.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -396,11 +396,11 @@ print "foo".to_yaml # => --- foo
 
 ## Class Methods
 
-### def yaml_new(klass, tag, val)
+### def Symbol.yaml_new(klass, tag, val)
 
 ライブラリ内部で使用します。
 
-### def yaml_tag_subclasses? -> true
+### def Symbol.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -435,11 +435,11 @@ print :foo.to_yaml # => --- :foo
 
 ## Class Methods
 
-### def yaml_new(klass, tag, val)
+### def Range.yaml_new(klass, tag, val)
 
 ライブラリ内部で使用します。
 
-### def yaml_tag_subclasses? -> true
+### def Range.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -478,11 +478,11 @@ excl: false
 
 ## Class Methods
 
-### def yaml_new(klass, tag, val)
+### def Regexp.yaml_new(klass, tag, val)
 
 ライブラリ内部で使用します。
 
-### def yaml_tag_subclasses? -> true
+### def Regexp.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -517,11 +517,11 @@ print /foo|bar/.to_yaml # => --- !ruby/regexp /foo|bar/
 
 ## Class Methods
 
-### def yaml_new(klass, tag, val)
+### def Time.yaml_new(klass, tag, val)
 
 ライブラリ内部で使用します。
 
-### def yaml_tag_subclasses? -> true
+### def Time.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -556,7 +556,7 @@ print Time.now.to_yaml # => --- 2011-12-31 02:17:31.192322 +09:00
 
 ## Class Methods
 
-### def yaml_tag_subclasses? -> true
+### def Date.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -591,7 +591,7 @@ print Date.today.to_yaml # => --- 2011-12-31
 
 ## Class Methods
 
-### def yaml_tag_subclasses? -> true
+### def Integer.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -627,7 +627,7 @@ print -1.to_yaml # => --- -1
 
 ## Class Methods
 
-### def yaml_tag_subclasses? -> true
+### def Float.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -666,7 +666,7 @@ print (0.0/0.0).to_yaml  # => --- .NaN
 
 ## Class Methods
 
-### def yaml_tag_subclasses? -> true
+### def TrueClass.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -701,7 +701,7 @@ print true.to_yaml # => --- true
 
 ## Class Methods
 
-### def yaml_tag_subclasses? -> true
+### def FalseClass.yaml_tag_subclasses? -> true
 
 常に true を返します。
 
@@ -736,7 +736,7 @@ print false.to_yaml # => --- false
 
 ## Class Methods
 
-### def yaml_tag_subclasses? -> true
+### def NilClass.yaml_tag_subclasses? -> true
 
 常に true を返します。
 

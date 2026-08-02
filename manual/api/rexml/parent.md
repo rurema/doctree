@@ -11,7 +11,7 @@ include:
 
 ## Class Methods
 
-### def new(parent = nil) -> REXML::Parent
+### def REXML::Parent.new(parent = nil) -> REXML::Parent
 
 REXML::Parent オブジェクトを生成します。
 

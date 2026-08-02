@@ -21,8 +21,8 @@ X.509 v3 証明書の拡張領域のためのクラスです。
 
 ## Class Methods
 
-### def new(der) -> OpenSSL::X509::Extension
-### def new(oid, value, critical=false) -> OpenSSL::X509::Extension
+### def OpenSSL::X509::Extension.new(der) -> OpenSSL::X509::Extension
+### def OpenSSL::X509::Extension.new(oid, value, critical=false) -> OpenSSL::X509::Extension
 
 [c:OpenSSL::X509::Extension] オブジェクトを生成します。
 

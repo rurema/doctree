@@ -10,8 +10,8 @@ since: "2.0.0"
 
 ## Class Methods
 
-### def new(lib, flags=Fiddle::Handle::RTLD_LAZY|Fiddle::Handle::RTLD_GLOBAL) -> Fiddle::Handle
-### def new(lib, flags=Fiddle::Handle::RTLD_LAZY|Fiddle::Handle::RTLD_GLOBAL) {|handle| ... }    -> Fiddle::Handle
+### def Fiddle::Handle.new(lib, flags=Fiddle::Handle::RTLD_LAZY|Fiddle::Handle::RTLD_GLOBAL) -> Fiddle::Handle
+### def Fiddle::Handle.new(lib, flags=Fiddle::Handle::RTLD_LAZY|Fiddle::Handle::RTLD_GLOBAL) {|handle| ... }    -> Fiddle::Handle
 
 ライブラリ lib をオープンし、Handle オブジェクトとして返します。
 
@@ -37,8 +37,8 @@ func = Fiddle::Function.new(i, [Fiddle::TYPE_VOIDP], Fiddle::TYPE_INT)
 p func.call("uxyz") # => 4
 ```
 
-### def sym(func) -> Integer
-### def [](func) -> Integer
+### def Fiddle::Handle.sym(func) -> Integer
+### def Fiddle::Handle.[](func) -> Integer
 
 ライブラリのデフォルトの検索順序に従い、現在のライブラリ以降の
 シンボルを探します。

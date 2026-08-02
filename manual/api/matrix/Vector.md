@@ -38,7 +38,7 @@ include:
 
 ## Class Methods
 
-### def [](*a) -> Vector
+### def Vector.[](*a) -> Vector
 
 可変個引数を要素とするベクトルを生成します。
 
@@ -52,7 +52,7 @@ require 'matrix'
 p Vector[1, 3, 4.0] # => Vector[1, 3, 4.0]
 ```
 
-### def elements(a, copy = true) -> Vector
+### def Vector.elements(a, copy = true) -> Vector
 
 配列 `a` を要素とするベクトルを生成します。
 ただし、オプション引数 `copy` が偽 (`false`) ならば、複製を行いません。
@@ -73,13 +73,13 @@ p v1        # => Vector[1, 2, 3]
 p v2        # => Vector[-1, 2, 3]
 ```
 
-### def independent?(*vectors) -> bool
+### def Vector.independent?(*vectors) -> bool
 
 ベクトルの列 `vectors` が線形独立であれば `true` を返し、そうでなければ `false` を返します。
 
 - **param** `vectors` -- 線形独立性を判定するベクトル列
 
-### def basis(size:, index:) -> Vector
+### def Vector.basis(size:, index:) -> Vector
 
 `size` 次元ベクトル空間の `index` 番目の標準基底を返します。
 

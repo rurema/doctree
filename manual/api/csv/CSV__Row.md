@@ -22,7 +22,7 @@ extend:
 
 ## Singleton Methods
 
-### def new(headers, fields, header_row = false) -> CSV::Row
+### def CSV::Row.new(headers, fields, header_row = false) -> CSV::Row
 
 自身を初期化します。
 

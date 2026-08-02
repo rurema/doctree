@@ -63,7 +63,7 @@ end
 
 ## Singleton Methods
 
-### def nowrite_flag -> bool
+### def RakeFileUtils.nowrite_flag -> bool
 
 この値が真の場合、実際のファイル書き込みをともなう操作は行いません。
 そうでない場合、ファイル書き込みを行います。
@@ -77,7 +77,7 @@ file :sample_file_task do |t|
 end
 ```
 
-### def nowrite_flag=(flag)
+### def RakeFileUtils.nowrite_flag=(flag)
 
 実際に動作を行うかどうか設定します。
 
@@ -95,7 +95,7 @@ file :sample_file_task do |t|
 end
 ```
 
-### def verbose_flag -> bool
+### def RakeFileUtils.verbose_flag -> bool
 
 この値が真の場合、詳細を表示します。
 
@@ -110,7 +110,7 @@ file :sample_file_task do |t|
 end
 ```
 
-### def verbose_flag=(flag)
+### def RakeFileUtils.verbose_flag=(flag)
 
 詳細を表示するかどうか設定します。
 

@@ -9,7 +9,7 @@ until: "2.7.0"
 例外クラスに特定のエラーメッセージ用フォーマットを関連づけるためのモジュールです。
 
 ## Singleton Methods
-### def def_e2message(klass, exception_class, message_format) -> Class
+### def Exception2MessageMapper.def_e2message(klass, exception_class, message_format) -> Class
 
 すでに存在する例外クラス exception_class に、
 エラーメッセージ用フォーマット message_format を関連づけます。
@@ -23,7 +23,7 @@ until: "2.7.0"
 
 - **return** -- exception_class を返します。
 
-### def def_exception(klass, exception_name, message_format, superklass = StandardError) -> Class
+### def Exception2MessageMapper.def_exception(klass, exception_name, message_format, superklass = StandardError) -> Class
 
 exception_name という名前の例外クラスを定義します。
 
@@ -39,21 +39,21 @@ exception_name という名前の例外クラスを定義します。
 
 - **return** -- 定義した例外クラスを返します。
 
-### def e2mm_message(klass, exp) -> String | nil
-### def message(klass, exp) -> String | nil
+### def Exception2MessageMapper.e2mm_message(klass, exp) -> String | nil
+### def Exception2MessageMapper.message(klass, exp) -> String | nil
 #%todo
 
 - **param** `klass` --
 
 - **param** `exp` --
 
-### def extend_object(cl) -> ()
+### def Exception2MessageMapper.extend_object(cl) -> ()
 #%todo
 
 - **param** `cl` --
 
-### def Raise(klass = E2MM, exception_class = nil, *rest) -> ()
-### def Fail(klass = E2MM, exception_class = nil, *rest)  -> ()
+### def Exception2MessageMapper.Raise(klass = E2MM, exception_class = nil, *rest) -> ()
+### def Exception2MessageMapper.Fail(klass = E2MM, exception_class = nil, *rest)  -> ()
 
 登録されている情報を使用して、例外を発生させます。
 

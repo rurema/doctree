@@ -8,7 +8,7 @@ require:
 # reopen OpenStruct
 ## Singleton Methods
 
-### def json_create(hash) -> OpenStruct
+### def OpenStruct.json_create(hash) -> OpenStruct
 
 JSON のオブジェクトから [c:OpenStruct] のオブジェクトを生成して返します。
 

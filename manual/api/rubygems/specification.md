@@ -555,13 +555,13 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオ�
 
 ## Singleton Methods
 
-### def _load(str) -> Gem::Specification
+### def Gem::Specification._load(str) -> Gem::Specification
 
 マーシャルされたデータをロードするためのメソッドです。
 
 - **param** `str` -- マーシャルされたデータを指定します。
 
-### def array_attribute(name) -> ()
+### def Gem::Specification.array_attribute(name) -> ()
 
 [m:Gem::Specification.attribute] と同じですが、値を配列に格納するアクセサを作ります。
 
@@ -569,13 +569,13 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオ�
 
 - **SEE** [m:Gem::Specification.attribute]
 
-### def array_attributes -> Array
+### def Gem::Specification.array_attributes -> Array
 
 @@array_attributes の複製を返します。
 
 - **SEE** [m:Object#dup]
 
-### def attribute(name) -> ()
+### def Gem::Specification.attribute(name) -> ()
 
 デフォルト値を指定したアクセサを定義するために使用します。
 
@@ -585,7 +585,7 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオ�
 - 通常の属性書き込みメソッドを定義します。
 - デフォルト値を持つ属性読み取りメソッドのように振る舞うメソッドを定義します。
 
-### def attribute_alias_singular(singular, plural) -> ()
+### def Gem::Specification.attribute_alias_singular(singular, plural) -> ()
 
 既に存在する複数形の属性の単数形バージョンを定義します。
 
@@ -604,16 +604,16 @@ s.require_path = 'mylib'
 
 - **param** `plural` -- 属性名の複数形を指定します。
 
-### def attribute_defaults -> Array
+### def Gem::Specification.attribute_defaults -> Array
 #%todo
 
 @@attributes の複製を返します。
 
-### def attribute_names -> Array
+### def Gem::Specification.attribute_names -> Array
 
 属性名の配列を返します。
 
-### def attributes(*args) -> ()
+### def Gem::Specification.attributes(*args) -> ()
 
 複数の属性を一度に作成するために使用します。
 
@@ -621,13 +621,13 @@ s.require_path = 'mylib'
 
 - **param** `args` -- 属性名を一つ以上指定します。
 
-### def default_value(name) -> object
+### def Gem::Specification.default_value(name) -> object
 
 与えられた名前の属性のデフォルト値を返します。
 
 - **param** `name` -- 属性名を指定します。
 
-### def from_yaml(input) -> Gem::Specification
+### def Gem::Specification.from_yaml(input) -> Gem::Specification
 
 YAML ファイルから gemspec をロードします。
 
@@ -637,11 +637,11 @@ gemspec のバージョンチェックも行います。
 
 - **param** `input` -- 文字列か [c:IO] オブジェクトを指定します。
 
-### def list -> Array
+### def Gem::Specification.list -> Array
 
 実行中の Ruby のインスタンスで作成された [c:Gem::Specification] のインスタンスを返します。
 
-### def load(filename) -> Gem::Specification
+### def Gem::Specification.load(filename) -> Gem::Specification
 
 gemspec ファイルをロードします。
 
@@ -649,13 +649,13 @@ gemspec ファイルをロードします。
 
 - **raise** `StandardError` -- gemspec ファイル内でこのメソッドを呼んでいる場合に発生します。
 
-### def normalize_yaml_input(input) -> String
+### def Gem::Specification.normalize_yaml_input(input) -> String
 
 YAML 形式の gemspec を正しくフォーマットします。
 
 - **param** `input` -- 文字列か [c:IO] オブジェクトを指定します。
 
-### def overwrite_accessor(name){ ... } -> ()
+### def Gem::Specification.overwrite_accessor(name){ ... } -> ()
 
 呼び出し時に特別な動作をする必要のある属性があります。
 このメソッドはそういうことを可能にします。
@@ -664,13 +664,13 @@ YAML 形式の gemspec を正しくフォーマットします。
 
 - **param** `name` -- 属性名を指定します。
 
-### def read_only(*names) -> ()
+### def Gem::Specification.read_only(*names) -> ()
 
 与えられた属性名を読み取り専用にします。
 
 - **param** `names` -- 属性名を一つ以上指定します。
 
-### def required_attribute(name, default = nil) -> ()
+### def Gem::Specification.required_attribute(name, default = nil) -> ()
 
 必須の属性を作成します。
 
@@ -680,17 +680,17 @@ YAML 形式の gemspec を正しくフォーマットします。
 
 - **SEE** [m:Gem::Specification.attribute]
 
-### def required_attribute?(name) -> bool
+### def Gem::Specification.required_attribute?(name) -> bool
 
 必須属性であれば真を返します。
 
 - **param** `name` -- 属性名を指定します。
 
-### def required_attributes -> Array
+### def Gem::Specification.required_attributes -> Array
 
 必須属性のリストを返します。
 
-### def stubs -> Array
+### def Gem::Specification.stubs -> Array
 
 インストールされている全ての Gem の情報を、Gem::StubSpecification（gemspec ファイルの内容を遅延読み込みする軽量なスタブオブジェクト）の配列として返します。
 
@@ -706,7 +706,7 @@ p Gem::Specification.stubs.first.name
 
 - **SEE** [m:Gem::Specification.list], [m:Gem::Specification.stubs_for]
 
-### def stubs_for(name) -> Array
+### def Gem::Specification.stubs_for(name) -> Array
 
 指定した名前を持つ Gem の Gem::StubSpecification の配列を返します。
 

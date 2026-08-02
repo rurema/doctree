@@ -6,7 +6,7 @@ type: library
 # reopen Symbol
 ## Singleton Methods
 
-### def json_create(hash) -> Symbol
+### def Symbol.json_create(hash) -> Symbol
 
 JSON のオブジェクトから [c:Symbol] のオブジェクトを生成して返します。
 

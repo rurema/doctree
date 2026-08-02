@@ -65,8 +65,8 @@ pretty printing アルゴリズムのためのクラスです。
 - 文字以外の整形
 
 ## Class Methods
-### def new(output = '', maxwidth = 79, newline = "\n")               -> PrettyPrint
-### def new(output = '', maxwidth = 79, newline = "\n"){|width| ...}  -> PrettyPrint
+### def PrettyPrint.new(output = '', maxwidth = 79, newline = "\n")               -> PrettyPrint
+### def PrettyPrint.new(output = '', maxwidth = 79, newline = "\n"){|width| ...}  -> PrettyPrint
 
 pretty printing のためのバッファを生成します。
 output は出力先です。output は << メソッドを持っていなければなりません。
@@ -85,7 +85,7 @@ output は出力先です。output は << メソッドを持っていなけれ�
 
 - **param** `newline` -- 改行に使われます。
 
-### def format(output = '', maxwidth = 79, newline = "\n", genspace = lambda{|n| ' ' * n}) {|pp| ...}    -> object
+### def PrettyPrint.format(output = '', maxwidth = 79, newline = "\n", genspace = lambda{|n| ' ' * n}) {|pp| ...}    -> object
 
 PrettyPrint オブジェクトを生成し、それを引数としてブロックを実行します。
 与えられた output を返します。
@@ -113,7 +113,7 @@ end
 - **param** `genspace` -- 空白の生成に使われる [c:Proc] オブジェクトを指定します。
                 生成したい空白の幅を表す整数を引数として呼ばれます。
 
-### def singleline_format(output = '', maxwidth = 79, newline = "\n", genspace = lambda{|n| ' ' * n}) {|pp| ...}    -> object
+### def PrettyPrint.singleline_format(output = '', maxwidth = 79, newline = "\n", genspace = lambda{|n| ' ' * n}) {|pp| ...}    -> object
 
 PrettyPrint オブジェクトを生成し、それを引数としてブロックを実行します。
 [m:PrettyPrint.format] に似ていますが、改行しません。

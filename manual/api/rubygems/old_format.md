@@ -45,13 +45,13 @@ Gem の [c:Gem::Specification] をセットします。
 
 ## Singleton Methods
 
-### def from_file_by_path(file_path) -> Gem::OldFormat
+### def Gem::OldFormat.from_file_by_path(file_path) -> Gem::OldFormat
 
 Gem ファイルのパスからデータを読み込んで、自身を初期化して返します。
 
 - **param** `file_path` -- Gem ファイルへのパスを指定します。
 
-### def from_io(io, gem_path = '(io)') -> Gem::OldFormat
+### def Gem::OldFormat.from_io(io, gem_path = '(io)') -> Gem::OldFormat
 
 Gem ファイルからデータを読み込んだ IO を受け取り、自身を初期化して返します。
 
@@ -59,7 +59,7 @@ Gem ファイルからデータを読み込んだ IO を受け取り、自身を
 
 - **param** `gem_path` -- Gem ファイルのパスを指定します。
 
-### def new(gem_path) -> Gem::OldFormat
+### def Gem::OldFormat.new(gem_path) -> Gem::OldFormat
 
 自身を初期化します。
 

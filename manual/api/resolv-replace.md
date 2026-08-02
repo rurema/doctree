@@ -8,7 +8,7 @@ category: Network
 
 ## Class Methods
 
-### def getaddress(host) -> String
+### def IPSocket.getaddress(host) -> String
 
 [m:IPSocket.getaddress] を置きかえ、
 [lib:resolv] ライブラリを使い名前解決します。
@@ -20,8 +20,8 @@ category: Network
 
 ## Class Methods
 
-### def open(host, serv, local_host=nil, local_service=nil) -> TCPSocket
-### def new(host, serv, local_host=nil, local_service=nil) -> TCPSocket
+### def TCPSocket.open(host, serv, local_host=nil, local_service=nil) -> TCPSocket
+### def TCPSocket.new(host, serv, local_host=nil, local_service=nil) -> TCPSocket
 
 [m:TCPSocket.new] のパラメータ host と local_host 
 の名前解決に [lib:resolv] ライブラリを使います。
@@ -71,7 +71,7 @@ category: Network
 
 ## Class Methods
 
-### def new(host, serv) -> SOCKSSocket
+### def SOCKSSocket.new(host, serv) -> SOCKSSocket
 
 [m:SOCKSSocket.new]のパラメータ host の名前解決に [lib:resolv] 
 ライブラリを使います。

@@ -72,7 +72,7 @@ SSL/TLS ハンドシェイク終了時に [c:OpenSSL::SSL::SSLContext] 内の
 #%# ここにコード例を書く
 
 ## Class Methods
-### def new(obj) -> OpenSSL::SSL::Session
+### def OpenSSL::SSL::Session.new(obj) -> OpenSSL::SSL::Session
 
 新しいセッションオブジェクトを生成します。
 

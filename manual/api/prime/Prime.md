@@ -22,12 +22,12 @@ p Prime.prime?(2)         #=> true
 
 ## Class Methods
 
-### def instance -> Prime
+### def Prime.instance -> Prime
 
 [c:Prime] のデフォルトのインスタンスを返します。
 
-### def each(upper_bound = nil, generator = EratosthenesGenerator.new){|prime| ... } -> object
-### def each(upper_bound = nil, generator = EratosthenesGenerator.new)               -> Enumerator
+### def Prime.each(upper_bound = nil, generator = EratosthenesGenerator.new){|prime| ... } -> object
+### def Prime.each(upper_bound = nil, generator = EratosthenesGenerator.new)               -> Enumerator
 
 Prime.instance.each と同じです。
 
@@ -43,7 +43,7 @@ Prime.instance.each と同じです。
 
 - **SEE** [m:Prime#each]
 
-### def int_from_prime_division(pd) -> Integer
+### def Prime.int_from_prime_division(pd) -> Integer
 
 Prime.instance.int_from_prime_division と同じです。
 
@@ -54,7 +54,7 @@ Prime.instance.int_from_prime_division と同じです。
 
 - **SEE** [m:Prime#int_from_prime_division]
 
-### def prime?(value, generator = Prime::Generator23.new) -> bool
+### def Prime.prime?(value, generator = Prime::Generator23.new) -> bool
 
 Prime.instance.prime? と同じです。
 
@@ -69,7 +69,7 @@ Prime.instance.prime? と同じです。
 
 - **SEE** [m:Prime#prime?]
 
-### def prime_division(value, generator= Prime::Generator23.new) -> [[Integer, Integer]]
+### def Prime.prime_division(value, generator= Prime::Generator23.new) -> [[Integer, Integer]]
 
 Prime.instance.prime_division と同じです。
 

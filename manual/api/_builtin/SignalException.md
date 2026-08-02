@@ -25,9 +25,9 @@ library: _builtin
 
 ## Singleton Methods
 
-### def new(sig_number)           -> SignalException
-### def new(sig_name)             -> SignalException
-### def new(sig_number, sig_name) -> SignalException
+### def SignalException.new(sig_number)           -> SignalException
+### def SignalException.new(sig_name)             -> SignalException
+### def SignalException.new(sig_number, sig_name) -> SignalException
 
 引数で指定したシグナルに関する SignalException オブジェクトを生成して返
 します。

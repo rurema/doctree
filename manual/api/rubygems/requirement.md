@@ -44,7 +44,7 @@ p Gem::Requirement::OPS["~>"].call(Gem::Version.new('3.1'), Gem::Version.new('3.
 
 ## Singleton Methods
 
-### def create(input) -> Gem::Requirement
+### def Gem::Requirement.create(input) -> Gem::Requirement
 
 [c:Gem::Requirement] のインスタンスを作成するためのファクトリメソッドです。
 
@@ -60,7 +60,7 @@ pp Gem::Requirement.create("~> 3.2.1")
 
 - **SEE** [m:Gem::Requirement.new], [m:Gem::Requirement.default]
 
-### def default -> Gem::Requirement
+### def Gem::Requirement.default -> Gem::Requirement
 
 ゼロ以上 ( '>= 0' ) を指定して作成された [c:Gem::Requirement] のインスタンスを返します。
 
@@ -69,7 +69,7 @@ pp Gem::Requirement.default
 # => Gem::Requirement.new([">= 0"])
 ```
 
-### def new(requirements) -> Gem::Requirement
+### def Gem::Requirement.new(requirements) -> Gem::Requirement
 
 [c:Gem::Requirement] のインスタンスを作成します。
 
@@ -82,7 +82,7 @@ pp Gem::Requirement.new("~> 3.2.1")
 
 - **SEE** [m:Gem::Requirement.parse], [m:Gem::Requirement.create]
 
-### def parse(obj) -> Array
+### def Gem::Requirement.parse(obj) -> Array
 
 バージョンの必要上件をパースして比較演算子とバージョンを要素とする二要素の配列を返します。
 

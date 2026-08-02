@@ -96,7 +96,7 @@ Ruby によって GC されます。すなわち、ある使わなくなった
 
 ## Class Methods
 
-### def all_symbols -> [Symbol]
+### def Symbol.all_symbols -> [Symbol]
 
 定義済みの全てのシンボルオブジェクトの配列を返します。
 

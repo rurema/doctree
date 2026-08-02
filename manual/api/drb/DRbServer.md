@@ -19,7 +19,7 @@ dRuby サーバは
 
 ## Class Methods
 
-### def default_acl(acl) -> ()
+### def DRb::DRbServer.default_acl(acl) -> ()
 
 サーバ起動時の :acl オプションのデフォルト値を指定します。
 
@@ -27,7 +27,7 @@ dRuby サーバは
 
 - **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service], [c:ACL]
 
-### def default_argc_limit(argc) -> ()
+### def DRb::DRbServer.default_argc_limit(argc) -> ()
 
 サーバ起動時の :argc_limit オプションのデフォルト値を指定します。
 
@@ -35,7 +35,7 @@ dRuby サーバは
 
 - **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
 
-### def default_id_conv(idconv) -> ()
+### def DRb::DRbServer.default_id_conv(idconv) -> ()
 
 サーバ起動時の :id_conv オプションのデフォルト値を指定します。
 
@@ -43,7 +43,7 @@ dRuby サーバは
 
 - **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
 
-### def default_load_limit(sz) -> ()
+### def DRb::DRbServer.default_load_limit(sz) -> ()
 
 サーバ起動時の :load_limit オプションのデフォルト値を指定します。
 
@@ -51,7 +51,7 @@ dRuby サーバは
 
 - **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service]
 
-### def new(uri=nil, front=nil, config_or_acl=nil) -> DRb::DRbServer
+### def DRb::DRbServer.new(uri=nil, front=nil, config_or_acl=nil) -> DRb::DRbServer
 
 dRuby サーバを起動し、DRbServerのインスタンスを返します。
 
@@ -62,14 +62,14 @@ dRuby サーバを起動し、DRbServerのインスタンスを返します。
 
 - **SEE** [m:DRb?.start_service]
 
-### def verbose -> bool
+### def DRb::DRbServer.verbose -> bool
 
 サーバ起動時の :verbose オプションのデフォルト値を返します。
 
 - **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service], 
      [m:DRb::DRbServer.verbose=]
 
-### def verbose=(on)
+### def DRb::DRbServer.verbose=(on)
 
 サーバ起動時の :verbose オプションのデフォルト値を指定します。
 

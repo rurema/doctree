@@ -4,7 +4,7 @@
 
 ## Class Methods
 
-### def tag_class(tag, cls) -> ()
+### def Syck.tag_class(tag, cls) -> ()
 
 tag で指定したタグ URI に　cls で指定したクラスを関連付けます。
 
@@ -14,7 +14,7 @@ tag で指定したタグ URI に　cls で指定したクラスを関連付け�
 
 - **SEE** [m:Syck.tagged_classes]
 
-### def tagged_classes -> {String => Class}
+### def Syck.tagged_classes -> {String => Class}
 
 タグ URI と、それが対応するクラスの一覧を返します。
 

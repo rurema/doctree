@@ -14,7 +14,7 @@ JSON 形式の文字列を生成するための設定を保持しておくため
 
 ## Singleton Methods
 
-### def new(options = {}) -> JSON::State
+### def JSON::State.new(options = {}) -> JSON::State
 
 自身を初期化します。
 
@@ -65,7 +65,7 @@ JSON 形式の文字列を生成するための設定を保持しておくため
   copy.indent # => "\t"
   ```
 
-### def from_state(options) -> JSON::State
+### def JSON::State.from_state(options) -> JSON::State
 
 与えられた options によって生成した [c:JSON::State] のインスタンスを返します。
 

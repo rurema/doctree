@@ -7,7 +7,7 @@ DTD の要素宣言(Element Declaration)を表すクラスです。
 
 ## Class Methods
 
-### def new(src) -> REXML::ElementDecl
+### def REXML::ElementDecl.new(src) -> REXML::ElementDecl
 
 新たな要素宣言オブジェクトを作ります。
 

@@ -7,7 +7,7 @@ library: rubygems/remote_fetcher
 
 ## Singleton Methods
 
-### def new(message, uri) -> Gem::RemoteFetcher::FetchError
+### def Gem::RemoteFetcher::FetchError.new(message, uri) -> Gem::RemoteFetcher::FetchError
 
 この例外クラスを初期化します。
 

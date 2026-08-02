@@ -50,7 +50,7 @@ p acl.allow_addr?(addr) # => true
 
 ## Class Methods
 
-### def new(list=nil, order = DENY_ALLOW) -> ACL
+### def ACL.new(list=nil, order = DENY_ALLOW) -> ACL
 
 新たな ACL オブジェクトを返します。
 

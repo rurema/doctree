@@ -11,7 +11,7 @@ library: openssl
 
 ## Class Methods
 
-### def new -> OpenSSL::X509::Store
+### def OpenSSL::X509::Store.new -> OpenSSL::X509::Store
 
 空の Store オブジェクトを生成します。
 

@@ -12,7 +12,7 @@ CGI を扱うためのサーブレットです。
 
 ## Class Methods
 
-### def new(server, name) -> WEBrick::HTTPServlet::CGIHandler
+### def WEBrick::HTTPServlet::CGIHandler.new(server, name) -> WEBrick::HTTPServlet::CGIHandler
 
 自身を初期化します。
 

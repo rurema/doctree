@@ -12,8 +12,8 @@ since: "2.5.0"
 
 ## Class Methods
 
-### def new(error_message = "") -> FrozenError
-### def new(error_message = "", receiver:) -> FrozenError
+### def FrozenError.new(error_message = "") -> FrozenError
+### def FrozenError.new(error_message = "", receiver:) -> FrozenError
 
 例外オブジェクトを生成して返します。
 

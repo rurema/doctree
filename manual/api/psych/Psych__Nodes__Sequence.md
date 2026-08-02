@@ -47,7 +47,7 @@ Psych::Nodes::Sequence は 0 個以上の子ノードを持つことができま
   - [c:Psych::Nodes::Alias]
 
 ## Class Methods
-### def new(anchor=nil, tag=nil, implicit=true, style=BLOCK) -> Psych::Nodes::Sequence
+### def Psych::Nodes::Sequence.new(anchor=nil, tag=nil, implicit=true, style=BLOCK) -> Psych::Nodes::Sequence
 
 新たな sequence オブジェクトを生成します。
 

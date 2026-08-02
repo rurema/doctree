@@ -11,7 +11,7 @@ RbConfig モジュールを定義します。
 
 ## Singleton Methods
 
-### def expand(val, config = CONFIG) -> String
+### def RbConfig.expand(val, config = CONFIG) -> String
 
 与えられたパスを展開します。
 
@@ -25,7 +25,7 @@ p RbConfig.expand("$(bindir)") # => /home/foobar/all-ruby/ruby19x/bin
   
 - **SEE** [m:RbConfig::MAKEFILE_CONFIG]
 
-### def ruby -> String
+### def RbConfig.ruby -> String
 
 ruby コマンドのフルパスを返します。
 

@@ -7,7 +7,7 @@ library: irb/input-method
 
 ## Class Methods
 
-### def new -> IRB::StdioInputMethod
+### def IRB::StdioInputMethod.new -> IRB::StdioInputMethod
 
 自身を初期化します。
 

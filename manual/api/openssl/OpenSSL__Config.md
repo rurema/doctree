@@ -21,8 +21,8 @@ p conf.get_value("CA_default", "default_days") # => "365"
 
 ## Class Methods
 
-### def load(filename = nil) -> OpenSSL::Config
-### def new(filename = nil) -> OpenSSL::Config
+### def OpenSSL::Config.load(filename = nil) -> OpenSSL::Config
+### def OpenSSL::Config.new(filename = nil) -> OpenSSL::Config
 
 OpenSSL::Config オブジェクトを生成します。
 
@@ -33,7 +33,7 @@ filename を省略した場合は空のオブジェクトが生成されます�
 - **param** `filename` -- ファイル名文字列
 - **raise** `OpenSSL::ConfigError` -- 設定ファイルの文法が正しくない場合に発生します
 
-### def parse(str) -> OpenSSL::Config
+### def OpenSSL::Config.parse(str) -> OpenSSL::Config
 
 文字列から OpenSSL::Config オブジェクトを生成します。
 

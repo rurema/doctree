@@ -8,7 +8,7 @@ library: zlib
 
 ## Class Methods
 
-### def inflate(string) -> String
+### def Zlib::Inflate.inflate(string) -> String
 
 string を展開します。
 
@@ -37,7 +37,7 @@ cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
 p Zlib::Inflate.inflate(cstr) #=> "hoge fuga end"
 ```
 
-### def new(window_bits = Zlib::MAX_WBITS) -> Zlib::Inflate
+### def Zlib::Inflate.new(window_bits = Zlib::MAX_WBITS) -> Zlib::Inflate
 
 展開ストリームを作成します。
 

@@ -7,7 +7,7 @@ library: logger
 
 ## Class Methods
 
-### def new(log = nil, opt = {}) -> Logger::LogDevice
+### def Logger::LogDevice.new(log = nil, opt = {}) -> Logger::LogDevice
 
 ログの出力先を初期化します。
 

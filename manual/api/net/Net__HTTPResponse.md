@@ -10,7 +10,7 @@ Net::HTTP クラスは実際には HTTPResponse のサブクラスを返しま�
 
 ## Class Methods
 
-### def body_permitted? -> bool
+### def Net::HTTPResponse.body_permitted? -> bool
 
 エンティティボディを含むことが許されているレスポンスクラス
 ならば真を、そうでなければ偽を返します。

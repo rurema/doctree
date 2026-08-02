@@ -12,7 +12,7 @@ Rubyist Magazine: <https://magazine.rubyist.net/>
 
 ## class methods
 
-### def new(opts = {}) -> Syck::Stream
+### def Syck::Stream.new(opts = {}) -> Syck::Stream
 
 ストリームを返します。ストリームはYAMLドキュメントを複数保持できます。
 

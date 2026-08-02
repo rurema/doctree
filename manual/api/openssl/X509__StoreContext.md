@@ -15,7 +15,7 @@ library: openssl
 検証結果の詳細情報を保持するためにも使われます。
 
 ## Class Methods
-### def new(store, cert, chain=nil) -> OpenSSL::X509::StoreContext
+### def OpenSSL::X509::StoreContext.new(store, cert, chain=nil) -> OpenSSL::X509::StoreContext
 
 証明書ストアコンテキストを生成します。
 

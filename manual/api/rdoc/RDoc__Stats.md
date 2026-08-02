@@ -8,7 +8,7 @@ RDoc のステータスを管理するクラスです。
 
 ## Class Methods
 
-### def new -> RDoc::Stats
+### def RDoc::Stats.new -> RDoc::Stats
 
 自身を初期化します。
 

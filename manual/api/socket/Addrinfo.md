@@ -12,7 +12,7 @@ IPv4/IPv6/Unix domain socketなどのアドレス情報を保持できます。
 struct addrinfo に対応します。
 
 ## Class methods
-### def new(sockaddr, family=Socket::PF_UNSPEC, socktype=0, protocol=0) -> Addrinfo
+### def Addrinfo.new(sockaddr, family=Socket::PF_UNSPEC, socktype=0, protocol=0) -> Addrinfo
 
 新たな Addrinfo オブジェクトを返します。
 
@@ -59,7 +59,7 @@ family や socktype と異なり、整数でなければなりません。
 - **param** `protocol` -- プロトコル(整数)
 - **raise** `SocketError` -- 不適なファミリーやソケットタイプなどを渡した場合に発生します
 
-### def ip(host) -> Addrinfo
+### def Addrinfo.ip(host) -> Addrinfo
 
 IP アドレスに対する Addrinfo オブジェクトを返します。
 
@@ -75,7 +75,7 @@ p Addrinfo.ip("localhost") #=> #<Addrinfo: 127.0.0.1 (localhost)>
 - **param** `host` -- ホスト(IP アドレスもしくはホスト名)
 - **SEE** [m:Addrinfo.new]
 
-### def tcp(host, port) -> Addrinfo
+### def Addrinfo.tcp(host, port) -> Addrinfo
 
 TCP アドレスに対する Addrinfo オブジェクトを返します。
 
@@ -89,7 +89,7 @@ p Addrinfo.tcp("localhost", "smtp")
 - **param** `host` -- ホスト(IP アドレスもしくはホスト名)
 - **param** `port` -- ポート番号(整数)もしくはサービス名(文字列)
 
-### def udp(host, port) -> Addrinfo
+### def Addrinfo.udp(host, port) -> Addrinfo
 
 UDP アドレスに対する Addrinfo オブジェクトを返します。
 
@@ -103,7 +103,7 @@ p Addrinfo.udp("localhost", "daytime")
 - **param** `host` -- ホスト(IP アドレスもしくはホスト名)
 - **param** `port` -- ポート番号(整数)もしくはサービス名(文字列)
 
-### def unix(path, socktype=Socket::SOCK_STREAM) -> Addrinfo
+### def Addrinfo.unix(path, socktype=Socket::SOCK_STREAM) -> Addrinfo
 
 Unix ソケットアドレスに対応する Addrinfo オブジェクトを返します。
 
@@ -121,8 +121,8 @@ p Addrinfo.unix("/tmp/sock", :DGRAM) #=> #<Addrinfo: /tmp/sock SOCK_DGRAM>
 
 - **SEE** [m:Addrinfo.new]
 
-### def foreach(nodename, service, family=nil, socktype=nil, protocol=nil, flags=0) -> Enumerator
-### def foreach(nodename, service, family=nil, socktype=nil, protocol=nil, flags=0){|addrinfo| ... } -> [Addrinfo]
+### def Addrinfo.foreach(nodename, service, family=nil, socktype=nil, protocol=nil, flags=0) -> Enumerator
+### def Addrinfo.foreach(nodename, service, family=nil, socktype=nil, protocol=nil, flags=0){|addrinfo| ... } -> [Addrinfo]
 
 [m:Addrinfo.getaddrinfo] で得られる配列の各要素を繰り返します。
 
@@ -135,7 +135,7 @@ p Addrinfo.unix("/tmp/sock", :DGRAM) #=> #<Addrinfo: /tmp/sock SOCK_DGRAM>
 - **param** `protocol` -- プロトコル(整数、もしくは nil)
 - **param** `flags` -- フラグ(整数)
 
-### def getaddrinfo(nodename, service, family=nil, socktype=nil, protocol=nil, flags=0) -> [Addrinfo]
+### def Addrinfo.getaddrinfo(nodename, service, family=nil, socktype=nil, protocol=nil, flags=0) -> [Addrinfo]
 
 パラメータから複数の Addrinfo オブジェクトを生成し、その配列を返します。
 

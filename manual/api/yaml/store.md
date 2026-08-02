@@ -49,8 +49,8 @@ greeting:
 
 #%# 最終的にPStore.newに渡されるためメソッドシグネチャは2.4.0以前と同様
 #%# にしてある。
-### def new(file_name, yaml_opts = {})                      -> YAML::Store
-### def new(file_name, thread_safe = false, yaml_opts = {}) -> YAML::Store
+### def YAML::Store.new(file_name, yaml_opts = {})                      -> YAML::Store
+### def YAML::Store.new(file_name, thread_safe = false, yaml_opts = {}) -> YAML::Store
 
 自身を初期化します。
 

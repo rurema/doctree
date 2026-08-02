@@ -13,7 +13,7 @@ Ruby の実装に用いられているシステムコールまたは一部の C 
 
 ## Class Methods
 
-### def new(error_message) -> SystemCallError
+### def SystemCallError.new(error_message) -> SystemCallError
 
 SystemCallError オブジェクトを生成して返します。
 
@@ -24,8 +24,8 @@ p SystemCallError.new("message")
     # => #<SystemCallError: unknown error - message>
 ```
 
-### def new(error_message, errno, location = nil) -> SystemCallError
-### def new(errno) -> SystemCallError
+### def SystemCallError.new(error_message, errno, location = nil) -> SystemCallError
+### def SystemCallError.new(errno) -> SystemCallError
 
 整数 errno に対応する [c:Errno::EXXX] オブジェクトを生成して返します。
 
@@ -57,7 +57,7 @@ p SystemCallError.new("message", 2, "location")
     # => #<Errno::ENOENT: No such file or directory @ location - message>
 ```
 
-### def ===(other) -> bool
+### def SystemCallError.===(other) -> bool
 
 other が SystemCallError のサブクラスのインスタンスで、
 かつ、other.errno の値が self::Errno と同じ場合に真を返します。そうでない場合は偽を返します。
@@ -294,8 +294,8 @@ Microsoft Windows システムにおいては <http://msdn2.microsoft.com/ja-jp/
 
 ## Class Methods
 
-### def new() -> Errno::EXXX
-### def new(error_message) -> Errno::EXXX
+### def Errno::EXXX.new() -> Errno::EXXX
+### def Errno::EXXX.new(error_message) -> Errno::EXXX
 
 Errno::EXXX オブジェクトを生成して返します。
 

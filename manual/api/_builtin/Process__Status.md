@@ -88,7 +88,7 @@ end
 
 ## Class Methods
 
-### def wait(pid = -1, flags = 0) -> Process::Status | nil
+### def Process::Status.wait(pid = -1, flags = 0) -> Process::Status | nil
 
 [m:Process?.wait] と同じですが、プロセス ID ではなく
 [c:Process::Status] を返します。

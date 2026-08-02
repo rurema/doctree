@@ -9,8 +9,8 @@ Thread を使うことで並行プログラミングが可能になります。
 #%include(thread.inc)
 
 ## Class Methods
-### def abort_on_exception             -> bool
-### def abort_on_exception=(newstate)
+### def Thread.abort_on_exception             -> bool
+### def Thread.abort_on_exception=(newstate)
 
 真の時は、いずれかのスレッドが例外によって終了した時に、その例外をメインスレッドで
 再度発生させます。メインスレッドがその例外を捕捉しない限り、結果としてインタプリタ
@@ -29,8 +29,8 @@ Thread.abort_on_exception = true
 p Thread.abort_on_exception # => true
 ```
 
-### def report_on_exception             -> bool
-### def report_on_exception=(newstate)
+### def Thread.report_on_exception             -> bool
+### def Thread.report_on_exception=(newstate)
 
 真の時は、いずれかのスレッドが例外によって終了した時に、その内容を $stderr に報告します。
 
@@ -70,7 +70,7 @@ Traceback (most recent call last):
 
 - **param** `newstate` -- スレッド実行中に例外発生した場合、その内容を報告するかどうかを true か false で指定します。
 
-### def ignore_deadlock -> bool
+### def Thread.ignore_deadlock -> bool
 
 デッドロック検知を無視する機能のon/offを返します。
 
@@ -80,7 +80,7 @@ Traceback (most recent call last):
 
 - **SEE** [m:Thread.ignore_deadlock=]
 
-### def ignore_deadlock=(bool)
+### def Thread.ignore_deadlock=(bool)
 
 デッドロック検知を無視する機能をon/offします。デフォルト値はfalseです。
 
@@ -98,7 +98,7 @@ puts queue.pop
 
 - **SEE** [m:Thread.ignore_deadlock]
 
-### def current    -> Thread
+### def Thread.current    -> Thread
 
 現在実行中のスレッド(カレントスレッド)を返します。
 
@@ -106,13 +106,13 @@ puts queue.pop
 p Thread.current #=> #<Thread:0x4022e6fc run>
 ```
 
-### def exit    -> ()
+### def Thread.exit    -> ()
 
 カレントスレッドに対して [m:Thread#exit] を呼びます。
 
 #%#noexample Thread#exitを参照
 
-### def kill(thread)    -> Thread
+### def Thread.kill(thread)    -> Thread
 
 指定したスレッド thread に対して [m:Thread#exit] を呼びます。終了したスレッドを返します。
 
@@ -125,7 +125,7 @@ end
 p Thread.kill(th)     #=> #<Thread:0x40221bc8 dead>
 ```
 
-### def list    -> [Thread]
+### def Thread.list    -> [Thread]
 
 全ての生きているスレッドを含む配列を生成して返します。aborting 状態であるスレッド
 も要素に含まれます。
@@ -139,7 +139,7 @@ sleep 0.1
 p Thread.list   #=> [#<Thread:0x40377a54 sleep>, #<Thread:0x4022e6fc run>]
 ```
 
-### def main    -> Thread
+### def Thread.main    -> Thread
 
 メインスレッドを返します。
 
@@ -147,8 +147,8 @@ p Thread.list   #=> [#<Thread:0x40377a54 sleep>, #<Thread:0x4022e6fc run>]
 p Thread.main #=> #<Thread:0x4022e6fc run>
 ```
 
-### def start(*arg) {|*arg| ... }       -> Thread
-### def fork(*arg) {|*arg| ... }        -> Thread
+### def Thread.start(*arg) {|*arg| ... }       -> Thread
+### def Thread.fork(*arg) {|*arg| ... }        -> Thread
 
 スレッドを生成して、ブロックの評価を開始します。
 生成したスレッドを返します。
@@ -180,7 +180,7 @@ for i in 1..5
 end
 ```
 
-### def new(*arg) {|*arg| ... }         -> Thread
+### def Thread.new(*arg) {|*arg| ... }         -> Thread
 
 スレッドを生成して、ブロックの評価を開始します。
 生成したスレッドを返します。
@@ -209,7 +209,7 @@ for i in 1..5
 end
 ```
 
-### def pass    -> nil
+### def Thread.pass    -> nil
 
 他のスレッドに実行権を譲ります。実行中のスレッドの状態を変えずに、
 他の実行可能状態のスレッドに切り替わるよう、スレッドスケジューラにヒントを与
@@ -241,7 +241,7 @@ end
 
 上記の出力は一例です。実行環境によって出力順序は異なり、保証されません。
 
-### def stop     -> nil
+### def Thread.stop     -> nil
 
 他のスレッドから [m:Thread#run] メソッドで再起動されるまで、カレ
 ントスレッドの実行を停止します。
@@ -259,10 +259,10 @@ a.join
 
 #%since 3.2
 #%since 3.4
-### def each_caller_location(start = 1, length = nil) {|location| ... } -> nil
-### def each_caller_location(range) {|location| ... } -> nil
+### def Thread.each_caller_location(start = 1, length = nil) {|location| ... } -> nil
+### def Thread.each_caller_location(range) {|location| ... } -> nil
 #%else
-### def each_caller_location {|location| ... } -> nil
+### def Thread.each_caller_location {|location| ... } -> nil
 #%end
 
 現在の実行スタックの各フレームを、[c:Thread::Backtrace::Location] オブジェクトと
@@ -298,7 +298,7 @@ foo
 - **SEE** [m:Kernel?.caller_locations]
 #%end
 
-### def DEBUG -> Integer
+### def Thread.DEBUG -> Integer
 
 スレッドのデバッグレベルを返します。
 
@@ -314,7 +314,7 @@ p Thread.DEBUG # => 0
 
 - **SEE** [m:Thread.DEBUG=]
 
-### def DEBUG=(val)
+### def Thread.DEBUG=(val)
 
 スレッドのデバッグレベルを val に設定します。
 
@@ -332,7 +332,7 @@ p Thread.DEBUG # => 1
 - **SEE** [m:Thread.DEBUG]
 
 #%# 参考: [[ruby-dev:45341]]
-### def pending_interrupt?(error = nil) -> bool
+### def Thread.pending_interrupt?(error = nil) -> bool
 
 非同期割り込みのキューが空かどうかを返します。
 
@@ -396,7 +396,7 @@ flag = false # スレッド停止
 
 - **SEE** [m:Thread#pending_interrupt?], [m:Thread.handle_interrupt]
 
-### def handle_interrupt(hash) { ... } -> object
+### def Thread.handle_interrupt(hash) { ... } -> object
 
 スレッドの割り込みのタイミングを引数で指定した内容に変更してブロックを
 実行します。

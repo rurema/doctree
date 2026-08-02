@@ -88,7 +88,7 @@ p decrypted_data
 ```
 
 ## Class Methods
-### def new(name) -> OpenSSL::Cipher
+### def OpenSSL::Cipher.new(name) -> OpenSSL::Cipher
 
 共通鍵暗号のアルゴリズム名を渡し、対応する暗号オブジェクトを生成します。
 
@@ -127,7 +127,7 @@ p decrypted_data
 - **raise** `RuntimeError` -- 利用可能でない暗号化方式名を指定した場合に発生します
 - **raise** `OpenSSL::Cipher::CipherError` -- 初期化に失敗した場合に発生します
 
-### def ciphers -> [String]
+### def OpenSSL::Cipher.ciphers -> [String]
 
 利用可能な暗号方式名を文字列の配列で返します。
 
@@ -297,7 +297,7 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 AES 暗号を表すクラス
 
 ## Class Methods
-### def new(bit, mode) -> OpenSSL::Cipher::AES
+### def OpenSSL::Cipher::AES.new(bit, mode) -> OpenSSL::Cipher::AES
 
 AES 共通鍵暗号オブジェクトを生成し、返します。
 
@@ -315,7 +315,7 @@ AES の鍵長を整数もしくは文字列(256 or "256") bit で、
 鍵長 128 ビットの AES 暗号を表すクラス
 
 ## Class Methods
-### def new(mode) -> OpenSSL::Cipher::AES128
+### def OpenSSL::Cipher::AES128.new(mode) -> OpenSSL::Cipher::AES128
 
 鍵長 128 ビット AES 暗号オブジェクトを生成し、返します。
 
@@ -330,7 +330,7 @@ AES の鍵長を整数もしくは文字列(256 or "256") bit で、
 鍵長 192 ビットの AES 暗号を表すクラス
 
 ## Class Methods
-### def new(mode) -> OpenSSL::Cipher::AES192
+### def OpenSSL::Cipher::AES192.new(mode) -> OpenSSL::Cipher::AES192
 
 鍵長 192 ビット AES 暗号オブジェクトを生成し、返します。
 
@@ -345,7 +345,7 @@ AES の鍵長を整数もしくは文字列(256 or "256") bit で、
 鍵長 256 ビットの AES 暗号を表すクラス
 
 ## Class Methods
-### def new(mode) -> OpenSSL::Cipher::AES256
+### def OpenSSL::Cipher::AES256.new(mode) -> OpenSSL::Cipher::AES256
 
 鍵長 256 ビット AES 暗号オブジェクトを生成し、返します。
 
@@ -360,7 +360,7 @@ AES の鍵長を整数もしくは文字列(256 or "256") bit で、
 BF(BlowFish)暗号を表すクラス
 
 ## Class Methods
-### def new(mode) -> OpenSSL::Cipher::BF
+### def OpenSSL::Cipher::BF.new(mode) -> OpenSSL::Cipher::BF
 
 BF(BlowFish)暗号オブジェクトを生成し、返します。
 
@@ -375,7 +375,7 @@ BF(BlowFish)暗号オブジェクトを生成し、返します。
 CAST5 暗号を表すクラス
 
 ## Class Methods
-### def new(mode) -> OpenSSL::Cipher::CAST5
+### def OpenSSL::Cipher::CAST5.new(mode) -> OpenSSL::Cipher::CAST5
 
 CAST5 暗号オブジェクトを生成し、返します。
 
@@ -390,7 +390,7 @@ CAST5 暗号オブジェクトを生成し、返します。
 DES 暗号を表すクラス
 
 ## Class Methods
-### def new(mode) -> OpenSSL::Cipher::DES
+### def OpenSSL::Cipher::DES.new(mode) -> OpenSSL::Cipher::DES
 
 DES 暗号オブジェクトを生成し、返します。
 
@@ -405,7 +405,7 @@ DES 暗号オブジェクトを生成し、返します。
 IDEA 暗号を表すクラス
 
 ## Class Methods
-### def new(*args) -> OpenSSL::Cipher::IDEA
+### def OpenSSL::Cipher::IDEA.new(*args) -> OpenSSL::Cipher::IDEA
 
 IDEA 暗号オブジェクトを生成します。
 
@@ -416,8 +416,8 @@ IDEA 暗号オブジェクトを生成します。
 RC2 暗号を表すクラス
 
 ## Class Methods
-### def new(bit, mode) -> OpenSSL::Cipher::RC2
-### def new(mode) -> OpenSSL::Cipher::RC2
+### def OpenSSL::Cipher::RC2.new(bit, mode) -> OpenSSL::Cipher::RC2
+### def OpenSSL::Cipher::RC2.new(mode) -> OpenSSL::Cipher::RC2
 
 RC2 暗号オブジェクトを生成します。
 
@@ -437,8 +437,8 @@ RC2 暗号オブジェクトを生成します。
 RC4 暗号を表すクラス
 
 ## Class Methods
-### def new() -> OpenSSL::Cipher::RC4
-### def new(bit) -> OpenSSL::Cipher::RC4
+### def OpenSSL::Cipher::RC4.new() -> OpenSSL::Cipher::RC4
+### def OpenSSL::Cipher::RC4.new(bit) -> OpenSSL::Cipher::RC4
 
 RC4 暗号オブジェクトを生成し、返します。
 
@@ -456,7 +456,7 @@ bit で鍵長を指定できます。
 RC5 暗号を表すクラス
 
 ## Class Methods
-### def new(*args) -> OpenSSL::Cipher::RC5
+### def OpenSSL::Cipher::RC5.new(*args) -> OpenSSL::Cipher::RC5
 
 RC5 暗号オブジェクトを生成し、返します。
 

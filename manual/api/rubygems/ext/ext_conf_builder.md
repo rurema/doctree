@@ -11,7 +11,7 @@ extconf.rb を元にして拡張ライブラリをビルドするためのクラ
 
 ## Singleton Methods
 
-### def build(extension, directory, dest_path, results) -> Array
+### def Gem::Ext::ExtConfBuilder.build(extension, directory, dest_path, results) -> Array
 #%todo
 
 Makefile が存在しない場合は、extconf.rb を実行して

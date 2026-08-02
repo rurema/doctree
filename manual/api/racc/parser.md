@@ -7,7 +7,7 @@ type: library
 
 ## Class Methods
 
-### def racc_runtime_type
+### def Racc::Parser.racc_runtime_type
 #%todo
 
 ## Private Instance Methods

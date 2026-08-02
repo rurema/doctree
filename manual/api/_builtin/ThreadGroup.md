@@ -39,7 +39,7 @@ Thread.new{ ... } はエラーになりません。生成されたスレッド�
 
 ## Class Methods
 
-### def new    -> ThreadGroup
+### def ThreadGroup.new    -> ThreadGroup
 
 新たな ThreadGroup を生成して返します。
 

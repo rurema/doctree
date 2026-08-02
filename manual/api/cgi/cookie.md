@@ -49,7 +49,7 @@ cookie1.httponly  = true
 
 ## Class Methods
 
-### def new(name = "", *value) -> CGI::Cookie
+### def CGI::Cookie.new(name = "", *value) -> CGI::Cookie
 
 クッキーオブジェクトを作成します。
 
@@ -109,7 +109,7 @@ cookie1.secure    = true
 cookie1.httponly  = true
 ```
 
-### def parse(raw_cookie) -> Hash
+### def CGI::Cookie.parse(raw_cookie) -> Hash
 
 クッキー文字列をパースします。
 

@@ -15,7 +15,7 @@ DL を経由して利用してください。
 fiddle ライブラリの名前空間をなすモジュール
 
 ## Singleton Methods
-### def win32_last_error -> Integer
+### def Fiddle.win32_last_error -> Integer
 
 最後に [m:Fiddle::Function#call] で C の関数を呼び出した
 結果設定された errno を返します。
@@ -24,7 +24,7 @@ fiddle ライブラリの名前空間をなすモジュール
 
 この値はスレッドローカルです。
 
-### def win32_last_error=(errno)
+### def Fiddle.win32_last_error=(errno)
 
 [m:Fiddle.win32_last_error] で返される値を設定します。
 
@@ -34,14 +34,14 @@ errno は fiddle が設定するのでユーザはこのメソッドを使わな
 
 - **param** `errno` -- 設定する errno
 
-### def last_error -> Integer
+### def Fiddle.last_error -> Integer
 
 最後に [m:Fiddle::Function#call] で C の関数を呼び出した
 結果設定された errno を返します。
 
 この値はスレッドローカルです。
 
-### def last_error=(errno)
+### def Fiddle.last_error=(errno)
 
 [m:Fiddle.last_error] で返される値を設定します。
 
@@ -120,7 +120,7 @@ Windows 環境下では true、それ以外では false です。
 C の関数を表すクラスです。
 
 ## Class Methods
-### def new(ptr, args, ret_type, abi=Fiddle::Function::DEFAULT) -> Fiddle::Function
+### def Fiddle::Function.new(ptr, args, ret_type, abi=Fiddle::Function::DEFAULT) -> Fiddle::Function
 
 ptr (関数ポインタを表す整数)から Fiddle::Function オブジェクトを
 生成します。
@@ -273,7 +273,7 @@ compare = Class.new(Fiddle::Closure){
 [c:Fiddle::Closure::BlockCaller] を使うほうが簡単です。
 
 ## Class Methods
-### def new(ret, args, abi=Fiddle::Function::DEFAULT) -> Fiddle::Closure
+### def Fiddle::Closure.new(ret, args, abi=Fiddle::Function::DEFAULT) -> Fiddle::Closure
 
 そのクラスの call メソッドを呼びだすような
 Fiddle::Closure オブジェクトを返します。
@@ -326,7 +326,7 @@ p s # =>  "()07Uabcqx"
 ```
 
 ## Class Methods
-### def new(ret, args, abi=Fiddle::Function::DEFAULT){ ... } -> Fiddle::Closure::BlockCaller
+### def Fiddle::Closure::BlockCaller.new(ret, args, abi=Fiddle::Function::DEFAULT){ ... } -> Fiddle::Closure::BlockCaller
 
 Ruby のブロックを呼び出す Fiddle::Closure オブジェクトを返します。
 

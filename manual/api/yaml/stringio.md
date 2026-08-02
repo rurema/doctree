@@ -7,7 +7,7 @@
 
 ## Class Methods
 
-### def make_stream(io) -> StringIO | IO
+### def Syck.make_stream(io) -> StringIO | IO
 
 引数を元にストリームオブジェクトを作成します。
 

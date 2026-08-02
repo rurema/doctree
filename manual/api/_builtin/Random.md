@@ -12,7 +12,7 @@ MT19937に基づく擬似乱数生成器を提供するクラスです。
 オリジナル版 <http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/mt.html>
 
 ## Class Methods
-### def new(seed = Random.new_seed) -> Random
+### def Random.new(seed = Random.new_seed) -> Random
 
 メルセンヌ・ツイスタに基づく擬似乱数発生装置オブジェクトを作ります。
 引数が省略された場合は、[m:Random.new_seed]の値を使用します。
@@ -29,7 +29,7 @@ p [ prng.rand, prng.rand ] #=> [0.1915194503788923, 0.6221087710398319]
 p [ prng.rand(10), prng.rand(1000) ]  #=> [4, 664]
 ```
 
-### def new_seed -> Integer
+### def Random.new_seed -> Integer
 
 適切な乱数の種を返します。
 
@@ -37,7 +37,7 @@ p [ prng.rand(10), prng.rand(1000) ]  #=> [4, 664]
 p Random.new_seed # => 184271600931914695177248627591520900872
 ```
 
-### def urandom(size) -> String
+### def Random.urandom(size) -> String
 
 プラットフォームの提供する機能を使って、文字列を返します。
 
@@ -55,9 +55,9 @@ p Random.new_seed # => 184271600931914695177248627591520900872
 p Random.urandom(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
 ```
 
-### def rand -> Float
-### def rand(max) -> Integer | Float
-### def rand(range) -> Integer | Float
+### def Random.rand -> Float
+### def Random.rand(max) -> Integer | Float
+### def Random.rand(range) -> Integer | Float
 
 擬似乱数を発生させます。
 
@@ -84,8 +84,8 @@ p rand(10.0)       #=> 6                   (rand(10) と同じ)
 - **SEE** [m:Random.srand], [m:Random#rand], [m:Random::DEFAULT]
 #%end
 
-### def srand -> Integer
-### def srand(number) -> Integer
+### def Random.srand -> Integer
+### def Random.srand(number) -> Integer
 
 デフォルトの擬似乱数生成器の種を設定し、古い種を返します。
 [m:Kernel?.srand] と同じです。
@@ -99,7 +99,7 @@ p rand(10.0)       #=> 6                   (rand(10) と同じ)
 #%else
 - **SEE** [m:Kernel?.rand], [m:Random::DEFAULT]
 #%end
-### def bytes(size) -> String
+### def Random.bytes(size) -> String
 
 ランダムなバイナリー文字列を返します。結果の文字列のサイズを指定できます。
 
@@ -295,13 +295,13 @@ p r1 == r3 # => true
 
 ## Private Singleton Methods
 
-### def state -> Integer
+### def Random.state -> Integer
 
 C言語レベルで定義されている構造体MTの静的変数default_randの状態を参照します。詳しくはrandom.c を参照してください。
 
 #%#noexample 詳しくはrandom.c を参照
 
-### def left -> Integer
+### def Random.left -> Integer
 
 C言語レベルで定義されている構造体MTの静的変数default_randの変数leftを参照します。詳しくはrandom.c を参照してください。
 

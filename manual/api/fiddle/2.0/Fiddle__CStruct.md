@@ -28,7 +28,7 @@ S = struct(["long foo", "void* bar"])
 このドキュメントは説明の便宜のためだと考えてください。
 
 ## Class Methods
-### def new(addr) -> Fiddle::CStruct
+### def Fiddle::CStruct.new(addr) -> Fiddle::CStruct
 
 addr のアドレスが指すメモリを構造体のアドレスとみなし、
 構造体を作ります。
@@ -43,7 +43,7 @@ return (struct foo*)addr;
 
 - **param** `addr` -- アドレス
 
-### def malloc -> Fiddle::CStruct
+### def Fiddle::CStruct.malloc -> Fiddle::CStruct
 
 構造体のためのメモリを確保し、Fiddle::CStruct の(子孫クラスの)
 オブジェクトで返します。
@@ -56,7 +56,7 @@ return (struct foo*)malloc(sizeof(struct foo));
 
 というコードと対応していると言えます。
 
-### def size -> Integer
+### def Fiddle::CStruct.size -> Integer
 
 構造体のサイズをバイト数で返します。
 

@@ -112,7 +112,7 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 
 ## Class Methods
 
-### def new(str, dup = false) -> StringScanner
+### def StringScanner.new(str, dup = false) -> StringScanner
 
 新しい StringScanner オブジェクトを生成します。
 
@@ -132,7 +132,7 @@ p s.scan(/\w+/)   #=> nil
 p s.scan(/\s+/)   #=> " "
 ```
 
-### def  must_C_version -> self
+### def StringScanner.must_C_version -> self
 
 このメソッドは後方互換性のために定義されています。
 

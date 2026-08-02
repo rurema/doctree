@@ -46,7 +46,7 @@ Ruby プログラムを解析して、[m:Ripper::SCANNER_EVENTS] にあるスキ
 
 ## Class Methods
 
-### def new(src, filename = '-', lineno = 1) -> Ripper::Filter
+### def Ripper::Filter.new(src, filename = '-', lineno = 1) -> Ripper::Filter
 
 Ripper::Filter オブジェクトを作成します。
 

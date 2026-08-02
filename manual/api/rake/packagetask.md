@@ -347,7 +347,7 @@ zip ファイル用のファイル名を返します。
 
 ## Singleton Methods
 
-### def new(name = nil, version = nil){|t| ... } -> Rake::PackageTask
+### def Rake::PackageTask.new(name = nil, version = nil){|t| ... } -> Rake::PackageTask
 
 自身を初期化してタスクを定義します。
 

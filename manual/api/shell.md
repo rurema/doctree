@@ -86,7 +86,7 @@ Shell オブジェクトはカレントディレクトリを持ち,
 
 ## Class Methods
 
-### def def_system_command(command, path = command) -> nil
+### def Shell.def_system_command(command, path = command) -> nil
 
 Shell のメソッドとして command を登録します.
 
@@ -117,7 +117,7 @@ sh.transact {
 }
 ```
 
-### def undef_system_command(command) -> Shell::CommandProcessor
+### def Shell.undef_system_command(command) -> Shell::CommandProcessor
 
 commandを削除します.
 
@@ -142,7 +142,7 @@ rescue NameError => err
 end
 ```
 
-### def alias_command(alias, command, *opts) {...} -> self
+### def Shell.alias_command(alias, command, *opts) {...} -> self
 
 コマンドの別名(エイリアス)を作成します。
 コマンドが無い場合は、[m:Shell.def_system_command] などであらかじめ作成します.
@@ -168,7 +168,7 @@ sh.transact {
 }
 ```
 
-### def unalias_command(alias) -> ()
+### def Shell.unalias_command(alias) -> ()
 
 commandのaliasを削除します.
 
@@ -197,7 +197,7 @@ rescue NameError => err
 end
 ```
 
-### def install_system_commands(pre = "sys_") -> ()
+### def Shell.install_system_commands(pre = "sys_") -> ()
 
 system_path上にある全ての実行可能ファイルをShellに定義する. メソッ
 ド名は元のファイル名の頭にpreをつけたものとなる.
@@ -218,7 +218,7 @@ sh.transact {
 }
 ```
 
-### def new(pwd = Dir.pwd, umask = nil) -> Shell
+### def Shell.new(pwd = Dir.pwd, umask = nil) -> Shell
 
 プロセスのカレントディレクトリをpwd で指定されたディレクトリとするShellオ
 ブジェクトを生成します.
@@ -228,7 +228,7 @@ sh.transact {
 
 - **param** `umask` -- ファイル作成の際に用いられる umask を使用します。
 
-### def cd(path = nil, verbose = self.verbose) -> self
+### def Shell.cd(path = nil, verbose = self.verbose) -> self
 
 pathをカレントディレクトリとするShellオブジェクトを生成します.
 
@@ -242,13 +242,13 @@ sh = Shell.new
 sh.cd("/tmp")
 ```
 
-### def debug -> bool | Integer
-### def debug? -> bool | Integer
+### def Shell.debug -> bool | Integer
+### def Shell.debug? -> bool | Integer
 #%todo
 
 デバッグ用フラグを参照します。
 
-### def debug=(val) 
+### def Shell.debug=(val) 
 
 デバッグ用のフラグを設定します。
 
@@ -260,8 +260,8 @@ sh.cd("/tmp")
 # debug: 2    -> detail inspect debug
 ```
 
-### def default_record_separator -> String
-### def default_record_separator=(rs)
+### def Shell.default_record_separator -> String
+### def Shell.default_record_separator=(rs)
 
 執筆者募集
 
@@ -270,8 +270,8 @@ Shell で用いられる入力レコードセパレータを表す文字列を�
 
 - **param** `rs` -- Shell で用いられる入力レコードセパレータを表す文字列を指定します。
 
-### def default_system_path -> Array
-### def default_system_path=(path)
+### def Shell.default_system_path -> Array
+### def Shell.default_system_path=(path)
 
 Shellでもちいられるコマンドを検索する対象のパスを設定および、参照します。
 
@@ -287,46 +287,46 @@ p Shell.default_system_path
 # => "/Users/kouya/bin"
 ```
 
-### def verbose -> bool  
-### def verbose? -> bool
+### def Shell.verbose -> bool  
+### def Shell.verbose? -> bool
 #%todo
 
-### def verbose=(flag)
+### def Shell.verbose=(flag)
 
 true ならば冗長な出力の設定を行います。
 
 - **param** `flag` -- true ならば冗長な出力の設定を行います。
 
-### def cascade -> bool
+### def Shell.cascade -> bool
 #%todo
 
-### def cascade=(flag)
+### def Shell.cascade=(flag)
 #%todo
 
-### def notify(*opts){|message| ... } -> String
+### def Shell.notify(*opts){|message| ... } -> String
 #%todo
 
-### def debug_output_lock -> Mutex
+### def Shell.debug_output_lock -> Mutex
 #%todo
 
 - **SEE** [m:Thread::Mutex#lock]
 
-### def debug_output_locked? -> bool
+### def Shell.debug_output_locked? -> bool
 #%todo
 
 - **SEE** [m:Thread::Mutex#locked?]
 
-### def debug_output_synchronize
+### def Shell.debug_output_synchronize
 #%todo
 
 - **SEE** [m:Thread::Mutex#synchronize]
 
-### def debug_output_try_lock -> bool
+### def Shell.debug_output_try_lock -> bool
 #%todo
 
 - **SEE** [m:Thread::Mutex#try_lock]
 
-### def debug_output_unlock -> Mutex | nil
+### def Shell.debug_output_unlock -> Mutex | nil
 #%todo
 
 - **SEE** [m:Thread::Mutex#unlock]

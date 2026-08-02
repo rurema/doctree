@@ -79,7 +79,7 @@ opt で置き換えます。そうでない場合は先頭に opt を追加し�
 
 ## Class Methods
 
-### def filter_backtrace(array) -> [String]
+### def OptionParser::ParseError.filter_backtrace(array) -> [String]
 
 array で指定されたバックトレースから optparse ライブラリに関する行を除
 外します。

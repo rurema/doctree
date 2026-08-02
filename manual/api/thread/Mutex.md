@@ -28,7 +28,7 @@ m.synchronize {
 
 ## Class Methods
 
-### def new -> Thread::Mutex
+### def Thread::Mutex.new -> Thread::Mutex
 
 新しい mutex を生成して返します。
 

@@ -851,7 +851,7 @@ FileUtils.uptodate?('hello.o', ['hello.c', 'hello.h']) or system('make')
 ```
 
 ## Singleton Methods
-### def collect_method(opt) -> Array
+### def FileUtils.collect_method(opt) -> Array
 
 与えられたオプションを持つメソッド名の配列を返します。
 
@@ -862,7 +862,7 @@ require 'fileutils'
 p FileUtils.collect_method(:preserve) # => ["cp", "cp_r", "copy", "install"]
 ```
 
-### def commands -> Array
+### def FileUtils.commands -> Array
 
 何らかのオプションを持つメソッド名の配列を返します。
 
@@ -871,7 +871,7 @@ require 'fileutils'
 p FileUtils.commands  # => ["chmod", "cp", "cp_r", "install", ...]
 ```
 
-### def have_option?(mid, opt) -> bool
+### def FileUtils.have_option?(mid, opt) -> bool
 
 mid というメソッドが opt というオプションを持つ場合、真を返します。
 そうでない場合は、偽を返します。
@@ -880,7 +880,7 @@ mid というメソッドが opt というオプションを持つ場合、真�
 
 - **param** `opt` -- オプション名を指定します。
 
-### def options -> Array
+### def FileUtils.options -> Array
 
 オプション名の配列を返します。
 
@@ -890,7 +890,7 @@ p FileUtils.options
 # => ["noop", "verbose", "force", "mode", "parents", "owner", "group", "preserve", "dereference_root", "remove_destination", "secure", "mtime", "nocreate"]
 ```
 
-### def options_of(mid) -> Array
+### def FileUtils.options_of(mid) -> Array
 
 与えられたメソッド名で使用可能なオプション名の配列を返します。
 

@@ -11,7 +11,7 @@ XPath を取り扱うためのクラスです。
 
 ## Class Methods
 
-### def first(element, path = nil, namespaces = {}, variables = {}) -> Node | nil
+### def REXML::XPath.first(element, path = nil, namespaces = {}, variables = {}) -> Node | nil
 
 element の path で指定した XPath 文字列にマッチする最初のノードを
 返します。
@@ -62,7 +62,7 @@ p b2 # => <b> ... </>
 p b2.text # => "b2"
 ```
 
-### def each(element, path = nil, namespaces = {}, variables = {}) {|e| ... } -> ()
+### def REXML::XPath.each(element, path = nil, namespaces = {}, variables = {}) {|e| ... } -> ()
 
 element の path で指定した XPath 文字列にマッチする各ノード
 に対してブロックを呼び出します。
@@ -103,7 +103,7 @@ REXML::XPath.each(doc, "/root/a/b"){|e| p e.text }
 # >> "b2"
 ```
 
-### def match(element, path = nil, namespaces = {}, variables = {}) -> [Node]
+### def REXML::XPath.match(element, path = nil, namespaces = {}, variables = {}) -> [Node]
 
 element の path で指定した XPath 文字列にマッチするノードの配列を
 返します。

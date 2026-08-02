@@ -535,7 +535,7 @@ $stderr に出力します。
 
 ## Constants
 
-### def DEPRECATED -> {String -> String}
+### const DEPRECATED -> {String -> String}
 
 非推奨のオプションの一覧を返します。
 

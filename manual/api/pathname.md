@@ -55,7 +55,7 @@ p Pathname("foo/bar")   # => #<Pathname:foo/bar>
 
 ## Class Methods
 
-### def new(path) -> Pathname
+### def Pathname.new(path) -> Pathname
 
 文字列 path を元に Pathname オブジェクトを生成します。
 
@@ -70,8 +70,8 @@ require "pathname"
 p Pathname.new(__FILE__) # => #<Pathname:/path/to/file.rb>
 ```
 
-### def getwd -> Pathname
-### def pwd   -> Pathname
+### def Pathname.getwd -> Pathname
+### def Pathname.pwd   -> Pathname
 
 カレントディレクトリを元に Pathname オブジェクトを生成します。
 Pathname.new(Dir.getwd) と同じです。
@@ -84,8 +84,8 @@ p Pathname.getwd #=> #<Pathname:/home/zzak/projects/ruby>
 
 - **SEE** [m:Dir.getwd]
 
-### def glob(pattern, flags=0) -> [Pathname]
-### def glob(pattern, flags=0) {|pathname| ...} -> nil
+### def Pathname.glob(pattern, flags=0) -> [Pathname]
+### def Pathname.glob(pattern, flags=0) {|pathname| ...} -> nil
 
 ワイルドカードの展開を行なった結果を、
 Pathname オブジェクトの配列として返します。

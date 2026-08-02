@@ -74,7 +74,7 @@ gemspec をセットします。
 
 ## Singleton Methods
 
-### def new(gem_spec){|t| ... } -> Rake::GemPackageTask
+### def Rake::GemPackageTask.new(gem_spec){|t| ... } -> Rake::GemPackageTask
 
 自身を初期化してタスクを定義します。
 

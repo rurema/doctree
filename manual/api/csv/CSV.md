@@ -223,7 +223,7 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 
 ## Singleton Methods
 
-### def new(data, options = Hash.new) -> CSV
+### def CSV.new(data, options = Hash.new) -> CSV
 
 このメソッドは CSV ファイルを読み込んだり、書き出したりするために
 [c:String] か [c:IO] のインスタンスをラップします。
@@ -348,9 +348,9 @@ p csv.first # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" "a
 
 - **SEE** [m:CSV::DEFAULT_OPTIONS], [m:CSV.open]
 
-### def filter(options = Hash.new){|row| ... }
-### def filter(input, options = Hash.new){|row| ... }
-### def filter(input, output, options = Hash.new){|row| ... }
+### def CSV.filter(options = Hash.new){|row| ... }
+### def CSV.filter(input, options = Hash.new){|row| ... }
+### def CSV.filter(input, output, options = Hash.new){|row| ... }
 #%# -> discard
 
 このメソッドは CSV データに対して Unix のツール群のようなフィルタを構築
@@ -421,8 +421,8 @@ end
 
 - **SEE** [m:CSV.new]
 
-### def foreach(path, options = Hash.new) -> Enumerator
-### def foreach(path, options = Hash.new){|row| ... } -> nil
+### def CSV.foreach(path, options = Hash.new) -> Enumerator
+### def CSV.foreach(path, options = Hash.new){|row| ... } -> nil
 
 このメソッドは CSV ファイルを読むための主要なインターフェイスです。
 各行が与えられたブロックに渡されます。
@@ -448,7 +448,7 @@ CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
 
 - **SEE** [m:CSV.new], [m:File.open]
 
-### def generate(str = "", options = Hash.new){|csv| ... } -> String
+### def CSV.generate(str = "", options = Hash.new){|csv| ... } -> String
 
 このメソッドは与えられた文字列をラップして [c:CSV] のオブジェクトとしてブロックに渡します。
 ブロック内で [c:CSV] オブジェクトに行を追加できます。
@@ -490,7 +490,7 @@ print csv
 
 - **SEE** [m:CSV.new]
 
-### def generate_line(row, options = Hash.new) -> String
+### def CSV.generate_line(row, options = Hash.new) -> String
 
 このメソッドは一つの [c:Array] オブジェクトを CSV 文字列に変換するためのショートカットです。
 複数行のCSVを扱う際は[m:CSV#<<]を使うとより高速です。
@@ -513,8 +513,8 @@ p CSV.generate_line(taro, col_sep: '|') # => "1|taro|tanaka|20\n"
 
 - **SEE** [m:CSV.new]
 
-### def instance(data = $stdout, **options) -> CSV
-### def instance(data = $stdout, **options){|csv| ... } -> object
+### def CSV.instance(data = $stdout, **options) -> CSV
+### def CSV.instance(data = $stdout, **options){|csv| ... } -> object
 
 このメソッドは [m:CSV.new] のように [c:CSV] のインスタンスを返します。
 しかし、返される値は [m:Object#object_id] と与えられたオプションを
@@ -554,10 +554,10 @@ print csv.read
 
 - **SEE** [m:CSV.new]
 
-### def open(filename, mode = "rb", options = Hash.new){|csv| ... } -> nil
-### def open(filename, mode = "rb", options = Hash.new) -> CSV
-### def open(filename, options = Hash.new){|csv| ... } -> nil
-### def open(filename, options = Hash.new) -> CSV
+### def CSV.open(filename, mode = "rb", options = Hash.new){|csv| ... } -> nil
+### def CSV.open(filename, mode = "rb", options = Hash.new) -> CSV
+### def CSV.open(filename, options = Hash.new){|csv| ... } -> nil
+### def CSV.open(filename, options = Hash.new) -> CSV
 
 このメソッドは [c:IO] オブジェクトをオープンして [c:CSV] でラップします。
 これは CSV ファイルを書くための主要なインターフェイスとして使うことを意図しています。
@@ -674,8 +674,8 @@ print File.read("test.csv")
 
 - **SEE** [m:CSV.new], [m:IO.open]
 
-### def parse(str, options = Hash.new){|row| ... } -> nil
-### def parse(str, options = Hash.new) -> Array
+### def CSV.parse(str, options = Hash.new){|row| ... } -> nil
+### def CSV.parse(str, options = Hash.new) -> Array
 
 このメソッドは文字列を簡単にパースできます。
 ブロックを与えた場合は、ブロックにそれぞれの行を渡します。
@@ -719,7 +719,7 @@ end
 # => ["jiro", "suzuki"]
 ```
 
-### def parse_line(line, options = Hash.new) -> Array
+### def CSV.parse_line(line, options = Hash.new) -> Array
 
 このメソッドは一行の CSV 文字列を配列に変換するためのショートカットです。
 
@@ -742,8 +742,8 @@ p CSV.parse_line("1,\"ta,ro\",\"tana\nka\", 20")
 # => ["1", "ta,ro", "tana\nka", " 20"]
 ```
 
-### def read(path, options = Hash.new) -> [Array] | CSV::Table
-### def readlines(path, options = Hash.new) -> [Array] | CSV::Table
+### def CSV.read(path, options = Hash.new) -> [Array] | CSV::Table
+### def CSV.readlines(path, options = Hash.new) -> [Array] | CSV::Table
 
 CSV ファイルを配列の配列にするために使います。
 headers オプションに偽でない値を指定した場合は [c:CSV::Table] オブジェクトを返します。
@@ -798,7 +798,7 @@ p table[0]    # => #<CSV::Row "id":"1" "first name":"taro" "last name":"tanaka" 
 
 - **SEE** [m:CSV.new], [m:CSV.table]
 
-### def table(path, options = Hash.new) -> CSV::Table | [Array]
+### def CSV.table(path, options = Hash.new) -> CSV::Table | [Array]
 
 以下と同等のことを行うメソッドです。
 

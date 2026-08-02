@@ -298,7 +298,7 @@ $ openssl rsa -in input_key.pem -noout -text
 
 ## Singleton Methods
 
-### def add_trusted_cert(cert, options = {}) -> nil
+### def Gem::Security.add_trusted_cert(cert, options = {}) -> nil
 
 信頼済み証明書リストに与えられた証明書を追加します。
 
@@ -308,7 +308,7 @@ Note: しばらくの間 OPT[:trust_dir] に保存されますが、今後変更
 
 - **param** `options` -- オプションを指定します。
 
-### def build_cert(name, key, options = {}) -> OpenSSL::X509::Certificate
+### def Gem::Security.build_cert(name, key, options = {}) -> OpenSSL::X509::Certificate
 
 与えられた DN と秘密鍵を使用して証明書を作成します。
 
@@ -318,7 +318,7 @@ Note: しばらくの間 OPT[:trust_dir] に保存されますが、今後変更
 
 - **param** `options` -- オプションを指定します。
 
-### def build_self_signed_cert(email_addr, options = {}) -> Hash
+### def Gem::Security.build_self_signed_cert(email_addr, options = {}) -> Hash
 
 与えられたメールアドレスを元にして自己署名証明書を作成します。
 
@@ -328,7 +328,7 @@ Note: しばらくの間 OPT[:trust_dir] に保存されますが、今後変更
 
 - **return** -- 鍵と証明書とそれらを保存したパスを表すハッシュを返します。
 
-### def sign_cert(cert, signing_key, signing_cert, options = {}) -> OpenSSL::X509::Certificate
+### def Gem::Security.sign_cert(cert, signing_key, signing_cert, options = {}) -> OpenSSL::X509::Certificate
 
 与えられた署名用の鍵と証明書を用いて証明書に署名します。
 
@@ -342,7 +342,7 @@ Note: しばらくの間 OPT[:trust_dir] に保存されますが、今後変更
 
 - **return** -- 署名された証明書を返します。
 
-### def verify_trust_dir(path, perms)
+### def Gem::Security.verify_trust_dir(path, perms)
 #%# -> discard
 信頼するディレクトリが存在することを確認します。
 
@@ -546,13 +546,13 @@ Note: しばらくの間 OPT[:trust_dir] に保存されますが、今後変更
 
 ## Singleton Methods
 
-### def new(policy = {}, options = {}) -> Gem::Security::Policy
+### def Gem::Security::Policy.new(policy = {}, options = {}) -> Gem::Security::Policy
 
 - **param** `policy` -- モードを指定します。
 
 - **param** `options` -- その他のオプションを指定します。
 
-### def trusted_cert_path(cert, options) -> String
+### def Gem::Security::Policy.trusted_cert_path(cert, options) -> String
 
 与えられた証明書へのパスを返します。
 
@@ -592,7 +592,7 @@ OpenSSL の署名者を扱うためのクラスです。
 
 ## Singleton Methods
 
-### def new(key, cert_chain) -> Gem::Security::Signer
+### def Gem::Security::Signer.new(key, cert_chain) -> Gem::Security::Signer
 
 与えられた鍵と証明書チェーンを用いて自身を初期化します。
 

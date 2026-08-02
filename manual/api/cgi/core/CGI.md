@@ -8,7 +8,7 @@ include:
 CGI スクリプトを書くために必要な機能を提供するクラスです。
 
 ## Class Methods
-### def parse(query) -> Hash
+### def CGI.parse(query) -> Hash
 
 与えられたクエリ文字列をパースします。
 
@@ -22,12 +22,12 @@ params = CGI.parse("query_string")
   #  "name2" => ["value1", "value2", ...], ... }
 ```
 
-### def accept_charset -> String
+### def CGI.accept_charset -> String
 
 受けとることができるキャラクタセットを文字列で返します。
 デフォルトは UTF-8 です。
 
-### def accept_charset=(charset)
+### def CGI.accept_charset=(charset)
 
 受けとることができるキャラクタセットを設定します。
 

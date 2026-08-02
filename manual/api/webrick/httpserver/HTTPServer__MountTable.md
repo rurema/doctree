@@ -7,7 +7,7 @@ library: webrick/httpserver
 
 ## Class Methods
 
-### def new -> WEBrick::HTTPServer::MountTable
+### def WEBrick::HTTPServer::MountTable.new -> WEBrick::HTTPServer::MountTable
 
 自身を初期化します。
 

@@ -136,7 +136,7 @@ cooked モードを有効にします。端末のモードを後で元に戻す�
 
 ## Singleton Methods
 
-### def console -> File | nil
+### def IO.console -> File | nil
 
 端末を [c:File] オブジェクトで返します。
 

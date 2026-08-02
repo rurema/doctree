@@ -16,8 +16,8 @@ category: Date/Time
 
 ## Class Methods
 
-### def parse(date, now = Time.now) -> Time
-### def parse(date, now = Time.now) {|year| year } -> Time
+### def Time.parse(date, now = Time.now) -> Time
+### def Time.parse(date, now = Time.now) {|year| year } -> Time
 
 date を [m:Date._parse] によって
 パースして [c:Time]オブジェクトに変換します。
@@ -75,8 +75,8 @@ Time.xmlschema(date) rescue Time.parse(date)
 
 従って [m:Time.parse] の失敗はチェックすべきです。
 
-### def rfc2822(date) -> Time
-### def rfc822(date) -> Time
+### def Time.rfc2822(date) -> Time
+### def Time.rfc822(date) -> Time
 
 [RFC:2822]で定義されているdate-timeとしてdateをパースして
 [c:Time]オブジェクトに変換します。
@@ -108,7 +108,7 @@ rescue ArgumentError => err
 end
 ```
 
-### def httpdate(date) -> Time
+### def Time.httpdate(date) -> Time
 
 [RFC:2616]で定義されているHTTP-dateとしてdateをパースして
 [c:Time]オブジェクトに変換します。
@@ -136,8 +136,8 @@ rescue ArgumentError => err
 end
 ```
 
-### def xmlschema(date) -> Time
-### def iso8601(date) -> Time
+### def Time.xmlschema(date) -> Time
+### def Time.iso8601(date) -> Time
 
 XML Schema で定義されている dateTime として
 date をパースして [c:Time] オブジェクトに変換します。
@@ -175,8 +175,8 @@ end
 
 - **SEE** [m:Time#xmlschema], [m:Time#iso8601]
 
-### def strptime(date, format, now=self.now) -> Time
-### def strptime(date, format, now=self.now){|y| ... } -> Time
+### def Time.strptime(date, format, now=self.now) -> Time
+### def Time.strptime(date, format, now=self.now){|y| ... } -> Time
 
 文字列を [m:Date._strptime] を用いて [c:Time] オブジェクト
 に変換します。

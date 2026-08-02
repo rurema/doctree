@@ -92,7 +92,7 @@ puts Shellwords.shelljoin(['grep', pattern, file])
 
 ## Singleton Methods
 
-### def split(line) -> [String]
+### def Shellwords.split(line) -> [String]
 
 Bourne シェルの単語分割規則に従った空白区切りの単語分割を行い、
 単語 (文字列) の配列を返します。
@@ -104,7 +104,7 @@ Bourne シェルの単語分割規則に従った空白区切りの単語分割�
 - **raise** `ArgumentError` -- 引数の中に対でないシングルクォートまたはダブル
        クォートが現れた場合に発生します。
 
-### def escape(str) -> String
+### def Shellwords.escape(str) -> String
 
 文字列を Bourne シェルのコマンドライン中で安全に使えるようにエスケープします。
 
@@ -113,7 +113,7 @@ Bourne シェルの単語分割規則に従った空白区切りの単語分割�
 - **param** `str` -- エスケープの対象となる文字列を指定します。
 - **return** -- エスケープされた文字列を返します。
 
-### def join(array) -> String
+### def Shellwords.join(array) -> String
 
 配列の各要素である文字列に対して、Bourne シェルのコマンドライン中で安全に
 使えるためのエスケープを適用し、空白文字を介してそれらを連結したコマンド

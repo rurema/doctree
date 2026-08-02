@@ -78,8 +78,8 @@ FTP を実装したクラスです。
 
 ## Class Methods
 
-### def new(host = nil, options = {}) -> Net::FTP
-### def new(host = nil, user = nil, passwd = nil, acct = nil) -> Net::FTP
+### def Net::FTP.new(host = nil, options = {}) -> Net::FTP
+### def Net::FTP.new(host = nil, user = nil, passwd = nil, acct = nil) -> Net::FTP
 
 新しい Net::FTP のインスタンスを生成します。
 
@@ -141,8 +141,8 @@ host が指定された場合、生成されたインスタンスに対して
 
 - **SEE** [m:Net::FTP.open]
 
-### def open(host, user = nil, passwd = nil, acct = nil) -> Net::FTP
-### def open(host, user = nil, passwd = nil, acct = nil){|ftp| ... } -> object
+### def Net::FTP.open(host, user = nil, passwd = nil, acct = nil) -> Net::FTP
+### def Net::FTP.open(host, user = nil, passwd = nil, acct = nil){|ftp| ... } -> object
 
 新しい Net::FTP インスタンスを生成します。
 
@@ -168,11 +168,11 @@ user が指定された場合は [m:Net::FTP#login]
 - **raise** `Net::FTPProtoError` -- 応答コードが RFC 的に正しくない場合に発生します。
 - **raise** `Net::FTPReplyError` -- 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
-### def default_passive -> bool
+### def Net::FTP.default_passive -> bool
 
 FTPの接続のグローバルなデフォルトモードが passive mode である場合に true を返します。
 
-### def default_passive=(on)
+### def Net::FTP.default_passive=(on)
 
 passive mode をFTPの接続のグローバルなデフォルトモードにするかどうかを設定します。
 

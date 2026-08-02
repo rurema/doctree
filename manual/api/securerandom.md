@@ -44,7 +44,7 @@ p SecureRandom.random_bytes(10) #=> "\323U\030TO\234\357\020\a\337"
 
 ## Singleton Methods
 
-### def base64(n = nil)    -> String
+### def SecureRandom.base64(n = nil)    -> String
 
 ランダムな base64 文字列を生成して返します。
 
@@ -61,7 +61,7 @@ p SecureRandom.base64(3)    #=> "4pYO"  (文字列のサイズは 3 でない)
 
 - **SEE** [rfc:3548]
 
-### def urlsafe_base64(n = nil, padding = false)  -> String
+### def SecureRandom.urlsafe_base64(n = nil, padding = false)  -> String
 
 ランダムで URL-safe な base64 文字列を生成して返します。
 
@@ -84,7 +84,7 @@ p SecureRandom.urlsafe_base64(nil, true) #=> "-M8rLhr7JEpJlqFGUMmOxg=="
 
 - **SEE** [m:SecureRandom.base64],  [rfc:3548]
 
-### def hex(n = nil)    -> String
+### def SecureRandom.hex(n = nil)    -> String
 
 ランダムな hex 文字列を生成して返します。
 
@@ -99,7 +99,7 @@ require 'securerandom'
 p SecureRandom.hex(3)    #=> "f72233"   (文字列のサイズは 3 でない)
 ```
 
-### def random_bytes(n = nil)    -> String
+### def SecureRandom.random_bytes(n = nil)    -> String
 
 ランダムなバイト列を生成して返します。
 
@@ -113,7 +113,7 @@ require 'securerandom'
 p SecureRandom.random_bytes(3)    #=> "\321\020\203"
 ```
 
-### def random_number(n = 0)     -> Integer | Float
+### def SecureRandom.random_number(n = 0)     -> Integer | Float
 
 ランダムな数値を生成して返します。
 n が 1 以上の整数の場合、0 以上 n 未満の整数を返します。
@@ -128,7 +128,7 @@ require 'securerandom'
 p SecureRandom.random_number(1 << 64)    #=> 4078466195356651249
 ```
 
-### def uuid   -> String
+### def SecureRandom.uuid   -> String
 
 バージョン 4 の UUID (Universally Unique IDentifier) を生成して返します。
 
@@ -146,9 +146,9 @@ p SecureRandom.uuid #=> "62936e70-1815-439b-bf89-8492855a7e6b"
 - **SEE** [rfc:4122]
 
 #%since 3.3
-### def alphanumeric(n = nil, chars: Random::Formatter::ALPHANUMERIC)    -> String
+### def SecureRandom.alphanumeric(n = nil, chars: Random::Formatter::ALPHANUMERIC)    -> String
 #%else
-### def alphanumeric(n = nil)    -> String
+### def SecureRandom.alphanumeric(n = nil)    -> String
 #%end
 
 ランダムな英数字を生成して返します。

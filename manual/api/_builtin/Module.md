@@ -7,7 +7,7 @@ library: _builtin
 
 ## Class Methods
 
-### def constants -> [Symbol]
+### def Module.constants -> [Symbol]
 
 このメソッドを呼び出した時点で参照可能な定数名の配列を返します。
 
@@ -21,7 +21,7 @@ p Module.constants   # => [:RUBY_PLATFORM, :STDIN, ..., :C, ...]
 
 - **SEE** [m:Module#constants], [m:Kernel?.local_variables], [m:Kernel?.global_variables], [m:Object#instance_variables], [m:Module#class_variables]
 
-### def nesting -> [Class, Module]
+### def Module.nesting -> [Class, Module]
 
 このメソッドを呼び出した時点でのクラス/モジュールのネスト情
 報を配列に入れて返します。
@@ -36,8 +36,8 @@ module Company
 end
 ```
 
-### def new -> Module
-### def new {|mod| ... } -> Module
+### def Module.new -> Module
+### def Module.new {|mod| ... } -> Module
 
 名前の付いていないモジュールを新しく生成して返します。
 
@@ -71,7 +71,7 @@ Helpers = m
 p m.name          # => "Utils"   # 一度確定した名前は変わらない
 ```
 
-### def used_modules -> [Module]
+### def Module.used_modules -> [Module]
 
 現在のスコープで using されているすべてのモジュールを配列で返します。
 配列内のモジュールの順番は未定義です。
@@ -94,7 +94,7 @@ p Module.used_modules
 ```
 
 #%since 3.2
-### def used_refinements -> [Refinement]
+### def Module.used_refinements -> [Refinement]
 
 現在のスコープで using されているすべての [c:Refinement] を配列で返します。
 配列内の順番は未定義です。

@@ -30,7 +30,7 @@ puts digest.hexdigest
 [lib:digest] も参照してください。
 
 ## Class Method
-### def new(name, data=nil) -> OpenSSL::Digest
+### def OpenSSL::Digest.new(name, data=nil) -> OpenSSL::Digest
 
 ダイジェストオブジェクトを生成します。
 
@@ -42,7 +42,7 @@ data に文字列を渡すと、その文字列でオブジェクトの内部状
 - **param** `data` -- 入力文字列
 - **raise** `RuntimeError` -- サポートされていないアルゴリズムを指定した場合に発生します
 
-### def digest(name, data) -> String
+### def OpenSSL::Digest.digest(name, data) -> String
 
 data のダイジェストを計算します。
 
@@ -80,7 +80,7 @@ data でダイジェストオブジェクトの内部状態を更新します。
 ハッシュ関数 DSS を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::DSS
+### def OpenSSL::Digest::DSS.new(data=nil) -> OpenSSL::Digest::DSS
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -88,13 +88,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::DSS.digest(data) -> String
 
 data のダイジェストを DSS で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::DSS.hexdigest(data) -> String
 
 data のダイジェストを DSS で計算し、16進文字列で返します。
 
@@ -105,7 +105,7 @@ data のダイジェストを DSS で計算し、16進文字列で返します�
 ハッシュ関数 DSS1 を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::DSS1
+### def OpenSSL::Digest::DSS1.new(data=nil) -> OpenSSL::Digest::DSS1
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -113,13 +113,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::DSS1.digest(data) -> String
 
 data のダイジェストを DSS1 で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::DSS1.hexdigest(data) -> String
 
 data のダイジェストを DSS1 で計算し、16進文字列で返します。
 
@@ -130,7 +130,7 @@ data のダイジェストを DSS1 で計算し、16進文字列で返します�
 ハッシュ関数 MD2 を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::MD2
+### def OpenSSL::Digest::MD2.new(data=nil) -> OpenSSL::Digest::MD2
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -138,13 +138,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::MD2.digest(data) -> String
 
 data のダイジェストを MD2 で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::MD2.hexdigest(data) -> String
 
 data のダイジェストを MD2 で計算し、16進文字列で返します。
 
@@ -155,7 +155,7 @@ data のダイジェストを MD2 で計算し、16進文字列で返します�
 ハッシュ関数 MD4 を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::MD4
+### def OpenSSL::Digest::MD4.new(data=nil) -> OpenSSL::Digest::MD4
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -163,13 +163,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::MD4.digest(data) -> String
 
 data のダイジェストを MD4 で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::MD4.hexdigest(data) -> String
 
 data のダイジェストを MD4 で計算し、16進文字列で返します。
 
@@ -180,7 +180,7 @@ data のダイジェストを MD4 で計算し、16進文字列で返します�
 ハッシュ関数 MD5 を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::MD5
+### def OpenSSL::Digest::MD5.new(data=nil) -> OpenSSL::Digest::MD5
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -188,13 +188,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::MD5.digest(data) -> String
 
 data のダイジェストを MD5 で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::MD5.hexdigest(data) -> String
 
 data のダイジェストを MD5 で計算し、16進文字列で返します。
 
@@ -205,7 +205,7 @@ data のダイジェストを MD5 で計算し、16進文字列で返します�
 ハッシュ関数 MDC2 を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::MDC2
+### def OpenSSL::Digest::MDC2.new(data=nil) -> OpenSSL::Digest::MDC2
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -213,13 +213,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::MDC2.digest(data) -> String
 
 data のダイジェストを MDC2 で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::MDC2.hexdigest(data) -> String
 
 data のダイジェストを MDC2 で計算し、16進文字列で返します。
 
@@ -230,7 +230,7 @@ data のダイジェストを MDC2 で計算し、16進文字列で返します�
 ハッシュ関数 RIPEMD160 を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::RIPEMD160
+### def OpenSSL::Digest::RIPEMD160.new(data=nil) -> OpenSSL::Digest::RIPEMD160
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -238,13 +238,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::RIPEMD160.digest(data) -> String
 
 data のダイジェストを RIPEMD160 で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::RIPEMD160.hexdigest(data) -> String
 
 data のダイジェストを RIPEMD160 で計算し、16進文字列で返します。
 
@@ -255,7 +255,7 @@ data のダイジェストを RIPEMD160 で計算し、16進文字列で返し�
 ハッシュ関数 SHA を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::SHA
+### def OpenSSL::Digest::SHA.new(data=nil) -> OpenSSL::Digest::SHA
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -263,13 +263,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::SHA.digest(data) -> String
 
 data のダイジェストを SHA で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::SHA.hexdigest(data) -> String
 
 data のダイジェストを SHA で計算し、16進文字列で返します。
 
@@ -280,7 +280,7 @@ data のダイジェストを SHA で計算し、16進文字列で返します�
 ハッシュ関数 SHA1 を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::SHA1
+### def OpenSSL::Digest::SHA1.new(data=nil) -> OpenSSL::Digest::SHA1
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -288,13 +288,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::SHA1.digest(data) -> String
 
 data のダイジェストを SHA1 で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::SHA1.hexdigest(data) -> String
 
 data のダイジェストを SHA1 で計算し、16進文字列で返します。
 
@@ -305,7 +305,7 @@ data のダイジェストを SHA1 で計算し、16進文字列で返します�
 ハッシュ関数 SHA224 を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::SHA224
+### def OpenSSL::Digest::SHA224.new(data=nil) -> OpenSSL::Digest::SHA224
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -313,13 +313,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::SHA224.digest(data) -> String
 
 data のダイジェストを SHA224 で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::SHA224.hexdigest(data) -> String
 
 data のダイジェストを SHA224 で計算し、16進文字列で返します。
 
@@ -330,7 +330,7 @@ data のダイジェストを SHA224 で計算し、16進文字列で返しま�
 ハッシュ関数 SHA256 を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::SHA256
+### def OpenSSL::Digest::SHA256.new(data=nil) -> OpenSSL::Digest::SHA256
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -338,13 +338,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::SHA256.digest(data) -> String
 
 data のダイジェストを SHA256 で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::SHA256.hexdigest(data) -> String
 
 data のダイジェストを SHA256 で計算し、16進文字列で返します。
 
@@ -355,7 +355,7 @@ data のダイジェストを SHA256 で計算し、16進文字列で返しま�
 ハッシュ関数 SHA384 を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::SHA384
+### def OpenSSL::Digest::SHA384.new(data=nil) -> OpenSSL::Digest::SHA384
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -363,13 +363,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::SHA384.digest(data) -> String
 
 data のダイジェストを SHA384 で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::SHA384.hexdigest(data) -> String
 
 data のダイジェストを SHA384 で計算し、16進文字列で返します。
 
@@ -380,7 +380,7 @@ data のダイジェストを SHA384 で計算し、16進文字列で返しま�
 ハッシュ関数 SHA512 を表すクラス
 
 ## Class Method
-### def new(data=nil) -> OpenSSL::Digest::SHA512
+### def OpenSSL::Digest::SHA512.new(data=nil) -> OpenSSL::Digest::SHA512
 
 新しいダイジェストオブジェクトを生成します。
 
@@ -388,13 +388,13 @@ data に文字列を渡すとその内容で内部状態を更新します。
 
 - **param** `data` -- 入力文字列
 
-### def digest(data) -> String
+### def OpenSSL::Digest::SHA512.digest(data) -> String
 
 data のダイジェストを SHA512 で計算します。
 
 - **param** `data` -- ダイジェストを計算する文字列
 
-### def hexdigest(data) -> String
+### def OpenSSL::Digest::SHA512.hexdigest(data) -> String
 
 data のダイジェストを SHA512 で計算し、16進文字列で返します。
 

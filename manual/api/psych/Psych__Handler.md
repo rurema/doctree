@@ -357,7 +357,7 @@ puts output.string
 
 ## Class Methods
 
-### def new(io) -> Psych::Emitter
+### def Psych::Emitter.new(io) -> Psych::Emitter
 
 Emitter オブジェクトを生成して返します。
 

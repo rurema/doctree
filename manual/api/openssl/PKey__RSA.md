@@ -42,8 +42,8 @@ p public_key.verify("sha256", sign, "foobarbaz")
 
 ## Class Methods
 
-### def generate(size, exponent = 65537) -> OpenSSL::PKey::RSA
-### def generate(size, exponent = 65537){|u,n| ... } -> OpenSSL::PKey::RSA
+### def OpenSSL::PKey::RSA.generate(size, exponent = 65537) -> OpenSSL::PKey::RSA
+### def OpenSSL::PKey::RSA.generate(size, exponent = 65537){|u,n| ... } -> OpenSSL::PKey::RSA
 
 乱数により RSA 公開鍵と秘密鍵のペアを生成して、RSA オブジェクトを返します。
 
@@ -73,12 +73,12 @@ RSA 鍵ペアの生成には時間がかかるため、鍵生成の途中経過�
 - **param** `exponent` -- public exponent
 
 #%until 4.0
-### def new -> OpenSSL::PKey::RSA
+### def OpenSSL::PKey::RSA.new -> OpenSSL::PKey::RSA
 #%end
-### def new(size, exponent = 65537) -> OpenSSL::PKey::RSA
-### def new(size, exponent = 65537){|u,n| ... }  -> OpenSSL::PKey::RSA
-### def new(obj, pass = nil) -> OpenSSL::PKey::RSA
-### def new(obj, pass = nil){|flag| ... } -> OpenSSL::PKey::RSA
+### def OpenSSL::PKey::RSA.new(size, exponent = 65537) -> OpenSSL::PKey::RSA
+### def OpenSSL::PKey::RSA.new(size, exponent = 65537){|u,n| ... }  -> OpenSSL::PKey::RSA
+### def OpenSSL::PKey::RSA.new(obj, pass = nil) -> OpenSSL::PKey::RSA
+### def OpenSSL::PKey::RSA.new(obj, pass = nil){|flag| ... } -> OpenSSL::PKey::RSA
 
 RSA 暗号鍵オブジェクトを生成します。
 

@@ -30,7 +30,7 @@ gz.close
 
 ## Class Methods
 
-### def new(io) -> Zlib::GzipReader
+### def Zlib::GzipReader.new(io) -> Zlib::GzipReader
 
 io と関連付けられた GzipReader オブジェクトを作成します。
 
@@ -59,8 +59,8 @@ rescue Zlib::GzipFile::Error => err
 end
 ```
 
-### def wrap(io) -> Zlib::GzipReader
-### def wrap(io) {|gz| ... } -> object
+### def Zlib::GzipReader.wrap(io) -> Zlib::GzipReader
+### def Zlib::GzipReader.wrap(io) {|gz| ... } -> object
 
 io と関連付けられた GzipReader オブジェクトを作成します。
 
@@ -96,8 +96,8 @@ Zlib::GzipReader.wrap(f){|gz|
 p f.closed? #=> false
 ```
 
-### def open(filename) -> Zlib::GzipReader
-### def open(filename) {|gz| ... } -> object
+### def Zlib::GzipReader.open(filename) -> Zlib::GzipReader
+### def Zlib::GzipReader.open(filename) {|gz| ... } -> object
 
 filename で指定されるファイルを gzip ファイルとして
 オープンします。GzipReader オブジェクトを返します。

@@ -25,7 +25,7 @@ p doc[2].content # => "type=\"text/css\" href=\"style.css\""
 
 ## Class Methods
 
-### def new(target, content = nil) -> REXML::Instruction
+### def REXML::Instruction.new(target, content = nil) -> REXML::Instruction
 
 新たな Instruction オブジェクトを生成します。
 

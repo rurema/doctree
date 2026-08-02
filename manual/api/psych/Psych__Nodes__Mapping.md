@@ -27,7 +27,7 @@ p ast.root.children.map{|v| v.value } # => ["x", "y", "u", "v"]
 ```
 
 ## Class Methods
-### def new(anchor=nil, tag=nil, implicit=true, style=BLOCK) -> Psych::Nodes::Mapping
+### def Psych::Nodes::Mapping.new(anchor=nil, tag=nil, implicit=true, style=BLOCK) -> Psych::Nodes::Mapping
 
 新たな mapping オブジェクトを生成します。
 

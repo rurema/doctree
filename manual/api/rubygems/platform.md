@@ -86,13 +86,13 @@ OS の種類をセットします。
 
 ## Singleton Methods
 
-### def local -> Gem::Platform
+### def Gem::Platform.local -> Gem::Platform
 #%todo ???
 
-### def match(platform) -> bool
+### def Gem::Platform.match(platform) -> bool
 #%todo ???
 
-### def new(arch)-> Gem::Platform
+### def Gem::Platform.new(arch)-> Gem::Platform
 
 自身を初期化します。
 

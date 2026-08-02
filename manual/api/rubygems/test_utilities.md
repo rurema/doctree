@@ -16,7 +16,7 @@ require:
 
 ## Singleton Methods
 
-### def fetcher=(fetcher)
+### def Gem::RemoteFetcher.fetcher=(fetcher)
 
 テスト用のメソッドです。
 

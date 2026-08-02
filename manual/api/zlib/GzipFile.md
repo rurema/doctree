@@ -12,7 +12,7 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと�
 
 ## Class Methods
 
-### def new(*args) -> ()
+### def Zlib::GzipFile.new(*args) -> ()
 
 直接使用しません。
 通常、具体的な読み書きをおこなうためには、
@@ -20,7 +20,7 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと�
 
 - **SEE** [m:Zlib::GzipReader.new], [m:Zlib::GzipWriter.new] 
 
-### def wrap(*args) {|gz| ... } -> ()
+### def Zlib::GzipFile.wrap(*args) {|gz| ... } -> ()
 
 直接使用しません。
 通常、具体的な読み書きをおこなうためには、
@@ -28,7 +28,7 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと�
 
 - **SEE** [m:Zlib::GzipReader.wrap],[m:Zlib::GzipWriter.wrap]
 
-### def open(*args) {|gz| ... } -> ()
+### def Zlib::GzipFile.open(*args) {|gz| ... } -> ()
 
 直接使用しません。
 通常、具体的な読み書きをおこなうためには、

@@ -10,7 +10,7 @@ YAML の AST のルートノードとなるオブジェクトのクラス。
 [c:Psych::Nodes::Document] オブジェクトでなければなりません。
 
 ## Class Methods
-### def new(encoding = Psych::Nodes::Stream::UTF8) -> Psych::Nodes::Stream
+### def Psych::Nodes::Stream.new(encoding = Psych::Nodes::Stream::UTF8) -> Psych::Nodes::Stream
 
 Psych::Nodes::Stream オブジェクトを生成して返します。
 

@@ -7,11 +7,11 @@ type: library
 
 ## Singleton Methods
 
-### def default_console_size -> [Integer, Integer]
+### def IO.default_console_size -> [Integer, Integer]
 
 デフォルトの端末のサイズを [rows, columns] で返します。
 
-### def console_size -> [Integer, Integer]
+### def IO.console_size -> [Integer, Integer]
 
 端末のサイズを [rows, columns] で返します。
 

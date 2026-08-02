@@ -8,7 +8,7 @@ library: webrick/httpservlet/filehandler
 
 ## Class Methods
 
-### def new(server, local_path) -> WEBrick::HTTPServlet::DefaultFileHandler
+### def WEBrick::HTTPServlet::DefaultFileHandler.new(server, local_path) -> WEBrick::HTTPServlet::DefaultFileHandler
 
 DefaultFileHandler サーブレットを生成します。ユーザが直接使うことはあま
 りありません。

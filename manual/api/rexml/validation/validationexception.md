@@ -2,5 +2,5 @@
 
 ## Class Methods
 
-### def new(msg)
+### def REXML::Validation::ValidationException.new(msg)
 #%todo

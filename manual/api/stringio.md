@@ -42,9 +42,9 @@ sio.write("a")
 
 ## Class Methods
 
-### def new(string = '', mode = 'r+')                 -> StringIO
-### def open(string = '', mode = 'r+')                -> StringIO
-### def open(string = '', mode = 'r+') {|io| ... }    -> object
+### def StringIO.new(string = '', mode = 'r+')                 -> StringIO
+### def StringIO.open(string = '', mode = 'r+')                -> StringIO
+### def StringIO.open(string = '', mode = 'r+') {|io| ... }    -> object
 
 StringIO オブジェクトを生成して返します。
 

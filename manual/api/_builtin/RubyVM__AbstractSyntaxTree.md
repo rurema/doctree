@@ -23,9 +23,9 @@ parser gem (<https://github.com/whitequark/parser>)や
 
 ## Singleton Methods
 
-### def of(proc) -> RubyVM::AbstractSyntaxTree::Node
+### def RubyVM::AbstractSyntaxTree.of(proc) -> RubyVM::AbstractSyntaxTree::Node
 #%since 3.2
-### def of(proc, keep_script_lines: false, error_tolerant: false, keep_tokens: false) -> RubyVM::AbstractSyntaxTree::Node
+### def RubyVM::AbstractSyntaxTree.of(proc, keep_script_lines: false, error_tolerant: false, keep_tokens: false) -> RubyVM::AbstractSyntaxTree::Node
 #%end
 
 引数 proc に渡したProcやメソッドオブジェクトの抽象構文木を返します。
@@ -72,9 +72,9 @@ pp RubyVM::AbstractSyntaxTree.of(method(:hello))
 #       (FCALL@6:2-6:21 :puts (LIST@6:7-6:21 (STR@6:7-6:21 "hello, world") nil)))
 ```
 
-### def parse(string) -> RubyVM::AbstractSyntaxTree::Node
+### def RubyVM::AbstractSyntaxTree.parse(string) -> RubyVM::AbstractSyntaxTree::Node
 #%since 3.2
-### def parse(string, keep_script_lines: false, error_tolerant: false, keep_tokens: false) -> RubyVM::AbstractSyntaxTree::Node
+### def RubyVM::AbstractSyntaxTree.parse(string, keep_script_lines: false, error_tolerant: false, keep_tokens: false) -> RubyVM::AbstractSyntaxTree::Node
 #%end
 
 文字列を抽象構文木にパースし、その木の根ノードを返します。
@@ -104,9 +104,9 @@ pp RubyVM::AbstractSyntaxTree.parse("x = 1; p(x; y=2", error_tolerant: true)
 #%end
 ```
 
-### def parse_file(pathname) -> RubyVM::AbstractSyntaxTree::Node
+### def RubyVM::AbstractSyntaxTree.parse_file(pathname) -> RubyVM::AbstractSyntaxTree::Node
 #%since 3.2
-### def parse_file(pathname, keep_script_lines: false, error_tolerant: false, keep_tokens: false) -> RubyVM::AbstractSyntaxTree::Node
+### def RubyVM::AbstractSyntaxTree.parse_file(pathname, keep_script_lines: false, error_tolerant: false, keep_tokens: false) -> RubyVM::AbstractSyntaxTree::Node
 #%end
 
 pathname のファイルを読み込み、その内容を抽象構文木にパースし、その木の根ノードを返します。

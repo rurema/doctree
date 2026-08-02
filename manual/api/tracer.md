@@ -71,12 +71,12 @@ Tracer.off
 
 ## Class Methods
 
-### def new
+### def Tracer.new
 
 自身を初期化します。
 
-### def on -> nil
-### def on {...}
+### def Tracer.on -> nil
+### def Tracer.on {...}
 
 トレース出力を開始します。
 ブロックを与えられた場合はそのブロック内のみトレース出力を行います。
@@ -97,15 +97,15 @@ t.test
 
 - **SEE** [m:Tracer.off]
 
-### def off -> nil
+### def Tracer.off -> nil
 
 トレース出力を中断します。
 トレース出力を開始するには、[m:Tracer.on]を使用します。
 
 - **SEE** [m:Tracer.on]
 
-### def set_get_line_procs(filename, proc)
-### def set_get_line_procs(filename) {|line| .... }
+### def Tracer.set_get_line_procs(filename, proc)
+### def Tracer.set_get_line_procs(filename) {|line| .... }
 
 あるファイルについて利用する、行番号からソースのその行の内容を返す
 手続きを指定します。何も指定しなければデフォルトの動作が利用されます。
@@ -140,8 +140,8 @@ end
 =end
 ```
 
-### def add_filter(proc)
-### def add_filter {|event, file, line, id, binding, klass| .... }
+### def Tracer.add_filter(proc)
+### def Tracer.add_filter {|event, file, line, id, binding, klass| .... }
 
 トレース出力するかどうかを決定するフィルタを追加します。
 何もフィルタを与えない場合はすべての行についてトレース情報が出力されます。
@@ -191,12 +191,12 @@ end
 - **`klass`**:
   現在呼び出されているメソッドのクラスオブジェクト。
 
-### def verbose -> bool
-### def verbose? -> bool
+### def Tracer.verbose -> bool
+### def Tracer.verbose? -> bool
 
 真ならばトレース出力の開始や終了を知らせます。
 
-### def verbose=(flag)
+### def Tracer.verbose=(flag)
 
 トレース出力の開始や終了を知らせる文字列("Trace on"または"Trace off")が必要なら真を設定します。
 
@@ -223,11 +223,11 @@ Hello#0:t5.rb:7:IO:<:   puts "Hello"
 Trace off
 ```
 
-### def stdout -> object
+### def Tracer.stdout -> object
 
 トレース出力先を参照します。
 
-### def stdout=(fp)
+### def Tracer.stdout=(fp)
 
 トレース出力先を変更します。
 
@@ -244,43 +244,43 @@ Tracer.on {
 fp.close
 ```
 
-### def display_c_call -> bool
-### def display_c_call? -> bool
+### def Tracer.display_c_call -> bool
+### def Tracer.display_c_call? -> bool
 
 真ならば、ビルトインメソッドの呼び出しを表示します。
 デフォルトは偽です。
 
-### def display_c_call=(flag)
+### def Tracer.display_c_call=(flag)
 
 ビルトインメソッドの呼び出しを表示するかどうかを設定します。
 
 - **param** `flag` -- ビルトインメソッドの呼び出しを表示するならば、真を指定します。
 
-### def display_process_id -> bool
-### def display_process_id? -> bool
+### def Tracer.display_process_id -> bool
+### def Tracer.display_process_id? -> bool
 
 真ならば、プロセス ID を表示します。
 デフォルトは、偽です。
 
-### def display_process_id=(flag)
+### def Tracer.display_process_id=(flag)
 
 プロセス ID を表示するかどうかを設定します。
 
 - **param** `flag` -- プロセス ID を表示するならば、真を指定します。
 
-### def display_thread_id -> bool
-### def display_thread_id? -> bool
+### def Tracer.display_thread_id -> bool
+### def Tracer.display_thread_id? -> bool
 
 真ならば、スレッド ID を表示します。
 デフォルトは、真です。
 
-### def display_thread_id=(flag)
+### def Tracer.display_thread_id=(flag)
 
 スレッド ID を表示するかどうかを設定します。
 
 - **param** `flag` -- スレッド ID を表示するならば、真を指定します。
 
-### def stdout_mutex -> Mutex
+### def Tracer.stdout_mutex -> Mutex
 #%todo
 
 ## Instance Methods

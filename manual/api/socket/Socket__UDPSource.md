@@ -7,7 +7,7 @@ since: "1.9.1"
 [m:Socket.udp_server_loop] で使われるアドレス情報を保持するクラスです。
 
 ## Class methods
-### def new(remote_addr, local_addr) {|msg| ... } -> Socket::UDPSource
+### def Socket::UDPSource.new(remote_addr, local_addr) {|msg| ... } -> Socket::UDPSource
 
 Socket::UDPSource オブジェクトを生成します。
 

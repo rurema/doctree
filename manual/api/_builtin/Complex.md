@@ -430,8 +430,8 @@ p Complex(-8, 6).to_c  # => (-8+6i)
 
 ## Class Methods
 
-### def rect(r, i = 0)        -> Complex
-### def rectangular(r, i = 0) -> Complex
+### def Complex.rect(r, i = 0)        -> Complex
+### def Complex.rectangular(r, i = 0) -> Complex
 
 実部が r、虚部が i である [c:Complex] クラスのオブジェクトを生成します。
 
@@ -447,7 +447,7 @@ p Complex.rectangular(1, 2) # => (1+2i)
 
 - **SEE** [m:Kernel?.Complex]
 
-### def polar(r, theta = 0) -> Complex
+### def Complex.polar(r, theta = 0) -> Complex
 
 絶対値が r、偏角が theta である [c:Complex] クラスのオブジェクトを生成します。
 

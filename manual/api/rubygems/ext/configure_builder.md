@@ -11,7 +11,7 @@ configure スクリプトを元に拡張ライブラリをビルドするクラ�
 
 ## Singleton Methods
 
-### def build(extension, directory, dest_path, results) -> Array
+### def Gem::Ext::ConfigureBuilder.build(extension, directory, dest_path, results) -> Array
 #%todo
 
 Makefile が存在しない場合は、configure スクリプトを実行して

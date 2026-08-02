@@ -149,7 +149,7 @@ Ruby スクリプト形式で .gemspec ファイルを作成します。
 
 ## Singleton Methods
 
-### def new(gem, options = {}) -> Gem::Installer
+### def Gem::Installer.new(gem, options = {}) -> Gem::Installer
 #%todo 書いてないオプションがいっぱいある
 
 与えられた引数で自身を初期化します。
@@ -183,34 +183,34 @@ Ruby スクリプト形式で .gemspec ファイルを作成します。
 
 - **raise** `Gem::FilePermissionError` -- 書き込み先のディレクトリに書き込み権限がない場合に発生します。
 
-### def exec_format -> String
+### def Gem::Installer.exec_format -> String
 
 実行ファイル名のフォーマットを返します。
 
 指定しない場合は ruby コマンドと同じフォーマットを使用します。
 
-### def exec_format=(format)
+### def Gem::Installer.exec_format=(format)
 
 実行ファイル名のフォーマットをセットします。
 
 - **param** `format` -- 実行ファイル名のフォーマットを指定します。
 
-### def home_install_warning -> bool
+### def Gem::Installer.home_install_warning -> bool
 
 この値が真の場合、ホームディレクトリに Gem をインストールしようとすると警告を表示します。
 
-### def home_install_warning=(flag)
+### def Gem::Installer.home_install_warning=(flag)
 
 ホームディレクトリに Gem をインストールしようとすると警告を表示するかどうかセットします。
 
 - **param** `flag` -- 真を指定するとホームディレクトリに Gem をインストールしよう
             とすると警告を表示するようになります。
 
-### def path_warning -> bool
+### def Gem::Installer.path_warning -> bool
 
 この値が 真の場合は Gem.bindir が PATH に含まれていない場合に警告を表示します。
 
-### def path_warning=(flag)
+### def Gem::Installer.path_warning=(flag)
 
 Gem.bindir が PATH に含まれていない場合に警告を表示するかどうかセットします。
 

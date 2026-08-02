@@ -15,7 +15,7 @@ SDBM ファイルをアクセスするクラス。
 
 ## Class Methods
 
-### def new(dbname, mode = 0666) -> SDBM
+### def SDBM.new(dbname, mode = 0666) -> SDBM
 
 dbname で指定したデータベースをモードを mode に設定してオープンします。
 
@@ -24,8 +24,8 @@ dbname で指定したデータベースをモードを mode に設定してオ�
 - **param** `mode` -- 省略値は 0666 です。mode として nil を指定するとデータベースが
             存在しない時には新たなデータベースを作らず nil を返します。
 
-### def open(dbname, mode = 0666) -> SDBM
-### def open(dbname, mode = 0666) {|db| ... } -> object
+### def SDBM.open(dbname, mode = 0666) -> SDBM
+### def SDBM.open(dbname, mode = 0666) {|db| ... } -> object
 
 dbname で指定したデータベースをモードを mode に設定してオープンします。
 

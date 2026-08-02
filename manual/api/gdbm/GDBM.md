@@ -13,7 +13,7 @@ GDBM ファイルをアクセスするクラス。
 
 ## Class Methods
 
-### def new(dbname, mode = 0666, flags = 0) -> GDBM
+### def GDBM.new(dbname, mode = 0666, flags = 0) -> GDBM
 
 dbname で指定したデータベースをモードを mode に設定してオープンします。
 
@@ -29,8 +29,8 @@ dbname で指定したデータベースをモードを mode に設定してオ�
              これらをどれも指定しなかった場合には、
              [m:GDBM::WRCREAT], [m:GDBM::WRITER], [m:GDBM::READER] の順で試します。
 
-### def open(dbname, mode = 0666, flags = 0) -> GDBM
-### def open(dbname, mode = 0666, flags = 0) {|db| ... } -> object
+### def GDBM.open(dbname, mode = 0666, flags = 0) -> GDBM
+### def GDBM.open(dbname, mode = 0666, flags = 0) {|db| ... } -> object
 
 dbname で指定したデータベースをモードを mode に設定してオープンします。
 

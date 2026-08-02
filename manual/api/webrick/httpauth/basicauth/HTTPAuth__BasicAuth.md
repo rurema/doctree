@@ -25,7 +25,7 @@ srv.start # http://127.0.0.1:10080/basic_auth
 
 ## Class Methods
 
-### def make_passwd(realm, user, pass) -> String
+### def WEBrick::HTTPAuth::BasicAuth.make_passwd(realm, user, pass) -> String
 
 pass をランダムなソルトで crypt した文字列を返します。
 
@@ -35,7 +35,7 @@ pass をランダムなソルトで crypt した文字列を返します。
 
 - **param** `pass` -- パスワードを指定します。
 
-### def new(config, default = Config::BasicAuth) -> WEBrick::HTTPAuth::BasicAuth
+### def WEBrick::HTTPAuth::BasicAuth.new(config, default = Config::BasicAuth) -> WEBrick::HTTPAuth::BasicAuth
 
 BasicAuth オブジェクトを生成します。config は設定を保存したハッシュです。
 

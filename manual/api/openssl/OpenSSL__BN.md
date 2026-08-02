@@ -11,7 +11,7 @@ OpenSSL内で利用される多倍長整数クラスです。
 
 ## Class Methods
 
-### def new(str, base=10) -> OpenSSL::BN
+### def OpenSSL::BN.new(str, base=10) -> OpenSSL::BN
 
 文字列を多倍長整数オブジェクト([c:OpenSSL::BN])を生成します。
 
@@ -57,13 +57,13 @@ p OpenSSL::BN.new(1209) # => 1209
 
 - **SEE** [m:OpenSSL::BN#to_s]
 
-### def new(bn) -> OpenSSL::BN
+### def OpenSSL::BN.new(bn) -> OpenSSL::BN
 
 [c:OpenSSL::BN] を複製して返します。
 
 - **param** `bn` -- 複製する [c:OpenSSL::BN] オブジェクト
 
-### def new(integer) -> OpenSSL::BN
+### def OpenSSL::BN.new(integer) -> OpenSSL::BN
 
 整数オブジェクト([c:Integer])から多倍長整数オブジェクト
 ([c:OpenSSL::BN])を生成します。
@@ -71,7 +71,7 @@ p OpenSSL::BN.new(1209) # => 1209
 - **param** `integer` -- 整数オブジェクト
 - **SEE** [m:Integer#to_bn]
 
-### def generate_prime(bits, safe=true, add=nil, rem=nil) -> OpenSSL::BN
+### def OpenSSL::BN.generate_prime(bits, safe=true, add=nil, rem=nil) -> OpenSSL::BN
 
 ランダム(擬似乱数的)な bits ビットの素数を返します。
 
@@ -90,7 +90,7 @@ add に整数を渡すと、 p % add == rem であるような
 - **param** `rem` -- 生成する素数の剰余の条件
 - **raise** `OpenSSL::BNError` -- 素数の生成に失敗した場合に発生します
 
-### def pseudo_rand(bits, fill=0, odd=false) -> OpenSSL::BN
+### def OpenSSL::BN.pseudo_rand(bits, fill=0, odd=false) -> OpenSSL::BN
 
 乱数を生成し、返します。
 
@@ -114,7 +114,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 - **raise** `OpenSSL::BNError` -- 乱数の生成に失敗した場合に発生します
 - **SEE** [m:OpenSSL::BN.rand], [m:OpenSSL::BN.pseudo_rand_range]
 
-### def pseudo_rand_range(range) -> OpenSSL::BN
+### def OpenSSL::BN.pseudo_rand_range(range) -> OpenSSL::BN
 
 乱数を 0 から range-1 までの間で生成し、返します。
 
@@ -124,7 +124,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 - **raise** `OpenSSL::BNError` -- 乱数の生成に失敗した場合に発生します
 - **SEE** [m:OpenSSL::BN.pseudo_rand], [m:OpenSSL::BN.rand_range]
 
-### def rand(bits, fill=0, odd=false) -> OpenSSL::BN
+### def OpenSSL::BN.rand(bits, fill=0, odd=false) -> OpenSSL::BN
 
 暗号論的に強い擬似乱数を生成し、返します。
 
@@ -144,7 +144,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 - **raise** `OpenSSL::BNError` -- 乱数の生成に失敗した場合に発生します
 - **SEE** [m:OpenSSL::BN.pseudo_rand], [m:OpenSSL::BN.rand_range]
 
-### def rand_range(range) -> OpenSSL::BN
+### def OpenSSL::BN.rand_range(range) -> OpenSSL::BN
 
 暗号論的に強い擬似乱数を 0 から range-1 までの間で生成し、返します。
 

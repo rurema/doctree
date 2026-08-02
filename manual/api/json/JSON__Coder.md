@@ -35,7 +35,7 @@ p MyApp::API_JSON_CODER.dump(t) # => "\"2025-01-21T08:41:44.286Z\""
 
 ## Singleton Methods
 
-### def new(options = nil) {|object| ... } -> JSON::Coder
+### def JSON::Coder.new(options = nil) {|object| ... } -> JSON::Coder
 
 自身を初期化します。
 

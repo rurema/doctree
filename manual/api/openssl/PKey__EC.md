@@ -9,7 +9,7 @@ EC(Ellicptic Curve,楕円曲線)暗号鍵のクラスです。
 の対応する関数の項を見てください。
 
 ## Class methods
-### def builtin_curves -> [[String, String]]
+### def OpenSSL::PKey::EC.builtin_curves -> [[String, String]]
 
 組み込みの曲線の名前と、それに対する説明を文字列の配列ペアの配列で返します。
 
@@ -26,8 +26,8 @@ p OpenSSL::PKey::EC.builtin_curves
 
 - **SEE** [m:OpenSSL::PKey::EC::Group.new]
 
-### def new -> OpenSSL::PKey::EC
-### def new(obj) -> OpenSSL::PKey::EC
+### def OpenSSL::PKey::EC.new -> OpenSSL::PKey::EC
+### def OpenSSL::PKey::EC.new(obj) -> OpenSSL::PKey::EC
 
 OpenSSL::PKey::EC オブジェクトを生成します。
 
@@ -220,8 +220,8 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
 楕円曲線暗号のパラメータとしての役割をはたします。
 
 ## Class methods
-### def new(obj) -> OpenSSL::PKey::EC::Group
-### def new(sym, p, a, b) -> OpenSSL::PKey::EC::Group
+### def OpenSSL::PKey::EC::Group.new(obj) -> OpenSSL::PKey::EC::Group
+### def OpenSSL::PKey::EC::Group.new(sym, p, a, b) -> OpenSSL::PKey::EC::Group
 
 楕円曲線から定義される群を表すオブジェクトを生成します。
 
@@ -384,9 +384,9 @@ seed を設定します。
 楕円曲線暗号の公開鍵となる曲線上の点を表します。
 
 ## Class methods
-### def new(point) -> OpenSSL::PKey::EC::Point
-### def new(group) -> OpenSSL::PKey::EC::Point
-### def new(group, bn) -> OpenSSL::PKey::EC::Point
+### def OpenSSL::PKey::EC::Point.new(point) -> OpenSSL::PKey::EC::Point
+### def OpenSSL::PKey::EC::Point.new(group) -> OpenSSL::PKey::EC::Point
+### def OpenSSL::PKey::EC::Point.new(group, bn) -> OpenSSL::PKey::EC::Point
 
 Point オブジェクトを生成します。
 

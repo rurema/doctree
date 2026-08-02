@@ -110,7 +110,7 @@ s.service(ARGV[0]).stop_service
 [c:DRb::ExtServ] で作られたサービスを管理するクラスです。
 
 ## Class Methods
-### def command -> { String => String|[String] }
+### def DRb::ExtServManager.command -> { String => String|[String] }
 
 サービスを起動するためのコマンドを指定するための [c:Hash] を
 返します。
@@ -125,7 +125,7 @@ Hash のキーがサービス名で、値がそのサービスを起動するた
 プロセスを起動する際に shell 経由で起動されます。
 文字列の配列で指定すると shell を経由せずに起動されます。
 
-### def command=(cmd)
+### def DRb::ExtServManager.command=(cmd)
 
 サービスを起動するためのコマンドを指定するための [c:Hash] を
 設定します。
@@ -133,7 +133,7 @@ Hash のキーがサービス名で、値がそのサービスを起動するた
 - **param** `cmd` -- コマンドを設定した Hash
 - **SEE** [m:DRb::ExtServManager.command]
 
-### def new -> DRb::ExtServManager
+### def DRb::ExtServManager.new -> DRb::ExtServManager
 
 DRb::ExtServManager オブジェクトを生成して返します。
 

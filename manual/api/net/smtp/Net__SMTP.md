@@ -9,7 +9,7 @@ SMTP のセッションを表現したクラスです。
 
 ## Singleton Methods
 
-### def new(address, port = Net::SMTP.default_port) -> Net::SMTP
+### def Net::SMTP.new(address, port = Net::SMTP.default_port) -> Net::SMTP
 
 新しい SMTP オブジェクトを生成します。
 address はSMTPサーバーのFQDNで、
@@ -25,10 +25,10 @@ port は接続するポート番号です。
 
 - **SEE** [m:Net::SMTP.start], [m:Net::SMTP#start]
 
-### def start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
-### def start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) {|smtp| ... } -> object
-### def start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
-### def start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
+### def Net::SMTP.start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
+### def Net::SMTP.start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) {|smtp| ... } -> object
+### def Net::SMTP.start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
+### def Net::SMTP.start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
 
 新しい SMTP オブジェクトを生成し、サーバに接続し、セッションを開始します。
 
@@ -75,20 +75,20 @@ Net::SMTP.start('smtp.example.com') {|smtp|
 
 - **SEE** [m:Net::SMTP#start], [m:Net::SMTP.new]
 
-### def default_port -> Integer
+### def Net::SMTP.default_port -> Integer
 
 SMTPのデフォルトのポート番号(25)を返します。
 
-### def default_submission_port -> Integer
+### def Net::SMTP.default_submission_port -> Integer
 
 デフォルトのサブミッションポート番号(587)を返します。
 
-### def default_ssl_context -> OpenSSL::SSL::SSLContext
+### def Net::SMTP.default_ssl_context -> OpenSSL::SSL::SSLContext
 
 SSL 通信に使われる SSL のコンテキストのデフォルト値を返します。
 
-### def default_tls_port -> Integer
-### def default_ssl_port -> Integer
+### def Net::SMTP.default_tls_port -> Integer
+### def Net::SMTP.default_ssl_port -> Integer
 
 デフォルトのSMTPSのポート番号(465)を返します。
 

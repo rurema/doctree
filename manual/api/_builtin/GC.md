@@ -176,7 +176,7 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
 
 ## Singleton Methods
 
-### def auto_compact -> bool
+### def GC.auto_compact -> bool
 
 auto compaction が有効化どうかを返します。
 
@@ -185,7 +185,7 @@ auto compaction が有効化どうかを返します。
 
 - **SEE** [m:GC.auto_compact=]
 
-### def auto_compact=(bool)
+### def GC.auto_compact=(bool)
 
 [m:GC.compact] をフルGCで行うかどうかを制御します。
 
@@ -202,8 +202,8 @@ true を設定するとフルGCのタイミングででヒープをコンパク�
 - **SEE** [m:GC.compact] [m:GC.auto_compact]
 
 #%since 3.4
-### def config -> {Symbol => object}
-### def config(hash) -> {Symbol => object}
+### def GC.config -> {Symbol => object}
+### def GC.config(hash) -> {Symbol => object}
 
 GC の設定を取得、変更します。
 
@@ -240,7 +240,7 @@ p GC.config # => {rgengc_allow_full_mark: false, implementation: "default"}
 
 #%end
 
-### def disable -> bool
+### def GC.disable -> bool
 
 ガーベージコレクトを禁止します。
 
@@ -254,7 +254,7 @@ p GC.disable # => true
 
 - **SEE** [m:GC.enable]
 
-### def enable -> bool
+### def GC.enable -> bool
 
 ガーベージコレクトを許可します。
 
@@ -269,7 +269,7 @@ p GC.enable  # => true
 p GC.enable  # => false
 ```
 
-### def start(full_mark: true, immediate_mark: true, immediate_sweep: true) -> nil
+### def GC.start(full_mark: true, immediate_mark: true, immediate_sweep: true) -> nil
 
 ガーベージコレクトを開始します。
 
@@ -297,7 +297,7 @@ p GC.start  # => nil
 p GC.count  # => 4
 ```
 
-### def stress -> bool
+### def GC.stress -> bool
 
 GCがストレスモードかどうかを返します。
 
@@ -305,7 +305,7 @@ GCがストレスモードかどうかを返します。
 
 - **SEE** [m:GC.stress=]
 
-### def stress=(value)
+### def GC.stress=(value)
 
 GCのストレスモードを引数 value に設定します。
 引数 value が真に設定されている間は、GC を行えるすべての機会に GC を行います。
@@ -330,7 +330,7 @@ GCのストレスモードを引数 value に設定します。
 
 - **SEE** [m:GC.stress]
 
-### def count -> Integer
+### def GC.count -> Integer
 
 プロセス開始からガーベージコレクトを実行した回数を [c:Integer] で返し
 ます。
@@ -339,8 +339,8 @@ GCのストレスモードを引数 value に設定します。
 p GC.count # => 3
 ```
 
-### def stat(result_hash = {}) -> {Symbol => Integer}
-### def stat(key) -> Numeric
+### def GC.stat(result_hash = {}) -> {Symbol => Integer}
+### def GC.stat(key) -> Numeric
 
 GC 内部の統計情報を [c:Hash] で返します。
 
@@ -392,11 +392,11 @@ p GC.stat
 本メソッドは C Ruby 以外では動作しません。
 
 #%since 3.2
-### def stat_heap                     -> {Integer => Hash}
-### def stat_heap(heap_id)            -> {Symbol => Integer}
-### def stat_heap(heap_id, key)       -> Integer
-### def stat_heap(heap_id, result_hash) -> {Symbol => Integer}
-### def stat_heap(nil, result_hash)   -> {Integer => Hash}
+### def GC.stat_heap                     -> {Integer => Hash}
+### def GC.stat_heap(heap_id)            -> {Symbol => Integer}
+### def GC.stat_heap(heap_id, key)       -> Integer
+### def GC.stat_heap(heap_id, result_hash) -> {Symbol => Integer}
+### def GC.stat_heap(nil, result_hash)   -> {Integer => Hash}
 
 サイズプールごとの GC の統計情報を [c:Hash] で返します。
 
@@ -427,8 +427,8 @@ p GC.stat_heap(0, :slot_size) # => 40
 - **SEE** [m:GC.stat]
 #%end
 
-### def latest_gc_info(result_hash = {}) -> Hash
-### def latest_gc_info(key)              -> object
+### def GC.latest_gc_info(result_hash = {}) -> Hash
+### def GC.latest_gc_info(key)              -> object
 
 最新のGCの情報を返します。
 
@@ -451,7 +451,7 @@ p GC.latest_gc_info(:gc_by)  # => :newobj
 ```
 
 #%since 3.1
-### def total_time -> Integer
+### def GC.total_time -> Integer
 
 プロセス開始から GC にかかった時間の合計をナノ秒で返します。
 
@@ -474,8 +474,8 @@ p GC.total_time         # => 937500  計測が無効なので増えない
 
 - **SEE** [m:GC.measure_total_time]
 
-### def measure_total_time -> bool
-### def measure_total_time=(flag)
+### def GC.measure_total_time -> bool
+### def GC.measure_total_time=(flag)
 
 GC にかかった時間を計測するかどうかを取得、設定します。
 既定では計測が有効です。
@@ -500,7 +500,7 @@ p GC.measure_total_time # => false
 - **SEE** [m:GC.total_time]
 #%end
 
-### def compact -> Hash
+### def GC.compact -> Hash
 
 ヒープをコンパクションします。
 
@@ -508,7 +508,7 @@ p GC.measure_total_time # => false
 
 - **SEE** [m:GC.verify_compaction_references]
 
-### def verify_compaction_references(toward: nil, double_heap: nil) -> Hash
+### def GC.verify_compaction_references(toward: nil, double_heap: nil) -> Hash
 
 コンパクションの参照の一貫性を検証します。
 
@@ -586,7 +586,7 @@ p GC::OPTS # => ["USE_RGENGC", "RGENGC_ESTIMATE_OLDMALLOC", "GC_ENABLE_LAZY_SWEE
 # この場合、GCデバッグ機能やプロファイル機能は無効化されている
 ```
 
-### def INTERNAL_CONSTANTS -> {Symbol => Integer}
+### const INTERNAL_CONSTANTS -> {Symbol => Integer}
 
 GC用内部定数の値を保持するハッシュテーブルです。
 

@@ -12,7 +12,7 @@ UNIVERSAL なタグを持つ ASN.1 値はこのクラスの2つのサブクラ�
 それ以外の値はこのクラスのインスタンスとして表現されます。
 
 ## Class Methods
-### def new(value, tag, tag_class) -> OpenSSL::ASN1::ASN1Data
+### def OpenSSL::ASN1::ASN1Data.new(value, tag, tag_class) -> OpenSSL::ASN1::ASN1Data
 
 ASN.1 値を表現する [c:OpenSSL::ASN1::ASN1Data] オブジェクトを
 生成します。

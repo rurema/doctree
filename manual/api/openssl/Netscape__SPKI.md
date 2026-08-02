@@ -7,8 +7,8 @@ Netscape SPKI、もしくは SPKAC(Signed Public Key And Challenge) と呼ばれ
 データフォーマットを扱うためのクラスです。
 
 ## Class Methods
-### def new() -> OpenSSL::Netscape::SPKI
-### def new(buf) -> OpenSSL::Netscape::SPKI
+### def OpenSSL::Netscape::SPKI.new() -> OpenSSL::Netscape::SPKI
+### def OpenSSL::Netscape::SPKI.new(buf) -> OpenSSL::Netscape::SPKI
 
 SPKI オブジェクトを生成します。
 

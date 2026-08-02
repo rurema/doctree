@@ -98,7 +98,7 @@ C 言語で記述されたソースコードから組み込みクラス/モジ�
 
 ## Class Methods
 
-### def new(top_level, file_name, body, options, stats) -> RDoc::Parser::C
+### def RDoc::Parser::C.new(top_level, file_name, body, options, stats) -> RDoc::Parser::C
 
 自身を初期化します。
 

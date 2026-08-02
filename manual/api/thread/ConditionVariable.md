@@ -135,7 +135,7 @@ recv Milk
 
 ## Class Methods
 
-### def new -> Thread::ConditionVariable
+### def Thread::ConditionVariable.new -> Thread::ConditionVariable
 
 状態変数を生成して返します。
 

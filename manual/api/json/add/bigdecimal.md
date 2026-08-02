@@ -8,7 +8,7 @@ require:
 # reopen BigDecimal
 ## Singleton Methods
 
-### def json_create(hash) -> BigDecimal
+### def BigDecimal.json_create(hash) -> BigDecimal
 
 JSON のオブジェクトから [c:BigDecimal] のオブジェクトを生成して返します。
 

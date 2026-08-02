@@ -13,7 +13,7 @@ require:
 
 ## Class Methods
 
-### def new(top_level, file_name, body, options, stats) -> RDoc::Parser::Simple
+### def RDoc::Parser::Simple.new(top_level, file_name, body, options, stats) -> RDoc::Parser::Simple
 
 自身を初期化します。
 

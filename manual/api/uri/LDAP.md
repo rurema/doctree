@@ -11,8 +11,8 @@ ldap://<host>/<dn>[?<attrs>[?<scope>[?<filter>[?<extensions>]]]]
 
 ## Class Methods
 
-### def build(ary)   -> URI::LDAP
-### def build(hash)  -> URI::LDAP
+### def URI::LDAP.build(ary)   -> URI::LDAP
+### def URI::LDAP.build(hash)  -> URI::LDAP
 
 引数で与えられた URI 構成要素から URI::LDAP オブジェクトを生成します。
 引数の正当性を検査します。
@@ -35,7 +35,7 @@ p URI::LDAP.build(["example.com", "1", "/a", "b", "c", "d", "e=f"]).to_s
 #=> "ldap://example.com:1/a?b?c?d?e=f"
 ```
 
-### def new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)   -> URI::LDAP
+### def URI::LDAP.new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)   -> URI::LDAP
 
 汎用的な構成要素から URI::LDAP オブジェクトを生成します。
 build と異なり、デフォルトでは引数の正当性を検査しません。

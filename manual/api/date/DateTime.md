@@ -26,8 +26,8 @@ yesterday = DateTime.now - 1
 
 ## Class Methods
 
-### def civil(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
-### def new(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
+### def DateTime.civil(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
+### def DateTime.new(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 
 暦日付に相当する日時オブジェクトを生成します。
 
@@ -44,7 +44,7 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 - **raise** `ArgumentError` -- 正しくない日時
 
-### def commercial(cwyear = -4712, cweek = 1, cwday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
+### def DateTime.commercial(cwyear = -4712, cweek = 1, cwday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 
 暦週日付に相当する日時オブジェクトを生成します。
 
@@ -61,7 +61,7 @@ yesterday = DateTime.now - 1
 - **raise** `ArgumentError` -- 正しくない日時
 
 #%# exp
-### def httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> DateTime
+### def DateTime.httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> DateTime
 
 [RFC:2616] で定められた書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -72,7 +72,7 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #%# exp
-### def iso8601(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
+### def DateTime.iso8601(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 
 いくつかの代表的な ISO 8601 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -84,7 +84,7 @@ yesterday = DateTime.now - 1
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-### def jd(jd = 0, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
+### def DateTime.jd(jd = 0, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 
 ユリウス日に相当する日時オブジェクトを生成します。
 
@@ -99,7 +99,7 @@ yesterday = DateTime.now - 1
 - **raise** `ArgumentError` -- 正しくない日時
 
 #%# exp
-### def jisx0301(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
+### def DateTime.jisx0301(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 
 いくつかの代表的な JIS X 0301 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -109,13 +109,13 @@ yesterday = DateTime.now - 1
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-### def now(start = Date::ITALY) -> DateTime
+### def DateTime.now(start = Date::ITALY) -> DateTime
 
 現在の時刻に相当する日時オブジェクトを生成します。
 
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-### def ordinal(year = -4712, yday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
+### def DateTime.ordinal(year = -4712, yday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 
 年日付に相当する日時オブジェクトを生成します。
 
@@ -131,8 +131,8 @@ yesterday = DateTime.now - 1
 - **raise** `ArgumentError` -- 正しくない日時
 
 #%# exp
-### def rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
-### def rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
+### def DateTime.rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
+### def DateTime.rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
 
 [RFC:2822] で定められた書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -143,7 +143,7 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #%# exp
-### def rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
+### def DateTime.rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 
 [RFC:3339] 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -153,7 +153,7 @@ yesterday = DateTime.now - 1
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-### def today(start = Date::ITALY) -> Date
+### def DateTime.today(start = Date::ITALY) -> Date
 
 このクラスでは利用できません。
 
@@ -162,7 +162,7 @@ yesterday = DateTime.now - 1
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #%# exp
-### def xmlschema(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
+### def DateTime.xmlschema(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 
 XML Schema による書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
@@ -172,7 +172,7 @@ XML Schema による書式の日付を解析し、
 - **param** `str` -- 日付をあらわす文字列
 - **param** `start` -- グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-### def parse(str = '-4712-01-01T00:00:00+00:00', complete = true, start = Date::ITALY) -> DateTime
+### def DateTime.parse(str = '-4712-01-01T00:00:00+00:00', complete = true, start = Date::ITALY) -> DateTime
 
 与えられた日時表現を解析し、
 その情報に基づいて DateTime オブジェクトを生成します。
@@ -194,7 +194,7 @@ p DateTime.parse('2001-02-03T12:13:14Z').to_s
 
 - **SEE** [m:Date._parse], [m:Date.parse]
 
-### def _strptime(str, format = '%FT%T%z') -> Hash
+### def DateTime._strptime(str, format = '%FT%T%z') -> Hash
 
 与えられた雛型で日時表現を解析し、その情報に基づいてハッシュを生成します。
 
@@ -211,7 +211,7 @@ p DateTime._strptime('2001-02-03T12:13:14Z')
 
 - **SEE** [m:Date._strptime], [m:DateTime.strptime]
 
-### def strptime(str = '-4712-01-01T00:00:00+00:00', format = '%FT%T%z', start = Date::ITALY) -> DateTime
+### def DateTime.strptime(str = '-4712-01-01T00:00:00+00:00', format = '%FT%T%z', start = Date::ITALY) -> DateTime
 
 与えられた雛型で日時表現を解析し、
 その情報に基づいて DateTime オブジェクトを生成します。

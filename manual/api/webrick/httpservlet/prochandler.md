@@ -14,7 +14,7 @@ require:
 
 ## Class Methods
 
-### def new(proc) -> WEBrick::HTTPServlet::ProcHandler
+### def WEBrick::HTTPServlet::ProcHandler.new(proc) -> WEBrick::HTTPServlet::ProcHandler
 
 自身を初期化します。
 

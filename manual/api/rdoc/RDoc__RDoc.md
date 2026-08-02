@@ -37,7 +37,7 @@ doc 以下に出力します。
 
 ## Class Methods
 
-### def add_generator(klass) -> klass
+### def RDoc::RDoc.add_generator(klass) -> klass
 
 引数 klass で指定したクラスをジェネレータとして登録します。
 

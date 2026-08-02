@@ -42,14 +42,14 @@ f.content_at(1)
 
 ## Singleton Methods
 
-### def debug -> bool
+### def Forwardable.debug -> bool
 
 委譲部分をバックトレースに含めるかどうかの状態を返します。
 
 バックトレースを含める設定となっている時、真を返します。
 デフォルトは含めない設定となっています。
 
-### def debug= -> bool
+### def Forwardable.debug= -> bool
 
 委譲部分をバックトレースに含めるかどうかの状態を設定します。
 

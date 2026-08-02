@@ -169,7 +169,7 @@ pp Coverage.result
 
 ## Class Methods
 
-### def start(option = {})  -> nil
+### def Coverage.start(option = {})  -> nil
 
 カバレッジの測定を開始します。既に実行されていた場合には何も起こりません。
 ただし、カバレッジ計測中に測定対象を変更しようとした場合は、RuntimeError となります。
@@ -209,7 +209,7 @@ bool(0)
 pp Coverage.result  #=> {"bool.rb"=>{:methods=>{[Object, :bool, 1, 0, 7, 3]=>1}}}
 ```
 
-### def result(stop: true, clear: true)  -> Hash
+### def Coverage.result(stop: true, clear: true)  -> Hash
 
 対象ファイル名をキー、測定結果を値したハッシュを返します。
 測定結果の詳細は、[lib:coverage] ライブラリ を参照してください。
@@ -260,7 +260,7 @@ p Coverage.result(clear: true, stop: false)  #=> {"bool.rb"=>{:oneshot_lines=>[5
 
 - **SEE** [m:Coverage.peek_result]
 
-### def peek_result -> Hash
+### def Coverage.peek_result -> Hash
 
 測定を止めることなく、測定中のその時の結果をハッシュで返します。
 測定結果の詳細は、[lib:coverage] ライブラリ を参照してください。
@@ -299,7 +299,7 @@ p Coverage.peek_result  #=> {"bool.rb"=>[1, 2, 1, nil, 1, nil, nil]}
 
 - **SEE** [m:Coverage.result]
 
-### def running? -> bool
+### def Coverage.running? -> bool
 
 カバレッジ測定中かどうかを返します。カバレッジの測定中とは、Coverage.start の
 呼び出し後から Coverage.result の呼び出し前です。
@@ -315,7 +315,7 @@ p Coverage.result      #=> {}
 p Coverage.running?    #=> false
 ```
 
-### def line_stub(file)  -> Array
+### def Coverage.line_stub(file)  -> Array
 
 行カバレッジの配列のスタブを返します。
 

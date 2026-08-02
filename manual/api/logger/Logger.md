@@ -9,7 +9,7 @@ include:
 
 ## Class Methods
 
-### def new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: Formatter.new, datetime_format: nil, binmode: false, shift_period_suffix: '%Y%m%d', reraise_write_errors: [], skip_header: false) -> Logger
+### def Logger.new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: Formatter.new, datetime_format: nil, binmode: false, shift_period_suffix: '%Y%m%d', reraise_write_errors: [], skip_header: false) -> Logger
 
 Logger オブジェクトを生成します。
 

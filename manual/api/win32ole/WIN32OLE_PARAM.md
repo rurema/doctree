@@ -26,7 +26,7 @@ puts param1.name # => Filename
 
 ## Class Methods
 
-### def new(ole_method,  index) -> WIN32OLE_PARAM
+### def WIN32OLE_PARAM.new(ole_method,  index) -> WIN32OLE_PARAM
 
 メソッドとパラメータ位置を指定してWIN32OLE_PARAMのインスタンスを作成します。
 

@@ -20,7 +20,7 @@
 
 ## Class Methods
 
-### def new(event_type, event_arg = nil)
+### def REXML::Validation::Event.new(event_type, event_arg = nil)
 #%todo
 
 ## Instance Methods

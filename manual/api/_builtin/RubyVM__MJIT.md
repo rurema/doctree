@@ -21,13 +21,13 @@ MJIT は Ruby 3.3 で削除され、このモジュールも同時に削除さ�
 
 ## Singleton Methods
 
-### def enabled? -> bool
+### def RubyVM::MJIT.enabled? -> bool
 
 JIT が有効かどうかを返します。
 
 - **SEE** [m:RubyVM::MJIT.pause], [m:RubyVM::MJIT.resume]
 
-### def pause(wait: true) -> bool
+### def RubyVM::MJIT.pause(wait: true) -> bool
 
 MJIT を一時停止します。
 
@@ -37,7 +37,7 @@ MJIT を一時停止します。
 
 - **SEE** [m:RubyVM::MJIT.enabled?], [m:RubyVM::MJIT.resume]
 
-### def resume -> bool
+### def RubyVM::MJIT.resume -> bool
 
 [m:RubyVM::MJIT.pause] で一時停止した JIT を再開します。
 

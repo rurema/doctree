@@ -30,16 +30,16 @@ s.close
 ## Class Methods
 
 #%version 4.0...
-### def open(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, open_timeout: nil, fast_fallback: true) -> TCPSocket
-### def new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, open_timeout: nil, fast_fallback: true) -> TCPSocket
+### def TCPSocket.open(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, open_timeout: nil, fast_fallback: true) -> TCPSocket
+### def TCPSocket.new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, open_timeout: nil, fast_fallback: true) -> TCPSocket
 #%end
 #%version 3.4...4.0
-### def open(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, fast_fallback: true) -> TCPSocket
-### def new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, fast_fallback: true) -> TCPSocket
+### def TCPSocket.open(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, fast_fallback: true) -> TCPSocket
+### def TCPSocket.new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, fast_fallback: true) -> TCPSocket
 #%end
 #%until 3.4
-### def open(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil) -> TCPSocket
-### def new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil) -> TCPSocket
+### def TCPSocket.open(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil) -> TCPSocket
+### def TCPSocket.new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil) -> TCPSocket
 #%end
 
 host で指定したホストの service で指定したポートと接続したソケッ
@@ -67,7 +67,7 @@ host で指定したホストの service で指定したポートと接続した
 - **param** `fast_fallback` -- Happy Eyeballs Version 2 ([RFC 8305](https://datatracker.ietf.org/doc/html/rfc8305)) を有効にします。
 #%end
 
-### def gethostbyname(host) -> Array
+### def TCPSocket.gethostbyname(host) -> Array
 
 このメソッドは deprecated です。[m:Addrinfo.getaddrinfo] を使用してください。
 

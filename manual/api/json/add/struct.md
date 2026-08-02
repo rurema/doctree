@@ -6,7 +6,7 @@ type: library
 # reopen Struct
 ## Singleton Methods
 
-### def json_create(hash) -> Struct
+### def Struct.json_create(hash) -> Struct
 
 JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 

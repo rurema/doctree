@@ -20,6 +20,6 @@ RDoc 形式のドキュメントを HTML に整形するクラスです。
 
 ## Class Methods
 
-### def new -> RDoc::Markup::ToHtml
+### def RDoc::Markup::ToHtml.new -> RDoc::Markup::ToHtml
 
 自身を初期化します。

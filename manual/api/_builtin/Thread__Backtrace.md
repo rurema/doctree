@@ -13,7 +13,7 @@ library: _builtin
 #%since 3.1
 ## Class Methods
 
-### def limit -> Integer
+### def Thread::Backtrace.limit -> Integer
 
 コマンドラインオプション `--backtrace-limit` で指定された、
 バックトレースを表示する行数の上限を返します。

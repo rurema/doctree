@@ -44,7 +44,7 @@ String オブジェクトとして返します。
 
 ## Class Methods
 
-### def new -> ()
+### def Zlib::ZStream.new -> ()
 
 直接使用しません。
 通常、具体的な圧縮/展開を行う場合は、

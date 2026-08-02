@@ -14,7 +14,7 @@ irb 中でコマンドを拡張するクラスのベースになるクラスで�
 
 ## Class Methods
 
-### def execute(conf, *opts) -> ()
+### def IRB::ExtendCommand::Nop.execute(conf, *opts) -> ()
 
 コマンドを実行します。ユーザが直接使用するものではありません。
 
@@ -22,7 +22,7 @@ irb 中でコマンドを拡張するクラスのベースになるクラスで�
 
 - **param** `opts` -- irb 中でコマンドに渡す引数を指定します。
 
-### def new(conf) -> IRB::ExtendCommand::Nop
+### def IRB::ExtendCommand::Nop.new(conf) -> IRB::ExtendCommand::Nop
 
 自身を初期化します。ユーザが直接使用するものではありません。
 

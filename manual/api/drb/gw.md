@@ -103,7 +103,7 @@ drb 通信中継のためのゲートウェイです。
 
 ## Class Methods
 
-### def new -> DRb::GW
+### def DRb::GW.new -> DRb::GW
 
 新たな GW オブジェクトを生成します。
 

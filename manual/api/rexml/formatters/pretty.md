@@ -28,7 +28,7 @@ p output.string
 ```
 
 ## Class Method
-### def new(indentation=2, ie_hack=false) -> REXML::Formatter::Pretty
+### def REXML::Formatters::Pretty.new(indentation=2, ie_hack=false) -> REXML::Formatter::Pretty
 
 フォーマッタオブジェクトを生成して返します。
 

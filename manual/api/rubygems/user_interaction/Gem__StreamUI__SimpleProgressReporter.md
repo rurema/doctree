@@ -7,7 +7,7 @@ library: rubygems/user_interaction
 
 ## Singleton Methods
 
-### def new(out_stream, size, initial_message, terminal_message = nil)
+### def Gem::StreamUI::SimpleProgressReporter.new(out_stream, size, initial_message, terminal_message = nil)
 
 このクラスを初期化します。
 

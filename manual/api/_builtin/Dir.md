@@ -9,9 +9,9 @@ include:
 
 ## Class Methods
 
-### def [](*pattern, base: nil, sort: true)                            -> [String]
-### def glob(pattern, flags = 0, base: nil, sort: true)                -> [String]
-### def glob(pattern, flags = 0, base: nil, sort: true) {|file| ...}   -> nil
+### def Dir.[](*pattern, base: nil, sort: true)                            -> [String]
+### def Dir.glob(pattern, flags = 0, base: nil, sort: true)                -> [String]
+### def Dir.glob(pattern, flags = 0, base: nil, sort: true) {|file| ...}   -> nil
 
 ワイルドカードの展開を行い、
 パターンにマッチするファイル名を文字列の配列として返します。
@@ -105,10 +105,10 @@ p Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
                                       #    "song/karaoke.rb"]
   ```
 
-### def chdir           -> 0
-### def chdir(path)     -> 0
-### def chdir {|path| ... }          -> object
-### def chdir(path) {|path| ... }    -> object
+### def Dir.chdir           -> 0
+### def Dir.chdir(path)     -> 0
+### def Dir.chdir {|path| ... }          -> object
+### def Dir.chdir(path) {|path| ... }    -> object
 
 カレントディレクトリを path に変更します。
 
@@ -140,8 +140,8 @@ p Dir.chdir("~/.ssh")        # => Errno::ENOENT
 #%end
 
 #%since 3.3
-### def fchdir(fd)    -> 0
-### def fchdir(fd) { ... }    -> object
+### def Dir.fchdir(fd)    -> 0
+### def Dir.fchdir(fd) { ... }    -> object
 
 カレントディレクトリを、整数のファイルディスクリプタ fd が指す
 ディレクトリに変更します。
@@ -172,7 +172,7 @@ p Dir.pwd            # => "/usr"
 - **SEE** [m:Dir.chdir], [m:Dir#fileno], [m:Dir.for_fd]
 #%end
 
-### def chroot(path)    -> 0
+### def Dir.chroot(path)    -> 0
 
 ルートディレクトリを path に変更します。
 
@@ -192,9 +192,9 @@ p Dir.glob("/*")  #=> ["/file1", "/file2]
 
 - **SEE** <http://opengroup.org/onlinepubs/007908799/xsh/chroot.html>
 
-### def delete(path)    -> 0
-### def rmdir(path)     -> 0
-### def unlink(path)    -> 0
+### def Dir.delete(path)    -> 0
+### def Dir.rmdir(path)     -> 0
+### def Dir.unlink(path)    -> 0
 
 ディレクトリを削除します。ディレクトリは空でなければいけませ
 ん。ディレクトリの削除に成功すれば 0 を返します。
@@ -207,8 +207,8 @@ p Dir.glob("/*")  #=> ["/file1", "/file2]
 Dir.delete("/tmp/hoge-jbrYBh.tmp")
 ```
 
-### def entries(path)                                        -> [String]
-### def entries(path, encoding: Encoding.find("filesystem")) -> [String]
+### def Dir.entries(path)                                        -> [String]
+### def Dir.entries(path, encoding: Encoding.find("filesystem")) -> [String]
 
 ディレクトリ path に含まれるファイルエントリ名の
 配列を返します。
@@ -228,8 +228,8 @@ p Dir.entries('.') #=> [".", "..", "bar", "foo"]
 - **SEE** [m:Dir.foreach]
 - **SEE** [m:Dir.children]
 
-### def children(path)                -> [String]
-### def children(path, encoding: enc) -> [String]
+### def Dir.children(path)                -> [String]
+### def Dir.children(path, encoding: enc) -> [String]
 
 ディレクトリ path に含まれるファイルエントリ名のうち、
 "." と ".." をのぞいた配列を返します。
@@ -250,10 +250,10 @@ p Dir.children('.') #=> ["bar", "foo"]
 - **SEE** [m:Dir.each_child]
 - **SEE** [m:Dir.entries]
 
-### def foreach(path) {|file| ...}                                        -> nil
-### def foreach(path, encoding: Encoding.find("filesystem")) {|file| ...} -> nil
-### def foreach(path)                                                     -> Enumerator
-### def foreach(path, encoding: Encoding.find("filesystem"))              -> Enumerator
+### def Dir.foreach(path) {|file| ...}                                        -> nil
+### def Dir.foreach(path, encoding: Encoding.find("filesystem")) {|file| ...} -> nil
+### def Dir.foreach(path)                                                     -> Enumerator
+### def Dir.foreach(path, encoding: Encoding.find("filesystem"))              -> Enumerator
 
 ディレクトリ path の各エントリを表す文字列を引数として、ブロックを評価します。
 
@@ -281,10 +281,10 @@ Dir.foreach('.'){|f|
 - **SEE** [m:Dir.entries]
 - **SEE** [m:Dir.each_child]
 
-### def each_child(path) {|file| ...}                -> nil
-### def each_child(path, encoding: enc) {|file| ...} -> nil
-### def each_child(path)                             -> Enumerator
-### def each_child(path, encoding: enc)              -> Enumerator
+### def Dir.each_child(path) {|file| ...}                -> nil
+### def Dir.each_child(path, encoding: enc) {|file| ...} -> nil
+### def Dir.each_child(path)                             -> Enumerator
+### def Dir.each_child(path, encoding: enc)              -> Enumerator
 
 ディレクトリ path の "." と ".." をのぞく各エントリを表す文字列を引数として、
 ブロックを評価します。
@@ -312,8 +312,8 @@ Dir.each_child('.'){|f|
 - **SEE** [m:Dir.children]
 - **SEE** [m:Dir#each_child]
 
-### def getwd    -> String
-### def pwd      -> String
+### def Dir.getwd    -> String
+### def Dir.pwd      -> String
 
 カレントディレクトリのフルパスを文字列で返します。
 
@@ -324,7 +324,7 @@ p Dir.chdir("/tmp") #=> 0
 p Dir.getwd         #=> "/tmp"
 ```
 
-### def mkdir(path, mode = 0777)    -> 0
+### def Dir.mkdir(path, mode = 0777)    -> 0
 
 path で指定された新しいディレクトリを作ります。パーミッションは
 mode で指定された値に umask をかけた値 (mode & ~umask) になります。
@@ -345,12 +345,12 @@ p "%#o" % (07777 & File.stat('t').mode)  #=> "0664"
 
 - **SEE** [m:FileUtils?.makedirs]
 
-### def new(path)                                                      -> Dir
-### def new(path, encoding: Encoding.find("filesystem"))               -> Dir
-### def open(path)                                                     -> Dir
-### def open(path, encoding: Encoding.find("filesystem"))              -> Dir
-### def open(path) {|dir| ...}                                         -> object
-### def open(path, encoding: Encoding.find("filesystem")) {|dir| ...}  -> object
+### def Dir.new(path)                                                      -> Dir
+### def Dir.new(path, encoding: Encoding.find("filesystem"))               -> Dir
+### def Dir.open(path)                                                     -> Dir
+### def Dir.open(path, encoding: Encoding.find("filesystem"))              -> Dir
+### def Dir.open(path) {|dir| ...}                                         -> object
+### def Dir.open(path, encoding: Encoding.find("filesystem")) {|dir| ...}  -> object
 
 path に対するディレクトリストリームをオープンして返します。
 
@@ -400,7 +400,7 @@ end
 ```
 
 #%since 3.3
-### def for_fd(fd)    -> Dir
+### def Dir.for_fd(fd)    -> Dir
 
 整数のディレクトリファイルディスクリプタ fd が指すディレクトリを表す、
 新しい [c:Dir] オブジェクトを返します。
@@ -431,7 +431,7 @@ end
 - **SEE** [m:Dir#fileno], [m:Dir#path], [m:Dir.fchdir]
 #%end
 
-### def exist?(file_name)    -> bool
+### def Dir.exist?(file_name)    -> bool
 
 file_name で与えられたディレクトリが存在する場合に真を返します。
 そうでない場合は、偽を返します。
@@ -446,13 +446,13 @@ p File.directory?(".") # => true
 - **SEE** [m:File.directory?]
 
 #%until 3.2
-### def exists?(file_name)    -> bool
+### def Dir.exists?(file_name)    -> bool
 {: since="1.9.1"}
 
 このメソッドは Ruby 2.1 から deprecated です。[m:Dir.exist?] を使用してください。
 #%end
-### def home          -> String | nil
-### def home(user)    -> String | nil
+### def Dir.home          -> String | nil
+### def Dir.home(user)    -> String | nil
 
 現在のユーザまたは指定されたユーザのホームディレクトリを返します。
 
@@ -467,7 +467,7 @@ p Dir.home("root")  # => "/root"
 
 - **SEE** [m:File.expand_path]
 
-### def empty?(path_name)    -> bool
+### def Dir.empty?(path_name)    -> bool
 
 path_name で与えられたディレクトリが空の場合に真を返します。
 ディレクトリでない場合や空でない場合に偽を返します。

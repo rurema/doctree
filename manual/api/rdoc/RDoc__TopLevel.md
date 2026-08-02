@@ -8,24 +8,24 @@ library:
 
 ## Class Methods
 
-### def all_classes_and_modules -> [RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule]
+### def RDoc::TopLevel.all_classes_and_modules -> [RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule]
 
 RDoc が収集したクラス、モジュールを配列で返します。
 
-### def find_class_named(name) -> RDoc::NormalClass | RDoc::SingleClass | nil
+### def RDoc::TopLevel.find_class_named(name) -> RDoc::NormalClass | RDoc::SingleClass | nil
 
 RDoc が収集したクラスの内、name で指定した名前のクラスを返します。見つ
 からなかった場合は nil を返します。
 
 - **param** `name` -- クラス名を文字列で指定します。
 
-### def new(file_name) -> RDoc::TopLevel
+### def RDoc::TopLevel.new(file_name) -> RDoc::TopLevel
 
 自身を初期化します。
 
 - **param** `file_name` -- ファイル名を文字列で指定します。
 
-### def reset -> ()
+### def RDoc::TopLevel.reset -> ()
 
 RDoc が収集した [c:RDoc::TopLevel] の情報(クラス、モジュール、ファイ
 ル)をクリアします。

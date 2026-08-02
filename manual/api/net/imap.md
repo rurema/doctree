@@ -212,8 +212,8 @@ IMAP 接続を表現するクラスです。
 
 ## Class Methods
 
-### def new(host, port = 143, usessl = false, certs = nil, verify = true) -> Net::IMAP
-### def new(host, options) -> Net::IMAP
+### def Net::IMAP.new(host, port = 143, usessl = false, certs = nil, verify = true) -> Net::IMAP
+### def Net::IMAP.new(host, options) -> Net::IMAP
 
 新たな Net::IMAP オブジェクトを生成し、指定したホストの
 指定したポートに接続し、接続語の IMAP オブジェクトを返します。
@@ -252,13 +252,13 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
 - **param** `verify` -- 真で接続先を検証する
 - **param** `options` -- 各種接続パラメータのハッシュ
 
-### def debug -> bool
+### def Net::IMAP.debug -> bool
 
 デバッグモードが on になっていれば真を返します。
 
 - **SEE** [m:Net::IMAP.debug=]
 
-### def debug=(val)
+### def Net::IMAP.debug=(val)
 
 デバッグモードの on/off をします。
 
@@ -267,7 +267,7 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
 - **param** `val` -- 設定するデバッグモードの on/off の真偽値
 - **SEE** [m:Net::IMAP.debug]
 
-### def add_authenticator(auth_type, authenticator) -> ()
+### def Net::IMAP.add_authenticator(auth_type, authenticator) -> ()
 
 [m:Net::IMAP#authenticate] で使う 
 認証用クラスを設定します。
@@ -281,7 +281,7 @@ Net::IMAP::LoginAuthenticator などを参考にしてください。
 - **param** `auth_type` -- 認証の種類(文字列)
 - **param** `authenticator` -- 認証クラス(Class オブジェクト)
 
-### def decode_utf7(str) -> String
+### def Net::IMAP.decode_utf7(str) -> String
 
 modified UTF-7 の文字列を UTF-8 の文字列に変換します。
 
@@ -296,7 +296,7 @@ Net::IMAP ではメールボックス名のエンコードを自動的変換「�
 - **param** `str` -- 変換対象の modified UTF-7 でエンコードされた文字列
 - **SEE** [m:Net::IMAP.encode_utf7]
 
-### def encode_utf7(str) -> String
+### def Net::IMAP.encode_utf7(str) -> String
 
 UTF-8 の文字列を modified UTF-7 の文字列に変換します。
 
@@ -308,7 +308,7 @@ UTF-7 を修正したものです。
 - **param** `str` -- 変換対象の UTF-8 でエンコードされた文字列
 - **SEE** [m:Net::IMAP.decode_utf7]
 
-### def format_date(time) -> String
+### def Net::IMAP.format_date(time) -> String
 
 時刻オブジェクトを IMAP の日付フォーマットでの文字列に変換します。
 
@@ -321,7 +321,7 @@ p Net::IMAP.format_date(Time.new(2011, 6, 20))
 
 - **param** `time` -- 変換する時刻オブジェクト
 
-### def format_datetime(time) -> String
+### def Net::IMAP.format_datetime(time) -> String
 
 時刻オブジェクトを IMAP の日付時刻フォーマットでの文字列に変換します
 
@@ -334,7 +334,7 @@ p Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
 
 - **param** `time` -- 変換する時刻オブジェクト
 
-### def max_flag_count -> Integer
+### def Net::IMAP.max_flag_count -> Integer
 
 サーバからのレスポンスに含まれる flag の上限を返します。
 
@@ -343,7 +343,7 @@ p Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
 
 - **SEE** [m:Net::IMAP.max_flag_count=]
 
-### def max_flag_count=(count)
+### def Net::IMAP.max_flag_count=(count)
 
 サーバからのレスポンスに含まれる flag の上限を設定します。
 
@@ -355,16 +355,16 @@ p Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
 - **param** `count` -- 設定する最大値の整数
 - **SEE** [m:Net::IMAP.max_flag_count]
 
-### def default_port -> Integer
-### def default_imap_port -> Integer
+### def Net::IMAP.default_port -> Integer
+### def Net::IMAP.default_imap_port -> Integer
 
 デフォルトの IMAP のポート番号(143)を返します。
 
 - **SEE** [m:Net::IMAP.default_tls_port]
 
-### def default_tls_port -> Integer
-### def default_imaps_port -> Integer
-### def default_ssl_port -> Integer
+### def Net::IMAP.default_tls_port -> Integer
+### def Net::IMAP.default_imaps_port -> Integer
+### def Net::IMAP.default_ssl_port -> Integer
 
 デフォルトの IMAPS のポート番号(993)を返します。
 

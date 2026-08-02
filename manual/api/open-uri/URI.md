@@ -6,8 +6,8 @@ since: "2.5.0"
 
 ## Class Methods
 
-### def open(name, mode = 'r', perm = nil, options = {})                -> StringIO | Tempfile | IO
-### def open(name, mode = 'r', perm = nil, options = {}) {|ouri| ...}   -> object
+### def URI.open(name, mode = 'r', perm = nil, options = {})                -> StringIO | Tempfile | IO
+### def URI.open(name, mode = 'r', perm = nil, options = {}) {|ouri| ...}   -> object
 
 name が http:// や https://、ftp:// で始まっている文字列なら URI のリソースを
 取得した上で [c:StringIO] オブジェクトまたは [c:Tempfile] オブジェクトとして返します。

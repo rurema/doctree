@@ -8,10 +8,10 @@ include:
 
 ## Class Methods
 
-### def new(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
-### def new(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) {|reg| ... }
-### def open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
-### def open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) {|reg| ... }
+### def Win32::Registry.new(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
+### def Win32::Registry.new(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) {|reg| ... }
+### def Win32::Registry.open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
+### def Win32::Registry.open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) {|reg| ... }
 #%todo
 
 レジストリキー key 下のキー subkey を開き、
@@ -26,8 +26,8 @@ desired はアクセスマスクです。opt はキーのオプションです�
 
 ブロックが与えられると、キーは自動的に閉じられます。
 
-### def create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
-### def create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED) {|reg| ... }
+### def Win32::Registry.create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
+### def Win32::Registry.create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED) {|reg| ... }
 #%todo
 
 レジストリキー key 下にキー subkey を作成し、
@@ -40,7 +40,7 @@ key は親のキーを Win32::Registry オブジェクトで指定します。
 
 ブロックが与えられると、キーは自動的に閉じられます。
 
-### def expand_environ(str)
+### def Win32::Registry.expand_environ(str)
 #%todo
 
 str の %\w+% という並びを環境変数に置換します。
@@ -50,12 +50,12 @@ REG_EXPAND_SZ で用いられます。
 
 - ExpandEnvironmentStrings: <http://msdn.microsoft.com/library/en-us/sysinfo/base/expandenvironmentstrings.asp>
 
-### def type2name(type)
+### def Win32::Registry.type2name(type)
 #%todo
 
 レジストリ値の型を整数から可読文字列に変換します。
 
-### def wtime2time(wtime)
+### def Win32::Registry.wtime2time(wtime)
 #%todo
 
 64bit の FILETIME を Time オブジェクトに変換します。
@@ -64,7 +64,7 @@ REG_EXPAND_SZ で用いられます。
 
 - FILETIME Structure: <http://msdn.microsoft.com/library/en-us/sysinfo/base/filetime_str.asp>
 
-### def time2wtime(time)
+### def Win32::Registry.time2wtime(time)
 #%todo
 
 Time オブジェクトまたは Integer オブジェクトを受け取り、

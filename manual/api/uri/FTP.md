@@ -7,8 +7,8 @@ FTP URI を表すクラスです。
 
 ## Class Methods
 
-### def build(ary)     -> URI::FTP
-### def build(hash)    -> URI::FTP
+### def URI::FTP.build(ary)     -> URI::FTP
+### def URI::FTP.build(hash)    -> URI::FTP
 
 引数で与えられた URI 構成要素から URI::FTP オブジェクトを生成します。
 引数の正当性を検査します。
@@ -46,7 +46,7 @@ p URI::FTP.build([nil, 'example.com', nil, '/foo', 'i']).to_s
 
 - **raise** `ArgumentError` -- typecode に定められた以外の文字を与えると発生します。
 
-### def new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)    -> URI::FTP
+### def URI::FTP.new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)    -> URI::FTP
 
 汎用的な構成要素から URI::FTP オブジェクトを生成します。build
 と異なり、デフォルトでは引数の正当性を検査しません。
@@ -83,7 +83,7 @@ p ftp.typecode
 
 - **raise** `URI::InvalidComponentError` -- 各要素が適合しない場合に発生します。
 
-### def new2(user, password, host, port, path, typecode = nil, arg_check = true)    -> URI::FTP
+### def URI::FTP.new2(user, password, host, port, path, typecode = nil, arg_check = true)    -> URI::FTP
 
 URI::FTP オブジェクトを生成して返します。
 引数の正当性を検査します。

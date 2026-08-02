@@ -50,8 +50,8 @@ p entities["zz"].normalized # => "%z;%z;&f;"
 
 ## Class Methods
 
-### def new(name, value, parent=nil, reference=false) -> REXML::Entity
-### def new(array) -> REXML::Entity
+### def REXML::Entity.new(name, value, parent=nil, reference=false) -> REXML::Entity
+### def REXML::Entity.new(array) -> REXML::Entity
 
 新たな Entity オブジェクトを生成して返します。
 
@@ -81,7 +81,7 @@ reference でその実体宣言がパラメータ実体(parameter entity)かど�
 REXML::Entity.new("gt", ">")
 ```
 
-### def matches?(string) -> bool
+### def REXML::Entity.matches?(string) -> bool
 
 string が実体宣言の文法に従う文字列であれば真を返します。
 

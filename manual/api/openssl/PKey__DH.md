@@ -53,8 +53,8 @@ p(key1 == key2)
 
 ## Class Methods
 
-### def generate(size, generator = 2) -> PKey::DH
-### def generate(size, generator = 2){|u,n| ... } -> PKey::DH
+### def OpenSSL::PKey::DH.generate(size, generator = 2) -> PKey::DH
+### def OpenSSL::PKey::DH.generate(size, generator = 2){|u,n| ... } -> PKey::DH
 
 DH 鍵共有プロトコルのパラメータを生成し、DH オブジェクトを返します。
 
@@ -83,9 +83,9 @@ DH パラメータの生成には時間がかかるため、鍵生成の途中�
 - **raise** `OpenSSL::PKey::DHError` -- パラメータの生成に失敗した場合に発生します
 - **SEE** [m:OpenSSL::PKey::DH#generate_key!]
 
-### def new(size, generator = 2) -> OpenSSL::PKey::DH
-### def new(obj) -> OpenSSL::PKey::DH
-### def new() -> OpenSSL::PKey::DH
+### def OpenSSL::PKey::DH.new(size, generator = 2) -> OpenSSL::PKey::DH
+### def OpenSSL::PKey::DH.new(obj) -> OpenSSL::PKey::DH
+### def OpenSSL::PKey::DH.new() -> OpenSSL::PKey::DH
 
 DH オブジェクトを生成します。
 

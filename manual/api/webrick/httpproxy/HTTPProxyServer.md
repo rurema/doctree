@@ -22,7 +22,7 @@ s.start
 
 ## Class Methods
 
-### def new(config, default = WEBrick::Config::HTTP)    -> WEBrick::HTTPProxyServer
+### def WEBrick::HTTPProxyServer.new(config, default = WEBrick::Config::HTTP)    -> WEBrick::HTTPProxyServer
 
 プロクシオブジェクトを生成して返します。
 

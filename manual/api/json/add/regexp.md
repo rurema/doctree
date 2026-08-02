@@ -6,7 +6,7 @@ type: library
 # reopen Regexp
 ## Singleton Methods
 
-### def json_create(hash) -> Regexp
+### def Regexp.json_create(hash) -> Regexp
 
 JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 

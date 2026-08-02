@@ -17,21 +17,21 @@ set_trace_func を用いて Ruby の実行をトレースしています。
 
 ## Class Methods
 
-### def top(n = 0) -> Binding
+### def IRB::Frame.top(n = 0) -> Binding
 
 上から n 番目のコンテキストを取り出します。
 
 - **param** `n` -- 取り出すコンテキストを [c:Integer] で指定します。n は 0 が最
          上位になります。
 
-### def bottom(n = 0) -> Binding
+### def IRB::Frame.bottom(n = 0) -> Binding
 
 下から n 番目のコンテキストを取り出します。
 
 - **param** `n` -- 取り出すコンテキストを [c:Integer] で指定します。n は 0 が最
          下位になります。
 
-### def sender -> object
+### def IRB::Frame.sender -> object
 
 センダになっているオブジェクトを取り出します。
 センダとは、そのメソッドを呼び出した側の self のことです。

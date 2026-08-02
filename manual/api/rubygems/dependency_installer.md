@@ -61,7 +61,7 @@ Gem が依存している Gem の情報を集めて返します。
 
 ## Singleton Methods
 
-### def new(options = {}) -> Gem::DependencyInstaller
+### def Gem::DependencyInstaller.new(options = {}) -> Gem::DependencyInstaller
 
 自身を初期化します。
 

@@ -56,6 +56,6 @@ Gem パッケージに含まれているファイルのうちロード可能な�
 
 ## Singleton Methods
 
-### def new -> Gem::GemPathSearcher
+### def Gem::GemPathSearcher.new -> Gem::GemPathSearcher
 
 検索を行うのに必要なデータを初期化します。

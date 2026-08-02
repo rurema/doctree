@@ -19,7 +19,7 @@ Ruby プログラムをテキストとして扱いたい場合、
 
 ## Class Methods
 
-### def new(src, filename = "(ripper)", lineno = 1) -> Ripper
+### def Ripper.new(src, filename = "(ripper)", lineno = 1) -> Ripper
 
 Ripper オブジェクトを作成します。
 
@@ -33,7 +33,7 @@ src の解析を行うには更に [m:Ripper#parse] などの呼び出しが必�
 
 - **SEE** [m:Ripper.parse], [m:Ripper#parse]
 
-### def parse(src, filename = '(ripper)', lineno = 1) -> nil
+### def Ripper.parse(src, filename = '(ripper)', lineno = 1) -> nil
 
 指定された文字列を解析します。常に nil を返します。
 
@@ -147,7 +147,7 @@ ripper の扱う全てのイベント ID (シンボル) のリストを返しま
 
 パーサイベントのイベント ID (シンボル) のリストを返します。
 
-### def PARSER_EVENT_TABLE -> {Symbol => Integer}
+### const PARSER_EVENT_TABLE -> {Symbol => Integer}
 
 パーサイベントのイベント ID (シンボル) と対応するハンドラの引数の個数の
 リストをハッシュで返します。
@@ -156,7 +156,7 @@ ripper の扱う全てのイベント ID (シンボル) のリストを返しま
 
 スキャナイベントのイベント ID (シンボル) のリストを返します。
 
-### def SCANNER_EVENT_TABLE -> {Symbol => Integer}
+### const SCANNER_EVENT_TABLE -> {Symbol => Integer}
 
 スキャナイベントのイベント ID (シンボル) と対応するハンドラの引数の個数
 のリストをハッシュで返します。

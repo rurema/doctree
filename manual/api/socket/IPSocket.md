@@ -9,7 +9,7 @@ library: socket
 
 ## Class Methods
 
-### def getaddress(host) -> String
+### def IPSocket.getaddress(host) -> String
 
 ホスト名からホストのアドレスを返します。ホストのアドレスは文
 字列は octet decimal の文字列 (例: 127.0.0.1) です。

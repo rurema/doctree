@@ -8,7 +8,7 @@ require:
 # reopen Date
 ## Singleton Methods
 
-### def json_create(hash) -> Date
+### def Date.json_create(hash) -> Date
 
 JSON のオブジェクトから Ruby のオブジェクトを生成して返します。
 

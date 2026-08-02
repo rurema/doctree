@@ -8,7 +8,7 @@ until: "2.7.0"
 
 ## Singleton Methods
 
-### def Fail(*options) -> ()
+### def Sync_m::UnknownLocker.Fail(*options) -> ()
 
 自身に定義されているメッセージをセットして例外を発生させます。
 

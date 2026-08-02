@@ -16,8 +16,8 @@ include:
 
 ## Class Methods
 
-### def new(attribute_to_clone, parent = nil) -> REXML::Attribute
-### def new(attribute, value, parent = nil) -> REXML::Attribute
+### def REXML::Attribute.new(attribute_to_clone, parent = nil) -> REXML::Attribute
+### def REXML::Attribute.new(attribute, value, parent = nil) -> REXML::Attribute
 
 新たな属性オブジェクトを生成します。
 

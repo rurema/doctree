@@ -7,7 +7,7 @@ since: "2.1.0"
 REXML のセキュリティ関連の限界値を設定/参照するためのモジュールです。
 
 ## Singleton Methods
-### def entity_expansion_limit -> Integer
+### def REXML::Security.entity_expansion_limit -> Integer
 
 実体参照の展開回数の上限を返します。
 
@@ -21,7 +21,7 @@ XML 文書([c:REXML::Document])ごとの展開回数がこの値を越えると
 
 - **SEE** [m:REXML::Document.entity_expansion_limit]
 
-### def entity_expansion_limit=(val)
+### def REXML::Security.entity_expansion_limit=(val)
 
 実体参照の展開回数の上限を指定します。
 
@@ -33,7 +33,7 @@ XML 文書([c:REXML::Document])ごとの展開回数がこの値を越えると
 - **param** `val` -- 設定する上限値(整数)
 - **SEE** [m:REXML::Document.entity_expansion_limit]
 
-### def entity_expansion_text_limit -> Integer
+### def REXML::Security.entity_expansion_text_limit -> Integer
 
 実体参照の展開による文字列の増分(テキストのバイト数)の
 最大値を指定します。
@@ -49,7 +49,7 @@ XML 文書([c:REXML::Document])ごとの展開回数がこの値を越えると
 - **SEE** [m:REXML::Document.entity_expansion_text_limit=],
      <http://www.ruby-lang.org/ja/news/2013/02/22/rexml-dos-2013-02-22/>
 
-### def entity_expansion_text_limit=(val)
+### def REXML::Security.entity_expansion_text_limit=(val)
 
 実体参照の展開による文字列の増分(テキストのバイト数)の
 最大値を指定します。

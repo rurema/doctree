@@ -7,10 +7,10 @@ UNIXストリーム型接続のサーバ側のソケットのクラス。
 
 ## Class Methods
 
-### def open(path) -> UNIXServer
-### def new(path) -> UNIXServer
-### def open(path){|sock| ...} -> object
-### def new(path){|sock| ...} -> object
+### def UNIXServer.open(path) -> UNIXServer
+### def UNIXServer.new(path) -> UNIXServer
+### def UNIXServer.open(path){|sock| ...} -> object
+### def UNIXServer.new(path){|sock| ...} -> object
 
 path で指定したパス名を用いて接続を受け付けるソケット
 を作成します。

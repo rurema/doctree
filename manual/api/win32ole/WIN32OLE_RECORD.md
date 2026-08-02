@@ -52,7 +52,7 @@ book.cost  # => 20
 
 ## Class Methods
 
-### def new(typename, obj) -> WIN32OLE_RECORD
+### def WIN32OLE_RECORD.new(typename, obj) -> WIN32OLE_RECORD
 
 WIN32OLE_RECORDオブジェクトを生成します。
 

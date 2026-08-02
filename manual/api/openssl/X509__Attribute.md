@@ -10,8 +10,8 @@ X.509 証明書署名要求の attribute を表すクラスです。
 
 ## Class Methods
 
-### def new(der) -> OpenSSL::X509::Attribute
-### def new(oid, value) -> OpenSSL::X509::Attribute
+### def OpenSSL::X509::Attribute.new(der) -> OpenSSL::X509::Attribute
+### def OpenSSL::X509::Attribute.new(oid, value) -> OpenSSL::X509::Attribute
 
 attribute オブジェクトを生成します。
 

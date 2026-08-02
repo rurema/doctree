@@ -49,7 +49,7 @@ open("log.txt"){|f|
 
 ## Class Methods
 
-### def new(obj, size=nil) {|yielder, *values| ... } -> Enumerator::Lazy
+### def Enumerator::Lazy.new(obj, size=nil) {|yielder, *values| ... } -> Enumerator::Lazy
 
 Lazy Enumerator を作成します。[m:Enumerator::Lazy#force] メソッドなどに
 よって列挙が実行されたとき、objのeachメソッドが実行され、値が一つずつ

@@ -14,7 +14,7 @@ include:
 
 ## Class Methods
 
-### def new(upper_bound = nil) -> Prime::PseudoPrimeGenerator
+### def Prime::PseudoPrimeGenerator.new(upper_bound = nil) -> Prime::PseudoPrimeGenerator
 
 自身を初期化します。
 

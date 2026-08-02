@@ -20,22 +20,22 @@ p Digest::MD5.file('ruby-1.8.5.tar.gz').to_s #=> '3fbb02294a8ca33d4684055adba5ed
 
 ## Class Methods
 
-### def new            -> Digest::Base
+### def Digest::Base.new            -> Digest::Base
 
 新しいダイジェストオブジェクトを生成します。
 
-### def digest(str) -> String
+### def Digest::Base.digest(str) -> String
 
 与えられた文字列に対するハッシュ値を文字列で返します。
 new(str).digest と等価です。
 
-### def hexdigest(str) -> String
+### def Digest::Base.hexdigest(str) -> String
 
 与えられた文字列に対するハッシュ値を、ASCIIコードを使って
 16進数の列を示す文字列にエンコードして返します。
 new(str).hexdigest と等価です。
 
-### def base64digest(str) -> String
+### def Digest::Base.base64digest(str) -> String
 
 与えられた文字列に対するハッシュ値を、Base64 エンコードした文字列にして返します。
 new(str).base64digest と等価です。
@@ -49,7 +49,7 @@ p Digest::MD5.base64digest('ruby') # => "WOU9EyTu9iZf25ewjtmq3w=="
 
 - **SEE** [m:Digest::Base#base64digest]
 
-### def file(path) -> object
+### def Digest::Base.file(path) -> object
 
 新しいダイジェストオブジェクトを生成し、
 ファイル名 file で指定したファイルの内容を読み込み、

@@ -14,11 +14,11 @@ include:
 ## Class Methods
 
 #%since 3.1
-### def new(*args, keyword_init: nil)                     -> Class
-### def new(*args, keyword_init: nil) {|subclass| block } -> Class
+### def Struct.new(*args, keyword_init: nil)                     -> Class
+### def Struct.new(*args, keyword_init: nil) {|subclass| block } -> Class
 #%else
-### def new(*args, keyword_init: false)                     -> Class
-### def new(*args, keyword_init: false) {|subclass| block } -> Class
+### def Struct.new(*args, keyword_init: false)                     -> Class
+### def Struct.new(*args, keyword_init: false) {|subclass| block } -> Class
 #%end
 
 [c:Struct] クラスに新しいサブクラスを作って、それを返します。
@@ -163,8 +163,8 @@ Structをカスタマイズする場合はこの方法が推奨されます。�
 
 - **SEE** [m:Class.new]
 
-### def new(*args) -> Struct
-### def [](*args) -> Struct
+### def Struct.new(*args) -> Struct
+### def Struct.[](*args) -> Struct
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体オブジェクトを生成して返します。
@@ -181,7 +181,7 @@ foo = Foo.new(1)
 p foo.values      # => [1, nil]
 ```
 
-### def members -> [Symbol]
+### def Struct.members -> [Symbol]
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバの名前([c:Symbol])の配列を返します。
@@ -192,7 +192,7 @@ p Foo.members      # => [:foo, :bar]
 ```
 
 #%since 3.1
-### def keyword_init? -> bool | nil
+### def Struct.keyword_init? -> bool | nil
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体が作成されたときに keyword_init: true を指定されていたら true を返します。

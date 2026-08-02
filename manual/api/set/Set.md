@@ -9,8 +9,8 @@ until: "3.2"
 集合を表すクラスです。要素の間に順序関係はありません。
 
 ## Class Methods
-### def new(enum = nil) -> Set
-### def new(enum = nil) {|o| ... } -> Set
+### def Set.new(enum = nil) -> Set
+### def Set.new(enum = nil) {|o| ... } -> Set
 
 引数 enum で与えられた要素を元に、新しい集合を作ります。
 
@@ -35,7 +35,7 @@ p Set.new([1, 2])              # => #<Set: {1, 2}>
 p Set.new([1, 2]) {|o| o * 2}  # => #<Set: {2, 4}>
 ```
 
-### def [](*ary) -> Set
+### def Set.[](*ary) -> Set
 
 与えられたオブジェクトを要素とする新しい集合を作ります。
 
