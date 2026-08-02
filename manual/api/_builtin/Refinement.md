@@ -4,7 +4,7 @@ since: "3.1"
 ---
 # class Refinement < Module
 
-refine のブロックの中の self のクラスです。
+[m:Module#refine] のブロックの中の `self` のクラスです。
 
 [m:Refinement#import_methods]で他のモジュールからメソッドを
 インポートできます。
@@ -15,7 +15,7 @@ refine のブロックの中の self のクラスです。
 #%since 3.3
 ### def target -> Class | Module
 
-`self` が refine の対象にしているクラスまたはモジュールを返します。
+`self` が [m:Module#refine] の対象にしているクラスまたはモジュールを返します。
 
 ```ruby
 module M
@@ -32,7 +32,7 @@ p M.refinements[0].target # => String
 #%until 3.4
 ### def refined_class -> Class
 
-`self` が refine の対象にしているクラスを返します。
+`self` が [m:Module#refine] の対象にしているクラスを返します。
 
 #%since 3.3
 Ruby 3.3 で deprecated になり、Ruby 3.4 で削除されました。
@@ -60,7 +60,7 @@ p M.refinements[0].refined_class # => String
 
 モジュールからメソッドをインポートします。
 
-[m:Module#include]と違って、import_methods はメソッドをコピーして
+[m:Module#include]と違って、`import_methods` はメソッドをコピーして
 refinement に追加して、refinementでインポートしたメソッドを有効化します。
 
 メソッドをコピーするため、Rubyコードで定義されたメソッドだけしか
