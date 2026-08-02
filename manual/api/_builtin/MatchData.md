@@ -15,11 +15,11 @@ library: _builtin
 
 ### def [](n) -> String | nil
 
-n 番目の部分文字列を返します。
+`n` 番目の部分文字列を返します。
 
-0 はマッチ全体を意味します。
-n の値が負の時には末尾からのインデックスとみなします(末尾の
-要素が -1 番目)。n 番目の要素が存在しない時には nil を返します。
+`0` はマッチ全体を意味します。
+`n` の値が負の時には末尾からのインデックスとみなします(末尾の
+要素が `-1` 番目)。`n` 番目の要素が存在しない時には `nil` を返します。
 
 - **param** `n` -- 返す部分文字列のインデックスを指定します。
 
@@ -36,7 +36,7 @@ p $~[-2]        # => "bar"
 
 ### def [](range) -> [String]
 
-[c:Range] オブジェクト range の範囲にある要素からなる部分配列を返します。
+[c:Range] オブジェクト `range` の範囲にある要素からなる部分配列を返します。
 
 - **param** `range` -- start..end 範囲式。
 
@@ -47,7 +47,7 @@ p $~[0..2]      # => ["foobar", "foo", "bar"]
 
 ### def [](start, length) -> [String]
 
-start 番目から length 個の要素を含む部分配列を返します。
+`start` 番目から `length` 個の要素を含む部分配列を返します。
 
 ```ruby title="例"
 /(foo)(bar)/ =~ "foobarbaz"
@@ -58,7 +58,7 @@ p $~[0, 3]      # => ["foobar", "foo", "bar"]
 
 ### def [](name) -> String | nil
 
-name という名前付きグループにマッチした文字列を返します。
+`name` という名前付きグループにマッチした文字列を返します。
 
 - **param** `name` -- 名前(シンボルか文字列)
 - **raise** `IndexError` -- 指定した名前が正規表現内に含まれていない場合に発生します
@@ -72,16 +72,16 @@ p /(?<alpha>[a-zA-Z]+)|(?<num>\d+)/.match("aZq")[:num] # => nil
 ### def match(n) -> String | nil
 ### def match(name) -> String | nil
 
-n 番目、または name という名前のグループにマッチした部分文字列を返します。
+`n` 番目、または `name` という名前のグループにマッチした部分文字列を返します。
 
 [m:MatchData#\[\]] と似ていますが、範囲や複数要素の指定はできず、
 単一のグループに対応する部分文字列だけを返します。
-マッチしていないグループを指定した場合は nil を返します。
+マッチしていないグループを指定した場合は `nil` を返します。
 
-- **param** `n` -- 返す部分文字列のインデックスを 0 以上の整数で指定します。
-           0 はマッチ全体を意味します。
+- **param** `n` -- 返す部分文字列のインデックスを `0` 以上の整数で指定します。
+           `0` はマッチ全体を意味します。
 - **param** `name` -- 名前付きグループの名前を [c:String] か [c:Symbol] で指定します。
-- **raise** `IndexError` -- 範囲外の n や、存在しない name を指定した場合に発生します。
+- **raise** `IndexError` -- 範囲外の `n` や、存在しない `name` を指定した場合に発生します。
 
 ```ruby title="例"
 m = /(.)(.)(\d+)(\d)(\w)?/.match("THX1138.")
@@ -99,15 +99,15 @@ p m.match(:bar) # => "ge"
 ### def match_length(n) -> Integer | nil
 ### def match_length(name) -> Integer | nil
 
-n 番目、または name という名前のグループにマッチした部分文字列の長さを
+`n` 番目、または `name` という名前のグループにマッチした部分文字列の長さを
 文字数で返します。
 
-マッチしていないグループを指定した場合は nil を返します。
+マッチしていないグループを指定した場合は `nil` を返します。
 
-- **param** `n` -- 対象の部分文字列のインデックスを 0 以上の整数で指定します。
-           0 はマッチ全体を意味します。
+- **param** `n` -- 対象の部分文字列のインデックスを `0` 以上の整数で指定します。
+           `0` はマッチ全体を意味します。
 - **param** `name` -- 名前付きグループの名前を [c:String] か [c:Symbol] で指定します。
-- **raise** `IndexError` -- 範囲外の n や、存在しない name を指定した場合に発生します。
+- **raise** `IndexError` -- 範囲外の `n` や、存在しない `name` を指定した場合に発生します。
 
 ```ruby title="例"
 m = /(.)(.)(\d+)(\d)(\w)?/.match("THX1138.")
@@ -124,14 +124,14 @@ p /(\p{Hiragana}+)/.match("あいう").match_length(1) # => 3
 
 ### def begin(n) -> Integer | nil
 
-n 番目の部分文字列先頭のオフセットを返します。
+`n` 番目の部分文字列先頭のオフセットを返します。
 
-0 はマッチ全体を意味します。
-n 番目の部分文字列がマッチしていなければ nilを返します。
+`0` はマッチ全体を意味します。
+`n` 番目の部分文字列がマッチしていなければ `nil` を返します。
 
 - **param** `n` -- 部分文字列を指定する数値。
 
-- **raise** `IndexError` -- 範囲外の n を指定した場合に発生します。
+- **raise** `IndexError` -- 範囲外の `n` を指定した場合に発生します。
 
 ```ruby title="例"
 /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
@@ -139,24 +139,20 @@ p $~.begin(0)   # => 0
 p $~.begin(1)   # => 0
 p $~.begin(2)   # => 3
 p $~.begin(3)   # => nil
-#%since 3.4
-p $~.begin(4)   # => 'begin': index 4 out of matches (IndexError)
-#%else
-p $~.begin(4)   # => `begin': index 4 out of matches (IndexError)
-#%end
+p $~.begin(4)   # ~> IndexError: index 4 out of matches
 ```
 
 - **SEE** [m:MatchData#end]
 
 ### def begin(name) -> Integer | nil
 
-name という名前付きグループの部分文字列先頭のオフセットを返します。
+`name` という名前付きグループの部分文字列先頭のオフセットを返します。
 
-name の名前付きグループがマッチしていなければ nil を返します。
+`name` の名前付きグループがマッチしていなければ `nil` を返します。
 
 - **param** `name` -- 名前(シンボルか文字列)
 
-- **raise** `IndexError` -- 正規表現中で定義されていない name を指定した場合に発生します。
+- **raise** `IndexError` -- 正規表現中で定義されていない `name` を指定した場合に発生します。
 
 ```ruby title="例"
 /(?<year>\d{4})年(?<month>\d{1,2})月(?:(?<day>\d{1,2})日)?/ =~ "2021年1月"
@@ -165,25 +161,21 @@ p $~.begin(:year)     # => 0
 p $~.begin('month')   # => 5
 p $~.begin(:month)    # => 5
 p $~.begin('day')     # => nil
-#%since 3.4
-p $~.begin('century') # => 'begin': undefined group name reference: century (IndexError)
-#%else
-p $~.begin('century') # => `begin': undefined group name reference: century (IndexError)
-#%end
+p $~.begin('century') # ~> IndexError: undefined group name reference: century
 ```
 
 - **SEE** [m:MatchData#end]
 
 ### def end(n) -> Integer | nil
 
-n 番目の部分文字列終端のオフセットを返します。
+`n` 番目の部分文字列終端のオフセットを返します。
 
-0 はマッチ全体を意味します。
-n 番目の部分文字列がマッチしていなければ nil を返します。
+`0` はマッチ全体を意味します。
+`n` 番目の部分文字列がマッチしていなければ `nil` を返します。
 
 - **param** `n` -- 部分文字列を指定する数値。
 
-- **raise** `IndexError` -- 範囲外の n を指定した場合に発生します。
+- **raise** `IndexError` -- 範囲外の `n` を指定した場合に発生します。
 
 ```ruby title="例"
 /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
@@ -191,24 +183,20 @@ p $~.end(0)   # => 6
 p $~.end(1)   # => 3
 p $~.end(2)   # => 6
 p $~.end(3)   # => nil
-#%since 3.4
-p $~.end(4)   # => 'end': index 4 out of matches (IndexError)
-#%else
-p $~.end(4)   # => `end': index 4 out of matches (IndexError)
-#%end
+p $~.end(4)   # ~> IndexError: index 4 out of matches
 ```
 
 - **SEE** [m:MatchData#begin]
 
 ### def end(name) -> Integer | nil
 
-name という名前付きグループの部分文字列終端のオフセットを返します。
+`name` という名前付きグループの部分文字列終端のオフセットを返します。
 
-name の名前付きグループがマッチしていなければ nil を返します。
+`name` の名前付きグループがマッチしていなければ `nil` を返します。
 
 - **param** `name` -- 名前(シンボルか文字列)
 
-- **raise** `IndexError` -- 正規表現中で定義されていない name を指定した場合に発生します。
+- **raise** `IndexError` -- 正規表現中で定義されていない `name` を指定した場合に発生します。
 
 ```ruby title="例"
 /(?<year>\d{4})年(?<month>\d{1,2})月(?:(?<day>\d{1,2})日)?/ =~ "2021年1月"
@@ -217,11 +205,7 @@ p $~.end(:year)     # => 4
 p $~.end('month')   # => 6
 p $~.end(:month)    # => 6
 p $~.end('day')     # => nil
-#%since 3.4
-p $~.end('century') # => 'end': undefined group name reference: century (IndexError)
-#%else
-p $~.end('century') # => `end': undefined group name reference: century (IndexError)
-#%end
+p $~.end('century') # ~> IndexError: undefined group name reference: century
 ```
 
 - **SEE** [m:MatchData#begin]
@@ -234,7 +218,7 @@ p $~.end('century') # => `end': undefined group name reference: century (IndexEr
 [m:$1], [m:$2], ... を格納した配列を返します。
 
 [m:MatchData#to_a] と異なり [m:$&] を要素に含みません。
-グループにマッチした部分文字列がなければ対応する要素は nil になります。
+グループにマッチした部分文字列がなければ対応する要素は `nil` になります。
 
 ```ruby title="例"
 /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
@@ -255,7 +239,7 @@ p $~.captures   # => ["foo", "bar", nil]
 
 [c:Hash] のキーは名前付きキャプチャの名前のシンボル、値はキーの名前に対応した名前付きグループのうち最後にマッチした文字列です。
 
-- **param** `array_of_names` -- 名前付きキャプチャの名前の配列を指定します。nil の場合は全ての名前付きキャプチャを意味します。
+- **param** `array_of_names` -- 名前付きキャプチャの名前の配列を指定します。`nil` の場合は全ての名前付きキャプチャを意味します。
 
 ```ruby title="例"
 m = /(?<hours>\d{2}):(?<minutes>\d{2}):(?<seconds>\d{2})/.match("18:37:22")
@@ -273,7 +257,7 @@ p m.deconstruct_keys(nil) # => {}
 ### def length -> Integer
 ### def size -> Integer
 
-部分文字列の数を返します(self.to_a.size と同じです)。
+部分文字列の数を返します(`self.to_a.size` と同じです)。
 
 ```ruby title="例"
 /(foo)(bar)(BAZ)?/ =~ "foobarbaz"
@@ -282,19 +266,19 @@ p $~.size       # => 4
 
 ### def offset(n) -> [Integer, Integer] | [nil, nil]
 
-n 番目の部分文字列のオフセットの配列 [start, end] を返
+`n` 番目の部分文字列のオフセットの配列 `[start, end]` を返
 します。
 
 ```ruby title="例"
 [ self.begin(n), self.end(n) ]
 ```
 
-と同じです。n番目の部分文字列がマッチしていなければ
-[nil, nil] を返します。
+と同じです。`n` 番目の部分文字列がマッチしていなければ
+`[nil, nil]` を返します。
 
 - **param** `n` -- 部分文字列を指定する数値
 
-- **raise** `IndexError` -- 範囲外の n を指定した場合に発生します。
+- **raise** `IndexError` -- 範囲外の `n` を指定した場合に発生します。
 
 #%since 3.2
 - **SEE** [m:MatchData#begin], [m:MatchData#end], [m:MatchData#byteoffset]
@@ -303,19 +287,19 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
 #%end
 ### def offset(name) -> [Integer, Integer] | [nil, nil]
 
-name という名前付きグループに対応する部分文字列のオフセットの配列 [start, end] を返
+`name` という名前付きグループに対応する部分文字列のオフセットの配列 `[start, end]` を返
 します。
 
 ```ruby title="例"
 [ self.begin(name), self.end(name) ]
 ```
 
-と同じです。nameの名前付きグループにマッチした部分文字列がなければ
-[nil, nil] を返します。
+と同じです。`name` の名前付きグループにマッチした部分文字列がなければ
+`[nil, nil]` を返します。
 
 - **param** `name` -- 名前(シンボルか文字列)
 
-- **raise** `IndexError` -- 正規表現中で定義されていない name を指定した場合に発生します。
+- **raise** `IndexError` -- 正規表現中で定義されていない `name` を指定した場合に発生します。
 
 ```ruby title="例"
 /(?<year>\d{4})年(?<month>\d{1,2})月(?:(?<day>\d{1,2})日)?/ =~ "2021年1月"
@@ -324,11 +308,7 @@ p $~.offset(:year)     # => [0, 4]
 p $~.offset('month')   # => [5, 6]
 p $~.offset(:month)    # => [5, 6]
 p $~.offset('day')     # => [nil, nil]
-#%since 3.4
-p $~.offset('century') # => 'offset': undefined group name reference: century (IndexError)
-#%else
-p $~.offset('century') # => `offset': undefined group name reference: century (IndexError)
-#%end
+p $~.offset('century') # ~> IndexError: undefined group name reference: century
 ```
 
 #%since 3.2
@@ -339,28 +319,28 @@ p $~.offset('century') # => `offset': undefined group name reference: century (I
 #%since 3.2
 ### def byteoffset(n) -> [Integer, Integer] | [nil, nil]
 
-n 番目の部分文字列のバイト単位のオフセットの
-配列 [start, end] を返します。
+`n` 番目の部分文字列のバイト単位のオフセットの
+配列 `[start, end]` を返します。
 
-n番目の部分文字列がマッチしていなければ [nil, nil] を返します。
+`n` 番目の部分文字列がマッチしていなければ `[nil, nil]` を返します。
 
 - **param** `n` -- 部分文字列を指定する数値
 
-- **raise** `IndexError` -- 範囲外の n を指定した場合に発生します。
+- **raise** `IndexError` -- 範囲外の `n` を指定した場合に発生します。
 
 - **SEE** [m:MatchData#offset]
 
 ### def byteoffset(name) -> [Integer, Integer] | [nil, nil]
 
-name という名前付きグループに対応する部分文字列のバイト単位のオフセットの
-配列 [start, end] を返します。
+`name` という名前付きグループに対応する部分文字列のバイト単位のオフセットの
+配列 `[start, end]` を返します。
 
-nameの名前付きグループにマッチした部分文字列がなければ
-[nil, nil] を返します。
+`name` の名前付きグループにマッチした部分文字列がなければ
+`[nil, nil]` を返します。
 
 - **param** `name` -- 名前(シンボルか文字列)
 
-- **raise** `IndexError` -- 正規表現中で定義されていない name を指定した場合に発生します。
+- **raise** `IndexError` -- 正規表現中で定義されていない `name` を指定した場合に発生します。
 
 ```ruby title="例"
 /(?<year>\d{4})年(?<month>\d{1,2})月(?:(?<day>\d{1,2})日)?/ =~ "2021年1月"
@@ -369,11 +349,7 @@ p $~.byteoffset(:year)     # => [0, 4]
 p $~.byteoffset('month')   # => [7, 8]
 p $~.byteoffset(:month)    # => [7, 8]
 p $~.byteoffset('day')     # => [nil, nil]
-#%since 3.4
-p $~.byteoffset('century') # => 'offset': undefined group name reference: century (IndexError)
-#%else
-p $~.byteoffset('century') # => `offset': undefined group name reference: century (IndexError)
-#%end
+p $~.byteoffset('century') # ~> IndexError: undefined group name reference: century
 ```
 
 - **SEE** [m:MatchData#offset]
@@ -383,18 +359,18 @@ p $~.byteoffset('century') # => `offset': undefined group name reference: centur
 ### def bytebegin(n) -> Integer | nil
 ### def bytebegin(name) -> Integer | nil
 
-n 番目の部分文字列先頭のバイトオフセットを返します。
+`n` 番目の部分文字列先頭のバイトオフセットを返します。
 
-0 はマッチ全体を意味します。
-n 番目の部分文字列がマッチしていなければ nilを返します。
+`0` はマッチ全体を意味します。
+`n` 番目の部分文字列がマッチしていなければ `nil` を返します。
 
 引数に文字列またはシンボルを渡した場合は、対応する名前付きキャプチャの先頭のバイトオフセットを返します。
 
 - **param** `n` -- 部分文字列を指定する数値。
 - **param** `name` -- 名前付きキャプチャを指定する文字列またはシンボル。
 
-- **raise** `IndexError` -- 範囲外の n を指定した場合に発生します。
-- **raise** `IndexError` -- 正規表現中で定義されていない name を指定した場合に発生します。
+- **raise** `IndexError` -- 範囲外の `n` を指定した場合に発生します。
+- **raise** `IndexError` -- 正規表現中で定義されていない `name` を指定した場合に発生します。
 
 ```ruby title="例"
 /(c).*(いう).*(e.*)/ =~ 'abcあいうdef'
@@ -403,32 +379,32 @@ p $~.bytebegin(0) # => 2
 p $~.bytebegin(1) # => 2
 p $~.bytebegin(2) # => 6
 p $~.bytebegin(3) # => 13
-p $~.bytebegin(4) # => index 4 out of matches (IndexError)
+p $~.bytebegin(4) # ~> IndexError: index 4 out of matches
 ```
 
 ```ruby title="シンボルを指定する例"
 /(?<key>\S+):\s*(?<value>\S+)/ =~ "name: ruby"
-p $~                 # => #<MatchData "name: ruby" key:"name" value:"ruby">
-p $~.bytebegin(:key) # => 0
+p $~                   # => #<MatchData "name: ruby" key:"name" value:"ruby">
+p $~.bytebegin(:key)   # => 0
 p $~.bytebegin(:value) # => 6
-$~.bytebegin(:foo)   # => undefined group name reference: foo (IndexError)
+$~.bytebegin(:foo)     # ~> IndexError: undefined group name reference: foo
 ```
 
 ### def byteend(n) -> Integer | nil
 ### def byteend(name) -> Integer | nil
 
-n 番目の部分文字列終端のバイトオフセットを返します。
+`n` 番目の部分文字列終端のバイトオフセットを返します。
 
-0 はマッチ全体を意味します。
-n 番目の部分文字列がマッチしていなければ nilを返します。
+`0` はマッチ全体を意味します。
+`n` 番目の部分文字列がマッチしていなければ `nil` を返します。
 
 引数に文字列またはシンボルを渡した場合は、対応する名前付きキャプチャの終端のバイトオフセットを返します。
 
 - **param** `n` -- 部分文字列を指定する数値。
 - **param** `name` -- 名前付きキャプチャを指定する文字列またはシンボル。
 
-- **raise** `IndexError` -- 範囲外の n を指定した場合に発生します。
-- **raise** `IndexError` -- 正規表現中で定義されていない name を指定した場合に発生します。
+- **raise** `IndexError` -- 範囲外の `n` を指定した場合に発生します。
+- **raise** `IndexError` -- 正規表現中で定義されていない `name` を指定した場合に発生します。
 
 ```ruby title="例"
 /(c).*(いう).*(e.*)/ =~ 'abcあいうdef'
@@ -437,7 +413,7 @@ p $~.byteend(0) # => 15
 p $~.byteend(1) # => 3
 p $~.byteend(2) # => 12
 p $~.byteend(3) # => 15
-p $~.byteend(4) # => index 4 out of matches (IndexError)
+p $~.byteend(4) # ~> IndexError: index 4 out of matches
 ```
 
 ```ruby title="シンボルを指定する例"
@@ -445,7 +421,7 @@ p $~.byteend(4) # => index 4 out of matches (IndexError)
 p $~               # => #<MatchData "name: ruby" key:"name" value:"ruby">
 p $~.byteend(:key) # => 4
 p $~.byteend(:value) # => 10
-$~.byteend(:foo)   # => undefined group name reference: foo (IndexError)
+$~.byteend(:foo)   # ~> IndexError: undefined group name reference: foo
 ```
 
 #%end
@@ -505,7 +481,7 @@ p $~.to_s       # => "bar"
 
 ### def inspect -> String
 
-self の内容を人間に読みやすい文字列にして返します。
+`self` の内容を人間に読みやすい文字列にして返します。
 
 ```ruby title="例"
 puts /.$/.match("foo").inspect
@@ -523,11 +499,11 @@ puts /(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").inspect
 
 ### def values_at(*index) -> [String]
 
-正規表現中の n 番目の括弧にマッチした部分文字列の配列を返します。
+正規表現中の `n` 番目の括弧にマッチした部分文字列の配列を返します。
 
-0 番目は [m:$&] のようにマッチした文字列全体を表します。
+`0` 番目は [m:$&] のようにマッチした文字列全体を表します。
 
-- **param** `index` -- インデックスを整数またはシンボル(名前付きキャプチャの場合)で 0 個以上指定します。
+- **param** `index` -- インデックスを整数またはシンボル(名前付きキャプチャの場合)で `0` 個以上指定します。
 
 ```ruby title="例"
 m = /(foo)(bar)(baz)/.match("foobarbaz")
@@ -546,7 +522,7 @@ p m.values_at(:a, :b, :op) # => ["1", "2", "+"]
 
 名前付きキャプチャの名前を文字列配列で返します。
 
-self.regexp.names と同じです。
+`self.regexp.names` と同じです。
 
 ```ruby title="例"
 p /(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").names
@@ -568,7 +544,7 @@ p m.regexp # => /a.*b/
 ### def hash -> Integer
 {: since=""}
 
-self のマッチ対象になった文字列、元になった正規表現オブジェクト、マッチ
+`self` のマッチ対象になった文字列、元になった正規表現オブジェクト、マッチ
 した位置を元にハッシュ値を計算して返します。
 
 ### def eql?(other) -> bool
@@ -576,9 +552,8 @@ self のマッチ対象になった文字列、元になった正規表現オブ
 ### def ==(other)   -> bool
 {: since=""}
 
-self と other のマッチ対象になった文字列、元になった正規表現オブジェク
-ト、マッチした位置が等しければ true を返します。そうでない場合には
-false を返します。
+`self` と `other` のマッチ対象になった文字列、元になった正規表現オブジェクト、マッチした位置が等しければ `true` を返します。そうでない場合には
+`false` を返します。
 
 - **param** `other` -- 比較対象のオブジェクトを指定します。
 
