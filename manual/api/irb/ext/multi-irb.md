@@ -1,7 +1,5 @@
 ---
 type: library
-require:
-  - thread
 ---
 irb 中で複数の独立した irb を扱えるようにするためのサブライブラリです。
 

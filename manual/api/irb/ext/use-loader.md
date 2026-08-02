@@ -1,7 +1,9 @@
 ---
 type: library
 require:
+#%until 3.4
   - irb/cmd/load
+#%end
   - irb/ext/loader
 ---
 load または require 時に irb のファイル読み込み機能(irb_load、

@@ -1,7 +1,5 @@
 ---
 type: library
-require:
-  - irb/ruby-token
 ---
 Ruby のソースコードを字句解析するためのサブライブラリです。
 
