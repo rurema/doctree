@@ -14,7 +14,7 @@ UNIX ドメインのストリーム型ソケットのクラス。
 ### def UNIXSocket.open(path){|sock| ...} -> object
 ### def UNIXSocket.new(path){|sock| ...} -> object
 
-path で指定したパス名を用いてソケットを接続します。
+`path` で指定したパス名を用いてソケットを接続します。
 
 ブロックを省略すると接続したソケットを返します。
 
@@ -36,12 +36,12 @@ s.send("hello", 0)
 
 相互に結合された UNIX ソケットのペアを含む2要素の配列を返します。
 
-type にはソケットタイプを指定します。
-Socket::SOCK_STREAM, Socket::SOCK_DGRAM, Socket::SOCK_RAW などの
-整数、:STREAM, :DGRAM, :RAW などのシンボル、
-"STREAM" などの文字列が渡せます。
+`type` にはソケットタイプを指定します。
+[m:Socket::SOCK_STREAM], [m:Socket::SOCK_DGRAM], [m:Socket::SOCK_RAW] などの
+整数、`:STREAM`, `:DGRAM`, `:RAW` などのシンボル、
+`"STREAM"` などの文字列が渡せます。
 
-protocol には プロトコルを指定します。0 は Unix domain でのデフォルト値が
+`protocol` には プロトコルを指定します。`0` は Unix domain でのデフォルト値が
 使われます。
 
 ```ruby
@@ -54,14 +54,14 @@ p s2.recv(10) #=> "ab"
 ```
 
 - **param** `type` -- ソケットタイプ
-- **param** `protocol` -- プトロコル
+- **param** `protocol` -- プロトコル
 
 ## Instance Methods
 
 ### def addr -> [String, String]
 
 ソケットの接続情報を表す配列を返します。配列の各要素は第1要
-素が文字列 "AF_UNIX"、第2要素がパスを表す文字列です。
+素が文字列 `"AF_UNIX"`、第2要素がパスを表す文字列です。
 
 クライアント側はパスを持たないため空文字列となります。
 例:
@@ -99,7 +99,7 @@ UNIXServer.open("/tmp/s") {|serv|
 ### def peeraddr -> [String, String]
 
 接続相手先ソケットの情報を表す配列を返します。配列の各要素は第1要
-素が文字列 "AF_UNIX"、第2要素がパスを表す文字列です。
+素が文字列 `"AF_UNIX"`、第2要素がパスを表す文字列です。
 
 ```ruby title="例"
 require 'socket'
@@ -117,9 +117,9 @@ UNIXServer.open("/tmp/s") {|serv|
 
 [man:recvfrom(2)] を用いてソケットからメッセージを受け取ります。
 
-maxlen で受け取るメッセージの最大長をバイト数で指定します。
+`maxlen` で受け取るメッセージの最大長をバイト数で指定します。
 
-flags には Socket::MSG_* という名前の定数の bitwise OR を渡します。
+`flags` には `Socket::MSG_*` という名前の定数の bitwise OR を渡します。
 
 戻り値は文字列と相手ソケットのパスのペアです。
 
@@ -141,11 +141,11 @@ UNIXServer.open("/tmp/s") {|serv|
 
 ソケットの接続先からファイルディスクリプタを受け取ります。
 
-klass が nil の場合、ファイルディスクリプタが Integer として
+`klass` が `nil` の場合、ファイルディスクリプタが [c:Integer] として
 返されます。
 
-klass が nil でない場合、
-klass.for_fd(fd[, mode]) が呼ばれ、その値が返されます。
+`klass` が `nil` でない場合、
+`klass.for_fd(fd[, mode])` が呼ばれ、その値が返されます。
 
 ```ruby title="例"
 require 'socket'
@@ -157,24 +157,24 @@ p File.identical?(io, STDOUT)     #=> true
 ```
 
 - **param** `klass` -- 受け取ったファイルディスクリプタを変換するためのクラス
-- **param** `mode` -- for_fd に渡すファイルモード
+- **param** `mode` -- `for_fd` に渡すファイルモード
 
 ### def send_io(io) -> nil
 
-引数 io に対応するファイルディスクリプタをソケットの接続先に送ります。
+引数 `io` に対応するファイルディスクリプタをソケットの接続先に送ります。
 
 ```ruby
 require 'socket'
 
 s1, s2 = UNIXSocket.pair
-  
+
 s1.send_io STDOUT
 stdout = s2.recv_io
-  
+
 p STDOUT.fileno #=> 1
 p stdout.fileno #=> 6
-  
+
 stdout.puts "hello" # outputs "hello\n" to standard output.
 ```
 
-- **param** `io` -- 送るファイルディスクリプタ(整数 or [c:IO]オブジェクト)
+- **param** `io` -- 送るファイルディスクリプタ(整数 or [c:IO] オブジェクト)
