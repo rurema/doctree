@@ -1,7 +1,6 @@
 ---
 type: library
-require:
-  - readline
+until: "3.4"
 ---
 [c:IRB::Context] にヒストリの読み込み、保存の機能を提供するサブライブ
 ラリです。

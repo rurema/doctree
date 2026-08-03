@@ -1,9 +1,10 @@
 ---
 type: library
-require:
-  - thread
 ---
 irb 中で複数の独立した irb を扱えるようにするためのサブライブラリです。
 
 このライブラリで定義されているメソッドはユーザが直接使用するものではあ
-りません。[lib:irb/cmd/subirb] から呼び出されます。
+りません。
+#%until 3.4
+[lib:irb/cmd/subirb] から呼び出されます。
+#%end

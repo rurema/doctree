@@ -5,7 +5,9 @@ category: Development
 require:
   - irb/init
   - irb/context
+#%until 3.4
   - irb/extend-command
+#%end
   - irb/ruby-lex
   - irb/input-method
   - irb/locale

@@ -5,7 +5,6 @@ require:
   - irb/src_encoding
   - irb/magic-file
 #%end
-  - readline
 ---
 irb が入力を扱うためのサブライブラリです。
 

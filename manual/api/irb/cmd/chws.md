@@ -1,5 +1,6 @@
 ---
 type: library
+until: "3.4"
 require:
   - irb/cmd/nop
   - irb/ext/change-ws
