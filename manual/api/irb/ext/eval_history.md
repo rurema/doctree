@@ -1,6 +1,6 @@
 ---
 type: library
-until: "3.3"
+since: "3.3"
 ---
 [c:IRB::Context] に実行結果の履歴を保持する機能を提供するサブライブラ
 リです。

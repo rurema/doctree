@@ -7,7 +7,11 @@ require:
   - irb/cmd/load
   - irb/cmd/pushws
   - irb/cmd/subirb
+#%until 3.3
   - irb/ext/history
+#%else
+  - irb/ext/eval_history
+#%end
   - irb/ext/tracer
   - irb/ext/use-loader
   - irb/ext/save-history
