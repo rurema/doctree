@@ -1,12 +1,19 @@
 ---
 library: irb/input-method
 include:
+#%until 4.0
   - Readline
+#%end
 ---
 # class IRB::ReadlineInputMethod < IRB::InputMethod
 
 readline を用いた標準入力からの入力を表すクラスです。ライブラリ内部で使
-用します。[lib:readline] の require に失敗した場合は定義されません。
+用します。
+#%until 4.0
+[lib:readline] の require に失敗した場合は定義されません。
+#%else
+[lib:readline] の require に失敗した場合は、Reline が代わりに使われます。
+#%end
 
 ## Class Methods
 
