@@ -80,7 +80,7 @@ begin
   raise Errno::EAGAIN, "pseudo error"
 rescue Errno::EWOULDBLOCK
   p $!
-  # => #<Errno::EAGAIN: pseudo error>
+  # => #<Errno::EAGAIN: Resource temporarily unavailable - pseudo error>
 end
 ```
 
