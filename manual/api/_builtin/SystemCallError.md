@@ -72,16 +72,16 @@ other が SystemCallError のサブクラスのインスタンスで、
 
 ```ruby title="例"
 p Errno::EAGAIN::Errno
+# => 11
 p Errno::EWOULDBLOCK::Errno
+# => 11
+
 begin
   raise Errno::EAGAIN, "pseudo error"
 rescue Errno::EWOULDBLOCK
   p $!
+  # => #<Errno::EAGAIN: Resource temporarily unavailable - pseudo error>
 end
-
-# => 11
-     11
-     #<Errno::EAGAIN: pseudo error>
 ```
 
 ## Instance Methods
