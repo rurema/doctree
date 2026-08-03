@@ -9,6 +9,7 @@ category: File
 ## Module Functions
 
 ### module_function def Pathname(path) -> Pathname
+{: since=""}
 
 文字列 path を元に [c:Pathname] オブジェクトを生成します。
 
