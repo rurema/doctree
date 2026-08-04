@@ -1,6 +1,10 @@
 ---
 type: library
 #%# Author: Keiju ISHITSUKA
+require:
+#%since 3.1
+  - irb/ruby-lex
+#%end
 ---
 irb の completion 機能を提供するライブラリです。
 

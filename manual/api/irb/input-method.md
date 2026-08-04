@@ -2,6 +2,11 @@
 type: library
 require:
   - reline
+  - io/console
+  - irb/completion
+#%if (version == "3.1")
+  - rdoc
+#%end
 #%until 3.3
   - irb/src_encoding
   - irb/magic-file
