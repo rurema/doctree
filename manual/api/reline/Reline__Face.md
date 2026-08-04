@@ -33,7 +33,7 @@ end
 
 ### def Reline::Face.config(name) { |conf| ... } -> object
 
-名前 name の face を定義します。
+名前 `name` の face を定義します。
 
 ブロックには設定用のオブジェクトが渡されます。`define(part, **attributes)`
 を呼んで、face を構成する部分ごとのスタイルを定義します。
@@ -54,14 +54,47 @@ end
 
 - **raise** `ArgumentError` -- `define` に不正な色やスタイルを指定した場合に発生します。
 
+```ruby title="例: 補完ダイアログの配色を変更する"
+require 'reline'
+
+Reline::Face.config(:completion_dialog) do |conf|
+  conf.define :default, foreground: :white, background: :blue
+  conf.define :enhanced, foreground: :white, background: :magenta
+  conf.define :scrollbar, foreground: :white, background: :blue
+end
+
+Reline::Face.configs[:completion_dialog][:default]
+# => {foreground: :white, background: :blue, escape_sequence: "\e[0m\e[37;44m"}
+```
+
 ### def Reline::Face.configs -> Hash
 
 定義されているすべての face の設定内容をハッシュで返します。
+
+```ruby title="例"
+require 'reline'
+
+Reline::Face.configs.keys
+# => [:default, :completion_dialog]
+Reline::Face.configs[:default]
+# => {default: {style: :reset, escape_sequence: "\e[0m"},
+#     enhanced: {style: :reset, escape_sequence: "\e[0m"},
+#     scrollbar: {style: :reset, escape_sequence: "\e[0m"}}
+```
 
 ### def Reline::Face.force_truecolor -> ()
 
 端末がトゥルーカラー対応かどうかの判定を、環境変数 `COLORTERM`
 の値によらず強制的に真にします。
+
+```ruby title="例: 24 ビットカラーで補完ダイアログの色を指定する"
+require 'reline'
+
+Reline::Face.force_truecolor
+Reline::Face.config(:completion_dialog) do |conf|
+  conf.define :default, foreground: "#dddddd", background: "#333333"
+end
+```
 
 - **SEE** [m:Reline::Face.truecolor?]
 

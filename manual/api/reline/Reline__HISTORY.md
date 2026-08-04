@@ -9,7 +9,7 @@ Reline で入力した内容(ヒストリ)にアクセスするための定数�
 `Reline::HISTORY[0]` で最初の入力内容を、`Reline::HISTORY.to_a`
 で全履歴を文字列の配列として取得できます。
 
-[m:Reline.readline] や [m:Reline.readmultiline] の引数 add_hist
+[m:Reline.readline] や [m:Reline.readmultiline] の引数 `add_hist`
 に真を指定すると、入力した文字列がここに追加されます。
 
 [c:Array] と異なる点は以下の通りです。
