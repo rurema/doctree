@@ -1,6 +1,7 @@
 ---
 type: library
 require:
+  - reline
 #%until 3.3
   - irb/src_encoding
   - irb/magic-file
