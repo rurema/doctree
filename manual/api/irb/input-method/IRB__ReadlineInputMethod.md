@@ -11,7 +11,7 @@ readline を用いた標準入力からの入力を表すクラスです。ラ�
 #%until 4.0
 [lib:readline] の require に失敗した場合は定義されません。
 #%else
-[lib:readline] の require に失敗した場合は、Reline が代わりに使われます。
+[lib:readline] の require に失敗した場合は、[c:Reline] が代わりに使われます。
 #%end
 
 ## Class Methods

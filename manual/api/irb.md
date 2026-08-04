@@ -3,6 +3,7 @@ type: library
 #%# Author: Keiju ISHITSUKA
 category: Development
 require:
+  - reline
   - irb/init
   - irb/context
 #%until 3.4
