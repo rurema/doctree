@@ -4,6 +4,9 @@ require:
   - reline
   - io/console
   - irb/completion
+#%since 3.3
+  - irb/history
+#%end
 #%if (version == "3.1")
   - rdoc
 #%end

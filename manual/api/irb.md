@@ -13,12 +13,29 @@ require:
   - irb/context
 #%until 3.4
   - irb/extend-command
+#%else
+  - irb/default_commands
 #%end
   - irb/ruby-lex
+#%since 3.3
+  - irb/statement
+#%end
+#%since 3.4
+  - irb/history
+#%end
   - irb/input-method
   - irb/locale
+  - irb/color
 #%# IRB.conf[:VERSION] を設定していない場合のみ。
   - irb/version
+  - irb/easter-egg
+#%since 4.1
+  - irb/startup_message
+#%end
+#%since 3.3
+  - irb/debug
+  - irb/pager
+#%end
 ---
 irb は Interactive Ruby の略です。
 irb を使うと、Ruby の式を標準入力から簡単に入力・実行できます。
