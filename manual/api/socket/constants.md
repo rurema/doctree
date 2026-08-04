@@ -584,8 +584,7 @@ level 引数に使用します。
 
 Accept only if any address is assigned。
 
-[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す定数です。
 
 - **SEE** [man:getaddrinfo(3)]
 
@@ -593,8 +592,7 @@ Accept only if any address is assigned。
 
 Allow all addresses。
 
-[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す定数です。
 
 - **SEE** [man:getaddrinfo(3)]
 
@@ -602,8 +600,7 @@ Allow all addresses。
 
 Fill in the canonical name。
 
-[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す定数です。
 
 - **SEE** [man:getaddrinfo(3)]
 
@@ -611,8 +608,7 @@ Fill in the canonical name。
 
 Default flags for getaddrinfo。
 
-[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す定数です。
 
 - **SEE** [man:getipnodebyname(3freebsd)]
 
@@ -623,8 +619,7 @@ Default flags for getaddrinfo。
 
 Prevent host name resolution。
 
-[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す定数です。
 
 - **SEE** [man:getaddrinfo(3)]
 
@@ -632,8 +627,7 @@ Prevent host name resolution。
 
 Prevent server name resolution。
 
-[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す定数です。
 
 - **SEE** [man:getaddrinfo(3)]
 
@@ -641,8 +635,7 @@ Prevent server name resolution。
 
 Get address to use with bind。
 
-[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す定数です。
 
 - **SEE** [man:getaddrinfo(3)]
 
@@ -650,8 +643,7 @@ Get address to use with bind。
 
 Accept IPv4-mapped IPv6 addresses。
 
-[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す定数です。
 
 - **SEE** [man:getaddrinfo(3)]
 
@@ -659,8 +651,7 @@ Accept IPv4-mapped IPv6 addresses。
 
 Accept IPv4 mapped addresses if the kernel supports it。
 
-[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] の引数 flags に渡す定数です。
 
 - **SEE** [man:getipnodebyname(3freebsd)]
 
@@ -668,10 +659,8 @@ Accept IPv4 mapped addresses if the kernel supports it。
 
 Address family for hostname not supported
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
@@ -679,10 +668,8 @@ Address family for hostname not supported
 
 Temporary failure in name resolution
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
@@ -690,10 +677,8 @@ Temporary failure in name resolution
 
 Invalid flags
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
@@ -701,10 +686,8 @@ Invalid flags
 
 Invalid value for hints
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 #%# 非標準的定数、KAMEで使われているらしい
 
@@ -712,10 +695,8 @@ Invalid value for hints
 
 Non-recoverable failure in name resolution
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
@@ -723,10 +704,8 @@ Non-recoverable failure in name resolution
 
 Address family not supported
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
@@ -738,10 +717,8 @@ EAI_* 定数の最大値。
 
 Memory allocation failure
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
@@ -749,10 +726,8 @@ Memory allocation failure
 
 No address associated with hostname
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)]
 
@@ -760,10 +735,8 @@ No address associated with hostname
 
 Hostname nor servname, or not known
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
@@ -771,10 +744,8 @@ Hostname nor servname, or not known
 
 Argument buffer overflow
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
@@ -782,10 +753,8 @@ Argument buffer overflow
 
 Resolved protocol is unknown
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
@@ -793,10 +762,8 @@ Resolved protocol is unknown
 
 Servname not supported for socket type
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
@@ -804,10 +771,8 @@ Servname not supported for socket type
 
 Socket type not supported
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを [c:SocketError] に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
@@ -815,10 +780,8 @@ Socket type not supported
 
 System error returned in errno
 
-[man:getaddrinfo(3)], [man:getnameinfo(3)] などの
-エラーコードです。
-対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などは
-エラーを適当な例外に変換するため、この定数は直接は利用しません。
+[man:getaddrinfo(3)], [man:getnameinfo(3)] などのエラーコードです。
+対応する [m:Socket.getaddrinfo], [m:Addrinfo.getaddrinfo] などはエラーを適当な例外に変換するため、この定数は直接は利用しません。
 
 - **SEE** [man:getaddrinfo(3linux)], [man:gai_strerror(3freebsd)]
 
@@ -893,8 +856,7 @@ IPv4アドレス文字列の最大長。
 
 The service specified is a datagram service (looks up UDP ports)。
 
-[m:Socket.getnameinfo], [m:Addrinfo#getnameinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getnameinfo], [m:Addrinfo#getnameinfo] の引数 flags に渡す定数です。
 
 ```ruby
 require 'socket'
@@ -923,8 +885,7 @@ p Socket.getnameinfo([ Socket::AF_INET, 514, "127.0.0.1"])
 
 A name is required。名前解決できなかった場合にエラーを返すことを意味します。
 
-[m:Socket.getnameinfo], [m:Addrinfo#getnameinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getnameinfo], [m:Addrinfo#getnameinfo] の引数 flags に渡す定数です。
 
 ```ruby
 require 'socket'
@@ -942,8 +903,7 @@ Addrinfo.tcp("192.0.2.18", 514).getnameinfo(Socket::NI_NAMEREQD)
 
 An FQDN is not required for local hosts, return only the local part.
 
-[m:Socket.getnameinfo], [m:Addrinfo#getnameinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getnameinfo], [m:Addrinfo#getnameinfo] の引数 flags に渡す定数です。
 
 - **SEE** [man:getnameinfo(3)]
 
@@ -951,8 +911,7 @@ An FQDN is not required for local hosts, return only the local part.
 
 Return a numeric address.
 
-[m:Socket.getnameinfo], [m:Addrinfo#getnameinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getnameinfo], [m:Addrinfo#getnameinfo] の引数 flags に渡す定数です。
 
 - **SEE** [man:getnameinfo(3)]
 
@@ -960,8 +919,7 @@ Return a numeric address.
 
 Return the service name as a digit string
 
-[m:Socket.getnameinfo], [m:Addrinfo#getnameinfo] の引数 flags に渡す
-定数です。
+[m:Socket.getnameinfo], [m:Addrinfo#getnameinfo] の引数 flags に渡す定数です。
 
 - **SEE** [man:getnameinfo(3)]
 

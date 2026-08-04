@@ -51,10 +51,7 @@ open("log.txt"){|f|
 
 ### def Enumerator::Lazy.new(obj, size=nil) {|yielder, *values| ... } -> Enumerator::Lazy
 
-Lazy Enumerator を作成します。[m:Enumerator::Lazy#force] メソッドなどに
-よって列挙が実行されたとき、objのeachメソッドが実行され、値が一つずつ
-ブロックに渡されます。ブロックは、yielder を使って最終的に yield される値を
-指定できます。
+Lazy Enumerator を作成します。[m:Enumerator::Lazy#force] メソッドなどによって列挙が実行されたとき、objのeachメソッドが実行され、値が一つずつブロックに渡されます。ブロックは、yielder を使って最終的に yield される値を指定できます。
 
 ```ruby title="Enumerable#filter_map と、その遅延評価版を定義する例"
 module Enumerable
@@ -207,8 +204,7 @@ p (100..Float::INFINITY).lazy.map(&:to_s).grep_v(/(\d).*\1/).take(15).force
 
 [m:Enumerable#zip] と同じですが、配列ではなくEnumerator::Lazy を返します。
 
-ただし一貫性のため、ブロック付きで呼び出した場合は Enumerable#zip と
-同じ挙動になります。
+ただし一貫性のため、ブロック付きで呼び出した場合は Enumerable#zip と同じ挙動になります。
 
 ```ruby title="例"
 p 1.step.lazy.zip(('a'..'z').cycle)
@@ -400,8 +396,7 @@ p 1.step.lazy.take(10).to_a
 
 to_enum は「ブロック付きで呼ぶとループを実行し、ブロックを省略した場合は
 Enumerator を返す」ようなメソッドを定義するときによく使われます。
-このときに lazy 性が正しく引き継がれるように、Lazy#to_enum は
-素のEnumerator ではなく Enumerator::Lazy を返すようになっています。
+このときに lazy 性が正しく引き継がれるように、Lazy#to_enum は素のEnumerator ではなく Enumerator::Lazy を返すようになっています。
 
 ```ruby title="例"
 module Enumerable

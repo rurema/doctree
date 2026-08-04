@@ -10,8 +10,7 @@ RSS 0.91/2.0を生成するときだけ利用されます。
 ### def new_day
 #%todo
 新しくdayを作成し、返します。作成された
-dayはdayリストの最後
-に追加されています。
+dayはdayリストの最後に追加されています。
 
 # class RSS::Maker::RSS09::Channel::SkipDays < RSS::Maker::ChannelBase::SkipDaysBase
 # class RSS::Maker::RSS20::Channel::SkipDays < RSS::Maker::RSS09::Channel::SkipDays
@@ -19,8 +18,7 @@ dayはdayリストの最後
 # class RSS::Maker::ChannelBase::SkipDaysBase::DayBase < Object
 
 dayは
-maker.channel.skipDays.new_dayで作成されたオ
-ブジェクトとします。
+maker.channel.skipDays.new_dayで作成されたオブジェクトとします。
 
 contentを指定する必要があります。
 

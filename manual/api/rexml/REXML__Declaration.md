@@ -18,8 +18,7 @@ DTD に含まれる各種宣言ノードを表すクラスです。
 
 output にノードを出力します。
 
-このメソッドは deprecated です。[c:REXML::Formatters::Default] で
-出力してください。
+このメソッドは deprecated です。[c:REXML::Formatters::Default] で出力してください。
 
 - **param** `output` -- 出力先の IO オブジェクト
 - **param** `indent` -- インデントの大きさ。無視されます。

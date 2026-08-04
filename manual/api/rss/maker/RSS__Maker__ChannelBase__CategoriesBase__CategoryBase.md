@@ -4,8 +4,7 @@ library: rss
 # class RSS::Maker::ChannelBase::CategoriesBase::CategoryBase < Object
 
 categoryは
-maker.channel.categories.new_categoryで作成されたオ
-ブジェクトとします。
+maker.channel.categories.new_categoryで作成されたオブジェクトとします。
 
 contentを指定する必要があります。
 

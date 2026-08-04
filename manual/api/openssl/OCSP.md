@@ -3,11 +3,9 @@ library: openssl
 ---
 # module OpenSSL::OCSP
 
-OCSP(Online Certificate Status Protocol)を取り扱うための
-モジュールです。OCSP は [RFC:2560] で定義されています。
+OCSP(Online Certificate Status Protocol)を取り扱うためのモジュールです。OCSP は [RFC:2560] で定義されています。
 
-このモジュールは OCSP のリクエストとレスポンスを取り扱う
-機能を持っています。
+このモジュールは OCSP のリクエストとレスポンスを取り扱う機能を持っています。
 
 OCSP レスポンダと通信する機能はありません。ユーザが例えば
 OCSP over http などを実装する必要があります。
@@ -91,8 +89,7 @@ delegated trust を許可しないことを意味します。
 
 ### const NOINTERN -> Integer
 
-Request/Response の署名データに含まれている証明書から
-署名者の証明書を「探さない」ことを意味します。
+Request/Response の署名データに含まれている証明書から署名者の証明書を「探さない」ことを意味します。
 
 ### const NOSIGS -> Integer
 
@@ -108,8 +105,7 @@ OCSP 応答の生成時刻を正しく設定しないことを意味します。
 
 ### const RESPID_KEY -> Integer
 
-OCSP レスポンダ の ID として公開鍵のハッシュ値を用いること
-を意味します。
+OCSP レスポンダ の ID として公開鍵のハッシュ値を用いることを意味します。
 
 詳しくは [RFC:2560] および X.509 を確認してください。
 
@@ -122,43 +118,37 @@ OCSP レスポンダの内部エラーにより妥当な応答を返せないこ
 
 ### const RESPONSE_STATUS_MALFORMEDREQUEST -> Integer
 
-[m:OpenSSL::OCSP::Response#status] のステータスコードで 、
-リクエストの構文が正しくないことを意味します。
+[m:OpenSSL::OCSP::Response#status] のステータスコードで 、リクエストの構文が正しくないことを意味します。
 
 詳しくは [RFC:2560] 2.3 を見てください。
 
 ### const RESPONSE_STATUS_SIGREQUIRED -> Integer
 
-[m:OpenSSL::OCSP::Response#status] のステータスコードで 、
-サーバがクライアントにリクエストへの署名を要求していることを意味します。
+[m:OpenSSL::OCSP::Response#status] のステータスコードで 、サーバがクライアントにリクエストへの署名を要求していることを意味します。
 
 詳しくは [RFC:2560] 2.3 を見てください。
 
 ### const RESPONSE_STATUS_SUCCESSFUL -> Integer
 
-[m:OpenSSL::OCSP::Response#status] のステータスコードで 、
-正しく応答したことを意味します。
+[m:OpenSSL::OCSP::Response#status] のステータスコードで 、正しく応答したことを意味します。
 
 詳しくは [RFC:2560] 2.3 を見てください。
 
 ### const RESPONSE_STATUS_TRYLATER -> Integer
 
-[m:OpenSSL::OCSP::Response#status] のステータスコードで 、
-レスポンダが一時的に応答できないことを意味します。
+[m:OpenSSL::OCSP::Response#status] のステータスコードで 、レスポンダが一時的に応答できないことを意味します。
 
 詳しくは [RFC:2560] 2.3 を見てください。
 
 ### const RESPONSE_STATUS_UNAUTHORIZED -> Integer
 
-[m:OpenSSL::OCSP::Response#status] のステータスコードで 、
-クライアントからサーバへの応答が認可されていないことを意味します。
+[m:OpenSSL::OCSP::Response#status] のステータスコードで 、クライアントからサーバへの応答が認可されていないことを意味します。
 
 詳しくは [RFC:2560] 2.3 を見てください。
 
 ### const REVOKED_STATUS_AFFILIATIONCHANGED -> Integer
 
-[m:OpenSSL::OCSP::BasicResponse#status] の失効理由コードで、
-証明書の記載内容が変更されたことを意味します。
+[m:OpenSSL::OCSP::BasicResponse#status] の失効理由コードで、証明書の記載内容が変更されたことを意味します。
 
 詳しくは [RFC:3280] や X.509 を参照してください。
 
@@ -171,22 +161,19 @@ CA が危殆化したことを意味します。
 
 ### const REVOKED_STATUS_CERTIFICATEHOLD -> Integer
 
-[m:OpenSSL::OCSP::BasicResponse#status] の失効理由コードで、
-一時的な保留を意味します。
+[m:OpenSSL::OCSP::BasicResponse#status] の失効理由コードで、一時的な保留を意味します。
 
 詳しくは [RFC:3280] や X.509 を参照してください。
 
 ### const REVOKED_STATUS_CESSATIONOFOPERATION -> Integer
 
-[m:OpenSSL::OCSP::BasicResponse#status] の失効理由コードで、
-証明書の運用を止めたことを意味します。
+[m:OpenSSL::OCSP::BasicResponse#status] の失効理由コードで、証明書の運用を止めたことを意味します。
 
 詳しくは [RFC:3280] や X.509 を参照してください。
 
 ### const REVOKED_STATUS_KEYCOMPROMISE -> Integer
 
-[m:OpenSSL::OCSP::BasicResponse#status] の失効理由コードで、
-鍵が危殆化したことを意味します。
+[m:OpenSSL::OCSP::BasicResponse#status] の失効理由コードで、鍵が危殆化したことを意味します。
 
 詳しくは [RFC:3280] や X.509 を参照してください。
 
@@ -204,15 +191,13 @@ CRL からの削除を意味します。
 
 ### const REVOKED_STATUS_SUPERSEDED -> Integer
 
-[m:OpenSSL::OCSP::BasicResponse#status] の失効理由コードで、
-証明書が破棄されたことを意味します。
+[m:OpenSSL::OCSP::BasicResponse#status] の失効理由コードで、証明書が破棄されたことを意味します。
 
 詳しくは [RFC:3280] や X.509 を参照してください。
 
 ### const REVOKED_STATUS_UNSPECIFIED -> Integer
 
-[m:OpenSSL::OCSP::BasicResponse#status] の失効理由コードで、
-未指定を意味します。
+[m:OpenSSL::OCSP::BasicResponse#status] の失効理由コードで、未指定を意味します。
 
 詳しくは [RFC:3280] や X.509 を参照してください。
 
@@ -253,8 +238,7 @@ OCSP の Basic OCSP Response を表すクラスです。
 はこのクラスのオブジェクトが保持します。
 
 OCSP レスポンダからのレスポンス自体は
-[c:OpenSSL::OCSP::Response] のオブジェクトが表現していて、
-このオブジェクトの [m:OpenSSL::OCSP::Response#basic] によって
+[c:OpenSSL::OCSP::Response] のオブジェクトが表現していて、このオブジェクトの [m:OpenSSL::OCSP::Response#basic] によって
 BasicResponse のオブジェクトを得ます。
 
 ## Class Methods
@@ -272,8 +256,7 @@ BasicResponse に nonce を追加します。
 
 引数を省略すると、ランダムな nonce を生成し利用します。
 
-通常はこのメソッドを使わず [m:OpenSSL::OCSP::BasicResponse#copy_nonce] を
-用います。
+通常はこのメソッドを使わず [m:OpenSSL::OCSP::BasicResponse#copy_nonce] を用います。
 
 - **param** `val` -- 追加する nonce の値(文字列)
 
@@ -301,16 +284,14 @@ request から nonce の値をコピーします。
 
 Response に署名します。
 
-OCSP レスポンダ(もしくは CA)はレスポンスに署名をすることで、
-レスポンスの内容を保証します。
+OCSP レスポンダ(もしくは CA)はレスポンスに署名をすることで、レスポンスの内容を保証します。
 
 flags には以下の値の OR を渡すことができます。
   - [m:OpenSSL::OCSP::NOTIME]
   - [m:OpenSSL::OCSP::RESPID_KEY]
   - [m:OpenSSL::OCSP::NOCERTS]
 
-certs に証明書の配列を渡すことで、この署名を検証するために
-必要となる別の証明書を付加できます。
+certs に証明書の配列を渡すことで、この署名を検証するために必要となる別の証明書を付加できます。
 
 - **param** `signer_cert` -- 署名者の証明書([c:OpenSSL::X509::Certificate] オブジェクト)
 - **param** `signer_key` -- 証明に用いる秘密鍵([c:OpenSSL::PKey::PKey] オブジェクト)
@@ -350,15 +331,12 @@ certs に証明書の配列を渡すことで、この署名を検証するた�
   - [m:OpenSSL::OCSP::REVOKED_STATUS_CERTIFICATEHOLD]
   - [m:OpenSSL::OCSP::REVOKED_STATUS_REMOVEFROMCRL]
 
-失効時刻は証明書が失効した時刻を表します。失効していない場合は nil を
-返します。
+失効時刻は証明書が失効した時刻を表します。失効していない場合は nil を返します。
 
-最終更新時刻は失効情報が更新された時刻を表します。この時刻が現在時刻より
-先である場合には、この Response の内容は信用できません。
+最終更新時刻は失効情報が更新された時刻を表します。この時刻が現在時刻より先である場合には、この Response の内容は信用できません。
 
 次回更新時刻は、失効情報の更新予定時刻です。
-この時刻が現在時刻より
-後である場合には、この Response の内容は信用できません。
+この時刻が現在時刻より後である場合には、この Response の内容は信用できません。
 次回更新時刻が指定されていない場合には nil を返します。
 
 拡張領域には、[c:OpenSSL::X509::Extension] の配列が渡されます。
@@ -402,8 +380,7 @@ TRUSTOTHER を有効にすると certs で指定した証明書を検証せず�
 
 問い合わせたい証明書にissuerの情報+αを付加したオブジェクトです。
 
-CertificateId オブジェクトを複数 [c:OpenSSL::OCSP::Request] に含め、
-同時に問い合わせることができます。
+CertificateId オブジェクトを複数 [c:OpenSSL::OCSP::Request] に含め、同時に問い合わせることができます。
 
 ## Class Methods
 ### def OpenSSL::OCSP::CertificateId.new(subject, issuer, digest=nil) -> OpenSSL::OCSP::CertificateId
@@ -423,16 +400,14 @@ subject には問合せ対象の証明書を、issuerにはsubjectのissuer(発�
 
 ### def cmp(other) -> bool
 
-2つの CertificateId オブジェクトを比較し、
-同じものであれば真を返します。
+2つの CertificateId オブジェクトを比較し、同じものであれば真を返します。
 
 - **param** `other` -- 比較する [c:OpenSSL::OCSP::CertificateId] オブジェクト
 - **SEE** [m:OpenSSL::OCSP::CertificateId#cmp_issuer]
 
 ### def cmp_issuer(other) -> bool
 
-2つの CertificateId オブジェクトの issuer(証明書発行者)を比較し、
-同じ issuer であれば真を返します。
+2つの CertificateId オブジェクトの issuer(証明書発行者)を比較し、同じ issuer であれば真を返します。
 
 - **param** `other` -- 比較する [c:OpenSSL::OCSP::CertificateId] オブジェクト
 - **SEE** [m:OpenSSL::OCSP::CertificateId#cmp]
@@ -447,8 +422,7 @@ subject には問合せ対象の証明書を、issuerにはsubjectのissuer(発�
 
 OCSP リクエストを表すクラスです。
 
-問合せたい証明書を [c:OpenSSL::OCSP::CertificateId] オブジェクトの
-形で複数持つことができます。
+問合せたい証明書を [c:OpenSSL::OCSP::CertificateId] オブジェクトの形で複数持つことができます。
 
 ## Class Methods
 ### def OpenSSL::OCSP::Request.new -> OpenSSL::OCSP::Request
@@ -483,15 +457,13 @@ nonce とは、リプレイ攻撃を防止するために設定する乱数で�
 
 ### def certid -> [OpenSSL::OCSP::CertificateId]
 
-Request オブジェクトが保持している問い合わせ対象の証明書の情報を
-配列で返します。
+Request オブジェクトが保持している問い合わせ対象の証明書の情報を配列で返します。
 
 - **SEE** [m:OpenSSL::OCSP::Request#add_certid]
 
 ### def check_nonce(basic_resp) -> Integer
 
-自身の nonce とレスポンスの nonce が整合しているか
-チェックします。
+自身の nonce とレスポンスの nonce が整合しているかチェックします。
 
 -1 から 3 までの整数を返します。それぞれの意味は以下の通りです。
   - -1 自身にしか nonce が設定されていない
@@ -503,8 +475,7 @@ Request オブジェクトが保持している問い合わせ対象の証明書
 0 は明らかに不正なので、これは必ずチェックする必要があります。
 1 は nonce が正しいということを意味します。
 それ以外は、場合(サーバの実装など)
-によって不正であったりそうでなかったりしますので、適切にチェック
-する必要があります。
+によって不正であったりそうでなかったりしますので、適切にチェックする必要があります。
 
 - **param** `basic_resp` -- 比較するレスポンス([c:OpenSSL::OCSP::BasicResponse] オブジェクト)
 
@@ -516,8 +487,7 @@ Request オブジェクトに署名をします。
 OCSP レスポンダはこの署名を確認します。
 Request に対する署名は必須ではありません。
 
-certs に証明書の配列を渡すことで、この署名を検証するために
-必要となる別の証明書を付加できます。
+certs に証明書の配列を渡すことで、この署名を検証するために必要となる別の証明書を付加できます。
 
 - **param** `signer_cert` -- 署名者の証明書([c:OpenSSL::X509::Certificate] オブジェクト)
 - **param** `signer_key` -- 証明に用いる秘密鍵([c:OpenSSL::PKey::PKey] オブジェクト)
@@ -554,9 +524,7 @@ OCSP レスポンダからのレスポンスを表わすオブジェクトです
 
 レスポンスの実質的な内容(証明書が失効しているか否か)
 は [m:OpenSSL::OCSP::Response#basic] 
-で得られる [c:OpenSSL::OCSP::BasicResponse] オブジェクトが
-保持しています。このオブジェクト自体はレスポンスのステータスコード
-などを保持しています。
+で得られる [c:OpenSSL::OCSP::BasicResponse] オブジェクトが保持しています。このオブジェクト自体はレスポンスのステータスコードなどを保持しています。
 
 ## Class Methods
 
@@ -565,16 +533,14 @@ OCSP レスポンダからのレスポンスを表わすオブジェクトです
 
 Response オブジェクトを生成します。
 
-DER 形式の文字列を渡した場合はその内容を
-ロードします。引数なしの場合は空のオブジェクトを返します。
+DER 形式の文字列を渡した場合はその内容をロードします。引数なしの場合は空のオブジェクトを返します。
 
 - **param** `der` -- DER 形式の文字列
 - **SEE** [m:OpenSSL::OCSP::Response.create]
 
 ### def OpenSSL::OCSP::Response.create(status, basic_resp) -> OpenSSL::OCSP::Response
 
-Response オブジェクトを [c:OpenSSL::OCSP::BasicResponse] オブジェクト
-から生成します。
+Response オブジェクトを [c:OpenSSL::OCSP::BasicResponse] オブジェクトから生成します。
 
 - **param** `status` -- ステータスコード(整数)
 - **param** `basic_resp` -- [c:OpenSSL::OCSP::BasicResponse] オブジェクト
@@ -584,8 +550,7 @@ Response オブジェクトを [c:OpenSSL::OCSP::BasicResponse] オブジェク�
 
 ### def basic -> OpenSSL::OCSP::BasicResponse | nil
 
-Response オブジェクトが保持している BasicResponse オブジェクトを
-返します。
+Response オブジェクトが保持している BasicResponse オブジェクトを返します。
 
 - **SEE** [c:OpenSSL::OCSP::BasicResponse]
 

@@ -15,8 +15,7 @@ category: Development
 与えられたブロックを実行して、経過した時間を [m:Process?.times] で計り、
 [c:Benchmark::Tms] オブジェクトを生成して返します。
 
-Benchmark::Tms オブジェクトには to_s が定義されているので、
-基本的には以下のように使います。
+Benchmark::Tms オブジェクトには to_s が定義されているので、基本的には以下のように使います。
 
 ```ruby
 require 'benchmark'
@@ -112,17 +111,13 @@ end
 
 ### module_function def bmbm(width = 0) {|job| ... } -> [Benchmark::Tms]
 
-[c:Benchmark::Job] オブジェクトを生成して、それを引数として与えられたブロックを
-実行します。
+[c:Benchmark::Job] オブジェクトを生成して、それを引数として与えられたブロックを実行します。
 
 ベンチマークの結果は GC の影響によって歪められてしまうことがあります。
 このメソッドは与えられたブロックを二度実行する事によってこの影響を最小化します。
-一回目は実行環境を安定化するためにリハーサルとして実行します。二回目は本番として
-実行します。
+一回目は実行環境を安定化するためにリハーサルとして実行します。二回目は本番として実行します。
 
-二回目のブロック実行の前に [m:GC.start] を実行しますが、この実行時間は計測には
-含まれません。しかし、実際にはこのメソッドを使用しても、GC などの影響を分離する
-ことは保証されません。
+二回目のブロック実行の前に [m:GC.start] を実行しますが、この実行時間は計測には含まれません。しかし、実際にはこのメソッドを使用しても、GC などの影響を分離することは保証されません。
 
 - **param** `width` -- ラベルの幅を指定します。
 
@@ -153,8 +148,7 @@ end
 [c:Benchmark::Report] オブジェクトを生成し、それを引数として与えられたブロックを実行します。
 
 基本的には以下のように使います。
-ブロックが [c:Benchmark::Tms] オブジェクトの配列を返した場合は、
-それらの数値も追加の行に表示されます。
+ブロックが [c:Benchmark::Tms] オブジェクトの配列を返した場合は、それらの数値も追加の行に表示されます。
 
 - **param** `caption` --     レポートの一行目に表示する文字列を指定します。
 - **param** `label_width` -- ラベルの幅を指定します。
@@ -315,8 +309,7 @@ self と x の除算を計算します。
 
 ### def add { ... } -> Benchmark::Tms
 
-与えられたブロックの実行時間を self に加算して
-新しい [c:Benchmark::Tms] オブジェクトを生成して返します。
+与えられたブロックの実行時間を self に加算して新しい [c:Benchmark::Tms] オブジェクトを生成して返します。
 
 - **SEE** [m:Benchmark?.measure]
 
@@ -332,8 +325,7 @@ self と x の除算を計算します。
 
 self を指定されたフォーマットで整形して返します。
 
-このメソッドは [m:Kernel?.format] のようにオブジェクトを整形しますが、
-以下の拡張を使用できます。
+このメソッドは [m:Kernel?.format] のようにオブジェクトを整形しますが、以下の拡張を使用できます。
 
 - **`%u`**:
   user CPU time で置き換えられます。[m:Benchmark::Tms#utime]
@@ -482,8 +474,7 @@ System CPU time
 
 # class Benchmark::Report < Object
 
-[m:Benchmark?.benchmark] メソッドや [m:Benchmark?.bm] メソッドの
-内部で使用されているクラスです。
+[m:Benchmark?.benchmark] メソッドや [m:Benchmark?.bm] メソッドの内部で使用されているクラスです。
 
 このライブラリのユーザーが直接意識する必要はありません。
 
@@ -514,7 +505,6 @@ System CPU time
 
 ### def list -> [Benchmark::Tms]
 
-[m:Benchmark::Report#item] 実行時に作成された [c:Benchmark::Tms] オ
-ブジェクトの一覧を返します。
+[m:Benchmark::Report#item] 実行時に作成された [c:Benchmark::Tms] オブジェクトの一覧を返します。
 
 - **SEE** [m:Benchmark::Report#item]

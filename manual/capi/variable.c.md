@@ -67,8 +67,7 @@ RSTRING(rb_class_path(klass))->ptr
 
 ### VALUE rb_class_path(VALUE klass)
 
-klass の名前を返します。klassが無名クラス、無名モジュー
-ルの場合 #<Class 0xXXXX>, #<Module 0xXXXX> の形式で返します。
+klass の名前を返します。klassが無名クラス、無名モジュールの場合 #<Class 0xXXXX>, #<Module 0xXXXX> の形式で返します。
 
 [m:Module#to_s] の定義は
 
@@ -107,8 +106,7 @@ klass 自体に定数 id が定義されていれば真。
 
 ### VALUE rb_cv_get(VALUE klass, char *name)
 
-klass のクラス変数 name の値を
-取得します。
+klass のクラス変数 name の値を取得します。
 
 ### void rb_cv_set(VALUE klass, char *name, VALUE val)
 
@@ -123,8 +121,7 @@ klass のクラス変数 name に val を代入します。
 
 ### VALUE rb_cvar_get(VALUE klass, ID name)
 
-klass のクラス変数 name の値を
-取得します。
+klass のクラス変数 name の値を取得します。
 
 ### void rb_cvar_set(VALUE klass, ID name, VALUE val)
 
@@ -133,18 +130,15 @@ klass のクラス変数 name に val を代入します。
 
 ### void rb_define_class_variable(VALUE klass, const char *name, VALUE val)
 
-クラス klass のクラス変数 name を初期値 val で
-定義します。既に同名の変数が定義されていたら警告します。
+クラス klass のクラス変数 name を初期値 val で定義します。既に同名の変数が定義されていたら警告します。
 
 ### void rb_define_const(VALUE klass, const char *name, VALUE val)
 
-クラス klass の定数 name を初期値 val で
-定義します。既に同名の定数が定義されていたら警告します。
+クラス klass の定数 name を初期値 val で定義します。既に同名の定数が定義されていたら警告します。
 
 ### void rb_define_global_const(const char *name, VALUE val)
 
-トップレベル (現在は [c:Object]) の定数 name を初期値 val で
-定義します。既に同名の定数が定義されていたら警告します。
+トップレベル (現在は [c:Object]) の定数 name を初期値 val で定義します。既に同名の定数が定義されていたら警告します。
 
 ### void rb_define_hooked_variable(const char *name, VALUE *var, VALUE (*getter)(), VALUE (*setter)())
 
@@ -199,8 +193,7 @@ entry で示されるグローバル変数が定義されているなら真。
 
 ### VALUE rb_iv_get(VALUE obj, char *name)
 
-オブジェクト obj のインスタンス変数 name の値を
-取得します。
+オブジェクト obj のインスタンス変数 name の値を取得します。
 
 ### VALUE rb_iv_set(VALUE obj, char *name, VALUE val)
 
@@ -209,13 +202,11 @@ val を代入します。
 
 ### VALUE rb_ivar_defined(VALUE obj, ID id)
 
-オブジェクト obj のインスタンス変数 name が
-定義されていれば真。
+オブジェクト obj のインスタンス変数 name が定義されていれば真。
 
 ### VALUE rb_ivar_get(VALUE obj, ID name)
 
-オブジェクト obj のインスタンス変数 name の値を
-取得します。
+オブジェクト obj のインスタンス変数 name の値を取得します。
 
 ### VALUE rb_ivar_set(VALUE obj, ID name, VALUE val)
 
@@ -266,8 +257,7 @@ val を代入します。
 ### static int top_const_get(ID id, VALUE *klassp)
 
 トップレベルの定数 id を参照します。
-定数 id が定義されていたら真を返し klassp に
-その値を書き込みます。未定義なら偽を返します。
+定数 id が定義されていたら真を返し klassp にその値を書き込みます。未定義なら偽を返します。
 
 ### static VALUE trace_en(struct global_variable *var)
 

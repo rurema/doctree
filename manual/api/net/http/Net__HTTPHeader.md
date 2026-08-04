@@ -6,9 +6,7 @@ library: net/http
 HTTP ヘッダのためのモジュールです。
 
 このモジュールを mix-in に @header という(ハッシュを代入してある)
-変数への「大文字小文字を無視した」ハッシュ的アクセスメソッドを
-提供します。またよくある HTTP ヘッダへの便利なアクセスメソッドも
-用意します。
+変数への「大文字小文字を無視した」ハッシュ的アクセスメソッドを提供します。またよくある HTTP ヘッダへの便利なアクセスメソッドも用意します。
 
 ## Instance Methods
 
@@ -35,8 +33,7 @@ req = Net::HTTP::Get.new(uri.request_uri)
 p req['user-agent'] # => Ruby
 ```
 
-一種類のヘッダフィールドが一つのヘッダの中に複数存在する
-場合にはそれを全て ", " で連結した文字列を返します。
+一種類のヘッダフィールドが一つのヘッダの中に複数存在する場合にはそれを全て ", " で連結した文字列を返します。
 key は大文字小文字を区別しません。
 
 - **param** `key` -- ヘッダフィールド名を文字列で与えます。
@@ -97,9 +94,7 @@ p request.get_fields('X-My-Header')   #=> ["a", "b", "c"]
 
 key ヘッダフィールドの値 (文字列) を配列で返します。
 
-たとえばキー 'content-length' に対しては ['2048'] のような
-文字列が得られます。一種類のヘッダフィールドが一つのヘッダの中
-に複数存在することがありえます。
+たとえばキー 'content-length' に対しては ['2048'] のような文字列が得られます。一種類のヘッダフィールドが一つのヘッダの中に複数存在することがありえます。
 key は大文字小文字を区別しません。
 
 - **param** `key` -- ヘッダフィールド名を文字列で与えます。
@@ -124,12 +119,9 @@ key ヘッダフィールドを返します。
 たとえばキー 'content-length' に対しては  '2048'
 のような文字列が得られます。キーが存在しなければ nil を返します。
 
-該当するキーが登録されてい
-ない時には、引数 default が与えられていればその値を、ブロッ
-クが与えられていればそのブロックを評価した値を返します。
+該当するキーが登録されていない時には、引数 default が与えられていればその値を、ブロックが与えられていればそのブロックを評価した値を返します。
 
-一種類のヘッダフィールドが一つのヘッダの中に複数存在する
-場合にはそれを全て ", " で連結した文字列を返します。
+一種類のヘッダフィールドが一つのヘッダの中に複数存在する場合にはそれを全て ", " で連結した文字列を返します。
 key は大文字小文字を区別しません。
 
 - **param** `key` -- ヘッダフィールド名を文字列で与えます。
@@ -198,8 +190,7 @@ p req.basic_auth("user", "pass") # => ["Basic dXNlcjpwYXNz"]
 
 ### def chunked? -> bool
 
-Transfer-Encoding: ヘッダフィールドが "chunked" である
-場合に真を返します。
+Transfer-Encoding: ヘッダフィールドが "chunked" である場合に真を返します。
 
 Transfer-Encoding: ヘッダフィールドが存在しなかったり、
 "chunked" 以外である場合には偽を返します。
@@ -216,8 +207,7 @@ p req.chunked? # => true
 
 ### def content_type -> String|nil
 
-"text/html" のような Content-Type を表す
-文字列を返します。
+"text/html" のような Content-Type を表す文字列を返します。
 
 Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
@@ -234,8 +224,7 @@ p req.content_type  # => "multipart/form-data"
 ### def content_type=(type)
 ### def set_content_type(type, params = {})
 
-type と params から Content-Type: ヘッダフィールドの
-値を設定します。
+type と params から Content-Type: ヘッダフィールドの値を設定します。
 
 - **param** `type` -- メディアタイプを文字列で指定します。
 - **param** `params` -- パラメータ属性をハッシュで指定します。
@@ -252,8 +241,7 @@ p req.content_type                        # => "multipart/form-data"
 
 ### def main_type -> String|nil
 
-"text/html" における "text" のようなタイプを表す
-文字列を返します。
+"text/html" における "text" のようなタイプを表す文字列を返します。
 
 Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
@@ -267,8 +255,7 @@ p res.main_type # => "text"
 
 ### def sub_type -> String|nil
 
-"text/html" における "html" のようなサブタイプを表す
-文字列を返します。
+"text/html" における "html" のようなサブタイプを表す文字列を返します。
 
 Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
@@ -285,8 +272,7 @@ p res.sub_type # => "html"
 Content-Type のパラメータを {"charset" => "iso-2022-jp"}
 という形の [c:Hash] で返します。
 
-Content-Type: ヘッダフィールドが存在しない場合には
-空のハッシュを返します。
+Content-Type: ヘッダフィールドが存在しない場合には空のハッシュを返します。
 
 ```ruby title="例"
 require 'net/http'
@@ -299,8 +285,7 @@ p res.type_params # => {"charset"=>"UTF-8"}
 ### def form_data=(params)
 ### def set_form_data(params, sep = '&') -> ()
 
-HTMLのフォームのデータ params から
-ヘッダフィールドとボディを設定します。
+HTMLのフォームのデータ params からヘッダフィールドとボディを設定します。
 
 ヘッダフィールド Content-Type: には
 'application/x-www-form-urlencoded' が設定されます。
@@ -347,8 +332,7 @@ p req.content_length  # => 10
 
 Content-Length: ヘッダフィールドに値を設定します。
 
-len に nil を与えると Content-Length: ヘッダフィールドを
-削除します。
+len に nil を与えると Content-Length: ヘッダフィールドを削除します。
 
 - **param** `len` -- 設定する値を整数で与えます。
 
@@ -432,8 +416,7 @@ p req.content_length  # => nil
 ### def each {|name, val| .... } -> ()
 ### def each_header {|name, val| .... } -> ()
 
-保持しているヘッダ名とその値をそれぞれ
-ブロックに渡して呼びだします。
+保持しているヘッダ名とその値をそれぞれブロックに渡して呼びだします。
 
 ヘッダ名は小文字で統一されます。
 val は ", " で連結した文字列がブロックに渡されます。
@@ -453,8 +436,7 @@ req.each_header { |key,value| puts "#{key} = #{value}" }
 ### def each_capitalized {|name, value| .... } -> ()
 ### def canonical_each {|name, value| .... } -> ()
 
-ヘッダフィールドの正規化名とその値のペアを
-ブロックに渡し、呼びだします。
+ヘッダフィールドの正規化名とその値のペアをブロックに渡し、呼びだします。
 
 正規化名は name に対し
 

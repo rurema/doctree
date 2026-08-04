@@ -14,8 +14,7 @@ ary = rb_ary_new();
 
 ### VALUE rb_ary_new2(long len)
 
-長さ len 分だけメモリを確保した、
-長さゼロの Ruby の配列を作成し返します。
+長さ len 分だけメモリを確保した、長さゼロの Ruby の配列を作成し返します。
 
 ```text title="対応するRubyコード"
 ary = Array.new(len)

@@ -3,8 +3,7 @@ library: _builtin
 ---
 # class ThreadGroup < Object
 
-スレッドグループを表すクラスです。グループに属する [c:Thread] をまとめて
-操作できます。
+スレッドグループを表すクラスです。グループに属する [c:Thread] をまとめて操作できます。
 
 [c:Thread] は必ずいずれかひとつのスレッドグループに属します。
 生成されたばかりの Thread は、生成した Thread のグループを引き継ぎます。
@@ -82,8 +81,7 @@ puts "tg group now #{tg.list}"
 自身への [m:ThreadGroup#add] によるスレッドの追加・削除を禁止します。
 enclose された ThreadGroup に追加や削除を行うと例外 [c:ThreadError] が発生します。
 
-ただし、[m:Thread.new] によるスレッドの追加は禁止されません。enclose されたスレッドグループ A に
-属するスレッドが新たにスレッドを生成した場合、生成されたスレッドはスレッドグループ A に属します。
+ただし、[m:Thread.new] によるスレッドの追加は禁止されません。enclose されたスレッドグループ A に属するスレッドが新たにスレッドを生成した場合、生成されたスレッドはスレッドグループ A に属します。
 
 ```ruby title="追加の例"
 thg = ThreadGroup.new.enclose
@@ -136,8 +134,7 @@ p thg.enclosed?         # => false
 ### def list    -> [Thread] 
 
 self に属するスレッドの配列を返します。
-version 1.8 では、aborting 状態であるスレッド
-も要素に含まれます。つまり「生きている」スレッドの配列を返します。
+version 1.8 では、aborting 状態であるスレッドも要素に含まれます。つまり「生きている」スレッドの配列を返します。
 
 ```ruby title="例"
 p ThreadGroup::Default.list # => [#<Thread:0x00007f8f13867078 run>]
@@ -147,5 +144,4 @@ p ThreadGroup::Default.list # => [#<Thread:0x00007f8f13867078 run>]
 
 ### const Default -> ThreadGroup
 
-デフォルトで定義されている [c:ThreadGroup] です。メインスレッド
-は最初このグループに属します。
+デフォルトで定義されている [c:ThreadGroup] です。メインスレッドは最初このグループに属します。

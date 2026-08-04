@@ -4,8 +4,7 @@ library: rss
 # class RSS::Maker::XMLStyleSheets::XMLStyleSheet < Object
 
 xml_stylesheetは
-maker.xml_stylesheet.new_xml_stylesheetで作成されたオ
-ブジェクトとします。
+maker.xml_stylesheet.new_xml_stylesheetで作成されたオブジェクトとします。
 
 hrefとtypeは必ず指定する必要があります。ただし、
 hrefに設定した値の拡張子が.xslまたは.cssの場合は

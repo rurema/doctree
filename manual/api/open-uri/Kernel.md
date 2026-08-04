@@ -9,8 +9,7 @@ until: "3.0.0"
 ### module_function def open(name, mode = 'r', perm = nil, options = {})                -> StringIO | Tempfile | IO
 ### module_function def open(name, mode = 'r', perm = nil, options = {}) {|ouri| ...}   -> object
 
-name が http:// や ftp:// で始まっている文字列なら URI のリソースを
-取得した上で [c:StringIO] オブジェクトまたは [c:Tempfile] オブジェクトとして返します。
+name が http:// や ftp:// で始まっている文字列なら URI のリソースを取得した上で [c:StringIO] オブジェクトまたは [c:Tempfile] オブジェクトとして返します。
 返されるオブジェクトは [c:OpenURI::Meta] モジュールで extend されています。
 
 name に open メソッドが定義されている場合は、*rest を引数として渡し
@@ -19,9 +18,7 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれま�
 これ以外の場合は、name はファイル名として扱われ、従来の
 [m:Kernel?.open](name, *rest) が呼ばれます。
 
-ブロックを与えた場合は上の場合と同様、name が http:// や ftp:// で
-始まっている文字列なら URI のリソースを取得した上で [c:StringIO] オブジェクト
-または [c:Tempfile] オブジェクトを引数としてブロックを評価します。後は同様です。
+ブロックを与えた場合は上の場合と同様、name が http:// や ftp:// で始まっている文字列なら URI のリソースを取得した上で [c:StringIO] オブジェクトまたは [c:Tempfile] オブジェクトを引数としてブロックを評価します。後は同様です。
 引数のオブジェクトは [c:OpenURI::Meta] モジュールで extend されています。
 
 Ruby2.7以降、open-uriにより拡張されたKernel.openでURLを開くときにwarningが表示されるようになりました。

@@ -5,8 +5,7 @@ library: fiddle/import
 
 C の関数をモジュールにインポートするためのモジュールです。
 
-対象となるモジュールに [m:Object#extend] することで、
-そのモジュールにインポートできるようになります。
+対象となるモジュールに [m:Object#extend] することで、そのモジュールにインポートできるようになります。
 
 使いかたは [lib:fiddle] や [lib:fiddle/import] を参照してください。
 
@@ -15,8 +14,7 @@ C の関数をモジュールにインポートするためのモジュールで
 ### def [](name) -> Fiddle::Function|nil
 
 [m:Fiddle::Importer#extern] でインポートした関数の 
-[c:Fiddle::Function] オブジェクト
-を返します。
+[c:Fiddle::Function] オブジェクトを返します。
 
 name という名前の関数が存在しない場合は nil を返します。
 
@@ -24,18 +22,15 @@ name という名前の関数が存在しない場合は nil を返します。
 
 ### def bind(signature, *opts){ ... } -> Fiddle::Function
 
-Ruby のブロックを C の関数で wrap し、その関数をモジュールに
-インポートします。
+Ruby のブロックを C の関数で wrap し、その関数をモジュールにインポートします。
 
 これでインポートされた関数はモジュール関数として定義されます。
-また、[m:Fiddle::Importer#\[\]] で [c:Fiddle::Function] オブジェクトとして
-取り出すことができます。
+また、[m:Fiddle::Importer#\[\]] で [c:Fiddle::Function] オブジェクトとして取り出すことができます。
 
 signature で関数の名前とシネグチャを指定します。例えば
 "int compare(void*, void*)" のように指定します。
 
-opts には :stdcall もしくは :cdecl を渡すことができ、
-呼出規約を明示できます。
+opts には :stdcall もしくは :cdecl を渡すことができ、呼出規約を明示できます。
 
 - **return** -- インポートした関数を表す [c:Fiddle::Function] オブジェクトを返します。
 
@@ -68,13 +63,11 @@ p data.unpack("i!*") # => [-13, -1, 0, 32, 49, 180001]
 
 C の動的ライブラリをモジュールにインポートします。
 
-これで取り込んだライブラリの関数は [m:Fiddle::Importer#extern] で
-インポートできます。
+これで取り込んだライブラリの関数は [m:Fiddle::Importer#extern] でインポートできます。
 
 複数のライブラリを指定できます。
 ファイル名文字列を指定することでそのライブラリをインポートします。
-[c:Fiddle::Handle] を渡すとそのハンドルが指しているライブラリをインポート
-します。
+[c:Fiddle::Handle] を渡すとそのハンドルが指しているライブラリをインポートします。
 
 このメソッドは同じモジュールで2回呼ばないでください。
 
@@ -93,8 +86,7 @@ C の関数をインポートします。
 signature で関数の名前とシネグチャを指定します。例えば
 "int strcmp(char*, char*)" のように指定できます。
 
-opts には :stdcall もしくは :cdecl を渡すことができ、
-呼出規約を明示できます。
+opts には :stdcall もしくは :cdecl を渡すことができ、呼出規約を明示できます。
 
 - **return** -- インポートした関数を表す [c:Fiddle::Function] オブジェクトを返します。
 
@@ -122,12 +114,10 @@ t が文字列の場合、その文字列が表す C の型の size が返され
 例えば、sizeof("char") は 1 を返します。
 sizeof("char*") は環境によって 4 や 8 といった値を返します。
 
-[m:Fiddle::Importer#struct] で定義した
-構造体クラスを渡すと、その構造体のサイズを返します。
+[m:Fiddle::Importer#struct] で定義した構造体クラスを渡すと、その構造体のサイズを返します。
 [m:Fiddle::Importer#union] で定義した共用体クラスも同様です。
 
-t がクラスの場合、t が to_ptr というインスタンスメソッドを持っている
-ならば t.size を返します。
+t がクラスの場合、t が to_ptr というインスタンスメソッドを持っているならば t.size を返します。
 
 それ以外の場合は Pointer[t].size を返します。
 
@@ -151,8 +141,7 @@ end
 
 C の構造体型に対応する Ruby のクラスを構築して返します。
 
-構造体の各要素は C と似せた表記ができます。そしてそれを
-配列で signature に渡してデータを定義します。例えば C における
+構造体の各要素は C と似せた表記ができます。そしてそれを配列で signature に渡してデータを定義します。例えば C における
 
 ```c
 struct timeval {
@@ -175,8 +164,7 @@ Timeval = struct(["long tv_sec", "long tv_usec"])
   - to_ptr
   - to_i
   - 構造体の各メンバへのアクセサ
-返されるクラスは [c:Fiddle::CStruct] を継承しています。詳しくは
-そちらを参照してください。
+返されるクラスは [c:Fiddle::CStruct] を継承しています。詳しくはそちらを参照してください。
 
 #%# これで定義したクラスについては Fiddle::CStruct を参照せよ
 
@@ -211,8 +199,7 @@ extern や struct で利用する型の別名を定義します。
 
 C の共用体型に対応する Ruby のクラスを構築して返します。
 
-共用体型を Ruby 上で定義する方法は [m:Fiddle::Importer#struct] と
-ほぼ同様です。C における
+共用体型を Ruby 上で定義する方法は [m:Fiddle::Importer#struct] とほぼ同様です。C における
 
 ```c
 typedef union epoll_data
@@ -255,14 +242,10 @@ end
 ### def create_value(type, val = nil) -> Fiddle::CStruct
 ### def value(type, val = nil) -> Fiddle::CStruct
 
-型が type で要素名が "value" であるような構造体を
-定義([m:Fiddle::Importer#struct])し、
-その構造体のメモリを [m:Fiddle::CStruct.malloc] で確保し、
-確保したメモリを保持しているオブジェクトを返します。
+型が type で要素名が "value" であるような構造体を定義([m:Fiddle::Importer#struct])し、その構造体のメモリを [m:Fiddle::CStruct.malloc] で確保し、確保したメモリを保持しているオブジェクトを返します。
 
 type は "int", "void*" といった文字列で型を指定します。
-val に nil 以外を指定すると、確保された構造体に
-その値を代入します。
+val に nil 以外を指定すると、確保された構造体にその値を代入します。
 
 - **param** `type` -- 型を表す文字列
 - **param** `val` -- 構造体に確保される初期値

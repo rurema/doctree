@@ -12,7 +12,6 @@ library: openssl
 
 互換性のためのメソッドです。
 
-[m:OpenSSL::Digest.new] で返されるオブジェクトと同じ働きをする
-オブジェクトを返します。
+[m:OpenSSL::Digest.new] で返されるオブジェクトと同じ働きをするオブジェクトを返します。
 
 - **param** `args` -- [m:OpenSSL::Digest.new] に渡すものと同じ引数を渡します

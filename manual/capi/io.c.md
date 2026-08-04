@@ -6,8 +6,7 @@ p の実体。obj を見やすく出力します。
 
 [man:open(2)] のようなモード指定modeをruby内部のモードフラグに変換します。
 
-modeは、O_RDONLY, O_WRONLY, O_RDWRのいずれかで
-対応する以下の値のいずれかを返します。
+modeは、O_RDONLY, O_WRONLY, O_RDWRのいずれかで対応する以下の値のいずれかを返します。
 
   - FMODE_READABLE,
   - FMODE_WRITABLE,
@@ -16,25 +15,19 @@ modeは、O_RDONLY, O_WRONLY, O_RDWRのいずれかで
 FMODE_READWRITEは、FMODE_READABLEと
 FMODE_WRITEABLEの論理和です。
 
-Microsoft Windows などファイルにバイナリ／テキスト属性の区別がある
-プラットフォームでは、modeにO_BINARYの論理和が指定されてい
-れば、戻り値にはFMODE_BINMODEの論理和が指定されます。
+Microsoft Windows などファイルにバイナリ／テキスト属性の区別があるプラットフォームでは、modeにO_BINARYの論理和が指定されていれば、戻り値にはFMODE_BINMODEの論理和が指定されます。
 
 ### static VALUE pipe_open(char *pname, char *mode)
 
-[man:popen(3)] を実行します。引数pname、modeは [man:popen(3)] の
-引数に対応します。
+[man:popen(3)] を実行します。引数pname、modeは [man:popen(3)] の引数に対応します。
 
 pnameは、実行するプロセスで "-" ならば、自身を [man:fork(2)] します。
 
-[c:IO] オブジェクトを生成し、mode が "r" のとき、
-子プロセスの標準出力を生成した IO の入力につなぎます。
+[c:IO] オブジェクトを生成し、mode が "r" のとき、子プロセスの標準出力を生成した IO の入力につなぎます。
 
-mode が "w" のとき、
-子プロセスの標準入力を生成した IO の出力につなぎます。
+mode が "w" のとき、子プロセスの標準入力を生成した IO の出力につなぎます。
 
-mode に "+" が含まれれば、子プロセスの標準入出力を
-生成した IO の入出力につなぎます。
+mode に "+" が含まれれば、子プロセスの標準入出力を生成した IO の入出力につなぎます。
 
 生成した IO オブジェクトを返します。
 pnameが "-" であれば、子プロセスには、nil を返します

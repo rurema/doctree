@@ -112,8 +112,7 @@ rake test TESTOPTS="--runner=fox"   # use the fox test runner
 
 明示的にテスト対象のファイルを指定します。
 
-[m:Rake::TestTask#pattern=], [m:Rake::TestTask#test_files=] の
-両方でテスト対象を指定した場合、両者は一つにまとめて使用されます。
+[m:Rake::TestTask#pattern=], [m:Rake::TestTask#test_files=] の両方でテスト対象を指定した場合、両者は一つにまとめて使用されます。
 
 - **param** `list` -- 配列か [c:Rake::FileList] のインスタンスを指定します。
 
@@ -143,7 +142,6 @@ rake test TESTOPTS="--runner=fox"   # use the fox test runner
 
 自身を初期化します。
 
-ブロックが与えられた場合は、自身をブロックパラメータとして与えられた
-ブロックを評価します。
+ブロックが与えられた場合は、自身をブロックパラメータとして与えられたブロックを評価します。
 
 - **param** `name` -- ターゲット名を指定します。

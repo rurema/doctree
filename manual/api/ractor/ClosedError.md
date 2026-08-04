@@ -6,8 +6,7 @@ since: "3.0"
 
 閉じられた Ractor のポートに対して送受信を行おうとした場合に発生します。
 
-[c:StopIteration] のサブクラスであるため、[m:Kernel?.loop] の中で発生した
-場合はループを終了させます。他の Ractor に関する例外と異なり、
+[c:StopIteration] のサブクラスであるため、[m:Kernel?.loop] の中で発生した場合はループを終了させます。他の Ractor に関する例外と異なり、
 [c:Ractor::Error] のサブクラスではないことに注意してください。
 
 ```ruby

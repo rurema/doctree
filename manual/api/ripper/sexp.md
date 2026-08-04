@@ -50,10 +50,7 @@ pp Ripper.sexp("def m(a) nil end")
 [:@ident, "m", [1, 4]]
 ```
 
-また、Ripper.sexp は [m:Ripper.sexp_raw] とは異なり、読みやすさのため
-に stmts_add や stmts_new のような _add、_new で終わるパーサイベントを
-省略します。_add で終わるパーサイベントはハンドラの引数が 0 個のものが
-省略されます。詳しくは [m:Ripper::PARSER_EVENTS] を確認してください。
+また、Ripper.sexp は [m:Ripper.sexp_raw] とは異なり、読みやすさのために stmts_add や stmts_new のような _add、_new で終わるパーサイベントを省略します。_add で終わるパーサイベントはハンドラの引数が 0 個のものが省略されます。詳しくは [m:Ripper::PARSER_EVENTS] を確認してください。
 
 - **SEE** [m:Ripper.sexp_raw]
 

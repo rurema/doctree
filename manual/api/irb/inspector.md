@@ -1,8 +1,7 @@
 ---
 type: library
 ---
-irb コマンドで実行結果の出力方式(inspect_mode)を定義するためのサブライ
-ブラリです。
+irb コマンドで実行結果の出力方式(inspect_mode)を定義するためのサブライブラリです。
 
 # reopen IRB
 
@@ -73,5 +72,4 @@ p IRB::Inspector.keys_with_inspector(IRB::Inspector::INSPECTORS[true])
 
 定義された inspect_mode を管理する [c:Hash] オブジェクトです。
 
-デフォルトで扱える Inspector については [ref:lib:irb#inspect_mode] を
-参照してください。
+デフォルトで扱える Inspector については [ref:lib:irb#inspect_mode] を参照してください。

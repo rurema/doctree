@@ -8,8 +8,7 @@ include Syslog::Facility
 include Syslog::Level
 include Syslog::Macros
 
-このモジュールにはシステムで使用可能なLOG_*定数、モジュール関数が定義さ
-れています。
+このモジュールにはシステムで使用可能なLOG_*定数、モジュール関数が定義されています。
 
 ```ruby title="例"
 require 'syslog'
@@ -57,8 +56,7 @@ Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
 
 # module Syslog::Option
 
-このモジュールには syslog のオプション(options)に関する定数が定義されて
-います。
+このモジュールには syslog のオプション(options)に関する定数が定義されています。
 
 ## Constants
 
@@ -74,8 +72,7 @@ Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
 
 # module Syslog::Facility
 
-このモジュールには syslog の機能(facilities)に関する定数が定義されてい
-ます。
+このモジュールには syslog の機能(facilities)に関する定数が定義されています。
 
 ## Constants
 
@@ -109,8 +106,7 @@ Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
 
 # module Syslog::Level
 
-このモジュールには syslog の優先度(priorities)に関する定数が定義されて
-います。
+このモジュールには syslog の優先度(priorities)に関する定数が定義されています。
 
 ## Constants
 

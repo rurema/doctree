@@ -21,8 +21,7 @@ gem-format な tar ファイルを読むためのクラスです。
 ### def rewind -> Integer
 
 自身に関連付けられた IO のファイルポインタを先頭に移動します。または、
-[m:Gem::Package::TarReader.new] したときの [m:IO#pos] にファイルポ
-インタを先頭に移動します。
+[m:Gem::Package::TarReader.new] したときの [m:IO#pos] にファイルポインタを先頭に移動します。
 
 [m:Gem::Package::TarReader#each] の実行中に呼ばないようにしてください。
 

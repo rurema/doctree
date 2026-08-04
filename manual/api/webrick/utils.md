@@ -53,8 +53,7 @@ p WEBrick::Utils.random_string(10)   #=> "xF0jwU4RJd"
 
 ### module_function def create_listeners(address, port, logger = nil) -> [TCPServer]
 
-与えられたアドレスとポートで [c:TCPServer] オブジェクトを生成し
-ます。
+与えられたアドレスとポートで [c:TCPServer] オブジェクトを生成します。
 
 - **param** `address` -- アドレスを指定します。
 

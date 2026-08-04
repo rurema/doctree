@@ -36,8 +36,7 @@ end
 
 ### def attr_accessor(*name) -> [Symbol]
 
-インスタンス変数 name に対する読み取りメソッドと書き込みメソッドの両方を
-定義します。
+インスタンス変数 name に対する読み取りメソッドと書き込みメソッドの両方を定義します。
 
 ```ruby title="例"
 class User

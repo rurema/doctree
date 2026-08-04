@@ -16,8 +16,7 @@ library: rexml/document
 
 どの要素の属性であるかを element で指定します。
 
-通常は [m:REXML::Element.new] によって Attributes オブジェクト
-が生成されるため、このメソッドを使う必要はありません。
+通常は [m:REXML::Element.new] によって Attributes オブジェクトが生成されるため、このメソッドを使う必要はありません。
 
 - **param** `element` -- 属性が属する要素([c:REXML::Element] オブジェクト)
 
@@ -108,8 +107,7 @@ end
 
 各属性の名前と値に対しブロックを呼び出します。
 
-名前には expanded_name([m:REXML::Namespace#expanded_name])が
-渡されます。
+名前には expanded_name([m:REXML::Namespace#expanded_name])が渡されます。
 
 ```ruby
 require 'rexml/document'
@@ -160,8 +158,7 @@ p a.attributes.get_attribute("foo:att") # => foo:att='1'
 指定した属性を更新します。
 
 name で属性の名前を、value で値を更新します。
-既に同じ名前の属性がある場合は上書きされ、
-そうでない場合は属性が追加されます。
+既に同じ名前の属性がある場合は上書きされ、そうでない場合は属性が追加されます。
 
 ```ruby
 require 'rexml/document'
@@ -183,8 +180,7 @@ p a # => <a foo:att='1' bar:att='2' att='9' foo:attt='8'/>
 
 ### def prefixes -> [String]
 
-self の中で宣言されている prefix の集合を
-文字列の配列で返します。
+self の中で宣言されている prefix の集合を文字列の配列で返します。
 
 self が属する要素より上位の要素で定義されているものは含みません。
 
@@ -260,9 +256,7 @@ p a.attributes.delete(attr)    # => <a/>
 
 属性を追加/更新します。
 
-attribute で更新する属性([c:REXML::Attribute] オブジェクト)を
-指定します。既に同じ名前([m:REXML::Namespace#name])のオブジェクトが
-存在する場合は属性が上書きされ、ない場合は追加されます。
+attribute で更新する属性([c:REXML::Attribute] オブジェクト)を指定します。既に同じ名前([m:REXML::Namespace#name])のオブジェクトが存在する場合は属性が上書きされ、ない場合は追加されます。
 
 - **param** `attribute` -- 追加(更新)する属性([c:REXML::Attribute] オブジェクト)
 - **SEE** [m:REXML::Attributes#\[\]=]
@@ -294,13 +288,11 @@ p a # => <a foo:att='1' bar:att='2'/>
 
 namespace と name で特定される属性を返します。
 
-namespace で名前空間を、 name で prefix を含まない属性名を
-指定します。
+namespace で名前空間を、 name で prefix を含まない属性名を指定します。
 
 指定された属性が存在しない場合は nil を返します。
 
-XML プロセッサが prefix を置き換えてしまった場合でも、このメソッドを
-使うことで属性を正しく指定できます。
+XML プロセッサが prefix を置き換えてしまった場合でも、このメソッドを使うことで属性を正しく指定できます。
 
 - **param** `namespace` -- 名前空間(URI, 文字列)
 - **param** `name` -- 属性名(文字列)

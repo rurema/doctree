@@ -7,8 +7,7 @@ require:
 ---
 # class WEBrick::HTTPServlet::HTTPServletError < StandardError
 
-ユーザが作成したサーブレット内で例外を発生させるときに使うと便利かもし
-れません。
+ユーザが作成したサーブレット内で例外を発生させるときに使うと便利かもしれません。
 
 # class WEBrick::HTTPServlet::AbstractServlet < Object
 
@@ -53,8 +52,7 @@ srv.start
 ### def WEBrick::HTTPServlet::AbstractServlet.get_instance(server, *options)    -> WEBrick::HTTPServlet::AbstractServlet
 
 new(server, *options) を呼び出してサーブレットを生成して返します。
-[c:WEBrick::HTTPServer] オブジェクトは実際にはこの get_instance メソッドを呼び出して
-サーブレットを生成します。
+[c:WEBrick::HTTPServer] オブジェクトは実際にはこの get_instance メソッドを呼び出してサーブレットを生成します。
 
 特に理由が無い限り AbstractServlet のサブクラスがこのメソッドを再定義する必要はありません。
 
@@ -66,11 +64,9 @@ new(server, *options) を呼び出してサーブレットを生成して返し�
 
 ### def service(request, response)    -> ()
 
-指定された [c:WEBrick::HTTPRequest] オブジェクト request の [m:WEBrick::HTTPRequest#request_method] に応じて、
-自身の do_GET, do_HEAD, do_POST, do_OPTIONS... いずれかのメソッドを request と response を引数として呼びます。
+指定された [c:WEBrick::HTTPRequest] オブジェクト request の [m:WEBrick::HTTPRequest#request_method] に応じて、自身の do_GET, do_HEAD, do_POST, do_OPTIONS... いずれかのメソッドを request と response を引数として呼びます。
 
-[c:WEBrick::HTTPServer] オブジェクトはクライアントからのリクエストがあるたびに
-サーブレットオブジェクトを生成し service メソッドを呼びます。
+[c:WEBrick::HTTPServer] オブジェクトはクライアントからのリクエストがあるたびにサーブレットオブジェクトを生成し service メソッドを呼びます。
 
 特に理由が無い限り AbstractServlet のサブクラスがこのメソッドを定義する必要はありません。
 
@@ -89,19 +85,13 @@ new(server, *options) を呼び出してサーブレットを生成して返し�
 ### def do_DELETE(request, response)     -> ()
 ### def do_OPTIONS(request, response)    -> ()
 
-自身の service メソッドから HTTP のリクエストに応じて
-呼ばれるメソッドです。AbstractServlet のサブクラスはこれらのメソッドを適切に実装し
-なければいけません。返り値は特に規定されていません。
+自身の service メソッドから HTTP のリクエストに応じて呼ばれるメソッドです。AbstractServlet のサブクラスはこれらのメソッドを適切に実装しなければいけません。返り値は特に規定されていません。
 
 クライアントが使う可能性のある RFC で定義された HTTP のメソッドはすべて実装する必要があります。
 クライアントからのリクエストに使われないと分かっているメソッドは実装しなくてもかまいません。
-実装されていない HTTP メソッドであった場合、自身の service メソッドが
-例外を発生させます。
+実装されていない HTTP メソッドであった場合、自身の service メソッドが例外を発生させます。
 
-このメソッドが呼ばれた時点では、クライアントからのリクエストに含まれる Entity Body の読み込みは
-まだ行われていません。[m:WEBrick::HTTPRequest#query], [m:WEBrick::HTTPRequest#body] などの
-メソッドが読ばれた時点で読み込みが行われます。クライアントから巨大なデータが送られてくることを考慮して
-ユーザはプログラミングを行うべきです。
+このメソッドが呼ばれた時点では、クライアントからのリクエストに含まれる Entity Body の読み込みはまだ行われていません。[m:WEBrick::HTTPRequest#query], [m:WEBrick::HTTPRequest#body] などのメソッドが読ばれた時点で読み込みが行われます。クライアントから巨大なデータが送られてくることを考慮してユーザはプログラミングを行うべきです。
 
 - **param** `request` -- クライアントからのリクエストを表す [c:WEBrick::HTTPRequest] オブジェクトです。
 

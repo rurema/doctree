@@ -20,8 +20,7 @@ Handle はブロックの終りで自動的にクローズされます。
 
 flags で [man:dlopen(3)] の第2引数として渡すフラグを指定できます。
 [m:Fiddle::Handle::RTLD_LAZY]、[m:Fiddle::Handle::RTLD_NOW] 
-のどちらか一方を指定する必要があり、
-またそれに [m:Fiddle::Handle::RTLD_GLOBAL] と OR を取ることができます。
+のどちらか一方を指定する必要があり、またそれに [m:Fiddle::Handle::RTLD_GLOBAL] と OR を取ることができます。
 詳しい意味は manpage([man:dlopen(3)]) を参照してください。
 
 - **param** `lib` -- ライブラリを文字列で指定します。
@@ -40,8 +39,7 @@ p func.call("uxyz") # => 4
 ### def Fiddle::Handle.sym(func) -> Integer
 ### def Fiddle::Handle.[](func) -> Integer
 
-ライブラリのデフォルトの検索順序に従い、現在のライブラリ以降の
-シンボルを探します。
+ライブラリのデフォルトの検索順序に従い、現在のライブラリ以降のシンボルを探します。
 
 Fiddle::Handle::NEXT.sym(func) と同じです。詳しくは [man:dlsym(3)] の
 RTLD_NEXT を見てください。

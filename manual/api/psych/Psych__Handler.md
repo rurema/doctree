@@ -5,8 +5,7 @@ library: psych
 
 [c:Psych::Parser] で用いるイベントハンドラの抽象基底クラスです。
 
-[c:Psych::Parser] を使うためには、このクラスを継承し、
-取り扱いたいイベントに対応するメソッドを定義します。
+[c:Psych::Parser] を使うためには、このクラスを継承し、取り扱いたいイベントに対応するメソッドを定義します。
 
 ## Instance Methods
 
@@ -19,8 +18,7 @@ encoding にはストリームのエンコーディング(以下のいずれか)
   - [m:Psych::Parser::UTF16BE]
   - [m:Psych::Parser::UTF16LE]
 
-このメソッドは YAML のストリームごとに呼び出されます。一つのストリームには
-複数のドキュメントが含まれている可能性があります。
+このメソッドは YAML のストリームごとに呼び出されます。一つのストリームには複数のドキュメントが含まれている可能性があります。
 
 必要に応じてこのメソッドを override してください。
 
@@ -36,8 +34,7 @@ version には YAML ドキュメントに宣言されているバージョンが
 tag_directives には tag directive の配列が渡されます。
 それぞれの tag は [prefix, suffix] という配列で表現されます。
 
-implicit にはドキュメントが implicit に始まっているかどうかが
-真偽値で渡されます。
+implicit にはドキュメントが implicit に始まっているかどうかが真偽値で渡されます。
 
 必要に応じてこのメソッドを override してください。
 
@@ -140,8 +137,7 @@ anchor がない場合には nil が渡されます。
 tag にはスカラー値に関連付けられた tag の名前が文字列で渡されます。
 tag がない場合には nil が渡されます。
 
-plain は plain style であるかどうか、quoted は quoted style であるかどうか
-が渡されます。style には node の style が整数値で渡されます。
+plain は plain style であるかどうか、quoted は quoted style であるかどうかが渡されます。style には node の style が整数値で渡されます。
 style は次の値のいずれかです。
   - [m:Psych::Nodes::Scalar::PLAIN]
   - [m:Psych::Nodes::Scalar::SINGLE_QUOTED]
@@ -194,11 +190,9 @@ anchor がない場合には nil が渡されます。
 tag には sequence に関連付けられた tag の名前が文字列で渡されます。
 tag がない場合には nil が渡されます。
 
-implicit には sequence が implicit に開始されたかどうかが
-真偽値で渡されます。
+implicit には sequence が implicit に開始されたかどうかが真偽値で渡されます。
 
-style には sequence の style が整数値で渡されます。以下のいずれか
-です。
+style には sequence の style が整数値で渡されます。以下のいずれかです。
   - [m:Psych::Nodes::Sequence::BLOCK]
   - [m:Psych::Nodes::Sequence::FLOW]
 
@@ -249,11 +243,9 @@ anchor がない場合には nil が渡されます。
 tag には map に関連付けられた tag の名前が文字列で渡されます。
 tag がない場合には nil が渡されます。
 
-implicit には map が implicit に開始されたかどうかが
-真偽値で渡されます。
+implicit には map が implicit に開始されたかどうかが真偽値で渡されます。
 
-style には sequence の style が整数値で渡されます。以下のいずれか
-です。
+style には sequence の style が整数値で渡されます。以下のいずれかです。
   - [m:Psych::Nodes::Mapping::BLOCK]
   - [m:Psych::Nodes::Mapping::FLOW]
 
@@ -316,8 +308,7 @@ override してください。
 [c:Psych::Parser] でパースし、生じたイベントから 
 YAML ドキュメントを再構築するようなハンドラです。
 
-以下の例では STDIN から YAML ドキュメントを入力し、
-再構築した YAML ドキュメントを STDERR に出力します。
+以下の例では STDIN から YAML ドキュメントを入力し、再構築した YAML ドキュメントを STDERR に出力します。
 
 ```ruby
 parser = Psych::Parser.new(Psych::Emitter.new($stderr))

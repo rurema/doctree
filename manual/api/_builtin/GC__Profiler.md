@@ -4,9 +4,7 @@ since: "1.9.1"
 ---
 # module GC::Profiler
 
-GC の起動回数や起動したタイミング、処理時間などの GC に関するプロファイル
-情報や、ヒープ全体のサイズ、ヒープ内での使用サイズやヒープ内に存在する
-オブジェクトの個数といった情報を扱うモジュールです。
+GC の起動回数や起動したタイミング、処理時間などの GC に関するプロファイル情報や、ヒープ全体のサイズ、ヒープ内での使用サイズやヒープ内に存在するオブジェクトの個数といった情報を扱うモジュールです。
 
 - **SEE** [c:GC]
 
@@ -134,8 +132,7 @@ p GC::Profiler.total_time # => 0.0011530000000000012
 ### def GC::Profiler.raw_data -> [Hash, ...] | nil
 
 GC のプロファイル情報を GC の発生ごとに [c:Hash] の配列
-(:GC_INVOKE_TIME が早いもの順)で返します。[c:GC::Profiler] が有効になっ
-ていない場合は nil を返します。
+(:GC_INVOKE_TIME が早いもの順)で返します。[c:GC::Profiler] が有効になっていない場合は nil を返します。
 
 ```text title="例"
 GC::Profiler.enable
@@ -180,8 +177,7 @@ GC::Profiler.raw_data
 
   GC がマークフェイズかどうか
 
-また、GC_PROFILE_MORE_DETAIL を有効にして Ruby をビルドした場合、以下の
-キーも参照できます。
+また、GC_PROFILE_MORE_DETAIL を有効にして Ruby をビルドした場合、以下のキーも参照できます。
 
 - :GC_MARK_TIME
 - :GC_SWEEP_TIME

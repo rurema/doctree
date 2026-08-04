@@ -2,8 +2,7 @@
 
 ### static void arg_ambiguous(void)
 
-メソッド引数の括弧が省略され、最初の引数の一文字目が
-演算子とも解釈できる場合に警告を出します。
+メソッド引数の括弧が省略され、最初の引数の一文字目が演算子とも解釈できる場合に警告を出します。
 
 ### static NODE *arg_blk_pass(NODE *node1, NODE *node2)
 
@@ -23,8 +22,7 @@
 
 ### static NODE *block_append(NODE *head, NODE *tail)
 
-head と tail を NODE_BLOCK のリストとして連結し、
-先頭ノードを返します。head または tail が NODE_BLOCK
+head と tail を NODE_BLOCK のリストとして連結し、先頭ノードを返します。head または tail が NODE_BLOCK
 でない場合は NODE_BLOCK に入れたうえでそれを連結します。
 head もしくは tail が NULL なら連結はせず、
 NULL でないほうを返します。
@@ -63,19 +61,16 @@ id が変数・定数として有効ならば、それを参照するノード�
 
 ### static int here_document(NODE *here)
 
-lex_strterm 形式の term に従ってヒアドキュメントを
-終端行まで読み込む。
+lex_strterm 形式の term に従ってヒアドキュメントを終端行まで読み込む。
 
 ### static int heredoc_identifier(void)
 
-ヒアドキュメントの「<<」を既に読みこんだものと仮定して
-開始記号を読みこみ、lex_strterm をセットします。
+ヒアドキュメントの「<<」を既に読みこんだものと仮定して開始記号を読みこみ、lex_strterm をセットします。
 返り値は、読み込みに成功したときはシンボル、解析できないときは 0 です。
 
 ### static void heredoc_restore(NODE *here)
 
-ヒアドキュメントの本体の読み込みに失敗したとき、開始記号
-のある行を復帰します。here は lex_strterm です。
+ヒアドキュメントの本体の読み込みに失敗したとき、開始記号のある行を復帰します。here は lex_strterm です。
 
 ### void Init_sym(void)
 
@@ -83,8 +78,7 @@ lex_strterm 形式の term に従ってヒアドキュメントを
 
 ### static ID internal_id(void)
 
-インタプリタ内部でだけ使う、
-他のものとは重複しない ID を返します。
+インタプリタ内部でだけ使う、他のものとは重複しない ID を返します。
 
 ### static VALUE lex_get_str(VALUE s)
 
@@ -104,8 +98,7 @@ tail を連結し、先頭ノードを返します。head が NULL
 
 ### static NODE *list_concat(NODE *head, NODE *tail)
 
-NODE_LISTのリストheadにNODE_LISTのノードtailを連結し、
-先頭ノードを返す。head、tailともにNULLであってはならない。
+NODE_LISTのリストheadにNODE_LISTのノードtailを連結し、先頭ノードを返す。head、tailともにNULLであってはならない。
 
 ### static NODE *literal_append(NODE *head, NODE *tail)
 
@@ -133,8 +126,7 @@ NODE_LISTのリストheadにNODE_LISTのノードtailを連結し、
 ### static void local_pop(void)
 
 ローカル変数テーブルをポップします。
-テーブルが参照されていない場合、
-テーブルは自動的に開放されます。
+テーブルが参照されていない場合、テーブルは自動的に開放されます。
 
 ### static void local_push(int top)
 
@@ -162,8 +154,7 @@ NODE_NEWLINEをnodeの前に付加し、それを返す。
 
 ### static char *newtok(void)
 
-トークンバッファを初期化またはクリアし、
-次のトークンを開始する。
+トークンバッファを初期化またはクリアし、次のトークンを開始する。
 
 ### static int nextc(void)
 
@@ -184,8 +175,7 @@ node の種類を返します。
 
 ### static int parse_string(NODE *quote)
 
-lex_strterm 形式のノード quote の指示に従い、
-文字列の終端または埋め込み式の始まりまで読みこみます。
+lex_strterm 形式のノード quote の指示に従い、文字列の終端または埋め込み式の始まりまで読みこみます。
 
 ### MACRO static int peek(int c)
 
@@ -212,24 +202,19 @@ c が EOF (-1) のときはなにもしません。
 
 C の文字列 s を構文木にコンパイルし、ruby_eval_tree と
 ruby_eval_tree_begin に格納します。ruby_eval_tree を返します。
-またコンパイルするときにファイル f の line 行目からをコンパイル
-していると仮定します。
+またコンパイルするときにファイル f の line 行目からをコンパイルしていると仮定します。
 
 ### NODE *rb_compile_file(const char *f, VALUE file, int start)
 
-Ruby の IO オブジェクト file から文字列を読み込み、
-それを Ruby プログラムとして構文木にコンパイルします。
-作成した構文木は ruby_eval_tree と ruby_eval_tree_begin に
-格納し、同時に ruby_eval_tree を返します。
-またコンパイルするときにファイル f の line 行目からをコンパイル
-していると仮定します。
+Ruby の IO オブジェクト file から文字列を読み込み、それを Ruby プログラムとして構文木にコンパイルします。
+作成した構文木は ruby_eval_tree と ruby_eval_tree_begin に格納し、同時に ruby_eval_tree を返します。
+またコンパイルするときにファイル f の line 行目からをコンパイルしていると仮定します。
 
 ### NODE *rb_compile_string(const char *f, VALUE s, int line)
 
 Ruby の文字列 s を構文木にコンパイルし、ruby_eval_tree と
 ruby_eval_tree_begin に格納します。ruby_eval_tree を返します。
-またコンパイルするときにファイル f の line 行目からをコンパイル
-していると仮定します。
+またコンパイルするときにファイル f の line 行目からをコンパイルしていると仮定します。
 
 ### char *rb_id2name(ID id)
 
@@ -268,8 +253,7 @@ id に対応する文字列を返します。
 
 ### NODE *rb_node_newnode(enum node_type type, NODE *a0, NODE *a1, NODE *a2)
 
-ノードタイプが type で a0 a1 a2 を
-要素に持つノードを生成し、返します。
+ノードタイプが type で a0 a1 a2 を要素に持つノードを生成し、返します。
 
 ### void rb_parser_append_print(void)
 
@@ -283,8 +267,7 @@ ruby の -n オプションの実装。
 
 ### static struct kwtable *rb_reserved_word(const char *str, unsigned int len)
 
-長さ len の文字列 str が予約語であれば
-そのフラグテーブルを返します。str が予約語でなければ
+長さ len の文字列 str が予約語であればそのフラグテーブルを返します。str が予約語でなければ
 NULL を返します。
 
 ```c
@@ -299,20 +282,17 @@ struct kwtable {
 
 ### VALUE rb_sym_all_symbols(void)
 
-呼び出し時までに変換が行われたすべてのシンボルの
-配列を返す。
+呼び出し時までに変換が行われたすべてのシンボルの配列を返す。
 
 ### static int read_escape(void)
 
-一文字に相当するバックスラッシュ記法が許す
-文字列を入力バッファから読みとり、評価値を返す。
+一文字に相当するバックスラッシュ記法が許す文字列を入力バッファから読みとり、評価値を返す。
 先頭のバックスラッシュはすでに読みこんでいるものと仮定する。
 不正な記法に対しては yyerror を呼び出し, 0 を返す。
 
 ### static int regx_options(void)
 
-正規表現のオプション (ixmo nesu) を読み込み
-フラグ (ビットマスク) を返します。
+正規表現のオプション (ixmo nesu) を読み込みフラグ (ビットマスク) を返します。
 
 ### static NODE *ret_args(NODE *node)
 
@@ -336,8 +316,7 @@ free してはならない。
 
 ### static int tokadd_escape(int term)
 
-文字列・正規表現中で許されるバックスラッシュ記法を
-入力バッファから読みとり、トークンバッファに追加します。
+文字列・正規表現中で許されるバックスラッシュ記法を入力バッファから読みとり、トークンバッファに追加します。
 先頭のバックスラッシュはすでに読みこんでいるものと仮定します。
 不正な記法に対しては yyerror を呼び出し 0 を返します。
 
@@ -361,18 +340,15 @@ free してはならない。
 
 ### static void top_local_setup(void)
 
-パース中のプログラムのトップレベルのためのローカル変数テーブルをポップし、
-現在存在する SCOPE にそれを接ぎ足す。
+パース中のプログラムのトップレベルのためのローカル変数テーブルをポップし、現在存在する SCOPE にそれを接ぎ足す。
 
 ### static int value_expr(NODE *node)
 
-node を評価したときに、確実に値が得られない式が
-あるならば警告またはエラーにする。
+node を評価したときに、確実に値が得られない式があるならば警告またはエラーにする。
 
 ### static void void_expr(NODE *node)
 
-node の表すプログラムの中に値を使わないと
-意味のない式があれば警告を出す。
+node の表すプログラムの中に値を使わないと意味のない式があれば警告を出す。
 
 ```ruby
 # 警告が出る例
@@ -383,8 +359,7 @@ p lvar
 
 ### static void void_stmts(NODE *node)
 
-node の表すプログラムの中に値を使わないと
-意味のない式があれば警告を出す。
+node の表すプログラムの中に値を使わないと意味のない式があれば警告を出す。
 
 ```ruby
 # 警告が出る例
@@ -395,13 +370,11 @@ p lvar
 
 ### static void warn_unless_e_option(const char *str)
 
-ruby -e で与えたプログラムの評価中ではないなら、
-警告メッセージ str を出力する。
+ruby -e で与えたプログラムの評価中ではないなら、警告メッセージ str を出力する。
 
 ### static void warning_unless_e_option(const char *str)
 
-ruby -e で与えたプログラムの評価中ではなく、
-しかも $VERBOSE が真ならば、警告メッセージ str を出力する。
+ruby -e で与えたプログラムの評価中ではなく、しかも $VERBOSE が真ならば、警告メッセージ str を出力する。
 
 ### static int whole_match_p(char *eos, int len, int indent)
 
@@ -409,9 +382,7 @@ ruby -e で与えたプログラムの評価中ではなく、
 
 ### static NODE *yycompile(char *f, int line)
 
-コンパイルを開始します。そのとき、
-ファイル名 f の line 行目からを
-コンパイルするものと仮定します。
+コンパイルを開始します。そのとき、ファイル名 f の line 行目からをコンパイルするものと仮定します。
 
 ### static int yyerror(char *msg)
 

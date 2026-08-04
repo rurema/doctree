@@ -21,11 +21,9 @@ struct sockaddr に対応します。family, socktype, protocol
 は [man:socket(2)] のパラメータに対応します。
 
 sockaddr には文字列もしくは配列を指定します。
-配列の場合は [m:IPSocket#addr] や [m:UNIXSocket#addr] の
-値と互換でなければなりません。
+配列の場合は [m:IPSocket#addr] や [m:UNIXSocket#addr] の値と互換でなければなりません。
 文字列の場合は [m:Socket.sockaddr_in] や
-[m:Socket.unpack_sockaddr_un] で得られるようなものでなければ
-なりません。
+[m:Socket.unpack_sockaddr_un] で得られるようなものでなければなりません。
 
 実際には sockaddr には以下のようなものが使えます。
   - ["AF_INET", 46102, "localhost.localdomain", "127.0.0.1"]
@@ -36,18 +34,14 @@ sockaddr には文字列もしくは配列を指定します。
   - Socket.sockaddr_in(80, "www.ruby-lang.org")
   - Socket.sockaddr_un("/tmp/sock")
 
-配列で AF_INET/AF_INET6 を指定した場合、配列の4番目の要素
-が実際のIPアドレスとして使われます。配列の3番目の要素は
-ホスト名ですが `Addrinfo#inspect` 
+配列で AF_INET/AF_INET6 を指定した場合、配列の4番目の要素が実際のIPアドレスとして使われます。配列の3番目の要素はホスト名ですが `Addrinfo#inspect` 
 での表示にしか用いられません。
 
 family は [m:Socket::PF_INET] のようなプロコルファミリーを指定します。
-文字列やシンボル名を指定できます(PF_ というプレフィクスは
-省略することもできます)。例えば :INET, :INET6, :UNIX, "PF_INET" などです。
+文字列やシンボル名を指定できます(PF_ というプレフィクスは省略することもできます)。例えば :INET, :INET6, :UNIX, "PF_INET" などです。
 
 socktype は [m:Socket::SOCK_STREAM] のようなソケットタイプを指定します。
-文字列やシンボル名を指定できます(SOCK_ というプレフィクスは
-省略することもできます)。例えば :STREAM, :DGRAM, :RAW, "SOCK_STREAM" などです。
+文字列やシンボル名を指定できます(SOCK_ というプレフィクスは省略することもできます)。例えば :STREAM, :DGRAM, :RAW, "SOCK_STREAM" などです。
 
 protocol は [m:Socket::IPPROTO_TCP] のようなプロトコルを指定します。
 family や socktype と異なり、整数でなければなりません。
@@ -153,8 +147,7 @@ IPv6 に制限したい場合には family に PF_INET6 を指定します。
 flags には Socket::AI_??? という定数のビット OR を取ります。
 
 アドレスの使い方がわかっている場合には socktype を明示すべきです。
-socktype を省略して service を整数で指定した場合にエラーが
-生じるプラットフォームが存在します。512 のようなポート番号は
+socktype を省略して service を整数で指定した場合にエラーが生じるプラットフォームが存在します。512 のようなポート番号は
 socktype なしでは曖昧な指定となるためです。
 
 ```ruby title="例"
@@ -464,8 +457,7 @@ p Addrinfo.tcp("127.0.0.1", 80).getnameinfo(Socket::NI_NUMERICSERV)
 
 引数から自身に「似た」Addrinfo オブジェクトを生成します。
 
-「似た」の意味はプロトコルファミリ、ソケットタイプ、プロトコルが
-同じことを意味します。
+「似た」の意味はプロトコルファミリ、ソケットタイプ、プロトコルが同じことを意味します。
 
 ```ruby
 require 'socket'
@@ -486,11 +478,9 @@ p Addrinfo.unix("/tmp/sock").family_addrinfo("/tmp/sock2")
 ### def connect_from(host, port, timeout: nil){|sock| ... } -> object
 ### def connect_from(addrinfo, timeout: nil){|sock| ... } -> object
 
-引数で指定されたアドレスから
-自身のアドレスへソケットを接続します。
+引数で指定されたアドレスから自身のアドレスへソケットを接続します。
 
-接続元のアドレスは [m:Addrinfo#family_addrinfo] により生成された
-ものが用いられます。
+接続元のアドレスは [m:Addrinfo#family_addrinfo] により生成されたものが用いられます。
 
 ブロックが渡されたときにはそのブロックに接続済み [c:Socket]
 オブジェクトが渡されます。ブロックの返り値がメソッドの返り値となります。
@@ -541,8 +531,7 @@ Addrinfo.tcp("www.ruby-lang.org", 80).connect_from(Addrinfo.tcp("0.0.0.0", 4649)
 
 自身のアドレスから指定したホストへソケット接続します。
 
-接続先のアドレスは [m:Addrinfo#family_addrinfo] により生成された
-ものが用いられます。
+接続先のアドレスは [m:Addrinfo#family_addrinfo] により生成されたものが用いられます。
 
 ブロックが渡されたときにはそのブロックに接続済み [c:Socket]
 オブジェクトが渡されます。ブロックの返り値がメソッドの返り値となります。

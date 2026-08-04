@@ -7,12 +7,10 @@ include:
 
 SSL サーバーのためのクラス。
 
-[c:TCPServer] をラップするクラスで、TCPServer で接続した
-ソケットを [c:OpenSSL::SSL::SSLSocket] でラップする機能を持ちます。
+[c:TCPServer] をラップするクラスで、TCPServer で接続したソケットを [c:OpenSSL::SSL::SSLSocket] でラップする機能を持ちます。
 おおよそ TCPServer と同様のメソッドを持ちます。
 
-基本的には SSL サーバを簡単に実装するためのクラスであり、
-これを利用せずとも SSL サーバを実装することは可能です。
+基本的には SSL サーバを簡単に実装するためのクラスであり、これを利用せずとも SSL サーバを実装することは可能です。
 
 以下はクライアントからの入力を標準出力に出力するだけのサーバです。
 
@@ -79,8 +77,7 @@ SSLSocket オブジェクトを返します。
 ラップしている [c:TCPServer] の [m:TCPServer#listen] 
 を呼びだします。
 
-通常は TCPServer の初期化時に listen が呼びだされるため
-呼ぶ必要はないはずです。
+通常は TCPServer の初期化時に listen が呼びだされるため呼ぶ必要はないはずです。
 
 - **param** `backlog` -- クライアントからの接続要求を保留できる数
 - **raise** `Errno::EXXX` -- [man:listen(2)] が失敗すれば 例外 [c:Errno::EXXX] が発生します。
@@ -97,9 +94,7 @@ accept したらすぐに TLS/SSL ハンドシェイクを実行するかどう�
 [m:OpenSSL::SSL::SSLServer#accept] で
 accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを設定します。
 
-これを真に設定した場合は、[m:OpenSSL::SSL::SSLServer#accept] で
-接続したソケットに対し [m:OpenSSL::SSL::SSLSocket#accept] を
-呼び、ハンドシェイクを実行します。
+これを真に設定した場合は、[m:OpenSSL::SSL::SSLServer#accept] で接続したソケットに対し [m:OpenSSL::SSL::SSLSocket#accept] を呼び、ハンドシェイクを実行します。
 
 デフォルトでは true です。
 

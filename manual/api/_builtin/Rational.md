@@ -16,8 +16,7 @@ p Rational('0.33')   # => (33/100)
 Rational.new(1, 3)   # ~> NoMethodError
 ```
 
-[c:Rational] オブジェクトは常に既約(それ以上約分できない状態)である
-事に注意してください。
+[c:Rational] オブジェクトは常に既約(それ以上約分できない状態)である事に注意してください。
 
 ```ruby title="例"
 p Rational(2, 6)     # => (1/3)
@@ -245,8 +244,7 @@ p Rational('-123.456').ceil(-1)     # => -120
 
 ### def coerce(other) -> Array
 
-`self` と `other` が同じクラスになるよう、`self` か `other` を変換し `[other, self]` という
-配列にして返します。
+`self` と `other` が同じクラスになるよう、`self` か `other` を変換し `[other, self]` という配列にして返します。
 
 - **param** `other` -- 比較または変換するオブジェクト
 
@@ -309,8 +307,7 @@ p Rational(-7, 4).to_i  # => -1
 p Rational(-7, 4).floor # => -2
 ```
 
-`precision` を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
-数か [c:Rational] を返します。
+`precision` を指定した場合は指定した桁数の数値と、上述の性質に最も近い整数か [c:Rational] を返します。
 
 ```ruby title="例"
 p Rational('-123.456').floor(+1)     # => (-247/2)
@@ -394,8 +391,7 @@ p Rational(2, 3).round  # => 1
 p Rational(-3, 2).round # => -2
 ```
 
-`precision` を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
-数か [c:Rational] を返します。
+`precision` を指定した場合は指定した桁数の数値と、上述の性質に最も近い整数か [c:Rational] を返します。
 
 ```ruby title="例"
 p Rational('-123.456').round(+1)    # => (-247/2)

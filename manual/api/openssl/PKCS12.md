@@ -22,14 +22,12 @@ pass はデータを暗号化するためのパスフレーズです。
 name は利用者の利便性のためにオブジェクトに与える名前です。
 pkey は秘密鍵、certは証明書、caはCA証明書の配列です。
 ca に nil を渡すのは空の配列を渡すのと同じ意味です。
-key_nid と cert_nid は 秘密鍵、証明書の暗号化方式を
-文字列で指定します。
+key_nid と cert_nid は 秘密鍵、証明書の暗号化方式を文字列で指定します。
 key_iter は暗号化アルゴリズムにイテレーション回数、
 mac_iter は MAC のイテレーション回数、
 keytype は鍵の種類を渡します。
 
-key_nid, cert_nid, key_iter, mac_iter, keytype すべてに nil を渡すと
-デフォルトとして、証明書は 40 bit RC2 で暗号化、秘密鍵は triple DES
+key_nid, cert_nid, key_iter, mac_iter, keytype すべてに nil を渡すとデフォルトとして、証明書は 40 bit RC2 で暗号化、秘密鍵は triple DES
 で暗号化、key_iter は2048、mac_iter は1、keytypeなしとなります。
 
 mac_iter がデフォルトで1なのは古いソフトウェアとの互換性のためです。
@@ -51,8 +49,7 @@ mac_iter がデフォルトで1なのは古いソフトウェアとの互換性�
 
 文字列もしくは [c:IO] オブジェクトから PKCS#12 オブジェクトを生成します。
 
-データは通常パスフレーズで暗号化されているため、pass でそのパスワードを渡し
-ます。
+データは通常パスフレーズで暗号化されているため、pass でそのパスワードを渡します。
 
 - **param** `obj` -- PKCS#12データを読み込むオブジェクト(文字列もしくは IO)
 - **param** `pass` -- パスフレーズ文字列

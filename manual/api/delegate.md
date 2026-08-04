@@ -8,11 +8,9 @@ category: DesignPattern
 [c:Delegator] クラスを利用する場合はこれを継承して
 [m:Delegator#__getobj__] メソッドを再定義して委譲先のオブジェクトを指定します。
 
-[c:SimpleDelegator] は [c:Delegator] の利用例の一つであり、
-コンストラクタに渡されたオブジェクトにメソッドの実行を委譲します。
+[c:SimpleDelegator] は [c:Delegator] の利用例の一つであり、コンストラクタに渡されたオブジェクトにメソッドの実行を委譲します。
 
-[m:Kernel#DelegateClass] は 引数で渡されたクラスのインスタンスをひとつとり、
-そのオブジェクトにインスタンスメソッドを委譲するクラスを定義して返します。
+[m:Kernel#DelegateClass] は 引数で渡されたクラスのインスタンスをひとつとり、そのオブジェクトにインスタンスメソッドを委譲するクラスを定義して返します。
 
 ### 参考
 
@@ -24,8 +22,7 @@ category: DesignPattern
 
 ### def DelegateClass(superclass) -> object
 
-クラス superclass のインスタンスへメソッドを委譲するクラスを定義し、
-そのクラスを返します。
+クラス superclass のインスタンスへメソッドを委譲するクラスを定義し、そのクラスを返します。
 
 - **param** `superclass` -- 委譲先となるクラス
 
@@ -86,8 +83,7 @@ p a         # => [25]
 
 委譲先のオブジェクトを返します。
 
-本メソッドは、サブクラスで再定義する必要があり、
-デフォルトでは [c:NotImplementedError] が発生します。
+本メソッドは、サブクラスで再定義する必要があり、デフォルトでは [c:NotImplementedError] が発生します。
 
 - **raise** `NotImplementedError` -- サブクラスにて本メソッドが再定義されていない場合に発生します。
 

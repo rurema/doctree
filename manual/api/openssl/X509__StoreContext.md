@@ -5,12 +5,10 @@ library: openssl
 
 証明書ストアコンテキストクラス。
 
-証明書ストア([c:OpenSSL::X509::Store])を利用して
-実際の検証を行う機能を持ちます。
+証明書ストア([c:OpenSSL::X509::Store])を利用して実際の検証を行う機能を持ちます。
 
 また、検証の途中の状態を保持するためにも使われます。
-検証フィルター([m:OpenSSL::X509::Store#verify_callback])の
-引数として渡されます。
+検証フィルター([m:OpenSSL::X509::Store#verify_callback])の引数として渡されます。
 
 検証結果の詳細情報を保持するためにも使われます。
 
@@ -20,8 +18,7 @@ library: openssl
 証明書ストアコンテキストを生成します。
 
 store には検証に必要なルート CA 証明書を含む [c:OpenSSL::X509::Store]
-オブジェクトを渡します。 cert は検証対象の証明書、chain は
-中間 CA 証明書チェインを証明書の配列で渡します。
+オブジェクトを渡します。 cert は検証対象の証明書、chain は中間 CA 証明書チェインを証明書の配列で渡します。
 
 - **param** `store` -- ルート CA 群を持っている証明書ストア
        ([c:OpenSSL::X509::Store] オブジェクト)
@@ -47,38 +44,26 @@ store には検証に必要なルート CA 証明書を含む [c:OpenSSL::X509::
 
 直前に検証した証明書のオブジェクトを返します。
 
-[m:OpenSSL::X509::StoreContext#verify] で検証が失敗した場合は
-証明書チェイン中で検証に失敗した証明書のオブジェクトを返します。
+[m:OpenSSL::X509::StoreContext#verify] で検証が失敗した場合は証明書チェイン中で検証に失敗した証明書のオブジェクトを返します。
 
-証明書チェインの各証明書検証後
-コールバック([m:OpenSSL::X509::Store#verify_callback=])呼び出しに
-渡される StoreContext オブジェクトにこのメソッドを呼び出すと
-直前に検証した証明書を返します。
+証明書チェインの各証明書検証後コールバック([m:OpenSSL::X509::Store#verify_callback=])呼び出しに渡される StoreContext オブジェクトにこのメソッドを呼び出すと直前に検証した証明書を返します。
 
-[m:OpenSSL::X509::StoreContext#verify] を呼ぶ前に
-このメソッドを呼ぶと空の [c:OpenSSL::X509::Certificate] を返します。
+[m:OpenSSL::X509::StoreContext#verify] を呼ぶ前にこのメソッドを呼ぶと空の [c:OpenSSL::X509::Certificate] を返します。
 
 ### def current_crl -> OpenSSL::X509::CRL | nil
 
 直前に検証に利用した CRL のオブジェクトを返します。
 
-証明書チェインの各証明書検証後
-コールバック([m:OpenSSL::X509::Store#verify_callback=])呼び出しに
-渡される StoreContext オブジェクトにこのメソッドを呼び出すと
-直前に検証に利用した CRL オブジェクトを返します。
+証明書チェインの各証明書検証後コールバック([m:OpenSSL::X509::Store#verify_callback=])呼び出しに渡される StoreContext オブジェクトにこのメソッドを呼び出すと直前に検証に利用した CRL オブジェクトを返します。
 
 ### def error -> Integer
 
 検証時のエラーコードを返します。
 
-[m:OpenSSL::X509::StoreContext#verify] を呼びだし、
-証明書チェインの各証明書を検証した
-コールバック([m:OpenSSL::X509::Store#verify_callback=])が呼び出され、
-StoreContext オブジェクトが渡されますが、このメソッドを呼ぶと
-直前の証明書検証結果のエラーコードが得られます。
+[m:OpenSSL::X509::StoreContext#verify] を呼びだし、証明書チェインの各証明書を検証したコールバック([m:OpenSSL::X509::Store#verify_callback=])が呼び出され、
+StoreContext オブジェクトが渡されますが、このメソッドを呼ぶと直前の証明書検証結果のエラーコードが得られます。
 
-[m:OpenSSL::X509::StoreContext#verify] を呼び出したあと、
-このメソッドを呼ぶと検証の最終的な検証結果のエラーコードを返します。
+[m:OpenSSL::X509::StoreContext#verify] を呼び出したあと、このメソッドを呼ぶと検証の最終的な検証結果のエラーコードを返します。
 
 エラーコードの整数値は [c:OpenSSL::X509] に定数が定義されています。
 詳しくは [ref:c:OpenSSL::X509#verify_error] を見てください。
@@ -90,12 +75,8 @@ StoreContext オブジェクトが渡されますが、このメソッドを呼�
 
 エラーコードを設定します。
 
-[m:OpenSSL::X509::StoreContext#verify] を呼びだし、
-証明書チェインの各証明書を検証した
-コールバック([m:OpenSSL::X509::Store#verify_callback=])が呼び出され、
-StoreContext オブジェクトが渡されますが、このメソッドでエラーコードを
-設定し、コールバックの返り値を false にすると、最終的なエラーコードが
-ここで設定したものになります。[m:OpenSSL::X509::StoreContext#error_string] 
+[m:OpenSSL::X509::StoreContext#verify] を呼びだし、証明書チェインの各証明書を検証したコールバック([m:OpenSSL::X509::Store#verify_callback=])が呼び出され、
+StoreContext オブジェクトが渡されますが、このメソッドでエラーコードを設定し、コールバックの返り値を false にすると、最終的なエラーコードがここで設定したものになります。[m:OpenSSL::X509::StoreContext#error_string] 
 もその値に応じた文字列が返るようになります。
 
 例:
@@ -120,31 +101,20 @@ p store.error_string # => "application verification failure"
 
 エラーが起きた場所の深さを返します。
 
-検証対象の証明書は深さ0、その証明書を発行した CA の証明書は
-深さ1、その CA の証明証を発行した上位の CA の証明書は深さ2、…
-と定義されいてます。
+検証対象の証明書は深さ0、その証明書を発行した CA の証明書は深さ1、その CA の証明証を発行した上位の CA の証明書は深さ2、…と定義されいてます。
 
-[m:OpenSSL::X509::StoreContext#verify] を呼び出したあと、
-このメソッドを呼ぶと検証でエラーが起きた場所の深さを返します。
+[m:OpenSSL::X509::StoreContext#verify] を呼び出したあと、このメソッドを呼ぶと検証でエラーが起きた場所の深さを返します。
 
-証明書チェインの各証明書を検証した
-コールバック([m:OpenSSL::X509::Store#verify_callback=])が検証時に
-呼びだされ、StoreContext オブジェクトが渡されますが、そのオブジェクトに
-対しこのメソッドを呼びだすと、そこで検証された証明書の
-深さが得られます。
+証明書チェインの各証明書を検証したコールバック([m:OpenSSL::X509::Store#verify_callback=])が検証時に呼びだされ、StoreContext オブジェクトが渡されますが、そのオブジェクトに対しこのメソッドを呼びだすと、そこで検証された証明書の深さが得られます。
 
 ### def error_string -> String
 
 検証したときのエラー文字列を返します。
 
-[m:OpenSSL::X509::StoreContext#verify] を呼びだし、
-証明書チェインの各証明書を検証した
-コールバック([m:OpenSSL::X509::Store#verify_callback=])が呼び出され、
-StoreContext オブジェクトが渡されますが、このメソッドを呼ぶと
-直前の証明書検証結果のエラー文字列が得られます。
+[m:OpenSSL::X509::StoreContext#verify] を呼びだし、証明書チェインの各証明書を検証したコールバック([m:OpenSSL::X509::Store#verify_callback=])が呼び出され、
+StoreContext オブジェクトが渡されますが、このメソッドを呼ぶと直前の証明書検証結果のエラー文字列が得られます。
 
-[m:OpenSSL::X509::StoreContext#verify] を呼び出したあと、
-このメソッドを呼ぶと検証の最終的な検証結果のエラー文字列を返します。
+[m:OpenSSL::X509::StoreContext#verify] を呼び出したあと、このメソッドを呼ぶと検証の最終的な検証結果のエラー文字列を返します。
 
 検証に成功した場合は "ok" を返します。
 

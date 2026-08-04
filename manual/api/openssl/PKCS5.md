@@ -11,8 +11,7 @@ OpenSSL PKCS#5 関連の機能を集めたモジュール
 pass と salt から共通鍵暗号の鍵および IV(Initialization Vector)
 を生成します。
 
-[m:OpenSSL::PKCS5?.pbkdf2_hmac_sha1] と異なり任意の
-ハッシュ関数を利用できます。
+[m:OpenSSL::PKCS5?.pbkdf2_hmac_sha1] と異なり任意のハッシュ関数を利用できます。
 
 返り値の文字列から鍵と IV に必要なバイト数を切り出して利用します。
 
@@ -31,9 +30,7 @@ pass と salt から共通鍵暗号の鍵および IV(Initialization Vector)
 pass と salt から共通鍵暗号の鍵および IV(Initialization Vector)
 を生成します。
 
-iter は鍵生成時のハッシュ関数の繰り返し回数で、大きな値を指定するほど
-安全であることが期待されます。RFCでは少なくとも1000を
-指定することを推奨しています。
+iter は鍵生成時のハッシュ関数の繰り返し回数で、大きな値を指定するほど安全であることが期待されます。RFCでは少なくとも1000を指定することを推奨しています。
 
 返り値の文字列から鍵と IV に必要なバイト数を切り出して利用します。
 

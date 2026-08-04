@@ -8,8 +8,7 @@ include:
 XML の DTD(文書型定義、Document Type Definition)を表すクラスです。
 
 rexml では DTD は積極的にはサポートされていません。
-デフォルトの実体定義(gt, lt, amp, quot apos)の解決のため DTD は
-ある程度はサポートされますが、スキーマの定義や検証をしたい場合は
+デフォルトの実体定義(gt, lt, amp, quot apos)の解決のため DTD はある程度はサポートされますが、スキーマの定義や検証をしたい場合は
 XML schema や RELAX NG などを使ってください。
 
 子ノード([m:REXML::Parent#children])として、
@@ -26,8 +25,7 @@ XML schema や RELAX NG などを使ってください。
 
 DocType オブジェクトを生成します。
 
-[c:REXML::Source] オブジェクトの場合は、Source オブジェクトが
-保持しているDTDのテキストがパースされ、その内容によって DocType
+[c:REXML::Source] オブジェクトの場合は、Source オブジェクトが保持しているDTDのテキストがパースされ、その内容によって DocType
 オブジェクトが初期化されます。
 
 ```ruby
@@ -39,11 +37,9 @@ EOS
 
 このインターフェースは deprecated です。
 
-このメソッドは他のインターフェースもありますが、内部用なので使わないで
-ください。
+このメソッドは他のインターフェースもありますが、内部用なので使わないでください。
 
-一般的にいって、XML 文書に含まれる DTD は [m:REXML::Document.new] などで
-適切に解析され、[m:REXML::Document#doctype] で取得できます。
+一般的にいって、XML 文書に含まれる DTD は [m:REXML::Document.new] などで適切に解析され、[m:REXML::Document#doctype] で取得できます。
 このメソッドを直接使う必要はありません。
 
 ## Instance Methods
@@ -63,8 +59,7 @@ p doctype.name # => "html"
 
 ### def external_id -> String | nil
 
-DTD が外部サブセットを用いている場合は "SYSTEM", "PUBLIC" の
-いずれかの文字列を返します。
+DTD が外部サブセットを用いている場合は "SYSTEM", "PUBLIC" のいずれかの文字列を返します。
 
 それ以外の場合は nil を返します。
 
@@ -93,8 +88,7 @@ p doctype.external_id # => nil
 
 DTD で宣言されている実体の集合を Hash で返します。
 
-返される Hash は実体参照名をキーとし、対応する [c:REXML::Entity] オブジェクト
-を値とするハッシュテーブルです。
+返される Hash は実体参照名をキーとし、対応する [c:REXML::Entity] オブジェクトを値とするハッシュテーブルです。
 
 これには、XML のデフォルトの実体(gt, lt, quot, apos)も含まれています。
 
@@ -122,8 +116,7 @@ nil を返します。
 
 ### def attributes_of(element) -> [REXML::Attribute]
 
-DTD 内の属性リスト宣言で、 element という名前の要素に対し宣言されている
-属性の名前とデフォルト値を REXML::Attribute の配列で返します。
+DTD 内の属性リスト宣言で、 element という名前の要素に対し宣言されている属性の名前とデフォルト値を REXML::Attribute の配列で返します。
 
 名前とデフォルト値のペアは、各 Attribute オブジェクトの
 [m:REXML::Namespace#name] と
@@ -151,12 +144,10 @@ p doctype.attributes_of("book")[0].value # => ""
 
 ### def attribute_of(element, attribute) -> String | nil
 
-DTD 内の属性リスト宣言で、 element という名前の要素の attribute という
-名前の属性のデフォルト値を返します。
+DTD 内の属性リスト宣言で、 element という名前の要素の attribute という名前の属性のデフォルト値を返します。
 
 elementという名前の要素の属性値は宣言されていない、
-elementという名前の要素にはattributeという名前の属性が宣言されていない、
-もしくはデフォルト値が宣言されていない、のいずれかの場合は nil を返します。
+elementという名前の要素にはattributeという名前の属性が宣言されていない、もしくはデフォルト値が宣言されていない、のいずれかの場合は nil を返します。
 
 - **param** `element` -- 要素名(文字列)
 - **param** `attribute` -- 属性名(文字列)
@@ -185,16 +176,13 @@ p doctype.attribute_of("book", "title") # => nil
 
 self の複製を返します。
 
-external_id ([m:REXML::DocType#external_id]) と
-名前([m:REXML::DocType#name]) のみ複製されるため、
-結果として得られるオブジェクトはあまり有用ではないでしょう。
+external_id ([m:REXML::DocType#external_id]) と名前([m:REXML::DocType#name]) のみ複製されるため、結果として得られるオブジェクトはあまり有用ではないでしょう。
 
 ### def write(output, indent = 0, transitive = false, ie_hack = false) -> ()
 
 output に DTD を出力します。
 
-このメソッドは deprecated です。[c:REXML::Formatters::Default] で
-出力してください。
+このメソッドは deprecated です。[c:REXML::Formatters::Default] で出力してください。
 
 - **param** `output` -- 出力先の IO オブジェクト
 - **param** `indent` -- インデントの深さ。指定しないでください。
@@ -231,8 +219,7 @@ DTD が属する文書の「コンテキスト」を返します。
 具体的には親ノードである [c:REXML::Document] オブジェクトの
 [m:REXML::Element#context] を返します。
 
-コンテキストの具体的な内容については [m:REXML::Element#context] を
-参照してください。
+コンテキストの具体的な内容については [m:REXML::Element#context] を参照してください。
 
 ### def entity(name) -> String | nil
 
@@ -310,8 +297,7 @@ p doctype.public  # => nil
 
 ### def notations -> [REXML::NotationDecl]
 
-DTD に含まれている記法宣言 ([c:REXML::NotationDecl]) を
-配列で返します。
+DTD に含まれている記法宣言 ([c:REXML::NotationDecl]) を配列で返します。
 
 ### def notation(name) -> REXML::NotationDecl | nil
 

@@ -6,8 +6,7 @@ HTML を生成するためのメソッドを提供するモジュールを定義
 様々な DTD に対応しています。
 
 #%since 4.0
-Ruby 4.0 から cgi ライブラリは default gems から削除されたため、
-このライブラリを利用するには cgi gem をインストールしてください。
+Ruby 4.0 から cgi ライブラリは default gems から削除されたため、このライブラリを利用するには cgi gem をインストールしてください。
 詳細は [lib:cgi] を参照してください。
 #%end
 
@@ -123,8 +122,7 @@ p checkbox("name" => "name", "value" => "value", "checked" => true)
 
 タイプが checkbox である input 要素のグループを生成します。
 
-生成される input 要素の name 属性はすべて同じになり、
-それぞれの input 要素の後ろにはラベルが続きます。
+生成される input 要素の name 属性はすべて同じになり、それぞれの input 要素の後ろにはラベルが続きます。
 
 - **param** `name` -- name 属性の値を指定します。
 
@@ -154,8 +152,7 @@ checkbox_group("name", ["1", "Foo"], ["2", "Bar", true], "Baz")
 
 タイプが checkbox である input 要素のグループを生成します。
 
-生成される input 要素の name 属性はすべて同じになり、
-それぞれの input 要素の後ろにはラベルが続きます。
+生成される input 要素の name 属性はすべて同じになり、それぞれの input 要素の後ろにはラベルが続きます。
 
 - **param** `attributes` -- 属性をハッシュで指定します。
 
@@ -516,8 +513,7 @@ radio_button({ "NAME" => "name", "VALUE" => "value", "ID" => "foo" })
 
 タイプが radio である input 要素のリストを生成します。
 
-生成される input 要素の name 属性はすべて同じになり、
-それぞれの input 要素の後ろにはラベルが続きます。
+生成される input 要素の name 属性はすべて同じになり、それぞれの input 要素の後ろにはラベルが続きます。
 
 - **param** `name` -- name 属性の値を指定します。
 
@@ -547,8 +543,7 @@ radio_group("name", ["1", "Foo"], ["2", "Bar", true], "Baz")
 
 タイプが radio である input 要素のリストを生成します。
 
-生成される input 要素の name 属性はすべて同じになり、
-それぞれの input 要素の後ろにはラベルが続きます。
+生成される input 要素の name 属性はすべて同じになり、それぞれの input 要素の後ろにはラベルが続きます。
 
 - **param** `attributes` -- 属性をハッシュで指定します。
 

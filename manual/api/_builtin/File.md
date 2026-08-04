@@ -7,8 +7,7 @@ include:
 ファイルアクセスのためのクラスです。
 
 通常 [m:Kernel?.open] または [m:File.open] を使って生成します。
-[c:IO] クラスがインクルードしている [c:File::Constants] は File クラスに関係する定数を
-格納したモジュールです。
+[c:IO] クラスがインクルードしている [c:File::Constants] は File クラスに関係する定数を格納したモジュールです。
 また [c:File::Stat] は stat 構造体( [man:stat(2)] 参照)を表すクラスです。
 
 ## Class Methods
@@ -69,9 +68,7 @@ p File.birthtime("testfile") #=> Wed Apr 09 08:53:13 CDT 2003
 
 ### def File.basename(filename, suffix = "")     -> String
 
-filename の一番後ろのスラッシュに続く要素を返します。もし、
-引数 suffix が与えられて、かつそれが filename の末尾に
-一致するなら、それを取り除いたものを返します。
+filename の一番後ろのスラッシュに続く要素を返します。もし、引数 suffix が与えられて、かつそれが filename の末尾に一致するなら、それを取り除いたものを返します。
 
 ```ruby title="例"
 p File.basename("ruby/ruby.c")          #=> "ruby.c"
@@ -98,8 +95,7 @@ p File.basename("foo/bar/")      # => "bar"
 
 ### def File.chmod(mode, *filename)    -> Integer
 
-ファイルのモードを mode に変更します。モードを変更したファイ
-ルの数を返します。
+ファイルのモードを mode に変更します。モードを変更したファイルの数を返します。
 
 - **param** `filename` -- ファイル名を表す文字列を指定します。
 
@@ -109,8 +105,7 @@ p File.basename("foo/bar/")      # => "bar"
 
 ### def File.lchmod(mode, *filename)    -> Integer
 
-[m:File.chmod] と同様ですが、シンボリックリンクに関してリンクそのものの
-モードを変更します。
+[m:File.chmod] と同様ですが、シンボリックリンクに関してリンクそのもののモードを変更します。
 
 - **param** `filename` -- ファイル名を表す文字列を指定します。
 
@@ -131,9 +126,7 @@ p File.lstat("testlink").mode.to_s(8)   # => "120744"
 
 ### def File.chown(owner, group, *filename)    -> Integer
 
-ファイルのオーナーとグループを変更します。スーパーユーザだけがファ
-イルのオーナーとグループを変更できます。変更を行ったファイルの数を
-返します。
+ファイルのオーナーとグループを変更します。スーパーユーザだけがファイルのオーナーとグループを変更できます。変更を行ったファイルの数を返します。
 
 - **param** `filename` -- ファイル名を表す文字列を指定します。
 
@@ -153,9 +146,7 @@ p File.stat("test.txt").uid # => 502
 
 ### def File.lchown(owner, group, *filename)    -> Integer
 
-[m:File#chown] と同様ですが、
-シンボリックリンクに関してリンクそのもののオーナー、
-グループを変更します。
+[m:File#chown] と同様ですが、シンボリックリンクに関してリンクそのもののオーナー、グループを変更します。
 
 - **param** `filename` -- ファイル名を表す文字列を指定します。
 
@@ -206,8 +197,7 @@ end
 ### def File.dirname(filename)    -> String
 #%end
 
-filename の一番後ろのスラッシュより前を文
-字列として返します。スラッシュを含まないファイル名に対しては
+filename の一番後ろのスラッシュより前を文字列として返します。スラッシュを含まないファイル名に対しては
 "."(カレントディレクトリ)を返します。
 
 ```ruby title="例"
@@ -271,8 +261,7 @@ file_name を絶対パスに変換した文字列を返します。
 相対パスの場合はカレントディレクトリを基準とします。
 dir_string を渡した場合はそのディレクトリを基準とします。
 
-[m:File.expand_path] と異なり、 file_name 先頭が "~" である場合
-それは展開されません。普通のディレクトリ名として処理されます。
+[m:File.expand_path] と異なり、 file_name 先頭が "~" である場合それは展開されません。普通のディレクトリ名として処理されます。
 
 ```ruby title="例"
 p Dir.getwd                      #=> "/home/matz/work/bar"
@@ -309,10 +298,8 @@ p File.absolute_path?("/foo/bar\\baz")  # => true
 
 ### def File.extname(filename)    -> String
 
-ファイル名 filename の拡張子部分(最後の "." に続く文字列)を
-返します。ディレクトリ名に含まれる "." や、ファイル名先頭の "."
-は拡張子の一部としては見なされません。filename に拡張子が含
-まれない場合は空文字列を返します。
+ファイル名 filename の拡張子部分(最後の "." に続く文字列)を返します。ディレクトリ名に含まれる "." や、ファイル名先頭の "."
+は拡張子の一部としては見なされません。filename に拡張子が含まれない場合は空文字列を返します。
 
 ```ruby title="例"
 p File.extname("foo/foo.txt")     # => ".txt"
@@ -356,8 +343,7 @@ path が pattern にマッチすれば真を返します。そうでない場合
 
 引数 flags に指定できる定数は以下のとおりです。
 これらの定数は [c:File::Constants] で定義されていますが、
-[c:File] クラスの親クラスの IO が [c:File::Constants] をインクルードしているので、
-これらの定数は File::FNM_NOESCAPE などとして参照可能です。
+[c:File] クラスの親クラスの IO が [c:File::Constants] をインクルードしているので、これらの定数は File::FNM_NOESCAPE などとして参照可能です。
 
 - **`FNM_NOESCAPE`**:
   エスケープ文字 \`\' を普通の文字とみなします。
@@ -472,8 +458,7 @@ p File.join                               # => ""
 
 ### def File.link(old, new)    -> 0
 
-old を指す new という名前のハードリンクを
-生成します。old はすでに存在している必要があります。
+old を指す new という名前のハードリンクを生成します。old はすでに存在している必要があります。
 ハードリンクに成功した場合は 0 を返します。
 
 失敗した場合は例外 [c:Errno::EXXX] が発生します。
@@ -494,14 +479,11 @@ p IO.read("testlink")               # => "test"
 ### def File.open(path, mode = "r", perm = 0666, **opts)               -> File 
 ### def File.open(path, mode = "r", perm = 0666, **opts) {|file| ... } -> object
 
-path で指定されるファイルをオープンし、[c:File] オブジェクトを生成して
-返します。
+path で指定されるファイルをオープンし、[c:File] オブジェクトを生成して返します。
 
 path が整数の場合はファイルディスクリプタとして扱い、それに対応する
 [c:File] オブジェクトを生成して返します。[m:IO.open] と同じです。
-ブロックを指定して呼び出した場合は、File オブジェクトを引数として
-ブロックを実行します。ブロックの実行が終了すると、ファイルは自動的に
-クローズされます。ブロックの実行結果を返します。
+ブロックを指定して呼び出した場合は、File オブジェクトを引数としてブロックを実行します。ブロックの実行が終了すると、ファイルは自動的にクローズされます。ブロックの実行結果を返します。
 
 - **param** `path` -- ファイルを文字列で指定します。整数を指定した場合はファイルディスクリプタとして扱います。
 
@@ -601,9 +583,7 @@ pathname の最後のコンポーネントは存在していなくても例外�
 
 ### def File.rename(from, to)    -> 0
 
-ファイルの名前を変更します。ディレクトリが異なる場合には移動も行い
-ます。[man:rename(2)] を参照してください。移動先のファ
-イルが存在する時には上書きされます。
+ファイルの名前を変更します。ディレクトリが異なる場合には移動も行います。[man:rename(2)] を参照してください。移動先のファイルが存在する時には上書きされます。
 
 ファイルの移動に成功した場合 0 を返します。失敗した場合は例外
 [c:Errno::EXXX] が発生します。
@@ -626,8 +606,7 @@ end
 
 ### def File.split(pathname)    -> [String]
 
-pathname を dirname とbasename に分割して、2 要
-素の配列を返します。
+pathname を dirname とbasename に分割して、2 要素の配列を返します。
 
 ```ruby
 [File.dirname(pathname), File.basename(pathname)]
@@ -639,8 +618,7 @@ pathname を dirname とbasename に分割して、2 要
 
 ### def File.stat(filename)    -> File::Stat
 
-filename の情報を含む [c:File::Stat] オブジェクトを生成し
-て返します。
+filename の情報を含む [c:File::Stat] オブジェクトを生成して返します。
 
 - **param** `filename` -- ファイル名を表す文字列を指定します。 
 
@@ -655,8 +633,7 @@ p File.stat("testfile").mtime # => 2017-12-10 01:13:56 +0900
 
 ### def File.lstat(filename)   -> File::Stat
 
-[m:File.stat]と同様ですが、シンボリックリンクに関してリンクそのものの
-情報を File::Stat として返します。[man:lstat(2)] を実装していないシステムでは、File.stat と同じです。
+[m:File.stat]と同様ですが、シンボリックリンクに関してリンクそのものの情報を File::Stat として返します。[man:lstat(2)] を実装していないシステムでは、File.stat と同じです。
 
 - **param** `filename` -- ファイル名を表す文字列を指定します。 
 
@@ -674,8 +651,7 @@ p File.stat("link.rb")  == File.stat("t.rb") # => true
 
 old への new という名前のシンボリックリンクを生成します。
 
-シンボリックリンクの作成に成功すれば 0 を返します。失敗した場合は
-例外 [c:Errno::EXXX] が発生します。
+シンボリックリンクの作成に成功すれば 0 を返します。失敗した場合は例外 [c:Errno::EXXX] が発生します。
 
 - **param** `old` -- ファイル名を表す文字列を指定します。 
 
@@ -689,8 +665,7 @@ p File.symlink("testfile", "testlink") # => 0
 
 ### def File.truncate(path, length)    -> 0
 
-path で指定されたファイルのサイズを最大 length バイト
-にします。
+path で指定されたファイルのサイズを最大 length バイトにします。
 
 サイズの変更に成功すれば 0 を返します。失敗した場合は例外
 [c:Errno::EXXX] が発生します。
@@ -729,8 +704,7 @@ p File.umask       # => 6
 ### def File.utime(atime, mtime, *filename)    -> Integer
 
 ファイルの最終アクセス時刻と更新時刻を変更します。
-シンボリックリンクに対しては [m:File.lutime]　と違って、
-シンボリックのリンク先を変更します。
+シンボリックリンクに対しては [m:File.lutime]　と違って、シンボリックのリンク先を変更します。
 
 - **param** `atime` -- 最終アクセス時刻を [c:Time] か、起算時からの経過秒数を数値で指定します。
 
@@ -761,8 +735,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 ### def File.lutime(atime, mtime, *filename)    -> Integer
 
 ファイルの最終アクセス時刻と更新時刻を変更します。
-シンボリックリンクに対しては [m:File.utime]　と違って、
-シンボリックそのものを変更します。
+シンボリックリンクに対しては [m:File.utime]　と違って、シンボリックそのものを変更します。
 
 - **param** `atime` -- 最終アクセス時刻を [c:Time] か、起算時からの経過秒数を数値で指定します。
 
@@ -972,8 +945,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 
 ### def File.world_readable?(path)    -> Integer | nil
 
-path が全てのユーザから読めるならばそのファイルのパーミッションを表す
-整数を返します。そうでない場合は nil を返します。
+path が全てのユーザから読めるならばそのファイルのパーミッションを表す整数を返します。そうでない場合は nil を返します。
 
 整数の意味はプラットフォームに依存します。
 
@@ -986,8 +958,7 @@ p "%o" % m                             # => "644"
 
 ### def File.world_writable?(path)    -> bool
 
-path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
-整数を返します。そうでない場合は nil を返します。
+path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す整数を返します。そうでない場合は nil を返します。
 
 整数の意味はプラットフォームに依存します。
 
@@ -1096,8 +1067,7 @@ end
 
 ファイルのモードを指定された mode に変更します。
 
-モードの変更に成功した場合は 0 を返します。失敗した場合は例外 [c:Errno::EXXX] が発生し
-ます。
+モードの変更に成功した場合は 0 を返します。失敗した場合は例外 [c:Errno::EXXX] が発生します。
 
 - **param** `mode` -- [man:chmod(2)] と同様に整数で指定します。
 
@@ -1115,8 +1085,7 @@ p f.chmod(0644) #=> 0
 ファイルのオーナーとグループを変更します。
 
 適切な権限があればファイルのオーナーとグループを変更できます。
-所有者の変更に成功した場合は 0 を返します。変更に失敗した場合は
-例外 [c:Errno::EXXX] が発生します。
+所有者の変更に成功した場合は 0 を返します。変更に失敗した場合は例外 [c:Errno::EXXX] が発生します。
 
 - **param** `owner` -- [man:chown(2)] と同様に数値で指定します。nil または -1 を指定することで、オーナーを維持できます。
 
@@ -1140,8 +1109,7 @@ p File.stat("testfile").gid                       # => 1000
 
 ロックを取得するまでブロックされます。
 ロックの取得に成功した場合は 0 を返します。
-File::LOCK_NB (ノンブロッキング) を指定すると、本来ならブロックされる場合に
-ブロックされずに false を返すようになります。
+File::LOCK_NB (ノンブロッキング) を指定すると、本来ならブロックされる場合にブロックされずに false を返すようになります。
 
 - **param** `operation` -- ロックに対する操作の種類を示す定数を指定します。
                  どのような定数が利用可能かは以下を参照して下さい。
@@ -1151,8 +1119,7 @@ File::LOCK_NB (ノンブロッキング) を指定すると、本来ならブロ
 - **raise** `Errno::EXXX` -- operation に不正な整数を与えた場合などに発生します。
 
 引数 operation に有効な定数は以下の通りです。定数は [c:File::Constants] で定義されていますが、
-[c:File] クラスの親クラスの IO が [c:File::Constants] をインクルードしているので、
-これらの定数は File::LOCK_SH などとして参照可能です。
+[c:File] クラスの親クラスの IO が [c:File::Constants] をインクルードしているので、これらの定数は File::LOCK_SH などとして参照可能です。
 
 - **`LOCK_SH`**:
   共有ロック。複数のプロセスが同時にロックを共有できます。
@@ -1291,18 +1258,14 @@ end
 
 ### const ALT_SEPARATOR -> "\\" | nil
 
-システムのファイルパスのセパレータが SEPARATOR と異なる場合
-に設定されます。MS-DOS などでは "\\" です。UNIX や Cygwin などでは nil です。
+システムのファイルパスのセパレータが SEPARATOR と異なる場合に設定されます。MS-DOS などでは "\\" です。UNIX や Cygwin などでは nil です。
 
 ### const PATH_SEPARATOR -> ";" | ":"
 
-PATH 環境変数の要素のセパレータです。UNIX では ":" MS-DOS な
-どでは ";" です。
+PATH 環境変数の要素のセパレータです。UNIX では ":" MS-DOS などでは ";" です。
 
 ### const SEPARATOR -> "/"
 ### const Separator -> "/"
 
-ファイルパスのセパレータです。ファイルを扱うメソッドにパス名を渡す
-場合などスクリプト内のパス名は環境によらずこのセパレータで統一され
-ます。値は "/" です。
+ファイルパスのセパレータです。ファイルを扱うメソッドにパス名を渡す場合などスクリプト内のパス名は環境によらずこのセパレータで統一されます。値は "/" です。
 

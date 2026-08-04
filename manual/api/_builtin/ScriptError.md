@@ -12,5 +12,4 @@ library: _builtin
   - [c:NotImplementedError]
   - [c:SyntaxError]
 
-これらの例外が発生したときは Ruby スクリプト自体に
-バグがある可能性が高いと考えられます。
+これらの例外が発生したときは Ruby スクリプト自体にバグがある可能性が高いと考えられます。

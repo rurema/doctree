@@ -5,20 +5,12 @@ library: win32ole
 
 OLEオートメーションの変数情報をRubyで参照するためのクラスです。
 
-OLEオートメーションサーバは、定数（[m:WIN32OLE.const_load]）、メソッ
-ド/プロパティ（[c:WIN32OLE_METHOD]）、イベント（[c:WIN32OLE_EVENT]）
-のほかに変数をクライアントへ提供できます。WIN32OLE_VARIABLEクラスは、サー
-バが提供する変数の情報をオブジェクト化します。変数情報にはCOMで決められ
-た構造体やユーザ定義型のフィールド情報などがありますが、最も良く利用さ
-れるのはenum（列挙型）のメンバ情報です。enumのメンバは定数として利用で
-きます。
+OLEオートメーションサーバは、定数（[m:WIN32OLE.const_load]）、メソッド/プロパティ（[c:WIN32OLE_METHOD]）、イベント（[c:WIN32OLE_EVENT]）のほかに変数をクライアントへ提供できます。WIN32OLE_VARIABLEクラスは、サーバが提供する変数の情報をオブジェクト化します。変数情報にはCOMで決められた構造体やユーザ定義型のフィールド情報などがありますが、最も良く利用されるのはenum（列挙型）のメンバ情報です。enumのメンバは定数として利用できます。
 
-WIN32OLE_VARIABLEのオブジェクトは、[m:WIN32OLE_TYPE#variables]メソッ
-ドを利用して取得します。
+WIN32OLE_VARIABLEのオブジェクトは、[m:WIN32OLE_TYPE#variables]メソッドを利用して取得します。
 
 Ruby 3.2 から、このクラスは WIN32OLE の名前空間下に移動し、`WIN32OLE::Variable`
-として定義されるようになりました。トップレベル定数 `WIN32OLE_VARIABLE` は後方
-互換のためのエイリアスとして残っていますが、Ruby 3.4 以降は非推奨
+として定義されるようになりました。トップレベル定数 `WIN32OLE_VARIABLE` は後方互換のためのエイリアスとして残っていますが、Ruby 3.4 以降は非推奨
 (deprecated)です(`Warning[:deprecated]` が有効なら参照時に警告が表示されます)。
 
 ### サンプルコード
@@ -78,8 +70,7 @@ variables.each do |variable|
 end
 ```
 
-OLEオートメーションの型名は、対応する[c:WIN32OLE::VARIANT]の定数の先
-頭の「VT_」を削除した名称を持ちます。
+OLEオートメーションの型名は、対応する[c:WIN32OLE::VARIANT]の定数の先頭の「VT_」を削除した名称を持ちます。
 
 ### def ole_type_detail -> [String]
 
@@ -110,16 +101,13 @@ UI4 [UI4] grfStateBits
 UI4 [UI4] reserved
 ```
 
-上例のように、WIN32OLE_VARIABLEで取得できる変数あるいはその元となる構造
-体は、必ずしもOLEオートメーション互換データというわけではありません。こ
-のようなデータはWIN32OLEからは利用できません。
+上例のように、WIN32OLE_VARIABLEで取得できる変数あるいはその元となる構造体は、必ずしもOLEオートメーション互換データというわけではありません。このようなデータはWIN32OLEからは利用できません。
 
 ### def value -> object | nil
 
 変数の値を取得します。
 
-変数情報によってはenum値のように定数値を持つものがあります。valueメソッ
-ドはこのような定数値を返します。
+変数情報によってはenum値のように定数値を持つものがあります。valueメソッドはこのような定数値を返します。
 
 - **return** -- この変数が持つ定数値。値を持たない場合はnilを返します。
 

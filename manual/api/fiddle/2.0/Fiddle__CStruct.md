@@ -5,11 +5,9 @@ library: fiddle/import
 
 C の構造体を表すクラスです。
 
-このクラスは直接は使わず、[m:Fiddle::Importer#struct] を用いて
-このクラスを継承したクラスを生成し、それを利用します。
+このクラスは直接は使わず、[m:Fiddle::Importer#struct] を用いてこのクラスを継承したクラスを生成し、それを利用します。
 
-[m:Fiddle::Importer#struct] が生成するクラスには
-構造体の各メンバへのアクセサが定義されています。
+[m:Fiddle::Importer#struct] が生成するクラスには構造体の各メンバへのアクセサが定義されています。
 このアクセサはシグネチャの型とメンバ名に従って定義されます。
 例えば 
 
@@ -19,8 +17,7 @@ include Fiddle::Importer
 S = struct(["long foo", "void* bar"])
 ```
 
-とすると、 S#foo, S#foo= というアクセサが Integer とやりとり
-するように定義され、 S#bar, S#bar= というアクセサが Fiddle::Pointer
+とすると、 S#foo, S#foo= というアクセサが Integer とやりとりするように定義され、 S#bar, S#bar= というアクセサが Fiddle::Pointer
 でやりとりするように定義されます。
 
 このクラスは実際にはこのドキュメントに書かれているメソッドを保持していません。
@@ -30,8 +27,7 @@ S = struct(["long foo", "void* bar"])
 ## Class Methods
 ### def Fiddle::CStruct.new(addr) -> Fiddle::CStruct
 
-addr のアドレスが指すメモリを構造体のアドレスとみなし、
-構造体を作ります。
+addr のアドレスが指すメモリを構造体のアドレスとみなし、構造体を作ります。
 
 C におけるキャストと似ています。
 
@@ -76,7 +72,6 @@ Ruby のオブジェクトとしてはより大きなメモリを消費してい
 
 C の共用体を表すクラスです。
 
-このクラスは直接は使わず、[m:Fiddle::Importer#union] を用いて
-このクラスを継承したクラスを生成し、それを利用します。
+このクラスは直接は使わず、[m:Fiddle::Importer#union] を用いてこのクラスを継承したクラスを生成し、それを利用します。
 
 [c:Fiddle::CStruct] と同様の構造をしています。詳しくはそちらを見てください。

@@ -3,8 +3,7 @@ type: library
 require:
   - optparse
 ---
-[m:OptionParser#on] で使用可能なクラスに [c:Date] と [c:DateTime] が
-追加されます。
+[m:OptionParser#on] で使用可能なクラスに [c:Date] と [c:DateTime] が追加されます。
 オプションの引数はそれぞれのクラスのインスタンスに変換されてから、
 [m:OptionParser#on] のブロックに渡されます。
 

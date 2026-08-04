@@ -4,8 +4,7 @@ since: "3.0"
 ---
 # class Ractor::RemoteError < Ractor::Error
 
-他の Ractor で発生した例外を、その結果を待っている Ractor に伝えるために
-発生します。
+他の Ractor で発生した例外を、その結果を待っている Ractor に伝えるために発生します。
 
 もとの例外は [m:Exception#cause] で取得できます。
 

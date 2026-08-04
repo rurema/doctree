@@ -9,12 +9,10 @@ extend:
 
 カスタムバージョンの [c:FileUtils] のメソッドを提供します。
 
-[c:FileUtils] で定義されているメソッドのうち、:verbose, :noop の二つの
-オプションのいずれかに反応するメソッドの動作を変更します。
+[c:FileUtils] で定義されているメソッドのうち、:verbose, :noop の二つのオプションのいずれかに反応するメソッドの動作を変更します。
 
 このモジュールはトップレベルでインクルードされます。
-その際、[c:FileUtils], [c:RakeFileUtils] に定義されているメソッドの
-可視性はプライベートに変更されます。
+その際、[c:FileUtils], [c:RakeFileUtils] に定義されているメソッドの可視性はプライベートに変更されます。
 
 - **SEE** [c:FileUtils]
 
@@ -48,8 +46,7 @@ nowrite(v) { code }  # ブロックを評価する間だけ与えられた状態
 
 ### def when_writing(msg = nil){ ... }
 
-[m:RakeFileUtils.nowrite_flag] が真である場合与えられたブロックを実行せずに、
-与えられたメッセージを表示します。
+[m:RakeFileUtils.nowrite_flag] が真である場合与えられたブロックを実行せずに、与えられたメッセージを表示します。
 
 そうでない場合は、与えられたブロックを実行します。
 

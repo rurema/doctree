@@ -4,8 +4,7 @@ category: Windows
 require:
   - win32/registry
 ---
-win32/resolv は Win32 プラットフォームで名前解決に関する情報を取得する
-ためのライブラリです。
+win32/resolv は Win32 プラットフォームで名前解決に関する情報を取得するためのライブラリです。
 
 # class Win32::Resolv
 

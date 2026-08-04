@@ -6,8 +6,7 @@ library: psych
 入力されたオブジェクトから変換された YAML document を指定した
 IO に出力する機能を持つクラスです。
 
-start で変換を開始し、push で変換する Ruby オブジェクトを渡し、
-最後に finish を呼ぶことで変換を完了します。
+start で変換を開始し、push で変換する Ruby オブジェクトを渡し、最後に finish を呼ぶことで変換を完了します。
 
 ```ruby
 stream = Psych::Stream.new($stdout)
@@ -18,8 +17,7 @@ stream.finish
 
 YAML document は(バッファリングされずに)直接 $stdout に出力されます。
 
-finish を確実に呼び出すためには [m:Psych::Stream#start] メソッドを
-ブロック付きで呼び出すとよいでしょう。
+finish を確実に呼び出すためには [m:Psych::Stream#start] メソッドをブロック付きで呼び出すとよいでしょう。
 
 ```ruby
 stream = Psych::Stream.new($stdout)
@@ -46,11 +44,9 @@ io で YAML document の出力先を指定します。
 
 Ruby オブジェクトを YAML document に変換するための準備をします。
 
-変換された document は [m:Psych::Stream.new] で指定した
-出力先に出力されます。
+変換された document は [m:Psych::Stream.new] で指定した出力先に出力されます。
 
-finish を呼び出すことで出力が完了します(finish を呼び出さないと
-最後まで出力されない場合があります)。
+finish を呼び出すことで出力が完了します(finish を呼び出さないと最後まで出力されない場合があります)。
 
 ブロック付きで start を呼び出すと、変換準備を終えた Stream オブジェクト
 (self) がブロックに渡され、ブロックが呼び出された後に finish を呼び出します。

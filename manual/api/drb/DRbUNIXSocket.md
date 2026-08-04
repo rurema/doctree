@@ -3,16 +3,14 @@ library: drb/unix
 ---
 # class DRb::DRbUNIXSocket
 
-drbunix: という形式の URI を使い、UNIX ドメインソケット経由で通信する
-プロトコル実装クラスです。[lib:drb/unix] を require すると、
+drbunix: という形式の URI を使い、UNIX ドメインソケット経由で通信するプロトコル実装クラスです。[lib:drb/unix] を require すると、
 [m:DRb::DRbProtocol?.add_protocol] によって自動的に drb に登録されます。
 
 内部的には、druby:// (TCP/IP) 用のプロトコル実装クラスである
 DRbTCPSocket のサブクラスとして実装されています。
 
 プロトコル実装クラスに要求されるインターフェースについては
-[c:DRb::DRbProtocol] を参照してください。通常、ユーザーがこのクラスの
-メソッドを直接呼び出すことはありません。
+[c:DRb::DRbProtocol] を参照してください。通常、ユーザーがこのクラスのメソッドを直接呼び出すことはありません。
 
 ## Class Methods
 
@@ -56,13 +54,11 @@ p DRb::DRbUNIXSocket.uri_option("drbunix:/tmp/foo?opt1", {}) # => ["drbunix:/tmp
 
 ### def close -> ()
 
-接続を閉じます。[m:DRb::DRbUNIXSocket.open_server] が返したオブジェクトの
-場合は、待ち受け用の UNIX ドメインソケットファイルも削除します。
+接続を閉じます。[m:DRb::DRbUNIXSocket.open_server] が返したオブジェクトの場合は、待ち受け用の UNIX ドメインソケットファイルも削除します。
 
 ### def accept -> DRb::DRbUNIXSocket
 
-クライアントからの接続を受け付け、そのクライアントとの通信を行うための
-新しい DRbUNIXSocket オブジェクトを返します。
+クライアントからの接続を受け付け、そのクライアントとの通信を行うための新しい DRbUNIXSocket オブジェクトを返します。
 
 [m:DRb::DRbUNIXSocket.open_server] が返したオブジェクトに対して呼び出します。
 

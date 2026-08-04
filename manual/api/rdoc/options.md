@@ -10,19 +10,13 @@ rdoc コマンドのオプションを解析するためのサブライブラリ
 
 rdoc コマンドのオプションを解析するためのクラスです。
 
-それぞれのオプションの詳細に関しては、[ref:lib:rdoc#usage] を参照してくだ
-さい。
+それぞれのオプションの詳細に関しては、[ref:lib:rdoc#usage] を参照してください。
 
 ### カスタムオプション {#custom_options}
 
-[c:RDoc] のジェネレータでは、[c:RDoc::Options] をフックして独自の
-オプションを指定できます。
+[c:RDoc] のジェネレータでは、[c:RDoc::Options] をフックして独自のオプションを指定できます。
 
-[m:Object::ARGV] に --format が含まれていた場合、[c:RDoc] はジェネ
-レータ独自のオプションを解析するために setup_options メソッドを呼び出し
-ます。カスタムオプションを指定する場合は --format オプションは必ず指定
-する必要があります。rdoc --help を実行すると追加したオプションの一覧が
-確認できます。
+[m:Object::ARGV] に --format が含まれていた場合、[c:RDoc] はジェネレータ独自のオプションを解析するために setup_options メソッドを呼び出します。カスタムオプションを指定する場合は --format オプションは必ず指定する必要があります。rdoc --help を実行すると追加したオプションの一覧が確認できます。
 
 ```ruby title="例"
 class RDoc::Generator::Spellcheck
@@ -55,8 +49,7 @@ end
 ### def exclude -> Regexp
 
 コマンドライン引数の --exclude オプションで指定した正規表現を返します。
-複数指定していた場合は、1 つの [c:Regexp] オブジェクトにまとめられた
-ものを返します。
+複数指定していた場合は、1 つの [c:Regexp] オブジェクトにまとめられたものを返します。
 
 ### def exclude=(val)
 
@@ -80,26 +73,22 @@ end
 
 ### def op_name -> String
 
-コマンドライン引数の --opname オプションで指定した名前を文字列で返しま
-す。
+コマンドライン引数の --opname オプションで指定した名前を文字列で返します。
 
 ### def show_all -> bool
 
-コマンドライン引数の --all オプションを指定していた場合、true を返しま
-す。そうでない場合は false を返します。
+コマンドライン引数の --all オプションを指定していた場合、true を返します。そうでない場合は false を返します。
 
 ### def show_all=(val)
 
-val に true を指定した場合、コマンドライン引数の --all オプションと同様
-の指定を行います。
+val に true を指定した場合、コマンドライン引数の --all オプションと同様の指定を行います。
 
 - **param** `val` -- --all オプションと同じ指定を行う場合は true、そうでない場合
            は false を指定します。
 
 ### def main_page -> String | nil
 
-コマンドライン引数の --main オプションで指定したファイル名、クラス/モ
-ジュール名を返します。
+コマンドライン引数の --main オプションで指定したファイル名、クラス/モジュール名を返します。
 
 指定しなかった場合は nil を返します。
 
@@ -111,13 +100,11 @@ val に true を指定した場合、コマンドライン引数の --all オプ
 
 ### def merge -> true | nil
 
-コマンドライン引数の --merge オプションを指定していた場合、true を返し
-ます。そうでない場合は nil を返します。
+コマンドライン引数の --merge オプションを指定していた場合、true を返します。そうでない場合は nil を返します。
 
 ### def quiet -> bool
 
-コマンドライン引数の --quiet オプションを指定していた場合、true を返し
-ます。そうでない場合は nil を返します。
+コマンドライン引数の --quiet オプションを指定していた場合、true を返します。そうでない場合は nil を返します。
 
 ### def generator -> Generator
 
@@ -138,58 +125,47 @@ Generator を返します。
 
 ### def rdoc_include -> [String]
 
-コマンドライン引数の --include オプションで指定したディレクトリを文字列
-の配列で返します。
+コマンドライン引数の --include オプションで指定したディレクトリを文字列の配列で返します。
 
 指定しなかった場合は ['.'] を返します。
 
 ### def template -> String
 
-コマンドライン引数の --template オプションで指定した名前を文字列の配列
-で返します。
+コマンドライン引数の --template オプションで指定した名前を文字列の配列で返します。
 
 指定しなかった場合は 'html' を返します。
 
 ### def diagram -> bool
 
-コマンドライン引数の --diagram オプションを指定していた場合、true を返
-します。そうでない場合は false を返します。
+コマンドライン引数の --diagram オプションを指定していた場合、true を返します。そうでない場合は false を返します。
 
 ### def fileboxes -> bool
 
-コマンドライン引数の --diagram オプション、--fileboxes オプションを指定
-していた場合、true を返します。そうでない場合は false を返します。
+コマンドライン引数の --diagram オプション、--fileboxes オプションを指定していた場合、true を返します。そうでない場合は false を返します。
 
 ### def show_hash -> bool
 
-コマンドライン引数の --show-hash オプションを指定していた場合、true を
-返します。そうでない場合は false を返します。
+コマンドライン引数の --show-hash オプションを指定していた場合、true を返します。そうでない場合は false を返します。
 
 ### def image_format -> String
 
-コマンドライン引数の --image-format オプションで指定した名前を文字列の
-配列で返します。
+コマンドライン引数の --image-format オプションで指定した名前を文字列の配列で返します。
 
 指定しなかった場合は 'png' を返します。
 
 ### def charset -> String
 
-コマンドライン引数の --charset オプションで指定した文字コードを文字列で
-返します。
+コマンドライン引数の --charset オプションで指定した文字コードを文字列で返します。
 
 指定しなかった場合は、[m:$KCODE] に応じた値になります。
 
 ### def inline_source -> bool
 
-コマンドライン引数の --inline-source オプションか --one-file を指定して
-いた場合、もしくは --fmt オプションに xml 指定した場合に true を返しま
-す。そうでない場合は false を返します。
+コマンドライン引数の --inline-source オプションか --one-file を指定していた場合、もしくは --fmt オプションに xml 指定した場合に true を返します。そうでない場合は false を返します。
 
 ### def all_one_file -> bool
 
-コマンドライン引数の --one-file を指定していた場合、もしくは --fmt オプ
-ションに xml 指定した場合に true を返します。そうでない場合は false を
-返します。
+コマンドライン引数の --one-file を指定していた場合、もしくは --fmt オプションに xml 指定した場合に true を返します。そうでない場合は false を返します。
 
 ### def tab_width -> Integer
 
@@ -202,28 +178,24 @@ Generator を返します。
 
 ### def extra_accessors -> Regexp | nil
 
-コマンドライン引数の --accessor オプションで指定したアクセサの名前すべ
-てにマッチする正規表現オブジェクトを返します。
+コマンドライン引数の --accessor オプションで指定したアクセサの名前すべてにマッチする正規表現オブジェクトを返します。
 
 指定しなかった場合は nil を返します。
 
 ### def extra_accessor_flags -> {String => String}
 
-コマンドライン引数の --accessor オプションで指定したアクセサがキー、ア
-クセサの種類が値のハッシュを返します。
+コマンドライン引数の --accessor オプションで指定したアクセサがキー、アクセサの種類が値のハッシュを返します。
 
 値は r、w、rw のいずれかです。それぞれ attr_reader、attr_writer、
 attr_accessor に対応します。
 
 ### def css -> String
 
-コマンドライン引数の --style オプションで指定した URL を文字列で返しま
-す。
+コマンドライン引数の --style オプションで指定した URL を文字列で返します。
 
 ### def webcvs -> String | nil
 
-コマンドライン引数の --webcvs オプションで指定した URL を文字列で返しま
-す。
+コマンドライン引数の --webcvs オプションで指定した URL を文字列で返します。
 
 指定しなかった場合は nil を返します。
 
@@ -234,8 +206,7 @@ attr_accessor に対応します。
 
 ### def force_update -> bool
 
-コマンドライン引数の --force_update を指定していた場合に true を返しま
-す。そうでない場合は false を返します。
+コマンドライン引数の --force_update を指定していた場合に true を返します。そうでない場合は false を返します。
 
 ### def parse(argv) -> ()
 
@@ -257,11 +228,9 @@ attr_accessor に対応します。
 
 ### def title=(string)
 
-ドキュメントのタイトルがまだ設定されていない場合に string で指定した文
-字列に設定します。
+ドキュメントのタイトルがまだ設定されていない場合に string で指定した文字列に設定します。
 
-コマンドライン引数で既に --title オプションが指定されていた場合には、そ
-ちらを優先します。
+コマンドライン引数で既に --title オプションが指定されていた場合には、そちらを優先します。
 
 - **param** `string` -- 設定するタイトルを文字列で指定します。
 
@@ -305,36 +274,31 @@ attr_accessor に対応します。
 
 ### def pipe -> bool
 
-コマンドライン引数の --pipe オプションを指定していた場合、true を返しま
-す。そうでない場合は false を返します。
+コマンドライン引数の --pipe オプションを指定していた場合、true を返します。そうでない場合は false を返します。
 
 ### def pipe=(val)
 
-val に true を指定した場合、コマンドライン引数の --pipe オプションと同
-様の指定を行います。
+val に true を指定した場合、コマンドライン引数の --pipe オプションと同様の指定を行います。
 
 - **param** `val` -- --pipe オプションと同じ指定を行う場合は true、そうでない場合
            は false を指定します。
 
 ### def dry_run -> bool
 
-コマンドライン引数の --dry-run オプションを指定していた場合、true を返
-します。--no-dry-run オプションを指定していた場合、false を返します。
+コマンドライン引数の --dry-run オプションを指定していた場合、true を返します。--no-dry-run オプションを指定していた場合、false を返します。
 
 どちらも指定しなかった場合は false を返します。
 
 ### def dry_run=(val)
 
-val に true を指定した場合、コマンドライン引数の --dry-run オプションと
-同様の指定を行います。
+val に true を指定した場合、コマンドライン引数の --dry-run オプションと同様の指定を行います。
 
 - **param** `val` -- --dry-run オプションと同じ指定を行う場合は true、そうでない
            場合は false を指定します。
 
 ### def encoding -> Encoding
 
-コマンドライン引数の --encoding オプションを指定していた場合、指定した
-エンコーディングに対応する [c:Encoding] オブジェクトを返します。
+コマンドライン引数の --encoding オプションを指定していた場合、指定したエンコーディングに対応する [c:Encoding] オブジェクトを返します。
 
 指定しなかった場合は [m:Encoding.default_external] の値を返します。
 
@@ -347,15 +311,13 @@ val に true を指定した場合、コマンドライン引数の --dry-run �
 ### def force_output -> bool
 
 コマンドライン引数の --force_output オプションを指定していた場合、true
-を返します。--no-force_output オプションを指定していた場合、false を返
-します。
+を返します。--no-force_output オプションを指定していた場合、false を返します。
 
 どちらも指定しなかった場合は true を返します。
 
 ### def force_output=(val)
 
-val に true を指定した場合、コマンドライン引数の --force_output オプショ
-ンと同様の指定を行います。
+val に true を指定した場合、コマンドライン引数の --force_output オプションと同様の指定を行います。
 
 - **param** `val` -- --force_output オプションと同じ指定を行う場合は true、そうで
            ない場合は false を指定します。
@@ -376,8 +338,7 @@ true を返します。
 
 ### def hyperlink_all=(val)
 
-val に true を指定した場合、コマンドライン引数の --hyperlink-all オプショ
-ンと同様の指定を行います。
+val に true を指定した場合、コマンドライン引数の --hyperlink-all オプションと同様の指定を行います。
 
 - **param** `val` -- --hyperlink-all オプションと同じ指定を行う場合は true、そう
            でない場合は false を指定します。
@@ -385,23 +346,20 @@ val に true を指定した場合、コマンドライン引数の --hyperlink-
 ### def line_numbers -> bool
 
 コマンドライン引数の --line-numbers オプションを指定していた場合、true
-を返します。--no-line-numbers オプションを指定していた場合、false を返
-します。
+を返します。--no-line-numbers オプションを指定していた場合、false を返します。
 
 どちらも指定しなかった場合は false を返します。
 
 ### def line_numbers=(val)
 
-val に true を指定した場合、コマンドライン引数の --line-numbers オプショ
-ンと同様の指定を行います。
+val に true を指定した場合、コマンドライン引数の --line-numbers オプションと同様の指定を行います。
 
 - **param** `val` -- --line-numbers オプションと同じ指定を行う場合は true、そうで
            ない場合は false を指定します。
 
 ### def coverage_report -> Integer | false
 
-コマンドライン引数の --coverage-report オプションを指定していた場合、指
-定した数値を返します。
+コマンドライン引数の --coverage-report オプションを指定していた場合、指定した数値を返します。
 
 指定しなかった場合は false を返します。
 
@@ -420,15 +378,13 @@ val に true を指定した場合、コマンドライン引数の --line-numbe
 
 ### def template_dir -> String | nil
 
-コマンドライン引数の --template オプションで指定したテンプレートに対応
-するディレクトリを返します。
+コマンドライン引数の --template オプションで指定したテンプレートに対応するディレクトリを返します。
 
 オプションの解析前は nil を返します。
 
 ### def template_dir=(val)
 
-コマンドライン引数の --template オプションで指定したテンプレートに対応
-するディレクトリを設定します。
+コマンドライン引数の --template オプションで指定したテンプレートに対応するディレクトリを設定します。
 
 - **param** `val` -- パスを文字列で指定します。
 
@@ -453,13 +409,11 @@ val に true を指定した場合、コマンドライン引数の --line-numbe
 
 ### def option_parser -> OptionParser | nil
 
-コマンドライン引数の解析のための [c:OptionParser] オブジェクトを返し
-ます。
+コマンドライン引数の解析のための [c:OptionParser] オブジェクトを返します。
 
 ### def option_parser=(val)
 
-コマンドライン引数の解析のための [c:OptionParser] オブジェクトを設定
-します。
+コマンドライン引数の解析のための [c:OptionParser] オブジェクトを設定します。
 
 - **param** `val` -- [c:OptionParser] オブジェクトを指定します。
 
@@ -468,8 +422,7 @@ val に true を指定した場合、コマンドライン引数の --line-numbe
 
 ### def markup -> String
 
-コマンドライン引数の --markup オプションで指定したフォーマットを返しま
-す。
+コマンドライン引数の --markup オプションで指定したフォーマットを返します。
 
 指定されていない場合は 'rdoc' を返します。
 
@@ -481,8 +434,7 @@ val に true を指定した場合、コマンドライン引数の --line-numbe
 
 ### def page_dir -> Pathname | nil
 
-コマンドライン引数の --page-dir オプションで指定したディレクトリを返し
-ます。
+コマンドライン引数の --page-dir オプションで指定したディレクトリを返します。
 
 指定されていない場合は nil を返します。
 
@@ -506,8 +458,7 @@ val に true を指定した場合、コマンドライン引数の --line-numbe
 
 ### def static_path -> [String]
 
-コマンドライン引数の --copy-files オプションで指定したパスの一覧を返し
-ます。
+コマンドライン引数の --copy-files オプションで指定したパスの一覧を返します。
 
 ### def static_path=(vals)
 
@@ -530,8 +481,7 @@ $stderr に出力します。
 
 ### def write_options -> object
 
-カレントディレクトリの .rdoc_options ファイルに指定した設定を YAML 形式
-で保存します。
+カレントディレクトリの .rdoc_options ファイルに指定した設定を YAML 形式で保存します。
 
 ## Constants
 

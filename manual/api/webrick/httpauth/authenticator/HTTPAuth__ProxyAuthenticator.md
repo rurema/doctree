@@ -3,8 +3,7 @@ library: webrick/httpauth/authenticator
 ---
 # module WEBrick::HTTPAuth::ProxyAuthenticator
 
-このモジュールはプロキシのためにダイジェスト認証とベーシック認証の両方
-の一般的なサポートを提供します。
+このモジュールはプロキシのためにダイジェスト認証とベーシック認証の両方の一般的なサポートを提供します。
 
 ## Constants
 

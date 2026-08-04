@@ -12,8 +12,7 @@ HTTP のレスポンスを表すためのクラスを提供するライブラリ
 
 HTTP のレスポンスを表すためのクラスです。
 
-通常 WEBrick::HTTPResponse オブジェクトはサーブレットの service メソッドや do_XXX メソッドの
-引数として与えられるものであり、ユーザが明示的に生成する必要はありません。
+通常 WEBrick::HTTPResponse オブジェクトはサーブレットの service メソッドや do_XXX メソッドの引数として与えられるものであり、ユーザが明示的に生成する必要はありません。
 
 ## Class Methods
 
@@ -304,8 +303,7 @@ p res.reason_phrase    #=> "Not Found"
 
 ### def set_redirect(status, url)    -> ()
 
-指定された url にリダイレクトするためのヘッダと内容(エンティティボディ)を
-設定し例外 status を発生させます。
+指定された url にリダイレクトするためのヘッダと内容(エンティティボディ)を設定し例外 status を発生させます。
 
 - **param** `status` -- [c:WEBrick::HTTPStatus::Redirect] を指定します。
 

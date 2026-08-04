@@ -23,8 +23,7 @@ Gem の依存関係を扱うためのクラスです。
 依存する Gem の数が少ない順にソートされた [c:Gem::Specification] のリストを返します。
 
 このことは、インストール済みの Gem を削除するときに便利です。
-このメソッドで返された順にインストール済みの Gem 削除すると、
-依存関係による多くの問題を回避できます。
+このメソッドで返された順にインストール済みの Gem 削除すると、依存関係による多くの問題を回避できます。
 
 If there are circular dependencies (yuck!), then gems will be
 returned in order until only the circular dependents and anything
@@ -52,8 +51,7 @@ returned in dependency order again.
 与えられた名前を持つ [c:Gem::Specification] を自身から削除しても OK な場合は真を返します。
 そうでない場合は、偽を返します。
 
-与えられた名前を持つ [c:Gem::Specification] を自身から削除すると、
-依存関係を壊してしまう場合が、それを削除してはいけない場合です。
+与えられた名前を持つ [c:Gem::Specification] を自身から削除すると、依存関係を壊してしまう場合が、それを削除してはいけない場合です。
 
 - **param** `full_name` -- バージョンを含むフルネームで Gem の名前を指定します。
 

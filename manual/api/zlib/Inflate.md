@@ -3,8 +3,7 @@ library: zlib
 ---
 # class Zlib::Inflate < Zlib::ZStream
 
-入力データを展開するストリームのクラス。[c:Zlib::Deflate] と違い、
-このクラスのインスタンスを複製 (clone, dup) することはできません。
+入力データを展開するストリームのクラス。[c:Zlib::Deflate] と違い、このクラスのインスタンスを複製 (clone, dup) することはできません。
 
 ## Class Methods
 
@@ -62,8 +61,7 @@ string を展開ストリームに入力します。
 
 処理後、ストリームからの出力を返します。
 このメソッドを呼ぶと出力バッファ及び入力バッファは空になります。
-string が nil の場合はストリームへの入力を
-終了します。([m:Zlib::ZStream#finish] と同じ)。
+string が nil の場合はストリームへの入力を終了します。([m:Zlib::ZStream#finish] と同じ)。
 
 - **param** `string` -- 展開する文字列を入力します。
 
@@ -81,10 +79,7 @@ p inz.inflate(cstr) #=> "hoge fuga end"
 
 ### def <<(string) -> self
 
-[m:Zlib::Inflate#inflate] と同じように string を
-展開ストリームに入力しますが、Zlib::Inflate オブジェクト
-そのものを返します。展開ストリームからの出力は、
-出力バッファに保存されます。
+[m:Zlib::Inflate#inflate] と同じように string を展開ストリームに入力しますが、Zlib::Inflate オブジェクトそのものを返します。展開ストリームからの出力は、出力バッファに保存されます。
 
 ```ruby
 require 'zlib'
@@ -102,15 +97,10 @@ p inz.flush_next_out #=> "ga end"
 
 展開ストリームを終了します。
 
-ストリーム内に残っていたデータ (つまり圧縮データの後についていた
-ゴミデータ) を返します。
-[m:Zlib::ZStream#finished?] が真でない時に finish を呼ぶと
-例外が発生します。
+ストリーム内に残っていたデータ (つまり圧縮データの後についていたゴミデータ) を返します。
+[m:Zlib::ZStream#finished?] が真でない時に finish を呼ぶと例外が発生します。
 
-展開ストリームは圧縮データ内に終了コードを発見した時点で
-自ら終了するため、明示的に finish を呼ぶ必要は必ずしも
-ありませんが、このメソッドは圧縮データが正しく終了しているかを
-確認するのに便利です。
+展開ストリームは圧縮データ内に終了コードを発見した時点で自ら終了するため、明示的に finish を呼ぶ必要は必ずしもありませんが、このメソッドは圧縮データが正しく終了しているかを確認するのに便利です。
 
 ```ruby
 require 'zlib'
@@ -124,8 +114,7 @@ p inz.finish #=> "hoge fuga end"
 ### def set_dictionary(string) -> String
 
 展開に用いる辞書を指定します。string を返します。
-このメソッドは [c:Zlib::NeedDict] 例外が発生した直後のみ
-有効です。詳細は zlib.h を参照して下さい。
+このメソッドは [c:Zlib::NeedDict] 例外が発生した直後のみ有効です。詳細は zlib.h を参照して下さい。
 
 - **param** `string` -- 展開に用いる辞書を文字列で指定します。
 

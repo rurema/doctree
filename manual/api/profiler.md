@@ -4,14 +4,12 @@ until: "2.7.0"
 category: Development
 ---
 プロファイラの実装です。
-現在、[lib:profile] ライブラリは profiler ライブラリを
-利用して実装されています。
+現在、[lib:profile] ライブラリは profiler ライブラリを利用して実装されています。
 
 # module Profiler__
 
 プロファイラの実装です。
-Profiler__.start_profile 実行から、Profiler__.stop_profile までの
-区間の実行コードのプロファイルを取得します。
+Profiler__.start_profile 実行から、Profiler__.stop_profile までの区間の実行コードのプロファイルを取得します。
 
 以下の使用例を参照してください。
 

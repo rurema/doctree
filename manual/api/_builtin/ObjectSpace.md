@@ -12,8 +12,7 @@ library: _builtin
 オブジェクト ID([m:BasicObject#__id__])からオブジェクトを得ます。
 
 #%since 4.0
-このメソッドは Ruby 4.0 から deprecated です。Warning[:deprecated] が真のとき
-「ObjectSpace._id2ref is deprecated」という警告を出力します。
+このメソッドは Ruby 4.0 から deprecated です。Warning[:deprecated] が真のとき「ObjectSpace._id2ref is deprecated」という警告を出力します。
 将来のバージョンでは削除される予定です。
 
 オブジェクト ID からオブジェクトを引く必要がある場合は、[m:Object#object_id]
@@ -40,13 +39,10 @@ p ObjectSpace._id2ref(a.__id__) #=> "hoge"
 ### module_function def define_finalizer(obj, proc)         -> Array
 ### module_function def define_finalizer(obj) {|id| ...}    -> Array
 
-obj が解放されるときに実行されるファイナライザ proc を
-登録します。同じオブジェクトについて複数回呼ばれたときは置き換えで
-はなく追加登録されます。固定値 0 と proc を配列にして返します。
+obj が解放されるときに実行されるファイナライザ proc を登録します。同じオブジェクトについて複数回呼ばれたときは置き換えではなく追加登録されます。固定値 0 と proc を配列にして返します。
 
 ブロックを指定した場合は、そのブロックがファイナライザになります。
-obj の回収時にブロックは obj の ID ([m:BasicObject#__id__])を引数とし
-て実行されます。
+obj の回収時にブロックは obj の ID ([m:BasicObject#__id__])を引数として実行されます。
 しかし、後述の問題があるのでブロックでファイナライザを登録するのは難しいでしょう。
 
 - **param** `obj` -- ファイナライザを登録したいオブジェクトを指定します。
@@ -69,12 +65,9 @@ Foo.new
 GC.start
 ```
 
-これは、渡された proc の self が obj を参照しつ
-づけるため。そのオブジェクトが GC の対象になりません。
+これは、渡された proc の self が obj を参照しつづけるため。そのオブジェクトが GC の対象になりません。
 
-[lib:tempfile] は、ファイナライザの使い方の
-良い例になっています。これは、クラスのコンテキストで [c:Proc] を
-生成することで上記の問題を回避しています。
+[lib:tempfile] は、ファイナライザの使い方の良い例になっています。これは、クラスのコンテキストで [c:Proc] を生成することで上記の問題を回避しています。
 
 ```ruby title="例"
 class Bar
@@ -92,9 +85,7 @@ GC.start
 ```
 
 proc の呼び出しで発生した大域脱出(exitや例外)は無視されます。
-これは、スクリプトのメイン処理が GC の発生によって非同期に中断され
-るのを防ぐためです。不安なうちは -d オプションで
-事前に例外の発生の有無を確認しておいた方が良いでしょう。
+これは、スクリプトのメイン処理が GC の発生によって非同期に中断されるのを防ぐためです。不安なうちは -d オプションで事前に例外の発生の有無を確認しておいた方が良いでしょう。
 
 ```ruby title="例"
 class Baz
@@ -121,9 +112,7 @@ GC.start
 ### module_function def each_object                          -> Enumerator
 ### module_function def each_object(klass)                   -> Enumerator
 
-指定された klass と [m:Object#kind_of?] の関係にある全ての
-オブジェクトに対して繰り返します。引数が省略された時には全てのオブ
-ジェクトに対して繰り返します。
+指定された klass と [m:Object#kind_of?] の関係にある全てのオブジェクトに対して繰り返します。引数が省略された時には全てのオブジェクトに対して繰り返します。
 繰り返した数を返します。
 
 ブロックが与えられなかった場合は、
@@ -184,9 +173,7 @@ puts "Total count: #{count}"
 - **param** `immediate_sweep` -- sweep を遅らせる(Lazy Sweep を行う)場合は false
                        を、そうでない場合は true を指定します。
 
-注意: これらのキーワード引数は Ruby の実装やバージョンによって異なりま
-す。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポー
-トしていない場合はキーワード引数を指定しても無視される可能性があります。
+注意: これらのキーワード引数は Ruby の実装やバージョンによって異なります。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポートしていない場合はキーワード引数を指定しても無視される可能性があります。
 
 #%#noexample 参照先の GC.start と同様の動作のため
 

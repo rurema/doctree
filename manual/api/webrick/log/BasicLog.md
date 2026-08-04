@@ -48,8 +48,7 @@ logger = WEBrick::BasicLog.new('testfile', WEBrick::BasicLog::FATAL)
 
 ### def <<(obj)    -> ()
 
-指定された obj を to_s メソッドで文字列に変換してから、
-ログレベル INFO でログに記録します。
+指定された obj を to_s メソッドで文字列に変換してから、ログレベル INFO でログに記録します。
 
 - **param** `obj` -- 記録したいオブジェクトを指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 

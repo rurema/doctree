@@ -1,10 +1,8 @@
 *.dllや*.soなど、ダイナミックリンクライブラリを扱うためのライブラリです。
 
-[lib:dl] と同様の機能を持ちます。dl は環境によっては正しく
-動作しないという問題を解決するために導入されました。
+[lib:dl] と同様の機能を持ちます。dl は環境によっては正しく動作しないという問題を解決するために導入されました。
 fiddle は libffi の wrapper です。
-dl ライブラリの一部機能は上記の問題を解決するため fiddle で
-実装されています。
+dl ライブラリの一部機能は上記の問題を解決するため fiddle で実装されています。
 
 Ruby 1.9.x ではこのライブラリは単体では利用できません。
 DL を経由して利用してください。
@@ -17,8 +15,7 @@ fiddle ライブラリの名前空間をなすモジュール
 ## Singleton Methods
 ### def Fiddle.win32_last_error -> Integer
 
-最後に [m:Fiddle::Function#call] で C の関数を呼び出した
-結果設定された errno を返します。
+最後に [m:Fiddle::Function#call] で C の関数を呼び出した結果設定された errno を返します。
 
 このメソッドは Windows 環境でのみ定義されています。
 
@@ -36,8 +33,7 @@ errno は fiddle が設定するのでユーザはこのメソッドを使わな
 
 ### def Fiddle.last_error -> Integer
 
-最後に [m:Fiddle::Function#call] で C の関数を呼び出した
-結果設定された errno を返します。
+最後に [m:Fiddle::Function#call] で C の関数を呼び出した結果設定された errno を返します。
 
 この値はスレッドローカルです。
 
@@ -60,8 +56,7 @@ C の void 型を表します。
 
 C の void* 型を表します。
 
-fiddle や dl 上では、すべてのポインタは void* であると
-見なされます。
+fiddle や dl 上では、すべてのポインタは void* であると見なされます。
 
 - **SEE** [m:Fiddle::Function.new]
 
@@ -122,15 +117,11 @@ C の関数を表すクラスです。
 ## Class Methods
 ### def Fiddle::Function.new(ptr, args, ret_type, abi=Fiddle::Function::DEFAULT) -> Fiddle::Function
 
-ptr (関数ポインタを表す整数)から Fiddle::Function オブジェクトを
-生成します。
+ptr (関数ポインタを表す整数)から Fiddle::Function オブジェクトを生成します。
 
-ptr には [c:DL::Handle] から [m:DL::Handle#ptr] で取りだした
-関数ポインタ(を表す整数)を渡します。
+ptr には [c:DL::Handle] から [m:DL::Handle#ptr] で取りだした関数ポインタ(を表す整数)を渡します。
 
-args、ret_type で関数の引数と返り値の型を指定します。これには以下の
-定数が利用できます。「-TYPE_INT」 のように符号を反転させると unsigned を
-意味します。
+args、ret_type で関数の引数と返り値の型を指定します。これには以下の定数が利用できます。「-TYPE_INT」 のように符号を反転させると unsigned を意味します。
   - [m:Fiddle::TYPE_VOID]
   - [m:Fiddle::TYPE_VOIDP]
   - [m:Fiddle::TYPE_CHAR]
@@ -167,8 +158,7 @@ f = Fiddle::Function.new(libc["strcpy"], [TYPE_VOIDP, TYPE_VOIDP], TYPE_VOIDP)
 関数を呼び出します。
 
 [m:Fiddle::Function.new] で指定した引数と返り値の型に基いて
-Ruby のオブジェクトを適切に C のデータに変換して C の関数を呼び出し、
-その返り値を Ruby のオブジェクトに変換して返します。
+Ruby のオブジェクトを適切に C のデータに変換して C の関数を呼び出し、その返り値を Ruby のオブジェクトに変換して返します。
 
 引数の変換は以下の通りです。
 
@@ -229,8 +219,7 @@ Ruby のメソッド(call)を C の関数ポインタとして表現するため
 
 FFI の closure の wrapper です。
 
-利用法としては、このクラスのサブクラスを作って
-そのサブクラスに call メソッドを定義し、
+利用法としては、このクラスのサブクラスを作ってそのサブクラスに call メソッドを定義し、
 new でオブジェクトを生成することで利用します。
   
 ```ruby
@@ -256,8 +245,7 @@ qs.call(s, s.size, 1, Compare.new(TYPE_INT, [TYPE_VOIDP, TYPE_VOIDP]))
 p s # =>  "()07Uabcqx"
 ```
 
-[m:Class.new] を使うことで、サブクラスを明示的に作ることなしに
-コールバックオブジェクトを作ることができます。
+[m:Class.new] を使うことで、サブクラスを明示的に作ることなしにコールバックオブジェクトを作ることができます。
 
 ```ruby
 require 'fiddle'
@@ -279,8 +267,7 @@ compare = Class.new(Fiddle::Closure){
 Fiddle::Closure オブジェクトを返します。
 
 args、ret で関数の引数と返り値の型を指定します。
-指定は [m:Fiddle::Function.new] と同様なので、そちら
-を参照してください。
+指定は [m:Fiddle::Function.new] と同様なので、そちらを参照してください。
 
 - **param** `ret` -- 返り値の型
 - **param** `args` -- 引数の型を表す配列
@@ -331,8 +318,7 @@ p s # =>  "()07Uabcqx"
 Ruby のブロックを呼び出す Fiddle::Closure オブジェクトを返します。
 
 args、ret で関数の引数と返り値の型を指定します。
-指定は [m:Fiddle::Function.new] と同様なので、そちら
-を参照してください。
+指定は [m:Fiddle::Function.new] と同様なので、そちらを参照してください。
 
 - **param** `ret` -- 返り値の型
 - **param** `args` -- 引数の型を表す配列

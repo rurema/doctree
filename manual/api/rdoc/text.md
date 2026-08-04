@@ -11,8 +11,7 @@ type: library
 
 ### def expand_tabs(text) -> String
 
-引数中のタブ(\t)を直前の連続するスペースと合計して 8 文字のスペースにな
-るように置き換えます。
+引数中のタブ(\t)を直前の連続するスペースと合計して 8 文字のスペースになるように置き換えます。
 
 - **param** `text` -- 文字列を指定します。
 
@@ -43,8 +42,7 @@ include したクラスに self#formatter メソッドが必要です。
 
 ### def parse(text) -> RDoc::Markup::Document | Array
 
-引数から [m:RDoc::Text#normalize_comment] でスペースや改行文字などを削
-除した後に解析を行います。
+引数から [m:RDoc::Text#normalize_comment] でスペースや改行文字などを削除した後に解析を行います。
 
 - **param** `text` -- 文字列を指定します。
 

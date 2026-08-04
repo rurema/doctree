@@ -17,11 +17,8 @@ zlib ライブラリのバージョンを表す文字列を返します。
 ### module_function def adler32(string = nil, adler = nil) -> Integer
 ### module_function def adler32(io, adler = nil) -> Integer
 
-string の Adler-32 チェックサムを計算し、adler を
-更新した値を返します。string が省略された場合は
-Adler-32 チェックサムの初期値を返します。adler が
-省略された場合は adler に初期値が与えらたものとして
-計算します。
+string の Adler-32 チェックサムを計算し、adler を更新した値を返します。string が省略された場合は
+Adler-32 チェックサムの初期値を返します。adler が省略された場合は adler に初期値が与えらたものとして計算します。
 
 - **param** `string` -- string の Adler-32 チェックサムが計算されます。
 - **param** `io` -- IO が指定された場合は [m:IO#read] で nil を返すまで
@@ -32,11 +29,8 @@ Adler-32 チェックサムの初期値を返します。adler が
 ### module_function def crc32(string = nil, crc = nil) -> Integer
 ### module_function def crc32(io, crc = nil) -> Integer
 
-string の CRC チェックサムを計算し、crc を
-更新した値を返します。string が省略された場合は
-CRC チェックサムの初期値を返します。crc が
-省略された場合は crc に初期値が与えらたものとして
-計算します。
+string の CRC チェックサムを計算し、crc を更新した値を返します。string が省略された場合は
+CRC チェックサムの初期値を返します。crc が省略された場合は crc に初期値が与えらたものとして計算します。
 
 - **param** `string` -- string の CRC チェックサムが計算されます。
 - **param** `io` -- IO が指定された場合は [m:IO#read] で nil を返すまで
@@ -114,38 +108,31 @@ zlib.h のバージョンを表す文字列です。
 
 ### const NO_COMPRESSION -> Integer
 
-[m:Zlib::Deflate.new] や [m:Zlib::Deflate#deflate] 等に渡す、
-圧縮レベルを表す整数です。
+[m:Zlib::Deflate.new] や [m:Zlib::Deflate#deflate] 等に渡す、圧縮レベルを表す整数です。
 
 ### const BEST_SPEED -> Integer
 
-[m:Zlib::Deflate.new] や [m:Zlib::Deflate#deflate] 等に渡す、
-圧縮レベルを表す整数です。
+[m:Zlib::Deflate.new] や [m:Zlib::Deflate#deflate] 等に渡す、圧縮レベルを表す整数です。
 
 ### const BEST_COMPRESSION -> Integer
 
-[m:Zlib::Deflate.new] や [m:Zlib::Deflate#deflate] 等に渡す、
-圧縮レベルを表す整数です。
+[m:Zlib::Deflate.new] や [m:Zlib::Deflate#deflate] 等に渡す、圧縮レベルを表す整数です。
 
 ### const DEFAULT_COMPRESSION -> Integer
 
-[m:Zlib::Deflate.new] や [m:Zlib::Deflate#deflate] 等に渡す、
-圧縮レベルを表す整数です。
+[m:Zlib::Deflate.new] や [m:Zlib::Deflate#deflate] 等に渡す、圧縮レベルを表す整数です。
 
 ### const FILTERED -> Integer
 
-[m:Zlib::Deflate.new] や [m:Zlib::Deflate#params] に渡す、
-圧縮方法を表す整数です。
+[m:Zlib::Deflate.new] や [m:Zlib::Deflate#params] に渡す、圧縮方法を表す整数です。
 
 ### const HUFFMAN_ONLY -> Integer
 
-[m:Zlib::Deflate.new] や [m:Zlib::Deflate#params] に渡す、
-圧縮方法を表す整数です。
+[m:Zlib::Deflate.new] や [m:Zlib::Deflate#params] に渡す、圧縮方法を表す整数です。
 
 ### const DEFAULT_STRATEGY -> Integer
 
-[m:Zlib::Deflate.new] や [m:Zlib::Deflate#params] に渡す、
-圧縮方法を表す整数です。
+[m:Zlib::Deflate.new] や [m:Zlib::Deflate#params] に渡す、圧縮方法を表す整数です。
 
 ### const DEF_MEM_LEVEL -> Integer
 
@@ -162,23 +149,19 @@ windowBits のデフォルト値です。
 
 ### const NO_FLUSH -> Integer
 
-[m:Zlib::Deflate#deflate] 等に渡す、ストリームの出力を
-制御するための整数です。
+[m:Zlib::Deflate#deflate] 等に渡す、ストリームの出力を制御するための整数です。
 
 ### const SYNC_FLUSH -> Integer
 
-[m:Zlib::Deflate#deflate] 等に渡す、ストリームの出力を
-制御するための整数です。
+[m:Zlib::Deflate#deflate] 等に渡す、ストリームの出力を制御するための整数です。
 
 ### const FULL_FLUSH -> Integer
 
-[m:Zlib::Deflate#deflate] 等に渡す、ストリームの出力を
-制御するための整数です。
+[m:Zlib::Deflate#deflate] 等に渡す、ストリームの出力を制御するための整数です。
 
 ### const FINISH -> Integer
 
-[m:Zlib::Deflate#deflate] 等に渡す、ストリームの出力を
-制御するための整数です。
+[m:Zlib::Deflate#deflate] 等に渡す、ストリームの出力を制御するための整数です。
 
 ### const OS_CODE -> Integer
 

@@ -5,8 +5,7 @@ include:
 ---
 # module REXML::Namespace
 
-XML 名前空間によって管理される「名前」を持つようなノードを
-表すモジュール。
+XML 名前空間によって管理される「名前」を持つようなノードを表すモジュール。
 
 要素([c:REXML::Element])、属性([c:REXML::Attribute])
 に include されます。
@@ -56,8 +55,7 @@ self が other と ns で指定した名前を持っているならば真を返�
 ns が nil でない場合は名前空間も比較されます。
 other が ":" を含んでいる(つまり prefix を含んでいる)場合は
 [m:REXML::Namespace#fully_expanded_name] と other を比較します。
-どちらでもない場合は other と [m:REXML::Namespace#name] を直接
-比較します。
+どちらでもない場合は other と [m:REXML::Namespace#name] を直接比較します。
 
 - **param** `other` -- 比較する名前(文字列)
 - **param** `ns` -- 比較する名前空間(文字列)

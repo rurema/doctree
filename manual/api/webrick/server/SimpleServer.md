@@ -4,8 +4,7 @@ library: webrick/server
 # class WEBrick::SimpleServer < Object
 
 サーバのタイプを表すクラスです。
-[m:WEBrick::GenericServer.new] の設定の :ServerType の値として指定した場合
-サーバは通常のプロセスとして動作します。
+[m:WEBrick::GenericServer.new] の設定の :ServerType の値として指定した場合サーバは通常のプロセスとして動作します。
 
 #%#== Class Methods
 

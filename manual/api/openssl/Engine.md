@@ -15,8 +15,7 @@ OpenSSL の Engine (プラグイン)を表すオブジェクトです。
 
 id で指定した engine をロードします。
 
-[m:OpenSSL::Engine.load] ではコンパイル時に決められた engine しか
-読み込めませんが、これは動的なロードが可能です。
+[m:OpenSSL::Engine.load] ではコンパイル時に決められた engine しか読み込めませんが、これは動的なロードが可能です。
 
 - **param** `id` -- engine の名前(文字列)
 - **raise** `OpenSSL::Engine::EngineError` -- ロードが失敗した場合に発生します。
@@ -39,8 +38,7 @@ engine が利用していたリソースを開放します。
 
 Engine をロードします。
 
-このメソッドは openssl のコンパイル時に静的に
-コンパイルされたものを読み込みます。
+このメソッドは openssl のコンパイル時に静的にコンパイルされたものを読み込みます。
 
 name で指定した engine をロードします。以下が指定可能です。
   - "dynamic"
@@ -56,8 +54,7 @@ name で指定した engine をロードします。以下が指定可能です�
   - "openssl"
 引数を省略した場合はロード可能なすべての engine をロードします。
 
-動的な読み込みをしたい場合は [m:OpenSSL::Engine.by_id] を
-用います。
+動的な読み込みをしたい場合は [m:OpenSSL::Engine.by_id] を用います。
 
 ロードに成功した場合は true を返します。
 
@@ -76,8 +73,7 @@ engine から暗号化/復号化オブジェクトを生成します。
 
 ### def cmds -> [[String, String, String]]
 
-その engine がサポートしているコマンドの一覧を
-配列で返します。
+その engine がサポートしているコマンドの一覧を配列で返します。
 
 配列の各要素は
 
@@ -143,8 +139,7 @@ p engine.name # => "Atalla hardware engine support"
 
 engine をデフォルトで利用するようにします。
 
-flags は engine を openssl のどの機能に関してデフォルトに
-するかを指定します。
+flags は engine を openssl のどの機能に関してデフォルトにするかを指定します。
 
 flags は以下の値の OR を取ります。
   - [m:OpenSSL::Engine::METHOD_CIPHERS]
@@ -160,8 +155,7 @@ flags は以下の値の OR を取ります。
 
 ### const METHOD_ALL -> Integer
 
-engine が持っている機能をすべて openssl のデフォルトにすること
-を意味します。
+engine が持っている機能をすべて openssl のデフォルトにすることを意味します。
 
 [m:OpenSSL::Engine#set_default] のフラグとして使います。
 

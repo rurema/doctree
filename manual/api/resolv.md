@@ -25,31 +25,24 @@ NIS はサポートされていません。
 
 リゾルバを表すクラスです。
 このクラス自体は実際には名前解決をせず、
-[m:Resolv.new] で与えられたリゾルバに順に
-問合せることしかしません。
+[m:Resolv.new] で与えられたリゾルバに順に問合せることしかしません。
 
-このクラスのクラスメソッドで名前解決をした場合には、
-内部で /etc/hosts, DNS の順に問合せます。
+このクラスのクラスメソッドで名前解決をした場合には、内部で /etc/hosts, DNS の順に問合せます。
 
-順に問合せる過程で、あるリゾルバが1個以上の
-結果を返した場合、それ以降のリゾルバには
-問い合わせをしません。
+順に問合せる過程で、あるリゾルバが1個以上の結果を返した場合、それ以降のリゾルバには問い合わせをしません。
 
 ## Class Methods
 ### def Resolv.new(resolvers = [Hosts.new, DNS.new]) -> Resolv
 
-resolvers に与えたリゾルバの配列を先頭から順に
-名前解決を試すような、新しいリゾルバオブジェクトを返します。
+resolvers に与えたリゾルバの配列を先頭から順に名前解決を試すような、新しいリゾルバオブジェクトを返します。
 
-resolvers の各要素は each_address と each_name という
-メソッドを持っていなければなりません。
+resolvers の各要素は each_address と each_name というメソッドを持っていなければなりません。
 
 - **param** `resolvers` -- リゾルバの配列
 
 ### def Resolv.getaddress(name) -> String
 
-ホスト名 name の IP アドレスをルックアップし、
-ルックアップ結果の最初のアドレスを返します。
+ホスト名 name の IP アドレスをルックアップし、ルックアップ結果の最初のアドレスを返します。
 
 ルックアップは /etc/hosts, DNS の順で行います。
 
@@ -64,8 +57,7 @@ p Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
 
 ### def Resolv.getaddresses(name) -> [String]
 
-ホスト名 name の IP アドレスをルックアップし、
-ルックアップ結果のアドレスリストを返します。
+ホスト名 name の IP アドレスをルックアップし、ルックアップ結果のアドレスリストを返します。
 
 ルックアップは /etc/hosts, DNS の順で行います。
 ルックアップに失敗した場合は空の配列が返されます。
@@ -74,8 +66,7 @@ p Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
 
 ### def Resolv.each_address(name) {|address| ...} -> ()
 
-ホスト名 name の IP アドレスをルックアップし、
-各ルックアップ結果のアドレスに対してブロックを評価します。
+ホスト名 name の IP アドレスをルックアップし、各ルックアップ結果のアドレスに対してブロックを評価します。
 
 ルックアップは /etc/hosts, DNS の順で行います。
 
@@ -83,8 +74,7 @@ p Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
 
 ### def Resolv.getname(address) -> String
 
-IP アドレス address のホスト名をルックアップし、
-ルックアップ結果の最初のホスト名を文字列で返します。
+IP アドレス address のホスト名をルックアップし、ルックアップ結果の最初のホスト名を文字列で返します。
 
 ルックアップは /etc/hosts, DNS の順で行います。
 
@@ -98,8 +88,7 @@ p Resolv.getname("221.186.184.68") #=> "carbon.ruby-lang.org"
 
 ### def Resolv.getnames(address) -> [String]
 
-IP アドレス address のホスト名をルックアップし、
-ルックアップ結果のホスト名リストを返します。
+IP アドレス address のホスト名をルックアップし、ルックアップ結果のホスト名リストを返します。
 
 ルックアップは /etc/hosts, DNS の順で行います。
 
@@ -107,8 +96,7 @@ IP アドレス address のホスト名をルックアップし、
 
 ### def Resolv.each_name(address) {|name| ...} -> ()
 
-IP アドレス address のホスト名をルックアップし、
-各ルックアップ結果のホスト名に対してブロックを評価します。
+IP アドレス address のホスト名をルックアップし、各ルックアップ結果のホスト名に対してブロックを評価します。
 
 ルックアップは /etc/hosts, DNS の順で行います。
 
@@ -118,16 +106,14 @@ IP アドレス address のホスト名をルックアップし、
 
 ### def getaddress(name) -> String
 
-ホスト名 name の IP アドレスをルックアップし、
-ルックアップ結果の最初のアドレスを返します。
+ホスト名 name の IP アドレスをルックアップし、ルックアップ結果の最初のアドレスを返します。
 
 - **param** `name` -- ホスト名を文字列で与えます。
 - **raise** `Resolv::ResolvError` -- ルックアップに失敗したときに発生します。
 
 ### def getaddresses(name) -> [String]
 
-ホスト名 name の IP アドレスをルックアップし、
-ルックアップ結果のアドレスリストを返します。
+ホスト名 name の IP アドレスをルックアップし、ルックアップ結果のアドレスリストを返します。
 
 ルックアップに失敗した場合は空の配列が返されます。
 
@@ -135,30 +121,26 @@ IP アドレス address のホスト名をルックアップし、
 
 ### def each_address(name) {|name| ...} -> ()
 
-ホスト名 name の IP アドレスをルックアップし、
-各ルックアップ結果のアドレスに対してブロックを評価します。
+ホスト名 name の IP アドレスをルックアップし、各ルックアップ結果のアドレスに対してブロックを評価します。
 
 - **param** `name` -- ホスト名を文字列で与えます。
 
 ### def getname(address) -> String
 
-IP アドレス address のホスト名をルックアップし、
-ルックアップ結果の最初のホスト名を文字列で返します。
+IP アドレス address のホスト名をルックアップし、ルックアップ結果の最初のホスト名を文字列で返します。
 
 - **param** `address` -- IPアドレスを文字列で与えます。
 - **raise** `Resolv::ResolvError` -- ルックアップに失敗したときに発生します。
 
 ### def getnames(address) -> [String]
 
-IP アドレス address のホスト名をルックアップし、
-ルックアップ結果のホスト名リストを返します。
+IP アドレス address のホスト名をルックアップし、ルックアップ結果のホスト名リストを返します。
 
 - **param** `address` -- IPアドレスを文字列で与えます。
 
 ### def each_name(address) {|name| ...} -> ()
 
-IP アドレス address のホスト名をルックアップし、
-各ルックアップ結果のホスト名に対してブロックを評価します。
+IP アドレス address のホスト名をルックアップし、各ルックアップ結果のホスト名に対してブロックを評価します。
 
 - **param** `address` -- IPアドレスを文字列で与えます。
 
@@ -166,8 +148,7 @@ IP アドレス address のホスト名をルックアップし、
 
 ### const DefaultResolver -> Resolv
 
-[c:Resolv] の各クラスメソッドを呼びだしたときに
-利用されるリゾルバです。
+[c:Resolv] の各クラスメソッドを呼びだしたときに利用されるリゾルバです。
 
 ### const AddressRegex -> Regexp
 
@@ -194,8 +175,7 @@ IPアドレスにマッチする正規表現です。
 
 ### def Resolv::Hosts.new(hosts = DefaultFileName) -> Resolv::Hosts
 
-hosts というファイル名のファイルを情報源とする
-リゾルバを生成し、返します。
+hosts というファイル名のファイルを情報源とするリゾルバを生成し、返します。
 
 - **param** `hosts` -- ホスト情報が書かれたファイルの名前を文字列で与えます。
 
@@ -203,16 +183,14 @@ hosts というファイル名のファイルを情報源とする
 
 ### def getaddress(name) -> String
 
-ホスト名 name の IP アドレスをルックアップし、
-ルックアップ結果の最初のアドレスを返します。
+ホスト名 name の IP アドレスをルックアップし、ルックアップ結果の最初のアドレスを返します。
 
 - **param** `name` -- ホスト名を文字列で与えます。
 - **raise** `Resolv::ResolvError` -- ルックアップに失敗したときに発生します。
 
 ### def getaddresses(name) -> [String]
 
-ホスト名 name の IP アドレスをルックアップし、
-ルックアップ結果のアドレスリストを返します。
+ホスト名 name の IP アドレスをルックアップし、ルックアップ結果のアドレスリストを返します。
 
 ルックアップに失敗した場合は空の配列が返されます。
 
@@ -220,30 +198,26 @@ hosts というファイル名のファイルを情報源とする
 
 ### def each_address(name) {|name| ...} -> ()
 
-ホスト名 name の IP アドレスをルックアップし、
-各ルックアップ結果のアドレスに対してブロックを評価します。
+ホスト名 name の IP アドレスをルックアップし、各ルックアップ結果のアドレスに対してブロックを評価します。
 
 - **param** `name` -- ホスト名を文字列で与えます。
 
 ### def getname(address) -> String
 
-IP アドレス address のホスト名をルックアップし、
-ルックアップ結果の最初のホスト名を文字列で返します。
+IP アドレス address のホスト名をルックアップし、ルックアップ結果の最初のホスト名を文字列で返します。
 
 - **param** `address` -- IPアドレスを文字列で与えます。
 - **raise** `Resolv::ResolvError` -- ルックアップに失敗したときに発生します。
 
 ### def getnames(address) -> [String]
 
-IP アドレス address のホスト名をルックアップし、
-ルックアップ結果のホスト名リストを返します。
+IP アドレス address のホスト名をルックアップし、ルックアップ結果のホスト名リストを返します。
 
 - **param** `address` -- IPアドレスを文字列で与えます。
 
 ### def each_name(address) {|name| ...} -> ()
 
-IP アドレス address のホスト名をルックアップし、
-各ルックアップ結果のホスト名に対してブロックを評価します。
+IP アドレス address のホスト名をルックアップし、各ルックアップ結果のホスト名に対してブロックを評価します。
 
 ルックアップは /etc/hosts, DNS の順で行います。
 
@@ -260,13 +234,11 @@ IP アドレス address のホスト名をルックアップし、
 
 ### const DefaultFileName -> String
 
-システム標準の、
-ホスト情報が書かれたファイルの名前です。
+システム標準の、ホスト情報が書かれたファイルの名前です。
 
 # class Resolv::DNS < Object
 
-このクラスは DNS を利用した名前解決をするリゾルバを
-表します。
+このクラスは DNS を利用した名前解決をするリゾルバを表します。
 
 このクラスは実際には下位のクラスに処理を依頼します。
 
@@ -285,8 +257,7 @@ DNSについては以下を参照してください。
 resolv_conf が nil の場合は
 /etc/resolv.conf もしくはプラットフォーム固有の
 DNS設定を利用します。
-resolv_conf が文字列の場合は /etc/resolv.conf と
-同じフォーマットのファイルを設定に利用します。
+resolv_conf が文字列の場合は /etc/resolv.conf と同じフォーマットのファイルを設定に利用します。
 resolv_conf がハッシュの場合は、:nameserver, :search, :ndots
 というキーが利用可能です。
 それぞれの意味は [man:resolv.conf(5)] を参照してください。
@@ -309,11 +280,9 @@ Resolv::DNS.new(:nameserver_port => [['8.8.8.8', 53], ['8.8.4.4', 53]],
 ### def Resolv::DNS.open(*args){|dns| ...} -> object
 
 新しい DNS リゾルバを生成します。
-ブロックを与えた場合は生成したリゾルバでブロックを呼びだし、
-ブロック終了時にリゾルバを閉じます。
+ブロックを与えた場合は生成したリゾルバでブロックを呼びだし、ブロック終了時にリゾルバを閉じます。
 
-ブロックを与えなかった場合は [m:Resolv::DNS.new] と
-同じです。
+ブロックを与えなかった場合は [m:Resolv::DNS.new] と同じです。
 
 - **param** `args` -- DNSの設定を与えます。意味は [m:Resolv::DNS.new] 
             の引数と同じです。
@@ -324,16 +293,14 @@ Resolv::DNS.new(:nameserver_port => [['8.8.8.8', 53], ['8.8.4.4', 53]],
 
 ### def getaddress(name) -> Resolv::IPv4 | Resolv::IPv6
 
-ホスト名 name の IP アドレスをルックアップし、
-ルックアップ結果の最初のアドレスを返します。
+ホスト名 name の IP アドレスをルックアップし、ルックアップ結果の最初のアドレスを返します。
 
 - **param** `name` -- ホスト名を文字列もしくは[c:Resolv::DNS::Name]のインスタンスで与えます。
 - **raise** `Resolv::ResolvError` -- ルックアップに失敗したときに発生します。
 
 ### def getaddresses(name) -> [Resolv::IPv4 | Resolv::IPv6]
 
-ホスト名 name の IP アドレスをルックアップし、
-ルックアップ結果のアドレスリストを返します。
+ホスト名 name の IP アドレスをルックアップし、ルックアップ結果のアドレスリストを返します。
 
 ルックアップに失敗した場合は空の配列が返されます。
 
@@ -341,15 +308,13 @@ Resolv::DNS.new(:nameserver_port => [['8.8.8.8', 53], ['8.8.4.4', 53]],
 
 ### def each_address(name) {|name| ...} -> ()
 
-ホスト名 name の IP アドレスをルックアップし、
-各ルックアップ結果のアドレスに対してブロックを評価します。
+ホスト名 name の IP アドレスをルックアップし、各ルックアップ結果のアドレスに対してブロックを評価します。
 
 - **param** `name` -- ホスト名を文字列もしくは[c:Resolv::DNS::Name]のインスタンスで与えます。
 
 ### def getname(address) -> Resolv::DNS::Name
 
-IP アドレス address のホスト名をルックアップし、
-ルックアップ結果の最初のホスト名を返します。
+IP アドレス address のホスト名をルックアップし、ルックアップ結果の最初のホスト名を返します。
 
 - **param** `address` -- IPアドレスを文字列、 Resolv::IPv4 のインスタンス、
                Resolv::IPv6 のインスタンス、のいずれか与えます。
@@ -358,16 +323,14 @@ IP アドレス address のホスト名をルックアップし、
 
 ### def getnames(address) -> [Resolv::DNS::Name]
 
-IP アドレス address のホスト名をルックアップし、
-ルックアップ結果のホスト名リストを返します。
+IP アドレス address のホスト名をルックアップし、ルックアップ結果のホスト名リストを返します。
 
 - **param** `address` -- IPアドレスを文字列、 Resolv::IPv4 のインスタンス、
                Resolv::IPv6 のインスタンス、のいずれか与えます。
 
 ### def each_name(address) {|name| ...} -> ()
 
-IP アドレス address のホスト名をルックアップし、
-各ルックアップ結果のホスト名に対してブロックを評価します。
+IP アドレス address のホスト名をルックアップし、各ルックアップ結果のホスト名に対してブロックを評価します。
 
 - **param** `address` -- IPアドレスを文字列、 Resolv::IPv4 のインスタンス、
                Resolv::IPv6 のインスタンス、のいずれか与えます。
@@ -393,8 +356,7 @@ typeclass は以下のいずれかです。
   - [c:Resolv::DNS::Resource::IN::SRV]
 
 ルックアップ結果は Resolv::DNS::Resource （のサブクラス）のインスタンスとなります。
-typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合には
-そのクラスのインスタンスを返します。
+typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合にはそのクラスのインスタンスを返します。
 
 - **param** `name` -- ルックアップ対象となる名前を [c:Resolv::DNS::Name] または String で指定します。
 - **param** `typeclass` -- レコード種別を指定します。
@@ -421,8 +383,7 @@ typeclass は以下のいずれかです。
   - [c:Resolv::DNS::Resource::IN::SRV]
 
 ルックアップ結果は Resolv::DNS::Resource （のサブクラス）のインスタンスとなります。
-typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合には
-そのクラスのインスタンスを返します。
+typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合にはそのクラスのインスタンスを返します。
 
 - **param** `name` -- ルックアップ対象となる名前を [c:Resolv::DNS::Name] または String で指定します。
 - **param** `typeclass` -- レコード種別を指定します。
@@ -448,8 +409,7 @@ typeclass は以下のいずれかです。
   - [c:Resolv::DNS::Resource::IN::SRV]
 
 ルックアップ結果は Resolv::DNS::Resource （のサブクラス）のインスタンスとなります。
-typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合には
-そのクラスのインスタンスを返します。
+typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合にはそのクラスのインスタンスを返します。
 
 - **param** `name` -- ルックアップ対象となる名前を [c:Resolv::DNS::Name] または String で指定します。
 - **param** `typeclass` -- レコード種別を指定します。
@@ -675,8 +635,7 @@ DNSリソースのドメイン名を表す抽象クラスです。
 
 # class Resolv::DNS::Resource::NS < Resolv::DNS::Resource::DomainName
 
-DNS リソースの NS (正式な(authoritative)ネームサーバ) レコード
-を表す抽象クラスです。
+DNS リソースの NS (正式な(authoritative)ネームサーバ) レコードを表す抽象クラスです。
 
 [m:Resolv::DNS#getresource] で NS レコードを得たい場合は
 [c:Resolv::DNS::Resource::IN::NS] を使うべきです。
@@ -690,8 +649,7 @@ DNS リソースの NS (正式な(authoritative)ネームサーバ) レコード
 
 # class Resolv::DNS::Resource::CNAME < Resolv::DNS::Resource::DomainName
 
-DNS リソースの CNAME レコード
-を表す抽象クラスです。
+DNS リソースの CNAME レコードを表す抽象クラスです。
 
 [m:Resolv::DNS#getresource] で CNAME レコードを得たい場合は
 [c:Resolv::DNS::Resource::IN::CNAME] を使うべきです。
@@ -705,8 +663,7 @@ DNS リソースの CNAME レコード
 
 # class Resolv::DNS::Resource::SOA < Resolv::DNS::Resource
 
-DNS リソースの SOA (Start Of Authority) レコード
-を表す抽象クラスです。
+DNS リソースの SOA (Start Of Authority) レコードを表す抽象クラスです。
 
 [m:Resolv::DNS#getresource] で SOA レコードを得たい場合は
 [c:Resolv::DNS::Resource::IN::SOA] を使うべきです。
@@ -747,23 +704,19 @@ Resolv::DNS::Resource::SOA のインスタンスを生成して返します。
 
 ### def refresh -> Integer
 
-プライマリサーバからの更新をセカンダリサーバがチェックする
-頻度を秒単位で返します。
+プライマリサーバからの更新をセカンダリサーバがチェックする頻度を秒単位で返します。
 
 ### def retry -> Integer
 
-セカンダリサーバがプライマリサーバからの情報更新に失敗した場合に
-何秒後にリトライするかを返します。
+セカンダリサーバがプライマリサーバからの情報更新に失敗した場合に何秒後にリトライするかを返します。
 
 ### def expire -> Integer
 
-プライマリサーバから得たゾーン情報をセカンダリサーバが
-何秒間有効なものとして保持するかを返します。
+プライマリサーバから得たゾーン情報をセカンダリサーバが何秒間有効なものとして保持するかを返します。
 
 ### def minimum -> Integer
 
-リソースレコードで TTL の値として使われる最小の秒数を
-返します。
+リソースレコードで TTL の値として使われる最小の秒数を返します。
 
 #%# --- encode_rdata(msg) -> ()
 #%# このメソッドはユーザが使うべきではありません。
@@ -778,8 +731,7 @@ Resolv::DNS::Resource::SOA のインスタンスを生成して返します。
 
 # class Resolv::DNS::Resource::PTR < Resolv::DNS::Resource::DomainName
 
-DNS リソースの PTR レコード
-を表す抽象クラスです。
+DNS リソースの PTR レコードを表す抽象クラスです。
 
 [m:Resolv::DNS#getresource] で PTR レコードを得たい場合は
 [c:Resolv::DNS::Resource::IN::PTR] を使うべきです。
@@ -793,11 +745,9 @@ DNS リソースの PTR レコード
 
 # class Resolv::DNS::Resource::HINFO < Resolv::DNS::Resource
 
-DNS リソースの HINFO レコード
-を表す抽象クラスです。
+DNS リソースの HINFO レコードを表す抽象クラスです。
 
-このレコードはホストのハードウェアとソフトウェアの情報を
-保持しています。
+このレコードはホストのハードウェアとソフトウェアの情報を保持しています。
 
 [m:Resolv::DNS#getresource] で HINFO レコードを得たい場合は
 [c:Resolv::DNS::Resource::IN::HINFO] を使うべきです。
@@ -839,8 +789,7 @@ Resolv::DNS::Resource::HINFO のインスタンスを生成します。
 
 # class Resolv::DNS::Resource::MINFO < Resolv::DNS::Resource
 
-DNS リソースの MINFO レコード
-を表す抽象クラスです。
+DNS リソースの MINFO レコードを表す抽象クラスです。
 
 [m:Resolv::DNS#getresource] で MINFO レコードを得たい場合は
 [c:Resolv::DNS::Resource::IN::MINFO] を使うべきです。
@@ -862,14 +811,11 @@ Resolv::DNS::Resource::MINFO のインスタンスを生成します。
 
 ### def rmailbx -> String
 
-メーリングリストもしくはメールボックスの
-責任者のドメイン名を返します。
+メーリングリストもしくはメールボックスの責任者のドメイン名を返します。
 
 ### def emailbx -> String
 
-メーリングリストもしくはメールボックスの
-エラーを受け取るメールボックスのドメイン名を
-返します。
+メーリングリストもしくはメールボックスのエラーを受け取るメールボックスのドメイン名を返します。
 
 #%# --- encode_rdata(msg) -> ()
 #%# #@todo
@@ -884,8 +830,7 @@ Resolv::DNS::Resource::MINFO のインスタンスを生成します。
 
 # class Resolv::DNS::Resource::MX < Resolv::DNS::Resource
 
-DNS リソースの MX レコード
-を表す抽象クラスです。
+DNS リソースの MX レコードを表す抽象クラスです。
 
 [m:Resolv::DNS#getresource] で MX レコードを得たい場合は
 [c:Resolv::DNS::Resource::IN::MX] を使うべきです。
@@ -926,8 +871,7 @@ MXのホスト名を返します。
 
 # class Resolv::DNS::Resource::TXT < Resolv::DNS::Resource
 
-DNS リソースの TXT レコード
-を表す抽象クラスです。
+DNS リソースの TXT レコードを表す抽象クラスです。
 
 [m:Resolv::DNS#getresource] で TXT レコードを得たい場合は
 [c:Resolv::DNS::Resource::IN::TXT] を使うべきです。
@@ -968,8 +912,7 @@ TXT レコードの文字列を配列で返します。
 
 # class Resolv::DNS::Resource::ANY < Resolv::DNS::Query 
 
-DNS のすべてのクラスに対するクエリーを表わす
-抽象クラスです。
+DNS のすべてのクラスに対するクエリーを表わす抽象クラスです。
 
 [m:Resolv::DNS#getresource] では
 [c:Resolv::DNS::Resource::IN::ANY] を使うべきです。
@@ -997,43 +940,35 @@ mixinして利用します。
 
 # class Resolv::DNS::Resource::IN::NS < Resolv::DNS::Resource::NS
 
-DNS リソースのクラス IN、タイプ NS に対応する
-クラスです。
+DNS リソースのクラス IN、タイプ NS に対応するクラスです。
 
 # class Resolv::DNS::Resource::IN::CNAME < Resolv::DNS::Resource::CNAME
 
-DNS リソースのクラス IN、タイプ CNAME に対応する
-クラスです。
+DNS リソースのクラス IN、タイプ CNAME に対応するクラスです。
 
 # class Resolv::DNS::Resource::IN::SOA < Resolv::DNS::Resource::SOA
 
-DNS リソースのクラス IN、タイプ SOA に対応する
-クラスです。
+DNS リソースのクラス IN、タイプ SOA に対応するクラスです。
 
 # class Resolv::DNS::Resource::IN::HINFO < Resolv::DNS::Resource::HINFO
 
-DNS リソースのクラス IN、タイプ HINFO に対応する
-クラスです。
+DNS リソースのクラス IN、タイプ HINFO に対応するクラスです。
 
 # class Resolv::DNS::Resource::IN::MINFO < Resolv::DNS::Resource::MINFO
 
-DNS リソースのクラス IN、タイプ MINFO に対応する
-クラスです。
+DNS リソースのクラス IN、タイプ MINFO に対応するクラスです。
 
 # class Resolv::DNS::Resource::IN::MX < Resolv::DNS::Resource::MX
 
-DNS リソースのクラス IN、タイプ MX に対応する
-クラスです。
+DNS リソースのクラス IN、タイプ MX に対応するクラスです。
 
 # class Resolv::DNS::Resource::IN::TXT < Resolv::DNS::Resource::TXT
 
-DNS リソースのクラス IN、タイプ TXT に対応する
-クラスです。
+DNS リソースのクラス IN、タイプ TXT に対応するクラスです。
 
 # class Resolv::DNS::Resource::IN::ANY < Resolv::DNS::Resource::ANY
 
-DNS クエリーのクラス IN、タイプ ANY に対応する
-クラスです。
+DNS クエリーのクラス IN、タイプ ANY に対応するクラスです。
 
 #%# == Constants
 #%# 
@@ -1044,8 +979,7 @@ DNS クエリーのクラス IN、タイプ ANY に対応する
 
 # class Resolv::DNS::Resource::IN::A < Resolv::DNS::Resource
 
-DNS リソースのクラス IN、タイプ A に対応する
-クラスです。
+DNS リソースのクラス IN、タイプ A に対応するクラスです。
 
 IPv4アドレスリソースを表します。
 
@@ -1053,8 +987,7 @@ IPv4アドレスリソースを表します。
 
 ### def Resolv::DNS::Resource::IN::A.new(address) -> Resolv::DNS::Resource::IN::A
 
-Resolv::DNS::Resource::IN::A のインスタンスを
-生成します。
+Resolv::DNS::Resource::IN::A のインスタンスを生成します。
 
 - **param** `address` -- IPv4アドレス
 
@@ -1081,8 +1014,7 @@ IPv4アドレスを返します。
 
 # class Resolv::DNS::Resource::IN::WKS < Resolv::DNS::Resource
 
-DNS リソースのクラス IN、タイプ WKS に対応する
-クラスです。
+DNS リソースのクラス IN、タイプ WKS に対応するクラスです。
 
 ## Class Methods
 
@@ -1115,8 +1047,7 @@ IPプロトコル番号を返します。
 
 例えば [m:Resolv::DNS::Resource::IN::WKS#protocol] が 6 (TCP)
 の場合、26番目のビットはポート25のサービス(SMTP)に対応しています。
-このビットが立っているならば SMTP は利用可能であり、
-そうでなければ利用できません。
+このビットが立っているならば SMTP は利用可能であり、そうでなければ利用できません。
 
 #%# --- encode_rdata(msg) -> ()
 #%# #@todo
@@ -1129,13 +1060,11 @@ IPプロトコル番号を返します。
 
 # class Resolv::DNS::Resource::IN::PTR < Resolv::DNS::Resource::PTR
 
-DNS リソースのクラス IN、タイプ PTR に対応する
-クラスです。
+DNS リソースのクラス IN、タイプ PTR に対応するクラスです。
 
 # class Resolv::DNS::Resource::IN::AAAA < Resolv::DNS::Resource
 
-DNS リソースのクラス IN、タイプ AAAA に対応する
-クラスです。
+DNS リソースのクラス IN、タイプ AAAA に対応するクラスです。
 
 IPv6アドレスリソースを表します。
 
@@ -1143,8 +1072,7 @@ IPv6アドレスリソースを表します。
 
 ### def Resolv::DNS::Resource::IN::AAAA.new(address) -> Resolv::DNS::Resource::IN::AAAA
 
-Resolv::DNS::Resource::IN::AAAA のインスタンスを
-生成します。
+Resolv::DNS::Resource::IN::AAAA のインスタンスを生成します。
 
 - **param** `address` -- IPv6アドレス
 
@@ -1169,8 +1097,7 @@ IPv6アドレスを返します。
 
 # class Resolv::DNS::Resource::IN::SRV < Resolv::DNS::Resource
 
-DNS リソースのクラス IN、タイプ SRV に対応する
-クラスです。
+DNS リソースのクラス IN、タイプ SRV に対応するクラスです。
 
 [RFC:2782] で定義されています。
 利用可能なサービスのホスト名とポート番号を指定するレコードです。
@@ -1202,8 +1129,7 @@ Resolv::DNS::Resource::IN::SRV のインスタンスを生成します。
 
 ホストの優先順位を返します。
 
-クライアントは利用可能なホストの中で最も priority が
-小さい数値のホストを利用しなければなりません。
+クライアントは利用可能なホストの中で最も priority が小さい数値のホストを利用しなければなりません。
 
 priority が同じならば [m:Resolv::DNS::Resource::IN::SRV#weight]
 で定義されるようにホストを選ぶべきです。
@@ -1218,12 +1144,10 @@ priority が同じならば [m:Resolv::DNS::Resource::IN::SRV#weight]
 
 サーバを選択するための「重み」です。
 
-[m:Resolv::DNS::Resource::IN::SRV#priority] が同じ場合に
-この項目が利用されます。
+[m:Resolv::DNS::Resource::IN::SRV#priority] が同じ場合にこの項目が利用されます。
 重みに比例した確率でホストを選択すべきです。
 返り値の範囲は 0 から 65535 までの整数です。
-選択肢が一つしかない、つまり選択する必要がない場合には
-この値は人間が読みやすいよう 0 にすべきです。
+選択肢が一つしかない、つまり選択する必要がない場合にはこの値は人間が読みやすいよう 0 にすべきです。
 
 #%# == Constants
 #%# 
@@ -1309,16 +1233,13 @@ priority が同じならば [m:Resolv::DNS::Resource::IN::SRV#weight]
 
 # class Resolv::DNS::DecodeError < StandardError
 
-DNSメッセージのデコードに失敗したときに発生する
-例外のクラスです。
+DNSメッセージのデコードに失敗したときに発生する例外のクラスです。
 
-DNSサーバからの応答が規格的に正しくない場合などに
-発生します。
+DNSサーバからの応答が規格的に正しくない場合などに発生します。
 
 # class Resolv::DNS::EncodeError < StandardError
 
-DNSメッセージのエンコードに失敗したときに発生する
-例外のクラスです。
+DNSメッセージのエンコードに失敗したときに発生する例外のクラスです。
 
 通常このエラーは発生しません。
 もし発生したならばライブラリのバグである可能性があります。
@@ -1674,8 +1595,7 @@ IPv6 のアドレスを表すクラスです。
 
 ### def Resolv::IPv6.create(address) -> Resolv::IPv6
 
-引数 address で指定した文字列から Resolv::IPv6 のインスタンスを生成しま
-す。
+引数 address で指定した文字列から Resolv::IPv6 のインスタンスを生成します。
 
 - **param** `address` -- human readable な IPv6 アドレスの文字列表現を以下のいず
                れかの形式で指定します。

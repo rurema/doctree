@@ -18,13 +18,10 @@ Ruby 4.0 から、cgi ライブラリは default gems から削除されまし�
   - [m:CGI.escapeElement], [m:CGI.unescapeElement]
   - [m:CGI.escapeURIComponent], [m:CGI.unescapeURIComponent]
 
-[c:CGI] クラス本体(フォームの解析、クッキー、セッション、HTML の生成など)を
-利用するには、cgi gem をインストールしてください。
+[c:CGI] クラス本体(フォームの解析、クッキー、セッション、HTML の生成など)を利用するには、cgi gem をインストールしてください。
 
-なお `require "cgi"` 自体は Ruby 4.0 でもエラーになりませんが、
-読み込まれるのは上記のエスケープ用のメソッドだけです。
-そのため、フォームを扱うメソッドの呼び出しが [c:NoMethodError] になるまで
-問題に気付きにくい点に注意してください。
+なお `require "cgi"` 自体は Ruby 4.0 でもエラーになりませんが、読み込まれるのは上記のエスケープ用のメソッドだけです。
+そのため、フォームを扱うメソッドの呼び出しが [c:NoMethodError] になるまで問題に気付きにくい点に注意してください。
 
 #%end
 CGI プロトコルの詳細については以下の文書を参照してください。
@@ -61,8 +58,7 @@ cgi = CGI.new
 params = cgi.params
 ```
 
-また CGI#params は毎回同じ Hash オブジェクトを返すので
-以下のような使いかたもできます。
+また CGI#params は毎回同じ Hash オブジェクトを返すので以下のような使いかたもできます。
 
 ```ruby
 cgi.params['new_field_name'] = ["value"]  # 新しいパラメータを加える
@@ -91,9 +87,7 @@ db.transaction do
 end
 ```
 
-ただし、PStore は Ruby のバージョンによってデータ互換性が
-なくなることがあるので、長い期間データを保存することがある
-場合には検討が必要です。
+ただし、PStore は Ruby のバージョンによってデータ互換性がなくなることがあるので、長い期間データを保存することがある場合には検討が必要です。
 
 [c:PStore] も参照してください。
 
@@ -173,8 +167,7 @@ value = cgi.auth_type
 \#content_length と #server_port
 は整数を、その他のメソッドは文字列を返します。
 
-HTTP_COOKIE と HTTP_COOKIE2 には
-それぞれ raw_cookie と raw_cookie2 が対応します。
+HTTP_COOKIE と HTTP_COOKIE2 にはそれぞれ raw_cookie と raw_cookie2 が対応します。
 
 ```ruby
 value = cgi.raw_cookie      # ENV["HTTP_COOKIE"]

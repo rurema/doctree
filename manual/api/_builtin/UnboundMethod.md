@@ -8,8 +8,7 @@ library: _builtin
 
 [m:Module#instance_method] や
 [m:Method#unbind] により生成し、後で
-[m:UnboundMethod#bind] によりレシーバを
-割り当てた [c:Method] オブジェクトを作ることができます。
+[m:UnboundMethod#bind] によりレシーバを割り当てた [c:Method] オブジェクトを作ることができます。
 
 ```ruby title="例: Method クラスの冒頭にある例を UnboundMethod で書くと以下のようになります。"
 class Foo
@@ -123,8 +122,7 @@ puts Kernel.instance_method(:inspect).bind_call(BasicObject.new) # => #<BasicObj
 -(必要とされる引数の数 + 1)
 ```
 
-を返します。C 言語レベルで実装されたメソッドが可変長引数を
-受け付ける場合、-1 を返します。
+を返します。C 言語レベルで実装されたメソッドが可変長引数を受け付ける場合、-1 を返します。
 
 ```ruby title="例"
 class C
@@ -228,8 +226,7 @@ p Integer.instance_method(:hash).owner # => Kernel
 
 ソースコードのファイル名と行番号を配列で返します。
 
-その手続オブジェクトが ruby で定義されていない(つまりネイティブ
-である)場合は nil を返します。
+その手続オブジェクトが ruby で定義されていない(つまりネイティブである)場合は nil を返します。
 
 ```ruby title="例"
 require 'time'
@@ -252,8 +249,7 @@ UnboundMethod オブジェクトの引数の情報を返します。
 
 ### def super_method -> UnboundMethod | nil
 
-self 内で super を実行した際に実行されるメソッドを [c:UnboundMethod] オブジェ
-クトにして返します。
+self 内で super を実行した際に実行されるメソッドを [c:UnboundMethod] オブジェクトにして返します。
 
 #%#noexample Method#super_methodを参照
 

@@ -6,11 +6,9 @@ library: _builtin
 捕捉していないシグナルを受け取ったときに発生します。
 
 実際に発生したシグナル名は、
-[m:Exception#message] から
-「"SIG" + シグナル名」という形で得られます。
+[m:Exception#message] から「"SIG" + シグナル名」という形で得られます。
 
-デフォルトの状態では、
-以下のシグナルが SignalException を発生させます。
+デフォルトの状態では、以下のシグナルが SignalException を発生させます。
 
   - SIGALRM
   - SIGHUP
@@ -29,11 +27,9 @@ library: _builtin
 ### def SignalException.new(sig_name)             -> SignalException
 ### def SignalException.new(sig_number, sig_name) -> SignalException
 
-引数で指定したシグナルに関する SignalException オブジェクトを生成して返
-します。
+引数で指定したシグナルに関する SignalException オブジェクトを生成して返します。
 
-引数は [m:Signal?.list] に含まれるもののいずれかを指定する必要があり
-ます。
+引数は [m:Signal?.list] に含まれるもののいずれかを指定する必要があります。
 
 - **param** `sig_name` -- シグナル名を [c:Symbol] オブジェクト、文字列のいずれ
                 かで指定します。

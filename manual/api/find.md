@@ -47,8 +47,7 @@ end
 ### module_function def find(*dirs, ignore_error: true)              -> Enumerator
 ### module_function def find(*dirs, ignore_error: true){|file| ... } -> nil
 
-[man:find(1)] のように dir 配下のすべてのファイルや
-ディレクトリを一つずつ引数 file に渡してブロックを実行します。
+[man:find(1)] のように dir 配下のすべてのファイルやディレクトリを一つずつ引数 file に渡してブロックを実行します。
 
 ディレクトリのシンボリックリンクは辿りません。
 また file に渡される順序は不定です。
@@ -73,12 +72,10 @@ Find.find('/tmp') {|f|
 あるディレクトリ配下の探索を省略したい場合は上記のように、
 [m:Find?.prune] を使用します。この例では "/tmp/bar"
 配下のファイルやディレクトリを探索しません。prune の代わりに
-[ref:d:spec/control#next] を使用した場合、"/tmp/bar" 自体をスキップする
-だけで、その配下の探索は続行されます。
+[ref:d:spec/control#next] を使用した場合、"/tmp/bar" 自体をスキップするだけで、その配下の探索は続行されます。
 
 - **SEE** [man:find(1)], [m:Find?.prune]
 
 ### module_function def prune -> ()
 
-[m:Find?.find] メソッドのブロックにディレクトリが渡されたときにこ
-のメソッドを実行すると、そのディレクトリ配下の探索を無視します。
+[m:Find?.find] メソッドのブロックにディレクトリが渡されたときにこのメソッドを実行すると、そのディレクトリ配下の探索を無視します。

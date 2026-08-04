@@ -17,9 +17,7 @@ URI.open("http://www.ruby-lang.org/") {|f|
 }
 ```
 
-開いたファイルオブジェクトは [c:StringIO] もしくは [c:Tempfile] で
-すが [c:OpenURI::Meta] モジュールで拡張されていて、メタ情報を獲得する
-メソッドが使えます。
+開いたファイルオブジェクトは [c:StringIO] もしくは [c:Tempfile] ですが [c:OpenURI::Meta] モジュールで拡張されていて、メタ情報を獲得するメソッドが使えます。
 
 ```ruby
 require 'open-uri'

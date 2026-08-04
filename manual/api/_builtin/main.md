@@ -7,8 +7,7 @@ library: _builtin
 
 main では参照できない事に注意してください。トップレベルで self から参照してください。
 
-トップレベルで定義したメソッドは [c:Object] の private インスタンスメソッドと
-して定義されます。
+トップレベルで定義したメソッドは [c:Object] の private インスタンスメソッドとして定義されます。
 
 ```ruby title="例: トップレベルで定義したメソッドの確認"
 basic_private_methods = private_methods(false)
@@ -39,11 +38,9 @@ p public_methods(false) - basic_public_methods
 
 メソッドを public に設定します。
 
-引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
-れるメソッドをどんな形式でも呼び出せるように(public)設定します。
+引数なしのときは今後このクラスまたはモジュール定義内で新規に定義されるメソッドをどんな形式でも呼び出せるように(public)設定します。
 
-引数が与えられた時には引数によって指定されたメソッドを public に設
-定します。
+引数が与えられた時には引数によって指定されたメソッドを public に設定します。
 
 - **param** `name` --  0 個以上の [c:String] または [c:Symbol] を指定します。
 - **param** `names` -- 0 個以上の [c:String] または [c:Symbol] を [c:Array] で指定します。
@@ -61,11 +58,9 @@ p public_methods(false) - basic_public_methods
 
 メソッドを private に設定します。
 
-引数が与えられた時には引数によって指定されたメソッドを private に
-設定します。
+引数が与えられた時には引数によって指定されたメソッドを private に設定します。
 
-引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
-れるメソッドを関数形式でだけ呼び出せるように(private)設定します。
+引数なしのときは今後このクラスまたはモジュール定義内で新規に定義されるメソッドを関数形式でだけ呼び出せるように(private)設定します。
 
 - **param** `name` --  0 個以上の [c:String] または [c:Symbol] を指定します。
 - **param** `names` -- 0 個以上の [c:String] または [c:Symbol] を [c:Array] で指定します。

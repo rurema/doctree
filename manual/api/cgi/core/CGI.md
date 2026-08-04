@@ -143,8 +143,7 @@ HTTP ヘッダと、ブロックで与えられた文字列を標準出力に出
 
 HEADリクエスト (REQUEST_METHOD == "HEAD") の場合は HTTP ヘッダのみを出力します。
 
-charset が "iso-2022-jp"・"euc-jp"・"shift_jis" のいずれかで
-ある場合は文字列エンコーディングを自動変換し、language を "ja"にします。
+charset が "iso-2022-jp"・"euc-jp"・"shift_jis" のいずれかである場合は文字列エンコーディングを自動変換し、language を "ja"にします。
 
 - **param** `options` -- [c:Hash] か文字列で HTTP ヘッダを生成するための情報を指定します。
 

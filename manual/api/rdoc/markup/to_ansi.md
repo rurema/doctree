@@ -1,8 +1,7 @@
 ---
 type: library
 ---
-RDoc 形式のドキュメントを ANSI エスケープシーケンスで色付けするサブライ
-ブラリです。
+RDoc 形式のドキュメントを ANSI エスケープシーケンスで色付けするサブライブラリです。
 
 ```ruby
 require 'rdoc/markup/to_ansi'
@@ -15,8 +14,7 @@ puts h.convert(input_string)
 
 # class RDoc::Markup::ToAnsi < RDoc::Markup::ToRdoc
 
-RDoc 形式のドキュメントを ANSI エスケープシーケンスで色付けするクラスで
-す。
+RDoc 形式のドキュメントを ANSI エスケープシーケンスで色付けするクラスです。
 
 ## Class Methods
 

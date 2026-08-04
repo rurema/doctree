@@ -14,8 +14,7 @@ include:
 ### def Win32::Registry.open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) {|reg| ... }
 #%todo
 
-レジストリキー key 下のキー subkey を開き、
-開いたキーを表す Win32::Registry オブジェクトを返します。
+レジストリキー key 下のキー subkey を開き、開いたキーを表す Win32::Registry オブジェクトを返します。
 key は親のキーを Win32::Registry オブジェクトで指定します。
 親のキーには定義済キー HKEY_* を使用できます (⇒[c:Win32::Registry::Constants])
 
@@ -30,8 +29,7 @@ desired はアクセスマスクです。opt はキーのオプションです�
 ### def Win32::Registry.create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED) {|reg| ... }
 #%todo
 
-レジストリキー key 下にキー subkey を作成し、
-開いたキーを表す Win32::Registry オブジェクトを返します。
+レジストリキー key 下にキー subkey を作成し、開いたキーを表す Win32::Registry オブジェクトを返します。
 key は親のキーを Win32::Registry オブジェクトで指定します。
 親のキーには定義済キー HKEY_* を使用できます (⇒[c:Win32::Registry::Constants])
 
@@ -107,8 +105,7 @@ data はレジストリ値のデータで、クラスは以下の通りです:
   - REG_BINARY, REG_NONE
     String (バイナリデータを含みます)
 
-オプション引数 rtype が指定されていた場合、レジストリ値の型が
-与えられた rtype の配列に存在するかチェックされ、存在しない場合に
+オプション引数 rtype が指定されていた場合、レジストリ値の型が与えられた rtype の配列に存在するかチェックされ、存在しない場合に
 [c:TypeError] が発生します。
 
 ### def [](name, *rtype)
@@ -136,8 +133,7 @@ REG_DWORD_BIG_ENDIAN, REG_QWORD 以外だった場合は TypeError が発生し�
 ### def read_s_expand(name)
 #%todo
 
-型が REG_SZ または REG_EXPAND_SZ であるレジストリ値 name を読み、
-その値を返します。
+型が REG_SZ または REG_EXPAND_SZ であるレジストリ値 name を読み、その値を返します。
 
 型が REG_EXPAND_SZ だった場合、環境変数が置換された値が返ります。
 REG_SZ または REG_EXPAND_SZ 以外だった場合、TypeError が発生します。

@@ -26,8 +26,7 @@ ArithmeticSequenceオブジェクトは、[m:Numeric#step], [m:Range#step] に�
 end はあくまで元になった範囲の終端の値であり、
 **数列が実際に生成する最後の要素と一致するとは限りません**。
 step の刻み幅によって end にちょうど到達しない場合や、
-[m:Enumerator::ArithmeticSequence#exclude_end?] が真で end 自体が
-数列から除外される場合があるためです。
+[m:Enumerator::ArithmeticSequence#exclude_end?] が真で end 自体が数列から除外される場合があるためです。
 
 ```ruby title="例: end と実際の最後の要素が一致する場合"
 s = (1..10).step(3)
@@ -93,8 +92,7 @@ true を返します。
 
 自身のハッシュ値を返します。
 
-begin, end, step, exclude_end? が等しい Enumerable::ArithmeticSequence は
-同じハッシュ値を返します。
+begin, end, step, exclude_end? が等しい Enumerable::ArithmeticSequence は同じハッシュ値を返します。
 
 ### def each {|n| ... }   -> self
 ### def each              -> self

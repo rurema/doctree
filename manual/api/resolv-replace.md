@@ -57,8 +57,7 @@ category: Network
 ### def send(mesg, flags , dest_sockaddr=nil) -> Integer
 ### def send(mesg, flags, host, port) -> Integer
 
-4 引数の形式で [m:UDPSocket#send] 実行したとき、
-パラメータ host の名前解決に
+4 引数の形式で [m:UDPSocket#send] 実行したとき、パラメータ host の名前解決に
 [lib:resolv] ライブラリを使います。
 
 - **param** `mesg` -- 送るデータを文字列で与えます。

@@ -24,17 +24,13 @@ m * n 個の数a(i,j)を
 m=nの行列をm次の正方行列(square matrix)といいます。
 インデックスは 0 から始まることに注意してください。
 
-上からi番目の横の数の並びを第i行(the i-th row)、
-左からj番目の縦の数の並びを第j列(the j-th column)といいます。
+上からi番目の横の数の並びを第i行(the i-th row)、左からj番目の縦の数の並びを第j列(the j-th column)といいます。
 
-(m,n)型行列は、
-大きさnの行(横)ベクトルをm個縦に並べたものとみなすこともできますし、
-大きさmの列(縦)ベクトルをn個横に並べたものとみなすこともできます。
+(m,n)型行列は、大きさnの行(横)ベクトルをm個縦に並べたものとみなすこともできますし、大きさmの列(縦)ベクトルをn個横に並べたものとみなすこともできます。
 
 第i行、第j列にある数a(i,j)を(i,j)要素(the (i,j)-th element)といいます。
 
-i=jの要素a(i,j)を対角要素(diagonal element)、
-それ以外の要素を非対角要素(nondiagonal element)といいます。
+i=jの要素a(i,j)を対角要素(diagonal element)、それ以外の要素を非対角要素(nondiagonal element)といいます。
 
 #%#使い方 Usage
 
@@ -112,8 +108,7 @@ p m # => Matrix[[1, 4, -1], [2, 5, -2], [3, 6, -3]]
 
 ### def Matrix.diagonal(*values) -> Matrix
 
-対角要素がvaluesで、非対角要素が全て0であるような
-正方行列を生成します。
+対角要素がvaluesで、非対角要素が全て0であるような正方行列を生成します。
 
 - **param** `values` -- 行列の対角要素
 
@@ -339,11 +334,9 @@ p Matrix[[1, 2, 3], [4, 5, 6]].column_count # => 3
 ### def find_index(selector = :all) -> Enumerator
 
 指定した値と一致する要素の位置を [row, column] という配列で返します。
-ブロックを与えた場合は各要素を引数としてブロックを呼び出し、
-返り値が真であった要素の位置を返します。
+ブロックを与えた場合は各要素を引数としてブロックを呼び出し、返り値が真であった要素の位置を返します。
 
-複数の位置で値が一致する/ブロックが真を返す、場合は最初
-に見つかった要素の位置を返します。
+複数の位置で値が一致する/ブロックが真を返す、場合は最初に見つかった要素の位置を返します。
 
 selector で行列のどの部分を探すかを指定します。この引数の意味は
 [m:Matrix#each] を参照してください。
@@ -366,8 +359,7 @@ value を指定せず、さらにブロックを省略した場合、
 行列の各要素を引数としてブロックを呼び出します。
 
 0行目、1行目、…という順番で処理します。
-which に以下の [c:Symbol] を指定することで
-引数として使われる要素を限定できます。
+which に以下の [c:Symbol] を指定することで引数として使われる要素を限定できます。
   - :all - すべての要素(デフォルト)
   - :diagonal - 対角要素
   - :off_diagonal 対角要素以外
@@ -700,8 +692,7 @@ p Matrix[[7,6],[3,9]].adjugate # => Matrix[[9, -6], [-3, 7]]
 
 row 行、もしくは column 列に関するラプラス展開をする。
 
-通常の行列に対してはこれは単に固有値を計算するだけです。かわりに[m:Matrix#determinant] を
-利用すべきです。
+通常の行列に対してはこれは単に固有値を計算するだけです。かわりに[m:Matrix#determinant] を利用すべきです。
 
 変則的な形状の行列に対してはそれ以上の意味を持ちます。例えば
 row行/column列が行列やベクトルである場合には
@@ -837,8 +828,7 @@ p Matrix[[1+0i, 0], [0, 1]].real? # => false
 行列が正則であるとは、正方行列であり、かつ、その逆行列が存在することです。
 行列式が0でないことと同値です。
 
-正方行列でない場合には例外 ExceptionForMatrix::ErrDimensionMismatch を
-発生させます。
+正方行列でない場合には例外 ExceptionForMatrix::ErrDimensionMismatch を発生させます。
 
 ```ruby title="例"
 require 'matrix'
@@ -872,8 +862,7 @@ p m.regular? # => raise ExceptionForMatrix::ErrDimensionMismatch
 行列が特異(singular)であるとは、正則でないことです。
 行列式が0であること同値です。
 
-正方行列でない場合には例外 ExceptionForMatrix::ErrDimensionMismatch を
-発生させます。
+正方行列でない場合には例外 ExceptionForMatrix::ErrDimensionMismatch を発生させます。
 
 - **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- 行列が正方行列でない場合に発生します
 
@@ -1122,8 +1111,7 @@ p m.coerce(r) #=> [#<Matrix::Scalar:0x832df18 @value=(1/2)>, Matrix[[1, 2], [-1.
 
 行列の固有値と左右の固有ベクトルを保持したオブジェクトを返します。
 
-[c:Matrix::EigenvalueDecomposition] は to_ary を定義しているため、
-多重代入によって3つの行列(右固有ベクトル、固有値行列、左固有ベクトル)
+[c:Matrix::EigenvalueDecomposition] は to_ary を定義しているため、多重代入によって3つの行列(右固有ベクトル、固有値行列、左固有ベクトル)
 を得ることができます。
 これを [V, D, W] と書くと、
 (元の行列が対角化可能ならば)、
@@ -1147,8 +1135,7 @@ p (v * d * v_inv).round(5) == m # => true
 
 行列の LUP 分解を保持したオブジェクトを返します。
 
-[c:Matrix::LUPDecomposition] は to_ary を定義しているため、
-多重代入によって3つの行列(下三角行列、上三角行列、置換行列)
+[c:Matrix::LUPDecomposition] は to_ary を定義しているため、多重代入によって3つの行列(下三角行列、上三角行列、置換行列)
 を得ることができます。これを [L, U, P] と書くと、
 L*U = P*self を満たします。
 

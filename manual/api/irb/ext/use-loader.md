@@ -17,15 +17,13 @@ irb_require)を使うように設定する機能を提供するサブライブ�
 
 ### def irb_load(*opts, &b) -> nil
 
-現在の irb に関する [c:IRB::Context] に対して irb_load コマンドを実行
-します。
+現在の irb に関する [c:IRB::Context] に対して irb_load コマンドを実行します。
 
 - **SEE** [m:IRB::ExtendCommand::Load#execute]
 
 ### def irb_require(*opts, &b) -> bool
 
-現在の irb に関する [c:IRB::Context] に対して irb_require コマンドを
-実行します。
+現在の irb に関する [c:IRB::Context] に対して irb_require コマンドを実行します。
 
 - **SEE** [m:IRB::ExtendCommand::Require#execute]
 
@@ -49,8 +47,7 @@ irb_require)を使うかどうかを返します。
 load または require 時に irb のファイル読み込み機能(irb_load、
 irb_require)を使うかどうかを設定します。
 
-.irbrc ファイル中で IRB.conf[:USE_LOADER] を設定する事でも同様の事が行
-えます。
+.irbrc ファイル中で IRB.conf[:USE_LOADER] を設定する事でも同様の事が行えます。
 
 #%# use_loader の値は irb 全体に反映されます。
 

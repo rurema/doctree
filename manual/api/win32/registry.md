@@ -2,8 +2,7 @@
 type: library
 category: Windows
 ---
-win32/registry は Win32 プラットフォームでレジストリをアクセスするための
-ライブラリです。Win32 API の呼び出しに [c:Fiddle::Importer] を使います
+win32/registry は Win32 プラットフォームでレジストリをアクセスするためのライブラリです。Win32 API の呼び出しに [c:Fiddle::Importer] を使います
 (`Win32API` は 1.9.1 で非推奨となり、現在は標準添付から外れています)。
 
 ```text

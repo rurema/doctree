@@ -5,11 +5,9 @@ require:
   - irb/cmd/nop
   - irb/ext/workspaces
 ---
-irb 中の irb_workspaces、irb_push_workspace、irb_pop_workspace コマンド
-のための拡張を定義したサブライブラリです。
+irb 中の irb_workspaces、irb_push_workspace、irb_pop_workspace コマンドのための拡張を定義したサブライブラリです。
 
-このライブラリで定義されているメソッドはユーザが直接使用するものではあ
-りません。
+このライブラリで定義されているメソッドはユーザが直接使用するものではありません。
 
 # class IRB::ExtendCommand::Workspaces < IRB::ExtendCommand::Nop
 

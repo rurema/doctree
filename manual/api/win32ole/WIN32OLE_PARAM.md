@@ -5,12 +5,10 @@ library: win32ole
 
 OLEオートメーションサーバが持つメソッドのパラメータ情報を提供します。
 
-WIN32OLE_PARAMは、[c:WIN32OLE_METHOD]のパラメータのメタデータを保持し
-ます。
+WIN32OLE_PARAMは、[c:WIN32OLE_METHOD]のパラメータのメタデータを保持します。
 
 Ruby 3.2 から、このクラスは WIN32OLE の名前空間下に移動し、`WIN32OLE::Param`
-として定義されるようになりました。トップレベル定数 `WIN32OLE_PARAM` は後方
-互換のためのエイリアスとして残っていますが、Ruby 3.4 以降は非推奨
+として定義されるようになりました。トップレベル定数 `WIN32OLE_PARAM` は後方互換のためのエイリアスとして残っていますが、Ruby 3.4 以降は非推奨
 (deprecated)です(`Warning[:deprecated]` が有効なら参照時に警告が表示されます)。
 
 ### サンプルコード
@@ -30,8 +28,7 @@ puts param1.name # => Filename
 
 メソッドとパラメータ位置を指定してWIN32OLE_PARAMのインスタンスを作成します。
 
-アプリケーションプログラムでは、WIN32OLE_PARAMオブジェクトをnewメソッド
-で生成するよりも、[m:WIN32OLE_METHOD#params]を参照するほうが簡単です。
+アプリケーションプログラムでは、WIN32OLE_PARAMオブジェクトをnewメソッドで生成するよりも、[m:WIN32OLE_METHOD#params]を参照するほうが簡単です。
 
 - **param** `ole_method` -- パラメータを取得する[c:WIN32OLE_METHOD]のインスタンス。
 - **param** `index` -- パラメータの位置。最左端を1とします。
@@ -75,9 +72,7 @@ end
 
 OLEオートメーションのパラメータは、in(クライアントからサーバへ与える。
 [m:WIN32OLE_PARAM#input?]が真)、out（サーバがクライアントへ与える。
-[m:WIN32OLE_PARAM#output?]が真)および、inout（クライアントからサーバ
-へ与え、サーバがクライアントへ与える）の3種類の方向属性のいずれかを持ち
-ます。
+[m:WIN32OLE_PARAM#output?]が真)および、inout（クライアントからサーバへ与え、サーバがクライアントへ与える）の3種類の方向属性のいずれかを持ちます。
 
 input?メソッドはin属性またはinout属性なら真を返します。
 
@@ -120,8 +115,7 @@ param1 = method.params[0]
 puts param1.ole_type # => VARIANT
 ```
 
-OLEオートメーションの型名は、対応する[c:WIN32OLE::VARIANT]の定数の先
-頭の「VT_」を削除した名称を持ちます。
+OLEオートメーションの型名は、対応する[c:WIN32OLE::VARIANT]の定数の先頭の「VT_」を削除した名称を持ちます。
 
 たとえば、32ビット符号付き整数であれば「I4」となります。
 
@@ -163,9 +157,7 @@ puts "#{param1.name} #{param1.optional?}" # => Filename true
 
 OLEオートメーションのパラメータは、in(クライアントからサーバへ与える。
 [m:WIN32OLE_PARAM#input?]が真)、out（サーバがクライアントへ与える。
-[m:WIN32OLE_PARAM#output?]が真)および、inout（クライアントからサーバ
-へ与え、サーバがクライアントへ与える）の3種類の方向属性のいずれかを持ち
-ます。
+[m:WIN32OLE_PARAM#output?]が真)および、inout（クライアントからサーバへ与え、サーバがクライアントへ与える）の3種類の方向属性のいずれかを持ちます。
 
 output?メソッドはout属性またはinout属性なら真を返します。
 
@@ -193,11 +185,7 @@ The result of above script is following:
 
 パラメータが戻り値かどうかを判定します。
 
-OLEオートメーションの規定では、メソッドの戻り値は引数リストの最右端のパ
-ラメータをout属性（[m:WIN32OLE_PARAM#output?]が真）とすることで実現し
-ます。ただし、そのパラメータをOLEオートメーション呼び出しを記述する言語
-が戻り値のように扱うか、それとも引数リストに並べるかはretval属性によっ
-て決定されます。
+OLEオートメーションの規定では、メソッドの戻り値は引数リストの最右端のパラメータをout属性（[m:WIN32OLE_PARAM#output?]が真）とすることで実現します。ただし、そのパラメータをOLEオートメーション呼び出しを記述する言語が戻り値のように扱うか、それとも引数リストに並べるかはretval属性によって決定されます。
 
 retval?メソッドは、戻り値として記述する場合に真となります。
 

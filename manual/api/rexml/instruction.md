@@ -5,11 +5,9 @@ library: rexml/document
 
 XML 処理命令(XML Processing Instruction, XML PI)を表すクラス。
 
-XML 処理命令 とは XML 文書中の <? と ?> で挟まれた部分のことで、
-アプリケーションへの指示を保持するために使われます。
+XML 処理命令 とは XML 文書中の <? と ?> で挟まれた部分のことで、アプリケーションへの指示を保持するために使われます。
 
-XML 宣言(文書先頭の <?xml version=... ?>)はXML処理命令ではありませんが、
-似た見た目を持っています。
+XML 宣言(文書先頭の <?xml version=... ?>)はXML処理命令ではありませんが、似た見た目を持っています。
 
 ```ruby
 require 'rexml/document'

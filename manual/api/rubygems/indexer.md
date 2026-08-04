@@ -16,8 +16,7 @@ Gem リポジトリのインデックスを作成するためのクラスです�
 
 ### def abbreviate(spec) -> Gem::Specification
 
-ダウンロードを速くするために与えられた [c:Gem::Specification] の持つデータを
-小さくします。
+ダウンロードを速くするために与えられた [c:Gem::Specification] の持つデータを小さくします。
 
 - **param** `spec` -- [c:Gem::Specification] を指定します。
 
@@ -32,8 +31,7 @@ Gem のキャッシュディレクトリ内の *.gem ファイルから [c:Gem::
 
 ### def compact_specs(specs) -> Array
 
-与えられたスペックを元にスペックを一意に特定できるだけの情報を持った配列を作成して
-返します。
+与えられたスペックを元にスペックを一意に特定できるだけの情報を持った配列を作成して返します。
 
 - **param** `specs` -- [c:Gem::Specification] の配列を指定します。
 
@@ -104,5 +102,4 @@ non-ASCII の文字列を XML エンティティに置換します。
 
 ### def Gem::Indexer.new(directory) -> Gem::Indexer
 
-与えられたディレクトリに Gem リポジトリのインデックスを作成するために
-自身を初期化します。
+与えられたディレクトリに Gem リポジトリのインデックスを作成するために自身を初期化します。

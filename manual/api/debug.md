@@ -3,8 +3,7 @@ type: library
 category: Development
 ---
 #%since 3.1
-Ruby デバッガです。このライブラリは Ruby 3.1 で標準添付ライブラリから
-削除されました。
+Ruby デバッガです。このライブラリは Ruby 3.1 で標準添付ライブラリから削除されました。
 
 Ruby 3.1 以降には、同名の debug gem(TracePoint ベースの新しいデバッガ。
 bundled gem)が同梱されています。これは本ライブラリとは別物です。

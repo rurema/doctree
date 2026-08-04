@@ -1,8 +1,7 @@
 ---
 type: library
 ---
-tar アーカイブ中のそれぞれのエントリを扱うためのクラスを提供するライブ
-ラリです。
+tar アーカイブ中のそれぞれのエントリを扱うためのクラスを提供するライブラリです。
 
 # class Gem::Package::TarReader::Entry
 

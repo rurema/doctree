@@ -21,8 +21,7 @@ name にクッキーの名前を、value にクッキーで保持する値を与
 
 ### def WEBrick::Cookie.parse(str)    -> [WEBrick::Cookie]
 
-ユーザーエージェントから送られてきた Cookie ヘッダの値 str をパースし、
-新しく [c:WEBrick::Cookie] オブジェクトを生成しその配列を返します。
+ユーザーエージェントから送られてきた Cookie ヘッダの値 str をパースし、新しく [c:WEBrick::Cookie] オブジェクトを生成しその配列を返します。
 各属性の形式が仕様に準拠しているかを確認しません。
 
 - **param** `str` -- Cookie を表す文字列を指定します。
@@ -40,8 +39,7 @@ p c[1].name, c[1].path
 
 ### def WEBrick::Cookie.parse_set_cookie(str)    -> WEBrick::Cookie
 
-サーバから送られてくる Set-Cookie ヘッダの値 str をパースし、
-新しく [c:WEBrick::Cookie] オブジェクトを生成し返します。
+サーバから送られてくる Set-Cookie ヘッダの値 str をパースし、新しく [c:WEBrick::Cookie] オブジェクトを生成し返します。
 
 - **param** `str` -- Set-Cookie ヘッダの値を文字列で指定します。
 
@@ -58,8 +56,7 @@ p c.name, c.value
 
 ### def WEBrick::Cookie.parse_set_cookies(str)    -> [WEBrick::Cookie]
 
-サーバから送られてくる Set-Cookie ヘッダの値 str をパースし、
-新しく [c:WEBrick::Cookie] オブジェクトの配列を生成し返します。
+サーバから送られてくる Set-Cookie ヘッダの値 str をパースし、新しく [c:WEBrick::Cookie] オブジェクトの配列を生成し返します。
 
 - **param** `str` -- Set-Cookie ヘッダの値を文字列で指定します。
 

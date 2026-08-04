@@ -11,8 +11,7 @@ until: "2.7.0"
 ## Singleton Methods
 ### def Exception2MessageMapper.def_e2message(klass, exception_class, message_format) -> Class
 
-すでに存在する例外クラス exception_class に、
-エラーメッセージ用フォーマット message_format を関連づけます。
+すでに存在する例外クラス exception_class に、エラーメッセージ用フォーマット message_format を関連づけます。
 
 - **param** `klass` -- 一階層上となるクラス名を指定します。
 
@@ -112,8 +111,7 @@ p Foo.Raise Foo::NewExceptionClass, 1, 3, 5  #=> in `Raise': message...1, 3 and 
 
 ### def def_e2message(exception_class, message_format) -> Class
 
-すでに存在する例外クラス exception_class に、
-エラーメッセージ用フォーマット message_format を関連づけます。
+すでに存在する例外クラス exception_class に、エラーメッセージ用フォーマット message_format を関連づけます。
 
 このフォーマットは [m:Exception2MessageMapper#Raise],
 [m:Exception2MessageMapper#Fail] で使用します。

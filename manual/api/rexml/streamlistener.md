@@ -10,23 +10,20 @@ type: library
 [c:REXML::Parsers::StreamParser]
 で使われるコールバックオブジェクトのためのモジュールです。
 
-このモジュールを include して、各メソッドを適切にオーバーライドした
-クラスのインスタンスを
+このモジュールを include して、各メソッドを適切にオーバーライドしたクラスのインスタンスを
 [m:REXML::Parsers::StreamParser.new] や
 [m:REXML::Document.parse_stream] の引数として渡します。
 
 このモジュールで定義されているメソッド自体は何もしません。
 コールバックのデフォルト動作(何もしない)を定義しているだけです。
 
-詳しい用例などについては [ref:c:REXML::Parsers::StreamParser#example] を
-見てください。
+詳しい用例などについては [ref:c:REXML::Parsers::StreamParser#example] を見てください。
 
 ## Instance Methods
 
 ### def tag_start(name, attrs) -> ()
 
-開始タグをパースしたとき
-に呼び出されるコールバックメソッドです。
+開始タグをパースしたときに呼び出されるコールバックメソッドです。
 
 - **param** `name` -- タグ名が文字列で渡されます
 - **param** `attrs` -- タグの属性が"属性名" => "属性値"という [c:Hash] で渡されます
@@ -104,8 +101,7 @@ XML文書内のコメントをパースしたときに呼び出されるコー�
 
 文書型宣言(DTD)をパースしたときに呼び出されるコールバックメソッドです。
 
-pub_sys, long_name, uri はDTDが内部サブセットのみを
-利用している場合には nil が渡されます。
+pub_sys, long_name, uri はDTDが内部サブセットのみを利用している場合には nil が渡されます。
 
 - **param** `name` -- 宣言されているルート要素名が文字列で渡されます。
 - **param** `pub_sys` -- "PUBLIC" もしくは "SYSTEM" が渡されます。nilが渡される場合もあります。
@@ -243,11 +239,9 @@ DTDの記法宣言をパースしたときに呼び出されるコールバッ�
 
 ### def entity(content) -> ()
 
-DTD内で、パラメータ実体参照(%entityname;)が現れたときに呼び出される
-コールバックメソッドです。
+DTD内で、パラメータ実体参照(%entityname;)が現れたときに呼び出されるコールバックメソッドです。
 
-DTDの各宣言(要素型宣言や実体参照宣言)の内側で使われた
-場合はこのメソッドはコールバックされません。
+DTDの各宣言(要素型宣言や実体参照宣言)の内側で使われた場合はこのメソッドはコールバックされません。
 各宣言のためのコールバックメソッド
 ([m:REXML::StreamListener#elementdecl] や [m:REXML::StreamListener#entitydecl]
 など)
@@ -281,8 +275,7 @@ content: " xyz "
 
 XML宣言をパースしたときに呼び出されるコールバックメソッドです。
 
-version, encoding, standalone はXML宣言内で
-対応する構成要素が省略されている場合には nil が渡されます。
+version, encoding, standalone はXML宣言内で対応する構成要素が省略されている場合には nil が渡されます。
 
 - **param** `version` -- 宣言されているバージョンが文字列で渡されます。
 - **param** `encoding` -- 宣言されているエンコーディングが文字列で渡されます。

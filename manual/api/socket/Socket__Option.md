@@ -4,20 +4,16 @@ since: "1.9.2"
 ---
 # class Socket::Option
 
-[m:BasicSocket#getsockopt]、[m:BasicSocket#setsockopt] で
-使うソケットオプションの値を表すクラス。
+[m:BasicSocket#getsockopt]、[m:BasicSocket#setsockopt] で使うソケットオプションの値を表すクラス。
 
-ソケットオプションの具体的な意味は
-自身の使っているシステムのドキュメントを見てください。
+ソケットオプションの具体的な意味は自身の使っているシステムのドキュメントを見てください。
 
 ## Class Methods
 ### def Socket::Option.new(family, level, optname, data) -> Socket::Option
 
 Socket::Option オブジェクト新たに生成し返します。
 
-family, level, optname には Socket::SOL_SOCKET のような整数の他、
-文字列("SOL_SOCKET", "SOCKET")、シンボル(:SOL_SOCKET, :SOCKET)を
-指定できます。
+family, level, optname には Socket::SOL_SOCKET のような整数の他、文字列("SOL_SOCKET", "SOCKET")、シンボル(:SOL_SOCKET, :SOCKET)を指定できます。
 
 - **param** `family` -- ソケットファミリー
 - **param** `level` -- ソケットオプションレベル
@@ -37,9 +33,7 @@ p sockopt #=> #<Socket::Option: INET SOCKET KEEPALIVE 1>
 
 整数をデータとして持つ Socket::Option オブジェクト新たに生成し返します。
 
-family, level, optname には Socket::SOL_SOCKET のような整数の他、
-文字列("SOL_SOCKET", "SOCKET")、シンボル(:SOL_SOCKET, :SOCKET)を
-指定できます。
+family, level, optname には Socket::SOL_SOCKET のような整数の他、文字列("SOL_SOCKET", "SOCKET")、シンボル(:SOL_SOCKET, :SOCKET)を指定できます。
 
 - **param** `family` -- ソケットファミリー
 - **param** `level` -- ソケットオプションレベル
@@ -50,9 +44,7 @@ family, level, optname には Socket::SOL_SOCKET のような整数の他、
 
 整数をデータとして持つ Socket::Option オブジェクト新たに生成し返します。
 
-family, level, optname には Socket::SOL_SOCKET のような整数の他、
-文字列("SOL_SOCKET", "SOCKET")、シンボル(:SOL_SOCKET, :SOCKET)を
-指定できます。
+family, level, optname には Socket::SOL_SOCKET のような整数の他、文字列("SOL_SOCKET", "SOCKET")、シンボル(:SOL_SOCKET, :SOCKET)を指定できます。
 
 - **param** `family` -- ソケットファミリー
 - **param** `level` -- ソケットオプションレベル
@@ -71,8 +63,7 @@ p Socket::Option.bool(:INET, :SOCKET, :KEEPALIVE, false)
 
 ### def Socket::Option.linger(onoff, secs) -> Socket::Option
 
-SOL_SOCKET/SO_LINGER 用の Socket::Option オブジェクト
-を新たに生成し返します。
+SOL_SOCKET/SO_LINGER 用の Socket::Option オブジェクトを新たに生成し返します。
 
 - **param** `onoff` -- 0/1もしくは真偽値
 - **param** `secs` -- 整数値
@@ -117,8 +108,7 @@ to_s は過去との互換性のために存在します。
 
 ### def linger -> [bool, Integer]
 
-オプションが SOL_SOCKET/SO_LINGER である場合に、
-オプションのデータ(内容)を真偽値と整数のペアとして返します。
+オプションが SOL_SOCKET/SO_LINGER である場合に、オプションのデータ(内容)を真偽値と整数のペアとして返します。
 
 - **raise** `TypeError` -- dataのバイト数が不適切である(sizeof(struct linger)と異なる)場合や、
                  level/optname が SOL_SOCKET/SO_LINGER でないに発生します

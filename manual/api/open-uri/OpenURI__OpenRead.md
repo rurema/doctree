@@ -13,8 +13,7 @@ library: open-uri
 自身が表すリソースを取得して [c:StringIO] オブジェクトとして返します。
 [m:OpenURI.open_uri](self, *rest, &block) と同じです。
 
-ブロックを与えた場合は [c:StringIO] オブジェクトを引数としてブロックを
-評価します。ブロックの終了時に StringIO は close されます。nil を返します。
+ブロックを与えた場合は [c:StringIO] オブジェクトを引数としてブロックを評価します。ブロックの終了時に StringIO は close されます。nil を返します。
 
 返り値である StringIO オブジェクトは [c:OpenURI::Meta] モジュールで extend されています。
 

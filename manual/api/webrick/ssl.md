@@ -4,8 +4,7 @@ type: library
 [c:WEBrick::GenericServer] を SSL/TLS に対応させるための実装。
 このファイルを require すると WEBrick::GenericServer が SSL/TLS 対応になる。
 
-ruby 1.8.3 以降では単に require するだけでは SSL/TLS は有効ではなく、
-設定で明示的に有効にする必要がある。
+ruby 1.8.3 以降では単に require するだけでは SSL/TLS は有効ではなく、設定で明示的に有効にする必要がある。
 
 # redefine WEBrick::GenericServer < Object
 
@@ -57,8 +56,7 @@ config で有効な項目が増えます。以下は増える項目とそのデ�
 
 ### const SSL -> Hash
 
-以下のほとんどの項目はサーバが保持する [c:OpenSSL::SSL::SSLContext] オブジェクト
-を設定するためのものです。詳しくは [c:OpenSSL::SSL::SSLContext] を参照して下さい。
+以下のほとんどの項目はサーバが保持する [c:OpenSSL::SSL::SSLContext] オブジェクトを設定するためのものです。詳しくは [c:OpenSSL::SSL::SSLContext] を参照して下さい。
 
 - **`:ServerSoftware`**:
   サーバソフト名を設定する。デフォルトでは

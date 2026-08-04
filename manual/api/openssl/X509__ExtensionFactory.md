@@ -3,8 +3,7 @@ library: openssl
 ---
 # class OpenSSL::X509::ExtensionFactory < Object
 
-[c:OpenSSL::X509::Extension] を簡便に生成するための
-クラスです。
+[c:OpenSSL::X509::Extension] を簡便に生成するためのクラスです。
 
 ```ruby title="例"
 require 'openssl'
@@ -44,17 +43,13 @@ newcert.add_extension(factory.create_extension("basicConstraints", "CA:FALSE"))
 ExtensionFactory オブジェクトを生成します。
 
 証明書の発行者や所有者の [c:OpenSSL::X509::Certificate] オブジェクトや
-[c:OpenSSL::X509::Request]、[c:OpenSSL::X509::CRL] オブジェクトを
-渡すことによって、拡張領域の中身を ExtensionFactory オブジェクトが
-計算できます。
-例えば、"subjectKeyIdentifier" 拡張領域は証明書の一部のハッシュ値
-を値として持ちますが、
+[c:OpenSSL::X509::Request]、[c:OpenSSL::X509::CRL] オブジェクトを渡すことによって、拡張領域の中身を ExtensionFactory オブジェクトが計算できます。
+例えば、"subjectKeyIdentifier" 拡張領域は証明書の一部のハッシュ値を値として持ちますが、
 [c:OpenSSL::X509::Certificate] オブジェクトをあらかじめ渡しておくことによって
 [m:OpenSSL::X509::ExtensionFactory#create_extension] がその値を計算します。
 これらの情報が必要ない場合は nil を渡します。
 
-以下のメソッドによってオブジェクト生成後に証明書オブジェクト等を
-設定できます。
+以下のメソッドによってオブジェクト生成後に証明書オブジェクト等を設定できます。
   - [m:OpenSSL::X509::ExtensionFactory#issuer_certificate=]
   - [m:OpenSSL::X509::ExtensionFactory#subject_certificate=]
   - [m:OpenSSL::X509::ExtensionFactory#subject_request=]
@@ -83,16 +78,13 @@ ExtensionFactory オブジェクトを生成します。
 
 [c:OpenSSL::X509::Extension] のインスタンスを生成して返します。
 
-引数の個数が1個である場合、それが配列、ハッシュ、文字列のいずれかである
-ならば、
+引数の個数が1個である場合、それが配列、ハッシュ、文字列のいずれかであるならば、
 [m:OpenSSL::X509::ExtensionFactory#create_ext_from_array]、
 [m:OpenSSL::X509::ExtensionFactory#create_ext_from_hash]、
-[m:OpenSSL::X509::ExtensionFactory#create_ext_from_string]、
-がそれぞれ呼びだされてオブジェクトを生成します。
+[m:OpenSSL::X509::ExtensionFactory#create_ext_from_string]、がそれぞれ呼びだされてオブジェクトを生成します。
 
 引数が2個以上である場合は、
-[m:OpenSSL::X509::ExtensionFactory#create_ext] が呼びだされて
-オブジェクトを生成します。
+[m:OpenSSL::X509::ExtensionFactory#create_ext] が呼びだされてオブジェクトを生成します。
 
 - **param** `obj` -- 拡張領域のデータ。配列、ハッシュ、文字列のいずれか
 - **param** `oid` -- 拡張領域の識別子を表す文字列
@@ -184,8 +176,7 @@ factory.config = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 {"oid" => OID文字列, "value" => value文字列, "critical" => 真偽値 }
 ```
 
-という内容が必要です。"critical" を省略した場合は false が
-渡されるのと同じになります。
+という内容が必要です。"critical" を省略した場合は false が渡されるのと同じになります。
 
 - **param** `hash` -- 生成する拡張領域のデータのハッシュテーブル
 - **SEE** [m:OpenSSL::X509::ExtensionFactory#create_ext]
@@ -194,8 +185,7 @@ factory.config = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 
 文字列から [c:OpenSSL::X509::Extension] オブジェクトを生成します。
 
-文字列は "oid = value" もしくは "oid = critical, value" という
-形式である必要があります。
+文字列は "oid = value" もしくは "oid = critical, value" という形式である必要があります。
 
 - **param** `str` -- 生成する拡張領域のデータの文字列
 - **SEE** [m:OpenSSL::X509::ExtensionFactory#create_ext]

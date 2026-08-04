@@ -82,8 +82,7 @@ p loc.lineno # => 2
 
 ### def label -> String
 
-self が表すフレームのラベルを返します。通常、メソッド名、クラス名、モ
-ジュール名などで構成されます。
+self が表すフレームのラベルを返します。通常、メソッド名、クラス名、モジュール名などで構成されます。
 
 例: [c:Thread::Backtrace::Location] の例1を用いた例
 
@@ -97,8 +96,7 @@ p loc.label # => "a"
 ### def base_label -> String
 
 self が表すフレームの基本ラベルを返します。通常、
-[m:Thread::Backtrace::Location#label] から修飾を取り除いたもので構成
-されます。
+[m:Thread::Backtrace::Location#label] から修飾を取り除いたもので構成されます。
 
 ```ruby title="例"
 # foo.rb
@@ -159,8 +157,7 @@ end
 
 ### def to_s -> String
 
-self が表すフレームを [m:Kernel?.caller] と同じ表現にした文字列を返し
-ます。
+self が表すフレームを [m:Kernel?.caller] と同じ表現にした文字列を返します。
 
 ```ruby title="例"
 # foo.rb
@@ -188,8 +185,7 @@ end
 
 ### def inspect -> String
 
-[m:Thread::Backtrace::Location#to_s] の結果を人間が読みやすいような文
-字列に変換したオブジェクトを返します。
+[m:Thread::Backtrace::Location#to_s] の結果を人間が読みやすいような文字列に変換したオブジェクトを返します。
 
 ```ruby title="例"
 # foo.rb

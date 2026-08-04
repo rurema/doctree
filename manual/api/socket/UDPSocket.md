@@ -12,8 +12,7 @@ UDP/IPデータグラム型ソケットのクラス。
 
 新しい UDP ソケットを返します。
 
-address_family には Socket::AF_INET のような整数、:INET のような
-シンボル、"INET" のような文字列を指定できます。
+address_family には Socket::AF_INET のような整数、:INET のようなシンボル、"INET" のような文字列を指定できます。
 
 ```ruby
 require 'socket'
@@ -39,9 +38,7 @@ bind したポートから [m:BasicSocket#recv] でデータを受け取るこ�
 
 ソケットを host の port に [man:connect(2)] します。
 
-これによって [m:UDPSocket#send] で送り先のアドレスを指定せずに
-データを送ることができます(connect しなくとも送り先のアドレスを明示すれば
-データを送ることができます)。
+これによって [m:UDPSocket#send] で送り先のアドレスを指定せずにデータを送ることができます(connect しなくとも送り先のアドレスを明示すればデータを送ることができます)。
 
 ```ruby
 require 'socket'
@@ -67,8 +64,7 @@ flags には Socket::MSG_* という定数の bitwise OR を渡します。
 詳しい意味は [man:send(2)] を参照してください。
 
 host, port の対、もしくは sockaddr_to で送り先を指定します。
-送り先を省略した場合は [m:UDPSocket#connect] で接続した
-先にデータを送ります。
+送り先を省略した場合は [m:UDPSocket#connect] で接続した先にデータを送ります。
 
 実際に送ったデータの長さを返します。
 
@@ -81,9 +77,7 @@ host, port に関しては [ref:lib:socket#host_format]、
 2 引数、3 引数の形式の場合の動作は、
 [m:BasicSocket#send] と同じです。
 
-4 引数の形式で、指定したホストが複数のアドレスを持つ場合、いずれか
-のアドレスへの送信が成功するまで(あるいはすべての送信が失敗するま
-で)、各アドレスへの送信を順に試みます。
+4 引数の形式で、指定したホストが複数のアドレスを持つ場合、いずれかのアドレスへの送信が成功するまで(あるいはすべての送信が失敗するまで)、各アドレスへの送信を順に試みます。
 
 データの送信に失敗した場合は例外 [c:Errno::EXXX] が発生します。
 
@@ -108,8 +102,7 @@ flags はフラグで、Socket::MSG_* の bitwise OR を渡します。
 
 [man:recvfrom(2)] がエラーになった場合、
 Errno::EAGAIN, Errno::EINTR を含め例外 [c:Errno::EXXX] が発生します。
-Errno::EWOULDBLOCK、Errno::EAGAIN のような待ってからリトライすることが
-可能であることを意味する例外には、[c:IO::WaitReadable] が extend
+Errno::EWOULDBLOCK、Errno::EAGAIN のような待ってからリトライすることが可能であることを意味する例外には、[c:IO::WaitReadable] が extend
 されています。
 
 ```ruby

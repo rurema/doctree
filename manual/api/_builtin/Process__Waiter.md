@@ -3,11 +3,9 @@ library: _builtin
 ---
 # class Process::Waiter < Thread
 
-[m:Process?.detach] が返す、子プロセスの終了を監視するスレッドを表す
-クラスです。
+[m:Process?.detach] が返す、子プロセスの終了を監視するスレッドを表すクラスです。
 
-[c:Thread] のサブクラスであり、監視している子プロセスのプロセス ID を
-保持しています。
+[c:Thread] のサブクラスであり、監視している子プロセスのプロセス ID を保持しています。
 
 - **SEE** [m:Process?.detach]
 

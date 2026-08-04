@@ -4,8 +4,7 @@ library: rss
 # class RSS::Maker::ImageBase
 
 RSS 1.0の場合はurl、title、
-maker.channel.link、maker.channelが適切に設定さ
-れている必要があります。
+maker.channel.link、maker.channelが適切に設定されている必要があります。
 
 RSS 0.91/2.0の場合はurl、title、
 maker.channel.linkが適切に設定されている必要があります。

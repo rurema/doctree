@@ -23,8 +23,7 @@ URI (Uniform Resource Identifier) のためのライブラリです。
 
 ### module_function def URI(uri_str) -> object
 
-与えられた URI から該当する [c:URI::Generic] のサブクラスのインスタンスを生成して
-返します。scheme が指定されていない場合は、[c:URI::Generic] オブジェクトを返します。
+与えられた URI から該当する [c:URI::Generic] のサブクラスのインスタンスを生成して返します。scheme が指定されていない場合は、[c:URI::Generic] オブジェクトを返します。
 
 - **param** `uri_str` -- パースしたい URI を文字列として与えます。
 

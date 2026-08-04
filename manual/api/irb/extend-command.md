@@ -76,15 +76,13 @@ irb で以下のメソッドが利用できるようになります。(それぞ
 - irb_kill
 - irb_help
 
-[lib:irb/extend-command] が require された時にライブラリ内部で自動的
-に実行されます。
+[lib:irb/extend-command] が require された時にライブラリ内部で自動的に実行されます。
 
 - **SEE** [m:IRB::ExtendCommandBundle.install_extend_commands]
 
 ### def IRB::ExtendCommandBundle.irb_original_method_name(method_name) -> String
 
-method_name で指定したメソッドの irb 中でのエイリアスを返します。ライブ
-ラリ内部で使用します。
+method_name で指定したメソッドの irb 中でのエイリアスを返します。ライブラリ内部で使用します。
 
 - **param** `method_name` -- メソッド名を [c:Symbol] か文字列で指定します。
 
@@ -126,25 +124,19 @@ irb を終了します。ret で指定したオブジェクトを返します。
 
 ### const NO_OVERRIDE -> 0
 
-irb でコマンドのエイリアスを定義する際に、既にこれからエイリアス先に指
-定したメソッド名と同名のメソッドが定義済みであった場合、エイリアスを定
-義しない事を指定するフラグです。
+irb でコマンドのエイリアスを定義する際に、既にこれからエイリアス先に指定したメソッド名と同名のメソッドが定義済みであった場合、エイリアスを定義しない事を指定するフラグです。
 
 - **SEE** [m:IRB::ExtendCommandBundle.def_extend_command]
 
 ### const OVERRIDE_ALL -> 1
 
-irb でコマンドのエイリアスを定義する際に、既にこれからエイリアス先に指
-定したメソッド名と同名のメソッドが定義済みであった場合でも、常にエイリ
-アスを定義する事を指定するフラグです。
+irb でコマンドのエイリアスを定義する際に、既にこれからエイリアス先に指定したメソッド名と同名のメソッドが定義済みであった場合でも、常にエイリアスを定義する事を指定するフラグです。
 
 - **SEE** [m:IRB::ExtendCommandBundle.def_extend_command]
 
 ### const OVERRIDE_PRIVATE_ONLY -> 2
 
-irb でコマンドのエイリアスを定義する際に、既にこれからエイリアス先に指
-定したメソッド名と同名の public メソッドが定義済みではなかった場合のみ、
-エイリアスを定義する事を指定するフラグです。
+irb でコマンドのエイリアスを定義する際に、既にこれからエイリアス先に指定したメソッド名と同名の public メソッドが定義済みではなかった場合のみ、エイリアスを定義する事を指定するフラグです。
 
 - **SEE** [m:IRB::ExtendCommandBundle.def_extend_command]
 
@@ -166,15 +158,13 @@ irb でコマンドのエイリアスを定義する際に、既にこれから�
 - use_loader=
 - save_history=
 
-[lib:irb/extend-command] が require された時にライブラリ内部で自動的
-に実行されます。
+[lib:irb/extend-command] が require された時にライブラリ内部で自動的に実行されます。
 
 - **SEE** [m:IRB::ContextExtender.def_extend_command]
 
 ### def IRB::ContextExtender.def_extend_command(cmd_name, load_file, *aliases) -> object
 
-[c:IRB::Context] に cmd_name で指定したメソッドが実行できるように拡張
-します。
+[c:IRB::Context] に cmd_name で指定したメソッドが実行できるように拡張します。
 
 - **param** `cmd_name` -- メソッド名を [c:Symbol] で指定します。
                 [c:IRB::Context] クラスのインスタンスメソッドとして定

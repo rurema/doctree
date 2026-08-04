@@ -3,8 +3,7 @@ library: openssl
 ---
 # class OpenSSL::Netscape::SPKI < Object
 
-Netscape SPKI、もしくは SPKAC(Signed Public Key And Challenge) と呼ばれる
-データフォーマットを扱うためのクラスです。
+Netscape SPKI、もしくは SPKAC(Signed Public Key And Challenge) と呼ばれるデータフォーマットを扱うためのクラスです。
 
 ## Class Methods
 ### def OpenSSL::Netscape::SPKI.new() -> OpenSSL::Netscape::SPKI
@@ -12,8 +11,7 @@ Netscape SPKI、もしくは SPKAC(Signed Public Key And Challenge) と呼ばれ
 
 SPKI オブジェクトを生成します。
 
-文字列を渡すと、PEM 形式、もしくは DER 形式のデータとみなし、
-その内容を読み込みます。
+文字列を渡すと、PEM 形式、もしくは DER 形式のデータとみなし、その内容を読み込みます。
 
 - **param** `buf` -- SPKI オブジェクトを生成するための文字列データ
 - **raise** `OpenSSL::Netscape::SPKIError` -- オブジェクトの生成に失敗した場合に発生します

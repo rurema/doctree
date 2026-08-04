@@ -18,8 +18,7 @@ library: _builtin
 `n` 番目の部分文字列を返します。
 
 `0` はマッチ全体を意味します。
-`n` の値が負の時には末尾からのインデックスとみなします(末尾の
-要素が `-1` 番目)。`n` 番目の要素が存在しない時には `nil` を返します。
+`n` の値が負の時には末尾からのインデックスとみなします(末尾の要素が `-1` 番目)。`n` 番目の要素が存在しない時には `nil` を返します。
 
 - **param** `n` -- 返す部分文字列のインデックスを指定します。
 
@@ -74,8 +73,7 @@ p /(?<alpha>[a-zA-Z]+)|(?<num>\d+)/.match("aZq")[:num] # => nil
 
 `n` 番目、または `name` という名前のグループにマッチした部分文字列を返します。
 
-[m:MatchData#\[\]] と似ていますが、範囲や複数要素の指定はできず、
-単一のグループに対応する部分文字列だけを返します。
+[m:MatchData#\[\]] と似ていますが、範囲や複数要素の指定はできず、単一のグループに対応する部分文字列だけを返します。
 マッチしていないグループを指定した場合は `nil` を返します。
 
 - **param** `n` -- 返す部分文字列のインデックスを `0` 以上の整数で指定します。
@@ -99,8 +97,7 @@ p m.match(:bar) # => "ge"
 ### def match_length(n) -> Integer | nil
 ### def match_length(name) -> Integer | nil
 
-`n` 番目、または `name` という名前のグループにマッチした部分文字列の長さを
-文字数で返します。
+`n` 番目、または `name` という名前のグループにマッチした部分文字列の長さを文字数で返します。
 
 マッチしていないグループを指定した場合は `nil` を返します。
 
@@ -266,8 +263,7 @@ p $~.size       # => 4
 
 ### def offset(n) -> [Integer, Integer] | [nil, nil]
 
-`n` 番目の部分文字列のオフセットの配列 `[start, end]` を返
-します。
+`n` 番目の部分文字列のオフセットの配列 `[start, end]` を返します。
 
 ```ruby title="例"
 [ self.begin(n), self.end(n) ]
@@ -287,8 +283,7 @@ p $~.size       # => 4
 #%end
 ### def offset(name) -> [Integer, Integer] | [nil, nil]
 
-`name` という名前付きグループに対応する部分文字列のオフセットの配列 `[start, end]` を返
-します。
+`name` という名前付きグループに対応する部分文字列のオフセットの配列 `[start, end]` を返します。
 
 ```ruby title="例"
 [ self.begin(name), self.end(name) ]
@@ -319,8 +314,7 @@ p $~.offset('century') # ~> IndexError: undefined group name reference: century
 #%since 3.2
 ### def byteoffset(n) -> [Integer, Integer] | [nil, nil]
 
-`n` 番目の部分文字列のバイト単位のオフセットの
-配列 `[start, end]` を返します。
+`n` 番目の部分文字列のバイト単位のオフセットの配列 `[start, end]` を返します。
 
 `n` 番目の部分文字列がマッチしていなければ `[nil, nil]` を返します。
 
@@ -332,8 +326,7 @@ p $~.offset('century') # ~> IndexError: undefined group name reference: century
 
 ### def byteoffset(name) -> [Integer, Integer] | [nil, nil]
 
-`name` という名前付きグループに対応する部分文字列のバイト単位のオフセットの
-配列 `[start, end]` を返します。
+`name` という名前付きグループに対応する部分文字列のバイト単位のオフセットの配列 `[start, end]` を返します。
 
 `name` の名前付きグループにマッチした部分文字列がなければ
 `[nil, nil]` を返します。
@@ -544,8 +537,7 @@ p m.regexp # => /a.*b/
 ### def hash -> Integer
 {: since=""}
 
-`self` のマッチ対象になった文字列、元になった正規表現オブジェクト、マッチ
-した位置を元にハッシュ値を計算して返します。
+`self` のマッチ対象になった文字列、元になった正規表現オブジェクト、マッチした位置を元にハッシュ値を計算して返します。
 
 ### def eql?(other) -> bool
 {: since=""}

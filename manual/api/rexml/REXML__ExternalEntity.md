@@ -3,11 +3,9 @@ library: rexml/document
 ---
 # class REXML::ExternalEntity < REXML::Child
 
-DTD 内の宣言でパラメータ実体参照を使って宣言が
-されているものを表わすクラスです。
+DTD 内の宣言でパラメータ実体参照を使って宣言がされているものを表わすクラスです。
 
-例えば、以下の DTD 宣言における %HTMLsymbol が
-それにあたります。
+例えば、以下の DTD 宣言における %HTMLsymbol がそれにあたります。
 
 ```text
 <!ENTITY % HTMLsymbol PUBLIC
@@ -50,8 +48,7 @@ p doctype.children.find_all{|child| REXML::ExternalEntity === child }.map(&:to_s
 
 output へ self を文字列化して出力します。
 
-このメソッドは deprecated です。[c:REXML::Formatters::Default] で
-出力してください。
+このメソッドは deprecated です。[c:REXML::Formatters::Default] で出力してください。
 
 - **param** `output` -- 出力先の IO オブジェクト
 - **param** `indent` -- インデントの大きさ。無視されます。

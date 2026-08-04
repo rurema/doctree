@@ -10,8 +10,7 @@ library: webrick/httpservlet/filehandler
 
 ### def WEBrick::HTTPServlet::DefaultFileHandler.new(server, local_path) -> WEBrick::HTTPServlet::DefaultFileHandler
 
-DefaultFileHandler サーブレットを生成します。ユーザが直接使うことはあま
-りありません。
+DefaultFileHandler サーブレットを生成します。ユーザが直接使うことはあまりありません。
 
 - **param** `server` -- [c:WEBrick::GenericServer] のサブクラスのインスタンスを
               指定します。

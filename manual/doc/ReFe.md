@@ -21,8 +21,7 @@ $ bitclust setup
 
 ### Ruby リファレンスマニュアルの検索ツール ReFe のデータ構築について
 
-最新 Ruby リファレンスマニュアル用に ReFe のデータを構築するには以下の
-手順で行います。(詳細は ReFe の README を参照してください)
+最新 Ruby リファレンスマニュアル用に ReFe のデータを構築するには以下の手順で行います。(詳細は ReFe の README を参照してください)
 
 (1) <http://i.loveruby.net/ja/prog/refe.html> から ReFe の基本セット
 

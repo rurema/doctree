@@ -3,11 +3,9 @@ library: rinda/rinda
 ---
 # class Rinda::TupleSpaceProxy < Object
 
-リモートの [c:Rinda::TupleSpace] オブジェクトを包む
-プロクシクラスです。
+リモートの [c:Rinda::TupleSpace] オブジェクトを包むプロクシクラスです。
 
-[m:Rinda::TupleSpace#take] でタプルの受け渡し時にタプルが
-消失する可能性を下げるためのプロクシクラスです。
+[m:Rinda::TupleSpace#take] でタプルの受け渡し時にタプルが消失する可能性を下げるためのプロクシクラスです。
 
 ## Class Methods
 

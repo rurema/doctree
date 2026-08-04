@@ -24,5 +24,4 @@ require:
 
 テスト用に [c:Tempfile] をラップします。
 
-[c:StringIO] と同じインタフェイスを持っていますが、
-データを書き込む先は [c:Tempfile] になっています。
+[c:StringIO] と同じインタフェイスを持っていますが、データを書き込む先は [c:Tempfile] になっています。

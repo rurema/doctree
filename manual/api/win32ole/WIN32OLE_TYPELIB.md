@@ -4,21 +4,14 @@ since: "1.9.1"
 ---
 # class WIN32OLE_TYPELIB < Object
 
-OLEオートメーションサーバの型情報ライブラリ（TypeLib）を操作するための
-クラスです。
+OLEオートメーションサーバの型情報ライブラリ（TypeLib）を操作するためのクラスです。
 
-OLEオートメーションサーバはクライアントに、クラス、インターフェイス、メ
-ソッドなどのメタデータを提供するための機構を持ちます。この情報は拡張子
-からTLBと呼ばれるライブラリまたはオートメーションサーバのプログラム内の
-リソースとして保持され、クライアントからの要求によって参照可能となりま
-す。
+OLEオートメーションサーバはクライアントに、クラス、インターフェイス、メソッドなどのメタデータを提供するための機構を持ちます。この情報は拡張子からTLBと呼ばれるライブラリまたはオートメーションサーバのプログラム内のリソースとして保持され、クライアントからの要求によって参照可能となります。
 
-WIN32OLE_TYPELIBクラスは、TypeLibを操作して各種情報を参照するためのオブ
-ジェクトを生成します。
+WIN32OLE_TYPELIBクラスは、TypeLibを操作して各種情報を参照するためのオブジェクトを生成します。
 
 Ruby 3.2 から、このクラスは WIN32OLE の名前空間下に移動し、`WIN32OLE::Typelib`
-として定義されるようになりました。トップレベル定数 `WIN32OLE_TYPELIB` は後方
-互換のためのエイリアスとして残っていますが、Ruby 3.4 以降は非推奨
+として定義されるようになりました。トップレベル定数 `WIN32OLE_TYPELIB` は後方互換のためのエイリアスとして残っていますが、Ruby 3.4 以降は非推奨
 (deprecated)です(`Warning[:deprecated]` が有効なら参照時に警告が表示されます)。
 
 ### サンプルコード
@@ -46,8 +39,7 @@ creatable classes:
   Worksheet: PROGID=Excel.Sheet.8
 ```
 
-ここでは、Excelのクラスのうち、[m:WIN32OLE.new]で作成可能なクラスを引
-数で指定する名前（PROGID）と共に示しています。
+ここでは、Excelのクラスのうち、[m:WIN32OLE.new]で作成可能なクラスを引数で指定する名前（PROGID）と共に示しています。
 
 ## Class Methods
 
@@ -82,12 +74,9 @@ puts tlib4.name  # => 'Microsoft Excel 14.0 Object Library'
 puts tlib5.name  # => 'Microsoft Shell Controls And Automation'
 ```
 
-TypeLibは、レジストリのHKEY_CLASS_ROOT\TypeLibキーの下にGUIDをキーとし
-て格納されています。GUIDキーの下にバージョン番号キーが並び、ドキュメン
-ト文字列はバージョン番号キーの既定値に設定されています。
+TypeLibは、レジストリのHKEY_CLASS_ROOT\TypeLibキーの下にGUIDをキーとして格納されています。GUIDキーの下にバージョン番号キーが並び、ドキュメント文字列はバージョン番号キーの既定値に設定されています。
 
-ドキュメント文字列は、コンテキストヘルプなどに利用可能なTypeLibの簡単な
-説明文で、通常バージョン番号を含みます。
+ドキュメント文字列は、コンテキストヘルプなどに利用可能なTypeLibの簡単な説明文で、通常バージョン番号を含みます。
 
 ### def WIN32OLE_TYPELIB.typelibs -> [WIN32OLE_TYPELIB]
 
@@ -155,8 +144,7 @@ puts tlib.minor_version # => 7
 
 TypeLibのドキュメント文字列を取得します。
 
-ドキュメント文字列は、コンテキストヘルプなどに利用可能なTypeLibの簡単な
-説明文で、通常バージョン番号を含みます。
+ドキュメント文字列は、コンテキストヘルプなどに利用可能なTypeLibの簡単な説明文で、通常バージョン番号を含みます。
 
 - **return** -- TypeLibのドキュメント文字列を返します。
 
@@ -170,8 +158,7 @@ puts tlib.name # => 'Microsoft Excel 14.0 Object Library'
 
 TypeLibに格納されているすべての型を取得します。
 
-TypeLibに格納されている型には、クラス（CoClass——コンポーネントクラス）
-やEnum（列挙子）、構造体などがあります。
+TypeLibに格納されている型には、クラス（CoClass——コンポーネントクラス）やEnum（列挙子）、構造体などがあります。
 
 - **return** -- TypeLibに格納されているすべての型を[c:WIN32OLE_TYPE]オブジェ
         クトの配列として返します。
@@ -217,8 +204,7 @@ puts tlib.version # => 1.7
 TypeLibの情報が公開情報かどうかを照会します。
 
 このメソッドは、TypeLibの属性（TLIBATTR）のフラグ値が0、制限
-(LIBFLAG_FRESTRICTED)、コントロール内部使用(LIBFLAG_FHIDDEN)のいずれか
-であれば非公開TypeLibとみなして偽を返します。
+(LIBFLAG_FRESTRICTED)、コントロール内部使用(LIBFLAG_FHIDDEN)のいずれかであれば非公開TypeLibとみなして偽を返します。
 
 - **return** -- TypeLibが公開可能であれば真を返します。
 - **raise** `WIN32OLERuntimeError` -- TypeLibの属性が読み取れない場合に通知します。

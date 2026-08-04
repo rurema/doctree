@@ -12,9 +12,7 @@ Thread を使うことで並行プログラミングが可能になります。
 ### def Thread.abort_on_exception             -> bool
 ### def Thread.abort_on_exception=(newstate)
 
-真の時は、いずれかのスレッドが例外によって終了した時に、その例外をメインスレッドで
-再度発生させます。メインスレッドがその例外を捕捉しない限り、結果としてインタプリタ
-全体が終了します。false の場合、あるスレッドで起こった例外は、[m:Thread#join]
+真の時は、いずれかのスレッドが例外によって終了した時に、その例外をメインスレッドで再度発生させます。メインスレッドがその例外を捕捉しない限り、結果としてインタプリタ全体が終了します。false の場合、あるスレッドで起こった例外は、[m:Thread#join]
 などで検出されない限りそのスレッドだけをなにも警告を出さずに終了させます。
 
 デフォルトは false です。
@@ -127,8 +125,7 @@ p Thread.kill(th)     #=> #<Thread:0x40221bc8 dead>
 
 ### def Thread.list    -> [Thread]
 
-全ての生きているスレッドを含む配列を生成して返します。aborting 状態であるスレッド
-も要素に含まれます。
+全ての生きているスレッドを含む配列を生成して返します。aborting 状態であるスレッドも要素に含まれます。
 
 ```ruby
 Thread.new do
@@ -163,8 +160,7 @@ new メソッドと違い initialize メソッドを呼びません。
 
 注意:
 
-例えば、以下のコードは間違いです。スレッドの実行が開始される前に
-変数 i が書き変わる可能性があるからです。
+例えば、以下のコードは間違いです。スレッドの実行が開始される前に変数 i が書き変わる可能性があるからです。
 
 ```ruby
 for i in 1..5
@@ -192,8 +188,7 @@ end
 
 注意:
 
-例えば、以下のコードは間違いです。スレッドの実行が開始される前に
-変数 i が書き変わる可能性があるからです。
+例えば、以下のコードは間違いです。スレッドの実行が開始される前に変数 i が書き変わる可能性があるからです。
 
 ```ruby
 for i in 1..5
@@ -211,9 +206,7 @@ end
 
 ### def Thread.pass    -> nil
 
-他のスレッドに実行権を譲ります。実行中のスレッドの状態を変えずに、
-他の実行可能状態のスレッドに切り替わるよう、スレッドスケジューラにヒントを与
-えます。実際に切り替わるかどうか、また次にどのスレッドが実行されるかは OS
+他のスレッドに実行権を譲ります。実行中のスレッドの状態を変えずに、他の実行可能状態のスレッドに切り替わるよう、スレッドスケジューラにヒントを与えます。実際に切り替わるかどうか、また次にどのスレッドが実行されるかは OS
 やスケジューラの実装に依存するため、保証されません。
 
 ```ruby
@@ -243,8 +236,7 @@ end
 
 ### def Thread.stop     -> nil
 
-他のスレッドから [m:Thread#run] メソッドで再起動されるまで、カレ
-ントスレッドの実行を停止します。
+他のスレッドから [m:Thread#run] メソッドで再起動されるまで、カレントスレッドの実行を停止します。
 
 ```ruby title="例"
 a = Thread.new { print "a"; Thread.stop; print "c" }
@@ -265,15 +257,11 @@ a.join
 ### def Thread.each_caller_location {|location| ... } -> nil
 #%end
 
-現在の実行スタックの各フレームを、[c:Thread::Backtrace::Location] オブジェクトと
-してブロックに渡します。
+現在の実行スタックの各フレームを、[c:Thread::Backtrace::Location] オブジェクトとしてブロックに渡します。
 
-[m:Kernel?.caller_locations] と似ていますが、配列を作らずにブロックへ順に
-渡すため、目的のフレームが見つかった時点で処理を打ち切るような用途で
-無駄な生成を避けられます。
+[m:Kernel?.caller_locations] と似ていますが、配列を作らずにブロックへ順に渡すため、目的のフレームが見つかった時点で処理を打ち切るような用途で無駄な生成を避けられます。
 #%since 3.4
-引数の意味は [m:Kernel?.caller_locations] と同じで、ブロックに渡すフレームの
-範囲を指定できます。引数を渡せるのは Ruby 3.4 以降です。
+引数の意味は [m:Kernel?.caller_locations] と同じで、ブロックに渡すフレームの範囲を指定できます。引数を渡せるのは Ruby 3.4 以降です。
 
 - **param** `start` -- 開始フレームの位置を数値で指定します。
 
@@ -305,8 +293,7 @@ foo
 スレッドのデバッグレベルが 0 のときはなにもしません。
 それ以外の場合は、スレッドのデバッグログを標準出力に出力します。
 初期値は 0 です。
-使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要が
-あります。通常配布されている Ruby では利用できません。
+使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要があります。通常配布されている Ruby では利用できません。
 
 ```ruby title="例"
 p Thread.DEBUG # => 0
@@ -320,8 +307,7 @@ p Thread.DEBUG # => 0
 
 val が 真 のときは Integer に変換してから設定します。
 偽 のときは 0 を設定します。
-使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要が
-あります。通常配布されている Ruby では利用できません。
+使用するためには、THREAD_DEBUG を -1 にして Ruby をコンパイルする必要があります。通常配布されている Ruby では利用できません。
 
 ```ruby title="例"
 p Thread.DEBUG # => 0
@@ -336,13 +322,9 @@ p Thread.DEBUG # => 1
 
 非同期割り込みのキューが空かどうかを返します。
 
-[m:Thread.handle_interrupt] は非同期割り込みの発生を延期させるのに使
-用しますが、本メソッドは任意の非同期割り込みが存在するかどうかを確認す
-るのに使用します。
+[m:Thread.handle_interrupt] は非同期割り込みの発生を延期させるのに使用しますが、本メソッドは任意の非同期割り込みが存在するかどうかを確認するのに使用します。
 
-本メソッドが true を返した場合、[m:Thread.handle_interrupt] で例外の
-発生を延期するブロックを終了すると延期させられていた例外を発生させるこ
-とができます。
+本メソッドが true を返した場合、[m:Thread.handle_interrupt] で例外の発生を延期するブロックを終了すると延期させられていた例外を発生させることができます。
 
 - **param** `error` -- 対象の例外クラスを指定します。省略した場合は全ての例外を対
              象に確認を行います。
@@ -398,8 +380,7 @@ flag = false # スレッド停止
 
 ### def Thread.handle_interrupt(hash) { ... } -> object
 
-スレッドの割り込みのタイミングを引数で指定した内容に変更してブロックを
-実行します。
+スレッドの割り込みのタイミングを引数で指定した内容に変更してブロックを実行します。
 
 「割り込み」とは、非同期イベントや [m:Thread#raise] や
 [m:Thread#kill]、[m:Signal?.trap](未サポート)、メインスレッドの終了
@@ -421,12 +402,10 @@ flag = false # スレッド停止
 
   まったく割り込みません。
 
-「ブロッキング処理」とは、読み込み処理や書き込み処理のような呼び出し元
-のスレッドをブロックするような処理を意味します。CRuby の実装では、GVL
+「ブロッキング処理」とは、読み込み処理や書き込み処理のような呼び出し元のスレッドをブロックするような処理を意味します。CRuby の実装では、GVL
 を解放して実行する処理は全てブロッキング処理に含まれます。
 
-また、マスクされた非同期割り込みは再度有効にされるまで延期されます。本
-メソッドは [man:sigprocmask(3)] に似ています。
+また、マスクされた非同期割り込みは再度有効にされるまで延期されます。本メソッドは [man:sigprocmask(3)] に似ています。
 
 - **return** -- ブロックの評価結果を返します。
 
@@ -434,9 +413,7 @@ flag = false # スレッド停止
 
 ### 注意
 
-非同期割り込みの利用は難しいため、スレッド間での通信を実現する場合はま
-ずはキューのような他の方法を検討してください。それでも非同期割り込みを
-利用する場合は本メソッドをよく理解してから利用してください。
+非同期割り込みの利用は難しいため、スレッド間での通信を実現する場合はまずはキューのような他の方法を検討してください。それでも非同期割り込みを利用する場合は本メソッドをよく理解してから利用してください。
 
 ### 使い方
 
@@ -480,9 +457,7 @@ Thread.handle_interrupt(Timeout::Error => :never) {
 }
 ```
 
-この例を ensure 節での [c:Timeout::Error] 発生に応用する事でリソースリー
-クに備える事ができます。[m:Timeout?.timeout] はスレッドを使って実装さ
-れているため、Thread.handle_interrupt による制御が有効です。
+この例を ensure 節での [c:Timeout::Error] 発生に応用する事でリソースリークに備える事ができます。[m:Timeout?.timeout] はスレッドを使って実装されているため、Thread.handle_interrupt による制御が有効です。
 
 #### Stack control settings
 
@@ -499,8 +474,7 @@ Thread.handle_interrupt(FooError => :never) {
 
 #### 例外クラスの継承関係
 
-本メソッドでは引数 hash のキーに指定した例外クラスの全てのサブクラスが
-処理の対象になります。
+本メソッドでは引数 hash のキーに指定した例外クラスの全てのサブクラスが処理の対象になります。
 
 ```ruby title="例"
 Thread.handle_interrupt(Exception => :never) {
@@ -515,8 +489,7 @@ Thread.handle_interrupt(Exception => :never) {
 ### def [](name)    -> object | nil
 
 name に対応したスレッドに固有のデータを取り出します。
-name に対応するスレッド固有データがなければ nil を返し
-ます。
+name に対応するスレッド固有データがなければ nil を返します。
 
 - **param** `name` -- スレッド固有データのキーを文字列か [c:Symbol] で指定します。
 
@@ -550,8 +523,7 @@ def meth(newvalue)
 end
 ```
 
-この関数に与えるブロックがFiberを切り替える場合は動的スコープとしては
-正しく動作しません。
+この関数に与えるブロックがFiberを切り替える場合は動的スコープとしては正しく動作しません。
 
 ```ruby
 f = Fiber.new {
@@ -589,9 +561,7 @@ val を name に対応するスレッド固有のデータとして格納しま�
 ### def fetch(name, default = nil) {|name| ... } -> object
 
 name に関連づけられたスレッドに固有のデータを返します。
-name に対応するスレッド固有データがない時には、引数 default が
-与えられていればその値を、ブロックが与えられていれば
-そのブロックを評価した値を返します。
+name に対応するスレッド固有データがない時には、引数 default が与えられていればその値を、ブロックが与えられていればそのブロックを評価した値を返します。
 
 - **param** `name` -- スレッド固有データのキーを文字列か [c:Symbol] で指定します。
 - **param** `default` -- name に対応するスレッド固有データがない時の返り値を指定します。
@@ -612,11 +582,8 @@ p th.fetch('fetch') {|name| "Thread" + name}  # => "Threadfetch"
 ### def abort_on_exception               -> bool
 ### def abort_on_exception=(newstate)
 
-真の場合、そのスレッドが例外によって終了した時に、その例外をメインスレッドで
-再度発生させます。メインスレッドがその例外を捕捉しない限り、結果としてインタ
-プリタ全体が終了します。false の場合、あるスレッドで起こった例外は、
-[m:Thread#join] などで検出されない限りそのスレッドだけをなにも警告を出さずに
-終了させます。
+真の場合、そのスレッドが例外によって終了した時に、その例外をメインスレッドで再度発生させます。メインスレッドがその例外を捕捉しない限り、結果としてインタプリタ全体が終了します。false の場合、あるスレッドで起こった例外は、
+[m:Thread#join] などで検出されない限りそのスレッドだけをなにも警告を出さずに終了させます。
 
 デフォルトは偽です。[ref:c:Thread#exception]を参照してください。
 
@@ -679,9 +646,7 @@ p thr.alive?            # => false
 
 スレッドの実行を終了させます。終了時に ensure 節が実行されます。
 
-ただし、スレッドは終了処理中(aborting)にはなりますが、
-直ちに終了するとは限りません。すでに終了している場合は何もしません。このメソッドにより
-終了したスレッドの [m:Thread#value] の返り値は不定です。
+ただし、スレッドは終了処理中(aborting)にはなりますが、直ちに終了するとは限りません。すでに終了している場合は何もしません。このメソッドにより終了したスレッドの [m:Thread#value] の返り値は不定です。
 自身がメインスレッドであるか最後のスレッドである場合は、プロセスを [m:Kernel?.exit](0) 
 により終了します。
 
@@ -716,9 +681,7 @@ p Thread.current.group == ThreadGroup::Default
 ### def join           -> self
 ### def join(limit)    -> self | nil
 
-スレッド self の実行が終了するまで、カレントスレッドを停止し
-ます。self が例外により終了していれば、その例外がカレントス
-レッドに対して発生します。
+スレッド self の実行が終了するまで、カレントスレッドを停止します。self が例外により終了していれば、その例外がカレントスレッドに対して発生します。
 
 limit を指定して、limit 秒過ぎても自身が終了しない場合、nil を返します。
 
@@ -822,8 +785,7 @@ end
 ### def run    -> self
 
 停止状態(stop)のスレッドを再開させます。
-[m:Thread#wakeup] と異なりすぐにスレッドの切り替え
-を行います。
+[m:Thread#wakeup] と異なりすぐにスレッドの切り替えを行います。
 
 - **raise** `ThreadError` -- 死んでいるスレッドに対して実行すると発生します。
 
@@ -842,9 +804,7 @@ a.join
 
 ### def status    -> String | false | nil
 
-生きているスレッドの状態を文字列 "run"、"sleep", "aborting" のいず
-れかで返します。正常終了したスレッドに対して false、例外によ
-り終了したスレッドに対して nil を返します。
+生きているスレッドの状態を文字列 "run"、"sleep", "aborting" のいずれかで返します。正常終了したスレッドに対して false、例外により終了したスレッドに対して nil を返します。
 #%#((-((<ruby 1.6 feature>)): version 1.6.5 までは、終了処理中
 #%#(aborting)のスレッドに対しては "run" を返していました-))
 
@@ -890,9 +850,7 @@ p b.stop? # => false
 
 ### def value    -> object 
 
-スレッド self が終了するまで待ち([m:Thread#join] と同じ)、
-そのスレッドのブロックが返した値を返します。スレッド実行中に例外が
-発生した場合には、その例外を再発生させます。
+スレッド self が終了するまで待ち([m:Thread#join] と同じ)、そのスレッドのブロックが返した値を返します。スレッド実行中に例外が発生した場合には、その例外を再発生させます。
 
 スレッドが [m:Thread#kill] によって終了した場合は、返り値は不定です。
 
@@ -907,8 +865,7 @@ threads.push(Thread.new { n = rand(5); sleep n; n })
 threads.each {|t| p t.value}
 ```
 
-最後の行で、待ち合わせを行っていることがわかりにくいと思うなら以下
-のように書くこともできます。
+最後の行で、待ち合わせを行っていることがわかりにくいと思うなら以下のように書くこともできます。
 
 ```ruby
 threads.each {|t| p t.join.value}
@@ -1048,8 +1005,7 @@ p th.backtrace # => nil
 ### def backtrace_locations(start = 0, length = nil) -> [Thread::Backtrace::Location] | nil
 ### def backtrace_locations(range)                   -> [Thread::Backtrace::Location] | nil
 
-スレッドの現在のバックトレースを [c:Thread::Backtrace::Location] の配
-列で返します。
+スレッドの現在のバックトレースを [c:Thread::Backtrace::Location] の配列で返します。
 
 引数で指定した値が範囲外の場合、スレッドがすでに終了している場合は nil
 を返します。
@@ -1060,8 +1016,7 @@ p th.backtrace # => nil
 
 - **param** `range` -- 取得したいフレームの範囲を示す Range オブジェクトを指定します。
 
-[m:Kernel?.caller_locations] と似ていますが、本メソッドは self に限定
-した情報を返します。
+[m:Kernel?.caller_locations] と似ていますが、本メソッドは self に限定した情報を返します。
 
 ```ruby title="例"
 thread = Thread.new { sleep 1 }
@@ -1079,8 +1034,7 @@ p thread.backtrace_locations # => ["/path/to/test.rb:1:in `sleep'", "/path/to/te
 
 引数 key で指定した名前のスレッドローカル変数を返します。
 
-[注意]: [m:Thread#\[\]] でセットしたローカル変数(Fiber ローカル変数)と
-異なり、Fiber を切り替えても同じ変数を返す事に注意してください。
+[注意]: [m:Thread#\[\]] でセットしたローカル変数(Fiber ローカル変数)と異なり、Fiber を切り替えても同じ変数を返す事に注意してください。
 
 ```ruby title="例"
 Thread.new {
@@ -1096,8 +1050,7 @@ Thread.new {
 }.join.value # => ['bar', nil]
 ```
 
-この例の "bar" は [m:Thread#thread_variable_get] により得られ
-た値で、nil は[m:Thread#\[\]] により得られた値です。
+この例の "bar" は [m:Thread#thread_variable_get] により得られた値で、nil は[m:Thread#\[\]] により得られた値です。
 
 - **SEE** [m:Thread#thread_variable_set], [m:Thread#\[\]]
 
@@ -1105,12 +1058,9 @@ Thread.new {
 
 ### def thread_variable_set(key, value)
 
-引数 key で指定した名前のスレッドローカル変数に引数 value をセットしま
-す。
+引数 key で指定した名前のスレッドローカル変数に引数 value をセットします。
 
-[注意]: [m:Thread#\[\]] でセットしたローカル変数(Fiber ローカル変数)と
-異なり、セットした変数は Fiber を切り替えても共通で使える事に注意してく
-ださい。
+[注意]: [m:Thread#\[\]] でセットしたローカル変数(Fiber ローカル変数)と異なり、セットした変数は Fiber を切り替えても共通で使える事に注意してください。
 
 ```ruby title="例"
 thr = Thread.new do
@@ -1125,8 +1075,7 @@ p thr.thread_variables # => [:cat, :dog]
 
 ### def thread_variable?(key) -> bool
 
-引数 key で指定した名前のスレッドローカル変数が存在する場合に true、そ
-うでない場合に false を返します。
+引数 key で指定した名前のスレッドローカル変数が存在する場合に true、そうでない場合に false を返します。
 
 - **param** `key` -- 変数名を [c:String] か [c:Symbol] で指定します。
 
@@ -1137,8 +1086,7 @@ p me.thread_variable?(:oliver)  # => true
 p me.thread_variable?(:stanley) # => false
 ```
 
-[注意]: [m:Thread#\[\]] でセットしたローカル変数(Fiber ローカル変数)が
-対象ではない事に注意してください。
+[注意]: [m:Thread#\[\]] でセットしたローカル変数(Fiber ローカル変数)が対象ではない事に注意してください。
 
 - **SEE** [m:Thread#thread_variable_get], [m:Thread#\[\]]
 
@@ -1146,8 +1094,7 @@ p me.thread_variable?(:stanley) # => false
 
 スレッドローカル変数の名前を [c:Symbol] の配列で返します。
 
-[注意]: [m:Thread#\[\]] でセットしたローカル変数(Fiber ローカル変数)は
-対象ではない事に注意してください。
+[注意]: [m:Thread#\[\]] でセットしたローカル変数(Fiber ローカル変数)は対象ではない事に注意してください。
 
 ```ruby title="例"
 thr = Thread.new do
@@ -1173,8 +1120,7 @@ ID は OS に依存します(pthread_self(3) が返す POSIX スレッド ID と
   * Windows では GetThreadId() が返すスレッド識別子です。
   * その他のプラットフォームでは [c:NotImplementedError] が発生します。
 
-スレッドがまだネイティブスレッドと結びついていない場合や、すでに切り離された
-場合は nil を返します。
+スレッドがまだネイティブスレッドと結びついていない場合や、すでに切り離された場合は nil を返します。
 
 ```ruby title="例"
 p Thread.current.native_thread_id.class # => Integer

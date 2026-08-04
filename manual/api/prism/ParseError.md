@@ -3,12 +3,9 @@ library: prism
 ---
 # class Prism::ParseError < Object
 
-[m:Prism::ParseResult#errors] で得られる、構文解析中に発生した
-エラーを表すクラスです。
+[m:Prism::ParseResult#errors] で得られる、構文解析中に発生したエラーを表すクラスです。
 
-例外クラスではないことに注意してください。prism はエラー耐性のある
-パーサであり、構文エラーがあっても例外を発生させず、見つかった
-エラーをこのクラスのインスタンスとして
+例外クラスではないことに注意してください。prism はエラー耐性のあるパーサであり、構文エラーがあっても例外を発生させず、見つかったエラーをこのクラスのインスタンスとして
 [m:Prism::ParseResult#errors] に蓄積します。
 
 ```ruby title="例"
@@ -30,18 +27,14 @@ p error.location.start_line # => 1
 
 ### def location -> Prism::Location
 
-エラーが発生したソースコード上の位置を表す [c:Prism::Location] を
-返します。該当箇所の文字列そのものは `location.slice` で取得できます。
+エラーが発生したソースコード上の位置を表す [c:Prism::Location] を返します。該当箇所の文字列そのものは `location.slice` で取得できます。
 
 #%since 3.4
 ### def type -> Symbol
 
-エラーの種類を表すシンボル(例: `:expect_expression_after_operator`)を
-返します。
+エラーの種類を表すシンボル(例: `:expect_expression_after_operator`)を返します。
 
-これはエラーメッセージの変換レイヤーとの連携のために使われる内部用の
-シンボルであり、正式な公開 API ではありません。将来のバージョンで
-予告なく変わる可能性があります。
+これはエラーメッセージの変換レイヤーとの連携のために使われる内部用のシンボルであり、正式な公開 API ではありません。将来のバージョンで予告なく変わる可能性があります。
 
 ### def level -> Symbol
 

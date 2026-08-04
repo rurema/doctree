@@ -227,8 +227,7 @@ p CMath.sqrt(Complex(0, 8)) # => (2.0+2.0i)
 
 ### module_function def sin!(x) -> Float
 
-実数 x の正弦関数の値を返します。[m:Math?.sin] のエイリアス
-です。
+実数 x の正弦関数の値を返します。[m:Math?.sin] のエイリアスです。
 
 - **param** `x` -- 実数（ラジアンで与えます）
 
@@ -255,8 +254,7 @@ z の正弦関数の値を返します。
 
 ### module_function def cos!(x) -> Float
 
-実数 x の余弦関数の値を返します。[m:Math?.cos] のエイリアス
-です。
+実数 x の余弦関数の値を返します。[m:Math?.cos] のエイリアスです。
 
 - **param** `x` -- 実数（ラジアンで与えます）
 
@@ -285,8 +283,7 @@ z の余弦関数の値を返します。
 
 ### module_function def tan!(x) -> Float
 
-実数 x の正接関数の値を返します。[m:Math?.tan] のエイリアス
-です。
+実数 x の正接関数の値を返します。[m:Math?.tan] のエイリアスです。
 
 - **param** `x` -- 実数（ラジアンで与えます）
 
@@ -313,8 +310,7 @@ z の正接関数の値を返します。
 
 ### module_function def sinh!(x) -> Float
 
-実数 x の双曲線正弦関数の値を返します。[m:Math?.sinh] のエイリアスで
-す。
+実数 x の双曲線正弦関数の値を返します。[m:Math?.sinh] のエイリアスです。
 
 - **param** `x` -- 実数
 
@@ -334,8 +330,7 @@ z の双曲線正弦関数の値を返します。
 
 ### module_function def cosh!(x) -> Float
 
-実数 x の双曲線余弦関数の値を返します。[m:Math?.cosh] のエイリアスで
-す。
+実数 x の双曲線余弦関数の値を返します。[m:Math?.cosh] のエイリアスです。
 
 - **param** `x` -- 実数
 
@@ -355,8 +350,7 @@ z の双曲線余弦関数の値を返します。
 
 ### module_function def tanh!(x) -> Float
 
-実数 x の双曲線正接関数の値を返します。[m:Math?.tanh] のエイリアスで
-す。
+実数 x の双曲線正接関数の値を返します。[m:Math?.tanh] のエイリアスです。
 
 - **param** `x` -- 実数
 
@@ -376,8 +370,7 @@ z の双曲線正接関数の値を返します。
 
 ### module_function def asin!(x) -> Float
 
-実数 x の逆正弦関数の値をラジアンで返します。[m:Math?.asin] のエイリ
-アスです。
+実数 x の逆正弦関数の値をラジアンで返します。[m:Math?.asin] のエイリアスです。
 
 - **param** `x` -- -1.0 <= x <= 1 の範囲内の実数。
 
@@ -399,8 +392,7 @@ z の逆正弦関数の値をラジアンで返します。
 
 ### module_function def acos!(x) -> Float
 
-実数 x の逆余弦関数の値をラジアンで返します。[m:Math?.acos] のエイリ
-アスです。
+実数 x の逆余弦関数の値をラジアンで返します。[m:Math?.acos] のエイリアスです。
 
 - **param** `x` -- -1.0 <= x <= 1 の範囲内の実数
 
@@ -424,8 +416,7 @@ z の逆余弦関数の値をラジアンで返します。
 
 ### module_function def atan!(x) -> Float
 
-実数 x の逆正接関数の値をラジアンで返します。[m:Math?.atan] のエイリ
-アスです。
+実数 x の逆正接関数の値をラジアンで返します。[m:Math?.atan] のエイリアスです。
 
 - **param** `x` -- 実数。
 
@@ -447,8 +438,7 @@ z の逆正接関数の値をラジアンで返します。
 
 ### module_function def atan2!(y, x) -> Float
 
-実数 y / x の逆正接関数の値を返します。[m:Math?.atan2] のエイリアスで
-す。
+実数 y / x の逆正接関数の値を返します。[m:Math?.atan2] のエイリアスです。
 
 - **param** `y` -- 実数。
 

@@ -24,12 +24,9 @@ respect_whitespace に真を指定すると、arg に含まれる空白文字は
 
 raw は true, false, nil のいずれかを指定し、生成されるテキストノードが
 raw モードであるかどうかを決めます。
-true の場合、そのノードは raw モードであると解釈され、
-テキストにはエスケープされていないXMLマークアップは
-含まれていないと仮定し、テキストの内容は変更されません。
+true の場合、そのノードは raw モードであると解釈され、テキストにはエスケープされていないXMLマークアップは含まれていないと仮定し、テキストの内容は変更されません。
 falseの場合、そのノードは raw モードであると解釈され、
-rexml はテキストに含まれているすべての(定義済み)実体を
-エスケープします
+rexml はテキストに含まれているすべての(定義済み)実体をエスケープします
 nilの場合、親ノードが raw モードであるかどうかで
 self が raw モードになるかどうかが決まります。
 arg に REXML::Text オブジェクトを渡した場合は、この値は無視され
@@ -37,12 +34,9 @@ arg が raw モードであるかどうかが使われます。
 
 entity_filter は置き換えたい実体のリストを文字列の配列で指定します。
 これは raw が false のときのみ意味を持ちます。
-entity_filter が nil の場合(デフォルトの場合)、
-テキストがどのようにエスケープされるかは、そのノードが属する
-文書([c:REXML::Document])の
+entity_filter が nil の場合(デフォルトの場合)、テキストがどのようにエスケープされるかは、そのノードが属する文書([c:REXML::Document])の
 DTD([c:REXML::DocType], [m:REXML::Document#doctype])
-で定義されます。DTD が与えられていない場合は、XMLの規格上
-以下の実体参照/対応文字がデフォルトで使われます。
+で定義されます。DTD が与えられていない場合は、XMLの規格上以下の実体参照/対応文字がデフォルトで使われます。
   - &amp; &
   - &lt; <
   - &gt; >
@@ -89,8 +83,7 @@ p REXML::Text.new("quzz", false, doc.root, true).to_s # => "quzz"
 
 ### def REXML::Text.normalize(input, doctype = nil, entity_filter = nil) -> String
 
-input を正規化(すべての entity をエスケープ)したものを
-返します。
+input を正規化(すべての entity をエスケープ)したものを返します。
 
 - **param** `input` -- 正規化する文字列
 - **param** `doctype` -- DTD([c:REXML::DocType] オブジェクト)
@@ -98,8 +91,7 @@ input を正規化(すべての entity をエスケープ)したものを
 
 ### def REXML::Text.unnormalize(string, doctype = nil, filter = nil, illegal = nil) -> String
 
-string を非正規化(すべての entity をアンエスケープ)したものを
-返します。
+string を非正規化(すべての entity をアンエスケープ)したものを返します。
 
 filter でアンエスケープしない実体の実体名を文字列配列で指定します。
 
@@ -210,8 +202,7 @@ p t.value # => "< & foobar"
 
 テキストの内容を val に変更します。
 
-val には非正規化された(エスケープされていない)文字列を渡さなければ
-なりません。
+val には非正規化された(エスケープされていない)文字列を渡さなければなりません。
 
 ```ruby
 require 'rexml/document'
@@ -246,9 +237,7 @@ p e.to_s # => "<a>&lt;a&gt;</a>"
 
 テキストノードが属する文書の DTD を返します。
 
-そのような文書([c:REXML::Document])が存在しない、すなわち
-テキストノードの親ノードを辿っても REXML::Document に到達しない、
-場合には nil を返します。
+そのような文書([c:REXML::Document])が存在しない、すなわちテキストノードの親ノードを辿っても REXML::Document に到達しない、場合には nil を返します。
 
 - **SEE** [c:REXML::DocType]
 

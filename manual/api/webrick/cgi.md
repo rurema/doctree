@@ -5,8 +5,7 @@ require:
   - webrick/httpresponse
   - webrick/config
 ---
-一般の CGI 環境で [lib:webrick] ライブラリのサーブレットと同じように CGI スクリプトを書くための
-ライブラリです。サーバが WEBrick でなくても使うことが出来ます。
+一般の CGI 環境で [lib:webrick] ライブラリのサーブレットと同じように CGI スクリプトを書くためのライブラリです。サーバが WEBrick でなくても使うことが出来ます。
 
 ### 使い方
 
@@ -36,20 +35,15 @@ MyCGI.new.start()
 
 do_XXX メソッドの XXX には GET, HEAD, POST, PUT, DELETE, OPTIONS が使用できます。
 
-[c:WEBrick::CGI] のサブクラスで定義された do_XXX メソッドは [m:WEBrick::CGI#service] メソッド
-から HTTP のリクエストに応じて自動的に呼び出されます。
+[c:WEBrick::CGI] のサブクラスで定義された do_XXX メソッドは [m:WEBrick::CGI#service] メソッドから HTTP のリクエストに応じて自動的に呼び出されます。
 なので [c:WEBrick::CGI] のサブクラスはこれらのメソッドを適切に実装しなければなりません。
 これらのメソッドの返り値は特に規定されていません。
 
-[c:WEBrick::CGI] のサブクラスでは、クライアントが使う可能性のある RFC で定義された HTTP の
-メソッドはすべて実装する必要があります。
+[c:WEBrick::CGI] のサブクラスでは、クライアントが使う可能性のある RFC で定義された HTTP のメソッドはすべて実装する必要があります。
 クライアントからのリクエストに使われないと分かっているメソッドは実装しなくてもかまいません。
 実装されていない HTTP メソッドであった場合、[m:WEBrick::CGI#service] メソッドが例外を発生させます。
 
-do_XXX メソッドが呼ばれた時点では、クライアントからのリクエストに含まれる Entity Body の読み込みは
-まだ行われていません。[m:WEBrick::HTTPRequest#query], [m:WEBrick::HTTPRequest#body] などの
-メソッドが読ばれた時点で読み込みが行われます。クライアントから巨大なデータが送られてくることを考慮して
-ユーザはプログラミングを行うべきです。
+do_XXX メソッドが呼ばれた時点では、クライアントからのリクエストに含まれる Entity Body の読み込みはまだ行われていません。[m:WEBrick::HTTPRequest#query], [m:WEBrick::HTTPRequest#body] などのメソッドが読ばれた時点で読み込みが行われます。クライアントから巨大なデータが送られてくることを考慮してユーザはプログラミングを行うべきです。
 
 do_XXX メソッドには二つの引数があります。
 第一引数は、クライアントからのリクエストを表す [c:WEBrick::HTTPRequest] オブジェクトです。
@@ -57,8 +51,7 @@ do_XXX メソッドには二つの引数があります。
 
 #### フォームフィールドの値を得る
 
-フォームフィールドの値は [m:WEBrick::HTTPRequest#query] メソッドが返す Hash オブジェクトに
-収納されています。
+フォームフィールドの値は [m:WEBrick::HTTPRequest#query] メソッドが返す Hash オブジェクトに収納されています。
 
 ```ruby
 require "webrick/cgi"
@@ -84,8 +77,7 @@ end
 MyCGI.new.start()
 ```
 
-query メソッドが返す Hash オブジェクトのキーと値のうち値は [c:WEBrick::HTTPUtils::FormData] クラスの
-インスタンスになります。FormData クラスは String クラスのサブクラスです。
+query メソッドが返す Hash オブジェクトのキーと値のうち値は [c:WEBrick::HTTPUtils::FormData] クラスのインスタンスになります。FormData クラスは String クラスのサブクラスです。
 
 #### マルチパートフィールドの値を取得する（ファイル送信）
 
@@ -164,8 +156,7 @@ MyCGI.new.start()
 
 # class WEBrick::CGI < Object
 
-一般の CGI 環境で [c:WEBrick] のサーブレットと同じように CGI スクリプトを書くための
-クラスです。
+一般の CGI 環境で [c:WEBrick] のサーブレットと同じように CGI スクリプトを書くためのクラスです。
 
 ## Class Methods
 
@@ -221,8 +212,7 @@ config で有効なキーとその値は以下のとおりです。
 
 ### def service(req, res)     -> ()
 
-指定された [c:WEBrick::HTTPRequest] オブジェクト req の [m:WEBrick::HTTPRequest#request_method] に応じて、
-自身の do_GET, do_HEAD, do_POST, do_OPTIONS... いずれかのメソッドを req と res を引数として呼びます。
+指定された [c:WEBrick::HTTPRequest] オブジェクト req の [m:WEBrick::HTTPRequest#request_method] に応じて、自身の do_GET, do_HEAD, do_POST, do_OPTIONS... いずれかのメソッドを req と res を引数として呼びます。
 
 特に理由が無い限り [c:WEBrick::CGI] のサブクラスがこのメソッドを定義する必要はありません。
 

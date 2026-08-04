@@ -57,11 +57,9 @@ anchor を付けない場合には nil を指定します。
 tag には sequence に付加されている tag を文字列で指定します。
 tag を付けない場合には nil を指定します。
 
-implicit には sequence が implicit に開始されたかどうかを
-真偽値で指定します。
+implicit には sequence が implicit に開始されたかどうかを真偽値で指定します。
 
-style には YAML ドキュメント上の style を整数で指定します。以下のいずれ
-かを指定できます。
+style には YAML ドキュメント上の style を整数で指定します。以下のいずれかを指定できます。
   - [m:Psych::Nodes::Sequence::ANY]
   - [m:Psych::Nodes::Sequence::BLOCK]
   - [m:Psych::Nodes::Sequence::FLOW]

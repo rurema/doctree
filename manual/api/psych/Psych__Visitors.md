@@ -37,11 +37,9 @@ YAMLTree オブジェクトを生成します。
 options には構築される YAML AST に設定されるオプション設定を指定します。
 [m:Psych.dump] と同じオプションが指定できます。
 
-emitter には AST の構築に使われる [c:Psych::TreeBuilder] オブジェクト
-を渡します。
+emitter には AST の構築に使われる [c:Psych::TreeBuilder] オブジェクトを渡します。
 
-ss は Ruby の [c:String] が YAML document 上で quote が必要かどうか
-を判定するための [c:Psych::ScalarScanner] オブジェクトを渡します。
+ss は Ruby の [c:String] が YAML document 上で quote が必要かどうかを判定するための [c:Psych::ScalarScanner] オブジェクトを渡します。
 
 emitter, ss は通常デフォルトのものから変える必要はないでしょう。
 
@@ -53,16 +51,14 @@ emitter, ss は通常デフォルトのものから変える必要はないで�
 ### def started -> bool
 ### def started? -> bool
 
-[m:Psych::Visitors::YAMLTree#start] をすでに呼び出しているならば
-真を返します。
+[m:Psych::Visitors::YAMLTree#start] をすでに呼び出しているならば真を返します。
 
 まだならば偽を返します。
 
 ### def finished -> bool
 ### def finished? -> bool
 
-[m:Psych::Visitors::YAMLTree#finish] をすでに呼び出しているならば
-真を返します。
+[m:Psych::Visitors::YAMLTree#finish] をすでに呼び出しているならば真を返します。
 
 まだならば偽を返します。
 
@@ -70,9 +66,7 @@ emitter, ss は通常デフォルトのものから変える必要はないで�
 
 Ruby オブジェクトから YAML AST への変換のための準備をします。
 
-[m:Psych::Visitors::YAMLTree#push] が呼び出されたとき、
-まだこのメソッドが呼び出されていなければ push メソッドがこの
-メソッドを呼び出し、変換の準備をします。
+[m:Psych::Visitors::YAMLTree#push] が呼び出されたとき、まだこのメソッドが呼び出されていなければ push メソッドがこのメソッドを呼び出し、変換の準備をします。
 
 encoding には以下のいずれかを指定できます。
   - [m:Psych::Nodes::Stream::UTF8]

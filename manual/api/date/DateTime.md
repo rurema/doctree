@@ -63,8 +63,7 @@ yesterday = DateTime.now - 1
 #%# exp
 ### def DateTime.httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> DateTime
 
-[RFC:2616] で定められた書式の日付を解析し、
-その情報に基づいて日付オブジェクトを生成します。
+[RFC:2616] で定められた書式の日付を解析し、その情報に基づいて日付オブジェクトを生成します。
 
 [m:Date._httpdate] も参照してください。
 
@@ -74,8 +73,7 @@ yesterday = DateTime.now - 1
 #%# exp
 ### def DateTime.iso8601(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 
-いくつかの代表的な ISO 8601 書式の日付を解析し、
-その情報に基づいて日付オブジェクトを生成します。
+いくつかの代表的な ISO 8601 書式の日付を解析し、その情報に基づいて日付オブジェクトを生成します。
 
 - **param** `str` -- 日付をあらわす文字列
 
@@ -101,8 +99,7 @@ yesterday = DateTime.now - 1
 #%# exp
 ### def DateTime.jisx0301(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 
-いくつかの代表的な JIS X 0301 書式の日付を解析し、
-その情報に基づいて日付オブジェクトを生成します。
+いくつかの代表的な JIS X 0301 書式の日付を解析し、その情報に基づいて日付オブジェクトを生成します。
 
 [m:Date._jisx0301] も参照してください。
 
@@ -134,8 +131,7 @@ yesterday = DateTime.now - 1
 ### def DateTime.rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
 ### def DateTime.rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
 
-[RFC:2822] で定められた書式の日付を解析し、
-その情報に基づいて日付オブジェクトを生成します。
+[RFC:2822] で定められた書式の日付を解析し、その情報に基づいて日付オブジェクトを生成します。
 
 [m:Date._rfc2822] も参照してください。
 
@@ -145,8 +141,7 @@ yesterday = DateTime.now - 1
 #%# exp
 ### def DateTime.rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 
-[RFC:3339] 書式の日付を解析し、
-その情報に基づいて日付オブジェクトを生成します。
+[RFC:3339] 書式の日付を解析し、その情報に基づいて日付オブジェクトを生成します。
 
 [m:Date._rfc3339] も参照してください。
 
@@ -164,8 +159,7 @@ yesterday = DateTime.now - 1
 #%# exp
 ### def DateTime.xmlschema(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 
-XML Schema による書式の日付を解析し、
-その情報に基づいて日付オブジェクトを生成します。
+XML Schema による書式の日付を解析し、その情報に基づいて日付オブジェクトを生成します。
 
 [m:Date._xmlschema] も参照してください。
 
@@ -174,11 +168,9 @@ XML Schema による書式の日付を解析し、
 
 ### def DateTime.parse(str = '-4712-01-01T00:00:00+00:00', complete = true, start = Date::ITALY) -> DateTime
 
-与えられた日時表現を解析し、
-その情報に基づいて DateTime オブジェクトを生成します。
+与えられた日時表現を解析し、その情報に基づいて DateTime オブジェクトを生成します。
 
-年が "00" から "99" の範囲であれば、
-年の下2桁表現であるとみなしこれを補います。
+年が "00" から "99" の範囲であれば、年の下2桁表現であるとみなしこれを補います。
 この振舞いを抑止したい場合は、ヒントとして、complete に false を与えます。
 
 - **param** `str` -- 日時をあらわす文字列
@@ -213,8 +205,7 @@ p DateTime._strptime('2001-02-03T12:13:14Z')
 
 ### def DateTime.strptime(str = '-4712-01-01T00:00:00+00:00', format = '%FT%T%z', start = Date::ITALY) -> DateTime
 
-与えられた雛型で日時表現を解析し、
-その情報に基づいて DateTime オブジェクトを生成します。
+与えられた雛型で日時表現を解析し、その情報に基づいて DateTime オブジェクトを生成します。
 
 - **param** `str` -- 日時をあらわす文字列
 - **param** `format` -- 書式

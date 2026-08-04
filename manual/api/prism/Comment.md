@@ -3,13 +3,10 @@ library: prism
 ---
 # class Prism::Comment < Object
 
-[m:Prism::ParseResult#comments] や [m:Prism?.parse_comments] で得られる、
-ソースコード中のコメントを表す抽象基底クラスです。
+[m:Prism::ParseResult#comments] や [m:Prism?.parse_comments] で得られる、ソースコード中のコメントを表す抽象基底クラスです。
 
-実際に生成されるのはサブクラスの [c:Prism::InlineComment](`#` から
-始まる通常のコメント)または [c:Prism::EmbDocComment](`=begin` 〜
-`=end` の埋め込みドキュメント)のどちらかで、このクラス自体の
-インスタンスが返されることはありません。
+実際に生成されるのはサブクラスの [c:Prism::InlineComment](`#` から始まる通常のコメント)または [c:Prism::EmbDocComment](`=begin` 〜
+`=end` の埋め込みドキュメント)のどちらかで、このクラス自体のインスタンスが返されることはありません。
 
 - **SEE** [m:Prism::ParseResult#comments], [m:Prism?.parse_comments]
 

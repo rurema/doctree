@@ -19,8 +19,7 @@ include:
 
 source_uri から取得した Gem パッケージをキャッシュディレクトリに配置します。
 
-既に Gem パッケージが存在する場合は、ファイルを置き換えませんが source_uri が
-ローカルパス (file://) である場合は常にファイルを置き換えます。
+既に Gem パッケージが存在する場合は、ファイルを置き換えませんが source_uri がローカルパス (file://) である場合は常にファイルを置き換えます。
 
 - **param** `spec` -- [c:Gem::Specification] のインスタンスを指定します。
 
@@ -36,9 +35,7 @@ source_uri から取得した Gem パッケージをキャッシュディレク�
 
 与えられた URI からダウンロードしたデータを文字列として返します。
 
-uri のスキームが http/https/s3 で head に真を指定した場合は、ボディを
-読まずにレスポンスオブジェクト([m:Gem::RemoteFetcher#request] の戻り値)を
-そのまま返します。file:// の場合は head の指定によらず常に文字列を返します。
+uri のスキームが http/https/s3 で head に真を指定した場合は、ボディを読まずにレスポンスオブジェクト([m:Gem::RemoteFetcher#request] の戻り値)をそのまま返します。file:// の場合は head の指定によらず常に文字列を返します。
 
 - **param** `uri` -- データ取得先の URI を指定します。
 
@@ -64,9 +61,7 @@ uri のスキームが http/https/s3 で head に真を指定した場合は、�
 
 与えられた URI に対してリクエストを実行し、レスポンスオブジェクトを返します。
 
-Ruby 3.3 以降の RubyGems は net-http を `Gem::Net` 名前空間の下に取り込んで
-いるため、戻り値は [c:Net::HTTPResponse] ではなく、それと同じインター
-フェースを持つ別クラス `Gem::Net::HTTPResponse` です。
+Ruby 3.3 以降の RubyGems は net-http を `Gem::Net` 名前空間の下に取り込んでいるため、戻り値は [c:Net::HTTPResponse] ではなく、それと同じインターフェースを持つ別クラス `Gem::Net::HTTPResponse` です。
 
 - **param** `uri` -- URI を指定します。
 

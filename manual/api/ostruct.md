@@ -8,8 +8,7 @@ type: library
 要素を動的に追加・削除できる手軽な構造体を提供するクラスです。
 
 OpenStruct のインスタンスに対して未定義なメソッド x= を呼ぶと、
-OpenStruct クラスの [m:BasicObject#method_missing] で捕捉され、そのインスタンスに
-インスタンスメソッド x, x= が定義されます。
+OpenStruct クラスの [m:BasicObject#method_missing] で捕捉され、そのインスタンスにインスタンスメソッド x, x= が定義されます。
 この挙動によって要素を動的に変更できる構造体として働きます。
 
 ```ruby
@@ -103,8 +102,7 @@ some1 = OpenStruct.new({:a =>"a",:b =>"b"}) # => #<OpenStruct b="b", a="a">
 
 ### def eql?(other) -> bool
 
-self と other が等しい場合に true を返します。そうでない場合は false を
-返します。
+self と other が等しい場合に true を返します。そうでない場合は false を返します。
 
 具体的には other が [c:OpenStruct] オブジェクトかそのサブクラスでかつ、
 self の各要素を保持した内部の [c:Hash] が eql? で比較して等しい場合に
@@ -131,11 +129,9 @@ nameで指定された要素を削除します。
 ### def to_h -> { Symbol => object }
 ### def to_h {|name, value| block } -> Hash
 
-self を各要素の名前をキー([c:Symbol])、要素が値のハッシュに変換して返
-します。
+self を各要素の名前をキー([c:Symbol])、要素が値のハッシュに変換して返します。
 
-ブロックを指定すると各ペアでブロックを呼び出し、
-その結果をペアとして使います。
+ブロックを指定すると各ペアでブロックを呼び出し、その結果をペアとして使います。
 
 ```ruby title="例"
 require 'ostruct'
@@ -188,8 +184,7 @@ person.age # => 42
 
 ### def dig(key, ...) -> object | nil
 
-self 以下のネストしたオブジェクトを dig メソッドで再帰的に参照して返し
-ます。途中のオブジェクトが nil であった場合は nil を返します。
+self 以下のネストしたオブジェクトを dig メソッドで再帰的に参照して返します。途中のオブジェクトが nil であった場合は nil を返します。
 
 - **param** `key` -- キーを任意個指定します。
 

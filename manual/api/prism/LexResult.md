@@ -8,8 +8,7 @@ since: "3.4"
 字句解析の結果と、付随情報(コメント・エラー・警告など。
 [c:Prism::Result] を参照)を保持します。
 
-Ruby 3.3 の prism にはこのクラスはなく、[c:Prism::ParseResult] が
-使われていました(`value` の形式は同じです)。
+Ruby 3.3 の prism にはこのクラスはなく、[c:Prism::ParseResult] が使われていました(`value` の形式は同じです)。
 
 - **SEE** [m:Prism?.lex], [m:Prism?.lex_file], [c:Prism::Result]
 
@@ -18,8 +17,7 @@ Ruby 3.3 の prism にはこのクラスはなく、[c:Prism::ParseResult] が
 ### def value -> Array
 
 字句解析の結果を、`[トークン, 直前からの字句解析器の状態を表す整数]`
-という 2 要素配列の配列で返します。トークンは [c:Prism::Token] の
-インスタンスです。
+という 2 要素配列の配列で返します。トークンは [c:Prism::Token] のインスタンスです。
 
 トークンだけの配列が欲しい場合は `value.map(&:first)` のようにします。
 

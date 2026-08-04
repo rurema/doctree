@@ -10,10 +10,7 @@ HMAC とは MAC(message authentication code, ハッシュ関数(MD5やSHAなど)
 
 メッセージの認証に利用されます。
 
-[c:OpenSSL::Digest] のようにある与えられた文字列の
-ハッシュ値を直接計算するインターフェースと
-インスタンスを生成して入力文字列を順次与えてハッシュ値を
-計算するインターフェースの2つがあります。
+[c:OpenSSL::Digest] のようにある与えられた文字列のハッシュ値を直接計算するインターフェースとインスタンスを生成して入力文字列を順次与えてハッシュ値を計算するインターフェースの2つがあります。
 
 HMAC は[RFC:2104] で定義されています。
 
@@ -21,8 +18,7 @@ HMAC は[RFC:2104] で定義されています。
 
 ### def OpenSSL::HMAC.digest(digest, key, data) -> String
 
-渡された digest と key を用いて data の HMAC を計算し、
-その値をバイナリ文字列として返します。
+渡された digest と key を用いて data の HMAC を計算し、その値をバイナリ文字列として返します。
 
 digest には利用するハッシュ関数を表す文字列("md5", "sha256" など)
 を渡します。
@@ -33,8 +29,7 @@ digest には利用するハッシュ関数を表す文字列("md5", "sha256" �
 
 ### def OpenSSL::HMAC.hexdigest(digest, key, data) -> String
 
-渡された digest と key を用いて data の HMAC を計算し、
-その値を16進文字列で返します。
+渡された digest と key を用いて data の HMAC を計算し、その値を16進文字列で返します。
 
 digest には利用するハッシュ関数を表す文字列("md5", "sha256" など)
 を渡します。
@@ -66,8 +61,7 @@ digest には利用するハッシュ関数を表す文字列("md5", "sha256" �
 
 ### def digest -> String
 
-オブジェクトの内部状態から算出された HMAC を
-バイナリ文字列で返します。
+オブジェクトの内部状態から算出された HMAC をバイナリ文字列で返します。
 
 ### def hexdigest -> String
 ### def to_s -> String

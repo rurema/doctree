@@ -3,9 +3,7 @@ library: _builtin
 ---
 # module Comparable
 
-比較演算を許すクラスのための Mix-in です。このモジュールをインクルー
-ドするクラスは、基本的な比較演算子である <=> 演算子を定義してい
-る必要があります。
+比較演算を許すクラスのための Mix-in です。このモジュールをインクルードするクラスは、基本的な比較演算子である <=> 演算子を定義している必要があります。
 
 self <=> other は
 - self が other より大きいなら正の整数
@@ -121,16 +119,14 @@ self を範囲内に収めます。
 
 min と max の2つの引数が渡された場合は次のようになります。
 self <=> min が負数を返したときは min を、
-self <=> max が正数を返したときは max を、
-それ以外の場合は self を返します。
+self <=> max が正数を返したときは max を、それ以外の場合は self を返します。
 
 min が nil の場合、min は self よりも小さい値として扱われます。
 max が nil の場合、max は self よりも大きい値として扱われます。
 
 range が1つ渡された場合は次のようになります。
 self <=> range.begin が負数を返したときは range.begin を、
-self <=> range.end が正数を返したときは range.end を、
-それ以外の場合は self を返します。
+self <=> range.end が正数を返したときは range.end を、それ以外の場合は self を返します。
 
 range.begin が nil の場合、range.begin は self よりも小さい値として扱われます。
 range.end が nil の場合、range.end は self よりも大きい値として扱われます。

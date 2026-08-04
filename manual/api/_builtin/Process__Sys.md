@@ -6,8 +6,7 @@ library: _builtin
 ユーザ ID・グループ ID を操作するシステムコールを直接呼ぶためのモジュールです。
 
 ポータブルにユーザ ID・グループ ID を操作するためのモジュール [c:Process::UID], [c:Process::GID] 
-も提供されています。Process::Sys と [c:Process::UID] や [c:Process::GID] を同時に使うことは
-非推奨です。
+も提供されています。Process::Sys と [c:Process::UID] や [c:Process::GID] を同時に使うことは非推奨です。
 
 ## Module Functions
 
@@ -149,7 +148,6 @@ library: _builtin
 
 システムコールの issetugid() を呼びます。
 
-プロセスが setuid もしくは setgid ビットを使って
-起動されている場合に真を返します。
+プロセスが setuid もしくは setgid ビットを使って起動されている場合に真を返します。
 
 - **raise** `NotImplementedError` -- システムコールが現在のプラットフォームで提供されていない場合に発生します。

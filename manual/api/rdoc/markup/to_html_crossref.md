@@ -5,8 +5,7 @@ require:
 ---
 RDoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
 
-[c:RDoc::Markup::ToHtml] を拡張して、ドキュメント内のメソッド名やクラ
-ス名を自動的にリンクにします。
+[c:RDoc::Markup::ToHtml] を拡張して、ドキュメント内のメソッド名やクラス名を自動的にリンクにします。
 
 # class RDoc::Markup::ToHtmlCrossref < RDoc::Markup::ToHtml
 

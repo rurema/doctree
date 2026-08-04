@@ -1,13 +1,11 @@
 ---
 type: library
 ---
-必要であれば、'.require_paths' というファイルを Gem ごとに作成するための
-モジュールを提供するためのライブラリです。
+必要であれば、'.require_paths' というファイルを Gem ごとに作成するためのモジュールを提供するためのライブラリです。
 
 # module Gem::RequirePathsBuilder
 
-必要であれば、'.require_paths' というファイルを Gem ごとに作成するための
-モジュールです。
+必要であれば、'.require_paths' というファイルを Gem ごとに作成するためのモジュールです。
 
 ## Public Instance Methods
 

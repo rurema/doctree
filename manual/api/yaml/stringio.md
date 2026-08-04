@@ -1,5 +1,4 @@
-[lib:stringio] ライブラリが使用できない環境を補助するためのサブライブ
-ラリです。
+[lib:stringio] ライブラリが使用できない環境を補助するためのサブライブラリです。
 
 ライブラリ内部で使用する [c:StringIO] と同名のクラスを定義します。
 
@@ -16,5 +15,4 @@
 - **raise** `YAML::Error` -- 引数が [c:IO]、[c:String] オブジェクトのサブクラ
                    スではなかった場合に発生します。
 
-[注意] [lib:stringio] を require した時に LoadError になる環境でしか
-使用できない事に注意してください。
+[注意] [lib:stringio] を require した時に LoadError になる環境でしか使用できない事に注意してください。

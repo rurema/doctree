@@ -1,8 +1,7 @@
 ### static VALUE boot_defclass(char *name, VALUE super)
 
 (まだ) メタクラスを持たないクラスを作成します。
-三つのメタオブジェクト Object, Module, Class を
-作成するのに使います。
+三つのメタオブジェクト Object, Module, Class を作成するのに使います。
 
 ### static VALUE convert_type(VALUE val, const char *tname, const char *method, int raise)
 
@@ -41,16 +40,13 @@ method の結果の型が type でなければ例外 TypeError が発生しま�
 
 ### VALUE rb_class_real(VALUE cl)
 
-特異クラスや化身クラス (T_ICLASS) を飛ばして cl の
-スーパークラスを辿り、Ruby レベルに露出してもよいクラスを返します。
+特異クラスや化身クラス (T_ICLASS) を飛ばして cl のスーパークラスを辿り、Ruby レベルに露出してもよいクラスを返します。
 
 ```c title="例"
 rb_class_real(RBASIC(klass)->super)
 ```
 
-rb_obj_class(obj) は、obj のクラスを返す汎用の関数(Object#type と
-同じ)だが、obj が Qtrue などでない RBasic 構造のものであることが
-わかっているなら
+rb_obj_class(obj) は、obj のクラスを返す汎用の関数(Object#type と同じ)だが、obj が Qtrue などでない RBasic 構造のものであることがわかっているなら
 
 ```c
 rb_class_real(RBASIC(obj)->klass)
@@ -67,20 +63,17 @@ rb_class_real(RBASIC(obj)->klass)
 オブジェクト val をクラス type のインスタンスに変換します。
 変換には、val.method の戻り値が使われます。
 
-val がもともと type クラスのインスタンスなら val を
-そのまま返します。
+val がもともと type クラスのインスタンスなら val をそのまま返します。
 
 ### double rb_cstr_to_dbl(const char *p, int badcheck)
 
 ### VALUE rb_eql(VALUE obj1, VALUE obj2)
 
-obj1.equal?(obj2) ならば Qtrue、
-そうでないならば Qfalse。
+obj1.equal?(obj2) ならば Qtrue、そうでないならば Qfalse。
 
 ### VALUE rb_equal(VALUE obj1, VALUE obj2)
 
-obj1 == obj2 ならば Qtrue、
-そうでないならば Qfalse。
+obj1 == obj2 ならば Qtrue、そうでないならば Qfalse。
 
 ### static VALUE rb_f_array(VALUE obj, VALUE arg)
 
@@ -208,8 +201,7 @@ obj がクラス klass のインスタンスならば真。
 
 ### VALUE rb_obj_is_kind_of(VALUE obj, VALUE klass)
 
-obj がクラス klass およびそのサブクラスの
-インスタンスのとき真。
+obj がクラス klass およびそのサブクラスのインスタンスのとき真。
 
 ### static VALUE rb_obj_methods(VALUE obj)
 

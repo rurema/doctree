@@ -3,8 +3,7 @@ library: zlib
 ---
 # class Zlib::GzipFile::Error < Zlib::Error
 
-gzip ファイルを処理している間にエラーが生じた時に発生する全ての例外の
-スーパークラスです。
+gzip ファイルを処理している間にエラーが生じた時に発生する全ての例外のスーパークラスです。
 
 ## Instance Methods
 
@@ -22,10 +21,8 @@ gzip ファイルにフッターが無い時に発生します。
 
 # class Zlib::GzipFile::CRCError < Zlib::GzipFile::Error
 
-フッターに記録されている CRC 値と実際に展開したデータの CRC 値が
-異なる時に発生します。
+フッターに記録されている CRC 値と実際に展開したデータの CRC 値が異なる時に発生します。
 
 # class Zlib::GzipFile::LengthError < Zlib::GzipFile::Error
 
-フッターに記録されているデータ長と実際に展開したデータの
-長さが異なる時に発生します。
+フッターに記録されているデータ長と実際に展開したデータの長さが異なる時に発生します。

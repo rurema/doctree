@@ -13,9 +13,7 @@ require:
 Ruby のコアクラスに JSON 形式の文字列に変換するメソッドや
 JSON 形式の文字列から Ruby のオブジェクトに変換するメソッドを定義します。
 
-json/add/core サブライブラリを require すると、例えば [c:Range] オブ
-ジェクトを JSON 形式の文字列にしたり、[c:Range] オブジェクトに戻す事
-ができます。
+json/add/core サブライブラリを require すると、例えば [c:Range] オブジェクトを JSON 形式の文字列にしたり、[c:Range] オブジェクトに戻す事ができます。
 
 ```ruby title="例"
 require 'json/add/core'

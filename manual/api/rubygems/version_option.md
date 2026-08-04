@@ -3,8 +3,7 @@ type: library
 require:
   - rubygems
 ---
-[c:Gem::Command] の --version, --platform オプションのためのモジュールを
-定義したライブラリです。
+[c:Gem::Command] の --version, --platform オプションのためのモジュールを定義したライブラリです。
 
 # module Gem::VersionOption
 

@@ -29,9 +29,7 @@ Pathname オブジェクトはパス名を表しており、ファイルやデ�
 
 Pathname オブジェクトは immutable であり、自身を破壊的に操作するメソッドはありません。
 
-Pathname のインスタンスメソッドには、ディレクトリのパスを返す [m:Pathname#dirname] のように、
-文字列操作だけで結果を返すものもあれば、ファイルの中身を読み出す [m:Pathname#read] のように
-ファイルシステムにアクセスするものもあります。
+Pathname のインスタンスメソッドには、ディレクトリのパスを返す [m:Pathname#dirname] のように、文字列操作だけで結果を返すものもあれば、ファイルの中身を読み出す [m:Pathname#read] のようにファイルシステムにアクセスするものもあります。
 
 Pathname オブジェクトの生成には、[m:Pathname.new] のほかに [m:Kernel?.Pathname] も使えます。
 
@@ -91,12 +89,9 @@ p Pathname.getwd #=> #<Pathname:/home/zzak/projects/ruby>
 ワイルドカードの展開を行なった結果を、
 Pathname オブジェクトの配列として返します。
 
-引数の意味は、[m:Dir.glob] と同じです。 flag の初期値である 0 は「何
-も指定しない」ことを意味します。
+引数の意味は、[m:Dir.glob] と同じです。 flag の初期値である 0 は「何も指定しない」ことを意味します。
 
-ブロックが与えられたときは、ワイルドカードにマッチした Pathname オブジェ
-クトを1つずつ引数としてそのブロックに与えて実行させます。この場合、値と
-しては nil を返します。
+ブロックが与えられたときは、ワイルドカードにマッチした Pathname オブジェクトを1つずつ引数としてそのブロックに与えて実行させます。この場合、値としては nil を返します。
 
 - **param** `pattern` -- ワイルドカードパターンです
 - **param** `flags` --   ワイルドカードのマッチ時のふるまいを変化させるフラグを指定します
@@ -118,8 +113,7 @@ p Pathname.glob("lib/i*.rb") # => [#<Pathname:lib/ipaddr.rb>, #<Pathname:lib/irb
 パス名を比較し、 other と同じなら真を返します。大文字小文字は区別されます。
 other は Pathname オブジェクトでなければなりません。
 
-パス名の比較は単純にパス文字列の比較によって行われるので、論理的に
-同じパスでもパス文字列が違えば異なると判断されます。
+パス名の比較は単純にパス文字列の比較によって行われるので、論理的に同じパスでもパス文字列が違えば異なると判断されます。
 
 - **param** `other` -- 比較対象の Pathname オブジェクトを指定します。
 
@@ -137,12 +131,10 @@ p Pathname.new("foo/../foo/bar") == Pathname.new("foo/bar")
 
 ### def <=>(other) -> -1 | 0 | 1 | nil
 
-パス名を比較します。other と同じなら 0 を、ASCII順で self が大きい場合
-は正、other が大きい場合は負を返します。大文字小文字は区別されます。
+パス名を比較します。other と同じなら 0 を、ASCII順で self が大きい場合は正、other が大きい場合は負を返します。大文字小文字は区別されます。
 other は Pathname オブジェクトでなければなりません。
 
-パス名の比較は単純にパス文字列の比較によって行われるので、論理的に
-同じパスでもパス文字列が違えば異なると判断されます。
+パス名の比較は単純にパス文字列の比較によって行われるので、論理的に同じパスでもパス文字列が違えば異なると判断されます。
 
 - **param** `other` -- 比較対象の Pathname オブジェクトを指定します。
 
@@ -178,8 +170,7 @@ File.open(path)
 
 余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返します。
 
-cleanpath は、実際にファイルシステムを参照することなく、文字列操作
-だけで処理を行います。
+cleanpath は、実際にファイルシステムを参照することなく、文字列操作だけで処理を行います。
 
 - **param** `consider_symlink` -- 真ならパス要素にシンボリックリンクがあった場合
                         にも問題ないように .. を残します。
@@ -241,8 +232,7 @@ p path.realpath
 
 ### def realdirpath(basedir = nil) -> Pathname
 
-[m:Pathname#realpath] とほぼ同じで、最後のコンポーネントは実際に
-存在しなくてもエラーになりません。
+[m:Pathname#realpath] とほぼ同じで、最後のコンポーネントは実際に存在しなくてもエラーになりません。
 
 - **param** `basedir` -- ベースディレクトリを指定します。省略するとカレントディレクトリになります。
 
@@ -296,8 +286,7 @@ path.mountpoint? # => false
 
 ### def root? -> bool
 
-self がルートディレクトリであれば真を返します。判断は文字列操作によっ
-て行われ、ファイルシステムはアクセスされません。
+self がルートディレクトリであれば真を返します。判断は文字列操作によって行われ、ファイルシステムはアクセスされません。
 
 ```ruby title="例"
 require 'pathname'
@@ -353,8 +342,7 @@ Pathname.new("/foo/../bar").each_filename {|v| p v}
 パス名を連結します。つまり、other を self からの相対パスとした新しい
 Pathname オブジェクトを生成して返します。
 
-other が絶対パスなら単に other と同じ内容の Pathname オブジェクトが返さ
-れます。
+other が絶対パスなら単に other と同じ内容の Pathname オブジェクトが返されます。
 
 ```ruby title="例"
 require 'pathname'
@@ -420,8 +408,7 @@ Pathname("/usr/local").each_child(false) {|f| p f }
 base_directory から self への相対パスを求め、その内容の新しい Pathname
 オブジェクトを生成して返します。
 
-パス名の解決は文字列操作によって行われ、ファイルシステムをアクセス
-しません。
+パス名の解決は文字列操作によって行われ、ファイルシステムをアクセスしません。
 
 self が相対パスなら base_directory も相対パス、self が絶対パスなら
 base_directory も絶対パスでなければなりません。
@@ -768,8 +755,7 @@ File.utime(atime, mtime, self.to_s) と同じです。
 
 File.lutime(atime, mtime, self.to_s) と同じです。
 
-[m:Pathname#utime] と違い、シンボリックリンクそのものの時刻を変更します
-（リンク先をたどりません）。
+[m:Pathname#utime] と違い、シンボリックリンクそのものの時刻を変更します（リンク先をたどりません）。
 
 - **param** `atime` -- 最終アクセス時刻を [c:Time] か、起算時からの経過秒数を数値で指定します。
 
@@ -1175,8 +1161,7 @@ Dir.open(self.to_s, &block) と同じです。
 ### def find(ignore_error: true)                  -> Enumerator
 ### def find(ignore_error: true) {|pathname| ...} -> nil
 
-self 配下のすべてのファイルやディレクトリを
-一つずつ引数 pathname に渡してブロックを実行します。
+self 配下のすべてのファイルやディレクトリを一つずつ引数 pathname に渡してブロックを実行します。
 
 ```text
 require 'find'
@@ -1224,8 +1209,7 @@ pathname.exist? # => false
 ### def ascend {|pathname| ... } -> nil
 ### def ascend                   -> Enumerator
 
-self のパス名から親方向に辿っていったときの各パス名を新しい Pathname オ
-ブジェクトとして生成し、ブロックへの引数として渡して実行します。
+self のパス名から親方向に辿っていったときの各パス名を新しい Pathname オブジェクトとして生成し、ブロックへの引数として渡して実行します。
 ブロックを省略した場合は [c:Enumerator] を返します。
 
 ```ruby title="例"
@@ -1251,8 +1235,7 @@ Pathname.new('path/to/some/file.rb').ascend {|v| p v}
 ### def descend                   -> Enumerator
 
 self のパス名の親から子供へと辿っていったときの各パス名を新しい
-Pathname オブジェクトとして生成し、ブロックへの引数として渡して実行しま
-す。
+Pathname オブジェクトとして生成し、ブロックへの引数として渡して実行します。
 ブロックを省略した場合は [c:Enumerator] を返します。
 
 ```ruby title="例"
@@ -1277,8 +1260,7 @@ Pathname.new('path/to/some/file.rb').descend {|v| p v}
 ### def sub(pattern, replace)  -> Pathname
 ### def sub(pattern) {|matched| ... } -> Pathname
 
-self を表現するパス文字列に対して sub メソッドを呼び出し、その結果を内
-容とする新しい Pathname オブジェクトを生成し、返します。
+self を表現するパス文字列に対して sub メソッドを呼び出し、その結果を内容とする新しい Pathname オブジェクトを生成し、返します。
 
 - **param** `pattern` -- 置き換える文字列のパターンを指定します。
 
@@ -1295,8 +1277,7 @@ path1.sub('perl', 'ruby') #=> #<Pathname:/usr/bin/ruby>
 
 ### def to_path -> String
 
-File.open などの引数に渡す際に呼ばれるメソッドです。 Pathname オブジェ
-クトにおいては、 to_s と同じです。
+File.open などの引数に渡す際に呼ばれるメソッドです。 Pathname オブジェクトにおいては、 to_s と同じです。
 
 #%#noexample
 
@@ -1327,12 +1308,9 @@ p Pathname('/home/user/test.tar.gz').sub_ext('.xz') # => #<Pathname:/home/user/t
 ワイルドカードの展開を行なった結果を、
 Pathname オブジェクトの配列として返します。
 
-引数の意味は、[m:Dir.glob] と同じです。 flag の初期値である 0 は「何
-も指定しない」ことを意味します。
+引数の意味は、[m:Dir.glob] と同じです。 flag の初期値である 0 は「何も指定しない」ことを意味します。
 
-ブロックが与えられたときは、ワイルドカードにマッチした Pathname オブジェ
-クトを1つずつ引数としてそのブロックに与えて実行させます。この場合、値と
-しては nil を返します。
+ブロックが与えられたときは、ワイルドカードにマッチした Pathname オブジェクトを1つずつ引数としてそのブロックに与えて実行させます。この場合、値としては nil を返します。
 
 このメソッドは内部で [m:Dir.glob] の base キーワード引数を使っています。
 

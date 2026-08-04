@@ -7,8 +7,7 @@ include:
 
 すべての URI クラスの基底クラスです。
 
-hash と eql? が再定義されているため、[c:Hash] のキーとして
-利用できます。
+hash と eql? が再定義されているため、[c:Hash] のキーとして利用できます。
 
 ## Class Methods
 
@@ -49,8 +48,7 @@ URI::Generic クラスでは false です。
 ### def URI::Generic.build2(hash)    -> URI::Generic
 
 URI::Generic.build と同じですが、例外 URI::InvalidComponentError
-が発生した場合に、引数の各要素を URI.escape して再度 build を試み
-ます。
+が発生した場合に、引数の各要素を URI.escape して再度 build を試みます。
 
 - **param** `ary` -- 構成要素を表す文字列の配列を与えます。要素は以下の順です。
   ```text
@@ -229,12 +227,9 @@ userinfo が「username:password」の形式である場合は、username 部を
 
 ### def hostname -> String | nil
 
-自身の hostname を文字列で返します。また、[m:URI::Generic#host] が設
-定されていない場合は nil を返します。
+自身の hostname を文字列で返します。また、[m:URI::Generic#host] が設定されていない場合は nil を返します。
 
-このメソッドは [m:URI::Generic#host] に IPv6 アドレスが設定されていた
-場合はブラケットを削除した文字列を返しますがそれ以外は同じ文字列を返し
-ます。
+このメソッドは [m:URI::Generic#host] に IPv6 アドレスが設定されていた場合はブラケットを削除した文字列を返しますがそれ以外は同じ文字列を返します。
 
 ```ruby
 require 'uri'
@@ -248,8 +243,7 @@ p u.host          # => "[::1]"
 自身の hostname を設定します。
 
 このメソッドは引数に IPv6 アドレスを設定した場合は
-[m:URI::Generic#host] にブラケットを追加した文字列を設定しますがそれ
-以外は同じ処理を行います。
+[m:URI::Generic#host] にブラケットを追加した文字列を設定しますがそれ以外は同じ処理を行います。
 
 ```ruby
 require 'uri'
@@ -451,8 +445,7 @@ p URI.parse('http://example.com/').route_to('http://example.com/foo/bar.html')
 ### def normalize     -> URI::Generic
 ### def normalize!    -> String | nil
 
-URI オブジェクトを正規化して返します。ホスト名を小文字にし、パスと
-構成要素がなければ '/' をセットします。
+URI オブジェクトを正規化して返します。ホスト名を小文字にし、パスと構成要素がなければ '/' をセットします。
 
 ```ruby title="例"
 require 'uri'
@@ -472,8 +465,7 @@ p URI.parse('http://example.com/').to_s #=> "http://example.com/"
 
 ### def ==(uri)    -> bool
 
-引数に指定した URI (文字列またはURIオブジェクト)との一致判定を行い
-ます。URI は正規化して比較されます。
+引数に指定した URI (文字列またはURIオブジェクト)との一致判定を行います。URI は正規化して比較されます。
 
 - **param** `uri` -- 比較したい URI を URI オブジェクトで指定します。
 
@@ -520,16 +512,13 @@ selfのパーサを返します。未定義であった場合は URI::DEFAULT_PA
 
 プロキシ URI を返します。
 
-プロキシ URI は http_proxy, ftp_proxy, no_proxy などの環境変数から取得
-します。適切なプロキシが見つからない場合は nil を返します。
+プロキシ URI は http_proxy, ftp_proxy, no_proxy などの環境変数から取得します。適切なプロキシが見つからない場合は nil を返します。
 
-環境変数は大文字にしたもの(HTTP_PROXY, FTP_PROXY, NO_PROXYなど)も調べら
-れる事に注意してください。
+環境変数は大文字にしたもの(HTTP_PROXY, FTP_PROXY, NO_PROXYなど)も調べられる事に注意してください。
 
 ただし、CGI環境下では http_proxy と HTTP_PROXY は特別扱いされます。
 HTTP_PROXY はヘッダ Proxy: に設定されうるためです。そのため、
-HTTP_PROXY(環境変数が大文字小文字を区別しない場合は http_proxy も) は使
-われません。代わりに CGI_HTTP_PROXY が使われます。
+HTTP_PROXY(環境変数が大文字小文字を区別しない場合は http_proxy も) は使われません。代わりに CGI_HTTP_PROXY が使われます。
 
 - **param** `env` -- 環境変数 [c:ENV] の代わりに参照するオブジェクトを指定します。
 

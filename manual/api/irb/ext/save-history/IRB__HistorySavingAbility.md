@@ -5,8 +5,7 @@ include:
 ---
 # module IRB::HistorySavingAbility
 
-[c:IRB::HistorySavingAbility] を extend したオブジェクトに irb のヒス
-トリの読み込み、保存の機能を提供するモジュールです。
+[c:IRB::HistorySavingAbility] を extend したオブジェクトに irb のヒストリの読み込み、保存の機能を提供するモジュールです。
 
 ## Class Methods
 

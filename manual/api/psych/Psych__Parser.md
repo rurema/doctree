@@ -5,12 +5,9 @@ library: psych
 
 YAML のパーサ。
 
-このクラスは YAML ドキュメントをパースし、コンストラクタに渡された
-ハンドラにイベントを通知(呼び出し)します。
-このイベントを使って YAML の AST を構築したり YAML ドキュメントを
-別のフォーマット変換したりします。
-[c:Psych::Emitter] を使うとパースしたドキュメントを元通りに出力
-することもできます。
+このクラスは YAML ドキュメントをパースし、コンストラクタに渡されたハンドラにイベントを通知(呼び出し)します。
+このイベントを使って YAML の AST を構築したり YAML ドキュメントを別のフォーマット変換したりします。
+[c:Psych::Emitter] を使うとパースしたドキュメントを元通りに出力することもできます。
 
 [c:Psych::Parser] が生成するイベントは [c:Psych::Handler] 
 を見てください。
@@ -30,8 +27,7 @@ parser.parse(yaml_document)
 ```
 
 次の例は [c:Psych::Emitter] にパースの結果を戻しています。
-STDIN からの入力をパース→YAMLフォーマットで STDERR に出力
-という流れになっています。
+STDIN からの入力をパース→YAMLフォーマットで STDERR に出力という流れになっています。
 
 ```ruby
 parser = Psych::Parser.new(Psych::Emitter.new($stderr))
@@ -80,15 +76,13 @@ handler で YAML のイベントを処理するハンドラを指定します。
 
 ### def parse(yaml) -> self
 
-YAML ドキュメントをパースし、イベントハンドラに
-イベントを逐次通知します。
+YAML ドキュメントをパースし、イベントハンドラにイベントを逐次通知します。
 
 - **SEE** [m:Psych::Parser.new], [c:Psych::Handler], [m:Psych::Parser#handler]
 
 ### def mark -> Psych::Parser::Mark
 
-パーサが現在読み込んでいる入力上の位置を [c:Psych::Parser::Mark] オブジェクト
-で返します。
+パーサが現在読み込んでいる入力上の位置を [c:Psych::Parser::Mark] オブジェクトで返します。
 
 #%# This function have no effect
 #%# --- external_encoding=(encoding)

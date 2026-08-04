@@ -4,8 +4,7 @@ require:
   - digest
 ---
 FIPS PUB 180-2に記述されているNIST (the US' National Institute of
-Standards and Technology) の以下のアルゴリズムを実装するクラスを提供す
-るライブラリです。
+Standards and Technology) の以下のアルゴリズムを実装するクラスを提供するライブラリです。
 
   - SHA-256 Secure Hash Algorithm
   - SHA-384 Secure Hash Algorithm
@@ -14,27 +13,23 @@ Standards and Technology) の以下のアルゴリズムを実装するクラス
 # class Digest::SHA256 < Digest::Base
 
 FIPS PUB 180-2に記述されているNIST (the US' National Institute of
-Standards and Technology) の SHA-256 Secure Hash Algorithmを
-実装するクラスです。
+Standards and Technology) の SHA-256 Secure Hash Algorithmを実装するクラスです。
 
 # class Digest::SHA384 < Digest::Base
 
 FIPS PUB 180-2に記述されているNIST (the US' National Institute of
-Standards and Technology) の SHA-384 Secure Hash Algorithmを
-実装するクラスです。
+Standards and Technology) の SHA-384 Secure Hash Algorithmを実装するクラスです。
 
 # class Digest::SHA512 < Digest::Base
 
 FIPS PUB 180-2に記述されているNIST (the US' National Institute of
-Standards and Technology) の SHA-512 Secure Hash Algorithmを
-実装するクラスです。
+Standards and Technology) の SHA-512 Secure Hash Algorithmを実装するクラスです。
 
 # class Digest::SHA2 < Digest::Class
 ## Class Methods
 ### def Digest::SHA2.new(bitlen = 256) -> Digest::SHA2
 
-与えられた bitlen に対応する SHA2 ハッシュを生成するためのオブジェクト
-を内部で設定して自身を初期化します。
+与えられた bitlen に対応する SHA2 ハッシュを生成するためのオブジェクトを内部で設定して自身を初期化します。
 
 - **param** `bitlen` -- ハッシュの長さを指定します。256, 384, 512 が指定可能です。
 

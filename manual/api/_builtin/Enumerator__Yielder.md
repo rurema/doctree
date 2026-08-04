@@ -13,8 +13,7 @@ library: _builtin
 [m:Enumerator.new] で使うメソッドです。
 
 生成された Enumerator オブジェクトの each メソッドを呼ぶと
-Enumerator::Yielder オブジェクトが渡されたブロックが実行され、
-ブロック内の << が呼ばれるたびに each に渡されたブロックが
+Enumerator::Yielder オブジェクトが渡されたブロックが実行され、ブロック内の << が呼ばれるたびに each に渡されたブロックが
 << に渡された値とともに繰り返されます。
 
 ```ruby title="例"
@@ -37,8 +36,7 @@ end
 [m:Enumerator.new] で使うメソッドです。
 
 引数を [m:Enumerator::Yielder#yield] に渡す [c:Proc] を返します。
-これは Enumerator::Yielder オブジェクトを他のメソッドにブロック引数と
-して直接渡すために使えます。
+これは Enumerator::Yielder オブジェクトを他のメソッドにブロック引数として直接渡すために使えます。
 
 ```ruby title="例"
 text = <<-END
@@ -63,9 +61,7 @@ end
 [m:Enumerator.new] で使うメソッドです。
 
 生成された Enumerator オブジェクトの each メソッドを呼ぶと
-Enumerator::Yielder オブジェクトが渡されたブロックが実行され、
-ブロック内の yield メソッドが呼ばれるたびに each に渡された
-ブロックが yield メソッドに渡された値とともに繰り返されます。
+Enumerator::Yielder オブジェクトが渡されたブロックが実行され、ブロック内の yield メソッドが呼ばれるたびに each に渡されたブロックが yield メソッドに渡された値とともに繰り返されます。
 
 ```ruby title="例"
 enum = Enumerator.new do |y|

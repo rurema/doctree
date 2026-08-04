@@ -2,8 +2,7 @@
 type: library
 category: CommandLine
 ---
-getoptlong は、GNU の getopt_long() とまったく同じ方式でコマンド
-行オプションの解析を行う Ruby のライブラリです。
+getoptlong は、GNU の getopt_long() とまったく同じ方式でコマンド行オプションの解析を行う Ruby のライブラリです。
 
 #%# Author: 笠原 基之 (m-kasahr@sra.co.jp)
 #%# 
@@ -11,9 +10,7 @@ getoptlong は、GNU の getopt_long() とまったく同じ方式でコマン�
 
 ### GNU getopt_long() とは?
 
-GNU getopt_long() は、コマンド行オプションの解析を行う C の関数です。多
-くの GNU ソフトウェアがこの関数を使用しています。GNU getopt_long() そし
-て getoptlong には、以下のような特徴があります。
+GNU getopt_long() は、コマンド行オプションの解析を行う C の関数です。多くの GNU ソフトウェアがこの関数を使用しています。GNU getopt_long() そして getoptlong には、以下のような特徴があります。
 
 - 伝統的な一文字オプションに加えて、長いオプションに対応しています。長
    いオプションは `-` の代わりに `--` で始まります (例: `--version`)。
@@ -25,9 +22,7 @@ GNU getopt_long() は、コマンド行オプションの解析を行う C の�
 ### 順序形式 (ordering)
 
 GNU getopt_long() および getoptlong.rb には、`REQUIRE_ORDER`,
-`PERMUTE`, `RETURN_IN_ORDER` という、3 つの「順序形式」が用
-意されています。それぞれの処理形式は、非オプション引数についての扱い方
-が異なります。
+`PERMUTE`, `RETURN_IN_ORDER` という、3 つの「順序形式」が用意されています。それぞれの処理形式は、非オプション引数についての扱い方が異なります。
 
 - REQUIRE_ORDER: 
     非オプション引数の後に来たオプションは、オプションとして認識しません。
@@ -45,13 +40,11 @@ GNU getopt_long() および getoptlong.rb には、`REQUIRE_ORDER`,
 
 ### POSIXLY_CORRECT
 
-環境変数 POSIXLY_CORRECT が定義されていると、処理形式に `PERMUTE` を
-選択していても、REQUIRE_ORDER 形式で処理されます。
+環境変数 POSIXLY_CORRECT が定義されていると、処理形式に `PERMUTE` を選択していても、REQUIRE_ORDER 形式で処理されます。
 
 ### 使い方
 
-あなたの作ったプログラムのヘルプメッセージが、次のようになっているもの
-とします。
+あなたの作ったプログラムのヘルプメッセージが、次のようになっているものとします。
 
 ```text
 Usage: command [option...]
@@ -62,8 +55,7 @@ Options:
   --version                   Output version number, then exit
 ```
 
-まず、`getoptlong.rb` を Ruby で書かれたあなたのプログラムに取り込みま
-す。
+まず、`getoptlong.rb` を Ruby で書かれたあなたのプログラムに取り込みます。
 
 ```ruby
 require 'getoptlong'
@@ -77,8 +69,7 @@ getoptlong はクラスを提供します。
 parser = GetoptLong.new
 ```
 
-そして、set_options メソッドを呼び出し、この parser にオプションを
-セットします。
+そして、set_options メソッドを呼び出し、この parser にオプションをセットします。
 
 ```ruby
 parser.set_options(
@@ -89,8 +80,7 @@ parser.set_options(
 ```
 
 getopts モジュールが行っているように、与えられたオプションを 
-`$OPT_...` という定数に入れたいときは、次のコードをあなたのプログラム
-に足して下さい。
+`$OPT_...` という定数に入れたいときは、次のコードをあなたのプログラムに足して下さい。
 
 ```ruby
 begin
@@ -102,13 +92,9 @@ rescue
 end
 ```
 
-each_option メソッドは、常にオプション名を「正式名 (canonical name)」
-の形で返してきます。「正式名」とは、`set_options` へ渡した個々の引数に
-おいて、一番左にあるオプション名のことです。たとえば、`--quiet` は、
-`-q` と `--silence` の正式名になります。したがって、この節の例で定義さ
-れる可能性があるのは、`$OPT_MAX_SIZE`, `$OPT_QUIET`, `$OPT_HELP`,
-`$OPT_VERSION` です。後方が省略されたオプションが与えられたときも、対
-応する正式名に変換されます。
+each_option メソッドは、常にオプション名を「正式名 (canonical name)」の形で返してきます。「正式名」とは、`set_options` へ渡した個々の引数において、一番左にあるオプション名のことです。たとえば、`--quiet` は、
+`-q` と `--silence` の正式名になります。したがって、この節の例で定義される可能性があるのは、`$OPT_MAX_SIZE`, `$OPT_QUIET`, `$OPT_HELP`,
+`$OPT_VERSION` です。後方が省略されたオプションが与えられたときも、対応する正式名に変換されます。
 
 ### 順序形式の設定
 
@@ -130,19 +116,13 @@ parser.ordering = GetoptLong::REQUIRE_ORDER
 - 与えられたオプションには引数が伴っているが、そのオプションは引数をと
    らない
 
-エラーが発生した場合、「静粛 (quiet)」フラグが設定されていなければ、標
-準エラー出力にエラーメッセージが出力され、例外が発生します。例外には、
-エラーメッセージも渡されます。
+エラーが発生した場合、「静粛 (quiet)」フラグが設定されていなければ、標準エラー出力にエラーメッセージが出力され、例外が発生します。例外には、エラーメッセージも渡されます。
 
-一旦エラーが起きてしまうと、続きのオプションを得ようとする試みはすべて
-失敗します。`GetoptLong` には、エラーを解除する方法はありません。言い
-換えると、エラーが起きたら、オプションの処理は諦めなければなりません。
+一旦エラーが起きてしまうと、続きのオプションを得ようとする試みはすべて失敗します。`GetoptLong` には、エラーを解除する方法はありません。言い換えると、エラーが起きたら、オプションの処理は諦めなければなりません。
 
 ### 静粛フラグ
 
-エラーが発生すると、デフォルトではエラーメッセージが標準エラー出力に出
-力されます。「静粛 (quiet)」フラグを設定すると、エラーメッセージの出力
-は抑制されます。
+エラーが発生すると、デフォルトではエラーメッセージが標準エラー出力に出力されます。「静粛 (quiet)」フラグを設定すると、エラーメッセージの出力は抑制されます。
 
 ```ruby
 parser.quiet = true
@@ -155,8 +135,7 @@ GNU getopt_long() を Ruby で模したクラスです。
 ## Class Methods
 ### def GetoptLong.new(*arguments)
 
-GetoptLong のオブジェクトを生成します。引数が与えられ
-たときは、それを [m:GetoptLong#set_options] メソッドに渡します。
+GetoptLong のオブジェクトを生成します。引数が与えられたときは、それを [m:GetoptLong#set_options] メソッドに渡します。
 
 - **param** `arguments` -- オプションを定義するための配列の配列を指定します。
 
@@ -167,36 +146,27 @@ GetoptLong のオブジェクトを生成します。引数が与えられ
 ### def each {|optname, optarg|...}
 ### def each_option {|optname, optarg|...}
 
-get メソッドのイテレータ版です。オプションとその引数の取得を
-繰り返し行います。
+get メソッドのイテレータ版です。オプションとその引数の取得を繰り返し行います。
 
 - **SEE** [m:GetoptLong#get]
 
 ### def get        -> [String, String]
 ### def get_option -> [String, String]
 
-ARGV から、次のオプションの名前と、もしあればその引数の組を取
-得します。メソッドは 2 つの値を返し、1 つ目の値がオプション名
+ARGV から、次のオプションの名前と、もしあればその引数の組を取得します。メソッドは 2 つの値を返し、1 つ目の値がオプション名
 (例: --max-size) で、2 つ目がオプションの引数 (例: 20K) です。
 
-get と get_option は常にオプション名を正式名
-で返します。与えられたオプションが引数を取らないときは、
-空の文字列 ('') が optarg にセットされます。オプションが
-ARGV に残っていないときは、optname, optarg ともに nil に
-セットされます。メソッドから戻る際に、取得したオプションと引数
-は自動的に ARGV から取り除かれます。
+get と get_option は常にオプション名を正式名で返します。与えられたオプションが引数を取らないときは、空の文字列 ('') が optarg にセットされます。オプションが
+ARGV に残っていないときは、optname, optarg ともに nil にセットされます。メソッドから戻る際に、取得したオプションと引数は自動的に ARGV から取り除かれます。
 
-与えられたコマンド行引数があなたのプログラムのオプションの設定
-に合わない場合は、エラーとなって、以下のいずれかの例外が発生し
-ます。
+与えられたコマンド行引数があなたのプログラムのオプションの設定に合わない場合は、エラーとなって、以下のいずれかの例外が発生します。
 
 - [c:GetoptLong::AmbiguousOption]
 - [c:GetoptLong::InvalidOption]
 - [c:GetoptLong::MissingArgument]
 - [c:GetoptLong::NeedlessArgument]
 
-加えて、静粛 (quiet) フラグが有効になっていない限り、エラーメッ
-セージを標準エラー出力に出力します。
+加えて、静粛 (quiet) フラグが有効になっていない限り、エラーメッセージを標準エラー出力に出力します。
 
 ```ruby title="例"
 optname, optarg = option_parser.get
@@ -210,20 +180,17 @@ optname, optarg = option_parser.get
 
 ### def error_message -> String | nil
 
-現在のエラーのエラーメッセージを返します。エラーが発生していな
-ければ、nil を返します。
+現在のエラーのエラーメッセージを返します。エラーが発生していなければ、nil を返します。
 
 ### def ordering=(ordering)
 
 順序形式を設定します。
 
 環境変数 POSIXLY_CORRECT が定義されていると、引数に 
-[m:GetoptLong::PERMUTE] を与えてこのメソッドを呼び出しても、実際のところの順
-序形式は [m:GetoptLong::REQUIRE_ORDER] に設定されます。
+[m:GetoptLong::PERMUTE] を与えてこのメソッドを呼び出しても、実際のところの順序形式は [m:GetoptLong::REQUIRE_ORDER] に設定されます。
 
 環境変数 POSIXLY_CORRECT が定義されていない限り、[m:GetoptLong::PERMUTE]
-が初期値です。定義されていれば、[m:GetoptLong::REQUIRE_ORDER] が初期値になり
-ます。
+が初期値です。定義されていれば、[m:GetoptLong::REQUIRE_ORDER] が初期値になります。
 
 - **param** `ordering` -- [m:GetoptLong::REQUIRE_ORDER], [m:GetoptLong::PERMUTE],
                 [m:GetoptLong::RETURN_IN_ORDER] のいずれかを指定します。
@@ -245,8 +212,7 @@ flag が真なら、静粛 (quiet) モードが有効になります。
 
 静粛モードが有効になっていると、レシーバのオブジェクトは、
 [m:GetoptLong#get], [m:GetoptLong#get_option],
-[m:GetoptLong#each], [m:GetoptLong#each_option] メソッドでエラーが
-発生しても、エラーメッセージを出力しません。初期値は、偽になっています。
+[m:GetoptLong#each], [m:GetoptLong#each_option] メソッドでエラーが発生しても、エラーメッセージを出力しません。初期値は、偽になっています。
 
 - **param** `flag` -- 真または偽を指定します。
 
@@ -258,19 +224,14 @@ flag が真なら、静粛 (quiet) モードが有効になります。
 ### def set_options(*arguments) -> self
 
 あなたのプログラムで、認識させたいオプションをセットします。
-個々のオプションは、オプション名と引数のフラグからなる配列でな
-ければいけません。
+個々のオプションは、オプション名と引数のフラグからなる配列でなければいけません。
 
-配列中のオプション名は、一文字オプション (例: -d) か長いオプ
-ション (例: --debug) を表した文字列のいずれかでなければなり
-ません。配列の中の一番左端のオプション名が、オプションの正式名
-になります。配列中の引数のフラグは、[m:GetoptLong::NO_ARGUMENT],
+配列中のオプション名は、一文字オプション (例: -d) か長いオプション (例: --debug) を表した文字列のいずれかでなければなりません。配列の中の一番左端のオプション名が、オプションの正式名になります。配列中の引数のフラグは、[m:GetoptLong::NO_ARGUMENT],
 [m:GetoptLong::REQUIRED_ARGUMENT], [m:GetoptLong::OPTIONAL_ARGUMENT]
 のいずれかでなくてはなりません。
 
 オプションを設定できるのは、get, get_option, each,
-each_option メソッドを呼び出す前だけです。これらのメソッドを
-呼び出した後でオプションを設定しようとすると、RuntimeError
+each_option メソッドを呼び出す前だけです。これらのメソッドを呼び出した後でオプションを設定しようとすると、RuntimeError
 例外が発生します。
 
 - **param** `arguments` -- オプションを表す配列を指定します。
@@ -283,8 +244,7 @@ parser.set_options(['-d', '--debug', GetoptLong::NO_ARGUMENT],
                    ['--help',        GetoptLong::NO_ARGUMENT])
 ```
 
-オプション名と引数のフラグの順番に決まりはないので、次のような
-形式でも構いません。
+オプション名と引数のフラグの順番に決まりはないので、次のような形式でも構いません。
 
 ```ruby
 parser.set_options([GetoptLong::NO_ARGUMENT, '-d', '--debug'],
@@ -294,8 +254,7 @@ parser.set_options([GetoptLong::NO_ARGUMENT, '-d', '--debug'],
 
 ### def terminate -> self
 
-オプションの処理を、強制的に終了させます。ただし、エラーが起き
-ている状態でこのメソッドを起動しても、終了させることはできません。
+オプションの処理を、強制的に終了させます。ただし、エラーが起きている状態でこのメソッドを起動しても、終了させることはできません。
 
 すでにオプションの処理が終了しているときは、このメソッドは何も行いません。
 
@@ -303,8 +262,7 @@ parser.set_options([GetoptLong::NO_ARGUMENT, '-d', '--debug'],
 
 ### def terminated? -> true | false
 
-エラーが起きずにオプションの処理が終了しているときは真が
-返ります。それ以外のときは、偽が返ります。
+エラーが起きずにオプションの処理が終了しているときは真が返ります。それ以外のときは、偽が返ります。
 
 ## Protected Instance Methods
 
@@ -334,15 +292,11 @@ parser.set_options([GetoptLong::NO_ARGUMENT, '-d', '--debug'],
 
 ### const PERMUTE -> 1
 
-コマンド行引数の内容を、走査した順に入れ替え、最終的にはすべての非オプ
-ションを末尾に寄せます。この方式では、オプションはどの順序で書いても良
-いことになります。これは、たとえプログラム側でそうなることを期待しなく
-ても、そうなります。この方式がデフォルトです。
+コマンド行引数の内容を、走査した順に入れ替え、最終的にはすべての非オプションを末尾に寄せます。この方式では、オプションはどの順序で書いても良いことになります。これは、たとえプログラム側でそうなることを期待しなくても、そうなります。この方式がデフォルトです。
 
 ### const RETURN_IN_ORDER -> 2
 
-オプションと他の非オプション引数はどんな順序で並んでも良いが、お互いの
-順序は保持したままにしたいというプログラムのための形式です。
+オプションと他の非オプション引数はどんな順序で並んでも良いが、お互いの順序は保持したままにしたいというプログラムのための形式です。
 
 ### const ARGUMENT_FLAGS -> Array
 
@@ -381,8 +335,7 @@ parser.set_options([GetoptLong::NO_ARGUMENT, '-d', '--debug'],
 
 # class GetoptLong::AmbiguousOption < GetoptLong::Error
 
-与えられたオプションは名前の後方が省略されていると思われるが、一意に決まらない
-場合に発生する例外です。
+与えられたオプションは名前の後方が省略されていると思われるが、一意に決まらない場合に発生する例外です。
 
 # class GetoptLong::InvalidOption < GetoptLong::Error
 
@@ -394,5 +347,4 @@ parser.set_options([GetoptLong::NO_ARGUMENT, '-d', '--debug'],
 
 # class GetoptLong::NeedlessArgument < GetoptLong::Error
 
-与えられたオプションは引数を伴っているが、そのオプションが
-引数をとらない場合に発生する例外です。
+与えられたオプションは引数を伴っているが、そのオプションが引数をとらない場合に発生する例外です。

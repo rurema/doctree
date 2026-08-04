@@ -2,8 +2,7 @@
 require:
   - date
 ---
-Ruby の組み込みクラスのいくつかを YAML に変換するためのサブライブラリで
-す。
+Ruby の組み込みクラスのいくつかを YAML に変換するためのサブライブラリです。
 
 # reopen Class
 
@@ -337,8 +336,7 @@ print [1, 2, 3].to_yaml
 
 ### def is_complex_yaml? -> Integer | nil
 
-自身が複数行になるキーを含むような YAML である場合に真になる値を返しま
-す。
+自身が複数行になるキーを含むような YAML である場合に真になる値を返します。
 
 例: ["Detroit Tigers", "Chicago cubs"] をキーとする場合
 
@@ -359,8 +357,7 @@ p YAML.load(s) # => {["Detroit Tigers", "Chicago cubs"]=>[#<Date: 4904227/2,0,22
 
 自身が ASCII 文字以外の文字列を含む場合に true を返します。
 
-この値が true になる場合、self.to_yaml した結果、"!binary ..." というよ
-うな文字列を返します。
+この値が true になる場合、self.to_yaml した結果、"!binary ..." というような文字列を返します。
 
 ```text
 require 'yaml'

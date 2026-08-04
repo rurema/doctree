@@ -3,8 +3,7 @@ library: socket
 ---
 # class BasicSocket < IO
 
-ソケットを表す抽象クラスです。具体的なソケット操作はサブクラスで
-定義されます。
+ソケットを表す抽象クラスです。具体的なソケット操作はサブクラスで定義されます。
 
 例えばインターネットドメインストリームソケットの場合は
 [c:TCPSocket] を用います。
@@ -13,8 +12,7 @@ library: socket
 
 ### def BasicSocket.do_not_reverse_lookup -> bool
 
-[m:BasicSocket#do_not_reverse_lookup] の Socket オブジェクト生成時の
-デフォルト値を返します。
+[m:BasicSocket#do_not_reverse_lookup] の Socket オブジェクト生成時のデフォルト値を返します。
 
 この設定は大域的に作用します。
 
@@ -89,8 +87,7 @@ TCPSocket.open("www.ruby-lang.org", 80) {|sock|
 
 ### def getpeername -> String
 
-接続の相手先のソケットの情報を取得します。sockaddr 構造体をパッ
-クした文字列を返します。[man:getpeername(2)] を参照してください。
+接続の相手先のソケットの情報を取得します。sockaddr 構造体をパックした文字列を返します。[man:getpeername(2)] を参照してください。
 
 ```ruby title="例"
 require 'socket'
@@ -106,8 +103,7 @@ p addr == s.getsockname     #=> true
 
 ### def getsockname -> String
 
-ソケットの情報を取得します。sockaddr 構造体をパックした
-文字列を返します。[man:getsockname(2)] を参照してください。
+ソケットの情報を取得します。sockaddr 構造体をパックした文字列を返します。[man:getsockname(2)] を参照してください。
 
 ```ruby title="例"
 require 'socket'
@@ -126,8 +122,7 @@ s = serv.accept
 取得したオプションのデータを [c:Socket::Option] で返します。
 
 level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR 
-といった整数値の他、文字列("SOL_SOCKET", prefixなしの "SOCKET")や
-シンボル(:SO_REUSEADDR, :REUSEADDR)を用いることができます。
+といった整数値の他、文字列("SOL_SOCKET", prefixなしの "SOCKET")やシンボル(:SO_REUSEADDR, :REUSEADDR)を用いることができます。
 
 - **param** `level` --    [man:getsockopt(2)] の 第二引数のlevel 
 - **param** `optname` --  [man:getsockopt(2)] の 第三引数のoption_name 
@@ -156,21 +151,17 @@ p c.getsockopt(:IP, :TTL).int #=> 64
 
 ソケットからデータを受け取り、文字列として返します。
 maxlen は受け取る最大の長さを指定します。
-flags については [man:recv(2)] を参照してください。flags の
-デフォルト値は 0 です。flags の指定に必要な定数は
+flags については [man:recv(2)] を参照してください。flags のデフォルト値は 0 です。flags の指定に必要な定数は
 Socket クラスで定義されています。(例: Socket::MSG_PEEK)
 
 内部で呼び出す [man:recv(2)] が 0 を返した場合の挙動は、ソケットの種類によって異なります。
 
-UDP のようなデータグラムソケットでは、サイズ 0 のパケットを受信したことを意味し、
-このメソッドは "" を返します。
+UDP のようなデータグラムソケットでは、サイズ 0 のパケットを受信したことを意味し、このメソッドは "" を返します。
 
 #%since 3.3
-TCP や UNIXSocket のようなストリームソケットでは、接続が閉じられたこと (EOF) を
-意味し、このメソッドは nil を返します。
+TCP や UNIXSocket のようなストリームソケットでは、接続が閉じられたこと (EOF) を意味し、このメソッドは nil を返します。
 #%else
-TCP や UNIXSocket のようなストリームソケットでは、接続が閉じられたこと (EOF) を
-意味し、このメソッドは "" を返します。
+TCP や UNIXSocket のようなストリームソケットでは、接続が閉じられたこと (EOF) を意味し、このメソッドは "" を返します。
 #%end
 
 - **param** `maxlen` -- 受け取る文字列の最大の長さを指定します。
@@ -209,8 +200,7 @@ p s2.recv(10)                     #=> ""
 
 引数、返り値は [m:BasicSocket#recv] と同じです。
 #%since 3.3
-すなわち、TCP や UNIXSocket のようなストリームソケットで接続が閉じられている
-場合 (EOF) は nil を返します。
+すなわち、TCP や UNIXSocket のようなストリームソケットで接続が閉じられている場合 (EOF) は nil を返します。
 #%end
 
 [man:recvfrom(2)] がエラーになった場合、
@@ -229,9 +219,7 @@ EAGAIN, EINTR を含め例外 [c:Errno::EXXX] が発生します。
 ### def send(mesg, flags, dest_sockaddr = nil) -> Integer
 
 ソケットを介してデータを送ります。flags に関しては
-[man:send(2)] を参照してください。connect していないソケット
-に対しては送り先である dest_sockaddr を指定する必要があります。実際に送っ
-たデータの長さを返します。
+[man:send(2)] を参照してください。connect していないソケットに対しては送り先である dest_sockaddr を指定する必要があります。実際に送ったデータの長さを返します。
 
 dest_sockaddr には[ref:lib:socket#pack_string]
 を指定します。
@@ -261,12 +249,10 @@ s.send("The king has donkey ears!", 0, sockaddr)
 を参照してください。
 
 level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR 
-といった整数値の他、文字列("SOL_SOCKET", prefixなしの "SOCKET")や
-シンボル(:SO_REUSEADDR, :REUSEADDR)を用いることができます。
+といった整数値の他、文字列("SOL_SOCKET", prefixなしの "SOCKET")やシンボル(:SO_REUSEADDR, :REUSEADDR)を用いることができます。
 
 optval には文字列、整数、真偽値(true or false)を渡すことができます。
-文字列の場合には [man:setsockopt(2)] にはその文字列と
-長さが渡されます。整数の場合はintへのポインタが渡されます。
+文字列の場合には [man:setsockopt(2)] にはその文字列と長さが渡されます。整数の場合はintへのポインタが渡されます。
 true/falseの場合は0/1という整数と解釈され、そのメモリ領域の
 intポインタを渡します。
 
@@ -327,15 +313,13 @@ how を省略すると Socket::SHUT_RDWR を指定したことになります。
 ローカルマシン内で接続するのに適当なアドレスを [c:Addrinfo]
 オブジェクトで返します。
 
-[m:BasicSocket#local_address] の返り値
-以下の点を除いては同じものを返します。
+[m:BasicSocket#local_address] の返り値以下の点を除いては同じものを返します。
   - IPv4 の不定アドレス(0.0.0.0) は IPv4 のループバックアドレス(127.0.0.1)
     に置換される
   - IPv6 の不定アドレス(::) は IPv6 のループバックアドレス(::1)
     に置換される
 
-BasicSocket#local_address が接続先として不適なアドレスを返す場合は
-例外 [c:SocketError] が発生します。
+BasicSocket#local_address が接続先として不適なアドレスを返す場合は例外 [c:SocketError] が発生します。
 
 ```ruby
 require 'socket'
@@ -354,13 +338,11 @@ Addrinfo.tcp("0.0.0.0", 0).listen {|serv|
 
 ### def getpeereid -> [Integer, Integer]
 
-Unix ドメインソケットにおいて接続相手の euid と egid を
-返します。
+Unix ドメインソケットにおいて接続相手の euid と egid を返します。
 
 配列の最初の要素が euid, 2番目の要素が egid です。
 
-ソケットが Unix ドメインソケットでない場合の返り値は
-不定です。
+ソケットが Unix ドメインソケットでない場合の返り値は不定です。
 
 ```ruby
 require 'socket'
@@ -384,8 +366,7 @@ Socket.unix_server_loop("/tmp/sock") {|s|
 [man:getsockname(2)] で得られたローカルアドレス情報を
 [c:Addrinfo] オブジェクトとして返します。
 
-返されたオブジェクトの [m:Addrinfo#protocol] は 0 を
-返すことに注意してください。
+返されたオブジェクトの [m:Addrinfo#protocol] は 0 を返すことに注意してください。
 
 ```ruby
 require 'socket'
@@ -409,8 +390,7 @@ TCPServer.open("127.0.0.1", 1512) {|serv|
 
 [man:recvmsg(2)] を用いてメッセージを受け取ります。
 
-このメソッドはブロックします。ノンブロッキング方式で通信したい
-場合は [m:BasicSocket#recvmsg_nonblock] を用います。
+このメソッドはブロックします。ノンブロッキング方式で通信したい場合は [m:BasicSocket#recvmsg_nonblock] を用います。
 
 #%since 3.3
 TCP や UNIXSocket のようなストリームソケットで、接続が閉じられている場合 (EOF) は
@@ -419,15 +399,12 @@ nil を返します。
 
 maxmesglen, maxcontrollen で受け取るメッセージおよび補助データ
 ([c:Socket::AncillaryData])の最大長をバイト単位で指定します。
-省略した場合は必要なだけ内部バッファを拡大して
-データが切れないようにします。
+省略した場合は必要なだけ内部バッファを拡大してデータが切れないようにします。
 
-flags では Socket::MSG_* という名前の定数の biwsise OR を取った
-ものを渡します。
+flags では Socket::MSG_* という名前の定数の biwsise OR を取ったものを渡します。
 
 opts にはその他のオプションを渡します。今のところ :scm_right => bool
-というオプションのみ利用できます。このオプションに
-真を渡すと、 SCM_RIGHTS 制御メッセージを受け取ったときに、メッセージに含まれる
+というオプションのみ利用できます。このオプションに真を渡すと、 SCM_RIGHTS 制御メッセージを受け取ったときに、メッセージに含まれる
 IO オブジェクトを生成します。詳しくは [m:Socket::AncillaryData#unix_rights]
 を参照してください。
 
@@ -435,10 +412,8 @@ IO オブジェクトを生成します。詳しくは [m:Socket::AncillaryData#
 
 返り値の配列の最初の要素は受け取ったメッセージを表す文字列です。
 
-2番目の要素は connection-less socket の場合には送り元の
-アドレスが [c:Addrinfo] オブジェクトとして含まれています。
-TCP のような connection-oriented socket の場合は
-何が含まれているかはプラットフォーム依存です。
+2番目の要素は connection-less socket の場合には送り元のアドレスが [c:Addrinfo] オブジェクトとして含まれています。
+TCP のような connection-oriented socket の場合は何が含まれているかはプラットフォーム依存です。
 
 3番目の要素は受け取ったメッセージに付加されているフラグで、
 Socket::MSG_* 定数の bitwise OR で表現されています。
@@ -475,8 +450,7 @@ controls.each {|ancdata|
 ブロッキングの有無以外は [m:BasicSocket#recvmsg] と同じです。
 詳しくはそちらを参照してください。
 #%since 3.3
-すなわち、TCP や UNIXSocket のようなストリームソケットで接続が閉じられている
-場合 (EOF) は nil を返します。
+すなわち、TCP や UNIXSocket のようなストリームソケットで接続が閉じられている場合 (EOF) は nil を返します。
 #%end
 
 - **param** `maxmesglen` -- 受け取るメッセージの最大長
@@ -491,8 +465,7 @@ controls.each {|ancdata|
 [man:getpeername(2)] で得られたリモートアドレス情報を
 [c:Addrinfo] オブジェクトとして返します。
 
-返されたオブジェクトの [m:Addrinfo#protocol] は 0 を
-返すことに注意してください。
+返されたオブジェクトの [m:Addrinfo#protocol] は 0 を返すことに注意してください。
 
 ```ruby
 require 'socket'
@@ -514,11 +487,9 @@ TCPServer.open("127.0.0.1", 1728) {|serv|
 
 [man:sendmsg(2)] を用いてメッセージを送ります。
 
-このメソッドはブロックします。ノンブロッキング方式で通信したい
-場合は [m:BasicSocket#sendmsg_nonblock] を用います。
+このメソッドはブロックします。ノンブロッキング方式で通信したい場合は [m:BasicSocket#sendmsg_nonblock] を用います。
 
-ソケットが connection-less の場合は dest_sockaddr で
-通信先のアドレスを指定しなければなりません。[m:Socket.sockaddr_in]
+ソケットが connection-less の場合は dest_sockaddr で通信先のアドレスを指定しなければなりません。[m:Socket.sockaddr_in]
 の返り値や [c:Addrinfo] オブジェクトを引数として渡すことができます。
 
 controls には 補助データ(ancillary data)を渡します。
