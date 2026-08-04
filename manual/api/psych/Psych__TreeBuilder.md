@@ -7,8 +7,7 @@ YAML AST を構築するためのクラスです。
 
 [m:Psych::Parser.new] に渡して YAML ドキュメントを YAML AST に変換できます。
 
-また、[m:Psych::Visitors::YAMLTree.new] に渡して Ruby オブジェクト
-を YAML AST に変換することもできます。
+また、[m:Psych::Visitors::YAMLTree.new] に渡して Ruby オブジェクトを YAML AST に変換することもできます。
 
 ### Example
 

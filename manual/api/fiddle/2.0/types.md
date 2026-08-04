@@ -1,9 +1,6 @@
 C の型の別名を定義するライブラリです。
 
-[c:Fiddle::Win32Types] や [c:Fiddle::BasicTypes] を [m:Module#include] する
-ことで、[m:Fiddle::Importer#extern] や [m:Fiddle::Importer#struct] で
-利用できる型が増えます。内部で [m:Fiddle::Importer#typealias] を
-呼び出しています。
+[c:Fiddle::Win32Types] や [c:Fiddle::BasicTypes] を [m:Module#include] することで、[m:Fiddle::Importer#extern] や [m:Fiddle::Importer#struct] で利用できる型が増えます。内部で [m:Fiddle::Importer#typealias] を呼び出しています。
 
 実装の問題があるため、 [m:Fiddle::Importer#dlload] を呼びだしてから
 include してください。

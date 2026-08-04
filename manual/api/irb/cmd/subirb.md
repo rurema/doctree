@@ -5,11 +5,9 @@ require:
   - irb/cmd/nop
   - irb/ext/multi-irb
 ---
-irb 中の irb、irb_jobs、irb_fg、irb_kill コマンドのための拡張を定義した
-サブライブラリです。
+irb 中の irb、irb_jobs、irb_fg、irb_kill コマンドのための拡張を定義したサブライブラリです。
 
-このライブラリで定義されているメソッドはユーザが直接使用するものではあ
-りません。
+このライブラリで定義されているメソッドはユーザが直接使用するものではありません。
 
 # class IRB::ExtendCommand::IrbCommand < IRB::ExtendCommand::Nop
 

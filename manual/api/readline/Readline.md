@@ -25,8 +25,7 @@ end
 
 ユーザが入力した内容を履歴(以下、ヒストリ)として記録できます。
 定数 [c:Readline::HISTORY] を使用して入力履歴にアクセスできます。
-例えば、[c:Readline::HISTORY].to_a により、
-全ての入力した内容を文字列の配列として取得できます。
+例えば、[c:Readline::HISTORY].to_a により、全ての入力した内容を文字列の配列として取得できます。
 
 ```ruby title="例: ヒストリを配列として取得する"
 require 'readline'
@@ -41,11 +40,9 @@ end
 ### module_function def readline(prompt = "", add_hist = false) -> String | nil
 
 prompt を出力し、ユーザからのキー入力を待ちます。
-エンターキーの押下などでユーザが文字列を入力し終えると、
-入力した文字列を返します。
+エンターキーの押下などでユーザが文字列を入力し終えると、入力した文字列を返します。
 このとき、add_hist が true であれば、入力した文字列を入力履歴に追加します。
-何も入力していない状態で EOF(UNIX では ^D) を入力するなどで、
-ユーザからの入力がない場合は nil を返します。
+何も入力していない状態で EOF(UNIX では ^D) を入力するなどで、ユーザからの入力がない場合は nil を返します。
 
 本メソッドはスレッドに対応しています。
 入力待ち状態のときはスレッドコンテキストの切替えが発生します。
@@ -191,11 +188,9 @@ proc は、次のものを想定しています。
   2. 引数にユーザからの入力文字列を取る。
   3. 候補の文字列の配列を返す。
 
-「/var/lib /v」の後で補完を行うと、
-デフォルトでは proc の引数に「/v」が渡されます。
+「/var/lib /v」の後で補完を行うと、デフォルトでは proc の引数に「/v」が渡されます。
 このように、ユーザが入力した文字列を
-[m:Readline.completer_word_break_characters] に含まれる文字で区切ったものを単語とすると、
-カーソルがある単語の最初の文字から現在のカーソル位置までの文字列が proc の引数に渡されます。
+[m:Readline.completer_word_break_characters] に含まれる文字で区切ったものを単語とすると、カーソルがある単語の最初の文字から現在のカーソル位置までの文字列が proc の引数に渡されます。
 
 - **param** `proc` -- ユーザからの入力を補完する時の候補を取得する [c:Proc] オブジェクトを指定します。
             nil を指定した場合はデフォルトの動作になります。
@@ -239,8 +234,7 @@ bool が真ならば同一視します。bool が偽ならば同一視しませ�
 ユーザの入力を補完する際、大文字と小文字を同一視する／しないを取得します。
 bool が真ならば同一視します。bool が偽ならば同一視しません。
 
-なお、Readline.completion_case_fold= メソッドで指定したオブジェクトを
-そのまま取得するので、次のような動作をします。
+なお、Readline.completion_case_fold= メソッドで指定したオブジェクトをそのまま取得するので、次のような動作をします。
 
 ```ruby
 require 'readline'
@@ -277,8 +271,7 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してく
 
 - **raise** `NotImplementedError` -- サポートしていない環境で発生します。
 
-半角スペース「" "」などの単語を区切る文字を指定すれば、
-連続して入力する際に便利です。
+半角スペース「" "」などの単語を区切る文字を指定すれば、連続して入力する際に便利です。
 
 ```console
 require 'readline'
@@ -291,8 +284,7 @@ Readline.completion_append_character = " "
 > /var/lib /usr
 ```
 
-なお、1文字しか指定することはできないため、
-例えば、"string"を指定した場合は最初の文字である"s"だけを使用します。
+なお、1文字しか指定することはできないため、例えば、"string"を指定した場合は最初の文字である"s"だけを使用します。
 
 ```ruby
 require 'readline'
@@ -312,8 +304,7 @@ p Readline.completion_append_character # => "s"
 
 ### def Readline.basic_word_break_characters=(string)
 
-ユーザの入力の補完を行う際、
-単語の区切りを示す複数の文字で構成される文字列 string を指定します。
+ユーザの入力の補完を行う際、単語の区切りを示す複数の文字で構成される文字列 string を指定します。
 
 GNU Readline のデフォルト値は、Bash の補完処理で使用している文字列
 " \t\n\"\\'\`@$><=;|&{(" (スペースを含む) になっています。
@@ -326,8 +317,7 @@ GNU Readline のデフォルト値は、Bash の補完処理で使用してい�
 
 ### def Readline.basic_word_break_characters -> String
 
-ユーザの入力の補完を行う際、
-単語の区切りを示す複数の文字で構成される文字列を取得します。
+ユーザの入力の補完を行う際、単語の区切りを示す複数の文字で構成される文字列を取得します。
 
 - **raise** `NotImplementedError` -- サポートしていない環境で発生します。
 
@@ -335,8 +325,7 @@ GNU Readline のデフォルト値は、Bash の補完処理で使用してい�
 
 ### def Readline.completer_word_break_characters=(string)
 
-ユーザの入力の補完を行う際、
-単語の区切りを示す複数の文字で構成される文字列 string を指定します。
+ユーザの入力の補完を行う際、単語の区切りを示す複数の文字で構成される文字列 string を指定します。
 [m:Readline.basic_word_break_characters=] との違いは、
 GNU Readline の rl_complete_internal 関数で使用されることです。
 
@@ -351,8 +340,7 @@ GNU Readline のデフォルトの値は、
 
 ### def Readline.completer_word_break_characters -> String
 
-ユーザの入力の補完を行う際、
-単語の区切りを示す複数の文字で構成された文字列を取得します。
+ユーザの入力の補完を行う際、単語の区切りを示す複数の文字で構成された文字列を取得します。
 [m:Readline.basic_word_break_characters] との違いは、
 GNU Readline の rl_complete_internal 関数で使用されることです。
 
@@ -362,8 +350,7 @@ GNU Readline の rl_complete_internal 関数で使用されることです。
 
 ### def Readline.basic_quote_characters=(string)
 
-スペースなどの単語の区切りをクオートするための
-複数の文字で構成される文字列 string を指定します。
+スペースなどの単語の区切りをクオートするための複数の文字で構成される文字列 string を指定します。
 
 GNU Readline のデフォルト値は、「"'」です。
 
@@ -375,8 +362,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 ### def Readline.basic_quote_characters -> String
 
-スペースなどの単語の区切りをクオートするための
-複数の文字で構成される文字列を取得します。
+スペースなどの単語の区切りをクオートするための複数の文字で構成される文字列を取得します。
 
 - **raise** `NotImplementedError` -- サポートしていない環境で発生します。
 
@@ -384,8 +370,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 ### def Readline.completer_quote_characters=(string)
 
-ユーザの入力の補完を行う際、スペースなどの単語の区切りを
-クオートするための複数の文字で構成される文字列 string を指定します。
+ユーザの入力の補完を行う際、スペースなどの単語の区切りをクオートするための複数の文字で構成される文字列 string を指定します。
 指定した文字の間では、[m:Readline.completer_word_break_characters=]
 で指定した文字列に含まれる文字も、普通の文字列として扱われます。
 
@@ -397,8 +382,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 ### def Readline.completer_quote_characters -> String
 
-ユーザの入力の補完を行う際、スペースなどの単語の区切りを
-クオートするための複数の文字で構成される文字列を取得します。
+ユーザの入力の補完を行う際、スペースなどの単語の区切りをクオートするための複数の文字で構成される文字列を取得します。
 
 - **raise** `NotImplementedError` -- サポートしていない環境で発生します。
 
@@ -406,8 +390,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 ### def Readline.filename_quote_characters=(string)
 
-ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りを
-クオートするための複数の文字で構成される文字列 string を指定します。
+ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りをクオートするための複数の文字で構成される文字列 string を指定します。
 
 GNU Readline のデフォルト値は nil(NULL) です。
 
@@ -419,8 +402,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 ### def Readline.filename_quote_characters -> String
 
-ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りを
-クオートするための複数の文字で構成される文字列を取得します。
+ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りをクオートするための複数の文字で構成される文字列を取得します。
 
 - **raise** `NotImplementedError` -- サポートしていない環境で発生します。
 
@@ -450,8 +432,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 ### const VERSION -> String
 
-Readlineモジュールが使用している GNU Readline や libedit のバージョンを
-示す文字列です。
+Readlineモジュールが使用している GNU Readline や libedit のバージョンを示す文字列です。
 
 ### const FILENAME_COMPLETION_PROC -> Proc
 

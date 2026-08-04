@@ -19,8 +19,7 @@ require:
 
 ### def find_gems_with_sources(dep) -> Array
 
-与えられた条件にマッチする [c:Gem::Specification] のインスタンスと URI のペアのリストを
-返します。
+与えられた条件にマッチする [c:Gem::Specification] のインスタンスと URI のペアのリストを返します。
 
 Gem はローカル (Dir.pwd) とリモート (Gem.sources) の両方から検索します。
 結果は、バージョンの新しい順が先にきます。また、ローカルの Gem も先にきます。
@@ -29,8 +28,7 @@ Gem はローカル (Dir.pwd) とリモート (Gem.sources) の両方から検�
 
 ### def find_spec_by_name_and_version(gem_name, version = Gem::Requirement.default) -> Array
 
-与えられた Gem の名前とバージョンに関する条件にマッチする [c:Gem::Specification] と
-それの存在する URI を含む配列を返します。
+与えられた Gem の名前とバージョンに関する条件にマッチする [c:Gem::Specification] とそれの存在する URI を含む配列を返します。
 
 - **param** `gem_name` -- Gem の名前を指定します。
 

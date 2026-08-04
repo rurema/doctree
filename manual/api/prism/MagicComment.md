@@ -4,11 +4,9 @@ library: prism
 # class Prism::MagicComment < Object
 
 [m:Prism::ParseResult#magic_comments] で得られる、マジックコメント
-(`# frozen_string_literal: true` のような、Ruby の動作に影響を与える
-特別な形式のコメント)を表すクラスです。
+(`# frozen_string_literal: true` のような、Ruby の動作に影響を与える特別な形式のコメント)を表すクラスです。
 
-キーも値も**文字列**として取得されます。`"true"` を真偽値に変換する
-ような意味の解釈は行われないことに注意してください。
+キーも値も**文字列**として取得されます。`"true"` を真偽値に変換するような意味の解釈は行われないことに注意してください。
 
 ```ruby title="例"
 require "prism"

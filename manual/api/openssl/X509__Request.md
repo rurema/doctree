@@ -3,8 +3,7 @@ library: openssl
 ---
 # class OpenSSL::X509::Request < Object
 
-X.509 の証明書署名要求(Certificate Signing Request, CSR)を表わす
-クラスです。
+X.509 の証明書署名要求(Certificate Signing Request, CSR)を表わすクラスです。
 
 X.509 CSR については [RFC:2986] などを参照してください。
 
@@ -46,14 +45,11 @@ puts csr.to_pem
 
 引数なしの場合は空の OpenSSL::X509::Request オブジェクトを生成します。
 
-引数が文字列の場合は、PEM 形式もしくは DER 形式であると
-みなしてオブジェクトを生成します。
+引数が文字列の場合は、PEM 形式もしくは DER 形式であるとみなしてオブジェクトを生成します。
 
-引数が [c:IO] オブジェクトである場合は、そのファイルの中身から
-オブジェクトを生成します。
+引数が [c:IO] オブジェクトである場合は、そのファイルの中身からオブジェクトを生成します。
 
-引数が OpenSSL::X509::Request である場合には、その内容を
-コピーしたオブジェクトを生成します。
+引数が OpenSSL::X509::Request である場合には、その内容をコピーしたオブジェクトを生成します。
 
 引数が to_der メソッドを持つ場合は、そのメソッドによって
 DER 形式の文字列に変換してからオブジェクトを生成します。
@@ -78,10 +74,8 @@ DER 形式の文字列に変換してからオブジェクトを生成します�
 CSR が保持している attribute を [c:OpenSSL::X509::Attribute] 
 の配列で返します。
 
-attribute とは X.509 証明書署名要求 に含まれる申請者に関する
-追加的な情報です。必須ではありません。X.509v3 拡張領域を
-CSR に含めるときは "reqExt" という oid の attribute を追加
-します。
+attribute とは X.509 証明書署名要求 に含まれる申請者に関する追加的な情報です。必須ではありません。X.509v3 拡張領域を
+CSR に含めるときは "reqExt" という oid の attribute を追加します。
 
 - **SEE** [m:OpenSSL::X509::Request#attributes=], 
      [m:OpenSSL::X509::Request#add_attribute]
@@ -99,8 +93,7 @@ CSR の attribute をクリアして新しい attribute を設定します。
 
 申請者の公開鍵を返します。
 
-実際には [c:OpenSSL::PKey::PKey] 自体のインスタンスでなく、
-そのサブクラスを返します。
+実際には [c:OpenSSL::PKey::PKey] 自体のインスタンスでなく、そのサブクラスを返します。
 
 - **raise** `OpenSSL::X509::RequestError` -- 公開鍵の取得に失敗した場合に発生します
 - **raise** `OpenSSL::PKey::PKeyError` -- 鍵の形式が不正であった場合に発生します

@@ -12,8 +12,7 @@ UNIX の [man:dlopen(3)] や Windows の LoadLibrary()
 ## Singleton Methods
 ### def Fiddle.win32_last_error -> Integer
 
-最後に [m:Fiddle::Function#call] で C の関数を呼び出した
-結果設定された errno を返します。
+最後に [m:Fiddle::Function#call] で C の関数を呼び出した結果設定された errno を返します。
 
 このメソッドは Windows 環境でのみ定義されています。
 
@@ -31,8 +30,7 @@ errno は fiddle が設定するのでユーザはこのメソッドを使わな
 
 ### def Fiddle.last_error -> Integer
 
-最後に [m:Fiddle::Function#call] で C の関数を呼び出した
-結果設定された errno を返します。
+最後に [m:Fiddle::Function#call] で C の関数を呼び出した結果設定された errno を返します。
 
 この値はスレッドローカルです。
 
@@ -67,8 +65,7 @@ size バイトのメモリ領域を確保し、その領域を指す整数を返
 
 ### module_function def realloc(addr, size)   -> Integer
 
-addr で指定したメモリ領域を size バイトにリサイズし、その領域を指す整数
-を返します。
+addr で指定したメモリ領域を size バイトにリサイズし、その領域を指す整数を返します。
 
 addr には [m:Fiddle?.malloc] で確保したメモリ領域を渡します。
 また、リサイズの結果、返り値が addr と異なる場合があります。

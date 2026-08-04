@@ -8,17 +8,14 @@ library: socket
 システムコールレベルから高水準の機能までを提供します。
 
 ソケットオブジェクトを生成する汎用的な方法として
-[m:Socket.new] がありますが、以下のようなより便利な
-メソッドがあります。
+[m:Socket.new] がありますが、以下のようなより便利なメソッドがあります。
   - TCP のクライアントソケット [m:Socket.tcp] [m:TCPSocket.open]
   - TCP のサーバソケット [m:Socket.tcp_server_loop],
     [m:Socket.tcp_server_sockets], [m:TCPServer.open]
   - UNIX socket のクライアントソケット [m:Socket.unix] [m:UNIXSocket.open]
   - UNIX socket のサーバソケット [m:Socket.unix_server_loop], 
     [m:Socket.unix_server_socket], [m:UNIXServer.open]
-また、クライアントソケットは [m:Addrinfo#connect] で、
-サーバソケットを [m:Addrinfo#bind] や [m:Addrinfo#listen] で
-作ることもできます。
+また、クライアントソケットは [m:Addrinfo#connect] で、サーバソケットを [m:Addrinfo#bind] や [m:Addrinfo#listen] で作ることもできます。
 
 ## Class Methods
 
@@ -26,12 +23,10 @@ library: socket
 ### def Socket.new(domain, type, protocol=0) -> Socket
 
 新しいソケットを生成します。domain、type、
-protocol はインクルードファイルにある定数で指定しま
-す。ほとんどの定数は Socket::AF_INET のように
+protocol はインクルードファイルにある定数で指定します。ほとんどの定数は Socket::AF_INET のように
 Socket クラスの定数として定義されています。domain
 とtype に関しては、"AF_INET",
-"SOCK_STREAM" のように文字列でも指定できますが、文
-字列ですべての機能を指定できる保証はありません。
+"SOCK_STREAM" のように文字列でも指定できますが、文字列ですべての機能を指定できる保証はありません。
 
 例えば、IPv4 の TCP ソケットは以下のように生成されます。
 
@@ -42,9 +37,7 @@ s = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
 ```
 
 なお、[man:socket(2)] の domain 引数において AF_ と PF_ のどちらの定数を使用するかについては混乱がありますが、
-Stevens の「UNIX ネットワークプログラミング第2版 Vol.1」4.2節に述べられているように、
-現実的にはどちらでも問題なく、また、既存のコーディング習慣として AF_ が用いられることが多いため、
-ここでは AF_ を使用しています。
+Stevens の「UNIX ネットワークプログラミング第2版 Vol.1」4.2節に述べられているように、現実的にはどちらでも問題なく、また、既存のコーディング習慣として AF_ が用いられることが多いため、ここでは AF_ を使用しています。
 
 - **param** `domain` -- 例えば、<sys/socket.h> のようなインクルードファイルに定義されている定数を指定します。
 - **param** `type` --   例えば、<sys/socket.h> のようなインクルードファイルに定義されている定数を指定します。
@@ -141,10 +134,7 @@ pp Socket.getaddrinfo(Socket.gethostname, nil)
 
 ### def Socket.getnameinfo(sa, flags = 0) -> Array
 
-[RFC:2553] で定義された getnameinfo() の機能を提供するク
-ラスメソッド。 gethostbyaddr() や getservbyport() の代
-わりとして用意されています。IPのバージョンに依存しないプログラムを
-書くための標準的なAPIです。
+[RFC:2553] で定義された getnameinfo() の機能を提供するクラスメソッド。 gethostbyaddr() や getservbyport() の代わりとして用意されています。IPのバージョンに依存しないプログラムを書くための標準的なAPIです。
 
 - **param** `sa` -- 文字列か配列を与えます。
 
@@ -158,28 +148,22 @@ pp Socket.getaddrinfo(Socket.gethostname, nil)
 
 ### 引数 sa について
 
-引数 sa には文字列か配列を与えます。文字列の場合は sockaddr 構造体
-のパック文字列を与えます。具体的には [m:BasicSocket#getsockname]
-の値が利用できます。配列を与える場合には、要素が3つの場合と4つの場合
-があります。
+引数 sa には文字列か配列を与えます。文字列の場合は sockaddr 構造体のパック文字列を与えます。具体的には [m:BasicSocket#getsockname]
+の値が利用できます。配列を与える場合には、要素が3つの場合と4つの場合があります。
 
   - 要素が3つの場合:
        [アドレスファミリー, サービス, ホスト]
   - 要素が4つの場合:
        [アドレスファミリー, サービス, 任意, アドレスを表す文字列]
 
-アドレスファミリーには Socket::AF_INET 等の定数の他に文字列
-で "AF_INET" もしくは "AF_INET6" もしくは nil が
-指定できます。ただしIPv6が使えないようにコンパイルされている場合は
+アドレスファミリーには Socket::AF_INET 等の定数の他に文字列で "AF_INET" もしくは "AF_INET6" もしくは nil が指定できます。ただしIPv6が使えないようにコンパイルされている場合は
 "AF_INET6" は無効な指定となります。アドレスファミリーに
-nil を指定することは Socket::AF_UNSPEC を指定すること
-と等価です。
+nil を指定することは Socket::AF_UNSPEC を指定することと等価です。
 
 サービス、ホストの指定に関しては [ref:lib:socket#service_format]、
 [ref:lib:socket#host_format]を参照してください。
 
-要素が3つの場合でも、ホストにはアドレスを指定できますが、要素が4つ
-の場合には、最後の要素を名前解決しないことが保証されます。
+要素が3つの場合でも、ホストにはアドレスを指定できますが、要素が4つの場合には、最後の要素を名前解決しないことが保証されます。
 #%# 4つの
 #%# 場合の3番目の引数ってなんだか変なインタフェースですね。4番目の引数
 #%# が nil の場合は要素3つと同じ扱いになるんですね。どういうわけでこう
@@ -203,8 +187,7 @@ Socket::NI_NUMERICSERV、
 Socket::NI_DGRAM
 が用意されている場合があります。
 
-これらの定数の意味については [man:getnameinfo(3)]を参照
-して下さい。
+これらの定数の意味については [man:getnameinfo(3)]を参照して下さい。
 
 ### 使用例
 
@@ -287,8 +270,7 @@ p Socket.gethostname   #=> "helium.ruby-lang.org"
 
 ### def Socket.getservbyname(service, proto = "tcp") -> Integer
 
-service, protoに対応するポート番号を返
-します。protoの省略値は"tcp"です。
+service, protoに対応するポート番号を返します。protoの省略値は"tcp"です。
 
 - **param** `service` -- サービス名を文字列で指定します。例えば、"ftp", "telnet" が相当します。
 - **param** `proto` --  プロトコル名を文字列で指定します。省略値は"tcp" です。
@@ -299,8 +281,7 @@ service, protoに対応するポート番号を返
 ### def Socket.pack_sockaddr_in(port, host) -> String
 
 指定したアドレスを[ref:lib:socket#pack_string]
-で返します。port は、ポート番号を表す [c:Integer] あるいは、ポート
-番号、サービス名を表す文字列です。
+で返します。port は、ポート番号を表す [c:Integer] あるいは、ポート番号、サービス名を表す文字列です。
 
 - **param** `port` --  ポート番号を表す [c:Integer] あるいは、ポート番号、サービス名を表す文字列を指定します。
 
@@ -392,18 +373,13 @@ p Socket.getservbyport(514, "udp") #=> "syslog"
 
 ### def Socket.accept_loop(sockets) {|sock, client_addrinfo| ...} -> ()
 
-sockets でサーバソケットを受け取り、接続を待ち受け、
-クライアントとの接続が確立するたびにブロックにその接続
-ソケットを渡し呼び出します。
+sockets でサーバソケットを受け取り、接続を待ち受け、クライアントとの接続が確立するたびにブロックにその接続ソケットを渡し呼び出します。
 
 ブロックの引数はクライアントと接続したソケットオブジェクトと
 [c:Addrinfo] オブジェクトです。
 
-[m:Socket.tcp_server_loop] と同様、ブロックは
-逐次的に呼び出されます。つまりブロックか終了するまで
-次の接続は accept されません。
-並列に通信したい場合は
-スレッドのような並列実行機構を使う必要があります。
+[m:Socket.tcp_server_loop] と同様、ブロックは逐次的に呼び出されます。つまりブロックか終了するまで次の接続は accept されません。
+並列に通信したい場合はスレッドのような並列実行機構を使う必要があります。
 
 - **param** `sockets` -- 待ち受けたいサーバソケットの配列
 
@@ -460,26 +436,21 @@ Socket.tcp("www.ruby-lang.org", 80) {|sock|
 ### def Socket.tcp_server_loop(port){|sock,addr| ...} -> ()
 ### def Socket.tcp_server_loop(host, port){|sock,addr| ...} -> ()
 
-TCP/IP で host:port で待ち受けるサーバ側のソケットを作成し、
-新しい接続を受け入れるごとにブロックを呼び出します。
+TCP/IP で host:port で待ち受けるサーバ側のソケットを作成し、新しい接続を受け入れるごとにブロックを呼び出します。
 
-ブロックには新しい接続を表すソケットオブジェクトと、
-クライアントアドレスを表す [c:Addrinfo] オブジェクトが渡されます。
+ブロックには新しい接続を表すソケットオブジェクトと、クライアントアドレスを表す [c:Addrinfo] オブジェクトが渡されます。
 
 ブロックの実行が終わってもソケットは close されません。
 アプリケーション側が明示的に close する必要があります。
 
 このメソッドはブロックを逐次的に呼び出します。
 つまりブロックからリターンするまで次のコネクションを受け入れません。
-そのため、同時に複数のクライアントと通信したい場合は
-スレッドのような並列機構を使う必要があります。
+そのため、同時に複数のクライアントと通信したい場合はスレッドのような並列機構を使う必要があります。
 
 サーバのソケットアドレスを決めるために
 [m:Addrinfo.getaddrinfo] が用いられることに注意してください。
 [m:Addrinfo.getaddrinfo] は複数のアドレスを返す(IPv4 と IPv6 など)
-場合があり、その場合その全てが用いられます。つまり IPv4 と IPv6 の
-両方を待ち受けます。getaddrinfo が 0 個のアドレスを返す場合はエラー
-になります。1つ以上を返した場合にそれが用いられます。
+場合があり、その場合その全てが用いられます。つまり IPv4 と IPv6 の両方を待ち受けます。getaddrinfo が 0 個のアドレスを返す場合はエラーになります。1つ以上を返した場合にそれが用いられます。
 
 ```ruby
 # 逐次的な echo サーバ
@@ -510,8 +481,7 @@ Socket.tcp_server_loop(16807) {|sock, client_addrinfo|
 }
 ```
 
-内部的には [m:Socket.tcp_server_sockets] で
-生成したソケットを [m:Socket.accept_loop] で処理しています。
+内部的には [m:Socket.tcp_server_sockets] で生成したソケットを [m:Socket.accept_loop] で処理しています。
 
 - **param** `host` -- 割り当てるホスト名
 - **param** `port` -- 割り当てるポート番号
@@ -522,13 +492,11 @@ Socket.tcp_server_loop(16807) {|sock, client_addrinfo|
 ### def Socket.tcp_server_sockets(port){|sockets| ...}  -> object
 ### def Socket.tcp_server_sockets(host, port){|sockets| ...}  -> object
 
-TCP/IP で host:port で待ち受けるサーバ側のソケットを
-作成します。
+TCP/IP で host:port で待ち受けるサーバ側のソケットを作成します。
 
 ブロックなしの場合は、ソケットオブジェクトの配列を返します。
 
-ブロック付きの場合は、ソケットオブジェクトをそのブロックに
-渡して呼び出します。ブロック終了時にそれらのソケットを閉じます。
+ブロック付きの場合は、ソケットオブジェクトをそのブロックに渡して呼び出します。ブロック終了時にそれらのソケットを閉じます。
 返り値はブロックの評価値となります。
 
 port が 0 の場合は、実際のポート番号は動的に選ばれます。
@@ -565,8 +533,7 @@ Socket.tcp_server_sockets(0) {|sockets|
 ### def Socket.udp_server_loop(port) {|msg, msg_src| ... } -> ()
 ### def Socket.udp_server_loop(host, port) {|msg, msg_src| ... } -> ()
 
-UDP のサーバを起動して、メッセージが来るごとに
-ブロックを呼び出します。
+UDP のサーバを起動して、メッセージが来るごとにブロックを呼び出します。
 
 ブロックに渡される引数は msg と msg_src の 2 つで、
 msg は受け取ったメッセージ文字列で、 msg_src は 
@@ -601,8 +568,7 @@ socketsで与えられた各 UDP ソケットからデータを読み取りま�
 msg は受け取ったメッセージ文字列で、 msg_src は 
 通信相手の [c:Socket::UDPSource] オブジェクトです。
 
-[m:Socket.udp_server_loop] はこのメソッドの用いて以下のようにして
-実装できます。
+[m:Socket.udp_server_loop] はこのメソッドの用いて以下のようにして実装できます。
 
 ```text
 require 'socket'
@@ -626,8 +592,7 @@ UDP で host:port を待ち受けるサーバ側のソケットを作成しま�
 
 ブロックなしの場合は、ソケットオブジェクトの配列を返します。
 
-ブロック付きの場合は、ソケットオブジェクトをそのブロックに
-渡して呼び出します。ブロック終了時にそれらのソケットを閉じます。
+ブロック付きの場合は、ソケットオブジェクトをそのブロックに渡して呼び出します。ブロック終了時にそれらのソケットを閉じます。
 
 port が 0 の場合は、実際のポート番号は動的に選ばれます。
 ただし返り値のソケットはすべて同じ番号を持ちます。
@@ -654,10 +619,7 @@ Unix クライアントソケットを生成します。
 
 ブロックが省略されたときは、生成されたソケットが返されます。
 
-ブロックが渡されたときは、生成されたソケットを
-引数としてブロックを呼び出します。メソッドの返り値は
-ブロックの評価値となります。また、ブロックの終了後に
-ソケットを [m:IO#close] します。
+ブロックが渡されたときは、生成されたソケットを引数としてブロックを呼び出します。メソッドの返り値はブロックの評価値となります。また、ブロックの終了後にソケットを [m:IO#close] します。
 
 ```ruby
 require 'socket'
@@ -674,20 +636,16 @@ Socket.unix("/tmp/sock") {|sock|
 
 ### def Socket.unix_server_loop(path) {|socket, client_addrinfo| ... } -> ()
 
-Unix サーバソケットを生成し、
-新しい接続を受け入れるごとにブロックを呼び出します。
+Unix サーバソケットを生成し、新しい接続を受け入れるごとにブロックを呼び出します。
 
-ブロックには新しい接続を表すソケットオブジェクトと、
-クライアントアドレスを表す [c:Addrinfo] オブジェクトが渡されます。
+ブロックには新しい接続を表すソケットオブジェクトと、クライアントアドレスを表す [c:Addrinfo] オブジェクトが渡されます。
 
 ブロックの実行が終わってもソケットは close されません。
 アプリケーション側が明示的に close する必要があります。
 
-path という名前のファイルが既に存在するときは、
-そのファイルのオーナである場合は先にそのファイルを削除してしまいます。
+path という名前のファイルが既に存在するときは、そのファイルのオーナである場合は先にそのファイルを削除してしまいます。
 これは path が悪意あるユーザによって変更されない場合に限りは安全です。
-つまり、 /tmp/malicious-users-directory/socket という名前のパスは
-使うべきではありません。
+つまり、 /tmp/malicious-users-directory/socket という名前のパスは使うべきではありません。
 /tmp にスティッキービットが立っている場合、/tmp/socket や
 /tmp/your-private-directory/socket というパス名は安全と考えて良いでしょう。
 
@@ -700,10 +658,7 @@ Unix サーバソケットを生成します。
 
 ブロックが省略されたときは、生成されたソケットが返されます。
 
-ブロックが渡されたときは、生成されたソケットを
-引数としてブロックを呼び出します。メソッドの返り値は
-ブロックの評価値となります。また、ブロックの終了後に
-ソケットを [m:IO#close] します。
+ブロックが渡されたときは、生成されたソケットを引数としてブロックを呼び出します。メソッドの返り値はブロックの評価値となります。また、ブロックの終了後にソケットを [m:IO#close] します。
 
 ```ruby
 require 'socket'
@@ -769,8 +724,7 @@ pp Socket.getifaddrs
 
 ### def accept -> Array
 
-新しい接続を受け付けて、新しい接続に対するソケットとアドレスの
-ペアを返します。[man:accept(2)] を参照。
+新しい接続を受け付けて、新しい接続に対するソケットとアドレスのペアを返します。[man:accept(2)] を参照。
 
 たとえば IPv4 の TCP サーバソケットを生成し、accept でクライアントからの接続を受け付けるには以下のようにします。
 
@@ -808,8 +762,7 @@ EAGAIN, EINTR を含め例外 [c:Errno::EXXX] が発生します。
 
 server_sockaddr は、
 [ref:lib:socket#pack_string]
-もしくは [c:Addrinfo] オブジェクト
-です。
+もしくは [c:Addrinfo] オブジェクトです。
 
 0 を返します。
 
@@ -877,8 +830,7 @@ results = socket.read
 
 ソケットからデータを受け取ります。
 
-[m:BasicSocket#recv] と同様ですが、返り値として
-データ文字列と相手ソケットのアドレスのペアが返されます。
+[m:BasicSocket#recv] と同様ですが、返り値としてデータ文字列と相手ソケットのアドレスのペアが返されます。
 
 flags には Socket::MSG_* という定数の bitwise OR を渡します。
 詳しくは [man:recvfrom(2)] を参照してください。
@@ -911,8 +863,7 @@ p Socket.unpack_sockaddr_in(sockaddr)     #=> [32882, "127.0.0.1"]
 
 [man:recvfrom(2)] がエラーになった場合、
 EAGAIN, EINTR を含め例外 [c:Errno::EXXX] が発生します。
-Errno::EWOULDBLOCK、Errno::EAGAIN のような待ってからリトライすることが
-可能であることを意味する例外には、[c:IO::WaitReadable] が extend
+Errno::EWOULDBLOCK、Errno::EAGAIN のような待ってからリトライすることが可能であることを意味する例外には、[c:IO::WaitReadable] が extend
 されています。
 
 - **param** `maxlen` -- ソケットから受けとるデータの最大値
@@ -922,8 +873,7 @@ Errno::EWOULDBLOCK、Errno::EAGAIN のような待ってからリトライする
 
 ### def sysaccept -> Array
 
-接続したクライアントのファイル記述子とアドレスのペアを返すことを除
-けば [m:Socket#accept] と同じです。
+接続したクライアントのファイル記述子とアドレスのペアを返すことを除けば [m:Socket#accept] と同じです。
 
 ### def ipv6only! -> ()
 

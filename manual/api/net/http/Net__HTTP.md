@@ -9,15 +9,12 @@ HTTP のクライアントのためのクラスです。
 
 ### gzip/deflate の自動展開
 
-Net::HTTP は、リクエストに Accept-Encoding ヘッダも Range ヘッダも
-指定されていない場合、自動的に
+Net::HTTP は、リクエストに Accept-Encoding ヘッダも Range ヘッダも指定されていない場合、自動的に
 `Accept-Encoding: gzip;q=1.0,deflate;q=0.6,identity;q=0.3` を付与します。
-このとき、応答の Content-Encoding が gzip や deflate であれば応答ボディは
-透過的に展開され、Content-Encoding ヘッダは取り除かれ、Content-Length は
+このとき、応答の Content-Encoding が gzip や deflate であれば応答ボディは透過的に展開され、Content-Encoding ヘッダは取り除かれ、Content-Length は
 (存在すれば)展開後のサイズに更新されます。
 
-自分で Accept-Encoding ヘッダや Range ヘッダを指定した場合はこの自動展開は
-行われず、圧縮されたままのボディと Content-Encoding ヘッダがそのまま得られます。
+自分で Accept-Encoding ヘッダや Range ヘッダを指定した場合はこの自動展開は行われず、圧縮されたままのボディと Content-Encoding ヘッダがそのまま得られます。
 また、応答に Content-Range ヘッダが含まれる場合も展開は行われません。
 
 ## Class Methods
@@ -26,16 +23,13 @@ Net::HTTP は、リクエストに Accept-Encoding ヘッダも Range ヘッダ�
 
 新しい [c:Net::HTTP] オブジェクトを生成します。
 
-proxy_addr に :ENV を指定すると自動的に環境変数 http_proxy からプロクシの URI を
-取り出し利用します。この場合環境変数 http_proxy が定義されていない場合には
-プロクシは利用せず直接接続します。
+proxy_addr に :ENV を指定すると自動的に環境変数 http_proxy からプロクシの URI を取り出し利用します。この場合環境変数 http_proxy が定義されていない場合にはプロクシは利用せず直接接続します。
 詳しくは [m:URI::Generic#find_proxy] を参照してください。
 
 明示的にプロクシのホスト名とポート番号を指定してプロクシを利用することもできます。
 このときには proxy_addr にホスト名もしくは IP アドレスを渡します。
 このときに proxy_userを指定するとプロクシの認証が行われます。
-no_proxy の文字列に address のホスト名やIPアドレスが含まれている場合はプロクシを利用せず
-直接接続します。
+no_proxy の文字列に address のホスト名やIPアドレスが含まれている場合はプロクシを利用せず直接接続します。
 
 このメソッドは TCP コネクションを張りません。
 
@@ -53,16 +47,12 @@ no_proxy の文字列に address のホスト名やIPアドレスが含まれて
 新しい [c:Net::HTTP] オブジェクトを生成し、
 TCP コネクション、 HTTP セッションを開始します。
 
-ブロックを与えた場合には生成したオブジェクトをそのブロックに
-渡し、ブロックが終わったときに接続を閉じます。このときは
-ブロックの値を返り値とします。
+ブロックを与えた場合には生成したオブジェクトをそのブロックに渡し、ブロックが終わったときに接続を閉じます。このときはブロックの値を返り値とします。
 
 ブロックを与えなかった場合には生成したオブジェクトを渡します。
 利用後にはこのオブジェクトを [m:Net::HTTP#finish] してください。
 
-proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシの URI を
-取り出し利用します。環境変数 http_proxy が定義されていない場合には
-プロクシは利用しません。
+proxy_addr に :ENV を指定すると環境変数 http_proxy からプロクシの URI を取り出し利用します。環境変数 http_proxy が定義されていない場合にはプロクシは利用しません。
 
 このメソッドは以下と同じです。
 
@@ -83,8 +73,7 @@ Net::HTTP.new(address, port, proxy_addr, proxy_port, proxy_user, proxy_pass).sta
 ### def Net::HTTP.get(uri) -> String
 ### def Net::HTTP.get(host, path, port = 80) -> String
 
-指定した対象に GET リクエストを送り、そのボディを
-文字列として返します。
+指定した対象に GET リクエストを送り、そのボディを文字列として返します。
 
 対象の指定方法は [c:URI] で指定するか、
 (host, path, port) で指定するかのいずれかです。
@@ -145,8 +134,7 @@ Net::HTTP.get_print 'www.example.com', '/index.html'
 [c:URI] で指定した対象に フォームのデータを HTTP で 
 POST します。
 
-送るデータは params に文字列から文字列への [c:Hash] として
-渡します。
+送るデータは params に文字列から文字列への [c:Hash] として渡します。
 
 - **param** `uri` -- POST する対象を [c:URI] で指定します。
 - **param** `params` -- POST するデータです。
@@ -181,8 +169,7 @@ POST します。
 ### def Net::HTTP.proxy_user -> String|nil
 
 自身が ([m:Net::HTTP.Proxy] によって作成された)
-プロクシ用のクラスで、かつプロクシの認証を利用する場合は
-プロクシ認証のユーザ名を返します。
+プロクシ用のクラスで、かつプロクシの認証を利用する場合はプロクシ認証のユーザ名を返します。
 
 そうでなければ nil を返します。
 
@@ -196,9 +183,7 @@ POST します。
 
 Proxy 経由で http サーバに接続するためのクラスを作成し返します。
 
-このクラスは Net::HTTP を継承しているので Net::HTTP と全く
-同じように使えます。指定されたプロクシを常に経由して http サーバ
-に接続します。
+このクラスは Net::HTTP を継承しているので Net::HTTP と全く同じように使えます。指定されたプロクシを常に経由して http サーバに接続します。
 
 address が nil のときは Net::HTTP クラスをそのまま返します。
 
@@ -265,9 +250,7 @@ HTTPS のデフォルトポート (443) を返します。
 TCP コネクションを張り、HTTP セッションを開始します。
 すでにセッションが開始していたら例外 IOError を発生します。
 
-ブロックを与えた場合には自分自身をそのブロックに
-渡し、ブロックが終わったときに接続を閉じます。このときは
-ブロックの値を返り値とします。
+ブロックを与えた場合には自分自身をそのブロックに渡し、ブロックが終わったときに接続を閉じます。このときはブロックの値を返り値とします。
 
 ブロックを与えなかった場合には自分自身を返します。
 利用後にはこのオブジェクトを [m:Net::HTTP#finish] してください。
@@ -285,8 +268,7 @@ active? は時代遅れのメソッドです。
 ### def set_debug_output(io) -> ()
 
 デバッグ出力の出力先を指定します。
-このメソッドは深刻なセキュリティホールの原因
-になるため、デバッグ以外では決して使わないでください。
+このメソッドは深刻なセキュリティホールの原因になるため、デバッグ以外では決して使わないでください。
 
 io に nil を指定するとデバッグ出力を止めます。
 
@@ -299,8 +281,7 @@ http.set_debug_output($stderr)
 
 ### def close_on_empty_response -> bool
 
-レスポンスがボディを持っていない場合にコネクションを
-閉じるかどうかを返します。
+レスポンスがボディを持っていない場合にコネクションを閉じるかどうかを返します。
 
 デフォルトでは偽(閉じない)です。
 
@@ -308,8 +289,7 @@ http.set_debug_output($stderr)
 
 ### def close_on_empty_response=(bool)
 
-レスポンスがボディを持っていない場合にコネクションを
-閉じるかどうかを設定します。
+レスポンスがボディを持っていない場合にコネクションを閉じるかどうかを設定します。
 
 - **param** `bool` -- レスポンスがボディを持っていない場合にコネクションを
             閉じるかどうか指定します。
@@ -330,8 +310,7 @@ http.set_debug_output($stderr)
 
 接続に用いるローカルホスト名を返します。
 
-nil の場合システムが適当にローカルホストを
-決めます。
+nil の場合システムが適当にローカルホストを決めます。
 
 デフォルトは nil です。
 
@@ -341,8 +320,7 @@ nil の場合システムが適当にローカルホストを
 
 接続に用いるローカルホスト名を指定します。
 
-nil の場合システムが適当にローカルホストを
-決めます。
+nil の場合システムが適当にローカルホストを決めます。
 
 デフォルトは nil です。
 
@@ -366,8 +344,7 @@ end
 
 接続に用いるローカルポートを返します。
 
-nil の場合システムが適当にローカルポートを
-決めます。
+nil の場合システムが適当にローカルポートを決めます。
 
 デフォルトは nil です。
 
@@ -377,8 +354,7 @@ nil の場合システムが適当にローカルポートを
 
 接続に用いるローカルポートを設定します。
 
-nil の場合システムが適当にローカルポートを
-決めます。
+nil の場合システムが適当にローカルポートを決めます。
 
 デフォルトは nil です。
 
@@ -409,8 +385,7 @@ end
 ### def proxy_address -> String|nil
 ### def proxyaddr -> String|nil
 
-プロクシ経由で接続する HTTP オブジェクトならプロクシのアドレス
-を返します。
+プロクシ経由で接続する HTTP オブジェクトならプロクシのアドレスを返します。
 
 そうでないなら nil を返します。
 
@@ -450,8 +425,7 @@ proxyport は時代遅れのメソッドです。
 
 ### def proxy_pass -> String|nil
 
-プロクシ経由で接続し、さらにプロクシのユーザ認証を
-する HTTP オブジェクトなら認証のパスワードを返します。
+プロクシ経由で接続し、さらにプロクシのユーザ認証をする HTTP オブジェクトなら認証のパスワードを返します。
 
 そうでないなら nil を返します。
 - **SEE** [m:Net::HTTP#proxy_pass=], [m:Net::HTTP#proxy_user], [m:Net::HTTP.new]
@@ -467,8 +441,7 @@ proxyport は時代遅れのメソッドです。
 
 ### def proxy_user -> String|nil
 
-プロクシ経由で接続し、さらにプロクシのユーザ認証を
-する HTTP オブジェクトなら認証のユーザ名を返します。
+プロクシ経由で接続し、さらにプロクシのユーザ認証をする HTTP オブジェクトなら認証のユーザ名を返します。
 
 そうでないなら nil を返します。
 
@@ -515,8 +488,7 @@ proxyport は時代遅れのメソッドです。
 
 接続時に待つ最大秒数を返します。
 
-この秒数たってもコネクションが
-開かなければ例外 [c:Net::OpenTimeout] を発生します。
+この秒数たってもコネクションが開かなければ例外 [c:Net::OpenTimeout] を発生します。
 
 デフォルトは 60 (秒)です。
 
@@ -526,8 +498,7 @@ proxyport は時代遅れのメソッドです。
 
 接続時に待つ最大秒数を設定します。
 
-この秒数たってもコネクションが
-開かなければ例外 [c:Net::OpenTimeout] を発生します。
+この秒数たってもコネクションが開かなければ例外 [c:Net::OpenTimeout] を発生します。
 nilを設定するとタイムアウトしなくなります。
 
 以下のコネクションを開くメソッドで有効です。
@@ -540,8 +511,7 @@ nilを設定するとタイムアウトしなくなります。
 
 ### def read_timeout -> Integer|nil
 
-読みこみ([man:read(2)]) 一回でブロックしてよい最大秒数
-を返します。
+読みこみ([man:read(2)]) 一回でブロックしてよい最大秒数を返します。
 
 この秒数たっても読みこめなければ例外 [c:Net::ReadTimeout]
 を発生します。
@@ -554,8 +524,7 @@ nilはタイムアウトしないことを意味します。
 
 ### def read_timeout=(seconds)
 
-読みこみ([man:read(2)]) 一回でブロックしてよい最大秒数を
-設定します。
+読みこみ([man:read(2)]) 一回でブロックしてよい最大秒数を設定します。
 
 この秒数たっても読みこめなければ例外 [c:Net::ReadTimeout]
 を発生します。
@@ -571,8 +540,7 @@ nilを設定するとタイムアウトしなくなります。
 
 ### def write_timeout -> Numeric|nil
 
-書き込み([man:write(2)]) 一回でブロックしてよい最大秒数
-を返します。
+書き込み([man:write(2)]) 一回でブロックしてよい最大秒数を返します。
 
 この秒数たっても書き込めなければ例外 [c:Net::WriteTimeout]
 を発生します。
@@ -585,8 +553,7 @@ Windows では Net::WriteTimeout は発生しません。
 
 ### def write_timeout=(seconds)
 
-書き込み([man:write(2)]) 一回でブロックしてよい最大秒数を
-設定します。
+書き込み([man:write(2)]) 一回でブロックしてよい最大秒数を設定します。
 
 Float や Rational も設定できます。
 
@@ -612,8 +579,7 @@ Windows では Net::WriteTimeout は発生しません。
 
 冪等なリクエストが [c:Net::ReadTimeout]、[c:IOError]、[c:EOFError]、
 [c:Errno::ECONNRESET]、[c:Errno::ECONNABORTED]、[c:Errno::EPIPE]、
-[c:OpenSSL::SSL::SSLError]、[c:Timeout::Error] のいずれかで失敗した場合に
-再試行する最大回数を設定します。
+[c:OpenSSL::SSL::SSLError]、[c:Timeout::Error] のいずれかで失敗した場合に再試行する最大回数を設定します。
 
 デフォルトは 1 です。
 
@@ -630,8 +596,7 @@ http.max_retries       # => 2
 
 ### def keep_alive_timeout -> Integer
 
-以前のリクエストで使ったコネクションの再利用(keep-alive)を許可する秒数を
-返します。
+以前のリクエストで使ったコネクションの再利用(keep-alive)を許可する秒数を返します。
 
 デフォルトは2(秒)です。
 
@@ -639,14 +604,11 @@ http.max_retries       # => 2
 
 ### def keep_alive_timeout=(seconds)
 
-以前のリクエストで使ったコネクションの再利用(keep-alive)を許可する秒数を
-設定します。
+以前のリクエストで使ったコネクションの再利用(keep-alive)を許可する秒数を設定します。
 
-この秒数以内に同じホストに次のリクエストを送った場合、
-ソケットを再利用します。
+この秒数以内に同じホストに次のリクエストを送った場合、ソケットを再利用します。
 
-デフォルトは2(秒)です。これは一般的にサーバ側の keep-alive の秒数
-が2秒である場合が多いからです。
+デフォルトは2(秒)です。これは一般的にサーバ側の keep-alive の秒数が2秒である場合が多いからです。
 
 - **SEE** [m:Net::HTTP#keep_alive_timeout]
 
@@ -654,8 +616,7 @@ http.max_retries       # => 2
 
 「100 Continue」レスポンスを待つ秒数を返します。
 
-この秒数待ってもレスポンスが来ない場合は
-リクエストボディを送信します。
+この秒数待ってもレスポンスが来ない場合はリクエストボディを送信します。
 
 デフォルトは nil (待たない)です。
 
@@ -665,8 +626,7 @@ http.max_retries       # => 2
 
 「100 Continue」レスポンスを待つ秒数を指定します。
 
-この秒数待ってもレスポンスが来ない場合は
-リクエストボディを送信します。
+この秒数待ってもレスポンスが来ない場合はリクエストボディを送信します。
 
 デフォルトは nil (待たない)です。
 
@@ -675,8 +635,7 @@ http.max_retries       # => 2
 
 ### def finish -> ()
 
-HTTP セッションを終了します。セッション開始前にこのメソッドが
-呼ばれた場合は例外 IOError を発生します。
+HTTP セッションを終了します。セッション開始前にこのメソッドが呼ばれた場合は例外 IOError を発生します。
 
 - **raise** `IOError` -- セッション開始前に呼ぶと発生します。
 
@@ -687,20 +646,13 @@ HTTP セッションを終了します。セッション開始前にこのメソ
 [c:Net::HTTPResponse] のインスタンスとして返します。
 
 header が nil
-でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
-送ります。 header は { 'Accept' = > '*/*', ... } という
-形のハッシュでなければいけません。
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして送ります。 header は { 'Accept' = > '*/*', ... } という形のハッシュでなければいけません。
 
-ブロックと一緒に呼びだされたときは
-エンティティボディを少しずつ文字列として
-ブロックに与えます。このとき戻り値の 
-[c:Net::HTTPResponse] オブジェクトは有効な body を
-持ちません。
+ブロックと一緒に呼びだされたときはエンティティボディを少しずつ文字列としてブロックに与えます。このとき戻り値の 
+[c:Net::HTTPResponse] オブジェクトは有効な body を持ちません。
 
 dest は時代遅れの引数です。利用しないでください。
-dest を指定した場合には
-ボディを少しずつ取得して順次
-「dest << ボディの断片」を実行します。
+dest を指定した場合にはボディを少しずつ取得して順次「dest << ボディの断片」を実行します。
 
 - **param** `path` -- 取得するエンティティのパスを文字列で指定します。
 - **param** `header` -- リクエストの HTTP ヘッダをハッシュで指定します。
@@ -736,9 +688,7 @@ File.open('save.txt', 'w') {|f|
 [c:Net::HTTPResponse] のインスタンスを返します。
 
 header が nil
-でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
-送ります。 header は { 'Accept' = > '*/*', ... } という
-形のハッシュでなければいけません。
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして送ります。 header は { 'Accept' = > '*/*', ... } という形のハッシュでなければいけません。
 
 - **param** `path` -- 取得するエンティティのパスを文字列で指定します。
 - **param** `header` -- リクエストの HTTP ヘッダをハッシュで指定します。
@@ -765,9 +715,7 @@ POST で送ります。
 
 返り値は [c:Net::HTTPResponse] のインスタンスです。
 
-ブロックと一緒に呼びだされたときはエンティティボディを少しずつ文字列として
-ブロックに与えます。このとき戻り値の HTTPResponse オブジェクトは有効な body を
-持ちません。
+ブロックと一緒に呼びだされたときはエンティティボディを少しずつ文字列としてブロックに与えます。このとき戻り値の HTTPResponse オブジェクトは有効な body を持ちません。
 
 #%since 4.0
 POST する場合にはヘッダに Content-Type: を指定する必要があります。
@@ -781,9 +729,7 @@ POST する場合にはヘッダに Content-Type: を指定する必要があり
 #%end
 
 dest は時代遅れの引数です。利用しないでください。
-dest を指定した場合には
-ボディを少しずつ取得して順次
-「dest << ボディの断片」を実行します。
+dest を指定した場合にはボディを少しずつ取得して順次「dest << ボディの断片」を実行します。
 
 - **param** `path` -- POST先のパスを文字列で指定します。
 - **param** `header` -- リクエストの HTTP ヘッダをハッシュで指定します。
@@ -818,16 +764,11 @@ File.open('save.html', 'w') {|f|
 [c:Net::HTTPResponse] オブジェクトを返します。
 
 header が nil
-でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
-送ります。 header は { 'Accept' = > '*/*', ... } という
-形のハッシュでなければいけません。
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして送ります。 header は { 'Accept' = > '*/*', ... } という形のハッシュでなければいけません。
 
-ブロックとともに呼び出されたときは、
-エンティティボディをソケットから読み出す前に、
-接続を維持した状態で [c:Net::HTTPResponse]
+ブロックとともに呼び出されたときは、エンティティボディをソケットから読み出す前に、接続を維持した状態で [c:Net::HTTPResponse]
 オブジェクトをブロックに渡します。
-大きなサイズのボディを一度に読みだすとまずく、
-小さなサイズに分けて取りだしたい場合にはこれを利用します。
+大きなサイズのボディを一度に読みだすとまずく、小さなサイズに分けて取りだしたい場合にはこれを利用します。
 
 - **param** `path` -- 取得するエンティティのパスを文字列で指定します。
 - **param** `header` -- リクエストの HTTP ヘッダをハッシュで指定します。
@@ -860,13 +801,10 @@ get2 は時代遅れなので使わないでください。
 [c:Net::HTTPResponse] オブジェクトを返します。
 
 header が nil
-でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
-送ります。 header は { 'Accept' = > '*/*', ... } という
-形のハッシュでなければいけません。
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして送ります。 header は { 'Accept' = > '*/*', ... } という形のハッシュでなければいけません。
 
 ブロックとともに呼び出されたときは、
-[m:Net::HTTP#request_get] と同じ動作を
-しますが、そもそもヘッダしか要求していないので
+[m:Net::HTTP#request_get] と同じ動作をしますが、そもそもヘッダしか要求していないので
 body は空です。そのためこの動作はそれほど意味はありません。
 
 - **param** `path` -- ヘッダを取得するエンティティのパスを
@@ -892,13 +830,9 @@ POST で送ります。
 返り値は [c:Net::HTTPResponse] のインスタンスです。
 
 header が nil
-でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
-送ります。 header は { 'Accept' = > '*/*', ... } という
-形のハッシュでなければいけません。
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして送ります。 header は { 'Accept' = > '*/*', ... } という形のハッシュでなければいけません。
 
-ブロックとともに呼び出されたときは、
-エンティティボディをソケットから読み出す前に、
-接続を維持した状態で [c:Net::HTTPResponse]
+ブロックとともに呼び出されたときは、エンティティボディをソケットから読み出す前に、接続を維持した状態で [c:Net::HTTPResponse]
 オブジェクトをブロックに渡します。
 
 #%since 4.0
@@ -960,9 +894,7 @@ PUT で送ります。
 
 返り値は [c:Net::HTTPResponse] のインスタンスです。
 
-ブロックとともに呼び出されたときは、
-ボディをソケットから読み出す前に、
-接続を維持した状態で [c:Net::HTTPResponse]
+ブロックとともに呼び出されたときは、ボディをソケットから読み出す前に、接続を維持した状態で [c:Net::HTTPResponse]
 オブジェクトをブロックに渡します。
 
 - **param** `path` -- 取得するエンティティのパスを文字列で指定します。
@@ -999,8 +931,7 @@ POST/PUT の時は data も与えられます
 (GET/HEAD などで  data を与えると 
 [c:ArgumentError] を発生します)。
 
-ブロックとともに呼びだされたときは
-ソケットからボディを読みこまずに [c:Net::HTTPResponse]
+ブロックとともに呼びだされたときはソケットからボディを読みこまずに [c:Net::HTTPResponse]
 オブジェクトをブロックに与えます。
 
 - **param** `request` -- リクエストオブジェクトを与えます。
@@ -1015,11 +946,9 @@ POST/PUT の時は data も与えられます
 
 ### def copy(path, initheader = nil) -> Net::HTTPResponse
 
-サーバの path に COPY リクエストを
-ヘッダを initheader として送ります。
+サーバの path に COPY リクエストをヘッダを initheader として送ります。
 
-レスポンスを [c:Net::HTTPResponse] のオブジェクト
-で返します。
+レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
@@ -1029,11 +958,9 @@ POST/PUT の時は data も与えられます
 
 ### def delete(path, initheader = nil) -> Net::HTTPResponse
 
-サーバの path に DELETE リクエストを
-ヘッダを initheader として送ります。
+サーバの path に DELETE リクエストをヘッダを initheader として送ります。
 
-レスポンスを [c:Net::HTTPResponse] のオブジェクト
-で返します。
+レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
@@ -1043,11 +970,9 @@ POST/PUT の時は data も与えられます
 
 ### def lock(path, body, initheader = nil) -> Net::HTTPResponse
 
-サーバの path に LOCK リクエストを
-ヘッダを initheader, ボディを body として送ります。
+サーバの path に LOCK リクエストをヘッダを initheader, ボディを body として送ります。
 
-レスポンスを [c:Net::HTTPResponse] のオブジェクト
-で返します。
+レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `body` -- リクエストのボディを文字列で与えます。
@@ -1058,11 +983,9 @@ POST/PUT の時は data も与えられます
 
 ### def mkcol(path, body, initheader = nil) -> Net::HTTPResponse
 
-サーバの path に MKCOL リクエストを
-ヘッダが initheader, ボディを body として送ります。
+サーバの path に MKCOL リクエストをヘッダが initheader, ボディを body として送ります。
 
-レスポンスを [c:Net::HTTPResponse] のオブジェクト
-で返します。
+レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `body` -- リクエストのボディを文字列で与えます。
@@ -1073,11 +996,9 @@ POST/PUT の時は data も与えられます
 
 ### def move(path, body, initheader = nil) -> Net::HTTPResponse
 
-サーバの path に MOVE リクエストを
-ヘッダが initheader, ボディを body として送ります。
+サーバの path に MOVE リクエストをヘッダが initheader, ボディを body として送ります。
 
-レスポンスを [c:Net::HTTPResponse] のオブジェクト
-で返します。
+レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `body` -- リクエストのボディを文字列で与えます。
@@ -1088,10 +1009,7 @@ POST/PUT の時は data も与えられます
 
 ### def options(path, initheader = nil) -> Net::HTTPResponse
 
-サーバの path に OPTIONS リクエストを
-ヘッダが initheader として送り、
-レスポンスを [c:Net::HTTPResponse] のオブジェクト
-で返します。
+サーバの path に OPTIONS リクエストをヘッダが initheader として送り、レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
@@ -1101,11 +1019,9 @@ POST/PUT の時は data も与えられます
 
 ### def propfind(path, body, initheader = {'Depth' => '0'}) -> Net::HTTPResponse
 
-サーバの path に PROPFIND リクエストを
-ヘッダを initheader, ボディを body として送ります。
+サーバの path に PROPFIND リクエストをヘッダを initheader, ボディを body として送ります。
 
-レスポンスを [c:Net::HTTPResponse] のオブジェクト
-で返します。
+レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `body` -- リクエストのボディを文字列で与えます。
@@ -1122,18 +1038,14 @@ PATCH リクエストで送ります。
 
 返り値は [c:Net::HTTPResponse] のインスタンスです。
 
-ブロックと一緒に呼びだされたときはエンティティボディを少しずつ文字列として
-ブロックに与えます。このとき戻り値の HTTPResponse オブジェクトは有効な body を
-持ちません。
+ブロックと一緒に呼びだされたときはエンティティボディを少しずつ文字列としてブロックに与えます。このとき戻り値の HTTPResponse オブジェクトは有効な body を持ちません。
 
 #%# POST する場合にはヘッダに Content-Type: を指定する必要があります。
 #%# もし header に指定しなかったならば、 Content-Type として
 #%# "application/x-www-form-urlencoded" を用います。
 
 Dest は時代遅れの引数です。利用しないでください。
-dest を指定した場合には
-ボディを少しずつ取得して順次
-「dest << ボディの断片」を実行します。
+dest を指定した場合にはボディを少しずつ取得して順次「dest << ボディの断片」を実行します。
 
 - **param** `path` -- POST先のパスを文字列で指定します。
 - **param** `header` -- リクエストの HTTP ヘッダをハッシュで指定します。
@@ -1141,11 +1053,9 @@ dest を指定した場合には
 
 ### def proppatch(path, body, initheader = nil) -> Net::HTTPResponse
 
-サーバの path に PROPPATCH リクエストを
-ヘッダを initheader, ボディを body として送ります。
+サーバの path に PROPPATCH リクエストをヘッダを initheader, ボディを body として送ります。
 
-レスポンスを [c:Net::HTTPResponse] のオブジェクト
-で返します。
+レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `body` -- リクエストのボディを文字列で与えます。
@@ -1156,11 +1066,9 @@ dest を指定した場合には
 
 ### def trace(path, initheader = nil) -> Net::HTTPResponse
 
-サーバの path に TRACE リクエストを
-ヘッダを initheader として送ります。
+サーバの path に TRACE リクエストをヘッダを initheader として送ります。
 
-レスポンスを [c:Net::HTTPResponse] のオブジェクト
-で返します。
+レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
@@ -1170,11 +1078,9 @@ dest を指定した場合には
 
 ### def unlock(path, body, initheader = nil) -> Net::HTTPResponse
 
-サーバの path に UNLOCK リクエストを
-ヘッダを initheader, ボディを body として送ります。
+サーバの path に UNLOCK リクエストをヘッダを initheader, ボディを body として送ります。
 
-レスポンスを [c:Net::HTTPResponse] のオブジェクト
-で返します。
+レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `body` -- リクエストのボディを文字列で与えます。
@@ -1215,11 +1121,9 @@ SSL/TLS のタイムアウト秒数を返します。
 SSL/TLS のタイムアウト秒数を設定します。
 
 HTTP セッション開始時([m:Net::HTTP#start] など)に
-[m:OpenSSL::SSL::SSLContext#ssl_timeout=] で
-タイムアウトを設定します。
+[m:OpenSSL::SSL::SSLContext#ssl_timeout=] でタイムアウトを設定します。
 
-デフォルト値は [m:OpenSSL::SSL::SSLContext#ssl_timeout=] と
-同じで、OpenSSL のデフォルト値(300秒)を用います。
+デフォルト値は [m:OpenSSL::SSL::SSLContext#ssl_timeout=] と同じで、OpenSSL のデフォルト値(300秒)を用います。
 
 - **param** `sec` -- タイムアウト秒数
 - **SEE** [m:Net::HTTP#ssl_timeout],
@@ -1323,8 +1227,7 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 
 ### def verify_callback -> Proc
 
-自身に設定されている検証をフィルタするコールバックを
-返します。
+自身に設定されている検証をフィルタするコールバックを返します。
 
 デフォルトのコールバックが設定されている場合には nil を返します。
 
@@ -1361,18 +1264,15 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 
 ### def cert_store -> OpenSSL::X509::Store | nil
 
-接続相手の証明書の検証のために使う、信頼している CA 証明書を
-含む証明書ストアを返します。
+接続相手の証明書の検証のために使う、信頼している CA 証明書を含む証明書ストアを返します。
 
 - **SEE** [m:Net::HTTP#cert_store], [m:OpenSSL::SSL::SSLContext#cert_store=]
 
 ### def cert_store=(store)
 
-接続相手の証明書の検証のために使う、信頼している CA 証明書を
-含む証明書ストアを設定します。
+接続相手の証明書の検証のために使う、信頼している CA 証明書を含む証明書ストアを設定します。
 
-通常は [m:Net::HTTP#ca_file=] や [m:Net::HTTP#ca_path=] で
-設定しますが、より詳細な設定をしたい場合にはこちらを用います。
+通常は [m:Net::HTTP#ca_file=] や [m:Net::HTTP#ca_path=] で設定しますが、より詳細な設定をしたい場合にはこちらを用います。
 
 デフォルトは nil (証明書ストアを指定しない)です。
 
@@ -1397,8 +1297,7 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 
 [m:Net::HTTP#ciphers] で設定した値を返します。
 
-[m:OpenSSL::SSL::SSLContext#ciphers] が返す値とは
-異なるので注意してください。
+[m:OpenSSL::SSL::SSLContext#ciphers] が返す値とは異なるので注意してください。
 
 - **SEE** [m:Net::HTTP#ciphers=]
 
@@ -1406,8 +1305,7 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 
 利用可能な共通鍵暗号を設定します。
 
-[m:OpenSSL::SSL::SSLContext#ciphers=] と同じ形式で
-設定します。詳しくはそちらを参照してください。
+[m:OpenSSL::SSL::SSLContext#ciphers=] と同じ形式で設定します。詳しくはそちらを参照してください。
 
 - **param** `ciphers` -- 利用可能にする共通鍵暗号の種類
 - **SEE** [m:Net::HTTP#ciphers]

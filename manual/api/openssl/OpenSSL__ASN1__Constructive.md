@@ -17,8 +17,7 @@ ASN.1 の構造型を表すクラスです。
 
 :IMPLICIT、:EXPLICIT、nil のいずれかを返します。
 
-タグ([m:OpenSSL::ASN1::ASN1Data#tag])が :UNIVERSAL ならば
-この値は無視されます。
+タグ([m:OpenSSL::ASN1::ASN1Data#tag])が :UNIVERSAL ならばこの値は無視されます。
 
 nil は :IMPLICIT と同義です。
 
@@ -33,6 +32,5 @@ nil は :IMPLICIT と同義です。
 
 ### def each {|item| ... } -> self
 
-構造型のデータに含まれる各要素に対してブロックを
-評価します。
+構造型のデータに含まれる各要素に対してブロックを評価します。
 

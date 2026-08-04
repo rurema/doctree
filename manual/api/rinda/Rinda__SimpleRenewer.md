@@ -26,6 +26,5 @@ sec で [m:Rinda::SimpleRenewer#renew] が返す秒数を指定します。
 
 [c:Rinda::TupleSpace] からオブジェクトの寿命を問合せるために呼び出されます。
 
-このメソッド自体は [m:Rinda::SimpleRenewer.new] で指定した秒数を
-返します。
+このメソッド自体は [m:Rinda::SimpleRenewer.new] で指定した秒数を返します。
 

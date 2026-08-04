@@ -3,14 +3,11 @@ library: rss
 ---
 # class RSS::Maker::ItemsBase::ItemBase < Object
 
-itemはmaker.items.new_itemで作成されたオブジェク
-トとします。
+itemはmaker.items.new_itemで作成されたオブジェクトとします。
 
-RSS 1.0/0.91の場合はtitle、linkを設定する必要があ
-ります。
+RSS 1.0/0.91の場合はtitle、linkを設定する必要があります。
 
-RSS 2.0の場合はtitleまたはdescriptionを設定する
-必要があります。
+RSS 2.0の場合はtitleまたはdescriptionを設定する必要があります。
 
 ## Instance Methods
 

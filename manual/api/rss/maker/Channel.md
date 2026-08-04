@@ -14,10 +14,8 @@ description、languageを設定しなければいけません。
 RSS 2.0を生成する場合はtitle、link、
 descriptionを設定しなければいけません。
 
-maker.channelになんらかの値を設定しておきながら、上記
-のmaker.channelが要求する値を設定していない場合は
-RSS::NotSetError例外が発生します。どの値も設定していな
-い場合は例外は発生しません。
+maker.channelになんらかの値を設定しておきながら、上記のmaker.channelが要求する値を設定していない場合は
+RSS::NotSetError例外が発生します。どの値も設定していない場合は例外は発生しません。
 
 ## Instance Methods
 

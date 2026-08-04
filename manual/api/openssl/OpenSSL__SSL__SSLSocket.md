@@ -51,8 +51,7 @@ socket には ラップする [c:TCPSocket] オブジェクトを与え、
 context には SSL の設定情報を所持している
 [c:OpenSSL::SSL::SSLContext] オブジェクトを与えます。
 
-context を省略した場合は [m:OpenSSL::SSL::SSLContext.new] で
-新たにコンテキストを生成してそれを用います。
+context を省略した場合は [m:OpenSSL::SSL::SSLContext.new] で新たにコンテキストを生成してそれを用います。
 
 - **param** `socket` -- ラップするソケット
 - **param** `context` -- SSL の設定情報を持つ SSL コンテキストオブジェクト
@@ -75,15 +74,13 @@ SSLSocket オブジェクトを生成する時に渡されたコンテクスト�
 
 ### def sync_close -> bool
 
-SSLSocket を close するときにラップしているソケットも close するかどうかを
-返します。
+SSLSocket を close するときにラップしているソケットも close するかどうかを返します。
 
 true でソケットも close します。
 
 ### def sync_close=(bool)
 
-SSLSocket を close するときにラップしているソケットも close するかどうかを
-設定します。
+SSLSocket を close するときにラップしているソケットも close するかどうかを設定します。
 
 true でソケットも close するようになります。
 
@@ -95,8 +92,7 @@ true でソケットも close するようになります。
 
 自分自身を証明する証明書を使わなかった場合は nil を返します。
 [m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept] 
-で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼んだ
-場合も nil を返します。
+で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼んだ場合も nil を返します。
 
 - **SEE** [m:OpenSSL::SSL::SSLContext#cert]
 
@@ -111,8 +107,7 @@ true でソケットも close するようになります。
 
 ### def peer_cert_chain -> [OpenSSL::X509::Certificate] | nil
 
-接続相手の証明書チェインを [c:OpenSSL::X509::Certificate] オブジェクト
-の配列で返します。
+接続相手の証明書チェインを [c:OpenSSL::X509::Certificate] オブジェクトの配列で返します。
 
 [m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept] 
 で SSL/TLS ハンドシェイクを行う前にこのメソッドを呼ぶと nil を返します。
@@ -146,15 +141,13 @@ true でソケットも close するようになります。
 
 ### def pending -> Integer | nil
 
-OpenSSL内部のバッファが保持している、直ちに読み取り可能な
-データのバイト数を返します。
+OpenSSL内部のバッファが保持している、直ちに読み取り可能なデータのバイト数を返します。
 
 ハンドシェイク開始前には nil を返します。
 
 ### def accept -> self
 
-TLS/SSL 通信をサーバモードとして開始し、クライアントからの
-ハンドシェイク開始を待ち、クライアントとのハンドシェイクを実行します。
+TLS/SSL 通信をサーバモードとして開始し、クライアントからのハンドシェイク開始を待ち、クライアントとのハンドシェイクを実行します。
 
 - **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で
        証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
@@ -164,8 +157,7 @@ TLS/SSL 通信をサーバモードとして開始し、クライアントから
 
 ### def connect -> self
 
-TLS/SSl 通信をクライアントモードとして開始し、
-サーバとのハンドシェイクを実行します。
+TLS/SSl 通信をクライアントモードとして開始し、サーバとのハンドシェイクを実行します。
 
 - **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で
        証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
@@ -184,9 +176,7 @@ OpenSSL の API では、
 [m:OpenSSL::SSL::SSLSocket#connect] や [m:OpenSSL::SSL::SSLSocket#accept] 
 での検証は実用的には不完全です。
 CA が証明書に署名してそれが失効していないことしか確認しません。
-実用上は証明書に記載されている事項を見て、接続先が妥当であるかを確認する
-必要があります。通常は接続先ホストの FQDN と証明書に記載されている FQDN が
-一致しているかどうかを調べます。このメソッドはその FQDN のチェックを行ないます。
+実用上は証明書に記載されている事項を見て、接続先が妥当であるかを確認する必要があります。通常は接続先ホストの FQDN と証明書に記載されている FQDN が一致しているかどうかを調べます。このメソッドはその FQDN のチェックを行ないます。
 
 - **param** `hostname` -- チェックする FQDN の文字列
 - **raise** `OpenSSL::SSL::SSLError` -- チェックに失敗した場合に発生します
@@ -195,26 +185,19 @@ CA が証明書に署名してそれが失効していないことしか確認�
 
 接続を閉じます。相手に'close notify'を送ります。
 
-このメソッドは openssl ライブラリ内で管理しているバッファを
-フラッシュせずに接続を閉じます。そのため、通常は
-これではなく [m:OpenSSL::Buffering#close] を呼ぶべきです。
+このメソッドは openssl ライブラリ内で管理しているバッファをフラッシュせずに接続を閉じます。そのため、通常はこれではなく [m:OpenSSL::Buffering#close] を呼ぶべきです。
 
-[m:OpenSSL::SSL::SSLSocket#sync_close] が真である場合は
-このメソッドを呼びだした時点で自身が保持しているソケット
-を同時に閉じます。
+[m:OpenSSL::SSL::SSLSocket#sync_close] が真である場合はこのメソッドを呼びだした時点で自身が保持しているソケットを同時に閉じます。
 
 ### def sysread(length, buf=nil) -> String
 
-データをバッファを経由せずに暗号化通信路から読み込み、
-読み込んだデータを文字列で返します。
+データをバッファを経由せずに暗号化通信路から読み込み、読み込んだデータを文字列で返します。
 
-基本的にはこのメソッドは使わず、[c:OpenSSL::Buffering] の
-メソッドを使ってデータを読み込むべきです。
+基本的にはこのメソッドは使わず、[c:OpenSSL::Buffering] のメソッドを使ってデータを読み込むべきです。
 
 length で読み込むバイト数を指定します。
 
-bufに文字列を指定するとその文字列のメモリ領域にデータを直接書き込み、
-その String オブジェクトを返します。
+bufに文字列を指定するとその文字列のメモリ領域にデータを直接書き込み、その String オブジェクトを返します。
 
 [m:IO#sysread] と同様です。
 
@@ -229,8 +212,7 @@ bufに文字列を指定するとその文字列のメモリ領域にデータ�
 
 書き込んだバイト数を整数で返します。
 
-基本的にはこのメソッドは使わず、[c:OpenSSL::Buffering] の
-メソッドを使ってデータを書き込むべきです。
+基本的にはこのメソッドは使わず、[c:OpenSSL::Buffering] のメソッドを使ってデータを書き込むべきです。
 
 [m:IO#syswrite] と同様です。
 
@@ -240,13 +222,9 @@ bufに文字列を指定するとその文字列のメモリ領域にデータ�
 ### def accept_nonblock -> self
 
 ノンブロッキング方式で
-TLS/SSL 通信をサーバモードとして開始し、
-クライアントとのハンドシェイクを実行します。
+TLS/SSL 通信をサーバモードとして開始し、クライアントとのハンドシェイクを実行します。
 
-IO が読み込み待ち、もしくは書き込み待ちになった場合は例外を
-発生させ、ハンドシェイクを中断します。IO が読み込み/書き込み
-可能状態になってからこのメソッドをもう一度呼ぶと
-ハンドシェイクを再開します。
+IO が読み込み待ち、もしくは書き込み待ちになった場合は例外を発生させ、ハンドシェイクを中断します。IO が読み込み/書き込み可能状態になってからこのメソッドをもう一度呼ぶとハンドシェイクを再開します。
 
 - **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で
        証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
@@ -264,13 +242,9 @@ IO が読み込み待ち、もしくは書き込み待ちになった場合は�
 ### def connect_nonblock -> self
 
 ノンブロッキング方式で
-TLS/SSL 通信をクライアントモードとして開始し、
-サーバとのハンドシェイクを実行します。
+TLS/SSL 通信をクライアントモードとして開始し、サーバとのハンドシェイクを実行します。
 
-IO が読み込み待ち、もしくは書き込み待ちになった場合は例外を
-発生させ、ハンドシェイクを中断します。IO が読み込み/書き込み
-可能状態になってからこのメソッドをもう一度呼ぶと
-ハンドシェイクを再開します。
+IO が読み込み待ち、もしくは書き込み待ちになった場合は例外を発生させ、ハンドシェイクを中断します。IO が読み込み/書き込み可能状態になってからこのメソッドをもう一度呼ぶとハンドシェイクを再開します。
 
 - **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で
        証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
@@ -299,15 +273,11 @@ TLS の Server Name Indication(SNI) 拡張で利用するサーバのホスト�
 
 Server Name Indication については [RFC:3546] を参照してください。
 
-このメソッドはハンドシェイク時にクライアント側がサーバ側に
-サーバのホスト名を伝えるために用います。そのため、
-クライアント側が [m:OpenSSL::SSL::SSLSocket#connect] を呼ぶ前に
-このメソッドでホスト名を指定する必要があります。
+このメソッドはハンドシェイク時にクライアント側がサーバ側にサーバのホスト名を伝えるために用います。そのため、クライアント側が [m:OpenSSL::SSL::SSLSocket#connect] を呼ぶ前にこのメソッドでホスト名を指定する必要があります。
 
 hostname に nil を渡すと SNI 拡張を利用しません。
 
-サーバ側については [m:OpenSSL::SSL::SSLContext#servername_cb=] を
-参照してください。
+サーバ側については [m:OpenSSL::SSL::SSLContext#servername_cb=] を参照してください。
 
 - **param** `hostname` -- ホスト名文字列
 - **SEE** [m:OpenSSL::SSL::SSLSocket#hostname],
@@ -324,18 +294,15 @@ hostname に nil を渡すと SNI 拡張を利用しません。
 
 ### def session=(sess)
 
-ハンドシェイクで再利用する SSL セッションを
-設定します。
+ハンドシェイクで再利用する SSL セッションを設定します。
 
 このメソッドはクライアント側でのみ有用です。
 セッションを再利用する場合は、
-[m:OpenSSL::SSL::SSLSocket#connect] を呼ぶ前に
-このメソッドでセッションオブジェクト
+[m:OpenSSL::SSL::SSLSocket#connect] を呼ぶ前にこのメソッドでセッションオブジェクト
 ([c:OpenSSL::SSL::Session] のインスタンス)
 を設定します。
 
-サーバ側の場合 [c:OpenSSL::SSL::SSLContext] がキャッシュの保持と
-管理を行います。
+サーバ側の場合 [c:OpenSSL::SSL::SSLContext] がキャッシュの保持と管理を行います。
 
 - **param** `sess` -- 設定するセッション
 - **SEE** [m:OpenSSL::SSL::SSLSocket#session],
@@ -343,8 +310,7 @@ hostname に nil を渡すと SNI 拡張を利用しません。
 
 ### def session_reused? -> bool
 
-利用している SSL セッションが再利用されたものである
-場合に真を返します。
+利用している SSL セッションが再利用されたものである場合に真を返します。
 
 - **SEE** [c:OpenSSL::SSL::Session],
      [m:OpenSSL::SSL::SSLSocket#session],

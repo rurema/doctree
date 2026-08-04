@@ -11,12 +11,10 @@ each 以外のメソッドにも [c:Enumerable] の機能を提供するため�
 [c:Enumerable] モジュールは、 [m:Module#include] 先のクラスが持つ
 each メソッドを元に様々なメソッドを提供します。
 例えば Array#map は [m:Array#each] の繰り返しを元にして定義されます。
-Enumerator を介することにより [m:String#each_byte] のような
-異なる名前のイテレータについても each と同様に Enumerable の機能を利用できます。
+Enumerator を介することにより [m:String#each_byte] のような異なる名前のイテレータについても each と同様に Enumerable の機能を利用できます。
 
 Enumerator を生成するには [m:Enumerator.new]あるいは
-[m:Object#to_enum], [m:Object#enum_for] を利用します。また、一部の
-イテレータはブロックを渡さずに呼び出すと繰り返しを実行する代わりに
+[m:Object#to_enum], [m:Object#enum_for] を利用します。また、一部のイテレータはブロックを渡さずに呼び出すと繰り返しを実行する代わりに
 enumerator を生成して返します。
 
 ### 注意
@@ -45,11 +43,9 @@ p a.next
 
 ### def Enumerator.new(size=nil){|y| ... }         -> Enumerator
 
-Enumerator オブジェクトを生成して返します。与えられたブロックは [c:Enumerator::Yielder] オブジェクトを
-引数として実行されます。
+Enumerator オブジェクトを生成して返します。与えられたブロックは [c:Enumerator::Yielder] オブジェクトを引数として実行されます。
 
-生成された Enumerator オブジェクトに対して each を呼ぶと、この生成時に指定されたブロックを
-実行し、Yielder オブジェクトに対して << メソッドが呼ばれるたびに、
+生成された Enumerator オブジェクトに対して each を呼ぶと、この生成時に指定されたブロックを実行し、Yielder オブジェクトに対して << メソッドが呼ばれるたびに、
 each に渡されたブロックが繰り返されます。
 
 new に渡されたブロックが終了した時点で each の繰り返しが終わります。
@@ -92,9 +88,7 @@ p fib.take(10) #=> [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 
 与えられたブロックを呼び出し続ける、停止しない Enumerator を返します。
 ブロックの戻り値が、次にブロックを呼び出す時に引数として渡されます。
-initial 引数が渡された場合、最初にブロックを呼び出す時にそれがブロック
-呼び出しの引数として渡されます。initial が渡されなかった場合は nil が
-渡されます。
+initial 引数が渡された場合、最初にブロックを呼び出す時にそれがブロック呼び出しの引数として渡されます。initial が渡されなかった場合は nil が渡されます。
 
 ブロックが例外 [c:StopIteration]を投げた場合、繰り返しが終了します。
 
@@ -209,8 +203,7 @@ p e.to_a #=> [1, 2, 3, 4, 5]
 
 生成時のパラメータに従ってブロックを繰り返します。
 *args を渡した場合は、生成時のパラメータ内引数末尾へ *args を追加した状態で繰り返します。
-ブロック付きで呼び出された場合は、
-生成時に指定したイテレータの戻り値をそのまま返します。
+ブロック付きで呼び出された場合は、生成時に指定したイテレータの戻り値をそのまま返します。
 
 - **param** `args` -- 末尾へ追加する引数
 
@@ -263,10 +256,8 @@ p enum.each(:y, :z) { |elm| elm } # => :method_returned
 [c:StopIteration] 例外を発生します。このとき列挙状態は変化しません。
 つまりもう一度 next を呼ぶと再び例外が発生します。
 
-next メソッドによる外部列挙の状態は他のイテレータメソッドによる
-内部列挙には影響を与えません。
-ただし、 [m:IO#each_line] のようにおおもとの列挙メカニズムが副作用を
-伴っている場合には影響があり得ます。
+next メソッドによる外部列挙の状態は他のイテレータメソッドによる内部列挙には影響を与えません。
+ただし、 [m:IO#each_line] のようにおおもとの列挙メカニズムが副作用を伴っている場合には影響があり得ます。
 
 - **raise** `StopIteration` -- 列挙状態が既に最後へ到達しているとき
 - **SEE** [m:Enumerator#rewind]
@@ -363,10 +354,8 @@ yield nil
 
 を区別するために使えます。
 
-next メソッドによる外部列挙の状態は他のイテレータメソッドによる
-内部列挙には影響を与えません。
-ただし、 [m:IO#each_line] のようにおおもとの列挙メカニズムが副作用を
-伴っている場合には影響があり得ます。
+next メソッドによる外部列挙の状態は他のイテレータメソッドによる内部列挙には影響を与えません。
+ただし、 [m:IO#each_line] のようにおおもとの列挙メカニズムが副作用を伴っている場合には影響があり得ます。
 
 ```ruby title="例: next と next_values の違いを"
 o = Object.new
@@ -405,8 +394,7 @@ p e.next
 
 「次」のオブジェクトを返しますが、列挙状態を変化させません。
 
-[m:Enumerator#next] のように
-現在までの列挙状態に応じて「次」のオブジェクトを返しますが、
+[m:Enumerator#next] のように現在までの列挙状態に応じて「次」のオブジェクトを返しますが、
 next と異なり列挙状態を変更しません。
 
 列挙が既に最後へ到達している場合は、[c:StopIteration] 例外を発生します。
@@ -428,11 +416,9 @@ p e.next   #raises StopIteration
 
 ### def peek_values -> Array
 
-[m:Enumerator#next_values] のように「次」のオブジェクトを
-配列で返しますが、列挙状態を変化させません。
+[m:Enumerator#next_values] のように「次」のオブジェクトを配列で返しますが、列挙状態を変化させません。
 
-[m:Enumerator#next], [m:Enumerator#next_values] のように
-現在までの列挙状態に応じて「次」のオブジェクトを返しますが、
+[m:Enumerator#next], [m:Enumerator#next_values] のように現在までの列挙状態に応じて「次」のオブジェクトを返しますが、
 next と異なり列挙状態を変更しません。
 
 列挙が既に最後へ到達している場合は、[c:StopIteration] 例外を発生します。
@@ -478,8 +464,7 @@ p e.peek_values    # raises StopIteration
 
 next メソッドによる外部列挙の状態を最初まで巻き戻します。 self を返します。
 
-内包するオブジェクトが rewind メソッドを持つとき(respond_to?(:rewind) に
-真を返すとき) は、その rewind メソッドを呼び出します。
+内包するオブジェクトが rewind メソッドを持つとき(respond_to?(:rewind) に真を返すとき) は、その rewind メソッドを呼び出します。
 
 - **SEE** [m:Enumerator#next]
 
@@ -529,8 +514,7 @@ each_with_index は受け取りません (引数はイテレータメソッド�
 
 obj には任意のオブジェクトを渡すことができます。
 
-ブロックが渡されなかった場合は、上で説明した繰り返しを実行し、
-最後に obj を返す [c:Enumerator] を返します。
+ブロックが渡されなかった場合は、上で説明した繰り返しを実行し、最後に obj を返す [c:Enumerator] を返します。
 
 ```ruby title="例"
 # 0,1,2 と呼びだす enumeratorを作る
@@ -558,9 +542,7 @@ end
 self の要素数を返します。
 
 要素数が無限の場合は [m:Float::INFINITY] を返します。
-[m:Enumerator.new] に [c:Proc] オブジェクトを指定していた場合はその
-実行結果を返します。呼び出した時に要素数が不明であった場合は nil を返し
-ます。
+[m:Enumerator.new] に [c:Proc] オブジェクトを指定していた場合はその実行結果を返します。呼び出した時に要素数が不明であった場合は nil を返します。
 
 ```ruby title="例"
 p (1..100).to_a.permutation(4).size # => 94109400

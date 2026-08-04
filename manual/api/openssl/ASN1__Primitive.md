@@ -15,8 +15,7 @@ ASN.1 の単純型を表すクラスです。
 
 :IMPLICIT、:EXPLICIT、nil のいずれかを返します。
 
-タグ([m:OpenSSL::ASN1::ASN1Data#tag])が :UNIVERSAL ならば
-この値は無視されます。
+タグ([m:OpenSSL::ASN1::ASN1Data#tag])が :UNIVERSAL ならばこの値は無視されます。
 
 nil は :IMPLICIT と同義です。
 
@@ -37,11 +36,9 @@ ASN.1 の Boolean 型(Universal タグのタグ番号1)を表すクラスです�
 ### def OpenSSL::ASN1::Boolean.new(value) ->  OpenSSL::ASN1::Boolean
 ### def OpenSSL::ASN1::Boolean.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Boolean
 
-ASN.1 の Boolean 型の値を表現する OpenSSL::ASN1::Boolean オブジェクトを
-生成します。
+ASN.1 の Boolean 型の値を表現する OpenSSL::ASN1::Boolean オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::BOOLEAN] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::BOOLEAN] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(true もしくは false)
 - **param** `tag` -- タグ番号
@@ -56,11 +53,9 @@ ASN.1 の Integer 型(Universal タグのタグ番号2)を表すクラスです�
 ### def OpenSSL::ASN1::Integer.new(value) ->  OpenSSL::ASN1::Integer
 ### def OpenSSL::ASN1::Integer.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Integer
 
-ASN.1 の Integer 型の値を表現する OpenSSL::ASN1::Integer オブジェクトを
-生成します。
+ASN.1 の Integer 型の値を表現する OpenSSL::ASN1::Integer オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::INTEGER] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::INTEGER] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト([c:OpenSSL::BN]のインスタンス)
 - **param** `tag` -- タグ番号
@@ -75,11 +70,9 @@ ASN.1 の Enumerated 型(Universal タグのタグ番号10)を表すクラスで
 ### def OpenSSL::ASN1::Enumerated.new(value) ->  OpenSSL::ASN1::Boolean
 ### def OpenSSL::ASN1::Enumerated.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Boolean
 
-ASN.1 の Enumerated 型の値を表現する OpenSSL::ASN1::Enumerated オブジェクトを
-生成します。
+ASN.1 の Enumerated 型の値を表現する OpenSSL::ASN1::Enumerated オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::ENUMERATED] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::ENUMERATED] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(0以上の整数)
 - **param** `tag` -- タグ番号
@@ -94,11 +87,9 @@ ASN.1 の Bit String 型(Universal タグのタグ番号3)を表すクラスで�
 ### def OpenSSL::ASN1::BitString.new(value) ->  OpenSSL::ASN1::BitString
 ### def OpenSSL::ASN1::BitString.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::BitString
 
-ASN.1 の Bit String 型の値を表現する OpenSSL::ASN1::BitString オブジェクトを
-生成します。
+ASN.1 の Bit String 型の値を表現する OpenSSL::ASN1::BitString オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::BIT_STRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::BIT_STRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -128,11 +119,9 @@ ASN.1 の Octet String 型(Universal タグのタグ番号4)を表すクラス�
 ### def OpenSSL::ASN1::OctetString.new(value) ->  OpenSSL::ASN1::OctetString
 ### def OpenSSL::ASN1::OctetString.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::OctetString
 
-ASN.1 の Octet String 型の値を表現する OpenSSL::ASN1::OctetString オブジェクトを
-生成します。
+ASN.1 の Octet String 型の値を表現する OpenSSL::ASN1::OctetString オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::OCTET_STRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::OCTET_STRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -147,11 +136,9 @@ ASN.1 の UTF8String 型(Universal タグのタグ番号12)を表すクラスで
 ### def OpenSSL::ASN1::UTF8String.new(value) ->  OpenSSL::ASN1::UTF8String
 ### def OpenSSL::ASN1::UTF8String.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UTF8String
 
-ASN.1 の UTF8String 型の値を表現する OpenSSL::ASN1::UTF8String オブジェクトを
-生成します。
+ASN.1 の UTF8String 型の値を表現する OpenSSL::ASN1::UTF8String オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::UTF8STRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::UTF8STRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -166,11 +153,9 @@ ASN.1 の NumericString 型(Universal タグのタグ番号18)を表すクラス
 ### def OpenSSL::ASN1::NumericString.new(value) ->  OpenSSL::ASN1::NumericString
 ### def OpenSSL::ASN1::NumericString.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::NumericString
 
-ASN.1 の NumericString 型の値を表現する OpenSSL::ASN1::NumericString オブジェクトを
-生成します。
+ASN.1 の NumericString 型の値を表現する OpenSSL::ASN1::NumericString オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::NUMERICSTRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::NUMERICSTRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -185,11 +170,9 @@ ASN.1 の PrintableString 型(Universal タグのタグ番号19)を表すクラ�
 ### def OpenSSL::ASN1::PrintableString.new(value) ->  OpenSSL::ASN1::PrintableString
 ### def OpenSSL::ASN1::PrintableString.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::PrintableString
 
-ASN.1 の PrintableString 型の値を表現する OpenSSL::ASN1::PrintableString オブジェクトを
-生成します。
+ASN.1 の PrintableString 型の値を表現する OpenSSL::ASN1::PrintableString オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::PRINTABLESTRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::PRINTABLESTRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -204,11 +187,9 @@ ASN.1 の T61String 型(Universal タグのタグ番号20)を表すクラスで�
 ### def OpenSSL::ASN1::T61String.new(value) ->  OpenSSL::ASN1::T61String
 ### def OpenSSL::ASN1::T61String.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::T61String
 
-ASN.1 の T61String 型の値を表現する OpenSSL::ASN1::T61String オブジェクトを
-生成します。
+ASN.1 の T61String 型の値を表現する OpenSSL::ASN1::T61String オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::T61STRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::T61STRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -223,11 +204,9 @@ ASN.1 の VideotexString 型(Universal タグのタグ番号21)を表すクラ�
 ### def OpenSSL::ASN1::VideotexString.new(value) ->  OpenSSL::ASN1::VideotexString
 ### def OpenSSL::ASN1::VideotexString.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::VideotexString
 
-ASN.1 の VideotexString 型の値を表現する OpenSSL::ASN1::VideotexString オブジェクトを
-生成します。
+ASN.1 の VideotexString 型の値を表現する OpenSSL::ASN1::VideotexString オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::VIDEOTEXSTRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::VIDEOTEXSTRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -242,11 +221,9 @@ ASN.1 の IA5String 型(Universal タグのタグ番号22)を表すクラスで�
 ### def OpenSSL::ASN1::IA5String.new(value) ->  OpenSSL::ASN1::IA5String
 ### def OpenSSL::ASN1::IA5String.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::IA5String
 
-ASN.1 の IA5String 型の値を表現する OpenSSL::ASN1::IA5String オブジェクトを
-生成します。
+ASN.1 の IA5String 型の値を表現する OpenSSL::ASN1::IA5String オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::IA5STRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::IA5STRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -261,11 +238,9 @@ ASN.1 の GraphicString 型(Universal タグのタグ番号25)を表すクラス
 ### def OpenSSL::ASN1::GraphicString.new(value) ->  OpenSSL::ASN1::GraphicString
 ### def OpenSSL::ASN1::GraphicString.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GraphicString
 
-ASN.1 の GraphicString 型の値を表現する OpenSSL::ASN1::GraphicString オブジェクトを
-生成します。
+ASN.1 の GraphicString 型の値を表現する OpenSSL::ASN1::GraphicString オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::GRAPHICSTRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::GRAPHICSTRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -280,11 +255,9 @@ ASN.1 の ISO64String 型(Universal タグのタグ番号26)を表すクラス�
 ### def OpenSSL::ASN1::ISO64String.new(value) ->  OpenSSL::ASN1::ISO64String
 ### def OpenSSL::ASN1::ISO64String.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::ISO64String
 
-ASN.1 の ISO64String 型の値を表現する OpenSSL::ASN1::ISO64String オブジェクトを
-生成します。
+ASN.1 の ISO64String 型の値を表現する OpenSSL::ASN1::ISO64String オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::ISO64STRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::ISO64STRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -299,11 +272,9 @@ ASN.1 の GeneralString 型(Universal タグのタグ番号27)を表すクラス
 ### def OpenSSL::ASN1::GeneralString.new(value) ->  OpenSSL::ASN1::GeneralString
 ### def OpenSSL::ASN1::GeneralString.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GeneralString
 
-ASN.1 の GeneralString 型の値を表現する OpenSSL::ASN1::GeneralString オブジェクトを
-生成します。
+ASN.1 の GeneralString 型の値を表現する OpenSSL::ASN1::GeneralString オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::GENERALSTRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::GENERALSTRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -318,11 +289,9 @@ ASN.1 の UniversalString 型(Universal タグのタグ番号28)を表すクラ�
 ### def OpenSSL::ASN1::UniversalString.new(value) ->  OpenSSL::ASN1::UniversalString
 ### def OpenSSL::ASN1::UniversalString.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UniversalString
 
-ASN.1 の UniversalString 型の値を表現する OpenSSL::ASN1::UniversalString オブジェクトを
-生成します。
+ASN.1 の UniversalString 型の値を表現する OpenSSL::ASN1::UniversalString オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::UNIVERSALSTRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::UNIVERSALSTRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -337,11 +306,9 @@ ASN.1 の BMPString 型(Universal タグのタグ番号30)を表すクラスで�
 ### def OpenSSL::ASN1::BMPString.new(value) ->  OpenSSL::ASN1::BMPString
 ### def OpenSSL::ASN1::BMPString.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::BMPString
 
-ASN.1 の BMPString 型の値を表現する OpenSSL::ASN1::BMPString オブジェクトを
-生成します。
+ASN.1 の BMPString 型の値を表現する OpenSSL::ASN1::BMPString オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::BMPSTRING] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::BMPSTRING] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(文字列)
 - **param** `tag` -- タグ番号
@@ -356,11 +323,9 @@ ASN.1 の Null 型(Universal タグのタグ番号5)を表すクラスです。
 ### def OpenSSL::ASN1::Null.new(value) ->  OpenSSL::ASN1::Null
 ### def OpenSSL::ASN1::Null.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Null
 
-ASN.1 の Null 型の値を表現する OpenSSL::ASN1::Null オブジェクトを
-生成します。
+ASN.1 の Null 型の値を表現する OpenSSL::ASN1::Null オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::NULL] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::NULL] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(nil)
 - **param** `tag` -- タグ番号
@@ -375,11 +340,9 @@ ASN.1 の UTCTime 型(Universal タグのタグ番号23)を表すクラスです
 ### def OpenSSL::ASN1::UTCTime.new(value) ->  OpenSSL::ASN1::UTCTime
 ### def OpenSSL::ASN1::UTCTime.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::UTCTime
 
-ASN.1 の UTCTime 型の値を表現する OpenSSL::ASN1::UTCTime オブジェクトを
-生成します。
+ASN.1 の UTCTime 型の値を表現する OpenSSL::ASN1::UTCTime オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::UTCTIME] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::UTCTIME] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(Timeオブジェクト)
 - **param** `tag` -- タグ番号
@@ -394,11 +357,9 @@ ASN.1 の GeneralizedTime 型(Universal タグのタグ番号23)を表すクラ�
 ### def OpenSSL::ASN1::GeneralizedTime.new(value) ->  OpenSSL::ASN1::GeneralizedTime
 ### def OpenSSL::ASN1::GeneralizedTime.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::GeneralizedTime
 
-ASN.1 の GeneralizedTime 型の値を表現する OpenSSL::ASN1::GeneralizedTime オブジェクトを
-生成します。
+ASN.1 の GeneralizedTime 型の値を表現する OpenSSL::ASN1::GeneralizedTime オブジェクトを生成します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::GENERALIZEDTIME] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::GENERALIZEDTIME] となります。
 
 - **param** `value` -- ASN.1 値を表す Ruby のオブジェクト(Timeオブジェクト)
 - **param** `tag` -- タグ番号

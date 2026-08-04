@@ -12,14 +12,11 @@ ASN.1 のオブジェクト識別子を表すクラス。
 ### def OpenSSL::ASN1::ObjectId.new(value) -> OpenSSL::ASN1::ObjectId
 ### def OpenSSL::ASN1::ObjectId.new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::ObjectId
 
-ASN.1 のオブジェクト識別子を表わす OpenSSL::ASN1::ObjectId の
-オブジェクトを生成します。
+ASN.1 のオブジェクト識別子を表わす OpenSSL::ASN1::ObjectId のオブジェクトを生成します。
 
-value としては、ドット区切り数字表記、short name、long name の文字列の
-をいずれかを渡します。
+value としては、ドット区切り数字表記、short name、long name の文字列のをいずれかを渡します。
 
-value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
-タグ は [m:OpenSSL::ASN1::OBJECT] となります。
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、タグ は [m:OpenSSL::ASN1::OBJECT] となります。
 
 ```ruby title="例"
 require "openssl"

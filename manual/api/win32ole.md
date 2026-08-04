@@ -21,16 +21,12 @@ Microsoft Windows で COM や ActiveX を扱うためのライブラリです。
 COMインターフェイスエラー時に発生する例外です。
 
 Ruby 3.4 から、このクラスは WIN32OLE の名前空間下に移動し、`WIN32OLE::RuntimeError`
-として定義されるようになりました。トップレベル定数 `WIN32OLERuntimeError` は後方
-互換のためのエイリアスとして残っていますが、非推奨(deprecated)です
+として定義されるようになりました。トップレベル定数 `WIN32OLERuntimeError` は後方互換のためのエイリアスとして残っていますが、非推奨(deprecated)です
 (`Warning[:deprecated]` が有効なら参照時に警告が表示されます)。
 
-WIN32OLERuntimeErrorは、OLEオートメーション呼び出しが例外ステータス
-（HRESULTのMSBがオン）で返った場合や、メソッド呼び出し時にオートメーショ
-ン仕様で認められていない値が与えられた場合に発生します。
+WIN32OLERuntimeErrorは、OLEオートメーション呼び出しが例外ステータス（HRESULTのMSBがオン）で返った場合や、メソッド呼び出し時にオートメーション仕様で認められていない値が与えられた場合に発生します。
 
-OLEオートメーション呼び出しが例外ステータスで戻された場合は、メッセージ
-に例外となったHRESULT値と対応するメッセージが表示されます。
+OLEオートメーション呼び出しが例外ステータスで戻された場合は、メッセージに例外となったHRESULT値と対応するメッセージが表示されます。
 
 HRESULT: <http://msdn.microsoft.com/en-us/library/cc704587(v=PROT.10).aspx>
 
@@ -39,13 +35,9 @@ HRESULT: <http://msdn.microsoft.com/en-us/library/cc704587(v=PROT.10).aspx>
 OLEオートメーション型を指定するための定数を定義したモジュールです。
 
 WIN32OLE::VARIANTは、[c:WIN32OLE_VARIANT]オブジェクトの作成時や、
-[m:WIN32OLE#_invoke]などのメソッド呼び出し時に、ユーザがRubyのオブジェ
-クトの変換方法を指定するための定数を提供します。
+[m:WIN32OLE#_invoke]などのメソッド呼び出し時に、ユーザがRubyのオブジェクトの変換方法を指定するための定数を提供します。
 
-これらの値は、COMの仕様で定義されたOLEオートメーション型と呼ばれる一連
-の型を決定する定数です。ただし、一部、OLEオートメーション非互換の型も定
-義されているため、利用時にはOLEオートメーション互換型のみを利用するよう
-にしてください。
+これらの値は、COMの仕様で定義されたOLEオートメーション型と呼ばれる一連の型を決定する定数です。ただし、一部、OLEオートメーション非互換の型も定義されているため、利用時にはOLEオートメーション互換型のみを利用するようにしてください。
 
 ## Constants
 
@@ -62,28 +54,23 @@ WIN32OLE::VARIANTは、[c:WIN32OLE_VARIANT]オブジェクトの作成時や、
 文字列（BSTR）を示します（8）。
 
 OLEオートメーションのBSTRはUnicodeで表現された長さ付き文字列です。Ruby
-のStringとBSTRの相互変換は、WIN32OLEが[m:WIN32OLE.codepage]に基づいて
-自動的に行います。
+のStringとBSTRの相互変換は、WIN32OLEが[m:WIN32OLE.codepage]に基づいて自動的に行います。
 
 ### const VT_BYREF -> Integer
 
 参照を示します（0x4000）。
 
-VT_BYREFは型ではなく、参照を示す型属性です。OLEオートメーションサーバが
-結果を引数に戻す場合、参照先の型を示す値と論理和を取るために利用します。
+VT_BYREFは型ではなく、参照を示す型属性です。OLEオートメーションサーバが結果を引数に戻す場合、参照先の型を示す値と論理和を取るために利用します。
 
 ### const VT_CY -> Integer
 
 通貨型（CURRENCY）を示します（6）。
 
-OLEオートメーションのCURRENCY型は、符号付き64ビット整数を10進表記した時
-の下4桁を小数点以下とすることで、加減算について誤差を生じさせない小数点
-数を表現します。
+OLEオートメーションのCURRENCY型は、符号付き64ビット整数を10進表記した時の下4桁を小数点以下とすることで、加減算について誤差を生じさせない小数点数を表現します。
 
 CURRENCY型の有効範囲は-922337203685477.5808から922337203685477.5807です。
 
-WIN32OLEはオートメーション呼び出しの返り値がCURRENCY型の場合、文字列に
-変換します。
+WIN32OLEはオートメーション呼び出しの返り値がCURRENCY型の場合、文字列に変換します。
 
 ### const VT_DATE -> Integer
 
@@ -104,8 +91,7 @@ RubyのオブジェクトをOLEオートメーションサーバへ与える場�
 
 HRESULTを示します（10）。
 
-HRESULTは、COMを含むWindowsのサービスがアプリケーションへ通知する統一的
-なエラーコードです。
+HRESULTは、COMを含むWindowsのサービスがアプリケーションへ通知する統一的なエラーコードです。
 
 HRESULT: <http://msdn.microsoft.com/en-us/library/cc704587(v=PROT.10).aspx>
 
@@ -185,6 +171,5 @@ VARIANT型を示します（12）。
 
 NULL型の値を示します（1）。
 
-[m:WIN32OLE::VARIANT::VT_EMPTY]と異なり、NULLという値（たとえばSQLパラ
-メータでNULLを指定する場合など）を示します。
+[m:WIN32OLE::VARIANT::VT_EMPTY]と異なり、NULLという値（たとえばSQLパラメータでNULLを指定する場合など）を示します。
 

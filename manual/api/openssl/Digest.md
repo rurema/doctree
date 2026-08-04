@@ -7,13 +7,10 @@ library: openssl
 
 このインターフェースには2通りの利用法が存在します。
 一方は文字列から直接ハッシュを計算する ([m:OpenSSL::Digest.digest],
-[m:Digest::Base.hexdigest]) 方法です。短い文字列の
-ダイジェストを取るときにはこちらを使えばよいでしょう。
+[m:Digest::Base.hexdigest]) 方法です。短い文字列のダイジェストを取るときにはこちらを使えばよいでしょう。
 
 もう一つはダイジェストオブジェクトを作成して、文字列を順次
-[m:OpenSSL::Digest#update] で渡すことでダイジェストを計算
-します。大きなファイルのハッシュ値を計算する場合などに
-利用します。
+[m:OpenSSL::Digest#update] で渡すことでダイジェストを計算します。大きなファイルのハッシュ値を計算する場合などに利用します。
 
 ```ruby title="例"
 require 'openssl'

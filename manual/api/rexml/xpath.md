@@ -13,20 +13,16 @@ XPath を取り扱うためのクラスです。
 
 ### def REXML::XPath.first(element, path = nil, namespaces = {}, variables = {}) -> Node | nil
 
-element の path で指定した XPath 文字列にマッチする最初のノードを
-返します。
+element の path で指定した XPath 文字列にマッチする最初のノードを返します。
 
-path に相対パスを指定した場合は element からの相対位置で
-マッチするノードを探します。
-絶対パスを指定した場合は element が属する文書のルート要素からの
-位置でマッチするノードを探します。
+path に相対パスを指定した場合は element からの相対位置でマッチするノードを探します。
+絶対パスを指定した場合は element が属する文書のルート要素からの位置でマッチするノードを探します。
 path を省略すると "*" を指定したことになります。
 
 namespace で名前空間の対応付けを指定します。
 
 variable で XPath 内の変数に対応する値を指定できます。
-XPathインジェクション攻撃を避けるため、適切な
-エスケープを付加するため、に用います。
+XPathインジェクション攻撃を避けるため、適切なエスケープを付加するため、に用います。
 
 マッチするノードがない場合には nil を返します。
 
@@ -64,20 +60,16 @@ p b2.text # => "b2"
 
 ### def REXML::XPath.each(element, path = nil, namespaces = {}, variables = {}) {|e| ... } -> ()
 
-element の path で指定した XPath 文字列にマッチする各ノード
-に対してブロックを呼び出します。
+element の path で指定した XPath 文字列にマッチする各ノードに対してブロックを呼び出します。
 
-path に相対パスを指定した場合は element からの相対位置で
-マッチするノードを探します。
-絶対パスを指定した場合は element が属する文書のルート要素からの
-位置でマッチするノードを探します。
+path に相対パスを指定した場合は element からの相対位置でマッチするノードを探します。
+絶対パスを指定した場合は element が属する文書のルート要素からの位置でマッチするノードを探します。
 path を省略すると "*" を指定したことになります。
 
 namespace で名前空間の対応付けを [c:Hash] で指定します。
 
 variable で XPath 内の変数に対応する値を指定できます。
-XPathインジェクション攻撃を避けるため、適切な
-エスケープを付加するため、に用います。
+XPathインジェクション攻撃を避けるため、適切なエスケープを付加するため、に用います。
 
 - **param** `element` -- 要素([c:REXML::Element])
 - **param** `path` -- XPath文字列
@@ -105,20 +97,16 @@ REXML::XPath.each(doc, "/root/a/b"){|e| p e.text }
 
 ### def REXML::XPath.match(element, path = nil, namespaces = {}, variables = {}) -> [Node]
 
-element の path で指定した XPath 文字列にマッチするノードの配列を
-返します。
+element の path で指定した XPath 文字列にマッチするノードの配列を返します。
 
-path に相対パスを指定した場合は element からの相対位置で
-マッチするノードを探します。
-絶対パスを指定した場合は element が属する文書のルート要素からの
-位置でマッチするノードを探します。
+path に相対パスを指定した場合は element からの相対位置でマッチするノードを探します。
+絶対パスを指定した場合は element が属する文書のルート要素からの位置でマッチするノードを探します。
 path を省略すると "*" を指定したことになります。
 
 namespace で名前空間の対応付けを [c:Hash] で指定します。
 
 variable で XPath 内の変数に対応する値を指定できます。
-XPathインジェクション攻撃を避けるため、適切な
-エスケープを付加するため、に用います。
+XPathインジェクション攻撃を避けるため、適切なエスケープを付加するため、に用います。
 
 - **param** `element` -- 要素([c:REXML::Element])
 - **param** `path` -- XPath文字列

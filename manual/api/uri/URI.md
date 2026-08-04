@@ -44,8 +44,7 @@ p URI.split("http://www.ruby-lang.org/")
 
 ### def URI.parse(uri_str)    -> object
 
-与えられた URI から該当する [c:URI::Generic] のサブクラスのインスタンスを生成して
-返します。scheme が指定されていない場合は、[c:URI::Generic] オブジェクトを返します。
+与えられた URI から該当する [c:URI::Generic] のサブクラスのインスタンスを生成して返します。scheme が指定されていない場合は、[c:URI::Generic] オブジェクトを返します。
 
 - **param** `uri_str` -- パースしたい URI を文字列として与えます。
 
@@ -69,8 +68,7 @@ p uri.path      # => "/"
 文字列 uri_str と path ... を URI として連結して得られる
 URI オブジェクトを返します。
 
-[rfc:2396] の Section 5.2 の
-仕様に従って連結します。
+[rfc:2396] の Section 5.2 の仕様に従って連結します。
 以下と等価です
 
 ```text
@@ -97,16 +95,12 @@ p URI.join('http://www.ruby-lang.org/', '/ja/man-1.6/')
 ### def URI.extract(str) {|uri_str| ... }              -> nil
 ### def URI.extract(str, schemes) {|uri_str| ... }     -> nil
 
-文字列 str に対して正規表現によるマッチを試み、
-絶対URIにマッチした部分文字列からなる配列として返します。
+文字列 str に対して正規表現によるマッチを試み、絶対URIにマッチした部分文字列からなる配列として返します。
 抽出する URI がなければ空の配列を返します。
 
-第2引数に文字列の配列 schemes が与えられた場合は
-そのスキームだけを検索します。
+第2引数に文字列の配列 schemes が与えられた場合はそのスキームだけを検索します。
 
-ブロックが与えられた場合は [m:String#scan] と同様で、
-マッチした部分がみつかるたびに uri_str に
-その部分を代入してブロックを評価します。
+ブロックが与えられた場合は [m:String#scan] と同様で、マッチした部分がみつかるたびに uri_str にその部分を代入してブロックを評価します。
 このときは nil を返します。
 
 このメソッドは Ruby 2.2 から obsolete です。
@@ -130,17 +124,12 @@ p URI.extract(str, ["http"])
 
 URIにマッチする正規表現を返します。
 
-schemes を与えた場合は、そのスキームの URI にのみマッチする
-正規表現を返します。
+schemes を与えた場合は、そのスキームの URI にのみマッチする正規表現を返します。
 
 いずれの場合も返り値の正規表現は不定数の正規表現グループ
-(括弧) を含みます。この括弧の数はバージョンによって変動
-する可能性があるので、それに依存したコードを書くべきでは
-ありません。
+(括弧) を含みます。この括弧の数はバージョンによって変動する可能性があるので、それに依存したコードを書くべきではありません。
 
-また、有効なURIではない文字列(たとえば"http://") にも
-マッチするため、有効なURIかどうかは必要に応じて別途
-検査してください。
+また、有効なURIではない文字列(たとえば"http://") にもマッチするため、有効なURIかどうかは必要に応じて別途検査してください。
 
 このメソッドは Ruby 2.2 から obsolete です。
 
@@ -158,8 +147,7 @@ p URI.regexp =~ "http://www.ruby-lang.org/"  #=> 0
 application/x-www-form-urlencoded 形式のデータをデコードし、
 [key, value] という形の配列の配列を返します。
 
-enc で指定したエンコーディングの文字列が URL エンコードされたものと
-みなし、エンコーディングを付加します。
+enc で指定したエンコーディングの文字列が URL エンコードされたものとみなし、エンコーディングを付加します。
 
 このメソッドは
 <https://url.spec.whatwg.org/#concept-urlencoded-parser>
@@ -182,15 +170,13 @@ p Hash[ary]           #=> {"a"=>"2", "b"=>"3"}
 
 ### def URI.decode_www_form_component(str, enc=Encoding::UTF_8) -> String
 
-URL-encoded form data の文字列の各コンポーネント
-をデコードした文字列を返します。
+URL-encoded form data の文字列の各コンポーネントをデコードした文字列を返します。
 
 通常は [m:URI.decode_www_form] を使うほうがよいでしょう。
 
 "+" という文字は空白文字にデコードします。
 
-enc で指定したエンコーディングの文字列が URL エンコードされたものと
-みなし、エンコーディングを付加します。
+enc で指定したエンコーディングの文字列が URL エンコードされたものとみなし、エンコーディングを付加します。
 
 このメソッドは
 <https://www.w3.org/TR/html5/sec-forms.html#urlencoded-form-data>
@@ -216,8 +202,7 @@ p URI.decode_www_form_component(enc)
 
 enum から URL-encoded form data を生成します。
 
-HTML5 で定義されている application/x-www-form-urlencoded 形式の
-文字列を生成します。
+HTML5 で定義されている application/x-www-form-urlencoded 形式の文字列を生成します。
 
 enum には通常 [key, value] という形の配列の配列を渡します。
 以下の例を見てください。
@@ -228,8 +213,7 @@ p URI.encode_www_form([["a", "1"], ["b", "2"], ["c", "x yz"]])
 # => "a=1&b=2&c=x+yz"
 ```
 
-実際には、each のブロック呼び出しで [key, value] の形のデータを渡すものであれば
-何でも渡すことができます(例えば [c:Hash] など)。
+実際には、each のブロック呼び出しで [key, value] の形のデータを渡すものであれば何でも渡すことができます(例えば [c:Hash] など)。
 
 ```ruby
 require 'uri'
@@ -237,16 +221,12 @@ p URI.encode_www_form({"a"=>"1", "b"=>"2", "c"=>"x yz"})
 # => "a=1&b=2&c=x+yz"
 ```
 
-このメソッドは引数のエンコーディングを変換しません。そのため
-送るデータのエンコーディングを変換したい場合はあらかじめ
-変換しておいてください(例えば ASCII incompatible なものを
+このメソッドは引数のエンコーディングを変換しません。そのため送るデータのエンコーディングを変換したい場合はあらかじめ変換しておいてください(例えば ASCII incompatible なものを
 UTF-8 に変換する場合など)。
-各要素のエンコーディングがばらばらの場合もあらかじめエンコーディングを
-揃えてからこのメソッドを使うべきです。
+各要素のエンコーディングがばらばらの場合もあらかじめエンコーディングを揃えてからこのメソッドを使うべきです。
 
 このメソッドはファイルを入力にすることはできません。
-ファイルを送りたい場合は multipart/form-data をつかうべきで
-このメソッドを使うべきではありません。
+ファイルを送りたい場合は multipart/form-data をつかうべきでこのメソッドを使うべきではありません。
 
 このメソッドは内部的に
 [m:URI.encode_www_form_component]
@@ -262,13 +242,11 @@ UTF-8 に変換する場合など)。
 
 ### def URI.encode_www_form_component(str, enc=nil) -> String
 
-文字列を URL-encoded form data の1コンポーネント
-としてエンコードした文字列を返します。
+文字列を URL-encoded form data の1コンポーネントとしてエンコードした文字列を返します。
 
 通常は [m:URI.encode_www_form] を使うほうがよいでしょう。
 
-このメソッドでは *, -, ., 0-9, A-Z, _, a-z, は変換せず、
-空白は + に変換し、その他は %XX に、変換します。
+このメソッドでは *, -, ., 0-9, A-Z, _, a-z, は変換せず、空白は + に変換し、その他は %XX に、変換します。
 
 このメソッドは
 <https://www.w3.org/TR/2013/CR-html5-20130806/forms.html#url-encoded-form-data>

@@ -84,8 +84,7 @@ end
 
 #### プロクシ経由のアクセス
 
-Net::HTTP は http_proxy 環境変数が存在するならば自動的に
-その URI を利用してプロクシを利用します。http_proxyを利用したくないならば
+Net::HTTP は http_proxy 環境変数が存在するならば自動的にその URI を利用してプロクシを利用します。http_proxyを利用したくないならば
 [m:Net::HTTP.new] や [m:Net::HTTP.start] の proxy_addr 引数に
 nil を渡してください。
 
@@ -174,23 +173,18 @@ Net::HTTP.start('www.example.com') {|http|
 
 ### フォームの値の区切り文字について
 
-POSTで application/x-www-form-urlencoded として複数のフォームの値を送る場合、
-現在広く行なわれているのは、 name0=value0&name1=value1 のようにアンパサンド
+POSTで application/x-www-form-urlencoded として複数のフォームの値を送る場合、現在広く行なわれているのは、 name0=value0&name1=value1 のようにアンパサンド
 (`&`) で区切るやりかたです。
 この方法は、[RFC:1866] Hypertext Markup Language - 2.0 で初めて公式に登場し、
 HTML 4.01 Specification の 17.13.4 Form content types
 でもそのように書かれています。
 
 ところが、同じ HTML 4.01 Specification の
-B.2.2 Ampersands in URI attribute values では、
-この `&` がSGMLの文字実体参照で用いられることが指摘されており、
-CGIやサーバの実装者に対し `&` の代わりに
-セミコロン `;` をサポートすることを奨めています。
+B.2.2 Ampersands in URI attribute values では、この `&` がSGMLの文字実体参照で用いられることが指摘されており、
+CGIやサーバの実装者に対し `&` の代わりにセミコロン `;` をサポートすることを奨めています。
 
-しかし、実際には `;` を解釈しないCGIやサーバもまだまだ見受けられるため
-このリファレンスマニュアルでは例として `&` を用いました。
+しかし、実際には `;` を解釈しないCGIやサーバもまだまだ見受けられるためこのリファレンスマニュアルでは例として `&` を用いました。
 
 なお Ruby 標準の [lib:cgi] ライブラリでは '&' と ';' の両方サポートしていますので、
-[lib:cgi] ライブラリを使って CGI スクリプトを書く場合はこれらの違いを気にする
-必要はありません。
+[lib:cgi] ライブラリを使って CGI スクリプトを書く場合はこれらの違いを気にする必要はありません。
 

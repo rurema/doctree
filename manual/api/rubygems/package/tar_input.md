@@ -4,13 +4,11 @@ include:
   - Gem::Package::FSyncDir
   - Enumerable
 ---
-gem-format な tar ファイルを読み込む [c:Gem::Package::TarReader] のラッ
-パークラスを提供するライブラリです。
+gem-format な tar ファイルを読み込む [c:Gem::Package::TarReader] のラッパークラスを提供するライブラリです。
 
 # class Gem::Package::TarInput
 
-gem-format な tar ファイルを読み込む [c:Gem::Package::TarReader] のラッ
-パークラスです。
+gem-format な tar ファイルを読み込む [c:Gem::Package::TarReader] のラッパークラスです。
 
 ## Singleton Methods
 

@@ -51,9 +51,7 @@ END 文で登録された Proc オブジェクト data を起動します。
 
 ### static NODE *compile(VALUE src, char *file, int line)
 
-Ruby の文字列または IO オブジェクト src を
-構文木にコンパイルし、返します。そのとき、src が
-ファイル file の line 行目から始まっていると仮定します。
+Ruby の文字列または IO オブジェクト src を構文木にコンパイルし、返します。そのとき、src がファイル file の line 行目から始まっていると仮定します。
 
 ### static void compile_error(const char *at)
 
@@ -64,9 +62,7 @@ max は select(2) の第一引数と同じ意味です。
 
 ### static NODE *copy_node_scope(NODE *node, VALUE rval)
 
-node の先頭についているはずの、
-ローカル変数スコープを積むための情報を格納したノード NODE_SCOPE を
-コピーして返します。そのとき nd_rval に rval を格納します。
+node の先頭についているはずの、ローカル変数スコープを積むための情報を格納したノード NODE_SCOPE をコピーして返します。そのとき nd_rval に rval を格納します。
 
 ### static VALUE cvar_cbase(void)
 
@@ -74,13 +70,11 @@ node の先頭についているはずの、
 
 ### static inline void dvar_asgn(ID id, VALUE value)
 
-現在のローカル変数スコープ中に存在するはずの
-ブロックローカル変数 id に value を代入します。
+現在のローカル変数スコープ中に存在するはずのブロックローカル変数 id に value を代入します。
 
 ### static inline void dvar_asgn_curr(ID id, VALUE value)
 
-現在のブロックローカル変数スコープに存在するはずの
-ブロックローカル変数 id に value を代入します。
+現在のブロックローカル変数スコープに存在するはずのブロックローカル変数 id に value を代入します。
 
 ### static void dvar_asgn_internal(ID id, VALUE value, int curr)
 
@@ -100,22 +94,18 @@ dvar_asgn と dvar_asgn_curr の補助関数です。
 
 ### static VALUE ev_const_defined(NODE *cref, ID id, VALUE self)
 
-外のクラスが cref で self が self のとき、
-定数 id が定義されていたら真。
+外のクラスが cref で self が self のとき、定数 id が定義されていたら真。
 
 ### static VALUE ev_const_get(NODE *cref, ID id, VALUE self)
 
-外のクラスが cref で self が self として
-定数 id を参照します。
+外のクラスが cref で self が self として定数 id を参照します。
 
 ### static VALUE eval(VALUE self, VALUE src, VALUE scope, char *file, int line)
 
 eval の実体。文字列 src を評価します。
-そのとき第三引数 scope が nil でなければ
-そのコンテキストの元で評価します。
+そのとき第三引数 scope が nil でなければそのコンテキストの元で評価します。
 
-また src をコンパイルするとき、
-ファイル file の line 行目に配置されていると仮定します。
+また src をコンパイルするとき、ファイル file の line 行目に配置されていると仮定します。
 
 ### static VALUE eval_node(VALUE self, NODE *node)
 
@@ -147,8 +137,7 @@ frame とその親 FRAME 全てをスタックからヒープに割り当てな�
 
 ### static char *is_defined(VALUE self, NODE *node, char *buf)
 
-node を self = self で評価したとき値が得られそうな
-式であれば、node の種別を表す文字列を返します。
+node を self = self で評価したとき値が得られそうな式であれば、node の種別を表す文字列を返します。
 
 ### static void jump_tag_but_local_jump(int state)
 
@@ -192,8 +181,7 @@ module を定義するモジュール文の本体 n を評価します。
 
 ### static void print_undef(VALUE klass, ID id)
 
-クラス klass にメソッド id が見付からない (undefined) ことに
-対するエラーメッセージを stderr に出力します。
+クラス klass にメソッド id が見付からない (undefined) ことに対するエラーメッセージを stderr に出力します。
 
 ### static VALUE proc_arity(VALUE proc)
 
@@ -207,8 +195,7 @@ module を定義するモジュール文の本体 n を評価します。
 
 ### static VALUE proc_invoke(VALUE proc, VALUE args, int pcall, VALUE self)
 
-Proc オブジェクト proc を起動します。そのとき
-引数を args とし、self を self にします。
+Proc オブジェクト proc を起動します。そのとき引数を args とし、self を self にします。
 
 ### static VALUE proc_new(VALUE klass)
 
@@ -238,13 +225,11 @@ Proc.yield の実体。
 
 ### void rb_alias(VALUE klass, ID def, ID name)
 
-クラス klass に定義されたメソッド name の
-本体を実体とする新しいメソッド def を定義します。
+クラス klass に定義されたメソッド name の本体を実体とする新しいメソッド def を定義します。
 
 ### VALUE rb_apply(VALUE recv, ID mid, VALUE args)
 
-オブジェクト recv のメソッド mid を
-引数 args とともに呼び出します。
+オブジェクト recv のメソッド mid を引数 args とともに呼び出します。
 
 ### void rb_attr(VALUE klass, ID id, int read, int write, int ex)
 
@@ -329,13 +314,11 @@ Init_foo(void)
 
 ### static void rb_clear_cache_by_class(VALUE klass)
 
-メソッドキャッシュから klass クラスのメソッドの
-キャッシュエントリを消去します。
+メソッドキャッシュから klass クラスのメソッドのキャッシュエントリを消去します。
 
 ### static void rb_clear_cache_by_id(ID id)
 
-メソッドキャッシュから id という名前のメソッドの
-キャッシュエントリを全て消去します。
+メソッドキャッシュから id という名前のメソッドのキャッシュエントリを全て消去します。
 
 ### static VALUE rb_cont_call(int argc, VALUE *argv, VALUE cont)
 
@@ -344,8 +327,7 @@ Continuation#call の実体。
 ### void rb_disable_super(VALUE klass, const char *name)
 
 クラス klass のメソッド name からの super を禁止します。
-klass とそのスーパークラスで name というメソッドが定義
-されていないときは例外 NameError を発生します。
+klass とそのスーパークラスで name というメソッドが定義されていないときは例外 NameError を発生します。
 
 ### VALUE rb_dvar_curr(ID id)
 
@@ -362,14 +344,11 @@ klass とそのスーパークラスで name というメソッドが定義
 ### void rb_enable_super(VALUE klass, const char *name)
 
 クラス klass のメソッド name からの super を許可します。
-klass とそのスーパークラスで name というメソッドが定義
-されていないときは例外 NameError を発生します。
+klass とそのスーパークラスで name というメソッドが定義されていないときは例外 NameError を発生します。
 
 ### VALUE rb_ensure(VALUE (*body)(), VALUE data1, VALUE (*ensure)(), VALUE data2)
 
-ensure の C 版です。まず body(data1) を実行し、その途中で
-例外や exit が起きたとしても ensure(data2) が確実に
-実行されます ( body() が正常終了しても実行されます)。
+ensure の C 版です。まず body(data1) を実行し、その途中で例外や exit が起きたとしても ensure(data2) が確実に実行されます ( body() が正常終了しても実行されます)。
 
 ### static VALUE rb_eval(VALUE self, NODE *n)
 
@@ -379,21 +358,18 @@ ensure の C 版です。まず body(data1) を実行し、その途中で
 
 ### VALUE rb_eval_string(const char *str)
 
-str を Ruby プログラムとしてコンパイル・評価し、
-その値を返します。
+str を Ruby プログラムとしてコンパイル・評価し、その値を返します。
 
 ### VALUE rb_eval_string_protect(const char *str, int *state)
 
-str を Ruby プログラムとしてコンパイル・評価し、
-その値を返します。
+str を Ruby プログラムとしてコンパイル・評価し、その値を返します。
 
 コンパイル中または評価中に例外を含む大域脱出が発生した場合は、
 state が NULL でなければそれに値が代入され Qnil を返します。
 
 ### VALUE rb_eval_string_wrap(const char *str, int *state)
 
-[f:rb_eval_string_protect] と同じですが、スクリプトの評価を
-無名のモジュールのもとで行います。
+[f:rb_eval_string_protect] と同じですが、スクリプトの評価を無名のモジュールのもとで行います。
 
 ### void rb_exc_fatal(VALUE err)
 
@@ -405,8 +381,7 @@ state が NULL でなければそれに値が代入され Qnil を返します�
 
 ### void rb_exec_end_proc(void)
 
-END ブロックおよび Kernel#at_exit で登録した Proc オブジェクトを
-実行します。
+END ブロックおよび Kernel#at_exit で登録した Proc オブジェクトを実行します。
 
 ### void rb_exit(int status)
 
@@ -425,8 +400,7 @@ END ブロックおよび Kernel#at_exit で登録した Proc オブジェクト
 ### static VALUE rb_f_block_given_p(void)
 
 block_given? の実体。
-現在評価中の (Ruby で実装された) メソッドに対して
-ブロックが与えられていたら真。
+現在評価中の (Ruby で実装された) メソッドに対してブロックが与えられていたら真。
 
 ### static VALUE rb_f_caller(int argc, VALUE *argv)
 
@@ -475,30 +449,22 @@ self == obj として fname を require します。
 
 ### VALUE rb_funcall(VALUE recv, ID name, int nargs, ...)
 
-recv に対してメソッド name を呼びだし、
-メソッドの返り値を返します。プライベートメソッドも
-呼びだせます。
+recv に対してメソッド name を呼びだし、メソッドの返り値を返します。プライベートメソッドも呼びだせます。
 
 メソッドへの引数は第四引数以降にあたえ、その数を nargs
-に指定します。それら引数はすべて VALUE でなければ
-いけません。
+に指定します。それら引数はすべて VALUE でなければいけません。
 
 ### VALUE rb_funcall2(VALUE recv, ID name, int nargs, VALUE *args)
 
-recv に対してメソッド name を呼びだし、
-メソッドの返り値を返します。プライベートメソッドも
-呼びだせます。
+recv に対してメソッド name を呼びだし、メソッドの返り値を返します。プライベートメソッドも呼びだせます。
 
-メソッドへの引数は VALUE の配列として第四引数にあたえ、
-その長さを nargs に指定します。
+メソッドへの引数は VALUE の配列として第四引数にあたえ、その長さを nargs に指定します。
 
 ### VALUE rb_funcall3(VALUE recv, ID mid, int argc, const VALUE *argv)
 
-recv に対してメソッド name を呼びだし、
-メソッドの返り値を返します。
+recv に対してメソッド name を呼びだし、メソッドの返り値を返します。
 
-メソッドへの引数は VALUE の配列として第四引数にあたえ、
-その長さを nargs に指定します。
+メソッドへの引数は VALUE の配列として第四引数にあたえ、その長さを nargs に指定します。
 
 rb_funcall2 との違いは、プライベートメソッドを呼び出せないことです。
 
@@ -527,8 +493,7 @@ break の C 用インターフェイスです。
 
 ブロック付きメソッド(イテレータ)呼び出しを行う関数です。
 
-まず call_proc(data1) を実行します。そしてその関数か
-その直下のメソッドで yield が発生すると以下が実行されます。
+まず call_proc(data1) を実行します。そしてその関数かその直下のメソッドで yield が発生すると以下が実行されます。
 
 ```text
 block_proc(VALUE block_arg, VALUE data2, VALUE self)
@@ -555,11 +520,9 @@ tagには上記関数の引数で受け取ったstateを指定します。
 
 参考: [ruby-list:21651]
 
-組込み関数 [m:Kernel?.load] の低レベルインタフェースです。Rubyスクリ
-プトが格納されたファイルfname をロードします。
+組込み関数 [m:Kernel?.load] の低レベルインタフェースです。Rubyスクリプトが格納されたファイルfname をロードします。
 
-引数wrapが、non-zeroなら無名のモジュールを生成して、ロー
-ドした内容をそのモジュールに閉じ込めます。閉じ込めるのは
+引数wrapが、non-zeroなら無名のモジュールを生成して、ロードした内容をそのモジュールに閉じ込めます。閉じ込めるのは
 
   - 定数
   - クラス、モジュール
@@ -611,9 +574,7 @@ Module#module_eval の実体です。
 
 Module#remove_method の実体。
 
-モジュール mod から name という名前のメソッドを
-検索し、エントリを削除します。見付からなかったときは
-例外 [c:NameError] が発生します。
+モジュール mod から name という名前のメソッドを検索し、エントリを削除します。見付からなかったときは例外 [c:NameError] が発生します。
 
 ### static VALUE rb_mod_s_constants(void)
 
@@ -622,8 +583,7 @@ Module#remove_method の実体。
 ### void rb_obj_call_init(VALUE obj, int argc, VALUE *argv)
 
 オブジェクト obj に対して initialize を呼び出します。
-引数は長さ argc の配列 argv で表され、
-ブロックが積んである場合はそれも自動的に渡されます。
+引数は長さ argc の配列 argv で表され、ブロックが積んである場合はそれも自動的に渡されます。
 
 ### static VALUE rb_obj_extend(int argc, VALUE *argv, VALUE obj)
 
@@ -670,8 +630,7 @@ if (status != 0) {
 
 ### void rb_remove_method(VALUE klass, const char *name)
 
-クラス klass 自体に登録されている name という名前のメソッドを
-検索し、エントリを削除します。
+クラス klass 自体に登録されている name という名前のメソッドを検索し、エントリを削除します。
 見付からなかったときは例外 NameError を発生します。
 
 ### VALUE rb_require(const char *fname)
@@ -696,22 +655,18 @@ obj にメソッド id が定義されているとき真。
 
 ### void rb_secure(int level)
 
-現在のセーフレベルが level 以上のとき、
-例外 SecurityError を発生します。
+現在のセーフレベルが level 以上のとき、例外 SecurityError を発生します。
 
 ### void rb_set_end_proc(void (*func)(VALUE), VALUE data)
 
 ### void rb_set_safe_level(int level)
 
 セーフレベルを level に上げます。
-level が現在のセーフレベルより低い場合は
-例外 SecurityError が発生します。
+level が現在のセーフレベルより低い場合は例外 SecurityError が発生します。
 
 ### VALUE *rb_svar(int cnt)
 
-現在の SCOPE でローカル変数IDが cnt である変数の
-領域へのポインタを返します。主に [m:$_] (cnt=0) と [m:$~] (cnt=1) に
-アクセスするために使われます。
+現在の SCOPE でローカル変数IDが cnt である変数の領域へのポインタを返します。主に [m:$_] (cnt=0) と [m:$~] (cnt=1) にアクセスするために使われます。
 
 ### static VALUE rb_thread_abort_exc(VALUE thread)
 
@@ -802,8 +757,7 @@ Thread#pass の実体。
 
 ### static void rb_thread_restore_context(rb_thread_t th, int exit)
 
-スレッドを切り替えるにあたって、切り替え先のスレッド th の
-コンテキストを評価器に復帰します。
+スレッドを切り替えるにあたって、切り替え先のスレッド th のコンテキストを評価器に復帰します。
 
 ### VALUE rb_thread_run(VALUE thread)
 
@@ -821,8 +775,7 @@ Thread#pass の実体。
 
 ### static void rb_thread_save_context(rb_thread_t th)
 
-スレッドを切り替えるにあたって、現在実行中のスレッド th の
-コンテキストを評価器から th に退避します。
+スレッドを切り替えるにあたって、現在実行中のスレッド th のコンテキストを評価器から th に退避します。
 
 ### void rb_thread_schedule(void)
 
@@ -845,8 +798,7 @@ Thread#pass の実体。
 
 setitimer(2) が存在する場合のみ定義されます。
 
-Ruby のスレッドスケジューリングに使用している
-インターバルタイマーを開始します。
+Ruby のスレッドスケジューリングに使用しているインターバルタイマーを開始します。
 
 ### static VALUE rb_thread_status(VALUE thread)
 
@@ -861,9 +813,7 @@ Ruby のスレッドスケジューリングに使用している
 
 setitimer(2) が存在する場合のみ定義されます。
 
-Ruby のスレッドスケジューリングに使用しているインターバルタイマーを
-停止します。このタイマーが止まると Ruby のスレッド機構は基本的に停止
-しますので注意してください。
+Ruby のスレッドスケジューリングに使用しているインターバルタイマーを停止します。このタイマーが止まると Ruby のスレッド機構は基本的に停止しますので注意してください。
 
 ### void rb_thread_trap_eval(VALUE cmd, int sig)
 
@@ -871,8 +821,7 @@ Ruby のスレッドスケジューリングに使用しているインターバ
 
 ### void rb_thread_wait_fd(int fd)
 
-ファイルディスクリプタ fd を読み込めるようになるまで
-カレントスレッドを停止します。
+ファイルディスクリプタ fd を読み込めるようになるまでカレントスレッドを停止します。
 
 ### void rb_thread_wait_for(struct timeval time)
 
@@ -919,8 +868,7 @@ Proc の呼び出しのときは pcall=非ゼロ にしなければならない�
 
 ### static void remove_method(VALUE klass, ID mid)
 
-クラス klass 自体に登録されている mid という名前のメソッドを
-検索し、エントリを削除します。見付からなかったときは例外 [c:NameError]
+クラス klass 自体に登録されている mid という名前のメソッドを検索し、エントリを削除します。見付からなかったときは例外 [c:NameError]
 を発生します。
 
 ### void ruby_finalize(void)
@@ -929,13 +877,11 @@ Proc の呼び出しのときは pcall=非ゼロ にしなければならない�
 
 ### void ruby_init(void)
 
-評価器を初期化します。Ruby C API を呼ぶプロセスでは
-前もって必ずこの関数を呼ばなければなりません。
+評価器を初期化します。Ruby C API を呼ぶプロセスでは前もって必ずこの関数を呼ばなければなりません。
 
 ### void ruby_options(int argc, char **argv)
 
-argc と argv を ruby への
-コマンドラインオプションとして処理します。
+argc と argv を ruby へのコマンドラインオプションとして処理します。
 
 ### void ruby_run(void)
 
@@ -951,16 +897,13 @@ ruby_eval_tree の評価を開始します。
 
 ### static void scope_dup(struct SCOPE *scope)
 
-scope とその親の SCOPE 全ての local_vars を
-スタックからヒープに割り当て直します。
+scope とその親の SCOPE 全ての local_vars をスタックからヒープに割り当て直します。
 
 ### static NODE *search_method(VALUE klass, ID id, VALUE *origin)
 
-クラス klass から id という名前のメソッドエントリを検索し、
-返します。見付からなければ NULL を返します。
+クラス klass から id という名前のメソッドエントリを検索し、返します。見付からなければ NULL を返します。
 
-このメソッドは undef を考慮しません。つまり m_tbl に
-エントリがあるならその内容に関らず探索は成功します。
+このメソッドは undef を考慮しません。つまり m_tbl にエントリがあるならその内容に関らず探索は成功します。
 
 ### static void secure_visibility(VALUE self)
 
@@ -983,8 +926,7 @@ rb_obj_instance_eval と rb_mod_module_eval を共通化するための補助関
 
 ### static VALUE superclass(VALUE self, NODE *node)
 
-クラス文のスーパークラスを表すノード node を
-評価してクラスを得ます。
+クラス文のスーパークラスを表すノード node を評価してクラスを得ます。
 
 ### static VALUE svalue_to_avalue(VALUE v)
 

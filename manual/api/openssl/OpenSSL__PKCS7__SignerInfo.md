@@ -25,15 +25,13 @@ alias:
 
 署名者の証明書の発行者の名前(DN)を返します。
 
-これと [m:OpenSSL::PKCS7::SignerInfo#serial] で
-署名者を一意に識別します。
+これと [m:OpenSSL::PKCS7::SignerInfo#serial] で署名者を一意に識別します。
 
 ### def serial -> Integer
 
 署名者の証明書の識別番号を返します。
 
-これと [m:OpenSSL::PKCS7::SignerInfo#issuer] で
-署名者を一意に識別します。
+これと [m:OpenSSL::PKCS7::SignerInfo#issuer] で署名者を一意に識別します。
 
 ### def signed_time -> Time
 

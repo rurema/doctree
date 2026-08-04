@@ -39,16 +39,12 @@ require 'net/smtp'
 Net::SMTP.new(address, port).start(helo: helo, user: user, password: password, authtype: authtype)
 ```
 
-このメソッドにブロックを与えた場合には、新しく作られた [c:Net::SMTP] オブジェクト
-を引数としてそのブロックを呼び、ブロック終了時に自動的に接続を閉じます。
-ブロックを与えなかった場合には新しく作られた [c:Net::SMTP] オブジェクトが
-返されます。この場合終了時に [m:Net::SMTP#finish] を呼ぶのは利用者の責任と
-なります。
+このメソッドにブロックを与えた場合には、新しく作られた [c:Net::SMTP] オブジェクトを引数としてそのブロックを呼び、ブロック終了時に自動的に接続を閉じます。
+ブロックを与えなかった場合には新しく作られた [c:Net::SMTP] オブジェクトが返されます。この場合終了時に [m:Net::SMTP#finish] を呼ぶのは利用者の責任となります。
 
 user と password の両方が与えられた場合、
 SMTP AUTH コマンドによって認証を行います。
-authtype は使用する認証のタイプで、
-シンボルで :plain, :login, :cram_md5 を指定します。
+authtype は使用する認証のタイプで、シンボルで :plain, :login, :cram_md5 を指定します。
 
 ```ruby title="Example"
 require 'net/smtp'
@@ -107,8 +103,7 @@ SSL 通信に使われる SSL のコンテキストのデフォルト値を返�
 その Net::SMTP オブジェクトが ESMTP を使うかどうかを指定します。
 
 この指定は [m:Net::SMTP#start] を呼ぶ前にする必要があります。
-ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
-場合には 普通の SMTP モードに切り替えてやりなおします
+ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった場合には 普通の SMTP モードに切り替えてやりなおします
 (逆はしません)。
 
 - **SEE** [m:Net::SMTP#esmtp?]
@@ -117,29 +112,25 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 
 サーバが STARTTLS を広告してきた場合に真を返します。
 
-このメソッドは [m:Net::SMTP#start] などでセッションを開始
-した以降にしか正しい値を返しません。
+このメソッドは [m:Net::SMTP#start] などでセッションを開始した以降にしか正しい値を返しません。
 
 ### def capable_cram_md5_auth? -> bool
 
 サーバが AUTH CRAM-MD5 を広告してきた場合に真を返します。
 
-このメソッドは [m:Net::SMTP#start] などでセッションを開始
-した以降にしか正しい値を返しません。
+このメソッドは [m:Net::SMTP#start] などでセッションを開始した以降にしか正しい値を返しません。
 
 ### def capable_login_auth? -> bool
 
 サーバが AUTH LOGIN を広告してきた場合に真を返します。
 
-このメソッドは [m:Net::SMTP#start] などでセッションを開始
-した以降にしか正しい値を返しません。
+このメソッドは [m:Net::SMTP#start] などでセッションを開始した以降にしか正しい値を返しません。
 
 ### def capable_plain_auth? -> bool
 
 サーバが AUTH PLAIN を広告してきた場合に真を返します。
 
-このメソッドは [m:Net::SMTP#start] などでセッションを開始
-した以降にしか正しい値を返しません。
+このメソッドは [m:Net::SMTP#start] などでセッションを開始した以降にしか正しい値を返しません。
 
 ### def capable_auth_types -> [String]
 
@@ -147,8 +138,7 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 
 返り値の配列の要素は、 'PLAIN', 'LOGIN', 'CRAM-MD5' です。
 
-このメソッドは [m:Net::SMTP#start] などでセッションを開始
-した以降にしか正しい値を返しません。
+このメソッドは [m:Net::SMTP#start] などでセッションを開始した以降にしか正しい値を返しません。
 
 ### def tls? -> bool
 ### def ssl? -> bool
@@ -180,24 +170,20 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 その Net::SMTP オブジェクトが STARTTLSを利用するかどうかを返します。
 
 常に利用する(利用できないときは [m:Net::SMTP#start] で例外 
-[c:Net::SMTPUnsupportedCommand] を発生) するときは :always を、
-利用可能な場合のみ利用する場合は :auto を、
-常に利用しない場合には nil を返します。
+[c:Net::SMTPUnsupportedCommand] を発生) するときは :always を、利用可能な場合のみ利用する場合は :auto を、常に利用しない場合には nil を返します。
 
 - **SEE** [m:Net::SMTP#start]
 
 ### def starttls_always? -> bool
 
 その Net::SMTP オブジェクトが 常にSTARTTLSを利用する
-(利用できない場合には例外を発生する)ならば
-真を返します。
+(利用できない場合には例外を発生する)ならば真を返します。
 
 - **SEE** [m:Net::SMTP#starttls?], [m:Net::SMTP#starttls_auto?], [m:Net::SMTP#enable_starttls]
 
 ### def starttls_auto? -> bool
 
-その Net::SMTP オブジェクトが利用可能な場合にのみにSTARTTLSを利用するならば
-真を返します。
+その Net::SMTP オブジェクトが利用可能な場合にのみにSTARTTLSを利用するならば真を返します。
 
 - **SEE** [m:Net::SMTP#starttls?], [m:Net::SMTP#starttls_always?], [m:Net::SMTP#enable_starttls_auto]
 
@@ -212,8 +198,7 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 ### def enable_starttls_auto(context = Net::SMTP.default_ssl_context) -> ()
 
 その Net::SMTP オブジェクトがSTARTTLSが利用可能な場合
-(つまりサーバがSTARTTLSを広告した場合)のみにSTARTTLSを利用する
-ように設定します。
+(つまりサーバがSTARTTLSを広告した場合)のみにSTARTTLSを利用するように設定します。
 
 - **SEE** [m:Net::SMTP#starttls?], [m:Net::SMTP#starttls_auto?], [m:Net::SMTP#enable_starttls_auto]
 - **param** `context` -- SSL接続で利用する [c:OpenSSL::SSL::SSLContext] 
@@ -245,14 +230,11 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった
 
 user と password の両方が与えられた場合、
 SMTP AUTH コマンドによって認証を行います。
-authtype は使用する認証のタイプで、
-シンボルで :plain, :login, :cram_md5 を指定します。
+authtype は使用する認証のタイプで、シンボルで :plain, :login, :cram_md5 を指定します。
 
-このメソッドにブロックを与えた場合には、そのオブジェクト
-を引数としてそのブロックを呼び、ブロック終了時に自動的に接続を閉じます。
+このメソッドにブロックを与えた場合には、そのオブジェクトを引数としてそのブロックを呼び、ブロック終了時に自動的に接続を閉じます。
 ブロックを与えなかった場合には自分自身を返します。
-この場合終了時に [m:Net::SMTP#finish] を呼ぶのは利用者の責任と
-なります。
+この場合終了時に [m:Net::SMTP#finish] を呼ぶのは利用者の責任となります。
 
 - **param** `helo` -- HELO で名乗るドメイン名です
 - **param** `user` -- 認証で使うアカウント名
@@ -291,8 +273,7 @@ SMTP セッションが開始されていたら真を返します。
 接続時に待つ最大秒数を返します。
 
 デフォルトは30(秒)です。
-この秒数たってもコネクションが
-開かなければ例外 TimeoutError を発生します。
+この秒数たってもコネクションが開かなければ例外 TimeoutError を発生します。
 
 - **SEE** [m:Net::SMTP#open_timeout=]
 
@@ -332,8 +313,7 @@ SMTP セッションを終了します。
 メールを送信します。
 
 mailsrc をメールとして送信します。
-mailsrc は each イテレータを持つ
-オブジェクトならなんでも構いません(たとえば String や File)。
+mailsrc は each イテレータを持つオブジェクトならなんでも構いません(たとえば String や File)。
 
 from_domain は送り主のメールアドレス ('...@...'のかたち) 、
 to_addrs には送信先メールアドレスを文字列で渡します。
@@ -364,9 +344,7 @@ sendmail は obsolete です。
 ### def open_message_stream(from_addr, *to_addrs) {|f| .... } -> ()
 ### def ready(from_addr, *to_addrs) {|f| .... } -> ()
 
-メール書き込みの準備をし、書き込み先のストリームオブジェクトを
-ブロックに渡します。ブロック終了後、書きこんだ結果が
-送られます。
+メール書き込みの準備をし、書き込み先のストリームオブジェクトをブロックに渡します。ブロック終了後、書きこんだ結果が送られます。
 
 渡されるストリームオブジェクトは以下のメソッドを持っています。
   - puts(str = '') strを出力して CR LFを出力
@@ -411,11 +389,9 @@ ready は obsolete です。
 
 認証を行います。
 
-このメソッドはセッション開始([m:Net::SMTP#start])後、
-メールを送る前に呼びだしてください。
+このメソッドはセッション開始([m:Net::SMTP#start])後、メールを送る前に呼びだしてください。
 
-通常は [m:Net::SMTP.start] や [m:Net::SMTP#start] で認証を
-行うためこれを利用する必要はないはずです。
+通常は [m:Net::SMTP.start] や [m:Net::SMTP#start] で認証を行うためこれを利用する必要はないはずです。
 
 - **param** `user` -- 認証で使うアカウント名
 - **param** `secret` -- 認証で使うパスワード
@@ -427,11 +403,9 @@ ready は obsolete です。
 
 PLAIN 認証を行います。
 
-このメソッドはセッション開始([m:Net::SMTP#start])後、
-メールを送る前に呼びだしてください。
+このメソッドはセッション開始([m:Net::SMTP#start])後、メールを送る前に呼びだしてください。
 
-通常は [m:Net::SMTP.start] や [m:Net::SMTP#start] で認証を
-行うためこれを利用する必要はないはずです。
+通常は [m:Net::SMTP.start] や [m:Net::SMTP#start] で認証を行うためこれを利用する必要はないはずです。
 
 - **param** `user` -- 認証で使うアカウント名
 - **param** `secret` -- 認証で使うパスワード
@@ -440,11 +414,9 @@ PLAIN 認証を行います。
 
 LOGIN 認証を行います。
 
-このメソッドはセッション開始([m:Net::SMTP#start])後、
-メールを送る前に呼びだしてください。
+このメソッドはセッション開始([m:Net::SMTP#start])後、メールを送る前に呼びだしてください。
 
-通常は [m:Net::SMTP.start] や [m:Net::SMTP#start] で認証を
-行うためこれを利用する必要はないはずです。
+通常は [m:Net::SMTP.start] や [m:Net::SMTP#start] で認証を行うためこれを利用する必要はないはずです。
 
 - **param** `user` -- 認証で使うアカウント名
 - **param** `secret` -- 認証で使うパスワード
@@ -453,11 +425,9 @@ LOGIN 認証を行います。
 
 CRAM-MD5 認証を行います。
 
-このメソッドはセッション開始([m:Net::SMTP#start])後、
-メールを送る前に呼びだしてください。
+このメソッドはセッション開始([m:Net::SMTP#start])後、メールを送る前に呼びだしてください。
 
-通常は [m:Net::SMTP.start] や [m:Net::SMTP#start] で認証を
-行うためこれを利用する必要はないはずです。
+通常は [m:Net::SMTP.start] や [m:Net::SMTP#start] で認証を行うためこれを利用する必要はないはずです。
 
 - **param** `user` -- 認証で使うアカウント名
 - **param** `secret` -- 認証で使うパスワード
@@ -470,15 +440,13 @@ RSET コマンドを送ります。
 
 STARTTLS コマンドを送ります。
 
-通常は [m:Net::SMTP#start] で STARTTLS が送られるため
-利用する必要はないはずです。
+通常は [m:Net::SMTP#start] で STARTTLS が送られるため利用する必要はないはずです。
 
 ### def helo(domain) -> Net::SMTP::Response
 
 HELO コマンドを送ります(標準的な SMTP を使います)。
 
-通常は [m:Net::SMTP.start], [m:Net::SMTP#start] で HELO が
-送られるため利用する必要はないはずです。
+通常は [m:Net::SMTP.start], [m:Net::SMTP#start] で HELO が送られるため利用する必要はないはずです。
 
 - **param** `domain` -- HELOで送るドメイン名
 
@@ -486,8 +454,7 @@ HELO コマンドを送ります(標準的な SMTP を使います)。
 
 EHLO コマンドを送ります(ESMTP を使います)。
 
-通常は [m:Net::SMTP.start], [m:Net::SMTP#start] で EHLO が
-送られるため利用する必要はないはずです。
+通常は [m:Net::SMTP.start], [m:Net::SMTP#start] で EHLO が送られるため利用する必要はないはずです。
 
 - **param** `domain` -- EHLOで送るドメイン名
 

@@ -14,12 +14,10 @@ library: timeout
 ブロックの実行時間が制限を過ぎたときは例外
 [c:Timeout::Error] が発生します。
 
-exception_class を指定した場合には [c:Timeout::Error] の代わりに
-その例外が発生します。
+exception_class を指定した場合には [c:Timeout::Error] の代わりにその例外が発生します。
 ブロックパラメータ i は sec がはいります。
 
-また sec が 0 もしくは nil のときは制限時間なしで
-ブロックを実行します。
+また sec が 0 もしくは nil のときは制限時間なしでブロックを実行します。
 
 - **param** `sec` -- タイムアウトする時間を秒数で指定します.
 - **param** `exception_class` -- タイムアウトした時、発生させる例外を指定します.
@@ -80,8 +78,7 @@ Socket などは DNSの名前解決に時間がかかった場合割り込めま
 のスレッドを意識してあげる必要があります。
 
 以下の例では、Fiddle 経由で libc の sleep(3) を直接呼び出しています。
-Ruby の sleep と異なり GVL を解放しないため Timeout からの割り込みを受け付けず、
-この呼び出し(1秒かかっている)が終了した直後((A)の箇所)で Timeout::Error 例外があがっています。
+Ruby の sleep と異なり GVL を解放しないため Timeout からの割り込みを受け付けず、この呼び出し(1秒かかっている)が終了した直後((A)の箇所)で Timeout::Error 例外があがっています。
 
 ```text title="例 timeout が割り込めない"
 require 'timeout'
@@ -131,8 +128,7 @@ end
 #%#[[unknown:timeoutの落し穴|trap::timeout]]も参照
 #%# unknown なので、ここに少し変えてコピペした。
 
-timeout による割り込みは [m:Kernel?.system] によって呼び出された外部プログラムを
-タイムアウトさせる事はできないので、[m:IO.popen]、[m:Kernel?.open]を使用するなどの工夫が必要です。
+timeout による割り込みは [m:Kernel?.system] によって呼び出された外部プログラムをタイムアウトさせる事はできないので、[m:IO.popen]、[m:Kernel?.open]を使用するなどの工夫が必要です。
 
 ```ruby title="例 外部コマンドのタイムアウト"
 require 'timeout'
@@ -205,8 +201,7 @@ alias TimeoutError
 関数 timeout がタイムアウトすると発生します。
 
 [lib:timeout] を使うライブラリを作成する場合は、ユーザが指定した
-timeout を捕捉しないようにライブラリ内で Timeout::Error のサブクラスを
-定義して使用した方が無難です。
+timeout を捕捉しないようにライブラリ内で Timeout::Error のサブクラスを定義して使用した方が無難です。
 #%#((-注: version 1.6 では、[[unknown:ruby-list:33352]] のパッチが必要です。
 #%#このパッチは 1.7 に取り込まれました[[unknown:ruby-list:33391]]-))
 

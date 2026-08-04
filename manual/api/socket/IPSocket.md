@@ -11,8 +11,7 @@ library: socket
 
 ### def IPSocket.getaddress(host) -> String
 
-ホスト名からホストのアドレスを返します。ホストのアドレスは文
-字列は octet decimal の文字列 (例: 127.0.0.1) です。
+ホスト名からホストのアドレスを返します。ホストのアドレスは文字列は octet decimal の文字列 (例: 127.0.0.1) です。
 
 - **param** `host` -- ホスト名を文字列で指定します。
 
@@ -26,9 +25,7 @@ p IPSocket.getaddress("www.ruby-lang.org")        #=> "210.163.138.100"
 
 ### def addr -> Array
 
-ソケットの接続情報を表す配列を返します。配列の各要素は第1要
-素が文字列 "AF_INET", "AF_INET6" など、第2要素が port 番号、第3要素がホストを表
-す文字列、第4要素がホストの IP アドレスを表す文字列 (octet
+ソケットの接続情報を表す配列を返します。配列の各要素は第1要素が文字列 "AF_INET", "AF_INET6" など、第2要素が port 番号、第3要素がホストを表す文字列、第4要素がホストの IP アドレスを表す文字列 (octet
 decimal や hexadecimal) です。
 #%# 接続先の情報はaddrではなくpeeraddrです。注意。[[trap:Socket]]
 
@@ -46,8 +43,7 @@ s = serv.accept
 ### def peeraddr -> Array
 
 接続相手先ソケットの情報を表す配列を返します。配列の各要素は
-[m:IPSocket#addr] メソッドが返す配列
-と同じです。
+[m:IPSocket#addr] メソッドが返す配列と同じです。
 
 - **raise** `Errno::EXXX` -- [man:getpeername(2)] が 0 未満の値を返した場合に発生します。
 
@@ -62,10 +58,8 @@ TCPSocket.open("localhost", "http") {|s|
 
 ### def recvfrom(maxlen, flags = 0) -> Array
 
-recv と同様にソケットからデータを受け取りますが、
-戻り値は文字列と相手ソケットのアドレス (形式は
-[m:IPSocket#addr] 参照) のペアです。引数につ
-いては [m:BasicSocket#recv] と同様です。
+recv と同様にソケットからデータを受け取りますが、戻り値は文字列と相手ソケットのアドレス (形式は
+[m:IPSocket#addr] 参照) のペアです。引数については [m:BasicSocket#recv] と同様です。
 
 - **param** `maxlen` -- 受け取る文字列の最大の長さを指定します。
 

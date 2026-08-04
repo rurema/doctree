@@ -6,8 +6,7 @@ library: openssl
 
 ### def to_bn -> OpenSSL::BN
 
-Integer を同じ数を表す [c:OpenSSL::BN] のオブジェクトに
-変換します。
+Integer を同じ数を表す [c:OpenSSL::BN] のオブジェクトに変換します。
 
 ```ruby
 require 'openssl'

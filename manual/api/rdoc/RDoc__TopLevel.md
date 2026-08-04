@@ -14,8 +14,7 @@ RDoc が収集したクラス、モジュールを配列で返します。
 
 ### def RDoc::TopLevel.find_class_named(name) -> RDoc::NormalClass | RDoc::SingleClass | nil
 
-RDoc が収集したクラスの内、name で指定した名前のクラスを返します。見つ
-からなかった場合は nil を返します。
+RDoc が収集したクラスの内、name で指定した名前のクラスを返します。見つからなかった場合は nil を返します。
 
 - **param** `name` -- クラス名を文字列で指定します。
 
@@ -27,8 +26,7 @@ RDoc が収集したクラスの内、name で指定した名前のクラスを�
 
 ### def RDoc::TopLevel.reset -> ()
 
-RDoc が収集した [c:RDoc::TopLevel] の情報(クラス、モジュール、ファイ
-ル)をクリアします。
+RDoc が収集した [c:RDoc::TopLevel] の情報(クラス、モジュール、ファイル)をクリアします。
 
 ## Instance Methods
 
@@ -48,9 +46,7 @@ collection に name で指定したクラス、モジュールを追加します
 - **param** `superclass` -- 追加するクラスの親クラスを [c:RDoc::NormalClass] オ
                   ブジェクトで指定します。
 
-既に登録済みであった場合は、引数で指定した情報で内容を更新します。ただ
-し、`RDoc::CodeObject#done_documenting` が true を返す場合、何も行
-われません。
+既に登録済みであった場合は、引数で指定した情報で内容を更新します。ただし、`RDoc::CodeObject#done_documenting` が true を返す場合、何も行われません。
 
 ### def find_local_symbol(name) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule | RDoc::AnyMethod | RDoc::Alias | RDoc::Attr | RDoc::Constant
 
@@ -73,8 +69,7 @@ RDoc が収集したクラスの内、name で指定した名前のモジュー�
 
 ### def file_stat=(val)
 
-自身が管理するファイルに関する [c:File::Stat] オブジェクトを設定しま
-す。
+自身が管理するファイルに関する [c:File::Stat] オブジェクトを設定します。
 
 - **param** `val` -- [c:File::Stat] オブジェクトを指定します。
 

@@ -3,27 +3,23 @@ type: library
 ---
 プル方式の XML パーサ。
 
-[c:REXML::Parsers::StreamParser] はパースした結果をコールバックによって
-受動的に受け取りますが、このパーサは [m:REXML::Parsers::PullParser#pull]
+[c:REXML::Parsers::StreamParser] はパースした結果をコールバックによって受動的に受け取りますが、このパーサは [m:REXML::Parsers::PullParser#pull]
 によってパーサから結果をイベントという形で順に能動的に取り出します。
 外部的にはこのクラスのオブジェクトはイベントのキューと見なせます。
 pull はそのキューの先頭を取り出し、キューから取り除きます。
 
 pull は [c:REXML::Parsers::PullEvent] オブジェクトを返します。
 このオブジェクトの
-[m:REXML::Parsers::PullEvent#event_type] で「開始タグ」「終了タグ」
-といったイベントの種類を取得します。
+[m:REXML::Parsers::PullEvent#event_type] で「開始タグ」「終了タグ」といったイベントの種類を取得します。
 [m:REXML::Parsers::PullEvent#\[\]] でそのイベントのパラメータ
 (例えば開始タグなら要素名と属性)を得ることができます。
 
 ### イベントの種類とパラメータ {#event_type}
 
-[m:REXML::Parsers::PullEvent#event_type] で得られるイベントの種類の
-シンボルを列挙しています。
+[m:REXML::Parsers::PullEvent#event_type] で得られるイベントの種類のシンボルを列挙しています。
 
 これらのうちのいくつかは、
-[m:REXML::Parsers::PullEvent#start_element?] などのメソッドで
-判定することが可能です。
+[m:REXML::Parsers::PullEvent#start_element?] などのメソッドで判定することが可能です。
 
 - **start_element (要素名, 属性)**:
   XML要素の開始タグ。属性は { 属性名文字列 => 属性値文字列 } という [c:Hash]

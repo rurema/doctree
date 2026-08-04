@@ -38,8 +38,7 @@ $stderr が変更されておらず、$stderr.tty? が真の場合は true を�
 ### def exception                   -> self
 ### def exception(error_message)    -> Exception
 
-引数を指定しない場合は self を返します。引数を指定した場合 自身のコピー
-を生成し [m:Exception#message] 属性を error_message にして返します。
+引数を指定しない場合は self を返します。引数を指定した場合 自身のコピーを生成し [m:Exception#message] 属性を error_message にして返します。
 
 [m:Kernel?.raise] は、実質的に、例外オブジェクトの exception
 メソッドの呼び出しです。
@@ -97,8 +96,7 @@ end
 バックトレース情報を返します。[m:Exception#backtrace]に似ていますが、
 [c:Thread::Backtrace::Location] の配列を返す点が異なります。
 
-現状では [m:Exception#set_backtrace] によって戻り値が変化する事はあり
-ません。
+現状では [m:Exception#set_backtrace] によって戻り値が変化する事はありません。
 
 ```ruby title="例: test.rb"
 require "date"
@@ -141,8 +139,7 @@ end
 
 ### def set_backtrace(errinfo)    -> nil | String | [String]
 
-バックトレース情報に errinfo を設定し、設定されたバックトレース
-情報を返します。
+バックトレース情報に errinfo を設定し、設定されたバックトレース情報を返します。
 
 #%since 3.4
 - **param** `errinfo` -- nil、[c:String]、[c:String] の配列、あるいは [c:Thread::Backtrace::Location] の配列のいずれかを指定します。
@@ -184,8 +181,7 @@ end
 {: since=""}
 
 自身と指定された other のクラスが同じであり、
-message と backtrace が == メソッドで比較して
-等しい場合に true を返します。そうでない場合に false を返します。
+message と backtrace が == メソッドで比較して等しい場合に true を返します。そうでない場合に false を返します。
 
 - **param** `other` -- 自身と比較したいオブジェクトを指定します。
              自身と異なるクラスのオブジェクトを指定した場合は
@@ -233,9 +229,7 @@ p results[0] == results[2]    # => false
 
 ### def cause -> Exception | nil
 
-self の前の例外(self が rescue 節や ensure 節の中で発生した例外の場合、
-その前に発生していた元々の例外)を返します。存在しない場合は nil を返し
-ます。
+self の前の例外(self が rescue 節や ensure 節の中で発生した例外の場合、その前に発生していた元々の例外)を返します。存在しない場合は nil を返します。
 
 ```ruby title="例"
 begin
@@ -254,10 +248,8 @@ end
 
 例外の整形された文字列を返します。
 
-返される文字列は Ruby が捕捉されなかった例外を標準エラー出力に出力するときと
-同じ形式です。
-そのため、メソッド呼び出し時に $stderr が変更されておらず、$stderr.tty? が真の場合は
-エスケープシーケンスによる文字装飾がついています。
+返される文字列は Ruby が捕捉されなかった例外を標準エラー出力に出力するときと同じ形式です。
+そのため、メソッド呼び出し時に $stderr が変更されておらず、$stderr.tty? が真の場合はエスケープシーケンスによる文字装飾がついています。
 
 - **param** `highlight` -- エスケープシーケンスによる文字装飾をつけるかどうかを指定します。
                  デフォルト値は [m:Exception.to_tty?] の返り値と同じです。
@@ -322,12 +314,10 @@ end
 ```
 
 Ruby が捕捉されなかった例外を報告するときに、このメソッドの返り値が使われます。
-[lib:did_you_mean] や error_highlight は、このメソッドを上書きして
-「もしかして」の候補やエラー箇所の指示を追加しています。
+[lib:did_you_mean] や error_highlight は、このメソッドを上書きして「もしかして」の候補やエラー箇所の指示を追加しています。
 そのため、実際に得られる文字列は読み込んでいるライブラリによって変わります。
 
-このメソッドを上書きする場合は、知らないキーワード引数を渡されても
-エラーにならないようにしてください。`highlight` のほか、`did_you_mean`、
+このメソッドを上書きする場合は、知らないキーワード引数を渡されてもエラーにならないようにしてください。`highlight` のほか、`did_you_mean`、
 `error_highlight`、`syntax_suggest` などが渡される可能性があります。
 
 ```ruby

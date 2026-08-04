@@ -5,8 +5,7 @@ library: rexml/document
 
 XMLドキュメントを(文字列として)出力するクラスです。
 
-[c:REXML::Formatters::Pretty] と
-異なりテキストの改行や空白を修正せずにそのまま出力します。
+[c:REXML::Formatters::Pretty] と異なりテキストの改行や空白を修正せずにそのまま出力します。
 
 ```ruby
 require 'rexml/document'

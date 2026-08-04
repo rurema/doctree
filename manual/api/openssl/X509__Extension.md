@@ -5,14 +5,11 @@ library: openssl
 
 X.509 v3 証明書の拡張領域のためのクラスです。
 
-[c:OpenSSL::X509::Certificate] オブジェクトは
-その拡張領域を Extension オブジェクトの配列として保持し、
+[c:OpenSSL::X509::Certificate] オブジェクトはその拡張領域を Extension オブジェクトの配列として保持し、
 [m:OpenSSL::X509::Certificate#extensions] でその配列が得られます。
 
-このクラスのインスタンス生成は [c:OpenSSL::ASN1::ASN1Data] を
-取り扱う必要があり面倒です。
-[c:OpenSSL::X509::ExtensionFactory] を用いることで
-インスタンスの生成を簡便に行うことができます。
+このクラスのインスタンス生成は [c:OpenSSL::ASN1::ASN1Data] を取り扱う必要があり面倒です。
+[c:OpenSSL::X509::ExtensionFactory] を用いることでインスタンスの生成を簡便に行うことができます。
 
 ### 参照
 
@@ -102,8 +99,7 @@ DER 形式のバイト列に変換して返します。
 
 ### def to_a -> [String, String, bool]
 
-拡張領域の内容を、[識別子(extnID), 値(extnValue), 重要度(critical)] という
-形で返します。
+拡張領域の内容を、[識別子(extnID), 値(extnValue), 重要度(critical)] という形で返します。
 
 ### def to_h -> Hash
 

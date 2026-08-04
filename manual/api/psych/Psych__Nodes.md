@@ -3,16 +3,12 @@ library: psych
 ---
 # module Psych::Nodes
 
-Psych が中間データとして利用している AST (Abstract Syntax Tree) に
-関するモジュール。
+Psych が中間データとして利用している AST (Abstract Syntax Tree) に関するモジュール。
 
-[m:Psych.load] によって YAML ドキュメントを Ruby オブジェクトに変換
-するときには、一度中間的な AST に変換され、その AST が Ruby の
-オブジェクトに変換されます。
+[m:Psych.load] によって YAML ドキュメントを Ruby オブジェクトに変換するときには、一度中間的な AST に変換され、その AST が Ruby のオブジェクトに変換されます。
 
 逆向き、つまり [m:Psych.dump] で Ruby のオブジェクトを
-YAML ドキュメントに変換するときには、中間的な AST に変換してから
-それを YAML ドキュメントに変換します。
+YAML ドキュメントに変換するときには、中間的な AST に変換してからそれを YAML ドキュメントに変換します。
 
 YAML AST の各ノードのクラスはすべて Psych::Nodes の下にあります。
 AST を手作業で構築して、visitor を使って AST を YAML ドキュメントや
@@ -33,8 +29,7 @@ doc.children    << seq
 seq.children    << scalar
 ```
 
-stream は AST のルートです。以下のようにして AST を YAML ドキュメントに
-変換できます。
+stream は AST のルートです。以下のようにして AST を YAML ドキュメントに変換できます。
 
 ```text
 stream.to_yaml => "---\n- foo\n"
@@ -48,10 +43,8 @@ stream.to_ruby => [["foo"]]
 
 ### YAML AST 仕様
 
-正しい YAML AST は [c:Psych::Nodes::Stream] ノードが
-木のルートでなければなりません。Psych::Nodes::Stream ノードは
-1つ以上の [c:Psych::Nodes::Document] ノードを子として
-持っていなければなりません。
+正しい YAML AST は [c:Psych::Nodes::Stream] ノードが木のルートでなければなりません。Psych::Nodes::Stream ノードは
+1つ以上の [c:Psych::Nodes::Document] ノードを子として持っていなければなりません。
 
 Psych::Nodes::Document は子ノードをちょうど1個持っていなければなりません。
 子ノードは以下のいずれかでなければなりません。
@@ -59,17 +52,13 @@ Psych::Nodes::Document は子ノードをちょうど1個持っていなけれ�
 - [c:Psych::Nodes::Mapping]
 - [c:Psych::Nodes::Scalar]
 
-[c:Psych::Nodes::Sequence] と [c:Psych::Nodes::Mapping] は複数の
-子ノードを持つことができます。Psych::Nodes::Mapping の子ノード数は
-偶数でなければなりません。
+[c:Psych::Nodes::Sequence] と [c:Psych::Nodes::Mapping] は複数の子ノードを持つことができます。Psych::Nodes::Mapping の子ノード数は偶数でなければなりません。
 
-Psych::Nodes::Sequence と Psych::Nodes::Mapping の子ノードとして有効な
-ものは以下のいずれかです。
+Psych::Nodes::Sequence と Psych::Nodes::Mapping の子ノードとして有効なものは以下のいずれかです。
 - [c:Psych::Nodes::Sequence]
 - [c:Psych::Nodes::Mapping]
 - [c:Psych::Nodes::Scalar]
 - [c:Psych::Nodes::Alias]
 
-[c:Psych::Nodes::Scalar] と [c:Psych::Nodes::Alias] は子ノードを持つ
-ことができません。
+[c:Psych::Nodes::Scalar] と [c:Psych::Nodes::Alias] は子ノードを持つことができません。
 

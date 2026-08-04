@@ -12,8 +12,7 @@ HTTP リクエストのためのクラスを提供するライブラリです。
 
 HTTP リクエストのためのクラスです。
 
-通常 WEBrick::HTTPRequest オブジェクトはサーブレットの service メソッドや do_XXX メソッドの
-引数として与えられるものであり、ユーザが明示的に生成する必要はありません。
+通常 WEBrick::HTTPRequest オブジェクトはサーブレットの service メソッドや do_XXX メソッドの引数として与えられるものであり、ユーザが明示的に生成する必要はありません。
 
 ## Class Methods
 
@@ -71,8 +70,7 @@ Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で
 
 ### def content_length    -> Integer
 
-リクエストの Content-Length ヘッダの値を整数で返します。リクエストに Content-Length ヘッダ
-が含まれていない場合は 0 を返します。
+リクエストの Content-Length ヘッダの値を整数で返します。リクエストに Content-Length ヘッダが含まれていない場合は 0 を返します。
 
 ### def content_type    -> String | nil
 
@@ -125,8 +123,7 @@ false となります。
 
 ### def parse(socket = nil)    -> ()
 
-指定された socket からクライアントのリクエストを読み込み、
-自身のアクセサなどを適切に設定します。
+指定された socket からクライアントのリクエストを読み込み、自身のアクセサなどを適切に設定します。
 
 - **param** `socket` -- クライアントに接続された IO オブジェクトを指定します。
 
@@ -156,15 +153,12 @@ false となります。
 
 リクエストのクエリーあるいはクライアントがフォームへ入力した値を表すハッシュを返します。
 
-ハッシュのキーも値も unescape されています。ただし multipart/form-data なフォームデータの場合には
-ユーザが content-transfer-encoding ヘッダを見て適切に処理する必要があります。
+ハッシュのキーも値も unescape されています。ただし multipart/form-data なフォームデータの場合にはユーザが content-transfer-encoding ヘッダを見て適切に処理する必要があります。
 
 ハッシュの値は正確には文字列ではなく String クラスのサブクラスである [c:WEBrick::HTTPUtils::FormData]
 クラスのインスタンスです。
 
-multipart/form-data なフォームデータであってもサイズの制限なく、通常のフォームデータと
-同じように扱われることに注意してください。クライアントからの入力によっては巨大な文字列が
-生成されてしまいます。
+multipart/form-data なフォームデータであってもサイズの制限なく、通常のフォームデータと同じように扱われることに注意してください。クライアントからの入力によっては巨大な文字列が生成されてしまいます。
 
 ```ruby title="例"
 h = req.query

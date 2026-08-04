@@ -12,8 +12,7 @@ require:
 ---
 rdoc で解析できるファイルの種類を追加するためのサブライブラリです。
 
-以下のメソッドを定義したクラスを作成する事で、新しいパーサクラスを作成
-する事ができます。
+以下のメソッドを定義したクラスを作成する事で、新しいパーサクラスを作成する事ができます。
 
 - #initialize(top_level, file_name, body, options, stats)
 - #scan
@@ -29,10 +28,8 @@ initialize メソッドは以下の引数を受け取ります。
 scan メソッドは引数を受け取りません。処理の後は必ず
 [c:RDoc::TopLevel] オブジェクトを返す必要があります。
 
-また、[c:RDoc::Parser] はファイル名からパーサクラスを取得するのにも使
-われます。このために、新しく作成するパーサクラスでは [c:RDoc::Parser]
-を継承し、parse_files_matching メソッドで自身が解析できるファイル名のパ
-ターンを登録しておく必要があります。
+また、[c:RDoc::Parser] はファイル名からパーサクラスを取得するのにも使われます。このために、新しく作成するパーサクラスでは [c:RDoc::Parser]
+を継承し、parse_files_matching メソッドで自身が解析できるファイル名のパターンを登録しておく必要があります。
 
 ```ruby title="例"
 require "rdoc/parser"
@@ -67,8 +64,7 @@ nil を返します。
 
 ### def RDoc::Parser.alias_extension(old_ext, new_ext) -> bool
 
-old_ext に登録されたパーサを new_ext でも解析できるようにエイリアスを登
-録します。
+old_ext に登録されたパーサを new_ext でも解析できるようにエイリアスを登録します。
 
 - **param** `old_ext` -- 拡張子を文字列で指定します。
 
@@ -95,15 +91,13 @@ file_name を解析できるパーサのインスタンスを返します。
 
 ### def RDoc::Parser.parsers -> [[Regexp, RDoc::Parser]]
 
-[m:RDoc::Parser#parse_files_matching] で登録した正規表現とパーサクラ
-スの配列の配列を返します。
+[m:RDoc::Parser#parse_files_matching] で登録した正規表現とパーサクラスの配列の配列を返します。
 
 ## Instance Methods
 
 ### def parse_files_matching(regexp) -> ()
 
-regexp で指定した正規表現にマッチするファイルを解析できるパーサとして、
-自身を登録します。
+regexp で指定した正規表現にマッチするファイルを解析できるパーサとして、自身を登録します。
 
 - **param** `regexp` -- 正規表現を指定します。
 

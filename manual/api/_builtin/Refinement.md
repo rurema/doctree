@@ -6,8 +6,7 @@ since: "3.1"
 
 [m:Module#refine] のブロックの中の `self` のクラスです。
 
-[m:Refinement#import_methods]で他のモジュールからメソッドを
-インポートできます。
+[m:Refinement#import_methods]で他のモジュールからメソッドをインポートできます。
 
 #%since 3.2
 ## Instance Methods
@@ -63,8 +62,7 @@ p M.refinements[0].refined_class # => String
 [m:Module#include]と違って、`import_methods` はメソッドをコピーして
 refinement に追加して、refinementでインポートしたメソッドを有効化します。
 
-メソッドをコピーするため、Rubyコードで定義されたメソッドだけしか
-インポートできないことに注意してください。
+メソッドをコピーするため、Rubyコードで定義されたメソッドだけしかインポートできないことに注意してください。
 
 ```ruby
 module StrUtils

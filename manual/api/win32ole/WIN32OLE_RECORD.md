@@ -8,15 +8,12 @@ WIN32OLE_RECORDオブジェクトは、OLEオートメーションのVT_RECORD�
 WIN32OLEはWIN32OLE_RECORDオブジェクトを返します。
 
 Ruby 3.2 から、このクラスは WIN32OLE の名前空間下に移動し、`WIN32OLE::Record`
-として定義されるようになりました。トップレベル定数 `WIN32OLE_RECORD` は後方
-互換のためのエイリアスとして残っていますが、Ruby 3.4 以降は非推奨
+として定義されるようになりました。トップレベル定数 `WIN32OLE_RECORD` は後方互換のためのエイリアスとして残っていますが、Ruby 3.4 以降は非推奨
 (deprecated)です(`Warning[:deprecated]` が有効なら参照時に警告が表示されます)。
 
 ### サンプルコード
 
-たとえば、VB.NETで作成したComServerプロジェクトのCOMサーバが、以下のよ
-うにtitle（文字列）とcost（整数）の2つのフィールドを持つBook構造体を返
-すgetBookメソッドを持っているとします。
+たとえば、VB.NETで作成したComServerプロジェクトのCOMサーバが、以下のようにtitle（文字列）とcost（整数）の2つのフィールドを持つBook構造体を返すgetBookメソッドを持っているとします。
 
 ```text
 Imports System.Runtime.InteropServices
@@ -47,8 +44,7 @@ book.cost  # => 20
 ```
 
 なお、`book.class`は常に`WIN32OLE::Record`を返します。トップレベル定数
-`WIN32OLE_RECORD`は同じクラスオブジェクトへのエイリアスですが、クラス
-自体の名前（`WIN32OLE::Record.name`）は変わりません。
+`WIN32OLE_RECORD`は同じクラスオブジェクトへのエイリアスですが、クラス自体の名前（`WIN32OLE::Record.name`）は変わりません。
 
 ## Class Methods
 
@@ -71,8 +67,7 @@ WIN32OLE_RECORDオブジェクトを生成します。
                             IRecordInfoインタフェースの取得に失敗し
                             ました。
 
-VB.NETのComServerプロジェクトで、以下のBook構造体を持つCOMサーバがある
-とします。
+VB.NETのComServerプロジェクトで、以下のBook構造体を持つCOMサーバがあるとします。
 
 ```text
 Imports System.Runtime.InteropServices
@@ -105,8 +100,7 @@ Hashのキーは、VT_RECORD OLE変数のメンバ名、値はその値です。
 
 - **return** -- VT_RECORD値の各メンバ名と値からなるHashオブジェクトを返します。
 
-VB.NETのComServerプロジェクトで作成したCOMサーバの以下のgetBookメソッ
-ドの戻り値に対して、
+VB.NETのComServerプロジェクトで作成したCOMサーバの以下のgetBookメソッドの戻り値に対して、
 
 ```text
 Imports System.Runtime.InteropServices
@@ -151,11 +145,7 @@ book.typename # => "Book"
 
 VT_RECORD OLE変数のメンバ名に対応する値を取得、または設定します。
 
-引数がnameだけの場合（`book.title`のようにgetterとして未定義メソッドが
-呼び出された場合）はメンバの値を取得します。引数がname、valの2つの場合
-（`book.title = "..."`のようにsetterとして未定義メソッドが呼び出された
-場合）は、nameの末尾の「=」を取り除いたメンバ名にvalを設定します。指定
-したメンバ名が存在しない場合は[c:KeyError]が発生します。
+引数がnameだけの場合（`book.title`のようにgetterとして未定義メソッドが呼び出された場合）はメンバの値を取得します。引数がname、valの2つの場合（`book.title = "..."`のようにsetterとして未定義メソッドが呼び出された場合）は、nameの末尾の「=」を取り除いたメンバ名にvalを設定します。指定したメンバ名が存在しない場合は[c:KeyError]が発生します。
 
 - **param** `name` -- アクセスするメンバ名に対応するメソッド名（シンボル）です。
            setterの場合は末尾に「=」が付きます。
@@ -166,8 +156,7 @@ VT_RECORD OLE変数のメンバ名に対応する値を取得、または設定�
 
 - **raise** `KeyError` -- 指定したメンバ名がselfに存在しません。
 
-VB.NETのComServerプロジェクトで作成したCOMサーバの以下のBook構造体に対
-して、
+VB.NETのComServerプロジェクトで作成したCOMサーバの以下のBook構造体に対して、
 
 ```text
 Imports System.Runtime.InteropServices
@@ -180,8 +169,7 @@ Public Class ComClass
 End Class
 ```
 
-値の取得・設定は次のようにメンバ名をメソッドとして呼び出すことで行いま
-す（実際には、method_missingが呼び出されます）。
+値の取得・設定は次のようにメンバ名をメソッドとして呼び出すことで行います（実際には、method_missingが呼び出されます）。
 
 ```ruby title="例"
 obj = WIN32OLE.new('ComServer.ComClass')
@@ -194,12 +182,10 @@ book.title = "Ruby" # ( book.method_missing(:title=, "Ruby") が呼び出され�
 
 ### def ole_instance_variable_get(name) -> object
 
-VT_RECORD OLE変数のメンバ名に対応する値を取得します。メンバ名が正しく
-ない場合は[c:KeyError]が発生します。
+VT_RECORD OLE変数のメンバ名に対応する値を取得します。メンバ名が正しくない場合は[c:KeyError]が発生します。
 
 Rubyの[c:Object]が持つメソッドと同名のメンバを持つなど、メンバに
-[m:WIN32OLE_RECORD#method_missing]経由で直接アクセスできない場合に利
-用します。
+[m:WIN32OLE_RECORD#method_missing]経由で直接アクセスできない場合に利用します。
 
 - **param** `name` -- 取得するメンバ名を文字列またはシンボルで指定します。
 - **return** -- 指定したメンバの値を返します。
@@ -207,8 +193,7 @@ Rubyの[c:Object]が持つメソッドと同名のメンバを持つなど、メ
 - **raise** `TypeError` -- nameがStringまたはSymbolではありません。
 - **raise** `KeyError` -- 指定したメンバ名がselfに存在しません。
 
-VB.NETのComServerプロジェクトで作成したCOMサーバの以下のComObject構造
-体（[m:Object#object_id]と同名のメンバを持つ）に対して、
+VB.NETのComServerプロジェクトで作成したCOMサーバの以下のComObject構造体（[m:Object#object_id]と同名のメンバを持つ）に対して、
 
 ```text
 Imports System.Runtime.InteropServices
@@ -219,8 +204,7 @@ Public Class ComClass
 End Class
 ```
 
-以下のようにすると、`obj.object_id`はRubyの[m:Object#object_id]を返し
-てしまうため、代わりにole_instance_variable_getを利用します。
+以下のようにすると、`obj.object_id`はRubyの[m:Object#object_id]を返してしまうため、代わりにole_instance_variable_getを利用します。
 
 ```ruby title="例"
 server = WIN32OLE.new('ComServer.ComClass')
@@ -233,11 +217,9 @@ obj.ole_instance_variable_get(:object_id) # => nil
 
 ### def ole_instance_variable_set(name, val) -> object
 
-VT_RECORD OLE変数のメンバ名に対応する値を設定します。メンバ名が正しく
-ない場合は[c:KeyError]が発生します。
+VT_RECORD OLE変数のメンバ名に対応する値を設定します。メンバ名が正しくない場合は[c:KeyError]が発生します。
 
-[m:WIN32OLE_RECORD#method_missing]経由でメンバの値を直接設定できない場
-合に利用します。
+[m:WIN32OLE_RECORD#method_missing]経由でメンバの値を直接設定できない場合に利用します。
 
 - **param** `name` -- 設定するメンバ名を文字列またはシンボルで指定します。
 - **param** `val` -- 設定する値を指定します。
@@ -274,8 +256,7 @@ selfが表すOLEの構造体名と各メンバ名、その値を含む文字列�
 `WIN32OLE_RECORD`経由で生成した場合であっても、常に`WIN32OLE::Record`
 と表示されます。
 
-VB.NETのComServerプロジェクトで作成したCOMサーバの以下のBook構造体に対
-して、
+VB.NETのComServerプロジェクトで作成したCOMサーバの以下のBook構造体に対して、
 
 ```text
 Imports System.Runtime.InteropServices

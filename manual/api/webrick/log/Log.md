@@ -4,8 +4,7 @@ library: webrick/log
 # class WEBrick::Log < WEBrick::BasicLog
 
 ログを取る機能を提供するクラスです。
-[c:WEBrick::BasicLog] との違いはログの各行の先頭に
-現在時刻が自動で挿入される点です。
+[c:WEBrick::BasicLog] との違いはログの各行の先頭に現在時刻が自動で挿入される点です。
 
 ## Instance Methods
 

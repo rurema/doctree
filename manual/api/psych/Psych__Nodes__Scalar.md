@@ -20,8 +20,7 @@ anchor を付けない場合には nil を指定します。
 tag には scalar に付加されている tag を文字列で指定します。
 tag を付けない場合には nil を指定します。
 
-plain は plain style であるかどうか、quoted は quoted style であるかどうか
-を指定します。style には node の style を整数値で渡します。
+plain は plain style であるかどうか、quoted は quoted style であるかどうかを指定します。style には node の style を整数値で渡します。
 style は次の値のいずれかです。
   - [m:Psych::Nodes::Scalar::ANY]
   - [m:Psych::Nodes::Scalar::PLAIN]

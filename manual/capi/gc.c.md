@@ -21,8 +21,7 @@ GC のスイープフェイズを実行します。
 ### static VALUE id2ref(VALUE obj, VALUE id)
 
 ObjectSpace#_id2ref の実体。
-Ruby の整数で表されたオブジェクト ID id から
-オブジェクトを返します。
+Ruby の整数で表されたオブジェクト ID id からオブジェクトを返します。
 
 ### void Init_heap(void)
 
@@ -56,8 +55,7 @@ dmark、解放するときは dfree を使うようになります。
 
 ### VALUE rb_gc(void)
 
-明示的に GC を開始します。rb_gc_disable() で禁止中のときおよび
-すでに GC が実行中のときは実際には行われません。
+明示的に GC を開始します。rb_gc_disable() で禁止中のときおよびすでに GC が実行中のときは実際には行われません。
 
 ### void rb_gc_call_finalizer_at_exit(void)
 
@@ -118,10 +116,7 @@ GC を起動します。
 ### void rb_memerror(void)
 
 NoMemoryErrorをraiseする。
-しかしraise自体にもメモリ容量を使うため、メモリが足りない状況
-ではその途中でまたメモリ不足になる可能性がある。そのため
-この関数では再帰を検出した場合はraiseではなくexitするように
-なっている。
+しかしraise自体にもメモリ容量を使うため、メモリが足りない状況ではその途中でまたメモリ不足になる可能性がある。そのためこの関数では再帰を検出した場合はraiseではなくexitするようになっている。
 
 ### VALUE rb_newobj(void)
 
@@ -145,8 +140,7 @@ GC を行いそれでもだめなときは例外 NoMemoryError を発生しま�
 
 ### void ruby_xfree(void *x)
 
-以前 malloc/calloc/realloc して free していないポインタ x を
-開放します。ruby のシグナル機構とコンフリクトしません。
+以前 malloc/calloc/realloc して free していないポインタ x を開放します。ruby のシグナル機構とコンフリクトしません。
 
 ### void *ruby_xmalloc(long size)
 

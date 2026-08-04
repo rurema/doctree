@@ -82,8 +82,7 @@ XML文書のバージョンを設定します。
 ### def standalone -> String | nil
 ### def stand_alone? -> String | nil
 
-スタンドアロン文書であるかどうかを "yes" "no" で
-返します。
+スタンドアロン文書であるかどうかを "yes" "no" で返します。
 
 nil(省略)を返す場合もあります。
 
@@ -99,8 +98,7 @@ nil(省略)を返す場合もあります。
 
 XML宣言内の encoding の宣言を出力時に省略するならば真を返します。
 
-これが真であっても UTF-8 以外のエンコーディングを指定している
-ならば encoding は出力されます。
+これが真であっても UTF-8 以外のエンコーディングを指定しているならば encoding は出力されます。
 
 ### def clone -> REXML::XMLDecl
 
@@ -148,8 +146,7 @@ self と other が同じであるならば真を返します。
 
 エンコーディングを enc に設定します。
 
-enc に nil を渡すと XML 宣言では encoding が
-指定されていない(デフォルトで UTF-8 が使われる)
+enc に nil を渡すと XML 宣言では encoding が指定されていない(デフォルトで UTF-8 が使われる)
 ことになります。
 
 - **param** `enc` -- エンコーディング(文字列 or nil)
@@ -157,15 +154,13 @@ enc に nil を渡すと XML 宣言では encoding が
 
 ### def nowrite -> ()
 
-出力時([m:REXML::Document#write]) に XML 宣言を省略する
-よう指示します。
+出力時([m:REXML::Document#write]) に XML 宣言を省略するよう指示します。
 
 - **SEE** [m:REXML::XMLDecl#dowrite], [m:REXML::XMLDecl#writethis]
 
 ### def dowrite -> ()
 
-出力時([m:REXML::Document#write]) に XML 宣言を省略しない
-よう指示します。
+出力時([m:REXML::Document#write]) に XML 宣言を省略しないよう指示します。
 
 - **SEE** [m:REXML::XMLDecl#nowrite], [m:REXML::XMLDecl#writethis]
 
@@ -183,8 +178,7 @@ enc に nil を渡すと XML 宣言では encoding が
 
 ### const DEFAULT_VERSION -> String
 
-[m:REXML::XMLDecl.new] や [m:REXML::XMLDecl.default] で
-の使われるデフォルトのXMLバージョン。
+[m:REXML::XMLDecl.new] や [m:REXML::XMLDecl.default] での使われるデフォルトのXMLバージョン。
 
 #%# #@todo
 #%#

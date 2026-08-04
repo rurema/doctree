@@ -14,18 +14,13 @@ alias ConditionVariable
 
 ### Condition Variable とは
 
-あるスレッド A が排他領域で動いていたとします。スレッド A は現在空いていない
-リソースが必要になったので空くまで待つことにしたとします。これはうまくいきません。
-なぜなら、スレッド A は排他領域で動いているわけですから、他のスレッドは動くことが
-できません。リソースを空けることもできません。スレッド A がリソースの空きを
-待っていても、いつまでも空くことはありません。
+あるスレッド A が排他領域で動いていたとします。スレッド A は現在空いていないリソースが必要になったので空くまで待つことにしたとします。これはうまくいきません。
+なぜなら、スレッド A は排他領域で動いているわけですから、他のスレッドは動くことができません。リソースを空けることもできません。スレッド A がリソースの空きを待っていても、いつまでも空くことはありません。
 
 以上のような状況を解決するのが Condition Variable です。
 
-スレッド a で条件(リソースが空いているかなど)が満たされるまで wait メソッドで
-スレッドを止めます。他のスレッド b において条件が満たされたなら signal
-メソッドでスレッド a に対して条件が成立したことを通知します。これが典型的な
-使用例です。
+スレッド a で条件(リソースが空いているかなど)が満たされるまで wait メソッドでスレッドを止めます。他のスレッド b において条件が満たされたなら signal
+メソッドでスレッド a に対して条件が成立したことを通知します。これが典型的な使用例です。
 
 ```ruby
 mutex = Thread::Mutex.new
@@ -49,8 +44,7 @@ b = Thread.start {
 }
 ```
 
-以下は [ruby-list:14445] で紹介されている例です。@q が空になった場合、
-あるいは満タンになった場合に Condition Variable を使って wait しています。
+以下は [ruby-list:14445] で紹介されている例です。@q が空になった場合、あるいは満タンになった場合に Condition Variable を使って wait しています。
 
 ```ruby
 class TinyQueue
@@ -147,8 +141,7 @@ recv Milk
 
 ### def broadcast -> self
 
-状態変数を待っているスレッドをすべて再開します。再開された
-スレッドは [m:Thread::ConditionVariable#wait]
+状態変数を待っているスレッドをすべて再開します。再開されたスレッドは [m:Thread::ConditionVariable#wait]
 で指定した mutex のロックを試みます。
 
 - **return** -- 常に self を返します。
@@ -189,8 +182,7 @@ sleep 1
 
 ### def signal -> self
 
-状態変数を待っているスレッドを1つ再開します。再開された
-スレッドは [m:Thread::ConditionVariable#wait]
+状態変数を待っているスレッドを1つ再開します。再開されたスレッドは [m:Thread::ConditionVariable#wait]
 で指定した mutex のロックを試みます。
 
 - **return** -- 常に self を返します。
@@ -231,8 +223,7 @@ sleep 1
 
 mutex のロックを解放し、カレントスレッドを停止します。
 [m:Thread::ConditionVariable#signal]または、
-[m:Thread::ConditionVariable#broadcast]で送られたシグナルを
-受け取ると、mutexのロックを取得し、実行状態となります。
+[m:Thread::ConditionVariable#broadcast]で送られたシグナルを受け取ると、mutexのロックを取得し、実行状態となります。
 
 - **param** `mutex` -- [c:Thread::Mutex] オブジェクトを指定します。
 

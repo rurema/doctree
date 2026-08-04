@@ -1,16 +1,12 @@
 RDoc 形式に整形されたプレインテキストを変換するためのサブライブラリです。
 
 [c:RDoc::Markup] は RDoc 形式のドキュメント、Wiki エントリ、Web上の
-FAQ などを想定したプレインテキストから様々なフォーマットへの変換を行う
-ツール群の基礎として作られています。[c:RDoc::Markup] 自身は何の出力も
-行いません。
+FAQ などを想定したプレインテキストから様々なフォーマットへの変換を行うツール群の基礎として作られています。[c:RDoc::Markup] 自身は何の出力も行いません。
 それらは [ref:output_format] で後述するクラス群に委ねられています。
 
 ### Markup
 
-基本的には、[ref:lib:rdoc#markup] と同じです。ただし、rdoc コマンドと
-は異なり、Ruby のソースコードのコメント部分ではなく、プレインテキストが
-変換対象になります。そのため、以下のみがフォーマットされます。
+基本的には、[ref:lib:rdoc#markup] と同じです。ただし、rdoc コマンドとは異なり、Ruby のソースコードのコメント部分ではなく、プレインテキストが変換対象になります。そのため、以下のみがフォーマットされます。
 
 - [ref:lib:rdoc#list]
 - [ref:lib:rdoc#labeled_list]
@@ -102,8 +98,7 @@ puts "<body>#{wh.convert ARGF.read}</body>"
 
 ### def add_word_pair(start, stop, name) -> ()
 
-start と stop ではさまれる文字列(例. *bold*)をフォーマットの対象にしま
-す。
+start と stop ではさまれる文字列(例. *bold*)をフォーマットの対象にします。
 
 - **param** `start` -- 開始となる文字列を指定します。
 
@@ -126,8 +121,7 @@ h.add_tag(:STRIKE, "<strike>", "</strike>")
 puts m.convert(input_string, h)
 ```
 
-変換時に実際にフォーマットを行うには [m:RDoc::Markup::Formatter#add_tag] のように、
-フォーマッタ側でも操作を行う必要があります。
+変換時に実際にフォーマットを行うには [m:RDoc::Markup::Formatter#add_tag] のように、フォーマッタ側でも操作を行う必要があります。
 
 ### def add_html(tag, name) -> ()
 
@@ -150,17 +144,14 @@ h.add_tag(:STRIKE, "<strike>", "</strike>")
 puts m.convert(input_string, h)
 ```
 
-変換時に実際にフォーマットを行うには [m:RDoc::Markup::Formatter#add_tag] のように、
-フォーマッタ側でも操作を行う必要があります。
+変換時に実際にフォーマットを行うには [m:RDoc::Markup::Formatter#add_tag] のように、フォーマッタ側でも操作を行う必要があります。
 
 ### def add_special(pattern, name) -> ()
 
-pattern で指定した正規表現にマッチする文字列をフォーマットの対象にしま
-す。
+pattern で指定した正規表現にマッチする文字列をフォーマットの対象にします。
 
 例えば WikiWord のような、[m:RDoc::Markup#add_word_pair]、
-[m:RDoc::Markup#add_html] でフォーマットできないものに対して使用
-します。
+[m:RDoc::Markup#add_html] でフォーマットできないものに対して使用します。
 
 - **param** `pattern` -- 正規表現を指定します。
 
@@ -205,8 +196,7 @@ str で指定された文字列を formatter に変換させます。
 rdoc ライブラリのデバッグ用途に使用します。
 [m:RDoc::Markup#convert] の後に実行します。
 
-変換のために加工したオブジェクトを改行で連結したものを返すため、変換前
-の文字列と結果が異なる事があります。
+変換のために加工したオブジェクトを改行で連結したものを返すため、変換前の文字列と結果が異なる事があります。
 
 - **SEE** [m:RDoc::Markup#convert]
 

@@ -48,8 +48,7 @@ library: fileutils
 
 プロセスのカレントディレクトリを dir に変更します。
 
-ブロックとともに呼び出された時はブロック終了後に
-元のディレクトリに戻ります。
+ブロックとともに呼び出された時はブロック終了後に元のディレクトリに戻ります。
 
 - **param** `dir` -- ディレクトリを指定します。
 
@@ -266,9 +265,7 @@ dest がディレクトリならdest/src にコピーします。
 dest が既に存在ししかもディレクトリでないときは上書きします。
 
 src にファイルが複数与えられた場合、
-file1 を dest/file1 にコピー、file2 を dest/file2 にコピー、
-というように、ディレクトリ dest の中にファイル file1、file2、 …を
-同じ名前でコピーします。dest がディレクトリでない場合は例外
+file1 を dest/file1 にコピー、file2 を dest/file2 にコピー、というように、ディレクトリ dest の中にファイル file1、file2、 …を同じ名前でコピーします。dest がディレクトリでない場合は例外
 [c:Errno::ENOTDIR] が発生します。
 
 - **param** `src` -- コピー元。一つの場合は文字列でも指定可能です。
@@ -293,8 +290,7 @@ FileUtils.cp(%w(cgi.rb complex.rb date.rb), '/usr/lib/ruby/1.8', verbose: true)
 
 ### module_function def cp_r(src, dest, preserve: nil, noop: nil, verbose: nil, dereference_root: true, remove_destination: nil) -> ()
 
-src を dest にコピーします。src がディレクトリであったら再帰的に
-コピーします。その際 dest がディレクトリなら dest/src にコピーします。
+src を dest にコピーします。src がディレクトリであったら再帰的にコピーします。その際 dest がディレクトリなら dest/src にコピーします。
 
 - **param** `src` -- コピー元。一つの場合は文字列でも指定可能です。
            二つ以上指定する場合は配列で指定します。
@@ -364,8 +360,7 @@ dest がすでに存在しディレクトリでないならば例外 Errno::EEXI
 ただし :force オプションを指定したときは dest を上書きします。
 
 src が複数の場合、
-src[0] へのハードリンク dest/src[0]、src[1] への
-ハードリンク dest/src[1] …を作成します。
+src[0] へのハードリンク dest/src[0]、src[1] へのハードリンク dest/src[1] …を作成します。
 dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
 
 - **param** `src` -- リンク元。一つの場合は文字列でも指定可能です。
@@ -451,8 +446,7 @@ dest がすでに存在しディレクトリでないならば例外 Errno::EEXI
 ただし :force オプションを指定したときは dest を上書きします。
 
 src が複数の場合、
-src[0] へのシンボリックリンク dest/src[0]、src[1] への
-シンボリックリンク dest/src[1] …を作成します。
+src[0] へのシンボリックリンク dest/src[0]、src[1] へのシンボリックリンク dest/src[1] …を作成します。
 dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
 
 #%since 3.2
@@ -499,8 +493,7 @@ dest がすでに存在しディレクトリでないならば例外 Errno::EEXI
 ただし :force オプションを指定したときは dest を上書きします。
 
 src が複数の場合、
-src[0] へのシンボリックリンク dest/src[0]、src[1] への
-シンボリックリンク dest/src[1] …を作成します。
+src[0] へのシンボリックリンク dest/src[0]、src[1] へのシンボリックリンク dest/src[1] …を作成します。
 dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
 
 - **param** `src` -- リンク元。一つの場合は文字列でも指定可能です。
@@ -772,17 +765,14 @@ FileUtils.remove_entry '/tmp/ruby.tmp.08883'
 [m:FileUtils?.rm_r] および [m:FileUtils?.remove_entry] には
 TOCTTOU (time-of-check to time-of-use)脆弱性が存在します。
 このメソッドはそれを防ぐために新設されました。
-[m:FileUtils?.rm_r] および [m:FileUtils?.remove_entry] は以下の条件が
-満たされるときにはセキュリティホールになりえます。
+[m:FileUtils?.rm_r] および [m:FileUtils?.remove_entry] は以下の条件が満たされるときにはセキュリティホールになりえます。
 
   - 親ディレクトリが全ユーザから書き込み可能 (/tmp を含む)
   - path 以下のいずれかのディレクトリが全ユーザから書き込み可能
   - システムがシンボリックリンクを持つ
 
-この脆弱性を防ぐため、remove_entry_secure は削除前に path 以下の
-ディレクトリのオーナーとパーミッションを変更し、上記の条件を回避します。
-ただし remove_entry_secure は親ディレクトリが以下の条件を満たすことを
-仮定しています。
+この脆弱性を防ぐため、remove_entry_secure は削除前に path 以下のディレクトリのオーナーとパーミッションを変更し、上記の条件を回避します。
+ただし remove_entry_secure は親ディレクトリが以下の条件を満たすことを仮定しています。
 
   - UNIX システムおよびそれに類する環境では、sticky ビットが立っていること。
   - 全ユーザが書き込み可能であるのは、直接の親ディレクトリのみであること。
@@ -813,8 +803,7 @@ TOCTTOU (time-of-check to time-of-use)脆弱性が存在します。
 
 ### module_function def touch(list, noop: nil, verbose: nil, mtime: nil, nocreate: nil) -> ()
 
-list で指定されたファイルの最終変更時刻 (mtime) と
-アクセス時刻 (atime) を変更します。
+list で指定されたファイルの最終変更時刻 (mtime) とアクセス時刻 (atime) を変更します。
 
 list で指定されたファイルが存在しない場合は空のファイルを作成します。
 

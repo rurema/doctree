@@ -4,5 +4,4 @@ since: "2.3.0"
 ---
 # class ClosedQueueError < StopIteration
 
-close 済みの [c:Thread::Queue] や [c:Thread::SizedQueue] に許可され
-ていない操作を行おうとした場合に発生する例外です。
+close 済みの [c:Thread::Queue] や [c:Thread::SizedQueue] に許可されていない操作を行おうとした場合に発生する例外です。

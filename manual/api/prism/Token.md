@@ -3,8 +3,7 @@ library: prism
 ---
 # class Prism::Token < Object
 
-[m:Prism?.lex] や [m:Prism?.parse_lex] の結果に含まれる、字句解析で
-得られたトークンを表すクラスです。
+[m:Prism?.lex] や [m:Prism?.parse_lex] の結果に含まれる、字句解析で得られたトークンを表すクラスです。
 
 ```ruby title="例"
 require "prism"
@@ -31,14 +30,11 @@ p token.location.start_column # => 0
 
 ### def location -> Prism::Location
 
-トークンのソースコード上の位置を表す [c:Prism::Location] を
-返します。
+トークンのソースコード上の位置を表す [c:Prism::Location] を返します。
 
 ### def ==(other) -> bool
 
-other が同じ `type` と `value` を持つ `Prism::Token` であれば true を
-返します。位置(`location`)は比較しないため、ソースコード上の別の
-場所にある同じ内容のトークンどうしも等しいと判定されます。
+other が同じ `type` と `value` を持つ `Prism::Token` であれば true を返します。位置(`location`)は比較しないため、ソースコード上の別の場所にある同じ内容のトークンどうしも等しいと判定されます。
 
 - **param** `other` -- 比較対象のオブジェクト
 

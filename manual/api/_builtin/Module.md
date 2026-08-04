@@ -23,8 +23,7 @@ p Module.constants   # => [:RUBY_PLATFORM, :STDIN, ..., :C, ...]
 
 ### def Module.nesting -> [Class, Module]
 
-このメソッドを呼び出した時点でのクラス/モジュールのネスト情
-報を配列に入れて返します。
+このメソッドを呼び出した時点でのクラス/モジュールのネスト情報を配列に入れて返します。
 
 ```ruby title="例"
 module Company
@@ -41,8 +40,7 @@ end
 
 名前の付いていないモジュールを新しく生成して返します。
 
-ブロックが与えられると生成したモジュールをブロックに渡し、
-モジュールのコンテキストでブロックを実行します。
+ブロックが与えられると生成したモジュールをブロックに渡し、モジュールのコンテキストでブロックを実行します。
 
 ```ruby title="例"
 mod = Module.new
@@ -57,8 +55,7 @@ mod
 
 ブロックを与えた場合も生成したモジュールを返します。
 
-このメソッドで生成された直後のモジュールは無名で、
-最初にいずれかの定数に代入された時点で名前が確定します
+このメソッドで生成された直後のモジュールは無名で、最初にいずれかの定数に代入された時点で名前が確定します
 ([m:Module#name] を参照)。
 
 ```ruby title="例"
@@ -99,8 +96,7 @@ p Module.used_modules
 現在のスコープで using されているすべての [c:Refinement] を配列で返します。
 配列内の順番は未定義です。
 
-[m:Module.used_modules] が refinement を定義しているモジュール自体を返すのに対し、
-このメソッドは refinement そのものを返します。
+[m:Module.used_modules] が refinement を定義しているモジュール自体を返すのに対し、このメソッドは refinement そのものを返します。
 
 ```ruby title="例"
 module A
@@ -129,8 +125,7 @@ p Module.used_refinements
 self と other の継承関係を比較します。
 
 self と other を比較して、
-self が other の子孫であるとき -1、
-同一のクラス／モジュールのとき 0、
+self が other の子孫であるとき -1、同一のクラス／モジュールのとき 0、
 self が other の先祖であるとき 1
 を返します。
 
@@ -198,8 +193,7 @@ Flyable < Object.new    # => in `<': compared with non class/module (TypeError)
 
 ### def <=(other) -> bool | nil
 
-比較演算子。self が other の子孫であるか、self と other が
-同一クラスである場合、 true を返します。
+比較演算子。self が other の子孫であるか、self と other が同一クラスである場合、 true を返します。
 self が other の先祖である場合、false を返します。
 
 継承関係にないクラス同士の比較では
@@ -305,8 +299,7 @@ p Awesome >= Object # => nil
 ### def ===(obj) -> bool
 
 指定された obj が self かそのサブクラスのインスタンスであるとき真を返します。
-また、obj が self をインクルードしたクラスかそのサブクラスのインスタンスである場合にも
-真を返します。上記のいずれでもない場合に false を返します。
+また、obj が self をインクルードしたクラスかそのサブクラスのインスタンスである場合にも真を返します。上記のいずれでもない場合に false を返します。
 
 言い替えると obj.kind_of?(self) が true の場合、 true を返します。
 
@@ -327,8 +320,7 @@ end
 
 ### def ancestors -> [Class, Module]
 
-クラス、モジュールのスーパークラスとインクルードしているモジュール
-を優先順位順に配列に格納して返します。
+クラス、モジュールのスーパークラスとインクルードしているモジュールを優先順位順に配列に格納して返します。
 
 ```ruby title="例"
 module Drivable
@@ -394,8 +386,7 @@ Zoo.autoload :Animal, '/tmp/zoo'
 p Zoo::Animal # => Zoo::Animal
 ```
 
-以下のように、autoload したライブラリがネストした定数を定義しない場
-合、NameError が発生します。
+以下のように、autoload したライブラリがネストした定数を定義しない場合、NameError が発生します。
 
 ```ruby title="例"
 # ------- /tmp/animal.rb ---------
@@ -472,11 +463,9 @@ p Two.class_variables(false) # => [:@@var2]
 
 ### def const_defined?(name, inherit = true) -> bool
 
-モジュールに name で指定される名前の定数が定義されている時真
-を返します。
+モジュールに name で指定される名前の定数が定義されている時真を返します。
 
-スーパークラスや include したモジュールで定義された定数を検索対象
-にするかどうかは第二引数で制御できます。
+スーパークラスや include したモジュールで定義された定数を検索対象にするかどうかは第二引数で制御できます。
 
 - **param** `name` -- [c:String], [c:Symbol] で指定される定数名。
 
@@ -552,8 +541,7 @@ p Class.const_get("Loggable::LEVEL")  # => 1
 
 ### def const_missing(name)
 
-定義されていない定数を参照したときに Ruby インタプリタが
-このメソッドを呼びます。
+定義されていない定数を参照したときに Ruby インタプリタがこのメソッドを呼びます。
 
 - **param** `name` -- 参照した定数名の [c:Symbol]
 
@@ -575,11 +563,9 @@ Application::Timezone
 
 ### def const_set(name, value) -> object
 
-モジュールに name で指定された名前の定数を value とい
-う値として定義し、value を返します。
+モジュールに name で指定された名前の定数を value という値として定義し、value を返します。
 
-そのモジュールにおいてすでにその名前の定数が定義されている場合、警
-告メッセージが出力されます。
+そのモジュールにおいてすでにその名前の定数が定義されている場合、警告メッセージが出力されます。
 
 - **param** `name` --  [c:Symbol],[c:String] で定数の名前を指定します。
 - **param** `value` -- セットしたい値を指定します。
@@ -657,11 +643,8 @@ p Object.const_source_location('String')  # => []  -- 定数は C のコード�
 
 そのモジュール(またはクラス)で定義されている定数名の配列を返します。
 
-inherit に真を指定すると
-スーパークラスやインクルードしているモジュールの定数も含みます。
-[c:Object] のサブクラスの場合、Objectやそのスーパークラスで定義されている
-定数は含まれません。 Object.constants とすると Object クラスで定義された
-定数の配列が得られます。
+inherit に真を指定するとスーパークラスやインクルードしているモジュールの定数も含みます。
+[c:Object] のサブクラスの場合、Objectやそのスーパークラスで定義されている定数は含まれません。 Object.constants とすると Object クラスで定義された定数の配列が得られます。
 
 得られる定数の順序は保証されません。
 
@@ -701,15 +684,11 @@ end
 name で指定した定数を deprecate に設定します。
 deprecate に設定した定数を参照すると警告メッセージが表示されます。
 
-Ruby 2.7.2 から Warning[:deprecated] のデフォルト値が false に変更になったため、
-デフォルトでは警告が表示されません。
+Ruby 2.7.2 から Warning[:deprecated] のデフォルト値が false に変更になったため、デフォルトでは警告が表示されません。
 
-コマンドラインオプション(詳細は[ref:d:spec/rubycmd#cmd_option]参照)で、
-「-w」か「-W2」などを指定するか、実行中に「Warning[:deprecated] = true」で
-変更すると表示されるようになります。
+コマンドラインオプション(詳細は[ref:d:spec/rubycmd#cmd_option]参照)で、「-w」か「-W2」などを指定するか、実行中に「Warning[:deprecated] = true」で変更すると表示されるようになります。
 
-「$VERBOSE = true」は「Warning[:deprecated]」に影響しないため、
-表示されるかどうかは変わりません。
+「$VERBOSE = true」は「Warning[:deprecated]」に影響しないため、表示されるかどうかは変わりません。
 
 - **param** `name` -- 0 個以上の [c:String] か [c:Symbol] を指定します。
 
@@ -752,8 +731,7 @@ end # ~> FrozenError: can't modify frozen module: Settings
 
 ### def include?(mod) -> bool
 
-self かその親クラス / 親モジュールがモジュール mod を
-インクルードしていれば true を返します。
+self かその親クラス / 親モジュールがモジュール mod をインクルードしていれば true を返します。
 
 - **param** `mod` -- [c:Module] を指定します。
 
@@ -822,8 +800,7 @@ interpreter.interpret('dave')
 
 ### def method_defined?(name, inherit=true) -> bool
 
-モジュールにインスタンスメソッド name が定義されており、
-かつその可視性が public または protected であるときに
+モジュールにインスタンスメソッド name が定義されており、かつその可視性が public または protected であるときに
 true を返します。
 
 - **param** `name` -- [c:Symbol] か [c:String] を指定します。
@@ -864,8 +841,7 @@ p C.method_defined? "private_method2"   #=> false
 ### def class_eval(expr, fname = "(eval)", lineno = 1)  -> object
 ### def class_eval{|mod| ... }                          -> object
 
-モジュールのコンテキストで文字列 expr またはモジュール自身をブロックパラメータとするブロックを
-評価してその結果を返します。
+モジュールのコンテキストで文字列 expr またはモジュール自身をブロックパラメータとするブロックを評価してその結果を返します。
 
 モジュールのコンテキストで評価するとは、実行中そのモジュールが self になるということです。
 つまり、そのモジュールの定義式の中にあるかのように実行されます。
@@ -959,16 +935,13 @@ p t.foo()              #=> 1
 
 モジュールやクラスの名前を文字列で返します。
 
-このメソッドが返す「モジュール / クラスの名前」とは、
-より正確には「クラスパス」を指します。
-クラスパスとは、ネストしているモジュールすべてを
-「::」を使って表示した名前のことです。
+このメソッドが返す「モジュール / クラスの名前」とは、より正確には「クラスパス」を指します。
+クラスパスとは、ネストしているモジュールすべてを「::」を使って表示した名前のことです。
 クラスパスの例としては「CGI::Session」「Net::HTTP」が挙げられます。
 
 [m:Module.new] や [m:Class.new] で生成した直後の無名のモジュール /
 クラスは、最初にいずれかの定数に代入された時点で名前が確定します。
-一度確定した名前は、その定数を remove_const で取り除いたり、
-そのモジュール / クラスを別の定数へ代入し直したりしても変わりません。
+一度確定した名前は、その定数を remove_const で取り除いたり、そのモジュール / クラスを別の定数へ代入し直したりしても変わりません。
 返り値の文字列は freeze されています。
 
 - **return** -- 名前のないモジュール / クラスに対しては、name は nil を、それ以外はオブジェクト ID の文字列を返します。
@@ -1010,8 +983,7 @@ p c.name.frozen? #=> true
 
 モジュール / クラスに一時的な名前を設定します。self を返します。
 
-設定した名前は [m:Module#name] や [m:Module#inspect] の結果に反映され、
-そのモジュール / クラスのインスタンスや定数、メソッドの表示にも使われます。
+設定した名前は [m:Module#name] や [m:Module#inspect] の結果に反映され、そのモジュール / クラスのインスタンスや定数、メソッドの表示にも使われます。
 定数に代入せずに、動的に生成したモジュール / クラスを区別したい場合に便利です。
 
 引数に nil を指定すると、再び無名の状態に戻ります。
@@ -1061,8 +1033,7 @@ String.set_temporary_name("<x>")          # ~> RuntimeError
 
 ### def instance_methods(inherited_too = true) -> [Symbol]
 
-そのモジュールで定義されている public および protected メソッド名
-の一覧を配列で返します。
+そのモジュールで定義されている public および protected メソッド名の一覧を配列で返します。
 
 - **param** `inherited_too` -- false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
@@ -1118,8 +1089,7 @@ p Dog.protected_instance_methods(true) - Object.protected_instance_methods(true)
 #%since 3.2
 ### def undefined_instance_methods -> [Symbol]
 
-そのモジュールで [m:Module#undef_method] によって未定義にされた
-インスタンスメソッド名の一覧を配列で返します。
+そのモジュールで [m:Module#undef_method] によって未定義にされたインスタンスメソッド名の一覧を配列で返します。
 
 祖先で未定義にされたメソッドは含まれません。
 
@@ -1143,8 +1113,7 @@ p Foo.undefined_instance_methods # => []
 #%since 3.2
 ### def refinements -> [Refinement]
 
-self の中で [m:Module#refine] によって定義された [c:Refinement] の
-一覧を配列で返します。
+self の中で [m:Module#refine] によって定義された [c:Refinement] の一覧を配列で返します。
 
 ```ruby title="例"
 module A
@@ -1184,8 +1153,7 @@ Kernel.public_instance_method(:p)         #   method `p' for module `Kernel' is 
 
 ### def public_instance_methods(inherited_too = true) -> [Symbol]
 
-そのモジュールで定義されている public メソッド名
-の一覧を配列で返します。
+そのモジュールで定義されている public メソッド名の一覧を配列で返します。
 
 - **param** `inherited_too` -- false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
@@ -1195,8 +1163,7 @@ Kernel.public_instance_method(:p)         #   method `p' for module `Kernel' is 
 
 ### def private_instance_methods(inherited_too = true) -> [Symbol]
 
-そのモジュールで定義されている private メソッド名
-の一覧を配列で返します。
+そのモジュールで定義されている private メソッド名の一覧を配列で返します。
 
 - **param** `inherited_too` -- false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
@@ -1221,8 +1188,7 @@ p Sortable.private_instance_methods(false) # => [:qux]
 
 ### def protected_instance_methods(inherited_too = true) -> [Symbol]
 
-そのモジュールで定義されている protected メソッド名
-の一覧を配列で返します。
+そのモジュールで定義されている protected メソッド名の一覧を配列で返します。
 
 - **param** `inherited_too` -- false を指定するとそのモジュールで定義されているメソッドのみ返します。
 
@@ -1233,8 +1199,7 @@ p Sortable.private_instance_methods(false) # => [:qux]
 ### def private_class_method(*name) -> self
 ### def private_class_method(names) -> self
 
-name で指定したクラスメソッド (クラスの特異メソッド) の
-可視性を private に変更します。
+name で指定したクラスメソッド (クラスの特異メソッド) の可視性を private に変更します。
 
 - **param** `name` --  0 個以上の [c:String] または [c:Symbol] を指定します。
 - **param** `names` -- 0 個以上の [c:String] または [c:Symbol] を [c:Array] で指定します。
@@ -1285,8 +1250,7 @@ Api::Internal   # ~> NameError: private constant Api::Internal referenced
 ### def public_class_method(*name) -> self
 ### def public_class_method(names) -> self
 
-name で指定したクラスメソッド (クラスの特異メソッド) の
-可視性を public に変更します。
+name で指定したクラスメソッド (クラスの特異メソッド) の可視性を public に変更します。
 
 - **param** `name` --  0 個以上の [c:String] または [c:Symbol] を指定します。
 - **param** `names` -- 0 個以上の [c:String] または [c:Symbol] を [c:Array] で指定します。
@@ -1355,8 +1319,7 @@ p SampleModule::SampleInnerClass # => SampleModule::SampleInnerClass
 
 ### def private_method_defined?(name, inherit=true) -> bool
 
-インスタンスメソッド name がモジュールに定義されており、
-しかもその可視性が private であるときに true を返します。
+インスタンスメソッド name がモジュールに定義されており、しかもその可視性が private であるときに true を返します。
 そうでなければ false を返します。
 
 - **param** `name` -- [c:Symbol] か [c:String] を指定します。
@@ -1388,8 +1351,7 @@ p C.method_defined? "method2"                #=> false
 
 ### def protected_method_defined?(name, inherit=true) -> bool
 
-インスタンスメソッド name がモジュールに定義されており、
-しかもその可視性が protected であるときに true を返します。
+インスタンスメソッド name がモジュールに定義されており、しかもその可視性が protected であるときに true を返します。
 そうでなければ false を返します。
 
 - **param** `name` -- [c:Symbol] か [c:String] を指定します。
@@ -1421,8 +1383,7 @@ p C.method_defined? "method2"                 #=> true
 
 ### def public_method_defined?(name, inherit=true) -> bool
 
-インスタンスメソッド name がモジュールに定義されており、
-しかもその可視性が public であるときに true を返します。
+インスタンスメソッド name がモジュールに定義されており、しかもその可視性が public であるときに true を返します。
 そうでなければ false を返します。
 
 - **param** `name` -- [c:Symbol] か [c:String] を指定します。
@@ -1454,8 +1415,7 @@ p C.method_defined? "method2"              #=> true
 
 ### def class_variable_defined?(name) -> bool
 
-name で与えられた名前のクラス変数がモジュールに存在する場合 true を
-返します。
+name で与えられた名前のクラス変数がモジュールに存在する場合 true を返します。
 #%# Returns true if the given class variable is defined in obj.
 
 - **param** `name` -- [c:Symbol] か [c:String] を指定します。
@@ -1515,8 +1475,7 @@ p Fred.new.foo    # => 101
 
 ### def remove_class_variable(name) -> object
 
-引数で指定したクラス変数を取り除き、そのクラス変数に設定さ
-れていた値を返します。
+引数で指定したクラス変数を取り除き、そのクラス変数に設定されていた値を返します。
 
 - **param** `name` -- [c:String] または [c:Symbol] を指定します。
 
@@ -1536,8 +1495,7 @@ end
 
 ### def singleton_class? -> bool
 
-self が特異クラスの場合に true を返します。そうでなければ false を返し
-ます。
+self が特異クラスの場合に true を返します。そうでなければ false を返します。
 
 ```ruby title="例"
 class C
@@ -1591,8 +1549,7 @@ def extend(*modules)
 end
 ```
 
-extend_object のデフォルトの実装では、self に定義されて
-いるインスタンスメソッドを obj の特異メソッドとして追加します。
+extend_object のデフォルトの実装では、self に定義されているインスタンスメソッドを obj の特異メソッドとして追加します。
 
 - **param** `obj` -- self の機能を追加するオブジェクトを指定します。
 
@@ -1602,8 +1559,7 @@ extend_object のデフォルトの実装では、self に定義されて
 
 ### def extended(obj) -> ()
 
-self が他のオブジェクト に [m:Object#extend] されたときに
-呼ばれます。引数には extend を行ったオブジェクトが渡されます。
+self が他のオブジェクト に [m:Object#extend] されたときに呼ばれます。引数には extend を行ったオブジェクトが渡されます。
 
 - **param** `obj` -- [m:Object#extend] を行ったオブジェクト
 
@@ -1623,8 +1579,7 @@ Object.new.extend Debuggable
 
 ### def included(class_or_module) -> ()
 
-self が [m:Module#include] されたときに対象のクラスまたはモジュー
-ルを引数にしてインタプリタがこのメソッドを呼び出します。
+self が [m:Module#include] されたときに対象のクラスまたはモジュールを引数にしてインタプリタがこのメソッドを呼び出します。
 
 - **param** `class_or_module` -- [m:Module#include] を実行したオブジェクト
 
@@ -1686,8 +1641,7 @@ end
 
 ### def method_removed(name) -> ()
 
-メソッドが [m:Module#remove_method] により削除
-された時にインタプリタがこのメソッドを呼び出します。
+メソッドが [m:Module#remove_method] により削除された時にインタプリタがこのメソッドを呼び出します。
 
 特異メソッドの削除に対するフックには
 [m:BasicObject#singleton_method_removed]
@@ -1748,13 +1702,10 @@ method C#bar was undefined
 
 メソッドをモジュール関数にします。
 
-引数が与えられた時には、
-引数で指定されたメソッドをモジュール関数にします。
-引数なしのときは今後このモジュール定義文内で
-新しく定義されるメソッドをすべてモジュール関数にします。
+引数が与えられた時には、引数で指定されたメソッドをモジュール関数にします。
+引数なしのときは今後このモジュール定義文内で新しく定義されるメソッドをすべてモジュール関数にします。
 
-モジュール関数とは、プライベートメソッドであると同時に
-モジュールの特異メソッドでもあるようなメソッドです。
+モジュール関数とは、プライベートメソッドであると同時にモジュールの特異メソッドでもあるようなメソッドです。
 例えば [c:Math] モジュールのメソッドはすべてモジュール関数です。
 
 単一の引数が与えられた時には与えられた引数をそのまま返します。
@@ -1765,8 +1716,7 @@ method C#bar was undefined
 
 ### 注意
 
-module_function はメソッドに「モジュール関数」という属性をつけるメ
-ソッドではなく、プライベートメソッドとモジュールの特異メソッドの 2
+module_function はメソッドに「モジュール関数」という属性をつけるメソッドではなく、プライベートメソッドとモジュールの特異メソッドの 2
 つを同時に定義するメソッドです。
 そのため、以下のように書いてもモジュール関数の別名は定義できません。
 
@@ -1791,12 +1741,9 @@ M.bar   # => undefined method `bar' for M:Module (NoMethodError)
 #%end
 ```
 
-このコードでは、モジュール関数 foo と
-プライベートインスタンスメソッド bar を定義してしまいます。
+このコードでは、モジュール関数 foo とプライベートインスタンスメソッド bar を定義してしまいます。
 
-正しくモジュール関数に別名を付けるには、
-以下のように、先に別名を定義してから
-それぞれをモジュール関数にしなければいけません。
+正しくモジュール関数に別名を付けるには、以下のように、先に別名を定義してからそれぞれをモジュール関数にしなければいけません。
 
 ```ruby title="例"
 module M
@@ -1819,11 +1766,9 @@ p M.bar # => "foo"
 
 メソッドを private に設定します。
 
-引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
-れるメソッドを関数形式でだけ呼び出せるように(private)設定します。
+引数なしのときは今後このクラスまたはモジュール定義内で新規に定義されるメソッドを関数形式でだけ呼び出せるように(private)設定します。
 
-引数が与えられた時には引数によって指定されたメソッドを private に
-設定します。
+引数が与えられた時には引数によって指定されたメソッドを private に設定します。
 
 可視性については [ref:d:spec/def#limit] を参照して下さい。
 
@@ -1859,8 +1804,7 @@ account.foo2            # => private method `foo2' called for #<Account:0x401b76
 
 メソッドを protected に設定します。
 
-引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
-れるメソッドを protected に設定します。
+引数なしのときは今後このクラスまたはモジュール定義内で新規に定義されるメソッドを protected に設定します。
 
 引数が与えられた時には引数によって指定されたメソッドを protected
 に設定します。
@@ -1883,11 +1827,9 @@ account.foo2            # => private method `foo2' called for #<Account:0x401b76
 
 メソッドを public に設定します。
 
-引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
-れるメソッドをどんな形式でも呼び出せるように(public)設定します。
+引数なしのときは今後このクラスまたはモジュール定義内で新規に定義されるメソッドをどんな形式でも呼び出せるように(public)設定します。
 
-引数が与えられた時には引数によって指定されたメソッドを public に設
-定します。
+引数が与えられた時には引数によって指定されたメソッドを public に設定します。
 
 可視性については [ref:d:spec/def#limit] を参照して下さい。
 
@@ -1920,8 +1862,7 @@ p Object.new.bar  # => 2
 
 ### def remove_const(name) -> object
 
-name で指定した定数を取り除き、その定数に設定されていた値を
-返します。
+name で指定した定数を取り除き、その定数に設定されていた値を返します。
 
 - **param** `name` -- [c:String] または [c:Symbol] を指定します。
 
@@ -1939,16 +1880,13 @@ end
 
 組み込みクラス/モジュールを設定している定数や [m:Kernel?.autoload] を指定した(まだロードしてない)定数を含めて削除する事ができます。
 
-取り除かれた定数は参照できなくなりますが、消える訳ではないので注意して
-使用してください。
+取り除かれた定数は参照できなくなりますが、消える訳ではないので注意して使用してください。
 
 - **SEE** [m:Module#remove_class_variable], [m:Object#remove_instance_variable]
 
 ### def refine(klass) { ... } -> Module
 
-引数 klass で指定したクラスまたはモジュールだけに対して、ブロックで指定した機能を提供で
-きるモジュールを定義します。定義した機能は Module#refine を使用せずに直
-接 klass に対して変更を行う場合と異なり、限られた範囲のみ有効にできます。
+引数 klass で指定したクラスまたはモジュールだけに対して、ブロックで指定した機能を提供できるモジュールを定義します。定義した機能は Module#refine を使用せずに直接 klass に対して変更を行う場合と異なり、限られた範囲のみ有効にできます。
 そのため、既存の機能を局所的に修正したい場合などに用いる事ができます。
 
 refinements 機能の詳細については以下を参照してください。
@@ -1956,8 +1894,7 @@ refinements 機能の詳細については以下を参照してください。
 - <https://magazine.rubyist.net/articles/0041/0041-200Special-refinement.html>
 - <https://docs.ruby-lang.org/en/master/syntax/refinements_rdoc.html>
 
-定義した機能は [m:main.using], [m:Module#using] を実行した場合のみ
-有効になります。
+定義した機能は [m:main.using], [m:Module#using] を実行した場合のみ有効になります。
 
 - **param** `klass` -- 拡張する対象のクラスまたはモジュールを指定します。
 
@@ -1992,11 +1929,9 @@ p x.foo # => "C#foo in M"
 ### def prepend_features(mod) -> self
 
 [m:Module#prepend] から呼び出されるメソッドで、
-prepend の処理の実体です。このメソッド自体は mod で指定した
-モジュール/クラスの継承チェインの先頭に self を追加します。
+prepend の処理の実体です。このメソッド自体は mod で指定したモジュール/クラスの継承チェインの先頭に self を追加します。
 
-このメソッドを上書きすることで、prepend の処理を変更したり
-追加したりできます。
+このメソッドを上書きすることで、prepend の処理を変更したり追加したりできます。
 
 - **param** `mod` -- prepend を呼び出したモジュール
 - **return** -- mod が返されます
@@ -2031,8 +1966,7 @@ p Recorder::RECORDS # => [A, C]
 
 ### def prepended(class_or_module) -> ()
 
-self が [m:Module#prepend] されたときに対象のクラスまたはモジュールを
-引数にしてインタプリタがこのメソッドを呼び出します。
+self が [m:Module#prepend] されたときに対象のクラスまたはモジュールを引数にしてインタプリタがこのメソッドを呼び出します。
 
 - **param** `class_or_module` -- [m:Module#prepend] を実行したオブジェクト
 
@@ -2084,8 +2018,7 @@ end
 
 ### def using(module) -> self
 
-引数で指定したモジュールで定義された拡張を現在のクラス、モジュールで有
-効にします。
+引数で指定したモジュールで定義された拡張を現在のクラス、モジュールで有効にします。
 
 有効にした拡張の有効範囲については以下を参照してください。
 

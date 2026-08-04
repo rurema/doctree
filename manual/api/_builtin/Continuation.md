@@ -5,11 +5,7 @@ library: continuation
 
 継続を表すクラスです。
 
-[m:Kernel?.callcc] { |cont| ... } の呼び出し
-は、直前の状態(ローカル変数の定義、スタックフレーム)を cont に記憶
-してブロックを実行します。cont は、Continuation クラスのインスタ
-ンスで、[m:Continuation#call] メソッドを実行するこ
-とでいつでも記憶した状態を継続できます。
+[m:Kernel?.callcc] { |cont| ... } の呼び出しは、直前の状態(ローカル変数の定義、スタックフレーム)を cont に記憶してブロックを実行します。cont は、Continuation クラスのインスタンスで、[m:Continuation#call] メソッドを実行することでいつでも記憶した状態を継続できます。
 
 C 言語の setjmp()/longjmp() がわかる人は
 
@@ -18,8 +14,7 @@ setjmp() == callcc {|c| }
 longjmp() == c.call
 ```
 
-と考えれば、わかりやすいかも知れません(ただし、callcc はスタックが深く
-なる方向にもジャンプ出来るという違いがあります)
+と考えれば、わかりやすいかも知れません(ただし、callcc はスタックが深くなる方向にもジャンプ出来るという違いがあります)
 
 callcc() は、ブロックの戻り値を返しますが、Continuation#call(args)
 が呼び出されたときは args を返します。

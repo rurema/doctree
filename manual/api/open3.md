@@ -2,13 +2,11 @@
 type: library
 category: I/O
 ---
-プログラムを実行し、そのプロセスの標準入力・標準出力・
-標準エラー出力にパイプをつなぎます。
+プログラムを実行し、そのプロセスの標準入力・標準出力・標準エラー出力にパイプをつなぎます。
 
 # module Open3
 
-プログラムを実行し、そのプロセスの標準入力・標準出力・
-標準エラー出力にパイプをつなぎます。
+プログラムを実行し、そのプロセスの標準入力・標準出力・標準エラー出力にパイプをつなぎます。
 
 ### 使用例
 
@@ -37,9 +35,7 @@ end
 ### module_function def popen3(*cmd) -> [IO, IO, IO, Thread]
 ### module_function def popen3(*cmd) {|stdin, stdout, stderr, wait_thr| ... } -> ()
 
-外部プログラム cmd を実行し、そのプロセスの標準入力、標準出力、標準エラー
-出力に接続されたパイプと実行したプロセスを待つためのスレッドを 4 要素の
-配列で返します。
+外部プログラム cmd を実行し、そのプロセスの標準入力、標準出力、標準エラー出力に接続されたパイプと実行したプロセスを待つためのスレッドを 4 要素の配列で返します。
 
 ```ruby
 require 'open3'
@@ -53,8 +49,7 @@ stdin, stdout, stderr, wait_thr = *Open3.popen3("/usr/bin/nroff -man")
         力と実行したプロセスを待つためのスレッドに接続されたパイプを返
         します。
 
-ブロックを指定するとパイプの配列を引数にブロックを実行し、最後にパイプ
-を close します。この場合はブロックの最後の式の結果を返します。
+ブロックを指定するとパイプの配列を引数にブロックを実行し、最後にパイプを close します。この場合はブロックの最後の式の結果を返します。
 
 ```ruby
 require 'open3'
@@ -76,8 +71,7 @@ stdin への入力が終わったらできる限り早く close か close_write
 [man:wait(2)] しなくてもゾンビになりません。
 
 引数 cmd はそのまま [m:Kernel?.spawn] に渡されます。
-[m:Kernel?.spawn]と同様に、引数リストの最初に環境変数をハッシュ形式で
-指定する事ができます。
+[m:Kernel?.spawn]と同様に、引数リストの最初に環境変数をハッシュ形式で指定する事ができます。
 
 ```ruby title="例"
 require 'open3'
@@ -91,8 +85,7 @@ Open3.popen3({"foo" => "1", "bar" => "2"}, "env") {|i, o, e, t|
 #   bar=2
 ```
 
-[m:Kernel?.spawn]と同様に、引数リストの最後にオプションをハッシュ形式
-で指定する事ができます。
+[m:Kernel?.spawn]と同様に、引数リストの最後にオプションをハッシュ形式で指定する事ができます。
 
 ```ruby title="例"
 require "open3"
@@ -115,8 +108,7 @@ Open3.popen3("pwd") {|i,o,e,t|
 ### module_function def popen2(*cmd) -> [IO, IO, Thread]
 ### module_function def popen2(*cmd) {|stdin, stdout, wait_thr| ... } -> ()
 
-cmdで指定されたコマンドを実行し、そのプロセスの標準入力・標準出力にパイ
-プをつなぎます。Open3.popen3に似ていますが、標準エラーを扱いません。
+cmdで指定されたコマンドを実行し、そのプロセスの標準入力・標準出力にパイプをつなぎます。Open3.popen3に似ていますが、標準エラーを扱いません。
 
 - **param** `cmd` -- 実行するコマンドを指定します。
 
@@ -124,17 +116,14 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準入�
         ブロックを指定しなかった場合は標準入力、標準出力に接続されたパ
         イプと実行したプロセスを待つためのスレッドを返します。
 
-[m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンド
-を実行する事ができます。
+[m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンドを実行する事ができます。
 
 - **SEE** [m:Open3?.popen3]
 
 ### module_function def popen2e(*cmd) -> [IO, IO, Thread]
 ### module_function def popen2e(*cmd) {|stdin, stdout_and_stderr, wait_thr| ... } -> ()
 
-cmdで指定されたコマンドを実行し、そのプロセスの標準入力・標準出力と標準
-エラーにパイプをつなぎます。Open3.popen3に似ていますが、標準出力と標準
-エラーが1つの変数で扱われます。
+cmdで指定されたコマンドを実行し、そのプロセスの標準入力・標準出力と標準エラーにパイプをつなぎます。Open3.popen3に似ていますが、標準出力と標準エラーが1つの変数で扱われます。
 
 - **param** `cmd` -- 実行するコマンドを指定します。
 
@@ -143,15 +132,13 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準入�
         接続されたパイプと実行したプロセスを待つためのスレッドを返しま
         す。
 
-[m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンド
-を実行する事ができます。
+[m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンドを実行する事ができます。
 
 - **SEE** [m:Open3?.popen3]
 
 ### module_function def capture3(*cmd) -> [String, String, Process::Status]
 
-cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラー、プ
-ロセスの終了ステータスを表すオブジェクトを返します。
+cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラー、プロセスの終了ステータスを表すオブジェクトを返します。
 
 - **param** `cmd` -- 実行するコマンドを指定します。
 
@@ -159,11 +146,7 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
         スを表すオブジェクトを配列で返します。
 
 指定された引数はopts[:stdin_data]とopts[:binmode]以外は全て
-[m:Open3?.popen3]に渡されます。opts[:stdin_data]は実行するコマンドの
-標準入力に渡されます。opts[:binmode]を真に指定されると内部で使用される
-パイプをバイナリモードに指定します。opts[:stdin_data]にはreadpartialに
-応答するIOのようなオブジェクト([c:IO]や[c:StringIO]など)も指定でき、
-その場合は内容が[m:IO.copy_stream]でコマンドの標準入力に渡されます。
+[m:Open3?.popen3]に渡されます。opts[:stdin_data]は実行するコマンドの標準入力に渡されます。opts[:binmode]を真に指定されると内部で使用されるパイプをバイナリモードに指定します。opts[:stdin_data]にはreadpartialに応答するIOのようなオブジェクト([c:IO]や[c:StringIO]など)も指定でき、その場合は内容が[m:IO.copy_stream]でコマンドの標準入力に渡されます。
 
 ```ruby title="例"
 require "open3"
@@ -174,15 +157,13 @@ p e #=> "bar\nbaz\nfoo\n"
 p s #=> #<Process::Status: pid 32682 exit 0>
 ```
 
-[m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンド
-を実行する事ができます。
+[m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンドを実行する事ができます。
 
 - **SEE** [m:Open3?.popen3]
 
 ### module_function def capture2(*cmd) -> [String, Process::Status]
 
-cmdで指定されたコマンドを実行し、そのプロセスの標準出力とプロセスの終了
-ステータスを表すオブジェクトを返します。
+cmdで指定されたコマンドを実行し、そのプロセスの標準出力とプロセスの終了ステータスを表すオブジェクトを返します。
 
 - **param** `cmd` -- 実行するコマンドを指定します。
 
@@ -190,11 +171,7 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
         配列で返します。
 
 指定された引数はopts[:stdin_data]とopts[:binmode]以外は全て
-[m:Open3?.popen3]に渡されます。opts[:stdin_data]は実行するコマンドの
-標準入力に渡されます。opts[:binmode]を真に指定されると内部で使用される
-パイプをバイナリモードに指定します。opts[:stdin_data]にはreadpartialに
-応答するIOのようなオブジェクト([c:IO]や[c:StringIO]など)も指定でき、
-その場合は内容が[m:IO.copy_stream]でコマンドの標準入力に渡されます。
+[m:Open3?.popen3]に渡されます。opts[:stdin_data]は実行するコマンドの標準入力に渡されます。opts[:binmode]を真に指定されると内部で使用されるパイプをバイナリモードに指定します。opts[:stdin_data]にはreadpartialに応答するIOのようなオブジェクト([c:IO]や[c:StringIO]など)も指定でき、その場合は内容が[m:IO.copy_stream]でコマンドの標準入力に渡されます。
 
 ```ruby title="例"
 require "open3"
@@ -204,16 +181,14 @@ o, s = Open3.capture2("factor", :stdin_data=>"42")
 p o #=> "42: 2 3 7\n"
 ```
 
-[m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンド
-を実行する事ができます。
+[m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンドを実行する事ができます。
 
 - **SEE** [m:Open3?.popen3]
 
 ### module_function def capture2e(*cmd) -> [String, Process::Status]
 
 cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラーを1
-つの文字列にしたものとプロセスの終了ステータスを表すオブジェクトを返し
-ます。
+つの文字列にしたものとプロセスの終了ステータスを表すオブジェクトを返します。
 
 - **param** `cmd` -- 実行するコマンドを指定します。
 
@@ -221,11 +196,7 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
         終了ステータスを表すオブジェクトを配列で返します。
 
 指定された引数はopts[:stdin_data]とopts[:binmode]以外は全て
-[m:Open3?.popen3]に渡されます。opts[:stdin_data]は実行するコマンドの
-標準入力に渡されます。opts[:binmode]を真に指定されると内部で使用される
-パイプをバイナリモードに指定します。opts[:stdin_data]にはreadpartialに
-応答するIOのようなオブジェクト([c:IO]や[c:StringIO]など)も指定でき、
-その場合は内容が[m:IO.copy_stream]でコマンドの標準入力に渡されます。
+[m:Open3?.popen3]に渡されます。opts[:stdin_data]は実行するコマンドの標準入力に渡されます。opts[:binmode]を真に指定されると内部で使用されるパイプをバイナリモードに指定します。opts[:stdin_data]にはreadpartialに応答するIOのようなオブジェクト([c:IO]や[c:StringIO]など)も指定でき、その場合は内容が[m:IO.copy_stream]でコマンドの標準入力に渡されます。
 
 ```ruby title="例"
 require "open3"
@@ -235,17 +206,14 @@ p o #=> "a\nbar\nbaz\nfoo\n"
 p s #=> #<Process::Status: pid 20574 exit 0>
 ```
 
-[m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンド
-を実行する事ができます。
+[m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンドを実行する事ができます。
 
 - **SEE** [m:Open3?.popen3]
 
 ### module_function def pipeline_rw(*cmds) -> [IO, IO, [Thread]]
 ### module_function def pipeline_rw(*cmds) {|first_stdin, last_stdout, wait_thrs| ... } -> ()
 
-指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
-コマンドの標準入力に書き込む事も最後のコマンドの標準出力を受けとる事も
-できます。
+指定したコマンドのリストをパイプで繋いで順番に実行します。最初のコマンドの標準入力に書き込む事も最後のコマンドの標準出力を受けとる事もできます。
 
 - **param** `cmds` -- 実行するコマンドのリストを指定します。それぞれのコマンドは
             以下のように [c:String] か [c:Array] で指定します。
@@ -289,8 +257,7 @@ Open3.pipeline_rw("sort", "cat -n") {|stdin, stdout, wait_thrs|
 ### module_function def pipeline_r(*cmds) -> [IO, [Thread]]
 ### module_function def pipeline_r(*cmds) {|last_stdout, wait_thrs| ... } -> ()
 
-指定したコマンドのリストをパイプで繋いで順番に実行します。最後の
-コマンドの標準出力を受けとる事ができます。
+指定したコマンドのリストをパイプで繋いで順番に実行します。最後のコマンドの標準出力を受けとる事ができます。
 
 - **param** `cmds` -- 実行するコマンドのリストを指定します。それぞれのコマンドは
             以下のように [c:String] か [c:Array] で指定します。
@@ -326,8 +293,7 @@ Open3.pipeline_r("yes", "head -10") {|r, ts|
 ### module_function def pipeline_w(*cmds) -> [IO, [Thread]]
 ### module_function def pipeline_w(*cmds) {|first_stdin, wait_thrs| ... } -> ()
 
-指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
-コマンドの標準入力に書き込む事ができます。
+指定したコマンドのリストをパイプで繋いで順番に実行します。最初のコマンドの標準入力に書き込む事ができます。
 
 - **param** `cmds` -- 実行するコマンドのリストを指定します。それぞれのコマンドは
             以下のように [c:String] か [c:Array] で指定します。

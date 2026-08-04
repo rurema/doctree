@@ -6,9 +6,7 @@ since: "3.0"
 
 他の Ractor に移動(move)されたオブジェクトにアクセスした場合に発生します。
 
-[m:Ractor#send] に `move: true` を指定してオブジェクトを送ると、送った側では
-そのオブジェクトが [c:Ractor::MovedObject] に置き換わり、以後アクセスできなく
-なります。
+[m:Ractor#send] に `move: true` を指定してオブジェクトを送ると、送った側ではそのオブジェクトが [c:Ractor::MovedObject] に置き換わり、以後アクセスできなくなります。
 
 ```ruby
 s = +"hello"

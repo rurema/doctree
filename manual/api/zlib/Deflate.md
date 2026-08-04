@@ -60,8 +60,7 @@ p str.size #=> 500
 
 ### def Zlib::Deflate.new(level = Zlib::DEFAULT_COMPRESSION, windowBits = Zlib::MAX_WBITS, memlevel = Zlib::DEF_MEM_LEVEL, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::Deflate
 
-圧縮ストリームを作成します。各引数の詳細は zlib.h を
-参照して下さい。nil の場合はデフォルトの値を使用します。
+圧縮ストリームを作成します。各引数の詳細は zlib.h を参照して下さい。nil の場合はデフォルトの値を使用します。
 
 - **param** `level` -- 0-9の範囲の整数, またはZlib::DEFAULT_COMPRESSIONを指定します。詳細はzlib.hを参照してください。
 - **param** `windowBits` -- ウィンドウの大きさを整数で指定します。詳細はzlib.hを参照してください。
@@ -85,10 +84,7 @@ p inzstr  #=> "123123123123123123123123123123123123123123123123123123123123"
 
 ### def deflate(string, flush = Zlib::NO_FLUSH) -> String
 
-string を圧縮ストリームに入力します。処理後、ストリームからの
-出力を返します。このメソッドを呼ぶと出力バッファ及び入力バッファは
-空になります。string が nil の場合はストリームへの入力を
-終了します。([m:Zlib::ZStream#finish] と同じ)。
+string を圧縮ストリームに入力します。処理後、ストリームからの出力を返します。このメソッドを呼ぶと出力バッファ及び入力バッファは空になります。string が nil の場合はストリームへの入力を終了します。([m:Zlib::ZStream#finish] と同じ)。
 flush には [m:Zlib::NO_FLUSH], [m:Zlib::SYNC_FLUSH],
 [m:Zlib::FULL_FLUSH], [m:Zlib::FINISH] のいずれかを指定します。
 詳しくは zlib.h を参照して下さい。
@@ -106,10 +102,7 @@ p dez.deflate("123" * 20, Zlib::FINISH) #=> "x\2343426$\027\001\000e\217\v\271"
 
 ### def <<(string) -> self
 
-[m:Zlib::Deflate#deflate] と同じように string を
-圧縮ストリームに入力しますが、Zlib::Deflate オブジェクト
-そのものを返します。圧縮ストリームからの出力は、
-出力バッファに保存されます。
+[m:Zlib::Deflate#deflate] と同じように string を圧縮ストリームに入力しますが、Zlib::Deflate オブジェクトそのものを返します。圧縮ストリームからの出力は、出力バッファに保存されます。
 
 - **param** `string` --  圧縮する文字列を指定します。
 
@@ -124,8 +117,7 @@ p dezstr #=> "x\2343426DB\245\351\371@d\210*\230\221\237\236\n\302\000\356\275\v
 
 ### def flush(flush = Zlib::SYNC_FLUSH) -> String
 
-deflate('', flush) と同じです。flush が
-省略された時は [m:Zlib::SYNC_FLUSH] が使用されます。
+deflate('', flush) と同じです。flush が省略された時は [m:Zlib::SYNC_FLUSH] が使用されます。
 このメソッドはスクリプトの可読性のために提供されています。
 
 - **param** `flush` -- [m:Zlib::NO_FLUSH] [m:Zlib::SYNC_FLUSH] [m:Zlib::FULL_FLUSH] などを指定します。
@@ -178,9 +170,7 @@ p dezstr #=> "x\2343426DB\245\351\371@d\210*\230\221\237\236\n\302\000\356\275\v
 
 ### def params(level, strategy) -> nil
 
-圧縮ストリームの設定を変更します。詳しくは zlib.h を
-参照して下さい。設定の変更に伴うストリームからの出力は
-出力バッファに保存されます。
+圧縮ストリームの設定を変更します。詳しくは zlib.h を参照して下さい。設定の変更に伴うストリームからの出力は出力バッファに保存されます。
 
 - **param** `level` -- 0-9の範囲の整数, または [m:Zlib::DEFAULT_COMPRESSION] を指定します。
              詳細はzlib.hを参照してください。

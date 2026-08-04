@@ -5,14 +5,10 @@ library: prism
 
 構文解析の結果得られる構文木の各ノードを表す抽象基底クラスです。
 [m:Prism?.parse] などが返す構文木は、このクラスのサブクラス
-(150 種類以上)のインスタンスで構成されます。`Prism::Node` 自身の
-インスタンスが生成されることはありません。
+(150 種類以上)のインスタンスで構成されます。`Prism::Node` 自身のインスタンスが生成されることはありません。
 
-個々のノードクラス(`Prism::ProgramNode`・`Prism::CallNode` など)に
-固有のフィールド(子ノードや値を取得するアクセサ)はこのリファレンス
-では扱いません。このページで扱うのは、すべてのノードクラスに共通する
-API です。個々のノードクラスの詳細は公式ドキュメントを参照して
-ください。
+個々のノードクラス(`Prism::ProgramNode`・`Prism::CallNode` など)に固有のフィールド(子ノードや値を取得するアクセサ)はこのリファレンスでは扱いません。このページで扱うのは、すべてのノードクラスに共通する
+API です。個々のノードクラスの詳細は公式ドキュメントを参照してください。
 
 - プロジェクトページ: <https://github.com/ruby/prism>
 - リファレンス(YARD): <https://www.rubydoc.info/gems/prism>
@@ -38,16 +34,13 @@ p call.compact_child_nodes.size # => 2
 
 ### def type -> Symbol
 
-[m:Prism::Node#type] のクラスメソッド版です。インスタンスを作らずに
-ノードクラス自体からノードの種類を表すシンボルを得られます。
+[m:Prism::Node#type] のクラスメソッド版です。インスタンスを作らずにノードクラス自体からノードの種類を表すシンボルを得られます。
 
 #%since 3.4
 ### def fields -> [Prism::Reflection::Field]
 
 このノードクラスが持つフィールド(子ノードや属性)を表す
-`Prism::Reflection::Field` の配列を返します。構文木の各ノード・
-各フィールドを再帰的に処理するツールを書くときのリフレクション用途に
-使えます。
+`Prism::Reflection::Field` の配列を返します。構文木の各ノード・各フィールドを再帰的に処理するツールを書くときのリフレクション用途に使えます。
 
 `Prism::Node` 自身に対して呼び出すと [c:NoMethodError] が発生します。
 サブクラスに対して呼び出してください。
@@ -57,9 +50,7 @@ p call.compact_child_nodes.size # => 2
 
 ### def type -> Symbol
 
-ノードの種類を表すシンボル(例 `:program_node`、`:call_node`)を
-返します。case 式や配列との比較でノードの種類を判定するときに
-使えます。
+ノードの種類を表すシンボル(例 `:program_node`、`:call_node`)を返します。case 式や配列との比較でノードの種類を判定するときに使えます。
 
 ### def location -> Prism::Location
 
@@ -80,15 +71,13 @@ Visitor パターンの受け入れメソッドです。ノードの種類に応
 
 ### def child_nodes -> [Prism::Node | nil]
 
-子ノードの配列を返します。存在しないオプショナルな子ノードの位置
-には nil が入ります。
+子ノードの配列を返します。存在しないオプショナルな子ノードの位置には nil が入ります。
 
 - **SEE** [m:Prism::Node#compact_child_nodes]
 
 ### def compact_child_nodes -> [Prism::Node]
 
-子ノードの配列を返します。[m:Prism::Node#child_nodes] と異なり、
-存在しないオプショナルな子ノードは含まれません(nil を含みません)。
+子ノードの配列を返します。[m:Prism::Node#child_nodes] と異なり、存在しないオプショナルな子ノードは含まれません(nil を含みません)。
 
 ### def comment_targets -> [Prism::Node | Prism::Location]
 
@@ -97,9 +86,7 @@ Visitor パターンの受け入れメソッドです。ノードの種類に応
 
 ### def copy(**params) -> Prism::Node
 
-自身と同じクラスの新しいノードを、指定したフィールドだけを差し替えて
-複製します。渡せるキーワードはノードクラスごとのフィールド名で、
-指定しなかったフィールドは自身の値を引き継ぎます。
+自身と同じクラスの新しいノードを、指定したフィールドだけを差し替えて複製します。渡せるキーワードはノードクラスごとのフィールド名で、指定しなかったフィールドは自身の値を引き継ぎます。
 
 ```ruby title="例"
 require "prism"
@@ -112,13 +99,11 @@ p copied.equal?(call) # => false
 
 ### def deconstruct -> [Prism::Node | nil]
 
-[m:Prism::Node#child_nodes] のエイリアスです。パターンマッチの
-配列パターン(`case node; in [a, b]`)で使われます。
+[m:Prism::Node#child_nodes] のエイリアスです。パターンマッチの配列パターン(`case node; in [a, b]`)で使われます。
 
 ### def deconstruct_keys(keys) -> Hash
 
-パターンマッチのハッシュパターン(`case node; in {value:}`)で
-使われます。ノードの各フィールドをキーに持つハッシュを返します。
+パターンマッチのハッシュパターン(`case node; in {value:}`)で使われます。ノードの各フィールドをキーに持つハッシュを返します。
 
 - **param** `keys` -- 取り出したいキーの配列。すべて取り出す場合は
        nil を指定します。
@@ -159,26 +144,22 @@ p dot.start_with?("digraph") # => true
 
 ### def newline? -> bool
 
-このノードが、[c:TracePoint] の `:line` イベントを発生させる行の位置
-としてマークされているかどうかを返します。
+このノードが、[c:TracePoint] の `:line` イベントを発生させる行の位置としてマークされているかどうかを返します。
 
 #%since 3.4
 ### def node_id -> Integer
 
-このノード固有の識別子を返します。同じソースコードを同じバージョン
-で再度解析した場合、対応するノードには同じ識別子が割り当てられます。
+このノード固有の識別子を返します。同じソースコードを同じバージョンで再度解析した場合、対応するノードには同じ識別子が割り当てられます。
 構文木全体をメモリ上に保持せずにノードを再特定するための仕組み
 (prism の `Prism::Relocation`)で使われます。
 
 ### def start_offset -> Integer
 
-開始位置のバイトオフセットを返します。[`location.start_offset`](m:Prism::Location#start_offset) と
-同じです。
+開始位置のバイトオフセットを返します。[`location.start_offset`](m:Prism::Location#start_offset) と同じです。
 
 ### def end_offset -> Integer
 
-終了位置のバイトオフセットを返します。[`location.end_offset`](m:Prism::Location#end_offset) と
-同じです。
+終了位置のバイトオフセットを返します。[`location.end_offset`](m:Prism::Location#end_offset) と同じです。
 
 ### def source_lines -> [String]
 
@@ -188,13 +169,11 @@ p dot.start_with?("digraph") # => true
 ### def script_lines -> [String]
 
 [m:Prism::Node#source_lines] のエイリアスです。
-[c:RubyVM::AbstractSyntaxTree] の API に合わせた名前で、そこからの
-移行を容易にするためのものです。
+[c:RubyVM::AbstractSyntaxTree] の API に合わせた名前で、そこからの移行を容易にするためのものです。
 
 ### def slice_lines -> String
 
-ノードの位置を含む行全体(開始行の行頭から終端行の行末まで)の
-文字列を返します。[`location.slice_lines`](m:Prism::Location#slice_lines) と同じです。
+ノードの位置を含む行全体(開始行の行頭から終端行の行末まで)の文字列を返します。[`location.slice_lines`](m:Prism::Location#slice_lines) と同じです。
 
 ### def static_literal? -> bool
 
@@ -203,9 +182,7 @@ p dot.start_with?("digraph") # => true
 
 ### def tunnel(line, column) -> [Prism::Node]
 
-指定した行・桁を位置に含むノードを、自分自身から子孫の方向へ順に
-並べた配列で返します。エディタ上のカーソル位置に対応するノードを
-特定するといった用途に使えます。
+指定した行・桁を位置に含むノードを、自分自身から子孫の方向へ順に並べた配列で返します。エディタ上のカーソル位置に対応するノードを特定するといった用途に使えます。
 
 - **param** `line` -- 行番号(1 始まり)を指定します。
 - **param** `column` -- 行頭からのバイト単位の桁位置(0 始まり)を
@@ -222,8 +199,7 @@ p path.map(&:type)
 
 ### def breadth_first_search {|node| ... } -> Prism::Node | nil
 
-自身を含めて構文木を幅優先で探索し、ブロックが真を返した最初の
-ノードを返します。見つからない場合は nil を返します。
+自身を含めて構文木を幅優先で探索し、ブロックが真を返した最初のノードを返します。見つからない場合は nil を返します。
 
 ```ruby title="例"
 require "prism"
@@ -240,9 +216,7 @@ p call&.type # => :call_node
 ### def ===(other) -> bool
 
 `other` が自身と同じクラスで、位置情報を除く各フィールドの内容が
-(再帰的に `===` で)一致する場合に true を返します。位置情報は
-「存在するかどうか」だけが比較され、実際の値(オフセットなど)は
-比較されません。
+(再帰的に `===` で)一致する場合に true を返します。位置情報は「存在するかどうか」だけが比較され、実際の値(オフセットなど)は比較されません。
 
 - **param** `other` -- 比較対象のオブジェクトを指定します。
 
@@ -297,32 +271,28 @@ p a === b # => true
 
 ### def cached_start_code_units_offset(cache) -> Integer
 
-キャッシュを使って、開始位置の、指定エンコーディングのコード単位
-でのオフセットを返します。
+キャッシュを使って、開始位置の、指定エンコーディングのコード単位でのオフセットを返します。
 
 - **param** `cache` -- [m:Prism::Result#code_units_cache] で得た
        キャッシュを指定します。
 
 ### def cached_end_code_units_offset(cache) -> Integer
 
-キャッシュを使って、終了位置の、指定エンコーディングのコード単位
-でのオフセットを返します。
+キャッシュを使って、終了位置の、指定エンコーディングのコード単位でのオフセットを返します。
 
 - **param** `cache` -- [m:Prism::Result#code_units_cache] で得た
        キャッシュを指定します。
 
 ### def cached_start_code_units_column(cache) -> Integer
 
-キャッシュを使って、開始位置の、行頭からのコード単位での桁位置を
-返します。
+キャッシュを使って、開始位置の、行頭からのコード単位での桁位置を返します。
 
 - **param** `cache` -- [m:Prism::Result#code_units_cache] で得た
        キャッシュを指定します。
 
 ### def cached_end_code_units_column(cache) -> Integer
 
-キャッシュを使って、終了位置の、行頭からのコード単位での桁位置を
-返します。
+キャッシュを使って、終了位置の、行頭からのコード単位での桁位置を返します。
 
 - **param** `cache` -- [m:Prism::Result#code_units_cache] で得た
        キャッシュを指定します。
@@ -347,16 +317,13 @@ p a === b # => true
 ### def each_child_node {|node| ... } -> ()
 {: since="4.0.1"}
 
-ブロックを指定した場合、[m:Prism::Node#compact_child_nodes] の
-各要素を順に yield します。ブロックを指定しない場合は [c:Enumerator] を
-返します。
+ブロックを指定した場合、[m:Prism::Node#compact_child_nodes] の各要素を順に yield します。ブロックを指定しない場合は [c:Enumerator] を返します。
 #%end
 
 #%since 4.1
 ### def breadth_first_search_all {|node| ... } -> [Prism::Node]
 
-自身を含めて構文木を幅優先で探索し、ブロックが真を返したノードを
-すべて集めた配列を返します。
+自身を含めて構文木を幅優先で探索し、ブロックが真を返したノードをすべて集めた配列を返します。
 
 - **SEE** [m:Prism::Node#find_all]
 

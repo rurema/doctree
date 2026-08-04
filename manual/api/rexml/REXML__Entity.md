@@ -61,9 +61,7 @@ reference でその実体宣言がパラメータ実体(parameter entity)かど�
 
 このコンストラクタでは単純な内部実体(internal entity)宣言のみを実現できます。
 
-それ以外の内容を保持する Entity オブジェクトが欲しい場合は、
-文書に適切な DTD を含めておいてそれを [m:REXML::Document.new] で
-パースするようにしてください。
+それ以外の内容を保持する Entity オブジェクトが欲しい場合は、文書に適切な DTD を含めておいてそれを [m:REXML::Document.new] でパースするようにしてください。
 
 配列を使うほうは rexml のパーサが内部的に利用するため通常は利用しません。
 
@@ -116,15 +114,13 @@ p REXML::Entity.matches?('<!ELEMENT br EMPTY >') # => false
 
 ### def ndata -> String | nil
 
-解析対象外実体(unparsed entity)宣言である場合には
-その記法名(notation name)を返します。
+解析対象外実体(unparsed entity)宣言である場合にはその記法名(notation name)を返します。
 
 それ以外の場合は nil を返します。
 
 ### def pubid -> String | nil
 
-公開識別子(public identifier)を用いた外部実体宣言の場合は、その公開識別子を
-返します。
+公開識別子(public identifier)を用いた外部実体宣言の場合は、その公開識別子を返します。
 
 それ以外の場合は nil を返します。
 
@@ -172,9 +168,7 @@ p e.to_s # => "<!ENTITY w \"wee\">"
 
 実体の値を返します。
 
-パラメータ実体参照(parameter entity)のみが展開され、
-そうでない実体参照(general entity)は展開されて
-いないような値が返されます。
+パラメータ実体参照(parameter entity)のみが展開され、そうでない実体参照(general entity)は展開されていないような値が返されます。
 
 外部実体(external entity)宣言の場合は nil を返します。
 

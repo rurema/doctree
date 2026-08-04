@@ -5,6 +5,5 @@ include:
 ---
 # class Net::SMTPUnsupportedCommand < Net::ProtocolError
 
-サーバで利用できないコマンドを送ろうとした時に発生する
-例外のクラスです。
+サーバで利用できないコマンドを送ろうとした時に発生する例外のクラスです。
 

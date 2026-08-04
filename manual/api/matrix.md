@@ -4,8 +4,7 @@ category: Math
 ---
 行列と数ベクトルを扱うためのライブラリです。
 
-行列、ベクトルの各要素には Ruby の任意の数オブジェクト([c:Numeric] の
-サブクラス、[c:Float], [c:Integer], [c:Complex], [c:Rational] など)
+行列、ベクトルの各要素には Ruby の任意の数オブジェクト([c:Numeric] のサブクラス、[c:Float], [c:Integer], [c:Complex], [c:Rational] など)
 が使えます。
 
 #%# [2002-04-02]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]

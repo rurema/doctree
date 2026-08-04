@@ -6,8 +6,7 @@ until: "2.7.0"
 
 このクラスは Ruby 3.0 で削除されました。
 
-拡張ライブラリを書く時に new が定義されているとまずい場合が
-あるため、[c:Object] から new と allocate を undef したクラスです。
+拡張ライブラリを書く時に new が定義されているとまずい場合があるため、[c:Object] から new と allocate を undef したクラスです。
 Ruby スクリプトレベルでは気にする必要は全くありません。
 
 #%# しているのは rb_undef_alloc_func なので例外あげるけど new は存在するような。

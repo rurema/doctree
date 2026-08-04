@@ -10,11 +10,9 @@ http/ftp に簡単にアクセスするためのモジュールです。
 ### def OpenURI.open_uri(name, mode = 'r', perm = nil, options = {})                  -> StringIO
 ### def OpenURI.open_uri(name, mode = 'r', perm = nil, options = {}){|sio| ... }     -> nil
 
-URI である文字列 name のリソースを取得して [c:StringIO] オブジェクト
-として返します。
+URI である文字列 name のリソースを取得して [c:StringIO] オブジェクトとして返します。
 
-ブロックを与えた場合は [c:StringIO] オブジェクトを引数としてブロックを
-評価します。ブロックの終了時に StringIO は close されます。nil を返します。
+ブロックを与えた場合は [c:StringIO] オブジェクトを引数としてブロックを評価します。ブロックの終了時に StringIO は close されます。nil を返します。
 
 ```ruby
 require 'open-uri'
@@ -25,8 +23,7 @@ puts sio.read
 OpenURI.open_uri('http://www.example.com'){|sio| sio.read }
 ```
 
-options には [c:Hash] を与えます。理解するハッシュの
-キーは以下のシンボル、
+options には [c:Hash] を与えます。理解するハッシュのキーは以下のシンボル、
 - :proxy
 - :progress_proc
 - :content_length_proc
@@ -39,8 +36,7 @@ options には [c:Hash] を与えます。理解するハッシュの
 - :redirect
 - :encoding
 です。
-「:content_length_proc」と「:progress_proc」はプログレスバーに
-利用されることを想定しています。
+「:content_length_proc」と「:progress_proc」はプログレスバーに利用されることを想定しています。
 
 ```ruby
 require 'open-uri'

@@ -5,8 +5,7 @@ library: openssl
 
 失効した証明書のクラス。
 
-[m:OpenSSL::X509::CRL#revoked] で返される
-失効証明書リストがこのクラスの配列です。
+[m:OpenSSL::X509::CRL#revoked] で返される失効証明書リストがこのクラスの配列です。
 
 ## Class Methods
 

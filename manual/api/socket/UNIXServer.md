@@ -12,14 +12,11 @@ UNIXストリーム型接続のサーバ側のソケットのクラス。
 ### def UNIXServer.open(path){|sock| ...} -> object
 ### def UNIXServer.new(path){|sock| ...} -> object
 
-path で指定したパス名を用いて接続を受け付けるソケット
-を作成します。
+path で指定したパス名を用いて接続を受け付けるソケットを作成します。
 
 ブロックを省略すると作成したサーバソケットを返します。
 
-ブロックを渡した場合は、作成したソケットを引数としてそのブロックを呼びだし、
-ブロック終了時にソケットを閉じます。この場合には
-ブロックの評価値を返り値として返します。
+ブロックを渡した場合は、作成したソケットを引数としてそのブロックを呼びだし、ブロック終了時にソケットを閉じます。この場合にはブロックの評価値を返り値として返します。
 
 - **param** `path` -- 接続を受け付けるパス名文字列
 
@@ -59,12 +56,10 @@ UNIXServer.open("/tmp/s") {|serv|
 接続した
 [c:UNIXSocket] のインスタンスを返します。
 
-[man:accept(2)] がエラーになった場合、[m:Socket#accept] と同じ例外が
-発生します。
+[man:accept(2)] がエラーになった場合、[m:Socket#accept] と同じ例外が発生します。
 
 [c:Errno::EWOULDBLOCK], [c:Errno::EAGAIN], 
-[c:Errno::ECONNABORTED], [c:Errno::EPROTO] のいずれかの例外が
-発生した場合は、その例外には [c:IO::WaitReadable] が extend
+[c:Errno::ECONNABORTED], [c:Errno::EPROTO] のいずれかの例外が発生した場合は、その例外には [c:IO::WaitReadable] が extend
 されます。それを利用してリトライ可能な例外を掴まえることができます。
 
 ```ruby

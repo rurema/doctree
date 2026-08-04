@@ -9,9 +9,7 @@ irb の設定を扱うためのサブライブラリです。
 
 irb の設定を扱うためのクラスです。
 
-irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する事で設定
-を変更します。irb の起動後は IRB.conf の内容を更新しても変更の内容は反
-映されない事に注意してください。
+irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する事で設定を変更します。irb の起動後は IRB.conf の内容を更新しても変更の内容は反映されない事に注意してください。
 
 なお、.irbrc 中に記述できる以下の設定値については、[c:IRB::Context]
 オブジェクトのメソッドとして操作できません。
@@ -139,8 +137,7 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する�
 
 自身のアプリケーション名を val に設定します。
 
-.irbrc ファイル中で IRB.conf[:AP_NAME] を設定する事でも同様の操作が行え
-ます。
+.irbrc ファイル中で IRB.conf[:AP_NAME] を設定する事でも同様の操作が行えます。
 
 - **param** `val` -- アプリケーション名を [c:String] で指定します。
 
@@ -181,8 +178,7 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する�
 エラー発生時のバックトレース表示の先頭、末尾の上限の行数をそれぞれ val
 行に設定します。
 
-.irbrc ファイル中で IRB.conf[:BACK_TRACE_LIMIT] を設定する事でも同様の
-操作が行えます。
+.irbrc ファイル中で IRB.conf[:BACK_TRACE_LIMIT] を設定する事でも同様の操作が行えます。
 
 - **param** `val` -- バックトレース表示の先頭、末尾の上限を [c:Integer] で指定
            します。
@@ -191,8 +187,7 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する�
 
 ### def debug? -> bool
 
-irb がデバッグモード([m:IRB::Context#debug_level] が 1 以上)で動作し
-ているかどうかを返します。
+irb がデバッグモード([m:IRB::Context#debug_level] が 1 以上)で動作しているかどうかを返します。
 
 デフォルト値は false です。
 
@@ -210,8 +205,7 @@ irb のデバッグレベルを返します。
 
 irb のデバッグレベルを val に設定します。
 
-.irbrc ファイル中で IRB.conf[:DEBUG_LEVEL] を設定する事でも同様の操作
-が行えます。
+.irbrc ファイル中で IRB.conf[:DEBUG_LEVEL] を設定する事でも同様の操作が行えます。
 
 - **SEE** [m:IRB::Context#debug_level], [m:IRB::Context#debug?]
 
@@ -228,8 +222,7 @@ irb のプロンプトでの評価結果を表示するかどうかを返しま�
 
 irb のプロンプトでの評価結果を表示するかどうかを設定します。
 
-.irbrc ファイル中で IRB.conf[:ECHO] を設定する事でも同様の操作が行えま
-す。
+.irbrc ファイル中で IRB.conf[:ECHO] を設定する事でも同様の操作が行えます。
 
 - **param** `val` -- true を指定した場合、irb のプロンプトでの評価結果を表示しま
            す。false を指定した場合は表示しません。
@@ -267,8 +260,7 @@ true の時は Ctrl-D を無視します。false の時は irb を終了しま�
 
 Ctrl-D(EOF) が入力された時に irb を終了するかどうかを val に設定します。
 
-.irbrc ファイル中で IRB.conf[:IGNORE_EOF] を設定する事でも同様の操作が
-行えます。
+.irbrc ファイル中で IRB.conf[:IGNORE_EOF] を設定する事でも同様の操作が行えます。
 
 - **param** `val` -- true を指定した場合、 Ctrl-D を無視します。false を指定した
            場合は Ctrl-D の入力時に irb を終了します。
@@ -295,8 +287,7 @@ false の時は irb を終了します。true の時は以下のように動作�
 
 Ctrl-C が入力された時に irb を終了するかどうかを val に設定します。
 
-.irbrc ファイル中で IRB.conf[:IGNORE_SIGINT] を設定する事でも同様の操作
-が行えます。
+.irbrc ファイル中で IRB.conf[:IGNORE_SIGINT] を設定する事でも同様の操作が行えます。
 
 - **param** `val` -- false を指定した場合、Ctrl-C の入力時に irb を終了します。
            true を指定した場合、Ctrl-C の入力時に以下のように動作します。
@@ -392,9 +383,7 @@ irb 中での最後の実行結果を返します。
 
 ### def load_modules -> [String]
 
-irb の起動時に -r オプション指定で読み込まれたライブラリ、~/.irbrc など
-の設定ファイル内で IRB.conf[:LOAD_MODULES] 指定で読み込まれたライブラリ
-の名前の配列を返します。
+irb の起動時に -r オプション指定で読み込まれたライブラリ、~/.irbrc などの設定ファイル内で IRB.conf[:LOAD_MODULES] 指定で読み込まれたライブラリの名前の配列を返します。
 
 #%# 変更しても影響がないため省略しました。
 #%#--- load_modules=
@@ -413,8 +402,7 @@ self に設定されたオブジェクトを返します。
 
 ### def prompt_c=(val)
 
-式が継続している時のプロンプトを表現するフォーマット文字列を val に設定
-します。
+式が継続している時のプロンプトを表現するフォーマット文字列を val に設定します。
 
 - **param** `val` -- フォーマットを文字列で指定します。指定できる内容については、
            [ref:lib:irb#customize_prompt] を参照してください。
@@ -450,8 +438,7 @@ self に設定されたオブジェクトを返します。
 そうでない場合は、:DEFAULT、:CLASSIC、:SIMPLE、:INF_RUBY、:XMP、:NULL
 のいずれかを返します。
 
-定義済みのプロンプトモードの内容については、IRB.conf[:PROMPT][mode] を
-参照してください。
+定義済みのプロンプトモードの内容については、IRB.conf[:PROMPT][mode] を参照してください。
 
 - **SEE** [m:IRB::Context#prompt_mode=], [ref:lib:irb#customize_prompt]
 
@@ -555,17 +542,14 @@ irb のプロンプトでの評価結果を表示する際のフォーマット�
 - **`nil`**:
     inf-ruby-mode 以外で readline ライブラリを利用しようとする (デフォルト)
 
-動作を変更するためには .irbrc ファイル中で IRB.conf[:USE_READLINE] の設
-定や irb 起動時に --readline オプション、--noreadline オプションの指定
-を行います。
+動作を変更するためには .irbrc ファイル中で IRB.conf[:USE_READLINE] の設定や irb 起動時に --readline オプション、--noreadline オプションの指定を行います。
 
 #%# 変更しても影響がないため省略しました。
 #%#--- use_readline=(opt)
 
 ### def verbose -> bool | nil
 
-標準出力に詳細なメッセージを出力するように設定されているかどうかを返し
-ます。
+標準出力に詳細なメッセージを出力するように設定されているかどうかを返します。
 
 [m:IRB::Context#verbose?] とは別のメソッドである事に注意してください。
 
@@ -581,9 +565,7 @@ irb のプロンプトでの評価結果を表示する際のフォーマット�
 - **return** -- 詳細なメッセージを出力する場合は true を返します。そうでない場
         合は false か nil を返します。
 
-設定を行っていた場合([m:IRB::Context#verbose] が true か false を返す
-場合)は設定した通りに動作します。設定を行っていない場合は、ファイルを指
-定して irb を実行した場合などに true を返します。
+設定を行っていた場合([m:IRB::Context#verbose] が true か false を返す場合)は設定した通りに動作します。設定を行っていない場合は、ファイルを指定して irb を実行した場合などに true を返します。
 
 - **SEE** [m:IRB::Context#verbose], [m:IRB::Context#verbose=]
 
@@ -591,11 +573,9 @@ irb のプロンプトでの評価結果を表示する際のフォーマット�
 
 標準出力に詳細なメッセージを出力するかどうかを val に設定します。
 
-.irbrc ファイル中で IRB.conf[:VERBOSE] を設定する事でも同様の操作が行え
-ます。
+.irbrc ファイル中で IRB.conf[:VERBOSE] を設定する事でも同様の操作が行えます。
 
-false や nil を指定した場合でも、[m:IRB::Context#verbose?] が true を
-返す場合は詳細なメッセージを出力する事に注意してください。
+false や nil を指定した場合でも、[m:IRB::Context#verbose?] が true を返す場合は詳細なメッセージを出力する事に注意してください。
 
 - **param** `val` -- true を指定した場合、詳細なメッセージを出力します。false や
            nil を指定した場合、詳細なメッセージを出力しません。

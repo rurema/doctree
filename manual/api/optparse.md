@@ -81,8 +81,7 @@ opt で置き換えます。そうでない場合は先頭に opt を追加し�
 
 ### def OptionParser::ParseError.filter_backtrace(array) -> [String]
 
-array で指定されたバックトレースから optparse ライブラリに関する行を除
-外します。
+array で指定されたバックトレースから optparse ライブラリに関する行を除外します。
 
 デバッグモード([m:$DEBUG]が真)の場合は何もしません。
 

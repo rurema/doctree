@@ -2,8 +2,7 @@
 type: library
 category: Development
 ---
-名前のタイポによって [c:NameError] や [c:NoMethodError] が起きたと
-きに、自動的に他の似た名前を提案してくれるライブラリです。
+名前のタイポによって [c:NameError] や [c:NoMethodError] が起きたときに、自動的に他の似た名前を提案してくれるライブラリです。
 
 ```ruby
 "Yuki".starts_with?("Y")
@@ -22,8 +21,7 @@ category: Development
 デフォルトで有効になっており、無効にするにはコマンドラインオプションで
 --disable=did_you_mean を指定します。
 
-このライブラリはbundled gem(gemファイルのみを同梱)です。詳しい内容は下
-記のページを参照してください。
+このライブラリはbundled gem(gemファイルのみを同梱)です。詳しい内容は下記のページを参照してください。
 
 - rubygems.org: <https://rubygems.org/gems/did_you_mean>
 - プロジェクトページ: <https://github.com/ruby/did_you_mean>

@@ -15,13 +15,10 @@ X.509 証明書署名要求の attribute を表すクラスです。
 
 attribute オブジェクトを生成します。
 
-引数が1個で、文字列であるならば、それを DER 形式の
-データであると見なして attribute オブジェクトを生成します。
-引数が1個で、それ以外の場合は to_der メソッドで DER 形式に変換してから
-それを attribute オブジェクトに変換します。
+引数が1個で、文字列であるならば、それを DER 形式のデータであると見なして attribute オブジェクトを生成します。
+引数が1個で、それ以外の場合は to_der メソッドで DER 形式に変換してからそれを attribute オブジェクトに変換します。
 
-引数が2個の場合は、それぞれを attribute の Object ID (識別子)と
-値(内容)と見なして attribute オブジェクトを生成します。
+引数が2個の場合は、それぞれを attribute の Object ID (識別子)と値(内容)と見なして attribute オブジェクトを生成します。
 この場合、oid は Object ID の文字列、value には
 [c:OpenSSL::ASN1::ASN1Data] のインスタンスを渡さなければなりません。
 
@@ -51,8 +48,7 @@ attribute の Object ID(識別子)を文字列で設定します。
 
 ### def value -> OpenSSL::ASN1::ASN1Data
 
-attribute の値を [c:OpenSSL::ASN1::ASN1Data] のオブジェクトで
-返します。
+attribute の値を [c:OpenSSL::ASN1::ASN1Data] のオブジェクトで返します。
 
 - **raise** `OpenSSL::X509::AttributeError` -- 値の取得に失敗した場合に発生します
 - **SEE** [m:OpenSSL::X509::Attribute#value=]
@@ -75,5 +71,4 @@ attribute の値を設定します。
 
 # class OpenSSL::X509::AttributeError < OpenSSL::OpenSSLError
 
-[c:OpenSSL::X509::Attribute] 関連のエラーが起きた場合に
-発生する例外です。
+[c:OpenSSL::X509::Attribute] 関連のエラーが起きた場合に発生する例外です。

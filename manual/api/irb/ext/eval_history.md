@@ -2,14 +2,11 @@
 type: library
 since: "3.3"
 ---
-[c:IRB::Context] に実行結果の履歴を保持する機能を提供するサブライブラ
-リです。
+[c:IRB::Context] に実行結果の履歴を保持する機能を提供するサブライブラリです。
 
-conf.eval_history か IRB.conf[:EVAL_HISTORY] に [c:Integer] を設定す
-る事で使用できます。
+conf.eval_history か IRB.conf[:EVAL_HISTORY] に [c:Integer] を設定する事で使用できます。
 
-このライブラリで定義されているメソッドはユーザが直接使用するものではあ
-りません。
+このライブラリで定義されているメソッドはユーザが直接使用するものではありません。
 
 # reopen IRB::Context
 
@@ -28,8 +25,7 @@ conf.eval_history か IRB.conf[:EVAL_HISTORY] に [c:Integer] を設定す
 
 実行結果の履歴の最大保存件数を val に設定します。
 
-.irbrc ファイル中で IRB.conf[:EVAL_HISTORY] を設定する事でも同様の事が
-行えます。
+.irbrc ファイル中で IRB.conf[:EVAL_HISTORY] を設定する事でも同様の事が行えます。
 
 - **param** `val` -- 実行結果の履歴の最大保存件数を [c:Integer] か nil で指定し
            ます。0 を指定した場合は無制限に履歴を保存します。現在の値よ

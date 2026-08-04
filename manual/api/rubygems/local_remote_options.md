@@ -3,8 +3,7 @@ type: library
 require:
   - rubygems
 ---
-[c:Gem::Command] で使用する --local, --remote オプションのためのモジュールを
-定義したライブラリです。
+[c:Gem::Command] で使用する --local, --remote オプションのためのモジュールを定義したライブラリです。
 
 # module Gem::LocalRemoteOptions
 

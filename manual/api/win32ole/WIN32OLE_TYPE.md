@@ -7,8 +7,7 @@ WIN32OLE_TYPEオブジェクトは、型情報ライブラリ（TypeLib）内に
 1つの型情報を保持します。
 
 Ruby 3.2 から、このクラスは WIN32OLE の名前空間下に移動し、`WIN32OLE::Type`
-として定義されるようになりました。トップレベル定数 `WIN32OLE_TYPE` は後方
-互換のためのエイリアスとして残っていますが、Ruby 3.4 以降は非推奨
+として定義されるようになりました。トップレベル定数 `WIN32OLE_TYPE` は後方互換のためのエイリアスとして残っていますが、Ruby 3.4 以降は非推奨
 (deprecated)です(`Warning[:deprecated]` が有効なら参照時に警告が表示されます)。
 
 ### サンプルコード
@@ -21,9 +20,7 @@ puts excel_app_type.progid # => "Excel.Application.14"
 ```
 
 Ruby-1.9.1以降、[c:WIN32OLE_TYPELIB]オブジェクトの
-[m:WIN32OLE_TYPELIB#ole_types]メソッドを利用して、型情報ライブラリ内
-に定義されているすべての型情報をWIN32OLE_TYPEオブジェクトの配列として取
-得できます。
+[m:WIN32OLE_TYPELIB#ole_types]メソッドを利用して、型情報ライブラリ内に定義されているすべての型情報をWIN32OLE_TYPEオブジェクトの配列として取得できます。
 
 - **SEE** [c:WIN32OLE_TYPELIB]
 
@@ -47,8 +44,7 @@ puts excel_app_type.progid # => "Excel.Application.14"
 ```
 
 TypeLibに定義されているすべての型を取得するには、
-[c:WIN32OLE_TYPELIB]オブジェクトの[m:WIN32OLE_TYPELIB#ole_types]メ
-ソッドを利用します。
+[c:WIN32OLE_TYPELIB]オブジェクトの[m:WIN32OLE_TYPELIB#ole_types]メソッドを利用します。
 
 ### def WIN32OLE_TYPE.ole_classes(libname) -> [WIN32OLE_TYPE]
 
@@ -67,8 +63,7 @@ classes = types.map{|k| k.name} # => ["Adjustments", "CalloutFormat", ...]
 ```
 
 Ruby-1.9.1からは、TypeLibに定義されているすべての型を取得するには、
-[c:WIN32OLE_TYPELIB]オブジェクトの[m:WIN32OLE_TYPELIB#ole_types]メ
-ソッドを利用してください。
+[c:WIN32OLE_TYPELIB]オブジェクトの[m:WIN32OLE_TYPELIB#ole_types]メソッドを利用してください。
 
 ### def WIN32OLE_TYPE.progids -> [String]
 
@@ -94,8 +89,7 @@ excel.visible = true
 excel.Quit
 ```
 
-PROGIDは、生成可能なOLEオートメーションサーバのCoClass（コンポーネント
-クラス）が持つレジストリ登録名です。[m:WIN32OLE.new]の引数に指定して
+PROGIDは、生成可能なOLEオートメーションサーバのCoClass（コンポーネントクラス）が持つレジストリ登録名です。[m:WIN32OLE.new]の引数に指定して
 WIN32OLEオブジェクトを生成できます。
 
 ### def WIN32OLE_TYPE.typelibs -> [String]
@@ -106,8 +100,7 @@ WIN32OLEオブジェクトを生成できます。
         列を返します。
 
 Ruby-1.9.1からは、すべてのTypeLibのドキュメント文字列を取得するには、
-[c:WIN32OLE_TYPELIB]オブジェクトを利用して、以下のように記述してくだ
-さい。
+[c:WIN32OLE_TYPELIB]オブジェクトを利用して、以下のように記述してください。
 
 ```ruby
 WIN32OLE_TYPELIB.typelibs.map {|t| t.name}
@@ -126,13 +119,11 @@ tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
 puts tobj.guid  # => {00024500-0000-0000-C000-000000000046}
 ```
 
-GUIDは、COMのクラス識別子(CLSID)、インターフェイス識別子(IID)など多数の
-領域でWindows上のオブジェクトの識別に利用される128ビットの値です。
+GUIDは、COMのクラス識別子(CLSID)、インターフェイス識別子(IID)など多数の領域でWindows上のオブジェクトの識別に利用される128ビットの値です。
 
 ### def helpcontext -> Integer | nil
 
-この型に関連するヘルプファイルのトピックID（ヘルプコンテキスト）を取得
-します。
+この型に関連するヘルプファイルのトピックID（ヘルプコンテキスト）を取得します。
 
 - **return** -- 型に関連するヘルプコンテキストを整数で返します。ヘルプコンテキ
         ストが登録されていない場合はnilを返します。
@@ -161,12 +152,9 @@ WIN32OLE.ole_show_help tobj.helpfile, tobj.helpcontext
 # 注）WIN32OLE.ole_show_help(tobj) の呼び出しが望ましい
 ```
 
-当メソッドがフルパス名を返しても、ヘルプファイルがインストールされてい
-ない場合があることに注意してください。
+当メソッドがフルパス名を返しても、ヘルプファイルがインストールされていない場合があることに注意してください。
 
-また、返送値はOLEサーバの登録値をそのまま利用するため、Rubyのパス名形式
-（ディレクトリ区切りは「/」）ではなく、Windowsのパス名形式（ディレクト
-リ区切りは「\」）です。
+また、返送値はOLEサーバの登録値をそのまま利用するため、Rubyのパス名形式（ディレクトリ区切りは「/」）ではなく、Windowsのパス名形式（ディレクトリ区切りは「\」）です。
 
 ### def helpstring -> String | nil
 
@@ -272,8 +260,7 @@ MaxはTYPEKINDの終端マーカなので意味を持ちません。
 
 selfのPROGIDを取得します。
 
-PROGIDは、生成可能なOLEオートメーションサーバのCoClass（コンポーネント
-クラス）が持つレジストリ登録名です。[m:WIN32OLE.new]の引数に指定して
+PROGIDは、生成可能なOLEオートメーションサーバのCoClass（コンポーネントクラス）が持つレジストリ登録名です。[m:WIN32OLE.new]の引数に指定して
 WIN32OLEオブジェクトを生成できます。
 
 - **return** -- selfのPROGIDを文字列で返します。selfがPROGIDを持たない、または
@@ -301,8 +288,7 @@ tobj =  WIN32OLE_TYPE.new('Microsoft Office 14.0 Object Library', 'MsoRGBType')
 p tobj.src_type   # => "I4"
 ```
 
-この例は、OfficeのMsoRGBType型は符号付き32ビット整数（I4）の別名だとい
-うことを示します。
+この例は、OfficeのMsoRGBType型は符号付き32ビット整数（I4）の別名だということを示します。
 
 ### def name -> String
 ### def to_s -> String
@@ -390,8 +376,7 @@ puts tobj.ole_typelib.name  # => 'Microsoft Excel 14.0 Object Library'
 
 この型が実装するインターフェイスを取得します。
 
-implemented_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）
-の場合、そのクラスが実装しているすべてのインターフェイスを返します。
+implemented_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスが実装しているすべてのインターフェイスを返します。
 
 - **return** -- クラスが実装するすべてのインターフェイスを[c:WIN32OLE_TYPE]の
         配列として返します。この型がインターフェイスを実装しない場合は、
@@ -408,13 +393,9 @@ p tobj.implemented_ole_types.map {|intf| intf.name} #=> ["_Worksheet", "DocEvent
 
 型が持つソースインターフェイスを取得します。
 
-source_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場合、
-そのクラスがサポートするすべてのソースインターフェイス（イベントの通知
-元となるインターフェイス）を返します。
+source_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスがサポートするすべてのソースインターフェイス（イベントの通知元となるインターフェイス）を返します。
 
-ActiveXコントロールのようにイベント（[c:WIN32OLE_EVENT]）をサポートし
-ているコンポーネントクラスの場合は、このメソッドの呼び出しによりイベン
-トインターフェイスを調べることが可能です。
+ActiveXコントロールのようにイベント（[c:WIN32OLE_EVENT]）をサポートしているコンポーネントクラスの場合は、このメソッドの呼び出しによりイベントインターフェイスを調べることが可能です。
 
 - **return** -- ソースインターフェイスを[c:WIN32OLE_TYPE]の配列として返します。
         ソースインターフェイスを持たない場合は空配列を返します。
@@ -428,9 +409,7 @@ p tobj.source_ole_types.map {|intf| intf.name} #=> ["DocEvents"]
 
 型が持つソースインターフェイスを取得します。
 
-default_event_sourcesメソッドは、selfがCoClass（コンポーネントクラス）
-の場合、そのクラスがサポートするデフォルトのソースインターフェイス（イ
-ベントの通知元となるインターフェイス）を返します。
+default_event_sourcesメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスがサポートするデフォルトのソースインターフェイス（イベントの通知元となるインターフェイス）を返します。
 
 - **return** -- デフォルトのソースインターフェイスを[c:WIN32OLE_TYPE]の配列と
         して返します。返すのは配列ですが、デフォルトのソースインターフェ
@@ -442,15 +421,11 @@ tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
 p tobj.default_event_sources.map {|intf| intf.name} #=> ["DocEvents"]
 ```
 
-[m:WIN32OLE_EVENT.new]でインターフェイス名を指定しない場合は、ここで
-返されたインターフェイスが選択されます。
+[m:WIN32OLE_EVENT.new]でインターフェイス名を指定しない場合は、ここで返されたインターフェイスが選択されます。
 
-次のサンプルは、IEのnaviaget2メソッドによってどのようなイベントが通知さ
-れるかを、実際にメソッド呼び出し（=イベント通知）をトレースして調べるプ
-ログラムです。イベントを受け付けるために、
+次のサンプルは、IEのnaviaget2メソッドによってどのようなイベントが通知されるかを、実際にメソッド呼び出し（=イベント通知）をトレースして調べるプログラムです。イベントを受け付けるために、
 [m:WIN32OLE_EVENT.message_loop]の呼び出しが必要な点に注意してください。
-ここでは最終イベントのStatusTextChangeイベントのメッセージについては既
-知としています。
+ここでは最終イベントのStatusTextChangeイベントのメッセージについては既知としています。
 
 ```text
 # coding : cp932
@@ -486,8 +461,7 @@ end
 ctl.Quit
 ```
 
-このプログラムを実行するとWindows7のIE8環境では以下のような出力を得られ
-ます。
+このプログラムを実行するとWindows7のIE8環境では以下のような出力を得られます。
 
 ```text
 2010-10-06 22:33:54 +0900: PropertyChange was called
@@ -538,9 +512,7 @@ ctl.Quit
 
 型が持つデフォルトのインターフェイスを取得します。
 
-default_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場
-合、そのクラスが実装しているデフォルトのインターフェイスと、サポートし
-ていればデフォルトのソースインターフェイスを返します。
+default_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスが実装しているデフォルトのインターフェイスと、サポートしていればデフォルトのソースインターフェイスを返します。
 
 - **return** -- デフォルトインターフェイスを[c:WIN32OLE_TYPE]の配列として返し
         ます。デフォルトインターフェイスは、最大でも、クラス操作用のイ

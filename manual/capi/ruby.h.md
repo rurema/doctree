@@ -18,9 +18,7 @@ obj の構造体型 ID を返します。
 
 ### void Check_Type(VALUE val, int typeflag)
 
-val の構造体型フラグが typeflag でなければ
-例外 TypeError を発生します。val は即値の VALUE であっても
-構いません。
+val の構造体型フラグが typeflag でなければ例外 TypeError を発生します。val は即値の VALUE であっても構いません。
 
 ### MACRO VALUE CHR2FIX(char x)
 
@@ -29,20 +27,17 @@ char 型の整数 x を Ruby の Fixnum に変換します。
 ### MACRO VALUE CLASS_OF(VALUE obj)
 
 obj のクラスを返します。
-この場合の「クラス」とは C レベルのクラス、
-つまり RBasic 構造体の klass メンバの値です。
+この場合の「クラス」とは C レベルのクラス、つまり RBasic 構造体の klass メンバの値です。
 また、構造体を持たない Fixnum などに対しても正常に働きます。
 
 ### MACRO void CLONESETUP(VALUE clone, VALUE obj)
 
 OBJSETUP() の変種。
-clone を、obj から clone で作った
-オブジェクトとして初期化します。
+clone を、obj から clone で作ったオブジェクトとして初期化します。
 
 ### MACRO void Data_Get_Struct(VALUE obj, type, type *svar)
 
-Ruby のオブジェクト obj から type 型へのポインタを
-とりだし svar に代入します。
+Ruby のオブジェクト obj から type 型へのポインタをとりだし svar に代入します。
 
 ```c title="使用例"
 struct mytype {
@@ -93,15 +88,12 @@ my_s_new(klass)
 
 ### MACRO void *DATA_PTR(VALUE dta)
 
-実際は struct RData* 型である dta から、
-それがラップしているポインタを取り出します。
+実際は struct RData* 型である dta から、それがラップしているポインタを取り出します。
 
 ### MACRO VALUE Data_Wrap_Struct(VALUE klass, RUBY_DATA_FUNC mark, RUBY_DATA_FUNC free, void *sval)
 
-C の構造体 sval をラップして klass クラスの
-インスタンスである Ruby オブジェクトを生成し、それを返します。
-mark、free はそれぞれ sval のマーク用・解放用の
-関数へのポインタです。どちらも、必要ないときはかわりに 0 を渡します。
+C の構造体 sval をラップして klass クラスのインスタンスである Ruby オブジェクトを生成し、それを返します。
+mark、free はそれぞれ sval のマーク用・解放用の関数へのポインタです。どちらも、必要ないときはかわりに 0 を渡します。
 
 また RUBY_DATA_FUNC の定義は以下のようです。
 
@@ -131,8 +123,7 @@ my_s_new(klass)
 ### MACRO void DUPSETUP(dup, obj)
 
 OBJSETUP() の変種。
-dup を、obj から dup で作った
-オブジェクトとして初期化します。
+dup を、obj から dup で作ったオブジェクトとして初期化します。
 
 ### MACRO int FIX2INT(VALUE x)
 
@@ -265,8 +256,7 @@ INT2FIX と同じです。
 ### MACRO int MEMCMP(p1, p2, type, n)
 
 type 型のメモリ領域 p1 と p2 の先頭 n 個を比較する。
-p1 が p2 の最初の n 個より小さい、等しい、大きいとき、そ
-れぞれ正、0、負の値を返す。
+p1 が p2 の最初の n 個より小さい、等しい、大きいとき、それぞれ正、0、負の値を返す。
 
 ### MACRO void MEMCPY(p1, p2, type, n)
 
@@ -301,8 +291,7 @@ obj が Qnil のとき真。
 
 x を int 型の整数に変換します。
 
-x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
-い場合は x.to_int による暗黙の型変換を試みます。
+x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合は x.to_int による暗黙の型変換を試みます。
 
 - **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に
                  発生します。
@@ -314,8 +303,7 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
 
 x を long 型の整数に変換します。
 
-x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
-い場合は x.to_int による暗黙の型変換を試みます。
+x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合は x.to_int による暗黙の型変換を試みます。
 
 - **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に
                  発生します。
@@ -327,8 +315,7 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
 
 x を unsigned int 型の整数に変換します。
 
-x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
-い場合は x.to_int による暗黙の型変換を試みます。
+x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合は x.to_int による暗黙の型変換を試みます。
 
 - **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に
                  発生します。
@@ -340,8 +327,7 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
 
 x を unsigned long 型の整数に変換します。
 
-x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
-い場合は x.to_int による暗黙の型変換を試みます。
+x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合は x.to_int による暗黙の型変換を試みます。
 
 - **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に
                  発生します。
@@ -353,8 +339,7 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
 
 x を short 型の整数に変換します。
 
-x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
-い場合は x.to_int による暗黙の型変換を試みます。
+x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合は x.to_int による暗黙の型変換を試みます。
 
 - **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に
                  発生します。
@@ -366,8 +351,7 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
 
 x を unsigned short 型の整数に変換します。
 
-x が [c:Integer]、[c:Float] オブジェクトのいずれでもな
-い場合は x.to_int による暗黙の型変換を試みます。
+x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合は x.to_int による暗黙の型変換を試みます。
 
 - **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に
                  発生します。
@@ -487,19 +471,15 @@ obj が Qfalse でも Qnil でもないとき真。
 
 ### MACRO RUBY_DATA_FUNC(func)
 
-任意の関数へのポインタ func を struct RData の dmark/dfree の
-値として適する型に強制キャストします。
+任意の関数へのポインタ func を struct RData の dmark/dfree の値として適する型に強制キャストします。
 
 ### MACRO RUBY_METHOD_FUNC(func)
 
-任意の関数へのポインタ func を Ruby のメソッドの実体として適する
-型に強制キャストします。
+任意の関数へのポインタ func を Ruby のメソッドの実体として適する型に強制キャストします。
 
 ### MACRO SafeStringValue(v)
 
-[f:StringValue] と同じく、val が String でなければ to_str メソッドを
-使って String に変換します。同時に rb_check_safe_str() によるチェックも
-行います。
+[f:StringValue] と同じく、val が String でなければ to_str メソッドを使って String に変換します。同時に rb_check_safe_str() によるチェックも行います。
 
 ### MACRO int SPECIAL_CONST_P(VALUE obj)
 
@@ -514,18 +494,13 @@ str が String でない場合は to_str によって変換を試みます。
 
 返り値を free したり直接書き換えたりしてはいけません。
 
-STR2CSTR は、与えられたオブジェクトが文字列でなく to_str メソッ
-ドを持つ場合、内部で to_str を呼び出して暗黙の型変換を行い、
-それが保持する文字列ポインタを返します。
-しかし、このAPIでは暗黙の型変換結果となるオブジェクトがどこからも
-保持されないため、注意して使用しないと結果が GC される可能性があります。
+STR2CSTR は、与えられたオブジェクトが文字列でなく to_str メソッドを持つ場合、内部で to_str を呼び出して暗黙の型変換を行い、それが保持する文字列ポインタを返します。
+しかし、このAPIでは暗黙の型変換結果となるオブジェクトがどこからも保持されないため、注意して使用しないと結果が GC される可能性があります。
 
-Ruby 1.7 以降では代わりに [f:StringValuePtr] を使用します。こちら
-は、引数の参照先が暗黙の型変換の結果に置き換わるため変換結果が GC
+Ruby 1.7 以降では代わりに [f:StringValuePtr] を使用します。こちらは、引数の参照先が暗黙の型変換の結果に置き換わるため変換結果が GC
 されません。(Ruby 1.7 では、STR2CSTR() は、obsolete です)
 
-[f:StringValue] は、引数が to_str による暗黙の型変換を期待する
-場合に使用します。
+[f:StringValue] は、引数が to_str による暗黙の型変換を期待する場合に使用します。
 
 ### MACRO void StringValue(VALUE val)
 
@@ -535,8 +510,7 @@ val が String でなければ to_str メソッドを使って String に変換�
 
 ### MACRO char *StringValuePtr(VALUE val)
 
-val が String でなければ to_str メソッドを使って String に変換し、
-その実体のポインタを返します。
+val が String でなければ to_str メソッドを使って String に変換し、その実体のポインタを返します。
 
 このマクロに渡した VALUE は ruby の GC から確実に保護されます。
 

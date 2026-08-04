@@ -21,8 +21,7 @@ YAML の scalar 型を読み込んで Ruby の built-in 型に変換するクラ
 
 ### def tokenize(string) -> object
 
-YAML の scalar である文字列を Ruby のオブジェクトに変換した
-ものを返します。
+YAML の scalar である文字列を Ruby のオブジェクトに変換したものを返します。
 
 ```ruby
 scanner = Psych::ScalarScanner.new

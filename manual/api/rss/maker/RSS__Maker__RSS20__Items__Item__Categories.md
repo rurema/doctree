@@ -12,8 +12,7 @@ RSS 2.0を生成するときだけ利用されます。
 ### def new_category
 #%todo
 新しくcategoryを作成し、返します。作成された
-categoryはcategoryリストの最後
-に追加されています。
+categoryはcategoryリストの最後に追加されています。
 
 item.categories.new_categoryが作成する
 categoryは

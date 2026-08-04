@@ -3,9 +3,7 @@ type: library
 category: Date/Time
 ---
 組み込みの [c:Time] クラスを拡張します。
-日時を表す文字列をパースして [c:Time] オブジェクトに変換したり、
-逆に [c:Time] オブジェクトを RFC などで定められた文字列に
-変換する機能を提供します。
+日時を表す文字列をパースして [c:Time] オブジェクトに変換したり、逆に [c:Time] オブジェクトを RFC などで定められた文字列に変換する機能を提供します。
 
 - date-time は [RFC:2822] で定義されています。
 - HTTP-date は [RFC:2616] で定義されています。
@@ -19,8 +17,7 @@ category: Date/Time
 ### def Time.parse(date, now = Time.now) -> Time
 ### def Time.parse(date, now = Time.now) {|year| year } -> Time
 
-date を [m:Date._parse] によって
-パースして [c:Time]オブジェクトに変換します。
+date を [m:Date._parse] によってパースして [c:Time]オブジェクトに変換します。
 
 ブロック付きで呼ばれた場合、dateの年はブロックによって変換されます。
 
@@ -29,8 +26,7 @@ require 'time'
 Time.parse(...) {|y| y < 100 ? (y >= 69 ? y + 1900 : y + 2000) : y}
 ```
 
-与えられた時刻に上位の要素がなかったり壊れていた場合、nowの
-該当要素が使われます。
+与えられた時刻に上位の要素がなかったり壊れていた場合、nowの該当要素が使われます。
 
 ```ruby
 require 'time'
@@ -58,12 +54,10 @@ p Time.parse("7/23")    #=> Mon Jul 23 00:00:00 GMT 2001
 p Time.parse("2002/1")  #=> Tue Jan 01 00:00:00 GMT 2002
 ```
 
-[m:Date._parse]がdateから情報を取り出せないとき、
-または [c:Time] クラスが指定された日時を表現できないときに
+[m:Date._parse]がdateから情報を取り出せないとき、または [c:Time] クラスが指定された日時を表現できないときに
 [c:ArgumentError] が発生します。
 
-このメソッドは他のパース用メソッドのフェイルセーフとして
-以下のように使用できます:
+このメソッドは他のパース用メソッドのフェイルセーフとして以下のように使用できます:
 
 ```ruby
 require 'time'
@@ -80,12 +74,10 @@ Time.xmlschema(date) rescue Time.parse(date)
 
 [RFC:2822]で定義されているdate-timeとしてdateをパースして
 [c:Time]オブジェクトに変換します。
-この形式は[RFC:822]で定義されて[RFC:1123]で更新された形式と
-同じです。
+この形式は[RFC:822]で定義されて[RFC:1123]で更新された形式と同じです。
 
 dateが[RFC:2822]に準拠していない、または
-[c:Time]クラスが指定された日時を表現できないときに[c:ArgumentError]が
-発生します。
+[c:Time]クラスが指定された日時を表現できないときに[c:ArgumentError]が発生します。
 
 - **param** `date` -- [RFC:2822] で定義されるdate-time として文字列を指定します。
 
@@ -114,8 +106,7 @@ end
 [c:Time]オブジェクトに変換します。
 
 dateが[RFC:2616]に準拠していない、または
-[c:Time]クラスが指定された日時を表現できないときに[c:ArgumentError]が
-発生します。
+[c:Time]クラスが指定された日時を表現できないときに[c:ArgumentError]が発生します。
 
 - **param** `date` -- [RFC:2616]で定義されているHTTP-dateとしてパースされる文字列を指定します。
 
@@ -142,12 +133,10 @@ end
 XML Schema で定義されている dateTime として
 date をパースして [c:Time] オブジェクトに変換します。
 
-date がISO 8601で定義されている形式に準拠していない、
-または [c:Time] クラスが指定された日時を表現できないときに
+date がISO 8601で定義されている形式に準拠していない、または [c:Time] クラスが指定された日時を表現できないときに
 [c:ArgumentError] が発生します。
 
-[c:Time] オブジェクトを ISO8601 形式の文字列にフォーマットする
-インスタンスメソッド [m:Time#iso8601], [m:Time#xmlschema] もあります。
+[c:Time] オブジェクトを ISO8601 形式の文字列にフォーマットするインスタンスメソッド [m:Time#iso8601], [m:Time#xmlschema] もあります。
 
 - **param** `date` -- XML Schema で定義されている dateTime として
             パースされる文字列を指定します。
@@ -178,8 +167,7 @@ end
 ### def Time.strptime(date, format, now=self.now) -> Time
 ### def Time.strptime(date, format, now=self.now){|y| ... } -> Time
 
-文字列を [m:Date._strptime] を用いて [c:Time] オブジェクト
-に変換します。
+文字列を [m:Date._strptime] を用いて [c:Time] オブジェクトに変換します。
 
 ```ruby
 require 'time'
@@ -218,8 +206,7 @@ Time.strptime('01/5/18 4:13:00', '%Y/%m/%d %T'){|y|
 ### def rfc2822 -> String
 ### def rfc822 -> String
 
-[RFC:2822] で定義されている date-time として表現される形式の文字列を
-返します。
+[RFC:2822] で定義されている date-time として表現される形式の文字列を返します。
 
 - **return** -- 以下の形式の文字列を返します。
   ```text
@@ -238,8 +225,7 @@ p t.rfc2822      #=> "Sun, 31 Aug 2008 03:34:56 -0000"
 
 ### def httpdate -> String
 
-[RFC:2616] で定義されている HTTP-date の rfc1123-date 形式の文字列を
-返します。
+[RFC:2616] で定義されている HTTP-date の rfc1123-date 形式の文字列を返します。
 
 - **return** -- 以下の形式の文字列を返します。
   ```text
@@ -258,11 +244,9 @@ p t.httpdate     #=> "Sun, 31 Aug 2008 03:34:56 GMT"
 ### def xmlschema(fractional_seconds = 0) -> String
 ### def iso8601(fractional_seconds = 0) -> String
 
-XML Schema で定義されている dateTime として
-表現される形式の文字列を返します。
+XML Schema で定義されている dateTime として表現される形式の文字列を返します。
 
-XML Schema で定義されている dateTime として
-表現される形式の文字列をパースするためのクラスメソッド
+XML Schema で定義されている dateTime として表現される形式の文字列をパースするためのクラスメソッド
 [m:Time.iso8601], [m:Time.xmlschema] もあります。
 
 - **param** `fractional_seconds` -- 小数点以下の秒の桁数を整数で指定します。

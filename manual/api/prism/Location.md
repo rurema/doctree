@@ -8,9 +8,7 @@ library: prism
 [c:Prism::ParseError]・[c:Prism::ParseWarning]・[c:Prism::Token] などの
 `location` メソッドから得られます。
 
-行番号・桁位置への変換や、該当範囲の文字列の取り出しなどのメソッドを
-持ちます。桁位置を表すメソッドには「バイト単位」(`start_column` など)と
-「文字単位」(`start_character_column` など)の系列があります。
+行番号・桁位置への変換や、該当範囲の文字列の取り出しなどのメソッドを持ちます。桁位置を表すメソッドには「バイト単位」(`start_column` など)と「文字単位」(`start_character_column` など)の系列があります。
 
 ```ruby title="例"
 require "prism"
@@ -43,8 +41,7 @@ p loc.start_column # => 4
 
 ### def start_line -> Integer
 
-範囲の開始位置がある行の行番号を返します。行番号は 1 から
-始まります。
+範囲の開始位置がある行の行番号を返します。行番号は 1 から始まります。
 
 ### def end_line -> Integer
 
@@ -52,19 +49,16 @@ p loc.start_column # => 4
 
 ### def start_column -> Integer
 
-範囲の開始位置の、行頭からのバイト単位の桁位置(0 origin)を
-返します。
+範囲の開始位置の、行頭からのバイト単位の桁位置(0 origin)を返します。
 
 ### def end_column -> Integer
 
-範囲の終端位置の、行頭からのバイト単位の桁位置(0 origin)を
-返します。
+範囲の終端位置の、行頭からのバイト単位の桁位置(0 origin)を返します。
 
 ### def start_character_column -> Integer
 
 範囲の開始位置の、行頭からの文字単位の桁位置(0 origin)を返します。
-マルチバイト文字を含む行では [m:Prism::Location#start_column] と
-異なる値になります。
+マルチバイト文字を含む行では [m:Prism::Location#start_column] と異なる値になります。
 
 ### def end_character_column -> Integer
 
@@ -80,13 +74,11 @@ p loc.end_character_column # => 12 (文字単位)
 
 ### def start_character_offset -> Integer
 
-範囲の開始位置の、ソースコード先頭からの文字単位のオフセットを
-返します。
+範囲の開始位置の、ソースコード先頭からの文字単位のオフセットを返します。
 
 ### def end_character_offset -> Integer
 
-範囲の終端位置の、ソースコード先頭からの文字単位のオフセットを
-返します。
+範囲の終端位置の、ソースコード先頭からの文字単位のオフセットを返します。
 
 ### def slice -> String
 
@@ -126,12 +118,9 @@ p body[0].location.join(body[1].location).slice
 
 ### def comments -> Array
 
-この位置に関連付けられたコメント([c:Prism::Comment] の
-サブクラスのインスタンス)の配列を返します。前に付くコメント、
-後ろに付くコメントの順に並びます。
+この位置に関連付けられたコメント([c:Prism::Comment] のサブクラスのインスタンス)の配列を返します。前に付くコメント、後ろに付くコメントの順に並びます。
 
-コメントの関連付けは [m:Prism::ParseResult#attach_comments!] を
-呼び出したときに行われます。呼び出す前は空配列です。
+コメントの関連付けは [m:Prism::ParseResult#attach_comments!] を呼び出したときに行われます。呼び出す前は空配列です。
 
 ### def ==(other) -> bool
 
@@ -142,8 +131,7 @@ other が同じ範囲を表す `Prism::Location` であれば true を返しま�
 #%since 3.4
 ### def leading_comments -> Array
 
-この位置の前に付くコメント([c:Prism::Comment] のサブクラスの
-インスタンス)の配列を返します。
+この位置の前に付くコメント([c:Prism::Comment] のサブクラスのインスタンス)の配列を返します。
 [m:Prism::ParseResult#attach_comments!] を呼び出す前は空配列です。
 
 ```ruby title="例"
@@ -167,8 +155,7 @@ p loc.trailing_comments.map { |c| c.slice } # => ["# trailing"]
 
 ### def adjoin(string) -> Prism::Location
 
-範囲の直後に続くソースコードが string と一致する場合に、その分だけ
-範囲を伸ばした新しい `Prism::Location` を返します。
+範囲の直後に続くソースコードが string と一致する場合に、その分だけ範囲を伸ばした新しい `Prism::Location` を返します。
 
 - **param** `string` -- 取り込む文字列
 - **raise** `RuntimeError` -- 範囲の直後が string と一致しない場合に
@@ -176,8 +163,7 @@ p loc.trailing_comments.map { |c| c.slice } # => ["# trailing"]
 
 ### def slice_lines -> String
 
-範囲を含む行全体(開始行の行頭から終端行の行末まで)の文字列を
-返します。
+範囲を含む行全体(開始行の行頭から終端行の行末まで)の文字列を返します。
 
 ### def source_lines -> Array
 
@@ -185,25 +171,21 @@ p loc.trailing_comments.map { |c| c.slice } # => ["# trailing"]
 
 ### def start_code_units_offset(encoding = Encoding::UTF_16LE) -> Integer
 
-範囲の開始位置の、指定エンコーディングのコード単位でのオフセットを
-返します。UTF-16 のコード単位で位置をやりとりする
+範囲の開始位置の、指定エンコーディングのコード単位でのオフセットを返します。UTF-16 のコード単位で位置をやりとりする
 LSP(Language Server Protocol)などとの連携向けです。
 
 - **param** `encoding` -- コード単位の基準となるエンコーディング
 
 ### def end_code_units_offset(encoding = Encoding::UTF_16LE) -> Integer
 
-範囲の終端位置の、指定エンコーディングのコード単位でのオフセットを
-返します。
+範囲の終端位置の、指定エンコーディングのコード単位でのオフセットを返します。
 
 ### def start_code_units_column(encoding = Encoding::UTF_16LE) -> Integer
 
-範囲の開始位置の、行頭からの指定エンコーディングのコード単位での
-桁位置を返します。
+範囲の開始位置の、行頭からの指定エンコーディングのコード単位での桁位置を返します。
 
 ### def end_code_units_column(encoding = Encoding::UTF_16LE) -> Integer
 
-範囲の終端位置の、行頭からの指定エンコーディングのコード単位での
-桁位置を返します。
+範囲の終端位置の、行頭からの指定エンコーディングのコード単位での桁位置を返します。
 
 #%end

@@ -49,8 +49,7 @@ config で有効なハッシュキーは以下の通りです。
 ```
 
 realm を表す文字列 :Realm には与えます。:UserDB
-には [c:WEBrick::HTTPAuth::Htpasswd] オブジェクトを与えます。:Logger には
-ロガーオブジェクトを与えます。また、:AutoReloadUserDB には
+には [c:WEBrick::HTTPAuth::Htpasswd] オブジェクトを与えます。:Logger にはロガーオブジェクトを与えます。また、:AutoReloadUserDB には
 [m:WEBrick::HTTPAuth::Htpasswd#get_passwd] の
 reload_db に渡す引数を与えます。
 
@@ -73,8 +72,7 @@ reload_db に渡す引数を与えます。
 
 ### def challenge(request, response) -> ()
 
-クライアントにパスワードを要求するためにレスポンスに WWW-Authenticate ヘッダを
-設定し、例外 WEBrick::HTTPStatus::Unauthorized を投げます。
+クライアントにパスワードを要求するためにレスポンスに WWW-Authenticate ヘッダを設定し、例外 WEBrick::HTTPStatus::Unauthorized を投げます。
 
 - **raise** `WEBrick::HTTPStatus::Unauthorized` -- このメソッドを呼ぶと必ず発生します。
 

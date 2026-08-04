@@ -9,8 +9,7 @@ drb で用いる ACL(Access Control List)クラス。
 
 Access control list は "allow" と "deny" の2つからなります。
 "all" や "*" という文字列は任意のアドレスにマッチします。
-[c:IPAddr] が取り扱える任意のアドレス/アドレスマスクを
-使うことができます。
+[c:IPAddr] が取り扱える任意のアドレス/アドレスマスクを使うことができます。
 
 ACLのエントリーは、以下の例に示すように、
 
@@ -57,9 +56,7 @@ p acl.allow_addr?(addr) # => true
 list で許可/拒否するアドレスのリストを指定し、
 order でデフォルトの挙動を指定します。
 
-order に [m:ACL::DENY_ALLOW] を指定するとデフォルトで
-すべてのアドレスを拒否します。[m:ACL::ALLOW_DENY] を指定すると
-デフォルトですべてのアドレスを許可します。
+order に [m:ACL::DENY_ALLOW] を指定するとデフォルトですべてのアドレスを拒否します。[m:ACL::ALLOW_DENY] を指定するとデフォルトですべてのアドレスを許可します。
 
 ```ruby
 require "drb/acl"
@@ -86,8 +83,7 @@ addr が ACL で許可されているならば真を返します。
 
 ### def allow_socket?(soc) -> bool
 
-ソケットに関連付けられたアドレスが ACL で許可されているならば
-真を返します。
+ソケットに関連付けられたアドレスが ACL で許可されているならば真を返します。
 
 - **param** `soc` -- 判定対象のソケット
 

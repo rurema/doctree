@@ -3,11 +3,9 @@ library: _builtin
 ---
 # class Binding < Object
 
-ローカル変数のテーブルと self、モジュールのネストなどの情報を保
-持するオブジェクトのクラスです。
+ローカル変数のテーブルと self、モジュールのネストなどの情報を保持するオブジェクトのクラスです。
 
-組み込み関数 [m:Kernel?.binding] と [m:Proc#binding] によっ
-てのみ生成され、[m:Kernel?.eval] の第 2 引数に使用します。
+組み込み関数 [m:Kernel?.binding] と [m:Proc#binding] によってのみ生成され、[m:Kernel?.eval] の第 2 引数に使用します。
 またトップレベルの Binding オブジェクトとして組み込み定数
 [m:Object::TOPLEVEL_BINDING] が用意されています。
 
@@ -89,8 +87,7 @@ def foo
 end
 ```
 
-このメソッドは以下のコード(ただし、obj が Ruby のコードで出力される場
-合)と同様の動作をします。
+このメソッドは以下のコード(ただし、obj が Ruby のコードで出力される場合)と同様の動作をします。
 
 ```ruby
 binding.eval("#{symbol} = #{obj}")
@@ -100,8 +97,7 @@ binding.eval("#{symbol} = #{obj}")
 
 ### def local_variable_defined?(symbol) -> bool
 
-引数 symbol で指定した名前のローカル変数が定義されている場合に true を、
-そうでない場合に false を返します。
+引数 symbol で指定した名前のローカル変数が定義されている場合に true を、そうでない場合に false を返します。
 
 - **param** `symbol` -- ローカル変数名を [c:Symbol] オブジェクトで指定します。
 #%since 4.0
@@ -138,8 +134,7 @@ end
 ```
 
 #%since 4.0
-番号指定パラメータ（_1 など）は 4.0 からローカル変数として扱われなくなり、
-返り値に含まれなくなりました。
+番号指定パラメータ（_1 など）は 4.0 からローカル変数として扱われなくなり、返り値に含まれなくなりました。
 
 ```ruby
 [1].each do
@@ -211,8 +206,7 @@ end
 
 ### def implicit_parameter_defined?(symbol) -> bool
 
-引数 symbol で指定した番号指定パラメータまたは it パラメータが self のスコープで
-定義されている場合に true を、そうでない場合に false を返します。
+引数 symbol で指定した番号指定パラメータまたは it パラメータが self のスコープで定義されている場合に true を、そうでない場合に false を返します。
 
 定義されていない場合に false を返すのは、symbol が番号指定パラメータまたは
 it パラメータの名前である場合だけです。それ以外の名前を指定した場合は

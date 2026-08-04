@@ -61,16 +61,14 @@ p IPAddr.new_ntoh("\300\250\001\001")   # => <IPAddr: IPv4:192.168.1.1/255.255.2
 
 ### def &(ipaddr) -> IPAddr
 
-他の IPAddr オブジェクトとのビットごとの論理積により、
-新しい IPAddr オブジェクトを生成します。
+他の IPAddr オブジェクトとのビットごとの論理積により、新しい IPAddr オブジェクトを生成します。
 
 - **param** `ipaddr` -- 他の IPAddr オブジェクト。
               また、数値や文字列も受け付けます。
 
 ### def |(ipaddr) -> IPAddr
 
-他の IPAddr オブジェクトとのビットごとの論理和により、
-新しい IPAddr オブジェクトを生成します。
+他の IPAddr オブジェクトとのビットごとの論理和により、新しい IPAddr オブジェクトを生成します。
 
 - **param** `ipaddr` -- 他の IPAddr オブジェクト。
               また、数値や文字列も受け付けます。
@@ -176,13 +174,11 @@ IPv4 互換 IPv6 アドレスなら 真を返します。
 
 ### def ipv4_mapped -> IPAddr
 
-IPv4 アドレスから IPv4 射影 IPv6 アドレスの
-新しい IPAddr オブジェクトを返します。
+IPv4 アドレスから IPv4 射影 IPv6 アドレスの新しい IPAddr オブジェクトを返します。
 
 ### def ipv4_compat -> IPAddr
 
-IPv4 アドレスから IPv4 互換 IPv6 アドレスの
-新しい IPAddr オブジェクトを返します。
+IPv4 アドレスから IPv4 互換 IPv6 アドレスの新しい IPAddr オブジェクトを返します。
 
 ### def native -> self | IPAddr
 

@@ -3,9 +3,7 @@ type: library
 ---
 SAX2 と同等の API を持つストリーム式の XML パーサ。
 
-コールバックをパーサオブジェクトに [m:REXML::Parsers::SAX2Parser#listen] で
-設定してから [m:REXML::Parsers::SAX2Parser#parse] を呼び出すことで、
-パーサからコールバックが呼び出されます。
+コールバックをパーサオブジェクトに [m:REXML::Parsers::SAX2Parser#listen] で設定してから [m:REXML::Parsers::SAX2Parser#parse] を呼び出すことで、パーサからコールバックが呼び出されます。
 
 コールバックには2種類あって、ブロックを使う方式と [c:REXML::SAX2Listener]
 を include したクラスのオブジェクトを使う方式があります。詳しくは
@@ -173,18 +171,13 @@ SAX2 パーサオブジェクトを生成します。
 
 コールバックをパーサに登録します。
 
-引数の種類やブロックの有無でどのような場合に何がコールバックされかが
-変わります。
+引数の種類やブロックの有無でどのような場合に何がコールバックされかが変わります。
 
 ブロックを指定した場合はそのブロックがコールバックされます。
-ブロックを指定しない場合は [c:REXML::SAX2Listener] を include した
-クラスのオブジェクトを指定します。
+ブロックを指定しない場合は [c:REXML::SAX2Listener] を include したクラスのオブジェクトを指定します。
 
-sym は以下のシンボルが指定でき、どの場合にコールバックが呼び出されるかを
-指定します。どのような場合にどのような引数でコールバックが呼び出されるか
-については、
-[c:REXML::SAX2Listener] の対応するメソッドで詳しく説明されていますので
-そちらを参照してください。
+sym は以下のシンボルが指定でき、どの場合にコールバックが呼び出されるかを指定します。どのような場合にどのような引数でコールバックが呼び出されるかについては、
+[c:REXML::SAX2Listener] の対応するメソッドで詳しく説明されていますのでそちらを参照してください。
 
   - :start_document
     (XML文書開始, [m:REXML::SAX2Listener#start_document])
@@ -220,13 +213,9 @@ sym は以下のシンボルが指定でき、どの場合にコールバック�
 
 ary には配列を指定し、要素名によるコールバック呼び出し条件を指定します。
 配列の要素としては、文字列か正規表現が指定できます。
-start_element, end_element に関しては、指定した名前を持つ
-要素の開始時と終了時にのみコールバックが呼び出されるようになります。
-start_prefix_mapping, end_prefix_mapping では、その名前空間が導入された
-要素の要素名、つまり xmlns:foo="bar" という属性を持つ
-要素の名前でフィルタリングされるようになります。
-それ以外(character, cdataなど)では、指定した名前を要素として持つ要素の直下のみ
-コールバックが呼び出されます。
+start_element, end_element に関しては、指定した名前を持つ要素の開始時と終了時にのみコールバックが呼び出されるようになります。
+start_prefix_mapping, end_prefix_mapping では、その名前空間が導入された要素の要素名、つまり xmlns:foo="bar" という属性を持つ要素の名前でフィルタリングされるようになります。
+それ以外(character, cdataなど)では、指定した名前を要素として持つ要素の直下のみコールバックが呼び出されます。
 フィルタリングに使われる名前は QName、つまり prefix を含む文字列です。
 
 - **param** `sym` -- イベント名(シンボル)
@@ -267,16 +256,13 @@ parser.listen(:characters, [/\Ah[1234]\z/]){|data|
 ### def deafen(listener) -> ()
 #%# --- deafen { ... } -> ()
 
-[m:REXML::Parsers::SAX2Parser#listen] で指定した listener を
-取り除きます。
+[m:REXML::Parsers::SAX2Parser#listen] で指定した listener を取り除きます。
 
 - **param** `listener` -- 取り除く listener
 
 ### def parse -> ()
 
-[m:REXML::Parsers::SAX2Parser.new] で指定した XML を
-パースし、その結果によって [m:REXML::Parsers::SAX2Parser#listen] で
-指定したコールバックを呼び出します。
+[m:REXML::Parsers::SAX2Parser.new] で指定した XML をパースし、その結果によって [m:REXML::Parsers::SAX2Parser#listen] で指定したコールバックを呼び出します。
 
 - **raise** `REXML::ParseException` -- XML文書のパースに失敗した場合に発生します
 - **raise** `REXML::UndefinedNamespaceException` -- XML文書のパース中に、定義されていない名前空間

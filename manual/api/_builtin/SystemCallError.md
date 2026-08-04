@@ -6,8 +6,7 @@ library: _builtin
 Ruby の実装に用いられているシステムコールまたは一部の C 言語関数が失敗した時に発生する例外です。
 システムコールの失敗した原因を表すエラーコードを保持します。
 
-多くの場合、実際には SystemCallError そのものではなく
-サブクラスである [c:Errno::EXXX] (XXX はエラーコードの値によって異なる。
+多くの場合、実際には SystemCallError そのものではなくサブクラスである [c:Errno::EXXX] (XXX はエラーコードの値によって異なる。
 システム定義のエラー名と同じ名前) が発生します。
 詳しくは [c:Errno::EXXX] を参照してください。
 
@@ -29,8 +28,7 @@ p SystemCallError.new("message")
 
 整数 errno に対応する [c:Errno::EXXX] オブジェクトを生成して返します。
 
-整数 errno をシステムコールで発生したエラーの原因を示すコードであると解釈し、
-対応する例外クラスのインスタンスを生成して返します。
+整数 errno をシステムコールで発生したエラーの原因を示すコードであると解釈し、対応する例外クラスのインスタンスを生成して返します。
 
 生成されるオブジェクトは SystemCallError の直接のインスタンスではなく、サブクラスのインスタンスです。
 それらのサブクラスは [c:Errno] モジュール内に定義されています。
@@ -38,8 +36,7 @@ p SystemCallError.new("message")
 
 エラーコードの取り得る値および意味はシステムに依存します。詳しくは [c:Errno::EXXX] を参照してください。
 
-location と error_message を両方指定した場合、エラーが発生した場所を表す
-情報としてエラーメッセージに location が付加されます。
+location と error_message を両方指定した場合、エラーが発生した場所を表す情報としてエラーメッセージに location が付加されます。
 
 - **param** `error_message` -- エラーメッセージを表す文字列
 - **param** `errno` -- システム依存のエラーコード
@@ -59,8 +56,7 @@ p SystemCallError.new("message", 2, "location")
 
 ### def SystemCallError.===(other) -> bool
 
-other が SystemCallError のサブクラスのインスタンスで、
-かつ、other.errno の値が self::Errno と同じ場合に真を返します。そうでない場合は偽を返します。
+other が SystemCallError のサブクラスのインスタンスで、かつ、other.errno の値が self::Errno と同じ場合に真を返します。そうでない場合は偽を返します。
 
 従って、特に other が self.kind_of?(other) である場合には [m:Module#===] と同様に真を返します。
 その他に、 Errno::EXXX::Errno == Errno::EYYY::Errno である場合にも Errno::EXXX == Errno::EYYY.new は真を返します。

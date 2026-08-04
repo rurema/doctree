@@ -10,8 +10,7 @@ include:
 XPath による探索をサポートします。
 
 [m:REXML::Element#elements] はこのオブジェクトを返します。
-XPath で相対パスを指定した場合は、この REXML::Element#elements の
-レシーバが基準要素となります。
+XPath で相対パスを指定した場合は、この REXML::Element#elements のレシーバが基準要素となります。
 
 ## Class Methods
 
@@ -19,8 +18,7 @@ XPath で相対パスを指定した場合は、この REXML::Element#elements �
 
 空の要素の集合を表すオブジェクトを生成します。
 
-通常は [m:REXML::Element.new] によって Elements オブジェクトが
-生成されるため、このメソッドを使う必要はありません。
+通常は [m:REXML::Element.new] によって Elements オブジェクトが生成されるため、このメソッドを使う必要はありません。
 
 - **param** `parant` -- 親要素オブジェクト
 
@@ -33,22 +31,18 @@ index が指し示している要素を返します。
 index には整数もしくは文字列を指定できます。
 
 index に整数を指定した場合は index 番目の子要素を返します。
-index は 1-origin です。つまり
-最初の要素の index は 1 であり、 0 ではありません。
+index は 1-origin です。つまり最初の要素の index は 1 であり、 0 ではありません。
 n 番目の要素の index は n であり、 n-1 ではありません。
 これは XPath の仕様に合わせています。
 
-index に文字列を指定した場合はその文字列を XPath と見なし、
-それで指定された要素を返します。
+index に文字列を指定した場合はその文字列を XPath と見なし、それで指定された要素を返します。
 XPath が複数の要素を指している場合は、そのうち一つを返します。
 XPath の性質上、子要素でない要素を返す場合もあります。
 
 name は index に整数を指定した場合にのみ意味があります。
-name を指定した場合 name という名前を持つ子要素の中で index 番目の
-ものを返します。この場合も index は 1-origin です。
+name を指定した場合 name という名前を持つ子要素の中で index 番目のものを返します。この場合も index は 1-origin です。
 
-整数で指定した場合でも、XPathで指定した場合でも、
-指定した要素が存在しない場合は nil を返します。
+整数で指定した場合でも、XPathで指定した場合でも、指定した要素が存在しない場合は nil を返します。
 
 - **param** `index` -- 取り出したい要素の index (整数)もしくは xpath (文字列)
 - **param** `name` -- 子要素の名前(文字列)
@@ -75,8 +69,7 @@ index には整数、文字列が指定できます。
 整数を指定した場合は index 番目の要素を変更します(1-originです)。
 文字列の場合は XPath としてマッチした要素を更新します。
 
-整数/文字列どちらの場合でも対応する要素が存在しない場合は、
-末尾に追加されます。
+整数/文字列どちらの場合でも対応する要素が存在しない場合は、末尾に追加されます。
 
 - **param** `index` -- 要素を更新する位置
 - **param** `element` -- 要素([c:REXML::Element]オブジェクト)
@@ -156,8 +149,7 @@ p doc.to_s                     # => "<a/>"
 
 要素 element を追加します。
 
-element には文字列もしくは [c:REXML::Element] オブジェクトを
-指定します。文字列を指定した場合には [m:REXML::Element.new](element)
+element には文字列もしくは [c:REXML::Element] オブジェクトを指定します。文字列を指定した場合には [m:REXML::Element.new](element)
 で生成される要素を追加します。
 
 element を省略した場合は、空の要素が追加されます。
@@ -179,11 +171,9 @@ p a.to_s # => "<a><b/><c/></a>"
 
 全ての子要素に対しブロックを呼び出します。
 
-xpath を指定した場合には、その XPath 文字列に
-マッチする要素に対しブロックを呼び出します。
+xpath を指定した場合には、その XPath 文字列にマッチする要素に対しブロックを呼び出します。
 
-[m:REXML::XPath.each] などとは異なり、要素以外の
-テキストノードなどはすべて無視されることに注意してください。
+[m:REXML::XPath.each] などとは異なり、要素以外のテキストノードなどはすべて無視されることに注意してください。
 
 - **param** `xpath` -- XPath文字列
 
@@ -218,11 +208,9 @@ p doc.root.elements.size # => 3
 
 すべての子要素の配列を返します。
 
-xpath を指定した場合は、その XPath 文字列に
-マッチする要素の配列を返します。
+xpath を指定した場合は、その XPath 文字列にマッチする要素の配列を返します。
 
-[m:REXML::Elements#each] と同様、[m:REXML::XPath.match] などと
-異なり、要素以外の子ノードは無視されます。
+[m:REXML::Elements#each] と同様、[m:REXML::XPath.match] などと異なり、要素以外の子ノードは無視されます。
 
 - **param** `xpath` -- XPath文字列
 
@@ -237,22 +225,18 @@ p REXML::XPath.match(doc.root, "child::node()") # => ["sean", <b/>, "elliott", <
 
 ### def collect(xpath = nil) {|element| .. } -> [object]
 
-[m:Enumerable#collect] と同様、
-各子要素に対しブロックを呼び出し、その返り値の配列を返します。
+[m:Enumerable#collect] と同様、各子要素に対しブロックを呼び出し、その返り値の配列を返します。
 
-xpath を指定した場合は、その XPath 文字列に
-マッチする要素に対し同様の操作をします。
+xpath を指定した場合は、その XPath 文字列にマッチする要素に対し同様の操作をします。
 
 - **param** `xpath` -- XPath文字列
 - **SEE** [m:REXML::Elements#each]
 
 ### def inject(xpath = nil, initial = nil) {|element| ... } -> object
 
-[m:Enumerable#inject] と同様、
-各子要素に対し畳み込みをします。
+[m:Enumerable#inject] と同様、各子要素に対し畳み込みをします。
 
-xpath を指定した場合は、その XPath 文字列に
-マッチする要素に対し同様の操作をします。
+xpath を指定した場合は、その XPath 文字列にマッチする要素に対し同様の操作をします。
 
 - **param** `xpath` -- XPath文字列
 - **SEE** [m:REXML::Elements#each]

@@ -7,18 +7,13 @@ DRb::ExtServManager は drb で実現されたサービスブローカーです�
 個々のサービスは [lib:drb/extserv] で定義されている
 [c:DRb::ExtServ] を用いて実装します。
 DRb::ExtServManager
-はクライアントの要求に応じて個々のサービスを
-サブプロセスとして起動し、各サービスを表す DRb::ExtServ オブジェクト
-をリモートオブジェクトとしてクライアントに渡します。
+はクライアントの要求に応じて個々のサービスをサブプロセスとして起動し、各サービスを表す DRb::ExtServ オブジェクトをリモートオブジェクトとしてクライアントに渡します。
 
-このライブラリは簡易的なもので、あまりメンテナンスもされていないので、
-本格的な用途にはこのライブラリを参考にして実装してください。
+このライブラリは簡易的なもので、あまりメンテナンスもされていないので、本格的な用途にはこのライブラリを参考にして実装してください。
 
 ### Example
 
-以下の例を実行するためには、まず server.rb を起動し、その後 client.rb を
-動かします。service.rb は server.rb が client.rb からサービスを要求された
-時に起動されます。また、stop.rbを用いて 
+以下の例を実行するためには、まず server.rb を起動し、その後 client.rb を動かします。service.rb は server.rb が client.rb からサービスを要求された時に起動されます。また、stop.rbを用いて 
 
 ```ruby title="server.rb"
 require 'drb/drb'
@@ -112,23 +107,19 @@ s.service(ARGV[0]).stop_service
 ## Class Methods
 ### def DRb::ExtServManager.command -> { String => String|[String] }
 
-サービスを起動するためのコマンドを指定するための [c:Hash] を
-返します。
+サービスを起動するためのコマンドを指定するための [c:Hash] を返します。
 
 Hash のキーがサービス名で、値がそのサービスを起動するためのコマンドです。
 この Hash を変更することでサービスを定義します。
-[m:DRb::ExtServManager.command=] で Hash 自体を
-変更することでも同じことができます。
+[m:DRb::ExtServManager.command=] で Hash 自体を変更することでも同じことができます。
 
 コマンドは文字列、もしくは文字列の配列で指定します。
-文字列で指定した場合は [m:Kernel?.spawn] で
-プロセスを起動する際に shell 経由で起動されます。
+文字列で指定した場合は [m:Kernel?.spawn] でプロセスを起動する際に shell 経由で起動されます。
 文字列の配列で指定すると shell を経由せずに起動されます。
 
 ### def DRb::ExtServManager.command=(cmd)
 
-サービスを起動するためのコマンドを指定するための [c:Hash] を
-設定します。
+サービスを起動するためのコマンドを指定するための [c:Hash] を設定します。
 
 - **param** `cmd` -- コマンドを設定した Hash
 - **SEE** [m:DRb::ExtServManager.command]
@@ -137,8 +128,7 @@ Hash のキーがサービス名で、値がそのサービスを起動するた
 
 DRb::ExtServManager オブジェクトを生成して返します。
 
-これで生成したオブジェクトの [m:DRb::ExtServManager#service] を
-リモートプロセスから呼び出すことでサービスの仲介を実現します。
+これで生成したオブジェクトの [m:DRb::ExtServManager#service] をリモートプロセスから呼び出すことでサービスの仲介を実現します。
 
 ## Instance Methods
 #%# --- regist(name, ro) -> ()
@@ -154,8 +144,7 @@ name で指定したサービスに関連付けられた [c:DRb::ExtServ]
 [m:DRb::ExtServ.new] によって ExtServManager に登録されるのを待ちます。
 その後、登録されたオブジェクトを返します。
 
-すでにプロセスが起動していた場合は、登録されている DRb::ExtServ オブジェクトを
-返します。
+すでにプロセスが起動していた場合は、登録されている DRb::ExtServ オブジェクトを返します。
 
 [m:DRb::ExtServ#stop_service] でサービスを停止すると、登録されている
 DRb::ExtServ は削除され、プロセスは停止します。

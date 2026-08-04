@@ -4,13 +4,11 @@ require:
   - rubygems
   - rubygems/security
 ---
-[c:Gem::Command] で使用するインストールとアップデートに関するオプションを
-扱うためのモジュールを定義したライブラリです。
+[c:Gem::Command] で使用するインストールとアップデートに関するオプションを扱うためのモジュールを定義したライブラリです。
 
 # module Gem::InstallUpdateOptions
 
-[c:Gem::Command] で使用するインストールとアップデートに関するオプションを
-扱うためのモジュールです。
+[c:Gem::Command] で使用するインストールとアップデートに関するオプションを扱うためのモジュールです。
 
 ## Public Instance Methods
 

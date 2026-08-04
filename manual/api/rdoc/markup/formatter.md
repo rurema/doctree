@@ -9,8 +9,7 @@ RDoc 形式のドキュメントを整形するためのサブライブラリで
 
 RDoc 形式のドキュメントを整形するための基本クラスです。
 
-実際にドキュメントを整形するには、[c:RDoc::Markup::ToHtml] のような、
-継承したクラスで convert メソッドを実行してください。
+実際にドキュメントを整形するには、[c:RDoc::Markup::ToHtml] のような、継承したクラスで convert メソッドを実行してください。
 
 ## Class Methods
 
@@ -31,8 +30,7 @@ content で指定された文字列を変換します。
 
 ### def add_tag(name, start, stop) -> ()
 
-name で登録された規則で取得された文字列を start と stop で囲むように指
-定します。
+name で登録された規則で取得された文字列を start と stop で囲むように指定します。
 
 - **param** `name` -- [c:RDoc::Markup::ToHtml] などのフォーマッタに識別させる時
             の名前を [c:Symbol] で指定します。

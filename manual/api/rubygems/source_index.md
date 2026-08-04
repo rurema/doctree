@@ -142,8 +142,7 @@ Gem パッケージのフルネームと それぞれの [c:Gem::Specification] 
 
 ### def Gem::SourceIndex.from_gems_in(*spec_dirs) -> Gem::SourceIndex
 
-引数で与えられたディレクトリに置かれている Ruby スクリプト形式の gemspec ファイルを使用して
-新しいインスタンスを作成します。
+引数で与えられたディレクトリに置かれている Ruby スクリプト形式の gemspec ファイルを使用して新しいインスタンスを作成します。
 
 - **param** `spec_dirs` -- gemspec ファイルが置かれているディレクトリを一つ以上指定します。
 

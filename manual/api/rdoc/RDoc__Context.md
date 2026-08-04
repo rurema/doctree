@@ -6,8 +6,7 @@ include:
 ---
 # class RDoc::Context < RDoc::CodeObject
 
-モジュール、クラス、メソッドなどの、[lib:rdoc/code_objects] が定義す
-るクラスを管理するクラスです。
+モジュール、クラス、メソッドなどの、[lib:rdoc/code_objects] が定義するクラスを管理するクラスです。
 
 ## Constants
 
@@ -49,8 +48,7 @@ Files this context is found in
 
 ### def method_list -> [RDoc::AnyMethod]
 
-追加された([c:RDoc::AnyMethod] かそのサブクラスのオブジェクト)の配列
-を返します。
+追加された([c:RDoc::AnyMethod] かそのサブクラスのオブジェクト)の配列を返します。
 
 ### def name -> String
 
@@ -119,9 +117,7 @@ collection に name で指定したクラス、モジュールを追加します
 - **param** `superclass` -- 追加するクラスの親クラスを [c:RDoc::NormalClass] オ
                   ブジェクトで指定します。
 
-既に登録済みであった場合は、引数で指定した情報で内容を更新します。ただ
-し、`RDoc::CodeObject#done_documenting` が true を返す場合、何も行
-われません。
+既に登録済みであった場合は、引数で指定した情報で内容を更新します。ただし、`RDoc::CodeObject#done_documenting` が true を返す場合、何も行われません。
 
 ### def add_constant(const) -> ()
 
@@ -146,8 +142,7 @@ collection に name で指定したクラス、モジュールを追加します
 
 引数で指定したモジュールを追加します。
 
-ただし、クラスとして既に同名のものが登録されていた場合は、何もせずにそ
-のクラスを返します。
+ただし、クラスとして既に同名のものが登録されていた場合は、何もせずにそのクラスを返します。
 
 - **param** `class_type` -- 追加するクラス、モジュールを [c:RDoc::NormalClass]、
                   [c:RDoc::SingleClass]、[c:RDoc::NormalModule] オ
@@ -172,8 +167,7 @@ array に thing を追加します。
 
 - **param** `thing` -- 追加する要素を指定します。
 
-[m:RDoc::Context#add_alias] などで使われています。ライブラリ内部で使
-用します。
+[m:RDoc::Context#add_alias] などで使われています。ライブラリ内部で使用します。
 
 - **SEE** [m:RDoc::Context#add_alias], [m:RDoc::Context#add_attribute],
      [m:RDoc::Context#add_constant], [m:RDoc::Context#add_include],
@@ -217,8 +211,7 @@ this context
 
 ### def find_module_named(name) -> RDoc::NormalModule | nil
 
-追加された [c:RDoc::NormalModule] から引数で指定した名前のモジュール
-を検索します。見つからなかった場合は nil を返します。
+追加された [c:RDoc::NormalModule] から引数で指定した名前のモジュールを検索します。見つからなかった場合は nil を返します。
 
 - **param** `name` -- モジュールの名前を文字列で指定します。
 
@@ -233,9 +226,7 @@ the symbol references a module that contains that method
 
 ### def initialize_methods_etc -> ()
 
-追加されたメソッド、属性、alias されたメソッド(メソッド名の対応が取れて
-いないものを含む)、require されたファイル、include されたファイル、定数
-をクリアします。
+追加されたメソッド、属性、alias されたメソッド(メソッド名の対応が取れていないものを含む)、require されたファイル、include されたファイル、定数をクリアします。
 
 ### def modules -> [RDoc::NormalModule]
 

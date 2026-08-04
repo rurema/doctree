@@ -25,12 +25,9 @@ p Encoding.aliases
 ### def Encoding.compatible?(obj1, obj2) -> Encoding | nil
 
 2つのオブジェクトのエンコーディングに関する互換性をチェックします。
-互換性がある場合はそのエンコーディングを、
-ない場合は nil を返します。
+互換性がある場合はそのエンコーディングを、ない場合は nil を返します。
 
-引数が両方とも文字列である場合、互換性があるならば
-その文字列を結合できます。この場合返り値のエンコーディングは
-結合した文字列が取るであろう Encoding オブジェクトを返します。
+引数が両方とも文字列である場合、互換性があるならばその文字列を結合できます。この場合返り値のエンコーディングは結合した文字列が取るであろう Encoding オブジェクトを返します。
 
 ```ruby title="例"
 p Encoding.compatible?("\xa1".force_encoding("iso-8859-1"), "b")
@@ -42,8 +39,7 @@ Encoding.compatible?(
 #=> nil
 ```
 
-引数が文字列でない場合でも、両方のオブジェクトが encoding を持つ場合には
-互換性を判定できます。
+引数が文字列でない場合でも、両方のオブジェクトが encoding を持つ場合には互換性を判定できます。
 
 ```ruby title="例"
 p Encoding.compatible?(Encoding::UTF_8, Encoding::CP932)
@@ -110,8 +106,7 @@ Rubyはロケールまたは -E オプションに従って default_external を
 
 -E オプションを指定していない場合は、WindowsではUTF-8、その他のOSではロケールに従って default_external を決定します。
 
-default_external は必ず設定されます。[m:Encoding.locale_charmap] が nil を返す場合には US-ASCII が、
-ロケールにRubyが扱えないエンコーディングが指定されている場合には ASCII-8BIT が、default_external に設定されます。
+default_external は必ず設定されます。[m:Encoding.locale_charmap] が nil を返す場合には US-ASCII が、ロケールにRubyが扱えないエンコーディングが指定されている場合には ASCII-8BIT が、default_external に設定されます。
 
 - **SEE** [d:spec/rubycmd] [man:locale(1)], [m:Encoding.locale_charmap] [m:Encoding.default_internal]
 
@@ -207,8 +202,7 @@ p Encoding::UTF_8.names    #=> ["UTF-8", "CP65001"]
 ダミーエンコーディングとは Ruby が名前を知っているものの実質的には対応していないエンコーディングのことです。例えば、ダミーエンコーディングで符号化された文字列の場合、 [m:String#length] はマルチバイト文字を考慮せずにバイト列の長さを返します。
 
 ダミーエンコーディングも [c:IO] の外部エンコーディングに指定できます。また
-Ruby はサポートしていないが拡張ライブラリがサポートしているエンコーディングを扱う場合にも
-用います。
+Ruby はサポートしていないが拡張ライブラリがサポートしているエンコーディングを扱う場合にも用います。
 
 ```ruby title="例"
 p Encoding::ISO_2022_JP.dummy?     #=> true
@@ -423,8 +417,7 @@ G0 が US-ASCII、G1 が JIS X 0201 片仮名図形文字集合、G2 が JIS X 0
 CP50220 エンコーディング、
 Windows で用いられる ISO-2022-JP 亜種です。
 
-CP50221 とほぼ同様のエンコーディングですが、
-他のエンコーディングへの変換テーブルが少し異なります。
+CP50221 とほぼ同様のエンコーディングですが、他のエンコーディングへの変換テーブルが少し異なります。
 
 - **SEE** <https://web.archive.org/web/20121217203947/http://legacy-encoding.sourceforge.jp/wiki/index.php?cp50220>
 
@@ -745,8 +738,7 @@ ISO8859-8 エンコーディング。
 
 ISO8859-9 エンコーディング。
 
-ISO8859-1 に近い、
-トルコ語を扱うことができる8bit single-byteエンコーディングです。
+ISO8859-1 に近い、トルコ語を扱うことができる8bit single-byteエンコーディングです。
 
 - **SEE** [m:Encoding::Windows_1254]
 
@@ -918,8 +910,7 @@ KDDI の携帯電話で使われる絵文字が含まれています。
 
 TIS-620 エンコーディング。
 
-タイ語を扱うためのエンコーディングで、 ISO8859-11 とほぼ
-同一のエンコーディングです。
+タイ語を扱うためのエンコーディングで、 ISO8859-11 とほぼ同一のエンコーディングです。
 
 - **SEE** <https://en.wikipedia.org/wiki/Thai_Industrial_Standard_620-2533>
 
@@ -1077,8 +1068,7 @@ EUC-JPに加え、Windowsの機種依存文字とユーザ定義文字を扱う�
 MacCentEuro エンコーディング。
 
 Mac OSで使われる
-8bit single-byteエンコーディングで、
-中欧および南東欧の言語を取り扱うものです。
+8bit single-byteエンコーディングで、中欧および南東欧の言語を取り扱うものです。
 
 - **SEE** <https://en.wikipedia.org/wiki/Macintosh_Central_European_encoding>
 
@@ -1088,8 +1078,7 @@ Mac OSで使われる
 MacCroatian エンコーディング。
 
 Mac OS で使われる
-8bit single-byteエンコーディングで、
-クロアチア語、スロベニア語を取り扱うものです。
+8bit single-byteエンコーディングで、クロアチア語、スロベニア語を取り扱うものです。
 
 - **SEE** <https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/CROATIAN.TXT>
 
@@ -1098,8 +1087,7 @@ Mac OS で使われる
 
 MacCyrillic エンコーディング。
 
-Mac OS で使われる 8bit single-byte エンコーディングで、
-キリル文字を取り扱うものです。
+Mac OS で使われる 8bit single-byte エンコーディングで、キリル文字を取り扱うものです。
 
 - **SEE** <https://en.wikipedia.org/wiki/Macintosh_Cyrillic_encoding>
 
@@ -1109,8 +1097,7 @@ Mac OS で使われる 8bit single-byte エンコーディングで、
 MacGreek エンコーディング。
 
 Mac OSで使われる
-8bit single-byte エンコーディングで、
-ギリシャ語のために使われます。
+8bit single-byte エンコーディングで、ギリシャ語のために使われます。
 
 - **SEE** <https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/GREEK.TXT>
 
@@ -1120,8 +1107,7 @@ Mac OSで使われる
 MacIceland エンコーディング。
 
 Mac OSで使われる
-8bit single-byte エンコーディングで、
-アイスランド語のために使われます
+8bit single-byte エンコーディングで、アイスランド語のために使われます
 
 - **SEE** <https://en.wikipedia.org/wiki/Mac_Icelandic_encoding>
 
@@ -1131,8 +1117,7 @@ Mac OSで使われる
 MacRoman エンコーディング。
 
 Mac OSで使われる
-8bit single-byte エンコーディングで、
-西欧を中心としたラテン文字を用いる諸語を取り扱うためのものです。
+8bit single-byte エンコーディングで、西欧を中心としたラテン文字を用いる諸語を取り扱うためのものです。
 
 IANA character-sets で "macintosh" で表現されるものです。
 
@@ -1144,8 +1129,7 @@ IANA character-sets で "macintosh" で表現されるものです。
 MacRoman エンコーディング。
 
 Mac OSで使われる
-8bit single-byte エンコーディングで、
-ルーマニア語のために使われます。
+8bit single-byte エンコーディングで、ルーマニア語のために使われます。
 
 - **SEE** <https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/ROMANIAN.TXT>
 
@@ -1164,8 +1148,7 @@ MacThai エンコーディング。
 MacTurkish エンコーディング。
 
 Mac OSで使われる
-8bit single-byte エンコーディングで、
-トルコ語のために使われます。
+8bit single-byte エンコーディングで、トルコ語のために使われます。
 
 - **SEE** <https://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/TURKISH.TXT>
 
@@ -1214,8 +1197,7 @@ UTF-8 にしかない文字を EUC-JP に変換しようとした場合などに
 # ~> Encoding::UndefinedConversionError: U+2603 from UTF-8 to EUC-JP
 ```
 
-変換が多段階でなされ、その途中で例外が生じた場合は、
-例外オブジェクトが保持するエラー情報はその中間のものになります。
+変換が多段階でなされ、その途中で例外が生じた場合は、例外オブジェクトが保持するエラー情報はその中間のものになります。
 
 ```ruby title="例"
 ec = Encoding::Converter.new("ISO-8859-1", "EUC-JP")
@@ -1265,8 +1247,7 @@ end
 エラーを発生させた変換の変換元のエンコーディングを [c:Encoding]
 オブジェクトで返します。
 
-変換が多段階になされる場合は元の文字列のものではない
-エンコーディングが返される場合があることに注意してください。
+変換が多段階になされる場合は元の文字列のものではないエンコーディングが返される場合があることに注意してください。
 
 - **SEE** [m:Encoding::UndefinedConversionError#destination_encoding]
 
@@ -1278,8 +1259,7 @@ end
 
 # class Encoding::InvalidByteSequenceError < EncodingError
 
-文字列がそのエンコーディングにおいて不正なバイト列である場合に発生
-する例外。
+文字列がそのエンコーディングにおいて不正なバイト列である場合に発生する例外。
 
 通常エンコーディング変換時に発生します。
 
@@ -1347,9 +1327,7 @@ end
 
 エラー発生時に入力文字列が不足している場合に真を返します。
 
-つまり、マルチバイト文字列の途中で文字列が終わっている場合に
-真を返します。これは後続の入力を追加することでエラーが
-解消する可能性があることを意味します。
+つまり、マルチバイト文字列の途中で文字列が終わっている場合に真を返します。これは後続の入力を追加することでエラーが解消する可能性があることを意味します。
 
 ```ruby title="例"
 ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
@@ -1373,8 +1351,7 @@ end
 
 # class Encoding::ConverterNotFoundError < EncodingError
 
-指定した名前のエンコーディング変換をする変換器が
-存在しない場合に発生する例外。
+指定した名前のエンコーディング変換をする変換器が存在しない場合に発生する例外。
 
 ```ruby title="例"
 "あ".encode("Foo")

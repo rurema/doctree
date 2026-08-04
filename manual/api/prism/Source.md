@@ -3,15 +3,11 @@ library: prism
 ---
 # class Prism::Source < Object
 
-解析対象のソースコード全体と各行の開始オフセットの表を保持し、
-バイトオフセットから行番号・桁位置への変換などを提供するクラスです。
+解析対象のソースコード全体と各行の開始オフセットの表を保持し、バイトオフセットから行番号・桁位置への変換などを提供するクラスです。
 [m:Prism::ParseResult#source] で得られます。
 
 #%since 3.4
-実際に得られるインスタンスは、ASCII のみのソース向けに最適化された
-サブクラス `Prism::ASCIISource` の場合があります。クラスの判定を
-する場合は `instance_of?` ではなく `is_a?(Prism::Source)` を使って
-ください。
+実際に得られるインスタンスは、ASCII のみのソース向けに最適化されたサブクラス `Prism::ASCIISource` の場合があります。クラスの判定をする場合は `instance_of?` ではなく `is_a?(Prism::Source)` を使ってください。
 
 #%end
 
@@ -40,8 +36,7 @@ byte_offset から length バイト分のソースコードを返します。
 
 ### def line(byte_offset) -> Integer
 
-byte_offset の位置がある行の行番号を返します。行番号は 1 から
-始まります。
+byte_offset の位置がある行の行番号を返します。行番号は 1 から始まります。
 
 - **param** `byte_offset` -- バイトオフセット
 
@@ -53,29 +48,25 @@ byte_offset の位置がある行の、行頭のバイトオフセットを返�
 
 ### def column(byte_offset) -> Integer
 
-byte_offset の位置の、行頭からのバイト単位の桁位置(0 origin)を
-返します。
+byte_offset の位置の、行頭からのバイト単位の桁位置(0 origin)を返します。
 
 - **param** `byte_offset` -- バイトオフセット
 
 ### def character_offset(byte_offset) -> Integer
 
-byte_offset に対応する、ソースコード先頭からの文字単位の
-オフセットを返します。
+byte_offset に対応する、ソースコード先頭からの文字単位のオフセットを返します。
 
 - **param** `byte_offset` -- バイトオフセット
 
 ### def character_column(byte_offset) -> Integer
 
-byte_offset の位置の、行頭からの文字単位の桁位置(0 origin)を
-返します。
+byte_offset の位置の、行頭からの文字単位の桁位置(0 origin)を返します。
 
 - **param** `byte_offset` -- バイトオフセット
 
 ### def offsets -> Array
 
-各行の開始バイトオフセットの配列を返します。末尾にはソースコード
-全体のバイト数が入ります。
+各行の開始バイトオフセットの配列を返します。末尾にはソースコード全体のバイト数が入ります。
 
 ### def start_line -> Integer
 
@@ -92,8 +83,7 @@ byte_offset の位置の、行頭からの文字単位の桁位置(0 origin)を
 
 ### def line_end(byte_offset) -> Integer
 
-byte_offset の位置がある行の終端のバイトオフセット(次の行の
-行頭と同じ位置)を返します。
+byte_offset の位置がある行の終端のバイトオフセット(次の行の行頭と同じ位置)を返します。
 
 - **param** `byte_offset` -- バイトオフセット
 
@@ -114,8 +104,7 @@ p source.line(9)           # => 2
 
 ### def code_units_offset(byte_offset, encoding) -> Integer
 
-byte_offset に対応する、指定エンコーディングのコード単位での
-オフセットを返します。UTF-16 のコード単位で位置をやりとりする
+byte_offset に対応する、指定エンコーディングのコード単位でのオフセットを返します。UTF-16 のコード単位で位置をやりとりする
 LSP(Language Server Protocol)などとの連携向けです。
 
 - **param** `byte_offset` -- バイトオフセット
@@ -123,8 +112,7 @@ LSP(Language Server Protocol)などとの連携向けです。
 
 ### def code_units_column(byte_offset, encoding) -> Integer
 
-byte_offset の位置の、行頭からの指定エンコーディングのコード単位
-での桁位置を返します。
+byte_offset の位置の、行頭からの指定エンコーディングのコード単位での桁位置を返します。
 
 - **param** `byte_offset` -- バイトオフセット
 - **param** `encoding` -- コード単位の基準となるエンコーディング

@@ -11,8 +11,7 @@ since: "1.9.1"
 
 Socket::UDPSource オブジェクトを生成します。
 
-このメソッドはユーザは直接使いません。[m:Socket.udp_server_loop] が
-内部で用います。
+このメソッドはユーザは直接使いません。[m:Socket.udp_server_loop] が内部で用います。
 
 - **param** `remote_addr` -- リモートのアドレス([c:Addrinfo] オブジェクト)
 - **param** `local_addr` -- ローカルのアドレス([c:Addrinfo] オブジェクト)

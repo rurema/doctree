@@ -64,8 +64,7 @@ f.content_at(1)
 
 - **param** `methods` -- 委譲するメソッドのリスト
 
-委譲元のオブジェクトで methods のそれぞれのメソッドが呼び出された場合に、
-委譲先のオブジェクトの同名のメソッドへ処理が委譲されるようになります。
+委譲元のオブジェクトで methods のそれぞれのメソッドが呼び出された場合に、委譲先のオブジェクトの同名のメソッドへ処理が委譲されるようになります。
 
 def_delegators は def_instance_delegators の別名になります。
 
@@ -92,8 +91,7 @@ def_delegator :@records, :map
 
 - **param** `ali` -- 委譲元のメソッド
 
-委譲元のオブジェクトで ali が呼び出された場合に、
-委譲先のオブジェクトの method へ処理が委譲されるようになります。
+委譲元のオブジェクトで ali が呼び出された場合に、委譲先のオブジェクトの method へ処理が委譲されるようになります。
 
 委譲元と委譲先のメソッド名が同じ場合は, ali を省略することが可能です。
 
@@ -191,8 +189,7 @@ p Facade.service # => serviced!
 ```
 
 もし [c:Forwardable] と [c:SingleForwardable] の両方を使いたい場合、
-def_instance_delegator と def_single_delegator メソッドの方を呼び出して
-ください。
+def_instance_delegator と def_single_delegator メソッドの方を呼び出してください。
 
 ## Instance Methods
 
@@ -205,8 +202,7 @@ def_instance_delegator と def_single_delegator メソッドの方を呼び出�
 
 - **param** `methods` -- 委譲するメソッドのリスト
 
-委譲元のオブジェクトで methods のそれぞれのメソッドが呼び出された場合に、
-委譲先のオブジェクトの同名のメソッドへ処理が委譲されるようになります。
+委譲元のオブジェクトで methods のそれぞれのメソッドが呼び出された場合に、委譲先のオブジェクトの同名のメソッドへ処理が委譲されるようになります。
 
 def_delegators は def_singleton_delegators の別名になります。
 
@@ -233,8 +229,7 @@ def_delegator :@records, :map
 
 - **param** `ali` -- 委譲元のメソッド
 
-委譲元のオブジェクトで ali が呼び出された場合に、
-委譲先のオブジェクトの method へ処理が委譲されるようになります。
+委譲元のオブジェクトで ali が呼び出された場合に、委譲先のオブジェクトの method へ処理が委譲されるようになります。
 
 委譲元と委譲先のメソッド名が同じ場合は, ali を省略することが可能です。
 

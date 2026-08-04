@@ -77,20 +77,17 @@ obj が shareable でない場合、obj と obj が参照する shareable でな
 #%until 4.0
 ### def Ractor.receive_if {|msg| ... } -> object
 
-このメソッドを呼び出した Ractor が受信したメッセージのうち、
-ブロックの評価結果が真になる最初のメッセージを受信して返します。
+このメソッドを呼び出した Ractor が受信したメッセージのうち、ブロックの評価結果が真になる最初のメッセージを受信して返します。
 #%end
 
 #%since 4.0
 ### def Ractor.select(*ports) -> [object, object]
 
-引数で指定した Ractor または [c:Ractor::Port] のいずれかが受信可能になるまで待ち、
-受信可能になったものと受信した値の配列を返します。
+引数で指定した Ractor または [c:Ractor::Port] のいずれかが受信可能になるまで待ち、受信可能になったものと受信した値の配列を返します。
 #%else
 ### def Ractor.select(*ractors, yield_value: nil, move: false) -> [object, object]
 
-引数で指定した Ractor のいずれかが [m:Ractor.yield] などで送信可能になるまで待ち、
-その Ractor と受信したオブジェクトの配列 [Ractor, obj] を返します。
+引数で指定した Ractor のいずれかが [m:Ractor.yield] などで送信可能になるまで待ち、その Ractor と受信したオブジェクトの配列 [Ractor, obj] を返します。
 受信したのが現在の Ractor 自身であった場合は、Ractor の代わりに :receive シンボルが返ります。
 yield_value を指定すると、他の Ractor が [m:Ractor#take] を呼んだときにその値が yield され、
 [:yield, nil] が返ります。move が真のとき yield_value は移動されます。
@@ -108,8 +105,7 @@ obj が shareable である場合、true を返します。
 与えられたブロックから shareable な [c:Proc] を作成して返します。
 
 通常の [c:Proc] は shareable ではないため、他の Ractor に渡せません。
-このメソッドで作成した [c:Proc] は shareable になるため、複数の Ractor から
-利用できます。
+このメソッドで作成した [c:Proc] は shareable になるため、複数の Ractor から利用できます。
 
 ```ruby
 pr = Ractor.shareable_proc { 42 }
@@ -140,8 +136,7 @@ p l.lambda?            # => true
 #%since 3.4
 ### def Ractor.store_if_absent(key) { ... } -> object
 
-このメソッドを呼び出した Ractor の Ractor-local storage の key データがない場合、
-ブロックを評価した結果を格納します。
+このメソッドを呼び出した Ractor の Ractor-local storage の key データがない場合、ブロックを評価した結果を格納します。
 格納した値を返します。
 
 - **param** `key` -- Ractor-local storage のキーを指定します。

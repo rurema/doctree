@@ -9,16 +9,12 @@ C の関数を表すクラスです。
 ## Class Methods
 ### def Fiddle::Function.new(ptr, args, ret_type, abi=Fiddle::Function::DEFAULT, name: nil) -> Fiddle::Function
 
-ptr (関数ポインタ)から Fiddle::Function オブジェクトを
-生成します。
+ptr (関数ポインタ)から Fiddle::Function オブジェクトを生成します。
 
-ptr には [c:Fiddle::Handle] から [m:Fiddle::Handle#sym] などで取りだした
-関数ポインタ(を表す整数)、もしくは関数を指している
+ptr には [c:Fiddle::Handle] から [m:Fiddle::Handle#sym] などで取りだした関数ポインタ(を表す整数)、もしくは関数を指している
 [c:Fiddle::Pointer] を渡します。
 
-args、ret_type で関数の引数と返り値の型を指定します。これには以下の
-定数が利用できます。「-TYPE_INT」 のように符号を反転させると unsigned を
-意味します。
+args、ret_type で関数の引数と返り値の型を指定します。これには以下の定数が利用できます。「-TYPE_INT」 のように符号を反転させると unsigned を意味します。
   - [m:Fiddle::TYPE_VOID]
   - [m:Fiddle::TYPE_VOIDP]
   - [m:Fiddle::TYPE_CHAR]
@@ -63,8 +59,7 @@ p func.name # => "strlen"
 関数を呼び出します。
 
 [m:Fiddle::Function.new] で指定した引数と返り値の型に基いて
-Ruby のオブジェクトを適切に C のデータに変換して C の関数を呼び出し、
-その返り値を Ruby のオブジェクトに変換して返します。
+Ruby のオブジェクトを適切に C のデータに変換して C の関数を呼び出し、その返り値を Ruby のオブジェクトに変換して返します。
 
 #%include(callargs)
 
@@ -120,8 +115,7 @@ Ruby のメソッド(call)を C の関数ポインタとして表現するため
 
 FFI の closure の wrapper です。
 
-利用法としては、このクラスのサブクラスを作って
-そのサブクラスに call メソッドを定義し、
+利用法としては、このクラスのサブクラスを作ってそのサブクラスに call メソッドを定義し、
 new でオブジェクトを生成することで利用します。
   
 ```ruby
@@ -147,8 +141,7 @@ qs.call(s, s.size, 1, Compare.new(TYPE_INT, [TYPE_VOIDP, TYPE_VOIDP]))
 p s # =>  "()07Uabcqx"
 ```
 
-[m:Class.new] を使うことで、サブクラスを明示的に作ることなしに
-コールバックオブジェクトを作ることができます。
+[m:Class.new] を使うことで、サブクラスを明示的に作ることなしにコールバックオブジェクトを作ることができます。
 
 ```ruby
 require 'fiddle'
@@ -170,8 +163,7 @@ compare = Class.new(Fiddle::Closure){
 Fiddle::Closure オブジェクトを返します。
 
 args、ret で関数の引数と返り値の型を指定します。
-指定は [m:Fiddle::Function.new] と同様なので、そちら
-を参照してください。
+指定は [m:Fiddle::Function.new] と同様なので、そちらを参照してください。
 
 - **param** `ret` -- 返り値の型
 - **param** `args` -- 引数の型を表す配列
@@ -222,8 +214,7 @@ p s # =>  "()07Uabcqx"
 Ruby のブロックを呼び出す Fiddle::Closure オブジェクトを返します。
 
 args、ret で関数の引数と返り値の型を指定します。
-指定は [m:Fiddle::Function.new] と同様なので、そちら
-を参照してください。
+指定は [m:Fiddle::Function.new] と同様なので、そちらを参照してください。
 
 - **param** `ret` -- 返り値の型
 - **param** `args` -- 引数の型を表す配列

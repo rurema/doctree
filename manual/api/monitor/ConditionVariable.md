@@ -3,8 +3,7 @@ library: monitor
 ---
 # class MonitorMixin::ConditionVariable < Object
 
-[c:MonitorMixin] と [c:Monitor] のための
-条件変数クラスです。
+[c:MonitorMixin] と [c:Monitor] のための条件変数クラスです。
 [m:MonitorMixin#new_cond] が返します。ユーザが
 MonitorMixin::ConditionVariable.new を直接呼ぶことはありません。
 
@@ -12,8 +11,7 @@ MonitorMixin::ConditionVariable.new を直接呼ぶことはありません。
 
 ### def broadcast -> ()
 
-その条件変数で
-待っている全てのスレッドの実行を再開します。
+その条件変数で待っている全てのスレッドの実行を再開します。
 
 - **SEE** [m:MonitorMixin::ConditionVariable#signal]
 
@@ -21,8 +19,7 @@ MonitorMixin::ConditionVariable.new を直接呼ぶことはありません。
 
 その条件変数で待っているスレッドがあれば実行を再開させます。
 
-複数のスレッドが待っている場合には1つのスレッドのみ
-実行を再開します。
+複数のスレッドが待っている場合には1つのスレッドのみ実行を再開します。
 
 - **SEE** [m:MonitorMixin::ConditionVariable#broadcast]
 
@@ -36,15 +33,12 @@ MonitorMixin::ConditionVariable.new を直接呼ぶことはありません。
 [m:MonitorMixin::ConditionVariable#broadcast]
 で起こされるまでスレッドは停止し続けます。
 
-timeout を与えた場合は最大 timeout 秒まで停止した後にスレッドを
-再開します。
+timeout を与えた場合は最大 timeout 秒まで停止した後にスレッドを再開します。
 
 実行を再開したスレッドはモニタのロックを保持した状態になります。
-これによって危険領域(critical section)上で動作している
-スレッドはただ一つになり、排他を実現します。
+これによって危険領域(critical section)上で動作しているスレッドはただ一つになり、排他を実現します。
 
-true を返します。timeout が与えられていて待ち時間が timeout を
-越えた場合は false を返します。
+true を返します。timeout が与えられていて待ち時間が timeout を越えた場合は false を返します。
 
 - **param** `timeout` -- タイムアウトまでの秒数。指定しなかった場合はタイムアウトしません。
 
@@ -54,28 +48,20 @@ true を返します。timeout が与えられていて待ち時間が timeout �
 
 ### def wait_while { ... } -> ()
 
-モニタのロックを開放し、現在のスレッドを
-ブロックで指定した条件を満たしている間停止します。
+モニタのロックを開放し、現在のスレッドをブロックで指定した条件を満たしている間停止します。
 
 [m:MonitorMixin::ConditionVariable#signal] や
-[m:MonitorMixin::ConditionVariable#broadcast] で
-スレッドが起こされると、ロックを取得し、ブロックを評価し
-その結果によってこのメソッドから抜け処理を継続するか
-再びロックを開放しスレッドを停止するかを決めます。
+[m:MonitorMixin::ConditionVariable#broadcast] でスレッドが起こされると、ロックを取得し、ブロックを評価しその結果によってこのメソッドから抜け処理を継続するか再びロックを開放しスレッドを停止するかを決めます。
 
 - **raise** `ThreadError` -- ロックを持っていないスレッドがこのメソッドを呼びだした場合に発生します
 - **SEE** [m:MonitorMixin::ConditionVariable#wait]
 
 ### def wait_until { ... } -> ()
 
-モニタのロックを開放し、現在のスレッドを
-ブロックで指定した条件を満たすまで停止します。
+モニタのロックを開放し、現在のスレッドをブロックで指定した条件を満たすまで停止します。
 
 [m:MonitorMixin::ConditionVariable#signal] や
-[m:MonitorMixin::ConditionVariable#broadcast] で
-スレッドが起こされると、ロックを取得し、ブロックを評価し
-その結果によってこのメソッドから抜け処理を継続するか
-再びロックを開放しスレッドを停止するかを決めます。
+[m:MonitorMixin::ConditionVariable#broadcast] でスレッドが起こされると、ロックを取得し、ブロックを評価しその結果によってこのメソッドから抜け処理を継続するか再びロックを開放しスレッドを停止するかを決めます。
 
 - **SEE** [m:MonitorMixin::ConditionVariable#wait]
 

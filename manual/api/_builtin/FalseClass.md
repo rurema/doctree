@@ -5,8 +5,7 @@ library: _builtin
 
 false のクラス。
 false は FalseClass クラスの唯一のインスタンスです。
-false は nil オブジェクトとともに偽を表し、
-その他の全てのオブジェクトは真です。
+false は nil オブジェクトとともに偽を表し、その他の全てのオブジェクトは真です。
 
 ## Instance Methods
 

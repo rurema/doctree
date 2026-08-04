@@ -346,8 +346,7 @@ puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
 
 ### def space_before -> String
 
-JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
-前に挿入する文字列を返します。
+JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の前に挿入する文字列を返します。
 
 ```ruby title="例"
 require "json"
@@ -365,8 +364,7 @@ puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
 
 ### def space_before=(string)
 
-JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
-前に挿入する文字列をセットします。
+JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の前に挿入する文字列をセットします。
 
 - **param** `string` -- JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
               前に挿入する文字列をセットします。
@@ -430,16 +428,14 @@ ASCII 文字列のみを用いて JSON 形式の文字列を生成する場合�
 
 ### def buffer_initial_length=(length)
 
-バッファの初期の長さを length にセットします。length が 0 より大きい場合のみ値がセットされ、
-それ以外の場合は値は変更されません。
+バッファの初期の長さを length にセットします。length が 0 より大きい場合のみ値がセットされ、それ以外の場合は値は変更されません。
 
 ### def [](name) -> object
 
 name という名前のメソッドを呼び出し、その戻り値を返します。
 
 #%since 4.0
-このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除される
-予定で、代わりの手段として JSON::Coder が挙げられています。
+このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除される予定で、代わりの手段として JSON::Coder が挙げられています。
 #%end
 
 ### def []=(name, value)
@@ -447,8 +443,7 @@ name という名前のメソッドを呼び出し、その戻り値を返しま
 属性 name に value をセットします。
 
 #%since 4.0
-このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除される
-予定で、代わりの手段として JSON::Coder が挙げられています。
+このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除される予定で、代わりの手段として JSON::Coder が挙げられています。
 #%end
 
 ### def generate(obj) -> String

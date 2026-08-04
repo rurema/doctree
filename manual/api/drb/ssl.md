@@ -17,8 +17,7 @@ DRb::DRbServer.new( 'drbssl://localhost:10000',
 
 サーバを起動するときは以下のオプションが追加で利用できます。
 詳しくは、対応するメソッドや
-[c:OpenSSL::SSL::SSLContext] クラス自体のドキュメント、
-その他 [lib:openssl] の各種ドキュメントを参照してください。
+[c:OpenSSL::SSL::SSLContext] クラス自体のドキュメント、その他 [lib:openssl] の各種ドキュメントを参照してください。
 
 - **`:SSLCertificate`**:
   サーバが自分自身を証明するための証明書を指定します。
@@ -81,8 +80,7 @@ DRb::DRbServer.new( 'drbssl://localhost:10000',
 オプションで :SSLCertificate と :SSLPrivateKey のペアを指定しなかった場合は
 [lib:openssl] を用いて鍵対と自己署名証明書を生成し、それが利用されます。
 
-安全性が必要なく、暗号通信できれば十分であるような
-場合には :SSLCertificate と :SSLPrivateKey を省略し、:SSLVerifyMode は
+安全性が必要なく、暗号通信できれば十分であるような場合には :SSLCertificate と :SSLPrivateKey を省略し、:SSLVerifyMode は
 OpenSSL::SSL::VERIFY_NONE を指定しておけば十分でしょう。
 
 高水準の安全性が必要な場合は drb 以外の選択肢を検討してください。

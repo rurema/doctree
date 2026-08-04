@@ -54,16 +54,14 @@ TOPDIR
 
 設定値を格納したハッシュです。
 
-格納されている要素のキーと値は Ruby のバージョンや使用しているプラット
-フォームによって変わります。
+格納されている要素のキーと値は Ruby のバージョンや使用しているプラットフォームによって変わります。
 
 - **SEE** [man:autoconf(1)], [man:make(1)]
 
 ### const MAKEFILE_CONFIG -> Hash
 
 [m:RbConfig::CONFIG]
-と同じですが、その値は以下のような形
-で他の変数への参照を含みます。
+と同じですが、その値は以下のような形で他の変数への参照を含みます。
 
 ```text
 MAKEFILE_CONFIG["bindir"] = "$(exec_prefix)/bin"
@@ -87,8 +85,7 @@ END_OF_MAKEFILE
 ```
 
 [m:RbConfig.expand]
-は、このような参照を解決する
-メソッドとして rbconfig 内部で利用されています。
+は、このような参照を解決するメソッドとして rbconfig 内部で利用されています。
 (CONFIG 変数は、MAKEFILE_CONFIG の内容から
 [m:RbConfig.expand]
 を使って生成されています)

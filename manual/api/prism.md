@@ -6,22 +6,16 @@ category: Text
 Ruby プログラムを解析するための、エラー耐性のあるパーサライブラリです。
 
 prism は Ruby 3.3 で default gem として導入され、Ruby 3.4 以降は
-CRuby 本体が Ruby プログラムをコンパイルする際に使われるデフォルトの
-パーサの実装になっています(3.3 の時点では `ruby --parser=prism`
+CRuby 本体が Ruby プログラムをコンパイルする際に使われるデフォルトのパーサの実装になっています(3.3 の時点では `ruby --parser=prism`
 オプションで試験的に切り替えられる位置づけでした)。
 
-設計上の目標として、構文エラーがあっても可能な限り解析を継続する
-「エラー耐性(error tolerant)」を重視しており、エディタや IDE、linter
-といった、エラーを含む可能性があるコードも解析する必要があるツールから
-利用しやすくなっています。また C99 で実装された移植性の高いライブラリ
-(libprism)でもあり、CRuby 以外の Ruby 処理系やツール、他言語の
-バインディングからも利用できます。
+設計上の目標として、構文エラーがあっても可能な限り解析を継続する「エラー耐性(error tolerant)」を重視しており、エディタや IDE、linter
+といった、エラーを含む可能性があるコードも解析する必要があるツールから利用しやすくなっています。また C99 で実装された移植性の高いライブラリ
+(libprism)でもあり、CRuby 以外の Ruby 処理系やツール、他言語のバインディングからも利用できます。
 
 構文解析の結果得られる構文木の各ノードは [c:Prism::Node] のサブクラス
 (150 種類以上)として表現されます。すべてのノードに共通する API は
-[c:Prism::Node] で扱いますが、個々のノードクラスの詳細はこの
-リファレンスでは扱いません。ノードクラスも含めた完全な API については
-公式ドキュメントを参照してください。
+[c:Prism::Node] で扱いますが、個々のノードクラスの詳細はこのリファレンスでは扱いません。ノードクラスも含めた完全な API については公式ドキュメントを参照してください。
 
 - プロジェクトページ: <https://github.com/ruby/prism>
 - リファレンス(YARD): <https://www.rubydoc.info/gems/prism>
@@ -38,13 +32,11 @@ p result.success?       # => true
 
 # module Prism
 
-Ruby プログラムの構文解析・字句解析を行うためのモジュール関数を
-提供するモジュールです。文字列を直接解析する [m:Prism?.parse] や
+Ruby プログラムの構文解析・字句解析を行うためのモジュール関数を提供するモジュールです。文字列を直接解析する [m:Prism?.parse] や
 [m:Prism?.lex] の他、ファイルを指定して解析する [m:Prism?.parse_file]
 などが用意されています。
 
-解析結果は多くの場合 [c:Prism::ParseResult] のインスタンスとして
-返されます。詳細は [c:Prism::ParseResult] を参照してください。
+解析結果は多くの場合 [c:Prism::ParseResult] のインスタンスとして返されます。詳細は [c:Prism::ParseResult] を参照してください。
 
 ## Module Functions
 
@@ -53,9 +45,7 @@ Ruby プログラムの構文解析・字句解析を行うためのモジュー
 Ruby プログラムのソースコード文字列 `source` を構文解析し、結果を
 [c:Prism::ParseResult] として返します。
 
-prism はエラー耐性のあるパーサなので、構文エラーがあっても可能な限り
-解析を継続し、部分的な構文木を [m:Prism::ParseResult#value] に格納
-します。エラーの有無は [m:Prism::ParseResult#success?] や
+prism はエラー耐性のあるパーサなので、構文エラーがあっても可能な限り解析を継続し、部分的な構文木を [m:Prism::ParseResult#value] に格納します。エラーの有無は [m:Prism::ParseResult#success?] や
 [m:Prism::ParseResult#errors] で確認できます。
 
 - **param** `source` -- 解析する Ruby プログラムの文字列を指定します。
@@ -78,9 +68,7 @@ prism はエラー耐性のあるパーサなので、構文エラーがあっ�
   省略時は最新の構文として解析します。
 
 上記以外にも `:command_line`, `:frozen_string_literal`, `:main_script`,
-`:partial_script` などのオプションがあります。利用可能なオプションの
-完全な一覧は prism のバージョンによって多少異なるため、公式ドキュメント
-を参照してください。
+`:partial_script` などのオプションがあります。利用可能なオプションの完全な一覧は prism のバージョンによって多少異なるため、公式ドキュメントを参照してください。
 
 ```ruby title="例"
 require "prism"
@@ -134,12 +122,10 @@ p result.success?      # => true
 #%since 3.4
 `source` を字句解析し、[c:Prism::LexResult] のインスタンスを返します。
 #%else
-`source` を字句解析します。Ruby 3.3 の prism には字句解析専用の
-結果クラスがないため、戻り値は [c:Prism::ParseResult] のインスタンスです。
+`source` を字句解析します。Ruby 3.3 の prism には字句解析専用の結果クラスがないため、戻り値は [c:Prism::ParseResult] のインスタンスです。
 #%end
 `value` は `[トークン, 直前からの字句解析器の状態(Integer)]` という
-2 要素配列の配列です。これは [c:Ripper] の [m:Ripper.lex] の戻り値の
-形式に近いものになっています。オプションは [m:Prism?.parse] と同じです。
+2 要素配列の配列です。これは [c:Ripper] の [m:Ripper.lex] の戻り値の形式に近いものになっています。オプションは [m:Prism?.parse] と同じです。
 
 - **param** `source` -- 解析する Ruby プログラムの文字列を指定します。
 
@@ -240,8 +226,7 @@ p tokens.size  # => 4
 ### module_function def parse_lex_file(filepath, **options) -> Prism::ParseResult
 #%end
 
-`filepath` で指定したファイルに対して構文解析と字句解析の両方を
-行います。戻り値の形式は [m:Prism?.parse_lex] と同じです。
+`filepath` で指定したファイルに対して構文解析と字句解析の両方を行います。戻り値の形式は [m:Prism?.parse_lex] と同じです。
 オプションは [m:Prism?.parse] と同じです。
 
 - **param** `filepath` -- 解析する Ruby プログラムのファイルパスを指定します。
@@ -264,9 +249,7 @@ p tokens.map { |token, _state| token.type }
 ### module_function def parse_success?(source, **options) -> bool
 
 `source` を構文解析し、エラーなく解析できた場合に true を返します。
-[m:Prism?.parse] を呼び出して [`.success?`](m:Prism::ParseResult#success?) を確認するのとほぼ同じ
-結果になりますが、構文木を Ruby オブジェクトとして構築しないぶん
-高速です。オプションは [m:Prism?.parse] と同じです。
+[m:Prism?.parse] を呼び出して [`.success?`](m:Prism::ParseResult#success?) を確認するのとほぼ同じ結果になりますが、構文木を Ruby オブジェクトとして構築しないぶん高速です。オプションは [m:Prism?.parse] と同じです。
 
 - **param** `source` -- 解析する Ruby プログラムの文字列を指定します。
 
@@ -283,8 +266,7 @@ p Prism.parse_success?("1 +")   # => false
 
 ### module_function def parse_failure?(source, **options) -> bool
 
-[m:Prism?.parse_success?] の否定です。`source` の構文解析に
-エラーがあった場合に true を返します。オプションは [m:Prism?.parse]
+[m:Prism?.parse_success?] の否定です。`source` の構文解析にエラーがあった場合に true を返します。オプションは [m:Prism?.parse]
 と同じです。
 
 - **param** `source` -- 解析する Ruby プログラムの文字列を指定します。
@@ -302,11 +284,7 @@ p Prism.parse_failure?("1 +")   # => true
 
 ### module_function def dump(source, **options) -> String
 
-`source` を構文解析した結果を prism 独自のバイナリ形式に
-シリアライズし、その文字列を返します。この形式は主に、CRuby の
-拡張ライブラリを経由せずに、他言語(JavaScript、Rust、Java など)の
-実装から prism の構文木を読み込むために使われます。エンコーディングは
-常に ASCII-8BIT (BINARY) になります。オプションは [m:Prism?.parse]
+`source` を構文解析した結果を prism 独自のバイナリ形式にシリアライズし、その文字列を返します。この形式は主に、CRuby の拡張ライブラリを経由せずに、他言語(JavaScript、Rust、Java など)の実装から prism の構文木を読み込むために使われます。エンコーディングは常に ASCII-8BIT (BINARY) になります。オプションは [m:Prism?.parse]
 と同じです。
 
 - **param** `source` -- 解析する Ruby プログラムの文字列を指定します。
@@ -323,8 +301,7 @@ p dumped.encoding  # => #<Encoding:BINARY (ASCII-8BIT)>
 
 ### module_function def dump_file(filepath, **options) -> String
 
-`filepath` で指定したファイルを構文解析し、[m:Prism?.dump] と
-同様にシリアライズした文字列を返します。オプションは [m:Prism?.parse]
+`filepath` で指定したファイルを構文解析し、[m:Prism?.dump] と同様にシリアライズした文字列を返します。オプションは [m:Prism?.parse]
 と同じです。
 
 - **param** `filepath` -- 解析する Ruby プログラムのファイルパスを指定します。
@@ -343,10 +320,7 @@ p Prism.dump_file("sample.rb").class # => String
 
 ### module_function def parse_comments(source, **options) -> Array
 
-`source` を構文解析し、見つかったコメントを表すオブジェクトの
-配列を返します。配列の要素は `Prism::InlineComment`(`# ...` 形式の
-コメント)または `Prism::EmbDocComment`(`=begin`/`=end` 形式の
-コメント)のインスタンスです。オプションは [m:Prism?.parse] と同じです。
+`source` を構文解析し、見つかったコメントを表すオブジェクトの配列を返します。配列の要素は `Prism::InlineComment`(`# ...` 形式のコメント)または `Prism::EmbDocComment`(`=begin`/`=end` 形式のコメント)のインスタンスです。オプションは [m:Prism?.parse] と同じです。
 
 - **param** `source` -- 解析する Ruby プログラムの文字列を指定します。
 

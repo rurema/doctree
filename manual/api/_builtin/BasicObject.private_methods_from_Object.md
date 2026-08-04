@@ -25,8 +25,7 @@ end
 
 ### def singleton_method_removed(name) -> object
 
-特異メソッドが [m:Module#remove_method] に
-より削除された時にインタプリタから呼び出されます。
+特異メソッドが [m:Module#remove_method] により削除された時にインタプリタから呼び出されます。
 
 通常のメソッドの削除に対するフックには
 [m:Module#method_removed]を使います。

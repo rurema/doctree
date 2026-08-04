@@ -4,8 +4,7 @@ since: "2.0.0"
 ---
 # class TracePoint < Object
 
-[m:Kernel?.set_trace_func] と同様の機能をオブジェクト指向的な API で
-提供するクラスです。
+[m:Kernel?.set_trace_func] と同様の機能をオブジェクト指向的な API で提供するクラスです。
 
 ```ruby title="例:例外に関する情報を収集する"
 trace = TracePoint.new(:raise) do |tp|
@@ -20,12 +19,9 @@ p trace.enable
 # => [5, :raise, #<ZeroDivisionError: divided by 0>]
 ```
 
-[m:TracePoint.new] または、[m:TracePoint.trace] で指定したブロック
-は、メソッドの引数(上記の例では :raise)に対応するイベントが発生した時に
-呼び出されます。
+[m:TracePoint.new] または、[m:TracePoint.trace] で指定したブロックは、メソッドの引数(上記の例では :raise)に対応するイベントが発生した時に呼び出されます。
 
-発生するイベントの詳細については、[m:TracePoint.new] を参照してくださ
-い。
+発生するイベントの詳細については、[m:TracePoint.new] を参照してください。
 
 ### 参考
 
@@ -37,8 +33,7 @@ p trace.enable
 
 ### def TracePoint.new(*events) {|obj| ... } -> TracePoint
 
-新しい [c:TracePoint] オブジェクトを作成して返します。トレースを有効
-にするには [m:TracePoint#enable] を実行してください。
+新しい [c:TracePoint] オブジェクトを作成して返します。トレースを有効にするには [m:TracePoint#enable] を実行してください。
 
 ```ruby title="例:irb で実行した場合"
 trace = TracePoint.new(:call) do |tp|
@@ -129,8 +124,7 @@ TracePoint.trace(:line) do |tp|
 end # ~> RuntimeError: not supported by this event
 ```
 
-イベントフックの外側で、発生したイベントに関連する情報を取得するメソッ
-ドを実行した場合には [c:RuntimeError] が発生します。
+イベントフックの外側で、発生したイベントに関連する情報を取得するメソッドを実行した場合には [c:RuntimeError] が発生します。
 
 ```ruby title="例"
 TracePoint.trace(:line) do |tp|
@@ -145,8 +139,7 @@ $tp.lineno # => access from outside (RuntimeError)
 
 ### def TracePoint.trace(*events) {|obj| ... } -> TracePoint
 
-新しい [c:TracePoint] オブジェクトを作成して自動的にトレースを開始し
-ます。[m:TracePoint.new] のコンビニエンスメソッドです。
+新しい [c:TracePoint] オブジェクトを作成して自動的にトレースを開始します。[m:TracePoint.new] のコンビニエンスメソッドです。
 
 - **param** `events` -- トレースするイベントを [c:String] か [c:Symbol] で任
               意の数指定します。指定できる値については
@@ -175,14 +168,10 @@ TracePoint の内部情報を返します。
 
 ブロックの中に限って、TracePoint の再入を許可します。
 
-通常、ある TracePoint のコールバックを実行している間は、他に登録された
-コールバックは呼ばれません。再入によって混乱が生じるのを避けるためです。
+通常、ある TracePoint のコールバックを実行している間は、他に登録されたコールバックは呼ばれません。再入によって混乱が生じるのを避けるためです。
 このメソッドを使うと、ブロックの中でだけ他のコールバックが呼ばれるようになります。
 
-デバッガのように、自身がコールバックの中にいることで他のライブラリのフックを
-妨げてはいけない場合に使います。ただしコールバックが際限なく呼ばれることが
-あるため、使用には注意が必要です。特に、あるコールバックの中でそれ自身を
-呼び出すイベントを発生させると無限に再帰します。
+デバッガのように、自身がコールバックの中にいることで他のライブラリのフックを妨げてはいけない場合に使います。ただしコールバックが際限なく呼ばれることがあるため、使用には注意が必要です。特に、あるコールバックの中でそれ自身を呼び出すイベントを発生させると無限に再帰します。
 
 - **return** -- ブロックの評価結果を返します。
 
@@ -228,8 +217,7 @@ inner.disable
 
 self のトレースを有効にします。
 
-実行前の [m:TracePoint#enabled?] を返します。(トレースが既に有効であっ
-た場合は true を返します。そうでなければ false を返します)
+実行前の [m:TracePoint#enabled?] を返します。(トレースが既に有効であった場合は true を返します。そうでなければ false を返します)
 
 ```ruby title="例"
 p trace.enabled?  # => false
@@ -270,8 +258,7 @@ trace.enable { p trace.lineno } # ~> RuntimeError: access from outside
 
 self のトレースを無効にします。
 
-実行前の [m:TracePoint#enabled?] を返します。(トレースが既に有効であっ
-た場合は true を返します。そうでなければ false を返します)
+実行前の [m:TracePoint#enabled?] を返します。(トレースが既に有効であった場合は true を返します。そうでなければ false を返します)
 
 ```ruby title="例"
 p trace.enabled? # => true
@@ -304,8 +291,7 @@ trace.enable { p trace.lineno } # ~> RuntimeError: access from outside
 
 ### def enabled? -> bool
 
-self のトレースが有効な場合に true を、そうでない場合に false を返しま
-す。
+self のトレースが有効な場合に true を、そうでない場合に false を返します。
 
 #%#noexample TracePoint#enable, TracePoint#disable  の例を参照
 
@@ -334,8 +320,7 @@ foo 1
 
 発生したイベントの種類を [c:Symbol] で返します。
 
-発生するイベントの詳細については、[m:TracePoint.new] を参照してくださ
-い。
+発生するイベントの詳細については、[m:TracePoint.new] を参照してください。
 
 - **raise** `RuntimeError` -- イベントフックの外側で実行した場合に発生します。
 
@@ -449,8 +434,7 @@ end.enable do
 end
 ```
 
-メソッドがモジュールで定義されていた場合も(include に関係なく)モジュー
-ルを返します。
+メソッドがモジュールで定義されていた場合も(include に関係なく)モジュールを返します。
 
 ```ruby title="例"
 module M; def foo; end; end
@@ -462,9 +446,7 @@ end.enable do
 end
 ```
 
-[注意] 特異メソッドを実行した場合は TracePoint#defined_class は特異クラ
-スを返します。また、[m:Kernel?.set_trace_func] の 6 番目のブロックパ
-ラメータは特異クラスではなく元のクラスを返します。
+[注意] 特異メソッドを実行した場合は TracePoint#defined_class は特異クラスを返します。また、[m:Kernel?.set_trace_func] の 6 番目のブロックパラメータは特異クラスではなく元のクラスを返します。
 
 ```ruby title="例"
 class C; def self.foo; end; end
@@ -475,8 +457,7 @@ end.enable do
 end
 ```
 
-[m:Kernel?.set_trace_func] と [c:TracePoint] の上記の差分に注意して
-ください。
+[m:Kernel?.set_trace_func] と [c:TracePoint] の上記の差分に注意してください。
 
 - **SEE** [ruby-core:50864]
 

@@ -85,15 +85,13 @@ Ripper.tokenize("def req(true) end", raise_errors: true)
 #%end
 ```
 
-Ripper.tokenize は空白やコメントも含め、
-元の文字列にある文字は 1 バイトも残さずに分割します。
+Ripper.tokenize は空白やコメントも含め、元の文字列にある文字は 1 バイトも残さずに分割します。
 ただし、ごく僅かな例外として、`__END__` 以降の文字列は黙って捨てられます。
 これは現在のところ仕様と考えてください。
 
 ### def Ripper.slice(src, pattern, n = 0) -> String | nil
 
-Ruby プログラム src のうち、
-パターン pattern の n 番目の括弧にマッチする文字列を取り出します。
+Ruby プログラム src のうち、パターン pattern の n 番目の括弧にマッチする文字列を取り出します。
 
 マッチしない場合は nil を返します。
 
@@ -106,8 +104,7 @@ Ruby プログラム src のうち、
 
 pattern は Ripper のイベント ID のリストを文字列で記述します。
 また pattern には Ruby の正規表現と同じメタ文字も使えます。
-ただし「.」は任意のトークン 1 つにマッチし、
-その他のメタ文字もすべて文字単位ではなくトークン単位で動作します。
+ただし「.」は任意のトークン 1 つにマッチし、その他のメタ文字もすべて文字単位ではなくトークン単位で動作します。
 
 ```ruby title="使用例"
 require 'ripper'
@@ -120,8 +117,7 @@ p Ripper.slice(%(<<HERE\nstring\#{nil}\nHERE),
 
 ### def Ripper.token_match(src, pattern) -> Ripper::TokenPattern::MatchData | nil
 
-Ruby プログラム src に対してパターン pattern をマッチし、
-マッチデータを返します。
+Ruby プログラム src に対してパターン pattern をマッチし、マッチデータを返します。
 
 ライブラリ内部で使用します。
 
@@ -145,7 +141,6 @@ Ruby プログラムの字句解析器です。
 
 ### def parse -> [[Integer, Integer], Symbol, String, Ripper::Lexer::State]
 
-自身の持つ Ruby プログラムをトークンに分割し、そのリストを返します。た
-だし [m:Ripper::Lexer#lex] と違い、結果をソートしません。
+自身の持つ Ruby プログラムをトークンに分割し、そのリストを返します。ただし [m:Ripper::Lexer#lex] と違い、結果をソートしません。
 
 ライブラリ内部で使用します。

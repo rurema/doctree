@@ -82,8 +82,7 @@ listen している [c:TCPServer] オブジェクトの配列を返します。
 
 ### def logger    -> WEBrick::Log
 
-生成する時に指定された、自身をロギングする [c:WEBrick::Log] のインス
-タンスを返します。
+生成する時に指定された、自身をロギングする [c:WEBrick::Log] のインスタンスを返します。
 
 ### def shutdown     -> ()
 
@@ -94,8 +93,7 @@ listen している [c:TCPServer] オブジェクトの配列を返します。
 
 サーバをスタートします。
 
-ブロックが与えられた場合 [m:WEBrick::GenericServer#run] メソッドの
-代わりにブロックが実際のクライアントとの応答を担います。
+ブロックが与えられた場合 [m:WEBrick::GenericServer#run] メソッドの代わりにブロックが実際のクライアントとの応答を担います。
 ブロックは [c:TCPSocket] オブジェクトを引数として呼ばれます。
 
 ### def status    -> Symbol
@@ -107,22 +105,18 @@ listen している [c:TCPServer] オブジェクトの配列を返します。
 
 サーバを停止します。
 
-実際にはサーバの状態を :Shutdown にするだけで、サーバがすぐに停止すると
-は限りません。
+実際にはサーバの状態を :Shutdown にするだけで、サーバがすぐに停止するとは限りません。
 
 ### def tokens    -> Thread::SizedQueue
 
-MaxClient の設定のために使われる [c:Thread::SizedQueue] オブジェクト
-を返します。[c:Thread::SizedQueue] オブジェクトのサイズは現在受け付け
-ることのできるクライアントの数です。
+MaxClient の設定のために使われる [c:Thread::SizedQueue] オブジェクトを返します。[c:Thread::SizedQueue] オブジェクトのサイズは現在受け付けることのできるクライアントの数です。
 
 MaxClient を知りたい場合は self.tokens.max です。
 self.tokens.max - self.tokens.length が現在のクライアントの接続数です。
 
 ### def run(sock)    -> ()
 
-クライアントと接続された TCPSocket オブジェクトを引数として呼ばれ、
-具体的な処理を行います。
+クライアントと接続された TCPSocket オブジェクトを引数として呼ばれ、具体的な処理を行います。
 WEBrick::GenericServer のサブクラスはこのメソッドを適切に再定義しなければいけません。
 
 - **param** `sock` -- クライアントと接続された TCPSocket オブジェクトを指定します。

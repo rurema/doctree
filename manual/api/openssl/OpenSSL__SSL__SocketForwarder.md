@@ -3,12 +3,9 @@ library: openssl
 ---
 # module OpenSSL::SSL::SocketForwarder 
 
-to_io で返されるソケットオブジェクトにメソッドを
-フォワードするモジュールです。
+to_io で返されるソケットオブジェクトにメソッドをフォワードするモジュールです。
 
-[c:OpenSSL::SSL::SSLSocket] や [c:OpenSSL::SSL::SSLServer] と
-いったソケットの SSL ラッパクラスにソケット関連のメソッドを定義するため
-に使われます。
+[c:OpenSSL::SSL::SSLSocket] や [c:OpenSSL::SSL::SSLServer] といったソケットの SSL ラッパクラスにソケット関連のメソッドを定義するために使われます。
 
 ## Instance Methods
 ### def addr -> Array

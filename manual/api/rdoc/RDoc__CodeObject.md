@@ -50,15 +50,13 @@ RDoc のコードツリーを表現するクラスの基本クラスです。
 
 ### def document_children -> bool
 
-自身に含まれるメソッド、エイリアス、定数や属性をドキュメントに含めるか
-どうかを返します。
+自身に含まれるメソッド、エイリアス、定数や属性をドキュメントに含めるかどうかを返します。
 
 - **SEE** [m:RDoc::CodeObject#document_self]
 
 ### def document_children=(val)
 
-自身に含まれるメソッド、エイリアス、定数や属性をドキュメントに含めるか
-どうかを設定します。
+自身に含まれるメソッド、エイリアス、定数や属性をドキュメントに含めるかどうかを設定します。
 
 :nodoc:、:stopdoc: を指定した時に false が設定されます。
 
@@ -87,18 +85,15 @@ RDoc のコードツリーを表現するクラスの基本クラスです。
 
 ### def remove_classes_and_modules -> ()
 
-何もしません。[m:RDoc::CodeObject#document_children=] に false を指定
-した時のコールバックとして呼び出されます。オーバーライドして使用します。
+何もしません。[m:RDoc::CodeObject#document_children=] に false を指定した時のコールバックとして呼び出されます。オーバーライドして使用します。
 
 ### def remove_methods_etc -> ()
 
-何もしません。[m:RDoc::CodeObject#document_self=] に false を指定した
-時のコールバックとして呼び出されます。オーバーライドして使用します。
+何もしません。[m:RDoc::CodeObject#document_self=] に false を指定した時のコールバックとして呼び出されます。オーバーライドして使用します。
 
 ### def start_doc -> ()
 
-以降に解析したコメントを [m:RDoc::CodeObject#stop_doc] を呼び出すまで
-の間、ドキュメントに含めます。
+以降に解析したコメントを [m:RDoc::CodeObject#stop_doc] を呼び出すまでの間、ドキュメントに含めます。
 
 :startdoc: を見つけた時に呼び出されます。
 [m:RDoc::CodeObject#document_self] と
@@ -108,8 +103,7 @@ RDoc のコードツリーを表現するクラスの基本クラスです。
 
 ### def stop_doc -> ()
 
-以降に解析したコメントを [m:RDoc::CodeObject#start_doc] を呼び出すま
-での間、ドキュメントに含めません。
+以降に解析したコメントを [m:RDoc::CodeObject#start_doc] を呼び出すまでの間、ドキュメントに含めません。
 
 :stopdoc: を見つけた時に呼び出されます。
 [m:RDoc::CodeObject#document_self] と

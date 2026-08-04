@@ -14,11 +14,9 @@ UNIVERSAL なタグを持つ ASN.1 値はこのクラスの2つのサブクラ�
 ## Class Methods
 ### def OpenSSL::ASN1::ASN1Data.new(value, tag, tag_class) -> OpenSSL::ASN1::ASN1Data
 
-ASN.1 値を表現する [c:OpenSSL::ASN1::ASN1Data] オブジェクトを
-生成します。
+ASN.1 値を表現する [c:OpenSSL::ASN1::ASN1Data] オブジェクトを生成します。
 
-通常 UNIVERSAL なタグクラスを持つ ASN.1 値はこのクラスのサブクラスで
-表現されるため、tag_class はそれ以外(:CONTEXT_SPECIFIC、:APPLICATION、
+通常 UNIVERSAL なタグクラスを持つ ASN.1 値はこのクラスのサブクラスで表現されるため、tag_class はそれ以外(:CONTEXT_SPECIFIC、:APPLICATION、
 :PRIVATE のいずれか)を指定します。
 
 value としては、通常は文字列(IMPLICIT tagging 相当)

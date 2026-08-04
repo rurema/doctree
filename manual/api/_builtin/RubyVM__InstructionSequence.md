@@ -5,14 +5,10 @@ library: _builtin
 
 Ruby の Virtual Machine のコンパイル済みの命令シーケンスを表すクラスです。
 
-[c:Method]、[c:Proc] オブジェクトや Ruby のソースコードを表す文字列
-から VM の命令シーケンスを得る事ができます。また、
-RubyVM::InstructionSequence オブジェクトを元に命令シーケンスを読みやす
-い文字列に変換する事もできます。Ruby の命令シーケンスコンパイラの設定を
-扱う必要がありますが、Ruby の VM がどのように働くかを知るのに有用です。
+[c:Method]、[c:Proc] オブジェクトや Ruby のソースコードを表す文字列から VM の命令シーケンスを得る事ができます。また、
+RubyVM::InstructionSequence オブジェクトを元に命令シーケンスを読みやすい文字列に変換する事もできます。Ruby の命令シーケンスコンパイラの設定を扱う必要がありますが、Ruby の VM がどのように働くかを知るのに有用です。
 
-VM の命令シーケンスの一覧はRuby のソースコード中の insns.def から参照で
-きます。
+VM の命令シーケンスの一覧はRuby のソースコード中の insns.def から参照できます。
 
 - <https://github.com/ruby/ruby/blob/master/insns.def>
 
@@ -53,8 +49,7 @@ p RubyVM::InstructionSequence.compile("a = 1 + 2")
 引数 file で指定した Ruby のソースコードを元にコンパイル済みの
 [c:RubyVM::InstructionSequence] オブジェクトを作成して返します。
 
-[m:RubyVM::InstructionSequence.compile] とは異なり、file、path などの
-メタデータは自動的に取得します。
+[m:RubyVM::InstructionSequence.compile] とは異なり、file、path などのメタデータは自動的に取得します。
 
 - **param** `file` -- ファイル名を文字列で指定します。
 
@@ -76,8 +71,7 @@ p RubyVM::InstructionSequence.compile_file("/tmp/hello.rb")
 
 ### def RubyVM::InstructionSequence.compile_option -> Hash
 
-命令シーケンスのコンパイル時のデフォルトの最適化オプションを Hash で返
-します。
+命令シーケンスのコンパイル時のデフォルトの最適化オプションを Hash で返します。
 
 #%version 3.4...
 
@@ -165,8 +159,7 @@ options で指定します。
   ```
                :debug_level をキーに指定した場合は値を数値で指定します。
 
-.new、.compile、.compile_file メソッドの実行の際に option 引数を指定し
-た場合はその実行のみ最適化オプションを変更する事もできます。
+.new、.compile、.compile_file メソッドの実行の際に option 引数を指定した場合はその実行のみ最適化オプションを変更する事もできます。
 
 - **SEE** [m:RubyVM::InstructionSequence.new],
      [m:RubyVM::InstructionSequence.compile],
@@ -176,8 +169,7 @@ options で指定します。
 ### def RubyVM::InstructionSequence.disassemble(body) -> String
 
 引数 body で指定したオブジェクトから作成した
-[c:RubyVM::InstructionSequence] オブジェクトを人間が読める形式の文字
-列に変換して返します。
+[c:RubyVM::InstructionSequence] オブジェクトを人間が読める形式の文字列に変換して返します。
 
 - **param** `body` -- [c:Proc]、[c:Method] オブジェクトを指定します。
 
@@ -456,8 +448,7 @@ p RubyVM::InstructionSequence.compile("1 + 2").eval # => 3
 
 self が表す命令シーケンスの相対パスを返します。
 
-self の作成時に指定した文字列を返します。self を文字列から作成していた
-場合は "<compiled>" を返します。
+self の作成時に指定した文字列を返します。self を文字列から作成していた場合は "<compiled>" を返します。
 
 例1:irb で実行した場合
 
@@ -517,11 +508,9 @@ end
 
 ### def label -> String
 
-self が表す命令シーケンスのラベルを返します。通常、メソッド名、クラス名、
-モジュール名などで構成されます。
+self が表す命令シーケンスのラベルを返します。通常、メソッド名、クラス名、モジュール名などで構成されます。
 
-トップレベルでは "<main>" を返します。self を文字列から作成していた場合
-は "<compiled>" を返します。
+トップレベルでは "<main>" を返します。self を文字列から作成していた場合は "<compiled>" を返します。
 
 例1:irb で実行した場合
 

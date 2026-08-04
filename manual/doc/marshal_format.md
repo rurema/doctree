@@ -32,8 +32,7 @@ n == 0:       0
 -124 < n < 0: n - 5
 ```
 
-という数値(1 byte)を格納します。5 を足したり引いたりするのは下記の
-形式 2 との区別のためです。
+という数値(1 byte)を格納します。5 を足したり引いたりするのは下記の形式 2 との区別のためです。
 
 ```ruby title="例"
 p Marshal.dump(-1).unpack1("x2 a*") # => "i\xFA"
@@ -267,16 +266,14 @@ p Marshal.dump("hogehoge").unpack("x2 a c a*")
 # => ["\"", 13, "hogehoge"]
 ```
 
-ruby 1.9.0 以降では encoding が 'encoding' という
-「@」のつかない内部的なインスタンス変数としてダンプされます。
+ruby 1.9.0 以降では encoding が 'encoding' という「@」のつかない内部的なインスタンス変数としてダンプされます。
 
 ```ruby title="例: euc-jp の時"
 p Marshal.dump("hogehoge".encode("euc-jp")).unpack("x2 a a c a8 c a ca8 aca*")
 # => ["I", "\"", 13, "hogehoge", 6, ":", 13, "encoding", "\"", 11, "EUC-JP"]
 ```
 
-ruby 1.9.2 以降では US-ASCII と UTF-8 が 'E' という内部的なインスタンス変数として、
-それぞれ false と true という値でダンプされます。
+ruby 1.9.2 以降では US-ASCII と UTF-8 が 'E' という内部的なインスタンス変数として、それぞれ false と true という値でダンプされます。
 
 ```ruby title="例: us-ascii の時"
 # coding: us-ascii
@@ -481,8 +478,7 @@ p Marshal.dump(:foo).unpack("x2 a c a*")
 
 ';' で始まるデータ構造は、対応するシンボル名が既に
 dump/load されている場合に使用されます。
-番号は内部管理のもので、dump/load 時に Symbol 管理用に
-ハッシュテーブルが作られていて、そのレコード位置です。
+番号は内部管理のもので、dump/load 時に Symbol 管理用にハッシュテーブルが作られていて、そのレコード位置です。
 
 ```text
 | ';' | Symbolの実体を指す番号(Fixnum形式) |
@@ -510,8 +506,7 @@ p Marshal.dump([:foo, :foo, :bar, :bar]).
 | インスタンス変数名(Symbol) のdump(n) | 値(n) |
 ```
 
-Object のインスタンスはそれ自身がインスタンス変数を含む構造を持つので
-別形式で dump されます。
+Object のインスタンスはそれ自身がインスタンス変数を含む構造を持つので別形式で dump されます。
 ([ref:d:marshal_format#Object] 参照)
 
 この形式は、Array や String のインスタンス用です。
@@ -523,16 +518,14 @@ p Marshal.dump(obj).unpack("x2 a ac c a c a4 aca*")
 # => ["I", "\"", 0, 6, ":", 9, "@foo", ":", 8, "bar"]
 ```
 
-クラスやモジュール(Class/Module のインスタンス)は、
-インスタンス変数の情報を dump しません。
+クラスやモジュール(Class/Module のインスタンス)は、インスタンス変数の情報を dump しません。
 ([ref:d:marshal_format#class_module] 参照)
 
 ### link
 
 '@' で始まるデータ構造は、対応するオブジェクトが既に
 dump/load されている場合に使用されます。
-番号は内部管理のもので、dump/load 時にオブジェクト管理用に
-ハッシュテーブルが作られていて、そのレコード位置です。
+番号は内部管理のもので、dump/load 時にオブジェクト管理用にハッシュテーブルが作られていて、そのレコード位置です。
 
 ```text
 | '@' | オブジェクトの実体を指す番号(Fixnum形式) |

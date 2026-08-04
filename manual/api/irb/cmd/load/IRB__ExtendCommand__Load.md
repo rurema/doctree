@@ -11,11 +11,9 @@ irb 中の irb_load コマンドのための拡張を定義したクラスです
 
 ### def execute(file_name, priv = nil) -> nil
 
-ファイル path を Ruby スクリプトとみなし、現在の irb インタプリタ上で実
-行します。
+ファイル path を Ruby スクリプトとみなし、現在の irb インタプリタ上で実行します。
 
-[m:Kernel?.load] と異なり、path の内容を irb で一行ずつタイプしたかの
-ように、irb 上で一行ずつ評価されます。
+[m:Kernel?.load] と異なり、path の内容を irb で一行ずつタイプしたかのように、irb 上で一行ずつ評価されます。
 
 - **param** `file_name` -- ファイル名を文字列で指定します。
 

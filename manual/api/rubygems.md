@@ -125,8 +125,7 @@ $ gem query -n ^rails -r  # rails で始まるものを検索する
 $ gem build <gemspec filename>
 ```
 
-最小の gemspec は以下のようになります。ビルドするために必要な最小の gemspec なので出来上がるのは
-メタデータのみを含む Gem パッケージです。また、いくつかの警告が表示されます。
+最小の gemspec は以下のようになります。ビルドするために必要な最小の gemspec なので出来上がるのはメタデータのみを含む Gem パッケージです。また、いくつかの警告が表示されます。
 
 ```ruby title="gemspec"
 Gem::Specification.new do |s|
@@ -224,8 +223,7 @@ end
   - $HOME/.gemrc
 
 環境変数 GEM_HOME, GEM_PATH を設定する事によって Gem コマンドの動作を変更できます。
-また、ホームディレクトリに .gemrc という YAML フォーマットで書かれたファイルを置くことでも
-動作を変更できます。
+また、ホームディレクトリに .gemrc という YAML フォーマットで書かれたファイルを置くことでも動作を変更できます。
 
 ```yaml title="例"
 --- 

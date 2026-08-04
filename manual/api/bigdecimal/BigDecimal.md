@@ -51,8 +51,7 @@ library: bigdecimal
 
 ### const EXCEPTION_ALL -> Integer
 
-[c:BigDecimal] の計算において例外を発生させるかどうかを設定、確認する
-際の値を返します。
+[c:BigDecimal] の計算において例外を発生させるかどうかを設定、確認する際の値を返します。
 
 以下の例外全てが対象です。
 
@@ -66,79 +65,68 @@ library: bigdecimal
 
 ### const EXCEPTION_INFINITY -> Integer
 
-[c:BigDecimal] の計算結果が無限大になった場合に例外を発生させるかどう
-かを設定、確認する際の値を返します。
+[c:BigDecimal] の計算結果が無限大になった場合に例外を発生させるかどうかを設定、確認する際の値を返します。
 
 [m:BigDecimal.mode] の第 1 引数に指定します。
 
 ### const EXCEPTION_NaN -> Integer
 
-[c:BigDecimal] の計算結果が NaN になった場合に例外を発生させるかどう
-かを設定、確認する際の値を返します。
+[c:BigDecimal] の計算結果が NaN になった場合に例外を発生させるかどうかを設定、確認する際の値を返します。
 
 [m:BigDecimal.mode] の第 1 引数に指定します。
 
 ### const EXCEPTION_OVERFLOW -> Integer
 
-[c:BigDecimal] の計算結果の指数部がオーバーフローした場合に例外を発生
-させるかどうかを設定、確認する際の値を返します。
+[c:BigDecimal] の計算結果の指数部がオーバーフローした場合に例外を発生させるかどうかを設定、確認する際の値を返します。
 
 [m:BigDecimal.mode] の第 1 引数に指定します。
 
 ### const EXCEPTION_UNDERFLOW -> Integer
 
-[c:BigDecimal] の計算結果の指数部がアンダーフローした場合に例外を発生
-させるかどうかを設定、確認する際の値を返します。
+[c:BigDecimal] の計算結果の指数部がアンダーフローした場合に例外を発生させるかどうかを設定、確認する際の値を返します。
 
 [m:BigDecimal.mode] の第 1 引数に指定します。
 
 ### const EXCEPTION_ZERODIVIDE -> Integer
 
-[c:BigDecimal] に 0 による割り算を実行した場合に例外を発生させるかど
-うかを設定、確認する際の値を返します。
+[c:BigDecimal] に 0 による割り算を実行した場合に例外を発生させるかどうかを設定、確認する際の値を返します。
 
 [m:BigDecimal.mode] の第 1 引数に指定します。
 
 ### const ROUND_CEILING -> Integer
 
-[c:BigDecimal] の計算結果の丸め処理で数値の大きい方に繰り上げるかどう
-かを設定、確認する際の値を返します。
+[c:BigDecimal] の計算結果の丸め処理で数値の大きい方に繰り上げるかどうかを設定、確認する際の値を返します。
 
 [m:BigDecimal.mode] の第 2 引数に指定します。
 
 ### const ROUND_DOWN -> Integer
 
-[c:BigDecimal] の計算結果の丸め処理で全て切り捨てるかどうかを設定、確
-認する際の値を返します。
+[c:BigDecimal] の計算結果の丸め処理で全て切り捨てるかどうかを設定、確認する際の値を返します。
 
 [m:BigDecimal.mode] の第 2 引数に指定します。
 
 ### const ROUND_FLOOR -> Integer
 
-[c:BigDecimal] の計算結果の丸め処理で数値の小さい方に繰り下げるかどう
-かを設定、確認する際の値を返します。
+[c:BigDecimal] の計算結果の丸め処理で数値の小さい方に繰り下げるかどうかを設定、確認する際の値を返します。
 
 [m:BigDecimal.mode] の第 2 引数に指定します。
 
 ### const ROUND_HALF_DOWN -> Integer
 
-[c:BigDecimal] の計算結果の丸め処理で五捨六入するかどうかを設定、確認
-する際の値を返します。
+[c:BigDecimal] の計算結果の丸め処理で五捨六入するかどうかを設定、確認する際の値を返します。
 
 [m:BigDecimal.mode] の第 2 引数に指定します。
 
 ### const ROUND_HALF_EVEN -> Integer
 
-[c:BigDecimal] の計算結果の丸め処理で四捨六入するかどうかを設定、確認
-する際の値を返します。5の時は上位1桁が奇数の時のみ繰り上げます
+[c:BigDecimal] の計算結果の丸め処理で四捨六入するかどうかを設定、確認する際の値を返します。5の時は上位1桁が奇数の時のみ繰り上げます
 (Banker's rounding)。
 
 [m:BigDecimal.mode] の第 2 引数に指定します。
 
 ### const ROUND_HALF_UP -> Integer
 
-[c:BigDecimal] の計算結果の丸め処理で四捨五入するかどうかを設定、確認
-する際の値を返します。
+[c:BigDecimal] の計算結果の丸め処理で四捨五入するかどうかを設定、確認する際の値を返します。
 
 [m:BigDecimal.mode] の第 2 引数に指定します。
 
@@ -151,8 +139,7 @@ library: bigdecimal
 
 ### const ROUND_UP -> Integer
 
-[c:BigDecimal] の計算結果の丸め処理で全て切り上げするかどうかを設定、
-確認する際の値を返します。
+[c:BigDecimal] の計算結果の丸め処理で全て切り上げするかどうかを設定、確認する際の値を返します。
 
 [m:BigDecimal.mode] の第 2 引数に指定します。
 
@@ -288,9 +275,7 @@ n を指定しない、または n が nil の場合は、現状の最大桁数�
 
 戻り値は設定する前の値です。設定値のデフォルト値は0で、桁数無制限を表しています。
 
-計算を続行する間に、数字の桁数が無制限に増えてしまうような場合 limit で
-予め桁数を制限できます。この場合 [m:BigDecimal.mode] で指定された丸め処理が
-実行されます。ただし、インスタンスメソッド ([m:BigDecimal#truncate] /
+計算を続行する間に、数字の桁数が無制限に増えてしまうような場合 limit で予め桁数を制限できます。この場合 [m:BigDecimal.mode] で指定された丸め処理が実行されます。ただし、インスタンスメソッド ([m:BigDecimal#truncate] /
 [m:BigDecimal#round] / [m:BigDecimal#ceil] / [m:BigDecimal#floor] /
 [m:BigDecimal#add]/ [m:BigDecimal#sub] / [m:BigDecimal#mult] /
 [m:BigDecimal#div]) の桁数制限は limit より優先されます。
@@ -378,8 +363,7 @@ while (v + 1.0 > 1.0) {
 
 和を計算します。
 
-self + other を最大で n 桁まで計算します。計算結果の精度が n より大きい
-ときは [m:BigDecimal.mode] で指定された方法で丸められます。
+self + other を最大で n 桁まで計算します。計算結果の精度が n より大きいときは [m:BigDecimal.mode] で指定された方法で丸められます。
 
 - **param** `other` -- self に足す数を指定します。
 
@@ -394,8 +378,7 @@ self + other を最大で n 桁まで計算します。計算結果の精度が 
 
 差を計算します。
 
-self - other を最大で n 桁まで計算します。計算結果の精度が n より大きい
-ときは [m:BigDecimal.mode] で指定された方法で丸められます。
+self - other を最大で n 桁まで計算します。計算結果の精度が n より大きいときは [m:BigDecimal.mode] で指定された方法で丸められます。
 
 - **param** `other` -- self から引く数を指定します。
 
@@ -410,8 +393,7 @@ self - other を最大で n 桁まで計算します。計算結果の精度が 
 
 積を計算します。
 
-self * other を最大で n 桁まで計算します。計算結果の精度が n より大きい
-ときは [m:BigDecimal.mode] で指定された方法で丸められます。
+self * other を最大で n 桁まで計算します。計算結果の精度が n より大きいときは [m:BigDecimal.mode] で指定された方法で丸められます。
 
 - **param** `other` -- self に掛ける数を指定します。
 
@@ -426,8 +408,7 @@ self * other を最大で n 桁まで計算します。計算結果の精度が 
 
 商を計算します。
 
-self / other を最大で n 桁まで計算します。計算結果の精度が n より大きい
-ときは [m:BigDecimal.mode] で指定された方法で丸められます。
+self / other を最大で n 桁まで計算します。計算結果の精度が n より大きいときは [m:BigDecimal.mode] で指定された方法で丸められます。
 
 - **param** `other` -- self を割る数を指定します。
 
@@ -509,9 +490,7 @@ p BigDecimal("15.23456").ceil(-1).to_f # => 20.0
 - **param** `b` -- 丸め処理の方式として、[m:BigDecimal.mode] の第 1 引数と同じ
          値を指定します。
 
-[m:BigDecimal.mode]([m:BigDecimal::ROUND_MODE],flag) で何も指定せず、
-かつ、引数を指定しない場合は
-「小数点以下第一位の数を四捨五入して整数(BigDecimal 値)」にします。
+[m:BigDecimal.mode]([m:BigDecimal::ROUND_MODE],flag) で何も指定せず、かつ、引数を指定しない場合は「小数点以下第一位の数を四捨五入して整数(BigDecimal 値)」にします。
 
 ```ruby
 require "bigdecimal"
@@ -529,8 +508,7 @@ p BigDecimal("1.23456").round(4).to_f  # => 1.2346
 p BigDecimal("15.23456").round(-1).to_f  # => 20.0
 ```
 
-2番目の引数を指定すると、[m:BigDecimal.mode] の指定を無視して、指定さ
-れた方法で丸め操作を実行します。
+2番目の引数を指定すると、[m:BigDecimal.mode] の指定を無視して、指定された方法で丸め操作を実行します。
 
 ```ruby
 require "bigdecimal"
@@ -581,8 +559,7 @@ self の小数点以下を切り捨てて整数に変換します。
 
 self の近似値を表す [c:Float] オブジェクトに変換します。
 
-仮数部や指数部の情報が必要な場合は、[m:BigDecimal#split] メソッドを利
-用してください。
+仮数部や指数部の情報が必要な場合は、[m:BigDecimal#split] メソッドを利用してください。
 
 - **SEE** [m:BigDecimal#split]
 
@@ -602,8 +579,7 @@ require "bigdecimal"
 BigDecimal("1.23456").to_s  #  ==> "0.123456e1"
 ```
 
-引数 n に正の整数が指定されたときは、小数点で分けられる左右部分を、
-それぞれ n 桁毎に空白で区切ります。
+引数 n に正の整数が指定されたときは、小数点で分けられる左右部分を、それぞれ n 桁毎に空白で区切ります。
 
 ```ruby
 require "bigdecimal"
@@ -715,9 +691,7 @@ p BigDecimal("1").nonzero? # => 0.1e1
 
 ### def split -> [Integer, String, Integer, Integer]
 
-BigDecimal 値を 0.xxxxxxx*10**n と表現したときに、
-符号 (NaNのときは 0、それ以外は+1か-1になります)、
-仮数部分の文字列("xxxxxxx")と、基数(10)、更に指数 n を配列で返します。
+BigDecimal 値を 0.xxxxxxx*10**n と表現したときに、符号 (NaNのときは 0、それ以外は+1か-1になります)、仮数部分の文字列("xxxxxxx")と、基数(10)、更に指数 n を配列で返します。
 
 ```ruby
 require "bigdecimal"
@@ -761,8 +735,7 @@ self の n 乗を計算します。
 
 ### def sqrt(n) -> BigDecimal
 
-self の有効桁 n 桁の平方根 (n の平方根ではありません) をニュートン法で
-計算します。
+self の有効桁 n 桁の平方根 (n の平方根ではありません) をニュートン法で計算します。
 
 - **param** `n` -- 有効桁数を整数で指定します。
 
@@ -770,8 +743,7 @@ self の有効桁 n 桁の平方根 (n の平方根ではありません) をニ
 
 ### def divmod(n) -> [BigDecimal, BigDecimal]
 
-self を other で割った商 q と余り r を、 [q, r] という 2 要素の配列にし
-て返します。
+self を other で割った商 q と余り r を、 [q, r] という 2 要素の配列にして返します。
 
 商は負の無限大負方向に丸められます。
 
@@ -802,8 +774,7 @@ p ( x % -3).to_i # => -2
 p (-x % -3).to_i # => -1
 ```
 
-戻り値は n と同じ符号になります。これは [m:BigDecimal#remainder] とは
-異なる点に注意してください。詳細は [m:Numeric#%]、
+戻り値は n と同じ符号になります。これは [m:BigDecimal#remainder] とは異なる点に注意してください。詳細は [m:Numeric#%]、
 [m:Numeric#remainder] を参照して下さい。
 
 ### def remainder(n) -> BigDecimal
@@ -821,8 +792,7 @@ p x.remainder(-3).to_i  # => 1
 p (-x).remainder(-3).to_i # => -1
 ```
 
-戻り値は self と同じ符号になります。これは [m:BigDecimal#%] とは異な
-る点に注意してください。詳細は [m:Numeric#%]、
+戻り値は self と同じ符号になります。これは [m:BigDecimal#%] とは異なる点に注意してください。詳細は [m:Numeric#%]、
 [m:Numeric#remainder] を参照して下さい。
 
 ### def <=>(other) -> -1 | 0 | 1 | nil
@@ -847,8 +817,7 @@ p BigDecimal('1.0') == 1.0 # => true
 
 ### def <(other) -> bool
 
-self が other より小さい場合に true を、そうでない場合に false を返しま
-す。
+self が other より小さい場合に true を、そうでない場合に false を返します。
 
 ### def <=(other) -> bool
 
@@ -857,8 +826,7 @@ self が other より小さいか等しい場合に true を、そうでない�
 
 ### def >(other) -> bool
 
-self が other より大きい場合に true を、そうでない場合に false を返しま
-す。
+self が other より大きい場合に true を、そうでない場合に false を返します。
 
 ### def >=(other) -> bool
 
@@ -904,12 +872,9 @@ a = BigDecimal("1.0")
 b = a / 2.0 # => 0.5e0
 ```
 
-other に [c:Rational] オブジェクトを指定した場合は self の有効桁数を
-用いて変換を行います。
+other に [c:Rational] オブジェクトを指定した場合は self の有効桁数を用いて変換を行います。
 
-数値を表す文字列から [c:BigDecimal] オブジェクトに変換する機能はデフォ
-ルトでは無効になっています。必要な場合は ENABLE_NUMERIC_STRING を有効に
-して Ruby をコンパイルしてください。
+数値を表す文字列から [c:BigDecimal] オブジェクトに変換する機能はデフォルトでは無効になっています。必要な場合は ENABLE_NUMERIC_STRING を有効にして Ruby をコンパイルしてください。
 
 ### def hash -> Integer
 
@@ -919,8 +884,7 @@ self のハッシュ値を返します。
 
 ### def save_exception_mode { ... } -> object
 
-例外処理に関する [m:BigDecimal.mode] の設定を保存してブロックを評価し
-ます。ブロック中で変更した設定はブロックの評価後に復元されます。
+例外処理に関する [m:BigDecimal.mode] の設定を保存してブロックを評価します。ブロック中で変更した設定はブロックの評価後に復元されます。
 
 ブロックの評価結果を返します。
 
@@ -933,8 +897,7 @@ self のハッシュ値を返します。
 
 ### def save_limit { ... } -> object
 
-現在の [m:BigDecimal.limit] の設定を保存してブロックを評価します。ブ
-ロック中で変更した設定はブロックの評価後に復元されます。
+現在の [m:BigDecimal.limit] の設定を保存してブロックを評価します。ブロック中で変更した設定はブロックの評価後に復元されます。
 
 ブロックの評価結果を返します。
 

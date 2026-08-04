@@ -8,8 +8,6 @@ require:
   - webrick/httpservlet/prochandler
 ---
 このファイルを [m:Kernel?.require] すると、
-[c:WEBrick::HTTPServlet::FileHandler] に対して
-拡張子 .cgi と .rhtml のためのハンドラを設定します。
+[c:WEBrick::HTTPServlet::FileHandler] に対して拡張子 .cgi と .rhtml のためのハンドラを設定します。
 
-[lib:webrick] や [lib:webrick/httpserver] を [m:Kernel?.require] すると
-このライブラリも一緒に [m:Kernel?.require] されます。
+[lib:webrick] や [lib:webrick/httpserver] を [m:Kernel?.require] するとこのライブラリも一緒に [m:Kernel?.require] されます。

@@ -7,12 +7,9 @@ require:
 irb コマンドで実行結果を [m:Object#inspect] の代わりに
 [c:Object#to_s] した結果で表示するためのサブライブラリです。
 
-conf.math_mode か IRB.conf[:MATH_MODE] に true を設定する事で使用できま
-す。ただし、inspect_mode が設定されていた場合は inspect_mode が優先され
-ます。
+conf.math_mode か IRB.conf[:MATH_MODE] に true を設定する事で使用できます。ただし、inspect_mode が設定されていた場合は inspect_mode が優先されます。
 
-このライブラリで定義されているメソッドはユーザが直接使用するものではあ
-りません。
+このライブラリで定義されているメソッドはユーザが直接使用するものではありません。
 
 # reopen IRB::Context
 
@@ -29,11 +26,9 @@ math_mode が有効かどうかを返します。
 
 math_mode を有効にするかどうかを指定します。
 
-.irbrc ファイル中で IRB.conf[:MATH_MODE] を設定する事でも同様の事が行え
-ます。
+.irbrc ファイル中で IRB.conf[:MATH_MODE] を設定する事でも同様の事が行えます。
 
-[lib:mathn] ライブラリを include するため、math_mode を有効にした後は
-無効にする事ができません。
+[lib:mathn] ライブラリを include するため、math_mode を有効にした後は無効にする事ができません。
 
 - **param** `opt` -- math_mode を有効にする場合に true を指定します。
 
@@ -46,7 +41,6 @@ math_mode を有効にするかどうかを指定します。
 
 [m:IRB::Context#inspect_mode] が有効かどうかを返します。
 
-ただし、[m:IRB::Context#inspect_mode] が未設定で math_mode が有効な場
-合には false を返します。
+ただし、[m:IRB::Context#inspect_mode] が未設定で math_mode が有効な場合には false を返します。
 
 - **SEE** [m:IRB::Context#math?]

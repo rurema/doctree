@@ -29,11 +29,9 @@ File.foreach('/var/log/system.log'){|line|
 ### module_function def open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) -> self
 ### module_function def open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
 
-与えられた引数でsyslogを開きます。以降、他の Syslog モジュール関数が使
-用可能となります。
+与えられた引数でsyslogを開きます。以降、他の Syslog モジュール関数が使用可能となります。
 
-ブロック付きで呼ばれた場合は、self を引数としてブロックを実行し、
-最後に [m:Syslog?.close] を行います。
+ブロック付きで呼ばれた場合は、self を引数としてブロックを実行し、最後に [m:Syslog?.close] を行います。
 
 syslog の詳細については [man:syslog(3)] を参照してください。
 
@@ -147,8 +145,7 @@ p Syslog.facility #=> 8
 syslogにメッセージを書き込みます。
 
 priority は優先度を示す定数([c:Syslog::Constants]参照)です。
-また、facility([c:Syslog::Constants]参照)を論理和で指定す
-ることで open で指定した facility を切替えることもできます。
+また、facility([c:Syslog::Constants]参照)を論理和で指定することで open で指定した facility を切替えることもできます。
 
 format 以降は [m:Kernel?.sprintf] と同じ形式の引数を指定します。
 

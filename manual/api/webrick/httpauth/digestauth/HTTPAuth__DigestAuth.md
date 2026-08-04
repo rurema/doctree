@@ -22,11 +22,8 @@ config[:UserDB] = htdigest
 digest_auth = WEBrick::HTTPAuth::DigestAuth.new config
 ```
 
-サーブレットの initialize メソッドの中でこのクラスのインスタンスを作成
-しないようにしてください。デフォルトでは WEBrick はリクエストのたびにサー
-ブレットのインスタンスを生成しますが、
-[c:WEBrick::HTTPAuth::DigestAuth] のオブジェクトはリクエストをまたい
-で利用しなければならないためです。
+サーブレットの initialize メソッドの中でこのクラスのインスタンスを作成しないようにしてください。デフォルトでは WEBrick はリクエストのたびにサーブレットのインスタンスを生成しますが、
+[c:WEBrick::HTTPAuth::DigestAuth] のオブジェクトはリクエストをまたいで利用しなければならないためです。
 
 ## Class Methods
 
@@ -44,8 +41,7 @@ digest_auth = WEBrick::HTTPAuth::DigestAuth.new config
 
 自身を初期化します。
 
-認証を実行するために、リクエスト間で状態を保存し、複数のリクエストに対
-して同一のインスタンスを使用してください。
+認証を実行するために、リクエスト間で状態を保存し、複数のリクエストに対して同一のインスタンスを使用してください。
 
 - **param** `config` -- 設定を保持しているハッシュを指定します。
               :Realm と :UserDB は必ず指定しなければなりません。
@@ -73,8 +69,7 @@ digest_auth = WEBrick::HTTPAuth::DigestAuth.new config
 
 ### def challenge(request, response, stale = false)
 
-クライアントにパスワードを要求するためにレスポンスに WWW-Authenticate ヘッダを
-設定し、例外 WEBrick::HTTPStatus::Unauthorized を発生させます。
+クライアントにパスワードを要求するためにレスポンスに WWW-Authenticate ヘッダを設定し、例外 WEBrick::HTTPStatus::Unauthorized を発生させます。
 
 - **param** `request` -- [c:WEBrick::HTTPRequest] のインスタンスを指定します。
 

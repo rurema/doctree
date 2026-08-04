@@ -20,9 +20,7 @@ type: library
 - **`DEBUG`**:
   低レベルの情報
 
-全てのメッセージは必ずログレベルを持ちます。また Logger オブジェクトも同じように
-ログレベルを持ちます。メッセージのログレベルが Logger オブジェクトのログレベルよりも
-低い場合メッセージは記録されません。
+全てのメッセージは必ずログレベルを持ちます。また Logger オブジェクトも同じようにログレベルを持ちます。メッセージのログレベルが Logger オブジェクトのログレベルよりも低い場合メッセージは記録されません。
 
 普段は INFO しか記録していないが、デバッグ情報が必要になった時には、
 Logger オブジェクトのログレベルを DEBUG に下げるなどという使い方をします。
@@ -70,14 +68,11 @@ logger_sample.rb:12:in `<main>'
 ```
 
 これは log.level が [m:Logger::Severity::WARN] になっているためです。WARN、
-ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログは無視されま
-す。
+ERROR、FATALログのみが記録の対象になります。DEBUG、INFOログは無視されます。
 
 #### 機能
 
-[c:Logger] はログファイルの自動切り替え、ログフォーマットの設定、ログ
-と一緒に記録するプログラム名の指定といった有用な機能があります。以降で
-はその使い方について説明します。
+[c:Logger] はログファイルの自動切り替え、ログフォーマットの設定、ログと一緒に記録するプログラム名の指定といった有用な機能があります。以降ではその使い方について説明します。
 
 ### 使い方
 
@@ -131,9 +126,7 @@ logger = Logger.new('foo.log', 'monthly')
 #### ログの記録
 
 ログをレベルごとに記録するのに [m:Logger#fatal]、[m:Logger#error]、
-[m:Logger#warn]、[m:Logger#info]、[m:Logger#debug] メソッドを使用
-します。動的に任意のログレベルを設定したい場合は [m:Logger#add] を使
-用します。
+[m:Logger#warn]、[m:Logger#info]、[m:Logger#debug] メソッドを使用します。動的に任意のログレベルを設定したい場合は [m:Logger#add] を使用します。
 
 **1.** ブロックを指定
 
@@ -159,16 +152,13 @@ logger.info('initialize') { "Initializing..." }
 logger.add(Logger::FATAL) { 'Fatal error!' }
 ```
 
-ブロック形式だと潜在的に複雑なログを記録する場合に評価をログの記録のタ
-イミングまで遅延させる事ができます。例えば以下のようにすると、
+ブロック形式だと潜在的に複雑なログを記録する場合に評価をログの記録のタイミングまで遅延させる事ができます。例えば以下のようにすると、
 
 ```ruby
 logger.debug { "This is a " + potentially + " expensive operation" }
 ```
 
-もしログレベルが INFO 以上であった場合、デバッグメッセージが記録されな
-いだけでなくブロックが評価される事もありません(以下だと記録が行われない
-のは同じですが、評価されます)。
+もしログレベルが INFO 以上であった場合、デバッグメッセージが記録されないだけでなくブロックが評価される事もありません(以下だと記録が行われないのは同じですが、評価されます)。
 
 ```ruby
 logger.debug("This is a " + potentially + " expensive operation")
@@ -216,8 +206,7 @@ Logger.new(logdev, level: 'INFO')
 
 ### フォーマット
 
-ログはデフォルトでは特定のフォーマットで記録されます。デフォルトのフォー
-マットとその場合のログの例は以下のようになります。
+ログはデフォルトでは特定のフォーマットで記録されます。デフォルトのフォーマットとその場合のログの例は以下のようになります。
 
 ```text title="フォーマット"
 SeverityID, [DateTime #pid] SeverityLabel -- ProgName: message
@@ -227,8 +216,7 @@ SeverityID, [DateTime #pid] SeverityLabel -- ProgName: message
 I, [1999-03-03T02:34:24.895701 #19074]  INFO -- Main: info.
 ```
 
-[m:Logger#datetime_format=] を用いてログに記録する時の日時のフォーマッ
-トを変更することもできます。
+[m:Logger#datetime_format=] を用いてログに記録する時の日時のフォーマットを変更することもできます。
 
 ```ruby
 logger.datetime_format = '%Y-%m-%d %H:%M:%S'

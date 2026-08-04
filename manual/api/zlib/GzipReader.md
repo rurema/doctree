@@ -6,8 +6,7 @@ include:
 # class Zlib::GzipReader < Zlib::GzipFile
 
 gzip 形式の圧縮ファイルを読み込むラッパークラスです。
-IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
-持つオブジェクト) と関連付けて使用します。
+IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを持つオブジェクト) と関連付けて使用します。
 
 ```ruby
 require 'zlib'
@@ -34,9 +33,7 @@ gz.close
 
 io と関連付けられた GzipReader オブジェクトを作成します。
 
-GzipReader オブジェクトは io からデータを逐次リードして
-解析/展開を行います。io には少なくとも、[m:IO#read] と
-同じ動作をする read メソッドが定義されている必要があります。
+GzipReader オブジェクトは io からデータを逐次リードして解析/展開を行います。io には少なくとも、[m:IO#read] と同じ動作をする read メソッドが定義されている必要があります。
 
 - **param** `io` -- IO オブジェクト、もしくは少なくとも [m:IO#read] と同じ動作を
           する read メソッドが定義されているオブジェクト
@@ -65,9 +62,7 @@ end
 io と関連付けられた GzipReader オブジェクトを作成します。
 
 ブロックが与えられた場合は、それを引数としてブロックを実行します。
-ブロックの実行が終了すると、GzipReader オブジェクトは自動的に
-クローズされます。関連付けられている IO オブジェクトまで
-クローズしたくない時は、ブロック中で [m:Zlib::GzipFile#finish]
+ブロックの実行が終了すると、GzipReader オブジェクトは自動的にクローズされます。関連付けられている IO オブジェクトまでクローズしたくない時は、ブロック中で [m:Zlib::GzipFile#finish]
 メソッドを呼び出して下さい。
 
 - **param** `io` -- IO オブジェクトを指定します。
@@ -99,10 +94,8 @@ p f.closed? #=> false
 ### def Zlib::GzipReader.open(filename) -> Zlib::GzipReader
 ### def Zlib::GzipReader.open(filename) {|gz| ... } -> object
 
-filename で指定されるファイルを gzip ファイルとして
-オープンします。GzipReader オブジェクトを返します。
-その他詳細は [m:Zlib::GzipReader.new] や [m:Zlib::GzipReader.wrap] と
-同じです。
+filename で指定されるファイルを gzip ファイルとしてオープンします。GzipReader オブジェクトを返します。
+その他詳細は [m:Zlib::GzipReader.new] や [m:Zlib::GzipReader.wrap] と同じです。
 
 - **param** `filename` -- gzip ファイル名を文字列で指定します。
 
@@ -183,14 +176,11 @@ Zlib::GzipReader.open('hoge.gz'){|gz|
 
 IO クラスの同名メソッド[m:IO#each], [m:IO#each_line]と同じです。
 
-但し、gzip ファイル中に
-エラーがあった場合 [c:Zlib::Error] 例外や
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
 [c:Zlib::GzipFile::Error] 例外が発生します。
 
 gzip ファイルのフッターの処理に注意して下さい。
-gzip ファイルのフッターには圧縮前データのチェックサムが
-記録されています。GzipReader オブジェクトは、次の時に展開した
-データとフッターの照合を行い、エラーがあった場合は
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
 [c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
 [c:Zlib::GzipFile::LengthError] 例外を発生させます。
 
@@ -234,14 +224,11 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 IO クラスの同名メソッド[m:IO#each_byte]と同じです。
 
-但し、gzip ファイル中に
-エラーがあった場合 [c:Zlib::Error] 例外や
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
 [c:Zlib::GzipFile::Error] 例外が発生します。
 
 gzip ファイルのフッターの処理に注意して下さい。
-gzip ファイルのフッターには圧縮前データのチェックサムが
-記録されています。GzipReader オブジェクトは、次の時に展開した
-データとフッターの照合を行い、エラーがあった場合は
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
 [c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
 [c:Zlib::GzipFile::LengthError] 例外を発生させます。
 
@@ -287,14 +274,11 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 IO クラスの同名メソッド[m:IO#gets]と同じです。
 
-但し、gzip ファイル中に
-エラーがあった場合 [c:Zlib::Error] 例外や
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
 [c:Zlib::GzipFile::Error] 例外が発生します。
 
 gzip ファイルのフッターの処理に注意して下さい。
-gzip ファイルのフッターには圧縮前データのチェックサムが
-記録されています。GzipReader オブジェクトは、次の時に展開した
-データとフッターの照合を行い、エラーがあった場合は
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
 [c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
 [c:Zlib::GzipFile::LengthError] 例外を発生させます。
 
@@ -338,14 +322,11 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 IO クラスの同名メソッド[m:IO#getc]と同じです。
 
-但し、gzip ファイル中に
-エラーがあった場合 [c:Zlib::Error] 例外や
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
 [c:Zlib::GzipFile::Error] 例外が発生します。
 
 gzip ファイルのフッターの処理に注意して下さい。
-gzip ファイルのフッターには圧縮前データのチェックサムが
-記録されています。GzipReader オブジェクトは、次の時に展開した
-データとフッターの照合を行い、エラーがあった場合は
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
 [c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
 [c:Zlib::GzipFile::LengthError] 例外を発生させます。
 
@@ -391,14 +372,11 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 IO クラスの同名メソッド[m:IO#lineno]と同じです。
 
-但し、gzip ファイル中に
-エラーがあった場合 [c:Zlib::Error] 例外や
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
 [c:Zlib::GzipFile::Error] 例外が発生します。
 
 gzip ファイルのフッターの処理に注意して下さい。
-gzip ファイルのフッターには圧縮前データのチェックサムが
-記録されています。GzipReader オブジェクトは、次の時に展開した
-データとフッターの照合を行い、エラーがあった場合は
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
 [c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
 [c:Zlib::GzipFile::LengthError] 例外を発生させます。
 
@@ -447,14 +425,11 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 IO クラスの同名メソッド[m:IO#lineno=]と同じです。
 
-但し、gzip ファイル中に
-エラーがあった場合 [c:Zlib::Error] 例外や
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
 [c:Zlib::GzipFile::Error] 例外が発生します。
 
 gzip ファイルのフッターの処理に注意して下さい。
-gzip ファイルのフッターには圧縮前データのチェックサムが
-記録されています。GzipReader オブジェクトは、次の時に展開した
-データとフッターの照合を行い、エラーがあった場合は
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
 [c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
 [c:Zlib::GzipFile::LengthError] 例外を発生させます。
 
@@ -506,14 +481,11 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 IO クラスの同名メソッド[m:IO#read]と同じです。
 
-但し、gzip ファイル中に
-エラーがあった場合 [c:Zlib::Error] 例外や
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
 [c:Zlib::GzipFile::Error] 例外が発生します。
 
 gzip ファイルのフッターの処理に注意して下さい。
-gzip ファイルのフッターには圧縮前データのチェックサムが
-記録されています。GzipReader オブジェクトは、次の時に展開した
-データとフッターの照合を行い、エラーがあった場合は
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
 [c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
 [c:Zlib::GzipFile::LengthError] 例外を発生させます。
 
@@ -557,14 +529,11 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 IO クラスの同名メソッド[m:IO#readchar]と同じです。
 
-但し、gzip ファイル中に
-エラーがあった場合 [c:Zlib::Error] 例外や
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
 [c:Zlib::GzipFile::Error] 例外が発生します。
 
 gzip ファイルのフッターの処理に注意して下さい。
-gzip ファイルのフッターには圧縮前データのチェックサムが
-記録されています。GzipReader オブジェクトは、次の時に展開した
-データとフッターの照合を行い、エラーがあった場合は
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
 [c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
 [c:Zlib::GzipFile::LengthError] 例外を発生させます。
 
@@ -613,14 +582,11 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 IO クラスの同名メソッド[m:IO#readline]と同じです。
 
-但し、gzip ファイル中に
-エラーがあった場合 [c:Zlib::Error] 例外や
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
 [c:Zlib::GzipFile::Error] 例外が発生します。
 
 gzip ファイルのフッターの処理に注意して下さい。
-gzip ファイルのフッターには圧縮前データのチェックサムが
-記録されています。GzipReader オブジェクトは、次の時に展開した
-データとフッターの照合を行い、エラーがあった場合は
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
 [c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
 [c:Zlib::GzipFile::LengthError] 例外を発生させます。
 
@@ -671,14 +637,11 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 IO クラスの同名メソッド[m:IO#readlines]と同じです。
 
-但し、gzip ファイル中に
-エラーがあった場合 [c:Zlib::Error] 例外や
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
 [c:Zlib::GzipFile::Error] 例外が発生します。
 
 gzip ファイルのフッターの処理に注意して下さい。
-gzip ファイルのフッターには圧縮前データのチェックサムが
-記録されています。GzipReader オブジェクトは、次の時に展開した
-データとフッターの照合を行い、エラーがあった場合は
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
 [c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
 [c:Zlib::GzipFile::LengthError] 例外を発生させます。
 
@@ -734,14 +697,11 @@ IO クラスの同名メソッド [m:IO#readpartial] と同じです。
 
 IO クラスの同名メソッド [m:IO#ungetc] と同じです。
 
-IO クラスの同名メソッドと同じですが、gzip ファイル中に
-エラーがあった場合 [c:Zlib::Error] 例外や
+IO クラスの同名メソッドと同じですが、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
 [c:Zlib::GzipFile::Error] 例外が発生します。
 
 gzip ファイルのフッターの処理に注意して下さい。
-gzip ファイルのフッターには圧縮前データのチェックサムが
-記録されています。GzipReader オブジェクトは、次の時に展開した
-データとフッターの照合を行い、エラーがあった場合は
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
 Zlib::GzipFile::NoFooter, Zlib::GzipFile::CRCError,
 Zlib::GzipFile::LengthError 例外を発生させます。
 
@@ -794,8 +754,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 ### def rewind -> 0
 
-ファイルポインタを [m:Zlib::GzipReader.new] を呼び出した直後の
-時点に戻します。関連付けられている IO オブジェクトに
+ファイルポインタを [m:Zlib::GzipReader.new] を呼び出した直後の時点に戻します。関連付けられている IO オブジェクトに
 seek メソッドが定義されている必要があります。
 
 ```ruby

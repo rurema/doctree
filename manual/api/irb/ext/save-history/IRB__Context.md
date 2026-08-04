@@ -7,8 +7,7 @@ library: irb/ext/save-history
 
 ### def init_save_history -> ()
 
-自身の持つ [c:IRB::InputMethod] オブジェクトが irb のヒストリを扱える
-ようにします。
+自身の持つ [c:IRB::InputMethod] オブジェクトが irb のヒストリを扱えるようにします。
 
 - **SEE** [m:IRB::HistorySavingAbility.extended]
 
@@ -25,8 +24,7 @@ library: irb/ext/save-history
 
 履歴の最大保存件数を val に設定します。
 
-.irbrc ファイル中で IRB.conf[:SAVE_HISTORY] を設定する事でも同様の事が
-行えます。
+.irbrc ファイル中で IRB.conf[:SAVE_HISTORY] を設定する事でも同様の事が行えます。
 
 - **param** `val` -- 履歴の最大保存件数を [c:Integer] で指定します。0 以下や
            nil を返した場合は追加の保存は行いません。現在の件数より小さ
@@ -48,8 +46,7 @@ library: irb/ext/save-history
 
 履歴ファイルのパスを val に設定します。
 
-.irbrc ファイル中で IRB.conf[:HISTORY_FILE] を設定する事でも同様の事が
-行えます。
+.irbrc ファイル中で IRB.conf[:HISTORY_FILE] を設定する事でも同様の事が行えます。
 
 - **param** `hist` -- 履歴ファイルのパスを文字列で指定します。
 

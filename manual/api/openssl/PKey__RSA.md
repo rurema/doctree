@@ -47,16 +47,13 @@ p public_key.verify("sha256", sign, "foobarbaz")
 
 乱数により RSA 公開鍵と秘密鍵のペアを生成して、RSA オブジェクトを返します。
 
-このメソッドを呼ぶ前に [c:OpenSSL::Random] の各モジュール関数に
-よって乱数が適切に初期化されている必要があります。
+このメソッドを呼ぶ前に [c:OpenSSL::Random] の各モジュール関数によって乱数が適切に初期化されている必要があります。
 
 size で鍵の modulus のビット数つまりは鍵のサイズを指定します。
 最低でも1024を指定してください。
-exponent で public exponent を指定します。exponent には奇数を指定し、
-大抵の場合、3、17 あるいは 65537 を指定します。
+exponent で public exponent を指定します。exponent には奇数を指定し、大抵の場合、3、17 あるいは 65537 を指定します。
 
-このメソッドにブロックが渡された場合には、鍵生成の途中経過の
-情報を引数としてブロックが呼び出されます。
+このメソッドにブロックが渡された場合には、鍵生成の途中経過の情報を引数としてブロックが呼び出されます。
   - n個目の素数候補を生成した場合、u=0 でブロックが呼びだされる
   - 生成した素数候補がn回目の素数テスト(Miller-Robin)に成功した
     場合、u=1 でブロックが呼び出される
@@ -66,8 +63,7 @@ exponent で public exponent を指定します。exponent には奇数を指定
     u=3, n=0 でブロックが呼び出される
   - 以上の素数生成をもう一度繰り返し、適切な素数 q が見付かった場合には、
     u=3, n=1 でブロックが呼び出される
-RSA 鍵ペアの生成には時間がかかるため、鍵生成の途中経過を
-ユーザに表示したい場合にこの機能を使います。
+RSA 鍵ペアの生成には時間がかかるため、鍵生成の途中経過をユーザに表示したい場合にこの機能を使います。
 
 - **param** `size` -- 鍵のサイズ
 - **param** `exponent` -- public exponent
@@ -90,11 +86,9 @@ RSA 暗号鍵オブジェクトを生成します。
 新しい鍵を生成する場合は [m:OpenSSL::PKey::RSA.generate] を使用してください。
 #%end
 
-第一引数に整数を指定した場合には、[m:OpenSSL::PKey::RSA.generate] により
-公開鍵と秘密鍵のペアを生成し、それを返します。
+第一引数に整数を指定した場合には、[m:OpenSSL::PKey::RSA.generate] により公開鍵と秘密鍵のペアを生成し、それを返します。
 
-それ以外の場合には、以下のようにして鍵データを読みこみ、RSA オブジェクト
-を生成します。
+それ以外の場合には、以下のようにして鍵データを読みこみ、RSA オブジェクトを生成します。
   - 第一引数が文字列の場合は、PEM 形式もしくは DER 形式と仮定して
     鍵データを読み込みます
   - 第一引数が [c:IO] オブジェクトの場合は、その内容を
@@ -103,10 +97,7 @@ RSA 暗号鍵オブジェクトを生成します。
     文字列に変換してから読み込みます
 pass が指定された場合は、秘密鍵を pass を使って復号化します。
 
-鍵データにパスフレーズが設定されているにもかかわらず、passが省略された場合は、
-渡されたブロックを呼びだしてパスフレーズを要求します。ブロックの返り値を
-パスフレーズとみなして復号します。ブロックの引数は通常は false が渡されますが、
-これはそのパスフレーズが秘密鍵の復号に使われることを意味します。
+鍵データにパスフレーズが設定されているにもかかわらず、passが省略された場合は、渡されたブロックを呼びだしてパスフレーズを要求します。ブロックの返り値をパスフレーズとみなして復号します。ブロックの引数は通常は false が渡されますが、これはそのパスフレーズが秘密鍵の復号に使われることを意味します。
 ブロックが渡されなかった場合にはターミナルに問い合わせをします。
 
 - **param** `size` -- 鍵生成をする場合の鍵のサイズ
@@ -143,15 +134,11 @@ pass が指定された場合は、秘密鍵を pass を使って復号化しま
 
 鍵を PEM 形式で出力します。
 
-cipher と pass が指定された場合、
-秘密鍵を暗号 cipher [c:OpenSSL::Cipher::Cipher] 
+cipher と pass が指定された場合、秘密鍵を暗号 cipher [c:OpenSSL::Cipher::Cipher] 
 とパスワード pass を使って暗号化します。
 
-cipher を指定して pass を省略した場合は
-渡されたブロックを呼びだしてパスフレーズを要求します。ブロックの返り値を
-パスフレーズとみなして暗号化します。
-ブロックの引数は通常は true が渡されますが、
-これはそのパスフレーズが秘密鍵の暗号化に使われることを意味します。
+cipher を指定して pass を省略した場合は渡されたブロックを呼びだしてパスフレーズを要求します。ブロックの返り値をパスフレーズとみなして暗号化します。
+ブロックの引数は通常は true が渡されますが、これはそのパスフレーズが秘密鍵の暗号化に使われることを意味します。
 ブロックが渡されなかった場合にはターミナルに問い合わせをします。
 
 公開鍵を出力する場合は cipher と pass は無視されます。
@@ -170,8 +157,7 @@ cipher を指定して pass を省略した場合は
 
 暗号化されたデータを文字列で返します。
 
-mode でパディングモードを指定します。以下の4つのうちいずれかが
-利用可能です。
+mode でパディングモードを指定します。以下の4つのうちいずれかが利用可能です。
 - [m:OpenSSL::PKey::RSA::PKCS1_PADDING]
 - [m:OpenSSL::PKey::RSA::SSLV23_PADDING]
 - [m:OpenSSL::PKey::RSA::PKCS1_OAEP_PADDING]
@@ -187,9 +173,7 @@ mode でパディングモードを指定します。以下の4つのうちい�
 
 復号化されたデータを文字列で返します。
 
-mode でパディングモードを指定します。以下のいずれかが
-利用可能です。暗号化に利用したパディングモードと同じものを
-指定する必要があります。
+mode でパディングモードを指定します。以下のいずれかが利用可能です。暗号化に利用したパディングモードと同じものを指定する必要があります。
 - [m:OpenSSL::PKey::RSA::PKCS1_PADDING]
 - [m:OpenSSL::PKey::RSA::NO_PADDING]
 
@@ -218,8 +202,7 @@ mode でパディングモードを指定します。以下のいずれかが利
 
 復号化されたデータを文字列で返します。
 
-mode でパディングモードを指定します。暗号化に利用した
-パディングモードと同じものを指定する必要があります。
+mode でパディングモードを指定します。暗号化に利用したパディングモードと同じものを指定する必要があります。
 以下の4つのうちいずれかが利用可能です。
 - [m:OpenSSL::PKey::RSA::PKCS1_PADDING]
 - [m:OpenSSL::PKey::RSA::SSLV23_PADDING]
@@ -373,8 +356,7 @@ PKCS #1 v1.5 で定義されているパディングモードです。
 [m:OpenSSL::PKey::RSA#public_encrypt]、
 [m:OpenSSL::PKey::RSA#public_decrypt]、
 [m:OpenSSL::PKey::RSA#private_encrypt]、
-[m:OpenSSL::PKey::RSA#private_decrypt] の
-第二引数に指定できます。
+[m:OpenSSL::PKey::RSA#private_decrypt] の第二引数に指定できます。
 
 ### const SSLV23_PADDING -> Integer
 
@@ -384,8 +366,7 @@ SSL特有の変更を加えたパディングモードです。
 互換性目的以外での利用は推奨しません。
 
 [m:OpenSSL::PKey::RSA#public_encrypt]、
-[m:OpenSSL::PKey::RSA#private_decrypt] の
-第二引数に指定できます。
+[m:OpenSSL::PKey::RSA#private_decrypt] の第二引数に指定できます。
 
 ### const NO_PADDING -> Integer
 
@@ -396,8 +377,7 @@ SSL特有の変更を加えたパディングモードです。
 [m:OpenSSL::PKey::RSA#public_encrypt]、
 [m:OpenSSL::PKey::RSA#public_decrypt]、
 [m:OpenSSL::PKey::RSA#private_encrypt]、
-[m:OpenSSL::PKey::RSA#private_decrypt] の
-第二引数に指定できます。
+[m:OpenSSL::PKey::RSA#private_decrypt] の第二引数に指定できます。
 
 ### const PKCS1_OAEP_PADDING -> Integer
 
@@ -406,8 +386,7 @@ PKCS #1 v2.0 で定義されているパディングモードです。
 互換性に問題ない場合はこのモードを利用すべきです。
 
 [m:OpenSSL::PKey::RSA#public_encrypt]、
-[m:OpenSSL::PKey::RSA#private_decrypt] の
-第二引数に指定できるパディングモード。
+[m:OpenSSL::PKey::RSA#private_decrypt] の第二引数に指定できるパディングモード。
 
 # class OpenSSL::PKey::RSAError < OpenSSL::PKey::PKeyError
 

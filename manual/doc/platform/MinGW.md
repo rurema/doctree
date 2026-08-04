@@ -1,7 +1,6 @@
 # MinGW
 
-フリーソフトウェアだけで純粋な Win32 用実行ファイルを作るための
-コンパイル環境のことで、MinGW は Minimalist GNU on Windows の略です。
+フリーソフトウェアだけで純粋な Win32 用実行ファイルを作るためのコンパイル環境のことで、MinGW は Minimalist GNU on Windows の略です。
 詳細は <http://www.mingw.org/> を参照してください。
 
 なお、この場合の「純粋な」は「msvcrt.dll を使ったアプリケーション」を指します。

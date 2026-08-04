@@ -4,8 +4,7 @@ library: zlib
 # class Zlib::GzipWriter < Zlib::GzipFile
 
 gzip 形式の圧縮ファイルを書き出すラッパークラスです。
-IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
-持つオブジェクト) と関連付けて使用します。
+IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを持つオブジェクト) と関連付けて使用します。
 
 ```ruby
 require 'zlib'
@@ -22,8 +21,7 @@ gz.close
 
 なお、Ruby の finalizer の制約のため、GzipWriter オブジェクトは必ず
 [m:Zlib::GzipWriter#close] 等を用いてクローズしてください。
-そうしなければフッターを書き出すことができず、壊れた gzip ファイルを
-生成してしまう可能性があります。
+そうしなければフッターを書き出すことができず、壊れた gzip ファイルを生成してしまう可能性があります。
 
 ## Class Methods
 
@@ -31,9 +29,7 @@ gz.close
 
 io と関連付けられた GzipWriter オブジェクトを作成します。
 level, strategy は [m:Zlib::Deflate.new] と同じです。
-GzipWriter オブジェクトは io に gzip 形式のデータを
-逐次ライトします。io には少なくとも、[m:IO#write] と
-同じ動作をする write メソッドが定義されている必要があります。
+GzipWriter オブジェクトは io に gzip 形式のデータを逐次ライトします。io には少なくとも、[m:IO#write] と同じ動作をする write メソッドが定義されている必要があります。
 
 - **param** `io` --  IOオブジェクト、もしくは少なくとも、
            [m:IO#write] と 同じ動作をする write メソッドが定義されている必要があります。
@@ -56,11 +52,8 @@ p FileTest.size(filename) #=> 32
 ### def Zlib::GzipWriter.wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
 
 io と関連付けられた GzipWriter オブジェクトを作成します。
-ブロックが与えられた場合、
-それを引数としてブロックを実行します。
-ブロックの実行が終了すると、GzipWriter オブジェクトは自動的に
-クローズされます。関連付けられている IO オブジェクトまで
-クローズしたくない時は、ブロック中で [m:Zlib::GzipFile#finish]
+ブロックが与えられた場合、それを引数としてブロックを実行します。
+ブロックの実行が終了すると、GzipWriter オブジェクトは自動的にクローズされます。関連付けられている IO オブジェクトまでクローズしたくない時は、ブロック中で [m:Zlib::GzipFile#finish]
 メソッドを呼び出して下さい。
 
 - **param** `io` --  IOオブジェクト、もしくは少なくとも、
@@ -101,10 +94,8 @@ case2
 ### def Zlib::GzipWriter.open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
 ### def Zlib::GzipWriter.open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
 
-filename で指定されるファイルを gzip 圧縮データの
-書き出し用にオープンします。GzipWriter オブジェクトを返します。
-その他詳細は [m:Zlib::GzipWriter.new] や [m:Zlib::GzipWriter.wrap] と
-同じです。
+filename で指定されるファイルを gzip 圧縮データの書き出し用にオープンします。GzipWriter オブジェクトを返します。
+その他詳細は [m:Zlib::GzipWriter.new] や [m:Zlib::GzipWriter.wrap] と同じです。
 
 - **param** `filename` -- ファイル名を文字列で指定します。
 - **param** `level` -- 0-9の範囲の整数、または [m:Zlib::NO_COMPRESSION], [m:Zlib::BEST_SPEED], 
@@ -130,12 +121,9 @@ p FileTest.size(filename) #=> 32
 ### def finish -> File
 
 フッターを書き出し、GzipWriter オブジェクトをクローズします。close と
-finish の違いは [m:Zlib::GzipFile#close], [m:Zlib::GzipFile#finish] を
-参照して下さい。
+finish の違いは [m:Zlib::GzipFile#close], [m:Zlib::GzipFile#finish] を参照して下さい。
 
-注意: Ruby の finalizer の制約のため、GzipWriter オブジェクトは
-必ずクローズしてください。そうしなければフッターを書き出すことが
-できず、壊れた gzip ファイルを生成してしまう可能性があります。
+注意: Ruby の finalizer の制約のため、GzipWriter オブジェクトは必ずクローズしてください。そうしなければフッターを書き出すことができず、壊れた gzip ファイルを生成してしまう可能性があります。
 
 ```ruby
 require 'zlib'
@@ -191,8 +179,7 @@ Zlib::GzipWriter.wrap(f, Zlib::BEST_COMPRESSION){|gz|
 
 ### def <<(str) -> self
 
-str を出力します。str が文字列でない場合は to_s を用いて
-文字列に変換します。
+str を出力します。str が文字列でない場合は to_s を用いて文字列に変換します。
 
 - **param** `str` -- 出力したいオブジェクトを与えます。
 
@@ -292,8 +279,7 @@ Zlib::GzipReader.wrap(fr){|gz|
 
 ### def printf(format, *args) -> nil
 
-C 言語の printf と同じように、format に従い引数
-を文字列に変換して、自身に出力します。
+C 言語の printf と同じように、format に従い引数を文字列に変換して、自身に出力します。
 
 - **param** `format` -- フォーマット文字列を指定します。[d:print_format] を参照してください。
 
@@ -318,8 +304,7 @@ Zlib::GzipReader.wrap(fr){|gz|
 
 ### def write(*str) -> Integer
 
-自身に str を出力します。str が文字列でなけ
-れば to_s による文字列化を試みます。
+自身に str を出力します。str が文字列でなければ to_s による文字列化を試みます。
 
 - **param** `str` -- 出力する文字列を指定します。文字列でない場合は to_s で文字列に変換します。
 
@@ -387,9 +372,7 @@ case2
 
 gzip ファイルのヘッダーに記録する最終更新時間を指定します。
 
-[m:Zlib::GzipWriter#write] 等の書き込み系メソッドを
-呼んだ後で指定しようとすると [c:Zlib::GzipFile::Error] 例外が
-発生します。
+[m:Zlib::GzipWriter#write] 等の書き込み系メソッドを呼んだ後で指定しようとすると [c:Zlib::GzipFile::Error] 例外が発生します。
 
 - **param** `time` -- gzip ファイルのヘッダーに記録する最終更新時間を整数で指定します。
 - **return** -- time を返します。
@@ -414,9 +397,7 @@ Zlib::GzipReader.wrap(fr){|gz|
 
 gzip ファイルのヘッダーに記録する元ファイル名を指定します。
 
-[m:Zlib::GzipWriter#write] 等の書き込み系メソッドを
-呼んだ後で指定しようとすると [c:Zlib::GzipFile::Error] 例外が
-発生します。
+[m:Zlib::GzipWriter#write] 等の書き込み系メソッドを呼んだ後で指定しようとすると [c:Zlib::GzipFile::Error] 例外が発生します。
 
 - **param** `filename` -- gzip ファイルのヘッダーに記録する元ファイル名を文字列で指定します。
 - **return** -- filename を返します。
@@ -440,9 +421,7 @@ Zlib::GzipReader.wrap(fr){|gz|
 
 gzip ファイルのヘッダーに記録するコメントを指定します。
 
-[m:Zlib::GzipWriter#write] 等の書き込み系メソッドを
-呼んだ後で指定しようとすると [c:Zlib::GzipFile::Error] 例外が
-発生します。
+[m:Zlib::GzipWriter#write] 等の書き込み系メソッドを呼んだ後で指定しようとすると [c:Zlib::GzipFile::Error] 例外が発生します。
 
 - **param** `string` -- gzip ファイルのヘッダーに記録するコメントを文字列で指定します。
 - **return** -- string を返します。

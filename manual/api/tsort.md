@@ -89,8 +89,7 @@ m.build('t5')
 
 ### Bugs
 
-tsort という名前は正確ではありません。なぜなら
-このライブラリは Tarjan の強連結成分に関するアルゴリズムを使っているからです。
+tsort という名前は正確ではありません。なぜならこのライブラリは Tarjan の強連結成分に関するアルゴリズムを使っているからです。
 とはいえ strongly_connected_components という正確な名前は長過ぎます。
 
 ### References
@@ -117,8 +116,7 @@ SIAM Journal on Computing, Vol. 1, No. 2, pp. 146-160, June 1972.
 
 # module TSort
 
-TSort は強連結成分に関する Tarjan のアルゴリズムを用いた
-トポロジカルソートの実装です。
+TSort は強連結成分に関する Tarjan のアルゴリズムを用いたトポロジカルソートの実装です。
 
 TSort は任意のオブジェクトを有向グラフとして解釈できるように設計されています。
 TSort がオブジェクトをグラフとして解釈するには2つのメソッドを要求します。
@@ -272,8 +270,7 @@ node から到達可能な強連結成分についてのイテレータです。
 
 返す値は規定されていません。
 
-TSort.each_strongly_connected_component_fromは[c:TSort]をincludeして
-グラフを表現する必要のないクラスメソッドです。
+TSort.each_strongly_connected_component_fromは[c:TSort]をincludeしてグラフを表現する必要のないクラスメソッドです。
 
 - **param** `node` -- ノードを指定します。
 
@@ -325,9 +322,7 @@ p sorted #=> [3, 2, 1, 4]
 ### def tsort_each -> Enumerator
 
 [m:TSort#tsort] メソッドのイテレータ版です。
-obj.tsort_each は obj.tsort.each と似ていますが、
-ブロックの評価中に obj が変更された場合は予期しない結果になる
-ことがあります。
+obj.tsort_each は obj.tsort.each と似ていますが、ブロックの評価中に obj が変更された場合は予期しない結果になることがあります。
 
 tsort_each は nil を返します。
 閉路が存在するとき、例外 [c:TSort::Cyclic] を起こします。
@@ -391,9 +386,7 @@ p non_sort.strongly_connected_components
 
 [m:TSort#strongly_connected_components] メソッドのイテレータ版です。
 obj.each_strongly_connected_component は
-obj.strongly_connected_components.each に似ていますが、
-ブロックの評価中に obj が変更された場合は予期しない結果になる
-ことがあります。
+obj.strongly_connected_components.each に似ていますが、ブロックの評価中に obj が変更された場合は予期しない結果になることがあります。
 
 each_strongly_connected_component は nil を返します。
 

@@ -12,8 +12,7 @@ require "bigdecimal/jacobian"
 dfdx = Jacobian.jacobian(f,fx,x)
 ```
 
-引数 f には関数を表すオブジェクトを指定します。以下のメソッドに応答でき
-る必要があります。
+引数 f には関数を表すオブジェクトを指定します。以下のメソッドに応答できる必要があります。
 
 - **`f.values(x)`**:
 

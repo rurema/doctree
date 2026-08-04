@@ -3,12 +3,9 @@ library: webrick/httputils
 ---
 # class WEBrick::HTTPUtils::FormData < String
 
-クライアントがフォームへ入力した値を表すクラスです。multipart/form-data なデータを表すのにも
-使われます。
+クライアントがフォームへ入力した値を表すクラスです。multipart/form-data なデータを表すのにも使われます。
 
-[m:WEBrick::HTTPRequest#query] はリクエストのクエリーあるいは
-クライアントがフォームへ入力した値を保持した Hash を返しますが、
-その Hash のキーと値のうち値は FormData クラスのインスタンスになります。
+[m:WEBrick::HTTPRequest#query] はリクエストのクエリーあるいはクライアントがフォームへ入力した値を保持した Hash を返しますが、その Hash のキーと値のうち値は FormData クラスのインスタンスになります。
 同じ名前のフィールドが複数ある場合、[m:WEBrick::HTTPUtils::FormData#list] や
 [m:WEBrick::HTTPUtils::FormData#each_data] によりそれぞれの値を取り出すことができます。
 

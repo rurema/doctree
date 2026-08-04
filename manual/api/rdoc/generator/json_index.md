@@ -5,8 +5,7 @@ include:
 require:
   - json
 ---
-他のジェネレータが生成する HTML で検索が行えるように、JSON の検索インデッ
-クスを生成するサブライブラリです。
+他のジェネレータが生成する HTML で検索が行えるように、JSON の検索インデックスを生成するサブライブラリです。
 
 This generator is derived from sdoc by Vladimir Kolesnikov and
 contains verbatim code written by him.
@@ -31,8 +30,7 @@ end
 
 ### インデックスフォーマット
 
-検索用のインデックスは JSON ファイルに出力されます。search_data という
-グローバル変数に以下のような内容で出力されます。
+検索用のインデックスは JSON ファイルに出力されます。search_data というグローバル変数に以下のような内容で出力されます。
 
 ```javascript
 var search_data = {
@@ -50,12 +48,7 @@ var search_data = {
 }
 ```
 
-searchIndex、longSearchIndex、info 中の情報は同じ位置にあるものは同じ要
-素に関する情報が格納されています。searchIndex フィールドには省略した名
-前が格納されています。longSearchIndex フィールドには(適切に記載されてい
-れば)完全な名前が格納されています。info フィールドには [名前、完全な名
-前、パス、パラメータ, 要素に記載されたコメントの断片] が格納されていま
-す。
+searchIndex、longSearchIndex、info 中の情報は同じ位置にあるものは同じ要素に関する情報が格納されています。searchIndex フィールドには省略した名前が格納されています。longSearchIndex フィールドには(適切に記載されていれば)完全な名前が格納されています。info フィールドには [名前、完全な名前、パス、パラメータ, 要素に記載されたコメントの断片] が格納されています。
 
 ### ライセンス
 
@@ -84,8 +77,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 # class RDoc::Generator::JsonIndex
 
-他のジェネレータが生成する HTML で検索が行えるように、JSON の検索インデッ
-クスを生成するクラスです。
+他のジェネレータが生成する HTML で検索が行えるように、JSON の検索インデックスを生成するクラスです。
 
 ## Class Methods
 
@@ -106,8 +98,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### def generate -> ()
 
-解析した情報を [m:RDoc::Generator::JsonIndex::SEARCH_INDEX_FILE] に出
-力します。
+解析した情報を [m:RDoc::Generator::JsonIndex::SEARCH_INDEX_FILE] に出力します。
 
 #%# --- build_index
 #%#

@@ -4,8 +4,7 @@ require:
   - rubygems/command
   - rubygems/server
 ---
-ローカルにインストールされている Gem パッケージとそのドキュメントを HTTP サーバに
-載せて公開するためのライブラリです。
+ローカルにインストールされている Gem パッケージとそのドキュメントを HTTP サーバに載せて公開するためのライブラリです。
 
 ```text
 Usage: gem server [options]
@@ -36,6 +35,5 @@ Defaults:
 
 # class Gem::Commands::ServerCommand < Gem::Command
 
-ローカルにインストールされている Gem パッケージとそのドキュメントを HTTP サーバに
-載せて公開するためのクラスです。
+ローカルにインストールされている Gem パッケージとそのドキュメントを HTTP サーバに載せて公開するためのクラスです。
 

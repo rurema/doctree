@@ -81,8 +81,7 @@ p Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, STDERR.fileno)
 
 ### def Socket::AncillaryData.unix_rights(*ios) -> Socket::AncillaryData
 
-ios で指定したファイルのファイルデスクリプタを
-データとして持つ family=AF_UNIX, level=SOL_SOCKET, type=SCM_RIGHTS
+ios で指定したファイルのファイルデスクリプタをデータとして持つ family=AF_UNIX, level=SOL_SOCKET, type=SCM_RIGHTS
 という Socket::AncillaryData オブジェクトを生成して返します。
 
 ```ruby
@@ -229,21 +228,18 @@ p ancdata.int #=> 2
 
 ### def unix_rights -> [IO] | nil
 
-Unix domain socket の SCM_RIGHTS 制御メッセージに含まれる
-ファイルディスクリプタを IO オブジェクトの配列として返します。
+Unix domain socket の SCM_RIGHTS 制御メッセージに含まれるファイルディスクリプタを IO オブジェクトの配列として返します。
 
 得られる IO オブジェクトか [c:IO] か [c:Socket] です。
 
-この配列は [c:Socket::AncillaryData] が初期化されたときに
-作られます。例えば [m:BasicSocket#recvmsg] を :scm_rights => true
+この配列は [c:Socket::AncillaryData] が初期化されたときに作られます。例えば [m:BasicSocket#recvmsg] を :scm_rights => true
 
 ```text
 オプションを付けて呼びだし、
 ```
 
 SCM_RIGHTS な 制御メッセージを受け取ったときに配列が作られます。
-適切なオプションを指定しなかった場合は配列は生成されず、
-このメソッドは nil を返します。
+適切なオプションを指定しなかった場合は配列は生成されず、このメソッドは nil を返します。
 
 ```ruby
 require 'socket'
@@ -273,8 +269,7 @@ p ctl.unix_rights #=> nil
 
 ### def timestamp -> Time
 
-タイムスタンプ制御メッセージに含まれる時刻を [c:Time] オブジェクト
-で返します。
+タイムスタンプ制御メッセージに含まれる時刻を [c:Time] オブジェクトで返します。
 
 "タイムスタンプ制御メッセージ" は以下のいずれかです。
   -  SOL_SOCKET/SCM_TIMESTAMP (micro second) GNU/Linux, FreeBSD, NetBSD, OpenBSD, Solaris, MacOS X

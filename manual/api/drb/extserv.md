@@ -6,8 +6,7 @@ include:
 [c:DRb::ExtServ] を定義しているライブラリ。
 
 [lib:drb/extservm] で定義されている [c:DRb::ExtServManager] 
-によって管理されるサービスを実現する [c:DRb::ExtServ] を
-定義しています。
+によって管理されるサービスを実現する [c:DRb::ExtServ] を定義しています。
 
 詳しくは [lib:drb/extservm] を見てください。
 
@@ -23,8 +22,7 @@ DRb::ExtServ オブジェクトを生成し、サービスを
 [c:DRb::ExtServManager] オブジェクトに登録します。
 
 there で指定した
-URI の front オブジェクト(これは [c:DRb::ExtServManager] の
-インスタンスであるべきです)に name という名前でサービスを登録します。
+URI の front オブジェクト(これは [c:DRb::ExtServManager] のインスタンスであるべきです)に name という名前でサービスを登録します。
 
 there, name は [m:Object::ARGV] の末尾2つを渡してください。
 
@@ -55,13 +53,10 @@ server には drb の通信に用いる [c:DRb::DRbServer] オブジェクトを
 [m:DRb::DRbServer#stop_service] でサーバを停止します。
 
 このメソッドはリモートから起動できます。
-サーバが停止するため、停止したサービスのリモートオブジェクトは
-利用できなくなります。また、サーバの停止により
-接続を待ち受けているスレッドが停止します。
+サーバが停止するため、停止したサービスのリモートオブジェクトは利用できなくなります。また、サーバの停止により接続を待ち受けているスレッドが停止します。
 
 サービス停止後、
-[m:DRb::ExtServManager#service] で同じ名前のサービスを要求すると、
-別のプロセスが起動します。
+[m:DRb::ExtServManager#service] で同じ名前のサービスを要求すると、別のプロセスが起動します。
 
 ### def alive? -> bool
 
