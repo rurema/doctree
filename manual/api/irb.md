@@ -3,6 +3,11 @@ type: library
 #%# Author: Keiju ISHITSUKA
 category: Development
 require:
+#%until 4.1
+  - ripper
+#%else
+  - prism
+#%end
   - reline
   - irb/init
   - irb/context
