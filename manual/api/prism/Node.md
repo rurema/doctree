@@ -32,12 +32,12 @@ p call.compact_child_nodes.size # => 2
 
 ## Class Methods
 
-### def type -> Symbol
+### def Prism::Node.type -> Symbol
 
 [m:Prism::Node#type] のクラスメソッド版です。インスタンスを作らずにノードクラス自体からノードの種類を表すシンボルを得られます。
 
 #%since 3.4
-### def fields -> [Prism::Reflection::Field]
+### def Prism::Node.fields -> [Prism::Reflection::Field]
 
 このノードクラスが持つフィールド(子ノードや属性)を表す
 `Prism::Reflection::Field` の配列を返します。構文木の各ノード・各フィールドを再帰的に処理するツールを書くときのリフレクション用途に使えます。
