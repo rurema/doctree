@@ -745,18 +745,24 @@ p Set[1, 2, 3].disjoint? Set[4, 5] # => true
 
 ```ruby
 array = [1]
+set = Set[array]
 #%since 4.0
-set = Set[array]  # => Set[[1]]
+p set  # => Set[[1]]
 #%else
-set = Set[array]  # => #<Set: {[1]}>
+p set  # => #<Set: {[1]}>
 #%end
 array << 2
+set.add(array)
 #%since 4.0
-set.add(array)    # => Set[[1, 2], [1, 2]]
-set.reset         # => Set[[1, 2]]
+p set  # => Set[[1, 2], [1, 2]]
 #%else
-set.add(array)    # => #<Set: {[1, 2], [1, 2]}>
-set.reset         # => #<Set: {[1, 2]}>
+p set  # => #<Set: {[1, 2], [1, 2]}>
+#%end
+set.reset
+#%since 4.0
+p set  # => Set[[1, 2]]
+#%else
+p set  # => #<Set: {[1, 2]}>
 #%end
 ```
 
