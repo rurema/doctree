@@ -71,6 +71,7 @@ Ruby の文法:
   - [d:spec/m17n]
   - [d:spec/regexp]
   - [d:spec/lambda_proc]
+  - [d:spec/memory_view]
 
 #### ライブラリ
 
