@@ -37,7 +37,7 @@ numo-narray の `Numo::NArray` や rmagick の `Magick::Image` といった、 c
 
 - **`ssize_t item_size`**: 各要素のバイト数。 `rb_memory_view_item_size_from_format(format)` と等しくなるはずです。
 
-- **`const rb_memory_view_item_component_t *item_desc.components`**: 一つの要素内の成分メタデータの配列。 `rb_memory_view_prepare_item_desc` と `rb_memory_view_get_item` が必要に応じてメモリーを割り当て、 `rb_memory_view_release` が解放します。 [メモリビュー成分構造体](#component-structure)も参照。
+- **`const rb_memory_view_item_component_t *item_desc.components`**: 一つの要素内の成分メタデータの配列。 `rb_memory_view_prepare_item_desc` と `rb_memory_view_get_item` が必要に応じてメモリーを割り当て、 `rb_memory_view_release` が解放します。 [メモリビュー成分構造体](#component-structure) も参照。
 
 - **`size_t item_desc.length`**: `item_desc.components` 内の要素数。
 
