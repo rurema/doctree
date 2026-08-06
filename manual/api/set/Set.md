@@ -614,5 +614,17 @@ p Set[1, 2, 3].disjoint? Set[4, 5] # => true
 
 要素はインデックスし直され、重複削除されます。
 
+```ruby
+require 'set'
+array = [1]
+set = Set[array]
+p set  # => #<Set: {[1]}>
+array << 2
+set.add(array)
+p set  # => #<Set: {[1, 2], [1, 2]}>
+set.reset
+p set  # => #<Set: {[1, 2]}>
+```
+
 - **SEE** [m:Hash#rehash]
 
