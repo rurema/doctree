@@ -68,7 +68,7 @@ N, V, f, e, g, q, q!, Q, Q!, d, E, G, j, J, x
 
 ### メモリビュー成分構造体 {#component-structure}
 
-メモリビューの成分のメタデータです。
+メモリビュー成分構造体（ `rb_memory_view_item_component_t` ）によってメモリビューの成分のメタデータを表現します。
 
 `rb_memory_view_t->item_desc.components` の一要素です。
 
