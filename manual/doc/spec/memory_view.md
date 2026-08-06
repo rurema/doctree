@@ -49,7 +49,7 @@ numo-narray の `Numo::NArray` や rmagick の `Magick::Image` といった、 c
 
 - **`const ssize_t *sub_offsets`**: メモリビューがネストされた配列をエクスポートする場合に、それぞれの次元におけるオフセットからなる、長さ `ndim` の配列。メモリビューが平坦な配列の場合は `NULL` になることがあります。
 
-- **`void *private_data`**: メモリビューのプロデューサが内部的に使用するプライベートなデータ。不要な場合は `NULL` になることがあります。
+- **`void *private_data`(Ruby 3.0 では `void *const private`)**: メモリビューのプロデューサが内部的に使用するプライベートなデータ。不要な場合は `NULL` になることがあります。
 
 #### フォーマット文字列 {#format}
 
