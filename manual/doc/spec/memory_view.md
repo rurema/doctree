@@ -76,7 +76,7 @@ N, V, f, e, g, q, q!, Q, Q!, d, E, G, j, J, x
 
 - **`char format`**: `rb_memory_view_t->format` 参照。
 
-- **`bool native_size_p`**: FIXME: 「ネイティブ」サイズが何なのか不明確。
+- **`bool native_size_p`**: ネイティブ（システム依存）のサイズかどうか。 [d:pack_template] の「整数のテンプレート文字のシステム依存性」の項参照。
 
 - **`bool little_endian_p`**: 成分のエンディアン。
 
