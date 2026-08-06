@@ -25,20 +25,23 @@ Ruby 2.4.0 からはどちらも `Integer` クラスのエイリアスとなっ�
 #%since 3.1
 ### def Integer.try_convert(obj) -> Integer | nil
 
-`obj` を `Integer` に変換しようと試みます。変換には [m:Object#to_int]
-メソッドが使われます。
+`obj` を `Integer` に変換するためのメソッドです。
 
-`Integer` ならそのまま `obj` を返します。
-そうでなければ `obj.to_int` の結果を返すか、`nil` が返されます。
+`obj` が `Integer` ならそのまま `obj` を返します。
+
+`obj` が `Integer` でないとき、`to_int` メソッドに反応するなら `obj.to_int` の結果を返し、反応しないなら `nil` を返します。
 
 - **param** `obj` --   変換する任意のオブジェクト
-- **return** --      `Integer` または `nil`
-- **raise** `TypeError` -- `to_int` が `Integer` を返さなかった場合に発生します。
+- **raise** `TypeError` -- `obj.to_int` が `Integer` オブジェクトを返さなかった場合に発生します。
 
-```ruby title="例"
+```ruby title="変換できる例"
 p Integer.try_convert(1)  # => 1
 p Integer.try_convert(1.25) # => 1
-p Integer.try_convert([]) # => nil
+```
+
+```ruby title="変換できない例"
+p Integer.try_convert("1") # => nil
+# String#to_int メソッドは存在しないため
 ```
 
 #%end
@@ -48,7 +51,7 @@ p Integer.try_convert([]) # => nil
 非負整数 `n` の整数の平方根を返します。すなわち `n` の平方根以下の最大の非負整数を返します。
 
 - **param** `n` -- 非負整数。`Integer` ではない場合は、最初に `Integer` に変換されます。
-- **raise** `Math::DomainError` -- `n` が負の整数の時に発生します。
+- **raise** `Math::DomainError` -- `n` が負の整数のときに発生します。
 
 ```ruby
 p Integer.sqrt(0)      # => 0
@@ -58,11 +61,11 @@ p Integer.sqrt(25)     # => 5
 p Integer.sqrt(10**400) == 10**200 # => true
 ```
 
-Math.sqrt(n).floor と同等ですが、後者は浮動小数点数の精度の限界によって真の値とは違う結果になることがあります。
+`Math.sqrt(n).floor` と数学的には同じ意味ですが、後者は浮動小数点数の精度の限界によって真の値とは違う結果になることがあります。
 
 ```ruby
-p Integer.sqrt(10**46)   #=> 100000000000000000000000
-p Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
+p Integer.sqrt(10**46)    # => 100000000000000000000000
+p Math.sqrt(10**46).floor # =>  99999999999999991611392 (!)
 ```
 
 - **SEE** [m:Math?.sqrt]
@@ -72,17 +75,13 @@ p Math.sqrt(10**46).floor  #=>  99999999999999991611392 (!)
 ### def chr -> String
 ### def chr(encoding) -> String
 
-`self` を文字コードとして見た時に、引数で与えたエンコーディング `encoding` に対応する文字を返します。
+`self` を文字コードとして見たときに、引数で与えたエンコーディング `encoding` に対応する文字を返します。
 
 ```ruby
 p 65.chr
 # => "A"
 p 12354.chr
-#%since 3.4
-# => 'chr': 12354 out of char range (RangeError)
-#%else
-# => `chr': 12354 out of char range (RangeError)
-#%end
+# ~> RangeError: 12354 out of char range
 
 p 12354.chr(Encoding::UTF_8)
 # => "あ"
@@ -105,21 +104,24 @@ p 0x80.chr.encoding # => #<Encoding:ASCII_8BIT>
 ### def digits -> [Integer]
 ### def digits(base) -> [Integer]
 
-`base` を基数として `self` を位取り記数法で表記した数値を配列で返します。
+`base` を基数として `self` を位取り記数法で表記した各桁の数を並べた配列を返します。配列の先頭が最下位桁の数です。
 `base` を指定しない場合の基数は `10` です。
 
 ```ruby
-p 16.digits   # => [6, 1]
-p 16.digits(16) # => [0, 1]
+p 123.digits    # => [3, 2, 1]
+p 8.digits(2)   # => [0, 0, 0, 1]
+p 0xF8.digits(16) # => [8, 15]
 ```
 
-`self` は非負整数でなければいけません。非負整数でない場合は、[c:Math::DomainError] が発生します。
+`self` が `0` のとき返り値は `[0]` です。この場合を除き、返り値の配列の末尾の要素は必ず正になります。
+
+`self` が負の場合、[c:Math::DomainError] が発生します。
 
 ```ruby
--10.digits  # Math::DomainError: out of domain が発生
+-10.digits # ~> Math::DomainError: out of domain
 ```
 
-- **return** --     位取り記数法で表した時の数値の配列
+- **return** --     位取り記数法で表したときの各桁の数の配列
 - **param** `base` -- 基数となる数値。
 - **raise** `ArgumentError` -- `base` に正の整数以外を指定した場合に発生します。
 - **raise** `Math::DomainError` -- 非負整数以外に対して呼び出した場合に発生します。
@@ -134,7 +136,11 @@ p 16.digits(16) # => [0, 1]
 - **return** --      `self` を返します。
 
 ```ruby
-p 5.downto(1) {|i| print i, " " } # => 5 4 3 2 1
+2.downto(-1) { |i| p i }
+# => 2
+#    1
+#    0
+#    -1
 ```
 
 - **SEE** [m:Integer#upto], [m:Numeric#step], [m:Integer#times]
@@ -144,11 +150,13 @@ p 5.downto(1) {|i| print i, " " } # => 5 4 3 2 1
 
 `self` の次の整数を返します。
 
+メソッド名 `succ` はsuccessor（次ぐもの）より。
+
 ```ruby
-p 1.next    #=> 2
-p (-1).next #=> 0
-p 1.succ    #=> 2
-p (-1).succ #=> 0
+p 1.next    # => 2
+p (-1).next # => 0
+p 1.succ    # => 2
+p (-1).succ # => 0
 ```
 
 - **SEE** [m:Integer#pred]
@@ -337,27 +345,29 @@ p ?a.ord  #=> 97
 
 ### def pred    -> Integer
 
-`self` から `-1` した値を返します。
+`self` から `1` を引いた値を返します。
+
+メソッド名 `pred` はpredecessor（前のもの）より。
 
 ```ruby
-p 1.pred    #=> 0
-p (-1).pred #=> -2
+p 1.pred    # => 0
+p (-1).pred # => -2
 ```
 
 - **SEE** [m:Integer#next]
 
 ### def denominator -> Integer
 
-分母(常に1)を返します。
+常に `1` を返します。
 
-- **return** -- 分母を返します。
+これは `self` を既約分数で表したときの分母（denominator）です。
 
 ```ruby
 p 10.denominator  # => 1
 p -10.denominator # => 1
 ```
 
-- **SEE** [m:Integer#numerator]
+- **SEE** [m:Integer#numerator], [m:Rational#denominator]
 
 ### def gcd(n) -> Integer
 
@@ -419,20 +429,20 @@ p 0.lcm(-7)                 # => 0
 
 ### def numerator -> Integer
 
-分子(常に `self`)を返します。
+常に `self` を返します。
 
-- **return** -- 分子を返します。
+これは `self` を既約分数で表したときの分子（numerator）です。
 
 ```ruby
 p 10.numerator  # => 10
 p -10.numerator # => -10
 ```
 
-- **SEE** [m:Integer#denominator]
+- **SEE** [m:Integer#denominator], [m:Rational#numerator]
 
 ### def to_r -> Rational
 
-`self` を [c:Rational] に変換します。
+`self` を [c:Rational] に変換して返します。
 
 ```ruby
 p 1.to_r      # => (1/1)
@@ -442,11 +452,11 @@ p (1<<64).to_r  # => (18446744073709551616/1)
 ### def rationalize      -> Rational
 ### def rationalize(eps) -> Rational
 
-`self` を [c:Rational] に変換します。
+`self` を [c:Rational] に変換して返します。
 
 - **param** `eps` -- 許容する誤差
 
-引数 `eps` は常に無視されます。
+このメソッドは [m:Rational#rationalize] や [m:Float#rationalize] などに合わせて用意されていますが、`Integer` においては引数 `eps` は常に無視され、[m:Integer#to_r] と同じ値を返します。
 
 ```ruby
 p 2.rationalize    # => (2/1)
@@ -468,7 +478,9 @@ p (-Float::MAX.to_i * 2).to_f  # => -Infinity
 
 ### def <=>(other) -> -1 | 0 | 1 | nil
 
-`self` と `other` を比較して、`self` が大きい時に `1`、等しい時に `0`、小さい時に `-1`、比較できない時に `nil` を返します。
+`self` を `other` と比較して、`self` のほうが大きいときに `1`、等しいときに `0`、小さいときに `-1`、比較できないときに `nil` を返します。
+
+`Integer` オブジェクトを左項とする二項演算子 `<=>` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
 - **return** --      `-1` か `0` か `1` か `nil` のいずれか
@@ -477,13 +489,14 @@ p (-Float::MAX.to_i * 2).to_f  # => -Infinity
 p 1 <=> 2  # => -1
 p 1 <=> 1  # => 0
 p 2 <=> 1  # => 1
-p 2 <=> '' # => nil
+p 2 <=> '1' # => nil
 ```
 
 ### def -@ -> Integer
 
-単項演算子の - です。
 `self` の符号を反転させたものを返します。
+
+`Integer` オブジェクトに対する単項演算子 `-` はこのメソッドの呼び出しになります。
 
 ```ruby
 p(- 10) # => -10
@@ -492,10 +505,11 @@ p(- -10) # => 10
 
 ### def +(other) -> Numeric
 
-算術演算子。和を計算します。
+`self` に `other` を足した値（＝和）を返します。
 
-- **param** `other` -- 二項演算の右側の引数(対象)
-- **return** -- 計算結果
+`Integer` オブジェクトを左項とする算術演算子 `+` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- `self` に加算する数値
 
 ```ruby
 p 3 + 4 # => 7
@@ -503,21 +517,23 @@ p 3 + 4 # => 7
 
 ### def -(other) -> Numeric
 
-算術演算子。差を計算します。
+`self` から `other` を引いた値（＝差）を返します。
 
-- **param** `other` -- 二項演算の右側の引数(対象)
-- **return** -- 計算結果
+`Integer` オブジェクトを左項とする算術演算子 `-` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- `self` から減算する数値
 
 ```ruby
-p 4 - 1 #=> 3
+p 4 - 1 # => 3
 ```
 
 ### def *(other) -> Numeric
 
-算術演算子。積を計算します。
+`self` に `other` を掛けた値（＝積）を返します。
 
-- **param** `other` -- 二項演算の右側の引数(対象)
-- **return** -- 計算結果
+`Integer` オブジェクトを左項とする算術演算子 `*` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- `self` に対する乗数
 
 ```ruby
 p 2 * 3 # => 6
@@ -525,19 +541,23 @@ p 2 * 3 # => 6
 
 ### def /(other) -> Numeric
 
-除算の算術演算子。
+`self` を `other` で割った値（＝商）を返します。`other` のクラスによって除算の種類が異なります。
 
 `other` が `Integer` の場合、整商（整数の商）を `Integer` で返します。
 普通の商（剰余を考えない商）を越えない最大の整数をもって整商とします。
 
 `other` が [c:Float]、[c:Rational]、[c:Complex] の場合、普通の商を `other` と同じクラスのインスタンスで返します。
 
-- **param** `other` -- 二項演算の右側の引数(対象)
-- **return** -- 計算結果
+`Integer` オブジェクトを左項とする算術演算子 `/` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- `self` に対する除数
 
 ```ruby title="例"
+# 整商を返す例
 p 7 / 2 # => 3
 p 7 / -2 # => -4
+
+# 普通の商を返す例
 p 7 / 2.0 # => 3.5
 p 7 / 2r # => (7/2)
 p 7 / (2+0i) # => ((7/2)+0i)
@@ -553,15 +573,15 @@ end
 
 ### def div(other) -> Integer
 
-整商（整数の商）を返します。
+`self` を整除法によって `other` で割った値（＝整商）を返します。
+
 普通の商（剰余を考えない商）を越えない最大の整数をもって整商とします。
 
 `other` が `Integer` オブジェクトの場合、[m:Integer#/] の結果と一致します。
 
-`div` に対応する剰余メソッドは `modulo` です。
+`div` に対応する剰余メソッドは [m:Integer#modulo] です。
 
-- **param** `other` -- 二項演算の右側の引数(対象)
-- **return** -- 計算結果
+- **param** `other` -- `self` に対する除数
 
 ```ruby title="例"
 p 7.div(2) # => 3
@@ -588,31 +608,32 @@ end
 ### def %(other) -> Numeric
 ### def modulo(other) -> Numeric
 
-算術演算子。剰余を計算します。
+`self` を `other` で割った余り（剰余）を返します。
+
+`Integer` オブジェクトを左項とする算術演算子 `%` はこのメソッドの呼び出しになります。
 
 ```ruby
-p 13 % 4  # =>  1
-p 13 % -4 # => -3
-p -13 % 4 # =>  3
-p -13 % -4  # => -1
+p  5 %  3 # =>  2
+p  5 % -3 # => -1
+p -5 %  3 # =>  1
+p -5 % -3 # => -2
 ```
 
-- **param** `other` -- 二項演算の右側の引数(対象)
-- **return** -- 計算結果
+- **param** `other` -- `self` に対する除数
 
 ### def remainder(other) -> Numeric
 
-`self` を `other` で割った余り `r` を返します。
+`self` を `other` で割った余り（剰余）`r` を返します。
 
 `r` の符号は `self` と同じになります。
 
-- **param** `other` -- `self` を割る数。
+- **param** `other` -- `self` に対する除数
 
 ```ruby
-p 5.remainder(3)  # =>  2
-p -5.remainder(3) # => -2
-p 5.remainder(-3) # =>  2
-p -5.remainder(-3)  # => -2
+p  5.remainder( 3) # =>  2
+p  5.remainder(-3) # =>  2
+p -5.remainder( 3) # => -2
+p -5.remainder(-3) # => -2
 
 p -1234567890987654321.remainder(13731)    # => -6966
 p -1234567890987654321.remainder(13731.24) # => -9906.22531493148
@@ -622,9 +643,9 @@ p -1234567890987654321.remainder(13731.24) # => -9906.22531493148
 
 ### def divmod(other) -> [Integer, Numeric]
 
-`self` を `other` で割った商 `q` と余り `r` を、`[q, r]` という 2 要素の配列にして返します。 商 `q` は常に整数ですが、余り `r` は整数であるとは限りません。
+`self` を `other` で割った商 `q` と余り `r` を、`[q, r]` という 2 要素の配列にして返します。商 `q` は常に整数ですが、余り `r` は整数であるとは限りません。
 
-- **param** `other` -- `self` を割る数。
+- **param** `other` -- `self` に対する除数
 
 - **SEE** [m:Numeric#divmod]
 
@@ -634,7 +655,7 @@ p -1234567890987654321.remainder(13731.24) # => -9906.22531493148
 ただし [c:Complex] が関わる場合は例外です。
 その場合も成分は `Float` になります。
 
-- **param** `other` -- `self` を割る数を指定します。
+- **param** `other` -- `self` に対する除数
 
 ```ruby title="例"
 654321.fdiv(13731)      # => 47.652829364212366
@@ -652,7 +673,7 @@ p -1234567890987654321.remainder(13731.24) # => -9906.22531493148
 `self` を `other` で割り、その(剰余を考えない)商を整数に切り上げたものを返します。
 すなわち、`self` を `other` で割った商を `q` とすると、`q` 以上で最小の整数を返します。
 
-- **param** `other` -- `self` を割る数を指定します。
+- **param** `other` -- `self` に対する除数
 
 ```ruby
 p 3.ceildiv(3)  # => 1
@@ -663,18 +684,28 @@ p -5.ceildiv(3) # => -1
 p -5.ceildiv(-3)  # => 2
 ```
 
+```ruby title="使い道の例"
+# n 個の品物を m 個入るケースで運ぶとき、ケースはいくつ必要か
+n = 31
+m = 7
+p n.ceildiv(m) # => 5
+
+# n 個の品物を m 人になるべく均等に（差が 1 以下に収まるように）分配するとき
+# 多い人は何個受け取るか、という問題と同じ答え
+```
 #%end
 
 ### def **(other) -> Numeric
 ### def pow(other) -> Numeric
 ### def pow(other, modulo) -> Integer
 
-算術演算子。冪(べき乗)を計算します。
+`self` の `other` 乗を返します。
 
-- **param** `other` -- 二項演算の右側の引数(対象)
+`Integer` オブジェクトを左項とする算術演算子 `**` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- `self` に対する冪指数（べきしすう）
 - **param** `modulo` -- 指定すると、計算途中に巨大な値を生成せずに `(self**other) % modulo` と同じ結果を返します。
-- **return** -- 計算結果
-- **raise** `TypeError` -- 2引数 `pow` で `Integer` 以外を指定した場合に発生します。
+- **raise** `TypeError` -- 2引数 `pow` で `other` や `modulo` に `Integer` 以外を指定した場合に発生します。
 - **raise** `RangeError` -- 2引数 `pow` で `other` に負の数を指定した場合に発生します。
 #%since 3.4
 - **raise** `ArgumentError` -- 計算結果が巨大になりすぎる場合に発生します。
@@ -732,20 +763,27 @@ p -1234567890987654321.abs # => 1234567890987654321
 ### def ===(other) -> bool
 {: since=""}
 
-比較演算子。数値として等しいか判定します。
+`self` が 数値として `other` と等しければ `true` を返し、そうでないとき `false` を返します。
+
+`other` が数値でないときは `false` を返します。
+
+`Integer` オブジェクトを左項とする比較演算子 `==` および `===` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
 - **return** --      `self` と `other` が等しい場合 `true` を返します。
              そうでなければ `false` を返します。
 
 ```ruby
-p 1 == 2    # => false
-p 1 == 1.0  # => true
+p 1 == 2   # => false
+p 1 == 1.0 # => true
+p 1 == "1" # => false
 ```
 
 ### def <(other)  -> bool
 
-比較演算子。数値として小さいか判定します。
+数値として小さいか判定します。
+
+`Integer` オブジェクトを左項とする比較演算子 `<` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
 - **return** --      `self` よりも `other` が大きい場合 `true` を返します。
@@ -758,7 +796,9 @@ p 1 < 2  # => true
 
 ### def <=(other) -> bool
 
-比較演算子。数値として等しいまたは小さいか判定します。
+数値として等しいまたは小さいか判定します。
+
+`Integer` オブジェクトを左項とする比較演算子 `<=` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
 - **return** --      `self` よりも `other` の方が大きい場合か、
@@ -773,7 +813,9 @@ p 1 <= 2  # => true
 
 ### def >(other)  -> bool
 
-比較演算子。数値として大きいか判定します。
+数値として大きいか判定します。
+
+`Integer` オブジェクトを左項とする比較演算子 `>` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
 - **return** --      `self` よりも `other` の方が小さい場合 `true` を返します。
@@ -786,7 +828,9 @@ p 1 > 1  # => false
 
 ### def >=(other) -> bool
 
-比較演算子。数値として等しいまたは大きいか判定します。
+数値として等しいまたは大きいか判定します。
+
+`Integer` オブジェクトを左項とする比較演算子 `>=` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
 - **return** --      `self` よりも `other` の方が小さい場合か、
@@ -801,7 +845,9 @@ p 1 >= 2  # => false
 
 ### def ~        -> Integer
 
-ビット演算子。否定を計算します。
+`self` をビット論理反転した整数を返します。
+
+`Integer` オブジェクトに対する単項演算子 `~` はこのメソッドの呼び出しになります。
 
 ```ruby
 p ~1  # => -2
@@ -811,7 +857,9 @@ p ~-4 # => 3
 
 ### def |(other) -> Integer
 
-ビット二項演算子。論理和を計算します。
+`self` と `other` のビット論理和を返します。
+
+`Integer` オブジェクトを左項とする二項演算子 `|` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 数値
 
@@ -822,7 +870,9 @@ p 2 | 3  # => 3
 
 ### def &(other) -> Integer
 
-ビット二項演算子。論理積を計算します。
+`self` と `other` のビット論理積を返します。
+
+`Integer` オブジェクトを左項とする二項演算子 `&` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 数値
 
@@ -833,7 +883,9 @@ p 2 & 3  # => 2
 
 ### def ^(other) -> Integer
 
-ビット二項演算子。排他的論理和を計算します。
+`self` と `other` のビット排他的論理和を返します。
+
+`Integer` オブジェクトを左項とする二項演算子 `^` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 数値
 
@@ -846,7 +898,7 @@ p 2 ^ 3  # => 1
 ### def [](nth, len) -> Integer
 ### def [](range) -> Integer
 
-`nth` 番目のビット(最下位ビット(LSB)が 0 番目)が立っている時 `1`
+`nth` 番目のビット(最下位ビット(LSB)が 0 番目)が立っているとき `1`
 を、そうでなければ `0` を返します。
 
 - **param** `nth` --   何ビット目を指すかの数値
@@ -890,7 +942,9 @@ immutable であるためです。
 
 ### def <<(bits) -> Integer
 
-シフト演算子。`bits` だけビットを左にシフトします。
+`self` を `bits` だけ左にビットシフトした整数を返します。
+
+`Integer` オブジェクトを左項とするシフト演算子 `<<` はこのメソッドの呼び出しになります。
 
 - **param** `bits` -- シフトさせるビット数
 
@@ -901,7 +955,9 @@ p -1 << 1 # => -2
 
 ### def >>(bits) -> Integer
 
-シフト演算子。`bits` だけビットを右にシフトします。
+`self` を `bits` だけ右にビットシフトした整数を返します。
+
+`Integer` オブジェクトを左項とするシフト演算子 `>>` はこのメソッドの呼び出しになります。
 
 右シフトは、符号ビット(最上位ビット(MSB))が保持されます。
 `bits` が実数の場合、小数点以下を切り捨てた値でシフトします。
