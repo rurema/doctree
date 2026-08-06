@@ -87,7 +87,7 @@ RUBY_MEMORY_VIEW_INDIRECT          = (1<<6) | RUBY_MEMORY_VIEW_STRIDES
 
 ### void rb_memory_view_prepare_item_desc(rb_memory_view_t *view)
 
-`view` の　`item_desc` メンバを埋めます。
+`view` の `item_desc` メンバを埋めます。
 
 ### bool rb_memory_view_is_contiguous(const rb_memory_view_t *view)
 
