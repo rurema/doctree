@@ -616,12 +616,11 @@ p Set[1, 2, 3].disjoint? Set[4, 5] # => true
 
 ```ruby
 require 'set'
-
 array = [1]
-set = Set[array]  
+set = Set[array]
 p set  # => #<Set: {[1]}>
 array << 2
-set.add(array) 
+set.add(array)
 p set  # => #<Set: {[1, 2], [1, 2]}>
 set.reset
 p set  # => #<Set: {[1, 2]}>
