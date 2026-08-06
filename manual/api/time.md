@@ -158,7 +158,7 @@ begin
   non_iso8601_time = '2008-08-31A12:34:56+09:00'
   Time.iso8601(non_iso8601_time)
 rescue ArgumentError => err
-  puts err #=> invalid date: "2008-08-31A12:34:56+09:00"
+  puts err #=> invalid xmlschema format: "2008-08-31A12:34:56+09:00"
 end
 ```
 
