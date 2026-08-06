@@ -55,7 +55,7 @@ numo-narray の `Numo::NArray` や rmagick の `Magick::Image` といった、 c
 
 `format` は以下の [d:pack_template] を並べた文字列です。
 
-```
+```text
 c, C, s, s!, S, S!, n, v, i, i!, I, I!, l, l!, L, L!,
 N, V, f, e, g, q, q!, Q, Q!, d, E, G, j, J, x
 ```
