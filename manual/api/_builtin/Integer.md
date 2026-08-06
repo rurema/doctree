@@ -29,7 +29,7 @@ Ruby 2.4.0 からはどちらも `Integer` クラスのエイリアスとなっ�
 
 `obj` が `Integer` ならそのまま `obj` を返します。
 
-`obj` が `Integer` でないとき、`to_int` メソッドに反応するなら `obj.to_int` の結果を返し、反応しないなら `nil` を返します。
+`obj` が `Integer` でないとき、`to_int` メソッドに応答するなら `obj.to_int` の結果を返し、応答しないなら `nil` を返します。
 
 - **param** `obj` --   変換する任意のオブジェクト
 - **raise** `TypeError` -- `obj.to_int` が `Integer` オブジェクトを返さなかった場合に発生します。
@@ -150,7 +150,7 @@ p 0xF8.digits(16) # => [8, 15]
 
 `self` の次の整数を返します。
 
-メソッド名 `succ` はsuccessor（次ぐもの）より。
+メソッド名 `succ` は successor（次ぐもの）より。
 
 ```ruby
 p 1.next    # => 2
@@ -347,7 +347,7 @@ p ?a.ord  #=> 97
 
 `self` から `1` を引いた値を返します。
 
-メソッド名 `pred` はpredecessor（前のもの）より。
+メソッド名 `pred` は predecessor（前のもの）より。
 
 ```ruby
 p 1.pred    # => 0
