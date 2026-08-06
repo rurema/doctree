@@ -20,7 +20,7 @@
 
 `flags` は以下をビット OR で組み合わせて指定します。
 
-```
+```c
 RUBY_MEMORY_VIEW_SIMPLE            = 0
 RUBY_MEMORY_VIEW_WRITABLE          = (1<<0)
 RUBY_MEMORY_VIEW_FORMAT            = (1<<1)
