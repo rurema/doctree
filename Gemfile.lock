@@ -19,7 +19,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     drb (2.2.3)
-    json (2.20.0)
+    json (2.21.2)
     nkf (0.3.0)
     progressbar (1.13.0)
     rack (3.2.6)
