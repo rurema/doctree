@@ -173,7 +173,9 @@ Ruby スクリプトで使われる記号の一覧です。
   定義されることもあります。
 
   ```ruby
+#%until 3.2
   require 'set'
+#%end
 #%since 4.0
   p Set[1, 2] | Set[2, 3] # => Set[1, 2, 3]
 #%else
