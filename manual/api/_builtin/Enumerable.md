@@ -24,8 +24,10 @@ Enumerableモジュールはインクルードされています。ただし、�
 - **param** `pattern` -- ブロックの代わりに各要素に対して pattern === item を評価します。
 
 ```ruby title="例"
+#%until 3.2
 require 'set'
 
+#%end
 # すべて正の数か？
 p Set[5,  6, 7].all? {|v| v > 0 }      # => true
 p Set[5, -1, 7].all? {|v| v > 0 }      # => false
@@ -56,7 +58,9 @@ p({foo: 0, bar: 1}.all?(Hash))         # => false
 - **param** `pattern` -- ブロックの代わりに各要素に対して pattern === item を評価します。
 
 ```ruby title="例"
+#%until 3.2
 require 'set'
+#%end
 p Set[1, 2, 3].any? {|v| v > 3 }         # => false
 p Set[1, 2, 3].any? {|v| v > 1 }         # => true
 p Set[].any? {|v| v > 0 }                # => false
@@ -937,7 +941,9 @@ p [].minmax_by{} # => [nil, nil]
 - **param** `pattern` -- ブロックの代わりに各要素に対して pattern === item を評価します。
 
 ```ruby title="例"
+#%until 3.2
 require 'set'
+#%end
 p Set['ant', 'bear', 'cat'].none? {|word| word.length == 5}  # => true
 p Set['ant', 'bear', 'cat'].none? {|word| word.length >= 4}  # => false
 p Set['ant', 'bear', 'cat'].none?(/d/)                     # => true
@@ -962,7 +968,9 @@ p Set[nil, false, true].none?                              # => false
 - **param** `pattern` -- ブロックの代わりに各要素に対して pattern === item を評価します。
 
 ```ruby title="例"
+#%until 3.2
 require 'set'
+#%end
 p Set['ant', 'bear', 'cat'].one? {|word| word.length == 4}  # => true
 p Set['ant', 'bear', 'cat'].one? {|word| word.length > 4} # => false
 p Set['ant', 'bear', 'cat'].one?(/t/)                     # => false
