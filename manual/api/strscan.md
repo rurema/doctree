@@ -1031,7 +1031,7 @@ p StringScanner::Version.frozen? # => true
 [c:StringScanner] クラスの詳しいバージョンを文字列で返します。
 この文字列は [m:Object#freeze] されています。
 
-# class StringScanner::Error
+# class StringScanner::Error < StandardError
 
 スキャン中に発生したエラーをあらわす例外です。
 
