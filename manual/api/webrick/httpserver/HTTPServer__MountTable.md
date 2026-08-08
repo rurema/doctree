@@ -19,7 +19,7 @@ library: webrick/httpserver
 
 - **param** `dir` -- ディレクトリを指定します。
 
-- **return** -- [c:WEBrick::HTTPServlet::AbstractServlet] のサブクラスのインタンスを返します。
+- **return** -- [c:WEBrick::HTTPServlet::AbstractServlet] のサブクラスのインスタンスを返します。
 
 ### def []=(dir, val)
 
@@ -35,7 +35,7 @@ library: webrick/httpserver
 
 - **param** `dir` -- ディレクトリを指定します。
 
-- **return** -- [c:WEBrick::HTTPServlet::AbstractServlet] のサブクラスのインタンスを返します。
+- **return** -- [c:WEBrick::HTTPServlet::AbstractServlet] のサブクラスのインスタンスを返します。
 
 ### def scan(path) -> Array
 #%# 自信ない
