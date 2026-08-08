@@ -115,37 +115,24 @@ puts s.dump                           #=> "\x8A\xBF\x8E\x9A"
 
 読み込んだ文字列のエンコーディング
 
-```text
-                                                   バイナリ読み込みメソッド      テキスト読み込みメソッド
-----------------------------------------------------------------------------------------------------------
-                                        指定無し        ASCII-8BIT                   default_external
- 
-                           default_internal のみ        ASCII-8BIT                   default_internal
- 
-                        外部エンコーディングのみ        ASCII-8BIT                 外部エンコーディング
- 
-                    内部エンコーディング指定あり        ASCII-8BIT                 内部エンコーディング
-  
-    内部エンコーディングと default_internal 両方        ASCII-8BIT                 内部エンコーディング
-```
+| | バイナリ読み込みメソッド | テキスト読み込みメソッド |
+|--------------------------|------------|------------------- |
+| 指定無し                  | ASCII-8BIT | default_external |
+| default_internal のみ    | ASCII-8BIT | default_internal |
+| 外部エンコーディングのみ    | ASCII-8BIT | 外部エンコーディング |
+| 内部エンコーディング指定あり | ASCII-8BIT | 内部エンコーディング |
+| 内部エンコーディングと default_internal 両方 | ASCII-8BIT | 内部エンコーディング |
 
 エンコーディングの変換
 
-```text
-                                              バイナリ読み込みメソッド   テキスト読み込みメソッド   書き込みメソッド
----------------------------------------------------------------------------------------------------------------------
-                                  指定無し           変換なし                 変換なし                   変換なし
-
-                  外部エンコーディングのみ           変換なし                 変換なし                   変換あり
-         
-                     default_internal のみ           変換なし                 変換あり                   変換あり 
-  
-                  内部エンコーディングのみ           変換なし                 変換あり                   変換あり
-
-外部エンコーディングと内部エンコーディング           変換なし                 変換あり                   変換あり
-
-   外部エンコーディングと default_internal           変換なし                 変換あり                   変換あり
-```
+| | バイナリ読み込みメソッド | テキスト読み込みメソッド | 書き込みメソッド |
+|------------------------|--------|---------|---------|
+| 指定無し                | 変換なし | 変換なし | 変換なし |
+| 外部エンコーディングのみ   | 変換なし | 変換なし | 変換あり |
+| default_internal のみ  | 変換なし | 変換あり | 変換あり |
+| 内部エンコーディングのみ   | 変換なし | 変換あり | 変換あり |
+| 外部エンコーディングと内部エンコーディング  | 変換なし | 変換あり | 変換あり |
+| 外部エンコーディングと default_internal | 変換なし | 変換あり | 変換あり |
 
 #### デフォルトの外部エンコーディングの指定
 
@@ -176,30 +163,26 @@ Windows の IO にはテキストモードとバイナリモードという2種�
 ただし、length を指定できるメソッドに関しては、length に nil または 0 を指定した場合、
 EOF であっても常に空文字列 "" を返します。
 
-```text
-メソッド                      空のファイルに対して
+| メソッド                 | 空のファイルに対して |
+|-------------------------|-------------------|
+| IO.read(空ファイル)         | `""` |
+| IO.read(空ファイル, length)  | `nil` |
+| IO.readlines(空ファイル)    | `[]` |
+| IO.foreach(空ファイル)      | 何もしない |
 
-IO.read(空ファイル)           ""
-IO.read(空ファイル, length)   nil
-IO.readlines(空ファイル)      []
-IO.foreach(空ファイル)        何もしない
-```
-
-```text
-メソッド                      既にEOFだったら
-
-IO#each_byte                  何もしない
-IO#getc                       nil
-IO#gets                       nil
-IO#read()                     ""
-IO#read(length)               nil
-IO#read_nonblock              EOFError
-IO#readchar                   EOFError
-IO#readline                   EOFError
-IO#readlines                  []
-IO#readpartial                EOFError
-IO#sysread                    EOFError
-```
+|メソッド            | 既にEOFだったら|
+|------------------|-----------|
+| IO#each_byte     | 何もしない |
+| IO#getc          | `nil` |
+| IO#gets          | `nil` |
+| IO#read()        | `""` |
+| IO#read(length)  | `nil` |
+| IO#read_nonblock | `EOFError` |
+| IO#readchar      | `EOFError` |
+| IO#readline      | `EOFError` |
+| IO#readlines     | `[]` |
+| IO#readpartial   | `EOFError` |
+| IO#sysread       | `EOFError` |
 
 ## Class Methods
 
