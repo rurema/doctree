@@ -17,7 +17,7 @@
 |[rurema-search](https://github.com/clear-code/rurema-search)|るりまを全文検索するWebアプリケーション（るりまサーチ）。docs.ruby-lang.org でも長らく稼働していたが、2026年7月に静的検索ページ（/ja/search/）へ置き換えられ退役。|
 |[ruri](https://github.com/jugyo/ruri)|るりまのシェル。|
 |[rubydoc-ja-docsets](http://labocho.github.io/rubydoc-ja-docsets/)|るりまを [Dash](http://kapeli.com/dash) で簡単にひけるようにするらしい。|
-|[RRSE](http://www.kmc.gr.jp/~ohai/rrse.html)|Emacsのミニバッファにメソッドのシネグチャを表示するツール。|
+|[RRSE](http://www.kmc.gr.jp/~ohai/rrse.html)|Emacsのミニバッファにメソッドのシグネチャを表示するツール。|
 |[Rbref](http://rbref.heroku.com/)|Rubyの組み込みクラスの全メソッドが一覧できる。|
 [rrmsc](https://github.com/succi0303/rrmsc)|コマンドラインから「るりまサーチ」の検索を実行するツール。|
 |[rbenv-refe2](https://github.com/hara/rbenv-refe2)|rbenv からるりまを参照するためのプラグイン。|
