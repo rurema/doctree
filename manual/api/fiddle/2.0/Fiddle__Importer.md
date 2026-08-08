@@ -27,14 +27,14 @@ Ruby のブロックを C の関数で wrap し、その関数をモジュール
 これでインポートされた関数はモジュール関数として定義されます。
 また、[m:Fiddle::Importer#\[\]] で [c:Fiddle::Function] オブジェクトとして取り出すことができます。
 
-signature で関数の名前とシネグチャを指定します。例えば
+signature で関数の名前とシグネチャを指定します。例えば
 "int compare(void*, void*)" のように指定します。
 
 opts には :stdcall もしくは :cdecl を渡すことができ、呼出規約を明示できます。
 
 - **return** -- インポートした関数を表す [c:Fiddle::Function] オブジェクトを返します。
 
-- **param** `signature` -- 関数の名前とシネグチャ
+- **param** `signature` -- 関数の名前とシグネチャ
 - **param** `opts` -- オプション
 
 ```ruby title="例"
@@ -83,14 +83,14 @@ C の関数をインポートします。
 
 インポートした関数はそのモジュールにモジュール関数として定義されます。
 
-signature で関数の名前とシネグチャを指定します。例えば
+signature で関数の名前とシグネチャを指定します。例えば
 "int strcmp(char*, char*)" のように指定できます。
 
 opts には :stdcall もしくは :cdecl を渡すことができ、呼出規約を明示できます。
 
 - **return** -- インポートした関数を表す [c:Fiddle::Function] オブジェクトを返します。
 
-- **param** `signature` -- 関数の名前とシネグチャ
+- **param** `signature` -- 関数の名前とシグネチャ
 - **param** `opts` -- オプション
 
 ```ruby title="例"
