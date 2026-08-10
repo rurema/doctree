@@ -225,7 +225,7 @@ p Marshal.dump(Math::PI).unpack("x2 a c a*")
 p Marshal.dump(0.0/0).unpack("x2 a c a*")  # => ["f", 8, "nan"]
 p Marshal.dump(1.0/0).unpack("x2 a c a*")  # => ["f", 8, "inf"]
 p Marshal.dump(-1.0/0).unpack("x2 a c a*") # => ["f", 9, "-inf"]
-p Marshal.dump(-0.0).unpack("x2 a c a*")   # => ["f", 9, "-0"]
+p Marshal.dump(-0.0).unpack("x2 a c a*")   # => ["f", 7, "-0"]
 ```
 
 #### ruby 1.7 feature
