@@ -8,7 +8,7 @@ alias:
 ---
 # class Integer < Numeric
 
-整数クラスです。
+整数を表すクラスです。
 
 整数オブジェクトに特異メソッドを追加する事はできません。追加した場合、
 [c:TypeError] が発生します。
@@ -19,6 +19,18 @@ alias:
 Ruby 2.4.0 から [c:Fixnum], [c:Bignum] は `Integer` に統合されました。
 Ruby 2.4.0 からはどちらも `Integer` クラスのエイリアスとなっています。
 #%end
+
+`Integer` には [m:Integer#~] や [m:Integer#&] のようなビット論理演算がいくつか定義されています。これらは、整数を「2 の補数表記」したビット列とみなして、位ごとに論理演算を行うものです。
+
+`Integer` のビット論理演算において、整数は以下の例のように左（上位）に無限に `0` または `1` が続くビット列として扱われます（`..` は、その右隣に書かれた数字が左に向かって無限に続くことを意味する）。
+
+| 10 進表記 | 2 進表記 |  ビット列  |
+|:-----:|---------:| --------:|
+|  `6` |  `0b110` | `..0110` |
+|  `1` |    `0b1` |   `..01` |
+|  `0` |    `0b0` |    `..0` |
+| `-1` |   `-0b1` |    `..1` |
+| `-6` | `-0b110` | `..1010` |
 
 ## Class Methods
 
@@ -274,20 +286,25 @@ p (-18).truncate(-1) # => -10
 ### def inspect(base=10) -> String
 {: since=""}
 
-整数を 10 進文字列表現に変換します。
+`base` を基数とする位取り記数法で `self` を表した文字列を返します。
 
-引数を指定すれば、それを基数とした文字列表現に変換します。
+つまり「`base` 進法」による整数の表記を返します。デフォルトは 10 進法です。
+
+`base` が 11 以上のとき、`"a"` から `"z"` までのアルファベットが 10〜35 を表す「数字」として用いられます。
 
 ```ruby
-p 10.to_s(2)    # => "1010"
-p 10.to_s(8)    # => "12"
-p 10.to_s(16)   # => "a"
-p 35.to_s(36)   # => "z"
+p 10.to_s     # => "10"
+p 10.to_s(2)  # => "1010"
+p 10.to_s(8)  # => "12"
+p 10.to_s(16) # => "a"
+p 35.to_s(36) # => "z"
 ```
 
 - **return** --     数値の文字列表現
-- **param** `base` -- 基数となる 2〜36 の数値。
+- **param** `base` -- 基数となる 2〜36 の整数。
 - **raise** `ArgumentError` -- `base` に 2〜36 以外の数値を指定した場合に発生します。
+
+- **SEE** [m:String#to_i]
 
 ### def upto(max) {|n| ... } -> Integer
 ### def upto(max) -> Enumerator
@@ -466,7 +483,7 @@ p 2.rationalize(0.1) # => (2/1)
 
 ### def to_f -> Float
 
-`self` を浮動小数点数([c:Float])に変換します。
+`self` を浮動小数点数([c:Float])に変換して返します。
 
 `self` が [c:Float] の範囲に収まらない場合、[m:Float::INFINITY] を返します。
 
@@ -482,7 +499,7 @@ p (-Float::MAX.to_i * 2).to_f  # => -Infinity
 
 `Integer` オブジェクトを左項とする二項演算子 `<=>` はこのメソッドの呼び出しになります。
 
-- **param** `other` -- 比較対象の数値
+- **param** `other` -- 比較対象
 - **return** --      `-1` か `0` か `1` か `nil` のいずれか
 
 ```ruby
@@ -612,14 +629,14 @@ end
 
 `Integer` オブジェクトを左項とする算術演算子 `%` はこのメソッドの呼び出しになります。
 
+- **param** `other` -- `self` に対する除数
+
 ```ruby
 p  5 %  3 # =>  2
 p  5 % -3 # => -1
 p -5 %  3 # =>  1
 p -5 % -3 # => -2
 ```
-
-- **param** `other` -- `self` に対する除数
 
 ### def remainder(other) -> Numeric
 
@@ -643,7 +660,8 @@ p -1234567890987654321.remainder(13731.24) # => -9906.22531493148
 
 ### def divmod(other) -> [Integer, Numeric]
 
-`self` を `other` で割った商 `q` と余り `r` を、`[q, r]` という 2 要素の配列にして返します。商 `q` は常に整数ですが、余り `r` は整数であるとは限りません。
+`self` を `other` で割った商 `q` と余り `r` を、`[q, r]` という 2 要素の配列にして返します。
+商 `q` は常に整数ですが、余り `r` は整数であるとは限りません。
 
 - **param** `other` -- `self` に対する除数
 
@@ -764,13 +782,13 @@ p -1234567890987654321.abs # => 1234567890987654321
 ### def ===(other) -> bool
 {: since=""}
 
-`self` が 数値として `other` と等しければ `true` を返し、そうでないとき `false` を返します。
+`self` が数値として `other` と等しければ `true` を返し、そうでないとき `false` を返します。
 
 `other` が数値でないときは `false` を返します。
 
 `Integer` オブジェクトを左項とする比較演算子 `==` および `===` はこのメソッドの呼び出しになります。
 
-- **param** `other` -- 比較対象の数値
+- **param** `other` -- 比較対象
 - **return** --      `self` と `other` が等しい場合 `true` を返します。
              そうでなければ `false` を返します。
 
@@ -782,66 +800,103 @@ p 1 == "1" # => false
 
 ### def <(other)  -> bool
 
-数値として小さいか判定します。
+`self` を数値として `other` と比較し、`self` のほうが小さければ `true` を、そうでなければ `false` を返します。
+
+`other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
+
+`other` が NaN のとき、`false` を返します。
+
+`other` が数値でないとき、`ArgumentError` が発生します。
 
 `Integer` オブジェクトを左項とする比較演算子 `<` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
-- **return** --      `self` よりも `other` が大きい場合 `true` を返します。
-             そうでなければ `false` を返します。
+- **return** -- `self` が `other` より小さければ `true` を、そうでなければ `false` を返します。
 
 ```ruby
 p 1 < 1  # => false
 p 1 < 2  # => true
+p 1 < Float::NAN # => false
+
+p 1 < Complex(2, 0)  # ~> NoMethodError
+p 1 < "2" # ~> ArgumentError: comparison of Integer with String failed
 ```
 
 ### def <=(other) -> bool
 
-数値として等しいまたは小さいか判定します。
+`self` を数値として `other` と比較し、`self` が `other` より小さいか等しければ `true` を、そうでなければ `false` を返します。
+
+`other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
+
+`other` が NaN のとき、`false` を返します。
+
+`other` が数値でないとき、`ArgumentError` が発生します。
 
 `Integer` オブジェクトを左項とする比較演算子 `<=` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
-- **return** --      `self` よりも `other` の方が大きい場合か、
-             両者が等しい場合 `true` を返します。
-             そうでなければ `false` を返します。
+- **return** -- `self` が `other` より小さいか等しければ `true` を、そうでなければ `false` を返します。
 
 ```ruby
 p 1 <= 0  # => false
 p 1 <= 1  # => true
 p 1 <= 2  # => true
+
+p 1 <= Float::NAN # => false
+
+p 1 <= Complex(2, 0)  # ~> NoMethodError
+p 1 <= "2" # ~> ArgumentError: comparison of Integer with String failed
 ```
 
 ### def >(other)  -> bool
 
-数値として大きいか判定します。
+`self` を数値として `other` と比較し、`self` が `other` より大きければ `true` を、そうでなければ `false` を返します。
+
+`other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
+
+`other` が NaN のとき、`false` を返します。
+
+`other` が数値でないとき、`ArgumentError` が発生します。
 
 `Integer` オブジェクトを左項とする比較演算子 `>` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
-- **return** --      `self` よりも `other` の方が小さい場合 `true` を返します。
-             そうでなければ `false` を返します。
+- **return** -- `self` が `other` より大きければ `true` を、そうでなければ `false` を返します。
 
 ```ruby
 p 1 > 0  # => true
 p 1 > 1  # => false
+
+p 1 > Float::NAN # => false
+
+p 1 > Complex(0, 0)  # ~> NoMethodError
+p 1 > "0" # ~> ArgumentError: comparison of Integer with String failed
 ```
 
 ### def >=(other) -> bool
 
-数値として等しいまたは大きいか判定します。
+`self` を数値として `other` と比較し、`self` が `other` より大きいか等しければ `true` を、そうでなければ `false` を返します。
+
+`other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
+
+`other` が NaN のとき、`false` を返します。
+
+`other` が数値でないとき、`ArgumentError` が発生します。
 
 `Integer` オブジェクトを左項とする比較演算子 `>=` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
-- **return** --      `self` よりも `other` の方が小さい場合か、
-             両者が等しい場合 `true` を返します。
-             そうでなければ `false` を返します。
+- **return** -- `self` が `other` より大きいか等しければ `true` を、そうでなければ `false` を返します。
 
 ```ruby
 p 1 >= 0  # => true
 p 1 >= 1  # => true
 p 1 >= 2  # => false
+
+p 1 >= Float::NAN # => false
+
+p 1 >= Complex(0, 0)  # ~> NoMethodError
+p 1 >= "0" # ~> ArgumentError: comparison of Integer with String failed
 ```
 
 ### def ~        -> Integer
