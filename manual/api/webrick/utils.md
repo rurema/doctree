@@ -37,7 +37,7 @@ setuid できないプラットフォームでは警告を表示し、何もし�
 
 ```ruby
 require 'webrick'
-p WEBrick::Utils.getservername   #=> "localhost"
+p WEBrick::Utils.getservername   # => "localhost"
 ```
 
 ### module_function def random_string(len)    -> String
@@ -48,7 +48,7 @@ A-Z, a-z, 0-9 からなる長さ len のランダムな文字列を返します�
 
 ```ruby
 require 'webrick'
-p WEBrick::Utils.random_string(10)   #=> "xF0jwU4RJd"
+p WEBrick::Utils.random_string(10)   # => "xF0jwU4RJd"
 ```
 
 ### module_function def create_listeners(address, port, logger = nil) -> [TCPServer]

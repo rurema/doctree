@@ -88,22 +88,22 @@ shareable_constant_value)は、実行コードより前であれば、複数の�
 # 続きのコメント
 
 # frozen_string_literal: true
-p "abc".frozen?  #=> true
+p "abc".frozen?  # => true
 ```
 
 複数のマジックコメントを、emacs のモードライン形式でまとめて 1 行に書くこともできます。
 
 ```ruby title="例"
 # -*- coding: utf-8; frozen_string_literal: true -*-
-p __ENCODING__     #=> #<Encoding:UTF-8>
-p "abc".frozen?    #=> true
+p __ENCODING__     # => #<Encoding:UTF-8>
+p "abc".frozen?    # => true
 ```
 
 ### エンコーディングの指定 {#encoding}
 
 ```ruby title="例"
 # coding: euc-jp
-p __ENCODING__  #=> #<Encoding:EUC-JP>
+p __ENCODING__  # => #<Encoding:EUC-JP>
 ```
 
 ソースファイルのエンコーディング(スクリプトエンコーディング)を指定します。以下のいずれの書き方でも認識されます。
@@ -124,12 +124,12 @@ Ruby 2.0 以降、マジックコメントが無い場合のデフォルトの�
 # frozen_string_literal: true
 
 s = "abc"
-p s.frozen?  #=> true
+p s.frozen?  # => true
 
 begin
   s << "d"
 rescue => e
-  p e.class  #=> FrozenError
+  p e.class  # => FrozenError
 end
 ```
 
@@ -140,7 +140,7 @@ end
 
 ```ruby title="例(require先やevalには伝播しない)"
 # frozen_string_literal: true
-eval('p "abc".frozen?')  #=> false
+eval('p "abc".frozen?')  # => false
 ```
 
 freeze されていないコピーが必要な場合は [m:Object#dup] や単項演算子
@@ -175,8 +175,8 @@ indent.rb:6: warning: mismatched indentations at 'end' with 'if' at 4
 # shareable_constant_value: literal
 
 FOO = {a: 1, b: [1, 2, 3]}
-p Ractor.shareable?(FOO)  #=> true
-p FOO.frozen?             #=> true
+p Ractor.shareable?(FOO)  # => true
+p FOO.frozen?             # => true
 ```
 
 このマジックコメントより後にある定数への代入について、その値をどこまで自動的に [c:Ractor] で共有可能([m:Ractor.shareable?])にするかを指定します。
@@ -198,6 +198,6 @@ p FOO.frozen?             #=> true
 
 obj = Object.new
 FOO = obj
-p Ractor.shareable?(FOO)  #=> true
-p FOO.equal?(obj)         #=> false (コピーされている)
+p Ractor.shareable?(FOO)  # => true
+p FOO.equal?(obj)         # => false (コピーされている)
 ```

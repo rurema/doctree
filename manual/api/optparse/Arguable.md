@@ -40,7 +40,7 @@ ARGV.options{|opt|
   opt.on('-a'){ o = true }
   opt.parse!
 }
-p o                         #=> true
+p o                         # => true
 ```
 
 ### def order!               -> [String]
@@ -59,7 +59,7 @@ require 'optparse'
 o = nil
 ARGV.options.on('-a'){ o = true }
 ARGV.order!
-p o                                #=> true
+p o                                # => true
 ```
 
 ### def permute!             -> [String]
@@ -77,7 +77,7 @@ require 'optparse'
 o = nil
 ARGV.options.on('-a'){ o = true }
 ARGV.permute!
-p o                                #=> true
+p o                                # => true
 ```
 
 ### def parse!               -> [String]
@@ -95,7 +95,7 @@ require 'optparse'
 o = nil
 ARGV.options.on('-a'){ o = true }
 ARGV.parse!
-p o                                #=> true
+p o                                # => true
 ```
 
 #%since 3.3

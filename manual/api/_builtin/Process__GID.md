@@ -35,9 +35,9 @@ Process::GID.re_exchange   # (g2,id,??) ==> (id,g2,??)
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 ```ruby
-p [Process.gid, Process.egid]        #=> [0, 0]
-p Process::GID.change_privilege(33)  #=> 33
-p [Process.gid, Process.egid]        #=> [33, 33]
+p [Process.gid, Process.egid]        # => [0, 0]
+p Process::GID.change_privilege(33)  # => 33
+p [Process.gid, Process.egid]        # => [33, 33]
 ```
 
 ### module_function def eid    -> Integer
@@ -49,7 +49,7 @@ p [Process.gid, Process.egid]        #=> [33, 33]
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 ```ruby
-p Process.egid #=> 500
+p Process.egid # => 500
 ```
 
 ### module_function def grant_privilege(id)    -> Integer
@@ -73,9 +73,9 @@ p Process.egid #=> 500
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 ```ruby
-p [Process.gid, Process.egid]        #=> [0, 0]
-p Process::GID.grant_privilege(33)   #=> 33
-p [Process.gid, Process.egid]        #=> [0, 33]
+p [Process.gid, Process.egid]        # => [0, 0]
+p Process::GID.grant_privilege(33)   # => 33
+p [Process.gid, Process.egid]        # => [0, 33]
 ```
 
 ### module_function def re_exchange    -> Integer
@@ -89,9 +89,9 @@ p [Process.gid, Process.egid]        #=> [0, 33]
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 ```ruby
-p [Process.gid, Process.egid] #=> [0, 33]
-p Process::GID.re_exchange    #=> 0
-p [Process.gid, Process.egid] #=> [33, 0]
+p [Process.gid, Process.egid] # => [0, 33]
+p Process::GID.re_exchange    # => 0
+p [Process.gid, Process.egid] # => [33, 0]
 ```
 
 ### module_function def re_exchangeable?    -> bool
@@ -103,7 +103,7 @@ p [Process.gid, Process.egid] #=> [33, 0]
 現在のプロセスの実グループ ID を返します。
 
 ```ruby
-p Process.rid #=> 500
+p Process.rid # => 500
 ```
 
 ### module_function def sid_available?    -> bool
@@ -141,11 +141,11 @@ p Process.rid #=> 500
 ```ruby
 include Process
 # (r, e, s) == (500, 505, 505)
-p [gid, egid]           #=> [500, 505]
+p [gid, egid]           # => [500, 505]
 Process::GID.switch do
-  p [gid, egid]         #=> [500, 500]
+  p [gid, egid]         # => [500, 500]
 end
-p [gid, egid]           #=> [500, 505]
+p [gid, egid]           # => [500, 505]
 ```
 
 ### module_function def from_name(name) -> Integer

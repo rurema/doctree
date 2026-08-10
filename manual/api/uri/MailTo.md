@@ -64,7 +64,7 @@ build と異なり、デフォルトでは引数の正当性を検査しませ�
 
 ```ruby title="例"
 require 'uri'
-p URI.parse("mailto:nospam@example.com").to     #=> "nospam@example.com"
+p URI.parse("mailto:nospam@example.com").to     # => "nospam@example.com"
 ```
 
 ### def to=(s) 
@@ -79,7 +79,7 @@ p URI.parse("mailto:nospam@example.com").to     #=> "nospam@example.com"
 require 'uri'
 m = URI.parse("mailto:nospam@example.com")
 m.to = "nospaaaam@example.com"
-p m                                        #=> #<URI::MailTo:0xb7bf0614 URL:mailto:nospaaaam@example.com>
+p m                                        # => #<URI::MailTo:0xb7bf0614 URL:mailto:nospaaaam@example.com>
 ```
 
 ### def headers        -> [[String]]
@@ -89,7 +89,7 @@ p m                                        #=> #<URI::MailTo:0xb7bf0614 URL:mail
 ```ruby title="例"
 require 'uri'
 m = URI.parse("mailto:ruby-list@ruby-lang.org?subject=subscribe&cc=myaddr")
-p m.headers #=> [["subject", "subscribe"], ["cc", "myaddr"]]
+p m.headers # => [["subject", "subscribe"], ["cc", "myaddr"]]
 ```
 
 ### def headers=(s)

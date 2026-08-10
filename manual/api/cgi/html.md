@@ -74,7 +74,7 @@ blockquote 要素を生成します。
        
   ```ruby title="例"
   blockquote("http://www.example.com/quotes/foo.html") { "Foo!" }
-    #=> "<BLOCKQUOTE CITE=\"http://www.example.com/quotes/foo.html\">Foo!</BLOCKQUOTE>
+    # => "<BLOCKQUOTE CITE=\"http://www.example.com/quotes/foo.html\">Foo!</BLOCKQUOTE>
   ```
 
 ### def caption(align = nil) -> String

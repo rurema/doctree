@@ -42,8 +42,8 @@
 例えば「&&」は「||」より優先順位が高いので、以下のように解釈されます。
 
 ```ruby
-p a && b || c #=> (a && b) || c
-p a || b && c #=>  a || (b && c)
+p a && b || c # => (a && b) || c
+p a || b && c # =>  a || (b && c)
 ```
 
 ほとんどの演算子は特別な形式のメソッド呼び出しですが、一部のものは言語に組み込みで、再定義できません。
@@ -334,7 +334,7 @@ Range にするにはかっこが必要になることがあるので、注意�
     p n
   end
 }
-#=> 2
+# => 2
 #   3
 
 5.times{|n|
@@ -342,7 +342,7 @@ Range にするにはかっこが必要になることがあるので、注意�
     p n
   end
 }
-#=> 2
+# => 2
 #   3
 
 # 「..」と「...」の違いを示すためだけの例
@@ -352,14 +352,14 @@ Range にするにはかっこが必要になることがあるので、注意�
     p n
   end
 }
-#=> 2
+# => 2
 
 5.times{|n|
   if (n==2)...(n==2)
     p n
   end
 }
-#=> 2
+# => 2
 #   3
 #   4
 ```
@@ -389,8 +389,8 @@ p(1 && 2) # => 2
 and を伴う式をメソッドの引数に渡す場合は二重に括弧が必要となります。
 
 ```ruby
-p(true && false)    #=> false
-p((true and false)) #=> false
+p(true && false)    # => false
+p((true and false)) # => false
 ```
 
 ### or {#or}
@@ -418,8 +418,8 @@ p(false || nil) # => nil
 or を伴う式をメソッドの引数に渡す場合は二重に括弧が必要となります。
 
 ```ruby
-p(false || true)    #=> true
-p((false or true)) #=> true
+p(false || true)    # => true
+p((false or true)) # => true
 ```
 
 ### not {#not}
@@ -452,8 +452,8 @@ not 式
 not を伴う式をメソッドの引数に渡す場合は二重に括弧が必要となります。
 
 ```ruby
-p(! false)      #=> true
-p((not false))  #=> true
+p(! false)      # => true
+p((not false))  # => true
 ```
 
 ### 条件演算子 {#cond}

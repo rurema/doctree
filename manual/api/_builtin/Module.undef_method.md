@@ -52,9 +52,9 @@ module M1
     undef foo
   end
 end
-p M1.instance_methods false #=> ["foo"]
+p M1.instance_methods false # => ["foo"]
 M1.moo
-p M1.instance_methods false #=> []
+p M1.instance_methods false # => []
 module M2
   def foo
   end
@@ -62,7 +62,7 @@ module M2
     undef_method :foo
   end
 end
-p M2.instance_methods false #=> ["foo"]
+p M2.instance_methods false # => ["foo"]
 M2.moo
-p M2.instance_methods false #=> []
+p M2.instance_methods false # => []
 ```

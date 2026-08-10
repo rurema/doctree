@@ -98,19 +98,19 @@ String オブジェクトは自身のエンコーディング情報を持ちま�
 エンコーディングの変換にはメソッド [m:String#encode] を使います。
 
 ```ruby title="例:エンコーディングの変換"
-p "いろは".size      #=> 3
-p "漢字"[0]          #=> "漢"
-p "山本山".reverse   #=> "山本山" (回文なので分からないですね)
-p "ループ".reverse   #=> "プール"
+p "いろは".size      # => 3
+p "漢字"[0]          # => "漢"
+p "山本山".reverse   # => "山本山" (回文なので分からないですね)
+p "ループ".reverse   # => "プール"
 
 s = "ruビー"
 s[0..1] = "ル"
-p s                  #=> "ルビー"
+p s                  # => "ルビー"
 
 e = "言語".encode("EUC-JP")
 u = "言語".encode("UTF-8")
-p e.encoding                   #=> Encoding::EUC_JP
-p u.encoding                   #=> Encoding::UTF_8
+p e.encoding                   # => Encoding::EUC_JP
+p u.encoding                   # => Encoding::UTF_8
 ```
 
 より詳しく知りたい場合は、[d:spec/m17n] を参照してください。
@@ -126,10 +126,10 @@ p u.encoding                   #=> Encoding::UTF_8
 s = "いろは"
 a = s.encode("EUC-JP")
 b = s.encode("UTF-8")
-p a == b                            #=> false
+p a == b                            # => false
 
 s = "合".encode("EUC-JP")
-p s + "\u{4f53}".encode("EUC-JP")   #=> "合体"
+p s + "\u{4f53}".encode("EUC-JP")   # => "合体"
 s + "\u{4f53}"                      # ~> Encoding::CompatibilityError
 ```
 
@@ -142,7 +142,7 @@ s = "いろは"
 s.force_encoding("EUC-JP")
 h[s] = 1
 s.force_encoding("ASCII-8BIT")
-p h[s]                             #=> nil
+p h[s]                             # => nil
 ```
 
 #### 7bit クリーンな文字列
@@ -156,8 +156,8 @@ ASCII 互換エンコーディングをもつ文字列にエンコーディン�
 s = "abc"
 a = s.encode("EUC-JP")
 b = s.encode("UTF-8")
-p a == b                           #=> true
-p a + b                            #=> "abcabc"
+p a == b                           # => true
+p a + b                            # => "abcabc"
 ```
 
 ここで言う「ASCII互換エンコーディング」とは、コードポイントが同一という意味ではなくバイト列が同じことを意味します。従って UTF-16 はASCII互換ではありません。
@@ -371,15 +371,15 @@ def stringlike.==(other)
   "string" == other
 end
 
-p "string".eql?(stringlike) #=> false
-p "string" == stringlike    #=> false
+p "string".eql?(stringlike) # => false
+p "string" == stringlike    # => false
 
 def stringlike.to_str
   raise
 end
 
-p "string".eql?(stringlike) #=> false
-p "string" == stringlike    #=> true
+p "string".eql?(stringlike) # => false
+p "string" == stringlike    # => true
 ```
 
 - **SEE** [m:String#eql?]
@@ -518,20 +518,20 @@ nth が負の場合は文字列の末尾から数えます。
 
 ```ruby title="例"
 str0 = "bar"
-p str0[2, 1]       #=> "r"
-p str0[2, 0]       #=> ""
-p str0[2, 100]     #=> "r"  (右側を超えても平気)
-p str0[-1, 1]      #=> "r"
-p str0[-1, 2]      #=> "r"  (右に向かって len 文字)
+p str0[2, 1]       # => "r"
+p str0[2, 0]       # => ""
+p str0[2, 100]     # => "r"  (右側を超えても平気)
+p str0[-1, 1]      # => "r"
+p str0[-1, 2]      # => "r"  (右に向かって len 文字)
 
-p str0[3, 1]       #=> ""
-p str0[4, 1]       #=> nil
-p str0[-4, 1]      #=> nil
+p str0[3, 1]       # => ""
+p str0[4, 1]       # => nil
+p str0[-4, 1]      # => nil
 str1 = str0[0, 2]    # (str0 の「一部」を str1 とする)
-p str1             #=> "ba"
+p str1             # => "ba"
 str1[0] = "XYZ"
-p str1             #=> "XYZa" (str1 の内容が破壊的に変更された)
-p str0             #=> "bar" (str0 は無傷、 str1 は str0 と内容を共有していない)
+p str1             # => "XYZa" (str1 の内容が破壊的に変更された)
+p str0             # => "bar" (str0 は無傷、 str1 は str0 と内容を共有していない)
 ```
 
 ### def [](substr) -> String | nil
@@ -835,16 +835,16 @@ Unicode 全体ではなく、A-Z/a-z だけです。
 - **param** `other` --    self と比較する文字列
 
 ```ruby title="例"
-p "aBcDeF".casecmp("abcde")   #=> 1
-p "aBcDeF".casecmp("abcdef")  #=> 0
-p "aBcDeF".casecmp("abcdefg") #=> -1
-p "abcdef".casecmp("ABCDEF")  #=> 0
+p "aBcDeF".casecmp("abcde")   # => 1
+p "aBcDeF".casecmp("abcdef")  # => 0
+p "aBcDeF".casecmp("abcdefg") # => -1
+p "abcdef".casecmp("ABCDEF")  # => 0
 ```
 
 nil は文字列のエンコーディングが非互換の時に返されます。
 
 ```ruby
-p "\u{e4 f6 fc}".encode("ISO-8859-1").casecmp("\u{c4 d6 dc}") #=> nil
+p "\u{e4 f6 fc}".encode("ISO-8859-1").casecmp("\u{c4 d6 dc}") # => nil
 ```
 
 - **SEE** [m:String#<=>], [m:Encoding.compatible?]
@@ -857,17 +857,17 @@ p "\u{e4 f6 fc}".encode("ISO-8859-1").casecmp("\u{c4 d6 dc}") #=> nil
 - **param** `other` --    self と比較する文字列
 
 ```ruby title="例"
-p "abcdef".casecmp?("abcde")   #=> false
-p "aBcDeF".casecmp?("abcdef")  #=> true
-p "abcdef".casecmp?("abcdefg") #=> false
-p "abcdef".casecmp?("ABCDEF")  #=> true
-p "\u{e4 f6 fc}".casecmp?("\u{c4 d6 dc}") #=> true
+p "abcdef".casecmp?("abcde")   # => false
+p "aBcDeF".casecmp?("abcdef")  # => true
+p "abcdef".casecmp?("abcdefg") # => false
+p "abcdef".casecmp?("ABCDEF")  # => true
+p "\u{e4 f6 fc}".casecmp?("\u{c4 d6 dc}") # => true
 ```
 
 nil は文字列のエンコーディングが非互換の時に返されます。
 
 ```ruby
-p "\u{e4 f6 fc}".encode("ISO-8859-1").casecmp?("\u{c4 d6 dc}") #=> nil
+p "\u{e4 f6 fc}".encode("ISO-8859-1").casecmp?("\u{c4 d6 dc}") # => nil
 ```
 
 - **SEE** [m:String#casecmp]
@@ -1154,8 +1154,8 @@ str の形式は [man:tr(1)] と同じです。
 - **param** `strs` --    削除する文字列を示す文字列 (のリスト)
 
 ```ruby title="例"
-p "123456789".delete("2378")         #=> "14569"
-p "123456789".delete("2-8", "^4-6")  #=> "14569"
+p "123456789".delete("2378")         # => "14569"
+p "123456789".delete("2-8", "^4-6")  # => "14569"
 ```
 
 - **SEE** [m:String#delete!]
@@ -1180,16 +1180,16 @@ str の形式は [man:tr(1)] と同じです。
 
 ```ruby title="例"
 str = "123456789"
-p str.delete!("2378")         #=> "14569"
-p str                         #=> "14569"
+p str.delete!("2378")         # => "14569"
+p str                         # => "14569"
 
 str = "123456789"
-p str.delete!("2-8", "^4-6")  #=> "14569"
-p str                         #=> "14569"
+p str.delete!("2-8", "^4-6")  # => "14569"
+p str                         # => "14569"
 
 str = "abc"
-p str.delete!("2378")         #=> "nil"
-p str                         #=> "abc"
+p str.delete!("2378")         # => "nil"
+p str                         # => "abc"
 ```
 
 - **SEE** [m:String#delete]
@@ -1273,7 +1273,7 @@ self のエスケープを戻したものを返します。
 [m:String#dump] の逆変換にあたります。
 
 ```ruby title="例"
-p "\"hello \\n ''\"".undump #=> "hello \n ''"
+p "\"hello \\n ''\"".undump # => "hello \n ''"
 ```
 
 - **SEE** [m:String#dump]
@@ -1305,8 +1305,8 @@ p "aa\n".lines.to_a           # => ["aa\n"]
 p "".lines.to_a               # => []
 
 s = "aa\nbb\ncc\n"
-p s.lines("\n").to_a #=> ["aa\n", "bb\n", "cc\n"]
-p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]
+p s.lines("\n").to_a # => ["aa\n", "bb\n", "cc\n"]
+p s.lines("bb").to_a # => ["aa\nbb", "\ncc\n"]
 ```
 
 - **SEE** [m:String#lines]
@@ -1387,9 +1387,9 @@ Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は�
 文字列が空 (つまり長さ 0) の時、真を返します。
 
 ```ruby title="例"
-p "hello".empty? #=> false
-p " ".empty?     #=> false
-p "".empty?      #=> true
+p "hello".empty? # => false
+p " ".empty?     # => false
+p "".empty?      # => true
 ```
 
 ### def getbyte(index) -> Integer | nil
@@ -1498,8 +1498,8 @@ puts '\n'.gsub(/\\/) { '\\\\' }      # => \\n        # OK
 - **return** -- 新しい文字列
 
 ```ruby title="例"
-p 'abcabc'.gsub(/[bc]/) {|s| s.upcase }  #=> "aBCaBC"
-p 'abcabc'.gsub(/[bc]/) { $&.upcase }    #=> "aBCaBC"
+p 'abcabc'.gsub(/[bc]/) {|s| s.upcase }  # => "aBCaBC"
+p 'abcabc'.gsub(/[bc]/) { $&.upcase }    # => "aBCaBC"
 ```
 
 - **SEE** [m:String#sub], [m:String#scan]
@@ -1513,8 +1513,8 @@ p 'abcabc'.gsub(/[bc]/) { $&.upcase }    #=> "aBCaBC"
 
 ```ruby title="例"
 hash = {'b'=>'B', 'c'=>'C'}
-p "abcabc".gsub(/[bc]/){hash[$&]} #=> "aBCaBC"
-p "abcabc".gsub(/[bc]/, hash)     #=> "aBCaBC"
+p "abcabc".gsub(/[bc]/){hash[$&]} # => "aBCaBC"
+p "abcabc".gsub(/[bc]/, hash)     # => "aBCaBC"
 ```
 
 ### def gsub!(pattern, replace) -> self | nil
@@ -1583,11 +1583,11 @@ replace に「\」自身を入れたいときは「\」を二重にエスケー�
 ```ruby title="例"
 str = 'abcabc'
 str.gsub!(/b/) {|s| s.upcase }
-p str    #=> "aBcaBc"
+p str    # => "aBcaBc"
 
 str = 'abcabc'
 str.gsub!(/b/) { $&.upcase }
-p str    #=> "aBcaBc"
+p str    # => "aBcaBc"
 ```
 
 - **SEE** [m:String#sub]
@@ -1603,11 +1603,11 @@ p str    #=> "aBcaBc"
 hash = {'b'=>'B', 'c'=>'C'}
 str = "abcabc"
 str.gsub!(/[bc]/){hash[$&]}
-p str     #=> "aBCaBC"
+p str     # => "aBCaBC"
 
 str = "abcabc"
 str.gsub!(/[bc]/, hash)
-p str     #=> "aBCaBC"
+p str     # => "aBCaBC"
 ```
 
 ### def hex -> Integer
@@ -1646,9 +1646,9 @@ p "".hex      # => 0
 - **param** `substr` --    検索する文字列
 
 ```ruby title="例"
-p "hello".include? "lo" #=> true
-p "hello".include? "ol" #=> false
-p "hello".include? ?h   #=> true
+p "hello".include? "lo" # => true
+p "hello".include? "ol" # => false
+p "hello".include? ?h   # => true
 ```
 
 ### def index(pattern, pos = 0) -> Integer | nil
@@ -1825,10 +1825,10 @@ regexp が文字列の場合は、正規表現にコンパイルします。
 詳しくは [m:Regexp#match?] を参照してください。
 
 ```ruby title="例"
-p "Ruby".match?(/R.../)  #=> true
-p "Ruby".match?(/R.../, 1) #=> false
-p "Ruby".match?(/P.../)  #=> false
-p $&                     #=> nil
+p "Ruby".match?(/R.../)  # => true
+p "Ruby".match?(/R.../, 1) # => false
+p "Ruby".match?(/P.../)  # => false
+p $&                     # => nil
 ```
 
 - **SEE** [m:Regexp#match?], [m:Symbol#match?]
@@ -2093,15 +2093,15 @@ p 'foo'.byterindex(/ooo/) # => nil
 
 # 右でのマッチが優先
 p 'foo'.byterindex(/o+/) # => 2
-p $~ #=> #<MatchData "o">
+p $~ # => #<MatchData "o">
 
 # 最長にするには否定戻り読み(negative look-behind)と組み合わせる
 p 'foo'.byterindex(/(?<!o)o+/) # => 1
-p $~ #=> #<MatchData "oo">
+p $~ # => #<MatchData "oo">
 
 # またはbyteindexを否定先読み(negative look-ahead)
 p 'foo'.byteindex(/o+(?!.*o)/) # => 1
-p $~ #=> #<MatchData "oo">
+p $~ # => #<MatchData "oo">
 
 p 'foo'.byterindex('o', 0) # => nil
 p 'foo'.byterindex('o', 1) # => 1
@@ -2174,11 +2174,11 @@ pattern が正規表現で括弧を含む場合は、括弧で括られたパタ
 
 ```ruby title="例"
 string = "this is a string"
-p string.slice!(2)      #=> "i"
-p string.slice!(3..6)   #=> " is "
-p string.slice!(/s.*t/) #=> "sa st"
-p string.slice!("r")    #=> "r"
-p string                #=> "thing"
+p string.slice!(2)      # => "i"
+p string.slice!(3..6)   # => " is "
+p string.slice!(/s.*t/) # => "sa st"
+p string.slice!("r")    # => "r"
+p string                # => "thing"
 ```
 
 ### def split(sep = $;, limit = 0) -> [String]
@@ -2362,15 +2362,15 @@ selectors の形式は [man:tr(1)] と同じです。
 #%end
 
 ```ruby title="例"
-p "  abc  \r\n".strip    #=> "abc"
-p "abc\n".strip          #=> "abc"
-p "  abc".strip          #=> "abc"
-p "abc".strip            #=> "abc"
-p "  \0  abc  \0".strip  #=> "abc"
+p "  abc  \r\n".strip    # => "abc"
+p "abc\n".strip          # => "abc"
+p "  abc".strip          # => "abc"
+p "abc".strip            # => "abc"
+p "  \0  abc  \0".strip  # => "abc"
 
 str = "\tabc\n"
-p str.strip              #=> "abc"
-p str                    #=> "\tabc\n" (元の文字列は変化しない)
+p str.strip              # => "abc"
+p str                    # => "\tabc\n" (元の文字列は変化しない)
 ```
 
 #%since 4.0
@@ -2418,16 +2418,16 @@ selectors の形式は [man:tr(1)] と同じです。
 
 ```ruby title="例"
 str = "  abc\r\n"
-p str.strip!     #=> "abc"
-p str            #=> "abc"
+p str.strip!     # => "abc"
+p str            # => "abc"
 
 str = "abc"
-p str.strip!     #=> nil
-p str            #=> "abc"
+p str.strip!     # => nil
+p str            # => "abc"
 
 str = "  \0  abc  \0"
 str.strip!
-p str            #=> "abc"
+p str            # => "abc"
 ```
 
 #%since 4.0
@@ -2471,9 +2471,9 @@ selectors の形式は [man:tr(1)] と同じです。
 #%end
 
 ```ruby title="例"
-p "  abc\n".lstrip     #=> "abc\n"
-p "\t abc\n".lstrip    #=> "abc\n"
-p "abc\n".lstrip       #=> "abc\n"
+p "  abc\n".lstrip     # => "abc\n"
+p "\t abc\n".lstrip    # => "abc\n"
+p "abc\n".lstrip       # => "abc\n"
 ```
 
 #%since 4.0
@@ -2566,14 +2566,14 @@ selectors の形式は [man:tr(1)] と同じです。
 #%end
 
 ```ruby title="例"
-p "  abc\n".rstrip          #=> "  abc"
-p "  abc \t\r\n\0".rstrip   #=> "  abc"
-p "  abc".rstrip            #=> "  abc"
-p "  abc\0 ".rstrip         #=> "  abc"
+p "  abc\n".rstrip          # => "  abc"
+p "  abc \t\r\n\0".rstrip   # => "  abc"
+p "  abc".rstrip            # => "  abc"
+p "  abc\0 ".rstrip         # => "  abc"
 
 str = "abc\n"
-p str.rstrip    #=> "abc"
-p str           #=> "abc\n"  (元の文字列は変化しない)
+p str.rstrip    # => "abc"
+p str           # => "abc\n"  (元の文字列は変化しない)
 ```
 
 #%since 4.0
@@ -2706,8 +2706,8 @@ puts '\n'.sub(/\\/) { '\\\\' }      # => \\n        # OK
                   文字列を指定した場合は全く同じ文字列にだけマッチする
 
 ```ruby title="例"
-p 'abcabc'.sub(/b/) {|s| s.upcase }  #=> "aBcabc"
-p 'abcabc'.sub(/b/) { $&.upcase }    #=> "aBcabc"
+p 'abcabc'.sub(/b/) {|s| s.upcase }  # => "aBcabc"
+p 'abcabc'.sub(/b/) { $&.upcase }    # => "aBcabc"
 ```
 
 - **SEE** [m:String#gsub]
@@ -2721,8 +2721,8 @@ p 'abcabc'.sub(/b/) { $&.upcase }    #=> "aBcabc"
 
 ```ruby title="例"
 hash = {'b'=>'B', 'c'=>'C'}
-p "abcabc".sub(/[bc]/){hash[$&]} #=> "aBCabc"
-p "abcabc".sub(/[bc]/, hash)     #=> "aBCabc"
+p "abcabc".sub(/[bc]/){hash[$&]} # => "aBCabc"
+p "abcabc".sub(/[bc]/, hash)     # => "aBCabc"
 ```
 
 ### def sub!(pattern, replace) -> self | nil
@@ -2790,11 +2790,11 @@ replace に「\」自身を入れたいときは「\」を二重にエスケー�
 ```ruby title="例"
 str = 'abcabc'
 str.sub!(/b/) {|s| s.upcase }
-p str    #=> "aBcabc"
+p str    # => "aBcabc"
 
 str = 'abcabc'
 str.sub!(/b/) { $&.upcase }
-p str    #=> "aBcabc"
+p str    # => "aBcabc"
 ```
 
 - **SEE** [m:String#gsub]
@@ -3275,7 +3275,7 @@ self の最初の文字だけを含む文字列を返します。
 
 ```ruby title="例"
 a = "abcde"
-p a.chr  #=> "a"
+p a.chr  # => "a"
 ```
 
 Ruby 1.9 で IO#getc の戻り値が Integer から String を返すように変更になりました。
@@ -3432,8 +3432,8 @@ Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は�
 ```ruby title="例"
 #coding:UTF-8
 # 実行結果は文字コードによって異なります。
-p "いろは".size     #=> 3
-p "いろは".bytesize #=> 9
+p "いろは".size     # => 3
+p "いろは".bytesize # => 9
 ```
 
 - **SEE** [m:String#size]
@@ -3478,13 +3478,13 @@ p euc_str.encoding  # => #<Encoding:EUC-JP>
 
 ```ruby title="例"
 s = [164, 164, 164, 237, 164, 207].pack("C*")
-p s.encoding                                  #=> ASCII-8BIT
-p s.force_encoding("EUC-JP")                  #=> "いろは"
-p s.force_encoding(Encoding::EUC_JP)          #=> "いろは"
+p s.encoding                                  # => ASCII-8BIT
+p s.force_encoding("EUC-JP")                  # => "いろは"
+p s.force_encoding(Encoding::EUC_JP)          # => "いろは"
 
 u = [12411, 12408, 12392].pack("U*")
-p u.force_encoding("UTF-8")                   #=> "ほへと"
-p u.force_encoding(Encoding::UTF_8)           #=> "ほへと"
+p u.force_encoding("UTF-8")                   # => "ほへと"
+p u.force_encoding(Encoding::UTF_8)           # => "ほへと"
 ```
 
 ### def ascii_only?  -> bool
@@ -3505,9 +3505,9 @@ false を返します。
 true を返します。そうでない場合は false を返します。
 
 ```ruby title="例"
-p "\xc2\xa1".force_encoding("UTF-8").valid_encoding?  #=> true
-p "\xc2".force_encoding("UTF-8").valid_encoding?    #=> false
-p "\x80".force_encoding("UTF-8").valid_encoding?    #=> false
+p "\xc2\xa1".force_encoding("UTF-8").valid_encoding?  # => true
+p "\xc2".force_encoding("UTF-8").valid_encoding?    # => false
+p "\x80".force_encoding("UTF-8").valid_encoding?    # => false
 ```
 
 ### def encode(encoding, **options) -> String

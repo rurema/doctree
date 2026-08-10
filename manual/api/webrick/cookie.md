@@ -32,7 +32,7 @@ include WEBrick
 c = Cookie.parse('$Version="1"; Customer="WILE"; $Path="/foo"; P_Number="Rocket"; $Path="/foo/hoge"')
 p c[1].name, c[1].path
  
-#=> 
+# => 
 "P_Number"
 "/foo/hoge"
 ```
@@ -49,7 +49,7 @@ include WEBrick
 c = Cookie.parse_set_cookie('Shipping="FedEx"; Version="1"; Path="/acme"')
 p c.name, c.value
   
-#=>
+# =>
 "Shipping"
 "FedEx"
 ```

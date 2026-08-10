@@ -30,16 +30,16 @@ threads = []
 ThreadsWait.all_waits(*threads) {|th| printf("end %s\n", th.inspect) }
 
 # 出力例
-#=> #<Thread:0x21584 run>
-#=> #<Thread:0x21610 run>
-#=> #<Thread:0x2169c run>
-#=> #<Thread:0x21728 run>
-#=> #<Thread:0x214f8 run>
-#=> end #<Thread:0x21584 dead>
-#=> end #<Thread:0x21610 dead>
-#=> end #<Thread:0x2169c dead>
-#=> end #<Thread:0x21728 dead>
-#=> end #<Thread:0x214f8 dead>
+# => #<Thread:0x21584 run>
+# => #<Thread:0x21610 run>
+# => #<Thread:0x2169c run>
+# => #<Thread:0x21728 run>
+# => #<Thread:0x214f8 run>
+# => end #<Thread:0x21584 dead>
+# => end #<Thread:0x21610 dead>
+# => end #<Thread:0x2169c dead>
+# => end #<Thread:0x21728 dead>
+# => end #<Thread:0x214f8 dead>
 ```
 
 ### def ThreadsWait.new(*threads) -> ThreadsWait
@@ -62,16 +62,16 @@ thall.all_waits{|th|
 }
   
 # 出力例
-#=> #<Thread:0x214bc run>
-#=> #<Thread:0x21548 run>
-#=> #<Thread:0x215d4 run>
-#=> #<Thread:0x21660 run>
-#=> #<Thread:0x21430 run>
-#=> end #<Thread:0x214bc dead>
-#=> end #<Thread:0x21548 dead>
-#=> end #<Thread:0x215d4 dead>
-#=> end #<Thread:0x21660 dead>
-#=> end #<Thread:0x21430 dead>
+# => #<Thread:0x214bc run>
+# => #<Thread:0x21548 run>
+# => #<Thread:0x215d4 run>
+# => #<Thread:0x21660 run>
+# => #<Thread:0x21430 run>
+# => end #<Thread:0x214bc dead>
+# => end #<Thread:0x21548 dead>
+# => end #<Thread:0x215d4 dead>
+# => end #<Thread:0x21660 dead>
+# => end #<Thread:0x21430 dead>
 ```
 
 ## Instance Methods
@@ -92,7 +92,7 @@ threads = []
 
 thall = ThreadsWait.new(*threads)
 p thall.threads
-#=> [#<Thread:0x21750 sleep>, #<Thread:0x216c4 sleep>, #<Thread:0x21638 sleep>]
+# => [#<Thread:0x21750 sleep>, #<Thread:0x216c4 sleep>, #<Thread:0x21638 sleep>]
 ```
 
 ### def empty? -> bool
@@ -110,9 +110,9 @@ threads = []
 }
 
 thall = ThreadsWait.new
-p thall.threads.empty? #=> true
+p thall.threads.empty? # => true
 thall.join(*threads)
-p thall.threads.empty? #=> false
+p thall.threads.empty? # => false
 ```
 
 ### def finished? -> bool
@@ -130,9 +130,9 @@ threads = []
 }
 
 thall = ThreadsWait.new(*threads)
-p thall.finished? #=> false
+p thall.finished? # => false
 sleep 3
-p thall.finished? #=> true
+p thall.finished? # => true
 ```
 
 ### def join(*threads) -> ()
@@ -150,10 +150,10 @@ threads = []
 }
 
 thall = ThreadsWait.new
-p thall.threads #=> []
+p thall.threads # => []
 thall.join(*threads)
 p thall.threads
-#=> [#<Thread:0x216ec dead>, #<Thread:0x21660 dead>, #<Thread:0x215d4 dead>, #<Thread:0x214bc dead>]
+# => [#<Thread:0x216ec dead>, #<Thread:0x21660 dead>, #<Thread:0x215d4 dead>, #<Thread:0x214bc dead>]
 ```
 
 ### def join_nowait(*threads) -> ()
@@ -172,9 +172,9 @@ threads = []
 }
 
 thall = ThreadsWait.new
-p thall.threads #=> []
+p thall.threads # => []
 thall.join_nowait(*threads)
-p thall.threads #=> [#<Thread:0x21638 sleep>, #<Thread:0x215ac sleep>, #<Thread:0x21520 sleep>, #<Thread:0x21494 sleep>, #<Thread:0x21408 sleep>]
+p thall.threads # => [#<Thread:0x21638 sleep>, #<Thread:0x215ac sleep>, #<Thread:0x21520 sleep>, #<Thread:0x21494 sleep>, #<Thread:0x21408 sleep>]
 # 実際には終了を待っていない。sleep している。
 ```
 
@@ -226,15 +226,15 @@ thall.all_waits{|th|
 }
   
 # 出力例
-#=> #<Thread:0x214bc run>
-#=> #<Thread:0x21548 run>
-#=> #<Thread:0x215d4 run>
-#=> #<Thread:0x21660 run>
-#=> #<Thread:0x21430 run>
-#=> end #<Thread:0x214bc dead>
-#=> end #<Thread:0x21548 dead>
-#=> end #<Thread:0x215d4 dead>
-#=> end #<Thread:0x21660 dead>
-#=> end #<Thread:0x21430 dead>
+# => #<Thread:0x214bc run>
+# => #<Thread:0x21548 run>
+# => #<Thread:0x215d4 run>
+# => #<Thread:0x21660 run>
+# => #<Thread:0x21430 run>
+# => end #<Thread:0x214bc dead>
+# => end #<Thread:0x21548 dead>
+# => end #<Thread:0x215d4 dead>
+# => end #<Thread:0x21660 dead>
+# => end #<Thread:0x21430 dead>
 ```
 

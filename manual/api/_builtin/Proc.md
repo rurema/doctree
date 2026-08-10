@@ -71,9 +71,9 @@ def sign(n)
   end
 end
 
-p sign(-4) #=> -1
-p sign(0)  #=> 0
-p sign(7)  #=> 1
+p sign(-4) # => -1
+p sign(0)  # => 0
+p sign(7)  # => 1
 ```
 
 また、以下のような syntactic sugar もあります。
@@ -257,34 +257,34 @@ Procをカリー化します
 
 ```ruby title="例"
 b = proc {|x, y, z| (x||0) + (y||0) + (z||0) }
-p b.curry[1][2][3]           #=> 6
-p b.curry[1, 2][3, 4]        #=> 6
-p b.curry(5)[1][2][3][4][5]  #=> 6
-p b.curry(5)[1, 2][3, 4][5]  #=> 6
-p b.curry(1)[1]              #=> 1
+p b.curry[1][2][3]           # => 6
+p b.curry[1, 2][3, 4]        # => 6
+p b.curry(5)[1][2][3][4][5]  # => 6
+p b.curry(5)[1, 2][3, 4][5]  # => 6
+p b.curry(1)[1]              # => 1
 
 b = proc {|x, y, z, *w| (x||0) + (y||0) + (z||0) + w.sum }
-p b.curry[1][2][3]           #=> 6
-p b.curry[1, 2][3, 4]        #=> 10
-p b.curry(5)[1][2][3][4][5]  #=> 15
-p b.curry(5)[1, 2][3, 4][5]  #=> 15
-p b.curry(1)[1]              #=> 1
+p b.curry[1][2][3]           # => 6
+p b.curry[1, 2][3, 4]        # => 10
+p b.curry(5)[1][2][3][4][5]  # => 15
+p b.curry(5)[1, 2][3, 4][5]  # => 15
+p b.curry(1)[1]              # => 1
 
 b = lambda {|x, y, z| (x||0) + (y||0) + (z||0) }
-p b.curry[1][2][3]           #=> 6
-p b.curry[1, 2][3, 4]        #=> wrong number of arguments (given 4, expected 3)
-p b.curry(5)                 #=> wrong number of arguments (given 5, expected 3)
-p b.curry(1)                 #=> wrong number of arguments (given 1, expected 3)
+p b.curry[1][2][3]           # => 6
+p b.curry[1, 2][3, 4]        # => wrong number of arguments (given 4, expected 3)
+p b.curry(5)                 # => wrong number of arguments (given 5, expected 3)
+p b.curry(1)                 # => wrong number of arguments (given 1, expected 3)
 
 b = lambda {|x, y, z, *w| (x||0) + (y||0) + (z||0) + w.sum }
-p b.curry[1][2][3]           #=> 6
-p b.curry[1, 2][3, 4]        #=> 10
-p b.curry(5)[1][2][3][4][5]  #=> 15
-p b.curry(5)[1, 2][3, 4][5]  #=> 15
-p b.curry(1)                 #=> wrong number of arguments (given 1, expected 3+)
+p b.curry[1][2][3]           # => 6
+p b.curry[1, 2][3, 4]        # => 10
+p b.curry(5)[1][2][3][4][5]  # => 15
+p b.curry(5)[1, 2][3, 4][5]  # => 15
+p b.curry(1)                 # => wrong number of arguments (given 1, expected 3+)
 
 b = proc { :foo }
-p b.curry[]                  #=> :foo
+p b.curry[]                  # => :foo
 ```
 
 ### def lambda? -> bool
@@ -316,21 +316,21 @@ p n {} # => false
 
 # &が付いた実引数によるものは、lambda?が元の Procオブジェクトから
 # 引き継がれる
-p lambda(&lambda {}).lambda? #=> true
-proc(&lambda {}).lambda?     #=> true
-p Proc.new(&lambda {}).lambda? #=> true
+p lambda(&lambda {}).lambda? # => true
+proc(&lambda {}).lambda?     # => true
+p Proc.new(&lambda {}).lambda? # => true
 
-p lambda(&proc {}).lambda?   #=> false
-proc(&proc {}).lambda?       #=> false
-p Proc.new(&proc {}).lambda? #=> false
+p lambda(&proc {}).lambda?   # => false
+proc(&proc {}).lambda?       # => false
+p Proc.new(&proc {}).lambda? # => false
 
-p n(&lambda {})              #=> true
-p n(&proc {})                #=> false
-p n(&Proc.new {})            #=> false
+p n(&lambda {})              # => true
+p n(&proc {})                # => false
+p n(&Proc.new {})            # => false
 
 # Method#to_proc によるものは lambda?が真となる
 def m() end
-p method(:m).to_proc.lambda? #=> true
+p method(:m).to_proc.lambda? # => true
 
 # Module#define_method は特別扱いで、
 # これで定義されたメソッドの引数は常に厳密に取り扱われる
@@ -338,13 +338,13 @@ class C
   define_method(:d) {}
 end
 C.new.d(1,2)       # ~> ArgumentError
-p C.new.method(:d).to_proc.lambda? #=> true
+p C.new.method(:d).to_proc.lambda? # => true
 
 class C
   define_method(:e, &proc {})
 end
 C.new.e(1,2)       # ~> ArgumentError
-p C.new.method(:e).to_proc.lambda? #=> true
+p C.new.method(:e).to_proc.lambda? # => true
 ```
 
 ### def source_location -> [String, Integer] | nil
@@ -420,7 +420,7 @@ p proc { |x, (a, b)| }.parameters # => [[:opt, :x], [:opt, nil]]
 
   ```ruby title="例"
   prc = lambda{|x, y=42, *other, k_x:, k_y: 42, **k_other, &b|}
-  prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
+  prc.parameters # => [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
   ```
 
 #%since 3.2

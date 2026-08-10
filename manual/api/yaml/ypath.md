@@ -55,7 +55,7 @@ require 'yaml'
 str = "/ugo[:hoge]/0/name"
 
 p YAML::YPath.new(str)
-#=> #<YAML::YPath:0x3238cc @predicates=[":hoge", nil, nil], @segments=["ugo", "0", "name"], @flags=nil>
+# => #<YAML::YPath:0x3238cc @predicates=[":hoge", nil, nil], @segments=["ugo", "0", "name"], @flags=nil>
 ```
 
 ### def Syck::YPath.each_path(str) {|ypath| ...} -> Array

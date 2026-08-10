@@ -37,10 +37,10 @@ Rubyの内部実装では、メソッド名や変数名、定数名、クラス�
 また、文字列と違い、immutable (変更不可)であり、同値ならば必ず同一です。
 
 ```ruby
-p "abc" == "abc" #=> true
-p "abc".equal?("abc") #=> false
-p :abc == :abc #=> true
-p :abc.equal?(:abc) #=> true ←同値ならば同一
+p "abc" == "abc" # => true
+p "abc".equal?("abc") # => false
+p :abc == :abc # => true
+p :abc.equal?(:abc) # => true ←同値ならば同一
 ```
 
 #### 用途
@@ -88,7 +88,7 @@ Ruby によって GC されます。すなわち、ある使わなくなった�
 定義済みの全てのシンボルオブジェクトの配列を返します。
 
 ```ruby
-p Symbol.all_symbols #=> [:RUBY_PLATFORM, :RUBY_VERSION, ...]
+p Symbol.all_symbols # => [:RUBY_PLATFORM, :RUBY_VERSION, ...]
 ```
 
 リテラルで表記したシンボルのうち、コンパイル時に値が決まるものはその時に生成されます。
@@ -101,7 +101,7 @@ def number
 end
 
 p Symbol.all_symbols.select{|sym|sym.to_s.include? 'make'}
-#=> [:make_1, :make_2]
+# => [:make_1, :make_2]
 
 re  = #確実に生成されるように代入操作を行う
 :make_1,
@@ -110,7 +110,7 @@ re  = #確実に生成されるように代入操作を行う
 'make_4'.intern
 
 p Symbol.all_symbols.select{|sym|sym.to_s.include? 'make'}
-#=> [:make_1, :make_2, :make_3, :make_4]
+# => [:make_1, :make_2, :make_3, :make_4]
 ```
 
 ## Instance Methods
@@ -205,8 +205,8 @@ other が同じシンボルの時に真を返します。
 - **param** `other` -- 比較対象のシンボルを指定します。
 
 ```ruby title="例"
-p :aaa == :aaa  #=> true
-p :aaa == :xxx  #=> false
+p :aaa == :aaa  # => true
+p :aaa == :xxx  # => false
 ```
 
 ### def start_with?(*prefixes)   -> bool
@@ -222,12 +222,12 @@ self の先頭が prefixes のいずれかであるとき true を返します�
 - **SEE** [m:String#start_with?]
 
 ```ruby
-p :hello.start_with?("hell")             #=> true
-p :hello.start_with?(/H/i)               #=> true
+p :hello.start_with?("hell")             # => true
+p :hello.start_with?(/H/i)               # => true
 
 # returns true if one of the prefixes matches.
-p :hello.start_with?("heaven", "hell")   #=> true
-p :hello.start_with?("heaven", "paradise") #=> false
+p :hello.start_with?("heaven", "hell")   # => true
+p :hello.start_with?("heaven", "paradise") # => false
 ```
 
 ### def succ -> Symbol
@@ -272,18 +272,18 @@ Unicode 全体ではなく、A-Z/a-z だけです。
 - **param** `other` -- 比較対象のシンボルを指定します。
 
 ```ruby
-p :aBcDeF.casecmp(:abcde)   #=> 1
-p :aBcDeF.casecmp(:abcdef)  #=> 0
-p :aBcDeF.casecmp(:abcdefg) #=> -1
-p :abcdef.casecmp(:ABCDEF)  #=> 0
-p :"\u{e4 f6 fc}".casecmp(:"\u{c4 d6 dc}") #=> 1
+p :aBcDeF.casecmp(:abcde)   # => 1
+p :aBcDeF.casecmp(:abcdef)  # => 0
+p :aBcDeF.casecmp(:abcdefg) # => -1
+p :abcdef.casecmp(:ABCDEF)  # => 0
+p :"\u{e4 f6 fc}".casecmp(:"\u{c4 d6 dc}") # => 1
 ```
 
 other がシンボルではない場合や、文字列のエンコーディングが非互換の場合は、nil を返します。
 
 ```ruby
-p :foo.casecmp("foo") #=> nil
-p "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp(:"\u{c4 d6 dc}") #=> nil
+p :foo.casecmp("foo") # => nil
+p "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp(:"\u{c4 d6 dc}") # => nil
 ```
 
 - **SEE** [m:String#casecmp], [m:Symbol#<=>], [m:Symbol#casecmp?]
@@ -296,18 +296,18 @@ p "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp(:"\u{c4 d6 dc}") #=> nil
 - **param** `other` -- 比較対象のシンボルを指定します。
 
 ```ruby
-p :abcdef.casecmp?(:abcde)   #=> false
-p :aBcDeF.casecmp?(:abcdef)  #=> true
-p :abcdef.casecmp?(:abcdefg) #=> false
-p :abcdef.casecmp?(:ABCDEF)  #=> true
-p :"\u{e4 f6 fc}".casecmp?(:"\u{c4 d6 dc}") #=> true
+p :abcdef.casecmp?(:abcde)   # => false
+p :aBcDeF.casecmp?(:abcdef)  # => true
+p :abcdef.casecmp?(:abcdefg) # => false
+p :abcdef.casecmp?(:ABCDEF)  # => true
+p :"\u{e4 f6 fc}".casecmp?(:"\u{c4 d6 dc}") # => true
 ```
 
 other がシンボルではない場合や、文字列のエンコーディングが非互換の場合は、nil を返します。
 
 ```ruby
-p :foo.casecmp?("foo") #=> nil
-p "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp?(:"\u{c4 d6 dc}") #=> nil
+p :foo.casecmp?("foo") # => nil
+p "\u{e4 f6 fc}".encode("ISO-8859-1").to_sym.casecmp?(:"\u{c4 d6 dc}") # => nil
 ```
 
 - **SEE** [m:String#casecmp?], [m:Symbol#casecmp]
@@ -450,7 +450,7 @@ p :foo[0..1] # => "fo"
 (self.to_s.length と同じです。)
 
 ```ruby
-p :foo.length #=> 3
+p :foo.length # => 3
 ```
 
 - **SEE** [m:String#length], [m:String#size]
@@ -460,8 +460,8 @@ p :foo.length #=> 3
 自身が :"" (length が 0 のシンボル)かどうかを返します。
 
 ```ruby
-p :"".empty?  #=> true
-p :foo.empty? #=> false
+p :"".empty?  # => true
+p :foo.empty? # => false
 ```
 
 - **SEE** [m:String#empty?]
@@ -479,11 +479,11 @@ self の末尾が suffixes のいずれかであるとき true を返します�
 - **SEE** [m:String#end_with?]
 
 ```ruby
-p :hello.end_with?("ello")             #=> true
+p :hello.end_with?("ello")             # => true
 
 # returns true if one of the +suffixes+ matches.
-p :hello.end_with?("heaven", "ello")   #=> true
-p :hello.end_with?("heaven", "paradise") #=> false
+p :hello.end_with?("heaven", "ello")   # => true
+p :hello.end_with?("heaven", "paradise") # => false
 ```
 
 ### def upcase(*options) -> Symbol
@@ -493,7 +493,7 @@ p :hello.end_with?("heaven", "paradise") #=> false
 (self.to_s.upcase.intern と同じです。)
 
 ```ruby
-p :foo.upcase #=> :FOO
+p :foo.upcase # => :FOO
 ```
 
 - **SEE** [m:String#upcase]
@@ -505,7 +505,7 @@ p :foo.upcase #=> :FOO
 (self.to_s.downcase.intern と同じです。)
 
 ```ruby
-p :FOO.downcase #=> :foo
+p :FOO.downcase # => :foo
 ```
 
 - **SEE** [m:String#downcase]
@@ -517,9 +517,9 @@ p :FOO.downcase #=> :foo
 (self.to_s.capitalize.intern と同じです。)
 
 ```ruby
-p :foobar.capitalize   #=> :Foobar
-p :fooBar.capitalize   #=> :Foobar
-p :FOOBAR.capitalize   #=> :Foobar
+p :foobar.capitalize   # => :Foobar
+p :fooBar.capitalize   # => :Foobar
+p :FOOBAR.capitalize   # => :Foobar
 p :"foobar--".capitalize # => "Foobar--"
 ```
 
@@ -556,5 +556,5 @@ p :あかさたな.encoding # => #<Encoding:UTF-8>
 自身を人間に読みやすい文字列にして返します。
 
 ```ruby
-p :fred.inspect #=> ":fred"
+p :fred.inspect # => ":fred"
 ```

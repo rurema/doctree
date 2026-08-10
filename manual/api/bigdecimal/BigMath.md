@@ -28,7 +28,7 @@ x に正の無限大を指定した場合は正の無限大を返します。負
 ```ruby
 require "bigdecimal/math"
 
-puts BigMath::exp(BigDecimal('1'), 10) #=> 0.2718281828e1
+puts BigMath::exp(BigDecimal('1'), 10) # => 0.2718281828e1
 ```
 
 ### module_function def log(x, prec) -> BigDecimal
@@ -52,5 +52,5 @@ x に無限大を指定した場合は無限大を返します。NaN を指定�
 ```ruby
 require "bigdecimal/math"
 
-puts BigMath::log(BigDecimal('2'), 10) #=> 0.693147180559945309417232112588603776354688e0
+puts BigMath::log(BigDecimal('2'), 10) # => 0.693147180559945309417232112588603776354688e0
 ```

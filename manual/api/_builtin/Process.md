@@ -190,8 +190,8 @@ p Process.last_status # => nil
 
 ```ruby title="例"
 include Process
-p lim = getrlimit(RLIMIT_STACK)                                        #=> [8388608, 18446744073709551615]
-p lim.map{|i| i == RLIM_INFINITY ? "unlimited" : "#{i/(1024**2)}MB" }  #=> ["8MB", "unlimited"]
+p lim = getrlimit(RLIMIT_STACK)                                        # => [8388608, 18446744073709551615]
+p lim.map{|i| i == RLIM_INFINITY ? "unlimited" : "#{i/(1024**2)}MB" }  # => ["8MB", "unlimited"]
 ```
 
 - **SEE** [m:Process?.setrlimit], [man:getrlimit(2)]
@@ -342,7 +342,7 @@ Process.groups.uniq.sort
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 ```ruby
-p Process.groups #=> [27, 6, 10, 11]
+p Process.groups # => [27, 6, 10, 11]
 ```
 
 - **SEE** [man:getgroups(2)]
@@ -517,7 +517,7 @@ fork do
   p [Process.pid, Process.getpgrp]
 end
 Process.wait
-#=>
+# =>
   [3427, 3426]
   0
   [3427, 3427]
@@ -642,7 +642,7 @@ p Process.wait2 # => [70024, #<Process::Status: pid 70024 exit 0>]
   Process.fork() { exit n }
 }
 p Process.waitall
-#=> [[2766, #<Process::Status: pid=2766,exited(1)>], [2765, #<Process::Status: pid=2765,exited(1)>]]
+# => [[2766, #<Process::Status: pid=2766,exited(1)>], [2765, #<Process::Status: pid=2765,exited(1)>]]
 ```
 
 #%since 3.3
@@ -729,7 +729,7 @@ Process.setproctitle('myapp: worker #%d' % worker_id)
 POSIX の clock_gettime() 関数の時間を返します。
 
 ```ruby title="例"
-p Process.clock_gettime(Process::CLOCK_MONOTONIC) #=> 896053.968060096
+p Process.clock_gettime(Process::CLOCK_MONOTONIC) # => 896053.968060096
 ```
 
 - **param** `clock_id` -- クロックの種類を以下の定数のいずれかで指定します。
@@ -1177,8 +1177,8 @@ trace されている子プロセスの ID は返しません。
 ```ruby
 include Process
 pid = fork{ Process.kill('SIGSTOP', Process.pid) }
-p pid                          #=> 4336
-p waitpid2(pid, WUNTRACED)     #=> [4336, #<Process::Status: pid=4336,stopped(SIGSTOP=19)>]
+p pid                          # => 4336
+p waitpid2(pid, WUNTRACED)     # => [4336, #<Process::Status: pid=4336,stopped(SIGSTOP=19)>]
 ```
 
 - **SEE** [man:waitpid(2)]

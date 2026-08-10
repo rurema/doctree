@@ -57,8 +57,8 @@ IO のすべての書き込みメソッドは内部で [m:IO#write] を呼びま
 
 ```ruby title="例"
 f = File.open('t.txt', 'r+:euc-jp')
-p f.getc.encoding                             #=> Encoding::EUC_JP
-p f.read(1).encoding                          #=> Encoding::ASCII_8BIT 
+p f.getc.encoding                             # => Encoding::EUC_JP
+p f.read(1).encoding                          # => Encoding::ASCII_8BIT 
 ```
 
 #### IO のエンコーディングとエンコーディングの変換 {#io_encoding}
@@ -97,7 +97,7 @@ IO に対してエンコーディングを指定する方法には、生成時�
 
 ```ruby title="例1"
 f = File.open('file1')
-p f.getc.encoding        #=> Encoding::EUC_JP
+p f.getc.encoding        # => Encoding::EUC_JP
 ```
 
 ```ruby title="例2"
@@ -105,7 +105,7 @@ f = File.open('t.txt', 'w+:shift_jis:euc-jp')
 f.write "\xB4\xC1\xBB\xFA"            # 文字列 "漢字" の EUC-JP リテラル
 f.rewind
 s = f.read(4)
-puts s.dump                           #=> "\x8A\xBF\x8E\x9A" 
+puts s.dump                           # => "\x8A\xBF\x8E\x9A" 
                                       # エンコーディングがSJISへ変換されていることが分かる。
 ```
 
@@ -620,11 +620,11 @@ p File.read("|echo hello")  # => Errno::ENOENT ("|echo hello" という名前の
 - **SEE** [m:IO.binread]
 
 ```ruby title="例"
-p IO.read(empty_file)           #=> ""
-p IO.read(empty_file, 1)        #=> nil
-p IO.read(one_byte_file, 0, 10) #=> ""
-p IO.read(one_byte_file, nil, 10) #=> "" 
-p IO.read(one_byte_file, 1, 10) #=> nil
+p IO.read(empty_file)           # => ""
+p IO.read(empty_file, 1)        # => nil
+p IO.read(one_byte_file, 0, 10) # => ""
+p IO.read(one_byte_file, nil, 10) # => "" 
+p IO.read(one_byte_file, 1, 10) # => nil
 ```
 
 ### def IO.binread(path, length = nil, offset = 0)     -> String | nil
@@ -796,10 +796,10 @@ offset を指定しないと、書き込みの末尾でファイルを切り捨�
 ```ruby title="例"
 text = "This is line one\nThis is line two\nThis is line three\nAnd so on...\n"
 p IO.write("testfile", text)            # => 66
-p IO.write("testfile", "0123456789", 20)  #=> 10
+p IO.write("testfile", "0123456789", 20)  # => 10
 p IO.read("testfile")
 # => "This is line one\nThi0123456789two\nThis is line three\nAnd so on...\n"
-p IO.write("testfile", "0123456789")    #=> 10
+p IO.write("testfile", "0123456789")    # => 10
 p IO.read("testfile")                   # => "0123456789"
 ```
 
@@ -1091,7 +1091,7 @@ end
 ```ruby
 f = File.new("testfile")
 dummy = f.readlines
-p f.eof #=> true
+p f.eof # => true
 ```
 
 自身がパイプやソケットなどのストリームであった場合、相手がデータを送るか close するまでブロックします。
@@ -1099,11 +1099,11 @@ p f.eof #=> true
 ```ruby
 r, w = IO.pipe
 Thread.new { sleep 10; w.close }
-p r.eof?  #=> 10秒ブロックしてから true を返す。
+p r.eof?  # => 10秒ブロックしてから true を返す。
 
 r, w = IO.pipe
 Thread.new { sleep 10; w.puts "a" }
-p r.eof?  #=> 10秒ブロックしてから false を返す。
+p r.eof?  # => 10秒ブロックしてから false を返す。
 
 r, w = IO.pipe
 r.eof?  # 永久にブロックします。
@@ -1204,11 +1204,11 @@ EOF に到達した時には nil を返します。
 ```ruby title="例"
 File.write("testfile", "test")
 f = File.new("testfile")
-p f.getc                 #=> "い"
-p f.getc                 #=> "ろ"
-p f.getc                 #=> "は"
+p f.getc                 # => "い"
+p f.getc                 # => "ろ"
+p f.getc                 # => "は"
 f.read
-p f.getc                 #=> nil
+p f.getc                 # => nil
 ```
 
 - **SEE** [m:IO#readchar]
@@ -1236,10 +1236,10 @@ limit で最大の読み込みバイト数を指定します。ただしファ�
 
 ```ruby
 f = File.new("oneline_file")
-p f.gets                        #=> "This is line one\n"
-p $_                            #=> "This is line one\n"
-p f.gets                        #=> nil
-p $_                            #=> nil
+p f.gets                        # => "This is line one\n"
+p $_                            # => "This is line one\n"
+p f.gets                        # => nil
+p $_                            # => nil
 ```
 
 - **SEE** [m:$/], [m:IO#readline]
@@ -1278,11 +1278,11 @@ p File.new("/dev/tty").isatty # => true
 
 ```ruby
 f = File.new("testfile")
-p f.lineno               #=> 0
-p f.gets                 #=> "This is line one\n"
-p f.lineno               #=> 1
-p f.gets                 #=> "This is line two\n"
-p f.lineno               #=> 2
+p f.lineno               # => 0
+p f.gets                 # => "This is line one\n"
+p f.lineno               # => 1
+p f.gets                 # => "This is line two\n"
+p f.lineno               # => 2
 ```
 
 - **SEE** [m:$.]
@@ -1297,13 +1297,13 @@ p f.lineno               #=> 2
 
 ```ruby
 f = File.new("testfile")
-p f.gets                   #=> "This is line one\n"
-p $.                       #=> 1
+p f.gets                   # => "This is line one\n"
+p $.                       # => 1
 f.lineno = 1000
-p f.lineno                 #=> 1000
-p $.                       #=> 1
-p f.gets                   #=> "This is line two\n"
-p $.                       #=> 1001
+p f.lineno                 # => 1000
+p $.                       # => 1
+p f.gets                   # => "This is line two\n"
+p $.                       # => 1001
 ```
 
 - **SEE** [m:$.]
@@ -1488,9 +1488,9 @@ EOF に到達した時には EOFError が発生します。
 
 ```ruby
 f = File.new("testfile")
-p f.readchar                   #=> "い"
-p f.readchar                   #=> "ろ"
-p f.readchar                   #=> "は"
+p f.readchar                   # => "い"
+p f.readchar                   # => "ろ"
+p f.readchar                   # => "は"
 f.read
 f.readchar                   # ~> EOFError
 ```
@@ -1520,10 +1520,10 @@ limit で最大読み込みバイト数を指定します。ただしマルチ�
 
 ```ruby
 f = File.new("oneline_file")
-p f.readline                    #=> "This is line one\n"
-p $_                            #=> "This is line one\n"
+p f.readline                    # => "This is line one\n"
+p $_                            # => "This is line one\n"
 f.readline                      # ~> EOFError
-p $_                            #=> nil
+p $_                            # => nil
 ```
 
 - **SEE** [m:$/], [m:IO#gets]
@@ -1623,21 +1623,21 @@ readpartial の結果は以下のようになります。
 ```ruby
 r, w = IO.pipe           #               buffer          pipe content
 w << "abc"               #               ""              "abc".
-p r.readpartial(4096)    #=> "abc"       ""              ""
+p r.readpartial(4096)    # => "abc"       ""              ""
 r.readpartial(4096)      # バッファにもパイプにもデータがないのでブロックする
   
 r, w = IO.pipe           #               buffer          pipe content
 w << "abc"               #               ""              "abc"
 w.close                  #               ""              "abc" EOF
-p r.readpartial(4096)    #=> "abc"       ""              EOF
+p r.readpartial(4096)    # => "abc"       ""              EOF
 r.readpartial(4096)      # ~> EOFError
   
 r, w = IO.pipe           #               buffer          pipe content
 w << "abc\ndef\n"        #               ""              "abc\ndef\n"
-p r.gets                 #=> "abc\n"     "def\n"         ""
+p r.gets                 # => "abc\n"     "def\n"         ""
 w << "ghi\n"             #               "def\n"         "ghi\n"
-p r.readpartial(4096)    #=> "def\n"     ""              "ghi\n"
-p r.readpartial(4096)    #=> "ghi\n"     ""              ""
+p r.readpartial(4096)    # => "def\n"     ""              "ghi\n"
+p r.readpartial(4096)    # => "ghi\n"     ""              ""
 ```
 
 なお、readpartial は nonblock フラグに影響されません。
@@ -1704,10 +1704,10 @@ f2.close
 
 ```ruby
 f = File.new("testfile")
-p f.readline             #=> "This is line one\n"
-p f.rewind               #=> 0
-p f.lineno               #=> 0
-p f.readline             #=> "This is line one\n"
+p f.readline             # => "This is line one\n"
+p f.rewind               # => 0
+p f.lineno               # => 0
+p f.readline             # => "This is line one\n"
 ```
 
 ### def seek(offset, whence = IO::SEEK_SET)    -> 0
@@ -1733,8 +1733,8 @@ offset 位置への移動が成功すれば 0 を返します。
 
 ```ruby
 f = File.new("testfile")
-p f.seek(-13, IO::SEEK_END) #=> 0
-p f.readline                #=> "And so on...\n"
+p f.seek(-13, IO::SEEK_END) # => 0
+p f.readline                # => "And so on...\n"
 ```
 
 - **SEE** [m:IO#sysseek]
@@ -2014,8 +2014,8 @@ IO から1バイトを読み込み整数として返します。
 
 ```ruby
 f = File.new("testfile")
-p f.getbyte #=> 84
-p f.getbyte #=> 104
+p f.getbyte # => 84
+p f.getbyte # => 104
 ```
 
 ### def readbyte   -> Integer
@@ -2052,7 +2052,7 @@ self は読み込み用にオープンされていなければなりません。
 
 ```ruby
 f = File.new("testfile")
-p f.each_char {|c| print c, ' ' } #=> #<File:testfile>
+p f.each_char {|c| print c, ' ' } # => #<File:testfile>
 ```
 
 ### def ungetbyte(c) -> nil
@@ -2067,10 +2067,10 @@ p f.each_char {|c| print c, ' ' } #=> #<File:testfile>
 - **param** `c` -- バイト列(文字列)、もしくは0から255までの整数
 
 ```ruby title="例"
-f = File.new("testfile")   #=> #<File:testfile>
-b = f.getbyte              #=> 0x38
-p f.ungetbyte(b)           #=> nil
-p f.getbyte                #=> 0x38
+f = File.new("testfile")   # => #<File:testfile>
+b = f.getbyte              # => 0x38
+p f.ungetbyte(b)           # => nil
+p f.getbyte                # => 0x38
 ```
 
 ### def binmode? -> bool
@@ -2095,7 +2095,7 @@ close します。
 f = open("/dev/null")
 f.close_on_exec = true
 system("cat", "/proc/self/fd/#{f.fileno}") # cat: /proc/self/fd/3: No such file or directory
-p f.closed?              #=> false
+p f.closed?              # => false
 ```
 
 - **SEE** [m:IO#close_on_exec?]
@@ -2107,11 +2107,11 @@ p f.closed?              #=> false
 
 ```ruby
 f = open("/dev/null")
-p f.close_on_exec?               #=> true
+p f.close_on_exec?               # => true
 f.close_on_exec = false
-p f.close_on_exec?               #=> false
+p f.close_on_exec?               # => false
 f.close_on_exec = true
-p f.close_on_exec?               #=> true
+p f.close_on_exec?               # => true
 ```
 
 - **SEE** [m:IO#close_on_exec=]
@@ -2184,15 +2184,15 @@ BOM が見つからなかった場合は nil を返します。
 ```ruby title="例"
 File.write("bom.txt", "\u{FEFF}abc")
 File.open("bom.txt", "rb") do |io|
-  p io.set_encoding_by_bom    #=>  #<Encoding:UTF-8>
+  p io.set_encoding_by_bom    # =>  #<Encoding:UTF-8>
   str = io.read
-  p str                       #=>  "abc"
-  p str.encoding              #=>  #<Encoding:UTF-8>
+  p str                       # =>  "abc"
+  p str.encoding              # =>  #<Encoding:UTF-8>
 end
 
 File.write("nobom.txt", "abc")
 File.open("nobom.txt", "rb") do |io|
-  p io.set_encoding_by_bom    #=>  nil
+  p io.set_encoding_by_bom    # =>  nil
 end
 ```
 

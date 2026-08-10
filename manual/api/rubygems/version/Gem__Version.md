@@ -75,7 +75,7 @@ ver3 = Gem::Version.create(nil)        # => nil
 p Gem::Version.new('1.2.0a') # => #<Gem::Version "1.2.0a">
 
 # Ruby 2.4.1より、空白文字以外の文字がない場合、バージョンは "0" になります。
-p Gem::Version.new(' ') #=> #<Gem::Version "0">
+p Gem::Version.new(' ') # => #<Gem::Version "0">
 ```
 
 - **param** `version` --

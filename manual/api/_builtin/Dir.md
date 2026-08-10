@@ -73,14 +73,14 @@ p Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
 
   ```ruby
   # 一般的な例
-  p Dir.glob("*")          #=> ["foo", "bar", "baz"]
-  p Dir.glob("./b*")       #=> ["./bar", "./baz"]      先頭に "./" が付いている。
-  p Dir.glob("*/")         #=> ["foo/"]                ディレクトリのみにマッチする。
-  p Dir.glob("wrong_name") #=> []                      マッチしないと空の配列を返す。
+  p Dir.glob("*")          # => ["foo", "bar", "baz"]
+  p Dir.glob("./b*")       # => ["./bar", "./baz"]      先頭に "./" が付いている。
+  p Dir.glob("*/")         # => ["foo/"]                ディレクトリのみにマッチする。
+  p Dir.glob("wrong_name") # => []                      マッチしないと空の配列を返す。
 
   Dir.glob("b*") {|f| p f }
 
-  #=> "bar"
+  # => "bar"
   #   "baz"
 
   # 複数のパターンを指定する例
@@ -88,17 +88,17 @@ p Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
   p Dir["f*", "b*"]        # => ["foo", "bar"]
 
   # ワイルドカードの例
-  p Dir.glob("*")          #=> ["foo", "bar"]
-  p Dir.glob("fo?")        #=> ["foo"]
-  p Dir.glob("[^f]*")      #=> ["bar"]
-  p Dir.glob("{b,f}*")     #=> ["bar", "foo"]
+  p Dir.glob("*")          # => ["foo", "bar"]
+  p Dir.glob("fo?")        # => ["foo"]
+  p Dir.glob("[^f]*")      # => ["bar"]
+  p Dir.glob("{b,f}*")     # => ["bar", "foo"]
 
   # ベースディレクトリの例
   rbfiles = File.join("**", "*.rb")
-  p Dir.glob(rbfiles)                 #=> ["main.rb",
+  p Dir.glob(rbfiles)                 # => ["main.rb",
                                       #    "lib/song.rb",
                                       #    "lib/song/karaoke.rb"]
-  p Dir.glob(rbfiles, base: "lib")    #=> ["song.rb",
+  p Dir.glob(rbfiles, base: "lib")    # => ["song.rb",
                                       #    "song/karaoke.rb"]
   ```
 
@@ -121,11 +121,11 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 ```ruby title="例"
 Dir.chdir("/var/spool/mail")
-p Dir.pwd                    #=> "/var/spool/mail"
+p Dir.pwd                    # => "/var/spool/mail"
 Dir.chdir("/tmp") do
-  p Dir.pwd                  #=> "/tmp"
+  p Dir.pwd                  # => "/tmp"
 end 
-p Dir.pwd                    #=> "/var/spool/mail"
+p Dir.pwd                    # => "/var/spool/mail"
 
 # ~ は展開されない
 p Dir.chdir("~/.ssh")        # => Errno::ENOENT
@@ -179,9 +179,9 @@ p Dir.pwd            # => "/usr"
 - **raise** `Errno::EXXX` -- 失敗した場合に発生します。
 
 ```ruby title="例"
-p Dir.glob("*")   #=> ["file1", "file2]
+p Dir.glob("*")   # => ["file1", "file2]
 Dir.chroot("./")
-p Dir.glob("/*")  #=> ["/file1", "/file2]
+p Dir.glob("/*")  # => ["/file1", "/file2]
 ```
 
 - **SEE** <http://opengroup.org/onlinepubs/007908799/xsh/chroot.html>
@@ -214,7 +214,7 @@ Dir.delete("/tmp/hoge-jbrYBh.tmp")
 - **raise** `Errno::EXXX` -- 失敗した場合に発生します。
 
 ```ruby title="例"
-p Dir.entries('.') #=> [".", "..", "bar", "foo"]
+p Dir.entries('.') # => [".", "..", "bar", "foo"]
 ```
 
 - **SEE** [m:Dir.foreach]
@@ -235,7 +235,7 @@ p Dir.entries('.') #=> [".", "..", "bar", "foo"]
 - **raise** `Errno::EXXX` -- 失敗した場合に発生します。
 
 ```ruby title="例"
-p Dir.children('.') #=> ["bar", "foo"]
+p Dir.children('.') # => ["bar", "foo"]
 ```
 
 - **SEE** [m:Dir#children]
@@ -264,7 +264,7 @@ p Dir.children('.') #=> ["bar", "foo"]
 Dir.foreach('.'){|f|
   p f
 }
-#=> "."
+# => "."
 #   ".."
 #   "bar"
 #   "foo"
@@ -295,7 +295,7 @@ Dir.foreach('.'){|f|
 Dir.each_child('.'){|f|
   p f
 }
-#=> "bar"
+# => "bar"
 #   "foo"
 ```
 
@@ -311,8 +311,8 @@ Dir.each_child('.'){|f|
 - **raise** `Errno::EXXX` -- カレントディレクトリの取得に失敗した場合に発生します(が、普通は失敗することはありません)。
 
 ```ruby title="例"
-p Dir.chdir("/tmp") #=> 0
-p Dir.getwd         #=> "/tmp"
+p Dir.chdir("/tmp") # => 0
+p Dir.getwd         # => "/tmp"
 ```
 
 ### def Dir.mkdir(path, mode = 0777)    -> 0
@@ -329,9 +329,9 @@ mode で指定された値に umask をかけた値 (mode & ~umask) になりま
 - **raise** `Errno::EXXX` -- ディレクトリの作成に失敗した場合に発生します。
 
 ```ruby title="例"
-p File.umask                                  #=> 2
+p File.umask                                  # => 2
 Dir.mkdir('t', 0666)
-p "%#o" % (07777 & File.stat('t').mode)  #=> "0664"
+p "%#o" % (07777 & File.stat('t').mode)  # => "0664"
 ```
 
 - **SEE** [m:FileUtils?.makedirs]
@@ -460,10 +460,10 @@ path_name で与えられたディレクトリが空の場合に真を返しま�
 ディレクトリでない場合や空でない場合に偽を返します。
 
 ```ruby title="例"
-p Dir.empty?('.')    #=> false
-p Dir.empty?(IO::NULL) #=> false
+p Dir.empty?('.')    # => false
+p Dir.empty?(IO::NULL) # => false
 require 'tmpdir'
-p Dir.mktmpdir { |dir| Dir.empty?(dir) } #=> true
+p Dir.mktmpdir { |dir| Dir.empty?(dir) } # => true
 ```
 
 - **param** `path_name` -- 確認したいディレクトリ名。
@@ -495,7 +495,7 @@ p d.close  # => nil
 Dir.open('.').each{|f|
   p f
 }
-#=> "."
+# => "."
 #   ".."
 #   "bar"
 #   "foo"
@@ -627,7 +627,7 @@ p Dir.open("..") { |d| d.fileno } # => 8
 Dir.open('.').each_child{|f|
   p f
 }
-#=> "bar"
+# => "bar"
 #   "foo"
 ```
 

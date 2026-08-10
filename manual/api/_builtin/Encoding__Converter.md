@@ -40,18 +40,18 @@ ec = Encoding::Converter.new("UTF-16BE", "UTF-8")
 
 # Usually, decorators such as newline conversion are inserted last.
 ec = Encoding::Converter.new("UTF-16BE", "UTF-8", :universal_newline => true)
-p ec.convpath #=> [[#<Encoding:UTF-16BE>, #<Encoding:UTF-8>],
+p ec.convpath # => [[#<Encoding:UTF-16BE>, #<Encoding:UTF-8>],
               #    "universal_newline"]
 
 # But, if the last encoding is ASCII incompatible,
 # decorators are inserted before the last conversion.
 ec = Encoding::Converter.new("UTF-8", "UTF-16BE", :crlf_newline => true)
-p ec.convpath #=> ["crlf_newline",
+p ec.convpath # => ["crlf_newline",
               #    [#<Encoding:UTF-8>, #<Encoding:UTF-16BE>]]
 
 # Conversion path can be specified directly.
 ec = Encoding::Converter.new(["universal_newline", ["EUC-JP", "UTF-8"], ["UTF-8", "UTF-16BE"]])
-p ec.convpath #=> ["universal_newline",
+p ec.convpath # => ["universal_newline",
               #    [#<Encoding:EUC-JP>, #<Encoding:UTF-8>],
               #    [#<Encoding:UTF-8>, #<Encoding:UTF-16BE>]]
 ```
@@ -69,9 +69,9 @@ p ec.convpath #=> ["universal_newline",
 引数が ASCII 互換エンコーディングである場合や、エンコーディングでない場合は nil を返します。
 
 ```ruby
-p Encoding::Converter.asciicompat_encoding("ISO-2022-JP") #=> #<Encoding:stateless-ISO-2022-JP>
-p Encoding::Converter.asciicompat_encoding("UTF-16BE") #=> #<Encoding:UTF-8>
-p Encoding::Converter.asciicompat_encoding("UTF-8") #=> nil
+p Encoding::Converter.asciicompat_encoding("ISO-2022-JP") # => #<Encoding:stateless-ISO-2022-JP>
+p Encoding::Converter.asciicompat_encoding("UTF-16BE") # => #<Encoding:UTF-8>
+p Encoding::Converter.asciicompat_encoding("UTF-8") # => nil
 ```
 
 ### def Encoding::Converter.search_convpath(source_encoding, destination_encoding, options) -> Array
@@ -126,7 +126,7 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
 
 ```ruby
 ec = Encoding::Converter.new("utf-8", "euc-jp")
-p ec.source_encoding #=> #<Encoding:UTF-8>
+p ec.source_encoding # => #<Encoding:UTF-8>
 ```
 
 ### def destination_encoding -> Encoding
@@ -137,7 +137,7 @@ p ec.source_encoding #=> #<Encoding:UTF-8>
 
 ```ruby
 ec = Encoding::Converter.new("utf-8", "euc-jp")
-p ec.destination_encoding #=> #<Encoding:EUC-JP>
+p ec.destination_encoding # => #<Encoding:EUC-JP>
 ```
 
 ### def convpath -> Array
@@ -149,7 +149,7 @@ p ec.destination_encoding #=> #<Encoding:EUC-JP>
 ```ruby
 ec = Encoding::Converter.new("ISo-8859-1", "EUC-JP", crlf_newline: true)
 p ec.convpath
-#=> [[#<Encoding:ISO-8859-1>, #<Encoding:UTF-8>],
+# => [[#<Encoding:ISO-8859-1>, #<Encoding:UTF-8>],
 #    [#<Encoding:UTF-8>, #<Encoding:EUC-JP>],
 #    "crlf_newline"]
 ```
@@ -164,10 +164,10 @@ p ec.convpath
 
 ```ruby
 ec = Encoding::Converter.new("euc-jp", "us-ascii")
-p ec.replacement    #=> "?"
+p ec.replacement    # => "?"
 
 ec = Encoding::Converter.new("euc-jp", "utf-8")
-p ec.replacement    #=> "\uFFFD"
+p ec.replacement    # => "\uFFFD"
 ```
 
 ### def replacement=(string)
@@ -179,7 +179,7 @@ p ec.replacement    #=> "\uFFFD"
 ```ruby
 ec = Encoding::Converter.new("utf-8", "us-ascii", :undef => :replace)
 ec.replacement = "<undef>"
-p ec.convert("a \u3042 b")      #=> "a <undef> b"
+p ec.convert("a \u3042 b")      # => "a <undef> b"
 ```
 
 ### def convert(source_string) -> String
@@ -199,19 +199,19 @@ p ec.convert("a \u3042 b")      #=> "a <undef> b"
 
 ```ruby
 ec = Encoding::Converter.new("utf-8", "euc-jp")
-puts ec.convert("\u3042").dump     #=> "\xA4\xA2"
-puts ec.finish.dump                #=> ""
+puts ec.convert("\u3042").dump     # => "\xA4\xA2"
+puts ec.finish.dump                # => ""
 
 ec = Encoding::Converter.new("euc-jp", "utf-8")
-puts ec.convert("\xA4").dump       #=> ""
-puts ec.convert("\xA2").dump       #=> "\xE3\x81\x82"
-puts ec.finish.dump                #=> ""
+puts ec.convert("\xA4").dump       # => ""
+puts ec.convert("\xA2").dump       # => "\xE3\x81\x82"
+puts ec.finish.dump                # => ""
 
 ec = Encoding::Converter.new("utf-8", "iso-2022-jp")
-puts ec.convert("\xE3").dump       #=> "".force_encoding("ISO-2022-JP")
-puts ec.convert("\x81").dump       #=> "".force_encoding("ISO-2022-JP")
-puts ec.convert("\x82").dump       #=> "\e$B$\"".force_encoding("ISO-2022-JP")
-puts ec.finish.dump                #=> "\e(B".force_encoding("ISO-2022-JP")
+puts ec.convert("\xE3").dump       # => "".force_encoding("ISO-2022-JP")
+puts ec.convert("\x81").dump       # => "".force_encoding("ISO-2022-JP")
+puts ec.convert("\x82").dump       # => "\e$B$\"".force_encoding("ISO-2022-JP")
+puts ec.finish.dump                # => "\e(B".force_encoding("ISO-2022-JP")
 ```
 
 ### def last_error -> Exception | nil
@@ -221,10 +221,10 @@ puts ec.finish.dump                #=> "\e(B".force_encoding("ISO-2022-JP")
 
 ```ruby
 ec = Encoding::Converter.new("utf-8", "iso-8859-1")
-p ec.primitive_convert(src="\xf1abcd", dst="")       #=> :invalid_byte_sequence
-p ec.last_error      #=> #<Encoding::InvalidByteSequenceError: "\xF1" followed by "a" on UTF-8>
-p ec.primitive_convert(src, dst, nil, 1)             #=> :destination_buffer_full
-p ec.last_error      #=> nil
+p ec.primitive_convert(src="\xf1abcd", dst="")       # => :invalid_byte_sequence
+p ec.last_error      # => #<Encoding::InvalidByteSequenceError: "\xF1" followed by "a" on UTF-8>
+p ec.primitive_convert(src, dst, nil, 1)             # => :destination_buffer_full
+p ec.last_error      # => nil
 ```
 
 ### def finish -> String
@@ -238,8 +238,8 @@ p ec.last_error      #=> nil
 
 ```ruby
 ec = Encoding::Converter.new("utf-8", "iso-2022-jp")
-p ec.convert("\u3042")     #=> "\e$B$\""
-p ec.finish                #=> "\e(B"
+p ec.convert("\u3042")     # => "\e$B$\""
+p ec.finish                # => "\e(B"
 ```
 
 ### def primitive_convert(source_buffer, destination_buffer) -> Symbol
@@ -321,7 +321,7 @@ primitive_errinfo はもっぱら [m:Encoding::Converter#primitive_convert] と�
 ec = Encoding::Converter.new("EUC-JP", "Shift_JIS")
 ec.primitive_convert(src="\xff", dst="", nil, 10)
 p ec.primitive_errinfo
-#=> [:invalid_byte_sequence, "EUC-JP", "Shift_JIS", "\xFF", ""]
+# => [:invalid_byte_sequence, "EUC-JP", "Shift_JIS", "\xFF", ""]
 
 # HIRAGANA LETTER A (\xa4\xa2 in EUC-JP) is not representable in ISO-8859-1.
 # Since this error is occur in UTF-8 to ISO-8859-1 conversion,
@@ -329,20 +329,20 @@ p ec.primitive_errinfo
 ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
 ec.primitive_convert(src="\xa4\xa2", dst="", nil, 10)
 p ec.primitive_errinfo
-#=> [:undefined_conversion, "UTF-8", "ISO-8859-1", "\xE3\x81\x82", ""]
+# => [:undefined_conversion, "UTF-8", "ISO-8859-1", "\xE3\x81\x82", ""]
 
 # partial character is invalid
 ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
 ec.primitive_convert(src="\xa4", dst="", nil, 10)
 p ec.primitive_errinfo
-#=> [:incomplete_input, "EUC-JP", "UTF-8", "\xA4", ""]
+# => [:incomplete_input, "EUC-JP", "UTF-8", "\xA4", ""]
 
 # Encoding::Converter::PARTIAL_INPUT prevents invalid errors by
 # partial characters.
 ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
 ec.primitive_convert(src="\xa4", dst="", nil, 10, Encoding::Converter::PARTIAL_INPUT)
 p ec.primitive_errinfo
-#=> [:source_buffer_empty, nil, nil, nil, nil]
+# => [:source_buffer_empty, nil, nil, nil, nil]
 
 # \xd8\x00\x00@ is invalid as UTF-16BE because
 # no low surrogate after high surrogate (\xd8\x00).
@@ -353,18 +353,18 @@ p ec.primitive_errinfo
 ec = Encoding::Converter.new("UTF-16BE", "UTF-8")
 ec.primitive_convert(src="\xd8\x00\x00@", dst="", nil, 10)
 p ec.primitive_errinfo
-#=> [:invalid_byte_sequence, "UTF-16BE", "UTF-8", "\xD8\x00", "\x00"]
+# => [:invalid_byte_sequence, "UTF-16BE", "UTF-8", "\xD8\x00", "\x00"]
 p src
-#=> "@"
+# => "@"
 
 # Similar to UTF-16BE, \x00\xd8@\x00 is invalid as UTF-16LE.
 # The problem is detected by 4th byte.
 ec = Encoding::Converter.new("UTF-16LE", "UTF-8")
 ec.primitive_convert(src="\x00\xd8@\x00", dst="", nil, 10)
 p ec.primitive_errinfo
-#=> [:invalid_byte_sequence, "UTF-16LE", "UTF-8", "\x00\xD8", "@\x00"]
+# => [:invalid_byte_sequence, "UTF-16LE", "UTF-8", "\x00\xD8", "@\x00"]
 p src
-#=> ""
+# => ""
 ```
 
 ### def insert_output(string) -> nil
@@ -382,20 +382,20 @@ p src
 ec = Encoding::Converter.new("utf-8", "iso-8859-1")
 src = "HIRAGANA LETTER A is \u{3042}."
 dst = ""
-p ec.primitive_convert(src, dst)    #=> :undefined_conversion
-puts "[#{dst.dump}, #{src.dump}]"   #=> ["HIRAGANA LETTER A is ", "."]
+p ec.primitive_convert(src, dst)    # => :undefined_conversion
+puts "[#{dst.dump}, #{src.dump}]"   # => ["HIRAGANA LETTER A is ", "."]
 ec.insert_output("<err>")
-p ec.primitive_convert(src, dst)    #=> :finished
-puts "[#{dst.dump}, #{src.dump}]"   #=> ["HIRAGANA LETTER A is <err>.", ""]
+p ec.primitive_convert(src, dst)    # => :finished
+puts "[#{dst.dump}, #{src.dump}]"   # => ["HIRAGANA LETTER A is <err>.", ""]
 
 ec = Encoding::Converter.new("utf-8", "iso-2022-jp")
 src = "\u{306F 3041 3068 2661 3002}" # U+2661 is not representable in iso-2022-jp
 dst = ""
-p ec.primitive_convert(src, dst)    #=> :undefined_conversion
-puts "[#{dst.dump}, #{src.dump}]"   #=> ["\e$B$O$!$H".force_encoding("ISO-2022-JP"), "\xE3\     x80\x82"]
+p ec.primitive_convert(src, dst)    # => :undefined_conversion
+puts "[#{dst.dump}, #{src.dump}]"   # => ["\e$B$O$!$H".force_encoding("ISO-2022-JP"), "\xE3\     x80\x82"]
 ec.insert_output "?"                # state change required to output "?".
-p ec.primitive_convert(src, dst)    #=> :finished
-puts "[#{dst.dump}, #{src.dump}]"   #=> ["\e$B$O$!$H\e(B?\e$B!#\e(B".force_encoding("ISO-20     22-JP"), ""]
+p ec.primitive_convert(src, dst)    # => :finished
+puts "[#{dst.dump}, #{src.dump}]"   # => ["\e$B$O$!$H\e(B?\e$B!#\e(B".force_encoding("ISO-20     22-JP"), ""]
 ```
 
 ### def putback -> String
@@ -411,9 +411,9 @@ puts "[#{dst.dump}, #{src.dump}]"   #=> ["\e$B$O$!$H\e(B?\e$B!#\e(B".force_encod
 ec = Encoding::Converter.new("utf-16le", "iso-8859-1")
 src = "\x00\xd8\x61\x00"
 dst = ""
-p ec.primitive_convert(src, dst)   #=> :invalid_byte_sequence
-p ec.primitive_errinfo     #=> [:invalid_byte_sequence, "UTF-16LE", "UTF-8", "\x00\xD8", "a\x00"]
-p ec.putback               #=> "a\x00"
-p ec.putback               #=> ""          # no more bytes to put back
+p ec.primitive_convert(src, dst)   # => :invalid_byte_sequence
+p ec.primitive_errinfo     # => [:invalid_byte_sequence, "UTF-16LE", "UTF-8", "\x00\xD8", "a\x00"]
+p ec.putback               # => "a\x00"
+p ec.putback               # => ""          # no more bytes to put back
 ```
 

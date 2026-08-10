@@ -399,9 +399,9 @@ Numeric では定義されておらず、サブクラスの実装によります
 自身の絶対値を返します。
 
 ```ruby title="例"
-p 12.abs       #=> 12
-p (-34.56).abs #=> 34.56
-p -34.56.abs   #=> 34.56
+p 12.abs       # => 12
+p (-34.56).abs # => 34.56
+p -34.56.abs   # => 34.56
 ```
 
 ### def ceil   -> Integer
@@ -409,10 +409,10 @@ p -34.56.abs   #=> 34.56
 自身と等しいかより大きな整数のうち最小のものを返します。
 
 ```ruby title="例"
-p 1.ceil      #=> 1
-p 1.2.ceil    #=> 2
-p (-1.2).ceil #=> -1
-p (-1.5).ceil #=> -1
+p 1.ceil      # => 1
+p 1.2.ceil    # => 2
+p (-1.2).ceil # => -1
+p (-1.5).ceil # => -1
 ```
 
 - **SEE** [m:Numeric#floor], [m:Numeric#round], [m:Numeric#truncate]
@@ -425,10 +425,10 @@ p (-1.5).ceil #=> -1
                負の整数を指定した場合、小数点位置から左に少なくとも n 個の 0 が並びます。
 
 ```ruby title="例"
-p 1.floor      #=> 1
-p 1.2.floor    #=> 1
-p (-1.2).floor #=> -2
-p (-1.5).floor #=> -2
+p 1.floor      # => 1
+p 1.2.floor    # => 1
+p (-1.2).floor # => -2
+p (-1.5).floor # => -2
 ```
 
 - **SEE** [m:Numeric#ceil], [m:Numeric#round], [m:Numeric#truncate]
@@ -441,10 +441,10 @@ p (-1.5).floor #=> -2
 中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。いわゆる四捨五入ですが、偶数丸めではありません。
 
 ```ruby title="例"
-p 1.round      #=> 1
-p 1.2.round    #=> 1
-p (-1.2).round #=> -1
-p (-1.5).round #=> -2
+p 1.round      # => 1
+p 1.2.round    # => 1
+p (-1.2).round # => -1
+p (-1.5).round # => -2
 ```
 
 - **SEE** [m:Numeric#ceil], [m:Numeric#floor], [m:Numeric#truncate]
@@ -454,10 +454,10 @@ p (-1.5).round #=> -2
 0 から 自身までの整数で、自身にもっとも近い整数を返します。
 
 ```ruby title="例"
-p 1.truncate      #=> 1
-p 1.2.truncate    #=> 1
-p (-1.2).truncate #=> -1
-p (-1.5).truncate #=> -1
+p 1.truncate      # => 1
+p 1.2.truncate    # => 1
+p (-1.2).truncate # => -1
+p (-1.5).truncate # => -1
 ```
 
 - **SEE** [m:Numeric#ceil], [m:Numeric#floor], [m:Numeric#round]
@@ -555,11 +555,11 @@ divmod が返す商は [m:Numeric#div] と同じです。
 - **param** `other` -- 自身を割る数を指定します。
 
 ```ruby title="例"
-p 11.divmod(3)       #=> [3, 2]
-p (11.5).divmod(3.5) #=> [3, 1.0]
-p 11.divmod(-3)      #=> [-4, -1]
-p 11.divmod(3.5)     #=> [3, 0.5]
-p (-11).divmod(3.5)  #=> [-4, 3.0]
+p 11.divmod(3)       # => [3, 2]
+p (11.5).divmod(3.5) # => [3, 1.0]
+p 11.divmod(-3)      # => [-4, -1]
+p 11.divmod(3.5)     # => [3, 0.5]
+p (-11).divmod(3.5)  # => [-4, 3.0]
 ```
 
 - **SEE** [m:Numeric#div], [m:Numeric#modulo]
@@ -578,13 +578,13 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 - **param** `other` -- 自身を割る数を指定します。
 
 ```ruby title="例"
-p 1.quo(3)    #=> (1/3)
-p 1.0.quo(3)  #=> 0.3333333333333333
-p 1.quo(3.0)  #=> 0.3333333333333333
-p 1.quo(0.5)  #=> 2.0
+p 1.quo(3)    # => (1/3)
+p 1.0.quo(3)  # => 0.3333333333333333
+p 1.quo(3.0)  # => 0.3333333333333333
+p 1.quo(0.5)  # => 2.0
 
-p (1+1i).quo(1)  #=> ((1/1)+(1/1)*i)
-p 1.quo(1+1i)    #=> ((1/2)-(1/2)*i)
+p (1+1i).quo(1)  # => ((1/1)+(1/1)*i)
+p 1.quo(1+1i)    # => ((1/2)-(1/2)*i)
 ```
 
 - **SEE** [m:Numeric#fdiv]
@@ -603,8 +603,8 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなけ
 - **param** `other` -- 自身を割る数を指定します。
 
 ```ruby title="例"
-p 1.fdiv(3)      #=> 0.3333333333333333
-p (1+1i).fdiv 1  #=> (1.0+1.0i)
+p 1.fdiv(3)      # => 0.3333333333333333
+p (1+1i).fdiv 1  # => (1.0+1.0i)
 1.fdiv(1+1i)   # ~> RangeError: can't convert 0.5-0.5i into Float
 ```
 
@@ -617,8 +617,8 @@ p (1+1i).fdiv 1  #=> (1.0+1.0i)
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 ```ruby title="例"
-p (1.0).integer? #=> false
-p (1).integer? #=> true
+p (1.0).integer? # => false
+p (1).integer? # => true
 ```
 
 - **SEE** [m:Numeric#real?]
@@ -644,12 +644,12 @@ modulo はメソッド % の呼び出しとして定義されています。
 - **param** `other` -- 自身を割る数を指定します。
 
 ```ruby title="例"
-p 13.modulo(4)       #=>  1
-p (11.5).modulo(3.5) #=> 1.0
-p 13.modulo(-4)      #=> -3
-p (-13).modulo(4)    #=>  3
-p (-13).modulo(-4)   #=> -1
-p (-11).modulo(3.5)  #=> 3.0
+p 13.modulo(4)       # =>  1
+p (11.5).modulo(3.5) # => 1.0
+p 13.modulo(-4)      # => -3
+p (-13).modulo(4)    # =>  3
+p (-13).modulo(-4)   # => -1
+p (-11).modulo(3.5)  # => 3.0
 ```
 
 - **SEE** [m:Numeric#divmod], [m:Numeric#remainder]
@@ -697,12 +697,12 @@ self を other で割った余り r を返します。
 - **param** `other` -- 自身を割る数を指定します。
 
 ```ruby title="例"
-p 13.remainder(4)       #=>  1
-p (11.5).remainder(3.5) #=> 1.0
-p 13.remainder(-4)      #=>  1
-p (-13).remainder(4)    #=> -1
-p (-13).remainder(-4)   #=> -1
-p (-11).remainder(3.5)  #=> -0.5
+p 13.remainder(4)       # =>  1
+p (11.5).remainder(3.5) # => 1.0
+p 13.remainder(-4)      # =>  1
+p (-13).remainder(4)    # => -1
+p (-13).remainder(-4)   # => -1
+p (-11).remainder(3.5)  # => -0.5
 ```
 
 - **SEE** [m:Numeric#divmod], [m:Numeric#modulo]
@@ -712,10 +712,10 @@ p (-11).remainder(3.5)  #=> -0.5
 自身がゼロの時 nil を返し、非ゼロの時 self を返します。
 
 ```ruby title="例"
-p 10.nonzero?   #=> 10
-p 0.nonzero?    #=> nil
-p 0.0.nonzero?  #=> nil
-p 0r.nonzero?   #=> nil
+p 10.nonzero?   # => 10
+p 0.nonzero?    # => nil
+p 0.0.nonzero?  # => nil
+p 0r.nonzero?   # => nil
 ```
 
 非ゼロの時に self を返すため、自身が 0 の時に他の処理をさせたい場合に以下のように記述する事もできます。
@@ -723,7 +723,7 @@ p 0r.nonzero?   #=> nil
 ```ruby title="例"
 a = %w( z Bb bB bb BB a aA Aa AA A )
 b = a.sort {|a,b| (a.downcase <=> b.downcase).nonzero? || a <=> b }
-p b #=> ["A", "a", "AA", "Aa", "aA", "BB", "Bb", "bB", "bb", "z"]
+p b # => ["A", "a", "AA", "Aa", "aA", "BB", "Bb", "bB", "bb", "z"]
 ```
 
 - **SEE** [m:Numeric#zero?]
@@ -768,9 +768,9 @@ p 3r.to_int          # => 3
 自身がゼロの時、trueを返します。そうでない場合は false を返します。
 
 ```ruby title="例"
-p 10.zero?              #=> false
-p 0.zero?               #=> true
-p 0.0.zero?             #=> true
+p 10.zero?              # => false
+p 0.zero?               # => true
+p 0.0.zero?             # => true
 ```
 
 - **SEE** [m:Numeric#nonzero?]
@@ -863,10 +863,10 @@ Numeric のサブクラスは、上の動作を満たすよう このメソッ�
 - **param** `other` -- 自身と比較したい数値を指定します。
 
 ```ruby title="例"
-p 1 <=> 0 #=> 1
-p 1 <=> 1 #=> 0
-p 1 <=> 2 #=> -1
-p 1 <=> "0" #=> nil
+p 1 <=> 0 # => 1
+p 1 <=> 1 # => 0
+p 1 <=> 2 # => -1
+p 1 <=> "0" # => nil
 ```
 
 ### def eql?(other) -> bool
@@ -880,9 +880,9 @@ hash メソッドを適切に定義する必要があります。
 - **param** `other` -- 自身と比較したい数値を指定します。
 
 ```ruby title="例"
-p 1.eql?(1)    #=> true
-p 1.eql?(1.0)  #=> false
-p 1 == 1.0     #=> true
+p 1.eql?(1)    # => true
+p 1.eql?(1.0)  # => false
+p 1 == 1.0     # => true
 ```
 
 - **SEE** [m:Object#equal?], [m:Object#eql?], [m:Object#==], [m:Object#===]

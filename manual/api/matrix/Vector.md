@@ -134,10 +134,10 @@ require 'matrix'
 v = Vector[0, 0, 0, 0, 0]
 
 v[1] = 2
-p v #=> Vector[0, 2, 0, 0, 0]
+p v # => Vector[0, 2, 0, 0, 0]
 
 v[-1] = 3
-p v #=> Vector[0, 2, 0, 0, 3]
+p v # => Vector[0, 2, 0, 0, 3]
 
 v[99] = 100
 # IndexError: given index 99 is outside of -5...5
@@ -161,13 +161,13 @@ require 'matrix'
 v = Vector[0, 0, 0, 0, 0]
 
 v[1..2] = 5
-p v #=> Vector[0, 5, 5, 0, 0]
+p v # => Vector[0, 5, 5, 0, 0]
 
 v[1..3] = Vector[2, 4, 8]
-p v #=> Vector[0, 2, 4, 8, 0]
+p v # => Vector[0, 2, 4, 8, 0]
 
 v[1..-2] = Matrix[[3, 6, 9]]
-p v #=> Vector[0, 3, 6, 9, 0]
+p v # => Vector[0, 3, 6, 9, 0]
 ```
 
 ### def ==(v) -> bool

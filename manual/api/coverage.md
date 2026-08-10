@@ -205,7 +205,7 @@ pp Coverage.result
 Coverage.start(methods: true)
 load "bool.rb"
 bool(0)
-pp Coverage.result  #=> {"bool.rb"=>{:methods=>{[Object, :bool, 1, 0, 7, 3]=>1}}}
+pp Coverage.result  # => {"bool.rb"=>{:methods=>{[Object, :bool, 1, 0, 7, 3]=>1}}}
 ```
 
 ### def Coverage.result(stop: true, clear: true)  -> Hash
@@ -235,7 +235,7 @@ end
 require "coverage"
 Coverage.start
 load "bool.rb"
-p Coverage.result  #=> {"bool.rb"=>[1, 0, 0, nil, 0, nil, nil]}
+p Coverage.result  # => {"bool.rb"=>[1, 0, 0, nil, 0, nil, nil]}
 bool(0)
 p Coverage.result  # coverage measurement is not enabled (RuntimeError)
 ```
@@ -247,11 +247,11 @@ Coverage.result(clear: true, stop: false) と指定することで、続けて�
 require "coverage"
 Coverage.start(oneshot_lines: true)
 load "bool.rb"
-p Coverage.result(clear: true, stop: false)  #=> {"bool.rb"=>{:oneshot_lines=>[1]}}
+p Coverage.result(clear: true, stop: false)  # => {"bool.rb"=>{:oneshot_lines=>[1]}}
 bool(0)
-p Coverage.result(clear: true, stop: false)  #=> {"bool.rb"=>{:oneshot_lines=>[2, 3]}}
+p Coverage.result(clear: true, stop: false)  # => {"bool.rb"=>{:oneshot_lines=>[2, 3]}}
 bool(nil)
-p Coverage.result(clear: true, stop: false)  #=> {"bool.rb"=>{:oneshot_lines=>[5]}}
+p Coverage.result(clear: true, stop: false)  # => {"bool.rb"=>{:oneshot_lines=>[5]}}
 ```
 
 上記のコード例で、bool(0) で実行された2行目の条件式は、測定記録がクリアされたあと bool(nil) で実行されても新しく記録されません。
@@ -287,13 +287,13 @@ require "coverage"
 Coverage.start
 
 load "bool.rb"
-p Coverage.peek_result  #=> {"bool.rb"=>[1, 0, 0, nil, 0, nil, nil]}
+p Coverage.peek_result  # => {"bool.rb"=>[1, 0, 0, nil, 0, nil, nil]}
 
 bool(true)
-p Coverage.peek_result  #=> {"bool.rb"=>[1, 1, 1, nil, 0, nil, nil]}
+p Coverage.peek_result  # => {"bool.rb"=>[1, 1, 1, nil, 0, nil, nil]}
 
 bool(false)
-p Coverage.peek_result  #=> {"bool.rb"=>[1, 2, 1, nil, 1, nil, nil]}
+p Coverage.peek_result  # => {"bool.rb"=>[1, 2, 1, nil, 1, nil, nil]}
 ```
 
 - **SEE** [m:Coverage.result]
@@ -304,13 +304,13 @@ p Coverage.peek_result  #=> {"bool.rb"=>[1, 2, 1, nil, 1, nil, nil]}
 
 ```ruby
 require 'coverage'
-p Coverage.running?    #=> false
+p Coverage.running?    # => false
 Coverage.start
-p Coverage.running?    #=> true
-p Coverage.peek_result #=> {}
-p Coverage.running?    #=> true
-p Coverage.result      #=> {}
-p Coverage.running?    #=> false
+p Coverage.running?    # => true
+p Coverage.peek_result # => {}
+p Coverage.running?    # => true
+p Coverage.result      # => {}
+p Coverage.running?    # => false
 ```
 
 ### def Coverage.line_stub(file)  -> Array
@@ -336,7 +336,7 @@ end
 
 ```ruby
 require "coverage"
-p Coverage.line_stub("foo.rb")  #=> [0, 0, 0, nil, nil, 0, 0, nil, 0, nil]
+p Coverage.line_stub("foo.rb")  # => [0, 0, 0, nil, nil, 0, 0, nil, 0, nil]
 ```
 
 この例において、空行, else, end の行は測定対象外であるため、nil となっています。

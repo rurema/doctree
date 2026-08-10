@@ -18,7 +18,7 @@ library: socket
 ```ruby title="例"
 require 'socket'
 
-p IPSocket.getaddress("www.ruby-lang.org")        #=> "210.163.138.100"
+p IPSocket.getaddress("www.ruby-lang.org")        # => "210.163.138.100"
 ```
 
 ## Instance Methods
@@ -35,7 +35,7 @@ decimal や hexadecimal) です。
 require 'socket'
 
 serv = TCPServer.new("localhost", 0)
-p serv.addr         #=> ["AF_INET", 46102, "localhost.localdomain", "127.0.0.1"]
+p serv.addr         # => ["AF_INET", 46102, "localhost.localdomain", "127.0.0.1"]
 c = TCPSocket.new(*serv.addr.values_at(3,1))
 s = serv.accept
 ```
@@ -51,8 +51,8 @@ s = serv.accept
 require 'socket'
 
 TCPSocket.open("localhost", "http") {|s|
-  p s.peeraddr    #=> ["AF_INET", 80, "localhost.localdomain", "127.0.0.1"]
-  p s.addr        #=> ["AF_INET", 52615, "localhost.localdomain", "127.0.0.1"]
+  p s.peeraddr    # => ["AF_INET", 80, "localhost.localdomain", "127.0.0.1"]
+  p s.addr        # => ["AF_INET", 52615, "localhost.localdomain", "127.0.0.1"]
 }
 ```
 
@@ -77,6 +77,6 @@ s1.bind("0.0.0.0", 0) # 適当に空いている port を割り当てる
 s2 = UDPSocket.new
 s2.send("foo", 0, s1.getsockname)
 mesg, inet_addr = s1.recvfrom(100)
-p mesg            #=> "foo"
-p inet_addr       #=> ["AF_INET", 32876, "localhost.localdomain", "127.0.0.1"]
+p mesg            # => "foo"
+p inet_addr       # => ["AF_INET", 32876, "localhost.localdomain", "127.0.0.1"]
 ```

@@ -4,11 +4,11 @@ type: library
 特殊変数 $! などに英語名の別名 ($ERROR_INFO など)をつけます。
 
 ```ruby title="例"
-p $/  #=> "\n"
-p $RS #=> nil
+p $/  # => "\n"
+p $RS # => nil
 
 require 'English'
-p $RS #=> "\n"
+p $RS # => "\n"
 ```
 
 # reopen Kernel
@@ -26,8 +26,8 @@ class SomethingError < StandardError; end
 begin
   raise SomethingError
 rescue
-  p $ERROR_INFO.backtrace #=> ["sample.rb:5"]
-  p $ERROR_INFO.to_s #=> "SomethingError"
+  p $ERROR_INFO.backtrace # => ["sample.rb:5"]
+  p $ERROR_INFO.to_s # => "SomethingError"
 end
 ```
 
@@ -42,7 +42,7 @@ class SomethingError < StandardError; end
 begin
   raise SomethingError
 rescue
-  p $ERROR_POSITION #=> ["sample.rb:5"]
+  p $ERROR_POSITION # => ["sample.rb:5"]
 end
 ```
 
@@ -55,9 +55,9 @@ end
 require "English"
 
 str = "hoge,fuga,ugo,bar,foo"
-p str.split #=> ["hoge,fuga,ugo,bar,foo"]
+p str.split # => ["hoge,fuga,ugo,bar,foo"]
 $FIELD_SEPARATOR = ","
-p str.split #=> ["hoge", "fuga", "ugo", "bar", "foo"]
+p str.split # => ["hoge", "fuga", "ugo", "bar", "foo"]
 ```
 
 ### gvar $OFS                    -> String | nil
@@ -69,9 +69,9 @@ p str.split #=> ["hoge", "fuga", "ugo", "bar", "foo"]
 require "English"
 
 array = %w|hoge fuga ugo bar foo|
-p array.join #=> "hogefugaugobarfoo"
+p array.join # => "hogefugaugobarfoo"
 $OUTPUT_FIELD_SEPARATOR = ","
-p array.join #=> "hoge,fuga,ugo,bar,foo"
+p array.join # => "hoge,fuga,ugo,bar,foo"
 ```
 
 ### gvar $RS                     -> String | nil
@@ -87,7 +87,7 @@ array = []
 while line = DATA.gets
   array << line
 end
-p array #=> ["ugo|", "ego|", "fogo\n"]
+p array # => ["ugo|", "ego|", "fogo\n"]
 
 __END__
 ugo|ego|fogo
@@ -173,7 +173,7 @@ print "foo"
 $DEFAULT_OUTPUT.close
 $DEFAULT_OUTPUT = dout
 p "bar" # => bar
-p File.read("out.txt") #=> foo
+p File.read("out.txt") # => foo
 ```
 
 ### gvar $DEFAULT_INPUT -> IO
@@ -200,7 +200,7 @@ ruby sample.rb < /etc/passwd
 ```ruby
 require "English"
 
-p sprintf("something%s", $PID) #=> "something5543" など
+p sprintf("something%s", $PID) # => "something5543" など
 ```
 
 ### gvar $CHILD_STATUS -> Process::Status | nil
@@ -232,9 +232,9 @@ require "English"
 str = "<a href=https://www.ruby-lang.org/en/about/license.txt>license</a>"
 
 if /<a href=(.+?)>/ =~ str
-  p $LAST_MATCH_INFO[0] #=> "<a href=https://www.ruby-lang.org/en/about/license.txt>"
-  p $LAST_MATCH_INFO[1] #=> "https://www.ruby-lang.org/en/about/license.txt"
-  p $LAST_MATCH_INFO[2] #=> nil
+  p $LAST_MATCH_INFO[0] # => "<a href=https://www.ruby-lang.org/en/about/license.txt>"
+  p $LAST_MATCH_INFO[1] # => "https://www.ruby-lang.org/en/about/license.txt"
+  p $LAST_MATCH_INFO[2] # => nil
 end
 ```
 
@@ -277,7 +277,7 @@ require "English"
 str = 'hoge,foo,bar,hee,hoo'
 
 /(foo|bar)/ =~ str
-p $MATCH     #=> "foo"
+p $MATCH     # => "foo"
 ```
 
 ### gvar $PREMATCH -> String | nil
@@ -290,7 +290,7 @@ require "English"
 str = 'hoge,foo,bar,hee,hoo'
 
 /foo/ =~ str
-p $PREMATCH  #=> "hoge,"
+p $PREMATCH  # => "hoge,"
 ```
 
 ### gvar $POSTMATCH -> String | nil
@@ -303,7 +303,7 @@ require "English"
 str = 'hoge,foo,bar,hee,hoo'
 
 /foo/ =~ str
-p $POSTMATCH #=> ",bar,hee,hoo"
+p $POSTMATCH # => ",bar,hee,hoo"
 ```
 
 ### gvar $LAST_PAREN_MATCH -> String | nil

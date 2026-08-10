@@ -18,10 +18,10 @@ class Hash
 end
 
 {1=>[2, 3], 2=>[3], 3=>[], 4=>[]}.tsort
-#=> [3, 2, 1, 4]
+# => [3, 2, 1, 4]
 
 {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}.strongly_connected_components
-#=> [[4], [2, 3], [1]]
+# => [[4], [2, 3], [1]]
 ```
 
 ### より現実的な例
@@ -313,7 +313,7 @@ class Hash
 end
 
 sorted = {1=>[2, 3], 2=>[3], 3=>[], 4=>[]}.tsort
-p sorted #=> [3, 2, 1, 4]
+p sorted # => [3, 2, 1, 4]
 ```
 
 - **SEE** [m:TSort.tsort]
@@ -349,9 +349,9 @@ non_sort.tsort_each {|node|
 }
 
 # 出力
-#=> 2 -> 3
-#=> 1 -> 2
-#=> 1 -> 3
+# => 2 -> 3
+# => 1 -> 2
+# => 1 -> 3
 ```
 
 - **SEE** [m:TSort.tsort_each]
@@ -376,7 +376,7 @@ end
 non_sort = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
 
 p non_sort.strongly_connected_components
-#=> [[4], [2, 3], [1]]
+# => [[4], [2, 3], [1]]
 ```
 
 - **SEE** [m:TSort.strongly_connected_components]
@@ -408,9 +408,9 @@ non_sort.each_strongly_connected_component{|nodes|
 }
 
 #出力
-#=> [4]
-#=> [2, 3]
-#=> [1]
+# => [4]
+# => [2, 3]
+# => [1]
 ```
 
 - **SEE** [m:TSort.each_strongly_connected_component]
@@ -450,17 +450,17 @@ non_sort.each_strongly_connected_component{|nodes|
 }
 
 #出力
-#=> [4]
-#=> 4 -> 4
-#=> [2, 3]
-#=> 2 -> 4
-#=> 2 -> 2,3
-#=> 3 -> 4
-#=> 3 -> 3,2
-#=> [1]
-#=> 1 -> 4
-#=> 1 -> 2,3
-#=> 1 -> 1
+# => [4]
+# => 4 -> 4
+# => [2, 3]
+# => 2 -> 4
+# => 2 -> 2,3
+# => 3 -> 4
+# => 3 -> 3,2
+# => [1]
+# => 1 -> 4
+# => 1 -> 2,3
+# => 1 -> 1
 ```
 
 - **SEE** [m:TSort.each_strongly_connected_component_from]

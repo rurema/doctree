@@ -18,9 +18,9 @@ a = Date.new(1993, 2, 24)
 b = Date.parse('1993-02-24')
 b += 10
 
-p b - a          #=> 10
-p b.year         #=> 1993
-p b.strftime('%a') #=> "Sat"
+p b - a          # => 10
+p b.year         # => 1993
+p b.strftime('%a') # => "Sat"
 
 yesterday = Date.today - 1
 ```
@@ -459,26 +459,26 @@ n は数値でなければなりません。
 
 ```ruby
 require 'date'
-p Date.new(2001,2,3)  <<  1 #=> #<Date: 2001-01-03 ...>
-p Date.new(2001,2,3)  << -2 #=> #<Date: 2001-04-03 ...>
+p Date.new(2001,2,3)  <<  1 # => #<Date: 2001-01-03 ...>
+p Date.new(2001,2,3)  << -2 # => #<Date: 2001-04-03 ...>
 ```
 
 対応する月に同じ日が存在しない時は、代わりにその月の末日が使われます。
 
 ```ruby
 require 'date'
-p Date.new(2001,3,28) << 1 #=> #<Date: 2001-02-28 ...>
-p Date.new(2001,3,31) << 1 #=> #<Date: 2001-02-28 ...>
+p Date.new(2001,3,28) << 1 # => #<Date: 2001-02-28 ...>
+p Date.new(2001,3,31) << 1 # => #<Date: 2001-02-28 ...>
 ```
 
 このことは以下のように、もしかすると予期しない振る舞いをするかもしれません。
 
 ```ruby
 require 'date'
-p Date.new(2001,3,31) << 2       #=> #<Date: 2001-01-31 ...>
-p Date.new(2001,3,31) << 1 << 1  #=> #<Date: 2001-01-28 ...>
+p Date.new(2001,3,31) << 2       # => #<Date: 2001-01-31 ...>
+p Date.new(2001,3,31) << 1 << 1  # => #<Date: 2001-01-28 ...>
 
-p Date.new(2001,3,31) << 1 << -1 #=> #<Date: 2001-03-28 ...>
+p Date.new(2001,3,31) << 1 << -1 # => #<Date: 2001-03-28 ...>
 ```
 
 [m:Date#prev_month] も参照してください。
@@ -518,26 +518,26 @@ n は数値でなければなりません。
 
 ```ruby
 require 'date'
-p Date.new(2001,2,3)  >>  1 #=> #<Date: 2001-03-03 ...>
-p Date.new(2001,2,3)  >> -2 #=> #<Date: 2000-12-03 ...>
+p Date.new(2001,2,3)  >>  1 # => #<Date: 2001-03-03 ...>
+p Date.new(2001,2,3)  >> -2 # => #<Date: 2000-12-03 ...>
 ```
 
 対応する月に同じ日が存在しない時は、代わりにその月の末日が使われます。
 
 ```ruby
 require 'date'
-p Date.new(2001,1,28) >> 1 #=> #<Date: 2001-02-28 ...>
-p Date.new(2001,1,31) >> 1 #=> #<Date: 2001-02-28 ...>
+p Date.new(2001,1,28) >> 1 # => #<Date: 2001-02-28 ...>
+p Date.new(2001,1,31) >> 1 # => #<Date: 2001-02-28 ...>
 ```
 
 このことは以下のように、もしかすると予期しない振る舞いをするかもしれません。
 
 ```ruby
 require 'date'
-p Date.new(2001,1,31) >> 2       #=> #<Date: 2001-03-31 ...>
-p Date.new(2001,1,31) >> 1 >> 1  #=> #<Date: 2001-03-28 ...>
+p Date.new(2001,1,31) >> 2       # => #<Date: 2001-03-31 ...>
+p Date.new(2001,1,31) >> 1 >> 1  # => #<Date: 2001-03-28 ...>
 
-p Date.new(2001,1,31) >> 1 >> -1 #=> #<Date: 2001-01-28 ...>
+p Date.new(2001,1,31) >> 1 >> -1 # => #<Date: 2001-01-28 ...>
 ```
 
 [m:Date#next_month] も参照してください。
@@ -707,9 +707,9 @@ self >> (n * 12) に相当します。
 
 ```ruby title="例"
 require 'date'
-p Date.new(2001,2,3).next_year    #=> #<Date: 2002-02-03 ...>
-p Date.new(2008,2,29).next_year   #=> #<Date: 2009-02-28 ...>
-p Date.new(2008,2,29).next_year(4)  #=> #<Date: 2012-02-29 ...>
+p Date.new(2001,2,3).next_year    # => #<Date: 2002-02-03 ...>
+p Date.new(2008,2,29).next_year   # => #<Date: 2009-02-28 ...>
+p Date.new(2008,2,29).next_year(4)  # => #<Date: 2012-02-29 ...>
 ```
 
 [m:Date#>>] も参照してください。
@@ -738,9 +738,9 @@ self << (n * 12) に相当します。
 
 ```ruby title="例"
 require 'date'
-p Date.new(2001,2,3).prev_year    #=> #<Date: 2000-02-03 ...>
-p Date.new(2008,2,29).prev_year   #=> #<Date: 2007-02-28 ...>
-p Date.new(2008,2,29).prev_year(4)  #=> #<Date: 2004-02-29 ...>
+p Date.new(2001,2,3).prev_year    # => #<Date: 2000-02-03 ...>
+p Date.new(2008,2,29).prev_year   # => #<Date: 2007-02-28 ...>
+p Date.new(2008,2,29).prev_year(4)  # => #<Date: 2004-02-29 ...>
 ```
 
 [m:Date#<<] も参照してください。
@@ -886,7 +886,7 @@ d = Date.new(2022, 10, 5)
 if d in wday: 3, day: ..7 # deconstruct_keys が使われます
   puts "first Wednesday of the month"
 end
-#=> "first Wednesday of the month" が出力される
+# => "first Wednesday of the month" が出力される
 
 case d
 in year: ...2022
@@ -896,7 +896,7 @@ in month: ..9
 in wday: 1..5, month:
   puts "working day in month #{month}"
 end
-#=> "working day in month 10" が出力される
+# => "working day in month 10" が出力される
 
 # クラスのチェックと組み合わせて利用することもできます
 if d in Date(wday: 3, day: ..7)

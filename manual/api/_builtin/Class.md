@@ -64,8 +64,8 @@ k = Class.new{|c|
     p "hoge hoge hoge"
   end
 }
-o = k.new              #=> "in initialize"
-p o.hoge               #=> "hoge hoge hoge"
+o = k.new              # => "in initialize"
+p o.hoge               # => "hoge hoge hoge"
 ```
 
 ## Instance Methods
@@ -85,7 +85,7 @@ klass = Class.new do
   end
 end
 
-p klass.allocate.initialized? #=> false
+p klass.allocate.initialized? # => false
 ```
 
 ### def new(*args, &block)    -> object
@@ -132,18 +132,18 @@ p C.subclasses      # => []
 自身のスーパークラスを返します。
 
 ```ruby title="例"
-p File.superclass        #=> IO
-p IO.superclass          #=> Object
+p File.superclass        # => IO
+p IO.superclass          # => Object
 class Foo; end
 class Bar < Foo; end
-p Bar.superclass         #=> Foo
-p Object.superclass      #=> BasicObject
+p Bar.superclass         # => Foo
+p Object.superclass      # => BasicObject
 ```
 
 ただし [c:BasicObject].superclass は nil を返します。
 
 ```ruby title="例"
-p BasicObject.superclass #=> nil
+p BasicObject.superclass # => nil
 ```
 
 #%since 3.1

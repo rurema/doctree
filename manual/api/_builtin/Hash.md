@@ -67,18 +67,18 @@ h = {1 => "value"}
 h.default = "none"
 
 g = Hash[h]
-p g #=> {1=>"value"}
+p g # => {1=>"value"}
 
-p h[:no] #=> "none"
-p g[:no] #=> nil
+p h[:no] # => "none"
+p g[:no] # => nil
 
 h[:add] = "some"
-p h #=> {1=>"value", :add=>"some"}
-p g #=> {1=>"value"}
+p h # => {1=>"value", :add=>"some"}
+p g # => {1=>"value"}
 
 h[1] << 'plus' #破壊的操作
-p h #=> {1=>"valueplus", :add=>"some"}
-p g #=> {1=>"valueplus"}
+p h # => {1=>"valueplus", :add=>"some"}
+p g # => {1=>"valueplus"}
 ```
 
 ### def Hash.[](*key_and_value)  -> Hash
@@ -145,7 +145,7 @@ ifnoneを省略した Hash.new は {} と同じです。
 h = Hash.new([])
 h[0] << 0
 h[1] << 1
-p h.default #=> [0, 1]
+p h.default # => [0, 1]
 ```
 
 これを避けるには、破壊的でないメソッドで再代入する必要が有ります。
@@ -166,15 +166,15 @@ capacity を指定すると、指定した要素数を格納するのに充分�
 ```ruby title="例"
 h = Hash.new([])
 
-p h[1]                  #=> []
-p h[1].object_id        #=> 6127150
-p h[1] << "bar"         #=> ["bar"]
-p h[1]                  #=> ["bar"]
+p h[1]                  # => []
+p h[1].object_id        # => 6127150
+p h[1] << "bar"         # => ["bar"]
+p h[1]                  # => ["bar"]
 
-p h[2]                  #=> ["bar"]
-p h[2].object_id        #=> 6127150
+p h[2]                  # => ["bar"]
+p h[2].object_id        # => 6127150
 
-p h                     #=> {}
+p h                     # => {}
 
 
 h = Hash.new([].freeze)
@@ -204,29 +204,29 @@ h[1] << 1     # ~> FrozenError: can't modify frozen Array: []
 # 破壊的変更によって他のキーに対応する値も変更されます。
 h = Hash.new("foo")
 
-p h[1]                  #=> "foo"
-p h[1].object_id        #=> 6127170
-p h[1] << "bar"         #=> "foobar"
-p h[1]                  #=> "foobar"
+p h[1]                  # => "foo"
+p h[1].object_id        # => 6127170
+p h[1] << "bar"         # => "foobar"
+p h[1]                  # => "foobar"
 
-p h[2]                  #=> "foobar"
-p h[2].object_id        #=> 6127170
+p h[2]                  # => "foobar"
+p h[2].object_id        # => 6127170
 
-p h                     #=> {}
+p h                     # => {}
 
 # ブロックを与えると、対応する値がまだ無いキーが呼び出される度に
 # ブロックを評価するので、全て別のオブジェクトになります。
 h = Hash.new {|hash, key| hash[key] = "foo"}
 
-p h[1]                  #=> "foo"
-p h[1].object_id        #=> 6126900
-p h[1] << "bar"         #=> "foobar"
-p h[1]                  #=> "foobar"
+p h[1]                  # => "foo"
+p h[1].object_id        # => 6126900
+p h[1] << "bar"         # => "foobar"
+p h[1]                  # => "foobar"
 
-p h[2]                  #=> "foo"
-p h[2].object_id        #=> 6126840
+p h[2]                  # => "foo"
+p h[2].object_id        # => 6126840
 
-p h                     #=> {1=>"foobar", 2=>"foo"}
+p h                     # => {1=>"foobar", 2=>"foo"}
 
 # 値が設定されていないときに(fetchのように)例外をあげるようにもできる
 h = Hash.new {|hash, key|
@@ -305,7 +305,7 @@ p foo({k: 1}) # => false
 
 ```ruby title="例"
 h1 = { "a" => 100, 2 => ["some"], :c => "c" }
-p h1.values         #=> [100, ["some"], "c"]
+p h1.values         # => [100, ["some"], "c"]
 ```
 
 - **SEE** [m:Hash#keys],[m:Hash#to_a]
@@ -316,7 +316,7 @@ p h1.values         #=> [100, ["some"], "c"]
 
 ```ruby title="例"
 h1 = { "a" => 100, 2 => ["some"], :c => "c" }
-p h1.to_a           #=> [["a", 100], [2, ["some"]], [:c, "c"]]
+p h1.to_a           # => [["a", 100], [2, ["some"]], [:c, "c"]]
 ```
 
 - **SEE** [m:Hash#keys],[m:Hash#values]
@@ -327,7 +327,7 @@ p h1.to_a           #=> [["a", 100], [2, ["some"]], [:c, "c"]]
 
 ```ruby title="例"
 h1 = { "a" => 100, 2 => ["some"], :c => "c" }
-p h1.keys           #=> ["a", 2, :c]
+p h1.keys           # => ["a", 2, :c]
 ```
 
 - **SEE** [m:Hash#values],[m:Hash#to_a]
@@ -387,11 +387,11 @@ p [1, 2, 3].map(&h) # => [10, 20, 30]
 
 ```ruby
 h = { "d" => 100, "a" => 200, "v" => 300, "e" => 400 }
-p h.length      #=> 4
-p h.size        #=> 4
-p h.delete("a") #=> 200
-p h.length      #=> 3
-p h.size        #=> 3
+p h.length      # => 4
+p h.size        # => 4
+p h.delete("a") # => 200
+p h.length      # => 3
+p h.size        # => 3
 ```
 
 ### def empty? -> bool
@@ -399,7 +399,7 @@ p h.size        #=> 3
 ハッシュが空の時、真を返します。
 
 ```ruby title="例"
-puts({}.empty?) #=> true
+puts({}.empty?) # => true
 ```
 
 ### def invert -> Hash
@@ -410,7 +410,7 @@ puts({}.empty?) #=> true
 
 ```ruby title="例"
 h = { "a" => 0, "b" => 100, "c" => 200, "d" => 300, "e" => 300 }
-p h.invert   #=> {0=>"a", 100=>"b", 200=>"c", 300=>"e"}
+p h.invert   # => {0=>"a", 100=>"b", 200=>"c", 300=>"e"}
 ```
 
 ### 参考
@@ -442,12 +442,12 @@ fetchはハッシュ自身にデフォルト値が設定されていても単に
 
 ```ruby title="例"
 h = {one: nil}
-p h[:one],h[:two]                        #=> nil,nil これではキーが存在するのか判別できない。
-p h.fetch(:one)                          #=> nil
+p h[:one],h[:two]                        # => nil,nil これではキーが存在するのか判別できない。
+p h.fetch(:one)                          # => nil
 h.fetch(:two)                            # ~> KeyError: key not found: :two
-p h.fetch(:two,"error")                  #=> "error"
-p h.fetch(:two){|key|"#{key} not exist"} #=> "two not exist"
-p h.fetch(:two, "error"){|key|           #=> "two not exist"
+p h.fetch(:two,"error")                  # => "error"
+p h.fetch(:two){|key|"#{key} not exist"} # => "two not exist"
+p h.fetch(:two, "error"){|key|           # => "two not exist"
     "#{key} not exist"                   #  warning: block supersedes default value argument
   }                                      #  警告が表示される。
 
@@ -506,8 +506,8 @@ p({1 => "one"}.key?(2)) # => false
 - **param** `value` -- 探索する値を指定します。
 
 ```ruby
-p({1 => "one"}.value?("one")) #=> true
-p({1 => "one"}.value?("two")) #=> false
+p({1 => "one"}.value?("one")) # => true
+p({1 => "one"}.value?("two")) # => false
 ```
 
 - **SEE** [m:Hash#key?]
@@ -524,7 +524,7 @@ key に対して value を関連づけます。value を返します。
 h = {}
 
 h[:key] = "value"
-p h #=>{:key => "value"}
+p h # =>{:key => "value"}
 ```
 
 - **SEE** [m:Hash#\[\]]
@@ -539,12 +539,12 @@ p h #=>{:key => "value"}
 ```ruby title="例"
 h = Hash.new("default value")
 h[:some] = "some"
-p h #=> {:some=>"some"}
+p h # => {:some=>"some"}
 
 h.clear
 
-p h #=> {}
-p h.default #=> "default value"
+p h # => {}
+p h.default # => "default value"
 ```
 
 ### def compact -> Hash
@@ -554,11 +554,11 @@ compact は自身から value が nil のもの取り除いた Hash を生成し
 
 ```ruby title="例"
 hash = {a: 1, b: nil, c: 3}
-p hash.compact  #=> {:a=>1, :c=>3}
-p hash          #=> {:a=>1, :b=>nil, :c=>3}
+p hash.compact  # => {:a=>1, :c=>3}
+p hash          # => {:a=>1, :b=>nil, :c=>3}
 hash.compact!
-p hash          #=> {:a=>1, :c=>3}
-p hash.compact! #=>  nil
+p hash          # => {:a=>1, :c=>3}
+p hash.compact! # =>  nil
 ```
 
 - **SEE** [m:Array#compact]
@@ -576,14 +576,14 @@ selfが変化する破壊的メソッドです。
 
 ```ruby title="例"
 h1 = { "a" => 100, "b" => 200, :c => "c" }
-p h1.compare_by_identity? #=> false
-p h1["a"]        #=> 100
+p h1.compare_by_identity? # => false
+p h1["a"]        # => 100
 
 h1.compare_by_identity
 
-p h1.compare_by_identity? #=> true
-p h1["a"]        #=> nil  # この"a"と最初の"a"とは違うオブジェクト
-p h1[:c]         #=> "c"  # 同じ内容のシンボルはすべて同一
+p h1.compare_by_identity? # => true
+p h1["a"]        # => nil  # この"a"と最初の"a"とは違うオブジェクト
+p h1[:c]         # => "c"  # 同じ内容のシンボルはすべて同一
 ```
 
 - **SEE** [m:Hash#compare_by_identity?]
@@ -594,11 +594,11 @@ p h1[:c]         #=> "c"  # 同じ内容のシンボルはすべて同一
 
 ```ruby title="例"
 h1 = {}
-p h1.compare_by_identity? #=> false
+p h1.compare_by_identity? # => false
 
 h1.compare_by_identity
 
-p h1.compare_by_identity? #=> true
+p h1.compare_by_identity? # => true
 ```
 
 - **SEE** [m:Hash#compare_by_identity]
@@ -617,18 +617,18 @@ Ruby 3.2以前は、ハッシュが空の場合、デフォルト値（[m:Hash#d
 
 ```ruby title="例"
 h = {:ab => "some" , :cd => "all"}
-p h.shift               #=> [:ab, "some"]
-p h.shift               #=> [:cd, "all"]
-p h                     #=> {}
-p h.shift               #=> nil
+p h.shift               # => [:ab, "some"]
+p h.shift               # => [:cd, "all"]
+p h                     # => {}
+p h.shift               # => nil
 
 h1 = Hash.new("default value")
-p h1                    #=> {}
-p h1.shift              #=> "default value"
+p h1                    # => {}
+p h1.shift              # => "default value"
 
 h2 = Hash.new {|*arg| arg}
-p h2                    #=> {}
-p h2.shift              #=> [{}, nil]
+p h2                    # => {}
+p h2.shift              # => [{}, nil]
 ```
 
 #%else
@@ -637,18 +637,18 @@ p h2.shift              #=> [{}, nil]
 
 ```ruby title="例"
 h = {:ab => "some" , :cd => "all"}
-p h.shift               #=> [:ab, "some"]
-p h.shift               #=> [:cd, "all"]
-p h                     #=> {}
-p h.shift               #=> nil
+p h.shift               # => [:ab, "some"]
+p h.shift               # => [:cd, "all"]
+p h                     # => {}
+p h.shift               # => nil
 
 h1 = Hash.new("default value")
-p h1                    #=> {}
-p h1.shift              #=> nil
+p h1                    # => {}
+p h1.shift              # => nil
 
 h2 = Hash.new {|*arg| arg}
-p h2                    #=> {}
-p h2.shift              #=> nil
+p h2                    # => {}
+p h2.shift              # => nil
 ```
 
 #%end
@@ -672,11 +672,11 @@ foo = {1 => 'a', 2 => 'b'}
 bar = {2 => 'B', 3 => 'C'}
 
 foo.replace(bar)
-p foo  #=> {2=>"B", 3=>"C"}
+p foo  # => {2=>"B", 3=>"C"}
 
 zoo = {}
 zoo = bar.dup
-p zoo  #=> {2=>"B", 3=>"C"}
+p zoo  # => {2=>"B", 3=>"C"}
 
 class Foo
   def to_hash
@@ -686,7 +686,7 @@ end
 
 h = Hash.new
 h.replace(Foo.new) #暗黙の変換
-p h #=> {:japan=>"kyoto"}
+p h # => {:japan=>"kyoto"}
 ```
 
 - **SEE** [m:Hash#dup],[m:Hash#merge],[m:Object#to_hash]
@@ -703,14 +703,14 @@ key に関連づけられた値を返します。
 
 ```ruby title="例"
 h = {:ab => "some" , :cd => "all"}
-p h[:ab]             #=> "some"
-p h[:ef]             #=> nil
+p h[:ab]             # => "some"
+p h[:ef]             # => nil
 
 h1 = Hash.new("default value")
-p h1[:non]             #=> "default value"
+p h1[:non]             # => "default value"
 
 h2 = Hash.new {|*arg| arg}
-p h2[:non]             #=> [{}, :non]
+p h2[:non]             # => [{}, :non]
 ```
 
 - **SEE** [m:Hash.new], [m:Hash#fetch],[m:Hash#values_at],[m:Hash#key?], [m:Hash#default], [m:Hash#default_proc]
@@ -729,19 +729,19 @@ self と引数 key をブロックに渡して評価し、その結果を返し�
 
 ```ruby title="例"
 h = Hash.new("default")
-p h.default        #=> "default"
-p h.default(:some) #=> "default"
-p h #=>{}
+p h.default        # => "default"
+p h.default(:some) # => "default"
+p h # =>{}
 
 h = Hash.new{|hash, key| hash[key] ="default" }
-p h.default        #=> nil
-p h.default(:some) #=> "default"
-p h                #=> {:some=>"default"}
+p h.default        # => nil
+p h.default(:some) # => "default"
+p h                # => {:some=>"default"}
 
 h = Hash.new
-p h.default        #=> nil
-p h.default(:some) #=> nil
-p h                #=> {}
+p h.default        # => nil
+p h.default(:some) # => nil
+p h                # => {}
 ```
 
 - **SEE** [m:Hash#default=], [m:Hash#default_proc]
@@ -757,10 +757,10 @@ p h                #=> {}
 
 ```ruby title="例"
 h = {}
-p h.default #=>nil
+p h.default # =>nil
 
 h.default = "default"
-p h.default #=>"default"
+p h.default # =>"default"
 ```
 
 - **SEE** [m:Hash#default]
@@ -772,13 +772,13 @@ p h.default #=>"default"
 
 ```ruby title="例"
 h = Hash.new {|hash, key| "The #{key} not exist in #{hash.inspect}"}
-p h.default              #=> nil
-p block = h.default_proc #=> #<Proc:0x0x401a9ff4>
-p block.call({},:foo)    #=> "The foo not exist in {}"
+p h.default              # => nil
+p block = h.default_proc # => #<Proc:0x0x401a9ff4>
+p block.call({},:foo)    # => "The foo not exist in {}"
 
 h = Hash.new("default")
-p h.default              #=> "default"
-p h.default_proc         #=> nil
+p h.default              # => "default"
+p h.default_proc         # => nil
 ```
 
 - **SEE** [m:Hash#default]
@@ -839,12 +839,12 @@ h1 = {"have" => "have a","as" => "as a" }
 h2 = h1.dup
 
 h2["have"] = "has"
-p h2 #=> {"have"=>"has", "as"=>"as a"}
-p h1 #=> {"have"=>"have a", "as"=>"as a"}
+p h2 # => {"have"=>"has", "as"=>"as a"}
+p h1 # => {"have"=>"have a", "as"=>"as a"}
 
 h2["as"].upcase!
-p h2 #=> {"have"=>"has", "as"=>"AS A"}
-p h1 #=> {"have"=>"have a", "as"=>"AS A"}
+p h2 # => {"have"=>"has", "as"=>"AS A"}
+p h1 # => {"have"=>"have a", "as"=>"AS A"}
 ```
 
 - **SEE** [m:Object#clone]
@@ -866,11 +866,11 @@ key に対応する要素を取り除きます。
 ```ruby title="例"
 h = {:ab => "some" , :cd => "all"}
 
-p h.delete(:ab) #=> "some"
-p h.delete(:ef) #=> nil
-p h.delete(:ef){|key|"#{key} Nothing"} #=> "ef Nothing"
+p h.delete(:ab) # => "some"
+p h.delete(:ef) # => nil
+p h.delete(:ef){|key|"#{key} Nothing"} # => "ef Nothing"
 
-p h #=> {:cd=>"all"}
+p h # => {:cd=>"all"}
 ```
 
 - **SEE** [m:Hash#delete_if]
@@ -887,7 +887,7 @@ selfを破壊的に変更したい場合はかわりに[m:Hash#delete_if]か[m:H
 ```ruby title="例"
 h = { 2 =>"8" ,4 =>"6" ,6 =>"4" ,8 =>"2" }
 
-p h.reject{|key, value| key.to_i < value.to_i} #=> {6=>"4", 8=>"2"}
+p h.reject{|key, value| key.to_i < value.to_i} # => {6=>"4", 8=>"2"}
 ```
 
 - **SEE** [m:Hash#delete_if],[m:Hash#delete],[m:Enumerable#reject]
@@ -907,11 +907,11 @@ reject! は、要素を削除しなかった場合には nil を返し、そう�
 ```ruby title="例"
 h = { 2 => "8" ,4 => "6" ,6 => "4" ,8 => "2" }
 
-p h.reject!{|key, value| key.to_i < value.to_i }   #=> { 6 => "4", 8 => "2" }
-p h                                                #=> { 6 => "4", 8 => "2" }
+p h.reject!{|key, value| key.to_i < value.to_i }   # => { 6 => "4", 8 => "2" }
+p h                                                # => { 6 => "4", 8 => "2" }
 
-p h.delete_if{|key, value| key.to_i < value.to_i } #=> { 6 => "4", 8 => "2" }
-p h.reject!{|key, value| key.to_i < value.to_i }   #=> nil
+p h.delete_if{|key, value| key.to_i < value.to_i } # => { 6 => "4", 8 => "2" }
+p h.reject!{|key, value| key.to_i < value.to_i }   # => nil
 ```
 
 - **SEE** [m:Hash#reject],[m:Hash#delete]
@@ -931,11 +931,11 @@ each_pair は each のエイリアスです。
 
 ```ruby title="例"
 {:a=>1, :b=>2}.each {|a| p a}
-#=> [:a, 1]
+# => [:a, 1]
 #   [:b, 2]
 
 {:a=>1, :b=>2}.each {|k, v| p [k, v]}
-#=> [:a, 1]
+# => [:a, 1]
 #   [:b, 2]
 
 p({:a=>1, :b=>2}.each_pair)  # => #<Enumerator: {:a=>1, :b=>2}:each_pair>
@@ -955,11 +955,11 @@ Ruby 2.7 までは動作していましたが、Ruby 3.0 以降は [c:ArgumentEr
 
 # 1引数で配列として受け取る
 {foo: 100}.each(&->(pair) { p pair })
-#=> [:foo, 100]
+# => [:foo, 100]
 
 # 仮引数を括弧で囲んで分解する
 {foo: 100}.each(&->((k, v)) { p [k, v] })
-#=> [:foo, 100]
+# => [:foo, 100]
 ```
 
 - **SEE** [m:Hash#each_key],[m:Hash#each_value]
@@ -974,7 +974,7 @@ Ruby 2.7 までは動作していましたが、Ruby 3.0 以降は [c:ArgumentEr
 
 ```ruby title="例"
 {:a=>1, :b=>2}.each_key {|k| p k}
-#=> :a
+# => :a
 #   :b
 
 p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {:a=>1, :b=>2}:each_key>
@@ -992,7 +992,7 @@ p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {:a=>1, :b=>2}:each_key>
 
 ```ruby title="例"
 {:a=>1, :b=>2}.each_value {|v| p v}
-#=> 1
+# => 1
 #   2
 
 p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {:a=>1, :b=>2}:each_value>
@@ -1012,9 +1012,9 @@ nil を返します。
 ```ruby title="例"
 h = {:ab => "some" , :cd => "all" , :ef => "all"}
 
-p h.key("some") #=> :ab
-p h.key("all") #=> :cd
-p h.key("at") #=> nil
+p h.key("some") # => :ab
+p h.key("all") # => :cd
+p h.key("at") # => nil
 ```
 
 - **SEE** [m:Hash#invert]
@@ -1033,7 +1033,7 @@ p h.key("at") #=> nil
 ```ruby title="例"
 h = {1=>"a", 2=>"b", 3=>"c"}
 
-p h.values_at(1,3,4)               #=> ["a", "c", nil]
+p h.values_at(1,3,4)               # => ["a", "c", nil]
 # [h[1], h[3] ,h[4]] と同じ
 ```
 
@@ -1070,13 +1070,13 @@ p g.dig(:foo, 1)             # => 11
 a = [ "a", "b" ]
 h = { a => 100 }
 
-p h[a]       #=> 100
+p h[a]       # => 100
 
 a[0] = "z"
-p h[a]       #=> nil
+p h[a]       # => nil
 
 h.rehash
-p h[a]       #=> 100
+p h[a]       # => 100
 ```
 
 - **SEE** [m:Object#hash]
@@ -1098,14 +1098,14 @@ othersがハッシュではない場合、othersのメソッドto_hashを使っ�
 h1 = { "a" => 100, "b" => 200 }
 h2 = { "b" => 246, "c" => 300 }
 h3 = { "b" => 357, "d" => 400 }
-p h1.merge        #=> {"a"=>100, "b"=>200}
-p h1.merge(h2)    #=> {"a"=>100, "b"=>246, "c"=>300}
-p h1.merge(h2, h3)  #=> {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
+p h1.merge        # => {"a"=>100, "b"=>200}
+p h1.merge(h2)    # => {"a"=>100, "b"=>246, "c"=>300}
+p h1.merge(h2, h3)  # => {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
 p h1.merge(h2) {|key, oldval, newval| newval - oldval}
-                  #=> {"a"=>100, "b"=>46,  "c"=>300}
+                  # => {"a"=>100, "b"=>46,  "c"=>300}
 p h1.merge(h2, h3) {|key, oldval, newval| newval - oldval}
-                  #=> {"a"=>100, "b"=>311, "c"=>300, "d"=>400}
-p h1              #=> {"a"=>100, "b"=>200}
+                  # => {"a"=>100, "b"=>311, "c"=>300, "d"=>400}
+p h1              # => {"a"=>100, "b"=>200}
 ```
 
 ```ruby
@@ -1159,23 +1159,23 @@ othersがハッシュではない場合、othersのメソッドto_hashを使っ�
 
 ```ruby
 h1 = { "a" => 100, "b" => 200 }
-p h1.merge!        #=> {"a"=>100, "b"=>200}
-p h1               #=> {"a"=>100, "b"=>200}
+p h1.merge!        # => {"a"=>100, "b"=>200}
+p h1               # => {"a"=>100, "b"=>200}
 ```
 
 ```ruby
 h1 = { "a" => 100, "b" => 200 }
 h2 = { "b" => 246, "c" => 300 }
-p h1.merge!(h2)    #=> {"a"=>100, "b"=>246, "c"=>300}
-p h1               #=> {"a"=>100, "b"=>246, "c"=>300}
+p h1.merge!(h2)    # => {"a"=>100, "b"=>246, "c"=>300}
+p h1               # => {"a"=>100, "b"=>246, "c"=>300}
 ```
 
 ```ruby
 h1 = { "a" => 100, "b" => 200 }
 h2 = { "b" => 246, "c" => 300 }
 h3 = { "b" => 357, "d" => 400 }
-p h1.merge!(h2, h3)  #=> {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
-p h1               #=> {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
+p h1.merge!(h2, h3)  # => {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
+p h1               # => {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
 ```
 
 ```ruby
@@ -1183,16 +1183,16 @@ h1 = { "a" => 100, "b" => 200 }
 h2 = { "b" => 246, "c" => 300 }
 h3 = { "b" => 357, "d" => 400 }
 p h1.merge!(h2, h3) {|key, v1, v2| v1 }
-                   #=> {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
-p h1               #=> {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
+                   # => {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
+p h1               # => {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
 ```
 
 ```ruby
 foo = {1 => 'a', 2 => 'b', 3 => 'c'}
 bar = {2 => 'B', 3 => 'C', 4 => 'D'}
 
-p foo.update(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
-p foo  #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo.update(bar) # => {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+p foo  # => {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
 
 p foo.update(bar) {|key, foo_val, bar_val| foo_val + bar_val } # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
 p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
@@ -1209,11 +1209,11 @@ p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
 - **param** `other` -- 自身と比較したい Hash オブジェクトを指定します。
 
 ```ruby title="例"
-p({ 1 => :a } == { 1 => :a })            #=> true
-p({ 1 => :a } == { 1 => :a, 2 => :b })   #=> false
-p({ 1 => :a } == { 1.0 => :a })          #=> false  ( 1.eql?(1.0) は false なので)
+p({ 1 => :a } == { 1 => :a })            # => true
+p({ 1 => :a } == { 1 => :a, 2 => :b })   # => false
+p({ 1 => :a } == { 1.0 => :a })          # => false  ( 1.eql?(1.0) は false なので)
 
-p({ :x => 1 } == { :x => 1.0 })          #=> true   ( 1 == 1.0 は true なので)
+p({ :x => 1 } == { :x => 1.0 })          # => true   ( 1 == 1.0 は true なので)
 ```
 
 - **SEE** [m:Hash#equal?]
@@ -1225,9 +1225,9 @@ p({ :x => 1 } == { :x => 1.0 })          #=> true   ( 1 == 1.0 は true なの�
 - **param** `other` -- 自身と比較したい Hash オブジェクトを指定します。
 
 ```ruby title="例"
-p({}.equal?({}))     #=> false
+p({}.equal?({}))     # => false
 a = {}
-p a.equal?(a)        #=> true
+p a.equal?(a)        # => true
 ```
 
 - **SEE** [m:Hash#==]
@@ -1303,9 +1303,9 @@ p h1 > h1  # => false
 
 ```ruby title="例"
 a = {}
-p a.hash     #=> 0
+p a.hash     # => 0
 a[1] = :x
-p a.hash     #=> 329543
+p a.hash     # => 329543
 ```
 
 ### def assoc(key)   ->  Array | nil
@@ -1320,8 +1320,8 @@ key が見つからなかった場合は、nil を返します。
 ```ruby title="例"
 h = {"colors"  => ["red", "blue", "green"],
      "letters" => ["a", "b", "c" ]}
-p h.assoc("letters")  #=> ["letters", ["a", "b", "c"]]
-p h.assoc("foo")    #=> nil
+p h.assoc("letters")  # => ["letters", ["a", "b", "c"]]
+p h.assoc("foo")    # => nil
 ```
 
 - **SEE** [m:Array#assoc]
@@ -1337,11 +1337,11 @@ p h.assoc("foo")    #=> nil
 
 ```ruby title="例"
 a =  {1=> "one", 2 => [2,"two"], 3 => "three"}
-p a.flatten   #=> [1, "one", 2, [2, "two"], 3, "three"]
-p a.flatten(1)  #=> [1, "one", 2, [2, "two"], 3, "three"]
-p a.flatten(2)  #=> [1, "one", 2, 2, "two", 3, "three"]
-p a.flatten(0)  #=> [[1, "one"], [2, [2, "two"]], [3, "three"]]
-p a.flatten(-1) #=> [1, "one", 2, 2, "two", 3, "three"]
+p a.flatten   # => [1, "one", 2, [2, "two"], 3, "three"]
+p a.flatten(1)  # => [1, "one", 2, [2, "two"], 3, "three"]
+p a.flatten(2)  # => [1, "one", 2, 2, "two", 3, "three"]
+p a.flatten(0)  # => [[1, "one"], [2, [2, "two"]], [3, "three"]]
+p a.flatten(-1) # => [1, "one", 2, 2, "two", 3, "three"]
 ```
 
 - **SEE** [m:Array#flatten]
@@ -1357,8 +1357,8 @@ p a.flatten(-1) #=> [1, "one", 2, 2, "two", 3, "three"]
 
 ```ruby title="例"
 a = {1=> "one", 2 => "two", 3 => "three", "ii" => "two"}
-p a.rassoc("two")  #=> [2, "two"]
-p a.rassoc("four") #=> nil
+p a.rassoc("two")  # => [2, "two"]
+p a.rassoc("four") # => nil
 ```
 
 - **SEE** [m:Hash#assoc], [m:Array#rassoc]
@@ -1375,8 +1375,8 @@ key, value のペアについてブロックを評価し、真となるペアだ
 
 ```ruby
 h = { "a" => 100, "b" => 200, "c" => 300 }
-p h.select {|k,v| k > "a"}  #=> {"b" => 200, "c" => 300}
-p h.select {|k,v| v < 200}  #=> {"a" => 100}
+p h.select {|k,v| k > "a"}  # => {"b" => 200, "c" => 300}
+p h.select {|k,v| v < 200}  # => {"a" => 100}
 ```
 
 - **SEE** [m:Hash#select!], [m:Hash#reject]
@@ -1435,10 +1435,10 @@ p h2.keep_if { |k, v| true }      # => {0=>"a", 3=>"d", 6=>"g"}
 
 ```ruby title="例"
 h = { a: 1, b: 2, c: 3 }
-p h.transform_values {|v| v * v + 1 }  #=> { a: 2, b: 5, c: 10 }
-p h.transform_values(&:to_s)         #=> { a: "1", b: "2", c: "3" }
+p h.transform_values {|v| v * v + 1 }  # => { a: 2, b: 5, c: 10 }
+p h.transform_values(&:to_s)         # => { a: "1", b: "2", c: "3" }
 p h.transform_values.with_index {|v, i| "#{v}.#{i}" }
-                                     #=> { a: "1.0", b: "2.1", c: "3.2" }
+                                     # => { a: "1.0", b: "2.1", c: "3.2" }
 ```
 
 - **SEE** [m:Hash#transform_values!]
@@ -1457,10 +1457,10 @@ p h.transform_values.with_index {|v, i| "#{v}.#{i}" }
 
 ```ruby title="例"
 h = { a: 1, b: 2, c: 3 }
-p h.transform_values! {|v| v * v + 1 }  #=> { a: 2, b: 5, c: 10 }
-p h.transform_values!(&:to_s)         #=> { a: "2", b: "5", c: "10" }
+p h.transform_values! {|v| v * v + 1 }  # => { a: 2, b: 5, c: 10 }
+p h.transform_values!(&:to_s)         # => { a: "2", b: "5", c: "10" }
 p h.transform_values!.with_index {|v, i| "#{v}.#{i}" }
-                                      #=> { a: "2.0", b: "5.1", c: "10.2" }
+                                      # => { a: "2.0", b: "5.1", c: "10.2" }
 ```
 
 - **SEE** [m:Hash#transform_values]

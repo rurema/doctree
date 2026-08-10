@@ -386,7 +386,7 @@ implemented_ole_typesメソッドは、selfがCoClass（コンポーネントク
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
-p tobj.implemented_ole_types.map {|intf| intf.name} #=> ["_Worksheet", "DocEvents"]
+p tobj.implemented_ole_types.map {|intf| intf.name} # => ["_Worksheet", "DocEvents"]
 ```
 
 ### def source_ole_types -> [WIN32OLE_TYPE]
@@ -402,7 +402,7 @@ ActiveXコントロールのようにイベント（[c:WIN32OLE_EVENT]）をサ�
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
-p tobj.source_ole_types.map {|intf| intf.name} #=> ["DocEvents"]
+p tobj.source_ole_types.map {|intf| intf.name} # => ["DocEvents"]
 ```
 
 ### def default_event_sources -> [WIN32OLE_TYPE]
@@ -418,7 +418,7 @@ default_event_sourcesメソッドは、selfがCoClass（コンポーネントク
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
-p tobj.default_event_sources.map {|intf| intf.name} #=> ["DocEvents"]
+p tobj.default_event_sources.map {|intf| intf.name} # => ["DocEvents"]
 ```
 
 [m:WIN32OLE_EVENT.new]でインターフェイス名を指定しない場合は、ここで返されたインターフェイスが選択されます。
@@ -522,7 +522,7 @@ default_ole_typesメソッドは、selfがCoClass（コンポーネントクラ�
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
-p tobj.default_ole_types.map {|intf| intf.name} #=> ["_Worksheet", "DocEvents"]
+p tobj.default_ole_types.map {|intf| intf.name} # => ["_Worksheet", "DocEvents"]
 ```
 
 ### def inspect -> String
@@ -534,7 +534,7 @@ selfを説明的な文字列で表現します。
 
 ```ruby
 x = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
-puts x.inspect #=> #<WIN32OLE_TYPE:Worksheet>
+puts x.inspect # => #<WIN32OLE_TYPE:Worksheet>
 ```
 
 - **SEE** [m:WIN32OLE_TYPE#to_s]

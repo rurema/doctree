@@ -358,9 +358,9 @@ untagged な応答は種類ごとに記録されます。
 ```ruby title="例"
 imap.select("inbox")
 p imap.responses["EXISTS"].last
-#=> 2
+# => 2
 p imap.responses["UIDVALIDITY"].last
-#=> 968263756
+# => 968263756
 ```
 
 ### def disconnect -> nil
@@ -518,7 +518,7 @@ LIST コマンドを送り、クライアントから利用可能なメールボ
 imap.create("foo/bar")
 imap.create("foo/baz")
 p imap.list("", "foo/%")
-#=> [#<Net::IMAP::MailboxList attr=[:Noselect], delim="/", name="foo/">, #<Net::IMAP::MailboxList attr=[:Noinferiors, :Marked], delim="/", name="foo/bar">, #<Net::IMAP::MailboxList attr=[:Noinferiors], delim="/", name="foo/baz">]
+# => [#<Net::IMAP::MailboxList attr=[:Noselect], delim="/", name="foo/">, #<Net::IMAP::MailboxList attr=[:Noinferiors, :Marked], delim="/", name="foo/bar">, #<Net::IMAP::MailboxList attr=[:Noinferiors], delim="/", name="foo/baz">]
 ```
 
 ### def xlist(refname, mailbox) -> [Net::IMAP::MailboxList]
@@ -538,7 +538,7 @@ XLISTコマンドを送り、クライアントから利用可能なメールボ
 imap.create("foo/bar")
 imap.create("foo/baz")
 p imap.xlist("", "foo/%")
-#=> [#<Net::IMAP::MailboxList attr=[:Noselect], delim="/", name="foo/">, \\
+# => [#<Net::IMAP::MailboxList attr=[:Noselect], delim="/", name="foo/">, \\
 #    #<Net::IMAP::MailboxList attr=[:Noinferiors, :Marked], delim="/", name="foo/bar">, \\
 #    #<Net::IMAP::MailboxList attr=[:Noinferiors], delim="/", name="foo/baz">]
 ```
@@ -567,7 +567,7 @@ STATUS コマンドを送り、mailbox のステータスを得ます。
 
 ```ruby title="例"
 p imap.status("inbox", ["MESSAGES", "RECENT"])
-#=> {"RECENT"=>0, "MESSAGES"=>44}
+# => {"RECENT"=>0, "MESSAGES"=>44}
 ```
 
 - **param** `mailbox` -- 問い合わせ対象のメールボックス(文字列)
@@ -631,11 +631,11 @@ SEARCH コマンドを送り、条件に合うメッセージの message sequenc
 
 ```ruby title="例"
 p imap.search(["SUBJECT", "hello"])
-#=> [1, 6, 7, 8]
+# => [1, 6, 7, 8]
 p imap.search(["SUBJECT", "hello", "FROM", "foo@example.com"])
-#=> [6, 7]
+# => [6, 7]
 p imap.search('SUBJECT "hello"')
-#=> [1, 6, 7, 8]
+# => [1, 6, 7, 8]
 ```
 
 - **param** `key` -- 検索キー(文字列の配列もしくは文字列)
@@ -656,11 +656,11 @@ UID SEARCH コマンドを送り、条件に合うメッセージの UID
 
 ```ruby title="例"
 p imap.uid_search(["SUBJECT", "hello"])
-#=> [1, 6, 7, 8]
+# => [1, 6, 7, 8]
 p imap.uid_search(["SUBJECT", "hello", "FROM", "foo@example.com"])
-#=> [6, 7]
+# => [6, 7]
 p imap.uid_search('SUBJECT "hello"')
-#=> [1, 6, 7, 8]
+# => [1, 6, 7, 8]
 ```
 
 - **param** `key` -- 検索キー(文字列の配列もしくは文字列)
@@ -682,18 +682,18 @@ attr には取得するアトリビュートを文字列の配列で渡してく
 
 ```ruby title="例"
 p imap.fetch(6..8, "UID")
-#=> [#<Net::IMAP::FetchData seqno=6, attr={"UID"=>98}>, #<Net::IMAP::FetchData seqno=7, attr={"UID"=>99}>, #<Net::IMAP::FetchData seqno=8, attr={"UID"=>100}>]
+# => [#<Net::IMAP::FetchData seqno=6, attr={"UID"=>98}>, #<Net::IMAP::FetchData seqno=7, attr={"UID"=>99}>, #<Net::IMAP::FetchData seqno=8, attr={"UID"=>100}>]
 p imap.fetch(6, "BODY[HEADER.FIELDS (SUBJECT)]")
-#=> [#<Net::IMAP::FetchData seqno=6, attr={"BODY[HEADER.FIELDS (SUBJECT)]"=>"Subject: test\r\n\r\n"}>]
+# => [#<Net::IMAP::FetchData seqno=6, attr={"BODY[HEADER.FIELDS (SUBJECT)]"=>"Subject: test\r\n\r\n"}>]
 data = imap.uid_fetch(98, ["RFC822.SIZE", "INTERNALDATE"])[0]
 p data.seqno
-#=> 6
+# => 6
 p data.attr["RFC822.SIZE"]
-#=> 611
+# => 611
 p data.attr["INTERNALDATE"]
-#=> "12-Oct-2000 22:40:59 +0900"
+# => "12-Oct-2000 22:40:59 +0900"
 p data.attr["UID"]
-#=> 98
+# => 98
 ```
 
 - **param** `set` -- 処理対象のメッセージの sequence number
@@ -741,7 +741,7 @@ flags には シンボルの配列で置き換え、追加もしくは削除さ�
 
 ```ruby title="例"
 p imap.store(6..8, "+FLAGS", [:Deleted])
-#=> [#<Net::IMAP::FetchData seqno=6, attr={"FLAGS"=>[:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=7, attr={"FLAGS"=>[:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=8, attr={"FLAGS"=>[:Seen, :Deleted]}>]
+# => [#<Net::IMAP::FetchData seqno=6, attr={"FLAGS"=>[:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=7, attr={"FLAGS"=>[:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=8, attr={"FLAGS"=>[:Seen, :Deleted]}>]
 ```
 
 - **param** `set` -- 更新するメッセージのsequence number
@@ -853,9 +853,9 @@ search_key には検索条件を渡します。[m:Net::IMAP#search] とほぼ同
 
 ```ruby title="例"
 p imap.sort(["FROM"], ["ALL"], "US-ASCII")
-#=> [1, 2, 3, 5, 6, 7, 8, 4, 9]
+# => [1, 2, 3, 5, 6, 7, 8, 4, 9]
 p imap.sort(["DATE"], ["SUBJECT", "hello"], "US-ASCII")
-#=> [6, 7, 8, 1]
+# => [6, 7, 8, 1]
 ```
 
 - **param** `sort_key` -- ソート順のキー(文字列配列)

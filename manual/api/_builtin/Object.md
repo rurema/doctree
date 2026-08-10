@@ -17,7 +17,7 @@ Objectクラスのインスタンスを生成して返します。
 
 ```ruby
 some = Object.new
-p some #=> #<Object:0x2b696d8>
+p some # => #<Object:0x2b696d8>
 ```
 
 ## Instance Methods
@@ -35,18 +35,18 @@ p some #=> #<Object:0x2b696d8>
 
 ```ruby title="例"
 o = Object.new
-p(o.eql?(o)) #=> true
-p(o.eql?(Object.new)) #=> false
+p(o.eql?(o)) # => true
+p(o.eql?(Object.new)) # => false
 ```
 
 下記の例のように、各クラスの性質に合わせて再定義されることが期待されています。
 
 ```ruby title="適切に再定義されている例"
-p("foo" == "bar") #=> false
-p("foo" == "foo") #=> true
+p("foo" == "bar") # => false
+p("foo" == "foo") # => true
 
-p(4 == 4) #=> true
-p(4 == 4.0) #=> true
+p(4 == 4) # => true
+p(4 == 4.0) # => true
 ```
 
 - **SEE** [m:Object#equal?],[m:Object#eql?]
@@ -78,11 +78,11 @@ p a <=> b # => nil
 - **param** `other` -- 比較するオブジェクトです。
 
 ```ruby
-p("foo".eql?("bar")) #=> false
-p("foo".eql?("foo")) #=> true
+p("foo".eql?("bar")) # => false
+p("foo".eql?("foo")) # => true
 
-p(4.eql?(4)) #=> true
-p(4.eql?(4.0)) #=> false
+p(4.eql?(4)) # => true
+p(4.eql?(4.0)) # => false
 ```
 
 - **SEE** [m:Object#hash],[m:Object#equal?],[m:Object#==],[m:Array#uniq],[c:Set]
@@ -99,13 +99,13 @@ other が self 自身の時、真を返します。
 - **param** `other` -- 比較するオブジェクトです。
 
 ```ruby
-p("foo".equal?("bar")) #=> false
-p("foo".equal?("foo")) #=> false
+p("foo".equal?("bar")) # => false
+p("foo".equal?("foo")) # => false
 
-p(4.equal?(4)) #=> true
-p(4.equal?(4.0)) #=> false
+p(4.equal?(4)) # => true
+p(4.equal?(4.0)) # => false
 
-p(:foo.equal? :foo) #=> true
+p(:foo.equal? :foo) # => true
 ```
 
 - **SEE** [m:Object#object_id],[m:Object#==],[m:Object#eql?],[c:Symbol]
@@ -341,7 +341,7 @@ class Foo
 end
 it = Foo.new(40)
 
-puts it #=> #<Foo:0x2b69110>
+puts it # => #<Foo:0x2b69110>
 
 class Foo
   def to_s
@@ -349,7 +349,7 @@ class Foo
   end
 end
 
-puts it #=> Class:Foo Number:40
+puts it # => Class:Foo Number:40
 ```
 
 - **SEE** [m:Object#to_str],[m:Kernel?.String]
@@ -376,7 +376,7 @@ class Foo
 end
 
 it = Foo.new
-p('Second' + it) #=> "SecondEdition"
+p('Second' + it) # => "SecondEdition"
 ```
 
 - **SEE** [m:Object#to_s],[m:Kernel?.String]
@@ -403,7 +403,7 @@ class Foo
 end
 
 it = Foo.new
-p([1,2] + it) #=> [1, 2, 3, 4]
+p([1,2] + it) # => [1, 2, 3, 4]
 ```
 
 - **SEE** [m:Object#to_a],[m:Kernel?.Array]
@@ -430,7 +430,7 @@ class Foo
 end
 
 it = Foo.new
-p({:as => 12}.merge(it)) #=> {"as"=>24, :as=>12}
+p({:as => 12}.merge(it)) # => {"as"=>24, :as=>12}
 ```
 
 ### def to_int -> Integer
@@ -481,7 +481,7 @@ class Foo
 end
 
 it = Foo.new
-p doing(&it) #=> "ok"
+p doing(&it) # => "ok"
 ```
 
 ### def to_io -> IO
@@ -522,7 +522,7 @@ class Foo
 end
 
 it = Foo.new
-p Regexp.union(/^at/, it) #=> /(?-mix:^at)|(?-mix:[\d]+)/
+p Regexp.union(/^at/, it) # => /(?-mix:^at)|(?-mix:[\d]+)/
 ```
 
 ### def to_enum(method = :each, *args) -> Enumerator
@@ -541,11 +541,11 @@ p Regexp.union(/^at/, it) #=> /(?-mix:^at)|(?-mix:[\d]+)/
 str = "xyz"
 
 enum = str.enum_for(:each_byte)
-p(a = enum.map{|b| '%02x' % b }) #=> ["78", "79", "7a"]
+p(a = enum.map{|b| '%02x' % b }) # => ["78", "79", "7a"]
 
 # protects an array from being modified
 a = [1, 2, 3]
-p(a.to_enum) #=> #<Enumerator: [1, 2, 3]:each>
+p(a.to_enum) # => #<Enumerator: [1, 2, 3]:each>
 ```
 
 ```ruby title="例(ブロックを指定する場合)"
@@ -637,20 +637,20 @@ Rubyでは、(Garbage Collectされていない)アクティブなオブジェ�
 これは、Immutable ならば複数の場所から参照されても`破壊的操作`による問題が発生しないので、同じ内容のインスタンスを複数生成しないという内部実装が理由です。
 
 ```ruby
-p "ruby".object_id #=> 60
-p "ruby".object_id #=> 80
+p "ruby".object_id # => 60
+p "ruby".object_id # => 80
 
-p [].object_id #=> 100
-p [].object_id #=> 120
+p [].object_id # => 100
+p [].object_id # => 120
 
-p :ruby.object_id #=> 710428
-p :ruby.object_id #=> 710428
+p :ruby.object_id # => 710428
+p :ruby.object_id # => 710428
 
-p 11.object_id #=> 23
-p 11.object_id #=> 23
+p 11.object_id # => 23
+p 11.object_id # => 23
 
-p true.object_id #=> 20
-p true.object_id #=> 20
+p true.object_id # => 20
+p true.object_id # => 20
 ```
 
 - **SEE** [m:Object#equal?],[m:BasicObject#__id__],[c:Symbol]
@@ -677,15 +677,15 @@ hash メソッドを再定義する場合は、一様に分布する任意の整
 - **return** -- ハッシュ値を返します。Ruby 内部の固定長整数 fixnum に収まらない場合は切り捨てられます。
 
 ```ruby
-p self.hash #=> 2013505522753096494
-p 0.hash    #=> 2647535320520409998
-p 0.0.hash  #=> -2975129765814025835
-p nil.hash  #=> 2401531420355998067
+p self.hash # => 2013505522753096494
+p 0.hash    # => 2647535320520409998
+p 0.0.hash  # => -2975129765814025835
+p nil.hash  # => 2401531420355998067
 
-p "ruby".hash #=> 4460896024486900438
-p "ruby".hash #=> 4460896024486900438
-p :ruby.hash  #=> 3979895509189707770
-p :ruby.hash  #=> 3979895509189707770
+p "ruby".hash # => 4460896024486900438
+p "ruby".hash # => 4460896024486900438
+p :ruby.hash  # => 3979895509189707770
+p :ruby.hash  # => 3979895509189707770
 ```
 
 - **SEE** [m:Object#eql?], [m:Hash#\[\]]
@@ -721,7 +721,7 @@ result =
     "adult"
   end
 
-puts result #=> "child"
+puts result # => "child"
 
 def check arg
   case arg
@@ -734,9 +734,9 @@ def check arg
   end
 end
 
-puts check([]) #=> unknown
-puts check("mash-up in Ruby on Rails") #=> instance of String class. But not hit...
-puts check("<Ruby's world>") #=> hit! <Ruby's world>
+puts check([]) # => unknown
+puts check("mash-up in Ruby on Rails") # => instance of String class. But not hit...
+puts check("<Ruby's world>") # => hit! <Ruby's world>
 ```
 
 - **SEE** [m:Object#==], [m:Range#===], [m:Module#===], [m:Regexp#===], [m:Enumerable#grep]
@@ -755,10 +755,10 @@ puts check("<Ruby's world>") #=> hit! <Ruby's world>
 
 ```ruby title="例"
 obj = 'regexp'
-p(obj =~ /re/) #=> 0
+p(obj =~ /re/) # => 0
 
 obj = nil
-p(obj =~ /re/) #=> nil
+p(obj =~ /re/) # => nil
 ```
 
 - **SEE** [m:String#=~]
@@ -798,7 +798,7 @@ end
 - **return** -- nil を返します。
 
 ```ruby
-p Object.new.display #=> #<Object:0xbb0210>
+p Object.new.display # => #<Object:0xbb0210>
 ```
 
 - **SEE** [m:$stdout]
@@ -829,16 +829,16 @@ end
 
 obj = Object.new
 obj.extend Foo, Bar
-p obj.a #=> "ok Foo"
-p obj.b #=> "ok Bar"
+p obj.a # => "ok Foo"
+p obj.b # => "ok Bar"
 
 class Klass
   include Foo
   extend Bar
 end
 
-p Klass.new.a #=> "ok Foo"
-p Klass.b     #=> "ok Bar"
+p Klass.new.a # => "ok Foo"
+p Klass.b     # => "ok Bar"
 ```
 
 extend の機能は、「特異クラスに対する [m:Module#include]」と言い替えることもできます。
@@ -916,9 +916,9 @@ class Foo
 end
 
 obj = Foo.new
-p obj.instance_variable_get("@foo")     #=> 1
-p obj.instance_variable_get(:@foo)      #=> 1
-p obj.instance_variable_get(:@bar)      #=> nil
+p obj.instance_variable_get("@foo")     # => 1
+p obj.instance_variable_get(:@foo)      # => 1
+p obj.instance_variable_get(:@bar)      # => nil
 ```
 
 - **SEE** [m:Object#instance_variable_set],[m:Object#instance_variables],[m:Object#instance_variable_defined?]
@@ -935,9 +935,9 @@ p obj.instance_variable_get(:@bar)      #=> nil
 
 ```ruby
 obj = Object.new
-p obj.instance_variable_set("@foo", 1)  #=> 1
-p obj.instance_variable_set(:@foo, 2)   #=> 2
-p obj.instance_variable_get(:@foo)      #=> 2
+p obj.instance_variable_set("@foo", 1)  # => 1
+p obj.instance_variable_set(:@foo, 2)   # => 2
+p obj.instance_variable_get(:@foo)      # => 2
 ```
 
 - **SEE** [m:Object#instance_variable_get],[m:Object#instance_variables],[m:Object#instance_variable_defined?]
@@ -951,7 +951,7 @@ obj = Object.new
 obj.instance_eval { @foo, @bar = nil }
 p obj.instance_variables
 
-#=> [:@foo, :@bar]
+# => [:@foo, :@bar]
 ```
 
 - **SEE** [m:Object#instance_variable_get], [m:Kernel?.local_variables], [m:Kernel?.global_variables], [m:Module.constants], [m:Module#constants], [m:Module#class_variables]
@@ -969,9 +969,9 @@ class Fred
   end
 end
 fred = Fred.new('cat', 99)
-p fred.instance_variable_defined?(:@a)    #=> true
-p fred.instance_variable_defined?("@b")   #=> true
-p fred.instance_variable_defined?("@c")   #=> false
+p fred.instance_variable_defined?(:@a)    # => true
+p fred.instance_variable_defined?("@b")   # => true
+p fred.instance_variable_defined?("@c")   # => false
 ```
 
 - **SEE** [m:Object#instance_variable_get],[m:Object#instance_variable_set],[m:Object#instance_variables]
@@ -996,8 +996,8 @@ public メソッドだけ呼び出せれば良い場合は
 - **param** `args` -- 呼び出すメソッドに渡す引数です。
 
 ```ruby
-p -365.send(:abs) #=> 365
-p "ruby".send(:sub,/./,"R") #=> "Ruby"
+p -365.send(:abs) # => 365
+p "ruby".send(:sub,/./,"R") # => "Ruby"
 
 
 class Foo
@@ -1075,11 +1075,11 @@ class Foo
   end
 end
 foo = Foo.new(['foo', 'bar'])
-p foo                      #=> #<Foo:0xbaf234 @foo=["foo", "bar"]>
+p foo                      # => #<Foo:0xbaf234 @foo=["foo", "bar"]>
 dms = Marshal.dump(foo)
-p dms                      #=> "\004\bu:\bFoo\023\004\b[\a\"\bfoo\"\bbar"
-result = Marshal.load(dms) #=> "\004\b[\a\"\bfoo\"\bbar" # self._load の引数
-p result                   #=> #<Foo:0xbaf07c @foo=["foo", "bar"]>
+p dms                      # => "\004\bu:\bFoo\023\004\b[\a\"\bfoo\"\bbar"
+result = Marshal.load(dms) # => "\004\b[\a\"\bfoo\"\bbar" # self._load の引数
+p result                   # => #<Foo:0xbaf07c @foo=["foo", "bar"]>
 ```
 
 インスタンス変数の情報は普通マーシャルデータに含まれるので、上例のように _dump を定義する必要はありません(ただし _dump を定義するとインスタンス変数の情報は dump されなくなります)。
@@ -1113,11 +1113,11 @@ class Foo
   end
 end
 foo = Foo.new(['foo', 'bar'])
-p foo                      #=> #<Foo:0xbaf3b0 @foo=["foo", "bar"]>
+p foo                      # => #<Foo:0xbaf3b0 @foo=["foo", "bar"]>
 dms = Marshal.dump(foo)
-p dms                      #=> "\004\bU:\bFoo[\a\"\bfoo\"\bbar"
-result = Marshal.load(dms) #=> ["foo", "bar"] # marshal_load の引数
-p result                   #=> #<Foo:0xbaf2ac @foo=["foo", "bar"]>
+p dms                      # => "\004\bU:\bFoo[\a\"\bfoo\"\bbar"
+result = Marshal.load(dms) # => ["foo", "bar"] # marshal_load の引数
+p result                   # => #<Foo:0xbaf2ac @foo=["foo", "bar"]>
 ```
 
 インスタンス変数の情報は普通マーシャルデータに含まれるので、上例のように marshal_dump を定義する必要はありません
@@ -1218,14 +1218,14 @@ obj = ["a","b","c"]
 obj_d = obj.dup
 obj_d[0] << "PLUS"
 
-p obj   #=> ["aPLUS", "b", "c"]
-p obj_d #=> ["aPLUS", "b", "c"]
+p obj   # => ["aPLUS", "b", "c"]
+p obj_d # => ["aPLUS", "b", "c"]
 
 obj_m = Marshal.load(Marshal.dump(obj))
 obj_m[1] << "PLUS"
 
-p obj   #=> ["aPLUS", "b", "c"]
-p obj_m #=> ["aPLUS", "bPLUS", "c"]
+p obj   # => ["aPLUS", "b", "c"]
+p obj_m # => ["aPLUS", "bPLUS", "c"]
 ```
 
 ### def dup -> object
@@ -1286,7 +1286,7 @@ p(obj_d.respond_to?(:fuga)) #=> false # 特異メソッドもコピーされな�
 ```ruby
 a1 = "foo".freeze
 a1 = "bar"
-p a1 #=> "bar"
+p a1 # => "bar"
 
 a2 = "foo".freeze
 a2.replace("bar") # can't modify frozen String (FrozenError)
@@ -1296,17 +1296,17 @@ a2.replace("bar") # can't modify frozen String (FrozenError)
 
 ```ruby
 a = [1].freeze
-p a.frozen?     #=> true
+p a.frozen?     # => true
 
 a[0] = "foo"
 p a             # can't modify frozen Array (FrozenError)
 
 b = a.dup
-p b             #=> [1]
-p b.frozen?     #=> false
+p b             # => [1]
+p b.frozen?     # => false
 
 b[0] = "foo"
-p b             #=> ["foo"]
+p b             # => ["foo"]
 ```
 
 - **SEE** [m:Object#frozen?],[m:Object#dup],[m:Kernel?.trace_var]
@@ -1317,9 +1317,9 @@ p b             #=> ["foo"]
 
 ```ruby
 obj = "someone"
-p obj.frozen? #=> false
+p obj.frozen? # => false
 obj.freeze
-p obj.frozen? #=> true
+p obj.frozen? # => true
 ```
 
 - **SEE** [m:Object#freeze]
@@ -1334,8 +1334,8 @@ p obj.frozen? #=> true
 
 ```ruby
 me = -365.method(:abs)
-p me #=> #<Method: Integer#abs>
-p me.call #=> 365
+p me # => #<Method: Integer#abs>
+p me.call # => 365
 ```
 
 [c:Method]・[c:UnboundMethod] オブジェクトを取得するメソッドの対比は次のとおりです。
@@ -1378,7 +1378,7 @@ def k.hi
   "Hi, @iv = #{@iv}"
 end
 m = k.singleton_method(:hi)    # => #<Method: #<Demo:0xf8b0c3c4 @iv=99>.hi>
-p m.call #=> "Hi, @iv = 99"
+p m.call # => "Hi, @iv = 99"
 m = k.singleton_method(:hello) # ~> NameError
 ```
 
@@ -1421,7 +1421,7 @@ A.who_am_i   # ==> "I am: A"
 
 guy = "Bob"
 guy.define_singleton_method(:hello) { "#{self}: Hello there!" }
-p guy.hello  #=>  "Bob: Hello there!"
+p guy.hello  # =>  "Bob: Hello there!"
 ```
 
 ### def respond_to?(name, include_all = false) -> bool
@@ -1460,10 +1460,10 @@ end
 list = [F.new,D.new]
 
 list.each{|it| puts it.hello if it.respond_to?(:hello)}
-#=> Bonjour
+# => Bonjour
 
 list.each{|it| it.instance_eval("puts hello if it.respond_to?(:hello, true)")}
-#=> Bonjour
+# => Bonjour
 #   Guten Tag
 
 module Template
@@ -1519,7 +1519,7 @@ puts File.respond_to?(:lchmod)         # => false
 class Foo
   def foo
     @foo = 1
-    p remove_instance_variable(:@foo) #=> 1
+    p remove_instance_variable(:@foo) # => 1
     p remove_instance_variable(:@foo) # instance variable @foo not defined (NameError)
   end
 end
@@ -1584,8 +1584,8 @@ p obj.is_a?(Hash)    # false
 レシーバが nil であれば真を返します。
 
 ```ruby
-p false.nil? #=> false
-p nil.nil? #=> true
+p false.nil? # => false
+p nil.nil? # => true
 ```
 
 - **SEE** [c:NilClass]
@@ -1595,12 +1595,12 @@ p nil.nil? #=> true
 レシーバのクラスを返します。
 
 ```ruby
-p "ruby".class #=> String
-p 100.class #=> Integer
-p ARGV.class #=> Array
-p self.class #=> Object
-p Class.class #=> Class
-p Kernel.class #=> Module
+p "ruby".class # => String
+p 100.class # => Integer
+p ARGV.class # => Array
+p self.class # => Object
+p Class.class # => Class
+p Kernel.class # => Module
 ```
 
 - **SEE** [m:Class#superclass],[m:Object#kind_of?],[m:Object#instance_of?]
@@ -1668,9 +1668,9 @@ FalseClass を返します。
 - **raise** `TypeError` -- レシーバが [c:Integer]、[c:Float]、[c:Symbol] の場合に発生します。
 
 ```ruby
-p Object.new.singleton_class  #=> #<Class:#<Object:0xb7ce1e24>>
-p String.singleton_class    #=> #<Class:String>
-p nil.singleton_class       #=> NilClass
+p Object.new.singleton_class  # => #<Class:#<Object:0xb7ce1e24>>
+p String.singleton_class    # => #<Class:String>
+p nil.singleton_class       # => NilClass
 ```
 
 - **SEE** [m:Object#class]
@@ -1722,7 +1722,7 @@ end
 
 it = Bar.new('myname','0500')
 p it
-#=> initialize Bar
+# => initialize Bar
 #   initialize Foo
 #   #<Bar:0x2b68f08 @name="myname", @pass="0500">
 ```

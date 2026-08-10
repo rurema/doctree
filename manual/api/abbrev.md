@@ -52,7 +52,7 @@ pp Abbrev.abbrev(['ru by']).sort
     #     ["ru by", "ru by"]]
 # sort していない例
 p %w[ruby rubyist].abbrev
-  #=> {"ruby"    => "ruby",
+  # => {"ruby"    => "ruby",
   #    "rubyi"   => "rubyist",
   #    "rubyis"  => "rubyist",
   #    "rubyist" => "rubyist"}
@@ -76,7 +76,7 @@ self が文字列の配列の場合、self から一意に決まる短縮形を�
 ```ruby
 require 'abbrev'
 p %w[ruby rubyist].abbrev
-#=> {"ruby"    => "ruby",
+# => {"ruby"    => "ruby",
 #    "rubyi"   => "rubyist",
 #    "rubyis"  => "rubyist",
 #    "rubyist" => "rubyist"}

@@ -35,8 +35,8 @@ class Foo
 end
 
 some = Foo.new 'XXX'
-p some.instance_eval{p @key} #=> "XXX"
-p some.instance_eval{do_fuga } #=> "secret" # private メソッドも呼び出せる
+p some.instance_eval{p @key} # => "XXX"
+p some.instance_eval{do_fuga } # => "secret" # private メソッドも呼び出せる
 
 some.instance_eval 'raise' # ..:10: (eval):1:  (RuntimeError)
 messg = 'unknown'
@@ -76,7 +76,7 @@ class KlassWithSecret
 end
 k = KlassWithSecret.new
 # 以下で x には 5 が渡される
-p k.instance_exec(5) {|x| @secret + x } #=> 104
+p k.instance_exec(5) {|x| @secret + x } # => 104
 ```
 
 - **SEE** [m:Module#class_exec], [m:Module#module_exec], [m:BasicObject#instance_eval]

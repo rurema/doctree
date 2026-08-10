@@ -223,8 +223,8 @@ p "あ".encoding # => #<Encoding:UTF-8>
 ```ruby title="例"
 # ($ruby = "RUBY"の場合)
 
-p "my name is #{$ruby}" #=> "my name is RUBY"
-p 'my name is #{$ruby}' #=> "my name is #{$ruby}"
+p "my name is #{$ruby}" # => "my name is RUBY"
+p 'my name is #{$ruby}' # => "my name is #{$ruby}"
 ```
 
 ダブルクォート `"` で囲まれた文字列式、コマンド文字列および正規表現の中では `#{式}` という形式で式の内容(を文字列化したもの)を埋め込むことができます。
@@ -627,9 +627,9 @@ p :-@ == :- # => false
 以下の記法も使えます。
 
 ```ruby
-p :'foo-bar' #=> :"foo-bar"
-p :"foo-bar" #=> :"foo-bar"
-p %s{foo-bar} #=> :"foo-bar"
+p :'foo-bar' # => :"foo-bar"
+p :"foo-bar" # => :"foo-bar"
+p %s{foo-bar} # => :"foo-bar"
 ```
 
 この記法では、任意のシンボルを定義できます。

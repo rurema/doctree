@@ -43,9 +43,9 @@ Process::UID.re_exchange   # (u2,id,??) ==> (id,u2,??)
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 ```ruby
-p [Process.uid, Process.euid]        #=> [0, 0]
-p Process::UID.change_privilege(33)  #=> 33
-p [Process.uid, Process.euid]        #=> [33, 33]
+p [Process.uid, Process.euid]        # => [0, 0]
+p Process::UID.change_privilege(33)  # => 33
+p [Process.uid, Process.euid]        # => [33, 33]
 ```
 
 ### module_function def grant_privilege(id)    -> Integer
@@ -70,9 +70,9 @@ p [Process.uid, Process.euid]        #=> [33, 33]
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 ```ruby
-p [Process.uid, Process.euid]        #=> [0, 0]
-p Process::UID.grant_privilege(33)   #=> 33
-p [Process.uid, Process.euid]        #=> [0, 33]
+p [Process.uid, Process.euid]        # => [0, 0]
+p Process::UID.grant_privilege(33)   # => 33
+p [Process.uid, Process.euid]        # => [0, 33]
 ```
 
 ### module_function def re_exchange    -> Integer
@@ -124,11 +124,11 @@ p [Process.uid, Process.euid]        #=> [0, 33]
 ```ruby
 include Process
 # (r, e, s) == (500, 505, 505)
-p [uid, euid]           #=> [500, 505]
+p [uid, euid]           # => [500, 505]
 Process::UID.switch do
-  p [uid, euid]         #=> [500, 500]
+  p [uid, euid]         # => [500, 500]
 end
-p [uid, euid]           #=> [500, 505]
+p [uid, euid]           # => [500, 505]
 ```
 
 ### module_function def from_name(name) -> Integer

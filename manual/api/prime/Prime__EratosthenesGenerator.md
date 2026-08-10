@@ -18,11 +18,11 @@ library: prime
 ```ruby title="例"
 require 'prime'
 generator = Prime::EratosthenesGenerator.new
-p generator.next #=> 2
-p generator.next #=> 3
-p generator.succ #=> 5
-p generator.succ #=> 7
-p generator.next #=> 11
+p generator.next # => 2
+p generator.next # => 3
+p generator.succ # => 5
+p generator.succ # => 7
+p generator.next # => 11
 ```
 
 ### def rewind -> nil
@@ -32,12 +32,12 @@ p generator.next #=> 11
 ```ruby title="例"
 require 'prime'
 generator = Prime::EratosthenesGenerator.new
-p generator.next #=> 2
-p generator.next #=> 3
-p generator.next #=> 5
+p generator.next # => 2
+p generator.next # => 3
+p generator.next # => 5
 
 generator.rewind
 
-p generator.next #=> 2
+p generator.next # => 2
 ```
 

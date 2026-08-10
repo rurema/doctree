@@ -18,7 +18,7 @@ since: "1.9.1"
 
 ```ruby title="例"
 p Encoding.aliases
-#=> {"BINARY"=>"ASCII-8BIT", "ASCII"=>"US-ASCII", "ANSI_X3.4-1968"=>"US-ASCII",
+# => {"BINARY"=>"ASCII-8BIT", "ASCII"=>"US-ASCII", "ANSI_X3.4-1968"=>"US-ASCII",
 #   "SJIS"=>"Windows-31J", "eucJP"=>"EUC-JP", "CP932"=>"Windows-31J"}
 ```
 
@@ -31,12 +31,12 @@ p Encoding.aliases
 
 ```ruby title="例"
 p Encoding.compatible?("\xa1".force_encoding("iso-8859-1"), "b")
-#=> #<Encoding:ISO-8859-1>
+# => #<Encoding:ISO-8859-1>
 
 Encoding.compatible?(
   "\xa1".force_encoding("iso-8859-1"),
   "\xa1\xa1".force_encoding("euc-jp"))
-#=> nil
+# => nil
 ```
 
 引数が文字列でない場合でも、両方のオブジェクトが encoding を持つ場合には互換性を判定できます。
@@ -62,7 +62,7 @@ p Encoding.compatible?(Encoding::UTF_8, Encoding::US_ASCII)
 特殊なエンコーディング名として、ロケールエンコーディングを表す locale、default_external を表す external、default_internal を表す internal、ファイルシステムエンコーディングを表す filesystem があります。
 
 ```ruby title="例"
-p Encoding.find("utf-8")       #=> #<Encoding:UTF-8>
+p Encoding.find("utf-8")       # => #<Encoding:UTF-8>
 ```
 
 ### def Encoding.list -> [Encoding]
@@ -90,7 +90,7 @@ p Encoding.list
 
 ```ruby title="例"
 p Encoding.name_list
-#=> ["US-ASCII", "ASCII-8BIT", "UTF-8",
+# => ["US-ASCII", "ASCII-8BIT", "UTF-8",
 #    "ISO-8859-1", "Shift_JIS", "EUC-JP",
 #    "Windows-31J",
 #    "BINARY", "CP932", "eucJP", ...]
@@ -149,19 +149,19 @@ default_internal を変更する前に作成した文字列と、default_interna
 ロケールエンコーディングを決定するために用いる、locale charmap 名を返します。nl_langinfo 等がない環境では nil を、miniruby では ASCII_8BIT を返します。
 
 ```ruby title="Debian GNU/Linux + LANG=C"
-p Encoding.locale_charmap #=> "ANSI_X3.4-1968"
+p Encoding.locale_charmap # => "ANSI_X3.4-1968"
 ```
 
 ```ruby title="LANG=ja_JP.EUC-JP"
-p Encoding.locale_charmap #=> "EUC-JP"
+p Encoding.locale_charmap # => "EUC-JP"
 ```
 
 ```ruby title="SunOS 5 + LANG=C"
-p Encoding.locale_charmap #=> "646"
+p Encoding.locale_charmap # => "646"
 ```
 
 ```ruby title="SunOS 5 + LANG=ja"
-p Encoding.locale_charmap #=> "eucJP"
+p Encoding.locale_charmap # => "eucJP"
 ```
 
 - **SEE** [man:charmap(5)]
@@ -173,8 +173,8 @@ p Encoding.locale_charmap #=> "eucJP"
 プログラマにわかりやすい表現の文字列を返します。
 
 ```ruby title="例"
-p Encoding::UTF_8.inspect     #=> "#<Encoding:UTF-8>"
-p Encoding::ISO_2022_JP.inspect #=> "#<Encoding:ISO-2022-JP (dummy)>"
+p Encoding::UTF_8.inspect     # => "#<Encoding:UTF-8>"
+p Encoding::ISO_2022_JP.inspect # => "#<Encoding:ISO-2022-JP (dummy)>"
 ```
 
 ### def name -> String
@@ -183,7 +183,7 @@ p Encoding::ISO_2022_JP.inspect #=> "#<Encoding:ISO-2022-JP (dummy)>"
 エンコーディングの名前を返します。
 
 ```ruby title="例"
-p Encoding::UTF_8.name     #=> "UTF-8"
+p Encoding::UTF_8.name     # => "UTF-8"
 ```
 
 ### def names -> String
@@ -191,7 +191,7 @@ p Encoding::UTF_8.name     #=> "UTF-8"
 エンコーディングの名前とエイリアス名の配列を返します。
 
 ```ruby title="例"
-p Encoding::UTF_8.names    #=> ["UTF-8", "CP65001"]
+p Encoding::UTF_8.names    # => ["UTF-8", "CP65001"]
 ```
 
 ### def dummy? -> bool
@@ -205,8 +205,8 @@ p Encoding::UTF_8.names    #=> ["UTF-8", "CP65001"]
 Ruby はサポートしていないが拡張ライブラリがサポートしているエンコーディングを扱う場合にも用います。
 
 ```ruby title="例"
-p Encoding::ISO_2022_JP.dummy?     #=> true
-p Encoding::UTF_8.dummy?           #=> false
+p Encoding::ISO_2022_JP.dummy?     # => true
+p Encoding::UTF_8.dummy?           # => false
 ```
 
 ### def ascii_compatible? -> bool
@@ -215,8 +215,8 @@ p Encoding::UTF_8.dummy?           #=> false
 そうでない場合は偽を返します。
 
 ```ruby title="例"
-p Encoding::UTF_8.ascii_compatible?   #=> true
-p Encoding::UTF_16BE.ascii_compatible?  #=> false
+p Encoding::UTF_8.ascii_compatible?   # => true
+p Encoding::UTF_16BE.ascii_compatible?  # => false
 ```
 
 #%until 3.3
@@ -231,11 +231,11 @@ name という名前のエンコーディングが既に存在する場合は [c
 #%end
 
 ```ruby
-encoding = Encoding::UTF_8.replicate("REPLICATED_UTF-8")     #=> #<Encoding:REPLICATED_UTF-8>
-p encoding.name                                              #=> "REPLICATED_UTF-8"
-p "\u3042".force_encoding(Encoding::UTF_8).valid_encoding?   #=> true
-p "\u3042".force_encoding(encoding).valid_encoding?          #=> true
-p "\u3042".force_encoding(Encoding::SHIFT_JIS).valid_encoding? #=> false
+encoding = Encoding::UTF_8.replicate("REPLICATED_UTF-8")     # => #<Encoding:REPLICATED_UTF-8>
+p encoding.name                                              # => "REPLICATED_UTF-8"
+p "\u3042".force_encoding(Encoding::UTF_8).valid_encoding?   # => true
+p "\u3042".force_encoding(encoding).valid_encoding?          # => true
+p "\u3042".force_encoding(Encoding::SHIFT_JIS).valid_encoding? # => false
 ```
 
 #%end
@@ -1206,12 +1206,12 @@ begin
   ec.convert("\xa0")
   # NO-BREAK SPACE, which is available in UTF-8 but not in EUC-JP.
 rescue Encoding::UndefinedConversionError
-  p $!.source_encoding              #=> #<Encoding:UTF-8>
-  p $!.destination_encoding         #=> #<Encoding:EUC-JP>
-  p $!.source_encoding_name         #=> "UTF-8"
-  p $!.destination_encoding_name    #=> "EUC-JP"
-  puts $!.error_char.dump   #=> "\u{a0}"
-  p $!.error_char.encoding  #=> #<Encoding:UTF-8>
+  p $!.source_encoding              # => #<Encoding:UTF-8>
+  p $!.destination_encoding         # => #<Encoding:EUC-JP>
+  p $!.source_encoding_name         # => "UTF-8"
+  p $!.destination_encoding_name    # => "EUC-JP"
+  puts $!.error_char.dump   # => "\u{a0}"
+  p $!.error_char.encoding  # => #<Encoding:UTF-8>
 end
 ```
 
@@ -1238,7 +1238,7 @@ ec = Encoding::Converter.new("UTF-8", "EUC-JP")
 begin
   ec.convert("\u{a0}")
 rescue Encoding::UndefinedConversionError
-  puts $!.error_char.dump   #=> "\u{a0}"
+  puts $!.error_char.dump   # => "\u{a0}"
 end
 ```
 
@@ -1265,7 +1265,7 @@ end
 
 ```ruby title="例"
 p "\x82\xa0".force_encoding("cp932").encode("UTF-8")
-#=> "あ"
+# => "あ"
 "\x82\xa0".force_encoding("EUC-JP").encode("UTF-8")
 # ~> Encoding::InvalidByteSequenceError: "\x82" on EUC-JP
 ```
@@ -1309,9 +1309,9 @@ begin
   ec.convert("abc\xA1\xFFdef")
 rescue Encoding::InvalidByteSequenceError
   p $!
-  #=> #<Encoding::InvalidByteSequenceError: "\xA1" followed by "\xFF" on EUC-JP>
-  puts $!.error_bytes.dump          #=> "\xA1"
-  puts $!.readagain_bytes.dump      #=> "\xFF"
+  # => #<Encoding::InvalidByteSequenceError: "\xA1" followed by "\xFF" on EUC-JP>
+  puts $!.error_bytes.dump          # => "\xA1"
+  puts $!.readagain_bytes.dump      # => "\xFF"
 end
 ```
 
@@ -1336,16 +1336,16 @@ begin
   ec.convert("abc\xA1z")
 rescue Encoding::InvalidByteSequenceError
   p $!
-  #=> #<Encoding::InvalidByteSequenceError: "\xA1" followed by "z" on EUC-JP>
-  p $!.incomplete_input?    #=> false
+  # => #<Encoding::InvalidByteSequenceError: "\xA1" followed by "z" on EUC-JP>
+  p $!.incomplete_input?    # => false
 end
 
 begin
   ec.convert("abc\xA1")
   ec.finish
 rescue Encoding::InvalidByteSequenceError
-  p $! #=> #<Encoding::InvalidByteSequenceError: incomplete "\xA1" on EUC-JP>
-  p $!.incomplete_input?    #=> true
+  p $! # => #<Encoding::InvalidByteSequenceError: incomplete "\xA1" on EUC-JP>
+  p $!.incomplete_input?    # => true
 end
 ```
 

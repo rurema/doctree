@@ -31,23 +31,23 @@ require 'tmpdir'
 
 puts Dir.tmpdir
 # 出力例: 動作環境により出力は異なります。
-#=> /cygdrive/c/DOCUME~1/kouya/LOCALS~1/Temp
+# => /cygdrive/c/DOCUME~1/kouya/LOCALS~1/Temp
 Dir.mktmpdir{|dir| 
   puts dir
   # 出力例: 一時ディレクトリ の名前の先頭に'd' をつける。
-  #=> /cygdrive/c/DOCUME~1/kouya/LOCALS~1/Temp/d20081011-4524-1m69psi
+  # => /cygdrive/c/DOCUME~1/kouya/LOCALS~1/Temp/d20081011-4524-1m69psi
   #                                            ^                    
 }
 Dir.mktmpdir("foo"){|dir|
   puts dir
   # 出力例:一時ディレクトリ の名前の先頭に'foo' をつける。
-  #=> /cygdrive/c/DOCUME~1/kouya/LOCALS~1/Temp/foo20081011-4824-pjvhwx
+  # => /cygdrive/c/DOCUME~1/kouya/LOCALS~1/Temp/foo20081011-4824-pjvhwx
   #                                            ^^^                    
 }
 Dir.mktmpdir(["foo", "bar"]){|dir| 
   puts dir
   # 出力例: 一時ディレクトリの名前の先頭に'foo' 、最後に'bar'をつける。
-  #=> /cygdrive/c/DOCUME~1/kouya/LOCALS~1/Temp/foo20081011-5624-1hyxrqbbar
+  # => /cygdrive/c/DOCUME~1/kouya/LOCALS~1/Temp/foo20081011-5624-1hyxrqbbar
   #                                            ^^^                     ^^^
 }
   
@@ -55,7 +55,7 @@ Dir.mktmpdir(nil, "/var/tmp") {|dir|
   puts dir
   # 出力例: tmpdir の作成先が'/var/tmp'となる。
   #         さらに、一時ディレクトリ の名前の先頭に'd' をつける。
-  #=> /var/tmp/d20081011-5304-h6b13j
+  # => /var/tmp/d20081011-5304-h6b13j
 }
   
 memory_dir = nil
@@ -66,7 +66,7 @@ Dir.mktmpdir {|dir|
   }
 }
 # ブロックを抜けたら、テンポラリディレクトリは消される。
-p FileTest.directory?(memory_dir) #=> false
+p FileTest.directory?(memory_dir) # => false
   
 dir = Dir.mktmpdir
 # ブロックを与えない場合は、ディレクトリは存在する。
@@ -77,7 +77,7 @@ begin
 ensure
   FileUtils.remove_entry_secure dir
 end
-p FileTest.directory?(dir) #=> false
+p FileTest.directory?(dir) # => false
 ```
 
 - **raise** `ArgumentError` -- tmpdirが全てのユーザから書き込み可能かつ、sticky
@@ -96,9 +96,9 @@ p FileTest.directory?(dir) #=> false
 
 require "tmpdir"
 
-p Dir.tmpdir #=> "C:/DOCUME~1/taro3/LOCALS~1/Temp"
+p Dir.tmpdir # => "C:/DOCUME~1/taro3/LOCALS~1/Temp"
 $SAFE = 1
-p Dir.tmpdir #=> "C:/WINDOWS/temp"
+p Dir.tmpdir # => "C:/WINDOWS/temp"
 
 # Linuxの場合 /tmp に加え、環境変数 ENV['TMPDIR'], ENV['TMP'], ENV['TEMP'], ENV['USERPROFILE']を参照します
 ```

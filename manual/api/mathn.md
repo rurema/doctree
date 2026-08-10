@@ -27,12 +27,12 @@ Integer や Float に比べ Rational は誤差無しで表現できる範囲が�
 となり、また、整数/整数の結果、割り切れない時は Rational が返るようになります。後者は、整数のメソッド「/」が整商(.div)でなく、商(.quo)を返すようになる、ということを意味します。
 
 ```ruby title="例"
-p 1/2              #=> 0
-p 2 * Rational(1,2)  #=> Rational(1,1)
+p 1/2              # => 0
+p 2 * Rational(1,2)  # => Rational(1,1)
 
 require 'mathn'
-p 1/2              #=> Rational(1,2)
-p 2 * Rational(1,2)  #=> 1
+p 1/2              # => Rational(1,2)
+p 2 * Rational(1,2)  # => 1
 ```
 
 #### 実数と複素数の相互変換
@@ -42,12 +42,12 @@ p 2 * Rational(1,2)  #=> 1
 一方、数学演算の定義域・終域を複素数に拡大するので、 mathn を利用しない場合には範囲エラー例外を発生していたような演算が Complex オブジェクトを返す場合もあります。
 
 ```ruby title="例"
-p Complex(0,-1)**2  #=> Complex(-1,0)
-p Math.sqrt(-1)   #=> NaN
+p Complex(0,-1)**2  # => Complex(-1,0)
+p Math.sqrt(-1)   # => NaN
  
 require 'mathn'
-p Complex(0,-1)**2  #=> -1
-p Math.sqrt(-1)   #=> Complex(0,1)
+p Complex(0,-1)**2  # => -1
+p Math.sqrt(-1)   # => Complex(0,1)
 ```
 
 ### 使用上の注意

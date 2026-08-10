@@ -226,10 +226,10 @@ self.to_i >> num と同じです。
 - **param** `num` -- 整数を指定します。
 
 ```ruby
-p fork { exit 99 } #=> 26563
-p Process.wait     #=> 26563
-p $?.to_i          #=> 25344
-p $? >> 8          #=> 99
+p fork { exit 99 } # => 26563
+p Process.wait     # => 26563
+p $?.to_i          # => 25344
+p $? >> 8          # => 99
 ```
 
 #%end

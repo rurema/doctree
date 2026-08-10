@@ -78,7 +78,7 @@ p Set[].any?                             # => false
 
 ```ruby title="例"
 e = (1..3).chain([4, 5])
-p e.to_a #=> [1, 2, 3, 4, 5]
+p e.to_a # => [1, 2, 3, 4, 5]
 ```
 
 - **SEE** [m:Enumerator#+]
@@ -189,7 +189,7 @@ p [1,2,3,4,5].select { |num| num.even? }  # => [2, 4]
 ブロックを省略した場合は [c:Enumerator] を返します。
 
 ```ruby title="例"
-p (1..10).filter_map { |i| i * 2 if i.even? } #=> [4, 8, 12, 16, 20]
+p (1..10).filter_map { |i| i * 2 if i.even? } # => [4, 8, 12, 16, 20]
 ```
 
 - **SEE** [m:Enumerable#filter], [m:Enumerable#map]
@@ -255,10 +255,10 @@ self の次の要素を引数に順次ブロックを実行します。
 
 ```ruby title="例"
 # 合計を計算する。
-p [2, 3, 4, 5].inject {|result, item| result + item }        #=> 14
+p [2, 3, 4, 5].inject {|result, item| result + item }        # => 14
 
 # 自乗和を計算する。初期値をセットする必要がある。
-p [2, 3, 4, 5].inject(0) {|result, item| result + item**2 }  #=> 54
+p [2, 3, 4, 5].inject(0) {|result, item| result + item**2 }  # => 54
 ```
 
 この式は以下のように書いても同じ結果が得られます。
@@ -268,8 +268,8 @@ result = 0
 [1, 2, 3, 4, 5].each {|v| result += v }
 p result   # => 15
 
-p [1, 2, 3, 4, 5].inject(:+)                    #=> 15
-p ["b", "c", "d"].inject("abbccddde", :squeeze) #=> "abcde"
+p [1, 2, 3, 4, 5].inject(:+)                    # => 15
+p ["b", "c", "d"].inject("abbccddde", :squeeze) # => "abcde"
 ```
 
 ### def member?(val)  -> bool
@@ -280,10 +280,10 @@ val と == の関係にある要素を含むとき真を返します。
 - **param** `val` --   任意のオブジェクト
 
 ```ruby title="例"
-p [2, 4, 6].include? 2 #=> true
-p [2, 4, 6].include? 1 #=> false
-p [2, 4, 6].member? 2  #=> true
-p [2, 4, 6].member? 1  #=> false
+p [2, 4, 6].include? 2 # => true
+p [2, 4, 6].include? 1 # => false
+p [2, 4, 6].member? 2  # => true
+p [2, 4, 6].member? 1  # => false
 ```
 
 ### def max    -> object | nil
@@ -396,10 +396,10 @@ a = e.wsample(20000) {|x|
   Math.exp(-(x/5.0)**2) # normal distribution
 }
 # a is 20000 samples from e.
-p a.length #=> 20000
+p a.length # => 20000
 h = a.group_by {|x| x }
 -10.upto(10) {|x| puts "*" * (h[x].length/30.0).to_i if h[x] }
-#=> *
+# => *
 #   ***
 #   ******
 #   ***********
@@ -527,7 +527,7 @@ p a.min_by(2) {|x| x.length } # => ["dog", "horse"]
 
 ```ruby title="例"
 p [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].partition {|i| i % 3 == 0 }
- #=> [[9, 6, 3, 0], [10, 8, 7, 5, 4, 2, 1]]
+ # => [[9, 6, 3, 0], [10, 8, 7, 5, 4, 2, 1]]
 ```
 
 ### def reject               -> Enumerator
@@ -648,11 +648,11 @@ ary.sort_by {|v| [v, i += 1] }
 - **param** `args` -- each の呼び出し時に引数として渡されます。
 
 ```ruby title="例"
-p (1..7).to_a                     #=> [1, 2, 3, 4, 5, 6, 7]
-{ 'a'=>1, 'b'=>2, 'c'=>3 }.to_a   #=> [["a", 1], ["b", 2], ["c", 3]]
+p (1..7).to_a                     # => [1, 2, 3, 4, 5, 6, 7]
+{ 'a'=>1, 'b'=>2, 'c'=>3 }.to_a   # => [["a", 1], ["b", 2], ["c", 3]]
 
 require 'prime'
-p Prime.entries 10                #=> [2, 3, 5, 7]
+p Prime.entries 10                # => [2, 3, 5, 7]
 ```
 
 ### def to_h(*args) -> Hash
@@ -843,16 +843,16 @@ p a.drop_while {|i| i < 3 } # => [3, 4, 5, 0]
 等しい要素がひとつもなかった場合は nil を返します。
 
 ```ruby title="例"
-p (1..10).find_index(11)  #=> nil
-p (1..10).find_index(2) #=> 1
+p (1..10).find_index(11)  # => nil
+p (1..10).find_index(2) # => 1
 ```
 
 ブロックが与えられた場合には、各要素を引数として先頭から順にブロックを実行し、ブロックが真を返した最初の要素の位置を返します。
 一つも真にならなかった場合は nil を返します。
 
 ```ruby title="例"
-p (1..10).find_index  {|i| i % 5 == 0 and i % 7 == 0 } #=> nil
-p (1..100).find_index {|i| i % 5 == 0 and i % 7 == 0 } #=> 34
+p (1..10).find_index  {|i| i % 5 == 0 and i % 7 == 0 } # => nil
+p (1..100).find_index {|i| i % 5 == 0 and i % 7 == 0 } # => 34
 ```
 
 引数、ブロックのどちらも与えられなかった場合は、
@@ -870,11 +870,11 @@ Enumerable オブジェクトが空の場合、引数を指定しない形式で
 
 ```ruby title="例"
 e = "abcd".each_byte
-p e.first #=> 97
-p e.first(2) #=> [97,98]
+p e.first # => 97
+p e.first(2) # => [97,98]
 e = "".each_byte
-p e.first #=> nil
-p e.first(2) #=> []
+p e.first # => nil
+p e.first(2) # => []
 ```
 
 ### def group_by               -> Enumerator
@@ -883,7 +883,7 @@ p e.first(2) #=> []
 ブロックを評価した結果をキー、対応する要素の配列を値とするハッシュを返します。
 
 ```ruby title="例"
-p (1..6).group_by {|i| i%3} #=> {0=>[3, 6], 1=>[1, 4], 2=>[2, 5]}
+p (1..6).group_by {|i| i%3} # => {0=>[3, 6], 1=>[1, 4], 2=>[2, 5]}
 ```
 
 ブロックを省略した場合は [c:Enumerator] を返します。
@@ -899,8 +899,8 @@ Enumerable オブジェクトの各要素のうち最小の要素と最大の要
 
 ```ruby title="例"
 a = %w(albatross dog horse)
-p a.minmax                               #=> ["albatross", "horse"]
-p a.minmax{|a,b| a.length <=> b.length } #=> ["dog", "albatross"]
+p a.minmax                               # => ["albatross", "horse"]
+p a.minmax{|a,b| a.length <=> b.length } # => ["dog", "albatross"]
 p [].minmax # => [nil, nil]
 ```
 
@@ -918,7 +918,7 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、
 
 ```ruby title="例"
 a = %w(albatross dog horse)
-p a.minmax_by {|x| x.length } #=> ["dog", "albatross"]
+p a.minmax_by {|x| x.length } # => ["dog", "albatross"]
 
 p [].minmax_by{} # => [nil, nil]
 ```
@@ -1137,7 +1137,7 @@ IO.popen("svn log README") {|f|
     pp lines
   }
 }
-#=> ["r20018 | knu | 2008-10-29 13:20:42 +0900 (Wed, 29 Oct 2008) | 2 lines\n",
+# => ["r20018 | knu | 2008-10-29 13:20:42 +0900 (Wed, 29 Oct 2008) | 2 lines\n",
 #    "\n",
 #    "* README, README.ja: Update the portability section.\n",
 #    "\n"]
@@ -1284,7 +1284,7 @@ open("ChangeLog") {|f|
 IO.popen([{"LC_ALL"=>"C"}, "svn", "proplist", "-R"]) {|f|
   f.lines.slice_before(/\AProp/).each {|lines| p lines }
 }
-#=> ["Properties on '.':\n", "  svn:ignore\n", "  svk:merge\n"]
+# => ["Properties on '.':\n", "  svn:ignore\n", "  svk:merge\n"]
 #   ["Properties on 'goruby.c':\n", "  svn:eol-style\n"]
 #   ["Properties on 'complex.c':\n", "  svn:mime-type\n", "  svn:eol-style\n"]
 #   ["Properties on 'regparse.c':\n", "  svn:eol-style\n"]
@@ -1303,7 +1303,7 @@ p a.slice_before {|e|
 }.map {|es|
   es.length <= 2 ? es.join(",") : "#{es.first}-#{es.last}"
 }.join(",")
-#=> "0,2-4,6,7,9"
+# => "0,2-4,6,7,9"
 ```
 
 - **SEE** [m:Enumerable#chunk], [m:Enumerable#slice_after]
@@ -1341,9 +1341,9 @@ p [0,2,4,1,2,4,5,3,1,4,2].slice_after(&:odd?).to_a
 lines = ["foo\n", "bar\\\n", "baz\n", "\n", "qux\n"]
 e = lines.slice_after(/(?<!\\)\n\z/)
 p e.to_a
-#=> [["foo\n"], ["bar\\\n", "baz\n"], ["\n"], ["qux\n"]]
+# => [["foo\n"], ["bar\\\n", "baz\n"], ["\n"], ["qux\n"]]
 p e.map {|ll| ll[0...-1].map {|l| l.sub(/\\\n\z/, "") }.join + ll.last }
-#=>["foo\n", "barbaz\n", "\n", "qux\n"]
+# =>["foo\n", "barbaz\n", "\n", "qux\n"]
 ```
 
 [m:Enumerable#map] のようなメソッドを使うこともできます。
@@ -1461,9 +1461,9 @@ p (1..10).sum {|v| v * 2 }                # => 110
 init 引数を明示的に指名すると数値以外のオブジェクトにも使えます。
 
 ```ruby title="例"
-{ 1 => 10, 2 => 20 }.sum([])                   #=> [1, 10, 2, 20]
-p "a\nb\nc".each_line.lazy.map(&:chomp).sum("")  #=> "abc"
-p [[1], [[2]], [3]].sum([])        #=> [1, [2], 3]
+{ 1 => 10, 2 => 20 }.sum([])                   # => [1, 10, 2, 20]
+p "a\nb\nc".each_line.lazy.map(&:chomp).sum("")  # => "abc"
+p [[1], [[2]], [3]].sum([])        # => [1, [2], 3]
 ```
 
 "+" メソッドが再定義されている場合、Enumerable#sum は再定義を無視することがあります(例えばInteger#+)。

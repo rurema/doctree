@@ -15,12 +15,12 @@ category: Text
 ```ruby title="例"
 require "stringio"
 sio = StringIO.new("hoge", 'r+')
-p sio.read                 #=> "hoge"
+p sio.read                 # => "hoge"
 sio.rewind
-p sio.read(1)              #=> "h"
+p sio.read(1)              # => "h"
 sio.write("OGE")
 sio.rewind
-p sio.read                 #=> "hOGE"
+p sio.read                 # => "hOGE"
 ```
 
 ### 例外
@@ -92,9 +92,9 @@ require "stringio"
 sio = StringIO.new
 sio << "abc"
 s = sio.string
-p s                    #=> "abc"
+p s                    # => "abc"
 sio << "xyz"
-p s                    #=> "abcxyz"
+p s                    # => "abcxyz"
 ```
 
 ### def string=(buf)
@@ -176,7 +176,7 @@ p sio.closed?   # => true
 require "stringio"
 a = StringIO.new("hoge\nfoo\n")
 a.each{|l| p l }
-#=> "hoge\n"
+# => "hoge\n"
 #   "foo\n"
 ```
 
@@ -194,7 +194,7 @@ a.each{|l| p l }
 require "stringio"
 a = StringIO.new("hoge")
 a.each_byte{|ch| p ch }
-#=> 104
+# => 104
 #   111
 #   103
 #   101
@@ -248,9 +248,9 @@ p a.getc                 # => nil
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("ho")
-p a.getbyte              #=> 104
-p a.getbyte              #=> 111
-p a.getbyte              #=> nil
+p a.getbyte              # => 104
+p a.getbyte              # => 111
+p a.getbyte              # => nil
 ```
 
 ### def gets(rs = $/)    -> String | nil
@@ -265,10 +265,10 @@ p a.getbyte              #=> nil
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("hoge")
-p a.gets                #=> "hoge"
-p $_                    #=> "hoge"
-p a.gets                #=> nil
-p $_                    #=> nil
+p a.gets                # => "hoge"
+p $_                    # => "hoge"
+p a.gets                # => nil
+p $_                    # => nil
 ```
 
 - **SEE** [m:$/]
@@ -309,7 +309,7 @@ require "stringio"
 a = StringIO.new("hoge", 'r+')
 a.pos = 10
 a << 'Z'
-p a.string                      #=> "hoge\000\000\000\000\000\000Z"
+p a.string                      # => "hoge\000\000\000\000\000\000Z"
 ```
 
 ### def print()        -> nil
@@ -326,7 +326,7 @@ p a.string                      #=> "hoge\000\000\000\000\000\000Z"
 require "stringio"
 a = StringIO.new("", 'r+')
 a.print("hoge", "bar", "foo")
-p a.string                   #=> "hogebarfoo"
+p a.string                   # => "hogebarfoo"
 ```
 
 ### def printf(format, *obj)    -> nil
@@ -343,7 +343,7 @@ p a.string                   #=> "hogebarfoo"
 require "stringio"
 a = StringIO.new("", 'r+')
 a.printf("%c%c%c", 97, 98, 99)
-p a.string                    #=> "abc"
+p a.string                    # => "abc"
 ```
 
 ### def putc(ch)    -> object
@@ -368,7 +368,7 @@ obj と改行を順番に自身に出力します。引数がなければ改行�
 require "stringio"
 a = StringIO.new("", 'r+')
 a.puts("hoge", "bar", "foo")
-p a.string                   #=> "hoge\nbar\nfoo\n"
+p a.string                   # => "hoge\nbar\nfoo\n"
 ```
 
 ### def read                  -> String
@@ -396,7 +396,7 @@ p a.string                   #=> "hoge\nbar\nfoo\n"
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("hoge")
-p a.readchar             #=> "h"
+p a.readchar             # => "h"
 ```
 
 - **raise** `EOFError` -- EOFに達した時発生する
@@ -410,7 +410,7 @@ p a.readchar             #=> "h"
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("hoge")
-p a.readbyte             #=> 104
+p a.readbyte             # => 104
 ```
 
 - **raise** `EOFError` -- 文字列の終端に到達した時に発生します。
@@ -431,8 +431,8 @@ p a.readbyte             #=> 104
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("hoge\nfoo\nbar\n")
-p a.readline                         #=> "hoge\n"
-p a.readline(nil)                    #=> "foo\nbar\n"
+p a.readline                         # => "hoge\n"
+p a.readline(nil)                    # => "foo\nbar\n"
 a.readline                           # ~> EOFError
 ```
 
@@ -450,8 +450,8 @@ a.readline                           # ~> EOFError
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("hoge\nfoo\nbar\n")
-p a.readlines                        #=> ["hoge\n", "foo\n", "bar\n"]
-p a.readlines                        #=> []
+p a.readlines                        # => ["hoge\n", "foo\n", "bar\n"]
+p a.readlines                        # => []
 ```
 
 - **SEE** [m:$/]
@@ -467,7 +467,7 @@ require 'stringio'
 sio = StringIO.new("hoge", 'r+')
 sio2 = StringIO.new("foo", 'r+')
 sio.reopen(sio2)
-p sio.read                       #=> "foo"
+p sio.read                       # => "foo"
 ```
 
 ### def reopen(str, mode = 'r+')     -> StringIO
@@ -489,7 +489,7 @@ p sio.read                       #=> "foo"
 require 'stringio'
 sio = StringIO.new("hoge", 'r+')
 sio.reopen('foo')
-p sio.read                      #=> "foo"
+p sio.read                      # => "foo"
 ```
 
 ### def rewind    -> 0
@@ -587,9 +587,9 @@ len を返します。
 require "stringio"
 a = StringIO.new("hoge", 'r+')
 a.truncate(2)
-p a.string                     #=> "ho"
+p a.string                     # => "ho"
 a.truncate(5)
-p a.string                     #=> "ho\000\000\000"
+p a.string                     # => "ho\000\000\000"
 ```
 
 ### def tty?    -> false
@@ -650,8 +650,8 @@ p s.pos      # => 7
 ```ruby title="例"
 require "stringio"
 a = StringIO.new("hoge", 'r+')
-p a.write("aaa")               #=> 3
-p a.string                     #=> "aaae"
+p a.write("aaa")               # => 3
+p a.string                     # => "aaae"
 ```
 
 ### def each_char{|c| ... } -> self

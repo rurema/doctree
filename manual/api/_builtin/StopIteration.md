@@ -21,13 +21,13 @@ end
 
 enumerator = object.to_enum
   
-p enumerator.next #=> :yield1
-p enumerator.next #=> :yield2
+p enumerator.next # => :yield1
+p enumerator.next # => :yield2
 
 begin
   enumerator.next
 rescue StopIteration => error
-  p error.result #=> :each_returned
+  p error.result # => :each_returned
 end
 ```
 

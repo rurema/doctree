@@ -39,7 +39,7 @@ URI を要素に分割した文字列の配列を返します。
 ```ruby title="例"
 require 'uri'
 p URI.split("http://www.ruby-lang.org/")
-#=> ["http", nil, "www.ruby-lang.org", nil, nil, "/", nil, nil, nil]
+# => ["http", nil, "www.ruby-lang.org", nil, nil, "/", nil, nil, nil]
 ```
 
 ### def URI.parse(uri_str)    -> object
@@ -137,7 +137,7 @@ schemes を与えた場合は、そのスキームの URI にのみマッチす�
 
 ```ruby title="例"
 require 'uri'
-p URI.regexp =~ "http://www.ruby-lang.org/"  #=> 0
+p URI.regexp =~ "http://www.ruby-lang.org/"  # => 0
 ```
 
 ### def URI.decode_www_form(str, enc=Encoding::UTF_8) -> [[String, String]]
@@ -157,10 +157,10 @@ enc で指定したエンコーディングの文字列が URL エンコード�
 ```ruby
 require 'uri'
 ary = URI.decode_www_form("a=1&a=2&b=3")
-p ary                 #=> [['a', '1'], ['a', '2'], ['b', '3']]
-p ary.assoc('a').last #=> '1'
-p ary.assoc('b').last #=> '3'
-p Hash[ary]           #=> {"a"=>"2", "b"=>"3"}
+p ary                 # => [['a', '1'], ['a', '2'], ['b', '3']]
+p ary.assoc('a').last # => '1'
+p ary.assoc('b').last # => '3'
+p Hash[ary]           # => {"a"=>"2", "b"=>"3"}
 ```
 
 - **param** `str` -- デコード対象の文字列

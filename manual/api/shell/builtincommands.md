@@ -428,7 +428,7 @@ require 'shell'
 Shell.verbose = false
 sh = Shell.new
 begin
-  p sh.mkdir("foo") #=> ["foo"]
+  p sh.mkdir("foo") # => ["foo"]
 rescue => err
   puts err
 end

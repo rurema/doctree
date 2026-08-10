@@ -446,7 +446,7 @@ p Set[10, 20, 30] - Set[10, 20, 40]
 require 'set'
 s1 = Set[10, 20, 30]
 s2 = Set[10, 30, 50]
-p s1 & s2 #=> #<Set: {10, 30}>
+p s1 & s2 # => #<Set: {10, 30}>
 ```
 
 - **SEE** [m:Array#&], [m:Array#intersection]

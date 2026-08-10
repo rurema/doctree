@@ -11,8 +11,8 @@ Integer を同じ数を表す [c:OpenSSL::BN] のオブジェクトに変換し�
 ```ruby
 require 'openssl'
 
-pp 5.to_bn     #=> #<OpenSSL::BN 5>
-pp (-5).to_bn  #=> #<OpenSSL::BN -5>
+pp 5.to_bn     # => #<OpenSSL::BN 5>
+pp (-5).to_bn  # => #<OpenSSL::BN -5>
 ```
 
 なお、実装は、以下のようになっています。

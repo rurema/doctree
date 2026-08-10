@@ -80,14 +80,14 @@ key に元々設定されていた値は破棄されず、それに val 追加�
 
 ```ruby title="例"
 request.add_field 'X-My-Header', 'a'
-p request['X-My-Header']              #=> "a"
-p request.get_fields('X-My-Header')   #=> ["a"]
+p request['X-My-Header']              # => "a"
+p request.get_fields('X-My-Header')   # => ["a"]
 request.add_field 'X-My-Header', 'b'
-p request['X-My-Header']              #=> "a, b"
-p request.get_fields('X-My-Header')   #=> ["a", "b"]
+p request['X-My-Header']              # => "a, b"
+p request.get_fields('X-My-Header')   # => ["a", "b"]
 request.add_field 'X-My-Header', 'c'
-p request['X-My-Header']              #=> "a, b, c"
-p request.get_fields('X-My-Header')   #=> ["a", "b", "c"]
+p request['X-My-Header']              # => "a, b, c"
+p request.get_fields('X-My-Header')   # => ["a", "b", "c"]
 ```
    
 ### def get_fields(key) -> [String]

@@ -51,8 +51,8 @@ f = File.open('hoge.txt')
 begin
   Zlib::GzipReader.new(f)
 rescue Zlib::GzipFile::Error => err
-  puts "error", err #=> error
-                    #=> not in gzip format
+  puts "error", err # => error
+                    # => not in gzip format
 end
 ```
 
@@ -81,14 +81,14 @@ f = File.open('hoge.gz')
 Zlib::GzipReader.wrap(f){|gz|
   print gz.read
 }
-p f.closed? #=> true
+p f.closed? # => true
 
 f = File.open('hoge.gz')
 Zlib::GzipReader.wrap(f){|gz|
   print gz.read
   gz.finish
 }
-p f.closed? #=> false
+p f.closed? # => false
 ```
 
 ### def Zlib::GzipReader.open(filename) -> Zlib::GzipReader
@@ -138,7 +138,7 @@ Zlib::GzipReader.open('hoge.gz'){|gz|
   gz.each_line{|line|
     puts line
   }
-  p gz.eof? #=> true
+  p gz.eof? # => true
 }
 ```
 
@@ -161,12 +161,12 @@ Zlib::GzipReader.open('hoge.gz'){|gz|
   end
 }
 # 実行例
-#=> h, 1
-#=> o, 2
-#=> g, 3
-#=> e, 4
-#=>  
-#=> , 5
+# => h, 1
+# => o, 2
+# => g, 3
+# => e, 4
+# =>  
+# => , 5
 ```
 
 ### def each(rs = $/){|line| ... } -> self
@@ -261,11 +261,11 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
     printf "%d -> %c\n", b, b
   }
 }
-#=> 104 -> h
-#=> 111 -> o
-#=> 103 -> g
-#=> 101 -> e
-#=> 10 -> 
+# => 104 -> h
+# => 111 -> o
+# => 103 -> g
+# => 101 -> e
+# => 10 -> 
 ```
 
 - **SEE** [m:IO#each_byte]
@@ -314,8 +314,8 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
     puts l
   end
 }
-#=> hoge
-#=> fuga
+# => hoge
+# => fuga
 ```
 
 ### def getc -> Integer | nil
@@ -359,11 +359,11 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
     puts c
   end
 }
-#=> 104
-#=> 111
-#=> 103
-#=> 101
-#=> 10
+# => 104
+# => 111
+# => 103
+# => 101
+# => 10
 ```
 
 - **SEE** [m:IO#getc]
@@ -413,10 +413,10 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
     printf "%s %d\n", l, gz.lineno
   end
 }
-#=> h 1
-#=> o 2
-#=> g 3
-#=> e 4
+# => h 1
+# => o 2
+# => g 3
+# => e 4
 ```
 
 - **SEE** [m:IO#lineno]
@@ -469,10 +469,10 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
     printf "%s %d\n", l, gz.lineno
   end
 }
-#=> h 1
-#=> o 1001
-#=> g 1002
-#=> e 1003
+# => h 1
+# => o 1001
+# => g 1002
+# => e 1003
 ```
 
 - **SEE** [m:IO#lineno=]
@@ -517,9 +517,9 @@ Zlib::GzipWriter.open('hoge.gz') { |gz|
 =end
 
 Zlib::GzipReader.open('hoge.gz') { |gz|
-  p gz.read(4)  #=> "hoge"
-  p gz.read     #=> "_fuga\n"
-  p gz.read(1)  #=> nil
+  p gz.read(4)  # => "hoge"
+  p gz.read     # => "_fuga\n"
+  p gz.read(1)  # => nil
 }
 ```
 
@@ -570,12 +570,12 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
     break
   end while true
 }
-#=> 104
-#=> 111
-#=> 103
-#=> 101
-#=> 10
-#=> end of file reached
+# => 104
+# => 111
+# => 103
+# => 101
+# => 10
+# => end of file reached
 ```
 
 ### def readline(rs = $/) -> String
@@ -626,9 +626,9 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
     break
   end while true
 }
-#=> hoge
-#=> fuga
-#=> end of file reached
+# => hoge
+# => fuga
+# => end of file reached
 ```
 
 - **SEE** [m:IO#readline]
@@ -673,7 +673,7 @@ Zlib::GzipWriter.open('hoge.gz') { |gz|
 =end
 
 Zlib::GzipReader.open('hoge.gz') { |gz|
-  p gz.readlines #=>  ["hoge\n", "fuga\n"]
+  p gz.readlines # =>  ["hoge\n", "fuga\n"]
 }
 ```
 
@@ -741,13 +741,13 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
   end while true
 }
 
-#=> h -> o
-#=> o -> g
-#=> g -> e
-#=> e -> f
-#=> f -> u
-#=> u -> g
-#=> g -> a
+# => h -> o
+# => o -> g
+# => g -> e
+# => e -> f
+# => f -> u
+# => u -> g
+# => g -> a
 ```
   
 - **SEE** [m:IO#ungetc]
@@ -769,10 +769,10 @@ Zlib::GzipWriter.open('hoge.gz') { |gz|
 =end
 
 gz = Zlib::GzipReader.open('hoge.gz')
-puts gz.gets #=> hoge
-puts gz.gets #=> fuga
-p gz.rewind  #=> 0
-puts gz.gets #=> hoge
+puts gz.gets # => hoge
+puts gz.gets # => fuga
+p gz.rewind  # => 0
+puts gz.gets # => hoge
 gz.close
 ```
 

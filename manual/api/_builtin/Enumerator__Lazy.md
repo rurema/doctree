@@ -104,7 +104,7 @@ Enumerator::Lazy のインスタンスを返します。
 
 ```ruby
 p ["foo", "bar"].lazy.flat_map {|i| i.each_char.lazy}.force
-#=> ["f", "o", "o", "b", "a", "r"]
+# => ["f", "o", "o", "b", "a", "r"]
 ```
 
 ブロックの返した値 x は、以下の場合にのみ分解され、連結されます。
@@ -116,7 +116,7 @@ p ["foo", "bar"].lazy.flat_map {|i| i.each_char.lazy}.force
 
 ```ruby
 p [{a:1}, {b:2}].lazy.flat_map {|i| i}.force
-#=> [{:a=>1}, {:b=>2}]
+# => [{:a=>1}, {:b=>2}]
 ```
 
 - **raise** `ArgumentError` -- ブロックを指定しなかった場合に発生します。
@@ -401,7 +401,7 @@ Enumerator を返す」ようなメソッドを定義するときによく使わ
 ```ruby title="例"
 module Enumerable
   # 要素をn回ずつ繰り返すメソッド
-  # 例：[1,2,3].repeat(2)  #=> [1,1,2,2,3,3]
+  # 例：[1,2,3].repeat(2)  # => [1,1,2,2,3,3]
   def repeat(n)
     raise ArgumentError if n < 0
     if block_given?
@@ -416,11 +416,11 @@ end
 
 r = 1..10
 p r.map{|n| n**2}.repeat(2).first(5)
-#=> [1, 1, 4, 4, 9]
+# => [1, 1, 4, 4, 9]
 
 r = 1..Float::INFINITY
 p r.lazy.map{|n| n**2}.repeat(2).first(5)
-#=> [1, 1, 4, 4, 9]
+# => [1, 1, 4, 4, 9]
 
 # Lazy#to_enum のおかげで、repeat の返り値は
 # もとが Enumerator のときは Enumerator に、

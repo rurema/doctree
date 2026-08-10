@@ -118,7 +118,7 @@ def foo
     c = 123
     d
   rescue NameError => err
-    p err.local_variables #=> [:b, :c, :err]
+    p err.local_variables # => [:b, :c, :err]
   end
 end
 

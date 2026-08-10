@@ -77,5 +77,5 @@ decimal の文字列 ("127.0.0.1"のような文字列) や IPv6
 require 'socket'
 
 p TCPSocket.gethostbyname("www.ruby-lang.org")
-#=> ["beryllium.ruby-lang.org", [], 2, "210.163.138.100"]
+# => ["beryllium.ruby-lang.org", [], 2, "210.163.138.100"]
 ```

@@ -40,7 +40,7 @@ str = (1..500).collect{
   ['A', 'T', 'C', 'G'].at(rand(4))
 }.join
 
-p str.size #=> 500
+p str.size # => 500
 
 [ Zlib::NO_COMPRESSION,
   Zlib::BEST_SPEED,
@@ -52,10 +52,10 @@ p str.size #=> 500
   #puts Zlib::Inflate.inflate(str)
 }
 #出力例
-#=> 511
-#=> 200
-#=> 194
-#=> 194
+# => 511
+# => 200
+# => 194
+# => 194
 ```
 
 ### def Zlib::Deflate.new(level = Zlib::DEFAULT_COMPRESSION, windowBits = Zlib::MAX_WBITS, memlevel = Zlib::DEF_MEM_LEVEL, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::Deflate
@@ -73,11 +73,11 @@ require 'zlib'
 dez = Zlib::Deflate.new(9, nil, 9)
 dez << "123" * 20
 dezstr = dez.finish
-p dezstr #=> "x\3323426$\027\001\000e\217\v\271"
+p dezstr # => "x\3323426$\027\001\000e\217\v\271"
 
 inz = Zlib::Inflate.new
 inzstr = inz.inflate(dezstr)
-p inzstr  #=> "123123123123123123123123123123123123123123123123123123123123"
+p inzstr  # => "123123123123123123123123123123123123123123123123123123123123"
 ```
 
 ## Instance Methods
@@ -97,7 +97,7 @@ flush には [m:Zlib::NO_FLUSH], [m:Zlib::SYNC_FLUSH],
 require 'zlib'
 
 dez = Zlib::Deflate.new
-p dez.deflate("123" * 20, Zlib::FINISH) #=> "x\2343426$\027\001\000e\217\v\271"
+p dez.deflate("123" * 20, Zlib::FINISH) # => "x\2343426$\027\001\000e\217\v\271"
 ```
 
 ### def <<(string) -> self
@@ -112,7 +112,7 @@ require 'zlib'
 dez = Zlib::Deflate.new
 dez << "123" * 5 << "ugougo" << "123" * 5 << "hogehoge"
 dezstr = dez.finish
-p dezstr #=> "x\2343426DB\245\351\371@d\210*\230\221\237\236\n\302\000\356\275\v\271"
+p dezstr # => "x\2343426DB\245\351\371@d\210*\230\221\237\236\n\302\000\356\275\v\271"
 ```
 
 ### def flush(flush = Zlib::SYNC_FLUSH) -> String
@@ -149,10 +149,10 @@ end
 
 case1
 case2
-#=> "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
-#=> "hoge fuga end"
-#=> "x\234\312\310OO\005\000\000\000\377\377RH+MO\004\000\000\000\377\377SH\315K\001\000!\251\004\276"
-#=> "hoge fuga end"
+# => "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
+# => "hoge fuga end"
+# => "x\234\312\310OO\005\000\000\000\377\377RH+MO\004\000\000\000\377\377SH\315K\001\000!\251\004\276"
+# => "hoge fuga end"
 ```
 
 ### def finish -> String
@@ -165,7 +165,7 @@ require 'zlib'
 dez = Zlib::Deflate.new
 dez << "123" * 5 << "ugougo" << "123" * 5 << "hogehoge"
 dezstr = dez.finish
-p dezstr #=> "x\2343426DB\245\351\371@d\210*\230\221\237\236\n\302\000\356\275\v\271"
+p dezstr # => "x\2343426DB\245\351\371@d\210*\230\221\237\236\n\302\000\356\275\v\271"
 ```
 
 ### def params(level, strategy) -> nil
@@ -201,10 +201,10 @@ end
 
 case1
 case2
-#=> "x\234\313\310OO\315@\303\006T\006\000D\367\0270"
-#=> "hogehogehogehogehoge00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-#=> "x\234\005\3011\r\000\000\f\003 K\230j\326\257\376\277Aw\351.\335\245\273t\027\000\000\000\000\000\000\000\000\000\200\aD\367\0270"
-#=> "hogehogehogehogehoge00000000000000000000000000000000000000000000000000000000000000000000000000000000"
+# => "x\234\313\310OO\315@\303\006T\006\000D\367\0270"
+# => "hogehogehogehogehoge00000000000000000000000000000000000000000000000000000000000000000000000000000000"
+# => "x\234\005\3011\r\000\000\f\003 K\230j\326\257\376\277Aw\351.\335\245\273t\027\000\000\000\000\000\000\000\000\000\200\aD\367\0270"
+# => "hogehogehogehogehoge00000000000000000000000000000000000000000000000000000000000000000000000000000000"
 ```
 
 ### def set_dictionary(string) -> String

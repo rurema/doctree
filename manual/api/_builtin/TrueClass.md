@@ -18,17 +18,17 @@ other が真なら true を, 偽なら false を返します。
 & は再定義可能な演算子に分類されていますので、通常は true & other のように使われます。
 
 ```ruby title="例"
-p true & true     #=> true
-p true & false    #=> false
-p true & nil      #=> false
-p true & (1 == 1) #=> true
-p true & (1 + 1)  #=> true
+p true & true     # => true
+p true & false    # => false
+p true & nil      # => false
+p true & (1 == 1) # => true
+p true & (1 + 1)  # => true
 
-p true.&(true)    #=> true
-p true.&(false)   #=> false
-p true.&(nil)     #=> false
-p true.&(1 == 1)  #=> true
-p true.&(1 + 1)   #=> true
+p true.&(true)    # => true
+p true.&(false)   # => false
+p true.&(nil)     # => false
+p true.&(1 == 1)  # => true
+p true.&(1 + 1)   # => true
 ```
 
 ### def |(other)    -> bool
@@ -40,17 +40,17 @@ p true.&(1 + 1)   #=> true
 | は再定義可能な演算子に分類されていますので、通常は true | other のように使われます。
 
 ```ruby title="例"
-p true | true     #=> true
-p true | false    #=> true
-p true | nil      #=> true
-p true | (1 == 1) #=> true
-p true | (1 + 1)  #=> true
+p true | true     # => true
+p true | false    # => true
+p true | nil      # => true
+p true | (1 == 1) # => true
+p true | (1 + 1)  # => true
 
-p true.|(true)    #=> true
-p true.|(false)   #=> true
-p true.|(nil)     #=> true
-p true.|(1 == 1)  #=> true
-p true.|(1 + 1)   #=> true
+p true.|(true)    # => true
+p true.|(false)   # => true
+p true.|(nil)     # => true
+p true.|(1 == 1)  # => true
+p true.|(1 + 1)   # => true
 ```
 
 ### def ^(other)    -> bool
@@ -62,17 +62,17 @@ other が真なら false を, 偽なら true を返します。
 ^ は再定義可能な演算子に分類されていますので、通常は true ^ other のように使われます。
 
 ```ruby title="例"
-p true ^ true     #=> false
-p true ^ false    #=> true
-p true ^ nil      #=> true
-p true ^ (1 == 1) #=> false
-p true ^ (1 + 1)  #=> false
+p true ^ true     # => false
+p true ^ false    # => true
+p true ^ nil      # => true
+p true ^ (1 == 1) # => false
+p true ^ (1 + 1)  # => false
 
-p true.^(true)    #=> false
-p true.^(false)   #=> true
-p true.^(nil)     #=> true
-p true.^(1 == 1)  #=> false
-p true.^(1 + 1)   #=> false
+p true.^(true)    # => false
+p true.^(false)   # => true
+p true.^(nil)     # => true
+p true.^(1 == 1)  # => false
+p true.^(1 + 1)   # => false
 ```
 
 ### def to_s    -> String

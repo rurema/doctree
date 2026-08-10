@@ -17,9 +17,9 @@ a = DateTime.new(1993, 2, 24, 12, 30, 45)
 b = DateTime.parse('1993-02-24T12:30:45')
 b += 10
 
-p b - a          #=> 10
-p b.year         #=> 1993
-p b.strftime('%a') #=> "Sat"
+p b - a          # => 10
+p b.year         # => 1993
+p b.strftime('%a') # => "Sat"
 
 yesterday = DateTime.now - 1
 ```
@@ -241,7 +241,7 @@ strftime('%FT%T%:z') と等価です。
 ```ruby title="例"
 require 'date'
 p DateTime.parse('2001-02-03T04:05:06.123456789+07:00').iso8601(9)
-#=> "2001-02-03T04:05:06.123456789+07:00"
+# => "2001-02-03T04:05:06.123456789+07:00"
 ```
 
 ### def jisx0301(n = 0) -> String
@@ -254,7 +254,7 @@ JIS X 0301 書式の文字列を返します。
 ```ruby title="例"
 require 'date'
 p DateTime.parse('2001-02-03T04:05:06.123456789+07:00').jisx0301(9)
-#=> "H13.02.03T04:05:06.123456789+07:00"
+# => "H13.02.03T04:05:06.123456789+07:00"
 ```
 
 ### def min -> Integer
@@ -328,7 +328,7 @@ dt = DateTime.new(2022, 10, 5, 13, 30)
 if dt in wday: 1..5, hour: 10..18 # deconstruct_keys が使われます
   puts "Working time"
 end
-#=> "Working time" が出力される
+# => "Working time" が出力される
 
 case dt
 in year: ...2022
@@ -338,7 +338,7 @@ in month: ..9
 in wday: 1..5, month:
   puts "working day in month #{month}"
 end
-#=> "working day in month 10" が出力される
+# => "working day in month 10" が出力される
 
 # クラスのチェックと組み合わせて利用することもできます
 if dt in DateTime(wday: 1..5, hour: 10..18, day: ..7)

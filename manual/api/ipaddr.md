@@ -133,8 +133,8 @@ p IPAddr.new("0.0.1.0").to_i   # => 256
 ```ruby
 require 'ipaddr'
 addr6 = IPAddr.new('::1')
-p addr6.to_s     #=> "::1"
-p addr6.to_string  #=> "0000:0000:0000:0000:0000:0000:0000:0001"
+p addr6.to_s     # => "::1"
+p addr6.to_string  # => "0000:0000:0000:0000:0000:0000:0000:0001"
 ```
 
 - **SEE** [m:IPAddr#to_string]
@@ -146,8 +146,8 @@ p addr6.to_string  #=> "0000:0000:0000:0000:0000:0000:0000:0001"
 ```ruby
 require 'ipaddr'
 addr6 = IPAddr.new('::1')
-p addr6.to_s     #=> "::1"
-p addr6.to_string  #=> "0000:0000:0000:0000:0000:0000:0000:0001"
+p addr6.to_s     # => "::1"
+p addr6.to_string  # => "0000:0000:0000:0000:0000:0000:0000:0001"
 ```
 
 - **SEE** [m:IPAddr#to_s]
@@ -253,7 +253,7 @@ self と other を比較します。
 ```ruby
 require 'ipaddr'
 ipaddr = IPAddr.new('192.168.1.1')
-p ipaddr.succ.to_s #=> "192.168.1.2"
+p ipaddr.succ.to_s # => "192.168.1.2"
 ```
 
 ### def to_range -> Range
@@ -264,9 +264,9 @@ self の IP アドレスとサブネットマスクで取得できる IP アド�
 ```ruby title="例"
 require 'ipaddr'
 p IPAddr.new('192.168.1.1').to_range
-#=> #<IPAddr: IPv4:192.168.1.1/255.255.255.255>..#<IPAddr: IPv4:192.168.1.1/255.255.255.255>
+# => #<IPAddr: IPv4:192.168.1.1/255.255.255.255>..#<IPAddr: IPv4:192.168.1.1/255.255.255.255>
 p IPAddr.new('::1').to_range
-#=> #<IPAddr: IPv6:0000:0000:0000:0000:0000:0000:0000:0001/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff>..
+# => #<IPAddr: IPv6:0000:0000:0000:0000:0000:0000:0000:0001/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff>..
 #   #<IPAddr: IPv6:0000:0000:0000:0000:0000:0000:0000:0001/ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff>
 ```
 

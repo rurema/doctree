@@ -12,8 +12,8 @@ include:
 ```ruby
 require 'digest/md5'
 
-p Digest::MD5.hexdigest('abc')               #=> '900150983cd24fb0d6963f7d28e17f72'
-p Digest::MD5.file('ruby-1.8.5.tar.gz').to_s #=> '3fbb02294a8ca33d4684055adba5ed6f'
+p Digest::MD5.hexdigest('abc')               # => '900150983cd24fb0d6963f7d28e17f72'
+p Digest::MD5.file('ruby-1.8.5.tar.gz').to_s # => '3fbb02294a8ca33d4684055adba5ed6f'
 ```
 
 すべての Digest::XXX クラスは以下の共通インタフェースを持ちます。

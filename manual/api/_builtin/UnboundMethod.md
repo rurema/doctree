@@ -134,18 +134,18 @@ class C
   def six(a, b, *c, &d); end
 end
 
-p C.instance_method(:one).arity     #=> 0
-p C.instance_method(:two).arity     #=> 1
-p C.instance_method(:three).arity   #=> -1
-p C.instance_method(:four).arity    #=> 2
-p C.instance_method(:five).arity    #=> -3
-p C.instance_method(:six).arity     #=> -3
+p C.instance_method(:one).arity     # => 0
+p C.instance_method(:two).arity     # => 1
+p C.instance_method(:three).arity   # => -1
+p C.instance_method(:four).arity    # => 2
+p C.instance_method(:five).arity    # => -3
+p C.instance_method(:six).arity     # => -3
 
 
-p String.instance_method(:size).arity    #=> 0
-p String.instance_method(:replace).arity #=> 1
-p String.instance_method(:squeeze).arity #=> -1
-p String.instance_method(:count).arity   #=> -1
+p String.instance_method(:size).arity    # => 0
+p String.instance_method(:replace).arity # => 1
+p String.instance_method(:squeeze).arity # => -1
+p String.instance_method(:count).arity   # => -1
 ```
 
 ### def ==(other)     -> bool
@@ -160,10 +160,10 @@ true を返します。そうでない場合に false を返します。
 ```ruby title="例"
 a = String.instance_method(:size)
 b = String.instance_method(:size)
-p a == b                            #=> true
+p a == b                            # => true
 
 c = Array.instance_method(:size)
-p a == c                            #=> false
+p a == c                            # => false
 ```
 
 ### def clone -> UnboundMethod

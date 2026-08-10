@@ -36,7 +36,7 @@ res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
 - **param** `field` -- ヘッダ名を文字列で指定します。大文字と小文字を区別しません。
 
 ```ruby
-p res['date']   #=> "Sat, 27 Oct 2007 08:53:03 GMT"
+p res['date']   # => "Sat, 27 Oct 2007 08:53:03 GMT"
 ```
 
 ### def []=(field, val)
@@ -216,8 +216,8 @@ res.cookies << WEBrick::Cookie.parse_set_cookie(k)
 ```ruby
 require 'webrick'
 res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
-p res.http_version.class                                        #=> WEBrick::HTTPVersion
-p res.http_version.to_s                                         #=> "1.1"
+p res.http_version.class                                        # => WEBrick::HTTPVersion
+p res.http_version.to_s                                         # => "1.1"
 ```
 
 ### def keep_alive?        -> bool
@@ -253,7 +253,7 @@ require 'webrick'
 res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
 res.status = 404
   
-p res.reason_phrase    #=> "Not Found"
+p res.reason_phrase    # => "Not Found"
 ```
 
 ### def request_http_version           -> WEBrick::HTTPVersion
@@ -331,7 +331,7 @@ require 'webrick'
 res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
 res.status = 404
   
-p res.reason_phrase    #=> "Not Found"
+p res.reason_phrase    # => "Not Found"
 ```
 
 ### def status_line    -> String
@@ -343,7 +343,7 @@ require 'webrick'
 res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
 res.status = 404
   
-p res.status_line    #=>  "HTTP/1.1 404 Not Found \r\n"
+p res.status_line    # =>  "HTTP/1.1 404 Not Found \r\n"
 ```
 
 ### def to_s    -> String

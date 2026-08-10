@@ -35,7 +35,7 @@ version が HTTPVersion オブジェクトの場合はそのまま version を�
 ```ruby
 require 'webrick'
 v = WEBrick::HTTPVersion.new('1.1')
-p v < '1.0'                          #=> false
+p v < '1.0'                          # => false
 ```
 
 ### def major      -> Integer
@@ -59,6 +59,6 @@ HTTP バージョンのマイナーを整数で表すアクセサです。
 ```ruby
 require 'webrick'
 v = WEBrick::HTTPVersion.new('1.1')
-p v.to_s                            #=> "1.1"
+p v.to_s                            # => "1.1"
 ```
 

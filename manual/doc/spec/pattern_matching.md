@@ -86,7 +86,7 @@ puts "Connect with user '#{user}'"
 
 ```ruby
 users = [{name: "Alice", age: 12}, {name: "Bob", age: 23}]
-p users.any? {|user| user in {name: /B/, age: 20..} } #=> true
+p users.any? {|user| user in {name: /B/, age: 20..} } # => true
 ```
 
 #%# See below for more examples and explanations of the syntax.
@@ -130,7 +130,7 @@ in [Integer, Integer]
 else
   "not matched"
 end
-#=> "not matched"
+# => "not matched"
 ```
 
 #%# while the hash matches even if there are other keys besides the specified part:
@@ -143,7 +143,7 @@ in {a: Integer}
 else
   "not matched"
 end
-#=> "matched"
+# => "matched"
 ```
 
 #%# <code>{}</code> is the only exclusion from this rule. It matches only if an empty hash is given:
@@ -156,7 +156,7 @@ in {}
 else
   "not matched"
 end
-#=> "not matched"
+# => "not matched"
 ```
 
 ```ruby
@@ -166,7 +166,7 @@ in {}
 else
   "not matched"
 end
-#=> "matched"
+# => "matched"
 ```
 
 #%# There is also a way to specify there should be no other keys in the matched hash except those explicitly specified by the pattern, with <code>**nil</code>:
@@ -195,7 +195,7 @@ in [Integer, *]
 else
   "not matched"
 end
-#=> "matched"
+# => "matched"
 ```
 
 ```ruby
@@ -205,7 +205,7 @@ in {a: Integer, **}
 else
   "not matched"
 end
-#=> "matched"
+# => "matched"
 ```
 
 #%since 3.1
@@ -223,7 +223,7 @@ in Integer, Integer
 else
   "not matched"
 end
-#=> "matched"
+# => "matched"
 ```
 
 ```ruby
@@ -233,7 +233,7 @@ in a: Integer
 else
   "not matched"
 end
-#=> "matched"
+# => "matched"
 ```
 
 #%since 3.1
@@ -287,7 +287,7 @@ in Integer => a, Integer
 else
   "not matched"
 end
-#=> "matched: 1"
+# => "matched: 1"
 ```
 
 ```ruby
@@ -297,7 +297,7 @@ in a: Integer => m
 else
   "not matched"
 end
-#=> "matched: 1"
+# => "matched: 1"
 ```
 
 #%# If no additional check is required, for only binding some part of the data to a variable, a simpler form could be used:
@@ -310,7 +310,7 @@ in a, Integer
 else
   "not matched"
 end
-#=> "matched: 1"
+# => "matched: 1"
 ```
 
 ```ruby
@@ -320,7 +320,7 @@ in a: m
 else
   "not matched"
 end
-#=> "matched: 1"
+# => "matched: 1"
 ```
 
 #%# For hash patterns, even a simpler form exists: key-only specification (without any sub-pattern) binds the local variable with the key's name, too:
@@ -333,7 +333,7 @@ in a:
 else
   "not matched"
 end
-#=> "matched: 1"
+# => "matched: 1"
 ```
 
 #%# Binding works for nested patterns as well:
@@ -346,7 +346,7 @@ in name:, friends: [{name: first_friend}, *]
 else
   "not matched"
 end
-#=> "matched: Jane"
+# => "matched: Jane"
 ```
 
 #%# The "rest" part of a pattern also can be bound to a variable:
@@ -359,7 +359,7 @@ in a, *rest
 else
   "not matched"
 end
-#=> "matched: 1, [2, 3]"
+# => "matched: 1, [2, 3]"
 ```
 
 ```ruby
@@ -369,7 +369,7 @@ in a:, **rest
 else
   "not matched"
 end
-#=> "matched: 1, {:b=>2, :c=>3}"
+# => "matched: 1, {:b=>2, :c=>3}"
 ```
 
 #%# Binding to variables currently does NOT work for alternative patterns joined with <code>|</code>:
@@ -433,7 +433,7 @@ in ^expectation, *rest
 else
   "not matched. expectation was: #{expectation}"
 end
-#=> "not matched. expectation was: 18"
+# => "not matched. expectation was: 18"
 ```
 
 #%# One important usage of variable pinning is specifying that the same value should occur in the pattern several times:
@@ -476,7 +476,7 @@ class A
   else
     "not matched"
   end
-  #=> "matched"
+  # => "matched"
 end
 ```
 
@@ -492,7 +492,7 @@ in ^(a + b)
 else
   "not matched"
 end
-#=> "matched"
+# => "matched"
 ```
 
 #%end
@@ -610,7 +610,7 @@ in a, b if b == a*2
 else
   "not matched"
 end
-#=> "matched"
+# => "matched"
 ```
 
 ```ruby
@@ -620,7 +620,7 @@ in a, b if b == a*2
 else
   "not matched"
 end
-#=> "not matched"
+# => "not matched"
 ```
 
 #%# +unless+ works, too:
@@ -633,7 +633,7 @@ in a, b unless b == a*2
 else
   "not matched"
 end
-#=> "matched"
+# => "matched"
 ```
 
 #%# == Current feature status

@@ -48,7 +48,7 @@ u1.bind("127.0.0.1", 4913)
 u2 = UDPSocket.new
 u2.connect("127.0.0.1", 4913)
 u2.send "uuuu", 0
-p u1.recvfrom(10) #=> ["uuuu", ["AF_INET", 33230, "localhost", "127.0.0.1"]]
+p u1.recvfrom(10) # => ["uuuu", ["AF_INET", 33230, "localhost", "127.0.0.1"]]
 ```
 
 - **param** `host` -- 接続するホスト名文字列
@@ -116,7 +116,7 @@ s1.connect(*s2.addr.values_at(3,1))
 s1.send "aaa", 0
 begin # emulate blocking recvfrom
   p s2.recvfrom_nonblock(10)  
-  #=> ["aaa", ["AF_INET", 33302, "localhost.localdomain", "127.0.0.1"]]
+  # => ["aaa", ["AF_INET", 33302, "localhost.localdomain", "127.0.0.1"]]
 rescue IO::WaitReadable
   IO.select([s2])
   retry

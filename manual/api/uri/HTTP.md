@@ -68,7 +68,7 @@ path が空である場合には、path は「'/'」であるとします。
 ```ruby title="例"
 require 'uri'
 u = URI.parse("http://example.com/search?q=xxx")
-p u.request_uri                                  #=> "/search?q=xxx"
+p u.request_uri                                  # => "/search?q=xxx"
 ```
 
 # class URI::HTTPS < URI::HTTP

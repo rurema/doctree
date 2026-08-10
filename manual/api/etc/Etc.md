@@ -222,7 +222,7 @@ p Etc.confstr(Etc::CS_GNU_LIBPTHREAD_VERSION) # => "NPTL 2.18"
 
 ```ruby
 require 'etc'
-p Etc.nprocessors #=> 4
+p Etc.nprocessors # => 4
 ```
 
 ## Constants

@@ -68,5 +68,5 @@ x = lusolve(a, b, ps, zero)
 # こう書いてもよい
 # x = lusolve(a, b, ludecomp(a, b.size, zero, one), zero)
 
-p x.map(&:to_f)  #=> [1.0, -1.0]
+p x.map(&:to_f)  # => [1.0, -1.0]
 ```

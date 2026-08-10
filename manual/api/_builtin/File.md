@@ -63,7 +63,7 @@ p File.mtime(__FILE__) # => 2017-12-03 03:16:22 +0900
 - **raise** `NotImplementedError` --  Windows のような birthtime のない環境で発生します。
 
 ```ruby title="例"
-p File.birthtime("testfile") #=> Wed Apr 09 08:53:13 CDT 2003
+p File.birthtime("testfile") # => Wed Apr 09 08:53:13 CDT 2003
 ```
 
 ### def File.basename(filename, suffix = "")     -> String
@@ -71,11 +71,11 @@ p File.birthtime("testfile") #=> Wed Apr 09 08:53:13 CDT 2003
 filename の一番後ろのスラッシュに続く要素を返します。もし、引数 suffix が与えられて、かつそれが filename の末尾に一致するなら、それを取り除いたものを返します。
 
 ```ruby title="例"
-p File.basename("ruby/ruby.c")          #=> "ruby.c"
-p File.basename("ruby/ruby.c", ".c")    #=> "ruby"
-p File.basename("ruby/ruby.c", ".*")    #=> "ruby"
-p File.basename("ruby/ruby.exe", ".*")  #=> "ruby"
-p File.basename("ruby/y.tab.c", ".*")   #=> "y.tab"
+p File.basename("ruby/ruby.c")          # => "ruby.c"
+p File.basename("ruby/ruby.c", ".c")    # => "ruby"
+p File.basename("ruby/ruby.c", ".*")    # => "ruby"
+p File.basename("ruby/ruby.exe", ".*")  # => "ruby"
+p File.basename("ruby/y.tab.c", ".*")   # => "y.tab"
 ```
 
 File.basename の動作は [man:basename(3)] 
@@ -242,12 +242,12 @@ path が相対パスであれば default_dir を基準にします。
 ~USER はそのユーザのホームディレクトリに展開されます。
 
 ```ruby title="例"
-p Dir.getwd                      #=> "/home/matz/work/foo"
-p ENV["HOME"]                    #=> "/home/matz"
-p File.expand_path("..")         #=> "/home/matz/work"
-p File.expand_path("..", "/tmp") #=> "/"
-p File.expand_path("~")          #=> "/home/matz"
-p File.expand_path("~foo")       #=> "/home/foo"
+p Dir.getwd                      # => "/home/matz/work/foo"
+p ENV["HOME"]                    # => "/home/matz"
+p File.expand_path("..")         # => "/home/matz/work"
+p File.expand_path("..", "/tmp") # => "/"
+p File.expand_path("~")          # => "/home/matz"
+p File.expand_path("~foo")       # => "/home/foo"
 ```
 
 - **param** `path` -- パスを表す文字列を指定します。
@@ -264,12 +264,12 @@ dir_string を渡した場合はそのディレクトリを基準とします。
 [m:File.expand_path] と異なり、 file_name 先頭が "~" である場合それは展開されません。普通のディレクトリ名として処理されます。
 
 ```ruby title="例"
-p Dir.getwd                      #=> "/home/matz/work/bar"
-p ENV["HOME"]                    #=> "/home/matz"
-p File.absolute_path("..")         #=> "/home/matz/work"
-p File.absolute_path("..", "/tmp") #=> "/"
-p File.absolute_path("~")          #=> "/home/matz/work/bar/~"
-p File.absolute_path("~foo")       #=> "/home/matz/work/bar/~foo"
+p Dir.getwd                      # => "/home/matz/work/bar"
+p ENV["HOME"]                    # => "/home/matz"
+p File.absolute_path("..")         # => "/home/matz/work"
+p File.absolute_path("..", "/tmp") # => "/"
+p File.absolute_path("~")          # => "/home/matz/work/bar/~"
+p File.absolute_path("~foo")       # => "/home/matz/work/bar/~foo"
 ```
 
 - **SEE** [m:File.expand_path]
@@ -966,7 +966,7 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 ```ruby title="例"
 m = File.world_writable?("/tmp")
-p "%o" % m                             #=> "777"
+p "%o" % m                             # => "777"
 ```
 
 ### def File.mkfifo(file_name, mode = 0666) -> 0
@@ -1042,7 +1042,7 @@ p File.open("testfile") { |f| f.mtime } # => 2017-12-21 22:58:17 +0900
 - **raise** `NotImplementedError` --  Windows のような birthtime のない環境で発生します。
 
 ```ruby
-p File.new("testfile").birthtime #=> Wed Apr 09 08:53:14 CDT 2003
+p File.new("testfile").birthtime # => Wed Apr 09 08:53:14 CDT 2003
 ```
 
 - **SEE** [m:File#lstat], [m:File#atime], [m:File#ctime], [m:File#mtime]
@@ -1053,7 +1053,7 @@ p File.new("testfile").birthtime #=> Wed Apr 09 08:53:14 CDT 2003
 
 ```ruby title="例"
 File.open("/dev/null") do |f|
-  p f.size #=> 0
+  p f.size # => 0
 end
 ```
 
@@ -1077,7 +1077,7 @@ end
 
 ```ruby title="例"
 f = File.new("out", "w");
-p f.chmod(0644) #=> 0
+p f.chmod(0644) # => 0
 ```
 
 ### def chown(owner, group)    -> 0
@@ -1210,8 +1210,8 @@ puts "re-locked by process1"
 - **raise** `IOError` -- TMPFILE [m:File::Constants::TMPFILE]オプション付きで作成されている場合に発生します。
 
 ```ruby title="例"
-p File.open("testfile") {|f| f.path }                      #=> "testfile"
-p File.open("/tmp/../tmp/xxx", "w") {|f| f.path }          #=> "/tmp/../tmp/xxx"
+p File.open("testfile") {|f| f.path }                      # => "testfile"
+p File.open("/tmp/../tmp/xxx", "w") {|f| f.path }          # => "/tmp/../tmp/xxx"
 File.open("/tmp", File::RDWR | File::TMPFILE){|f| f.path } # IOError: File is unnamed (TMPFILE?)
 ```
 

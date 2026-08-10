@@ -16,13 +16,13 @@ FTP URI を表すクラスです。
 ```ruby title="例"
 require 'uri'
 p URI::FTP.build([nil, "www.example.com", 10020, "/path",  'a'])
-#=> #<URI::FTP:0x201c4f9c URL:ftp://www.example.com:10020/path;type=a>
+# => #<URI::FTP:0x201c4f9c URL:ftp://www.example.com:10020/path;type=a>
   
 p URI::FTP.build({:host => "www.example.com", :path => "/path",  :typecode => 'a'})
-#=> #<URI::FTP:0x201bd9cc URL:ftp://www.example.com/path;type=a>
+# => #<URI::FTP:0x201bd9cc URL:ftp://www.example.com/path;type=a>
   
 p URI::FTP.build([nil, 'example.com', nil, '/foo', 'i']).to_s
-#=> 'ftp://example.com/%2Ffoo;type=i'
+# => 'ftp://example.com/%2Ffoo;type=i'
 ```
 
 - **param** `ary` -- 構成要素を表す文字列の配列を与えます。要素は
@@ -55,8 +55,8 @@ p URI::FTP.build([nil, 'example.com', nil, '/foo', 'i']).to_s
 require 'uri'
 p ftp = URI.parse("ftp://ftp.ruby-lang.org/pub/ruby/;type=d")
 p ftp.typecode
-#=> #<URI::FTP:0x2010029c URL:ftp://ftp.ruby-lang.org/pub/ruby/;type=d>
-#=> "d"
+# => #<URI::FTP:0x2010029c URL:ftp://ftp.ruby-lang.org/pub/ruby/;type=d>
+# => "d"
 ```
 
 - **param** `scheme` -- 構成要素を表す文字列を与えます。

@@ -40,7 +40,7 @@ class Proxy < BasicObject
 end
 
 proxy = Proxy.new("1")
-proxy.to_i #=> 1
+proxy.to_i # => 1
 ```
 
 ## Instance Methods
@@ -67,8 +67,8 @@ end
 tanaka1 = Person.new("tanaka", 24)
 tanaka2 = Person.new("tanaka", 24)
 
-p tanaka1 == tanaka1  #=> true
-p tanaka1 == tanaka2  #=> false
+p tanaka1 == tanaka1  # => true
+p tanaka1 == tanaka2  # => false
 ```
 
 - **SEE** [m:BasicObject#equal?], [m:Object#==], [m:Object#equal?],
@@ -91,10 +91,10 @@ original = "a"
 copied = original.dup
 substituted = original
 
-p original == copied        #=> true
-p original == substituted   #=> true
-p original.equal? copied    #=> false
-p original.equal? substituted #=> true
+p original == copied        # => true
+p original == substituted   # => true
+p original.equal? copied    # => false
+p original.equal? substituted # => true
 ```
 
 - **SEE** [m:Object#equal?], [m:Object#==], [m:Object#eql?]
@@ -128,7 +128,7 @@ recorder = NegationRecorder.new
 !!!!!!!recorder
 puts 'hoge' if !recorder
 
-puts recorder.count #=> 3
+puts recorder.count # => 3
 ```
 
 ```ruby title="例"
@@ -141,7 +141,7 @@ another_false = AnotherFalse.new
 
 # another_falseは*真*
 puts "another false is a truth" if another_false
-#=> "another false is a truth"
+# => "another false is a truth"
 ```
 
 ### def !=(other) -> bool
@@ -175,7 +175,7 @@ recorder = NonequalityRecorder.new
 recorder != 1
 puts 'hoge' if recorder != "str"
 
-p recorder.count #=> 2
+p recorder.count # => 2
 ```
 
 ### def __send__(name, *args) -> object
@@ -261,7 +261,7 @@ class Foo
 end
 
 dic = Foo.new({:English => %w(zero one two), :Esperanto => %w(nulo unu du)})
-p dic.find_2_in :Esperanto #=> "du"
+p dic.find_2_in :Esperanto # => "du"
 ```
 
 [注意] このメソッドを override する場合は対象のメソッド名に対して

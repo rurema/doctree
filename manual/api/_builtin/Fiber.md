@@ -41,7 +41,7 @@ end
 begin
 f.resume     # ここでも StandardError が発生する。
 rescue => e
-p e.message  #=> "hoge"
+p e.message  # => "hoge"
 end
 ```
 
@@ -66,7 +66,7 @@ end
  p f.resume
 end
 
-#=> 0
+# => 0
     1
     2
     3
@@ -87,9 +87,9 @@ end
  
 g = enum2gen(1..100)
  
-p g.resume  #=> 1
-p g.resume  #=> 2
-p g.resume  #=> 3
+p g.resume  # => 1
+p g.resume  # => 2
+p g.resume  # => 3
 ```
 
 ### 注意
@@ -170,8 +170,8 @@ f = Fiber.new do |obj|
 end
   
 b = f.resume(:foo)
-p a  #=> :foo
-p b  #=> :hoge
+p a  # => :foo
+p b  # => :hoge
 ```
 
 #%since 3.2
@@ -205,7 +205,7 @@ end
 f.resume()
 f.resume(:foo)
 
-p a  #=> :foo
+p a  # => :foo
 ```
 
 #%since 3.2
@@ -437,8 +437,8 @@ f = Fiber.new do
   :fuga
 end
   
-p f.resume() #=> :hoge
-p f.resume() #=> :fuga
+p f.resume() # => :hoge
+p f.resume() # => :fuga
 f.resume()   # ~> FiberError: attempt to resume a terminated fiber
 ```
 

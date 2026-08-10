@@ -151,13 +151,13 @@ self.class.component を返します。
 require 'uri'
 u = URI.parse('http://example.com/')
 u.userinfo = 'hoge-san:jfae82kj'
-p u.to_s                             #=> "http://hoge-san:jfae82kj@example.com/"
+p u.to_s                             # => "http://hoge-san:jfae82kj@example.com/"
   
 u.userinfo = 'oreore'
-p u.to_s                             #=> "http://oreore:jfae82kj@example.com/"
+p u.to_s                             # => "http://oreore:jfae82kj@example.com/"
 
 u.userinfo = ['you', 'akakfd']
-p u.to_s                             #=> "http://you:akakfd@example.com/"
+p u.to_s                             # => "http://you:akakfd@example.com/"
 ```
 
 ### def user    -> String | nil
@@ -279,11 +279,11 @@ p u.to_s                  # => "http://[::1]/bar"
 
 ```ruby
 require 'uri'
-p URI.parse('http://example.com/hoge').path       #=> "/hoge"
-p URI.parse('http://example.com').path            #=> ""
-p URI.parse('mailto:nospam@localhost').path       #=> nil
-p URI('ftp://example.com/foo').path    #=> 'foo'
-p URI('ftp://example.com/%2Ffoo').path #=> '/foo'
+p URI.parse('http://example.com/hoge').path       # => "/hoge"
+p URI.parse('http://example.com').path            # => ""
+p URI.parse('mailto:nospam@localhost').path       # => nil
+p URI('ftp://example.com/foo').path    # => 'foo'
+p URI('ftp://example.com/%2Ffoo').path # => '/foo'
 ```
 
 ### def path=(s)
@@ -302,7 +302,7 @@ p URI('ftp://example.com/%2Ffoo').path #=> '/foo'
 
 ```ruby title="例"
 require 'uri'
-p URI.parse('http://example.com/?hoge').query   #=> "hoge"
+p URI.parse('http://example.com/?hoge').query   # => "hoge"
 ```
 
 ### def query=(s)
@@ -321,9 +321,9 @@ p URI.parse('http://example.com/?hoge').query   #=> "hoge"
 
 ```ruby title="例"
 require 'uri'
-p URI.parse('http://example.com/').opaque       #=> nil
-p URI.parse('mailto:nospam@localhost').opaque   #=> "nospam@localhost"
-p URI.parse('urn:ietf:rfc:1149').opaque         #=> "ietf:rfc:1149"
+p URI.parse('http://example.com/').opaque       # => nil
+p URI.parse('mailto:nospam@localhost').opaque   # => "nospam@localhost"
+p URI.parse('urn:ietf:rfc:1149').opaque         # => "ietf:rfc:1149"
 ```
 
 ### def opaque=(s)
@@ -343,7 +343,7 @@ p URI.parse('urn:ietf:rfc:1149').opaque         #=> "ietf:rfc:1149"
 ```ruby title="例"
 require 'uri'
 u = URI.parse('http://example.com/#frgmt')
-p u.fragment                                #=> "frgmt"
+p u.fragment                                # => "frgmt"
 ```
 
 ### def fragment=(s)
@@ -365,8 +365,8 @@ p u.fragment                                #=> "frgmt"
 
 ```ruby title="例"
 require 'uri'
-p URI.parse('http://example.com/').absolute?    #=> true
-p URI.parse('./').absolute?                     #=> false
+p URI.parse('http://example.com/').absolute?    # => true
+p URI.parse('./').absolute?                     # => false
 ```
 
 ### def relative?    -> bool
@@ -375,8 +375,8 @@ p URI.parse('./').absolute?                     #=> false
 
 ```ruby title="例"
 require 'uri'
-p URI.parse('http://example.com/').relative?    #=> false
-p URI.parse('./').relative?                     #=> true
+p URI.parse('http://example.com/').relative?    # => false
+p URI.parse('./').relative?                     # => true
 ```
 
 ### def merge!(rel)    -> self
@@ -392,7 +392,7 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換して�
 require 'uri'
 u = URI.parse('http://example.com/')
 u.merge!('/foo/bar.html')
-p u.to_s                                   #=> http://example.com/foo/bar.html
+p u.to_s                                   # => http://example.com/foo/bar.html
 ```
 
 ### def merge(rel)     -> URI::Generic
@@ -408,12 +408,12 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換して�
 ```ruby title="例"
 require 'uri'
 p URI.parse('http://example.com/') + '/foo/bar.html'
-#=> #<URI::HTTP:0x201001c0 URL:http://example.com/foo/bar.html>
-p URI('http://a/b/c/d;p?q').merge('?y')             #=> #<URI::HTTP:0xb7ca2e2c URL:http://a/b/c/d;p?y>
-p URI('http://a/b/c/d;p?q').merge('/./g')           #=> #<URI::HTTP:0xb7ca2738 URL:http://a/g>
-p URI('http://a/b/c/d;p?q').merge('/../g')          #=> #<URI::HTTP:0xb7ca2008 URL:http://a/g>
-p URI('http://a/b/c/d;p?q').merge('../../../g')     #=> #<URI::HTTP:0xb7ca1888 URL:http://a/g>
-p URI('http://a/b/c/d;p?q').merge('../../../../g')  #=> #<URI::HTTP:0xb7ca10a4 URL:http://a/g>
+# => #<URI::HTTP:0x201001c0 URL:http://example.com/foo/bar.html>
+p URI('http://a/b/c/d;p?q').merge('?y')             # => #<URI::HTTP:0xb7ca2e2c URL:http://a/b/c/d;p?y>
+p URI('http://a/b/c/d;p?q').merge('/./g')           # => #<URI::HTTP:0xb7ca2738 URL:http://a/g>
+p URI('http://a/b/c/d;p?q').merge('/../g')          # => #<URI::HTTP:0xb7ca2008 URL:http://a/g>
+p URI('http://a/b/c/d;p?q').merge('../../../g')     # => #<URI::HTTP:0xb7ca1888 URL:http://a/g>
+p URI('http://a/b/c/d;p?q').merge('../../../../g')  # => #<URI::HTTP:0xb7ca10a4 URL:http://a/g>
 ```
 
 ### def route_from(src)    -> URI::Generic
@@ -426,7 +426,7 @@ p URI('http://a/b/c/d;p?q').merge('../../../../g')  #=> #<URI::HTTP:0xb7ca10a4 U
 ```ruby title="例"
 require 'uri'
 p URI.parse('http://example.com/foo/bar.html') - 'http://example.com/'
-#=> #<URI::Generic:0x20100256 URL:foo/bar.html>
+# => #<URI::Generic:0x20100256 URL:foo/bar.html>
 ```
 
 ### def route_to(dst)     -> URI::Generic
@@ -439,7 +439,7 @@ p URI.parse('http://example.com/foo/bar.html') - 'http://example.com/'
 require 'uri'
 p URI.parse('http://example.com/').route_to('http://example.com/foo/bar.html')
   
-#=> #<URI::Generic:0x20100198 URL:foo/bar.html>
+# => #<URI::Generic:0x20100198 URL:foo/bar.html>
 ```
 
 ### def normalize     -> URI::Generic
@@ -450,8 +450,8 @@ URI オブジェクトを正規化して返します。ホスト名を小文字�
 ```ruby title="例"
 require 'uri'
 u = URI.parse('http://Example.Com')
-p u.to_s                            #=> "http://Example.Com"
-p u.normalize.to_s                  #=> "http://example.com/"
+p u.to_s                            # => "http://Example.Com"
+p u.normalize.to_s                  # => "http://example.com/"
 ```
 
 ### def to_s      -> String
@@ -460,7 +460,7 @@ p u.normalize.to_s                  #=> "http://example.com/"
 
 ```ruby title="例"
 require 'uri'
-p URI.parse('http://example.com/').to_s #=> "http://example.com/"
+p URI.parse('http://example.com/').to_s # => "http://example.com/"
 ```
 
 ### def ==(uri)    -> bool
@@ -473,7 +473,7 @@ p URI.parse('http://example.com/').to_s #=> "http://example.com/"
 require 'uri'
 u1 = URI.parse('http://example.com/?hoge')
 u2 = URI.parse('http://Example.Com/?hoge')
-p u1 == u2                                  #=> true
+p u1 == u2                                  # => true
 ```
 
 ### def select(*components)    -> [String]

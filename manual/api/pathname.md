@@ -78,7 +78,7 @@ Pathname.new(Dir.getwd) と同じです。
 ```ruby title="例"
 require "pathname"
 
-p Pathname.getwd #=> #<Pathname:/home/zzak/projects/ruby>
+p Pathname.getwd # => #<Pathname:/home/zzak/projects/ruby>
 ```
 
 - **SEE** [m:Dir.getwd]
@@ -316,10 +316,10 @@ self が相対パス指定であれば真を返します。
 require 'pathname'
 
 p = Pathname.new('/im/sure')
-p.relative? #=> false
+p.relative? # => false
 
 p = Pathname.new('not/so/sure')
-p.relative? #=> true
+p.relative? # => true
 ```
 
 ### def each_filename {|v| ... } -> nil
@@ -776,11 +776,11 @@ Pathname.new(File.basename(self.to_s, suffix)) と同じです。
 ```ruby title="例"
 require "pathname"
 
-p Pathname("ruby/ruby.c").basename        #=> #<Pathname:"ruby.c">
-p Pathname("ruby/ruby.c").basename(".c")  #=> #<Pathname:"ruby">
-p Pathname("ruby/ruby.c").basename(".*")  #=> #<Pathname:"ruby">
-p Pathname("ruby/ruby.exe").basename(".*")  #=> #<Pathname:"ruby">
-p Pathname("ruby/y.tab.c").basename(".*") #=> #<Pathname:"y.tab">
+p Pathname("ruby/ruby.c").basename        # => #<Pathname:"ruby.c">
+p Pathname("ruby/ruby.c").basename(".c")  # => #<Pathname:"ruby">
+p Pathname("ruby/ruby.c").basename(".*")  # => #<Pathname:"ruby">
+p Pathname("ruby/ruby.exe").basename(".*")  # => #<Pathname:"ruby">
+p Pathname("ruby/y.tab.c").basename(".*") # => #<Pathname:"y.tab">
 ```
 
 - **SEE** [m:File.basename]
@@ -835,7 +835,7 @@ path0 = Pathname("/usr")                # Pathname:/usr
 path0 = path0.join("bin/ruby")          # Pathname:/usr/bin/ruby
     # 上記の path0 の処理は下記の path1 と同様のパスになります
 path1 = Pathname("/usr") + "bin/ruby"   # Pathname:/usr/bin/ruby
-path0 == path1                          #=> true
+path0 == path1                          # => true
 ```
 
 ### def split -> Array
@@ -1270,7 +1270,7 @@ self を表現するパス文字列に対して sub メソッドを呼び出し�
 require 'pathname'
 
 path1 = Pathname('/usr/bin/perl')
-path1.sub('perl', 'ruby') #=> #<Pathname:/usr/bin/ruby>
+path1.sub('perl', 'ruby') # => #<Pathname:/usr/bin/ruby>
 ```
 
 - **SEE** [m:String#sub]

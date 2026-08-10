@@ -57,7 +57,7 @@ do_XXX メソッドには二つの引数があります。
 require "webrick/cgi"
 class MyCGI < WEBrick::CGI
   def do_GET(req, res)
-    p req.query             #=> Hash を返します。
+    p req.query             # => Hash を返します。
     req.query['q']          
     req.query['num']       
   end
@@ -71,7 +71,7 @@ MyCGI.new.start()
 require "webrick/cgi"
 class MyCGI < WEBrick::CGI
   def do_GET(req, res)
-    p req.query['q'].list   #=> フォームの値を保持した文字列の配列を返します。
+    p req.query['q'].list   # => フォームの値を保持した文字列の配列を返します。
   end
 end
 MyCGI.new.start()
@@ -85,11 +85,11 @@ query メソッドが返す Hash オブジェクトのキーと値のうち値�
 require "webrick/cgi"
 class MyCGI < WEBrick::CGI
   def do_GET(req, res)
-    d = req.query['field_name']   #=> FormData クラスのインスタンス
-    p d.name                      #=> "field_name"
-    p d.filename                  #=> もしあればファイル名を返す。
-    p d['content-type']           #=> ヘッダの値は [] メソッドで取得する
-    p d                           #=> 送られてきたファイルの中身
+    d = req.query['field_name']   # => FormData クラスのインスタンス
+    p d.name                      # => "field_name"
+    p d.filename                  # => もしあればファイル名を返す。
+    p d['content-type']           # => ヘッダの値は [] メソッドで取得する
+    p d                           # => 送られてきたファイルの中身
   end
 end
 MyCGI.new.start()
@@ -119,8 +119,8 @@ MyCGI.new.start()
 require "webrick/cgi"
 class MyCGI < WEBrick::CGI
   def do_GET(req, res)
-    p req.cookies                                 #=> WEBrick::Cookie オブジェクトの配列
-    c = req.cookies.find{|c| c.name == "name1" }  #=> WEBrick::Cookie オブジェクト
+    p req.cookies                                 # => WEBrick::Cookie オブジェクトの配列
+    c = req.cookies.find{|c| c.name == "name1" }  # => WEBrick::Cookie オブジェクト
   end
 end
 MyCGI.new.start()

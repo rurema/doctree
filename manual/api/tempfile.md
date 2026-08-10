@@ -53,9 +53,9 @@ new にブロックを指定した場合は無視されます。
 ```ruby title="例"
 require "tempfile"
 t = Tempfile.open(['hoge', 'bar'])
-p t.path                            #=> "/tmp/hoge20080518-6961-5fnk19-0bar"
+p t.path                            # => "/tmp/hoge20080518-6961-5fnk19-0bar"
 t2 = Tempfile.open(['t', '.xml'])
-p t2.path                           #=> "/tmp/t20080518-6961-xy2wvx-0.xml"
+p t2.path                           # => "/tmp/t20080518-6961-xy2wvx-0.xml"
 ```
 
 ```ruby title="例：ブロックを与えた場合"
@@ -67,7 +67,7 @@ tf = Tempfile.open("temp"){|fp|
 }
 # テンポラリファイルへのパスを表示
 p tf.path
-p File.read(tf.path) #=> "hoge\n"
+p File.read(tf.path) # => "hoge\n"
 ```
 
 - **SEE** [m:Tempfile.create]
@@ -115,9 +115,9 @@ GC.disable
 path = ""
 Tempfile.create("foo") do |f|
   path = f.path
-  p File.exist?(path) #=> true
+  p File.exist?(path) # => true
 end
-p File.exist?(path) #=> false
+p File.exist?(path) # => false
 ```
 
 ## Instance Methods

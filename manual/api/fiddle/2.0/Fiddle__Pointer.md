@@ -59,8 +59,8 @@ val が整数の場合はそれをアドレスとする Pointer オブジェク�
 ```ruby title="例"
 require 'fiddle'
 s = "abc"
-p Fiddle::Pointer[s].to_i                 #=> 136186388
-p [s].pack('p*').unpack('l!*')[0]  #=> 136186388
+p Fiddle::Pointer[s].to_i                 # => 136186388
+p [s].pack('p*').unpack('l!*')[0]  # => 136186388
 ```
 
 ## Instance Methods
@@ -78,9 +78,9 @@ require 'fiddle'
  
 s = 'abc'
 cptr = Fiddle::Pointer[s]
-p cptr[0,1]         #=> "a"
+p cptr[0,1]         # => "a"
 cptr += 1
-p cptr[0,1]         #=> "b"
+p cptr[0,1]         # => "b"
 ```
 
 ### def ptr   -> Fiddle::Pointer
@@ -99,9 +99,9 @@ require 'fiddle'
 s = 'abc'
 cptr = Fiddle::Pointer[s]
 cref = cptr.ref
-p cref.to_s(4).unpack('l*')[0]  #=> 136121648
-p cptr.to_i                     #=> 136121648
-p cref.ptr.to_s                 #=> "abc"
+p cref.to_s(4).unpack('l*')[0]  # => 136121648
+p cptr.to_i                     # => 136121648
+p cref.ptr.to_s                 # => "abc"
 ```
 
 ### def -(n)   -> Fiddle::Pointer
@@ -118,9 +118,9 @@ require 'fiddle'
 s = 'abc'
 cptr = Fiddle::Pointer[s]
 cptr += 1
-p cptr[0,1]         #=> "b"
+p cptr[0,1]         # => "b"
 cptr -= 1
-p cptr[0,1]         #=> "a"
+p cptr[0,1]         # => "a"
 ```
 
 ### def ref   -> Fiddle::Pointer
@@ -137,9 +137,9 @@ require 'fiddle'
 s = 'abc'
 cptr = Fiddle::Pointer[s]
 cref = cptr.ref
-p cref.to_s(4).unpack('l*')[0]  #=> 136121648
-p cptr.to_i                     #=> 136121648
-p cref.ptr.to_s                 #=> "abc"
+p cref.to_s(4).unpack('l*')[0]  # => 136121648
+p cptr.to_i                     # => 136121648
+p cref.ptr.to_s                 # => "abc"
 ```
 
 ### def <=>(other)    -> Integer
@@ -166,8 +166,8 @@ cptr  = Fiddle::Pointer[s]
 cptr0 = Fiddle::Pointer[s]
 cptr1 = cptr + 1
  
-p cptr == cptr1     #=> false
-p cptr == cptr0     #=> true
+p cptr == cptr1     # => false
+p cptr == cptr0     # => true
 ```
 
 ### def [](offset)            -> Integer
@@ -182,8 +182,8 @@ require 'fiddle'
  
 s = 'abc'
 cptr  = Fiddle::Pointer[s]
-p cptr[0]            #=> 97           
-p cptr[1]            #=> 98
+p cptr[0]            # => 97           
+p cptr[1]            # => 98
 ```
 
 ### def [](offset, len)       -> String
@@ -203,8 +203,8 @@ require 'fiddle'
  
 s = 'abc'
 cptr  = Fiddle::Pointer[s]
-p cptr[0, 1]            #=> "a"
-p cptr[1, 2]            #=> "bc"
+p cptr[0, 1]            # => "a"
+p cptr[1, 2]            # => "bc"
 ```
 
 ### def []=(offset, n)
@@ -220,7 +220,7 @@ require 'fiddle'
 s = 'abc'
 cptr  = Fiddle::Pointer[s]
 cptr[0] = 65
-p cptr.to_s         #=> "Bbc"
+p cptr.to_s         # => "Bbc"
 ```
 
 ### def []=(offset, len, v) 
@@ -244,7 +244,7 @@ require 'fiddle'
 s = 'abc'
 cptr  = Fiddle::Pointer[s]
 p cptr[1,2] = "AA"
-p cptr.to_s         #=> "aAA"
+p cptr.to_s         # => "aAA"
 ```
 
 ### def free     -> Fiddle::CFunc
@@ -314,6 +314,6 @@ require 'fiddle'
 s = 'abc'
 i = Fiddle.dlwrap(s)
 cptr = Fiddle::Pointer.new(i)
-p cptr.to_value   #=> "abc"
+p cptr.to_value   # => "abc"
 ```
 

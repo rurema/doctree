@@ -28,7 +28,7 @@ require 'open-uri'
 open("http://www.ruby-lang.org/") {|f|
   # ...
 }
-#=> warning: calling URI.open via Kernel#open is deprecated, call URI.open directly or use URI#open
+# => warning: calling URI.open via Kernel#open is deprecated, call URI.open directly or use URI#open
 ```
 
 - **param** `name` -- オープンしたいリソースを文字列で与えます。

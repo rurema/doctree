@@ -54,7 +54,7 @@ str = '<p><a href="http://example.com">example.com</a></p>'
 if %r[<a href="(.*?)">(.*?)</a>] =~ str
   p $& 
 end
-#=> "<a href=\"http://example.com\">example.com</a>"
+# => "<a href=\"http://example.com\">example.com</a>"
 ```
 
 ### gvar $~ -> MatchData | nil
@@ -75,7 +75,7 @@ str = '<p><a href="http://example.com">example.com</a></p>'
 if %r[<a href="(.*?)">(.*?)</a>] =~ str
   p $~[1]
 end
-#=> "http://example.com"
+# => "http://example.com"
 ```
 
 ### gvar $` -> String | nil
@@ -93,7 +93,7 @@ str = '<p><a href="http://example.com">example.com</a></p>'
 if %r[<a href="(.*?)">(.*?)</a>] =~ str
   p $`
 end
-#=> "<p>"
+# => "<p>"
 ```
 
 ### gvar $' -> String | nil
@@ -111,7 +111,7 @@ str = '<p><a href="http://example.com">example.com</a></p>'
 if %r[<a href="(.*?)">(.*?)</a>] =~ str
   p $'
 end
-#=> "</p>"
+# => "</p>"
 ```
 
 ### gvar $+ -> String | nil
@@ -151,8 +151,8 @@ if %r[<a href="(.*?)">(.*?)</a>] =~ str
   print $1
   print $2
 end
-#=> "http://example.com"
-#=> "example.com"
+# => "http://example.com"
+# => "example.com"
 ```
 
 ### gvar $? -> Process::Status | nil

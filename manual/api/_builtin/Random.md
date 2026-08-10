@@ -21,12 +21,12 @@ MT19937に基づく擬似乱数生成器を提供するクラスです。
 
 ```ruby title="例： 種が同じなら同じ乱数列を発生できる。"
 prng = Random.new(1234)
-p [ prng.rand, prng.rand ] #=> [0.1915194503788923, 0.6221087710398319]
-p [ prng.rand(10), prng.rand(1000) ]  #=> [4, 664]
+p [ prng.rand, prng.rand ] # => [0.1915194503788923, 0.6221087710398319]
+p [ prng.rand(10), prng.rand(1000) ]  # => [4, 664]
 # 同じ乱数列を発生する。
 prng = Random.new(1234)
-p [ prng.rand, prng.rand ] #=> [0.1915194503788923, 0.6221087710398319]
-p [ prng.rand(10), prng.rand(1000) ]  #=> [4, 664]
+p [ prng.rand, prng.rand ] # => [0.1915194503788923, 0.6221087710398319]
+p [ prng.rand(10), prng.rand(1000) ]  # => [4, 664]
 ```
 
 ### def Random.new_seed -> Integer
@@ -49,7 +49,7 @@ p Random.new_seed # => 184271600931914695177248627591520900872
 2017年の時点で、Linuxのmanpage([man:random(7)])には「今日256ビット以上のセキュリティを約束できる暗号化プリミティブが入手可能だとは期待できません」と書いてあります。そのため、sizeとして32より大きい値を指定することには疑問の余地があります。
 
 ```ruby title="例"
-p Random.urandom(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
+p Random.urandom(8)  # => "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
 ```
 
 ### def Random.rand -> Float
@@ -71,8 +71,8 @@ p Random.urandom(8)  #=> "\x78\x41\xBA\xAF\x7D\xEA\xD8\xEA"
 
 ```ruby title="例"
 srand 1234 # 乱数の種を設定する。
-p Random.rand(10.0)  #=> 1.9151945037889229  (0.0 以上 10.0 未満の実数)
-p rand(10.0)       #=> 6                   (rand(10) と同じ)
+p Random.rand(10.0)  # => 1.9151945037889229  (0.0 以上 10.0 未満の実数)
+p rand(10.0)       # => 6                   (rand(10) と同じ)
 ```
 
 #%since 3.2
@@ -227,8 +227,8 @@ prng = Random.new(1234)
 srand(1234)
 # Kernel.#rand は Array#sample などの影響を受けて値がずれることがある
 [0, 1].sample
-prng.rand            #=> 0.1915194503788923
-p rand               #=> 0.6221087710398319
+prng.rand            # => 0.1915194503788923
+p rand               # => 0.6221087710398319
 ```
 
 - **SEE** [m:Kernel?.rand]

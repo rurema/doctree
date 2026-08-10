@@ -61,7 +61,7 @@ p nil.nil? # => true
 空配列 [] を返します。
 
 ```ruby title="例"
-p nil.to_a #=> []
+p nil.to_a # => []
 ```
 
 ### def to_f -> Float
@@ -69,7 +69,7 @@ p nil.to_a #=> []
 0.0 を返します。
 
 ```ruby title="例"
-p nil.to_f #=> 0.0
+p nil.to_f # => 0.0
 ```
 
 ### def to_i -> Integer
@@ -77,7 +77,7 @@ p nil.to_f #=> 0.0
 0 を返します。
 
 ```ruby title="例"
-p nil.to_i #=> 0
+p nil.to_i # => 0
 ```
 
 ### def to_s -> String
@@ -124,7 +124,7 @@ p nil.rationalize(0.1) # => (0/1)
 {} を返します。
 
 ```ruby title="例"
-p nil.to_h #=> {}
+p nil.to_h # => {}
 ```
 
 ### def =~(other) -> nil
@@ -141,10 +141,10 @@ p nil.to_h #=> {}
 
 ```ruby title="例"
 obj = 'regexp'
-p(obj =~ /re/) #=> 0
+p(obj =~ /re/) # => 0
 
 obj = nil
-p(obj =~ /re/) #=> nil
+p(obj =~ /re/) # => nil
 ```
 
 - **SEE** [m:String#=~]

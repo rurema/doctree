@@ -124,10 +124,10 @@ IP のバージョンに依存しないプログラムを書くための標準�
 require 'socket'
 
 p Socket.getaddrinfo(Socket.gethostname, "ftp")
-#=> [["AF_INET", 21, "helium.ruby-lang.org", "210.251.121.214", 2, 1, 6]]
+# => [["AF_INET", 21, "helium.ruby-lang.org", "210.251.121.214", 2, 1, 6]]
   
 pp Socket.getaddrinfo(Socket.gethostname, nil)
-#=> [["AF_INET", 0, "helium.ruby-lang.org", "210.251.121.214", 2, 1, 6],
+# => [["AF_INET", 0, "helium.ruby-lang.org", "210.251.121.214", 2, 1, 6],
 #    ["AF_INET", 0, "helium.ruby-lang.org", "210.251.121.214", 2, 2, 17],
 #    ["AF_INET", 0, "helium.ruby-lang.org", "210.251.121.214", 2, 3, 0]]
 ```
@@ -195,10 +195,10 @@ Socket::NI_DGRAM
 require 'socket'
 
 p Socket.getnameinfo(Socket.sockaddr_in('21','127.0.0.1'))
-#=> ["localhost", "ftp"]
+# => ["localhost", "ftp"]
   
 p Socket.getnameinfo([nil, 21,'127.0.0.1'])
-#=> ["localhost", "ftp"]
+# => ["localhost", "ftp"]
 ```
 
 ### def Socket.gethostbyaddr(host, type = Socket::AF_INET) -> Array
@@ -265,7 +265,7 @@ irb(main):009:0> Socket.unpack_sockaddr_in(Socket.gethostbyname("210.251.121.214
 ```ruby title="例"
 require 'socket'
 
-p Socket.gethostname   #=> "helium.ruby-lang.org"
+p Socket.gethostname   # => "helium.ruby-lang.org"
 ```
 
 ### def Socket.getservbyname(service, proto = "tcp") -> Integer
@@ -366,9 +366,9 @@ p Socket.unpack_sockaddr_un(Socket.sockaddr_un("/tmp/.X11-unix/X0"))
 ```ruby
 require 'socket'
 
-p Socket.getservbyport(80)       #=> "www"
-p Socket.getservbyport(514, "tcp") #=> "shell"
-p Socket.getservbyport(514, "udp") #=> "syslog"
+p Socket.getservbyport(80)       # => "www"
+p Socket.getservbyport(514, "tcp") # => "shell"
+p Socket.getservbyport(514, "udp") # => "syslog"
 ```
 
 ### def Socket.accept_loop(sockets) {|sock, client_addrinfo| ...} -> ()
@@ -507,22 +507,22 @@ require 'socket'
 
 # tcp_server_sockets returns は2つのソケットを返す
 sockets = Socket.tcp_server_sockets(1296)
-p sockets #=> [#<Socket:fd 3>, #<Socket:fd 4>]
+p sockets # => [#<Socket:fd 3>, #<Socket:fd 4>]
   
 # それぞれは IPv4 と IPv6 のソケット
 sockets.each {|s| p s.local_address }
-#=> #<Addrinfo: [::]:1296 TCP>
+# => #<Addrinfo: [::]:1296 TCP>
 #   #<Addrinfo: 0.0.0.0:1296 TCP>
   
 # ポート番号を動的に選んでも IPv6 と IPv4 で同じポート番号を持つ
 sockets = Socket.tcp_server_sockets(0)
 sockets.each {|s| p s.local_address }
-#=> #<Addrinfo: [::]:53114 TCP>
+# => #<Addrinfo: [::]:53114 TCP>
 #   #<Addrinfo: 0.0.0.0:53114 TCP>
   
 # ブロックにソケットの配列が渡される
 Socket.tcp_server_sockets(0) {|sockets|
-  p sockets #=> [#<Socket:fd 3>, #<Socket:fd 4>]
+  p sockets # => [#<Socket:fd 3>, #<Socket:fd 4>]
 }
 ```
 
@@ -602,7 +602,7 @@ port が 0 の場合は、実際のポート番号は動的に選ばれます。
 require 'socket'
 
 Socket.udp_server_sockets(0) {|sockets|
-  p sockets.first.local_address.ip_port     #=> 32963
+  p sockets.first.local_address.ip_port     # => 32963
   Socket.udp_server_loop_on(sockets) {|msg, msg_src|
     msg_src.reply msg
   }
@@ -664,12 +664,12 @@ Unix サーバソケットを生成します。
 require 'socket'
 
 socket = Socket.unix_server_socket("/tmp/s")
-p socket                  #=> #<Socket:fd 3>
-p socket.local_address    #=> #<Addrinfo: /tmp/s SOCK_STREAM>
+p socket                  # => #<Socket:fd 3>
+p socket.local_address    # => #<Addrinfo: /tmp/s SOCK_STREAM>
   
 Socket.unix_server_socket("/tmp/sock") {|s|
-  p s                     #=> #<Socket:fd 3>
-  p s.local_address       #=> # #<Addrinfo: /tmp/sock SOCK_STREAM>
+  p s                     # => #<Socket:fd 3>
+  p s.local_address       # => # #<Addrinfo: /tmp/sock SOCK_STREAM>
 }
 ```
 
@@ -687,7 +687,7 @@ require 'socket'
 pp Socket.getifaddrs.reject {|ifaddr|
   !ifaddr.addr.ip? || (ifaddr.flags & Socket::IFF_MULTICAST == 0)
 }.map {|ifaddr| [ifaddr.name, ifaddr.ifindex, ifaddr.addr] }
-#=> [["eth0", 2, #<Addrinfo: 221.186.184.67>],
+# => [["eth0", 2, #<Addrinfo: 221.186.184.67>],
 #    ["eth0", 2, #<Addrinfo: fe80::216:3eff:fe95:88bb%eth0>]]
 ```
 
@@ -695,7 +695,7 @@ pp Socket.getifaddrs.reject {|ifaddr|
 require 'socket'
 
 pp Socket.getifaddrs
-#=> [#<Socket::Ifaddr lo UP,LOOPBACK,RUNNING,0x10000 PACKET[protocol=0 lo hatype=772 HOST hwaddr=00:00:00:00:00:00]>,
+# => [#<Socket::Ifaddr lo UP,LOOPBACK,RUNNING,0x10000 PACKET[protocol=0 lo hatype=772 HOST hwaddr=00:00:00:00:00:00]>,
 #    #<Socket::Ifaddr eth0 UP,BROADCAST,RUNNING,MULTICAST,0x10000 PACKET[protocol=0 eth0 hatype=1 HOST hwaddr=00:16:3e:95:88:bb] broadcast=PACKET[protocol=0 eth0 hatype=1 HOST hwaddr=ff:ff:ff:ff:ff:ff]>,
 #    #<Socket::Ifaddr sit0 NOARP PACKET[protocol=0 sit0 hatype=776 HOST hwaddr=00:00:00:00]>,
 #    #<Socket::Ifaddr lo UP,LOOPBACK,RUNNING,0x10000 127.0.0.1 netmask=255.0.0.0>,
@@ -708,7 +708,7 @@ pp Socket.getifaddrs
 require 'socket'
 
 pp Socket.getifaddrs
-#=> [#<Socket::Ifaddr usbus0 UP,0x10000 LINK[usbus0]>,
+# => [#<Socket::Ifaddr usbus0 UP,0x10000 LINK[usbus0]>,
 #    #<Socket::Ifaddr re0 UP,BROADCAST,RUNNING,MULTICAST,0x800 LINK[re0 3a:d0:40:9a:fe:e8]>,
 #    #<Socket::Ifaddr re0 UP,BROADCAST,RUNNING,MULTICAST,0x800 10.250.10.18 netmask=255.255.255.? (7 bytes for 16 bytes sockaddr_in) broadcast=10.250.10.255>,
 #    #<Socket::Ifaddr re0 UP,BROADCAST,RUNNING,MULTICAST,0x800 fe80:2::38d0:40ff:fe9a:fee8 netmask=ffff:ffff:ffff:ffff::>,
@@ -849,9 +849,9 @@ s2 = Socket.new(Socket::AF_INET, Socket::SOCK_DGRAM, 0)
 s1.bind(Socket.sockaddr_in(0, "0.0.0.0"))
 s2.send("foo", 0, s1.getsockname)
 mesg, sockaddr = s1.recvfrom(10)
-p mesg                                    #=> "foo"
-p sockaddr                                #=> "\002\000\200r\177\000\000\001\000\000\000\000\000\000\000\000"
-p Socket.unpack_sockaddr_in(sockaddr)     #=> [32882, "127.0.0.1"]
+p mesg                                    # => "foo"
+p sockaddr                                # => "\002\000\200r\177\000\000\001\000\000\000\000\000\000\000\000"
+p Socket.unpack_sockaddr_in(sockaddr)     # => [32882, "127.0.0.1"]
 ```
 
 ### def recvfrom_nonblock(maxlen, flags=0) -> [String, Addrinfo]

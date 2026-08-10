@@ -26,12 +26,12 @@ Ruby 2.7 以前は SortedSet が定義されていました)。
 ```ruby
 require 'set'
 p [30, 10, 20].to_set
-#=> #<Set: {30, 10, 20}>
+# => #<Set: {30, 10, 20}>
 MySet = Class.new(Set)
 p [30, 10, 20].to_set(MySet)
-#=> #<MySet: {10, 20, 30}>
+# => #<MySet: {10, 20, 30}>
 p [30, 10, 20].to_set {|num| num / 10}
-#=> #<Set: {3, 1, 2}>
+# => #<Set: {3, 1, 2}>
 ```
 
 - **SEE** [m:Set.new]

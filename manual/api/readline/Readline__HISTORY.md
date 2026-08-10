@@ -16,7 +16,7 @@ Readline::HISTORY を使用してヒストリにアクセスできます。
 
 ```ruby title="例"
 require 'readline'
-p Readline::HISTORY.to_s #=> "HISTORY"
+p Readline::HISTORY.to_s # => "HISTORY"
 ```
 
 ### def Readline::HISTORY.[](index) -> String
@@ -36,10 +36,10 @@ p Readline::HISTORY.to_s #=> "HISTORY"
 ```ruby title="例"
 require "readline"
 
-p Readline::HISTORY[0] #=> 最初の入力内容
-p Readline::HISTORY[4] #=> 5番目の入力内容
-p Readline::HISTORY[-1] #=> 最後の入力内容
-p Readline::HISTORY[-5] #=> 最後から5番目の入力内容
+p Readline::HISTORY[0] # => 最初の入力内容
+p Readline::HISTORY[4] # => 5番目の入力内容
+p Readline::HISTORY[-1] # => 最後の入力内容
+p Readline::HISTORY[-5] # => 最後から5番目の入力内容
 ```
 
 例: 1000000 番目の入力内容が存在しない場合、例外 IndexError が発生します。
@@ -97,7 +97,7 @@ self を返します。
 require "readline"
 
 Readline::HISTORY << "foo"
-p Readline::HISTORY[-1] #=> "foo"
+p Readline::HISTORY[-1] # => "foo"
 ```
 
 例: "foo"、"bar"を追加する。
@@ -106,8 +106,8 @@ p Readline::HISTORY[-1] #=> "foo"
 require "readline"
 
 Readline::HISTORY << "foo" << "bar"
-p Readline::HISTORY[-1] #=> "bar"
-p Readline::HISTORY[-2] #=> "foo"
+p Readline::HISTORY[-1] # => "bar"
+p Readline::HISTORY[-2] # => "foo"
 ```
 
 - **SEE** [m:Readline::HISTORY.push]
@@ -125,7 +125,7 @@ self を返します。
 require "readline"
 
 Readline::HISTORY.push("foo")
-p Readline::HISTORY[-1] #=> "foo"
+p Readline::HISTORY[-1] # => "foo"
 ```
 
 例: "foo"、"bar"を追加する。
@@ -134,8 +134,8 @@ p Readline::HISTORY[-1] #=> "foo"
 require "readline"
 
 Readline::HISTORY.push("foo", "bar")
-p Readline::HISTORY[-1] #=> "bar"
-p Readline::HISTORY[-2] #=> "foo"
+p Readline::HISTORY[-1] # => "bar"
+p Readline::HISTORY[-2] # => "foo"
 ```
 
 - **SEE** [m:Readline::HISTORY.<<]
@@ -151,9 +151,9 @@ p Readline::HISTORY[-2] #=> "foo"
 require "readline"
   
 Readline::HISTORY.push("foo", "bar", "baz")
-p Readline::HISTORY.pop #=> "baz"
-p Readline::HISTORY.pop #=> "bar"
-p Readline::HISTORY.pop #=> "foo"
+p Readline::HISTORY.pop # => "baz"
+p Readline::HISTORY.pop # => "bar"
+p Readline::HISTORY.pop # => "foo"
 ```
 
 - **SEE** [m:Readline::HISTORY.push]、[m:Readline::HISTORY.shift]、
@@ -170,9 +170,9 @@ p Readline::HISTORY.pop #=> "foo"
 require "readline"
   
 Readline::HISTORY.push("foo", "bar", "baz")
-p Readline::HISTORY.shift #=> "foo"
-p Readline::HISTORY.shift #=> "bar"
-p Readline::HISTORY.shift #=> "baz"
+p Readline::HISTORY.shift # => "foo"
+p Readline::HISTORY.shift # => "bar"
+p Readline::HISTORY.shift # => "baz"
 ```
 
 - **SEE** [m:Readline::HISTORY.push]、[m:Readline::HISTORY.pop]、
@@ -189,7 +189,7 @@ require "readline"
   
 Readline::HISTORY.push("foo", "bar", "baz")
 Readline::HISTORY.each do |s|
-  p s #=> "foo", "bar", "baz"
+  p s # => "foo", "bar", "baz"
 end
 ```
 
@@ -201,7 +201,7 @@ require "readline"
 Readline::HISTORY.push("foo", "bar", "baz")
 e = Readline::HISTORY.each
 e.each do |s|
-  p s #=> "foo", "bar", "baz"
+  p s # => "foo", "bar", "baz"
 end
 ```
 
@@ -214,7 +214,7 @@ end
 require "readline"
   
 Readline::HISTORY.push("foo", "bar", "baz")
-p Readline::HISTORY.length #=> 3
+p Readline::HISTORY.length # => 3
 ```
 
 - **SEE** [m:Readline::HISTORY.empty?]
@@ -226,9 +226,9 @@ p Readline::HISTORY.length #=> 3
 ```ruby title="例"
 require "readline"
   
-p Readline::HISTORY.empty? #=> true
+p Readline::HISTORY.empty? # => true
 Readline::HISTORY.push("foo", "bar", "baz")
-p Readline::HISTORY.empty? #=> false
+p Readline::HISTORY.empty? # => false
 ```
 
 - **SEE** [m:Readline::HISTORY.length]
@@ -251,7 +251,7 @@ require "readline"
   
 Readline::HISTORY.push("foo", "bar", "baz")
 Readline::HISTORY.delete_at(1)
-p Readline::HISTORY.to_a #=> ["foo", "baz"]
+p Readline::HISTORY.to_a # => ["foo", "baz"]
 ```
 
 ### def Readline::HISTORY.clear -> self

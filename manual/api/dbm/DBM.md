@@ -168,16 +168,16 @@ db2 = DBM.open('bbb.db', 0666, DBM::NEWDB)
 db2[:bb] = 'bbb'
 db2[:cc] = 'ccc'
   
-p db1.keys #=> ['b', 'a']
+p db1.keys # => ['b', 'a']
   
 db1.replace(db2)
   
-p db1.keys #=> ['bb', 'cc']
-p db2.keys #=> ['bb', 'cc']
+p db1.keys # => ['bb', 'cc']
+p db2.keys # => ['bb', 'cc']
   
 hash = {'x' => 'xxx', 'y' => 'yyy' }
-p db1               #=> #<DBM:0xb7c7eb08>
-p db1.replace(hash) #=> #<DBM:0xb7c7eb08>
+p db1               # => #<DBM:0xb7c7eb08>
+p db1.replace(hash) # => #<DBM:0xb7c7eb08>
 ```
 
 ### def fetch(key, ifnone = nil) -> String
@@ -195,10 +195,10 @@ require 'dbm'
 db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
 db1[:a] = 'aaa'
 db1[:b] = 'bbbbbb'
-p db1.fetch('a')                     #=> 'aaa'
-p db1.fetch('z', 'zzz')              #=> 'zzz'
-p db1.fetch('z'){|key| [:key, key] } #=> [:key, 'z']
-p db1.fetch('z')                     #=> IndexError 発生
+p db1.fetch('a')                     # => 'aaa'
+p db1.fetch('z', 'zzz')              # => 'zzz'
+p db1.fetch('z'){|key| [:key, key] } # => [:key, 'z']
+p db1.fetch('z')                     # => IndexError 発生
 ```
 
 - **SEE** [m:Hash#fetch]
@@ -216,7 +216,7 @@ key に対して value を格納します。
 require 'dbm'
   
 db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
-p db1.store('c', 'ccc') #=> "ccc"
+p db1.store('c', 'ccc') # => "ccc"
 ```
 
 ### def select{|key, value| ... } -> [Array]
@@ -230,7 +230,7 @@ db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
 db1[:a] = 'aaa'
 db1[:b] = 'bbbbbb'
   
-p db1.select {|key, value| key == 'a' } #=> [["a", "aaa"]]
+p db1.select {|key, value| key == 'a' } # => [["a", "aaa"]]
 ```
 
 ### def values_at(*keys) -> [String]
@@ -246,7 +246,7 @@ db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
 db1[:a] = 'aaa'
 db1[:b] = 'bbbbbb'
   
-p db1.values_at('a', 'b') #=> ["aaa", "bbbbbb"]
+p db1.values_at('a', 'b') # => ["aaa", "bbbbbb"]
 ```
 
 ### def invert -> Hash
@@ -259,7 +259,7 @@ require 'dbm'
 db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
 db1[:a] = 'aaa'
 db1[:b] = 'bbbbbb'
-p db1.invert  #=> {"bbbbbb" => "b", "aaa" => "a"}
+p db1.invert  # => {"bbbbbb" => "b", "aaa" => "a"}
 ```
 
 ### def update(other){|key, value| ... } -> self
@@ -281,7 +281,7 @@ db2[:bb] = 'bbb'
 db2[:cc] = 'ccc'
   
 db1.update(db2)
-p db1.keys #=> ["bb", "cc", "b", "a"]
+p db1.keys # => ["bb", "cc", "b", "a"]
 ```
 
 ### def to_a -> [Array]
@@ -295,7 +295,7 @@ db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
 db1[:a] = 'aaa'
 db1[:b] = 'bbbbbb'
 
-p db1.to_a #=> [["b", "bbbbbb"], ["a", "aaa"]]
+p db1.to_a # => [["b", "bbbbbb"], ["a", "aaa"]]
 ```
 
 ### def to_hash -> Hash
@@ -308,7 +308,7 @@ require 'dbm'
 db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
 db1[:a] = 'aaa'
 db1[:b] = 'bbbbbb'
-p db1.to_hash #=> {"a"=>"aaa", "b"=>"bbbbbb"}
+p db1.to_hash # => {"a"=>"aaa", "b"=>"bbbbbb"}
 ```
 
 ### def index(value) -> String | nil

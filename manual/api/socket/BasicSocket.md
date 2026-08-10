@@ -96,9 +96,9 @@ serv = TCPServer.open("", 0)
 c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
 s = serv.accept
 addr = c.getpeername
-p addr      #=> "\002\000\267\214\177\000\000\001\000\000\000\000\000\000\000\000"
-p Socket.unpack_sockaddr_in(addr)   #=> [46988, "127.0.0.1"]
-p addr == s.getsockname     #=> true
+p addr      # => "\002\000\267\214\177\000\000\001\000\000\000\000\000\000\000\000"
+p Socket.unpack_sockaddr_in(addr)   # => [46988, "127.0.0.1"]
+p addr == s.getsockname     # => true
 ```
 
 ### def getsockname -> String
@@ -109,8 +109,8 @@ p addr == s.getsockname     #=> true
 require 'socket'
 
 serv = TCPServer.open("", 0)
-p serv.getsockname        #=> "\002\000\236C\000\000\000\000\000\000\000\000\000\000\000\000"
-p Socket.unpack_sockaddr_in(serv.getsockname)     #=> [40515, "0.0.0.0"]
+p serv.getsockname        # => "\002\000\236C\000\000\000\000\000\000\000\000\000\000\000\000"
+p Socket.unpack_sockaddr_in(serv.getsockname)     # => [40515, "0.0.0.0"]
 c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
 s = serv.accept
 ```
@@ -136,11 +136,11 @@ c = serv.local_address.connect
 s = serv.accept
 opt = c.getsockopt(Socket::IPPROTO_TCP, Socket::TCP_NODELAY)
 # c.getsockopt("TCP", "NODELAY"),  なども可能
-p opt #=> #<Socket::Option: INET TCP NODELAY 0>
-p opt.bool #=> false (Nagle アルゴリズム有効)
-p opt.unpack("i")[0] #=> 0 (Socket::Option#unpack が互換性のために存在する)
+p opt # => #<Socket::Option: INET TCP NODELAY 0>
+p opt.bool # => false (Nagle アルゴリズム有効)
+p opt.unpack("i")[0] # => 0 (Socket::Option#unpack が互換性のために存在する)
 # 整数値の場合は Socket::Option#int を用いる
-p c.getsockopt(:IP, :TTL).int #=> 64
+p c.getsockopt(:IP, :TTL).int # => 64
 ```
 
 #%since 3.3
@@ -325,10 +325,10 @@ BasicSocket#local_address が接続先として不適なアドレスを返す場
 require 'socket'
 
 Addrinfo.tcp("0.0.0.0", 0).listen {|serv|
-  p serv.connect_address #=> #<Addrinfo: 127.0.0.1:53660 TCP>
+  p serv.connect_address # => #<Addrinfo: 127.0.0.1:53660 TCP>
   serv.connect_address.connect {|c|
     s, _ = serv.accept
-    p [c, s] #=> [#<Socket:fd 4>, #<Socket:fd 6>]
+    p [c, s] # => [#<Socket:fd 4>, #<Socket:fd 6>]
   }
 }
 ```
@@ -372,11 +372,11 @@ Socket.unix_server_loop("/tmp/sock") {|s|
 require 'socket'
 
 TCPSocket.open("www.ruby-lang.org", 80) {|s|
-  p s.local_address #=> #<Addrinfo: 192.168.0.129:36873 TCP>
+  p s.local_address # => #<Addrinfo: 192.168.0.129:36873 TCP>
 }
   
 TCPServer.open("127.0.0.1", 1512) {|serv|
-  p serv.local_address #=> #<Addrinfo: 127.0.0.1:1512 TCP>
+  p serv.local_address # => #<Addrinfo: 127.0.0.1:1512 TCP>
 }
 ```
 
@@ -471,13 +471,13 @@ controls.each {|ancdata|
 require 'socket'
 
 TCPSocket.open("www.ruby-lang.org", 80) {|s|
-  p s.remote_address #=> #<Addrinfo: 221.186.184.68:80 TCP>
+  p s.remote_address # => #<Addrinfo: 221.186.184.68:80 TCP>
 }
   
 TCPServer.open("127.0.0.1", 1728) {|serv|
   c = TCPSocket.new("127.0.0.1", 1728)
   s = serv.accept
-  p s.remote_address #=> #<Addrinfo: 127.0.0.1:36504 TCP>
+  p s.remote_address # => #<Addrinfo: 127.0.0.1:36504 TCP>
 }
 ```
 

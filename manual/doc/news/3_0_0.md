@@ -51,10 +51,10 @@
 
 ```ruby
 # version 3.0
-0 in 1 #=> false
+0 in 1 # => false
 
 # version 2.7
-0 in 1 #=> raise NoMatchingPatternError
+0 in 1 # => raise NoMatchingPatternError
 ```
 
   - Find パターンが実験的に導入されています。 [EXPERIMENTAL]
@@ -183,7 +183,7 @@
       module M2; end
       C.include M1
       M1.include M2
-      p C.ancestors #=> [C, M1, M2, Object, Kernel, BasicObject]
+      p C.ancestors # => [C, M1, M2, Object, Kernel, BasicObject]
       ```
 
   - Mutex
@@ -321,7 +321,7 @@
   - 正規表現リテラルとすべての Range オブジェクトは freeze されるようになりました。[feature:8948] [feature:16377] [feature:15504]
 
     ```ruby
-    p /foo/.frozen? #=> true
+    p /foo/.frozen? # => true
     p (42...).frozen? # => true
     ```
 

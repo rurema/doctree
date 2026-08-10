@@ -117,7 +117,7 @@ end
 h = {:a => 'a'*5, :b => 'b'*10, :c => 'c'*20, :d => 'd'*30}
 pp h
 
-#=>
+# =>
 # <hash>
 #   :d => "dddddddddd...",
 #   :a => "aaaaa",
@@ -171,10 +171,10 @@ puts str
 b = [1, 2, 3]
 a = [b, b]
 
-pp a                        #=> [[1, 2, 3], [1, 2, 3]]
+pp a                        # => [[1, 2, 3], [1, 2, 3]]
 
 PP.sharing_detection = true
-pp a                        #=> [[1, 2, 3], [...]]
+pp a                        # => [[1, 2, 3], [...]]
 ```
 
 ### def PP.singleline_pp(obj, out=$>)    -> object

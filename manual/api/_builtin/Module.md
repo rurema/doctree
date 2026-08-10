@@ -87,7 +87,7 @@ end
 using A
 using B
 p Module.used_modules
-#=> [B, A]
+# => [B, A]
 ```
 
 #%since 3.2
@@ -112,7 +112,7 @@ end
 using A
 using B
 p Module.used_refinements
-#=> [#<refinement:Object@B>, #<refinement:Object@A>]
+# => [#<refinement:Object@B>, #<refinement:Object@A>]
 ```
 
 - **SEE** [m:Module.used_modules], [m:Module#refinements]
@@ -760,8 +760,8 @@ module Outer
   include Mixin
 end
 
-p Mixin.included_modules #=> []
-p Outer.included_modules #=> [Mixin]
+p Mixin.included_modules # => []
+p Outer.included_modules # => [Mixin]
 ```
 
 - **SEE** [m:Module#ancestors]
@@ -825,15 +825,15 @@ class C < B
   def method3()  end
 end
 
-p A.method_defined? :method1            #=> true
-p C.method_defined? "method1"           #=> true
-p C.method_defined? "method2"           #=> true
-p C.method_defined? "method2", true     #=> true
-p C.method_defined? "method2", false    #=> false
-p C.method_defined? "method3"           #=> true
-p C.method_defined? "protected_method1" #=> true
-p C.method_defined? "method4"           #=> false
-p C.method_defined? "private_method2"   #=> false
+p A.method_defined? :method1            # => true
+p C.method_defined? "method1"           # => true
+p C.method_defined? "method2"           # => true
+p C.method_defined? "method2", true     # => true
+p C.method_defined? "method2", false    # => false
+p C.method_defined? "method3"           # => true
+p C.method_defined? "protected_method1" # => true
+p C.method_defined? "method4"           # => false
+p C.method_defined? "private_method2"   # => false
 ```
 
 ### def module_eval(expr, fname = "(eval)", lineno = 1) -> object
@@ -870,7 +870,7 @@ C.class_eval %Q{
   end
 }
 
-p C.new.m        #=> [:m, 1]
+p C.new.m        # => [:m, 1]
 ```
 
 ```ruby title="定数のスコープが異なる例"
@@ -888,8 +888,8 @@ C.class_eval { X = 1 }
 # と書いたのと同じ意味になる。
 C.class_eval 'X = 2'
 
-p X    #=> 1
-p C::X #=> 2
+p X    # => 1
+p C::X # => 2
 ```
 
 - **SEE** [m:BasicObject#instance_eval], [m:Module.new], [m:Kernel?.eval]
@@ -922,8 +922,8 @@ Thing.class_exec{
 }
 
 t = Thing.new
-p t.hello()            #=> "Hello there!"
-p t.foo()              #=> 1
+p t.hello()            # => "Hello there!"
+p t.foo()              # => 1
 ```
 
 - **SEE** [m:Module#module_eval], [m:Module#class_eval]
@@ -951,30 +951,30 @@ module A
   module B
   end
 
-  p B.name  #=> "A::B"
+  p B.name  # => "A::B"
 
   class C
   end
 end
 
-p A.name    #=> "A"
-p A::B.name #=> "A::B"
-p A::C.name #=> "A::C"
+p A.name    # => "A"
+p A::B.name # => "A::B"
+p A::C.name # => "A::C"
 
 # 名前のないモジュール / クラス
-p Module.new.name   #=> nil
-p Class.new.name    #=> nil
-p Module.new.to_s   #=> "#<Module:0x00007f90b09112c8>"
-p Class.new.to_s    #=> "#<Class:0x00007fa5c40b41b0>"
+p Module.new.name   # => nil
+p Class.new.name    # => nil
+p Module.new.to_s   # => "#<Module:0x00007f90b09112c8>"
+p Class.new.to_s    # => "#<Class:0x00007fa5c40b41b0>"
 
 # 名前は最初に代入された定数で確定し、以後は変わらない
 c = Class.new
-p c.name         #=> nil
+p c.name         # => nil
 Foo = c
-p c.name         #=> "Foo"
+p c.name         # => "Foo"
 Bar = c
-p c.name         #=> "Foo"
-p c.name.frozen? #=> true
+p c.name         # => "Foo"
+p c.name.frozen? # => true
 ```
 
 #%since 3.3
@@ -1125,7 +1125,7 @@ module A
 end
 
 p A.refinements
-#=> [#<refinement:Integer@A>, #<refinement:String@A>]
+# => [#<refinement:Integer@A>, #<refinement:String@A>]
 ```
 
 - **SEE** [m:Module#refine], [m:Module.used_refinements]
@@ -1341,12 +1341,12 @@ class C < B
   def method3()  end
 end
 
-p A.method_defined? :method1                 #=> true
-p C.private_method_defined? "method1"        #=> false
-p C.private_method_defined? "method2"        #=> true
-p C.private_method_defined? "method2", true  #=> true
-p C.private_method_defined? "method2", false #=> false
-p C.method_defined? "method2"                #=> false
+p A.method_defined? :method1                 # => true
+p C.private_method_defined? "method1"        # => false
+p C.private_method_defined? "method2"        # => true
+p C.private_method_defined? "method2", true  # => true
+p C.private_method_defined? "method2", false # => false
+p C.method_defined? "method2"                # => false
 ```
 
 ### def protected_method_defined?(name, inherit=true) -> bool
@@ -1373,12 +1373,12 @@ class C < B
   def method3()  end
 end
 
-p A.method_defined? :method1                  #=> true
-p C.protected_method_defined? "method1"       #=> false
-p C.protected_method_defined? "method2"       #=> true
-p C.protected_method_defined? "method2", true #=> true
-p C.protected_method_defined? "method2", false  #=> false
-p C.method_defined? "method2"                 #=> true
+p A.method_defined? :method1                  # => true
+p C.protected_method_defined? "method1"       # => false
+p C.protected_method_defined? "method2"       # => true
+p C.protected_method_defined? "method2", true # => true
+p C.protected_method_defined? "method2", false  # => false
+p C.method_defined? "method2"                 # => true
 ```
 
 ### def public_method_defined?(name, inherit=true) -> bool
@@ -1405,12 +1405,12 @@ class C < B
   def method3()  end
 end
 
-p A.method_defined? :method1               #=> true
-p C.public_method_defined? "method1"       #=> true
-p C.public_method_defined? "method1", true #=> true
-p C.public_method_defined? "method1", false  #=> true
-p C.public_method_defined? "method2"       #=> false
-p C.method_defined? "method2"              #=> true
+p A.method_defined? :method1               # => true
+p C.public_method_defined? "method1"       # => true
+p C.public_method_defined? "method1", true # => true
+p C.public_method_defined? "method1", false  # => true
+p C.public_method_defined? "method2"       # => false
+p C.method_defined? "method2"              # => true
 ```
 
 ### def class_variable_defined?(name) -> bool
@@ -1424,10 +1424,10 @@ name で与えられた名前のクラス変数がモジュールに存在する
 class Fred
   @@foo = 99
 end
-p Fred.class_variable_defined?(:@@foo)  #=> true
-p Fred.class_variable_defined?(:@@bar)  #=> false
-p Fred.class_variable_defined?('@@foo')  #=> true
-p Fred.class_variable_defined?('@@bar')  #=> false
+p Fred.class_variable_defined?(:@@foo)  # => true
+p Fred.class_variable_defined?(:@@bar)  # => false
+p Fred.class_variable_defined?('@@foo')  # => true
+p Fred.class_variable_defined?('@@bar')  # => false
 ```
 
 ### def class_variable_get(name) -> object
@@ -1447,7 +1447,7 @@ def Fred.foo
   class_variable_get(:@@foo)
 end
 
-p Fred.foo #=> 99
+p Fred.foo # => 99
 ```
 
 ### def class_variable_set(name, val) -> object

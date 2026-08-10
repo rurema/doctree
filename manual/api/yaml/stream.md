@@ -44,12 +44,12 @@ begin
   ys[0] = Dog.new("kuro")
 rescue
   p $!
-  #=> #<NoMethodError: undefined method `[]=' for #<YAML::Stream:0x2b07d48 @documents=[], @options={}>>
+  # => #<NoMethodError: undefined method `[]=' for #<YAML::Stream:0x2b07d48 @documents=[], @options={}>>
 end
   
 ys.add Dog.new("pochi")
 p ys[0]
-#=> #<Dog:0x2b07b04 @name="pochi">
+# => #<Dog:0x2b07b04 @name="pochi">
 ```
 
 ### def add(doc) -> ()
@@ -75,10 +75,10 @@ EOT
   
 ys = YAML.load_stream(str1)
 p ys.documents
-#=> [#<YAML::DomainType:0x2b07af0 @value={"name"=>"pochi"}, @type_id="Dog", @domain="ruby.yaml.org,2002">]
+# => [#<YAML::DomainType:0x2b07af0 @value={"name"=>"pochi"}, @type_id="Dog", @domain="ruby.yaml.org,2002">]
 ys.add(Dog.new("tama"))
 p ys.documents
-#=> [#<YAML::DomainType:0x2b07af0 @value={"name"=>"pochi"}, @type_id="Dog", @domain="ruby.yaml.org,2002">, #<Dog:0x2b079b0 @name="tama">]
+# => [#<YAML::DomainType:0x2b07af0 @value={"name"=>"pochi"}, @type_id="Dog", @domain="ruby.yaml.org,2002">, #<Dog:0x2b079b0 @name="tama">]
 ```
 
 ### def edit(doc_num, doc) -> ()
@@ -104,7 +104,7 @@ ys.add(Dog.new("tama"))
 ys.edit(1, Dog.new("pochi"))
 ys.edit(5, Dog.new("jack"))
 p ys.documents
-#=> [#<Dog:0x2b07c44 @name="tama">, #<Dog:0x2b07c1c @name="pochi">, nil, nil, nil, #<Dog:0x2b07bf4 @name="jack">]
+# => [#<Dog:0x2b07c44 @name="tama">, #<Dog:0x2b07c1c @name="pochi">, nil, nil, nil, #<Dog:0x2b07bf4 @name="jack">]
 ```
 
 ### def emit(io = nil) -> IO | String
@@ -160,11 +160,11 @@ EOT
   
 ys = YAML.load_stream(str1)
 p ys.documents.pop
-#=> {:age=>17, :color=>"white"}
+# => {:age=>17, :color=>"white"}
 p ys.documents.pop
-#=> #<YAML::DomainType:0x2b07e24 @type_id="Dog", @domain="ruby.yaml.org,2002", @value={"name"=>"pochi"}>
+# => #<YAML::DomainType:0x2b07e24 @type_id="Dog", @domain="ruby.yaml.org,2002", @value={"name"=>"pochi"}>
 p ys.documents.pop
-#=> nil
+# => nil
 ```
 
 ### def documents=(val)
