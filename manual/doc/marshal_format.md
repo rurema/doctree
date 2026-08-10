@@ -51,7 +51,7 @@ p Marshal.dump(2).unpack1("x2 a*")  # => "i\a"   ("i\x07")
 byte            bytes
 ```
 
-len の値は -4 〜 -1, 1 〜 4 で。符号と後続のデータが n1 〜 n_len
+len の値は -4 〜 -1, 1 〜 4 で、符号と後続のデータが n_1 〜 n_len
 まであることを示します。
 
 ```ruby

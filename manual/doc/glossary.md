@@ -1236,7 +1236,7 @@
   また、クラスに include されているモジュールもまた、データを特徴
   づけるものであり、データ型を表していると考えることができる。
   たとえば Float、Integer、[c:Rational] のような数値クラスや
-  String、[c:Time] といった クラスには [c:Comparable] モジュール
+  String、[c:Time] といったクラスには [c:Comparable] モジュール
   が include されており、大小比較に基づくさまざまなメソッドが使える。
   これらのクラスのインスタンスを Comparable 型であると言っても差し支え
   ないだろう。
@@ -1584,8 +1584,8 @@
 
   スクリプトエンコーディングを示すもの（encoding）、
   文字列リテラルを凍結するかどうかを指定するもの（frozen_string_literal）、
-  インデント不整合の警告を出すかどうかを指定するもの（warn_indent）
-  、定数を Ractor で共有可能にするもの（shareable_constant_value）などがある。
+  インデント不整合の警告を出すかどうかを指定するもの（warn_indent）、
+  定数を Ractor で共有可能にするもの（shareable_constant_value）などがある。
 
   参照：[ref:d:spec/comment#magic_comment]
 

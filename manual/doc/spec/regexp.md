@@ -517,7 +517,7 @@ p /\A(?<a>|.|(?:(?<b>.)\g<a>\k<b+0>))\z/.match("rekxker")
 # => #<MatchData "rekxker" a:"rekxker" b:"k">
 ```
 
-以下の例では、開始タグと終了タグを対応付ける正規表現です。
+以下の例は、開始タグと終了タグを対応付ける正規表現です。
 
 ```ruby
 r = Regexp.compile(<<'__REGEXP__'.strip, Regexp::EXTENDED)
