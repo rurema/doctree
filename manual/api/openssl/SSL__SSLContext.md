@@ -278,7 +278,7 @@ ctx.client_cert_cb = proc{|sslsocket|
 
 [m:OpenSSL::SSL::SSLContext#cert=] で設定された自分自身を証明するための証明書の公開鍵に対応する秘密鍵を設定します。
 
-デフォルトな nil です。
+デフォルトは nil です。
 
 - **param** `key` -- 設定する秘密鍵([c:OpenSSL::PKey::PKey] のサブクラスのインスタンス)
 - **SEE** [m:OpenSSL::SSL::SSLContext#key]

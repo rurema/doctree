@@ -43,7 +43,7 @@ Ruby 2.1ではRGenGCと呼ばれる新たなGCメカニズムが導入されま�
    数の上限を決めるための係数。
    RubyのフルGCは oldobject の個数が閾値 old_objects_limit
    を越えるごとに実行される。old_objects_limit はフルGCの直後に変更される。
-   その値はフルGC直後のの oldobject の個数 (
+   その値はフルGC直後の oldobject の個数 (
    old_objects) の RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR 倍となる。
    つまり、フルGC直後から oldobject の個数が RUBY_GC_HEAP_OLDOBJECT_LIMIT_FACTOR 倍に
    なったタイミングでフルGCが実行される。
@@ -180,7 +180,7 @@ auto compaction が有効化どうかを返します。
 
 [m:GC.compact] をフルGCで行うかどうかを制御します。
 
-true を設定するとフルGCのタイミングででヒープをコンパクションします。
+true を設定するとフルGCのタイミングでヒープをコンパクションします。
 
 この機能を有効にするとフルGCのパフォーマンスが低下します。
 
