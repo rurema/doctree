@@ -24,13 +24,13 @@ Ruby 2.4.0 からはどちらも `Integer` クラスのエイリアスとなっ�
 
 `Integer` のビット論理演算において、整数は以下の例のように左（上位）に無限に `0` または `1` が続くビット列として扱われます（`..` は、その右隣に書かれた数字が左に向かって無限に続くことを意味する）。
 
-| 10 数表記 | 2 進表記 |  ビット列  |
+| 10 進表記 | 2 進表記 |  ビット列  |
 |:-----:|---------:| --------:|
-|  `6` |  `0x110` | `..0110` |
-|  `1` |    `0x1` |   `..01` |
-|  `0` |    `0x0` |    `..0` |
-| `-1` |   `-0x1` |    `..1` |
-| `-6` | `-0x110` | `..1010` |
+|  `6` |  `0b110` | `..0110` |
+|  `1` |    `0b1` |   `..01` |
+|  `0` |    `0b0` |    `..0` |
+| `-1` |   `-0b1` |    `..1` |
+| `-6` | `-0b110` | `..1010` |
 
 ## Class Methods
 
@@ -804,7 +804,7 @@ p 1 == "1" # => false
 
 `other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
 
-`other` が NAN のとき、`false` を返します。
+`other` が NaN のとき、`false` を返します。
 
 `other` が数値でないとき、`ArgumentError` が発生します。
 
@@ -828,7 +828,7 @@ p 1 < "2" # ~> ArgumentError: comparison of Integer with String failed
 
 `other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
 
-`other` が NAN のとき、`false` を返します。
+`other` が NaN のとき、`false` を返します。
 
 `other` が数値でないとき、`ArgumentError` が発生します。
 
@@ -854,7 +854,7 @@ p 1 <= "2" # ~> ArgumentError: comparison of Integer with String failed
 
 `other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
 
-`other` が NAN のとき、`false` を返します。
+`other` が NaN のとき、`false` を返します。
 
 `other` が数値でないとき、`ArgumentError` が発生します。
 
@@ -879,7 +879,7 @@ p 1 > "0" # ~> ArgumentError: comparison of Integer with String failed
 
 `other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
 
-`other` が NAN のとき、`false` を返します。
+`other` が NaN のとき、`false` を返します。
 
 `other` が数値でないとき、`ArgumentError` が発生します。
 
