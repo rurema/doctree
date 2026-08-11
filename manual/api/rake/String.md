@@ -65,14 +65,14 @@ p 'a/b/c/d/file.txt'.pathmap("%-2d") # => "c/d"
 
 ```ruby title="例"
 p "src/org/onestepback/proj/A.java".pathmap("%{^src,bin}X.class")
-#=> "bin/org/onestepback/proj/A.class"
+# => "bin/org/onestepback/proj/A.class"
 ```
 
 置換文字列に '*' を指定した場合は、置換文字列を計算するためにブロックを評価します。
 
 ```ruby title="例"
 p "/path/to/file.TXT".pathmap("%X%{.*,*}x") { |ext| ext.downcase }
-#=> "/path/to/file.txt"
+# => "/path/to/file.txt"
 ```
 
 ## Protected Instance Methods

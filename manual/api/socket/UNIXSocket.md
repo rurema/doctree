@@ -46,7 +46,7 @@ require 'socket'
 s1, s2 = UNIXSocket.pair
 s1.send "a", 0
 s1.send "b", 0
-p s2.recv(10) #=> "ab"
+p s2.recv(10) # => "ab"
 ```
 
 - **param** `type` -- ソケットタイプ
@@ -65,13 +65,13 @@ p s2.recv(10) #=> "ab"
 require 'socket'
 
 UNIXServer.open("/tmp/s") {|serv|
-  p serv.addr     #=> ["AF_UNIX", "/tmp/s"]
+  p serv.addr     # => ["AF_UNIX", "/tmp/s"]
 }
 
 UNIXServer.open("/tmp/s") {|serv|
   c = UNIXSocket.open("/tmp/s")
-  p c.peeraddr    #=> ["AF_UNIX", "/tmp/s"]
-  p c.addr #=> ["AF_UNIX", ""]
+  p c.peeraddr    # => ["AF_UNIX", "/tmp/s"]
+  p c.addr # => ["AF_UNIX", ""]
 }
 ```
 
@@ -87,7 +87,7 @@ UNIX ソケットのパスを返します。
 require 'socket'
 
 UNIXServer.open("/tmp/s") {|serv|
-  p serv.path     #=> "/tmp/s"
+  p serv.path     # => "/tmp/s"
 }
 ```
 
@@ -100,8 +100,8 @@ require 'socket'
 
 UNIXServer.open("/tmp/s") {|serv|
   c = UNIXSocket.open("/tmp/s")
-  p c.peeraddr    #=> ["AF_UNIX", "/tmp/s"]
-  p c.addr #=> ["AF_UNIX", ""]
+  p c.peeraddr    # => ["AF_UNIX", "/tmp/s"]
+  p c.addr # => ["AF_UNIX", ""]
 }
 ```
 
@@ -124,7 +124,7 @@ UNIXServer.open("/tmp/s") {|serv|
   c = UNIXSocket.open("/tmp/s")
   s = serv.accept
   s.send "a", 0
-  p c.recvfrom(10)[0]     #=> "a"
+  p c.recvfrom(10)[0]     # => "a"
 }
 ```
 
@@ -146,7 +146,7 @@ require 'socket'
 s1, s2 = UNIXSocket.pair
 s1.send_io STDOUT
 io = s2.recv_io
-p File.identical?(io, STDOUT)     #=> true
+p File.identical?(io, STDOUT)     # => true
 ```
 
 - **param** `klass` -- 受け取ったファイルディスクリプタを変換するためのクラス
@@ -164,8 +164,8 @@ s1, s2 = UNIXSocket.pair
 s1.send_io STDOUT
 stdout = s2.recv_io
 
-p STDOUT.fileno #=> 1
-p stdout.fileno #=> 6
+p STDOUT.fileno # => 1
+p stdout.fileno # => 6
 
 stdout.puts "hello" # outputs "hello\n" to standard output.
 ```

@@ -440,11 +440,11 @@ p utc_t.utc?                         # => true
 タイムゾーンを協定世界時に設定した Time オブジェクトを新しく生成して返します。
 
 ```ruby
-p t = Time.local(2000,1,1,20,15,1)   #=> 2000-01-01 20:15:01 +0900
-p t.gmt?                             #=> false
-p y = t.getgm                        #=> 2000-01-01 11:15:01 UTC
-p y.gmt?                             #=> true
-p t == y                             #=> true
+p t = Time.local(2000,1,1,20,15,1)   # => 2000-01-01 20:15:01 +0900
+p t.gmt?                             # => false
+p y = t.getgm                        # => 2000-01-01 11:15:01 UTC
+p y.gmt?                             # => true
+p t == y                             # => true
 ```
 
 ### def getlocal             -> Time
@@ -855,11 +855,11 @@ p t.strftime("%Y-%m-%d %H:%M:%S UTC")  # => "2000-01-01 18:04:05 UTC"
 
 ```ruby
 t = Time.now
-p t.inspect                           #=> "2012-11-10 18:16:12.261257655 +0100"
-p t.strftime "%Y-%m-%d %H:%M:%S.%N %z"  #=> "2012-11-10 18:16:12.261257655 +0100"
+p t.inspect                           # => "2012-11-10 18:16:12.261257655 +0100"
+p t.strftime "%Y-%m-%d %H:%M:%S.%N %z"  # => "2012-11-10 18:16:12.261257655 +0100"
 
-p t.utc.inspect                        #=> "2012-11-10 17:16:12.261257655 UTC"
-p t.strftime "%Y-%m-%d %H:%M:%S.%N UTC"  #=> "2012-11-10 17:16:12.261257655 UTC"
+p t.utc.inspect                        # => "2012-11-10 17:16:12.261257655 UTC"
+p t.strftime "%Y-%m-%d %H:%M:%S.%N UTC"  # => "2012-11-10 17:16:12.261257655 UTC"
 
 t2 = Time.at(0.1r)
 p t2.inspect                              # => "1970-01-01 09:00:00.1 +0900"
@@ -886,8 +886,8 @@ self のハッシュ値を返します。
 
 ```ruby
 t = Time.local(2000,1,2,3,4,5,6)
-p "%10.6f" % t.to_f   #=> "946749845.000006"
-p t.usec              #=> 6
+p "%10.6f" % t.to_f   # => "946749845.000006"
+p t.usec              # => 6
 ```
 
 ### def floor(ndigits=0)   -> Time
@@ -1041,7 +1041,7 @@ p (t + 0.123456789).round(4).iso8601(6)  # => "1999-12-31T23:59:59.123500Z"
 ```ruby
 t = Time.local(2000,1,2,3,4,5,6)
 p "%10.9f" % t.to_f   # => "946749845.000005960"
-p t.subsec            #=> (3/500000)
+p t.subsec            # => (3/500000)
 ```
 
 to_f の値と subsec の値の下のほうの桁の値は異なる場合があります。
@@ -1074,7 +1074,7 @@ t = Time.utc(2022, 10, 5, 21, 25, 30)
 if t in wday: 3, day: ..7 # deconstruct_keys が使われます
   puts "first Wednesday of the month"
 end
-#=> "first Wednesday of the month" が出力される
+# => "first Wednesday of the month" が出力される
 
 case t
 in year: ...2022
@@ -1084,7 +1084,7 @@ in month: ..9
 in wday: 1..5, month:
   puts "working day in month #{month}"
 end
-#=> "working day in month 10" が出力される
+# => "working day in month 10" が出力される
 
 # クラスのチェックと組み合わせて利用することもできます
 if t in Time(wday: 3, day: ..7)

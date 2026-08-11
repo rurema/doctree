@@ -92,7 +92,7 @@ end
 opts = OptionParser.new
 
 opts.on("-t", "--time [TIME]", Time) do |time|
-  p time.class #=> Time
+  p time.class # => Time
 end
 
 opts.parse!(ARGV)
@@ -734,12 +734,12 @@ opts.on("-o", "--overwrite VALUE", TrueClass){|boolean| ...}
 opts.on("--protocol VALUE", [:http, :ftp, :https]){|w|
   p w
 }
-# ruby command --protocol=http #=> :http
+# ruby command --protocol=http # => :http
 
 opts.on("-c", "--charset VALUE", {"jis" => "iso-2022-jp", "sjis" => "shift_jis"}){|w|
   p w
 }
-# ruby command --charset=jis #=> "iso-2022-jp"
+# ruby command --charset=jis # => "iso-2022-jp"
 ```
 
 ### def make_switch(opts, block = nil) -> Array

@@ -101,7 +101,7 @@ puts queue.pop
 現在実行中のスレッド(カレントスレッド)を返します。
 
 ```ruby
-p Thread.current #=> #<Thread:0x4022e6fc run>
+p Thread.current # => #<Thread:0x4022e6fc run>
 ```
 
 ### def Thread.exit    -> ()
@@ -120,7 +120,7 @@ p Thread.current #=> #<Thread:0x4022e6fc run>
 th = Thread.new do
 end
     
-p Thread.kill(th)     #=> #<Thread:0x40221bc8 dead>
+p Thread.kill(th)     # => #<Thread:0x40221bc8 dead>
 ```
 
 ### def Thread.list    -> [Thread]
@@ -133,7 +133,7 @@ Thread.new do
 end
 sleep 0.1
   
-p Thread.list   #=> [#<Thread:0x40377a54 sleep>, #<Thread:0x4022e6fc run>]
+p Thread.list   # => [#<Thread:0x40377a54 sleep>, #<Thread:0x4022e6fc run>]
 ```
 
 ### def Thread.main    -> Thread
@@ -141,7 +141,7 @@ p Thread.list   #=> [#<Thread:0x40377a54 sleep>, #<Thread:0x4022e6fc run>]
 メインスレッドを返します。
 
 ```ruby
-p Thread.main #=> #<Thread:0x4022e6fc run>
+p Thread.main # => #<Thread:0x4022e6fc run>
 ```
 
 ### def Thread.start(*arg) {|*arg| ... }       -> Thread
@@ -223,7 +223,7 @@ loop do
   p :main
 end
 
-#=>
+# =>
 1
 :main
 2
@@ -664,7 +664,7 @@ end
 sleep 0.1
 th1.kill
 
-#=> "this will be displayed"
+# => "this will be displayed"
 ```
 
 - **SEE** [m:Kernel?.exit], [m:Kernel?.exit!]
@@ -725,7 +725,7 @@ th[:foo] = 'FOO'
 th['bar'] = 'BAR'
 p th.keys
 
-#=> [:bar, :foo]
+# => [:bar, :foo]
 ```
 
 ### def priority    -> Integer
@@ -811,26 +811,26 @@ a.join
 [m:Thread#alive?] が真を返すなら、このメソッドも真です。
 
 ```ruby title="例"
-p Thread.current.status #=> "run"
+p Thread.current.status # => "run"
 
 a = Thread.new { raise("die now") }
 sleep 0.1
-p a.status              #=> nil
+p a.status              # => nil
 
 b = Thread.new { Thread.stop }
 sleep 0.1
-p b.status              #=> "sleep"
+p b.status              # => "sleep"
 
 c = Thread.new { Thread.exit }
 sleep 0.1
-p c.status              #=> false
+p c.status              # => false
 
 d = Thread.new { sleep }
 sleep 0.1
-p d.status              #=> "sleep"
+p d.status              # => "sleep"
 d.kill
 sleep 0.1
-p d.status              #=> false
+p d.status              # => false
 ```
 
 - **SEE** [m:Thread#alive?], [m:Thread#stop?]

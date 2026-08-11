@@ -12,7 +12,7 @@ require 'optparse/date'
 opts = OptionParser.new
 
 opts.on("-d DATE", Date){|d|
-  p d.to_s #=> 2000-01-01
+  p d.to_s # => 2000-01-01
 }
 opts.parse!
 

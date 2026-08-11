@@ -365,7 +365,7 @@ class C
   end
 end
 
-p C.new.foo #=> "objtrace.rb:8"
+p C.new.foo # => "objtrace.rb:8"
 ```
 
 ### module_function def dump(obj, output: :string) -> String | File | IO | nil

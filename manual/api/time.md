@@ -31,7 +31,7 @@ Time.parse(...) {|y| y < 100 ? (y >= 69 ? y + 1900 : y + 2000) : y}
 ```ruby
 require 'time'
 time = Time.local(2019, 5, 1)
-p Time.parse("12:00", time) #=> 2019-05-01 12:00:00 +0900
+p Time.parse("12:00", time) # => 2019-05-01 12:00:00 +0900
 ```
 
 下位の要素がなかったり壊れていた場合、最小値(1か0)が使われます。
@@ -49,9 +49,9 @@ require 'time'
 
 # 現在時刻が "Thu Nov 29 14:33:20 GMT 2001" で
 # タイムゾーンがGMTとすると:
-p Time.parse("16:30")   #=> Thu Nov 29 16:30:00 GMT 2001
-p Time.parse("7/23")    #=> Mon Jul 23 00:00:00 GMT 2001
-p Time.parse("2002/1")  #=> Tue Jan 01 00:00:00 GMT 2002
+p Time.parse("16:30")   # => Thu Nov 29 16:30:00 GMT 2001
+p Time.parse("7/23")    # => Mon Jul 23 00:00:00 GMT 2001
+p Time.parse("2002/1")  # => Tue Jan 01 00:00:00 GMT 2002
 ```
 
 [m:Date._parse]がdateから情報を取り出せないとき、または [c:Time] クラスが指定された日時を表現できないときに
@@ -90,7 +90,7 @@ require 'time'
 
 rfc2822_time = 'Sun, 31 Aug 2008 12:08:19 +0900'
 t = Time.rfc2822(rfc2822_time)
-p t.kind_of?(Time) #=> true
+p t.kind_of?(Time) # => true
 non_rfc2822_time = 'Sun 31 Aug 2008 12:08:19 +0900'
 
 begin
@@ -117,13 +117,13 @@ require 'time'
 rfc2616_time = 'Sun, 31 Aug 2008 12:34:56 GMT'
 
 t = Time.httpdate(rfc2616_time)
-p t.kind_of?(Time) #=> true
+p t.kind_of?(Time) # => true
 
 non_rfc2616_time = 'San, 31 Aug 2008 12:34:56 GMT'
 begin
   Time.httpdate(non_rfc2616_time)
 rescue ArgumentError => err
-  puts err #=>  not RFC 2616 compliant date: "San, 31 Aug 2008 12:34:56 GMT"
+  puts err # =>  not RFC 2616 compliant date: "San, 31 Aug 2008 12:34:56 GMT"
 end
 ```
 
@@ -151,14 +151,14 @@ require 'time'
 
 iso8601_time = '2008-08-31T12:34:56+09:00'
 t = Time.iso8601(iso8601_time)
-p t #=> 2008-08-31 12:34:56 +0900
-p t.kind_of?(Time) #=> true
+p t # => 2008-08-31 12:34:56 +0900
+p t.kind_of?(Time) # => true
 
 begin
   non_iso8601_time = '2008-08-31A12:34:56+09:00'
   Time.iso8601(non_iso8601_time)
 rescue ArgumentError => err
-  puts err #=> invalid xmlschema format: "2008-08-31A12:34:56+09:00"
+  puts err # => invalid xmlschema format: "2008-08-31A12:34:56+09:00"
 end
 ```
 
@@ -172,7 +172,7 @@ end
 ```ruby
 require 'time'
 p Time.strptime('2001-02-03T04:05:06+09:00', '%Y-%m-%dT%H:%M:%S%z')
-#=> 2001-02-03 06:05:06 +0900
+# => 2001-02-03 06:05:06 +0900
 ```
 
 ブロックを渡すと年の部分をブロックによって変換できます。
@@ -185,7 +185,7 @@ Time.strptime('91/5/18 4:13:00', '%Y/%m/%d %T'){|y|
   else y + 2000
   end
 }
-#=> 1991-05-18 04:13:00 +0900
+# => 1991-05-18 04:13:00 +0900
   
 Time.strptime('01/5/18 4:13:00', '%Y/%m/%d %T'){|y| 
   if y > 100 then y
@@ -193,7 +193,7 @@ Time.strptime('01/5/18 4:13:00', '%Y/%m/%d %T'){|y|
   else y + 2000
   end
 }
-#=>  2001-05-18 04:13:00 +0900
+# =>  2001-05-18 04:13:00 +0900
 ```
 
 詳しくは [m:DateTime.strptime], [m:Date.strptime] を見てください。
@@ -220,7 +220,7 @@ require 'time'
 
 iso8601_time = '2008-08-31T12:34:56+09:00'
 t = Time.iso8601(iso8601_time)
-p t.rfc2822      #=> "Sun, 31 Aug 2008 03:34:56 -0000"
+p t.rfc2822      # => "Sun, 31 Aug 2008 03:34:56 -0000"
 ```
 
 ### def httpdate -> String
@@ -238,7 +238,7 @@ require 'time'
 
 iso8601_time = '2008-08-31T12:34:56+09:00'
 t = Time.iso8601(iso8601_time)
-p t.httpdate     #=> "Sun, 31 Aug 2008 03:34:56 GMT"
+p t.httpdate     # => "Sun, 31 Aug 2008 03:34:56 GMT"
 ```
 
 ### def xmlschema(fractional_seconds = 0) -> String
@@ -264,8 +264,8 @@ require 'time'
 
 iso8601_time = '2008-08-31T12:34:56+09:00'
 t = Time.iso8601(iso8601_time)
-p t.xmlschema    #=> "2008-08-31T03:34:56Z"
-p t.xmlschema(9) #=> "2008-08-31T03:34:56.000000000Z"
+p t.xmlschema    # => "2008-08-31T03:34:56Z"
+p t.xmlschema(9) # => "2008-08-31T03:34:56.000000000Z"
 ```
 
 - **SEE** [m:Time.iso8601], [m:Time.xmlschema]

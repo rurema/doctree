@@ -21,25 +21,25 @@ HTTP のセッションキーなどに適しています。
 ```ruby
 # random hexadecimal string.
 require 'securerandom'
-p SecureRandom.hex(10) #=> "52750b30ffbc7de3b362"
-p SecureRandom.hex(10) #=> "92b15d6c8dc4beb5f559"
-p SecureRandom.hex(11) #=> "6aca1b5c58e4863e6b81b8"
-p SecureRandom.hex(12) #=> "94b2fff3e7fd9b9c391a2306"
-p SecureRandom.hex(13) #=> "39b290146bea6ce975c37cfc23"
+p SecureRandom.hex(10) # => "52750b30ffbc7de3b362"
+p SecureRandom.hex(10) # => "92b15d6c8dc4beb5f559"
+p SecureRandom.hex(11) # => "6aca1b5c58e4863e6b81b8"
+p SecureRandom.hex(12) # => "94b2fff3e7fd9b9c391a2306"
+p SecureRandom.hex(13) # => "39b290146bea6ce975c37cfc23"
 
 # random base64 string.
 require 'securerandom'
-p SecureRandom.base64(10) #=> "EcmTPZwWRAozdA=="
-p SecureRandom.base64(10) #=> "9b0nsevdwNuM/w=="
-p SecureRandom.base64(10) #=> "KO1nIU+p9DKxGg=="
-p SecureRandom.base64(11) #=> "l7XEiFja+8EKEtY="
-p SecureRandom.base64(12) #=> "7kJSM/MzBJI+75j8"
-p SecureRandom.base64(13) #=> "vKLJ0tXBHqQOuIcSIg=="
+p SecureRandom.base64(10) # => "EcmTPZwWRAozdA=="
+p SecureRandom.base64(10) # => "9b0nsevdwNuM/w=="
+p SecureRandom.base64(10) # => "KO1nIU+p9DKxGg=="
+p SecureRandom.base64(11) # => "l7XEiFja+8EKEtY="
+p SecureRandom.base64(12) # => "7kJSM/MzBJI+75j8"
+p SecureRandom.base64(13) # => "vKLJ0tXBHqQOuIcSIg=="
 
 # random binary string.
 require 'securerandom'
-p SecureRandom.random_bytes(10) #=> "\016\t{\370g\310pbr\301"
-p SecureRandom.random_bytes(10) #=> "\323U\030TO\234\357\020\a\337"
+p SecureRandom.random_bytes(10) # => "\016\t{\370g\310pbr\301"
+p SecureRandom.random_bytes(10) # => "\323U\030TO\234\357\020\a\337"
 ```
 
 ## Singleton Methods
@@ -56,7 +56,7 @@ p SecureRandom.random_bytes(10) #=> "\323U\030TO\234\357\020\a\337"
 
 ```ruby
 require 'securerandom'
-p SecureRandom.base64(3)    #=> "4pYO"  (文字列のサイズは 3 でない)
+p SecureRandom.base64(3)    # => "4pYO"  (文字列のサイズは 3 でない)
 ```
 
 - **SEE** [rfc:3548]
@@ -76,10 +76,10 @@ p SecureRandom.base64(3)    #=> "4pYO"  (文字列のサイズは 3 でない)
 
 ```ruby
 require 'securerandom'
-p SecureRandom.urlsafe_base64 #=> "b4GOKm4pOYU_-BOXcrUGDg"
-p SecureRandom.urlsafe_base64 #=> "UZLdOkzop70Ddx-IJR0ABg"
-p SecureRandom.urlsafe_base64(nil, true) #=> "i0XQ-7gglIsHGV2_BNPrdQ=="
-p SecureRandom.urlsafe_base64(nil, true) #=> "-M8rLhr7JEpJlqFGUMmOxg=="
+p SecureRandom.urlsafe_base64 # => "b4GOKm4pOYU_-BOXcrUGDg"
+p SecureRandom.urlsafe_base64 # => "UZLdOkzop70Ddx-IJR0ABg"
+p SecureRandom.urlsafe_base64(nil, true) # => "i0XQ-7gglIsHGV2_BNPrdQ=="
+p SecureRandom.urlsafe_base64(nil, true) # => "-M8rLhr7JEpJlqFGUMmOxg=="
 ```
 
 - **SEE** [m:SecureRandom.base64],  [rfc:3548]
@@ -96,7 +96,7 @@ p SecureRandom.urlsafe_base64(nil, true) #=> "-M8rLhr7JEpJlqFGUMmOxg=="
 
 ```ruby
 require 'securerandom'
-p SecureRandom.hex(3)    #=> "f72233"   (文字列のサイズは 3 でない)
+p SecureRandom.hex(3)    # => "f72233"   (文字列のサイズは 3 でない)
 ```
 
 ### def SecureRandom.random_bytes(n = nil)    -> String
@@ -110,7 +110,7 @@ p SecureRandom.hex(3)    #=> "f72233"   (文字列のサイズは 3 でない)
 
 ```ruby
 require 'securerandom'
-p SecureRandom.random_bytes(3)    #=> "\321\020\203"
+p SecureRandom.random_bytes(3)    # => "\321\020\203"
 ```
 
 ### def SecureRandom.random_number(n = 0)     -> Integer | Float
@@ -125,7 +125,7 @@ n が 0 の場合、0.0 以上 1.0 未満の実数を返します。
 
 ```ruby
 require 'securerandom'
-p SecureRandom.random_number(1 << 64)    #=> 4078466195356651249
+p SecureRandom.random_number(1 << 64)    # => 4078466195356651249
 ```
 
 ### def SecureRandom.uuid   -> String
@@ -139,8 +139,8 @@ version 4 の UUID は全くランダムです (バージョンを除いて)。
 
 ```ruby
 require 'securerandom'
-p SecureRandom.uuid #=> "2d931510-d99f-494a-8c67-87feb05e1594"
-p SecureRandom.uuid #=> "62936e70-1815-439b-bf89-8492855a7e6b"
+p SecureRandom.uuid # => "2d931510-d99f-494a-8c67-87feb05e1594"
+p SecureRandom.uuid # => "62936e70-1815-439b-bf89-8492855a7e6b"
 ```
 
 - **SEE** [rfc:4122]

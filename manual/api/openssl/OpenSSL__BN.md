@@ -610,8 +610,8 @@ p 7.to_bn.to_s(0) # => "\x00\x00\x00\x01\a"
 ```ruby
 require 'openssl'
 
-pp 5.to_bn     #=> #<OpenSSL::BN 5>
-pp (-5).to_bn  #=> #<OpenSSL::BN -5>
+pp 5.to_bn     # => #<OpenSSL::BN 5>
+pp (-5).to_bn  # => #<OpenSSL::BN -5>
 ```
 
 - **param** `pp` -- [c:PP] クラスのインスタンスオブジェクト

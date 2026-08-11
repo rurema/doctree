@@ -47,7 +47,7 @@ format で指定した文字列が見つからない場合は空の配列を生�
 ```ruby
 require 'scanf'
 str = "123 abc 456 def 789 ghi"
-p str.scanf("%d%s") #=> [123, "abc"]
+p str.scanf("%d%s") # => [123, "abc"]
 ```
 
 ブロックを指定した場合は scanf を継続して実行し、順次見つかった文字列を変換したオブジェクトの配列を引数に、ブロックを実行します。このとき、ブロックの実行結果を要素とする配列を返します。
@@ -56,7 +56,7 @@ p str.scanf("%d%s") #=> [123, "abc"]
 require 'scanf'
 str = "123 0x45 678 0x90"
 p str.scanf("%d%x"){|n, s| [n, s]}
-#=> [[123, 69], [678, 144]]
+# => [[123, 69], [678, 144]]
 ```
 
 formatに完全にマッチしていなくても、部分的にマッチしていれば、ブロックは実行されます。
@@ -65,7 +65,7 @@ formatに完全にマッチしていなくても、部分的にマッチして�
 require 'scanf'
 str = "123 abc 456 def"
 ret = str.scanf("%s%d") { |s, n| [s, n] }
-p ret #=> [["123", nil], ["abc", 456], ["def", nil]]
+p ret # => [["123", nil], ["abc", 456], ["def", nil]]
 ```
 
 - **param** `format` -- スキャンするフォーマットを文字列で指定します。
@@ -74,7 +74,7 @@ p ret #=> [["123", nil], ["abc", 456], ["def", nil]]
 ```ruby title="使用例"
 require 'scanf'
 str = "123 abc 456 def 789 ghi"
-p str.scanf("%d%s") #=> [123, "abc"]
+p str.scanf("%d%s") # => [123, "abc"]
 ```
 
 ### scanfフォーマット文字列 {#format}
@@ -94,7 +94,7 @@ p "a10".scanf("%1s %d")      # => ["a", 10]
 ```ruby title="使用例"
 require 'scanf'
 str = "1234"
-p str.scanf("%1s%3d")  #=> ["1", 234]
+p str.scanf("%1s%3d")  # => ["1", 234]
 ```
 
 また、1.9 以降では、スペースには全角文字列が含まれます。
@@ -104,7 +104,7 @@ p str.scanf("%1s%3d")  #=> ["1", 234]
 require 'scanf'
 
 str = "1　　　　　aaa"
-p str.scanf("%d %s") #=> [1, "aaa"]
+p str.scanf("%d %s") # => [1, "aaa"]
 ```
 
 #%# There may be an optional maximum field width, expressed as a decimal

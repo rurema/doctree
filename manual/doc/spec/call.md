@@ -339,19 +339,19 @@ def foo
   yield 1,2,3
 end
 
-p foo{|v| p v}     #=> 1
+p foo{|v| p v}     # => 1
 
 def bar
   yield [1,2,3]
 end
 
-p bar{|a, b, c| p a} #=> 1
+p bar{|a, b, c| p a} # => 1
 
 def hoge
   yield [1,2,3],4,5
 end
 
-p hoge{|a, b, c| p a} #=> [1,2,3]
+p hoge{|a, b, c| p a} # => [1,2,3]
 ```
 
 <http://www.a-k-r.org/d/2007-08.html#a2007_08_16_1>

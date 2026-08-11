@@ -274,7 +274,7 @@ class Vector2D
   # ...
 end
 vec0 = Vector2D.new(10, 20); vec1 = Vector2D.new(20, 30)
-p vec0 + vec1 == Vector2D.new(30, 50) #=> true
+p vec0 + vec1 == Vector2D.new(30, 50) # => true
 ```
 
 仮引数にデフォルト式が与えられた場合、メソッド呼び出しで実引数を省略したときのデフォルト値になります。
@@ -283,8 +283,8 @@ p vec0 + vec1 == Vector2D.new(30, 50) #=> true
 def foo(x, y = 1)    # 2番目の引数yにデフォルト値を指定
   10 * x + y
 end
-p foo(1, 5)  #=> 15
-p foo(3)     #=> 31
+p foo(1, 5)  # => 15
+p foo(3)     # => 31
 foo          # ~> ArgumentError: wrong number of arguments (given 0, expected 1..2)
 ```
 
@@ -295,10 +295,10 @@ foo          # ~> ArgumentError: wrong number of arguments (given 0, expected 1.
 def foo(a, b = 1, c = 2, d = 3, e)
   [a, b, c, d, e]
 end
-p foo(10, 20)              #=> [10, 1, 2, 3, 20]
-p foo(10, 20, 30)          #=> [10, 20, 2, 3, 30]
-p foo(10, 20, 30, 40)      #=> [10, 20, 30, 3, 40]
-p foo(10, 20, 30, 40, 50)  #=> [10, 20, 30, 40, 50]
+p foo(10, 20)              # => [10, 1, 2, 3, 20]
+p foo(10, 20, 30)          # => [10, 20, 2, 3, 30]
+p foo(10, 20, 30, 40)      # => [10, 20, 30, 3, 40]
+p foo(10, 20, 30, 40, 50)  # => [10, 20, 30, 40, 50]
 
 # NG: 次の定義は SyntaxError になる
 # def foo(x = 1, y, z = 2)
@@ -314,7 +314,7 @@ def bar(x, y = $gvar)  # 確かに定義時には$gvar == 3だが
 end
 $gvar = 7
 # 呼び出し時の$gvarの値が使われる
-p bar(5)   #=> 57 (!= 53)
+p bar(5)   # => 57 (!= 53)
 ```
 
 仮引数の直前に * がある場合には残りの実引数
@@ -327,16 +327,16 @@ p bar(5)   #=> 57 (!= 53)
 def foo(x, *xs)
   puts "#{x} : #{xs.inspect}"   # Object#inspect は p のような詳細な内部表示
 end
-p foo(1)      #=> 1 : []
-p foo(1, 2)   #=> 1 : [2]
-p foo(1, 2, 3)  #=> 1 : [2, 3]
+p foo(1)      # => 1 : []
+p foo(1, 2)   # => 1 : [2]
+p foo(1, 2, 3)  # => 1 : [2, 3]
 
 def bar(x, *) # 残りの引数を単に無視したいとき
   puts "#{x}"
 end
-p bar(1)      #=> 1
-p bar(1, 2)   #=> 1
-p bar(1, 2, 3)  #=> 1
+p bar(1)      # => 1
+p bar(1, 2)   # => 1
+p bar(1, 2, 3)  # => 1
 ```
 
 Ruby 1.9 以降では可変長引数よりも後にまだ通常の引数を置くことができます。
@@ -350,7 +350,7 @@ yield を呼び出すことです。
 def foo(cnt, &block_arg)
   cnt.times { block_arg.call } # ブロックに収まったProcオブジェクトはcallで実行
 end
-p foo(3) { print "Ruby! " } #=> Ruby! Ruby! Ruby!
+p foo(3) { print "Ruby! " } # => Ruby! Ruby! Ruby!
 ```
 
 メソッド定義において、仮引数はその種類毎に以下の順序でしか指定することはできません。いずれも省略することは可能です。
@@ -381,7 +381,7 @@ def f(a, b, c, m = 1, n = 1, *rest, x, y, z, k: 1, **kwrest, &blk)
 end
 
 f("a", "b", "c", 2, 3, "foo", "bar", "baz", "x", "y", "z", k: 42, u: "unknown") { }
-  #=> a: "a"
+  # => a: "a"
   #   b: "b"
   #   c: "c"
   #   m: 2

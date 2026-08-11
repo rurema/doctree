@@ -63,7 +63,7 @@ port, socktype, protocol は 0 で初期化されます。
 ```ruby
 require 'socket'
 
-p Addrinfo.ip("localhost") #=> #<Addrinfo: 127.0.0.1 (localhost)>
+p Addrinfo.ip("localhost") # => #<Addrinfo: 127.0.0.1 (localhost)>
 ```
 
 - **param** `host` -- ホスト(IP アドレスもしくはホスト名)
@@ -77,7 +77,7 @@ TCP アドレスに対する Addrinfo オブジェクトを返します。
 require 'socket'
 
 p Addrinfo.tcp("localhost", "smtp")
-#=> #<Addrinfo: 127.0.0.1:25 TCP (localhost:smtp)>
+# => #<Addrinfo: 127.0.0.1:25 TCP (localhost:smtp)>
 ```
 
 - **param** `host` -- ホスト(IP アドレスもしくはホスト名)
@@ -91,7 +91,7 @@ UDP アドレスに対する Addrinfo オブジェクトを返します。
 require 'socket'
 
 p Addrinfo.udp("localhost", "daytime")
-#=> #<Addrinfo: 127.0.0.1:13 UDP (localhost:daytime)>
+# => #<Addrinfo: 127.0.0.1:13 UDP (localhost:daytime)>
 ```
 
 - **param** `host` -- ホスト(IP アドレスもしくはホスト名)
@@ -106,8 +106,8 @@ socktype でソケットタイプを指定します。
 ```ruby
 require 'socket'
 
-p Addrinfo.unix("/tmp/sock")       #=> #<Addrinfo: /tmp/sock SOCK_STREAM>
-p Addrinfo.unix("/tmp/sock", :DGRAM) #=> #<Addrinfo: /tmp/sock SOCK_DGRAM>
+p Addrinfo.unix("/tmp/sock")       # => #<Addrinfo: /tmp/sock SOCK_STREAM>
+p Addrinfo.unix("/tmp/sock", :DGRAM) # => #<Addrinfo: /tmp/sock SOCK_DGRAM>
 ```
 
 - **param** `path` -- Unix ソケットのアドレス文字列
@@ -154,7 +154,7 @@ socktype なしでは曖昧な指定となるためです。
 require 'socket'
 
 p Addrinfo.getaddrinfo("www.kame.net", 80, nil, :STREAM)
-#=> [#<Addrinfo: 203.178.141.194:80 TCP (www.kame.net:80)>,
+# => [#<Addrinfo: 203.178.141.194:80 TCP (www.kame.net:80)>,
 #    #<Addrinfo: [2001:200:0:8002:203:47ff:fea5:3085]:80 TCP (www.kame.net:80)>]
 ```
 
@@ -176,7 +176,7 @@ p Addrinfo.getaddrinfo("www.kame.net", 80, nil, :STREAM)
 ```ruby
 require 'socket'
 
-p Addrinfo.tcp("localhost", 80).afamily == Socket::AF_INET #=> true
+p Addrinfo.tcp("localhost", 80).afamily == Socket::AF_INET # => true
 ```
 
 ### def pfamily -> Integer
@@ -186,7 +186,7 @@ p Addrinfo.tcp("localhost", 80).afamily == Socket::AF_INET #=> true
 ```ruby
 require 'socket'
 
-p Addrinfo.tcp("localhost", 80).pfamily == Socket::PF_INET #=> true
+p Addrinfo.tcp("localhost", 80).pfamily == Socket::PF_INET # => true
 ```
 
 ### def socktype -> Integer
@@ -196,7 +196,7 @@ p Addrinfo.tcp("localhost", 80).pfamily == Socket::PF_INET #=> true
 ```ruby
 require 'socket'
 
-p Addrinfo.tcp("localhost", 80).socktype == Socket::SOCK_STREAM #=> true
+p Addrinfo.tcp("localhost", 80).socktype == Socket::SOCK_STREAM # => true
 ```
 
 ### def protocol -> Integer
@@ -206,7 +206,7 @@ p Addrinfo.tcp("localhost", 80).socktype == Socket::SOCK_STREAM #=> true
 ```ruby
 require 'socket'
 
-p Addrinfo.tcp("localhost", 80).protocol == Socket::IPPROTO_TCP #=> true
+p Addrinfo.tcp("localhost", 80).protocol == Socket::IPPROTO_TCP # => true
 ```
 
 ### def canonname -> String|nil
@@ -222,8 +222,8 @@ p Addrinfo.tcp("localhost", 80).protocol == Socket::IPPROTO_TCP #=> true
 require 'socket'
 
 list = Addrinfo.getaddrinfo("www.ruby-lang.org", 80, :INET, :STREAM, nil, Socket::AI_CANONNAME)
-p list[0] #=> #<Addrinfo: 221.186.184.68:80 TCP carbon.ruby-lang.org (www.ruby-lang.org:80)>
-p list[0].canonname #=> "carbon.ruby-lang.org"
+p list[0] # => #<Addrinfo: 221.186.184.68:80 TCP carbon.ruby-lang.org (www.ruby-lang.org:80)>
+p list[0].canonname # => "carbon.ruby-lang.org"
 ```
 
 ### def ipv4? -> bool
@@ -235,9 +235,9 @@ p list[0].canonname #=> "carbon.ruby-lang.org"
 ```ruby
 require 'socket'
 
-p Addrinfo.tcp("127.0.0.1", 80).ipv4? #=> true
-p Addrinfo.tcp("::1", 80).ipv4?     #=> false
-p Addrinfo.unix("/tmp/sock").ipv4?  #=> false
+p Addrinfo.tcp("127.0.0.1", 80).ipv4? # => true
+p Addrinfo.tcp("::1", 80).ipv4?     # => false
+p Addrinfo.unix("/tmp/sock").ipv4?  # => false
 ```
 
 ### def ipv6? -> bool
@@ -247,9 +247,9 @@ p Addrinfo.unix("/tmp/sock").ipv4?  #=> false
 ```ruby
 require 'socket'
 
-p Addrinfo.tcp("127.0.0.1", 80).ipv6? #=> false
-p Addrinfo.tcp("::1", 80).ipv6?     #=> true
-p Addrinfo.unix("/tmp/sock").ipv6?  #=> false
+p Addrinfo.tcp("127.0.0.1", 80).ipv6? # => false
+p Addrinfo.tcp("::1", 80).ipv6?     # => true
+p Addrinfo.unix("/tmp/sock").ipv6?  # => false
 ```
 
 - **SEE** [m:Addrinfo#ipv4?], [m:Addrinfo#ip?]
@@ -261,9 +261,9 @@ p Addrinfo.unix("/tmp/sock").ipv6?  #=> false
 ```ruby
 require 'socket'
 
-p Addrinfo.tcp("127.0.0.1", 80).unix? #=> false
-p Addrinfo.tcp("::1", 80).unix?     #=> false
-p Addrinfo.unix("/tmp/sock").unix?  #=> true
+p Addrinfo.tcp("127.0.0.1", 80).unix? # => false
+p Addrinfo.tcp("::1", 80).unix?     # => false
+p Addrinfo.unix("/tmp/sock").unix?  # => true
 ```
 
 - **SEE** [m:Addrinfo#ip?]
@@ -275,9 +275,9 @@ p Addrinfo.unix("/tmp/sock").unix?  #=> true
 ```ruby
 require 'socket'
 
-p Addrinfo.tcp("127.0.0.1", 80).ip? #=> true
-p Addrinfo.tcp("::1", 80).ip?     #=> true
-p Addrinfo.unix("/tmp/sock").ip?  #=> false
+p Addrinfo.tcp("127.0.0.1", 80).ip? # => true
+p Addrinfo.tcp("::1", 80).ip?     # => true
+p Addrinfo.unix("/tmp/sock").ip?  # => false
 ```
 
 - **SEE** [m:Addrinfo#ipv4?], [m:Addrinfo#ipv6?], [m:Addrinfo#unix?]
@@ -289,8 +289,8 @@ IP アドレスとポート番号を 2 要素の配列で返します。
 ```ruby
 require 'socket'
 
-p Addrinfo.tcp("127.0.0.1", 80).ip_unpack  #=> ["127.0.0.1", 80]
-p Addrinfo.tcp("::1", 80).ip_unpack        #=> ["::1", 80]
+p Addrinfo.tcp("127.0.0.1", 80).ip_unpack  # => ["127.0.0.1", 80]
+p Addrinfo.tcp("::1", 80).ip_unpack        # => ["::1", 80]
 ```
 
 - **SEE** [m:Addrinfo#ip_address], [m:Addrinfo#ip_port]
@@ -302,8 +302,8 @@ IP アドレスを文字列で返します。
 ```ruby
 require 'socket'
 
-p Addrinfo.tcp("127.0.0.1", 80).ip_address  #=> "127.0.0.1"
-p Addrinfo.tcp("::1", 80).ip_address        #=> "::1"
+p Addrinfo.tcp("127.0.0.1", 80).ip_address  # => "127.0.0.1"
+p Addrinfo.tcp("::1", 80).ip_address        # => "::1"
 ```
 
 - **SEE** [m:Addrinfo#ip_port], [m:Addrinfo#ip_unpack]
@@ -315,8 +315,8 @@ p Addrinfo.tcp("::1", 80).ip_address        #=> "::1"
 ```ruby
 require 'socket'
 
-p Addrinfo.tcp("127.0.0.1", 80).ip_port  #=> 80
-p Addrinfo.tcp("::1", 80).ip_port        #=> 80
+p Addrinfo.tcp("127.0.0.1", 80).ip_port  # => 80
+p Addrinfo.tcp("::1", 80).ip_port        # => 80
 ```
 
 - **SEE** [m:Addrinfo#ip_address], [m:Addrinfo#ip_unpack]
@@ -401,11 +401,11 @@ IPv6 の v4 マップド/互換アドレスを v4 のアドレスに変換しま
 ```ruby
 require 'socket'
 
-p Addrinfo.ip("::192.0.2.3").ipv6_to_ipv4    #=> #<Addrinfo: 192.0.2.3>
-p Addrinfo.ip("::ffff:192.0.2.3").ipv6_to_ipv4 #=> #<Addrinfo: 192.0.2.3>
-p Addrinfo.ip("::1").ipv6_to_ipv4            #=> nil
-p Addrinfo.ip("192.0.2.3").ipv6_to_ipv4      #=> nil
-p Addrinfo.unix("/tmp/sock").ipv6_to_ipv4    #=> nil
+p Addrinfo.ip("::192.0.2.3").ipv6_to_ipv4    # => #<Addrinfo: 192.0.2.3>
+p Addrinfo.ip("::ffff:192.0.2.3").ipv6_to_ipv4 # => #<Addrinfo: 192.0.2.3>
+p Addrinfo.ip("::1").ipv6_to_ipv4            # => nil
+p Addrinfo.ip("192.0.2.3").ipv6_to_ipv4      # => nil
+p Addrinfo.unix("/tmp/sock").ipv6_to_ipv4    # => nil
 ```
 
 ### def unix_path -> String
@@ -415,7 +415,7 @@ Unix domain socket の path を文字列で返します。
 ```ruby
 require 'socket'
 
-p Addrinfo.unix("/tmp/sock").unix_path     #=> "/tmp/sock"
+p Addrinfo.unix("/tmp/sock").unix_path     # => "/tmp/sock"
 ```
 
 - **raise** `SocketError` -- アドレスが Unix domain socket のものでない場合に発生します
@@ -429,7 +429,7 @@ struct sockaddr をパックした形式の文字列に変換します。
 require 'socket'
 
 p Addrinfo.tcp("localhost", 80).to_sockaddr
-#=> "\x02\x00\x00P\x7F\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00"
+# => "\x02\x00\x00P\x7F\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00"
 ```
 
 ### def getnameinfo(flags=0) -> [String, String]
@@ -442,9 +442,9 @@ flags には Socket::NI_??? という名前の定数のビット OR を渡しま
 require 'socket'
 
 p Addrinfo.tcp("127.0.0.1", 80).getnameinfo
-#=> ["localhost", "www"]
+# => ["localhost", "www"]
 p Addrinfo.tcp("127.0.0.1", 80).getnameinfo(Socket::NI_NUMERICSERV)
-#=> ["localhost", "80"]
+# => ["localhost", "80"]
 ```
 
 - **param** `flags` -- フラグ
@@ -463,10 +463,10 @@ p Addrinfo.tcp("127.0.0.1", 80).getnameinfo(Socket::NI_NUMERICSERV)
 require 'socket'
 
 p Addrinfo.tcp("0.0.0.0", 4649).family_addrinfo("www.ruby-lang.org", 80)
-#=> #<Addrinfo: 221.186.184.68:80 TCP (www.ruby-lang.org:80)>
+# => #<Addrinfo: 221.186.184.68:80 TCP (www.ruby-lang.org:80)>
   
 p Addrinfo.unix("/tmp/sock").family_addrinfo("/tmp/sock2")
-#=> #<Addrinfo: /tmp/sock2 SOCK_STREAM>
+# => #<Addrinfo: /tmp/sock2 SOCK_STREAM>
 ```
 
 - **param** `host` -- ホスト(IP アドレスもしくはホスト名)
@@ -560,7 +560,7 @@ require 'socket'
 
 Addrinfo.udp("0.0.0.0", 9981).bind {|s|
   s.local_address.connect {|s| s.send "hello", 0 }
-  p s.recv(10) #=> "hello"
+  p s.recv(10) # => "hello"
 }
 ```
 
@@ -584,7 +584,7 @@ Addrinfo.udp("0.0.0.0", 9981).bind {|s|
 ```ruby
 require 'socket'
 
-p Addrinfo.tcp("localhost", 80).inspect_sockaddr   #=> "127.0.0.1:80"
-p Addrinfo.tcp("ip6-localhost", 80).inspect_sockaddr #=> "[::1]:80"
-p Addrinfo.unix("/tmp/sock").inspect_sockaddr      #=> "/tmp/sock"
+p Addrinfo.tcp("localhost", 80).inspect_sockaddr   # => "127.0.0.1:80"
+p Addrinfo.tcp("ip6-localhost", 80).inspect_sockaddr # => "[::1]:80"
+p Addrinfo.unix("/tmp/sock").inspect_sockaddr      # => "/tmp/sock"
 ```

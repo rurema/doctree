@@ -33,7 +33,7 @@ end
 require 'zlib'
 
 cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
-p Zlib::Inflate.inflate(cstr) #=> "hoge fuga end"
+p Zlib::Inflate.inflate(cstr) # => "hoge fuga end"
 ```
 
 ### def Zlib::Inflate.new(window_bits = Zlib::MAX_WBITS) -> Zlib::Inflate
@@ -50,7 +50,7 @@ require 'zlib'
 cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
 inz = Zlib::Inflate.new(15)
 inz << cstr
-p inz.finish #=> "hoge fuga end"
+p inz.finish # => "hoge fuga end"
 ```
 
 ## Instance Methods
@@ -74,7 +74,7 @@ require 'zlib'
 
 cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
 inz = Zlib::Inflate.new
-p inz.inflate(cstr) #=> "hoge fuga end"
+p inz.inflate(cstr) # => "hoge fuga end"
 ```
 
 ### def <<(string) -> self
@@ -87,10 +87,10 @@ require 'zlib'
 cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
 inz = Zlib::Inflate.new
 inz << cstr[0, 10]
-p inz.flush_next_out #=> "hoge fu"
+p inz.flush_next_out # => "hoge fu"
 
 inz << cstr[10..-1]
-p inz.flush_next_out #=> "ga end"
+p inz.flush_next_out # => "ga end"
 ```
 
 ### def finish -> String
@@ -108,7 +108,7 @@ require 'zlib'
 cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
 inz = Zlib::Inflate.new
 inz << cstr
-p inz.finish #=> "hoge fuga end"
+p inz.finish # => "hoge fuga end"
 ```
 
 ### def set_dictionary(string) -> String

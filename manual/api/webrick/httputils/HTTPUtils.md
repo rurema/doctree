@@ -32,9 +32,9 @@ p WEBrick::HTTPUtils.load_mime_types('/etc/mime.types')
 ```ruby
 require 'webrick'
 include WEBrick::HTTPUtils
-p mime_type('index.html', DefaultMimeTypes)     #=> "text/html"
-p mime_type('index.html.ja', DefaultMimeTypes)  #=> "text/html"
-p mime_type('index.hoge', DefaultMimeTypes)     #=> "application/octet-stream"
+p mime_type('index.html', DefaultMimeTypes)     # => "text/html"
+p mime_type('index.html.ja', DefaultMimeTypes)  # => "text/html"
+p mime_type('index.hoge', DefaultMimeTypes)     # => "application/octet-stream"
 ```
 
 ### module_function def parse_header(raw) -> Hash

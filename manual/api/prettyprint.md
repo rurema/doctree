@@ -32,7 +32,7 @@ p2.group(p2.indent + s.size + 1) do
 end
 p2.flush
 puts p2.output
-#=>
+# =>
 # hello
 #       a
 #       b

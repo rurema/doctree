@@ -44,8 +44,8 @@ f = File.open(filename, "w")
 gz = Zlib::GzipWriter.new(f)
 gz.puts "hogehoge" * 100
 gz.close  
-p gz.closed? #=> true
-p FileTest.size(filename) #=> 32
+p gz.closed? # => true
+p FileTest.size(filename) # => 32
 ```
 
 ### def Zlib::GzipWriter.wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
@@ -71,8 +71,8 @@ def case1
   Zlib::GzipWriter.wrap(f, Zlib::NO_COMPRESSION){|gz|
     gz.puts "hogehoge" * 100
   }
-  p f.closed? #=> true
-  p FileTest.size(filename) #=> 824
+  p f.closed? # => true
+  p FileTest.size(filename) # => 824
 end
   
 def case2
@@ -82,9 +82,9 @@ def case2
     gz.puts "hogehoge" * 100
     gz.finish
   }
-  p f.closed? #=> false
+  p f.closed? # => false
   f.close
-  p FileTest.size(filename) #=> 32
+  p FileTest.size(filename) # => 32
 end
   
 case1
@@ -111,8 +111,8 @@ filename='hoge1.gz'
 gz = Zlib::GzipWriter.open(filename)
 gz.puts "hogehoge" * 100
 gz.close
-p gz.closed? #=> true
-p FileTest.size(filename) #=> 32
+p gz.closed? # => true
+p FileTest.size(filename) # => 32
 ```
 
 ## Instance Methods
@@ -135,7 +135,7 @@ def case_finish
   f = gz.finish
   p f.atime
   # 例
-  #=> Sun Jul 06 15:43:57 +0900 2008
+  # => Sun Jul 06 15:43:57 +0900 2008
 end
  
 def case_close
@@ -146,7 +146,7 @@ def case_close
   begin
     p f.atime
   rescue IOError => err
-    puts err #=> closed stream
+    puts err # => closed stream
   end
 end
  
@@ -171,9 +171,9 @@ Zlib::GzipWriter.wrap(f, Zlib::BEST_COMPRESSION){|gz|
     puts gz.pos
   }
 }
-#=> 1
-#=> 2
-#=> 3
+# => 1
+# => 2
+# => 3
 # ...
 ```
 
@@ -195,7 +195,7 @@ fr = File.open(filename)
 Zlib::GzipReader.wrap(fr){|gz|
   puts gz.read
 }
-#=> hogefuga
+# => hogefuga
 ```
 
 - **SEE** [m:IO#<<]
@@ -226,7 +226,7 @@ fr = File.open(filename)
 Zlib::GzipReader.wrap(fr){|gz|
   puts gz.read
 }
-#=> ugo
+# => ugo
 ```
 
 - **SEE** [m:IO#putc], [m:Kernel?.putc]
@@ -249,7 +249,7 @@ fr = File.open(filename)
 Zlib::GzipReader.wrap(fr){|gz|
   puts gz.read
 }
-#=> fuga
+# => fuga
 ```
 
 - **SEE** [m:IO#puts], [m:Kernel?.puts]
@@ -272,7 +272,7 @@ fr = File.open(filename)
 Zlib::GzipReader.wrap(fr){|gz|
   puts gz.read
 }
-#=> ugo
+# => ugo
 ```
 
 - **SEE** [m:IO#print], [m:Kernel?.print]
@@ -297,7 +297,7 @@ fr = File.open(filename)
 Zlib::GzipReader.wrap(fr){|gz|
   puts gz.read
 }
-#=>       bar
+# =>       bar
 ```
 
 - **SEE** [m:IO#printf], [m:Kernel?.printf]
@@ -322,7 +322,7 @@ fr = File.open(filename)
 Zlib::GzipReader.wrap(fr){|gz|
   puts gz.read
 }
-#=> foo
+# => foo
 ```
 
 - **SEE** [m:IO#write]
@@ -363,9 +363,9 @@ def case2
 end
  
 case1
-#=> "\037\213\b\000p\257pH\002\003K+MO\344*M\317\347\002\000<\326\000\371\t\000\000\000"
+# => "\037\213\b\000p\257pH\002\003K+MO\344*M\317\347\002\000<\326\000\371\t\000\000\000"
 case2
-#=> "\037\213\b\000p\257pH\002\003J+MO\344\002\000\000\000\377\377*M\317\347\002\000\000\000\377\377\003\000<\326\000\371\t\000\000\000"
+# => "\037\213\b\000p\257pH\002\003J+MO\344\002\000\000\000\377\377*M\317\347\002\000\000\000\377\377\003\000<\326\000\371\t\000\000\000"
 ```
 
 ### def mtime=(time)
@@ -383,13 +383,13 @@ require 'zlib'
 filename='hoge1.gz'
 fw = File.open(filename, "w")
 Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
-  p gz.mtime = 1 #=> 1
+  p gz.mtime = 1 # => 1
 }
 fr = File.open(filename)
 Zlib::GzipReader.wrap(fr){|gz|
   puts gz.mtime
   # 例
-  #=> Thu Jan 01 09:00:01 +0900 1970
+  # => Thu Jan 01 09:00:01 +0900 1970
 }
 ```
 
@@ -409,11 +409,11 @@ filename='hoge1.gz'
 fw = File.open(filename, "w")
 Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
   gz.orig_name = "hogehoge"
-  p gz.orig_name #=> "hogehoge"
+  p gz.orig_name # => "hogehoge"
 }
 fr = File.open(filename)
 Zlib::GzipReader.wrap(fr){|gz|
-  puts gz.orig_name #=> hogehoge
+  puts gz.orig_name # => hogehoge
 }
 ```
 
@@ -433,11 +433,11 @@ filename='hoge1.gz'
 fw = File.open(filename, "w")
 Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
   gz.comment = "hogehoge"
-  p gz.comment #=> "hogehoge"
+  p gz.comment # => "hogehoge"
 }
 fr = File.open(filename)
 Zlib::GzipReader.wrap(fr){|gz|
-  puts gz.comment #=> hogehoge
+  puts gz.comment # => hogehoge
 }
 ```
 

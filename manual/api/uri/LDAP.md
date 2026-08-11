@@ -32,7 +32,7 @@ ldap://<host>/<dn>[?<attrs>[?<scope>[?<filter>[?<extensions>]]]]
 ```ruby title="例"
 require 'uri'
 p URI::LDAP.build(["example.com", "1", "/a", "b", "c", "d", "e=f"]).to_s   
-#=> "ldap://example.com:1/a?b?c?d?e=f"
+# => "ldap://example.com:1/a?b?c?d?e=f"
 ```
 
 ### def URI::LDAP.new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)   -> URI::LDAP

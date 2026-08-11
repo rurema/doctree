@@ -24,7 +24,7 @@ begin
   cc.to_yaml
 rescue
   p $!
-  #=> #<TypeError: can't dump anonymous class Class>
+  # => #<TypeError: can't dump anonymous class Class>
 end
 ```
 
@@ -67,9 +67,9 @@ h = {
 }
   
 print h.to_yaml
-#=> ---
-#=> :ugo: 17
-#=> :hoge: fuga
+# => ---
+# => :ugo: 17
+# => :hoge: fuga
   
 class MyDog
   attr_accessor :name, :age
@@ -79,9 +79,9 @@ c = MyDog.new
 c.name = "Pochi"
 c.age = 3
 print c.to_yaml
-#=> --- !ruby/object:MyDog
-#=> age: 3
-#=> name: Pochi
+# => --- !ruby/object:MyDog
+# => age: 3
+# => name: Pochi
 ```
 
 ### def to_yaml_style -> nil
@@ -94,10 +94,10 @@ nilを返します。
 require 'yaml'
   
 p to_yaml_style
-#=> nil
+# => nil
 a = []
 p a.to_yaml_style
-#=> nil
+# => nil
 ```
 
 ### def to_yaml_properties -> [String]
@@ -115,7 +115,7 @@ h = {
 }
   
 p h.to_yaml_properties
-#=> []
+# => []
 class MyDog
   attr_accessor :name, :age
 end
@@ -124,7 +124,7 @@ c = MyDog.new
 c.name = "Pochi"
 c.age = 3
 p c.to_yaml_properties
-#=> ["@age", "@name"]
+# => ["@age", "@name"]
 ```
 
 # reopen Hash
@@ -187,7 +187,7 @@ require 'yaml'
   
 YStruct = Struct.new("YStruct", :name)
 p YStruct::yaml_tag_class_name
-#=> "YStruct"
+# => "YStruct"
 ```
 
 ### def Struct.yaml_tag_subclasses? -> true
@@ -209,7 +209,7 @@ require 'yaml'
   
 YStruct = Struct.new("YStruct", :name)
 p YStruct::yaml_tag_read_class("YStruct")
-#=> "Struct::YStruct"
+# => "Struct::YStruct"
 ```
 
 ## Instance Methods

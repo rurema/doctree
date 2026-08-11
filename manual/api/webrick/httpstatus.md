@@ -32,7 +32,7 @@ StandardError
 
 ```ruby
 require 'webrick'
-p WEBrick::HTTPStatus[200]   #=> WEBrick::HTTPStatus::OK
+p WEBrick::HTTPStatus[200]   # => WEBrick::HTTPStatus::OK
 ```
 
 ## Module Functions
@@ -46,7 +46,7 @@ p WEBrick::HTTPStatus[200]   #=> WEBrick::HTTPStatus::OK
 
 ```ruby
 require 'webrick'
-p WEBrick::HTTPStatus.reason_phrase(304)   #=> "Not Modified"
+p WEBrick::HTTPStatus.reason_phrase(304)   # => "Not Modified"
 ```
 
 ### module_function def info?(code)    -> bool
@@ -144,7 +144,7 @@ HTTP のステータスコードを表す整数です。
 
 ```ruby
 require 'webrick'
-p WEBrick::HTTPStatus::RC_INTERNAL_SERVER_ERROR   #=> 500
+p WEBrick::HTTPStatus::RC_INTERNAL_SERVER_ERROR   # => 500
 ```
 
 # class WEBrick::HTTPStatus::Status < StandardError

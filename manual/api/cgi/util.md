@@ -15,12 +15,12 @@ CGI で利用するユーティリティメソッドを定義したライブラ�
 ```ruby title="例"
 require "cgi"
 
-p CGI.escape('@##')   #=> "%40%23%23"
+p CGI.escape('@##')   # => "%40%23%23"
 
 url = "http://www.example.com/register?url=" + 
   CGI.escape('http://www.example.com/index.rss')
 p url
-#=> "http://www.example.com/register?url=http%3A%2F%2Fwww.example.com%2Findex.rss"
+# => "http://www.example.com/register?url=http%3A%2F%2Fwww.example.com%2Findex.rss"
 ```
 
 ### def CGI.unescape(string) -> String
@@ -32,10 +32,10 @@ p url
 ```ruby
 require "cgi"
 
-p CGI.unescape('%40%23%23')   #=> "@##"
+p CGI.unescape('%40%23%23')   # => "@##"
 
 p CGI.unescape("http%3A%2F%2Fwww.example.com%2Findex.rss")
-#=> "http://www.example.com/index.rss"
+# => "http://www.example.com/index.rss"
 ```
 
 #%since 3.2
@@ -51,11 +51,11 @@ p CGI.unescape("http%3A%2F%2Fwww.example.com%2Findex.rss")
 ```ruby
 require "cgi"
 
-p CGI.escapeURIComponent("'Stop!' said Fred") #=> "%27Stop%21%27%20said%20Fred"
+p CGI.escapeURIComponent("'Stop!' said Fred") # => "%27Stop%21%27%20said%20Fred"
 
 # CGI.escape は空白を + にするが、escapeURIComponent は %20 にする
-p CGI.escape("a b")             #=> "a+b"
-p CGI.escapeURIComponent("a b") #=> "a%20b"
+p CGI.escape("a b")             # => "a+b"
+p CGI.escapeURIComponent("a b") # => "a%20b"
 ```
 
 - **SEE** [m:CGI.escape], [m:CGI.unescapeURIComponent]
@@ -69,7 +69,7 @@ p CGI.escapeURIComponent("a b") #=> "a%20b"
 ```ruby
 require "cgi"
 
-p CGI.unescapeURIComponent("%27Stop%21%27%20said%20Fred") #=> "'Stop!' said Fred"
+p CGI.unescapeURIComponent("%27Stop%21%27%20said%20Fred") # => "'Stop!' said Fred"
 ```
 
 - **SEE** [m:CGI.unescape], [m:CGI.escapeURIComponent]
@@ -85,12 +85,12 @@ p CGI.unescapeURIComponent("%27Stop%21%27%20said%20Fred") #=> "'Stop!' said Fred
 ```ruby
 require "cgi"
 
-p CGI.escapeHTML("3 > 1")   #=> "3 &gt; 1"
+p CGI.escapeHTML("3 > 1")   # => "3 &gt; 1"
 
 print('<script type="text/javascript">alert("警告")</script>')
 
 p CGI.escapeHTML('<script type="text/javascript">alert("警告")</script>')
-#=> "&lt;script type=&quot;text/javascript&quot;&gt;alert(&quot;警告&quot;)&lt;/script&gt;"
+# => "&lt;script type=&quot;text/javascript&quot;&gt;alert(&quot;警告&quot;)&lt;/script&gt;"
 ```
 
 ### def CGI.unescapeHTML(string) -> String
@@ -104,7 +104,7 @@ p CGI.escapeHTML('<script type="text/javascript">alert("警告")</script>')
 ```ruby
 require "cgi"
 
-p CGI.unescapeHTML("3 &gt; 1")   #=> "3 > 1"
+p CGI.unescapeHTML("3 &gt; 1")   # => "3 > 1"
 ```
 
 ### def CGI.escapeElement(string, *elements) -> String

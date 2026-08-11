@@ -47,7 +47,7 @@ ruby 1.9以降のRubyのThreadとネイティブスレッドが1対1で対応す
 ```ruby
 excel = WIN32OLE.new('Excel.Application')
 Thread.start do
-  workbook = excel.Workbooks.Open('workbook.xls') #=> HRESULT error code:0x800401f0
+  workbook = excel.Workbooks.Open('workbook.xls') # => HRESULT error code:0x800401f0
   workbook.PrintOut
   workbook.Close(:SaveChanges => false)
 end.join
@@ -317,7 +317,7 @@ OLEオートメーション規約ではItemと命名することが決められ�
 
 ```ruby
 fsys = WIN32OLE.new('Scripting.FileSystemObject')
-p fsys.Drives[:c].FreeSpace #=> Cドライブの空き容量
+p fsys.Drives[:c].FreeSpace # => Cドライブの空き容量
 ```
 
 ### def []=(key..., value)
@@ -343,8 +343,8 @@ WIN32OLEからデフォルトプロパティにアクセスするには、[]内�
 dict = WIN32OLE.new('Scripting.Dictionary')
 dict[:a] = 0x41
 dict[:b] = 0x42
-p dict[:a] #=> 65
-p dict[:b] #=> 66
+p dict[:a] # => 65
+p dict[:b] # => 66
 ```
 
 ### def _getproperty(dispid, args, types) -> object
@@ -380,7 +380,7 @@ puts excel._getproperty(558, [], []) # VisibleプロパティのDISPIDは558
 workbook = excel.Workbooks.Add
 sheet = workbook.Worksheets[1]
 sheet._setproperty(DISPID_CELLS, [1, 2, 'hello'], [VT_I2, VT_I2, VT_BSTR])
-puts sheet._getproperty(DISPID_CELLS, [1, 2], [VT_I2, VT_I2]).value  #=> 'hello'
+puts sheet._getproperty(DISPID_CELLS, [1, 2], [VT_I2, VT_I2]).value  # => 'hello'
 workbook.Close(:SaveChanges => false)
 excel.Quit
 ```
@@ -475,7 +475,7 @@ puts excel._setproperty(558,      # VisibleプロパティのDISPIDは558
 workbook = excel.Workbooks.Add
 sheet = workbook.Worksheets[1]
 sheet._setproperty(DISPID_CELLS, [1, 2, 'hello'], [VT_I2, VT_I2, VT_BSTR])
-puts sheet._getproperty(DISPID_CELLS, [1, 2], [VT_I2, VT_I2]).value  #=> 'hello'
+puts sheet._getproperty(DISPID_CELLS, [1, 2], [VT_I2, VT_I2]).value  # => 'hello'
 workbook.Close(:SaveChanges => false)
 excel.Quit
 ```
@@ -589,7 +589,7 @@ selfが参照するCOMオブジェクトのIUnknown::Releaseを呼び出すこ�
 ```ruby
 excel = WIN32OLE.new('Excel.Application')
 excel.ole_free  # オブジェクトの解放
-excel.Quit      #=> RuntimeError (failed to get Dispatch Interface)
+excel.Quit      # => RuntimeError (failed to get Dispatch Interface)
 ```
 
 通常は利用されなくなったWIN32OLEオブジェクトはGCのタイミングで自動的に解放されるため、当メソッドを呼び出す必要はありません。Officeのような外部プロセスサーバ呼び出し時に、スクリプト終了後もサーバが解放されない場合に強制的にサーバを終了するために当メソッドを利用できます。ただし、現実には途中で生成される子オブジェクトからの逆参照などがあるため、
@@ -845,8 +845,8 @@ OLEオートメーションサーバが引数で指定した名前のメソッ�
 
 ```ruby
 excel = WIN32OLE.new('Excel.Application')
-p excel.ole_respond_to?(:quit) #=> true
-p excel.ole_respond_to?(:exit) #=> false
+p excel.ole_respond_to?(:quit) # => true
+p excel.ole_respond_to?(:exit) # => false
 ```
 
 ### def ole_typelib -> WIN32OLE_TYPELIB

@@ -27,7 +27,7 @@ module M
   dlload './libsum.so'
   extern 'double sum(double*, int)'
 end
-p M.sum([2.0, 3.0, 4.0].pack('d*'), 3)   #=> 9.0
+p M.sum([2.0, 3.0, 4.0].pack('d*'), 3)   # => 9.0
 ```
 
 また与えられた文字列の配列 s (長さlen)の各要素の最初の文字を buf にコピーする関数
@@ -47,7 +47,7 @@ module M
 end
 buf = '111'
 M.first_char(['Abc', 'Def', 'Ghi'].pack('p*'), buf, 3) 
-p buf  #=> 'ADG'
+p buf  # => 'ADG'
 ```
 
 #### Ruby のオブジェクトをコールバックに渡したい
@@ -72,7 +72,7 @@ end
 buff =  [Time.at(1), Time.now, Time.at(100), Time.at(10)]
 a = buff.map{|t| Fiddle.dlwrap(t)}.pack('l!*')
 M.qsort(a, buff.size, Fiddle::SIZEOF_VOIDP, M::QsortCallback)
-p a.unpack('l!*').map{|t| Fiddle.dlunwrap(t).to_i }             #=> [1, 10, 100, 1241603848]
+p a.unpack('l!*').map{|t| Fiddle.dlunwrap(t).to_i }             # => [1, 10, 100, 1241603848]
 ```
 
 #### 複雑な構造体を定義したい

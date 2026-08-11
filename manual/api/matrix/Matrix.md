@@ -156,7 +156,7 @@ n × n の零行列（要素が全て 0 の行列）を生成して返します�
 
 ```ruby title="例"
 require 'matrix'
-p Matrix.zero(2) #=> Matrix[[0, 0], [0, 0]]
+p Matrix.zero(2) # => Matrix[[0, 0], [0, 0]]
 ```
 
 - **param** `n` -- 生成する正方零行列の次数
@@ -167,7 +167,7 @@ row × column の零行列（要素が全て 0 の行列）を生成して返し
 
 ```ruby title="例"
 require 'matrix'
-p Matrix.zero(2, 3) #=> Matrix[[0, 0, 0], [0, 0, 0]]
+p Matrix.zero(2, 3) # => Matrix[[0, 0, 0], [0, 0, 0]]
 ```
 
 - **param** `row` -- 生成する行列の行数
@@ -455,7 +455,7 @@ m = Matrix[[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 m[0, 0..-1] = 5
 m[1, 0..1] = Vector[2, 4]
 m[2, 0..2] = Matrix[[3, 6, 9]]
-p m #=> Matrix[[5, 5, 5], [2, 4, 0], [3, 6, 9]]
+p m # => Matrix[[5, 5, 5], [2, 4, 0], [3, 6, 9]]
 
 m = Matrix[[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 m[0..2, 0..1] = 9
@@ -529,9 +529,9 @@ self の各成分を数 other で割った行列を返します。
 ```ruby title="例"
 require 'matrix'
 
-p Matrix[[2, 1], [3, 2]].inv         #=> Matrix[[(2/1), (-1/1)], [(-3/1), (2/1)]]
+p Matrix[[2, 1], [3, 2]].inv         # => Matrix[[(2/1), (-1/1)], [(-3/1), (2/1)]]
 
-p Matrix[[2.0, 1.0], [3.0, 2.0]].inv #=> Matrix[[2.0000000000000004, -1.0000000000000002], [-3.000000000000001, 2.0000000000000004]]
+p Matrix[[2.0, 1.0], [3.0, 2.0]].inv # => Matrix[[2.0000000000000004, -1.0000000000000002], [-3.000000000000001, 2.0000000000000004]]
 ```
 
 ### def **(n) -> Matrix
@@ -554,8 +554,8 @@ self の n 乗を返します。
 ```ruby title="例"
 require 'matrix'
 
-p Matrix[[2, 1], [-1, 2]].det         #=> 5
-p Matrix[[2.0, 1.0], [-1.0, 2.0]].det #=> 5.0
+p Matrix[[2, 1], [-1, 2]].det         # => 5
+p Matrix[[2.0, 1.0], [-1.0, 2.0]].det # => 5.0
 ```
 
 ### def determinant_e -> Rational | Float
@@ -793,8 +793,8 @@ require 'matrix'
 
 m = Matrix[[1, 2], [3, 4]]
 
-p m.map! { |element| element * 10 } #=> Matrix[[10, 20], [30, 40]]
-p m                                 #=> Matrix[[10, 20], [30, 40]]
+p m.map! { |element| element * 10 } # => Matrix[[10, 20], [30, 40]]
+p m                                 # => Matrix[[10, 20], [30, 40]]
 ```
 
 - **SEE** [m:Matrix#each], [m:Matrix#map]
@@ -1075,7 +1075,7 @@ a1 = [1, 2]
 a2 = [-1.25, 2.2]
 m = Matrix[a1, a2]
 r = 1/2r
-p m.coerce(r) #=> [#<Matrix::Scalar:0x832df18 @value=(1/2)>, Matrix[[1, 2], [-1.25, 2.2]]]
+p m.coerce(r) # => [#<Matrix::Scalar:0x832df18 @value=(1/2)>, Matrix[[1, 2], [-1.25, 2.2]]]
 ```
 
 #%# bc-rdoc: detected missing name: inverse_from

@@ -29,8 +29,8 @@ def get_binding(str)
   binding
 end
 str = "hello"
-p eval("str + ' Fred'")                      #=> "hello Fred"
-p get_binding("bye").eval("str + ' Fred'")   #=> "bye Fred"
+p eval("str + ' Fred'")                      # => "hello Fred"
+p get_binding("bye").eval("str + ' Fred'")   # => "bye Fred"
 ```
 
 - **SEE** [m:Kernel?.eval]
@@ -128,7 +128,7 @@ binding.eval("defined?(#{symbol}) == 'local-variable'")
 def foo
   a = 1
   2.times do |n|
-    p binding.local_variables #=> [:a, :n]
+    p binding.local_variables # => [:a, :n]
   end
 end
 ```

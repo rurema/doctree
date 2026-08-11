@@ -28,7 +28,7 @@ dog = Struct.new("Dog", :name, :age)
 fred = dog.new("fred", 5)
 fred.age = 6
 printf "name:%s age:%d", fred.name, fred.age
-#=> "name:fred age:6" を出力します
+# => "name:fred age:6" を出力します
 ```
 
 実装の都合により、クラス名の省略は後づけの機能でした。
@@ -257,8 +257,8 @@ joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
 joe["name"] = "Luke"
 joe[:zip]   = "90210"
 
-p joe.name #=> "Luke"
-p joe.zip  #=> "90210"
+p joe.name # => "Luke"
+p joe.zip  # => "90210"
 ```
 
 ### def each {|value| ... } -> self
@@ -302,7 +302,7 @@ Foo.new('FOO', 'BAR').each_pair {|m, v| p [m,v]}
 ```ruby title="例"
 Customer = Struct.new(:name, :address, :zip)
 joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
-p joe.length #=> 3
+p joe.length # => 3
 ```
 
 ### def members -> [Symbol]
@@ -380,7 +380,7 @@ p joe.inspect # => "#<struct Customer name=\"Joe Smith\", address=\"123 Maple, A
 ```ruby title="例"
 Lots = Struct.new(:a, :b, :c, :d, :e, :f)
 l = Lots.new(11, 22, 33, 44, 55, 66)
-p l.select {|v| (v % 2).zero? } #=> [22, 44, 66]
+p l.select {|v| (v % 2).zero? } # => [22, 44, 66]
 ```
 
 #%include(Struct.attention)
@@ -431,9 +431,9 @@ Dog = Struct.new(:name, :age)
 dog1 = Dog.new("fred", 5)
 dog2 = Dog.new("fred", 5)
 
-p dog1 == dog2                #=> true
-p dog1.eql?(dog2)             #=> true
-p dog1.equal?(dog2)           #=> false
+p dog1 == dog2                # => true
+p dog1.eql?(dog2)             # => true
+p dog1.equal?(dog2)           # => false
 ```
 
 #%include(Struct.attention)
@@ -452,9 +452,9 @@ Dog = Struct.new(:name, :age)
 dog1 = Dog.new("fred", 5)
 dog2 = Dog.new("fred", 5)
 
-p dog1 == dog2                #=> true
-p dog1.eql?(dog2)             #=> true
-p dog1.equal?(dog2)           #=> false
+p dog1 == dog2                # => true
+p dog1.eql?(dog2)             # => true
+p dog1.equal?(dog2)           # => false
 ```
 
 #%include(Struct.attention)
@@ -480,9 +480,9 @@ self が保持するメンバの値が変化すればこのメソッドが返す
 ```ruby title="例"
 Dog = Struct.new(:name, :age)
 dog = Dog.new("fred", 5)
-p dog.hash                    #=> 7917421
+p dog.hash                    # => 7917421
 dog.name = "john"
-p dog.hash                    #=> -38913223
+p dog.hash                    # => -38913223
 ```
 
 #%include(Struct.attention)

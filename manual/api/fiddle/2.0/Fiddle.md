@@ -86,7 +86,7 @@ addr には [m:Fiddle?.malloc] で確保したメモリ領域を渡します。
 ```ruby title="例"
 require 'fiddle'
 addr = Fiddle.malloc(10)
-p addr               #=> 136942800
+p addr               # => 136942800
 Fiddle.free(addr)
 ```
 
@@ -99,8 +99,8 @@ Fiddle.free(addr)
 ```ruby title="例"
 require 'fiddle'
 s = 'abc'
-p addr = Fiddle.dlwrap(s)   #=> 136122440
-p Fiddle.dlunwrap(addr)     #=> "abc"
+p addr = Fiddle.dlwrap(s)   # => 136122440
+p Fiddle.dlunwrap(addr)     # => "abc"
 ```
 
 ### module_function def dlunwrap(addr)  -> object
@@ -112,8 +112,8 @@ p Fiddle.dlunwrap(addr)     #=> "abc"
 ```ruby title="例"
 require 'fiddle'
 s = 'abc'
-p addr = Fiddle.dlwrap(s)   #=> 136122440
-p Fiddle.dlunwrap(addr)     #=> "abc"
+p addr = Fiddle.dlwrap(s)   # => 136122440
+p Fiddle.dlunwrap(addr)     # => "abc"
 ```
 
 ## Constants

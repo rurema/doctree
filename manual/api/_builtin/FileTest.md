@@ -156,14 +156,14 @@ ruby 1.8.3 以前では[m:Kernel?.test](?-, file1, file2)を使ってくださ�
 
 ```ruby
 open("a", "w") {}
-p File.identical?("a", "a")      #=> true
-p File.identical?("a", "./a")    #=> true
+p File.identical?("a", "a")      # => true
+p File.identical?("a", "./a")    # => true
 File.link("a", "b")
-p File.identical?("a", "b")      #=> true
+p File.identical?("a", "b")      # => true
 File.symlink("a", "c")
-p File.identical?("a", "c")      #=> true
+p File.identical?("a", "c")      # => true
 open("d", "w") {}
-p File.identical?("a", "d")      #=> false
+p File.identical?("a", "d")      # => false
 ```
 
 - **param** `file1` -- ファイル名を表す文字列か IO オブジェクトを指定します。
@@ -401,5 +401,5 @@ path が全てのユーザから書き込めるならば、そのファイルの
 
 ```ruby
 m = FileTest.world_writable?("/tmp")
-p "%o" % m                             #=> "777"
+p "%o" % m                             # => "777"
 ```

@@ -18,7 +18,7 @@ obj = Foo.new
 def obj.foo
 end
 
-#=> singleton method "foo" was added
+# => singleton method "foo" was added
 ```
 
 - **SEE** [m:Module#method_added],[m:BasicObject#singleton_method_removed],[m:BasicObject#singleton_method_undefined]
@@ -47,7 +47,7 @@ class << obj
   remove_method :foo
 end
 
-#=> singleton method "foo" was removed
+# => singleton method "foo" was removed
 ```
 
 - **SEE** [m:Module#method_removed],[m:BasicObject#singleton_method_added],[m:BasicObject#singleton_method_undefined]
@@ -80,7 +80,7 @@ class << obj
 end
 obj.instance_eval {undef bar}
 
-#=> singleton method "foo" was undefined
+# => singleton method "foo" was undefined
 #   singleton method "bar" was undefined
 ```
 

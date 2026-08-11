@@ -29,7 +29,7 @@ ensure
 end
 puts 'end' #実行されない
 
-#=> start
+# => start
 #   start1...
 #   end1 with #<SystemExit: exit>
 #   start2...
@@ -63,7 +63,7 @@ ensure
 end
 puts 'end' #実行されない
 
-#=> start
+# => start
 #   start1...
 #終了ステータス:1
 ```
@@ -141,8 +141,8 @@ command を外部コマンドとして実行し、その標準出力を文字列
 - **raise** `Errno::EXXX` -- コマンドを実行できないときや失敗した場合に発生します。
 
 ```ruby title="例"
-puts `ruby -v` #=> ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
-puts $?.inspect #=> #<Process::Status: pid=3580,exited(0)>
+puts `ruby -v` # => ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
+puts $?.inspect # => #<Process::Status: pid=3580,exited(0)>
 ```
 
 - **SEE** [m:Kernel?.system],[m:Kernel?.exec],[m:Kernel?.spawn]
@@ -488,7 +488,7 @@ stderr と stdout を混ぜる例を以下に示します。
 
 ```ruby
 io = IO.popen(["sh", "-c", "echo out; echo err >&2", :err=>[:child, :out]])
-p io.read #=> "out\nerr\n
+p io.read # => "out\nerr\n
 ```
 
 spawn と IO.popen ではデフォルトでは非標準的なファイルデスクリプタ(3以降)を閉じません。
@@ -1089,7 +1089,7 @@ end
 # ----- end of /tmp/foo.rb ----
 
 autoload :Bar, '/tmp/foo'
-p Bar #=> Bar
+p Bar # => Bar
 ```
 
 - **SEE** [m:Kernel?.autoload?],[m:Module#autoload],[m:Kernel?.require]
@@ -1115,11 +1115,11 @@ end
 
 class Foo
 end
-p Foo.autoload?(:Bar)         #=> nil
+p Foo.autoload?(:Bar)         # => nil
 Foo.autoload :Bar, '/tmp/foo'
-p Foo.autoload?(:Bar)         #=> "/tmp/foo"
-p Foo::Bar                    #=> Foo::Bar
-p Foo.autoload?(:Bar)         #=> nil
+p Foo.autoload?(:Bar)         # => "/tmp/foo"
+p Foo::Bar                    # => Foo::Bar
+p Foo.autoload?(:Bar)         # => nil
 ```
 
 - **SEE** [m:Kernel?.autoload]
@@ -1287,7 +1287,7 @@ end
 
 debug "debug information"
 
-#=> ["-:7", "debug information"]
+# => ["-:7", "debug information"]
 ```
 
 ### module_function def caller_locations(start = 1, length = nil) -> [Thread::Backtrace::Location] | nil
@@ -1363,12 +1363,12 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内
 
 ```ruby title="main.rb"
 ARGV << 'b.txt' << 'c.txt'
-p gets #=> "hello\n"
-p gets(nil) #=> "it\ncommon\n"
-p gets("") #=> "ARGF\n\n"
-p gets('、') #=> "# スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\n# みなして、"
-p gets #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。\n"
-p gets #=> nil
+p gets # => "hello\n"
+p gets(nil) # => "it\ncommon\n"
+p gets("") # => "ARGF\n\n"
+p gets('、') # => "# スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\n# みなして、"
+p gets # => "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。\n"
+p gets # => nil
 p readline # end of file reached (EOFError)
 ```
 
@@ -1405,11 +1405,11 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内
 ```ruby title="例"
 # ---main.rb---
 ARGV << 'b.txt' << 'c.txt'
-p readline #=> "hello\n"
-p readline(nil) #=> "it\ncommon\n"
-p readline("") #=> "ARGF\n\n"
-p readline('、') #=> "スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\nみなして、"
-p readline #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
+p readline # => "hello\n"
+p readline(nil) # => "it\ncommon\n"
+p readline("") # => "ARGF\n\n"
+p readline('、') # => "スクリプトに指定した引数 (Object::ARGV を参照) をファイル名と\nみなして、"
+p readline # => "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
 p readline # end of file reached (EOFError)
 # --- b.txt ---
 hello
@@ -1437,17 +1437,17 @@ rs に nil を指定すると行区切りなしとみなします。
 
 ```ruby title="main.rb"
 ARGV << 'b.txt' << 'b.txt'
-p readlines       #=> ["hello\n", "it\n", "\n", "common\n", "hello\n", "it\n", "\n", "common\n"]
+p readlines       # => ["hello\n", "it\n", "\n", "common\n", "hello\n", "it\n", "\n", "common\n"]
 
 ARGV << 'b.txt' << 'b.txt'
-p readlines(nil)  #=> ["hello\nit\n\ncommon\n", "hello\nit\n\ncommon\n"]
+p readlines(nil)  # => ["hello\nit\n\ncommon\n", "hello\nit\n\ncommon\n"]
 
 ARGV << 'b.txt' << 'b.txt'
-p readlines("")   #=> ["hello\nit\n\n", "common\n", "hello\nit\n\n", "common\n"]
+p readlines("")   # => ["hello\nit\n\n", "common\n", "hello\nit\n\n", "common\n"]
 
 ARGV << 'b.txt' << 'b.txt'
-p readlines('it') #=> ["hello\nit", "\n\ncommon\n", "hello\nit", "\n\ncommon\n"]
-p readlines       #=> []
+p readlines('it') # => ["hello\nit", "\n\ncommon\n", "hello\nit", "\n\ncommon\n"]
+p readlines       # => []
 ```
 
 ```ruby title="b.txt"
@@ -1515,15 +1515,15 @@ p に引数を与えずに呼び出した場合は特に何もしません。
 - **return** -- 指定された引数 arg を返します。複数の引数が指定された場合はそれらを要素とする配列を返します。
 
 ```ruby title="例"
-puts "" #=> （空行）
-p "" #=> ""
+puts "" # => （空行）
+p "" # => ""
 
 puts 50,"50"
-#=> 50
-#=> 50
+# => 50
+# => 50
 p 50,"50"
-#=> 50
-#=> "50"
+# => 50
+# => "50"
 ```
 
 - **SEE** [m:Object#inspect],[m:Kernel?.puts],[m:Kernel?.print]
@@ -1550,15 +1550,15 @@ print "Hello, world!"
 print "Regexp is",/ant/
 print nil
 print "\n"
-#=> Hello, world!Regexp is(?-mix:ant)
+# => Hello, world!Regexp is(?-mix:ant)
 
 $_ = "input"
 $, = "<and>"
 $\ = "<end>\n"
 print
 print "AA","BB"
-#=> input<end>
-#=> AA<and>BB<end>
+# => input<end>
+# => AA<and>BB<end>
 ```
 
 - **SEE** [m:Kernel?.puts],[m:Kernel?.p],[m:IO#print]
@@ -1582,7 +1582,7 @@ puts ""    # 改行のみ出力
 puts       # 改行のみ出力
 puts nil   # 改行のみ出力
 puts ["oui", "non"]
-#=> foo
+# => foo
 #   bar
 #   baz
 #
@@ -1616,7 +1616,7 @@ nil
 - **raise** `Errno::EXXX` -- 出力に失敗した場合に発生します。
 
 ```ruby title="例"
-warn "caution!" #=> caution!
+warn "caution!" # => caution!
 $VERBOSE = nil
 warn "caution!" # 何もしない
 ```
@@ -1654,9 +1654,9 @@ arg に to_ary, to_a のいずれのメソッドも定義されていない場�
 - **raise** `TypeError` -- to_ary, to_a の返り値が配列でなければ発生します
 
 ```ruby title="例"
-p Array({:it => 3}) #=> [[:it, 3]]
-p Array(nil) #=> []
-p Array("fefe") #=> ["fefe"]
+p Array({:it => 3}) # => [[:it, 3]]
+p Array(nil) # => []
+p Array("fefe") # => ["fefe"]
 ```
 
 - **SEE** [m:Object#to_a],[m:Object#to_ary],[c:Array]
@@ -1788,7 +1788,7 @@ class Foo
 end
 
 arg = Foo.new
-p String(arg) #=> "hogehoge"
+p String(arg) # => "hogehoge"
 ```
 
 - **SEE** [m:Object#to_s],[c:String]
@@ -1810,7 +1810,7 @@ END{puts "END"}
 at_exit{puts "at_exit"}
 puts "main_end"
 
-#=> main_end
+# => main_end
 #   at_exit
 #   END
 #   at_exit2
@@ -1877,7 +1877,7 @@ puts re
 it.run
 re2 = sleep 0.76
 puts re2
-#=> 2
+# => 2
 #   it_end
 #   1
 ```
@@ -1899,8 +1899,8 @@ def check
     puts "Block isn't given."
   end
 end
-p check{} #=> Block is given.
-p check #=> Block isn't given.
+p check{} # => Block is given.
+p check # => Block isn't given.
 ```
 
 ### module_function def catch {|tag| .... } -> object
@@ -1928,7 +1928,7 @@ result = catch do |tag|
   end
 end
 
-p result #=> 1
+p result # => 1
 ```
 
 - **SEE** [m:Kernel?.throw]
@@ -1964,7 +1964,7 @@ ret = catch(:exit) do
   end
 end
 puts ret
-#=> ensure
+# => ensure
 #   25
 ```
 
@@ -1995,17 +1995,17 @@ range に含まれる数が無い場合は nil を返します。
 
 ```ruby title="例"
 srand(1234)     # 乱数の種を設定する。
-p rand          #=> 0.1915194503788923
-p rand          #=> 0.6221087710398319
-p rand(10)      #=> 4
-p rand(5.5)     #=> 0
+p rand          # => 0.1915194503788923
+p rand          # => 0.6221087710398319
+p rand(10)      # => 4
+p rand(5.5)     # => 0
                 # rand(5) と同じ。 5 が乱数値の範囲に含まれないことに注意。
 
-p rand(1..6)    #=> 2                   (1 から 6 までの整数)
-p rand(0...10)  #=> 1                   (0 から 9 までの整数。終端を含まない)
-p rand(1.0..1.5)  #=> 1.1362963047752432  (1.0 以上 1.5 以下の実数)
-p rand(1.0...1.5) #=> 1.1382321275715483  (1.0 以上 1.5 未満の実数)
-p rand(1..0)    #=> nil
+p rand(1..6)    # => 2                   (1 から 6 までの整数)
+p rand(0...10)  # => 1                   (0 から 9 までの整数。終端を含まない)
+p rand(1.0..1.5)  # => 1.1362963047752432  (1.0 以上 1.5 以下の実数)
+p rand(1.0...1.5) # => 1.1382321275715483  (1.0 以上 1.5 未満の実数)
+p rand(1..0)    # => nil
 ```
 
 - **SEE** [m:Kernel?.srand], [m:Random#rand], [c:Random]
@@ -2030,28 +2030,28 @@ seeds = []
 
 srand(num)
 
-p rand(6) #=> 3
-p rand(6) #=> 0
-p rand(0) #=> 0.445804380918972
-p rand(0) #=> 0.422248634121701
+p rand(6) # => 3
+p rand(6) # => 0
+p rand(0) # => 0.445804380918972
+p rand(0) # => 0.422248634121701
 
 seeds << srand
 
-p rand(6) #=> 3
-p rand(6) #=> 3
-p rand(0) #=> 0.938911141393347
-p rand(0) #=> 0.915824970865251
+p rand(6) # => 3
+p rand(6) # => 3
+p rand(0) # => 0.938911141393347
+p rand(0) # => 0.915824970865251
 
 seeds << srand(num)
 
-p rand(6) #=> 3
-p rand(6) #=> 0
-p rand(0) #=> 0.445804380918972
-p rand(0) #=> 0.422248634121701
+p rand(6) # => 3
+p rand(6) # => 0
+p rand(0) # => 0.445804380918972
+p rand(0) # => 0.422248634121701
 
 seeds << srand
 
-p seeds #=> [455675, 2995620310703489221660585195204777696, 455675]
+p seeds # => [455675, 2995620310703489221660585195204777696, 455675]
 ```
 
 #%since 3.2
@@ -2065,7 +2065,7 @@ p seeds #=> [455675, 2995620310703489221660585195204777696, 455675]
 プログラム中で定義されているグローバル変数(`$`で始まる変数)名の配列を返します。
 
 ```ruby title="例"
-p global_variables #=> [:$;, :$-F, :$@, ... ]
+p global_variables # => [:$;, :$-F, :$@, ... ]
 ```
 
 - **SEE** [m:Kernel?.local_variables],[m:Object#instance_variables],[m:Module.constants],[m:Module#constants],[m:Module#class_variables]
@@ -2076,7 +2076,7 @@ p global_variables #=> [:$;, :$-F, :$@, ... ]
 
 ```ruby title="例"
 yuyu = 0
-p local_variables #=> [:yuyu]
+p local_variables # => [:yuyu]
 ```
 
 #%since 4.0
@@ -2245,10 +2245,10 @@ hook をすべて解除してその配列を返します(ブロックで登録�
 
 ```ruby title="例"
 trace_var(:$v){|val| puts "hook: $v=#{val.inspect}" }
-$v = 1       #=> hook: $v=1
-$v = "foo"   #=> hook: $v="foo"
+$v = 1       # => hook: $v=1
+$v = "foo"   # => hook: $v="foo"
 $v.upcase!
-p $v         #=> "FOO"
+p $v         # => "FOO"
 ```
 
 - **SEE** [m:Kernel?.untrace_var]
@@ -2269,13 +2269,13 @@ varname のフックを全て解除します。
 trace_var(:$v){|val| print "hookA.#{val.inspect},\n" }
 block = proc{|val| print "hookB.#{val.inspect}," }
 trace_var(:$v,&block)
-$v = 'str'        #=> hookB."str",hookA."str",
+$v = 'str'        # => hookB."str",hookA."str",
 
 untrace_var(:$v,block)
-$v = 'str'        #=> hookA."str",
+$v = 'str'        # => hookA."str",
 
 trace_var(:$v){|val| print "hookC.#{val.inspect}," }
-p untrace_var(:$v) #=> [#<Proc:0x02b68f58 ..:9>, #<Proc:0x02b6978c ..:3>]
+p untrace_var(:$v) # => [#<Proc:0x02b68f58 ..:9>, #<Proc:0x02b6978c ..:3>]
 $v = 'str'        # なにも出力されない
 ```
 
@@ -2331,7 +2331,7 @@ rescue ArgumentError => err
 rescue NameError => err
 rescue TypeError => err
 ensure
-  p err #=> #<NameError: !!error!!>
+  p err # => #<NameError: !!error!!>
 end
 ```
 
@@ -2349,7 +2349,7 @@ ensure
   print "in ensure.\n"
 end
 
-p foo(4) #=> in method.in rescue.in method.in else.in ensure.
+p foo(4) # => in method.in rescue.in method.in else.in ensure.
 ```
 
 ```ruby title="例3"
@@ -2362,7 +2362,7 @@ end
 begin
   raise MyException.new
 rescue SecurityError
-  p $! #=> #<SecurityError: SecurityError>
+  p $! # => #<SecurityError: SecurityError>
 end
 ```
 
@@ -2389,14 +2389,14 @@ Ruby における format 文字列の拡張については
 
 ```ruby title="例"
 printf("calculate%3s%-6s%.15f", 'PI', '...', Math::PI)
-#=> calculate PI...   3.141592653589793
+# => calculate PI...   3.141592653589793
 
-printf("%d %04x", 123, 123)               #=> "123 007b"
-printf("%08b '%4s'", 123, 123)            #=> "01111011 ' 123'"
-printf("%1$*2$s %2$d %1$s", "hello", 8)   #=> "   hello 8 hello"
-printf("%1$*2$s %2$d", "hello", -8)       #=> "hello    -8"
-printf("%+g:% g:%-g", 1.23, 1.23, 1.23)   #=> "+1.23: 1.23:1.23"
-printf("%u", -123)                        #=> "..4294967173"
+printf("%d %04x", 123, 123)               # => "123 007b"
+printf("%08b '%4s'", 123, 123)            # => "01111011 ' 123'"
+printf("%1$*2$s %2$d %1$s", "hello", 8)   # => "   hello 8 hello"
+printf("%1$*2$s %2$d", "hello", -8)       # => "hello    -8"
+printf("%+g:% g:%-g", 1.23, 1.23, 1.23)   # => "+1.23: 1.23:1.23"
+printf("%u", -123)                        # => "..4294967173"
 ```
 
 - **SEE** [m:Kernel?.sprintf],[m:IO#printf]
@@ -2422,7 +2422,7 @@ def foo
   binding
 end
 
-p eval("p a", foo)  #=> 1
+p eval("p a", foo)  # => 1
 ```
 
 - **SEE** [m:Kernel?.eval],[m:Object::TOPLEVEL_BINDING]
@@ -2451,13 +2451,13 @@ bind によらずに特定のオブジェクトのコンテキストで expr を
 ```ruby title="例"
 a = nil
 eval('a = RUBY_RELEASE_DATE')
-p a #=> "2007-03-13"
+p a # => "2007-03-13"
 
 eval('def fuga;p 777 end')
-p fuga #=> 777
+p fuga # => 777
 
 eval('raise RuntimeError', binding, 'XXX.rb', 4)
-#=> XXX.rb:4: RuntimeError (RuntimeError)
+# => XXX.rb:4: RuntimeError (RuntimeError)
 #       from ..:9
 ```
 
@@ -2491,7 +2491,7 @@ def foo &block
 end
 
 it = foo{p 12}
-p it.call #=> 12
+p it.call # => 12
 ```
 
 - **SEE** [c:Proc],[m:Proc.new]
@@ -2508,9 +2508,9 @@ def foo
   p __method__
 end
 alias :bar :foo
-p foo #=> :foo
-p bar #=> :foo
-p __method__ #=> nil
+p foo # => :foo
+p bar # => :foo
+p __method__ # => nil
 ```
 
 現在のメソッド名が alias されたメソッドの場合でも alias 元のメソッド名を返します。

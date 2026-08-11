@@ -47,10 +47,10 @@ cmsg_data には補助データの内容となる文字列を渡します
 require 'socket'
 
 p Socket::AncillaryData.new(:INET, :TCP, :NODELAY, "")
-#=> #<Socket::AncillaryData: INET TCP NODELAY "">
+# => #<Socket::AncillaryData: INET TCP NODELAY "">
   
 p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "")
-#=> #<Socket::AncillaryData: INET6 IPV6 PKTINFO "">
+# => #<Socket::AncillaryData: INET6 IPV6 PKTINFO "">
 ```
 
 - **param** `family` -- ソケットファミリー
@@ -69,7 +69,7 @@ Socket::AncillaryData オブジェクトを生成します。
 require 'socket'
 
 p Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, STDERR.fileno)
-#=> #<Socket::AncillaryData: UNIX SOCKET RIGHTS 2>
+# => #<Socket::AncillaryData: UNIX SOCKET RIGHTS 2>
 ```
 
 - **param** `family` -- ソケットファミリー
@@ -88,7 +88,7 @@ ios で指定したファイルのファイルデスクリプタをデータと�
 require 'socket'
 
 p Socket::AncillaryData.unix_rights(STDERR)
-#=> #<Socket::AncillaryData: UNIX SOCKET RIGHTS 2>
+# => #<Socket::AncillaryData: UNIX SOCKET RIGHTS 2>
 ```
 
 - **param** `ios` -- IO オブジェクトの配列
@@ -108,7 +108,7 @@ addr = Addrinfo.ip("127.0.0.1")
 ifindex = 0
 spec_dst = Addrinfo.ip("127.0.0.1")
 p Socket::AncillaryData.ip_pktinfo(addr, ifindex, spec_dst)
-#=> #<Socket::AncillaryData: INET IP PKTINFO 127.0.0.1 ifindex:0 spec_dst:127.0.0.1>
+# => #<Socket::AncillaryData: INET IP PKTINFO 127.0.0.1 ifindex:0 spec_dst:127.0.0.1>
 ```
 
 - **param** `addr` -- アドレス(文字列もしくは [c:Addrinfo])
@@ -130,7 +130,7 @@ require 'socket'
 addr = Addrinfo.ip("::1")
 ifindex = 0
 p Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
-#=> #<Socket::AncillaryData: INET6 IPV6 PKTINFO ::1 ifindex:0>
+# => #<Socket::AncillaryData: INET6 IPV6 PKTINFO ::1 ifindex:0>
 ```
 
 - **param** `addr` -- アドレス(文字列もしくは [c:Addrinfo])
@@ -148,7 +148,7 @@ p Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
 require 'socket'
 
 p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").family
-#=> 10
+# => 10
 ```
 
 - **SEE** [m:Socket::AncillaryData.new]
@@ -161,7 +161,7 @@ p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").family
 require 'socket'
 
 p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").level
-#=> 41
+# => 41
 ```
 
 - **SEE** [m:Socket::AncillaryData.new]
@@ -174,7 +174,7 @@ p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").level
 require 'socket'
 
 p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").type
-#=> 2
+# => 2
 ```
 
 - **SEE** [m:Socket::AncillaryData.new]
@@ -187,7 +187,7 @@ p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").type
 require 'socket'
 
 p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").type
-#=> ""
+# => ""
 ```
 
 - **SEE** [m:Socket::AncillaryData.new]
@@ -200,10 +200,10 @@ p Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "").type
 require 'socket'
 
 ancdata = Socket::AncillaryData.new(:INET6, :IPV6, :PKTINFO, "")
-p ancdata.cmsg_is?(Socket::IPPROTO_IPV6, Socket::IPV6_PKTINFO) #=> true
-p ancdata.cmsg_is?(:IPV6, :PKTINFO)     #=> true
-p ancdata.cmsg_is?(:IP, :PKTINFO)       #=> false
-p ancdata.cmsg_is?(:SOCKET, :RIGHTS)    #=> false
+p ancdata.cmsg_is?(Socket::IPPROTO_IPV6, Socket::IPV6_PKTINFO) # => true
+p ancdata.cmsg_is?(:IPV6, :PKTINFO)     # => true
+p ancdata.cmsg_is?(:IP, :PKTINFO)       # => false
+p ancdata.cmsg_is?(:SOCKET, :RIGHTS)    # => false
 ```
 
 - **param** `level` -- 一致を確認する cmsg_level (文字列、シンボル、整数)
@@ -220,7 +220,7 @@ p ancdata.cmsg_is?(:SOCKET, :RIGHTS)    #=> false
 require 'socket'
 
 ancdata = Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, STDERR.fileno)
-p ancdata.int #=> 2
+p ancdata.int # => 2
 ```
 
 - **raise** `TypeError` -- cmgs data のサイズが int のバイト数と異なる場合に発生します
@@ -246,21 +246,21 @@ require 'socket'
 
 # recvmsg needs :scm_rights=>true for unix_rights
 s1, s2 = UNIXSocket.pair
-p s1                                         #=> #<UNIXSocket:fd 3>
+p s1                                         # => #<UNIXSocket:fd 3>
 s1.sendmsg "stdin and a socket", 0, nil, Socket::AncillaryData.unix_rights(STDIN, s1)
 _, _, _, ctl = s2.recvmsg(:scm_rights=>true)
 p ctl
-#=> #<Socket::AncillaryData: UNIX SOCKET RIGHTS 6 7>
-p ctl.unix_rights                            #=> [#<IO:fd 6>, #<Socket:fd 7>]
-p File.identical?(STDIN, ctl.unix_rights[0]) #=> true
-p File.identical?(s1, ctl.unix_rights[1])    #=> true
+# => #<Socket::AncillaryData: UNIX SOCKET RIGHTS 6 7>
+p ctl.unix_rights                            # => [#<IO:fd 6>, #<Socket:fd 7>]
+p File.identical?(STDIN, ctl.unix_rights[0]) # => true
+p File.identical?(s1, ctl.unix_rights[1])    # => true
   
 # If :scm_rights=>true is not given, unix_rights returns nil
 s1, s2 = UNIXSocket.pair
 s1.sendmsg "stdin and a socket", 0, nil, Socket::AncillaryData.unix_rights(STDIN, s1)
 _, _, _, ctl = s2.recvmsg
-p ctl #=> #<Socket::AncillaryData: UNIX SOCKET RIGHTS 6 7>
-p ctl.unix_rights #=> nil
+p ctl # => #<Socket::AncillaryData: UNIX SOCKET RIGHTS 6 7>
+p ctl.unix_rights # => nil
 ```
 
 - **raise** `TypeError` -- family/level/type が AF_UNIX/SOL_SOCKET/SCM_RIGHTS でない場合
@@ -285,11 +285,11 @@ Addrinfo.udp("127.0.0.1", 0).bind {|s1|
     s2.send "a", 0, s1.local_address
     ctl = s1.recvmsg.last
     p ctl    
-    #=> #<Socket::AncillaryData: INET SOCKET TIMESTAMP 2009-02-24 17:35:46.775581>
+    # => #<Socket::AncillaryData: INET SOCKET TIMESTAMP 2009-02-24 17:35:46.775581>
     t = ctl.timestamp
-    p t      #=> 2009-02-24 17:35:46 +0900
-    p t.usec #=> 775581
-    p t.nsec #=> 775581000
+    p t      # => 2009-02-24 17:35:46 +0900
+    p t.usec # => 775581
+    p t.nsec # => 775581000
   }
 }
 ```
@@ -317,7 +317,7 @@ ifindex = 0
 spec_dest = Addrinfo.ip("127.0.0.1")
 ancdata = Socket::AncillaryData.ip_pktinfo(addr, ifindex, spec_dest)
 p ancdata.ip_pktinfo
-#=> [#<Addrinfo: 127.0.0.1>, 0, #<Addrinfo: 127.0.0.1>]
+# => [#<Addrinfo: 127.0.0.1>, 0, #<Addrinfo: 127.0.0.1>]
 ```
 
 - **raise** `TypeError` -- level, type が IPPROTO_IP, IP_PKTINFO でない場合に
@@ -339,7 +339,7 @@ require 'socket'
 addr = Addrinfo.ip("::1")
 ifindex = 0
 ancdata = Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
-p ancdata.ipv6_pktinfo #=> [#<Addrinfo: ::1>, 0]
+p ancdata.ipv6_pktinfo # => [#<Addrinfo: ::1>, 0]
 ```
 
 - **SEE** [m:Socket::AncillaryData.ipv6_pktinfo], 
@@ -359,7 +359,7 @@ require 'socket'
 addr = Addrinfo.ip("::1")
 ifindex = 0
 ancdata = Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
-p ancdata.ipv6_pktinfo_addr #=> #<Addrinfo: ::1>
+p ancdata.ipv6_pktinfo_addr # => #<Addrinfo: ::1>
 ```
 
 - **SEE** [m:Socket::AncillaryData.ipv6_pktinfo], 
@@ -379,7 +379,7 @@ require 'socket'
 addr = Addrinfo.ip("::1")
 ifindex = 0
 ancdata = Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
-p ancdata.ipv6_pktinfo_ifindex #=> 0
+p ancdata.ipv6_pktinfo_ifindex # => 0
 ```
 
 - **SEE** [m:Socket::AncillaryData.ipv6_pktinfo], 

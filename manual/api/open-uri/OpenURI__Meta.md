@@ -19,7 +19,7 @@ Last-Modified ヘッダがない場合は nil を返します。
 require 'open-uri'
 URI.open('http://www.rubyist.net/') {|f|
   p f.last_modified
-  #=> Thu Feb 26 16:54:58 +0900 2004
+  # => Thu Feb 26 16:54:58 +0900 2004
 }
 ```
 
@@ -31,7 +31,7 @@ Content-Type ヘッダがない場合は、"application/octet-stream" を返し�
 ```ruby title="例"
 require 'open-uri'
 URI.open('http://www.ruby-lang.org/') {|f|
-  p f.content_type  #=> "text/html"
+  p f.content_type  # => "text/html"
 }
 ```
 
@@ -62,7 +62,7 @@ Content-Encoding ヘッダがない場合は、空の配列を返します。
 ```ruby title="例"
 require 'open-uri'
 URI.open('http://example.com/f.tar.gz') {|f|
-  p f.content_encoding  #=> ["x-gzip"]
+  p f.content_encoding  # => ["x-gzip"]
 }
 ```
 
@@ -73,7 +73,7 @@ URI.open('http://example.com/f.tar.gz') {|f|
 ```ruby title="例"
 require 'open-uri'
 URI.open('http://example.com/') {|f|
-  p f.status  #=> ["200", "OK"]
+  p f.status  # => ["200", "OK"]
 }
 ```
 
@@ -86,7 +86,7 @@ URI.open('http://example.com/') {|f|
 require 'open-uri'
 URI.open('http://www.ruby-lang.org/') {|f|
   p f.base_uri
-  #=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
+  # => #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
 }
 ```
 
@@ -98,7 +98,7 @@ URI.open('http://www.ruby-lang.org/') {|f|
 require 'open-uri'
 URI.open('http://example.com/') {|f|
   p f.meta
-  #=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
+  # => {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
   #    "content-type"=>"text/html;charset=utf-8",
   #    "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
   #    "transfer-encoding"=>"chunked"}

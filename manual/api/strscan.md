@@ -13,25 +13,25 @@ StringScanner は文字列スキャナクラスです。
 require 'strscan'
 
 s = StringScanner.new('This is an example string')
-p s.eos?          #=> false
+p s.eos?          # => false
 
-p s.scan(/\w+/)   #=> "This"
-p s.scan(/\w+/)   #=> nil
-p s.scan(/\s+/)   #=> " "
-p s.scan(/\s+/)   #=> nil
-p s.scan(/\w+/)   #=> "is"
-p s.eos?          #=> false
+p s.scan(/\w+/)   # => "This"
+p s.scan(/\w+/)   # => nil
+p s.scan(/\s+/)   # => " "
+p s.scan(/\s+/)   # => nil
+p s.scan(/\w+/)   # => "is"
+p s.eos?          # => false
 
-p s.scan(/\s+/)   #=> " "
-p s.scan(/\w+/)   #=> "an"
-p s.scan(/\s+/)   #=> " "
-p s.scan(/\w+/)   #=> "example"
-p s.scan(/\s+/)   #=> " "
-p s.scan(/\w+/)   #=> "string"
-p s.eos?          #=> true
+p s.scan(/\s+/)   # => " "
+p s.scan(/\w+/)   # => "an"
+p s.scan(/\s+/)   # => " "
+p s.scan(/\w+/)   # => "example"
+p s.scan(/\s+/)   # => " "
+p s.scan(/\w+/)   # => "string"
+p s.eos?          # => true
 
-p s.scan(/\s+/)   #=> nil
-p s.scan(/\w+/)   #=> nil
+p s.scan(/\s+/)   # => nil
+p s.scan(/\w+/)   # => nil
 ```
 
 StringScanner オブジェクトはスキャンする文字列と「スキャンポインタ」のセットです。
@@ -72,20 +72,20 @@ require 'strscan'
 
 def case1
   s = StringScanner.new('test string')
-  p s.scan(/t/)       #=> "t"
-  p s.scan(/\w+/)     #=> "est"
-  p s.scan(/string/)  #=> nil
-  p s.scan(/\s+/)     #=> " "
-  p s.scan(/string/)  #=> "string"
+  p s.scan(/t/)       # => "t"
+  p s.scan(/\w+/)     # => "est"
+  p s.scan(/string/)  # => nil
+  p s.scan(/\s+/)     # => " "
+  p s.scan(/string/)  # => "string"
 end
 
 def case2
   s = StringScanner.new('test string')
-  p s.scan_until(/t/)       #=> "t"
-  p s.scan_until(/\w+/)     #=> "est"
-  p s.scan_until(/string/)  #=> " string"
-  p s.scan_until(/\s+/)     #=> nil
-  p s.scan_until(/string/)  #=> nil
+  p s.scan_until(/t/)       # => "t"
+  p s.scan_until(/\w+/)     # => "est"
+  p s.scan_until(/string/)  # => " string"
+  p s.scan_until(/\s+/)     # => nil
+  p s.scan_until(/string/)  # => nil
 end
 
 p "case1"
@@ -101,7 +101,7 @@ case2
 # vim:set fileencoding=euc-jp:
 require 'strscan'
 s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
-p s.exist?(/び/) #=> 4
+p s.exist?(/び/) # => 4
 ```
 
 StringScanner は $~ $& $1 $2 …… などの正規表現関連変数をセットしません。代わりに [m:StringScanner#\[\]], [m:StringScanner#matched?] などのマッチデータ関連メソッドを使ってください。
@@ -121,11 +121,11 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数をセッ�
 require 'strscan'
 
 s = StringScanner.new('This is an example string')
-p s.eos?          #=> false
+p s.eos?          # => false
 
-p s.scan(/\w+/)   #=> "This"
-p s.scan(/\w+/)   #=> nil
-p s.scan(/\s+/)   #=> " "
+p s.scan(/\w+/)   # => "This"
+p s.scan(/\w+/)   # => nil
+p s.scan(/\s+/)   # => " "
 ```
 
 ### def StringScanner.must_C_version -> self
@@ -335,13 +335,13 @@ require 'strscan'
 
 utf8 = "\u{308B 3073 3044}"
 s = StringScanner.new(utf8.encode("EUC-JP"))
-p s.get_byte       #=> "\xA4"
-p s.get_byte       #=> "\xEB"
-p s.get_byte       #=> "\xA4"
-p s.get_byte       #=> "\xD3"
-p s.get_byte       #=> "\xA4"
-p s.get_byte       #=> "\xA4"
-p s.get_byte       #=> nil
+p s.get_byte       # => "\xA4"
+p s.get_byte       # => "\xEB"
+p s.get_byte       # => "\xA4"
+p s.get_byte       # => "\xD3"
+p s.get_byte       # => "\xA4"
+p s.get_byte       # => "\xA4"
+p s.get_byte       # => nil
 ```
 
 ### def inspect -> String
@@ -382,7 +382,7 @@ def case1(encode)
   s.match?(/#{"\u{308B}".encode(encode)}/)
 end
 
-p case1("EUC-JP")     #=> 2
+p case1("EUC-JP")     # => 2
 ```
 
 - **param** `regexp` -- マッチに用いる正規表現を指定します。
@@ -391,9 +391,9 @@ p case1("EUC-JP")     #=> 2
 require 'strscan'
 
 s = StringScanner.new('test string')
-p s.match?(/\w+/)   #=> 4
-p s.match?(/\w+/)   #=> 4
-p s.match?(/\s+/)   #=> nil
+p s.match?(/\w+/)   # => 4
+p s.match?(/\w+/)   # => 4
+p s.match?(/\s+/)   # => nil
 ```
 
 ### def matched -> String | nil
@@ -448,9 +448,9 @@ def run(encode)
   s.matched_size
 end
 
-p run("UTF-8")     #=> 3
-p run("EUC-JP")    #=> 2
-p run("Shift_Jis") #=> 2
+p run("UTF-8")     # => 3
+p run("EUC-JP")    # => 2
+p run("Shift_Jis") # => 2
 
 ```
 
@@ -575,7 +575,7 @@ p s.scan(/\w+/) # => "ring"
 begin
   s.pos = 20
 rescue RangeError => err
-  puts err #=> index out of range
+  puts err # => index out of range
 end
 p s.pos = -4    # => -4
 p s.scan(/\w+/) # => "ring"
@@ -715,11 +715,11 @@ p s.rest.size # => 11
 require 'strscan'
 
 s = StringScanner.new('test string')
-p s.scan(/\w+/)   #=> "test"
-p s.scan(/\w+/)   #=> nil
-p s.scan(/\s+/)   #=> " "
-p s.scan(/\w+/)   #=> "string"
-p s.scan(/./)     #=> nil
+p s.scan(/\w+/)   # => "test"
+p s.scan(/\w+/)   # => nil
+p s.scan(/\s+/)   # => " "
+p s.scan(/\w+/)   # => "string"
+p s.scan(/./)     # => nil
 ```
 
 ### def scan_full(regexp, s, f) -> object
@@ -754,11 +754,11 @@ p s.scan(/./)     #=> nil
 require 'strscan'
 
 s = StringScanner.new('test string')
-p s.scan_full(/\w+/, true, true)     #=> "test"
-p s.scan_full(/\s+/, false, true)    #=> " "
-p s.scan_full(/\s+/, true, false)    #=> 1
-p s.scan_full(/\w+/, false, false)   #=> 6
-p s.scan_full(/\w+/, true, true)     #=> "string"
+p s.scan_full(/\w+/, true, true)     # => "test"
+p s.scan_full(/\s+/, false, true)    # => " "
+p s.scan_full(/\s+/, true, false)    # => 1
+p s.scan_full(/\w+/, false, false)   # => 6
+p s.scan_full(/\w+/, true, true)     # => "string"
 ```
 
 - **SEE** [m:StringScanner#scan] [m:StringScanner#skip] [m:StringScanner#check]  [m:StringScanner#match?]
@@ -813,9 +813,9 @@ regexp で指定された正規表現とマッチするまで文字列をスキ�
 require 'strscan'
 
 s = StringScanner.new('test string')
-p s.search_full(/t/, true, true)       #=> "t"
-p s.search_full(/str/, false, true)    #=> "est str"
-p s.search_full(/string/, true, true)  #=> "est string"
+p s.search_full(/t/, true, true)       # => "t"
+p s.search_full(/str/, false, true)    # => "est str"
+p s.search_full(/string/, true, true)  # => "est string"
 ```
 
 - **SEE** [m:StringScanner#scan_until] [m:StringScanner#skip_until] [m:StringScanner#check_until] [m:StringScanner#exist?]
@@ -831,11 +831,11 @@ p s.search_full(/string/, true, true)  #=> "est string"
 require 'strscan'
 
 s = StringScanner.new('test string')
-p s.skip(/\w+/)   #=> 4
-p s.skip(/\w+/)   #=> nil
-p s.skip(/\s+/)   #=> 1
-p s.skip(/\w+/)   #=> 6
-p s.skip(/./)     #=> nil
+p s.skip(/\w+/)   # => 4
+p s.skip(/\w+/)   # => nil
+p s.skip(/\s+/)   # => 1
+p s.skip(/\w+/)   # => 6
+p s.skip(/./)     # => nil
 ```
 
 ### def skip_until(regexp) -> Integer | nil
@@ -978,7 +978,7 @@ begin
 rescue StringScanner::Error => err
   puts err
   # 出力例
-  #=> unscan failed: previous match had failed
+  # => unscan failed: previous match had failed
 end
 p s.scan(/\w+/) # => "test"
 s.unscan
@@ -988,7 +988,7 @@ begin
 rescue StringScanner::Error => err
   puts err
   # 出力例
-  #=> unscan failed: previous match had failed
+  # => unscan failed: previous match had failed
 end
 p s.scan(/\w+/) # => "test"
 p s.scan(/\w+/) # => nil
@@ -998,7 +998,7 @@ begin
 rescue => err
   puts err
   # 出力例
-  #=> unscan failed: previous match had failed
+  # => unscan failed: previous match had failed
 end
 ```
 

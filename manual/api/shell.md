@@ -279,7 +279,7 @@ Shellでもちいられるコマンドを検索する対象のパスを設定お
 require 'shell'
 p Shell.default_system_path 
 # 例
-#=> [ "/opt/local/bin", "/opt/local/sbin", "/usr/bin", "/bin", "/usr/sbin", "/sbin", "/usr/local/bin", "/usr/X11/bin", "/Users/kouya/bin"]
+# => [ "/opt/local/bin", "/opt/local/sbin", "/usr/bin", "/bin", "/usr/sbin", "/sbin", "/usr/local/bin", "/usr/X11/bin", "/Users/kouya/bin"]
 Shell.default_system_path = ENV["HOME"] + "/bin"
 p Shell.default_system_path
 # => "/Users/kouya/bin"
@@ -344,7 +344,7 @@ require 'shell'
 sh = Shell.new
 p sh.cwd 
 # 例
-#=> "/Users/kouya/tall"
+# => "/Users/kouya/tall"
 ```
 
 ### def system_path -> Array 
@@ -358,7 +358,7 @@ p sh.cwd
 require 'shell'
 sh = Shell.new
 sh.system_path = [ "./" ]
-p sh.system_path #=> ["./"]
+p sh.system_path # => ["./"]
 ```
 
 ### def umask -> object
@@ -398,9 +398,9 @@ require 'shell'
 sh = Shell.new
 sh.transact {
   cd("/tmp"){
-    p cwd #=> "/tmp"
+    p cwd # => "/tmp"
   }
-  p cwd #=> "/Users/kouya/rbmanual"
+  p cwd # => "/Users/kouya/rbmanual"
 }
 ```
 
@@ -418,15 +418,15 @@ sh.transact {
   Shell.verbose = false
   sh = Shell.new
   sh.pushd("/tmp")
-  p sh.cwd #=> "/tmp"
+  p sh.cwd # => "/tmp"
   sh.pushd("/usr")
-  p sh.cwd #=> "/usr"
+  p sh.cwd # => "/usr"
   sh.popd
-  p sh.cwd #=> "/tmp"
+  p sh.cwd # => "/tmp"
   sh.pushd("/usr/local"){
-    p sh.cwd #=> "/usr/local"
+    p sh.cwd # => "/usr/local"
   }
-  p sh.cwd #=> "/tmp"
+  p sh.cwd # => "/tmp"
   ```
 
 ### def popd -> ()
@@ -439,11 +439,11 @@ require 'shell'
 Shell.verbose = false
 sh = Shell.new
 sh.pushd("/tmp")
-p sh.cwd #=> "/tmp"
+p sh.cwd # => "/tmp"
 sh.pushd("/usr")
-p sh.cwd #=> "/usr"
+p sh.cwd # => "/usr"
 sh.popd
-p sh.cwd #=> "/tmp"
+p sh.cwd # => "/tmp"
 ```
 
 #%# 組込みコマンド

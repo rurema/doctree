@@ -203,8 +203,8 @@ FileUtils.chown_R 'cvs', 'cvs', '/var/cvs', verbose: true
 
 ```ruby
 require 'fileutils'
-p FileUtils.cmp('somefile', 'somefile')    #=> true
-p FileUtils.cmp('/dev/null', '/dev/urandom') #=> false
+p FileUtils.cmp('somefile', 'somefile')    # => true
+p FileUtils.cmp('/dev/null', '/dev/urandom') # => false
 ```
 
 ### module_function def compare_stream(io_a, io_b) -> bool

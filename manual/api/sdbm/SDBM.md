@@ -82,7 +82,7 @@ db1['a'] = 'aaa'
 db1['b'] = 'bbb'
 db1['c'] = 'ccc'
   
-p db1.delete('a') #=> 'aaa'
+p db1.delete('a') # => 'aaa'
 ```
 
 ### def reject! { |key, value|  ...  }   -> self
@@ -98,8 +98,8 @@ db1['a'] = 'aaa'
 db1['b'] = 'bbb'
 db1['c'] = 'ccc'
   
-p db1                                    #=> #<SDBM:0xb7cc96f8>
-p db1.reject!{ |key, value| key == 'a' } #=> #<SDBM:0xb7cc96f8>
+p db1                                    # => #<SDBM:0xb7cc96f8>
+p db1.reject!{ |key, value| key == 'a' } # => #<SDBM:0xb7cc96f8>
 ```
 
 ### def reject {|key, value| ... } -> Hash
@@ -167,7 +167,7 @@ db1 = SDBM.open('aaa.gdbm', 0666)
 db1['a'] = 'aaa'
 db1['b'] = 'bbb'
 db1['c'] = 'ccc'
-p db1.keys #=> ["a", "b","c"]
+p db1.keys # => ["a", "b","c"]
 ```
 
 ### def length -> Integer
@@ -190,7 +190,7 @@ db1 = SDBM.open('aaa.gdbm', 0666)
 db1['a'] = 'aaa'
 db1['b'] = 'bbb'
 db1['c'] = 'ccc'
-p db1.shift #=> ["a", "aaa"]
+p db1.shift # => ["a", "aaa"]
 ```
 
 ### def values -> [String]
@@ -215,12 +215,12 @@ db2['c'] = 'ccc'
 db2['d'] = 'ddd'
 hash = { 'x' => 'xxx', 'y' => 'yyy'}
   
-p db1               #=> #<SDBM:0xb7c304d0>
-p db1.to_hash       #=> {"a"=>"aaa", "b"=>"bbb", "c"=>"ccc"}
-p db1.replace(db2)  #=> #<SDBM:0xb7c304d0>
-p db1.to_hash       #=> {"c"=>"ccc", "d"=>"ddd"}
-p db1.replace(hash) #=> #<SDBM:0xb7c304d0>
-p db1.to_hash       #=> {"x"=>"xxx", "y"=>"yyy"}
+p db1               # => #<SDBM:0xb7c304d0>
+p db1.to_hash       # => {"a"=>"aaa", "b"=>"bbb", "c"=>"ccc"}
+p db1.replace(db2)  # => #<SDBM:0xb7c304d0>
+p db1.to_hash       # => {"c"=>"ccc", "d"=>"ddd"}
+p db1.replace(hash) # => #<SDBM:0xb7c304d0>
+p db1.to_hash       # => {"x"=>"xxx", "y"=>"yyy"}
 ```
 
 ### def fetch(key, ifnone = nil){|key| ... } -> object
@@ -241,11 +241,11 @@ db1['a'] = 'aaa'
 db1['b'] = 'bbb'
 db1['c'] = 'ccc'
   
-p db1.fetch('a')                             #=> "aaa"
-p db1.fetch('z', 'zzz')                      #=> "zzz"
-p db1.fetch('z'){|key| [:key, key] }         #=> [:key, "z"]
-p db1.fetch('z', 'zzz'){|key| [:key, key] }  #=> "zzz"
-p db1.fetch('z')                             #=> IndexError 発生
+p db1.fetch('a')                             # => "aaa"
+p db1.fetch('z', 'zzz')                      # => "zzz"
+p db1.fetch('z'){|key| [:key, key] }         # => [:key, "z"]
+p db1.fetch('z', 'zzz'){|key| [:key, key] }  # => "zzz"
+p db1.fetch('z')                             # => IndexError 発生
 ```
 
 ### def store(key, val) -> [String]
@@ -267,8 +267,8 @@ db1['a'] = 'aaa'
 db1['b'] = 'bbb'
 db1['c'] = 'ccc'
   
-p db1.select{ |key, value| key == 'a' } #=> [["a", "aaa"]]
-p db1.select{ |key, value| key != 'a' } #=> [["c", "ccc"], ["b", "bbb"]]
+p db1.select{ |key, value| key == 'a' } # => [["a", "aaa"]]
+p db1.select{ |key, value| key != 'a' } # => [["c", "ccc"], ["b", "bbb"]]
 ```
 
 ### def values_at(*keys) -> [String]
@@ -285,7 +285,7 @@ db1['a'] = 'aaa'
 db1['b'] = 'bbb'
 db1['c'] = 'ccc'
   
-p db1.values_at('a', 'b')  #=> ["aaa", "bbb"]
+p db1.values_at('a', 'b')  # => ["aaa", "bbb"]
 ```
 
 ### def invert -> Hash
@@ -301,7 +301,7 @@ db1['a'] = 'aaa'
 db1['b'] = 'bbb'
 db1['c'] = 'ccc'
   
-p db1.invert #=> {"aaa"=>"a", "bbb"=>"b", "ccc"=>"c"}
+p db1.invert # => {"aaa"=>"a", "bbb"=>"b", "ccc"=>"c"}
 ```
 
 ### def update(other) -> self
@@ -326,12 +326,12 @@ db2['c'] = 'ccc'
 db2['d'] = 'ddd'
 hash = { 'x' => 'xxx', 'y' => 'yyy'}
   
-p db1               #=> #<SDBM:0xb7d19554>
-p db1.to_hash       #=> {"a"=>"aaa", "b"=>"bbb", "c"=>"ccc"}
-p db1.update(db2)   #=> #<SDBM:0xb7d19554>
-p db1.to_hash       #=> {"a"=>"aaa", "b"=>"bbb", "c"=>"ccc", "d"=>"ddd"}
-p db1.update(hash)  #=> #<SDBM:0xb7d19554>
-p db1.to_hash       #=> {"a"=>"aaa", "x"=>"xxx", "b"=>"bbb", "y"=>"yyy", "c"=>"ccc", "d"=>"ddd"}
+p db1               # => #<SDBM:0xb7d19554>
+p db1.to_hash       # => {"a"=>"aaa", "b"=>"bbb", "c"=>"ccc"}
+p db1.update(db2)   # => #<SDBM:0xb7d19554>
+p db1.to_hash       # => {"a"=>"aaa", "b"=>"bbb", "c"=>"ccc", "d"=>"ddd"}
+p db1.update(hash)  # => #<SDBM:0xb7d19554>
+p db1.to_hash       # => {"a"=>"aaa", "x"=>"xxx", "b"=>"bbb", "y"=>"yyy", "c"=>"ccc", "d"=>"ddd"}
 ```
 
 ### def to_a -> [[String]]
@@ -350,7 +350,7 @@ db1['a'] = 'aaa'
 db1['b'] = 'bbb'
 db1['c'] = 'ccc'
   
-p db1.to_a #=> [["a", "aaa"], ["b", "bbb"], ["c", "ccc"]]
+p db1.to_a # => [["a", "aaa"], ["b", "bbb"], ["c", "ccc"]]
 ```
 
 ### def to_hash -> Hash
@@ -366,7 +366,7 @@ db1['a'] = 'aaa'
 db1['b'] = 'bbb'
 db1['c'] = 'ccc'
   
-p db1.to_hash #=> {"a"=>"aaa", "b"=>"bbb", "c"=>"ccc"}
+p db1.to_hash # => {"a"=>"aaa", "b"=>"bbb", "c"=>"ccc"}
 ```
 
 ### def index(val) -> String | nil

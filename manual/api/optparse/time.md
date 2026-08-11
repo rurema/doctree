@@ -12,7 +12,7 @@ require 'optparse/time'
 opts = OptionParser.new
 
 opts.on("-t TIME", Time){|t|
-  p t #=> Sat, Jan 01 2000 00:00:00 +0900
+  p t # => Sat, Jan 01 2000 00:00:00 +0900
 }
 opts.parse!
 

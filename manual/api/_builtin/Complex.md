@@ -121,11 +121,11 @@ other が Complex で虚部がゼロの場合も同様です。
 - **param** `other` -- 自身と比較する数値
 
 ```ruby title="例"
-p Complex(2, 3)  <=> Complex(2, 3) #=> nil
-p Complex(2, 3)  <=> 1           #=> nil
-p Complex(2)     <=> 1           #=> 1
-p Complex(2)     <=> 2           #=> 0
-p Complex(2)     <=> 3           #=> -1
+p Complex(2, 3)  <=> Complex(2, 3) # => nil
+p Complex(2, 3)  <=> 1           # => nil
+p Complex(2)     <=> 1           # => 1
+p Complex(2)     <=> 2           # => 0
+p Complex(2)     <=> 3           # => -1
 ```
 
 ### def <(other)    -> bool
@@ -197,14 +197,14 @@ p Complex.polar(3, Math::PI/2).arg # => 1.5707963267948966
 -0.0 では値が変わります。
 
 ```ruby title="例"
-p Complex(-1, 0).arg            #=>  3.141592653589793
-p Complex(-1, -0).arg           #=>  3.141592653589793
-p Complex(-1, -0.0).arg         #=> -3.141592653589793
+p Complex(-1, 0).arg            # =>  3.141592653589793
+p Complex(-1, -0).arg           # =>  3.141592653589793
+p Complex(-1, -0.0).arg         # => -3.141592653589793
 
-p Complex(0, 0.0).arg           #=>  0.0
-p Complex(0, -0.0).arg          #=> -0.0
-p Complex(-0.0, 0).arg          #=>  3.141592653589793
-p Complex(-0.0, -0.0).arg       #=> -3.141592653589793
+p Complex(0, 0.0).arg           # =>  0.0
+p Complex(0, -0.0).arg          # => -0.0
+p Complex(-0.0, 0).arg          # =>  3.141592653589793
+p Complex(-0.0, -0.0).arg       # => -3.141592653589793
 ```
 
 - **SEE** [m:Numeric#arg]

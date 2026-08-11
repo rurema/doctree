@@ -59,7 +59,7 @@ p OpenSSL::ASN1::ObjectId.new("2.5.29.9").long_name
 ```ruby title="例"
 require "openssl"
 oid = OpenSSL::ASN1::ObjectId.new("subjectAltName")
-p oid.oid   #=> "2.5.29.17"
+p oid.oid   # => "2.5.29.17"
 ```
 
 - **raise** `OpenSSL::ASN1::ASN1Error` -- オブジェクト識別子名が未知である場合に発生します
@@ -72,7 +72,7 @@ p oid.oid   #=> "2.5.29.17"
 ```ruby title="例"
 require "openssl"
 oid = OpenSSL::ASN1::ObjectId.new("subjectAltName")
-p oid.sn   #=> "subjectAltName"
+p oid.sn   # => "subjectAltName"
 ```
 
 - **SEE** [m:OpenSSL::ASN1::ObjectId#ln]
@@ -85,7 +85,7 @@ p oid.sn   #=> "subjectAltName"
 ```ruby title="例"
 require "openssl"
 oid = OpenSSL::ASN1::ObjectId.new("subjectAltName")
-p oid.ln   #=> "X509v3 Subject Alternative Name"
+p oid.ln   # => "X509v3 Subject Alternative Name"
 ```
 
 - **SEE** [m:OpenSSL::ASN1::ObjectId#sn]

@@ -92,10 +92,10 @@ class Foo
   end
 end
   
-p Foo.new().foo() #=> in `Raise': message...1, 2 and 3 (Foo::NewExceptionClass)
+p Foo.new().foo() # => in `Raise': message...1, 2 and 3 (Foo::NewExceptionClass)
                 #   という例外が発生します。
   
-p Foo.Raise Foo::NewExceptionClass, 1, 3, 5  #=> in `Raise': message...1, 3 and 5 (Foo::NewExceptionClass)
+p Foo.Raise Foo::NewExceptionClass, 1, 3, 5  # => in `Raise': message...1, 3 and 5 (Foo::NewExceptionClass)
                                            #   という例外が発生します。
 ```
 

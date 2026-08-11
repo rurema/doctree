@@ -10,8 +10,8 @@ include:
 [c:FileTest] に同名のモジュール関数がある場合はそれと同じ働きをします。ただ、ファイル名を引数に取るかわりに Stat 自身について判定する点が違います。
 
 ```ruby
-p File::Stat.new($0).directory? #=> false
-p FileTest.directory?($0) #=> false
+p File::Stat.new($0).directory? # => false
+p FileTest.directory?($0) # => false
 ```
 
 1.8 以降では、属性メソッドがシステムでサポートされていない場合 nil が返ります。
@@ -50,10 +50,10 @@ path に関する File::Stat オブジェクトを生成して返します。
 
 ```ruby
 p $:[0]
-#=> 例
+# => 例
 # "C:/Program Files/ruby-1.8/lib/ruby/site_ruby/1.8"
 p File::Stat.new($:[0])
-#=> 例
+# => 例
 #<File::Stat dev=0x2, ino=0, mode=040755, nlink=1, uid=0, gid=0, rdev=0x2, size=0, blksize=nil, blocks=nil, atime=Sun Sep 02 14:15:20 +0900 2007, mtime=Tue Apr 24 23:03:44 +0900 2007, ctime=Tue Apr 24 23:03:37 +0900 2007>
 ```
 
@@ -75,9 +75,9 @@ sleep(1)
 fp2 = Tempfile.open("second")
 fp2.print "新しい方\n"
 
-p File::Stat.new(fp1.path) <=> File::Stat.new(fp2.path) #=> -1
-p File::Stat.new(fp2.path) <=> File::Stat.new(fp1.path) #=>  1
-p File::Stat.new(fp1.path) <=> fp2.path #=> nil
+p File::Stat.new(fp1.path) <=> File::Stat.new(fp2.path) # => -1
+p File::Stat.new(fp2.path) <=> File::Stat.new(fp1.path) # =>  1
+p File::Stat.new(fp1.path) <=> fp2.path # => nil
 ```
 
 ### def ftype -> String
@@ -104,8 +104,8 @@ p File::Stat.new(fp1.path) <=> fp2.path #=> nil
 
 ```ruby title="例"
 fs = File::Stat.new($0)
-p fs.ftype #=> "file"
-p File::Stat.new($:[0]).ftype #=> "directory"
+p fs.ftype # => "file"
+p File::Stat.new($:[0]).ftype # => "directory"
 ```
 
 1.8 以降では、属性メソッドがシステムでサポートされていない場合 nil が返ります。
@@ -119,7 +119,7 @@ p File::Stat.new($:[0]).ftype #=> "directory"
 fs = File::Stat.new($0)
 p fs.dev
 #例
-#=> 2
+# => 2
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -132,7 +132,7 @@ dev の major 番号部を返します。
 fs = File::Stat.new($0)
 p fs.dev_major
 #例
-#=> nil #この場合ではシステムでサポートされていないため
+# => nil #この場合ではシステムでサポートされていないため
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -145,7 +145,7 @@ dev の minor 番号部を返します。
 fs = File::Stat.new($0)
 p fs.dev_minor
 #例
-#=> nil
+# => nil
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -157,7 +157,7 @@ i-node 番号を返します。
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.ino      #=> 0
+p fs.ino      # => 0
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -170,7 +170,7 @@ p fs.ino      #=> 0
 fs = File::Stat.new($0)
 printf "%o\n", fs.mode
 #例
-#=> 100644
+# => 100644
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -182,7 +182,7 @@ printf "%o\n", fs.mode
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.nlink    #=> 1
+p fs.nlink    # => 1
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -194,7 +194,7 @@ p fs.nlink    #=> 1
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.uid    #=> 0
+p fs.uid    # => 0
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -206,7 +206,7 @@ p fs.uid    #=> 0
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.gid      #=> 0
+p fs.gid      # => 0
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -218,7 +218,7 @@ p fs.gid      #=> 0
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.rdev     #=> 2
+p fs.rdev     # => 2
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -230,7 +230,7 @@ rdev の major 番号部を返します。
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.rdev_major #=> nil
+p fs.rdev_major # => nil
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -242,7 +242,7 @@ rdev の minor 番号部を返します。
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.rdev_minor #=> nil
+p fs.rdev_minor # => nil
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -254,7 +254,7 @@ p fs.rdev_minor #=> nil
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.size    #=> 1548
+p fs.size    # => 1548
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -266,7 +266,7 @@ p fs.size    #=> 1548
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.blksize #=> nil
+p fs.blksize # => nil
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -278,7 +278,7 @@ p fs.blksize #=> nil
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.blocks  #=> nil
+p fs.blocks  # => nil
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -290,7 +290,7 @@ p fs.blocks  #=> nil
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.atime.to_a  #=> [45, 5, 21, 5, 9, 2007, 3, 248, false, "\223\214\213\236 (\225W\217\200\216\236) "]
+p fs.atime.to_a  # => [45, 5, 21, 5, 9, 2007, 3, 248, false, "\223\214\213\236 (\225W\217\200\216\236) "]
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -304,7 +304,7 @@ p fs.atime.to_a  #=> [45, 5, 21, 5, 9, 2007, 3, 248, false, "\223\214\213\236 (\
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.mtime   #=> Wed Sep 05 20:42:18 +0900 2007
+p fs.mtime   # => Wed Sep 05 20:42:18 +0900 2007
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -319,7 +319,7 @@ p fs.mtime   #=> Wed Sep 05 20:42:18 +0900 2007
 ```ruby
 fs = File::Stat.new($0)
 #例
-p fs.ctime.to_f   #=> 1188719843.0
+p fs.ctime.to_f   # => 1188719843.0
 ```
 
 #%# WindowsXP ruby1.8.6 でテスト
@@ -340,10 +340,10 @@ sleep 10
 File.chmod(0644, "testfile")
 sleep 10
 File.read("testfile")
-p File.stat("testfile").birthtime #=> 2014-02-24 11:19:17 +0900
-p File.stat("testfile").mtime     #=> 2014-02-24 11:19:27 +0900
-p File.stat("testfile").ctime     #=> 2014-02-24 11:19:37 +0900
-p File.stat("testfile").atime     #=> 2014-02-24 11:19:47 +0900
+p File.stat("testfile").birthtime # => 2014-02-24 11:19:17 +0900
+p File.stat("testfile").mtime     # => 2014-02-24 11:19:27 +0900
+p File.stat("testfile").ctime     # => 2014-02-24 11:19:37 +0900
+p File.stat("testfile").atime     # => 2014-02-24 11:19:47 +0900
 ```
 
 ### def directory? -> bool
@@ -351,7 +351,7 @@ p File.stat("testfile").atime     #=> 2014-02-24 11:19:47 +0900
 ディレクトリの時に真を返します。
 
 ```ruby
-p File::Stat.new($0).directory? #=> false
+p File::Stat.new($0).directory? # => false
 ```
 
 - **SEE** [m:FileTest?.directory?]
@@ -361,7 +361,7 @@ p File::Stat.new($0).directory? #=> false
 読み込み可能な時に真を返します。
 
 ```ruby
-p File::Stat.new($0).readable? #=> true
+p File::Stat.new($0).readable? # => true
 ```
 
 ### def readable_real? -> bool
@@ -369,7 +369,7 @@ p File::Stat.new($0).readable? #=> true
 実ユーザ/実グループによって読み込み可能な時に真を返します。
 
 ```ruby
-p File::Stat.new($0).readable_real? #=> true
+p File::Stat.new($0).readable_real? # => true
 ```
 
 ### def writable? -> bool
@@ -377,7 +377,7 @@ p File::Stat.new($0).readable_real? #=> true
 書き込み可能な時に真を返します。
 
 ```ruby
-p File::Stat.new($0).writable? #=> true
+p File::Stat.new($0).writable? # => true
 ```
 
 ### def writable_real? -> bool
@@ -385,7 +385,7 @@ p File::Stat.new($0).writable? #=> true
 実ユーザ/実グループによって書き込み可能な時に真を返します。
 
 ```ruby
-p File::Stat.new($0).writable_real? #=> true
+p File::Stat.new($0).writable_real? # => true
 ```
 
 ### def executable? -> bool
@@ -395,7 +395,7 @@ p File::Stat.new($0).writable_real? #=> true
 ```ruby
 p File::Stat.new($0).executable?
 # 例
-#=> true
+# => true
 ```
 
 ### def executable_real? -> bool
@@ -405,7 +405,7 @@ p File::Stat.new($0).executable?
 ```ruby
 p File::Stat.new($0).executable_real?
 #例
-#=> true
+# => true
 ```
 
 ### def file? -> bool
@@ -413,7 +413,7 @@ p File::Stat.new($0).executable_real?
 通常ファイルの時に真を返します。
 
 ```ruby
-p File::Stat.new($0).file? #=> true
+p File::Stat.new($0).file? # => true
 ```
 
 ### def zero? -> bool
@@ -421,7 +421,7 @@ p File::Stat.new($0).file? #=> true
 サイズが0である時に真を返します。
 
 ```ruby
-p File::Stat.new($0).zero? #=> false
+p File::Stat.new($0).zero? # => false
 ```
 
 ### def size? -> Integer | nil
@@ -432,12 +432,12 @@ p File::Stat.new($0).zero? #=> false
 require 'tempfile'
 
 fp = Tempfile.new("temp")
-p fp.size #=> 0
-p File::Stat.new(fp.path).size? #=> nil
+p fp.size # => 0
+p File::Stat.new(fp.path).size? # => nil
 fp.print "not 0 "
 fp.close
-p FileTest.exist?(fp.path) #=> true
-p File::Stat.new(fp.path).size? #=> 6
+p FileTest.exist?(fp.path) # => true
+p File::Stat.new(fp.path).size? # => 6
 ```
 
 ### def owned? -> bool
@@ -447,7 +447,7 @@ p File::Stat.new(fp.path).size? #=> 6
 ```ruby
 printf "%s %s\n", $:[0], File::Stat.new($:[0]).owned?
 #例
-#=> /usr/local/lib/site_ruby/1.8 false
+# => /usr/local/lib/site_ruby/1.8 false
 ```
 
 ### def grpowned? -> bool
@@ -459,10 +459,10 @@ printf "%s %s\n", $:[0], File::Stat.new($:[0]).owned?
 ```ruby
 printf "%s %s\n", $:[0], File::Stat.new($:[0]).grpowned?
 #例
-#=> /usr/local/lib/site_ruby/1.8 false
+# => /usr/local/lib/site_ruby/1.8 false
 printf "%s %s\n", $0, File::Stat.new($0).grpowned?
 #例
-#=> filestat.rb true
+# => filestat.rb true
 ```
 
 ### def pipe? -> bool
@@ -473,7 +473,7 @@ printf "%s %s\n", $0, File::Stat.new($0).grpowned?
 
 ```ruby
 system("mkfifo /tmp/pipetest")
-p File::Stat.new("/tmp/pipetest").pipe? #=> true
+p File::Stat.new("/tmp/pipetest").pipe? # => true
 ```
 
 ### def symlink? -> false
@@ -487,9 +487,9 @@ p File::Stat.new("/tmp/pipetest").pipe? #=> true
 require 'fileutils'
 outfile = $0 + ".ln"
 FileUtils.ln_s($0, outfile)
-p File::Stat.new(outfile).symlink? #=> false
-p File.lstat(outfile).symlink?     #=> true
-p FileTest.symlink?(outfile)       #=> true
+p File::Stat.new(outfile).symlink? # => false
+p File.lstat(outfile).symlink?     # => true
+p FileTest.symlink?(outfile)       # => true
 ```
 
 - **SEE** [m:File.lstat]
@@ -505,7 +505,7 @@ Dir.glob("/tmp/*"){|file|
   end
 }
 #例
-#=> /tmp/uimhelper-hogehoge
+# => /tmp/uimhelper-hogehoge
 #...
 ```
 
@@ -521,8 +521,8 @@ Dir.glob("/dev/*") {|bd|
 }
 #例
 #...
-#=> /dev/hda1
-#=> /dev/hda3
+# => /dev/hda1
+# => /dev/hda3
 #...
 ```
 
@@ -538,8 +538,8 @@ Dir.glob("/dev/*") {|bd|
 }
 #例
 #...
-#=> /dev/tty1
-#=> /dev/stderr
+# => /dev/tty1
+# => /dev/stderr
 #...
 ```
 
@@ -555,8 +555,8 @@ Dir.glob("/bin/*") {|bd|
 }
 #例
 #...
-#=> /bin/ping
-#=> /bin/su
+# => /bin/ping
+# => /bin/su
 #...
 ```
 
@@ -572,7 +572,7 @@ Dir.glob("/usr/sbin/*") {|bd|
 }
 #例
 #...
-#=> /usr/sbin/postqueue
+# => /usr/sbin/postqueue
 #...
 ```
 
@@ -591,7 +591,7 @@ Dir.glob("/usr/bin/*") {|bd|
 }
 #例
 #...
-#=> /usr/bin/emacs-21.4
+# => /usr/bin/emacs-21.4
 #...
 ```
 

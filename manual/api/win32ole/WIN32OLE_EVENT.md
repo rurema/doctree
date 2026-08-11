@@ -19,7 +19,7 @@ event = WIN32OLE_EVENT.new(ie, 'DWebBrowserEvents2')
 b = false
 event.on_event('DocumentComplete') do |disp, uri|
   disp.document.getElementsByTagName('a').each do |e|
-    puts "#{e.innerHTML}=#{e.href}"   #=> ダウンロード=http://www.ruby-lang.org/ja/downloads/ など
+    puts "#{e.innerHTML}=#{e.href}"   # => ダウンロード=http://www.ruby-lang.org/ja/downloads/ など
   end
   disp.quit
   b = true
@@ -48,7 +48,7 @@ event = WIN32OLE_EVENT.new(ie, 'DWebBrowserEvents2')
 b = false
 event.on_event('DocumentComplete') do |disp, uri|
   disp.document.getElementsByTagName('a').each do |e|
-    puts "#{e.innerHTML}=#{e.href}"   #=> ダウンロード=http://www.ruby-lang.org/ja/downloads/ など
+    puts "#{e.innerHTML}=#{e.href}"   # => ダウンロード=http://www.ruby-lang.org/ja/downloads/ など
   end
   disp.quit
   b = true

@@ -27,7 +27,7 @@ def foo
   }
 end
 
-p foo().call       #=> 1
+p foo().call       # => 1
 ```
 
 ### Proc オブジェクトをブロック付きメソッド呼び出しに使う {#block}
@@ -62,7 +62,7 @@ b = Proc.new{|a,b,c|
   p a,b,c
 }
 p b.call(2, 4)
-#=> 2
+# => 2
     4
     nil
 ```
@@ -101,9 +101,9 @@ def test_block
   return :from_method
 end
 
-p test_proc()   #=> :from_proc
-p test_lambda() #=> :from_method
-p test_block()  #=> :from_block
+p test_proc()   # => :from_proc
+p test_lambda() # => :from_method
+p test_block()  # => :from_block
 ```
 
 以下の表は、手続きオブジェクトの実行を上の例と同じように、手続きオブジェクトが定義されたのと同じメソッド内で行った場合の結果です。

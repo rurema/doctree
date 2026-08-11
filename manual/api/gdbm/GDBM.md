@@ -184,11 +184,11 @@ db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
 db1['a'] = 'aaa'
 db1['b'] = 'bbb'
   
-p db1.fetch('a')                            #=> 'aaa'
-p db1.fetch('z', 'zzz')                     #=> 'zzz'
-p db1.fetch('z'){|key| [:key, key] }        #=> [:key, 'z']
-p db1.fetch('z', 'zzz'){|key| [:key, key] } #=> 'zzz'
-p db1.fetch('z')                            #=> IndexError 発生
+p db1.fetch('a')                            # => 'aaa'
+p db1.fetch('z', 'zzz')                     # => 'zzz'
+p db1.fetch('z'){|key| [:key, key] }        # => [:key, 'z']
+p db1.fetch('z', 'zzz'){|key| [:key, key] } # => 'zzz'
+p db1.fetch('z')                            # => IndexError 発生
 ```
 
 - **SEE** [m:Hash#fetch]
@@ -221,7 +221,7 @@ require 'gdbm'
 db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
 db1['a'] = 'aaa'
 db1['b'] = 'bbb'
-p db1.invert #=> {"aaa"=>"a", "bbb"=>"b"}
+p db1.invert # => {"aaa"=>"a", "bbb"=>"b"}
 ```
 
 ### def key(value) -> String | nil
@@ -243,7 +243,7 @@ require 'gdbm'
 db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
 db1['a'] = 'aaa'
 db1['b'] = 'bbb'
-p db1.keys #=> ["a", "b"]
+p db1.keys # => ["a", "b"]
 ```
 
 ### def length -> Integer
@@ -291,9 +291,9 @@ db2['c'] = 'ccc'
 db2['d'] = 'ddd'
 hash = { 'x' => 'xxx', 'y' => 'yyy'}
   
-p db1               #=> #<GDBM:0xb7d1c8a8>
-p db1.replace(db2)  #=> #<GDBM:0xb7d1c8a8>
-p db1.replace(hash) #=> #<GDBM:0xb7d1c8a8>
+p db1               # => #<GDBM:0xb7d1c8a8>
+p db1.replace(db2)  # => #<GDBM:0xb7d1c8a8>
+p db1.replace(hash) # => #<GDBM:0xb7d1c8a8>
 ```
 
 ### def select{|key, value| ... } -> [[String]]
@@ -308,8 +308,8 @@ db1['a'] = 'aaa'
 db1['b'] = 'bbb'
 db1['c'] = 'ccc'
   
-p db1.select{ |key, value| key == 'a' } #=> [["a", "aaa"]]
-p db1.select{ |key, value| key != 'a' } #=> [["c", "ccc"], ["b", "bbb"]]
+p db1.select{ |key, value| key == 'a' } # => [["a", "aaa"]]
+p db1.select{ |key, value| key != 'a' } # => [["c", "ccc"], ["b", "bbb"]]
 ```
 
 - **SEE** [m:Hash#select]
@@ -325,7 +325,7 @@ db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
 db1['a'] = 'aaa'
 db1['b'] = 'bbb'
   
-p db1.shift #=> ["a", "aaa"]
+p db1.shift # => ["a", "aaa"]
 ```
 
 ### def store(key, val) -> [String]
@@ -381,8 +381,8 @@ db1['a'] = 'aaa'
 db1['b'] = 'bbb'
 db1['c'] = 'ccc'
   
-p db1.values_at('a', 'b') #=> ["aaa", "bbb"]
-p db1.values_at('x', 'y') #=> [nil, nil]
+p db1.values_at('a', 'b') # => ["aaa", "bbb"]
+p db1.values_at('x', 'y') # => [nil, nil]
 ```
 
 ## Constants

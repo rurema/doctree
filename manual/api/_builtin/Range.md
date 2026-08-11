@@ -196,8 +196,8 @@ p (1 .. 3).include?(1.5) # => true
 [m:Range#===] は主に case 式での比較に用いられます。
 
 ```ruby title="例"
-p (0...50) === 79  #=> false
-p (60...80) === 79 #=> true
+p (0...50) === 79  # => false
+p (60...80) === 79 # => true
 
 case 79
 when  0...60  then  puts "low"
@@ -214,18 +214,18 @@ end
 
 ```ruby title="例"
 require 'date'
-p (Date.today - 100...Date.today + 100).include?(DateTime.now)  #=> false
-p (Date.today - 100...Date.today + 100).cover?(DateTime.now)    #=> true
-p (Date.today - 100...Date.today + 100) ===  DateTime.now       #=> true
+p (Date.today - 100...Date.today + 100).include?(DateTime.now)  # => false
+p (Date.today - 100...Date.today + 100).cover?(DateTime.now)    # => true
+p (Date.today - 100...Date.today + 100) ===  DateTime.now       # => true
 # 2.5 以前は、=== は、include? と同じく比較できず false を返していました。
 ```
 
 2.7 以降の === は、文字列も [m:Range#cover?] と同様の処理をするようになりました。
 
 ```ruby title="例"
-p ('a'..'z').include? 'at'  #=> false
-p ('a'..'z').cover? 'at'    #=> true
-p ('a'..'z') === 'at'       #=> true
+p ('a'..'z').include? 'at'  # => false
+p ('a'..'z').cover? 'at'    # => true
+p ('a'..'z') === 'at'       # => true
 # 2.6 以前は、=== は、include? と同じく比較できず false を返していました。
 ```
 
@@ -264,10 +264,10 @@ p ('b'..'d').cover?('ba')   # => true
 
 ```ruby title="Date, DateTime の例"
 require 'date'
-p (Date.today - 365 .. Date.today + 365).include?(Date.today)  #=> true
-p (Date.today - 365 .. Date.today + 365).include?(DateTime.now)  #=> false
-p (Date.today - 365 .. Date.today + 365).cover?(Date.today)    #=> true
-p (Date.today - 365 .. Date.today + 365).cover?(DateTime.now)  #=> true
+p (Date.today - 365 .. Date.today + 365).include?(Date.today)  # => true
+p (Date.today - 365 .. Date.today + 365).include?(DateTime.now)  # => false
+p (Date.today - 365 .. Date.today + 365).cover?(Date.today)    # => true
+p (Date.today - 365 .. Date.today + 365).cover?(DateTime.now)  # => true
 ```
 
 ### def cover?(range) -> bool
@@ -279,9 +279,9 @@ p (Date.today - 365 .. Date.today + 365).cover?(DateTime.now)  #=> true
 - **param** `range` -- 比較対象の Range クラスのインスタンスを指定します。
 
 ```ruby title="引数が Range の例"
-p (1..5).cover?(2..3)   #=> true
-p (1..5).cover?(0..6)   #=> false
-p (1..5).cover?(1...6)  #=> true
+p (1..5).cover?(2..3)   # => true
+p (1..5).cover?(0..6)   # => false
+p (1..5).cover?(1...6)  # => true
 ```
 
 「(a..b).cover?(c...d)」のように終端を含まない Range オブジェクトが引数に渡されており、「a <= c && b < d」を満たし、cが数値ではない(つまり引数の Range の終端を求めるために succ メソッドの呼び出しが必要な)場合、パフォーマンスの問題が起きる可能性があります。
@@ -304,16 +304,16 @@ self と range に重なりがある場合は true を、そうでない場合�
 - **SEE** [m:Range#cover?]
 
 ```ruby title="例"
-p (0..2).overlap?(1..3)  #=> true
-p (0..2).overlap?(3..4)  #=> false
-p (0..).overlap?(..0)  #=> true
-p (0..).overlap?(...0) #=> false
+p (0..2).overlap?(1..3)  # => true
+p (0..2).overlap?(3..4)  # => false
+p (0..).overlap?(..0)  # => true
+p (0..).overlap?(...0) # => false
 ```
 
 self の端点と range の端点が比較可能でない（<=> メソッドが nil を返す）場合、false を返します。
 
 ```ruby title="比較可能でない例"
-p (1..3).overlap?('a'..'d') #=> false
+p (1..3).overlap?('a'..'d') # => false
 ```
 
 self または range が空である場合、false を返します。
@@ -326,9 +326,9 @@ self または range が空である場合、false を返します。
 のいずれかを満たすことをいいます。
 
 ```ruby title="Range が空である例"
-p (0..2).overlap?(1...1) #=> false
-p (1...1).overlap?(0..2) #=> false
-p (0..2).overlap?(2..0)  #=> false
+p (0..2).overlap?(1...1) # => false
+p (1...1).overlap?(0..2) # => false
+p (0..2).overlap?(2..0)  # => false
 ```
 
 なお、上記の意味において空であることと、その Range オブジェクトが表す範囲に含まれるオブジェクトが存在しないこととは、同値ではないことに注意してください。
@@ -340,7 +340,7 @@ p (0..2).overlap?(2..0)  #=> false
 そのため、...-Float::INFINITY は ...-Float::INFINITY 自身と重なりがあると判定されます。
 
 ```ruby title="例"
-p (...-Float::INFINITY).overlap?(...-Float::INFINITY) #=> true
+p (...-Float::INFINITY).overlap?(...-Float::INFINITY) # => true
 ```
 
 #%end
@@ -359,7 +359,7 @@ p (1..5).first # => 1
 p (1..0).first # => 1
 
 # 始端を持たない場合
-p (..5).begin #=> nil
+p (..5).begin # => nil
 (..5).first   # ~> RangeError
 ```
 

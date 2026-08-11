@@ -402,11 +402,11 @@ p /(.)(.)\k<-2>\k<-1>/.match("xyzyz") # => #<MatchData "yzyz" 1:"y" 2:"z">
 ```ruby
 # The pattern below matches a vowel followed by 2 word characters:
 # 'aen'
-p /[aeiou]\w{2}/.match("Caenorhabditis elegans") #=> #<MatchData "aen">
+p /[aeiou]\w{2}/.match("Caenorhabditis elegans") # => #<MatchData "aen">
 # Whereas the following pattern matches a vowel followed by a word
 # character, twice, i.e. <tt>[aeiou]\w[aeiou]\w</tt>: 'enor'.
 p /([aeiou]\w){2}/.match("Caenorhabditis elegans")
-    #=> #<MatchData "enor" 1:"or">
+    # => #<MatchData "enor" 1:"or">
 ```
 
 (?:pat) という記法を使うとキャプチャせずにグループ化できます。

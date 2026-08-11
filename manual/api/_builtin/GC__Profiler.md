@@ -15,11 +15,11 @@ GC の起動回数や起動したタイミング、処理時間などの GC に�
 GC のプロファイラを起動中であれば true、停止中であれば false を返します。
 
 ```ruby title="例"
-p GC::Profiler.enabled? #=> false
+p GC::Profiler.enabled? # => false
 GC::Profiler.enable
-p GC::Profiler.enabled? #=> true
+p GC::Profiler.enabled? # => true
 GC::Profiler.disable
-p GC::Profiler.enabled? #=> false
+p GC::Profiler.enabled? # => false
 ```
 
 - **SEE** [m:GC::Profiler.enable], [m:GC::Profiler.disable]
@@ -33,7 +33,7 @@ GC についてプロファイル情報を取得します。
 
 ```ruby title="例"
 GC::Profiler.enable
-p GC::Profiler.enabled? #=> true
+p GC::Profiler.enabled? # => true
 ```
 
 - **SEE** [m:GC::Profiler.disable], [m:GC::Profiler.enabled?]
@@ -44,7 +44,7 @@ GC のプロファイラを停止します。
 
 ```ruby title="例"
 GC::Profiler.disable
-p GC::Profiler.enabled? #=> false
+p GC::Profiler.enabled? # => false
 ```
 
 このメソッドでは、蓄積したプロファイル情報は破棄しません。
@@ -60,10 +60,10 @@ p GC::Profiler.enabled? #=> false
 GC::Profiler.enable
 GC.start
 GC.start
-p GC::Profiler.report #=> 2 回分の GC のプロファイル情報出力する。
+p GC::Profiler.report # => 2 回分の GC のプロファイル情報出力する。
 GC::Profiler.clear
 GC.start
-p GC::Profiler.report #=> 1 回分の GC のプロファイル情報出力する。
+p GC::Profiler.report # => 1 回分の GC のプロファイル情報出力する。
 ```
 
 ### def GC::Profiler.result -> String

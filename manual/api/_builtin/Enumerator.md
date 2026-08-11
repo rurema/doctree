@@ -65,7 +65,7 @@ enum = Enumerator.new{|y|
 }
 enum.each{|i| p i }
 
-#=>  5
+# =>  5
 #   10
 
 
@@ -77,7 +77,7 @@ fib = Enumerator.new { |y|
   }
 }
 
-p fib.take(10) #=> [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+p fib.take(10) # => [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 ```
 
 #%since 4.0
@@ -191,7 +191,7 @@ end
 
 ```ruby title="例"
 e = (1..3).each + [4, 5]
-p e.to_a #=> [1, 2, 3, 4, 5]
+p e.to_a # => [1, 2, 3, 4, 5]
 ```
 
 - **SEE** [m:Enumerable#chain]
@@ -288,7 +288,7 @@ end
     #    122
     #    iteration reached at end
 puts enum.next
-    #=> 再度 StopIteration 例外が発生
+    # => 再度 StopIteration 例外が発生
 ```
 
 ```ruby title="例3: Kernel.#loop は StopIteration を捕捉します。"
@@ -402,12 +402,12 @@ next と異なり列挙状態を変更しません。
 ```ruby title="例"
 a = [1,2,3]
 e = a.to_enum
-p e.next   #=> 1
-p e.peek   #=> 2
-p e.peek   #=> 2
-p e.peek   #=> 2
-p e.next   #=> 2
-p e.next   #=> 3
+p e.next   # => 1
+p e.peek   # => 2
+p e.peek   # => 2
+p e.peek   # => 2
+p e.next   # => 2
+p e.next   # => 3
 p e.next   #raises StopIteration
 ```
 
@@ -445,12 +445,12 @@ def o.each
   yield 1, 2
 end
 e = o.to_enum
-p e.peek_values    #=> []
+p e.peek_values    # => []
 e.next
-p e.peek_values    #=> [1]
-p e.peek_values    #=> [1]
+p e.peek_values    # => [1]
+p e.peek_values    # => [1]
 e.next
-p e.peek_values    #=> [1, 2]
+p e.peek_values    # => [1, 2]
 e.next
 p e.peek_values    # raises StopIteration
 ```

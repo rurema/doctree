@@ -245,18 +245,18 @@ class C
 end
 
 c = C.new
-p c.method(:u).arity     #=> 0
-p c.method(:v).arity     #=> 1
-p c.method(:w).arity     #=> -1
-p c.method(:x).arity     #=> 2
-p c.method(:y).arity     #=> -3
-p c.method(:z).arity     #=> -3
+p c.method(:u).arity     # => 0
+p c.method(:v).arity     # => 1
+p c.method(:w).arity     # => -1
+p c.method(:x).arity     # => 2
+p c.method(:y).arity     # => -3
+p c.method(:z).arity     # => -3
 
 s = "xyz"
-p s.method(:size).arity    #=> 0
-p s.method(:replace).arity #=> 1
-p s.method(:squeeze).arity #=> -1
-p s.method(:count).arity   #=> -1
+p s.method(:size).arity    # => 0
+p s.method(:replace).arity # => 1
+p s.method(:squeeze).arity # => -1
+p s.method(:count).arity   # => -1
 ```
 
 - **SEE** [ref:d:glossary#arity]
@@ -394,7 +394,7 @@ true を返します。そうでない場合に false を返します。
 s = "bar"
 a = s.method(:size)
 b = s.method(:size)
-p a == b                            #=> true
+p a == b                            # => true
 ```
 
 ### def hash    -> Integer
@@ -514,8 +514,8 @@ Method オブジェクトが引数を取らなければ空の配列を返しま�
 
   ```ruby title="例"
   m = Class.new{define_method(:m){|x, y=42, *other, k_x:, k_y: 42, **k_other, &b|}}.instance_method(:m)
-  p m.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
-  p File.method(:symlink).parameters #=> [[:req], [:req]]
+  p m.parameters # => [[:req, :x], [:opt, :y], [:rest, :other], [:keyreq, :k_x], [:key, :k_y], [:keyrest, :k_other], [:block, :b]]
+  p File.method(:symlink).parameters # => [[:req], [:req]]
   ```
 
 - **SEE** [m:Proc#parameters]
@@ -536,17 +536,17 @@ def foo(a,b,c)
 end
 
 proc  = self.method(:foo).curry
-proc2 = proc.call(1, 2)          #=> #<Proc>
-proc2.call(3)                    #=> [1,2,3]
+proc2 = proc.call(1, 2)          # => #<Proc>
+proc2.call(3)                    # => [1,2,3]
 
 def vararg(*args)
   args
 end
 
 proc = self.method(:vararg).curry(4)
-proc2 = proc.call(:x)      #=> #<Proc>
-proc3 = proc2.call(:y, :z) #=> #<Proc>
-proc3.call(:a)             #=> [:x, :y, :z, :a]
+proc2 = proc.call(:x)      # => #<Proc>
+proc3 = proc2.call(:y, :z) # => #<Proc>
+proc3.call(:a)             # => [:x, :y, :z, :a]
 ```
 
 - **SEE** [m:Proc#curry]

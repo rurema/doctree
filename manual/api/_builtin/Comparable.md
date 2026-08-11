@@ -141,32 +141,32 @@ range.end が nil の場合、range.end は self よりも大きい値として�
                      終端が nil でないときに発生します。
 
 ```ruby title="例"
-p 12.clamp(0, 100)       #=> 12
-p 523.clamp(0, 100)      #=> 100
-p -3.123.clamp(0, 100)   #=> 0
+p 12.clamp(0, 100)       # => 12
+p 523.clamp(0, 100)      # => 100
+p -3.123.clamp(0, 100)   # => 0
 
-p 'd'.clamp('a', 'f')    #=> 'd'
-p 'z'.clamp('a', 'f')    #=> 'f'
+p 'd'.clamp('a', 'f')    # => 'd'
+p 'z'.clamp('a', 'f')    # => 'f'
 ```
 
 ```ruby title="nil を渡す例"
-p 5.clamp(0, nil)        #=> 5
-p 5.clamp(nil, 0)        #=> 0
-p 5.clamp(nil, nil)      #=> 5
+p 5.clamp(0, nil)        # => 5
+p 5.clamp(nil, 0)        # => 0
+p 5.clamp(nil, nil)      # => 5
 ```
 
 ```ruby title="range を渡す例"
-p 12.clamp(0..100)   #=> 12
-p 523.clamp(0..100)  #=> 100
-p -3.123.clamp(0..100) #=> 0
+p 12.clamp(0..100)   # => 12
+p 523.clamp(0..100)  # => 100
+p -3.123.clamp(0..100) # => 0
 
-p 'd'.clamp('a'..'f')  #=> 'd'
-p 'z'.clamp('a'..'f')  #=> 'f'
+p 'd'.clamp('a'..'f')  # => 'd'
+p 'z'.clamp('a'..'f')  # => 'f'
 
 100.clamp(0...100)   # ArgumentError
 ```
 
 ```ruby title="range の始端か終端が nil の場合"
-p -20.clamp(0..) #=> 0
-p 523.clamp(..100) #=> 100
+p -20.clamp(0..) # => 0
+p 523.clamp(..100) # => 100
 ```

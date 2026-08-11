@@ -45,7 +45,7 @@ end
 - **param** `item` -- 配列の要素を指定します。
 
 ```ruby title="例"
-p Array[1, 2, 3] #=> [1, 2, 3]
+p Array[1, 2, 3] # => [1, 2, 3]
 
 class SubArray < Array
   # ...
@@ -67,9 +67,9 @@ p SubArray[1, 2, 3] # => [1, 2, 3]
 
 ```ruby title="例"
 ary = Array.new(3, "foo")
-p ary                     #=> ["foo", "foo", "foo"]
+p ary                     # => ["foo", "foo", "foo"]
 ary[0].capitalize!
-p ary                     #=> ["Foo", "Foo", "Foo"]  (各要素は同一のオブジェクトである)
+p ary                     # => ["Foo", "Foo", "Foo"]  (各要素は同一のオブジェクトである)
 ```
 
 ### def Array.new(ary)    -> Array
@@ -85,8 +85,8 @@ p Array.new([1,2,3]) # => [1,2,3]
 a = ["a", "b", "c"]
 b = Array.new(a)
 a.each{|s| s.capitalize! }
-p a                        #=> ["A", "B", "C"]
-p b                        #=> ["A", "B", "C"]   (b は a と要素を共有する)
+p a                        # => ["A", "B", "C"]
+p b                        # => ["A", "B", "C"]   (b は a と要素を共有する)
 ```
 
 ### def Array.new(size) {|index| ... }    -> Array
@@ -99,14 +99,14 @@ p b                        #=> ["A", "B", "C"]   (b は a と要素を共有す�
 
 ```ruby title="例"
 ary = Array.new(3){|index| "hoge#{index}"}
-p ary                      #=> ["hoge0", "hoge1", "hoge2"]
+p ary                      # => ["hoge0", "hoge1", "hoge2"]
 ```
 
 ```ruby title="例"
 ary = Array.new(3){ "foo" }
-p ary                      #=> ["foo", "foo", "foo"]
+p ary                      # => ["foo", "foo", "foo"]
 ary[0].capitalize!
-p ary                      #=> ["Foo", "foo", "foo"]  (各要素は違うオブジェクトである)
+p ary                      # => ["Foo", "foo", "foo"]  (各要素は違うオブジェクトである)
 ```
 
 ## Instance Methods
@@ -127,11 +127,11 @@ nth 番目の要素を返します。nth 番目の要素が存在しない時に
 
 ```ruby title="例"
 a = [ "a", "b", "c", "d", "e" ]
-p a[0]  #=> "a"
-p a[1]  #=> "b"
-p a[-1] #=> "e"
-p a[-2] #=> "d"
-p a[10] #=> nil
+p a[0]  # => "a"
+p a[1]  # => "b"
+p a[-1] # => "e"
+p a[-2] # => "d"
+p a[10] # => nil
 ```
 
 ### def [](range)    -> Array | nil
@@ -147,19 +147,19 @@ range の begin が end より後にある場合には空の配列を返しま�
 
 ```ruby title="例"
 a = [ "a", "b", "c", "d", "e" ]
-p a[0..1] #=> ["a", "b"]
-p a[0...1]  #=> ["a"]
-p a[0..-1]  #=> ["a", "b", "c", "d", "e"]
-p a[-2..-1] #=> ["d", "e"]
-p a[-2..4]  #=> ["d", "e"]  (start は末尾から -2 番目、end は先頭から (4+1) 番目となる。)
-p a[0..10]  #=> ["a", "b", "c", "d", "e"]
-p a[10..11] #=> nil
-p a[2..1] #=> []
-p a[-1..-2] #=> []
+p a[0..1] # => ["a", "b"]
+p a[0...1]  # => ["a"]
+p a[0..-1]  # => ["a", "b", "c", "d", "e"]
+p a[-2..-1] # => ["d", "e"]
+p a[-2..4]  # => ["d", "e"]  (start は末尾から -2 番目、end は先頭から (4+1) 番目となる。)
+p a[0..10]  # => ["a", "b", "c", "d", "e"]
+p a[10..11] # => nil
+p a[2..1] # => []
+p a[-1..-2] # => []
 
 # 特殊なケース。begin が自身の長さと同じ場合には以下のようになります。
-p a[5]    #=> nil
-p a[5..10]  #=> []
+p a[5]    # => nil
+p a[5..10]  # => []
 ```
 
 ### def [](start, length)    ->  Array | nil
@@ -185,16 +185,16 @@ length が負の時は nil を返します。
 
 ```ruby title="例"
 a = [ "a", "b", "c", "d", "e" ]
-p a[0, 1]  #=> ["a"]
-p a[-1, 1] #=> ["e"]
-p a[0, 10] #=> ["a", "b", "c", "d", "e"]
-p a[0, 0]  #=> []
-p a[0, -1] #=> nil
-p a[10, 1] #=> nil
+p a[0, 1]  # => ["a"]
+p a[-1, 1] # => ["e"]
+p a[0, 10] # => ["a", "b", "c", "d", "e"]
+p a[0, 0]  # => []
+p a[0, -1] # => nil
+p a[10, 1] # => nil
 
 # 特殊なケース。start が自身の長さと同じ場合には以下のようになります。
-p a[5]     #=> nil
-p a[5, 1]  #=> []
+p a[5]     # => nil
+p a[5, 1]  # => []
 ```
 
 ### def []=(nth, val)
@@ -215,9 +215,9 @@ nth 番目の要素を val に設定します。nth が配列の範囲を越え�
 ```ruby title="例"
 a = [0, 1, 2, 3, 4, 5]
 a[0] = "a"
-p a  #=> ["a", 1, 2, 3, 4, 5]
+p a  # => ["a", 1, 2, 3, 4, 5]
 a[10] = "x"
-p a  #=> ["a", 1, 2, 3, 4, 5, nil, nil, nil, nil, "x"]
+p a  # => ["a", 1, 2, 3, 4, 5, nil, nil, nil, nil, "x"]
 
 a = [0, 1, 2, 3, 4, 5]
 a[-100] = 1           # ~> IndexError
@@ -281,15 +281,15 @@ start が自身の末尾を越える時には配列の長さを自動的に拡�
 ```ruby title="例"
 ary = [0, 1, 2, 3]
 ary[1, 2] = ["a", "b", "c", "d"]
-p ary                        #=> [0, "a", "b", "c", "d", 3]
+p ary                        # => [0, "a", "b", "c", "d", 3]
 
 ary = [0, 1, 2]
 ary[5, 1] = "Z"
-p ary                        #=> [0, 1, 2, nil, nil, "Z"]
+p ary                        # => [0, 1, 2, nil, nil, "Z"]
 
 ary = [0, 1, 2, 3]
 ary[0, 10] = ["a"]
-p ary                        #=> ["a"]
+p ary                        # => ["a"]
 ```
 
 - **param** `start` -- 置き換えたい範囲の先頭のインデックスを指定します。
@@ -346,9 +346,9 @@ p a   # => [0, 1, 5]
 ```ruby title="例"
 a = [1, 2]
 b = [8, 9]
-p a + b     #=> [1, 2, 8, 9]
-p a         #=> [1, 2]        (変化なし)
-p b         #=> [8, 9]        (こちらも変化なし)
+p a + b     # => [1, 2, 8, 9]
+p a         # => [1, 2]        (変化なし)
+p b         # => [8, 9]        (こちらも変化なし)
 ```
 
 ### def *(times)    -> Array
@@ -366,7 +366,7 @@ p b         #=> [8, 9]        (こちらも変化なし)
 - **raise** `ArgumentError` -- 引数に負の数を指定した場合に発生します。
 
 ```ruby title="例"
-p [1, 2, 3] * 3  #=> [1, 2, 3, 1, 2, 3, 1, 2, 3]
+p [1, 2, 3] * 3  # => [1, 2, 3, 1, 2, 3, 1, 2, 3]
 ```
 
 ### def *(sep)    -> String
@@ -439,7 +439,7 @@ p [ 1, 'c', :s, 'yep' ].difference([ 1 ], [ 'a', 'c' ])  # => [:s, "yep"]
                  指定した場合に発生します。
 
 ```ruby title="例"
-p [1, 1, 2, 3] & [3, 1, 4] #=> [1, 3]
+p [1, 1, 2, 3] & [3, 1, 4] # => [1, 3]
 ```
 
 - **SEE** [m:Array#|], [m:Array#intersection]
@@ -460,7 +460,7 @@ p [1, 1, 2, 3] & [3, 1, 4] #=> [1, 3]
                  指定した場合に発生します。
 
 ```ruby title="例"
-p [1, 1, 4, 2, 3] | [5, 4, 5]  #=> [1, 4, 2, 3, 5]
+p [1, 1, 4, 2, 3] | [5, 4, 5]  # => [1, 4, 2, 3, 5]
 ```
 
 - **SEE** [m:Array#&]
@@ -475,8 +475,8 @@ p [1, 1, 4, 2, 3] | [5, 4, 5]  #=> [1, 4, 2, 3, 5]
 - **param** `other_arrays` -- 0個以上の配列を指定します。
 
 ```ruby title="例"
-p ["a", "b", "c"].union([ "c", "d", "a" ])  #=> ["a", "b", "c", "d"]
-p ["a"].union(["e", "b"], ["a", "c", "b"])  #=> ["a", "e", "b", "c"]
+p ["a", "b", "c"].union([ "c", "d", "a" ])  # => ["a", "b", "c", "d"]
+p ["a"].union(["e", "b"], ["a", "c", "b"])  # => ["a", "e", "b", "c"]
 p ["a"].union # => ["a"]
 ```
 
@@ -497,7 +497,7 @@ p ary      # [1, 2]
 ```ruby title="例"
 ary = [1]
 ary << 2 << 3 << 4
-p ary   #=> [1, 2, 3, 4]
+p ary   # => [1, 2, 3, 4]
 ```
 
 - **param** `obj` -- 自身に加えたいオブジェクトを指定します。[m:Array#push] と違って引数は一つしか指定できません。
@@ -516,9 +516,9 @@ other に配列以外のオブジェクトを指定した場合は nil を返し
              る暗黙の型変換を試みます。
 
 ```ruby title="例"
-p [ 1, 2, 3 ] <=> [ 1, 3, 2 ]     #=> -1
-p [ 1, 2, 3 ] <=> [ 1, 2, 3 ]     #=> 0
-p [ 1, 2, 3 ] <=> [ 1, 2 ]        #=> 1
+p [ 1, 2, 3 ] <=> [ 1, 3, 2 ]     # => -1
+p [ 1, 2, 3 ] <=> [ 1, 2, 3 ]     # => 0
+p [ 1, 2, 3 ] <=> [ 1, 2 ]        # => 1
 ```
 
 ### def ==(other)    -> bool
@@ -530,9 +530,9 @@ p [ 1, 2, 3 ] <=> [ 1, 2 ]        #=> 1
 - **SEE** [m:Object#==]
 
 ```ruby title="例"
-p [ "a", "c" ]    == [ "a", "c", 7 ]   #=> false
-p [ "a", "c", 7 ] == [ "a", "c", 7 ]   #=> true
-p [ "a", "c", 7 ] == [ "a", "d", "f" ] #=> false
+p [ "a", "c" ]    == [ "a", "c", 7 ]   # => false
+p [ "a", "c", 7 ] == [ "a", "c", 7 ]   # => true
+p [ "a", "c", 7 ] == [ "a", "d", "f" ] # => false
 ```
 
 ### def all?               -> bool
@@ -613,7 +613,7 @@ p ary.assoc(15)          # => nil
 ```ruby title="例"
 ary = [1, 2]
 ary.clear
-p ary     #=> []
+p ary     # => []
 ```
 
 ### def clone    -> Array
@@ -628,13 +628,13 @@ dup は内容だけをコピーします。
 
 ```ruby title="例"
 ary = ['string']
-p ary             #=> ["string"]
+p ary             # => ["string"]
 copy = ary.dup
-p copy            #=> ["string"]
+p copy            # => ["string"]
 
 ary[0][0...3] = ''
-p ary             #=> ["ing"]
-p copy            #=> ["ing"]
+p ary             # => ["ing"]
+p copy            # => ["ing"]
 ```
 
 ### def collect  -> Enumerator
@@ -670,12 +670,12 @@ p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
 ```ruby title="例"
 ary = [1, 2, 3]
 ary.map! {|i| i * 3 }
-p ary   #=> [3, 6, 9]
+p ary   # => [3, 6, 9]
 
 ary = [1, 2, 3]
 e = ary.map!
 e.each{ 1 }
-p ary           #=> [1, 1, 1]
+p ary           # => [1, 1, 1]
 ```
 
 - **SEE** [m:Array#collect],  [c:Enumerator]
@@ -688,11 +688,11 @@ compact! は自身から破壊的に nil を取り除き、変更が行われた
 
 ```ruby title="例"
 ary = [1, nil, 2, nil, 3, nil]
-p ary.compact   #=> [1, 2, 3]
-p ary           #=> [1, nil, 2, nil, 3, nil]
+p ary.compact   # => [1, 2, 3]
+p ary           # => [1, nil, 2, nil, 3, nil]
 ary.compact!
-p ary           #=> [1, 2, 3]
-p ary.compact!  #=> nil
+p ary           # => [1, 2, 3]
+p ary.compact!  # => nil
 ```
 
 ### def concat(other)    -> self
@@ -716,16 +716,16 @@ other_arrays の要素を自身の末尾に破壊的に連結します。
 - **param** `other_arrays` -- 自身と連結したい配列を指定します。
 
 ```ruby title="例"
-p [ "a", "b" ].concat( ["c", "d"] ) #=> [ "a", "b", "c", "d" ]
-p [ "a" ].concat( ["b"], ["c", "d"] ) #=> [ "a", "b", "c", "d" ]
-p [ "a" ].concat #=> [ "a" ]
+p [ "a", "b" ].concat( ["c", "d"] ) # => [ "a", "b", "c", "d" ]
+p [ "a" ].concat( ["b"], ["c", "d"] ) # => [ "a", "b", "c", "d" ]
+p [ "a" ].concat # => [ "a" ]
 
 a = [ 1, 2, 3 ]
 a.concat( [ 4, 5 ] )
-p a                               #=> [ 1, 2, 3, 4, 5 ]
+p a                               # => [ 1, 2, 3, 4, 5 ]
 
 a = [ 1, 2 ]
-p a.concat(a, a)                  #=> [1, 2, 1, 2, 1, 2]
+p a.concat(a, a)                  # => [1, 2, 1, 2, 1, 2]
 ```
 
 - **SEE** [m:Array#+]
@@ -768,15 +768,15 @@ p ary.count{|x|x%2==0}  # => 3
 
 ```ruby title="例"
 array = [1, 2, 3, 2, 1]
-p array.delete(2)       #=> 2
-p array                 #=> [1, 3, 1]
+p array.delete(2)       # => 2
+p array                 # => [1, 3, 1]
 
 # ブロックなしの引数に nil を渡すとその戻り値から削除が
 # 行われたかどうかの判定をすることはできない
 ary = [nil,nil,nil]
-p ary.delete(nil)       #=> nil
-p ary                   #=> []
-p ary.delete(nil)       #=> nil
+p ary.delete(nil)       # => nil
+p ary                   # => []
+p ary.delete(nil)       # => nil
 ```
 
 ### def delete_at(pos)    -> object | nil
@@ -796,7 +796,7 @@ pos が範囲外であったら nil を返します。
 ```ruby title="例"
 array = [0, 1, 2, 3, 4]
 array.delete_at 2
-p array             #=> [0, 1, 3, 4]
+p array             # => [0, 1, 3, 4]
 ```
 
 ### def delete_if {|x| ... }    -> self
@@ -815,12 +815,12 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
 ```ruby title="例"
 a = [0, 1, 2, 3, 4, 5]
 a.delete_if{|x| x % 2 == 0}
-p a #=> [1, 3, 5]
+p a # => [1, 3, 5]
 
 a = [0, 1, 2, 3, 4, 5]
 e = a.reject!
 e.each{|i| i % 2 == 0}
-p a                    #=> [1, 3, 5]  もとの配列から削除されていることに注意。
+p a                    # => [1, 3, 5]  もとの配列から削除されていることに注意。
 ```
 
 - **SEE** [m:Array#select!], [m:Array#keep_if]
@@ -875,7 +875,7 @@ p a                         # => [1, 2, 3, 4, 5, 0]
 [1, 2, 3].each do |i|
   puts i
 end
-#=> 1
+# => 1
 #   2
 #   3
 ```
@@ -939,8 +939,8 @@ end
 自身の要素の数が 0 の時に真を返します。そうでない場合に false を返します。
 
 ```ruby title="例"
-p [].empty?         #=> true
-p [1, 2, 3].empty?  #=> false
+p [].empty?         # => true
+p [1, 2, 3].empty?  # => false
 ```
 
 ### def eql?(other)    -> bool
@@ -951,9 +951,9 @@ p [1, 2, 3].empty?  #=> false
 - **param** `other` -- 自身と比較したい配列を指定します。
 
 ```ruby title="例"
-p ["a", "b", "c"].eql? ["a", "b", "c"]    #=> true
-p ["a", "b", "c"].eql? ["a", "c", "b"]    #=> false
-p ["a", "b", 1].eql?   ["a", "b", 1.0]    #=> false (1.eql?(1.0) が false なので)
+p ["a", "b", "c"].eql? ["a", "b", "c"]    # => true
+p ["a", "b", "c"].eql? ["a", "c", "b"]    # => false
+p ["a", "b", 1].eql?   ["a", "b", 1.0]    # => false (1.eql?(1.0) が false なので)
 ```
 
 - **SEE** [m:Object#eql?]
@@ -985,16 +985,16 @@ a = [1, 2, 3, 4, 5]
 begin
   p a.fetch(10)
 rescue IndexError => err
-  puts err #=> index 10 out of array
+  puts err # => index 10 out of array
 end
 
-p a.fetch(10, 999) #=> 999
+p a.fetch(10, 999) # => 999
 
 result = a.fetch(10){|nth|
   print "#{nth} はありません。\n"
   999
 }
-p result #=> 999
+p result # => 999
 ```
 
 #%since 3.4
@@ -1037,13 +1037,13 @@ val の代わりにブロックを指定するとブロックの評価結果を�
 ```ruby title="例"
 a = [0, 1, 2, 3, 4]
 a.fill(10)
-p a #=> [10, 10, 10, 10, 10]
+p a # => [10, 10, 10, 10, 10]
 
 a = [0, 1, 2, 3, 4]
 a.fill("a")
-p a #=> ["a", "a", "a", "a", "a"]
+p a # => ["a", "a", "a", "a", "a"]
 a[0].capitalize!
-p a #=> ["A", "A", "A", "A", "A"]
+p a # => ["A", "A", "A", "A", "A"]
 ```
 
 ### def fill(val, start, length = nil)             -> self
@@ -1060,7 +1060,7 @@ p a #=> ["A", "A", "A", "A", "A"]
 ```ruby title="例"
 a = [0, 1, 2]
 a.fill("x", 5..10)
-p a #=> [0, 1, 2, nil, nil, "x", "x", "x", "x", "x", "x"]
+p a # => [0, 1, 2, nil, nil, "x", "x", "x", "x", "x", "x"]
 ```
 
 val の代わりにブロックを指定するとブロックの評価結果を値とします。ブロックは要素毎に実行されるので、セットする値のそれぞれをあるオブジェクトの複製にできます。
@@ -1098,8 +1098,8 @@ p ary.collect {|v| v.object_id } # => [537770124, 537770112, 537770100]
 配列の先頭の要素を返します。要素がなければ nil を返します。
 
 ```ruby title="例"
-p [0, 1, 2].first   #=> 0
-p [].first          #=> nil
+p [0, 1, 2].first   # => 0
+p [].first          # => nil
 ```
 
 - **SEE** [m:Array#last]
@@ -1152,20 +1152,20 @@ lv が指定された場合、lv の深さまで再帰的に平坦化します�
 ```ruby title="例"
 # 自身を再帰的に平坦化する例。
 a = [1, [2, 3, [4], 5]]
-p a.flatten                     #=> [1, 2, 3, 4, 5]
-p a                             #=> [1, [2, 3, [4], 5]]
+p a.flatten                     # => [1, 2, 3, 4, 5]
+p a                             # => [1, [2, 3, [4], 5]]
 
 # 自身を破壊的に平坦化する例。
 a = [[[1, [2, 3]]]]
-p a.flatten!                    #=> [1, 2, 3]
-p a                             #=> [1, 2, 3]
+p a.flatten!                    # => [1, 2, 3]
+p a                             # => [1, 2, 3]
 
 # 平坦化が行われない場合は nil を返す。
-p [1, 2, 3].flatten!            #=> nil
+p [1, 2, 3].flatten!            # => nil
 
 # 平坦化の再帰の深さを指定する例。
 a = [ 1, 2, [3, [4, 5] ] ]
-p a.flatten(1)            #=> [1, 2, 3, [4, 5]]
+p a.flatten(1)            # => [1, 2, 3, [4, 5]]
 ```
 
 ### def hash    -> Integer
@@ -1174,12 +1174,12 @@ p a.flatten(1)            #=> [1, 2, 3, [4, 5]]
 
 ```ruby title="例"
 a = ["a", "b", 1]
-p a.hash              #=>  321
+p a.hash              # =>  321
 b = a.dup
-p b.hash              #=>  321
+p b.hash              # =>  321
 
-p ["a", 1, "b"].hash  #=>  491
-p ["a", 1.0, "b"].hash  #=>  466227
+p ["a", 1, "b"].hash  # =>  491
+p ["a", 1.0, "b"].hash  # =>  466227
 ```
 
 ### def include?(val)    -> bool
@@ -1190,8 +1190,8 @@ p ["a", 1.0, "b"].hash  #=>  466227
 
 ```ruby title="例"
 a = [ "a", "b", "c" ]
-p a.include?("b")     #=> true
-p a.include?("z")     #=> false
+p a.include?("b")     # => true
+p a.include?("z")     # => false
 ```
 
 ### def find_index(val)          -> Integer | nil
@@ -1209,16 +1209,16 @@ p a.include?("z")     #=> false
 等しい要素がひとつもなかった場合は nil を返します。
 
 ```ruby title="例"
-p [1, 0, 0, 1, 0].index(1)   #=> 0
-p [1, 0, 0, 0, 0].index(1)   #=> 0
-p [0, 0, 0, 0, 0].index(1)   #=> nil
+p [1, 0, 0, 1, 0].index(1)   # => 0
+p [1, 0, 0, 0, 0].index(1)   # => 0
+p [0, 0, 0, 0, 0].index(1)   # => nil
 ```
 
 ブロックが与えられた場合には、各要素を引数として順にブロックを実行し、ブロックが真を返した最初の要素の位置を返します。
 一つも真にならなかった場合は nil を返します。
 
 ```ruby title="例"
-p [0, 1, 0, 1, 0].index {|v| v > 0}   #=> 1
+p [0, 1, 0, 1, 0].index {|v| v > 0}   # => 1
 ```
 
 引数、ブロックのどちらも与えられなかった場合は、
@@ -1318,7 +1318,7 @@ ary.join        # ~> ArgumentError: recursive array join
                      して join を呼んだ場合に発生します。
 
 ```ruby title="例"
-p [1, 2, 3].join('-') #=> "1-2-3"
+p [1, 2, 3].join('-') # => "1-2-3"
 ```
 
 - **SEE** [m:Array#*], [m:$,]
@@ -1328,8 +1328,8 @@ p [1, 2, 3].join('-') #=> "1-2-3"
 配列の末尾の要素を返します。配列が空のときは nil を返します。
 
 ```ruby title="例"
-p [0, 1, 2].last   #=> 2
-p [].last          #=> nil
+p [0, 1, 2].last   # => 2
+p [].last          # => nil
 ```
 
 - **SEE** [m:Array#first]
@@ -1369,7 +1369,7 @@ p ary.last(4)
 配列の長さを返します。配列が空のときは 0 を返します。
 
 ```ruby title="例"
-p [1, nil, 3, nil].size    #=> 4
+p [1, nil, 3, nil].size    # => 4
 ```
 
 ### def none?               -> bool
@@ -1481,8 +1481,8 @@ p array.pop      # => 1
 p array.pop      # => nil
 p array          # => []
 array = [1, 2, 3]
-p array.pop(2)   #=> [2, 3]
-p array          #=> [1]
+p array.pop(2)   # => [2, 3]
+p array          # => [1]
 ```
 
 - **SEE** [m:Array#push], [m:Array#shift], [m:Array#unshift]
@@ -1553,7 +1553,7 @@ p [1, 2, 3, 4, 5, 6].reject {|i| i % 2 == 0 }  # => [1, 3, 5]
 ```ruby title="例"
 a = [1, 2, 3]
 a.replace [4, 5, 6]
-p a                 #=> [4, 5, 6]
+p a                 # => [4, 5, 6]
 ```
 
 ### def reverse     -> Array
@@ -1565,12 +1565,12 @@ reverse! は self を返します。
 
 ```ruby title="例"
 a = ["a", 2, true]
-p a.reverse         #=> [true, 2, "a"]
-p a                 #=> ["a", 2, true] (変化なし)
+p a.reverse         # => [true, 2, "a"]
+p a                 # => ["a", 2, true] (変化なし)
 
 a = ["a", 2, true]
-p a.reverse!        #=> [true, 2, "a"]
-p a                 #=> [true, 2, "a"]
+p a.reverse!        # => [true, 2, "a"]
+p a                 # => [true, 2, "a"]
 ```
 
 ### def reverse_each {|item| ... }    -> self
@@ -1639,10 +1639,10 @@ p a.rfind                      # => #<Enumerator: [1, 2, 3, 4, 5, 6]:rfind>
 - **param** `val` -- オブジェクトを指定します。
 
 ```ruby title="例"
-p [1, 0, 0, 1, 0].rindex(1)   #=> 3
-p [1, 0, 0, 0, 0].rindex(1)   #=> 0
-p [0, 0, 0, 0, 0].rindex(1)   #=> nil
-p [0, 1, 0, 1, 0].rindex {|v| v > 0}   #=> 3
+p [1, 0, 0, 1, 0].rindex(1)   # => 3
+p [1, 0, 0, 0, 0].rindex(1)   # => 0
+p [0, 0, 0, 0, 0].rindex(1)   # => nil
+p [0, 1, 0, 1, 0].rindex {|v| v > 0}   # => 3
 ```
 
 - **SEE** [m:Array#index]
@@ -1668,11 +1668,11 @@ p [0, 1, 0, 1, 0].rindex {|v| v > 0}   #=> 3
 
 ```ruby title="例"
 a = [0, 1, 2, 3, 4]
-p a.shift            #=> 0
-p a                  #=> [1, 2, 3, 4]
+p a.shift            # => 0
+p a                  # => [1, 2, 3, 4]
 
-p [].shift           #=> nil
-p [].shift(1)        #=> []
+p [].shift           # => nil
+p [].shift(1)        # => []
 ```
 
 - **SEE** [m:Array#push], [m:Array#pop], [m:Array#unshift]
@@ -1684,9 +1684,9 @@ p [].shift(1)        #=> []
 - **param** `nth` -- 要素のインデックスを整数で指定します。[m:Array#\[\]] と同じです。
 
 ```ruby title="例"
-p [0, 1, 2].slice(1)    #=> 1
-p [0, 1, 2].slice(2)    #=> 2
-p [0, 1, 2].slice(10)   #=> nil
+p [0, 1, 2].slice(1)    # => 1
+p [0, 1, 2].slice(2)    # => 2
+p [0, 1, 2].slice(10)   # => nil
 ```
 
 ### def slice(pos, len)  -> Array | nil
@@ -1701,9 +1701,9 @@ p [0, 1, 2].slice(10)   #=> nil
 - **param** `range` -- [m:Array#\[\]] と同じです。
 
 ```ruby title="例"
-p [0, 1, 2].slice(0, 2)    #=> [0, 1]
-p [0, 1, 2].slice(2..3)    #=> [2]
-p [0, 1, 2].slice(10, 1)   #=> nil
+p [0, 1, 2].slice(0, 2)    # => [0, 1]
+p [0, 1, 2].slice(2..3)    # => [2]
+p [0, 1, 2].slice(10, 1)   # => nil
 ```
 
 ### def slice!(nth)       -> object | nil
@@ -1715,12 +1715,12 @@ p [0, 1, 2].slice(10, 1)   #=> nil
 
 ```ruby title="例"
 a = [ "a", "b", "c" ]
-p a.slice!(1)   #=> "b"
-p a             #=> ["a", "c"]
-p a.slice!(-1)  #=> "c"
-p a             #=> ["a"]
-p a.slice!(100) #=> nil
-p a             #=> ["a"]
+p a.slice!(1)   # => "b"
+p a             # => ["a", "c"]
+p a.slice!(-1)  # => "c"
+p a             # => ["a"]
+p a.slice!(100) # => nil
+p a             # => ["a"]
 ```
 
 ### def slice!(start, len)  -> Array | nil
@@ -1737,12 +1737,12 @@ p a             #=> ["a"]
 
 ```ruby title="例"
 a = [ "a", "b", "c" ]
-p a.slice!(1, 2)   #=> ["b", "c"]
-p a                #=> ["a"]
+p a.slice!(1, 2)   # => ["b", "c"]
+p a                # => ["a"]
 
 a = [ "a", "b", "c" ]
-p a.slice!(1, 0)   #=> []
-p a                #=> [ "a", "b", "c" ]
+p a.slice!(1, 0)   # => []
+p a                # => [ "a", "b", "c" ]
 ```
 
 ### def sort                -> Array
@@ -1768,14 +1768,14 @@ Array#sort, Array#sort! は安定ではありません (unstable sort)。
 
 ```ruby title="例"
 ary1 = [ "d", "a", "e", "c", "b" ]
-p ary1.sort                             #=> ["a", "b", "c", "d", "e"]
+p ary1.sort                             # => ["a", "b", "c", "d", "e"]
 
 ary2 = ["9", "7", "10", "11", "8"]
-p ary2.sort                             #=> ["10", "11", "7", "8", "9"] (文字列としてソートするとこうなる)
-p ary2.sort{|a, b| a.to_i <=> b.to_i }  #=> ["7", "8", "9", "10", "11"] (ブロックを使って数字としてソート)
+p ary2.sort                             # => ["10", "11", "7", "8", "9"] (文字列としてソートするとこうなる)
+p ary2.sort{|a, b| a.to_i <=> b.to_i }  # => ["7", "8", "9", "10", "11"] (ブロックを使って数字としてソート)
 
 # sort_by を使っても良い
-p ary2.sort_by{|x| x.to_i }             #=> ["7", "8", "9", "10", "11"]
+p ary2.sort_by{|x| x.to_i }             # => ["7", "8", "9", "10", "11"]
 ```
 
 - **SEE** [m:Enumerable#sort_by]
@@ -1964,11 +1964,11 @@ p [1, 3, 2, "2", "3"].uniq { |n| n.to_s } # => [1, 3, 2]
 ```ruby title="例"
 arr = [1,2,3]
 arr.unshift 0
-p arr             #=> [0, 1, 2, 3]
+p arr             # => [0, 1, 2, 3]
 arr.unshift [0]
-p arr             #=> [[0], 0, 1, 2, 3]
+p arr             # => [[0], 0, 1, 2, 3]
 arr.unshift 1, 2
-p arr             #=> [1, 2, [0], 0, 1, 2, 3]
+p arr             # => [1, 2, [0], 0, 1, 2, 3]
 ```
 
 - **SEE** [m:Array#push], [m:Array#pop], [m:Array#shift]
@@ -1981,14 +1981,14 @@ p arr             #=> [1, 2, [0], 0, 1, 2, 3]
 
 ```ruby title="例"
 ary = %w( a b c d e )
-p ary.values_at( 0, 2, 4 )          #=> ["a", "c", "e"]
-p ary.values_at( 3, 4, 5, 6, 35 )   #=> ["d", "e", nil, nil, nil]
-p ary.values_at( 0, -1, -2 )        #=> ["a", "e", "d"]
-p ary.values_at( -4, -5, -6, -35 )  #=> ["b", "a", nil, nil]
-p ary.values_at( 1..2 )             #=> ["b", "c"]
-p ary.values_at( 3..10 )            #=> ["d", "e", nil, nil, nil, nil, nil, nil]
-p ary.values_at( 6..7 )             #=> [nil, nil]
-p ary.values_at( 0, 3..5 )          #=> ["a", "d", "e", nil]
+p ary.values_at( 0, 2, 4 )          # => ["a", "c", "e"]
+p ary.values_at( 3, 4, 5, 6, 35 )   # => ["d", "e", nil, nil, nil]
+p ary.values_at( 0, -1, -2 )        # => ["a", "e", "d"]
+p ary.values_at( -4, -5, -6, -35 )  # => ["b", "a", nil, nil]
+p ary.values_at( 1..2 )             # => ["b", "c"]
+p ary.values_at( 3..10 )            # => ["d", "e", nil, nil, nil, nil, nil, nil]
+p ary.values_at( 6..7 )             # => [nil, nil]
+p ary.values_at( 0, 3..5 )          # => ["a", "d", "e", nil]
 ```
 
 #%# ([[m:Array#indexes]], [[m:Array#indices]] と同じです)
@@ -2062,10 +2062,10 @@ srand()が有効です。
 
 ```ruby title="例"
 a = (1..10).to_a
-p a.sample        #=>  9
-p a.sample        #=> 10
-p a.sample(3)     #=> [1, 9, 3]
-p a               #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+p a.sample        # =>  9
+p a.sample        # => 10
+p a.sample(3)     # => [1, 9, 3]
+p a               # => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
 
 random [c:SecureRandom] などの乱数生成器を渡すことができます。
@@ -2073,7 +2073,7 @@ random [c:SecureRandom] などの乱数生成器を渡すことができます�
 ```ruby title="例"
 require 'securerandom'
 a = (1..10).to_a
-p a.sample(random: SecureRandom)  #=>  2
+p a.sample(random: SecureRandom)  # =>  2
 ```
 
 ### def cycle(n=nil) {|obj| block } -> nil
@@ -2103,8 +2103,8 @@ a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
 引数に [c:Random] オブジェクトを渡すことでそのオブジェクトが生成する擬似乱数列を用いることができます。
 
 ```ruby title="例"
-a = [ 1, 2, 3 ]           #=> [1, 2, 3]
-p a.shuffle               #=> [2, 3, 1]
+a = [ 1, 2, 3 ]           # => [1, 2, 3]
+p a.shuffle               # => [2, 3, 1]
 rng = Random.new
 rng2 = rng.dup # RNGを複製
 # 以下の2つは同じ結果を返す
@@ -2129,9 +2129,9 @@ rng2 = rng.dup # RNGを複製
               せん。
 
 ```ruby title="例"
-a = [ 1, 2, 3 ]           #=> [1, 2, 3]
-p a.shuffle!              #=> [2, 3, 1]
-p a                       #=> [2, 3, 1]
+a = [ 1, 2, 3 ]           # => [1, 2, 3]
+p a.shuffle!              # => [2, 3, 1]
+p a                       # => [2, 3, 1]
 ```
 
 - **SEE** [m:Array#shuffle]
@@ -2152,12 +2152,12 @@ p a                       #=> [2, 3, 1]
 
 ```ruby title="例"
 a = [1, 2, 3, 4]
-p a.combination(1).to_a  #=> [[1],[2],[3],[4]]
-p a.combination(2).to_a  #=> [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
-p a.combination(3).to_a  #=> [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
-p a.combination(4).to_a  #=> [[1,2,3,4]]
-p a.combination(0).to_a  #=> [[]]: one combination of length 0
-p a.combination(5).to_a  #=> []  : no combinations of length 5
+p a.combination(1).to_a  # => [[1],[2],[3],[4]]
+p a.combination(2).to_a  # => [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
+p a.combination(3).to_a  # => [[1,2,3],[1,2,4],[1,3,4],[2,3,4]]
+p a.combination(4).to_a  # => [[1,2,3,4]]
+p a.combination(0).to_a  # => [[]]: one combination of length 0
+p a.combination(5).to_a  # => []  : no combinations of length 5
 ```
 
 ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実行して self を返します。
@@ -2166,7 +2166,7 @@ p a.combination(5).to_a  #=> []  : no combinations of length 5
 a = [1, 2, 3, 4]
 result = []
 p a.combination(2) {|e| result << e} # => [1,2,3,4]
-p result #=> [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
+p result # => [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
 ```
 
 - **SEE** [m:Array#permutation], [m:Array#repeated_combination]
@@ -2189,12 +2189,12 @@ p result #=> [[1,2],[1,3],[1,4],[2,3],[2,4],[3,4]]
 
 ```ruby title="例"
 a = [1, 2, 3]
-p a.permutation.to_a   #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
-p a.permutation(1).to_a  #=> [[1],[2],[3]]
-p a.permutation(2).to_a  #=> [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
-p a.permutation(3).to_a  #=> [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
-p a.permutation(0).to_a  #=> [[]]: one permutation of length 0
-p a.permutation(4).to_a  #=> []  : no permutations of length 4
+p a.permutation.to_a   # => [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+p a.permutation(1).to_a  # => [[1],[2],[3]]
+p a.permutation(2).to_a  # => [[1,2],[1,3],[2,1],[2,3],[3,1],[3,2]]
+p a.permutation(3).to_a  # => [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+p a.permutation(0).to_a  # => [[]]: one permutation of length 0
+p a.permutation(4).to_a  # => []  : no permutations of length 4
 ```
 
 ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実行して self を返します。
@@ -2251,14 +2251,14 @@ p a # => [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
 
 ```ruby title="例"
 a = [1, 2, 3]
-p a.repeated_combination(1).to_a  #=> [[1], [2], [3]]
-p a.repeated_combination(2).to_a  #=> [[1,1],[1,2],[1,3],[2,2],[2,3],[3,3]]
-p a.repeated_combination(3).to_a  #=> [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3],
+p a.repeated_combination(1).to_a  # => [[1], [2], [3]]
+p a.repeated_combination(2).to_a  # => [[1,1],[1,2],[1,3],[2,2],[2,3],[3,3]]
+p a.repeated_combination(3).to_a  # => [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3],
                                 #    [1,3,3],[2,2,2],[2,2,3],[2,3,3],[3,3,3]]
-p a.repeated_combination(4).to_a  #=> [[1,1,1,1],[1,1,1,2],[1,1,1,3],[1,1,2,2],[1,1,2,3],
+p a.repeated_combination(4).to_a  # => [[1,1,1,1],[1,1,1,2],[1,1,1,3],[1,1,2,2],[1,1,2,3],
                                 #    [1,1,3,3],[1,2,2,2],[1,2,2,3],[1,2,3,3],[1,3,3,3],
                                 #    [2,2,2,2],[2,2,2,3],[2,2,3,3],[2,3,3,3],[3,3,3,3]]
-p a.repeated_combination(0).to_a  #=> [[]] # one combination of length 0
+p a.repeated_combination(0).to_a  # => [[]] # one combination of length 0
 ```
 
 ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実行して self を返します。
@@ -2267,7 +2267,7 @@ p a.repeated_combination(0).to_a  #=> [[]] # one combination of length 0
 a = [1, 2, 3]
 result = []
 p a.repeated_combination(3) {|e| result << e} # => [1,2,3]
-p result  #=> [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3],
+p result  # => [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3],
         #    [1,3,3],[2,2,2],[2,2,3],[2,3,3],[3,3,3]]
 ```
 
@@ -2289,11 +2289,11 @@ p result  #=> [[1,1,1],[1,1,2],[1,1,3],[1,2,2],[1,2,3],
 
 ```ruby title="例"
 a = [1, 2]
-p a.repeated_permutation(1).to_a  #=> [[1], [2]]
-p a.repeated_permutation(2).to_a  #=> [[1,1],[1,2],[2,1],[2,2]]
-p a.repeated_permutation(3).to_a  #=> [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
+p a.repeated_permutation(1).to_a  # => [[1], [2]]
+p a.repeated_permutation(2).to_a  # => [[1,1],[1,2],[2,1],[2,2]]
+p a.repeated_permutation(3).to_a  # => [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
                                 #    [2,1,1],[2,1,2],[2,2,1],[2,2,2]]
-p a.repeated_permutation(0).to_a  #=> [[]] # one permutation of length 0
+p a.repeated_permutation(0).to_a  # => [[]] # one permutation of length 0
 ```
 
 ブロックが与えられた場合、作成した配列の各要素を引数としてブロックを実行して self を返します。
@@ -2302,7 +2302,7 @@ p a.repeated_permutation(0).to_a  #=> [[]] # one permutation of length 0
 a = [1, 2]
 result = []
 p a.repeated_permutation(3) {|e| result << e} # => [1,2]
-p result  #=> [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
+p result  # => [[1,1,1],[1,1,2],[1,2,1],[1,2,2],
         #    [2,1,1],[2,1,2],[2,2,1],[2,2,2]]
 ```
 
@@ -2409,10 +2409,10 @@ cnt で指定したインデックスの要素が先頭になるように自身�
 
 ```ruby title="例"
 a = [ "a", "b", "c", "d" ]
-p a.rotate!      #=> ["b", "c", "d", "a"]
-p a              #=> ["b", "c", "d", "a"]
-p a.rotate!(2)   #=> ["d", "a", "b", "c"]
-p a.rotate!(-3)  #=> ["a", "b", "c", "d"]
+p a.rotate!      # => ["b", "c", "d", "a"]
+p a              # => ["b", "c", "d", "a"]
+p a.rotate!(2)   # => ["d", "a", "b", "c"]
+p a.rotate!(-3)  # => ["a", "b", "c", "d"]
 ```
 
 - **SEE** [m:Array#rotate]
@@ -2508,10 +2508,10 @@ p ary.bsearch_index { |x| 4 - x / 2 } # => nil
 引数を指定する形式では、空の配列を返します。
 
 ```ruby title="例"
-p [].max         #=> nil
-p [].max(1)      #=> []
-p [2, 5, 3].max  #=> 5
-p [2, 5, 3].max(2) #=> [5, 3]
+p [].max         # => nil
+p [].max(1)      # => []
+p [2, 5, 3].max  # => 5
+p [2, 5, 3].max(2) # => [5, 3]
 ```
 
 - **param** `n` -- 取得する要素数。
@@ -2532,12 +2532,12 @@ n 要素が降順に入った配列を返します。
 a == b のとき 0、a < b のとき負の整数を、期待しています。
 
 ```ruby title="例"
-p [].max {|a, b| a <=> b }  #=> nil
-p [].max(1) {|a, b| a <=> b } #=> []
+p [].max {|a, b| a <=> b }  # => nil
+p [].max(1) {|a, b| a <=> b } # => []
 
 ary = %w(albatross dog horse)
-p ary.max {|a, b| a.length <=> b.length }  #=> "albatross"
-p ary.max(2) {|a, b| a.length <=> b.length } #=> ["albatross", "horse"]
+p ary.max {|a, b| a.length <=> b.length }  # => "albatross"
+p ary.max(2) {|a, b| a.length <=> b.length } # => ["albatross", "horse"]
 ```
 
 - **param** `n` -- 取得する要素数。
@@ -2556,10 +2556,10 @@ p ary.max(2) {|a, b| a.length <=> b.length } #=> ["albatross", "horse"]
 引数を指定する形式では、空の配列を返します。
 
 ```ruby title="例"
-p [].min         #=> nil
-p [].min(1)      #=> []
-p [2, 5, 3].min  #=> 2
-p [2, 5, 3].min(2) #=> [2, 3]
+p [].min         # => nil
+p [].min(1)      # => []
+p [2, 5, 3].min  # => 2
+p [2, 5, 3].min(2) # => [2, 3]
 ```
 
 - **param** `n` -- 取得する要素数。
@@ -2580,12 +2580,12 @@ n 要素が昇順で入った配列を返します。
 a < b のとき負の整数を、期待しています。
 
 ```ruby title="例"
-p [].min {|a, b| a <=> b }  #=> nil
-p [].min(1) {|a, b| a <=> b } #=> []
+p [].min {|a, b| a <=> b }  # => nil
+p [].min(1) {|a, b| a <=> b } # => []
 
 ary = %w(albatross dog horse)
-p ary.min {|a, b| a.length <=> b.length }  #=> "dog"
-p ary.min(2) {|a, b| a.length <=> b.length } #=> ["dog", "horse"]
+p ary.min {|a, b| a.length <=> b.length }  # => "dog"
+p ary.min(2) {|a, b| a.length <=> b.length } # => ["dog", "horse"]
 ```
 
 - **param** `n` -- 取得する要素数。
@@ -2603,8 +2603,8 @@ p ary.min(2) {|a, b| a.length <=> b.length } #=> ["dog", "horse"]
 
 ```ruby title="例"
 a = %w(albatross dog horse)
-p a.minmax                               #=> ["albatross", "horse"]
-p a.minmax{|a,b| a.length <=> b.length } #=> ["dog", "albatross"]
+p a.minmax                               # => ["albatross", "horse"]
+p a.minmax{|a,b| a.length <=> b.length } # => ["dog", "albatross"]
 p [].minmax # => [nil, nil]
 ```
 
@@ -2620,11 +2620,11 @@ p [].minmax # => [nil, nil]
 配列が空の場合、initを返します。
 
 ```ruby title="例"
-p [].sum                           #=> 0
-p [].sum(0.0)                      #=> 0.0
-p [1, 2, 3].sum                    #=> 6
-p [3, 5.5].sum                     #=> 8.5
-p [2.5, 3.0].sum(0.0) {|e| e * e } #=> 15.25
+p [].sum                           # => 0
+p [].sum(0.0)                      # => 0.0
+p [1, 2, 3].sum                    # => 6
+p [3, 5.5].sum                     # => 8.5
+p [2.5, 3.0].sum(0.0) {|e| e * e } # => 15.25
 [Object.new].sum                   # ~> TypeError
 ```
 
@@ -2637,15 +2637,15 @@ mean = ary.sum(0.0) / ary.length
 init 引数を明示的に指名すると数値以外のオブジェクトにも使えます。
 
 ```ruby title="例"
-p ["a", "b", "c"].sum("")          #=> "abc"
-p [[1], [[2]], [3]].sum([])        #=> [1, [2], 3]
+p ["a", "b", "c"].sum("")          # => "abc"
+p [[1], [[2]], [3]].sum([])        # => [1, [2], 3]
 ```
 
 しかし、文字列の配列や配列の配列の場合 [m:Array#join] や [m:Array#flatten] の方が [m:Array#sum] よりも高速です。
 
 ```ruby title="例"
-p ["a", "b", "c"].join             #=> "abc"
-p [[1], [[2]], [3]].flatten(1)     #=> [1, [2], 3]
+p ["a", "b", "c"].join             # => "abc"
+p [[1], [[2]], [3]].flatten(1)     # => [1, [2], 3]
 ```
 
 "+" メソッドが再定義されている場合、[m:Array#sum] は再定義を無視することがあります(例えば [m:Integer#+])。

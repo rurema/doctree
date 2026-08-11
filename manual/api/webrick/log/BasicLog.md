@@ -70,7 +70,7 @@ msg の終端が "\n" でない場合には "\n" を追加します。
 ```ruby
 require 'webrick'
 logger = WEBrick::BasicLog.new()
-p logger.fatal('out of money')     #=> FATAL out of money   (標準エラー出力に出力)
+p logger.fatal('out of money')     # => FATAL out of money   (標準エラー出力に出力)
 ```
 
 ### def error(msg)    -> ()

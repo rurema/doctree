@@ -37,7 +37,7 @@ WEBrick::HTTPUtils の内部で使われます。ユーザがこのメソッド�
 require "webrick/cgi"
 class MyCGI < WEBrick::CGI
   def do_GET(req, res)
-    p req.query['q'].name   #=> "q"
+    p req.query['q'].name   # => "q"
   end
 end
 MyCGI.new.start()
@@ -54,7 +54,7 @@ MyCGI.new.start()
 require "webrick/cgi"
 class MyCGI < WEBrick::CGI
   def do_GET(req, res)
-    p req.query['q'].filename   #=> "my_file.txt"
+    p req.query['q'].filename   # => "my_file.txt"
   end
 end
 MyCGI.new.start()
@@ -71,7 +71,7 @@ MyCGI.new.start()
 require "webrick/cgi"
 class MyCGI < WEBrick::CGI
   def do_GET(req, res)
-    p req.query['q']['content-type']   #=> "plain/text"
+    p req.query['q']['content-type']   # => "plain/text"
   end
 end
 MyCGI.new.start()
@@ -96,7 +96,7 @@ class MyCGI < WEBrick::CGI
     req.query['q'].each_data{|s|
       p s
     }
-    #=> "val1"
+    # => "val1"
         "val2"
         "val3"
   end
@@ -113,7 +113,7 @@ MyCGI.new.start()
 require "webrick/cgi"
 class MyCGI < WEBrick::CGI
   def do_GET(req, res)
-    p req.query['q'].list    #=> ["val1", "val2", "val3"]
+    p req.query['q'].list    # => ["val1", "val2", "val3"]
   end
 end
 MyCGI.new.start()

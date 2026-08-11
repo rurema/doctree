@@ -48,8 +48,8 @@ resolvers の各要素は each_address と each_name というメソッドを持
 
 ```ruby
 require "resolv"
-p Resolv.getaddress("localhost") #=> "127.0.0.1"
-p Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
+p Resolv.getaddress("localhost") # => "127.0.0.1"
+p Resolv.getaddress("www.ruby-lang.org") # => "221.186.184.68"
 ```
 
 - **param** `name` -- ホスト名を文字列で与えます。
@@ -80,7 +80,7 @@ IP アドレス address のホスト名をルックアップし、ルックア�
 
 ```ruby
 require "resolv"
-p Resolv.getname("221.186.184.68") #=> "carbon.ruby-lang.org"
+p Resolv.getname("221.186.184.68") # => "carbon.ruby-lang.org"
 ```
 
 - **param** `address` -- IPアドレスを文字列で与えます。
@@ -1512,12 +1512,12 @@ other が self のサブドメインであるかどうかを返します。
 ```ruby
 require "resolv"
 domain = Resolv::DNS::Name.create("y.z")
-p Resolv::DNS::Name.create("w.x.y.z").subdomain_of?(domain) #=> true
-p Resolv::DNS::Name.create("x.y.z").subdomain_of?(domain) #=> true
-p Resolv::DNS::Name.create("y.z").subdomain_of?(domain) #=> false
-p Resolv::DNS::Name.create("z").subdomain_of?(domain) #=> false
-p Resolv::DNS::Name.create("x.y.z.").subdomain_of?(domain) #=> false
-p Resolv::DNS::Name.create("w.z").subdomain_of?(domain) #=> false
+p Resolv::DNS::Name.create("w.x.y.z").subdomain_of?(domain) # => true
+p Resolv::DNS::Name.create("x.y.z").subdomain_of?(domain) # => true
+p Resolv::DNS::Name.create("y.z").subdomain_of?(domain) # => false
+p Resolv::DNS::Name.create("z").subdomain_of?(domain) # => false
+p Resolv::DNS::Name.create("x.y.z.").subdomain_of?(domain) # => false
+p Resolv::DNS::Name.create("w.z").subdomain_of?(domain) # => false
 ```
 
 # class Resolv::DNS::Resource < Resolv::DNS::Query

@@ -26,7 +26,7 @@ family, level, optname には Socket::SOL_SOCKET のような整数の他、文�
 require 'socket'
 
 sockopt = Socket::Option.new(:INET, :SOCKET, :KEEPALIVE, [1].pack("i"))
-p sockopt #=> #<Socket::Option: INET SOCKET KEEPALIVE 1>
+p sockopt # => #<Socket::Option: INET SOCKET KEEPALIVE 1>
 ```
 
 ### def Socket::Option.int(family, level, optname, integer) -> Socket::Option

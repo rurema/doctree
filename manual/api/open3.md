@@ -80,7 +80,7 @@ Open3.popen3({"foo" => "1", "bar" => "2"}, "env") {|i, o, e, t|
   i.close
   print o.read
 }
-#=> ...
+# => ...
 #   foo=1
 #   bar=2
 ```
@@ -93,13 +93,13 @@ require "open3"
 # オプションを指定した場合。
 Dir.chdir("/tmp")
 Open3.popen3("pwd", :chdir=> "/") {|i,o,e,t|
-  p o.read.chomp #=> "/"
+  p o.read.chomp # => "/"
 }
 
 # オプションを指定しない場合。
 Dir.chdir("/tmp")
 Open3.popen3("pwd") {|i,o,e,t|
-  p o.read.chomp #=> "/tmp"
+  p o.read.chomp # => "/tmp"
 }
 ```
 
@@ -152,9 +152,9 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
 require "open3"
 
 o, e, s = Open3.capture3("echo a; sort >&2", :stdin_data=>"foo\nbar\nbaz\n")
-p o #=> "a\n"
-p e #=> "bar\nbaz\nfoo\n"
-p s #=> #<Process::Status: pid 32682 exit 0>
+p o # => "a\n"
+p e # => "bar\nbaz\nfoo\n"
+p s # => #<Process::Status: pid 32682 exit 0>
 ```
 
 [m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンドを実行する事ができます。
@@ -178,7 +178,7 @@ require "open3"
 
 # factorコマンドで与えられた数値(42)を素因数分解する。
 o, s = Open3.capture2("factor", :stdin_data=>"42")
-p o #=> "42: 2 3 7\n"
+p o # => "42: 2 3 7\n"
 ```
 
 [m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンドを実行する事ができます。
@@ -202,8 +202,8 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出�
 require "open3"
 
 o, s = Open3.capture2e("echo a; sort >&2", :stdin_data=>"foo\nbar\nbaz\n")
-p o #=> "a\nbar\nbaz\nfoo\n"
-p s #=> #<Process::Status: pid 20574 exit 0>
+p o # => "a\nbar\nbaz\nfoo\n"
+p s # => #<Process::Status: pid 20574 exit 0>
 ```
 
 [m:Open3?.popen3]と同様に引数に環境変数とオプションを指定してコマンドを実行する事ができます。
@@ -248,7 +248,7 @@ Open3.pipeline_rw("sort", "cat -n") {|stdin, stdout, wait_thrs|
 
   # stdinに渡した文字列をsortコマンドが並べ替えたものに、catコマンド
   # が行番号を付けた文字列が表示される。
-  p stdout.read   #=> "     1\tbar\n     2\tbaz\n     3\tfoo\n"
+  p stdout.read   # => "     1\tbar\n     2\tbaz\n     3\tfoo\n"
 }
 ```
 
@@ -282,9 +282,9 @@ Open3.pipeline_rw("sort", "cat -n") {|stdin, stdout, wait_thrs|
 require "open3"
 
 Open3.pipeline_r("yes", "head -10") {|r, ts|
-  p r.read      #=> "y\ny\ny\ny\ny\ny\ny\ny\ny\ny\n"
-  p ts[0].value #=> #<Process::Status: pid 24910 SIGPIPE (signal 13)>
-  p ts[1].value #=> #<Process::Status: pid 24913 exit 0>
+  p r.read      # => "y\ny\ny\ny\ny\ny\ny\ny\ny\ny\n"
+  p ts[0].value # => #<Process::Status: pid 24910 SIGPIPE (signal 13)>
+  p ts[1].value # => #<Process::Status: pid 24913 exit 0>
 }
 ```
 
@@ -356,7 +356,7 @@ Open3.pipeline_start("xeyes") {|ts|
   sleep 10
   t = ts[0]
   Process.kill("TERM", t.pid)
-  p t.value #=> #<Process::Status: pid 911 SIGTERM (signal 15)>
+  p t.value # => #<Process::Status: pid 911 SIGTERM (signal 15)>
 }
 ```
 
@@ -388,7 +388,7 @@ require "open3"
 
 fname = "/usr/share/man/man1/ruby.1.gz"
 p Open3.pipeline(["zcat", fname], "nroff -man", "less")
-#=> [#<Process::Status: pid 11817 exit 0>,
+# => [#<Process::Status: pid 11817 exit 0>,
 #    #<Process::Status: pid 11820 exit 0>,
 #    #<Process::Status: pid 11828 exit 0>]
 ```
