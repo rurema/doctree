@@ -21,7 +21,7 @@ p WEBrick::HTTPUtils.load_mime_types('/etc/mime.types')
 
 ### module_function def mime_type(filename, mime_tab)    -> String
 
-ファイル名 filename の拡張子をもとにその MIME タイプを指定された mime_tab 
+ファイル名 filename の拡張子をもとにその MIME タイプを指定された mime_tab
 から探して文字列として返します。MIME タイプが見つからない場合は "application/octet-stream"
 を返します。
 

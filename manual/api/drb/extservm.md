@@ -13,7 +13,7 @@ DRb::ExtServManager
 
 ### Example
 
-以下の例を実行するためには、まず server.rb を起動し、その後 client.rb を動かします。service.rb は server.rb が client.rb からサービスを要求された時に起動されます。また、stop.rbを用いて 
+以下の例を実行するためには、まず server.rb を起動し、その後 client.rb を動かします。service.rb は server.rb が client.rb からサービスを要求された時に起動されます。また、stop.rbを用いて
 
 ```ruby title="server.rb"
 require 'drb/drb'
@@ -136,10 +136,10 @@ DRb::ExtServManager オブジェクトを生成して返します。
 
 ### def service(name) -> DRb::ExtServ
 
-name で指定したサービスに関連付けられた [c:DRb::ExtServ] 
+name で指定したサービスに関連付けられた [c:DRb::ExtServ]
 オブジェクトを返します。
 
-サービスを提供するプロセスが起動していない場合は、[m:DRb::ExtServManager.command] 
+サービスを提供するプロセスが起動していない場合は、[m:DRb::ExtServManager.command]
 で指定したプロセスを起動し、そのプロセスが [c:DRb::ExtServ] オブジェクトが
 [m:DRb::ExtServ.new] によって ExtServManager に登録されるのを待ちます。
 その後、登録されたオブジェクトを返します。

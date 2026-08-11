@@ -30,7 +30,7 @@ srv.start
 上のスクリプトでは以下のような流れで view.rb は実行されます。
 
 1. サーバのパス /view.cgi と CGIHandler がマウントにより結びつけられます。
-2. パス /view.cgi にアクセスがあるたびにサーバ(WEBrick::HTTPServer オブジェクト)は 'view.rb' 
+2. パス /view.cgi にアクセスがあるたびにサーバ(WEBrick::HTTPServer オブジェクト)は 'view.rb'
      を引数として CGIHandler オブジェクトを生成します。
 3. サーバはリクエストオブジェクトを引数として CGIHandler#service メソッドを呼びます。
 4. CGIHandler オブジェクトは view.rb を CGI スクリプトとして実行します。
@@ -75,7 +75,7 @@ new(server, *options) を呼び出してサーブレットを生成して返し�
 - **param** `response` -- クライアントへのレスポンスを表す [c:WEBrick::HTTPResponse] オブジェクトです。
 
 - **raise** `WEBrick::HTTPStatus::MethodNotAllowed` -- 
-       指定された [c:WEBrick::HTTPRequest] オブジェクト  req が自身に定義されていない 
+       指定された [c:WEBrick::HTTPRequest] オブジェクト  req が自身に定義されていない
        HTTP のメソッドであった場合発生します。
 
 ### def do_GET(request, response)        -> ()

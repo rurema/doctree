@@ -13,7 +13,7 @@ library: socket
   - TCP のサーバソケット [m:Socket.tcp_server_loop],
     [m:Socket.tcp_server_sockets], [m:TCPServer.open]
   - UNIX socket のクライアントソケット [m:Socket.unix] [m:UNIXSocket.open]
-  - UNIX socket のサーバソケット [m:Socket.unix_server_loop], 
+  - UNIX socket のサーバソケット [m:Socket.unix_server_loop],
     [m:Socket.unix_server_socket], [m:UNIXServer.open]
 また、クライアントソケットは [m:Addrinfo#connect] で、サーバソケットを [m:Addrinfo#bind] や [m:Addrinfo#listen] で作ることもできます。
 
@@ -536,7 +536,7 @@ Socket.tcp_server_sockets(0) {|sockets|
 UDP のサーバを起動して、メッセージが来るごとにブロックを呼び出します。
 
 ブロックに渡される引数は msg と msg_src の 2 つで、
-msg は受け取ったメッセージ文字列で、 msg_src は 
+msg は受け取ったメッセージ文字列で、 msg_src は
 通信相手の [c:Socket::UDPSource] オブジェクトです。
 
 - **param** `host` -- 割り当てるホスト名
@@ -551,7 +551,7 @@ sockets (UDP のソケット)に対し、通信を待ち受けます。
 
 ソケットからメッセージを受け取るたびにブロックを呼び出します。
 ブロックに渡される引数は msg と msg_src の 2 つで、
-msg は受け取ったメッセージ文字列で、 msg_src は 
+msg は受け取ったメッセージ文字列で、 msg_src は
 通信相手の [c:Socket::UDPSource] オブジェクトです。
 
 無限ループ構造になっています。
@@ -565,7 +565,7 @@ socketsで与えられた各 UDP ソケットからデータを読み取りま�
 
 各ソケットからメッセージを読み取るごとにブロックを呼び出します。
 ブロックに渡される引数は msg と msg_src の 2 つで、
-msg は受け取ったメッセージ文字列で、 msg_src は 
+msg は受け取ったメッセージ文字列で、 msg_src は
 通信相手の [c:Socket::UDPSource] オブジェクトです。
 
 [m:Socket.udp_server_loop] はこのメソッドの用いて以下のようにして実装できます。

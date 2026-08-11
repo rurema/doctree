@@ -78,7 +78,7 @@ p File.basename("ruby/ruby.exe", ".*")  # => "ruby"
 p File.basename("ruby/y.tab.c", ".*")   # => "y.tab"
 ```
 
-File.basename の動作は [man:basename(3)] 
+File.basename の動作は [man:basename(3)]
 #%#[[url:http://www.unix-systems.org/version3/online.html]]
 に従います。
 
@@ -206,7 +206,7 @@ p File.dirname("file.ext")        # => "."
 ```
 
 File.dirname の動作は [man:dirname(3)]
-#%#[[url:http://www.unix-systems.org/version3/online.html]] 
+#%#[[url:http://www.unix-systems.org/version3/online.html]]
 に従います。
 
 ```ruby title="例"
@@ -472,8 +472,8 @@ p File.link("testfile", "testlink") # => 0
 p IO.read("testlink")               # => "test"
 ```
 
-### def File.new(path, mode = "r", perm = 0666, **opts)                -> File 
-### def File.open(path, mode = "r", perm = 0666, **opts)               -> File 
+### def File.new(path, mode = "r", perm = 0666, **opts)                -> File
+### def File.open(path, mode = "r", perm = 0666, **opts)               -> File
 ### def File.open(path, mode = "r", perm = 0666, **opts) {|file| ... } -> object
 
 path で指定されるファイルをオープンし、[c:File] オブジェクトを生成して返します。

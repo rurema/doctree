@@ -119,15 +119,15 @@ encoding には以下のいずれかを指定できます。
 
 #%# = class Psych::Visitors::JSONTree < Psych::Visitors::YAMLTree
 #%# Ruby オブジェクトから JSON 用の AST を構築するためのクラスです。
-#%# 
+#%#
 #%# AST は YAML 用の AST と同様 [[c:Psych::Nodes::Node]] のサブクラスに
 #%# よって表現されます。しかし JSON と YAML の仕様の違い(基本的に
 #%# YAML のほうが rich なデータ型を持っています。例えば JSON には
 #%# Symbol を表現する方法がなく、文字列ど同一視されます)を
 #%# ごまかすための仕組みが含まれています。
-#%# 
+#%#
 #%# 実際問題としてこれを直接は使わない気がするのでドキュメントは書きません。
-#%# 
+#%#
 #%# == Class Methods
 #%# --- new(options = {}, emitter = Psych::JSON::TreeBuilder.new)
 #%#

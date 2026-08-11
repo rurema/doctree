@@ -1,7 +1,7 @@
 ---
 library: openssl
 ---
-# module OpenSSL::SSL::SocketForwarder 
+# module OpenSSL::SSL::SocketForwarder
 
 to_io で返されるソケットオブジェクトにメソッドをフォワードするモジュールです。
 

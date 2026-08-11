@@ -30,11 +30,11 @@ p template.match({'name' => :seki,  'age' => 0x20}) # => false
 ```
 
 #%# == Instance Methods
-#%# 
+#%#
 #%# --- ===(tuple)
 #%# --- match(tuple)
 #%# #@todo
-#%# 
+#%#
 #%# self と tuple のサイズが同じで、
 #%# self の各要素が tuple にマッチする場合は真を返します。
 #%# マッチングの検査には [[m:Rinda::Tuple#==]] と [[m:Rinda::Tuple#===]] を用います。

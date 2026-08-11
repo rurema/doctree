@@ -17,7 +17,7 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと�
 通常、具体的な読み書きをおこなうためには、
 [m:Zlib::GzipReader.new] もしくは、 [m:Zlib::GzipWriter.new] を使用します。
 
-- **SEE** [m:Zlib::GzipReader.new], [m:Zlib::GzipWriter.new] 
+- **SEE** [m:Zlib::GzipReader.new], [m:Zlib::GzipWriter.new]
 
 ### def Zlib::GzipFile.wrap(*args) {|gz| ... } -> ()
 
@@ -80,7 +80,7 @@ gzip ファイルのヘッダーに記録されているコメントを返しま
 コメントが存在しない場合は nil を返します。
 
 ### def sync -> bool
-### def sync=(flag) 
+### def sync=(flag)
 
 IO クラスと同じ。flag が真の時、関連付けられている
 IO オブジェクトが flush メソッドを持っていなければなりません。

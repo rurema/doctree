@@ -169,7 +169,7 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった場
 
 その Net::SMTP オブジェクトが STARTTLSを利用するかどうかを返します。
 
-常に利用する(利用できないときは [m:Net::SMTP#start] で例外 
+常に利用する(利用できないときは [m:Net::SMTP#start] で例外
 [c:Net::SMTPUnsupportedCommand] を発生) するときは :always を、利用可能な場合のみ利用する場合は :auto を、常に利用しない場合には nil を返します。
 
 - **SEE** [m:Net::SMTP#start]

@@ -19,7 +19,7 @@ spec = Gem::Specification.new do |s|
 end
 ```
 
-#%# @see 
+#%# @see
 
 # class Gem::Specification
 

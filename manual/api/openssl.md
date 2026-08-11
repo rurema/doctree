@@ -59,7 +59,7 @@ print cer.to_text
     邦訳, Eric Rescorla 著 齋藤孝道・鬼頭利之・古森貞監訳.
     マスタリングTCP/IP SSL/TLS編
   - John Viega, Matt Messier and Pravir Chandra. Network Security with OpenSSL:
-    Cryptography for Secure Communications. 
+    Cryptography for Secure Communications.
     邦訳, John Viega, Matt Messier and Pravir Chandra 著 齋藤孝道監訳.
     OpenSSL -暗号・PKI・SSL/TLSライブラリの詳細-
 

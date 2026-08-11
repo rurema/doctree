@@ -8,7 +8,7 @@ since: "1.9.2"
 で用いる ancillary data (補助データ、制御情報)
 を表すクラスです。
 
-[m:Socket::AncillaryData#family](socket family), 
+[m:Socket::AncillaryData#family](socket family),
 [m:Socket::AncillaryData#level](cmsg level),
 [m:Socket::AncillaryData#type](cmsg type),
 [m:Socket::AncillaryData#data](cmsg data),
@@ -340,8 +340,8 @@ ancdata = Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
 p ancdata.ipv6_pktinfo # => [#<Addrinfo: ::1>, 0]
 ```
 
-- **SEE** [m:Socket::AncillaryData.ipv6_pktinfo], 
-     [m:Socket::AncillaryData#ipv6_pktinfo_addr], 
+- **SEE** [m:Socket::AncillaryData.ipv6_pktinfo],
+     [m:Socket::AncillaryData#ipv6_pktinfo_addr],
      [m:Socket::AncillaryData#ipv6_pktinfo_ifindex],
      [m:Socket::Constants::IPV6_PKTINFO]
 
@@ -360,8 +360,8 @@ ancdata = Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
 p ancdata.ipv6_pktinfo_addr # => #<Addrinfo: ::1>
 ```
 
-- **SEE** [m:Socket::AncillaryData.ipv6_pktinfo], 
-     [m:Socket::AncillaryData#ipv6_pktinfo], 
+- **SEE** [m:Socket::AncillaryData.ipv6_pktinfo],
+     [m:Socket::AncillaryData#ipv6_pktinfo],
      [m:Socket::AncillaryData#ipv6_pktinfo_ifindex],
      [m:Socket::Constants::IPV6_PKTINFO]
 
@@ -380,7 +380,7 @@ ancdata = Socket::AncillaryData.ipv6_pktinfo(addr, ifindex)
 p ancdata.ipv6_pktinfo_ifindex # => 0
 ```
 
-- **SEE** [m:Socket::AncillaryData.ipv6_pktinfo], 
-     [m:Socket::AncillaryData#ipv6_pktinfo], 
+- **SEE** [m:Socket::AncillaryData.ipv6_pktinfo],
+     [m:Socket::AncillaryData#ipv6_pktinfo],
      [m:Socket::AncillaryData#ipv6_pktinfo_addr],
      [m:Socket::Constants::IPV6_PKTINFO]

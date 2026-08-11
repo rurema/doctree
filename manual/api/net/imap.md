@@ -27,7 +27,7 @@ message sequence number は最後のメッセージの message sequence number+1
 message sequence number が付け替えられます。
 
 一方、UID はセッションを越えて恒久的に保持されます。
-あるメールボックス内の異なる2つのメッセージが同じ  UID 
+あるメールボックス内の異なる2つのメッセージが同じ  UID
 を持つことはありません。
 これは、メッセージがメールボックスから削除された後でも成立します。
 
@@ -235,7 +235,7 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
 
 ### def Net::IMAP.add_authenticator(auth_type, authenticator) -> ()
 
-[m:Net::IMAP#authenticate] で使う 
+[m:Net::IMAP#authenticate] で使う
 認証用クラスを設定します。
 
 imap ライブラリに新たな認証方式を追加するために用います。
@@ -659,7 +659,7 @@ set で対象とするメッセージを指定します。
 これには sequence number、sequence number の配列、もしくは
 [c:Range] オブジェクトを渡します。
 attr には取得するアトリビュートを文字列の配列で渡してください。
-指定可能なアトリビュートについては [m:Net::IMAP::FetchData#attr] 
+指定可能なアトリビュートについては [m:Net::IMAP::FetchData#attr]
 を見てください。
 
 ```ruby title="例"
@@ -692,7 +692,7 @@ set で対象とするメッセージを指定します。
 これには UID、UID の配列、もしくは
 [c:Range] オブジェクトを渡します。
 attr には取得するアトリビュートを文字列の配列で渡してください。
-指定可能なアトリビュートについては [m:Net::IMAP::FetchData#attr] 
+指定可能なアトリビュートについては [m:Net::IMAP::FetchData#attr]
 を見てください。
 
 - **param** `set` -- 処理対象のメッセージの UID
@@ -900,7 +900,7 @@ rights に nil を渡すと、空文字列を指定したのと同様、つま�
 
 ### def getacl(mailbox) -> [Net::IMAP::MailboxACLItem]
 
-GETACL コマンドを送り、メールボックスの 
+GETACL コマンドを送り、メールボックスの
 ACL(Access Control List) を取得します。
 
 [m:Net::IMAP#getacl] で指定したメールボックスに対し何らかの権限を持つ各ユーザに対して
@@ -1234,7 +1234,7 @@ IMAP のレスポンスにはタグ付きのものとタグなしのものがあ
   - "NO"
   - "BAD"
 
-### def data -> Net::IMAP::ResponseText 
+### def data -> Net::IMAP::ResponseText
 
 レスポンスを解析したオブジェクトを返します。
 
@@ -1946,69 +1946,69 @@ true を返します。
 
 #%# internal classes for authentication
 #%# = class Net::IMAP::LoginAuthenticator
-#%# 
+#%#
 #%# Authenticator for the "LOGIN" authentication type.
 #%# See [[m:Net::IMAP#authenticate]].
-#%# 
+#%#
 #%# == Class Methods
-#%# 
+#%#
 #%# --- new(user, password)
 #%# #@todo
-#%# 
+#%#
 #%# == Instance Methods
-#%# 
+#%#
 #%# --- process(data)
 #%# #@todo
-#%# 
-#%# 
-#%# 
+#%#
+#%#
+#%#
 #%# = class Net::IMAP::CramMD5Authenticator
-#%# 
+#%#
 #%# Authenticator for the "CRAM-MD5" authentication type.
 #%# See [[m:Net::IMAP#authenticate]].
-#%# 
+#%#
 #%# == Class Methods
-#%# 
+#%#
 #%# --- new(user, password)
 #%# #@todo
-#%# 
+#%#
 #%# == Instance Methods
-#%# 
+#%#
 #%# --- process(challenge)
 #%# #@todo
-#%# 
-#%# 
-#%# 
+#%#
+#%#
+#%#
 #%# #@since 1.9.1
 #%# = class Net::IMAP::PlainAuthenticator
-#%# 
+#%#
 #%# Authenticator for the "PLAIN" authentication type.
 #%# See [[m:Net::IMAP#authenticate]].
-#%# 
+#%#
 #%# == Class Methods
-#%# 
+#%#
 #%# --- new(user, password)
 #%# #@todo
-#%# 
+#%#
 #%# == Instance Methods
-#%# 
+#%#
 #%# --- process(data)
 #%# #@todo
-#%# 
-#%# 
-#%# 
+#%#
+#%#
+#%#
 #%# = class Net::IMAP::DigestMD5Authenticator
-#%# 
+#%#
 #%# Authenticator for the "DIGEST-MD5" authentication type.
 #%# See [[m:Net::IMAP#authenticate]].
-#%# 
+#%#
 #%# == Class Methods
-#%# 
+#%#
 #%# --- new(user, password, authname = nil)
 #%# #@todo
-#%# 
+#%#
 #%# == Instance Methods
-#%# 
+#%#
 #%# --- process(challenge)
 #%# #@todo
 #%# #@end

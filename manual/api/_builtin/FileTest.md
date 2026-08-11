@@ -305,7 +305,7 @@ File.delete("testfile")
 p FileTest.size?("testfile")    # => nil
 ```
 
-- **SEE** [m:FileTest?.size], [m:FileTest?.zero?] 
+- **SEE** [m:FileTest?.size], [m:FileTest?.zero?]
 
 ### module_function def sticky?(file)    -> bool
 

@@ -100,7 +100,7 @@ filename で指定されるファイルを gzip 圧縮データの書き出し�
 - **param** `filename` -- ファイル名を文字列で指定します。
 - **param** `level` -- 0-9の範囲の整数、または [m:Zlib::NO_COMPRESSION], [m:Zlib::BEST_SPEED], 
              [m:Zlib::BEST_COMPRESSION], [m:Zlib::DEFAULT_COMPRESSION] を指定します。
-             詳細はzlib.hを参照してください。 
+             詳細はzlib.hを参照してください。
 - **param** `strategy` -- [m:Zlib::FILTERED], [m:Zlib::HUFFMAN_ONLY], [m:Zlib::DEFAULT_STRATEGY]など指定します。
                 詳細はzlib.h を参照してください。
 

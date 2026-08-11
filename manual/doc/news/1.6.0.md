@@ -9,7 +9,7 @@ ruby version 1.6 は安定版です。この版での変更はバグ修正がメ
 - **`2003-01-22: errno`**:
 
     EAGAIN と EWOULDBLOCK が同じ値のシステムで、EWOULDBLOCK がなくなっ
-    ていました。現在は、このようなシステムでは、EWOULDBLOCK は、EAGAIN 
+    ていました。現在は、このようなシステムでは、EWOULDBLOCK は、EAGAIN
     として定義されています。(これは 1.6.7 とは異なる挙動です)
 
         p Errno::EAGAIN
@@ -72,7 +72,7 @@ ruby version 1.6 は安定版です。この版での変更はバグ修正がメ
         => ruby 1.6.7 (2002-09-25) [i586-linux]
            ""
 
-  これは1.7からのバックポートではありません。コメントの扱いなどは、1.7 
+  これは1.7からのバックポートではありません。コメントの扱いなどは、1.7
   とは異なります。(((<ruby 1.7 feature>)) の 2002-06-24 も参照)
 
         p "#{ "" # comment }"
@@ -133,7 +133,7 @@ ruby version 1.6 は安定版です。この版での変更はバグ修正がメ
            false
 
 \# : 2002-08-01 IO#read, gets ..., etc.
-\# 
+\#
 \#    File::NONBLOCK を指定した IO の読み込みで EWOULDBLOCK が発生すると、
 \#    途中まで読んだデータが失われることがありました。
 \#    ((<ruby-dev:17855>))
@@ -141,7 +141,7 @@ ruby version 1.6 は安定版です。この版での変更はバグ修正がメ
 
 - **`2002-07-11 String#slice!`**:
 
-  範囲外の文字列を指定したときに例外を返す場合がありましたが、常に nil 
+  範囲外の文字列を指定したときに例外を返す場合がありましたが、常に nil
   を返すようになりました。(String#[]やString#slice と同じ結果を返すと
   いうことです)
 
@@ -158,7 +158,7 @@ ruby version 1.6 は安定版です。この版での変更はバグ修正がメ
 
 - **`2002-07-05 String#split`**:
 
-  最初の引数に nil を指定できるようになりました。((<ruby-talk:43513>)) 
+  最初の引数に nil を指定できるようになりました。((<ruby-talk:43513>))
   この場合、$; を分割文字列として使用します。以前までは $; が有効にな
   るのは引数省略時だけでした。
 
@@ -546,7 +546,7 @@ ruby version 1.6 は安定版です。この版での変更はバグ修正がメ
 
 - **`2002-03-16 $~`**:
 
-  正規表現マッチのメソッドが実際には内部でマッチを実行しない場合に 
+  正規表現マッチのメソッドが実際には内部でマッチを実行しない場合に
   $~ の状態をクリアしていませんでした。
   ((<ruby-bugs-ja:PR#208>))
 
@@ -744,7 +744,7 @@ ruby version 1.6 は安定版です。この版での変更はバグ修正がメ
 
   このバグにより 1.6.7 が近いうちにリリースされるかもしれません
   ((<ruby-talk:30387>))(やっぱそんなことはなかったようです。
-  これを見て、1.6.6 の stable-snapshot を使用している方は、2002/1/30 
+  これを見て、1.6.6 の stable-snapshot を使用している方は、2002/1/30
   の以下の変更(ChangeLog)
 
         * re.c (rb_reg_search): should set regs.allocated.
@@ -938,7 +938,7 @@ p sprintf("**%c", 255).succ
 
   String#=~ の呼出で両辺ともリテラルであったときに速度重視のためにメソッ
   ドコールを行わなくなりました。(実際は、前からこのようにしようとして
-  いたがバグによりメソッドが呼び出されていた(しかもString#=~ でなく 
+  いたがバグによりメソッドが呼び出されていた(しかもString#=~ でなく
   Regexp#=~))
 
     class String
@@ -1003,12 +1003,12 @@ p sprintf("**%c", 255).succ
   いたため、以下のようなコードで異常な状態になっていました。
   ((<ruby-bugs-ja:PR#91>))
 
-    %w!a! "b" 
+    %w!a! "b"
     => -:1: tried to allocate too big memory (NoMemoryError)
        ruby 1.6.5 (2001-09-19) [i586-linux]
 
     => -:1: parse error
-           %w!a! "b" 
+           %w!a! "b"
                     ^
        ruby 1.6.5 (2001-10-10) [i586-linux]
 
@@ -1214,7 +1214,7 @@ p sprintf("**%c", 255).succ
 
 - **`Dir.chdir`**:
 
-        環境変数 HOME, LOGDIR のいずれも定義されていないとき引数なしの 
+        環境変数 HOME, LOGDIR のいずれも定義されていないとき引数なしの
         Dir.chdir で ArgumentError 例外を起こすようになりました
 
         ENV['HOME'] = nil
@@ -1820,7 +1820,7 @@ p sprintf("**%c", 255).succ
 
     env TZ=America/Managua ruby -e 'p Time.local(1998,12,1,0,59,59)'
     => Mon Nov 30 01:59:59 EST 1998
-    env TZ=America/Managua ruby -e 'p Time.local(1998,12,1,0,59,59).tv_sec'   
+    env TZ=America/Managua ruby -e 'p Time.local(1998,12,1,0,59,59).tv_sec'
     => 912409199
 
 - **`SIGINFO`**:
@@ -1945,7 +1945,7 @@ p sprintf("**%c", 255).succ
         a = 677330545177305025495135714080
         b = 14269972710765292560
         p a % b  #=> 0
-        p -a % b #=> 
+        p -a % b #=>
 
         => ruby 1.6.3 (2001-04-02) [i386-cygwin]
            0

@@ -305,7 +305,7 @@ override してください。
 
 # class Psych::Emitter < Psych::Handler
 
-[c:Psych::Parser] でパースし、生じたイベントから 
+[c:Psych::Parser] でパースし、生じたイベントから
 YAML ドキュメントを再構築するようなハンドラです。
 
 以下の例では STDIN から YAML ドキュメントを入力し、再構築した YAML ドキュメントを STDERR に出力します。

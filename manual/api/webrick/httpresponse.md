@@ -52,7 +52,7 @@ require 'time'
 res['last-modified'] = Time.now.httpdate
 ```
 
-- **SEE** [m:WEBrick::HTTPResponse#chunked?], [m:WEBrick::HTTPResponse#content_length], 
+- **SEE** [m:WEBrick::HTTPResponse#chunked?], [m:WEBrick::HTTPResponse#content_length],
      [m:WEBrick::HTTPResponse#content_type]
 
 ### def body        -> String | IO

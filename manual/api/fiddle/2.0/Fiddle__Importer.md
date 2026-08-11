@@ -13,7 +13,7 @@ C の関数をモジュールにインポートするためのモジュールで
 
 ### def [](name) -> Fiddle::Function|nil
 
-[m:Fiddle::Importer#extern] でインポートした関数の 
+[m:Fiddle::Importer#extern] でインポートした関数の
 [c:Fiddle::Function] オブジェクトを返します。
 
 name という名前の関数が存在しない場合は nil を返します。
@@ -191,7 +191,7 @@ extern や struct で利用する型の別名を定義します。
 
 - **param** `new` -- 別名(文字列)
 - **param** `orig` -- 別名を付けたい型の名前(文字列)
-- **SEE** [m:Fiddle::Importer#extern], [m:Fiddle::Importer#sizeof], 
+- **SEE** [m:Fiddle::Importer#extern], [m:Fiddle::Importer#sizeof],
      [m:Fiddle::Importer#struct], [m:Fiddle::Importer#union]
 
 ### def union(signature) -> Class
@@ -266,7 +266,7 @@ p v.value # => 48
 
 取り込んだライブラリからシンボルをインポートします。
 
-返り値はシンボルがロードされたメモリのアドレスを持つ [c:Fiddle::Pointer] 
+返り値はシンボルがロードされたメモリのアドレスを持つ [c:Fiddle::Pointer]
 オブジェクトを返します。
 
 - **param** `name` -- シンボル名(文字列)

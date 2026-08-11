@@ -172,7 +172,7 @@ SSL_CTX_set_cipher_list の項を見てください。
 
 - **SEE** [m:OpenSSL::SSL::SSLContext#cert_store=]
 
-### def cert_store=(store) 
+### def cert_store=(store)
 
 接続相手の証明書の検証のために使う、信頼している CA 証明書を含む証明書ストアを設定します。
 
@@ -428,7 +428,7 @@ proc{|sslsocket, is_export, keylen| ... }
   - sslsocket 通信に使われる [c:OpenSSL::SSL::SSLSocket] オブジェクト
   - is_export 輸出規制のある暗号を利用するかどうかを0か0以外かで指定
   - keylen 鍵長
-となります。ブロックの返り値には適切な鍵パラメータを含む 
+となります。ブロックの返り値には適切な鍵パラメータを含む
 [c:OpenSSL::PKey::DH] オブジェクトを返します。鍵パラメータは
 keylen で指定された鍵長に対応したものでなければなりません。
 
@@ -492,7 +492,7 @@ cb に nil を指定するとデフォルトのパラメータが利用されま
   - :session_new_cb ([m:OpenSSL::SSL::SSLContext#session_new_cb=])
   - :session_remove_cb ([m:OpenSSL::SSL::SSLContext#session_remove_cb=])
   - :servername_cb ([m:OpenSSL::SSL::SSLContext#servername_cb=])
-指定されなかったパラメータは [m:OpenSSL::SSL::SSLContext::DEFAULT_PARAMS] 
+指定されなかったパラメータは [m:OpenSSL::SSL::SSLContext::DEFAULT_PARAMS]
 の値で初期化されます。
 
 ### def ssl_version=(ver)
@@ -524,7 +524,7 @@ proc{|sslsocket, hostname| ... }
 2つで、1つ目は認証および暗号化通信に使われる [c:OpenSSL::SSL::SSLSocket]
 オブジェクトで、2つ目がクライアント側から伝えられてきたホスト名です。
 
-コールバックの返り値には認証と暗号化の設定を含んだ 
+コールバックの返り値には認証と暗号化の設定を含んだ
 [c:OpenSSL::SSL::SSLContext] オブジェクト、もしくは
 nil を返さなければなりません。
 これで得られたコンテキストオブジェクトが sslsocket に設定され、コンテキストが持っている証明書などの各情報を用いてハンドシェイクを継続します。
@@ -774,7 +774,7 @@ p OpenSSL::SSL::SSLContext::METHODS
 
 [m:OpenSSL::SSL::SSLContext#session_cache_mode=] に渡すフラグとして用います。
 
-このフラグが立っているとサーバ側の [c:OpenSSL::SSL::SSLContext] 
+このフラグが立っているとサーバ側の [c:OpenSSL::SSL::SSLContext]
 でセッションキャッシュの保持と管理、再利用が行われます。
 
 このフラグはデフォルトで有効になっています。

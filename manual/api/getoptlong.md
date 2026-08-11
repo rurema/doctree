@@ -5,7 +5,7 @@ category: CommandLine
 getoptlong は、GNU の getopt_long() とまったく同じ方式でコマンド行オプションの解析を行う Ruby のライブラリです。
 
 #%# Author: 笠原 基之 (m-kasahr@sra.co.jp)
-#%# 
+#%#
 #%# Copyright 1998, 1999  Motoyuki Kasahara
 
 ### GNU getopt_long() とは?
@@ -24,17 +24,17 @@ GNU getopt_long() は、コマンド行オプションの解析を行う C の�
 GNU getopt_long() および getoptlong.rb には、`REQUIRE_ORDER`,
 `PERMUTE`, `RETURN_IN_ORDER` という、3 つの「順序形式」が用意されています。それぞれの処理形式は、非オプション引数についての扱い方が異なります。
 
-- REQUIRE_ORDER: 
+- REQUIRE_ORDER:
     非オプション引数の後に来たオプションは、オプションとして認識しません。
     最初に非オプション引数が現れた時点で、オプションの解析処理を中止します。
 
-- PERMUTE: 
+- PERMUTE:
    コマンド行引数の内容を、走査した順に入れ替え、最終的にはすべての非オプ
    ションを末尾に寄せます。この方式では、オプションはどの順序で書いても良
    いことになります。これは、たとえプログラム側でそうなることを期待しなく
    ても、そうなります。この方式がデフォルトです。
 
-- RETURN_IN_ORDER: 
+- RETURN_IN_ORDER:
    オプションと他の非オプション引数はどんな順序で並んでも良いが、お互いの
    順序は保持したままにしたいというプログラムのための形式です。
 
@@ -79,7 +79,7 @@ parser.set_options(
     ['--version',                  GetoptLong::NO_ARGUMENT])
 ```
 
-getopts モジュールが行っているように、与えられたオプションを 
+getopts モジュールが行っているように、与えられたオプションを
 `$OPT_...` という定数に入れたいときは、次のコードをあなたのプログラムに足して下さい。
 
 ```ruby
@@ -186,7 +186,7 @@ optname, optarg = option_parser.get
 
 順序形式を設定します。
 
-環境変数 POSIXLY_CORRECT が定義されていると、引数に 
+環境変数 POSIXLY_CORRECT が定義されていると、引数に
 [m:GetoptLong::PERMUTE] を与えてこのメソッドを呼び出しても、実際のところの順序形式は [m:GetoptLong::REQUIRE_ORDER] に設定されます。
 
 環境変数 POSIXLY_CORRECT が定義されていない限り、[m:GetoptLong::PERMUTE]

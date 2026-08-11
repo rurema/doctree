@@ -6,7 +6,7 @@ library: openssl
 Diffie-Hellman 鍵共有クラス
 
 Diffie-Hellman 鍵共有プロトコルは署名ができないため、
-[m:OpenSSL::PKey::PKey#sign] や [m:OpenSSL::PKey::PKey#verify] 
+[m:OpenSSL::PKey::PKey#sign] や [m:OpenSSL::PKey::PKey#verify]
 を呼び署名や署名の検証を行おうとすると例外
 [c:OpenSSL::PKey::PKeyError] が発生します。
 
@@ -118,7 +118,7 @@ DH オブジェクトを生成します。
 
 #%# --- public?
 #%# #@todo
-#%# 
+#%#
 #%# 公開鍵を持っているかどうか判定します。
 #%#
 #%# --- private?
@@ -146,7 +146,7 @@ DH オブジェクトを生成します。
 
 #%# --- public_key
 #%# #@todo
-#%# 
+#%#
 #%# 公開鍵を複製して DH オブジェクトとして返します。
 
 ### def params_ok? -> bool

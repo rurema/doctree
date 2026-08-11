@@ -44,7 +44,7 @@ IO の読み込みメソッドは2種類存在します。
 返す文字列のエンコーディングは常に ASCII-8BIT になります。
 以下がバイナリ読み込みメソッドです。
 
-- [m:IO#read](size) 
+- [m:IO#read](size)
 - [m:IO#read_nonblock]
 - [m:IO#readpartial]
 - [m:IO#sysread]
@@ -90,7 +90,7 @@ IO オブジェクトは外部エンコーディングと内部エンコーデ�
   IO へ書き込まれる文字列は外部エンコーディングへと変換されます。
   外部エンコーディングへの変換方法が分からない場合は例外が発生します。
 
-IO に対してエンコーディングを指定する方法には、生成時に [m:IO.open] や [m:File.open] 
+IO に対してエンコーディングを指定する方法には、生成時に [m:IO.open] や [m:File.open]
 に渡すモードとともに指定するものと生成後に [m:IO#set_encoding] を使って指定するものの二通りがあります。詳しくはそれぞれのメソッドの項を参照して下さい。通常は前者の方法を使います。
 
 ```ruby title="例1"
@@ -513,7 +513,7 @@ end
 ```
   
 ブロックを与えられた場合、親プロセスでは生成した IO オブジェクトを引数にブロックを実行し、その結果を返します。ブロックの実行後、生成したパイプは自動的にクローズされます。
-子プロセスでは nil を引数にブロックを実行し終了します。  
+子プロセスでは nil を引数にブロックを実行し終了します。
 
 ```ruby
 p IO.popen("-", "r+") {|io|
@@ -1740,7 +1740,7 @@ File.open("testfile") do |f|
 end
 ```
 
-- **SEE** [m:File#lstat], [m:File.stat], [m:File.lstat] 
+- **SEE** [m:File#lstat], [m:File.stat], [m:File.lstat]
 
 ### def sync    -> bool
 
@@ -1835,13 +1835,13 @@ File.open("/dev/null", "w") {|f|
   - IO::SEEK_HOLE: offset 以降の次にホールがある位置へ(同上)
 
 - **raise** `IOError` -- 読み込み用にバッファリングされた IO に対して実行すると発生します。
-               既に close されていた場合にも発生します。 
+               既に close されていた場合にも発生します。
 
 - **raise** `Errno::EXXX` -- 移動に失敗した場合に発生します。
 
 - **SEE** [m:IO#seek]
 
-### def syswrite(string)    -> Integer    
+### def syswrite(string)    -> Integer
 
 [man:write(2)] を用いて string を出力します。
 string が文字列でなければ to_s による文字列化を試みます。
@@ -1892,7 +1892,7 @@ IOポートに対して str を出力します。str が文字列でなければ
 [m:IO#syswrite] を除く全ての出力メソッドは、最終的に
 "write" という名のメソッドを呼び出すので、このメソッドを置き換えることで出力関数の挙動を変更できます。
 #%##@since 1.8.0
-#%#以前は [[m:Kernel.#putc]], 
+#%#以前は [[m:Kernel.#putc]],
 #%#[[m:IO#putc]] に対してだけこのことは適用されませんでした
 #%#([[ruby-dev:16305]])が、修正されました([[ruby-dev:18038]])。
 #%##@end

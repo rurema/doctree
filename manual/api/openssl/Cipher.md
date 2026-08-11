@@ -5,18 +5,18 @@ library: openssl
 
 共通鍵暗号のために抽象化されたインターフェースを提供するクラスです。
 
-基本的にこのクラスを直接使ってデータを暗号化することは避けてください。通常はより高水準なインターフェースが利用可能なはずです。必要なのは暗号アルゴリズムを指定するため 
+基本的にこのクラスを直接使ってデータを暗号化することは避けてください。通常はより高水準なインターフェースが利用可能なはずです。必要なのは暗号アルゴリズムを指定するため
 [m:OpenSSL::Cipher.new] で暗号オブジェクトを生成することだけでしょう。
 
 もし、このクラスを直接利用して暗号化する場合は、暗号の鍵や
 IV(Initialization Vector)の取り扱いについて正しく理解してからにしてください。
 
 以下の手順で利用します。
-  - [m:OpenSSL::Cipher.new] や [m:OpenSSL::Cipher::AES256.new] 
+  - [m:OpenSSL::Cipher.new] や [m:OpenSSL::Cipher::AES256.new]
     などで暗号オブジェクトを生成する
   - [m:OpenSSL::Cipher#encrypt], [m:OpenSSL::Cipher#decrypt] で
     暗号、復号のいずれをするかを設定する
-  - [m:OpenSSL::Cipher#key=], [m:OpenSSL::Cipher#iv=], 
+  - [m:OpenSSL::Cipher#key=], [m:OpenSSL::Cipher#iv=],
     [m:OpenSSL::Cipher#random_key], [m:OpenSSL::Cipher#random_iv] などで
     鍵と IV(initialization vector) を設定する
   - [m:OpenSSL::Cipher#update], [m:OpenSSL::Cipher#final] で
@@ -90,7 +90,7 @@ p decrypted_data
 利用できるアルゴリズムはシステムにインストールされている openssl に依存します。
 [m:OpenSSL::Cipher.ciphers] で利用可能な暗号のアルゴリズム名が得られます。
 
-さまざまな方式がありますが、2006年現在 aes256 (aes-256-cbc) 
+さまざまな方式がありますが、2006年現在 aes256 (aes-256-cbc)
 を用いるのが安心でしょう。
 
 #%# 参考: [[unknown:UNIXの部屋 検索結果: openssl|URL:http://x68000.q-e-d.net/~68user/unix/pickup?openssl]]
@@ -170,13 +170,13 @@ pass と iv が渡された場合、これらを用いて鍵を生成し、暗�
 
 渡された文字列を暗号化もしくは復号化して文字列として返します。
 
-どちらがなされるかは直前に [m:OpenSSL::Cipher#encrypt] もしくは 
+どちらがなされるかは直前に [m:OpenSSL::Cipher#encrypt] もしくは
 [m:OpenSSL::Cipher#decrypt] のいずれが呼びだされたかによって決まります。
 
 ブロック暗号を利用する場合は、暗号化/復号化はブロックサイズで規定されたバイト数ごとに行われます。そのため余ったデータは暗号オブジェクト内部に保存され、次の文字列が渡されたときに使われます。
 
 暗号化/復号化すべきデータを渡し終えた後は、
-[m:OpenSSL::Cipher#final] 
+[m:OpenSSL::Cipher#final]
 を呼びだして暗号オブジェクト内部に残されたデータを暗号化/復号化する必要があります。
 
 - **param** `data` -- 暗号化/復号化する文字列
@@ -187,7 +187,7 @@ pass と iv が渡された場合、これらを用いて鍵を生成し、暗�
 
 パディング([m:OpenSSL::Cipher#padding=])を有効にしている場合は、残されたデータにパディングを付加した上で暗号化します。
 
-### def key=(key) 
+### def key=(key)
 
 暗号鍵を設定します。
 
@@ -204,7 +204,7 @@ pass と iv が渡された場合、これらを用いて鍵を生成し、暗�
 - **param** `length` -- 新しく設定する長さ(バイト数)
 - **raise** `OpenSSL::Cipher::CipherError` -- 指定した長さが不適切である(暗号方式の規格上許されていない値である)場合に発生します
 
-### def iv=(iv) 
+### def iv=(iv)
 
 IV(Initialization Vector) を設定します。
 

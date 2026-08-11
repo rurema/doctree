@@ -8,7 +8,7 @@ until: "2.7.0"
 
 # class Shell::Filter < Object
 
-コマンドの実行結果はすべて [c:Shell::Filter] か、そのサブクラスのインスタンスとして返ります。 
+コマンドの実行結果はすべて [c:Shell::Filter] か、そのサブクラスのインスタンスとして返ります。
 
 ## Class Methods
 

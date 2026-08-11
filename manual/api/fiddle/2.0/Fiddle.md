@@ -6,7 +6,7 @@ since: "2.0.0"
 
 [lib:fiddle] の名前空間をなすモジュールです。
 
-UNIX の [man:dlopen(3)] や Windows の LoadLibrary() 
+UNIX の [man:dlopen(3)] や Windows の LoadLibrary()
 などのダイナミックリンカへの低レベルなインターフェースを提供するモジュールです。
 
 ## Singleton Methods
@@ -120,11 +120,11 @@ p Fiddle.dlunwrap(addr)     # => "abc"
 
 #%# Constants for internal use
 #%# --- CdeclCallbackProcs
-#%# 
+#%#
 #%# --- CdeclCallbackAddrs
-#%# 
+#%#
 #%# --- StdcallCallbackProcs
-#%# 
+#%#
 #%# --- StdcallCallbackAddrs
 
 ### const ALIGN_CHAR -> Integer

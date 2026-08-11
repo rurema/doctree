@@ -12,7 +12,7 @@ include:
 
 ## Class Methods
 
-#%# 
+#%#
 #%# --- new(m, reqbody, resbody, path, initheader = nil)
 
 ## Instance Methods

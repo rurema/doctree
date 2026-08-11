@@ -34,7 +34,7 @@ sockaddr には文字列もしくは配列を指定します。
   - Socket.sockaddr_in(80, "www.ruby-lang.org")
   - Socket.sockaddr_un("/tmp/sock")
 
-配列で AF_INET/AF_INET6 を指定した場合、配列の4番目の要素が実際のIPアドレスとして使われます。配列の3番目の要素はホスト名ですが `Addrinfo#inspect` 
+配列で AF_INET/AF_INET6 を指定した場合、配列の4番目の要素が実際のIPアドレスとして使われます。配列の3番目の要素はホスト名ですが `Addrinfo#inspect`
 での表示にしか用いられません。
 
 family は [m:Socket::PF_INET] のようなプロコルファミリーを指定します。

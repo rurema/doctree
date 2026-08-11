@@ -17,19 +17,19 @@ hook して、それを転送します。
 #%# #@# bc-rdoc: detected missing name: _load
 #%# --- _load(s)
 #%# #@todo
-#%# 
+#%#
 #%# Unmarshall a marshalled DRbObject.
-#%# 
+#%#
 #%# If the referenced object is located within the local server,
 #%# then the object itself is returned. Otherwise, a new DRbObject
 #%# is created to act as a stub for the remote referenced object.
-#%# 
+#%#
 #%# #@# bc-rdoc: detected missing name: new
 #%# --- new(obj, uri=nil)
 #%# #@todo
-#%# 
+#%#
 #%# Create a new remote object stub.
-#%# 
+#%#
 #%# obj is the (local) object we want to create a stub for. Normally
 #%# this is nil. uri is the URI of the remote object that this will
 #%# be a stub for.
@@ -43,14 +43,14 @@ URI から新しい DRbObject を生成します。
 - **param** `uri` -- URI リモートオブジェクトを指定するための URI (文字列)
 
 #%# --- new_with -> DRb::DRbObject
-#%# used internally 
+#%# used internally
 
 ## Instance Methods
 
 #%# #@# bc-rdoc: detected missing name: method_missing
 #%# --- method_missing(msg_id, *a, &b)
 #%# #@todo
-#%# 
+#%#
 #%# Routes method calls to the referenced object.
 
 ### def ==(other) -> bool

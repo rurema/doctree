@@ -91,7 +91,7 @@ otherと自身が同一のセッションであれば真を返します。
 
 セッションタイムアウトの時間(秒数)を整数で返します。
 
-デフォルト値は [m:OpenSSL::SSL::SSLContext#timeout=] 
+デフォルト値は [m:OpenSSL::SSL::SSLContext#timeout=]
 で設定されます。
 
 - **SEE** [m:OpenSSL::SSL::Session#time],

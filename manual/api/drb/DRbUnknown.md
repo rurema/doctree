@@ -24,9 +24,9 @@ C ではそれを元のオブジェクトに復元できます。
 #%# ものなので、ユーザは new を使わないはず。
 #%# --- new(err, buf)
 #%# #@todo
-#%# 
+#%#
 #%# Create a new DRbUnknown object.
-#%# 
+#%#
 #%# buf is a string containing a marshalled object that could not be
 #%# unmarshalled. err is the error message that was raised when the
 #%# unmarshalling failed. It is used to determine the name of the

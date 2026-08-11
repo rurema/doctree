@@ -51,7 +51,7 @@ include すると 以下の型が定義されます。
 よく使われる型の別名を定義するモジュールです。
 
 include すると 以下の型が定義されます。
-  - "uint" 
+  - "uint"
   - "u_int"
-  - "ulong" 
-  - "u_long" 
+  - "ulong"
+  - "u_long"

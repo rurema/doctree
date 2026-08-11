@@ -7,8 +7,8 @@ mailto URI を表すクラスです。[RFC:2368]。
 
 ## Class Methods
 
-### def URI::MailTo.build(ary)     -> URI::MailTo 
-### def URI::MailTo.build(hash)    -> URI::MailTo 
+### def URI::MailTo.build(ary)     -> URI::MailTo
+### def URI::MailTo.build(hash)    -> URI::MailTo
 
 引数で与えられた URI 構成要素から URI::MailTo オブジェクトを生成します。
 引数の正当性をチェックします。
@@ -67,7 +67,7 @@ require 'uri'
 p URI.parse("mailto:nospam@example.com").to     # => "nospam@example.com"
 ```
 
-### def to=(s) 
+### def to=(s)
 
 自身の e-mail アドレスを文字列で設定します。
 

@@ -644,7 +644,7 @@ p thr.alive?            # => false
 スレッドの実行を終了させます。終了時に ensure 節が実行されます。
 
 ただし、スレッドは終了処理中(aborting)にはなりますが、直ちに終了するとは限りません。すでに終了している場合は何もしません。このメソッドにより終了したスレッドの [m:Thread#value] の返り値は不定です。
-自身がメインスレッドであるか最後のスレッドである場合は、プロセスを [m:Kernel?.exit](0) 
+自身がメインスレッドであるか最後のスレッドである場合は、プロセスを [m:Kernel?.exit](0)
 により終了します。
 
 [m:Kernel?.exit] と違い例外  [c:SystemExit] を発生しません。
@@ -845,7 +845,7 @@ p b.stop? # => false
 
 - **SEE** [m:Thread#alive?], [m:Thread#status]
 
-### def value    -> object 
+### def value    -> object
 
 スレッド self が終了するまで待ち([m:Thread#join] と同じ)、そのスレッドのブロックが返した値を返します。スレッド実行中に例外が発生した場合には、その例外を再発生させます。
 

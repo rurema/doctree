@@ -208,7 +208,7 @@ p lambda{|(x, y), z|}.arity # =>  2
 
 ### def binding -> Binding
 
-Proc オブジェクトが保持するコンテキストを 
+Proc オブジェクトが保持するコンテキストを
 [c:Binding] オブジェクトで返します。
 
 ```ruby title="例"

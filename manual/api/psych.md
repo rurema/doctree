@@ -67,7 +67,7 @@ Psych は YAML ドキュメントを出力する機能があります。
 
 詳しくは [c:Psych::Emitter] を見てください。
 
-#####  中水準出力 API 
+#####  中水準出力 API
 
 中水準 API では、利用者が AST を構築し YAML ドキュメントに変換します。
 この AST は YAML ドキュメントをパースして得られるものと同じものです。
@@ -423,7 +423,7 @@ YAML の文法エラーを表すクラスです。
 エラーが生じた位置の offset をバイト数で返します。
 
 offset とは、
-[m:Psych::SyntaxError#line], [m:Psych::SyntaxError#column] 
+[m:Psych::SyntaxError#line], [m:Psych::SyntaxError#column]
 で指示される位置からの相対位置です。
 この位置から 0 バイトの位置でエラーが発生することが多いため、このメソッドはしばしば 0 を返します。
 

@@ -6,7 +6,7 @@ library: psych
 YAML の scalar 型を読み込んで Ruby の built-in 型に変換するクラス。
 
 #%# == Constants
-#%# 
+#%#
 #%# --- TIME -> Regexp
 #%# #@todo
 #%# --- FLOAT

@@ -16,8 +16,8 @@ S/MIME などに使用されています。
 ### S/MIME メッセージの種類
 
 S/MIME には以下の種類のメッセージがあります
-  - enveloped-only 
-  - signed-only 
+  - enveloped-only
+  - signed-only
     - signedData フォーマット
     - multipart/signed フォーマット
   - Certificate-only
@@ -85,7 +85,7 @@ data に証明書と秘密鍵で署名します。
 cert に署名に使う証明書を、key にその証明書に対応する秘密鍵を渡します。certs に [c:OpenSSL::X509::Certificate] オブジェクトの配列 を渡すと [c:OpenSSL::PKCS7] オブジェクトにそれらの証明書が追加で保持されます。
 例えば中間 CA 証明書などを渡します。
 flags は以下の値の OR を渡します。
-  - [m:OpenSSL::PKCS7::TEXT] 
+  - [m:OpenSSL::PKCS7::TEXT]
       text/plain 用の MIME ヘッダをデータに付け加える。
   - [m:OpenSSL::PKCS7::NOCERTS]
       署名者の証明書を署名に含めません。送り先がすでに証明書をもっている場合
@@ -372,7 +372,7 @@ DER 形式のバイナリ列に変換します。
 
 ### const DETACHED -> Integer
 
-平文に署名を付ける形式 (multipart/signed) で行います。 
+平文に署名を付ける形式 (multipart/signed) で行います。
 
 [m:OpenSSL::PKCS7.sign]、[m:OpenSSL::PKCS7.write_smime]
 で利用可能なフラグです。
@@ -381,8 +381,8 @@ DER 形式のバイナリ列に変換します。
 
 text/plain タイプの MIME ヘッダーを取り扱います。
 
-[m:OpenSSL::PKCS7.sign], [m:OpenSSL::PKCS7.write_smime], 
-[m:OpenSSL::PKCS7#verify], 
+[m:OpenSSL::PKCS7.sign], [m:OpenSSL::PKCS7.write_smime],
+[m:OpenSSL::PKCS7#verify],
 [m:OpenSSL::PKCS7.encrypt], [m:OpenSSL::PKCS7#decrypt]
 で利用可能なフラグです。
   

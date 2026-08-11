@@ -1,6 +1,6 @@
 # Cygwin
 
-Win32 上で [d:platform/Unix] をエミュレートする環境。Windows 上でまさに Unix 
+Win32 上で [d:platform/Unix] をエミュレートする環境。Windows 上でまさに Unix
 を使っているような感覚が味わえる。GNU ユーティリティのおかげで下手な商用 Unix よりもある意味使いやすい。Cygwin環境でコンパイルされた実行ファイルは cygwin1.dll がリンクされ、この DLL が Unix のシステムコール等をエミュレートしてくれる。
 
 Cygwin を使う人にとって本当に必要な環境が Unix なのか Windows なのかは謎。(何事も行き過ぎはよくない。中間こそが心地よいのかもしれない)

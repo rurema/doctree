@@ -76,7 +76,7 @@ StoreContext オブジェクトが渡されますが、このメソッドを呼�
 エラーコードを設定します。
 
 [m:OpenSSL::X509::StoreContext#verify] を呼びだし、証明書チェインの各証明書を検証したコールバック([m:OpenSSL::X509::Store#verify_callback=])が呼び出され、
-StoreContext オブジェクトが渡されますが、このメソッドでエラーコードを設定し、コールバックの返り値を false にすると、最終的なエラーコードがここで設定したものになります。[m:OpenSSL::X509::StoreContext#error_string] 
+StoreContext オブジェクトが渡されますが、このメソッドでエラーコードを設定し、コールバックの返り値を false にすると、最終的なエラーコードがここで設定したものになります。[m:OpenSSL::X509::StoreContext#error_string]
 もその値に応じた文字列が返るようになります。
 
 例:

@@ -46,7 +46,7 @@ ASN.1 値に対応するRubyのオブジェクトを変更します。
 
 タグ番号を返します。
 
-タグ番号です。Universal 型の場合は BOOLEAN = 1 から BMPSTRING = 30 
+タグ番号です。Universal 型の場合は BOOLEAN = 1 から BMPSTRING = 30
 のいずれかの値をとります。
 
 - **SEE** [m:OpenSSL::ASN1::ASN1Data#tag=]
