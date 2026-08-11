@@ -309,8 +309,7 @@ pp に表示したくないインスタンス変数がある場合にこのメ�
 出力する全てのオブジェクトに [m:Object#pretty_print] が定義されている必要があります。
 そうでない場合には [c:RuntimeError] が発生します。
 
-- **raise** `RuntimeError` -- 出力する全てのオブジェクトに [m:Object#pretty_print] が定義されて
-                    いない場合に発生します。
+- **raise** `RuntimeError` -- 出力する全てのオブジェクトに [m:Object#pretty_print] が定義されていない場合に発生します。
 
 # reopen Object
 ## Instance Methods

@@ -180,8 +180,7 @@ config で有効なキーとその値は以下のとおりです。
   NPH スクリプトとして実行される場合に true を指定します。そうでない場合に false を指定します。
   デフォルトは false です。
 - **`:Logger`**:
-  ログを取るための [c:WEBrick::BasicLog] オブジェクトを指定します。デフォルトでは標準エラー出力に
-  ログが出力されます。
+  ログを取るための [c:WEBrick::BasicLog] オブジェクトを指定します。デフォルトでは標準エラー出力にログが出力されます。
 - **`:RequestTimeout`**:
   リクエストを読み込む時のタイムアウトを秒で指定します。デフォルトは 30 秒です。
 - **`:Escape8bitURI`**:
@@ -221,8 +220,7 @@ config で有効なキーとその値は以下のとおりです。
 - **param** `res` -- クライアントへのレスポンスを表す [c:WEBrick::HTTPResponse] オブジェクトです。
 
 - **raise** `WEBrick::HTTPStatus::MethodNotAllowed` -- 指定された
-       [c:WEBrick::HTTPRequest] オブジェクト req が自身に定義されてい
-       ないHTTP のメソッドであった場合発生します。
+       [c:WEBrick::HTTPRequest] オブジェクト req が自身に定義されていないHTTP のメソッドであった場合発生します。
 
 ### def start(env = ENV, stdin = $stdin, stdout = $stdout)     -> ()
 
@@ -231,8 +229,7 @@ config で有効なキーとその値は以下のとおりです。
 start メソッドは service メソッドを呼び出し、service メソッドはリクエストに応じて
 do_XXX メソッドを呼び出します。このようにして CGI スクリプトは実行されます。
 
-- **param** `env` -- CGI スクリプトが受け取った Meta-Variables (環境変数)を保持したハッシュか、
-           それと同じ [] メソッドを持ったオブジェクトを指定します。
+- **param** `env` -- CGI スクリプトが受け取った Meta-Variables (環境変数)を保持したハッシュか、それと同じ [] メソッドを持ったオブジェクトを指定します。
 
 - **param** `stdin` -- リクエストデータの入力元を [c:IO] オブジェクトで指定します。
 

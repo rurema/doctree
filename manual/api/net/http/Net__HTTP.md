@@ -272,8 +272,7 @@ active? は時代遅れのメソッドです。
 
 io に nil を指定するとデバッグ出力を止めます。
 
-- **param** `io` -- 出力先を指定します。このオブジェクトは 
-          メソッド << を持っている必要があります。
+- **param** `io` -- 出力先を指定します。このオブジェクトはメソッド << を持っている必要があります。
 
 ```ruby title="例"
 http.set_debug_output($stderr)
@@ -291,8 +290,7 @@ http.set_debug_output($stderr)
 
 レスポンスがボディを持っていない場合にコネクションを閉じるかどうかを設定します。
 
-- **param** `bool` -- レスポンスがボディを持っていない場合にコネクションを
-            閉じるかどうか指定します。
+- **param** `bool` -- レスポンスがボディを持っていない場合にコネクションを閉じるかどうか指定します。
 
 - **SEE** [m:Net::HTTP#close_on_empty_response]
 
@@ -807,8 +805,7 @@ header が nil
 [m:Net::HTTP#request_get] と同じ動作をしますが、そもそもヘッダしか要求していないので
 body は空です。そのためこの動作はそれほど意味はありません。
 
-- **param** `path` -- ヘッダを取得するエンティティのパスを
-            文字列で指定します。
+- **param** `path` -- ヘッダを取得するエンティティのパスを文字列で指定します。
 - **param** `header` -- リクエストの HTTP ヘッダをハッシュで指定します。
 
 head2 は時代遅れなので使わないでください。
@@ -937,8 +934,7 @@ POST/PUT の時は data も与えられます
 - **param** `request` -- リクエストオブジェクトを与えます。
 - **param** `data` -- リクエストのボディを文字列で与えます。
 
-- **raise** `ArgumentError` -- dataを与えるべきでないリクエストでdataを
-                     与えた場合に発生します。
+- **raise** `ArgumentError` -- dataを与えるべきでないリクエストでdataを与えた場合に発生します。
 - **SEE** [m:Net::HTTP#send_request]
 
 #%# --- inspect
@@ -951,8 +947,7 @@ POST/PUT の時は data も与えられます
 レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
-- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
-                  ハッシュで与えます。
+- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」のハッシュで与えます。
 
 - **SEE** [c:Net::HTTP::Copy]
 
@@ -963,8 +958,7 @@ POST/PUT の時は data も与えられます
 レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
-- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
-                  ハッシュで与えます。
+- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」のハッシュで与えます。
 
 - **SEE** [c:Net::HTTP::Delete]
 
@@ -976,8 +970,7 @@ POST/PUT の時は data も与えられます
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `body` -- リクエストのボディを文字列で与えます。
-- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
-                  ハッシュで与えます。
+- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」のハッシュで与えます。
 
 - **SEE** [c:Net::HTTP::Lock]
 
@@ -989,8 +982,7 @@ POST/PUT の時は data も与えられます
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `body` -- リクエストのボディを文字列で与えます。
-- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
-                  ハッシュで与えます。
+- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」のハッシュで与えます。
 
 - **SEE** [c:Net::HTTP::Mkcol]
 
@@ -1002,8 +994,7 @@ POST/PUT の時は data も与えられます
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `body` -- リクエストのボディを文字列で与えます。
-- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
-                  ハッシュで与えます。
+- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」のハッシュで与えます。
 
 - **SEE** [c:Net::HTTP::Move]
 
@@ -1012,8 +1003,7 @@ POST/PUT の時は data も与えられます
 サーバの path に OPTIONS リクエストをヘッダが initheader として送り、レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
-- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
-                  ハッシュで与えます。
+- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」のハッシュで与えます。
 
 - **SEE** [c:Net::HTTP::Options]
 
@@ -1025,8 +1015,7 @@ POST/PUT の時は data も与えられます
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `body` -- リクエストのボディを文字列で与えます。
-- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
-                  ハッシュで与えます。
+- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」のハッシュで与えます。
 
 - **SEE** [c:Net::HTTP::Propfind]
 
@@ -1059,8 +1048,7 @@ dest を指定した場合にはボディを少しずつ取得して順次「des
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `body` -- リクエストのボディを文字列で与えます。
-- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
-                  ハッシュで与えます。
+- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」のハッシュで与えます。
 
 - **SEE** [c:Net::HTTP::Proppatch]
 
@@ -1071,8 +1059,7 @@ dest を指定した場合にはボディを少しずつ取得して順次「des
 レスポンスを [c:Net::HTTPResponse] のオブジェクトで返します。
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
-- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
-                  ハッシュで与えます。
+- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」のハッシュで与えます。
 
 - **SEE** [c:Net::HTTP::Trace]
 
@@ -1084,8 +1071,7 @@ dest を指定した場合にはボディを少しずつ取得して順次「des
 
 - **param** `path` -- リクエストを送るパスを文字列で与えます。
 - **param** `body` -- リクエストのボディを文字列で与えます。
-- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」の
-                  ハッシュで与えます。
+- **param** `initheader` -- リクエストのヘッダを「文字列=>文字列」のハッシュで与えます。
 - **SEE** [c:Net::HTTP::Unlock]
 
 ### def use_ssl? -> bool

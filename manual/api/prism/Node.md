@@ -66,8 +66,7 @@ p call.compact_child_nodes.size # => 2
 Visitor パターンの受け入れメソッドです。ノードの種類に応じた
 `visitor.visit_xxx` を呼び出し、その戻り値を返します。
 
-- **param** `visitor` -- `Prism::Visitor` (またはそのサブクラス)の
-       インスタンスを指定します。
+- **param** `visitor` -- `Prism::Visitor` (またはそのサブクラス)のインスタンスを指定します。
 
 ### def child_nodes -> [Prism::Node | nil]
 
@@ -185,8 +184,7 @@ p dot.start_with?("digraph") # => true
 指定した行・桁を位置に含むノードを、自分自身から子孫の方向へ順に並べた配列で返します。エディタ上のカーソル位置に対応するノードを特定するといった用途に使えます。
 
 - **param** `line` -- 行番号(1 始まり)を指定します。
-- **param** `column` -- 行頭からのバイト単位の桁位置(0 始まり)を
-       指定します。
+- **param** `column` -- 行頭からのバイト単位の桁位置(0 始まり)を指定します。
 
 ```ruby title="例"
 require "prism"
@@ -273,29 +271,25 @@ p a === b # => true
 
 キャッシュを使って、開始位置の、指定エンコーディングのコード単位でのオフセットを返します。
 
-- **param** `cache` -- [m:Prism::Result#code_units_cache] で得た
-       キャッシュを指定します。
+- **param** `cache` -- [m:Prism::Result#code_units_cache] で得たキャッシュを指定します。
 
 ### def cached_end_code_units_offset(cache) -> Integer
 
 キャッシュを使って、終了位置の、指定エンコーディングのコード単位でのオフセットを返します。
 
-- **param** `cache` -- [m:Prism::Result#code_units_cache] で得た
-       キャッシュを指定します。
+- **param** `cache` -- [m:Prism::Result#code_units_cache] で得たキャッシュを指定します。
 
 ### def cached_start_code_units_column(cache) -> Integer
 
 キャッシュを使って、開始位置の、行頭からのコード単位での桁位置を返します。
 
-- **param** `cache` -- [m:Prism::Result#code_units_cache] で得た
-       キャッシュを指定します。
+- **param** `cache` -- [m:Prism::Result#code_units_cache] で得たキャッシュを指定します。
 
 ### def cached_end_code_units_column(cache) -> Integer
 
 キャッシュを使って、終了位置の、行頭からのコード単位での桁位置を返します。
 
-- **param** `cache` -- [m:Prism::Result#code_units_cache] で得た
-       キャッシュを指定します。
+- **param** `cache` -- [m:Prism::Result#code_units_cache] で得たキャッシュを指定します。
 
 ### def leading_comments -> [Prism::Comment]
 

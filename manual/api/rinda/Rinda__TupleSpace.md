@@ -154,7 +154,6 @@ nil は無限を意味し、この場合にはタプルは経過時間によっ�
 - **param** `tuple` -- 追加する tuple (配列かHash)
 - **param** `sec` -- 有効期限(秒数)
 
-- **raise** `Rinda::InvalidHashTupleKey` -- 不正な Hash tuple (キーが文字列以外のもの)を
-       追加しようとすると発生します
+- **raise** `Rinda::InvalidHashTupleKey` -- 不正な Hash tuple (キーが文字列以外のもの)を追加しようとすると発生します
 
 - **return** -- tuple 管理用の [c:Rinda::TupleEntry] オブジェクト

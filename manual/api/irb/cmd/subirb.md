@@ -19,9 +19,7 @@ irb 中の irb コマンドのための拡張を定義したクラスです。
 
 新しいサブ irb インタプリタを起動します。
 
-- **param** `obj` -- 新しいサブ irb インタプリタで self にするオブジェクトを指定
-           します。省略した場合は irb を起動したときの main オブジェク
-           トを self にします。
+- **param** `obj` -- 新しいサブ irb インタプリタで self にするオブジェクトを指定します。省略した場合は irb を起動したときの main オブジェクトを self にします。
 
 # class IRB::ExtendCommand::Jobs < IRB::ExtendCommand::Nop
 

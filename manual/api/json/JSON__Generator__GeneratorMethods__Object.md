@@ -14,10 +14,8 @@ alias:
 
 このメソッドはあるオブジェクトに to_json メソッドが定義されていない場合に使用するフォールバックのためのメソッドです。
 
-- **param** `state_or_hash` -- 生成する JSON 形式の文字列をカスタマイズするため
-                     に [c:JSON::State] のインスタンスか、
-                     [m:JSON::State.new] の引数と同じ [c:Hash] を
-                     指定します。
+- **param** `state_or_hash` -- 生成する JSON 形式の文字列をカスタマイズするために [c:JSON::State] のインスタンスか、
+                     [m:JSON::State.new] の引数と同じ [c:Hash] を指定します。
 
 ```ruby title="例"
 require "json"

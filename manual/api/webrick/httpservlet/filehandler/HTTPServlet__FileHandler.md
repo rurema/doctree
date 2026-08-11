@@ -25,11 +25,9 @@ library: webrick/httpservlet/filehandler
 
 FileHandler サーブレットを生成します。ユーザが直接使うことはあまりありません。
 
-- **param** `server` -- [c:WEBrick::GenericServer] のサブクラスのインスタンスを
-              指定します。
+- **param** `server` -- [c:WEBrick::GenericServer] のサブクラスのインスタンスを指定します。
 
-- **param** `root` -- サーブレットにルートディレクトリとして認識させる、
-            ローカルのファイルシステムのディレクトリを文字列で与える。
+- **param** `root` -- サーブレットにルートディレクトリとして認識させる、ローカルのファイルシステムのディレクトリを文字列で与える。
 
 - **param** `options` -- 設定を保存したハッシュ、
 

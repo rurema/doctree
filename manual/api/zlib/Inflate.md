@@ -66,8 +66,7 @@ string が nil の場合はストリームへの入力を終了します。([m:Z
 - **param** `string` -- 展開する文字列を入力します。
 
 - **raise** `Zlib::NeedDict` -- 展開に辞書が必要な場合に発生します。
-                      [m:Zlib::Inflate#set_dictionary] メソッドで辞書をセットした
-                      後で、空文字列と共にこのメソッドを再度呼び出して下さい。
+                      [m:Zlib::Inflate#set_dictionary] メソッドで辞書をセットした後で、空文字列と共にこのメソッドを再度呼び出して下さい。
 
 ```ruby
 require 'zlib'

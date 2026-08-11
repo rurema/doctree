@@ -35,16 +35,13 @@ File.foreach('/var/log/system.log'){|line|
 
 syslog の詳細については [man:syslog(3)] を参照してください。
 
-- **param** `ident` -- すべてのログにつく識別子で、どのプログラムから送られ
-             たログなのかを識別するために使われる文字列を指定します。
+- **param** `ident` -- すべてのログにつく識別子で、どのプログラムから送られたログなのかを識別するために使われる文字列を指定します。
              指定しない場合はプログラム名が使われます。
 
 - **param** `options` -- Syslog.open や Syslog.log の動作を制御するフラグを指定します。
-               指定しない場合は、Syslog::LOG_PID|Syslog::LOG_CONSの値が使われ
-               ます。使用できる値は[c:Syslog::Constants] を参照してください。
+               指定しない場合は、Syslog::LOG_PID|Syslog::LOG_CONSの値が使われます。使用できる値は[c:Syslog::Constants] を参照してください。
 
-- **param** `facility` -- ログ出力を行うプログラムの種別を指定します。syslog はこの値
-                にしたがって出力先となるログファイルを決定します。 詳しくは、
+- **param** `facility` -- ログ出力を行うプログラムの種別を指定します。syslog はこの値にしたがって出力先となるログファイルを決定します。 詳しくは、
                 [man:syslog.conf(5)],
                 [c:Syslog::Constants] を参照してください。
 
@@ -80,18 +77,14 @@ Syslog.open('ftpd', Syslog::LOG_PID | Syslog::LOG_NDELAY,
 
 開いていた syslog を最初にクローズする点を除いて[m:Syslog?.open] と同じです。
 
-- **param** `ident` -- すべてのログにつく識別子で、どのプログラムから送られ
-             たログなのかを識別するために使われる文字列を指定します。
+- **param** `ident` -- すべてのログにつく識別子で、どのプログラムから送られたログなのかを識別するために使われる文字列を指定します。
              指定しない場合はプログラム名が使われます。
 
 - **param** `options` -- Syslog.open や Syslog.log の動作を制御するフラグを指定します。
-               指定しない場合は、Syslog::LOG_PID|Syslog::LOG_CONSの値が使われ
-               ます。使用できる値は[c:Syslog::Constants] を参照してください。
+               指定しない場合は、Syslog::LOG_PID|Syslog::LOG_CONSの値が使われます。使用できる値は[c:Syslog::Constants] を参照してください。
 
-- **param** `facility` -- ログ出力を行うプログラムの種別を指定します。syslog はこの値
-                にしたがって出力先となるログファイルを決定します。 詳しくは、
-                [man:syslog.conf(5)], [c:Syslog::Constants] を参照してく
-                ださい。
+- **param** `facility` -- ログ出力を行うプログラムの種別を指定します。syslog はこの値にしたがって出力先となるログファイルを決定します。 詳しくは、
+                [man:syslog.conf(5)], [c:Syslog::Constants] を参照してください。
 
 ```ruby title="使用例"
 require 'syslog'

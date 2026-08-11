@@ -19,8 +19,7 @@ dbname で指定したデータベースをモードを mode に設定してオ�
 
 - **param** `dbname` -- データベースの名前を指定します。
 
-- **param** `mode` -- 省略値は 0666 です。mode として nil を指定するとデータベースが
-            存在しない時には新たなデータベースを作らず nil を返します。
+- **param** `mode` -- 省略値は 0666 です。mode として nil を指定するとデータベースが存在しない時には新たなデータベースを作らず nil を返します。
 
 ### def SDBM.open(dbname, mode = 0666) -> SDBM
 ### def SDBM.open(dbname, mode = 0666) {|db| ... } -> object
@@ -29,8 +28,7 @@ dbname で指定したデータベースをモードを mode に設定してオ�
 
 - **param** `dbname` -- データベースの名前を指定します。
 
-- **param** `mode` -- 省略値は 0666 です。mode として nil を指定するとデータベースが
-            存在しない時には新たなデータベースを作らず nil を返します。
+- **param** `mode` -- 省略値は 0666 です。mode として nil を指定するとデータベースが存在しない時には新たなデータベースを作らず nil を返します。
 
 ## Instance Methods
 
@@ -230,8 +228,7 @@ p db1.to_hash       # => {"x"=>"xxx", "y"=>"yyy"}
 - **param** `key` --     探索するキー。
 - **param** `ifnone` --  対応するキーが見つからなかった場合に返す値。
 
-- **raise** `IndexError` -- ifnone が設定されていないときに、対応するキーが
-                  見つからなかった場合に発生します。
+- **raise** `IndexError` -- ifnone が設定されていないときに、対応するキーが見つからなかった場合に発生します。
 
 ```ruby
 require 'sdbm'

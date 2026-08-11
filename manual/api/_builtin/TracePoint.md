@@ -56,8 +56,7 @@ puts "Hello, TracePoint!"
 trace.disable
 ```
 
-- **param** `events` -- トレースするイベントを [c:String] か [c:Symbol] で任
-              意の数指定します。
+- **param** `events` -- トレースするイベントを [c:String] か [c:Symbol] で任意の数指定します。
 
 - **`:line`**:
 
@@ -141,8 +140,7 @@ $tp.lineno # => access from outside (RuntimeError)
 
 新しい [c:TracePoint] オブジェクトを作成して自動的にトレースを開始します。[m:TracePoint.new] のコンビニエンスメソッドです。
 
-- **param** `events` -- トレースするイベントを [c:String] か [c:Symbol] で任
-              意の数指定します。指定できる値については
+- **param** `events` -- トレースするイベントを [c:String] か [c:Symbol] で任意の数指定します。指定できる値については
               [m:TracePoint.new] を参照してください。
 
 ```ruby title="例"
@@ -175,8 +173,7 @@ TracePoint の内部情報を返します。
 
 - **return** -- ブロックの評価結果を返します。
 
-- **raise** `RuntimeError` -- TracePoint のコールバックの外で呼び出した場合に
-             発生します。すでに再入が許可されている場合も同様です。
+- **raise** `RuntimeError` -- TracePoint のコールバックの外で呼び出した場合に発生します。すでに再入が許可されている場合も同様です。
 
 ```ruby
 def helper
@@ -505,8 +502,7 @@ trace.binding.eval('self')
 
 メソッドやブロックの戻り値を返します。
 
-- **raise** `RuntimeError` -- :return、:c_return、:b_return イベントのためのイベ
-                    ントフックの外側で実行した場合に発生します。
+- **raise** `RuntimeError` -- :return、:c_return、:b_return イベントのためのイベントフックの外側で実行した場合に発生します。
 
 ```ruby title="例"
 def foo(ret)
@@ -523,8 +519,7 @@ foo 1
 
 発生した例外を返します。
 
-- **raise** `RuntimeError` -- :raise イベントのためのイベントフックの外側で実行し
-                    た場合に発生します。
+- **raise** `RuntimeError` -- :raise イベントのためのイベントフックの外側で実行した場合に発生します。
 
 ```ruby title="例"
 trace = TracePoint.new(:raise) do |tp|
@@ -570,8 +565,7 @@ end.enable do
 end
 ```
 
-- **raise** `RuntimeError` -- :script_compiled イベントのための
-                    イベントフックの外側で実行した場合に発生します。
+- **raise** `RuntimeError` -- :script_compiled イベントのためのイベントフックの外側で実行した場合に発生します。
 
 ### def instruction_sequence -> RubyVM::InstructionSequence
 
@@ -586,6 +580,5 @@ end.enable do
 end
 ```
 
-- **raise** `RuntimeError` -- :script_compiled イベントのための
-                    イベントフックの外側で実行した場合に発生します。
+- **raise** `RuntimeError` -- :script_compiled イベントのためのイベントフックの外側で実行した場合に発生します。
 

@@ -40,8 +40,7 @@ uri で指定したパスに UNIX ドメインソケットを作成し、接続�
 
 uri をパースして [uri, option] という配列を返します。
 
-- **param** `uri` -- "drbunix:パス" または "drbunix:パス?オプション" という
-             形式の URI を指定します。
+- **param** `uri` -- "drbunix:パス" または "drbunix:パス?オプション" という形式の URI を指定します。
 
 - **param** `config` -- 接続の設定を [c:Hash] で指定します。
 

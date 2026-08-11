@@ -51,8 +51,7 @@ illegal は内部用なので使わないでください。
 - **param** `raw` -- テキストのエスケープの挙動を決める値
 - **param** `entity_filter` -- 置換したい実体の名前の配列
 - **param** `illegal` -- ライブラリ内部用
-- **raise** `RuntimeError` -- テキストがXMLのテキストとして不正な
-       文字を含んでいる場合に発生します。
+- **raise** `RuntimeError` -- テキストがXMLのテキストとして不正な文字を含んでいる場合に発生します。
 
 ```ruby title="doctype なしの場合"
 p REXML::Text.new("<&", false, nil, false).to_s  # => "&lt;&amp;"

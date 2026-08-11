@@ -399,8 +399,7 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオ�
 
 この Gem パッケージを使用した際に require するファイルが置かれているディレクトリのリストをセットします。
 
-- **param** `paths` -- この Gem パッケージを使用した際に require するファイルが置かれているディレクトリ
-             のリストを指定します。
+- **param** `paths` -- この Gem パッケージを使用した際に require するファイルが置かれているディレクトリのリストを指定します。
 
 ### def required_ruby_version -> Gem::Requirement
 

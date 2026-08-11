@@ -92,8 +92,7 @@ fork のための内部 API です。このメソッドを直接呼び出して�
 [m:Process?.daemon] も fork(2) を用いて実装されることがありますが、そちらはこのメソッドを経由しません。fork を捕捉する目的によっては、
 [m:Process?.daemon] も併せて上書きする必要があります。
 
-- **return** -- 子プロセスでは 0 を、親プロセスでは生成した子プロセスの
-             プロセス ID を返します。
+- **return** -- 子プロセスでは 0 を、親プロセスでは生成した子プロセスのプロセス ID を返します。
 
 ```ruby
 module ForkMonitor
@@ -336,8 +335,7 @@ Process.setrlimit(Process::RLIMIT_CORE,
 Process.groups.uniq.sort
 ```
 
-- **raise** `Errno::EXXX` -- [m:Process?.maxgroups] が実際に返される補助グループ ID の
-                   数よりも少ない値を設定していると発生します。
+- **raise** `Errno::EXXX` -- [m:Process?.maxgroups] が実際に返される補助グループ ID の数よりも少ない値を設定していると発生します。
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
@@ -355,8 +353,7 @@ root だけがこのメソッドを呼ぶことができます。
 
 - **param** `gids` -- 補助グループ ID の配列を指定します。補助グループ ID は整数かグループ名を表す文字列です。
 
-- **raise** `ArgumentError` -- 設定する補助グループ ID の数が [m:Process?.maxgroups] の
-                     数を越えている場合に発生します。
+- **raise** `ArgumentError` -- 設定する補助グループ ID の数が [m:Process?.maxgroups] の数を越えている場合に発生します。
 
 - **raise** `Errno::EXXX` -- 権限がない場合に発生します。
 
@@ -570,11 +567,9 @@ end
 
 引数 pid で指定されたプロセスのセッション ID を返します。
 
-- **param** `pid` -- プロセス ID を整数で指定します。省略した場合、0 を指定した場
-           合は現在のプロセスの ID を指定した場合と同じ動作になります。
+- **param** `pid` -- プロセス ID を整数で指定します。省略した場合、0 を指定した場合は現在のプロセスの ID を指定した場合と同じ動作になります。
 
-- **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されて
-                           いない場合に発生します。
+- **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 ```ruby
 p Process.getsid()            # => 27422

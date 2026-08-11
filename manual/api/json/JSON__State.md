@@ -26,8 +26,7 @@ JSON 形式の文字列を生成するための設定を保持しておくため
 - **`:space`**:
   JSON 形式の文字列のトークン間に挿入する文字列を指定します。デフォルトは空文字列です。
 - **`:space_before`**:
-  JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
-  前に挿入する文字列をセットします。デフォルトは空文字列です。
+  JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の前に挿入する文字列をセットします。デフォルトは空文字列です。
 - **`:object_nl`**:
   JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を指定します。
   デフォルトは空文字列です。
@@ -71,10 +70,8 @@ JSON 形式の文字列を生成するための設定を保持しておくため
 
 - **param** `options` -- [c:JSON::State] のインスタンスか、ハッシュを指定します。
 
-- **return** -- options がハッシュである場合は、それによって初期化した [c:JSON::State] を
-        返します。options が [c:JSON::State] のインスタンスである場合は単に
-        options を返します。いずれでも無い場合は、何も設定されていない [c:JSON::State] の
-        インスタンスを返します。
+- **return** -- options がハッシュである場合は、それによって初期化した [c:JSON::State] を返します。options が [c:JSON::State] のインスタンスである場合は単に
+        options を返します。いずれでも無い場合は、何も設定されていない [c:JSON::State] のインスタンスを返します。
 
 ```ruby title="例 Hash を指定"
 require "json"
@@ -366,8 +363,7 @@ puts JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
 
 JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の前に挿入する文字列をセットします。
 
-- **param** `string` -- JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
-              前に挿入する文字列をセットします。
+- **param** `string` -- JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の前に挿入する文字列をセットします。
 
 ```ruby title="例"
 require "json"

@@ -315,8 +315,7 @@ Content-Length: ヘッダフィールドの表している値を整数で返し�
 
 ヘッダが設定されていない場合には nil を返します。
 
-- **raise** `Net::HTTPHeaderSyntaxError` -- フィールドの値が不正である場合に
-                                  発生します。
+- **raise** `Net::HTTPHeaderSyntaxError` -- フィールドの値が不正である場合に発生します。
 
 ```ruby title="例"
 require 'net/http'
@@ -369,9 +368,7 @@ Content-Range: ヘッダフィールドの表している長さを整数で返�
 
 ヘッダが設定されていない場合には nil を返します。
 
-- **raise** `Net::HTTPHeaderSyntaxError` -- Content-Range: ヘッダフィールド
-                                  の値が不正である場合に
-                                  発生します。
+- **raise** `Net::HTTPHeaderSyntaxError` -- Content-Range: ヘッダフィールドの値が不正である場合に発生します。
 
 ```ruby title="例"
 require 'net/http'
@@ -550,8 +547,7 @@ Range: ヘッダの示す範囲を [c:Range] オブジェクトで返します�
 
 ヘッダにない場合は nil を返します。
 
-- **raise** `Net::HTTPHeaderSyntaxError` -- Range:ヘッダの中身が規格通り
-                                  でない場合に発生します。
+- **raise** `Net::HTTPHeaderSyntaxError` -- Range:ヘッダの中身が規格通りでない場合に発生します。
 
 ```ruby title="例 正常な値"
 require 'net/http'

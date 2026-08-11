@@ -55,8 +55,7 @@ end
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```ruby
 require 'yaml'
@@ -154,8 +153,7 @@ p c.to_yaml_properties
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```text
 require 'yaml'
@@ -229,8 +227,7 @@ p YStruct::yaml_tag_read_class("YStruct")
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```text
 require 'yaml'
@@ -268,8 +265,7 @@ baz: baz
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```ruby
 require 'yaml'
@@ -315,8 +311,7 @@ print [1, 2, 3].to_yaml
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 # reopen String
 
@@ -381,8 +376,7 @@ print "テスト".to_yaml
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```ruby
 require 'yaml'
@@ -420,8 +414,7 @@ print "foo".to_yaml # => --- foo
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```ruby
 require 'yaml'
@@ -459,8 +452,7 @@ print :foo.to_yaml # => --- :foo
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```text
 require 'yaml'
@@ -502,8 +494,7 @@ excl: false
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```ruby
 require 'yaml'
@@ -541,8 +532,7 @@ print /foo|bar/.to_yaml # => --- !ruby/regexp /foo|bar/
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```ruby
 require 'yaml'
@@ -576,8 +566,7 @@ print Time.now.to_yaml # => --- 2011-12-31 02:17:31.192322 +09:00
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```ruby
 require 'yaml'
@@ -611,8 +600,7 @@ print Date.today.to_yaml # => --- 2011-12-31
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```ruby
 require 'yaml'
@@ -647,8 +635,7 @@ print -1.to_yaml # => --- -1
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```ruby
 require 'yaml'
@@ -686,8 +673,7 @@ print (0.0/0.0).to_yaml  # => --- .NaN
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```ruby
 require 'yaml'
@@ -721,8 +707,7 @@ print true.to_yaml # => --- true
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```ruby
 require 'yaml'
@@ -756,8 +741,7 @@ print false.to_yaml # => --- false
 自身を YAML ドキュメントに変換します。
 
 - **param** `opts` -- YAML ドキュメント出力の際のオプションを指定します。
-            オプションの詳細は [m:Syck::Emitter#reset] を参照し
-            てください。
+            オプションの詳細は [m:Syck::Emitter#reset] を参照してください。
 
 ```ruby
 require 'yaml'

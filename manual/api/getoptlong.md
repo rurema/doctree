@@ -199,8 +199,7 @@ optname, optarg = option_parser.get
                  [m:GetoptLong::RETURN_IN_ORDER] 以外の値を指定した場合に発生します。
 
 - **raise** `RuntimeError` -- [m:GetoptLong#get], [m:GetoptLong#get_option],
-                    [m:GetoptLong#each], [m:GetoptLong#each_option] メソッドを
-                    呼び出した後にこのメソッドを呼び出した場合に発生します。
+                    [m:GetoptLong#each], [m:GetoptLong#each_option] メソッドを呼び出した後にこのメソッドを呼び出した場合に発生します。
 
 ### def ordering -> Integer
 

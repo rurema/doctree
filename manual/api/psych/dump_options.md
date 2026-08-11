@@ -1,6 +1,5 @@
 - **`:version`**:
-  YAML document に付加するバージョンを [major, minor] という配列、
-  もしくは文字列で指定します
+  YAML document に付加するバージョンを [major, minor] という配列、もしくは文字列で指定します
 - **`:header`**:
   出力にヘッダを付けるかどうかを真偽値で指定します
 - **`:indentation`**:

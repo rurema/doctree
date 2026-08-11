@@ -269,8 +269,7 @@ p GC.enable  # => false
 
 nil を返します。
 
-- **param** `full_mark` -- マイナー GC を動作させる場合は false を、そうでない場
-                 合は true を指定します。
+- **param** `full_mark` -- マイナー GC を動作させる場合は false を、そうでない場合は true を指定します。
 
 - **param** `immediate_mark` -- mark を遅らせる(Lazy Mark を行う)場合は false
                        を、そうでない場合は true を指定します。
@@ -331,9 +330,7 @@ p GC.count # => 3
 
 GC 内部の統計情報を [c:Hash] で返します。
 
-- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新
-                   しくハッシュを作成します。result_hash の内容は上書き
-                   されます。
+- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新しくハッシュを作成します。result_hash の内容は上書きされます。
 
 - **param** `key` -- 得られる統計情報から特定の情報を取得したい場合にキーを
            [c:Symbol] で指定します。
@@ -393,9 +390,7 @@ heap_id を指定すると、そのサイズプールの統計情報だけを返
 - **param** `heap_id` -- サイズプールの番号を [c:Integer] で指定します。
            nil を指定すると、すべてのサイズプールが対象になります。
 - **param** `key` -- 特定の情報だけを取得したい場合にキーを [c:Symbol] で指定します。
-- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新
-                   しくハッシュを作成します。result_hash の内容は上書き
-                   されます。
+- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新しくハッシュを作成します。result_hash の内容は上書きされます。
 - **raise** `ArgumentError` -- 存在しないサイズプールの番号を指定した場合に発生します。
 
 ```ruby
@@ -418,9 +413,7 @@ p GC.stat_heap(0, :slot_size) # => 40
 
 最新のGCの情報を返します。
 
-- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新
-                   しくハッシュを作成します。result_hash の内容は上書き
-                   されます。
+- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新しくハッシュを作成します。result_hash の内容は上書きされます。
 
 - **param** `key` -- 得られる情報から特定の情報を取得したい場合にキーを
            [c:Symbol] で指定します。
@@ -470,8 +463,7 @@ GC にかかった時間を計測するかどうかを取得、設定します�
 
 - **param** `flag` -- nil または false を指定すると計測を無効にします。
            それ以外の値を指定すると有効にします。
-- **return** -- measure_total_time は計測が有効なら true を、
-        無効なら false を返します。
+- **return** -- measure_total_time は計測が有効なら true を、無効なら false を返します。
 
 ```ruby
 p GC.measure_total_time # => true
@@ -524,8 +516,7 @@ SEGV が起きるでしょう。
 
 nil を返します。
 
-- **param** `full_mark` -- マイナー GC を動作させる場合は false を、そうでない場
-                 合は true を指定します。
+- **param** `full_mark` -- マイナー GC を動作させる場合は false を、そうでない場合は true を指定します。
 
 - **param** `immediate_mark` -- mark を遅らせる(Lazy Mark を行う)場合は false
                        を、そうでない場合は true を指定します。

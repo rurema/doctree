@@ -12,8 +12,7 @@ library: webrick/httpservlet/filehandler
 
 DefaultFileHandler サーブレットを生成します。ユーザが直接使うことはあまりありません。
 
-- **param** `server` -- [c:WEBrick::GenericServer] のサブクラスのインスタンスを
-              指定します。
+- **param** `server` -- [c:WEBrick::GenericServer] のサブクラスのインスタンスを指定します。
 
 - **param** `local_path` -- 処理するファイルのパスを指定します。
 

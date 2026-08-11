@@ -19,10 +19,8 @@ RDoc 形式のドキュメントを HTML に整形するクラスです。
 
 - **param** `path` -- 生成するファイルのパスを文字列で指定します。
 
-- **param** `context` -- [c:RDoc::Context] オブジェクトかそのサブクラスのオブジェ
-               クトを指定します。
+- **param** `context` -- [c:RDoc::Context] オブジェクトかそのサブクラスのオブジェクトを指定します。
 
-- **param** `show_hash` -- true を指定した場合、メソッド名のリンクに # を表示しま
-                 す。false の場合は表示しません。
+- **param** `show_hash` -- true を指定した場合、メソッド名のリンクに # を表示します。false の場合は表示しません。
 
 - **raise** `ArgumentError` -- path に nil を指定した場合に発生します。

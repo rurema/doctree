@@ -122,8 +122,7 @@ t がクラスの場合、t が to_ptr というインスタンスメソッド�
 それ以外の場合は Pointer[t].size を返します。
 
 - **param** `t` -- サイズを計算する対象
-- **raise** `Fiddle::DLError` -- t として文字列を渡し、それが表している型を Fiddle が知らなかった
-       場合に発生します
+- **raise** `Fiddle::DLError` -- t として文字列を渡し、それが表している型を Fiddle が知らなかった場合に発生します
 
 ```ruby title="例"
 require 'fiddle/import'

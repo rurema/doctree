@@ -26,8 +26,7 @@ until: "2.2.0"
 - **param** `test` -- 真偽値を返す式を指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 与えられた式が偽である場合に発生します。
 
@@ -36,8 +35,7 @@ until: "2.2.0"
 与えられたブロックの評価結果が真である場合、検査にパスしたことになります。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 与えられたブロックの評価結果が偽である場合に発生します。
 
@@ -48,8 +46,7 @@ until: "2.2.0"
 - **param** `object` -- 任意のオブジェクトを指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 与えられたオブジェクトが empty? メソッドを持たない場合に発生します。
                            また、与えられたオブジェクトが空でない場合にも発生します。
@@ -63,8 +60,7 @@ until: "2.2.0"
 - **param** `actual` -- 実際の値を指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 与えられた期待値と実際の値が等しくない場合に発生します。
 
@@ -81,8 +77,7 @@ until: "2.2.0"
 - **param** `delta` -- 許容する絶対誤差を指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 与えられた期待値と実際の値の差の絶対値が与えられた差分を越える場合に発生します。
 
@@ -103,8 +98,7 @@ until: "2.2.0"
 - **param** `epsilon` -- 許容する相対誤差を指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 検査に失敗した場合に発生します。
 
@@ -117,8 +111,7 @@ until: "2.2.0"
 - **param** `object` -- 任意のオブジェクトを指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 第一引数のオブジェクトが include? メソッドを持たない場合に発生します。
                            与えられたコレクションにオブジェクトが含まれていない場合に発生します。
@@ -132,11 +125,9 @@ until: "2.2.0"
 - **param** `object` -- 任意のオブジェクトを指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
-- **raise** `MiniTest::Assertion` -- 与えられたオブジェクトが与えられたクラスの直接のインスタンスでない
-                           場合に発生します。
+- **raise** `MiniTest::Assertion` -- 与えられたオブジェクトが与えられたクラスの直接のインスタンスでない場合に発生します。
 
 - **SEE** [m:Module#===], [m:MiniTest::Assertions#assert_kind_of]
 
@@ -149,11 +140,9 @@ until: "2.2.0"
 - **param** `object` -- 任意のオブジェクトを指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
-- **raise** `MiniTest::Assertion` -- 与えられたオブジェクトが与えられたクラスまたはそのサブクラスの
-                           インスタンスではない場合に発生します。
+- **raise** `MiniTest::Assertion` -- 与えられたオブジェクトが与えられたクラスまたはそのサブクラスのインスタンスではない場合に発生します。
 
 - **SEE** [m:Object#kind_of?], [m:MiniTest::Assertions#assert_instance_of]
 
@@ -161,14 +150,12 @@ until: "2.2.0"
 
 与えられた文字列が与えられた正規表現にマッチした場合、検査にパスしたことになります。
 
-- **param** `regexp` -- 正規表現か文字列を指定します。文字列を指定した場合は文字列そのものにマッチする
-              正規表現に変換してから使用します。
+- **param** `regexp` -- 正規表現か文字列を指定します。文字列を指定した場合は文字列そのものにマッチする正規表現に変換してから使用します。
 
 - **param** `str` -- 検査対象の文字列を指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 与えられた文字列が与えられた正規表現にマッチしなかった場合に発生します。
 
@@ -179,8 +166,7 @@ until: "2.2.0"
 - **param** `object` -- 任意のオブジェクトを指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 与えられたオブジェクトが nil でない場合に発生します。
 
@@ -195,8 +181,7 @@ until: "2.2.0"
 - **param** `operand2` -- 任意のオブジェクトを指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 与えられたオブジェクトから作成する式を評価した結果が真でない場合に発生します。
 
@@ -214,8 +199,7 @@ assert('aaa'.__send__(:==, 'aaa'), 'message')
             最後の引数は、メッセージを指定できます。
 
 - **raise** `MiniTest::Assertion` -- 与えられたブロックを評価した結果、例外が発生しない場合に発生します。
-                           また、与えられたブロックを評価中に発生した例外が、与えられた例外
-                           またはそのサブクラスでない場合に発生します。
+                           また、与えられたブロックを評価中に発生した例外が、与えられた例外またはそのサブクラスでない場合に発生します。
 
 ### def assert_respond_to(object, method_name, message = nil) -> true
 
@@ -226,8 +210,7 @@ assert('aaa'.__send__(:==, 'aaa'), 'message')
 - **param** `method_name` -- メソッド名を指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 与えられたオブジェクトが与えられたメソッドを持たない場合に発生します。
 
@@ -242,8 +225,7 @@ assert('aaa'.__send__(:==, 'aaa'), 'message')
 - **param** `actual` -- 任意のオブジェクトを指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 与えられた二つのオブジェクトが異なる場合に発生します。
 
@@ -253,12 +235,10 @@ assert('aaa'.__send__(:==, 'aaa'), 'message')
 
 引数から、式を取り出して評価した結果が真の場合、検査にパスしたことになります。
 
-- **param** `array` -- 第一要素にレシーバとなる任意のオブジェクト、第二要素にメソッド名、
-             第三要素にパラメータをそれぞれ指定した配列を指定します。
+- **param** `array` -- 第一要素にレシーバとなる任意のオブジェクト、第二要素にメソッド名、第三要素にパラメータをそれぞれ指定した配列を指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 取り出した式が偽を返す場合に発生します。
 
@@ -273,8 +253,7 @@ assert_send([%w[foo bar baz], :include?, 'baz'])
 - **param** `tag` -- 与えられたブロック評価中に [m:Kernel?.throw] されるタグを任意のオブジェクトとして指定します。
 
 - **param** `message` -- 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した
-               結果を使用します。
+               文字列か [c:Proc] を指定します。[c:Proc] である場合は [m:Proc#call] した結果を使用します。
 
 - **raise** `MiniTest::Assertion` -- 与えられたタグが [m:Kernel?.throw] されなかった場合に発生します。
 
@@ -284,8 +263,7 @@ assert_send([%w[foo bar baz], :include?, 'baz'])
 
 与えられたブロックを評価中の標準出力と標準エラー出力を [c:StringIO] に変更します。
 
-- **return** -- ブロック評価中に出力された文字列を標準出力を第一要素、標準エラー出力を第二要素とした
-        配列にして返します。
+- **return** -- ブロック評価中に出力された文字列を標準出力を第一要素、標準エラー出力を第二要素とした配列にして返します。
 
 ### def exception_details(exception, message) -> String
 
@@ -329,8 +307,7 @@ assert_send([%w[foo bar baz], :include?, 'baz'])
 
 - **param** `message` -- メッセージを指定します。
 
-- **param** `backtrace` -- 例外発生時のスタックトレースで、[m:Kernel?.caller] の戻り値と同じ
-                 形式で指定しなければいけません。
+- **param** `backtrace` -- 例外発生時のスタックトレースで、[m:Kernel?.caller] の戻り値と同じ形式で指定しなければいけません。
 
 - **raise** `MiniTest::Skip` -- 必ず発生します。
 

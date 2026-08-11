@@ -70,8 +70,7 @@ start_prefix_mapping が呼びだされます。
        nil が渡されます
 - **param** `localname` -- 接頭辞を取り除いた要素名文字列が渡されます
 - **param** `qname` -- 修飾名(qualified-name)文字列、つまり接頭辞を含む文字列が渡されます
-- **param** `attribute` -- 属性が { 属性名 => 属性値文字列 } という [c:Hash] で
-       で渡されます。
+- **param** `attribute` -- 属性が { 属性名 => 属性値文字列 } という [c:Hash] でで渡されます。
 
 ### def end_element(uri, localname, qname) -> ()
 
@@ -101,8 +100,7 @@ XML 処理命令(PI)に対し呼び出されるコールバックメソッドで
 
 - **param** `name` -- 宣言されているルート要素名が文字列で渡されます。
 - **param** `pub_sys` -- "PUBLIC" もしくは "SYSTEM" が渡されます。nilが渡される場合もあります。
-- **param** `long_name` -- "SYSTEM" の場合はシステム識別子が、"PUBLIC"の場合は公開識別子が
-       文字列で渡されます
+- **param** `long_name` -- "SYSTEM" の場合はシステム識別子が、"PUBLIC"の場合は公開識別子が文字列で渡されます
 - **param** `uri` -- "SYSTEM" の場合は nil が、"PUBLIC" の場合はシステム識別子が渡されます
 
 ### def attlistdecl(element, pairs, contents) -> ()
@@ -111,8 +109,7 @@ DTDの属性リスト宣言に対し呼び出されるコールバックメソ�
 
 - **param** `element` -- 要素名が文字列で渡されます
 - **param** `pairs` -- 属性名とそのデフォルト値の対応が
-     { 属性名文字列 => デフォルト値文字列(無ければnil) } という
-     ハッシュテーブルで渡されます
+     { 属性名文字列 => デフォルト値文字列(無ければnil) } というハッシュテーブルで渡されます
 - **param** `contents` -- 文書内の属性リスト宣言の文字列がそのまま渡されます
 
 ### def elementdecl(content) -> ()

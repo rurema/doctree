@@ -12,15 +12,13 @@ library: webrick/server
 
 GenericServer オブジェクトを生成して返します。
 
-- **param** `config` -- サーバの設定を保存したハッシュを指定します。有効なキーと
-              値は以下のとおりです。
+- **param** `config` -- サーバの設定を保存したハッシュを指定します。有効なキーと値は以下のとおりです。
 
 - **`:ServerName`**:
   サーバのホスト名を表す文字列を指定します。デフォルトの Utils.getservername は /etc/hostname
   に書かれている文字列です。
 - **`:BindAddress`**:
-  サーバのアドレスを指定します。デフォルトの nil や "0.0.0.0", "::" などを指定した
-  場合は使用可能なすべてのネットワークインターフェースに対して listen を開始します。
+  サーバのアドレスを指定します。デフォルトの nil や "0.0.0.0", "::" などを指定した場合は使用可能なすべてのネットワークインターフェースに対して listen を開始します。
   [ref:lib:socket#host_format] を参照して下さい。
 - **`:Port`**:
   サーバのポートを指定します。[ref:lib:socket#service_format]を参照を参照して下さい。
@@ -37,11 +35,9 @@ GenericServer オブジェクトを生成して返します。
 - **`:DoNotListen`**:
   true の場合、GenericServer オブジェクトを生成しただけでは listen を開始しません。
 - **`:StartCallback`**:
-  start 開始時に呼ばれる [c:Proc] オブジェクト。呼ばれる時に引数は
-  特に与えられません。
+  start 開始時に呼ばれる [c:Proc] オブジェクト。呼ばれる時に引数は特に与えられません。
 - **`:StopCallback`**:
-  サーバを stop した時に呼ばれる [c:Proc] オブジェクトを指定します。呼ばれる時に引数は
-  特に与えられません。
+  サーバを stop した時に呼ばれる [c:Proc] オブジェクトを指定します。呼ばれる時に引数は特に与えられません。
 - **`:AcceptCallback`**:
   クライアントからの接続を accept したときに呼ばれる [c:Proc] オブジェクトを指定します。
   クライアントと接続された [c:TCPSocket] オブジェクトを引数として呼ばれます。
@@ -50,8 +46,7 @@ GenericServer オブジェクトを生成して返します。
   [m:BasicSocket#do_not_reverse_lookup]
   も参照して下さい。
 
-- **param** `default` -- サーバのデフォルトの設定を保存したハッシュを指定します。指定された config で
-               設定がなかった項目に関してはこの default の値が使われます。
+- **param** `default` -- サーバのデフォルトの設定を保存したハッシュを指定します。指定された config で設定がなかった項目に関してはこの default の値が使われます。
 
 - **SEE** [m:WEBrick::Config::General]
 

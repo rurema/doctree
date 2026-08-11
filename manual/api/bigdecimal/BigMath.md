@@ -20,8 +20,7 @@ x に正の無限大を指定した場合は正の無限大を返します。負
 - **param** `prec` -- 計算結果の精度を指定します。
 
 - **raise** `ArgumentError` -- x に [c:Integer]、[c:BigDecimal]、
-                     [c:Float]、[c:Rational]以外のオブジェクトを指
-                     定した場合に発生します。
+                     [c:Float]、[c:Rational]以外のオブジェクトを指定した場合に発生します。
 
 - **raise** `ArgumentError` -- prec に 0 以下の数値が指定された場合に発生します。
 
@@ -39,13 +38,11 @@ x に無限大を指定した場合は無限大を返します。NaN を指定�
 を返します。
 
 - **param** `x` -- 計算対象の数値を [c:Integer]、[c:Float]、
-         [c:Rational]、[c:BigDecimal] オブジェクトのいずれかで指定
-         します。
+         [c:Rational]、[c:BigDecimal] オブジェクトのいずれかで指定します。
 
 - **param** `prec` -- 計算結果の精度を指定します。
 
-- **raise** `Math::DomainError` -- x に 0 以下の数値か [c:Complex] オブジェクト
-                         が指定された場合に発生します。
+- **raise** `Math::DomainError` -- x に 0 以下の数値か [c:Complex] オブジェクトが指定された場合に発生します。
 
 - **raise** `ArgumentError` -- prec に 0 以下の数値が指定された場合に発生します。
 

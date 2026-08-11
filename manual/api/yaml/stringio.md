@@ -12,7 +12,6 @@
 
 - **param** `io` -- [c:IO]、[c:String] オブジェクトかそのサブクラスを指定します。
 
-- **raise** `YAML::Error` -- 引数が [c:IO]、[c:String] オブジェクトのサブクラ
-                   スではなかった場合に発生します。
+- **raise** `YAML::Error` -- 引数が [c:IO]、[c:String] オブジェクトのサブクラスではなかった場合に発生します。
 
 [注意] [lib:stringio] を require した時に LoadError になる環境でしか使用できない事に注意してください。

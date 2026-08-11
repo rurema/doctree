@@ -46,8 +46,7 @@ extend:
 XMLをパースし、得られたイベント列を引数として順にブロックを呼び出します。
 
 - **raise** `REXML::ParseException` -- XML文書のパースに失敗した場合に発生します
-- **raise** `REXML::UndefinedNamespaceException` -- XML文書のパース中に、定義されていない名前空間
-       が現れた場合に発生します
+- **raise** `REXML::UndefinedNamespaceException` -- XML文書のパース中に、定義されていない名前空間が現れた場合に発生します
 
 ### def peek(depth = 0) -> REXML::Parsers::PullEvent | nil
 
@@ -62,16 +61,14 @@ XMLをパースし、得られたイベント列を引数として順にブロ�
 - **param** `depth` -- 先頭から depth 番目のイベントを取り出します
 
 - **raise** `REXML::ParseException` -- XML文書のパースに失敗した場合に発生します
-- **raise** `REXML::UndefinedNamespaceException` -- XML文書のパース中に、定義されていない名前空間
-       が現れた場合に発生します
+- **raise** `REXML::UndefinedNamespaceException` -- XML文書のパース中に、定義されていない名前空間が現れた場合に発生します
 
 ### def pull -> REXML::Parsers::PullEvent
 
 イベントキューの先頭のイベントを取り出し、キューからそれを取り除きます。
 
 - **raise** `REXML::ParseException` -- XML文書のパースに失敗した場合に発生します
-- **raise** `REXML::UndefinedNamespaceException` -- XML文書のパース中に、定義されていない名前空間
-       が現れた場合に発生します
+- **raise** `REXML::UndefinedNamespaceException` -- XML文書のパース中に、定義されていない名前空間が現れた場合に発生します
 
 ### def unshift(token) -> ()
 

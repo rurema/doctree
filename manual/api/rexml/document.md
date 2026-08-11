@@ -86,8 +86,7 @@ context で「コンテキスト」を指定します。テキストノードの
 - **param** `source` -- XML文書(文字列, IO)もしくは REXML::Document オブジェクト
 - **param** `context` -- コンテキスト
 - **raise** `REXML::ParseException` -- XML文書のパースに失敗した場合に発生します
-- **raise** `REXML::UndefinedNamespaceException` -- XML文書のパース中に、定義されていない名前空間
-       が現れた場合に発生します
+- **raise** `REXML::UndefinedNamespaceException` -- XML文書のパース中に、定義されていない名前空間が現れた場合に発生します
 
 ### def REXML::Document.parse_stream(source, listener) -> ()
 
@@ -284,10 +283,8 @@ REXML は明示しない限り(つまりXML宣言を [m:REXML::Document#add] で
 - **param** `output` -- 出力先([c:IO] のように << で書き込めるオブジェクト)
 - **param** `indent` -- インデントのスペースの数(-1 だとインデントしない)
 - **param** `transitive` -- XMLではインデントのスペースでDOMが変化してしまう場合がある。
-       これに真を渡すと、XMLのDOMに余計な要素が加わらないように
-       空白の出力を適当に抑制するようになる
-- **param** `ie_hack` -- IEはバージョンによってはXMLをちゃんと解釈できないので、
-       それに対応したXMLを出力するかどうかを真偽値で指定する
+       これに真を渡すと、XMLのDOMに余計な要素が加わらないように空白の出力を適当に抑制するようになる
+- **param** `ie_hack` -- IEはバージョンによってはXMLをちゃんと解釈できないので、それに対応したXMLを出力するかどうかを真偽値で指定する
 
 ## Constants
 

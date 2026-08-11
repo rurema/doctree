@@ -48,21 +48,18 @@ p Marshal.dump(Hash.new {})
 
 - **param** `port` -- [c:IO] かそのサブクラスのインスタンスを指定します。
 
-- **param** `limit` -- 指定した場合、limit 段以上深くリンクしたオブジェクトを
-             ダンプできません。負の limit を指定すると深さチェックを行いません。
+- **param** `limit` -- 指定した場合、limit 段以上深くリンクしたオブジェクトをダンプできません。負の limit を指定すると深さチェックを行いません。
              デフォルトは -1 です。
 
 - **return** -- port を省略すると、obj をダンプした [c:String] を返します。
              port を指定すると port を返します。
 
-- **raise** `TypeError` -- ファイルに書き出せないオブジェクトをファイルに
-                 書きだそうとした場合に発生します。
+- **raise** `TypeError` -- ファイルに書き出せないオブジェクトをファイルに書きだそうとした場合に発生します。
 
 - **raise** `ArgumentError` -- 名前の付いていない [c:Class] や [c:Module]
                      オブジェクトをダンプしようとした場合に発生します。
 
-- **raise** `ArgumentError` -- limit 段以上深くリンクしたオブジェクトをダンプしようと
-                     した場合に発生します。
+- **raise** `ArgumentError` -- limit 段以上深くリンクしたオブジェクトをダンプしようとした場合に発生します。
 
 - **SEE** [m:Object#marshal_dump], [m:Object#marshal_load]
 
@@ -96,8 +93,7 @@ p Marshal.load(str, proc {|obj| p obj})
 #    ["a", 1, 10000000000, 1.0, :foo]
 ```
 
-- **param** `port` -- [c:String] か [c:IO] (またはそのサブクラス)の
-            インスタンスを指定します。
+- **param** `port` -- [c:String] か [c:IO] (またはそのサブクラス)のインスタンスを指定します。
 
 - **param** `proc` -- 手続きオブジェクト。[c:Proc]
 
@@ -109,8 +105,7 @@ p Marshal.load(str, proc {|obj| p obj})
   デフォルトは偽です。
 #%end
 
-- **raise** `TypeError` -- メジャーバージョンが異なるか、バージョンの大きな
-                 マーシャルデータを読み込んだ場合に発生します。
+- **raise** `TypeError` -- メジャーバージョンが異なるか、バージョンの大きなマーシャルデータを読み込んだ場合に発生します。
 
 ## Constants
 

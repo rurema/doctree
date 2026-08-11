@@ -101,8 +101,7 @@ p loc.start_line_slice # => "x = "
 自身の開始位置から other の終端位置までを表す新しい
 `Prism::Location` を返します。間にある文字列も範囲に含まれます。
 
-- **param** `other` -- 結合する `Prism::Location`。自身より後ろに
-  ある必要があります。
+- **param** `other` -- 結合する `Prism::Location`。自身より後ろにある必要があります。
 
 ```ruby title="例"
 require "prism"
@@ -158,8 +157,7 @@ p loc.trailing_comments.map { |c| c.slice } # => ["# trailing"]
 範囲の直後に続くソースコードが string と一致する場合に、その分だけ範囲を伸ばした新しい `Prism::Location` を返します。
 
 - **param** `string` -- 取り込む文字列
-- **raise** `RuntimeError` -- 範囲の直後が string と一致しない場合に
-  発生します。
+- **raise** `RuntimeError` -- 範囲の直後が string と一致しない場合に発生します。
 
 ### def slice_lines -> String
 

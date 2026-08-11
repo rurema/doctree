@@ -32,10 +32,8 @@ VM の命令シーケンスの一覧はRuby のソースコード中の insns.de
 
 - **param** `line` -- 引数 source の 1 行目の行番号を指定します。
 
-- **param** `options` -- コンパイル時のオプションを true、false、[c:Hash] オブ
-               ジェクトのいずれかで指定します。詳細は
-               [m:RubyVM::InstructionSequence.compile_option=] を参照
-               してください。
+- **param** `options` -- コンパイル時のオプションを true、false、[c:Hash] オブジェクトのいずれかで指定します。詳細は
+               [m:RubyVM::InstructionSequence.compile_option=] を参照してください。
 
 ```ruby
 p RubyVM::InstructionSequence.compile("a = 1 + 2")
@@ -53,10 +51,8 @@ p RubyVM::InstructionSequence.compile("a = 1 + 2")
 
 - **param** `file` -- ファイル名を文字列で指定します。
 
-- **param** `options` -- コンパイル時のオプションを true、false、[c:Hash] オブ
-               ジェクトのいずれかで指定します。詳細は
-               [m:RubyVM::InstructionSequence.compile_option=] を参照
-               してください。
+- **param** `options` -- コンパイル時のオプションを true、false、[c:Hash] オブジェクトのいずれかで指定します。詳細は
+               [m:RubyVM::InstructionSequence.compile_option=] を参照してください。
 
 ```ruby
 # /tmp/hello.rb
@@ -140,12 +136,7 @@ pp RubyVM::InstructionSequence.compile_option
 options で指定します。
 
 - **param** `options` -- コンパイル時の最適化オプションを true、false、nil、
-               [c:Hash] のいずれかで指定します。true を指定した場合は
-               全てのオプションを有効にします。false を指定した場合は全
-               てのオプションを無効にします。nil を指定した場合はいずれ
-               のオプションも変更しません。また、[c:Hash] を指定した
-               場合は以下のキーに対して、true か false を指定する事で個
-               別に有効、無効を指定します。
+               [c:Hash] のいずれかで指定します。true を指定した場合は全てのオプションを有効にします。false を指定した場合は全てのオプションを無効にします。nil を指定した場合はいずれのオプションも変更しません。また、[c:Hash] を指定した場合は以下のキーに対して、true か false を指定する事で個別に有効、無効を指定します。
   ```
     * :inline_const_cache
     * :instructions_unification

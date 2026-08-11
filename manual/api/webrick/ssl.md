@@ -39,8 +39,7 @@ config で有効な項目が増えます。以下は増える項目とそのデ�
 
 - **param** `config` -- サーバの設定を保存したハッシュを指定します。
 
-- **param** `default` -- サーバのデフォルトの設定を保存したハッシュを指定します。指定された config で
-               設定がなかった項目に関してはこの default の値が使われます。
+- **param** `default` -- サーバのデフォルトの設定を保存したハッシュを指定します。指定された config で設定がなかった項目に関してはこの default の値が使われます。
 
 - **SEE** [m:WEBrick::Config::General]
 
@@ -69,8 +68,7 @@ config で有効な項目が増えます。以下は増える項目とそのデ�
   サーバ証明書を設定します。[c:OpenSSL::X509::Certificate] オブジェクトです。
   nil の場合、WEBrick は自己署名証明書を自動的に生成します。
 - **`:SSLPrivateKey`**:
-  サーバの秘密鍵を設定します。[c:OpenSSL::PKey::PKey] の
-  サブクラスのインスタンスです。
+  サーバの秘密鍵を設定します。[c:OpenSSL::PKey::PKey] のサブクラスのインスタンスです。
 - **`:SSLClientCA`**:
   サーバがクライアント証明書を要求する時にクライアントに送る CA のリストです。
   [m:OpenSSL::SSL::SSLContext#client_ca] を参照してください。
@@ -84,8 +82,7 @@ config で有効な項目が増えます。以下は増える項目とそのデ�
   信頼している CA 証明書ファイルを含むディレクトリのパスです。
   [m:OpenSSL::SSL::SSLContext#ca_path] を参照してください。
 - **`:SSLCertificateStore`**:
-  接続相手の証明書の検証のために使う、信頼している CA 証明書を
-  含む証明書ストアです。
+  接続相手の証明書の検証のために使う、信頼している CA 証明書を含む証明書ストアです。
   [m:OpenSSL::SSL::SSLContext#cert_store] を参照してください。
 - **`:SSLVerifyClient`**:
   検証モードです。

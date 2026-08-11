@@ -93,29 +93,24 @@ Files this context is found in
 引数で指定したクラスを追加します。
 
 - **param** `class_type` -- 追加するクラス、モジュールを [c:RDoc::NormalClass]、
-                  [c:RDoc::SingleClass]、[c:RDoc::NormalModule] オ
-                  ブジェクトのいずれかで指定します。
+                  [c:RDoc::SingleClass]、[c:RDoc::NormalModule] オブジェクトのいずれかで指定します。
 
 - **param** `name` -- クラス名を文字列で指定します。
 
-- **param** `superclass` -- 追加するクラスの親クラスを [c:RDoc::NormalClass] オ
-                  ブジェクトで指定します。
+- **param** `superclass` -- 追加するクラスの親クラスを [c:RDoc::NormalClass] オブジェクトで指定します。
 
 ### def add_class_or_module(collection, class_type, name, superclass = nil) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule
 
 collection に name で指定したクラス、モジュールを追加します。
 
-- **param** `collection` -- クラス、モジュールを追加する先を [c:Hash] オブジェ
-                  クトで指定します。
+- **param** `collection` -- クラス、モジュールを追加する先を [c:Hash] オブジェクトで指定します。
 
 - **param** `class_type` -- 追加するクラス、モジュールを [c:RDoc::NormalClass]、
-                  [c:RDoc::SingleClass]、[c:RDoc::NormalModule] オ
-                  ブジェクトのいずれかで指定します。
+                  [c:RDoc::SingleClass]、[c:RDoc::NormalModule] オブジェクトのいずれかで指定します。
 
 - **param** `name` -- クラス名を文字列で指定します。
 
-- **param** `superclass` -- 追加するクラスの親クラスを [c:RDoc::NormalClass] オ
-                  ブジェクトで指定します。
+- **param** `superclass` -- 追加するクラスの親クラスを [c:RDoc::NormalClass] オブジェクトで指定します。
 
 既に登録済みであった場合は、引数で指定した情報で内容を更新します。ただし、`RDoc::CodeObject#done_documenting` が true を返す場合、何も行われません。
 
@@ -135,8 +130,7 @@ collection に name で指定したクラス、モジュールを追加します
 
 引数で指定した [c:RDoc::AnyMethod] オブジェクトを追加します。
 
-- **param** `a_method` -- [c:RDoc::AnyMethod] オブジェクトかそのサブクラスのオ
-                ブジェクトを指定します。
+- **param** `a_method` -- [c:RDoc::AnyMethod] オブジェクトかそのサブクラスのオブジェクトを指定します。
 
 ### def add_module(class_type, name) -> RDoc::NormalModule | RDoc::SingleClass | RDoc::NormalClass
 
@@ -145,8 +139,7 @@ collection に name で指定したクラス、モジュールを追加します
 ただし、クラスとして既に同名のものが登録されていた場合は、何もせずにそのクラスを返します。
 
 - **param** `class_type` -- 追加するクラス、モジュールを [c:RDoc::NormalClass]、
-                  [c:RDoc::SingleClass]、[c:RDoc::NormalModule] オ
-                  ブジェクトのいずれかで指定します。
+                  [c:RDoc::SingleClass]、[c:RDoc::NormalModule] オブジェクトのいずれかで指定します。
 
 - **param** `name` -- クラス名を文字列で指定します。
 
@@ -250,14 +243,11 @@ methods で指定した [c:RDoc::AnyMethod]、[c:RDoc::Attr] の内、
 singleton で指定した条件と一致するメソッドすべての可視性を visibility
 に設定します。
 
-- **param** `methods` -- [c:RDoc::AnyMethod]、[c:RDoc::Attr] オブジェクトの配
-               列を指定します。
+- **param** `methods` -- [c:RDoc::AnyMethod]、[c:RDoc::Attr] オブジェクトの配列を指定します。
 
-- **param** `visibility` -- 可視性を :public, :protected, :private の内のいずれか
-                  で指定します。
+- **param** `visibility` -- 可視性を :public, :protected, :private の内のいずれかで指定します。
 
-- **param** `singleton` -- 特異メソッドの可視性を変更する場合は true、そうでない
-                 場合は false を指定します。
+- **param** `singleton` -- 特異メソッドの可視性を変更する場合は true、そうでない場合は false を指定します。
 
 ### def toplevel -> RDoc::TopLevel
 
@@ -277,5 +267,4 @@ singleton で指定した条件と一致するメソッドすべての可視性�
 メソッド名の対応が取れていない alias の旧メソッド名がキー、
 [c:RDoc::Alias] が値の [c:Hash] を設定します。
 
-- **param** `val` -- 旧メソッド名がキー、[c:RDoc::Alias] が値の [c:Hash] を指
-           定します。
+- **param** `val` -- 旧メソッド名がキー、[c:RDoc::Alias] が値の [c:Hash] を指定します。

@@ -25,9 +25,7 @@ attribute オブジェクトを生成します。
 - **param** `der` -- DER 形式の文字列、もしくは to_der を持つオブジェクト
 - **param** `oid` -- Object ID 文字列
 - **param** `value` -- 値を表す [c:OpenSSL::ASN1::ASN1Data] インスタンス
-- **raise** `OpenSSL::X509::AttributeError` -- attributeオブジェクトの生成に失敗した場合に
-       発生します。DER 形式文字列が不正であった場合、oid, value が不正であった
-       場合などに発生します。
+- **raise** `OpenSSL::X509::AttributeError` -- attributeオブジェクトの生成に失敗した場合に発生します。DER 形式文字列が不正であった場合、oid, value が不正であった場合などに発生します。
 
 ## Instance Methods
 

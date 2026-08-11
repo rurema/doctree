@@ -70,9 +70,7 @@ old_ext に登録されたパーサを new_ext でも解析できるようにエ
 
 - **param** `new_ext` -- 拡張子を文字列で指定します。
 
-- **return** -- エイリアスが登録された場合は true を返します。old_ext にパーサ
-        が登録されていない場合、エイリアスが登録されずに false を返しま
-        す。
+- **return** -- エイリアスが登録された場合は true を返します。old_ext にパーサが登録されていない場合、エイリアスが登録されずに false を返します。
 
 ### def RDoc::Parser.parser_for(top_level, file_name, body, options, stats) -> RDoc::Parser
 

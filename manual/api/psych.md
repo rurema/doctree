@@ -118,10 +118,8 @@ filename はパース中に発生した例外のメッセージに用います�
 - **param** `yaml` -- YAML ドキュメント(文字列 or IO オブジェクト)
 - **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列。
 - **param** `fallback` -- 引数 yaml に空のYAMLを指定した場合の戻り値を指定します。デフォルトは false です。
-- **param** `symbolize_names` -- ハッシュ(YAMLの仕様では正確にはマッピング)のキー
-                       を [c:Symbol] に変換するかどうかを指定します。
-                       true を指定した場合は変換します。デフォルトでは
-                       文字列に変換されます。
+- **param** `symbolize_names` -- ハッシュ(YAMLの仕様では正確にはマッピング)のキーを [c:Symbol] に変換するかどうかを指定します。
+                       true を指定した場合は変換します。デフォルトでは文字列に変換されます。
 - **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
 - **SEE** [m:Psych.parse]
 
@@ -224,16 +222,13 @@ Psych.safe_load("", [Date])
 
 - **param** `io` -- YAMLフォーマットの文書の読み込み先のIOオブジェクト。
 - **param** `permitted_classes` -- 追加で読み込みを許可するクラスの配列。
-- **param** `permitted_symbols` -- 引数 permitted_classesに [c:Symbol] を含む場
-                         合に読み込みを許可する [c:Symbol] の配列。
+- **param** `permitted_symbols` -- 引数 permitted_classesに [c:Symbol] を含む場合に読み込みを許可する [c:Symbol] の配列。
                          省略した場合は全ての [c:Symbol] を許可します。
 - **param** `aliases` -- エイリアスの読み込みを許可するかどうか。
 - **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列。
 - **param** `fallback` -- 引数 yaml に空のYAMLを指定した場合の戻り値を指定します。デフォルトは nil です。
-- **param** `symbolize_names` -- ハッシュ(YAMLの仕様では正確にはマッピング)のキー
-                       を [c:Symbol] に変換するかどうかを指定します。
-                       true を指定した場合は変換します。デフォルトでは
-                       文字列に変換されます。
+- **param** `symbolize_names` -- ハッシュ(YAMLの仕様では正確にはマッピング)のキーを [c:Symbol] に変換するかどうかを指定します。
+                       true を指定した場合は変換します。デフォルトでは文字列に変換されます。
 - **param** `freeze` -- true を指定すると再帰的に freeze されたオブジェクトを返します。
               デフォルトは false です。
 

@@ -85,8 +85,7 @@ p public_methods(false) - basic_public_methods
 
 - **param** `modules` -- [c:Module] のインスタンス( [c:Enumerable] など)を指定します。
 
-- **raise** `ArgumentError` -- 継承関係が循環してしまうような include を行った場
-                     合に発生します。
+- **raise** `ArgumentError` -- 継承関係が循環してしまうような include を行った場合に発生します。
 
 ```ruby title="例:"
 include Math
@@ -107,13 +106,11 @@ p hypot(3, 4)  # => 5.0
 
 - **param** `name` -- [c:String] または [c:Symbol] を指定します。
 
-- **param** `method` -- [c:Proc]、[c:Method] あるいは [c:UnboundMethod] の
-              いずれかのインスタンスを指定します。
+- **param** `method` -- [c:Proc]、[c:Method] あるいは [c:UnboundMethod] のいずれかのインスタンスを指定します。
 
 - **return** -- メソッド名を表す [c:Symbol] を返します。
 
-- **raise** `TypeError` -- method に同じクラス、サブクラス以外のメソッドを指定し
-                 た場合に発生します。
+- **raise** `TypeError` -- method に同じクラス、サブクラス以外のメソッドを指定した場合に発生します。
 
 #%#noexample Module#define_method を参照
 

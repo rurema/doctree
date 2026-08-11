@@ -19,10 +19,8 @@ ASCII 以外の文字がエスケープされる場合、そのコードポイ�
 基本多言語面(BMP)外の文字は、UTF-16 のサロゲートペアとして "\uXXXX\uXXXX" のように \u エスケープを 2 つ連ねて表されます。
 返り値の [c:String] のエンコーディングは常に UTF-8 です。
 
-- **param** `state_or_hash` -- 生成する JSON 形式の文字列をカスタマイズするため
-                     に [c:JSON::State] のインスタンスか、
-                     [m:JSON::State.new] の引数と同じ [c:Hash] を
-                     指定します。
+- **param** `state_or_hash` -- 生成する JSON 形式の文字列をカスタマイズするために [c:JSON::State] のインスタンスか、
+                     [m:JSON::State.new] の引数と同じ [c:Hash] を指定します。
 
 ```ruby title="例"
 require "json"

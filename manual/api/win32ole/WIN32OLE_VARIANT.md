@@ -54,8 +54,7 @@ Openを実行します。
 
 オートメーションメソッド呼び出し用の配列を生成します。なお、OLEオートメーションの配列の次元と添え字の関係はVB型だという点に注意してください。これはCと逆順の並びです。
 
-- **param** `dims` -- 各次元の要素数を示す配列を与えます。たとえば4要素のベクター
-            であれば[4]、各3要素の2次元配列であれば[3, 3]とします。
+- **param** `dims` -- 各次元の要素数を示す配列を与えます。たとえば4要素のベクターであれば[4]、各3要素の2次元配列であれば[3, 3]とします。
 - **param** `vt` -- 配列要素の型を[c:WIN32OLE::VARIANT]の定数で指定します。
 - **return** -- 指定された次元/要素数を持つWIN32OLE_VARIANTオブジェクト。
 
@@ -114,9 +113,7 @@ selfは、[m:WIN32OLE_VARIANT.array]または引数に配列を指定して
 - **return** -- 引数で指定したインデックスの要素を返します。
 - **raise** `ArgError` -- 引数の数が次元数と一致していません。
 
-- **raise** `WIN32OLERuntimeError` -- selfが配列型のWIN32OLE_VARIANTではありませ
-                            ん。あるいはインデックスが0未満または要素数
-                            以上を指定しています。
+- **raise** `WIN32OLERuntimeError` -- selfが配列型のWIN32OLE_VARIANTではありません。あるいはインデックスが0未満または要素数以上を指定しています。
 
 ```ruby
 obj = WIN32OLE_VARIANT.new([[1,2,3],[4,5,6]])
@@ -136,14 +133,11 @@ selfは、[m:WIN32OLE_VARIANT.array]または引数に配列を指定して
 - **param** `i` -- 各次元の0からのインデックスを「,」で区切って次元数分指定します。
          インデックスは0から要素数-1までのIntegerで指定してください。
 - **param** `val` -- 設定値を指定します。Array、String、Integer、Float、
-           TrueClass、FalseClass、NilClass以外のオブジェクトはオートメー
-           ションオブジェクト（WIN32OLEオブジェクト）に変換します。
+           TrueClass、FalseClass、NilClass以外のオブジェクトはオートメーションオブジェクト（WIN32OLEオブジェクト）に変換します。
 - **return** -- 引数で指定したインデックスの要素を返します。
 - **raise** `ArgError` -- 引数の数が次元数と一致していません。
 
-- **raise** `WIN32OLERuntimeError` -- selfが配列型のWIN32OLE_VARIANTではありませ
-                            ん。あるいはインデックスが0未満または要素数
-                            以上を指定しています。
+- **raise** `WIN32OLERuntimeError` -- selfが配列型のWIN32OLE_VARIANTではありません。あるいはインデックスが0未満または要素数以上を指定しています。
 
 ```ruby
 obj = WIN32OLE_VARIANT.new([[1,2,3],[4,5,6]])
@@ -172,8 +166,7 @@ WIN32OLE_VARIANTの値を再設定します。
 指定した値でselfを再設定します。指定値が元のVARIANT型に合わない場合は元のVARIANT型に合うように引数を変換します。変換は、引数を一度VARIANT型に変換してからCOMのVARIANT型変換関数（VariantChangeTypeEx）を呼び出すことで実現します。
 
 - **param** `val` -- 設定値を指定します。
-- **raise** `WIN32OLERuntimeError` -- selfが配列型です。あるいは、型変換に失敗し
-                            ました。
+- **raise** `WIN32OLERuntimeError` -- selfが配列型です。あるいは、型変換に失敗しました。
 
 ```ruby
 obj = WIN32OLE_VARIANT.new(1) # VARIANT型にWIN32OLE::VARIANT::VT_I4を設定

@@ -223,8 +223,7 @@ p v * m # => Matrix[[4, 5, 6], [8, 10, 12]]
 
 - **param** `v` -- 加算するベクトル。加算可能な行列やベクトルを指定します。
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
-       ルの要素の数(次元)が異なっていたときに発生します。
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクトルの要素の数(次元)が異なっていたときに発生します。
 
 ### def -(v) -> Vector | Matrix
 
@@ -235,8 +234,7 @@ p v * m # => Matrix[[4, 5, 6], [8, 10, 12]]
 
 - **param** `v` -- 減算するベクトル。減算可能な行列やベクトルを指定します。
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
-       ルの要素の数(次元)が異なっていたときに発生します。
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクトルの要素の数(次元)が異なっていたときに発生します。
 
 ### def +@ -> self
 
@@ -253,8 +251,7 @@ p v * m # => Matrix[[4, 5, 6], [8, 10, 12]]
 
 - **param** `v` -- 内積を求めるベクトル
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
-       ルの要素の数(次元)が異なっていたときに発生します。
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクトルの要素の数(次元)が異なっていたときに発生します。
 
 ### def /(other) -> Vector
 
@@ -306,10 +303,8 @@ p Vector[1, 0].angle_with(Vector[0, 1]) # => Math::PI/2
 ```
 
 - **param** `v` -- このベクトルと `self` とがなす角度を計算します
-- **raise** `Vector::ZeroVectorError` -- `self` もしくは `v` のどちらかが零ベクトルである場合に
-       発生します
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `v` と `self` の
-       ベクトルの次元が異なる場合に発生します。
+- **raise** `Vector::ZeroVectorError` -- `self` もしくは `v` のどちらかが零ベクトルである場合に発生します
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `v` と `self` のベクトルの次元が異なる場合に発生します。
 
 ### def independent?(*vectors) -> bool
 
@@ -332,8 +327,7 @@ n-1個のn次元ベクトルが張る空間と直交するベクトルを返し�
 n次元ベクトルでなければなりません。
 
 - **param** `vs` -- クロス積を取るベクトルの集合
-- **raise** `ExceptionForMatrix::ErrOperationNotDefined` -- `self` の
-        次元が1以下であるときに発生します。
+- **raise** `ExceptionForMatrix::ErrOperationNotDefined` -- `self` の次元が1以下であるときに発生します。
 - **raise** `ArgumentError` -- `vs` のベクトルの個数が n-2 以外である場合に発生します。
 
 ### def collect {|x| ... } -> Vector
@@ -390,8 +384,7 @@ p v # => Vector[2, 4, 6]
 ブロックを省略した場合は [c:Enumerator] を返します。
 
 - **param** `v` -- 各要素と組を取るためのオブジェクト
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
-       ルの要素の数(次元)が異なっていたときに発生します。
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクトルの要素の数(次元)が異なっていたときに発生します。
 - **SEE** [m:Array#zip]
 
 ### def collect2(v) {|x, y| ... } -> Array
@@ -405,8 +398,7 @@ p v # => Vector[2, 4, 6]
 
 - **param** `v` -- ブロック内で評価される(ベクトル or 配列)
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
-       ルの要素の数(次元)が異なっていたときに発生します。
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクトルの要素の数(次元)が異なっていたときに発生します。
 
 - **SEE** [m:Vector#map2]
 
@@ -436,8 +428,7 @@ p z # => [14, 27, 55]
 
 - **param** `v` -- ブロック内で評価される(ベクトル or 配列)
 
-- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクト
-       ルの要素の数(次元)が異なっていたときに発生します。
+- **raise** `ExceptionForMatrix::ErrDimensionMismatch` -- `self` と引数のベクトルの要素の数(次元)が異なっていたときに発生します。
 
 - **SEE** [m:Vector#collect2]
 
