@@ -481,7 +481,7 @@ end
 ```
 
 #%# You can also pin the result of arbitrary expressions using parentheses:
-また、括弧を使って任意の式に対してピン演算子を利用できます
+また、括弧を使って任意の式に対してピン演算子を利用できます。
 
 ```ruby
 a = 1
