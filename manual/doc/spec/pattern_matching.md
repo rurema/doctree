@@ -76,11 +76,11 @@ config => {db: {user:}} # もし config の構造が期待したものでなか�
 
 puts "Connect with user '#{user}'"
 #%# # Prints: "Connect with user 'admin'"
-# Connect with user 'admin'" と出力
+# "Connect with user 'admin'" と出力
 ```
 
 #%# <code><expression> in <pattern></code> is the same as <code>case <expression>; in <pattern>; true; else false; end</code>.
-『<expression> in <pattern>』 は 『<expression>; in <pattern>; true; else false; end』 と等価です。
+『<expression> in <pattern>』 は 『case <expression>; in <pattern>; true; else false; end』 と等価です。
 #%# You can use it when you only want to know if a pattern has been matched or not:
 パターンにマッチするかどうかだけを知りたいときに使えます。
 
