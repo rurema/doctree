@@ -52,11 +52,9 @@ Gem がインストールされているディレクトリを返します。
 - **param** `list` -- アンインストールする Gem のリストを指定します。
             このパラメータは破壊的に変更されます。
 
-- **raise** `Gem::DependencyRemovalException` -- アンインストール指定された Gem を削除すると
-                                       依存関係が壊れる場合に発生します。
+- **raise** `Gem::DependencyRemovalException` -- アンインストール指定された Gem を削除すると依存関係が壊れる場合に発生します。
 
-- **raise** `Gem::GemNotInHomeException` -- アンインストール指定された Gem が所定の
-                                  ディレクトリにそんないしない場合に発生します。
+- **raise** `Gem::GemNotInHomeException` -- アンインストール指定された Gem が所定のディレクトリにそんないしない場合に発生します。
 
 ### def remove_all(list)
 #%# -> discard

@@ -47,9 +47,7 @@ log.info 'this line will be logged via syslog(3)'
 
 - **param** `program_name` -- [c:Logger] との互換性のために用意されています。
                     プログラム名を文字列で指定できますが、最初の
-                    [c:Syslog::Logger] の初期化時のみ、指定した値がセッ
-                    トされます(syslog の仕様で 1 つのプログラム名のみが
-                    採用されます)。
+                    [c:Syslog::Logger] の初期化時のみ、指定した値がセットされます(syslog の仕様で 1 つのプログラム名のみが採用されます)。
 
 ### def Syslog::Logger.syslog -> Syslog
 
@@ -193,8 +191,7 @@ self のログレベルを引数 val で指定した値に設定します。
 
 ログを出力する際に使用するフォーマッターをセットします。
 
-- **param** `formatter` -- 4 つの引数 (severity, time, program name, message) を
-                 受け取る call メソッドを 持つオブジェクトを指定します。
+- **param** `formatter` -- 4 つの引数 (severity, time, program name, message) を受け取る call メソッドを 持つオブジェクトを指定します。
 
 引数 formatter が持つ call メソッドは以下の 4 つの引数 (severity,
 time, program name, message) を受けとります。
@@ -225,9 +222,7 @@ call メソッドは文字列を返す必要があります。
 
 ブロックを与えた場合はブロックを評価した返り値をメッセージとしてログに記録します。 ユーザがこのメソッドを直接使うことはあまりありません。
 
-- **param** `severity` -- ログレベル。Logger クラスで定義されている定数を指定しま
-                す。この値がレシーバーに設定されているレベルよりも低い
-                場合、メッセージは記録されません。
+- **param** `severity` -- ログレベル。Logger クラスで定義されている定数を指定します。この値がレシーバーに設定されているレベルよりも低い場合、メッセージは記録されません。
 
 - **param** `message` -- ログに出力するメッセージを表すオブジェクトを指定します。
                省略すると nil が用いられます。

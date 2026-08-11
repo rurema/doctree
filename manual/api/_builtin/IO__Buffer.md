@@ -157,16 +157,11 @@ p str # => "Ruby"
 
 - **param** `file` -- マップする [c:File] を指定します。
 
-- **param** `size` -- マップするバイト数を指定します。省略するとファイル全体を
-             マップします。0 を指定した場合と空のファイルを指定した場合は
-             エラーになります。
+- **param** `size` -- マップするバイト数を指定します。省略するとファイル全体をマップします。0 を指定した場合と空のファイルを指定した場合はエラーになります。
 
-- **param** `offset` -- マップを開始する位置をファイルの先頭からのバイト数で
-             指定します。指定できる値はシステム依存で、多くの環境では
-             ページサイズの倍数である必要があります。
+- **param** `offset` -- マップを開始する位置をファイルの先頭からのバイト数で指定します。指定できる値はシステム依存で、多くの環境ではページサイズの倍数である必要があります。
 
-- **param** `flags` -- [m:IO::Buffer::READONLY] や [m:IO::Buffer::PRIVATE] を
-             指定します。
+- **param** `flags` -- [m:IO::Buffer::READONLY] や [m:IO::Buffer::PRIVATE] を指定します。
 
 ```ruby title="例: 読み込み専用でマップする"
 File.write("test.txt", "hello world")
@@ -274,8 +269,7 @@ p IO::Buffer.new(8).size # => 8
 
 - **param** `offset` -- 読み出しを開始する位置をバッファの先頭からのバイト数で指定します。
 
-- **param** `length` -- 読み出すバイト数を指定します。省略した場合は offset から
-               バッファの終端までを読み出します。
+- **param** `length` -- 読み出すバイト数を指定します。省略した場合は offset からバッファの終端までを読み出します。
 
 - **param** `encoding` -- 返す文字列のエンコーディングを指定します。
                  省略した場合は [m:Encoding::BINARY] になります。
@@ -351,8 +345,7 @@ buffer_type には以下のシンボルを指定します。
 
 - **param** `offset` -- 読み出す位置をバッファの先頭からのバイト数で指定します。
 
-- **raise** `ArgumentError` -- buffer_type が上記以外の場合や、読み出す範囲が
-             バッファの外にはみ出す場合に発生します。
+- **raise** `ArgumentError` -- buffer_type が上記以外の場合や、読み出す範囲がバッファの外にはみ出す場合に発生します。
 
 ```ruby
 buf = IO::Buffer.for([1.5].pack("f"))
@@ -379,8 +372,7 @@ p buf.get_value(:U16, 0) # => 258
 
 - **param** `offset` -- 読み出しを開始する位置をバッファの先頭からのバイト数で指定します。
 
-- **raise** `ArgumentError` -- 型が不正な場合や、読み出す範囲がバッファの外に
-             はみ出す場合に発生します。
+- **raise** `ArgumentError` -- 型が不正な場合や、読み出す範囲がバッファの外にはみ出す場合に発生します。
 
 ```ruby
 buf = IO::Buffer.for([1.5, 2.5].pack("ff"))
@@ -409,11 +401,9 @@ offset をそのまま返します。
 
 - **param** `value` -- 書き込む値を数値で指定します。
 
-- **raise** `ArgumentError` -- buffer_type が不正な場合や、書き込む範囲が
-             バッファの外にはみ出す場合に発生します。
+- **raise** `ArgumentError` -- buffer_type が不正な場合や、書き込む範囲がバッファの外にはみ出す場合に発生します。
 
-- **raise** `IO::Buffer::AccessError` -- 読み取り専用のバッファに対して
-             呼び出した場合に発生します。
+- **raise** `IO::Buffer::AccessError` -- 読み取り専用のバッファに対して呼び出した場合に発生します。
 
 ```ruby
 buf = IO::Buffer.new(8)
@@ -440,11 +430,9 @@ p buf.get_value(:U32, 0) # => 2
 
 - **param** `values` -- 書き込む値の配列を指定します。
 
-- **raise** `ArgumentError` -- 型が不正な場合や、書き込む範囲がバッファの外に
-             はみ出す場合に発生します。
+- **raise** `ArgumentError` -- 型が不正な場合や、書き込む範囲がバッファの外にはみ出す場合に発生します。
 
-- **raise** `IO::Buffer::AccessError` -- 読み取り専用のバッファに対して
-             呼び出した場合に発生します。
+- **raise** `IO::Buffer::AccessError` -- 読み取り専用のバッファに対して呼び出した場合に発生します。
 
 ```ruby
 buf = IO::Buffer.new(8)
@@ -464,8 +452,7 @@ p buf.get_string(0, 3)                   # => "\x01\x00\x02"
 
 - **param** `offset` -- 読み出しを開始する位置をバッファの先頭からのバイト数で指定します。
 
-- **param** `count` -- 読み出す個数を指定します。省略した場合はバッファの末尾まで
-             読み出します。
+- **param** `count` -- 読み出す個数を指定します。省略した場合はバッファの末尾まで読み出します。
 
 ```ruby
 buf = IO::Buffer.for("Hello World")
@@ -487,8 +474,7 @@ p buf.values(:U8, 9)    # => [108, 100]
 
 - **param** `offset` -- 読み出しを開始する位置をバッファの先頭からのバイト数で指定します。
 
-- **param** `count` -- 読み出す個数を指定します。省略した場合はバッファの末尾まで
-             読み出します。
+- **param** `count` -- 読み出す個数を指定します。省略した場合はバッファの末尾まで読み出します。
 
 ```ruby
 IO::Buffer.for("Hello World").each(:U8, 2, 2) do |offset, value|
@@ -509,8 +495,7 @@ end
 
 - **param** `offset` -- 読み出しを開始する位置をバッファの先頭からのバイト数で指定します。
 
-- **param** `count` -- 読み出すバイト数を指定します。省略した場合はバッファの末尾まで
-             読み出します。
+- **param** `count` -- 読み出すバイト数を指定します。省略した場合はバッファの末尾まで読み出します。
 
 #%until 4.0
 Ruby 3.4 以前では引数が正しく扱われません。引数を 1 つだけ渡した場合は無視されて先頭から末尾まで読み出し、2 つ渡した場合は 2 番目の引数が読み出しの開始位置として使われます。位置や個数を指定するには Ruby 4.0 以降が必要です。
@@ -838,8 +823,7 @@ p IO::Buffer.new(4).readonly?                       # => false
 
 - **raise** `LocalJumpError` -- ブロックを渡さなかった場合に発生します。
 
-- **raise** `IO::Buffer::LockedError` -- すでにロックされているバッファに対して
-             呼び出した場合に発生します。
+- **raise** `IO::Buffer::LockedError` -- すでにロックされているバッファに対して呼び出した場合に発生します。
 
 ```ruby
 buf = IO::Buffer.new(4)
@@ -925,8 +909,7 @@ mask が自身より短い場合は、mask を先頭から繰り返し使いま�
 
 - **raise** `IO::Buffer::MaskError` -- mask の大きさが 0 の場合に発生します。
 
-- **raise** `IO::Buffer::AccessError` -- 読み取り専用のバッファに対して
-             呼び出した場合に発生します。
+- **raise** `IO::Buffer::AccessError` -- 読み取り専用のバッファに対して呼び出した場合に発生します。
 
 ```ruby
 # IO::Buffer.for はブロックを渡さないと読み取り専用になるので、dup で複製する
@@ -943,8 +926,7 @@ IO::Buffer.for("1234").and!(IO::Buffer.for("\xFF")) # ~> IO::Buffer::AccessError
 
 [m:IO::Buffer#~] と同じビット反転を、新しいバッファを作らずに自身に対して行います。`self` を返します。
 
-- **raise** `IO::Buffer::AccessError` -- 読み取り専用のバッファに対して
-             呼び出した場合に発生します。
+- **raise** `IO::Buffer::AccessError` -- 読み取り専用のバッファに対して呼び出した場合に発生します。
 
 ```ruby
 buf = IO::Buffer.for("1234567890").dup
@@ -1023,8 +1005,7 @@ puts IO::Buffer.new(300).inspect.lines.last
              省略した場合は offset からバッファの終わりまでです。
 - **param** `width` -- 1 行に表示するバイト数を整数で指定します。
 
-- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを
-             超える場合に発生します。
+- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを超える場合に発生します。
 - **raise** `ArgumentError` -- width に 1 未満を指定した場合に発生します。
 #%end
 
@@ -1116,8 +1097,7 @@ io から読み込んだ内容をバッファに書き込みます。
 - **return** -- 読み込んだバイト数を返します。読み込みに失敗した場合は
              errno を負にした整数を返します。例外は発生しません。
 
-- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを
-             超える場合に発生します。
+- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを超える場合に発生します。
 
 ```ruby
 File.write("test.txt", "Hello World")
@@ -1171,8 +1151,7 @@ p(-Errno::EBADF::Errno)  # => -9
 - **return** -- 書き込んだバイト数を返します。書き込みに失敗した場合は
              errno を負にした整数を返します。例外は発生しません。
 
-- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを
-             超える場合に発生します。
+- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを超える場合に発生します。
 
 ```ruby
 buf = IO::Buffer.for("Ruby!")
@@ -1202,8 +1181,7 @@ io の現在の位置は変わりません。
              指定します。
 
 - **param** `length` -- 読み込む最小のバイト数を整数で指定します。
-             省略するか nil を指定した場合は、バッファの大きさから offset を
-             引いた値、つまりバッファの残り全体になります。
+             省略するか nil を指定した場合は、バッファの大きさから offset を引いた値、つまりバッファの残り全体になります。
              0 を指定した場合は [man:pread(2)] をちょうど 1 回呼びます。
 
 - **param** `offset` -- 読み込んだ内容を書き込む位置を、バッファの先頭からの
@@ -1218,8 +1196,7 @@ io の現在の位置は変わりません。
 - **return** -- 読み込んだバイト数を返します。読み込みに失敗した場合は
              errno を負にした整数を返します。例外は発生しません。
 
-- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを
-             超える場合に発生します。
+- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを超える場合に発生します。
 
 #%since 3.2
 
@@ -1269,8 +1246,7 @@ io の現在の位置は変わりません。
              指定します。
 
 - **param** `length` -- 書き込む最小のバイト数を整数で指定します。
-             省略するか nil を指定した場合は、バッファの大きさから offset を
-             引いた値、つまりバッファの残り全体になります。
+             省略するか nil を指定した場合は、バッファの大きさから offset を引いた値、つまりバッファの残り全体になります。
              0 を指定した場合は [man:pwrite(2)] をちょうど 1 回呼びます。
 
 - **param** `offset` -- 書き込む内容の開始位置を、バッファの先頭からの
@@ -1285,8 +1261,7 @@ io の現在の位置は変わりません。
 - **return** -- 書き込んだバイト数を返します。書き込みに失敗した場合は
              errno を負にした整数を返します。例外は発生しません。
 
-- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを
-             超える場合に発生します。
+- **raise** `ArgumentError` -- offset と length の合計がバッファの大きさを超える場合に発生します。
 
 #%since 3.2
 

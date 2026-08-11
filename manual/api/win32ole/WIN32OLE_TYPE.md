@@ -30,10 +30,8 @@ Ruby-1.9.1以降、[c:WIN32OLE_TYPELIB]オブジェクトの
 
 WIN32OLE_TYPEオブジェクトを生成します。
 
-- **param** `libname` -- 生成するTypeLibのレジストリ上のドキュメント文字列
-              （[m:WIN32OLE_TYPELIB#name]）または
-               GUID（[m:WIN32OLE_TYPELIB#guid]）またはTLBファイル名を
-               文字列で指定します。
+- **param** `libname` -- 生成するTypeLibのレジストリ上のドキュメント文字列（[m:WIN32OLE_TYPELIB#name]）または
+               GUID（[m:WIN32OLE_TYPELIB#guid]）またはTLBファイル名を文字列で指定します。
 - **param** `ole_class` -- 型情報を取り出す型の名前を指定します。
 - **return** -- 指定されたTypeLIbに定義された型の情報を格納したWIN32OLE_TYPEオブジェクトを返します。
 - **raise** `WIN32OLERuntimeError` -- TypeLibが見つかりません。またはole_classで指定した型が未定義です。
@@ -50,10 +48,8 @@ TypeLibに定義されているすべての型を取得するには、
 
 TypeLibで定義されているすべての型情報を取得します。
 
-- **param** `libname` -- 生成するTypeLibのレジストリ上のドキュメント文字列
-              （[m:WIN32OLE_TYPELIB#name]）または
-               GUID（[m:WIN32OLE_TYPELIB#guid]）またはTLBファイル名を
-               文字列で指定します。
+- **param** `libname` -- 生成するTypeLibのレジストリ上のドキュメント文字列（[m:WIN32OLE_TYPELIB#name]）または
+               GUID（[m:WIN32OLE_TYPELIB#guid]）またはTLBファイル名を文字列で指定します。
 - **return** -- TypeLibに格納されているすべての型を[c:WIN32OLE_TYPE]オブジェクトの配列として返します。
 - **raise** `WIN32OLERuntimeError` -- 引数で指定したTypeLibが見つかりません。
 
@@ -69,8 +65,7 @@ Ruby-1.9.1からは、TypeLibに定義されているすべての型を取得す
 
 システムに登録されているすべてのコンポーネントクラスのPROGIDを取得します。
 
-- **return** -- システムに登録されているすべてのコンポーネントクラスのPROGIDを
-        文字列配列で返します。
+- **return** -- システムに登録されているすべてのコンポーネントクラスのPROGIDを文字列配列で返します。
 
 ```ruby
 excel = nil
@@ -96,8 +91,7 @@ WIN32OLEオブジェクトを生成できます。
 
 システムに登録されているすべてのTypeLibのドキュメント文字列を取得します。
 
-- **return** -- システムに登録されているすべてのTypeLibのドキュメント文字列の配
-        列を返します。
+- **return** -- システムに登録されているすべてのTypeLibのドキュメント文字列の配列を返します。
 
 Ruby-1.9.1からは、すべてのTypeLibのドキュメント文字列を取得するには、
 [c:WIN32OLE_TYPELIB]オブジェクトを利用して、以下のように記述してください。
@@ -125,8 +119,7 @@ GUIDは、COMのクラス識別子(CLSID)、インターフェイス識別子(II
 
 この型に関連するヘルプファイルのトピックID（ヘルプコンテキスト）を取得します。
 
-- **return** -- 型に関連するヘルプコンテキストを整数で返します。ヘルプコンテキ
-        ストが登録されていない場合はnilを返します。
+- **return** -- 型に関連するヘルプコンテキストを整数で返します。ヘルプコンテキストが登録されていない場合はnilを返します。
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
@@ -280,8 +273,7 @@ PROGIDを持つことを示します。
 
 selfが他の型の別名ならば、元の型名を取得します。
 
-- **return** -- selfが別名ならば元の型名を文字列で返します。別名でなければnilを
-        返します。
+- **return** -- selfが別名ならば元の型名を文字列で返します。別名でなければnilを返します。
 
 ```ruby
 tobj =  WIN32OLE_TYPE.new('Microsoft Office 14.0 Object Library', 'MsoRGBType')
@@ -364,8 +356,7 @@ p tobj.visible?  # => true
 
 この型を登録してある型情報ライブラリ（TypeLib）を取得します。
 
-- **return** -- この型を登録しているTypeLibを[c:WIN32OLE_TYPELIB]オブジェクト
-        として返します。見つからない場合はnilを返します。
+- **return** -- この型を登録しているTypeLibを[c:WIN32OLE_TYPELIB]オブジェクトとして返します。見つからない場合はnilを返します。
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
@@ -378,9 +369,7 @@ puts tobj.ole_typelib.name  # => 'Microsoft Excel 14.0 Object Library'
 
 implemented_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスが実装しているすべてのインターフェイスを返します。
 
-- **return** -- クラスが実装するすべてのインターフェイスを[c:WIN32OLE_TYPE]の
-        配列として返します。この型がインターフェイスを実装しない場合は、
-        空配列を返します。
+- **return** -- クラスが実装するすべてのインターフェイスを[c:WIN32OLE_TYPE]の配列として返します。この型がインターフェイスを実装しない場合は、空配列を返します。
 
 - **raise** `WIN32OLERuntimeError` -- 型属性が取得できない場合に通知します。
 
@@ -411,10 +400,7 @@ p tobj.source_ole_types.map {|intf| intf.name} # => ["DocEvents"]
 
 default_event_sourcesメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスがサポートするデフォルトのソースインターフェイス（イベントの通知元となるインターフェイス）を返します。
 
-- **return** -- デフォルトのソースインターフェイスを[c:WIN32OLE_TYPE]の配列と
-        して返します。返すのは配列ですが、デフォルトのソースインターフェ
-        イスは最大でも1インターフェイスです。ソースインターフェイスを持
-        たない場合は空配列を返します。
+- **return** -- デフォルトのソースインターフェイスを[c:WIN32OLE_TYPE]の配列として返します。返すのは配列ですが、デフォルトのソースインターフェイスは最大でも1インターフェイスです。ソースインターフェイスを持たない場合は空配列を返します。
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
@@ -514,11 +500,7 @@ ctl.Quit
 
 default_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスが実装しているデフォルトのインターフェイスと、サポートしていればデフォルトのソースインターフェイスを返します。
 
-- **return** -- デフォルトインターフェイスを[c:WIN32OLE_TYPE]の配列として返し
-        ます。デフォルトインターフェイスは、最大でも、クラス操作用のイ
-        ンターフェイス（OLEオートメーション用）と、イベント用のソースイ
-        ンターフェイスの2要素です。デフォルトインターフェイスを持たない
-        場合は空配列を返します。
+- **return** -- デフォルトインターフェイスを[c:WIN32OLE_TYPE]の配列として返します。デフォルトインターフェイスは、最大でも、クラス操作用のインターフェイス（OLEオートメーション用）と、イベント用のソースインターフェイスの2要素です。デフォルトインターフェイスを持たない場合は空配列を返します。
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
@@ -529,8 +511,7 @@ p tobj.default_ole_types.map {|intf| intf.name} # => ["_Worksheet", "DocEvents"]
 
 selfを説明的な文字列で表現します。
 
-- **return** -- "#<WIN32OLE_TYPE"と[m:WIN32OLE_TYPE#to_s]の結果を「:」で結合
-        し、「>」で閉じた文字列を返します。
+- **return** -- "#<WIN32OLE_TYPE"と[m:WIN32OLE_TYPE#to_s]の結果を「:」で結合し、「>」で閉じた文字列を返します。
 
 ```ruby
 x = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')

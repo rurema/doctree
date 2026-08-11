@@ -88,8 +88,7 @@ puts method.event? # => true
 
 メソッドがイベントの場合、イベントのインターフェイス名を取得します。
 
-- **return** -- メソッドがイベントであれば、イベントのインターフェイス名を返し
-        ます。イベントでなければnilを返します。
+- **return** -- メソッドがイベントであれば、イベントのインターフェイス名を返します。イベントでなければnilを返します。
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
@@ -121,8 +120,7 @@ WIN32OLE_METHODオブジェクトを引数として、[m:WIN32OLE.ole_show_help]
 
 メソッドにヘルプファイルが関連付けられている場合、該当ヘルプファイルのパス名を返します。
 
-- **return** -- ヘルプファイルのパス名を文字列で返します。ヘルプファイルが未定
-        義ならばnilを返します。
+- **return** -- ヘルプファイルのパス名を文字列で返します。ヘルプファイルが未定義ならばnilを返します。
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
@@ -241,8 +239,7 @@ puts method.offset_vtbl # => 40
 
 このメソッドのパラメータを[c:WIN32OLE_PARAM]の配列として返します。配列の最初の要素が最左端のパラメータに対応します。
 
-- **return** -- [c:WIN32OLE_PARAM]の配列。無引数のメソッドであれば要素数0の配
-        列を返します。
+- **return** -- [c:WIN32OLE_PARAM]の配列。無引数のメソッドであれば要素数0の配列を返します。
 
 ```text
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
@@ -309,8 +306,7 @@ VARENUMの定義は、Platform SDKのwtypes.hにあります。
 
 オプションパラメータ数を取得します。
 
-- **return** -- オプションパラメータ数を整数で返します。メソッドの詳細情報を取
-        得できない場合はnilを返します。
+- **return** -- オプションパラメータ数を整数で返します。メソッドの詳細情報を取得できない場合はnilを返します。
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
@@ -322,8 +318,7 @@ puts method.size_opt_params # => 5
 
 パラメータ数を取得します。
 
-- **return** -- パラメータ数を整数で返します。メソッドの詳細情報を取得できない
-        場合はnilを返します。
+- **return** -- パラメータ数を整数で返します。メソッドの詳細情報を取得できない場合はnilを返します。
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')

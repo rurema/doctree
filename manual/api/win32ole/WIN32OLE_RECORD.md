@@ -53,19 +53,14 @@ book.cost  # => 20
 WIN32OLE_RECORDオブジェクトを生成します。
 
 - **param** `typename` -- 構造体名を文字列またはシンボルで指定します。
-- **param** `obj` -- [c:WIN32OLE]オブジェクトまたは[c:WIN32OLE_TYPELIB]オブジェ
-           クトを指定します。typenameで指定した構造体の型情報を取得する
-           ために利用します。
+- **param** `obj` -- [c:WIN32OLE]オブジェクトまたは[c:WIN32OLE_TYPELIB]オブジェクトを指定します。typenameで指定した構造体の型情報を取得するために利用します。
 - **return** -- 生成したWIN32OLE_RECORDオブジェクトを返します。
 
 - **raise** `ArgumentError` -- typenameがStringまたはSymbolではありません。あるいは
-                obj がWIN32OLEオブジェクトまたはWIN32OLE_TYPELIBオブジェク
-                トのいずれでもありません。
+                obj がWIN32OLEオブジェクトまたはWIN32OLE_TYPELIBオブジェクトのいずれでもありません。
 
-- **raise** `WIN32OLERuntimeError` -- objからITypeLibインタフェースの取得に失
-                            敗しました。あるいはtypenameに対応する
-                            IRecordInfoインタフェースの取得に失敗し
-                            ました。
+- **raise** `WIN32OLERuntimeError` -- objからITypeLibインタフェースの取得に失敗しました。あるいはtypenameに対応する
+                            IRecordInfoインタフェースの取得に失敗しました。
 
 VB.NETのComServerプロジェクトで、以下のBook構造体を持つCOMサーバがあるとします。
 
@@ -151,8 +146,7 @@ VT_RECORD OLE変数のメンバ名に対応する値を取得、または設定�
            setterの場合は末尾に「=」が付きます。
 - **param** `args` -- setterとして呼び出された場合、設定する値を1つ指定します。
            getterとして呼び出された場合は空です。
-- **return** -- getterとして呼び出された場合はメンバの値、setterとして呼び出さ
-           れた場合は設定した値を返します。
+- **return** -- getterとして呼び出された場合はメンバの値、setterとして呼び出された場合は設定した値を返します。
 
 - **raise** `KeyError` -- 指定したメンバ名がselfに存在しません。
 

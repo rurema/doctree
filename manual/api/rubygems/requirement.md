@@ -48,8 +48,7 @@ p Gem::Requirement::OPS["~>"].call(Gem::Version.new('3.1'), Gem::Version.new('3.
 
 [c:Gem::Requirement] のインスタンスを作成するためのファクトリメソッドです。
 
-- **param** `input` -- 文字列か配列か [c:Gem::Requirement], [c:Gem::Version] のインスタンス
-             のいずれかを指定します。
+- **param** `input` -- 文字列か配列か [c:Gem::Requirement], [c:Gem::Version] のインスタンスのいずれかを指定します。
 
 - **return** -- 上記以外の値を input に指定するとデフォルト値を返します。
 

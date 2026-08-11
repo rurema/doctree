@@ -30,9 +30,7 @@ HTTPServer オブジェクトを生成して返します。
 - **`:HTTPVersion`**:
   使用する HTTP のバージョンです。[c:WEBrick::HTTPVersion] オブジェクトで指定します。デフォルトは 1.1 です。
 - **`:AccessLog`**:
-  アクセスログの出力先とフォーマットを [[io, format], [io, format], ...] のような
-  配列で指定します。io は [c:IO] オブジェクトです。format は文字列です。デフォルトでは
-  フォーマットの形式は Apache のそれに準拠し標準エラー出力に出力します。
+  アクセスログの出力先とフォーマットを [[io, format], [io, format], ...] のような配列で指定します。io は [c:IO] オブジェクトです。format は文字列です。デフォルトではフォーマットの形式は Apache のそれに準拠し標準エラー出力に出力します。
   <http://httpd.apache.org/docs/mod/mod_log_config.html#formats>
   [m:WEBrick::AccessLog::COMMON_LOG_FORMAT] [m:WEBrick::AccessLog::REFERER_LOG_FORMAT]
   も参照して下さい。
@@ -42,15 +40,11 @@ HTTPServer オブジェクトを生成して返します。
 - **`:DirectoryIndex`**:
   ディレクトリのインデックスとなるファイル名を配列で指定します。
 - **`:DocumentRoot`**:
-  サーバ上のルートディレクトリに対応させる、ローカルのファイルシステムの
-  ディレクトリを文字列で指定します。
+  サーバ上のルートディレクトリに対応させる、ローカルのファイルシステムのディレクトリを文字列で指定します。
 - **`:DocumentRootOptions`**:
-  ルートディレクトリの処理を担当する [c:WEBrick::HTTPServlet::FileHandler] のコンストラクタに
-  渡されるオプションをハッシュで指定します。デフォルトは { :FancyIndexing => true } ですので、
-  ディレクトリにアクセスするとディレクトリの内容を適当な形式で表示します。
+  ルートディレクトリの処理を担当する [c:WEBrick::HTTPServlet::FileHandler] のコンストラクタに渡されるオプションをハッシュで指定します。デフォルトは { :FancyIndexing => true } ですので、ディレクトリにアクセスするとディレクトリの内容を適当な形式で表示します。
 - **`:RequestCallback`**:
-  クライアントからのリクエストを受け付けた時に呼ばれる [c:Proc] オブジェクトを
-  指定します。callback.call(req, res) のように [c:WEBrick::HTTPRequest] オブジェクトと
+  クライアントからのリクエストを受け付けた時に呼ばれる [c:Proc] オブジェクトを指定します。callback.call(req, res) のように [c:WEBrick::HTTPRequest] オブジェクトと
   [c:WEBrick::HTTPResponse] オブジェクトを引数として呼ばれます。
 - **`:ServerAlias`**:
   サーバのホスト名の別名を文字列の配列で指定します。

@@ -190,20 +190,15 @@ string と同じ内容の新しい文字列を作成して返します。
 
 - **param** `string` --   文字列
 - **param** `encoding` -- 作成する文字列のエンコーディングを文字列か
-                [c:Encoding] オブジェクトで指定します(変換は行われま
-                せん)。省略した場合は引数 string のエンコーディングと同
-                じになります(ただし、string が指定されていなかった場合は
+                [c:Encoding] オブジェクトで指定します(変換は行われません)。省略した場合は引数 string のエンコーディングと同じになります(ただし、string が指定されていなかった場合は
                 [m:Encoding::ASCII_8BIT]になります)。
 - **param** `capacity` -- 内部バッファのサイズを指定します。
                 指定することで、なんども文字列連結する
-                (そしてreallocがなんども呼ばれる)ときの
-                パフォーマンスが改善されるかもしれません。
+                (そしてreallocがなんども呼ばれる)ときのパフォーマンスが改善されるかもしれません。
                 capacity を指定しても文字列の内容や
                 [m:String#bytesize] が変わるわけではありません。
                 内部バッファの実際の確保方法は実装依存です。
-                特に短い文字列はオブジェクトに直接埋め込まれる表現に
-                なって独立したバッファを持たないなど、指定が反映され
-                ない場合もあります。
+                特に短い文字列はオブジェクトに直接埋め込まれる表現になって独立したバッファを持たないなど、指定が反映されない場合もあります。
 - **return** --         引数 string と同じ内容の文字列オブジェクト
 
 ```ruby title="例"
@@ -752,8 +747,7 @@ p buf    # => "def preprocess(cmd)"
 
 - **return** -- val を返します。
 
-- **raise** `IndexError` -- name で指定した名前付きキャプチャが存在しない場合に発
-                  生します。
+- **raise** `IndexError` -- name で指定した名前付きキャプチャが存在しない場合に発生します。
 
 ```ruby title="例"
 s = "FooBar"
@@ -807,8 +801,7 @@ p "FOOBAR--".capitalize   # => "Foobar--"
 
 - **param** `options` -- オプションの詳細は [m:String#downcase] を参照してください。
 
-- **return** -- capitalize! は self を変更して返しますが、
-        変更が起こらなかった場合は nil を返します。
+- **return** -- capitalize! は self を変更して返しますが、変更が起こらなかった場合は nil を返します。
 
 ```ruby title="例"
 str = "foobar"
@@ -1334,8 +1327,7 @@ p "hello\nworld\n".lines(chomp: true) # => ["hello", "world"]
 
 - **param** `rs` -- 行末を示す文字列
 
-- **param** `chomp` -- 分割した各行に対して [m:String#chomp] と同等の結果を得
-             る場合は true を、そうでない場合は false で指定します。
+- **param** `chomp` -- 分割した各行に対して [m:String#chomp] と同等の結果を得る場合は true を、そうでない場合は false で指定します。
              省略した場合は false を指定したとみなされます。
 
 ブロックが指定された場合は [m:String#each_line] と同じように動作します。
@@ -2191,8 +2183,7 @@ p string                # => "thing"
 
 - **正規表現**:
     正規表現にマッチする部分で分割する。
-    特に、括弧によるグルーピングがあればそのグループにマッチした
-    文字列も結果の配列に含まれる (後述)。
+    特に、括弧によるグルーピングがあればそのグループにマッチした文字列も結果の配列に含まれる (後述)。
 - **文字列**:
     その文字列自体にマッチする部分で分割する。
 - **1 バイトの空白文字 ' '**:
@@ -3668,8 +3659,7 @@ nth バイト目の文字を返します。nth が負の場合は文字列の末
 
 - **param** `nth` -- 文字の位置を表す整数を指定します。
 
-- **return** -- 切り出した文字列を返します。戻り値の文字エンコーディングは自身
-        と同じです。
+- **return** -- 切り出した文字列を返します。戻り値の文字エンコーディングは自身と同じです。
 
 ```ruby title="例"
 p "hello".byteslice(1)  # => "e"
@@ -3690,8 +3680,7 @@ nil を返します。
 
 - **param** `len` -- 取得したい文字列の長さを正の整数で指定します。
 
-- **return** -- 切り出した文字列を返します。戻り値の文字エンコーディングは自身
-        と同じです。
+- **return** -- 切り出した文字列を返します。戻り値の文字エンコーディングは自身と同じです。
 
 ```ruby title="例"
 p "hello".byteslice(1, 2)            # => "el"
@@ -3708,8 +3697,7 @@ range で指定したバイトの範囲に含まれる部分文字列を返し�
 
 - **param** `range` -- 取得したい文字列の範囲を示す Range オブジェクト
 
-- **return** -- 切り出した文字列を返します。戻り値の文字エンコーディングは自身
-        と同じです。
+- **return** -- 切り出した文字列を返します。戻り値の文字エンコーディングは自身と同じです。
 
 ```ruby title="例"
 p "hello".byteslice(1..2)        # => "el"
@@ -3800,13 +3788,9 @@ p 'abc123'.b.encoding  # => #<Encoding:ASCII-8BIT>
 
 self が不正なバイト列を含む場合に別の文字列に置き換えた新しい文字列を返します。
 
-- **param** `repl` -- 不正なバイト列を置き換える文字列を指定します。省略した場合
-            は self の文字エンコーディングが [m:Encoding::UTF_16BE],
+- **param** `repl` -- 不正なバイト列を置き換える文字列を指定します。省略した場合は self の文字エンコーディングが [m:Encoding::UTF_16BE],
             [m:Encoding::UTF_16LE], [m:Encoding::UTF_32BE],
-            [m:Encoding::UTF_32LE], [m:Encoding::UTF_8] のいずれか
-            の場合は "\uFFFD" を表す文字で、それ以外の場合は "?" で置き
-            換えられます。ブロックが指定された場合は不正なバイト列はブ
-            ロックの戻り値で置き換えられます。
+            [m:Encoding::UTF_32LE], [m:Encoding::UTF_8] のいずれかの場合は "\uFFFD" を表す文字で、それ以外の場合は "?" で置き換えられます。ブロックが指定された場合は不正なバイト列はブロックの戻り値で置き換えられます。
 
 ```ruby title="例"
 p "abc\u3042\x81".scrub    # => "abc\u3042\uFFFD"
@@ -3822,13 +3806,9 @@ p "abc\u3042\xE3\x80".scrub{|bytes| '<'+bytes.unpack('H*')[0]+'>' } # => "abc\u3
 
 self が不正なバイト列を含む場合に別の文字列に置き換えます。常に self を返します。
 
-- **param** `repl` -- 不正なバイト列を置き換える文字列を指定します。省略した場合
-            は self の文字エンコーディングが [m:Encoding::UTF_16BE],
+- **param** `repl` -- 不正なバイト列を置き換える文字列を指定します。省略した場合は self の文字エンコーディングが [m:Encoding::UTF_16BE],
             [m:Encoding::UTF_16LE], [m:Encoding::UTF_32BE],
-            [m:Encoding::UTF_32LE], [m:Encoding::UTF_8] のいずれか
-            の場合は "\uFFFD" を表す文字で、それ以外の場合は "?" で置き
-            換えられます。ブロックが指定された場合は不正なバイト列はブ
-            ロックの戻り値で置き換えられます。
+            [m:Encoding::UTF_32LE], [m:Encoding::UTF_8] のいずれかの場合は "\uFFFD" を表す文字で、それ以外の場合は "?" で置き換えられます。ブロックが指定された場合は不正なバイト列はブロックの戻り値で置き換えられます。
 
 ```ruby title="例"
 p "abc\u3042\x81".scrub!    # => "abc\u3042\uFFFD"
@@ -3842,11 +3822,9 @@ p "abc\u3042\xE3\x80".scrub!{|bytes| '<'+bytes.unpack('H*')[0]+'>' } # => "abc\u
 
 self を NFC、NFD、NFKC、NFKD のいずれかの正規化形式で Unicode 正規化した文字列を返します。
 
-- **param** `form` -- 正規化形式を :nfc、:nfd、:nfkc、:nfkd のいずれかで指定しま
-            す。省略した場合は :nfc になります。
+- **param** `form` -- 正規化形式を :nfc、:nfd、:nfkc、:nfkd のいずれかで指定します。省略した場合は :nfc になります。
 
-- **raise** `Encoding::CompatibilityError` -- self が Unicode 文字列ではない場合
-                                    に発生します。
+- **raise** `Encoding::CompatibilityError` -- self が Unicode 文字列ではない場合に発生します。
 
 このメソッドでの "Unicode 文字列" とは、UTF-8、UTF-16BE/LE、
 UTF-32BE/LE だけではなく GB18030、UCS_2BE、and UCS_4BE を含みます。
@@ -3869,11 +3847,9 @@ self を NFC、NFD、NFKC、NFKD のいずれかの正規化形式で Unicode �
 
 (gsub!などと異なり)変換が行なわれなくても self を返します。
 
-- **param** `form` -- 正規化形式を :nfc、:nfd、:nfkc、:nfkd のいずれかで指定しま
-            す。省略した場合は :nfc になります。
+- **param** `form` -- 正規化形式を :nfc、:nfd、:nfkc、:nfkd のいずれかで指定します。省略した場合は :nfc になります。
 
-- **raise** `Encoding::CompatibilityError` -- self が Unicode 文字列ではない場合
-                                    に発生します。
+- **raise** `Encoding::CompatibilityError` -- self が Unicode 文字列ではない場合に発生します。
 
 ```ruby title="例"
 text = "a\u0300"
@@ -3889,11 +3865,9 @@ p text == "a\u0300"           # => true
 
 self が引数 form で指定された正規化形式で Unicode 正規化された文字列かどうかを返します。
 
-- **param** `form` -- 正規化形式を :nfc、:nfd、:nfkc、:nfkd のいずれかで指定しま
-            す。省略した場合は :nfc になります。
+- **param** `form` -- 正規化形式を :nfc、:nfd、:nfkc、:nfkd のいずれかで指定します。省略した場合は :nfc になります。
 
-- **raise** `Encoding::CompatibilityError` -- self が Unicode 文字列ではない場合
-                                    に発生します。
+- **raise** `Encoding::CompatibilityError` -- self が Unicode 文字列ではない場合に発生します。
 
 ```ruby title="例"
 p "a\u0300".unicode_normalized?      # => false

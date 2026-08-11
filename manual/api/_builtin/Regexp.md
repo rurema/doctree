@@ -62,8 +62,7 @@ p Regexp.new('abc').frozen?
 - **param** `option` -- [m:Regexp::IGNORECASE], [m:Regexp::MULTILINE],
               [m:Regexp::EXTENDED]
               の論理和を指定します。
-              [c:Integer] 以外であれば真偽値の指定として見なされ
-              、真(nil, false 以外)であれば
+              [c:Integer] 以外であれば真偽値の指定として見なされ、真(nil, false 以外)であれば
               [m:Regexp::IGNORECASE] の指定と同じになります。
 
 - **param** `code` -- "n", "N" が与えられた時には、生成された正規表現のエンコーディングは ASCII-8BIT になります。
@@ -311,8 +310,7 @@ p /foo/ =~ "bar"  # => nil
 
 - **param** `string` -- マッチ対象文字列
 
-- **raise** `TypeError` -- string が nil でも [c:String] オブジェクト
-                 でも [c:Symbol] でもない場合発生します。
+- **raise** `TypeError` -- string が nil でも [c:String] オブジェクトでも [c:Symbol] でもない場合発生します。
 
 ```ruby title="例"
 p /foo/ =~ "foo"        # => 0

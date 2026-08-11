@@ -34,8 +34,7 @@ s.start
   プロクシ認証を行う [c:Proc] オブジェクトを指定します。この proc は
   [c:WEBrick::HTTPResponse] オブジェクトと [c:WEBrick::HTTPRequest] オブジェクトを引数として
   proc.call(req, res) のように呼ばれます。
-  認証に失敗した場合 proc は適切な例外を発生させなければいけません。nil を指定した場合すべての接続を
-  受け付けます。デフォルトは nil です。通常は [c:WEBrick::HTTPAuth::ProxyBasicAuth] か
+  認証に失敗した場合 proc は適切な例外を発生させなければいけません。nil を指定した場合すべての接続を受け付けます。デフォルトは nil です。通常は [c:WEBrick::HTTPAuth::ProxyBasicAuth] か
   [c:WEBrick::HTTPAuth::ProxyDigestAuth] を使用します。
   ```ruby
    require 'webrick'

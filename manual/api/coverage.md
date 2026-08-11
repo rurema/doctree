@@ -218,8 +218,7 @@ pp Coverage.result  # => {"bool.rb"=>{:methods=>{[Object, :bool, 1, 0, 7, 3]=>1}
 
 - **return** -- 測定結果を表すハッシュ
 
-- **raise** `RuntimeError` -- [m:Coverage.start] を実行する前に実行された場合に
-                    発生します。
+- **raise** `RuntimeError` -- [m:Coverage.start] を実行する前に実行された場合に発生します。
 
 ```ruby title="bool.rb"
 def bool(obj)
@@ -268,8 +267,7 @@ p Coverage.result(clear: true, stop: false)  # => {"bool.rb"=>{:oneshot_lines=>[
 
 - **return** -- 測定途中結果を表すハッシュ
 
-- **raise** `RuntimeError` -- [m:Coverage.start] を実行する前に実行された場合に
-                    発生します。
+- **raise** `RuntimeError` -- [m:Coverage.start] を実行する前に実行された場合に発生します。
 
 ```ruby title="bool.rb"
 def bool(obj)

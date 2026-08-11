@@ -35,13 +35,11 @@ open("http://www.ruby-lang.org/") {|f|
 
 - **param** `mode` -- モードを文字列で与えます。[m:Kernel?.open] と同じです。
 
-- **param** `perm` -- [man:open(2)] の第 3 引数のように、ファイルを生成する場合のファイルのパーミッションを
-            整数で指定します。[m:Kernel?.open] と同じです
+- **param** `perm` -- [man:open(2)] の第 3 引数のように、ファイルを生成する場合のファイルのパーミッションを整数で指定します。[m:Kernel?.open] と同じです
 
 - **param** `options` -- ハッシュを与えます。詳しくは [m:OpenURI.open_uri] を参照してください。
 
-- **raise** `OpenURI::HTTPError` -- 対象となる URI のスキームが http であり、
-                          かつリソースの取得に失敗した時に発生します。
+- **raise** `OpenURI::HTTPError` -- 対象となる URI のスキームが http であり、かつリソースの取得に失敗した時に発生します。
 
 - **raise** `Net::FTPError` -- 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
                      [c:Net::FTPError] のサブクラスが発生します。詳しくは [lib:net/ftp]

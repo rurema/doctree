@@ -17,14 +17,11 @@ DRb::DRbServer.new('drbunix:/tmp/hoge', obj)
 
 - **`:UNIXFileMode`**:
   UNIX ドメインソケットと結び付けられたファイルのモードを指定します。
-  指定しない場合は [m:UNIXServer.new] がデフォルトで設定する
-  値を利用します。
+  指定しない場合は [m:UNIXServer.new] がデフォルトで設定する値を利用します。
 - **`:UNIXFileOwner`**:
   UNIX ドメインソケットと結び付けられたファイルの所有者を指定します。
-  指定しない場合は [m:UNIXServer.new] がデフォルトで設定する
-  値を利用します。
+  指定しない場合は [m:UNIXServer.new] がデフォルトで設定する値を利用します。
 - **`:UNIXFileGroup`**:
   UNIX ドメインソケットと結び付けられたファイルのグループを指定します。
-  指定しない場合は [m:UNIXServer.new] がデフォルトで設定する
-  値を利用します。
+  指定しない場合は [m:UNIXServer.new] がデフォルトで設定する値を利用します。
 

@@ -92,26 +92,20 @@ IMAP サーバは以下の3種類のエラーを送ります。
 
 - **`NO`**:
   コマンドが正常に完了しなかったことを意味します。
-  例えば、ログインでのユーザ名/パスワードが間違っていた、
-  選択したメールボックスが存在しない、などです。
+  例えば、ログインでのユーザ名/パスワードが間違っていた、選択したメールボックスが存在しない、などです。
 
 - **`BAD`**:
-  クライアントからのリクエストをサーバが理解できなかった
-  ことを意味します。
-  クライアントの現在の状態では使えないコマンドを使おうとした
-  場合にも発生します。例えば、
+  クライアントからのリクエストをサーバが理解できなかったことを意味します。
+  クライアントの現在の状態では使えないコマンドを使おうとした場合にも発生します。例えば、
   selected状態(SELECT/EXAMINEでこの状態に移行する)にならずに
   SEARCH コマンドを使おうとした場合に発生します。
-  サーバの内部エラー(ディスクが壊れたなど)の場合も
-  このエラーが発生します。
+  サーバの内部エラー(ディスクが壊れたなど)の場合もこのエラーが発生します。
 
 - **`BYE`**:
   サーバが接続を切ろうとしていることを意味します。
   これは通常のログアウト処理で発生します。
-  また、ログイン時にサーバが(なんらかの理由で)接続
-  したくない場合にも発生します。
-  それ以外では、サーバがシャットダウンする場合か
-  サーバがタイムアウトする場合に発生します。
+  また、ログイン時にサーバが(なんらかの理由で)接続したくない場合にも発生します。
+  それ以外では、サーバがシャットダウンする場合かサーバがタイムアウトする場合に発生します。
 
 これらのエラーはそれぞれ
   - [c:Net::IMAP::NoResponseError]
@@ -439,8 +433,7 @@ SELECT コマンドを送り、指定したメールボックスを処理対象�
 [m:Net::IMAP#add_response_handler] を使うとそのような更新情報を即座に取得できます。
 
 - **param** `mailbox` -- 処理対象としたいメールボックスの名前(文字列)
-- **raise** `Net::IMAP::NoResponseError` -- mailboxが存在しない等の理由でコマンドの実行に失敗
-       した場合に発生します。
+- **raise** `Net::IMAP::NoResponseError` -- mailboxが存在しない等の理由でコマンドの実行に失敗した場合に発生します。
 
 ### def examine(mailbox) -> Net::IMAP::TaggedResponse
 
@@ -449,8 +442,7 @@ EXAMINE コマンドを送り、指定したメールボックスを処理対象
 [m:Net::IMAP#select] と異なりセッション中はメールボックスが読み取り専用となります。それ以外は select と同じです。
 
 - **param** `mailbox` -- 処理対象としたいメールボックスの名前(文字列)
-- **raise** `Net::IMAP::NoResponseError` -- mailboxが存在しない等の理由でコマンドの実行に失敗
-       した場合に発生します。
+- **raise** `Net::IMAP::NoResponseError` -- mailboxが存在しない等の理由でコマンドの実行に失敗した場合に発生します。
 
 ### def create(mailbox) -> Net::IMAP::TaggedResponse
 
@@ -464,9 +456,7 @@ CREATE  コマンドを送り、新しいメールボックスを作ります。
 DELETE コマンドを送り、指定したメールボックスを削除します。
 
 - **param** `mailbox` -- 削除するメールボックスの名前(文字列)
-- **raise** `Net::IMAP::NoResponseError` -- 指定した名前のメールボックスを削除できなかった場合
-       に発生します。指定した名前のメールボックスが存在しない場合や、
-       ユーザにメールボックスを削除する権限がない場合に発生します。
+- **raise** `Net::IMAP::NoResponseError` -- 指定した名前のメールボックスを削除できなかった場合に発生します。指定した名前のメールボックスが存在しない場合や、ユーザにメールボックスを削除する権限がない場合に発生します。
 
 ### def rename(mailbox, newname) -> Net::IMAP::TaggedResponse
 
@@ -474,11 +464,8 @@ RENAME コマンドを送り、指定したメールボックスをリネーム�
 
 - **param** `mailbox` -- リネームするメールボックス(文字列)
 - **param** `newname` -- リネーム後の名前(文字列)
-- **raise** `Net::IMAP::NoResponseError` -- 指定した名前のメールボックスを
-       リネームできなかった場合に発生します。
-       指定した名前のメールボックスが存在しない場合や、
-       リネーム後の名前を持つメールボックスが既に存在する
-       場合に発生します。
+- **raise** `Net::IMAP::NoResponseError` -- 指定した名前のメールボックスをリネームできなかった場合に発生します。
+       指定した名前のメールボックスが存在しない場合や、リネーム後の名前を持つメールボックスが既に存在する場合に発生します。
 
 ### def subscribe(mailbox) -> Net::IMAP::TaggedResponse
 
@@ -486,10 +473,8 @@ SUBSCRIBE コマンドを送り、指定したメールボックスを
 "active" もしくは "subscribe" なメールボックスの集合に追加します。
 
 - **param** `mailbox` -- 追加するメールボックスの名前(文字列)
-- **raise** `Net::IMAP::NoResponseError` -- 指定した名前のメールボックスを
-       追加できなかった場合に発生します。
-       指定した名前のメールボックスが存在しない場合などに
-       生じます。
+- **raise** `Net::IMAP::NoResponseError` -- 指定した名前のメールボックスを追加できなかった場合に発生します。
+       指定した名前のメールボックスが存在しない場合などに生じます。
 
 ### def unsubscribe(mailbox) -> Net::IMAP::TaggedResponse
 
@@ -497,10 +482,8 @@ UNSUBSCRIBE コマンドを送り、指定したメールボックスを
 "active" もしくは "subscribe" なメールボックスの集合から削除します。
 
 - **param** `mailbox` -- 削除するするメールボックスの名前(文字列)
-- **raise** `Net::IMAP::NoResponseError` -- 指定した名前のメールボックスを
-       削除できなかった場合に発生します。
-       指定した名前のメールボックスが active/subscribe でなかった
-       場合などに発生します。
+- **raise** `Net::IMAP::NoResponseError` -- 指定した名前のメールボックスを削除できなかった場合に発生します。
+       指定した名前のメールボックスが active/subscribe でなかった場合などに発生します。
 
 ### def list(refname, mailbox) -> [Net::IMAP::MailboxList] | nil
 
@@ -572,8 +555,7 @@ p imap.status("inbox", ["MESSAGES", "RECENT"])
 
 - **param** `mailbox` -- 問い合わせ対象のメールボックス(文字列)
 - **param** `attr` -- 問合せたいアトリビュート名(文字列)の配列
-- **raise** `Net::IMAP::NoResponseError` -- メールボックスが存在しない場合や、
-       アトリビュート名が存在しない場合に発生します
+- **raise** `Net::IMAP::NoResponseError` -- メールボックスが存在しない場合や、アトリビュート名が存在しない場合に発生します
 
 ### def append(mailbox, message, flags = nil, date_time = nil) -> Net::IMAP::TaggedResponse
 
@@ -1465,8 +1447,7 @@ UID ではなく、sequence numberを返します。
     [c:Net::IMAP::Envelope] オブジェクト。
 - **`FLAGS`**:
     メッセージにセットされたフラグ。
-    [c:Symbol] の配列。[m:String#capitalize] でキャピタライズ
-    されている。
+    [c:Symbol] の配列。[m:String#capitalize] でキャピタライズされている。
 - **`INTERNALDATE`**:
     メッセージの内部日付。文字列。
 - **`RFC822`**:

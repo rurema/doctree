@@ -37,9 +37,7 @@ Logger オブジェクトを生成します。
                省略した場合は false です。
                Logger v1.4.0 以降で利用可能です。
 
-- **param** `shift_period_suffix` -- daily、weekly、monthlyでログファイルの切り替
-                           えを行う時のログファイルの名の末尾に追加する
-                           文字列のフォーマットを指定します。
+- **param** `shift_period_suffix` -- daily、weekly、monthlyでログファイルの切り替えを行う時のログファイルの名の末尾に追加する文字列のフォーマットを指定します。
                            省略した場合は '%Y%m%d' です。
 
 - **param** `reraise_write_errors` -- ログ書き込み時にエラーが発生した場合に raise される例外クラスの配列。
@@ -92,8 +90,7 @@ logger << "add message"
 ユーザがこのメソッドを直接使うことはあまりありません。
 
 - **param** `severity` -- ログレベル。[c:Logger] クラスで定義されている定数を指定します。
-                この値がレシーバーに設定されているレベルよりも低い場合、
-                メッセージは記録されません。
+                この値がレシーバーに設定されているレベルよりも低い場合、メッセージは記録されません。
 
 - **param** `message` -- ログに出力するメッセージを文字列か例外オブジェクトを指定します。
                省略すると nil が用いられます。
@@ -476,8 +473,7 @@ logger.info("MyApp") { "test" }
 
 ログを出力する際に使用するフォーマッターをセットします。
 
-- **param** `formatter` -- 4 つの引数 (severity, time, program name, message) を受け取る call メソッドを
-                 持つオブジェクトを指定します。call メソッドの返り値は文字列にしてください。
+- **param** `formatter` -- 4 つの引数 (severity, time, program name, message) を受け取る call メソッドを持つオブジェクトを指定します。call メソッドの返り値は文字列にしてください。
 
 ```ruby
 require 'logger'

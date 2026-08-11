@@ -43,10 +43,8 @@ m.synchronize {
 mutex オブジェクトをロックします。一度に一つのスレッドだけが mutex をロックできます。既にロックされている mutex
 に対してロックを行おうとしたスレッドは mutex のロックが解放されるまで、実行が停止されます。
 
-- **raise** `ThreadError` -- self 既にカレントスレッドにロックされている場合に発
-                   生します。
-                   また、[m:Signal?.trap] に指定したハンドラ内で実行
-                   した場合に発生します。
+- **raise** `ThreadError` -- self 既にカレントスレッドにロックされている場合に発生します。
+                   また、[m:Signal?.trap] に指定したハンドラ内で実行した場合に発生します。
 
 #%#noexample Thread::Mutex#unlock を参照
 
@@ -70,10 +68,8 @@ mutex をロックし、ブロックを実行します。実行後に必ず mute
 
 ブロックが最後に評価した値を返します。
 
-- **raise** `ThreadError` -- self 既にカレントスレッドにロックされている場合に発
-                   生します。
-                   また、[m:Signal?.trap] に指定したハンドラ内で実行
-                   した場合に発生します。
+- **raise** `ThreadError` -- self 既にカレントスレッドにロックされている場合に発生します。
+                   また、[m:Signal?.trap] に指定したハンドラ内で実行した場合に発生します。
 
 ```ruby title="例"
 m = Thread::Mutex.new
@@ -126,10 +122,8 @@ Thread.new do
 end.join
 ```
 
-- **raise** `ThreadError` -- self がロックされていない場合や self をロックしたス
-                   レッド以外から呼ばれた場合に発生します。
-                   また、[m:Signal?.trap] に指定したハンドラ内で実行
-                   した場合に発生します。
+- **raise** `ThreadError` -- self がロックされていない場合や self をロックしたスレッド以外から呼ばれた場合に発生します。
+                   また、[m:Signal?.trap] に指定したハンドラ内で実行した場合に発生します。
 
 ### def sleep(timeout = nil)    -> Integer
 {: since="1.9.1"}

@@ -1430,8 +1430,7 @@ p h2.keep_if { |k, v| true }      # => {0=>"a", 3=>"d", 6=>"g"}
 キーは変化しません。
 
 - **return** -- 置き換えたハッシュを返します。
-        ブロックが与えられなかった場合は、[c:Enumerator] オブジェクトを
-        返します。
+        ブロックが与えられなかった場合は、[c:Enumerator] オブジェクトを返します。
 
 ```ruby title="例"
 h = { a: 1, b: 2, c: 3 }
@@ -1452,8 +1451,7 @@ p h.transform_values.with_index {|v, i| "#{v}.#{i}" }
 キーは変化しません。
 
 - **return** -- transform_values! は常に self を返します。
-        ブロックが与えられなかった場合は、[c:Enumerator] オブジェクトを
-        返します。
+        ブロックが与えられなかった場合は、[c:Enumerator] オブジェクトを返します。
 
 ```ruby title="例"
 h = { a: 1, b: 2, c: 3 }
@@ -1498,8 +1496,7 @@ p h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
 
 - **param** `hash` -- 置き換え前のキーから置き換え後のキーへのハッシュを指定します。
 - **return** -- transform_keys! は常に self を返します。
-        ブロックが与えられなかった場合は、[c:Enumerator] オブジェクトを
-        返します。
+        ブロックが与えられなかった場合は、[c:Enumerator] オブジェクトを返します。
 
 ```ruby title="例"
 h = { a: 1, b: 2, c: 3 }

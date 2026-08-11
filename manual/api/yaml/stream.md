@@ -181,5 +181,4 @@ p ys.documents.pop
 
 オプションの一覧を設定します。
 
-- **param** `val` -- 設定を [c:Hash] オブジェクトで指定します。設定可能なオプショ
-           ンは [m:Syck::DEFAULTS] を参照してください。
+- **param** `val` -- 設定を [c:Hash] オブジェクトで指定します。設定可能なオプションは [m:Syck::DEFAULTS] を参照してください。

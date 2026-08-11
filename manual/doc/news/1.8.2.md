@@ -106,8 +106,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 ### 2004-12-14
 
 - **`CGI::Session.initialize [lib] [change]`**:
-  存在しないセッション ID がクライアントから送られてきた場合
-  例外を投げずに新しいセッションを作成するようになりました。
+  存在しないセッション ID がクライアントから送られてきた場合例外を投げずに新しいセッションを作成するようになりました。
   ((<ruby-list:40368>))
 
 ### 2004-12-09
@@ -224,8 +223,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 ### 2004-10-21
 
 - **`PStore#transaction  [lib] [compat]`**:
-  PStore.new に指定したファイルがまだ存在しない場合に、PStore#transaction(true) を呼
-  び出しても例外 Errno::ENOENT が発生しなくなりました。((<ruby-dev:24561>))
+  PStore.new に指定したファイルがまだ存在しない場合に、PStore#transaction(true) を呼び出しても例外 Errno::ENOENT が発生しなくなりました。((<ruby-dev:24561>))
 
 ### 2004-10-20
 
@@ -297,8 +295,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 - **`Net::IMAP#disconnected? [lib] [new]`**:
 
 - **CGI::Session::FileStore#update [lib] [compat]**:
-  セッションを保存するファイルの mode をデフォルトで 0600 に
-  セットするようになりました。
+  セッションを保存するファイルの mode をデフォルトで 0600 にセットするようになりました。
 
 ### 2004-07-16
 
@@ -345,8 +342,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 ### 2004-06-16
 
 - **`object.c     [ruby] [bug]`**:
-  特異クラスが特異オブジェクトのクラスを継承していると見なされて
-  いるバグを修正しました。((<ruby-dev:23690>))
+  特異クラスが特異オブジェクトのクラスを継承していると見なされているバグを修正しました。((<ruby-dev:23690>))
 
     $ ruby1.8.1 -e 'class X;end; x=X.new; class << x;p self < X; end' 
     true
@@ -380,8 +376,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
   追加。
 
 - **`Marshal.dump [ruby] [bug]`**:
-  特異メソッドを定義されていないオブジェクトを dump できない場合があったのを
-  修正しました。 ((<ruby-dev:22631>))
+  特異メソッドを定義されていないオブジェクトを dump できない場合があったのを修正しました。 ((<ruby-dev:22631>))
 
 - **`Marshal.dump [ruby] [bug]`**:
   特異クラス内のクラスを dump するとエラーになるようになりました。
@@ -402,8 +397,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 ### 2004-05-13
 
 - **`Net::Telnet#login    [lib] [compat]`**:
-  "options" でログインプロンプトとパスワードプロンプトのための正規表現を
-  指定できるようになりました。
+  "options" でログインプロンプトとパスワードプロンプトのための正規表現を指定できるようになりました。
 
 - **`String#unpack [ruby] [change]`**:
   Z* が最初の null までしかマッチしないようになりました。((<ruby-talk:98281>))
@@ -511,8 +505,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 - **`OpenSSL::Config#each [lib] [new]`**:
 
 - **`Dir.glob [ruby] [change]`**:
-  File::FNM_DOTMATCH がセットされない限り Dir.glob('test/**/') は 'test/.test/' などに
-  マッチしなくなりました。((<ruby-dev:23014>))
+  File::FNM_DOTMATCH がセットされない限り Dir.glob('test/**/') は 'test/.test/' などにマッチしなくなりました。((<ruby-dev:23014>))
 
 ### 2004-02-20
 
@@ -586,8 +579,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 ### 2003-12-27
 
 - **`ruby -i.bak [ruby] [compat]`**:
-  inplace edit mode で標準入力から読み込んだ時常に警告を
-  出力するようになりました。
+  inplace edit mode で標準入力から読み込んだ時常に警告を出力するようになりました。
 
 ### 2003-12-26
 

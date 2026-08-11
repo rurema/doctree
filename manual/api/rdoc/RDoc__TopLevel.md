@@ -34,17 +34,14 @@ RDoc が収集した [c:RDoc::TopLevel] の情報(クラス、モジュール、
 
 collection に name で指定したクラス、モジュールを追加します。
 
-- **param** `collection` -- クラス、モジュールを追加する先を [c:Hash] オブジェ
-                  クトで指定します。
+- **param** `collection` -- クラス、モジュールを追加する先を [c:Hash] オブジェクトで指定します。
 
 - **param** `class_type` -- 追加するクラス、モジュールを [c:RDoc::NormalClass]、
-                  [c:RDoc::SingleClass]、[c:RDoc::NormalModule] オ
-                  ブジェクトのいずれかで指定します。
+                  [c:RDoc::SingleClass]、[c:RDoc::NormalModule] オブジェクトのいずれかで指定します。
 
 - **param** `name` -- クラス名を文字列で指定します。
 
-- **param** `superclass` -- 追加するクラスの親クラスを [c:RDoc::NormalClass] オ
-                  ブジェクトで指定します。
+- **param** `superclass` -- 追加するクラスの親クラスを [c:RDoc::NormalClass] オブジェクトで指定します。
 
 既に登録済みであった場合は、引数で指定した情報で内容を更新します。ただし、`RDoc::CodeObject#done_documenting` が true を返す場合、何も行われません。
 

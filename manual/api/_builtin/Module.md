@@ -414,8 +414,7 @@ autoload 定数がまだ定義されてない(ロードされていない) と�
 
 - **param** `const_name` -- [c:String] または [c:Symbol] で指定します。
 
-- **param** `inherit` -- false にすると、スーパークラスや include したモジュールで
-       定義された autoload を検索対象にしません。
+- **param** `inherit` -- false にすると、スーパークラスや include したモジュールで定義された autoload を検索対象にしません。
 
 - **SEE** [m:Kernel?.autoload?]
 
@@ -444,8 +443,7 @@ p Child.autoload?(:Logger, false) # => nil
 
 クラス／モジュールに定義されているクラス変数の名前の配列を返します。
 
-- **param** `inherit` -- false を指定しない場合はスーパークラスやインクルードして
-       いるモジュールのクラス変数を含みます。
+- **param** `inherit` -- false を指定しない場合はスーパークラスやインクルードしているモジュールのクラス変数を含みます。
 
 ```ruby title="例"
 class One
@@ -469,8 +467,7 @@ p Two.class_variables(false) # => [:@@var2]
 
 - **param** `name` -- [c:String], [c:Symbol] で指定される定数名。
 
-- **param** `inherit` -- false を指定するとスーパークラスや include したモジュールで
-       定義された定数は対象にはなりません。
+- **param** `inherit` -- false を指定するとスーパークラスや include したモジュールで定義された定数は対象にはなりません。
 
 ```ruby title="例"
 module Kernel
@@ -511,8 +508,7 @@ name で指定される名前の定数の値を取り出します。
             完全修飾名を指定しなかった場合はモジュールに定義されている
             name で指定される名前の定数の値を取り出します。
 
-- **param** `inherit` -- false を指定するとスーパークラスや include したモジュールで
-       定義された定数は対象にはなりません。
+- **param** `inherit` -- false を指定するとスーパークラスや include したモジュールで定義された定数は対象にはなりません。
 
 - **raise** `NameError` -- 定数が定義されていないときに発生します。
 
@@ -648,8 +644,7 @@ inherit に真を指定するとスーパークラスやインクルードして
 
 得られる定数の順序は保証されません。
 
-- **param** `inherit` -- true を指定するとスーパークラスや include したモジュールで
-       定義された定数が対象にはなります。false を指定した場合 対象にはなりません。
+- **param** `inherit` -- true を指定するとスーパークラスや include したモジュールで定義された定数が対象にはなります。false を指定した場合 対象にはなりません。
 
 - **SEE** [m:Module.constants], [m:Kernel?.local_variables], [m:Kernel?.global_variables], [m:Object#instance_variables], [m:Module#class_variables]
 
@@ -804,8 +799,7 @@ interpreter.interpret('dave')
 true を返します。
 
 - **param** `name` -- [c:Symbol] か [c:String] を指定します。
-- **param** `inherit` -- 真を指定するとスーパークラスや include したモジュールで
-       定義されたメソッドも対象になります。
+- **param** `inherit` -- 真を指定するとスーパークラスや include したモジュールで定義されたメソッドも対象になります。
 
 - **SEE** [m:Module#public_method_defined?], [m:Module#private_method_defined?], [m:Module#protected_method_defined?]
 
@@ -992,14 +986,12 @@ p c.name.frozen? # => true
 また、既に永続的な名前を持つモジュール / クラスには設定できません。
 
 - **param** `string` -- 一時的な名前を文字列で指定します。
-             永続的な名前と紛らわしくならないよう、クラスパスとして
-             有効な文字列は指定できません。nil を指定すると無名に戻ります。
+             永続的な名前と紛らわしくならないよう、クラスパスとして有効な文字列は指定できません。nil を指定すると無名に戻ります。
 
 - **raise** `ArgumentError` -- string がクラスパスとして有効な文字列(`Foo` や
              `Foo::Bar` など)である場合や、空文字列である場合に発生します。
 
-- **raise** `RuntimeError` -- 既に永続的な名前を持つモジュール / クラスに対して
-             呼び出した場合に発生します。
+- **raise** `RuntimeError` -- 既に永続的な名前を持つモジュール / クラスに対して呼び出した場合に発生します。
 
 ```ruby title="例"
 m = Module.new
@@ -1323,8 +1315,7 @@ p SampleModule::SampleInnerClass # => SampleModule::SampleInnerClass
 そうでなければ false を返します。
 
 - **param** `name` -- [c:Symbol] か [c:String] を指定します。
-- **param** `inherit` -- 真を指定するとスーパークラスや include したモジュールで
-       定義されたメソッドも対象になります。
+- **param** `inherit` -- 真を指定するとスーパークラスや include したモジュールで定義されたメソッドも対象になります。
 
 - **SEE** [m:Module#method_defined?], [m:Module#public_method_defined?], [m:Module#protected_method_defined?]
 
@@ -1355,8 +1346,7 @@ p C.method_defined? "method2"                # => false
 そうでなければ false を返します。
 
 - **param** `name` -- [c:Symbol] か [c:String] を指定します。
-- **param** `inherit` -- 真を指定するとスーパークラスや include したモジュールで
-       定義されたメソッドも対象になります。
+- **param** `inherit` -- 真を指定するとスーパークラスや include したモジュールで定義されたメソッドも対象になります。
 
 - **SEE** [m:Module#method_defined?], [m:Module#public_method_defined?], [m:Module#private_method_defined?]
 
@@ -1387,8 +1377,7 @@ p C.method_defined? "method2"                 # => true
 そうでなければ false を返します。
 
 - **param** `name` -- [c:Symbol] か [c:String] を指定します。
-- **param** `inherit` -- 真を指定するとスーパークラスや include したモジュールで
-       定義されたメソッドも対象になります。
+- **param** `inherit` -- 真を指定するとスーパークラスや include したモジュールで定義されたメソッドも対象になります。
 
 - **SEE** [m:Module#method_defined?], [m:Module#private_method_defined?], [m:Module#protected_method_defined?]
 

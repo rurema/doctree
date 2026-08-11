@@ -31,12 +31,9 @@ library: _builtin
 
 引数は [m:Signal?.list] に含まれるもののいずれかを指定する必要があります。
 
-- **param** `sig_name` -- シグナル名を [c:Symbol] オブジェクト、文字列のいずれ
-                かで指定します。
+- **param** `sig_name` -- シグナル名を [c:Symbol] オブジェクト、文字列のいずれかで指定します。
 
-- **param** `sig_number` -- シグナル番号を指定します。整数以外のオブジェクトを指
-                  定した場合は to_int メソッドによる暗黙の型変換を試み
-                  ます。
+- **param** `sig_number` -- シグナル番号を指定します。整数以外のオブジェクトを指定した場合は to_int メソッドによる暗黙の型変換を試みます。
 
 ```ruby title="例"
 signal_number = Signal.list["INT"]

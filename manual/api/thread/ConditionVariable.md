@@ -227,9 +227,7 @@ mutex のロックを解放し、カレントスレッドを停止します。
 
 - **param** `mutex` -- [c:Thread::Mutex] オブジェクトを指定します。
 
-- **param** `timeout` -- スリープする秒数を指定します。この場合はシグナルを受け取
-               らなかった場合でも指定した秒数が経過するとスリープを終了
-               します。省略するとスリープし続けます。
+- **param** `timeout` -- スリープする秒数を指定します。この場合はシグナルを受け取らなかった場合でも指定した秒数が経過するとスリープを終了します。省略するとスリープし続けます。
 
 #%#noexample Thread::ConditionVariable#signal, Thread::ConditionVariable#broadcast を参照
 - **SEE** [m:Thread::ConditionVariable#signal], [m:Thread::ConditionVariable#broadcast]

@@ -82,8 +82,7 @@ dateが[RFC:2822]に準拠していない、または
 - **param** `date` -- [RFC:2822] で定義されるdate-time として文字列を指定します。
 
 - **raise** `ArgumentError` -- dateが[RFC:2822]に準拠していない、または 
-                     [c:Time]クラスが指定された日時を表現できないときに
-                     発生します。
+                     [c:Time]クラスが指定された日時を表現できないときに発生します。
 
 ```ruby title="使用例"
 require 'time'
@@ -138,12 +137,9 @@ date がISO 8601で定義されている形式に準拠していない、また�
 
 [c:Time] オブジェクトを ISO8601 形式の文字列にフォーマットするインスタンスメソッド [m:Time#iso8601], [m:Time#xmlschema] もあります。
 
-- **param** `date` -- XML Schema で定義されている dateTime として
-            パースされる文字列を指定します。
+- **param** `date` -- XML Schema で定義されている dateTime としてパースされる文字列を指定します。
 
-- **raise** `ArgumentError` -- date がISO 8601で定義されている形式に準拠していない、
-                     または [c:Time] クラスが指定された日時を表現できないとき
-                     に発生します。
+- **raise** `ArgumentError` -- date がISO 8601で定義されている形式に準拠していない、または [c:Time] クラスが指定された日時を表現できないときに発生します。
 使用例
 
 ```ruby

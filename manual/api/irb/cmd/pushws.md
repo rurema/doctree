@@ -31,8 +31,7 @@ irb 中の irb_push_workspace コマンドのための拡張を定義したク�
 
 UNIX シェルコマンドの pushd と同じです。
 
-- **param** `obj` -- [c:IRB::WorkSpace] オブジェクトを指定します。複数指定した
-           場合は先頭のオブジェクトのみが設定されます。
+- **param** `obj` -- [c:IRB::WorkSpace] オブジェクトを指定します。複数指定した場合は先頭のオブジェクトのみが設定されます。
 
 # class IRB::ExtendCommand::PopWorkspace < IRB::ExtendCommand::Nop
 

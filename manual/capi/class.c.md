@@ -83,8 +83,7 @@ super のサブクラスとして新しい Ruby クラスを、outer の定数�
 - **raise** `TypeError` -- 引数 name と同じ名前の定数が既に存在し、それが
                  [c:Class] オブジェクトではない場合に発生します。
 
-- **raise** `TypeError` -- 定義済みのクラスと継承元のクラスが一致しない場合に発生
-                 します。
+- **raise** `TypeError` -- 定義済みのクラスと継承元のクラスが一致しない場合に発生します。
 
 ### void rb_define_global_function(const char *name, VALUE (*func)(), int argc)
 

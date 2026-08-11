@@ -23,8 +23,7 @@ library: open-uri
 
 - **param** `options` -- ハッシュを与えます。
 
-- **raise** `OpenURI::HTTPError` -- 対象となる URI のスキームが http であり、かつリソースの取得に
-                          失敗した時に発生します。
+- **raise** `OpenURI::HTTPError` -- 対象となる URI のスキームが http であり、かつリソースの取得に失敗した時に発生します。
 
 - **raise** `Net::FTPError` -- 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
                      [c:Net::FTPError] のサブクラスが発生します。詳しくは [lib:net/ftp]

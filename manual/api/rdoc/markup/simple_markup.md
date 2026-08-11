@@ -91,8 +91,7 @@ puts "<body>#{wh.convert ARGF.read}</body>"
 
 自身を初期化します。
 
-- **param** `attribute_manager` -- `RDoc::AttributeManager` オブジェクトを指
-                         定します。
+- **param** `attribute_manager` -- `RDoc::AttributeManager` オブジェクトを指定します。
 
 ## Instance Methods
 
@@ -102,8 +101,7 @@ start と stop ではさまれる文字列(例. *bold*)をフォーマットの�
 
 - **param** `start` -- 開始となる文字列を指定します。
 
-- **param** `stop` -- 終了となる文字列を指定します。start と同じ文字列にする事も
-            可能です。
+- **param** `stop` -- 終了となる文字列を指定します。start と同じ文字列にする事も可能です。
 
 - **param** `name` -- [c:RDoc::Markup::ToHtml] などのフォーマッタに識別させる時の名前を
             [c:Symbol] で指定します。
@@ -127,8 +125,7 @@ puts m.convert(input_string, h)
 
 tag で指定したタグをフォーマットの対象にします。
 
-- **param** `tag` -- 追加するタグ名を文字列で指定します。大文字、小文字のど
-           ちらを指定しても同一のものとして扱われます。
+- **param** `tag` -- 追加するタグ名を文字列で指定します。大文字、小文字のどちらを指定しても同一のものとして扱われます。
 
 - **param** `name` -- [c:RDoc::Markup::ToHtml] などのフォーマッタに識別させる時の名前を
             [c:Symbol] で指定します。
@@ -184,8 +181,7 @@ str で指定された文字列を formatter に変換させます。
 
 - **param** `str` -- 変換する文字列を指定します。
 
-- **param** `formatter` -- [c:RDoc::Markup::ToHtml]、`RDoc::Markup::ToLaTeX` などのインスタンス
-                 を指定します。
+- **param** `formatter` -- [c:RDoc::Markup::ToHtml]、`RDoc::Markup::ToLaTeX` などのインスタンスを指定します。
 
 変換結果は formatter によって文字列や配列を返します。
 

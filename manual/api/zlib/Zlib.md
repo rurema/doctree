@@ -21,9 +21,7 @@ string の Adler-32 チェックサムを計算し、adler を更新した値を
 Adler-32 チェックサムの初期値を返します。adler が省略された場合は adler に初期値が与えらたものとして計算します。
 
 - **param** `string` -- string の Adler-32 チェックサムが計算されます。
-- **param** `io` -- IO が指定された場合は [m:IO#read] で nil を返すまで
-       読み込んで、読み込んだデータ全体の Adler-32 チェックサムが
-       計算されます。
+- **param** `io` -- IO が指定された場合は [m:IO#read] で nil を返すまで読み込んで、読み込んだデータ全体の Adler-32 チェックサムが計算されます。
 - **param** `adler` --  adler を整数で指定します。
 
 ### module_function def crc32(string = nil, crc = nil) -> Integer
@@ -33,9 +31,7 @@ string の CRC チェックサムを計算し、crc を更新した値を返し�
 CRC チェックサムの初期値を返します。crc が省略された場合は crc に初期値が与えらたものとして計算します。
 
 - **param** `string` -- string の CRC チェックサムが計算されます。
-- **param** `io` -- IO が指定された場合は [m:IO#read] で nil を返すまで
-       読み込んで、読み込んだデータ全体の CRC チェックサムが
-       計算されます。
+- **param** `io` -- IO が指定された場合は [m:IO#read] で nil を返すまで読み込んで、読み込んだデータ全体の CRC チェックサムが計算されます。
 - **param** `crc` --  crc を整数で指定します。
 
 ### module_function def crc_table -> Array

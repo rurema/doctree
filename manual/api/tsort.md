@@ -137,11 +137,9 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソ�
 
 引数 each_node と each_child でグラフを表します。
 
-- **param** `each_node` -- グラフ上の頂点をそれぞれ評価するcallメソッドを持つオブ
-                 ジェクトを指定します。
+- **param** `each_node` -- グラフ上の頂点をそれぞれ評価するcallメソッドを持つオブジェクトを指定します。
 
-- **param** `each_child` -- 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
-                  ドを持つオブジェクトを指定します。
+- **param** `each_child` -- 引数で与えられた頂点の子をそれぞれ評価するcallメソッドを持つオブジェクトを指定します。
 
 - **raise** `TSort::Cyclic` -- 閉路が存在するとき、発生します。
 
@@ -168,11 +166,9 @@ p TSort.tsort(each_node, each_child) # raises TSort::Cyclic
 
 引数 each_node と each_child でグラフを表します。
 
-- **param** `each_node` -- グラフ上の頂点をそれぞれ評価するcallメソッドを持つオブ
-                 ジェクトを指定します。
+- **param** `each_node` -- グラフ上の頂点をそれぞれ評価するcallメソッドを持つオブジェクトを指定します。
 
-- **param** `each_child` -- 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
-                  ドを持つオブジェクトを指定します。
+- **param** `each_child` -- 引数で与えられた頂点の子をそれぞれ評価するcallメソッドを持つオブジェクトを指定します。
 
 - **raise** `TSort::Cyclic` -- 閉路が存在するとき、発生します.
 
@@ -199,11 +195,9 @@ TSort.tsort_each(each_node, each_child) {|n| p n }
 
 引数 each_node と each_child でグラフを表します。
 
-- **param** `each_node` -- グラフ上の頂点をそれぞれ評価するcallメソッドを持つオブ
-                 ジェクトを指定します。
+- **param** `each_node` -- グラフ上の頂点をそれぞれ評価するcallメソッドを持つオブジェクトを指定します。
 
-- **param** `each_child` -- 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
-                  ドを持つオブジェクトを指定します。
+- **param** `each_child` -- 引数で与えられた頂点の子をそれぞれ評価するcallメソッドを持つオブジェクトを指定します。
 
 ```ruby title="使用例"
 require 'tsort'
@@ -230,11 +224,9 @@ p TSort.strongly_connected_components(each_node, each_child)
 
 引数 each_node と each_child でグラフを表します。
 
-- **param** `each_node` -- グラフ上の頂点をそれぞれ評価するcallメソッドを持つオブ
-                 ジェクトを指定します。
+- **param** `each_node` -- グラフ上の頂点をそれぞれ評価するcallメソッドを持つオブジェクトを指定します。
 
-- **param** `each_child` -- 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
-                  ドを持つオブジェクトを指定します。
+- **param** `each_child` -- 引数で与えられた頂点の子をそれぞれ評価するcallメソッドを持つオブジェクトを指定します。
 
 ```ruby title="使用例"
 require 'tsort'
@@ -274,8 +266,7 @@ TSort.each_strongly_connected_component_fromは[c:TSort]をincludeしてグラ�
 
 - **param** `node` -- ノードを指定します。
 
-- **param** `each_child` -- 引数で与えられた頂点の子をそれぞれ評価するcallメソッ
-                  ドを持つオブジェクトを指定します。
+- **param** `each_child` -- 引数で与えられた頂点の子をそれぞれ評価するcallメソッドを持つオブジェクトを指定します。
 
 ```ruby title="使用例"
 require 'tsort'

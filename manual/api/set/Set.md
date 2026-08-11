@@ -22,8 +22,7 @@ until: "3.2"
 
 - **param** `enum` -- 集合要素を格納するオブジェクトを指定します。
        enum には each メソッドが定義されている必要があります。
-- **raise** `ArgumentError` -- 引数 enum が与えられて、かつ enum に each メソッドが
-       定義されていない場合に発生します。
+- **raise** `ArgumentError` -- 引数 enum が与えられて、かつ enum に each メソッドが定義されていない場合に発生します。
 
 ```ruby
 require 'set'
@@ -146,8 +145,7 @@ p s # => #<Set: {}>
 引数 enum には each メソッドが定義されている必要があります。
 
 - **param** `enum` -- 置き換え後の集合要素を格納するオブジェクトを指定します。
-- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に
-       発生します。
+- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に発生します。
 
 ```ruby
 require 'set'
@@ -165,8 +163,7 @@ flatten は、平坦化した集合を新しく作成し、それを返します
 
 flatten! は、元の集合を破壊的に平坦化します。集合の要素に変更が発生した場合には self を、そうでない場合には nil を返します。
 
-- **raise** `ArgumentError` -- 集合の要素として self が再帰的に現れた場合に発生
-                     します。
+- **raise** `ArgumentError` -- 集合の要素として self が再帰的に現れた場合に発生します。
 
 ```ruby
 require 'set'
@@ -196,8 +193,7 @@ p set.to_a # => ["hello", "world"]
 [m:Set#to_a] してから [m:Array#join] を呼ぶのと同じです。
 要素の順序は不定なので、連結される順序も不定です。
 
-- **param** `separator` -- 間に挟む文字列を指定します。nil を指定した場合と
-                 省略した場合は、間に何も挟まずに連結します。
+- **param** `separator` -- 間に挟む文字列を指定します。nil を指定した場合と省略した場合は、間に何も挟まずに連結します。
 
 ```ruby
 require 'set'
@@ -375,8 +371,7 @@ p s2.reject! {|str| str =~ /\.o\z/}   # => nil
 引数 enum には each メソッドが定義されている必要があります。
 
 - **param** `enum` -- 追加対象の要素を格納したオブジェクトを指定します。
-- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に
-       発生します。
+- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に発生します。
 
 ```ruby
 require 'set'
@@ -392,8 +387,7 @@ p set # => #<Set: {10, 20, 30}>
 引数 enum には each メソッドが定義されている必要があります。
 
 - **param** `enum` -- 削除対象の要素を格納したオブジェクトを指定します。
-- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に
-       発生します。
+- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に発生します。
 
 ```ruby
 require 'set'
@@ -409,8 +403,7 @@ p set # => #<Set: {40}>
 和集合、すなわち、2 つの集合の少なくともどちらか一方に属するすべての要素からなる新しい集合を作ります。
 
 - **param** `enum` -- each メソッドが定義されたオブジェクトを指定します。
-- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に
-       発生します。
+- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に発生します。
 
 ```ruby
 require 'set'
@@ -424,8 +417,7 @@ p Set[10, 20, 30] + Set[10, 20, 40]
 差集合、すなわち、元の集合の要素のうち引数 enum に含まれる要素を取り除いた新しい集合を作ります。
 
 - **param** `enum` -- each メソッドが定義されたオブジェクトを指定します。
-- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に
-       発生します。
+- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に発生します。
 
 ```ruby
 require 'set'
@@ -439,8 +431,7 @@ p Set[10, 20, 30] - Set[10, 20, 40]
 共通部分、すなわち、2つの集合のいずれにも属するすべての要素からなる新しい集合を作ります。
 
 - **param** `enum` -- each メソッドが定義されたオブジェクトを指定します。
-- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に
-       発生します。
+- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に発生します。
 
 ```ruby
 require 'set'
@@ -456,8 +447,7 @@ p s1 & s2 # => #<Set: {10, 30}>
 対称差、すなわち、2 つの集合のいずれか一方にだけ属するすべての要素からなる新しい集合を作ります。
 
 - **param** `enum` -- each メソッドが定義されたオブジェクトを指定します。
-- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に
-       発生します。
+- **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に発生します。
 
 ```ruby
 require 'set'

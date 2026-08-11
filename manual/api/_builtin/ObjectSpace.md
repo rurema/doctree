@@ -167,8 +167,7 @@ puts "Total count: #{count}"
 どこからも参照されなくなったオブジェクトを回収します。
 [m:GC.start] と同じです。
 
-- **param** `full_mark` -- マイナー GC を動作させる場合は false を、そうでない場
-                 合は true を指定します。
+- **param** `full_mark` -- マイナー GC を動作させる場合は false を、そうでない場合は true を指定します。
 
 - **param** `immediate_sweep` -- sweep を遅らせる(Lazy Sweep を行う)場合は false
                        を、そうでない場合は true を指定します。

@@ -47,17 +47,12 @@ creatable classes:
 
 WIN32OLE_TYPELIBオブジェクトを生成します。
 
-- **param** `libname` -- 生成するTypeLibのレジストリ上のドキュメント文字列
-              （[m:WIN32OLE_TYPELIB#name]）または
-               GUID（[m:WIN32OLE_TYPELIB#guid]）またはTLBファイル名を
-               文字列で指定します。
+- **param** `libname` -- 生成するTypeLibのレジストリ上のドキュメント文字列（[m:WIN32OLE_TYPELIB#name]）または
+               GUID（[m:WIN32OLE_TYPELIB#guid]）またはTLBファイル名を文字列で指定します。
 - **param** `mjv` -- 作成するTypeLibのメジャーバージョン番号をIntegerで指定します。
-           または整数部にメジャーバージョン、小数点数部にマイナーバージョ
-           ンを指定したFloatで指定します。libnameに名前を指定した場合は
-           無視します。
+           または整数部にメジャーバージョン、小数点数部にマイナーバージョンを指定したFloatで指定します。libnameに名前を指定した場合は無視します。
 - **param** `miv` -- 作成するTypeLibのマイナーバージョン番号を整数で指定します。
-           mjvにFloatを与えた場合およびlibnameに名前を指定した場合は無
-           視します。
+           mjvにFloatを与えた場合およびlibnameに名前を指定した場合は無視します。
 - **return** -- libnameで指定したWIN32OLE_TYPELIBオブジェクトを返します。
 - **raise** `WIN32OLERuntimeError` -- 引数で指定したTypeLibが見つかりません。
 
@@ -82,8 +77,7 @@ TypeLibは、レジストリのHKEY_CLASS_ROOT\TypeLibキーの下にGUIDをキ�
 
 システムに登録されているすべてのTypeLibを取得します。
 
-- **return** -- 登録されているすべてのTypeLibを元にWIN32OLE_TYPELIBオブジェクト
-        の配列を返します。
+- **return** -- 登録されているすべてのTypeLibを元にWIN32OLE_TYPELIBオブジェクトの配列を返します。
 
 ```ruby
 tlibs = WIN32OLE_TYPELIB.typelibs
@@ -160,8 +154,7 @@ TypeLibに格納されているすべての型を取得します。
 
 TypeLibに格納されている型には、クラス（CoClass——コンポーネントクラス）やEnum（列挙子）、構造体などがあります。
 
-- **return** -- TypeLibに格納されているすべての型を[c:WIN32OLE_TYPE]オブジェ
-        クトの配列として返します。
+- **return** -- TypeLibに格納されているすべての型を[c:WIN32OLE_TYPE]オブジェクトの配列として返します。
 
 ```ruby
 tlib = WIN32OLE_TYPELIB.new('Microsoft Excel 14.0 Object Library')
@@ -172,10 +165,7 @@ classes = tlib.ole_types.map{|k| k.name} # => ["Adjustments", "CalloutFormat", .
 
 TypeLibのパス名を取得します。
 
-- **return** -- TypeLibのパス名を文字列で返します。この値はレジストリの登録値を
-        そのまま利用するため、Rubyのパス名形式（ディレクトリ区切りは
-        「/」）ではなく、Windowsのパス名形式（ディレクトリ区切りは「\」）
-        です。
+- **return** -- TypeLibのパス名を文字列で返します。この値はレジストリの登録値をそのまま利用するため、Rubyのパス名形式（ディレクトリ区切りは「/」）ではなく、Windowsのパス名形式（ディレクトリ区切りは「\」）です。
 - **raise** `WIN32OLERuntimeError` -- TypeLibの属性が読み取れない場合に通知します。
 
 ```ruby
@@ -190,8 +180,7 @@ DLLやEXE内にリソースとして組み込まれている場合とがあり�
 
 TypeLibのバージョン番号を取得します。
 
-- **return** -- TypeLibのバージョン番号を整数部にメジャーバージョン番号、小数点
-        数部にマイナーバージョン番号を設定したFloatで返します。
+- **return** -- TypeLibのバージョン番号を整数部にメジャーバージョン番号、小数点数部にマイナーバージョン番号を設定したFloatで返します。
 - **raise** `WIN32OLERuntimeError` -- TypeLibの属性が読み取れない場合に通知します。
 
 ```ruby

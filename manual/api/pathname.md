@@ -172,8 +172,7 @@ File.open(path)
 
 cleanpath は、実際にファイルシステムを参照することなく、文字列操作だけで処理を行います。
 
-- **param** `consider_symlink` -- 真ならパス要素にシンボリックリンクがあった場合
-                        にも問題ないように .. を残します。
+- **param** `consider_symlink` -- 真ならパス要素にシンボリックリンクがあった場合にも問題ないように .. を残します。
 
 ```ruby title="例"
 require "pathname"

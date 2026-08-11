@@ -104,8 +104,7 @@ end
 
 - **param** `output` -- 出力先を指定します。output は << メソッドを持っていなければなりません。
 
-- **param** `maxwidth` -- 行の最大幅を指定します。ただし、改行できないものが渡された場合は、
-                実際の出力幅は maxwidth を越えることがあります。
+- **param** `maxwidth` -- 行の最大幅を指定します。ただし、改行できないものが渡された場合は、実際の出力幅は maxwidth を越えることがあります。
 
 - **param** `newline` -- 改行に使われます。
 
@@ -165,11 +164,9 @@ obj を width カラムのテキストとして自身に追加します。
 
 - **param** `indent` -- グループのインデントの深さを指定します。
 
-- **param** `open_obj` -- 指定された場合、self.text(open_obj, open_width) がブロックが
-                実行される前に呼ばれます。開き括弧などを出力するのに使用されます。
+- **param** `open_obj` -- 指定された場合、self.text(open_obj, open_width) がブロックが実行される前に呼ばれます。開き括弧などを出力するのに使用されます。
 
-- **param** `close_obj` -- 指定された場合、self.text(close_obj, close_width) がブロックが
-                 実行された後に呼ばれます。閉じ括弧などを出力するのに使用されます。
+- **param** `close_obj` -- 指定された場合、self.text(close_obj, close_width) がブロックが実行された後に呼ばれます。閉じ括弧などを出力するのに使用されます。
 
 - **param** `open_width` -- open_obj のカラムを指定します。
 

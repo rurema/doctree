@@ -108,8 +108,7 @@ pid と flags の意味は [m:Process?.wait] と同じです。
 - **param** `flags` -- [m:Process::WNOHANG] などを指定します。
              指定できる値は [m:Process?.wait] と同じです。
 
-- **return** -- flags に [m:Process::WNOHANG] を指定していて、
-             子プロセスがまだ終了していない場合は nil を返します。
+- **return** -- flags に [m:Process::WNOHANG] を指定していて、子プロセスがまだ終了していない場合は nil を返します。
 
 ```ruby
 pid = fork { exit 1 }

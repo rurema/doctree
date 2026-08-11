@@ -11,16 +11,13 @@ library: bigdecimal
 引数で指定した値を表す BigDecimal オブジェクトを生成します。
 
 - **param** `s` -- 数値を表現する初期値を文字列、[c:Integer]、
-         [c:Float]、[c:Rational]、[c:BigDecimal] オブジェクトのい
-         ずれかで指定します。
-         文字列中のスペースは無視されます。また、判断できない文字が出現
-         した時点で文字列は終了したものとみなされます。
+         [c:Float]、[c:Rational]、[c:BigDecimal] オブジェクトのいずれかで指定します。
+         文字列中のスペースは無視されます。また、判断できない文字が出現した時点で文字列は終了したものとみなされます。
 
 - **param** `n` -- 必要な有効桁数(self の最大有効桁数)を整数で指定します。 n が
          0 または省略されたときは、n の値は s の有効桁数とみなされます。
          s の有効桁数より n が小さいときもn = 0 のときと同じです。
-         self の最大有効桁数は n より若干大きい値が採用されます。最大有
-         効桁数は以下のような割り算を実行するとき等に意味を持ちます。
+         self の最大有効桁数は n より若干大きい値が採用されます。最大有効桁数は以下のような割り算を実行するとき等に意味を持ちます。
   ```ruby
   require "bigdecimal"
   p BigDecimal("1")    / BigDecimal("3")  # => 0.333333333333333333e0
@@ -29,13 +26,11 @@ library: bigdecimal
          ただし、個々の演算における最大有効桁数 n の取り扱いは将来のバー
          ジョンで若干変更される可能性があります。
 
-- **param** `exception` -- false を指定すると、変換できなかった場合、
-                 例外を発生する代わりに nil を返します。
+- **param** `exception` -- false を指定すると、変換できなかった場合、例外を発生する代わりに nil を返します。
 
 - **raise** `ArgumentError` -- s に [c:Float] オブジェクトを指定し、n に
                      [m:Float::DIG] + 2 以上の値を指定した場合に発生します。
-                     s に [c:Float]、[c:Rational] オブジェクトを指
-                     定し、n を省略した場合に発生します。
+                     s に [c:Float]、[c:Rational] オブジェクトを指定し、n を省略した場合に発生します。
 
 - **raise** `ArgumentError` -- n に負の数を指定した場合に発生します。
 
@@ -196,11 +191,9 @@ NaN を表す [c:BigDecimal] オブジェクトを返します。
          [m:BigDecimal::ROUND_MODE] のいずれかで指定します。
 
 - **param** `v` -- 引数 s が [m:BigDecimal::ROUND_MODE] の場合は
-         [m:BigDecimal::ROUND_MODE] 以外の BigDecimal::_ROUND* のいず
-         れかを指定します。指定した丸め処理が有効になります。
+         [m:BigDecimal::ROUND_MODE] 以外の BigDecimal::_ROUND* のいずれかを指定します。指定した丸め処理が有効になります。
          それ以外の場合は、true、false、nil のいずれかを指定します。
-         true を指定した場合は設定値が有効になり、false を指定した場合
-         は設定値が無効になります。
+         true を指定した場合は設定値が有効になり、false を指定した場合は設定値が無効になります。
 
 - **raise** `TypeError` -- 引数 s に有効でない値を指定した場合に発生します。
 
@@ -487,8 +480,7 @@ p BigDecimal("15.23456").ceil(-1).to_f # => 20.0
 
 - **param** `n` -- 小数点以下の桁数を整数で指定します。
 
-- **param** `b` -- 丸め処理の方式として、[m:BigDecimal.mode] の第 1 引数と同じ
-         値を指定します。
+- **param** `b` -- 丸め処理の方式として、[m:BigDecimal.mode] の第 1 引数と同じ値を指定します。
 
 [m:BigDecimal.mode]([m:BigDecimal::ROUND_MODE],flag) で何も指定せず、かつ、引数を指定しない場合は「小数点以下第一位の数を四捨五入して整数(BigDecimal 値)」にします。
 

@@ -37,15 +37,10 @@ irb コマンドで実行結果の出力方式(inspect_mode)を定義するた�
 
 新しい実行結果の出力方式を定義します。
 
-- **param** `key` -- conf.inspect_mode や IRB.conf[:INSPECT_MODE] に指定するキー
-           オブジェクトを指定します。配列を指定した場合は配列中の要素全
-           てが対象になります。
+- **param** `key` -- conf.inspect_mode や IRB.conf[:INSPECT_MODE] に指定するキーオブジェクトを指定します。配列を指定した場合は配列中の要素全てが対象になります。
 
-- **param** `arg` -- ブロックを指定する場合には、inspect_mode の初期化のための手続
-           きオブジェクトを指定します。あらかじめ require が必要な場合
-           などに、proc { require "foo" } といった指定を行います。
-           ブロックを指定しない場合には、実行結果の出力のための手続きオ
-           ブジェクトを指定します。
+- **param** `arg` -- ブロックを指定する場合には、inspect_mode の初期化のための手続きオブジェクトを指定します。あらかじめ require が必要な場合などに、proc { require "foo" } といった指定を行います。
+           ブロックを指定しない場合には、実行結果の出力のための手続きオブジェクトを指定します。
 
 ```console title="例"
 # .irbrc

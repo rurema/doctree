@@ -63,8 +63,7 @@ DER 形式の文字列に変換してからオブジェクトを生成します�
 
 新たな attribute を CSR に追加します。
 
-- **param** `attr` -- 追加する attribute([c:OpenSSL::X509::Attribute] の
-       インスタンス)
+- **param** `attr` -- 追加する attribute([c:OpenSSL::X509::Attribute] のインスタンス)
 - **return** -- 渡した attribute オブジェクトを返します
 - **SEE** [m:OpenSSL::X509::Request#attributes], 
      [m:OpenSSL::X509::Request#attributes=]
@@ -84,8 +83,7 @@ CSR に含めるときは "reqExt" という oid の attribute を追加しま�
 
 CSR の attribute をクリアして新しい attribute を設定します。
 
-- **param** `attrs` -- 新たに設定する attribute([c:OpenSSL::X509::Attribute] の
-       インスタンス)の配列
+- **param** `attrs` -- 新たに設定する attribute([c:OpenSSL::X509::Attribute] のインスタンス)の配列
 - **SEE** [m:OpenSSL::X509::Request#attributes]
      [m:OpenSSL::X509::Request#add_attribute]
 

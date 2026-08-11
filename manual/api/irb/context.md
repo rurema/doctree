@@ -104,16 +104,12 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する�
 
 - **param** `irb` -- [c:IRB::Irb] オブジェクトを指定します。
 
-- **param** `workspace` -- [c:IRB::WorkSpace] オブジェクトを指定します。省略し
-                 た場合は新しく作成されます。
+- **param** `workspace` -- [c:IRB::WorkSpace] オブジェクトを指定します。省略した場合は新しく作成されます。
 
-- **param** `input_method` -- [c:String]、[c:IRB::InputMethod] のサブクラスの
-                    オブジェクト、nil のいずれかを指定します。
+- **param** `input_method` -- [c:String]、[c:IRB::InputMethod] のサブクラスのオブジェクト、nil のいずれかを指定します。
 
-- **param** `output_method` -- [c:IRB::OutputMethod] のサブクラスのオブジェクト
-                     を指定します。省略した場合は
-                     [c:IRB::StdioOutputMethod] オブジェクトが新しく
-                     作成されます。
+- **param** `output_method` -- [c:IRB::OutputMethod] のサブクラスのオブジェクトを指定します。省略した場合は
+                     [c:IRB::StdioOutputMethod] オブジェクトが新しく作成されます。
 
 ## Instance Methods
 
@@ -158,8 +154,7 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する�
 
 入力が次の行に継続した時に自動で字下げを行うかどうかを val に設定します。
 
-- **param** `val` -- true を指定した場合、自動で字下げを行います。false を指定し
-           た場合は自動で字下げを行いません。
+- **param** `val` -- true を指定した場合、自動で字下げを行います。false を指定した場合は自動で字下げを行いません。
 
 [m:IRB::Context#prompt_mode] の変更に影響を受ける事に注意してください。
 
@@ -180,8 +175,7 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する�
 
 .irbrc ファイル中で IRB.conf[:BACK_TRACE_LIMIT] を設定する事でも同様の操作が行えます。
 
-- **param** `val` -- バックトレース表示の先頭、末尾の上限を [c:Integer] で指定
-           します。
+- **param** `val` -- バックトレース表示の先頭、末尾の上限を [c:Integer] で指定します。
 
 - **SEE** [m:IRB::Context#back_trace_limit]
 
@@ -224,8 +218,7 @@ irb のプロンプトでの評価結果を表示するかどうかを設定し�
 
 .irbrc ファイル中で IRB.conf[:ECHO] を設定する事でも同様の操作が行えます。
 
-- **param** `val` -- true を指定した場合、irb のプロンプトでの評価結果を表示しま
-           す。false を指定した場合は表示しません。
+- **param** `val` -- true を指定した場合、irb のプロンプトでの評価結果を表示します。false を指定した場合は表示しません。
 
 - **SEE** [m:IRB::Context#echo]
 
@@ -262,8 +255,7 @@ Ctrl-D(EOF) が入力された時に irb を終了するかどうかを val に�
 
 .irbrc ファイル中で IRB.conf[:IGNORE_EOF] を設定する事でも同様の操作が行えます。
 
-- **param** `val` -- true を指定した場合、 Ctrl-D を無視します。false を指定した
-           場合は Ctrl-D の入力時に irb を終了します。
+- **param** `val` -- true を指定した場合、 Ctrl-D を無視します。false を指定した場合は Ctrl-D の入力時に irb を終了します。
 
 - **SEE** [m:IRB::Context#ignore_eof]
 
@@ -308,8 +300,7 @@ Ctrl-C が入力された時に irb を終了するかどうかを val に設定
 
 [m:IRB::Context#inspect_mode] が有効かどうかを返します。
 
-- **return** -- 出力結果に to_s したものを表示する場合は false を返します。それ
-        以外の場合は true を返します。
+- **return** -- 出力結果に to_s したものを表示する場合は false を返します。それ以外の場合は true を返します。
 
 - **SEE** [m:IRB::Context#inspect_mode], [m:IRB::Context#inspect_mode=]
 
@@ -446,8 +437,7 @@ self に設定されたオブジェクトを返します。
 
 プロンプトモードを mode に設定します。
 
-- **param** `mode` -- プロンプトモードを [c:Symbol] で指定します。オリジナルの
-            プロンプトモードか、:DEFAULT、:CLASSIC、:SIMPLE、:INF_RUBY、
+- **param** `mode` -- プロンプトモードを [c:Symbol] で指定します。オリジナルのプロンプトモードか、:DEFAULT、:CLASSIC、:SIMPLE、:INF_RUBY、
             :XMP、:NULL のいずれを指定してください。
 
 - **SEE** [m:IRB::Context#prompt_mode], [ref:lib:irb#customize_prompt]
@@ -494,9 +484,7 @@ self に設定されたオブジェクトを返します。
 
 ~/.irbrc などの設定ファイルがあれば読み込みを行うかどうかを返します。
 
-- **return** -- 設定ファイルの読み込みを行う場合は true を返します。行わない場
-        合(irb の起動時に -f オプションを指定した場合)は false を返しま
-        す。
+- **return** -- 設定ファイルの読み込みを行う場合は true を返します。行わない場合(irb の起動時に -f オプションを指定した場合)は false を返します。
 
 #%# 上記は .irbrc が存在しない場合も true を返す事から、「.irbrc を読み
 #%# 込んでいたら true を返す」という記述を止めました。
@@ -553,8 +541,7 @@ irb のプロンプトでの評価結果を表示する際のフォーマット�
 
 [m:IRB::Context#verbose?] とは別のメソッドである事に注意してください。
 
-- **return** -- 詳細なメッセージを出力するように設定されている場合は true を返
-        します。そうでない場合は false か nil を返します。
+- **return** -- 詳細なメッセージを出力するように設定されている場合は true を返します。そうでない場合は false か nil を返します。
 
 - **SEE** [m:IRB::Context#verbose?], [m:IRB::Context#verbose=]
 
@@ -562,8 +549,7 @@ irb のプロンプトでの評価結果を表示する際のフォーマット�
 
 標準出力に詳細なメッセージを出力するかどうかを返します。
 
-- **return** -- 詳細なメッセージを出力する場合は true を返します。そうでない場
-        合は false か nil を返します。
+- **return** -- 詳細なメッセージを出力する場合は true を返します。そうでない場合は false か nil を返します。
 
 設定を行っていた場合([m:IRB::Context#verbose] が true か false を返す場合)は設定した通りに動作します。設定を行っていない場合は、ファイルを指定して irb を実行した場合などに true を返します。
 

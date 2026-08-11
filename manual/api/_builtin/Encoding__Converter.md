@@ -78,16 +78,13 @@ p Encoding::Converter.asciicompat_encoding("UTF-8") # => nil
 
 引数で指定した文字エンコーディングの変換の経路を配列にして返します。
 
-- **param** `source_encoding` -- 変換元の文字エンコーディングを [c:Encoding] オ
-                       ブジェクトか文字列で指定します。
+- **param** `source_encoding` -- 変換元の文字エンコーディングを [c:Encoding] オブジェクトか文字列で指定します。
 
 - **param** `destination_encoding` -- 変換先の文字エンコーディングを
-                            [c:Encoding] オブジェクトか文字列で指定し
-                            ます。
+                            [c:Encoding] オブジェクトか文字列で指定します。
 
 - **param** `options` -- 変換の詳細を指定する定数やハッシュを指定します。
-               [m:Encoding::Converter.new] と同じオプションが指定でき
-               ます。
+               [m:Encoding::Converter.new] と同じオプションが指定できます。
 
 ```ruby
 p Encoding::Converter.search_convpath("ISO-8859-1", "EUC-JP")
@@ -233,8 +230,7 @@ p ec.last_error      # => nil
 変換元の文字列の末尾がバイト列の途中で終わっていた場合、保持しているバイト列全てを返します。
 
 - **return** -- 変換結果の末尾
-- **raise** `Encoding::InvalidByteSequenceError` -- 変換元のエンコーディングにお
-       いて不正なバイト列があった場合に発生します。
+- **raise** `Encoding::InvalidByteSequenceError` -- 変換元のエンコーディングにおいて不正なバイト列があった場合に発生します。
 
 ```ruby
 ec = Encoding::Converter.new("utf-8", "iso-2022-jp")

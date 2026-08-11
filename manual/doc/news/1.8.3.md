@@ -318,8 +318,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
   
   クラスメソッドから((<変数と定数/クラス変数>))にアクセスするための
   ((<Module#class_variable_get|Module/class_variable_get>)) と
-  ((<Module#class_variable_set|Module/class_variable_set>)) が
-  追加されました。((<ruby-talk:144741>))
+  ((<Module#class_variable_set|Module/class_variable_set>)) が追加されました。((<ruby-talk:144741>))
 
     class Fred
       @@foo = 99
@@ -358,8 +357,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
 ### 2005-05-24
 
 - **`getopts [lib] [obsolete]`**:
-  getopts が deprecated になりました。deprecated であるという警告は、
-  オプションに -w を付けた時に出ます。((<ruby-dev:26201>))
+  getopts が deprecated になりました。deprecated であるという警告は、オプションに -w を付けた時に出ます。((<ruby-dev:26201>))
 
 ### 2005-05-22
 
@@ -370,8 +368,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
 
 - **`REXML::Encoding#decode_sjis [lib] [bug]`**:
 - **`REXML::Encoding#encode_sjis [lib] [bug]`**:
-  decode_sjis と encode_sjis が
-  逆に定義されていたバグを修正しました。((<ruby-core:4772>))
+  decode_sjis と encode_sjis が逆に定義されていたバグを修正しました。((<ruby-core:4772>))
 
 ### 2005-05-16
 
@@ -392,8 +389,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
 - **`NameError`**:
 - **`SystemCallError`**:
 - **`SystemExit`**:
-  各例外クラスのインスタンスが生成される時に、親クラスのコンストラクタ
-  である Exception#initialize が呼ばれるようになりました。((<ruby-talk:142593>)) ((<ruby-dev:26177>))
+  各例外クラスのインスタンスが生成される時に、親クラスのコンストラクタである Exception#initialize が呼ばれるようになりました。((<ruby-talk:142593>)) ((<ruby-dev:26177>))
 
 ### 2005-05-11
 
@@ -428,9 +424,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
 ### 2005-05-01
 
 - **`ruby -s option [ruby] [bug]`**:
-  オプション -s でアクセスできないグローバル変数ができてしまうバグを修正
-  しました。- を _ に変換してグローバル変数を定義するようになりました。- 以外の
-  記号がふくまれる場合は、例外 NameError を投げます。
+  オプション -s でアクセスできないグローバル変数ができてしまうバグを修正しました。- を _ に変換してグローバル変数を定義するようになりました。- 以外の記号がふくまれる場合は、例外 NameError を投げます。
   
     $ ruby-1.8.2 -se 'puts global_variables.grep(/foo/)' -- --foo-bar
     $-foo-bar
@@ -448,8 +442,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
 ### 2005-04-10
 
 - **`WIN32OLE#invoke [lib] [bug]`**:
-  nil を VT_ERROR に変換して Invokeを呼び出して失敗するときには VT_EMPTYに変換して
-  再度 Invokeを呼び出すようにしました。
+  nil を VT_ERROR に変換して Invokeを呼び出して失敗するときには VT_EMPTYに変換して再度 Invokeを呼び出すようにしました。
     
 ### 2005-04-09
 
@@ -483,8 +476,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
 ### 2005-02-23
 
 - **`local variable and method [ruby][bug]`**:
-  レシーバを指定したメソッド呼び出しが、同名のローカル変数の有無によっ
-  て影響されるバグが修正されました。
+  レシーバを指定したメソッド呼び出しが、同名のローカル変数の有無によって影響されるバグが修正されました。
   ((<ruby-dev:25737>))
   ((<URL:http://yowaken.dip.jp/tdiary/20050220.html#p01>))
 
@@ -566,8 +558,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
 ### 2005-01-26
 
 - **`File#flock [ruby] [bug]`**:
-  Windows 上での File#flock(File::LOCK_UN) が正しく理解されないバグが
-  修正されました。((<ruby-dev:25574>)) 
+  Windows 上での File#flock(File::LOCK_UN) が正しく理解されないバグが修正されました。((<ruby-dev:25574>))
 
 ### 2005-01-25
 

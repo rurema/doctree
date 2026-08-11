@@ -12,8 +12,7 @@ library: _builtin
 
 例外オブジェクトを生成して返します。
 
-- **param** `error_message` -- エラーメッセージを表す文字列を指定します。このメッセージは
-                     属性 [m:Exception#message] の値になり、デフォルトの例外ハンドラで表示されます。
+- **param** `error_message` -- エラーメッセージを表す文字列を指定します。このメッセージは属性 [m:Exception#message] の値になり、デフォルトの例外ハンドラで表示されます。
 
 ```ruby title="例"
 e = Exception.new("some message")
@@ -295,12 +294,10 @@ highlight に true を指定すると、エスケープシーケンスによる�
 [m:Exception#full_message] と違い、highlight の既定値は常に false です。
 [m:Exception.to_tty?] の値によって変わることはありません。
 
-- **param** `highlight` -- エスケープシーケンスによる文字装飾をつけるかどうかを
-                 指定します。
+- **param** `highlight` -- エスケープシーケンスによる文字装飾をつけるかどうかを指定します。
 
 - **param** `opt` -- 上書きしたメソッドが解釈するためのキーワード引数です。
-             このメソッド自身は解釈せず、知らないキーワードを渡しても
-             エラーになりません。
+             このメソッド自身は解釈せず、知らないキーワードを渡してもエラーになりません。
 
 ```ruby
 begin

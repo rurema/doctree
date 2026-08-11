@@ -31,23 +31,18 @@ irb のコマンドを拡張するためのモジュールです。
 irb に cmd_name で指定したメソッドが実行できるように拡張します。
 
 - **param** `cmd_name` -- メソッド名を [c:Symbol] か文字列で指定します。
-                cmd_class で指定するクラスの execute メソッドとして定
-                義してある必要があります。
+                cmd_class で指定するクラスの execute メソッドとして定義してある必要があります。
 
 - **param** `cmd_class` -- 指定した拡張が定義されたクラス名を [c:Symbol]、
                  [c:String]、[c:Class] のいずれかで指定します。
-                 なお、このクラスは `IRB::ExtendCommand` 以下で定義
-                 する必要があります。
+                 なお、このクラスは `IRB::ExtendCommand` 以下で定義する必要があります。
 
-- **param** `load_file` -- 指定したメソッドが定義されたファイル名を指
-                 定します。このファイルは自動的に require されます。
+- **param** `load_file` -- 指定したメソッドが定義されたファイル名を指定します。このファイルは自動的に require されます。
 
-- **param** `aliases` -- cmd_name の別名を [c:Symbol] とフラグの配列で指定しま
-               す。複数指定する事ができます。フラグは
+- **param** `aliases` -- cmd_name の別名を [c:Symbol] とフラグの配列で指定します。複数指定する事ができます。フラグは
                [m:IRB::ExtendCommandBundle::NO_OVERRIDE]、
                [m:IRB::ExtendCommandBundle::OVERRIDE_PRIVATE_ONLY]、
-               [m:IRB::ExtendCommandBundle::OVERRIDE_ALL] のいずれか
-               を指定します。
+               [m:IRB::ExtendCommandBundle::OVERRIDE_ALL] のいずれかを指定します。
 
 ### def IRB::ExtendCommandBundle.extend_object(obj) -> IRB::ExtendCommandBundle
 
@@ -98,12 +93,10 @@ method_name で指定したメソッドの irb 中でのエイリアスを返し
 
 - **param** `from` -- 元のメソッド名を [c:Symbol] か文字列で指定します。
 
-- **param** `override` -- 新しいメソッド名が定義済みであった場合にそのメソッドを
-                上書きするかどうかを
+- **param** `override` -- 新しいメソッド名が定義済みであった場合にそのメソッドを上書きするかどうかを
                 [m:IRB::ExtendCommandBundle::NO_OVERRIDE]、
                 [m:IRB::ExtendCommandBundle::OVERRIDE_PRIVATE_ONLY]、
-                [m:IRB::ExtendCommandBundle::OVERRIDE_ALL] のいずれか
-                で指定します。
+                [m:IRB::ExtendCommandBundle::OVERRIDE_ALL] のいずれかで指定します。
 
 ### def irb_exit(ret = 0) -> object
 
@@ -167,11 +160,9 @@ irb でコマンドのエイリアスを定義する際に、既にこれから�
 [c:IRB::Context] に cmd_name で指定したメソッドが実行できるように拡張します。
 
 - **param** `cmd_name` -- メソッド名を [c:Symbol] で指定します。
-                [c:IRB::Context] クラスのインスタンスメソッドとして定
-                義してある必要があります。
+                [c:IRB::Context] クラスのインスタンスメソッドとして定義してある必要があります。
 
-- **param** `load_file` -- cmd_name で指定したメソッドが定義されたファイル名を指
-                 定します。このファイルは自動的に require されます。
+- **param** `load_file` -- cmd_name で指定したメソッドが定義されたファイル名を指定します。このファイルは自動的に require されます。
 
 - **param** `aliases` -- cmd_name の別名を [c:Symbol] で指定します。複数指定する事ができます。
 

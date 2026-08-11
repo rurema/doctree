@@ -24,8 +24,7 @@ library: fileutils
 - **`:nocreate`**:
   真を指定するとファイルを作成しません。
 - **`:dereference_root`**:
-  真を指定すると src についてだけシンボリックリンクの指す
-  内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
+  真を指定すると src についてだけシンボリックリンクの指す内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 - **`:remove_destination`**:
   真を指定するとコピーを実行する前にコピー先を削除します。
 - **`:secure`**:
@@ -226,11 +225,9 @@ src がディレクトリの場合はその中身を再帰的にコピーしま�
 
 - **param** `dest` -- コピー先。
 
-- **param** `preserve` -- preserve が真のときは更新時刻と、
-                可能なら所有ユーザ・所有グループもコピーします。
+- **param** `preserve` -- preserve が真のときは更新時刻と、可能なら所有ユーザ・所有グループもコピーします。
 
-- **param** `dereference_root` -- dereference_root が真のときは src についてだけシンボリックリンクの指す
-                        内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
+- **param** `dereference_root` -- dereference_root が真のときは src についてだけシンボリックリンクの指す内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 
 ### module_function def copy_file(src, dest, preserve = false, dereference_root = true) -> ()
 
@@ -240,11 +237,9 @@ src がディレクトリの場合はその中身を再帰的にコピーしま�
 
 - **param** `dest` -- コピー先。
 
-- **param** `preserve` -- preserve が真のときは更新時刻と、
-                可能なら所有ユーザ・所有グループもコピーします。
+- **param** `preserve` -- preserve が真のときは更新時刻と、可能なら所有ユーザ・所有グループもコピーします。
 
-- **param** `dereference_root` -- dereference_root が真のときは src についてだけシンボリックリンクの指す
-                        内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
+- **param** `dereference_root` -- dereference_root が真のときは src についてだけシンボリックリンクの指す内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 
 ### module_function def copy_stream(src, dest) -> ()
 
@@ -303,8 +298,7 @@ src を dest にコピーします。src がディレクトリであったら再
 
 - **param** `verbose` -- 真を指定すると詳細を出力します。
 
-- **param** `dereference_root` -- 真を指定すると src についてだけシンボリックリンクの指す
-                        内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
+- **param** `dereference_root` -- 真を指定すると src についてだけシンボリックリンクの指す内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 
 - **param** `remove_destination` -- 真を指定するとコピーを実行する前にコピー先を削除します。
 
@@ -330,8 +324,7 @@ src と dest の内容が違うときだけ src を dest にコピーします�
 - **param** `dest` -- コピー先のファイルかディレクトリです。
 
 - **param** `mode` -- パーミッションを8進数(absolute mode)か文字列(symbolic
-            mode)で指定します。symbolic mode の詳細は [m:FileUtils?.chmod] を
-            参照してください。
+            mode)で指定します。symbolic mode の詳細は [m:FileUtils?.chmod] を参照してください。
 
 - **param** `owner` -- ユーザー名か uid を指定すると所有ユーザを変更します。
 
@@ -400,8 +393,7 @@ dest がディレクトリの場合、src へのハードリンク dest/src を�
 
 - **param** `verbose` -- 真を指定すると詳細を出力します。
 
-- **param** `dereference_root` -- 真を指定すると src についてだけシンボリックリンクの指す
-                        内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
+- **param** `dereference_root` -- 真を指定すると src についてだけシンボリックリンクの指す内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 
 - **param** `remove_destination` -- 真を指定するとコピーを実行する前にコピー先を削除します。
 

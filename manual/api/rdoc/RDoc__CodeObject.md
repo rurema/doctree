@@ -119,8 +119,7 @@ RDoc のコードツリーを表現するクラスの基本クラスです。
 
 自身を所有する(変数や定数などの形で保持する)オブジェクトを設定します。
 
-- **param** `val` -- [c:RDoc::CodeObject] のサブクラスのオブジェクトを指定しま
-           す。
+- **param** `val` -- [c:RDoc::CodeObject] のサブクラスのオブジェクトを指定します。
 
 ### def section -> RDoc::Context::Section
 

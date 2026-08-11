@@ -215,11 +215,8 @@ str を出力します。
 - **param** `maxlen` -- 読み込む長さの上限(整数)
 - **param** `buf` -- 読み込みバッファ
 - **raise** `EOFError` -- 読み込みが既に終端に到達している場合に発生します
-- **raise** `OpenSSL::SSL::SSLError` -- ソケットが読み込み/書き込み可能状態になるのを
-       待つ必要がある場合に発生します。
-       読み込み可能状態を待つ必要がある場合には [c:IO::WaitReadable] を、
-       書き込み可能状態を待つ必要がある場合には [c:IO::WaitWritable] を、
-       それぞれ extend した例外オブジェクトが生成されます。
+- **raise** `OpenSSL::SSL::SSLError` -- ソケットが読み込み/書き込み可能状態になるのを待つ必要がある場合に発生します。
+       読み込み可能状態を待つ必要がある場合には [c:IO::WaitReadable] を、書き込み可能状態を待つ必要がある場合には [c:IO::WaitWritable] を、それぞれ extend した例外オブジェクトが生成されます。
 
 ### def write_nonblock(s) -> Integer
 
@@ -242,11 +239,8 @@ str を出力します。
 通信データをある程度の大きさのブロック単位で暗号化/復号化するためです。
 
 - **param** `s` -- 出力する文字列
-- **raise** `OpenSSL::SSL::SSLError` -- ソケットが読み込み/書き込み可能状態になるのを
-       待つ必要がある場合に発生します。
-       読み込み可能状態を待つ必要がある場合には [c:IO::WaitReadable] を、
-       書き込み可能状態を待つ必要がある場合には [c:IO::WaitWritable] を、
-       それぞれ extend した例外オブジェクトが生成されます。
+- **raise** `OpenSSL::SSL::SSLError` -- ソケットが読み込み/書き込み可能状態になるのを待つ必要がある場合に発生します。
+       読み込み可能状態を待つ必要がある場合には [c:IO::WaitReadable] を、書き込み可能状態を待つ必要がある場合には [c:IO::WaitWritable] を、それぞれ extend した例外オブジェクトが生成されます。
 
 ### def readpartial(maxlen, buf=nil) -> String | nil
 

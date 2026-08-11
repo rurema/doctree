@@ -37,8 +37,7 @@ tar ファイルを書き込むためのクラスです。
 #%# -> discard
 自身に関連付けられた IO が既に close されているかどうかチェックします。
 
-- **raise** `IOError` -- 自身に関連付けられた IO が既に close されている場合に発
-               生します。
+- **raise** `IOError` -- 自身に関連付けられた IO が既に close されている場合に発生します。
 
 ### def close -> true
 
@@ -104,8 +103,7 @@ tar ファイルを書き込むためのクラスです。
 
 - **return** -- 書き込んだデータのサイズを返します。
 
-- **raise** `Gem::Package::TarWriter::FileOverflow` -- [m:Gem::Package::TarWriter::BoundedStream#limit] を越えて
-       書き込もうとした場合に発生します。
+- **raise** `Gem::Package::TarWriter::FileOverflow` -- [m:Gem::Package::TarWriter::BoundedStream#limit] を越えて書き込もうとした場合に発生します。
 
 # class Gem::Package::TarWriter::RestrictedStream
 

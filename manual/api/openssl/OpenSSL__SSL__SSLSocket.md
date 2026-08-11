@@ -149,8 +149,7 @@ OpenSSL内部のバッファが保持している、直ちに読み取り可能�
 
 TLS/SSL 通信をサーバモードとして開始し、クライアントからのハンドシェイク開始を待ち、クライアントとのハンドシェイクを実行します。
 
-- **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で
-       証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
+- **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
        場合に発生します
 - **SEE** [m:OpenSSL::SSL::SSLSocket#connect],
      [m:OpenSSL::SSL::SSLSocket#accept_nonblock]
@@ -159,8 +158,7 @@ TLS/SSL 通信をサーバモードとして開始し、クライアントから
 
 TLS/SSl 通信をクライアントモードとして開始し、サーバとのハンドシェイクを実行します。
 
-- **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で
-       証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
+- **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
        場合に発生します
 - **SEE** [m:OpenSSL::SSL::SSLSocket#accept],
      [m:OpenSSL::SSL::SSLSocket#connect_nonblock]
@@ -226,16 +224,11 @@ TLS/SSL 通信をサーバモードとして開始し、クライアントとの
 
 IO が読み込み待ち、もしくは書き込み待ちになった場合は例外を発生させ、ハンドシェイクを中断します。IO が読み込み/書き込み可能状態になってからこのメソッドをもう一度呼ぶとハンドシェイクを再開します。
 
-- **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で
-       証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
+- **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
        場合に発生します
-       (実際は [c:OpenSSL::SSL::SSLError] をこのモジュールで extend した
-       例外オブジェクトが生成されます)
-- **raise** `OpenSSL::SSL::SSLError` -- ソケットが読み込み/書き込み可能状態になるのを
-       待つ必要がある場合に発生します。
-       読み込み可能状態を待つ必要がある場合には [c:IO::WaitReadable] を、
-       書き込み可能状態を待つ必要がある場合には [c:IO::WaitWritable] を、
-       それぞれ extend した例外オブジェクトが生成されます。
+       (実際は [c:OpenSSL::SSL::SSLError] をこのモジュールで extend した例外オブジェクトが生成されます)
+- **raise** `OpenSSL::SSL::SSLError` -- ソケットが読み込み/書き込み可能状態になるのを待つ必要がある場合に発生します。
+       読み込み可能状態を待つ必要がある場合には [c:IO::WaitReadable] を、書き込み可能状態を待つ必要がある場合には [c:IO::WaitWritable] を、それぞれ extend した例外オブジェクトが生成されます。
 - **SEE** [m:OpenSSL::SSL::SSLSocket#connect_nonblock],
      [m:OpenSSL::SSL::SSLSocket#accept]
 
@@ -246,14 +239,10 @@ TLS/SSL 通信をクライアントモードとして開始し、サーバとの
 
 IO が読み込み待ち、もしくは書き込み待ちになった場合は例外を発生させ、ハンドシェイクを中断します。IO が読み込み/書き込み可能状態になってからこのメソッドをもう一度呼ぶとハンドシェイクを再開します。
 
-- **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で
-       証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
+- **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
        場合に発生します
-- **raise** `OpenSSL::SSL::SSLError` -- ソケットが読み込み/書き込み可能状態になるのを
-       待つ必要がある場合に発生します。
-       読み込み可能状態を待つ必要がある場合には [c:IO::WaitReadable] を、
-       書き込み可能状態を待つ必要がある場合には [c:IO::WaitWritable] を、
-       それぞれ extend した例外オブジェクトが生成されます。
+- **raise** `OpenSSL::SSL::SSLError` -- ソケットが読み込み/書き込み可能状態になるのを待つ必要がある場合に発生します。
+       読み込み可能状態を待つ必要がある場合には [c:IO::WaitReadable] を、書き込み可能状態を待つ必要がある場合には [c:IO::WaitWritable] を、それぞれ extend した例外オブジェクトが生成されます。
 - **SEE** [m:OpenSSL::SSL::SSLSocket#accept_nonblock],
      [m:OpenSSL::SSL::SSLSocket#connect]
 

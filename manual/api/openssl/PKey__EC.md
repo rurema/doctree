@@ -149,8 +149,7 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
 自身で適当なダイジェストを取る必要があります。
 
 - **param** `data` -- 署名対象のデータ(文字列)
-- **raise** `OpenSSL::PKey::ECError` -- EC オブジェクトが秘密鍵を保持していない場合、
-                              もしくは署名に失敗した場合に発生します
+- **raise** `OpenSSL::PKey::ECError` -- EC オブジェクトが秘密鍵を保持していない場合、もしくは署名に失敗した場合に発生します
 - **SEE** [m:OpenSSL::PKey::EC#dsa_verify_asn1]
 
 ### def dsa_verify_asn1(data, sig) -> bool
@@ -297,8 +296,7 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
   - :hybrid
 詳しくは  X9.62 (ECDSA) などを参照してください。
 
-- **raise** `OpenSSL::PKey::EC::Group::Error` -- 得られたエンコーディングが未知の値であった
-       場合に発生します。
+- **raise** `OpenSSL::PKey::EC::Group::Error` -- 得られたエンコーディングが未知の値であった場合に発生します。
 - **SEE** [m:OpenSSL::PKey::EC::Group#point_conversion_form=]
 
 ### def point_conversion_form=(sym)
@@ -379,8 +377,7 @@ Point オブジェクトを生成します。
 - **param** `point` -- 複製する [c:OpenSSL::PKey::EC::Point] オブジェクト
 - **param** `group` -- 関連付ける群([c:OpenSSL::PKey::EC::Group] オブジェクト)
 - **param** `bn` -- 点を表す整数([c:OpenSSL::BN] オブジェクト)
-- **raise** `OpenSSL::PKey::EC::Point::Error` -- オブジェクトの生成に失敗した場合
-       に発生します。
+- **raise** `OpenSSL::PKey::EC::Point::Error` -- オブジェクトの生成に失敗した場合に発生します。
 
 ## Instance methods
 ### def group -> OpenSSL::PKey::EC::Group

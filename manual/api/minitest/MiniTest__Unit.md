@@ -53,8 +53,7 @@ until: "2.2.0"
 
 - **param** `exception` -- 例外クラスを指定します。
 
-- **return** -- 与えられた例外クラスによって "Skip", "Failure", "Error" の
-        いずれかの頭文字を返します。
+- **return** -- 与えられた例外クラスによって "Skip", "Failure", "Error" のいずれかの頭文字を返します。
 
 ### def report -> Array
 

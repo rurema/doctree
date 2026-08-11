@@ -263,8 +263,7 @@ p ctl # => #<Socket::AncillaryData: UNIX SOCKET RIGHTS 6 7>
 p ctl.unix_rights # => nil
 ```
 
-- **raise** `TypeError` -- family/level/type が AF_UNIX/SOL_SOCKET/SCM_RIGHTS でない場合
-       に発生します。
+- **raise** `TypeError` -- family/level/type が AF_UNIX/SOL_SOCKET/SCM_RIGHTS でない場合に発生します。
 - **SEE** [m:Socket::Constants::SCM_RIGHTS]
 
 ### def timestamp -> Time
@@ -320,8 +319,7 @@ p ancdata.ip_pktinfo
 # => [#<Addrinfo: 127.0.0.1>, 0, #<Addrinfo: 127.0.0.1>]
 ```
 
-- **raise** `TypeError` -- level, type が IPPROTO_IP, IP_PKTINFO でない場合に
-       発生します。
+- **raise** `TypeError` -- level, type が IPPROTO_IP, IP_PKTINFO でない場合に発生します。
 - **SEE** [m:Socket::AncillaryData.ip_pktinfo],
      [m:Socket::Constants::IP_PKTINFO]
 

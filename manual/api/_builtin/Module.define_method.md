@@ -7,13 +7,11 @@
 
 - **param** `name` -- メソッド名を [c:String] または [c:Symbol] を指定します。
 
-- **param** `method` -- [c:Proc]、[c:Method] あるいは [c:UnboundMethod] の
-       いずれかのインスタンスを指定します。
+- **param** `method` -- [c:Proc]、[c:Method] あるいは [c:UnboundMethod] のいずれかのインスタンスを指定します。
 
 - **return** -- メソッド名を表す [c:Symbol] を返します。
 
-- **raise** `TypeError` -- method に同じクラス、サブクラス、モジュール以外のメソッ
-                 ドを指定した場合に発生します。
+- **raise** `TypeError` -- method に同じクラス、サブクラス、モジュール以外のメソッドを指定した場合に発生します。
 
 ```ruby title="例"
 class Foo

@@ -169,8 +169,7 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 - **`:downcase`**:
   ヘッダの文字列に対して [m:String#downcase] を呼び出します。
 - **`:symbol`**:
-  ヘッダの文字列を小文字に変換してから、空白文字列 (\s) をアンダースコアに
-  置換し、非英数字 (\W) を削除します。最後に [m:String#to_sym] を呼び出します。
+  ヘッダの文字列を小文字に変換してから、空白文字列 (\s) をアンダースコアに置換し、非英数字 (\W) を削除します。最後に [m:String#to_sym] を呼び出します。
 
 全ての組み込みのヘッダ用変換器は、実際に変換する前にヘッダのデータの文字エンコーディングを UTF-8 に変換します。そのヘッダの文字エンコーディングを UTF-8 に変換できなかった場合は、変換には失敗しますが、データは変更されません。
 
@@ -223,20 +222,16 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 他の位置から処理したい場合はあらかじめそのように設定した [c:StringIO] を渡してください。
 
 - **param** `data` -- [c:String] か [c:IO] のインスタンスを指定します。
-            [c:String] のインスタンスを指定した場合、[m:CSV#string] を使用して
-            後からデータを取り出すことが出来ます。
+            [c:String] のインスタンスを指定した場合、[m:CSV#string] を使用して後からデータを取り出すことが出来ます。
 
 - **param** `options` -- CSV をパースするためのオプションをハッシュで指定します。
-               パフォーマンス上の理由でインスタンスメソッドではオプションを上書きすることが
-               出来ないので、上書きしたい場合は必ずここで上書きするようにしてください。
+               パフォーマンス上の理由でインスタンスメソッドではオプションを上書きすることが出来ないので、上書きしたい場合は必ずここで上書きするようにしてください。
 
 - **`:col_sep`**:
-  フィールドの区切り文字列を指定します。この文字列はパースする前にデータの
-  エンコーディングに変換されます。
+  フィールドの区切り文字列を指定します。この文字列はパースする前にデータのエンコーディングに変換されます。
 - **`:row_sep`**:
   行区切りの文字列を指定します。:auto という特別な値をセットできます。
-  :auto を指定した場合データから自動的に行区切りの文字列を見つけ出します。このとき
-  データの先頭から次の "\r\n", "\n", "\r" の並びまでを読みます。
+  :auto を指定した場合データから自動的に行区切りの文字列を見つけ出します。このときデータの先頭から次の "\r\n", "\n", "\r" の並びまでを読みます。
   A sequence will be selected even if it occurs in a quoted field, assuming that you
   would have the same line endings there.  If none of those sequences is
   found, +data+ is [c:ARGF], [m:Object::STDIN], [m:Object::STDOUT], or
@@ -249,8 +244,7 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   read ahead. This String will be  transcoded into the data's Encoding  before parsing.
 - **`:quote_char`**:
   フィールドをクオートする文字を指定します。長さ 1 の文字列でなければなりません。
-  正しいダブルクオートではなく間違ったシングルクオートを使用しているアプリケーション
-  で便利です。
+  正しいダブルクオートではなく間違ったシングルクオートを使用しているアプリケーションで便利です。
   CSV will always consider a double  sequence this character to be an
   escaped quote.
   この文字列はパースする前にデータのエンコーディングに変換されます。
@@ -263,34 +257,24 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   limit can cause a legitimate parse to  fail and thus is set to +nil+, or off,
   by default.
 - **`:converters`**:
-  [m:CSV::Converters] から取り出した名前の配列です。変換器が一つだけ
-  の場合は配列に格納する必要はありません。
-  全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変
-  換を試みます。エンコーディング変換に失敗した場合はフィールドは変換さ
-  れません。
+  [m:CSV::Converters] から取り出した名前の配列です。変換器が一つだけの場合は配列に格納する必要はありません。
+  全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変換を試みます。エンコーディング変換に失敗した場合はフィールドは変換されません。
 - **`:unconverted_fields`**:
-  真をセットすると `CSV::Row#unconverted_fields` という変換前のフィー
-  ルドを返すメソッドを全ての行に追加します。headers オプションによって
-  追加したヘッダはフィールドではないので
+  真をセットすると `CSV::Row#unconverted_fields` という変換前のフィールドを返すメソッドを全ての行に追加します。headers オプションによって追加したヘッダはフィールドではないので
   `CSV::Row#unconverted_fields` は空の配列を返します。
 - **`:headers`**:
   :first_row というシンボルか真を指定すると、CSV ファイルの一行目をヘッダとして扱います。
-  配列を指定するとそれをヘッダとして扱います。文字列を指定すると [m:CSV.parse_line] を
-  使用してパースした結果をヘッダとして扱います。このとき、:col_sep, :row_sep, :quote_char
+  配列を指定するとそれをヘッダとして扱います。文字列を指定すると [m:CSV.parse_line] を使用してパースした結果をヘッダとして扱います。このとき、:col_sep, :row_sep, :quote_char
   はこのインスタンスと同じものを使用します。この設定は [m:CSV#shift]
   の返り値を配列のかわりに [c:CSV::Row] のインスタンスに変更します。
-  [m:CSV#read] の返り値を配列の配列のかわりに [c:CSV::Table] のイン
-  スタンスに変更します。
+  [m:CSV#read] の返り値を配列の配列のかわりに [c:CSV::Table] のインスタンスに変更します。
 - **`:return_headers`**:
-  偽を指定すると、ヘッダ行を無視します。真を指定すると、ヘッダ行を
-  ヘッダと値が同一の [c:CSV::Row] のインスタンスとして返します。
+  偽を指定すると、ヘッダ行を無視します。真を指定すると、ヘッダ行をヘッダと値が同一の [c:CSV::Row] のインスタンスとして返します。
 - **`:write_headers`**:
   真を指定して :headers にも値をセットすると、ヘッダを出力します。
 - **`:header_converters`**:
   :converters オプションに似ていますが、ヘッダ専用の変換器を定義します。
-  全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変
-  換を試みます。エンコーディング変換に失敗した場合はヘッダは変換されま
-  せん。
+  全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変換を試みます。エンコーディング変換に失敗した場合はヘッダは変換されません。
 - **`:skip_blanks`**:
   真を指定すると、空行を読み飛ばします。
 - **`:force_quotes`**:
@@ -430,8 +414,7 @@ CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
 
 - **param** `options` -- [m:CSV.new] のオプションと同じオプションを指定できます。
                :encoding というキーを使用すると入出力のエンコーディングを指定できます。
-               [m:Encoding.default_external] と異なるエンコーディングを持つ入力を使用する場合は、
-               必ずエンコーディングを指定してください。
+               [m:Encoding.default_external] と異なるエンコーディングを持つ入力を使用する場合は、必ずエンコーディングを指定してください。
 
 - **SEE** [m:CSV.new], [m:File.open]
 
@@ -447,8 +430,7 @@ CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
 
 - **param** `options` -- [m:CSV.new] のオプションと同じオプションを指定できます。
                :encoding というキーを使用すると出力のエンコーディングを指定できます。
-               ASCII と互換性の無い文字エンコーディングを持つ文字列を出力する場合は、このヒントを
-               指定する必要があります。
+               ASCII と互換性の無い文字エンコーディングを持つ文字列を出力する場合は、このヒントを指定する必要があります。
 
 ```ruby title="例"
 require "csv"
@@ -733,8 +715,7 @@ headers オプションに偽でない値を指定した場合は [c:CSV::Table]
 
 - **param** `options` -- [m:CSV.new] のオプションと同じオプションを指定できます。
                :encoding というキーを使用すると入力のエンコーディングを指定できます。
-               入力のエンコーディングが [m:Encoding.default_external] と異なる場合は
-               必ず指定しなければなりません。
+               入力のエンコーディングが [m:Encoding.default_external] と異なる場合は必ず指定しなければなりません。
 
 ```ruby title="例"
 require "csv"
@@ -808,8 +789,7 @@ CSV.read( path, { headers:           true,
 データソースは書き込み用にオープンされていなければなりません。
 
 - **param** `row` -- 配列か [c:CSV::Row] のインスタンスを指定します。
-           [c:CSV::Row] のインスタンスが指定された場合は、[m:CSV::Row#fields] の値
-           のみが追加されます。
+           [c:CSV::Row] のインスタンスが指定された場合は、[m:CSV::Row#fields] の値のみが追加されます。
 
 ```ruby title="例 配列を指定"
 require "csv"

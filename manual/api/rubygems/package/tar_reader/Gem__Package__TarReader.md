@@ -27,8 +27,7 @@ gem-format な tar ファイルを読むためのクラスです。
 
 - **return** -- 戻った位置を返します。
 
-- **raise** `Gem::Package::NonSeekableIO` -- 自身に関連付けられた IO がシーク可能
-                                   でない場合に発生します。
+- **raise** `Gem::Package::NonSeekableIO` -- 自身に関連付けられた IO がシーク可能でない場合に発生します。
 
 ## Singleton Methods
 
@@ -36,6 +35,5 @@ gem-format な tar ファイルを読むためのクラスです。
 
 io に関連付けて [c:Gem::Package::TarReader] を初期化します。
 
-- **param** `io` -- pos, eof?, read, getc, pos= というインスタンスメソッドを持つ
-          オブジェクトを指定します。
+- **param** `io` -- pos, eof?, read, getc, pos= というインスタンスメソッドを持つオブジェクトを指定します。
 

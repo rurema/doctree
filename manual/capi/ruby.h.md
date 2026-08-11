@@ -293,11 +293,9 @@ x を int 型の整数に変換します。
 
 x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合は x.to_int による暗黙の型変換を試みます。
 
-- **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に
-                 発生します。
+- **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に発生します。
 
-- **raise** `RangeError` -- x が int 型で表現できる値の範囲外であった場合に発生し
-                  ます。
+- **raise** `RangeError` -- x が int 型で表現できる値の範囲外であった場合に発生します。
 
 ### MACRO long NUM2LONG(VALUE x)
 
@@ -305,11 +303,9 @@ x を long 型の整数に変換します。
 
 x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合は x.to_int による暗黙の型変換を試みます。
 
-- **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に
-                 発生します。
+- **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に発生します。
 
-- **raise** `RangeError` -- x が long 型で表現できる値の範囲外であった場合に発生
-                  します。
+- **raise** `RangeError` -- x が long 型で表現できる値の範囲外であった場合に発生します。
 
 ### MACRO unsigned int NUM2UINT(VALUE x)
 
@@ -317,11 +313,9 @@ x を unsigned int 型の整数に変換します。
 
 x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合は x.to_int による暗黙の型変換を試みます。
 
-- **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に
-                 発生します。
+- **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に発生します。
 
-- **raise** `RangeError` -- x が unsigned int 型で表現できる値の範囲外であった場
-                  合に発生します。
+- **raise** `RangeError` -- x が unsigned int 型で表現できる値の範囲外であった場合に発生します。
 
 ### MACRO unsigned long NUM2ULONG(VALUE x)
 
@@ -329,11 +323,9 @@ x を unsigned long 型の整数に変換します。
 
 x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合は x.to_int による暗黙の型変換を試みます。
 
-- **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に
-                 発生します。
+- **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に発生します。
 
-- **raise** `RangeError` -- x が unsigned long 型で表現できる値の範囲外であった場
-                  合に発生します。
+- **raise** `RangeError` -- x が unsigned long 型で表現できる値の範囲外であった場合に発生します。
 
 ### MACRO short NUM2SHORT(VALUE x)
 
@@ -341,11 +333,9 @@ x を short 型の整数に変換します。
 
 x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合は x.to_int による暗黙の型変換を試みます。
 
-- **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に
-                 発生します。
+- **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に発生します。
 
-- **raise** `RangeError` -- x が short 型で表現できる値の範囲外であった場合に発生
-                  します。
+- **raise** `RangeError` -- x が short 型で表現できる値の範囲外であった場合に発生します。
 
 ### MACRO unsigned short NUM2USHORT(VALUE x)
 
@@ -353,11 +343,9 @@ x を unsigned short 型の整数に変換します。
 
 x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合は x.to_int による暗黙の型変換を試みます。
 
-- **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に
-                 発生します。
+- **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に発生します。
 
-- **raise** `RangeError` -- x が unsigned short 型で表現できる値の範囲外であった
-                  場合に発生します。
+- **raise** `RangeError` -- x が unsigned short 型で表現できる値の範囲外であった場合に発生します。
 
 ### MACRO void OBJ_FREEZE(VALUE x)
 

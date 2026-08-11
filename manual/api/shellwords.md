@@ -32,8 +32,7 @@ Bourne シェルの単語分割規則に従った空白区切りの単語分割�
 
 - **param** `line` -- 分割の対象となる文字列を指定します。
 - **return** -- 分割結果の各文字列を要素とする配列を返します。
-- **raise** `ArgumentError` -- 引数の中に対でないシングルクォートまたはダブル
-       クォートが現れた場合に発生します。
+- **raise** `ArgumentError` -- 引数の中に対でないシングルクォートまたはダブルクォートが現れた場合に発生します。
 
 ```ruby title="例"
 require 'shellwords'
@@ -88,8 +87,7 @@ Bourne シェルの単語分割規則に従った空白区切りの単語分割�
 
 - **param** `line` -- 分割の対象となる文字列を指定します。
 - **return** -- 分割結果の各文字列を要素とする配列を返します。
-- **raise** `ArgumentError` -- 引数の中に対でないシングルクォートまたはダブル
-       クォートが現れた場合に発生します。
+- **raise** `ArgumentError` -- 引数の中に対でないシングルクォートまたはダブルクォートが現れた場合に発生します。
 
 ### def Shellwords.escape(str) -> String
 
@@ -120,8 +118,7 @@ Bourne シェルの単語分割規則に従った空白区切りの単語分割�
 string.shellsplit は、Shellwords.shellsplit(string) と等価です。
 
 - **return** -- 分割結果の各文字列を要素とする配列を返します。
-- **raise** `ArgumentError` -- 引数の中に対でないシングルクォートまたはダブル
-       クォートが現れた場合に発生します。
+- **raise** `ArgumentError` -- 引数の中に対でないシングルクォートまたはダブルクォートが現れた場合に発生します。
 - **SEE** [m:Shellwords?.shellsplit]
 
 ### def shellescape -> String

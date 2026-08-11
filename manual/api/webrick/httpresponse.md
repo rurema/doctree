@@ -135,9 +135,7 @@ Content-Length ヘッダの値を整数で表すアクセサです。デフォ�
   content_length の値が nil のとき Content-Length ヘッダには
   body のサイズが使われます。nil でないとき body の実際のサイズとこの値が同じかどうかの検証は行われません。
 - **body が IO オブジェクトである場合**:
-  content_length の値が nil のとき Content-Length ヘッダはレスポンスに含まれず、IO から全てを読み込ん
-  でそれをエンティティボディとします。nil でないとき IO から content_length バイトだけ読み込みそれを
-  エンティティボディとします。
+  content_length の値が nil のとき Content-Length ヘッダはレスポンスに含まれず、IO から全てを読み込んでそれをエンティティボディとします。nil でないとき IO から content_length バイトだけ読み込みそれをエンティティボディとします。
 
 また [RFC:2616] 4.4 で定められた Content-Length ヘッダを送ってはいけない場合に当てはまる時には
 content_length の値は無視され Content-Length ヘッダはレスポンスに含まれません。

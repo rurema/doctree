@@ -58,9 +58,7 @@ end
 
 変数の型を取得します。
 
-- **return** -- 変数の型名を文字列で返します。型名を文字列に変換できない場合は、
-       「Unknown Type nn」（nnはバリアント型を示す数値）の形式の文字列
-        を返します。
+- **return** -- 変数の型名を文字列で返します。型名を文字列に変換できない場合は、「Unknown Type nn」（nnはバリアント型を示す数値）の形式の文字列を返します。
 
 ```ruby
 tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'XlSheetType')

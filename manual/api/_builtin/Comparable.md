@@ -102,8 +102,7 @@ self >= min and self <= max
 
 - **param** `max` -- 範囲の上端を表すオブジェクトを指定します。
 
-- **raise** `ArgumentError` -- self <=> min か、self <=> max が nil を返
-                     したときに発生します。
+- **raise** `ArgumentError` -- self <=> min か、self <=> max が nil を返したときに発生します。
 
 ```ruby title="例"
 p 3.between?(1, 5)             # => true
@@ -137,8 +136,7 @@ range.end が nil の場合、range.end は self よりも大きい値として�
 
 - **param** `range` -- 範囲を表す Range オブジェクトを指定します。
 
-- **raise** `ArgumentError` -- rangeが終端を含まない範囲オブジェクトであり、
-                     終端が nil でないときに発生します。
+- **raise** `ArgumentError` -- rangeが終端を含まない範囲オブジェクトであり、終端が nil でないときに発生します。
 
 ```ruby title="例"
 p 12.clamp(0, 100)       # => 12

@@ -22,8 +22,7 @@ size であると仮定されます。GC は free 関数を使用してメモリ
 
 - **param** `size` -- 生成する Pointer オブジェクトが指すメモリ領域のサイズを整数で指定します。
 
-- **param** `free` -- GC 時に呼ばれる free 関数を [c:Fiddle::Function] オブジェクトか
-       整数で指定します。
+- **param** `free` -- GC 時に呼ばれる free 関数を [c:Fiddle::Function] オブジェクトか整数で指定します。
 
 ### def Fiddle::Pointer.malloc(size, free = nil)   -> Fiddle::Pointer
 

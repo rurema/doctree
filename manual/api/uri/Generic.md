@@ -55,8 +55,7 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
         [scheme, userinfo, host, port, registry, path, opaque, query, fragment]
   ```
 
-- **param** `hash` --  構成要素を表すハッシュを与えます。ハッシュのキーはシンボルは以下
-            のいずれかです。 ハッシュの値は文字列で与えます。
+- **param** `hash` --  構成要素を表すハッシュを与えます。ハッシュのキーはシンボルは以下のいずれかです。 ハッシュの値は文字列で与えます。
   ```text
         :scheme, :userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment 
   ```

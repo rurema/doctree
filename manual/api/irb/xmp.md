@@ -82,8 +82,7 @@ xmp "foo", an_binding
 
 - **param** `exps` -- 評価するRuby のソースコードを文字列で指定します。
 
-- **param** `bind` -- [c:Binding] オブジェクトを指定します。省略した場合は、最
-            後に実行した [m:XMP#puts]、[m:Kernel#xmp] の
+- **param** `bind` -- [c:Binding] オブジェクトを指定します。省略した場合は、最後に実行した [m:XMP#puts]、[m:Kernel#xmp] の
             [c:Binding] を使用します。まだ何も実行していない場合は
             [m:Object::TOPLEVEL_BINDING] を使用します。
 
@@ -97,8 +96,7 @@ Ruby のソースコードとその実行結果を、行ごとに交互に表示
 
 自身を初期化します。
 
-- **param** `bind` -- [c:Binding] オブジェクトを指定します。省略した場合は、最
-            後に実行した [m:XMP#puts]、[m:Kernel#xmp] の
+- **param** `bind` -- [c:Binding] オブジェクトを指定します。省略した場合は、最後に実行した [m:XMP#puts]、[m:Kernel#xmp] の
             [c:Binding] を使用します。まだ何も実行していない場合は
             [m:Object::TOPLEVEL_BINDING] を使用します。
 

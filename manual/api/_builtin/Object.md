@@ -248,8 +248,7 @@ self がクラスの場合はスーパークラスのクラスメソッド([c:Cl
 
 singleton_methods(false) は、[m:Object#methods](false) と同じです。
 
-- **param** `inherited_too` -- 継承した特異メソッドを含める場合は真を、
-                     そうでない場合は偽を指定します。
+- **param** `inherited_too` -- 継承した特異メソッドを含める場合は真を、そうでない場合は偽を指定します。
 
 ```ruby title="例1"
 Parent = Class.new
@@ -1038,8 +1037,7 @@ p 1.public_send(:+, 2)  # => 3
 
 - **raise** `ArgumentError` -- name を指定しなかった場合に発生します。
 
-- **raise** `NoMethodError` -- protected メソッドや private メソッドに対して実行
-                     した場合に発生します。
+- **raise** `NoMethodError` -- protected メソッドや private メソッドに対して実行した場合に発生します。
 
 ```ruby
 1.public_send(:puts, "hello")  # ~> NoMethodError
@@ -1401,8 +1399,7 @@ self に特異メソッド name を定義します。
 
 - **param** `symbol` -- メソッド名を [c:String] または [c:Symbol] で指定します。
 
-- **param** `method` -- [c:Proc]、[c:Method] あるいは [c:UnboundMethod] の
-              いずれかのインスタンスを指定します。
+- **param** `method` -- [c:Proc]、[c:Method] あるいは [c:UnboundMethod] のいずれかのインスタンスを指定します。
 
 - **return** -- メソッド名を表す [c:Symbol] を返します。
 
@@ -1440,9 +1437,7 @@ Rubyで実装されたメソッドで NotImplementedError が発生する場合�
 
 - **param** `name` -- [c:Symbol] または文字列で指定するメソッド名です。
 
-- **param** `include_all` -- private メソッドと protected メソッドを確認の対象に
-                   含めるかを true か false で指定します。省略した場合
-                   は false(含めない) を指定した事になります。
+- **param** `include_all` -- private メソッドと protected メソッドを確認の対象に含めるかを true か false で指定します。省略した場合は false(含めない) を指定した事になります。
 
 ```ruby
 class F
@@ -1745,8 +1740,7 @@ initialize_copy は、Ruby インタプリタが知り得ない情報をコピ�
 
 initialize_copy という名前のメソッドは自動的に private に設定されます。
 
-- **raise** `TypeError` -- レシーバが freeze されているか、obj のクラスがレシーバ
-  のクラスと異なる場合に発生します。
+- **raise** `TypeError` -- レシーバが freeze されているか、obj のクラスがレシーバのクラスと異なる場合に発生します。
 - **SEE** [m:Object#clone],[m:Object#dup]
 
 dup や clone は以下の手順でオブジェクトを複製します。
