@@ -145,3 +145,28 @@ p "ABC".downcase # => "ABC"
 
 - **SEE** [m:Module#refine], [m:Module#using]
 
+### def main.ruby2_keywords(method_name, ...) -> nil
+{: since="2.7.0"}
+
+トップレベルで定義したメソッドに、可変長引数(`*args`)で受けたキーワード引数を別のメソッド呼び出しへそのまま渡すためのフラグを設定します。
+
+Ruby 2.7 より前との後方互換性のために用意されているメソッドです。
+詳細は [m:Module#ruby2_keywords] を参照してください。
+
+- **param** `method_name` -- メソッド名を [c:String] か [c:Symbol] で指定します。複数指定できます。
+
+```ruby title="例"
+def target(a, k: 0)
+  [a, k]
+end
+
+def pass(*args)
+  target(*args)
+end
+ruby2_keywords :pass
+
+p pass(1, k: 2) # => [1, 2]
+```
+
+- **SEE** [m:Module#ruby2_keywords], [m:Proc#ruby2_keywords], [m:Hash.ruby2_keywords_hash]
+
