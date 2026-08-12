@@ -27,7 +27,7 @@ X.509 v3 証明書の拡張領域のためのクラスです。
 
 引数が2つ以上の場合は、oid には拡張領域の OID の ドット区切り表記、
 short name、long name のいずれかである文字列を与えます。
-value にはその値を表す DER 形式の文字列、もしくは 
+value にはその値を表す DER 形式の文字列、もしくは
 [c:OpenSSL::ASN1::ASN1Data] のサブクラスを与えます。
 
 ```ruby title="例"

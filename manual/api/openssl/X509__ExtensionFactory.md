@@ -53,7 +53,7 @@ ExtensionFactory オブジェクトを生成します。
   - [m:OpenSSL::X509::ExtensionFactory#issuer_certificate=]
   - [m:OpenSSL::X509::ExtensionFactory#subject_certificate=]
   - [m:OpenSSL::X509::ExtensionFactory#subject_request=]
-  - [m:OpenSSL::X509::ExtensionFactory#crl=] 
+  - [m:OpenSSL::X509::ExtensionFactory#crl=]
 
 - **param** `issuer_cert` -- 証明書発行者、すなわち CA の 
        [c:OpenSSL::X509::Certificate] オブジェクト
@@ -147,7 +147,7 @@ ExtensionFactory オブジェクトを生成します。
 
 自身に設定されているコンフィグファイルオブジェクトを設定します。
 
-### def config=(config) 
+### def config=(config)
 
 自身にコンフィグファイルオブジェクトを設定します。
 
@@ -170,7 +170,7 @@ factory.config = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
 
 ハッシュから [c:OpenSSL::X509::Extension] オブジェクトを生成します。
 
-渡すハッシュテーブルは 
+渡すハッシュテーブルは
 
 ```text
 {"oid" => OID文字列, "value" => value文字列, "critical" => 真偽値 }

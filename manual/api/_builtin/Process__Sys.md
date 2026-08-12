@@ -5,7 +5,7 @@ library: _builtin
 
 ユーザ ID・グループ ID を操作するシステムコールを直接呼ぶためのモジュールです。
 
-ポータブルにユーザ ID・グループ ID を操作するためのモジュール [c:Process::UID], [c:Process::GID] 
+ポータブルにユーザ ID・グループ ID を操作するためのモジュール [c:Process::UID], [c:Process::GID]
 も提供されています。Process::Sys と [c:Process::UID] や [c:Process::GID] を同時に使うことは非推奨です。
 
 ## Module Functions

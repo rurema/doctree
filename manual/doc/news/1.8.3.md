@@ -167,7 +167,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
           puts "safe level: #{$SAFE}"
         end
       end
-    }    
+    }
     th.join
     p $SAFE
     Hoge.new.foo
@@ -279,7 +279,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
     def foo.bar
       puts "bar"
     end
-    foo2.bar  
+    foo2.bar
      
     $ ruby-1.8.2 -r delegate test_dlg.rb
     test_dlg.rb:6: undefined method `bar` for #<Object:0x4021b0a0> (NoMethodError)
@@ -331,14 +331,14 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
       @@foo = 101      #=> @@foo は Fred クラスのクラス変数ではない。
     end
     
-    def Fred.foo_foo   
+    def Fred.foo_foo
       class_variable_set(:@@foo, 101)  # self が Fred クラス自身であることに注意。クラス変数 @@foo に値をセットする。
     end
     
     Fred.foo           # メソッドを呼んでも、Fred クラスのクラス変数 @@foo は変わらない。
-    p Fred.new.foo     #=> 99 
+    p Fred.new.foo     #=> 99
 
-    Fred.foo_foo       # 
+    Fred.foo_foo       #
     p Fred.new.foo     #=> 101
 
 ### 2005-05-28
@@ -431,7 +431,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
     $ ruby-1.8.3 -se 'puts global_variables.grep(/foo/)' -- --foo-bar
     $_foo_bar
 
-    $ ruby-1.8.3 -se 'puts global_variables.grep(/foo/)' -- --foo\@bar    
+    $ ruby-1.8.3 -se 'puts global_variables.grep(/foo/)' -- --foo\@bar
     -e: invalid name for global variable - --foo@bar (NameError)
 
 ### 2005-04-18
@@ -462,7 +462,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
   ((<ruby-dev:25811>))
 
     $ ruby-1.8.2 -e 'p "a" <=> 1'
-    false 
+    false
     $ ruby-1.8.3 -e 'p "a" <=> 1'
     nil
 
@@ -566,7 +566,7 @@ soap4r-1.5.3がruby-1.8.2、soap4r-1.5.5がruby-1.8.3にbundleされています
   環境変数 RUBYOPT の -T オプションを適切に解釈するようになりました。
   またハイフン - を省略できるようになりました。((<ruby-dev:25512>))
 
-    $ env RUBYOPT='Ke rnet/http' ruby  -e 'p Net::HTTP'  
+    $ env RUBYOPT='Ke rnet/http' ruby  -e 'p Net::HTTP'
     Net::HTTP
 
 ### 2005-01-17

@@ -384,20 +384,20 @@ srcdir/lib のディレクトリ構造はそのまま dest 配下に反映され
 
 #%# --- append_library(libs, lib)
 #%#  nodoc
-#%# 
+#%#
 #%# ライブラリのリスト libs の先頭にライブラリ lib を追加し、
 #%# その結果を返します。
-#%# 
+#%#
 #%# 引数 libs とこのメソッドの戻り値は
 #%# リンカに渡す引数形式の文字列です。
 #%# すなわち、UNIX 系 OS では
-#%# 
+#%#
 #%#   "-lfoo -lbar"
-#%# 
+#%#
 #%# であり、MS Windows などでは
-#%# 
+#%#
 #%#   "foo.lib bar.lib"
-#%# 
+#%#
 #%# です。
 #%# 第 2 引数 lib は、この例での "foo" や "bar" にあたります。
 
@@ -538,7 +538,7 @@ p have_type('foo') # => true
 
 - **param** `headers` -- 追加のヘッダを指定します。
 
-- **SEE** [m:Kernel#have_type] 
+- **SEE** [m:Kernel#have_type]
 
 ### def have_const(const, headers = nil, opt = "") -> bool
 ### def have_const(const, headers = nil, opt = ""){ ... } -> bool
@@ -923,9 +923,9 @@ create_makefile('foo') {|conf|
 #%# --- checking_for(message, format = nil){ ... } -> object
 #%# 内部用
 #%# have_*, find_* 系メソッドの実行結果を標準出力に出力するためのメソッドです。
-#%# 
+#%#
 #%# @param message メッセージを指定します。
-#%# 
+#%#
 #%# @param format フォーマット文字列を指定します。
 
 #%# #@since 1.8.6
@@ -1185,30 +1185,30 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 #%# おそらくユーザに解放されていない変数
 #%# --- $LOCAL_LIBS
 #%#     ライブラリを指定する文字列です。
-#%# 
+#%#
 #%# --- $local_flags
 #%#     リンカオプションを指定する文字列です。
 
 #%# = reopen String
 #%# 内部用
 #%# == Instance Methods
-#%# 
+#%#
 #%# --- quote -> String
-#%# 
+#%#
 #%# スペースを含む文字列をクオートして返します。
-#%# 
+#%#
 #%# --- tr_cpp -> String
-#%# 
+#%#
 #%# C プリプロセッサに使用できる名前を生成して返します。
-#%# 
+#%#
 #%# = reopen Array
 #%# 内部用
 #%# == Instance Methods
-#%# 
+#%#
 #%# --- quote -> Array
-#%# 
+#%#
 #%# 全ての要素を [[m:String#quote]] して返します。
-#%# 
+#%#
 #%# = module Logging
 #%# 内部利用のみ
 

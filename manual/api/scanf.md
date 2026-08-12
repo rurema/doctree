@@ -170,16 +170,16 @@ p str.scanf("%d %s") # => [1, "aaa"]
 - **param** `format` -- スキャンするフォーマットを文字列で指定します。
               詳細は、[ref:m:String#scanf#format] を参照してください。
 
-#%#The trick here is doing a match where you grab one line of input at a time. 
-#%#The linebreak may or may not occur at the boundary where the string matches 
-#%#a format specifier. And if it does, some rule about whitespace may or may not 
+#%#The trick here is doing a match where you grab one line of input at a time.
+#%#The linebreak may or may not occur at the boundary where the string matches
+#%#a format specifier. And if it does, some rule about whitespace may or may not
 #%#be in effect...
 #%#
 #%#That’s why this is much more elaborate than the string version.
 #%#
-#%#For each line: 
+#%#For each line:
 #%#
-#%#Match succeeds (non-emptily) 
+#%#Match succeeds (non-emptily)
 #%#
 #%#a) and the last attempted spec/string sub-match succeeded:
 #%#

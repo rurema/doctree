@@ -23,7 +23,7 @@ category: Network
 ### def TCPSocket.open(host, serv, local_host=nil, local_service=nil) -> TCPSocket
 ### def TCPSocket.new(host, serv, local_host=nil, local_service=nil) -> TCPSocket
 
-[m:TCPSocket.new] のパラメータ host と local_host 
+[m:TCPSocket.new] のパラメータ host と local_host
 の名前解決に [lib:resolv] ライブラリを使います。
 
 - **param** `host` --           ホスト名、またはインターネットアドレスを示す文字列を指定します。
@@ -38,7 +38,7 @@ category: Network
 
 ### def bind(host, port) -> Integer
 
-[m:UDPSocket#bind]のパラメータ host の名前解決に [lib:resolv] 
+[m:UDPSocket#bind]のパラメータ host の名前解決に [lib:resolv]
 ライブラリを使います。
 
 - **param** `host` -- bindするホスト名を文字列で指定します。
@@ -47,7 +47,7 @@ category: Network
 
 ### def connect(host, port) -> Integer
 
-[m:UDPSocket#connect] のパラメータ host の名前解決に 
+[m:UDPSocket#connect] のパラメータ host の名前解決に
 [lib:resolv] ライブラリを使います。
 
 - **param** `host` -- connect するホスト名を文字列で指定します。
@@ -72,7 +72,7 @@ category: Network
 
 ### def SOCKSSocket.new(host, serv) -> SOCKSSocket
 
-[m:SOCKSSocket.new]のパラメータ host の名前解決に [lib:resolv] 
+[m:SOCKSSocket.new]のパラメータ host の名前解決に [lib:resolv]
 ライブラリを使います。
 
 - **param** `host` -- ホスト名を文字列で指定します。

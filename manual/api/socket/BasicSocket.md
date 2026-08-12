@@ -121,7 +121,7 @@ s = serv.accept
 を参照してください。
 取得したオプションのデータを [c:Socket::Option] で返します。
 
-level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR 
+level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR
 といった整数値の他、文字列("SOL_SOCKET", prefixなしの "SOCKET")やシンボル(:SO_REUSEADDR, :REUSEADDR)を用いることができます。
 
 - **param** `level` --    [man:getsockopt(2)] の 第二引数のlevel 
@@ -248,7 +248,7 @@ s.send("The king has donkey ears!", 0, sockaddr)
 ソケットのオプションを設定します。[man:setsockopt(2)]
 を参照してください。
 
-level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR 
+level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR
 といった整数値の他、文字列("SOL_SOCKET", prefixなしの "SOCKET")やシンボル(:SO_REUSEADDR, :REUSEADDR)を用いることができます。
 
 optval には文字列、整数、真偽値(true or false)を渡すことができます。

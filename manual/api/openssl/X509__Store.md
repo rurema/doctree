@@ -127,13 +127,13 @@ verify を一度も呼びだしていない場合は nil を返します。
 - **param** `purpose` -- 証明書の使用目的を表す整数値
 - **SEE** [m:OpenSSL::X509::StoreContext#purpose=]
 
-#%# memo: 
+#%# memo:
 #%# purpose は
 #%# どうやら X509v3 拡張領域のkeyUsage拡張領域
 #%# やextKeyKeyUsage拡張領域をチェックするらしい。
 #%# 検証している証明書や、それに証明している中間CAなどが
 #%# 目的外使用していないかどうかを判定するらしい。
-#%# SMIME_SIGN ならば、「証明書が S/MIME として使えるか」& 
+#%# SMIME_SIGN ならば、「証明書が S/MIME として使えるか」&
 #%# 「CA 証明書が S/MIME CA として使えるか」の2つを判定しているようである。
 #%# 「Network Security with OpenSSL:Cryptography for Secure Communications」
 #%# によると、この拡張領域は
@@ -196,7 +196,7 @@ CA 証明書を信頼する証明書として証明書ストアに加えます�
 
 証明書を証明書ストアに存在する CA 証明書で検証します。
 
-chain には検証したい証明書の証明書チェイン全体を 
+chain には検証したい証明書の証明書チェイン全体を
 [c:OpenSSL::X509::Certificate] の配列で渡します。
 
 検証に成功した場合は true を、失敗した場合は false を返します。

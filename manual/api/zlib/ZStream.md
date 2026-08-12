@@ -43,7 +43,7 @@ String オブジェクトとして返します。
 通常、具体的な圧縮/展開を行う場合は、
 [m:Zlib::Deflate.new] もしくは、[m:Zlib::Inflate.new] を使用します。
 
-- **SEE** [m:Zlib::Deflate.new], [m:Zlib::Inflate.new] 
+- **SEE** [m:Zlib::Deflate.new], [m:Zlib::Inflate.new]
 
 ## Instance Methods
 
@@ -101,7 +101,7 @@ adler-32 チェックサムを返します。
 より具体的な振る舞いは [m:Zlib::Deflate#finish],
 [m:Zlib::Inflate#finish] を参照して下さい。
 
-- **SEE** [m:Zlib::Deflate#finish],[m:Zlib::Inflate#finish] 
+- **SEE** [m:Zlib::Deflate#finish],[m:Zlib::Inflate#finish]
 
 ### def finished? -> bool
 ### def stream_end? -> bool

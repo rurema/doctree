@@ -82,7 +82,7 @@ pass が指定された場合は、秘密鍵を pass を使って復号化しま
 
 鍵を PEM 形式で出力します。
 
-cipher と pass が指定された場合、秘密鍵を暗号 cipher [c:OpenSSL::Cipher::Cipher] 
+cipher と pass が指定された場合、秘密鍵を暗号 cipher [c:OpenSSL::Cipher::Cipher]
 とパスワード pass を使って暗号化します。
 
 cipher を指定して pass を省略した場合は渡されたブロックを呼びだしてパスフレーズを要求します。ブロックの返り値をパスフレーズとみなして暗号化します。

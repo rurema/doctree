@@ -8,7 +8,7 @@ UNIX のプロセスを管理するモジュールです。
 Process がプロセスを表現するクラスではなく、プロセスに対する操作をまとめたモジュールであることに注意してください。
 
 ユーザ ID・グループ ID を操作するシステムコールを直接呼ぶために [c:Process::Sys] が提供されています。
-ポータブルにユーザ ID・グループ ID を操作するためのモジュール [c:Process::UID], [c:Process::GID] 
+ポータブルにユーザ ID・グループ ID を操作するためのモジュール [c:Process::UID], [c:Process::GID]
 も提供されています。
 
 ## Singleton Methods
@@ -530,7 +530,7 @@ Process.wait
 
 - [m:Process::PRIO_PROCESS]
 - [m:Process::PRIO_PGRP]
-- [m:Process::PRIO_USER] 
+- [m:Process::PRIO_USER]
 
 - **param** `who` -- which の値にしたがってプロセス ID、プロセスグループ ID、ユーザ ID のいずれかを整数で指定します。
 

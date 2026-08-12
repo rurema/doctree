@@ -85,7 +85,7 @@ srv.mount('/img', WEBrick::HTTPServlet::FileHandler, '/home/username/images')
 - **param** `dir` -- ディレクトリをあらわす文字列を指定します。
 
 - **param** `proc` -- リクエストを処理する [c:Proc] オブジェクトを指定します。
-            [c:WEBrick::HTTPResponse] オブジェクトと [c:WEBrick::HTTPRequest] 
+            [c:WEBrick::HTTPResponse] オブジェクトと [c:WEBrick::HTTPRequest]
             オブジェクトを引数として proc.call(request, response) の引数の順で呼び出されます。
 
 - **raise** `WEBrick::HTTPServerError` -- proc も指定されずブロックも与えられない場合に発生します。

@@ -10,7 +10,7 @@ library: webrick/httputils
 [m:WEBrick::HTTPUtils::FormData#each_data] によりそれぞれの値を取り出すことができます。
 
 通常のフォームデータ(application/x-www-form-urlencoded)は unescape されています。
-ただし multipart/form-data なフォームデータはユーザが content-transfer-encoding 
+ただし multipart/form-data なフォームデータはユーザが content-transfer-encoding
 ヘッダを見て適切に処理する必要があります。
 
 ### リンク
@@ -62,7 +62,7 @@ MyCGI.new.start()
 
 ### def [](header)    -> String | nil
 
-自身が multipart/form-data なデータの場合に、header で指定された 
+自身が multipart/form-data なデータの場合に、header で指定された
 ヘッダの値を文字列で返します。無ければ nil を返します。
 
 - **param** `header` -- ヘッダ名を文字列で指定します。大文字と小文字を区別しません。

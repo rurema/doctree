@@ -79,7 +79,7 @@ flags には通常は以下のいずれかを渡します。
   - [m:OpenSSL::X509::Name::ONELINE]
   - [m:OpenSSL::X509::Name::MULTILINE]
 
-* 
+*
 例:
 
 ```ruby
@@ -136,7 +136,7 @@ OpenSSL 0.9.8 と互換な古い方式のハッシュ関数のハッシュ値を
 
 属性型に対応する ASN.1の型を格納したハッシュです。
 
-[m:OpenSSL::X509::Name.parse] や [m:OpenSSL::X509::Name.new] 
+[m:OpenSSL::X509::Name.parse] や [m:OpenSSL::X509::Name.new]
 などでデフォルト値として使われます。
 
 キーは属性型文字列で、ASN.1の型を表わす整数が対応します。

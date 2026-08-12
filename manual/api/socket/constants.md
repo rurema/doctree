@@ -181,7 +181,7 @@ XEROX NS protocol。
 デバイスレベルインターフェース。
 [m:Socket.open] の第一引数 domain に使用します。
 
-- **SEE** [man:socket(2linux)], [man:packet(7linux)]     
+- **SEE** [man:socket(2linux)], [man:packet(7linux)]
 
 ### const AF_PPP -> Integer
 ### const PF_PPP -> Integer
@@ -289,7 +289,7 @@ eXpress Transfer Protocol。
 RAW ソケット。
 [m:Socket.open] の第二引数 type に使用します。
 
-- **SEE** [man:sys/socket.h(header)], [man:socket(2linux)], 
+- **SEE** [man:sys/socket.h(header)], [man:socket(2linux)],
      [man:raw(7linux)], [m:Socket.open]
 
 ### const SOCK_RDM -> Integer
@@ -333,7 +333,7 @@ Internal key-management function。
 ### const IPPROTO_AH -> Integer
 
 IPv6 auth header。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -343,7 +343,7 @@ level 引数に使用します。
 ### const IPPROTO_DSTOPTS -> Integer
 
 IPv6 destination option。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -353,7 +353,7 @@ level 引数に使用します。
 ### const IPPROTO_ESP -> Integer
 
 IPv6 Encapsulated Security Payload。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -363,7 +363,7 @@ level 引数に使用します。
 ### const IPPROTO_FRAGMENT -> Integer
 
 IPv6 fragmentation header。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -373,7 +373,7 @@ level 引数に使用します。
 ### const IPPROTO_HOPOPTS -> Integer
 
 IPv6 hop-by-hop options。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -383,7 +383,7 @@ level 引数に使用します。
 ### const IPPROTO_ICMPV6 -> Integer
 
 Internet Control Message Protocol for IPv6。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -393,7 +393,7 @@ level 引数に使用します。
 ### const IPPROTO_IPV6 -> Integer
 
 Internet Protocol Version 6。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -405,7 +405,7 @@ level 引数に使用します。
 ### const IPPROTO_NONE -> Integer
 
 IP6 no next header。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -414,7 +414,7 @@ level 引数に使用します。
 
 ### const IPPROTO_ROUTING -> Integer
 
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -423,7 +423,7 @@ level 引数に使用します。
 
 ### const IPPROTO_BIP -> Integer
 #%todo
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -431,7 +431,7 @@ level 引数に使用します。
 ### const IPPROTO_EGP -> Integer
 #%todo
 Exterior Gateway Protocol。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -439,7 +439,7 @@ level 引数に使用します。
 ### const IPPROTO_EON -> Integer
 #%todo
 ISO cnlp。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -447,7 +447,7 @@ level 引数に使用します。
 ### const IPPROTO_GGP -> Integer
 #%todo
 Gateway to Gateway Protocol。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -455,7 +455,7 @@ level 引数に使用します。
 ### const IPPROTO_HELLO -> Integer
 #%todo
 "hello" routing protocol。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -463,7 +463,7 @@ level 引数に使用します。
 ### const IPPROTO_ICMP -> Integer
 
 Control message protocol。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -474,7 +474,7 @@ level 引数に使用します。
 ### const IPPROTO_IDP -> Integer
 #%todo
 XNS IDP。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -482,7 +482,7 @@ level 引数に使用します。
 ### const IPPROTO_IGMP -> Integer
 #%todo
 Group Management Protocol。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -490,7 +490,7 @@ level 引数に使用します。
 ### const IPPROTO_IP -> Integer
 
 Internet protocol。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -505,7 +505,7 @@ IPPROTO 定数の最大値。
 ### const IPPROTO_ND -> Integer
 #%todo
 Sun net disk protocol
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -513,7 +513,7 @@ level 引数に使用します。
 ### const IPPROTO_PUP -> Integer
 #%todo
 PARC Universal Packet protocol。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -521,7 +521,7 @@ level 引数に使用します。
 ### const IPPROTO_RAW -> Integer
 
 Raw IP packets protocol。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -532,7 +532,7 @@ level 引数に使用します。
 ### const IPPROTO_TCP -> Integer
 
 Transmission control protocol。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -543,7 +543,7 @@ level 引数に使用します。
 ### const IPPROTO_TP -> Integer
 #%todo
 ISO transport protocol class 4。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -551,7 +551,7 @@ level 引数に使用します。
 ### const IPPROTO_UDP -> Integer
 
 User Datagram Protocol。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -562,7 +562,7 @@ level 引数に使用します。
 ### const IPPROTO_XTP -> Integer
 #%todo
 Xpress Transport Protocol。
-[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の 
+[m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt] の
 level 引数に使用します。
 
 また、[m:Socket.open] の protocol 引数に渡す利用法もあります。
@@ -570,12 +570,12 @@ level 引数に使用します。
 #%# IPプロトコル:
 #%# [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の level 引数に
 #%# 使用します。
-#%# 
+#%#
 #%# また、[[m:Socket.open]] の
 #%# 第一引数 domain に AF_INET もしくは AF_INET6,
 #%# 第二引数 type に SOCK_RAW を指定した場合の、
 #%# 第三引数 protocol にも使用します。
-#%# 
+#%#
 #%# なお、AF_INET で SOCK_STREAM な場合には IPPROTO_TCP を使用できますが、
 #%# その場合は 0 を指定しても同じ結果を得られますので通常は使用されません。
 #%# AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
@@ -794,7 +794,7 @@ IPv4の 244.0.0.1 に対応する整数です。
 
 ### const INADDR_ANY -> Integer
 
-A socket bound to INADDR_ANY receives packets from 
+A socket bound to INADDR_ANY receives packets from
 all interfaces and sends from the default IP address。
 IPv4アドレスの 0.0.0.0 に対応する整数です。
 
@@ -930,7 +930,7 @@ Add a multicast group membership
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)], [man:ip(7linux)]
      
 ### const IP_DEFAULT_MULTICAST_LOOP -> Integer
@@ -947,7 +947,7 @@ Drop a multicast group membership。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)], [man:ip(7linux)]
 
 ### const IP_HDRINCL -> Integer
@@ -956,7 +956,7 @@ Header is included with data。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)]
 
 ### const IP_MAX_MEMBERSHIPS -> Integer
@@ -965,7 +965,7 @@ Maximum number multicast groups a socket can join。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)]
 
 ### const IP_MULTICAST_IF -> Integer
@@ -974,7 +974,7 @@ IP multicast interface。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)], [man:ip(7linux)]
 
 ### const IP_MULTICAST_LOOP -> Integer
@@ -983,7 +983,7 @@ IP multicast loopback。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)], [man:ip(7linux)]
 
 ### const IP_MULTICAST_TTL -> Integer
@@ -992,7 +992,7 @@ IP multicast TTL。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)], [man:ip(7linux)]
 
 ### const IP_OPTIONS -> Integer
@@ -1001,7 +1001,7 @@ IP options to be included in packets。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)], [man:ip(7linux)]
 
 ### const IP_RECVDSTADDR -> Integer
@@ -1010,7 +1010,7 @@ Receive IP destination address with datagram。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)]
 
 ### const IP_RECVOPTS -> Integer
@@ -1019,7 +1019,7 @@ Receive IP destination address with datagram。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(7linux)]
 
 ### const IP_RECVRETOPTS -> Integer
@@ -1032,7 +1032,7 @@ IP options to be included in datagrams。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(7linux)]
 
 ### const IP_TOS -> Integer
@@ -1041,7 +1041,7 @@ IP type-of-service。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)], [man:ip(7linux)]
 
 ### const IP_TTL -> Integer
@@ -1050,7 +1050,7 @@ IP time-to-live。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)], [man:ip(7linux)]
 
 ### const IP_ADD_SOURCE_MEMBERSHIP -> Integer
@@ -1059,7 +1059,7 @@ Add a multicast group membership。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)]
 
 ### const IP_DROP_SOURCE_MEMBERSHIP -> Integer
@@ -1068,7 +1068,7 @@ Drop a multicast group membership。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)]
 
 ### const IP_BLOCK_SOURCE -> Integer
@@ -1077,7 +1077,7 @@ Block IPv4 multicast packets with a give source address。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)]
 
 ### const IP_UNBLOCK_SOURCE -> Integer
@@ -1086,7 +1086,7 @@ Unblock IPv4 multicast packets with a give source address。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)]
 
 ### const IP_DONTFRAG -> Integer
@@ -1095,7 +1095,7 @@ Don't fragment packets。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第2引数(optname)に使用します。
 
-- **SEE** [m:Socket::Constants::IPPROTO_IP], 
+- **SEE** [m:Socket::Constants::IPPROTO_IP],
      [man:ip(4freebsd)]
 
 ### const IP_FREEBIND -> Integer
@@ -1827,7 +1827,7 @@ The sender's credentials
 
 [c:Socket::AncillaryData] の type として利用します。
 
-- **SEE** [c:Socket::AncillaryData], 
+- **SEE** [c:Socket::AncillaryData],
      [m:BasicSocket#sendmsg], [m:BasicSocket#recvmsg],
      [man:unix(7linux)]
 
@@ -1837,7 +1837,7 @@ Process credentials
 
 [c:Socket::AncillaryData] の type として利用します。
 
-- **SEE** [c:Socket::AncillaryData], 
+- **SEE** [c:Socket::AncillaryData],
      [m:BasicSocket#sendmsg], [m:BasicSocket#recvmsg],
      [man:unix(4freebsd)]
 
@@ -2230,7 +2230,7 @@ Socket level options。
 [m:BasicSocket#getsockopt], [m:BasicSocket#setsockopt]
 の第一引数(level)に使用します。
 
-- **SEE** [man:getsockopt(2)], [man:setsockopt(2)], 
+- **SEE** [man:getsockopt(2)], [man:setsockopt(2)],
      [man:sys/socket.h(header)], [man:socket(7linux)]
      [man:getsockopt(2freebsd)]
 

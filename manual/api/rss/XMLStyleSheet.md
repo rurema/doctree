@@ -28,7 +28,7 @@ library: rss
 ### def type=
 #%todo
 
-# module RSS::XMLStyleSheetMixin 
+# module RSS::XMLStyleSheetMixin
 ## Instance Methods
 ### def xml_stylesheets
 ### def xml_stylesheets=

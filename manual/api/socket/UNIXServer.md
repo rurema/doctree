@@ -58,7 +58,7 @@ UNIXServer.open("/tmp/s") {|serv|
 
 [man:accept(2)] がエラーになった場合、[m:Socket#accept] と同じ例外が発生します。
 
-[c:Errno::EWOULDBLOCK], [c:Errno::EAGAIN], 
+[c:Errno::EWOULDBLOCK], [c:Errno::EAGAIN],
 [c:Errno::ECONNABORTED], [c:Errno::EPROTO] のいずれかの例外が発生した場合は、その例外には [c:IO::WaitReadable] が extend
 されます。それを利用してリトライ可能な例外を掴まえることができます。
 

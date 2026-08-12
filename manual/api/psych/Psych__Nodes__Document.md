@@ -51,7 +51,7 @@ YAML ドキュメントのバージョンを返します。
 - **SEE** [m:Psych::Nodes::Document#version=],
      [m:Psych::Nodes::Document.new]
 
-### def version=(ver) 
+### def version=(ver)
 
 YAML ドキュメントのバージョンを設定します。
 

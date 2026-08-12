@@ -1,7 +1,7 @@
 ---
 library: _builtin
 ---
-# module ObjectSpace 
+# module ObjectSpace
 
 全てのオブジェクトを操作するためのモジュールです。
 

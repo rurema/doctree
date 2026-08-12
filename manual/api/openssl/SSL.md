@@ -7,7 +7,7 @@ library: openssl
   - [c:OpenSSL::SSL::SSLServer]
   - [c:OpenSSL::SSL::SSLSocket]
 
-#%# internal 
+#%# internal
 #%# == Module functions
 #%# --- verify_certificate_identity(cert, hostname)
 
@@ -163,7 +163,7 @@ OpenSSL による通信の圧縮を禁止します。
 
 サーバーモードであるかクライアントモードであるかによって意味がことなります。
 
-サーバーモード: クライアントが証明書を返さない場合に 
+サーバーモード: クライアントが証明書を返さない場合に
 TLS/SSL ハンドシェイクを即座に終了させます。
 このフラグは VERIFY_PEER フラグとともに使われなければなりません。
 
@@ -208,5 +208,5 @@ anonymous cipher が有効であるかどうかは
 
 [c:OpenSSL::SSL] 関連のエラーが生じたときに発生する例外です。
 
-#%# internal 
+#%# internal
 #%# = class OpenSSL::SSL::Nonblock

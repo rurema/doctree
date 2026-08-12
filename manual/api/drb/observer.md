@@ -3,7 +3,7 @@ type: library
 include:
   - Observable
 ---
-DRb 用の修正をした [c:Observable] 
+DRb 用の修正をした [c:Observable]
 ([c:DRb::DRbObservable])
 を定義するライブラリ。
 

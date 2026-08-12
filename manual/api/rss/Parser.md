@@ -27,7 +27,7 @@ library: rss
 
 # class RSS::NotWellFormedError < RSS::Error
 ## Instance Methods
-### def line 
+### def line
 #%todo
 
 ### def element

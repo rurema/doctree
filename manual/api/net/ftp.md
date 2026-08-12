@@ -68,8 +68,8 @@ FTP を実装したクラスです。
 
 新しい Net::FTP のインスタンスを生成します。
 
-host が指定された場合、生成されたインスタンスに対して 
-[m:Net::FTP#connect] を呼び出し、さらにログインユーザ名が指定された場合は [m:Net::FTP#login] 
+host が指定された場合、生成されたインスタンスに対して
+[m:Net::FTP#connect] を呼び出し、さらにログインユーザ名が指定された場合は [m:Net::FTP#login]
 を呼び出します。
 
 2 番目の引数には、後方互換のためログインに使うユーザ名を表す文字列をそのまま渡すこともできますが、各キーがシンボルであるオプションのハッシュを渡すこともできます。オプションのハッシュを渡した場合、3 番目・4 番目の引数(passwd、acct)は無視され、ユーザ名やパスワードはオプションの
@@ -134,7 +134,7 @@ host が指定された場合、生成されたインスタンスに対して
 
 ブロックを与えなかった場合には生成したインスタンスを返します。
 
-user が指定された場合は [m:Net::FTP#login] 
+user が指定された場合は [m:Net::FTP#login]
 を呼び出します。
 
 - **param** `host` -- 接続するホストを指定します。
@@ -220,7 +220,7 @@ acct で指定したパラメータで送ります。
 ### def retrbinary(cmd, blocksize, rest_offset = nil) -> nil
 ### def retrbinary(cmd, blocksize, rest_offset = nil){|data| ...} -> nil
 
-サーバーに cmd で指定されたコマンドを送り、バイナリデータを 
+サーバーに cmd で指定されたコマンドを送り、バイナリデータを
 取り寄せます。
 
 blocksize で指定されたバイト単位でデータを読み込み、ブロックに渡します。
@@ -241,7 +241,7 @@ REST コマンドを送り、指定したバイト数の位置から転送を開
 
 ### def retrlines(cmd){|line| ...} -> nil
 
-サーバーに cmd で指定されたコマンドを送り、テキストデータを 
+サーバーに cmd で指定されたコマンドを送り、テキストデータを
 取り寄せます。
 
 一行ずつテキストを読み込み、ブロックに渡します。
@@ -258,7 +258,7 @@ REST コマンドを送り、指定したバイト数の位置から転送を開
 ### def storbinary(cmd, file, blocksize, rest_offset = nil) -> nil
 ### def storbinary(cmd, file, blocksize, rest_offset = nil){|data| ...} -> nil
 
-サーバーに cmd で指定されたコマンドを送り、バイナリデータを 
+サーバーに cmd で指定されたコマンドを送り、バイナリデータを
 送ります。
 
 送るデータは [c:IO] のインスタンスを
@@ -408,7 +408,7 @@ dir を省略した場合カレントディレクトリが指定されます。
 
 ### def list(*args) -> [String]
 ### def list(*args) {|line| ... } -> nil
-### def ls(*args) -> [String] 
+### def ls(*args) -> [String]
 ### def ls(*args) {|line| ... } -> nil
 ### def dir(*args) -> [String]
 ### def dir(*args) {|line| ...} -> nil
@@ -916,9 +916,9 @@ FTPのデフォルトのポート番号(21)です。
 
 #%# #@since 1.9.2
 #%# = class Net::FTP::NullSocket < Object
-#%# 
+#%#
 #%# 全てのメソッド呼び出しに対して [[c:Net::FTPConnectionError]] を発生させます。
-#%# 
+#%#
 #%# #@end
 
 # class Net::FTPError < StandardError
@@ -936,7 +936,7 @@ FTPの応答が 1yz や 3yz であり、それが想定外であることを表�
 
 # class Net::FTPTempError < Net::FTPError
 
-FTP の応答コード 4yz 
+FTP の応答コード 4yz
 (Transient Negative Completion reply)
 を表す例外クラスです。
 
@@ -944,7 +944,7 @@ FTP の応答コード 4yz
 
 # class Net::FTPPermError < Net::FTPError
 
-FTP の応答コード 5yz 
+FTP の応答コード 5yz
 (Permanent Negative Completion reply)
 を表す例外クラスです。
 

@@ -81,7 +81,7 @@ print sh.cat("/etc/passwd").head.collect {|line| /keiju/ =~ line }
 
 # class Shell < Object
 
-Shell オブジェクトはカレントディレクトリを持ち, 
+Shell オブジェクトはカレントディレクトリを持ち,
 コマンド実行はそこからの相対パスになります.
 
 ## Class Methods
@@ -246,7 +246,7 @@ sh.cd("/tmp")
 
 デバッグ用フラグを参照します。
 
-### def Shell.debug=(val) 
+### def Shell.debug=(val)
 
 デバッグ用のフラグを設定します。
 
@@ -285,7 +285,7 @@ p Shell.default_system_path
 # => "/Users/kouya/bin"
 ```
 
-### def Shell.verbose -> bool  
+### def Shell.verbose -> bool
 ### def Shell.verbose? -> bool
 #%todo
 
@@ -347,7 +347,7 @@ p sh.cwd
 # => "/Users/kouya/tall"
 ```
 
-### def system_path -> Array 
+### def system_path -> Array
 ### def system_path=(path)
 
 コマンドサーチパスの配列を返す。
@@ -457,7 +457,7 @@ Fileクラスにある同名のクラスメソッドと同じです.
 
 - **SEE** [m:File.expand_path]
 
-### def verbose -> bool  
+### def verbose -> bool
 ### def verbose? -> bool
 #%todo
 

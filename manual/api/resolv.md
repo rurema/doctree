@@ -160,14 +160,14 @@ IPアドレスにマッチする正規表現です。
 
 #%# = class Resolv::ResolvTimeout < TimeoutError
 #%# 名前解決がタイムアウトしたときに発生する例外のクラスです。
-#%# 
+#%#
 #%# この例外はライブラリ内部で rescue されて
 #%# Resolv::ResolvError に変換されるので、ユーザは
 #%# 利用しないはずです。
 
 # class Resolv::Hosts < Object
 
-/etc/hosts (Windows であれば 
+/etc/hosts (Windows であれば
 %SystemRoot%\System32\drivers\etc\hosts など)
 を使用するホスト名リゾルバです。
 
@@ -679,7 +679,7 @@ Resolv::DNS::Resource::SOA のインスタンスを生成して返します。
 - **param** `minimum` -- リソースレコードの最小 TTL (秒単位)
 
 #%# --- decode_rdata(msg) -> Resolv::DNS::Resource::SOA
-#%# 
+#%#
 #%# このメソッドはユーザが使うべきではありません。
 
 ## Instance Methods
@@ -717,10 +717,10 @@ Resolv::DNS::Resource::SOA のインスタンスを生成して返します。
 #%# #@todo
 
 #%# == Constants
-#%# 
+#%#
 #%# --- TypeValue
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 #%# DNS のクエリータイプ SOA に対応する整数値です。
 
 # class Resolv::DNS::Resource::PTR < Resolv::DNS::Resource::DomainName
@@ -731,10 +731,10 @@ DNS リソースの PTR レコードを表す抽象クラスです。
 [c:Resolv::DNS::Resource::IN::PTR] を使うべきです。
 
 #%# == Constants
-#%# 
+#%#
 #%# --- TypeValue
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 #%# DNS のクエリータイプ PTR に対応する整数値です。
 
 # class Resolv::DNS::Resource::HINFO < Resolv::DNS::Resource
@@ -757,7 +757,7 @@ Resolv::DNS::Resource::HINFO のインスタンスを生成します。
 
 #%# --- decode_rdata(msg) -> Resolv::DNS::Resource::HINFO
 #%# このメソッドはユーザが使うべきではありません。
-#%# 
+#%#
 #%# #@todo
 
 ## Instance Methods
@@ -773,12 +773,12 @@ Resolv::DNS::Resource::HINFO のインスタンスを生成します。
 #%# --- encode_rdata(msg) -> ()
 #%# このメソッドはユーザが使うべきではありません。
 #%# #@todo
-#%# 
+#%#
 #%# == Constants
-#%# 
+#%#
 #%# --- TypeValue
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 #%# DNS のクエリータイプ HINFO に対応する整数値です。
 
 # class Resolv::DNS::Resource::MINFO < Resolv::DNS::Resource
@@ -814,12 +814,12 @@ Resolv::DNS::Resource::MINFO のインスタンスを生成します。
 #%# --- encode_rdata(msg) -> ()
 #%# #@todo
 #%# このメソッドはユーザが使うべきではありません。
-#%# 
+#%#
 #%# == Constants
-#%# 
+#%#
 #%# --- TypeValue
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 #%# DNS のクエリータイプ MINFO に対応する整数値です。
 
 # class Resolv::DNS::Resource::MX < Resolv::DNS::Resource
@@ -840,7 +840,7 @@ Resolv::DNS::Resource::MX のインスタンスを返します。
 
 #%# --- decode_rdata(msg) -> Resolv::DNS::Resource::MX
 #%# このメソッドはユーザが使うべきではありません。
-#%# #@todo 
+#%# #@todo
 
 ## Instance Methods
 
@@ -855,12 +855,12 @@ MXのホスト名を返します。
 #%# --- encode_rdata(msg) -> ()
 #%# このメソッドはユーザが使うべきではありません。
 #%# #@todo
-#%# 
+#%#
 #%# == Constants
-#%# 
+#%#
 #%# --- TypeValue
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 #%# DNS のクエリータイプ MX に対応する整数値です。
 
 # class Resolv::DNS::Resource::TXT < Resolv::DNS::Resource
@@ -898,13 +898,13 @@ TXT レコードの最初の文字列を返します。
 TXT レコードの文字列を配列で返します。
 
 #%# == Constants
-#%# 
+#%#
 #%# --- TypeValue
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 #%# DNS のクエリータイプ MX に対応する整数値です。
 
-# class Resolv::DNS::Resource::ANY < Resolv::DNS::Query 
+# class Resolv::DNS::Resource::ANY < Resolv::DNS::Query
 
 DNS のすべてのクラスに対するクエリーを表わす抽象クラスです。
 
@@ -912,10 +912,10 @@ DNS のすべてのクラスに対するクエリーを表わす抽象クラス�
 [c:Resolv::DNS::Resource::IN::ANY] を使うべきです。
 
 #%# == Constants
-#%# 
+#%#
 #%# --- TypeValue
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 #%# DNS のクエリータイプ ANY に対応する整数値です。
 
 # module Resolv::DNS::Resource::IN
@@ -926,10 +926,10 @@ DNS のインターネットクラスリソースを表すモジュールです�
 mixinして利用します。
 
 #%# == Constants
-#%# 
+#%#
 #%# --- ClassValue
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 #%# DNS のクラス IN に対応する整数値です。
 
 # class Resolv::DNS::Resource::IN::NS < Resolv::DNS::Resource::NS
@@ -965,10 +965,10 @@ DNS リソースのクラス IN、タイプ TXT に対応するクラスです�
 DNS クエリーのクラス IN、タイプ ANY に対応するクラスです。
 
 #%# == Constants
-#%# 
+#%#
 #%# --- ClassValue
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 #%# DNS のクラス IN に対応する整数値です。
 
 # class Resolv::DNS::Resource::IN::A < Resolv::DNS::Resource
@@ -988,7 +988,7 @@ Resolv::DNS::Resource::IN::A のインスタンスを生成します。
 #%# --- decode_rdata(msg) -> Resolv::DNS::Resource::IN::A
 #%# #@todo
 #%# このメソッドはユーザが使うべきではありません。
-#%# 
+#%#
 ## Instance Methods
 
 ### def address -> Resolv::IPv4
@@ -998,12 +998,12 @@ IPv4アドレスを返します。
 #%# --- encode_rdata(msg) -> ()
 #%# #@todo
 #%# このメソッドはユーザが使うべきではありません。
-#%# 
+#%#
 #%# == Constants
-#%# 
+#%#
 #%# --- TypeValue
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 #%# DNS のクエリータイプ A に対応する整数値です。
 
 # class Resolv::DNS::Resource::IN::WKS < Resolv::DNS::Resource
@@ -1046,9 +1046,9 @@ IPプロトコル番号を返します。
 #%# --- encode_rdata(msg) -> ()
 #%# #@todo
 #%# このメソッドはユーザが使うべきではありません。
-#%# 
+#%#
 #%# == Constants
-#%# 
+#%#
 #%# --- TypeValue
 #%# #@todo
 
@@ -1083,9 +1083,9 @@ IPv6アドレスを返します。
 #%# --- encode_rdata(msg) -> ()
 #%# #@todo
 #%# このメソッドはユーザが使うべきではありません。
-#%# 
+#%#
 #%# == Constants
-#%# 
+#%#
 #%# --- TypeValue
 #%# #@todo
 
@@ -1144,84 +1144,84 @@ priority が同じならば [m:Resolv::DNS::Resource::IN::SRV#weight]
 選択肢が一つしかない、つまり選択する必要がない場合にはこの値は人間が読みやすいよう 0 にすべきです。
 
 #%# == Constants
-#%# 
+#%#
 #%# --- TypeValue
 #%# #@todo
 
 #%# = module Resolv::DNS::OpCode
 #%# このモジュールはユーザが使うべきではありません。
 #%# == Constants
-#%# 
+#%#
 #%# --- Query
 #%# #@todo
-#%# 
+#%#
 #%# --- IQuery
 #%# #@todo
-#%# 
+#%#
 #%# --- Status
 #%# #@todo
-#%# 
+#%#
 #%# --- Notify
 #%# #@todo
-#%# 
+#%#
 #%# --- Update
 #%# #@todo
-#%# 
+#%#
 #%# = module Resolv::DNS::RCode
-#%# 
+#%#
 #%# == Constants
-#%# 
+#%#
 #%# --- NoError
 #%# #@todo
-#%# 
+#%#
 #%# --- FormErr
 #%# #@todo
-#%# 
+#%#
 #%# --- ServFail
 #%# #@todo
-#%# 
+#%#
 #%# --- NXDomain
 #%# #@todo
-#%# 
+#%#
 #%# --- NotImp
 #%# #@todo
-#%# 
+#%#
 #%# --- Refused
 #%# #@todo
-#%# 
+#%#
 #%# --- YXDomain
 #%# #@todo
-#%# 
+#%#
 #%# --- YXRRSet
 #%# #@todo
-#%# 
+#%#
 #%# --- NXRRSet
 #%# #@todo
-#%# 
+#%#
 #%# --- NotAuth
 #%# #@todo
-#%# 
+#%#
 #%# --- NotZone
 #%# #@todo
-#%# 
+#%#
 #%# --- BADVERS
 #%# #@todo
-#%# 
+#%#
 #%# --- BADSIG
 #%# #@todo
-#%# 
+#%#
 #%# --- BADKEY
 #%# #@todo
-#%# 
+#%#
 #%# --- BADTIME
 #%# #@todo
-#%# 
+#%#
 #%# --- BADMODE
 #%# #@todo
-#%# 
+#%#
 #%# --- BADNAME
 #%# #@todo
-#%# 
+#%#
 #%# --- BADALG
 #%# #@todo
 
@@ -1240,46 +1240,46 @@ DNSメッセージのエンコードに失敗したときに発生する例外�
 
 #%# = class Resolv::DNS::Config
 #%# このクラスはユーザが使うべきではありません。
-#%# 
-#%# 
+#%#
+#%#
 #%# == Class Methods
-#%# 
+#%#
 #%# --- new(config_info = nil)
 #%# #@todo
-#%# 
+#%#
 #%# --- default_config_hash(filename = '/etc/resolv.conf')
 #%# #@todo
-#%# 
+#%#
 #%# --- parse_resolv_conf(filename)
 #%# #@todo
-#%# 
+#%#
 #%# == Instance Methods
-#%# 
+#%#
 #%# --- lazy_initialize
 #%# #@todo
-#%# 
+#%#
 #%# --- generate_candidates(name)
 #%# #@todo
-#%# 
+#%#
 #%# --- generate_timeouts
 #%# #@todo
-#%# 
+#%#
 #%# --- resolv(name)
 #%# #@todo
-#%# 
+#%#
 #%# --- single?
 #%# #@todo
-#%# 
+#%#
 #%# == Constants
-#%# 
+#%#
 #%# --- InitialTimeout
 #%# #@todo
 
 #%# = class Resolv::DNS::Config::NXDomain < Resolv::ResolvError
 #%# 問合せたドメイン名が存在しないことを示す例外。
-#%# 
+#%#
 #%# ライブラリ内部で握り潰すためユーザは使わないはず。
-#%# 
+#%#
 
 # class Resolv::DNS::Config::OtherResolvError < Resolv::ResolvError
 
@@ -1290,15 +1290,15 @@ Resolv::DNSの各メソッドがこの例外を発生させる可能性があり
 #%# = class Resolv::DNS::Message < Object
 #%# このクラスはユーザが使うべきではありません。
 #%# == Class Method
-#%# 
+#%#
 #%# --- new(id = ((@@identifier += 1) & 0xffff))
 #%# #@todo
-#%# 
+#%#
 #%# --- decode(m)
 #%# #@todo
-#%# 
+#%#
 #%# == Instance Method
-#%# 
+#%#
 #%# --- add_question(name, typeclass)
 #%# --- each_question
 #%# --- add_answer(name, ttl, data)
@@ -1310,60 +1310,60 @@ Resolv::DNSの各メソッドがこの例外を発生させる可能性があり
 #%# --- each_resource
 #%# --- encode
 #%# #@todo
-#%# 
+#%#
 #%# --- id
 #%# --- id=()
 #%# #@todo
-#%# 
+#%#
 #%# --- qr
 #%# --- qr=()
 #%# #@todo
-#%# 
+#%#
 #%# --- opcode
 #%# --- opcode=()
 #%# #@todo
-#%# 
+#%#
 #%# --- aa
 #%# --- aa=()
 #%# #@todo
-#%# 
+#%#
 #%# --- tc
 #%# --- tc=()
 #%# #@todo
-#%# 
+#%#
 #%# --- rd
 #%# --- rd=()
 #%# #@todo
-#%# 
+#%#
 #%# --- ra
 #%# --- ra=()
 #%# #@todo
-#%# 
+#%#
 #%# --- rcode
 #%# --- rcode=()
 #%# #@todo
-#%# 
+#%#
 #%# --- question
 #%# #@todo
-#%# 
+#%#
 #%# --- answer
 #%# #@todo
-#%# 
+#%#
 #%# --- authority
 #%# #@todo
-#%# 
+#%#
 #%# --- additional
 #%# #@todo
-#%# 
+#%#
 #%# = class Resolv::DNS::Message::MessageDecoder < Object
-#%# 
+#%#
 #%# == Class Method
-#%# 
+#%#
 #%# --- new(data)
 #%# #@todo
-#%# 
+#%#
 #%# == Instance Method
-#%# 
+#%#
 #%# --- get_bytes(len)
 #%# --- get_length16
 #%# --- get_label
@@ -1375,16 +1375,16 @@ Resolv::DNSの各メソッドがこの例外を発生させる可能性があり
 #%# --- get_string_list
 #%# --- get_unpack(template)
 #%# #@todo
-#%# 
+#%#
 #%# = class Resolv::DNS::Message::MessageEncoder < Object
-#%# 
+#%#
 #%# == Class Methods
-#%# 
+#%#
 #%# --- new
 #%# #@todo
-#%# 
+#%#
 #%# == Instance Method
-#%# 
+#%#
 #%# --- put_bytes(d)
 #%# --- put_label(d)
 #%# --- put_labels(d)
@@ -1394,7 +1394,7 @@ Resolv::DNSの各メソッドがこの例外を発生させる可能性があり
 #%# --- put_string(d)
 #%# --- put_string_list(ds)
 #%# #@todo
-#%# 
+#%#
 #%# --- to_s
 #%# #@todo
 
@@ -1403,56 +1403,56 @@ Resolv::DNSの各メソッドがこの例外を発生させる可能性があり
 DNSクエリを表す抽象クラスです。
 
 #%# == Class Methods
-#%# 
+#%#
 #%# --- decode_rdata(msg)
 #%# このメソッドはユーザが使うべきではありません。
-#%# 
+#%#
 #%# == Instance Method
-#%# 
+#%#
 #%# --- encode_rdata(msg)
 #%# このメソッドはユーザが使うべきではありません。
-#%# 
-#%# 
+#%#
+#%#
 #%# = module Resolv::DNS::Label
 #%# ユーザがこのモジュールを使う必要はないでしょう。
-#%# 
+#%#
 #%# ドメイン名を取り扱うためのユーティリティモジュールです。
 #%# [[c:Resolv::DNS::Name]] から使われます。
-#%# 
+#%#
 #%# == Class Methods
-#%# 
+#%#
 #%# --- split(name) -> [Resolv::DNS::Label::Str]
 #%# 文字列 name を分割して、 [[c:Resolv::DNS::Label::Str]] の配列を返します。
-#%# 
+#%#
 #%# @paarm name ドメイン名の文字列。
-#%# 
+#%#
 #%# = class Resolv::DNS::Label::Str
 #%# ユーザがこのクラスを使う必要はないでしょう。
-#%# 
+#%#
 #%# ドメイン名をドットで分割した各要素を表すクラスです。
-#%# 
+#%#
 #%# 文字列中の大文字と小文字を同一視するために存在するクラスです。
-#%# 
+#%#
 #%# == Class Methods
-#%# 
+#%#
 #%# --- new(string) -> Resolv::DNS::Label::Str
 #%# 文字列 string から [[c:Resolv::DNS::Label::Str]]のインスタンスを生成します。
-#%# 
-#%# @param string 
-#%# 
+#%#
+#%# @param string
+#%#
 #%# == Instance Methods
-#%# 
+#%#
 #%# --- string -> String
 #%# --- to_s -> String
 #%# このメソッドはユーザが使うべきではありません。
-#%# 
+#%#
 #%# [[m:Resolv::DNS::Label::Str.new]] で引数に与えた文字列を返します。
-#%# 
+#%#
 #%# --- downcase -> String
 #%# このメソッドはユーザが使うべきではありません。
-#%# 
+#%#
 #%# [[m:Resolv::DNS::Label::Str.new]] で引数に与えた文字列を小文字にして返します。
-#%# 
+#%#
 
 # class Resolv::DNS::Name < Object
 
@@ -1480,7 +1480,7 @@ labels は `Resolv::DNS::Label::Str` の配列を与えます。
 
 #%# --- to_a -> [Resolv::DNS::Label::Str]
 #%# このメソッドはユーザが使うべきではありません。
-#%# 
+#%#
 
 ### def to_s -> String
 
@@ -1490,7 +1490,7 @@ labels は `Resolv::DNS::Label::Str` の配列を与えます。
 
 #%# --- [](i) -> Resolv::DNS::Label::Str
 #%# このメソッドはユーザが使うべきではありません。
-#%# 
+#%#
 
 ### def absolute? -> bool
 
@@ -1519,27 +1519,27 @@ p Resolv::DNS::Name.create("w.z").subdomain_of?(domain) # => false
 DNSリソースを表す抽象クラスです。
 
 #%# == Class Methods
-#%# 
+#%#
 #%# --- decode_rdata(msg)
 #%# --- get_class(type_value, class_value)
 #%# #@todo
-#%# 
+#%#
 #%# == Instance Methods
-#%# 
+#%#
 #%# --- encode_rdata(msg)
 #%# #@todo
-#%# 
+#%#
 #%# == Constants
-#%# 
+#%#
 #%# --- ClassHash
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 #%# --- ClassValue
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 #%# --- ClassInsensitiveTypes
 #%# この定数はユーザが使うべきではありません。
-#%# 
+#%#
 
 # class Resolv::IPv4 < Object
 
@@ -1559,7 +1559,7 @@ Resolv::IPv4 のインスタンスを生成します。
 4 byte の文字列 address から Resolv::IPv4 のインスタンスを生成します。
 
 - **param** `address` -- 4 byte のバイナリ列の IPv4 のアドレス
-- **SEE** [m:Resolv::IPv4.create] 
+- **SEE** [m:Resolv::IPv4.create]
 
 ## Instance Methods
 

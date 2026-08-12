@@ -26,7 +26,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
   - [obsolete]: 廃止された(される予定の)機能
   - [platform]: 対応プラットフォームの追加
 
-## 1.8.1 (2003-12-25) -> 1.8.2 (2004-12-25) 
+## 1.8.1 (2003-12-25) -> 1.8.2 (2004-12-25)
 
 * cgi/session においてクライアントからセッション ID を指定できてしまうバグが
 
@@ -52,7 +52,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 ((<URL:https://magazine.rubyist.net/articles/0002/0002-RubyCore.html>))
 ```
 
-* tk の変更点は 
+* tk の変更点は
 
 ```text
 ((<URL:https://magazine.rubyist.net/articles/0003/0003-RubyTkMovement.html>))
@@ -116,7 +116,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
   ((<ruby-core:03922>))
 
 - **`String#inspect [ruby] [bug]`**:
-  式展開になる '#'がエスケープされるようになりました。 
+  式展開になる '#'がエスケープされるようになりました。
   ((<ruby-core:03922>))
     $ ruby1.8.1 -e "puts '# #{}'.inspect"
     "# #{}"
@@ -125,7 +125,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
     "# \#{}"
 
 - **`String#dump [ruby] [bug]`**:
-  式展開にならない '#'がエスケープされないようになりました。 
+  式展開にならない '#'がエスケープされないようになりました。
   ((<ruby-core:03922>))
     $ ruby1.8.1 -e "puts '# #{}'.dump"
     "\# \#{}"
@@ -138,7 +138,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 - **`rss/rss [lib] [obsolete]`**:
   #item=/#set_item and so on are obsolete.
 
-### 2004-12-06 
+### 2004-12-06
 
 - **`Hash#hash [ruby] [new]`**:
 
@@ -247,7 +247,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 ### 2004-10-18
 
 - **`WEBrick::HTTPRequest [lib] [new]`**:
-  new methods. accept, accept_charset, accept_encoding, accept_language, 
+  new methods. accept, accept_charset, accept_encoding, accept_language,
   content_length and content_type.
 
 - **WEBrick::HTTPResponse#content_length= [lib] [new]**:
@@ -344,10 +344,10 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 - **`object.c     [ruby] [bug]`**:
   特異クラスが特異オブジェクトのクラスを継承していると見なされているバグを修正しました。((<ruby-dev:23690>))
 
-    $ ruby1.8.1 -e 'class X;end; x=X.new; class << x;p self < X; end' 
+    $ ruby1.8.1 -e 'class X;end; x=X.new; class << x;p self < X; end'
     true
 
-    $ ruby1.8.2 -e 'class X;end; x=X.new; class << x;p self < X; end' 
+    $ ruby1.8.2 -e 'class X;end; x=X.new; class << x;p self < X; end'
     nil
 
 ### 2004-06-04
@@ -391,7 +391,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 - **`DBM::NEWDB            [lib] [new]`**:
 
   DBM.open に第3引数を追加し、DBM::READER,
-  DBM::WRITER, DBM::WRCREAT, DBM::NEWDB を指定できるようになりました。  
+  DBM::WRITER, DBM::WRCREAT, DBM::NEWDB を指定できるようになりました。
   ((<ruby-dev:23520>))
 
 ### 2004-05-13
@@ -402,10 +402,10 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 - **`String#unpack [ruby] [change]`**:
   Z* が最初の null までしかマッチしないようになりました。((<ruby-talk:98281>))
 
-    $ ruby1.8.1 -e 'p "abc\000def\000".unpack("Z*Z*")' 
+    $ ruby1.8.1 -e 'p "abc\000def\000".unpack("Z*Z*")'
     ["abc\000def", ""]
 
-    $ ruby1.8.2 -e 'p "abc\000def\000".unpack("Z*Z*")' 
+    $ ruby1.8.2 -e 'p "abc\000def\000".unpack("Z*Z*")'
     ["abc", "def"]
 
 ### 2004-05-10
@@ -430,7 +430,7 @@ ruby 1.8.2 での ruby 1.8.1 からの変更点です。
 - **`Hash#==   [change]`**:
 - **`Hash#eql? [new]`**:
 
-  Hash#== は内容が一致していれば真に、Hash#eql? は、さらに 
+  Hash#== は内容が一致していれば真に、Hash#eql? は、さらに
   ハッシュのデフォルト値が同じ(==)なら真になるよう定義されました。
 
         h1 = Hash.new("a")

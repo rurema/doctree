@@ -7,7 +7,7 @@ library: openssl
 
 [c:IO] クラスと同様のメソッドを提供しています。
 
-内部的には sysread, syswrite, sysread_nonblock, syswrite_nonblock, 
+内部的には sysread, syswrite, sysread_nonblock, syswrite_nonblock,
 sysclose といった [c:OpenSSL::SSL::SSLSocket] が提供するメソッドを利用し、 [c:OpenSSL::SSL::SSLSocket] がラップしているソケットをバッファ経由でデータを暗号化してやりとりを行います。
 
 ### IO との違い

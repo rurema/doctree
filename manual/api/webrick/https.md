@@ -20,7 +20,7 @@ require:
 
 ### def cipher -> Array
 
-現在実際に使われている暗号の情報を配列で返します。 
+現在実際に使われている暗号の情報を配列で返します。
 
 - **SEE** [m:OpenSSL::SSL::SSLSocket#cipher]
 

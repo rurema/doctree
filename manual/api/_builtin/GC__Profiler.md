@@ -8,7 +8,7 @@ GC の起動回数や起動したタイミング、処理時間などの GC に�
 
 - **SEE** [c:GC]
 
-## Singleton Methods 
+## Singleton Methods
 
 ### def GC::Profiler.enabled? -> bool
 

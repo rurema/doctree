@@ -13,7 +13,7 @@ HTTP ヘッダのためのモジュールです。
 #%# --- initialize_http_header(initheader) -> ()
 #%# このモジュールを mix-in したクラスの
 #%# 初期化時に呼びだし、 このモジュールの各メソッド
-#%# を利用可能にします。 
+#%# を利用可能にします。
 #%# @param initheader 初期化時のヘッダの内容を
 #%#                   {ヘッダフィールド名(文字列)=>その中身(文字列)}
 #%#                   というハッシュで与えます。
@@ -446,7 +446,7 @@ name.downcase.split(/-/).capitalize.join('-')
 ### def each_capitalized_name {|name| .... } -> ()
 
 保持しているヘッダ名を正規化
-('x-my-header' -> 'X-My-Header') 
+('x-my-header' -> 'X-My-Header')
 して、ブロックに渡します。
 
 ```ruby title="例"

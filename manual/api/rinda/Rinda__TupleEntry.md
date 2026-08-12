@@ -18,10 +18,10 @@ include:
 #%# Rinda::TupleSpace が内部的に呼び出す
 #%# --- new(ary, sec = nil)
 #%# #@todo
-#%# 
+#%#
 #%# Creates a TupleEntry based on +ary+ with an optional renewer or
 #%# expiry time +sec+.
-#%# 
+#%#
 #%# A renewer must implement the +renew+ method which returns a
 #%# Numeric, nil, or true to indicate when the tuple has expired.
 
@@ -72,7 +72,7 @@ Tue Jan 19 03:14:07 GMT Standard Time 2038 を返します。
 
 - **SEE** [m:Rinda::TupleEntry#expires=]
 
-### def expires=(expires) 
+### def expires=(expires)
 
 タプルの期限切れの時刻を指定します。
 
@@ -91,22 +91,22 @@ Tue Jan 19 03:14:07 GMT Standard Time 2038 を返します。
 - **SEE** [m:Rinda::TupleEntry#\[\]]
 
 #%# Used internally from renew
-#%# --- make_expires(sec = nil) 
+#%# --- make_expires(sec = nil)
 #%# #@todo
-#%# 
+#%#
 #%# Returns an expiry Time based on +sec+ which can be one of:
-#%# 
+#%#
 #%# Numeric: +sec+ seconds into the future
-#%# 
+#%#
 #%# +true+:  the expiry time is the start of 1970 (i.e. expired)
-#%# 
+#%#
 #%# +nil+:   it is Tue Jan 19 03:14:07 GMT Standard Time 2038 (i.e.
 #%#          when UNIX clocks will die)
 
 #%# Used internally from initialize
 #%# --- make_tuple(ary)
 #%# #@todo
-#%# 
+#%#
 #%# Creates a Rinda::Tuple for +ary+.
 
 ### def renew(sec_or_renewer) -> ()

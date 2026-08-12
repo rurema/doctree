@@ -74,7 +74,7 @@ SSLSocket オブジェクトを返します。
 
 ### def listen(backlog=5) -> 0
 
-ラップしている [c:TCPServer] の [m:TCPServer#listen] 
+ラップしている [c:TCPServer] の [m:TCPServer#listen]
 を呼びだします。
 
 通常は TCPServer の初期化時に listen が呼びだされるため呼ぶ必要はないはずです。

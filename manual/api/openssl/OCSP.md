@@ -62,7 +62,7 @@ exts.each{|ext| p ext}
 
 #%# 意味は
 #%# don't allow an OCSP response to be signed by the issuing
-#%# CA certificate. 
+#%# CA certificate.
 #%# とのこと
 
 ### const NOCERTS -> Integer
@@ -207,24 +207,24 @@ CRL からの削除を意味します。
 
 ### const V_CERTSTATUS_GOOD -> Integer
 
-[m:OpenSSL::OCSP::BasicResponse#status] 
+[m:OpenSSL::OCSP::BasicResponse#status]
 のステータスコードで証明書が有効であることを意味します。
 
 ### const V_CERTSTATUS_REVOKED -> Integer
 
-[m:OpenSSL::OCSP::BasicResponse#status] 
+[m:OpenSSL::OCSP::BasicResponse#status]
 のステータスコードで証明書が失効していることを意味します。
 
 ### const V_CERTSTATUS_UNKNOWN -> Integer
 
-[m:OpenSSL::OCSP::BasicResponse#status] 
+[m:OpenSSL::OCSP::BasicResponse#status]
 のステータスコードで証明書の有効性が不明であることを意味します。
 
 #%# 以下の2つの定数はおそらく使い道がない
 #%# --- V_RESPID_KEY -> Integer
 #%# #@todo
 #%# --- V_RESPID_NAME -> Integer
-#%# #@todo 
+#%# #@todo
 
 # class OpenSSL::OCSP::OCSPError < OpenSSL::OpenSSLError
 
@@ -321,7 +321,7 @@ certs に証明書の配列を渡すことで、この署名を検証するた�
   - [m:OpenSSL::OCSP::V_CERTSTATUS_UNKNOWN] 不明
 
 失効理由コードは以下のいずれかを返します。
-  - [m:OpenSSL::OCSP::REVOKED_STATUS_NOSTATUS] 
+  - [m:OpenSSL::OCSP::REVOKED_STATUS_NOSTATUS]
   - [m:OpenSSL::OCSP::REVOKED_STATUS_UNSPECIFIED]
   - [m:OpenSSL::OCSP::REVOKED_STATUS_KEYCOMPROMISE]
   - [m:OpenSSL::OCSP::REVOKED_STATUS_CACOMPROMISE]
@@ -523,7 +523,7 @@ TRUSTOTHER を有効にすると certs で指定した証明書を検証せず�
 OCSP レスポンダからのレスポンスを表わすオブジェクトです。
 
 レスポンスの実質的な内容(証明書が失効しているか否か)
-は [m:OpenSSL::OCSP::Response#basic] 
+は [m:OpenSSL::OCSP::Response#basic]
 で得られる [c:OpenSSL::OCSP::BasicResponse] オブジェクトが保持しています。このオブジェクト自体はレスポンスのステータスコードなどを保持しています。
 
 ## Class Methods

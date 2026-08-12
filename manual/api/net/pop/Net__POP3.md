@@ -248,7 +248,7 @@ SSL を有効にしていない場合には nil を返します。
 
 #%# internal use
 #%# --- create_ssl_params(verify_or_params = {}, certs = nil)
-#%# 
+#%#
 
 ### def Net::POP3.disable_ssl -> ()
 

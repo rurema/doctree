@@ -277,7 +277,7 @@ args、ret で関数の引数と返り値の型を指定します。
 
 C の関数ポインタのアドレスを返します。
 
-### def ctype -> Integer 
+### def ctype -> Integer
 
 返り値の型を返します。
 

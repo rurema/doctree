@@ -63,7 +63,7 @@ dRuby サーバを起動し、DRbServerのインスタンスを返します。
 
 サーバ起動時の :verbose オプションのデフォルト値を返します。
 
-- **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service], 
+- **SEE** [m:DRb::DRbServer.new], [m:DRb?.start_service],
      [m:DRb::DRbServer.verbose=]
 
 ### def DRb::DRbServer.verbose=(on)
@@ -84,11 +84,11 @@ dRuby サーバを起動し、DRbServerのインスタンスを返します。
 
 #%# --- check_insecure_method(obj, msg_id)
 #%# #@todo
-#%# 
+#%#
 #%# Check that a method is callable via dRuby.
 #%# obj is the object we want to invoke the method on. msg_id is the method name
 #%# as a Symbol.
-#%# If the method is an insecure method (see insecure_method?) a SecurityError is thrown. If the method is private or undefined, a [[c:NameError]] is thrown. 
+#%# If the method is an insecure method (see insecure_method?) a SecurityError is thrown. If the method is private or undefined, a [[c:NameError]] is thrown.
 
 ### def stop_service -> ()
 
@@ -98,12 +98,12 @@ dRuby サーバを起動し、DRbServerのインスタンスを返します。
 
 #%# --- to_id(obj)
 #%# #@todo
-#%# 
-#%# Convert a local object to a dRuby reference. 
-#%# 
+#%#
+#%# Convert a local object to a dRuby reference.
+#%#
 #%# --- to_obj(ref)
 #%# #@todo
-#%# 
+#%#
 #%# Convert a dRuby reference to the local object it refers to.
 
 ### def verbose -> bool
@@ -112,7 +112,7 @@ dRuby サーバを起動し、DRbServerのインスタンスを返します。
 
 - **SEE** [m:DRb::DRbServer#verbose=]
 
-### def verbose=(on) 
+### def verbose=(on)
 
 サーバの verbose mode を真偽値で設定します。
 

@@ -131,7 +131,7 @@ Net::HTTP.get_print 'www.example.com', '/index.html'
 
 ### def Net::HTTP.post_form(uri, params) -> Net::HTTPResponse
 
-[c:URI] で指定した対象に フォームのデータを HTTP で 
+[c:URI] で指定した対象に フォームのデータを HTTP で
 POST します。
 
 送るデータは params に文字列から文字列への [c:Hash] として渡します。
@@ -141,7 +141,7 @@ POST します。
 
 ### def Net::HTTP.proxy_address -> String|nil
 
-自身が ([m:Net::HTTP.Proxy] によって作成された) 
+自身が ([m:Net::HTTP.Proxy] によって作成された)
 プロクシ用のクラスならばプロクシのアドレスを返します。
 
 そうでなければ nil を返します。
@@ -150,7 +150,7 @@ POST します。
 
 ### def Net::HTTP.proxy_port -> Integer|nil
 
-自身が ([m:Net::HTTP.Proxy] によって作成された) 
+自身が ([m:Net::HTTP.Proxy] によって作成された)
 プロクシ用のクラスならばプロクシのポート番号を返します。
 
 そうでなければ nil を返します。
@@ -159,7 +159,7 @@ POST します。
 
 ### def Net::HTTP.proxy_pass -> String|nil
 
-自身が ([m:Net::HTTP.Proxy] によって作成された) 
+自身が ([m:Net::HTTP.Proxy] によって作成された)
 プロクシ用のクラスならばプロクシ認証のパスワードを返します。
 
 そうでなければ nil を返します。
@@ -470,7 +470,7 @@ proxyport は時代遅れのメソッドです。
 環境変数 http_proxy が定義されていなくともこの値は true を返します。
 その場合にはプロクシは利用されず直接サーバに接続します。
 
-- **SEE** [m:Net::HTTP#proxy_from_env=] 
+- **SEE** [m:Net::HTTP#proxy_from_env=]
 
 ### def proxy_from_env=(boolean)
 
@@ -480,7 +480,7 @@ proxyport は時代遅れのメソッドです。
 
 - **param** `boolean` -- プロクシ情報を環境変数から得るかどうかを指定する真偽値
 
-- **SEE** [m:Net::HTTP#proxy_from_env?] 
+- **SEE** [m:Net::HTTP#proxy_from_env?]
 
 ### def open_timeout -> Integer|nil
 
@@ -646,7 +646,7 @@ HTTP セッションを終了します。セッション開始前にこのメソ
 header が nil
 でなければ、リクエストを送るときにその内容を HTTP ヘッダとして送ります。 header は { 'Accept' = > '*/*', ... } という形のハッシュでなければいけません。
 
-ブロックと一緒に呼びだされたときはエンティティボディを少しずつ文字列としてブロックに与えます。このとき戻り値の 
+ブロックと一緒に呼びだされたときはエンティティボディを少しずつ文字列としてブロックに与えます。このとき戻り値の
 [c:Net::HTTPResponse] オブジェクトは有効な body を持ちません。
 
 dest は時代遅れの引数です。利用しないでください。
@@ -924,8 +924,8 @@ puts response.body
 
 [c:Net::HTTPRequest] オブジェクト request をサーバに送信します。
 
-POST/PUT の時は data も与えられます 
-(GET/HEAD などで  data を与えると 
+POST/PUT の時は data も与えられます
+(GET/HEAD などで  data を与えると
 [c:ArgumentError] を発生します)。
 
 ブロックとともに呼びだされたときはソケットからボディを読みこまずに [c:Net::HTTPResponse]
@@ -938,7 +938,7 @@ POST/PUT の時は data も与えられます
 - **SEE** [m:Net::HTTP#send_request]
 
 #%# --- inspect
-#%# 
+#%#
 
 ### def copy(path, initheader = nil) -> Net::HTTPResponse
 
@@ -1078,7 +1078,7 @@ dest を指定した場合にはボディを少しずつ取得して順次「des
 
 SSLを利用して接続する場合に真を返します。
 
-- **SEE** [lib:net/https], [lib:openssl] 
+- **SEE** [lib:net/https], [lib:openssl]
 
 ### def use_ssl=(bool)
 

@@ -438,11 +438,11 @@ puts JSON.pretty_generate(hash, space: "\t")
 
 #%# nodoc
 #%# --- JSON::VERSION_ARRAY -> Array
-#%# 
+#%#
 #%# --- JSON::VERSION_BUILD -> Fixnum
-#%# 
+#%#
 #%# --- JSON::VERSION_MAJOR -> Fixnum
-#%# 
+#%#
 #%# --- JSON::VERSION_MINOR -> Fixnum
 #%#
 

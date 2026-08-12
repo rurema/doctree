@@ -32,7 +32,7 @@ end
 ### ThreadGroup#freeze と ThreadGroup#enclose の違い
 
 どちらのメソッドでも [m:ThreadGroup#add] によるスレッドの追加ができなくなる点は同じですが、
-[m:Thread.new] に関して違いがあります。現在のスレッドが属する ThreadGroup が freeze 
+[m:Thread.new] に関して違いがあります。現在のスレッドが属する ThreadGroup が freeze
 されている場合、Thread.new{ ... } はエラーになります。ThreadGroup が enclose されているだけでは、
 Thread.new{ ... } はエラーになりません。生成されたスレッドは従来通り 親スレッドの ThreadGroup に属します。
 
@@ -131,7 +131,7 @@ p thg.enclosed?         # => false
 
 - **SEE** [m:ThreadGroup#enclose]
 
-### def list    -> [Thread] 
+### def list    -> [Thread]
 
 self に属するスレッドの配列を返します。
 version 1.8 では、aborting 状態であるスレッドも要素に含まれます。つまり「生きている」スレッドの配列を返します。
