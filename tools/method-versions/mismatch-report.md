@@ -4,6 +4,20 @@
 を doctree/gd(generated-documents)の修正アクション検討用に整理したもの。
 ロジックの詳細・用語の定義は `notes-compare.md` 参照。
 
+## 再生成履歴
+
+- **2026-08-12**: doctree master 2e07bf371 / gd origin/main d73c31e6f97 で
+  `doctree-entries.tsv`(3160→3356 行)・`gd-db-names.tsv`(32737→33426 行)・
+  `mismatches.tsv` を再生成。新しい内訳: 総数 2298 = OK 1741 /
+  MISMATCH_SINCE 368(ladder-gap 273・real-autoload-gap 57・db-late 26・
+  explicit-wrong 11・explicit-empty 1)/ MISMATCH_UNTIL 12 / DOC_ONLY 33 /
+  INFO_1_8_7 76 / INFO_1_9_2 68。#3279〜#3282 のバッジ補正反映で
+  **frozen-db-contamination と db-late の大半が解消**(db-late 92→26)。
+  explicit-wrong 11 件は全て下記正誤表・既知の限界(ARGF print 系の可視性
+  誤検出・意図的な明示値)に該当し、新規アクションなし。
+  以下の分析本文の件数・個別リストは 2026-07-23 スナップショット時点の
+  ものなので、現状は `mismatches.tsv` を直接参照すること。
+
 ## エグゼクティブサマリ
 
 **何と何を突き合わせたか**: (1) 実 Ruby 処理系19版(1.8.6〜4.0、all-ruby
