@@ -96,6 +96,22 @@ p rand(10.0)       # => 6                   (rand(10) と同じ)
 #%else
 - **SEE** [m:Kernel?.rand], [m:Random::DEFAULT]
 #%end
+
+### def Random.seed -> Integer
+
+デフォルトの擬似乱数生成器([m:Kernel?.rand] や [m:Random.rand] が使うもの)の現在の種を返します。
+
+[m:Kernel?.srand] や [m:Random.srand] で新しい種を設定するまで、同じ値を返します。
+
+```ruby title="例"
+srand(42)
+p Random.seed  # => 42
+Random.srand(7)
+p Random.seed  # => 7
+```
+
+- **SEE** [m:Random#seed], [m:Random.srand], [m:Kernel?.srand]
+
 ### def Random.bytes(size) -> String
 
 ランダムなバイナリー文字列を返します。結果の文字列のサイズを指定できます。
