@@ -154,6 +154,52 @@ p l.lambda?            # => true
 
 ## Instance Methods
 
+### def [](sym) -> object | nil
+
+カレント Ractor(このメソッドを呼び出した Ractor)の Ractor-local storage の sym に対応するデータを取り出します。
+sym に対応するデータがなければ nil を返します。
+
+#%since 4.0
+self がカレント Ractor でない場合は例外が発生します。
+#%else
+self がカレント Ractor でなくても例外にはならず、常にカレント Ractor の Ractor-local storage を参照します(self は使われません)。
+#%end
+
+- **param** `sym` -- Ractor-local storage のキーを指定します。
+#%since 4.0
+- **raise** `RuntimeError` -- self がカレント Ractor でない場合に発生します。
+#%end
+
+```ruby title="例"
+Ractor.current[:user] = "me"
+p Ractor.current[:user] # => "me"
+p Ractor.current[:none] # => nil
+```
+
+#%since 3.4
+- **SEE** [m:Ractor.\[\]], [m:Ractor.store_if_absent]
+#%end
+
+### def []=(sym, val)
+
+カレント Ractor(このメソッドを呼び出した Ractor)の Ractor-local storage の sym に val を格納します。
+
+#%since 4.0
+self がカレント Ractor でない場合は例外が発生します。
+#%else
+self がカレント Ractor でなくても例外にはならず、常にカレント Ractor の Ractor-local storage に格納します(self は使われません)。
+#%end
+
+- **param** `sym` -- Ractor-local storage のキーを指定します。
+- **param** `val` -- 格納するデータを指定します。
+#%since 4.0
+- **raise** `RuntimeError` -- self がカレント Ractor でない場合に発生します。
+#%end
+
+#%since 3.4
+- **SEE** [m:Ractor.\[\]=], [m:Ractor.store_if_absent]
+#%end
+
 #%since 4.0
 ### def close -> bool
 
