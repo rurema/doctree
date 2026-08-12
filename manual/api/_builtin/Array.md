@@ -728,6 +728,22 @@ p ary.count{|x|x%2==0}  # => 3
 
 - **SEE** [m:Enumerable#count]
 
+### def deconstruct -> self
+{: since="2.7.0"}
+
+self を返します。
+
+このメソッドは以下のようにパターンマッチ(配列パターン)で利用されます。
+
+```ruby title="例"
+case [1, [2, 3]]
+in [a, [b, c]] # 裏側で #deconstruct を呼ぶ
+  p [a, b, c] # => [1, 2, 3]
+end
+```
+
+- **SEE** [m:Hash#deconstruct_keys], [ref:d:spec/pattern_matching#matching_non_primitive_objects]
+
 ### def delete(val)           -> object | nil
 ### def delete(val) { ... }   -> object
 
