@@ -99,7 +99,7 @@ unless 式 [then]
 end
 ```
 
-unless は if と反対で、条件式が偽の時に then 以下の式を評価します。unless 式にelsif を指定することはできません。
+unless は if と反対で、条件式が偽の時に then 以下の式を評価します。unless 式に elsif を指定することはできません。
 
 #### unless 修飾子 {#unless_modifier}
 
