@@ -484,7 +484,22 @@ p GC.measure_total_time # => false
 
 詳細は[feature:15626]を参照してください。
 
-- **SEE** [m:GC.verify_compaction_references]
+- **SEE** [m:GC.verify_compaction_references], [m:GC.latest_compact_info]
+
+### def GC.latest_compact_info -> Hash
+
+最後に実行されたヒープコンパクション([m:GC.compact] など)の統計情報を返します。
+
+返り値の [c:Hash] のキーは以下のとおりで、値はいずれもオブジェクトの型ごとの件数を表す [c:Hash] です(コンパクションがまだ実行されていない場合は空の [c:Hash])。
+
+- `:considered` -- 移動の対象として検討されたオブジェクト数
+- `:moved` -- 実際に移動されたオブジェクト数
+#%since 3.2
+- `:moved_up` -- 移動先のアドレスが元より高かったオブジェクト数
+- `:moved_down` -- 移動先のアドレスが元より低かったオブジェクト数
+#%end
+
+- **SEE** [m:GC.compact], [m:GC.auto_compact]
 
 ### def GC.verify_compaction_references(toward: nil, double_heap: nil) -> Hash
 
