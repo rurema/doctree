@@ -209,6 +209,40 @@ self がこのメソッドを呼び出した Ractor ではない場合、Ractor:
 
 #%end
 
+#%until 4.0
+### def close_incoming -> bool
+
+self の incoming port を閉じます。すでに閉じられていた場合は true を、そうでなければ false を返します。
+
+閉じると、self への [m:Ractor#send] と self 内での [m:Ractor.receive] は
+[c:Ractor::ClosedError] を発生させるようになります(受信待ちでブロックしていた場合も同様です)。
+
+Ractor の実行が終了すると、incoming port と outgoing port は自動的に閉じられます。
+
+```ruby title="例"
+r = Ractor.new { Ractor.receive }
+p r.close_incoming # => false
+r.send(1)          # ~> Ractor::ClosedError
+```
+
+- **SEE** [m:Ractor#close_outgoing], [m:Ractor#send], [m:Ractor.receive]
+
+### def close_outgoing -> bool
+
+self の outgoing port を閉じます。すでに閉じられていた場合は true を、そうでなければ false を返します。
+
+閉じると、self への [m:Ractor#take] と self 内での [m:Ractor.yield] は
+[c:Ractor::ClosedError] を発生させるようになります(送信待ち・受信待ちでブロックしていた場合も同様です)。
+
+```ruby title="例"
+r = Ractor.new { Ractor.receive }
+p r.close_outgoing # => false
+r.take             # ~> Ractor::ClosedError
+```
+
+- **SEE** [m:Ractor#close_incoming], [m:Ractor#take], [m:Ractor.yield]
+#%end
+
 #%since 4.0
 ### def default_port -> Ractor::Port
 
