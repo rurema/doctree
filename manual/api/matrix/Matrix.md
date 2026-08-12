@@ -1051,7 +1051,7 @@ p Matrix[[1+2i, 1i, 0], [1, 2, 3]].real
 行列を実部と虚部に分解したものを返します。
 
 ```ruby title="例"
-m.rect == [m.real, m.imag]  # ==> true for all matrices m
+m.rect == [m.real, m.imag]  # => true for all matrices m
 ```
 
 - **SEE** [m:Matrix#imaginary], [m:Matrix#real]
