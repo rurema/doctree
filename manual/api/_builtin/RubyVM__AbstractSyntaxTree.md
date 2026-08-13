@@ -21,9 +21,32 @@ parser gem (<https://github.com/whitequark/parser>)や
 
 ## Singleton Methods
 
+#%since 3.2
+### def RubyVM::AbstractSyntaxTree.node_id_for_backtrace_location(backtrace_location) -> Integer
+
+引数の [c:Thread::Backtrace::Location] が指すコードの位置に対応するノードの ID を返します。
+
+ID は [m:RubyVM::AbstractSyntaxTree::Node#node_id] と同じ体系の整数で、具体的な値は Ruby のバージョンやパーサによって異なります。
+
+- **param** `backtrace_location` -- [c:Thread::Backtrace::Location] を指定します。
+
+- **raise** `TypeError` -- backtrace_location が [c:Thread::Backtrace::Location] でない場合に発生します。
+
+```ruby title="例"
+loc = caller_locations(0, 1).first
+p RubyVM::AbstractSyntaxTree.node_id_for_backtrace_location(loc) # => 3
+```
+
+- **SEE** [m:RubyVM::AbstractSyntaxTree::Node#node_id]
+#%end
+
 ### def RubyVM::AbstractSyntaxTree.of(proc) -> RubyVM::AbstractSyntaxTree::Node
 #%since 3.2
 ### def RubyVM::AbstractSyntaxTree.of(proc, keep_script_lines: false, error_tolerant: false, keep_tokens: false) -> RubyVM::AbstractSyntaxTree::Node
+#%else
+#%since 3.1
+### def RubyVM::AbstractSyntaxTree.of(proc, keep_script_lines: false) -> RubyVM::AbstractSyntaxTree::Node
+#%end
 #%end
 
 引数 proc に渡したProcやメソッドオブジェクトの抽象構文木を返します。
@@ -31,11 +54,20 @@ parser gem (<https://github.com/whitequark/parser>)や
 このメソッドはProcやメソッドが定義されたファイルを読み込む必要があるため、
 irbのようなファイルを介さない対話的環境では動作しません。
 
+#%since 3.4
+また、Ruby 3.4 以降でデフォルトになったパーサ(Prism)でコンパイルされたコードに対しては使えません。使う場合は `--parser=parse.y` を付けて Ruby を起動してください。
+#%end
+
 - **param** `proc` -- Procもしくはメソッドオブジェクトを指定します。
+#%since 3.1
+- **param** `keep_script_lines` -- true を指定すると、[m:RubyVM::AbstractSyntaxTree::Node#script_lines] でノードと関連づけられたソースコードのテキストを取得できます。
+#%end
 #%since 3.2
-- **param** `keep_script_lines` -- true を指定すると、 Node#script_lines でノードと関連づけられたソースコードのテキストを取得できます。
-- **param** `keep_tokens` -- true を指定すると、 Node#token が利用できます。
+- **param** `keep_tokens` -- true を指定すると、[m:RubyVM::AbstractSyntaxTree::Node#tokens] が利用できます。
 - **param** `error_tolerant` -- true を指定すると、構文エラーが発生した際にエラー箇所を type が :ERROR であるようなノードに置き換えてツリーを生成します。
+#%end
+#%since 3.4
+- **raise** `RuntimeError` -- Prism でコンパイルされたコードを指定した場合に発生します。
 #%end
 
 ```ruby
@@ -73,14 +105,20 @@ pp RubyVM::AbstractSyntaxTree.of(method(:hello))
 ### def RubyVM::AbstractSyntaxTree.parse(string) -> RubyVM::AbstractSyntaxTree::Node
 #%since 3.2
 ### def RubyVM::AbstractSyntaxTree.parse(string, keep_script_lines: false, error_tolerant: false, keep_tokens: false) -> RubyVM::AbstractSyntaxTree::Node
+#%else
+#%since 3.1
+### def RubyVM::AbstractSyntaxTree.parse(string, keep_script_lines: false) -> RubyVM::AbstractSyntaxTree::Node
+#%end
 #%end
 
 文字列を抽象構文木にパースし、その木の根ノードを返します。
 
 - **param** `string` -- パースする対象の Ruby のコードを文字列で指定します。
+#%since 3.1
+- **param** `keep_script_lines` -- true を指定すると、[m:RubyVM::AbstractSyntaxTree::Node#script_lines] でノードと関連づけられたソースコードのテキストを取得できます。
+#%end
 #%since 3.2
-- **param** `keep_script_lines` -- true を指定すると、 Node#script_lines でノードと関連づけられたソースコードのテキストを取得できます。
-- **param** `keep_tokens` -- true を指定すると、 Node#token が利用できます。
+- **param** `keep_tokens` -- true を指定すると、[m:RubyVM::AbstractSyntaxTree::Node#tokens] が利用できます。
 - **param** `error_tolerant` -- true を指定すると、構文エラーが発生した際にエラー箇所を type が :ERROR であるようなノードに置き換えてツリーを生成します。
 #%end
 - **raise** `SyntaxError` -- string が Ruby のコードとして正しくない場合に発生します。
@@ -105,14 +143,20 @@ pp RubyVM::AbstractSyntaxTree.parse("x = 1; p(x; y=2", error_tolerant: true)
 ### def RubyVM::AbstractSyntaxTree.parse_file(pathname) -> RubyVM::AbstractSyntaxTree::Node
 #%since 3.2
 ### def RubyVM::AbstractSyntaxTree.parse_file(pathname, keep_script_lines: false, error_tolerant: false, keep_tokens: false) -> RubyVM::AbstractSyntaxTree::Node
+#%else
+#%since 3.1
+### def RubyVM::AbstractSyntaxTree.parse_file(pathname, keep_script_lines: false) -> RubyVM::AbstractSyntaxTree::Node
+#%end
 #%end
 
 pathname のファイルを読み込み、その内容を抽象構文木にパースし、その木の根ノードを返します。
 
 - **param** `pathname` -- パースする対象のファイルパスを指定します
+#%since 3.1
+- **param** `keep_script_lines` -- true を指定すると、[m:RubyVM::AbstractSyntaxTree::Node#script_lines] でノードと関連づけられたソースコードのテキストを取得できます。
+#%end
 #%since 3.2
-- **param** `keep_script_lines` -- true を指定すると、 Node#script_lines でノードと関連づけられたソースコードのテキストを取得できます。
-- **param** `keep_tokens` -- true を指定すると、 Node#token が利用できます。
+- **param** `keep_tokens` -- true を指定すると、[m:RubyVM::AbstractSyntaxTree::Node#tokens] が利用できます。
 - **param** `error_tolerant` -- true を指定すると、構文エラーが発生した際にエラー箇所を type が :ERROR であるようなノードに置き換えてツリーを生成します。
 #%end
 - **raise** `SyntaxError` -- pathname から取得された文字列が Ruby のコードとして正しくない場合に発生します。
