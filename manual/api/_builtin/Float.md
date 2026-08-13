@@ -97,7 +97,7 @@ p(- -1.2)  # => 1.2
 
 ```ruby title="例"
 # 積
-p 2.4 * 3 # => 7.2
+p 2.5 * 3 # => 7.5
 ```
 
 ### def /(other) -> Float
@@ -129,7 +129,7 @@ p 3.0 % 1.2 # => 0.6000000000000001
 3.0 % 0.0   # ZeroDivisionError
 ```
 
-### def **(other) -> Numeric
+### def **(other) -> Float | Complex
 
 `self` の `other` 乗を返します。
 
@@ -211,6 +211,12 @@ p [Float::NAN] == [0.0 / 0.0] # => false
 
 `self` を数値として `other` と比較し、`self` が `other` より小さければ `true` を、そうでなければ `false` を返します。
 
+`other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
+
+`other` が NaN のとき、`false` を返します。
+
+`other` が数値でないとき、`ArgumentError` が発生します。
+
 `Float` オブジェクトを左項とする比較演算子 `<` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
@@ -223,6 +229,12 @@ p 3.14 <= 3.1415  # => true
 ### def <=(other) -> bool
 
 `self` を数値として `other` と比較し、`self` が `other` より小さいか等しければ `true` を、そうでなければ `false` を返します。
+
+`other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
+
+`other` が NaN のとき、`false` を返します。
+
+`other` が数値でないとき、`ArgumentError` が発生します。
 
 `Float` オブジェクトを左項とする比較演算子 `<=` はこのメソッドの呼び出しになります。
 
@@ -237,6 +249,12 @@ p 3.14 <= 3.1415  # => true
 
 `self` を数値として `other` と比較し、`self` が `other` より大きければ `true` を、そうでなければ `false` を返します。
 
+`other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
+
+`other` が NaN のとき、`false` を返します。
+
+`other` が数値でないとき、`ArgumentError` が発生します。
+
 `Float` オブジェクトを左項とする比較演算子 `>` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
@@ -249,6 +267,12 @@ p 3.14 >= 3.1415  # => false
 ### def >=(other) -> bool
 
 `self` を数値として `other` と比較し、`self` が `other` より大きいか等しければ `true` を、そうでなければ `false` を返します。
+
+`other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
+
+`other` が NaN のとき、`false` を返します。
+
+`other` が数値でないとき、`ArgumentError` が発生します。
 
 `Float` オブジェクトを左項とする比較演算子 `>=` はこのメソッドの呼び出しになります。
 
@@ -588,7 +612,8 @@ p (0.0/0.0).to_s         # => "NaN"
 
 `self` の偏角を返します。
 
-`self` が 0 以上の数なら `0`、負の数なら [m:Math::PI] となります。
+`self` が正の数か `0.0` なら `0`、負の数か `-0.0` なら [m:Math::PI] となります。
+（`-0.0` は [m:Float#negative?] では負とはみなされませんが、`arg` は符号ビットに従います）。
 
 `self` が NaN の場合は NaN を返します。
 
@@ -596,6 +621,7 @@ p (0.0/0.0).to_s         # => "NaN"
 p 1.0.arg  # => 0
 p 0.0.arg  # => 0
 p -1.0.arg # => 3.141592653589793
+p -0.0.arg # => 3.141592653589793
 p Float::NAN.arg # => NaN
 ```
 
