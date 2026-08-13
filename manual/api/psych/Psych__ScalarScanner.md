@@ -24,6 +24,8 @@ YAML の scalar 型を読み込んで Ruby の built-in 型に変換するクラ
 YAML の scalar である文字列を Ruby のオブジェクトに変換したものを返します。
 
 ```ruby
+require 'psych'
+
 scanner = Psych::ScalarScanner.new
 p scanner.tokenize("yes") # => true
 p scanner.tokenize("year") # => "year"

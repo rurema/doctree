@@ -16,6 +16,8 @@ Ruby オブジェクトから YAML の AST を構築するためのクラスで�
 ### 例
 
 ```ruby
+require 'psych'
+
 builder = Psych::Visitors::YAMLTree.new
 builder << { :foo => 'bar' }
 builder << ["baz", "bazbaz"]

@@ -17,6 +17,8 @@ Ruby のオブジェクトに変換できます。
 以下の例ではスカラを1つ持つリストの AST を構築しています。
 
 ```ruby
+require 'psych'
+
 # Create our nodes
 stream = Psych::Nodes::Stream.new
 doc    = Psych::Nodes::Document.new

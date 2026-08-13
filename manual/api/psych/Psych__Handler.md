@@ -311,6 +311,8 @@ YAML ドキュメントを再構築するようなハンドラです。
 以下の例では STDIN から YAML ドキュメントを入力し、再構築した YAML ドキュメントを STDERR に出力します。
 
 ```ruby
+require 'psych'
+
 parser = Psych::Parser.new(Psych::Emitter.new($stderr))
 parser.parse($stdin)
 ```
