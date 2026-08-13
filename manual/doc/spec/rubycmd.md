@@ -178,7 +178,7 @@ Rubyインタプリタは以下のコマンドラインオプションを受け�
 #%end
       * did_you_mean    did_you_mean (default: enabled)
       * rubyopt         RUBYOPT 環境変数 (default: enabled)
-      * frozen-string-literal 全ての文字列リテラルをfreeze (default: disabled)
+      * frozen-string-literal 全ての文字列リテラルを freeze (default: disabled)
       * jit             JIT (default: disabled)
 #%since 3.1
       * mjit            MJIT (default: disabled)

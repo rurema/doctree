@@ -251,7 +251,7 @@ def hello    # 引数のないメソッド。
   puts "Hello, world!"
 end
 
-def foo(a, b)    # 引数のあるメソッド。括弧を省いてdef foo a, bとも
+def foo(a, b)    # 引数のあるメソッド。括弧を省いて def foo a, b とも
   a + 3 * b
 end
 ```
