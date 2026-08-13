@@ -1975,26 +1975,15 @@ end
 
 ### def ruby2_keywords(method_name, ...)    -> nil
 
-For the given method names, marks the method as passing keywords through
-a normal argument splat.  This should only be called on methods that
-accept an argument splat (\`*args\`) but not explicit keywords or a
-keyword splat.  It marks the method such that if the method is called
-with keyword arguments, the final hash argument is marked with a special
-flag such that if it is the final element of a normal argument splat to
-another method call, and that method call does not include explicit
-keywords or a keyword splat, the final element is interpreted as
-keywords. In other words, keywords will be passed through the method to
-other methods.
+引数で指定した名前のメソッドに、通常の引数スプラット(`*args`)を通してキーワード引数を透過させるためのフラグを設定します。引数スプラットは受け取るものの、明示的なキーワード引数やキーワードスプラット(`**kwargs`)は受け取らないメソッドに対してだけ使ってください。
 
-This should only be used for methods that delegate keywords to another
-method, and only for backwards compatibility with Ruby versions before
-2.7.
+フラグを設定したメソッドがキーワード引数付きで呼び出されると、末尾の Hash 引数に特別なフラグが設定されます。その Hash が別のメソッド呼び出しの引数スプラットの末尾要素として渡され、かつその呼び出しが明示的なキーワード引数やキーワードスプラットを含まない場合、末尾要素はキーワード引数として解釈されます。つまり、キーワード引数がこのメソッドを経由してほかのメソッドへ渡されるようになります。
 
-This method will probably be removed at some point, as it exists only
-for backwards compatibility. As it does not exist in Ruby versions
-before 2.7, check that the module responds to this method before calling
-it. Also, be aware that if this method is removed, the behavior of the
-method will change so that it does not pass through keywords.
+キーワード引数をほかのメソッドに委譲するメソッドに対して、Ruby 2.7 より前のバージョンとの後方互換性のためだけに使ってください。
+
+このメソッドは後方互換性のためだけに存在するので、いずれ削除される可能性があります。Ruby 2.7 より前のバージョンには存在しないため、例のように呼び出す前にこのメソッドに応答するかを確認してください。また、このメソッドが削除されたときには、フラグを設定していたメソッドはキーワード引数を透過しない挙動に変わることに注意してください。
+
+- **param** `method_name` -- メソッド名を [c:String] か [c:Symbol] で指定します。複数指定できます。
 
 ```ruby title="例"
 module Mod
@@ -2004,6 +1993,8 @@ module Mod
   ruby2_keywords(:foo) if respond_to?(:ruby2_keywords, true)
 end
 ```
+
+- **SEE** [m:main.ruby2_keywords], [m:Proc#ruby2_keywords], [m:Hash.ruby2_keywords_hash]
 
 ### def using(module) -> self
 
