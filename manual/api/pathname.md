@@ -1296,7 +1296,7 @@ require "pathname"
 p Pathname('/usr/bin/shutdown').sub_ext('.rb')    # => #<Pathname:/usr/bin/shutdown.rb>
 p Pathname('/home/user/test.txt').sub_ext('.pdf') # => #<Pathname:/home/user/test.pdf>
 p Pathname('/home/user/test').sub_ext('.pdf')     # => #<Pathname:/home/user/test.pdf>
-p Pathname('/home/user/test.').sub_ext('.pdf')    # => #<Pathname:/home/user/test..pdf>
+p Pathname('/home/user/test.').sub_ext('.pdf')    # => #<Pathname:/home/user/test.pdf>
 p Pathname('/home/user/.test').sub_ext('.pdf')    # => #<Pathname:/home/user/.test.pdf>
 p Pathname('/home/user/test.tar.gz').sub_ext('.xz') # => #<Pathname:/home/user/test.tar.xz>
 ```

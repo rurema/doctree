@@ -971,7 +971,7 @@ rs に空文字列 ("") を指定した場合は「パラグラフモード」�
 
 ```ruby title="例"
 buf = "string\n"
-p buf.chomp!  # => nil
+p buf.chomp!  # => "string"
 p buf       # => "string"
 
 $/ = "\n"   # デフォルトと同じ
@@ -1181,7 +1181,7 @@ p str.delete!("2-8", "^4-6")  # => "14569"
 p str                         # => "14569"
 
 str = "abc"
-p str.delete!("2378")         # => "nil"
+p str.delete!("2378")         # => nil
 p str                         # => "abc"
 ```
 
@@ -1534,7 +1534,7 @@ p buf   # => "Str!!-Str!!"
 
 buf = "String.String"
 buf.gsub!(/in./, '<<\&>>')
-p buf   # => "Str<<ing>>-Str<<ing>>"
+p buf   # => "Str<<ing>>.Str<<ing>>"
 
 buf = "foo"
 buf.gsub!(/(?<name>fo)/, 'match: \k<name>')
@@ -2712,8 +2712,8 @@ p 'abcabc'.sub(/b/) { $&.upcase }    # => "aBcabc"
 
 ```ruby title="例"
 hash = {'b'=>'B', 'c'=>'C'}
-p "abcabc".sub(/[bc]/){hash[$&]} # => "aBCabc"
-p "abcabc".sub(/[bc]/, hash)     # => "aBCabc"
+p "abcabc".sub(/[bc]/){hash[$&]} # => "aBcabc"
+p "abcabc".sub(/[bc]/, hash)     # => "aBcabc"
 ```
 
 ### def sub!(pattern, replace) -> self | nil
@@ -2741,7 +2741,7 @@ p buf   # => "Str!!-String"
 
 buf = "String.String"
 buf.sub!(/in./, '<<\&>>')
-p buf   # => "Str<<ing>>-String"
+p buf   # => "Str<<ing>>.String"
 
 buf = "foo"
 buf.sub!(/(?<name>fo)/, 'match: \k<name>')

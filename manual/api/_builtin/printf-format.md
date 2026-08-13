@@ -285,7 +285,7 @@ p sprintf("%.*s", 5, "foobar") # => "fooba"
 
   # 負の数に対して ".." が付加されます
   p sprintf("%#b", -1)    # => "0b..1"
-  p sprintf("%#o", -1)    # => "0..7"
+  p sprintf("%#o", -1)    # => "..7"
   p sprintf("%#x", -1)    # => "0x..f"
 
   p sprintf("%10x", -1)   # => "       ..f"
@@ -336,13 +336,13 @@ p sprintf("%.*s", 5, "foobar") # => "fooba"
 
   無限大、NaN(Not a Number) に対する出力は以下のとおりです。
   ```ruby
-  p sprintf("%f",  1.0/0)  # => "inf"
-  p sprintf("%f", -1.0/0)  # => "-inf"
-  p sprintf("%f",  0.0/0)  # => "nan"
+  p sprintf("%f",  1.0/0)  # => "Inf"
+  p sprintf("%f", -1.0/0)  # => "-Inf"
+  p sprintf("%f",  0.0/0)  # => "NaN"
 
-  p sprintf("%E",  1.0/0)  # => "INF"
-  p sprintf("%E", -1.0/0)  # => "-INF"
-  p sprintf("%E",  0.0/0)  # => "NAN"
+  p sprintf("%E",  1.0/0)  # => "Inf"
+  p sprintf("%E", -1.0/0)  # => "-Inf"
+  p sprintf("%E",  0.0/0)  # => "NaN"
   ```
   f, e, E, g, G に関しては [man:sprintf(3)] の結果を利用しています。従って出力結果は
   実際にはシステムに依存することになります。

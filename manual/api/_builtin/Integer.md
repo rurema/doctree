@@ -104,8 +104,8 @@ p 12354.chr(Encoding::UTF_8)
 引数無しで呼ばれた場合は `self` を US-ASCII、ASCII-8BIT、デフォルト内部エンコーディングの順で優先的に解釈します。
 
 ```ruby
-p 0x79.chr.encoding # => #<Encoding:US_ASCII>
-p 0x80.chr.encoding # => #<Encoding:ASCII_8BIT>
+p 0x79.chr.encoding # => #<Encoding:US-ASCII>
+p 0x80.chr.encoding # => #<Encoding:BINARY (ASCII-8BIT)>
 ```
 
 - **param** `encoding` -- エンコーディングを表すオブジェクト。[m:Encoding::UTF_8]、`"shift_jis"` など。
