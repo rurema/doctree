@@ -20,12 +20,14 @@ $ bitclust setup
 
 `bitclust setup` はリファレンスマニュアルのソース
 ([rurema/doctree](https://github.com/rurema/doctree)) を
-`~/.bitclust/rubydoc` に取得し、`~/.bitclust/db-3.4.0` のような
-ディレクトリにバージョンごとのデータベースを構築します。
+`~/.bitclust/rubydoc` に取得し、`~/.bitclust` 配下に
+バージョンごとのデータベースを構築します。
 対象バージョンは `--versions` オプションで変更できます。
+バージョンはリファレンスマニュアルの版と同じく `3.4` のように
+teeny を省いた形式で指定します。
 
 ```console
-$ bitclust setup --versions=3.4.0,4.0.0
+$ bitclust setup --versions=3.4,4.0
 ```
 
 マニュアルの更新を取り込むときは、もう一度 `bitclust setup` を実行します。
