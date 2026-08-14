@@ -3,7 +3,9 @@ library: _builtin
 ---
 # class Float < Numeric
 
-浮動小数点数のクラス。`Float` の実装は C 言語の double で、その精度は環境に依存します。
+浮動小数点数を表すクラスです。
+
+`Float` の実装は C 言語の double で、その精度は環境に依存します。
 
 一般にはせいぜい15桁です。詳しくは多くのシステムで採用されている浮動小数点標準規格、IEEE 754 を参照してください。
 
@@ -14,15 +16,47 @@ printf("%.50f\n", 1.0/3)
   # => 0.33333333333333331482961625624739099293947219848633
 ```
 
-[m:Math::PI] などの数学定数については [c:Math] を参照してください。
+特別な値として正の無限大（+∞）、負の無限大（−∞）、非数（NaN: Not a Number）があります。それぞれ以下のようにして得られます。負の無限大は定数として定義されていません。
+
+```ruby title="正負の無限大と非数"
+# 正の無限大（+∞）
+p Float::INFINITY  # => Infinity
+p 1.0 / 0          # => Infinity
+
+# 負の無限大（−∞）
+p -Float::INFINITY # => -Infinity
+p -1.0 / 0         # => -Infinity
+
+# 非数（NaN）
+p Float::NAN       # => NaN
+p 0.0 / 0          # => NaN
+```
+
+浮動小数点数リテラル `0.0` と `-0.0` は若干違った性質を持つ `Float` オブジェクトを生成します。どちらもゼロを表しますが、以下のような違いがあります。
+
+```ruby title="0.0 と -0.0 の性質が異なる例"
+# 逆数をとると符号の異なる無限大になる
+p 1 / 0.0  # => Infinity
+p 1 / -0.0 # => -Infinity
+
+p Math.atan2(0.0, -1)  # => 3.141592653589793
+p Math.atan2(-0.0, -1) # => -3.141592653589793
+
+p Math.atan2(1, 0.0)  # => 3.141592653589793
+p Math.atan2(1, -0.0) # => -3.141592653589793
+```
+
+円周率（[m:Math::PI]）などの数学定数や平方根（[m:Math?.sqrt]）などの数学関数については [c:Math] を参照してください。
 
 ## Instance Methods
 
 ### def +(other) -> Float
 
-算術演算子。和を計算します。
+`self` に `other` を足した値（＝和）を返します。
 
-- **param** `other` -- 二項演算の右側の引数(対象)
+`Float` オブジェクトを左項とする算術演算子 `+` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- `self` に加算する数値
 
 ```ruby title="例"
 # 和
@@ -31,9 +65,11 @@ p 3.0 + 4.5 # => 7.5
 
 ### def -(other) -> Float
 
-算術演算子。差を計算します。
+`self` から `other` を引いた値（＝差）を返します。
 
-- **param** `other` -- 二項演算の右側の引数(対象)
+`Float` オブジェクトを左項とする算術演算子 `-` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- `self` から減算する数値
 
 ```ruby title="例"
 # 差
@@ -42,8 +78,9 @@ p 4.5 - 1.3 # => 3.2
 
 ### def -@    -> Float
 
-単項演算子の `-` です。
 `self` の符号を反転させたものを返します。
+
+`Float` オブジェクトに対する単項演算子 `-` はこのメソッドの呼び出しになります。
 
 ```ruby title="例"
 p(- 1.2) # => -1.2
@@ -52,20 +89,24 @@ p(- -1.2)  # => 1.2
 
 ### def *(other) -> Float
 
-算術演算子。積を計算します。
+`self` に `other` を掛けた値（＝積）を返します。
 
-- **param** `other` -- 二項演算の右側の引数(対象)
+`Float` オブジェクトを左項とする算術演算子 `*` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- `self` に対する乗数
 
 ```ruby title="例"
 # 積
-p 2.4 * 3 # => 7.2
+p 2.5 * 3 # => 7.5
 ```
 
 ### def /(other) -> Float
 
-算術演算子。商を計算します。
+`self` を `other` で割った値（＝商）を返します。
 
-- **param** `other` -- 二項演算の右側の引数(対象)
+`Float` オブジェクトを左項とする算術演算子 `/` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- `self` に対する除数
 
 ```ruby title="例"
 # 商
@@ -76,9 +117,11 @@ p 1.0 / 0 # => Infinity
 ### def %(other) -> Float
 ### def modulo(other) -> Float
 
-算術演算子。剰余を計算します。
+`self` を `other` で割った余り（剰余）を返します。
 
-- **param** `other` -- 二項演算の右側の引数(対象)
+`Float` オブジェクトを左項とする算術演算子 `%` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- `self` に対する除数
 
 ```ruby title="例"
 # 剰余
@@ -86,23 +129,32 @@ p 3.0 % 1.2 # => 0.6000000000000001
 3.0 % 0.0   # ZeroDivisionError
 ```
 
-### def **(other) -> Float
+### def **(other) -> Float | Complex
 
-算術演算子。冪を計算します。
+`self` の `other` 乗を返します。
 
-- **param** `other` -- 二項演算の右側の引数(対象)
+`Float` オブジェクトを左項とする算術演算子 `**` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- `self` に対する冪指数（べきしすう）
 
 ```ruby title="例"
-# 冪
+# Float を返す例
 p 1.2 ** 3.0  # => 1.7279999999999998
 p 3.0 + 4.5 - 1.3 / 2.4 * 3 % 1.2 ** 3.0 # => 5.875
 p 0.0 ** 0 # => 1.0
+
+# Complex を返す例
+p (-1.0) ** 0.5 # => (0.0+1.0i)
 ```
 
 ### def <=>(other) -> -1 | 0 | 1 | nil
 
-`self` を `other` と比較し、`self` のほうが大きい場合に `1`、等しい場合に `0`、小さい場合に `-1` を返します。
-比較できない場合は `nil` を返します
+`self` を `other` と比較し、`self` が `other` より大きければ `1` を、等しければ `0` を、小さければ `-1` を返します。
+比較できないときは `nil` を返します。
+
+`Float` オブジェクトを左項とする比較演算子 `<=>` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- 比較対象
 
 返り値を覚えるには、`<=>` を `-` に置き換えてみるとよいでしょう。`x <=> y` と `x - y` は符号が一致します。
 
@@ -133,19 +185,21 @@ p 3.14 <=> "3.1" # => nil
 
 ### def ==(other) -> bool
 
-比較演算子。数値として等しいか判定します。
+`self` が数値として `other` と等しければ `true` を、そうでなければ `false` を返します。
 
-- **param** `other` -- 比較対象の数値
+`other` が数値でないときは `false` を返します。
 
-- **return** -- `self` と `other` が等しい場合 `true` を返します。
-             そうでなければ `false` を返します。
+`Float` オブジェクトを左項とする比較演算子 `==` はこのメソッドの呼び出しになります。
+
+- **param** `other` -- 比較対象
 
 ```ruby title="例"
 p 3.14 == 3.14000 # => true
 p 3.14 == 3.1415  # => false
+p 1.0 == "1" # => false
 ```
 
-NaNどうしの比較は、未定義です。
+NaN 同士の比較は未定義です。
 
 ```ruby title="例"
 p Float::NAN == Float::NAN    # => false
@@ -155,11 +209,17 @@ p [Float::NAN] == [0.0 / 0.0] # => false
 
 ### def <(other)  -> bool
 
-比較演算子。数値として小さいか判定します。
+`self` を数値として `other` と比較し、`self` が `other` より小さければ `true` を、そうでなければ `false` を返します。
+
+`other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
+
+`other` が NaN のとき、`false` を返します。
+
+`other` が数値でないとき、`ArgumentError` が発生します。
+
+`Float` オブジェクトを左項とする比較演算子 `<` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
-- **return** -- `self` よりも `other` が大きい場合 `true` を返します。
-             そうでなければ `false` を返します。
 
 ```ruby title="例"
 p 3.14 <  3.1415  # => true
@@ -168,11 +228,17 @@ p 3.14 <= 3.1415  # => true
 
 ### def <=(other) -> bool
 
-比較演算子。数値として等しいまたは小さいか判定します。
+`self` を数値として `other` と比較し、`self` が `other` より小さいか等しければ `true` を、そうでなければ `false` を返します。
+
+`other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
+
+`other` が NaN のとき、`false` を返します。
+
+`other` が数値でないとき、`ArgumentError` が発生します。
+
+`Float` オブジェクトを左項とする比較演算子 `<=` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
-- **return** -- `self` よりも `other` の方が大きい場合か、両者が等しい場合 `true` を返します。
-             そうでなければ `false` を返します。
 
 ```ruby title="例"
 p 3.14 <  3.1415  # => true
@@ -181,11 +247,17 @@ p 3.14 <= 3.1415  # => true
 
 ### def >(other)  -> bool
 
-比較演算子。数値として大きいか判定します。
+`self` を数値として `other` と比較し、`self` が `other` より大きければ `true` を、そうでなければ `false` を返します。
+
+`other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
+
+`other` が NaN のとき、`false` を返します。
+
+`other` が数値でないとき、`ArgumentError` が発生します。
+
+`Float` オブジェクトを左項とする比較演算子 `>` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
-- **return** -- `self` よりも `other` の方が小さい場合 `true` を返します。
-             そうでなければ `false` を返します。
 
 ```ruby title="例"
 p 3.14 >  3.1415  # => false
@@ -194,11 +266,17 @@ p 3.14 >= 3.1415  # => false
 
 ### def >=(other) -> bool
 
-比較演算子。数値として等しいまたは大きいか判定します。
+`self` を数値として `other` と比較し、`self` が `other` より大きいか等しければ `true` を、そうでなければ `false` を返します。
+
+`other` が [c:Complex] オブジェクトのとき、たとえ虚部がゼロでも `NoMethodError` が発生します。
+
+`other` が NaN のとき、`false` を返します。
+
+`other` が数値でないとき、`ArgumentError` が発生します。
+
+`Float` オブジェクトを左項とする比較演算子 `>=` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象の数値
-- **return** -- `self` よりも `other` の方が小さい場合か、両者が等しい場合 `true` を返します。
-             そうでなければ `false` を返します。
 
 ```ruby title="例"
 p 3.14 >  3.1415  # => false
@@ -212,8 +290,8 @@ p 3.14 >= 3.1415  # => false
 
 ```ruby title="例"
 p 3.14.finite? # => true
-inf = 1.0/0
-p inf.finite? # => false
+p Float::INFINITY.finite? # => false
+p Float::NAN.finite? # => false
 ```
 
 - **SEE** [m:Float#infinite?]
@@ -239,9 +317,9 @@ p inf.infinite?  # => -1
 `self` が NaN(Not a number)のとき `true` を返し、そうでないとき `false` を返します。
 
 ```ruby title="例"
-nan = 0.0/0.0
-p nan       # => NaN
-p nan.nan?  # => true
+p Float::NAN.nan?      # => true
+p Float::INFINITY.nan? # => false
+p 0.0.nan?             # => false
 ```
 
 ### def to_f -> self
@@ -255,13 +333,13 @@ p 3.14.to_f # => 3.14
 ### def to_i -> Integer
 ### def truncate(ndigits = 0) -> Integer | Float
 
-小数点以下を切り捨てて値を整数に変換します。
+小数点以下を切り捨てて値を整数に変換して返します。
 
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
                正の整数を指定した場合、[c:Float] を返します。
-               小数点以下を、最大 n 桁にします。
+               小数点以下を、最大 `n` 桁にします。
                負の整数を指定した場合、[c:Integer] を返します。
-               小数点位置から左に少なくとも n 個の 0 が並びます。
+               小数点位置から左に少なくとも `n` 個の `0` が並びます。
 
 ```ruby title="例"
 p 2.8.truncate         # => 2
@@ -274,7 +352,7 @@ p 34567.89.truncate(-2)  # => 34500
 
 ### def hash -> Integer
 
-ハッシュ値を返します。
+`self` のハッシュ値を返します。
 
 ```ruby title="例"
 pi1 = 3.14
@@ -289,7 +367,7 @@ pi3.hash # => 420540030
 ### def abs        -> Float
 ### def magnitude  -> Float
 
-`self` の絶対値を返します。
+`self` の絶対値（absolute value）を返します。
 
 ```ruby title="例"
 p 34.56.abs    # => 34.56
@@ -302,9 +380,9 @@ p -34.56.abs   # => 34.56
 
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
                正の整数を指定した場合、[c:Float] を返します。
-               小数点以下を、最大 n 桁にします。
+               小数点以下を、最大 `n` 桁にします。
                負の整数を指定した場合、[c:Integer] を返します。
-               小数点位置から左に少なくとも n 個の 0 が並びます。
+               小数点位置から左に少なくとも `n` 個の `0` が並びます。
 
 ```ruby title="例"
 p 1.2.ceil    # => 2
@@ -332,21 +410,20 @@ p 34567.89.ceil(3) # => 34567.89
 
 ### def divmod(other) -> [Numeric]
 
-`self` を `other` で割った商 `q` と余り `r` を、
-`[q, r]` という 2 要素の配列にして返します。
+`self` を `other` で割った商 `q` と余り `r` を、`[q, r]` という 2 要素の配列にして返します。
 商 `q` は常に整数ですが、余り `r` は整数であるとは限りません。
 
 ここで、商 `q` と余り `r` は、
 
   - `self == other * q + r`
 と
-  - `other > 0` のとき:  `0     <= r < other`
-  - `other < 0` のとき:  `other <  r <= 0`
+  - `other > 0` のとき: `0     <= r < other`
+  - `other < 0` のとき: `other <  r <= 0`
   - `q` は整数
 をみたす数です。
 このメソッドは、メソッド `/` と `%` によって定義されています。
 
-- **param** `other` -- `self` を割る数を指定します。
+- **param** `other` -- `self` に対する除数
 
 ```ruby title="例"
 p 11.divmod(3)       # => [3, 2]
@@ -364,9 +441,9 @@ p (-11).divmod(3.5)  # => [-4, 3.0]
 
 - **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
                正の整数を指定した場合、[c:Float] を返します。
-               小数点以下を、最大 n 桁にします。
+               小数点以下を、最大 `n` 桁にします。
                負の整数を指定した場合、[c:Integer] を返します。
-               小数点位置から左に少なくとも n 個の 0 が並びます。
+               小数点位置から左に少なくとも `n` 個の `0` が並びます。
 
 ```ruby title="例"
 p 1.2.floor    # => 1
@@ -407,7 +484,9 @@ p 1.0.eql?(1.0) # => true
 ### def round(ndigits = 0)  -> Integer | Float
 ### def round(ndigits = 0, half: :up)  -> Integer | Float
 
-`self` ともっとも近い整数もしくは実数を返します。
+`self` を `ndigits` で指定された位に丸めた数値を返します。
+
+ある位に丸めるとは、それより下の位を端数として処理することを意味します。
 
 中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。
 いわゆる四捨五入ですが、偶数丸めではありません。
@@ -460,34 +539,46 @@ p 3.5.round(half: :down) # => 3
 
 ### def zero?  -> bool
 
-`self` がゼロの時、`true` を返します。そうでない場合は `false` を返します。
+`self` がゼロなら `true` を、そうでなければ `false` を返します。
 
 ```ruby title="例"
-p 10.0.zero?          # => false
-p 0.zero?             # => true
-p 0.0.zero?           # => true
+p 0.0.zero?            # => true
+p -0.0.zero?           # => true
+p Float::EPSILON.zero? # => false
 ```
 
 ### def positive? -> bool
 
-`self` が 0 より大きい場合に `true` を返します。そうでない場合に `false` を返します。
+`self` が正の数なら `true` を、そうでないなら `false` を返します。
 
 ```ruby title="例"
 p 0.1.positive? # => true
 p 0.0.positive? # => false
 p -0.1.positive?  # => false
+
+# 無限大も正
+p Float::INFINITY.positive? # => true
+
+# NaN は正ではない
+p Float::NAN.positive? # => false
 ```
 
 - **SEE** [m:Float#negative?]
 
 ### def negative? -> bool
 
-`self` が 0 未満の場合に `true` を返します。そうでない場合に `false` を返します。
+`self` が負の数なら `true` を、そうでないなら `false` を返します。
 
 ```ruby title="例"
 p -0.1.negative? # => true
 p 0.0.negative?  # => false
 p 0.1.negative?  # => false
+
+# 負の無限大も負
+p (-Float::INFINITY).negative? # => true
+
+p -0.0.negative? # => false
+# 負とはみなされないことに注意
 ```
 
 - **SEE** [m:Float#positive?]
@@ -519,37 +610,47 @@ p (0.0/0.0).to_s         # => "NaN"
 ### def angle -> 0 | Float
 ### def phase -> 0 | Float
 
-`self` の偏角(正の数なら `0`、負の数なら [m:Math::PI])を返します。
+`self` の偏角を返します。
+
+`self` が正の数か `0.0` なら `0`、負の数か `-0.0` なら [m:Math::PI] となります。
+（`-0.0` は [m:Float#negative?] では負とはみなされませんが、`arg` は符号ビットに従います）。
+
+`self` が NaN の場合は NaN を返します。
 
 ```ruby title="例"
-p 1.arg  # => 0
-p -1.arg # => 3.141592653589793
+p 1.0.arg  # => 0
+p 0.0.arg  # => 0
+p -1.0.arg # => 3.141592653589793
+p -0.0.arg # => 3.141592653589793
+p Float::NAN.arg # => NaN
 ```
-
-ただし、`self` が NaN(Not a number) であった場合は、NaN を返します。
 
 ### def denominator -> Integer
 
-`self` を [c:Rational] に変換した時の分母を返します。
-
-- **return** -- 分母を返します。
+`self` を [m:Float#to_r] で [c:Rational] に変換したときの分母（denominator）を返します。
 
 ```ruby title="例"
-p 2.0.denominator       # => 1
-p 0.5.denominator       # => 2
+p 2.0.denominator # => 1
+p 0.5.denominator # => 2
+
+p 0.1.denominator # => 36028797018963968
+# リテラル `0.1` で生成される Float オブジェクトは
+# 1/10 からわずかにずれた値であるため
 ```
 
 - **SEE** [m:Float#numerator]
 
 ### def numerator -> Integer
 
-`self` を [c:Rational] に変換した時の分子を返します。
-
-- **return** -- 分子を返します。
+`self` を [m:Float#to_r] で [c:Rational] に変換したときの分子（numerator）を返します。
 
 ```ruby title="例"
-p 2.0.numerator         # => 2
-p 0.5.numerator         # => 1
+p 2.0.numerator # => 2
+p 0.5.numerator # => 1
+
+p 0.1.numerator # => 3602879701896397
+# リテラル `0.1` で生成される Float オブジェクトは
+# 1/10 からわずかにずれた値であるため
 ```
 
 - **SEE** [m:Float#denominator]
@@ -730,7 +831,7 @@ f = 0.01; 20.times { printf "%-20a %s\n", f, f.to_s; f = f.prev_float }
 
 最小の 10 進の指数です。
 
-通常はデフォルトで -307 です。
+通常はデフォルトで `-307` です。
 
 - **SEE** [m:Float::MAX_10_EXP]
 
@@ -738,7 +839,7 @@ f = 0.01; 20.times { printf "%-20a %s\n", f, f.to_s; f = f.prev_float }
 
 最大の `Float::RADIX` 進の指数です。
 
-通常はデフォルトで 1024 です。
+通常はデフォルトで `1024` です。
 
 - **SEE** [m:Float::MIN_EXP]
 
@@ -746,7 +847,7 @@ f = 0.01; 20.times { printf "%-20a %s\n", f, f.to_s; f = f.prev_float }
 
 最小の `Float::RADIX` 進の指数です。
 
-通常はデフォルトで -1021 です。
+通常はデフォルトで `-1021` です。
 
 - **SEE** [m:Float::MAX_EXP]
 
@@ -758,7 +859,7 @@ f = 0.01; 20.times { printf "%-20a %s\n", f, f.to_s; f = f.prev_float }
 
 浮動小数点数における正の無限大です。
 
-負の無限大は `-Float::INFINITY` です。
+負の無限大は `-Float::INFINITY` で得られます。
 
 - **SEE** [m:Float#finite?], [m:Float#infinite?]
 
