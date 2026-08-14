@@ -66,7 +66,7 @@ p 0.3.to_c  # => (0.3+0i)
 p 0.5r.to_c # => ((1/2)+0i)
 ```
 
-```ruby title="文字列表現からの変換による生成
+```ruby title="文字列表現からの変換による生成"
 p "0.3-0.5i".to_c    # => (0.3-0.5i)
 p "2/3+3/4i".to_c    # => ((2/3)+(3/4)*i)
 p "2@3.141592653589793".to_c # => (-2+0.0i)
@@ -164,6 +164,8 @@ p -Complex(-1, 1) # => (1-1i)
 
 `self` を `other` で割った値（＝商）を返します。
 
+`Complex` オブジェクトを左項とする算術演算子 `/` はこのメソッドの呼び出しになります。
+
 - **param** `other` -- `self` に対する除数
 
 ```ruby title="例"
@@ -201,6 +203,8 @@ p Complex(1, 0) == 1.0        # => true
 `self` と `other` が共に実数（＝虚部がゼロの数）のとき `self.real <=> other.real` の結果を返します。
 
 そうでないときは `nil` を返します。
+
+`Complex` オブジェクトを左項とする二項演算子 `<=>` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- 比較対象
 
@@ -360,7 +364,7 @@ p Complex(3).denominator          # => 1
 `self` を `other` で割った商を返します。
 実部と虚部が共に [c:Float] の値になります。
 
-- **param** `other` -- 自身を割る数
+- **param** `other` -- `self` に対する除数
 
 ```ruby title="例"
 p Complex(11, 22).fdiv(3) # => (3.6666666666666665+7.333333333333333i)
@@ -413,7 +417,7 @@ p Complex(3).numerator        # => (3+0i)
 `self` の絶対値と偏角を配列にして返します。
 
 ```ruby title="例"
-p Complex.polar(1, 2).polar # => [1, 2]
+p Complex.polar(1, 2).polar # => [1.0, 2.0]
 ```
 
 - **SEE** [m:Numeric#polar]
@@ -568,7 +572,7 @@ p Complex(-8, 6).to_c  # => (-8+6i)
 
 ## Class Methods
 
-### def Complex.rect(re, im = 0)        -> Complex
+### def Complex.rect(real, imag = 0)        -> Complex
 ### def Complex.rectangular(real, imag = 0) -> Complex
 
 実部が `real`、虚部が `imag` である [c:Complex] クラスのオブジェクトを生成します。
@@ -591,7 +595,7 @@ p Complex.rectangular(1, 2) # => (1+2i)
 
 絶対値が `r`、偏角が `theta` である [c:Complex] クラスのオブジェクトを生成します。
 
-複素数の極形式（polar form）に基づくために基づくためこの名があります。
+複素数の極形式（polar form）に基づくためこの名があります。
 
 - **param** `r` -- 生成する複素数の絶対値。
 
@@ -600,7 +604,7 @@ p Complex.rectangular(1, 2) # => (1+2i)
 ```ruby title="例"
 p Complex.polar(2.0)          # => (2.0+0.0i)
 p Complex.polar(2.0, 0)       # => (2.0+0.0i)
-p Complex.polar(2.0, Math::PI)  # => (-2.0+2.4492127076447545e-16i)
+p Complex.polar(2.0, Math::PI)  # => (-2.0+0.0i)
 ```
 
 ## Private Instance Methods
