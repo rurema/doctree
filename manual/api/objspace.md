@@ -19,6 +19,8 @@ MRI の実装について詳しくない一般のユーザはこのライブラ�
 戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒントとして扱う必要があります。特に T_DATA の合計値は正しくないでしょう。
 
 ```ruby title="例"
+require 'objspace'
+
 p ObjectSpace.count_objects_size
 # => {:TOTAL=>1461154, :T_CLASS=>158280, :T_MODULE=>20672, :T_STRING=>527249, ...}
 ```
@@ -83,6 +85,8 @@ end
 本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォーマンスやメモリ管理に興味のある C Ruby の開発者向けのものです。
 
 ```ruby title="例"
+require 'objspace'
+
 p ObjectSpace.count_nodes
 # => {:NODE_METHOD=>2027, :NODE_FBODY=>1927, :NODE_CFUNC=>1798, ...}
 ```
@@ -102,6 +106,8 @@ T_DATA の種類ごとにオブジェクトの数を格納したハッシュを�
 本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォーマンスに興味のある C Ruby の開発者向けのものです。
 
 ```ruby title="例"
+require 'objspace'
+
 p ObjectSpace.count_tdata_objects
 # => {RubyVM::InstructionSequence=>504, :parser=>5, :barrier=>6,
 #     :mutex=>6, Proc=>60, RubyVM::Env=>57, Mutex=>1, Encoding=>99,
@@ -123,6 +129,8 @@ rb_data_type_struct に格納された名前が使用されます。
 obj から到達可能なすべてのオブジェクトを返します。マーク不能なオブジェクトを指定した場合は nil を返します。本メソッドを使う事でメモリリークの調査が行えます。
 
 ```ruby title="例"
+require 'objspace'
+
 # 配列クラス(Array)と 'a'、'b'、'c' に到達可能。
 p ObjectSpace.reachable_objects_from(['a', 'b', 'c'])
 # => [Array, 'a', 'b', 'c']
@@ -131,6 +139,8 @@ p ObjectSpace.reachable_objects_from(['a', 'b', 'c'])
 obj が 2 つ以上の同じオブジェクト x への参照を持つ場合、戻り値に含まれるオブジェクト x は 1 つだけです。
 
 ```ruby title="例"
+require 'objspace'
+
 # 配列クラス(Array)と v に到達可能。
 p ObjectSpace.reachable_objects_from([v = 'a', v, v])
 # => [Array, 'a']
@@ -144,6 +154,8 @@ obj にマーク不能なオブジェクト(true、false、nil、[c:Symbol]、�
 nil を返します。
 
 ```ruby title="例"
+require 'objspace'
+
 # 1 はマーク不能
 p ObjectSpace.reachable_objects_from(1)
 # => nil
