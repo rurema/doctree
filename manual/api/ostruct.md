@@ -49,6 +49,7 @@ OpenStruct は Ruby のメソッド探索を利用して、プロパティに必
 これは、Ruby バージョン間の非互換性の原因にもなります：
 
 ```ruby
+require 'ostruct'
 o = OpenStruct.new
 p o.then          # => Ruby < 2.6 では nil、Ruby >= 2.6 では Enumerator
 ```
@@ -56,6 +57,7 @@ p o.then          # => Ruby < 2.6 では nil、Ruby >= 2.6 では Enumerator
 以下の方法では、組み込みライブラリのメソッドが上書きされる可能性があり、バグやセキュリティ上の問題が発生する可能性があります：
 
 ```ruby
+require 'ostruct'
 o = OpenStruct.new
 p o.methods       # => [:to_h, :marshal_load, :marshal_dump, :each_pair, ...]
 o.methods = [:foo, :bar]
@@ -65,6 +67,7 @@ p o.methods       # => [:foo, :bar]
 衝突を避けるために [c:OpenStruct] は ! で終わるメソッドは protected と private でのみ使用し、public な組み込みライブラリの ! で終わるメソッドはエイリアスを定義しています：
 
 ```ruby
+require 'ostruct'
 o = OpenStruct.new(make: 'Bentley', class: :luxury)
 p o.class         # => :luxury
 p o.class!        # => OpenStruct

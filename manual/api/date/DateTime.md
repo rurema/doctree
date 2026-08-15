@@ -323,6 +323,7 @@ self を返します。
 - **param** `array_of_names_or_nil` -- パターンマッチに使用する名前の配列を指定します。nil の場合は全てをパターンマッチに使用します。
 
 ```ruby title="例"
+require 'date'
 dt = DateTime.new(2022, 10, 5, 13, 30)
 
 if dt in wday: 1..5, hour: 10..18 # deconstruct_keys が使われます

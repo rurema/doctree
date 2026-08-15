@@ -59,6 +59,7 @@ irb(main):001:0> :abc # => abcabc
 - **param** `inspector` -- [c:IRB::Inspector] オブジェクトを指定します。
 
 ```ruby
+require "irb/inspector"
 p IRB::Inspector.keys_with_inspector(IRB::Inspector::INSPECTORS[true])
 # => [true, :p, "p", :inspect, "inspect"]
 ```

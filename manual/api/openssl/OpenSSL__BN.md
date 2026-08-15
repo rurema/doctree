@@ -199,6 +199,8 @@ odd が真なら、生成される整数は奇数のみとなります。
 自身を other ビット左シフトした値を返します。
 
 ```ruby
+require 'openssl'
+
 bn = 1.to_bn
 pp bn << 1    # => #<OpenSSL::BN 2>
 pp bn         # => #<OpenSSL::BN 1>
