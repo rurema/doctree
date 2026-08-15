@@ -294,7 +294,11 @@ require "prism"
 
 dumped = Prism.dump("1 + 2")
 p dumped.class     # => String
+#%since 3.4
 p dumped.encoding  # => #<Encoding:BINARY (ASCII-8BIT)>
+#%else
+p dumped.encoding  # => #<Encoding:ASCII-8BIT>
+#%end
 ```
 
 ### module_function def dump_file(filepath, **options) -> String
