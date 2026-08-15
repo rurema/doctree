@@ -124,6 +124,8 @@ filename はパース中に発生した例外のメッセージに用います�
 - **SEE** [m:Psych.parse]
 
 ```ruby title="例"
+require 'psych'
+
 p Psych.load("--- a")         # => 'a'
 p Psych.load("---\n - a\n - b") # => ['a', 'b']
 
@@ -138,6 +140,8 @@ end
 キーワード引数 symbolize_names に true を指定した場合はハッシュのキーを [c:Symbol] に変換して返します。
 
 ```ruby title="例"
+require 'psych'
+
 p Psych.load("---\n foo: bar")                       # => {"foo"=>"bar"}
 p Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 ```
@@ -162,6 +166,9 @@ p Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 任意のクラスを許可するにはキーワード引数 permitted_classes を指定すると、そのクラスが追加されます。例えば Date クラスを許可するには以下のように書いてください:
 
 ```ruby title="permitted_classes: に Date を渡した例"
+require 'psych'
+require 'date'
+
 Psych.safe_load(yaml, permitted_classes: [Date])
 ```
 
@@ -170,6 +177,8 @@ Psych.safe_load(yaml, permitted_classes: [Date])
 エイリアスはキーワード引数 aliases を指定することで明示的に許可できます。
 
 ```ruby title="aliases: true の例"
+require 'psych'
+
 x = []
 x << x
 yaml = Psych.dump x
@@ -188,6 +197,8 @@ filename はパース中に発生した例外のメッセージに用います�
 キーワード引数 symbolize_names に true を指定した場合はハッシュのキーを [c:Symbol] に変換して返します。
 
 ```ruby title="symbolize_names: true の例"
+require 'psych'
+
 p Psych.safe_load("---\n foo: bar")                       # => {"foo"=>"bar"}
 p Psych.safe_load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 ```
@@ -216,6 +227,9 @@ p yaml["aaa"]["bbb"].first.frozen?    # = true
 [m:$-w] が true の時にオプション引数を渡すと警告が出力されます。
 
 ```ruby title="オプション引数を使用した例"
+require 'psych'
+require 'date'
+
 # warning: Passing permitted_classes with the 2nd argument of Psych.safe_load is deprecated. Use keyword argument like Psych.safe_load(yaml, permitted_classes: ...) instead.
 Psych.safe_load("", [Date])
 ```
@@ -248,6 +262,8 @@ AST については [c:Psych::Nodes] を参照してください。
 - **SEE** [m:Psych.load]
 
 ```ruby title="例"
+require 'psych'
+
 p Psych.parse("---\n - a\n - b") # => #<Psych::Nodes::Document:...>
 
 begin
@@ -283,6 +299,8 @@ yaml が 複数の YAML ドキュメントを含む場合を取り扱うこと�
 - **SEE** [c:Psych::Nodes]
 
 ```ruby title="例"
+require 'psych'
+
 p Psych.parse_stream("---\n - a\n - b") # => #<Psych::Nodes::Stream:0x00>
 ```
 
@@ -303,6 +321,9 @@ options で出力に関するオプションを以下の指定できます。
 - **param** `options` -- 出力オプション
 
 ```ruby title="例"
+require 'psych'
+require 'stringio'
+
 # Dump an array, get back a YAML string
 p Psych.dump(['a', 'b'])  # => "---\n- a\n- b\n"
 
@@ -323,6 +344,8 @@ Psych.dump(['a', ['b']], StringIO.new, :indentation => 3)
 - **param** `objects` -- 変換対象のオブジェクト列
 
 ```ruby title="例"
+require 'psych'
+
 p Psych.dump_stream("foo\n  ", {}) # => "--- ! \"foo\\n  \"\n--- {}\n"
 ```
 
@@ -341,12 +364,16 @@ Ruby のオブジェクトに変換します。
 ブロックなしの場合はオブジェクトの配列を返します。
 
 ```ruby title="例"
+require 'psych'
+
 p Psych.load_stream("--- foo\n...\n--- bar\n...") # => ['foo', 'bar']
 ```
 
 ブロックありの場合は各オブジェクト引数としてそのブロックを呼び出します。
 
 ```ruby title="例"
+require 'psych'
+
 list = []
 Psych.load_stream("--- foo\n...\n--- bar\n...") do |ruby|
   list << ruby

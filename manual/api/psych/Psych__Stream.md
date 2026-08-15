@@ -9,6 +9,8 @@ IO に出力する機能を持つクラスです。
 start で変換を開始し、push で変換する Ruby オブジェクトを渡し、最後に finish を呼ぶことで変換を完了します。
 
 ```ruby
+require 'psych'
+
 stream = Psych::Stream.new($stdout)
 stream.start
 stream.push({:foo => 'bar'})
@@ -20,6 +22,8 @@ YAML document は(バッファリングされずに)直接 $stdout に出力さ�
 finish を確実に呼び出すためには [m:Psych::Stream#start] メソッドをブロック付きで呼び出すとよいでしょう。
 
 ```ruby
+require 'psych'
+
 stream = Psych::Stream.new($stdout)
 stream.start do |em|
   em.push(:foo => 'bar')

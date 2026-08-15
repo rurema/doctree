@@ -35,6 +35,8 @@ implicit にはドキュメントが implicit に始まっているかどうか�
 tag directive を1つ持ち、 implicit にドキュメントが開始している Document オブジェクトを生成しています。
 
 ```ruby
+require 'psych'
+
 Psych::Nodes::Document.new(
   [1,1],
   [["!", "tag:tenderlovemaking.com,2009:"]],

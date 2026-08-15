@@ -12,6 +12,8 @@ YAML AST を構築するためのクラスです。
 ### Example
 
 ```ruby
+require 'psych'
+
 parser = Psych::Parser.new Psych::TreeBuilder.new
 parser.parse('--- foo')
 parser.handler.root # => #<Psych::Nodes::Stream:0x00000001400000 ... >

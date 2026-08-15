@@ -16,6 +16,8 @@ Psych::Nodes::Mapping は 0 個以上の子ノードを持つことができま�
 子ノードは mapping のキーと値が交互に並んでいます。
 
 ```ruby
+require 'psych'
+
 ast = Psych.parse(<<EOS)
 %YAML 1.1
 ---

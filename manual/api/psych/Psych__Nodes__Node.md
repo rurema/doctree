@@ -22,6 +22,8 @@ YAML AST のノードを表す抽象クラスです。
 タグが付加されていない場合は nil を返します。
 
 ```ruby
+require 'psych'
+
 ast = Psych.parse(<<EOS)
 ---
 - !!str a
