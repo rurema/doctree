@@ -80,6 +80,30 @@ def check_bitclust_version!
   MESSAGE
 end
 
+# RBS 型シグネチャ（rurema/bitclust#321）を取り込む対象バージョン →
+# ruby/rbs のタグ（その版に同梱される rbs の系列）。表に無いバージョンには
+# 取り込まない（シグネチャ表示は 4.0 以降のみ）。4.1 は rbs 4.0 系を
+# 追随中なので、4.1 リリース時に同梱される rbs の確定タグへ更新する
+RBS_TAGS = {
+  "4.0" => "v3.10.0",
+  "4.1" => "v4.0.3",
+}
+RBS_CHECKOUT_BASE = ENV.fetch("RBS_CHECKOUT_BASE", "/tmp")
+RBS_CHECKOUT_MUTEX = Mutex.new
+
+def rbs_checkout(tag)
+  dir = File.join(RBS_CHECKOUT_BASE, "rbs-#{tag}")
+  # rake generate は multitask（スレッド並列）なので clone は排他する
+  RBS_CHECKOUT_MUTEX.synchronize do
+    unless File.directory?(dir)
+      succeeded = system("git", "clone", "--depth=1", "--branch=#{tag}",
+                         "https://github.com/ruby/rbs.git", dir)
+      raise "Failed to checkout ruby/rbs #{tag}" unless succeeded
+    end
+  end
+  dir
+end
+
 # ソースは manual/ の Markdown ツリー（manual/doc は manual/api から自動で取り込まれる）。
 # 旧 refm/ は移行ウィンドウ中の凍結ソース。旧経路でビルドしたい場合は
 # BITCLUST_SOURCE=refm を指定する。
@@ -106,6 +130,11 @@ def generate_database(version)
     succeeded = system("bundle", "exec", "bitclust", "--database=#{db}", "--capi",
                        "update", "--markdowntree=manual/capi")
     raise "Failed to update BitClust C API database" unless succeeded
+  end
+  if (tag = RBS_TAGS[version])
+    succeeded = system("bundle", "exec", "bitclust", "rbssig",
+                       "--sig-root=#{rbs_checkout(tag)}", db)
+    raise "Failed to fill RBS signatures" unless succeeded
   end
 end
 
