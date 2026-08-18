@@ -61,7 +61,7 @@ irb(main):001:0> :abc # => abcabc
 ```ruby
 require "irb/inspector"
 p IRB::Inspector.keys_with_inspector(IRB::Inspector::INSPECTORS[true])
-# => [true, :p, "p", :inspect, "inspect"]
+# => [true, :pp, "pp", :pretty_inspect, "pretty_inspect"]
 ```
 
 # object IRB::Inspector::INSPECTORS

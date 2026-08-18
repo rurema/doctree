@@ -59,7 +59,7 @@ p o.then          # => Ruby < 2.6 では nil、Ruby >= 2.6 では Enumerator
 ```ruby
 require 'ostruct'
 o = OpenStruct.new
-p o.methods       # => [:to_h, :marshal_load, :marshal_dump, :each_pair, ...]
+p o.methods       # => [:to_h, :marshal_dump, :each_pair, ...] (内容と順序は Ruby のバージョンによって異なります)
 o.methods = [:foo, :bar]
 p o.methods       # => [:foo, :bar]
 ```
