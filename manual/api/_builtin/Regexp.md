@@ -3,13 +3,15 @@ library: _builtin
 ---
 # class Regexp < Object
 
-正規表現のクラス。正規表現のリテラルはスラッシュで囲んだ形式で記述します。
+正規表現（regular expression）を表すクラスです。
+
+正規表現のリテラルはスラッシュで囲んだ形式で記述します。
 
 ```ruby
 /^this is regexp/
 ```
 
-Regexp.new(string) を使って正規表現オブジェクトを動的に生成することもできます。
+`Regexp.new(string)` を使って正規表現オブジェクトを動的に生成することもできます。
 
 ```ruby
 str = "this is regexp"
@@ -37,35 +39,32 @@ p Regexp.new('abc').frozen?
 ### def Regexp.compile(string, option = nil) -> Regexp
 ### def Regexp.new(string, option = nil) -> Regexp
 
-文字列 string をコンパイルして正規表現オブジェクトを生成して返します。
+文字列 `string` をコンパイルして正規表現オブジェクトを生成して返します。
 
-第一引数が正規表現であれば第一引数を複製して返します。第二引数は警告の上無視されます。
+第一引数が正規表現オブジェクトであればそれを複製して返します。その場合、第二引数は警告の上無視されます。
 
 - **param** `string` -- 正規表現を文字列として与えます。
 
 - **param** `option` -- [m:Regexp::IGNORECASE], [m:Regexp::MULTILINE],
               [m:Regexp::EXTENDED]
               の論理和を指定します。
-              [c:Integer] 以外であれば真偽値の指定として見なされ
-              、真(nil, false 以外)であれば
-              [m:Regexp::IGNORECASE] の指定と同じになります。
+              [c:Integer] 以外であれば真偽値の指定とみなされ、真なら [m:Regexp::IGNORECASE] の指定と同じになります。
 #%else
 ### def Regexp.compile(string, option = nil, code = nil) -> Regexp
 ### def Regexp.new(string, option = nil, code = nil) -> Regexp
 
-文字列 string をコンパイルして正規表現オブジェクトを生成して返します。
+文字列 `string` をコンパイルして正規表現オブジェクトを生成して返します。
 
-第一引数が正規表現であれば第一引数を複製して返します。第二、第三引数は警告の上無視されます。
+第一引数が正規表現オブジェクトであればそれを複製して返します。その場合、第二、第三引数は警告の上無視されます。
 
 - **param** `string` -- 正規表現を文字列として与えます。
 
 - **param** `option` -- [m:Regexp::IGNORECASE], [m:Regexp::MULTILINE],
               [m:Regexp::EXTENDED]
               の論理和を指定します。
-              [c:Integer] 以外であれば真偽値の指定として見なされ、真(nil, false 以外)であれば
-              [m:Regexp::IGNORECASE] の指定と同じになります。
+              [c:Integer] 以外であれば真偽値の指定とみなされ、真なら [m:Regexp::IGNORECASE] の指定と同じになります。
 
-- **param** `code` -- "n", "N" が与えられた時には、生成された正規表現のエンコーディングは ASCII-8BIT になります。
+- **param** `code` -- `"n"`, `"N"` を与えると、返り値のエンコーディングは ASCII-8BIT になります。
             それ以外の指定は警告を出力します。
 #%end
 
@@ -93,7 +92,7 @@ p t2.match(str)[0]  # => "ふるいけや\nかわずと"
 ### def Regexp.escape(string) -> String
 ### def Regexp.quote(string) -> String
 
-string の中で正規表現において特別な意味を持つ文字の直前にエスケープ文字(バックスラッシュ)を挿入した文字列を返します。
+`string` の中で正規表現において特別な意味を持つ文字の直前にエスケープ文字（バックスラッシュ）を挿入した文字列を返します。
 
 - **param** `string` -- 正規表現において特別な意味をもつ文字をもつ文字列を指定します。
 
@@ -102,7 +101,7 @@ rp = Regexp.escape("$bc^")
 p rp # => "\\$bc\\^"
 ```
 
-### def Regexp.last_match -> MatchData
+### def Regexp.last_match -> MatchData | nil
 
 カレントスコープで最後に行った正規表現マッチの [c:MatchData] オブジェクトを返します。このメソッドの呼び出しは [m:$~]
 の参照と同じです。
@@ -118,9 +117,8 @@ p Regexp.last_match[3]   # => nil
 
 ### def Regexp.last_match(nth) -> String | nil
 
-整数 nth が 0 の場合、マッチした文字列を返します
-([m:$&])。それ以外では、nth 番目の括弧にマッチした部分文字列を返します([m:$1],[m:$2],...)。
-対応する括弧がない場合やマッチしなかった場合には nil を返します。
+整数 `nth` が `0` の場合、マッチした文字列を返します（[m:$&]）。それ以外では、`nth` 番目の括弧にマッチした部分文字列を返します（[m:$1], [m:$2], ...）。
+対応する括弧がない場合やマッチしなかった場合には `nil` を返します。
 
 ```ruby title="例"
 /(.)(.)/ =~ "ab"
@@ -131,9 +129,9 @@ p Regexp.last_match(3)   # => nil
 ```
 
 正規表現全体がマッチしなかった場合、引数なしの
-Regexp.last_match はnil を返すため、
-last_match[1] の形式では例外 [c:NoMethodError] が発生します。
-対して、last_match(1) は nil を返します。
+`Regexp.last_match` は `nil` を返すため、
+`last_match[1]` の形式では例外 [c:NoMethodError] が発生します。
+対して、`last_match(1)` は `nil` を返します。
 
 ```ruby title="例"
 str = "This is Regexp"
@@ -152,58 +150,57 @@ p Regexp.last_match(1) # => nil
 ```
 
 - **param** `nth` -- 整数を指定します。
-	整数 nth が 0 の場合、マッチした文字列を返します。それ以外では、nth 番目の括弧にマッチした部分文字列を返します。
+  整数 `nth` が `0` の場合、マッチした文字列を返します。それ以外では、`nth` 番目の括弧にマッチした部分文字列を返します。
 
 ### def Regexp.union(*pattern) -> Regexp
 
-引数として与えた pattern を選択 | で連結し、Regexp として返します。
-結果の Regexp は与えた pattern のどれかにマッチする場合にマッチするものになります。
+引数として与えた `pattern` を選択 `|` で連結し、正規表現オブジェクトとして返します。
+返り値は与えた `pattern` のどれかにマッチする場合にマッチするものになります。
 
 ```ruby
 p Regexp.union(/a/, /b/, /c/) # => /(?-mix:a)|(?-mix:b)|(?-mix:c)/
 ```
 
-引数を一つだけ与える場合は、[c:Array] を与えても Regexp を生成します。
+引数を一つだけ与える場合は、[c:Array] を与えても正規表現オブジェクトを生成します。
 つまり、以下のように書くことができます。
 
 ```ruby
 arr = [/a/, /b/, /c/]
 p Regexp.union(arr)  # => /(?-mix:a)|(?-mix:b)|(?-mix:c)/
-# 1.8.7 より前は、以下のように書く必要があった
+# Ruby 1.8.7 より前は、以下のように書く必要があった
 p Regexp.union(*arr) # => /(?-mix:a)|(?-mix:b)|(?-mix:c)/
 ```
 
-pattern は Regexp または String で与えます。
-String で与えた場合、それ自身と等しい文字列にマッチするものと解釈され、エスケープされて結果の Regexp に組み込まれます。
+`pattern` は `Regexp` または `String` で与えます。
+`String` で与えた場合、それ自身と等しい文字列にマッチするものと解釈され、エスケープされて結果の正規表現オブジェクトに組み込まれます。
 
 ```ruby
 p Regexp.union("a", "?", "b") # => /a|\?|b/
 p Regexp.union(/a/, "*") # => /(?-mix:a)|\*/
 ```
 
-引数をひとつも与えなかった場合、決してマッチしない Regexp を返します。
+引数をひとつも与えなかった場合、決してマッチしない正規表現オブジェクトを返します。
 
 ```ruby
 p Regexp.union() # => /(?!)/
 ```
 
-結果の Regexp が対応する文字コードは引数として与えた Regexp が扱う文字コードに一致します。
-固定コードに対してコンパイルされている Regexp を複数与える場合、それらのコードは一致していなければなりません。
-異なる固定コードに対してコンパイルされている Regexp が存在する場合、
-[c:ArgumentError] が発生します。
+返り値が対応する文字コードは引数として与えた正規表現オブジェクトが扱う文字コードに一致します。
+固定コードに対してコンパイルされている正規表現オブジェクトを複数与える場合、それらのコードは一致していなければなりません。
+異なる固定コードに対してコンパイルされている正規表現オブジェクトが存在する場合、[c:ArgumentError] が発生します。
 
 ```ruby
 p Regexp.union(/a/e, /b/e) # => /(?-mix:a)|(?-mix:b)/e
 Regexp.union(/a/e, /b/s)   # ~> ArgumentError
 ```
 
-コードが固定されている Regexp とコードが固定されていない Regexp を混ぜた場合、結果の Regexp は固定されているコードに対応するものになります。
+コードが固定されている正規表現オブジェクトとコードが固定されていない正規表現オブジェクトを混ぜた場合、返り値は固定されているコードに対応するものになります。
 
 ```ruby
 p Regexp.union(/a/e, /b/) # => /(?-mix:a)|(?-mix:b)/e
 ```
 
-- **param** `pattern` -- | で連結したい正規表現を指定します
+- **param** `pattern` -- `|` で連結したい正規表現を指定します
 
 ```ruby title="例"
 # オプションは合成されない
@@ -222,9 +219,11 @@ p Regexp.union(rep2)  # => /(?x-mi:foo)|bar|hoge/
 
 ### def Regexp.try_convert(obj) -> Regexp | nil
 
-obj を to_regexp メソッドで Regexp オブジェクトに変換しようと試みます。
+`obj` を正規表現オブジェクトに変換するためのメソッドです。
 
-変換に成功した場合はそれを返し、失敗時には nil を返します。
+`obj` が正規表現オブジェクトならそのまま `obj` を返します。
+
+`obj` が正規表現オブジェクトでないとき、`to_regexp` メソッドに応答するなら `obj.to_regexp` の結果を返し、応答しないなら `nil` を返します。
 
 ```ruby title="例"
 p Regexp.try_convert(/re/)    # => /re/
@@ -236,10 +235,9 @@ p Regexp.try_convert("re")    # => nil
 
 正規表現のマッチにかける時間の上限を秒数で返します。
 
-上限が設定されていない場合は nil を返します。既定値は nil です。
+上限が設定されていない場合は `nil` を返します。既定値は `nil` です。
 
-この設定はプロセス全体で共有されます。個々の正規表現に設定された上限
-([m:Regexp#timeout])がある場合、そちらが優先されます。
+この設定はプロセス全体で共有されます。個々の正規表現オブジェクトに設定された上限（[m:Regexp#timeout]）がある場合、そちらが優先されます。
 
 ```ruby
 p Regexp.timeout # => nil
@@ -251,14 +249,14 @@ p Regexp.timeout # => nil
 
 正規表現のマッチにかける時間の上限を秒数で設定します。
 
-nil を指定すると上限を設定しない状態に戻します。
+`nil` を指定すると上限を設定しない状態に戻します。
 
-この設定はプロセス全体に影響します。個々の正規表現ごとに設定したい場合は
-[m:Regexp.new] の timeout キーワード引数を使用してください。
+この設定はプロセス全体に影響します。個々の正規表現オブジェクトごとに設定したい場合は
+[m:Regexp.new] の `timeout` キーワード引数を使用してください。
 
 上限を超えた場合は [c:Regexp::TimeoutError] が発生します。
 
-- **param** `seconds` -- 上限の秒数を数値で指定します。nil を指定すると上限なしになります。
+- **param** `seconds` -- 上限の秒数を数値で指定します。`nil` を指定すると上限なしになります。
 
 ```ruby
 Regexp.timeout = 0.5
@@ -273,7 +271,7 @@ p Regexp.timeout # => 0.5
 ### def Regexp.linear_time?(re) -> bool
 ### def Regexp.linear_time?(string, options = 0) -> bool
 
-正規表現 re が入力文字列の長さに対して線形時間でマッチできる場合に true を、そうでない場合に false を返します。
+正規表現 `re` が入力文字列の長さに対して線形時間でマッチできる場合に `true` を、そうでない場合に `false` を返します。
 
 これは Ruby の処理系の性質であって、正規表現そのものの性質ではありません。
 同じ正規表現でも Ruby のビルドや実装によって結果が変わることがあり、返り値について前方互換性も後方互換性も保証されません。
@@ -296,7 +294,7 @@ p Regexp.linear_time?(/^((a|a)+)\1$/) # => false （後方参照があるため�
 
 ### def =~(string) -> Integer | nil
 
-文字列 string との正規表現マッチを行います。マッチした場合、マッチした位置のインデックスを返します(先頭は0)。マッチしなかった場合、あるいは string が nil の場合には nil を返します。
+文字列 `string` との正規表現マッチを行います。マッチした場合、マッチした位置のインデックスを返します（先頭は `0`）。マッチしなかった場合、あるいは `string` が `nil` の場合には `nil` を返します。
 
 ```ruby title="例"
 p /foo/ =~ "foo"  # => 0
@@ -310,7 +308,7 @@ p /foo/ =~ "bar"  # => nil
 
 - **param** `string` -- マッチ対象文字列
 
-- **raise** `TypeError` -- string が nil でも [c:String] オブジェクトでも [c:Symbol] でもない場合発生します。
+- **raise** `TypeError` -- `string` が `nil` でも [c:String] オブジェクトでも [c:Symbol] でもない場合発生します。
 
 ```ruby title="例"
 p /foo/ =~ "foo"        # => 0
@@ -333,12 +331,12 @@ end
 
 ### def ===(string) -> bool
 
-文字列 string との正規表現マッチを行います。
+文字列 `string` との正規表現マッチを行います。
 マッチした場合は真を返します。
 
-string が文字列でもシンボルでもない場合には false を返します。
+`string` が文字列でもシンボルでもない場合には `false` を返します。
 
-このメソッドは主にcase文での比較に用いられます。
+このメソッドは主に `case` 式での比較に用いられます。
 
 - **param** `string` -- マッチ対象文字列
 
@@ -398,7 +396,7 @@ end
 
 ### def casefold? -> bool
 
-正規表現が大文字小文字の判定をしないようにコンパイルされている時、真を返します。
+`self` が大文字小文字の判定をしないようにコンパイルされていれば `true` を、そうでなければ `false` を返します。
 
 ```ruby title="例"
 reg = Regexp.new("foobar", Regexp::IGNORECASE)
@@ -410,7 +408,7 @@ p reg.casefold? # => false
 
 ### def fixed_encoding? -> bool
 
-正規表現が任意の ASCII 互換エンコーディングとマッチ可能な時に false を返します。
+`self` が任意の ASCII 互換エンコーディングとマッチ可能なら `false` を、そうでないなら `true` を返します。
 
 ```ruby title="例"
 # -*- coding:utf-8 -*-
@@ -448,17 +446,17 @@ p r =~ "abc".force_encoding("euc-jp")           # => nil
 ### def match(str, pos = 0) -> MatchData | nil
 ### def match(str, pos = 0) {|m| ... } -> object | nil
 
-指定された文字列 str に対して位置 pos から自身が表す正規表現によるマッチングを行います。マッチした場合には結果を MatchData オブジェクトで返します。
-マッチしなかった場合 nil を返します。
+指定された文字列 `str` に対して位置 `pos` から `self` が表す正規表現によるマッチングを行います。マッチした場合には結果を [c:MatchData] オブジェクトで返します。
+マッチしなかった場合 `nil` を返します。
 
-省略可能な第二引数 pos を指定すると、マッチの開始位置を pos から行うよう制御できます(pos のデフォルト値は 0)。
+省略可能な第二引数 `pos` を指定すると、マッチの開始位置を `pos` から行うよう制御できます（`pos` のデフォルト値は `0`）。
 
 ```ruby title="例"
 p(/(.).(.)/.match("foobar", 3).captures)   # => ["b", "r"]
 p(/(.).(.)/.match("foobar", -3).captures)  # => ["b", "r"]
 ```
 
-pos を指定しても [m:MatchData#offset] 等の結果には影響しません。つまり、
+`pos` を指定しても [m:MatchData#offset] 等の結果には影響しません。つまり、
 
 ```ruby
 re.match(str[pos..-1])
@@ -472,8 +470,8 @@ re.match(str, pos)
 
 は異なります。
 
-ブロックを渡すと、マッチした場合に限り MatchData オブジェクトがブロック引数に渡されて実行されます。
-マッチした場合はブロックの値を返し、マッチしなかった場合は nil を返します。
+ブロックを渡すと、マッチした場合に限り [c:MatchData] オブジェクトがブロック引数に渡されて実行されます。
+マッチした場合はブロックの値を返し、マッチしなかった場合は `nil` を返します。
 
 ```ruby title="例"
 results = []
@@ -482,9 +480,9 @@ p /((.)\2)/.match("bar") {|m| results << m[0] } # => nil
 p results # => ["oo"]
 ```
 
-- **param** `str` -- 文字列を指定します。str との正規表現マッチを行います。
+- **param** `str` -- 文字列を指定します。`str` との正規表現マッチを行います。
 
-- **param** `pos` -- 整数を指定します。マッチの開始位置を pos から行うよう制御できます(pos のデフォルト値は 0)。
+- **param** `pos` -- 整数を指定します。マッチの開始位置を `pos` から行うよう制御できます（`pos` のデフォルト値は `0`）。
 
 ```ruby title="例"
 reg = Regexp.new("foo")
@@ -510,11 +508,9 @@ bar = /foo(.*)baz/.match("foobarbaz").to_a[1]
 foo, bar, baz = /(foo)(bar)(baz)/.match("foobarbaz").to_a.values_at(1,2,3)
 ```
 
-のように使用できます。(to_a は、マッチに失敗した場合を考慮しています。)
+のように使用できます。（`to_a` は、マッチに失敗した場合を考慮しています。）
 
-多重代入の規則では右辺が配列でない一つのオブジェクトで to_a
-メソッドを持つ場合、右辺に * を付けることで to_a の結果を利用できます。つまり、上記は以下のように書くことができます。(ここでの
-`_` は、[m:$&] を捨てるために適当に選んだ変数名)
+多重代入の規則では右辺が配列でない一つのオブジェクトで `to_a` メソッドを持つ場合、右辺に `*` を付けることで `to_a` の結果を利用できます。つまり、上記は以下のように書くことができます。（ここでの `_` は、[m:$&] を捨てるために適当に選んだ変数名）
 
 ```ruby title="例"
 _, foo, bar, baz = */(foo)(bar)(baz)/.match("foobarbaz")
@@ -523,8 +519,8 @@ p [foo, bar, baz]
 # => ["foo", "bar", "baz"]
 ```
 
-このような用途に [m:MatchData#captures] が使えると考えるかも知れませんが、captures では、マッチに失敗した場合、
-nil.captures を呼び出そうとして例外 [c:NoMethodError] が発生してしまいます。
+このような用途に [m:MatchData#captures] が使えると考えるかも知れませんが、`captures` では、マッチに失敗した場合、
+`nil.captures` を呼び出そうとして例外 [c:NoMethodError] が発生してしまいます。
 
 ```ruby title="例"
 foo, bar, baz = /(foo)(bar)(baz)/.match("foobar").captures
@@ -540,8 +536,8 @@ foo, bar, baz = /(foo)(bar)(baz)/.match("foobar").captures
 
 ### def match?(str, pos = 0) -> bool
 
-指定された文字列 str に対して 位置 pos から自身が表す正規表現によるマッチングを行います。
-マッチした場合 true を返し、マッチしない場合には false を返します。
+指定された文字列 `str` に対して位置 `pos` から `self` が表す正規表現によるマッチングを行います。
+マッチした場合 `true` を返し、マッチしない場合には `false` を返します。
 また、[m:$~] など正規表現のマッチに関する組み込み変数の値は変更されません。
 
 ```ruby title="例"
@@ -555,7 +551,7 @@ p $&                     # => nil
 
 ### def options -> Integer
 
-正規表現の生成時に指定されたオプションを返します。戻り値は、
+`self` の生成時に指定されたオプションを返します。戻り値は、
 [m:Regexp::EXTENDED], [m:Regexp::IGNORECASE],
 [m:Regexp::MULTILINE],
 [m:Regexp::FIXEDENCODING],
@@ -580,11 +576,11 @@ p Regexp.new("foo", Regexp::IGNORECASE | Regexp::MULTILINE | Regexp::EXTENDED).o
 #%since 3.2
 ### def timeout -> Float | nil
 
-その正規表現のマッチにかける時間の上限を秒数で返します。
+`self` のマッチにかける時間の上限を秒数で返します。
 
-上限が設定されていない場合は nil を返します。
+上限が設定されていない場合は `nil` を返します。
 
-この設定は正規表現ごとのもので、[m:Regexp.new] の timeout キーワード引数で指定します。設定されている場合、[m:Regexp.timeout] によるプロセス全体の設定よりも優先されます。
+この設定は正規表現オブジェクトごとのもので、[m:Regexp.new] の `timeout` キーワード引数で指定します。設定されている場合、[m:Regexp.timeout] によるプロセス全体の設定よりも優先されます。
 
 ```ruby
 re = Regexp.new("^(a|a)*$", timeout: 0.5)
@@ -598,7 +594,7 @@ p /^(a|a)*$/.timeout # => nil
 
 ### def source -> String
 
-その正規表現のもととなった文字列表現を生成して返します。
+`self` のもととなった文字列表現を生成して返します。
 
 ```ruby title="例"
 re = /foo|bar|baz/i
@@ -607,7 +603,7 @@ p re.source     # => "foo|bar|baz"
 
 ### def to_s -> String
 
-正規表現の文字列表現を生成して返します。返される文字列は他の正規表現に埋め込んでもその意味が保持されるようになっています。
+`self` の文字列表現を生成して返します。返される文字列は他の正規表現に埋め込んでもその意味が保持されるようになっています。
 
 ```ruby
 re = /foo|bar|baz/i
@@ -625,20 +621,14 @@ p /(baz)#{re}/          # \1 は、baz
 # => /(baz)(?-mix:(foo|bar)\1)/
 ```
 
-```ruby title="使用例"
-re = /foo|bar|baz/i
-p re.to_s       # => "(?i-mx:foo|bar|baz)"
-p /#{re}+/o     # => /(?i-mx:foo|bar|baz)+/
-```
-
 - **SEE** [m:Regexp#inspect]
 
 ### def ==(other) -> bool
 ### def eql?(other) -> bool
 
-otherが同じパターン、オプション、文字コードの正規表現であったらtrueを返します。
+`self` が `other` と同じパターン、オプション、文字コードの正規表現オブジェクトであったら `true` を、そうでなければ `false` を返します。
 
-- **param** `other` -- 正規表現を指定します。
+- **param** `other` -- 比較対象の正規表現オブジェクト
 
 ```ruby title="例"
 p /^eee$/   == /~eee$/x   # => false
@@ -650,7 +640,7 @@ p /^eee$/.eql?(/^eee$/)          # => true
 
 ### def hash -> Integer
 
-正規表現のオプションやテキストに基づいたハッシュ値を返します。
+`self` のオプションやテキストに基づいたハッシュ値を返します。
 
 ```ruby title="例"
 p /abc/i.hash # => 4893115
@@ -670,7 +660,7 @@ p /^ugou.*?/i.inspect # => "/^ugou.*?/i"
 
 ### def encoding   -> Encoding
 
-正規表現オブジェクトのエンコーディングを表す [c:Encoding] オブジェクトを返します。
+`self` のエンコーディングを表す [c:Encoding] オブジェクトを返します。
 
 #%#noexample 正規表現ページのエンコーディングを参照
 
@@ -678,10 +668,9 @@ p /^ugou.*?/i.inspect # => "/^ugou.*?/i"
 
 ### def named_captures -> { String => [Integer] }
 
-正規表現に含まれる名前付きキャプチャ(named capture)の情報を
-[c:Hash] で返します。
+`self` に含まれる名前付きキャプチャ（named capture）の情報を [c:Hash] で返します。
 
-Hash のキーは名前付きキャプチャの名前で、値はその名前に関連付けられたキャプチャの index のリストを返します。
+`Hash` のキーは名前付きキャプチャの名前で、値はその名前に関連付けられたキャプチャの index のリストを返します。
 
 ```ruby title="例"
 p /(?<foo>.)(?<bar>.)/.named_captures
@@ -697,7 +686,7 @@ p /(.)(.)/.named_captures
 
 ### def names -> [String]
 
-正規表現に含まれる名前付きキャプチャ(named capture)の名前を文字列の配列で返します。
+`self` に含まれる名前付きキャプチャ（named capture）の名前を文字列の配列で返します。
 
 ```ruby title="例"
 /(?<foo>.)(?<bar>.)(?<baz>.)/.names
@@ -714,17 +703,19 @@ p /(.)(.)/.names
 
 ### const EXTENDED -> Integer
 
-バックスラッシュでエスケープされていない空白と # から改行までを無視します。正規表現リテラルの //x オプションと同じです。(空白を入れる場合は\でエスケープして\ (<-空白)と指定します)
+バックスラッシュでエスケープされていない空白と `#` から改行までを無視します。
+正規表現リテラルの `x` オプションと同じです。
+空白を入れる場合は `\` でエスケープして `\␣` とします（`␣` は実際にはスペース）。
 
 ### const IGNORECASE -> Integer
 
 文字の大小の違いを無視します。
-正規表現リテラルの //i オプションと同じです。
+正規表現リテラルの `i` オプションと同じです。
 
 ### const MULTILINE -> Integer
 
-複数行モード。正規表現 "." が改行にマッチするようになります。
-正規表現リテラルの //m オプションと同じです。
+複数行モード。正規表現 `.` が改行にマッチするようになります。
+正規表現リテラルの `m` オプションと同じです。
 
 ### const FIXEDENCODING -> Integer
 
@@ -736,14 +727,14 @@ p /(.)(.)/.names
 
 正規表現のマッチ時に文字列のエンコーディングを無視し、バイト列としてマッチすることを意味します。
 
-正規表現リテラルの n オプションに対応します。
+正規表現リテラルの `n` オプションに対応します。
 
 #%since 3.2
 # class Regexp::TimeoutError < RegexpError
 
 正規表現のマッチが、設定された時間の上限を超えた場合に発生します。
 
-上限は [m:Regexp.timeout=] でプロセス全体に対して、あるいは [m:Regexp.new] の timeout キーワード引数で正規表現ごとに設定します。
+上限は [m:Regexp.timeout=] でプロセス全体に対して、あるいは [m:Regexp.new] の `timeout` キーワード引数で正規表現オブジェクトごとに設定します。
 
 ```ruby
 Regexp.timeout = 0.5
