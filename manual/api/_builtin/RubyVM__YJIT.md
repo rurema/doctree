@@ -18,12 +18,12 @@ Ruby 3.2 で「実験的」の位置づけが外れ、Ruby 3.3 では実行時�
 
 有効化するには以下のいずれかの方法を使います。
 
-* コマンドラインオプション `--yjit`
-* 環境変数 `RUBY_YJIT_ENABLE`
+- コマンドラインオプション `--yjit`
+- 環境変数 `RUBY_YJIT_ENABLE`
 #%since 3.3
-* (Ruby 3.3 以降) [m:RubyVM::YJIT.enable] による実行時の有効化
+- (Ruby 3.3 以降) [m:RubyVM::YJIT.enable] による実行時の有効化
 #%else
-* (Ruby 3.3 以降) `RubyVM::YJIT.enable` による実行時の有効化
+- (Ruby 3.3 以降) `RubyVM::YJIT.enable` による実行時の有効化
 #%end
 
 このモジュールは、YJIT が対応していないプラットフォームでは定義されないことがあります。

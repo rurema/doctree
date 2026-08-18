@@ -119,7 +119,7 @@ p Thread.current # => #<Thread:0x4022e6fc run>
 ```ruby
 th = Thread.new do
 end
-    
+
 p Thread.kill(th)     # => #<Thread:0x40221bc8 dead>
 ```
 
@@ -129,10 +129,10 @@ p Thread.kill(th)     # => #<Thread:0x40221bc8 dead>
 
 ```ruby
 Thread.new do
-  sleep 
+  sleep
 end
 sleep 0.1
-  
+
 p Thread.list   # => [#<Thread:0x40377a54 sleep>, #<Thread:0x4022e6fc run>]
 ```
 
@@ -215,7 +215,7 @@ Thread.new do
   }
   exit
 end
- 
+
 loop do
   Thread.pass
   p :main
@@ -1111,11 +1111,11 @@ self に対応するネイティブスレッドの ID を返します。
 
 ID は OS に依存します(pthread_self(3) が返す POSIX スレッド ID とは異なります)。
 
-  * Linux では gettid(2) が返す TID です。
-  * macOS では pthread_threadid_np(3) が返すシステム全体で一意な整数の ID です。
-  * FreeBSD では pthread_getthreadid_np(3) が返すスレッド固有の整数の ID です。
-  * Windows では GetThreadId() が返すスレッド識別子です。
-  * その他のプラットフォームでは [c:NotImplementedError] が発生します。
+- Linux では gettid(2) が返す TID です。
+- macOS では pthread_threadid_np(3) が返すシステム全体で一意な整数の ID です。
+- FreeBSD では pthread_getthreadid_np(3) が返すスレッド固有の整数の ID です。
+- Windows では GetThreadId() が返すスレッド識別子です。
+- その他のプラットフォームでは [c:NotImplementedError] が発生します。
 
 スレッドがまだネイティブスレッドと結びついていない場合や、すでに切り離された場合は nil を返します。
 
