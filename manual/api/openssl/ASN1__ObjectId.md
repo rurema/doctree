@@ -5,7 +5,7 @@ library: openssl
 
 ASN.1 のオブジェクト識別子を表すクラス。
 
-* ITU-T X.660 <https://www.itu.int/rec/T-REC-X.660/en>
+- ITU-T X.660 <https://www.itu.int/rec/T-REC-X.660/en>
 
 ## Class Methods
 
@@ -41,7 +41,7 @@ OpenSSLの内部テーブルに登録します。
 require "openssl"
 OpenSSL::ASN1::ObjectId.register(
   "2.5.29.9", "subjectDirAttrs", "X509v3 Subject Directory Attributes")
-p OpenSSL::ASN1::ObjectId.new("2.5.29.9").long_name 
+p OpenSSL::ASN1::ObjectId.new("2.5.29.9").long_name
 # => "X509v3 Subject Directory Attributes"
 ```
 
