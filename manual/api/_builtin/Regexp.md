@@ -48,7 +48,8 @@ p Regexp.new('abc').frozen?
 - **param** `option` -- [m:Regexp::IGNORECASE], [m:Regexp::MULTILINE],
               [m:Regexp::EXTENDED]
               の論理和を指定します。
-              [c:Integer] 以外であれば真偽値の指定とみなされ、真なら [m:Regexp::IGNORECASE] の指定と同じになります。
+              [c:String] であれば `"i"`（IGNORECASE）、`"m"`（MULTILINE）、`"x"`（EXTENDED）を並べたオプション文字列として解釈します。それ以外の文字を含む文字列を与えると [c:ArgumentError] が発生します。
+              [c:Integer] でも [c:String] でもなければ真偽値の指定とみなされ、真なら [m:Regexp::IGNORECASE] の指定と同じになります。
 #%else
 ### def Regexp.compile(string, option = nil, code = nil) -> Regexp
 ### def Regexp.new(string, option = nil, code = nil) -> Regexp
@@ -62,10 +63,16 @@ p Regexp.new('abc').frozen?
 - **param** `option` -- [m:Regexp::IGNORECASE], [m:Regexp::MULTILINE],
               [m:Regexp::EXTENDED]
               の論理和を指定します。
+#%since 3.2
+              [c:String] であれば `"i"`（IGNORECASE）、`"m"`（MULTILINE）、`"x"`（EXTENDED）を並べたオプション文字列として解釈します。それ以外の文字を含む文字列を与えると [c:ArgumentError] が発生します。
+              [c:Integer] でも [c:String] でもなければ真偽値の指定とみなされ、真なら [m:Regexp::IGNORECASE] の指定と同じになります。
+#%else
               [c:Integer] 以外であれば真偽値の指定とみなされ、真なら [m:Regexp::IGNORECASE] の指定と同じになります。
+#%end
 
-- **param** `code` -- `"n"`, `"N"` を与えると、返り値のエンコーディングは ASCII-8BIT になります。
-            それ以外の指定は警告を出力します。
+- **param** `code` -- `"n"` または `"N"` を与えると、パターンを ASCII-8BIT（バイナリ）のパターンとして扱います。
+            パターンが ASCII 文字だけの場合、返り値のエンコーディングは US-ASCII になります。
+            それ以外の指定は無視されます。
 #%end
 
 - **raise**  `RegexpError` -- 正規表現のコンパイルに失敗した場合発生します。
