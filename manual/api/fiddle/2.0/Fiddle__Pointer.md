@@ -9,6 +9,12 @@ since: "2.0.0"
 2.2.0 で削除された dl の DL::CPtr に対応します。
 DL::CPtrとほぼ同じインターフェースを持ちます。
 
+### メモリビュー
+
+[c:Fiddle::Pointer] は [d:spec/memory_view] をエクスポートします。
+
+1 次元の読み込み専用バイト列としてエクスポートされます。
+
 ## Singleton Methods
 
 ### def Fiddle::Pointer.new(addr, size = 0, free = nil)   -> Fiddle::Pointer
