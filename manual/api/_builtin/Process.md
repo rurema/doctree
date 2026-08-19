@@ -608,7 +608,7 @@ nil を返します。
        -1 (省略時のデフォルト) は任意の子プロセスを待ちます。
        -1 未満なら pid の絶対値とプロセスグループ ID が同じ任意の子プロセスを待ちます。
 
-- **param** `flags` -- Process モジュールの定数 [m:Process::WNOHANG](ノンブロッキングモード)と
+- **param** `flags` -- Process モジュールの定数 [m:Process::WNOHANG] (ノンブロッキングモード)と
              [m:Process::WUNTRACED] の論理和を指定します。省略したときの値は 0 です。
              ノンブロッキングモードで子プロセスがまだ終了していない時には
              nil を返します。[man:waitpid(2)] か [man:wait4(2)] の実装されていないマシンでは

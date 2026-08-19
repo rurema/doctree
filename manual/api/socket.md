@@ -61,11 +61,11 @@ p Socket.pack_sockaddr_in("echo", "127.0.0.1")
 
 ホスト名から IP アドレスへの変換 (正引き) を行うメソッドは以下のものが用意されています。
 
-  - [m:Addrinfo.getaddrinfo]("www.ruby-lang.org", "http") =>  [#<Addrinfo: 221.186.184.68:80 TCP (www.ruby-lang.org:http)>]
-  - [m:IPSocket.getaddress]("www.ruby-lang.org") => "210.163.138.100"
-  - [m:TCPSocket.gethostbyname]("www.ruby-lang.org") => ["beryllium.ruby-lang.org", [], 2, "210.163.138.100"]
-  - [m:Socket.gethostbyname]("www.ruby-lang.org") => ["beryllium.ruby-lang.org", [], 2, "\322\243\212d"]
-  - [m:Socket.getaddrinfo]("www.ruby-lang.org", "http") => [["AF_INET", 80, "beryllium.ruby-lang.org", "210.163.138.100", 2, 1, 6]]
+  - [m:Addrinfo.getaddrinfo] ("www.ruby-lang.org", "http") =>  [#<Addrinfo: 221.186.184.68:80 TCP (www.ruby-lang.org:http)>]
+  - [m:IPSocket.getaddress] ("www.ruby-lang.org") => "210.163.138.100"
+  - [m:TCPSocket.gethostbyname] ("www.ruby-lang.org") => ["beryllium.ruby-lang.org", [], 2, "210.163.138.100"]
+  - [m:Socket.gethostbyname] ("www.ruby-lang.org") => ["beryllium.ruby-lang.org", [], 2, "\322\243\212d"]
+  - [m:Socket.getaddrinfo] ("www.ruby-lang.org", "http") => [["AF_INET", 80, "beryllium.ruby-lang.org", "210.163.138.100", 2, 1, 6]]
 
 逆に IP アドレスからホスト名への変換 (逆引き) を行うメソッドは以下のものが用意されています。
 

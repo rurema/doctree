@@ -115,9 +115,9 @@ p(:foo.equal? :foo) # => true
 そのオブジェクトに対して呼び出せるメソッド名の一覧を返します。
 このメソッドは public メソッドおよび protected メソッドの名前を返します。
 
-ただし特別に、引数が偽の時は [m:Object#singleton_methods](false) と同じになっています。
+ただし特別に、引数が偽の時は false を引数とした [m:Object#singleton_methods] と同じになっています。
 
-- **param** `include_inherited` -- 引数が偽の時は [m:Object#singleton_methods](false) と同じになります。
+- **param** `include_inherited` -- 引数が偽の時は false を引数とした [m:Object#singleton_methods] と同じになります。
 
 ```ruby title="例1"
 class Parent
@@ -246,7 +246,7 @@ inherited_too が真のときは継承した特異メソッドを含みます。
 継承した特異メソッドとは [m:Object#extend] によって追加された特異メソッドや、
 self がクラスの場合はスーパークラスのクラスメソッド([c:Class]のインスタンスの特異メソッド)などです。
 
-singleton_methods(false) は、[m:Object#methods](false) と同じです。
+singleton_methods(false) は、false を引数とした [m:Object#methods] と同じです。
 
 - **param** `inherited_too` -- 継承した特異メソッドを含める場合は真を、そうでない場合は偽を指定します。
 

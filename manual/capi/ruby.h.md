@@ -14,7 +14,7 @@ type 型のメモリを n 個スタックフレームに割り当てる。
 ### MACRO int BUILTIN_TYPE(VALUE obj)
 
 obj の構造体型 ID を返します。
-[f:SPECIAL_CONST_P](obj) が真のオブジェクトに対して使うと落ちます。
+[f:SPECIAL_CONST_P] (obj) が真のオブジェクトに対して使うと落ちます。
 
 ### void Check_Type(VALUE val, int typeflag)
 
@@ -505,7 +505,7 @@ val が String でなければ to_str メソッドを使って String に変換�
 ### MACRO int SYM2ID(VALUE symbol)
 
 Symbol symbol を数値に変換します。
-1.4では、[f:FIX2INT](symbol)と同じです。
+1.4では、symbol を引数とした [f:FIX2INT] と同じです。
 
 ### MACRO int SYMBOL_P(VALUE obj)
 

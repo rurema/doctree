@@ -149,7 +149,7 @@ p doc.to_s                     # => "<a/>"
 
 要素 element を追加します。
 
-element には文字列もしくは [c:REXML::Element] オブジェクトを指定します。文字列を指定した場合には [m:REXML::Element.new](element)
+element には文字列もしくは [c:REXML::Element] オブジェクトを指定します。文字列を指定した場合には element を引数とした [m:REXML::Element.new]
 で生成される要素を追加します。
 
 element を省略した場合は、空の要素が追加されます。

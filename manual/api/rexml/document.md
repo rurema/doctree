@@ -178,7 +178,7 @@ XML 文書([c:REXML::Document])ごとの展開回数がこの値を越えると�
 
 self を複製します。
 
-[m:REXML::Document.new](self) と同じです。
+self を引数とした [m:REXML::Document.new] と同じです。
 
 ### def expanded_name -> String
 ### def name -> String

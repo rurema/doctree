@@ -475,14 +475,14 @@ p BigDecimal("15.23456").ceil(-1).to_f # => 20.0
 ### def round(n) -> BigDecimal
 ### def round(n, b) -> BigDecimal
 
-クラスメソッド [m:BigDecimal.mode]([m:BigDecimal::ROUND_MODE],flag) で指定した
+クラスメソッド [m:BigDecimal.mode] ([m:BigDecimal::ROUND_MODE],flag) で指定した
 [m:BigDecimal::ROUND_MODE] に従って丸め操作を実行します。
 
 - **param** `n` -- 小数点以下の桁数を整数で指定します。
 
 - **param** `b` -- 丸め処理の方式として、[m:BigDecimal.mode] の第 1 引数と同じ値を指定します。
 
-[m:BigDecimal.mode]([m:BigDecimal::ROUND_MODE],flag) で何も指定せず、かつ、引数を指定しない場合は「小数点以下第一位の数を四捨五入して整数(BigDecimal 値)」にします。
+[m:BigDecimal.mode] ([m:BigDecimal::ROUND_MODE],flag) で何も指定せず、かつ、引数を指定しない場合は「小数点以下第一位の数を四捨五入して整数(BigDecimal 値)」にします。
 
 ```ruby
 require "bigdecimal"
