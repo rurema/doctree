@@ -611,6 +611,7 @@ ISO 8601 書式の文字列を返します (拡大表記はつかいません)�
 [m:Date#strftime] に `'%Y-%m-%d'` を指定した場合と同様、時刻を含まない日付のみの文字列になります。
 
 ```ruby title="例"
+require 'date'
 p Date.new(2001, 2, 3).iso8601 # => "2001-02-03"
 ```
 
@@ -759,6 +760,7 @@ p Date.new(2008,2,29).prev_year(4)  # => #<Date: 2004-02-29 ...>
 (時刻は 00:00:00 固定です)。
 
 ```ruby title="例"
+require 'date'
 p Date.new(2001, 2, 3).rfc3339 # => "2001-02-03T00:00:00+00:00"
 ```
 
@@ -881,6 +883,7 @@ XML Schema (date) による書式の文字列を返します。
 - **param** `array_of_names_or_nil` -- パターンマッチに使用する名前の配列を指定します。nil の場合は全てをパターンマッチに使用します。
 
 ```ruby title="例"
+require 'date'
 d = Date.new(2022, 10, 5)
 
 if d in wday: 3, day: ..7 # deconstruct_keys が使われます
