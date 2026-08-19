@@ -1192,6 +1192,7 @@ Ruby のバージョンによって値は変わります。
 ```ruby
 p Encoding::UNICODE_VERSION # => "17.0.0"
 ```
+
 #%end
 
 # class EncodingError < StandardError
