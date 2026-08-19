@@ -74,6 +74,7 @@ end
 
 本メソッドは C Ruby 以外では動作しません。
 
+#%until 4.1
 ### module_function def count_nodes(result_hash = nil) -> Hash
 
 ノードの種類ごとの数を格納したハッシュを返します。
@@ -84,16 +85,19 @@ end
 
 本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォーマンスやメモリ管理に興味のある C Ruby の開発者向けのものです。
 
+Ruby 2.5 以降、パーサのノードは GC の管理対象ではないため、本メソッドは常に空のハッシュを返します。Ruby 4.1 で削除されました。
+
 ```ruby title="例"
 require 'objspace'
 
 p ObjectSpace.count_nodes
-# => {:NODE_METHOD=>2027, :NODE_FBODY=>1927, :NODE_CFUNC=>1798, ...}
+# => {}
 ```
 
 戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
 
 本メソッドは C Ruby 以外では動作しません。
+#%end
 
 ### module_function def count_tdata_objects(result_hash = nil) -> Hash
 
@@ -289,7 +293,11 @@ class A
 end
 
 A.new.foo
+#%since 4.0
+# => "A"
+#%else
 # => "Class"
+#%end
 ```
 
 - **SEE** [m:ObjectSpace?.trace_object_allocations_start],
@@ -317,7 +325,11 @@ class A
 end
 
 A.new.foo
+#%since 4.0
+# => "A#foo"
+#%else
 # => "Class#new"
+#%end
 ```
 
 - **SEE** [m:ObjectSpace?.trace_object_allocations_start],
