@@ -432,11 +432,22 @@ ISO-2022-JP に加え、ESC ( I でいわゆる半角カナを許し、Windows �
 ### const EUC_CN -> Encoding
 ### const EUCCN -> Encoding
 ### const EucCN -> Encoding
+### const GB2312 -> Encoding
+{: since=""}
 
-ENC-CN エンコーディングです。
+EUC-CN エンコーディングです。
 
 中国で用いられる簡体字中国語 EUCのエンコーディングです。
 GB2312 と呼ばれることも多いです。
+
+### const EUC_JIS_2004 -> Encoding
+{: since=""}
+### const EUC_JISX0213 -> Encoding
+{: since=""}
+
+EUC-JIS-2004 エンコーディングです。
+
+日本語 EUC 亜種で、JIS X 0213:2004 の文字集合を取り扱えます。
 
 ### const EUC_KR -> Encoding
 ### const EUCKR -> Encoding
@@ -1170,6 +1181,18 @@ Emacs-Mule エンコーディングです。
 Emacsの多言語化(Mule)で使われているステートレスのエンコーディングです。
 
 - **SEE** <http://web.archive.org/web/20100714080650/http://www.m17n.org/mule/pricai96/mule.en.html>
+
+#%since 4.0
+### const UNICODE_VERSION -> String
+
+Ruby の Unicode 対応(大文字・小文字の変換や正規表現の Unicode プロパティなど)が基づいている Unicode のバージョンです。
+
+Ruby のバージョンによって値は変わります。
+
+```ruby
+p Encoding::UNICODE_VERSION # => "17.0.0"
+```
+#%end
 
 # class EncodingError < StandardError
 
