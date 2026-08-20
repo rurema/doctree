@@ -8,22 +8,22 @@
 - 開発版対応リファレンス
 #%end
 #%version 4.0...4.1
-- version 4.0 対応リファレンス
+- Ruby 4.0 対応リファレンス
 #%end
 #%version 3.4...4.0
-- version 3.4 対応リファレンス
+- Ruby 3.4 対応リファレンス
 #%end
 #%version 3.3...3.4
-- version 3.3 対応リファレンス
+- Ruby 3.3 対応リファレンス
 #%end
 #%version 3.2...3.3
-- version 3.2 対応リファレンス
+- Ruby 3.2 対応リファレンス
 #%end
 #%version 3.1...3.2
-- version 3.1 対応リファレンス
+- Ruby 3.1 対応リファレンス
 #%end
 #%until 3.1
-- version 3.0 対応リファレンス
+- Ruby 3.0 対応リファレンス
 #%end
 - 原著：まつもとゆきひろ
 - 最新版URL: <https://www.ruby-lang.org/ja/documentation/>

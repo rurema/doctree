@@ -2062,7 +2062,7 @@ p local_variables # => [:yuyu]
 ```
 
 #%since 4.0
-番号指定パラメータ（_1 など）は 4.0 からローカル変数として扱われなくなり、返り値に含まれなくなりました。
+番号指定パラメータ（_1 など）は Ruby 4.0 からローカル変数として扱われなくなり、返り値に含まれなくなりました。
 
 ```ruby
 [1].each do
@@ -2550,7 +2550,7 @@ p Complex('1+1i') + Complex('2+3i') * Complex('i') # => (-2+3i)
 
 - **SEE** [m:Complex.rect]、[m:Complex.rectangular]
 
-[注意] Complex.new、Complex.new! は 1.9 系では廃止されました。
+[注意] Complex.new、Complex.new! は Ruby 1.9 系では廃止されました。
 
 ### module_function def Rational(x, y = 1, exception: true) -> Rational | nil
 

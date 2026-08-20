@@ -1050,7 +1050,7 @@ p 1.public_send(:+, 2)  # => 3
 [m:Marshal?.dump] において出力するオブジェクトがメソッド _dump
 を定義している場合には、そのメソッドの結果が書き出されます。
 
-バージョン1.8.0以降では[m:Object#marshal_dump], [m:Object#marshal_load]の使用が推奨されます。 Marshal.dump するオブジェクトが _dump と marshal_dump の両方のメソッドを持つ場合は marshal_dump が優先されます。
+Ruby 1.8.0 以降では[m:Object#marshal_dump], [m:Object#marshal_load]の使用が推奨されます。 Marshal.dump するオブジェクトが _dump と marshal_dump の両方のメソッドを持つ場合は marshal_dump が優先されます。
 
 メソッド _dump は引数として再帰を制限するレベル limit を受け取り、オブジェクトを文字列化したものを返します。
 

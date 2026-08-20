@@ -208,7 +208,7 @@ end
 
 Ruby 2.5 までは、単純に [m:Range#include?] メソッドを内部で呼んでいました。
 
-しかし、2.6 以降では、(文字列を除いて) [m:Range#cover?] と同様の処理をするように切り替わりました。
+しかし、Ruby 2.6 以降では、(文字列を除いて) [m:Range#cover?] と同様の処理をするように切り替わりました。
 
 ただし、=== は、[m:Range#cover?] のように Range オブジェクトを引数にとる設計はありません。
 
@@ -220,7 +220,7 @@ p (Date.today - 100...Date.today + 100) ===  DateTime.now       # => true
 # Ruby 2.5 までは、=== は、include? と同じく比較できず false を返していました。
 ```
 
-2.7 以降の === は、文字列も [m:Range#cover?] と同様の処理をするようになりました。
+Ruby 2.7 以降の === は、文字列も [m:Range#cover?] と同様の処理をするようになりました。
 
 ```ruby title="例"
 p ('a'..'z').include? 'at'  # => false
@@ -272,7 +272,7 @@ p (Date.today - 365 .. Date.today + 365).cover?(DateTime.now)  # => true
 
 ### def cover?(range) -> bool
 
-2.6 以降の cover? は、[m:Range#include?] や [m:Range#===] と異なり、引数に Range オブジェクトを指定して比較できます。
+Ruby 2.6 以降の cover? は、[m:Range#include?] や [m:Range#===] と異なり、引数に Range オブジェクトを指定して比較できます。
 
 引数が Range オブジェクトの場合、引数の範囲が self の範囲に含まれる時に true を返します。
 
