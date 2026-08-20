@@ -5,7 +5,7 @@ require:
 ---
 [m:Kernel#require] を再定義するためのライブラリです。
 
-Ruby1.9 以前で使用しています。
+Ruby 1.9 まで使用していました。
 
 # reopen Kernel
 

@@ -12,7 +12,7 @@ p Marshal.dump(true).unpack1("x2 a*")  # => "T"
 p Marshal.dump(false).unpack1("x2 a*") # => "F"
 ```
 
-Ruby 2.1 以前では、インスタンス変数を設定しても dump されません。
+Ruby 2.1 までは、インスタンス変数を設定しても dump されません。
 Ruby 2.2 以降は freeze されているので、インスタンス変数は設定できません。
 
 ### Fixnum
@@ -85,7 +85,7 @@ p Marshal.dump(256).unpack("x2 acC*")  # => ["i", 2, 0, 1]
 p foo(2, 0, 1)                         # => 256
 ```
 
-Ruby 1.9.3 以前では、インスタンス変数を設定しても dump されません。
+Ruby 1.9.3 までは、インスタンス変数を設定しても dump されません。
 Ruby 2.0 以降は freeze されているので、インスタンス変数は設定できません。
 
 ### instance of the user class
@@ -260,7 +260,7 @@ Ruby 1.6.3 では ["l", "+", 8, "\000\000\001\000"] になるバグがありま�
 | '"' | 長さ(Fixnum形式) | 文字列 |
 ```
 
-```ruby title="例: ascii-8bit の時 (1.8 以前と同じ)"
+```ruby title="例: ascii-8bit の時 (Ruby 1.8 までと同じ)"
 # coding: ascii-8bit
 p Marshal.dump("hogehoge").unpack("x2 a c a*")
 # => ["\"", 13, "hogehoge"]

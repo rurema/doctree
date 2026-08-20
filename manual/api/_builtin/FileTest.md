@@ -152,7 +152,7 @@ p FileTest.file?('/no_such_file') # => false
 file1 と file2 が同じファイルを指している時に真を返します。
 そうでない場合、ファイルが存在しない場合、あるいはシステムコールに失敗した場合などには false を返します。
 
-Ruby 1.8.3 以前では[m:Kernel?.test](?-, file1, file2)を使ってください。
+Ruby 1.8.3 までは[m:Kernel?.test](?-, file1, file2)を使ってください。
 
 ```ruby
 open("a", "w") {}

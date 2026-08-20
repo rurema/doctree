@@ -611,7 +611,7 @@ p h1.compare_by_identity? # => true
 shiftは破壊的メソッドです。selfは要素を取り除かれた残りのハッシュに変更されます。
 
 #%until 3.2
-Ruby 3.2以前は、ハッシュが空の場合、デフォルト値（[m:Hash#default]または[m:Hash#default_proc]のブロックの値か、どちらもnilならばnil）を返します(このとき、[key,value] という形式の値を返すわけではないことに注意)。
+Ruby 3.2 より前は、ハッシュが空の場合、デフォルト値（[m:Hash#default]または[m:Hash#default_proc]のブロックの値か、どちらもnilならばnil）を返します(このとき、[key,value] という形式の値を返すわけではないことに注意)。
 
 3.2以降ではデフォルト値に関わらず nil を返すよう変更されています。
 

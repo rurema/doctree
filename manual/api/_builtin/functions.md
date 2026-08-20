@@ -2067,7 +2067,7 @@ p local_variables # => [:yuyu]
 ```ruby
 [1].each do
   p _1              # => 1
-  p local_variables # => []（Ruby 3.4 以前は [:_1]）
+  p local_variables # => []（Ruby 3.4 までは [:_1]）
 end
 ```
 
