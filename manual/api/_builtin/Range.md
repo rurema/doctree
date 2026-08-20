@@ -206,7 +206,7 @@ when 80..100  then  puts "high"
 end
 ```
 
-2.5 以前は、単純に [m:Range#include?] メソッドを内部で呼んでいました。
+Ruby 2.5 までは、単純に [m:Range#include?] メソッドを内部で呼んでいました。
 
 しかし、2.6 以降では、(文字列を除いて) [m:Range#cover?] と同様の処理をするように切り替わりました。
 
@@ -217,7 +217,7 @@ require 'date'
 p (Date.today - 100...Date.today + 100).include?(DateTime.now)  # => false
 p (Date.today - 100...Date.today + 100).cover?(DateTime.now)    # => true
 p (Date.today - 100...Date.today + 100) ===  DateTime.now       # => true
-# 2.5 以前は、=== は、include? と同じく比較できず false を返していました。
+# Ruby 2.5 までは、=== は、include? と同じく比較できず false を返していました。
 ```
 
 2.7 以降の === は、文字列も [m:Range#cover?] と同様の処理をするようになりました。
@@ -226,7 +226,7 @@ p (Date.today - 100...Date.today + 100) ===  DateTime.now       # => true
 p ('a'..'z').include? 'at'  # => false
 p ('a'..'z').cover? 'at'    # => true
 p ('a'..'z') === 'at'       # => true
-# 2.6 以前は、=== は、include? と同じく比較できず false を返していました。
+# Ruby 2.6 までは、=== は、include? と同じく比較できず false を返していました。
 ```
 
 - **SEE** [ref:d:spec/control#case]

@@ -33,7 +33,7 @@ p Dog.new(name: "Terry", age: 3)
 fred.age = 6 # ~> NoMethodError
 ```
 
-なお、Ruby 2.7 以前に存在し Ruby 3.0 で削除された Data クラスとは異なります。
+なお、Ruby 2.7 まで存在し Ruby 3.0 で削除された Data クラスとは異なります。
 
 ## Class Methods
 

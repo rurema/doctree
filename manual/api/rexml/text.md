@@ -7,7 +7,7 @@ include:
 
 XML のテキストノードを表すクラスです。
 
-注意: Ruby 2.0.0 以前では、バグのため entity_filter の機能は正しく動作しません。
+注意: Ruby 2.0.0 までは、バグのため entity_filter の機能は正しく動作しません。
 
 ## Class Methods
 
