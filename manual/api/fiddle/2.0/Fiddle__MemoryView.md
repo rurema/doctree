@@ -95,25 +95,25 @@ end
 
 [#release](m:Fiddle::MemoryView#release) を呼んだ後は `nil` になります。
 
-### def shape -> Array[Integer] | nil
+### def shape -> [Integer] | nil
 
 各次元の要素数を示す、長さ [ndim](m:Fiddle::MemoryView#ndim) の配列を返します。 `ndim` が 1 の時は `nil` になることがあります。
 
 [#release](m:Fiddle::MemoryView#release) を呼んだ後は `nil` になります。
 
-### def strides -> Array[Integer] | nil
+### def strides -> [Integer] | nil
 
 それぞれの次元で次の要素まで進むのに何バイトスキップすればよいかを示す、長さ [ndim](m:Fiddle::MemoryView#ndim) の配列を返します。各要素は負数になることもあります。メモリビューが行指向の contiguous （連続配置）な配列の場合は `nil` になることもあります。
 
 [#release](m:Fiddle::MemoryView#release) を呼んだ後は `nil` になります。
 
-### def sub_offsets -> Array[Integer] | nil
+### def sub_offsets -> [Integer] | nil
 
 メモリビューがネストされた配列をエクスポートする場合に、それぞれの次元におけるオフセットからなる、長さ [ndim](m:Fiddle::MemoryView#ndim) の配列を返します。メモリビューが平坦な配列の場合は `nil` になることがあります。
 
 [#release](m:Fiddle::MemoryView#release) を呼んだ後は `nil` になります。
 
-### def [](i, j, k, ...) -> Integer | Float | Array[Integer] | Array[Float] | nil
+### def [](i, j, k, ...) -> Integer | Float | [Integer] | [Float] | nil
 
 多次元配列の 1 次元目のインデックスが `i` 、 2次元目のインデックスが `j` 、 3次元目のインデックスが `k` 、……の場所にある要素を返します。
 
