@@ -290,7 +290,7 @@ ruby ./sample.rb --version
 
 --version は、トップレベルに Version 定数が定義されていると出力されます。
 (優先度は低いが VERSION 定数も参照します。Ruby のバージョンを示す VERSION
-定数が ruby 1.8 までは定義されているので注意)
+定数が Ruby 1.8 までは定義されているので注意)
 
 ```ruby
 require 'optparse'

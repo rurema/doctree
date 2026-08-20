@@ -125,7 +125,7 @@ class SessionDemo
     @cgi = CGI.new
     File.umask(0077)                                # セッションファイルは誰にも読まれたくないよ
     @session = CGI::Session.new(@cgi)               # セッションはこうして生成する。
-    @cmd = "#{@cgi['cmd'].first}"                   # ruby 1.8 でも動くように(warning は出ます)
+    @cmd = "#{@cgi['cmd'].first}"                   # Ruby 1.8 でも動くように(warning は出ます)
     @cmd = 'start' if @cmd.empty?
     @header = { "type" => "text/html", "charset" => "euc-jp" }
       

@@ -3273,9 +3273,9 @@ Ruby 1.9 で IO#getc の戻り値が Integer から String を返すように変
 Ruby 1.8 以前と1.9以降の互換性を保つために  String#chr が存在します。
 
 ```console title="例"
-# ruby 1.8 系では STDIN.getc が 116 を返すため Integer#chr が呼び出される
+# Ruby 1.8 系では STDIN.getc が 116 を返すため Integer#chr が呼び出される
 $ echo test | ruby -e "p STDIN.getc.chr" # => "t"
-# ruby 1.9 系以降では STDIN.getc が "t" を返すため String#chr が呼び出される
+# Ruby 1.9 系以降では STDIN.getc が "t" を返すため String#chr が呼び出される
 $ echo test | ruby -e "p STDIN.getc.chr" # => "t"
 ```
 
