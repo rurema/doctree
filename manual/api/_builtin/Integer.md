@@ -16,8 +16,8 @@ alias:
 #%since 3.2
 かつて `Integer` クラスのエイリアスであった `Fixnum` と `Bignum` は Ruby 3.2 で削除されました。
 #%else
-Ruby 2.4.0 から [c:Fixnum], [c:Bignum] は `Integer` に統合されました。
-Ruby 2.4.0 からはどちらも `Integer` クラスのエイリアスとなっています。
+Ruby 2.4 から [c:Fixnum], [c:Bignum] は `Integer` に統合されました。
+Ruby 2.4 からはどちらも `Integer` クラスのエイリアスとなっています。
 #%end
 
 `Integer` には [m:Integer#~] や [m:Integer#&] のようなビット論理演算がいくつか定義されています。これらは、整数を「2 の補数表記」したビット列とみなして、位ごとに論理演算を行うものです。

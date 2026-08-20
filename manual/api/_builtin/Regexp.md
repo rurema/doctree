@@ -20,7 +20,7 @@ p rp1 =~ str           # => 0
 p Regexp.last_match[0] # => "this is regexp"
 ```
 
-Ruby 3.0.0 から正規表現リテラルは freeze されるようになりました。
+Ruby 3.0 から正規表現リテラルは freeze されるようになりました。
 
 ```ruby
 p /abc/.frozen?

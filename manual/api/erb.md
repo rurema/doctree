@@ -160,7 +160,7 @@ eRubyスクリプト から ERB オブジェクトを生成して返します。
 - **param** `eoutvar` -- eRubyスクリプトの中で出力をためていく変数の名前を表す文字列。eRuby スクリプトの中でさらに ERB を使うときに変更します。通常は指定する必要はありません。
 
 #%until 3.2
-Ruby 2.6.0 から位置引数での safe_level, trim_mode, eoutvar の指定は非推奨です。
+Ruby 2.6 から位置引数での safe_level, trim_mode, eoutvar の指定は非推奨です。
 Ruby 3.2 で削除されました。
 trim_mode と eoutvar の指定はキーワード引数に移行してください。
 #%end
