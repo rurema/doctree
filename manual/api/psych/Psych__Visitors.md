@@ -18,11 +18,11 @@ Ruby オブジェクトから YAML の AST を構築するためのクラスで�
 ```ruby
 require 'psych'
 
-builder = Psych::Visitors::YAMLTree.new
+builder = Psych::Visitors::YAMLTree.create
 builder << { :foo => 'bar' }
 builder << ["baz", "bazbaz"]
 p builder.tree # => #<Psych::Nodes::Stream ... > A stream containing two documents
-puts tree.to_yaml
+puts builder.tree.to_yaml
 # =>
 # ---
 # :foo: bar
@@ -32,7 +32,8 @@ puts tree.to_yaml
 ```
 
 ## Class Methods
-### def Psych::Visitors::YAMLTree.new(options = {}, emitter = Psych::TreeBuilder.new, ss = Psych::ScalarScanner.new) -> Psych::Visitors::YAMLTree
+### def Psych::Visitors::YAMLTree.create(options = {}, emitter = nil) -> Psych::Visitors::YAMLTree
+### def Psych::Visitors::YAMLTree.new(emitter, ss, options) -> Psych::Visitors::YAMLTree
 
 YAMLTree オブジェクトを生成します。
 
@@ -44,10 +45,12 @@ emitter には AST の構築に使われる [c:Psych::TreeBuilder] オブジェ�
 ss は Ruby の [c:String] が YAML document 上で quote が必要かどうかを判定するための [c:Psych::ScalarScanner] オブジェクトを渡します。
 
 emitter, ss は通常デフォルトのものから変える必要はないでしょう。
+create では emitter を省略すると [c:Psych::TreeBuilder] が、ss には [c:Psych::ScalarScanner] が用意されます。
+new は 3 つの引数がすべて必須です。
 
 - **param** `options` -- オプション
 - **param** `emitter` -- AST の構築に使う [c:Psych::TreeBuilder] オブジェクト
-- **param** `ss` -- 文字列に quite が必要かどうかを判定するための [c:Psych::ScalarScanner] オブジェクト
+- **param** `ss` -- 文字列に quote が必要かどうかを判定するための [c:Psych::ScalarScanner] オブジェクト
 
 ## Instance Methods
 ### def started -> bool

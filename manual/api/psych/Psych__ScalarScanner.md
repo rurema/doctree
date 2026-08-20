@@ -13,9 +13,11 @@ YAML の scalar 型を読み込んで Ruby の built-in 型に変換するクラ
 
 ## Class Methods
 
-### def Psych::ScalarScanner.new
+### def Psych::ScalarScanner.new(class_loader) -> Psych::ScalarScanner
 
 新たな ScalarScanner オブジェクトを生成します。
+
+- **param** `class_loader` -- YAML のタグから Ruby のクラスを解決するための Psych::ClassLoader オブジェクト
 
 ## Instance Methods
 
@@ -26,7 +28,7 @@ YAML の scalar である文字列を Ruby のオブジェクトに変換した�
 ```ruby
 require 'psych'
 
-scanner = Psych::ScalarScanner.new
+scanner = Psych::ScalarScanner.new(Psych::ClassLoader.new)
 p scanner.tokenize("yes") # => true
 p scanner.tokenize("year") # => "year"
 p scanner.tokenize("12") # =>  12

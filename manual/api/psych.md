@@ -147,7 +147,9 @@ p Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 ```
 
 ### def Psych.safe_load(yaml, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false) -> object
+#%until 3.1
 ### def Psych.safe_load(yaml, legacy_permitted_classes=[], legacy_permitted_symbols=[], legacy_aliases=false, legacy_filename=nil) -> object
+#%end
 
 安全に YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
 
@@ -223,6 +225,7 @@ p yaml["aaa"]["bbb"].frozen?          # = true
 p yaml["aaa"]["bbb"].first.frozen?    # = true
 ```
 
+#%until 3.1
 また legacy_permitted_classes などのオプション引数は非推奨な引数となっています。
 [m:$-w] が true の時にオプション引数を渡すと警告が出力されます。
 
@@ -234,6 +237,7 @@ require 'date'
 Psych.safe_load("", [Date])
 ```
 
+#%end
 - **param** `io` -- YAMLフォーマットの文書の読み込み先のIOオブジェクト。
 - **param** `permitted_classes` -- 追加で読み込みを許可するクラスの配列。
 - **param** `permitted_symbols` -- 引数 permitted_classesに [c:Symbol] を含む場合に読み込みを許可する [c:Symbol] の配列。
@@ -246,7 +250,10 @@ Psych.safe_load("", [Date])
 - **param** `freeze` -- true を指定すると再帰的に freeze されたオブジェクトを返します。
               デフォルトは false です。
 
+### def Psych.parse(yaml, filename: nil) -> Psych::Nodes::Document
+#%until 3.1
 ### def Psych.parse(yaml, filename = nil) -> Psych::Nodes::Document
+#%end
 
 YAML ドキュメントをパースし、YAML の AST を返します。
 
@@ -267,7 +274,7 @@ require 'psych'
 p Psych.parse("---\n - a\n - b") # => #<Psych::Nodes::Document:...>
 
 begin
-  Psych.parse("--- `", "file.txt")
+  Psych.parse("--- `", filename: "file.txt")
 rescue Psych::SyntaxError => ex
   p ex.file    # => 'file.txt'
   p ex.message # => "(file.txt): found character that cannot start any token while scanning for the next token at line 1 column 5"
