@@ -12,7 +12,7 @@ BigDecimal オブジェクトに変換する機能を提供します。
 
 これらのメソッドを使うには 'bigdecimal/util' を require する必要があります。
 
-なお、Ruby 2.6.0 以降では、'bigdecimal/util' を require すると、
+なお、Ruby 2.6 以降では、'bigdecimal/util' を require すると、
 'bigdecimal' 本体も require されます。
 
 # reopen Float

@@ -266,7 +266,7 @@ p Marshal.dump("hogehoge").unpack("x2 a c a*")
 # => ["\"", 13, "hogehoge"]
 ```
 
-Ruby 1.9.0 以降では encoding が 'encoding' という「@」のつかない内部的なインスタンス変数としてダンプされます。
+Ruby 1.9 以降では encoding が 'encoding' という「@」のつかない内部的なインスタンス変数としてダンプされます。
 
 ```ruby title="例: euc-jp の時"
 p Marshal.dump("hogehoge".encode("euc-jp")).unpack("x2 a a c a8 c a ca8 aca*")

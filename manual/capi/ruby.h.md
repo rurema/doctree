@@ -505,7 +505,7 @@ val が String でなければ to_str メソッドを使って String に変換�
 ### MACRO int SYM2ID(VALUE symbol)
 
 Symbol symbol を数値に変換します。
-1.4では、[`FIX2INT(symbol)`](f:FIX2INT)と同じです。
+Ruby 1.4 では、[`FIX2INT(symbol)`](f:FIX2INT)と同じです。
 
 ### MACRO int SYMBOL_P(VALUE obj)
 

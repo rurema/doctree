@@ -250,7 +250,7 @@ binding.eval("self")
 
 REPLのセッションを開始します。
 
-Ruby 2.5.0 からは require 'irb' せずに直接 binding.irb を呼び出しても使えるようになりました。
+Ruby 2.5 からは require 'irb' せずに直接 binding.irb を呼び出しても使えるようになりました。
 
 - **SEE** [lib:irb]
 

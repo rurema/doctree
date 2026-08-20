@@ -403,7 +403,7 @@ self の情報を 14 要素の配列にして返します。
 
   iseq = RubyVM::InstructionSequence.compile('num = 1 + 2')
   pp iseq.to_a
-  # ※ Ruby 2.5.0 での実行結果
+  # ※ Ruby 2.5 での実行結果
   # => ["YARVInstructionSequence/SimpleDataFormat",
   # 2,
   # 0,

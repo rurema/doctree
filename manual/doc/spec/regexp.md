@@ -678,7 +678,7 @@ p Regexp.new("abc # Comment", Regexp::EXTENDED)           # => /abc # Comment/x
 p Regexp.new("abc", Regexp::IGNORECASE | Regexp::MULTILINE) # => /abc/mi
 ```
 
-Ruby 2.0.0 以降では、文字クラスの挙動を変更するための d,a,u というオプションを
+Ruby 2.0 以降では、文字クラスの挙動を変更するための d,a,u というオプションを
 (?on:pat)もしくは(?on)の形で指定できます。(?on-off:pat), (?on-off)
 という形式を用いる場合はonの部分にのみ用いることができます(offはできません)。
   - d デフォルト(1.9.3互換)
@@ -889,7 +889,7 @@ Rubyで利用可能なメタ文字、メタ文字列の一覧です。
     場合は falsepat
 オプション
   - (?on:pat) patの間だけ on オプション(i,m,x)を有効にする
-    Ruby 2.0.0 以降はd,a,uオプションも使える。
+    Ruby 2.0 以降はd,a,uオプションも使える。
   - (?on-off:pat)  patの間だけ on オプションを有効にし、offオプションを無効にする
 コメント
   - (?#comment here) コメント

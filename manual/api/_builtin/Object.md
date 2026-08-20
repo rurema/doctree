@@ -1050,7 +1050,7 @@ p 1.public_send(:+, 2)  # => 3
 [m:Marshal?.dump] において出力するオブジェクトがメソッド _dump
 を定義している場合には、そのメソッドの結果が書き出されます。
 
-Ruby 1.8.0 以降では[m:Object#marshal_dump], [m:Object#marshal_load]の使用が推奨されます。 Marshal.dump するオブジェクトが _dump と marshal_dump の両方のメソッドを持つ場合は marshal_dump が優先されます。
+Ruby 1.8 以降では[m:Object#marshal_dump], [m:Object#marshal_load]の使用が推奨されます。 Marshal.dump するオブジェクトが _dump と marshal_dump の両方のメソッドを持つ場合は marshal_dump が優先されます。
 
 メソッド _dump は引数として再帰を制限するレベル limit を受け取り、オブジェクトを文字列化したものを返します。
 
@@ -1091,7 +1091,7 @@ _dump/_load はより高度な制御を行いたい場合や拡張ライブラ�
 
 Marshal.dump(some) において、出力するオブジェクト some がメソッド marshal_dump を持つ場合には、その返り値がダンプされたものが Marshal.dump(some) の返り値となります。
 
-marshal_dump/marshal_load の仕組みは Ruby 1.8.0 から導入されました。
+marshal_dump/marshal_load の仕組みは Ruby 1.8 から導入されました。
 これから書くプログラムでは _dump/_load ではなく
 marshal_dump/marshal_load を使うべきです。
 
@@ -1136,7 +1136,7 @@ some のダンプ結果（Marshal.dump(some)） をロードする（Marshal.loa
 このとき、marshal_dump の返り値が marshal_load の引数に利用されます。
 marshal_load 時の self は、生成されたばかり（[m:Class#allocate] されたばかり） の状態です。
 
-marshal_dump/marshal_load の仕組みは Ruby 1.8.0 から導入されました。
+marshal_dump/marshal_load の仕組みは Ruby 1.8 から導入されました。
 これから書くプログラムでは _dump/_load ではなく
 marshal_dump/marshal_load を使うべきです。
 
