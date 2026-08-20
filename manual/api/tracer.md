@@ -41,7 +41,7 @@ Tracer.off
 ```ruby
 # 例: 式の評価の中でHogeクラスのメソッドが呼び出される時、トレースする。
 
-# ruby 1.8 では警告がでますが、動作します。
+# Ruby 1.8 では警告がでますが、動作します。
 require 'tracer'
 
 class Hoge

@@ -22,7 +22,7 @@ IV(Initialization Vector)の取り扱いについて正しく理解してから�
   - [m:OpenSSL::Cipher#update], [m:OpenSSL::Cipher#final] で
     暗号化/復号化をする
 
-ruby 1.8.3 から Cast5 と Idea が CAST5 と IDEA に改名されました。
+Ruby 1.8.3 から Cast5 と Idea が CAST5 と IDEA に改名されました。
 
 ### ブロック暗号モード
 

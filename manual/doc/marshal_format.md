@@ -228,7 +228,7 @@ p Marshal.dump(-1.0/0).unpack("x2 a c a*") # => ["f", 9, "-inf"]
 p Marshal.dump(-0.0).unpack("x2 a c a*")   # => ["f", 7, "-0"]
 ```
 
-#### ruby 1.7 feature
+#### Ruby 1.7 feature
 
 Ruby 1.6 では、nan などの出力は [man:sprintf(3)] に依存していて、読み込みは
 "nan", "inf", "-inf" 以外は [man:strtod(3)] に依存していました。
@@ -250,7 +250,7 @@ p Marshal.dump(2**32).unpack("x2 a a c a*")
 # => ["l", "+", 8, "\x00\x00\x00\x00\x01\x00"]
 ```
 
-ruby 1.6.3 では ["l", "+", 8, "\000\000\001\000"] になるバグがありました。
+Ruby 1.6.3 では ["l", "+", 8, "\000\000\001\000"] になるバグがありました。
 
 ### String
 
@@ -266,14 +266,14 @@ p Marshal.dump("hogehoge").unpack("x2 a c a*")
 # => ["\"", 13, "hogehoge"]
 ```
 
-ruby 1.9.0 以降では encoding が 'encoding' という「@」のつかない内部的なインスタンス変数としてダンプされます。
+Ruby 1.9.0 以降では encoding が 'encoding' という「@」のつかない内部的なインスタンス変数としてダンプされます。
 
 ```ruby title="例: euc-jp の時"
 p Marshal.dump("hogehoge".encode("euc-jp")).unpack("x2 a a c a8 c a ca8 aca*")
 # => ["I", "\"", 13, "hogehoge", 6, ":", 13, "encoding", "\"", 11, "EUC-JP"]
 ```
 
-ruby 1.9.2 以降では US-ASCII と UTF-8 が 'E' という内部的なインスタンス変数として、それぞれ false と true という値でダンプされます。
+Ruby 1.9.2 以降では US-ASCII と UTF-8 が 'E' という内部的なインスタンス変数として、それぞれ false と true という値でダンプされます。
 
 ```ruby title="例: us-ascii の時"
 # coding: us-ascii
@@ -299,7 +299,7 @@ p Marshal.dump("hogehoge").unpack("x2 a a c a8 c acaa*")
 
 オプションは、[m:Regexp#options]の結果 + 漢字コードのフラグ値です。
 
-ruby 1.9 以降では隠しインスタンス変数として String と同様に
+Ruby 1.9 以降では隠しインスタンス変数として String と同様に
 encoding が付いています。
 
 ```ruby title="1.9.2 以降での例"
