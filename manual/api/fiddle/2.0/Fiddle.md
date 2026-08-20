@@ -49,7 +49,7 @@ errno は fiddle が設定するのでユーザはこのメソッドを使わな
 ダイナミックライブラリ lib をロードし、
 [c:Fiddle::Handle] として返します。
 
-lib を引数とした [m:Fiddle::Handle.new] と等価です。
+[`Fiddle::Handle.new(lib)`](m:Fiddle::Handle.new) と等価です。
 
 - **param** `lib` -- ロードしたいライブラリを文字列で与えます。
 
