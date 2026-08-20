@@ -34,7 +34,7 @@ status = FooApp.new(....).start
 
 ### 注意
 
-このクラスは 2.2.0 で gem ライブラリとして切り離されました。2.2.0
+このクラスは Ruby 2.2.0 で gem ライブラリとして切り離されました。Ruby 2.2.0
 以降ではそちらを利用してください。
 
   - <https://rubygems.org/gems/logger-application>

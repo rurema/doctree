@@ -614,7 +614,7 @@ p Complex.polar(2.0, Math::PI)  # => (-2.0+0.0i)
 [m:Marshal?.load] のためのメソッドです。
 `Complex::compatible#marshal_load` で復元可能な配列を返します。
 
-2.0 以降では [m:Marshal?.load] で 1.8 系の [c:Complex] オブジェクトを保存した文字列も復元できます。
+Ruby 2.0 以降では [m:Marshal?.load] で Ruby 1.8 系の [c:Complex] オブジェクトを保存した文字列も復元できます。
 
 [注意] `Complex::compatible` は通常の方法では参照できません。
 

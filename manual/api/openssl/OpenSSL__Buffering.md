@@ -21,8 +21,8 @@ sysclose といった [c:OpenSSL::SSL::SSLSocket] が提供するメソッドを
     write_nonblock が読み込み不可能で例外を発生させたりします。
     これは暗号化通信でのデータの送信には双方向のメッセージの
     やりとりが必要な場合があるためです。
-  - 1.9 では encoding 関連を設定しません
-  - 1.9 で each_byte が String をブロックに渡します
+  - Ruby 1.9 では encoding 関連を設定しません
+  - Ruby 1.9 で each_byte が String をブロックに渡します
 
 ## Instance Methods
 ### def <<(s) -> self

@@ -8,10 +8,10 @@ until: "3.3"
 Ruby の JIT (Just-in-time compiler) 関連のモジュールです。
 
 Ruby 2.6 で実験的機能として導入された MJIT (Method-based JIT) コンパイラを制御します。
-コマンドラインオプション `--jit`(3.0)/`--mjit`(3.1 以降)で有効化します。
+コマンドラインオプション `--jit`(Ruby 3.0)/`--mjit`(Ruby 3.1 以降)で有効化します。
 
 MJIT は Ruby 3.3 で削除され、このモジュールも同時に削除されました。
-3.3 以降は YJIT(`RubyVM::YJIT`)や RJIT が JIT コンパイラとして提供されています。
+Ruby 3.3 以降は YJIT(`RubyVM::YJIT`)や RJIT が JIT コンパイラとして提供されています。
 
 なお、開発版の Ruby では 2021 年 1 月から 12 月にかけての一時期、このモジュールが `RubyVM::JIT` にリネームされていたことがありますが
 ([feature:17490])、Ruby 3.1.0 のリリース前に `RubyVM::MJIT` へ戻されており、`RubyVM::JIT` という名前が正式リリースに存在したことはありません。

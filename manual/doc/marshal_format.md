@@ -302,7 +302,7 @@ p Marshal.dump("hogehoge").unpack("x2 a a c a8 c acaa*")
 Ruby 1.9 以降では隠しインスタンス変数として String と同様に
 encoding が付いています。
 
-```ruby title="1.9.2 以降での例"
+```ruby title="Ruby 1.9.2 以降での例"
 p Marshal.dump(/(hoge)*/).unpack("x2 a a c a7 c cacaa")
 # => ["I", "/", 12, "(hoge)*", 0, 6, ":", 6, "E", "F"]
 

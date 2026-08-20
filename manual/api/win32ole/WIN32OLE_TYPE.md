@@ -19,7 +19,7 @@ excel_app_type = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Appli
 puts excel_app_type.progid # => "Excel.Application.14"
 ```
 
-Ruby-1.9.1以降、[c:WIN32OLE_TYPELIB]オブジェクトの
+Ruby 1.9.1 以降、[c:WIN32OLE_TYPELIB]オブジェクトの
 [m:WIN32OLE_TYPELIB#ole_types]メソッドを利用して、型情報ライブラリ内に定義されているすべての型情報をWIN32OLE_TYPEオブジェクトの配列として取得できます。
 
 - **SEE** [c:WIN32OLE_TYPELIB]
@@ -58,7 +58,7 @@ types = WIN32OLE_TYPE.ole_classes('Microsoft Excel 14.0 Object Library')
 classes = types.map{|k| k.name} # => ["Adjustments", "CalloutFormat", ...]
 ```
 
-Ruby-1.9.1からは、TypeLibに定義されているすべての型を取得するには、
+Ruby 1.9.1 からは、TypeLibに定義されているすべての型を取得するには、
 [c:WIN32OLE_TYPELIB]オブジェクトの[m:WIN32OLE_TYPELIB#ole_types]メソッドを利用してください。
 
 ### def WIN32OLE_TYPE.progids -> [String]
@@ -93,7 +93,7 @@ WIN32OLEオブジェクトを生成できます。
 
 - **return** -- システムに登録されているすべてのTypeLibのドキュメント文字列の配列を返します。
 
-Ruby-1.9.1からは、すべてのTypeLibのドキュメント文字列を取得するには、
+Ruby 1.9.1 からは、すべてのTypeLibのドキュメント文字列を取得するには、
 [c:WIN32OLE_TYPELIB]オブジェクトを利用して、以下のように記述してください。
 
 ```ruby

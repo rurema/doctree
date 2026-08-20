@@ -134,7 +134,7 @@ p thg.enclosed?         # => false
 ### def list    -> [Thread]
 
 self に属するスレッドの配列を返します。
-version 1.8 では、aborting 状態であるスレッドも要素に含まれます。つまり「生きている」スレッドの配列を返します。
+Ruby 1.8 では、aborting 状態であるスレッドも要素に含まれます。つまり「生きている」スレッドの配列を返します。
 
 ```ruby title="例"
 p ThreadGroup::Default.list # => [#<Thread:0x00007f8f13867078 run>]

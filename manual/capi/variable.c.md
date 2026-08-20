@@ -46,7 +46,7 @@
 
 ### void rb_autoload(const char *klass, const char *filename)
 
-この関数は 2.3.0 以降で deprecated です。[f:rb_funcall] を使用してください。
+この関数は Ruby 2.3.0 以降で deprecated です。[f:rb_funcall] を使用してください。
 
 ### int rb_autoload_defined(ID id)
 

@@ -325,7 +325,7 @@ C言語レベルで定義されている構造体MTの静的変数default_rand�
 #%until 3.2
 ### const DEFAULT -> Class
 
-Ruby 3.0 から非推奨で、3.2で廃止されます。代わりに Random クラスオブジェクトを擬似乱数生成器として使用してください。
+Ruby 3.0 から非推奨で、Ruby 3.2 で廃止されます。代わりに Random クラスオブジェクトを擬似乱数生成器として使用してください。
 
 また、 Random::DEFAULT は Random クラスオブジェクトが返ります。
 

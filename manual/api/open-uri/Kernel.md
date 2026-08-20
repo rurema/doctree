@@ -21,7 +21,7 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれま�
 ブロックを与えた場合は上の場合と同様、name が http:// や ftp:// で始まっている文字列なら URI のリソースを取得した上で [c:StringIO] オブジェクトまたは [c:Tempfile] オブジェクトを引数としてブロックを評価します。後は同様です。
 引数のオブジェクトは [c:OpenURI::Meta] モジュールで extend されています。
 
-Ruby2.7以降、open-uriにより拡張されたKernel.openでURLを開くときにwarningが表示されるようになりました。
+Ruby 2.7 以降、open-uriにより拡張されたKernel.openでURLを開くときにwarningが表示されるようになりました。
 
 ```ruby
 require 'open-uri'

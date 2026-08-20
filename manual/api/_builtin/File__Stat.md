@@ -14,7 +14,7 @@ p File::Stat.new($0).directory? # => false
 p FileTest.directory?($0) # => false
 ```
 
-1.8 以降では、属性メソッドがシステムでサポートされていない場合 nil が返ります。
+Ruby 1.8 以降では、属性メソッドがシステムでサポートされていない場合 nil が返ります。
 なお、Ruby 1.7 までは 0 が返っていました。
 
 ```text
@@ -108,7 +108,7 @@ p fs.ftype # => "file"
 p File::Stat.new($:[0]).ftype # => "directory"
 ```
 
-1.8 以降では、属性メソッドがシステムでサポートされていない場合 nil が返ります。
+Ruby 1.8 以降では、属性メソッドがシステムでサポートされていない場合 nil が返ります。
 なお、Ruby 1.7 までは 0 が返っていました。
 
 ### def dev -> String

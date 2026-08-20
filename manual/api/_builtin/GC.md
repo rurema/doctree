@@ -25,16 +25,16 @@ Ruby 2.1ではRGenGCと呼ばれる新たなGCメカニズムが導入されま�
    指数的に大きくしていくが、その上限を決める値。0は上限なしを意味する。
    この値を指定すると、スロット数が特定の値を越えると指数的ではなく線形的に
    スロット数が増大する。
-- RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIO (2.4以降、default: 0.20) -
+- RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIO (Ruby 2.4 以降、default: 0.20) -
    GC後の空きスロット割合の下限。
    つまり空きスロット数の全スロット数に対する割合がこの値より小さいときは新たな
    ページを確保する。
-- RUBY_GC_HEAP_FREE_SLOTS_GOAL_RATIO (2.4以降、
+- RUBY_GC_HEAP_FREE_SLOTS_GOAL_RATIO (Ruby 2.4 以降、
    default: 0.40) - GC後の空きスロットの割合の目標。
    RUBY_GC_HEAP_FREE_SLOTS_MIN_RATIOの閾値にひっかかって新たなスロットを確保するときは
    この割合が目標となる。
    この値が 0.0 の場合は、RUBY_GC_HEAP_GROWTH_FACTORを直接使う。
-- RUBY_GC_HEAP_FREE_SLOTS_MAX_RATIO (2.4以降、default: 0.65) -
+- RUBY_GC_HEAP_FREE_SLOTS_MAX_RATIO (Ruby 2.4 以降、default: 0.65) -
    GC後の空きスロットの割合の上限。
    空きスロット数の全スロット数に対する割合がこの値より大きい場合は
    積極的にページを解放する。
@@ -142,7 +142,7 @@ oldmalloc_increase_bytes と呼ばれる。この2つの性質は以下のよう
     実際にはこの領域からのポインタがCのヒープ領域に確保したメモリを所持していることが多く、
     メモリ上の実占有領域はスロット外にもあることがしばしばある。
     RubyのGCのチューニングには重要な概念。
-  - RGenGC - Ruby2.1で採用された世代別GC。マイナーGCとフルGCの2段階のGCをすることで
+  - RGenGC - Ruby 2.1 で採用された世代別GC。マイナーGCとフルGCの2段階のGCをすることで
     効率的なGCを実現する。
   - マイナーGC - 新しいオブジェクト(前回のGCの後に生成されたオブジェクト)
     のみを対象としたGC。GCすべきオブジェクトの数が少ないので高速。
