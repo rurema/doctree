@@ -1,6 +1,6 @@
 ---
 library: fiddle
-since: "3.0.0"
+since: "3.0"
 ---
 # class Fiddle::MemoryView < Object
 
