@@ -53,7 +53,7 @@ end
 
 ## Instance Methods
 
-### def release
+### def release -> nil
 
 メモリビューを解放します。
 
