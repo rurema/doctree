@@ -1076,7 +1076,7 @@ p (2/3r).real? # => true
 
 ```ruby title="false を返す例"
 # Complex のインスタンスはたとえ虚部がゼロでも `false` を返す
-p Complex(1, 0) # => false
+p Complex(1, 0).real? # => false
 ```
 
 - **SEE** [m:Numeric#integer?]、[m:Complex#real?]
