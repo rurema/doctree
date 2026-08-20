@@ -126,7 +126,7 @@ self のエンコーディングをロケールエンコーディングに変換
 
 self が EUC-JP なバイト列として正当であるかどうかを判定します。
 
-[m:Kconv?.iseuc](self) と同じです。
+[`Kconv.iseuc(self)`](m:Kconv?.iseuc) と同じです。
 
 ```ruby title="例"
 require 'kconv'
@@ -155,7 +155,7 @@ self が Shift_JIS なバイト列として正当であるかどうかを判定�
 
 self が UTF-8 なバイト列として正当であるかどうかを判定します。
 
-[m:Kconv?.isutf8](self) と同じです。
+[`Kconv.isutf8(self)`](m:Kconv?.isutf8) と同じです。
 
 ### def isjis -> bool
 

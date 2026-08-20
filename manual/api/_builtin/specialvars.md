@@ -140,8 +140,8 @@ end
 
 番号 n は任意の正整数にできますが、巨大な数に対しては常に nil を返し、警告を表示します。
 
-[m:Regexp.last_match](1),
-[m:Regexp.last_match](2), ... と同じ。
+[`Regexp.last_match(1)`](m:Regexp.last_match),
+[`Regexp.last_match(2)`](m:Regexp.last_match), ... と同じ。
 
 これらの変数はローカルスコープかつスレッドローカル、読み取り専用です。
 

@@ -1413,7 +1413,7 @@ ARGF
 
 ### module_function def readlines(rs = $/) -> [String]
 
-[c:ARGF]を [m:Kernel?.gets](rs) でEOFまで読み込んで、その各行を要素としてもつ配列を返します。
+[c:ARGF]を [`gets(rs)`](m:Kernel?.gets) でEOFまで読み込んで、その各行を要素としてもつ配列を返します。
 行の区切りは引数 rs で指定した文字列になります。
 
 rs に nil を指定すると行区切りなしとみなします。
