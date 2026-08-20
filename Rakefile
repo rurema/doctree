@@ -9,15 +9,17 @@ UNRELEASED_VERSIONS = %w[4.1]
 # bitclust statichtml --eol-warning で警告バナーを表示する。
 # EOL 状況は https://www.ruby-lang.org/ja/downloads/branches/ を参照して更新する
 MINIMUM_SUPPORTED_RUBY_VERSION = Gem::Version.new("3.3")
-# ruby.wasm の npm パッケージ (@ruby/X.Y-wasm-wasi) が存在するバージョンの
-# 静的 HTML にはサンプルコードの RUN ボタンを有効にする
-# (bitclust statichtml --run-ruby-wasm)。https://github.com/ruby/ruby.wasm 参照
-# npm 上の安定版は「<パッケージ版>-<ruby.wasm版>」形式（latest dist-tag の値）
-RUBY_WASM_NPM_VERSION = "2.9.3-2.9.4"
+# サンプルコードの RUN ボタン (bitclust statichtml --run-ruby-wasm) を
+# 有効にするバージョン。実行には rurema/run-ruby-wasm のリリース
+# (ruby.wasm に各バージョンの bundled gems を焼き込んだビルド)を使う。
+# リリースのアセットはサイトの wasm/<リリース名>/ 配下に同期されている
+# (docs.ruby-lang.org と同一オリジンなので CORS 設定も不要)。
+# リリース名は「<npm パッケージ版>-<ruby.wasm 版>-<通し番号>」形式
+RUBY_WASM_RELEASE = "2.9.3-2.9.4-1"
 RUBY_WASM_VERSIONS = %w[3.2 3.3 3.4 4.0]
 def ruby_wasm_url(version)
   if RUBY_WASM_VERSIONS.include?(version)
-    return "https://cdn.jsdelivr.net/npm/@ruby/#{version}-wasm-wasi@#{RUBY_WASM_NPM_VERSION}/dist/ruby+stdlib.wasm"
+    return "https://docs.ruby-lang.org/wasm/#{RUBY_WASM_RELEASE}/ruby-#{version}.wasm"
   end
   return ruby_head_wasm_url(version) if UNRELEASED_VERSIONS.include?(version)
   nil
