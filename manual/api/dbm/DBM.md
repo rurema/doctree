@@ -1,5 +1,6 @@
 ---
 library: dbm
+until: "3.1"
 include:
   - Enumerable
 ---

@@ -2,9 +2,15 @@
 type: library
 require:
   - rubygems/command
+#%until 3.1
   - rubygems/server
+#%end
 ---
 ローカルにインストールされている Gem パッケージとそのドキュメントを HTTP サーバに載せて公開するためのライブラリです。
+
+#%since 3.1
+Ruby 3.1 以降、`gem server` コマンドの実体は rubygems-server gem に移動しました。標準添付として残っているクラスは、rubygems-server gem のインストールを案内するメッセージを表示するだけのスタブです。
+#%end
 
 ```text
 Usage: gem server [options]
