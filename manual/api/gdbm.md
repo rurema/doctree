@@ -1,6 +1,7 @@
 ---
 type: library
 category: Database
+until: "3.1"
 ---
 GDBM(GNU データベース・マネージャ) を Ruby スクリプトから扱うためのライブラリです。
 

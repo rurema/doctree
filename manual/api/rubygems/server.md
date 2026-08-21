@@ -1,5 +1,6 @@
 ---
 type: library
+until: "3.1"
 include:
   - Gem::UserInteraction
 require:
