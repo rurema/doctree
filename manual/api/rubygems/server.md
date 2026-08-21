@@ -40,33 +40,33 @@ Gem パッケージを配布したり Gem パッケージに同梱されてい�
 
 メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 
-- **param** `request` --  [c:WEBrick::HTTPRequest] オブジェクトが自動的に指定されます。
+- **param** `request` --  `WEBrick::HTTPRequest` オブジェクトが自動的に指定されます。
 
-- **param** `response` -- [c:WEBrick::HTTPResponse] オブジェクトが自動的に指定されます。
+- **param** `response` -- `WEBrick::HTTPResponse` オブジェクトが自動的に指定されます。
 
 ### def latest_specs(request, response) -> ()
 
 メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 
-- **param** `request` --  [c:WEBrick::HTTPRequest] オブジェクトが自動的に指定されます。
+- **param** `request` --  `WEBrick::HTTPRequest` オブジェクトが自動的に指定されます。
 
-- **param** `response` -- [c:WEBrick::HTTPResponse] オブジェクトが自動的に指定されます。
+- **param** `response` -- `WEBrick::HTTPResponse` オブジェクトが自動的に指定されます。
 
 ### def quick(request, response) -> ()
 
 メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 
-- **param** `request` --  [c:WEBrick::HTTPRequest] オブジェクトが自動的に指定されます。
+- **param** `request` --  `WEBrick::HTTPRequest` オブジェクトが自動的に指定されます。
 
-- **param** `response` -- [c:WEBrick::HTTPResponse] オブジェクトが自動的に指定されます。
+- **param** `response` -- `WEBrick::HTTPResponse` オブジェクトが自動的に指定されます。
 
 ### def root(request, response) -> ()
 
 メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 
-- **param** `request` --  [c:WEBrick::HTTPRequest] オブジェクトが自動的に指定されます。
+- **param** `request` --  `WEBrick::HTTPRequest` オブジェクトが自動的に指定されます。
 
-- **param** `response` -- [c:WEBrick::HTTPResponse] オブジェクトが自動的に指定されます。
+- **param** `response` -- `WEBrick::HTTPResponse` オブジェクトが自動的に指定されます。
 
 ### def run -> ()
 
@@ -76,17 +76,17 @@ Gem パッケージを配布したり Gem パッケージに同梱されてい�
 
 メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 
-- **param** `request` --  [c:WEBrick::HTTPRequest] オブジェクトが自動的に指定されます。
+- **param** `request` --  `WEBrick::HTTPRequest` オブジェクトが自動的に指定されます。
 
-- **param** `response` -- [c:WEBrick::HTTPResponse] オブジェクトが自動的に指定されます。
+- **param** `response` -- `WEBrick::HTTPResponse` オブジェクトが自動的に指定されます。
 
 ### def yaml(request, response) -> ()
 
 メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 
-- **param** `request` --  [c:WEBrick::HTTPRequest] オブジェクトが自動的に指定されます。
+- **param** `request` --  `WEBrick::HTTPRequest` オブジェクトが自動的に指定されます。
 
-- **param** `response` -- [c:WEBrick::HTTPResponse] オブジェクトが自動的に指定されます。
+- **param** `response` -- `WEBrick::HTTPResponse` オブジェクトが自動的に指定されます。
 
 ## Singleton Methods
 
