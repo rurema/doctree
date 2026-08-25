@@ -1,5 +1,6 @@
 ---
 library: gdbm
+until: "3.1"
 include:
   - Enumerable
 ---

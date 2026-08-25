@@ -1,6 +1,7 @@
 ---
 type: library
 category: Database
+until: "3.1"
 ---
 DBM を Ruby スクリプトから扱えるようにするライブラリです。
 
