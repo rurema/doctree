@@ -14,7 +14,9 @@ require:
 #%end
   - irb/ext/tracer
   - irb/ext/use-loader
+#%until 3.3
   - irb/ext/save-history
+#%end
 ---
 #%# irb/cmd/fork.rb はどこからも require されないため省略しました。
 

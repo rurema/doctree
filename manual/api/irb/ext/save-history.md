@@ -1,6 +1,6 @@
 ---
 type: library
-until: "3.4"
+until: "3.3"
 ---
 [c:IRB::Context] にヒストリの読み込み、保存の機能を提供するサブライブラリです。
 
