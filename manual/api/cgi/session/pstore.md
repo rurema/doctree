@@ -1,5 +1,6 @@
 ---
 type: library
+until: "4.0"
 require:
   - cgi/session
 ---

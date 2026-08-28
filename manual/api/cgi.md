@@ -2,10 +2,14 @@
 type: library
 category: Network
 require:
+#%until 4.0
   - cgi/core
   - cgi/cookie
+#%end
   - cgi/util
+#%until 4.0
   - cgi/html
+#%end
 ---
 CGI プログラムの支援ライブラリです。
 
@@ -23,7 +27,7 @@ Ruby 4.0 から、cgi ライブラリは default gems から削除されまし�
 なお `require "cgi"` 自体は Ruby 4.0 でもエラーになりませんが、読み込まれるのは上記のエスケープ用のメソッドだけです。
 そのため、フォームを扱うメソッドの呼び出しが [c:NoMethodError] になるまで問題に気付きにくい点に注意してください。
 
-#%end
+#%else
 CGI プロトコルの詳細については以下の文書を参照してください。
 
   - <https://tools.ietf.org/html/draft-coar-cgi-v11-03>
@@ -280,4 +284,5 @@ CGI.new("html4Fr")  # html4.0 Frameset
 
 HTML 生成メソッドの引数としては、基本的に Hash オブジェクトが与えられる（あるいは何も与えられない）べきです。
 ただし以下に列挙されたメソッドでは、各メソッドの引数の形式に従って、 Hash オブジェクト以外のものを渡すこともできます。
+#%end
 

@@ -3,7 +3,11 @@ type: library
 ---
 CGI で利用するユーティリティメソッドを定義したライブラリです。
 
+#%until 4.0
 # reopen CGI
+#%else
+# class CGI
+#%end
 
 ## Class Methods
 ### def CGI.escape(string) -> String

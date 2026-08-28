@@ -1,5 +1,6 @@
 ---
 type: library
+until: "4.0"
 require:
   - rubygems/command
   - rubygems/local_remote_options
