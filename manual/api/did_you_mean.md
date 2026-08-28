@@ -21,10 +21,10 @@ category: Development
 デフォルトで有効になっており、無効にするにはコマンドラインオプションで
 --disable=did_you_mean を指定します。
 
-このライブラリはbundled gem(gemファイルのみを同梱)です。詳しい内容は下記のページを参照してください。
+このライブラリはdefault gemです。詳しい内容は下記のページを参照してください。
 
 - rubygems.org: <https://rubygems.org/gems/did_you_mean>
 - プロジェクトページ: <https://github.com/ruby/did_you_mean>
 - リファレンス: <https://www.rubydoc.info/gems/did_you_mean/>
 
-- **SEE** [ref:d:glossary#bundled-gem]
+- **SEE** [ref:d:glossary#default-gem]
