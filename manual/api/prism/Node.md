@@ -32,11 +32,11 @@ p call.compact_child_nodes.size # => 2
 
 ## Class Methods
 
+#%since 3.4
 ### def Prism::Node.type -> Symbol
 
 [m:Prism::Node#type] のクラスメソッド版です。インスタンスを作らずにノードクラス自体からノードの種類を表すシンボルを得られます。
 
-#%since 3.4
 ### def Prism::Node.fields -> [Prism::Reflection::Field]
 
 このノードクラスが持つフィールド(子ノードや属性)を表す
@@ -48,10 +48,12 @@ p call.compact_child_nodes.size # => 2
 
 ## Instance Methods
 
+#%since 3.4
 ### def type -> Symbol
 
 ノードの種類を表すシンボル(例 `:program_node`、`:call_node`)を返します。case 式や配列との比較でノードの種類を判定するときに使えます。
 
+#%end
 ### def location -> Prism::Location
 
 ノードのソースコード上の位置を表す [c:Prism::Location] を返します。
@@ -61,6 +63,7 @@ p call.compact_child_nodes.size # => 2
 ノードの位置に対応するソースコードの文字列を返します。
 [`location.slice`](m:Prism::Location#slice) と同じです。
 
+#%since 3.4
 ### def accept(visitor) -> object
 
 Visitor パターンの受け入れメソッドです。ノードの種類に応じた
@@ -83,6 +86,7 @@ Visitor パターンの受け入れメソッドです。ノードの種類に応
 コメントの関連付け先になりうる子ノードや位置情報の配列を返します。
 [m:Prism::ParseResult#attach_comments!] が内部で使用します。
 
+#%end
 ### def copy(**params) -> Prism::Node
 
 自身と同じクラスの新しいノードを、指定したフィールドだけを差し替えて複製します。渡せるキーワードはノードクラスごとのフィールド名で、指定しなかったフィールドは自身の値を引き継ぎます。
@@ -96,10 +100,12 @@ p copied.class        # => Prism::CallNode
 p copied.equal?(call) # => false
 ```
 
+#%since 3.4
 ### def deconstruct -> [Prism::Node | nil]
 
 [m:Prism::Node#child_nodes] のエイリアスです。パターンマッチの配列パターン(`case node; in [a, b]`)で使われます。
 
+#%end
 ### def deconstruct_keys(keys) -> Hash
 
 パターンマッチのハッシュパターン(`case node; in {value:}`)で使われます。ノードの各フィールドをキーに持つハッシュを返します。
