@@ -298,6 +298,7 @@ p Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
 
 - **param** `time` -- 変換する時刻オブジェクト
 
+#%until 3.1
 ### def Net::IMAP.max_flag_count -> Integer
 
 サーバからのレスポンスに含まれる flag の上限を返します。
@@ -319,6 +320,7 @@ p Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
 - **param** `count` -- 設定する最大値の整数
 - **SEE** [m:Net::IMAP.max_flag_count]
 
+#%end
 ### def Net::IMAP.default_port -> Integer
 ### def Net::IMAP.default_imap_port -> Integer
 
@@ -1006,13 +1008,17 @@ THREADコマンドを送り、メールボックスを検索した結果をス�
 - **param** `charset` -- 検索条件の解釈に用いるCHARSET名(文字列)
 - **SEE** [c:Net::IMAP::ThreadMember], [m:Net::IMAP#thread]
 
+#%until 3.4
 ### def client_thread -> Thread
 
 このメソッドは obsolete です。使わないでください。
+#%end
 
+#%until 3.3
 ### def client_thread=(th)
 
 このメソッドは obsolete です。使わないでください。
+#%end
 
 ### def idle {|resp| ...} -> Net::IMAP::TaggedResponse
 
@@ -2065,5 +2071,7 @@ true を返します。
 
 サーバからのレスポンスに含まれるフラグが多すぎるときに発生する例外です。
 
+#%until 3.1
 この上限は [m:Net::IMAP.max_flag_count=] で設定します。
+#%end
 

@@ -50,6 +50,7 @@ filename を省略した場合は空のオブジェクトが生成されます�
 - **param** `section` -- セクションを表す文字列。"" を渡すことでグローバルな設定情報を読むことができます。
 - **param** `name` -- キーを表す文字列
 
+#%until 3.1
 ### def value(name) -> String | nil
 ### def value(section, name) -> String | nil
 
@@ -108,6 +109,7 @@ section は obsolete です。[] を使ってください。
 
 オブジェクトに含まれる設定情報を OpenSSL の設定ファイルの形式で出力します。
 
+#%end
 ### def each {|section, key, value| ... } -> self
 
 オブジェクトに含まれる全ての設定情報を順にブロックに渡し呼び出します。
