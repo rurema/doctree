@@ -1,6 +1,11 @@
 ---
 library:
+#%since 3.4
+  - rdoc/code_object/attr
+#%end
+#%until 3.4
   - rdoc/attr
+#%end
 ---
 # class RDoc::Attr < RDoc::CodeObject
 

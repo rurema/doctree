@@ -1,6 +1,11 @@
 ---
 library:
+#%since 3.4
+  - rdoc/code_object/context
+#%end
+#%until 3.4
   - rdoc/context
+#%end
 include:
   - RDoc::Text
 ---
