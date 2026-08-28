@@ -1,7 +1,7 @@
 ---
 library: json
 include:
-  - JSON::Generator::GeneratorMethods::Object
+  - JSON::Ext::Generator::GeneratorMethods::Object
 ---
 # reopen Object
 

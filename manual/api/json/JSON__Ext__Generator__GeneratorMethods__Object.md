@@ -1,9 +1,7 @@
 ---
 library: json
-alias:
-  - JSON::Ext::Generator::GeneratorMethods::Object
 ---
-# module JSON::Generator::GeneratorMethods::Object
+# module JSON::Ext::Generator::GeneratorMethods::Object
 
 [c:Object] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 

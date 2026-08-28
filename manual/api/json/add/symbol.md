@@ -23,8 +23,8 @@ JSON のオブジェクトから [c:Symbol] のオブジェクトを生成して
 
 自身を JSON 形式の文字列に変換して返します。
 
-内部的にはハッシュにデータをセットしてから [m:JSON::Generator::GeneratorMethods::Hash#to_json] を呼び出しています。
+内部的にはハッシュにデータをセットしてから [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json] を呼び出しています。
 
-- **param** `args` -- 引数はそのまま [m:JSON::Generator::GeneratorMethods::Hash#to_json] に渡されます。
+- **param** `args` -- 引数はそのまま [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json] に渡されます。
 
-- **SEE** [m:JSON::Generator::GeneratorMethods::Hash#to_json]
+- **SEE** [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]

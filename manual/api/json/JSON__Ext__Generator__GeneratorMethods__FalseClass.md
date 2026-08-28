@@ -1,9 +1,7 @@
 ---
 library: json
-alias:
-  - JSON::Ext::Generator::GeneratorMethods::FalseClass
 ---
-# module JSON::Generator::GeneratorMethods::FalseClass
+# module JSON::Ext::Generator::GeneratorMethods::FalseClass
 
 [c:FalseClass] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 

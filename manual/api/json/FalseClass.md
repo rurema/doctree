@@ -1,7 +1,7 @@
 ---
 library: json
 include:
-  - JSON::Generator::GeneratorMethods::FalseClass
+  - JSON::Ext::Generator::GeneratorMethods::FalseClass
 ---
 # reopen FalseClass
 

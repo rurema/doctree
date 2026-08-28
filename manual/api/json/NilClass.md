@@ -1,7 +1,7 @@
 ---
 library: json
 include:
-  - JSON::Generator::GeneratorMethods::NilClass
+  - JSON::Ext::Generator::GeneratorMethods::NilClass
 ---
 # reopen NilClass
 
