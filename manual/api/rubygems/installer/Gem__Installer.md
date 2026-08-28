@@ -45,7 +45,7 @@ extconf.rb, configure script, Rakefile, mkmf_files です。
 
 また、ファイルを Gem ディレクトリにインストールしないようにします。
 
-- **raise** `ArgumentError` -- 自身に [c:Gem::Format] がセットされていない場合に発生します。
+- **raise** `ArgumentError` -- 自身に `Gem::Format` がセットされていない場合に発生します。
 
 - **raise** `Gem::InstallError` -- インストール先のパスが不正な場合に発生します。
 

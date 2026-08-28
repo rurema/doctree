@@ -56,9 +56,9 @@ Defaults:
 
 - **param** `name` -- Gem の名前を指定します。
 
-- **param** `source_index` -- [c:Gem::SourceIndex] のインスタンスを指定します。
+- **param** `source_index` -- `Gem::SourceIndex` のインスタンスを指定します。
 
-- **SEE** [m:Gem::SourceIndex#search]
+- **SEE** `Gem::SourceIndex#search`
 
 ### def find_reverse_dependencies(spec) -> Array
 

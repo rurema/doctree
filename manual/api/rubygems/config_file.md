@@ -99,14 +99,14 @@ Gem を探索するパスをセットします。
 
 ### def update_sources -> bool
 
-真の場合は [c:Gem::SourceInfoCache] を毎回更新します。
+真の場合は `Gem::SourceInfoCache` を毎回更新します。
 そうでない場合は、キャッシュがあればキャッシュの情報を使用します。
 
 ### def update_sources=(update_sources)
 
-[c:Gem::SourceInfoCache] を毎回更新するかどうか設定します。
+`Gem::SourceInfoCache` を毎回更新するかどうか設定します。
 
-- **param** `update_sources` -- 真を指定すると毎回 [c:Gem::SourceInfoCache] を更新します。
+- **param** `update_sources` -- 真を指定すると毎回 `Gem::SourceInfoCache` を更新します。
 
 ### def verbose -> bool | Symbol
 
@@ -156,7 +156,7 @@ Gem を探索するパスをセットします。
 
 ### const DEFAULT_UPDATE_SOURCES -> true
 
-毎回 [c:Gem::SourceInfoCache] を更新するかどうかのデフォルト値です。
+毎回 `Gem::SourceInfoCache` を更新するかどうかのデフォルト値です。
 
 ### const DEFAULT_VERBOSITY -> true
 
