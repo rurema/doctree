@@ -182,12 +182,12 @@ cookies = CGI::Cookie.parse("raw_cookie_string")
 
 - **param** `val` -- 真を指定すると自身はセキュアクッキーになります。
 
-### def httopnly -> bool
+### def httponly -> bool
 
 自身がhttpオンリークッキーである場合は、真を返します。
 そうでない場合は、偽を返します。
 
-### def httopnly=(val)
+### def httponly=(val)
 
 httpオンリークッキーであるかどうかを変更します。
 

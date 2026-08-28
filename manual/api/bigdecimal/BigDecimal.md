@@ -314,6 +314,25 @@ while (v + 1.0 > 1.0) {
 
 - **SEE** [m:BigDecimal#_dump], [m:Marshal?.dump], [m:Marshal?.load]
 
+### def BigDecimal.save_exception_mode { ... } -> object
+
+例外処理に関する [m:BigDecimal.mode] の設定を保存してブロックを評価します。ブロック中で変更した設定はブロックの評価後に復元されます。
+
+ブロックの評価結果を返します。
+
+### def BigDecimal.save_rounding_mode { ... } -> object
+
+丸め処理に関する [m:BigDecimal.mode] の設定を保存してブロックを評価します。
+ブロック中で変更した設定はブロックの評価後に復元されます。
+
+ブロックの評価結果を返します。
+
+### def BigDecimal.save_limit { ... } -> object
+
+現在の [m:BigDecimal.limit] の設定を保存してブロックを評価します。ブロック中で変更した設定はブロックの評価後に復元されます。
+
+ブロックの評価結果を返します。
+
 ## Instance Methods
 
 ### def +(other) -> BigDecimal
@@ -873,25 +892,6 @@ other に [c:Rational] オブジェクトを指定した場合は self の有効
 self のハッシュ値を返します。
 
 符号、小数部、指数部が同じ場合に同じハッシュ値を返します。
-
-### def save_exception_mode { ... } -> object
-
-例外処理に関する [m:BigDecimal.mode] の設定を保存してブロックを評価します。ブロック中で変更した設定はブロックの評価後に復元されます。
-
-ブロックの評価結果を返します。
-
-### def save_rounding_mode { ... } -> object
-
-丸め処理に関する [m:BigDecimal.mode] の設定を保存してブロックを評価します。
-ブロック中で変更した設定はブロックの評価後に復元されます。
-
-ブロックの評価結果を返します。
-
-### def save_limit { ... } -> object
-
-現在の [m:BigDecimal.limit] の設定を保存してブロックを評価します。ブロック中で変更した設定はブロックの評価後に復元されます。
-
-ブロックの評価結果を返します。
 
 ### def clone -> self
 

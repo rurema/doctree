@@ -998,16 +998,6 @@ rescue => err
 end
 ```
 
-#%# bc-rdoc: detected missing name: matchedsize
-### def matchedsize -> Integer | nil
-
-[m:StringScanner#matched_size] と同じです。
-
-このメソッドは は将来のバージョンで削除される予定です。
-代わりに [m:StringScanner#matched_size] を使ってください。
-
-- **SEE** [m:StringScanner#matched_size]
-
 ## Constants
 
 ### const Version -> String
