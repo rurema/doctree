@@ -16,138 +16,166 @@ include:
 
 [m:Numeric#coerce] メソッドを使うことによって異なる数値クラス間で演算を行うこともできます。
 
-### 数値関連のメソッドを実際に定義しているクラス一覧
+### 数値関連のメソッドが使えるクラス一覧
 
-ほとんどの数値関連のメソッドはサブクラスで再定義されています。これは、効率のためであったり上位抽象クラスで実装を定義できなかったりするためです。以下の表は
-2.4.2
-での一覧です。実際にどのメソッドがどのクラスに定義されているかはそれぞれのクラスを参照してください。
+数値関連のメソッドがどのクラスで使えるかの一覧です。ほとんどのメソッドはサブクラスで再定義されています。これは、効率のためであったり上位抽象クラスで実装を定義できなかったりするためです。
 
-#%#  cary = [Numeric, Integer, Float, Rational, Complex]
-#%#  mary = cary.collect {|c| c.instance_methods(false)}
-#%#  methods = mary.flatten.uniq.sort
+- リンク付きの ○: 使えます。リンク先はそのクラス自身のメソッド項目です
+- リンクなしの ○: 使えます。説明は上位クラスの同名メソッドの項目を参照してください
+- ―: 使えません
+
+#%#  # Numeric 系 5 クラスの「メソッド × 使えるか」Markdown 表を生成する
+#%#  #   ruby numeric_table_md.rb        # るりまの内部参照記法でリンク(原稿用)
+#%#  #   ruby numeric_table_md.rb --url  # docs.ruby-lang.org の URL でリンク(この表)
+#%#  url_mode = ARGV.include?("--url")
 #%#
-#%#  methods.each_with_index {|op, i|
-#%#  if i % 10 == 0
-#%#    heading = sprintf("%23s   %10s %10s %10s %10s %10s",
-#%#                "", *cary.collect {|klass| klass.name.center(10)})
-#%#    puts heading
-#%#    puts "-" * heading.size
+#%#  classes = [Numeric, Integer, Float, Rational, Complex]
+#%#  defined = classes.to_h { [_1, _1.instance_methods(false)] }
+#%#  usable  = classes.to_h { [_1, _1.instance_methods(true)] }
+#%#
+#%#  # るりまに項目のあるクラスが 1 つもないメソッドは除外(2026-08 実測)
+#%#  excluded = %i[singleton_method_added clone dup]
+#%#
+#%#  # ランタイムでは(再)定義されているが、るりまにそのクラス自身の項目がないセル
+#%#  # (リンクなしの ○ にする。2026-08 実測)
+#%#  no_entry = [
+#%#    [Integer, :coerce], [Integer, :zero?],
+#%#    [Float, :===], [Float, :coerce], [Float, :fdiv], [Float, :quo], [Float, :to_int],
+#%#    [Complex, :eql?], [Complex, :hash],
+#%#  ]
+#%#
+#%#  all_methods = defined.values.flatten.uniq.sort - excluded
+#%#
+#%#  # bitclust の URL エンコード(英数字と _ 以外は =XX)
+#%#  def encode_url(name)
+#%#    name.gsub(/[^A-Za-z0-9_]/) { "=%02x" % _1.ord }
 #%#  end
 #%#
-#%#  printf("%23s | %10s %10s %10s %10s %10s\n",
-#%#        op, *mary.collect {|ms| (ms.member?(op) ? "o" : "-").center(10)})
-#%#  }
+#%#  # GFM テーブルのセル内ではリテラルの | を \| と書く
+#%#  def escape_cell(str)
+#%#    str.gsub("|", "\\\\|")
+#%#  end
+#%#
+#%#  link =
+#%#    if url_mode
+#%#      ->(c, m) { "[○](https://docs.ruby-lang.org/ja/latest/method/#{c.name}/i/#{encode_url(m.to_s)}.html)" }
+#%#    else
+#%#      ->(c, m) { "[○](m:#{c.name}##{escape_cell(m.to_s)})" }
+#%#    end
+#%#
+#%#  puts "| メソッド | #{classes.map(&:name).join(' | ')} |"
+#%#  puts "|---:|#{([':---:'] * classes.size).join('|')}|"
+#%#
+#%#  all_methods.each do |m|
+#%#    cells = classes.map do |c|
+#%#      if defined[c].include?(m) && !no_entry.include?([c, m])
+#%#        link.(c, m)
+#%#      elsif usable[c].include?(m)
+#%#        "○"
+#%#      else
+#%#        "―"
+#%#      end
+#%#    end
+#%#    puts "| `#{escape_cell(m.to_s)}` | #{cells.join(' | ')} |"
+#%#  end
 
-```text
-=> ruby 2.4.2p198 (2017-09-14 revision 59899) [x86_64-darwin15]
-                            Numeric    Integer     Float     Rational   Complex
- --------------------------------------------------------------------------------
-                       % |     o          o          o          -          -
-                       & |     -          o          -          -          -
-                       * |     -          o          o          o          o
-                      ** |     -          o          o          o          o
-                       + |     -          o          o          o          o
-                      +@ |     o          -          -          -          -
-                       - |     -          o          o          o          o
-                      -@ |     o          o          o          o          o
-                       / |     -          o          o          o          o
-                       < |     -          o          o          -          -
-                            Numeric    Integer     Float     Rational   Complex
- --------------------------------------------------------------------------------
-                      << |     -          o          -          -          -
-                      <= |     -          o          o          -          -
-                     <=> |     o          o          o          o          -
-                      == |     -          o          o          o          o
-                     === |     -          o          o          -          -
-                       > |     -          o          o          -          -
-                      >= |     -          o          o          -          -
-                      >> |     -          o          -          -          -
-                      [] |     -          o          -          -          -
-                       ^ |     -          o          -          -          -
-                            Numeric    Integer     Float     Rational   Complex
- --------------------------------------------------------------------------------
-                     abs |     o          o          o          o          o
-                    abs2 |     o          -          -          -          o
-                   angle |     o          -          o          -          o
-                     arg |     o          -          o          -          o
-              bit_length |     -          o          -          -          -
-                    ceil |     o          o          o          o          -
-                     chr |     -          o          -          -          -
-                  coerce |     o          o          o          o          o
-                    conj |     o          -          -          -          o
-               conjugate |     o          -          -          -          o
-                            Numeric    Integer     Float     Rational   Complex
- --------------------------------------------------------------------------------
-             denominator |     o          o          o          o          o
-                  digits |     -          o          -          -          -
-                     div |     o          o          -          -          -
-                  divmod |     o          o          o          -          -
-                  downto |     -          o          -          -          -
-                    eql? |     o          -          o          -          o
-                   even? |     -          o          -          -          -
-                    fdiv |     o          o          o          o          o
-                 finite? |     o          -          o          -          o
-                   floor |     o          o          o          o          -
-                            Numeric    Integer     Float     Rational   Complex
- --------------------------------------------------------------------------------
-                     gcd |     -          o          -          -          -
-                  gcdlcm |     -          o          -          -          -
-                    hash |     -          -          o          o          o
-                       i |     o          -          -          -          -
-                    imag |     o          -          -          -          o
-               imaginary |     o          -          -          -          o
-               infinite? |     o          -          o          -          o
-                 inspect |     -          o          o          o          o
-                integer? |     o          o          -          -          -
-                     lcm |     -          o          -          -          -
-                            Numeric    Integer     Float     Rational   Complex
- --------------------------------------------------------------------------------
-               magnitude |     o          o          o          o          o
-                  modulo |     o          o          o          -          -
-                    nan? |     -          -          o          -          -
-               negative? |     o          -          o          o          -
-                    next |     -          o          -          -          -
-              next_float |     -          -          o          -          -
-                nonzero? |     o          -          -          -          -
-               numerator |     o          o          o          o          o
-                    odd? |     -          o          -          -          -
-                     ord |     -          o          -          -          -
-                            Numeric    Integer     Float     Rational   Complex
- --------------------------------------------------------------------------------
-                   phase |     o          -          o          -          o
-                   polar |     o          -          -          -          o
-               positive? |     o          -          o          o          -
-                    pred |     -          o          -          -          -
-              prev_float |     -          -          o          -          -
-                     quo |     o          -          o          o          o
-             rationalize |     -          o          o          o          o
-                    real |     o          -          -          -          o
-                   real? |     o          -          -          -          o
-                    rect |     o          -          -          -          o
-                            Numeric    Integer     Float     Rational   Complex
- --------------------------------------------------------------------------------
-             rectangular |     o          -          -          -          o
-               remainder |     o          o          -          -          -
-                   round |     o          o          o          o          -
-  singleton_method_added |     o          -          -          -          -
-                    size |     -          o          -          -          -
-                    step |     o          -          -          -          -
-                    succ |     -          o          -          -          -
-                   times |     -          o          -          -          -
-                    to_c |     o          -          -          -          o
-                    to_f |     -          o          o          o          o
-                            Numeric    Integer     Float     Rational   Complex
- --------------------------------------------------------------------------------
-                    to_i |     -          o          o          o          o
-                  to_int |     o          o          o          -          -
-                    to_r |     -          o          o          o          o
-                    to_s |     -          o          o          o          o
-                truncate |     o          o          o          o          -
-                    upto |     -          o          -          -          -
-                   zero? |     o          -          o          -          -
-                       | |     -          o          -          -          -
-                       ~ |     -          o          -          -          -
-```
+| メソッド | Numeric | Integer | Float | Rational | Complex |
+|---:|:---:|:---:|:---:|:---:|:---:|
+| `%` | [○](m:Numeric#%) | [○](m:Integer#%) | [○](m:Float#%) | ○ | ― |
+| `&` | ― | [○](m:Integer#&) | ― | ― | ― |
+| `*` | ― | [○](m:Integer#*) | [○](m:Float#*) | [○](m:Rational#*) | [○](m:Complex#*) |
+| `**` | ― | [○](m:Integer#**) | [○](m:Float#**) | [○](m:Rational#**) | [○](m:Complex#**) |
+| `+` | ― | [○](m:Integer#+) | [○](m:Float#+) | [○](m:Rational#+) | [○](m:Complex#+) |
+| `+@` | [○](m:Numeric#+@) | ○ | ○ | ○ | ○ |
+| `-` | ― | [○](m:Integer#-) | [○](m:Float#-) | [○](m:Rational#-) | [○](m:Complex#-) |
+| `-@` | [○](m:Numeric#-@) | [○](m:Integer#-@) | [○](m:Float#-@) | [○](m:Rational#-@) | [○](m:Complex#-@) |
+| `/` | ― | [○](m:Integer#/) | [○](m:Float#/) | [○](m:Rational#/) | [○](m:Complex#/) |
+| `<` | ○ | [○](m:Integer#<) | [○](m:Float#<) | ○ | ― |
+| `<<` | ― | [○](m:Integer#<<) | ― | ― | ― |
+| `<=` | ○ | [○](m:Integer#<=) | [○](m:Float#<=) | ○ | ― |
+| `<=>` | [○](m:Numeric#<=>) | [○](m:Integer#<=>) | [○](m:Float#<=>) | [○](m:Rational#<=>) | [○](m:Complex#<=>) |
+| `==` | ○ | [○](m:Integer#==) | [○](m:Float#==) | [○](m:Rational#==) | [○](m:Complex#==) |
+| `===` | ○ | [○](m:Integer#===) | ○ | ○ | ○ |
+| `>` | ○ | [○](m:Integer#>) | [○](m:Float#>) | ○ | ― |
+| `>=` | ○ | [○](m:Integer#>=) | [○](m:Float#>=) | ○ | ― |
+| `>>` | ― | [○](m:Integer#>>) | ― | ― | ― |
+| `[]` | ― | [○](m:Integer#[]) | ― | ― | ― |
+| `^` | ― | [○](m:Integer#^) | ― | ― | ― |
+| `abs` | [○](m:Numeric#abs) | [○](m:Integer#abs) | [○](m:Float#abs) | [○](m:Rational#abs) | [○](m:Complex#abs) |
+| `abs2` | [○](m:Numeric#abs2) | ○ | ○ | ○ | [○](m:Complex#abs2) |
+| `allbits?` | ― | [○](m:Integer#allbits?) | ― | ― | ― |
+| `angle` | [○](m:Numeric#angle) | ○ | [○](m:Float#angle) | ○ | [○](m:Complex#angle) |
+| `anybits?` | ― | [○](m:Integer#anybits?) | ― | ― | ― |
+| `arg` | [○](m:Numeric#arg) | ○ | [○](m:Float#arg) | ○ | [○](m:Complex#arg) |
+| `bit_length` | ― | [○](m:Integer#bit_length) | ― | ― | ― |
+| `ceil` | [○](m:Numeric#ceil) | [○](m:Integer#ceil) | [○](m:Float#ceil) | [○](m:Rational#ceil) | ― |
+#%since 3.2
+| `ceildiv` | ― | [○](m:Integer#ceildiv) | ― | ― | ― |
+#%end
+| `chr` | ― | [○](m:Integer#chr) | ― | ― | ― |
+| `coerce` | [○](m:Numeric#coerce) | ○ | ○ | [○](m:Rational#coerce) | [○](m:Complex#coerce) |
+| `conj` | [○](m:Numeric#conj) | ○ | ○ | ○ | [○](m:Complex#conj) |
+| `conjugate` | [○](m:Numeric#conjugate) | ○ | ○ | ○ | [○](m:Complex#conjugate) |
+| `denominator` | [○](m:Numeric#denominator) | [○](m:Integer#denominator) | [○](m:Float#denominator) | [○](m:Rational#denominator) | [○](m:Complex#denominator) |
+| `digits` | ― | [○](m:Integer#digits) | ― | ― | ― |
+| `div` | [○](m:Numeric#div) | [○](m:Integer#div) | ○ | ○ | ― |
+| `divmod` | [○](m:Numeric#divmod) | [○](m:Integer#divmod) | [○](m:Float#divmod) | ○ | ― |
+| `downto` | ― | [○](m:Integer#downto) | ― | ― | ― |
+| `eql?` | [○](m:Numeric#eql?) | ○ | [○](m:Float#eql?) | ○ | ○ |
+| `even?` | ― | [○](m:Integer#even?) | ― | ― | ― |
+| `fdiv` | [○](m:Numeric#fdiv) | [○](m:Integer#fdiv) | ○ | [○](m:Rational#fdiv) | [○](m:Complex#fdiv) |
+| `finite?` | [○](m:Numeric#finite?) | ○ | [○](m:Float#finite?) | ○ | [○](m:Complex#finite?) |
+| `floor` | [○](m:Numeric#floor) | [○](m:Integer#floor) | [○](m:Float#floor) | [○](m:Rational#floor) | ― |
+| `gcd` | ― | [○](m:Integer#gcd) | ― | ― | ― |
+| `gcdlcm` | ― | [○](m:Integer#gcdlcm) | ― | ― | ― |
+| `hash` | ○ | ○ | [○](m:Float#hash) | [○](m:Rational#hash) | ○ |
+| `i` | [○](m:Numeric#i) | ○ | ○ | ○ | ― |
+| `imag` | [○](m:Numeric#imag) | ○ | ○ | ○ | [○](m:Complex#imag) |
+| `imaginary` | [○](m:Numeric#imaginary) | ○ | ○ | ○ | [○](m:Complex#imaginary) |
+| `infinite?` | [○](m:Numeric#infinite?) | ○ | [○](m:Float#infinite?) | ○ | [○](m:Complex#infinite?) |
+| `inspect` | ○ | [○](m:Integer#inspect) | [○](m:Float#inspect) | [○](m:Rational#inspect) | [○](m:Complex#inspect) |
+| `integer?` | [○](m:Numeric#integer?) | [○](m:Integer#integer?) | ○ | ○ | ○ |
+| `lcm` | ― | [○](m:Integer#lcm) | ― | ― | ― |
+| `magnitude` | [○](m:Numeric#magnitude) | [○](m:Integer#magnitude) | [○](m:Float#magnitude) | [○](m:Rational#magnitude) | [○](m:Complex#magnitude) |
+| `modulo` | [○](m:Numeric#modulo) | [○](m:Integer#modulo) | [○](m:Float#modulo) | ○ | ― |
+| `nan?` | ― | ― | [○](m:Float#nan?) | ― | ― |
+| `negative?` | [○](m:Numeric#negative?) | ○ | [○](m:Float#negative?) | [○](m:Rational#negative?) | ― |
+| `next` | ― | [○](m:Integer#next) | ― | ― | ― |
+| `next_float` | ― | ― | [○](m:Float#next_float) | ― | ― |
+| `nobits?` | ― | [○](m:Integer#nobits?) | ― | ― | ― |
+| `nonzero?` | [○](m:Numeric#nonzero?) | ○ | ○ | ○ | ○ |
+| `numerator` | [○](m:Numeric#numerator) | [○](m:Integer#numerator) | [○](m:Float#numerator) | [○](m:Rational#numerator) | [○](m:Complex#numerator) |
+| `odd?` | ― | [○](m:Integer#odd?) | ― | ― | ― |
+| `ord` | ― | [○](m:Integer#ord) | ― | ― | ― |
+| `phase` | [○](m:Numeric#phase) | ○ | [○](m:Float#phase) | ○ | [○](m:Complex#phase) |
+| `polar` | [○](m:Numeric#polar) | ○ | ○ | ○ | [○](m:Complex#polar) |
+| `positive?` | [○](m:Numeric#positive?) | ○ | [○](m:Float#positive?) | [○](m:Rational#positive?) | ― |
+| `pow` | ― | [○](m:Integer#pow) | ― | ― | ― |
+| `pred` | ― | [○](m:Integer#pred) | ― | ― | ― |
+| `prev_float` | ― | ― | [○](m:Float#prev_float) | ― | ― |
+| `quo` | [○](m:Numeric#quo) | ○ | ○ | [○](m:Rational#quo) | [○](m:Complex#quo) |
+| `rationalize` | ― | [○](m:Integer#rationalize) | [○](m:Float#rationalize) | [○](m:Rational#rationalize) | [○](m:Complex#rationalize) |
+| `real` | [○](m:Numeric#real) | ○ | ○ | ○ | [○](m:Complex#real) |
+| `real?` | [○](m:Numeric#real?) | ○ | ○ | ○ | [○](m:Complex#real?) |
+| `rect` | [○](m:Numeric#rect) | ○ | ○ | ○ | [○](m:Complex#rect) |
+| `rectangular` | [○](m:Numeric#rectangular) | ○ | ○ | ○ | [○](m:Complex#rectangular) |
+| `remainder` | [○](m:Numeric#remainder) | [○](m:Integer#remainder) | ○ | ○ | ― |
+| `round` | [○](m:Numeric#round) | [○](m:Integer#round) | [○](m:Float#round) | [○](m:Rational#round) | ― |
+| `size` | ― | [○](m:Integer#size) | ― | ― | ― |
+| `step` | [○](m:Numeric#step) | ○ | ○ | ○ | ― |
+| `succ` | ― | [○](m:Integer#succ) | ― | ― | ― |
+| `times` | ― | [○](m:Integer#times) | ― | ― | ― |
+| `to_c` | [○](m:Numeric#to_c) | ○ | ○ | ○ | [○](m:Complex#to_c) |
+| `to_f` | ― | [○](m:Integer#to_f) | [○](m:Float#to_f) | [○](m:Rational#to_f) | [○](m:Complex#to_f) |
+| `to_i` | ― | [○](m:Integer#to_i) | [○](m:Float#to_i) | [○](m:Rational#to_i) | [○](m:Complex#to_i) |
+| `to_int` | [○](m:Numeric#to_int) | [○](m:Integer#to_int) | ○ | ○ | ○ |
+| `to_r` | ― | [○](m:Integer#to_r) | [○](m:Float#to_r) | [○](m:Rational#to_r) | [○](m:Complex#to_r) |
+| `to_s` | ○ | [○](m:Integer#to_s) | [○](m:Float#to_s) | [○](m:Rational#to_s) | [○](m:Complex#to_s) |
+| `truncate` | [○](m:Numeric#truncate) | [○](m:Integer#truncate) | [○](m:Float#truncate) | [○](m:Rational#truncate) | ― |
+| `upto` | ― | [○](m:Integer#upto) | ― | ― | ― |
+| `zero?` | [○](m:Numeric#zero?) | ○ | [○](m:Float#zero?) | ○ | ○ |
+| `\|` | ― | [○](m:Integer#\|) | ― | ― | ― |
+| `~` | ― | [○](m:Integer#~) | ― | ― | ― |
 
 ### 丸めメソッドの動作一覧
 
