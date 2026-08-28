@@ -71,12 +71,6 @@ s.add_runtime_dependency "progressbar", ">= 1.9.0", "< 2.0"
 
 - **SEE** [m:Gem::Specification#add_development_dependency], [c:Gem::Dependency]
 
-### def assign_defaults -> ()
-
-全ての属性にデフォルト値をセットします。
-
-これはアクセサメソッドを使用して行われるので、ブロックを用いた特別な初期化もきちんと実行されます。セットされる値はデフォルト値のコピーです。
-
 ### def author -> String
 
 作成者の名前を返します。
@@ -127,6 +121,7 @@ s.add_runtime_dependency "progressbar", ">= 1.9.0", "< 2.0"
 
 - **param** `date` -- 日付をセットします。デフォルトは今日です。
 
+#%until 4.0
 ### def default_executable -> String | nil
 
 Gem パッケージ内で gem コマンド経由で実行するファイルを返します。
@@ -137,6 +132,7 @@ Gem パッケージ内で gem コマンド経由で実行するファイルを�
 
 - **param** `executable` -- 実行ファイルを指定します。
 
+#%end
 ### def dependencies -> Array
 
 依存している Gem のリストを返します。
@@ -241,6 +237,7 @@ RDoc でドキュメントを作成する際に使用する特別なファイル
 
 プラットフォームの情報が指定されている場合は、それも含みます (name-version-platform)。
 
+#%until 4.0
 ### def has_rdoc -> bool
 
 真の場合は RDoc を生成しません。偽の場合は RDoc を生成します。
@@ -255,6 +252,7 @@ RDoc を生成するかどうかをセットします。デフォルトは偽で
 
 - **SEE** [m:Gem::Specification#has_rdoc]
 
+#%end
 ### def has_test_suite? -> bool
 
 このメソッドは非推奨です。 [m:Gem::Specification#has_unit_tests?] を使用してください。
@@ -275,28 +273,10 @@ RDoc を生成するかどうかをセットします。デフォルトは偽で
 
 - **param** `uri` -- この Gem パッケージを作成しているプロジェクトか作成者のウェブサイトの URI を指定します。
 
-### def installation_path -> String
-
-この Gem パッケージのインストール先のパスを返します。
-
 ### def lib_files -> [String]
 
 この Gem パッケージに含まれているファイルのうち [m:Gem::Specification#require_paths]
 以下にあるファイルのリストを返します。
-
-### def loaded=(flag)
-
-この Gem パッケージの gemspec が既にロードされているかどうかをセットします。
-
-この属性は永続化しません。
-
-- **param** `flag` -- 既にロードされている場合は真を指定します。
-
-### def loaded? -> bool
-
-この Gem パッケージの gemspec が既にロードされているかどうかを返します。
-
-既にロードされている場合は真を返します。そうでない場合は偽を返します。
 
 ### def loaded_from -> String
 
@@ -310,10 +290,12 @@ RDoc を生成するかどうかをセットします。デフォルトは偽で
 
 - **param** `path` -- この Gem パッケージの gemspec がある場所を指定します。
 
+#%until 3.4
 ### def mark_version -> String
 
 RubyGems のバージョンを内部にセットします。
 
+#%end
 ### def name -> String
 
 この Gem パッケージの名前を返します。
@@ -512,16 +494,6 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオ�
 
 - **param** `files` -- ユニットテストのファイルのリストを指定します。
 
-### def test_suite_file -> String
-
-この属性は非推奨です。 [m:Gem::Specification#test_files] を使用してください。
-
-### def test_suite_file=(file)
-
-この属性は非推奨です。 [m:Gem::Specification#test_files=] を使用してください。
-
-- **param** `file` -- テストスイートのファイルを指定します。
-
 ### def to_ruby -> String
 
 自身を再現するための Ruby スクリプトを文字列で返します。
@@ -557,71 +529,15 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオ�
 
 - **param** `str` -- マーシャルされたデータを指定します。
 
-### def Gem::Specification.array_attribute(name) -> ()
-
-[m:Gem::Specification.attribute] と同じですが、値を配列に格納するアクセサを作ります。
-
-- **param** `name` -- 属性の名前を指定します。
-
-- **SEE** [m:Gem::Specification.attribute]
-
 ### def Gem::Specification.array_attributes -> Array
 
 @@array_attributes の複製を返します。
 
 - **SEE** [m:Object#dup]
 
-### def Gem::Specification.attribute(name) -> ()
-
-デフォルト値を指定したアクセサを定義するために使用します。
-
-以下の副作用があります。
-
-- クラス変数 @@attributes, @@default_value を変更します。
-- 通常の属性書き込みメソッドを定義します。
-- デフォルト値を持つ属性読み取りメソッドのように振る舞うメソッドを定義します。
-
-### def Gem::Specification.attribute_alias_singular(singular, plural) -> ()
-
-既に存在する複数形の属性の単数形バージョンを定義します。
-
-これは単に一つの引数を受け取りそれを配列に追加するようなヘルパーメソッドを定義するということです。
-
-```ruby title="例"
-# このように定義すると
-attribute_alias_singular :require_path, :require_paths
-# こう書くかわりに
-s.require_paths = ['mylib']
-# こう書くことができます。
-s.require_path = 'mylib'
-```
-
-- **param** `singular` -- 属性名の単数形を指定します。
-
-- **param** `plural` -- 属性名の複数形を指定します。
-
-### def Gem::Specification.attribute_defaults -> Array
-#%todo
-
-@@attributes の複製を返します。
-
 ### def Gem::Specification.attribute_names -> Array
 
 属性名の配列を返します。
-
-### def Gem::Specification.attributes(*args) -> ()
-
-複数の属性を一度に作成するために使用します。
-
-各属性のデフォルト値は nil になります。
-
-- **param** `args` -- 属性名を一つ以上指定します。
-
-### def Gem::Specification.default_value(name) -> object
-
-与えられた名前の属性のデフォルト値を返します。
-
-- **param** `name` -- 属性名を指定します。
 
 ### def Gem::Specification.from_yaml(input) -> Gem::Specification
 
@@ -631,10 +547,6 @@ YAML ファイルから [c:Gem::Specification] をロードすると、通常の
 gemspec のバージョンチェックも行います。
 
 - **param** `input` -- 文字列か [c:IO] オブジェクトを指定します。
-
-### def Gem::Specification.list -> Array
-
-実行中の Ruby のインスタンスで作成された [c:Gem::Specification] のインスタンスを返します。
 
 ### def Gem::Specification.load(filename) -> Gem::Specification
 
@@ -650,31 +562,6 @@ YAML 形式の gemspec を正しくフォーマットします。
 
 - **param** `input` -- 文字列か [c:IO] オブジェクトを指定します。
 
-### def Gem::Specification.overwrite_accessor(name){ ... } -> ()
-
-呼び出し時に特別な動作をする必要のある属性があります。
-このメソッドはそういうことを可能にします。
-
-ブロックパラメータは任意のものを使用できます。
-
-- **param** `name` -- 属性名を指定します。
-
-### def Gem::Specification.read_only(*names) -> ()
-
-与えられた属性名を読み取り専用にします。
-
-- **param** `names` -- 属性名を一つ以上指定します。
-
-### def Gem::Specification.required_attribute(name, default = nil) -> ()
-
-必須の属性を作成します。
-
-- **param** `name` -- 属性名を指定します。
-
-- **param** `default` -- デフォルト値を指定します。
-
-- **SEE** [m:Gem::Specification.attribute]
-
 ### def Gem::Specification.required_attribute?(name) -> bool
 
 必須属性であれば真を返します。
@@ -689,7 +576,7 @@ YAML 形式の gemspec を正しくフォーマットします。
 
 インストールされている全ての Gem の情報を、Gem::StubSpecification（gemspec ファイルの内容を遅延読み込みする軽量なスタブオブジェクト）の配列として返します。
 
-[m:Gem::Specification.list] とは異なり、gemspec ファイルの内容を実際に読み込まずにスタブを生成するため、高速に動作します。
+`Gem::Specification.list` とは異なり、gemspec ファイルの内容を実際に読み込まずにスタブを生成するため、高速に動作します。
 
 ```ruby title="例"
 p Gem::Specification.stubs.first(3).map(&:class)
@@ -699,7 +586,7 @@ p Gem::Specification.stubs.first.name
 # => "abbrev"
 ```
 
-- **SEE** [m:Gem::Specification.list], [m:Gem::Specification.stubs_for]
+- **SEE** [m:Gem::Specification.stubs_for]
 
 ### def Gem::Specification.stubs_for(name) -> Array
 
