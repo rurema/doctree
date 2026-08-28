@@ -1,0 +1,25 @@
+minitest	5.14.2	seattlerb/minitest
+minitest	5.15.0	seattlerb/minitest
+minitest	5.25.1	seattlerb/minitest
+power_assert	1.2.1	ruby/power_assert
+power_assert	2.0.1	ruby/power_assert
+power_assert	2.0.3	ruby/power_assert
+rake	13.0.3	ruby/rake
+rake	13.0.6	ruby/rake
+rexml	3.2.5	ruby/rexml
+rexml	3.3.9	ruby/rexml
+rss	0.2.9	ruby/rss	0.2.9
+rss	0.3.1	ruby/rss
+test-unit	3.3.7	test-unit/test-unit	3.3.7
+test-unit	3.5.3	test-unit/test-unit
+test-unit	3.5.7	test-unit/test-unit
+matrix	0.4.2	ruby/matrix
+net-ftp	0.1.4	ruby/net-ftp
+net-ftp	0.2.1	ruby/net-ftp
+net-imap	0.2.4	ruby/net-imap
+net-imap	0.3.9	ruby/net-imap
+net-pop	0.1.1	ruby/net-pop
+net-pop	0.1.2	ruby/net-pop
+net-smtp	0.3.1.1	ruby/net-smtp
+net-smtp	0.3.4	ruby/net-smtp
+prime	0.1.2	ruby/prime

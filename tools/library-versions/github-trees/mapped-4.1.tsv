@@ -1,0 +1,197 @@
+abbrev	gem:abbrev	0.1.2	https://github.com/ruby/abbrev	
+base64	gem:base64	0.3.0	https://github.com/ruby/base64	
+benchmark	gem:benchmark	0.5.0	https://github.com/ruby/benchmark	
+bigdecimal	gem:bigdecimal	4.1.2	https://github.com/ruby/bigdecimal	
+bigdecimal/jacobian	gem:bigdecimal	4.1.2	https://github.com/ruby/bigdecimal	
+bigdecimal/ludcmp	gem:bigdecimal	4.1.2	https://github.com/ruby/bigdecimal	
+bigdecimal/math	gem:bigdecimal	4.1.2	https://github.com/ruby/bigdecimal	
+bigdecimal/newton	gem:bigdecimal	4.1.2	https://github.com/ruby/bigdecimal	
+bigdecimal/util	gem:bigdecimal	4.1.2	https://github.com/ruby/bigdecimal	
+cgi/cookie	NOGEM			
+cgi/core	NOGEM			
+cgi/html	NOGEM			
+cgi/session	NOGEM			
+cgi/session/pstore	NOGEM			
+csv	gem:csv	3.3.6	https://github.com/ruby/csv	
+drb	gem:drb	2.2.3	https://github.com/ruby/drb	
+drb/acl	gem:drb	2.2.3	https://github.com/ruby/drb	
+drb/extserv	gem:drb	2.2.3	https://github.com/ruby/drb	
+drb/extservm	gem:drb	2.2.3	https://github.com/ruby/drb	
+drb/gw	gem:drb	2.2.3	https://github.com/ruby/drb	
+drb/observer	gem:drb	2.2.3	https://github.com/ruby/drb	
+drb/ssl	gem:drb	2.2.3	https://github.com/ruby/drb	
+drb/timeridconv	gem:drb	2.2.3	https://github.com/ruby/drb	
+drb/unix	gem:drb	2.2.3	https://github.com/ruby/drb	
+fiddle	gem:fiddle	1.1.8	https://github.com/ruby/fiddle	
+fiddle/import	gem:fiddle	1.1.8	https://github.com/ruby/fiddle	
+fiddle/types	gem:fiddle	1.1.8	https://github.com/ruby/fiddle	
+getoptlong	gem:getoptlong	0.2.1	https://github.com/ruby/getoptlong	
+io/console/size	NOGEM			
+irb	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/cmd/nop	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/color	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/completion	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/context	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/debug	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/default_commands	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/easter-egg	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/ext/change-ws	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/ext/eval_history	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/ext/loader	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/ext/multi-irb	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/ext/tracer	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/ext/use-loader	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/ext/workspaces	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/frame	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/help	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/history	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/init	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/input-method	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/inspector	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/locale	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/notifier	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/output-method	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/pager	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/ruby-lex	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/startup_message	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/statement	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/version	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/workspace	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/ws-for-case-2	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+irb/xmp	gem:irb	1.18.0	https://github.com/ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+json/add/bigdecimal	NOGEM			
+json/add/complex	NOGEM			
+json/add/core	NOGEM			
+json/add/date	NOGEM			
+json/add/date_time	NOGEM			
+json/add/exception	NOGEM			
+json/add/ostruct	NOGEM			
+json/add/range	NOGEM			
+json/add/rational	NOGEM			
+json/add/regexp	NOGEM			
+json/add/struct	NOGEM			
+json/add/symbol	NOGEM			
+json/add/time	NOGEM			
+json/editor	NOGEM			
+kconv	NOGEM			
+logger	gem:logger	1.7.0	https://github.com/ruby/logger	
+matrix	gem:matrix	0.4.3	https://github.com/ruby/matrix	
+minitest/autorun	gem:minitest	6.0.6	https://github.com/minitest/minitest	
+minitest/mock	gem:minitest	6.0.6	https://github.com/minitest/minitest	
+minitest/spec	gem:minitest	6.0.6	https://github.com/minitest/minitest	
+minitest/unit	gem:minitest	6.0.6	https://github.com/minitest/minitest	
+mutex_m	gem:mutex_m	0.3.0	https://github.com/ruby/mutex_m	
+net/ftp	NOGEM			
+net/imap	gem:net-imap	0.6.6	https://github.com/ruby/net-imap	
+net/pop	NOGEM			
+net/smtp	gem:net-smtp	0.5.1	https://github.com/ruby/net-smtp	
+net/telnet	NOGEM			
+nkf	gem:nkf	0.3.0	https://github.com/ruby/nkf	
+observer	gem:observer	0.1.2	https://github.com/ruby/observer	
+ostruct	gem:ostruct	0.6.3	https://github.com/ruby/ostruct	
+power_assert	gem:power_assert	3.1.0	https://github.com/ruby/power_assert	
+prime	gem:prime	0.1.4	https://github.com/ruby/prime	
+pstore	gem:pstore	0.2.1	https://github.com/ruby/pstore	
+racc/parser	gem:racc	1.8.1	https://github.com/ruby/racc	
+rake	gem:rake	13.4.2	https://github.com/ruby/rake	
+rake/classic_namespace	gem:rake	13.4.2	https://github.com/ruby/rake	
+rake/clean	gem:rake	13.4.2	https://github.com/ruby/rake	
+rake/gempackagetask	gem:rake	13.4.2	https://github.com/ruby/rake	
+rake/loaders/makefile	gem:rake	13.4.2	https://github.com/ruby/rake	
+rake/packagetask	gem:rake	13.4.2	https://github.com/ruby/rake	
+rake/rake_test_loader	gem:rake	13.4.2	https://github.com/ruby/rake	
+rake/rdoctask	gem:rake	13.4.2	https://github.com/ruby/rake	
+rake/runtest	gem:rake	13.4.2	https://github.com/ruby/rake	
+rake/tasklib	gem:rake	13.4.2	https://github.com/ruby/rake	
+rake/testtask	gem:rake	13.4.2	https://github.com/ruby/rake	
+rdoc	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/alias	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/anon_class	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/any_method	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/attr	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/class_module	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/code_object	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/code_objects	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/constant	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/context	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/generator	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/generator/darkfish	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/generator/json_index	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/generator/markup	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/generator/ri	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/ghost_method	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/include	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/known_classes	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/markdown	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/markdown/entities	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/markup	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/markup/formatter	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/markup/to_ansi	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/markup/to_bs	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/markup/to_html	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/markup/to_html_crossref	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/markup/to_rdoc	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/meta_method	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/normal_class	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/normal_module	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/options	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/parser	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/parser/c	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/parser/changelog	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/parser/markdown	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/parser/rd	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/parser/ruby	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/parser/ruby_tools	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/parser/simple	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/parser/text	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/rdoc.lib	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/require	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/single_class	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/stats	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/text	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/token_stream	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+rdoc/top_level	gem:rdoc	8.0.0	https://github.com/ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+readline	gem:readline	0.0.4	https://github.com/ruby/readline	
+reline	gem:reline	0.7.0	https://github.com/ruby/reline	
+resolv-replace	gem:resolv-replace	0.2.0	https://github.com/ruby/resolv-replace	
+rexml	gem:rexml	3.4.4	https://github.com/ruby/rexml	
+rexml/document	gem:rexml	3.4.4	https://github.com/ruby/rexml	
+rexml/parsers/pullparser	gem:rexml	3.4.4	https://github.com/ruby/rexml	
+rexml/parsers/sax2parser	gem:rexml	3.4.4	https://github.com/ruby/rexml	
+rexml/parsers/streamparser	gem:rexml	3.4.4	https://github.com/ruby/rexml	
+rexml/parsers/ultralightparser	gem:rexml	3.4.4	https://github.com/ruby/rexml	
+rexml/sax2listener	gem:rexml	3.4.4	https://github.com/ruby/rexml	
+rexml/streamlistener	gem:rexml	3.4.4	https://github.com/ruby/rexml	
+rinda/rinda	gem:rinda	0.2.0	https://github.com/ruby/rinda	
+rinda/tuplespace	gem:rinda	0.2.0	https://github.com/ruby/rinda	
+rss	gem:rss	0.3.3	https://github.com/ruby/rss	
+rubygems/builder	NOGEM			
+rubygems/commands/query_command	NOGEM			
+rubygems/custom_require	NOGEM			
+rubygems/digest/digest_adapter	NOGEM			
+rubygems/digest/md5	NOGEM			
+rubygems/digest/sha1	NOGEM			
+rubygems/digest/sha2	NOGEM			
+rubygems/doc_manager	NOGEM			
+rubygems/format	NOGEM			
+rubygems/gem_openssl	NOGEM			
+rubygems/gem_path_searcher	NOGEM			
+rubygems/indexer	NOGEM			
+rubygems/old_format	NOGEM			
+rubygems/package/f_sync_dir	NOGEM			
+rubygems/package/tar_input	NOGEM			
+rubygems/package/tar_output	NOGEM			
+rubygems/require_paths_builder	NOGEM			
+rubygems/source_index	NOGEM			
+rubygems/source_info_cache	NOGEM			
+rubygems/source_info_cache_entry	NOGEM			
+rubygems/test_utilities	NOGEM			
+rubygems/timer	NOGEM			
+syslog	gem:syslog	0.4.0	https://github.com/ruby/syslog	
+syslog/logger	gem:syslog	0.4.0	https://github.com/ruby/syslog	
+test/unit	gem:test-unit	3.7.8	https://github.com/test-unit/test-unit	
+thread	NOGEM			
+tsort	gem:tsort	0.2.0	https://github.com/ruby/tsort	
+win32/registry	gem:win32-registry	0.1.2	https://github.com/ruby/win32-registry	
+win32ole	gem:win32ole	1.9.3	https://github.com/ruby/win32ole	
+xmlrpc	NOGEM			

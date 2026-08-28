@@ -1,0 +1,6 @@
+bigdecimal.rb
+bigdecimal/jacobian.rb
+bigdecimal/ludcmp.rb
+bigdecimal/math.rb
+bigdecimal/newton.rb
+bigdecimal/util.rb

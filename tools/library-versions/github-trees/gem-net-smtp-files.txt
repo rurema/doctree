@@ -1,0 +1,6 @@
+net/smtp.rb
+net/smtp/auth_cram_md5.rb
+net/smtp/auth_login.rb
+net/smtp/auth_plain.rb
+net/smtp/auth_xoauth2.rb
+net/smtp/authenticator.rb
