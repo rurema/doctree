@@ -27,9 +27,9 @@ Gem パッケージを配布したり Gem パッケージに同梱されてい�
 以下のインデックスはレガシーなものです。
 
 - **`"/Marshal.#{Gem.marshal_version}"`**:
-  インストールされている Gem パッケージの [c:Gem::SourceIndex] を [c:Marshal] の形式でダンプしたものを返します。
+  インストールされている Gem パッケージの `Gem::SourceIndex` を [c:Marshal] の形式でダンプしたものを返します。
 - **`"/yaml"`**:
-  インストールされている Gem パッケージの [c:Gem::SourceIndex] を YAML 形式でダンプしたメタデータを返します。この機能は非推奨です。
+  インストールされている Gem パッケージの `Gem::SourceIndex` を YAML 形式でダンプしたメタデータを返します。この機能は非推奨です。
 
 # class Gem::Server
 

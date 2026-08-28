@@ -309,7 +309,7 @@ GEM_SKIP=libA:libB ruby-I../libA -I../libB ./mycode.rb
 [m:Gem?.path] にある [c:Gem::Specification] のキャッシュを返します。
 インストールされている [c:Gem::Specification] のインデックスを返します
 
-- **SEE** [c:Gem::SourceIndex], [c:Gem::Specification]
+- **SEE** `Gem::SourceIndex`, [c:Gem::Specification]
 
 ### module_function def win_platform? -> bool
 

@@ -81,8 +81,8 @@ spec.
 
 ### def Gem::DependencyList.from_source_index(src_index) -> Gem::DependencyList
 
-与えられた [c:Gem::SourceIndex] のインスタンスから自身を作成します。
+与えられた `Gem::SourceIndex` のインスタンスから自身を作成します。
 
-- **param** `src_index` -- [c:Gem::SourceIndex] を指定します。
+- **param** `src_index` -- `Gem::SourceIndex` を指定します。
 
-- **SEE** [c:Gem::SourceIndex]
+- **SEE** `Gem::SourceIndex`
