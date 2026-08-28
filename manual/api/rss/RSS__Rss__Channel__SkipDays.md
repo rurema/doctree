@@ -1,7 +1,7 @@
 ---
 library: rss
 ---
-# class RSS::Rss::SkipDays < RSS::Element
+# class RSS::Rss::Channel::SkipDays < RSS::Element
 ## Instance Methods
 
 ### def day
