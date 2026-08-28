@@ -44,8 +44,14 @@ end
 
 - **raise** `OpenURI::HTTPError` -- 対象となる URI のスキームが http または https であり、かつリソースの取得に失敗したときに発生します。
 
+#%until 4.1
 - **raise** `Net::FTPError` -- 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
                      [c:Net::FTPError] のサブクラスが発生します。詳しくは [lib:net/ftp]
                      を参照して下さい。
+#%else
+- **raise** `Net::FTPError` -- 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
+                     `Net::FTPError` のサブクラスが発生します。詳しくは `net/ftp`
+                     を参照して下さい。
+#%end
 
 - **SEE** [m:Kernel?.open], [m:OpenURI.open_uri]
