@@ -1,7 +1,7 @@
 ---
 library: rss
 ---
-# module DublinCoreModel
+# module RSS::DublinCoreModel
 
 - <http://purl.org/dc/elements/1.1/>
 

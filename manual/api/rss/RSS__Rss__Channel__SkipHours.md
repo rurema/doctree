@@ -1,7 +1,7 @@
 ---
 library: rss
 ---
-# class RSS::Rss::SkipHours < RSS::Element
+# class RSS::Rss::Channel::SkipHours < RSS::Element
 ## Instance Methods
 
 ### def hour

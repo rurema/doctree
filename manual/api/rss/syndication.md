@@ -1,7 +1,7 @@
 ---
 library: rss
 ---
-# module  RSS::SyndicationModel
+# module RSS::SyndicationModel
 
 - <http://purl.org/rss/1.0/modules/syndication/>
 
