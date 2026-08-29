@@ -8,7 +8,7 @@ library: rake
 タスクは一つ以上の関連するアクションと事前タスクを持ちます。
 タスクを実行すると、まず始めに全ての事前タスクを一度だけ実行してから自身のアクションを実行します。
 
-タスクは通常 [m:Kernel#task], [m:Kernel#file] という便利なメソッドを使用して定義します。
+タスクは通常 [m:Rake::DSL#task], [m:Rake::DSL#file] という便利なメソッドを使用して定義します。
 
 ## Public Instance Methods
 

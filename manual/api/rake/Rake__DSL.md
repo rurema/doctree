@@ -3,7 +3,13 @@ library: rake
 include:
   - RakeFileUtils
 ---
-# reopen Kernel
+# module Rake::DSL
+
+Rakefile の中で使うタスク定義などの DSL メソッドを定義するモジュールです。
+
+`require "rake"` すると main オブジェクトがこのモジュールで
+extend されるため、Rakefile のトップレベルでは task や desc などを
+直接呼び出せます。
 
 ## Private Instance Methods
 
@@ -45,7 +51,7 @@ end
 
 ファイルを作成するタスクを定義します。
 
-主に [m:Kernel#directory] を定義するために使用します。
+主に [m:Rake::DSL#directory] を定義するために使用します。
 
 ### def directory(dir) -> ()
 

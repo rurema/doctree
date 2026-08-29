@@ -3,7 +3,7 @@ library: rake
 ---
 # class Rake::DefaultLoader
 
-[m:Kernel#import] で使用するデフォルトのローダーです。
+[m:Rake::DSL#import] で使用するデフォルトのローダーです。
 
 ## Public Instance Methods
 
