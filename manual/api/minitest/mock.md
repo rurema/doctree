@@ -1,5 +1,6 @@
 ---
 type: library
+until: "4.0"
 since: "1.9.1"
 category: Development
 ---

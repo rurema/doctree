@@ -28,7 +28,11 @@ Defaults:
   --local --no-details
 ```
 
+#%until 4.0
 # class Gem::Commands::SearchCommand < Gem::Commands::QueryCommand
+#%else
+# class Gem::Commands::SearchCommand < Gem::Command
+#%end
 
 指定された文字列を含む Gem パッケージを全て表示するためのクラスです。
 

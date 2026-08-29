@@ -1,5 +1,6 @@
 ---
 type: library
+until: "4.0"
 ---
 CGI のセッション管理を行うライブラリ。
 

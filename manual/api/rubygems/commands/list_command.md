@@ -28,6 +28,10 @@ Defaults:
   --local --no-details
 ```
 
+#%until 4.0
 # class Gem::Commands::ListCommand < Gem::Commands::QueryCommand
+#%else
+# class Gem::Commands::ListCommand < Gem::Command
+#%end
 
 Gem パッケージの名前を前方一致で検索するためのクラスです。
