@@ -260,7 +260,9 @@ p s.pre_match        # => "test "
 ```
 
 ### def eos? -> bool
+#%until 4.0
 ### def empty? -> bool
+#%end
 
 スキャンポインタが文字列の末尾を指しているなら true を、末尾以外を指しているなら false を返します。
 
@@ -275,8 +277,10 @@ s.scan(/\w+/)
 p s.eos?      # => true
 ```
 
+#%until 4.0
 [m:StringScanner#empty?] は将来のバージョンで削除される予定です。
 代わりに [m:StringScanner#eos?] を使ってください。
+#%end
 
 ### def exist?(regexp) -> Integer | nil
 #%#Ruby 1.8.6 以降は以下の記述に沿った仕様に変わります。
@@ -320,14 +324,18 @@ p s.getch                         # => nil
 ```
 
 ### def get_byte -> String | nil
+#%until 4.0
 ### def getbyte -> String | nil
+#%end
 
 1 バイトスキャンして文字列で返します。
 スキャンポインタをその後ろに進めます。
 スキャンポインタが文字列の末尾を指すなら nil を返します。
 
+#%until 4.0
 [m:StringScanner#getbyte] は将来のバージョンで削除される予定です。
 代わりに [m:StringScanner#get_byte] を使ってください。
+#%end
 
 ```ruby title="例"
 require 'strscan'
@@ -465,7 +473,9 @@ p s.matched_size # => nil
 ```
 
 ### def peek(bytes) -> String
+#%until 4.0
 ### def peep(bytes) -> String
+#%end
 
 スキャンポインタから長さ bytes バイト分だけ文字列を返します。
 
@@ -477,8 +487,10 @@ p s.peek(4) # => "test"
 
 また、このメソッドを実行してもスキャンポインタは移動しません。
 
+#%until 4.0
 [m:StringScanner#peep] は将来のバージョンでは削除される予定です。
 代わりに [m:StringScanner#peek] を使ってください。
+#%end
 
 - **param** `bytes` -- 0 以上の整数を指定します。
              ただし、スキャン対象の文字列の長さを超える分は無視されます。
@@ -686,13 +698,17 @@ p s.rest?       # => false
 ```
 
 ### def rest_size -> Integer
+#%until 4.0
 ### def restsize -> Integer
+#%end
 
 文字列の残りの長さを返します。
 stringscanner.rest.size と同じです。
 
+#%until 4.0
 [m:StringScanner#restsize] は将来のバージョンで削除される予定です。
 代わりに[m:StringScanner#rest_size] を使ってください。
+#%end
 
 ```ruby title="例"
 require 'strscan'
@@ -918,7 +934,9 @@ p s.scan(/\w+/)    # => "0123"
 ```
 
 ### def terminate -> self
+#%until 4.0
 ### def clear -> self
+#%end
 
 スキャンポインタを文字列末尾後まで進め、マッチ記録を捨てます。
 
@@ -940,8 +958,10 @@ p s[0]        # => nil
 p s.pos       # => 11
 ```
 
+#%until 4.0
 [m:StringScanner#clear] は将来のバージョンで削除される予定です。
 代わりに [m:StringScanner#terminate] を使ってください。
+#%end
 
 ### def unscan -> self
 

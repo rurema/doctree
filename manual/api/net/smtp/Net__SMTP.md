@@ -397,8 +397,13 @@ ready は obsolete です。
 - **param** `secret` -- 認証で使うパスワード
 - **param** `authtype` -- 認証の種類(:plain, :login, :cram_md5 のいずれか)
 
+#%until 3.3
 - **SEE** [m:Net::SMTP.start], [m:Net::SMTP#start], [m:Net::SMTP#auth_plain], [m:Net::SMTP#auth_login], [m:Net::SMTP#auth_cram_md5]
+#%else
+- **SEE** [m:Net::SMTP.start], [m:Net::SMTP#start]
+#%end
 
+#%until 3.3
 ### def auth_plain(user, secret) -> ()
 
 PLAIN 認証を行います。
@@ -432,6 +437,7 @@ CRAM-MD5 認証を行います。
 - **param** `user` -- 認証で使うアカウント名
 - **param** `secret` -- 認証で使うパスワード
 
+#%end
 ### def rset -> Net::SMTP::Response
 
 RSET コマンドを送ります。
@@ -520,7 +526,9 @@ QUIT が送られるため利用する必要はないはずです。
 #%# --- OMASK
 #%# --- CRAM_BUFSIZE
 
+#%until 3.3
 ### const Revision -> String
 
 ファイルのリビジョンです。使わないでください。
+#%end
 
