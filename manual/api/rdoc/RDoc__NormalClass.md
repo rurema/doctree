@@ -1,6 +1,11 @@
 ---
 library:
+#%since 3.4
+  - rdoc/code_object/normal_class
+#%end
+#%until 3.4
   - rdoc/normal_class
+#%end
 ---
 # class RDoc::NormalClass < RDoc::ClassModule
 

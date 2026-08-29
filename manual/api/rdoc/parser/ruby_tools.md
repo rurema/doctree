@@ -1,5 +1,6 @@
 ---
 type: library
+until: "4.1"
 include:
   - RDoc::RubyToken
 ---

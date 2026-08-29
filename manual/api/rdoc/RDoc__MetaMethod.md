@@ -1,6 +1,11 @@
 ---
 library:
+#%since 3.4
+  - rdoc/code_object/meta_method
+#%end
+#%until 3.4
   - rdoc/meta_method
+#%end
 ---
 # class RDoc::MetaMethod < RDoc::AnyMethod
 

@@ -1,6 +1,11 @@
 ---
 library:
+#%since 3.4
+  - rdoc/code_object/alias
+#%end
+#%until 3.4
   - rdoc/alias
+#%end
 ---
 # class RDoc::Alias < RDoc::CodeObject
 

@@ -1,6 +1,11 @@
 ---
 library:
+#%since 3.4
+  - rdoc/code_object/any_method
+#%end
+#%until 3.4
   - rdoc/any_method
+#%end
 ---
 # class RDoc::AnyMethod < RDoc::CodeObject
 
