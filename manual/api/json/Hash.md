@@ -1,7 +1,7 @@
 ---
 library: json
 include:
-  - JSON::Generator::GeneratorMethods::Hash
+  - JSON::Ext::Generator::GeneratorMethods::Hash
 ---
 # reopen Hash
 

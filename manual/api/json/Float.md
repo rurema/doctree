@@ -1,7 +1,7 @@
 ---
 library: json
 include:
-  - JSON::Generator::GeneratorMethods::Float
+  - JSON::Ext::Generator::GeneratorMethods::Float
 ---
 # reopen Float
 

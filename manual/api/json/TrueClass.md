@@ -1,6 +1,6 @@
 ---
 library: json
 include:
-  - JSON::Generator::GeneratorMethods::TrueClass
+  - JSON::Ext::Generator::GeneratorMethods::TrueClass
 ---
 # reopen TrueClass

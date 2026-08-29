@@ -1,11 +1,9 @@
 ---
 library: json
-alias:
-  - JSON::Ext::Generator::GeneratorMethods::Integer
 ---
-# module JSON::Generator::GeneratorMethods::Integer
+# module JSON::Ext::Generator::GeneratorMethods::Float
 
-[c:Integer] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
+[c:Float] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 ## Public Instance Methods
 ### def to_json(state_or_hash = nil) -> String
@@ -18,6 +16,6 @@ alias:
 ```ruby title="例"
 require "json"
 
-p 10.to_json # => "10"
+p (1.0).to_json # => "1.0"
 ```
 

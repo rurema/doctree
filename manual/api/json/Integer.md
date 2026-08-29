@@ -1,7 +1,7 @@
 ---
 library: json
 include:
-  - JSON::Generator::GeneratorMethods::Integer
+  - JSON::Ext::Generator::GeneratorMethods::Integer
 ---
 # reopen Integer
 

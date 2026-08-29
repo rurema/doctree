@@ -1,9 +1,11 @@
 ---
 library: json
 include:
-  - JSON::Generator::GeneratorMethods::String
+  - JSON::Ext::Generator::GeneratorMethods::String
 extend:
-  - JSON::Generator::GeneratorMethods::String::Extend
+#%until 4.0
+  - JSON::Ext::Generator::GeneratorMethods::String::Extend
+#%end
 ---
 # reopen String
 

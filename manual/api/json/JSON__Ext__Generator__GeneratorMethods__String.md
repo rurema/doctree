@@ -1,9 +1,7 @@
 ---
 library: json
-alias:
-  - JSON::Ext::Generator::GeneratorMethods::String
 ---
-# module JSON::Generator::GeneratorMethods::String
+# module JSON::Ext::Generator::GeneratorMethods::String
 
 [c:String] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
@@ -33,9 +31,9 @@ puts "𤘩宮城".to_json(ascii_only: true) # => "\ud851\ude29\u5bae\u57ce"
 
 ### def to_json_raw -> String
 
-自身に対して [m:JSON::Generator::GeneratorMethods::String#to_json_raw_object] を呼び出して [m:JSON::Generator::GeneratorMethods::Hash#to_json] した結果を返します。
+自身に対して [m:JSON::Ext::Generator::GeneratorMethods::String#to_json_raw_object] を呼び出して [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json] した結果を返します。
 
-- **SEE** [m:JSON::Generator::GeneratorMethods::String#to_json_raw_object], [m:JSON::Generator::GeneratorMethods::Hash#to_json]
+- **SEE** [m:JSON::Ext::Generator::GeneratorMethods::String#to_json_raw_object], [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]
 
 ### def to_json_raw_object -> Hash
 

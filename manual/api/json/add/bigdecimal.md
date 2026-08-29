@@ -26,9 +26,9 @@ JSON のオブジェクトから [c:BigDecimal] のオブジェクトを生成�
 
 自身を JSON 形式の文字列に変換して返します。
 
-内部的にはハッシュにデータをセットしてから [m:JSON::Generator::GeneratorMethods::Hash#to_json] を呼び出しています。
+内部的にはハッシュにデータをセットしてから [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json] を呼び出しています。
 
-- **param** `args` -- 引数はそのまま [m:JSON::Generator::GeneratorMethods::Hash#to_json]
+- **param** `args` -- 引数はそのまま [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]
             に渡されます。
 
 ```ruby title="例"
@@ -36,4 +36,4 @@ require 'json/add/bigdecimal'
 p BigDecimal('0.123456789123456789').to_json # => "{\"json_class\":\"BigDecimal\",\"b\":\"36:0.123456789123456789e0\"}"
 ```
 
-- **SEE** [m:JSON::Generator::GeneratorMethods::Hash#to_json]
+- **SEE** [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]

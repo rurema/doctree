@@ -18,9 +18,9 @@ JSON のオブジェクトから Ruby のオブジェクトを生成して返し
 
 自身を JSON 形式の文字列に変換して返します。
 
-内部的にはハッシュにデータをセットしてから [m:JSON::Generator::GeneratorMethods::Hash#to_json] を呼び出しています。
+内部的にはハッシュにデータをセットしてから [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json] を呼び出しています。
 
-- **param** `args` -- 引数はそのまま [m:JSON::Generator::GeneratorMethods::Hash#to_json] に渡されます。
+- **param** `args` -- 引数はそのまま [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json] に渡されます。
 
 ```ruby title="例"
 require "json/add/core"
@@ -29,4 +29,4 @@ Person = Struct.new(:name, :age)
 p Person.new("tanaka", 29).to_json # => "{\"json_class\":\"Person\",\"v\":[\"tanaka\",29]}"
 ```
 
-- **SEE** [m:JSON::Generator::GeneratorMethods::Hash#to_json]
+- **SEE** [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]

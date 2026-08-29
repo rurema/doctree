@@ -1,14 +1,13 @@
 ---
 library: json
-alias:
-  - JSON::Ext::Generator::GeneratorMethods::String::Extend
+until: "4.0"
 ---
-# module JSON::Generator::GeneratorMethods::String::Extend
+# module JSON::Ext::Generator::GeneratorMethods::String::Extend
 
 [c:String] に JSON で使用する特異メソッドを追加するためのモジュールです。
 
 ## Class Methods
-### def JSON::Generator::GeneratorMethods::String::Extend.json_create(hash) -> String
+### def JSON::Ext::Generator::GeneratorMethods::String::Extend.json_create(hash) -> String
 
 JSON のオブジェクトから Ruby の文字列を生成して返します。
 
