@@ -79,9 +79,15 @@ ne_width=6>], @singleline_width=6>, @sharing_detection=false>
 [c:PP] は [c:PrettyPrint] のサブクラスですので、上で PrettyPrint のメソッドとされているものは
 PP のメソッドでもあります。
 
+pp ライブラリは読み込み時に組み込みクラスの pretty_print メソッドを定義するため、
+[m:Kernel?.pp] の初回呼び出しによる自動 require に頼ると、先に書いた再定義が上書きされてしまいます。
+カスタマイズする場合はあらかじめ pp を require してください。
+
 以下は Hash の pretty printing のカスタマイズの例です。
 
 ```ruby
+require 'pp'
+
 class Hash
   def pretty_print(q)
     q.group(2, "<hash>") do
@@ -119,10 +125,10 @@ pp h
 
 # =>
 # <hash>
-#   :d => "dddddddddd...",
 #   :a => "aaaaa",
 #   :b => "bbbbbbbbbb",
-#   :c => "cccccccccc..."
+#   :c => "cccccccccc...",
+#   :d => "dddddddddd..."
 # </hash>
 ```
 
