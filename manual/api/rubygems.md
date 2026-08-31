@@ -304,13 +304,6 @@ GEM_SKIP=libA:libB ruby-I../libA -I../libB ./mycode.rb
 
 このライブラリがインストールされているディレクトリの親ディレクトリを返します。
 
-### module_function def source_index -> Gem::SourceIndex
-
-[m:Gem?.path] にある [c:Gem::Specification] のキャッシュを返します。
-インストールされている [c:Gem::Specification] のインデックスを返します
-
-- **SEE** `Gem::SourceIndex`, [c:Gem::Specification]
-
 ### module_function def win_platform? -> bool
 
 Windows プラットフォームであれば真を返します。そうでなければ偽を返します。
@@ -327,21 +320,9 @@ Gem をインストールするために必要なサブディレクトリを適�
 
 ディレクトリを作成する権限が無い場合もこのメソッドからは例外は発生しません。
 
-- **SEE** [m:Gem::DIRECTORIES]
-
 ### module_function def path -> Array
 
 Gem を検索するパスの配列を返します。
-
-### module_function def set_home
-
-Gem のホームディレクトリをセットします。
-
-### module_function def set_paths
-
-Gem を検索するパスをセットします。
-
-- **SEE** [m:Gem?.path]
 
 ### module_function def ruby -> String
 
@@ -349,18 +330,17 @@ Gem を検索するパスをセットします。
 
 ## Constants
 
+#%until 4.0
 ### const ConfigMap -> Hash
 
 [m:RbConfig::CONFIG] の中からこのライブラリで使用するものを抽出して定義したハッシュ。
 
-### const DIRECTORIES -> Array
-
-Gem のホームディレクトリ以下に作成されるサブディレクトリの配列。
-
-### const RubyGemsVersion        -> String
-### const RubyGemsPackageVersion -> String
+#%end
+#%until 4.0
+### const RubyGemsVersion -> String
 
 このライブラリのバージョンを表す文字列。
+#%end
 
 ### const WIN_PATTERNS -> Array
 
@@ -381,60 +361,4 @@ Gem をロードできなかった場合に発生するエラーです。
 ロードに失敗した Gem の名前をセットします。
 
 - **param** `gem_name` -- Gem の名前を指定します。
-
-### def version_requirement -> Get::Requirement
-
-ロードに失敗した Gem の必要条件を返します。
-
-- **SEE** [c:Gem::Requirement], [m:Gem::Dependency#version_requirements]
-
-### def version_requirement=(version_requirement)
-
-ロードに失敗した Gem の必要条件をセットします。
-
-- **param** `version_requirement` -- [c:Gem::Requirement] のインスタンスをセットします。
-
-- **SEE** [c:Gem::Requirement], [m:Gem::Dependency#version_requirements]
-
-# module Gem::QuickLoader
-
-prelude.c で定義されている内部用のモジュールです。
-
-## Public Instance Methods
-
-### def calculate_integers_for_gem_version
-
-prelude.c で定義されている内部用のメソッドです。
-
-### def const_missing
-
-prelude.c で定義されている内部用のメソッドです。
-
-### def method_missing
-
-prelude.c で定義されている内部用のメソッドです。
-
-### def push_all_highest_version_gems_on_load_path
-
-prelude.c で定義されている内部用のメソッドです。
-
-### def push_gem_version_on_load_path
-
-prelude.c で定義されている内部用のメソッドです。
-
-## Singleton Methods
-
-### def Gem::QuickLoader.load_full_rubygems_library
-
-prelude.c で定義されている内部用のメソッドです。
-
-## Constants
-
-### const GemPaths -> Hash
-
-prelude.c で定義されている内部用の定数です。
-
-### const GemVersions -> Hash
-
-prelude.c で定義されている内部用の定数です。
 
