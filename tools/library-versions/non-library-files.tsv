@@ -79,17 +79,17 @@ json/Integer
 json/JSON	
 json/JSON__CircularDatastructure	
 json/JSON__Coder	
+json/JSON__Ext__Generator__GeneratorMethods__Array	
+json/JSON__Ext__Generator__GeneratorMethods__FalseClass	
+json/JSON__Ext__Generator__GeneratorMethods__Float	
+json/JSON__Ext__Generator__GeneratorMethods__Hash	
+json/JSON__Ext__Generator__GeneratorMethods__Integer	
+json/JSON__Ext__Generator__GeneratorMethods__NilClass	
+json/JSON__Ext__Generator__GeneratorMethods__Object	
+json/JSON__Ext__Generator__GeneratorMethods__String	
+json/JSON__Ext__Generator__GeneratorMethods__String__Extend	
+json/JSON__Ext__Generator__GeneratorMethods__TrueClass	
 json/JSON__GeneratorError	
-json/JSON__Generator__GeneratorMethods__Array	
-json/JSON__Generator__GeneratorMethods__FalseClass	
-json/JSON__Generator__GeneratorMethods__Float	
-json/JSON__Generator__GeneratorMethods__Hash	
-json/JSON__Generator__GeneratorMethods__Integer	
-json/JSON__Generator__GeneratorMethods__NilClass	
-json/JSON__Generator__GeneratorMethods__Object	
-json/JSON__Generator__GeneratorMethods__String	
-json/JSON__Generator__GeneratorMethods__String__Extend	
-json/JSON__Generator__GeneratorMethods__TrueClass	
 json/JSON__JSONError	
 json/JSON__MissingUnicodeSupport	
 json/JSON__NestingError	
@@ -337,12 +337,12 @@ ractor/Port
 ractor/RemoteError	
 ractor/UnsafeError	
 rake/FileUtils	
-rake/Kernel	
 rake/Module	
 rake/Rake	
 rake/RakeFileUtils	
 rake/Rake__Application	
 rake/Rake__Cloneable	
+rake/Rake__DSL	
 rake/Rake__DefaultLoader	
 rake/Rake__EarlyTime	
 rake/Rake__FileCreationTask	
@@ -381,7 +381,6 @@ rdoc/RDoc__TopLevel
 rdoc/RDoc__constants	(no front matter)
 rdoc/markup/simple_markup	(no front matter)
 rdoc/parsers/parse_c	
-rdoc/parsers/parse_f95	
 rdoc/parsers/parse_rb	
 rdoc/parsers/parse_simple	
 rdoc/parsers/parserfactory	
@@ -456,7 +455,6 @@ rinda/Rinda__TupleSpaceProxy
 rss/2.0	
 rss/Parser	
 rss/RSS__BaseTrackBackModel	
-rss/RSS__DublinCoreModel	
 rss/RSS__ImageFaviconModel	
 rss/RSS__ImageFaviconModel__ImageFavicon	
 rss/RSS__ImageItemModel	
@@ -479,9 +477,9 @@ rss/RSS__Rss__Channel__Item
 rss/RSS__Rss__Channel__Item__Category	
 rss/RSS__Rss__Channel__Item__Enclosure	
 rss/RSS__Rss__Channel__Item__Source	
+rss/RSS__Rss__Channel__SkipDays	
+rss/RSS__Rss__Channel__SkipHours	
 rss/RSS__Rss__Channel__TextInput	
-rss/RSS__Rss__SkipDays	
-rss/RSS__Rss__SkipHours	
 rss/RSS__TaxonomyTopicModel	
 rss/RSS__TaxonomyTopicModel__TaxonomyTopic	
 rss/RSS__TaxonomyTopicsModel	

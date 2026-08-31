@@ -3,8 +3,11 @@ import os
 import re
 import sys
 
-ROOT = "/home/debian/rurema/doctree/manual/api"
-OUT = "/tmp/claude-1000/-home-debian-rurema/58ba4581-c6ee-4450-bb72-29d0c6d1cc48/scratchpad/lib-check"
+# usage: extract_doctree_libs.py [manual/api の場所] [出力先]
+# 省略時はリポジトリ内の位置から解決する(出力先= tools/library-versions/)
+_HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = sys.argv[1] if len(sys.argv) > 1 else os.path.normpath(os.path.join(_HERE, "..", "..", "..", "manual", "api"))
+OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.normpath(os.path.join(_HERE, ".."))
 
 def strip_quotes(s):
     s = s.strip()

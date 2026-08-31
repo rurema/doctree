@@ -2,6 +2,7 @@
 require "set"
 
 SP = File.expand_path(__dir__)
+BASE = File.expand_path("..", SP)  # データ一式の置き場(tools/ の親= library-versions/)
 DOC_VERSIONS = %w[3.0 3.1 3.2 3.3 3.4 4.0 4.1]
 RUBY_SRC = { "3.0" => "3.0", "3.1" => "3.1", "3.2" => "3.2", "3.3" => "3.3",
              "3.4" => "3.4", "4.0" => "4.0", "4.1" => "master" }
@@ -41,13 +42,14 @@ SUPPLEMENT = {
   "win32/registry" => { kind: "ext", vers: %w[3.0 3.1 3.2 3.3 3.4 4.0] }, # 4.1 は bundled(win32-registry)側で載る
   "win32/resolv"   => { kind: "ext", vers: %w[3.0 3.1 3.2 3.3 3.4 4.0 4.1] },
   "reline"       => { kind: "default-gem", vers: %w[3.0 3.1] },  # 3.0/3.1 の rdoc に記載漏れ(ツリー実在)
+  "error_highlight" => { kind: "default-gem", vers: %w[3.1] },   # 3.1 の rdoc に記載漏れ(v3_1_7 ツリーに lib/error_highlight 実在。記載は 3.2 から)
   "io/nonblock"  => { kind: "default-gem", vers: %w[3.4] },      # 3.4 md に記載漏れ(ローカル実測で default gem)
   "io/wait"      => { kind: "default-gem", vers: %w[3.4] },      # 同上
   "cgi"          => { kind: "lib", vers: %w[4.0 4.1] },          # 4.0 で gem 廃止・escape 系のみ lib/cgi.rb+ext/cgi として残存
 }
 
 # --- rurema 名一覧(名寄せの正: gem 名のダッシュを require パスのスラッシュへ寄せる判定に使う) ---
-RUREMA_NAMES = File.readlines("#{SP}/rurema-libs.tsv").drop(1)
+RUREMA_NAMES = File.readlines("#{BASE}/rurema-libs.tsv").drop(1)
                    .map { |l| l.split("\t")[0].downcase }.to_set
 
 def norm(name)
@@ -61,7 +63,7 @@ end
 ruby = {} # doc_ver => { unit => kind }
 RUBY_SRC.each do |dv, src|
   units = {}
-  File.readlines("#{SP}/ruby-stdlib/#{src}.tsv").drop(1).each do |l|
+  File.readlines("#{BASE}/ruby-stdlib/#{src}.tsv").drop(1).each do |l|
     name, kind, source = l.chomp.split("\t")
     keys = MULTI_ALIAS[name] || [ALIAS[name] || norm(name)]
     keys.each do |k|
@@ -79,7 +81,7 @@ end
 ruby_unit_keys = ruby.values.flat_map(&:keys).to_set
 
 # --- rurema 側読み込み ---
-rurema = File.readlines("#{SP}/rurema-libs.tsv").drop(1).map do |l|
+rurema = File.readlines("#{BASE}/rurema-libs.tsv").drop(1).map do |l|
   name, since, until_, = l.chomp.split("\t", 4)
   { name: name, since: (since.to_s.empty? ? nil : since), until: (until_.to_s.empty? ? nil : until_) }
 end
@@ -117,7 +119,7 @@ end
 # --- マトリクス ---
 all_units = (ruby_unit_keys + rurema_units.keys).sort
 KIND_CODE = { "lib" => "L", "ext" => "E", "default-gem" => "D", "bundled-gem" => "B" }
-File.open("#{SP}/matrix-libs.tsv", "w") do |f|
+File.open("#{BASE}/matrix-libs.tsv", "w") do |f|
   f.puts(["unit", *DOC_VERSIONS].join("\t"))
   all_units.each do |u|
     cells = DOC_VERSIONS.map do |v|
@@ -130,7 +132,7 @@ File.open("#{SP}/matrix-libs.tsv", "w") do |f|
 end
 
 # --- findings ---
-File.open("#{SP}/findings.md", "w") do |f|
+File.open("#{BASE}/findings.md", "w") do |f|
   f.puts "# ライブラリ単位突き合わせ(自動生成: crosscheck.rb)"
   f.puts
   f.puts "## A. Ruby に存在するが rurema にページがない(版別)"

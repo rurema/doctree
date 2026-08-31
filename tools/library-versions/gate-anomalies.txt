@@ -1,43 +1,22 @@
-対象: type: library を持つファイル(_builtin/ 除く)のうち、ファイル先頭 5 行に
-#%since / #%until を含むもの。該当 10 件。front matter の since/until キー以外の
-版ゲートを使っている箇所として、2 種類のパターンが見つかった。
+先頭5行に #%since / #%until を含む library ファイル:
+cgi: line 5: #%until 4.0
+debug: line 5: #%since 3.1
+irb/cmd/nop: line 5: #%until 3.4
+irb/color: line 5: #%until 4.1
+irb/completion: line 5: #%since 3.1
+irb/ext/tracer: line 4: #%until 3.1
+irb/ext/use-loader: line 4: #%until 3.4
+irb/history: line 5: #%since 3.4
+irb/pager: line 5: #%since 4.0
+irb/ruby-lex: line 4: #%until 4.1
+rdoc/code_objects: line 5: #%since 3.4
+rubygems/commands/server_command: line 5: #%until 3.1
+yaml/dbm: line 5: #%until 3.1
 
-【パターン A】front matter 内の require: リストの条件分岐(ライブラリ自体の
-since/until ではなく、「どの require を書くか」がバージョンで変わるだけ)
-
-- irb/color        : require: 内 `#%until 4.1 - ripper #%else - prism #%end`
-- irb/completion   : require: 内 `#%since 3.1 - irb/ruby-lex #%end`
-- irb/ext/tracer   : require: 内 `#%until 3.1 - tracer #%end`
-- irb/ext/use-loader: require: 内 `#%until 3.4 - irb/cmd/load #%end`
-- irb/history      : require: 内 `#%since 3.4 - pathname #%end`(front matter に
-                     since: "3.3" も別途あり。TSV に反映済み)
-- irb/pager        : require: 内 `#%since 4.0 - reline #%end`(front matter に
-                     since: "3.3" も別途あり。TSV に反映済み)
-- irb/ruby-lex     : require: 内 `#%until 4.1 - ripper #%else - prism #%end`
-- rubygems/commands/server_command: require: 内 `#%until 3.1 - rubygems/server #%end`
-- yaml/dbm         : require: 内 `#%until 3.1 - dbm #%end`
-
-【パターン B】front matter の直後、本文全体(または本文の広い範囲)を
-#%since/#%else/#%end で丸ごと版分岐しているもの(= front matter に
-since/until を持たない代わりに、本文の記述内容自体をバージョンで出し分け)
-
-- debug.md: 4 行目で front matter が閉じた直後(5 行目)に `#%since 3.1` があり、
-  15 行目 `#%else`、198 行目 `#%end` で閉じる。本文全体(3.1 以降=削除の説明/
-  それ以前=デバッガ本体の説明)が丸ごと版分岐。front matter 自体には
-  since/until キーはない(category: Development のみ)。
-- rubygems/commands/server_command.md: 上記パターン A に加え、本文側にも
-  11〜13 行目に `#%since 3.1 ... #%end` の版ゲート段落が別途ある。
-- yaml/dbm.md: 上記パターン A に加え、本文側にも計 6 箇所
-  (9,18,25 / 27,29,31 / 33,37,39 / 53,55,57 / 165,167,169 / 192,194,196 行目)
-  で `#%since 3.1 ... #%else ... #%end` の段落単位版分岐があり、
-  クラス階層(3.0=DBM の別名/3.1+=Object 継承)の説明を出し分けている。
-  front matter 自体には since/until キーはない。
-
-備考: irb/ext/tracer.md も本文側(8,15,28,40,48 行目起点)に同様の
-`#%since 3.1 ... #%else ... #%end` 段落分岐が複数あるが、front matter 内の
-条件分岐(パターン A)がファイル先頭 5 行の判定に該当したため上記に分類。
-
-まとめ: 「front matter の since/until 以外の版ゲート」を持つ library ファイルは
-実質 10 件(重複なし)で、上記 A/B の 2 パターンいずれか(または両方)に該当する。
-それ以外の 355 件の library ファイルには、先頭 5 行に #%since/#%until は
-見つからなかった。
+注記(2026-08-31 再採取): いずれも「front matter の since/until キー以外の版ゲート」で、
+- require: リストのゲート(どの require を書くかが版で変わる)
+  = irb 系 7 件・rdoc/code_objects・rubygems/commands/server_command・yaml/dbm
+- 本文全体の版分岐(ページ自体の since/until ではない)= debug・cgi・irb/cmd/nop
+の 2 パターン。cgi(#3521)・irb/cmd/nop(#3531)・rdoc/code_objects(#3528)は
+修正 PR で導入された正当なゲート。パターン別の詳細分析(2026-08-28 の修正前版)は
+本ディレクトリを追加した初回コミットの同ファイルを参照。

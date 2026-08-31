@@ -6,24 +6,28 @@ ruby/ruby・各 gem のソースツリーに突き合わせた実測データ一
 メソッド単位(全エントリの実在)の 3 段階で検証した。
 組み込みメソッド版の [tools/method-versions](../method-versions/README.md) の姉妹編。
 
-作成: 2026-08-28。分析の本文は [report.md](report.md)、
-この検証で見つかった問題は doctree #3514〜#3531 の各 PR で対応済み
-(**本データは修正前のスナップショット**)。
+作成: 2026-08-28・再採取: 2026-08-31。分析の本文は [report.md](report.md)。
+初回採取で見つかった問題は doctree #3514〜#3531 の各 PR で対応済みで、
+**本データはその修正を適用した後の再採取版**
+(修正前の初回採取データは、本ディレクトリを追加した最初のコミットを参照)。
 
 ## データ生成時点(スナップショット情報)
 
-- doctree 側(`rurema-libs.tsv`・`entries/`): master 4ee3411c2 時点
-  (#3511 マージ直後・#3514 以降の修正前)
+- doctree 側(`rurema-libs.tsv`・`entries/`)と sweep・probe・集計:
+  master 9c18dceb5(#3514〜#3531 適用済み)時点・2026-08-31 再採取
 - 実測バイナリ: 3.0.7 / 3.1.7 / 3.2.11 = `ghcr.io/ruby/all-ruby` Docker、
   3.3.12 / 3.4.8 / 4.0.6 = mise インストール。4.1 はバイナリなし
   (ツリー判定のみ)
-- ソースツリー(`github-trees/`・`ruby-stdlib/raw/`): ruby/ruby の
-  v3_0_7 / v3_1_7 / v3_2_11 / v3_3_12 / v3_4_10 / v4.0.6 / master と、
-  bundled gem 各リポジトリのピン版タグ。いずれも 2026-08-28 に
-  api.github.com から取得
+- ソースツリー(`github-trees/`・`ruby-stdlib/raw/`)と `local-rubies/`:
+  ruby/ruby の v3_0_7 / v3_1_7 / v3_2_11 / v3_3_12 / v3_4_10 / v4.0.6 /
+  master と、bundled gem 各リポジトリのピン版タグ。いずれも 2026-08-28 に
+  api.github.com から取得(Ruby 側は不変のため再採取時も取り直していない)
 - ローカル環境の注意: 3.4.8 にはピン版より新しい gem
-  (minitest 6.0.x・net-imap 0.6.2 等)が混入していた。この影響は
-  境界確定時に x.y.0 タグで補正済み(後述の「既知の限界」参照)
+  (minitest 6.0.x・net-imap 0.6.2・json 等)が混入していた。この影響は
+  境界確定時に x.y.0 タグで補正済み(後述の「既知の限界」参照)。
+  json のドリフトにより `JSON::Ext::Generator::GeneratorMethods` 系
+  エントリの 3.4 列は no-class になる(mismatch-matrix の mixed 判定は
+  これ由来)
 
 ## ファイル構成
 
@@ -49,11 +53,13 @@ ruby/ruby・各 gem のソースツリーに突き合わせた実測データ一
 
 doctree/bitclust が変わったら次の順で再生成できる(DB はスクラッチ領域に作ること):
 
-1. `tools/extract_doctree_libs.py` 相当で `rurema-libs.tsv` を再抽出(front matter の type: library を走査)
+1. `python3 tools/extract_doctree_libs.py`(引数省略でリポジトリ内の位置から解決)で
+   `rurema-libs.tsv`・`non-library-files.tsv`・`gate-anomalies.txt`・`notes-doctree.md` を再抽出
 2. `bundle exec bitclust --database=DB init/update --markdowntree=manual/api` で各版 DB を構築し、`tools/extract_entries.rb DB > entries/entries-<v>.tsv`
 3. `tools/gen_active_lists.rb rurema-libs.tsv require-check/` → `tools/sweep2.sh <ruby> active-<v>.txt req2-<v>.tsv tools/req_classify.rb` で require 可否(3.0〜3.2 は all-ruby Docker: `/all-ruby/build/<ver>/bin/ruby`)
 4. `tools/split_by_lib.rb entries-<v>.tsv split-<v>` → `tools/run_probe.sh <ruby> split-<v> tools/probe.rb probe2-<v>.tsv`
-5. `tools/aggregate.rb <dir>` で `mismatch-matrix.tsv`、`tools/crosscheck.rb` でライブラリ単位マトリクス
+5. `tools/aggregate.rb <dir>` で `mismatch-matrix.tsv`、`ruby tools/crosscheck.rb`
+   (このディレクトリ基準で入出力)で `matrix-libs.tsv`・`findings.md`
 6. ruby-stdlib 側は `tools/parse_stdlib_doc.rb`(gh api で `doc/standard_library.*`・`gems/bundled_gems` を取得してから)
 
 `tools/triage_script.rb`・`triage_worker.rb`・`github-trees/tools/*.rb` は採取時の

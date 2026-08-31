@@ -5,6 +5,23 @@
 ツリー裏取り: ruby/ruby 7 ref の lib/ext 再帰ツリー+bundled gem リポジトリのピン版ツリー(gh api)。
 4.1(master)はツリー判定のみ(バイナリなし= method-versions と同じ制約)。
 
+## 更新(2026-08-31): 修正適用後の再採取
+
+以下の A/B の分析本文は 2026-08-28 の初回採取(修正前)に基づく調査記録で、
+発見はすべて doctree #3514〜#3531 で対応済み。同梱データは修正マージ後の
+master 9c18dceb5 で再採取した版(doctree 側抽出・sweep・probe・集計を再実行。
+ソースツリー系スナップショットは Ruby 側不変のため 08-28 のまま)。主な変化:
+
+- mismatch-matrix: 709 → 630 エントリ。残りは platform-const 309(socket/etc)と
+  環境起因・既知の偽陰性(rss/mutex_m の no-class・yaml/dbm・readline・
+  システム OpenSSL 依存= B-1 参照)が中心
+- findings: A 残= set(3.2〜3.4)のみ・B 残= thread(墓標として妥当= A-3)のみ
+- 残課題(改名修正でクラス解決が通り新たに可視化):
+  `JSON::Ext::Generator::GeneratorMethods::String#to_json_raw`/`#to_json_raw_object`
+  が 4.0 で no-method(until 候補・要精査)。なお同系エントリの 3.4 列の
+  no-class はローカル json ドリフト起因(README の既知の限界参照)
+- 修正前後の全差分は、本ディレクトリを追加した初回コミットとの diff を参照
+
 ## 測定の信頼性メモ
 
 - 4.0.6 ローカルの bundled gem はピン版と完全一致(検証済み)。3.4.8 は minitest 6.0.x・net-imap 0.6.2 など**ピンより新しい gem が混入**= 3.4 の bundled gem 境界判定には使わない(3.3 と 4.0 で挟む)
@@ -59,8 +76,7 @@
 - psych: Kernel#y は require "psych/y" が必要(文書の require 案内確認)
 - rss の残 21(mixin 由来を含む)+openssl の Digest DSS/DSS1/MD2/MDC2/SHA・Engine・EGD 系= **システム OpenSSL 依存の消滅**(Ruby 版でなく OpenSSL 3 環境で消える)→ 版ゲートでなく記述の編集判断
 
-## データ(このスクラッチパッド内・セッション限り)
+## データ
 
-- file-check/: req2-<v>.tsv(require 分類)・active-<v>.txt・github/(7 ref+gem ピン版ツリー・tree-4.1.tsv)
-- method-check/: entries-<v>.tsv(DB 抽出)・probe2-<v>.tsv・mismatch-matrix.tsv(709 行)・always-ng-triage.tsv(291 行)・各スクリプト(extract_entries.rb, probe.rb, aggregate.rb, triage_script.rb ほか= 再現可能)
-- 恒久化するなら doctree の tools/(method-versions と同型の tools/library-versions/ 等)への dataset PR が候補
+本ディレクトリに同梱(構成と再生成手順は [README.md](README.md))。
+`always-ng-triage.*`・`boundary-report.md` は 2026-08-28 調査時の記録。

@@ -3,7 +3,7 @@ abbrev	Do	Do	Do	Do	Bo	Bo	Bo
 base64	Do	Do	Do	Do	Bo	Bo	Bo
 benchmark	Do	Do	Do	Do	Do	Bo	Bo
 bigdecimal	Do	Do	Do	Do	Bo	Bo	Bo
-bundler	D.	D.	D.	D.	D.	D.	D.
+bundler	Do	Do	Do	Do	Do	Do	Do
 cgi	Do	Do	Do	Do	Do	Lo	Lo
 cmath	..	..	..	..	..	..	..
 continuation	Eo	Eo	Eo	Eo	Eo	Eo	Eo
@@ -19,7 +19,7 @@ drb	Do	Do	Do	Do	Bo	Bo	Bo
 e2mmap	..	..	..	..	..	..	..
 english	Do	Do	Do	Do	Do	Do	Do
 erb	Do	Do	Do	Do	Do	Do	Do
-error_highlight	..	..	D.	D.	D.	D.	D.
+error_highlight	..	Do	Do	Do	Do	Do	Do
 etc	Do	Do	Do	Do	Do	Do	Do
 fcntl	Do	Do	Do	Do	Do	Do	Do
 fiber	Eo	..	..	..	..	..	..
@@ -42,13 +42,12 @@ minitest	Bo	Bo	Bo	Bo	Bo	Bo	Bo
 mkmf	Lo	Lo	Lo	Lo	Lo	Lo	Lo
 monitor	Eo	Eo	Eo	Eo	Eo	Eo	Eo
 mutex_m	Do	Do	Do	Do	Bo	Bo	Bo
-net/ftp	Do	Bo	Bo	Bo	Bo	Bo	.o
+net/ftp	Do	Bo	Bo	Bo	Bo	Bo	..
 net/http	Do	Do	Do	Do	Do	Do	Do
 net/imap	Do	Bo	Bo	Bo	Bo	Bo	Bo
-net/pop	Do	Bo	Bo	Bo	Bo	Bo	.o
+net/pop	Do	Bo	Bo	Bo	Bo	Bo	..
 net/protocol	Do	Do	Do	Do	Do	Do	Do
 net/smtp	Do	Bo	Bo	Bo	Bo	Bo	Bo
-net/telnet	.o	.o	.o	.o	.o	.o	.o
 nkf	Do	Do	Do	Do	Bo	Bo	Bo
 objspace	Eo	Eo	Eo	Eo	Eo	Eo	Eo
 observer	Do	Do	Do	Do	Bo	Bo	Bo
@@ -71,11 +70,11 @@ pty	Eo	Eo	Eo	Eo	Eo	Eo	Eo
 racc	Do	Do	Do	Bo	Bo	Bo	Bo
 rake	Bo	Bo	Bo	Bo	Bo	Bo	Bo
 rbconfig	Lo	Lo	Lo	Lo	Lo	Lo	Lo
-rbs	B.	B.	B.	B.	B.	B.	B.
+rbs	Bo	Bo	Bo	Bo	Bo	Bo	Bo
 rdoc	Do	Do	Do	Do	Do	Bo	Bo
 readline	Do	Do	Do	Do	Do	Bo	Bo
 reline	Do	Do	Do	Do	Do	Bo	Bo
-repl_type_completor	..	..	..	..	B.	B.	B.
+repl_type_completor	..	..	..	..	Bo	Bo	Bo
 resolv	Do	Do	Do	Do	Do	Do	Do
 resolv-replace	Do	Do	Do	Do	Bo	Bo	Bo
 rexml	Bo	Bo	Bo	Bo	Bo	Bo	Bo
@@ -109,7 +108,7 @@ timeout	Do	Do	Do	Do	Do	Do	Do
 tmpdir	Do	Do	Do	Do	Do	Do	Do
 tracer	Do	..	..	..	..	..	..
 tsort	Do	Do	Do	Do	Do	Do	Bo
-typeprof	B.	B.	B.	B.	B.	B.	B.
+typeprof	Bo	Bo	Bo	Bo	Bo	Bo	Bo
 ubygems	..	..	..	..	..	..	..
 un	Do	Do	Do	Do	Do	Do	Do
 uri	Do	Do	Do	Do	Do	Do	Do
@@ -117,6 +116,5 @@ weakref	Do	Do	Do	Do	Do	Do	Do
 win32/registry	Eo	Eo	Eo	Eo	Eo	Eo	Bo
 win32/resolv	Eo	Eo	Eo	Eo	Eo	Eo	Eo
 win32ole	Do	Do	Do	Do	Do	Bo	Bo
-xmlrpc	.o	.o	.o	.o	.o	.o	.o
 yaml	Do	Do	Do	Do	Do	Do	Do
 zlib	Do	Do	Do	Do	Do	Do	Do

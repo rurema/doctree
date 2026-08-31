@@ -10,12 +10,13 @@ bigdecimal/ludcmp
 bigdecimal/math			
 bigdecimal/newton			
 bigdecimal/util			
+bundler			Development
 cgi			Network
-cgi/cookie			
-cgi/core			
-cgi/html			
-cgi/session			
-cgi/session/pstore			
+cgi/cookie		4.0	
+cgi/core		4.0	
+cgi/html		4.0	
+cgi/session		4.0	
+cgi/session/pstore		4.0	
 cgi/util			
 cmath		2.7.0	Math
 continuation			
@@ -43,6 +44,7 @@ drb/timeridconv
 drb/unix			
 e2mmap		2.7.0	
 erb			Text
+error_highlight	3.1		Development
 etc			Unix
 expect			CUI
 fcntl			I/O
@@ -64,7 +66,7 @@ irb			Development
 irb/cmd/chws		3.4	
 irb/cmd/help		3.4	
 irb/cmd/load		3.4	
-irb/cmd/nop			
+irb/cmd/nop		4.0	
 irb/cmd/pushws		3.4	
 irb/cmd/subirb		3.4	
 irb/color			
@@ -79,7 +81,7 @@ irb/ext/history		3.3
 irb/ext/loader			
 irb/ext/math-mode		2.5.0	
 irb/ext/multi-irb			
-irb/ext/save-history		3.4	
+irb/ext/save-history		3.3	
 irb/ext/tracer			
 irb/ext/use-loader			
 irb/ext/workspaces			
@@ -119,26 +121,24 @@ json/add/regexp
 json/add/struct			
 json/add/symbol			
 json/add/time			
-json/editor			
 kconv			CharacterEncoding
 logger			
 mathn		2.5.0	Math
 matrix			Math
 minitest/autorun	1.9.1		
-minitest/mock	1.9.1		Development
+minitest/mock	1.9.1	4.0	Development
 minitest/spec	1.9.1		Development
-minitest/unit	1.9.1		Development
+minitest/unit	1.9.1	4.0	Development
 mkmf			Development
 monitor			Thread
 mutex_m			Thread
-net/ftp			Network
+net/ftp		4.1	Network
 net/http			Network
 net/https			Network
 net/imap			Network
-net/pop			Network
+net/pop		4.1	Network
 net/protocol			Network
 net/smtp			Network
-net/telnet			Network
 nkf			CharacterEncoding
 objspace			
 observer			DesignPattern
@@ -164,35 +164,47 @@ psych			FileFormat
 pty			CUI
 racc/parser			
 rake			Development
-rake/classic_namespace			
 rake/clean			
-rake/gempackagetask			
 rake/loaders/makefile			
 rake/packagetask			
 rake/rake_test_loader			
-rake/rdoctask			
-rake/runtest			
 rake/tasklib			
 rake/testtask			
 rbconfig			Development
 rbconfig/sizeof			Development
+rbs			Development
 rdoc			FileFormat
-rdoc/alias			
-rdoc/anon_class			
-rdoc/any_method			
-rdoc/attr			
-rdoc/class_module			
+rdoc/alias		3.4	
+rdoc/anon_class		3.4	
+rdoc/any_method		3.4	
+rdoc/attr		3.4	
+rdoc/class_module		3.4	
 rdoc/code_object			
+rdoc/code_object/alias	3.4		
+rdoc/code_object/anon_class	3.4	4.1	
+rdoc/code_object/any_method	3.4		
+rdoc/code_object/attr	3.4		
+rdoc/code_object/class_module	3.4		
+rdoc/code_object/constant	3.4		
+rdoc/code_object/context	3.4		
+rdoc/code_object/ghost_method	3.4	4.1	
+rdoc/code_object/include	3.4		
+rdoc/code_object/meta_method	3.4	4.1	
+rdoc/code_object/normal_class	3.4		
+rdoc/code_object/normal_module	3.4		
+rdoc/code_object/require	3.4		
+rdoc/code_object/single_class	3.4		
+rdoc/code_object/top_level	3.4		
 rdoc/code_objects			
-rdoc/constant			
-rdoc/context			
+rdoc/constant		3.4	
+rdoc/context		3.4	
 rdoc/generator			
 rdoc/generator/darkfish			
 rdoc/generator/json_index			
 rdoc/generator/markup			
 rdoc/generator/ri			
-rdoc/ghost_method			
-rdoc/include			
+rdoc/ghost_method		3.4	
+rdoc/include		3.4	
 rdoc/known_classes			
 rdoc/markdown			
 rdoc/markdown/entities			
@@ -203,9 +215,9 @@ rdoc/markup/to_bs
 rdoc/markup/to_html			
 rdoc/markup/to_html_crossref			
 rdoc/markup/to_rdoc			
-rdoc/meta_method			
-rdoc/normal_class			
-rdoc/normal_module			
+rdoc/meta_method		3.4	
+rdoc/normal_class		3.4	
+rdoc/normal_module		3.4	
 rdoc/options			
 rdoc/parser			
 rdoc/parser/c			
@@ -213,18 +225,19 @@ rdoc/parser/changelog
 rdoc/parser/markdown			
 rdoc/parser/rd			
 rdoc/parser/ruby			
-rdoc/parser/ruby_tools			
+rdoc/parser/ruby_tools		4.1	
 rdoc/parser/simple			
 rdoc/parser/text			
 rdoc/rdoc.lib			
-rdoc/require			
-rdoc/single_class			
+rdoc/require		3.4	
+rdoc/single_class		3.4	
 rdoc/stats			
 rdoc/text			
 rdoc/token_stream			
-rdoc/top_level			
+rdoc/top_level		3.4	
 readline			CUI
 reline	2.7		CUI
+repl_type_completor	3.4		Development
 resolv			Network
 resolv-replace			Network
 rexml			FileFormat
@@ -243,7 +256,6 @@ ripper/lexer	1.9.0
 ripper/sexp	1.9.0		
 rss			FileFormat
 rubygems			
-rubygems/builder			
 rubygems/command			
 rubygems/command_manager			
 rubygems/commands/build_command			
@@ -262,7 +274,7 @@ rubygems/commands/lock_command
 rubygems/commands/mirror_command			
 rubygems/commands/outdated_command			
 rubygems/commands/pristine_command			
-rubygems/commands/query_command			
+rubygems/commands/query_command		4.0	
 rubygems/commands/rdoc_command			
 rubygems/commands/search_command			
 rubygems/commands/server_command			
@@ -274,52 +286,33 @@ rubygems/commands/unpack_command
 rubygems/commands/update_command			
 rubygems/commands/which_command			
 rubygems/config_file			
-rubygems/custom_require			
 rubygems/defaults			
 rubygems/dependency			
 rubygems/dependency_installer			
 rubygems/dependency_list			
-rubygems/digest/digest_adapter			
-rubygems/digest/md5			
-rubygems/digest/sha1			
-rubygems/digest/sha2			
-rubygems/doc_manager			
 rubygems/exceptions			
 rubygems/ext			
 rubygems/ext/builder			
 rubygems/ext/configure_builder			
 rubygems/ext/ext_conf_builder			
 rubygems/ext/rake_builder			
-rubygems/format			
-rubygems/gem_openssl			
-rubygems/gem_path_searcher			
 rubygems/gem_runner			
-rubygems/indexer			
+rubygems/indexer		3.3	
 rubygems/install_update_options			
 rubygems/installer			
 rubygems/local_remote_options			
-rubygems/old_format			
 rubygems/package			
-rubygems/package/f_sync_dir			
 rubygems/package/tar_header			
-rubygems/package/tar_input			
-rubygems/package/tar_output			
 rubygems/package/tar_reader			
 rubygems/package/tar_reader/entry			
 rubygems/package/tar_writer			
 rubygems/platform			
 rubygems/remote_fetcher			
-rubygems/require_paths_builder			
 rubygems/requirement			
 rubygems/security			
 rubygems/server		3.1	
-rubygems/source_index			
-rubygems/source_info_cache			
-rubygems/source_info_cache_entry			
 rubygems/spec_fetcher			
 rubygems/specification			
-rubygems/test_utilities			
-rubygems/timer			
 rubygems/uninstaller			
 rubygems/user_interaction			
 rubygems/validator			
@@ -352,6 +345,7 @@ timeout			Thread
 tmpdir			File
 tracer		3.1	Development
 tsort			Math
+typeprof			Development
 ubygems	1.9.1	2.5.0	
 un			File
 uri			Network
@@ -359,7 +353,6 @@ weakref			GC
 win32/registry			Windows
 win32/resolv			Windows
 win32ole			Windows
-xmlrpc			Network
 yaml			FileFormat
 yaml/dbm			
 yaml/store			
