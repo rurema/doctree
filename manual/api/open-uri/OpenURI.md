@@ -134,9 +134,15 @@ sio = OpenURI.open_uri('http://www.example.com',
 
 - **raise** `OpenURI::HTTPError` -- 対象となる URI のスキームが http であり、かつリソースの取得に失敗した時に発生します。
 
+#%until 4.1
 - **raise** `Net::FTPError` -- 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
                      [c:Net::FTPError] のサブクラスが発生します。詳しくは [lib:net/ftp]
                      を参照して下さい。
+#%else
+- **raise** `Net::FTPError` -- 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
+                     `Net::FTPError` のサブクラスが発生します。詳しくは [`net/ftp`](https://github.com/ruby/net-ftp)
+                     を参照して下さい。
+#%end
 
 - **raise** `ArgumentError` -- 与えられた mode が読み込みモードでなかった場合に発生します。
 
