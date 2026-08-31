@@ -31,7 +31,7 @@ library: open-uri
                      を参照して下さい。
 #%else
 - **raise** `Net::FTPError` -- 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に
-                     `Net::FTPError` のサブクラスが発生します。詳しくは `net/ftp`
+                     `Net::FTPError` のサブクラスが発生します。詳しくは [`net/ftp`](https://github.com/ruby/net-ftp)
                      を参照して下さい。
 #%end
 
