@@ -2421,6 +2421,15 @@ eval 実行後にも引き継がれます。
 fname と lineno が与えられた場合には、ファイル
 fname の行番号 lineno から文字列 expr が書かれているかのようにコンパイルされます。スタックトレースの表示などを差し替えることができます。
 
+expr は、文字列 expr 自身のエンコーディングをスクリプトエンコーディング([ref:d:spec/m17n#script_encoding])として評価されます。ただし expr の先頭にマジックコメント([ref:d:spec/m17n#magic_comment])がある場合は、そこで指定されたエンコーディングが優先されます。
+
+```ruby
+# ソースファイルが UTF-8 の場合
+p eval("__ENCODING__")                        # => #<Encoding:UTF-8>
+p eval("__ENCODING__".encode("EUC-JP"))       # => #<Encoding:EUC-JP>
+p eval("# encoding: us-ascii\n__ENCODING__")  # => #<Encoding:US-ASCII>
+```
+
 bind によらずに特定のオブジェクトのコンテキストで expr を評価したい場合、
 [m:Module#module_eval], [m:BasicObject#instance_eval] が使えます。
 
