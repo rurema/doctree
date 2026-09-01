@@ -1,0 +1,12 @@
+net/imap.rb
+net/imap/authenticators.rb
+net/imap/authenticators/cram_md5.rb
+net/imap/authenticators/digest_md5.rb
+net/imap/authenticators/login.rb
+net/imap/authenticators/plain.rb
+net/imap/command_data.rb
+net/imap/data_encoding.rb
+net/imap/errors.rb
+net/imap/flags.rb
+net/imap/response_data.rb
+net/imap/response_parser.rb

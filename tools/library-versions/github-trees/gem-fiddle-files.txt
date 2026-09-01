@@ -1,0 +1,11 @@
+fiddle.rb
+fiddle/closure.rb
+fiddle/cparser.rb
+fiddle/ffi_backend.rb
+fiddle/function.rb
+fiddle/import.rb
+fiddle/pack.rb
+fiddle/struct.rb
+fiddle/types.rb
+fiddle/value.rb
+fiddle/version.rb

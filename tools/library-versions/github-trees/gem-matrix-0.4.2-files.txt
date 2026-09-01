@@ -1,0 +1,4 @@
+matrix.rb
+matrix/eigenvalue_decomposition.rb
+matrix/lup_decomposition.rb
+matrix/version.rb

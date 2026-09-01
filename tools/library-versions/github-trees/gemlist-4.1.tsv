@@ -1,0 +1,35 @@
+minitest	6.0.6	minitest/minitest
+power_assert	3.1.0	ruby/power_assert
+rake	13.4.2	ruby/rake
+test-unit	3.7.8	test-unit/test-unit
+rexml	3.4.4	ruby/rexml
+rss	0.3.3	ruby/rss
+net-imap	0.6.6	ruby/net-imap
+net-smtp	0.5.1	ruby/net-smtp
+matrix	0.4.3	ruby/matrix
+prime	0.1.4	ruby/prime
+racc	1.8.1	ruby/racc
+mutex_m	0.3.0	ruby/mutex_m
+getoptlong	0.2.1	ruby/getoptlong
+base64	0.3.0	ruby/base64
+bigdecimal	4.1.2	ruby/bigdecimal
+observer	0.1.2	ruby/observer
+abbrev	0.1.2	ruby/abbrev
+resolv-replace	0.2.0	ruby/resolv-replace
+rinda	0.2.0	ruby/rinda
+drb	2.2.3	ruby/drb
+nkf	0.3.0	ruby/nkf
+syslog	0.4.0	ruby/syslog
+csv	3.3.6	ruby/csv
+ostruct	0.6.3	ruby/ostruct
+pstore	0.2.1	ruby/pstore
+benchmark	0.5.0	ruby/benchmark
+logger	1.7.0	ruby/logger
+rdoc	8.0.0	ruby/rdoc	a9ebd59d3a49b1e929ae8658f84d3a29a360e10e
+win32ole	1.9.3	ruby/win32ole
+irb	1.18.0	ruby/irb	ac42eaaa88e6399384c1a56cc948c4b2528a9cc2
+reline	0.7.0	ruby/reline
+readline	0.0.4	ruby/readline
+fiddle	1.1.8	ruby/fiddle
+tsort	0.2.0	ruby/tsort
+win32-registry	0.1.2	ruby/win32-registry

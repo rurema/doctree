@@ -1,0 +1,22 @@
+先頭5行に #%since / #%until を含む library ファイル:
+cgi: line 5: #%until 4.0
+debug: line 5: #%since 3.1
+irb/cmd/nop: line 5: #%until 3.4
+irb/color: line 5: #%until 4.1
+irb/completion: line 5: #%since 3.1
+irb/ext/tracer: line 4: #%until 3.1
+irb/ext/use-loader: line 4: #%until 3.4
+irb/history: line 5: #%since 3.4
+irb/pager: line 5: #%since 4.0
+irb/ruby-lex: line 4: #%until 4.1
+rdoc/code_objects: line 5: #%since 3.4
+rubygems/commands/server_command: line 5: #%until 3.1
+yaml/dbm: line 5: #%until 3.1
+
+注記(2026-08-31 再採取): いずれも「front matter の since/until キー以外の版ゲート」で、
+- require: リストのゲート(どの require を書くかが版で変わる)
+  = irb 系 7 件・rdoc/code_objects・rubygems/commands/server_command・yaml/dbm
+- 本文全体の版分岐(ページ自体の since/until ではない)= debug・cgi・irb/cmd/nop
+の 2 パターン。cgi(#3521)・irb/cmd/nop(#3531)・rdoc/code_objects(#3528)は
+修正 PR で導入された正当なゲート。パターン別の詳細分析(2026-08-28 の修正前版)は
+本ディレクトリを追加した初回コミットの同ファイルを参照。

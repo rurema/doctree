@@ -1,0 +1,26 @@
+minitest/autorun	gem:minitest	5.14.2	https://github.com/seattlerb/minitest	
+minitest/mock	gem:minitest	5.14.2	https://github.com/seattlerb/minitest	
+minitest/spec	gem:minitest	5.14.2	https://github.com/seattlerb/minitest	
+minitest/unit	gem:minitest	5.14.2	https://github.com/seattlerb/minitest	
+power_assert	gem:power_assert	1.2.1	https://github.com/ruby/power_assert	
+rake	gem:rake	13.0.3	https://github.com/ruby/rake	
+rake/classic_namespace	gem:rake	13.0.3	https://github.com/ruby/rake	
+rake/clean	gem:rake	13.0.3	https://github.com/ruby/rake	
+rake/gempackagetask	gem:rake	13.0.3	https://github.com/ruby/rake	
+rake/loaders/makefile	gem:rake	13.0.3	https://github.com/ruby/rake	
+rake/packagetask	gem:rake	13.0.3	https://github.com/ruby/rake	
+rake/rake_test_loader	gem:rake	13.0.3	https://github.com/ruby/rake	
+rake/rdoctask	gem:rake	13.0.3	https://github.com/ruby/rake	
+rake/runtest	gem:rake	13.0.3	https://github.com/ruby/rake	
+rake/tasklib	gem:rake	13.0.3	https://github.com/ruby/rake	
+rake/testtask	gem:rake	13.0.3	https://github.com/ruby/rake	
+rexml	gem:rexml	3.2.5	https://github.com/ruby/rexml	
+rexml/document	gem:rexml	3.2.5	https://github.com/ruby/rexml	
+rexml/parsers/pullparser	gem:rexml	3.2.5	https://github.com/ruby/rexml	
+rexml/parsers/sax2parser	gem:rexml	3.2.5	https://github.com/ruby/rexml	
+rexml/parsers/streamparser	gem:rexml	3.2.5	https://github.com/ruby/rexml	
+rexml/parsers/ultralightparser	gem:rexml	3.2.5	https://github.com/ruby/rexml	
+rexml/sax2listener	gem:rexml	3.2.5	https://github.com/ruby/rexml	
+rexml/streamlistener	gem:rexml	3.2.5	https://github.com/ruby/rexml	
+rss	gem:rss	0.2.9	https://github.com/ruby/rss	0.2.9
+test/unit	gem:test-unit	3.3.7	https://github.com/test-unit/test-unit	3.3.7
