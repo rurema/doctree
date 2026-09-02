@@ -6,7 +6,7 @@ since: "2.6.0"
 
 [m:RubyVM::AbstractSyntaxTree.parse] によって作られる抽象構文木を表すクラスです。
 
-このクラスは MRI の実装の詳細を表します。
+このクラスは CRuby の実装の詳細を表します。
 
 ## Instance Methods
 

@@ -8,7 +8,7 @@ since: "3.4"
 
 [m:RubyVM::AbstractSyntaxTree::Node#locations] で取得できます。
 
-[c:RubyVM::AbstractSyntaxTree] と同様に MRI の実装の詳細を表す実験的な API であり、予告なしに変更される可能性があります。
+[c:RubyVM::AbstractSyntaxTree] と同様に CRuby の実装の詳細を表す実験的な API であり、予告なしに変更される可能性があります。
 
 ## Instance Methods
 

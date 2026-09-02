@@ -3,8 +3,8 @@ type: library
 ---
 このライブラリは [c:ObjectSpace] を拡張してオブジェクトやメモリ管理についての統計情報を取得するメソッドをいくつか追加します。
 
-MRI の実装について詳しくない一般のユーザはこのライブラリを使ってはいけません。
-このライブラリは、メモリプロファイラの開発者や MRI がどのようにメモリを使用するか知りたい MRI 開発者が使用します。
+CRuby の実装について詳しくない一般のユーザはこのライブラリを使ってはいけません。
+このライブラリは、メモリプロファイラの開発者や CRuby がどのようにメモリを使用するか知りたい CRuby 開発者が使用します。
 
 # reopen ObjectSpace
 
@@ -29,7 +29,7 @@ p ObjectSpace.count_objects_size
 
 戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
 
-本メソッドは C Ruby 以外では動作しません。
+本メソッドは CRuby 以外では動作しません。
 
 ### module_function def memsize_of(obj) -> Integer
 
@@ -40,7 +40,7 @@ obj が消費するメモリ使用量をバイト単位で返します。
 戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒントとして扱う必要があります。特に T_DATA の値は正しくないでしょう。
 Ruby 2.2 以降では RVALUE のサイズを含んだ結果を返します。
 
-本メソッドは C Ruby 以外では動作しません。
+本メソッドは CRuby 以外では動作しません。
 
 ```ruby title="例"
 require 'objspace'
@@ -72,7 +72,7 @@ end
 
 また、同様に戻り値の内容は malloc されたメモリの合計でもない事に注意してください。
 
-本メソッドは C Ruby 以外では動作しません。
+本メソッドは CRuby 以外では動作しません。
 
 #%until 4.1
 ### module_function def count_nodes(result_hash = nil) -> Hash
@@ -83,7 +83,7 @@ end
 
 - **raise** `TypeError` -- result_hash にハッシュ以外を指定した時に発生します。
 
-本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォーマンスやメモリ管理に興味のある C Ruby の開発者向けのものです。
+本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォーマンスやメモリ管理に興味のある CRuby の開発者向けのものです。
 
 Ruby 2.5 以降、パーサのノードは GC の管理対象ではないため、本メソッドは常に空のハッシュを返します。Ruby 4.1 で削除されました。
 
@@ -96,7 +96,7 @@ p ObjectSpace.count_nodes
 
 戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
 
-本メソッドは C Ruby 以外では動作しません。
+本メソッドは CRuby 以外では動作しません。
 #%end
 
 ### module_function def count_tdata_objects(result_hash = nil) -> Hash
@@ -107,7 +107,7 @@ T_DATA の種類ごとにオブジェクトの数を格納したハッシュを�
 
 - **raise** `TypeError` -- result_hash にハッシュ以外を指定した時に発生します。
 
-本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォーマンスに興味のある C Ruby の開発者向けのものです。
+本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォーマンスに興味のある CRuby の開発者向けのものです。
 
 ```ruby title="例"
 require 'objspace'
@@ -126,7 +126,7 @@ rb_data_type_struct に格納された名前が使用されます。
 
 戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
 
-本メソッドは C Ruby 以外では動作しません。
+本メソッドは CRuby 以外では動作しません。
 
 ### module_function def reachable_objects_from(obj) -> Array | nil
 
@@ -171,7 +171,7 @@ ObjectSpace::InternalObjectWrapper オブジェクトが戻り値に含まれま
 
 obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合、そのオブジェクトから参照される全てのオブジェクトを返します。
 
-本メソッドは C Ruby 以外では動作しません。
+本メソッドは CRuby 以外では動作しません。
 
 - **SEE** <https://www.atdot.net/~ko1/diary/201212.html#d8>,
      <https://www.atdot.net/~ko1/diary/201212.html#d9>
@@ -196,7 +196,7 @@ p reachable.keys
 
 本メソッドはメモリリークの原因を調査するなど、オブジェクトグラフのデバッグに役立ちます。
 
-本メソッドは C Ruby 以外では動作しません。
+本メソッドは CRuby 以外では動作しません。
 
 - **SEE** [m:ObjectSpace?.reachable_objects_from]
 
@@ -419,7 +419,7 @@ puts ObjectSpace.dump("hello")
 
 戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒントとして扱う必要があります。
 
-本メソッドは C Ruby 以外では動作しない、実験的なメソッドです。出力のフォーマットは将来のバージョンで変更される可能性があります。
+本メソッドは CRuby 以外では動作しない、実験的なメソッドです。出力のフォーマットは将来のバージョンで変更される可能性があります。
 
 - **SEE** [m:ObjectSpace?.dump_all]
 
@@ -485,6 +485,6 @@ p str.lines.grep(/"type":"SHAPE"/).size
 
 戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒントとして扱う必要があります。
 
-本メソッドは C Ruby 以外では動作しない、実験的なメソッドです。出力のフォーマットは将来のバージョンで変更される可能性があります。
+本メソッドは CRuby 以外では動作しない、実験的なメソッドです。出力のフォーマットは将来のバージョンで変更される可能性があります。
 
 - **SEE** [m:ObjectSpace?.dump], [m:ObjectSpace?.trace_object_allocations_start]
