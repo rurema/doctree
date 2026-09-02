@@ -59,7 +59,7 @@ end
 # `cannot load such file -- drb` や `invalid option: --markdowntree` のような
 # 分かりにくいエラーで失敗するので、ビルド前に検査して案内を出す
 # (https://github.com/rurema/bitclust/issues/230)
-REQUIRED_BITCLUST_VERSION = Gem::Version.new("1.5.0")
+REQUIRED_BITCLUST_VERSION = Gem::Version.new("1.7.0")
 def check_bitclust_version!
   begin
     require "bitclust/version"
