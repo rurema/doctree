@@ -7,22 +7,22 @@
 #%since 4.1
 - 開発版対応リファレンス
 #%end
-#%version 4.0...4.1
+#%version 4.0
 - Ruby 4.0 対応リファレンス
 #%end
-#%version 3.4...4.0
+#%version 3.4
 - Ruby 3.4 対応リファレンス
 #%end
-#%version 3.3...3.4
+#%version 3.3
 - Ruby 3.3 対応リファレンス
 #%end
-#%version 3.2...3.3
+#%version 3.2
 - Ruby 3.2 対応リファレンス
 #%end
-#%version 3.1...3.2
+#%version 3.1
 - Ruby 3.1 対応リファレンス
 #%end
-#%until 3.1
+#%version 3.0
 - Ruby 3.0 対応リファレンス
 #%end
 - 原著：まつもとゆきひろ
