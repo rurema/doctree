@@ -208,6 +208,18 @@ p :aaa == :aaa  # => true
 p :aaa == :xxx  # => false
 ```
 
+### def hash -> Integer
+
+self のハッシュ値を返します。
+
+eql? で等しいシンボルは、常にハッシュ値も等しくなります。
+
+[c:Symbol] のインスタンスは、[c:Hash] のキーとして使われるとき Ruby 内部の
+組み込みのハッシュ関数でハッシュ値が計算されます。そのため、この hash メソッドを
+再定義しても Hash のキーとしての振る舞いは変わりません。
+
+- **SEE** [m:Object#hash]
+
 ### def start_with?(*prefixes)   -> bool
 
 self の先頭が prefixes のいずれかであるとき true を返します。

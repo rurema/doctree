@@ -903,6 +903,18 @@ p 1 >= Complex(0, 0)  # ~> NoMethodError
 p 1 >= "0" # ~> ArgumentError: comparison of Integer with String failed
 ```
 
+### def hash -> Integer
+
+self のハッシュ値を返します。
+
+eql? で等しい整数は、常にハッシュ値も等しくなります。
+
+[c:Integer] のインスタンスは、[c:Hash] のキーとして使われるとき Ruby 内部の
+組み込みのハッシュ関数でハッシュ値が計算されます。そのため、この hash メソッドを
+再定義しても Hash のキーとしての振る舞いは変わりません。
+
+- **SEE** [m:Object#hash]
+
 ### def ~        -> Integer
 
 `self` をビット論理反転した整数を返します。
