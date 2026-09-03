@@ -10,7 +10,7 @@ self.bar
 #%version 3.4...
 # => -:1: undefined method 'bar' for main (NoMethodError)
 #%end
-#%version 3.3...3.4
+#%version 3.3
 # => -:1: undefined method `bar' for main (NoMethodError)
 #%end
 #%version ...3.3
@@ -25,7 +25,7 @@ self.bar
 #%version 3.4...
 # => -:1:in '<main>': private method 'puts' called for an instance of String (NoMethodError)
 #%end
-#%version 3.3...3.4
+#%version 3.3
 # => -:1:in `<main>': private method `puts' called for an instance of String (NoMethodError)
 #%end
 #%version ...3.3
@@ -40,7 +40,7 @@ bar
 #%version 3.4...
 # => -:1: undefined local variable or method 'bar' for main (NameError)
 #%end
-#%version 3.3...3.4
+#%version 3.3
 # => -:1: undefined local variable or method `bar' for main (NameError)
 #%end
 #%version ...3.3
@@ -91,7 +91,7 @@ end
 #%version 3.4...
 # => #<NoMethodError: undefined method 'foobar' for main>
 #%end
-#%version 3.3...3.4
+#%version 3.3
 # => #<NoMethodError: undefined method `foobar' for main>
 #%end
 #%version ...3.3

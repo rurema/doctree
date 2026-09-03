@@ -32,7 +32,7 @@ p [a,b] # => [#<SomeSingletonClass:0x0000562e6e18ddd0>, #<SomeSingletonClass:0x0
 #%version 3.4...
 a = SomeSingletonClass.new  # ~> NoMethodError: private method 'new' called for class SomeSingletonClass
 #%end
-#%version 3.3...3.4
+#%version 3.3
 a = SomeSingletonClass.new  # ~> NoMethodError: private method `new' called for class SomeSingletonClass
 #%end
 #%version ...3.3

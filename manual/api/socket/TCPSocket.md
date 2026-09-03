@@ -30,7 +30,7 @@ s.close
 ### def TCPSocket.open(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, open_timeout: nil, fast_fallback: true) -> TCPSocket
 ### def TCPSocket.new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, open_timeout: nil, fast_fallback: true) -> TCPSocket
 #%end
-#%version 3.4...4.0
+#%version 3.4
 ### def TCPSocket.open(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, fast_fallback: true) -> TCPSocket
 ### def TCPSocket.new(host, service, local_host=nil, local_service=nil, resolv_timeout: nil, connect_timeout: nil, fast_fallback: true) -> TCPSocket
 #%end
