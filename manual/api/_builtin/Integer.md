@@ -904,6 +904,7 @@ p 1 >= "0" # ~> ArgumentError: comparison of Integer with String failed
 ```
 
 ### def hash -> Integer
+{: since=""}
 
 self のハッシュ値を返します。
 

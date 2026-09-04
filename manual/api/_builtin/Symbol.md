@@ -209,6 +209,7 @@ p :aaa == :xxx  # => false
 ```
 
 ### def hash -> Integer
+{: since=""}
 
 self のハッシュ値を返します。
 
