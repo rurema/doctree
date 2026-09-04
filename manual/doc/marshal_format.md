@@ -144,7 +144,7 @@ _dump、_load を定義していれば 'u' になります。
 ```
 
 ```ruby
-# coding: ascii-8bit
+# encoding: ASCII-8BIT
 class Foo
   def self._load
   end
@@ -167,7 +167,7 @@ marshal_dump、marshal_load を定義していれば 'U' になります。
 ```
 
 ```ruby
-# coding: ascii-8bit
+# encoding: ASCII-8BIT
 class Foo
   def marshal_dump
     "hogehoge"
@@ -261,7 +261,7 @@ Ruby 1.6.3 では ["l", "+", 8, "\000\000\001\000"] になるバグがありま�
 ```
 
 ```ruby title="例: ascii-8bit の時 (Ruby 1.8 までと同じ)"
-# coding: ascii-8bit
+# encoding: ASCII-8BIT
 p Marshal.dump("hogehoge").unpack("x2 a c a*")
 # => ["\"", 13, "hogehoge"]
 ```
@@ -276,14 +276,14 @@ p Marshal.dump("hogehoge".encode("euc-jp")).unpack("x2 a a c a8 c a ca8 aca*")
 Ruby 1.9.2 以降では US-ASCII と UTF-8 が 'E' という内部的なインスタンス変数として、それぞれ false と true という値でダンプされます。
 
 ```ruby title="例: us-ascii の時"
-# coding: us-ascii
+# encoding: US-ASCII
 p "hogehoge".encoding # => #<Encoding:US-ASCII>
 p Marshal.dump("hogehoge").unpack("x2 a a c a8 c acaa*")
 # => ["I", "\"", 13, "hogehoge", 6, ":", 6, "E", "F"]
 ```
 
 ```ruby title="例: utf-8 の時"
-# coding: utf-8
+# encoding: UTF-8
 p "hogehoge".encoding # => #<Encoding:UTF-8>
 p Marshal.dump("hogehoge").unpack("x2 a a c a8 c acaa*")
 # => ["I", "\"", 13, "hogehoge", 6, ":", 6, "E", "T"]
