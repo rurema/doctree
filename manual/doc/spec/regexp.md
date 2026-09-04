@@ -585,7 +585,6 @@ p /\w(and|or)\w/.match("dissemblance") # => nil
 その結果、以下のような挙動をします。
 
 ```ruby
-# -*- coding:utf-8 -*-
 # デフォルトは UTF-8
 p /foo\b/.match("あいうfoo%") # => #<MatchData "foo">
 p /\bfoo\b/.match("あいうfoo%") # => nil
@@ -707,7 +706,6 @@ d,a,u のオプションは正規表現直後に置く方式では指定がで�
 正規表現オブジェクトのエンコーディングは [m:Regexp#encoding] で取得できます。
 
 ```ruby
-# -*- coding:utf-8 -*-
 p /あいう/.encoding # => #<Encoding:UTF-8>
 p /abc/.encoding # => #<Encoding:US-ASCII>
 p /abc/u.encoding # => #<Encoding:UTF-8>
@@ -722,7 +720,6 @@ p /abc/u.encoding # => #<Encoding:UTF-8>
 これが偽である場合にはASCII互換な文字列であればマッチの判定をさせることができます。[m:Regexp.new] に [m:Regexp::FIXEDENCODING] を指定することで明示的に指定することが可能です。
 
 ```ruby
-# -*- coding:utf-8 -*-
 p /あいう/.fixed_encoding? # => true
 p /abc/.fixed_encoding? # => false
 p /abc/e.fixed_encoding? # => true

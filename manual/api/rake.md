@@ -60,14 +60,12 @@ Options are ...
 また、ルールやファイルタスクをうまく使うとタスクを簡潔に書くことが出来る場合があります。Rakefile は普通の Ruby スクリプトと同じ文法で書くことができるので工夫次第で Ruby にできることなら何でもできます。
 
 ```ruby title="簡単な例"
-# coding: utf-8
 task :hello do
   puts 'do task hello!'
 end
 ```
 
 ```ruby title="動的にタスクを定義する例"
-# coding: utf-8
 require 'rake/testtask'
 require 'rake/clean'    # clean, clobber の二つのタスクを定義
 task :default => [:test]

@@ -134,7 +134,6 @@ p "foo" "bar"
 文字列リテラルから生成される文字列オブジェクトのエンコーディングは、スクリプトエンコーディング(ソースファイルのエンコーディング。マジックコメント `# encoding:` で指定でき、指定がなければ UTF-8)になります。
 
 ```ruby
-# encoding: utf-8
 p "あ".encoding # => #<Encoding:UTF-8>
 ```
 
@@ -642,7 +641,6 @@ p %s{foo-bar} # => :"foo-bar"
 シンボルのエンコーディングは、ASCII文字のみからなる場合はUS-ASCII、そうでなければスクリプトエンコーディングになります。文字列リテラルは中身がASCII文字のみでも常にスクリプトエンコーディングになる([ref:string]参照)のに対し、シンボルはASCII文字のみの場合にUS-ASCIIになる点が異なります。
 
 ```ruby
-# encoding: utf-8
 p :abc.encoding  # => #<Encoding:US-ASCII>
 p :あ.encoding    # => #<Encoding:UTF-8>
 p "abc".encoding # => #<Encoding:UTF-8> (Symbolと異なりASCII文字のみでもスクリプトエンコーディングになる)
