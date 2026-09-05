@@ -1,0 +1,1 @@
+ruby 3.4.0dev (2024-12-25 master f450108330) +PRISM [x86_64-linux]

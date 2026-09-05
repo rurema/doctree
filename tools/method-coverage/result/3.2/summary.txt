@@ -1,0 +1,22 @@
+== 3.2  ruby: ruby 3.2.0 (2022-12-25 revision a528908271) [x86_64-linux]
+DB method entries: 8200  (libs 309)  real methods: 27230
+require-failed libs (3): irb/ext/multi-irb irb/ws-for-case-2 yaml/dbm
+-- scope builtin
+  excess methods: 24  (EXCESS(no-class)=6, EXCESS(no-method)=18)
+  excess consts: 2
+  shortage: ALIAS_OF_DOC=18, DOC_ON_ANCESTOR=98, DOC_ON_DESCENDANT=4, UNDOC=12, UNDOC(class-undoc)=1, UNDOC_PRIV=7, UNDOC_UNDERSCORE=1
+-- scope stdlib
+  excess methods: 203  (EXCESS(no-class)=41, EXCESS(no-method)=162, unmeasured(require-failed)=22, unmeasured(skipped-lib)=200)
+  excess consts: 22
+  shortage: ALIAS_OF_DOC=36, DOC_ON_ANCESTOR=1147, DOC_ON_DESCENDANT=99, UNDOC=1977, UNDOC(class-stub)=111, UNDOC(class-undoc)=2970, UNDOC_PRIV=1196, UNDOC_UNDERSCORE=294
+-- scope bundled
+  excess methods: 78  (EXCESS(no-class)=9, EXCESS(no-method)=69)
+  excess consts: 1
+  shortage: ALIAS_OF_DOC=31, DOC_ON_ANCESTOR=859, DOC_ON_DESCENDANT=24, UNDOC=1081, UNDOC(class-stub)=140, UNDOC(class-undoc)=1505, UNDOC_PRIV=1282, UNDOC_UNDERSCORE=1
+-- scope stale-lib
+  excess methods: 0  ()
+  excess consts: 0
+  shortage: 
+-- vendored: 442 real methods (bundler/vendor/fileutils/lib/fileutils=442)
+-- internal: 0 real methods ()
+-- undoc-lib: 12 real methods (random/formatter=7, syntax_suggest/core_ext=5)
