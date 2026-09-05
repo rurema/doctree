@@ -5,11 +5,15 @@ since: "2.0.0"
 # class ObjectSpace::WeakMap
 
 GC の対象になるオブジェクトへの weak reference を持つクラスです。
-#%since 4.0
+#%since 4.1
+[c:WeakRef] クラスの内部で使用されているほか、Ruby 4.0 で deprecated になり Ruby 4.1 で削除された `ObjectSpace._id2ref` の代替として、オブジェクト ID からオブジェクトを引く用途([m:Object#object_id] をキーとしてオブジェクトを保持しておく方法)にも案内されています。
+#%end
+#%version 4.0
 [c:WeakRef] クラスの内部で使用されているほか、[m:ObjectSpace?._id2ref] が
 deprecated になった Ruby 4.0 以降では、オブジェクト ID からオブジェクトを引く用途([m:Object#object_id] をキーとしてオブジェクトを保持しておく方法)
 の代替としても案内されています。詳しくは [m:ObjectSpace?._id2ref] を参照してください。
-#%else
+#%end
+#%until 4.0
 主に [c:WeakRef] クラスの内部で使用されるため、[lib:weakref] ライブラリ経由で使用してください。
 #%end
 #%since 3.3

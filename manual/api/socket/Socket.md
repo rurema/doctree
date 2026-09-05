@@ -201,6 +201,7 @@ p Socket.getnameinfo([nil, 21,'127.0.0.1'])
 # => ["localhost", "ftp"]
 ```
 
+#%until 4.1
 ### def Socket.gethostbyaddr(host, type = Socket::AF_INET) -> Array
 
 このメソッドは deprecated です。[m:Addrinfo#getnameinfo] を使用してください。
@@ -253,6 +254,8 @@ irb(main):009:0> Socket.gethostbyname("210.251.121.214")
 irb(main):009:0> Socket.unpack_sockaddr_in(Socket.gethostbyname("210.251.121.214")[3])[1]
 "210.251.121.214"
 ```
+
+#%end
 
 ### def Socket.gethostname -> String
 

@@ -60,6 +60,7 @@ host で指定したホストの service で指定したポートと接続した
 - **param** `fast_fallback` -- Happy Eyeballs Version 2 ([RFC 8305](https://datatracker.ietf.org/doc/html/rfc8305)) を有効にします。
 #%end
 
+#%until 4.1
 ### def TCPSocket.gethostbyname(host) -> Array
 
 このメソッドは deprecated です。[m:Addrinfo.getaddrinfo] を使用してください。
@@ -79,3 +80,5 @@ require 'socket'
 p TCPSocket.gethostbyname("www.ruby-lang.org")
 # => ["beryllium.ruby-lang.org", [], 2, "210.163.138.100"]
 ```
+
+#%end
