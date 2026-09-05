@@ -179,8 +179,11 @@ DH 鍵共有プロトコルの鍵パラメータ p を返します。
 
 このパラメータは安全な素数でなければなりません。
 
+#%until 3.1
 - **SEE** [m:OpenSSL::PKey::DH#p=]
+#%end
 
+#%until 3.1
 ### def p=(p)
 
 DH 鍵共有プロトコルの鍵パラメータ p を設定します。
@@ -191,14 +194,19 @@ DH 鍵共有プロトコルの鍵パラメータ p を設定します。
 - **param** `p` -- 設定する整数値(OpenSSL::BN)
 - **SEE** [m:OpenSSL::PKey::DH#p]
 
+#%end
+
 ### def g -> OpenSSL::BN
 
 DH 鍵共有プロトコルの鍵パラメータ g を返します。
 
 この値は生成元と呼ばれます。
 
+#%until 3.1
 - **SEE** [m:OpenSSL::PKey::DH#g=]
+#%end
 
+#%until 3.1
 ### def g=(g)
 
 DH 鍵共有プロトコルの鍵パラメータ g を設定します。
@@ -209,12 +217,17 @@ DH 鍵共有プロトコルの鍵パラメータ g を設定します。
 - **param** `g` -- 設定する整数値(OpenSSL::BN)
 - **SEE** [m:OpenSSL::PKey::DH#g]
 
+#%end
+
 ### def pub_key -> OpenSSL::BN
 
 DH 鍵共有プロトコルの公開鍵を返します。
 
+#%until 3.1
 - **SEE** [m:OpenSSL::PKey::DH#pub_key=]
+#%end
 
+#%until 3.1
 ### def pub_key=(public_key)
 
 DH 鍵共有プロトコルの公開鍵を設定します。
@@ -226,12 +239,17 @@ DH 鍵共有プロトコルの公開鍵を設定します。
 - **SEE** [m:OpenSSL::PKey::DH#pub_key],
      [m:OpenSSL::PKey::DH#generate_key!]
 
+#%end
+
 ### def priv_key -> OpenSSL::BN
 
 DH 鍵共有プロトコルの秘密鍵を返します。
 
+#%until 3.1
 - **SEE** [m:OpenSSL::PKey::DH#priv_key=]
+#%end
 
+#%until 3.1
 ### def priv_key=(private_key)
 
 DH 鍵共有プロトコルの秘密鍵を設定します。
@@ -242,6 +260,8 @@ DH 鍵共有プロトコルの秘密鍵を設定します。
 - **param** `private_key` -- 設定する整数値(OpenSSL::BN)
 - **SEE** [m:OpenSSL::PKey::DH#priv_key],
      [m:OpenSSL::PKey::DH#generate_key!]
+
+#%end
 
 # class OpenSSL::PKey::DHError < OpenSSL::PKey::PKeyError
 

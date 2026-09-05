@@ -188,16 +188,6 @@ Ruby スクリプト形式で .gemspec ファイルを作成します。
 
 - **param** `format` -- 実行ファイル名のフォーマットを指定します。
 
-### def Gem::Installer.home_install_warning -> bool
-
-この値が真の場合、ホームディレクトリに Gem をインストールしようとすると警告を表示します。
-
-### def Gem::Installer.home_install_warning=(flag)
-
-ホームディレクトリに Gem をインストールしようとすると警告を表示するかどうかセットします。
-
-- **param** `flag` -- 真を指定するとホームディレクトリに Gem をインストールしようとすると警告を表示するようになります。
-
 ### def Gem::Installer.path_warning -> bool
 
 この値が 真の場合は Gem.bindir が PATH に含まれていない場合に警告を表示します。

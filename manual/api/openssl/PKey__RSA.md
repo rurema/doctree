@@ -220,6 +220,7 @@ mode でパディングモードを指定します。暗号化に利用したパ
 
 これは公開鍵の一部です。
 
+#%until 3.1
 ### def e=(new_e)
 
 鍵の public exponent を変更します。
@@ -229,12 +230,15 @@ mode でパディングモードを指定します。暗号化に利用したパ
 
 - **param** `new_e` -- 設定する public exponent の整数値
 
+#%end
+
 ### def iqmp -> OpenSSL::BN
 
 鍵の coefficient (inverse of q mod p) です。
 
 秘密鍵の情報です。
 
+#%until 3.1
 ### def iqmp=(new_iqmp)
 
 鍵の coefficient を設定します。
@@ -244,12 +248,15 @@ mode でパディングモードを指定します。暗号化に利用したパ
 
 - **param** `new_iqmp` -- 設定する整数値
 
+#%end
+
 ### def d -> OpenSSL::BN
 
 鍵の private exponent です。
 
 これは秘密鍵の一部です。
 
+#%until 3.1
 ### def d=(new_d)
 
 private exponent を設定します。
@@ -259,12 +266,15 @@ private exponent を設定します。
 
 - **param** `new_d` -- 設定する整数値
 
+#%end
+
 ### def n -> OpenSSL::BN
 
 鍵の modulus です。
 
 公開鍵、秘密鍵両方の一部です。
 
+#%until 3.1
 ### def n=(new_n)
 
 鍵の modulus を設定します。
@@ -274,12 +284,15 @@ private exponent を設定します。
 
 - **param** `new_n` -- 設定する整数値
 
+#%end
+
 ### def p -> OpenSSL::BN
 
 鍵の1つめの素数です。
 
 秘密鍵の情報です。
 
+#%until 3.1
 ### def p=(new_p)
 
 鍵の1つめの素数を設定します。
@@ -289,12 +302,15 @@ private exponent を設定します。
 
 - **param** `new_p` -- 設定する素数
 
+#%end
+
 ### def q -> OpenSSL::BN
 
 鍵の2つめの素数です。
 
 秘密鍵の情報です。
 
+#%until 3.1
 ### def q=(new_q)
 
 鍵の2つめの素数を設定します。
@@ -304,12 +320,15 @@ private exponent を設定します。
 
 - **param** `new_q` -- 設定する素数
 
+#%end
+
 ### def dmp1 -> OpenSSL::BN
 
 鍵の exponent1 (d mod (p-1)) です。
 
 秘密鍵の情報です。
 
+#%until 3.1
 ### def dmp1=(new_dmp1)
 
 鍵の exponent1 を設定します。
@@ -319,12 +338,15 @@ private exponent を設定します。
 
 - **param** `new_dmp1` -- 設定する整数
 
+#%end
+
 ### def dmq1 -> OpenSSL::BN
 
 鍵の exponent2 (d mod (q-1)) です。
 
 秘密鍵の情報です。
 
+#%until 3.1
 ### def dmq1=(new_dmq1)
 
 鍵の exponent2 を設定します。
@@ -333,6 +355,8 @@ private exponent を設定します。
 よく考えて必要な場合のみ利用してください。
 
 - **param** `new_dmq1` -- 設定する整数
+
+#%end
 
 ### def params -> {String => OpenSSL::BN}
 

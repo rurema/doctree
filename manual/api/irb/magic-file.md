@@ -10,10 +10,6 @@ irb が扱う入力やファイル中のマジックコメントを正しく扱�
 
 irb が扱う入力やファイル中のマジックコメントを正しく扱うためのクラスです。
 
-### def IRB::MagicFile.ENCODING_SPEC_RE -> %r"coding\s*[=:]\s*([[:alnum:]\-_]+)"
-
-マジックコメントにマッチする正規表現を返します。
-
 ### def IRB::MagicFile.open(path) -> File
 ### def IRB::MagicFile.open(path) { |io| ... } -> object
 

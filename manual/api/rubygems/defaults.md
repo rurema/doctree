@@ -31,14 +31,6 @@ RubyGems ライブラリで使用するデフォルト値を返すメソッド�
 
 実行ファイルのデフォルトのパスを返します。
 
-### def Gem.default_system_source_cache_dir -> String
-
-デフォルトのシステム全体のソースキャッシュファイルのパスを返します。
-
-### def Gem.default_user_source_cache_dir -> String
-
-デフォルトのユーザ専用のソースキャッシュファイルのパスを返します。
-
 ### def Gem.ruby_engine -> String
 
 Ruby処理系実装の種類を表す文字列を返します。

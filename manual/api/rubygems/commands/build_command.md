@@ -29,12 +29,6 @@ Gem パッケージをビルドするためのクラスです。
 
 コマンドを実行します。
 
-### def load_gemspecs(filename) -> Array
-
-gemspec ファイルをロードします。
-
-- **param** `filename` -- ファイル名を指定します。
-
 ### def usage -> String
 
 使用方法を表す文字列を返します。
@@ -43,8 +37,3 @@ gemspec ファイルをロードします。
 
 引数の説明を表す文字列を返します。
 
-### def yaml?(filename) -> bool
-
-与えられたファイル名を持つファイルが yaml ファイルである場合に真を返します。
-
-- **param** `filename` -- ファイル名を指定します。
