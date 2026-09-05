@@ -282,6 +282,220 @@ p IPAddr.new('::1').to_range
 
 - **SEE** [m:Object#hash]
 
+#%since 4.0
+### def +(offset) -> IPAddr
+
+`self` のアドレス部分に `offset` を足した新しい IPAddr オブジェクトを返します。プリフィックス長(サブネットマスク)は `self` と同じ値のまま保持されます。
+
+- **param** `offset` -- 足し合わせる整数のオフセットです。
+
+- **raise** `IPAddr::InvalidAddressError` -- 演算結果のアドレスが有効な範囲(IPv4 なら 0 から [m:IPAddr::IN4MASK]、IPv6 なら 0 から [m:IPAddr::IN6MASK])を外れた場合に発生します。
+
+```ruby title="例"
+require "ipaddr"
+ip = IPAddr.new("192.168.1.1")
+p (ip + 1).to_s   # => "192.168.1.2"
+
+net = IPAddr.new("192.168.1.0/24")
+p (net + 1)       # => #<IPAddr: IPv4:192.168.1.1/255.255.255.0>
+```
+
+- **SEE** [m:IPAddr#-]
+
+#%end
+
+#%since 4.0
+### def -(offset) -> IPAddr
+
+`self` のアドレス部分から `offset` を引いた新しい IPAddr オブジェクトを返します。プリフィックス長(サブネットマスク)は `self` と同じ値のまま保持されます。
+
+- **param** `offset` -- 引く整数のオフセットです。
+
+- **raise** `IPAddr::InvalidAddressError` -- 演算結果のアドレスが有効な範囲(IPv4 なら 0 から [m:IPAddr::IN4MASK]、IPv6 なら 0 から [m:IPAddr::IN6MASK])を外れた場合に発生します。
+
+```ruby title="例"
+require "ipaddr"
+ip = IPAddr.new("192.168.1.1")
+p (ip - 1).to_s   # => "192.168.1.0"
+```
+
+- **SEE** [m:IPAddr#+]
+
+#%end
+
+### def loopback? -> bool
+
+`self` がループバックアドレスなら真を返します。IPv4 の 127.0.0.0/8 と IPv6 の ::1 がループバックアドレスとみなされます。IPv4 射影 IPv6 アドレス範囲内のループバックな IPv4 アドレスもループバックとみなされます。
+
+```ruby title="例"
+require "ipaddr"
+p IPAddr.new("127.0.0.1").loopback?    # => true
+p IPAddr.new("::1").loopback?          # => true
+p IPAddr.new("192.168.1.1").loopback?  # => false
+```
+
+### def private? -> bool
+
+`self` がプライベートアドレスなら真を返します。[RFC:1918] で定義された IPv4 の 10.0.0.0/8、172.16.0.0/12、192.168.0.0/16 と、[RFC:4193] で定義された IPv6 のユニークローカルアドレス fc00::/7 がプライベートアドレスとみなされます。IPv4 射影 IPv6 アドレス範囲内のプライベートな IPv4 アドレスもプライベートとみなされます。
+
+```ruby title="例"
+require "ipaddr"
+p IPAddr.new("192.168.1.1").private?  # => true
+p IPAddr.new("10.1.2.3").private?     # => true
+p IPAddr.new("8.8.8.8").private?      # => false
+p IPAddr.new("fc00::1").private?      # => true
+```
+
+### def link_local? -> bool
+#%since 4.1
+### def link_local_unicast? -> bool
+
+#%end
+
+`self` がリンクローカルアドレスなら真を返します。[RFC:3927] で予約された IPv4 の 169.254.0.0/16 と、[RFC:4291] で予約された IPv6 のリンクローカルユニキャストアドレス fe80::/10 がリンクローカルとみなされます。IPv4 射影 IPv6 アドレス範囲内のリンクローカルな IPv4 アドレスもリンクローカルとみなされます。
+
+#%since 4.1
+`link_local_unicast?` は `link_local?` の別名です。
+
+#%end
+
+```ruby title="例"
+require "ipaddr"
+p IPAddr.new("169.254.1.1").link_local?  # => true
+p IPAddr.new("fe80::1").link_local?      # => true
+p IPAddr.new("192.168.1.1").link_local?  # => false
+```
+
+#%since 4.1
+### def multicast? -> bool
+
+`self` がマルチキャストアドレスなら真を返します。IPv4 の 224.0.0.0/4 と IPv6 の ff00::/8 がマルチキャストとみなされます。IPv4 射影 IPv6 アドレス範囲内のマルチキャストな IPv4 アドレスもマルチキャストとみなされます。
+
+- **SEE** [m:IPAddr#link_local_multicast?]
+
+#%end
+
+#%since 4.1
+### def link_local_multicast? -> bool
+
+`self` がリンクローカルマルチキャストアドレスなら真を返します。IPv4 の 224.0.0.0/24(Local Network Control Block)と IPv6 の ff02::/16 がリンクローカルマルチキャストとみなされます。IPv4 射影 IPv6 アドレス範囲内のリンクローカルマルチキャストな IPv4 アドレスもリンクローカルマルチキャストとみなされます。
+
+- **SEE** [m:IPAddr#multicast?]
+
+#%end
+
+#%since 3.1
+### def netmask -> String
+
+サブネットマスクを文字列表現で返します(例: 255.255.0.0)。
+
+```ruby title="例"
+require "ipaddr"
+p IPAddr.new("192.168.0.0/16").netmask       # => "255.255.0.0"
+p IPAddr.new("2001:db8::/32").netmask        # => "ffff:ffff:0000:0000:0000:0000:0000:0000"
+```
+
+#%since 3.4
+- **SEE** [m:IPAddr#wildcard_mask]
+
+#%end
+
+#%end
+
+#%since 3.4
+### def wildcard_mask -> String
+
+ワイルドカードマスク([m:IPAddr#netmask] のビットごとの論理否定)を文字列表現で返します(例: 0.0.255.255)。
+
+```ruby title="例"
+require "ipaddr"
+p IPAddr.new("192.168.0.0/16").wildcard_mask  # => "0.0.255.255"
+```
+
+- **SEE** [m:IPAddr#netmask]
+
+#%end
+
+#%since 3.4
+### def cidr -> String
+
+`self` を CIDR 表記(`アドレス/プリフィックス長`)の文字列に変換します。ホストアドレスであってもプリフィックス長を省略しません。
+
+```ruby title="例"
+require "ipaddr"
+p IPAddr.new("192.168.1.1").cidr      # => "192.168.1.1/32"
+p IPAddr.new("192.168.1.0/24").cidr   # => "192.168.1.0/24"
+```
+
+- **SEE** [m:IPAddr#to_s], [m:IPAddr#to_string]
+
+#%end
+
+#%since 3.4
+### def as_json(*args) -> String
+
+JSON 形式に変換する際に使われる、`self` を表す文字列を返します。
+
+IPv4 アドレスでプリフィックス長が 32 の場合、または IPv6 アドレスでプリフィックス長が 128 の場合は [m:IPAddr#to_s] と同じ文字列を返します。それ以外の場合は [m:IPAddr#cidr] と同じ CIDR 表記の文字列を返します。
+
+- **param** `args` -- JSON ライブラリとの互換性のために受け取りますが、使用されません。
+
+```ruby title="例"
+require "ipaddr"
+p IPAddr.new("192.168.1.1").as_json      # => "192.168.1.1"
+p IPAddr.new("192.168.1.0/24").as_json   # => "192.168.1.0/24"
+```
+
+- **SEE** [m:IPAddr#to_json], [m:IPAddr#cidr], [m:IPAddr#to_s]
+
+#%end
+
+#%since 3.4
+### def to_json(*args) -> String
+
+`self` を JSON 形式の文字列に変換して返します。内部で [m:IPAddr#as_json] を呼び出し、その結果を二重引用符で囲んだ文字列を返します。
+
+- **param** `args` -- JSON ライブラリとの互換性のために受け取りますが、使用されません。
+
+```ruby title="例"
+require "ipaddr"
+p IPAddr.new("192.168.1.1").to_json      # => "\"192.168.1.1\""
+p IPAddr.new("192.168.1.0/24").to_json   # => "\"192.168.1.0/24\""
+```
+
+- **SEE** [m:IPAddr#as_json]
+
+#%end
+
+#%since 3.1
+### def zone_id -> String | nil
+### def zone_id=(zid)
+
+IPv6 アドレスのゾーン ID を取得・設定します。ゾーン ID は `"%eth0"` のように `%` から始まる文字列で、リンクローカルアドレスなどで通信に使うネットワークインターフェースを指定するために使われます。
+
+- **param** `zid` -- 設定するゾーン ID です。`%` で始まる文字列か、ゾーン ID を削除する場合は nil を指定します。
+
+- **return** -- ゾーン ID が設定されていない場合は nil を返します。
+
+- **raise** `IPAddr::InvalidAddressError` -- `self` が IPv6 アドレスでない場合に発生します(取得・設定のどちらでも発生します)。
+
+- **raise** `IPAddr::InvalidAddressError` -- `zone_id=` において、`zid` が nil でも `%` から始まる文字列でもない場合に発生します。
+
+```ruby title="例"
+require "ipaddr"
+a = IPAddr.new("fe80::1%eth0")
+p a.zone_id            # => "%eth0"
+
+b = IPAddr.new("fe80::1")
+b.zone_id = "%eth1"
+p b.zone_id            # => "%eth1"
+p b.to_s               # => "fe80::1%eth1"
+```
+
+- **SEE** [m:IPAddr#to_s]
+
+#%end
+
 ## Protected Instance Methods
 
 ### def set(addr, *family) -> self
