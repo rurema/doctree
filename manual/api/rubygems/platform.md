@@ -89,9 +89,11 @@ OS の種類をセットします。
 ### def Gem::Platform.local -> Gem::Platform
 #%todo ???
 
+#%until 4.0
 ### def Gem::Platform.match(platform) -> bool
 #%todo ???
 
+#%end
 ### def Gem::Platform.new(arch)-> Gem::Platform
 
 自身を初期化します。

@@ -1,5 +1,6 @@
 ---
 library: json
+until: "4.0"
 ---
 # reopen Class
 

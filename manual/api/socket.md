@@ -63,8 +63,10 @@ p Socket.pack_sockaddr_in("echo", "127.0.0.1")
 
   - [`Addrinfo.getaddrinfo("www.ruby-lang.org", "http")`](m:Addrinfo.getaddrinfo) =>  [#<Addrinfo: 221.186.184.68:80 TCP (www.ruby-lang.org:http)>]
   - [`IPSocket.getaddress("www.ruby-lang.org")`](m:IPSocket.getaddress) => "210.163.138.100"
+#%until 4.1
   - [`TCPSocket.gethostbyname("www.ruby-lang.org")`](m:TCPSocket.gethostbyname) => ["beryllium.ruby-lang.org", [], 2, "210.163.138.100"]
   - [`Socket.gethostbyname("www.ruby-lang.org")`](m:Socket.gethostbyname) => ["beryllium.ruby-lang.org", [], 2, "\322\243\212d"]
+#%end
   - [`Socket.getaddrinfo("www.ruby-lang.org", "http")`](m:Socket.getaddrinfo) => [["AF_INET", 80, "beryllium.ruby-lang.org", "210.163.138.100", 2, 1, 6]]
 
 逆に IP アドレスからホスト名への変換 (逆引き) を行うメソッドは以下のものが用意されています。

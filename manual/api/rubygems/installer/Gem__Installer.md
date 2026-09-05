@@ -128,12 +128,14 @@ Gem をインストールします。
 
 インストールしようとしている Gem に対応する [c:Gem::Specification] のインスタンスを返します。
 
+#%until 4.0
 ### def unpack(directory)
 #%# -> discard
 与えられたディレクトリに Gem を展開します。
 
 - **param** `directory` -- Gem を展開するディレクトリを指定します。
 
+#%end
 ### def windows_stub_script -> String
 
 コマンドを起動するために使用する Windows 用のバッチファイルの内容を文字列として返します。
@@ -198,6 +200,7 @@ Ruby スクリプト形式で .gemspec ファイルを作成します。
 
 - **param** `flag` -- 真を指定するとホームディレクトリに Gem をインストールしようとすると警告を表示するようになります。
 
+#%until 3.4
 ### def Gem::Installer.path_warning -> bool
 
 この値が 真の場合は Gem.bindir が PATH に含まれていない場合に警告を表示します。
@@ -208,3 +211,4 @@ Gem.bindir が PATH に含まれていない場合に警告を表示するかど
 
 - **param** `flag` -- 真を指定すると、Gem.bindir が PATH に含まれていない場合に警告を表示するようになります。
 
+#%end
