@@ -235,6 +235,7 @@ p opts.banner # => "Usage: example.rb [options]"
 ```
 
 ### def banner=(heading)
+### def set_banner(heading)
 
 サマリの最初に表示される文字列を指定します。
 
@@ -280,6 +281,7 @@ p opts.summarize
 ```
 
 ### def summary_width=(width)
+### def set_summary_width(width)
 
 サマリを表示するときの幅を整数で指定します。
 
@@ -328,6 +330,7 @@ p opts.summarize
 ```
 
 ### def summary_indent=(indent)
+### def set_summary_indent(indent)
 
 サマリを表示する時のインデントを文字列で指定します。
 
@@ -369,6 +372,7 @@ end
 ```
 
 ### def program_name=(name)
+### def set_program_name(name)
 
 プログラムの名前を文字列で指定します。
 
