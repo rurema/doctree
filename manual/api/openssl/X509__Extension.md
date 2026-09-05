@@ -115,6 +115,14 @@ DER 形式のバイト列に変換して返します。
 
 拡張領域の内容を、文字列表現で返します。
 
+### def value_der -> String
+
+拡張領域の値(extnValue)を DER 形式にエンコードしたバイト列のまま返します。
+
+[m:OpenSSL::X509::Extension#value] が可読な文字列に変換した値を返すのに対し、こちらは加工前の生のオクテット列を返します。
+
+- **SEE** [m:OpenSSL::X509::Extension#value]
+
 # class OpenSSL::X509::ExtensionError < OpenSSL::OpenSSLError
 
 [c:OpenSSL::X509::Extension] 関連のエラーが起きたときに発生します。

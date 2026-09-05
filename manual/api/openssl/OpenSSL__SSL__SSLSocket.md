@@ -313,3 +313,93 @@ hostname に nil を渡すと SNI 拡張を利用しません。
 詳しくは [ref:c:OpenSSL::X509#verify_error] を見てください。
 検証に成功した場合は [m:OpenSSL::X509::V_OK] を返します。
 
+### def alpn_protocol -> String | nil
+
+ハンドシェイクの結果、Application-Layer Protocol Negotiation(ALPN)で最終的に選択されたプロトコルを表す文字列を返します。
+
+ALPN が使われなかった場合や、まだハンドシェイクが行われていない場合は nil を返します。
+
+- **SEE** [m:OpenSSL::SSL::SSLContext#alpn_protocols=], [m:OpenSSL::SSL::SSLContext#alpn_select_cb=]
+
+### def client_ca -> [OpenSSL::X509::Name] | nil
+
+クライアント証明書を要求する際に提示される CA のリストを、[c:OpenSSL::X509::Name] の配列で返します。
+
+[m:OpenSSL::SSL::SSLContext#client_ca=] とは異なり、[c:OpenSSL::X509::Certificate] の配列ではなく、各 CA のサブジェクトの識別名([c:OpenSSL::X509::Name])の配列を返すことに注意してください。
+
+サーバモードでは [m:OpenSSL::SSL::SSLContext#client_ca=] で設定したリストを返します。クライアントモードでは、サーバから送られてきたクライアント CA のリストを返します。
+
+- **SEE** [m:OpenSSL::SSL::SSLContext#client_ca=]
+
+#%since 3.4
+### def close_read -> nil
+
+`self` の読み込み側を閉じます。
+
+OpenSSL には読み込み側だけを閉じる合理的な方法がないため、実際には何も行いません。ただし [c:IO] との互換性のために用意されています。
+
+- **SEE** [m:IO#close_read], [m:OpenSSL::SSL::SSLSocket#close_write]
+
+#%end
+
+#%since 3.4
+### def close_write -> nil
+
+`self` の書き込み側を閉じます。
+
+相手に 'close_notify' アラートを送信しますが、相手からの 'close_notify' の応答は待ちません。
+
+動作は使われている OpenSSL のバージョンと TLS のプロトコルバージョンによって異なります。TLS 1.2 以前では、相手からの 'close_notify' を受信すると、`self` も 'close_notify' を返して即座に接続を閉じます。書き込みを待っているデータは破棄されます。そのため TLS 1.2 では、このメソッドの呼び出しによって接続全体が閉じられることになります。TLS 1.3 では、読み込み用に接続は開いたままになります。
+
+- **SEE** [m:IO#close_write], [m:OpenSSL::SSL::SSLSocket#close_read]
+
+#%end
+
+#%since 3.2
+### def export_keying_material(label, length, context = nil) -> String
+
+[RFC:5705] に従って、共有されているセッション鍵の材料をエクスポートします。
+
+TLS のマスターシークレットから `label`(と、指定した場合は `context`)を使って `length` バイトのデータを導出します。これは、TLS 接続の上位で追加の暗号鍵を安全に生成する場合などに使えます。
+
+- **param** `label` -- 鍵導出に使うラベルを表す文字列
+- **param** `length` -- 生成するデータのバイト数
+- **param** `context` -- 鍵導出に使う追加のコンテキスト文字列
+- **raise** `OpenSSL::SSL::SSLError` -- 鍵材料のエクスポートに失敗した場合に発生します
+
+#%end
+
+### def finished_message -> String
+
+直近に送信した Finished メッセージを返します。
+
+- **SEE** [m:OpenSSL::SSL::SSLSocket#peer_finished_message]
+
+### def npn_protocol -> String | nil
+
+ハンドシェイクの結果、Next Protocol Negotiation(NPN)でクライアントが最終的に選択したプロトコルを表す文字列を返します。
+
+NPN が使われなかった場合や、まだハンドシェイクが行われていない場合は nil を返します。
+
+- **SEE** [m:OpenSSL::SSL::SSLContext#npn_protocols=], [m:OpenSSL::SSL::SSLContext#npn_select_cb=]
+
+### def peer_finished_message -> String
+
+直近に受信した Finished メッセージを返します。
+
+- **SEE** [m:OpenSSL::SSL::SSLSocket#finished_message]
+
+### def ssl_version -> String
+
+コネクションで使われている SSL/TLS のバージョンを表す文字列を返します。
+
+例えば "TLSv1.2" のような文字列を返します。
+
+### def tmp_key -> OpenSSL::PKey::PKey | nil
+
+Forward Secrecy(前方秘匿性)を持つ暗号スイートが使われた場合の、一時的な鍵を返します。
+
+Forward Secrecy を持つ暗号スイートが使われなかった場合は nil を返します。
+
+- **SEE** [m:OpenSSL::SSL::SSLContext#ecdh_curves=]
+

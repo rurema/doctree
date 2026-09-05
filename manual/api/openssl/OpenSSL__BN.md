@@ -651,3 +651,54 @@ p (-5).to_bn.negative?  # => true
 
 自身が 0 である場合に true を返します。
 
+### def +@ -> OpenSSL::BN
+
+`self` と同じ値を持つ新しい [c:OpenSSL::BN] オブジェクトを返します。
+
+### def -@ -> OpenSSL::BN
+
+`self` の符号を反転した値を持つ新しい [c:OpenSSL::BN] オブジェクトを返します。
+
+#%since 3.1
+### def abs -> OpenSSL::BN
+
+`self` の絶対値を返します。
+
+#%end
+
+#%since 3.1
+### def get_flags(flags) -> Integer
+
+`self` に立っているフラグを返します。
+
+flags をビットマスクとして使い、`self` の内部フラグとの AND を取った値を返します。
+
+- **param** `flags` -- 調べたいフラグを表す整数(ビットマスク)
+- **SEE** [m:OpenSSL::BN#set_flags]
+
+#%end
+
+#%since 3.2
+### def mod_sqrt(bn2) -> OpenSSL::BN
+
+`self` の bn2 を法とする平方根を返します。
+
+`x**2 % bn2 == self % bn2` となる x を返します。
+
+- **param** `bn2` -- 法とする数
+- **raise** `OpenSSL::BNError` -- 計算に失敗した場合に発生します
+
+#%end
+
+#%since 3.1
+### def set_flags(flags) -> nil
+
+`self` にフラグを立てます。
+
+flags には `OpenSSL::BN::CONSTTIME` を指定できます。このフラグを立てることで、定数時間での計算を強制できます。
+
+- **param** `flags` -- 立てるフラグを表す整数
+- **SEE** [m:OpenSSL::BN#get_flags]
+
+#%end
+

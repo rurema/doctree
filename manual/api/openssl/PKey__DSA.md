@@ -237,6 +237,25 @@ DSA 鍵の秘密鍵パラメータを設定します。
 公開鍵における priv_key のように自身が持っていないパラメータは
 0 がセットされます。
 
+### def set_pqg(p, q, g) -> self
+
+p, q, g を `self` に設定します。
+
+- **param** `p` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **param** `q` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **param** `g` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **raise** `OpenSSL::PKey::PKeyError` -- OpenSSL 3.0 以降とリンクされている場合に発生します。鍵オブジェクトが変更不可(immutable)になるため、このメソッドは利用できません
+- **SEE** [m:OpenSSL::PKey::DSA#p], [m:OpenSSL::PKey::DSA#q], [m:OpenSSL::PKey::DSA#g]
+
+### def set_key(pub_key, priv_key) -> self
+
+pub_key と priv_key を `self` に設定します。
+
+- **param** `pub_key` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **param** `priv_key` -- 設定する [c:OpenSSL::BN] オブジェクトです。nil でもかまいません
+- **raise** `OpenSSL::PKey::PKeyError` -- OpenSSL 3.0 以降とリンクされている場合に発生します。鍵オブジェクトが変更不可(immutable)になるため、このメソッドは利用できません
+- **SEE** [m:OpenSSL::PKey::DSA#pub_key], [m:OpenSSL::PKey::DSA#priv_key]
+
 # class OpenSSL::PKey::DSAError < OpenSSL::PKey::PKeyError
 
 DSA 関連のエラーが起きた場合に発生する例外です。

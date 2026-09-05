@@ -78,3 +78,19 @@ ASN.1 値に対応するRubyのオブジェクトを変更します。
 ASN.1 値の DER 表現を返します。
 
 - **SEE** [m:OpenSSL::ASN1?.decode]
+
+### def indefinite_length -> bool
+### def indefinite_length=(bool)
+### def infinite_length -> bool
+### def infinite_length=(bool)
+
+エンコードやデコードで indefinite length 形式(不定長形式)を使うかどうかを取得・設定します。
+
+デコード時は、パースした値が indefinite length 形式でエンコードされていれば true になります。エンコード時に true を設定すると、indefinite length 形式でエンコードされます。
+
+DER ではすべての値が definite length 形式(長さ確定形式)でエンコードされますが、BER では、長さの部分をゼロにすることで、後続の内容が分割されて送られてくることを示す indefinite length 形式が使えます。SET や SEQUENCE だけでなく、OCTET STRING や BIT STRING のような単純型もこの形式にできます。分割されたデータの終わりは EOC (End of Content) タグで示されます。
+
+`infinite_length`・`infinite_length=` は `indefinite_length`・`indefinite_length=` の別名です。以前はこちらの名前が使われていましたが、綴りの誤りのため `indefinite_length` に改名され、`infinite_length` は互換性のために残されています。
+
+- **param** `bool` -- 設定する真偽値
+

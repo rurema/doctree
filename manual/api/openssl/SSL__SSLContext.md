@@ -731,6 +731,277 @@ end
 - **param** `cb` -- コールバック(Proc, Method など)もしくは nil
 - **SEE** [m:OpenSSL::SSL::SSLContext#renegotiation_cb]
 
+### def add_certificate(certificate, pkey, extra_certs = nil) -> self
+
+証明書とその秘密鍵を `self` に追加します。
+
+`certificate` に対応する秘密鍵を `pkey` で指定します。公開鍵の種類(RSA、ECDSA など)が異なる証明書を複数回に分けて追加でき、ハンドシェイク時に OpenSSL がそのときの状況に最も適した証明書を選択します。
+
+[m:OpenSSL::SSL::SSLContext#cert=]、[m:OpenSSL::SSL::SSLContext#key=]、[m:OpenSSL::SSL::SSLContext#extra_chain_cert=] は証明書を設定するための古い方法で、内部的にはこのメソッドを呼び出します。
+
+- **param** `certificate` -- 追加する証明書([c:OpenSSL::X509::Certificate] のインスタンス)
+- **param** `pkey` -- `certificate` に対応する秘密鍵([c:OpenSSL::PKey::PKey] のインスタンス)
+- **param** `extra_certs` -- `certificate` に続けて送信する証明書チェイン([c:OpenSSL::X509::Certificate] の配列)
+- **raise** `ArgumentError` -- `certificate` が公開鍵を含んでいない場合や、`pkey` が `certificate` の公開鍵と一致しない場合に発生します
+- **raise** `OpenSSL::SSL::SSLError` -- 証明書や秘密鍵の設定に失敗した場合に発生します
+
+```ruby invalid
+ctx.add_certificate(rsa_cert, rsa_pkey, [ca_intermediate_cert])
+```
+
+- **SEE** [m:OpenSSL::SSL::SSLContext#cert=], [m:OpenSSL::SSL::SSLContext#key=], [m:OpenSSL::SSL::SSLContext#extra_chain_cert=]
+
+### def alpn_protocols -> [String] | nil
+### def alpn_protocols=(protocols)
+
+Application-Layer Protocol Negotiation(ALPN)で通知するプロトコル名の一覧を取得・設定します。
+
+`alpn_protocols=` で設定した文字列の配列がハンドシェイク時に ALPN 拡張として送信されます。クライアント側で設定するものであり、サーバ側で設定しても効果はありません。設定しなかった場合、ハンドシェイクに ALPN 拡張は含まれません。
+
+サーバ側でクライアントが提示したプロトコルから選択するには [m:OpenSSL::SSL::SSLContext#alpn_select_cb=] を使います。
+
+```ruby title="例"
+require 'openssl'
+ctx = OpenSSL::SSL::SSLContext.new
+ctx.alpn_protocols = ["http/1.1", "spdy/2", "h2"]
+```
+
+- **param** `protocols` -- 通知するプロトコル名の文字列の配列
+- **SEE** [m:OpenSSL::SSL::SSLContext#alpn_select_cb=], [m:OpenSSL::SSL::SSLSocket#alpn_protocol]
+
+### def alpn_select_cb -> Proc | nil
+### def alpn_select_cb=(cb)
+
+ALPN 拡張でクライアントが提示したプロトコルの中から、サーバが利用するプロトコルを選択するためのコールバックを取得・設定します。
+
+コールバックにはクライアントが提示したプロトコル名の文字列の配列が渡され、その中から選んだプロトコル名を文字列で返さなければなりません。提示された中に受け入れられるものがない場合は、コールバック内で例外を発生させるとハンドシェイクが失敗します。
+
+このコールバックを設定しない場合、サーバ側は ALPN 拡張をサポートしません。クライアント側で設定しても効果はありません。
+
+デフォルトは nil です。
+
+```ruby invalid
+proc{|protocols| ... }
+```
+
+- **param** `cb` -- コールバックオブジェクト([c:Proc] や [c:Method] など)
+- **SEE** [m:OpenSSL::SSL::SSLContext#alpn_protocols=]
+
+#%since 3.2
+### def ciphersuites=(ciphers)
+
+TLS 1.3 で使う共通鍵暗号の一覧を設定します。
+
+[m:OpenSSL::SSL::SSLContext#ciphers=] は TLS 1.2 以下向けの設定であり、TLS 1.3 の通信には影響しません。TLS 1.3 の暗号を設定するにはこのメソッドを使います。
+
+指定の方法は [m:OpenSSL::SSL::SSLContext#ciphers=] と同様に、コロン区切りの文字列、もしくは名前の配列で指定します。
+
+- **param** `ciphers` -- 利用可能にする TLS 1.3 の共通鍵暗号の種類
+- **raise** `OpenSSL::SSL::SSLError` -- 設定に失敗した場合に発生します
+- **SEE** [m:OpenSSL::SSL::SSLContext#ciphers=]
+
+#%end
+
+#%since 4.0
+### def sigalgs=(sigalgs)
+
+このコンテキストで使う「サポートする署名アルゴリズム」の一覧をコロン区切りの文字列で設定します。
+
+TLS クライアントの場合、この一覧は ClientHello メッセージの "signature_algorithms" 拡張に使われます。TLS サーバの場合、OpenSSL が共有可能な署名アルゴリズムの集合を決定するために使われ、その中から最も適切なものを選択します。
+
+クライアント認証における同等の設定については [m:OpenSSL::SSL::SSLContext#client_sigalgs=] を参照してください。
+
+- **param** `sigalgs` -- コロン区切りの署名アルゴリズム名の文字列(例 `"sigalg1:sigalg2:..."`)
+- **raise** `OpenSSL::SSL::SSLError` -- 設定に失敗した場合に発生します
+- **SEE** [m:OpenSSL::SSL::SSLContext#client_sigalgs=]
+
+#%end
+
+#%since 4.0
+### def client_sigalgs=(sigalgs)
+
+クライアント認証のために使う「サポートする署名アルゴリズム」の一覧をコロン区切りの文字列で設定します。
+
+TLS サーバの場合、この一覧は CertificateRequest メッセージの一部としてクライアントに送信されます。
+
+サーバ認証における同等の設定については [m:OpenSSL::SSL::SSLContext#sigalgs=] を参照してください。
+
+- **param** `sigalgs` -- コロン区切りの署名アルゴリズム名の文字列(例 `"sigalg1:sigalg2:..."`)
+- **raise** `OpenSSL::SSL::SSLError` -- 設定に失敗した場合に発生します
+- **SEE** [m:OpenSSL::SSL::SSLContext#sigalgs=]
+
+#%end
+
+### def ecdh_curves=(groups_list)
+#%since 4.0
+### def groups=(groups_list)
+#%end
+
+鍵共有(キー交換)に用いるグループの一覧をコロン区切りの文字列で設定します。
+
+TLS クライアントの場合、この一覧はそのまま "supported_groups" 拡張に使われます。TLS サーバの場合、OpenSSL が共有可能なグループの集合を決定するために使われ、その中から最も適切なものを選択します。
+
+#%since 4.0
+`ecdh_curves=` は `groups=` の非推奨の別名です。
+
+#%end
+
+```ruby title="例"
+require 'openssl'
+ctx1 = OpenSSL::SSL::SSLContext.new
+ctx1.ecdh_curves = "X25519:P-256:P-224"
+
+ctx2 = OpenSSL::SSL::SSLContext.new
+ctx2.ecdh_curves = "P-256"
+```
+
+- **param** `groups_list` -- コロン区切りのグループ名の文字列(例 `"X25519:P-256:P-224"`)
+- **raise** `OpenSSL::SSL::SSLError` -- 設定に失敗した場合に発生します
+
+### def enable_fallback_scsv -> nil
+
+この `self` に対して TLS_FALLBACK_SCSV を有効にします。
+
+TLS_FALLBACK_SCSV は、クライアントがプロトコルバージョンのダウングレードを再試行していることをサーバに通知し、ダウングレード攻撃を検知できるようにする仕組みです。詳しくは [RFC:7507] を参照してください。
+
+#%since 3.2
+### def keylog_cb -> Proc | nil
+### def keylog_cb=(cb)
+
+TLS の鍵情報が生成、あるいは受信されたときに呼び出されるコールバックを取得・設定します。
+
+コールバックには [c:OpenSSL::SSL::SSLSocket] オブジェクトと、NSS の SSLKEYLOGFILE デバッグ出力形式のキー情報を含む文字列が渡されます。この情報をファイルに保存しておくことで、Wireshark などのツールで通信内容を復号してデバッグするのに使えます。
+
+OpenSSL 1.1.1 以降でのみ利用できます。
+
+```ruby invalid
+proc{|sslsocket, line| ... }
+```
+
+- **param** `cb` -- コールバックオブジェクト([c:Proc] や [c:Method] など)
+
+```ruby title="例"
+require 'openssl'
+context = OpenSSL::SSL::SSLContext.new
+context.keylog_cb = proc do |_sock, line|
+  File.open('ssl_keylog_file', "a") do |f|
+    f.write("#{line}\n")
+  end
+end
+```
+
+#%end
+
+### def min_version=(version)
+
+サポートする SSL/TLS プロトコルバージョンの下限を設定します。
+
+`version` には `OpenSSL::SSL::TLS1_2_VERSION` のような整数の定数、`:TLS1_2` のようなシンボル、もしくは `nil` を指定します。`nil` は「バージョンの制限なし」を意味します。
+
+```ruby title="例"
+require 'openssl'
+ctx = OpenSSL::SSL::SSLContext.new
+ctx.min_version = OpenSSL::SSL::TLS1_1_VERSION
+ctx.max_version = OpenSSL::SSL::TLS1_2_VERSION
+```
+
+- **param** `version` -- 設定するプロトコルバージョンの下限(整数の定数、シンボル、もしくは nil)
+- **raise** `OpenSSL::SSL::SSLError` -- バージョンの設定に失敗した場合に発生します
+- **raise** `ArgumentError` -- `version` が認識できない値の場合に発生します
+- **SEE** [m:OpenSSL::SSL::SSLContext#max_version=]
+
+### def max_version=(version)
+
+サポートする SSL/TLS プロトコルバージョンの上限を設定します。指定できる値は [m:OpenSSL::SSL::SSLContext#min_version=] と同様です。
+
+- **param** `version` -- 設定するプロトコルバージョンの上限(整数の定数、シンボル、もしくは nil)
+- **raise** `OpenSSL::SSL::SSLError` -- バージョンの設定に失敗した場合に発生します
+- **raise** `ArgumentError` -- `version` が認識できない値の場合に発生します
+- **SEE** [m:OpenSSL::SSL::SSLContext#min_version=]
+
+### def npn_protocols -> [String] | nil
+### def npn_protocols=(protocols)
+
+Next Protocol Negotiation(NPN)で通知するプロトコル名の一覧を取得・設定します。
+
+サーバ側でのみ効果があります。設定しなかった場合、ハンドシェイクで NPN 拡張は送信されません。
+
+```ruby title="例"
+require 'openssl'
+ctx = OpenSSL::SSL::SSLContext.new
+ctx.npn_protocols = ["http/1.1", "spdy/2"]
+```
+
+- **param** `protocols` -- 通知するプロトコル名の文字列の配列
+- **SEE** [m:OpenSSL::SSL::SSLSocket#npn_protocol]
+
+### def npn_select_cb -> Proc | nil
+### def npn_select_cb=(cb)
+
+NPN 拡張でサーバが提示したプロトコルの中から、クライアントが利用するプロトコルを選択するためのコールバックを取得・設定します。
+
+クライアント側でのみ効果があります。コールバックにはサーバが提示したプロトコル名の文字列の配列が渡され、その中から選んだプロトコル名を文字列で返さなければなりません。サーバが提示したものの中に受け入れられるものがない場合は、コールバック内で例外を発生させるとハンドシェイクが失敗します。このコールバックを設定しない場合、クライアント側は NPN 拡張をサポートせず、サーバから提示されたプロトコルはすべて無視されます。
+
+```ruby invalid
+proc{|protocols| ... }
+```
+
+- **param** `cb` -- コールバックオブジェクト([c:Proc] や [c:Method] など)
+
+### def security_level -> Integer
+### def security_level=(level)
+
+コンテキストのセキュリティレベルを取得・設定します。
+
+OpenSSL はこのレベルに応じて暗号スイート、楕円曲線・グループ、鍵長、証明書の署名アルゴリズム、プロトコルバージョンなどのパラメータを制限します。例えばレベル 1 では、MAC に MD5 を使う暗号スイートや 1024 ビット未満の RSA 鍵など、80 ビット未満のセキュリティ強度しか持たないパラメータが拒否されます。
+
+すでに設定されているパラメータがそのレベルの基準を満たさない場合、レベルの引き上げも拒否されることに注意してください。その場合は先にレベルを下げる必要があります。
+
+OpenSSL 1.1.0 未満ではこの機能はサポートされておらず、0 以外の値を設定しようとすると `NotImplementedError` が発生します。レベル 0 はすべてのパラメータを許可することを意味し、これは以前のバージョンの OpenSSL と同じ動作です。
+
+- **param** `level` -- 設定するセキュリティレベル(整数)
+- **raise** `NotImplementedError` -- OpenSSL 1.1.0 未満で 0 以外の値を設定しようとした場合に発生します
+
+### def setup -> true | nil
+
+`self` の設定を確定させ、内部状態を準備します。
+
+このメソッドは [c:OpenSSL::SSL::SSLSocket] オブジェクトが生成されるときに自動的に呼び出されます。ただしスレッドセーフではないため、複数のスレッドを使うプログラムでは `SSLSocket` オブジェクトを生成する前に明示的に呼び出しておく必要があります。
+
+初めて呼び出したときは true を返します。すでに呼び出し済みの場合は何もせず nil を返します。
+
+#%since 3.1
+### def tmp_dh=(pkey)
+
+一時的 DH 鍵交換で使う DH パラメータを設定します。サーバ側でのみ意味を持ちます。
+
+`pkey` には [c:OpenSSL::PKey::DH] のインスタンスを指定します。このオブジェクトが保持している鍵の成分があっても無視され、サーバはハンドシェイクのたびに新しい鍵ペアを生成します。
+
+[m:OpenSSL::SSL::SSLContext#tmp_dh_callback=] よりもこちらの利用が推奨されます。
+
+```ruby invalid
+ctx = OpenSSL::SSL::SSLContext.new
+ctx.tmp_dh = OpenSSL::PKey::DH.generate(2048)
+svr = OpenSSL::SSL::SSLServer.new(tcp_svr, ctx)
+Thread.new { svr.accept }
+```
+
+- **param** `pkey` -- 一時的 DH 鍵交換で使う DH パラメータ([c:OpenSSL::PKey::DH] のインスタンス)
+- **raise** `OpenSSL::SSL::SSLError` -- `pkey` が DH 鍵でない場合や、設定に失敗した場合に発生します
+- **SEE** [m:OpenSSL::SSL::SSLContext#tmp_dh_callback=]
+
+#%end
+
+### def verify_hostname -> bool
+### def verify_hostname=(bool)
+
+サーバ証明書がホスト名に対して有効かどうかを検証するかどうかを取得・設定します。
+
+これを機能させるには、[m:OpenSSL::SSL::SSLContext#verify_mode=] に `OpenSSL::SSL::VERIFY_PEER` を設定し、かつ [m:OpenSSL::SSL::SSLSocket#hostname=] でサーバのホスト名を設定しておく必要があります。
+
+- **param** `bool` -- 検証を行うかどうかを true か false で指定します
+- **SEE** [m:OpenSSL::SSL::SSLContext#verify_mode=], [m:OpenSSL::SSL::SSLSocket#hostname=]
+
 ## Constants
 ### const DEFAULT_CERT_STORE -> OpenSSL::X509::Store
 

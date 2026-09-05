@@ -47,6 +47,15 @@ OpenSSL::PKey::EC オブジェクトを生成します。
            or 文字列)
 - **raise** `OpenSSL::PKey::ECError` -- オブジェクトの生成に失敗した場合に発生します
 
+### def OpenSSL::PKey::EC.generate(ec_group) -> OpenSSL::PKey::EC
+### def OpenSSL::PKey::EC.generate(string) -> OpenSSL::PKey::EC
+
+新しいランダムな秘密鍵と公開鍵を持つ EC オブジェクトを生成します。
+
+- **param** `ec_group` -- 鍵パラメータとなる群を表す [c:OpenSSL::PKey::EC::Group] オブジェクト
+- **param** `string` -- 曲線の名前を表す文字列
+- **SEE** [m:OpenSSL::PKey::EC.new]
+
 ## Instance methods
 ### def group -> OpenSSL::PKey::EC::Group
 
@@ -104,10 +113,12 @@ nil を渡すことで EC オブジェクトが公開鍵のみを持つ状態に
 - **SEE** [m:OpenSSL::PKey::EC#public_key]
 
 ### def private_key? -> bool
+### def private? -> bool
 
 EC オブジェクトが秘密鍵を保持していれば真を返します。
 
 ### def public_key? -> bool
+### def public? -> bool
 
 EC オブジェクトが公開鍵を保持していれば真を返します。
 
@@ -116,11 +127,14 @@ EC オブジェクトが公開鍵を保持していれば真を返します。
 
 このメソッドを呼ぶ前に [c:OpenSSL::Random] の各モジュール関数によって乱数が適切に初期化されている必要があります。
 
+### def generate_key! -> self
 ### def generate_key -> self
 
 鍵ペアを乱数で生成します。
 
-- **raise** `OpenSSL::PKey::ECError` -- 鍵ペアの生成に失敗した場合に発生します
+OpenSSL 3.0 以降とリンクされている場合は、鍵オブジェクトが変更不可(immutable)になるためこのメソッドは利用できません。代わりに [m:OpenSSL::PKey::EC.generate] を使ってください。
+
+- **raise** `OpenSSL::PKey::ECError` -- 鍵ペアの生成に失敗した場合、または OpenSSL 3.0 以降とリンクされている場合に発生します
 
 ### def check_key -> true
 
@@ -166,12 +180,19 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
 - **raise** `OpenSSL::PKey::ECError` -- 署名の検証時にエラーが生じた場合に発生します
 - **SEE** [m:OpenSSL::PKey::EC#dsa_sign_asn1]
 
-### def to_pem -> String
+### def export(cipher = nil, pass = nil) -> String
+### def to_pem(cipher = nil, pass = nil) -> String
 
 鍵を PEM 形式の文字列に変換します。
 
-現在の仕様では [m:OpenSSL::PKey::RSA#to_pem] のように出力をパスフレーズで暗号化することはできません。
+`self` が公開鍵の情報しか持たない場合は X.509 SubjectPublicKeyInfo 形式になります。この場合 cipher と pass は無視されます。
 
+`self` が秘密鍵の情報を持つ場合は SEC 1/RFC 5915 の ECPrivateKey 形式になります。cipher と pass を指定すると、OpenSSL の伝統的な PEM 暗号化形式で暗号化します。この形式は鍵導出に MD5 を使うため、FIPS 準拠のシステムでは利用できません。
+
+このメソッドは互換性のために残されています。X.509 SubjectPublicKeyInfo 形式が必要なら [m:OpenSSL::PKey::PKey#public_to_pem] を、PKCS #8 形式が必要なら [m:OpenSSL::PKey::PKey#private_to_pem] を使ってください。
+
+- **param** `cipher` -- 秘密鍵を暗号化する暗号アルゴリズムの名前、または [c:OpenSSL::Cipher] オブジェクト
+- **param** `pass` -- 暗号化に使うパスワード
 - **raise** `OpenSSL::PKey::ECError` -- 文字列への変換に失敗した場合に発生します。
        公開鍵が含まれていない場合や、鍵が妥当でない場合などに失敗します。
 
@@ -428,6 +449,35 @@ Point オブジェクトを生成します。
 点を整数に変換します。
 
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- 変換に失敗した場合に発生します
+
+### def to_octet_string(conversion_form) -> String
+
+楕円曲線上の点をオクテット文字列(バイト列)として返します。
+
+- **param** `conversion_form` -- 点の変換方式を :compressed、:uncompressed、:hybrid のいずれかのシンボルで指定します
+
+### def add(point) -> OpenSSL::PKey::EC::Point
+
+楕円曲線上の点の加算を行います。
+
+`self` と point の和を表す新しい [c:OpenSSL::PKey::EC::Point] オブジェクトを返します。
+
+- **param** `point` -- 加算するもう一方の [c:OpenSSL::PKey::EC::Point] オブジェクト
+- **return** -- 演算結果を表す新しい [c:OpenSSL::PKey::EC::Point] オブジェクト
+- **raise** `OpenSSL::PKey::EC::Point::Error` -- 演算に失敗した場合に発生します
+
+### def mul(bn1, bn2 = nil) -> OpenSSL::PKey::EC::Point
+
+楕円曲線上の点のスカラー倍算を行います。
+
+`bn1 * self + bn2 * G` を計算した結果を表す新しい [c:OpenSSL::PKey::EC::Point] オブジェクトを返します。ここで G は `self` が属する群の生成元です。bn2 を省略した場合は、単に `bn1 * self` を計算します。
+
+Ruby 3.4 までは、複数の点と係数の配列を渡す `point.mul(bns, points [, bn2])` という形式もサポートされていましたが、Ruby 4.0 で廃止されました。
+
+- **param** `bn1` -- 掛ける整数を表す [c:OpenSSL::BN] オブジェクト
+- **param** `bn2` -- 生成元 G に掛ける整数を表す [c:OpenSSL::BN] オブジェクトです(省略可)
+- **return** -- 演算結果を表す新しい [c:OpenSSL::PKey::EC::Point] オブジェクト
+- **raise** `OpenSSL::PKey::EC::Point::Error` -- 演算に失敗した場合に発生します
 
 # class OpenSSL::PKey::EC::Group::Error < OpenSSL::OpenSSLError
 

@@ -275,6 +275,29 @@ false に設定すると書き込みはバッファリングされます。
 - **param** `sync` -- 設定するモード(真偽値)
 - **SEE** [m:OpenSSL::Buffering#sync]
 
+#%since 3.1
+### def getbyte -> Integer | nil
+
+ストリームから1バイトを読み込み、整数として返します。
+
+既に読み込みが終端に達している場合は nil を返します。
+
+[m:IO#getbyte] と同様です。
+
+#%end
+
+#%since 3.4
+### def readbyte -> Integer
+
+ストリームから1バイトを読み込み、整数として返します。
+
+[m:IO#readbyte] と同様です。
+
+- **raise** `EOFError` -- 既に読み込みが終端に達している場合に発生します
+- **SEE** [m:OpenSSL::Buffering#getbyte]
+
+#%end
+
 ## Constants
 
 ### const BLOCK_SIZE -> Integer

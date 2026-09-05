@@ -29,6 +29,18 @@ DER 形式のバイト列に変換し、証明書オブジェクトを生成し�
 - **param** `obj` -- 証明書のデータ
 - **raise** `OpenSSL::X509::CertificateError` -- 証明書のフォーマットが不正であるなど、読み込みに失敗した場合に発生します
 
+#%since 3.1
+### def OpenSSL::X509::Certificate.load_file(path) -> [OpenSSL::X509::Certificate]
+
+path で指定したファイルを読み込み、`OpenSSL::X509::Certificate.load` で証明書をパースして返します。
+
+PEM 形式・DER 形式のどちらにも対応しています。PEM 形式の場合は複数の証明書を連結したファイルも読み込め、返り値にはすべての証明書が含まれます。
+
+- **param** `path` -- 読み込むファイルのパス
+- **raise** `OpenSSL::X509::CertificateError` -- ファイルの中身が空であったり、証明書として解釈できないデータしか含まれていない場合に発生します
+
+#%end
+
 ## Instance Methods
 
 ### def to_der -> String
@@ -178,6 +190,15 @@ DSA で署名する場合は digest は "dss1" でなければなりません。
 
 確認に成功した場合に真を返します。
 - **param** `private_key` -- 確認用の秘密鍵
+
+#%since 3.4
+### def tbs_bytes -> String
+
+署名対象となる TBSCertificate 部分を DER 形式でエンコードしたバイト列を返します。
+
+主に Certificate Transparency の埋め込み署名を検証する際に使われます。
+
+#%end
 
 # class OpenSSL::X509::CertificateError < OpenSSL::OpenSSLError
 

@@ -186,3 +186,26 @@ CRL に関するフラグを設定します。
   - [m:OpenSSL::X509::StoreContext#chain]
   - [m:OpenSSL::X509::StoreContext#current_crl]
 
+#%since 4.1
+### def flags -> Integer
+
+このコンテキストでの検証に使われるフラグを返します。
+
+- **SEE** [m:OpenSSL::X509::StoreContext#flags=]
+
+#%end
+
+#%since 4.1
+### def clear_flags(flags = nil)
+
+このコンテキストでの検証に使われるフラグをクリアします。
+
+flags を省略した場合は、設定されているフラグをすべてクリアします。
+
+[m:OpenSSL::X509::StoreContext#flags=] は既存のフラグに OR で追加するだけで置き換えないため、フラグを設定し直したい場合は先にこのメソッドを呼んでクリアしてください。
+
+- **param** `flags` -- クリアするフラグ(整数)。省略した場合はすべてのフラグをクリアします
+- **SEE** [m:OpenSSL::X509::StoreContext#flags=]
+
+#%end
+
