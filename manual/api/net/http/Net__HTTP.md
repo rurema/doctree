@@ -242,6 +242,120 @@ HTTPS のデフォルトポート (443) を返します。
 
 - **SEE** [m:Net::HTTP.version_1_2], [m:Net::HTTP.version_1_1?]
 
+#%since 3.4
+### def Net::HTTP.default_configuration -> {Symbol => object} | nil
+### def Net::HTTP.default_configuration=(configuration)
+
+[m:Net::HTTP.new] でインスタンスを生成する際に使われるデフォルトの設定を取得・設定します。
+
+デフォルトは nil で、この場合 [m:Net::HTTP.new] は組み込みのデフォルト値 (keep_alive_timeout は 2、open_timeout・read_timeout・write_timeout は 60 など) を使います。configuration に指定したハッシュのキーに対応する設定は、以後生成されるすべてのインスタンスのデフォルト値として使われます。
+
+指定できるキーは以下のとおりです。
+
+- `keep_alive_timeout`
+- `close_on_empty_response`
+- `open_timeout`
+- `read_timeout`
+- `write_timeout`
+- `continue_timeout`
+- `max_retries`
+- `debug_output`
+- `response_body_encoding`
+- `ignore_eof`
+
+- **param** `configuration` -- デフォルトの設定を `{Symbol => object}` の形のハッシュで指定します。
+- **return** -- 現在設定されているデフォルトの設定を返します。設定されていなければ nil を返します。
+
+```ruby title="例"
+require 'net/http'
+
+Net::HTTP.default_configuration = {
+  read_timeout: 1,
+  write_timeout: 1
+}
+http = Net::HTTP.new('www.example.com')
+http.open_timeout   # => 60
+http.read_timeout   # => 1
+http.write_timeout  # => 1
+```
+
+- **SEE** [m:Net::HTTP.new], [m:Net::HTTP#open_timeout], [m:Net::HTTP#read_timeout], [m:Net::HTTP#write_timeout]
+
+#%end
+
+### def Net::HTTP.post(url, data, header = nil) -> Net::HTTPResponse
+
+[c:URI] で指定した対象にデータを POST し、そのレスポンスを [c:Net::HTTPResponse] として返します。
+
+このメソッドは以下とほぼ同じです。
+
+```ruby title="例"
+require 'net/http'
+Net::HTTP.start(url.hostname, url.port, use_ssl: url.scheme == 'https') {|http|
+  http.post(url, data, header)
+}
+```
+
+- **param** `url` -- POST する対象を [c:URI] で指定します。
+- **param** `data` -- POST するデータを文字列で指定します。
+- **param** `header` -- リクエストの HTTP ヘッダをハッシュで指定します。
+
+```ruby title="例"
+require 'net/http'
+
+uri = URI('http://www.example.com/index.html')
+Net::HTTP.post(uri, 'query=subject&target=ruby', 'content-type' => 'application/x-www-form-urlencoded')
+```
+
+- **SEE** [m:Net::HTTP#post], [c:Net::HTTP::Post]
+
+#%since 3.4
+### def Net::HTTP.proxy_use_ssl -> bool | nil
+
+`self` が [m:Net::HTTP.Proxy] によって作成されたプロクシ用のクラスで、かつプロクシとの接続に SSL/TLS を使う場合に真を返します。
+
+プロクシを使わない場合は nil を返します。
+
+```ruby title="例"
+require 'net/http'
+
+proxy_class = Net::HTTP.Proxy('proxy.example.com', 8080, nil, nil, true)
+proxy_class.proxy_use_ssl # => true
+```
+
+- **SEE** [m:Net::HTTP.Proxy], [m:Net::HTTP#proxy_use_ssl=]
+
+#%end
+
+#%since 3.4
+### def Net::HTTP.put(url, data, header = nil) -> Net::HTTPResponse
+
+[c:URI] で指定した対象にデータを PUT し、そのレスポンスを [c:Net::HTTPResponse] として返します。
+
+このメソッドは以下とほぼ同じです。
+
+```ruby title="例"
+require 'net/http'
+Net::HTTP.start(url.hostname, url.port, use_ssl: url.scheme == 'https') {|http|
+  http.put(url, data, header)
+}
+```
+
+- **param** `url` -- PUT する対象を [c:URI] で指定します。
+- **param** `data` -- PUT するデータを文字列で指定します。
+- **param** `header` -- リクエストの HTTP ヘッダをハッシュで指定します。
+
+```ruby title="例"
+require 'net/http'
+
+uri = URI('http://www.example.com/index.html')
+Net::HTTP.put(uri, 'query=subject&target=ruby', 'content-type' => 'application/x-www-form-urlencoded')
+```
+
+- **SEE** [m:Net::HTTP#put], [c:Net::HTTP::Put]
+
+#%end
+
 ## Instance Methods
 
 ### def start -> self
@@ -1295,4 +1409,166 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 
 - **param** `ciphers` -- 利用可能にする共通鍵暗号の種類
 - **SEE** [m:Net::HTTP#ciphers]
+
+#%since 3.4
+### def proxy_use_ssl=(ssl)
+
+プロクシとの接続(プロクシ自身への TCP 接続)に SSL/TLS を使うかどうかを設定します。[m:Net::HTTP#start] で接続する前に設定する必要があります。
+
+これは、プロクシ経由で接続先自体に SSL/TLS を使うかどうかを指定する [m:Net::HTTP#use_ssl=] とは別の設定です。
+
+- **param** `ssl` -- プロクシとの接続に SSL/TLS を使うかどうかを真偽値で指定します。
+
+```ruby title="例"
+require 'net/http'
+
+http = Net::HTTP.new('www.example.com')
+http.proxy_use_ssl = true
+```
+
+- **SEE** [m:Net::HTTP.proxy_use_ssl], [m:Net::HTTP#use_ssl=]
+
+#%end
+
+### def extra_chain_cert -> [OpenSSL::X509::Certificate] | nil
+### def extra_chain_cert=(certificates)
+
+証明書チェインに追加する、自分自身を証明する証明書からルート CA までの証明書 (クライアント証明書自体は除く) を取得・設定します。
+
+デフォルトは nil です。
+
+詳しくは [m:OpenSSL::SSL::SSLContext#extra_chain_cert], [m:OpenSSL::SSL::SSLContext#extra_chain_cert=] を見てください。
+
+- **param** `certificates` -- 証明書チェインに追加する [c:OpenSSL::X509::Certificate] の配列
+- **SEE** [m:OpenSSL::SSL::SSLContext#extra_chain_cert], [m:OpenSSL::SSL::SSLContext#extra_chain_cert=]
+
+#%since 3.2
+### def ignore_eof -> bool
+### def ignore_eof=(bool)
+
+`Content-Length:` ヘッダフィールドが指定されたレスポンスボディを読み込む際に、EOF (End Of File) を無視するかどうかを取得・設定します。
+
+デフォルトは true です。
+
+- **param** `bool` -- EOF を無視するかどうかを真偽値で指定します。
+
+#%end
+
+### def ipaddr -> String | nil
+### def ipaddr=(addr)
+
+接続先の IP アドレスを取得・設定します。
+
+セッションが開始されていない場合は、`ipaddr=` で設定した値 (未設定なら nil) を返します。セッションが開始されている場合は、実際に接続したソケットの IP アドレスを返します。
+
+`ipaddr=` はセッションが開始された後には設定できません。
+
+- **param** `addr` -- 接続先の IP アドレスを文字列で指定します。
+- **raise** `IOError` -- セッション開始後に `ipaddr=` で値を変更しようとすると発生します。
+
+```ruby title="例"
+require 'net/http'
+
+http = Net::HTTP.new('www.example.com')
+http.ipaddr         # => nil
+http.ipaddr = '172.67.155.76'
+http.ipaddr         # => "172.67.155.76"
+```
+
+- **SEE** [m:Net::HTTP.new]
+
+### def max_version -> Integer | Symbol | nil
+### def max_version=(version)
+
+利用する SSL/TLS のバージョンの上限を取得・設定します。
+
+デフォルトは nil です。指定できる値は [c:OpenSSL::SSL::SSLContext] の `max_version=` と同じです。
+
+- **param** `version` -- 利用する SSL/TLS のバージョンの上限
+- **SEE** [m:Net::HTTP#min_version], [m:Net::HTTP#ssl_version=]
+
+### def min_version -> Integer | Symbol | nil
+### def min_version=(version)
+
+利用する SSL/TLS のバージョンの下限を取得・設定します。
+
+デフォルトは nil です。指定できる値は [c:OpenSSL::SSL::SSLContext] の `min_version=` と同じです。
+
+- **param** `version` -- 利用する SSL/TLS のバージョンの下限
+- **SEE** [m:Net::HTTP#max_version], [m:Net::HTTP#ssl_version=]
+
+#%since 4.1
+### def query(path, data, initheader = nil, dest = nil) -> Net::HTTPResponse
+### def query(path, data, initheader = nil, dest = nil) {|body_segment| .... } -> Net::HTTPResponse
+
+サーバ上の path にあるエンティティに対し文字列 data を QUERY メソッドで送ります。
+
+返り値は [c:Net::HTTPResponse] のインスタンスです。
+
+ブロックと一緒に呼びだされたときはエンティティボディを少しずつ文字列としてブロックに与えます。このとき戻り値の [c:Net::HTTPResponse] オブジェクトは有効な body を持ちません。
+
+QUERY メソッドは安全 (safe) かつ冪等 (idempotent) で、キャッシュ可能な HTTP メソッドとして定義されています。リクエストの生成には `Net::HTTP::Query` オブジェクトが使われます。
+
+dest は時代遅れの引数です。利用しないでください。
+dest を指定した場合にはボディを少しずつ取得して順次「dest << ボディの断片」を実行します。
+
+- **param** `path` -- リクエストを送るパスを文字列で指定します。
+- **param** `data` -- 送るデータを文字列で指定します。
+- **param** `initheader` -- リクエストの HTTP ヘッダをハッシュで指定します。
+- **param** `dest` -- 利用しないでください。
+
+- **SEE** [m:Net::HTTP#request_query]
+
+#%end
+
+#%since 4.1
+### def request_query(path, data, initheader = nil) -> Net::HTTPResponse
+### def request_query(path, data, initheader = nil) {|response| .... } -> Net::HTTPResponse
+
+サーバ上の path にあるエンティティに対し文字列 data を QUERY メソッドで送ります。
+
+返り値は [c:Net::HTTPResponse] のインスタンスです。
+
+ブロックとともに呼び出されたときは、エンティティボディをソケットから読み出す前に、接続を維持した状態で [c:Net::HTTPResponse] オブジェクトをブロックに渡します。
+
+- **param** `path` -- リクエストを送るパスを文字列で指定します。
+- **param** `data` -- 送るデータを文字列で指定します。
+- **param** `initheader` -- リクエストの HTTP ヘッダをハッシュで指定します。
+
+- **SEE** [m:Net::HTTP#query], [m:Net::HTTPResponse#read_body]
+
+#%end
+
+#%since 3.2
+### def response_body_encoding -> Encoding | false
+### def response_body_encoding=(value)
+
+レスポンスボディに使うエンコーディングを取得・設定します。
+
+デフォルトは false で、この場合エンコーディングは強制されません。
+
+value には [c:Encoding] オブジェクト、エンコーディング名の文字列、エンコーディング名のエイリアスの文字列のいずれかを指定できます。文字列を指定した場合は [m:Encoding.find] を使って [c:Encoding] オブジェクトに変換されます。詳しくは [c:Encoding] を見てください。
+
+- **param** `value` -- 使用するエンコーディング ([c:Encoding] オブジェクトまたはその名前を表す文字列)
+
+```ruby title="例"
+require 'net/http'
+
+http = Net::HTTP.new('www.example.com')
+http.response_body_encoding = Encoding::US_ASCII # => #<Encoding:US-ASCII>
+http.response_body_encoding = 'US-ASCII'         # => "US-ASCII"
+http.response_body_encoding = 'ASCII'            # => "ASCII"
+```
+
+#%end
+
+### def verify_hostname -> bool | nil
+### def verify_hostname=(bool)
+
+証明書がホスト名に対して有効かどうかを検証するかどうかを取得・設定します。
+
+デフォルトは nil です。
+
+- **param** `bool` -- ホスト名の検証を行うかどうかを真偽値で指定します。
+- **SEE** [m:Net::HTTP#verify_mode], [m:Net::HTTP#verify_mode=]
 

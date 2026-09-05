@@ -139,3 +139,40 @@ head = Net::HTTP::Head.new(uri.request_uri)
 p head.response_body_permitted? # => false
 ```
 
+### def decode_content -> bool
+
+リクエストヘッダフィールド `Accept-Encoding:` をユーザが明示的に設定・削除していないかどうかを表します。
+
+ユーザが `Accept-Encoding:` を設定・削除していなければ真を、設定・削除していれば偽を返します。真の場合、[c:Net::HTTP] はレスポンスの `Content-Encoding:` に応じてボディを自動的に展開します (gzip/deflate の自動展開)。
+
+```ruby title="例"
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri)
+p req['Accept-Encoding']    # => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
+p req.decode_content         # => true
+req['Accept-Encoding'] = 'foo'
+p req.decode_content         # => false
+req.delete('Accept-Encoding')
+p req.decode_content         # => false
+```
+
+- **SEE** [m:Net::HTTPResponse#decode_content]
+
+### def uri -> URI | nil
+
+リクエストの生成に使われた [c:URI] オブジェクトを返します。
+
+リクエストをパスの文字列で生成した場合 (URI オブジェクトを使わなかった場合) は nil を返します。
+
+```ruby title="例"
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+p Net::HTTP::Get.new(uri).uri            # => #<URI::HTTP http://www.example.com/index.html>
+p Net::HTTP::Get.new('/index.html').uri  # => nil
+```
+
+- **SEE** [m:Net::HTTPResponse#uri]
+
