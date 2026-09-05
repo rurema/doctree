@@ -127,6 +127,14 @@ scalar の style を変更します。
 - **SEE** [m:Psych::Nodes::Scalar#style=],
      [m:Psych::Nodes::Scalar.new]
 
+### def scalar? -> bool
+
+常に true を返します。
+
+[c:Psych::Nodes::Node] の同名のメソッドを override しており、`self` が scalar ノードであることを示します。
+
+- **SEE** [m:Psych::Nodes::Node#scalar?]
+
 ## Constants
 ### const ANY -> Integer
 

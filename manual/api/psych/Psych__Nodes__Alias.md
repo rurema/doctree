@@ -36,3 +36,11 @@ alias が指す先の anchor を変更します。
 - **SEE** [m:Psych::Nodes::Alias#anchor],
      [m:Psych::Nodes::Alias.new]
 
+### def alias? -> bool
+
+常に true を返します。
+
+[c:Psych::Nodes::Node] の同名のメソッドを override しており、`self` が alias ノードであることを示します。
+
+- **SEE** [m:Psych::Nodes::Node#alias?]
+

@@ -68,3 +68,91 @@ options には以下が指定できます。
 - **param** `io` -- 書き込み先の IO
 - **param** `options` -- オプション
 
+### def alias? -> bool
+
+`self` が [c:Psych::Nodes::Alias] を表すノードかどうかを返します。
+
+`Psych::Nodes::Node` では常に false を返します。`Psych::Nodes::Alias` ではこのメソッドを override しており、常に true を返します。
+
+- **SEE** [c:Psych::Nodes::Alias]
+
+### def document? -> bool
+
+`self` が [c:Psych::Nodes::Document] を表すノードかどうかを返します。
+
+`Psych::Nodes::Node` では常に false を返します。`Psych::Nodes::Document` ではこのメソッドを override しており、常に true を返します。
+
+- **SEE** [c:Psych::Nodes::Document]
+
+### def mapping? -> bool
+
+`self` が [c:Psych::Nodes::Mapping] を表すノードかどうかを返します。
+
+`Psych::Nodes::Node` では常に false を返します。`Psych::Nodes::Mapping` ではこのメソッドを override しており、常に true を返します。
+
+- **SEE** [c:Psych::Nodes::Mapping]
+
+### def scalar? -> bool
+
+`self` が [c:Psych::Nodes::Scalar] を表すノードかどうかを返します。
+
+`Psych::Nodes::Node` では常に false を返します。`Psych::Nodes::Scalar` ではこのメソッドを override しており、常に true を返します。
+
+- **SEE** [c:Psych::Nodes::Scalar]
+
+### def sequence? -> bool
+
+`self` が [c:Psych::Nodes::Sequence] を表すノードかどうかを返します。
+
+`Psych::Nodes::Node` では常に false を返します。`Psych::Nodes::Sequence` ではこのメソッドを override しており、常に true を返します。
+
+- **SEE** [c:Psych::Nodes::Sequence]
+
+### def stream? -> bool
+
+`self` が [c:Psych::Nodes::Stream] を表すノードかどうかを返します。
+
+`Psych::Nodes::Node` では常に false を返します。`Psych::Nodes::Stream` ではこのメソッドを override しており、常に true を返します。
+
+- **SEE** [c:Psych::Nodes::Stream]
+
+### def start_line -> Integer | nil
+### def start_line=(line)
+
+`self` が表す YAML ドキュメント上の要素が開始する行番号を返します。
+
+[m:Psych.parse] などでパースして得られたノードには、パース時にこの位置情報が設定されます。手動で生成したノードでは nil のままです。
+
+- **param** `line` -- 設定する開始行番号
+- **SEE** [m:Psych::Nodes::Node#start_column], [m:Psych::Nodes::Node#end_line]
+
+### def start_column -> Integer | nil
+### def start_column=(column)
+
+`self` が表す YAML ドキュメント上の要素が開始する行内の位置(列番号)を返します。
+
+[m:Psych.parse] などでパースして得られたノードには、パース時にこの位置情報が設定されます。手動で生成したノードでは nil のままです。
+
+- **param** `column` -- 設定する開始位置の列番号
+- **SEE** [m:Psych::Nodes::Node#start_line], [m:Psych::Nodes::Node#end_column]
+
+### def end_line -> Integer | nil
+### def end_line=(line)
+
+`self` が表す YAML ドキュメント上の要素が終了する行番号を返します。
+
+[m:Psych.parse] などでパースして得られたノードには、パース時にこの位置情報が設定されます。手動で生成したノードでは nil のままです。
+
+- **param** `line` -- 設定する終了行番号
+- **SEE** [m:Psych::Nodes::Node#end_column], [m:Psych::Nodes::Node#start_line]
+
+### def end_column -> Integer | nil
+### def end_column=(column)
+
+`self` が表す YAML ドキュメント上の要素が終了する行内の位置(列番号)を返します。
+
+[m:Psych.parse] などでパースして得られたノードには、パース時にこの位置情報が設定されます。手動で生成したノードでは nil のままです。
+
+- **param** `column` -- 設定する終了位置の列番号
+- **SEE** [m:Psych::Nodes::Node#end_line], [m:Psych::Nodes::Node#start_column]
+

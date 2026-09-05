@@ -132,6 +132,14 @@ sequence の style を設定します。
 - **SEE** [m:Psych::Nodes::Sequence#style],
      [m:Psych::Nodes::Sequence.new]
 
+### def sequence? -> bool
+
+常に true を返します。
+
+[c:Psych::Nodes::Node] の同名のメソッドを override しており、`self` が sequence ノードであることを示します。
+
+- **SEE** [m:Psych::Nodes::Node#sequence?]
+
 ## Constants
 ### const ANY -> Integer
 

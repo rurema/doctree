@@ -114,6 +114,14 @@ mapping の style を設定します。
 - **SEE** [m:Psych::Nodes::Mapping#style],
      [m:Psych::Nodes::Mapping.new]
 
+### def mapping? -> bool
+
+常に true を返します。
+
+[c:Psych::Nodes::Node] の同名のメソッドを override しており、`self` が mapping ノードであることを示します。
+
+- **SEE** [m:Psych::Nodes::Node#mapping?]
+
 ## Constants
 ### const ANY -> Integer
 
