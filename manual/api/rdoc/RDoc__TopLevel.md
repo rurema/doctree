@@ -13,25 +13,11 @@ library:
 
 ## Class Methods
 
-### def RDoc::TopLevel.all_classes_and_modules -> [RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule]
-
-RDoc が収集したクラス、モジュールを配列で返します。
-
-### def RDoc::TopLevel.find_class_named(name) -> RDoc::NormalClass | RDoc::SingleClass | nil
-
-RDoc が収集したクラスの内、name で指定した名前のクラスを返します。見つからなかった場合は nil を返します。
-
-- **param** `name` -- クラス名を文字列で指定します。
-
 ### def RDoc::TopLevel.new(file_name) -> RDoc::TopLevel
 
 自身を初期化します。
 
 - **param** `file_name` -- ファイル名を文字列で指定します。
-
-### def RDoc::TopLevel.reset -> ()
-
-RDoc が収集した [c:RDoc::TopLevel] の情報(クラス、モジュール、ファイル)をクリアします。
 
 ## Instance Methods
 
@@ -75,22 +61,3 @@ RDoc が収集したクラスの内、name で指定した名前のモジュー�
 
 - **param** `val` -- [c:File::Stat] オブジェクトを指定します。
 
-### def file_relative_name -> String
-
-自身が管理するファイルに関する相対パスを文字列で返します。
-
-### def file_relative_name=(val)
-
-自身が管理するファイルに関する相対パスを文字列で設定します。
-
-- **param** `val` -- パスを文字列で指定します。
-
-### def file_absolute_name -> String
-
-自身が管理するファイルに関する絶対パスを文字列で返します。
-
-### def file_absolute_name=(val)
-
-自身が管理するファイルに関する絶対パスを文字列で設定します。
-
-- **param** `val` -- パスを文字列で指定します。

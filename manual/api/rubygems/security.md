@@ -257,63 +257,6 @@ $ openssl rsa -in input_key.pem -noout -text
 
 ## Singleton Methods
 
-### def Gem::Security.add_trusted_cert(cert, options = {}) -> nil
-
-信頼済み証明書リストに与えられた証明書を追加します。
-
-Note: しばらくの間 OPT[:trust_dir] に保存されますが、今後変更される可能性があります。
-
-- **param** `cert` -- 証明書を指定します。
-
-- **param** `options` -- オプションを指定します。
-
-### def Gem::Security.build_cert(name, key, options = {}) -> OpenSSL::X509::Certificate
-
-与えられた DN と秘密鍵を使用して証明書を作成します。
-
-- **param** `name` -- DN を指定します。
-
-- **param** `key` -- 秘密鍵を指定します。
-
-- **param** `options` -- オプションを指定します。
-
-### def Gem::Security.build_self_signed_cert(email_addr, options = {}) -> Hash
-
-与えられたメールアドレスを元にして自己署名証明書を作成します。
-
-- **param** `email_addr` -- メールアドレスを指定します。
-
-- **param** `options` -- オプションを指定します。
-
-- **return** -- 鍵と証明書とそれらを保存したパスを表すハッシュを返します。
-
-### def Gem::Security.sign_cert(cert, signing_key, signing_cert, options = {}) -> OpenSSL::X509::Certificate
-
-与えられた署名用の鍵と証明書を用いて証明書に署名します。
-
-- **param** `cert` -- 署名する証明書を指定します。
-
-- **param** `signing_key` -- 署名にしようする鍵を指定します。
-
-- **param** `signing_cert` -- 署名に使用する証明書を指定します。
-
-- **param** `options` -- オプションを指定します。
-
-- **return** -- 署名された証明書を返します。
-
-### def Gem::Security.verify_trust_dir(path, perms)
-#%# -> discard
-信頼するディレクトリが存在することを確認します。
-
-与えられたパスが存在する場合、ディレクトリであることを確認します。
-そうでない場合は、ディレクトリを作成してパーミッションを変更します。
-
-- **param** `path` -- 確認するパスを指定します。
-
-- **param** `perms` -- ディレクトリを作成する場合のパーミッションを指定します。
-
-- **raise** `Gem::Security::Exception` -- path がディレクトリでない場合に発生します。
-
 ## Constants
 
 ### const AlmostNoSecurity -> Gem::Security::Policy
@@ -465,20 +408,6 @@ Note: しばらくの間 OPT[:trust_dir] に保存されますが、今後変更
 
 - **param** `flag` -- 真、または偽を指定します。
 
-### def verify_gem(signature, data, chain, time = Time.now) -> Array
-
-与えられたデータを与えられた署名と証明書チェーンで検証します。
-
-- **param** `signature` -- 署名を指定します。
-
-- **param** `data` -- 検証するデータを指定します。
-
-- **param** `chain` -- 検証で使用する証明書チェーンを指定します。
-
-- **param** `time` -- この時刻に有効であることを検証する。
-
-- **raise** `Gem::Security::Exception` -- 検証に失敗した場合に発生します。
-
 ### def verify_root -> bool
 
 この値が真である場合は、証明書チェーンのルートを検証します。
@@ -504,14 +433,6 @@ Note: しばらくの間 OPT[:trust_dir] に保存されますが、今後変更
 ### def Gem::Security::Policy.new(policy = {}, options = {}) -> Gem::Security::Policy
 
 - **param** `policy` -- モードを指定します。
-
-- **param** `options` -- その他のオプションを指定します。
-
-### def Gem::Security::Policy.trusted_cert_path(cert, options) -> String
-
-与えられた証明書へのパスを返します。
-
-- **param** `cert` -- 証明書オブジェクトを指定します。
 
 - **param** `options` -- その他のオプションを指定します。
 

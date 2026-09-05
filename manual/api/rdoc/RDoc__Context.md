@@ -218,10 +218,6 @@ this context
 Look up the given symbol. If method is non-nil, then we assume
 the symbol references a module that contains that method
 
-### def initialize_classes_and_modules -> ()
-
-追加されたクラスやモジュールをクリアします。
-
 ### def initialize_methods_etc -> ()
 
 追加されたメソッド、属性、alias されたメソッド(メソッド名の対応が取れていないものを含む)、require されたファイル、include されたファイル、定数をクリアします。
@@ -253,10 +249,6 @@ singleton で指定した条件と一致するメソッドすべての可視性�
 - **param** `visibility` -- 可視性を :public, :protected, :private の内のいずれかで指定します。
 
 - **param** `singleton` -- 特異メソッドの可視性を変更する場合は true、そうでない場合は false を指定します。
-
-### def toplevel -> RDoc::TopLevel
-
-自身が所属する [c:RDoc::TopLevel] オブジェクトを返します。
 
 ### def current_section -> RDoc::Context::Section
 

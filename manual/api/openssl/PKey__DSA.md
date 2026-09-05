@@ -142,6 +142,7 @@ DSA 鍵のパラメータ p を返します。
 
 p は公開鍵、秘密鍵の両方に属する情報です。
 
+#%until 3.1
 ### def p=(p)
 
 DSA 鍵のパラメータ p を設定します。
@@ -151,12 +152,15 @@ DSA 鍵のパラメータ p を設定します。
 
 - **param** `p` -- 設定する整数値
 
+#%end
+
 ### def q -> OpenSSL::BN
 
 DSA 鍵のパラメータ q を返します。
 
 q は公開鍵、秘密鍵の両方に属する情報です。
 
+#%until 3.1
 ### def q=(q)
 
 DSA 鍵のパラメータ q を設定します。
@@ -166,12 +170,15 @@ DSA 鍵のパラメータ q を設定します。
 
 - **param** `q` -- 設定する整数値
 
+#%end
+
 ### def g -> OpenSSL::BN
 
 DSA 鍵のパラメータ g を返します。
 
 g は公開鍵、秘密鍵の両方に属する情報です。
 
+#%until 3.1
 ### def g=(g)
 
 DSA 鍵のパラメータ g を設定します。
@@ -181,6 +188,8 @@ DSA 鍵のパラメータ g を設定します。
 
 - **param** `g` -- 設定する整数値
 
+#%end
+
 ### def pub_key -> OpenSSL::BN
 
 DSA 鍵の公開鍵パラメータを返します。
@@ -189,6 +198,7 @@ DSA 鍵の公開鍵パラメータを返します。
 [m:OpenSSL::PKey::DSA#p], [m:OpenSSL::PKey::DSA#q], [m:OpenSSL::PKey::DSA#g]
 から構成されます。
 
+#%until 3.1
 ### def pub_key=(public_key)
 
 DSA 鍵の公開鍵パラメータを設定します。
@@ -198,6 +208,8 @@ DSA 鍵の公開鍵パラメータを設定します。
 
 - **param** `public_key` -- 設定する整数値
 
+#%end
+
 ### def priv_key -> OpenSSL::BN
 
 DSA 鍵の秘密鍵パラメータを返します。
@@ -206,6 +218,7 @@ DSA 鍵の秘密鍵パラメータを返します。
 [m:OpenSSL::PKey::DSA#p], [m:OpenSSL::PKey::DSA#q], [m:OpenSSL::PKey::DSA#g]
 から構成されます。
 
+#%until 3.1
 ### def priv_key=(private_key)
 
 DSA 鍵の秘密鍵パラメータを設定します。
@@ -214,6 +227,8 @@ DSA 鍵の秘密鍵パラメータを設定します。
 よく考えて必要な場合のみ利用してください。
 
 - **param** `private_key` -- 設定する整数値
+
+#%end
 
 ### def params -> {String => OpenSSL::BN}
 
