@@ -132,11 +132,11 @@ trim_mode に指定できる値は次の通りです。
 ERB は入力した文字列と同じエンコーディングの文字列を返すのがデフォルトの動作ですが、以下のようにマジックコメントを指定すると、ERB によって生成される文字列のエンコーディングを指定できます。
 
 ```ruby
-# -*- coding: UTF-8 -*-
+# encoding: UTF-8
 require 'erb'
   
 template = ERB.new <<EOF
-<%#-*- coding: Big5 -*-%>
+<%# encoding: Big5 %>
   __ENCODING__ is <%= __ENCODING__ %>.
 EOF
 puts template.result # => __ENCODING__ is Big5

@@ -100,7 +100,6 @@ p str.scanf("%1s%3d")  # => ["1", 234]
 また、Ruby 1.9 以降では、スペースには全角文字列が含まれます。
 
 ```ruby title="動作例"
-# encoding: utf-8
 require 'scanf'
 
 str = "1　　　　　aaa"

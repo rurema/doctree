@@ -418,8 +418,6 @@ p reg.casefold? # => false
 `self` が任意の ASCII 互換エンコーディングとマッチ可能なら `false` を、そうでないなら `true` を返します。
 
 ```ruby title="例"
-# -*- coding:utf-8 -*-
-
 r = /a/
 p r.fixed_encoding?                             # => false
 p r.encoding                                    # => #<Encoding:US-ASCII>

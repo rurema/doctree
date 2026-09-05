@@ -414,7 +414,7 @@ p tobj.default_event_sources.map {|intf| intf.name} # => ["DocEvents"]
 ここでは最終イベントのStatusTextChangeイベントのメッセージについては既知としています。
 
 ```text
-# coding : cp932
+# encoding: CP932
 require 'win32ole'
  
 type = WIN32OLE_TYPE.new('Microsoft Internet Controls', 'InternetExplorer')

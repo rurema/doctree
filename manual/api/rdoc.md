@@ -643,7 +643,6 @@ fred() { |index, position| ... }
   ファイルの先頭で :markup: を記述した場合、ファイル全体に適用されます。
 
   ```text
-      # coding: UTF-8
       # :markup: tomdoc
 
       # tomdoc 形式のコメントを記述 ...

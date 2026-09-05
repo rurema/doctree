@@ -135,8 +135,7 @@ s + "\u{4f53}"                      # ~> Encoding::CompatibilityError
 
 [m:String#eql?] はハッシュのキーの比較に使われますので、ハッシュのキーに非 ASCII 文字列を使う場合には注意が必要です。
 
-```ruby title="動作例:  (注)一行目にmagic commentが必要です。"
-# encoding: UTF-8
+```ruby title="動作例"
 h = {}
 s = "いろは"
 s.force_encoding("EUC-JP")
@@ -3390,7 +3389,6 @@ Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は�
 UTF-8/UTF-16(BE|LE)/UTF-32(BE|LE) 以外のエンコーディングに対しては各文字のバイナリ表現由来の値になります。
 
 ```ruby title="例"
-#coding:UTF-8
 p "hello わーるど".each_codepoint.to_a
 # => [104, 101, 108, 108, 111, 32, 12431, 12540, 12427, 12393]
 p "hello わーるど".encode('euc-jp').each_codepoint.to_a
@@ -3405,7 +3403,6 @@ p "hello わーるど".encode('euc-jp').each_codepoint.to_a
 文字列の各コードポイントの配列を返します。(self.each_codepoint.to_a と同じです)
 
 ```ruby title="例"
-#coding:UTF-8
 p "hello わーるど".codepoints
 # => [104, 101, 108, 108, 111, 32, 12431, 12540, 12427, 12393]
 ```
@@ -3421,7 +3418,6 @@ Ruby 2.6 までは deprecated の警告が出ますが、Ruby 2.7 で警告は�
 文字列のバイト長を整数で返します。
 
 ```ruby title="例"
-#coding:UTF-8
 # 実行結果は文字コードによって異なります。
 p "いろは".size     # => 3
 p "いろは".bytesize # => 9
@@ -3449,7 +3445,6 @@ p "a".ord   # => 97
 文字列のエンコーディング情報を表現した Encoding オブジェクトを返します。
 
 ```ruby title="例"
-# encoding: utf-8
 utf8_str = "test"
 euc_str = utf8_str.encode("EUC-JP")
 p utf8_str.encoding # => #<Encoding:UTF-8>
@@ -3542,7 +3537,6 @@ self を指定したエンコーディングに変換した文字列を作成し
 これ以上細かい指定を行いたい場合は、[m:Encoding::Converter#convert] を用いましょう。
 
 ```ruby title="例"
-#coding:UTF-8
 s = "いろは"
 s.encode("EUC-JP")
 s.encode(Encoding::UTF_8)
@@ -3569,7 +3563,6 @@ self のエンコーディングが使われます。変換後の self を返し
 - **return** --               変換後のself
 
 ```ruby title="例"
-#coding:UTF-8
 s = "いろは"
 s.encode!("EUC-JP")
 s.encode!(Encoding::UTF_8)
