@@ -12,6 +12,7 @@ require:
 ## Public Instance Methods
 
 ### def ==(other) -> bool
+### def eql?(other) -> bool
 
 自身と other が同じプラットフォームである場合に真を返します。
 そうでない場合は偽を返します。
@@ -67,6 +68,9 @@ OS の種類をセットします。
 - **param** `os` -- OS の種類を指定します。
 
 ### def to_a -> Array
+#%since 4.0
+### def deconstruct -> Array
+#%end
 
 自身にセットされている CPU, OS, バージョンを配列として返します。
 

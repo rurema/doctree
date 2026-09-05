@@ -454,6 +454,9 @@ p u.normalize.to_s                  # => "http://example.com/"
 ```
 
 ### def to_s      -> String
+#%since 3.3
+### def to_str -> String
+#%end
 
 自身が表す URI を文字列として返します。
 
