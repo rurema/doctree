@@ -393,7 +393,7 @@ sockets でサーバソケットを受け取り、接続を待ち受け、クラ
 ### def Socket.tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, open_timeout: nil, fast_fallback: true) -> Socket
 ### def Socket.tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, open_timeout: nil, fast_fallback: true) {|socket| ... } -> object
 #%end
-#%version 3.4...4.0
+#%version 3.4
 ### def Socket.tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, fast_fallback: true) -> Socket
 ### def Socket.tcp(host, port, local_host=nil, local_port=nil, connect_timeout: nil, resolv_timeout: nil, fast_fallback: true) {|socket| ... } -> object
 #%end

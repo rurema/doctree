@@ -7,7 +7,7 @@ require:
 #%since 3.3
   - irb/history
 #%end
-#%if (version == "3.1")
+#%version 3.1
   - rdoc
 #%end
 #%until 3.3

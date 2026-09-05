@@ -1259,7 +1259,7 @@ end
 #%version 3.4...
 Factory.foo # NoMethodError: private method 'foo' called for class Factory
 #%end
-#%version 3.3...3.4
+#%version 3.3
 Factory.foo # NoMethodError: private method `foo' called for class Factory
 #%end
 #%version ...3.3
@@ -1778,7 +1778,7 @@ p account.foo1          # => 1
 #%version 3.4...
 account.foo2            # => private method 'foo2' called for an instance of Account (NoMethodError)
 #%end
-#%version 3.3...3.4
+#%version 3.3
 account.foo2            # => private method `foo2' called for an instance of Account (NoMethodError)
 #%end
 #%version ...3.3
@@ -1836,7 +1836,7 @@ p foo             # => 1
 #%version 3.4...
 Object.new.foo    # => private method 'foo' called for an instance of Object (NoMethodError)
 #%end
-#%version 3.3...3.4
+#%version 3.3
 Object.new.foo    # => private method `foo' called for an instance of Object (NoMethodError)
 #%end
 #%version ...3.3

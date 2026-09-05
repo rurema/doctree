@@ -18,7 +18,7 @@ Socketに対してしか利用できません。
 
 判別が不可能な場合は0を返します。
 
-#%if (version == "3.0")
+#%version 3.0
 ### def ready? -> IO | false | nil
 
 ブロックせずに読み込み可能なら真を、

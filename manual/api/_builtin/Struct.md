@@ -46,7 +46,7 @@ printf "name:%s age:%d", fred.name, fred.age
 #%else
 - **param** `keyword_init` -- true を指定すると、キーワード引数で初期化する構造体を定義します。
 #%end
-#%if (version == "3.1")
+#%version 3.1
                     Ruby 3.1 では互換性に影響のある使い方をしたときに警告が出るため、
                     従来の挙動を期待する構造体には明示的に false を指定してください。
 #%end
@@ -94,7 +94,7 @@ p Point.new(y: 2)     # => #<struct Point x=nil, y=2>
 Point.new(z: 3)       # ArgumentError (unknown keywords: z)
 ```
 
-#%if (version == "3.1")
+#%version 3.1
 
 ```ruby title="警告が出る例"
 Point = Struct.new(:x, :y)

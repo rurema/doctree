@@ -80,7 +80,7 @@ JIT の有効・無効はコマンドラインオプションや環境変数な�
 #%version 4.0...
 ### def RubyVM::YJIT.enable(stats: false, log: false, mem_size: nil, call_threshold: nil) -> bool
 #%end
-#%version 3.4...4.0
+#%version 3.4
 ### def RubyVM::YJIT.enable(stats: false, log: false) -> bool
 #%end
 #%version ...3.4
@@ -134,7 +134,7 @@ Marshal 形式で `filename` にダンプします。ダンプしたファイル
 #%version 3.4...
 ### def RubyVM::YJIT.runtime_stats(key = nil) -> Hash | object | nil
 #%end
-#%version 3.3...3.4
+#%version 3.3
 ### def RubyVM::YJIT.runtime_stats(context: false) -> Hash | nil
 #%end
 #%version ...3.3
@@ -149,7 +149,7 @@ Marshal 形式で `filename` にダンプします。ダンプしたファイル
 - **return** -- `key` を指定しない場合は統計情報のハッシュを返します。`key` を指定した場合は対応する値を返します。統計収集が無効な場合は `nil` を返します。
 - **raise** `TypeError` -- `key` に Symbol 以外(`nil` を除く)を指定した場合に発生します。
 #%else
-#%version 3.3...3.4
+#%version 3.3
 - **param** `context` -- true を指定すると、コンパイルコンテキストに関する統計も含めます。
 #%end
 - **return** -- 統計情報のハッシュを返します。統計収集が無効な場合は `nil` を返します。

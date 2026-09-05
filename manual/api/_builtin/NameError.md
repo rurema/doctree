@@ -10,7 +10,7 @@ bar
 #%version 3.4...
 # ~> NameError: undefined local variable or method 'bar' for main
 #%end
-#%version 3.3...3.4
+#%version 3.3
 # ~> NameError: undefined local variable or method `bar' for main
 #%end
 #%version ...3.3
@@ -52,7 +52,7 @@ rescue NameError => err
 #%version 3.4...
 p err       # => #<NameError: undefined local variable or method 'foobar' for main>
 #%end
-#%version 3.3...3.4
+#%version 3.3
 p err       # => #<NameError: undefined local variable or method `foobar' for main>
 #%end
 #%version ...3.3
@@ -74,7 +74,7 @@ rescue NameError => err
 p err       # => #<NameError: undefined local variable or method 'foobar' for main>
 p err.to_s  # => "undefined local variable or method 'foobar' for main"
 #%end
-#%version 3.3...3.4
+#%version 3.3
 p err       # => #<NameError: undefined local variable or method `foobar' for main>
 p err.to_s  # => "undefined local variable or method `foobar' for main"
 #%end

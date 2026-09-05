@@ -11,7 +11,7 @@ json[:article][:title]
 #%version 3.4...
 # ~> undefined method '[]' for nil (NoMethodError)
 #%end
-#%version 3.3...3.4
+#%version 3.3
 # ~> undefined method `[]' for nil (NoMethodError)
 #%end
 #%version ...3.3

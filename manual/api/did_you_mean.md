@@ -9,7 +9,7 @@ category: Development
 #%version 3.4...
 # ~> NoMethodError: undefined method 'starts_with?' for an instance of String
 #%end
-#%version 3.3...3.4
+#%version 3.3
 # ~> NoMethodError: undefined method `starts_with?' for an instance of String
 #%end
 #%version ...3.3

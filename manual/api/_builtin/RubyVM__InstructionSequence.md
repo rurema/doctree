@@ -88,7 +88,7 @@ pp RubyVM::InstructionSequence.compile_option
 ```
 
 #%end
-#%version 3.3...3.4
+#%version 3.3
 
 ```ruby title="例"
 require "pp"
