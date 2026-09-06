@@ -44,12 +44,6 @@ section のタイトルを返します。
 
 section のコメントを返します。
 
-### def sequence -> String
-
-section のシーケンス番号を文字列で返します。
-
-リンクを作成する時に使われます。
-
 ### def ==(other) -> bool
 
 自身と other のシーケンス番号を比較した結果を返します。
@@ -59,23 +53,6 @@ section のシーケンス番号を文字列で返します。
 ### def inspect -> String
 
 自身の情報を人間に読みやすい文字列にして返します。
-
-### def set_comment(comment) -> ()
-
-自身にコメントを設定します。
-
-- **param** `comment` -- 文字列を指定します。
-
-comment の最初の行に :section: を含んでいた場合、その行以降の文字列をコメントとして設定します。そうでない場合は comment すべてをコメントとして設定します。
-
-```text
-# ---------------------
-# :section: The title
-# The body
-# ---------------------
-```
-
-#%# 1.8 系では、同名の private メソッドが定義されている。
 
 ### def parent -> RDoc::Context
 

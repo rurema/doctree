@@ -30,11 +30,6 @@ Makefile を編集して make, make install を実行します。
 
 - **raise** `Gem::InstallError` -- make の実行に失敗した場合に発生します。
 
-### def Gem::Ext::Builder.redirector -> String
-#%todo
-
-'2>&1' という文字列を返します。
-
 ### def Gem::Ext::Builder.run(command, results)
 #%todo
 

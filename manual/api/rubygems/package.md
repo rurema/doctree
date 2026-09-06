@@ -14,20 +14,6 @@ require:
 ---
 このライブラリは Gem パッケージを扱うためのライブラリです。
 
-# class Gem::FileOperations
-
-このクラスは [c:FileUtils] のラッパーです。
-
-ロギングの機能を追加しています。
-
-## Singleton Methods
-
-### def Gem::FileOperations.new(logger = nil) -> Gem::FileOperations
-
-このクラスを初期化します。
-
-- **param** `logger` -- ロガーを指定します。ロガーは log という名前のメソッドを持っている必要があります。
-
 # module Gem::Package
 
 ## Singleton Methods
@@ -40,17 +26,6 @@ io を開いて与えられたブロックに渡してブロックを評価し�
 - **param** `io` -- IO オブジェクトを指定します。普通は Gem パッケージを開いたファイルオブジェクトを指定します。
 
 - **param** `mode` -- モードを文字列で指定します。指定できるモードは読み込み (r) と書き込み (w) です。
-
-- **param** `signer` -- ???
-
-### def Gem::Package.pack(src, destname, signer = nil)
-#%todo
-
-???
-
-- **param** `src` -- ???
-
-- **param** `destname` -- ???
 
 - **param** `signer` -- ???
 

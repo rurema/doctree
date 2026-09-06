@@ -37,16 +37,6 @@ self が other との依存関係を満たしていれば真を返します。�
 
 依存関係の型を返します。
 
-### def version_requirements -> Gem::Requirement
-
-依存しているバージョンを返します。
-
-### def version_requirements=(version_requirements)
-
-依存しているバージョンを設定します。
-
-- **param** `version_requirements` -- [c:Gem::Requirement] のインスタンスを指定します。
-
 ## Constants
 
 ### const TYPES -> Array

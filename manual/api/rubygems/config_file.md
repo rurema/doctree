@@ -43,17 +43,6 @@ require:
 
 - **param** `backtrace` -- 真を指定するとエラー発生時にバックトレースを出力するようになります。
 
-### def benchmark -> bool
-
-真の場合はベンチマークを実行します。
-そうでない場合は、ベンチマークを実行しません。
-
-### def benchmark=(benchmark)
-
-ベンチマークを実行するかどうか設定します。
-
-- **param** `benchmark` -- 真を指定するとベンチマークを実行するようになります。
-
 ### def bulk_threshold -> Integer
 
 一括ダウンロードの閾値を返します。

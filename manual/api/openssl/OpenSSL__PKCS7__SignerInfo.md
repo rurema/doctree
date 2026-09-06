@@ -21,7 +21,6 @@ alias:
 ## Instance Methods
 
 ### def issuer -> OpenSSL::X509::Name
-### def name -> OpenSSL::X509::Name
 
 署名者の証明書の発行者の名前(DN)を返します。
 
