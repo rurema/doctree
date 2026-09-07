@@ -37,3 +37,28 @@ end
 ```
 
 - **SEE** [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]
+
+#%until 4.1
+### def as_json(*args) -> Hash
+
+`self` を JSON 形式の文字列に変換する際に使う、中間表現となるハッシュに変換して返します。
+[m:Exception#to_json] が内部で使用しています。
+
+ハッシュには、[m:JSON.create_id] をキーとしてクラス名が、`'m'` にメッセージが、
+`'b'` にバックトレースが入ります。
+
+- **param** `args` -- 無視されます。
+
+```ruby title="例"
+require 'json/add/exception'
+
+hash = Exception.new('Foo').as_json
+hash['json_class'] # => "Exception"
+hash['m']           # => "Foo"
+hash['b']           # => nil
+```
+
+- **SEE** [m:Exception#to_json], [m:Exception.json_create]
+
+#%end
+

@@ -29,3 +29,27 @@ p (1..5).to_json # => "{\"json_class\":\"Range\",\"a\":[1,5,false]}"
 ```
 
 - **SEE** [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]
+
+#%until 4.1
+### def as_json(*args) -> Hash
+
+`self` を JSON 形式の文字列に変換する際に使う、中間表現となるハッシュに変換して返します。
+[m:Range#to_json] が内部で使用しています。
+
+ハッシュには、[m:JSON.create_id] をキーとしてクラス名が、`'a'` に
+始端・終端・終端を含むかどうかの 3 要素からなる配列(`[first, last, exclude_end?]`)が入ります。
+
+- **param** `args` -- 無視されます。
+
+```ruby title="例"
+require 'json/add/range'
+
+hash = (1..5).as_json
+hash['json_class'] # => "Range"
+hash['a']           # => [1, 5, false]
+```
+
+- **SEE** [m:Range#to_json], [m:Range.json_create]
+
+#%end
+

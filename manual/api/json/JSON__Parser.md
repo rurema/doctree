@@ -84,6 +84,28 @@ __END__
 }
 ```
 
+#%since 3.4
+### def JSON::Parser.parse(source, options) -> object
+
+`JSON::Parser.new(source, options).parse` と同様に、source をパースして
+その結果を返します。[m:JSON::Parser.new] でインスタンスを作らずに直接パースできる分、
+高速です。
+
+- **param** `source` -- パースする文字列を指定します。
+- **param** `options` -- オプションを指定するためのハッシュです。nil も指定できます。
+           指定可能なオプションは [m:JSON::Parser.new] と同様です。
+
+```ruby title="例"
+require "json"
+
+JSON::Parser.parse(%q({"a":1}), {})                    # => {"a" => 1}
+JSON::Parser.parse(%q({"a":1}), symbolize_names: true) # => {a: 1}
+```
+
+- **SEE** [m:JSON::Parser.new]
+
+#%end
+
 ## Public Instance Methods
 
 ### def parse -> object

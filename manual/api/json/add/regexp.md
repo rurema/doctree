@@ -28,3 +28,29 @@ require "json/add/core"
 
 p /0\d{1,4}-\d{1,4}-\d{4}/.to_json # => "{\"json_class\":\"Regexp\",\"o\":0,\"s\":\"0\\\\d{1,4}-\\\\d{1,4}-\\\\d{4}\"}"
 ```
+
+#%until 4.1
+### def as_json(*args) -> Hash
+
+`self` を JSON 形式の文字列に変換する際に使う、中間表現となるハッシュに変換して返します。
+[m:Regexp#to_json] が内部で使用しています。
+
+ハッシュには、[m:JSON.create_id] をキーとしてクラス名が、`'o'` に
+オプションを表す整数([m:Regexp#options] の返り値)が、`'s'` にパターン文字列
+([m:Regexp#source] の返り値)が入ります。
+
+- **param** `args` -- 無視されます。
+
+```ruby title="例"
+require 'json/add/regexp'
+
+hash = /foo/i.as_json
+hash['json_class'] # => "Regexp"
+hash['o']           # => 1
+hash['s']           # => "foo"
+```
+
+- **SEE** [m:Regexp#to_json], [m:Regexp.json_create]
+
+#%end
+

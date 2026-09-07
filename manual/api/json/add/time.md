@@ -29,3 +29,30 @@ p Time.now.to_json # => "{\"json_class\":\"Time\",\"s\":1544968675,\"n\":6761670
 ```
 
 - **SEE** [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]
+
+#%until 4.1
+### def as_json(*args) -> Hash
+
+`self` を JSON 形式の文字列に変換する際に使う、中間表現となるハッシュに変換して返します。
+[m:Time#to_json] が内部で使用しています。
+
+ハッシュには、[m:JSON.create_id] をキーとしてクラス名が、`'s'` に 1970-01-01 からの
+経過秒数([m:Time#tv_sec] の返り値)が、`'n'` にナノ秒未満の端数([m:Time#tv_nsec] の
+返り値)が入ります。
+
+- **param** `args` -- 無視されます。
+
+```ruby title="例"
+require 'json/add/time'
+
+t = Time.at(1700000000, 123456, :usec)
+hash = t.as_json
+hash['json_class'] # => "Time"
+hash['s']           # => 1700000000
+hash['n']           # => 123456000
+```
+
+- **SEE** [m:Time#to_json], [m:Time.json_create]
+
+#%end
+
