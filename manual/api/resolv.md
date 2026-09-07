@@ -1541,6 +1541,14 @@ DNSリソースを表す抽象クラスです。
 #%# この定数はユーザが使うべきではありません。
 #%#
 
+## Instance Methods
+
+### def ttl -> Integer
+
+この DNS リソースレコードの残り TTL(Time To Live)を返します。
+
+[m:Resolv::DNS#getresource] などで取得したリソースで、DNS サーバから返された TTL の値を保持しています。
+
 # class Resolv::IPv4 < Object
 
 IPv4のアドレスを表すクラスです。
