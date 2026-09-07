@@ -262,6 +262,130 @@ p URI.encode_www_form_component('Ruby リファレンスマニュアル')
 - **param** `enc` -- 指定された場合、パーセントエンコーディングする前に、strをこのエンコーディングに変換
 - **SEE** [m:URI.decode_www_form_component], [m:URI.encode_www_form]
 
+### def URI.for(scheme, *arguments, default: URI::Generic) -> URI::Generic
+
+scheme と arguments から新しい URI オブジェクトを生成して返します。
+
+scheme を大文字にしたものが [m:URI.scheme_list] に登録されていれば、そのクラスのインスタンスを生成します。登録されていない場合は default で指定したクラスを使います。arguments はそのクラスの `new` にそのまま渡されます。
+
+- **param** `scheme` -- 生成する URI の scheme を文字列で指定します。
+- **param** `arguments` -- 構成要素を、生成に使うクラスの `new` に渡す引数と同じ形式で指定します。
+- **param** `default` -- scheme に対応するクラスが登録されていない場合に使うクラスを指定します。省略した場合は `URI::Generic` です。
+
+```ruby title="例"
+require 'uri'
+values = ["john.doe", "www.example.com", "123", nil, "/forum/questions/", nil, "tag=networking&order=newest", "top"]
+p URI.for('https', *values)
+# => #<URI::HTTPS https://john.doe@www.example.com:123/forum/questions/?tag=networking&order=newest#top>
+p URI.for('foo', *values, default: URI::HTTP)
+# => #<URI::HTTP foo://john.doe@www.example.com:123/forum/questions/?tag=networking&order=newest#top>
+```
+
+- **SEE** [m:URI.scheme_list], [c:URI::Generic]
+#%since 3.1
+- **SEE** [m:URI.register_scheme]
+
+#%end
+
+#%since 3.1
+### def URI.register_scheme(scheme, klass) -> Class
+
+klass を、scheme という文字列で表される URI のスキームに対応するクラスとして登録します。
+
+以後、この scheme を使って [m:URI.parse] や [m:URI.for] を呼び出すと、klass のインスタンスが生成されるようになります。scheme を大文字にした文字列は、Ruby の定数名として有効なものでなければなりません。
+
+- **param** `scheme` -- 登録するスキーム名を文字列で指定します。
+- **param** `klass` -- scheme に対応させるクラスを指定します。
+- **return** -- 引数 klass をそのまま返します。
+- **raise** `ArgumentError` -- scheme を大文字にした文字列が、定数名として使えない場合に発生します。
+
+```ruby title="例"
+require 'uri'
+p URI.register_scheme('MS_SEARCH', URI::Generic) # => URI::Generic
+p URI.scheme_list['MS_SEARCH']                   # => URI::Generic
+```
+
+- **SEE** [m:URI.scheme_list]
+
+#%end
+
+### def URI.scheme_list -> {String => Class}
+
+定義されているスキームとクラスの対応をハッシュで返します。
+
+キーはスキーム名を表す大文字の文字列、値は対応する [c:URI::Generic] のサブクラスです。
+
+```ruby title="例"
+require 'uri'
+p URI.scheme_list
+# => {"HTTPS" => URI::HTTPS, "LDAP" => URI::LDAP, "FILE" => URI::File, "FTP" => URI::FTP, "LDAPS" => URI::LDAPS, "MAILTO" => URI::MailTo, "WS" => URI::WS, "WSS" => URI::WSS, "HTTP" => URI::HTTP}
+```
+
+#%since 3.1
+- **SEE** [m:URI.register_scheme]
+
+#%end
+
+#%since 3.4
+### def URI.parser=(parser = URI::RFC3986_PARSER)
+
+`self` が使うデフォルトのパーサを設定します。
+
+このメソッドを呼び出すと、[m:URI.parse] や [m:URI.split] などが使うパーサ(`URI::RFC3986_Parser` または `URI::RFC2396_Parser` のインスタンス)が切り替わります。同時に `URI::PARSER`・`URI::Parser` や、パーサが提供する正規表現に対応する定数群も、指定したパーサのものに更新されます。
+
+- **param** `parser` -- 設定するパーサを、`URI::RFC3986_Parser` または `URI::RFC2396_Parser` のインスタンスで指定します。省略した場合は `URI::RFC3986_PARSER` を設定します。
+
+```ruby title="例"
+require 'uri'
+URI.parser = URI::RFC2396_PARSER
+p URI::PARSER.class      # => URI::RFC2396_Parser
+URI.parser = URI::RFC3986_PARSER
+p URI::PARSER.class      # => URI::RFC3986_Parser
+```
+
+#%end
+
+#%since 3.2
+### def URI.decode_uri_component(str, enc=Encoding::UTF_8) -> String
+
+URL エンコードされた文字列 str をデコードした文字列を返します。
+
+[m:URI.decode_www_form_component] と同様の変換を行いますが、"+" という文字はデコードせずそのまま残す点が異なります。
+
+enc で指定したエンコーディングの文字列が URL エンコードされたものとみなし、返り値にそのエンコーディングを付加します。
+
+- **param** `str` -- デコード対象の文字列です。
+- **param** `enc` -- 変換先のエンコーディングです。
+- **raise** `ArgumentError` -- str の %-エンコーディングの書式が不正である場合に発生します。
+
+```ruby title="例"
+require 'uri'
+p URI.decode_uri_component('a+b%20c') # => "a+b c"
+```
+
+- **SEE** [m:URI.encode_uri_component], [m:URI.decode_www_form_component]
+
+#%end
+
+#%since 3.2
+### def URI.encode_uri_component(str, enc=nil) -> String
+
+文字列 str を URL エンコードした文字列を返します。
+
+[m:URI.encode_www_form_component] と同様の変換を行いますが、空白文字 " " を "+" ではなく "%20" に変換する点が異なります。
+
+- **param** `str` -- エンコードする文字列です。
+- **param** `enc` -- 指定された場合、パーセントエンコーディングする前に、str をこのエンコーディングに変換します。
+
+```ruby title="例"
+require 'uri'
+p URI.encode_uri_component('Ruby is fun+test') # => "Ruby%20is%20fun%2Btest"
+```
+
+- **SEE** [m:URI.decode_uri_component], [m:URI.encode_www_form_component]
+
+#%end
+
 ## Constants
 
 ### const UNSAFE -> Regexp
