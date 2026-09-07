@@ -17,6 +17,7 @@ require:
 
 ## Public Instance Methods
 
+#%until 4.0
 ### def find_gems_with_sources(dep) -> Array
 
 与えられた条件にマッチする [c:Gem::Specification] のインスタンスと URI のペアのリストを返します。
@@ -26,6 +27,7 @@ Gem はローカル (Dir.pwd) とリモート (Gem.sources) の両方から検�
 
 - **param** `dep` -- [c:Gem::Dependency] のインスタンスを指定します。
 
+#%end
 ### def find_spec_by_name_and_version(gem_name, version = Gem::Requirement.default) -> Array
 
 与えられた Gem の名前とバージョンに関する条件にマッチする [c:Gem::Specification] とそれの存在する URI を含む配列を返します。

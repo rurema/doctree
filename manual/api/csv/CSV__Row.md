@@ -432,7 +432,7 @@ row = CSV::Row.new(["header2", "header1", "header2"], [1, 2, 3])
 p row.to_hash # => {"header2"=>3, "header1"=>2}
 ```
 
-#%since 3.1
+#%since 3.2
 ### def deconstruct -> [object]
 
 パターンマッチに使用する行の値の配列を返します。

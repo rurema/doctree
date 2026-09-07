@@ -87,6 +87,7 @@ byte_offset の位置がある行の終端のバイトオフセット(次の行�
 
 - **param** `byte_offset` -- バイトオフセット
 
+#%since 4.1
 ### def byte_offset(line, column) -> Integer
 
 行番号と桁位置からバイトオフセットを求めます。
@@ -102,6 +103,7 @@ p source.byte_offset(2, 1) # => 9
 p source.line(9)           # => 2
 ```
 
+#%end
 ### def code_units_offset(byte_offset, encoding) -> Integer
 
 byte_offset に対応する、指定エンコーディングのコード単位でのオフセットを返します。UTF-16 のコード単位で位置をやりとりする

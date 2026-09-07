@@ -7,6 +7,7 @@ library: _builtin
 
 ## Module Functions
 
+#%until 4.1
 ### module_function def _id2ref(id)    -> object
 
 オブジェクト ID([m:BasicObject#__id__])からオブジェクトを得ます。
@@ -35,6 +36,8 @@ p map[a.object_id] # => "hoge"
 a = "hoge"
 p ObjectSpace._id2ref(a.__id__) # => "hoge"
 ```
+
+#%end
 
 ### module_function def define_finalizer(obj, proc)         -> Array
 ### module_function def define_finalizer(obj) {|id| ...}    -> Array

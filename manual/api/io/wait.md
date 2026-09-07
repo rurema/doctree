@@ -11,6 +11,7 @@ Socketに対してしか利用できません。
 
 ## Instance Methods
 
+#%until 4.0
 ### def nread -> Integer
 
 ブロックせずに読み込み可能なバイト数を返します。
@@ -30,6 +31,7 @@ Socketに対してしか利用できません。
 ブロックしてしまう可能性があるならfalseを返します。
 
 判定不可能な場合は nil を返します。
+#%end
 
 ### def wait(timeout = nil)          -> bool | self | nil
 ### def wait_readable(timeout = nil) -> bool | self | nil
