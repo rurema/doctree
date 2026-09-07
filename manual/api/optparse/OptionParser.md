@@ -152,6 +152,16 @@ parse(opts2) # => unsupported argument type: Time (ArgumentError)
 
 - **SEE** [m:OptionParser#getopts]
 
+### def OptionParser.terminate(arg = nil) -> ()
+
+[m:OptionParser#terminate] と同じです。
+
+- **param** `arg` -- パース結果の先頭に戻す文字列を指定します。省略した場合は何も戻しません。
+
+#%#noexample OptionParser#terminate を参照
+
+- **SEE** [m:OptionParser#terminate]
+
 ## Instance Methods
 
 ### def accept(klass, pat = /.*/){|str| ...}    -> ()
@@ -1175,3 +1185,153 @@ params = opt.getopts(ARGV, "ab:", "foo", "bar:")
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブクラスになります。
+
+### def define(*params) {|v| ... } -> OptionParser::Switch
+### def def_option(*params) {|v| ... } -> OptionParser::Switch
+
+オプションを登録します。[m:OptionParser#on] と同じ引数を受け付けますが、`self` ではなく登録した [c:OptionParser::Switch] オブジェクトを返します。
+
+- **param** `params` -- [m:OptionParser#on] と同じです。
+- **return** -- 登録した [c:OptionParser::Switch] オブジェクトを返します。
+
+- **SEE** [m:OptionParser#on]
+
+### def define_head(*params) {|v| ... } -> OptionParser::Switch
+### def def_head_option(*params) {|v| ... } -> OptionParser::Switch
+
+オプションを、サマリの先頭に表示される位置に登録します。[m:OptionParser#on_head] と同じ引数を受け付けますが、`self` ではなく登録した [c:OptionParser::Switch] オブジェクトを返します。
+
+- **param** `params` -- [m:OptionParser#on_head] と同じです。
+- **return** -- 登録した [c:OptionParser::Switch] オブジェクトを返します。
+
+- **SEE** [m:OptionParser#on_head]
+
+### def define_tail(*params) {|v| ... } -> OptionParser::Switch
+### def def_tail_option(*params) {|v| ... } -> OptionParser::Switch
+
+オプションを、サマリの末尾に表示される位置に登録します。[m:OptionParser#on_tail] と同じ引数を受け付けますが、`self` ではなく登録した [c:OptionParser::Switch] オブジェクトを返します。
+
+- **param** `params` -- [m:OptionParser#on_tail] と同じです。
+- **return** -- 登録した [c:OptionParser::Switch] オブジェクトを返します。
+
+- **SEE** [m:OptionParser#on_tail]
+
+### def terminate(arg = nil) -> ()
+
+オプションのパースを打ち切ります。
+
+`arg` を指定すると、パースされずに残った引数の先頭に `arg` を戻します。
+オプションを処理するブロックの中から呼び出し、その時点でパースを終了させたい場合に使います。
+
+内部では [m:OptionParser.terminate] を呼び出しています。
+
+- **param** `arg` -- パース結果の先頭に戻す文字列を指定します。省略した場合は何も戻しません。
+
+```ruby
+require "optparse"
+
+opts = OptionParser.new
+opts.on("-a"){ |v| }
+opts.on("-b"){ |v| opts.terminate("leftover") }
+p opts.parse(["-b", "-a"])   # => ["leftover", "-a"]
+```
+
+- **SEE** [m:OptionParser.terminate]
+
+#%since 3.1
+### def require_exact           -> bool
+### def require_exact=(newstate)
+
+長い形式のオプション([m:OptionParser#on] で登録するロングオプション)の指定を、
+省略せずに完全な形で行うことを要求するかどうかを表します。デフォルトは false です。
+
+true を指定すると、一意に補完できる範囲であっても省略した形式のロングオプションを
+受け付けなくなり、完全に一致しない場合は例外 [c:OptionParser::InvalidOption] が発生します。
+
+- **param** `newstate` -- 完全な形式のみを受け付けるかどうかを true か false で指定します。
+
+- **return** -- 現在の設定を true か false で返します。
+
+```ruby
+require "optparse"
+
+opts = OptionParser.new
+opts.on("--foobar")
+
+opts.require_exact = false
+p opts.parse(["--foo"])   # => []
+
+opts.require_exact = true
+begin
+  opts.parse(["--foo"])
+rescue OptionParser::ParseError => e
+  puts e.message   # => invalid option: --foo
+end
+```
+
+#%end
+
+#%since 3.2
+### def raise_unknown           -> bool
+### def raise_unknown=(newstate)
+
+未知のオプションを検出した時に例外を発生させるかどうかを表します。デフォルトは true です。
+
+false を指定すると、未知のオプションに出会った時点で例外を発生させずに、
+[m:OptionParser#terminate] を呼んだときと同様にその場でパースを打ち切ります。
+そのオプション以降の引数は、パースされずに残った引数として返り値に含まれます。
+
+- **param** `newstate` -- 未知のオプションで例外を発生させるかどうかを true か false で指定します。
+
+- **return** -- 現在の設定を true か false で返します。
+
+```ruby
+require "optparse"
+
+opts = OptionParser.new
+opts.on("-a")
+opts.raise_unknown = false
+p opts.parse(["-a", "-x", "-a"])   # => ["-x", "-a"]
+```
+
+#%end
+
+### def candidate(word) -> [String]
+
+`word` で始まるオプション名の補完候補を配列で返します。
+
+デフォルトで利用可能な `--*-completion-bash` オプションの処理で、
+コマンドラインの補完候補を求めるために使われます。
+
+- **param** `word` -- 補完したいオプション名の断片を文字列で指定します。
+             `--` で始まる場合はロングオプション、`-` 1 文字だけの場合は
+             ショートオプションとロングオプションの両方、それ以外の `-` で始まる
+             文字列の場合はショートオプションが候補の対象になります。
+
+```ruby
+require "optparse"
+
+opts = OptionParser.new
+opts.on("--foo VALUE")
+opts.on("--bar")
+p opts.candidate("--f")   # => ["--foo"]
+p opts.candidate("-")     # => ["--foo", "--bar"]
+```
+
+#%since 3.4
+### def help_exit -> ()
+
+サマリ([m:OptionParser#help] と同じ内容)を表示してから、プロセスを終了します。
+
+標準出力がターミナル(tty)に接続されており、かつ環境変数 `RUBY_PAGER` か `PAGER`
+のいずれかが空でない値に設定されている場合は、そのページャー経由でサマリを表示します。
+それ以外の場合は標準出力に直接出力します。
+
+デフォルトで利用可能な `--help` オプションの処理で使われるメソッドです。
+
+内部で `exit` を呼び出すため、呼び出し元には戻りません。
+
+- **SEE** [m:OptionParser#help]
+
+#%end
+
