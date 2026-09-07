@@ -1018,6 +1018,246 @@ rescue => err
 end
 ```
 
+### def captures -> [String | nil] | nil
+
+直前のマッチが成功していれば、キャプチャした部分文字列(インデックス 1 以降)を格納した配列を返します。マッチが失敗していれば `nil` を返します。
+
+#%since 3.4
+マッチに参加しなかったグループに対応する要素は `nil` になります。
+#%else
+マッチに参加しなかったグループに対応する要素は空文字列になります。
+
+#%end
+
+```ruby title="例"
+require 'strscan'
+
+s = StringScanner.new('Fri Dec 12 1975 14:39')
+p s.captures                       # => nil
+p s.scan(/(\w+) (\w+) (\d+) /)     # => "Fri Dec 12 "
+p s.captures                       # => ["Fri", "Dec", "12"]
+p s.scan(/(\d+)/)                  # => "1975"
+p s.captures                       # => ["1975"]
+```
+
+- **SEE** [m:StringScanner#\[\]]
+
+### def fixed_anchor? -> bool
+
+`self` が fixed anchor モードで生成されていれば `true` を、そうでなければ `false` を返します。
+
+fixed anchor モードは [m:StringScanner.new] に `fixed_anchor: true` を指定すると有効になります。このモードでは、正規表現中の `\A` は現在のスキャンポインタの位置ではなく元の文字列の先頭にマッチするようになり、`^` はスキャンポインタの位置に関係なく通常の行頭にマッチするようになります。
+
+```ruby title="例"
+require 'strscan'
+
+s1 = StringScanner.new('test')
+p s1.fixed_anchor?                        # => false
+
+s2 = StringScanner.new('test', fixed_anchor: true)
+p s2.fixed_anchor?                        # => true
+```
+
+```ruby title="例: \A の挙動の違い"
+require 'strscan'
+
+s1 = StringScanner.new("ab\ncd")
+s1.scan(/a/)
+p s1.scan(/\Ab/)                          # => "b"
+
+s2 = StringScanner.new("ab\ncd", fixed_anchor: true)
+s2.scan(/a/)
+p s2.scan(/\Ab/)                          # => nil
+```
+
+- **SEE** [m:StringScanner.new]
+
+#%since 4.1
+### def integer_at(specifier, base = 10) -> Integer | nil
+
+`specifier` に対応するキャプチャの部分文字列を、[m:String#to_i] と同様の変換で整数にして返します。
+
+`specifier` には 0 以上の整数、負の整数、シンボル、名前付きキャプチャの名前を表す文字列を指定できます。`specifier` の意味は [m:StringScanner#\[\]] と同じです。
+
+以下のいずれかに該当する場合は `nil` を返します。
+
+- 直前にマッチを行っていない、または直前のマッチが失敗している場合。
+- `specifier` が整数で、範囲外の場合。
+- `specifier` が指すグループがマッチに参加していない場合。
+
+`self[specifier]&.to_i(base)` とほぼ同じですが、一時的な文字列オブジェクトの生成を避けます。
+
+- **param** `specifier` -- 取得するキャプチャを指定します。整数、シンボル、または文字列で指定します。
+- **param** `base` -- 整数へ変換する際の基数を指定します。
+- **raise** `IndexError` -- `specifier` が名前付きキャプチャに対応しないシンボルまたは文字列のときに発生します。
+
+```ruby title="例"
+require 'strscan'
+
+scanner = StringScanner.new("2024-06-15")
+scanner.scan(/(\d{4})-(\d{2})-(\d{2})/)
+p scanner.integer_at(1)       # => 2024
+p scanner.integer_at(1, 16)   # => 8228
+```
+
+- **SEE** [m:StringScanner#\[\]], [m:String#to_i]
+
+#%end
+
+#%since 3.2
+### def named_captures -> {String => String | nil}
+
+直前に使用した正規表現に含まれる名前付きキャプチャグループの名前をキー、対応する部分文字列を値とするハッシュを返します。
+
+値は、そのグループがマッチに参加していれば対応する部分文字列に、参加していなければ `nil` になります。直前のマッチ全体が失敗した場合も、同様にすべての値が `nil` になります。直前の正規表現に名前付きキャプチャグループが無い場合は空のハッシュ `{}` を返します。
+
+```ruby title="例"
+require 'strscan'
+
+s = StringScanner.new('Fri Dec 12 1975 14:39')
+pattern = /(?<wday>\w+) (?<month>\w+) (?<day>\d+) /
+s.match?(pattern)
+p s.named_captures     # => {"wday" => "Fri", "month" => "Dec", "day" => "12"}
+
+s.match?(/(\d+)/)
+p s.named_captures     # => {}
+```
+
+```ruby title="例: マッチが失敗した場合"
+require 'strscan'
+
+s = StringScanner.new('nope')
+pattern = /(?<wday>\w+) (?<month>\w+) (?<day>\d+) /
+p s.match?(pattern)     # => nil
+p s.named_captures      # => {"wday" => nil, "month" => nil, "day" => nil}
+```
+
+- **SEE** [m:StringScanner#\[\]]
+
+#%end
+
+#%since 3.4
+### def peek_byte -> Integer | nil
+
+スキャンポインタの位置にある 1 バイトを読み取り、その文字コードを整数で返します。スキャンポインタは進めません。
+
+マルチバイト文字であっても常に 1 バイトだけを見ます。スキャンポインタが文字列の末尾を指しているときは `nil` を返します。
+
+```ruby title="例"
+require 'strscan'
+
+s = StringScanner.new('ab')
+p s.peek_byte    # => 97
+p s.getch        # => "a"
+p s.peek_byte    # => 98
+p s.getch        # => "b"
+p s.peek_byte    # => nil
+```
+
+- **SEE** [m:StringScanner#peek], [m:StringScanner#getch], [m:StringScanner#scan_byte]
+
+#%end
+
+#%since 3.4
+### def scan_byte -> Integer | nil
+
+1 バイトスキャンして、その文字コードを整数で返します。スキャンポインタをその後ろに進めます。
+
+このメソッドはマルチバイト文字を意識しません。常に 1 バイトだけをスキャンします。スキャンポインタが文字列の末尾を指しているときは `nil` を返します。
+
+```ruby title="例"
+require 'strscan'
+
+s = StringScanner.new('ab')
+p s.scan_byte    # => 97
+p s.scan_byte    # => 98
+p s.scan_byte    # => nil
+```
+
+```ruby title="例: マルチバイト文字を含む文字列"
+require 'strscan'
+
+s = StringScanner.new("るびい")
+p s.scan_byte    # => 227
+p s.scan_byte    # => 130
+p s.scan_byte    # => 139
+```
+
+- **SEE** [m:StringScanner#getch], [m:StringScanner#get_byte], [m:StringScanner#peek_byte]
+
+#%end
+
+#%since 3.4
+### def scan_integer(base: 10) -> Integer | nil
+
+スキャンポインタの地点から整数をスキャンし、`Integer` に変換して返します。マッチしなかった場合は `nil` を返します。
+
+`base` を省略した場合や 10 を指定した場合は `/[+-]?\d+/` にマッチする部分をスキャンします。`base` に 16 を指定した場合は `/[+-]?(0x)?[0-9a-fA-F]+/` にマッチする部分をスキャンします。
+
+- **param** `base` -- スキャンする整数の基数を指定します。10 または 16 を指定できます。
+- **raise** `ArgumentError` -- `base` に 10, 16 以外を指定すると発生します。
+- **raise** `Encoding::CompatibilityError` -- スキャン対象の文字列が ASCII 互換でないエンコーディングのとき発生します。
+
+```ruby title="例"
+require 'strscan'
+
+s = StringScanner.new('42end')
+p s.scan_integer         # => 42
+p s.rest                 # => "end"
+
+s = StringScanner.new('-3')
+p s.scan_integer         # => -3
+
+s = StringScanner.new('abc')
+p s.scan_integer         # => nil
+```
+
+```ruby title="例: 16 進数"
+require 'strscan'
+
+s = StringScanner.new('0x1fg')
+p s.scan_integer(base: 16)   # => 31
+p s.rest                     # => "g"
+```
+
+- **SEE** [m:StringScanner#scan], [m:StringScanner#scan_byte]
+
+#%end
+
+### def size -> Integer | nil
+
+直前のマッチが成功していれば、そのキャプチャの数(マッチ全体を含む)を返します。マッチが失敗していれば `nil` を返します。
+
+```ruby title="例"
+require 'strscan'
+
+s = StringScanner.new('Fri Dec 12 1975 14:39')
+p s.size                          # => nil
+p s.scan(/(\w+) (\w+) (\d+) /)    # => "Fri Dec 12 "
+p s.size                          # => 4
+```
+
+- **SEE** [m:StringScanner#captures], [m:StringScanner#values_at]
+
+### def values_at(*specifiers) -> [String | nil] | nil
+
+直前のマッチが成功していれば、各 `specifier` に対応する部分文字列を集めた配列を返します。マッチが失敗していれば `nil` を返します。
+
+各 `specifier` に対応する値は [m:StringScanner#\[\]] と同じです。
+
+- **param** `specifiers` -- 取得したいキャプチャを指定します。整数、シンボル、文字列を指定できます。
+
+```ruby title="例"
+require 'strscan'
+
+s = StringScanner.new('Fri Dec 12 1975 14:39')
+s.scan(/(\w+) (\w+) (\d+) /)
+p s.values_at(0, 1, 2, 3)    # => ["Fri Dec 12 ", "Fri", "Dec", "12"]
+p s.values_at(0, -1)         # => ["Fri Dec 12 ", "12"]
+```
+
+- **SEE** [m:StringScanner#\[\]]
+
 ## Constants
 
 ### const Version -> String
