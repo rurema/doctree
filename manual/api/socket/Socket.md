@@ -720,6 +720,38 @@ pp Socket.getifaddrs
 #    #<Socket::Ifaddr lo0 UP,LOOPBACK,RUNNING,MULTICAST 127.0.0.1 netmask=255.?.?.? (5 bytes for 16 bytes sockaddr_in)>]
 ```
 
+#%since 3.4
+### def Socket.tcp_fast_fallback -> bool
+### def Socket.tcp_fast_fallback=(enable)
+
+Happy Eyeballs Version 2([RFC 8305](https://datatracker.ietf.org/doc/html/rfc8305))を [m:TCPSocket.new] と [m:Socket.tcp] で既定で有効にするかどうかを取得・設定します。
+
+`true` にすると、[m:TCPSocket.new] と [m:Socket.tcp] の両方で Happy Eyeballs Version 2 が有効になります(Windows では [m:TCPSocket.new] はこのアルゴリズムに対応していません)。`false` にすると Ruby 3.3 以前の動作に戻ります。
+
+明示的に設定しなければ既定値は `true` です。
+
+#%since 4.0
+ただし、環境変数 `RUBY_TCP_NO_FAST_FALLBACK=1` が設定されている場合、既定値は `false` になります。
+
+#%end
+メソッド呼び出しごとに制御したい場合は、各メソッドのキーワード引数 `fast_fallback` を使ってください。
+
+- **param** `enable` -- `true` なら Happy Eyeballs Version 2 を有効に、`false` なら無効にします。
+
+```ruby
+require 'socket'
+
+p Socket.tcp_fast_fallback   # => true
+
+Socket.tcp_fast_fallback = false
+p Socket.tcp_fast_fallback   # => false
+```
+
+- **SEE** [m:Socket.tcp]
+- **SEE** [m:TCPSocket.new]
+
+#%end
+
 ## Instance Methods
 
 ### def accept -> Array
