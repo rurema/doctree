@@ -1,0 +1,22 @@
+== 4.1  ruby: ruby 4.1.0dev (2026-09-04T00:08:20Z master 07ef97df22) +PRISM [x86_64-linux]
+DB method entries: 8060  (libs 292)  real methods: 39052
+require-failed libs (15): irb/ext/multi-irb irb/ws-for-case-2 json/add/bigdecimal json/add/complex json/add/core json/add/date json/add/date_time json/add/exception json/add/ostruct json/add/range json/add/rational json/add/regexp json/add/struct json/add/symbol json/add/time
+-- scope builtin
+  excess methods: 18  (EXCESS(no-method)=18)
+  excess consts: 3
+  shortage: ALIAS_OF_DOC=19, DOC_ON_ANCESTOR=110, DOC_ON_DESCENDANT=4, UNDOC=55, UNDOC(class-undoc)=34, UNDOC_PRIV=30, UNDOC_UNDERSCORE=2
+-- scope stdlib
+  excess methods: 169  (EXCESS(no-class)=66, EXCESS(no-method)=103, unmeasured(require-failed)=24, unmeasured(skipped-lib)=2)
+  excess consts: 19
+  shortage: ALIAS_OF_DOC=17, DOC_ON_ANCESTOR=2876, DOC_ON_DESCENDANT=97, UNDOC=1088, UNDOC(class-stub)=100, UNDOC(class-undoc)=4390, UNDOC_PRIV=1216, UNDOC_UNDERSCORE=18
+-- scope bundled
+  excess methods: 164  (EXCESS(no-class)=14, EXCESS(no-method)=150, unmeasured(skipped-lib)=198)
+  excess consts: 14
+  shortage: ALIAS_OF_DOC=47, DOC_ON_ANCESTOR=1214, DOC_ON_DESCENDANT=30, UNDOC=1977, UNDOC(class-stub)=196, UNDOC(class-undoc)=3123, UNDOC_PRIV=1982, UNDOC_UNDERSCORE=271
+-- scope stale-lib
+  excess methods: 0  ()
+  excess consts: 0
+  shortage: UNDOC(class-undoc)=5
+-- vendored: 1709 real methods (bundler/vendor/fileutils/lib/fileutils=442, rubygems/vendor/resolv/lib/resolv=345, rubygems/vendor/optparse/lib/optparse=156, rubygems/vendor/net-http/lib/net/http=152, rubygems/vendor/uri/lib/uri/generic=85, rubygems/vendor/net-protocol/lib/net/protocol=60, rubygems/vendor/net-http/lib/net/http/response=49, rubygems/vendor/pub_grub/lib/pub_grub/version_range=48)
+-- internal: 0 real methods ()
+-- undoc-lib: 17 real methods (random/formatter=9, bundled_gems=7, syntax_suggest/core_ext=1)

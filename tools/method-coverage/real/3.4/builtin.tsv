@@ -1,0 +1,5471 @@
+V	3.4.0	ruby 3.4.0dev (2024-12-25 master f450108330) +PRISM [x86_64-linux]
+A	Object	class	BasicObject	Object,Kernel,BasicObject
+A	Refinement	class	Module	Refinement,Module,Object,Kernel,BasicObject
+A	Kernel	module	-	Kernel
+A	Symbol	class	Object	Symbol,Comparable,Object,Kernel,BasicObject
+A	Exception	class	Object	Exception,Object,Kernel,BasicObject
+A	Range	class	Object	Range,Enumerable,Object,Kernel,BasicObject
+A	IOError	class	StandardError	IOError,StandardError,Exception,Object,Kernel,BasicObject
+A	EOFError	class	IOError	EOFError,IOError,StandardError,Exception,Object,Kernel,BasicObject
+A	SystemExit	class	Exception	SystemExit,Exception,Object,Kernel,BasicObject
+A	StopIteration	class	IndexError	StopIteration,IndexError,StandardError,Exception,Object,Kernel,BasicObject
+A	SignalException	class	Exception	SignalException,Exception,Object,Kernel,BasicObject
+A	Interrupt	class	SignalException	Interrupt,SignalException,Exception,Object,Kernel,BasicObject
+A	StandardError	class	Exception	StandardError,Exception,Object,Kernel,BasicObject
+A	TypeError	class	StandardError	TypeError,StandardError,Exception,Object,Kernel,BasicObject
+A	ArgumentError	class	StandardError	ArgumentError,StandardError,Exception,Object,Kernel,BasicObject
+A	IndexError	class	StandardError	IndexError,StandardError,Exception,Object,Kernel,BasicObject
+A	KeyError	class	IndexError	KeyError,IndexError,StandardError,Exception,Object,Kernel,BasicObject
+A	String	class	Object	String,Comparable,Object,Kernel,BasicObject
+A	Array	class	Object	Array,Enumerable,Object,Kernel,BasicObject
+A	RangeError	class	StandardError	RangeError,StandardError,Exception,Object,Kernel,BasicObject
+A	NilClass	class	Object	NilClass,Object,Kernel,BasicObject
+A	ScriptError	class	Exception	ScriptError,Exception,Object,Kernel,BasicObject
+A	SyntaxError	class	ScriptError	SyntaxError,ScriptError,Exception,Object,Kernel,BasicObject
+A	LoadError	class	ScriptError	LoadError,ScriptError,Exception,Object,Kernel,BasicObject
+A	NotImplementedError	class	ScriptError	NotImplementedError,ScriptError,Exception,Object,Kernel,BasicObject
+A	NameError	class	StandardError	NameError,StandardError,Exception,Object,Kernel,BasicObject
+A	Fiber	class	Object	Fiber,Object,Kernel,BasicObject
+A	NoMethodError	class	NameError	NoMethodError,NameError,StandardError,Exception,Object,Kernel,BasicObject
+A	Thread	class	Object	Thread,Object,Kernel,BasicObject
+A	Hash	class	Object	Hash,Enumerable,Object,Kernel,BasicObject
+A	RuntimeError	class	StandardError	RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
+A	FrozenError	class	RuntimeError	FrozenError,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
+A	SecurityError	class	Exception	SecurityError,Exception,Object,Kernel,BasicObject
+A	NoMemoryError	class	Exception	NoMemoryError,Exception,Object,Kernel,BasicObject
+A	EncodingError	class	StandardError	EncodingError,StandardError,Exception,Object,Kernel,BasicObject
+A	Ractor	class	Object	Ractor,Object,Kernel,BasicObject
+A	NoMatchingPatternError	class	StandardError	NoMatchingPatternError,StandardError,Exception,Object,Kernel,BasicObject
+A	NoMatchingPatternKeyError	class	NoMatchingPatternError	NoMatchingPatternKeyError,NoMatchingPatternError,StandardError,Exception,Object,Kernel,BasicObject
+A	Rational	class	Numeric	Rational,Numeric,Comparable,Object,Kernel,BasicObject
+A	SystemCallError	class	StandardError	SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO	class	Object	IO,File::Constants,Enumerable,Object,Kernel,BasicObject
+A	Errno	module	-	Errno
+A	Warning	module	-	Warning
+A	RubyVM	class	Object	RubyVM,Object,Kernel,BasicObject
+A	FiberError	class	StandardError	FiberError,StandardError,Exception,Object,Kernel,BasicObject
+A	Dir	class	Object	Dir,Enumerable,Object,Kernel,BasicObject
+A	Complex	class	Numeric	Complex,Numeric,Comparable,Object,Kernel,BasicObject
+A	TrueClass	class	Object	TrueClass,Object,Kernel,BasicObject
+A	FalseClass	class	Object	FalseClass,Object,Kernel,BasicObject
+A	Encoding	class	Object	Encoding,Object,Kernel,BasicObject
+A	TracePoint	class	Object	TracePoint,Object,Kernel,BasicObject
+A	Comparable	module	-	Comparable
+A	Enumerable	module	-	Enumerable
+A	Time	class	Object	Time,Comparable,Object,Kernel,BasicObject
+A	UncaughtThrowError	class	ArgumentError	UncaughtThrowError,ArgumentError,StandardError,Exception,Object,Kernel,BasicObject
+A	ThreadGroup	class	Object	ThreadGroup,Object,Kernel,BasicObject
+A	ThreadError	class	StandardError	ThreadError,StandardError,Exception,Object,Kernel,BasicObject
+A	Thread::Mutex	class	Object	Thread::Mutex,Object,Kernel,BasicObject
+A	Thread::Queue	class	Object	Thread::Queue,Object,Kernel,BasicObject
+A	ClosedQueueError	class	StopIteration	ClosedQueueError,StopIteration,IndexError,StandardError,Exception,Object,Kernel,BasicObject
+A	ZeroDivisionError	class	StandardError	ZeroDivisionError,StandardError,Exception,Object,Kernel,BasicObject
+A	FloatDomainError	class	RangeError	FloatDomainError,RangeError,StandardError,Exception,Object,Kernel,BasicObject
+A	Numeric	class	Object	Numeric,Comparable,Object,Kernel,BasicObject
+A	Thread::SizedQueue	class	Thread::Queue	Thread::SizedQueue,Thread::Queue,Object,Kernel,BasicObject
+A	FileTest	module	-	FileTest
+A	File	class	IO	File,IO,File::Constants,Enumerable,Object,Kernel,BasicObject
+A	Random	class	Random::Base	Random,Random::Base,Random::Formatter,Object,Kernel,BasicObject
+A	Thread::ConditionVariable	class	Object	Thread::ConditionVariable,Object,Kernel,BasicObject
+A	Signal	module	-	Signal
+A	Integer	class	Numeric	Integer,Numeric,Comparable,Object,Kernel,BasicObject
+A	Struct	class	Object	Struct,Enumerable,Object,Kernel,BasicObject
+A	Proc	class	Object	Proc,Object,Kernel,BasicObject
+A	Data	class	Object	Data,Object,Kernel,BasicObject
+A	Float	class	Numeric	Float,Numeric,Comparable,Object,Kernel,BasicObject
+A	RegexpError	class	StandardError	RegexpError,StandardError,Exception,Object,Kernel,BasicObject
+A	LocalJumpError	class	StandardError	LocalJumpError,StandardError,Exception,Object,Kernel,BasicObject
+A	Regexp	class	Object	Regexp,Object,Kernel,BasicObject
+A	SystemStackError	class	Exception	SystemStackError,Exception,Object,Kernel,BasicObject
+A	Method	class	Object	Method,Object,Kernel,BasicObject
+A	UnboundMethod	class	Object	UnboundMethod,Object,Kernel,BasicObject
+A	Set	class	Object	Set,Enumerable,Object,Kernel,BasicObject
+A	Binding	class	Object	Binding,Object,Kernel,BasicObject
+A	MatchData	class	Object	MatchData,Object,Kernel,BasicObject
+A	Process	module	-	Process
+A	Math	module	-	Math
+A	GC	module	-	GC
+A	ObjectSpace	module	-	ObjectSpace
+A	Enumerator	class	Object	Enumerator,Enumerable,Object,Kernel,BasicObject
+A	Marshal	module	-	Marshal
+A	UnicodeNormalize	module	-	UnicodeNormalize
+A	BasicObject	class	-	BasicObject
+A	Module	class	Object	Module,Object,Kernel,BasicObject
+A	Class	class	Module	Class,Module,Object,Kernel,BasicObject
+A	Thread::Backtrace	class	Object	Thread::Backtrace,Object,Kernel,BasicObject
+A	Ractor::Error	class	RuntimeError	Ractor::Error,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
+A	Ractor::IsolationError	class	Ractor::Error	Ractor::IsolationError,Ractor::Error,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
+A	Ractor::RemoteError	class	Ractor::Error	Ractor::RemoteError,Ractor::Error,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
+A	Ractor::MovedError	class	Ractor::Error	Ractor::MovedError,Ractor::Error,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
+A	Ractor::ClosedError	class	StopIteration	Ractor::ClosedError,StopIteration,IndexError,StandardError,Exception,Object,Kernel,BasicObject
+A	Ractor::UnsafeError	class	Ractor::Error	Ractor::UnsafeError,Ractor::Error,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
+A	Ractor::MovedObject	class	BasicObject	Ractor::MovedObject,BasicObject
+A	IO::WaitWritable	module	-	IO::WaitWritable
+A	IO::EAGAINWaitReadable	class	Errno::EAGAIN	IO::EAGAINWaitReadable,IO::WaitReadable,Errno::EAGAIN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::EAGAINWaitWritable	class	Errno::EAGAIN	IO::EAGAINWaitWritable,IO::WaitWritable,Errno::EAGAIN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::TimeoutError	class	IOError	IO::TimeoutError,IOError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::EINPROGRESSWaitReadable	class	Errno::EINPROGRESS	IO::EINPROGRESSWaitReadable,IO::WaitReadable,Errno::EINPROGRESS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::EINPROGRESSWaitWritable	class	Errno::EINPROGRESS	IO::EINPROGRESSWaitWritable,IO::WaitWritable,Errno::EINPROGRESS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::Buffer	class	Object	IO::Buffer,Comparable,Object,Kernel,BasicObject
+A	IO::WaitReadable	module	-	IO::WaitReadable
+A	Errno::ENOLINK	class	SystemCallError	Errno::ENOLINK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOMEDIUM	class	SystemCallError	Errno::ENOMEDIUM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOMEM	class	SystemCallError	Errno::ENOMEM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOMSG	class	SystemCallError	Errno::ENOMSG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENONET	class	SystemCallError	Errno::ENONET,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOPKG	class	SystemCallError	Errno::ENOPKG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::NOERROR	class	SystemCallError	Errno::NOERROR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOPROTOOPT	class	SystemCallError	Errno::ENOPROTOOPT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOSPC	class	SystemCallError	Errno::ENOSPC,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOSR	class	SystemCallError	Errno::ENOSR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOSTR	class	SystemCallError	Errno::ENOSTR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOSYS	class	SystemCallError	Errno::ENOSYS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTBLK	class	SystemCallError	Errno::ENOTBLK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTCONN	class	SystemCallError	Errno::ENOTCONN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTDIR	class	SystemCallError	Errno::ENOTDIR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTEMPTY	class	SystemCallError	Errno::ENOTEMPTY,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTNAM	class	SystemCallError	Errno::ENOTNAM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTRECOVERABLE	class	SystemCallError	Errno::ENOTRECOVERABLE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTSOCK	class	SystemCallError	Errno::ENOTSOCK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTSUP	class	SystemCallError	Errno::ENOTSUP,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTTY	class	SystemCallError	Errno::ENOTTY,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOTUNIQ	class	SystemCallError	Errno::ENOTUNIQ,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENXIO	class	SystemCallError	Errno::ENXIO,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EOVERFLOW	class	SystemCallError	Errno::EOVERFLOW,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EOWNERDEAD	class	SystemCallError	Errno::EOWNERDEAD,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EPERM	class	SystemCallError	Errno::EPERM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EPFNOSUPPORT	class	SystemCallError	Errno::EPFNOSUPPORT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EPIPE	class	SystemCallError	Errno::EPIPE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EPROTO	class	SystemCallError	Errno::EPROTO,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EPROTONOSUPPORT	class	SystemCallError	Errno::EPROTONOSUPPORT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EPROTOTYPE	class	SystemCallError	Errno::EPROTOTYPE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ERANGE	class	SystemCallError	Errno::ERANGE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EREMCHG	class	SystemCallError	Errno::EREMCHG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EREMOTE	class	SystemCallError	Errno::EREMOTE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EREMOTEIO	class	SystemCallError	Errno::EREMOTEIO,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ERESTART	class	SystemCallError	Errno::ERESTART,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ERFKILL	class	SystemCallError	Errno::ERFKILL,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EROFS	class	SystemCallError	Errno::EROFS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESHUTDOWN	class	SystemCallError	Errno::ESHUTDOWN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESOCKTNOSUPPORT	class	SystemCallError	Errno::ESOCKTNOSUPPORT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESPIPE	class	SystemCallError	Errno::ESPIPE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESRCH	class	SystemCallError	Errno::ESRCH,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESRMNT	class	SystemCallError	Errno::ESRMNT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESTALE	class	SystemCallError	Errno::ESTALE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ESTRPIPE	class	SystemCallError	Errno::ESTRPIPE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ETIME	class	SystemCallError	Errno::ETIME,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ETIMEDOUT	class	SystemCallError	Errno::ETIMEDOUT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ETOOMANYREFS	class	SystemCallError	Errno::ETOOMANYREFS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ETXTBSY	class	SystemCallError	Errno::ETXTBSY,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EUCLEAN	class	SystemCallError	Errno::EUCLEAN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EUNATCH	class	SystemCallError	Errno::EUNATCH,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EUSERS	class	SystemCallError	Errno::EUSERS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EAGAIN	class	SystemCallError	Errno::EAGAIN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EXDEV	class	SystemCallError	Errno::EXDEV,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EXFULL	class	SystemCallError	Errno::EXFULL,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::E2BIG	class	SystemCallError	Errno::E2BIG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EACCES	class	SystemCallError	Errno::EACCES,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EADDRINUSE	class	SystemCallError	Errno::EADDRINUSE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EADDRNOTAVAIL	class	SystemCallError	Errno::EADDRNOTAVAIL,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EADV	class	SystemCallError	Errno::EADV,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EAFNOSUPPORT	class	SystemCallError	Errno::EAFNOSUPPORT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EALREADY	class	SystemCallError	Errno::EALREADY,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADE	class	SystemCallError	Errno::EBADE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADF	class	SystemCallError	Errno::EBADF,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADFD	class	SystemCallError	Errno::EBADFD,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADMSG	class	SystemCallError	Errno::EBADMSG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADR	class	SystemCallError	Errno::EBADR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADRQC	class	SystemCallError	Errno::EBADRQC,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBADSLT	class	SystemCallError	Errno::EBADSLT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBFONT	class	SystemCallError	Errno::EBFONT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EBUSY	class	SystemCallError	Errno::EBUSY,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECANCELED	class	SystemCallError	Errno::ECANCELED,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECHILD	class	SystemCallError	Errno::ECHILD,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECHRNG	class	SystemCallError	Errno::ECHRNG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECOMM	class	SystemCallError	Errno::ECOMM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECONNABORTED	class	SystemCallError	Errno::ECONNABORTED,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECONNREFUSED	class	SystemCallError	Errno::ECONNREFUSED,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ECONNRESET	class	SystemCallError	Errno::ECONNRESET,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EDEADLK	class	SystemCallError	Errno::EDEADLK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EDESTADDRREQ	class	SystemCallError	Errno::EDESTADDRREQ,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EDOM	class	SystemCallError	Errno::EDOM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EDOTDOT	class	SystemCallError	Errno::EDOTDOT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EDQUOT	class	SystemCallError	Errno::EDQUOT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EEXIST	class	SystemCallError	Errno::EEXIST,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EFAULT	class	SystemCallError	Errno::EFAULT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EFBIG	class	SystemCallError	Errno::EFBIG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EHOSTDOWN	class	SystemCallError	Errno::EHOSTDOWN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EHOSTUNREACH	class	SystemCallError	Errno::EHOSTUNREACH,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EHWPOISON	class	SystemCallError	Errno::EHWPOISON,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EIDRM	class	SystemCallError	Errno::EIDRM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EILSEQ	class	SystemCallError	Errno::EILSEQ,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EINPROGRESS	class	SystemCallError	Errno::EINPROGRESS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EINTR	class	SystemCallError	Errno::EINTR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EINVAL	class	SystemCallError	Errno::EINVAL,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EIO	class	SystemCallError	Errno::EIO,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EISCONN	class	SystemCallError	Errno::EISCONN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EISDIR	class	SystemCallError	Errno::EISDIR,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EISNAM	class	SystemCallError	Errno::EISNAM,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EKEYEXPIRED	class	SystemCallError	Errno::EKEYEXPIRED,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EKEYREJECTED	class	SystemCallError	Errno::EKEYREJECTED,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EKEYREVOKED	class	SystemCallError	Errno::EKEYREVOKED,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EL2HLT	class	SystemCallError	Errno::EL2HLT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EL2NSYNC	class	SystemCallError	Errno::EL2NSYNC,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EL3HLT	class	SystemCallError	Errno::EL3HLT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EL3RST	class	SystemCallError	Errno::EL3RST,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELIBACC	class	SystemCallError	Errno::ELIBACC,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELIBBAD	class	SystemCallError	Errno::ELIBBAD,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELIBEXEC	class	SystemCallError	Errno::ELIBEXEC,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELIBMAX	class	SystemCallError	Errno::ELIBMAX,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELIBSCN	class	SystemCallError	Errno::ELIBSCN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELNRNG	class	SystemCallError	Errno::ELNRNG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ELOOP	class	SystemCallError	Errno::ELOOP,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EMEDIUMTYPE	class	SystemCallError	Errno::EMEDIUMTYPE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EMFILE	class	SystemCallError	Errno::EMFILE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EMLINK	class	SystemCallError	Errno::EMLINK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EMSGSIZE	class	SystemCallError	Errno::EMSGSIZE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::EMULTIHOP	class	SystemCallError	Errno::EMULTIHOP,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENAMETOOLONG	class	SystemCallError	Errno::ENAMETOOLONG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENAVAIL	class	SystemCallError	Errno::ENAVAIL,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENETDOWN	class	SystemCallError	Errno::ENETDOWN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENETRESET	class	SystemCallError	Errno::ENETRESET,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENETUNREACH	class	SystemCallError	Errno::ENETUNREACH,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENFILE	class	SystemCallError	Errno::ENFILE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOANO	class	SystemCallError	Errno::ENOANO,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOBUFS	class	SystemCallError	Errno::ENOBUFS,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOCSI	class	SystemCallError	Errno::ENOCSI,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENODATA	class	SystemCallError	Errno::ENODATA,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENODEV	class	SystemCallError	Errno::ENODEV,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOENT	class	SystemCallError	Errno::ENOENT,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOEXEC	class	SystemCallError	Errno::ENOEXEC,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOKEY	class	SystemCallError	Errno::ENOKEY,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	Errno::ENOLCK	class	SystemCallError	Errno::ENOLCK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
+A	RubyVM::AbstractSyntaxTree	module	-	RubyVM::AbstractSyntaxTree
+A	RubyVM::RJIT	module	-	RubyVM::RJIT
+A	RubyVM::InstructionSequence	class	Object	RubyVM::InstructionSequence,Object,Kernel,BasicObject
+A	Encoding::CompatibilityError	class	EncodingError	Encoding::CompatibilityError,EncodingError,StandardError,Exception,Object,Kernel,BasicObject
+A	Encoding::UndefinedConversionError	class	EncodingError	Encoding::UndefinedConversionError,EncodingError,StandardError,Exception,Object,Kernel,BasicObject
+A	Encoding::InvalidByteSequenceError	class	EncodingError	Encoding::InvalidByteSequenceError,EncodingError,StandardError,Exception,Object,Kernel,BasicObject
+A	Encoding::ConverterNotFoundError	class	EncodingError	Encoding::ConverterNotFoundError,EncodingError,StandardError,Exception,Object,Kernel,BasicObject
+A	Encoding::Converter	class	Object	Encoding::Converter,Object,Kernel,BasicObject
+A	File::Constants	module	-	File::Constants
+A	File::Stat	class	Object	File::Stat,Comparable,Object,Kernel,BasicObject
+A	Random::Base	class	Object	Random::Base,Random::Formatter,Object,Kernel,BasicObject
+A	Random::Formatter	module	-	Random::Formatter
+A	Regexp::TimeoutError	class	RegexpError	Regexp::TimeoutError,RegexpError,StandardError,Exception,Object,Kernel,BasicObject
+A	Process::UID	module	-	Process::UID
+A	Process::GID	module	-	Process::GID
+A	Process::Sys	module	-	Process::Sys
+A	Process::Waiter	class	Thread	Process::Waiter,Thread,Object,Kernel,BasicObject
+A	Process::Status	class	Object	Process::Status,Object,Kernel,BasicObject
+A	Process::Tms	class	Struct	Process::Tms,Struct,Enumerable,Object,Kernel,BasicObject
+A	Math::DomainError	class	StandardError	Math::DomainError,StandardError,Exception,Object,Kernel,BasicObject
+A	GC::Profiler	module	-	GC::Profiler
+A	ObjectSpace::WeakMap	class	Object	ObjectSpace::WeakMap,Enumerable,Object,Kernel,BasicObject
+A	ObjectSpace::WeakKeyMap	class	Object	ObjectSpace::WeakKeyMap,Object,Kernel,BasicObject
+A	Enumerator::Yielder	class	Object	Enumerator::Yielder,Object,Kernel,BasicObject
+A	Enumerator::Producer	class	Object	Enumerator::Producer,Object,Kernel,BasicObject
+A	Enumerator::Chain	class	Enumerator	Enumerator::Chain,Enumerator,Enumerable,Object,Kernel,BasicObject
+A	Enumerator::Product	class	Enumerator	Enumerator::Product,Enumerator,Enumerable,Object,Kernel,BasicObject
+A	Enumerator::ArithmeticSequence	class	Enumerator	Enumerator::ArithmeticSequence,Enumerator,Enumerable,Object,Kernel,BasicObject
+A	Enumerator::Lazy	class	Enumerator	Enumerator::Lazy,Enumerator,Enumerable,Object,Kernel,BasicObject
+A	Enumerator::Generator	class	Object	Enumerator::Generator,Enumerable,Object,Kernel,BasicObject
+A	Thread::Backtrace::Location	class	Object	Thread::Backtrace::Location,Object,Kernel,BasicObject
+A	IO::Buffer::LockedError	class	RuntimeError	IO::Buffer::LockedError,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::Buffer::AllocationError	class	RuntimeError	IO::Buffer::AllocationError,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::Buffer::AccessError	class	RuntimeError	IO::Buffer::AccessError,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::Buffer::InvalidatedError	class	RuntimeError	IO::Buffer::InvalidatedError,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
+A	IO::Buffer::MaskError	class	ArgumentError	IO::Buffer::MaskError,ArgumentError,StandardError,Exception,Object,Kernel,BasicObject
+A	RubyVM::AbstractSyntaxTree::Node	class	Object	RubyVM::AbstractSyntaxTree::Node,Object,Kernel,BasicObject
+A	RubyVM::AbstractSyntaxTree::Location	class	Object	RubyVM::AbstractSyntaxTree::Location,Object,Kernel,BasicObject
+A	ARGF.class	class	Object	ARGF.class,Enumerable,Object,Kernel,BasicObject
+A	ENV	object	-	-
+A	main	object	-	-
+M	Refinement	i	pub	target	-	-
+M	Refinement	i	priv	import_methods	-	-
+M	Kernel	s	pub	Integer	-	-
+M	Kernel	s	pub	load	-	-
+M	Kernel	s	pub	require	-	-
+M	Kernel	s	pub	require_relative	-	-
+M	Kernel	s	pub	autoload	-	-
+M	Kernel	s	pub	autoload?	-	-
+M	Kernel	s	pub	syscall	-	-
+M	Kernel	s	pub	open	-	-
+M	Kernel	s	pub	printf	-	-
+M	Kernel	s	pub	print	-	-
+M	Kernel	s	pub	putc	-	-
+M	Kernel	s	pub	puts	-	-
+M	Kernel	s	pub	sprintf	-	-
+M	Kernel	s	pub	format	-	-
+M	Kernel	s	pub	String	-	-
+M	Kernel	s	pub	Array	-	-
+M	Kernel	s	pub	Hash	-	-
+M	Kernel	s	pub	p	-	-
+M	Kernel	s	pub	readline	-	-
+M	Kernel	s	pub	readlines	-	-
+M	Kernel	s	pub	Float	-	-
+M	Kernel	s	pub	local_variables	-	-
+M	Kernel	s	pub	binding	-	-
+M	Kernel	s	pub	exec	-	-
+M	Kernel	s	pub	exit!	-	-
+M	Kernel	s	pub	system	-	-
+M	Kernel	s	pub	spawn	-	-
+M	Kernel	s	pub	abort	-	-
+M	Kernel	s	pub	Rational	-	-
+M	Kernel	s	pub	caller	-	-
+M	Kernel	s	pub	caller_locations	-	-
+M	Kernel	s	pub	warn	-	-
+M	Kernel	s	pub	Complex	-	-
+M	Kernel	s	pub	loop	-	-
+M	Kernel	s	pub	gets	-	-
+M	Kernel	s	pub	raise	-	-
+M	Kernel	s	pub	fail	-	-
+M	Kernel	s	pub	global_variables	-	-
+M	Kernel	s	pub	__method__	-	-
+M	Kernel	s	pub	__callee__	-	-
+M	Kernel	s	pub	__dir__	-	-
+M	Kernel	s	pub	proc	-	-
+M	Kernel	s	pub	lambda	-	-
+M	Kernel	s	pub	fork	-	-
+M	Kernel	s	pub	test	-	-
+M	Kernel	s	pub	set_trace_func	-	-
+M	Kernel	s	pub	exit	-	-
+M	Kernel	s	pub	eval	-	-
+M	Kernel	s	pub	iterator?	-	-
+M	Kernel	s	pub	block_given?	-	-
+M	Kernel	s	pub	catch	-	-
+M	Kernel	s	pub	throw	-	-
+M	Kernel	s	pub	select	-	-
+M	Kernel	s	pub	`	-	-
+M	Kernel	s	pub	trace_var	-	-
+M	Kernel	s	pub	untrace_var	-	-
+M	Kernel	s	pub	sleep	-	-
+M	Kernel	s	pub	at_exit	-	-
+M	Kernel	s	pub	rand	-	-
+M	Kernel	s	pub	srand	-	-
+M	Kernel	s	pub	trap	-	-
+M	Kernel	i	pub	singleton_class	-	-
+M	Kernel	i	pub	dup	-	-
+M	Kernel	i	pub	itself	-	-
+M	Kernel	i	pub	methods	-	-
+M	Kernel	i	pub	singleton_methods	-	-
+M	Kernel	i	pub	protected_methods	-	-
+M	Kernel	i	pub	private_methods	-	-
+M	Kernel	i	pub	public_methods	-	-
+M	Kernel	i	pub	instance_variables	-	-
+M	Kernel	i	pub	instance_variable_get	-	-
+M	Kernel	i	pub	instance_variable_set	-	-
+M	Kernel	i	pub	instance_variable_defined?	-	-
+M	Kernel	i	pub	remove_instance_variable	-	-
+M	Kernel	i	pub	instance_of?	-	-
+M	Kernel	i	pub	kind_of?	-	-
+M	Kernel	i	pub	is_a?	-	-
+M	Kernel	i	pub	display	-	-
+M	Kernel	i	pub	class	-	-
+M	Kernel	i	pub	frozen?	-	-
+M	Kernel	i	pub	tap	-	-
+M	Kernel	i	pub	yield_self	then	-
+M	Kernel	i	pub	then	-	-
+M	Kernel	i	pub	public_send	-	-
+M	Kernel	i	pub	extend	-	-
+M	Kernel	i	pub	clone	-	-
+M	Kernel	i	pub	<=>	-	-
+M	Kernel	i	pub	===	-	-
+M	Kernel	i	pub	!~	-	-
+M	Kernel	i	pub	nil?	-	-
+M	Kernel	i	pub	eql?	-	-
+M	Kernel	i	pub	respond_to?	-	-
+M	Kernel	i	pub	method	-	-
+M	Kernel	i	pub	public_method	-	-
+M	Kernel	i	pub	singleton_method	-	-
+M	Kernel	i	pub	define_singleton_method	-	-
+M	Kernel	i	pub	hash	-	-
+M	Kernel	i	pub	freeze	-	-
+M	Kernel	i	pub	inspect	-	-
+M	Kernel	i	pub	object_id	-	-
+M	Kernel	i	pub	send	-	-
+M	Kernel	i	pub	to_s	-	-
+M	Kernel	i	pub	to_enum	-	-
+M	Kernel	i	pub	enum_for	-	-
+M	Kernel	i	priv	sprintf	-	-
+M	Kernel	i	priv	format	-	-
+M	Kernel	i	priv	String	-	-
+M	Kernel	i	priv	Array	-	-
+M	Kernel	i	priv	Hash	-	-
+M	Kernel	i	priv	open	-	-
+M	Kernel	i	priv	printf	-	-
+M	Kernel	i	priv	readlines	-	-
+M	Kernel	i	priv	putc	-	-
+M	Kernel	i	priv	puts	-	-
+M	Kernel	i	priv	readline	-	-
+M	Kernel	i	priv	local_variables	-	-
+M	Kernel	i	priv	print	-	-
+M	Kernel	i	priv	syscall	-	-
+M	Kernel	i	priv	p	-	-
+M	Kernel	i	priv	Rational	-	-
+M	Kernel	i	priv	caller	-	-
+M	Kernel	i	priv	caller_locations	-	-
+M	Kernel	i	priv	Complex	-	-
+M	Kernel	i	priv	warn	-	-
+M	Kernel	i	priv	loop	-	-
+M	Kernel	i	priv	raise	-	-
+M	Kernel	i	priv	fail	-	-
+M	Kernel	i	priv	global_variables	-	-
+M	Kernel	i	priv	__method__	-	-
+M	Kernel	i	priv	__callee__	-	-
+M	Kernel	i	priv	__dir__	-	-
+M	Kernel	i	priv	fork	-	-
+M	Kernel	i	priv	set_trace_func	-	-
+M	Kernel	i	priv	exit	-	-
+M	Kernel	i	priv	eval	-	-
+M	Kernel	i	priv	iterator?	-	-
+M	Kernel	i	priv	block_given?	-	-
+M	Kernel	i	priv	catch	-	-
+M	Kernel	i	priv	throw	-	-
+M	Kernel	i	priv	select	-	-
+M	Kernel	i	priv	`	-	-
+M	Kernel	i	priv	trace_var	-	-
+M	Kernel	i	priv	untrace_var	-	-
+M	Kernel	i	priv	sleep	-	-
+M	Kernel	i	priv	at_exit	-	-
+M	Kernel	i	priv	rand	-	-
+M	Kernel	i	priv	srand	-	-
+M	Kernel	i	priv	trap	-	-
+M	Kernel	i	priv	Integer	-	-
+M	Kernel	i	priv	load	-	-
+M	Kernel	i	priv	require	-	-
+M	Kernel	i	priv	require_relative	-	-
+M	Kernel	i	priv	autoload?	-	-
+M	Kernel	i	priv	Float	-	-
+M	Kernel	i	priv	autoload	-	-
+M	Kernel	i	priv	binding	-	-
+M	Kernel	i	priv	respond_to_missing?	-	-
+M	Kernel	i	priv	pp	-	-
+M	Kernel	i	priv	exec	-	-
+M	Kernel	i	priv	exit!	-	-
+M	Kernel	i	priv	system	-	-
+M	Kernel	i	priv	spawn	-	-
+M	Kernel	i	priv	abort	-	-
+M	Kernel	i	priv	gets	-	-
+M	Kernel	i	priv	proc	-	-
+M	Kernel	i	priv	lambda	-	-
+M	Kernel	i	priv	initialize_copy	-	-
+M	Kernel	i	priv	initialize_clone	-	-
+M	Kernel	i	priv	initialize_dup	-	-
+M	Kernel	i	priv	test	-	-
+M	Symbol	s	pub	all_symbols	-	-
+M	Symbol	i	pub	<=>	-	-
+M	Symbol	i	pub	==	-	-
+M	Symbol	i	pub	===	-	-
+M	Symbol	i	pub	start_with?	-	-
+M	Symbol	i	pub	next	-	-
+M	Symbol	i	pub	=~	-	-
+M	Symbol	i	pub	[]	-	-
+M	Symbol	i	pub	to_proc	-	-
+M	Symbol	i	pub	to_s	-	-
+M	Symbol	i	pub	end_with?	-	-
+M	Symbol	i	pub	to_sym	-	-
+M	Symbol	i	pub	empty?	-	-
+M	Symbol	i	pub	casecmp	-	-
+M	Symbol	i	pub	casecmp?	-	-
+M	Symbol	i	pub	match	-	-
+M	Symbol	i	pub	match?	-	-
+M	Symbol	i	pub	name	-	-
+M	Symbol	i	pub	id2name	to_s	-
+M	Symbol	i	pub	inspect	-	-
+M	Symbol	i	pub	intern	to_sym	-
+M	Symbol	i	pub	slice	-	-
+M	Symbol	i	pub	encoding	-	-
+M	Symbol	i	pub	upcase	-	-
+M	Symbol	i	pub	downcase	-	-
+M	Symbol	i	pub	capitalize	-	-
+M	Symbol	i	pub	swapcase	-	-
+M	Symbol	i	pub	length	-	-
+M	Symbol	i	pub	size	-	-
+M	Symbol	i	pub	succ	-	-
+M	Exception	s	pub	exception	-	-
+M	Exception	s	pub	to_tty?	-	-
+M	Exception	i	pub	message	-	-
+M	Exception	i	pub	detailed_message	-	-
+M	Exception	i	pub	full_message	-	-
+M	Exception	i	pub	backtrace	-	-
+M	Exception	i	pub	backtrace_locations	-	-
+M	Exception	i	pub	==	-	-
+M	Exception	i	pub	set_backtrace	-	-
+M	Exception	i	pub	cause	-	-
+M	Exception	i	pub	inspect	-	-
+M	Exception	i	pub	to_s	-	-
+M	Exception	i	pub	exception	-	-
+M	Exception	i	pub	respond_to?	-	-
+M	Exception	i	priv	initialize	-	-
+M	Exception	i	priv	method_missing	-	-
+M	Exception	i	priv	respond_to_missing?	-	-
+M	Range	i	pub	each	-	-
+M	Range	i	pub	step	-	-
+M	Range	i	pub	exclude_end?	-	-
+M	Range	i	pub	last	-	-
+M	Range	i	pub	overlap?	-	-
+M	Range	i	pub	cover?	-	-
+M	Range	i	pub	==	-	-
+M	Range	i	pub	===	-	-
+M	Range	i	pub	to_a	-	-
+M	Range	i	pub	to_s	-	-
+M	Range	i	pub	entries	-	-
+M	Range	i	pub	include?	-	-
+M	Range	i	pub	eql?	-	-
+M	Range	i	pub	count	-	-
+M	Range	i	pub	%	-	-
+M	Range	i	pub	bsearch	-	-
+M	Range	i	pub	max	-	-
+M	Range	i	pub	min	-	-
+M	Range	i	pub	hash	-	-
+M	Range	i	pub	first	-	-
+M	Range	i	pub	inspect	-	-
+M	Range	i	pub	begin	-	-
+M	Range	i	pub	end	-	-
+M	Range	i	pub	minmax	-	-
+M	Range	i	pub	member?	-	-
+M	Range	i	pub	reverse_each	-	-
+M	Range	i	pub	size	-	-
+M	Range	i	priv	initialize	-	-
+M	Range	i	priv	initialize_copy	-	-
+M	SystemExit	i	pub	success?	-	-
+M	SystemExit	i	pub	status	-	-
+M	SystemExit	i	priv	initialize	-	-
+M	StopIteration	i	pub	result	-	-
+M	SignalException	i	pub	signo	-	-
+M	SignalException	i	pub	signm	message	-
+M	SignalException	i	priv	initialize	-	-
+M	Interrupt	i	priv	initialize	-	-
+M	KeyError	i	pub	receiver	-	-
+M	KeyError	i	pub	key	-	-
+M	KeyError	i	priv	initialize	-	-
+M	String	s	pub	try_convert	-	-
+M	String	s	pub	new	-	-
+M	String	i	pub	encoding	-	-
+M	String	i	pub	each_grapheme_cluster	-	-
+M	String	i	pub	slice	-	-
+M	String	i	pub	valid_encoding?	-	-
+M	String	i	pub	ascii_only?	-	-
+M	String	i	pub	unicode_normalize!	-	-
+M	String	i	pub	force_encoding	-	-
+M	String	i	pub	b	-	-
+M	String	i	pub	dup	-	-
+M	String	i	pub	unicode_normalized?	-	-
+M	String	i	pub	to_r	-	-
+M	String	i	pub	unicode_normalize	-	-
+M	String	i	pub	encode	-	-
+M	String	i	pub	encode!	-	-
+M	String	i	pub	%	-	-
+M	String	i	pub	*	-	-
+M	String	i	pub	+	-	-
+M	String	i	pub	to_c	-	-
+M	String	i	pub	count	-	-
+M	String	i	pub	partition	-	-
+M	String	i	pub	+@	-	-
+M	String	i	pub	-@	-	-
+M	String	i	pub	<=>	-	-
+M	String	i	pub	<<	-	-
+M	String	i	pub	sum	-	-
+M	String	i	pub	==	-	-
+M	String	i	pub	===	-	-
+M	String	i	pub	=~	-	-
+M	String	i	pub	next	-	-
+M	String	i	pub	[]	-	-
+M	String	i	pub	[]=	-	-
+M	String	i	pub	unpack	-	-
+M	String	i	pub	unpack1	-	-
+M	String	i	pub	include?	-	-
+M	String	i	pub	empty?	-	-
+M	String	i	pub	casecmp	-	-
+M	String	i	pub	casecmp?	-	-
+M	String	i	pub	bytesize	-	-
+M	String	i	pub	match	-	-
+M	String	i	pub	match?	-	-
+M	String	i	pub	succ!	-	-
+M	String	i	pub	eql?	-	-
+M	String	i	pub	insert	-	-
+M	String	i	pub	upto	-	-
+M	String	i	pub	next!	-	-
+M	String	i	pub	byteindex	-	-
+M	String	i	pub	index	-	-
+M	String	i	pub	byterindex	-	-
+M	String	i	pub	rindex	-	-
+M	String	i	pub	chr	-	-
+M	String	i	pub	getbyte	-	-
+M	String	i	pub	clear	-	-
+M	String	i	pub	byteslice	-	-
+M	String	i	pub	hash	-	-
+M	String	i	pub	bytesplice	-	-
+M	String	i	pub	scrub!	-	-
+M	String	i	pub	dedup	-@	-
+M	String	i	pub	replace	-	-
+M	String	i	pub	dump	-	-
+M	String	i	pub	undump	-	-
+M	String	i	pub	scrub	-	-
+M	String	i	pub	setbyte	-	-
+M	String	i	pub	intern	-	-
+M	String	i	pub	upcase	-	-
+M	String	i	pub	freeze	-	-
+M	String	i	pub	inspect	-	-
+M	String	i	pub	swapcase	-	-
+M	String	i	pub	downcase	-	-
+M	String	i	pub	length	-	-
+M	String	i	pub	size	-	-
+M	String	i	pub	upcase!	-	-
+M	String	i	pub	succ	-	-
+M	String	i	pub	hex	-	-
+M	String	i	pub	swapcase!	-	-
+M	String	i	pub	downcase!	-	-
+M	String	i	pub	capitalize	-	-
+M	String	i	pub	bytes	-	-
+M	String	i	pub	lines	-	-
+M	String	i	pub	reverse	-	-
+M	String	i	pub	grapheme_clusters	-	-
+M	String	i	pub	oct	-	-
+M	String	i	pub	split	-	-
+M	String	i	pub	to_str	-	-
+M	String	i	pub	crypt	-	-
+M	String	i	pub	chars	-	-
+M	String	i	pub	codepoints	-	-
+M	String	i	pub	end_with?	-	-
+M	String	i	pub	prepend	-	-
+M	String	i	pub	to_s	-	-
+M	String	i	pub	to_i	-	-
+M	String	i	pub	to_f	-	-
+M	String	i	pub	sub	-	-
+M	String	i	pub	scan	-	-
+M	String	i	pub	reverse!	-	-
+M	String	i	pub	concat	-	-
+M	String	i	pub	capitalize!	-	-
+M	String	i	pub	chomp	-	-
+M	String	i	pub	ljust	-	-
+M	String	i	pub	to_sym	-	-
+M	String	i	pub	start_with?	-	-
+M	String	i	pub	strip	-	-
+M	String	i	pub	append_as_bytes	-	-
+M	String	i	pub	chop	-	-
+M	String	i	pub	rjust	-	-
+M	String	i	pub	ord	-	-
+M	String	i	pub	lstrip	-	-
+M	String	i	pub	gsub	-	-
+M	String	i	pub	delete_prefix	-	-
+M	String	i	pub	delete_suffix	-	-
+M	String	i	pub	sub!	-	-
+M	String	i	pub	center	-	-
+M	String	i	pub	rstrip	-	-
+M	String	i	pub	chomp!	-	-
+M	String	i	pub	strip!	-	-
+M	String	i	pub	lstrip!	-	-
+M	String	i	pub	gsub!	-	-
+M	String	i	pub	chop!	-	-
+M	String	i	pub	delete_suffix!	-	-
+M	String	i	pub	tr	-	-
+M	String	i	pub	tr_s	-	-
+M	String	i	pub	rstrip!	-	-
+M	String	i	pub	delete_prefix!	-	-
+M	String	i	pub	tr!	-	-
+M	String	i	pub	tr_s!	-	-
+M	String	i	pub	delete!	-	-
+M	String	i	pub	delete	-	-
+M	String	i	pub	squeeze	-	-
+M	String	i	pub	each_byte	-	-
+M	String	i	pub	each_char	-	-
+M	String	i	pub	each_codepoint	-	-
+M	String	i	pub	squeeze!	-	-
+M	String	i	pub	each_line	-	-
+M	String	i	pub	slice!	-	-
+M	String	i	pub	rpartition	-	-
+M	String	i	priv	initialize	-	-
+M	String	i	priv	initialize_copy	-	-
+M	Array	s	pub	try_convert	-	-
+M	Array	s	pub	[]	-	-
+M	Array	s	pub	new	-	-
+M	Array	i	pub	last	-	-
+M	Array	i	pub	to_h	-	-
+M	Array	i	pub	&	-	-
+M	Array	i	pub	*	-	-
+M	Array	i	pub	+	-	-
+M	Array	i	pub	-	-	-
+M	Array	i	pub	at	-	-
+M	Array	i	pub	fetch	-	-
+M	Array	i	pub	union	-	-
+M	Array	i	pub	difference	-	-
+M	Array	i	pub	intersection	-	-
+M	Array	i	pub	intersect?	-	-
+M	Array	i	pub	push	-	-
+M	Array	i	pub	append	push	-
+M	Array	i	pub	pop	-	-
+M	Array	i	pub	shift	-	-
+M	Array	i	pub	unshift	-	-
+M	Array	i	pub	each_index	-	-
+M	Array	i	pub	join	-	-
+M	Array	i	pub	rotate	-	-
+M	Array	i	pub	rotate!	-	-
+M	Array	i	pub	sort!	-	-
+M	Array	i	pub	sort_by!	-	-
+M	Array	i	pub	collect!	-	-
+M	Array	i	pub	map!	-	-
+M	Array	i	pub	select!	-	-
+M	Array	i	pub	filter!	-	-
+M	Array	i	pub	keep_if	-	-
+M	Array	i	pub	sort	-	-
+M	Array	i	pub	delete_at	-	-
+M	Array	i	pub	delete_if	-	-
+M	Array	i	pub	values_at	-	-
+M	Array	i	pub	count	-	-
+M	Array	i	pub	fill	-	-
+M	Array	i	pub	find_index	-	-
+M	Array	i	pub	rassoc	-	-
+M	Array	i	pub	select	-	-
+M	Array	i	pub	filter	-	-
+M	Array	i	pub	compact!	-	-
+M	Array	i	pub	reject	-	-
+M	Array	i	pub	collect	-	-
+M	Array	i	pub	map	-	-
+M	Array	i	pub	uniq!	-	-
+M	Array	i	pub	permutation	-	-
+M	Array	i	pub	flatten	-	-
+M	Array	i	pub	flatten!	-	-
+M	Array	i	pub	reject!	-	-
+M	Array	i	pub	transpose	-	-
+M	Array	i	pub	repeated_permutation	-	-
+M	Array	i	pub	assoc	-	-
+M	Array	i	pub	product	-	-
+M	Array	i	pub	combination	-	-
+M	Array	i	pub	bsearch_index	-	-
+M	Array	i	pub	repeated_combination	-	-
+M	Array	i	pub	minmax	-	-
+M	Array	i	pub	bsearch	-	-
+M	Array	i	pub	all?	-	-
+M	Array	i	pub	any?	-	-
+M	Array	i	pub	one?	-	-
+M	Array	i	pub	none?	-	-
+M	Array	i	pub	reverse_each	-	-
+M	Array	i	pub	deconstruct	-	-
+M	Array	i	pub	fetch_values	-	-
+M	Array	i	pub	|	-	-
+M	Array	i	pub	zip	-	-
+M	Array	i	pub	take	-	-
+M	Array	i	pub	take_while	-	-
+M	Array	i	pub	drop	-	-
+M	Array	i	pub	drop_while	-	-
+M	Array	i	pub	cycle	-	-
+M	Array	i	pub	<=>	-	-
+M	Array	i	pub	<<	-	-
+M	Array	i	pub	uniq	-	-
+M	Array	i	pub	compact	-	-
+M	Array	i	pub	sum	-	-
+M	Array	i	pub	==	-	-
+M	Array	i	pub	[]	-	-
+M	Array	i	pub	[]=	-	-
+M	Array	i	pub	include?	-	-
+M	Array	i	pub	shuffle!	-	-
+M	Array	i	pub	empty?	-	-
+M	Array	i	pub	eql?	-	-
+M	Array	i	pub	insert	-	-
+M	Array	i	pub	shuffle	-	-
+M	Array	i	pub	sample	-	-
+M	Array	i	pub	index	-	-
+M	Array	i	pub	first	-	-
+M	Array	i	pub	rindex	-	-
+M	Array	i	pub	replace	-	-
+M	Array	i	pub	clear	-	-
+M	Array	i	pub	max	-	-
+M	Array	i	pub	min	-	-
+M	Array	i	pub	hash	-	-
+M	Array	i	pub	freeze	-	-
+M	Array	i	pub	inspect	-	-
+M	Array	i	pub	length	-	-
+M	Array	i	pub	size	-	-
+M	Array	i	pub	each	-	-
+M	Array	i	pub	reverse	-	-
+M	Array	i	pub	concat	-	-
+M	Array	i	pub	to_ary	-	-
+M	Array	i	pub	prepend	unshift	-
+M	Array	i	pub	reverse!	-	-
+M	Array	i	pub	to_a	-	-
+M	Array	i	pub	to_s	inspect	-
+M	Array	i	pub	pack	-	-
+M	Array	i	pub	delete	-	-
+M	Array	i	pub	slice	-	-
+M	Array	i	pub	slice!	-	-
+M	Array	i	pub	dig	-	-
+M	Array	i	priv	initialize	-	-
+M	Array	i	priv	initialize_copy	-	-
+M	NilClass	i	pub	to_c	-	-
+M	NilClass	i	pub	&	-	-
+M	NilClass	i	pub	===	-	-
+M	NilClass	i	pub	rationalize	-	-
+M	NilClass	i	pub	inspect	-	-
+M	NilClass	i	pub	=~	-	-
+M	NilClass	i	pub	to_a	-	-
+M	NilClass	i	pub	to_s	-	-
+M	NilClass	i	pub	to_i	-	-
+M	NilClass	i	pub	to_f	-	-
+M	NilClass	i	pub	to_r	-	-
+M	NilClass	i	pub	nil?	-	-
+M	NilClass	i	pub	|	-	-
+M	NilClass	i	pub	to_h	-	-
+M	NilClass	i	pub	^	-	-
+M	SyntaxError	i	pub	path	-	-
+M	SyntaxError	i	priv	initialize	-	-
+M	LoadError	i	pub	path	-	-
+M	NameError	i	pub	receiver	-	-
+M	NameError	i	pub	local_variables	-	-
+M	NameError	i	pub	name	-	-
+M	NameError	i	priv	initialize	-	-
+M	Fiber	s	pub	yield	-	-
+M	Fiber	s	pub	[]	-	-
+M	Fiber	s	pub	[]=	-	-
+M	Fiber	s	pub	blocking?	-	-
+M	Fiber	s	pub	scheduler	-	-
+M	Fiber	s	pub	set_scheduler	-	-
+M	Fiber	s	pub	current_scheduler	-	-
+M	Fiber	s	pub	schedule	-	-
+M	Fiber	s	pub	current	-	-
+M	Fiber	s	pub	blocking	-	-
+M	Fiber	i	pub	blocking?	-	-
+M	Fiber	i	pub	storage=	-	-
+M	Fiber	i	pub	resume	-	-
+M	Fiber	i	pub	raise	-	-
+M	Fiber	i	pub	alive?	-	-
+M	Fiber	i	pub	backtrace	-	-
+M	Fiber	i	pub	backtrace_locations	-	-
+M	Fiber	i	pub	kill	-	-
+M	Fiber	i	pub	inspect	to_s	-
+M	Fiber	i	pub	to_s	-	-
+M	Fiber	i	pub	transfer	-	-
+M	Fiber	i	pub	storage	-	-
+M	Fiber	i	priv	initialize	-	-
+M	NoMethodError	i	pub	args	-	-
+M	NoMethodError	i	pub	private_call?	-	-
+M	NoMethodError	i	priv	initialize	-	-
+M	Thread	s	pub	list	-	-
+M	Thread	s	pub	start	-	-
+M	Thread	s	pub	fork	-	-
+M	Thread	s	pub	main	-	-
+M	Thread	s	pub	current	-	-
+M	Thread	s	pub	stop	-	-
+M	Thread	s	pub	kill	-	-
+M	Thread	s	pub	exit	-	-
+M	Thread	s	pub	pass	-	-
+M	Thread	s	pub	abort_on_exception	-	-
+M	Thread	s	pub	abort_on_exception=	-	-
+M	Thread	s	pub	report_on_exception	-	-
+M	Thread	s	pub	each_caller_location	-	-
+M	Thread	s	pub	report_on_exception=	-	-
+M	Thread	s	pub	ignore_deadlock	-	-
+M	Thread	s	pub	ignore_deadlock=	-	-
+M	Thread	s	pub	handle_interrupt	-	-
+M	Thread	s	pub	pending_interrupt?	-	-
+M	Thread	s	pub	new	-	-
+M	Thread	i	pub	raise	-	-
+M	Thread	i	pub	fetch	-	-
+M	Thread	i	pub	key?	-	-
+M	Thread	i	pub	backtrace	-	-
+M	Thread	i	pub	backtrace_locations	-	-
+M	Thread	i	pub	join	-	-
+M	Thread	i	pub	exit	-	-
+M	Thread	i	pub	status	-	-
+M	Thread	i	pub	[]	-	-
+M	Thread	i	pub	[]=	-	-
+M	Thread	i	pub	abort_on_exception=	-	-
+M	Thread	i	pub	kill	-	-
+M	Thread	i	pub	report_on_exception=	-	-
+M	Thread	i	pub	report_on_exception	-	-
+M	Thread	i	pub	abort_on_exception	-	-
+M	Thread	i	pub	pending_interrupt?	-	-
+M	Thread	i	pub	terminate	-	-
+M	Thread	i	pub	run	-	-
+M	Thread	i	pub	wakeup	-	-
+M	Thread	i	pub	priority	-	-
+M	Thread	i	pub	priority=	-	-
+M	Thread	i	pub	value	-	-
+M	Thread	i	pub	thread_variable_set	-	-
+M	Thread	i	pub	thread_variables	-	-
+M	Thread	i	pub	thread_variable?	-	-
+M	Thread	i	pub	alive?	-	-
+M	Thread	i	pub	stop?	-	-
+M	Thread	i	pub	thread_variable_get	-	-
+M	Thread	i	pub	group	-	-
+M	Thread	i	pub	name	-	-
+M	Thread	i	pub	native_thread_id	-	-
+M	Thread	i	pub	name=	-	-
+M	Thread	i	pub	set_trace_func	-	-
+M	Thread	i	pub	add_trace_func	-	-
+M	Thread	i	pub	to_s	-	-
+M	Thread	i	pub	inspect	to_s	-
+M	Thread	i	pub	keys	-	-
+M	Thread	i	priv	initialize	-	-
+M	Hash	s	pub	ruby2_keywords_hash?	-	-
+M	Hash	s	pub	[]	-	-
+M	Hash	s	pub	try_convert	-	-
+M	Hash	s	pub	ruby2_keywords_hash	-	-
+M	Hash	i	pub	merge!	-	-
+M	Hash	i	pub	update	-	-
+M	Hash	i	pub	has_key?	-	-
+M	Hash	i	pub	merge	-	-
+M	Hash	i	pub	key?	-	-
+M	Hash	i	pub	member?	-	-
+M	Hash	i	pub	compare_by_identity	-	-
+M	Hash	i	pub	value?	-	-
+M	Hash	i	pub	has_value?	-	-
+M	Hash	i	pub	compare_by_identity?	-	-
+M	Hash	i	pub	compact	-	-
+M	Hash	i	pub	any?	-	-
+M	Hash	i	pub	==	-	-
+M	Hash	i	pub	<=	-	-
+M	Hash	i	pub	>=	-	-
+M	Hash	i	pub	dig	-	-
+M	Hash	i	pub	[]	-	-
+M	Hash	i	pub	[]=	-	-
+M	Hash	i	pub	deconstruct_keys	-	-
+M	Hash	i	pub	include?	-	-
+M	Hash	i	pub	key	-	-
+M	Hash	i	pub	eql?	-	-
+M	Hash	i	pub	to_h	-	-
+M	Hash	i	pub	empty?	-	-
+M	Hash	i	pub	replace	-	-
+M	Hash	i	pub	clear	-	-
+M	Hash	i	pub	hash	-	-
+M	Hash	i	pub	freeze	-	-
+M	Hash	i	pub	inspect	-	-
+M	Hash	i	pub	length	-	-
+M	Hash	i	pub	size	-	-
+M	Hash	i	pub	>	-	-
+M	Hash	i	pub	<	-	-
+M	Hash	i	pub	each	-	-
+M	Hash	i	pub	fetch	-	-
+M	Hash	i	pub	shift	-	-
+M	Hash	i	pub	to_hash	-	-
+M	Hash	i	pub	to_proc	-	-
+M	Hash	i	pub	to_a	-	-
+M	Hash	i	pub	to_s	inspect	-
+M	Hash	i	pub	select!	-	-
+M	Hash	i	pub	filter!	-	-
+M	Hash	i	pub	keep_if	-	-
+M	Hash	i	pub	values_at	-	-
+M	Hash	i	pub	delete_if	-	-
+M	Hash	i	pub	reject!	-	-
+M	Hash	i	pub	assoc	-	-
+M	Hash	i	pub	rassoc	-	-
+M	Hash	i	pub	select	-	-
+M	Hash	i	pub	filter	-	-
+M	Hash	i	pub	flatten	-	-
+M	Hash	i	pub	reject	-	-
+M	Hash	i	pub	compact!	-	-
+M	Hash	i	pub	delete	-	-
+M	Hash	i	pub	rehash	-	-
+M	Hash	i	pub	store	-	-
+M	Hash	i	pub	default=	-	-
+M	Hash	i	pub	default_proc	-	-
+M	Hash	i	pub	default_proc=	-	-
+M	Hash	i	pub	default	-	-
+M	Hash	i	pub	each_key	-	-
+M	Hash	i	pub	each_pair	-	-
+M	Hash	i	pub	each_value	-	-
+M	Hash	i	pub	transform_keys!	-	-
+M	Hash	i	pub	transform_values	-	-
+M	Hash	i	pub	transform_keys	-	-
+M	Hash	i	pub	transform_values!	-	-
+M	Hash	i	pub	values	-	-
+M	Hash	i	pub	fetch_values	-	-
+M	Hash	i	pub	keys	-	-
+M	Hash	i	pub	slice	-	-
+M	Hash	i	pub	invert	-	-
+M	Hash	i	pub	except	-	-
+M	Hash	i	priv	initialize	-	-
+M	Hash	i	priv	initialize_copy	-	-
+M	FrozenError	i	pub	receiver	-	-
+M	FrozenError	i	priv	initialize	-	-
+M	Ractor	s	pub	select	-	-
+M	Ractor	s	pub	make_shareable	-	-
+M	Ractor	s	pub	main?	-	-
+M	Ractor	s	pub	store_if_absent	-	-
+M	Ractor	s	pub	_require	-	-
+M	Ractor	s	pub	main	-	-
+M	Ractor	s	pub	current	-	-
+M	Ractor	s	pub	yield	-	-
+M	Ractor	s	pub	[]	-	-
+M	Ractor	s	pub	[]=	-	-
+M	Ractor	s	pub	receive	-	-
+M	Ractor	s	pub	recv	receive	-
+M	Ractor	s	pub	receive_if	-	-
+M	Ractor	s	pub	count	-	-
+M	Ractor	s	pub	shareable?	-	-
+M	Ractor	s	pub	new	-	-
+M	Ractor	s	priv	_activated	-	-
+M	Ractor	i	pub	send	-	-
+M	Ractor	i	pub	name	-	-
+M	Ractor	i	pub	<<	send	-
+M	Ractor	i	pub	inspect	-	-
+M	Ractor	i	pub	[]	-	-
+M	Ractor	i	pub	to_s	inspect	-
+M	Ractor	i	pub	[]=	-	-
+M	Ractor	i	pub	close_incoming	-	-
+M	Ractor	i	pub	close_outgoing	-	-
+M	Ractor	i	pub	take	-	-
+M	Ractor	i	priv	receive	-	-
+M	Ractor	i	priv	recv	receive	-
+M	Ractor	i	priv	receive_if	-	-
+M	NoMatchingPatternKeyError	i	pub	key	-	-
+M	NoMatchingPatternKeyError	i	pub	matchee	-	-
+M	NoMatchingPatternKeyError	i	priv	initialize	-	-
+M	Rational	s	priv	convert	-	-
+M	Rational	i	pub	floor	-	-
+M	Rational	i	pub	ceil	-	-
+M	Rational	i	pub	round	-	-
+M	Rational	i	pub	truncate	-	-
+M	Rational	i	pub	-@	-	-
+M	Rational	i	pub	**	-	-
+M	Rational	i	pub	<=>	-	-
+M	Rational	i	pub	negative?	-	-
+M	Rational	i	pub	positive?	-	-
+M	Rational	i	pub	==	-	-
+M	Rational	i	pub	to_s	-	-
+M	Rational	i	pub	to_i	-	-
+M	Rational	i	pub	to_f	-	-
+M	Rational	i	pub	to_r	-	-
+M	Rational	i	pub	fdiv	-	-
+M	Rational	i	pub	quo	-	-
+M	Rational	i	pub	*	-	-
+M	Rational	i	pub	+	-	-
+M	Rational	i	pub	numerator	-	-
+M	Rational	i	pub	-	-	-
+M	Rational	i	pub	denominator	-	-
+M	Rational	i	pub	/	-	-
+M	Rational	i	pub	hash	-	-
+M	Rational	i	pub	rationalize	-	-
+M	Rational	i	pub	inspect	-	-
+M	Rational	i	pub	coerce	-	-
+M	Rational	i	pub	abs	-	-
+M	Rational	i	pub	magnitude	-	-
+M	Rational	i	priv	marshal_dump	-	-
+M	SystemCallError	s	pub	===	-	-
+M	SystemCallError	i	pub	errno	-	-
+M	SystemCallError	i	priv	initialize	-	-
+M	IO	s	pub	select	-	-
+M	IO	s	pub	sysopen	-	-
+M	IO	s	pub	for_fd	-	-
+M	IO	s	pub	popen	-	-
+M	IO	s	pub	foreach	-	-
+M	IO	s	pub	binread	-	-
+M	IO	s	pub	binwrite	-	-
+M	IO	s	pub	pipe	-	-
+M	IO	s	pub	copy_stream	-	-
+M	IO	s	pub	open	-	-
+M	IO	s	pub	write	-	-
+M	IO	s	pub	readlines	-	-
+M	IO	s	pub	try_convert	-	-
+M	IO	s	pub	new	-	-
+M	IO	s	pub	read	-	-
+M	IO	i	pub	<<	-	-
+M	IO	i	pub	getc	-	-
+M	IO	i	pub	flush	-	-
+M	IO	i	pub	readpartial	-	-
+M	IO	i	pub	set_encoding	-	-
+M	IO	i	pub	fileno	-	-
+M	IO	i	pub	printf	-	-
+M	IO	i	pub	print	-	-
+M	IO	i	pub	putc	-	-
+M	IO	i	pub	puts	-	-
+M	IO	i	pub	stat	-	-
+M	IO	i	pub	readlines	-	-
+M	IO	i	pub	readline	-	-
+M	IO	i	pub	timeout	-	-
+M	IO	i	pub	timeout=	-	-
+M	IO	i	pub	getbyte	-	-
+M	IO	i	pub	inspect	-	-
+M	IO	i	pub	reopen	-	-
+M	IO	i	pub	syswrite	-	-
+M	IO	i	pub	sysread	-	-
+M	IO	i	pub	pread	-	-
+M	IO	i	pub	pwrite	-	-
+M	IO	i	pub	fsync	-	-
+M	IO	i	pub	fdatasync	-	-
+M	IO	i	pub	sync	-	-
+M	IO	i	pub	sync=	-	-
+M	IO	i	pub	lineno	-	-
+M	IO	i	pub	lineno=	-	-
+M	IO	i	pub	gets	-	-
+M	IO	i	pub	readbyte	-	-
+M	IO	i	pub	each	-	-
+M	IO	i	pub	ungetbyte	-	-
+M	IO	i	pub	tell	-	-
+M	IO	i	pub	seek	-	-
+M	IO	i	pub	readchar	-	-
+M	IO	i	pub	rewind	-	-
+M	IO	i	pub	write	-	-
+M	IO	i	pub	ungetc	-	-
+M	IO	i	pub	pos=	-	-
+M	IO	i	pub	pos	-	-
+M	IO	i	pub	eof?	-	-
+M	IO	i	pub	eof	-	-
+M	IO	i	pub	to_io	-	-
+M	IO	i	pub	close_on_exec?	-	-
+M	IO	i	pub	close_on_exec=	-	-
+M	IO	i	pub	to_i	fileno	-
+M	IO	i	pub	closed?	-	-
+M	IO	i	pub	close_read	-	-
+M	IO	i	pub	close	-	-
+M	IO	i	pub	isatty	-	-
+M	IO	i	pub	tty?	-	-
+M	IO	i	pub	close_write	-	-
+M	IO	i	pub	sysseek	-	-
+M	IO	i	pub	advise	-	-
+M	IO	i	pub	binmode?	-	-
+M	IO	i	pub	fcntl	-	-
+M	IO	i	pub	pid	-	-
+M	IO	i	pub	ioctl	-	-
+M	IO	i	pub	external_encoding	-	-
+M	IO	i	pub	internal_encoding	-	-
+M	IO	i	pub	to_path	-	-
+M	IO	i	pub	autoclose?	-	-
+M	IO	i	pub	autoclose=	-	-
+M	IO	i	pub	path	-	-
+M	IO	i	pub	wait_readable	-	-
+M	IO	i	pub	wait_writable	-	-
+M	IO	i	pub	wait	-	-
+M	IO	i	pub	set_encoding_by_bom	-	-
+M	IO	i	pub	wait_priority	-	-
+M	IO	i	pub	each_line	-	-
+M	IO	i	pub	each_byte	-	-
+M	IO	i	pub	each_char	-	-
+M	IO	i	pub	each_codepoint	-	-
+M	IO	i	pub	read_nonblock	-	-
+M	IO	i	pub	write_nonblock	-	-
+M	IO	i	pub	read	-	-
+M	IO	i	pub	binmode	-	-
+M	IO	i	priv	initialize	-	-
+M	IO	i	priv	initialize_copy	-	-
+M	Warning	s	pub	[]	-	-
+M	Warning	s	pub	[]=	-	-
+M	Warning	s	pub	categories	-	-
+M	Warning	i	pub	warn	-	-
+M	RubyVM	s	pub	keep_script_lines=	-	-
+M	RubyVM	s	pub	stat	-	-
+M	RubyVM	s	pub	keep_script_lines	-	-
+M	Dir	s	pub	unlink	-	-
+M	Dir	s	pub	for_fd	-	-
+M	Dir	s	pub	delete	-	-
+M	Dir	s	pub	foreach	-	-
+M	Dir	s	pub	each_child	-	-
+M	Dir	s	pub	children	-	-
+M	Dir	s	pub	chdir	-	-
+M	Dir	s	pub	fchdir	-	-
+M	Dir	s	pub	getwd	-	-
+M	Dir	s	pub	pwd	-	-
+M	Dir	s	pub	chroot	-	-
+M	Dir	s	pub	mkdir	-	-
+M	Dir	s	pub	rmdir	-	-
+M	Dir	s	pub	home	-	-
+M	Dir	s	pub	entries	-	-
+M	Dir	s	pub	open	-	-
+M	Dir	s	pub	empty?	-	-
+M	Dir	s	pub	[]	-	-
+M	Dir	s	pub	glob	-	-
+M	Dir	s	pub	exist?	-	-
+M	Dir	i	pub	each	-	-
+M	Dir	i	pub	tell	-	-
+M	Dir	i	pub	seek	-	-
+M	Dir	i	pub	path	-	-
+M	Dir	i	pub	rewind	-	-
+M	Dir	i	pub	pos	-	-
+M	Dir	i	pub	pos=	-	-
+M	Dir	i	pub	each_child	-	-
+M	Dir	i	pub	children	-	-
+M	Dir	i	pub	inspect	-	-
+M	Dir	i	pub	fileno	-	-
+M	Dir	i	pub	close	-	-
+M	Dir	i	pub	chdir	-	-
+M	Dir	i	pub	to_path	-	-
+M	Dir	i	pub	read	-	-
+M	Dir	i	priv	initialize	-	-
+M	Complex	s	pub	rectangular	-	-
+M	Complex	s	pub	rect	-	-
+M	Complex	s	pub	polar	-	-
+M	Complex	s	priv	convert	-	-
+M	Complex	i	pub	-@	-	-
+M	Complex	i	pub	**	-	-
+M	Complex	i	pub	<=>	-	-
+M	Complex	i	pub	==	-	-
+M	Complex	i	pub	eql?	-	-
+M	Complex	i	pub	infinite?	-	-
+M	Complex	i	pub	finite?	-	-
+M	Complex	i	pub	*	-	-
+M	Complex	i	pub	+	-	-
+M	Complex	i	pub	numerator	-	-
+M	Complex	i	pub	-	-	-
+M	Complex	i	pub	denominator	-	-
+M	Complex	i	pub	/	-	-
+M	Complex	i	pub	hash	-	-
+M	Complex	i	pub	rationalize	-	-
+M	Complex	i	pub	inspect	-	-
+M	Complex	i	pub	arg	-	-
+M	Complex	i	pub	real?	-	-
+M	Complex	i	pub	rectangular	-	-
+M	Complex	i	pub	rect	-	-
+M	Complex	i	pub	polar	-	-
+M	Complex	i	pub	real	-	-
+M	Complex	i	pub	imaginary	-	-
+M	Complex	i	pub	imag	-	-
+M	Complex	i	pub	angle	-	-
+M	Complex	i	pub	phase	-	-
+M	Complex	i	pub	conjugate	-	-
+M	Complex	i	pub	conj	-	-
+M	Complex	i	pub	to_c	-	-
+M	Complex	i	pub	abs2	-	-
+M	Complex	i	pub	to_s	-	-
+M	Complex	i	pub	to_i	-	-
+M	Complex	i	pub	to_r	-	-
+M	Complex	i	pub	to_f	-	-
+M	Complex	i	pub	fdiv	-	-
+M	Complex	i	pub	quo	-	-
+M	Complex	i	pub	coerce	-	-
+M	Complex	i	pub	abs	-	-
+M	Complex	i	pub	magnitude	-	-
+M	Complex	i	priv	marshal_dump	-	-
+M	TrueClass	i	pub	^	-	-
+M	TrueClass	i	pub	to_s	-	-
+M	TrueClass	i	pub	|	-	-
+M	TrueClass	i	pub	===	-	-
+M	TrueClass	i	pub	&	-	-
+M	TrueClass	i	pub	inspect	to_s	-
+M	FalseClass	i	pub	^	-	-
+M	FalseClass	i	pub	to_s	-	-
+M	FalseClass	i	pub	|	-	-
+M	FalseClass	i	pub	===	-	-
+M	FalseClass	i	pub	&	-	-
+M	FalseClass	i	pub	inspect	to_s	-
+M	Encoding	s	pub	list	-	-
+M	Encoding	s	pub	name_list	-	-
+M	Encoding	s	pub	aliases	-	-
+M	Encoding	s	pub	find	-	-
+M	Encoding	s	pub	compatible?	-	-
+M	Encoding	s	pub	_load	-	-
+M	Encoding	s	pub	default_external	-	-
+M	Encoding	s	pub	default_external=	-	-
+M	Encoding	s	pub	default_internal	-	-
+M	Encoding	s	pub	default_internal=	-	-
+M	Encoding	s	pub	locale_charmap	-	-
+M	Encoding	i	pub	to_s	-	-
+M	Encoding	i	pub	name	-	-
+M	Encoding	i	pub	names	-	-
+M	Encoding	i	pub	dummy?	-	-
+M	Encoding	i	pub	ascii_compatible?	-	-
+M	Encoding	i	pub	_dump	-	-
+M	Encoding	i	pub	inspect	-	-
+M	TracePoint	s	pub	trace	-	-
+M	TracePoint	s	pub	allow_reentry	-	-
+M	TracePoint	s	pub	stat	-	-
+M	TracePoint	s	pub	new	-	-
+M	TracePoint	i	pub	enabled?	-	-
+M	TracePoint	i	pub	enable	-	-
+M	TracePoint	i	pub	disable	-	-
+M	TracePoint	i	pub	path	-	-
+M	TracePoint	i	pub	event	-	-
+M	TracePoint	i	pub	method_id	-	-
+M	TracePoint	i	pub	callee_id	-	-
+M	TracePoint	i	pub	defined_class	-	-
+M	TracePoint	i	pub	inspect	-	-
+M	TracePoint	i	pub	self	-	-
+M	TracePoint	i	pub	return_value	-	-
+M	TracePoint	i	pub	binding	-	-
+M	TracePoint	i	pub	eval_script	-	-
+M	TracePoint	i	pub	raised_exception	-	-
+M	TracePoint	i	pub	parameters	-	-
+M	TracePoint	i	pub	instruction_sequence	-	-
+M	TracePoint	i	pub	lineno	-	-
+M	Comparable	i	pub	between?	-	-
+M	Comparable	i	pub	clamp	-	-
+M	Comparable	i	pub	<=	-	-
+M	Comparable	i	pub	>=	-	-
+M	Comparable	i	pub	==	-	-
+M	Comparable	i	pub	<	-	-
+M	Comparable	i	pub	>	-	-
+M	Enumerable	i	pub	drop	-	-
+M	Enumerable	i	pub	drop_while	-	-
+M	Enumerable	i	pub	cycle	-	-
+M	Enumerable	i	pub	chunk	-	-
+M	Enumerable	i	pub	slice_before	-	-
+M	Enumerable	i	pub	slice_after	-	-
+M	Enumerable	i	pub	slice_when	-	-
+M	Enumerable	i	pub	chunk_while	-	-
+M	Enumerable	i	pub	sum	-	-
+M	Enumerable	i	pub	uniq	-	-
+M	Enumerable	i	pub	compact	-	-
+M	Enumerable	i	pub	chain	-	-
+M	Enumerable	i	pub	lazy	-	-
+M	Enumerable	i	pub	include?	-	-
+M	Enumerable	i	pub	to_h	-	-
+M	Enumerable	i	pub	to_set	-	-
+M	Enumerable	i	pub	max	-	-
+M	Enumerable	i	pub	min	-	-
+M	Enumerable	i	pub	find	-	-
+M	Enumerable	i	pub	to_a	-	-
+M	Enumerable	i	pub	entries	-	-
+M	Enumerable	i	pub	sort	-	-
+M	Enumerable	i	pub	sort_by	-	-
+M	Enumerable	i	pub	grep	-	-
+M	Enumerable	i	pub	grep_v	-	-
+M	Enumerable	i	pub	count	-	-
+M	Enumerable	i	pub	detect	-	-
+M	Enumerable	i	pub	find_index	-	-
+M	Enumerable	i	pub	find_all	-	-
+M	Enumerable	i	pub	select	-	-
+M	Enumerable	i	pub	filter	-	-
+M	Enumerable	i	pub	filter_map	-	-
+M	Enumerable	i	pub	reject	-	-
+M	Enumerable	i	pub	collect	-	-
+M	Enumerable	i	pub	map	-	-
+M	Enumerable	i	pub	flat_map	-	-
+M	Enumerable	i	pub	collect_concat	-	-
+M	Enumerable	i	pub	inject	-	-
+M	Enumerable	i	pub	reduce	-	-
+M	Enumerable	i	pub	partition	-	-
+M	Enumerable	i	pub	group_by	-	-
+M	Enumerable	i	pub	tally	-	-
+M	Enumerable	i	pub	first	-	-
+M	Enumerable	i	pub	all?	-	-
+M	Enumerable	i	pub	any?	-	-
+M	Enumerable	i	pub	one?	-	-
+M	Enumerable	i	pub	none?	-	-
+M	Enumerable	i	pub	minmax	-	-
+M	Enumerable	i	pub	min_by	-	-
+M	Enumerable	i	pub	max_by	-	-
+M	Enumerable	i	pub	minmax_by	-	-
+M	Enumerable	i	pub	member?	-	-
+M	Enumerable	i	pub	each_with_index	-	-
+M	Enumerable	i	pub	reverse_each	-	-
+M	Enumerable	i	pub	each_entry	-	-
+M	Enumerable	i	pub	each_slice	-	-
+M	Enumerable	i	pub	each_cons	-	-
+M	Enumerable	i	pub	each_with_object	-	-
+M	Enumerable	i	pub	zip	-	-
+M	Enumerable	i	pub	take	-	-
+M	Enumerable	i	pub	take_while	-	-
+M	Time	s	pub	at	-	-
+M	Time	s	pub	now	-	-
+M	Time	s	pub	utc	-	-
+M	Time	s	pub	local	-	-
+M	Time	s	pub	gm	utc	-
+M	Time	s	pub	mktime	local	-
+M	Time	s	priv	_load	-	-
+M	Time	i	pub	floor	-	-
+M	Time	i	pub	ceil	-	-
+M	Time	i	pub	round	-	-
+M	Time	i	pub	<=>	-	-
+M	Time	i	pub	deconstruct_keys	-	-
+M	Time	i	pub	ctime	-	-
+M	Time	i	pub	eql?	-	-
+M	Time	i	pub	+	-	-
+M	Time	i	pub	min	-	-
+M	Time	i	pub	hash	-	-
+M	Time	i	pub	-	-	-
+M	Time	i	pub	inspect	-	-
+M	Time	i	pub	zone	-	-
+M	Time	i	pub	usec	-	-
+M	Time	i	pub	nsec	-	-
+M	Time	i	pub	year	-	-
+M	Time	i	pub	mon	-	-
+M	Time	i	pub	mday	-	-
+M	Time	i	pub	hour	-	-
+M	Time	i	pub	sec	-	-
+M	Time	i	pub	isdst	-	-
+M	Time	i	pub	to_a	-	-
+M	Time	i	pub	to_s	-	-
+M	Time	i	pub	to_i	-	-
+M	Time	i	pub	to_f	-	-
+M	Time	i	pub	to_r	-	-
+M	Time	i	pub	day	-	-
+M	Time	i	pub	wday	-	-
+M	Time	i	pub	month	-	-
+M	Time	i	pub	utc	-	-
+M	Time	i	pub	subsec	-	-
+M	Time	i	pub	localtime	-	-
+M	Time	i	pub	gmtime	-	-
+M	Time	i	pub	getlocal	-	-
+M	Time	i	pub	getgm	-	-
+M	Time	i	pub	getutc	-	-
+M	Time	i	pub	asctime	-	-
+M	Time	i	pub	dst?	-	-
+M	Time	i	pub	gmtoff	-	-
+M	Time	i	pub	gmt_offset	-	-
+M	Time	i	pub	utc_offset	-	-
+M	Time	i	pub	utc?	-	-
+M	Time	i	pub	yday	-	-
+M	Time	i	pub	gmt?	-	-
+M	Time	i	pub	sunday?	-	-
+M	Time	i	pub	monday?	-	-
+M	Time	i	pub	tuesday?	-	-
+M	Time	i	pub	wednesday?	-	-
+M	Time	i	pub	thursday?	-	-
+M	Time	i	pub	friday?	-	-
+M	Time	i	pub	saturday?	-	-
+M	Time	i	pub	tv_sec	-	-
+M	Time	i	pub	tv_usec	-	-
+M	Time	i	pub	tv_nsec	-	-
+M	Time	i	pub	strftime	-	-
+M	Time	i	pub	xmlschema	-	-
+M	Time	i	pub	iso8601	xmlschema	-
+M	Time	i	priv	initialize	-	-
+M	Time	i	priv	initialize_copy	-	-
+M	Time	i	priv	_dump	-	-
+M	UncaughtThrowError	i	pub	to_s	-	-
+M	UncaughtThrowError	i	pub	tag	-	-
+M	UncaughtThrowError	i	pub	value	-	-
+M	UncaughtThrowError	i	priv	initialize	-	-
+M	ThreadGroup	i	pub	enclose	-	-
+M	ThreadGroup	i	pub	enclosed?	-	-
+M	ThreadGroup	i	pub	add	-	-
+M	ThreadGroup	i	pub	list	-	-
+M	Thread::Mutex	i	pub	unlock	-	-
+M	Thread::Mutex	i	pub	sleep	-	-
+M	Thread::Mutex	i	pub	synchronize	-	-
+M	Thread::Mutex	i	pub	locked?	-	-
+M	Thread::Mutex	i	pub	owned?	-	-
+M	Thread::Mutex	i	pub	try_lock	-	-
+M	Thread::Mutex	i	pub	lock	-	-
+M	Thread::Mutex	i	priv	initialize	-	-
+M	Thread::Queue	i	pub	shift	pop	-
+M	Thread::Queue	i	pub	push	-	-
+M	Thread::Queue	i	pub	clear	-	-
+M	Thread::Queue	i	pub	pop	-	-
+M	Thread::Queue	i	pub	<<	push	-
+M	Thread::Queue	i	pub	deq	pop	-
+M	Thread::Queue	i	pub	freeze	-	-
+M	Thread::Queue	i	pub	close	-	-
+M	Thread::Queue	i	pub	closed?	-	-
+M	Thread::Queue	i	pub	num_waiting	-	-
+M	Thread::Queue	i	pub	enq	push	-
+M	Thread::Queue	i	pub	marshal_dump	-	-
+M	Thread::Queue	i	pub	empty?	-	-
+M	Thread::Queue	i	pub	length	-	-
+M	Thread::Queue	i	pub	size	length	-
+M	Thread::Queue	i	priv	initialize	-	-
+M	Numeric	i	pub	nonzero?	-	-
+M	Numeric	i	pub	floor	-	-
+M	Numeric	i	pub	ceil	-	-
+M	Numeric	i	pub	round	-	-
+M	Numeric	i	pub	truncate	-	-
+M	Numeric	i	pub	-@	-	-
+M	Numeric	i	pub	step	-	-
+M	Numeric	i	pub	<=>	-	-
+M	Numeric	i	pub	negative?	-	-
+M	Numeric	i	pub	positive?	-	-
+M	Numeric	i	pub	+@	-	-
+M	Numeric	i	pub	dup	-	-
+M	Numeric	i	pub	eql?	-	-
+M	Numeric	i	pub	infinite?	-	-
+M	Numeric	i	pub	finite?	-	-
+M	Numeric	i	pub	%	-	-
+M	Numeric	i	pub	integer?	-	-
+M	Numeric	i	pub	numerator	-	-
+M	Numeric	i	pub	denominator	-	-
+M	Numeric	i	pub	arg	-	-
+M	Numeric	i	pub	real?	-	-
+M	Numeric	i	pub	singleton_method_added	-	-
+M	Numeric	i	pub	rectangular	-	-
+M	Numeric	i	pub	rect	-	-
+M	Numeric	i	pub	polar	-	-
+M	Numeric	i	pub	real	-	-
+M	Numeric	i	pub	imaginary	-	-
+M	Numeric	i	pub	imag	imaginary	-
+M	Numeric	i	pub	abs2	-	-
+M	Numeric	i	pub	angle	-	-
+M	Numeric	i	pub	phase	-	-
+M	Numeric	i	pub	conjugate	-	-
+M	Numeric	i	pub	conj	conjugate	-
+M	Numeric	i	pub	to_c	-	-
+M	Numeric	i	pub	to_int	-	-
+M	Numeric	i	pub	div	-	-
+M	Numeric	i	pub	divmod	-	-
+M	Numeric	i	pub	fdiv	-	-
+M	Numeric	i	pub	quo	-	-
+M	Numeric	i	pub	coerce	-	-
+M	Numeric	i	pub	clone	-	-
+M	Numeric	i	pub	i	-	-
+M	Numeric	i	pub	modulo	-	-
+M	Numeric	i	pub	remainder	-	-
+M	Numeric	i	pub	abs	-	-
+M	Numeric	i	pub	magnitude	-	-
+M	Numeric	i	pub	zero?	-	-
+M	Thread::SizedQueue	i	pub	clear	-	-
+M	Thread::SizedQueue	i	pub	push	-	-
+M	Thread::SizedQueue	i	pub	pop	-	-
+M	Thread::SizedQueue	i	pub	max	-	-
+M	Thread::SizedQueue	i	pub	deq	pop	-
+M	Thread::SizedQueue	i	pub	shift	pop	-
+M	Thread::SizedQueue	i	pub	close	-	-
+M	Thread::SizedQueue	i	pub	<<	push	-
+M	Thread::SizedQueue	i	pub	num_waiting	-	-
+M	Thread::SizedQueue	i	pub	enq	push	-
+M	Thread::SizedQueue	i	pub	max=	-	-
+M	Thread::SizedQueue	i	pub	empty?	-	-
+M	Thread::SizedQueue	i	pub	length	-	-
+M	Thread::SizedQueue	i	pub	size	length	-
+M	Thread::SizedQueue	i	priv	initialize	-	-
+M	FileTest	s	pub	readable_real?	-	-
+M	FileTest	s	pub	world_readable?	-	-
+M	FileTest	s	pub	writable?	-	-
+M	FileTest	s	pub	writable_real?	-	-
+M	FileTest	s	pub	world_writable?	-	-
+M	FileTest	s	pub	executable?	-	-
+M	FileTest	s	pub	executable_real?	-	-
+M	FileTest	s	pub	file?	-	-
+M	FileTest	s	pub	size?	-	-
+M	FileTest	s	pub	owned?	-	-
+M	FileTest	s	pub	grpowned?	-	-
+M	FileTest	s	pub	pipe?	-	-
+M	FileTest	s	pub	symlink?	-	-
+M	FileTest	s	pub	socket?	-	-
+M	FileTest	s	pub	blockdev?	-	-
+M	FileTest	s	pub	chardev?	-	-
+M	FileTest	s	pub	setuid?	-	-
+M	FileTest	s	pub	setgid?	-	-
+M	FileTest	s	pub	sticky?	-	-
+M	FileTest	s	pub	exist?	-	-
+M	FileTest	s	pub	readable?	-	-
+M	FileTest	s	pub	identical?	-	-
+M	FileTest	s	pub	empty?	-	-
+M	FileTest	s	pub	size	-	-
+M	FileTest	s	pub	directory?	-	-
+M	FileTest	s	pub	zero?	-	-
+M	FileTest	i	priv	readable_real?	-	-
+M	FileTest	i	priv	world_readable?	-	-
+M	FileTest	i	priv	writable?	-	-
+M	FileTest	i	priv	writable_real?	-	-
+M	FileTest	i	priv	world_writable?	-	-
+M	FileTest	i	priv	executable?	-	-
+M	FileTest	i	priv	executable_real?	-	-
+M	FileTest	i	priv	file?	-	-
+M	FileTest	i	priv	size?	-	-
+M	FileTest	i	priv	owned?	-	-
+M	FileTest	i	priv	grpowned?	-	-
+M	FileTest	i	priv	pipe?	-	-
+M	FileTest	i	priv	symlink?	-	-
+M	FileTest	i	priv	socket?	-	-
+M	FileTest	i	priv	blockdev?	-	-
+M	FileTest	i	priv	chardev?	-	-
+M	FileTest	i	priv	setuid?	-	-
+M	FileTest	i	priv	setgid?	-	-
+M	FileTest	i	priv	sticky?	-	-
+M	FileTest	i	priv	exist?	-	-
+M	FileTest	i	priv	readable?	-	-
+M	FileTest	i	priv	identical?	-	-
+M	FileTest	i	priv	empty?	-	-
+M	FileTest	i	priv	size	-	-
+M	FileTest	i	priv	directory?	-	-
+M	FileTest	i	priv	zero?	-	-
+M	File	s	pub	readable_real?	-	-
+M	File	s	pub	world_readable?	-	-
+M	File	s	pub	writable?	-	-
+M	File	s	pub	writable_real?	-	-
+M	File	s	pub	world_writable?	-	-
+M	File	s	pub	executable?	-	-
+M	File	s	pub	executable_real?	-	-
+M	File	s	pub	file?	-	-
+M	File	s	pub	size?	-	-
+M	File	s	pub	owned?	-	-
+M	File	s	pub	grpowned?	-	-
+M	File	s	pub	pipe?	-	-
+M	File	s	pub	symlink?	-	-
+M	File	s	pub	socket?	-	-
+M	File	s	pub	blockdev?	-	-
+M	File	s	pub	chardev?	-	-
+M	File	s	pub	setuid?	-	-
+M	File	s	pub	setgid?	-	-
+M	File	s	pub	sticky?	-	-
+M	File	s	pub	identical?	-	-
+M	File	s	pub	stat	-	-
+M	File	s	pub	lstat	-	-
+M	File	s	pub	ftype	-	-
+M	File	s	pub	atime	-	-
+M	File	s	pub	mtime	-	-
+M	File	s	pub	ctime	-	-
+M	File	s	pub	empty?	-	-
+M	File	s	pub	birthtime	-	-
+M	File	s	pub	utime	-	-
+M	File	s	pub	chmod	-	-
+M	File	s	pub	chown	-	-
+M	File	s	pub	lchmod	-	-
+M	File	s	pub	lchown	-	-
+M	File	s	pub	lutime	-	-
+M	File	s	pub	link	-	-
+M	File	s	pub	symlink	-	-
+M	File	s	pub	readlink	-	-
+M	File	s	pub	unlink	-	-
+M	File	s	pub	rename	-	-
+M	File	s	pub	umask	-	-
+M	File	s	pub	truncate	-	-
+M	File	s	pub	expand_path	-	-
+M	File	s	pub	mkfifo	-	-
+M	File	s	pub	absolute_path?	-	-
+M	File	s	pub	zero?	-	-
+M	File	s	pub	realdirpath	-	-
+M	File	s	pub	realpath	-	-
+M	File	s	pub	absolute_path	-	-
+M	File	s	pub	basename	-	-
+M	File	s	pub	dirname	-	-
+M	File	s	pub	extname	-	-
+M	File	s	pub	fnmatch	-	-
+M	File	s	pub	fnmatch?	-	-
+M	File	s	pub	size	-	-
+M	File	s	pub	split	-	-
+M	File	s	pub	join	-	-
+M	File	s	pub	path	-	-
+M	File	s	pub	delete	-	-
+M	File	s	pub	directory?	-	-
+M	File	s	pub	exist?	-	-
+M	File	s	pub	readable?	-	-
+M	File	i	pub	flock	-	-
+M	File	i	pub	truncate	-	-
+M	File	i	pub	lstat	-	-
+M	File	i	pub	atime	-	-
+M	File	i	pub	mtime	-	-
+M	File	i	pub	ctime	-	-
+M	File	i	pub	birthtime	-	-
+M	File	i	pub	chmod	-	-
+M	File	i	pub	size	-	-
+M	File	i	pub	chown	-	-
+M	File	i	priv	initialize	-	-
+M	Random	s	pub	new_seed	-	-
+M	Random	s	pub	urandom	-	-
+M	Random	s	pub	bytes	-	-
+M	Random	s	pub	rand	-	-
+M	Random	s	pub	srand	-	-
+M	Random	s	pub	seed	-	-
+M	Random	s	priv	state	-	-
+M	Random	s	priv	left	-	-
+M	Random	i	pub	==	-	-
+M	Random	i	priv	left	-	-
+M	Random	i	priv	marshal_dump	-	-
+M	Random	i	priv	marshal_load	-	-
+M	Random	i	priv	state	-	-
+M	Random	i	priv	initialize_copy	-	-
+M	Thread::ConditionVariable	i	pub	marshal_dump	-	-
+M	Thread::ConditionVariable	i	pub	wait	-	-
+M	Thread::ConditionVariable	i	pub	signal	-	-
+M	Thread::ConditionVariable	i	pub	broadcast	-	-
+M	Thread::ConditionVariable	i	priv	initialize	-	-
+M	Signal	s	pub	trap	-	-
+M	Signal	s	pub	signame	-	-
+M	Signal	s	pub	list	-	-
+M	Signal	i	priv	trap	-	-
+M	Signal	i	priv	signame	-	-
+M	Signal	i	priv	list	-	-
+M	Integer	s	pub	try_convert	-	-
+M	Integer	s	pub	sqrt	-	-
+M	Integer	i	pub	abs	-	-
+M	Integer	i	pub	floor	-	-
+M	Integer	i	pub	ceil	-	-
+M	Integer	i	pub	round	-	-
+M	Integer	i	pub	truncate	-	-
+M	Integer	i	pub	-@	-	-
+M	Integer	i	pub	**	-	-
+M	Integer	i	pub	<=>	-	-
+M	Integer	i	pub	<<	-	-
+M	Integer	i	pub	>>	-	-
+M	Integer	i	pub	allbits?	-	-
+M	Integer	i	pub	anybits?	-	-
+M	Integer	i	pub	nobits?	-	-
+M	Integer	i	pub	downto	-	-
+M	Integer	i	pub	pred	-	-
+M	Integer	i	pub	next	-	-
+M	Integer	i	pub	pow	-	-
+M	Integer	i	pub	>=	-	-
+M	Integer	i	pub	==	-	-
+M	Integer	i	pub	===	-	-
+M	Integer	i	pub	[]	-	-
+M	Integer	i	pub	digits	-	-
+M	Integer	i	pub	<=	-	-
+M	Integer	i	pub	zero?	-	-
+M	Integer	i	pub	upto	-	-
+M	Integer	i	pub	%	-	-
+M	Integer	i	pub	&	-	-
+M	Integer	i	pub	integer?	-	-
+M	Integer	i	pub	chr	-	-
+M	Integer	i	pub	*	-	-
+M	Integer	i	pub	+	-	-
+M	Integer	i	pub	numerator	-	-
+M	Integer	i	pub	-	-	-
+M	Integer	i	pub	rationalize	-	-
+M	Integer	i	pub	inspect	to_s	-
+M	Integer	i	pub	/	-	-
+M	Integer	i	pub	gcd	-	-
+M	Integer	i	pub	lcm	-	-
+M	Integer	i	pub	gcdlcm	-	-
+M	Integer	i	pub	denominator	-	-
+M	Integer	i	pub	<	-	-
+M	Integer	i	pub	size	-	-
+M	Integer	i	pub	>	-	-
+M	Integer	i	pub	succ	-	-
+M	Integer	i	pub	to_int	-	-
+M	Integer	i	pub	ord	-	-
+M	Integer	i	pub	to_s	-	-
+M	Integer	i	pub	to_i	-	-
+M	Integer	i	pub	to_f	-	-
+M	Integer	i	pub	to_r	-	-
+M	Integer	i	pub	^	-	-
+M	Integer	i	pub	div	-	-
+M	Integer	i	pub	divmod	-	-
+M	Integer	i	pub	fdiv	-	-
+M	Integer	i	pub	bit_length	-	-
+M	Integer	i	pub	even?	-	-
+M	Integer	i	pub	odd?	-	-
+M	Integer	i	pub	ceildiv	-	-
+M	Integer	i	pub	times	-	-
+M	Integer	i	pub	coerce	-	-
+M	Integer	i	pub	modulo	-	-
+M	Integer	i	pub	|	-	-
+M	Integer	i	pub	remainder	-	-
+M	Integer	i	pub	~	-	-
+M	Integer	i	pub	magnitude	abs	-
+M	Struct	s	pub	new	-	-
+M	Struct	i	pub	each	-	-
+M	Struct	i	pub	deconstruct_keys	-	-
+M	Struct	i	pub	==	-	-
+M	Struct	i	pub	members	-	-
+M	Struct	i	pub	to_a	-	-
+M	Struct	i	pub	to_s	inspect	-
+M	Struct	i	pub	[]=	-	-
+M	Struct	i	pub	[]	-	-
+M	Struct	i	pub	values_at	-	-
+M	Struct	i	pub	eql?	-	-
+M	Struct	i	pub	to_h	-	-
+M	Struct	i	pub	select	-	-
+M	Struct	i	pub	filter	-	-
+M	Struct	i	pub	deconstruct	-	-
+M	Struct	i	pub	hash	-	-
+M	Struct	i	pub	inspect	-	-
+M	Struct	i	pub	each_pair	-	-
+M	Struct	i	pub	dig	-	-
+M	Struct	i	pub	values	-	-
+M	Struct	i	pub	length	-	-
+M	Struct	i	pub	size	-	-
+M	Struct	i	priv	initialize	-	-
+M	Struct	i	priv	initialize_copy	-	-
+M	Proc	s	pub	new	-	-
+M	Proc	i	pub	parameters	-	-
+M	Proc	i	pub	ruby2_keywords	-	-
+M	Proc	i	pub	dup	-	-
+M	Proc	i	pub	<<	-	-
+M	Proc	i	pub	>>	-	-
+M	Proc	i	pub	==	-	-
+M	Proc	i	pub	===	-	-
+M	Proc	i	pub	hash	-	-
+M	Proc	i	pub	inspect	to_s	-
+M	Proc	i	pub	yield	-	-
+M	Proc	i	pub	[]	-	-
+M	Proc	i	pub	arity	-	-
+M	Proc	i	pub	to_s	-	-
+M	Proc	i	pub	binding	-	-
+M	Proc	i	pub	to_proc	-	-
+M	Proc	i	pub	source_location	-	-
+M	Proc	i	pub	curry	-	-
+M	Proc	i	pub	call	-	-
+M	Proc	i	pub	clone	-	-
+M	Proc	i	pub	eql?	-	-
+M	Proc	i	pub	lambda?	-	-
+M	Data	s	pub	define	-	-
+M	Data	i	pub	deconstruct_keys	-	-
+M	Data	i	pub	deconstruct	-	-
+M	Data	i	pub	==	-	-
+M	Data	i	pub	hash	-	-
+M	Data	i	pub	members	-	-
+M	Data	i	pub	inspect	-	-
+M	Data	i	pub	to_s	inspect	-
+M	Data	i	pub	with	-	-
+M	Data	i	pub	eql?	-	-
+M	Data	i	pub	to_h	-	-
+M	Data	i	priv	initialize	-	-
+M	Data	i	priv	initialize_copy	-	-
+M	Float	i	pub	floor	-	-
+M	Float	i	pub	ceil	-	-
+M	Float	i	pub	round	-	-
+M	Float	i	pub	truncate	-	-
+M	Float	i	pub	-@	-	-
+M	Float	i	pub	**	-	-
+M	Float	i	pub	<=>	-	-
+M	Float	i	pub	negative?	-	-
+M	Float	i	pub	positive?	-	-
+M	Float	i	pub	<=	-	-
+M	Float	i	pub	>=	-	-
+M	Float	i	pub	==	-	-
+M	Float	i	pub	===	-	-
+M	Float	i	pub	eql?	-	-
+M	Float	i	pub	nan?	-	-
+M	Float	i	pub	infinite?	-	-
+M	Float	i	pub	finite?	-	-
+M	Float	i	pub	next_float	-	-
+M	Float	i	pub	prev_float	-	-
+M	Float	i	pub	%	-	-
+M	Float	i	pub	*	-	-
+M	Float	i	pub	+	-	-
+M	Float	i	pub	numerator	-	-
+M	Float	i	pub	hash	-	-
+M	Float	i	pub	-	-	-
+M	Float	i	pub	/	-	-
+M	Float	i	pub	inspect	to_s	-
+M	Float	i	pub	rationalize	-	-
+M	Float	i	pub	arg	-	-
+M	Float	i	pub	denominator	-	-
+M	Float	i	pub	<	-	-
+M	Float	i	pub	>	-	-
+M	Float	i	pub	angle	-	-
+M	Float	i	pub	phase	-	-
+M	Float	i	pub	to_int	-	-
+M	Float	i	pub	to_s	-	-
+M	Float	i	pub	to_i	-	-
+M	Float	i	pub	to_f	-	-
+M	Float	i	pub	to_r	-	-
+M	Float	i	pub	divmod	-	-
+M	Float	i	pub	fdiv	-	-
+M	Float	i	pub	quo	-	-
+M	Float	i	pub	coerce	-	-
+M	Float	i	pub	modulo	-	-
+M	Float	i	pub	abs	-	-
+M	Float	i	pub	magnitude	abs	-
+M	Float	i	pub	zero?	-	-
+M	LocalJumpError	i	pub	exit_value	-	-
+M	LocalJumpError	i	pub	reason	-	-
+M	Regexp	s	pub	union	-	-
+M	Regexp	s	pub	timeout	-	-
+M	Regexp	s	pub	timeout=	-	-
+M	Regexp	s	pub	try_convert	-	-
+M	Regexp	s	pub	compile	-	-
+M	Regexp	s	pub	quote	-	-
+M	Regexp	s	pub	escape	-	-
+M	Regexp	s	pub	last_match	-	-
+M	Regexp	s	pub	linear_time?	-	-
+M	Regexp	i	pub	source	-	-
+M	Regexp	i	pub	match	-	-
+M	Regexp	i	pub	options	-	-
+M	Regexp	i	pub	casefold?	-	-
+M	Regexp	i	pub	names	-	-
+M	Regexp	i	pub	fixed_encoding?	-	-
+M	Regexp	i	pub	named_captures	-	-
+M	Regexp	i	pub	timeout	-	-
+M	Regexp	i	pub	==	-	-
+M	Regexp	i	pub	hash	-	-
+M	Regexp	i	pub	===	-	-
+M	Regexp	i	pub	=~	-	-
+M	Regexp	i	pub	inspect	-	-
+M	Regexp	i	pub	to_s	-	-
+M	Regexp	i	pub	encoding	-	-
+M	Regexp	i	pub	eql?	-	-
+M	Regexp	i	pub	~	-	-
+M	Regexp	i	pub	match?	-	-
+M	Regexp	i	priv	initialize	-	-
+M	Regexp	i	priv	initialize_copy	-	-
+M	Method	i	pub	<<	-	-
+M	Method	i	pub	dup	-	-
+M	Method	i	pub	>>	-	-
+M	Method	i	pub	==	-	-
+M	Method	i	pub	===	-	-
+M	Method	i	pub	to_proc	-	-
+M	Method	i	pub	[]	-	-
+M	Method	i	pub	arity	-	-
+M	Method	i	pub	to_s	-	-
+M	Method	i	pub	curry	-	-
+M	Method	i	pub	source_location	-	-
+M	Method	i	pub	parameters	-	-
+M	Method	i	pub	call	-	-
+M	Method	i	pub	receiver	-	-
+M	Method	i	pub	eql?	-	-
+M	Method	i	pub	original_name	-	-
+M	Method	i	pub	owner	-	-
+M	Method	i	pub	unbind	-	-
+M	Method	i	pub	super_method	-	-
+M	Method	i	pub	name	-	-
+M	Method	i	pub	hash	-	-
+M	Method	i	pub	inspect	-	-
+M	Method	i	pub	clone	-	-
+M	UnboundMethod	i	pub	name	-	-
+M	UnboundMethod	i	pub	bind	-	-
+M	UnboundMethod	i	pub	bind_call	-	-
+M	UnboundMethod	i	pub	dup	-	-
+M	UnboundMethod	i	pub	==	-	-
+M	UnboundMethod	i	pub	hash	-	-
+M	UnboundMethod	i	pub	inspect	-	-
+M	UnboundMethod	i	pub	arity	-	-
+M	UnboundMethod	i	pub	to_s	-	-
+M	UnboundMethod	i	pub	source_location	-	-
+M	UnboundMethod	i	pub	parameters	-	-
+M	UnboundMethod	i	pub	clone	-	-
+M	UnboundMethod	i	pub	eql?	-	-
+M	UnboundMethod	i	pub	original_name	-	-
+M	UnboundMethod	i	pub	owner	-	-
+M	UnboundMethod	i	pub	super_method	-	-
+M	Set	s	pub	[]	-	set
+M	Set	i	pub	merge	-	set
+M	Set	i	pub	compare_by_identity	-	set
+M	Set	i	pub	compare_by_identity?	-	set
+M	Set	i	pub	<=>	-	set
+M	Set	i	pub	<<	add	set
+M	Set	i	pub	<=	subset?	set
+M	Set	i	pub	>=	superset?	set
+M	Set	i	pub	==	-	set
+M	Set	i	pub	===	include?	set
+M	Set	i	pub	include?	-	set
+M	Set	i	pub	empty?	-	set
+M	Set	i	pub	eql?	-	set
+M	Set	i	pub	to_set	-	set
+M	Set	i	pub	&	-	set
+M	Set	i	pub	replace	-	set
+M	Set	i	pub	clear	-	set
+M	Set	i	pub	+	|	set
+M	Set	i	pub	-	-	set
+M	Set	i	pub	freeze	-	set
+M	Set	i	pub	inspect	-	set
+M	Set	i	pub	hash	-	set
+M	Set	i	pub	length	size	set
+M	Set	i	pub	size	-	set
+M	Set	i	pub	>	proper_superset?	set
+M	Set	i	pub	<	proper_subset?	set
+M	Set	i	pub	each	-	set
+M	Set	i	pub	union	|	set
+M	Set	i	pub	difference	-	set
+M	Set	i	pub	intersect?	-	set
+M	Set	i	pub	intersection	&	set
+M	Set	i	pub	join	-	set
+M	Set	i	pub	to_a	-	set
+M	Set	i	pub	to_s	inspect	set
+M	Set	i	pub	collect!	-	set
+M	Set	i	pub	map!	collect!	set
+M	Set	i	pub	select!	-	set
+M	Set	i	pub	filter!	select!	set
+M	Set	i	pub	keep_if	-	set
+M	Set	i	pub	delete_if	-	set
+M	Set	i	pub	reject!	-	set
+M	Set	i	pub	^	-	set
+M	Set	i	pub	flatten	-	set
+M	Set	i	pub	flatten!	-	set
+M	Set	i	pub	proper_superset?	-	set
+M	Set	i	pub	superset?	-	set
+M	Set	i	pub	disjoint?	-	set
+M	Set	i	pub	subset?	-	set
+M	Set	i	pub	proper_subset?	-	set
+M	Set	i	pub	delete	-	set
+M	Set	i	pub	add	-	set
+M	Set	i	pub	delete?	-	set
+M	Set	i	pub	reset	-	set
+M	Set	i	pub	add?	-	set
+M	Set	i	pub	classify	-	set
+M	Set	i	pub	subtract	-	set
+M	Set	i	pub	divide	-	set
+M	Set	i	pub	member?	include?	set
+M	Set	i	pub	pretty_print	-	set
+M	Set	i	pub	pretty_print_cycle	-	set
+M	Set	i	pub	|	-	set
+M	Set	i	priv	initialize	-	set
+M	Set	i	priv	initialize_clone	-	set
+M	Set	i	priv	initialize_dup	-	set
+M	Set	i	priv	do_with_enum	-	set
+M	Set	i	prot	flatten_merge	-	set
+M	Binding	i	pub	eval	-	-
+M	Binding	i	pub	irb	-	-
+M	Binding	i	pub	local_variables	-	-
+M	Binding	i	pub	source_location	-	-
+M	Binding	i	pub	dup	-	-
+M	Binding	i	pub	clone	-	-
+M	Binding	i	pub	receiver	-	-
+M	Binding	i	pub	local_variable_get	-	-
+M	Binding	i	pub	local_variable_set	-	-
+M	Binding	i	pub	local_variable_defined?	-	-
+M	MatchData	i	pub	hash	-	-
+M	MatchData	i	pub	names	-	-
+M	MatchData	i	pub	deconstruct_keys	-	-
+M	MatchData	i	pub	==	-	-
+M	MatchData	i	pub	to_a	-	-
+M	MatchData	i	pub	[]	-	-
+M	MatchData	i	pub	to_s	-	-
+M	MatchData	i	pub	values_at	-	-
+M	MatchData	i	pub	eql?	-	-
+M	MatchData	i	pub	match	-	-
+M	MatchData	i	pub	named_captures	-	-
+M	MatchData	i	pub	deconstruct	captures	-
+M	MatchData	i	pub	regexp	-	-
+M	MatchData	i	pub	offset	-	-
+M	MatchData	i	pub	byteoffset	-	-
+M	MatchData	i	pub	bytebegin	-	-
+M	MatchData	i	pub	byteend	-	-
+M	MatchData	i	pub	begin	-	-
+M	MatchData	i	pub	end	-	-
+M	MatchData	i	pub	match_length	-	-
+M	MatchData	i	pub	captures	-	-
+M	MatchData	i	pub	pre_match	-	-
+M	MatchData	i	pub	post_match	-	-
+M	MatchData	i	pub	string	-	-
+M	MatchData	i	pub	inspect	-	-
+M	MatchData	i	pub	length	-	-
+M	MatchData	i	pub	size	-	-
+M	MatchData	i	priv	initialize_copy	-	-
+M	Process	s	pub	exec	-	-
+M	Process	s	pub	exit!	-	-
+M	Process	s	pub	spawn	-	-
+M	Process	s	pub	abort	-	-
+M	Process	s	pub	last_status	-	-
+M	Process	s	pub	_fork	-	-
+M	Process	s	pub	wait2	-	-
+M	Process	s	pub	waitpid	-	-
+M	Process	s	pub	waitpid2	-	-
+M	Process	s	pub	waitall	-	-
+M	Process	s	pub	detach	-	-
+M	Process	s	pub	ppid	-	-
+M	Process	s	pub	getpgrp	-	-
+M	Process	s	pub	setpgrp	-	-
+M	Process	s	pub	getpgid	-	-
+M	Process	s	pub	setpgid	-	-
+M	Process	s	pub	getsid	-	-
+M	Process	s	pub	setsid	-	-
+M	Process	s	pub	getpriority	-	-
+M	Process	s	pub	setpriority	-	-
+M	Process	s	pub	warmup	-	-
+M	Process	s	pub	fork	-	-
+M	Process	s	pub	getrlimit	-	-
+M	Process	s	pub	kill	-	-
+M	Process	s	pub	exit	-	-
+M	Process	s	pub	setrlimit	-	-
+M	Process	s	pub	uid	-	-
+M	Process	s	pub	gid	-	-
+M	Process	s	pub	pid	-	-
+M	Process	s	pub	argv0	-	-
+M	Process	s	pub	setproctitle	-	-
+M	Process	s	pub	uid=	-	-
+M	Process	s	pub	wait	-	-
+M	Process	s	pub	gid=	-	-
+M	Process	s	pub	euid	-	-
+M	Process	s	pub	euid=	-	-
+M	Process	s	pub	egid	-	-
+M	Process	s	pub	egid=	-	-
+M	Process	s	pub	initgroups	-	-
+M	Process	s	pub	groups	-	-
+M	Process	s	pub	maxgroups	-	-
+M	Process	s	pub	maxgroups=	-	-
+M	Process	s	pub	groups=	-	-
+M	Process	s	pub	times	-	-
+M	Process	s	pub	daemon	-	-
+M	Process	s	pub	clock_gettime	-	-
+M	Process	s	pub	clock_getres	-	-
+M	Process	i	priv	ppid	-	-
+M	Process	i	priv	getpgrp	-	-
+M	Process	i	priv	setpgrp	-	-
+M	Process	i	priv	getpgid	-	-
+M	Process	i	priv	setpgid	-	-
+M	Process	i	priv	getsid	-	-
+M	Process	i	priv	setsid	-	-
+M	Process	i	priv	getpriority	-	-
+M	Process	i	priv	setpriority	-	-
+M	Process	i	priv	warmup	-	-
+M	Process	i	priv	getrlimit	-	-
+M	Process	i	priv	kill	-	-
+M	Process	i	priv	setrlimit	-	-
+M	Process	i	priv	uid	-	-
+M	Process	i	priv	gid	-	-
+M	Process	i	priv	pid	-	-
+M	Process	i	priv	argv0	-	-
+M	Process	i	priv	setproctitle	-	-
+M	Process	i	priv	uid=	-	-
+M	Process	i	priv	wait	-	-
+M	Process	i	priv	gid=	-	-
+M	Process	i	priv	euid	-	-
+M	Process	i	priv	euid=	-	-
+M	Process	i	priv	egid	-	-
+M	Process	i	priv	egid=	-	-
+M	Process	i	priv	initgroups	-	-
+M	Process	i	priv	groups	-	-
+M	Process	i	priv	groups=	-	-
+M	Process	i	priv	maxgroups	-	-
+M	Process	i	priv	maxgroups=	-	-
+M	Process	i	priv	daemon	-	-
+M	Process	i	priv	times	-	-
+M	Process	i	priv	wait2	-	-
+M	Process	i	priv	waitpid	-	-
+M	Process	i	priv	waitpid2	-	-
+M	Process	i	priv	waitall	-	-
+M	Process	i	priv	detach	-	-
+M	Process	i	priv	clock_getres	-	-
+M	Process	i	priv	clock_gettime	-	-
+M	Math	s	pub	log2	-	-
+M	Math	s	pub	log10	-	-
+M	Math	s	pub	cbrt	-	-
+M	Math	s	pub	frexp	-	-
+M	Math	s	pub	ldexp	-	-
+M	Math	s	pub	hypot	-	-
+M	Math	s	pub	erf	-	-
+M	Math	s	pub	erfc	-	-
+M	Math	s	pub	gamma	-	-
+M	Math	s	pub	sqrt	-	-
+M	Math	s	pub	lgamma	-	-
+M	Math	s	pub	atan2	-	-
+M	Math	s	pub	cos	-	-
+M	Math	s	pub	sin	-	-
+M	Math	s	pub	tan	-	-
+M	Math	s	pub	acos	-	-
+M	Math	s	pub	asin	-	-
+M	Math	s	pub	atan	-	-
+M	Math	s	pub	cosh	-	-
+M	Math	s	pub	sinh	-	-
+M	Math	s	pub	tanh	-	-
+M	Math	s	pub	acosh	-	-
+M	Math	s	pub	asinh	-	-
+M	Math	s	pub	atanh	-	-
+M	Math	s	pub	exp	-	-
+M	Math	s	pub	log	-	-
+M	Math	i	priv	log2	-	-
+M	Math	i	priv	log10	-	-
+M	Math	i	priv	cbrt	-	-
+M	Math	i	priv	frexp	-	-
+M	Math	i	priv	ldexp	-	-
+M	Math	i	priv	hypot	-	-
+M	Math	i	priv	erf	-	-
+M	Math	i	priv	erfc	-	-
+M	Math	i	priv	gamma	-	-
+M	Math	i	priv	sqrt	-	-
+M	Math	i	priv	lgamma	-	-
+M	Math	i	priv	atan2	-	-
+M	Math	i	priv	cos	-	-
+M	Math	i	priv	sin	-	-
+M	Math	i	priv	tan	-	-
+M	Math	i	priv	acos	-	-
+M	Math	i	priv	asin	-	-
+M	Math	i	priv	atan	-	-
+M	Math	i	priv	cosh	-	-
+M	Math	i	priv	sinh	-	-
+M	Math	i	priv	tanh	-	-
+M	Math	i	priv	acosh	-	-
+M	Math	i	priv	asinh	-	-
+M	Math	i	priv	atanh	-	-
+M	Math	i	priv	exp	-	-
+M	Math	i	priv	log	-	-
+M	GC	s	pub	enable	-	-
+M	GC	s	pub	stress	-	-
+M	GC	s	pub	disable	-	-
+M	GC	s	pub	stress=	-	-
+M	GC	s	pub	stat_heap	-	-
+M	GC	s	pub	config	-	-
+M	GC	s	pub	start	-	-
+M	GC	s	pub	compact	-	-
+M	GC	s	pub	count	-	-
+M	GC	s	pub	measure_total_time=	-	-
+M	GC	s	pub	latest_gc_info	-	-
+M	GC	s	pub	measure_total_time	-	-
+M	GC	s	pub	total_time	-	-
+M	GC	s	pub	stat	-	-
+M	GC	s	pub	auto_compact	-	-
+M	GC	s	pub	auto_compact=	-	-
+M	GC	s	pub	latest_compact_info	-	-
+M	GC	s	pub	verify_compaction_references	-	-
+M	GC	s	pub	verify_internal_consistency	-	-
+M	GC	i	pub	garbage_collect	-	-
+M	ObjectSpace	s	pub	count_objects	-	-
+M	ObjectSpace	s	pub	garbage_collect	-	-
+M	ObjectSpace	s	pub	each_object	-	-
+M	ObjectSpace	s	pub	define_finalizer	-	-
+M	ObjectSpace	s	pub	undefine_finalizer	-	-
+M	ObjectSpace	s	pub	_id2ref	-	-
+M	ObjectSpace	i	priv	count_objects	-	-
+M	ObjectSpace	i	priv	garbage_collect	-	-
+M	ObjectSpace	i	priv	each_object	-	-
+M	ObjectSpace	i	priv	define_finalizer	-	-
+M	ObjectSpace	i	priv	undefine_finalizer	-	-
+M	ObjectSpace	i	priv	_id2ref	-	-
+M	Enumerator	s	pub	product	-	-
+M	Enumerator	s	pub	produce	-	-
+M	Enumerator	i	pub	each	-	-
+M	Enumerator	i	pub	rewind	-	-
+M	Enumerator	i	pub	+	-	-
+M	Enumerator	i	pub	next	-	-
+M	Enumerator	i	pub	inspect	-	-
+M	Enumerator	i	pub	with_index	-	-
+M	Enumerator	i	pub	with_object	-	-
+M	Enumerator	i	pub	next_values	-	-
+M	Enumerator	i	pub	peek_values	-	-
+M	Enumerator	i	pub	peek	-	-
+M	Enumerator	i	pub	each_with_index	-	-
+M	Enumerator	i	pub	feed	-	-
+M	Enumerator	i	pub	each_with_object	-	-
+M	Enumerator	i	pub	size	-	-
+M	Enumerator	i	priv	initialize	-	-
+M	Enumerator	i	priv	initialize_copy	-	-
+M	Marshal	s	pub	restore	load	-
+M	Marshal	s	pub	dump	-	-
+M	Marshal	s	pub	load	-	-
+M	Marshal	i	priv	dump	-	-
+M	BasicObject	i	pub	equal?	-	-
+M	BasicObject	i	pub	!	-	-
+M	BasicObject	i	pub	__send__	-	-
+M	BasicObject	i	pub	==	-	-
+M	BasicObject	i	pub	!=	-	-
+M	BasicObject	i	pub	__id__	-	-
+M	BasicObject	i	pub	instance_eval	-	-
+M	BasicObject	i	pub	instance_exec	-	-
+M	BasicObject	i	priv	initialize	-	-
+M	BasicObject	i	priv	singleton_method_added	-	-
+M	BasicObject	i	priv	method_missing	-	-
+M	BasicObject	i	priv	singleton_method_removed	-	-
+M	BasicObject	i	priv	singleton_method_undefined	-	-
+M	Module	s	pub	used_modules	-	-
+M	Module	s	pub	used_refinements	-	-
+M	Module	s	pub	nesting	-	-
+M	Module	s	pub	constants	-	-
+M	Module	i	pub	<=>	-	-
+M	Module	i	pub	<=	-	-
+M	Module	i	pub	>=	-	-
+M	Module	i	pub	==	-	-
+M	Module	i	pub	===	-	-
+M	Module	i	pub	autoload	-	-
+M	Module	i	pub	autoload?	-	-
+M	Module	i	pub	include?	-	-
+M	Module	i	pub	included_modules	-	-
+M	Module	i	pub	set_temporary_name	-	-
+M	Module	i	pub	ancestors	-	-
+M	Module	i	pub	attr	-	-
+M	Module	i	pub	attr_reader	-	-
+M	Module	i	pub	attr_writer	-	-
+M	Module	i	pub	attr_accessor	-	-
+M	Module	i	pub	instance_method	-	-
+M	Module	i	pub	instance_methods	-	-
+M	Module	i	pub	public_instance_methods	-	-
+M	Module	i	pub	protected_instance_methods	-	-
+M	Module	i	pub	private_instance_methods	-	-
+M	Module	i	pub	undefined_instance_methods	-	-
+M	Module	i	pub	constants	-	-
+M	Module	i	pub	const_get	-	-
+M	Module	i	pub	freeze	-	-
+M	Module	i	pub	inspect	to_s	-
+M	Module	i	pub	const_defined?	-	-
+M	Module	i	pub	const_set	-	-
+M	Module	i	pub	const_missing	-	-
+M	Module	i	pub	class_variables	-	-
+M	Module	i	pub	class_variable_get	-	-
+M	Module	i	pub	remove_class_variable	-	-
+M	Module	i	pub	class_variable_set	-	-
+M	Module	i	pub	<	-	-
+M	Module	i	pub	public_constant	-	-
+M	Module	i	pub	>	-	-
+M	Module	i	pub	const_source_location	-	-
+M	Module	i	pub	class_variable_defined?	-	-
+M	Module	i	pub	private_constant	-	-
+M	Module	i	pub	deprecate_constant	-	-
+M	Module	i	pub	singleton_class?	-	-
+M	Module	i	pub	include	-	-
+M	Module	i	pub	prepend	-	-
+M	Module	i	pub	refinements	-	-
+M	Module	i	pub	to_s	-	-
+M	Module	i	pub	public_instance_method	-	-
+M	Module	i	pub	define_method	-	-
+M	Module	i	pub	module_exec	-	-
+M	Module	i	pub	class_exec	-	-
+M	Module	i	pub	module_eval	-	-
+M	Module	i	pub	class_eval	-	-
+M	Module	i	pub	remove_method	-	-
+M	Module	i	pub	undef_method	-	-
+M	Module	i	pub	alias_method	-	-
+M	Module	i	pub	name	-	-
+M	Module	i	pub	method_defined?	-	-
+M	Module	i	pub	public_method_defined?	-	-
+M	Module	i	pub	private_method_defined?	-	-
+M	Module	i	pub	protected_method_defined?	-	-
+M	Module	i	pub	public_class_method	-	-
+M	Module	i	pub	private_class_method	-	-
+M	Module	i	priv	included	-	-
+M	Module	i	priv	extended	-	-
+M	Module	i	priv	prepended	-	-
+M	Module	i	priv	remove_const	-	-
+M	Module	i	priv	const_added	-	-
+M	Module	i	priv	method_added	-	-
+M	Module	i	priv	method_removed	-	-
+M	Module	i	priv	method_undefined	-	-
+M	Module	i	priv	extend_object	-	-
+M	Module	i	priv	append_features	-	-
+M	Module	i	priv	initialize	-	-
+M	Module	i	priv	initialize_copy	-	-
+M	Module	i	priv	initialize_clone	-	-
+M	Module	i	priv	refine	-	-
+M	Module	i	priv	using	-	-
+M	Module	i	priv	prepend_features	-	-
+M	Module	i	priv	module_function	-	-
+M	Module	i	priv	public	-	-
+M	Module	i	priv	protected	-	-
+M	Module	i	priv	private	-	-
+M	Module	i	priv	ruby2_keywords	-	-
+M	Class	s	pub	allocate	-	-
+M	Class	i	pub	allocate	-	-
+M	Class	i	pub	superclass	-	-
+M	Class	i	pub	subclasses	-	-
+M	Class	i	pub	attached_object	-	-
+M	Class	i	pub	new	-	-
+M	Class	i	priv	inherited	-	-
+M	Class	i	priv	initialize	-	-
+M	Thread::Backtrace	s	pub	limit	-	-
+M	Ractor::RemoteError	i	pub	ractor	-	-
+M	Ractor::MovedObject	i	pub	equal?	-	-
+M	Ractor::MovedObject	i	pub	!	-	-
+M	Ractor::MovedObject	i	pub	__id__	-	-
+M	Ractor::MovedObject	i	pub	__send__	-	-
+M	Ractor::MovedObject	i	pub	method_missing	-	-
+M	Ractor::MovedObject	i	pub	instance_eval	-	-
+M	Ractor::MovedObject	i	pub	instance_exec	-	-
+M	Ractor::MovedObject	i	pub	==	-	-
+M	Ractor::MovedObject	i	pub	!=	-	-
+M	IO::Buffer	s	pub	string	-	-
+M	IO::Buffer	s	pub	size_of	-	-
+M	IO::Buffer	s	pub	for	-	-
+M	IO::Buffer	s	pub	map	-	-
+M	IO::Buffer	i	pub	null?	-	-
+M	IO::Buffer	i	pub	external?	-	-
+M	IO::Buffer	i	pub	internal?	-	-
+M	IO::Buffer	i	pub	mapped?	-	-
+M	IO::Buffer	i	pub	shared?	-	-
+M	IO::Buffer	i	pub	locked?	-	-
+M	IO::Buffer	i	pub	private?	-	-
+M	IO::Buffer	i	pub	readonly?	-	-
+M	IO::Buffer	i	pub	locked	-	-
+M	IO::Buffer	i	pub	resize	-	-
+M	IO::Buffer	i	pub	free	-	-
+M	IO::Buffer	i	pub	<=>	-	-
+M	IO::Buffer	i	pub	empty?	-	-
+M	IO::Buffer	i	pub	get_value	-	-
+M	IO::Buffer	i	pub	get_values	-	-
+M	IO::Buffer	i	pub	set_value	-	-
+M	IO::Buffer	i	pub	set_values	-	-
+M	IO::Buffer	i	pub	copy	-	-
+M	IO::Buffer	i	pub	get_string	-	-
+M	IO::Buffer	i	pub	set_string	-	-
+M	IO::Buffer	i	pub	clear	-	-
+M	IO::Buffer	i	pub	&	-	-
+M	IO::Buffer	i	pub	or!	-	-
+M	IO::Buffer	i	pub	and!	-	-
+M	IO::Buffer	i	pub	not!	-	-
+M	IO::Buffer	i	pub	xor!	-	-
+M	IO::Buffer	i	pub	inspect	-	-
+M	IO::Buffer	i	pub	write	-	-
+M	IO::Buffer	i	pub	pread	-	-
+M	IO::Buffer	i	pub	pwrite	-	-
+M	IO::Buffer	i	pub	size	-	-
+M	IO::Buffer	i	pub	each	-	-
+M	IO::Buffer	i	pub	to_s	-	-
+M	IO::Buffer	i	pub	^	-	-
+M	IO::Buffer	i	pub	each_byte	-	-
+M	IO::Buffer	i	pub	slice	-	-
+M	IO::Buffer	i	pub	hexdump	-	-
+M	IO::Buffer	i	pub	valid?	-	-
+M	IO::Buffer	i	pub	transfer	-	-
+M	IO::Buffer	i	pub	values	-	-
+M	IO::Buffer	i	pub	|	-	-
+M	IO::Buffer	i	pub	~	-	-
+M	IO::Buffer	i	pub	read	-	-
+M	IO::Buffer	i	priv	initialize	-	-
+M	IO::Buffer	i	priv	initialize_copy	-	-
+M	RubyVM::AbstractSyntaxTree	s	pub	parse_file	-	-
+M	RubyVM::AbstractSyntaxTree	s	pub	of	-	-
+M	RubyVM::AbstractSyntaxTree	s	pub	node_id_for_backtrace_location	-	-
+M	RubyVM::AbstractSyntaxTree	s	pub	parse	-	-
+M	RubyVM::RJIT	s	pub	enabled?	-	-
+M	RubyVM::RJIT	s	pub	enable	-	-
+M	RubyVM::InstructionSequence	s	pub	compile_file	-	-
+M	RubyVM::InstructionSequence	s	pub	compile_option	-	-
+M	RubyVM::InstructionSequence	s	pub	compile_option=	-	-
+M	RubyVM::InstructionSequence	s	pub	of	-	-
+M	RubyVM::InstructionSequence	s	pub	compile_file_prism	-	-
+M	RubyVM::InstructionSequence	s	pub	disasm	-	-
+M	RubyVM::InstructionSequence	s	pub	disassemble	-	-
+M	RubyVM::InstructionSequence	s	pub	load_from_binary	-	-
+M	RubyVM::InstructionSequence	s	pub	load_from_binary_extra_data	-	-
+M	RubyVM::InstructionSequence	s	pub	compile	-	-
+M	RubyVM::InstructionSequence	s	pub	compile_parsey	-	-
+M	RubyVM::InstructionSequence	s	pub	new	-	-
+M	RubyVM::InstructionSequence	s	pub	compile_prism	-	-
+M	RubyVM::InstructionSequence	i	pub	script_lines	-	-
+M	RubyVM::InstructionSequence	i	pub	path	-	-
+M	RubyVM::InstructionSequence	i	pub	absolute_path	-	-
+M	RubyVM::InstructionSequence	i	pub	each_child	-	-
+M	RubyVM::InstructionSequence	i	pub	inspect	-	-
+M	RubyVM::InstructionSequence	i	pub	eval	-	-
+M	RubyVM::InstructionSequence	i	pub	to_a	-	-
+M	RubyVM::InstructionSequence	i	pub	base_label	-	-
+M	RubyVM::InstructionSequence	i	pub	label	-	-
+M	RubyVM::InstructionSequence	i	pub	disasm	-	-
+M	RubyVM::InstructionSequence	i	pub	disassemble	-	-
+M	RubyVM::InstructionSequence	i	pub	to_binary	-	-
+M	RubyVM::InstructionSequence	i	pub	first_lineno	-	-
+M	RubyVM::InstructionSequence	i	pub	trace_points	-	-
+M	Encoding::UndefinedConversionError	i	pub	source_encoding	-	-
+M	Encoding::UndefinedConversionError	i	pub	source_encoding_name	-	-
+M	Encoding::UndefinedConversionError	i	pub	destination_encoding	-	-
+M	Encoding::UndefinedConversionError	i	pub	destination_encoding_name	-	-
+M	Encoding::UndefinedConversionError	i	pub	error_char	-	-
+M	Encoding::InvalidByteSequenceError	i	pub	source_encoding	-	-
+M	Encoding::InvalidByteSequenceError	i	pub	source_encoding_name	-	-
+M	Encoding::InvalidByteSequenceError	i	pub	incomplete_input?	-	-
+M	Encoding::InvalidByteSequenceError	i	pub	destination_encoding	-	-
+M	Encoding::InvalidByteSequenceError	i	pub	destination_encoding_name	-	-
+M	Encoding::InvalidByteSequenceError	i	pub	error_bytes	-	-
+M	Encoding::InvalidByteSequenceError	i	pub	readagain_bytes	-	-
+M	Encoding::Converter	s	pub	asciicompat_encoding	-	-
+M	Encoding::Converter	s	pub	search_convpath	-	-
+M	Encoding::Converter	i	pub	source_encoding	-	-
+M	Encoding::Converter	i	pub	primitive_convert	-	-
+M	Encoding::Converter	i	pub	finish	-	-
+M	Encoding::Converter	i	pub	primitive_errinfo	-	-
+M	Encoding::Converter	i	pub	convert	-	-
+M	Encoding::Converter	i	pub	insert_output	-	-
+M	Encoding::Converter	i	pub	last_error	-	-
+M	Encoding::Converter	i	pub	putback	-	-
+M	Encoding::Converter	i	pub	replacement=	-	-
+M	Encoding::Converter	i	pub	replacement	-	-
+M	Encoding::Converter	i	pub	==	-	-
+M	Encoding::Converter	i	pub	inspect	-	-
+M	Encoding::Converter	i	pub	destination_encoding	-	-
+M	Encoding::Converter	i	pub	convpath	-	-
+M	Encoding::Converter	i	priv	initialize	-	-
+M	File::Stat	i	pub	readable_real?	-	-
+M	File::Stat	i	pub	world_readable?	-	-
+M	File::Stat	i	pub	writable?	-	-
+M	File::Stat	i	pub	writable_real?	-	-
+M	File::Stat	i	pub	world_writable?	-	-
+M	File::Stat	i	pub	executable?	-	-
+M	File::Stat	i	pub	executable_real?	-	-
+M	File::Stat	i	pub	<=>	-	-
+M	File::Stat	i	pub	file?	-	-
+M	File::Stat	i	pub	size?	-	-
+M	File::Stat	i	pub	owned?	-	-
+M	File::Stat	i	pub	grpowned?	-	-
+M	File::Stat	i	pub	symlink?	-	-
+M	File::Stat	i	pub	socket?	-	-
+M	File::Stat	i	pub	blockdev?	-	-
+M	File::Stat	i	pub	chardev?	-	-
+M	File::Stat	i	pub	setuid?	-	-
+M	File::Stat	i	pub	pipe?	-	-
+M	File::Stat	i	pub	setgid?	-	-
+M	File::Stat	i	pub	sticky?	-	-
+M	File::Stat	i	pub	readable?	-	-
+M	File::Stat	i	pub	ftype	-	-
+M	File::Stat	i	pub	atime	-	-
+M	File::Stat	i	pub	mtime	-	-
+M	File::Stat	i	pub	ctime	-	-
+M	File::Stat	i	pub	birthtime	-	-
+M	File::Stat	i	pub	inspect	-	-
+M	File::Stat	i	pub	size	-	-
+M	File::Stat	i	pub	dev	-	-
+M	File::Stat	i	pub	dev_major	-	-
+M	File::Stat	i	pub	dev_minor	-	-
+M	File::Stat	i	pub	ino	-	-
+M	File::Stat	i	pub	mode	-	-
+M	File::Stat	i	pub	nlink	-	-
+M	File::Stat	i	pub	uid	-	-
+M	File::Stat	i	pub	gid	-	-
+M	File::Stat	i	pub	rdev	-	-
+M	File::Stat	i	pub	rdev_major	-	-
+M	File::Stat	i	pub	rdev_minor	-	-
+M	File::Stat	i	pub	blksize	-	-
+M	File::Stat	i	pub	blocks	-	-
+M	File::Stat	i	pub	directory?	-	-
+M	File::Stat	i	pub	zero?	-	-
+M	File::Stat	i	priv	initialize	-	-
+M	File::Stat	i	priv	initialize_copy	-	-
+M	Random::Base	i	pub	rand	-	-
+M	Random::Base	i	pub	bytes	-	-
+M	Random::Base	i	pub	seed	-	-
+M	Random::Base	i	priv	initialize	-	-
+M	Random::Formatter	i	pub	rand	-	-
+M	Random::Formatter	i	pub	random_number	-	-
+M	Process::UID	s	pub	rid	-	-
+M	Process::UID	s	pub	eid	-	-
+M	Process::UID	s	pub	change_privilege	-	-
+M	Process::UID	s	pub	grant_privilege	-	-
+M	Process::UID	s	pub	eid=	grant_privilege	-
+M	Process::UID	s	pub	re_exchange	-	-
+M	Process::UID	s	pub	re_exchangeable?	-	-
+M	Process::UID	s	pub	sid_available?	-	-
+M	Process::UID	s	pub	switch	-	-
+M	Process::UID	s	pub	from_name	-	-
+M	Process::UID	i	priv	rid	-	-
+M	Process::UID	i	priv	eid	-	-
+M	Process::UID	i	priv	change_privilege	-	-
+M	Process::UID	i	priv	grant_privilege	-	-
+M	Process::UID	i	priv	re_exchange	-	-
+M	Process::UID	i	priv	re_exchangeable?	-	-
+M	Process::UID	i	priv	sid_available?	-	-
+M	Process::UID	i	priv	switch	-	-
+M	Process::UID	i	priv	from_name	-	-
+M	Process::GID	s	pub	rid	-	-
+M	Process::GID	s	pub	eid	-	-
+M	Process::GID	s	pub	change_privilege	-	-
+M	Process::GID	s	pub	grant_privilege	-	-
+M	Process::GID	s	pub	eid=	grant_privilege	-
+M	Process::GID	s	pub	re_exchange	-	-
+M	Process::GID	s	pub	re_exchangeable?	-	-
+M	Process::GID	s	pub	sid_available?	-	-
+M	Process::GID	s	pub	switch	-	-
+M	Process::GID	s	pub	from_name	-	-
+M	Process::GID	i	priv	rid	-	-
+M	Process::GID	i	priv	eid	-	-
+M	Process::GID	i	priv	change_privilege	-	-
+M	Process::GID	i	priv	grant_privilege	-	-
+M	Process::GID	i	priv	re_exchange	-	-
+M	Process::GID	i	priv	re_exchangeable?	-	-
+M	Process::GID	i	priv	sid_available?	-	-
+M	Process::GID	i	priv	switch	-	-
+M	Process::GID	i	priv	from_name	-	-
+M	Process::Sys	s	pub	getuid	-	-
+M	Process::Sys	s	pub	geteuid	-	-
+M	Process::Sys	s	pub	getgid	-	-
+M	Process::Sys	s	pub	getegid	-	-
+M	Process::Sys	s	pub	setuid	-	-
+M	Process::Sys	s	pub	setgid	-	-
+M	Process::Sys	s	pub	setruid	-	-
+M	Process::Sys	s	pub	setrgid	-	-
+M	Process::Sys	s	pub	seteuid	-	-
+M	Process::Sys	s	pub	setegid	-	-
+M	Process::Sys	s	pub	setreuid	-	-
+M	Process::Sys	s	pub	setregid	-	-
+M	Process::Sys	s	pub	setresuid	-	-
+M	Process::Sys	s	pub	setresgid	-	-
+M	Process::Sys	s	pub	issetugid	-	-
+M	Process::Sys	i	priv	getuid	-	-
+M	Process::Sys	i	priv	geteuid	-	-
+M	Process::Sys	i	priv	getgid	-	-
+M	Process::Sys	i	priv	getegid	-	-
+M	Process::Sys	i	priv	setuid	-	-
+M	Process::Sys	i	priv	setgid	-	-
+M	Process::Sys	i	priv	setruid	-	-
+M	Process::Sys	i	priv	setrgid	-	-
+M	Process::Sys	i	priv	seteuid	-	-
+M	Process::Sys	i	priv	setegid	-	-
+M	Process::Sys	i	priv	setreuid	-	-
+M	Process::Sys	i	priv	setregid	-	-
+M	Process::Sys	i	priv	setresuid	-	-
+M	Process::Sys	i	priv	setresgid	-	-
+M	Process::Sys	i	priv	issetugid	-	-
+M	Process::Waiter	i	pub	pid	-	-
+M	Process::Status	s	pub	wait	-	-
+M	Process::Status	i	pub	coredump?	-	-
+M	Process::Status	i	pub	&	-	-
+M	Process::Status	i	pub	>>	-	-
+M	Process::Status	i	pub	==	-	-
+M	Process::Status	i	pub	inspect	-	-
+M	Process::Status	i	pub	success?	-	-
+M	Process::Status	i	pub	to_s	-	-
+M	Process::Status	i	pub	to_i	-	-
+M	Process::Status	i	pub	stopped?	-	-
+M	Process::Status	i	pub	stopsig	-	-
+M	Process::Status	i	pub	pid	-	-
+M	Process::Status	i	pub	termsig	-	-
+M	Process::Status	i	pub	exited?	-	-
+M	Process::Status	i	pub	signaled?	-	-
+M	Process::Status	i	pub	exitstatus	-	-
+M	Process::Tms	s	pub	inspect	-	-
+M	Process::Tms	s	pub	[]	-	-
+M	Process::Tms	s	pub	keyword_init?	-	-
+M	Process::Tms	s	pub	new	-	-
+M	Process::Tms	s	pub	members	-	-
+M	Process::Tms	i	pub	cstime=	-	-
+M	Process::Tms	i	pub	utime=	-	-
+M	Process::Tms	i	pub	stime	-	-
+M	Process::Tms	i	pub	utime	-	-
+M	Process::Tms	i	pub	stime=	-	-
+M	Process::Tms	i	pub	cutime	-	-
+M	Process::Tms	i	pub	cutime=	-	-
+M	Process::Tms	i	pub	cstime	-	-
+M	GC::Profiler	s	pub	enabled?	-	-
+M	GC::Profiler	s	pub	enable	-	-
+M	GC::Profiler	s	pub	raw_data	-	-
+M	GC::Profiler	s	pub	disable	-	-
+M	GC::Profiler	s	pub	report	-	-
+M	GC::Profiler	s	pub	total_time	-	-
+M	GC::Profiler	s	pub	clear	-	-
+M	GC::Profiler	s	pub	result	-	-
+M	ObjectSpace::WeakMap	i	pub	each	-	-
+M	ObjectSpace::WeakMap	i	pub	key?	-	-
+M	ObjectSpace::WeakMap	i	pub	delete	-	-
+M	ObjectSpace::WeakMap	i	pub	inspect	-	-
+M	ObjectSpace::WeakMap	i	pub	[]	-	-
+M	ObjectSpace::WeakMap	i	pub	[]=	-	-
+M	ObjectSpace::WeakMap	i	pub	each_value	-	-
+M	ObjectSpace::WeakMap	i	pub	each_pair	-	-
+M	ObjectSpace::WeakMap	i	pub	member?	-	-
+M	ObjectSpace::WeakMap	i	pub	include?	-	-
+M	ObjectSpace::WeakMap	i	pub	each_key	-	-
+M	ObjectSpace::WeakMap	i	pub	keys	-	-
+M	ObjectSpace::WeakMap	i	pub	values	-	-
+M	ObjectSpace::WeakMap	i	pub	length	-	-
+M	ObjectSpace::WeakMap	i	pub	size	-	-
+M	ObjectSpace::WeakKeyMap	i	pub	[]	-	-
+M	ObjectSpace::WeakKeyMap	i	pub	[]=	-	-
+M	ObjectSpace::WeakKeyMap	i	pub	key?	-	-
+M	ObjectSpace::WeakKeyMap	i	pub	delete	-	-
+M	ObjectSpace::WeakKeyMap	i	pub	clear	-	-
+M	ObjectSpace::WeakKeyMap	i	pub	getkey	-	-
+M	ObjectSpace::WeakKeyMap	i	pub	inspect	-	-
+M	Enumerator::Yielder	i	pub	yield	-	-
+M	Enumerator::Yielder	i	pub	<<	-	-
+M	Enumerator::Yielder	i	pub	to_proc	-	-
+M	Enumerator::Yielder	i	priv	initialize	-	-
+M	Enumerator::Producer	i	pub	each	-	-
+M	Enumerator::Chain	i	pub	each	-	-
+M	Enumerator::Chain	i	pub	rewind	-	-
+M	Enumerator::Chain	i	pub	size	-	-
+M	Enumerator::Chain	i	pub	inspect	-	-
+M	Enumerator::Chain	i	priv	initialize	-	-
+M	Enumerator::Chain	i	priv	initialize_copy	-	-
+M	Enumerator::Product	i	pub	each	-	-
+M	Enumerator::Product	i	pub	rewind	-	-
+M	Enumerator::Product	i	pub	size	-	-
+M	Enumerator::Product	i	pub	inspect	-	-
+M	Enumerator::Product	i	priv	initialize	-	-
+M	Enumerator::Product	i	priv	initialize_copy	-	-
+M	Enumerator::ArithmeticSequence	i	pub	each	-	-
+M	Enumerator::ArithmeticSequence	i	pub	step	-	-
+M	Enumerator::ArithmeticSequence	i	pub	last	-	-
+M	Enumerator::ArithmeticSequence	i	pub	exclude_end?	-	-
+M	Enumerator::ArithmeticSequence	i	pub	==	-	-
+M	Enumerator::ArithmeticSequence	i	pub	hash	-	-
+M	Enumerator::ArithmeticSequence	i	pub	first	-	-
+M	Enumerator::ArithmeticSequence	i	pub	inspect	-	-
+M	Enumerator::ArithmeticSequence	i	pub	===	-	-
+M	Enumerator::ArithmeticSequence	i	pub	begin	-	-
+M	Enumerator::ArithmeticSequence	i	pub	end	-	-
+M	Enumerator::ArithmeticSequence	i	pub	eql?	-	-
+M	Enumerator::ArithmeticSequence	i	pub	size	-	-
+M	Enumerator::Lazy	i	pub	eager	-	-
+M	Enumerator::Lazy	i	pub	slice_before	-	-
+M	Enumerator::Lazy	i	pub	drop	-	-
+M	Enumerator::Lazy	i	pub	slice_when	-	-
+M	Enumerator::Lazy	i	pub	chunk_while	-	-
+M	Enumerator::Lazy	i	pub	chunk	-	-
+M	Enumerator::Lazy	i	pub	slice_after	-	-
+M	Enumerator::Lazy	i	pub	drop_while	-	-
+M	Enumerator::Lazy	i	pub	uniq	-	-
+M	Enumerator::Lazy	i	pub	compact	-	-
+M	Enumerator::Lazy	i	pub	grep	-	-
+M	Enumerator::Lazy	i	pub	grep_v	-	-
+M	Enumerator::Lazy	i	pub	find_all	-	-
+M	Enumerator::Lazy	i	pub	select	-	-
+M	Enumerator::Lazy	i	pub	filter	-	-
+M	Enumerator::Lazy	i	pub	filter_map	-	-
+M	Enumerator::Lazy	i	pub	reject	-	-
+M	Enumerator::Lazy	i	pub	collect	-	-
+M	Enumerator::Lazy	i	pub	map	-	-
+M	Enumerator::Lazy	i	pub	flat_map	-	-
+M	Enumerator::Lazy	i	pub	collect_concat	-	-
+M	Enumerator::Lazy	i	pub	force	to_a	-
+M	Enumerator::Lazy	i	pub	to_enum	-	-
+M	Enumerator::Lazy	i	pub	enum_for	-	-
+M	Enumerator::Lazy	i	pub	with_index	-	-
+M	Enumerator::Lazy	i	pub	lazy	-	-
+M	Enumerator::Lazy	i	pub	zip	-	-
+M	Enumerator::Lazy	i	pub	take	-	-
+M	Enumerator::Lazy	i	pub	take_while	-	-
+M	Enumerator::Lazy	i	priv	_enumerable_find_all	find_all	-
+M	Enumerator::Lazy	i	priv	_enumerable_filter	filter	-
+M	Enumerator::Lazy	i	priv	_enumerable_filter_map	filter_map	-
+M	Enumerator::Lazy	i	priv	_enumerable_reject	reject	-
+M	Enumerator::Lazy	i	priv	_enumerable_grep	grep	-
+M	Enumerator::Lazy	i	priv	_enumerable_grep_v	grep_v	-
+M	Enumerator::Lazy	i	priv	_enumerable_zip	zip	-
+M	Enumerator::Lazy	i	priv	_enumerable_take	take	-
+M	Enumerator::Lazy	i	priv	_enumerable_take_while	take_while	-
+M	Enumerator::Lazy	i	priv	_enumerable_drop	drop	-
+M	Enumerator::Lazy	i	priv	_enumerable_drop_while	drop_while	-
+M	Enumerator::Lazy	i	priv	_enumerable_uniq	uniq	-
+M	Enumerator::Lazy	i	priv	_enumerable_with_index	-	-
+M	Enumerator::Lazy	i	priv	_enumerable_collect_concat	collect_concat	-
+M	Enumerator::Lazy	i	priv	_enumerable_flat_map	flat_map	-
+M	Enumerator::Lazy	i	priv	_enumerable_select	select	-
+M	Enumerator::Lazy	i	priv	initialize	-	-
+M	Enumerator::Lazy	i	priv	_enumerable_map	map	-
+M	Enumerator::Lazy	i	priv	_enumerable_collect	collect	-
+M	Enumerator::Generator	i	pub	each	-	-
+M	Enumerator::Generator	i	priv	initialize	-	-
+M	Enumerator::Generator	i	priv	initialize_copy	-	-
+M	Thread::Backtrace::Location	i	pub	label	-	-
+M	Thread::Backtrace::Location	i	pub	base_label	-	-
+M	Thread::Backtrace::Location	i	pub	to_s	-	-
+M	Thread::Backtrace::Location	i	pub	path	-	-
+M	Thread::Backtrace::Location	i	pub	absolute_path	-	-
+M	Thread::Backtrace::Location	i	pub	lineno	-	-
+M	Thread::Backtrace::Location	i	pub	inspect	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	last_column	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	tokens	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	all_tokens	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	script_lines	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	node_id	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	locations	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	source	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	children	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	inspect	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	first_lineno	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	type	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	first_column	-	-
+M	RubyVM::AbstractSyntaxTree::Node	i	pub	last_lineno	-	-
+M	RubyVM::AbstractSyntaxTree::Location	i	pub	last_column	-	-
+M	RubyVM::AbstractSyntaxTree::Location	i	pub	inspect	-	-
+M	RubyVM::AbstractSyntaxTree::Location	i	pub	first_lineno	-	-
+M	RubyVM::AbstractSyntaxTree::Location	i	pub	first_column	-	-
+M	RubyVM::AbstractSyntaxTree::Location	i	pub	last_lineno	-	-
+M	ARGF.class	i	pub	getc	-	-
+M	ARGF.class	i	pub	readpartial	-	-
+M	ARGF.class	i	pub	set_encoding	-	-
+M	ARGF.class	i	pub	fileno	-	-
+M	ARGF.class	i	pub	printf	-	-
+M	ARGF.class	i	pub	print	-	-
+M	ARGF.class	i	pub	putc	-	-
+M	ARGF.class	i	pub	puts	-	-
+M	ARGF.class	i	pub	readline	-	-
+M	ARGF.class	i	pub	readlines	-	-
+M	ARGF.class	i	pub	getbyte	-	-
+M	ARGF.class	i	pub	inspect	to_s	-
+M	ARGF.class	i	pub	write	-	-
+M	ARGF.class	i	pub	lineno	-	-
+M	ARGF.class	i	pub	lineno=	-	-
+M	ARGF.class	i	pub	readchar	-	-
+M	ARGF.class	i	pub	readbyte	-	-
+M	ARGF.class	i	pub	each	-	-
+M	ARGF.class	i	pub	gets	-	-
+M	ARGF.class	i	pub	tell	-	-
+M	ARGF.class	i	pub	seek	-	-
+M	ARGF.class	i	pub	rewind	-	-
+M	ARGF.class	i	pub	pos	-	-
+M	ARGF.class	i	pub	pos=	-	-
+M	ARGF.class	i	pub	eof	-	-
+M	ARGF.class	i	pub	eof?	-	-
+M	ARGF.class	i	pub	to_io	-	-
+M	ARGF.class	i	pub	to_a	-	-
+M	ARGF.class	i	pub	to_s	-	-
+M	ARGF.class	i	pub	to_i	-	-
+M	ARGF.class	i	pub	closed?	-	-
+M	ARGF.class	i	pub	binmode?	-	-
+M	ARGF.class	i	pub	close	-	-
+M	ARGF.class	i	pub	external_encoding	-	-
+M	ARGF.class	i	pub	internal_encoding	-	-
+M	ARGF.class	i	pub	path	-	-
+M	ARGF.class	i	pub	argv	-	-
+M	ARGF.class	i	pub	each_line	-	-
+M	ARGF.class	i	pub	read_nonblock	-	-
+M	ARGF.class	i	pub	each_char	-	-
+M	ARGF.class	i	pub	to_write_io	-	-
+M	ARGF.class	i	pub	each_codepoint	-	-
+M	ARGF.class	i	pub	skip	-	-
+M	ARGF.class	i	pub	file	-	-
+M	ARGF.class	i	pub	each_byte	-	-
+M	ARGF.class	i	pub	filename	-	-
+M	ARGF.class	i	pub	inplace_mode=	-	-
+M	ARGF.class	i	pub	inplace_mode	-	-
+M	ARGF.class	i	pub	read	-	-
+M	ARGF.class	i	pub	binmode	-	-
+M	ARGF.class	i	priv	initialize	-	-
+M	ARGF.class	i	priv	initialize_copy	-	-
+M	ENV	s	pub	has_key?	-	-
+M	ENV	s	pub	has_value?	-	-
+M	ENV	s	pub	key?	-	-
+M	ENV	s	pub	value?	-	-
+M	ENV	s	pub	clone	-	-
+M	ENV	s	pub	dup	-	-
+M	ENV	s	pub	[]	-	-
+M	ENV	s	pub	[]=	-	-
+M	ENV	s	pub	include?	-	-
+M	ENV	s	pub	key	-	-
+M	ENV	s	pub	empty?	-	-
+M	ENV	s	pub	to_h	-	-
+M	ENV	s	pub	replace	-	-
+M	ENV	s	pub	clear	-	-
+M	ENV	s	pub	freeze	-	-
+M	ENV	s	pub	inspect	-	-
+M	ENV	s	pub	length	-	-
+M	ENV	s	pub	size	-	-
+M	ENV	s	pub	each	-	-
+M	ENV	s	pub	fetch	-	-
+M	ENV	s	pub	shift	-	-
+M	ENV	s	pub	to_hash	-	-
+M	ENV	s	pub	to_a	-	-
+M	ENV	s	pub	to_s	-	-
+M	ENV	s	pub	select!	-	-
+M	ENV	s	pub	filter!	-	-
+M	ENV	s	pub	keep_if	-	-
+M	ENV	s	pub	values_at	-	-
+M	ENV	s	pub	delete_if	-	-
+M	ENV	s	pub	reject!	-	-
+M	ENV	s	pub	assoc	-	-
+M	ENV	s	pub	rassoc	-	-
+M	ENV	s	pub	select	-	-
+M	ENV	s	pub	filter	-	-
+M	ENV	s	pub	reject	-	-
+M	ENV	s	pub	delete	-	-
+M	ENV	s	pub	rehash	-	-
+M	ENV	s	pub	store	-	-
+M	ENV	s	pub	each_value	-	-
+M	ENV	s	pub	each_key	-	-
+M	ENV	s	pub	each_pair	-	-
+M	ENV	s	pub	slice	-	-
+M	ENV	s	pub	member?	-	-
+M	ENV	s	pub	keys	-	-
+M	ENV	s	pub	values	-	-
+M	ENV	s	pub	except	-	-
+M	ENV	s	pub	invert	-	-
+M	ENV	s	pub	update	-	-
+M	ENV	s	pub	merge!	-	-
+M	main	s	pub	to_s	-	-
+M	main	s	pub	inspect	to_s	-
+M	main	s	priv	public	-	-
+M	main	s	priv	private	-	-
+M	main	s	priv	ruby2_keywords	-	-
+M	main	s	priv	include	-	-
+M	main	s	priv	define_method	-	-
+M	main	s	priv	using	-	-
+R	ARGF.class	#	argv	ok
+R	ARGF.class	#	binmode	ok
+R	ARGF.class	#	binmode?	ok
+R	ARGF.class	#	close	ok
+R	ARGF.class	#	closed?	ok
+R	ARGF.class	#	each	ok
+R	ARGF.class	#	each_line	ok
+R	ARGF.class	#	each_byte	ok
+R	ARGF.class	#	each_char	ok
+R	ARGF.class	#	each_codepoint	ok
+R	ARGF.class	#	eof	ok
+R	ARGF.class	#	eof?	ok
+R	ARGF.class	#	external_encoding	ok
+R	ARGF.class	#	file	ok
+R	ARGF.class	#	filename	ok
+R	ARGF.class	#	path	ok
+R	ARGF.class	#	fileno	ok
+R	ARGF.class	#	to_i	ok
+R	ARGF.class	#	getbyte	ok
+R	ARGF.class	#	getc	ok
+R	ARGF.class	#	gets	ok
+R	ARGF.class	#	inplace_mode	ok
+R	ARGF.class	#	inplace_mode=	ok
+R	ARGF.class	#	inspect	ok
+R	ARGF.class	#	to_s	ok
+R	ARGF.class	#	internal_encoding	ok
+R	ARGF.class	#	lineno	ok
+R	ARGF.class	#	lineno=	ok
+R	ARGF.class	#	pos	ok
+R	ARGF.class	#	tell	ok
+R	ARGF.class	#	pos=	ok
+R	ARGF.class	#	print	ok
+R	ARGF.class	#	printf	ok
+R	ARGF.class	#	putc	ok
+R	ARGF.class	#	puts	ok
+R	ARGF.class	#	read	ok
+R	ARGF.class	#	read_nonblock	ok
+R	ARGF.class	#	readbyte	ok
+R	ARGF.class	#	readchar	ok
+R	ARGF.class	#	readline	ok
+R	ARGF.class	#	readlines	ok
+R	ARGF.class	#	to_a	ok
+R	ARGF.class	#	readpartial	ok
+R	ARGF.class	#	rewind	ok
+R	ARGF.class	#	seek	ok
+R	ARGF.class	#	set_encoding	ok
+R	ARGF.class	#	skip	ok
+R	ARGF.class	#	to_io	ok
+R	ARGF.class	#	to_write_io	ok
+R	ARGF.class	#	write	ok
+R	Array	#	&	ok
+R	Array	#	*	ok
+R	Array	#	+	ok
+R	Array	#	-	ok
+R	Array	#	<<	ok
+R	Array	#	<=>	ok
+R	Array	#	==	ok
+R	Array	#	[]	ok
+R	Array	#	at	ok
+R	Array	#	[]=	ok
+R	Array	#	|	ok
+R	Array	#	all?	ok
+R	Array	#	any?	ok
+R	Array	#	append	ok
+R	Array	#	push	ok
+R	Array	#	assoc	ok
+R	Array	#	bsearch	ok
+R	Array	#	bsearch_index	ok
+R	Array	#	clear	ok
+R	Array	#	clone	ok
+R	Array	#	dup	ok
+R	Array	#	collect	ok
+R	Array	#	map	ok
+R	Array	#	collect!	ok
+R	Array	#	map!	ok
+R	Array	#	combination	ok
+R	Array	#	compact	ok
+R	Array	#	compact!	ok
+R	Array	#	concat	ok
+R	Array	#	count	ok
+R	Array	#	cycle	ok
+R	Array	#	deconstruct	ok
+R	Array	#	delete	ok
+R	Array	#	delete_at	ok
+R	Array	#	delete_if	ok
+R	Array	#	reject!	ok
+R	Array	#	difference	ok
+R	Array	#	dig	ok
+R	Array	#	drop	ok
+R	Array	#	drop_while	ok
+R	Array	#	each	ok
+R	Array	#	each_index	ok
+R	Array	#	empty?	ok
+R	Array	#	eql?	ok
+R	Array	#	fetch	ok
+R	Array	#	fetch_values	ok
+R	Array	#	fill	ok
+R	Array	#	filter	ok
+R	Array	#	select	ok
+R	Array	#	filter!	ok
+R	Array	#	select!	ok
+R	Array	#	find_index	ok
+R	Array	#	index	ok
+R	Array	#	first	ok
+R	Array	#	flatten	ok
+R	Array	#	flatten!	ok
+R	Array	#	hash	ok
+R	Array	#	include?	ok
+R	Array	#	insert	ok
+R	Array	#	inspect	ok
+R	Array	#	to_s	ok
+R	Array	#	intersect?	ok
+R	Array	#	intersection	ok
+R	Array	#	join	ok
+R	Array	#	keep_if	ok
+R	Array	#	last	ok
+R	Array	#	length	ok
+R	Array	#	size	ok
+R	Array	#	max	ok
+R	Array	#	min	ok
+R	Array	#	minmax	ok
+R	Array	#	none?	ok
+R	Array	#	one?	ok
+R	Array	#	pack	ok
+R	Array	#	permutation	ok
+R	Array	#	pop	ok
+R	Array	#	prepend	ok
+R	Array	#	unshift	ok
+R	Array	#	product	ok
+R	Array	#	rassoc	ok
+R	Array	#	reject	ok
+R	Array	#	repeated_combination	ok
+R	Array	#	repeated_permutation	ok
+R	Array	#	replace	ok
+R	Array	#	reverse	ok
+R	Array	#	reverse!	ok
+R	Array	#	reverse_each	ok
+R	Array	#	rindex	ok
+R	Array	#	rotate	ok
+R	Array	#	rotate!	ok
+R	Array	#	sample	ok
+R	Array	#	shift	ok
+R	Array	#	shuffle	ok
+R	Array	#	shuffle!	ok
+R	Array	#	slice	ok
+R	Array	#	slice!	ok
+R	Array	#	sort	ok
+R	Array	#	sort!	ok
+R	Array	#	sort_by!	ok
+R	Array	#	sum	ok
+R	Array	#	take	ok
+R	Array	#	take_while	ok
+R	Array	#	to_a	ok
+R	Array	#	to_ary	ok
+R	Array	#	to_h	ok
+R	Array	#	transpose	ok
+R	Array	#	union	ok
+R	Array	#	uniq	ok
+R	Array	#	uniq!	ok
+R	Array	#	values_at	ok
+R	Array	#	zip	ok
+R	Array	.	[]	ok
+R	Array	.	new	ok
+R	Array	.	try_convert	ok
+R	BasicObject	#	!	ok
+R	BasicObject	#	!=	ok
+R	BasicObject	#	==	ok
+R	BasicObject	#	__id__	ok
+R	BasicObject	#	__send__	ok
+R	BasicObject	#	equal?	ok
+R	BasicObject	#	instance_eval	ok
+R	BasicObject	#	instance_exec	ok
+R	BasicObject	#	method_missing	ok
+R	BasicObject	#	singleton_method_added	ok
+R	BasicObject	#	singleton_method_removed	ok
+R	BasicObject	#	singleton_method_undefined	ok
+R	Binding	#	eval	ok
+R	Binding	#	irb	ok
+R	Binding	#	local_variable_defined?	ok
+R	Binding	#	local_variable_get	ok
+R	Binding	#	local_variable_set	ok
+R	Binding	#	local_variables	ok
+R	Binding	#	receiver	ok
+R	Binding	#	source_location	ok
+R	Class	#	_load	no-method
+R	Class	#	allocate	ok
+R	Class	#	attached_object	ok
+R	Class	#	inherited	ok
+R	Class	#	new	ok
+R	Class	#	subclasses	ok
+R	Class	#	superclass	ok
+R	Class	.	new	ok
+R	Comparable	#	<	ok
+R	Comparable	#	<=	ok
+R	Comparable	#	==	ok
+R	Comparable	#	>	ok
+R	Comparable	#	>=	ok
+R	Comparable	#	between?	ok
+R	Comparable	#	clamp	ok
+R	Complex	::	I	ok
+R	Complex	#	*	ok
+R	Complex	#	**	ok
+R	Complex	#	+	ok
+R	Complex	#	-	ok
+R	Complex	#	-@	ok
+R	Complex	#	/	ok
+R	Complex	#	quo	ok
+R	Complex	#	<	no-method
+R	Complex	#	<=	no-method
+R	Complex	#	<=>	ok
+R	Complex	#	==	ok
+R	Complex	#	>	no-method
+R	Complex	#	>=	no-method
+R	Complex	#	abs	ok
+R	Complex	#	magnitude	ok
+R	Complex	#	abs2	ok
+R	Complex	#	angle	ok
+R	Complex	#	arg	ok
+R	Complex	#	phase	ok
+R	Complex	#	between?	no-method
+R	Complex	#	clamp	no-method
+R	Complex	#	coerce	ok
+R	Complex	#	conj	ok
+R	Complex	#	conjugate	ok
+R	Complex	#	denominator	ok
+R	Complex	#	fdiv	ok
+R	Complex	#	finite?	ok
+R	Complex	#	imag	ok
+R	Complex	#	imaginary	ok
+R	Complex	#	infinite?	ok
+R	Complex	#	inspect	ok
+R	Complex	#	marshal_dump	ok
+R	Complex	#	numerator	ok
+R	Complex	#	polar	ok
+R	Complex	#	rationalize	ok
+R	Complex	#	real	ok
+R	Complex	#	real?	ok
+R	Complex	#	rect	ok
+R	Complex	#	rectangular	ok
+R	Complex	#	to_c	ok
+R	Complex	#	to_f	ok
+R	Complex	#	to_i	ok
+R	Complex	#	to_r	ok
+R	Complex	#	to_s	ok
+R	Complex	.	polar	ok
+R	Complex	.	rect	ok
+R	Complex	.	rectangular	ok
+R	Data	#	==	ok
+R	Data	#	deconstruct	ok
+R	Data	#	deconstruct_keys	ok
+R	Data	#	eql?	ok
+R	Data	#	hash	ok
+R	Data	#	inspect	ok
+R	Data	#	to_s	ok
+R	Data	#	members	ok
+R	Data	#	to_h	ok
+R	Data	#	with	ok
+R	Data	.	[]	no-method
+R	Data	.	new	no-method
+R	Data	.	define	ok
+R	Data	.	members	no-method
+R	Dir	#	chdir	ok
+R	Dir	#	children	ok
+R	Dir	#	close	ok
+R	Dir	#	each	ok
+R	Dir	#	each_child	ok
+R	Dir	#	fileno	ok
+R	Dir	#	inspect	ok
+R	Dir	#	path	ok
+R	Dir	#	to_path	ok
+R	Dir	#	pos	ok
+R	Dir	#	tell	ok
+R	Dir	#	pos=	ok
+R	Dir	#	seek	ok
+R	Dir	#	read	ok
+R	Dir	#	rewind	ok
+R	Dir	.	[]	ok
+R	Dir	.	glob	ok
+R	Dir	.	chdir	ok
+R	Dir	.	children	ok
+R	Dir	.	chroot	ok
+R	Dir	.	delete	ok
+R	Dir	.	rmdir	ok
+R	Dir	.	unlink	ok
+R	Dir	.	each_child	ok
+R	Dir	.	empty?	ok
+R	Dir	.	entries	ok
+R	Dir	.	exist?	ok
+R	Dir	.	fchdir	ok
+R	Dir	.	for_fd	ok
+R	Dir	.	foreach	ok
+R	Dir	.	getwd	ok
+R	Dir	.	pwd	ok
+R	Dir	.	home	ok
+R	Dir	.	mkdir	ok
+R	Dir	.	new	ok
+R	Dir	.	open	ok
+R	ENV	.	[]	ok
+R	ENV	.	[]=	ok
+R	ENV	.	store	ok
+R	ENV	.	assoc	ok
+R	ENV	.	clear	ok
+R	ENV	.	clone	ok
+R	ENV	.	delete	ok
+R	ENV	.	delete_if	ok
+R	ENV	.	reject!	ok
+R	ENV	.	dup	ok
+R	ENV	.	each	ok
+R	ENV	.	each_pair	ok
+R	ENV	.	each_key	ok
+R	ENV	.	each_value	ok
+R	ENV	.	empty?	ok
+R	ENV	.	except	ok
+R	ENV	.	fetch	ok
+R	ENV	.	filter	ok
+R	ENV	.	select	ok
+R	ENV	.	filter!	ok
+R	ENV	.	keep_if	ok
+R	ENV	.	select!	ok
+R	ENV	.	freeze	ok
+R	ENV	.	has_key?	ok
+R	ENV	.	include?	ok
+R	ENV	.	key?	ok
+R	ENV	.	member?	ok
+R	ENV	.	has_value?	ok
+R	ENV	.	value?	ok
+R	ENV	.	inspect	ok
+R	ENV	.	invert	ok
+R	ENV	.	key	ok
+R	ENV	.	keys	ok
+R	ENV	.	length	ok
+R	ENV	.	size	ok
+R	ENV	.	merge!	ok
+R	ENV	.	update	ok
+R	ENV	.	rassoc	ok
+R	ENV	.	rehash	ok
+R	ENV	.	reject	ok
+R	ENV	.	replace	ok
+R	ENV	.	shift	ok
+R	ENV	.	slice	ok
+R	ENV	.	to_a	ok
+R	ENV	.	to_h	ok
+R	ENV	.	to_hash	ok
+R	ENV	.	to_s	ok
+R	ENV	.	values	ok
+R	ENV	.	values_at	ok
+R	Encoding	::	ANSI_X3_4_1968	ok
+R	Encoding	::	ASCII	ok
+R	Encoding	::	US_ASCII	ok
+R	Encoding	::	ASCII_8BIT	ok
+R	Encoding	::	BINARY	ok
+R	Encoding	::	BIG5	ok
+R	Encoding	::	Big5	ok
+R	Encoding	::	BIG5_HKSCS	ok
+R	Encoding	::	BIG5_HKSCS_2008	ok
+R	Encoding	::	Big5_HKSCS	ok
+R	Encoding	::	Big5_HKSCS_2008	ok
+R	Encoding	::	BIG5_UAO	ok
+R	Encoding	::	Big5_UAO	ok
+R	Encoding	::	CESU_8	ok
+R	Encoding	::	CP1250	ok
+R	Encoding	::	WINDOWS_1250	ok
+R	Encoding	::	Windows_1250	ok
+R	Encoding	::	CP1251	ok
+R	Encoding	::	WINDOWS_1251	ok
+R	Encoding	::	Windows_1251	ok
+R	Encoding	::	CP1252	ok
+R	Encoding	::	WINDOWS_1252	ok
+R	Encoding	::	Windows_1252	ok
+R	Encoding	::	CP1253	ok
+R	Encoding	::	WINDOWS_1253	ok
+R	Encoding	::	Windows_1253	ok
+R	Encoding	::	CP1254	ok
+R	Encoding	::	WINDOWS_1254	ok
+R	Encoding	::	Windows_1254	ok
+R	Encoding	::	CP1255	ok
+R	Encoding	::	WINDOWS_1255	ok
+R	Encoding	::	Windows_1255	ok
+R	Encoding	::	CP1256	ok
+R	Encoding	::	WINDOWS_1256	ok
+R	Encoding	::	Windows_1256	ok
+R	Encoding	::	CP1257	ok
+R	Encoding	::	WINDOWS_1257	ok
+R	Encoding	::	Windows_1257	ok
+R	Encoding	::	CP1258	ok
+R	Encoding	::	WINDOWS_1258	ok
+R	Encoding	::	Windows_1258	ok
+R	Encoding	::	CP437	ok
+R	Encoding	::	IBM437	ok
+R	Encoding	::	CP50220	ok
+R	Encoding	::	CP50221	ok
+R	Encoding	::	CP51932	ok
+R	Encoding	::	CP65000	ok
+R	Encoding	::	UTF_7	ok
+R	Encoding	::	CP65001	ok
+R	Encoding	::	UTF_8	ok
+R	Encoding	::	CP720	ok
+R	Encoding	::	IBM720	ok
+R	Encoding	::	CP737	ok
+R	Encoding	::	IBM737	ok
+R	Encoding	::	CP775	ok
+R	Encoding	::	IBM775	ok
+R	Encoding	::	CP850	ok
+R	Encoding	::	IBM850	ok
+R	Encoding	::	CP852	ok
+R	Encoding	::	IBM852	ok
+R	Encoding	::	CP855	ok
+R	Encoding	::	IBM855	ok
+R	Encoding	::	CP857	ok
+R	Encoding	::	IBM857	ok
+R	Encoding	::	CP860	ok
+R	Encoding	::	IBM860	ok
+R	Encoding	::	CP861	ok
+R	Encoding	::	IBM861	ok
+R	Encoding	::	CP862	ok
+R	Encoding	::	IBM862	ok
+R	Encoding	::	CP863	ok
+R	Encoding	::	IBM863	ok
+R	Encoding	::	CP864	ok
+R	Encoding	::	IBM864	ok
+R	Encoding	::	CP865	ok
+R	Encoding	::	IBM865	ok
+R	Encoding	::	CP866	ok
+R	Encoding	::	IBM866	ok
+R	Encoding	::	CP869	ok
+R	Encoding	::	IBM869	ok
+R	Encoding	::	CP874	ok
+R	Encoding	::	WINDOWS_874	ok
+R	Encoding	::	Windows_874	ok
+R	Encoding	::	CP878	ok
+R	Encoding	::	KOI8_R	ok
+R	Encoding	::	CP932	ok
+R	Encoding	::	CSWINDOWS31J	ok
+R	Encoding	::	CsWindows31J	ok
+R	Encoding	::	PCK	ok
+R	Encoding	::	SJIS	ok
+R	Encoding	::	WINDOWS_31J	ok
+R	Encoding	::	Windows_31J	ok
+R	Encoding	::	CP936	ok
+R	Encoding	::	GBK	ok
+R	Encoding	::	CP949	ok
+R	Encoding	::	CP950	ok
+R	Encoding	::	CP951	ok
+R	Encoding	::	EBCDIC_CP_US	ok
+R	Encoding	::	IBM037	ok
+R	Encoding	::	EMACS_MULE	ok
+R	Encoding	::	Emacs_Mule	ok
+R	Encoding	::	EUCCN	ok
+R	Encoding	::	EUC_CN	ok
+R	Encoding	::	EucCN	ok
+R	Encoding	::	GB2312	ok
+R	Encoding	::	EUCJP	ok
+R	Encoding	::	EUC_JP	ok
+R	Encoding	::	EucJP	ok
+R	Encoding	::	EUCJP_MS	ok
+R	Encoding	::	EUC_JP_MS	ok
+R	Encoding	::	EucJP_ms	ok
+R	Encoding	::	EUCKR	ok
+R	Encoding	::	EUC_KR	ok
+R	Encoding	::	EucKR	ok
+R	Encoding	::	EUCTW	ok
+R	Encoding	::	EUC_TW	ok
+R	Encoding	::	EucTW	ok
+R	Encoding	::	EUC_JISX0213	ok
+R	Encoding	::	EUC_JIS_2004	ok
+R	Encoding	::	GB12345	ok
+R	Encoding	::	GB18030	ok
+R	Encoding	::	GB1988	ok
+R	Encoding	::	ISO2022_JP	ok
+R	Encoding	::	ISO_2022_JP	ok
+R	Encoding	::	ISO2022_JP2	ok
+R	Encoding	::	ISO_2022_JP_2	ok
+R	Encoding	::	ISO8859_1	ok
+R	Encoding	::	ISO_8859_1	ok
+R	Encoding	::	ISO8859_10	ok
+R	Encoding	::	ISO_8859_10	ok
+R	Encoding	::	ISO8859_11	ok
+R	Encoding	::	ISO_8859_11	ok
+R	Encoding	::	ISO8859_13	ok
+R	Encoding	::	ISO_8859_13	ok
+R	Encoding	::	ISO8859_14	ok
+R	Encoding	::	ISO_8859_14	ok
+R	Encoding	::	ISO8859_15	ok
+R	Encoding	::	ISO_8859_15	ok
+R	Encoding	::	ISO8859_16	ok
+R	Encoding	::	ISO_8859_16	ok
+R	Encoding	::	ISO8859_2	ok
+R	Encoding	::	ISO_8859_2	ok
+R	Encoding	::	ISO8859_3	ok
+R	Encoding	::	ISO_8859_3	ok
+R	Encoding	::	ISO8859_4	ok
+R	Encoding	::	ISO_8859_4	ok
+R	Encoding	::	ISO8859_5	ok
+R	Encoding	::	ISO_8859_5	ok
+R	Encoding	::	ISO8859_6	ok
+R	Encoding	::	ISO_8859_6	ok
+R	Encoding	::	ISO8859_7	ok
+R	Encoding	::	ISO_8859_7	ok
+R	Encoding	::	ISO8859_8	ok
+R	Encoding	::	ISO_8859_8	ok
+R	Encoding	::	ISO8859_9	ok
+R	Encoding	::	ISO_8859_9	ok
+R	Encoding	::	ISO_2022_JP_KDDI	ok
+R	Encoding	::	KOI8_U	ok
+R	Encoding	::	MACCENTEURO	ok
+R	Encoding	::	MacCentEuro	ok
+R	Encoding	::	MACCROATIAN	ok
+R	Encoding	::	MacCroatian	ok
+R	Encoding	::	MACCYRILLIC	ok
+R	Encoding	::	MacCyrillic	ok
+R	Encoding	::	MACGREEK	ok
+R	Encoding	::	MacGreek	ok
+R	Encoding	::	MACICELAND	ok
+R	Encoding	::	MacIceland	ok
+R	Encoding	::	MACJAPAN	ok
+R	Encoding	::	MACJAPANESE	ok
+R	Encoding	::	MacJapan	ok
+R	Encoding	::	MacJapanese	ok
+R	Encoding	::	MACROMAN	ok
+R	Encoding	::	MacRoman	ok
+R	Encoding	::	MACROMANIA	ok
+R	Encoding	::	MacRomania	ok
+R	Encoding	::	MACTHAI	ok
+R	Encoding	::	MacThai	ok
+R	Encoding	::	MACTURKISH	ok
+R	Encoding	::	MacTurkish	ok
+R	Encoding	::	MACUKRAINE	ok
+R	Encoding	::	MacUkraine	ok
+R	Encoding	::	SHIFT_JIS	ok
+R	Encoding	::	Shift_JIS	ok
+R	Encoding	::	SJIS_DOCOMO	ok
+R	Encoding	::	SJIS_DoCoMo	ok
+R	Encoding	::	SJIS_KDDI	ok
+R	Encoding	::	SJIS_SOFTBANK	ok
+R	Encoding	::	SJIS_SoftBank	ok
+R	Encoding	::	STATELESS_ISO_2022_JP	ok
+R	Encoding	::	Stateless_ISO_2022_JP	ok
+R	Encoding	::	STATELESS_ISO_2022_JP_KDDI	ok
+R	Encoding	::	Stateless_ISO_2022_JP_KDDI	ok
+R	Encoding	::	TIS_620	ok
+R	Encoding	::	UCS_2BE	ok
+R	Encoding	::	UTF_16BE	ok
+R	Encoding	::	UCS_4BE	ok
+R	Encoding	::	UTF_32BE	ok
+R	Encoding	::	UCS_4LE	ok
+R	Encoding	::	UTF_32LE	ok
+R	Encoding	::	UTF8_DOCOMO	ok
+R	Encoding	::	UTF8_DoCoMo	ok
+R	Encoding	::	UTF8_KDDI	ok
+R	Encoding	::	UTF8_MAC	ok
+R	Encoding	::	UTF_8_HFS	ok
+R	Encoding	::	UTF_8_MAC	ok
+R	Encoding	::	UTF8_SOFTBANK	ok
+R	Encoding	::	UTF8_SoftBank	ok
+R	Encoding	::	UTF_16	ok
+R	Encoding	::	UTF_16LE	ok
+R	Encoding	::	UTF_32	ok
+R	Encoding	#	ascii_compatible?	ok
+R	Encoding	#	dummy?	ok
+R	Encoding	#	inspect	ok
+R	Encoding	#	name	ok
+R	Encoding	#	to_s	ok
+R	Encoding	#	names	ok
+R	Encoding	.	aliases	ok
+R	Encoding	.	compatible?	ok
+R	Encoding	.	default_external	ok
+R	Encoding	.	default_external=	ok
+R	Encoding	.	default_internal	ok
+R	Encoding	.	default_internal=	ok
+R	Encoding	.	find	ok
+R	Encoding	.	list	ok
+R	Encoding	.	locale_charmap	ok
+R	Encoding	.	name_list	ok
+R	Encoding::Converter	#	convert	ok
+R	Encoding::Converter	#	convpath	ok
+R	Encoding::Converter	#	destination_encoding	ok
+R	Encoding::Converter	#	finish	ok
+R	Encoding::Converter	#	insert_output	ok
+R	Encoding::Converter	#	inspect	ok
+R	Encoding::Converter	#	last_error	ok
+R	Encoding::Converter	#	primitive_convert	ok
+R	Encoding::Converter	#	primitive_errinfo	ok
+R	Encoding::Converter	#	putback	ok
+R	Encoding::Converter	#	replacement	ok
+R	Encoding::Converter	#	replacement=	ok
+R	Encoding::Converter	#	source_encoding	ok
+R	Encoding::Converter	.	asciicompat_encoding	ok
+R	Encoding::Converter	.	new	ok
+R	Encoding::Converter	.	search_convpath	ok
+R	Encoding::InvalidByteSequenceError	#	destination_encoding	ok
+R	Encoding::InvalidByteSequenceError	#	destination_encoding_name	ok
+R	Encoding::InvalidByteSequenceError	#	error_bytes	ok
+R	Encoding::InvalidByteSequenceError	#	incomplete_input?	ok
+R	Encoding::InvalidByteSequenceError	#	readagain_bytes	ok
+R	Encoding::InvalidByteSequenceError	#	source_encoding	ok
+R	Encoding::InvalidByteSequenceError	#	source_encoding_name	ok
+R	Encoding::UndefinedConversionError	#	destination_encoding	ok
+R	Encoding::UndefinedConversionError	#	destination_encoding_name	ok
+R	Encoding::UndefinedConversionError	#	error_char	ok
+R	Encoding::UndefinedConversionError	#	source_encoding	ok
+R	Encoding::UndefinedConversionError	#	source_encoding_name	ok
+R	Enumerable	#	all?	ok
+R	Enumerable	#	any?	ok
+R	Enumerable	#	chain	ok
+R	Enumerable	#	chunk	ok
+R	Enumerable	#	chunk_while	ok
+R	Enumerable	#	collect	ok
+R	Enumerable	#	map	ok
+R	Enumerable	#	collect_concat	ok
+R	Enumerable	#	flat_map	ok
+R	Enumerable	#	compact	ok
+R	Enumerable	#	count	ok
+R	Enumerable	#	cycle	ok
+R	Enumerable	#	detect	ok
+R	Enumerable	#	find	ok
+R	Enumerable	#	drop	ok
+R	Enumerable	#	drop_while	ok
+R	Enumerable	#	each_cons	ok
+R	Enumerable	#	each_entry	ok
+R	Enumerable	#	each_slice	ok
+R	Enumerable	#	each_with_index	ok
+R	Enumerable	#	each_with_object	ok
+R	Enumerable	#	entries	ok
+R	Enumerable	#	to_a	ok
+R	Enumerable	#	filter	ok
+R	Enumerable	#	find_all	ok
+R	Enumerable	#	select	ok
+R	Enumerable	#	filter_map	ok
+R	Enumerable	#	find_index	ok
+R	Enumerable	#	first	ok
+R	Enumerable	#	grep	ok
+R	Enumerable	#	grep_v	ok
+R	Enumerable	#	group_by	ok
+R	Enumerable	#	include?	ok
+R	Enumerable	#	member?	ok
+R	Enumerable	#	inject	ok
+R	Enumerable	#	reduce	ok
+R	Enumerable	#	lazy	ok
+R	Enumerable	#	max	ok
+R	Enumerable	#	max_by	ok
+R	Enumerable	#	min	ok
+R	Enumerable	#	min_by	ok
+R	Enumerable	#	minmax	ok
+R	Enumerable	#	minmax_by	ok
+R	Enumerable	#	none?	ok
+R	Enumerable	#	one?	ok
+R	Enumerable	#	partition	ok
+R	Enumerable	#	reject	ok
+R	Enumerable	#	reverse_each	ok
+R	Enumerable	#	slice_after	ok
+R	Enumerable	#	slice_before	ok
+R	Enumerable	#	slice_when	ok
+R	Enumerable	#	sort	ok
+R	Enumerable	#	sort_by	ok
+R	Enumerable	#	sum	ok
+R	Enumerable	#	take	ok
+R	Enumerable	#	take_while	ok
+R	Enumerable	#	tally	ok
+R	Enumerable	#	to_h	ok
+R	Enumerable	#	to_set	ok
+R	Enumerable	#	uniq	ok
+R	Enumerable	#	zip	ok
+R	Enumerator	#	+	ok
+R	Enumerator	#	each	ok
+R	Enumerator	#	feed	ok
+R	Enumerator	#	next	ok
+R	Enumerator	#	next_values	ok
+R	Enumerator	#	peek	ok
+R	Enumerator	#	peek_values	ok
+R	Enumerator	#	rewind	ok
+R	Enumerator	#	size	ok
+R	Enumerator	#	with_index	ok
+R	Enumerator	#	with_object	ok
+R	Enumerator	.	new	ok
+R	Enumerator	.	produce	ok
+R	Enumerator	.	product	ok
+R	Enumerator::ArithmeticSequence	#	==	ok
+R	Enumerator::ArithmeticSequence	#	begin	ok
+R	Enumerator::ArithmeticSequence	#	each	ok
+R	Enumerator::ArithmeticSequence	#	end	ok
+R	Enumerator::ArithmeticSequence	#	exclude_end?	ok
+R	Enumerator::ArithmeticSequence	#	first	ok
+R	Enumerator::ArithmeticSequence	#	hash	ok
+R	Enumerator::ArithmeticSequence	#	inspect	ok
+R	Enumerator::ArithmeticSequence	#	last	ok
+R	Enumerator::ArithmeticSequence	#	size	ok
+R	Enumerator::ArithmeticSequence	#	step	ok
+R	Enumerator::Chain	#	each	ok
+R	Enumerator::Chain	#	inspect	ok
+R	Enumerator::Chain	#	rewind	ok
+R	Enumerator::Chain	#	size	ok
+R	Enumerator::Chain	.	new	ok
+R	Enumerator::Generator	#	each	ok
+R	Enumerator::Lazy	#	chunk	ok
+R	Enumerator::Lazy	#	chunk_while	ok
+R	Enumerator::Lazy	#	collect	ok
+R	Enumerator::Lazy	#	map	ok
+R	Enumerator::Lazy	#	collect_concat	ok
+R	Enumerator::Lazy	#	flat_map	ok
+R	Enumerator::Lazy	#	compact	ok
+R	Enumerator::Lazy	#	drop	ok
+R	Enumerator::Lazy	#	drop_while	ok
+R	Enumerator::Lazy	#	eager	ok
+R	Enumerator::Lazy	#	enum_for	ok
+R	Enumerator::Lazy	#	to_enum	ok
+R	Enumerator::Lazy	#	filter	ok
+R	Enumerator::Lazy	#	find_all	ok
+R	Enumerator::Lazy	#	select	ok
+R	Enumerator::Lazy	#	filter_map	ok
+R	Enumerator::Lazy	#	force	ok
+R	Enumerator::Lazy	#	grep	ok
+R	Enumerator::Lazy	#	grep_v	ok
+R	Enumerator::Lazy	#	lazy	ok
+R	Enumerator::Lazy	#	reject	ok
+R	Enumerator::Lazy	#	slice_after	ok
+R	Enumerator::Lazy	#	slice_before	ok
+R	Enumerator::Lazy	#	slice_when	ok
+R	Enumerator::Lazy	#	take	ok
+R	Enumerator::Lazy	#	take_while	ok
+R	Enumerator::Lazy	#	uniq	ok
+R	Enumerator::Lazy	#	with_index	ok
+R	Enumerator::Lazy	#	zip	ok
+R	Enumerator::Lazy	.	new	ok
+R	Enumerator::Product	#	each	ok
+R	Enumerator::Product	#	inspect	ok
+R	Enumerator::Product	#	rewind	ok
+R	Enumerator::Product	#	size	ok
+R	Enumerator::Product	.	new	ok
+R	Enumerator::Yielder	#	<<	ok
+R	Enumerator::Yielder	#	to_proc	ok
+R	Enumerator::Yielder	#	yield	ok
+R	Errno::EXXX	::	Errno	no-class
+R	Errno::EXXX	.	new	no-class
+R	Exception	#	==	ok
+R	Exception	#	backtrace	ok
+R	Exception	#	backtrace_locations	ok
+R	Exception	#	cause	ok
+R	Exception	#	detailed_message	ok
+R	Exception	#	exception	ok
+R	Exception	#	full_message	ok
+R	Exception	#	inspect	ok
+R	Exception	#	message	ok
+R	Exception	#	to_s	ok
+R	Exception	#	set_backtrace	ok
+R	Exception	.	exception	ok
+R	Exception	.	new	ok
+R	Exception	.	to_tty?	ok
+R	FalseClass	#	&	ok
+R	FalseClass	#	^	ok
+R	FalseClass	#	|	ok
+R	FalseClass	#	inspect	ok
+R	FalseClass	#	to_s	ok
+R	Fiber	#	alive?	ok
+R	Fiber	#	backtrace	ok
+R	Fiber	#	backtrace_locations	ok
+R	Fiber	#	blocking?	ok
+R	Fiber	#	kill	ok
+R	Fiber	#	raise	ok
+R	Fiber	#	resume	ok
+R	Fiber	#	storage	ok
+R	Fiber	#	storage=	ok
+R	Fiber	#	transfer	ok
+R	Fiber	.	[]	ok
+R	Fiber	.	[]=	ok
+R	Fiber	.	blocking	ok
+R	Fiber	.	blocking?	ok
+R	Fiber	.	current	ok
+R	Fiber	.	current_scheduler	ok
+R	Fiber	.	new	ok
+R	Fiber	.	schedule	ok
+R	Fiber	.	scheduler	ok
+R	Fiber	.	set_scheduler	ok
+R	Fiber	.	yield	ok
+R	File	::	ALT_SEPARATOR	ok
+R	File	::	PATH_SEPARATOR	ok
+R	File	::	SEPARATOR	ok
+R	File	::	Separator	ok
+R	File	#	atime	ok
+R	File	#	birthtime	ok
+R	File	#	chmod	ok
+R	File	#	chown	ok
+R	File	#	ctime	ok
+R	File	#	flock	ok
+R	File	#	lstat	ok
+R	File	#	mtime	ok
+R	File	#	path	ok
+R	File	#	to_path	ok
+R	File	#	size	ok
+R	File	#	truncate	ok
+R	File	.	absolute_path	ok
+R	File	.	absolute_path?	ok
+R	File	.	atime	ok
+R	File	.	basename	ok
+R	File	.	birthtime	ok
+R	File	.	blockdev?	ok
+R	File	.	chardev?	ok
+R	File	.	chmod	ok
+R	File	.	chown	ok
+R	File	.	ctime	ok
+R	File	.	delete	ok
+R	File	.	unlink	ok
+R	File	.	directory?	ok
+R	File	.	dirname	ok
+R	File	.	empty?	ok
+R	File	.	zero?	ok
+R	File	.	executable?	ok
+R	File	.	executable_real?	ok
+R	File	.	exist?	ok
+R	File	.	expand_path	ok
+R	File	.	extname	ok
+R	File	.	file?	ok
+R	File	.	fnmatch	ok
+R	File	.	fnmatch?	ok
+R	File	.	ftype	ok
+R	File	.	grpowned?	ok
+R	File	.	identical?	ok
+R	File	.	join	ok
+R	File	.	lchmod	ok
+R	File	.	lchown	ok
+R	File	.	link	ok
+R	File	.	lstat	ok
+R	File	.	lutime	ok
+R	File	.	mkfifo	ok
+R	File	.	mtime	ok
+R	File	.	new	ok
+R	File	.	open	ok
+R	File	.	owned?	ok
+R	File	.	path	ok
+R	File	.	pipe?	ok
+R	File	.	readable?	ok
+R	File	.	readable_real?	ok
+R	File	.	readlink	ok
+R	File	.	realdirpath	ok
+R	File	.	realpath	ok
+R	File	.	rename	ok
+R	File	.	setgid?	ok
+R	File	.	setuid?	ok
+R	File	.	size	ok
+R	File	.	size?	ok
+R	File	.	socket?	ok
+R	File	.	split	ok
+R	File	.	stat	ok
+R	File	.	sticky?	ok
+R	File	.	symlink	ok
+R	File	.	symlink?	ok
+R	File	.	truncate	ok
+R	File	.	umask	ok
+R	File	.	utime	ok
+R	File	.	world_readable?	ok
+R	File	.	world_writable?	ok
+R	File	.	writable?	ok
+R	File	.	writable_real?	ok
+R	File::Constants	::	APPEND	ok
+R	File::Constants	::	BINARY	ok
+R	File::Constants	::	CREAT	ok
+R	File::Constants	::	DIRECT	ok
+R	File::Constants	::	DSYNC	ok
+R	File::Constants	::	EXCL	ok
+R	File::Constants	::	FNM_CASEFOLD	ok
+R	File::Constants	::	FNM_DOTMATCH	ok
+R	File::Constants	::	FNM_EXTGLOB	ok
+R	File::Constants	::	FNM_NOESCAPE	ok
+R	File::Constants	::	FNM_PATHNAME	ok
+R	File::Constants	::	FNM_SYSCASE	ok
+R	File::Constants	::	LOCK_EX	ok
+R	File::Constants	::	LOCK_NB	ok
+R	File::Constants	::	LOCK_SH	ok
+R	File::Constants	::	LOCK_UN	ok
+R	File::Constants	::	NOATIME	ok
+R	File::Constants	::	NOCTTY	ok
+R	File::Constants	::	NOFOLLOW	ok
+R	File::Constants	::	NONBLOCK	ok
+R	File::Constants	::	NULL	ok
+R	File::Constants	::	RDONLY	ok
+R	File::Constants	::	RDWR	ok
+R	File::Constants	::	RSYNC	ok
+R	File::Constants	::	SHARE_DELETE	ok
+R	File::Constants	::	SYNC	ok
+R	File::Constants	::	TMPFILE	ok
+R	File::Constants	::	TRUNC	ok
+R	File::Constants	::	WRONLY	ok
+R	File::Stat	#	<=>	ok
+R	File::Stat	#	atime	ok
+R	File::Stat	#	birthtime	no-method
+R	File::Stat	#	blksize	ok
+R	File::Stat	#	blockdev?	ok
+R	File::Stat	#	blocks	ok
+R	File::Stat	#	chardev?	ok
+R	File::Stat	#	ctime	ok
+R	File::Stat	#	dev	ok
+R	File::Stat	#	dev_major	ok
+R	File::Stat	#	dev_minor	ok
+R	File::Stat	#	directory?	ok
+R	File::Stat	#	executable?	ok
+R	File::Stat	#	executable_real?	ok
+R	File::Stat	#	file?	ok
+R	File::Stat	#	ftype	ok
+R	File::Stat	#	gid	ok
+R	File::Stat	#	grpowned?	ok
+R	File::Stat	#	ino	ok
+R	File::Stat	#	mode	ok
+R	File::Stat	#	mtime	ok
+R	File::Stat	#	nlink	ok
+R	File::Stat	#	owned?	ok
+R	File::Stat	#	pipe?	ok
+R	File::Stat	#	rdev	ok
+R	File::Stat	#	rdev_major	ok
+R	File::Stat	#	rdev_minor	ok
+R	File::Stat	#	readable?	ok
+R	File::Stat	#	readable_real?	ok
+R	File::Stat	#	setgid?	ok
+R	File::Stat	#	setuid?	ok
+R	File::Stat	#	size	ok
+R	File::Stat	#	size?	ok
+R	File::Stat	#	socket?	ok
+R	File::Stat	#	sticky?	ok
+R	File::Stat	#	symlink?	ok
+R	File::Stat	#	uid	ok
+R	File::Stat	#	world_readable?	ok
+R	File::Stat	#	world_writable?	ok
+R	File::Stat	#	writable?	ok
+R	File::Stat	#	writable_real?	ok
+R	File::Stat	#	zero?	ok
+R	File::Stat	.	new	ok
+R	FileTest	.#	blockdev?	ok
+R	FileTest	.#	chardev?	ok
+R	FileTest	.#	directory?	ok
+R	FileTest	.#	empty?	ok
+R	FileTest	.#	zero?	ok
+R	FileTest	.#	executable?	ok
+R	FileTest	.#	executable_real?	ok
+R	FileTest	.#	exist?	ok
+R	FileTest	.#	file?	ok
+R	FileTest	.#	grpowned?	ok
+R	FileTest	.#	identical?	ok
+R	FileTest	.#	owned?	ok
+R	FileTest	.#	pipe?	ok
+R	FileTest	.#	readable?	ok
+R	FileTest	.#	readable_real?	ok
+R	FileTest	.#	setgid?	ok
+R	FileTest	.#	setuid?	ok
+R	FileTest	.#	size	ok
+R	FileTest	.#	size?	ok
+R	FileTest	.#	socket?	ok
+R	FileTest	.#	sticky?	ok
+R	FileTest	.#	symlink?	ok
+R	FileTest	.#	world_readable?	ok
+R	FileTest	.#	world_writable?	ok
+R	FileTest	.#	writable?	ok
+R	FileTest	.#	writable_real?	ok
+R	Float	::	DIG	ok
+R	Float	::	EPSILON	ok
+R	Float	::	INFINITY	ok
+R	Float	::	MANT_DIG	ok
+R	Float	::	MAX	ok
+R	Float	::	MAX_10_EXP	ok
+R	Float	::	MAX_EXP	ok
+R	Float	::	MIN	ok
+R	Float	::	MIN_10_EXP	ok
+R	Float	::	MIN_EXP	ok
+R	Float	::	NAN	ok
+R	Float	::	RADIX	ok
+R	Float	#	%	ok
+R	Float	#	modulo	ok
+R	Float	#	*	ok
+R	Float	#	**	ok
+R	Float	#	+	ok
+R	Float	#	-	ok
+R	Float	#	-@	ok
+R	Float	#	/	ok
+R	Float	#	<	ok
+R	Float	#	<=	ok
+R	Float	#	<=>	ok
+R	Float	#	==	ok
+R	Float	#	>	ok
+R	Float	#	>=	ok
+R	Float	#	abs	ok
+R	Float	#	magnitude	ok
+R	Float	#	angle	ok
+R	Float	#	arg	ok
+R	Float	#	phase	ok
+R	Float	#	ceil	ok
+R	Float	#	denominator	ok
+R	Float	#	divmod	ok
+R	Float	#	eql?	ok
+R	Float	#	finite?	ok
+R	Float	#	floor	ok
+R	Float	#	hash	ok
+R	Float	#	infinite?	ok
+R	Float	#	inspect	ok
+R	Float	#	to_s	ok
+R	Float	#	nan?	ok
+R	Float	#	negative?	ok
+R	Float	#	next_float	ok
+R	Float	#	numerator	ok
+R	Float	#	positive?	ok
+R	Float	#	prev_float	ok
+R	Float	#	rationalize	ok
+R	Float	#	round	ok
+R	Float	#	to_f	ok
+R	Float	#	to_i	ok
+R	Float	#	truncate	ok
+R	Float	#	to_r	ok
+R	Float	#	zero?	ok
+R	FrozenError	#	receiver	ok
+R	FrozenError	.	new	ok
+R	GC	::	INTERNAL_CONSTANTS	ok
+R	GC	::	OPTS	ok
+R	GC	#	garbage_collect	ok
+R	GC	.	auto_compact	ok
+R	GC	.	auto_compact=	ok
+R	GC	.	compact	ok
+R	GC	.	config	ok
+R	GC	.	count	ok
+R	GC	.	disable	ok
+R	GC	.	enable	ok
+R	GC	.	latest_compact_info	ok
+R	GC	.	latest_gc_info	ok
+R	GC	.	measure_total_time	ok
+R	GC	.	measure_total_time=	ok
+R	GC	.	start	ok
+R	GC	.	stat	ok
+R	GC	.	stat_heap	ok
+R	GC	.	stress	ok
+R	GC	.	stress=	ok
+R	GC	.	total_time	ok
+R	GC	.	verify_compaction_references	ok
+R	GC::Profiler	.	clear	ok
+R	GC::Profiler	.	disable	ok
+R	GC::Profiler	.	enable	ok
+R	GC::Profiler	.	enabled?	ok
+R	GC::Profiler	.	raw_data	ok
+R	GC::Profiler	.	report	ok
+R	GC::Profiler	.	result	ok
+R	GC::Profiler	.	total_time	ok
+R	Hash	#	<	ok
+R	Hash	#	<=	ok
+R	Hash	#	==	ok
+R	Hash	#	===	ok
+R	Hash	#	eql?	ok
+R	Hash	#	>	ok
+R	Hash	#	>=	ok
+R	Hash	#	[]	ok
+R	Hash	#	[]=	ok
+R	Hash	#	store	ok
+R	Hash	#	assoc	ok
+R	Hash	#	clear	ok
+R	Hash	#	clone	ok
+R	Hash	#	dup	ok
+R	Hash	#	compact	ok
+R	Hash	#	compact!	ok
+R	Hash	#	compare_by_identity	ok
+R	Hash	#	compare_by_identity?	ok
+R	Hash	#	deconstruct_keys	ok
+R	Hash	#	default	ok
+R	Hash	#	default=	ok
+R	Hash	#	default_proc	ok
+R	Hash	#	default_proc=	ok
+R	Hash	#	delete	ok
+R	Hash	#	delete_if	ok
+R	Hash	#	reject!	ok
+R	Hash	#	dig	ok
+R	Hash	#	each	ok
+R	Hash	#	each_pair	ok
+R	Hash	#	each_key	ok
+R	Hash	#	each_value	ok
+R	Hash	#	empty?	ok
+R	Hash	#	equal?	ok
+R	Hash	#	except	ok
+R	Hash	#	fetch	ok
+R	Hash	#	fetch_values	ok
+R	Hash	#	filter	ok
+R	Hash	#	select	ok
+R	Hash	#	filter!	ok
+R	Hash	#	keep_if	ok
+R	Hash	#	select!	ok
+R	Hash	#	flatten	ok
+R	Hash	#	has_key?	ok
+R	Hash	#	include?	ok
+R	Hash	#	key?	ok
+R	Hash	#	member?	ok
+R	Hash	#	has_value?	ok
+R	Hash	#	value?	ok
+R	Hash	#	hash	ok
+R	Hash	#	inspect	ok
+R	Hash	#	to_s	ok
+R	Hash	#	invert	ok
+R	Hash	#	key	ok
+R	Hash	#	keys	ok
+R	Hash	#	length	ok
+R	Hash	#	size	ok
+R	Hash	#	merge	ok
+R	Hash	#	merge!	ok
+R	Hash	#	update	ok
+R	Hash	#	rassoc	ok
+R	Hash	#	rehash	ok
+R	Hash	#	reject	ok
+R	Hash	#	replace	ok
+R	Hash	#	shift	ok
+R	Hash	#	slice	ok
+R	Hash	#	to_a	ok
+R	Hash	#	to_h	ok
+R	Hash	#	to_hash	ok
+R	Hash	#	to_proc	ok
+R	Hash	#	transform_keys	ok
+R	Hash	#	transform_keys!	ok
+R	Hash	#	transform_values	ok
+R	Hash	#	transform_values!	ok
+R	Hash	#	values	ok
+R	Hash	#	values_at	ok
+R	Hash	.	[]	ok
+R	Hash	.	new	ok
+R	Hash	.	ruby2_keywords_hash	ok
+R	Hash	.	ruby2_keywords_hash?	ok
+R	Hash	.	try_convert	ok
+R	IO	::	SEEK_CUR	ok
+R	IO	::	SEEK_DATA	ok
+R	IO	::	SEEK_END	ok
+R	IO	::	SEEK_HOLE	ok
+R	IO	::	SEEK_SET	ok
+R	IO	#	<<	ok
+R	IO	#	advise	ok
+R	IO	#	autoclose=	ok
+R	IO	#	autoclose?	ok
+R	IO	#	binmode	ok
+R	IO	#	binmode?	ok
+R	IO	#	clone	ok
+R	IO	#	dup	ok
+R	IO	#	close	ok
+R	IO	#	close_on_exec=	ok
+R	IO	#	close_on_exec?	ok
+R	IO	#	close_read	ok
+R	IO	#	close_write	ok
+R	IO	#	closed?	ok
+R	IO	#	each	ok
+R	IO	#	each_line	ok
+R	IO	#	each_byte	ok
+R	IO	#	each_char	ok
+R	IO	#	each_codepoint	ok
+R	IO	#	eof	ok
+R	IO	#	eof?	ok
+R	IO	#	external_encoding	ok
+R	IO	#	fcntl	ok
+R	IO	#	fdatasync	ok
+R	IO	#	fileno	ok
+R	IO	#	to_i	ok
+R	IO	#	flush	ok
+R	IO	#	fsync	ok
+R	IO	#	getbyte	ok
+R	IO	#	getc	ok
+R	IO	#	gets	ok
+R	IO	#	internal_encoding	ok
+R	IO	#	ioctl	ok
+R	IO	#	isatty	ok
+R	IO	#	tty?	ok
+R	IO	#	lineno	ok
+R	IO	#	lineno=	ok
+R	IO	#	path	ok
+R	IO	#	to_path	ok
+R	IO	#	pid	ok
+R	IO	#	pos	ok
+R	IO	#	tell	ok
+R	IO	#	pos=	ok
+R	IO	#	pread	ok
+R	IO	#	print	ok
+R	IO	#	printf	ok
+R	IO	#	putc	ok
+R	IO	#	puts	ok
+R	IO	#	pwrite	ok
+R	IO	#	read	ok
+R	IO	#	read_nonblock	ok
+R	IO	#	readbyte	ok
+R	IO	#	readchar	ok
+R	IO	#	readline	ok
+R	IO	#	readlines	ok
+R	IO	#	readpartial	ok
+R	IO	#	reopen	ok
+R	IO	#	rewind	ok
+R	IO	#	seek	ok
+R	IO	#	set_encoding	ok
+R	IO	#	set_encoding_by_bom	ok
+R	IO	#	stat	ok
+R	IO	#	sync	ok
+R	IO	#	sync=	ok
+R	IO	#	sysread	ok
+R	IO	#	sysseek	ok
+R	IO	#	syswrite	ok
+R	IO	#	timeout	ok
+R	IO	#	timeout=	ok
+R	IO	#	to_io	ok
+R	IO	#	ungetbyte	ok
+R	IO	#	ungetc	ok
+R	IO	#	write	ok
+R	IO	#	write_nonblock	ok
+R	IO	.	binread	ok
+R	IO	.	binwrite	ok
+R	IO	.	copy_stream	ok
+R	IO	.	for_fd	ok
+R	IO	.	new	ok
+R	IO	.	open	ok
+R	IO	.	foreach	ok
+R	IO	.	pipe	ok
+R	IO	.	popen	ok
+R	IO	.	read	ok
+R	IO	.	readlines	ok
+R	IO	.	select	ok
+R	IO	.	sysopen	ok
+R	IO	.	try_convert	ok
+R	IO	.	write	ok
+R	IO::Buffer	::	BIG_ENDIAN	ok
+R	IO::Buffer	::	HOST_ENDIAN	ok
+R	IO::Buffer	::	LITTLE_ENDIAN	ok
+R	IO::Buffer	::	NETWORK_ENDIAN	ok
+R	IO::Buffer	::	DEFAULT_SIZE	ok
+R	IO::Buffer	::	EXTERNAL	ok
+R	IO::Buffer	::	INTERNAL	ok
+R	IO::Buffer	::	LOCKED	ok
+R	IO::Buffer	::	MAPPED	ok
+R	IO::Buffer	::	PAGE_SIZE	ok
+R	IO::Buffer	::	PRIVATE	ok
+R	IO::Buffer	::	READONLY	ok
+R	IO::Buffer	::	SHARED	ok
+R	IO::Buffer	#	&	ok
+R	IO::Buffer	#	^	ok
+R	IO::Buffer	#	|	ok
+R	IO::Buffer	#	<=>	ok
+R	IO::Buffer	#	~	ok
+R	IO::Buffer	#	and!	ok
+R	IO::Buffer	#	or!	ok
+R	IO::Buffer	#	xor!	ok
+R	IO::Buffer	#	clear	ok
+R	IO::Buffer	#	copy	ok
+R	IO::Buffer	#	each	ok
+R	IO::Buffer	#	each_byte	ok
+R	IO::Buffer	#	empty?	ok
+R	IO::Buffer	#	external?	ok
+R	IO::Buffer	#	free	ok
+R	IO::Buffer	#	get_string	ok
+R	IO::Buffer	#	get_value	ok
+R	IO::Buffer	#	get_values	ok
+R	IO::Buffer	#	hexdump	ok
+R	IO::Buffer	#	inspect	ok
+R	IO::Buffer	#	internal?	ok
+R	IO::Buffer	#	locked	ok
+R	IO::Buffer	#	locked?	ok
+R	IO::Buffer	#	mapped?	ok
+R	IO::Buffer	#	not!	ok
+R	IO::Buffer	#	null?	ok
+R	IO::Buffer	#	pread	ok
+R	IO::Buffer	#	private?	ok
+R	IO::Buffer	#	pwrite	ok
+R	IO::Buffer	#	read	ok
+R	IO::Buffer	#	readonly?	ok
+R	IO::Buffer	#	resize	ok
+R	IO::Buffer	#	set_string	ok
+R	IO::Buffer	#	set_value	ok
+R	IO::Buffer	#	set_values	ok
+R	IO::Buffer	#	shared?	ok
+R	IO::Buffer	#	size	ok
+R	IO::Buffer	#	slice	ok
+R	IO::Buffer	#	to_s	ok
+R	IO::Buffer	#	transfer	ok
+R	IO::Buffer	#	valid?	ok
+R	IO::Buffer	#	values	ok
+R	IO::Buffer	#	write	ok
+R	IO::Buffer	.	for	ok
+R	IO::Buffer	.	map	ok
+R	IO::Buffer	.	new	ok
+R	IO::Buffer	.	size_of	ok
+R	IO::Buffer	.	string	ok
+R	Integer	#	%	ok
+R	Integer	#	modulo	ok
+R	Integer	#	&	ok
+R	Integer	#	*	ok
+R	Integer	#	**	ok
+R	Integer	#	pow	ok
+R	Integer	#	+	ok
+R	Integer	#	-	ok
+R	Integer	#	-@	ok
+R	Integer	#	/	ok
+R	Integer	#	<	ok
+R	Integer	#	<<	ok
+R	Integer	#	<=	ok
+R	Integer	#	<=>	ok
+R	Integer	#	==	ok
+R	Integer	#	===	ok
+R	Integer	#	>	ok
+R	Integer	#	>=	ok
+R	Integer	#	>>	ok
+R	Integer	#	[]	ok
+R	Integer	#	^	ok
+R	Integer	#	|	ok
+R	Integer	#	~	ok
+R	Integer	#	abs	ok
+R	Integer	#	magnitude	ok
+R	Integer	#	allbits?	ok
+R	Integer	#	anybits?	ok
+R	Integer	#	bit_length	ok
+R	Integer	#	ceil	ok
+R	Integer	#	ceildiv	ok
+R	Integer	#	chr	ok
+R	Integer	#	denominator	ok
+R	Integer	#	digits	ok
+R	Integer	#	div	ok
+R	Integer	#	divmod	ok
+R	Integer	#	downto	ok
+R	Integer	#	even?	ok
+R	Integer	#	fdiv	ok
+R	Integer	#	floor	ok
+R	Integer	#	gcd	ok
+R	Integer	#	gcdlcm	ok
+R	Integer	#	hash	ok
+R	Integer	#	inspect	ok
+R	Integer	#	to_s	ok
+R	Integer	#	integer?	ok
+R	Integer	#	lcm	ok
+R	Integer	#	next	ok
+R	Integer	#	succ	ok
+R	Integer	#	nobits?	ok
+R	Integer	#	numerator	ok
+R	Integer	#	odd?	ok
+R	Integer	#	ord	ok
+R	Integer	#	pred	ok
+R	Integer	#	rationalize	ok
+R	Integer	#	remainder	ok
+R	Integer	#	round	ok
+R	Integer	#	size	ok
+R	Integer	#	times	ok
+R	Integer	#	to_f	ok
+R	Integer	#	to_i	ok
+R	Integer	#	to_int	ok
+R	Integer	#	to_r	ok
+R	Integer	#	truncate	ok
+R	Integer	#	upto	ok
+R	Integer	.	sqrt	ok
+R	Integer	.	try_convert	ok
+R	Kernel	.#	`	ok
+R	Kernel	.#	Array	ok
+R	Kernel	.#	Complex	ok
+R	Kernel	.#	Float	ok
+R	Kernel	.#	Hash	ok
+R	Kernel	.#	Integer	ok
+R	Kernel	.#	Rational	ok
+R	Kernel	.#	String	ok
+R	Kernel	.#	__callee__	ok
+R	Kernel	.#	__dir__	ok
+R	Kernel	.#	__method__	ok
+R	Kernel	.#	abort	ok
+R	Kernel	.#	at_exit	ok
+R	Kernel	.#	autoload	ok
+R	Kernel	.#	autoload?	ok
+R	Kernel	.#	binding	ok
+R	Kernel	.#	block_given?	ok
+R	Kernel	.#	iterator?	ok
+R	Kernel	.#	caller	ok
+R	Kernel	.#	caller_locations	ok
+R	Kernel	.#	catch	ok
+R	Kernel	.#	chomp	no-method
+R	Kernel	.#	chop	no-method
+R	Kernel	.#	eval	ok
+R	Kernel	.#	exec	ok
+R	Kernel	.#	exit	ok
+R	Kernel	.#	exit!	ok
+R	Kernel	.#	fail	ok
+R	Kernel	.#	raise	ok
+R	Kernel	.#	fork	ok
+R	Kernel	.#	format	ok
+R	Kernel	.#	sprintf	ok
+R	Kernel	.#	gets	ok
+R	Kernel	.#	global_variables	ok
+R	Kernel	.#	gsub	no-method
+R	Kernel	.#	lambda	ok
+R	Kernel	.#	proc	ok
+R	Kernel	.#	load	ok
+R	Kernel	.#	local_variables	ok
+R	Kernel	.#	loop	ok
+R	Kernel	.#	open	ok
+R	Kernel	.#	p	ok
+R	Kernel	.#	pp	ok
+R	Kernel	.#	print	ok
+R	Kernel	.#	printf	ok
+R	Kernel	.#	putc	ok
+R	Kernel	.#	puts	ok
+R	Kernel	.#	rand	ok
+R	Kernel	.#	readline	ok
+R	Kernel	.#	readlines	ok
+R	Kernel	.#	require	ok
+R	Kernel	.#	require_relative	ok
+R	Kernel	.#	select	ok
+R	Kernel	.#	set_trace_func	ok
+R	Kernel	.#	sleep	ok
+R	Kernel	.#	spawn	ok
+R	Kernel	.#	srand	ok
+R	Kernel	.#	sub	no-method
+R	Kernel	.#	syscall	ok
+R	Kernel	.#	system	ok
+R	Kernel	.#	test	ok
+R	Kernel	.#	throw	ok
+R	Kernel	.#	trace_var	ok
+R	Kernel	.#	trap	ok
+R	Kernel	.#	untrace_var	ok
+R	Kernel	.#	warn	ok
+R	Kernel	$	0	ok
+R	Kernel	$	PROGRAM_NAME	ok
+R	Kernel	$	1	ok
+R	Kernel	$	10	no-method
+R	Kernel	$	11	no-method
+R	Kernel	$	2	no-method
+R	Kernel	$	3	no-method
+R	Kernel	$	4	no-method
+R	Kernel	$	5	no-method
+R	Kernel	$	6	no-method
+R	Kernel	$	7	no-method
+R	Kernel	$	8	no-method
+R	Kernel	$	9	no-method
+R	Kernel	$	!	ok
+R	Kernel	$	"	ok
+R	Kernel	$	LOADED_FEATURES	ok
+R	Kernel	$	$	bad-name
+R	Kernel	$	&	ok
+R	Kernel	$	'	ok
+R	Kernel	$	*	ok
+R	Kernel	$	+	ok
+R	Kernel	$	,	ok
+R	Kernel	$	-0	ok
+R	Kernel	$	/	ok
+R	Kernel	$	-F	ok
+R	Kernel	$	;	ok
+R	Kernel	$	-I	ok
+R	Kernel	$	:	ok
+R	Kernel	$	LOAD_PATH	ok
+R	Kernel	$	-K	no-method
+R	Kernel	$	KCODE	no-method
+R	Kernel	$	-W	ok
+R	Kernel	$	-a	ok
+R	Kernel	$	-d	ok
+R	Kernel	$	DEBUG	ok
+R	Kernel	$	-i	ok
+R	Kernel	$	-l	ok
+R	Kernel	$	-p	ok
+R	Kernel	$	-v	ok
+R	Kernel	$	-w	ok
+R	Kernel	$	VERBOSE	ok
+R	Kernel	$	.	ok
+R	Kernel	$	<	ok
+R	Kernel	$	=	ok
+R	Kernel	$	>	ok
+R	Kernel	$	stdout	ok
+R	Kernel	$	?	ok
+R	Kernel	$	@	ok
+R	Kernel	$	\	ok
+R	Kernel	$	`	ok
+R	Kernel	$	~	ok
+R	Kernel	$	FILENAME	ok
+R	Kernel	$	SAFE	no-method
+R	Kernel	$	_	ok
+R	Kernel	$	stderr	ok
+R	Kernel	$	stdin	ok
+R	KeyError	#	key	ok
+R	KeyError	#	receiver	ok
+R	KeyError	.	new	ok
+R	LoadError	#	path	ok
+R	LocalJumpError	#	exit_value	ok
+R	LocalJumpError	#	reason	ok
+R	Marshal	::	MAJOR_VERSION	ok
+R	Marshal	::	MINOR_VERSION	ok
+R	Marshal	.#	dump	ok
+R	Marshal	.#	load	ok
+R	Marshal	.#	restore	ok
+R	MatchData	#	==	ok
+R	MatchData	#	eql?	ok
+R	MatchData	#	[]	ok
+R	MatchData	#	begin	ok
+R	MatchData	#	bytebegin	ok
+R	MatchData	#	byteend	ok
+R	MatchData	#	byteoffset	ok
+R	MatchData	#	captures	ok
+R	MatchData	#	deconstruct	ok
+R	MatchData	#	deconstruct_keys	ok
+R	MatchData	#	end	ok
+R	MatchData	#	hash	ok
+R	MatchData	#	inspect	ok
+R	MatchData	#	length	ok
+R	MatchData	#	size	ok
+R	MatchData	#	match	ok
+R	MatchData	#	match_length	ok
+R	MatchData	#	named_captures	ok
+R	MatchData	#	names	ok
+R	MatchData	#	offset	ok
+R	MatchData	#	post_match	ok
+R	MatchData	#	pre_match	ok
+R	MatchData	#	regexp	ok
+R	MatchData	#	string	ok
+R	MatchData	#	to_a	ok
+R	MatchData	#	to_s	ok
+R	MatchData	#	values_at	ok
+R	Math	::	E	ok
+R	Math	::	PI	ok
+R	Math	.#	acos	ok
+R	Math	.#	acosh	ok
+R	Math	.#	asin	ok
+R	Math	.#	asinh	ok
+R	Math	.#	atan	ok
+R	Math	.#	atan2	ok
+R	Math	.#	atanh	ok
+R	Math	.#	cbrt	ok
+R	Math	.#	cos	ok
+R	Math	.#	cosh	ok
+R	Math	.#	erf	ok
+R	Math	.#	erfc	ok
+R	Math	.#	exp	ok
+R	Math	.#	frexp	ok
+R	Math	.#	gamma	ok
+R	Math	.#	hypot	ok
+R	Math	.#	ldexp	ok
+R	Math	.#	lgamma	ok
+R	Math	.#	log	ok
+R	Math	.#	log10	ok
+R	Math	.#	log2	ok
+R	Math	.#	sin	ok
+R	Math	.#	sinh	ok
+R	Math	.#	sqrt	ok
+R	Math	.#	tan	ok
+R	Math	.#	tanh	ok
+R	Method	#	<<	ok
+R	Method	#	==	ok
+R	Method	#	eql?	ok
+R	Method	#	===	ok
+R	Method	#	[]	ok
+R	Method	#	call	ok
+R	Method	#	>>	ok
+R	Method	#	arity	ok
+R	Method	#	clone	ok
+R	Method	#	curry	ok
+R	Method	#	hash	ok
+R	Method	#	inspect	ok
+R	Method	#	to_s	ok
+R	Method	#	name	ok
+R	Method	#	original_name	ok
+R	Method	#	owner	ok
+R	Method	#	parameters	ok
+R	Method	#	receiver	ok
+R	Method	#	source_location	ok
+R	Method	#	super_method	ok
+R	Method	#	to_proc	ok
+R	Method	#	unbind	ok
+R	Module	#	<	ok
+R	Module	#	<=	ok
+R	Module	#	<=>	ok
+R	Module	#	===	ok
+R	Module	#	>	ok
+R	Module	#	>=	ok
+R	Module	#	alias_method	ok
+R	Module	#	ancestors	ok
+R	Module	#	append_features	ok
+R	Module	#	attr	ok
+R	Module	#	attr_accessor	ok
+R	Module	#	attr_reader	ok
+R	Module	#	attr_writer	ok
+R	Module	#	autoload	ok
+R	Module	#	autoload?	ok
+R	Module	#	class_eval	ok
+R	Module	#	module_eval	ok
+R	Module	#	class_exec	ok
+R	Module	#	module_exec	ok
+R	Module	#	class_variable_defined?	ok
+R	Module	#	class_variable_get	ok
+R	Module	#	class_variable_set	ok
+R	Module	#	class_variables	ok
+R	Module	#	const_added	ok
+R	Module	#	const_defined?	ok
+R	Module	#	const_get	ok
+R	Module	#	const_missing	ok
+R	Module	#	const_set	ok
+R	Module	#	const_source_location	ok
+R	Module	#	constants	ok
+R	Module	#	define_method	ok
+R	Module	#	deprecate_constant	ok
+R	Module	#	extend_object	ok
+R	Module	#	extended	ok
+R	Module	#	freeze	ok
+R	Module	#	include	ok
+R	Module	#	include?	ok
+R	Module	#	included	ok
+R	Module	#	included_modules	ok
+R	Module	#	inspect	ok
+R	Module	#	name	ok
+R	Module	#	to_s	ok
+R	Module	#	instance_method	ok
+R	Module	#	instance_methods	ok
+R	Module	#	method_added	ok
+R	Module	#	method_defined?	ok
+R	Module	#	method_removed	ok
+R	Module	#	method_undefined	ok
+R	Module	#	module_function	ok
+R	Module	#	prepend	ok
+R	Module	#	prepend_features	ok
+R	Module	#	prepended	ok
+R	Module	#	private	ok
+R	Module	#	private_class_method	ok
+R	Module	#	private_constant	ok
+R	Module	#	private_instance_methods	ok
+R	Module	#	private_method_defined?	ok
+R	Module	#	protected	ok
+R	Module	#	protected_instance_methods	ok
+R	Module	#	protected_method_defined?	ok
+R	Module	#	public	ok
+R	Module	#	public_class_method	ok
+R	Module	#	public_constant	ok
+R	Module	#	public_instance_method	ok
+R	Module	#	public_instance_methods	ok
+R	Module	#	public_method_defined?	ok
+R	Module	#	refine	ok
+R	Module	#	refinements	ok
+R	Module	#	remove_class_variable	ok
+R	Module	#	remove_const	ok
+R	Module	#	remove_method	ok
+R	Module	#	ruby2_keywords	ok
+R	Module	#	set_temporary_name	ok
+R	Module	#	singleton_class?	ok
+R	Module	#	undef_method	ok
+R	Module	#	undefined_instance_methods	ok
+R	Module	#	using	ok
+R	Module	.	constants	ok
+R	Module	.	nesting	ok
+R	Module	.	new	ok
+R	Module	.	used_modules	ok
+R	Module	.	used_refinements	ok
+R	NameError	#	local_variables	ok
+R	NameError	#	name	ok
+R	NameError	#	receiver	ok
+R	NameError	#	to_s	ok
+R	NameError	.	new	ok
+R	NilClass	#	&	ok
+R	NilClass	#	=~	ok
+R	NilClass	#	^	ok
+R	NilClass	#	|	ok
+R	NilClass	#	nil?	ok
+R	NilClass	#	rationalize	ok
+R	NilClass	#	to_a	ok
+R	NilClass	#	to_c	ok
+R	NilClass	#	to_f	ok
+R	NilClass	#	to_h	ok
+R	NilClass	#	to_i	ok
+R	NilClass	#	to_r	ok
+R	NilClass	#	to_s	ok
+R	NoMatchingPatternKeyError	#	key	ok
+R	NoMatchingPatternKeyError	#	matchee	ok
+R	NoMatchingPatternKeyError	.	new	ok
+R	NoMethodError	#	args	ok
+R	NoMethodError	#	private_call?	ok
+R	NoMethodError	.	new	ok
+R	Numeric	#	%	ok
+R	Numeric	#	modulo	ok
+R	Numeric	#	+@	ok
+R	Numeric	#	-@	ok
+R	Numeric	#	/	no-method
+R	Numeric	#	<=>	ok
+R	Numeric	#	abs	ok
+R	Numeric	#	magnitude	ok
+R	Numeric	#	abs2	ok
+R	Numeric	#	angle	ok
+R	Numeric	#	arg	ok
+R	Numeric	#	phase	ok
+R	Numeric	#	ceil	ok
+R	Numeric	#	coerce	ok
+R	Numeric	#	conj	ok
+R	Numeric	#	conjugate	ok
+R	Numeric	#	denominator	ok
+R	Numeric	#	div	ok
+R	Numeric	#	divmod	ok
+R	Numeric	#	eql?	ok
+R	Numeric	#	fdiv	ok
+R	Numeric	#	finite?	ok
+R	Numeric	#	floor	ok
+R	Numeric	#	i	ok
+R	Numeric	#	imag	ok
+R	Numeric	#	imaginary	ok
+R	Numeric	#	infinite?	ok
+R	Numeric	#	integer?	ok
+R	Numeric	#	negative?	ok
+R	Numeric	#	nonzero?	ok
+R	Numeric	#	numerator	ok
+R	Numeric	#	polar	ok
+R	Numeric	#	positive?	ok
+R	Numeric	#	quo	ok
+R	Numeric	#	real	ok
+R	Numeric	#	real?	ok
+R	Numeric	#	rect	ok
+R	Numeric	#	rectangular	ok
+R	Numeric	#	remainder	ok
+R	Numeric	#	round	ok
+R	Numeric	#	step	ok
+R	Numeric	#	to_c	ok
+R	Numeric	#	to_int	ok
+R	Numeric	#	truncate	ok
+R	Numeric	#	zero?	ok
+R	Object	::	ARGF	ok
+R	Object	::	ARGV	ok
+R	Object	::	DATA	no-method
+R	Object	::	ENV	ok
+R	Object	::	RUBY_COPYRIGHT	ok
+R	Object	::	RUBY_DESCRIPTION	ok
+R	Object	::	RUBY_ENGINE	ok
+R	Object	::	RUBY_ENGINE_VERSION	ok
+R	Object	::	RUBY_PATCHLEVEL	ok
+R	Object	::	RUBY_PLATFORM	ok
+R	Object	::	RUBY_RELEASE_DATE	ok
+R	Object	::	RUBY_REVISION	ok
+R	Object	::	RUBY_VERSION	ok
+R	Object	::	SCRIPT_LINES__	no-method
+R	Object	::	STDERR	ok
+R	Object	::	STDIN	ok
+R	Object	::	STDOUT	ok
+R	Object	::	TOPLEVEL_BINDING	ok
+R	Object	#	!~	ok
+R	Object	#	<=>	ok
+R	Object	#	==	ok
+R	Object	#	===	ok
+R	Object	#	_dump	no-method
+R	Object	#	class	ok
+R	Object	#	clone	ok
+R	Object	#	define_singleton_method	ok
+R	Object	#	display	ok
+R	Object	#	dup	ok
+R	Object	#	enum_for	ok
+R	Object	#	to_enum	ok
+R	Object	#	eql?	ok
+R	Object	#	equal?	ok
+R	Object	#	extend	ok
+R	Object	#	freeze	ok
+R	Object	#	frozen?	ok
+R	Object	#	hash	ok
+R	Object	#	initialize	ok
+R	Object	#	initialize_clone	ok
+R	Object	#	initialize_copy	ok
+R	Object	#	initialize_dup	ok
+R	Object	#	inspect	ok
+R	Object	#	instance_of?	ok
+R	Object	#	instance_variable_defined?	ok
+R	Object	#	instance_variable_get	ok
+R	Object	#	instance_variable_set	ok
+R	Object	#	instance_variables	ok
+R	Object	#	is_a?	ok
+R	Object	#	kind_of?	ok
+R	Object	#	itself	ok
+R	Object	#	marshal_dump	no-method
+R	Object	#	marshal_load	no-method
+R	Object	#	method	ok
+R	Object	#	methods	ok
+R	Object	#	nil?	ok
+R	Object	#	object_id	ok
+R	Object	#	private_methods	ok
+R	Object	#	protected_methods	ok
+R	Object	#	public_method	ok
+R	Object	#	public_methods	ok
+R	Object	#	public_send	ok
+R	Object	#	remove_instance_variable	ok
+R	Object	#	respond_to?	ok
+R	Object	#	respond_to_missing?	ok
+R	Object	#	send	ok
+R	Object	#	singleton_class	ok
+R	Object	#	singleton_method	ok
+R	Object	#	singleton_methods	ok
+R	Object	#	tap	ok
+R	Object	#	then	ok
+R	Object	#	yield_self	ok
+R	Object	#	to_a	no-method
+R	Object	#	to_ary	no-method
+R	Object	#	to_hash	no-method
+R	Object	#	to_int	no-method
+R	Object	#	to_io	no-method
+R	Object	#	to_proc	no-method
+R	Object	#	to_regexp	no-method
+R	Object	#	to_s	ok
+R	Object	#	to_str	no-method
+R	Object	.	new	ok
+R	ObjectSpace	.#	_id2ref	ok
+R	ObjectSpace	.#	count_objects	ok
+R	ObjectSpace	.#	define_finalizer	ok
+R	ObjectSpace	.#	each_object	ok
+R	ObjectSpace	.#	garbage_collect	ok
+R	ObjectSpace	.#	undefine_finalizer	ok
+R	ObjectSpace::WeakKeyMap	#	[]	ok
+R	ObjectSpace::WeakKeyMap	#	[]=	ok
+R	ObjectSpace::WeakKeyMap	#	clear	ok
+R	ObjectSpace::WeakKeyMap	#	delete	ok
+R	ObjectSpace::WeakKeyMap	#	getkey	ok
+R	ObjectSpace::WeakKeyMap	#	inspect	ok
+R	ObjectSpace::WeakKeyMap	#	key?	ok
+R	ObjectSpace::WeakMap	#	[]	ok
+R	ObjectSpace::WeakMap	#	[]=	ok
+R	ObjectSpace::WeakMap	#	delete	ok
+R	ObjectSpace::WeakMap	#	each	ok
+R	ObjectSpace::WeakMap	#	each_pair	ok
+R	ObjectSpace::WeakMap	#	each_key	ok
+R	ObjectSpace::WeakMap	#	each_value	ok
+R	ObjectSpace::WeakMap	#	include?	ok
+R	ObjectSpace::WeakMap	#	key?	ok
+R	ObjectSpace::WeakMap	#	member?	ok
+R	ObjectSpace::WeakMap	#	inspect	ok
+R	ObjectSpace::WeakMap	#	keys	ok
+R	ObjectSpace::WeakMap	#	length	ok
+R	ObjectSpace::WeakMap	#	size	ok
+R	ObjectSpace::WeakMap	#	values	ok
+R	Proc	#	<<	ok
+R	Proc	#	===	ok
+R	Proc	#	[]	ok
+R	Proc	#	call	ok
+R	Proc	#	yield	ok
+R	Proc	#	>>	ok
+R	Proc	#	arity	ok
+R	Proc	#	binding	ok
+R	Proc	#	curry	ok
+R	Proc	#	hash	ok
+R	Proc	#	inspect	ok
+R	Proc	#	to_s	ok
+R	Proc	#	lambda?	ok
+R	Proc	#	parameters	ok
+R	Proc	#	ruby2_keywords	ok
+R	Proc	#	source_location	ok
+R	Proc	#	to_proc	ok
+R	Proc	.	new	ok
+R	Process	::	CLOCK_BOOTTIME	ok
+R	Process	::	CLOCK_BOOTTIME_ALARM	ok
+R	Process	::	CLOCK_MONOTONIC	ok
+R	Process	::	CLOCK_MONOTONIC_COARSE	ok
+R	Process	::	CLOCK_MONOTONIC_FAST	no-method
+R	Process	::	CLOCK_MONOTONIC_PRECISE	no-method
+R	Process	::	CLOCK_MONOTONIC_RAW	ok
+R	Process	::	CLOCK_MONOTONIC_RAW_APPROX	no-method
+R	Process	::	CLOCK_PROCESS_CPUTIME_ID	ok
+R	Process	::	CLOCK_PROF	no-method
+R	Process	::	CLOCK_REALTIME	ok
+R	Process	::	CLOCK_REALTIME_ALARM	ok
+R	Process	::	CLOCK_REALTIME_COARSE	ok
+R	Process	::	CLOCK_REALTIME_FAST	no-method
+R	Process	::	CLOCK_REALTIME_PRECISE	no-method
+R	Process	::	CLOCK_SECOND	no-method
+R	Process	::	CLOCK_THREAD_CPUTIME_ID	ok
+R	Process	::	CLOCK_UPTIME	no-method
+R	Process	::	CLOCK_UPTIME_FAST	no-method
+R	Process	::	CLOCK_UPTIME_PRECISE	no-method
+R	Process	::	CLOCK_UPTIME_RAW	no-method
+R	Process	::	CLOCK_UPTIME_RAW_APPROX	no-method
+R	Process	::	CLOCK_VIRTUAL	no-method
+R	Process	::	PRIO_PGRP	ok
+R	Process	::	PRIO_PROCESS	ok
+R	Process	::	PRIO_USER	ok
+R	Process	::	RLIMIT_AS	ok
+R	Process	::	RLIMIT_CORE	ok
+R	Process	::	RLIMIT_CPU	ok
+R	Process	::	RLIMIT_DATA	ok
+R	Process	::	RLIMIT_FSIZE	ok
+R	Process	::	RLIMIT_MEMLOCK	ok
+R	Process	::	RLIMIT_NOFILE	ok
+R	Process	::	RLIMIT_NPROC	ok
+R	Process	::	RLIMIT_RSS	ok
+R	Process	::	RLIMIT_SBSIZE	no-method
+R	Process	::	RLIMIT_STACK	ok
+R	Process	::	RLIM_INFINITY	ok
+R	Process	::	RLIM_SAVED_CUR	ok
+R	Process	::	RLIM_SAVED_MAX	ok
+R	Process	::	WNOHANG	ok
+R	Process	::	WUNTRACED	ok
+R	Process	.#	argv0	ok
+R	Process	.#	clock_getres	ok
+R	Process	.#	clock_gettime	ok
+R	Process	.#	daemon	ok
+R	Process	.#	detach	ok
+R	Process	.#	egid	ok
+R	Process	.#	egid=	ok
+R	Process	.#	euid	ok
+R	Process	.#	euid=	ok
+R	Process	.#	getpgid	ok
+R	Process	.#	getpgrp	ok
+R	Process	.#	getpriority	ok
+R	Process	.#	getrlimit	ok
+R	Process	.#	getsid	ok
+R	Process	.#	gid	ok
+R	Process	.#	gid=	ok
+R	Process	.#	groups	ok
+R	Process	.#	groups=	ok
+R	Process	.#	initgroups	ok
+R	Process	.#	kill	ok
+R	Process	.#	maxgroups	ok
+R	Process	.#	maxgroups=	ok
+R	Process	.#	pid	ok
+R	Process	.#	ppid	ok
+R	Process	.#	setpgid	ok
+R	Process	.#	setpgrp	ok
+R	Process	.#	setpriority	ok
+R	Process	.#	setproctitle	ok
+R	Process	.#	setrlimit	ok
+R	Process	.#	setsid	ok
+R	Process	.#	times	ok
+R	Process	.#	uid	ok
+R	Process	.#	uid=	ok
+R	Process	.#	wait	ok
+R	Process	.#	wait2	ok
+R	Process	.#	waitpid	ok
+R	Process	.#	waitpid2	ok
+R	Process	.#	waitall	ok
+R	Process	.#	warmup	ok
+R	Process	.	_fork	ok
+R	Process	.	abort	ok
+R	Process	.	exec	ok
+R	Process	.	exit	ok
+R	Process	.	exit!	ok
+R	Process	.	fork	ok
+R	Process	.	last_status	ok
+R	Process	.	spawn	ok
+R	Process::GID	.#	change_privilege	ok
+R	Process::GID	.#	eid	ok
+R	Process::GID	.#	eid=	ok
+R	Process::GID	.#	grant_privilege	ok
+R	Process::GID	.#	from_name	ok
+R	Process::GID	.#	re_exchange	ok
+R	Process::GID	.#	re_exchangeable?	ok
+R	Process::GID	.#	rid	ok
+R	Process::GID	.#	sid_available?	ok
+R	Process::GID	.#	switch	ok
+R	Process::Status	#	&	ok
+R	Process::Status	#	==	ok
+R	Process::Status	#	>>	ok
+R	Process::Status	#	coredump?	ok
+R	Process::Status	#	exited?	ok
+R	Process::Status	#	exitstatus	ok
+R	Process::Status	#	inspect	ok
+R	Process::Status	#	pid	ok
+R	Process::Status	#	signaled?	ok
+R	Process::Status	#	stopped?	ok
+R	Process::Status	#	stopsig	ok
+R	Process::Status	#	success?	ok
+R	Process::Status	#	termsig	ok
+R	Process::Status	#	to_i	ok
+R	Process::Status	#	to_s	ok
+R	Process::Status	.	wait	ok
+R	Process::Sys	.#	getegid	ok
+R	Process::Sys	.#	geteuid	ok
+R	Process::Sys	.#	getgid	ok
+R	Process::Sys	.#	getuid	ok
+R	Process::Sys	.#	issetugid	no-method
+R	Process::Sys	.#	setegid	ok
+R	Process::Sys	.#	seteuid	ok
+R	Process::Sys	.#	setgid	ok
+R	Process::Sys	.#	setregid	ok
+R	Process::Sys	.#	setresgid	ok
+R	Process::Sys	.#	setresuid	ok
+R	Process::Sys	.#	setreuid	ok
+R	Process::Sys	.#	setrgid	no-method
+R	Process::Sys	.#	setruid	no-method
+R	Process::Sys	.#	setuid	ok
+R	Process::Tms	#	cstime	ok
+R	Process::Tms	#	cstime=	ok
+R	Process::Tms	#	cutime	ok
+R	Process::Tms	#	cutime=	ok
+R	Process::Tms	#	stime	ok
+R	Process::Tms	#	stime=	ok
+R	Process::Tms	#	utime	ok
+R	Process::Tms	#	utime=	ok
+R	Process::UID	.#	change_privilege	ok
+R	Process::UID	.#	eid	ok
+R	Process::UID	.#	eid=	ok
+R	Process::UID	.#	grant_privilege	ok
+R	Process::UID	.#	from_name	ok
+R	Process::UID	.#	re_exchange	ok
+R	Process::UID	.#	re_exchangeable?	ok
+R	Process::UID	.#	rid	ok
+R	Process::UID	.#	sid_available?	ok
+R	Process::UID	.#	switch	ok
+R	Process::Waiter	#	pid	ok
+R	Ractor	#	<<	ok
+R	Ractor	#	send	ok
+R	Ractor	#	[]	ok
+R	Ractor	#	[]=	ok
+R	Ractor	#	close_incoming	ok
+R	Ractor	#	close_outgoing	ok
+R	Ractor	#	name	ok
+R	Ractor	#	take	ok
+R	Ractor	.	[]	ok
+R	Ractor	.	[]=	ok
+R	Ractor	.	count	ok
+R	Ractor	.	current	ok
+R	Ractor	.	main	ok
+R	Ractor	.	main?	ok
+R	Ractor	.	make_shareable	ok
+R	Ractor	.	new	ok
+R	Ractor	.	receive	ok
+R	Ractor	.	recv	ok
+R	Ractor	.	receive_if	ok
+R	Ractor	.	select	ok
+R	Ractor	.	shareable?	ok
+R	Ractor	.	store_if_absent	ok
+R	Ractor	.	yield	ok
+R	Ractor::RemoteError	#	ractor	ok
+R	Random	#	==	ok
+R	Random	#	bytes	ok
+R	Random	#	left	ok
+R	Random	#	marshal_dump	ok
+R	Random	#	marshal_load	ok
+R	Random	#	rand	ok
+R	Random	#	seed	ok
+R	Random	#	state	ok
+R	Random	.	bytes	ok
+R	Random	.	left	ok
+R	Random	.	new	ok
+R	Random	.	new_seed	ok
+R	Random	.	rand	ok
+R	Random	.	seed	ok
+R	Random	.	srand	ok
+R	Random	.	state	ok
+R	Random	.	urandom	ok
+R	Random::Formatter	#	alphanumeric	no-method
+R	Range	#	%	ok
+R	Range	#	step	ok
+R	Range	#	==	ok
+R	Range	#	===	ok
+R	Range	#	begin	ok
+R	Range	#	first	ok
+R	Range	#	bsearch	ok
+R	Range	#	cover?	ok
+R	Range	#	each	ok
+R	Range	#	end	ok
+R	Range	#	last	ok
+R	Range	#	entries	ok
+R	Range	#	to_a	ok
+R	Range	#	eql?	ok
+R	Range	#	exclude_end?	ok
+R	Range	#	hash	ok
+R	Range	#	include?	ok
+R	Range	#	member?	ok
+R	Range	#	inspect	ok
+R	Range	#	max	ok
+R	Range	#	min	ok
+R	Range	#	minmax	ok
+R	Range	#	overlap?	ok
+R	Range	#	reverse_each	ok
+R	Range	#	size	ok
+R	Range	#	to_s	ok
+R	Range	.	new	ok
+R	Rational	#	*	ok
+R	Rational	#	**	ok
+R	Rational	#	+	ok
+R	Rational	#	-	ok
+R	Rational	#	-@	ok
+R	Rational	#	/	ok
+R	Rational	#	quo	ok
+R	Rational	#	<=>	ok
+R	Rational	#	==	ok
+R	Rational	#	abs	ok
+R	Rational	#	magnitude	ok
+R	Rational	#	ceil	ok
+R	Rational	#	coerce	ok
+R	Rational	#	denominator	ok
+R	Rational	#	fdiv	ok
+R	Rational	#	floor	ok
+R	Rational	#	hash	ok
+R	Rational	#	inspect	ok
+R	Rational	#	marshal_dump	ok
+R	Rational	#	negative?	ok
+R	Rational	#	numerator	ok
+R	Rational	#	positive?	ok
+R	Rational	#	rationalize	ok
+R	Rational	#	round	ok
+R	Rational	#	to_f	ok
+R	Rational	#	to_i	ok
+R	Rational	#	truncate	ok
+R	Rational	#	to_r	ok
+R	Rational	#	to_s	ok
+R	Rational	.	convert	ok
+R	Refinement	#	import_methods	ok
+R	Refinement	#	target	ok
+R	Regexp	::	EXTENDED	ok
+R	Regexp	::	FIXEDENCODING	ok
+R	Regexp	::	IGNORECASE	ok
+R	Regexp	::	MULTILINE	ok
+R	Regexp	::	NOENCODING	ok
+R	Regexp	#	==	ok
+R	Regexp	#	eql?	ok
+R	Regexp	#	===	ok
+R	Regexp	#	=~	ok
+R	Regexp	#	~	ok
+R	Regexp	#	casefold?	ok
+R	Regexp	#	encoding	ok
+R	Regexp	#	fixed_encoding?	ok
+R	Regexp	#	hash	ok
+R	Regexp	#	inspect	ok
+R	Regexp	#	match	ok
+R	Regexp	#	match?	ok
+R	Regexp	#	named_captures	ok
+R	Regexp	#	names	ok
+R	Regexp	#	options	ok
+R	Regexp	#	source	ok
+R	Regexp	#	timeout	ok
+R	Regexp	#	to_s	ok
+R	Regexp	.	compile	ok
+R	Regexp	.	new	ok
+R	Regexp	.	escape	ok
+R	Regexp	.	quote	ok
+R	Regexp	.	last_match	ok
+R	Regexp	.	linear_time?	ok
+R	Regexp	.	timeout	ok
+R	Regexp	.	timeout=	ok
+R	Regexp	.	try_convert	ok
+R	Regexp	.	union	ok
+R	RubyVM	::	DEFAULT_PARAMS	ok
+R	RubyVM	::	INSTRUCTION_NAMES	ok
+R	RubyVM	::	OPTS	ok
+R	RubyVM	.	stat	ok
+R	RubyVM::AbstractSyntaxTree	.	node_id_for_backtrace_location	ok
+R	RubyVM::AbstractSyntaxTree	.	of	ok
+R	RubyVM::AbstractSyntaxTree	.	parse	ok
+R	RubyVM::AbstractSyntaxTree	.	parse_file	ok
+R	RubyVM::AbstractSyntaxTree::Location	#	first_column	ok
+R	RubyVM::AbstractSyntaxTree::Location	#	first_lineno	ok
+R	RubyVM::AbstractSyntaxTree::Location	#	last_column	ok
+R	RubyVM::AbstractSyntaxTree::Location	#	last_lineno	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	all_tokens	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	children	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	first_column	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	first_lineno	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	inspect	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	last_column	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	last_lineno	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	locations	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	node_id	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	script_lines	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	source	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	tokens	ok
+R	RubyVM::AbstractSyntaxTree::Node	#	type	ok
+R	RubyVM::InstructionSequence	#	absolute_path	ok
+R	RubyVM::InstructionSequence	#	base_label	ok
+R	RubyVM::InstructionSequence	#	disasm	ok
+R	RubyVM::InstructionSequence	#	disassemble	ok
+R	RubyVM::InstructionSequence	#	eval	ok
+R	RubyVM::InstructionSequence	#	first_lineno	ok
+R	RubyVM::InstructionSequence	#	inspect	ok
+R	RubyVM::InstructionSequence	#	label	ok
+R	RubyVM::InstructionSequence	#	path	ok
+R	RubyVM::InstructionSequence	#	to_a	ok
+R	RubyVM::InstructionSequence	#	to_binary	ok
+R	RubyVM::InstructionSequence	.	compile	ok
+R	RubyVM::InstructionSequence	.	new	ok
+R	RubyVM::InstructionSequence	.	compile_file	ok
+R	RubyVM::InstructionSequence	.	compile_option	ok
+R	RubyVM::InstructionSequence	.	compile_option=	ok
+R	RubyVM::InstructionSequence	.	disasm	ok
+R	RubyVM::InstructionSequence	.	disassemble	ok
+R	RubyVM::InstructionSequence	.	load_from_binary	ok
+R	RubyVM::InstructionSequence	.	load_from_binary_extra_data	ok
+R	RubyVM::InstructionSequence	.	of	ok
+R	RubyVM::YJIT	.	code_gc	no-class
+R	RubyVM::YJIT	.	dump_exit_locations	no-class
+R	RubyVM::YJIT	.	enable	no-class
+R	RubyVM::YJIT	.	enabled?	no-class
+R	RubyVM::YJIT	.	log	no-class
+R	RubyVM::YJIT	.	log_enabled?	no-class
+R	RubyVM::YJIT	.	reset_stats!	no-class
+R	RubyVM::YJIT	.	runtime_stats	no-class
+R	RubyVM::YJIT	.	stats_enabled?	no-class
+R	RubyVM::YJIT	.	stats_string	no-class
+R	Set	#	&	ok
+R	Set	#	intersection	ok
+R	Set	#	+	ok
+R	Set	#	union	ok
+R	Set	#	|	ok
+R	Set	#	-	ok
+R	Set	#	difference	ok
+R	Set	#	<	ok
+R	Set	#	<=	ok
+R	Set	#	proper_subset?	ok
+R	Set	#	subset?	ok
+R	Set	#	<<	ok
+R	Set	#	add	ok
+R	Set	#	add?	ok
+R	Set	#	==	ok
+R	Set	#	===	ok
+R	Set	#	include?	ok
+R	Set	#	member?	ok
+R	Set	#	>	ok
+R	Set	#	>=	ok
+R	Set	#	proper_superset?	ok
+R	Set	#	superset?	ok
+R	Set	#	^	ok
+R	Set	#	classify	ok
+R	Set	#	clear	ok
+R	Set	#	clone	ok
+R	Set	#	dup	ok
+R	Set	#	collect!	ok
+R	Set	#	map!	ok
+R	Set	#	compare_by_identity	ok
+R	Set	#	compare_by_identity?	ok
+R	Set	#	delete	ok
+R	Set	#	delete?	ok
+R	Set	#	delete_if	ok
+R	Set	#	reject!	ok
+R	Set	#	disjoint?	ok
+R	Set	#	divide	ok
+R	Set	#	each	ok
+R	Set	#	empty?	ok
+R	Set	#	filter!	ok
+R	Set	#	select!	ok
+R	Set	#	flatten	ok
+R	Set	#	flatten!	ok
+R	Set	#	inspect	ok
+R	Set	#	to_s	ok
+R	Set	#	intersect?	ok
+R	Set	#	join	ok
+R	Set	#	keep_if	ok
+R	Set	#	length	ok
+R	Set	#	size	ok
+R	Set	#	merge	ok
+R	Set	#	replace	ok
+R	Set	#	reset	ok
+R	Set	#	subtract	ok
+R	Set	#	to_a	ok
+R	Set	.	[]	ok
+R	Set	.	new	ok
+R	Signal	.#	list	ok
+R	Signal	.#	signame	ok
+R	Signal	.#	trap	ok
+R	SignalException	#	signm	ok
+R	SignalException	#	signo	ok
+R	SignalException	.	new	ok
+R	StopIteration	#	result	ok
+R	String	#	%	ok
+R	String	#	*	ok
+R	String	#	+	ok
+R	String	#	+@	ok
+R	String	#	-@	ok
+R	String	#	dedup	ok
+R	String	#	<<	ok
+R	String	#	concat	ok
+R	String	#	<=>	ok
+R	String	#	==	ok
+R	String	#	===	ok
+R	String	#	=~	ok
+R	String	#	[]	ok
+R	String	#	slice	ok
+R	String	#	[]=	ok
+R	String	#	append_as_bytes	ok
+R	String	#	ascii_only?	ok
+R	String	#	b	ok
+R	String	#	byteindex	ok
+R	String	#	byterindex	ok
+R	String	#	bytes	ok
+R	String	#	bytesize	ok
+R	String	#	byteslice	ok
+R	String	#	bytesplice	ok
+R	String	#	capitalize	ok
+R	String	#	capitalize!	ok
+R	String	#	casecmp	ok
+R	String	#	casecmp?	ok
+R	String	#	center	ok
+R	String	#	chars	ok
+R	String	#	chomp	ok
+R	String	#	chomp!	ok
+R	String	#	chop	ok
+R	String	#	chop!	ok
+R	String	#	chr	ok
+R	String	#	clear	ok
+R	String	#	codepoints	ok
+R	String	#	count	ok
+R	String	#	crypt	ok
+R	String	#	delete	ok
+R	String	#	delete!	ok
+R	String	#	delete_prefix	ok
+R	String	#	delete_prefix!	ok
+R	String	#	delete_suffix	ok
+R	String	#	delete_suffix!	ok
+R	String	#	downcase	ok
+R	String	#	downcase!	ok
+R	String	#	dump	ok
+R	String	#	each_byte	ok
+R	String	#	each_char	ok
+R	String	#	each_codepoint	ok
+R	String	#	each_grapheme_cluster	ok
+R	String	#	each_line	ok
+R	String	#	empty?	ok
+R	String	#	encode	ok
+R	String	#	encode!	ok
+R	String	#	encoding	ok
+R	String	#	end_with?	ok
+R	String	#	eql?	ok
+R	String	#	force_encoding	ok
+R	String	#	getbyte	ok
+R	String	#	grapheme_clusters	ok
+R	String	#	gsub	ok
+R	String	#	gsub!	ok
+R	String	#	hash	ok
+R	String	#	hex	ok
+R	String	#	include?	ok
+R	String	#	index	ok
+R	String	#	insert	ok
+R	String	#	inspect	ok
+R	String	#	intern	ok
+R	String	#	to_sym	ok
+R	String	#	length	ok
+R	String	#	size	ok
+R	String	#	lines	ok
+R	String	#	ljust	ok
+R	String	#	lstrip	ok
+R	String	#	lstrip!	ok
+R	String	#	match	ok
+R	String	#	match?	ok
+R	String	#	next	ok
+R	String	#	succ	ok
+R	String	#	next!	ok
+R	String	#	succ!	ok
+R	String	#	oct	ok
+R	String	#	ord	ok
+R	String	#	partition	ok
+R	String	#	prepend	ok
+R	String	#	replace	ok
+R	String	#	reverse	ok
+R	String	#	reverse!	ok
+R	String	#	rindex	ok
+R	String	#	rjust	ok
+R	String	#	rpartition	ok
+R	String	#	rstrip	ok
+R	String	#	rstrip!	ok
+R	String	#	scan	ok
+R	String	#	scrub	ok
+R	String	#	scrub!	ok
+R	String	#	setbyte	ok
+R	String	#	slice!	ok
+R	String	#	split	ok
+R	String	#	squeeze	ok
+R	String	#	squeeze!	ok
+R	String	#	start_with?	ok
+R	String	#	strip	ok
+R	String	#	strip!	ok
+R	String	#	sub	ok
+R	String	#	sub!	ok
+R	String	#	sum	ok
+R	String	#	swapcase	ok
+R	String	#	swapcase!	ok
+R	String	#	to_c	ok
+R	String	#	to_f	ok
+R	String	#	to_i	ok
+R	String	#	to_r	ok
+R	String	#	to_s	ok
+R	String	#	to_str	ok
+R	String	#	tr	ok
+R	String	#	tr!	ok
+R	String	#	tr_s	ok
+R	String	#	tr_s!	ok
+R	String	#	undump	ok
+R	String	#	unicode_normalize	ok
+R	String	#	unicode_normalize!	ok
+R	String	#	unicode_normalized?	ok
+R	String	#	unpack	ok
+R	String	#	unpack1	ok
+R	String	#	upcase	ok
+R	String	#	upcase!	ok
+R	String	#	upto	ok
+R	String	#	valid_encoding?	ok
+R	String	.	new	ok
+R	String	.	try_convert	ok
+R	Struct	#	==	ok
+R	Struct	#	[]	ok
+R	Struct	#	[]=	ok
+R	Struct	#	deconstruct	ok
+R	Struct	#	to_a	ok
+R	Struct	#	values	ok
+R	Struct	#	deconstruct_keys	ok
+R	Struct	#	dig	ok
+R	Struct	#	each	ok
+R	Struct	#	each_pair	ok
+R	Struct	#	eql?	ok
+R	Struct	#	equal?	ok
+R	Struct	#	filter	ok
+R	Struct	#	select	ok
+R	Struct	#	hash	ok
+R	Struct	#	inspect	ok
+R	Struct	#	to_s	ok
+R	Struct	#	length	ok
+R	Struct	#	size	ok
+R	Struct	#	members	ok
+R	Struct	#	to_h	ok
+R	Struct	#	values_at	ok
+R	Struct	.	[]	no-method
+R	Struct	.	new	ok
+R	Struct	.	keyword_init?	no-method
+R	Struct	.	members	no-method
+R	Symbol	#	<=>	ok
+R	Symbol	#	==	ok
+R	Symbol	#	=~	ok
+R	Symbol	#	[]	ok
+R	Symbol	#	slice	ok
+R	Symbol	#	capitalize	ok
+R	Symbol	#	casecmp	ok
+R	Symbol	#	casecmp?	ok
+R	Symbol	#	downcase	ok
+R	Symbol	#	empty?	ok
+R	Symbol	#	encoding	ok
+R	Symbol	#	end_with?	ok
+R	Symbol	#	hash	ok
+R	Symbol	#	id2name	ok
+R	Symbol	#	to_s	ok
+R	Symbol	#	inspect	ok
+R	Symbol	#	intern	ok
+R	Symbol	#	to_sym	ok
+R	Symbol	#	length	ok
+R	Symbol	#	size	ok
+R	Symbol	#	match	ok
+R	Symbol	#	match?	ok
+R	Symbol	#	name	ok
+R	Symbol	#	next	ok
+R	Symbol	#	succ	ok
+R	Symbol	#	start_with?	ok
+R	Symbol	#	swapcase	ok
+R	Symbol	#	to_proc	ok
+R	Symbol	#	upcase	ok
+R	Symbol	.	all_symbols	ok
+R	SyntaxError	#	path	ok
+R	SystemCallError	#	errno	ok
+R	SystemCallError	.	===	ok
+R	SystemCallError	.	new	ok
+R	SystemExit	#	status	ok
+R	SystemExit	#	success?	ok
+R	SystemExit	.	new	ok
+R	Thread	#	[]	ok
+R	Thread	#	[]=	ok
+R	Thread	#	abort_on_exception	ok
+R	Thread	#	abort_on_exception=	ok
+R	Thread	#	add_trace_func	ok
+R	Thread	#	alive?	ok
+R	Thread	#	backtrace	ok
+R	Thread	#	backtrace_locations	ok
+R	Thread	#	exit	ok
+R	Thread	#	kill	ok
+R	Thread	#	terminate	ok
+R	Thread	#	fetch	ok
+R	Thread	#	group	ok
+R	Thread	#	inspect	ok
+R	Thread	#	to_s	ok
+R	Thread	#	join	ok
+R	Thread	#	key?	ok
+R	Thread	#	keys	ok
+R	Thread	#	name	ok
+R	Thread	#	name=	ok
+R	Thread	#	native_thread_id	ok
+R	Thread	#	pending_interrupt?	ok
+R	Thread	#	priority	ok
+R	Thread	#	priority=	ok
+R	Thread	#	raise	ok
+R	Thread	#	report_on_exception	ok
+R	Thread	#	report_on_exception=	ok
+R	Thread	#	run	ok
+R	Thread	#	set_trace_func	ok
+R	Thread	#	status	ok
+R	Thread	#	stop?	ok
+R	Thread	#	thread_variable?	ok
+R	Thread	#	thread_variable_get	ok
+R	Thread	#	thread_variable_set	ok
+R	Thread	#	thread_variables	ok
+R	Thread	#	value	ok
+R	Thread	#	wakeup	ok
+R	Thread	.	DEBUG	no-method
+R	Thread	.	DEBUG=	no-method
+R	Thread	.	abort_on_exception	ok
+R	Thread	.	abort_on_exception=	ok
+R	Thread	.	current	ok
+R	Thread	.	each_caller_location	ok
+R	Thread	.	exit	ok
+R	Thread	.	fork	ok
+R	Thread	.	start	ok
+R	Thread	.	handle_interrupt	ok
+R	Thread	.	ignore_deadlock	ok
+R	Thread	.	ignore_deadlock=	ok
+R	Thread	.	kill	ok
+R	Thread	.	list	ok
+R	Thread	.	main	ok
+R	Thread	.	new	ok
+R	Thread	.	pass	ok
+R	Thread	.	pending_interrupt?	ok
+R	Thread	.	report_on_exception	ok
+R	Thread	.	report_on_exception=	ok
+R	Thread	.	stop	ok
+R	Thread::Backtrace	.	limit	ok
+R	Thread::Backtrace::Location	#	absolute_path	ok
+R	Thread::Backtrace::Location	#	base_label	ok
+R	Thread::Backtrace::Location	#	inspect	ok
+R	Thread::Backtrace::Location	#	label	ok
+R	Thread::Backtrace::Location	#	lineno	ok
+R	Thread::Backtrace::Location	#	path	ok
+R	Thread::Backtrace::Location	#	to_s	ok
+R	Thread::ConditionVariable	#	broadcast	ok
+R	Thread::ConditionVariable	#	signal	ok
+R	Thread::ConditionVariable	#	wait	ok
+R	Thread::ConditionVariable	.	new	ok
+R	Thread::Mutex	#	lock	ok
+R	Thread::Mutex	#	locked?	ok
+R	Thread::Mutex	#	owned?	ok
+R	Thread::Mutex	#	sleep	ok
+R	Thread::Mutex	#	synchronize	ok
+R	Thread::Mutex	#	try_lock	ok
+R	Thread::Mutex	#	unlock	ok
+R	Thread::Mutex	.	new	ok
+R	Thread::Queue	#	<<	ok
+R	Thread::Queue	#	enq	ok
+R	Thread::Queue	#	push	ok
+R	Thread::Queue	#	clear	ok
+R	Thread::Queue	#	close	ok
+R	Thread::Queue	#	closed?	ok
+R	Thread::Queue	#	deq	ok
+R	Thread::Queue	#	pop	ok
+R	Thread::Queue	#	shift	ok
+R	Thread::Queue	#	empty?	ok
+R	Thread::Queue	#	length	ok
+R	Thread::Queue	#	size	ok
+R	Thread::Queue	#	num_waiting	ok
+R	Thread::Queue	.	new	ok
+R	Thread::SizedQueue	#	<<	ok
+R	Thread::SizedQueue	#	enq	ok
+R	Thread::SizedQueue	#	push	ok
+R	Thread::SizedQueue	#	close	ok
+R	Thread::SizedQueue	#	deq	ok
+R	Thread::SizedQueue	#	pop	ok
+R	Thread::SizedQueue	#	shift	ok
+R	Thread::SizedQueue	#	empty?	ok
+R	Thread::SizedQueue	#	length	ok
+R	Thread::SizedQueue	#	size	ok
+R	Thread::SizedQueue	#	max	ok
+R	Thread::SizedQueue	#	max=	ok
+R	Thread::SizedQueue	.	new	ok
+R	ThreadGroup	::	Default	ok
+R	ThreadGroup	#	add	ok
+R	ThreadGroup	#	enclose	ok
+R	ThreadGroup	#	enclosed?	ok
+R	ThreadGroup	#	list	ok
+R	ThreadGroup	.	new	ok
+R	Time	#	+	ok
+R	Time	#	-	ok
+R	Time	#	<=>	ok
+R	Time	#	asctime	ok
+R	Time	#	ctime	ok
+R	Time	#	ceil	ok
+R	Time	#	day	ok
+R	Time	#	mday	ok
+R	Time	#	deconstruct_keys	ok
+R	Time	#	dst?	ok
+R	Time	#	isdst	ok
+R	Time	#	eql?	ok
+R	Time	#	floor	ok
+R	Time	#	friday?	ok
+R	Time	#	getgm	ok
+R	Time	#	getutc	ok
+R	Time	#	getlocal	ok
+R	Time	#	gmt?	ok
+R	Time	#	utc?	ok
+R	Time	#	gmt_offset	ok
+R	Time	#	gmtoff	ok
+R	Time	#	utc_offset	ok
+R	Time	#	gmtime	ok
+R	Time	#	utc	ok
+R	Time	#	hash	ok
+R	Time	#	hour	ok
+R	Time	#	inspect	ok
+R	Time	#	localtime	ok
+R	Time	#	min	ok
+R	Time	#	mon	ok
+R	Time	#	month	ok
+R	Time	#	monday?	ok
+R	Time	#	nsec	ok
+R	Time	#	tv_nsec	ok
+R	Time	#	round	ok
+R	Time	#	saturday?	ok
+R	Time	#	sec	ok
+R	Time	#	strftime	ok
+R	Time	#	subsec	ok
+R	Time	#	sunday?	ok
+R	Time	#	thursday?	ok
+R	Time	#	to_a	ok
+R	Time	#	to_f	ok
+R	Time	#	to_i	ok
+R	Time	#	tv_sec	ok
+R	Time	#	to_r	ok
+R	Time	#	to_s	ok
+R	Time	#	tuesday?	ok
+R	Time	#	tv_usec	ok
+R	Time	#	usec	ok
+R	Time	#	wday	ok
+R	Time	#	wednesday?	ok
+R	Time	#	yday	ok
+R	Time	#	year	ok
+R	Time	#	zone	ok
+R	Time	.	at	ok
+R	Time	.	gm	ok
+R	Time	.	utc	ok
+R	Time	.	local	ok
+R	Time	.	mktime	ok
+R	Time	.	new	ok
+R	Time	.	now	ok
+R	TracePoint	#	binding	ok
+R	TracePoint	#	callee_id	ok
+R	TracePoint	#	defined_class	ok
+R	TracePoint	#	disable	ok
+R	TracePoint	#	enable	ok
+R	TracePoint	#	enabled?	ok
+R	TracePoint	#	eval_script	ok
+R	TracePoint	#	event	ok
+R	TracePoint	#	inspect	ok
+R	TracePoint	#	instruction_sequence	ok
+R	TracePoint	#	lineno	ok
+R	TracePoint	#	method_id	ok
+R	TracePoint	#	parameters	ok
+R	TracePoint	#	path	ok
+R	TracePoint	#	raised_exception	ok
+R	TracePoint	#	return_value	ok
+R	TracePoint	#	self	ok
+R	TracePoint	.	allow_reentry	ok
+R	TracePoint	.	new	ok
+R	TracePoint	.	stat	ok
+R	TracePoint	.	trace	ok
+R	TrueClass	#	&	ok
+R	TrueClass	#	^	ok
+R	TrueClass	#	|	ok
+R	TrueClass	#	inspect	ok
+R	TrueClass	#	to_s	ok
+R	UnboundMethod	#	==	ok
+R	UnboundMethod	#	eql?	ok
+R	UnboundMethod	#	arity	ok
+R	UnboundMethod	#	bind	ok
+R	UnboundMethod	#	bind_call	ok
+R	UnboundMethod	#	clone	ok
+R	UnboundMethod	#	hash	ok
+R	UnboundMethod	#	inspect	ok
+R	UnboundMethod	#	to_s	ok
+R	UnboundMethod	#	name	ok
+R	UnboundMethod	#	original_name	ok
+R	UnboundMethod	#	owner	ok
+R	UnboundMethod	#	parameters	ok
+R	UnboundMethod	#	source_location	ok
+R	UnboundMethod	#	super_method	ok
+R	UncaughtThrowError	#	tag	ok
+R	UncaughtThrowError	#	to_s	ok
+R	UncaughtThrowError	#	value	ok
+R	Warning	#	warn	ok
+R	Warning	.	[]	ok
+R	Warning	.	[]=	ok
+R	Warning	.	categories	ok
+R	Warning	.	warn	ok
+R	main	.	define_method	ok
+R	main	.	include	ok
+R	main	.	inspect	ok
+R	main	.	to_s	ok
+R	main	.	private	ok
+R	main	.	public	ok
+R	main	.	ruby2_keywords	ok
+R	main	.	using	ok

@@ -1,0 +1,22 @@
+== 3.4  ruby: ruby 3.4.0dev (2024-12-25 master f450108330) +PRISM [x86_64-linux]
+DB method entries: 8300  (libs 306)  real methods: 35549
+require-failed libs (2): irb/ext/multi-irb irb/ws-for-case-2
+-- scope builtin
+  excess methods: 28  (EXCESS(no-class)=10, EXCESS(no-method)=18)
+  excess consts: 2
+  shortage: ALIAS_OF_DOC=18, DOC_ON_ANCESTOR=105, DOC_ON_DESCENDANT=4, UNDOC=13, UNDOC(class-undoc)=3, UNDOC_PRIV=8, UNDOC_UNDERSCORE=2
+-- scope stdlib
+  excess methods: 220  (EXCESS(no-class)=65, EXCESS(no-method)=155, unmeasured(skipped-lib)=200)
+  excess consts: 22
+  shortage: ALIAS_OF_DOC=37, DOC_ON_ANCESTOR=2939, DOC_ON_DESCENDANT=99, UNDOC=2009, UNDOC(class-stub)=122, UNDOC(class-undoc)=5298, UNDOC_PRIV=1405, UNDOC_UNDERSCORE=277
+-- scope bundled
+  excess methods: 84  (EXCESS(no-class)=10, EXCESS(no-method)=74)
+  excess consts: 4
+  shortage: ALIAS_OF_DOC=32, DOC_ON_ANCESTOR=960, DOC_ON_DESCENDANT=28, UNDOC=1236, UNDOC(class-stub)=156, UNDOC(class-undoc)=1951, UNDOC_PRIV=1570, UNDOC_UNDERSCORE=13
+-- scope stale-lib
+  excess methods: 0  ()
+  excess consts: 0
+  shortage: 
+-- vendored: 1891 real methods (bundler/vendor/fileutils/lib/fileutils=442, rubygems/vendor/resolv/lib/resolv=343, rubygems/vendor/optparse/lib/optparse=154, rubygems/vendor/net-http/lib/net/http=151, rubygems/vendor/molinillo/lib/molinillo/resolution=104, rubygems/vendor/uri/lib/uri/generic=83, bundler/vendor/net-http-persistent/lib/net/http/persistent=81, rubygems/vendor/net-protocol/lib/net/protocol=60)
+-- internal: 0 real methods ()
+-- undoc-lib: 34 real methods (rdoc_plugin/parser=18, random/formatter=9, bundled_gems=6, syntax_suggest/core_ext=1)

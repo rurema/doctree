@@ -1,0 +1,22 @@
+== 3.3  ruby: ruby 3.3.0 (2023-12-25 revision 5124f9ac75) [x86_64-linux]
+DB method entries: 8262  (libs 310)  real methods: 32841
+require-failed libs (3): irb/ext/multi-irb irb/ws-for-case-2 yaml/dbm
+-- scope builtin
+  excess methods: 26  (EXCESS(no-class)=8, EXCESS(no-method)=18)
+  excess consts: 2
+  shortage: ALIAS_OF_DOC=18, DOC_ON_ANCESTOR=101, DOC_ON_DESCENDANT=4, UNDOC=12, UNDOC(class-undoc)=3, UNDOC_PRIV=7, UNDOC_UNDERSCORE=1
+-- scope stdlib
+  excess methods: 199  (EXCESS(no-class)=41, EXCESS(no-method)=158, unmeasured(require-failed)=22, unmeasured(skipped-lib)=200)
+  excess consts: 23
+  shortage: ALIAS_OF_DOC=38, DOC_ON_ANCESTOR=1898, DOC_ON_DESCENDANT=98, UNDOC=1992, UNDOC(class-stub)=124, UNDOC(class-undoc)=6004, UNDOC_PRIV=1905, UNDOC_UNDERSCORE=286
+-- scope bundled
+  excess methods: 78  (EXCESS(no-class)=9, EXCESS(no-method)=69)
+  excess consts: 1
+  shortage: ALIAS_OF_DOC=31, DOC_ON_ANCESTOR=891, DOC_ON_DESCENDANT=25, UNDOC=1163, UNDOC(class-stub)=141, UNDOC(class-undoc)=1782, UNDOC_PRIV=1427, UNDOC_UNDERSCORE=7
+-- scope stale-lib
+  excess methods: 0  ()
+  excess consts: 0
+  shortage: 
+-- vendored: 550 real methods (bundler/vendor/fileutils/lib/fileutils=442, bundler/vendor/net-http-persistent/lib/net/http/persistent=79, bundler/vendor/net-http-persistent/lib/net/http/persistent/connection=13, bundler/vendor/net-http-persistent/lib/net/http/persistent/timed_stack_multi=10, bundler/vendor/net-http-persistent/lib/net/http/persistent/pool=6)
+-- internal: 0 real methods ()
+-- undoc-lib: 37 real methods (rdoc_plugin/parser=18, random/formatter=9, bundled_gems=5, syntax_suggest/core_ext=5)
