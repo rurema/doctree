@@ -6,8 +6,9 @@ until: "4.0"
 
 [c:String] に JSON で使用する特異メソッドを追加するためのモジュールです。
 
-## Class Methods
-### def JSON::Ext::Generator::GeneratorMethods::String::Extend.json_create(hash) -> String
+## Instance Methods
+
+### def json_create(hash) -> String
 
 JSON のオブジェクトから Ruby の文字列を生成して返します。
 

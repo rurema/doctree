@@ -686,18 +686,12 @@ textarea("name", 40, 5)
 ### def doctype
 #%todo
 
-### def element_init
-#%todo
-
 # module CGI::Html4
 #%# nodoc
 
 ## Instance Methods
 
 ### def doctype
-#%todo
-
-### def element_init
 #%todo
 
 # module CGI::Html4Fr
@@ -708,9 +702,6 @@ textarea("name", 40, 5)
 ### def doctype
 #%todo
 
-### def element_init
-#%todo
-
 # module CGI::Html4Tr
 #%# nodoc
 
@@ -719,5 +710,3 @@ textarea("name", 40, 5)
 ### def doctype
 #%todo
 
-### def element_init
-#%todo

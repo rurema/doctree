@@ -43,13 +43,6 @@ dirs から package_name という名前を持つファイルを探索します�
 
 - **param** `dirs` -- 探索するディレクトリを文字列の配列で指定します。
 
-### def gem_paths(spec) -> Array
-
-与えられた [c:Gem::Specification] のインスタンスからその Gem が
-require するファイルのあるディレクトリをまとめて返します。
-
-- **param** `spec` -- [c:Gem::Specification] のインスタンスを指定します。
-
 ## Constants
 
 ### const EXT -> [String]

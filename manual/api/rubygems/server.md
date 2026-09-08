@@ -37,14 +37,6 @@ Gem パッケージを配布したり Gem パッケージに同梱されてい�
 
 ## Instance Methods
 
-### def Marshal(request, response) -> ()
-
-メソッド名に対応する URI に対するリクエストを処理するメソッドです。
-
-- **param** `request` --  `WEBrick::HTTPRequest` オブジェクトが自動的に指定されます。
-
-- **param** `response` -- `WEBrick::HTTPResponse` オブジェクトが自動的に指定されます。
-
 ### def latest_specs(request, response) -> ()
 
 メソッド名に対応する URI に対するリクエストを処理するメソッドです。
@@ -74,14 +66,6 @@ Gem パッケージを配布したり Gem パッケージに同梱されてい�
 サーバを実行します。
 
 ### def specs(request, response) -> ()
-
-メソッド名に対応する URI に対するリクエストを処理するメソッドです。
-
-- **param** `request` --  `WEBrick::HTTPRequest` オブジェクトが自動的に指定されます。
-
-- **param** `response` -- `WEBrick::HTTPResponse` オブジェクトが自動的に指定されます。
-
-### def yaml(request, response) -> ()
 
 メソッド名に対応する URI に対するリクエストを処理するメソッドです。
 

@@ -20,9 +20,6 @@ require:
 ローカルリポジトリにインストールされている Gem パッケージを更新するためのクラスです。
 
 ## Public Instance Methods
-### def do_rubygems_update(version)
-
-RubyGems 自体を更新します。
 
 ### def which_to_update(highest_installed_gems, gem_names) -> Array
 

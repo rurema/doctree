@@ -15,20 +15,10 @@ Gem リポジトリのインデックスを作成するためのクラスです�
 
 ## Public Instance Methods
 
-### def abbreviate(spec) -> Gem::Specification
-
-ダウンロードを速くするために与えられた [c:Gem::Specification] の持つデータを小さくします。
-
-- **param** `spec` -- [c:Gem::Specification] を指定します。
-
 ### def build_indices
 #%# -> discard
 
 インデックスを構築します。
-
-### def collect_specs -> Gem::SourceIndex
-
-Gem のキャッシュディレクトリ内の *.gem ファイルから [c:Gem::Specification] を集めます。
 
 ### def compact_specs(specs) -> Array
 
@@ -83,21 +73,6 @@ Gem のキャッシュディレクトリ内の *.gem ファイルから [c:Gem::
 - **param** `extension` -- 圧縮されたファイルの拡張子を指定します。
 
 - **raise** `RuntimeError` -- 圧縮されたデータと圧縮されていないデータが一致しない場合に発生します。
-
-### def sanitize(spec) -> Gem::Specification
-
-与えられたスペックの詳細を表す属性をサニタイズします。
-
-non-ASCII の文字列は、サイトインデックスを文字化けさせることがあります。
-non-ASCII の文字列を XML エンティティに置換します。
-
-### def sanitize_string(string) -> String
-
-与えられた文字列をサニタイズします。
-
-- **param** `string` -- サニタイズ対象の文字列を指定します。
-
-- **SEE** [m:Gem::Indexer#sanitize]
 
 ## Singleton Methods
 
