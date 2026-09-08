@@ -15,6 +15,7 @@ self と other を [m:Gem::Dependency#name] の ASCII コードで比較して
 self が大きい時には正の整数、等しい時には 0、小さい時には負の整数を返します。
 
 ### def =~(other) -> bool
+### def ===(other) -> bool
 
 self と other を比較して真偽値を返します。
 
