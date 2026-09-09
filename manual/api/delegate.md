@@ -160,5 +160,24 @@ p a         # => [25]
 
 - **param** `include_private` -- 真を指定すると private メソッドも調べます。
 
+### def eql?(obj) -> bool
+
+自身が委譲先のオブジェクトと `eql?` の意味で等しい場合に、真を返します。
+そうでない場合は、偽を返します。
+
+- **param** `obj` -- 比較対象のオブジェクトを指定します。
+
+```ruby title="例"
+require 'delegate'
+
+a = SimpleDelegator.new([1, 2, 3])
+b = SimpleDelegator.new([1, 2, 3])
+p a.eql?(b)         # => true
+p a.eql?([1, 2, 3]) # => true
+p a.eql?([1, 2, 4]) # => false
+```
+
+- **SEE** [m:Delegator#==]
+
 ## Constants
 

@@ -831,6 +831,25 @@ require 'fileutils'
 FileUtils.uptodate?('hello.o', ['hello.c', 'hello.h']) or system('make')
 ```
 
+### module_function def link_entry(src, dest, dereference_root = false, remove_destination = false) -> ()
+
+ファイルシステムのエントリ src を dest にハードリンクします。src がディレクトリの場合はその中身を再帰的にリンクします。
+
+- **param** `src` -- リンク元。存在している必要があります。
+
+- **param** `dest` -- リンク先。存在していてはいけません。
+
+- **param** `dereference_root` -- 真のときは src についてだけシンボリックリンクの指す内容をリンクします。
+
+- **param** `remove_destination` -- 真のときはコピーする前に dest のファイルを削除します。
+
+```ruby
+require 'fileutils'
+FileUtils.link_entry('src', 'dest')
+```
+
+- **SEE** [m:FileUtils?.copy_entry]
+
 ## Singleton Methods
 ### def FileUtils.collect_method(opt) -> Array
 

@@ -32,6 +32,18 @@ argv で与えられた引数を元にドキュメントをフォーマットし
 指定できるオプションについては、[ref:lib:rdoc#usage] を参照してください。出力ディレクトリが指定されなかった場合はカレントディレクトリ の
 doc 以下に出力します。
 
+#%until 3.1
+### def load_options -> RDoc::Options
+
+カレントディレクトリの `.rdoc_options` ファイルが存在すれば、その内容を読み込んで [c:RDoc::Options] オブジェクトを返します。
+存在しない場合は新しい [c:RDoc::Options] オブジェクトを返します。
+
+- **raise** `RDoc::Error` -- `.rdoc_options` ファイルの内容が正しい RDoc::Options の形式でなかった場合に発生します。
+
+- **SEE** [m:RDoc::Options#write_options]
+
+#%end
+
 ## Class Methods
 
 ### def RDoc::RDoc.add_generator(klass) -> klass

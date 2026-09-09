@@ -195,3 +195,109 @@ obj を width カラムのテキストとして自身に追加します。
 ### def indent    -> Integer
 
 現在のインデントの深さを返します。
+
+### def fill_breakable(sep = ' ') -> ()
+### def fill_breakable(sep, width = sep.length) -> ()
+
+[m:PrettyPrint#breakable] と似ていますが、改行するかどうかがそれぞれ個別に決定される点が異なります。
+
+同じグループの中で fill_breakable を2回呼んだ場合、(改行,改行)・(改行,非改行)・(非改行,改行)・(非改行,非改行) の4通りの結果になり得ます。これは [m:PrettyPrint#breakable] とは異なる点です。同じグループの中で breakable を2回呼んだ場合、改行するなら全て同時に改行するため、(改行,改行)・(非改行,非改行) の2通りにしかなりません。
+
+もしその位置で改行されなければ、width カラムのテキスト sep が出力の際にそこに挿入されます。
+
+- **param** `sep` -- 改行が起きなかった場合に挿入されるテキストを文字列で指定します。指定されなかった場合、' ' が利用されます。
+
+- **param** `width` -- テキスト sep は width カラムであると仮定されます。指定されなければ、sep.length が利用されます。例えば sep が多バイト文字の際に指定する必要があるかも知れません。
+
+```ruby
+require 'prettyprint'
+
+out = PrettyPrint.format(''.dup, 10) do |q|
+  q.group {
+    %w[aaaa bbbb cccc dddd].each_with_index do |w, i|
+      q.fill_breakable if i > 0
+      q.text w
+    end
+  }
+end
+puts out
+# => aaaa bbbb
+#    cccc dddd
+```
+
+- **SEE** [m:PrettyPrint#breakable]
+
+### def break_outmost_groups -> ()
+
+自身のバッファの中で、出力幅([m:PrettyPrint#maxwidth])を超えている外側のグループを、バッファの幅が maxwidth 以下になるまで改行して出力します。
+
+[m:PrettyPrint#text] や [m:PrettyPrint#breakable] の内部で、バッファに追加を行うたびに呼ばれています。
+
+```ruby
+require 'prettyprint'
+
+out = PrettyPrint.format(''.dup, 10) do |q|
+  q.text 'aaaaa'
+  q.group {
+    q.text 'b' * 20
+    q.breakable
+    q.text 'c'
+  }
+  q.break_outmost_groups
+  q.text 'd'
+end
+puts out
+# => aaaaabbbbbbbbbbbbbbbbbbbb
+#    cd
+```
+
+### def current_group -> PrettyPrint::Group
+
+スタックに最後に積まれたグループ、つまり現在ブロックを実行中の最も内側の [m:PrettyPrint#group] に対応するグループを返します。
+
+カスタムフォーマッタの実装で、現在のネストの深さなどを調べるために使用します。
+
+```ruby
+require 'prettyprint'
+
+out = PrettyPrint.format(''.dup) do |q|
+  q.group {
+    q.text q.current_group.depth.to_s
+    q.group {
+      q.text q.current_group.depth.to_s
+    }
+  }
+end
+puts out
+# => 12
+```
+
+- **SEE** [m:PrettyPrint#group]
+
+### def group_queue -> PrettyPrint::GroupQueue
+
+自身が持つ、プリティプリント待ちのグループのキュー(PrettyPrint::GroupQueue オブジェクト)を返します。
+
+### def group_sub { ... } -> object
+
+ブロックを実行しながら、現在のグループより1段階深いグループをキューに追加します。
+
+[m:PrettyPrint#group] と異なり、開き括弧・閉じ括弧の出力([m:PrettyPrint#text])やインデントの増加([m:PrettyPrint#nest])は行いません。[m:PrettyPrint#group] は内部でこのメソッドを使って実装されています。
+
+```ruby
+require 'prettyprint'
+
+out = PrettyPrint.format(''.dup, 5) do |q|
+  q.group_sub {
+    q.text 'hello'
+    q.breakable
+    q.text 'world'
+  }
+end
+puts out
+# => hello
+#    world
+```
+
+- **SEE** [m:PrettyPrint#group]
+

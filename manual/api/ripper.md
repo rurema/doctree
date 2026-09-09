@@ -44,6 +44,14 @@ src の解析を行うには更に [m:Ripper#parse] などの呼び出しが必�
 
 - **SEE** [m:Ripper#parse]
 
+### def Ripper.lex_state_name(state) -> String
+
+state で指定したスキャナ状態を表す文字列表現を返します。
+
+- **param** `state` -- スキャナ状態を表す整数を指定します。[m:Ripper#state] などで得られる値です。
+
+state が複数の状態のビット OR である場合は、それぞれの状態名を `"|"` でつないだ文字列を返します。
+
 ## Instance Methods
 
 ### def parse -> nil
@@ -89,6 +97,37 @@ yydebugの構文解析器の追跡機能が有効か無効かを返します。
 yydebugの構文解析器の追跡機能が有効か無効かを指定します。
 
 - **param** `flag` -- true か false を指定します。
+
+### def debug_output -> object
+### def debug_output=(obj)
+
+構文解析のデバッグ出力先を取得・設定します。
+
+`debug_output` は現在のデバッグ出力先を返します。初期値は標準出力です。
+
+`debug_output=` はデバッグ出力先を obj に設定します。[m:Ripper#yydebug] を true にした場合、構文解析器のトレース情報がここで指定したオブジェクトに書き込まれます。
+
+- **param** `obj` -- デバッグ出力の書き込み先を指定します。`<<` を実行できるオブジェクト(IO オブジェクトなど)を指定します。
+
+- **SEE** [m:Ripper#yydebug], [m:Ripper#yydebug=]
+
+### def error? -> bool
+
+これまでに解析した Ruby プログラムにエラーがあったかどうかを返します。
+
+- **SEE** [m:Ripper#parse]
+
+### def state -> Integer | nil
+
+現在のトークンのスキャナ状態を、`Ripper::EXPR_*` 定数のビット OR を表す整数で返します。
+
+このメソッドはイベントハンドラの中でのみ意味のある値を返します。イベントハンドラの中で self.state を実行してください。
+
+### def token -> String | nil
+
+現在のトークン文字列を返します。
+
+このメソッドはイベントハンドラの中でのみ意味のある値を返します。イベントハンドラの中で self.token を実行してください。
 
 ## Private Instance Methods
 

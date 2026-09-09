@@ -400,6 +400,67 @@ erb.filename = filename
 p erb.filename # =>"example.rhtml"
 ```
 
+### def encoding -> Encoding
+
+コンパイルされた eRuby スクリプトを `eval` するときに使われるエンコーディングを返します。
+
+```ruby title="例"
+require 'erb'
+erb = ERB.new('<%= 1 + 1 %>')
+p erb.encoding # => #<Encoding:UTF-8>
+```
+
+### def lineno -> Integer
+### def lineno=(n)
+
+eRuby スクリプトを `eval` するときに [m:Kernel?.eval] に渡す行番号を取得・設定します。
+
+エラーが発生した際の報告に使われます。
+
+- **param** `n` -- 設定する行番号を整数で指定します。
+
+```ruby title="例"
+require 'erb'
+erb = ERB.new('<%= 1 + 1 %>')
+p erb.lineno    # => 0
+erb.lineno = 3
+p erb.lineno    # => 3
+```
+
+- **SEE** [m:ERB#filename], [m:ERB#filename=]
+
+### def location=((filename, lineno))
+
+エラーメッセージや `eval` に使われるファイル名と行番号をまとめて設定します。
+
+- **param** `filename` -- ファイル名を文字列で指定します。
+- **param** `lineno` -- 行番号を整数で指定します。nil を渡した場合、行番号は変更されません。
+
+```ruby title="例"
+require 'erb'
+erb = ERB.new('<%= 1 + 1 %>')
+erb.location = ['file.erb', 10]
+p erb.filename # => "file.erb"
+p erb.lineno   # => 10
+```
+
+- **SEE** [m:ERB#filename=]
+
+### def make_compiler(trim_mode) -> ERB::Compiler
+
+自身のための `ERB::Compiler` オブジェクトを新しく作成して返します。
+
+このメソッドは [m:ERB.new] から呼び出されます。`ERB` のサブクラスでこのメソッドを再定義すると、
+コンパイラの生成方法をカスタマイズできます。
+
+- **param** `trim_mode` -- [m:ERB.new] に指定した trim_mode を渡します。
+
+```ruby title="例"
+require 'erb'
+erb = ERB.new('<%= 1 + 1 %>')
+p erb.make_compiler(nil).class # => ERB::Compiler
+```
+
 # module ERB::Util
 
 eRubyスクリプトのためのユーティリティを提供するモジュールです。

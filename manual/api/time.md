@@ -197,6 +197,47 @@ Time.strptime('01/5/18 4:13:00', '%Y/%m/%d %T'){|y|
 - **param** `date` -- 時刻を表す文字列
 - **param** `format` -- 書式文字列
 
+### def Time.zone_offset(zone, year = self.now.year) -> Integer | nil
+
+タイムゾーンを表す文字列 zone を、協定世界時 (UTC) との差(秒)に変換します。
+
+`-10:00` や `+1330` のような分を含む数値表記、`-10` や `+13` のような時のみの数値表記に対応しています。
+
+数値表記でない場合は、`"UTC"`、`"JST"` のような、[lib:time] ライブラリが認識するタイムゾーンの略称も使用できます。
+
+上記のいずれにも一致しなかった場合は、ローカルタイムゾーン(サマータイムを考慮したものと考慮しないものの両方)が zone と一致するかどうかを調べます。
+year を指定すると、ローカルタイムゾーンを調べる際に使う年を変更できます。
+
+zone のオフセットを判別できなかった場合は nil を返します。
+
+- **param** `zone` -- タイムゾーンを表す文字列を指定します。
+- **param** `year` -- ローカルタイムゾーンの判別に使う年を整数で指定します。省略した場合、現在の年が使われます。
+
+```ruby title="例"
+require 'time'
+p Time.zone_offset("EST")    # => -18000
+p Time.zone_offset("+09:00") # => 32400
+```
+
+#%since 4.1
+### def Time.rfc3339(date) -> Time
+
+[RFC:3339] で定義されている dateTime として date をパースして [c:Time] オブジェクトに変換します。
+
+[m:Time.xmlschema] とほぼ同様ですが、日付と時刻の区切りが `T` または空白に限られる点、
+タイムゾーンの指定を省略できない点、年が 4 桁固定である点が異なります。
+
+date が RFC 3339 で定義されている形式に準拠していない、または [c:Time] クラスが指定された日時を表現できないときに
+[c:ArgumentError] が発生します。
+
+- **param** `date` -- RFC 3339 で定義されている dateTime としてパースされる文字列を指定します。
+
+- **raise** `ArgumentError` -- date が RFC 3339 で定義されている形式に準拠していない、または [c:Time] クラスが指定された日時を表現できないときに発生します。
+
+- **SEE** [m:Time.xmlschema]
+
+#%end
+
 ## Instance Methods
 
 ### def rfc2822 -> String

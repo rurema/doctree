@@ -265,3 +265,30 @@ singleton で指定した条件と一致するメソッドすべての可視性�
 [c:RDoc::Alias] が値の [c:Hash] を設定します。
 
 - **param** `val` -- 旧メソッド名がキー、[c:RDoc::Alias] が値の [c:Hash] を指定します。
+
+#%until 4.0
+### def each_include {|i| ... } -> [RDoc::Include]
+
+追加された [c:RDoc::Include] に対してブロックを評価します。
+
+- **SEE** [m:RDoc::Context#includes]
+
+#%end
+
+#%until 4.0
+### def each_extend {|e| ... } -> [RDoc::Extend]
+
+追加された `RDoc::Extend` に対してブロックを評価します。
+
+#%end
+
+#%until 4.0
+### def find_file_named(name) -> RDoc::TopLevel | nil
+
+name で指定した名前のファイルを、`self` が所属する `RDoc::Store` 内から検索します。
+見つからなかった場合は nil を返します。
+
+- **param** `name` -- 検索するファイル名を文字列で指定します。
+
+#%end
+

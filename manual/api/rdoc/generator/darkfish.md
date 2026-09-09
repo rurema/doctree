@@ -84,16 +84,6 @@ HTML を生成するためのクラスです。
 #%#
 #%# Output progress information if debugging is enabled
 #%#
-#%# --- class_dir
-#%#
-#%# Directory where generated class HTML files live relative to the output
-#%# dir.
-#%#
-#%# --- file_dir
-#%#
-#%# Directory where generated class HTML files live relative to the output
-#%# dir.
-#%#
 #%# --- gen_sub_directories
 #%#
 #%# Create the directories the generated docs will live in if they don't
@@ -150,11 +140,6 @@ HTML を生成するためのクラスです。
 #%#
 #%# Prepares for generation of output from the current directory
 #%#
-#%# --- time_delta_string(seconds)
-#%#
-#%# Return a string describing the amount of time in the given number of
-#%# seconds in terms a human can understand easily.
-#%#
 #%# --- get_svninfo(klass)
 #%#
 #%# Try to extract Subversion information out of the first constant whose
@@ -190,6 +175,29 @@ HTML を生成するためのクラスです。
 #%# --- template_for(file, page = true, klass = ERB)
 #%#
 #%# Retrieves a cache template for +file+, if present, or fills the cache.
+
+#%until 4.0
+### def class_dir -> nil
+### def file_dir -> nil
+
+常に nil を返します。
+
+生成するクラス・ファイルの HTML を出力ディレクトリのどこに置くか(出力ディレクトリからの相対パス)を返すためのフックです。
+サブクラスでオーバーライドして使用します。
+
+#%end
+
+#%until 4.0
+### def time_delta_string(seconds) -> String
+
+seconds で指定した秒数を、人が読みやすい形式の文字列にして返します。
+
+- **param** `seconds` -- 秒数を数値で指定します。
+
+- **return** -- "less than a minute"、"3 minutes"、"about one hour"、"2 days"、
+           "3 weeks" のように、秒数のおおまかさに応じた形式の文字列を返します。
+
+#%end
 
 ## Constants
 
