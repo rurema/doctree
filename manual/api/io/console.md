@@ -129,17 +129,42 @@ cooked モードを有効にします。端末のモードを後で元に戻す�
 
 - **SEE** [m:IO#cooked]
 
+#%until 4.1
 ### def console_mode -> IO::ConsoleMode
+#%else
+### def console_mode -> IO::Console::Mode
+#%end
 ### def console_mode=(mode)
 
 現在の端末の入出力モードを取得し、または設定します。
 
-`console_mode` は現在のモードを表す `IO::ConsoleMode` のインスタンスを返します。
+#%until 4.1
+`console_mode` は現在のモードを表す [c:IO::ConsoleMode] のインスタンスを返します。
+#%else
+`console_mode` は現在のモードを表す [c:IO::Console::Mode] のインスタンスを返します。
+#%end
 `console_mode=` は mode に指定したモードを端末に設定します。[m:IO#raw] などでモードを
 変更する前に `console_mode` で現在の状態を取得しておき、後で `console_mode=` に渡して
 元に戻す、という使い方ができます。
 
-- **param** `mode` -- 設定するモードを表す `IO::ConsoleMode` のインスタンスです。
+```ruby
+require "io/console"
+mode = STDIN.console_mode
+begin
+  STDIN.console_mode = mode.raw
+  # raw モードでの処理
+ensure
+  STDIN.console_mode = mode
+end
+```
+
+- **param** `mode` -- 設定するモードを表す、`console_mode` が返すのと同じクラスのオブジェクトです。
+- **raise** `TypeError` -- mode がモードを表すオブジェクトでない場合に発生します。
+#%until 4.1
+- **SEE** [c:IO::ConsoleMode]
+#%else
+- **SEE** [c:IO::Console::Mode]
+#%end
 
 ### def beep -> self
 
@@ -375,3 +400,147 @@ p IO.console # => #<File:/dev/tty>
 プロセスが端末から切り離された状態で実行すると nil を返します。
 
 戻り値はプラットフォームや環境に依存します。
+
+#%until 4.1
+# class IO::ConsoleMode < Object
+#%else
+# class IO::Console::Mode < Object
+
+alias IO::ConsoleMode
+#%end
+
+端末の入出力モードを表すクラスです。
+
+現在のモードは [m:IO#console_mode] で取得します。`new` でインスタンスを作ることは
+できません。取得したモードは `dup` でコピーできます。
+
+このクラスのメソッドは `self` が保持するモードの値を変更するだけで、端末には
+反映されません。変更したモードを端末に反映するには [m:IO#console_mode=] に渡してください。
+
+#%since 4.1
+Ruby 4.1 で `IO::ConsoleMode` から `IO::Console::Mode` に改名されました。
+旧名の `IO::ConsoleMode` は非推奨の別名として残っていますが、参照すると非推奨の警告が出ます。
+#%end
+
+```ruby
+require "io/console"
+mode = STDIN.console_mode
+noecho = mode.dup
+noecho.echo = false
+STDIN.console_mode = noecho  # エコーバックを無効にする
+begin
+  password = STDIN.gets
+ensure
+  STDIN.console_mode = mode  # 元に戻す
+end
+```
+
+- **SEE** [m:IO#console_mode], [m:IO#console_mode=]
+
+## Instance Methods
+
+### def echo=(flag)
+
+文字入力時のエコーバックを有効にするかどうかを `self` に設定します。
+
+- **param** `flag` -- 真を指定した場合はエコーバックを有効に、偽を指定した場合は無効にします。
+- **SEE** [m:IO#echo=]
+
+#%since 4.1
+### def echo? -> bool
+### def echo -> bool
+
+`self` で文字入力時のエコーバックが有効かどうかを返します。
+
+- **SEE** [m:IO#echo?]
+
+#%end
+#%until 4.1
+### def raw(min: 1, time: 0, intr: false) -> IO::ConsoleMode
+#%else
+### def raw(min: 1, time: 0, intr: false) -> IO::Console::Mode
+#%end
+
+`self` を raw モードに変更したコピーを返します。`self` は変更しません。
+
+キーワード引数の意味は [m:IO#raw] と同じです。
+
+- **param** `min` -- 入力操作 (read) 時に受信したい最小のバイト数を指定します。
+- **param** `time` -- タイムアウトするまでの秒数を指定します。
+- **param** `intr` -- true を指定した場合は、割り込み (interrupt) 、中止 (quit) 、停止 (suspend) の各シグナルを生成する制御文字が有効になります。
+- **raise** `ArgumentError` -- intr に true または false 以外の値を指定した場合に発生します。
+- **SEE** [m:IO#raw]
+
+### def raw!(min: 1, time: 0, intr: false) -> self
+
+`self` を raw モードに変更します。
+
+キーワード引数の意味は [m:IO#raw] と同じです。
+
+- **param** `min` -- 入力操作 (read) 時に受信したい最小のバイト数を指定します。
+- **param** `time` -- タイムアウトするまでの秒数を指定します。
+- **param** `intr` -- true を指定した場合は、割り込み (interrupt) 、中止 (quit) 、停止 (suspend) の各シグナルを生成する制御文字が有効になります。
+- **raise** `ArgumentError` -- intr に true または false 以外の値を指定した場合に発生します。
+- **SEE** [m:IO#raw!]
+
+#%since 4.1
+### def min -> Integer | nil
+
+入力操作 (read) 時に受信したい最小のバイト数(termios の VMIN)を返します。
+
+termios を利用できない環境(Windows)では nil を返します。
+
+- **SEE** [m:IO#raw]
+
+### def min=(min)
+
+入力操作 (read) 時に受信したい最小のバイト数(termios の VMIN)を設定します。
+
+- **param** `min` -- 最小のバイト数を整数で指定します。nil を指定した場合は 1 になります。0 から 255 の範囲外の値を指定した場合は 255 になります。
+
+termios を利用できない環境(Windows)では何もしません。
+
+### def time -> Rational | nil
+
+入力操作 (read) がタイムアウトするまでの秒数(termios の VTIME)を [c:Rational] で返します。
+値は 0.1 秒単位です。
+
+termios を利用できない環境(Windows)では nil を返します。
+
+- **SEE** [m:IO#raw]
+
+### def time=(time)
+
+入力操作 (read) がタイムアウトするまでの秒数(termios の VTIME)を設定します。
+
+- **param** `time` -- 秒数を数値で指定します。0.1 秒単位に切り捨てられ、25.5 秒を超える値は 25.5 秒になります。nil を指定した場合は 0 になります。
+
+termios を利用できない環境(Windows)では何もしません。
+
+### def virtual_terminal_processing? -> bool
+### def virtual_terminal_processing=(enabled)
+
+出力時に仮想端末シーケンス(エスケープシーケンス)を処理するかどうかを返し、または設定します。
+
+このメソッドは Windows でのみ使用できます。
+
+- **param** `enabled` -- 真を指定した場合は処理を有効に、偽を指定した場合は無効にします。
+
+### def wrap_at_eol_output? -> bool
+### def wrap_at_eol_output=(enabled)
+
+出力が行末に達したときに次の行へ折り返すかどうかを返し、または設定します。
+
+このメソッドは Windows でのみ使用できます。
+
+- **param** `enabled` -- 真を指定した場合は折り返しを有効に、偽を指定した場合は無効にします。
+
+#%end
+#%until 4.1
+## Constants
+
+### const VERSION -> String
+
+io/console ライブラリのバージョンを表す文字列です。
+
+#%end
