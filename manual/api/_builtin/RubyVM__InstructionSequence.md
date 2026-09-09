@@ -284,6 +284,77 @@ p RubyVM::InstructionSequence.load_from_binary_extra_data(binary) # => extra_dat
 
 - **SEE** [m:RubyVM::InstructionSequence#to_binary]
 
+#%since 3.3
+### def RubyVM::InstructionSequence.compile_prism(source, file = nil, path = nil, line = 1, options = nil) -> RubyVM::InstructionSequence
+
+引数 source で指定した Ruby のソースコードを構文解析器 Prism でパースしてコンパイルし、
+[c:RubyVM::InstructionSequence] オブジェクトを作成して返します。
+
+[m:RubyVM::InstructionSequence.compile] とは異なり、常に Prism でパースします。
+
+- **param** `source` -- Ruby のソースコードを表す文字列、または開いた File オブジェクトを指定します。
+- **param** `file` -- ファイル名を文字列で指定します。
+- **param** `path` -- 引数 file の絶対パスファイル名を文字列で指定します。
+- **param** `line` -- 引数 source の 1 行目の行番号を指定します。
+- **param** `options` -- コンパイル時のオプションを true、false、[c:Hash] オブジェクトのいずれかで指定します。詳細は
+               [m:RubyVM::InstructionSequence.compile_option=] を参照してください。
+
+```ruby title="例"
+iseq = RubyVM::InstructionSequence.compile_prism("a = 1 + 2")
+p iseq.eval # => 3
+```
+
+- **SEE** [m:RubyVM::InstructionSequence.compile]
+
+### def RubyVM::InstructionSequence.compile_file_prism(file, options = nil) -> RubyVM::InstructionSequence
+
+引数 file で指定した Ruby のソースコードを構文解析器 Prism でパースしてコンパイルし、
+[c:RubyVM::InstructionSequence] オブジェクトを作成して返します。
+
+[m:RubyVM::InstructionSequence.compile_file] とは異なり、常に Prism でパースします。
+
+- **param** `file` -- ファイル名を文字列で指定します。
+- **param** `options` -- コンパイル時のオプションを true、false、[c:Hash] オブジェクトのいずれかで指定します。詳細は
+               [m:RubyVM::InstructionSequence.compile_option=] を参照してください。
+
+```ruby title="例"
+# /tmp/hello.rb
+puts "Hello, world!"
+
+iseq = RubyVM::InstructionSequence.compile_file_prism("/tmp/hello.rb")
+iseq.eval
+# => Hello, world!
+```
+
+- **SEE** [m:RubyVM::InstructionSequence.compile_file]
+
+#%end
+
+#%since 3.4
+### def RubyVM::InstructionSequence.compile_parsey(source, file = nil, path = nil, line = 1, options = nil) -> RubyVM::InstructionSequence
+
+引数 source で指定した Ruby のソースコードを、旧来のパーサ(parse.y)でパースしてコンパイルし、
+[c:RubyVM::InstructionSequence] オブジェクトを作成して返します。
+
+Ruby 3.4 以降、[m:RubyVM::InstructionSequence.compile] は既定でパーサ Prism を使いますが、
+本メソッドは常に parse.y でパースします。
+
+- **param** `source` -- Ruby のソースコードを表す文字列、または開いた File オブジェクトを指定します。
+- **param** `file` -- ファイル名を文字列で指定します。
+- **param** `path` -- 引数 file の絶対パスファイル名を文字列で指定します。
+- **param** `line` -- 引数 source の 1 行目の行番号を指定します。
+- **param** `options` -- コンパイル時のオプションを true、false、[c:Hash] オブジェクトのいずれかで指定します。詳細は
+               [m:RubyVM::InstructionSequence.compile_option=] を参照してください。
+
+```ruby title="例"
+iseq = RubyVM::InstructionSequence.compile_parsey("a = 1 + 2")
+p iseq.eval # => 3
+```
+
+- **SEE** [m:RubyVM::InstructionSequence.compile]
+
+#%end
+
 ## Instance Methods
 
 ### def inspect -> String
@@ -646,3 +717,60 @@ iseq.to_binary("extra_data")
 
 - **SEE** [m:RubyVM::InstructionSequence.load_from_binary]
 - **SEE** [m:RubyVM::InstructionSequence.load_from_binary_extra_data]
+
+### def each_child {|child_iseq| ... } -> self
+
+`self` が直接含む(ネストした)命令シーケンスを、それぞれ引数としてブロックに渡して繰り返します。
+
+繰り返す順序は実装やバージョンによって異なるため、順序に依存すべきではありません。
+
+```ruby title="例"
+def foo
+  bar = -> { 1 }
+  bar.call
+end
+
+iseq = RubyVM::InstructionSequence.of(method(:foo))
+children = []
+iseq.each_child {|child| children << child.label }
+p children # => ["block in foo"]
+```
+
+### def trace_points -> [[Integer, Symbol]]
+
+`self` が表す命令シーケンス内のトレースポイント(イベントが発生しうる位置)の一覧を返します。
+
+配列の要素は `[行番号, イベントを表す Symbol]` という 2 要素の配列です。
+イベントを表す Symbol は `:class`、`:call`、`:b_call`、`:line`、`:end`、`:return`、`:b_return` のいずれかです。
+
+```ruby title="例"
+iseq = RubyVM::InstructionSequence.compile(<<~RUBY)
+  def hello
+    puts "hi"
+  end
+RUBY
+p iseq.trace_points # => [[1, :line]]
+```
+
+#%since 3.1
+### def script_lines -> [String] | nil
+
+`self` が表す命令シーケンスに対応するソースコードの行を配列で返します。記録されていない場合は nil を返します。
+
+配列に含まれる行は `self` の命令シーケンスの範囲に限られず、ソースファイル全体の行です。
+
+記録するには、コンパイルする前に [m:RubyVM.keep_script_lines] を true に設定しておく必要があります。
+
+このメソッドは Ruby 内部での利用、デバッグ、研究のための API です。それ以外の目的で使うべきではありません。将来のバージョンとの互換性も保証されません。
+
+```ruby title="例"
+RubyVM.keep_script_lines = true
+iseq = RubyVM::InstructionSequence.compile("num = 1 + 2\nputs num")
+p iseq.script_lines # => ["num = 1 + 2\n", "puts num"]
+RubyVM.keep_script_lines = false
+```
+
+- **SEE** [m:RubyVM.keep_script_lines]
+
+#%end
+
