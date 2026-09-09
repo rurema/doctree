@@ -696,9 +696,6 @@ time に [c:Time] オブジェクトを渡すと、その時刻で時間切れ�
 - **param** `time` -- キャッシュ破棄の基準時刻
 - **SEE** [m:OpenSSL::SSL::SSLContext#session_cache_mode=]
 
-#%# --- setup -> true
-#%# 内部的に利用されるメソッド
-
 ### def renegotiation_cb -> nil | Proc
 
 ハンドシェイク開始時に呼び出されるコールバックを得ます。
