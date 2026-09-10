@@ -80,6 +80,33 @@ CRC チェックサムの計算に用いるテーブルを配列で返します�
 
 - **SEE** [m:Zlib::Inflate.inflate]
 
+### module_function def gzip(string, level: nil, strategy: nil) -> String
+
+string を gzip 形式に圧縮した文字列を返します。
+
+- **param** `string` -- 圧縮する文字列を指定します。
+- **param** `level` -- 圧縮の水準を整数で指定します。有効な値は [m:Zlib::NO_COMPRESSION], [m:Zlib::BEST_SPEED], [m:Zlib::BEST_COMPRESSION], [m:Zlib::DEFAULT_COMPRESSION] (デフォルト) 及び 0 から 9 の整数です。
+- **param** `strategy` -- 圧縮方法を整数で指定します。有効な値は [m:Zlib::FILTERED], [m:Zlib::HUFFMAN_ONLY], [m:Zlib::DEFAULT_STRATEGY] (デフォルト) 等です。[m:Zlib::Deflate.new] を参照してください。
+
+```ruby
+require 'zlib'
+
+compressed = Zlib.gzip('hoge fuga')
+p Zlib.gunzip(compressed) # => "hoge fuga"
+```
+
+- **SEE** [m:Zlib?.gunzip]
+
+### module_function def gunzip(string) -> String
+
+gzip 形式で圧縮された文字列 string を展開した文字列を返します。[m:Zlib?.gzip] で圧縮したデータを元に戻すために使います。
+
+- **param** `string` -- 展開する、gzip 形式で圧縮された文字列を指定します。
+
+- **raise** `Zlib::GzipFile::Error` -- gzip 形式でないデータを渡した場合などに発生します。
+
+- **SEE** [m:Zlib?.gzip]
+
 ## Constants
 
 ### const VERSION -> String

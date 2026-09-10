@@ -113,6 +113,37 @@ Zlib::GzipReader.open('hoge.gz'){|gz|
 }
 ```
 
+### def Zlib::GzipReader.zcat(io, options = {}) -> String
+### def Zlib::GzipReader.zcat(io, options = {}) {|string| ... } -> nil
+
+io に含まれているすべての gzip ストリームを展開します。io の末尾まで、複数の gzip ストリームが連続して格納されている場合も扱います。gzip ストリームの後ろに gzip 形式以外のデータがあってはいけません。
+
+ブロックが与えられた場合は、展開したストリームごとにブロックを呼び出し、`nil` を返します。ブロックが与えられなかった場合は、すべてのストリームを展開した結果を連結した文字列を返します。
+
+- **param** `io` -- 読み込み元の IO オブジェクトを指定します。
+- **param** `options` -- [m:Zlib::GzipReader.new] に渡すオプションをハッシュで指定します。
+
+```ruby
+require 'zlib'
+
+File.open('multi.gz', 'wb') { |f|
+  f.write(Zlib.gzip('hoge'))
+  f.write(Zlib.gzip('fuga'))
+}
+
+File.open('multi.gz') { |f|
+  p Zlib::GzipReader.zcat(f) # => "hogefuga"
+}
+
+File.open('multi.gz') { |f|
+  Zlib::GzipReader.zcat(f) { |chunk| p chunk }
+}
+# => "hoge"
+# => "fuga"
+```
+
+- **SEE** [m:Zlib::GzipReader.new]
+
 ## Instance Methods
 
 ### def eof -> bool
@@ -777,4 +808,199 @@ gz.close
 
 gzip フォーマットの解析のために読み込んだ余剰のデータを返します。
 gzip ファイルが最後まで解析されていない場合は nil を返します。
+
+### def getbyte -> Integer | nil
+
+IO クラスの同名メソッド[m:IO#getbyte]と同じです。
+
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
+[c:Zlib::GzipFile::Error] 例外が発生します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
+[c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
+[c:Zlib::GzipFile::LengthError] 例外を発生させます。
+
+  - EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [m:Zlib::GzipReader#read],
+    [m:Zlib::GzipReader#gets] メソッド等が nil を返す時。
+  - EOF まで読み込んだ後、[m:Zlib::GzipFile#close] メソッドが
+    呼び出された時。
+  - EOF まで読み込んだ後、[m:Zlib::GzipReader#unused] メソッドが
+    呼び出された時。
+
+- **raise** `Zlib::Error` -- [c:Zlib::Error] を参照
+- **raise** `Zlib::GzipFile::Error` -- [c:Zlib::GzipFile::Error]を参照
+- **raise** `Zlib::GzipFile::NoFooter` -- [c:Zlib::GzipFile::NoFooter]を参照
+- **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
+- **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
+
+```ruby
+require 'zlib'
+
+Zlib::GzipWriter.open('hoge.gz') { |gz| gz.print 'hoge' }
+
+Zlib::GzipReader.open('hoge.gz') { |gz|
+  while b = gz.getbyte
+    puts b
+  end
+}
+# => 104
+# => 111
+# => 103
+# => 101
+```
+
+- **SEE** [m:IO#getbyte]
+
+### def readbyte -> Integer
+
+IO クラスの同名メソッド[m:IO#readbyte]と同じです。
+
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
+[c:Zlib::GzipFile::Error] 例外が発生します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
+[c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
+[c:Zlib::GzipFile::LengthError] 例外を発生させます。
+
+  - EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [m:Zlib::GzipReader#read],
+    [m:Zlib::GzipReader#gets] メソッド等が nil を返す時。
+  - EOF まで読み込んだ後、[m:Zlib::GzipFile#close] メソッドが
+    呼び出された時。
+  - EOF まで読み込んだ後、[m:Zlib::GzipReader#unused] メソッドが
+    呼び出された時。
+
+- **raise** `EOFError` -- EOF に到達したとき発生します。
+- **raise** `Zlib::Error` -- [c:Zlib::Error] を参照
+- **raise** `Zlib::GzipFile::Error` -- [c:Zlib::GzipFile::Error]を参照
+- **raise** `Zlib::GzipFile::NoFooter` -- [c:Zlib::GzipFile::NoFooter]を参照
+- **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
+- **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
+
+```ruby
+require 'zlib'
+
+Zlib::GzipWriter.open('hoge.gz') { |gz| gz.print 'hoge' }
+
+Zlib::GzipReader.open('hoge.gz') { |gz|
+  begin
+    puts gz.readbyte
+  rescue EOFError => err
+    puts err
+    break
+  end while true
+}
+# => 104
+# => 111
+# => 103
+# => 101
+# => end of file reached
+```
+
+- **SEE** [m:IO#readbyte]
+
+### def each_char{|c| ... } -> nil
+### def each_char -> Enumerator
+
+IO クラスの同名メソッド[m:IO#each_char]と同じです。
+
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
+[c:Zlib::GzipFile::Error] 例外が発生します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
+[c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
+[c:Zlib::GzipFile::LengthError] 例外を発生させます。
+
+  - EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [m:Zlib::GzipReader#read],
+    [m:Zlib::GzipReader#gets] メソッド等が nil を返す時。
+  - EOF まで読み込んだ後、[m:Zlib::GzipFile#close] メソッドが
+    呼び出された時。
+  - EOF まで読み込んだ後、[m:Zlib::GzipReader#unused] メソッドが
+    呼び出された時。
+
+- **raise** `Zlib::Error` -- [c:Zlib::Error] を参照
+- **raise** `Zlib::GzipFile::Error` -- [c:Zlib::GzipFile::Error]を参照
+- **raise** `Zlib::GzipFile::NoFooter` -- [c:Zlib::GzipFile::NoFooter]を参照
+- **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
+- **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
+
+```ruby
+require 'zlib'
+
+Zlib::GzipWriter.open('hoge.gz') { |gz| gz.print 'hoge' }
+
+Zlib::GzipReader.open('hoge.gz') { |gz|
+  gz.each_char { |c| print c, ' ' }
+}
+# => h o g e 
+```
+
+- **SEE** [m:IO#each_char]
+
+### def ungetbyte(char) -> nil
+
+IO クラスの同名メソッド[m:IO#ungetbyte]と同じです。
+
+但し、gzip ファイル中にエラーがあった場合 [c:Zlib::Error] 例外や
+[c:Zlib::GzipFile::Error] 例外が発生します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが記録されています。GzipReader オブジェクトは、次の時に展開したデータとフッターの照合を行い、エラーがあった場合は
+[c:Zlib::GzipFile::NoFooter], [c:Zlib::GzipFile::CRCError],
+[c:Zlib::GzipFile::LengthError] 例外を発生させます。
+
+  - EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [m:Zlib::GzipReader#read],
+    [m:Zlib::GzipReader#gets] メソッド等が nil を返す時。
+  - EOF まで読み込んだ後、[m:Zlib::GzipFile#close] メソッドが
+    呼び出された時。
+  - EOF まで読み込んだ後、[m:Zlib::GzipReader#unused] メソッドが
+    呼び出された時。
+
+- **param** `char` -- 読み戻したい 1 バイトを、バイト値(整数)または 1 文字の文字列で指定します。
+
+- **raise** `Zlib::Error` -- [c:Zlib::Error] を参照
+- **raise** `Zlib::GzipFile::Error` -- [c:Zlib::GzipFile::Error]を参照
+- **raise** `Zlib::GzipFile::NoFooter` -- [c:Zlib::GzipFile::NoFooter]を参照
+- **raise** `Zlib::GzipFile::CRCError` -- [c:Zlib::GzipFile::CRCError]を参照
+- **raise** `Zlib::GzipFile::LengthError` -- [c:Zlib::GzipFile::LengthError]を参照
+
+```ruby
+require 'zlib'
+
+Zlib::GzipWriter.open('hoge.gz') { |gz| gz.print 'hoge' }
+
+Zlib::GzipReader.open('hoge.gz') { |gz|
+  b1 = gz.getbyte
+  b2 = gz.getbyte
+  printf "%d -> %d\n", b1, b2
+  gz.ungetbyte(b2)
+  p gz.getbyte
+}
+# => 104 -> 111
+# => 111
+```
+
+- **SEE** [m:IO#ungetbyte]
+
+### def external_encoding -> Encoding
+
+`self` が読み込むデータの外部エンコーディングを返します。[m:Zlib::GzipReader.new] や [m:Zlib::GzipReader.open] の `:external_encoding` オプションや `:encoding` オプションで指定した値を返します。省略した場合はデフォルトの外部エンコーディング([m:Encoding.default_external])を返します。
+
+```ruby
+require 'zlib'
+
+Zlib::GzipWriter.open('hoge.gz') { |gz| gz.print 'hoge' }
+
+Zlib::GzipReader.open('hoge.gz', external_encoding: 'EUC-JP') { |gz|
+  p gz.external_encoding # => #<Encoding:EUC-JP>
+}
+```
+
+- **SEE** [m:IO#external_encoding]
 
