@@ -68,6 +68,50 @@ SOL_SOCKET/SO_LINGER 用の Socket::Option オブジェクトを新たに生成�
 - **param** `onoff` -- 0/1もしくは真偽値
 - **param** `secs` -- 整数値
 
+### def Socket::Option.byte(family, level, optname, integer) -> Socket::Option
+
+1 バイトの整数をデータとして持つ `Socket::Option` オブジェクトを新たに生成し返します。
+
+family, level, optname には Socket::SOL_SOCKET のような整数の他、文字列("SOL_SOCKET", "SOCKET")、シンボル(:SOL_SOCKET, :SOCKET)を指定できます。
+
+- **param** `family` -- ソケットファミリー
+- **param** `level` -- ソケットオプションレベル
+- **param** `optname` -- オプションの名前
+- **param** `integer` -- データ(1 バイトの整数)
+
+```ruby
+require 'socket'
+
+p Socket::Option.byte(:INET, :SOCKET, :KEEPALIVE, 1)
+# => #<Socket::Option: INET SOCKET KEEPALIVE "\x01">
+```
+
+### def Socket::Option.ipv4_multicast_loop(integer) -> Socket::Option
+
+IPPROTO_IP/IP_MULTICAST_LOOP 用の `Socket::Option` オブジェクトを新たに生成し返します。
+
+- **param** `integer` -- データ(整数)
+
+```ruby
+require 'socket'
+
+p Socket::Option.ipv4_multicast_loop(1)
+# => #<Socket::Option: INET IP MULTICAST_LOOP 1>
+```
+
+### def Socket::Option.ipv4_multicast_ttl(integer) -> Socket::Option
+
+IPPROTO_IP/IP_MULTICAST_TTL 用の `Socket::Option` オブジェクトを新たに生成し返します。
+
+- **param** `integer` -- データ(整数)
+
+```ruby
+require 'socket'
+
+p Socket::Option.ipv4_multicast_ttl(10)
+# => #<Socket::Option: INET IP MULTICAST_TTL 10>
+```
+
 ## Instance Methods
 ### def family -> Integer
 
@@ -119,3 +163,25 @@ to_s は過去との互換性のために存在します。
 data に対し [m:String#unpack] を呼び出し、その結果を返します。
 
 このメソッドは過去との互換性のために存在します。
+
+### def byte -> Integer
+
+オプションのデータ(内容)を 1 バイトの整数に変換して返します。
+
+- **raise** `TypeError` -- dataのバイト数が不適切である(sizeof(char)と異なる)場合に発生します
+- **SEE** [m:Socket::Option#data]
+
+### def ipv4_multicast_loop -> Integer
+
+オプションが IPPROTO_IP/IP_MULTICAST_LOOP である場合に、オプションのデータ(内容)を整数に変換して返します。
+
+- **raise** `TypeError` -- family が AF_INET でない、または level/optname が IPPROTO_IP/IP_MULTICAST_LOOP でない場合に発生します
+- **SEE** [m:Socket::Option#data]
+
+### def ipv4_multicast_ttl -> Integer
+
+オプションが IPPROTO_IP/IP_MULTICAST_TTL である場合に、オプションのデータ(内容)を整数に変換して返します。
+
+- **raise** `TypeError` -- family が AF_INET でない、または level/optname が IPPROTO_IP/IP_MULTICAST_TTL でない場合に発生します
+- **SEE** [m:Socket::Option#data]
+
