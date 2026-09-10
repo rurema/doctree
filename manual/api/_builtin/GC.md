@@ -520,6 +520,32 @@ SEGV が起きるでしょう。
 
 - **SEE** [m:GC.compact]
 
+### def GC.verify_internal_consistency -> nil
+
+GC 内部の一貫性を検証します。
+
+デバッグ用のメソッドです。世代別 GC (RGenGC) をサポートしている場合は世代間の一貫性もあわせて検証します。内部に矛盾が見つかった場合はプロセスが異常終了します。
+
+本メソッドは CRuby 以外では動作しません。
+
+```ruby title="例"
+p GC.verify_internal_consistency # => nil
+```
+
+#%since 3.1
+#%until 3.3
+### def GC.using_rvargc? -> bool
+
+実験的機能である Variable Width Allocation (可変長のオブジェクト割り当て) が有効かどうかを返します。
+
+有効な場合は true を、そうでない場合は false を返します。この値はビルド時の設定に依存します。
+
+- **SEE** [m:GC.stat]
+
+#%end
+
+#%end
+
 ## Instance Methods
 
 ### def garbage_collect(full_mark: true, immediate_mark: true, immediate_sweep: true) -> nil
