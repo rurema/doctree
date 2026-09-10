@@ -95,6 +95,50 @@ FIPS モードを明示的に on/off します。
 
 - **SEE** [m:OpenSSL::OPENSSL_FIPS]
 
+### module_function def Digest(name) -> Class
+
+name に対応する [c:OpenSSL::Digest] のサブクラスを返します。
+
+- **param** `name` -- ダイジェストアルゴリズムの名前を表す文字列("MD5" や "SHA256" など)
+- **raise** `NameError` -- name に対応するクラスが無い場合に発生します
+
+```ruby title="例"
+require "openssl"
+
+p OpenSSL.Digest("MD5") # => OpenSSL::Digest::MD5
+```
+
+### module_function def fips_mode -> bool
+
+FIPS モードが現在有効であれば true を返します。
+
+- **SEE** [m:OpenSSL?.fips_mode=]
+
+### module_function def fixed_length_secure_compare(string1, string2) -> bool
+
+長さの等しい文字列同士を、一定時間で比較します。[c:OpenSSL::HMAC] の計算結果同士の比較など、固定長の値を比較する場合に向いています。
+
+比較にかかる時間が入力の値に依存しないようになっているため、比較結果の違いにかかる時間差から内容を推測するタイミング攻撃を防げます。
+
+string1 と string2 が同じ内容であれば true を、長さが等しく内容が異なる場合は false を返します。
+
+- **param** `string1` -- 比較する文字列
+- **param** `string2` -- 比較する文字列
+- **raise** `ArgumentError` -- string1 と string2 の長さが異なる場合に発生します
+
+### module_function def secure_compare(string1, string2) -> bool
+
+文字列同士を、一定時間で比較します。
+
+内部で SHA-256 によるハッシュ化を行ってから比較するため、[m:OpenSSL?.fixed_length_secure_compare] とは異なり、string1 と string2 の長さが異なっていても使えます。
+
+string1 と string2 が同じ内容であれば true を、そうでなければ false を返します。
+
+このメソッドは SHA-256 によるハッシュ化のためのコストがかかります。string1 と string2 の長さが等しいと分かっている場合は、[m:OpenSSL?.fixed_length_secure_compare] を使うほうが高速です。
+
+- **param** `string1` -- 比較する文字列
+- **param** `string2` -- 比較する文字列
+
 ## Constants
 
 ### const VERSION -> String
@@ -127,4 +171,17 @@ Ruby/OpenSSL のバージョンです。
 # class OpenSSL::OpenSSLError < StandardError
 
 すべての OpenSSL 関連の例外クラスのベースとなる例外クラスです。
+
+## Instance Methods
+
+#%since 4.0
+### def errors -> [String]
+
+例外が発生した時点で OpenSSL のエラーキューに残っていたエラー文字列の配列を返します。
+
+配列の要素は文字列で、古いものから新しいものの順に並んでいます。書式は OpenSSL 本体やこのライブラリのバージョンによって変わることがあります。
+
+[m:OpenSSL?.debug] を true にしておくと、同じ内容が標準エラー出力にも出力されます。
+
+#%end
 

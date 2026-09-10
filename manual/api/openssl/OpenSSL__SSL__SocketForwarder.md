@@ -65,3 +65,84 @@ close していたら true を返します。
 
 - **param** `bool` -- 真で逆引きを抑制します
 
+### def fileno -> Integer
+
+ラップされているソケットのファイル記述子を表す整数を返します。
+
+[m:IO#fileno] と同様です。
+
+#%since 3.4
+### def close_on_exec=(bool)
+
+ラップされているソケットに close-on-exec フラグを設定します。
+
+[m:IO#close_on_exec=] と同様です。
+
+- **param** `bool` -- 設定する close-on-exec フラグを true か false で指定します
+
+#%end
+
+#%since 3.4
+### def close_on_exec? -> bool
+
+ラップされているソケットに close-on-exec フラグが設定されていれば true を返します。
+
+[m:IO#close_on_exec?] と同様です。
+
+#%end
+
+#%since 3.4
+### def local_address -> Addrinfo
+
+ラップされているソケットのローカルアドレス情報を [c:Addrinfo] オブジェクトとして返します。
+
+[m:BasicSocket#local_address] と同様です。
+
+#%end
+
+#%since 3.4
+### def remote_address -> Addrinfo
+
+ラップされているソケットの接続先相手のアドレス情報を [c:Addrinfo] オブジェクトとして返します。
+
+[m:BasicSocket#remote_address] と同様です。
+
+#%end
+
+#%since 3.4
+### def timeout -> Numeric | nil
+### def timeout=(numeric)
+
+ラップされているソケットに設定されている入出力のタイムアウトを秒単位で取得・設定します。
+
+[m:IO#timeout], [m:IO#timeout=] と同様です。
+
+- **param** `numeric` -- タイムアウトの秒数。nil を指定するとタイムアウトを解除します
+
+#%end
+
+#%since 3.4
+### def wait(events, timeout = nil) -> Integer | nil
+### def wait(timeout = nil) -> bool | self | nil
+### def wait_readable(timeout = nil) -> bool | self | nil
+
+ラップされているソケットが指定したイベント(省略時は読み込み可能)の状態になるまでブロックします。
+
+引数はそのまま [m:IO#wait] と [m:IO#wait_readable] に渡されます。返り値もそれらと同じです。
+
+- **param** `events` -- 待つイベントを [m:IO#wait] と同じ形式で指定します
+- **param** `timeout` -- タイムアウトまでの秒数を指定します
+
+#%end
+
+#%since 3.4
+### def wait_writable(timeout = nil) -> self | nil
+
+ラップされているソケットが書き込み可能になるまでブロックします。
+
+引数はそのまま [m:IO#wait_writable] に渡されます。返り値も同じです。
+
+- **param** `timeout` -- タイムアウトまでの秒数を指定します
+
+#%end
+

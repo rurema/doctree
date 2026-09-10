@@ -367,6 +367,76 @@ private exponent を設定します。
 鍵が公開鍵の場合、[m:OpenSSL::PKey::RSA#d]
 のように公開鍵が持っていない値は 0 になります。
 
+### def set_key(n, e, d) -> self
+
+n, e, d を `self` に設定します。
+
+- **param** `n` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **param** `e` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **param** `d` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **raise** `OpenSSL::PKey::PKeyError` -- OpenSSL 3.0 以降とリンクされている場合に発生します。鍵オブジェクトが変更不可(immutable)になるため、このメソッドは利用できません
+- **SEE** [m:OpenSSL::PKey::RSA#n], [m:OpenSSL::PKey::RSA#e], [m:OpenSSL::PKey::RSA#d]
+
+### def set_factors(p, q) -> self
+
+p, q を `self` に設定します。
+
+- **param** `p` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **param** `q` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **raise** `OpenSSL::PKey::PKeyError` -- OpenSSL 3.0 以降とリンクされている場合に発生します。鍵オブジェクトが変更不可(immutable)になるため、このメソッドは利用できません
+- **SEE** [m:OpenSSL::PKey::RSA#p], [m:OpenSSL::PKey::RSA#q]
+
+### def set_crt_params(dmp1, dmq1, iqmp) -> self
+
+dmp1, dmq1, iqmp を `self` に設定します。それぞれ `d mod (p - 1)`、`d mod (q - 1)`、`q^(-1) mod p` として計算される値です。
+
+- **param** `dmp1` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **param** `dmq1` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **param** `iqmp` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **raise** `OpenSSL::PKey::PKeyError` -- OpenSSL 3.0 以降とリンクされている場合に発生します。鍵オブジェクトが変更不可(immutable)になるため、このメソッドは利用できません
+- **SEE** [m:OpenSSL::PKey::RSA#dmp1], [m:OpenSSL::PKey::RSA#dmq1], [m:OpenSSL::PKey::RSA#iqmp]
+
+### def sign_pss(digest, data, salt_length:, mgf1_hash:) -> String
+
+RSA-PSS (Probabilistic Signature Scheme) を使って data に署名し、計算した署名を返します。
+
+エラーが発生した場合は [c:OpenSSL::PKey::PKeyError] が発生します。
+
+検証には [m:OpenSSL::PKey::RSA#verify_pss] を使います。
+
+- **param** `digest` -- 利用するメッセージダイジェストアルゴリズムの名前を表す文字列
+- **param** `data` -- 署名するデータの文字列
+- **param** `salt_length` -- ソルトの長さ(オクテット単位)です。特別な値として、ダイジェストの長さを意味する `:digest` と、秘密鍵と選択したメッセージダイジェストアルゴリズムの組み合わせで可能な最大の長さを意味する `:max` が指定できます
+- **param** `mgf1_hash` -- MGF1(サポートされているマスク生成関数(MGF))で使うハッシュアルゴリズム
+- **raise** `OpenSSL::PKey::PKeyError` -- エラーが発生した場合に発生します
+- **SEE** [m:OpenSSL::PKey::RSA#verify_pss]
+
+```ruby
+require "openssl"
+data = "Sign me!"
+pkey = OpenSSL::PKey::RSA.generate(2048)
+signature = pkey.sign_pss("SHA256", data, salt_length: :max, mgf1_hash: "SHA256")
+pub_key = OpenSSL::PKey.read(pkey.public_to_der)
+p pub_key.verify_pss("SHA256", signature, data, salt_length: :auto, mgf1_hash: "SHA256") # => true
+```
+
+### def verify_pss(digest, signature, data, salt_length:, mgf1_hash:) -> bool
+
+RSA-PSS を使って data の署名を検証します。
+
+署名が正しい場合は true を、そうでない場合は false を返します。エラーが発生した場合は [c:OpenSSL::PKey::PKeyError] が発生します。
+
+署名の生成については [m:OpenSSL::PKey::RSA#sign_pss] を参照してください。
+
+- **param** `digest` -- 利用するメッセージダイジェストアルゴリズムの名前を表す文字列
+- **param** `signature` -- 検証する署名の文字列
+- **param** `data` -- 署名されたデータの文字列
+- **param** `salt_length` -- ソルトの長さ(オクテット単位)です。特別な値として、ダイジェストの長さを意味する `:digest` と、署名をもとに長さを自動的に決定することを意味する `:auto` が指定できます
+- **param** `mgf1_hash` -- MGF1 で使うハッシュアルゴリズム
+- **return** -- 署名が正しい場合は true、そうでない場合は false
+- **raise** `OpenSSL::PKey::PKeyError` -- エラーが発生した場合に発生します
+- **SEE** [m:OpenSSL::PKey::RSA#sign_pss]
+
 ## Constants
 
 ### const PKCS1_PADDING -> Integer

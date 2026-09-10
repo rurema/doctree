@@ -39,6 +39,14 @@ filename を省略した場合は空のオブジェクトが生成されます�
 
 - **param** `str` -- 設定ファイルデータ
 
+### def OpenSSL::Config.parse_config(io) -> {String => {String => String}}
+
+io から設定データを読み込んでパースし、その内容全体を Hash として返します。
+
+返り値はセクション名をキーとし、それぞれのセクション内のキーと値の組を表す Hash を値とする Hash です。
+
+- **param** `io` -- 設定データ(文字列または File などの IO オブジェクト)
+
 ## Instance Methods
 
 ### def get_value(section, name) -> String | nil
@@ -90,15 +98,20 @@ hashtbl に含まれていないキーに対応する情報は変更されませ
 - **param** `sec` -- セクションを表す文字列
 - **param** `hashtbl` -- 設定する情報のハッシュ
 
+#%end
 ### def [](sec) -> {String => String}
+#%until 3.1
 ### def section(sec) -> {String => String}
+#%end
 
 指定したセクションの設定情報をハッシュで返します。
 
 ハッシュのキーが設定情報のキー、ハッシュの値が対応する情報となります。
 
+#%until 3.1
 section は obsolete です。[] を使ってください。
 
+#%end
 - **param** `sec` -- セクションを表す文字列
 
 ### def sections -> [String]
@@ -109,7 +122,6 @@ section は obsolete です。[] を使ってください。
 
 オブジェクトに含まれる設定情報を OpenSSL の設定ファイルの形式で出力します。
 
-#%end
 ### def each {|section, key, value| ... } -> self
 
 オブジェクトに含まれる全ての設定情報を順にブロックに渡し呼び出します。

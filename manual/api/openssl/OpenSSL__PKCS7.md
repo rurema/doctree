@@ -368,6 +368,13 @@ DER 形式のバイナリ列に変換します。
 
 これは暗号化した場合のみ意味があります。
 
+#%since 3.4
+### def to_text -> String
+
+`self` の内容を人間が読める形式に変換した文字列を返します。
+
+#%end
+
 ## Constants
 
 ### const DETACHED -> Integer

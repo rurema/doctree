@@ -226,6 +226,29 @@ chain には検証したい証明書の証明書チェイン全体を
 
 - **raise** `OpenSSL::X509::StoreError` -- 読み込みに失敗した場合に発生します
 
+#%since 4.1
+### def flags -> Integer
+
+証明書チェイン検証に使われるフラグを返します。
+
+- **SEE** [m:OpenSSL::X509::Store#flags=]
+
+#%end
+
+#%since 4.1
+### def clear_flags(flags = nil)
+
+証明書チェイン検証に使われるフラグをクリアします。
+
+flags を省略した場合は、設定されているフラグをすべてクリアします。
+
+[m:OpenSSL::X509::Store#flags=] は既存のフラグに OR で追加するだけで置き換えないため、フラグを設定し直したい場合は先にこのメソッドを呼んでクリアしてください。
+
+- **param** `flags` -- クリアするフラグ(整数)。省略した場合はすべてのフラグをクリアします
+- **SEE** [m:OpenSSL::X509::Store#flags=]
+
+#%end
+
 # class OpenSSL::X509::StoreError < OpenSSL::OpenSSLError
 
 [c:OpenSSL::X509::Store] 関連のエラーを表す例外クラスです。

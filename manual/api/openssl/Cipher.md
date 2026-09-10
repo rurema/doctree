@@ -269,6 +269,68 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 
 暗号化アルゴリズムの名前を文字列で返します。
 
+### def auth_data=(data)
+
+認証付き暗号(AEAD)の追加認証データ(AAD、associated data とも呼ばれます)を設定します。
+
+このデータ自体は暗号化されませんが、認証タグの計算に含まれ、暗号文の完全性の検証に使われます。
+
+このメソッドは [m:OpenSSL::Cipher#key=] と [m:OpenSSL::Cipher#iv=] を呼んだ後、[m:OpenSSL::Cipher#update] で暗号化・復号を始める前に呼ぶ必要があります。暗号モードによっては、その前に `auth_tag_len=` や `ccm_data_len=` の呼び出しが必要になることもあります。
+
+- **param** `data` -- 追加認証データ
+- **raise** `OpenSSL::Cipher::CipherError` -- AEAD に対応していない暗号で呼び出した場合に発生します
+
+### def auth_tag(tag_len = 16) -> String
+### def auth_tag=(string)
+
+認証付き暗号(AEAD)の認証タグを取得・設定します。
+
+`auth_tag` は [m:OpenSSL::Cipher#final] で暗号化を確定させた後に呼び出し、生成された認証タグを取得します。返り値は tag_len バイトの文字列です。暗号モードによっては、暗号化を始める前に `auth_tag_len=` で長さをあらかじめ指定しておく必要があります。
+
+`auth_tag=` は、復号時に暗号文の完全性を検証するための認証タグを設定します。[m:OpenSSL::Cipher#final] を呼ぶ前に設定しておく必要があります。CCM モードや OCB モードでは、復号を始める前に `auth_tag_len=` でタグの長さを設定しておく必要があります。
+
+- **param** `tag_len` -- 取得する認証タグの長さ(バイト数)
+- **param** `string` -- 設定する認証タグ
+- **raise** `OpenSSL::Cipher::CipherError` -- この暗号方式が認証タグに対応していない場合に発生します
+
+### def auth_tag_len=(integer)
+
+認証付き暗号(AEAD)で生成される認証タグの長さを設定します。
+
+CCM モードや OCB モードなど、暗号化・復号を始める前にタグの長さを指定しておく必要がある一部の AEAD 暗号で使います。CCM モードと OCB モードでは、[m:OpenSSL::Cipher#iv=] を設定するより前にこのメソッドを呼び出す必要があります。
+
+- **param** `integer` -- 認証タグの長さ(バイト数)
+- **raise** `OpenSSL::Cipher::CipherError` -- AEAD に対応していない暗号で呼び出した場合に発生します
+- **SEE** [m:OpenSSL::Cipher#auth_tag]
+
+### def authenticated? -> bool
+
+`self` が認証付き暗号(AEAD)のモードであれば true を返します。
+
+#%since 3.1
+### def ccm_data_len=(integer)
+
+CCM モードで、[m:OpenSSL::Cipher#update] が処理する平文・暗号文全体の長さを設定します。
+
+[m:OpenSSL::Cipher#key=] と [m:OpenSSL::Cipher#iv=] を設定した後、`auth_data=` や [m:OpenSSL::Cipher#update] を呼ぶより前に呼び出してください。
+
+CCM モードの暗号でのみ使用できます。
+
+- **param** `integer` -- 処理するデータ全体の長さ(バイト数)
+- **raise** `OpenSSL::Cipher::CipherError` -- 設定に失敗した場合に発生します
+
+#%end
+
+### def iv_len=(integer)
+
+認証付き暗号(AEAD)で、IV(nonce)の長さを変更します。
+
+可変長の IV に対応した AEAD 暗号において、OpenSSL のデフォルトと異なる長さの IV を使いたい場合に、[m:OpenSSL::Cipher#iv=] を呼ぶ前に使用します。
+
+- **param** `integer` -- IV の長さ(バイト数)
+- **raise** `OpenSSL::Cipher::CipherError` -- AEAD に対応していない暗号で呼び出した場合に発生します
+- **SEE** [m:OpenSSL::Cipher#iv_len]
+
 # class OpenSSL::Cipher::Cipher < OpenSSL::Cipher
 
 このクラスは互換性のために存在します。

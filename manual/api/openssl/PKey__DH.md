@@ -116,16 +116,6 @@ DH オブジェクトを生成します。
 
 - **param** `bn` -- 相手の公開鍵(OpenSSL::BN)
 
-#%# --- public?
-#%# #@todo
-#%#
-#%# 公開鍵を持っているかどうか判定します。
-#%#
-#%# --- private?
-#%# #@todo
-#%#
-#%# 秘密鍵を持っているかどうか判定します。
-
 ### def to_text -> String
 
 鍵パラメータを人間が読める形式に変換します。
@@ -143,11 +133,6 @@ DH オブジェクトを生成します。
 ### def to_der -> String
 
 鍵パラメータをDER 形式に変換します。
-
-#%# --- public_key
-#%# #@todo
-#%#
-#%# 公開鍵を複製して DH オブジェクトとして返します。
 
 ### def params_ok? -> bool
 
@@ -262,6 +247,66 @@ DH 鍵共有プロトコルの秘密鍵を設定します。
      [m:OpenSSL::PKey::DH#generate_key!]
 
 #%end
+
+### def public? -> bool
+
+`self` が公開鍵を保持しているかどうかを判定します。
+
+公開鍵は [m:OpenSSL::PKey::DH#pub_key] で取得できます。
+
+- **SEE** [m:OpenSSL::PKey::DH#pub_key]
+
+### def private? -> bool
+
+`self` が秘密鍵を保持しているかどうかを判定します。
+
+秘密鍵は [m:OpenSSL::PKey::DH#priv_key] で取得できます。
+
+- **SEE** [m:OpenSSL::PKey::DH#priv_key]
+
+### def public_key -> OpenSSL::PKey::DH
+
+`self` の鍵パラメータ(p, g)だけを持つ新しい DH インスタンスを返します。
+
+メソッド名に反して、返り値のオブジェクトは鍵パラメータのみを持ち、公開鍵(pub_key)は含まれません。
+
+このメソッドは後方互換性のために提供されています。多くの場合、このメソッドを呼ぶ必要はありません。公開鍵をシリアライズしたい場合は [m:OpenSSL::PKey::PKey#public_to_pem] や [m:OpenSSL::PKey::PKey#public_to_der] を使ってください。
+#%since 3.1
+パラメータを保持したまま鍵対を再生成したい場合は [m:OpenSSL::PKey?.generate_key] の利用を検討してください。
+#%end
+
+```ruby
+require "openssl"
+dh1 = OpenSSL::PKey::DH.generate(2048)
+p dh1.priv_key.class # => OpenSSL::BN
+dhcopy = dh1.public_key
+p dhcopy.priv_key # => nil
+```
+
+### def q -> OpenSSL::BN
+
+DH 鍵共有プロトコルの鍵パラメータ q を返します。
+
+- **SEE** [m:OpenSSL::PKey::DH#set_pqg]
+
+### def set_pqg(p, q, g) -> self
+
+p, q, g を `self` に設定します。
+
+- **param** `p` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **param** `q` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **param** `g` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **raise** `OpenSSL::PKey::PKeyError` -- OpenSSL 3.0 以降とリンクされている場合に発生します。鍵オブジェクトが変更不可(immutable)になるため、このメソッドは利用できません
+- **SEE** [m:OpenSSL::PKey::DH#p], [m:OpenSSL::PKey::DH#q], [m:OpenSSL::PKey::DH#g]
+
+### def set_key(pub_key, priv_key) -> self
+
+pub_key と priv_key を `self` に設定します。
+
+- **param** `pub_key` -- 設定する [c:OpenSSL::BN] オブジェクト
+- **param** `priv_key` -- 設定する [c:OpenSSL::BN] オブジェクトです。nil でもかまいません
+- **raise** `OpenSSL::PKey::PKeyError` -- OpenSSL 3.0 以降とリンクされている場合に発生します。鍵オブジェクトが変更不可(immutable)になるため、このメソッドは利用できません
+- **SEE** [m:OpenSSL::PKey::DH#pub_key], [m:OpenSSL::PKey::DH#priv_key]
 
 # class OpenSSL::PKey::DHError < OpenSSL::PKey::PKeyError
 

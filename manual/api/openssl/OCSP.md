@@ -374,6 +374,25 @@ TRUSTOTHER を有効にすると certs で指定した証明書を検証せず�
 - **param** `store` -- 検証に用いる証明書ストア([c:OpenSSL::X509::Store] オブジェクト)
 - **param** `flags` -- フラグ(整数)
 
+### def find_response(certificate_id) -> OpenSSL::OCSP::SingleResponse | nil
+
+certificate_id に CertId が一致する `OpenSSL::OCSP::SingleResponse` を返します。
+
+一致するものが無い場合は nil を返します。
+
+- **param** `certificate_id` -- 検索対象の [c:OpenSSL::OCSP::CertificateId] オブジェクト
+- **SEE** [m:OpenSSL::OCSP::BasicResponse#responses]
+
+### def responses -> [OpenSSL::OCSP::SingleResponse]
+
+`self` が保持している `OpenSSL::OCSP::SingleResponse` の配列を返します。
+
+- **SEE** [m:OpenSSL::OCSP::BasicResponse#find_response]
+
+### def to_der -> String
+
+DER 形式のバイト列に変換します。
+
 # class OpenSSL::OCSP::CertificateId < Object
 
 失効状態を問い合わせたい個々の証明書を識別するためのクラスです。
@@ -417,6 +436,26 @@ subject には問合せ対象の証明書を、issuerにはsubjectのissuer(発�
 証明書の識別番号を返します。
 
 - **SEE** [m:OpenSSL::X509::Certificate#serial]
+
+### def hash_algorithm -> String
+
+issuerNameHash と issuerKeyHash の算出に使われたハッシュアルゴリズムの名前(ロングネーム)を返します。
+
+### def issuer_key_hash -> String
+
+この CertificateId の issuerKeyHash(発行者の公開鍵のハッシュ値)を16進文字列で返します。
+
+- **SEE** [m:OpenSSL::OCSP::CertificateId#issuer_name_hash]
+
+### def issuer_name_hash -> String
+
+この CertificateId の issuerNameHash(発行者の識別名のハッシュ値)を16進文字列で返します。
+
+- **SEE** [m:OpenSSL::OCSP::CertificateId#issuer_key_hash]
+
+### def to_der -> String
+
+DER 形式のバイト列に変換します。
 
 # class OpenSSL::OCSP::Request < Object
 
@@ -517,6 +556,12 @@ TRUSTOTHER を有効にすると certs で指定した証明書を検証せず�
 - **param** `certs` -- 検証に用いる追加的な証明書([c:OpenSSL::X509::Certificate] オブジェクトの配列)
 - **param** `store` -- 検証に用いる証明書ストア([c:OpenSSL::X509::Store] オブジェクト)
 - **param** `flags` -- フラグ(整数)
+
+### def signed? -> bool
+
+Request オブジェクトが署名されていれば true を返します。
+
+署名の妥当性はチェックしません。署名を検証するには [m:OpenSSL::OCSP::Request#verify] を使ってください。
 
 # class OpenSSL::OCSP::Response < Object
 

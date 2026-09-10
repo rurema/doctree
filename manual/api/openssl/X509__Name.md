@@ -130,6 +130,22 @@ OpenSSL 0.9.8 と互換な古い方式のハッシュ関数のハッシュ値を
 
 内部では OpenSSL の X509_NAME_hash_old を呼び出します。
 
+### def to_utf8 -> String
+
+識別名(Distinguished Name)を UTF-8 の文字列で返します。
+
+[RFC:2253] で定められた形式で、[m:OpenSSL::X509::Name#to_s] に [m:OpenSSL::X509::Name::RFC2253] を渡した場合と同様の書式になりますが、返される文字列のエンコーディングは常に UTF-8 になります。
+
+[m:OpenSSL::X509::Name#to_s] の利用は推奨されていないため、代わりにこのメソッドを使ってください。
+
+```ruby title="例"
+require "openssl"
+
+n = OpenSSL::X509::Name.parse('/C=JP/ST=Kanagawa/L=Yokohama/O=Example Company/OU=Lab3/CN=foobar/emailAddress=foobar@lab3.example.co.jp')
+p n.to_utf8
+# => "emailAddress=foobar@lab3.example.co.jp,CN=foobar,OU=Lab3,O=Example Company,L=Yokohama,ST=Kanagawa,C=JP"
+```
+
 ## Constants
 
 ### const OBJECT_TYPE_TEMPLATE -> { String => Integer }

@@ -451,6 +451,14 @@ ASN.1 の Set 型の値を表現する Ruby のオブジェクトを生成しま
 - **param** `tagging` -- タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
 - **param** `tag_class` -- タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
+### module_function def EndOfContent -> OpenSSL::ASN1::EndOfContent
+
+End-of-Contents octets (EOC) を表現する `OpenSSL::ASN1::EndOfContent` オブジェクトを生成します。
+
+`OpenSSL::ASN1::EndOfContent.new` と同じです。
+
+indefinite length 形式(不定長形式)でエンコードされた値の終端を表すために使います。
+
 ## Constants
 
 ### const UNIVERSAL_TAG_NAME -> [String]

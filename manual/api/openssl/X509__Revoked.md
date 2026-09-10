@@ -65,6 +65,10 @@ ex を返します。
 - **param** `ex` -- 追加するデータ
 - **raise** `OpenSSL::X509::RevokedError` -- 追加に失敗した場合に発生します
 
+### def to_der -> String
+
+DER 形式のバイト列に変換します。
+
 # class OpenSSL::X509::RevokedError < OpenSSL::OpenSSLError
 
 [c:OpenSSL::X509::Revoked] 関連のエラーが生じたときに発生します。

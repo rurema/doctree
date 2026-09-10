@@ -185,6 +185,24 @@ ex を返します。
 - **param** `ex` -- 追加するデータ
 - **raise** `OpenSSL::X509::CRLError` -- 追加に失敗した場合に発生します
 
+#%since 4.1
+### def by_serial(serial) -> OpenSSL::X509::Revoked | nil
+
+serial に一致するシリアル番号を持つ失効証明書を CRL から探し、一致する [c:OpenSSL::X509::Revoked] を返します。
+
+一致するものが無い場合は nil を返します。
+
+[m:OpenSSL::X509::CRL#revoked] で全体を配列として取得してから探す場合と異なり、ソート済みのデータに対する検索を行うため、大きな CRL に対しても高速かつ省メモリに動作します。
+
+- **param** `serial` -- 検索する証明書のシリアル番号(整数または [c:OpenSSL::BN] オブジェクト)
+
+```text
+crl.by_serial(cert.serial)        # => #<OpenSSL::X509::Revoked ...> または nil
+crl.by_serial(cert.serial)&.time  # => 失効時刻(失効している場合)
+```
+
+#%end
+
 # class OpenSSL::X509::CRLError < OpenSSL::OpenSSLError
 
 [c:OpenSSL::X509::CRL] 関連のエラーが生じたときに発生します。
