@@ -428,6 +428,141 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 - **SEE** GNU Readline ライブラリの rl_get_screen_size 関数
 
+### def Readline.completion_quote_character -> String | nil
+
+補完処理中(completion_proc の中など)に呼び出すと、補完対象の引数をクオートするために使われた文字を返します。引数がクオートされていない場合は `nil` を返します。
+
+補完処理中以外に呼び出した場合は、常に `nil` を返します。
+
+なお、[m:Readline.completer_quote_characters=] が設定されていない場合、このメソッドは常に `nil` を返します。
+
+- **SEE** [m:Readline.completer_quote_characters=]
+
+### def Readline.delete_text(start, length) -> self
+### def Readline.delete_text(range) -> self
+### def Readline.delete_text() -> self
+
+現在の入力行のうち、指定した範囲のテキストを削除します。引数を省略した場合は、入力行全体を削除します。
+
+- **param** `start` -- 削除する範囲の開始位置を整数で指定します。
+- **param** `length` -- 削除する文字数を整数で指定します。
+- **param** `range` -- 削除する範囲を [c:Range] オブジェクトで指定します。
+
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+
+- **SEE** GNU Readline ライブラリの rl_delete_text 関数
+
+### def Readline.emacs_editing_mode? -> bool
+
+Emacs モードが有効であれば真を返します。そうでなければ偽を返します。
+
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+
+- **SEE** [m:Readline.emacs_editing_mode]
+
+### def Readline.insert_text(string) -> self
+
+現在のカーソル位置に文字列 string を挿入します。
+
+- **param** `string` -- 挿入する文字列を指定します。
+
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+
+- **SEE** GNU Readline ライブラリの rl_insert_text 関数
+
+### def Readline.line_buffer -> String
+
+編集中の行全体を返します。 completion_proc の中で、補完要求の文脈を判断するのに便利です。
+
+`Readline.line_buffer` の長さは、GNU Readline の rl_end と同じです。
+
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+
+- **SEE** [m:Readline.point]
+
+### def Readline.point=(pos)
+### def Readline.point -> Integer
+
+編集中の行における現在のカーソル位置のインデックスを設定・取得します。
+
+`Readline.point=` は、カーソル位置のインデックスを pos に設定します。
+
+`Readline.point` は、[m:Readline.line_buffer] における現在のカーソル位置のインデックスを返します。 completion_proc に渡される入力文字列の開始位置に対応する [m:Readline.line_buffer] 中のインデックスは、入力文字列の長さから `Readline.point` を引くことで求められます。
+
+- **param** `pos` -- カーソル位置のインデックスを整数で指定します。
+
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+
+### def Readline.pre_input_hook=(proc)
+### def Readline.pre_input_hook -> Proc | nil
+
+最初のプロンプトが表示された後、readline が入力文字の読み取りを開始する直前に呼び出す [c:Proc] オブジェクト proc を指定・取得します。
+
+`Readline.pre_input_hook=` は、呼び出す [c:Proc] オブジェクト proc を指定します。詳細は GNU Readline の rl_pre_input_hook 変数を参照してください。
+
+`Readline.pre_input_hook` は、指定されている [c:Proc] オブジェクトを返します。デフォルトは `nil` です。
+
+- **param** `proc` -- 呼び出す [c:Proc] オブジェクトを指定します。
+
+- **raise** `ArgumentError` -- proc が call メソッドを持たない場合に発生します。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+
+#%until 3.3
+### def Readline.quoting_detection_proc=(proc)
+### def Readline.quoting_detection_proc -> Proc
+
+ユーザの入力中の文字がエスケープされているかどうかを判定する [c:Proc] オブジェクト proc を指定・取得します。
+
+`Readline.quoting_detection_proc=` は、判定用の [c:Proc] オブジェクト proc を指定します。 proc は、ユーザの入力文字列と、判定対象の文字のインデックスを引数として受け取り、その文字がエスケープされていれば真を返すことを想定しています。
+
+Readline は、[m:Readline.completer_quote_characters=] で指定した文字(クオートされた引数の終わりを判定するため)や、[m:Readline.completer_word_break_characters=] で指定した文字(引数の区切りを判定するため)に対してのみ、この proc を呼び出します。
+
+[m:Readline.completer_quote_characters=] が設定されていない場合、またはユーザの入力に completer_quote_characters に含まれる文字や `\` 文字が含まれない場合、Readline はこの proc を一切使用しません。
+
+`Readline.quoting_detection_proc` は、指定されている [c:Proc] オブジェクトを返します。
+
+- **param** `proc` -- 判定を行う [c:Proc] オブジェクトを指定します。
+
+- **raise** `ArgumentError` -- proc が call メソッドを持たない場合に発生します。
+
+#%end
+
+### def Readline.redisplay -> self
+
+画面の表示を、現在の入力内容を反映した状態に更新します。
+
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+
+- **SEE** GNU Readline ライブラリの rl_redisplay 関数
+
+#%until 3.3
+### def Readline.refresh_line -> nil
+
+現在の入力行をクリアします。
+
+- **SEE** GNU Readline ライブラリの rl_refresh_line 関数
+
+#%end
+
+### def Readline.special_prefixes=(string)
+### def Readline.special_prefixes -> String
+
+単語の区切り文字ではあるものの、補完関数に渡すテキストにはそのまま残しておく文字を指定・取得します。プログラムはこれを使って、どのような補完を行うかを判断できます。例えば、 Bash はシェル変数やホスト名を補完できるように、この値を `"$@"` に設定しています。
+
+- **param** `string` -- 文字列を指定します。
+
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+
+- **SEE** GNU Readline ライブラリの rl_special_prefixes 変数
+
+### def Readline.vi_editing_mode? -> bool
+
+vi モードが有効であれば真を返します。そうでなければ偽を返します。
+
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+
+- **SEE** [m:Readline.vi_editing_mode]
+
 ## Constants
 
 ### const VERSION -> String

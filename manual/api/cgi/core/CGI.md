@@ -48,6 +48,7 @@ params = CGI.parse("query_string")
 #%#nodoc
 
 ### def header(options = "text/html") -> String
+### def http_header(options = "text/html") -> String
 
 HTTP ヘッダを options に従って生成します。 [m:CGI#out] と違い、標準出力には出力しません。
 [m:CGI#out] を使わずに自力で HTML を出力したい場合などに使います。

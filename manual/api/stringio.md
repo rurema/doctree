@@ -692,3 +692,52 @@ p a.string                     # => "aaae"
 自身の各コードポイントに対して繰り返します。
 
 - **SEE** [m:IO#each_codepoint]
+
+#%since 3.3
+### def pread(maxlen, offset) -> String
+### def pread(maxlen, offset, outbuf) -> String
+
+自身の現在の読み込み位置を変更せずに、offset から maxlen バイト読み込んで返します。
+[m:IO#pread] と違いシステムコールを使わないので、常にアトミックです。
+
+- **param** `maxlen` -- 読み込むバイト数を指定します。
+- **param** `offset` -- 読み込み開始位置を先頭からのオフセットで指定します。
+- **param** `outbuf` -- 読み込んだデータを格納する String を指定します。
+
+- **raise** `EOFError` -- offset が末尾以降を指している場合に発生します。
+- **raise** `IOError` -- 自身が読み込み用にオープンされていない場合に発生します。
+
+```ruby title="例"
+require 'stringio'
+
+s = StringIO.new("hello world")
+p s.pread(5, 6)          # => "world"
+buf = String.new
+p s.pread(5, 0, buf)      # => "hello"
+p buf                     # => "hello"
+```
+
+- **SEE** [m:IO#pread]
+
+#%end
+
+### def set_encoding_by_bom -> Encoding | nil
+
+自身の BOM からエンコーディングを設定します。
+
+自身が BOM から始まる場合、BOM を読み進めて外部エンコーディングをセットし、セットしたエンコーディングを返します。
+BOM が見付からなかった場合は nil を返します。
+
+```ruby title="例"
+require 'stringio'
+
+s = StringIO.new("\u{FEFF}abc".b)
+p s.set_encoding_by_bom  # => #<Encoding:UTF-8>
+p s.read                 # => "abc"
+
+s2 = StringIO.new("abc".b)
+p s2.set_encoding_by_bom # => nil
+```
+
+- **SEE** [m:IO#set_encoding_by_bom]
+

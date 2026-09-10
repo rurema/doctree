@@ -61,3 +61,17 @@ RDoc が収集したクラスの内、name で指定した名前のモジュー�
 
 - **param** `val` -- [c:File::Stat] オブジェクトを指定します。
 
+### def display? -> bool
+
+`self` が管理するファイルがテキストファイルであり、かつドキュメントとして表示すべきものである場合に true を返します。
+テキストファイルでない場合は false を返します。
+
+#%until 4.0
+### def last_modified -> Time | nil
+
+`self` が管理するファイルの最終更新日時を返します。取得できなかった場合は nil を返します。
+
+- **SEE** [m:RDoc::TopLevel#file_stat]
+
+#%end
+

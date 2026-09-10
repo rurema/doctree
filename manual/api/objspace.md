@@ -488,3 +488,144 @@ p str.lines.grep(/"type":"SHAPE"/).size
 本メソッドは CRuby 以外では動作しない、実験的なメソッドです。出力のフォーマットは将来のバージョンで変更される可能性があります。
 
 - **SEE** [m:ObjectSpace?.dump], [m:ObjectSpace?.trace_object_allocations_start]
+
+### module_function def count_imemo_objects(result_hash = nil) -> Hash
+
+T_IMEMO の種類ごとにオブジェクトの数を格納したハッシュを返します。T_IMEMO は Ruby のプログラムからは見えない Ruby 内部専用のオブジェクトです。
+
+- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新しくハッシュを作成します。result_hash の内容は上書きされます。プローブ効果を避けるために使用します。
+- **raise** `TypeError` -- result_hash にハッシュ以外を指定した時に発生します。
+
+本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォーマンスやメモリ使用量に興味のある CRuby の開発者向けのものです。
+
+```ruby title="例"
+require 'objspace'
+
+p ObjectSpace.count_imemo_objects
+# => {imemo_ment: 3599, imemo_callcache: 764, imemo_constcache: 245, imemo_env: 29,
+#     imemo_cref: 195, imemo_iseq: 1163, imemo_callinfo: 15}
+# (内容やキーの構成は処理系やバージョン、実行時の状態に依存します)
+```
+
+戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
+
+本メソッドは CRuby 以外では動作しません。
+
+### module_function def count_symbols(result_hash = nil) -> Hash
+
+Symbol の種類ごとにオブジェクトの数を格納したハッシュを返します。
+
+- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新しくハッシュを作成します。result_hash の内容は上書きされます。プローブ効果を避けるために使用します。
+- **raise** `TypeError` -- result_hash にハッシュ以外を指定した時に発生します。
+
+戻り値のキーの意味は以下の通りです。
+
+- **`mortal_dynamic_symbol`**:
+  ガベージコレクションの対象になる Symbol の数です。
+- **`immortal_dynamic_symbol`**:
+  動的に確保されましたが、ガベージコレクションの対象にはならない Symbol の数です。
+- **`immortal_static_symbol`**:
+  動的な確保を経ずに存在し、ガベージコレクションの対象にもならない Symbol の数です。
+- **`immortal_symbol`**:
+  `immortal_dynamic_symbol` と `immortal_static_symbol` の合計です。
+
+本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォーマンスやメモリ使用量に興味のある CRuby の開発者向けのものです。
+
+```ruby title="例"
+require 'objspace'
+
+p ObjectSpace.count_symbols
+# => {mortal_dynamic_symbol: 0, immortal_dynamic_symbol: 3,
+#     immortal_static_symbol: 4482, immortal_symbol: 4485}
+# (内容は処理系やバージョン、実行時の状態に依存します)
+```
+
+戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
+
+本メソッドは CRuby 以外では動作しません。
+
+#%since 3.2
+### module_function def dump_shapes(output: :file, since: 0) -> String | File | IO | nil
+
+Ruby の shape 木(オブジェクトの内部レイアウトを表す情報)の内容を JSON 形式でダンプします。1 行につき 1 shape 分の JSON が出力されます。
+
+- **param** `output` -- ダンプ結果の出力先を指定します。指定できる値は [m:ObjectSpace?.dump] の output と同じです(デフォルトは `:file`)。
+- **param** `since` -- 0 以上の整数を指定します。正の整数を指定した場合、指定した shape_id 以降のシェイプのみをダンプします。現在の shape_id は [m:RubyVM.stat] の `:next_shape_id` で取得できます。デフォルトは 0 です。
+
+```ruby title="例"
+require 'objspace'
+
+str = ObjectSpace.dump_shapes(output: :string)
+puts str.lines.size
+# => 225 (シェイプの状態に依存するため実行するたびに変わります)
+
+puts str.lines.first
+# => {"address":"0x...", "type":"SHAPE", "id":0, "depth":1, "shape_type":"ROOT",
+#     "edges":10, "memsize":320}
+# (address の値は実行するたびに変わります)
+```
+
+- **raise** `ArgumentError` -- output に [m:ObjectSpace?.dump] で指定できる値以外を指定した場合に発生します。
+
+戻り値の内容は完全ではない事に注意してください。この内容はあくまでもヒントとして扱う必要があります。
+
+本メソッドは CRuby 以外では動作しない、実験的なメソッドです。出力のフォーマットは将来のバージョンで変更される可能性があります。
+
+- **SEE** [m:ObjectSpace?.dump], [m:ObjectSpace?.dump_all]
+
+#%end
+
+### module_function def internal_class_of(obj) -> Class | Module
+
+obj の実際のクラスを返します。これは [m:Object#class] が返すクラスとは異なる場合があります。
+
+Ruby は特異クラスや、include したモジュールの iclass のような隠されたクラスをオブジェクトの継承関係に挿入します。[m:Object#class] はこれらを読み飛ばして返しますが、本メソッドは特異クラスなどの隠されたクラスも含めて、最初に見つかったクラスをそのまま返します。
+
+- **param** `obj` -- 実際のクラスを取得したいオブジェクトを指定します。`ObjectSpace::InternalObjectWrapper` オブジェクトを指定することもでき、その場合はラップされている内部オブジェクトのクラスを返します。
+
+```ruby title="例"
+require 'objspace'
+
+s = "x"
+def s.foo; end                      # s に特異クラスを与える
+p s.class                           # => String
+p ObjectSpace.internal_class_of(s)  # => #<Class:#<String:0x...>>
+```
+
+本メソッドをアプリケーションで使用すべきではありません。
+
+本メソッドは CRuby 以外では動作しません。
+
+- **SEE** [m:ObjectSpace?.internal_super_of]
+
+### module_function def internal_super_of(cls) -> Class | Module
+
+cls の直接のスーパークラスを返します。include したモジュールの iclass のような隠されたクラスも読み飛ばさずに返します。
+
+- **param** `cls` -- `Class` または `Module` を指定します。それらをラップした `ObjectSpace::InternalObjectWrapper` オブジェクトを指定することもできます。
+
+[m:Class#superclass] は include したモジュールの iclass を読み飛ばして返しますが、本メソッドは読み飛ばしません。
+
+```ruby title="例"
+require 'objspace'
+
+module M; end
+class A
+  include M
+end
+p A.superclass                       # => Object
+p ObjectSpace.internal_super_of(A)   # => #<InternalObject:0x... T_ICLASS>
+```
+
+本メソッドをアプリケーションで使用すべきではありません。
+
+本メソッドは CRuby 以外では動作しません。
+
+- **SEE** [m:ObjectSpace?.internal_class_of]
+
+### module_function def trace_object_allocations_debug_start -> nil
+
+GC のデバッグ用に、オブジェクト割り当てのトレースを開始します。挙動は [m:ObjectSpace?.trace_object_allocations_start] を呼び出すのと同じですが、あわせて内部的なレポーターを登録します。アプリケーションで "... is T_NONE" のような BUG に遭遇した場合、アプリケーションの先頭で本メソッドを呼んでおくと調査の助けになります。
+
+- **SEE** [m:ObjectSpace?.trace_object_allocations_start], [m:ObjectSpace?.trace_object_allocations_stop]
+
