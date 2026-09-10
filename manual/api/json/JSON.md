@@ -125,6 +125,108 @@ p JSON.state # => JSON::Ext::Generator::State
 #%# 他のメソッドから考えると nodoc のはず。
 #%# --- state=(state)
 
+#%until 4.1
+### def JSON.dump_default_options -> {Symbol => object}
+### def JSON.dump_default_options=(val)
+
+[m:JSON?.dump] が使用するデフォルトのオプションを取得・設定します。
+
+初期値は `{max_nesting: false, allow_nan: true}` です。
+
+#%since 4.0
+Ruby 4.0 では非推奨で、Ruby 4.1 で削除されます。
+
+#%end
+
+- **param** `val` -- デフォルトのオプションとして使用するハッシュを指定します。
+
+```ruby title="例"
+require "json"
+
+p JSON.dump_default_options[:max_nesting] # => false
+p JSON.dump_default_options[:allow_nan]   # => true
+```
+
+- **SEE** [m:JSON?.dump]
+
+#%end
+
+#%until 4.1
+### def JSON.load_default_options -> {Symbol => object}
+### def JSON.load_default_options=(val)
+
+[m:JSON?.load] が使用するデフォルトのオプションを取得・設定します。
+
+初期値は `{allow_nan: true, allow_blank: true, create_additions: nil}` です。
+
+#%since 4.0
+Ruby 4.0 では非推奨で、Ruby 4.1 で削除されます。
+
+#%end
+
+- **param** `val` -- デフォルトのオプションとして使用するハッシュを指定します。
+
+```ruby title="例"
+require "json"
+
+p JSON.load_default_options[:allow_nan]   # => true
+p JSON.load_default_options[:allow_blank] # => true
+```
+
+- **SEE** [m:JSON?.load]
+
+#%end
+
+#%since 3.4
+#%until 4.1
+#%since 3.4
+### def JSON.unsafe_load_default_options -> {Symbol => object}
+### def JSON.unsafe_load_default_options=(val)
+
+`JSON.unsafe_load` が使用するデフォルトのオプションを取得・設定します。
+
+初期値は `{max_nesting: false, allow_nan: true, allow_blank: true, create_additions: true}` です。
+
+#%since 4.0
+Ruby 4.0 では非推奨で、Ruby 4.1 で削除されます。
+
+#%end
+
+- **param** `val` -- デフォルトのオプションとして使用するハッシュを指定します。
+
+```ruby title="例"
+require "json"
+
+p JSON.unsafe_load_default_options[:create_additions] # => true
+```
+
+- **SEE** [m:JSON?.unsafe_load]
+
+#%end
+
+#%end
+
+#%until 4.0
+
+#%end
+### def JSON.iconv(to, from, string) -> String
+
+文字列 string の文字エンコーディングを from から to に変換して返します。
+
+内部的には [m:String#encode] を呼び出しているだけです。
+
+- **param** `to` -- 変換先の文字エンコーディングを文字列で指定します。
+- **param** `from` -- 変換元の文字エンコーディングを文字列で指定します。
+- **param** `string` -- 変換の対象となる文字列を指定します。
+
+```ruby title="例"
+require "json"
+
+p JSON.iconv("UTF-8", "EUC-JP", "test".encode("EUC-JP")) # => "test"
+```
+
+#%end
+
 ## Module Functions
 
 ### module_function def dump(object, io = nil, limit = nil) -> String | IO
@@ -424,6 +526,39 @@ puts JSON.pretty_generate(hash, space: "\t")
 
 #%# nodoc?
 #%# --- recurse_proc(result, &proc) -> object
+
+#%since 3.4
+### module_function def unsafe_load(source, proc = nil, options = nil) -> object
+
+与えられた JSON 形式の文字列を Ruby オブジェクトとしてロードして返します。
+
+[m:JSON?.load] と同様のメソッドですが、こちらは信頼できる入力を読み込むためのメソッドであることを
+名前で明示しています。デフォルトのオプション(`create_additions: true` を含みます)は
+`JSON.unsafe_load_default_options` で変更できます。
+
+source には JSON 形式の文字列だけでなく、to_str, to_io, read のいずれかに応答するオブジェクト
+(File などの [c:IO] や、パスを表すオブジェクトなど) も指定でき、その内容を読み込んだ上で
+内部的に [m:JSON?.parse] を呼び出します。
+
+proc として手続きオブジェクトが与えられた場合は、読み込んだ結果を引数にその手続きを呼び出し、
+その返り値を最終的な結果とします。
+
+- **param** `source` -- JSON 形式の文字列を指定します。他には、to_str, to_io, read メソッドを持つオブジェクトも指定可能です。
+- **param** `proc` -- [c:Proc] オブジェクトを指定します。
+- **param** `options` -- オプションをハッシュで指定します。指定可能なオプションは [m:JSON?.parse] と同様です。
+
+```ruby title="例"
+require "json"
+require "json/add/core"
+
+json = (1..5).to_json
+p JSON.parse(json).class # => Hash
+p JSON.unsafe_load(json) # => 1..5
+```
+
+- **SEE** [m:JSON?.load], [m:JSON?.parse]
+
+#%end
 
 ## Constants
 

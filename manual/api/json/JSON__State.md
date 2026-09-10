@@ -92,12 +92,71 @@ same.class               # => JSON::Ext::Generator::State
 same.indent              # => "\t"
 ```
 
+#%since 4.1
+### def JSON::State.default_sort_keys_proc=(prc)
+
+`sort_keys=` に真を指定したときに使用する、デフォルトの並べ替え用 `Proc` を設定します。
+
+- **param** `prc` -- ハッシュを引数に取り、並べ替えたハッシュを返す `Proc` を指定します。
+
+- **raise** `TypeError` -- `prc` が `Proc` でない場合に発生します。
+
+```ruby title="例"
+require "json"
+
+JSON::State.default_sort_keys_proc = ->(hash) { hash.sort.to_h }
+state = JSON::State.new(sort_keys: true)
+JSON.generate({b: 1, a: 2}, state) # => "{\"a\":2,\"b\":1}"
+```
+
+- **SEE** [m:JSON::State#sort_keys=]
+
+#%end
+
+#%since 3.4
+### def JSON::State.generate(obj, options, io) -> String | IO
+
+`obj` と `options` から一時的な [c:JSON::State] を作成し、それを使って
+`obj` から JSON 形式の文字列を生成します。
+
+- **param** `obj` -- JSON 形式の文字列に変換するオブジェクトを指定します。
+- **param** `options` -- [m:JSON::State.new] に指定するのと同様のオプションをハッシュで指定します。
+           nil を指定した場合、オプション無しで初期化した [c:JSON::State] を使用します。
+- **param** `io` -- 生成した文字列の書き込み先を、write メソッドを持つオブジェクトで指定します。
+           nil を指定した場合は、生成した文字列をそのまま返します。
+- **return** -- `io` を指定しなかった場合は生成した JSON 形式の文字列を返します。
+           `io` を指定した場合は、そこに書き込んだ上で `io` を返します。
+
+```ruby title="例"
+require "json"
+
+JSON::State.generate({b: 1, a: 2}, nil, nil) # => "{\"b\":1,\"a\":2}"
+JSON::State.generate({b: 1, a: 2}, {indent: "  ", object_nl: "\n"}, nil)
+# => "{\n  \"b\":1,\n  \"a\":2\n}"
+```
+
+- **SEE** [m:JSON::State.new], [m:JSON::State#generate]
+
+#%end
+
 ## Public Instance Methods
 
 ### def allow_nan? -> bool
+#%since 3.4
+### def allow_nan=(enable)
+#%end
 
-NaN, Infinity, -Infinity を生成できる場合、真を返します。
+NaN, Infinity, -Infinity を生成できる場合、`allow_nan?` は真を返します。
 そうでない場合は偽を返します。
+
+#%since 3.4
+`allow_nan=` は、NaN, Infinity, -Infinity を生成できるかどうかを設定します。
+#%end
+
+#%since 3.4
+- **param** `enable` -- 真を指定すると NaN, Infinity, -Infinity を生成できるようにします。
+           偽を指定すると生成できないようにします。
+#%end
 
 ```ruby title="例"
 require "json"
@@ -107,6 +166,19 @@ json_state.allow_nan? # => false
 json_state = JSON::State.new(allow_nan: true)
 json_state.allow_nan? # => true
 ```
+
+#%since 3.4
+
+```ruby title="例 allow_nan= を使う"
+require "json"
+
+json_state = JSON::State.new(allow_nan: true)
+json_state.allow_nan? # => true
+json_state.allow_nan = false
+json_state.allow_nan? # => false
+```
+
+#%end
 
 - **SEE** [rfc:4627]
 
@@ -404,9 +476,32 @@ pp json_state.to_h
 ```
 
 ### def ascii_only? -> bool
+#%since 3.4
+### def ascii_only=(enable)
+#%end
 
-ASCII 文字列のみを用いて JSON 形式の文字列を生成する場合に真を返します。
+ASCII 文字列のみを用いて JSON 形式の文字列を生成する場合に `ascii_only?` は真を返します。
 そうでない場合に偽を返します。
+
+#%since 3.4
+`ascii_only=` は、ASCII 文字列のみを用いて JSON 形式の文字列を生成するかどうかを設定します。
+
+- **param** `enable` -- 真を指定すると ASCII 文字列のみを生成するようになります。
+           偽を指定すると、ASCII 以外の文字列もそのまま生成するようになります。
+#%end
+
+#%since 3.4
+
+```ruby title="例"
+require "json"
+
+json_state = JSON::State.new(ascii_only: true)
+JSON.generate(["日本語"], json_state) # => "[\"\\u65e5\\u672c\\u8a9e\"]"
+json_state.ascii_only = false
+JSON.generate(["日本語"], json_state) # => "[\"日本語\"]"
+```
+
+#%end
 
 ### def depth -> Integer
 
@@ -446,3 +541,120 @@ name という名前のメソッドを呼び出し、その戻り値を返しま
 
 オブジェクト obj から有効な JSON 形式の文字列を生成し、その結果を返します。
 有効な JSON 形式の文字列を生成できない場合は、[c:JSON::GeneratorError] 例外が発生します。
+
+#%since 4.0
+### def as_json -> Proc | nil
+### def as_json=(prc)
+
+`strict?` が真のとき、そのままでは JSON 形式の文字列に変換できないオブジェクトを
+変換するために使用する `Proc` を取得・設定します。
+
+設定した `Proc` は、変換できないオブジェクトが現れるたびに、そのオブジェクトと、
+それがハッシュのキーとして使われているかどうかを表す真偽値の 2 引数で呼び出されます。
+`Proc` の返り値が、代わりに JSON 形式の文字列への変換に使われます。
+
+- **param** `prc` -- 変換できないオブジェクトを変換するための `Proc` を指定します。
+
+```ruby title="例"
+require "json"
+
+state = JSON::State.new(strict: true, as_json: ->(obj, is_key) { obj.to_s })
+state.as_json.class             # => Proc
+JSON.generate([1, 2..3], state) # => "[1,\"2..3\"]"
+```
+
+- **SEE** [m:JSON::State#strict]
+
+#%end
+
+#%since 3.3
+### def script_safe -> bool
+### def script_safe? -> bool
+### def script_safe=(enable)
+#%end
+#%until 4.1
+### def escape_slash -> bool
+### def escape_slash? -> bool
+### def escape_slash=(enable)
+#%end
+
+生成する JSON 形式の文字列中のスラッシュ(`/`)をエスケープするかどうかを取得・設定します。
+真を指定すると、スラッシュを `\/` としてエスケープします。
+
+#%since 3.3
+Ruby 3.3 以降は、スラッシュに加えて U+2028, U+2029 もエスケープするようになりました。
+`escape_slash`, `escape_slash?`, `escape_slash=` は、この設定が `script_safe` という
+名前になる前から使われている別名です。Ruby 4.1 で削除されます。
+
+#%end
+
+- **param** `enable` -- 真を指定するとエスケープを有効にします。偽を指定すると無効にします。
+
+```ruby title="例"
+require "json"
+
+state = JSON::State.new(script_safe: true)
+state.script_safe?            # => true
+JSON.generate(["a/b"], state) # => "[\"a\\/b\"]"
+```
+
+#%since 3.3
+### def strict -> bool
+### def strict? -> bool
+### def strict=(enable)
+
+JSON 形式で表現できない型のオブジェクトが現れたときの挙動を取得・設定します。
+
+偽の場合(デフォルト)、JSON 形式で表現できない型のオブジェクトは文字列に変換されて出力されます。
+真の場合、そのようなオブジェクトが現れると [c:JSON::GeneratorError] が発生します。
+
+- **param** `enable` -- 真を指定すると、JSON 形式で表現できない型のオブジェクトが現れたときに
+           例外を発生させるようになります。
+
+- **raise** `JSON::GeneratorError` -- `strict?` が真の状態で、JSON 形式で表現できない
+           型のオブジェクトを変換しようとした場合に発生します。
+
+```ruby title="例"
+require "json"
+
+state = JSON::State.new(strict: true)
+state.strict?                            # => true
+begin
+  JSON.generate([Object.new], state)
+rescue JSON::GeneratorError => e
+  e.message # => "Object not allowed in JSON"
+end
+```
+
+- **SEE** `JSON::State#as_json=`
+
+#%end
+
+#%since 4.1
+### def sort_keys -> bool | Proc
+### def sort_keys=(value)
+
+生成する JSON 形式の文字列で、オブジェクト(ハッシュ)のキーを並べ替えるかどうかを取得・設定します。
+
+`value` に真を指定すると、キーを昇順に並べ替えます。`Proc` を指定すると、
+ハッシュ全体を引数としてその `Proc` を呼び出し、返り値のハッシュをそのままの順序で使用します。
+これにより任意の並べ替えができます。偽を指定すると並べ替えを行いません(デフォルト)。
+
+- **param** `value` -- 真偽値または `Proc` を指定します。
+
+- **raise** `TypeError` -- `value` が真偽値でも `Proc` でもない場合に発生します。
+
+```ruby title="例"
+require "json"
+
+state = JSON::State.new(sort_keys: true)
+JSON.generate({b: 1, a: 2}, state) # => "{\"a\":2,\"b\":1}"
+
+state2 = JSON::State.new(sort_keys: ->(hash) { hash.sort_by { |k, v| -v }.to_h })
+JSON.generate({a: 1, b: 2}, state2) # => "{\"b\":2,\"a\":1}"
+```
+
+- **SEE** [m:JSON::State.default_sort_keys_proc=]
+
+#%end
+

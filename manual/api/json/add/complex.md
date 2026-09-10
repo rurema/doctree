@@ -14,11 +14,6 @@ JSON のオブジェクトから [c:Complex] のオブジェクトを生成し�
 
 ## Public Instance Methods
 
-#%# --- as_json(*args) -> Hash
-#%#
-#%# Returns a hash, that will be turned into a JSON object and
-#%# represent this object.
-
 ### def to_json(*args) -> String
 
 自身を JSON 形式の文字列に変換して返します。
@@ -34,3 +29,28 @@ p (2+3i).to_json # => "{\"json_class\":\"Complex\",\"r\":2,\"i\":3}"
 ```
 
 - **SEE** [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]
+
+#%until 4.1
+### def as_json(*args) -> Hash
+
+`self` を JSON 形式の文字列に変換する際に使う、中間表現となるハッシュに変換して返します。
+[m:Complex#to_json] が内部で使用しています。
+
+ハッシュには、[m:JSON.create_id] をキーとしてクラス名が、`'r'` に実部が、
+`'i'` に虚部が入ります。
+
+- **param** `args` -- 無視されます。
+
+```ruby title="例"
+require 'json/add/complex'
+
+hash = Complex(2, 3).as_json
+hash['json_class'] # => "Complex"
+hash['r']           # => 2
+hash['i']           # => 3
+```
+
+- **SEE** [m:Complex#to_json], [m:Complex.json_create]
+
+#%end
+
