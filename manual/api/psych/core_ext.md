@@ -78,3 +78,31 @@ objects を YAML document として標準出力に出力します。
 このメソッドは irb 上でのみ定義されます。
 
 - **param** `objects` -- YAML document に変換する Ruby のオブジェクト
+
+# reopen Set
+
+## Instance Methods
+
+#%since 4.0
+### def encode_with(coder) -> Psych::Coder
+
+`self` を YAML にダンプするために [m:Psych.dump] などから呼び出されます。
+
+`self` の要素をキー、true を値とするハッシュを組み立て、coder に "hash" というキーで登録します。
+
+Ruby 3.4 までは [c:Set] は Ruby で書かれた通常のオブジェクトであり、この定義がなくても Psych でダンプできていました。Ruby 4.0 から Set は C で実装されたコアクラスになったため、以前と同じ形式でダンプできるようにこのメソッドが定義されています。
+
+- **param** `coder` -- 情報を書き込む Psych::Coder オブジェクト
+- **SEE** [m:Set#each]
+#%end
+
+#%since 4.0
+### def init_with(coder) -> self
+
+[m:Psych.load] などによって YAML から `self` を復元するために呼び出されます。
+
+[m:Set#encode_with] によって coder に登録された要素を取り出し、[m:Set#replace] で `self` の内容をその要素に置き換えます。
+
+- **param** `coder` -- 要素の情報を保持する Psych::Coder オブジェクト
+- **SEE** [m:Set#replace]
+#%end

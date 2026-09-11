@@ -110,3 +110,11 @@ tag directive の配列を設定します。
 
 ルートノードを返します。
 
+### def document? -> bool
+
+常に true を返します。
+
+[c:Psych::Nodes::Node] の同名のメソッドを override しており、`self` が document ノードであることを示します。
+
+- **SEE** [m:Psych::Nodes::Node#document?]
+

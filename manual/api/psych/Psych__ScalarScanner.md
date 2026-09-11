@@ -41,3 +41,13 @@ p scanner.tokenize("12") # =>  12
 文字列を Time オブジェクトに変換します。
 
 - **param** `string` -- 変換文字列
+
+### def parse_int(string) -> Integer
+
+文字列 string を整数に変換して返します。
+
+string に含まれるカンマ(`,`)とアンダースコア(`_`)を取り除いてから [m:Kernel?.Integer] で変換します。
+
+- **param** `string` -- 変換する文字列
+- **raise** `ArgumentError` -- string を整数に変換できないときに発生します
+

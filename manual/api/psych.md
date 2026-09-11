@@ -423,6 +423,143 @@ Ruby のオブジェクトに変換します。
 #%# --- domain_types
 #%# --- domain_types=(val)
 
+### def Psych.safe_load_file(filename) -> object
+
+filename で指定したファイルの内容を安全に YAML ドキュメントとして読み込み、Ruby のオブジェクトに変換します。
+
+オプションは [m:Psych.safe_load] と同じものが指定できます。ファイルが空の場合は fallback オプションで指定した値(デフォルトは nil)を返します。
+
+- **param** `filename` -- 読み込むファイルの名前
+- **raise** `Psych::SyntaxError` -- YAML ドキュメントに文法エラーが発見されたときに発生します
+- **SEE** [m:Psych.safe_load], [m:Psych.load_file]
+
+#%since 4.0
+### def Psych.safe_load_stream(yaml, filename: nil, permitted_classes: [], aliases: false) -> [object]
+### def Psych.safe_load_stream(yaml, filename: nil, permitted_classes: [], aliases: false){|obj| ... } -> nil
+
+複数の YAML ドキュメントを含むデータを、[m:Psych.safe_load] と同様に安全に Ruby のオブジェクトに変換します。
+
+ブロックなしの場合は変換したオブジェクトの配列を返します。
+
+ブロックありの場合は変換した各オブジェクトを引数としてそのブロックを呼び出し、nil を返します。
+
+permitted_classes、aliases の意味は [m:Psych.safe_load] と同じです。
+
+- **param** `yaml` -- YAML ドキュメント(文字列 or IO オブジェクト)
+- **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列
+- **param** `permitted_classes` -- 追加で読み込みを許可するクラスの配列
+- **param** `aliases` -- エイリアスの読み込みを許可するかどうか
+- **raise** `Psych::DisallowedClass` -- yaml に permitted_classes で許可されていないクラスが含まれていたときに発生します
+- **raise** `Psych::BadAlias` -- yaml がエイリアスを含み、かつ aliases が false のときに発生します
+- **SEE** [m:Psych.safe_load], [m:Psych.load_stream]
+
+```ruby title="例"
+require 'psych'
+
+p Psych.safe_load_stream("--- foo\n...\n--- bar\n...") # => ['foo', 'bar']
+
+list = []
+Psych.safe_load_stream("--- foo\n...\n--- bar\n...") do |ruby|
+  list << ruby
+end
+p list # => ['foo', 'bar']
+```
+
+#%end
+
+#%since 3.1
+### def Psych.safe_dump(o, options = {}) -> String
+### def Psych.safe_dump(o, io, options = {}) -> ()
+
+Ruby のオブジェクト o を安全に YAML ドキュメントに変換します。
+
+[m:Psych.dump] と同様の変換を行いますが、デフォルトでは以下のクラスのオブジェクトしか変換しません。
+
+- TrueClass
+- FalseClass
+- NilClass
+- Integer
+- Float
+- String
+- Array
+- Hash
+
+options のキー permitted_classes を指定すると、変換を許可するクラスを追加できます。
+
+```ruby title="permitted_classes に Date を渡した例"
+require 'psych'
+require 'date'
+
+Psych.safe_dump(Date.today, permitted_classes: [Date])
+```
+
+o が permitted_classes で許可されていないクラスのオブジェクトを含む場合は、
+Psych::DisallowedClass 例外が発生します。
+
+io に IO オブジェクトを指定した場合は、変換されたドキュメントがその IO に書き込まれます。
+指定しなかった場合は変換されたドキュメントが文字列としてメソッドの返り値となります。
+
+options でその他に指定できる項目は [m:Psych.dump] と同じです。
+
+- **param** `o` -- 変換するオブジェクト
+- **param** `io` -- 出力先
+- **param** `options` -- 出力オプション(permitted_classes を含む)
+- **raise** `Psych::DisallowedClass` -- o が permitted_classes で許可されていないクラスのオブジェクトを含むときに発生します
+- **SEE** [m:Psych.dump], [m:Psych.safe_load]
+
+#%end
+
+#%since 3.1
+### def Psych.unsafe_load(yaml, filename: nil, fallback: false, symbolize_names: false, freeze: false) -> object
+
+YAML ドキュメント yaml を Ruby のデータ構造(オブジェクト)に変換します。
+
+[m:Psych.load] と異なりクラスの制限を行わず、任意の Ruby オブジェクトに変換します。
+外部から与えられた信頼できない YAML ドキュメントの変換には使わないでください。信頼できないドキュメントには [m:Psych.safe_load] を使ってください。
+
+入力に複数のドキュメントが含まれている場合は、先頭のものを変換して返します。
+
+yaml が空の場合は fallback で指定した値(デフォルトは false)を返します。
+
+filename はパース中に発生した例外のメッセージに用います。
+
+キーワード引数 symbolize_names に true を指定した場合はハッシュのキーを [c:Symbol] に変換して返します。
+
+キーワード引数 freeze に true を指定した場合は再帰的に [m:Object#freeze] したオブジェクトを返します。
+
+- **param** `yaml` -- YAML ドキュメント(文字列 or IO オブジェクト)
+- **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列
+- **param** `fallback` -- 引数 yaml に空の YAML を指定した場合の戻り値。デフォルトは false です
+- **param** `symbolize_names` -- ハッシュのキーを [c:Symbol] に変換するかどうか
+- **param** `freeze` -- true を指定すると再帰的に freeze されたオブジェクトを返します
+- **raise** `Psych::SyntaxError` -- YAML ドキュメントに文法エラーが発見されたときに発生します
+- **raise** `TypeError` -- yaml に nil を指定したときに発生します
+- **SEE** [m:Psych.load], [m:Psych.safe_load]
+
+```ruby title="例"
+require 'psych'
+
+p Psych.unsafe_load("--- a")             # => 'a'
+p Psych.unsafe_load("---\n - a\n - b")   # => ['a', 'b']
+```
+
+#%end
+
+#%since 3.1
+### def Psych.unsafe_load_file(filename) -> object
+
+filename で指定したファイルの内容を [m:Psych.unsafe_load] を使って Ruby のオブジェクトに変換します。
+
+信頼できないファイルの変換には使わないでください。信頼できないファイルには [m:Psych.safe_load_file] を使ってください。
+
+ファイルが空の場合は fallback で指定した値(デフォルトは false)を返します。
+
+- **param** `filename` -- 読み込むファイルの名前
+- **raise** `Psych::SyntaxError` -- YAML ドキュメントに文法エラーが発見されたときに発生します
+- **SEE** [m:Psych.unsafe_load], [m:Psych.safe_load_file], [m:Psych.load_file]
+
+#%end
+
 # class Psych::Exception < RuntimeError
 
 Psych 関連のエラーを表す例外です。

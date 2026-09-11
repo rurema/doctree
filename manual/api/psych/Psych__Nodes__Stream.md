@@ -41,6 +41,14 @@ stream に使われるエンコーディングを指定します。
 - **param** `enc` -- 設定するエンコーディング
 - **SEE** [m:Psych::Nodes::Stream#encoding]
 
+### def stream? -> bool
+
+常に true を返します。
+
+[c:Psych::Nodes::Node] の同名のメソッドを override しており、`self` が stream ノードであることを示します。
+
+- **SEE** [m:Psych::Nodes::Node#stream?]
+
 ## Constants
 ### const ANY -> Integer
 
