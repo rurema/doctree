@@ -590,3 +590,81 @@ x が負ならば最初から x バイト目までの範囲を表します。
 
 #%# internal classes
 #%# = module Net::HTTP::ProxyDelta
+
+### def connection_close? -> bool
+
+`Connection:` ヘッダフィールド (プロクシ経由の場合は `Proxy-Connection:` ヘッダフィールド) が `close` を指定しているかどうかを返します。
+
+```ruby title="例"
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+p req.connection_close? # => false
+req['Connection'] = 'close'
+p req.connection_close? # => true
+```
+
+- **SEE** [m:Net::HTTPHeader#connection_keep_alive?]
+
+### def connection_keep_alive? -> bool
+
+`Connection:` ヘッダフィールド (プロクシ経由の場合は `Proxy-Connection:` ヘッダフィールド) が `keep-alive` を指定しているかどうかを返します。
+
+```ruby title="例"
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+p req.connection_keep_alive? # => false
+req['Connection'] = 'keep-alive'
+p req.connection_keep_alive? # => true
+```
+
+- **SEE** [m:Net::HTTPHeader#connection_close?]
+
+### def set_form(params, enctype = 'application/x-www-form-urlencoded', formopt = {}) -> ()
+
+`POST` や `PUT` リクエストで使うフォームのデータを設定します。
+
+params は配列またはハッシュで指定します。ハッシュの場合は各エントリがフィールドの名前と値の組を表し、値には nil、文字列、(enctype に `'multipart/form-data'` を指定した場合のみ) 読み込み用に開かれた IO ストリームを指定できます。配列の場合は各要素が `[名前]`、`[名前, 値]`、あるいは (enctype が `'multipart/form-data'` の場合) `[名前, IO ストリーム]` や `[名前, IO ストリーム, オプションのハッシュ]` という形のサブ配列です。
+
+enctype には `Content-Type:` ヘッダフィールドに設定する値を指定します。`'application/x-www-form-urlencoded'` (デフォルト) か `'multipart/form-data'` のいずれかでなければなりません。
+
+formopt は enctype が `'multipart/form-data'` のときだけ有効なオプションのハッシュで、`:boundary` (マルチパートメッセージの境界文字列) と `:charset` (フォームの文字コード) を指定できます。
+
+このメソッドを呼ぶと、実際にサーバに送るボディの内容はリクエスト送信時まで生成されないため、呼び出し直後は [m:Net::HTTPGenericRequest#body] は nil のままです。
+
+- **param** `params` -- フォームのデータを配列またはハッシュで指定します。
+- **param** `enctype` -- `Content-Type:` ヘッダフィールドに設定する値を指定します。
+- **param** `formopt` -- enctype が `'multipart/form-data'` のときのオプションです。
+- **raise** `ArgumentError` -- enctype に `'application/x-www-form-urlencoded'`、`'multipart/form-data'` 以外を指定すると発生します。
+
+```ruby title="例"
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Post.new(uri.request_uri)
+req.set_form([['q', 'ruby'], ['lang', 'en']])
+p req.content_type # => "application/x-www-form-urlencoded"
+```
+
+- **SEE** [m:Net::HTTPHeader#set_form_data]
+
+### def to_hash -> {String => [String]}
+
+保持しているヘッダフィールドの名前と値の組をハッシュで返します。
+
+キーはヘッダフィールド名 (小文字)、値はそのフィールドの値からなる配列です。
+
+```ruby title="例"
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri.request_uri)
+p req.to_hash
+# => {"accept-encoding"=>["gzip;q=1.0,deflate;q=0.6,identity;q=0.3"], "accept"=>["*/*"], "user-agent"=>["Ruby"], "host"=>["www.example.com"]}
+```
+
+- **SEE** [m:Net::HTTPHeader#each_header]
+

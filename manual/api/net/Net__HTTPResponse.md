@@ -165,6 +165,95 @@ dest を指定した場合にはボディを少しずつ取得して順次「des
 
 - **SEE** [m:Net::HTTP#request_get]
 
+### def body=(value)
+
+エンティティボディを value に設定します。
+
+- **param** `value` -- 設定するボディを文字列で指定します。
+
+```ruby title="例"
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+response = Net::HTTP.get_response(uri)
+response.body = 'dummy'
+p response.body # => "dummy"
+```
+
+- **SEE** [m:Net::HTTPResponse#body], [m:Net::HTTPResponse#read_body]
+
+#%since 3.2
+### def body_encoding -> Encoding | false
+### def body_encoding=(value)
+
+エンティティボディを読み込む際に使うエンコーディングを取得・設定します。
+
+デフォルトは false で、この場合ボディの内容からエンコーディングが推測されます。
+
+value には [c:Encoding] オブジェクト、またはエンコーディング名を表す文字列を指定できます。文字列を指定した場合は [m:Encoding.find] を使って [c:Encoding] オブジェクトに変換されます。
+
+- **param** `value` -- 使用するエンコーディング ([c:Encoding] オブジェクトまたはその名前を表す文字列)
+
+```ruby title="例"
+require 'net/http'
+
+http = Net::HTTP.new('www.example.com')
+req = Net::HTTP::Get.new('/')
+http.request(req) do |res|
+  res.body_encoding = "UTF-8"
+  p res.body.encoding # => #<Encoding:UTF-8>
+end
+```
+
+#%end
+
+### def decode_content -> bool
+### def decode_content=(bool)
+
+エンティティボディの `Content-Encoding:` を自動的に展開するかどうかを取得・設定します。
+
+ユーザがリクエストヘッダフィールド `Accept-Encoding:` を明示的に設定・削除していなかった場合に、自動的に真が設定されます。真の場合、[m:Net::HTTPResponse#read_body] などでボディを読み込む際に、レスポンスの `Content-Encoding:` が gzip や deflate であればボディを透過的に展開します。
+
+- **param** `bool` -- `Content-Encoding:` を自動的に展開するかどうかを真偽値で指定します。
+- **SEE** [m:Net::HTTPGenericRequest#decode_content]
+
+#%since 3.2
+### def ignore_eof -> bool
+### def ignore_eof=(bool)
+
+`Content-Length:` ヘッダフィールドが指定されたボディを読み込む際に、EOF (End Of File) を無視するかどうかを取得・設定します。
+
+- **param** `bool` -- EOF を無視するかどうかを真偽値で指定します。
+
+```ruby title="例"
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+response = Net::HTTP.get_response(uri)
+response.ignore_eof = false
+p response.ignore_eof # => false
+```
+
+- **SEE** [m:Net::HTTP#ignore_eof]
+
+#%end
+
+### def uri -> URI | nil
+
+このレスポンスの取得に使われた [c:URI] オブジェクトを返します。
+
+リクエストの生成に URI オブジェクトを使わなかった場合は nil を返します。
+
+```ruby title="例"
+require 'net/http'
+
+uri = URI.parse('http://www.example.com/index.html')
+response = Net::HTTP.get_response(uri)
+p response.uri # => #<URI::HTTP http://www.example.com/index.html>
+```
+
+- **SEE** [m:Net::HTTPGenericRequest#uri]
+
 ## Constants
 
 ### const CODE_CLASS_TO_OBJ -> Hash
