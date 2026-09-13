@@ -33,7 +33,7 @@ HTTP のリザルトコードです。例えば '302' などです。
 require 'net/http'
 
 uri = "http://www.example.com/index.html"
-response = Net::HTTP.get_response(URI.parse(uri))
+response = Net::HTTP.get_response(URI(uri))
 p response.code # => "200"
 ```
 
@@ -49,7 +49,7 @@ msg は obsolete です。使わないでください。
 require 'net/http'
 
 uri = "http://www.example.com/index.html"
-response = Net::HTTP.get_response(URI.parse(uri))
+response = Net::HTTP.get_response(URI(uri))
 p response.message # => "OK"
 ```
 
@@ -61,7 +61,7 @@ p response.message # => "OK"
 require 'net/http'
 
 uri = "http://www.example.com/index.html"
-response = Net::HTTP.get_response(URI.parse(uri))
+response = Net::HTTP.get_response(URI(uri))
 p response.http_version # => "1.1"
 ```
 
@@ -78,7 +78,7 @@ p response.http_version # => "1.1"
 require 'net/http'
 
 uri = "http://www.example.com/index.html"
-response = Net::HTTP.get_response(URI.parse(uri))
+response = Net::HTTP.get_response(URI(uri))
 p response.value # => nil
 ```
 
@@ -86,7 +86,7 @@ p response.value # => nil
 require 'net/http'
 
 uri = "http://www.example.com/invalid.html"
-response = Net::HTTP.get_response(URI.parse(uri))
+response = Net::HTTP.get_response(URI(uri))
 begin
   response.value
 rescue => e
@@ -120,7 +120,7 @@ entity は obsolete です。
 require 'net/http'
 
 uri = "http://www.example.com/index.html"
-response = Net::HTTP.get_response(URI.parse(uri))
+response = Net::HTTP.get_response(URI(uri))
 p response.body[0..10] # => "<!doctype h"
 ```
 
@@ -136,14 +136,14 @@ p response.body[0..10] # => "<!doctype h"
 require 'net/http'
 
 uri = "http://www.example.com/index.html"
-response = Net::HTTP.get_response(URI.parse(uri))
+response = Net::HTTP.get_response(URI(uri))
 p response.read_body[0..10] # => "<!doctype h"
 ```
 
 ```ruby title="例2 ブロックを与えて大きいファイルを取得"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/path/to/big.file')
+uri = URI('http://www.example.com/path/to/big.file')
 Net::HTTP.start(uri.host, uri.port) do |http|
   File.open("/path/to/big.file", "w") do |f|
     # Net::HTTP#request_get と Net::HTTPResponse#read_body で少しずつ読み書き。メモリ消費が少ない。

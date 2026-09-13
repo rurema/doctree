@@ -28,7 +28,7 @@ key ヘッダフィールドを返します。
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req['user-agent'] # => Ruby
 ```
@@ -56,7 +56,7 @@ val に nil を与えるとそのフィールドを削除します。
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req['user-agent'] # => Ruby
 req['user-agent'] = "update"
@@ -102,7 +102,7 @@ key は大文字小文字を区別しません。
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 res = Net::HTTP.get_response(uri)
 p res.get_fields('accept-ranges') # => ["none"]
 ```
@@ -131,7 +131,7 @@ key は大文字小文字を区別しません。
 ```ruby title="例 key のみ指定。key が存在する"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req.fetch("user-agent") # => "Ruby"
 ```
@@ -149,7 +149,7 @@ end
 ```ruby title="例 key , default を指定"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req.fetch("content-length", "default") # => "default"
 ```
@@ -157,7 +157,7 @@ p req.fetch("content-length", "default") # => "default"
 ```ruby title="例 key とブロックを指定"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req.fetch("content-length") { |e| 99 } # => 99
 ```
@@ -183,7 +183,7 @@ Authorization: ヘッダを BASIC 認証用にセットします。
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req.basic_auth("user", "pass") # => ["Basic dXNlcjpwYXNz"]
 ```
@@ -198,7 +198,7 @@ Transfer-Encoding: ヘッダフィールドが存在しなかったり、
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req.chunked? # => false
 req["Transfer-Encoding"] = "chunked"
@@ -214,7 +214,7 @@ Content-Type: ヘッダフィールドが存在しない場合には nil を返�
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/comments.cgi?post=comment')
+uri = URI('http://www.example.com/comments.cgi?post=comment')
 req = Net::HTTP::Post.new(uri.request_uri)
 p req.content_type  # => nil
 req.content_type = 'multipart/form-data'
@@ -232,7 +232,7 @@ type と params から Content-Type: ヘッダフィールドの値を設定し�
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req.content_type                        # => nil
 req.content_type = 'multipart/form-data'  # => "multipart/form-data"
@@ -248,7 +248,7 @@ Content-Type: ヘッダフィールドが存在しない場合には nil を返�
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 res = Net::HTTP.get_response(uri)
 p res.main_type # => "text"
 ```
@@ -262,7 +262,7 @@ Content-Type: ヘッダフィールドが存在しない場合には nil を返�
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 res = Net::HTTP.get_response(uri)
 p res.sub_type # => "html"
 ```
@@ -277,7 +277,7 @@ Content-Type: ヘッダフィールドが存在しない場合には空のハッ
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 res = Net::HTTP.get_response(uri)
 p res.type_params # => {"charset"=>"UTF-8"}
 ```
@@ -296,7 +296,7 @@ HTMLのフォームのデータ params からヘッダフィールドとボデ�
 ```ruby title="例 form_data"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req.form_data = {"q" => ["ruby", "perl"], "lang" => "en"} # => {"q"=>["ruby", "perl"], "lang"=>"en"}
 ```
@@ -304,7 +304,7 @@ req.form_data = {"q" => ["ruby", "perl"], "lang" => "en"} # => {"q"=>["ruby", "p
 ```ruby title="例 set_form_data"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req.set_form_data({"q" => "ruby", "lang" => "en"}, ';') # => "application/x-www-form-urlencoded"
 ```
@@ -320,7 +320,7 @@ Content-Length: ヘッダフィールドの表している値を整数で返し�
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req.content_length  # => nil
 req.content_length = 10
@@ -338,7 +338,7 @@ len に nil を与えると Content-Length: ヘッダフィールドを削除し
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req.content_length    # => nil
 req.content_length = 10 # => 10
@@ -355,7 +355,7 @@ Range の表わす長さは [m:Net::HTTPHeader#range_length] で得られます�
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req.content_range    # => nil
 req['Content-Range'] = "bytes 0-499/1234"
@@ -373,7 +373,7 @@ Content-Range: ヘッダフィールドの表している長さを整数で返�
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req['Content-Range'] = "bytes 1-500/1000"
 p req.range_length # => 500
@@ -384,7 +384,7 @@ p req.range_length # => 500
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req['Content-Range'] = "bytes 200-699/1000"
 p req.range_length # => 500
@@ -402,7 +402,7 @@ key ヘッダフィールドを削除します。
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req.content_length = 10
 p req.content_length  # => 10
@@ -421,7 +421,7 @@ val は ", " で連結した文字列がブロックに渡されます。
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req.each_header { |key,value| puts "#{key} = #{value}" }
 
@@ -452,7 +452,7 @@ name.downcase.split(/-/).capitalize.join('-')
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req.each_capitalized_name { |key| puts key }
 
@@ -471,7 +471,7 @@ req.each_capitalized_name { |key| puts key }
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req.each_name { |name| puts name }
 
@@ -489,7 +489,7 @@ req.each_name { |name| puts name }
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req.each_value { |value| puts value }
 
@@ -508,7 +508,7 @@ key は大文字小文字を区別しません。
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 res = Net::HTTP.get_response(uri)
 p res.key?('content-type')   # => true
 p res.key?('nonexist-header')  # => false
@@ -524,7 +524,7 @@ Proxy 認証のために Proxy-Authorization: ヘッダをセットします。
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req.proxy_basic_auth("account", "password") # => ["Basic YWNjb3VudDpwYXNzd29yZA=="]
 ```
@@ -540,7 +540,7 @@ Range: ヘッダの示す範囲を [c:Range] オブジェクトで返します�
 ```ruby title="例 正常な値"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req['range'] = "bytes=1-5"
 p req.range # => [1..5]
@@ -549,7 +549,7 @@ p req.range # => [1..5]
 ```ruby title="例 Net::HTTPHeaderSyntaxError"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 req['range'] = "invalid"
 req.range # ~> Net::HTTPHeaderSyntaxError

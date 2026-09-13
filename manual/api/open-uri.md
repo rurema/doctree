@@ -60,7 +60,7 @@ URI オブジェクトも似たような方法で開けます。
 
 ```ruby
 require 'open-uri'
-uri = URI.parse("http://www.ruby-lang.org/en/")
+uri = URI("http://www.ruby-lang.org/en/")
 uri.open {|f|
   # ...
 }

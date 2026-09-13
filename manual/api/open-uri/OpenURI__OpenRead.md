@@ -48,7 +48,7 @@ self.open(options={}) {|io| io.read } と同じです。
 
 ```ruby
 require 'open-uri'
-uri = URI.parse('http://www.example.com/')
+uri = URI('http://www.example.com/')
 str = uri.read
 p str.is_a?(OpenURI::Meta) # => true
 p str.content_type

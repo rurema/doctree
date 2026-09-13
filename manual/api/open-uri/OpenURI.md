@@ -50,7 +50,7 @@ sio = OpenURI.open_uri('http://www.example.com',
   値には以下のいずれかを与えます。
   ```text
      文字列:           "http://proxy.example.com:8000/" のようなプロクシの URI。
-     URI オブジェクト: URI.parse("http://proxy.example.com:8000/") のようなプロクシの URI オブジェクト。
+     URI オブジェクト: URI("http://proxy.example.com:8000/") のようなプロクシの URI オブジェクト。
      true:             Proxy を環境変数などから見つけようとする。使う環境変数は scheme に応じて
                        http_proxy, https_proxy, ftp_proxy, no_proxy が使われる。
      false:            Proxy を用いない。
@@ -80,7 +80,7 @@ sio = OpenURI.open_uri('http://www.example.com',
      :proxy_http_basic_authentication =>
        ["http://proxy.example.com:8000/", "proxy-user", "proxy-password"]
      :proxy_http_basic_authentication =>
-       [URI.parse("http://proxy.example.com:8000/"), "proxy-user", "proxy-password"]
+       [URI("http://proxy.example.com:8000/"), "proxy-user", "proxy-password"]
   ```
 
 - **`:read_timeout`**:
