@@ -598,8 +598,8 @@ x が負ならば最初から x バイト目までの範囲を表します。
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
-req = Net::HTTP::Get.new(uri.request_uri)
+uri = URI('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri)
 p req.connection_close? # => false
 req['Connection'] = 'close'
 p req.connection_close? # => true
@@ -614,8 +614,8 @@ p req.connection_close? # => true
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
-req = Net::HTTP::Get.new(uri.request_uri)
+uri = URI('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri)
 p req.connection_keep_alive? # => false
 req['Connection'] = 'keep-alive'
 p req.connection_keep_alive? # => true
@@ -643,8 +643,8 @@ formopt は enctype が `'multipart/form-data'` のときだけ有効なオプ�
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
-req = Net::HTTP::Post.new(uri.request_uri)
+uri = URI('http://www.example.com/index.html')
+req = Net::HTTP::Post.new(uri)
 req.set_form([['q', 'ruby'], ['lang', 'en']])
 p req.content_type # => "application/x-www-form-urlencoded"
 ```
@@ -660,8 +660,8 @@ p req.content_type # => "application/x-www-form-urlencoded"
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
-req = Net::HTTP::Get.new(uri.request_uri)
+uri = URI('http://www.example.com/index.html')
+req = Net::HTTP::Get.new(uri)
 p req.to_hash
 # => {"accept-encoding"=>["gzip;q=1.0,deflate;q=0.6,identity;q=0.3"], "accept"=>["*/*"], "user-agent"=>["Ruby"], "host"=>["www.example.com"]}
 ```

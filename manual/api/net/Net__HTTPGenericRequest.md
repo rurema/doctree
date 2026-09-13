@@ -148,7 +148,7 @@ p head.response_body_permitted? # => false
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri)
 p req['Accept-Encoding']    # => "gzip;q=1.0,deflate;q=0.6,identity;q=0.3"
 p req.decode_content         # => true
@@ -169,7 +169,7 @@ p req.decode_content         # => false
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 p Net::HTTP::Get.new(uri).uri            # => #<URI::HTTP http://www.example.com/index.html>
 p Net::HTTP::Get.new('/index.html').uri  # => nil
 ```

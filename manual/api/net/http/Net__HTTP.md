@@ -250,18 +250,20 @@ HTTPS のデフォルトポート (443) を返します。
 
 デフォルトは nil で、この場合 [m:Net::HTTP.new] は組み込みのデフォルト値 (keep_alive_timeout は 2、open_timeout・read_timeout・write_timeout は 60 など) を使います。configuration に指定したハッシュのキーに対応する設定は、以後生成されるすべてのインスタンスのデフォルト値として使われます。
 
-指定できるキーは以下のとおりです。
+指定できるキーと値は以下のとおりです。それぞれ対応するメソッドで設定するのと同じ値を指定します。
 
-- `keep_alive_timeout`
-- `close_on_empty_response`
-- `open_timeout`
-- `read_timeout`
-- `write_timeout`
-- `continue_timeout`
-- `max_retries`
-- `debug_output`
-- `response_body_encoding`
-- `ignore_eof`
+- `keep_alive_timeout` -- コネクションの再利用 (keep-alive) を許可する秒数 ([m:Net::HTTP#keep_alive_timeout=])
+- `close_on_empty_response` -- レスポンスがボディを持っていない場合にコネクションを閉じるかどうかの真偽値 ([m:Net::HTTP#close_on_empty_response=])
+- `open_timeout` -- 接続時に待つ最大秒数 ([m:Net::HTTP#open_timeout=])
+- `read_timeout` -- 読みこみ一回でブロックしてよい最大秒数、または nil ([m:Net::HTTP#read_timeout=])
+- `write_timeout` -- 書き込み一回でブロックしてよい最大秒数、または nil ([m:Net::HTTP#write_timeout=])
+- `continue_timeout` -- 「100 Continue」レスポンスを待つ秒数、または nil ([m:Net::HTTP#continue_timeout=])
+- `max_retries` -- 冪等なリクエストが失敗した場合に再試行する最大回数 ([m:Net::HTTP#max_retries=])
+- `debug_output` -- デバッグ出力の出力先となる IO オブジェクト、または nil ([m:Net::HTTP#set_debug_output])
+- `response_body_encoding` -- レスポンスボディに使うエンコーディング ([c:Encoding] オブジェクトかその名前の文字列)、または false ([m:Net::HTTP#response_body_encoding=])
+- `ignore_eof` -- レスポンスボディの読み込み時に EOF を無視するかどうかの真偽値 ([m:Net::HTTP#ignore_eof=])
+
+上記以外のキーは無視されます。[m:Net::HTTP#verify_mode=] や [m:Net::HTTP#verify_hostname=] などの SSL/TLS に関する設定はここでは指定できません。
 
 - **param** `configuration` -- デフォルトの設定を `{Symbol => object}` の形のハッシュで指定します。
 - **return** -- 現在設定されているデフォルトの設定を返します。設定されていなければ nil を返します。
@@ -1482,7 +1484,7 @@ http.ipaddr         # => "172.67.155.76"
 
 利用する SSL/TLS のバージョンの上限を取得・設定します。
 
-デフォルトは nil です。指定できる値は [c:OpenSSL::SSL::SSLContext] の `max_version=` と同じです。
+デフォルトは nil です。指定できる値は [m:OpenSSL::SSL::SSLContext#max_version=] と同じです。
 
 - **param** `version` -- 利用する SSL/TLS のバージョンの上限
 - **SEE** [m:Net::HTTP#min_version], [m:Net::HTTP#ssl_version=]
@@ -1492,7 +1494,7 @@ http.ipaddr         # => "172.67.155.76"
 
 利用する SSL/TLS のバージョンの下限を取得・設定します。
 
-デフォルトは nil です。指定できる値は [c:OpenSSL::SSL::SSLContext] の `min_version=` と同じです。
+デフォルトは nil です。指定できる値は [m:OpenSSL::SSL::SSLContext#min_version=] と同じです。
 
 - **param** `version` -- 利用する SSL/TLS のバージョンの下限
 - **SEE** [m:Net::HTTP#max_version], [m:Net::HTTP#ssl_version=]
@@ -1507,7 +1509,7 @@ http.ipaddr         # => "172.67.155.76"
 
 ブロックと一緒に呼びだされたときはエンティティボディを少しずつ文字列としてブロックに与えます。このとき戻り値の [c:Net::HTTPResponse] オブジェクトは有効な body を持ちません。
 
-QUERY メソッドは安全 (safe) かつ冪等 (idempotent) で、キャッシュ可能な HTTP メソッドとして定義されています。リクエストの生成には `Net::HTTP::Query` オブジェクトが使われます。
+QUERY メソッドは安全 (safe) かつ冪等 (idempotent) で、キャッシュ可能な HTTP メソッドとして [rfc:10008] で定義されています。リクエストの生成には `Net::HTTP::Query` オブジェクトが使われます。
 
 dest は時代遅れの引数です。利用しないでください。
 dest を指定した場合にはボディを少しずつ取得して順次「dest << ボディの断片」を実行します。
@@ -1555,9 +1557,13 @@ value には [c:Encoding] オブジェクト、エンコーディング名の文
 require 'net/http'
 
 http = Net::HTTP.new('www.example.com')
-http.response_body_encoding = Encoding::US_ASCII # => #<Encoding:US-ASCII>
-http.response_body_encoding = 'US-ASCII'         # => "US-ASCII"
-http.response_body_encoding = 'ASCII'            # => "ASCII"
+p http.response_body_encoding # => false
+http.response_body_encoding = Encoding::US_ASCII
+p http.response_body_encoding # => #<Encoding:US-ASCII>
+http.response_body_encoding = 'US-ASCII'
+p http.response_body_encoding # => #<Encoding:US-ASCII>
+http.response_body_encoding = 'ASCII'
+p http.response_body_encoding # => #<Encoding:US-ASCII>
 ```
 
 #%end
@@ -1566,6 +1572,8 @@ http.response_body_encoding = 'ASCII'            # => "ASCII"
 ### def verify_hostname=(bool)
 
 証明書がホスト名に対して有効かどうかを検証するかどうかを取得・設定します。
+
+詳しくは [m:OpenSSL::SSL::SSLContext#verify_hostname] を見てください。
 
 デフォルトは nil です。
 

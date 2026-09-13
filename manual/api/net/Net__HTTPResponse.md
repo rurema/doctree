@@ -174,7 +174,7 @@ dest を指定した場合にはボディを少しずつ取得して順次「des
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 response = Net::HTTP.get_response(uri)
 response.body = 'dummy'
 p response.body # => "dummy"
@@ -228,7 +228,7 @@ end
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 response = Net::HTTP.get_response(uri)
 response.ignore_eof = false
 p response.ignore_eof # => false
@@ -247,7 +247,7 @@ p response.ignore_eof # => false
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 response = Net::HTTP.get_response(uri)
 p response.uri # => #<URI::HTTP http://www.example.com/index.html>
 ```
