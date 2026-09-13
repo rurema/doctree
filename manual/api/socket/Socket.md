@@ -724,7 +724,7 @@ pp Socket.getifaddrs
 ### def Socket.tcp_fast_fallback -> bool
 ### def Socket.tcp_fast_fallback=(enable)
 
-Happy Eyeballs Version 2([RFC 8305](https://datatracker.ietf.org/doc/html/rfc8305))を [m:TCPSocket.new] と [m:Socket.tcp] で既定で有効にするかどうかを取得・設定します。
+Happy Eyeballs Version 2([rfc:8305])を [m:TCPSocket.new] と [m:Socket.tcp] で既定で有効にするかどうかを取得・設定します。
 
 `true` にすると、[m:TCPSocket.new] と [m:Socket.tcp] の両方で Happy Eyeballs Version 2 が有効になります(Windows では [m:TCPSocket.new] はこのアルゴリズムに対応していません)。`false` にすると Ruby 3.3 以前の動作に戻ります。
 
