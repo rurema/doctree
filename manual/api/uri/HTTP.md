@@ -71,6 +71,48 @@ u = URI.parse("http://example.com/search?q=xxx")
 p u.request_uri                                  # => "/search?q=xxx"
 ```
 
+#%since 3.1
+### def authority -> String
+
+[RFC:3986] の Section 3.2 で定義されている authority を文字列で返します。
+
+port が [m:URI::Generic.default_port] と同じ場合は host だけを返します。そうでない場合は "host:port" という形式の文字列を返します。
+
+```ruby title="例"
+require 'uri'
+p URI::HTTP.build(host: 'www.example.com', path: '/foo/bar').authority
+# => "www.example.com"
+p URI::HTTP.build(host: 'www.example.com', port: 8000, path: '/foo/bar').authority
+# => "www.example.com:8000"
+p URI::HTTP.build(host: 'www.example.com', port: 80, path: '/foo/bar').authority
+# => "www.example.com"
+```
+
+- **SEE** [m:URI::HTTP#origin], [m:URI::Generic.default_port]
+
+#%end
+
+#%since 3.1
+### def origin -> String
+
+[RFC:6454] で定義されている origin を文字列で返します。
+
+"scheme://authority" という形式の文字列になります。
+
+```ruby title="例"
+require 'uri'
+p URI::HTTP.build(host: 'www.example.com', path: '/foo/bar').origin
+# => "http://www.example.com"
+p URI::HTTP.build(host: 'www.example.com', port: 8000, path: '/foo/bar').origin
+# => "http://www.example.com:8000"
+p URI::HTTPS.build(host: 'www.example.com', path: '/foo/bar').origin
+# => "https://www.example.com"
+```
+
+- **SEE** [m:URI::HTTP#authority]
+
+#%end
+
 # class URI::HTTPS < URI::HTTP
 
 HTTPS URI を表すクラスです。

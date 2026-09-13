@@ -528,6 +528,57 @@ HTTP_PROXY(環境変数が大文字小文字を区別しない場合は http_pro
 
 - **SEE** [c:ENV]
 
+#%since 4.0
+### def authority -> [String, String, String, Integer] | nil
+
+`self` の authority 情報を [user, password, host, port] という 4 要素の配列で返します。
+
+user・password・host・port のいずれか一つでも設定されていれば配列を返します。設定されていない要素は nil になります。user・password・host・port のいずれも設定されていない場合は nil を返します。
+
+```ruby title="例"
+require 'uri'
+u = URI.parse('foo://myuser:mypass@www.example.com:8080/bar')
+p u.authority # => ["myuser", "mypass", "www.example.com", 8080]
+
+p URI::Generic.build(scheme: 'foo').authority # => nil
+```
+
+- **SEE** [m:URI::Generic#userinfo], [m:URI::Generic#host], [m:URI::Generic#port]
+
+#%end
+
+#%since 3.2
+### def decoded_user -> String | nil
+
+`self` の user を URI デコードした文字列で返します。設定されていない場合は nil を返します。
+
+```ruby title="例"
+require 'uri'
+u = URI.parse('http://my%20user:my%20pass@www.example.com/')
+p u.user         # => "my%20user"
+p u.decoded_user # => "my user"
+```
+
+- **SEE** [m:URI::Generic#user], [m:URI.decode_uri_component]
+
+#%end
+
+#%since 3.2
+### def decoded_password -> String | nil
+
+`self` の password を URI デコードした文字列で返します。設定されていない場合は nil を返します。
+
+```ruby title="例"
+require 'uri'
+u = URI.parse('http://my%20user:my%20pass@www.example.com/')
+p u.password         # => "my%20pass"
+p u.decoded_password # => "my pass"
+```
+
+- **SEE** [m:URI::Generic#password], [m:URI.decode_uri_component]
+
+#%end
+
 ## Constants
 
 ### const COMPONENT -> [Symbol]
