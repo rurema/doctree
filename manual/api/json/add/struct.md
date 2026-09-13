@@ -50,8 +50,8 @@ require 'json/add/struct'
 
 Person = Struct.new(:name, :age)
 hash = Person.new("tanaka", 29).as_json
-hash['json_class'] # => "Person"
-hash['v']           # => ["tanaka", 29]
+p hash['json_class'] # => "Person"
+p hash['v']           # => ["tanaka", 29]
 ```
 
 - **SEE** [m:Struct#to_json], [m:Struct.json_create]

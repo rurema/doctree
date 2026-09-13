@@ -177,9 +177,7 @@ p JSON.load_default_options[:allow_blank] # => true
 
 #%end
 
-#%since 3.4
-#%until 4.1
-#%since 3.4
+#%version 3.4...4.1
 ### def JSON.unsafe_load_default_options -> {Symbol => object}
 ### def JSON.unsafe_load_default_options=(val)
 
@@ -204,14 +202,10 @@ p JSON.unsafe_load_default_options[:create_additions] # => true
 
 #%end
 
-#%end
-
 #%until 4.0
-
-#%end
 ### def JSON.iconv(to, from, string) -> String
 
-文字列 string の文字エンコーディングを from から to に変換して返します。
+文字列 `string` の文字エンコーディングを `from` から `to` に変換して返します。
 
 内部的には [m:String#encode] を呼び出しているだけです。
 
@@ -536,14 +530,14 @@ puts JSON.pretty_generate(hash, space: "\t")
 名前で明示しています。デフォルトのオプション(`create_additions: true` を含みます)は
 `JSON.unsafe_load_default_options` で変更できます。
 
-source には JSON 形式の文字列だけでなく、to_str, to_io, read のいずれかに応答するオブジェクト
+`source` には JSON 形式の文字列だけでなく、`to_str`, `to_io`, `read` のいずれかに応答するオブジェクト
 (File などの [c:IO] や、パスを表すオブジェクトなど) も指定でき、その内容を読み込んだ上で
 内部的に [m:JSON?.parse] を呼び出します。
 
-proc として手続きオブジェクトが与えられた場合は、読み込んだ結果を引数にその手続きを呼び出し、
+`proc` として手続きオブジェクトが与えられた場合は、読み込んだ結果を引数にその手続きを呼び出し、
 その返り値を最終的な結果とします。
 
-- **param** `source` -- JSON 形式の文字列を指定します。他には、to_str, to_io, read メソッドを持つオブジェクトも指定可能です。
+- **param** `source` -- JSON 形式の文字列を指定します。他には、`to_str`, `to_io`, `read` メソッドを持つオブジェクトも指定可能です。
 - **param** `proc` -- [c:Proc] オブジェクトを指定します。
 - **param** `options` -- オプションをハッシュで指定します。指定可能なオプションは [m:JSON?.parse] と同様です。
 

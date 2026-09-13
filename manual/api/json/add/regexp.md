@@ -45,9 +45,9 @@ p /0\d{1,4}-\d{1,4}-\d{4}/.to_json # => "{\"json_class\":\"Regexp\",\"o\":0,\"s\
 require 'json/add/regexp'
 
 hash = /foo/i.as_json
-hash['json_class'] # => "Regexp"
-hash['o']           # => 1
-hash['s']           # => "foo"
+p hash['json_class'] # => "Regexp"
+p hash['o']           # => 1
+p hash['s']           # => "foo"
 ```
 
 - **SEE** [m:Regexp#to_json], [m:Regexp.json_create]

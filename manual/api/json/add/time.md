@@ -47,9 +47,9 @@ require 'json/add/time'
 
 t = Time.at(1700000000, 123456, :usec)
 hash = t.as_json
-hash['json_class'] # => "Time"
-hash['s']           # => 1700000000
-hash['n']           # => 123456000
+p hash['json_class'] # => "Time"
+p hash['s']           # => 1700000000
+p hash['n']           # => 123456000
 ```
 
 - **SEE** [m:Time#to_json], [m:Time.json_create]

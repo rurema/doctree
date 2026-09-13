@@ -49,11 +49,11 @@ p Date.today.to_json
 require 'json/add/date'
 
 hash = Date.new(2024, 1, 2).as_json
-hash['json_class'] # => "Date"
-hash['y']           # => 2024
-hash['m']           # => 1
-hash['d']           # => 2
-hash['sg']          # => 2299161.0
+p hash['json_class'] # => "Date"
+p hash['y']           # => 2024
+p hash['m']           # => 1
+p hash['d']           # => 2
+p hash['sg']          # => 2299161.0
 ```
 
 - **SEE** [m:Date#to_json], [m:Date.json_create]

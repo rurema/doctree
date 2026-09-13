@@ -53,9 +53,9 @@ end
 require 'json/add/exception'
 
 hash = Exception.new('Foo').as_json
-hash['json_class'] # => "Exception"
-hash['m']           # => "Foo"
-hash['b']           # => nil
+p hash['json_class'] # => "Exception"
+p hash['m']           # => "Foo"
+p hash['b']           # => nil
 ```
 
 - **SEE** [m:Exception#to_json], [m:Exception.json_create]

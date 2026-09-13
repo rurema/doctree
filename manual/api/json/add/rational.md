@@ -45,9 +45,9 @@ p (1/3r).to_json # => "{\"json_class\":\"Rational\",\"n\":1,\"d\":3}"
 require 'json/add/rational'
 
 hash = Rational(2, 3).as_json
-hash['json_class'] # => "Rational"
-hash['n']           # => 2
-hash['d']           # => 3
+p hash['json_class'] # => "Rational"
+p hash['n']           # => 2
+p hash['d']           # => 3
 ```
 
 - **SEE** [m:Rational#to_json], [m:Rational.json_create]

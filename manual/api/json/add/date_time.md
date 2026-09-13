@@ -51,11 +51,11 @@ p DateTime.now.to_json
 require 'json/add/date_time'
 
 hash = DateTime.new(2024, 1, 2, 3, 4, 5).as_json
-hash['json_class'] # => "DateTime"
-hash['y']           # => 2024
-hash['H']           # => 3
-hash['of']          # => "0/1"
-hash['sg']          # => 2299161.0
+p hash['json_class'] # => "DateTime"
+p hash['y']           # => 2024
+p hash['H']           # => 3
+p hash['of']          # => "0/1"
+p hash['sg']          # => 2299161.0
 ```
 
 - **SEE** [m:DateTime#to_json], [m:DateTime.json_create]

@@ -45,8 +45,8 @@ p (1..5).to_json # => "{\"json_class\":\"Range\",\"a\":[1,5,false]}"
 require 'json/add/range'
 
 hash = (1..5).as_json
-hash['json_class'] # => "Range"
-hash['a']           # => [1, 5, false]
+p hash['json_class'] # => "Range"
+p hash['a']           # => [1, 5, false]
 ```
 
 - **SEE** [m:Range#to_json], [m:Range.json_create]

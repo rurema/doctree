@@ -87,7 +87,7 @@ __END__
 #%since 3.4
 ### def JSON::Parser.parse(source, options) -> object
 
-`JSON::Parser.new(source, options).parse` と同様に、source をパースして
+`JSON::Parser.new(source, options).parse` と同様に、`source` をパースして
 その結果を返します。[m:JSON::Parser.new] でインスタンスを作らずに直接パースできる分、
 高速です。
 
@@ -98,8 +98,8 @@ __END__
 ```ruby title="例"
 require "json"
 
-JSON::Parser.parse(%q({"a":1}), {})                    # => {"a" => 1}
-JSON::Parser.parse(%q({"a":1}), symbolize_names: true) # => {a: 1}
+p JSON::Parser.parse(%q({"a":1}), {})                    # => {"a" => 1}
+p JSON::Parser.parse(%q({"a":1}), symbolize_names: true) # => {a: 1}
 ```
 
 - **SEE** [m:JSON::Parser.new]

@@ -45,9 +45,9 @@ p (2+3i).to_json # => "{\"json_class\":\"Complex\",\"r\":2,\"i\":3}"
 require 'json/add/complex'
 
 hash = Complex(2, 3).as_json
-hash['json_class'] # => "Complex"
-hash['r']           # => 2
-hash['i']           # => 3
+p hash['json_class'] # => "Complex"
+p hash['r']           # => 2
+p hash['i']           # => 3
 ```
 
 - **SEE** [m:Complex#to_json], [m:Complex.json_create]

@@ -39,8 +39,8 @@ JSON のオブジェクトから [c:Symbol] のオブジェクトを生成して
 require 'json/add/symbol'
 
 hash = :foo.as_json
-hash['json_class'] # => "Symbol"
-hash['s']           # => "foo"
+p hash['json_class'] # => "Symbol"
+p hash['s']           # => "foo"
 ```
 
 - **SEE** [m:Symbol#to_json], [m:Symbol.json_create]

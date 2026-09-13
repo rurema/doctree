@@ -21,8 +21,8 @@ require "json"
 begin
   JSON.generate([Object.new], strict: true)
 rescue JSON::GeneratorError => e
-  e.invalid_object.class # => Object
-  e.message               # => "Object not allowed in JSON"
+  p e.invalid_object.class # => Object
+  p e.message               # => "Object not allowed in JSON"
 end
 ```
 

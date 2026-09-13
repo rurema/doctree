@@ -24,9 +24,9 @@ require "json"
 begin
   JSON.parse(%Q({"a": invalid}))
 rescue JSON::ParserError => e
-  e.line    # => 1
-  e.column  # => 7
-  e.message # => "unexpected character: 'invalid}' at line 1 column 7"
+  p e.line    # => 1
+  p e.column  # => 7
+  p e.message # => "unexpected character: 'invalid}' at line 1 column 7"
 end
 ```
 
@@ -37,7 +37,7 @@ end
 
 パースエラーが発生した位置を、JSON ドキュメント中の位置を表す JSONPath 形式の文字列
 (例: `$.foo[0].bar`)で返します。キーが重複しているというエラーの場合は、
-重複したキー`self` の位置を指します。
+重複しているキーの位置を指します。
 
 ```ruby title="例"
 require "json"
@@ -45,7 +45,7 @@ require "json"
 begin
   JSON.parse('{"articles": [ { "title": invalid } ]}')
 rescue JSON::ParserError => error
-  error.json_path # => "$.articles[0].title"
+  p error.json_path # => "$.articles[0].title"
 end
 ```
 

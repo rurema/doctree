@@ -106,7 +106,7 @@ require "json"
 
 JSON::State.default_sort_keys_proc = ->(hash) { hash.sort.to_h }
 state = JSON::State.new(sort_keys: true)
-JSON.generate({b: 1, a: 2}, state) # => "{\"a\":2,\"b\":1}"
+p JSON.generate({b: 1, a: 2}, state) # => "{\"a\":2,\"b\":1}"
 ```
 
 - **SEE** [m:JSON::State#sort_keys=]
@@ -122,7 +122,7 @@ JSON.generate({b: 1, a: 2}, state) # => "{\"a\":2,\"b\":1}"
 - **param** `obj` -- JSON 形式の文字列に変換するオブジェクトを指定します。
 - **param** `options` -- [m:JSON::State.new] に指定するのと同様のオプションをハッシュで指定します。
            nil を指定した場合、オプション無しで初期化した [c:JSON::State] を使用します。
-- **param** `io` -- 生成した文字列の書き込み先を、write メソッドを持つオブジェクトで指定します。
+- **param** `io` -- 生成した文字列の書き込み先を、`write` メソッドを持つオブジェクトで指定します。
            nil を指定した場合は、生成した文字列をそのまま返します。
 - **return** -- `io` を指定しなかった場合は生成した JSON 形式の文字列を返します。
            `io` を指定した場合は、そこに書き込んだ上で `io` を返します。
@@ -130,8 +130,8 @@ JSON.generate({b: 1, a: 2}, state) # => "{\"a\":2,\"b\":1}"
 ```ruby title="例"
 require "json"
 
-JSON::State.generate({b: 1, a: 2}, nil, nil) # => "{\"b\":1,\"a\":2}"
-JSON::State.generate({b: 1, a: 2}, {indent: "  ", object_nl: "\n"}, nil)
+p JSON::State.generate({b: 1, a: 2}, nil, nil) # => "{\"b\":1,\"a\":2}"
+p JSON::State.generate({b: 1, a: 2}, {indent: "  ", object_nl: "\n"}, nil)
 # => "{\n  \"b\":1,\n  \"a\":2\n}"
 ```
 
@@ -151,9 +151,7 @@ NaN, Infinity, -Infinity を生成できる場合、`allow_nan?` は真を返し
 
 #%since 3.4
 `allow_nan=` は、NaN, Infinity, -Infinity を生成できるかどうかを設定します。
-#%end
 
-#%since 3.4
 - **param** `enable` -- 真を指定すると NaN, Infinity, -Infinity を生成できるようにします。
            偽を指定すると生成できないようにします。
 #%end
@@ -173,9 +171,9 @@ json_state.allow_nan? # => true
 require "json"
 
 json_state = JSON::State.new(allow_nan: true)
-json_state.allow_nan? # => true
+p json_state.allow_nan? # => true
 json_state.allow_nan = false
-json_state.allow_nan? # => false
+p json_state.allow_nan? # => false
 ```
 
 #%end
@@ -488,17 +486,14 @@ ASCII 文字列のみを用いて JSON 形式の文字列を生成する場合�
 
 - **param** `enable` -- 真を指定すると ASCII 文字列のみを生成するようになります。
            偽を指定すると、ASCII 以外の文字列もそのまま生成するようになります。
-#%end
-
-#%since 3.4
 
 ```ruby title="例"
 require "json"
 
 json_state = JSON::State.new(ascii_only: true)
-JSON.generate(["日本語"], json_state) # => "[\"\\u65e5\\u672c\\u8a9e\"]"
+p JSON.generate(["日本語"], json_state) # => "[\"\\u65e5\\u672c\\u8a9e\"]"
 json_state.ascii_only = false
-JSON.generate(["日本語"], json_state) # => "[\"日本語\"]"
+p JSON.generate(["日本語"], json_state) # => "[\"日本語\"]"
 ```
 
 #%end
@@ -559,8 +554,8 @@ name という名前のメソッドを呼び出し、その戻り値を返しま
 require "json"
 
 state = JSON::State.new(strict: true, as_json: ->(obj, is_key) { obj.to_s })
-state.as_json.class             # => Proc
-JSON.generate([1, 2..3], state) # => "[1,\"2..3\"]"
+p state.as_json.class             # => Proc
+p JSON.generate([1, 2..3], state) # => "[1,\"2..3\"]"
 ```
 
 - **SEE** [m:JSON::State#strict]
@@ -594,8 +589,8 @@ Ruby 3.3 以降は、スラッシュに加えて U+2028, U+2029 もエスケー�
 require "json"
 
 state = JSON::State.new(script_safe: true)
-state.script_safe?            # => true
-JSON.generate(["a/b"], state) # => "[\"a\\/b\"]"
+p state.script_safe?            # => true
+p JSON.generate(["a/b"], state) # => "[\"a\\/b\"]"
 ```
 
 #%since 3.3
@@ -618,11 +613,11 @@ JSON 形式で表現できない型のオブジェクトが現れたときの挙
 require "json"
 
 state = JSON::State.new(strict: true)
-state.strict?                            # => true
+p state.strict?                            # => true
 begin
   JSON.generate([Object.new], state)
 rescue JSON::GeneratorError => e
-  e.message # => "Object not allowed in JSON"
+  p e.message # => "Object not allowed in JSON"
 end
 ```
 
@@ -648,10 +643,10 @@ end
 require "json"
 
 state = JSON::State.new(sort_keys: true)
-JSON.generate({b: 1, a: 2}, state) # => "{\"a\":2,\"b\":1}"
+p JSON.generate({b: 1, a: 2}, state) # => "{\"a\":2,\"b\":1}"
 
 state2 = JSON::State.new(sort_keys: ->(hash) { hash.sort_by { |k, v| -v }.to_h })
-JSON.generate({a: 1, b: 2}, state2) # => "{\"b\":2,\"a\":1}"
+p JSON.generate({a: 1, b: 2}, state2) # => "{\"b\":2,\"a\":1}"
 ```
 
 - **SEE** [m:JSON::State.default_sort_keys_proc=]
