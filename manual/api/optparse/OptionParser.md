@@ -1312,10 +1312,11 @@ p opts.parse(["-a", "-x", "-a"])   # => ["-x", "-a"]
 require "optparse"
 
 opts = OptionParser.new
-opts.on("--foo VALUE")
-opts.on("--bar")
+opts.on("-f", "--foo VALUE")
+opts.on("-b", "--bar")
 p opts.candidate("--f")   # => ["--foo"]
-p opts.candidate("-")     # => ["--foo", "--bar"]
+p opts.candidate("-f")    # => ["-f"]
+p opts.candidate("-")     # => ["--foo", "-f", "--bar", "-b"]
 ```
 
 #%since 3.4
