@@ -99,7 +99,9 @@ p Zlib.gunzip(compressed) # => "hoge fuga"
 
 ### module_function def gunzip(string) -> String
 
-gzip 形式で圧縮された文字列 string を展開した文字列を返します。[m:Zlib?.gzip] で圧縮したデータを元に戻すために使います。
+gzip 形式で圧縮された文字列 string を展開した文字列を返します。
+
+[m:Zlib?.gzip] で圧縮したデータを元に戻すために使います。
 
 - **param** `string` -- 展開する、gzip 形式で圧縮された文字列を指定します。
 

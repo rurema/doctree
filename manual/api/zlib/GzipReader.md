@@ -116,7 +116,9 @@ Zlib::GzipReader.open('hoge.gz'){|gz|
 ### def Zlib::GzipReader.zcat(io, options = {}) -> String
 ### def Zlib::GzipReader.zcat(io, options = {}) {|string| ... } -> nil
 
-io に含まれているすべての gzip ストリームを展開します。io の末尾まで、複数の gzip ストリームが連続して格納されている場合も扱います。gzip ストリームの後ろに gzip 形式以外のデータがあってはいけません。
+io に含まれているすべての gzip ストリームを展開します。
+
+io の末尾まで、複数の gzip ストリームが連続して格納されている場合も扱います。gzip ストリームの後ろに gzip 形式以外のデータがあってはいけません。
 
 ブロックが与えられた場合は、展開したストリームごとにブロックを呼び出し、`nil` を返します。ブロックが与えられなかった場合は、すべてのストリームを展開した結果を連結した文字列を返します。
 
@@ -990,7 +992,9 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 
 ### def external_encoding -> Encoding
 
-`self` が読み込むデータの外部エンコーディングを返します。[m:Zlib::GzipReader.new] や [m:Zlib::GzipReader.open] の `:external_encoding` オプションや `:encoding` オプションで指定した値を返します。省略した場合はデフォルトの外部エンコーディング([m:Encoding.default_external])を返します。
+`self` が読み込むデータの外部エンコーディングを返します。
+
+[m:Zlib::GzipReader.new] や [m:Zlib::GzipReader.open] の `:external_encoding` オプションや `:encoding` オプションで指定した値を返します。省略した場合はデフォルトの外部エンコーディング([m:Encoding.default_external])を返します。
 
 ```ruby
 require 'zlib'
