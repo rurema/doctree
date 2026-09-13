@@ -255,7 +255,7 @@ HTTPS のデフォルトポート (443) を返します。
 - `keep_alive_timeout` -- コネクションの再利用 (keep-alive) を許可する秒数 ([m:Net::HTTP#keep_alive_timeout=])
 - `close_on_empty_response` -- レスポンスがボディを持っていない場合にコネクションを閉じるかどうかの真偽値 ([m:Net::HTTP#close_on_empty_response=])
 - `open_timeout` -- 接続時に待つ最大秒数 ([m:Net::HTTP#open_timeout=])
-- `read_timeout` -- 読みこみ一回でブロックしてよい最大秒数、または nil ([m:Net::HTTP#read_timeout=])
+- `read_timeout` -- 読み込み一回でブロックしてよい最大秒数、または nil ([m:Net::HTTP#read_timeout=])
 - `write_timeout` -- 書き込み一回でブロックしてよい最大秒数、または nil ([m:Net::HTTP#write_timeout=])
 - `continue_timeout` -- 「100 Continue」レスポンスを待つ秒数、または nil ([m:Net::HTTP#continue_timeout=])
 - `max_retries` -- 冪等なリクエストが失敗した場合に再試行する最大回数 ([m:Net::HTTP#max_retries=])
