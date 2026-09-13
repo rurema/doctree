@@ -76,6 +76,33 @@ opt で置き換えます。そうでない場合は先頭に opt を追加し�
 
 - **return** -- array を返します。
 
+### def additional -> object | nil
+### def additional=(additional)
+
+`self` のエラーメッセージに追加する情報を作る、呼び出し可能オブジェクトです。
+
+[m:OptionParser::ParseError#message] は、この値が nil でなければ、
+エラーの原因となった引数を渡してこれを呼び出し、その結果をエラーメッセージの末尾に追加します。
+デフォルトは nil です。[m:OptionParser#parse] などのパース時に発生する例外では、
+綴りの近い候補を提示するメッセージを組み立てる [c:Proc] が自動的に設定されます。
+
+- **param** `additional` -- エラーメッセージに追加する情報を作る、呼び出し可能オブジェクトを指定します。
+
+```ruby
+require "optparse"
+
+opts = OptionParser.new
+opts.on("--foobar")
+begin
+  opts.parse!(["--foobaz"])
+rescue OptionParser::ParseError => e
+  e.additional = proc {|arg| " (hint for #{arg})" }
+  puts e.message   # => invalid option: --foobaz (hint for foobaz)
+end
+```
+
+- **SEE** [m:OptionParser::ParseError#message]
+
 ## Class Methods
 
 ### def OptionParser::ParseError.filter_backtrace(array) -> [String]
