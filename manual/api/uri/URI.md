@@ -348,15 +348,15 @@ p URI::PARSER.class      # => URI::RFC3986_Parser
 #%since 3.2
 ### def URI.decode_uri_component(str, enc=Encoding::UTF_8) -> String
 
-URL エンコードされた文字列 str をデコードした文字列を返します。
+パーセントエンコードされた文字列 str をデコードした文字列を返します。
 
 [m:URI.decode_www_form_component] と同様の変換を行いますが、"+" という文字はデコードせずそのまま残す点が異なります。
 
-enc で指定したエンコーディングの文字列が URL エンコードされたものとみなし、返り値にそのエンコーディングを付加します。
+enc で指定したエンコーディングの文字列がパーセントエンコードされたものとみなし、返り値にそのエンコーディングを付加します。
 
 - **param** `str` -- デコード対象の文字列です。
 - **param** `enc` -- 変換先のエンコーディングです。
-- **raise** `ArgumentError` -- str の %-エンコーディングの書式が不正である場合に発生します。
+- **raise** `ArgumentError` -- str のパーセントエンコーディングの書式が不正である場合に発生します。
 
 ```ruby title="例"
 require 'uri'
@@ -370,7 +370,7 @@ p URI.decode_uri_component('a+b%20c') # => "a+b c"
 #%since 3.2
 ### def URI.encode_uri_component(str, enc=nil) -> String
 
-文字列 str を URL エンコードした文字列を返します。
+文字列 str をパーセントエンコードした文字列を返します。
 
 [m:URI.encode_www_form_component] と同様の変換を行いますが、空白文字 " " を "+" ではなく "%20" に変換する点が異なります。
 
