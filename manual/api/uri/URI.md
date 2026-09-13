@@ -147,7 +147,7 @@ p URI.regexp =~ "http://www.ruby-lang.org/"  # => 0
 application/x-www-form-urlencoded 形式のデータをデコードし、
 [key, value] という形の配列の配列を返します。
 
-enc で指定したエンコーディングの文字列が URL エンコードされたものとみなし、エンコーディングを付加します。
+enc で指定したエンコーディングの文字列がパーセントエンコードされたものとみなし、エンコーディングを付加します。
 
 このメソッドは
 <https://url.spec.whatwg.org/#concept-urlencoded-parser>
@@ -176,7 +176,7 @@ URL-encoded form data の文字列の各コンポーネントをデコードし�
 
 "+" という文字は空白文字にデコードします。
 
-enc で指定したエンコーディングの文字列が URL エンコードされたものとみなし、エンコーディングを付加します。
+enc で指定したエンコーディングの文字列がパーセントエンコードされたものとみなし、エンコーディングを付加します。
 
 このメソッドは
 <https://www.w3.org/TR/html5/sec-forms.html#urlencoded-form-data>
