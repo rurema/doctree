@@ -1019,6 +1019,7 @@ end
 ```
 
 ### def captures -> [String | nil] | nil
+{: since="2.5.0"}
 
 直前のマッチが成功していれば、キャプチャした部分文字列(インデックス 1 以降)を格納した配列を返します。マッチが失敗していれば `nil` を返します。
 
@@ -1043,6 +1044,7 @@ p s.captures                       # => ["1975"]
 - **SEE** [m:StringScanner#\[\]]
 
 ### def fixed_anchor? -> bool
+{: since="2.7.0"}
 
 `self` が fixed anchor モードで生成されていれば `true` を、そうでなければ `false` を返します。
 
@@ -1225,6 +1227,7 @@ p s.rest                     # => "g"
 #%end
 
 ### def size -> Integer | nil
+{: since="2.5.0"}
 
 直前のマッチが成功していれば、そのキャプチャの数(マッチ全体を含む)を返します。マッチが失敗していれば `nil` を返します。
 
@@ -1240,6 +1243,7 @@ p s.size                          # => 4
 - **SEE** [m:StringScanner#captures], [m:StringScanner#values_at]
 
 ### def values_at(*specifiers) -> [String | nil] | nil
+{: since="2.5.0"}
 
 直前のマッチが成功していれば、各 `specifier` に対応する部分文字列を集めた配列を返します。マッチが失敗していれば `nil` を返します。
 
