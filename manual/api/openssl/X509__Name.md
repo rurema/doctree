@@ -131,6 +131,7 @@ OpenSSL 0.9.8 と互換な古い方式のハッシュ関数のハッシュ値を
 内部では OpenSSL の X509_NAME_hash_old を呼び出します。
 
 ### def to_utf8 -> String
+{: since="2.5.0"}
 
 識別名(Distinguished Name)を UTF-8 の文字列で返します。
 

@@ -592,6 +592,7 @@ x が負ならば最初から x バイト目までの範囲を表します。
 #%# = module Net::HTTP::ProxyDelta
 
 ### def connection_close? -> bool
+{: since="1.9.1"}
 
 `Connection:` ヘッダフィールド (プロクシ経由の場合は `Proxy-Connection:` ヘッダフィールド) が `close` を指定しているかどうかを返します。
 
@@ -608,6 +609,7 @@ p req.connection_close? # => true
 - **SEE** [m:Net::HTTPHeader#connection_keep_alive?]
 
 ### def connection_keep_alive? -> bool
+{: since="1.9.1"}
 
 `Connection:` ヘッダフィールド (プロクシ経由の場合は `Proxy-Connection:` ヘッダフィールド) が `keep-alive` を指定しているかどうかを返します。
 
@@ -624,6 +626,7 @@ p req.connection_keep_alive? # => true
 - **SEE** [m:Net::HTTPHeader#connection_close?]
 
 ### def set_form(params, enctype = 'application/x-www-form-urlencoded', formopt = {}) -> ()
+{: since="1.9.3"}
 
 `POST` や `PUT` リクエストで使うフォームのデータを設定します。
 
@@ -652,6 +655,7 @@ p req.content_type # => "application/x-www-form-urlencoded"
 - **SEE** [m:Net::HTTPHeader#set_form_data]
 
 ### def to_hash -> {String => [String]}
+{: since=""}
 
 保持しているヘッダフィールドの名前と値の組をハッシュで返します。
 

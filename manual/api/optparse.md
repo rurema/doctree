@@ -77,7 +77,9 @@ opt で置き換えます。そうでない場合は先頭に opt を追加し�
 - **return** -- array を返します。
 
 ### def additional -> object | nil
+{: since="2.7.0"}
 ### def additional=(additional)
+{: since="2.7.0"}
 
 `self` のエラーメッセージに追加する情報を作る、呼び出し可能オブジェクトです。
 

@@ -812,6 +812,7 @@ gzip フォーマットの解析のために読み込んだ余剰のデータを
 gzip ファイルが最後まで解析されていない場合は nil を返します。
 
 ### def getbyte -> Integer | nil
+{: since="1.9.1"}
 
 IO クラスの同名メソッド[m:IO#getbyte]と同じです。
 
@@ -856,6 +857,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 - **SEE** [m:IO#getbyte]
 
 ### def readbyte -> Integer
+{: since="1.9.1"}
 
 IO クラスの同名メソッド[m:IO#readbyte]と同じです。
 
@@ -905,7 +907,9 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 - **SEE** [m:IO#readbyte]
 
 ### def each_char{|c| ... } -> nil
+{: since="1.9.1"}
 ### def each_char -> Enumerator
+{: since="1.9.1"}
 
 IO クラスの同名メソッド[m:IO#each_char]と同じです。
 
@@ -945,6 +949,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 - **SEE** [m:IO#each_char]
 
 ### def ungetbyte(char) -> nil
+{: since="1.9.1"}
 
 IO クラスの同名メソッド[m:IO#ungetbyte]と同じです。
 
@@ -991,6 +996,7 @@ Zlib::GzipReader.open('hoge.gz') { |gz|
 - **SEE** [m:IO#ungetbyte]
 
 ### def external_encoding -> Encoding
+{: since="2.3.0"}
 
 `self` が読み込むデータの外部エンコーディングを返します。
 

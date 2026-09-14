@@ -9,6 +9,7 @@ JSON のエラーのための基底クラスです。
 
 #%until 4.0
 ### def JSON::JSONError.wrap(exception) -> JSON::JSONError
+{: since="2.0.0"}
 
 任意の例外 `exception` を [c:JSON::JSONError] でラップして返します。
 

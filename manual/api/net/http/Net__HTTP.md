@@ -286,6 +286,7 @@ http.write_timeout  # => 1
 #%end
 
 ### def Net::HTTP.post(url, data, header = nil) -> Net::HTTPResponse
+{: since="2.4.0"}
 
 [c:URI] で指定した対象にデータを POST し、そのレスポンスを [c:Net::HTTPResponse] として返します。
 
@@ -1457,7 +1458,9 @@ http.proxy_use_ssl = true
 #%end
 
 ### def ipaddr -> String | nil
+{: since="2.7.0"}
 ### def ipaddr=(addr)
+{: since="2.7.0"}
 
 接続先の IP アドレスを取得・設定します。
 
@@ -1480,7 +1483,9 @@ http.ipaddr         # => "172.67.155.76"
 - **SEE** [m:Net::HTTP.new]
 
 ### def max_version -> Integer | Symbol | nil
+{: since="2.5.0"}
 ### def max_version=(version)
+{: since="2.5.0"}
 
 利用する SSL/TLS のバージョンの上限を取得・設定します。
 
@@ -1490,7 +1495,9 @@ http.ipaddr         # => "172.67.155.76"
 - **SEE** [m:Net::HTTP#min_version], [m:Net::HTTP#ssl_version=]
 
 ### def min_version -> Integer | Symbol | nil
+{: since="2.5.0"}
 ### def min_version=(version)
+{: since="2.5.0"}
 
 利用する SSL/TLS のバージョンの下限を取得・設定します。
 

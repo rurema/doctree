@@ -249,6 +249,7 @@ DH 鍵共有プロトコルの秘密鍵を設定します。
 #%end
 
 ### def public? -> bool
+{: since=""}
 
 `self` が公開鍵を保持しているかどうかを判定します。
 
@@ -257,6 +258,7 @@ DH 鍵共有プロトコルの秘密鍵を設定します。
 - **SEE** [m:OpenSSL::PKey::DH#pub_key]
 
 ### def private? -> bool
+{: since=""}
 
 `self` が秘密鍵を保持しているかどうかを判定します。
 
@@ -265,6 +267,7 @@ DH 鍵共有プロトコルの秘密鍵を設定します。
 - **SEE** [m:OpenSSL::PKey::DH#priv_key]
 
 ### def public_key -> OpenSSL::PKey::DH
+{: since=""}
 
 `self` の鍵パラメータ(p, g)だけを持つ新しい DH インスタンスを返します。
 
@@ -284,12 +287,14 @@ p dhcopy.priv_key # => nil
 ```
 
 ### def q -> OpenSSL::BN
+{: since="2.4.0"}
 
 DH 鍵共有プロトコルの鍵パラメータ q を返します。
 
 - **SEE** [m:OpenSSL::PKey::DH#set_pqg]
 
 ### def set_pqg(p, q, g) -> self
+{: since="2.4.0"}
 
 p, q, g を `self` に設定します。
 
@@ -300,6 +305,7 @@ p, q, g を `self` に設定します。
 - **SEE** [m:OpenSSL::PKey::DH#p], [m:OpenSSL::PKey::DH#q], [m:OpenSSL::PKey::DH#g]
 
 ### def set_key(pub_key, priv_key) -> self
+{: since="2.4.0"}
 
 pub_key と priv_key を `self` に設定します。
 

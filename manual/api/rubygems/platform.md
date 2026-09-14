@@ -13,6 +13,7 @@ require:
 
 ### def ==(other) -> bool
 ### def eql?(other) -> bool
+{: since=""}
 
 自身と other が同じプラットフォームである場合に真を返します。
 そうでない場合は偽を返します。

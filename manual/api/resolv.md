@@ -1544,6 +1544,7 @@ DNSリソースを表す抽象クラスです。
 ## Instance Methods
 
 ### def ttl -> Integer
+{: since=""}
 
 この DNS リソースレコードの残り TTL(Time To Live)を返します。
 

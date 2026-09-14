@@ -81,6 +81,7 @@ CRC チェックサムの計算に用いるテーブルを配列で返します�
 - **SEE** [m:Zlib::Inflate.inflate]
 
 ### module_function def gzip(string, level: nil, strategy: nil) -> String
+{: since="2.4.0"}
 
 string を gzip 形式に圧縮した文字列を返します。
 
@@ -98,6 +99,7 @@ p Zlib.gunzip(compressed) # => "hoge fuga"
 - **SEE** [m:Zlib?.gunzip]
 
 ### module_function def gunzip(string) -> String
+{: since="2.4.0"}
 
 gzip 形式で圧縮された文字列 string を展開した文字列を返します。
 

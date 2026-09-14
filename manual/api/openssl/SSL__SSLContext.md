@@ -729,6 +729,7 @@ end
 - **SEE** [m:OpenSSL::SSL::SSLContext#renegotiation_cb]
 
 ### def add_certificate(certificate, pkey, extra_certs = nil) -> self
+{: since="2.5.0"}
 
 証明書とその秘密鍵を `self` に追加します。
 
@@ -749,7 +750,9 @@ ctx.add_certificate(rsa_cert, rsa_pkey, [ca_intermediate_cert])
 - **SEE** [m:OpenSSL::SSL::SSLContext#cert=], [m:OpenSSL::SSL::SSLContext#key=], [m:OpenSSL::SSL::SSLContext#extra_chain_cert=]
 
 ### def alpn_protocols -> [String] | nil
+{: since="2.3.0"}
 ### def alpn_protocols=(protocols)
+{: since="2.3.0"}
 
 Application-Layer Protocol Negotiation(ALPN)で通知するプロトコル名の一覧を取得・設定します。
 
@@ -767,7 +770,9 @@ ctx.alpn_protocols = ["http/1.1", "spdy/2", "h2"]
 - **SEE** [m:OpenSSL::SSL::SSLContext#alpn_select_cb=], [m:OpenSSL::SSL::SSLSocket#alpn_protocol]
 
 ### def alpn_select_cb -> Proc | nil
+{: since="2.3.0"}
 ### def alpn_select_cb=(cb)
+{: since="2.3.0"}
 
 ALPN 拡張でクライアントが提示したプロトコルの中から、サーバが利用するプロトコルを選択するためのコールバックを取得・設定します。
 
@@ -830,6 +835,7 @@ TLS サーバの場合、この一覧は CertificateRequest メッセージの�
 #%end
 
 ### def ecdh_curves=(groups_list)
+{: since="2.4.0"}
 #%since 4.0
 ### def groups=(groups_list)
 #%end
@@ -856,6 +862,7 @@ ctx2.ecdh_curves = "P-256"
 - **raise** `OpenSSL::SSL::SSLError` -- 設定に失敗した場合に発生します
 
 ### def enable_fallback_scsv -> nil
+{: since="2.5.0"}
 
 この `self` に対して TLS_FALLBACK_SCSV を有効にします。
 
@@ -890,6 +897,7 @@ end
 #%end
 
 ### def min_version=(version)
+{: since="2.5.0"}
 
 サポートする SSL/TLS プロトコルバージョンの下限を設定します。
 
@@ -908,6 +916,7 @@ ctx.max_version = OpenSSL::SSL::TLS1_2_VERSION
 - **SEE** [m:OpenSSL::SSL::SSLContext#max_version=]
 
 ### def max_version=(version)
+{: since="2.5.0"}
 
 サポートする SSL/TLS プロトコルバージョンの上限を設定します。指定できる値は [m:OpenSSL::SSL::SSLContext#min_version=] と同様です。
 
@@ -917,7 +926,9 @@ ctx.max_version = OpenSSL::SSL::TLS1_2_VERSION
 - **SEE** [m:OpenSSL::SSL::SSLContext#min_version=]
 
 ### def npn_protocols -> [String] | nil
+{: since="2.0.0"}
 ### def npn_protocols=(protocols)
+{: since="2.0.0"}
 
 Next Protocol Negotiation(NPN)で通知するプロトコル名の一覧を取得・設定します。
 
@@ -933,7 +944,9 @@ ctx.npn_protocols = ["http/1.1", "spdy/2"]
 - **SEE** [m:OpenSSL::SSL::SSLSocket#npn_protocol]
 
 ### def npn_select_cb -> Proc | nil
+{: since="2.0.0"}
 ### def npn_select_cb=(cb)
+{: since="2.0.0"}
 
 NPN 拡張でサーバが提示したプロトコルの中から、クライアントが利用するプロトコルを選択するためのコールバックを取得・設定します。
 
@@ -946,7 +959,9 @@ proc{|protocols| ... }
 - **param** `cb` -- コールバックオブジェクト([c:Proc] や [c:Method] など)
 
 ### def security_level -> Integer
+{: since="2.4.0"}
 ### def security_level=(level)
+{: since="2.4.0"}
 
 コンテキストのセキュリティレベルを取得・設定します。
 
@@ -960,6 +975,7 @@ OpenSSL 1.1.0 未満ではこの機能はサポートされておらず、0 以�
 - **raise** `NotImplementedError` -- OpenSSL 1.1.0 未満で 0 以外の値を設定しようとした場合に発生します
 
 ### def setup -> true | nil
+{: since=""}
 
 `self` の設定を確定させ、内部状態を準備します。
 
@@ -990,7 +1006,9 @@ Thread.new { svr.accept }
 #%end
 
 ### def verify_hostname -> bool
+{: since="2.4.0"}
 ### def verify_hostname=(bool)
+{: since="2.4.0"}
 
 サーバ証明書がホスト名に対して有効かどうかを検証するかどうかを取得・設定します。
 

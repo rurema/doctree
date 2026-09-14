@@ -69,6 +69,7 @@ SOL_SOCKET/SO_LINGER 用の Socket::Option オブジェクトを新たに生成�
 - **param** `secs` -- 整数値
 
 ### def Socket::Option.byte(family, level, optname, integer) -> Socket::Option
+{: since="2.1.0"}
 
 1 バイトの整数をデータとして持つ `Socket::Option` オブジェクトを新たに生成し返します。
 
@@ -87,6 +88,7 @@ p Socket::Option.byte(:INET, :SOCKET, :KEEPALIVE, 1)
 ```
 
 ### def Socket::Option.ipv4_multicast_loop(integer) -> Socket::Option
+{: since="2.1.0"}
 
 IPPROTO_IP/IP_MULTICAST_LOOP 用の `Socket::Option` オブジェクトを新たに生成し返します。
 
@@ -100,6 +102,7 @@ p Socket::Option.ipv4_multicast_loop(1)
 ```
 
 ### def Socket::Option.ipv4_multicast_ttl(integer) -> Socket::Option
+{: since="2.1.0"}
 
 IPPROTO_IP/IP_MULTICAST_TTL 用の `Socket::Option` オブジェクトを新たに生成し返します。
 
@@ -165,6 +168,7 @@ data に対し [m:String#unpack] を呼び出し、その結果を返します�
 このメソッドは過去との互換性のために存在します。
 
 ### def byte -> Integer
+{: since="2.1.0"}
 
 オプションのデータ(内容)を 1 バイトの整数に変換して返します。
 
@@ -172,6 +176,7 @@ data に対し [m:String#unpack] を呼び出し、その結果を返します�
 - **SEE** [m:Socket::Option#data]
 
 ### def ipv4_multicast_loop -> Integer
+{: since="2.1.0"}
 
 オプションが IPPROTO_IP/IP_MULTICAST_LOOP である場合に、オプションのデータ(内容)を整数に変換して返します。
 
@@ -179,6 +184,7 @@ data に対し [m:String#unpack] を呼び出し、その結果を返します�
 - **SEE** [m:Socket::Option#data]
 
 ### def ipv4_multicast_ttl -> Integer
+{: since="2.1.0"}
 
 オプションが IPPROTO_IP/IP_MULTICAST_TTL である場合に、オプションのデータ(内容)を整数に変換して返します。
 

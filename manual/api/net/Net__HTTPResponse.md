@@ -166,6 +166,7 @@ dest を指定した場合にはボディを少しずつ取得して順次「des
 - **SEE** [m:Net::HTTP#request_get]
 
 ### def body=(value)
+{: since="1.9.1"}
 
 エンティティボディを value に設定します。
 
@@ -208,7 +209,9 @@ end
 #%end
 
 ### def decode_content -> bool
+{: since="2.0.0"}
 ### def decode_content=(bool)
+{: since="2.0.0"}
 
 エンティティボディの `Content-Encoding:` を自動的に展開するかどうかを取得・設定します。
 
@@ -239,6 +242,7 @@ p response.ignore_eof # => false
 #%end
 
 ### def uri -> URI | nil
+{: since="2.0.0"}
 
 このレスポンスの取得に使われた [c:URI] オブジェクトを返します。
 

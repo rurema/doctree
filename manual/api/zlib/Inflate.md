@@ -160,6 +160,7 @@ true を返し、残りのデータは入力バッファ内に保持されます
 What is this?
 
 ### def add_dictionary(string) -> self
+{: since="2.0.0"}
 
 今後必要になるかもしれない辞書 string を、あらかじめ展開ストリームに登録します。
 

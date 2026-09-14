@@ -270,6 +270,7 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 暗号化アルゴリズムの名前を文字列で返します。
 
 ### def auth_data=(data)
+{: since="2.0.0"}
 
 認証付き暗号(AEAD)の追加認証データ(AAD、associated data とも呼ばれます)を設定します。
 
@@ -281,7 +282,9 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 - **raise** `OpenSSL::Cipher::CipherError` -- AEAD に対応していない暗号で呼び出した場合に発生します
 
 ### def auth_tag(tag_len = 16) -> String
+{: since="2.0.0"}
 ### def auth_tag=(string)
+{: since="2.0.0"}
 
 認証付き暗号(AEAD)の認証タグを取得・設定します。
 
@@ -294,6 +297,7 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 - **raise** `OpenSSL::Cipher::CipherError` -- この暗号方式が認証タグに対応していない場合に発生します
 
 ### def auth_tag_len=(integer)
+{: since="2.4.0"}
 
 認証付き暗号(AEAD)で生成される認証タグの長さを設定します。
 
@@ -304,6 +308,7 @@ CCM モードや OCB モードなど、暗号化・復号を始める前にタ�
 - **SEE** [m:OpenSSL::Cipher#auth_tag]
 
 ### def authenticated? -> bool
+{: since="2.0.0"}
 
 `self` が認証付き暗号(AEAD)のモードであれば true を返します。
 
@@ -322,6 +327,7 @@ CCM モードの暗号でのみ使用できます。
 #%end
 
 ### def iv_len=(integer)
+{: since="2.4.0"}
 
 認証付き暗号(AEAD)で、IV(nonce)の長さを変更します。
 

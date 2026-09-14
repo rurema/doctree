@@ -375,6 +375,7 @@ TRUSTOTHER を有効にすると certs で指定した証明書を検証せず�
 - **param** `flags` -- フラグ(整数)
 
 ### def find_response(certificate_id) -> OpenSSL::OCSP::SingleResponse | nil
+{: since="2.4.0"}
 
 certificate_id に CertId が一致する `OpenSSL::OCSP::SingleResponse` を返します。
 
@@ -384,12 +385,14 @@ certificate_id に CertId が一致する `OpenSSL::OCSP::SingleResponse` を返
 - **SEE** [m:OpenSSL::OCSP::BasicResponse#responses]
 
 ### def responses -> [OpenSSL::OCSP::SingleResponse]
+{: since="2.4.0"}
 
 `self` が保持している `OpenSSL::OCSP::SingleResponse` の配列を返します。
 
 - **SEE** [m:OpenSSL::OCSP::BasicResponse#find_response]
 
 ### def to_der -> String
+{: since=""}
 
 DER 形式のバイト列に変換します。
 
@@ -438,22 +441,26 @@ subject には問合せ対象の証明書を、issuerにはsubjectのissuer(発�
 - **SEE** [m:OpenSSL::X509::Certificate#serial]
 
 ### def hash_algorithm -> String
+{: since="2.4.0"}
 
 issuerNameHash と issuerKeyHash の算出に使われたハッシュアルゴリズムの名前(ロングネーム)を返します。
 
 ### def issuer_key_hash -> String
+{: since="2.4.0"}
 
 この CertificateId の issuerKeyHash(発行者の公開鍵のハッシュ値)を16進文字列で返します。
 
 - **SEE** [m:OpenSSL::OCSP::CertificateId#issuer_name_hash]
 
 ### def issuer_name_hash -> String
+{: since="2.4.0"}
 
 この CertificateId の issuerNameHash(発行者の識別名のハッシュ値)を16進文字列で返します。
 
 - **SEE** [m:OpenSSL::OCSP::CertificateId#issuer_key_hash]
 
 ### def to_der -> String
+{: since=""}
 
 DER 形式のバイト列に変換します。
 
@@ -536,6 +543,7 @@ certs に証明書の配列を渡すことで、この署名を検証するた�
 - **raise** `OpenSSL::OCSP::OCSPError` -- 署名に失敗した場合に発生します
 
 ### def to_der -> String
+{: since=""}
 
 Request オブジェクトを DER 形式の文字列に変換します。
 
@@ -558,6 +566,7 @@ TRUSTOTHER を有効にすると certs で指定した証明書を検証せず�
 - **param** `flags` -- フラグ(整数)
 
 ### def signed? -> bool
+{: since="2.5.0"}
 
 Request オブジェクトが署名されていれば true を返します。
 
@@ -620,5 +629,6 @@ Response オブジェクトが保持している BasicResponse オブジェク�
 - **SEE** [m:OpenSSL::OCSP::Response#status]
 
 ### def to_der -> String
+{: since=""}
 
 Response オブジェクトを DER 形式の文字列に変換します。
