@@ -58,8 +58,11 @@ p prng.alphanumeric(10, chars: [*"!".."/"]) # => ",.,++%/''."
 - **SEE** [m:SecureRandom.alphanumeric]
 
 ### def random_number -> Float
+{: since="2.3.0"}
 ### def random_number(max) -> Integer | Float
+{: since="2.3.0"}
 ### def random_number(range) -> Integer | Float
+{: since="2.3.0"}
 
 生の乱数から整形した乱数を生成して返します。[m:Random#rand] とほぼ同じ働きをします。
 

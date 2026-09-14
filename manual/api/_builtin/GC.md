@@ -521,6 +521,7 @@ SEGV が起きるでしょう。
 - **SEE** [m:GC.compact]
 
 ### def GC.verify_internal_consistency -> nil
+{: since="2.1.0"}
 
 GC 内部の一貫性を検証します。
 

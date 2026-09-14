@@ -719,6 +719,7 @@ iseq.to_binary("extra_data")
 - **SEE** [m:RubyVM::InstructionSequence.load_from_binary_extra_data]
 
 ### def each_child {|child_iseq| ... } -> self
+{: since="2.5.0"}
 
 `self` が直接含む(ネストした)命令シーケンスを、それぞれ引数としてブロックに渡して繰り返します。
 
@@ -737,6 +738,7 @@ p children # => ["block in foo"]
 ```
 
 ### def trace_points -> [[Integer, Symbol]]
+{: since="2.5.0"}
 
 `self` が表す命令シーケンス内のトレースポイント(イベントが発生しうる位置)の一覧を返します。
 
