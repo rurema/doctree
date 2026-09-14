@@ -46,7 +46,9 @@ Standards and Technology) の SHA-512 Secure Hash Algorithmを実装するクラ
 ダイジェストのハッシュ値のバイト長を返します。
 
 ### def update(str) -> self
+{: since=""}
 ### def <<(str) -> self
+{: since=""}
 
 文字列 str を追加して内部状態を更新し、`self` を返します。
 
@@ -66,6 +68,7 @@ p digest.hexdigest # => "b9138194ffe9e7c8bb6d79d1ed56259553d18d9cb60b66e3ba5aa2e
 - **SEE** [m:Digest::Base#update]
 
 ### def reset -> self
+{: since=""}
 
 内部状態を初期状態(`new` した直後と同様の状態)に戻し、`self` を返します。
 

@@ -83,6 +83,7 @@ Ruby プログラムのファイル名を文字列で返します。
 - **SEE** [m:Ripper::Filter#on_default], [m:Ripper::Filter#on_XXX]
 
 ### def state -> Ripper::Lexer::State
+{: since="2.5.0"}
 
 現在のトークンのスキャナ状態を返します。
 

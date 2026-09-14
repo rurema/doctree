@@ -126,7 +126,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #%until 4.0
 ### def class_dir -> object
+{: since="2.0.0"}
 ### def file_dir -> object
+{: since="2.0.0"}
 
 [m:RDoc::Generator::JsonIndex.new] に指定した親ジェネレータ(通常は
 [c:RDoc::Generator::Darkfish])の class_dir、file_dir をそれぞれそのまま返します。

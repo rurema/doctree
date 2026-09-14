@@ -106,6 +106,7 @@ URI.open('http://example.com/') {|f|
 ```
 
 ### def status=(status)
+{: since=""}
 
 対象となるリソースのステータスコードと reason phrase を設定します。
 
@@ -114,6 +115,7 @@ URI.open('http://example.com/') {|f|
 - **SEE** [m:OpenURI::Meta#status]
 
 ### def base_uri=(uri)
+{: since=""}
 
 リソースの実際の URI を設定します。
 
@@ -122,6 +124,7 @@ URI.open('http://example.com/') {|f|
 - **SEE** [m:OpenURI::Meta#base_uri]
 
 ### def metas -> Hash
+{: since="2.1.0"}
 
 ヘッダを収録したハッシュを返します。
 

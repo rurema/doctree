@@ -832,6 +832,7 @@ FileUtils.uptodate?('hello.o', ['hello.c', 'hello.h']) or system('make')
 ```
 
 ### module_function def link_entry(src, dest, dereference_root = false, remove_destination = false) -> ()
+{: since="2.6.0"}
 
 ファイルシステムのエントリ src を dest にハードリンクします。src がディレクトリの場合はその中身を再帰的にリンクします。
 

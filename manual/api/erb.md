@@ -401,6 +401,7 @@ p erb.filename # =>"example.rhtml"
 ```
 
 ### def encoding -> Encoding
+{: since="2.2.0"}
 
 コンパイルされた eRuby スクリプトを `eval` するときに使われるエンコーディングを返します。
 
@@ -411,7 +412,9 @@ p erb.encoding # => #<Encoding:UTF-8>
 ```
 
 ### def lineno -> Integer
+{: since="2.2.0"}
 ### def lineno=(n)
+{: since="2.2.0"}
 
 eRuby スクリプトを `eval` するときに [m:Kernel?.eval] に渡す行番号を取得・設定します。
 
@@ -430,6 +433,7 @@ p erb.lineno    # => 3
 - **SEE** [m:ERB#filename], [m:ERB#filename=]
 
 ### def location=((filename, lineno))
+{: since="2.2.0"}
 
 エラーメッセージや `eval` に使われるファイル名と行番号をまとめて設定します。
 
@@ -447,6 +451,7 @@ p erb.lineno   # => 10
 - **SEE** [m:ERB#filename=]
 
 ### def make_compiler(trim_mode) -> ERB::Compiler
+{: since="2.0.0"}
 
 自身のための `ERB::Compiler` オブジェクトを新しく作成して返します。
 

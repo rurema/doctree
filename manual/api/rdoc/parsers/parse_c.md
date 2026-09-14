@@ -123,6 +123,7 @@ C 言語で記述されたソースコードから組み込みクラス/モジ�
 
 #%until 3.2
 ### def handle_tab_width(body) -> String
+{: since="1.9.1"}
 
 body に含まれるタブをスペースに変換した文字列を返します。
 

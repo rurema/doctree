@@ -197,7 +197,9 @@ obj を width カラムのテキストとして自身に追加します。
 現在のインデントの深さを返します。
 
 ### def fill_breakable(sep = ' ') -> ()
+{: since=""}
 ### def fill_breakable(sep, width = sep.length) -> ()
+{: since=""}
 
 [m:PrettyPrint#breakable] と似ていますが、改行するかどうかがそれぞれ個別に決定される点が異なります。
 
@@ -228,6 +230,7 @@ puts out
 - **SEE** [m:PrettyPrint#breakable]
 
 ### def break_outmost_groups -> ()
+{: since=""}
 
 自身のバッファの中で、出力幅([m:PrettyPrint#maxwidth])を超えている外側のグループを、バッファの幅が maxwidth 以下になるまで改行して出力します。
 
@@ -252,6 +255,7 @@ puts out
 ```
 
 ### def current_group -> PrettyPrint::Group
+{: since=""}
 
 スタックに最後に積まれたグループ、つまり現在ブロックを実行中の最も内側の [m:PrettyPrint#group] に対応するグループを返します。
 
@@ -275,10 +279,12 @@ puts out
 - **SEE** [m:PrettyPrint#group]
 
 ### def group_queue -> PrettyPrint::GroupQueue
+{: since=""}
 
 自身が持つ、プリティプリント待ちのグループのキュー(PrettyPrint::GroupQueue オブジェクト)を返します。
 
 ### def group_sub { ... } -> object
+{: since=""}
 
 ブロックを実行しながら、現在のグループより1段階深いグループをキューに追加します。
 

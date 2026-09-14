@@ -268,6 +268,7 @@ singleton で指定した条件と一致するメソッドすべての可視性�
 
 #%until 4.0
 ### def each_include {|i| ... } -> [RDoc::Include]
+{: since="1.9.2"}
 
 追加された [c:RDoc::Include] に対してブロックを評価します。
 
@@ -277,6 +278,7 @@ singleton で指定した条件と一致するメソッドすべての可視性�
 
 #%until 4.0
 ### def each_extend {|e| ... } -> [RDoc::Extend]
+{: since="2.0.0"}
 
 追加された `RDoc::Extend` に対してブロックを評価します。
 
@@ -284,6 +286,7 @@ singleton で指定した条件と一致するメソッドすべての可視性�
 
 #%until 4.0
 ### def find_file_named(name) -> RDoc::TopLevel | nil
+{: since="1.9.2"}
 
 name で指定した名前のファイルを、`self` が所属する `RDoc::Store` 内から検索します。
 見つからなかった場合は nil を返します。

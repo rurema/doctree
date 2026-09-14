@@ -490,6 +490,7 @@ p str.lines.grep(/"type":"SHAPE"/).size
 - **SEE** [m:ObjectSpace?.dump], [m:ObjectSpace?.trace_object_allocations_start]
 
 ### module_function def count_imemo_objects(result_hash = nil) -> Hash
+{: since="2.3.0"}
 
 T_IMEMO の種類ごとにオブジェクトの数を格納したハッシュを返します。T_IMEMO は Ruby のプログラムからは見えない Ruby 内部専用のオブジェクトです。
 
@@ -512,6 +513,7 @@ p ObjectSpace.count_imemo_objects
 本メソッドは CRuby 以外では動作しません。
 
 ### module_function def count_symbols(result_hash = nil) -> Hash
+{: since="2.3.0"}
 
 Symbol の種類ごとにオブジェクトの数を格納したハッシュを返します。
 
@@ -576,6 +578,7 @@ puts str.lines.first
 #%end
 
 ### module_function def internal_class_of(obj) -> Class | Module
+{: since="2.3.0"}
 
 obj の実際のクラスを返します。これは [m:Object#class] が返すクラスとは異なる場合があります。
 
@@ -599,6 +602,7 @@ p ObjectSpace.internal_class_of(s)  # => #<Class:#<String:0x...>>
 - **SEE** [m:ObjectSpace?.internal_super_of]
 
 ### module_function def internal_super_of(cls) -> Class | Module
+{: since="2.3.0"}
 
 cls の直接のスーパークラスを返します。include したモジュールの iclass のような隠されたクラスも読み飛ばさずに返します。
 
@@ -624,6 +628,7 @@ p ObjectSpace.internal_super_of(A)   # => #<InternalObject:0x... T_ICLASS>
 - **SEE** [m:ObjectSpace?.internal_class_of]
 
 ### module_function def trace_object_allocations_debug_start -> nil
+{: since="2.1.0"}
 
 GC のデバッグ用に、オブジェクト割り当てのトレースを開始します。挙動は [m:ObjectSpace?.trace_object_allocations_start] を呼び出すのと同じですが、あわせて内部的なレポーターを登録します。アプリケーションで "... is T_NONE" のような BUG に遭遇した場合、アプリケーションの先頭で本メソッドを呼んでおくと調査の助けになります。
 

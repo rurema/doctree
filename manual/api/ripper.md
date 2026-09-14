@@ -45,6 +45,7 @@ src の解析を行うには更に [m:Ripper#parse] などの呼び出しが必�
 - **SEE** [m:Ripper#parse]
 
 ### def Ripper.lex_state_name(state) -> String
+{: since="2.5.0"}
 
 state で指定したスキャナ状態を表す文字列表現を返します。
 
@@ -99,7 +100,9 @@ yydebugの構文解析器の追跡機能が有効か無効かを指定します�
 - **param** `flag` -- true か false を指定します。
 
 ### def debug_output -> object
+{: since="2.7.0"}
 ### def debug_output=(obj)
+{: since="2.7.0"}
 
 構文解析のデバッグ出力先を取得・設定します。
 
@@ -112,18 +115,21 @@ yydebugの構文解析器の追跡機能が有効か無効かを指定します�
 - **SEE** [m:Ripper#yydebug], [m:Ripper#yydebug=]
 
 ### def error? -> bool
+{: since="2.2.0"}
 
 これまでに解析した Ruby プログラムにエラーがあったかどうかを返します。
 
 - **SEE** [m:Ripper#parse]
 
 ### def state -> Integer | nil
+{: since="2.5.0"}
 
 現在のトークンのスキャナ状態を、`Ripper::EXPR_*` 定数のビット OR を表す整数で返します。
 
 このメソッドはイベントハンドラの中でのみ意味のある値を返します。イベントハンドラの中で self.state を実行してください。
 
 ### def token -> String | nil
+{: since="2.7.0"}
 
 現在のトークン文字列を返します。
 

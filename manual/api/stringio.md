@@ -722,6 +722,7 @@ p buf                     # => "hello"
 #%end
 
 ### def set_encoding_by_bom -> Encoding | nil
+{: since="2.7.0"}
 
 自身の BOM からエンコーディングを設定します。
 

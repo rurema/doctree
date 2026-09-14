@@ -34,6 +34,7 @@ doc 以下に出力します。
 
 #%until 3.1
 ### def load_options -> RDoc::Options
+{: since="2.0.0"}
 
 カレントディレクトリの `.rdoc_options` ファイルが存在すれば、その内容を読み込んで [c:RDoc::Options] オブジェクトを返します。
 存在しない場合は新しい [c:RDoc::Options] オブジェクトを返します。

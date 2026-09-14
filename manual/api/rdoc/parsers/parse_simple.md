@@ -35,6 +35,7 @@ require:
 - **return** -- [c:RDoc::TopLevel] オブジェクトを返します。
 
 ### def remove_private_comment(comment) -> String
+{: since="2.0.0"}
 
 行頭の "--" から "++" で囲まれたコメントを comment から削除した結果を返します。
 

@@ -429,6 +429,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 - **SEE** GNU Readline ライブラリの rl_get_screen_size 関数
 
 ### def Readline.completion_quote_character -> String | nil
+{: since="2.5.0"}
 
 補完処理中(completion_proc の中など)に呼び出すと、補完対象の引数をクオートするために使われた文字を返します。引数がクオートされていない場合は `nil` を返します。
 
@@ -439,8 +440,11 @@ GNU Readline のデフォルト値は nil(NULL) です。
 - **SEE** [m:Readline.completer_quote_characters=]
 
 ### def Readline.delete_text(start, length) -> self
+{: since="2.1.0"}
 ### def Readline.delete_text(range) -> self
+{: since="2.1.0"}
 ### def Readline.delete_text() -> self
+{: since="2.1.0"}
 
 現在の入力行のうち、指定した範囲のテキストを削除します。引数を省略した場合は、入力行全体を削除します。
 
@@ -453,6 +457,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 - **SEE** GNU Readline ライブラリの rl_delete_text 関数
 
 ### def Readline.emacs_editing_mode? -> bool
+{: since="1.9.1"}
 
 Emacs モードが有効であれば真を返します。そうでなければ偽を返します。
 
@@ -461,6 +466,7 @@ Emacs モードが有効であれば真を返します。そうでなければ�
 - **SEE** [m:Readline.emacs_editing_mode]
 
 ### def Readline.insert_text(string) -> self
+{: since="2.0.0"}
 
 現在のカーソル位置に文字列 string を挿入します。
 
@@ -471,6 +477,7 @@ Emacs モードが有効であれば真を返します。そうでなければ�
 - **SEE** GNU Readline ライブラリの rl_insert_text 関数
 
 ### def Readline.line_buffer -> String
+{: since="1.9.2"}
 
 編集中の行全体を返します。 completion_proc の中で、補完要求の文脈を判断するのに便利です。
 
@@ -481,7 +488,9 @@ Emacs モードが有効であれば真を返します。そうでなければ�
 - **SEE** [m:Readline.point]
 
 ### def Readline.point=(pos)
+{: since="2.1.0"}
 ### def Readline.point -> Integer
+{: since="1.9.2"}
 
 編集中の行における現在のカーソル位置のインデックスを設定・取得します。
 
@@ -494,7 +503,9 @@ Emacs モードが有効であれば真を返します。そうでなければ�
 - **raise** `NotImplementedError` -- サポートしていない環境で発生します。
 
 ### def Readline.pre_input_hook=(proc)
+{: since="2.0.0"}
 ### def Readline.pre_input_hook -> Proc | nil
+{: since="2.0.0"}
 
 最初のプロンプトが表示された後、readline が入力文字の読み取りを開始する直前に呼び出す [c:Proc] オブジェクト proc を指定・取得します。
 
@@ -509,7 +520,9 @@ Emacs モードが有効であれば真を返します。そうでなければ�
 
 #%until 3.3
 ### def Readline.quoting_detection_proc=(proc)
+{: since="2.5.0"}
 ### def Readline.quoting_detection_proc -> Proc
+{: since="2.5.0"}
 
 ユーザの入力中の文字がエスケープされているかどうかを判定する [c:Proc] オブジェクト proc を指定・取得します。
 
@@ -528,6 +541,7 @@ Readline は、[m:Readline.completer_quote_characters=] で指定した文字(�
 #%end
 
 ### def Readline.redisplay -> self
+{: since="2.0.0"}
 
 画面の表示を、現在の入力内容を反映した状態に更新します。
 
@@ -537,6 +551,7 @@ Readline は、[m:Readline.completer_quote_characters=] で指定した文字(�
 
 #%until 3.3
 ### def Readline.refresh_line -> nil
+{: since="1.9.2"}
 
 現在の入力行をクリアします。
 
@@ -545,7 +560,9 @@ Readline は、[m:Readline.completer_quote_characters=] で指定した文字(�
 #%end
 
 ### def Readline.special_prefixes=(string)
+{: since="2.0.0"}
 ### def Readline.special_prefixes -> String
+{: since="2.0.0"}
 
 単語の区切り文字ではあるものの、補完関数に渡すテキストにはそのまま残しておく文字を指定・取得します。プログラムはこれを使って、どのような補完を行うかを判断できます。例えば、 Bash はシェル変数やホスト名を補完できるように、この値を `"$@"` に設定しています。
 
@@ -556,6 +573,7 @@ Readline は、[m:Readline.completer_quote_characters=] で指定した文字(�
 - **SEE** GNU Readline ライブラリの rl_special_prefixes 変数
 
 ### def Readline.vi_editing_mode? -> bool
+{: since="1.9.1"}
 
 vi モードが有効であれば真を返します。そうでなければ偽を返します。
 

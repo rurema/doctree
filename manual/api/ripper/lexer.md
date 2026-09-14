@@ -145,6 +145,7 @@ Ruby プログラムの字句解析器です。
 ライブラリ内部で使用します。
 
 ### def errors -> [Ripper::Lexer::Elem] | nil
+{: since="2.7.0"}
 
 直前に実行した解析([m:Ripper::Lexer#scan]・[m:Ripper::Lexer#lex]・[m:Ripper::Lexer#tokenize] など)で見つかった構文エラーの一覧を返します。エラーが見つからなかった場合は空の配列を返します。解析を一度も実行していない場合は `nil` を返します。
 
@@ -153,6 +154,7 @@ Ruby プログラムの字句解析器です。
 - **SEE** [m:Ripper::Lexer#scan]
 
 ### def scan -> [Ripper::Lexer::Elem]
+{: since="2.7.0"}
 
 自身の持つ Ruby プログラムを解析し、トークンの一覧を返します。[m:Ripper::Lexer#lex] や [m:Ripper::Lexer#tokenize] と異なり、[m:Ripper::Lexer#errors] で得られる構文エラーの要素も結果に含め、出現位置順に並べて返します。
 

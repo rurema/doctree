@@ -179,6 +179,7 @@ p SecureRandom.alphanumeric(4, chars: [*"0".."9"]) # => "2952"
 - **SEE** [m:Random::Formatter#alphanumeric]
 
 ### def SecureRandom.bytes(n) -> String
+{: since="2.4.0"}
 
 n バイトの乱数を生成し、バイナリの文字列として返します。
 

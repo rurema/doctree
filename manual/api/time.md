@@ -198,6 +198,7 @@ Time.strptime('01/5/18 4:13:00', '%Y/%m/%d %T'){|y|
 - **param** `format` -- 書式文字列
 
 ### def Time.zone_offset(zone, year = self.now.year) -> Integer | nil
+{: since=""}
 
 タイムゾーンを表す文字列 zone を、協定世界時 (UTC) との差(秒)に変換します。
 

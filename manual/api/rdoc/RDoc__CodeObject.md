@@ -153,6 +153,7 @@ self.parent の名前を返します。
 
 #%until 4.0
 ### def each_parent {|code_object| ... } -> self
+{: since="1.9.3"}
 
 [m:RDoc::CodeObject#parent] が nil になるまで、`self` の親を順にたどりながらブロックを評価します。
 
@@ -162,7 +163,9 @@ self.parent の名前を返します。
 
 #%until 4.0
 ### def viewer -> object
+{: since=""}
 ### def viewer=(val)
+{: since=""}
 
 `self` に関連付けられた viewer オブジェクトを返します。
 

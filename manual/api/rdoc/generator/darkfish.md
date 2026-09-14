@@ -178,7 +178,9 @@ HTML を生成するためのクラスです。
 
 #%until 4.0
 ### def class_dir -> nil
+{: since="1.9.2"}
 ### def file_dir -> nil
+{: since="1.9.2"}
 
 常に nil を返します。
 
@@ -189,6 +191,7 @@ HTML を生成するためのクラスです。
 
 #%until 4.0
 ### def time_delta_string(seconds) -> String
+{: since="2.0.0"}
 
 seconds で指定した秒数を、人が読みやすい形式の文字列にして返します。
 
