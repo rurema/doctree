@@ -37,6 +37,7 @@ alias が指す先の anchor を変更します。
      [m:Psych::Nodes::Alias.new]
 
 ### def alias? -> bool
+{: since="2.6.0"}
 
 常に true を返します。
 

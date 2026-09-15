@@ -48,7 +48,9 @@ OpenSSL::PKey::EC オブジェクトを生成します。
 - **raise** `OpenSSL::PKey::ECError` -- オブジェクトの生成に失敗した場合に発生します
 
 ### def OpenSSL::PKey::EC.generate(ec_group) -> OpenSSL::PKey::EC
+{: since="2.4.0"}
 ### def OpenSSL::PKey::EC.generate(string) -> OpenSSL::PKey::EC
+{: since="2.4.0"}
 
 新しいランダムな秘密鍵と公開鍵を持つ EC オブジェクトを生成します。
 
@@ -114,11 +116,13 @@ nil を渡すことで EC オブジェクトが公開鍵のみを持つ状態に
 
 ### def private_key? -> bool
 ### def private? -> bool
+{: since="2.4.0"}
 
 EC オブジェクトが秘密鍵を保持していれば真を返します。
 
 ### def public_key? -> bool
 ### def public? -> bool
+{: since="2.4.0"}
 
 EC オブジェクトが公開鍵を保持していれば真を返します。
 
@@ -128,6 +132,7 @@ EC オブジェクトが公開鍵を保持していれば真を返します。
 このメソッドを呼ぶ前に [c:OpenSSL::Random] の各モジュール関数によって乱数が適切に初期化されている必要があります。
 
 ### def generate_key! -> self
+{: since="2.4.0"}
 ### def generate_key -> self
 
 鍵ペアを乱数で生成します。
@@ -181,7 +186,9 @@ data のダイジェストを取る処理はこのメソッドに含まれてい
 - **SEE** [m:OpenSSL::PKey::EC#dsa_sign_asn1]
 
 ### def export(cipher = nil, pass = nil) -> String
+{: since="2.0.0"}
 ### def to_pem(cipher = nil, pass = nil) -> String
+{: since=""}
 
 鍵を PEM 形式の文字列に変換します。
 
@@ -451,6 +458,7 @@ Point オブジェクトを生成します。
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- 変換に失敗した場合に発生します
 
 ### def to_octet_string(conversion_form) -> String
+{: since="2.5.0"}
 
 楕円曲線上の点をオクテット文字列(バイト列)として返します。
 
@@ -467,6 +475,7 @@ Point オブジェクトを生成します。
 - **raise** `OpenSSL::PKey::EC::Point::Error` -- 演算に失敗した場合に発生します
 
 ### def mul(bn1, bn2 = nil) -> OpenSSL::PKey::EC::Point
+{: since="2.0.0"}
 
 楕円曲線上の点のスカラー倍算を行います。
 

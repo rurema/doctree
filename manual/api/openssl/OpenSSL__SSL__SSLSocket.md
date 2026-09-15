@@ -314,6 +314,7 @@ hostname に nil を渡すと SNI 拡張を利用しません。
 検証に成功した場合は [m:OpenSSL::X509::V_OK] を返します。
 
 ### def alpn_protocol -> String | nil
+{: since="2.3.0"}
 
 ハンドシェイクの結果、Application-Layer Protocol Negotiation(ALPN)で最終的に選択されたプロトコルを表す文字列を返します。
 
@@ -322,6 +323,7 @@ ALPN が使われなかった場合や、まだハンドシェイクが行われ
 - **SEE** [m:OpenSSL::SSL::SSLContext#alpn_protocols=], [m:OpenSSL::SSL::SSLContext#alpn_select_cb=]
 
 ### def client_ca -> [OpenSSL::X509::Name] | nil
+{: since="1.9.3"}
 
 クライアント証明書を要求する際に提示される CA のリストを、[c:OpenSSL::X509::Name] の配列で返します。
 
@@ -376,6 +378,7 @@ TLS のマスターシークレットから `label`(と、指定した場合は 
 - **SEE** [m:OpenSSL::SSL::SSLSocket#peer_finished_message]
 
 ### def npn_protocol -> String | nil
+{: since="2.0.0"}
 
 ハンドシェイクの結果、Next Protocol Negotiation(NPN)でクライアントが最終的に選択したプロトコルを表す文字列を返します。
 
@@ -390,12 +393,14 @@ NPN が使われなかった場合や、まだハンドシェイクが行われ�
 - **SEE** [m:OpenSSL::SSL::SSLSocket#finished_message]
 
 ### def ssl_version -> String
+{: since="2.0.0"}
 
 コネクションで使われている SSL/TLS のバージョンを表す文字列を返します。
 
 例えば "TLSv1.2" のような文字列を返します。
 
 ### def tmp_key -> OpenSSL::PKey::PKey | nil
+{: since="2.4.0"}
 
 Forward Secrecy(前方秘匿性)を持つ暗号スイートが使われた場合の、一時的な鍵を返します。
 

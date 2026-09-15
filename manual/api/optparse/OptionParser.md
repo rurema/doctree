@@ -153,6 +153,7 @@ parse(opts2) # => unsupported argument type: Time (ArgumentError)
 - **SEE** [m:OptionParser#getopts]
 
 ### def OptionParser.terminate(arg = nil) -> ()
+{: since=""}
 
 [m:OptionParser#terminate] と同じです。
 
@@ -246,6 +247,7 @@ p opts.banner # => "Usage: example.rb [options]"
 
 ### def banner=(heading)
 ### def set_banner(heading)
+{: since=""}
 
 サマリの最初に表示される文字列を指定します。
 
@@ -292,6 +294,7 @@ p opts.summarize
 
 ### def summary_width=(width)
 ### def set_summary_width(width)
+{: since=""}
 
 サマリを表示するときの幅を整数で指定します。
 
@@ -341,6 +344,7 @@ p opts.summarize
 
 ### def summary_indent=(indent)
 ### def set_summary_indent(indent)
+{: since=""}
 
 サマリを表示する時のインデントを文字列で指定します。
 
@@ -383,6 +387,7 @@ end
 
 ### def program_name=(name)
 ### def set_program_name(name)
+{: since=""}
 
 プログラムの名前を文字列で指定します。
 
@@ -1191,7 +1196,9 @@ params = opt.getopts(ARGV, "ab:", "foo", "bar:")
                                 実際は OptionParser::ParseError のサブクラスになります。
 
 ### def define(*params) {|v| ... } -> OptionParser::Switch
+{: since=""}
 ### def def_option(*params) {|v| ... } -> OptionParser::Switch
+{: since=""}
 
 オプションを登録します。[m:OptionParser#on] と同じ引数を受け付けますが、`self` ではなく登録した [c:OptionParser::Switch] オブジェクトを返します。
 
@@ -1201,7 +1208,9 @@ params = opt.getopts(ARGV, "ab:", "foo", "bar:")
 - **SEE** [m:OptionParser#on]
 
 ### def define_head(*params) {|v| ... } -> OptionParser::Switch
+{: since=""}
 ### def def_head_option(*params) {|v| ... } -> OptionParser::Switch
+{: since=""}
 
 オプションを、サマリの先頭に表示される位置に登録します。[m:OptionParser#on_head] と同じ引数を受け付けますが、`self` ではなく登録した [c:OptionParser::Switch] オブジェクトを返します。
 
@@ -1211,7 +1220,9 @@ params = opt.getopts(ARGV, "ab:", "foo", "bar:")
 - **SEE** [m:OptionParser#on_head]
 
 ### def define_tail(*params) {|v| ... } -> OptionParser::Switch
+{: since=""}
 ### def def_tail_option(*params) {|v| ... } -> OptionParser::Switch
+{: since=""}
 
 オプションを、サマリの末尾に表示される位置に登録します。[m:OptionParser#on_tail] と同じ引数を受け付けますが、`self` ではなく登録した [c:OptionParser::Switch] オブジェクトを返します。
 
@@ -1221,6 +1232,7 @@ params = opt.getopts(ARGV, "ab:", "foo", "bar:")
 - **SEE** [m:OptionParser#on_tail]
 
 ### def terminate(arg = nil) -> ()
+{: since=""}
 
 オプションのパースを打ち切ります。
 
@@ -1301,6 +1313,7 @@ p opts.parse(["-a", "-x", "-a"])   # => ["-x", "-a"]
 #%end
 
 ### def candidate(word) -> [String]
+{: since="1.9.3"}
 
 `word` で始まるオプション名の補完候補を配列で返します。
 

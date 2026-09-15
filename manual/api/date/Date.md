@@ -911,6 +911,7 @@ end
 #%end
 
 ### def day_fraction -> Integer | Rational
+{: since=""}
 
 1 日のうちで経過した時刻を分数で返します。真夜中を `0`、正午を `Rational(1, 2)` として計算します。
 
@@ -923,6 +924,7 @@ p DateTime.new(2001, 2, 3, 12).day_fraction # => (1/2)
 ```
 
 ### def infinite? -> false
+{: since="2.7.0"}
 
 常に `false` を返します。
 

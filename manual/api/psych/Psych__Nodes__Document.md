@@ -111,6 +111,7 @@ tag directive の配列を設定します。
 ルートノードを返します。
 
 ### def document? -> bool
+{: since="2.6.0"}
 
 常に true を返します。
 

@@ -40,6 +40,7 @@ filename を省略した場合は空のオブジェクトが生成されます�
 - **param** `str` -- 設定ファイルデータ
 
 ### def OpenSSL::Config.parse_config(io) -> {String => {String => String}}
+{: since="1.9.3"}
 
 io から設定データを読み込んでパースし、その内容全体を Hash として返します。
 

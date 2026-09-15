@@ -127,7 +127,9 @@ p JSON.state # => JSON::Ext::Generator::State
 
 #%until 4.1
 ### def JSON.dump_default_options -> {Symbol => object}
+{: since="2.0.0"}
 ### def JSON.dump_default_options=(val)
+{: since="2.0.0"}
 
 [m:JSON?.dump] が使用するデフォルトのオプションを取得・設定します。
 
@@ -153,7 +155,9 @@ p JSON.dump_default_options[:allow_nan]   # => true
 
 #%until 4.1
 ### def JSON.load_default_options -> {Symbol => object}
+{: since="2.0.0"}
 ### def JSON.load_default_options=(val)
+{: since="2.0.0"}
 
 [m:JSON?.load] が使用するデフォルトのオプションを取得・設定します。
 
@@ -204,6 +208,7 @@ p JSON.unsafe_load_default_options[:create_additions] # => true
 
 #%until 4.0
 ### def JSON.iconv(to, from, string) -> String
+{: since="1.9.2"}
 
 文字列 `string` の文字エンコーディングを `from` から `to` に変換して返します。
 

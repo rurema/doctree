@@ -42,6 +42,7 @@ stream に使われるエンコーディングを指定します。
 - **SEE** [m:Psych::Nodes::Stream#encoding]
 
 ### def stream? -> bool
+{: since="2.6.0"}
 
 常に true を返します。
 

@@ -96,6 +96,7 @@ FIPS モードを明示的に on/off します。
 - **SEE** [m:OpenSSL::OPENSSL_FIPS]
 
 ### module_function def Digest(name) -> Class
+{: since="2.0.0"}
 
 name に対応する [c:OpenSSL::Digest] のサブクラスを返します。
 
@@ -109,6 +110,7 @@ p OpenSSL.Digest("MD5") # => OpenSSL::Digest::MD5
 ```
 
 ### module_function def fips_mode -> bool
+{: since="2.5.0"}
 
 FIPS モードが現在有効であれば true を返します。
 

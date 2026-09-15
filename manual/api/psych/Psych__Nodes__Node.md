@@ -69,6 +69,7 @@ options には以下が指定できます。
 - **param** `options` -- オプション
 
 ### def alias? -> bool
+{: since="2.6.0"}
 
 `self` が [c:Psych::Nodes::Alias] を表すノードかどうかを返します。
 
@@ -77,6 +78,7 @@ options には以下が指定できます。
 - **SEE** [c:Psych::Nodes::Alias]
 
 ### def document? -> bool
+{: since="2.6.0"}
 
 `self` が [c:Psych::Nodes::Document] を表すノードかどうかを返します。
 
@@ -85,6 +87,7 @@ options には以下が指定できます。
 - **SEE** [c:Psych::Nodes::Document]
 
 ### def mapping? -> bool
+{: since="2.6.0"}
 
 `self` が [c:Psych::Nodes::Mapping] を表すノードかどうかを返します。
 
@@ -93,6 +96,7 @@ options には以下が指定できます。
 - **SEE** [c:Psych::Nodes::Mapping]
 
 ### def scalar? -> bool
+{: since="2.6.0"}
 
 `self` が [c:Psych::Nodes::Scalar] を表すノードかどうかを返します。
 
@@ -101,6 +105,7 @@ options には以下が指定できます。
 - **SEE** [c:Psych::Nodes::Scalar]
 
 ### def sequence? -> bool
+{: since="2.6.0"}
 
 `self` が [c:Psych::Nodes::Sequence] を表すノードかどうかを返します。
 
@@ -109,6 +114,7 @@ options には以下が指定できます。
 - **SEE** [c:Psych::Nodes::Sequence]
 
 ### def stream? -> bool
+{: since="2.6.0"}
 
 `self` が [c:Psych::Nodes::Stream] を表すノードかどうかを返します。
 
@@ -117,7 +123,9 @@ options には以下が指定できます。
 - **SEE** [c:Psych::Nodes::Stream]
 
 ### def start_line -> Integer | nil
+{: since="2.5.0"}
 ### def start_line=(line)
+{: since="2.5.0"}
 
 `self` が表す YAML ドキュメント上の要素が開始する行番号を返します。
 
@@ -127,7 +135,9 @@ options には以下が指定できます。
 - **SEE** [m:Psych::Nodes::Node#start_column], [m:Psych::Nodes::Node#end_line]
 
 ### def start_column -> Integer | nil
+{: since="2.5.0"}
 ### def start_column=(column)
+{: since="2.5.0"}
 
 `self` が表す YAML ドキュメント上の要素が開始する行内の位置(列番号)を返します。
 
@@ -137,7 +147,9 @@ options には以下が指定できます。
 - **SEE** [m:Psych::Nodes::Node#start_line], [m:Psych::Nodes::Node#end_column]
 
 ### def end_line -> Integer | nil
+{: since="2.5.0"}
 ### def end_line=(line)
+{: since="2.5.0"}
 
 `self` が表す YAML ドキュメント上の要素が終了する行番号を返します。
 
@@ -147,7 +159,9 @@ options には以下が指定できます。
 - **SEE** [m:Psych::Nodes::Node#end_column], [m:Psych::Nodes::Node#start_line]
 
 ### def end_column -> Integer | nil
+{: since="2.5.0"}
 ### def end_column=(column)
+{: since="2.5.0"}
 
 `self` が表す YAML ドキュメント上の要素が終了する行内の位置(列番号)を返します。
 

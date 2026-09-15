@@ -16,6 +16,7 @@ self が大きい時には正の整数、等しい時には 0、小さい時に�
 
 ### def =~(other) -> bool
 ### def ===(other) -> bool
+{: since=""}
 
 self と other を比較して真偽値を返します。
 

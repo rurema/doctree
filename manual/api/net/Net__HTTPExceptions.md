@@ -17,6 +17,7 @@ HTTP 例外クラスです。
 ## Instance Methods
 ### def response -> Net::HTTPResponse
 ### def data -> Net::HTTPResponse
+{: since=""}
 
 例外の原因となったレスポンスオブジェクトを返します。
 

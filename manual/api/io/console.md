@@ -28,12 +28,14 @@ STDIN.noecho(&:gets)
 - **raise** `LocalJumpError` -- ブロックを指定しなかった場合に発生します。
 
 ### def echo=(flag)
+{: since="1.9.3"}
 
 文字入力時のエコーバックが有効かどうかを設定します。
 
 - **param** `flag` -- true を指定した場合、文字入力時のエコーバックが有効に設定されます。
 
 ### def echo? -> bool
+{: since="1.9.3"}
 
 文字入力時のエコーバックが有効かどうかを返します。
 
@@ -61,6 +63,7 @@ STDIN.raw(&:gets)
 ```
 
 ### def raw!(min: 1, time: 0, intr: false) -> self
+{: since="1.9.3"}
 
 raw モードを有効にします。端末のモードを後で元に戻す必要がある場合は
 [m:IO#raw] を使用してください。
@@ -131,10 +134,13 @@ cooked モードを有効にします。端末のモードを後で元に戻す�
 
 #%until 4.1
 ### def console_mode -> IO::ConsoleMode
+{: since="2.7.0"}
 #%else
 ### def console_mode -> IO::Console::Mode
+{: since="2.7.0"}
 #%end
 ### def console_mode=(mode)
+{: since="2.7.0"}
 
 現在の端末の入出力モードを取得し、または設定します。
 
@@ -167,10 +173,12 @@ end
 #%end
 
 ### def beep -> self
+{: since="2.3.0"}
 
 端末を鳴らします。
 
 ### def goto(line, column) -> self
+{: since="2.3.0"}
 
 カーソル位置を line 行目、column 列目に移動します。
 
@@ -180,6 +188,7 @@ end
 - **SEE** [m:IO#cursor]
 
 ### def goto_column(column) -> self
+{: since="2.7.0"}
 
 カーソルを同じ行のまま column 列目に移動します。
 
@@ -188,7 +197,9 @@ end
 - **SEE** [m:IO#goto]
 
 ### def cursor -> [Integer, Integer] | nil
+{: since="2.3.0"}
 ### def cursor=(pos)
+{: since="2.3.0"}
 
 現在のカーソル位置を取得し、または移動します。
 
@@ -204,6 +215,7 @@ end
 - **SEE** [m:IO#goto]
 
 ### def cursor_up(n) -> self
+{: since="2.7.0"}
 
 カーソルを n 行上に移動します。
 
@@ -212,6 +224,7 @@ end
 - **SEE** [m:IO#cursor_down]
 
 ### def cursor_down(n) -> self
+{: since="2.7.0"}
 
 カーソルを n 行下に移動します。
 
@@ -220,6 +233,7 @@ end
 - **SEE** [m:IO#cursor_up]
 
 ### def cursor_left(n) -> self
+{: since="2.7.0"}
 
 カーソルを n 列左に移動します。
 
@@ -228,6 +242,7 @@ end
 - **SEE** [m:IO#cursor_right]
 
 ### def cursor_right(n) -> self
+{: since="2.7.0"}
 
 カーソルを n 列右に移動します。
 
@@ -254,6 +269,7 @@ end
 #%end
 
 ### def erase_line(mode) -> self
+{: since="2.7.0"}
 
 カーソル位置を基準にして、行の一部または全体を消去します。
 
@@ -265,6 +281,7 @@ end
 - **SEE** [m:IO#erase_screen]
 
 ### def erase_screen(mode) -> self
+{: since="2.7.0"}
 
 カーソル位置を基準にして、画面の一部または全体を消去します。
 
@@ -277,6 +294,7 @@ end
 - **SEE** [m:IO#erase_line], [m:IO#clear_screen]
 
 ### def clear_screen -> self
+{: since="2.7.0"}
 
 画面全体を消去し、カーソルを左上に移動します。
 
@@ -286,6 +304,7 @@ end
 - **SEE** [m:IO#erase_screen], [m:IO#goto]
 
 ### def scroll_forward(n) -> self
+{: since="2.7.0"}
 
 画面全体を n 行分、上方向にスクロールします。新しく現れた行は空白になります。
 
@@ -294,6 +313,7 @@ end
 - **SEE** [m:IO#scroll_backward]
 
 ### def scroll_backward(n) -> self
+{: since="2.7.0"}
 
 画面全体を n 行分、下方向にスクロールします。新しく現れた行は空白になります。
 
@@ -302,6 +322,7 @@ end
 - **SEE** [m:IO#scroll_forward]
 
 ### def pressed?(key) -> bool
+{: since="2.3.0"}
 
 key で指定したキーが押されているかどうかを返します。
 
@@ -314,6 +335,7 @@ key で指定したキーが押されているかどうかを返します。
 - **raise** `NotImplementedError` -- Windows 以外の環境で発生します。
 
 ### def check_winsize_changed { ... } -> self
+{: since="2.7.0"}
 
 コンソールの入力イベントキューに溜まっているイベントを読み進め、ウィンドウサイズが
 変更されたイベントが見つかるたびにブロックを評価します。ウィンドウサイズの変更以外の
@@ -359,6 +381,7 @@ key で指定したキーが押されているかどうかを返します。
 #%end
 
 ### def getpass(prompt = nil) -> String
+{: since="2.3.0"}
 
 エコーバックなしで 1 行読み込んで返します。
 
@@ -440,6 +463,7 @@ end
 ## Instance Methods
 
 ### def echo=(flag)
+{: since="2.7.0"}
 
 文字入力時のエコーバックを有効にするかどうかを `self` に設定します。
 
@@ -457,8 +481,10 @@ end
 #%end
 #%until 4.1
 ### def raw(min: 1, time: 0, intr: false) -> IO::ConsoleMode
+{: since="2.7.0"}
 #%else
 ### def raw(min: 1, time: 0, intr: false) -> IO::Console::Mode
+{: since="2.7.0"}
 #%end
 
 `self` を raw モードに変更したコピーを返します。`self` は変更しません。
@@ -472,6 +498,7 @@ end
 - **SEE** [m:IO#raw]
 
 ### def raw!(min: 1, time: 0, intr: false) -> self
+{: since="2.7.0"}
 
 `self` を raw モードに変更します。
 
@@ -536,7 +563,7 @@ termios を利用できない環境(Windows)では何もしません。
 - **param** `enabled` -- 真を指定した場合は折り返しを有効に、偽を指定した場合は無効にします。
 
 #%end
-#%until 4.1
+#%version 3.3...4.1
 ## Constants
 
 ### const VERSION -> String

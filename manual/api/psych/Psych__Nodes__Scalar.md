@@ -128,6 +128,7 @@ scalar の style を変更します。
      [m:Psych::Nodes::Scalar.new]
 
 ### def scalar? -> bool
+{: since="2.6.0"}
 
 常に true を返します。
 

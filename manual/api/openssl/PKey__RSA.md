@@ -368,6 +368,7 @@ private exponent を設定します。
 のように公開鍵が持っていない値は 0 になります。
 
 ### def set_key(n, e, d) -> self
+{: since="2.4.0"}
 
 n, e, d を `self` に設定します。
 
@@ -378,6 +379,7 @@ n, e, d を `self` に設定します。
 - **SEE** [m:OpenSSL::PKey::RSA#n], [m:OpenSSL::PKey::RSA#e], [m:OpenSSL::PKey::RSA#d]
 
 ### def set_factors(p, q) -> self
+{: since="2.4.0"}
 
 p, q を `self` に設定します。
 
@@ -387,6 +389,7 @@ p, q を `self` に設定します。
 - **SEE** [m:OpenSSL::PKey::RSA#p], [m:OpenSSL::PKey::RSA#q]
 
 ### def set_crt_params(dmp1, dmq1, iqmp) -> self
+{: since="2.4.0"}
 
 dmp1, dmq1, iqmp を `self` に設定します。それぞれ `d mod (p - 1)`、`d mod (q - 1)`、`q^(-1) mod p` として計算される値です。
 
@@ -397,6 +400,7 @@ dmp1, dmq1, iqmp を `self` に設定します。それぞれ `d mod (p - 1)`、
 - **SEE** [m:OpenSSL::PKey::RSA#dmp1], [m:OpenSSL::PKey::RSA#dmq1], [m:OpenSSL::PKey::RSA#iqmp]
 
 ### def sign_pss(digest, data, salt_length:, mgf1_hash:) -> String
+{: since="2.5.0"}
 
 RSA-PSS (Probabilistic Signature Scheme) を使って data に署名し、計算した署名を返します。
 
@@ -421,6 +425,7 @@ p pub_key.verify_pss("SHA256", signature, data, salt_length: :auto, mgf1_hash: "
 ```
 
 ### def verify_pss(digest, signature, data, salt_length:, mgf1_hash:) -> bool
+{: since="2.5.0"}
 
 RSA-PSS を使って data の署名を検証します。
 

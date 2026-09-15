@@ -43,6 +43,7 @@ p scanner.tokenize("12") # =>  12
 - **param** `string` -- 変換文字列
 
 ### def parse_int(string) -> Integer
+{: since="2.0.0"}
 
 文字列 string を整数に変換して返します。
 

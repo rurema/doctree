@@ -133,6 +133,7 @@ sequence の style を設定します。
      [m:Psych::Nodes::Sequence.new]
 
 ### def sequence? -> bool
+{: since="2.6.0"}
 
 常に true を返します。
 

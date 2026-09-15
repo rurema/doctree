@@ -66,6 +66,7 @@ ex を返します。
 - **raise** `OpenSSL::X509::RevokedError` -- 追加に失敗した場合に発生します
 
 ### def to_der -> String
+{: since="2.5.0"}
 
 DER 形式のバイト列に変換します。
 

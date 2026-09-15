@@ -652,10 +652,12 @@ p (-5).to_bn.negative?  # => true
 自身が 0 である場合に true を返します。
 
 ### def +@ -> OpenSSL::BN
+{: since="2.5.0"}
 
 `self` と同じ値を持つ新しい [c:OpenSSL::BN] オブジェクトを返します。
 
 ### def -@ -> OpenSSL::BN
+{: since="2.5.0"}
 
 `self` の符号を反転した値を持つ新しい [c:OpenSSL::BN] オブジェクトを返します。
 

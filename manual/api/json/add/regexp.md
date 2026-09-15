@@ -31,6 +31,7 @@ p /0\d{1,4}-\d{1,4}-\d{4}/.to_json # => "{\"json_class\":\"Regexp\",\"o\":0,\"s\
 
 #%until 4.1
 ### def as_json(*args) -> Hash
+{: since="1.9.3"}
 
 `self` を JSON 形式の文字列に変換する際に使う、中間表現となるハッシュに変換して返します。
 [m:Regexp#to_json] が内部で使用しています。

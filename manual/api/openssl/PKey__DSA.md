@@ -238,6 +238,7 @@ DSA 鍵の秘密鍵パラメータを設定します。
 0 がセットされます。
 
 ### def set_pqg(p, q, g) -> self
+{: since="2.4.0"}
 
 p, q, g を `self` に設定します。
 
@@ -248,6 +249,7 @@ p, q, g を `self` に設定します。
 - **SEE** [m:OpenSSL::PKey::DSA#p], [m:OpenSSL::PKey::DSA#q], [m:OpenSSL::PKey::DSA#g]
 
 ### def set_key(pub_key, priv_key) -> self
+{: since="2.4.0"}
 
 pub_key と priv_key を `self` に設定します。
 

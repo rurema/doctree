@@ -140,6 +140,7 @@ p head.response_body_permitted? # => false
 ```
 
 ### def decode_content -> bool
+{: since="2.0.0"}
 
 リクエストヘッダフィールド `Accept-Encoding:` をユーザが明示的に設定・削除していないかどうかを表します。
 
@@ -161,6 +162,7 @@ p req.decode_content         # => false
 - **SEE** [m:Net::HTTPResponse#decode_content]
 
 ### def uri -> URI | nil
+{: since="2.0.0"}
 
 リクエストの生成に使われた [c:URI] オブジェクトを返します。
 
