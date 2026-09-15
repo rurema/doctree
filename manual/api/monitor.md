@@ -7,6 +7,10 @@ category: Thread
 スレッドの同期機構としてのモニター機能を提供するクラスです。
 また同じスレッドから何度も lock できる Mutex としての機能も提供します。
 
+#%since 4.1
+Ruby 4.1 からは `Monitor` クラス本体は組み込みの [c:Thread::Monitor] になり、条件変数も組み込みの [c:Thread::Monitor::ConditionVariable] になりました。このライブラリは [c:MonitorMixin] と、`mon_enter` のような `mon_` の付いた別名メソッドを提供します。
+#%end
+
 モニターとは、一つの Mutex とそれに関連付けられた複数の条件変数から構成された、スレッドの同期機構です。
 Mutex と 条件変数によって同等の機能を実現することは可能ですが、モニタの利点はライブラリがその関連を保証していることです。
 
