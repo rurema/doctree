@@ -132,7 +132,11 @@ mon_enter でロックした回数だけ mon_exit を呼ばなければモニタ
 
 ロックができなかった場合は偽を返し、実行を継続します。この場合にはスレッドはブロックしません。
 
+#%until 4.1
 ### def new_cond -> MonitorMixin::ConditionVariable
+#%else
+### def new_cond -> Thread::Monitor::ConditionVariable
+#%end
 
 モニターに関連付けられた、新しい [c:MonitorMixin::ConditionVariable] を生成して返します。
 
