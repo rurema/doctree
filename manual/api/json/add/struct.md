@@ -1,5 +1,6 @@
 ---
 type: library
+until: "4.1"
 ---
 [c:Struct] に JSON 形式の文字列に変換するメソッドや JSON 形式の文字列から Ruby のオブジェクトに変換するメソッドを定義します。
 
@@ -31,7 +32,6 @@ p Person.new("tanaka", 29).to_json # => "{\"json_class\":\"Person\",\"v\":[\"tan
 
 - **SEE** [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]
 
-#%until 4.1
 ### def as_json(*args) -> Hash
 {: since="1.9.3"}
 
@@ -56,6 +56,3 @@ p hash['v']           # => ["tanaka", 29]
 ```
 
 - **SEE** [m:Struct#to_json], [m:Struct.json_create]
-
-#%end
-

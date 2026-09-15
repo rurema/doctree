@@ -32,6 +32,7 @@ p JSON[hash]                         # => "{\"a\":1,\"b\":2,\"c\":3}"
 
 - **SEE** [m:JSON?.parse], [m:JSON?.generate]
 
+#%until 4.1
 ### def JSON.create_id -> String
 
 json_create メソッドで使用するクラスを決定するために使用する値を返します。
@@ -86,6 +87,8 @@ JSON.create_id = "my_json_class" # => "my_json_class"
 p JSON.create_id                 # => "my_json_class"
 puts (1..5).to_json              # => {"my_json_class":"Range","a":[1,5,false]}
 ```
+
+#%end
 
 #%# nodoc
 #%# --- deep_const_get
@@ -340,8 +343,11 @@ p JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
 
 [m:JSON?.parse] との違いは、load は信頼できる入力源を読み込むための簡易メソッドである点です。
 source には JSON 形式の文字列だけでなく、to_str, to_io, read のいずれかに応答するオブジェクト
-(File などの IO や、パスを表すオブジェクトなど) も指定でき、その内容を読み込んだ上で内部的に [m:JSON?.parse] を呼び出します。また、[m:JSON?.parse] とはデフォルトのオプション
+(File などの IO や、パスを表すオブジェクトなど) も指定でき、その内容を読み込んだ上で内部的に [m:JSON?.parse] を呼び出します。
+#%until 4.1
+また、[m:JSON?.parse] とはデフォルトのオプション
 (特に create_additions) が異なります。
+#%end
 
 proc として手続きオブジェクトが与えられた場合は、読み込んだオブジェクトを引数にその手続きを呼び出します。
 
@@ -391,9 +397,11 @@ p JSON.load(str, proc{|v| p v }) # => {"a"=>1, "b"=>2, "c"=>3}
   偽を指定した場合、これらの値を生成しようとすると例外が発生します。デフォルトは真です。
 - **`:allow_blank`**:
   真を指定すると、sourceがnilの場合にnilを返します。デフォルトは真です。
+#%until 4.1
 - **`:create_additions`**:
   偽を指定するとマッチするクラスや [m:JSON.create_id] が見つかっても付加情報を生成しません。
   デフォルトは真です。
+#%end
 - **`:symbolize_names`**:
   真を指定するとハッシュのキーを文字列ではなくシンボルにします。デフォルトは偽です。
 
@@ -432,9 +440,11 @@ filespec で指定した JSON 形式のファイルを Ruby オブジェクト�
 - **`:allow_nan`**:
   真を指定すると [rfc:4627] を無視してパース時に [m:JSON::NaN], [m:JSON::Infinity],
   [m:JSON::MinusInfinity] を許可するようになります。デフォルトは偽です。
+#%until 4.1
 - **`:create_additions`**:
   偽を指定するとマッチするクラスや [m:JSON.create_id] が見つかっても付加情報を生成しません。
   デフォルトは偽です。
+#%end
 - **`:symbolize_names`**:
   真を指定するとハッシュのキーを文字列ではなくシンボルにします。デフォルトは偽です。
 
@@ -468,9 +478,11 @@ filespec で指定した JSON 形式のファイルを Ruby オブジェクト�
 - **`:allow_nan`**:
   真を指定すると [rfc:4627] を無視してパース時に [m:JSON::NaN], [m:JSON::Infinity],
   [m:JSON::MinusInfinity] を許可するようになります。デフォルトは真です。
+#%until 4.1
 - **`:create_additions`**:
   偽を指定するとマッチするクラスや [m:JSON.create_id] が見つかっても付加情報を生成しません。
   デフォルトは偽です。
+#%end
 
   ```ruby title="例"
   require "json"
@@ -532,8 +544,11 @@ puts JSON.pretty_generate(hash, space: "\t")
 与えられた JSON 形式の文字列を Ruby オブジェクトとしてロードして返します。
 
 [m:JSON?.load] と同様のメソッドですが、こちらは信頼できる入力を読み込むためのメソッドであることを
-名前で明示しています。デフォルトのオプション(`create_additions: true` を含みます)は
+名前で明示しています。
+#%until 4.1
+デフォルトのオプション(`create_additions: true` を含みます)は
 `JSON.unsafe_load_default_options` で変更できます。
+#%end
 
 `source` には JSON 形式の文字列だけでなく、`to_str`, `to_io`, `read` のいずれかに応答するオブジェクト
 (File などの [c:IO] や、パスを表すオブジェクトなど) も指定でき、その内容を読み込んだ上で
@@ -546,6 +561,8 @@ puts JSON.pretty_generate(hash, space: "\t")
 - **param** `proc` -- [c:Proc] オブジェクトを指定します。
 - **param** `options` -- オプションをハッシュで指定します。指定可能なオプションは [m:JSON?.parse] と同様です。
 
+#%until 4.1
+
 ```ruby title="例"
 require "json"
 require "json/add/core"
@@ -554,6 +571,16 @@ json = (1..5).to_json
 p JSON.parse(json).class # => Hash
 p JSON.unsafe_load(json) # => 1..5
 ```
+
+#%else
+
+```ruby title="例"
+require "json"
+
+p JSON.unsafe_load('[1, [2, [3]]]') # => [1, [2, [3]]]
+```
+
+#%end
 
 - **SEE** [m:JSON?.load], [m:JSON?.parse]
 

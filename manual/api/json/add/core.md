@@ -9,6 +9,7 @@ require:
   - json/add/struct
   - json/add/symbol
   - json/add/time
+until: "4.1"
 ---
 Ruby のコアクラスに JSON 形式の文字列に変換するメソッドや
 JSON 形式の文字列から Ruby のオブジェクトに変換するメソッドを定義します。

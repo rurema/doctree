@@ -1,5 +1,6 @@
 ---
 type: library
+until: "4.1"
 ---
 [c:Symbol] に JSON 形式の文字列に変換するメソッドや JSON 形式の文字列から Ruby のオブジェクトに変換するメソッドを定義します。
 
@@ -24,7 +25,6 @@ JSON のオブジェクトから [c:Symbol] のオブジェクトを生成して
 
 - **SEE** [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]
 
-#%until 4.1
 ### def as_json(*args) -> Hash
 {: since="1.9.3"}
 
@@ -45,6 +45,3 @@ p hash['s']           # => "foo"
 ```
 
 - **SEE** [m:Symbol#to_json], [m:Symbol.json_create]
-
-#%end
-

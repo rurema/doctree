@@ -1,5 +1,6 @@
 ---
 type: library
+until: "4.1"
 ---
 [c:Range] に JSON 形式の文字列に変換するメソッドや JSON 形式の文字列から Ruby のオブジェクトに変換するメソッドを定義します。
 
@@ -30,7 +31,6 @@ p (1..5).to_json # => "{\"json_class\":\"Range\",\"a\":[1,5,false]}"
 
 - **SEE** [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]
 
-#%until 4.1
 ### def as_json(*args) -> Hash
 {: since="1.9.3"}
 
@@ -51,6 +51,3 @@ p hash['a']           # => [1, 5, false]
 ```
 
 - **SEE** [m:Range#to_json], [m:Range.json_create]
-
-#%end
-

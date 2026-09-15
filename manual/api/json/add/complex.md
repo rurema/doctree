@@ -1,5 +1,6 @@
 ---
 type: library
+until: "4.1"
 ---
 [c:Complex] に JSON 形式の文字列に変換するメソッドや JSON 形式の文字列から Ruby のオブジェクトに変換するメソッドを定義します。
 
@@ -30,7 +31,6 @@ p (2+3i).to_json # => "{\"json_class\":\"Complex\",\"r\":2,\"i\":3}"
 
 - **SEE** [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]
 
-#%until 4.1
 ### def as_json(*args) -> Hash
 {: since="1.9.3"}
 
@@ -52,6 +52,3 @@ p hash['i']           # => 3
 ```
 
 - **SEE** [m:Complex#to_json], [m:Complex.json_create]
-
-#%end
-

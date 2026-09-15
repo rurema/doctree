@@ -1,5 +1,6 @@
 ---
 type: library
+until: "4.1"
 ---
 [c:Regexp] に JSON 形式の文字列に変換するメソッドや JSON 形式の文字列から Ruby のオブジェクトに変換するメソッドを定義します。
 
@@ -29,7 +30,6 @@ require "json/add/core"
 p /0\d{1,4}-\d{1,4}-\d{4}/.to_json # => "{\"json_class\":\"Regexp\",\"o\":0,\"s\":\"0\\\\d{1,4}-\\\\d{1,4}-\\\\d{4}\"}"
 ```
 
-#%until 4.1
 ### def as_json(*args) -> Hash
 {: since="1.9.3"}
 
@@ -52,6 +52,3 @@ p hash['s']           # => "foo"
 ```
 
 - **SEE** [m:Regexp#to_json], [m:Regexp.json_create]
-
-#%end
-
