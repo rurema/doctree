@@ -17,14 +17,14 @@ print Net::HTTP.get('www.example.com', '/index.html')
 ```ruby title="例2: URI を使う"
 require 'net/http'
 require 'uri'
-print Net::HTTP.get(URI.parse('http://www.example.com/index.html'))
+print Net::HTTP.get(URI('http://www.example.com/index.html'))
 ```
 
 ```ruby title="例3: より汎用的な例"
 require 'net/http'
 require 'uri'
 
-url = URI.parse('http://www.example.com/index.html')
+url = URI('http://www.example.com/index.html')
 res = Net::HTTP.start(url.host, url.port) {|http|
   http.get('/index.html')
 }
@@ -34,7 +34,7 @@ puts res.body
 ```ruby title="例4: 上の例よりさらに汎用的な例"
 require 'net/http'
 
-url = URI.parse('http://www.example.com/index.html')
+url = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(url.path)
 res = Net::HTTP.start(url.host, url.port) {|http|
   http.request(req)
@@ -46,7 +46,7 @@ puts res.body
 require 'net/http'
 require 'uri'
 
-url = URI.parse('http://www.example.com/search')
+url = URI('http://www.example.com/search')
 url.query = URI.encode_www_form('q'=>'ruby', 'max'=>'50')
 res = Net::HTTP.get_response(url)
 puts res.body
@@ -59,17 +59,17 @@ require 'net/http'
 require 'uri'
 
 #例1: POSTするだけ
-res = Net::HTTP.post_form(URI.parse('http://www.example.com/search'),
+res = Net::HTTP.post_form(URI('http://www.example.com/search'),
                           {'q'=>'ruby', 'max'=>'50'})
 puts res.body
 
 #例2: 認証付きで POST する
-res = Net::HTTP.post_form(URI.parse('http://jack:pass@www.example.com/todo.cgi'),
+res = Net::HTTP.post_form(URI('http://jack:pass@www.example.com/todo.cgi'),
                           {'from'=>'2005-01-01', 'to'=>'2005-03-31'})
 puts res.body
 
 #例3: より細かく制御する
-url = URI.parse('http://www.example.com/todo.cgi')
+url = URI('http://www.example.com/todo.cgi')
 req = Net::HTTP::Post.new(url.path)
 req.basic_auth 'jack', 'pass'
 req.set_form_data({'from'=>'2005-01-01', 'to'=>'2005-03-31'})
@@ -118,7 +118,7 @@ def fetch(uri_str, limit = 10)
   # You should choose better exception. 
   raise ArgumentError, 'HTTP redirect too deep' if limit == 0
 
-  response = Net::HTTP.get_response(URI.parse(uri_str))
+  response = Net::HTTP.get_response(URI(uri_str))
   case response
   when Net::HTTPSuccess
     response

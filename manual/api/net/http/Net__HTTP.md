@@ -104,7 +104,7 @@ Net::HTTP.new(address, port, proxy_addr, proxy_port, proxy_user, proxy_pass).sta
 ```ruby
 require 'net/http'
 require 'uri'
-Net::HTTP.get_print URI.parse('http://www.example.com/index.html')
+Net::HTTP.get_print URI('http://www.example.com/index.html')
 ```
 
 もしくは

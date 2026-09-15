@@ -35,7 +35,7 @@ include:
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Post.new(uri.request_uri)
 req.body = "Test Post Data"
 p req.body # => "Test Post Data"
@@ -52,7 +52,7 @@ p req.body # => "Test Post Data"
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Post.new(uri.request_uri)
 req.body = "Test Post Data" # => "Test Post Data"
 ```
@@ -71,7 +71,7 @@ f は read(size) メソッドが定義されている必要があります。
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 post = Net::HTTP::Post.new(uri.request_uri)
 File.open("/path/to/test", 'rb') do |f|
   # 大きなファイルを扱う際にメモリ消費を少なくできる
@@ -88,7 +88,7 @@ end
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Post.new(uri.request_uri)
 p req.method # => "POST"
 req = Net::HTTP::Get.new(uri.request_uri)
@@ -102,7 +102,7 @@ p req.method # => "GET"
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
 p req.path # => "/index.html"
 ```
@@ -115,7 +115,7 @@ HTTP メソッド (POST など)の場合真を返します。
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 post = Net::HTTP::Post.new(uri.request_uri)
 post.request_body_permitted?   # => true
 
@@ -131,7 +131,7 @@ HTTP メソッド (GET, POST など)の場合真を返します。
 ```ruby title="例"
 require 'net/http'
 
-uri = URI.parse('http://www.example.com/index.html')
+uri = URI('http://www.example.com/index.html')
 post = Net::HTTP::Post.new(uri.request_uri)
 post.response_body_permitted?   # => true
 

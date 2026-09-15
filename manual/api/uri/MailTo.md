@@ -64,7 +64,7 @@ build と異なり、デフォルトでは引数の正当性を検査しませ�
 
 ```ruby title="例"
 require 'uri'
-p URI.parse("mailto:nospam@example.com").to     # => "nospam@example.com"
+p URI("mailto:nospam@example.com").to     # => "nospam@example.com"
 ```
 
 ### def to=(s)
@@ -77,7 +77,7 @@ p URI.parse("mailto:nospam@example.com").to     # => "nospam@example.com"
 
 ```ruby title="例"
 require 'uri'
-m = URI.parse("mailto:nospam@example.com")
+m = URI("mailto:nospam@example.com")
 m.to = "nospaaaam@example.com"
 p m                                        # => #<URI::MailTo:0xb7bf0614 URL:mailto:nospaaaam@example.com>
 ```
@@ -88,7 +88,7 @@ p m                                        # => #<URI::MailTo:0xb7bf0614 URL:mai
 
 ```ruby title="例"
 require 'uri'
-m = URI.parse("mailto:ruby-list@ruby-lang.org?subject=subscribe&cc=myaddr")
+m = URI("mailto:ruby-list@ruby-lang.org?subject=subscribe&cc=myaddr")
 p m.headers # => [["subject", "subscribe"], ["cc", "myaddr"]]
 ```
 
@@ -102,7 +102,7 @@ p m.headers # => [["subject", "subscribe"], ["cc", "myaddr"]]
 
 ```ruby title="例"
 require 'uri'
-m = URI.parse("mailto:nospam@example.com")
+m = URI("mailto:nospam@example.com")
 m.headers =  URI.escape("subject=hello hello")
 ```
 
@@ -113,7 +113,7 @@ URI オブジェクトからメールテキスト文字列を生成します。
 
 ```text title="例"
 require 'uri'
-p mailto = URI.parse("mailto:ruby-list@ruby-lang.org?subject=subscribe&cc=myaddr")
+p mailto = URI("mailto:ruby-list@ruby-lang.org?subject=subscribe&cc=myaddr")
 print mailto.to_mailtext
 
 => #<URI::MailTo:0x20104a0e URL:mailto:ruby-list@ruby-lang.org?subject=subscribe&cc=myaddr>
