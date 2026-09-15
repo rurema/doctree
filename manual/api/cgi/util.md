@@ -45,12 +45,12 @@ p CGI.unescape("http%3A%2F%2Fwww.example.com%2Findex.rss")
 #%since 3.2
 ### def CGI.escapeURIComponent(string) -> String
 
-与えられた文字列を [RFC:3986] に従って URL エンコードした文字列を新しく作成し返します。
+与えられた文字列を [RFC:3986] に従ってパーセントエンコードした文字列を新しく作成し返します。
 
 [m:CGI.escape] と異なり、空白文字を `+` ではなく `%20` に変換します。
 [JavaScript の encodeURIComponent 関数](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) と同じ結果になります。
 
-- **param** `string` -- URL エンコードしたい文字列を指定します。
+- **param** `string` -- パーセントエンコードしたい文字列を指定します。
 
 ```ruby
 require "cgi"
@@ -66,9 +66,9 @@ p CGI.escapeURIComponent("a b") # => "a%20b"
 
 ### def CGI.unescapeURIComponent(string) -> String
 
-与えられた文字列を [m:CGI.escapeURIComponent] でエンコードされたものとして URL デコードした文字列を新しく作成し返します。
+与えられた文字列を [m:CGI.escapeURIComponent] でエンコードされたものとしてデコードした文字列を新しく作成し返します。
 
-- **param** `string` -- URL エンコードされている文字列を指定します。
+- **param** `string` -- パーセントエンコードされている文字列を指定します。
 
 ```ruby
 require "cgi"

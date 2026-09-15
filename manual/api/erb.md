@@ -427,11 +427,11 @@ puts html_escape("is a > 0 & a < 10?")
 ### module_function def url_encode(s)  -> String
 ### module_function def u(s) -> String
 
-文字列 s を URLエンコードした文字列を返します。
+文字列 s をパーセントエンコードした文字列を返します。
 
-文字列 s 中に含まれる 2バイト文字や半角スペースについて URL エンコードを行った文字列を返します([m:CGI.escape]とほぼ同じです)。
+文字列 s 中に含まれる 2バイト文字や半角スペースについてパーセントエンコードを行った文字列を返します([m:CGI.escape]とほぼ同じです)。
 
-- **param** `s` -- URLエンコードを行う文字列
+- **param** `s` -- パーセントエンコードを行う文字列
 
 ```ruby title="例"
 require "erb"
