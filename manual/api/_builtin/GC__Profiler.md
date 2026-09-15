@@ -189,3 +189,33 @@ GC::Profiler.raw_data
 - :HAVE_FINALIZE
 
 - **SEE** [m:GC::Profiler.report], [m:GC::Profiler.result]
+
+#%since 4.1
+### def GC::Profiler.configure(max_records: 4096) -> nil
+
+[m:GC::Profiler.raw_data] が保持する生のプロファイルレコードの最大件数を設定します。
+
+プロファイラは `max_records` で指定した件数までのレコードをリング状のバッファに
+保持します。バッファが満杯になると、新しい GC のレコードが最も古いレコードを
+上書きします。デフォルトの上限は 4096 件です。
+
+`nil` を指定すると、件数を無制限に保持していた従来の挙動に戻ります。
+
+`max_records` を変更すると、既存のプロファイルデータは削除されます。このメソッドは
+プロファイラの有効・無効を切り替えません。切り替えには [m:GC::Profiler.enable] と
+[m:GC::Profiler.disable] を使ってください。
+
+- **param** `max_records` -- 保持するレコード数の上限を整数または `nil` で指定します。
+
+- **raise** `ArgumentError` -- `max_records` に 0 以下の整数を指定した場合に発生します。
+
+```ruby title="例"
+# 保持件数を無制限に戻す(従来の挙動)
+GC::Profiler.configure(max_records: nil)
+```
+
+- **SEE** [m:GC::Profiler.raw_data]
+- **SEE** [m:GC::Profiler.clear]
+
+#%end
+

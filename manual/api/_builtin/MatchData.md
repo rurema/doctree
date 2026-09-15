@@ -612,3 +612,47 @@ p m.named_captures(symbolize_names: true) #=> {:a => "1"}
 #%else
 - **SEE** [m:MatchData#captures]
 #%end
+
+#%since 4.1
+### def integer_at(index, base = 10) -> Integer | nil
+### def integer_at(name, base = 10)  -> Integer | nil
+
+マッチした部分文字列を整数に変換して返します。
+`$~.integer_at(n)` は `$n&.to_i` と同じです。整数に変換せずに部分文字列をそのまま得るには `MatchData#[]` を使います。
+
+部分文字列がマッチしていない場合は `nil` を返します。
+
+文字列は既定では 10 進数として変換されます。
+
+- **param** `index` -- 変換する部分文字列のインデックスを整数で指定します。
+- **param** `name` -- 変換する部分文字列を名前付きキャプチャの名前(シンボルまたは文字列)で指定します。
+- **param** `base` -- 変換に使う基数を整数で指定します。省略した場合は 10 進数として変換します。
+           `0` を指定すると、[m:String#to_i] と同様に文字列先頭の `0x`・`0b`・`0`
+           などのプレフィックスから基数を判定します。
+- **raise** `IndexError` -- `name` が正規表現に存在しない名前付きキャプチャの名前の場合に発生します。
+
+```ruby title="例"
+m = /(\d{4})(\d{2})(\d{2})/.match("20260308")
+p m.integer_at(0) # => 20260308
+p m.integer_at(1) # => 2026
+p m.integer_at(2) # => 3
+p m.integer_at(3) # => 8
+
+m = /(?<y>\d{4})(?<m>\d{2})(?<d>\d{2})/.match("20260308")
+p m.integer_at("y") # => 2026
+p m.integer_at("m") # => 3
+p m.integer_at("d") # => 8
+
+re = /(\d+)?/
+p re.match("123").integer_at(1) # => 123
+p re.match("abc").integer_at(1) # => nil
+
+p /\d+/.match("011").integer_at(0)     # => 11
+p /\d+/.match("011").integer_at(0, 12) # => 13
+p /\d+/.match("011").integer_at(0, 0)  # => 9
+```
+
+- **SEE** [m:String#to_i]
+
+#%end
+

@@ -1133,3 +1133,28 @@ p 0b0100_0101.nobits?(0b1010_1010) # => true
 
 - **SEE** [m:Integer#allbits?]
 - **SEE** [m:Integer#anybits?]
+
+#%since 4.1
+### def bit_count -> Integer
+
+`self` を 2 進数で表したときに立っているビット(値が `1` のビット)の数を返します。ポピュレーションカウント、あるいはハミング重みとも呼ばれます。
+
+- **return** -- 立っているビットの数を返します。
+- **raise** `ArgumentError` -- `self` が負の整数の場合に発生します。
+
+```ruby title="例"
+p 0.bit_count           # => 0
+p 1.bit_count           # => 1
+p 7.bit_count           # => 3
+p 0b10101.bit_count     # => 3
+p 255.bit_count         # => 8
+p (2**1000).bit_count   # => 1
+p (2**1000-1).bit_count # => 1000
+
+(-1).bit_count # ~> ArgumentError: bit_count is undefined for negative integers
+```
+
+- **SEE** [m:Integer#bit_length]
+
+#%end
+

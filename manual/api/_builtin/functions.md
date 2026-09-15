@@ -1112,6 +1112,40 @@ p Foo.autoload?(:Bar)         # => nil
 
 - **SEE** [m:Kernel?.autoload]
 
+#%since 4.1
+### module_function def autoload_relative(const_name, feature) -> nil
+
+定数 const_name を最初に参照した時に、feature を呼び出し元のファイルからの
+相対パスとして [m:Kernel?.require] するように設定します。[m:Kernel?.autoload]
+と似ていますが、feature の解決方法が [m:Kernel?.require_relative] と同様に、
+autoload_relative を呼び出したファイルのディレクトリからの相対パスになる点が
+異なります。
+
+const_name には、"::" 演算子を含めることはできません。
+ネストした定数を指定する方法は [m:Module#autoload_relative] を参照してください。
+
+const_name が autoload 設定されていて、まだ定義されてない(ロードされていない)
+ときは、autoload する対象を置き換えます。const_name が(autoload ではなく)
+既に定義されているときは何もしません。
+
+相対パスは絶対パスに変換されます。この絶対パスが [m:Kernel?.autoload?] の
+返り値になります。
+
+- **param** `const_name` -- 定数を String または Symbol で指定します。
+- **param** `feature` -- 呼び出し元のファイルからの相対パスで、autoload する対象を指定します。
+
+- **raise** `LoadError` -- ファイルのコンテキストなしに呼び出された場合(eval の中など)に発生します。
+
+```ruby title="例"
+autoload_relative :MyModule, "my_module.rb"
+```
+
+- **SEE** [m:Kernel?.autoload]
+- **SEE** [m:Kernel?.require_relative]
+- **SEE** [m:Module#autoload_relative]
+
+#%end
+
 ### module_function def set_trace_func(proc) -> Proc
 
 Ruby インタプリタのイベントをトレースする [c:Proc] オブジェクトとして指定された proc を登録します。 nil を指定するとトレースがオフになります。
