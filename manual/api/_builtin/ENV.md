@@ -151,6 +151,34 @@ key に関連づけられた値を返します。該当するキーが登録さ�
 - **param** `default` --   keyに対応する環境変数の値がないときにこの値を返します。 
 - **raise**  `KeyError` --   引数defaultもブロックも与えられてない時、キーの探索に失敗すると発生します。
 
+#%since 4.1
+### def ENV.fetch_values(*key)               -> [String]
+### def ENV.fetch_values(*key) {|key| ... }  -> [String]
+
+引数で指定された環境変数名に対応する値の配列を返します。
+
+該当する環境変数が登録されていない場合、ブロックが与えられていればそのブロックを
+評価した値を返します。ブロックが与えられていない場合は `KeyError` が発生します。
+
+引数を 1 つも指定しなかった場合は空の配列を返します。
+
+- **param** `key` -- 探索する環境変数名を任意個指定します。文字列で指定します。
+           文字列以外のオブジェクトを指定した場合は to_str メソッドによる暗黙の型変換を試みます。
+
+- **raise** `KeyError` -- ブロックが与えられておらず、指定した環境変数名が見つからないときに発生します。
+
+```ruby title="例"
+ENV.replace('foo' => '0', 'bar' => '1', 'baz' => '2')
+p ENV.fetch_values('foo', 'baz')                    # => ["0", "2"]
+p ENV.fetch_values('foo', 'bam') {|key| key.to_s }  # => ["0", "bam"]
+ENV.fetch_values('foo', 'bam')                      # raises KeyError
+```
+
+- **SEE** [m:ENV.fetch]
+- **SEE** [m:ENV.values_at]
+
+#%end
+
 ### def ENV.has_key?(key) -> bool
 ### def ENV.include?(key) -> bool
 ### def ENV.key?(key)     -> bool

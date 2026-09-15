@@ -462,3 +462,29 @@ p r.lazy.map{|n| n**2}.repeat(2).first(5)
 
 [m:Enumerable#compact] と同じですが、配列ではなく Enumerator::Lazy を返します。
 #%end
+
+#%since 4.1
+### def tap_each {|item| ... } -> Enumerator::Lazy
+
+各要素をブロックに渡して評価しますが、要素そのものを変更したり、以後の
+列挙に影響を与えたりはしません。新しい Enumerator::Lazy を返します。
+
+遅延評価の連鎖を崩さずに、デバッグやログ出力のために要素を覗き見たいときに使います。
+
+- **raise** `ArgumentError` -- ブロックを指定しなかった場合に発生します。
+
+```ruby title="例"
+p (1..).lazy.tap_each { |x| puts "got #{x}" }.select(&:even?).first(3)
+# got 1
+# got 2
+# got 3
+# got 4
+# got 5
+# got 6
+# => [2, 4, 6]
+```
+
+- **SEE** [m:Object#tap]
+
+#%end
+

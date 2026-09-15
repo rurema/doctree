@@ -776,3 +776,58 @@ RubyVM.keep_script_lines = false
 
 #%end
 
+#%since 4.1
+### def node_id -> Integer
+
+`self` のコンパイル元になった抽象構文木(AST)のノードの `node_id` を返します。
+
+[m:RubyVM::InstructionSequence#syntax_tree] は、この値と [m:RubyVM::InstructionSequence#source_hash] を使って、再度パースし直したソースから対応するノードを探します。
+
+```ruby title="例"
+iseq = RubyVM::InstructionSequence.compile("1 + 2")
+p iseq.node_id.is_a?(Integer) # => true
+```
+
+- **SEE** [m:RubyVM::InstructionSequence#source_hash], [m:RubyVM::InstructionSequence#syntax_tree]
+
+### def source_hash -> Integer | nil
+
+`self` のコンパイル元になったソースのハッシュ値を返します。ソースが不明な場合は nil を返します。
+
+[m:RubyVM::InstructionSequence#syntax_tree] は、この値を使って、再度パースし直したソースが元のソースから変わっていないかどうかを確認します。
+
+```ruby title="例"
+iseq = RubyVM::InstructionSequence.compile("x = 1")
+p iseq.source_hash.is_a?(Integer) # => true
+```
+
+- **SEE** [m:RubyVM::InstructionSequence#node_id], [m:RubyVM::InstructionSequence#syntax_tree]
+
+### def syntax_tree -> Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
+
+`self` のコンパイル元になった抽象構文木(AST)のノードを、コンパイルに使ったのと同じパーサでソースを再度パースし直すことで返します。デフォルトの prism でコンパイルされていれば [c:Prism::Node] を、`parse.y` でコンパイルされていれば [c:RubyVM::AbstractSyntaxTree::Node] を返します。
+
+以下のように、ノードを確実に取得できない場合は nil を返します。
+
+- ソースを利用できない場合(文字列からコンパイルした場合や、`RubyVM.keep_script_lines` を有効にせずに eval したコードなど)
+- コンパイルしたあとにソースファイルが変更されている場合
+
+デフォルトの prism gem 以外の prism gem が読み込まれていると、`$VERBOSE` が真のときに警告が出力されます。この場合、読み込まれている prism がコンパイル時に使われたパーサと異なる解釈をする可能性があるため、返されるノードが実際に実行されたコードと対応しないことがあります。
+
+このメソッドは実験的なもので、予告なく変更される可能性があります。
+
+```ruby title="例"
+# /tmp/hello.rb
+puts "hello, world"
+
+iseq = RubyVM::InstructionSequence.compile_file("/tmp/hello.rb")
+p iseq.syntax_tree.type # => :program_node
+
+# 文字列からコンパイルした場合はソースを再度読み込めないので nil
+p RubyVM::InstructionSequence.compile("1 + 2").syntax_tree # => nil
+```
+
+- **SEE** [m:RubyVM::InstructionSequence#node_id], [m:RubyVM::InstructionSequence#source_hash], [m:Proc#syntax_tree]
+
+#%end
+
