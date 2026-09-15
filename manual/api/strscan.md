@@ -1072,6 +1072,22 @@ s2.scan(/a/)
 p s2.scan(/\Ab/)                          # => nil
 ```
 
+```ruby title="例: ^ の挙動の違い"
+require 'strscan'
+
+s1 = StringScanner.new("ab\ncd")
+s1.scan(/a/)
+p s1.scan(/^b/)                           # => "b"
+s1.scan(/\n/)
+p s1.scan(/^c/)                           # => "c"
+
+s2 = StringScanner.new("ab\ncd", fixed_anchor: true)
+s2.scan(/a/)
+p s2.scan(/^b/)                           # => nil
+s2.scan(/b\n/)
+p s2.scan(/^c/)                           # => "c"
+```
+
 - **SEE** [m:StringScanner.new]
 
 #%since 4.1
