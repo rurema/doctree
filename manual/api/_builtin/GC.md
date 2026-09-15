@@ -533,8 +533,7 @@ GC 内部の一貫性を検証します。
 p GC.verify_internal_consistency # => nil
 ```
 
-#%since 3.1
-#%until 3.3
+#%version 3.1...3.3
 ### def GC.using_rvargc? -> bool
 
 実験的機能である Variable Width Allocation (可変長のオブジェクト割り当て) が有効かどうかを返します。
@@ -542,8 +541,6 @@ p GC.verify_internal_consistency # => nil
 有効な場合は true を、そうでない場合は false を返します。この値はビルド時の設定に依存します。
 
 - **SEE** [m:GC.stat]
-
-#%end
 
 #%end
 
