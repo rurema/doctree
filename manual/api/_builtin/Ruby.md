@@ -11,6 +11,9 @@ Ruby 4.0 で導入されました。
 たとえば `Ruby::VERSION` と [m:Object::RUBY_VERSION] は同じ文字列を返します。
 
 また、このモジュールの下には、クラスやモジュールをプロセス内で隔離する実験的機能のためのクラス `Ruby::Box` も定義されています。
+#%since 4.1
+ソースコード上の範囲を表すクラス [c:Ruby::SourceRange] もこのモジュールの下に定義されています。
+#%end
 
 ## Constants
 

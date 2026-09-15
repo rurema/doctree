@@ -602,3 +602,52 @@ self が protected であるかどうかを返します。
 
 self が private であるかどうかを返します。
 #%end
+
+#%since 4.1
+### def source_range -> Ruby::SourceRange | nil
+
+このメソッドに対応する [c:Ruby::SourceRange] を返します。
+
+メソッドが Ruby で定義されていない(C で実装されている)場合や、ソースパスを持たない場合は nil を返します。
+
+返される `Ruby::SourceRange` には、ソースパス、(可能なら)絶対パス、開始・終了の行番号とバイト単位の桁番号が含まれます。
+
+```ruby title="例"
+# ------- /tmp/foo.rb ---------
+class Foo
+  def foo; end
+end
+# ----- end of /tmp/foo.rb ----
+
+require '/tmp/foo'
+
+range = Foo.new.method(:foo).source_range
+p range.path          # => "/tmp/foo.rb"
+p range.absolute_path # => "/tmp/foo.rb"
+p range.start_line    # => 2
+
+p method(:puts).source_range # => nil
+```
+
+- **SEE** [m:Method#source_location], [m:Method#syntax_tree]
+
+### def syntax_tree -> Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
+
+このメソッドのコンパイル元になった抽象構文木(AST)のノードを、コンパイルに使ったのと同じパーサでソースを再度パースし直すことで返します。
+
+Ruby で定義されていないメソッドに対しては nil を返します。ソースが変更されているなど、ノードを確実に取得できない場合に nil を返す他の条件については [m:RubyVM::InstructionSequence#syntax_tree] を参照してください。
+
+このメソッドは実験的なもので、予告なく変更される可能性があります。
+
+```ruby title="例"
+def proc_ast_test_method = :ok
+
+node = method(:proc_ast_test_method).syntax_tree
+p node.type  # => :def_node
+p node.slice # => "def proc_ast_test_method = :ok"
+```
+
+- **SEE** [m:Method#source_range], [m:RubyVM::InstructionSequence#syntax_tree]
+
+#%end
+

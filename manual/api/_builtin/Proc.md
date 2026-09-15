@@ -460,3 +460,79 @@ end
 ```
 
 - **SEE** [m:Module#ruby2_keywords], [m:Hash.ruby2_keywords_hash]
+
+#%since 4.1
+### def source_range -> Ruby::SourceRange | nil
+
+`self` に対応する [c:Ruby::SourceRange] を返します。
+
+`self` が Ruby で定義されていない(C で実装されている)場合や、ソースパスを持たない場合は nil を返します。
+
+返される `Ruby::SourceRange` には、ソースパス、(可能なら)絶対パス、開始・終了の行番号とバイト単位の桁番号が含まれます。ブロックから作られた `Proc` の範囲は `{` または `do` から始まります。
+
+```ruby title="例"
+# /path/to/target.rb を実行
+pr = proc { 42 }
+range = pr.source_range
+p range.path         # => "/path/to/target.rb"
+p range.start_line   # => 2
+p range.start_column # => 10
+
+p method(:p).to_proc.source_range # => nil
+```
+
+- **SEE** [m:Proc#source_location], [m:Proc#syntax_tree]
+
+### def syntax_tree -> Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
+
+`self` のコンパイル元になった抽象構文木(AST)のノードを、コンパイルに使ったのと同じパーサでソースを再度パースし直すことで返します。ブロックから作られた `Proc` では、ブロック自身のノードではなく、そのブロックを持つ外側のノード(ブロック付きのメソッド呼び出しなど)を返します。
+
+ノードを確実に取得できない場合に nil を返す条件については [m:RubyVM::InstructionSequence#syntax_tree] を参照してください。
+
+このメソッドは実験的なもので、予告なく変更される可能性があります。
+
+```ruby title="例"
+node = -> { 42 }.syntax_tree
+p node.is_a?(Prism::LambdaNode) # => true
+
+node = proc { 42 }.syntax_tree
+p node.is_a?(Prism::CallNode) # => true
+```
+
+- **SEE** [m:Proc#source_range], [m:RubyVM::InstructionSequence#syntax_tree]
+
+### def refined(*modules) -> Proc
+
+`self` と同じように振る舞いつつ、本体の中で `modules` の各モジュールによって有効化される refinement が効く新しい `Proc` を返します。`self` は変更されません。
+
+`modules` を 1 つも指定しなかった場合は `self` を返します。
+
+このメソッドの呼び出しを連鎖させた場合、指定したすべてのモジュールが指定した順序で有効になります。そのため、後の呼び出しで有効にした refinement が優先されます。
+
+refinement は本体全体で有効で、本体の中でネストしたブロックや、本体の中で `def` で定義したメソッドにも及びます。`using` の効く範囲の中で `def` したメソッドと同様に、そのようなメソッドは後で呼び出されたときも refinement を保持し続けます。
+
+返された `Proc` の refinement の集合は生成時に固定されます。その本体の中で `using` を呼び出すと [c:RuntimeError] が発生します。
+
+返された `Proc` を実行するには、`self` に影響を与えずに refinement を通してメソッドを解決できるように、そのブロックとネストしたすべてのブロックの命令シーケンスのコピーが必要です。コピーは返された `Proc` が初めて呼び出されたときに作られ、同じブロックと同じモジュールの組み合わせ(1 回の呼び出しでも連鎖した呼び出しでも)に対してキャッシュされて再利用されます。一度も呼び出されない `Proc` はコピーされません。そのため refinement を適用すると、`Proc` を実行した時点でブロックの大きさにおおむね比例してメモリ使用量が増えます。
+
+- **param** `modules` -- 有効にする refinement を定義した [c:Module] を任意個指定します。
+- **raise** `TypeError` -- `modules` に [c:Module] 以外を指定した場合に発生します。
+- **raise** `ArgumentError` -- `self` が Ruby のブロックから作られた `Proc` でない場合(C 関数・[c:Symbol]・[c:Method] から変換された `Proc` など)に発生します。
+
+```ruby title="例"
+module StringRefinement
+  refine String do
+    def shout = upcase + "!"
+  end
+end
+
+original = ->(s) { s.shout }
+refined_proc = original.refined(StringRefinement)
+p refined_proc.call("hi") # => "HI!"
+original.call("hi")       # ~> NoMethodError
+```
+
+- **SEE** [m:Module#refine], [m:main.using]
+
+#%end
+
