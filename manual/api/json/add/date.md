@@ -2,6 +2,7 @@
 type: library
 require:
   - date
+until: "4.1"
 ---
 [c:Date] に JSON 形式の文字列に変換するメソッドや JSON 形式の文字列から Ruby のオブジェクトに変換するメソッドを定義します。
 
@@ -33,7 +34,6 @@ p Date.today.to_json
 
 - **SEE** [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json]
 
-#%until 4.1
 ### def as_json(*args) -> Hash
 {: since="1.9.3"}
 
@@ -58,6 +58,3 @@ p hash['sg']          # => 2299161.0
 ```
 
 - **SEE** [m:Date#to_json], [m:Date.json_create]
-
-#%end
-
