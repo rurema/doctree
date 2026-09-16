@@ -20,7 +20,7 @@ doctree の版別 DB に収録されている全メソッドエントリと、�
 - 実測バイナリ: 3.0.0 / 3.1.0 / 3.2.0 / 3.3.0 / 3.4.0 / 4.0.0 = `ghcr.io/ruby/all-ruby`
   (`/all-ruby/bin/ruby-x.y.0`)、4.1 = `ghcr.io/ruby/ruby:master`
   (2026-09-04 ビルド・4.1.0dev 07ef97df22・json 3.0.0.rc1)。各版の `real/<版>/ruby-v.txt` 参照
-- 実測環境の注意: all-ruby の 3.2〜4.0 は YJIT 非ビルド(`RubyVM::YJIT` が no-class になる)、
+- 実測環境の注意: all-ruby の 3.2〜4.0 は YJIT 非ビルド(`RubyVM::YJIT` が no-class になる)(フル機能ビルドとの差分は「ビルド環境依存の差分」節)、
   readline は libedit、システム OpenSSL は 3.0 系(`OpenSSL::Engine`・`Digest::MD2` 等が無い)。
   3.0.0 は fiddle/dbm の共有ライブラリ依存が欠けて require 不可
 - bundled gem の判定: [tools/library-versions/matrix-libs.tsv](../library-versions/matrix-libs.tsv)
@@ -128,6 +128,40 @@ DB と実測ダンプはリポジトリ外(作業用ディレクトリ `WORK`)�
    `compare_mc.rb` は `$WORK/{db-extract,real,probe-in}` を読み、`$WORK/result/<版>/` に
    `excess.tsv`・`shortage.tsv`・`real-keys.tsv`・`summary-by-lib.tsv`・`summary.txt` を書く。
    `aggregate_mc.rb` は `result/matrix-*.tsv` を書く
+
+## ビルド環境依存の差分(フル機能ビルドとの突き合わせ・2026-09-16 追加)
+
+all-ruby のバイナリは YJIT/ZJIT 非対応ビルド(rustc なし)・readline は libedit・一部の共有ライブラリ欠落
+(3.0 の fiddle など)で、実 Ruby にあるメソッドが「無い」と観測されることがある。
+その影響を測るため、`--enable-yjit --enable-zjit` でビルドされた `ghcr.io/ruby/ruby:<版>` と
+all-ruby の同じ teeny で組み込み+標準添付を測定し直し、両者の差分を `result/env-diff/<版>.tsv` に置いた
+(使ったバイナリは `result/env-diff/ruby-v.tsv`。4.0 だけ all-ruby に 4.0.7 が無く 4.0.6 との比較)。
+
+```sh
+cp $T/*.rb $T/*.sh $WORK/tools/
+for v in 3.0 3.1 3.2 3.3 3.4 4.0; do
+  bash $T/measure_env.sh $WORK $v                       # docker: ghcr.io/ruby/ruby:$v と all-ruby
+  ruby $T/env_compare.rb $WORK $v $WORK/db-extract/entries-$v.tsv > $WORK/env-diff-$v.tsv
+done
+```
+
+`env_compare.rb` の出力列: ver / lib / kind(`class-only-in-full`・`method-only-in-full`・`method-only-in-allruby`・
+`probe-differs`・`require`)/ class / typemark / name / info(可視性と DB 記載の有無、プローブ結果の対、require の成否)/ libs。
+同梱 gem の版ずれと読み込み順の差しか出ない `Gem::`・`RDoc::` 等のクラスと rubygems/bundler/rdoc 配下のライブラリは除いている。
+
+結果(3.0〜4.0): ビルド環境で有無が変わるのは次だけで、他の組み込み・標準添付のメソッドは両ビルドで一致した。
+
+- `RubyVM::YJIT`(3.2〜4.0 で all-ruby に無い): 公開メソッドは rurema に記載済み。未記載の `disasm`・`exit_locations`・
+  `insns_compiled`・`simulate_oom!`・`trace_exit_locations_enabled?` は原典で `:nodoc:`
+- `RubyVM::ZJIT`(4.0 で all-ruby に無い): rurema にページが無い。`enable`・`enabled?`・`stats`・`stats_enabled?`・`stats_string`・
+  `reset_stats!`・`trace_exit_locations_enabled?`・`exit_locations`・`dump_exit_locations` が 4.0 の公開 API
+  (4.1 の master では `exit_locations`・`dump_exit_locations` が消え `induce_*` 3 件が追加)
+- `Readline`(3.0〜3.2・libedit): `emacs_editing_mode`・`vi_editing_mode`・`filename_quote_characters(=)`・
+  3.0 は `basic_quote_characters(=)` も all-ruby で `no-method`(記載はある= 過剰側の誤検出)
+- `fiddle`(3.0): all-ruby 3.0.5 は libffi.so.7 が無く require 不可(未測定扱い)。`net/imap`(3.2)は all-ruby に bundled gem が無い
+
+このため `result/matrix-shortage.tsv` の `RubyVM::YJIT`/`RubyVM::ZJIT` 行の版別存在と first_present は信用しない
+(YJIT の公開メソッドは 3.1〜3.3 初出、ZJIT は 4.0 初出)。MJIT(3.0〜3.2)・RJIT(3.3)は両ビルドにあり差は出ない。
 
 ## 既知の限界(結果を読むときの注意)
 

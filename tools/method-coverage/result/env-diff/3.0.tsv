@@ -1,0 +1,8 @@
+ver	lib	kind	class	typemark	name	info	libs
+3.0	readline	probe-differs	Readline	.	basic_quote_characters	full=ok allruby=no-method	readline
+3.0	readline	probe-differs	Readline	.	basic_quote_characters=	full=ok allruby=no-method	readline
+3.0	readline	probe-differs	Readline	.	emacs_editing_mode	full=ok allruby=no-method	readline
+3.0	readline	probe-differs	Readline	.	filename_quote_characters	full=ok allruby=no-method	readline
+3.0	readline	probe-differs	Readline	.	filename_quote_characters=	full=ok allruby=no-method	readline
+3.0	readline	probe-differs	Readline	.	vi_editing_mode	full=ok allruby=no-method	readline
+3.0	fiddle	require	-	-	-	full=ok allruby=FAIL(LoadError: libffi.so.7: cannot open shared object file: No s)	fiddle,fiddle/import

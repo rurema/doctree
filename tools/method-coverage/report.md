@@ -71,3 +71,12 @@
 - probe は `-n/-p` 限定の `Kernel.#chomp` 系・`$1` 等の特殊変数を判定できない(除外済み)。`Errno::EXXX` プレースホルダも除外
 - 不足のライブラリ帰属は「DB でクラスを記載しているライブラリ → source_location の feature → クラス内多数派」の順の推定。forwardable/delegate 生成メソッドは前段で吸収済みだが未文書クラスでは残る
 - 「存在する」= メソッド定義の有無のみ。引数追加などシグネチャ単位の差分は検出しない
+
+## 追記(2026-09-16): ビルド環境依存の確認と 4.1 の再測定
+
+- `ghcr.io/ruby/ruby:<版>`(YJIT/ZJIT 有効)と all-ruby の同じ teeny で 3.0〜4.0 を測り直した(README「ビルド環境依存の差分」・`result/env-diff/`)。
+  ビルドで有無が変わるのは `RubyVM::YJIT`(3.2〜4.0)・`RubyVM::ZJIT`(4.0)・`Readline` の libedit 差(3.0〜3.2)・3.0 の fiddle だけ
+- 上の「不足」で 4.1 新規に数えた YJIT 4 件と未文書クラスの `RubyVM::ZJIT` 11 件は訂正: YJIT の 4 件は 3.2〜3.3 から存在するが原典で `:nodoc:`、
+  ZJIT は 4.0 から存在する(rurema にページが無い= 実際の不足)
+- 4.1 は 2026-09-15 の master(0c3c61ca82)で組み込みを再測定したが、09-04 のスナップショットと差は無かった。
+  4.1 新規 42 件(+ `Ruby::SourceRange`)は #3573、`Thread::Monitor` の組み込み化は #3574 で対応

@@ -1,0 +1,29 @@
+ver	lib	kind	class	typemark	name	info	libs
+3.2	_builtin	class-only-in-full	RubyVM::YJIT	-	-	doc	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	_dump_locations	priv UNDOC	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	_print_stats	priv UNDOC	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	code_gc	pub doc(_builtin)	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	disasm	pub UNDOC	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	dump_exit_locations	pub doc(_builtin)	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	enabled?	pub doc(_builtin)	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	exit_locations	pub UNDOC	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	insns_compiled	pub UNDOC	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	print_counters	priv UNDOC	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	print_sorted_exit_counts	priv UNDOC	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	reset_stats!	pub doc(_builtin)	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	runtime_stats	pub doc(_builtin)	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	simulate_oom!	pub UNDOC	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	stats_enabled?	pub doc(_builtin)	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	total_exit_count	priv UNDOC	_builtin
+3.2	_builtin	method-only-in-full	RubyVM::YJIT	.	trace_exit_locations_enabled?	pub UNDOC	_builtin
+3.2	readline	probe-differs	Readline	.	emacs_editing_mode	full=ok allruby=no-method	readline
+3.2	readline	probe-differs	Readline	.	filename_quote_characters	full=ok allruby=no-method	readline
+3.2	readline	probe-differs	Readline	.	filename_quote_characters=	full=ok allruby=no-method	readline
+3.2	readline	probe-differs	Readline	.	vi_editing_mode	full=ok allruby=no-method	readline
+3.2	_builtin	probe-differs	RubyVM::YJIT	.	code_gc	full=ok allruby=no-class	_builtin
+3.2	_builtin	probe-differs	RubyVM::YJIT	.	dump_exit_locations	full=ok allruby=no-class	_builtin
+3.2	_builtin	probe-differs	RubyVM::YJIT	.	enabled?	full=ok allruby=no-class	_builtin
+3.2	_builtin	probe-differs	RubyVM::YJIT	.	reset_stats!	full=ok allruby=no-class	_builtin
+3.2	_builtin	probe-differs	RubyVM::YJIT	.	runtime_stats	full=ok allruby=no-class	_builtin
+3.2	_builtin	probe-differs	RubyVM::YJIT	.	stats_enabled?	full=ok allruby=no-class	_builtin
+3.2	net/imap	require	-	-	-	full=ok allruby=FAIL(LoadError: cannot load such file -- net/imap)	net/imap
