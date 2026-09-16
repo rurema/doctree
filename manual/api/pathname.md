@@ -104,6 +104,28 @@ p Pathname.glob("lib/i*.rb") # => [#<Pathname:lib/ipaddr.rb>, #<Pathname:lib/irb
 - **SEE** [m:Dir.glob]
 - **SEE** [m:Pathname#glob]
 
+#%since 3.4
+### def Pathname.mktmpdir -> Pathname
+### def Pathname.mktmpdir {|dir| ... } -> object
+
+一時ディレクトリを作成し、そのパスを [c:Pathname] オブジェクトでラップして返します。
+
+ブロックを指定した場合は、ブロックの終了時にディレクトリを削除します。ブロックの評価値を返します。
+
+```ruby title="例"
+require 'pathname'
+
+Pathname.mktmpdir {|dir|
+  p dir.class   # => Pathname
+  # 出力例: 動作環境により出力は異なります。
+  p dir         # => #<Pathname:/tmp/d20260909-5-7sp1c2>
+}
+```
+
+- **SEE** [m:Dir.mktmpdir]
+
+#%end
+
 ## Instance Methods
 
 ### def ==(other)   -> bool
@@ -179,7 +201,6 @@ require "pathname"
 path = Pathname.new("//.././../")
 path                  # => #<Pathname://.././../>
 path.cleanpath        # => #<Pathname:/>
-
 
 require 'pathname'
 Dir.rmdir("/tmp/foo")      rescue nil
