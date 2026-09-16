@@ -234,7 +234,9 @@ p range.start_line == loc.lineno # => true
 
 ### def syntax_tree -> Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
 
-`self` が表すフレームに対応する抽象構文木(AST)のノードを、ソースファイルを再度パースし直すことで返します。ノードを確実に取得できない場合に nil を返す条件については [m:RubyVM::InstructionSequence#syntax_tree] を参照してください。
+`self` が表すフレームに対応する抽象構文木(AST)のノードを、ソースファイルを再度パースし直すことで返します。
+
+ノードを確実に取得できない場合に nil を返す条件については [m:RubyVM::InstructionSequence#syntax_tree] を参照してください。
 
 このメソッドは実験的なもので、予告なく変更される可能性があります。
 

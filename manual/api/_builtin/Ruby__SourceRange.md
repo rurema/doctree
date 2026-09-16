@@ -18,7 +18,9 @@ Ruby のソースコード上のある範囲を表すクラスです。
 
 ### def path -> String
 
-`self` に対応する呼び出し可能オブジェクトのソースパスを返します。[m:Proc#source_location] や [m:Method#source_location] が返す配列の最初の要素と同じものです。
+`self` に対応する呼び出し可能オブジェクトのソースパスを返します。
+
+[m:Proc#source_location] や [m:Method#source_location] が返す配列の最初の要素と同じものです。
 
 ```ruby title="例"
 range = eval("proc {}", binding, "/tmp/sample.rb", 10).source_range
@@ -29,7 +31,9 @@ p range.path # => "/tmp/sample.rb"
 
 ### def absolute_path -> String | nil
 
-`self` に対応する呼び出し可能オブジェクトの絶対パスを返します。eval したコードなど、ソースが絶対パスを持たない場合は nil を返します。
+`self` に対応する呼び出し可能オブジェクトの絶対パスを返します。
+
+eval したコードなど、ソースが絶対パスを持たない場合は nil を返します。
 
 ```ruby title="例"
 range = eval("proc {}", binding, "/tmp/sample.rb", 10).source_range
@@ -40,7 +44,9 @@ p range.absolute_path # => nil
 
 ### def start_line -> Integer
 
-この範囲が開始する行番号を返します。1 から数えます。
+この範囲が開始する行番号を返します。
+
+1 から数えます。
 
 ```ruby title="例"
 range = eval("proc {}", binding, "/tmp/sample.rb", 10).source_range
@@ -51,7 +57,9 @@ p range.start_line # => 10
 
 ### def start_column -> Integer
 
-この範囲が開始するバイト単位の桁を返します。0 から数えます。
+この範囲が開始するバイト単位の桁を返します。
+
+0 から数えます。
 
 lambda の範囲は `->` から、ブロックの範囲は `{` または `do` から、メソッドの範囲は `def` から始まります。
 
@@ -70,7 +78,9 @@ p meth.source_range.start_column # => 14
 
 ### def end_line -> Integer
 
-この範囲が終了する行番号を返します。1 から数えます。
+この範囲が終了する行番号を返します。
+
+1 から数えます。
 
 呼び出し可能オブジェクトの `end` を越えて続くヒアドキュメントは範囲に含まれないことに注意してください。最後のヒアドキュメントまでの範囲を得たい場合は、`Prism.find` に `Proc`・`Method`・`UnboundMethod` を渡した結果から、子ノードの終了行・終了桁の最大値を計算してください。
 
@@ -86,7 +96,9 @@ p pr.source_range.end_line # => 1
 
 ### def end_column -> Integer
 
-この範囲が終了するバイト単位の桁を返します。0 から数えます。
+この範囲が終了するバイト単位の桁を返します。
+
+0 から数えます。
 
 呼び出し可能オブジェクトの `end` を越えて続くヒアドキュメントは範囲に含まれないことに注意してください。最後のヒアドキュメントまでの範囲を得たい場合は、`Prism.find` に `Proc`・`Method`・`UnboundMethod` を渡した結果から、子ノードの終了行・終了桁の最大値を計算してください。
 

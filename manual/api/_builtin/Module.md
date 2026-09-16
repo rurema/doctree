@@ -1503,10 +1503,11 @@ p C.singleton_class.singleton_class?  # => true
 ### def autoload_relative(const_name, feature) -> nil
 
 定数 const_name を最初に参照した時に、feature を呼び出し元のファイルからの
-相対パスとして [m:Kernel?.require] するように設定します。[m:Module#autoload]
-と似ていますが、feature の解決方法が [m:Kernel?.require_relative] と同様に、
-autoload_relative を呼び出したファイルのディレクトリからの相対パスになる点が
-異なります。
+相対パスとして [m:Kernel?.require] するように設定します。
+
+[m:Module#autoload] と似ていますが、feature の解決方法が
+[m:Kernel?.require_relative] と同様に autoload_relative を呼び出したファイルの
+ディレクトリからの相対パスになる点が異なります。
 
 const_name が autoload 設定されていて、まだ定義されてない(ロードされていない)
 ときは、autoload する対象を置き換えます。const_name が(autoload ではなく)
@@ -1536,10 +1537,8 @@ A.autoload_relative(:B, "b.rb")
 ### def descendants -> [Class, Module]
 
 `self` を [m:Module#ancestors] に持つクラスやモジュールの配列を返します。
-`self` の子孫を返す点で [m:Module#ancestors] の逆演算にあたり、
-`x.descendants.include?(y)` が成り立つのは `y.ancestors.include?(x)` が
-成り立つときに限られます。ただし `self` 自身、特異クラス、refinement は
-結果に含まれません。返される配列の順序は不定です。
+
+`self` の子孫を返す点で [m:Module#ancestors] の逆演算にあたり、`x.descendants.include?(y)` が成り立つのは `y.ancestors.include?(x)` が成り立つときに限られます。ただし `self` 自身、特異クラス、refinement は結果に含まれません。返される配列の順序は不定です。
 
 `self` は返された子孫への参照を保持しないため、参照を持つオブジェクトが
 無くなった子孫をガベージコレクションから守ることはありません。そのため、

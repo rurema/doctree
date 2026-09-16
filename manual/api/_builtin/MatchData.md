@@ -618,6 +618,7 @@ p m.named_captures(symbolize_names: true) #=> {:a => "1"}
 ### def integer_at(name, base = 10)  -> Integer | nil
 
 マッチした部分文字列を整数に変換して返します。
+
 `$~.integer_at(n)` は `$n&.to_i` と同じです。整数に変換せずに部分文字列をそのまま得るには `MatchData#[]` を使います。
 
 部分文字列がマッチしていない場合は `nil` を返します。

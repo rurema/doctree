@@ -485,7 +485,9 @@ p method(:p).to_proc.source_range # => nil
 
 ### def syntax_tree -> Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
 
-`self` のコンパイル元になった抽象構文木(AST)のノードを、コンパイルに使ったのと同じパーサでソースを再度パースし直すことで返します。ブロックから作られた `Proc` では、ブロック自身のノードではなく、そのブロックを持つ外側のノード(ブロック付きのメソッド呼び出しなど)を返します。
+`self` のコンパイル元になった抽象構文木(AST)のノードを、コンパイルに使ったのと同じパーサでソースを再度パースし直すことで返します。
+
+ブロックから作られた `Proc` では、ブロック自身のノードではなく、そのブロックを持つ外側のノード(ブロック付きのメソッド呼び出しなど)を返します。
 
 ノードを確実に取得できない場合に nil を返す条件については [m:RubyVM::InstructionSequence#syntax_tree] を参照してください。
 
@@ -503,7 +505,9 @@ p node.is_a?(Prism::CallNode) # => true
 
 ### def refined(*modules) -> Proc
 
-`self` と同じように振る舞いつつ、本体の中で `modules` の各モジュールによって有効化される refinement が効く新しい `Proc` を返します。`self` は変更されません。
+`self` と同じように振る舞いつつ、本体の中で `modules` の各モジュールによって有効化される refinement が効く新しい `Proc` を返します。
+
+`self` は変更されません。
 
 `modules` を 1 つも指定しなかった場合は `self` を返します。
 

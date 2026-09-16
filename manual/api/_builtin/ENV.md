@@ -171,7 +171,7 @@ key に関連づけられた値を返します。該当するキーが登録さ�
 ENV.replace('foo' => '0', 'bar' => '1', 'baz' => '2')
 p ENV.fetch_values('foo', 'baz')                    # => ["0", "2"]
 p ENV.fetch_values('foo', 'bam') {|key| key.to_s }  # => ["0", "bam"]
-ENV.fetch_values('foo', 'bam')                      # raises KeyError
+ENV.fetch_values('foo', 'bam')                      # ~> KeyError: key not found: "bam"
 ```
 
 - **SEE** [m:ENV.fetch]

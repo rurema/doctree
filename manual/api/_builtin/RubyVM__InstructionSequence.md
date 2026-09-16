@@ -792,7 +792,9 @@ p iseq.node_id.is_a?(Integer) # => true
 
 ### def source_hash -> Integer | nil
 
-`self` のコンパイル元になったソースのハッシュ値を返します。ソースが不明な場合は nil を返します。
+`self` のコンパイル元になったソースのハッシュ値を返します。
+
+ソースが不明な場合は nil を返します。
 
 [m:RubyVM::InstructionSequence#syntax_tree] は、この値を使って、再度パースし直したソースが元のソースから変わっていないかどうかを確認します。
 
@@ -805,7 +807,9 @@ p iseq.source_hash.is_a?(Integer) # => true
 
 ### def syntax_tree -> Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
 
-`self` のコンパイル元になった抽象構文木(AST)のノードを、コンパイルに使ったのと同じパーサでソースを再度パースし直すことで返します。デフォルトの prism でコンパイルされていれば [c:Prism::Node] を、`parse.y` でコンパイルされていれば [c:RubyVM::AbstractSyntaxTree::Node] を返します。
+`self` のコンパイル元になった抽象構文木(AST)のノードを、コンパイルに使ったのと同じパーサでソースを再度パースし直すことで返します。
+
+デフォルトの prism でコンパイルされていれば [c:Prism::Node] を、`parse.y` でコンパイルされていれば [c:RubyVM::AbstractSyntaxTree::Node] を返します。
 
 以下のように、ノードを確実に取得できない場合は nil を返します。
 

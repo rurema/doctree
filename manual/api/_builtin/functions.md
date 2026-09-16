@@ -1116,10 +1116,11 @@ p Foo.autoload?(:Bar)         # => nil
 ### module_function def autoload_relative(const_name, feature) -> nil
 
 定数 const_name を最初に参照した時に、feature を呼び出し元のファイルからの
-相対パスとして [m:Kernel?.require] するように設定します。[m:Kernel?.autoload]
-と似ていますが、feature の解決方法が [m:Kernel?.require_relative] と同様に、
-autoload_relative を呼び出したファイルのディレクトリからの相対パスになる点が
-異なります。
+相対パスとして [m:Kernel?.require] するように設定します。
+
+[m:Kernel?.autoload] と似ていますが、feature の解決方法が
+[m:Kernel?.require_relative] と同様に autoload_relative を呼び出したファイルの
+ディレクトリからの相対パスになる点が異なります。
 
 const_name には、"::" 演算子を含めることはできません。
 ネストした定数を指定する方法は [m:Module#autoload_relative] を参照してください。
