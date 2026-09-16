@@ -1,5 +1,6 @@
 ---
 library: monitor
+until: "4.1"
 ---
 # class MonitorMixin::ConditionVariable < Object
 
