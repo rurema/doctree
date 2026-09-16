@@ -105,3 +105,38 @@ URI.open('http://example.com/') {|f|
 }
 ```
 
+### def status=(status)
+{: since=""}
+
+対象となるリソースのステータスコードと reason phrase を設定します。
+
+- **param** `status` -- ステータスコードと reason phrase からなる文字列の配列を指定します。
+
+- **SEE** [m:OpenURI::Meta#status]
+
+### def base_uri=(uri)
+{: since=""}
+
+リソースの実際の URI を設定します。
+
+- **param** `uri` -- 設定する [c:URI] オブジェクトを指定します。
+
+- **SEE** [m:OpenURI::Meta#base_uri]
+
+### def metas -> Hash
+{: since="2.1.0"}
+
+ヘッダを収録したハッシュを返します。
+
+[m:OpenURI::Meta#meta] と異なり、値は文字列の配列になります。
+同じフィールド名のヘッダが複数存在する場合は、それらをまとめて 1 つの配列にします。
+
+```ruby title="例"
+require 'open-uri'
+URI.open('http://example.com/') {|f|
+  p f.metas["content-type"]  # => ["text/html"]
+}
+```
+
+- **SEE** [m:OpenURI::Meta#meta]
+

@@ -120,17 +120,20 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #%#
 #%# Adds pages to the index
 #%#
-#%# --- class_dir
-#%#
-#%# The directory classes are written to
-#%#
-#%# --- file_dir
-#%#
-#%# The directory files are written to
-#%#
 #%# --- search_string(string)
 #%#
 #%# Removes whitespace and downcases +string+
+
+#%until 4.0
+### def class_dir -> object
+{: since="2.0.0"}
+### def file_dir -> object
+{: since="2.0.0"}
+
+[m:RDoc::Generator::JsonIndex.new] に指定した親ジェネレータ(通常は
+[c:RDoc::Generator::Darkfish])の class_dir、file_dir をそれぞれそのまま返します。
+
+#%end
 
 ## Constants
 

@@ -340,3 +340,102 @@ p Coverage.line_stub("foo.rb")  # => [0, 0, 0, nil, nil, 0, 0, nil, 0, nil]
 この例において、空行, else, end の行は測定対象外であるため、nil となっています。
 
 - **param** `file` -- ファイル名を表す文字列
+
+#%since 3.2
+### def Coverage.supported?(mode) -> bool
+
+指定したモードのカバレッジ測定がサポートされているかどうかを返します。
+
+- **param** `mode` -- `:lines`、`:branches`、`:methods`、`:eval` のいずれかをシンボルで指定します。
+
+```ruby
+require "coverage"
+p Coverage.supported?(:lines)  # => true
+p Coverage.supported?(:all)    # => false
+```
+
+#%end
+
+#%since 3.1
+### def Coverage.setup(mode = nil) -> nil
+### def Coverage.setup(lines: nil, branches: nil, methods: nil, eval: nil, oneshot_lines: nil) -> nil
+
+カバレッジの測定の準備をします。
+
+このメソッド自体は測定を開始しません。測定を開始するには [m:Coverage.resume] を使います。
+準備と開始を同時に行いたい場合は [m:Coverage.start] を使ってください。
+
+- **param** `mode` -- `:all` を指定すると、`lines`、`branches`、`methods`、`eval` の全てを計測対象にします。
+              省略した場合は行カバレッジのみが対象になります。
+- **param** `lines` -- 真を指定すると行カバレッジを計測対象にします。
+- **param** `branches` -- 真を指定すると分岐カバレッジを計測対象にします。
+- **param** `methods` -- 真を指定するとメソッドカバレッジを計測対象にします。
+- **param** `eval` -- 真を指定すると eval カバレッジを計測対象にします。
+- **param** `oneshot_lines` -- 真を指定すると、行カバレッジを 1 度でも実行されたかどうかだけを記録するモード([lib:coverage] ライブラリ参照)で計測対象にします。`lines` と同時には指定できません。
+
+- **raise** `RuntimeError` -- 既に [m:Coverage.setup] 済みの状態で、対象とするモードが異なる引数で呼び出した場合に発生します。
+
+```ruby
+require "coverage"
+Coverage.setup(lines: true)
+p Coverage.state  # => :suspended
+Coverage.resume
+```
+
+- **SEE** [m:Coverage.resume], [m:Coverage.start]
+
+### def Coverage.resume -> nil
+
+カバレッジの測定を開始、または再開します。
+
+事前に [m:Coverage.setup] で測定の準備をしておく必要があります。
+
+現在のところプロセス全体のカバレッジしか測定できません。スレッドごとのカバレッジは測定できないため、
+複数のスレッドを持つプロセスで [m:Coverage.resume] と [m:Coverage.suspend] を使って
+特定のコードブロックの実行だけをカバレッジ測定の対象にしようとすると、意図しない結果になることがあります。
+
+- **raise** `RuntimeError` -- [m:Coverage.setup] を実行する前に実行した場合、または既に測定中の場合に発生します。
+
+```ruby
+require "coverage"
+Coverage.setup
+Coverage.resume
+p Coverage.state  # => :running
+```
+
+- **SEE** [m:Coverage.setup], [m:Coverage.suspend]
+
+### def Coverage.suspend -> nil
+
+カバレッジの測定を一時停止します。
+
+再開するには [m:Coverage.resume] を使います。
+
+- **raise** `RuntimeError` -- 測定中でない場合に発生します。
+
+```ruby
+require "coverage"
+Coverage.start
+Coverage.suspend
+p Coverage.state  # => :suspended
+```
+
+- **SEE** [m:Coverage.resume]
+
+### def Coverage.state -> Symbol
+
+カバレッジの測定の状態を返します。
+
+`:idle`([m:Coverage.setup] も [m:Coverage.start] も行われていない状態)、`:suspended`(測定の準備はできているが一時停止中の状態)、`:running`(測定中の状態)のいずれかを返します。
+
+```ruby
+require "coverage"
+p Coverage.state  # => :idle
+Coverage.setup
+p Coverage.state  # => :suspended
+Coverage.resume
+p Coverage.state  # => :running
+```
+
+#%end
+

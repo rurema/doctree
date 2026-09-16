@@ -150,3 +150,30 @@ self.parent の名前を返します。
 ### def metadata -> Hash
 
 自身が持つメタデータ(他から任意の値を設定してもよい)を返します。
+
+#%until 4.0
+### def each_parent {|code_object| ... } -> self
+{: since="1.9.3"}
+
+[m:RDoc::CodeObject#parent] が nil になるまで、`self` の親を順にたどりながらブロックを評価します。
+
+- **SEE** [m:RDoc::CodeObject#parent], `RDoc::ClassModule#each_ancestor`
+
+#%end
+
+#%until 4.0
+### def viewer -> object
+{: since=""}
+### def viewer=(val)
+{: since=""}
+
+`self` に関連付けられた viewer オブジェクトを返します。
+
+RDoc は自身が扱うコードを表すモデルですが、実際の表示は viewer が担当します。
+Viewable プロトコルを実装したオブジェクトを `self` に関連付けることで、
+viewer 側から `self` にアクセスできるようになります。
+
+- **param** `val` -- `self` に関連付ける viewer オブジェクトを指定します。
+
+#%end
+
