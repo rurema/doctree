@@ -437,13 +437,15 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 なお、[m:Readline.completer_quote_characters=] が設定されていない場合、このメソッドは常に `nil` を返します。
 
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは利用できません。
+
 - **SEE** [m:Readline.completer_quote_characters=]
 
 ### def Readline.delete_text(start, length) -> self
 {: since="2.1.0"}
 ### def Readline.delete_text(range) -> self
 {: since="2.1.0"}
-### def Readline.delete_text() -> self
+### def Readline.delete_text -> self
 {: since="2.1.0"}
 
 現在の入力行のうち、指定した範囲のテキストを削除します。引数を省略した場合は、入力行全体を削除します。
@@ -459,9 +461,9 @@ GNU Readline のデフォルト値は nil(NULL) です。
 ### def Readline.emacs_editing_mode? -> bool
 {: since="1.9.1"}
 
-Emacs モードが有効であれば真を返します。そうでなければ偽を返します。
+Emacs モードが有効であれば `true` を返します。そうでなければ `false` を返します。
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは利用できません。
 
 - **SEE** [m:Readline.emacs_editing_mode]
 
@@ -479,7 +481,9 @@ Emacs モードが有効であれば真を返します。そうでなければ�
 ### def Readline.line_buffer -> String
 {: since="1.9.2"}
 
-編集中の行全体を返します。 completion_proc の中で、補完要求の文脈を判断するのに便利です。
+編集中の行全体を返します。
+
+completion_proc の中で、補完要求の文脈を判断するのに便利です。
 
 `Readline.line_buffer` の長さは、GNU Readline の rl_end と同じです。
 
@@ -537,6 +541,7 @@ Readline は、[m:Readline.completer_quote_characters=] で指定した文字(�
 - **param** `proc` -- 判定を行う [c:Proc] オブジェクトを指定します。
 
 - **raise** `ArgumentError` -- proc が call メソッドを持たない場合に発生します。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは利用できません。
 
 #%end
 
@@ -554,6 +559,8 @@ Readline は、[m:Readline.completer_quote_characters=] で指定した文字(�
 {: since="1.9.2"}
 
 現在の入力行をクリアします。
+
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは利用できません。
 
 - **SEE** GNU Readline ライブラリの rl_refresh_line 関数
 
@@ -575,9 +582,9 @@ Readline は、[m:Readline.completer_quote_characters=] で指定した文字(�
 ### def Readline.vi_editing_mode? -> bool
 {: since="1.9.1"}
 
-vi モードが有効であれば真を返します。そうでなければ偽を返します。
+vi モードが有効であれば `true` を返します。そうでなければ `false` を返します。
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは利用できません。
 
 - **SEE** [m:Readline.vi_editing_mode]
 

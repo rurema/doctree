@@ -698,6 +698,7 @@ p a.string                     # => "aaae"
 ### def pread(maxlen, offset, outbuf) -> String
 
 自身の現在の読み込み位置を変更せずに、offset から maxlen バイト読み込んで返します。
+
 [m:IO#pread] と違いシステムコールを使わないので、常にアトミックです。
 
 - **param** `maxlen` -- 読み込むバイト数を指定します。

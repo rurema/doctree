@@ -346,7 +346,11 @@ p Coverage.line_stub("foo.rb")  # => [0, 0, 0, nil, nil, 0, 0, nil, 0, nil]
 
 指定したモードのカバレッジ測定がサポートされているかどうかを返します。
 
+#%since 3.3
+- **param** `mode` -- `:lines`、`:oneshot_lines`、`:branches`、`:methods`、`:eval` のいずれかをシンボルで指定します。
+#%else
 - **param** `mode` -- `:lines`、`:branches`、`:methods`、`:eval` のいずれかをシンボルで指定します。
+#%end
 
 ```ruby
 require "coverage"

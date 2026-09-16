@@ -166,7 +166,7 @@ p ObjectSpace.reachable_objects_from(1)
 ```
 
 obj が内部でオブジェクトへの参照を持つ場合、
-ObjectSpace::InternalObjectWrapper オブジェクトが戻り値に含まれます。このオブジェクトは obj が内部で持っているオブジェクトを持ちます。内部のオブジェクトの型を確認する場合は ObjectSpace::InternalObjectWrapper#type
+[c:ObjectSpace::InternalObjectWrapper] オブジェクトが戻り値に含まれます。このオブジェクトは obj が内部で持っているオブジェクトを持ちます。内部のオブジェクトの型を確認する場合は [m:ObjectSpace::InternalObjectWrapper#type]
 を参照してください。:T_CLASS のような [c:Symbol] を返します。
 
 obj が ObjectSpace::InternalObjectWrapper オブジェクトであった場合、そのオブジェクトから参照される全てのオブジェクトを返します。
@@ -191,7 +191,7 @@ p reachable.keys
 
 戻り値のハッシュはキーを同一性で比較するため、文字列リテラルを使ってキーを指定して参照することはできません。[m:Hash#keys] や [m:Hash#values] などで取得してください。
 
-内部オブジェクトへの参照は `ObjectSpace::InternalObjectWrapper` オブジェクトでラップされます。詳しくは [m:ObjectSpace?.reachable_objects_from]
+内部オブジェクトへの参照は [c:ObjectSpace::InternalObjectWrapper] オブジェクトでラップされます。詳しくは [m:ObjectSpace?.reachable_objects_from]
 を参照してください。
 
 本メソッドはメモリリークの原因を調査するなど、オブジェクトグラフのデバッグに役立ちます。
@@ -492,7 +492,9 @@ p str.lines.grep(/"type":"SHAPE"/).size
 ### module_function def count_imemo_objects(result_hash = nil) -> Hash
 {: since="2.3.0"}
 
-T_IMEMO の種類ごとにオブジェクトの数を格納したハッシュを返します。T_IMEMO は Ruby のプログラムからは見えない Ruby 内部専用のオブジェクトです。
+T_IMEMO の種類ごとにオブジェクトの数を格納したハッシュを返します。
+
+T_IMEMO は Ruby のプログラムからは見えない Ruby 内部専用のオブジェクトです。
 
 - **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新しくハッシュを作成します。result_hash の内容は上書きされます。プローブ効果を避けるために使用します。
 - **raise** `TypeError` -- result_hash にハッシュ以外を指定した時に発生します。
@@ -529,7 +531,7 @@ Symbol の種類ごとにオブジェクトの数を格納したハッシュを�
 - **`immortal_static_symbol`**:
   動的な確保を経ずに存在し、ガベージコレクションの対象にもならない Symbol の数です。
 - **`immortal_symbol`**:
-  `immortal_dynamic_symbol` と `immortal_static_symbol` の合計です。
+  ガベージコレクションの対象にはならない Symbol の数 (`immortal_dynamic_symbol` と `immortal_static_symbol` の合計) です。
 
 本メソッドは普通の Ruby プログラマ向けのメソッドではありません。パフォーマンスやメモリ使用量に興味のある CRuby の開発者向けのものです。
 
@@ -584,7 +586,7 @@ obj の実際のクラスを返します。これは [m:Object#class] が返す�
 
 Ruby は特異クラスや、include したモジュールの iclass のような隠されたクラスをオブジェクトの継承関係に挿入します。[m:Object#class] はこれらを読み飛ばして返しますが、本メソッドは特異クラスなどの隠されたクラスも含めて、最初に見つかったクラスをそのまま返します。
 
-- **param** `obj` -- 実際のクラスを取得したいオブジェクトを指定します。`ObjectSpace::InternalObjectWrapper` オブジェクトを指定することもでき、その場合はラップされている内部オブジェクトのクラスを返します。
+- **param** `obj` -- 実際のクラスを取得したいオブジェクトを指定します。[c:ObjectSpace::InternalObjectWrapper] オブジェクトを指定することもでき、その場合はラップされている内部オブジェクトのクラスを返します。
 
 ```ruby title="例"
 require 'objspace'
@@ -606,7 +608,7 @@ p ObjectSpace.internal_class_of(s)  # => #<Class:#<String:0x...>>
 
 cls の直接のスーパークラスを返します。include したモジュールの iclass のような隠されたクラスも読み飛ばさずに返します。
 
-- **param** `cls` -- `Class` または `Module` を指定します。それらをラップした `ObjectSpace::InternalObjectWrapper` オブジェクトを指定することもできます。
+- **param** `cls` -- `Class` または `Module` を指定します。それらをラップした [c:ObjectSpace::InternalObjectWrapper] オブジェクトを指定することもできます。
 
 [m:Class#superclass] は include したモジュールの iclass を読み飛ばして返しますが、本メソッドは読み飛ばしません。
 
