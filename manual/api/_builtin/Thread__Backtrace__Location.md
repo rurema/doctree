@@ -210,3 +210,43 @@ end
 # "path/to/foo.rb:9:in `<main>'"
 #%end
 ```
+
+#%since 4.1
+### def source_range -> Ruby::SourceRange
+
+`self` が表すフレームに対応する Ruby の式の [c:Ruby::SourceRange] を返します。
+
+CRuby では、このメソッドは呼び出されるたびにソースファイルを再度読み込んでパースし直すことで範囲を求めます。読み込みで発生したファイルのエラー(存在しないファイルに対する `Errno::ENOENT` など)はそのまま発生します。
+
+`RubyVM.keep_script_lines = true` を指定すると、ソースファイルをメモリ上に保持し、ファイルシステムからの再読み込みを避けられます。eval したコードのフレームでは、`RubyVM.keep_script_lines = true` を指定していないと範囲を取得できません。
+
+- **raise** `RuntimeError` -- ソースが変更されているなど、範囲を求めるために必要な情報が得られない場合に発生します。
+- **raise** `ArgumentError` -- eval したコードのフレームで、`RubyVM.keep_script_lines = true` を指定していない場合に発生します。
+
+```ruby title="例"
+loc = caller_locations(0, 1)[0]
+range = loc.source_range
+p range.path == loc.path         # => true
+p range.start_line == loc.lineno # => true
+```
+
+- **SEE** [m:Thread::Backtrace::Location#syntax_tree], [m:Proc#source_range]
+
+### def syntax_tree -> Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
+
+`self` が表すフレームに対応する抽象構文木(AST)のノードを、ソースファイルを再度パースし直すことで返します。
+
+ノードを確実に取得できない場合に nil を返す条件については [m:RubyVM::InstructionSequence#syntax_tree] を参照してください。
+
+このメソッドは実験的なもので、予告なく変更される可能性があります。
+
+```ruby title="例"
+node = -> { caller_locations(0, 1)[0] }.call.syntax_tree
+p node.is_a?(Prism::CallNode) # => true
+p node.name                   # => :caller_locations
+```
+
+- **SEE** [m:Thread::Backtrace::Location#source_range], [m:RubyVM::InstructionSequence#syntax_tree]
+
+#%end
+

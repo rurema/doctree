@@ -1290,3 +1290,27 @@ p File.read("test.txt")  # => "Hello RUBY!"
 #%end
 
 - **SEE** [m:IO::Buffer#write], [m:IO::Buffer#pread], [man:pwrite(2)]
+
+#%since 4.1
+### def bit_count(offset = 0, length = nil) -> Integer
+
+バッファに含まれる、立っているビット(値が `1` のビット)の数を返します。
+
+ポピュレーションカウント、あるいはハミング重みとも呼ばれます。
+
+`offset` と `length` を指定すると、バッファの一部の範囲だけを対象に数えます。
+
+- **param** `offset` -- 数える範囲の開始位置をバッファの先頭からのバイト数で指定します。省略した場合は `0` です。
+- **param** `length` -- 数える範囲の長さをバイト数で指定します。省略した場合は `offset` からバッファの終端までです。
+- **return** -- 対象の範囲に含まれる、立っているビットの数を返します。
+- **raise** `ArgumentError` -- `offset` と `length` の合計がバッファのバイト数を超える場合に発生します。
+
+```ruby title="例"
+p IO::Buffer.for("\xFF\x00\x0F").bit_count       # => 12
+p IO::Buffer.for("\xFF\x00\x0F").bit_count(1, 2) # => 4
+```
+
+- **SEE** [m:IO::Buffer#~], [m:String#bit_count]
+
+#%end
+

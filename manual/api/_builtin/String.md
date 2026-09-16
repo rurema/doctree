@@ -3991,3 +3991,361 @@ p "hello".delete_suffix!("hel") # => nil
 - **SEE** [m:String#delete_prefix!]
 - **SEE** [m:String#delete_suffix]
 - **SEE** [m:String#end_with?]
+
+#%since 4.1
+### def bit_get(offset, lsb_first: true) -> Integer | nil
+
+0 から数えたビット位置 `offset` のビットを `0` か `1` の整数で返します。
+
+`offset` が `self` の範囲を超える場合は `nil` を返します。
+
+既定では、各バイト内のビットは最下位ビット(LSB)から最上位ビット(MSB)の順に番号が付きます。`lsb_first` に `false` を指定すると、バイトの並び順はそのままに、各バイト内のビット番号だけが最上位ビット(MSB)から最下位ビット(LSB)の順になります。
+
+- **param** `offset` -- 取得するビットの位置を 0 から数えた整数で指定します。
+- **param** `lsb_first` -- バイト内のビットの番号の付け方を指定します。既定は `true`(最下位ビットが 0 番目)です。`false` を指定すると最上位ビットが 0 番目になります。
+- **return** -- `offset` のビットが立っていれば `1`、立っていなければ `0` を返します。`offset` が `self` の範囲を超える場合は `nil` を返します。
+- **raise** `IndexError` -- `offset` が負の場合に発生します。
+- **raise** `ArgumentError` -- `offset` がビット位置として表現できないほど大きい場合に発生します。
+- **raise** `ArgumentError` -- `lsb_first` に `true`、`false` 以外を指定した場合に発生します。
+
+```ruby title="例"
+s = "\xAA".b # 0b10101010
+p s.bit_get(0) # => 0
+p s.bit_get(1) # => 1
+p s.bit_get(8) # => nil
+p s.bit_get(0, lsb_first: false) # => 1
+p s.bit_get(1, lsb_first: false) # => 0
+```
+
+- **SEE** [m:String#bit_set?], [m:String#getbyte]
+
+### def bit_set?(offset, lsb_first: true) -> bool | nil
+
+0 から数えたビット位置 `offset` のビットが立っているかどうかを真偽値で返します。
+
+`offset` が `self` の範囲を超える場合は `nil` を返します。
+
+既定では、各バイト内のビットは最下位ビット(LSB)から最上位ビット(MSB)の順に番号が付きます。`lsb_first` に `false` を指定すると、バイトの並び順はそのままに、各バイト内のビット番号だけが最上位ビット(MSB)から最下位ビット(LSB)の順になります。
+
+- **param** `offset` -- 調べるビットの位置を 0 から数えた整数で指定します。
+- **param** `lsb_first` -- バイト内のビットの番号の付け方を指定します。既定は `true`(最下位ビットが 0 番目)です。`false` を指定すると最上位ビットが 0 番目になります。
+- **return** -- `offset` のビットが立っていれば `true`、立っていなければ `false` を返します。`offset` が `self` の範囲を超える場合は `nil` を返します。
+- **raise** `IndexError` -- `offset` が負の場合に発生します。
+- **raise** `ArgumentError` -- `offset` がビット位置として表現できないほど大きい場合に発生します。
+- **raise** `ArgumentError` -- `lsb_first` に `true`、`false` 以外を指定した場合に発生します。
+
+```ruby title="例"
+s = "\xAA".b # 0b10101010
+p s.bit_set?(0) # => false
+p s.bit_set?(1) # => true
+p s.bit_set?(8) # => nil
+p s.bit_set?(0, lsb_first: false) # => true
+p s.bit_set?(1, lsb_first: false) # => false
+```
+
+- **SEE** [m:String#bit_get]
+
+### def bit_set(offset, lsb_first: true) -> self
+### def bit_set(offset, length, lsb_first: true) -> self
+### def bit_set(range, lsb_first: true) -> self
+
+0 から数えたビット位置 `offset` のビットを `1` にして `self` を返します。
+
+`length` を指定すると、`offset` から `length` ビット分を連続して `1` にします。`range` を指定すると、`range` が示すビットの範囲を `1` にします。
+
+指定した範囲は全体が `self` の範囲内に収まっていなければなりません。範囲が `self` の末尾を超える場合は、切り詰められるのではなく `IndexError` が発生します。ビット数が 0 の範囲を指定した場合は何もしません(no-op)が、その開始位置が `self` の末尾を超えている場合は、ビット数が 0 であっても `IndexError` が発生します。
+
+既定では、各バイト内のビットは最下位ビット(LSB)から最上位ビット(MSB)の順に番号が付きます。`lsb_first` に `false` を指定すると、バイトの並び順はそのままに、各バイト内のビット番号だけが最上位ビット(MSB)から最下位ビット(LSB)の順になります。
+
+- **param** `offset` -- 変更を開始するビットの位置を 0 から数えた整数で指定します。
+- **param** `length` -- 変更するビット数を指定します。
+- **param** `range` -- 変更するビットの範囲を [c:Range] オブジェクトで指定します。
+- **param** `lsb_first` -- バイト内のビットの番号の付け方を指定します。既定は `true`(最下位ビットが 0 番目)です。`false` を指定すると最上位ビットが 0 番目になります。
+- **return** -- `self` を返します。
+- **raise** `IndexError` -- `offset` が範囲外の場合、または範囲の一部が `self` の外に及ぶ場合に発生します。
+- **raise** `ArgumentError` -- `length` に負の数を指定した場合に発生します。
+- **raise** `ArgumentError` -- ビット位置として表現できないほど大きい値を指定した場合に発生します。
+- **raise** `ArgumentError` -- `lsb_first` に `true`、`false` 以外を指定した場合に発生します。
+- **raise** `FrozenError` -- `self` が凍結されている場合に発生します。変更するビット数が 0 の場合でも発生します。
+
+```ruby title="例"
+s = "\x00".b
+p s.bit_set(1) # => "\x02"
+p s            # => "\x02"
+
+s = "\x00\x00".b
+p s.bit_set(4, 8) # => "\xF0\x0F"
+
+s = "\x00\x00".b
+p s.bit_set(4..11) # => "\xF0\x0F"
+```
+
+- **SEE** [m:String#bit_clear], [m:String#bit_flip], [m:String#bit_set?]
+
+### def bit_clear(offset, lsb_first: true) -> self
+### def bit_clear(offset, length, lsb_first: true) -> self
+### def bit_clear(range, lsb_first: true) -> self
+
+0 から数えたビット位置 `offset` のビットを `0` にして `self` を返します。
+
+`length` を指定すると、`offset` から `length` ビット分を連続して `0` にします。`range` を指定すると、`range` が示すビットの範囲を `0` にします。
+
+指定した範囲は全体が `self` の範囲内に収まっていなければなりません。範囲が `self` の末尾を超える場合は、切り詰められるのではなく `IndexError` が発生します。ビット数が 0 の範囲を指定した場合は何もしません(no-op)が、その開始位置が `self` の末尾を超えている場合は、ビット数が 0 であっても `IndexError` が発生します。
+
+既定では、各バイト内のビットは最下位ビット(LSB)から最上位ビット(MSB)の順に番号が付きます。`lsb_first` に `false` を指定すると、バイトの並び順はそのままに、各バイト内のビット番号だけが最上位ビット(MSB)から最下位ビット(LSB)の順になります。
+
+- **param** `offset` -- 変更を開始するビットの位置を 0 から数えた整数で指定します。
+- **param** `length` -- 変更するビット数を指定します。
+- **param** `range` -- 変更するビットの範囲を [c:Range] オブジェクトで指定します。
+- **param** `lsb_first` -- バイト内のビットの番号の付け方を指定します。既定は `true`(最下位ビットが 0 番目)です。`false` を指定すると最上位ビットが 0 番目になります。
+- **return** -- `self` を返します。
+- **raise** `IndexError` -- `offset` が範囲外の場合、または範囲の一部が `self` の外に及ぶ場合に発生します。
+- **raise** `ArgumentError` -- `length` に負の数を指定した場合に発生します。
+- **raise** `ArgumentError` -- ビット位置として表現できないほど大きい値を指定した場合に発生します。
+- **raise** `ArgumentError` -- `lsb_first` に `true`、`false` 以外を指定した場合に発生します。
+- **raise** `FrozenError` -- `self` が凍結されている場合に発生します。変更するビット数が 0 の場合でも発生します。
+
+```ruby title="例"
+s = "\xFF".b
+p s.bit_clear(1) # => "\xFD"
+p s              # => "\xFD"
+
+s = "\xFF\xFF".b
+p s.bit_clear(4, 8) # => "\x0F\xF0"
+
+s = "\xFF\xFF".b
+p s.bit_clear(4..11) # => "\x0F\xF0"
+```
+
+- **SEE** [m:String#bit_set], [m:String#bit_flip]
+
+### def bit_flip(offset, lsb_first: true) -> self
+### def bit_flip(offset, length, lsb_first: true) -> self
+### def bit_flip(range, lsb_first: true) -> self
+
+0 から数えたビット位置 `offset` のビットを反転して `self` を返します。
+
+`length` を指定すると、`offset` から `length` ビット分を連続して反転します。`range` を指定すると、`range` が示すビットの範囲を反転します。
+
+指定した範囲は全体が `self` の範囲内に収まっていなければなりません。範囲が `self` の末尾を超える場合は、切り詰められるのではなく `IndexError` が発生します。ビット数が 0 の範囲を指定した場合は何もしません(no-op)が、その開始位置が `self` の末尾を超えている場合は、ビット数が 0 であっても `IndexError` が発生します。
+
+既定では、各バイト内のビットは最下位ビット(LSB)から最上位ビット(MSB)の順に番号が付きます。`lsb_first` に `false` を指定すると、バイトの並び順はそのままに、各バイト内のビット番号だけが最上位ビット(MSB)から最下位ビット(LSB)の順になります。
+
+- **param** `offset` -- 変更を開始するビットの位置を 0 から数えた整数で指定します。
+- **param** `length` -- 変更するビット数を指定します。
+- **param** `range` -- 変更するビットの範囲を [c:Range] オブジェクトで指定します。
+- **param** `lsb_first` -- バイト内のビットの番号の付け方を指定します。既定は `true`(最下位ビットが 0 番目)です。`false` を指定すると最上位ビットが 0 番目になります。
+- **return** -- `self` を返します。
+- **raise** `IndexError` -- `offset` が範囲外の場合、または範囲の一部が `self` の外に及ぶ場合に発生します。
+- **raise** `ArgumentError` -- `length` に負の数を指定した場合に発生します。
+- **raise** `ArgumentError` -- ビット位置として表現できないほど大きい値を指定した場合に発生します。
+- **raise** `ArgumentError` -- `lsb_first` に `true`、`false` 以外を指定した場合に発生します。
+- **raise** `FrozenError` -- `self` が凍結されている場合に発生します。変更するビット数が 0 の場合でも発生します。
+
+```ruby title="例"
+s = "\x00".b
+p s.bit_flip(1) # => "\x02"
+p s.bit_flip(1) # => "\x00"
+
+s = "\x00\xFF".b
+p s.bit_flip(4, 8) # => "\xF0\xF0"
+
+s = "\x00\xFF".b
+p s.bit_flip(4..11) # => "\xF0\xF0"
+```
+
+- **SEE** [m:String#bit_set], [m:String#bit_clear]
+
+### def bit_count -> Integer
+### def bit_count(offset, length, lsb_first: true) -> Integer
+### def bit_count(range, lsb_first: true) -> Integer
+
+`self` に含まれる、立っているビット(値が `1` のビット)の数を返します。
+
+ポピュレーションカウント、あるいはハミング重みとも呼ばれます。
+
+引数を指定しない場合は `self` の全バイトを対象に数えます。
+
+`offset` と `length` を指定すると、0 から数えたビット位置 `offset` から `length` ビット分を対象に数えます。`range` を指定すると、`range` が示すビットの範囲を対象に数えます。
+
+対象の範囲が `self` の末尾を超える場合は、実際に存在するビットだけに切り詰めて数えます。範囲の開始位置が `self` の末尾以上の場合は `0` を返します。[m:String#bit_set] などの書き込み系メソッドと異なり、範囲外を指定してもエラーにはなりません。
+
+既定では、各バイト内のビットは最下位ビット(LSB)から最上位ビット(MSB)の順に番号が付きます。`lsb_first` に `false` を指定すると、バイトの並び順はそのままに、各バイト内のビット番号だけが最上位ビット(MSB)から最下位ビット(LSB)の順になります。ビット番号の付け方が結果に影響するのは範囲がバイト境界に揃っていない場合だけで、引数無しの形は `lsb_first` に関係なく同じ結果になります。
+
+- **param** `offset` -- 数える範囲の開始位置を 0 から数えた整数で指定します。
+- **param** `length` -- 数える範囲の長さをビット数で指定します。
+- **param** `range` -- 数える範囲を [c:Range] オブジェクトで指定します。
+- **param** `lsb_first` -- バイト内のビットの番号の付け方を指定します。既定は `true`(最下位ビットが 0 番目)です。`false` を指定すると最上位ビットが 0 番目になります。
+- **return** -- 対象の範囲に含まれる、立っているビットの数を返します。
+- **raise** `IndexError` -- `offset` または `range` の端点に負の値を指定した場合に発生します。
+- **raise** `ArgumentError` -- `length` に負の数を指定した場合に発生します。
+- **raise** `ArgumentError` -- ビット位置として表現できないほど大きい値を指定した場合に発生します。
+- **raise** `ArgumentError` -- `lsb_first` に `true`、`false` 以外を指定した場合に発生します。
+
+```ruby title="例"
+p "\x00".b.bit_count # => 0
+p "\xFF".b.bit_count # => 8
+p "\xAA".b.bit_count # => 4
+
+data = "\xFF\x00\xF0".b
+p data.bit_count(0, 8)   # => 8
+p data.bit_count(8, 8)   # => 0
+p data.bit_count(0..7)   # => 8
+p data.bit_count(8...16) # => 0
+p data.bit_count(16..)   # => 4
+
+p data.bit_count(16, 100) # => 4
+p data.bit_count(100, 8)  # => 0
+
+p "\xF0".b.bit_count(0, 4)                   # => 0
+p "\xF0".b.bit_count(0, 4, lsb_first: false) # => 4
+```
+
+- **SEE** [m:Integer#bit_count], [m:String#bit_get]
+
+### def bitwise_not -> String
+
+`self` の各バイトのビットを反転した新しい文字列を返します。
+
+返される文字列の文字エンコーディングは ASCII-8BIT になります。
+
+- **return** -- ビットを反転した新しい文字列を返します。
+
+```ruby title="例"
+p "\x00\xAA".b.bitwise_not # => "\xFFU"
+```
+
+- **SEE** [m:String#bitwise_not!]
+
+### def bitwise_not! -> self
+
+`self` の各バイトをビット反転した値に破壊的に置き換えます。
+
+`self` を返します。
+
+`self` の文字エンコーディングは変更されません。
+
+- **return** -- `self` を返します。
+- **raise** `FrozenError` -- `self` が凍結されている場合に発生します。
+
+```ruby title="例"
+s = "\x00\xAA".b
+p s.bitwise_not! # => "\xFFU"
+p s              # => "\xFFU"
+```
+
+- **SEE** [m:String#bitwise_not]
+
+### def bitwise_and(other) -> String
+
+`self` と `other` の各バイトのビット単位の AND を計算した新しい文字列を返します。
+
+`other` は `to_str` メソッドで文字列に変換されます。返される文字列の文字エンコーディングは ASCII-8BIT になります。
+
+- **param** `other` -- 演算の相手を文字列で指定します。`self` と同じバイト数でなければなりません。
+- **return** -- AND を計算した新しい文字列を返します。
+- **raise** `ArgumentError` -- `self` と `other` の長さ(バイト数)が異なる場合に発生します。
+
+```ruby title="例"
+p "\xF0".b.bitwise_and("\xCC") # => "\xC0"
+```
+
+- **SEE** [m:String#bitwise_and!], [m:String#bitwise_or], [m:String#bitwise_xor]
+
+### def bitwise_and!(other) -> self
+
+`self` の各バイトを、それぞれのバイトと `other` の対応するバイトとのビット単位の AND で破壊的に置き換えます。
+
+`self` を返します。
+
+`other` は `to_str` メソッドで文字列に変換されます。`self` の文字エンコーディングは変更されません。
+
+- **param** `other` -- 演算の相手を文字列で指定します。`self` と同じバイト数でなければなりません。
+- **return** -- `self` を返します。
+- **raise** `ArgumentError` -- `self` と `other` の長さ(バイト数)が異なる場合に発生します。
+- **raise** `FrozenError` -- `self` が凍結されている場合に発生します。
+
+```ruby title="例"
+s = "\xF0".b
+p s.bitwise_and!("\xCC") # => "\xC0"
+p s                      # => "\xC0"
+```
+
+- **SEE** [m:String#bitwise_and]
+
+### def bitwise_or(other) -> String
+
+`self` と `other` の各バイトのビット単位の OR を計算した新しい文字列を返します。
+
+`other` は `to_str` メソッドで文字列に変換されます。返される文字列の文字エンコーディングは ASCII-8BIT になります。
+
+- **param** `other` -- 演算の相手を文字列で指定します。`self` と同じバイト数でなければなりません。
+- **return** -- OR を計算した新しい文字列を返します。
+- **raise** `ArgumentError` -- `self` と `other` の長さ(バイト数)が異なる場合に発生します。
+
+```ruby title="例"
+p "\xF0".b.bitwise_or("\x0C") # => "\xFC"
+```
+
+- **SEE** [m:String#bitwise_or!], [m:String#bitwise_and], [m:String#bitwise_xor]
+
+### def bitwise_or!(other) -> self
+
+`self` の各バイトを、それぞれのバイトと `other` の対応するバイトとのビット単位の OR で破壊的に置き換えます。
+
+`self` を返します。
+
+`other` は `to_str` メソッドで文字列に変換されます。`self` の文字エンコーディングは変更されません。
+
+- **param** `other` -- 演算の相手を文字列で指定します。`self` と同じバイト数でなければなりません。
+- **return** -- `self` を返します。
+- **raise** `ArgumentError` -- `self` と `other` の長さ(バイト数)が異なる場合に発生します。
+- **raise** `FrozenError` -- `self` が凍結されている場合に発生します。
+
+```ruby title="例"
+s = "\xF0".b
+p s.bitwise_or!("\x0C") # => "\xFC"
+p s                     # => "\xFC"
+```
+
+- **SEE** [m:String#bitwise_or]
+
+### def bitwise_xor(other) -> String
+
+`self` と `other` の各バイトのビット単位の XOR を計算した新しい文字列を返します。
+
+`other` は `to_str` メソッドで文字列に変換されます。返される文字列の文字エンコーディングは ASCII-8BIT になります。
+
+- **param** `other` -- 演算の相手を文字列で指定します。`self` と同じバイト数でなければなりません。
+- **return** -- XOR を計算した新しい文字列を返します。
+- **raise** `ArgumentError` -- `self` と `other` の長さ(バイト数)が異なる場合に発生します。
+
+```ruby title="例"
+p "\xF0".b.bitwise_xor("\xCC") # => "<"
+```
+
+- **SEE** [m:String#bitwise_xor!], [m:String#bitwise_and], [m:String#bitwise_or]
+
+### def bitwise_xor!(other) -> self
+
+`self` の各バイトを、それぞれのバイトと `other` の対応するバイトとのビット単位の XOR で破壊的に置き換えます。
+
+`self` を返します。
+
+`other` は `to_str` メソッドで文字列に変換されます。`self` の文字エンコーディングは変更されません。
+
+- **param** `other` -- 演算の相手を文字列で指定します。`self` と同じバイト数でなければなりません。
+- **return** -- `self` を返します。
+- **raise** `ArgumentError` -- `self` と `other` の長さ(バイト数)が異なる場合に発生します。
+- **raise** `FrozenError` -- `self` が凍結されている場合に発生します。
+
+```ruby title="例"
+s = "\xF0".b
+p s.bitwise_xor!("\xCC") # => "<"
+p s                      # => "<"
+```
+
+- **SEE** [m:String#bitwise_xor]
+
+#%end
+

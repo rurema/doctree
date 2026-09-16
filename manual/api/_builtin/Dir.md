@@ -457,6 +457,48 @@ p Dir.mktmpdir { |dir| Dir.empty?(dir) } # => true
 
 - **param** `path_name` -- 確認したいディレクトリ名。
 
+#%since 4.1
+### def Dir.scan(path)                                                -> [[String, Symbol]]
+### def Dir.scan(path, encoding: enc)                                 -> [[String, Symbol]]
+### def Dir.scan(path) {|entry_name, entry_type| ... }                -> nil
+### def Dir.scan(path, encoding: enc) {|entry_name, entry_type| ... } -> nil
+
+ディレクトリ path に含まれるファイルエントリ名と、その種別の組を取得します。
+
+"." と ".." は含みません。エントリの並び順はファイルシステムに依存します。
+
+ブロックを与えなかった場合は、エントリ名とその種別からなる 2 要素の配列を
+要素とする配列を返します。
+
+ブロックを与えた場合は、各エントリのエントリ名とその種別を引数としてブロックを
+評価し、`nil` を返します。
+
+エントリの種別は `:file`・`:directory`・`:characterSpecial`・`:blockSpecial`・
+`:fifo`・`:link`・`:socket`・`:unknown` のいずれかのシンボルです。ファイルシステムが
+種別を判別できない場合は `:unknown` になりますが、可能であれば
+`lstat` を使って実際の種別を判定してから割り当てます。
+
+- **param** `path` -- ディレクトリのパスを文字列で指定します。
+
+- **param** `encoding` -- ディレクトリのエンコーディングを文字列か
+            [c:Encoding] オブジェクトで指定します。省略した場合はファイルシステムのエンコーディングと同じになります。
+
+- **raise** `Errno::EXXX` -- 失敗した場合に発生します。
+
+```ruby title="例"
+p Dir.scan('/example') # => [["config.h", :file], ["lib", :directory], ["main.rb", :file]]
+
+entries = []
+Dir.scan('/example') {|entry_name, entry_type| entries << [entry_name, entry_type] } # => nil
+p entries # => [["config.h", :file], ["lib", :directory], ["main.rb", :file]]
+```
+
+- **SEE** [m:Dir#scan]
+- **SEE** [m:Dir.children]
+- **SEE** [m:Dir.entries]
+
+#%end
+
 ## Instance Methods
 
 #%since 3.3
@@ -662,3 +704,36 @@ Dir.open('.'){|d|
 ```
 
 - **SEE** [m:Dir.children]
+
+#%since 4.1
+### def scan                                 -> [[String, Symbol]]
+### def scan {|entry_name, entry_type| ... } -> nil
+
+`self` のファイルエントリ名と、その種別の組を取得します。
+
+"." と ".." は含みません。エントリの並び順はファイルシステムに依存します。
+
+ブロックを与えなかった場合は、エントリ名とその種別からなる 2 要素の配列を
+要素とする配列を返します。
+
+ブロックを与えた場合は、各エントリのエントリ名とその種別を引数としてブロックを
+評価し、`nil` を返します。
+
+エントリの種別については [m:Dir.scan] を参照してください。
+
+- **raise** `IOError` -- 既に `self` が close している場合に発生します。
+
+```ruby title="例"
+dir = Dir.new('/example')
+p dir.scan # => [["config.h", :file], ["lib", :directory], ["main.rb", :file]]
+
+entries = []
+dir.scan {|entry_name, entry_type| entries << [entry_name, entry_type] } # => nil
+p entries # => [["config.h", :file], ["lib", :directory], ["main.rb", :file]]
+```
+
+- **SEE** [m:Dir.scan]
+- **SEE** [m:Dir#children]
+
+#%end
+
