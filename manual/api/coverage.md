@@ -362,19 +362,29 @@ p Coverage.supported?(:all)    # => false
 
 #%since 3.1
 ### def Coverage.setup(mode = nil) -> nil
+#%since 3.2
 ### def Coverage.setup(lines: nil, branches: nil, methods: nil, eval: nil, oneshot_lines: nil) -> nil
+#%else
+### def Coverage.setup(lines: nil, branches: nil, methods: nil, oneshot_lines: nil) -> nil
+#%end
 
 カバレッジの測定の準備をします。
 
 このメソッド自体は測定を開始しません。測定を開始するには [m:Coverage.resume] を使います。
 準備と開始を同時に行いたい場合は [m:Coverage.start] を使ってください。
 
+#%since 3.2
 - **param** `mode` -- `:all` を指定すると、`lines`、`branches`、`methods`、`eval` の全てを計測対象にします。
+#%else
+- **param** `mode` -- `:all` を指定すると、`lines`、`branches`、`methods` の全てを計測対象にします。
+#%end
               省略した場合は行カバレッジのみが対象になります。
 - **param** `lines` -- 真を指定すると行カバレッジを計測対象にします。
 - **param** `branches` -- 真を指定すると分岐カバレッジを計測対象にします。
 - **param** `methods` -- 真を指定するとメソッドカバレッジを計測対象にします。
-- **param** `eval` -- 真を指定すると eval カバレッジを計測対象にします。
+#%since 3.2
+- **param** `eval` -- 真を指定すると eval カバレッジを計測対象にします。(Ruby 3.2 で追加されたキーワード引数です)
+#%end
 - **param** `oneshot_lines` -- 真を指定すると、行カバレッジを 1 度でも実行されたかどうかだけを記録するモード([lib:coverage] ライブラリ参照)で計測対象にします。`lines` と同時には指定できません。
 
 - **raise** `RuntimeError` -- 既に [m:Coverage.setup] 済みの状態で、対象とするモードが異なる引数で呼び出した場合に発生します。

@@ -251,7 +251,7 @@ vi モードの詳細は、GNU Readline のマニュアルを参照してくだ�
 
   - <http://www.gnu.org/directory/readline.html>
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドではこのメソッドを利用できないため発生します。
 
 ### def Readline.emacs_editing_mode -> nil
 
@@ -261,7 +261,7 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してく
 
   - <http://www.gnu.org/directory/readline.html>
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドではこのメソッドを利用できないため発生します。
 
 ### def Readline.completion_append_character=(string)
 
@@ -356,7 +356,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 - **param** `string` -- 文字列を指定します。
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは、libedit の版によってはこのメソッドを利用できないため発生します。
 
 - **SEE** [m:Readline.basic_quote_characters]
 
@@ -364,7 +364,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 スペースなどの単語の区切りをクオートするための複数の文字で構成される文字列を取得します。
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは、libedit の版によってはこのメソッドを利用できないため発生します。
 
 - **SEE** [m:Readline.basic_quote_characters=]
 
@@ -396,7 +396,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 - **param** `string` -- 文字列を指定します。
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドではこのメソッドを利用できないため発生します。
 
 - **SEE** [m:Readline.filename_quote_characters]
 
@@ -404,7 +404,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りをクオートするための複数の文字で構成される文字列を取得します。
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドではこのメソッドを利用できないため発生します。
 
 - **SEE** [m:Readline.filename_quote_characters=]
 
@@ -437,7 +437,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 なお、[m:Readline.completer_quote_characters=] が設定されていない場合、このメソッドは常に `nil` を返します。
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは利用できません。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドではこのメソッドを利用できないため発生します。
 
 - **SEE** [m:Readline.completer_quote_characters=]
 
@@ -454,7 +454,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 - **param** `length` -- 削除する文字数を整数で指定します。
 - **param** `range` -- 削除する範囲を [c:Range] オブジェクトで指定します。
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは、libedit の版によってはこのメソッドを利用できないため発生します。
 
 - **SEE** GNU Readline ライブラリの rl_delete_text 関数
 
@@ -463,7 +463,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 Emacs モードが有効であれば `true` を返します。そうでなければ `false` を返します。
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは利用できません。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドではこのメソッドを利用できないため発生します。
 
 - **SEE** [m:Readline.emacs_editing_mode]
 
@@ -541,7 +541,7 @@ Readline は、[m:Readline.completer_quote_characters=] で指定した文字(�
 - **param** `proc` -- 判定を行う [c:Proc] オブジェクトを指定します。
 
 - **raise** `ArgumentError` -- proc が call メソッドを持たない場合に発生します。
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは利用できません。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドではこのメソッドを利用できないため発生します。
 
 #%end
 
@@ -560,7 +560,7 @@ Readline は、[m:Readline.completer_quote_characters=] で指定した文字(�
 
 現在の入力行をクリアします。
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは利用できません。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドではこのメソッドを利用できないため発生します。
 
 - **SEE** GNU Readline ライブラリの rl_refresh_line 関数
 
@@ -584,7 +584,7 @@ Readline は、[m:Readline.completer_quote_characters=] で指定した文字(�
 
 vi モードが有効であれば `true` を返します。そうでなければ `false` を返します。
 
-- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドでは利用できません。
+- **raise** `NotImplementedError` -- サポートしていない環境で発生します。libedit(Edit Line)を使ったビルドではこのメソッドを利用できないため発生します。
 
 - **SEE** [m:Readline.vi_editing_mode]
 
