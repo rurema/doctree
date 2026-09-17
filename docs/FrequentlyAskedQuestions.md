@@ -102,6 +102,24 @@ since: "3.2"
 
 ついでに言えば、1.6.x のタグも必要ありません。
 
+### 実 Ruby にあるメソッドはすべて載せるのですか?
+
+公開メソッドは原則としてすべて載せますが、次のものは個別のエントリを作らず、一覧表や概要で代えます
+([rurema/doctree#3566](https://github.com/rurema/doctree/issues/3566) で決めた方針です。個別の判断が必要なものが多いので、
+ルールとして固まるまではここに記録します)。
+
+- **生成物**: 名前の一覧から機械的に生成されるメソッド。例えば cgi/html の `CGI::Html3` などの各 DTD モジュールが
+  要素名ごとに定義するメソッド(`html`・`p`・`br` など)は、モジュールの説明に要素名の一覧表を置いて、要素ごとのエントリは作りません
+- **巨大な生成系のクラス群**: prism のノードクラス(`Prism::*Node`・150 種類以上)は `Prism::Node` にクラス名とフィールド名の一覧表を置き、
+  各ノードクラスのページやメソッドのエントリは作りません。`Prism::Visitor`・`Prism::Compiler`・`Prism::Dispatcher`・`Prism::DSL` など、
+  ノードごとに `visit_xxx_node` のようなメソッドを持つクラスも同様に載せません
+- **内部 API**: rubygems は利用者向けの API(`Gem` の設定・検索系のメソッド、`Gem::Specification` の gemspec 属性と検索系のメソッド、
+  `Gem::Version`・`Gem::Requirement`・`Gem::Dependency`・`Gem::Platform`)と例外クラスだけを載せ、
+  `Gem::Installer`・`Gem::Indexer`・`Gem::RemoteFetcher`・`Gem::Security`・`Gem::Commands::*` などの内部クラスや、
+  `Gem::Net::HTTP` のような vendored ライブラリは載せません(既存のページは残しますが、追補はしません)
+
+`tools/method-coverage` の集計では、これらを `POLICY(理由)` として不足側から除外しています。
+
 ### default gem と bundled gemはどう書く？
 
 default gemは組み込みクラスや標準ライブラリ同様内容まで記述してください。
