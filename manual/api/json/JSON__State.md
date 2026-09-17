@@ -516,20 +516,24 @@ p JSON.generate(["日本語"], json_state) # => "[\"日本語\"]"
 
 バッファの初期の長さを length にセットします。length が 0 より大きい場合のみ値がセットされ、それ以外の場合は値は変更されません。
 
+#%until 4.1
 ### def [](name) -> object
 
 name という名前のメソッドを呼び出し、その戻り値を返します。
 
-#%since 4.0
-このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除される予定で、代わりの手段として JSON::Coder が挙げられています。
+#%end
+#%version 4.0...4.1
+このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除されました。代わりの手段として JSON::Coder が挙げられています。
 #%end
 
+#%until 4.1
 ### def []=(name, value)
 
 属性 name に value をセットします。
 
-#%since 4.0
-このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除される予定で、代わりの手段として JSON::Coder が挙げられています。
+#%end
+#%version 4.0...4.1
+このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除されました。代わりの手段として JSON::Coder が挙げられています。
 #%end
 
 ### def generate(obj) -> String

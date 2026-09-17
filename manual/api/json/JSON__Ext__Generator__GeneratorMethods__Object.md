@@ -1,5 +1,6 @@
 ---
 library: json
+until: "4.1"
 ---
 # module JSON::Ext::Generator::GeneratorMethods::Object
 

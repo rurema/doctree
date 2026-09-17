@@ -5,6 +5,7 @@ library: json
 
 ## Private Instance Methods
 
+#%until 4.1
 ### def j(*objects) -> nil
 
 与えられたオブジェクトを JSON 形式の文字列で標準出力に一行で出力します。
@@ -41,6 +42,7 @@ p jj([1,2,{"name" => "tanaka","age" => 19}])
 ```
 
 - **SEE** [m:Kernel?.pp]
+#%end
 
 ### def JSON(object, options = {}) -> object
 

@@ -262,6 +262,7 @@ end
 
 - **SEE** [c:Marshal], [m:Marshal?.dump]
 
+#%until 4.1
 ### module_function def fast_generate(object) -> String
 ### module_function def fast_unparse(object) -> String
 
@@ -281,8 +282,12 @@ require "json"
 p JSON.fast_generate({ name: "tanaka", age: 19 }) # => "{\"name\":\"tanaka\",\"age\":19}"
 ```
 
+#%end
+
 ### module_function def generate(object, state = nil) -> String
+#%until 4.1
 ### module_function def unparse(object, state = nil) -> String
+#%end
 
 与えられたオブジェクトを一行の JSON 形式の文字列に変換して返します。
 
@@ -290,7 +295,9 @@ p JSON.fast_generate({ name: "tanaka", age: 19 }) # => "{\"name\":\"tanaka\",\"a
 また、循環参照のチェックを行います。[m:JSON::NaN], [m:JSON::Infinity],
 [m:JSON::MinusInfinity] を生成することもありません。
 
+#%until 4.1
 unparse は将来削除される予定です。
+#%end
 
 - **param** `object` -- JSON 形式の文字列に変換するオブジェクトを指定します。
 
@@ -337,7 +344,9 @@ p JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
 - **SEE** [c:JSON::State], [m:JSON?.pretty_generate]
 
 ### module_function def load(source, proc = nil, options = {}) -> object
+#%until 4.1
 ### module_function def restore(source, proc = nil, options = {}) -> object
+#%end
 
 与えられた JSON 形式の文字列を Ruby オブジェクトとしてロードして返します。
 
@@ -500,13 +509,17 @@ filespec で指定した JSON 形式のファイルを Ruby オブジェクト�
 - **SEE** [m:JSON::Parser#parse]
 
 ### module_function def pretty_generate(object, options = nil) -> String
+#%until 4.1
 ### module_function def pretty_unparse(object, options = nil) -> String
+#%end
 
 Ruby のオブジェクトを JSON 形式の文字列に変換して返します。
 
 このメソッドは [m:JSON?.generate] よりも人間に読みやすい文字列を返します。
 
+#%until 4.1
 pretty_unparse は将来削除される予定です。
+#%end
 
 - **param** `object` -- JSON 形式の文字列に変換するオブジェクトを指定します。
 
