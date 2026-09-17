@@ -15,7 +15,9 @@ CRuby 本体が Ruby プログラムをコンパイルする際に使われる�
 
 構文解析の結果得られる構文木の各ノードは [c:Prism::Node] のサブクラス
 (150 種類以上)として表現されます。すべてのノードに共通する API は
-[c:Prism::Node] で扱いますが、個々のノードクラスの詳細はこのリファレンスでは扱いません。ノードクラスも含めた完全な API については公式ドキュメントを参照してください。
+[c:Prism::Node] で扱いますが、個々のノードクラスの詳細はこのリファレンスでは扱いません([c:Prism::Node] にクラス名とフィールド名の一覧表だけを置いています)。
+また、ノードの種類ごとに `visit_xxx_node` のようなメソッドを持つ `Prism::Visitor`・`Prism::BasicVisitor`・`Prism::Compiler`・`Prism::Dispatcher`・`Prism::DSL`・`Prism::Translation::Ripper` などのクラスも扱いません。
+ノードクラスも含めた完全な API については公式ドキュメントを参照してください。
 
 - プロジェクトページ: <https://github.com/ruby/prism>
 - リファレンス(YARD): <https://www.rubydoc.info/gems/prism>

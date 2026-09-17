@@ -7,7 +7,8 @@ library: prism
 [m:Prism?.parse] などが返す構文木は、このクラスのサブクラス
 (150 種類以上)のインスタンスで構成されます。`Prism::Node` 自身のインスタンスが生成されることはありません。
 
-個々のノードクラス(`Prism::ProgramNode`・`Prism::CallNode` など)に固有のフィールド(子ノードや値を取得するアクセサ)はこのリファレンスでは扱いません。このページで扱うのは、すべてのノードクラスに共通する
+個々のノードクラス(`Prism::ProgramNode`・`Prism::CallNode` など)に固有のフィールド(子ノードや値を取得するアクセサ)は、
+このページ末尾の [ノードクラスの一覧](#node_classes) に名前だけを載せ、個別のエントリは作りません。このページで扱うのは、すべてのノードクラスに共通する
 API です。個々のノードクラスの詳細は公式ドキュメントを参照してください。
 
 - プロジェクトページ: <https://github.com/ruby/prism>
@@ -234,7 +235,7 @@ p a === b # => true
 
 #%end
 
-#%since 4.0
+#%since 3.4
 ### def start_line -> Integer
 
 開始位置の行番号を返します。[`location.start_line`](m:Prism::Location#start_line) と同じです。
@@ -313,6 +314,9 @@ p a === b # => true
 このノードに関連付けられた前後両方のコメントの配列を返します。
 [`location.comments`](m:Prism::Location#comments) と同じです。
 
+#%end
+
+#%since 4.0
 ### def each_child_node -> Enumerator
 ### def each_child_node {|node| ... } -> ()
 {: since="4.0.1"}
@@ -335,3 +339,396 @@ p a === b # => true
 
 [m:Prism::Node#breadth_first_search_all] の別名です。
 #%end
+
+### ノードクラスの一覧 {#node_classes}
+
+prism の各ノードクラス(`Prism::Node` のサブクラス)と、そのフィールド(子ノードや値を取得するアクセサ)の名前の一覧です。
+prism の `config.yml`(3.3= prism 0.19.0・3.4= 1.2.0・4.0= 1.7.0・4.1= 1.9.0)から機械的に生成しています。
+フィールドの構成が版によって異なるノードは、版ごとに行を分けています。各フィールドの意味は公式ドキュメントを参照してください。
+
+| ノードクラス | フィールド |
+|--------------|------------|
+| `AliasGlobalVariableNode` | `new_name`, `old_name`, `keyword_loc` |
+| `AliasMethodNode` | `new_name`, `old_name`, `keyword_loc` |
+| `AlternationPatternNode` | `left`, `right`, `operator_loc` |
+| `AndNode` | `left`, `right`, `operator_loc` |
+#%until 3.4
+| `ArgumentsNode` | `flags`, `arguments` |
+#%end
+#%since 3.4
+| `ArgumentsNode` | `arguments` |
+#%end
+#%until 3.4
+| `ArrayNode` | `flags`, `elements`, `opening_loc`, `closing_loc` |
+#%end
+#%since 3.4
+| `ArrayNode` | `elements`, `opening_loc`, `closing_loc` |
+#%end
+| `ArrayPatternNode` | `constant`, `requireds`, `rest`, `posts`, `opening_loc`, `closing_loc` |
+| `AssocNode` | `key`, `value`, `operator_loc` |
+| `AssocSplatNode` | `value`, `operator_loc` |
+| `BackReferenceReadNode` | `name` |
+| `BeginNode` | `begin_keyword_loc`, `statements`, `rescue_clause`, `else_clause`, `ensure_clause`, `end_keyword_loc` |
+| `BlockArgumentNode` | `expression`, `operator_loc` |
+| `BlockLocalVariableNode` | `name` |
+#%until 3.4
+| `BlockNode` | `locals`, `locals_body_index`, `parameters`, `body`, `opening_loc`, `closing_loc` |
+#%end
+#%since 3.4
+| `BlockNode` | `locals`, `parameters`, `body`, `opening_loc`, `closing_loc` |
+#%end
+| `BlockParameterNode` | `name`, `name_loc`, `operator_loc` |
+| `BlockParametersNode` | `parameters`, `locals`, `opening_loc`, `closing_loc` |
+| `BreakNode` | `arguments`, `keyword_loc` |
+#%until 3.4
+| `CallAndWriteNode` | `flags`, `receiver`, `call_operator_loc`, `message_loc`, `read_name`, `write_name`, `operator_loc`, `value` |
+#%end
+#%since 3.4
+| `CallAndWriteNode` | `receiver`, `call_operator_loc`, `message_loc`, `read_name`, `write_name`, `operator_loc`, `value` |
+#%end
+#%until 3.4
+| `CallNode` | `flags`, `receiver`, `call_operator_loc`, `name`, `message_loc`, `opening_loc`, `arguments`, `closing_loc`, `block` |
+#%end
+#%version 3.4
+| `CallNode` | `receiver`, `call_operator_loc`, `name`, `message_loc`, `opening_loc`, `arguments`, `closing_loc`, `block` |
+#%end
+#%since 4.0
+| `CallNode` | `receiver`, `call_operator_loc`, `name`, `message_loc`, `opening_loc`, `arguments`, `closing_loc`, `equal_loc`, `block` |
+#%end
+#%until 3.4
+| `CallOperatorWriteNode` | `flags`, `receiver`, `call_operator_loc`, `message_loc`, `read_name`, `write_name`, `operator`, `operator_loc`, `value` |
+#%end
+#%since 3.4
+| `CallOperatorWriteNode` | `receiver`, `call_operator_loc`, `message_loc`, `read_name`, `write_name`, `binary_operator`, `binary_operator_loc`, `value` |
+#%end
+#%until 3.4
+| `CallOrWriteNode` | `flags`, `receiver`, `call_operator_loc`, `message_loc`, `read_name`, `write_name`, `operator_loc`, `value` |
+#%end
+#%since 3.4
+| `CallOrWriteNode` | `receiver`, `call_operator_loc`, `message_loc`, `read_name`, `write_name`, `operator_loc`, `value` |
+#%end
+#%until 3.4
+| `CallTargetNode` | `flags`, `receiver`, `call_operator_loc`, `name`, `message_loc` |
+#%end
+#%since 3.4
+| `CallTargetNode` | `receiver`, `call_operator_loc`, `name`, `message_loc` |
+#%end
+| `CapturePatternNode` | `value`, `target`, `operator_loc` |
+#%until 3.4
+| `CaseMatchNode` | `predicate`, `conditions`, `consequent`, `case_keyword_loc`, `end_keyword_loc` |
+#%end
+#%since 3.4
+| `CaseMatchNode` | `predicate`, `conditions`, `else_clause`, `case_keyword_loc`, `end_keyword_loc` |
+#%end
+#%until 3.4
+| `CaseNode` | `predicate`, `conditions`, `consequent`, `case_keyword_loc`, `end_keyword_loc` |
+#%end
+#%since 3.4
+| `CaseNode` | `predicate`, `conditions`, `else_clause`, `case_keyword_loc`, `end_keyword_loc` |
+#%end
+| `ClassNode` | `locals`, `class_keyword_loc`, `constant_path`, `inheritance_operator_loc`, `superclass`, `body`, `end_keyword_loc`, `name` |
+| `ClassVariableAndWriteNode` | `name`, `name_loc`, `operator_loc`, `value` |
+#%until 3.4
+| `ClassVariableOperatorWriteNode` | `name`, `name_loc`, `operator_loc`, `value`, `operator` |
+#%end
+#%since 3.4
+| `ClassVariableOperatorWriteNode` | `name`, `name_loc`, `binary_operator_loc`, `value`, `binary_operator` |
+#%end
+| `ClassVariableOrWriteNode` | `name`, `name_loc`, `operator_loc`, `value` |
+| `ClassVariableReadNode` | `name` |
+| `ClassVariableTargetNode` | `name` |
+| `ClassVariableWriteNode` | `name`, `name_loc`, `value`, `operator_loc` |
+| `ConstantAndWriteNode` | `name`, `name_loc`, `operator_loc`, `value` |
+#%until 3.4
+| `ConstantOperatorWriteNode` | `name`, `name_loc`, `operator_loc`, `value`, `operator` |
+#%end
+#%since 3.4
+| `ConstantOperatorWriteNode` | `name`, `name_loc`, `binary_operator_loc`, `value`, `binary_operator` |
+#%end
+| `ConstantOrWriteNode` | `name`, `name_loc`, `operator_loc`, `value` |
+| `ConstantPathAndWriteNode` | `target`, `operator_loc`, `value` |
+#%until 3.4
+| `ConstantPathNode` | `parent`, `child`, `delimiter_loc` |
+#%end
+#%since 3.4
+| `ConstantPathNode` | `parent`, `name`, `delimiter_loc`, `name_loc` |
+#%end
+#%until 3.4
+| `ConstantPathOperatorWriteNode` | `target`, `operator_loc`, `value`, `operator` |
+#%end
+#%since 3.4
+| `ConstantPathOperatorWriteNode` | `target`, `binary_operator_loc`, `value`, `binary_operator` |
+#%end
+| `ConstantPathOrWriteNode` | `target`, `operator_loc`, `value` |
+#%until 3.4
+| `ConstantPathTargetNode` | `parent`, `child`, `delimiter_loc` |
+#%end
+#%since 3.4
+| `ConstantPathTargetNode` | `parent`, `name`, `delimiter_loc`, `name_loc` |
+#%end
+| `ConstantPathWriteNode` | `target`, `operator_loc`, `value` |
+| `ConstantReadNode` | `name` |
+| `ConstantTargetNode` | `name` |
+| `ConstantWriteNode` | `name`, `name_loc`, `value`, `operator_loc` |
+#%until 3.4
+| `DefNode` | `name`, `name_loc`, `receiver`, `parameters`, `body`, `locals`, `locals_body_index`, `def_keyword_loc`, `operator_loc`, `lparen_loc`, `rparen_loc`, `equal_loc`, `end_keyword_loc` |
+#%end
+#%since 3.4
+| `DefNode` | `name`, `name_loc`, `receiver`, `parameters`, `body`, `locals`, `def_keyword_loc`, `operator_loc`, `lparen_loc`, `rparen_loc`, `equal_loc`, `end_keyword_loc` |
+#%end
+| `DefinedNode` | `lparen_loc`, `value`, `rparen_loc`, `keyword_loc` |
+| `ElseNode` | `else_keyword_loc`, `statements`, `end_keyword_loc` |
+| `EmbeddedStatementsNode` | `opening_loc`, `statements`, `closing_loc` |
+| `EmbeddedVariableNode` | `operator_loc`, `variable` |
+| `EnsureNode` | `ensure_keyword_loc`, `statements`, `end_keyword_loc` |
+| `FalseNode` | (なし) |
+| `FindPatternNode` | `constant`, `left`, `requireds`, `right`, `opening_loc`, `closing_loc` |
+#%until 3.4
+| `FlipFlopNode` | `flags`, `left`, `right`, `operator_loc` |
+#%end
+#%since 3.4
+| `FlipFlopNode` | `left`, `right`, `operator_loc` |
+#%end
+#%until 3.4
+| `FloatNode` | (なし) |
+#%end
+#%since 3.4
+| `FloatNode` | `value` |
+#%end
+| `ForNode` | `index`, `collection`, `statements`, `for_keyword_loc`, `in_keyword_loc`, `do_keyword_loc`, `end_keyword_loc` |
+| `ForwardingArgumentsNode` | (なし) |
+| `ForwardingParameterNode` | (なし) |
+| `ForwardingSuperNode` | `block` |
+| `GlobalVariableAndWriteNode` | `name`, `name_loc`, `operator_loc`, `value` |
+#%until 3.4
+| `GlobalVariableOperatorWriteNode` | `name`, `name_loc`, `operator_loc`, `value`, `operator` |
+#%end
+#%since 3.4
+| `GlobalVariableOperatorWriteNode` | `name`, `name_loc`, `binary_operator_loc`, `value`, `binary_operator` |
+#%end
+| `GlobalVariableOrWriteNode` | `name`, `name_loc`, `operator_loc`, `value` |
+| `GlobalVariableReadNode` | `name` |
+| `GlobalVariableTargetNode` | `name` |
+| `GlobalVariableWriteNode` | `name`, `name_loc`, `value`, `operator_loc` |
+| `HashNode` | `opening_loc`, `elements`, `closing_loc` |
+| `HashPatternNode` | `constant`, `elements`, `rest`, `opening_loc`, `closing_loc` |
+#%until 3.4
+| `IfNode` | `if_keyword_loc`, `predicate`, `then_keyword_loc`, `statements`, `consequent`, `end_keyword_loc` |
+#%end
+#%since 3.4
+| `IfNode` | `if_keyword_loc`, `predicate`, `then_keyword_loc`, `statements`, `subsequent`, `end_keyword_loc` |
+#%end
+| `ImaginaryNode` | `numeric` |
+| `ImplicitNode` | `value` |
+| `ImplicitRestNode` | (なし) |
+| `InNode` | `pattern`, `statements`, `in_loc`, `then_loc` |
+#%until 3.4
+| `IndexAndWriteNode` | `flags`, `receiver`, `call_operator_loc`, `opening_loc`, `arguments`, `closing_loc`, `block`, `operator_loc`, `value` |
+#%end
+#%since 3.4
+| `IndexAndWriteNode` | `receiver`, `call_operator_loc`, `opening_loc`, `arguments`, `closing_loc`, `block`, `operator_loc`, `value` |
+#%end
+#%until 3.4
+| `IndexOperatorWriteNode` | `flags`, `receiver`, `call_operator_loc`, `opening_loc`, `arguments`, `closing_loc`, `block`, `operator`, `operator_loc`, `value` |
+#%end
+#%since 3.4
+| `IndexOperatorWriteNode` | `receiver`, `call_operator_loc`, `opening_loc`, `arguments`, `closing_loc`, `block`, `binary_operator`, `binary_operator_loc`, `value` |
+#%end
+#%until 3.4
+| `IndexOrWriteNode` | `flags`, `receiver`, `call_operator_loc`, `opening_loc`, `arguments`, `closing_loc`, `block`, `operator_loc`, `value` |
+#%end
+#%since 3.4
+| `IndexOrWriteNode` | `receiver`, `call_operator_loc`, `opening_loc`, `arguments`, `closing_loc`, `block`, `operator_loc`, `value` |
+#%end
+#%until 3.4
+| `IndexTargetNode` | `flags`, `receiver`, `opening_loc`, `arguments`, `closing_loc`, `block` |
+#%end
+#%since 3.4
+| `IndexTargetNode` | `receiver`, `opening_loc`, `arguments`, `closing_loc`, `block` |
+#%end
+| `InstanceVariableAndWriteNode` | `name`, `name_loc`, `operator_loc`, `value` |
+#%until 3.4
+| `InstanceVariableOperatorWriteNode` | `name`, `name_loc`, `operator_loc`, `value`, `operator` |
+#%end
+#%since 3.4
+| `InstanceVariableOperatorWriteNode` | `name`, `name_loc`, `binary_operator_loc`, `value`, `binary_operator` |
+#%end
+| `InstanceVariableOrWriteNode` | `name`, `name_loc`, `operator_loc`, `value` |
+| `InstanceVariableReadNode` | `name` |
+| `InstanceVariableTargetNode` | `name` |
+| `InstanceVariableWriteNode` | `name`, `name_loc`, `value`, `operator_loc` |
+#%until 3.4
+| `IntegerNode` | `flags` |
+#%end
+#%since 3.4
+| `IntegerNode` | `value` |
+#%end
+#%until 3.4
+| `InterpolatedMatchLastLineNode` | `flags`, `opening_loc`, `parts`, `closing_loc` |
+#%end
+#%since 3.4
+| `InterpolatedMatchLastLineNode` | `opening_loc`, `parts`, `closing_loc` |
+#%end
+#%until 3.4
+| `InterpolatedRegularExpressionNode` | `flags`, `opening_loc`, `parts`, `closing_loc` |
+#%end
+#%since 3.4
+| `InterpolatedRegularExpressionNode` | `opening_loc`, `parts`, `closing_loc` |
+#%end
+| `InterpolatedStringNode` | `opening_loc`, `parts`, `closing_loc` |
+| `InterpolatedSymbolNode` | `opening_loc`, `parts`, `closing_loc` |
+| `InterpolatedXStringNode` | `opening_loc`, `parts`, `closing_loc` |
+#%since 3.4
+| `ItLocalVariableReadNode` | (なし) |
+#%end
+#%since 3.4
+| `ItParametersNode` | (なし) |
+#%end
+#%until 3.4
+| `KeywordHashNode` | `flags`, `elements` |
+#%end
+#%since 3.4
+| `KeywordHashNode` | `elements` |
+#%end
+| `KeywordRestParameterNode` | `name`, `name_loc`, `operator_loc` |
+#%until 3.4
+| `LambdaNode` | `locals`, `locals_body_index`, `operator_loc`, `opening_loc`, `closing_loc`, `parameters`, `body` |
+#%end
+#%since 3.4
+| `LambdaNode` | `locals`, `operator_loc`, `opening_loc`, `closing_loc`, `parameters`, `body` |
+#%end
+| `LocalVariableAndWriteNode` | `name_loc`, `operator_loc`, `value`, `name`, `depth` |
+#%until 3.4
+| `LocalVariableOperatorWriteNode` | `name_loc`, `operator_loc`, `value`, `name`, `operator`, `depth` |
+#%end
+#%since 3.4
+| `LocalVariableOperatorWriteNode` | `name_loc`, `binary_operator_loc`, `value`, `name`, `binary_operator`, `depth` |
+#%end
+| `LocalVariableOrWriteNode` | `name_loc`, `operator_loc`, `value`, `name`, `depth` |
+| `LocalVariableReadNode` | `name`, `depth` |
+| `LocalVariableTargetNode` | `name`, `depth` |
+| `LocalVariableWriteNode` | `name`, `depth`, `name_loc`, `value`, `operator_loc` |
+#%until 3.4
+| `MatchLastLineNode` | `flags`, `opening_loc`, `content_loc`, `closing_loc`, `unescaped` |
+#%end
+#%since 3.4
+| `MatchLastLineNode` | `opening_loc`, `content_loc`, `closing_loc`, `unescaped` |
+#%end
+| `MatchPredicateNode` | `value`, `pattern`, `operator_loc` |
+| `MatchRequiredNode` | `value`, `pattern`, `operator_loc` |
+| `MatchWriteNode` | `call`, `targets` |
+| `MissingNode` | (なし) |
+| `ModuleNode` | `locals`, `module_keyword_loc`, `constant_path`, `body`, `end_keyword_loc`, `name` |
+| `MultiTargetNode` | `lefts`, `rest`, `rights`, `lparen_loc`, `rparen_loc` |
+| `MultiWriteNode` | `lefts`, `rest`, `rights`, `lparen_loc`, `rparen_loc`, `operator_loc`, `value` |
+| `NextNode` | `arguments`, `keyword_loc` |
+| `NilNode` | (なし) |
+| `NoKeywordsParameterNode` | `operator_loc`, `keyword_loc` |
+| `NumberedParametersNode` | `maximum` |
+| `NumberedReferenceReadNode` | `number` |
+| `OptionalKeywordParameterNode` | `name`, `name_loc`, `value` |
+| `OptionalParameterNode` | `name`, `name_loc`, `operator_loc`, `value` |
+| `OrNode` | `left`, `right`, `operator_loc` |
+| `ParametersNode` | `requireds`, `optionals`, `rest`, `posts`, `keywords`, `keyword_rest`, `block` |
+| `ParenthesesNode` | `body`, `opening_loc`, `closing_loc` |
+| `PinnedExpressionNode` | `expression`, `operator_loc`, `lparen_loc`, `rparen_loc` |
+| `PinnedVariableNode` | `variable`, `operator_loc` |
+| `PostExecutionNode` | `statements`, `keyword_loc`, `opening_loc`, `closing_loc` |
+| `PreExecutionNode` | `statements`, `keyword_loc`, `opening_loc`, `closing_loc` |
+| `ProgramNode` | `locals`, `statements` |
+#%until 3.4
+| `RangeNode` | `flags`, `left`, `right`, `operator_loc` |
+#%end
+#%since 3.4
+| `RangeNode` | `left`, `right`, `operator_loc` |
+#%end
+#%until 3.4
+| `RationalNode` | `numeric` |
+#%end
+#%since 3.4
+| `RationalNode` | `numerator`, `denominator` |
+#%end
+| `RedoNode` | (なし) |
+#%until 3.4
+| `RegularExpressionNode` | `flags`, `opening_loc`, `content_loc`, `closing_loc`, `unescaped` |
+#%end
+#%since 3.4
+| `RegularExpressionNode` | `opening_loc`, `content_loc`, `closing_loc`, `unescaped` |
+#%end
+| `RequiredKeywordParameterNode` | `name`, `name_loc` |
+| `RequiredParameterNode` | `name` |
+| `RescueModifierNode` | `expression`, `keyword_loc`, `rescue_expression` |
+#%until 3.4
+| `RescueNode` | `keyword_loc`, `exceptions`, `operator_loc`, `reference`, `statements`, `consequent` |
+#%end
+#%version 3.4
+| `RescueNode` | `keyword_loc`, `exceptions`, `operator_loc`, `reference`, `statements`, `subsequent` |
+#%end
+#%since 4.0
+| `RescueNode` | `keyword_loc`, `exceptions`, `operator_loc`, `reference`, `then_keyword_loc`, `statements`, `subsequent` |
+#%end
+| `RestParameterNode` | `name`, `name_loc`, `operator_loc` |
+| `RetryNode` | (なし) |
+| `ReturnNode` | `keyword_loc`, `arguments` |
+| `SelfNode` | (なし) |
+#%since 3.4
+| `ShareableConstantNode` | `write` |
+#%end
+| `SingletonClassNode` | `locals`, `class_keyword_loc`, `operator_loc`, `expression`, `body`, `end_keyword_loc` |
+| `SourceEncodingNode` | (なし) |
+| `SourceFileNode` | `filepath` |
+| `SourceLineNode` | (なし) |
+| `SplatNode` | `operator_loc`, `expression` |
+| `StatementsNode` | `body` |
+#%until 3.4
+| `StringNode` | `flags`, `opening_loc`, `content_loc`, `closing_loc`, `unescaped` |
+#%end
+#%since 3.4
+| `StringNode` | `opening_loc`, `content_loc`, `closing_loc`, `unescaped` |
+#%end
+| `SuperNode` | `keyword_loc`, `lparen_loc`, `arguments`, `rparen_loc`, `block` |
+#%until 3.4
+| `SymbolNode` | `flags`, `opening_loc`, `value_loc`, `closing_loc`, `unescaped` |
+#%end
+#%since 3.4
+| `SymbolNode` | `opening_loc`, `value_loc`, `closing_loc`, `unescaped` |
+#%end
+| `TrueNode` | (なし) |
+| `UndefNode` | `names`, `keyword_loc` |
+#%until 3.4
+| `UnlessNode` | `keyword_loc`, `predicate`, `then_keyword_loc`, `statements`, `consequent`, `end_keyword_loc` |
+#%end
+#%since 3.4
+| `UnlessNode` | `keyword_loc`, `predicate`, `then_keyword_loc`, `statements`, `else_clause`, `end_keyword_loc` |
+#%end
+#%until 3.4
+| `UntilNode` | `flags`, `keyword_loc`, `closing_loc`, `predicate`, `statements` |
+#%end
+#%version 3.4
+| `UntilNode` | `keyword_loc`, `closing_loc`, `predicate`, `statements` |
+#%end
+#%since 4.0
+| `UntilNode` | `keyword_loc`, `do_keyword_loc`, `closing_loc`, `predicate`, `statements` |
+#%end
+#%until 3.4
+| `WhenNode` | `keyword_loc`, `conditions`, `statements` |
+#%end
+#%since 3.4
+| `WhenNode` | `keyword_loc`, `conditions`, `then_keyword_loc`, `statements` |
+#%end
+#%until 3.4
+| `WhileNode` | `flags`, `keyword_loc`, `closing_loc`, `predicate`, `statements` |
+#%end
+#%version 3.4
+| `WhileNode` | `keyword_loc`, `closing_loc`, `predicate`, `statements` |
+#%end
+#%since 4.0
+| `WhileNode` | `keyword_loc`, `do_keyword_loc`, `closing_loc`, `predicate`, `statements` |
+#%end
+#%until 3.4
+| `XStringNode` | `flags`, `opening_loc`, `content_loc`, `closing_loc`, `unescaped` |
+#%end
+#%since 3.4
+| `XStringNode` | `opening_loc`, `content_loc`, `closing_loc`, `unescaped` |
+#%end
+| `YieldNode` | `keyword_loc`, `lparen_loc`, `arguments`, `rparen_loc` |
