@@ -225,13 +225,13 @@ p Time.local(2000, 1, 1) # => 2000-01-01 00:00:00 +0900
 - **raise** `ArgumentError` -- 与えられた引数の範囲が valid でない場合に発生します。
 
 ### def Time.new    -> Time
-### def Time.now    -> Time
 
 現在時刻の Time オブジェクトを生成して返します。
 タイムゾーンは地方時となります。
+[m:Time.now] と同じです。
 
 ```ruby
-p Time.now # => 2009-06-24 12:39:54 +0900
+p Time.new # => 2009-06-24 12:39:54 +0900
 ```
 
 ### def Time.new(year, mon = nil, day = nil, hour = nil, min = nil, sec = nil, zone = nil)    -> Time
@@ -300,6 +300,33 @@ p Time.new("2024-02-15 10:20:30", in: "+0800")     # => 2024-02-15 10:20:30 +080
 ```
 
 #%end
+
+### def Time.now    -> Time
+#%since 3.1
+### def Time.now(in: nil)    -> Time
+#%else
+### def Time.now(in:)    -> Time
+#%end
+
+現在時刻の Time オブジェクトを生成して返します。
+引数を指定しない [m:Time.new] と同じです。
+
+キーワード引数 in でタイムゾーンを指定できます。
+#%since 3.1
+in を指定しない場合や nil を指定した場合、タイムゾーンは地方時となります。
+#%else
+in を指定しない場合、タイムゾーンは地方時となります。
+#%end
+
+- **param** `in` -- 協定世界時との時差を、秒を単位とする整数か、
+          "UTC" かミリタリータイムゾーンの文字列または
+          "+HH:MM" "-HH:MM" 形式の文字列で指定します。
+
+```ruby
+p Time.now               # => 2009-06-24 12:39:54 +0900
+p Time.now(in: "+04:00") # => 2009-06-24 07:39:54 +0400
+p Time.now(in: "UTC")    # => 2009-06-24 03:39:54 UTC
+```
 
 ## Instance Methods
 
