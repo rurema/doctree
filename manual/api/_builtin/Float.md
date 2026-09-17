@@ -331,6 +331,16 @@ p 3.14.to_f # => 3.14
 ```
 
 ### def to_i -> Integer
+
+小数点以下を切り捨てて値を整数に変換して返します。
+
+```ruby title="例"
+p 2.8.to_i       # => 2
+p (-2.8).to_i    # => -2
+```
+
+- **SEE** [m:Float#truncate], [m:Numeric#round], [m:Numeric#ceil], [m:Numeric#floor]
+
 ### def truncate(ndigits = 0) -> Integer | Float
 
 小数点以下を切り捨てて値を整数に変換して返します。

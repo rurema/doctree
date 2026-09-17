@@ -362,6 +362,13 @@ root だけがこのメソッドを呼ぶことができます。
 - **SEE** [man:setgroups(2)]
 
 ### module_function def maxgroups        -> Integer
+
+設定できる補助グループ ID の数を返します。
+
+- **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
+- **SEE** [m:Process?.maxgroups=]
+
 ### module_function def maxgroups=(num)
 
 設定できる補助グループ ID の数を指定します。
@@ -372,6 +379,8 @@ root だけがこのメソッドを呼ぶことができます。
 - **param** `num` -- 整数を指定します。
 
 - **raise** `NotImplementedError` -- メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
+- **SEE** [m:Process?.maxgroups]
 
 ### module_function def pid    -> Integer
 
@@ -590,13 +599,9 @@ p Process.getsid(Process.pid()) # => 27422
 - **SEE** [c:Process::Tms]
 
 ### module_function def wait(pid = -1, flags = 0)       -> Integer | nil
-### module_function def wait2(pid = -1, flags = 0)      -> [Integer, Process::Status] | nil
 ### module_function def waitpid(pid = -1, flags = 0)    -> Integer | nil
-### module_function def waitpid2(pid = -1, flags = 0)   -> [Integer, Process::Status] | nil
 
 pid で指定される特定の子プロセスの終了を待ち、そのプロセスが終了した時に pid を返します。
-wait2, waitpid2 は子プロセスの pid と終了ステータスを表す
-[c:Process::Status] オブジェクトの配列を返します。
 ノンブロッキングモードで子プロセスがまだ終了していない時には
 nil を返します。
 
@@ -618,10 +623,34 @@ nil を返します。
 
 ```ruby
 pid = fork { sleep 1 }
+p Process.wait # => 70024
+p $?           # => #<Process::Status: pid 70024 exit 0>
+```
+
+- **SEE** [m:Process?.wait2], [man:wait(2)], [man:waitpid(2)]
+
+### module_function def wait2(pid = -1, flags = 0)      -> [Integer, Process::Status] | nil
+### module_function def waitpid2(pid = -1, flags = 0)   -> [Integer, Process::Status] | nil
+
+pid で指定される特定の子プロセスの終了を待ち、そのプロセスが終了した時に
+子プロセスの pid と終了ステータスを表す [c:Process::Status] オブジェクトの配列を返します。
+ノンブロッキングモードで子プロセスがまだ終了していない時には
+nil を返します。
+
+[m:$?] に終了した子プロセスの [c:Process::Status] オブジェクトがセットされます。
+
+- **param** `pid` -- [m:Process?.wait] の pid と同じです。
+
+- **param** `flags` -- [m:Process?.wait] の flags と同じです。
+
+- **raise** `Errno::ECHILD` -- 子プロセスが存在しない場合に発生します。
+
+```ruby
+pid = fork { sleep 1 }
 p Process.wait2 # => [70024, #<Process::Status: pid 70024 exit 0>]
 ```
 
-- **SEE** [man:wait(2)], [man:waitpid(2)]
+- **SEE** [m:Process?.wait], [man:wait(2)], [man:waitpid(2)]
 
 ### module_function def waitall    -> [[Integer, Process::Status]]
 

@@ -379,7 +379,6 @@ p "string" == stringlike    # => true
 - **SEE** [m:String#eql?]
 
 ### def <<(other) -> self
-### def concat(other) -> self
 
 self に文字列 other を破壊的に連結します。
 other が 整数である場合は other.chr(self.encoding) 相当の文字を末尾に追加します。
@@ -390,16 +389,16 @@ self を返します。
 
 ```ruby title="例"
 str = "string"
-str.concat "XXX"
-p str    # => "stringXXX"
-
 str << "YYY"
-p str    # => "stringXXXYYY"
+p str    # => "stringYYY"
 
 str << 65  # 文字AのASCIIコード
-p str    # => "stringXXXYYYA"
+p str    # => "stringYYYA"
 ```
 
+- **SEE** [m:String#concat]
+
+### def concat(other) -> self
 ### def concat(*arguments) -> self
 
 self に複数の文字列を破壊的に連結します。
