@@ -20,67 +20,67 @@ RSS::NotSetError例外が発生します。どの値も設定していない場�
 ## Instance Methods
 
 ### def about
-### def about=()
+### def about=(about)
 #%todo
 
 ### def title
-### def title=()
+### def title=(title)
 #%todo
 
 ### def link
-### def link=()
+### def link=(link)
 #%todo
 
 ### def description
-### def description=()
+### def description=(description)
 #%todo
 
 ### def language
-### def language=()
+### def language=(language)
 #%todo
 
 ### def copyright
-### def copyright=()
+### def copyright=(copyright)
 #%todo
 
 ### def managingEditor
-### def managingEditor=()
+### def managingEditor=(managingEditor)
 #%todo
 
 ### def webMaster
-### def webMaster=()
+### def webMaster=(webMaster)
 #%todo
 
 ### def rating
-### def rating=()
+### def rating=(rating)
 #%todo
 
 ### def docs
-### def docs=()
+### def docs=(docs)
 #%todo
 
 ### def date
-### def date=()
+### def date=(date)
 #%todo
 
 ### def pubDate
 #%todo
 maker.channel.dateの別名です。
 
-### def pubDate=()
+### def pubDate=(pubDate)
 #%todo
 maker.channel.date=の別名です。
 
 ### def lastBuildDate
-### def lastBuildDate=()
+### def lastBuildDate=(lastBuildDate)
 #%todo
 
 ### def generator
-### def generator=()
+### def generator=(generator)
 #%todo
 
 ### def ttl
-### def ttl=()
+### def ttl=(ttl)
 #%todo
 
 ### def categories

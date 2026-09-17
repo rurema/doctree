@@ -312,7 +312,7 @@ a << 'Z'
 p a.string                      # => "hoge\000\000\000\000\000\000Z"
 ```
 
-### def print()        -> nil
+### def print          -> nil
 ### def print(*obj)    -> nil
 
 自身に引数を順に出力します。引数を省略した場合は、[m:$_] を出力します。

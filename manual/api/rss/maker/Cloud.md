@@ -7,23 +7,23 @@ RSS 2.0を生成するときだけ利用されます。
 ## Instance Methods
 
 ### def domain
-### def domain=()
+### def domain=(domain)
 #%todo
 
 ### def port
-### def port=()
+### def port=(port)
 #%todo
 
 ### def path
-### def path=()
+### def path=(path)
 #%todo
 
 ### def registerProcedure
-### def registerProcedure=()
+### def registerProcedure=(registerProcedure)
 #%todo
 
 ### def protocol
-### def protocol=()
+### def protocol=(protocol)
 #%todo
 
 # class RSS::Maker::RSS09::Channel::Cloud < RSS::Maker::ChannelBase::CloudBase

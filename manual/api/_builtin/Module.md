@@ -1746,7 +1746,7 @@ method C#foo was undefined
 method C#bar was undefined
 ```
 
-### def module_function() -> nil
+### def module_function -> nil
 ### def module_function(name) -> String | Symbol
 ### def module_function(*name) -> Array
 
@@ -1809,7 +1809,7 @@ p M.foo # => "foo"
 p M.bar # => "foo"
 ```
 
-### def private() -> nil
+### def private -> nil
 ### def private(name) -> String | Symbol
 ### def private(*name) -> Array
 ### def private(names) -> Array
@@ -1847,7 +1847,7 @@ account.foo2            # => private method `foo2' called for #<Account:0x401b76
 #%end
 ```
 
-### def protected() -> nil
+### def protected -> nil
 ### def protected(name) -> String | Symbol
 ### def protected(*name) -> Array
 ### def protected(names) -> Array
@@ -1870,7 +1870,7 @@ account.foo2            # => private method `foo2' called for #<Account:0x401b76
 
 - **SEE** [m:Module#protected_method_defined?]
 
-### def public() -> nil
+### def public -> nil
 ### def public(name) -> String | Symbol
 ### def public(*name) -> Array
 ### def public(names) -> Array

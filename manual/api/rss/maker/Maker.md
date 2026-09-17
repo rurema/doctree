@@ -25,7 +25,7 @@ maker.channelを適切に設定しなければRSSは生成されません。
 #%todo
 作成するXMLのバージョンを返します。
 
-### def version=()
+### def version=(version)
 #%todo
 作成するXMLのバージョンを設定します。
 
@@ -34,7 +34,7 @@ maker.channelを適切に設定しなければRSSは生成されません。
 作成するXMLのエンコーディングを返します。デフォルトは
 UTF-8です。
 
-### def encoding=()
+### def encoding=(encoding)
 #%todo
 作成するXMLのエンコーディングを設定します。maker
 に設定する際のエンコーディングはここで指定したものにする必要があります。
@@ -43,7 +43,7 @@ UTF-8です。
 #%todo
 作成するXMLのstandaloneを返します。
 
-### def standalone=()
+### def standalone=(standalone)
 #%todo
 作成するXMLのstandaloneを設定します。
 

@@ -11,10 +11,10 @@ contentを指定する必要があります。
 ## Instance Methods
 
 ### def domain
-### def domain=()
+### def domain=(domain)
 #%todo
 
 ### def content
-### def content=()
+### def content=(content)
 #%todo
 

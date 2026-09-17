@@ -11,6 +11,6 @@ contentを指定する必要があります。
 ## Instance Methods
 
 ### def content
-### def content=()
+### def content=(content)
 #%todo
 

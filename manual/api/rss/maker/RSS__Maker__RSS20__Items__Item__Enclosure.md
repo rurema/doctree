@@ -10,14 +10,14 @@ url、length、typeを設定する必要があります。
 ## Instance Methods
 
 ### def url
-### def url=()
+### def url=(url)
 #%todo
 
 ### def length
-### def length=()
+### def length=(length)
 #%todo
 
 ### def type
-### def type=()
+### def type=(type)
 #%todo
 

@@ -16,7 +16,7 @@ itemはitemリストの最後に追加されています。
 現在のdo_sortの値を取得します。デフォルトでは
 falseになっています。
 
-### def do_sort=()
+### def do_sort=(do_sort)
 #%todo
 trueに設定するとitem.dateが新しい順に並び替えます。Procオブジェクトを指定することにより並び替え方法をカスタマイズできます。
 
@@ -25,7 +25,7 @@ trueに設定するとitem.dateが新しい順に並び替えます。Procオブ
 現在のmax_sizeの値を取得します。デフォルトでは
 -1になっています。
 
-### def max_size=()
+### def max_size=(max_size)
 #%todo
 出力するitemの数の最大値を設定します。
 
