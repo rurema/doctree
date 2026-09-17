@@ -2339,9 +2339,109 @@ r.read # ~> IO::TimeoutError
 
 - **SEE** [m:IO#timeout], [c:IO::TimeoutError]
 
+### def wait(events, timeout)              -> Integer | nil
+### def wait(*mode, timeout = nil)          -> self | true | nil
+
+`self` が指定したイベント(読み込み可能・書き込み可能・優先データの受信)の準備ができるまでブロックします。
+
+第 1 の形式では、待つイベントを `IO::READABLE`・`IO::WRITABLE`・`IO::PRIORITY` のビット OR で指定します。
+準備ができたイベントのビットマスクを [c:Integer] で返し、`timeout` 秒待っても準備できなかった場合は nil を返します。
+`IO::READABLE` を含む場合、内部のバッファにデータがあればブロックせずに `IO::READABLE` を返します。
+
+第 2 の形式では、待つイベントをシンボルで指定します。`:read`(`:r`・`:readable`)・`:write`(`:w`・`:writable`)・
+`:read_write`(`:rw`・`:readable_writable`)を 1 つ以上指定でき、省略した場合は `:read` です。
+`timeout` とシンボルは任意の順序で指定できます。
+準備ができたら `self` を返し、内部のバッファにデータがあればブロックせずに true を返します。
+`timeout` 秒待っても準備できなかった場合は nil を返します。
+
+- **param** `events` -- 待つイベントを `IO::READABLE`・`IO::WRITABLE`・`IO::PRIORITY` のビット OR で指定します。
+- **param** `mode` -- 待つイベントを `:read`・`:write`・`:read_write` などのシンボルで指定します。
+- **param** `timeout` -- タイムアウトまでの秒数を指定します。nil を指定すると準備ができるまで待ち続けます。第 1 の形式では省略できません。
+- **raise** `ArgumentError` -- `events` が正の整数でない場合や、`mode` に未対応のシンボルを指定した場合に発生します。
+
+```ruby title="例"
+r, w = IO.pipe
+
+p r.wait(IO::READABLE, 0)                 # => nil
+p w.wait(IO::WRITABLE, 0) == IO::WRITABLE # => true
+p r.wait(:read, 0)                        # => nil
+
+w.write("x")
+p r.wait(IO::READABLE, 0) == IO::READABLE # => true
+p r.wait(:read, 0).equal?(r)              # => true
+```
+
+- **SEE** [m:IO#wait_readable], [m:IO#wait_writable], [m:IO#wait_priority]
+
+### def wait_readable(timeout = nil) -> self | true | nil
+
+`self` が読み込み可能になるまでブロックし、読み込み可能になったら真値を返します。
+
+一度ブロックしてから読み込み可能になった場合には `self` を返します。
+内部のバッファにデータがある場合にはブロックせずに true を返します。
+内部のバッファとは Ruby の処理系が保持管理しているバッファのことです。
+つまり、読み込み可能である場合には true を返す場合と `self` を返す場合があることに注意してください。
+`self` が EOF に達している場合も読み込み可能として扱われます。
+
+`timeout` を指定した場合は、指定秒数経過するまでブロックし、タイムアウトした場合は nil を返します。
+
+- **param** `timeout` -- タイムアウトまでの秒数を指定します。nil を指定すると読み込み可能になるまで待ち続けます。
+
+```ruby title="例"
+r, w = IO.pipe
+
+p r.wait_readable(0)           # => nil
+w.write("x")
+p r.wait_readable(0).equal?(r) # => true
+```
+
+- **SEE** [m:IO#wait], [m:IO#wait_writable]
+
+### def wait_writable(timeout = nil) -> self | nil
+
+`self` が書き込み可能になるまでブロックし、書き込み可能になったら `self` を返します。
+
+`timeout` を指定した場合は、指定秒数経過するまでブロックし、タイムアウトした場合は nil を返します。
+
+- **param** `timeout` -- タイムアウトまでの秒数を指定します。nil を指定すると書き込み可能になるまで待ち続けます。
+
+```ruby title="例"
+r, w = IO.pipe
+
+p w.wait_writable(0).equal?(w) # => true
+```
+
+- **SEE** [m:IO#wait], [m:IO#wait_readable]
+
+### def wait_priority(timeout = nil) -> self | true | false | nil
+
+`self` が優先データを受信して読み込み可能になるまでブロックし、読み込み可能になったら真値を返します。
+
+優先データ(緊急データ)は [m:Socket::Constants::MSG_OOB] フラグを用いて送受信され、通常はストリーム型のソケットに限られます。
+
+一度ブロックしてから読み込み可能になった場合には `self` を返します。
+内部のバッファにデータがある場合にはブロックせずに true を返します。
+`timeout` 秒待っても優先データを受信しなかった場合は偽の値(false または nil)を返します。
+
+- **param** `timeout` -- タイムアウトまでの秒数を指定します。nil を指定すると読み込み可能になるまで待ち続けます。
+
+- **SEE** [m:IO#wait], [m:IO#wait_readable], [m:IO#wait_writable]
+
 #%end
 
 ## Constants
+
+### const READABLE -> Integer
+
+[m:IO#wait] で「読み込み可能」のイベントを表すビットです。
+
+### const WRITABLE -> Integer
+
+[m:IO#wait] で「書き込み可能」のイベントを表すビットです。
+
+### const PRIORITY -> Integer
+
+[m:IO#wait] で「優先データを受信して読み込み可能」のイベントを表すビットです。
 
 ### const SEEK_CUR -> Integer
 
