@@ -89,6 +89,30 @@ OS の種類をセットします。
 
 - **param** `version` -- プラットフォームのバージョンを指定します。
 
+#%since 4.0
+### def deconstruct_keys(keys) -> {Symbol => String | nil}
+
+`self` を `cpu`・`os`・`version` をキーとするハッシュに分解して返します。
+
+パターンマッチングのハッシュパターンに対応するためのメソッドです。
+
+- **param** `keys` -- パターンマッチングの実装から渡されるキーの配列です。`self` では無視されます。
+
+```ruby title="例"
+p Gem::Platform.new("x86_64-linux").deconstruct_keys(nil)
+# => {cpu: "x86_64", os: "linux", version: nil}
+
+result = case Gem::Platform.new("x86_64-linux")
+         in cpu: "x86_64", os: "linux"
+           :matched
+         end
+p result # => :matched
+```
+
+- **SEE** [m:Gem::Platform#deconstruct], [m:Gem::Platform#to_a]
+
+#%end
+
 ## Singleton Methods
 
 ### def Gem::Platform.local -> Gem::Platform
@@ -104,6 +128,94 @@ OS の種類をセットします。
 自身を初期化します。
 
 - **param** `arch` -- アーキテクチャを指定します。
+
+#%since 4.0
+### def Gem::Platform.generic(platform) -> Gem::Platform | String
+
+platform に対応する一般化されたプラットフォームを返します。
+
+Java 用や各種 Windows 用としてまとめて扱われる代表的なプラットフォームが存在する場合はそれを返します。
+該当するものが無い場合や、platform が nil または [m:Gem::Platform::RUBY] の場合は
+`Gem::Platform::RUBY` を返します。
+
+- **param** `platform` -- 一般化したい [c:Gem::Platform] のインスタンス、または nil を指定します。
+
+```ruby title="例"
+p Gem::Platform.generic(Gem::Platform::RUBY)               # => "ruby"
+p Gem::Platform.generic(Gem::Platform.new("x86_64-linux")) # => "ruby"
+```
+
+- **SEE** [m:Gem::Platform.sort_priority]
+
+#%end
+
+### def Gem::Platform.installable?(spec) -> bool
+{: since="2.1.0"}
+
+spec が現在の環境にインストール可能かどうかを返します。
+
+spec が `installable_platform?` に応答する場合はその結果を、応答しない場合は
+[m:Gem::Platform.match_spec?] の結果を返します。
+
+- **param** `spec` -- 判定したい [c:Gem::Specification] のインスタンスを指定します。
+
+```ruby title="例"
+spec = Gem::Specification.new("rake", "1.0.0")
+spec.platform = Gem::Platform::RUBY
+p Gem::Platform.installable?(spec) # => true
+```
+
+- **SEE** [m:Gem::Platform.match_spec?]
+
+### def Gem::Platform.match_gem?(platform, gem_name) -> bool
+
+platform が現在の環境にインストール可能なプラットフォームかどうかを返します。
+
+内部で `Gem.platforms` を参照し、そのいずれかと platform が一致するかどうかを調べます。
+gem_name は TruffleRuby など一部の Ruby 処理系でのみ判定に使われます。
+
+- **param** `platform` -- 判定したい [c:Gem::Platform] のインスタンス、または文字列を指定します。
+- **param** `gem_name` -- 対象の Gem の名前を文字列で指定します。
+
+```ruby title="例"
+p Gem::Platform.match_gem?(Gem::Platform::RUBY, "rake") # => true
+```
+
+- **SEE** [m:Gem::Platform.match_spec?]
+
+### def Gem::Platform.match_spec?(spec) -> bool
+
+spec のプラットフォームが現在の環境にインストール可能かどうかを返します。
+
+[m:Gem::Platform.match_gem?] に、spec の [m:Gem::Specification#platform] と
+[m:Gem::Specification#name] を渡した結果を返します。
+
+- **param** `spec` -- 判定したい [c:Gem::Specification] のインスタンスを指定します。
+
+```ruby title="例"
+spec = Gem::Specification.new("rake", "1.0.0")
+spec.platform = Gem::Platform::RUBY
+p Gem::Platform.match_spec?(spec) # => true
+```
+
+- **SEE** [m:Gem::Platform.match_gem?]
+
+#%since 3.1
+### def Gem::Platform.sort_priority(platform) -> Integer
+
+ソートする際に platform を優先させるための整数を返します。
+
+platform が [m:Gem::Platform::RUBY] であれば -1 を、そうでなければ 1 を返します。
+値が小さいほど優先順位が高いことを表します。
+
+- **param** `platform` -- 優先順位を調べたい [c:Gem::Platform] のインスタンスを指定します。
+
+```ruby title="例"
+p Gem::Platform.sort_priority(Gem::Platform::RUBY)               # => -1
+p Gem::Platform.sort_priority(Gem::Platform.new("x86_64-linux")) # => 1
+```
+
+#%end
 
 ## Constants
 
