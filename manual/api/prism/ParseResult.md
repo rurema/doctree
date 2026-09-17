@@ -187,3 +187,38 @@ require "prism"
 result = Prism.parse("1 + 2")
 p result.source.is_a?(Prism::Source) # => true
 ```
+
+### def deconstruct_keys(keys) -> Hash
+
+パターンマッチのハッシュパターン(`case result; in {value:}`)で使われます。`comments` などの付随情報と、構文木そのものである `value` をキーに持つハッシュを返します。
+
+- **param** `keys` -- 取り出したいキーの配列を指定します。すべて取り出す場合は nil を指定します。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.parse("1 + 2")
+case result
+in {value:}
+  p value.class
+end
+# => Prism::ProgramNode
+```
+
+### def mark_newlines! -> ()
+
+構文木を巡回し、CRuby の `:line` [c:TracePoint] イベントが発生する行に対応するノードに印を付けます。
+
+印が付いたノードは [m:Prism::Node#newline?] で判定できます。[m:Prism?.parse] などの通常の解析結果ではこの処理は解析時にすでに行われていますが、構文木を独自に構築した場合など、印が付いていない構文木に対して明示的に呼び出すために使います。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.parse("if true\n  1\nend\n")
+result.mark_newlines!
+p result.value.statements.body[0].newline?
+# => true
+```
+
+- **SEE** [m:Prism::Node#newline?]
+

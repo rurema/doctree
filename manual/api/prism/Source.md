@@ -120,3 +120,145 @@ byte_offset の位置の、行頭からの指定エンコーディングのコ�
 - **param** `encoding` -- コード単位の基準となるエンコーディング
 
 #%end
+
+#%since 3.4
+### def code_units_cache(encoding) -> Prism::CodeUnitsCache
+
+指定したエンコーディングでのコード単位のオフセットを高速に計算するためのキャッシュを生成します。
+
+[c:Prism::Location] の `cached_start_code_units_offset` などのメソッドに、多数の位置に対して繰り返し使うためのキャッシュとして渡します。
+
+- **param** `encoding` -- コード単位の基準となるエンコーディングを指定します。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.parse("x = \"あい\" + 1\n")
+cache = result.source.code_units_cache(Encoding::UTF_16LE)
+p cache.class # => Prism::CodeUnitsCache
+p cache[9]    # => 7
+```
+
+- **SEE** [m:Prism::Location#cached_start_code_units_offset], [m:Prism::Result#code_units_cache]
+
+#%end
+
+#%since 4.0
+### def deep_freeze -> ()
+
+`self` とソースコード文字列を frozen にします。
+
+```ruby title="例"
+require "prism"
+
+source = Prism.parse("1 + 2").source
+source.deep_freeze
+p source.frozen?        # => true
+p source.source.frozen? # => true
+```
+
+- **SEE** [m:Prism::Token#deep_freeze]
+
+#%end
+
+#%since 4.1
+### def find_line(byte_offset) -> Integer
+
+byte_offset の位置がある行の、[m:Prism::Source#offsets] 配列上でのインデックス(0 起点)を二分探索で求めます。
+
+実際の行番号(1 起点)ではなく、内部で保持している配列上のインデックスを返す点に注意してください。実際の行番号を得たい場合は [m:Prism::Source#line] を使ってください。[m:Prism::Source#line]・[m:Prism::Source#line_start]・[m:Prism::Source#line_end] が内部でこのメソッドを使用します。
+
+- **param** `byte_offset` -- バイトオフセットを指定します。
+
+```ruby title="例"
+require "prism"
+
+source = Prism.parse("foo = 1\nbar = 2\n").source
+p source.find_line(9) # => 1
+p source.line(9)      # => 2
+```
+
+- **SEE** [m:Prism::Source#line]
+
+#%end
+
+#%since 4.0
+### def replace_offsets(offsets) -> ()
+
+内部で保持している、各行の開始バイトオフセットの配列を `offsets` に置き換えます。
+
+- **param** `offsets` -- 新しい開始バイトオフセットの配列を指定します。
+
+```ruby title="例"
+require "prism"
+
+source = Prism.parse("1 + 2").source
+source.replace_offsets([0, 6])
+p source.offsets
+# => [0, 6]
+```
+
+- **SEE** [m:Prism::Source#offsets]
+
+### def replace_start_line(start_line) -> ()
+
+開始行の行番号を `start_line` に置き換えます。
+
+- **param** `start_line` -- 新しい開始行の行番号を指定します。
+
+```ruby title="例"
+require "prism"
+
+source = Prism.parse("1 + 2").source
+source.replace_start_line(10)
+p source.start_line
+# => 10
+```
+
+- **SEE** [m:Prism::Source#start_line]
+
+#%end
+
+#%version 3.3
+### def start_line=(start_line)
+
+[m:Prism::Source#start_line] を書き換えるセッターです。
+
+- **param** `start_line` -- 新しい開始行の行番号を指定します。
+
+```ruby title="例"
+require "prism"
+
+source = Prism.parse("1 + 2").source
+source.start_line = 10
+p source.start_line
+# => 10
+```
+
+#%end
+
+## Singleton Methods
+
+#%since 3.4
+### def Prism::Source.for(source, start_line, offsets) -> Prism::Source
+
+指定したソースコード文字列から `Prism::Source` のインスタンスを作成します。
+
+`new` の代わりにこのメソッドを使うことが推奨されます。ソースコードにマルチバイト文字が含まれない場合は、より高速に動作する特化版のサブクラス `Prism::ASCIISource` のインスタンスを返します。
+
+- **param** `source` -- ソースコードの文字列を指定します。
+- **param** `start_line` -- ソースコードが開始する行番号を指定します。通常は 1 ですが、このソースコードがより大きなソースコードの一部である場合や、`eval` の場合はそれ以外の値になることがあります。
+- **param** `offsets` -- ソースコード中の各行の開始バイトオフセットの配列を指定します。先頭の要素は必ず 0 です。
+
+```ruby title="例"
+require "prism"
+
+source = Prism::Source.for("foo = 1\nbar = 2\n", 1, [0, 8, 16])
+p source.class   # => Prism::ASCIISource
+p source.line(9) # => 2
+```
+
+- **SEE** [m:Prism::ParseResult#source]
+
+#%end
+

@@ -187,3 +187,162 @@ LSP(Language Server Protocol)などとの連携向けです。
 範囲の終端位置の、行頭からの指定エンコーディングのコード単位での桁位置を返します。
 
 #%end
+
+#%since 3.4
+### def cached_start_code_units_offset(cache) -> Integer
+
+キャッシュを使って、開始位置の、指定エンコーディングのコード単位でのオフセットを返します。
+
+- **param** `cache` -- [m:Prism::Result#code_units_cache] で得たキャッシュを指定します。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.parse("x = \"あい\" + 1\n")
+loc = result.value.statements.body[0].location
+cache = result.code_units_cache(Encoding::UTF_16LE)
+p loc.cached_start_code_units_offset(cache)
+# => 0
+```
+
+- **SEE** [m:Prism::Result#code_units_cache]
+
+### def cached_end_code_units_offset(cache) -> Integer
+
+キャッシュを使って、終了位置の、指定エンコーディングのコード単位でのオフセットを返します。
+
+- **param** `cache` -- [m:Prism::Result#code_units_cache] で得たキャッシュを指定します。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.parse("x = \"あい\" + 1\n")
+loc = result.value.statements.body[0].location
+cache = result.code_units_cache(Encoding::UTF_16LE)
+p loc.cached_end_code_units_offset(cache)
+# => 12
+```
+
+- **SEE** [m:Prism::Result#code_units_cache]
+
+### def cached_start_code_units_column(cache) -> Integer
+
+キャッシュを使って、開始位置の、行頭からのコード単位での桁位置を返します。
+
+- **param** `cache` -- [m:Prism::Result#code_units_cache] で得たキャッシュを指定します。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.parse("x = \"あい\" + 1\n")
+loc = result.value.statements.body[0].location
+cache = result.code_units_cache(Encoding::UTF_16LE)
+p loc.cached_start_code_units_column(cache)
+# => 0
+```
+
+- **SEE** [m:Prism::Result#code_units_cache]
+
+### def cached_end_code_units_column(cache) -> Integer
+
+キャッシュを使って、終了位置の、行頭からのコード単位での桁位置を返します。
+
+- **param** `cache` -- [m:Prism::Result#code_units_cache] で得たキャッシュを指定します。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.parse("x = \"あい\" + 1\n")
+loc = result.value.statements.body[0].location
+cache = result.code_units_cache(Encoding::UTF_16LE)
+p loc.cached_end_code_units_column(cache)
+# => 12
+```
+
+- **SEE** [m:Prism::Result#code_units_cache]
+
+#%end
+
+### def deconstruct_keys(keys) -> Hash
+
+パターンマッチのハッシュパターン(`case loc; in {start_offset:, end_offset:}`)で使われます。`start_offset`・`end_offset` をキーに持つハッシュを返します。
+
+- **param** `keys` -- 取り出したいキーの配列を指定します。すべて取り出す場合は nil を指定します。
+
+```ruby title="例"
+require "prism"
+
+loc = Prism.parse("1 + 2").value.location
+case loc
+in {start_offset:, end_offset:}
+  p [start_offset, end_offset]
+end
+# => [0, 5]
+```
+
+#%since 3.4
+### def leading_comment(comment) -> ()
+
+この位置の前に付くコメントとして `comment` を追加します。
+
+[m:Prism::ParseResult#attach_comments!] が内部で使用します。追加したコメントは [m:Prism::Location#leading_comments] で参照できます。
+
+- **param** `comment` -- 追加する [c:Prism::Comment] のサブクラスのインスタンスを指定します。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.parse("# leading\na = 1\n")
+loc = result.value.statements.body[0].location
+comment = result.comments.first
+
+loc.leading_comment(comment)
+p loc.leading_comments.map(&:slice)
+# => ["# leading"]
+```
+
+- **SEE** [m:Prism::Location#leading_comments], [m:Prism::Location#trailing_comment]
+
+### def trailing_comment(comment) -> ()
+
+この位置の後ろに付くコメントとして `comment` を追加します。
+
+[m:Prism::ParseResult#attach_comments!] が内部で使用します。追加したコメントは [m:Prism::Location#trailing_comments] で参照できます。
+
+- **param** `comment` -- 追加する [c:Prism::Comment] のサブクラスのインスタンスを指定します。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.parse("a = 1 # trailing\n")
+loc = result.value.statements.body[0].location
+comment = result.comments.first
+
+loc.trailing_comment(comment)
+p loc.trailing_comments.map(&:slice)
+# => ["# trailing"]
+```
+
+- **SEE** [m:Prism::Location#trailing_comments], [m:Prism::Location#leading_comment]
+
+#%end
+
+## Singleton Methods
+
+#%version 3.3
+### def Prism::Location.null -> Prism::Location
+
+ソースコードのどこにも対応しない、ファイルの先頭を指すダミーの `Prism::Location` を返します。
+
+位置情報のオブジェクトが必要だが、実際の位置を気にしない場合に使います。
+
+```ruby title="例"
+require "prism"
+
+loc = Prism::Location.null
+p loc.start_offset # => 0
+p loc.length       # => 0
+```
+
+#%end
+

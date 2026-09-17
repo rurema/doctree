@@ -732,3 +732,72 @@ prism の `config.yml`(3.3= prism 0.19.0・3.4= 1.2.0・4.0= 1.7.0・4.1= 1.9.0)
 | `XStringNode` | `opening_loc`, `content_loc`, `closing_loc`, `unescaped` |
 #%end
 | `YieldNode` | `keyword_loc`, `lparen_loc`, `arguments`, `rparen_loc` |
+
+#%since 3.4
+### def deprecated(*replacements) -> ()
+
+このノードの、別のフィールドに置き換えられた古いメソッドが呼び出されたときに、非推奨であることを示す警告を出力します。
+
+生成された各ノードクラスの、名前が変更されたフィールドの読み出しメソッドが内部で使用するためのメソッドです。呼び出し元のメソッド名と、`replacements` に指定した代替メソッド名を含む警告メッセージを、`:deprecated` カテゴリの警告として([c:Kernel] の `warn` を使って)出力します。
+
+- **param** `replacements` -- 代わりに使うべきメソッド名を文字列で 1 つ以上指定します。
+
+### def save(repository) -> Prism::Relocation::Entry
+
+`self` を `repository` に保存し、後で参照するための `Prism::Relocation::Entry` を返します。
+
+構文木全体をメモリ上に保持し続けることなく、[m:Prism::Node#node_id] を使ってノードを後から再特定するための仕組み(`Prism::Relocation`)で使われます。
+
+- **param** `repository` -- 保存先の `Prism::Relocation::Repository` を指定します。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.parse("1 + 2")
+node = result.value.statements.body[0]
+
+repository = Prism::Relocation.filepath("sample.rb")
+entry = node.save(repository)
+p entry.class
+# => Prism::Relocation::Entry
+```
+
+- **SEE** [m:Prism::Node#save_location], [m:Prism::Node#node_id]
+
+### def save_location(repository) -> Prism::Relocation::Entry
+
+`self` の位置情報を `repository` に保存し、後で参照するための `Prism::Relocation::Entry` を返します。
+
+[m:Prism::Node#save] とは異なり、ノードそのものではなく [m:Prism::Node#location] だけを保存します。
+
+- **param** `repository` -- 保存先の `Prism::Relocation::Repository` を指定します。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.parse("1 + 2")
+node = result.value.statements.body[0]
+
+repository = Prism::Relocation.filepath("sample.rb")
+entry = node.save_location(repository)
+p entry.class
+# => Prism::Relocation::Entry
+```
+
+- **SEE** [m:Prism::Node#save]
+
+#%end
+
+#%version 3.3
+### def set_newline_flag(newline_marked) -> ()
+
+このノードの開始行にまだ印が付けられていなければ、[m:Prism::Node#newline?] が true を返すように印を付けます。
+
+`newline_marked` は行番号をインデックスとする真偽値の配列です。[m:Prism::ParseResult#mark_newlines!] が構文木を巡回する際に、行ごとに最初に見つかったノードだけに印を付けるために内部で使用します。
+
+- **param** `newline_marked` -- 行番号をインデックスとする真偽値の配列を指定します。すでに印が付いている行には true が入っています。
+
+- **SEE** [m:Prism::Node#newline?]
+
+#%end
+

@@ -28,3 +28,24 @@ result = Prism.lex("1 + 2")
 p result.value.map { |token, _state| token.type }
 # => [:INTEGER, :PLUS, :INTEGER, :EOF]
 ```
+
+#%since 3.4
+### def deconstruct_keys(keys) -> Hash
+
+パターンマッチのハッシュパターン(`case result; in {value:}`)で使われます。[m:Prism::Result#comments] などの付随情報と `value` をキーに持つハッシュを返します。
+
+- **param** `keys` -- 取り出したいキーの配列を指定します。すべて取り出す場合は nil を指定します。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.lex("1 + 2")
+case result
+in {value:}
+  p value.size
+end
+# => 4
+```
+
+#%end
+
