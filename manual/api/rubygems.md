@@ -724,7 +724,7 @@ RubyGems のプラグインをインストールするディレクトリのパ�
 
 実行中のプラットフォームが Solaris であれば真を返します。そうでなければ偽を返します。
 
-- **SEE** [m:Object::RUBY_PLATFORM], [m:Gem?.java_platform?], [m:Gem?.freebsd_platform?]
+- **SEE** [m:Object::RUBY_PLATFORM], [m:Gem?.java_platform?]
 
 #%end
 
