@@ -4,14 +4,28 @@ category: I/O
 ---
 IOが読み込み可能になるまで待つ機能を提供するライブラリです。
 
+#%until 4.0
 Windowsではこのライブラリで定義されているメソッドは
 Socketに対してしか利用できません。
 
+#%end
+#%since 3.2
+[m:IO#wait]・[m:IO#wait_readable]・[m:IO#wait_writable]・[m:IO#wait_priority] は Ruby 3.2 で
+[c:IO] 本体に移動したため、このライブラリを require しなくても使えます。
+#%end
+#%since 4.0
+`IO#nread` と `IO#ready?` は io-wait 0.4.0(Ruby 4.0)で削除されました。
+Ruby 4.0 以降ではこのライブラリは何も定義せず、互換性のために require できるだけです。
+#%end
+#%since 4.1
+io-wait 1.0.0(Ruby 4.1)ではライブラリ自体が非推奨になり、require すると警告が出ます。
+#%end
+
+#%until 4.0
 # reopen IO
 
 ## Instance Methods
 
-#%until 4.0
 ### def nread -> Integer
 
 ブロックせずに読み込み可能なバイト数を返します。
@@ -31,8 +45,8 @@ Socketに対してしか利用できません。
 ブロックしてしまう可能性があるならfalseを返します。
 
 判定不可能な場合は nil を返します。
-#%end
 
+#%until 3.2
 ### def wait(timeout = nil)          -> bool | self | nil
 ### def wait_readable(timeout = nil) -> bool | self | nil
 
@@ -81,3 +95,5 @@ timeout を指定した場合は、指定秒数経過するまでブロックし
              nil を指定すると読み込み可能になるまで待ち続けます。
 
 - **SEE** [m:IO#wait_readable], [m:IO#wait_writable]
+#%end
+#%end
