@@ -559,9 +559,8 @@ p f.alive? # => false
 
 #%since 3.2
 ### def storage -> Hash | nil
-### def storage=(hash)
 
-`self` が表すファイバーの fiber storage を取得、設定します。
+`self` が表すファイバーの fiber storage を取得します。
 
 fiber storage はファイバーごとに持てる記憶領域です。
 [m:Fiber.new] で生成したファイバーには複製が引き継がれます。
@@ -573,15 +572,10 @@ fiber storage はファイバーを起点とする実行単位の中だけで共
 storage が返すのは複製なので、返り値を変更しても fiber storage には反映されません。
 まだ fiber storage を持たない場合は nil を返します。
 
-storage= は実験的な機能です。呼び出すと実験的な機能である旨の警告が出ます。
-警告は `-W:no-experimental` オプションで抑制できます。
-
-- **param** `hash` -- 設定する [c:Hash] を指定します。キーは [c:Symbol] で指定します。
-  nil を指定すると fiber storage を空にします。
-- **return** -- storage は fiber storage の複製を返します。
+- **return** -- fiber storage の複製を返します。
 - **raise** `ArgumentError` -- [m:Fiber.current] 以外のファイバーに対して呼んだ場合に発生します。
 
-```ruby title="例: 取得"
+```ruby title="例"
 Fiber[:key] = 1
 #%since 3.4
 p Fiber.current.storage # => {key: 1}
@@ -594,7 +588,21 @@ Fiber.current.storage[:key] = 2
 p Fiber[:key]           # => 1
 ```
 
-```ruby title="例: 設定"
+- **SEE** [m:Fiber.new], [m:Fiber#storage=]
+
+### def storage=(hash)
+
+`self` が表すファイバーの fiber storage を設定します。
+fiber storage については [m:Fiber#storage] を参照してください。
+
+storage= は実験的な機能です。呼び出すと実験的な機能である旨の警告が出ます。
+警告は `-W:no-experimental` オプションで抑制できます。
+
+- **param** `hash` -- 設定する [c:Hash] を指定します。キーは [c:Symbol] で指定します。
+  nil を指定すると fiber storage を空にします。
+- **raise** `ArgumentError` -- [m:Fiber.current] 以外のファイバーに対して呼んだ場合に発生します。
+
+```ruby title="例"
 Fiber[:key] = 1
 
 Fiber.current.storage = {other: 2} # 実験的な機能である旨の警告が出る
@@ -602,5 +610,5 @@ p Fiber[:key]   # => nil
 p Fiber[:other] # => 2
 ```
 
-- **SEE** [m:Fiber.new]
+- **SEE** [m:Fiber.new], [m:Fiber#storage]
 #%end

@@ -346,24 +346,36 @@ p (...-Float::INFINITY).overlap?(...-Float::INFINITY) # => true
 #%end
 
 ### def begin -> object
-### def first -> object
 
 始端の要素を返します。
-始端を持たない範囲オブジェクトの場合、begin はnilを返しますが, first は例外 [c:RangeError] が発生します。
+始端を持たない範囲オブジェクトの場合、nil を返します。
 
 ```ruby title="例"
 # 始端を持つ場合
 p (1..5).begin # => 1
 p (1..0).begin # => 1
+
+# 始端を持たない場合
+p (..5).begin # => nil
+```
+
+- **SEE** [m:Range#end], [m:Range#first]
+
+### def first -> object
+
+始端の要素を返します。
+始端を持たない範囲オブジェクトの場合、例外 [c:RangeError] が発生します。
+
+```ruby title="例"
+# 始端を持つ場合
 p (1..5).first # => 1
 p (1..0).first # => 1
 
 # 始端を持たない場合
-p (..5).begin # => nil
 (..5).first   # ~> RangeError
 ```
 
-- **SEE** [m:Range#end]
+- **SEE** [m:Range#begin], [m:Range#last]
 
 ### def first(n) -> [object]
 
@@ -429,6 +441,16 @@ p (..5).reverse_each.first(3) # => [5, 4, 3]
 #%end
 
 ### def end -> object
+
+終端の要素を返します。範囲オブジェクトが終端を含むかどうかは関係ありません。
+
+```ruby title="例"
+p (10..20).end    # => 20
+p (10...20).end   # => 20
+```
+
+- **SEE** [m:Range#begin], [m:Range#last]
+
 ### def last -> object
 
 終端の要素を返します。範囲オブジェクトが終端を含むかどうかは関係ありません。
@@ -438,7 +460,7 @@ p (10..20).last    # => 20
 p (10...20).last   # => 20
 ```
 
-- **SEE** [m:Range#begin]
+- **SEE** [m:Range#end], [m:Range#first]
 
 ### def last(n) -> [object]
 
@@ -471,11 +493,26 @@ p (1..5).exclude_end?   # => false
 p (1...5).exclude_end?  # => true
 ```
 
+### def %(s)        -> Enumerator
+### def %(s)        -> Enumerator::ArithmeticSequence
+
+範囲内の要素を s おきに繰り返す [c:Enumerator] を返します。
+ブロックを指定しない [m:Range#step] と同じです。
+
+- **param** `s` -- [m:Range#step] の s と同じです。
+- **return** -- 数値の Range の時は [c:Enumerator::ArithmeticSequence] を返します。
+- **return** -- その他の Range の時は [c:Enumerator] を返します。(例: String の Range)
+
+```ruby title="例"
+p ((1..10) % 3).to_a     # => [1, 4, 7, 10]
+p (("a".."f") % 2).to_a  # => ["a", "c", "e"]
+```
+
+- **SEE** [m:Range#step]
+
 ### def step(s = 1) {|item| ... } -> self
 ### def step(s = 1) -> Enumerator
 ### def step(s = 1) -> Enumerator::ArithmeticSequence
-### def %(s)        -> Enumerator
-### def %(s)        -> Enumerator::ArithmeticSequence
 
 範囲内の要素を s おきに繰り返します。
 

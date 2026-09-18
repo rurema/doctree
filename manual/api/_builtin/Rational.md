@@ -462,13 +462,8 @@ p Rational(-10**1000).to_f   # => -Infinity
 ```
 
 ### def to_i -> Integer
-### def truncate(precision = 0) -> Rational | Integer
 
 小数点以下を切り捨てて値を整数に変換して返します。
-
-- **param** `precision` -- 計算結果の精度
-
-- **raise** `TypeError` -- `precision` に整数以外のものを指定すると発生します。
 
 ```ruby title="例"
 p Rational(2, 3).to_i # => 0
@@ -477,6 +472,16 @@ p Rational(300.6).to_i  # => 300
 p Rational(98, 71).to_i # => 1
 p Rational(-31, 2).to_i # => -15
 ```
+
+- **SEE** [m:Rational#truncate], [m:Rational#ceil], [m:Rational#floor]
+
+### def truncate(precision = 0) -> Rational | Integer
+
+小数点以下を切り捨てて値を整数に変換して返します。
+
+- **param** `precision` -- 計算結果の精度
+
+- **raise** `TypeError` -- `precision` に整数以外のものを指定すると発生します。
 
 `precision` を指定した場合は指定した桁数で切り捨てた整数か
 [c:Rational] を返します。

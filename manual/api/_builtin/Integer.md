@@ -719,17 +719,12 @@ p n.ceildiv(m) # => 5
 #%end
 
 ### def **(other) -> Numeric
-### def pow(other) -> Numeric
-### def pow(other, modulo) -> Integer
 
 `self` の `other` 乗を返します。
 
 `Integer` オブジェクトを左項とする算術演算子 `**` はこのメソッドの呼び出しになります。
 
 - **param** `other` -- `self` に対する冪指数（べきしすう）
-- **param** `modulo` -- 指定すると、計算途中に巨大な値を生成せずに `(self**other) % modulo` と同じ結果を返します。
-- **raise** `TypeError` -- 2引数 `pow` で `other` や `modulo` に `Integer` 以外を指定した場合に発生します。
-- **raise** `RangeError` -- 2引数 `pow` で `other` に負の数を指定した場合に発生します。
 #%since 3.4
 - **raise** `ArgumentError` -- 計算結果が巨大になりすぎる場合に発生します。
 #%end
@@ -738,12 +733,6 @@ p n.ceildiv(m) # => 5
 p 2 ** 3 # => 8
 p 2 ** 0 # => 1
 p 0 ** 0 # => 1
-p 3.pow(3,  8)  # =>  3
-p 3.pow(3, -8)  # => -5
-p 3.pow(2, -2)  # => -1
-p -3.pow(3,  8) # =>  5
-p -3.pow(3, -8) # => -3
-p 5.pow(2, -8)  # => -7
 ```
 
 #%until 3.4
@@ -769,7 +758,33 @@ p 100**9999999999999999999
 判定の閾値は変わりえます。
 #%end
 
-- **SEE** [m:BigDecimal#power]
+- **SEE** [m:BigDecimal#power], [m:Integer#pow]
+
+### def pow(other) -> Numeric
+### def pow(other, modulo) -> Integer
+
+`self` の `other` 乗を返します。
+`modulo` を指定しない場合は [m:Integer#**] と同じです。
+
+- **param** `other` -- `self` に対する冪指数（べきしすう）
+- **param** `modulo` -- 指定すると、計算途中に巨大な値を生成せずに `(self**other) % modulo` と同じ結果を返します。
+- **raise** `TypeError` -- 2引数 `pow` で `other` や `modulo` に `Integer` 以外を指定した場合に発生します。
+- **raise** `RangeError` -- 2引数 `pow` で `other` に負の数を指定した場合に発生します。
+#%since 3.4
+- **raise** `ArgumentError` -- 計算結果が巨大になりすぎる場合に発生します。
+#%end
+
+```ruby
+p 2.pow(3) # => 8
+p 3.pow(3,  8)  # =>  3
+p 3.pow(3, -8)  # => -5
+p 3.pow(2, -2)  # => -1
+p -3.pow(3,  8) # =>  5
+p -3.pow(3, -8) # => -3
+p 5.pow(2, -8)  # => -7
+```
+
+- **SEE** [m:Integer#**]
 
 ### def abs -> Integer
 ### def magnitude -> Integer

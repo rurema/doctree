@@ -10,6 +10,23 @@ include:
 ## Class Methods
 
 ### def Dir.[](*pattern, base: nil, sort: true)                            -> [String]
+
+ワイルドカードの展開を行い、パターンにマッチするファイル名を文字列の配列として返します。
+flags を指定しない [m:Dir.glob] と同じです。パターンやワイルドカードの詳細は [m:Dir.glob] を参照してください。
+
+- **param** `pattern` -- パターンを文字列で指定します。複数指定できます。
+
+- **param** `base` -- [m:Dir.glob] の base と同じです。
+
+- **param** `sort` -- [m:Dir.glob] の sort と同じです。
+
+```ruby
+p Dir["*"]           # => ["foo", "bar"]
+p Dir["f*", "b*"]    # => ["foo", "bar"]
+```
+
+- **SEE** [m:Dir.glob]
+
 ### def Dir.glob(pattern, flags = 0, base: nil, sort: true)                -> [String]
 ### def Dir.glob(pattern, flags = 0, base: nil, sort: true) {|file| ...}   -> nil
 
@@ -588,6 +605,26 @@ Dir.open("/tmp") {|d|
 ```
 
 ### def pos=(pos)
+
+ディレクトリストリームの読み込み位置を pos に移動させます。
+pos は [m:Dir#tell] で与えられた値でなければなりません。
+
+- **param** `pos` -- 変更したい位置を整数で与えます。
+
+- **raise** `IOError` -- 既に自身が close している場合に発生します。
+
+```ruby title="例"
+Dir.open("testdir") do |d|
+  p d.read                 # => "."
+  i = d.tell               # => 12
+  p d.read                 # => ".."
+  d.pos = i
+  p d.read                 # => ".."
+end
+```
+
+- **SEE** [m:Dir#seek]
+
 ### def seek(pos)    -> self
 
 ディレクトリストリームの読み込み位置を pos に移動させます。
@@ -606,6 +643,8 @@ Dir.open("testdir") do |d|
   p d.read                 # => ".."
 end
 ```
+
+- **SEE** [m:Dir#pos=]
 
 ### def read    -> String | nil
 

@@ -10,6 +10,17 @@ Thread を使うことで並行プログラミングが可能になります。
 
 ## Class Methods
 ### def Thread.abort_on_exception             -> bool
+
+いずれかのスレッドが例外によって終了した時に、その例外をメインスレッドで再度発生させるかどうかを返します。
+
+デフォルトは false です。
+
+[ref:c:Thread#exception]を参照してください。
+
+#%#noexample Thread.abort_on_exception= を参照
+
+- **SEE** [m:Thread.abort_on_exception=]
+
 ### def Thread.abort_on_exception=(newstate)
 
 真の時は、いずれかのスレッドが例外によって終了した時に、その例外をメインスレッドで再度発生させます。メインスレッドがその例外を捕捉しない限り、結果としてインタプリタ全体が終了します。false の場合、あるスレッドで起こった例外は、[m:Thread#join]
@@ -27,7 +38,19 @@ Thread.abort_on_exception = true
 p Thread.abort_on_exception # => true
 ```
 
+- **SEE** [m:Thread.abort_on_exception]
+
 ### def Thread.report_on_exception             -> bool
+
+いずれかのスレッドが例外によって終了した時に、その内容を $stderr に報告するかどうかを返します。
+
+デフォルトは true です。
+詳細は [m:Thread.report_on_exception=] を参照してください。
+
+#%#noexample Thread.report_on_exception= を参照
+
+- **SEE** [m:Thread.report_on_exception=]
+
 ### def Thread.report_on_exception=(newstate)
 
 真の時は、いずれかのスレッドが例外によって終了した時に、その内容を $stderr に報告します。
@@ -67,6 +90,8 @@ Traceback (most recent call last):
 スレッドごとに設定する方法は [m:Thread#report_on_exception=] を参照してください。
 
 - **param** `newstate` -- スレッド実行中に例外発生した場合、その内容を報告するかどうかを true か false で指定します。
+
+- **SEE** [m:Thread.report_on_exception]
 
 ### def Thread.ignore_deadlock -> bool
 
@@ -577,6 +602,15 @@ p th.fetch('fetch') {|name| "Thread" + name}  # => "Threadfetch"
 - **SEE** [m:Thread#\[\]]
 
 ### def abort_on_exception               -> bool
+
+そのスレッドが例外によって終了した時に、その例外をメインスレッドで再度発生させるかどうかを返します。
+
+デフォルトは偽です。[ref:c:Thread#exception]を参照してください。
+
+#%#noexample Thread#abort_on_exception= を参照
+
+- **SEE** [m:Thread#abort_on_exception=]
+
 ### def abort_on_exception=(newstate)
 
 真の場合、そのスレッドが例外によって終了した時に、その例外をメインスレッドで再度発生させます。メインスレッドがその例外を捕捉しない限り、結果としてインタプリタ全体が終了します。false の場合、あるスレッドで起こった例外は、
@@ -593,7 +627,18 @@ thread.abort_on_exception = true
 p thread.abort_on_exception # => true
 ```
 
+- **SEE** [m:Thread#abort_on_exception]
+
 ### def report_on_exception               -> bool
+
+そのスレッドが例外によって終了した時に、その内容を $stderr に報告するかどうかを返します。
+
+デフォルトはスレッド作成時の [m:Thread.report_on_exception] です。
+
+#%#noexample Thread#report_on_exception= を参照
+
+- **SEE** [m:Thread#report_on_exception=], [m:Thread.report_on_exception]
+
 ### def report_on_exception=(newstate)
 
 真の場合、そのスレッドが例外によって終了した時に、その内容を $stderr に報告します。
@@ -620,7 +665,7 @@ b.report_on_exception = false
 p b.run # => #<Thread:0x00007fc3f48aefc0 (irb):4 dead>
 ```
 
-- **SEE** [m:Thread.report_on_exception]
+- **SEE** [m:Thread#report_on_exception], [m:Thread.report_on_exception]
 
 ### def alive?     -> bool
 
@@ -726,11 +771,20 @@ p th.keys
 ```
 
 ### def priority    -> Integer
-### def priority=(val)
 
 スレッドの優先度を返します。この値が大きいほど優先度が高くなります。
 メインスレッドのデフォルト値は 0 です。新しく生成されたスレッドは親スレッドの
 priority を引き継ぎます。
+
+```ruby title="例"
+p Thread.current.priority # => 0
+```
+
+- **SEE** [m:Thread#priority=]
+
+### def priority=(val)
+
+スレッドの優先度を設定します。この値が大きいほど優先度が高くなります。
 
 - **param** `val` -- スレッドの優先度を指定します。プラットフォームに依存します。
 
@@ -752,6 +806,8 @@ p sleep 1 # => 1
 p count1  # => 13809431
 p count2  # => 11571921
 ```
+
+- **SEE** [m:Thread#priority]
 
 ### def raise(error_type, message, traceback)     -> ()
 
