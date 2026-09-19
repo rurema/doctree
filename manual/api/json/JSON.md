@@ -356,6 +356,8 @@ source には JSON 形式の文字列だけでなく、to_str, to_io, read の�
 #%until 4.1
 また、[m:JSON?.parse] とはデフォルトのオプション
 (特に create_additions) が異なります。
+
+restore は将来削除される予定です。
 #%end
 
 proc として手続きオブジェクトが与えられた場合は、読み込んだオブジェクトを引数にその手続きを呼び出します。
