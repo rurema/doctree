@@ -15,7 +15,9 @@ CRuby 本体が Ruby プログラムをコンパイルする際に使われる�
 
 構文解析の結果得られる構文木の各ノードは [c:Prism::Node] のサブクラス
 (150 種類以上)として表現されます。すべてのノードに共通する API は
-[c:Prism::Node] で扱いますが、個々のノードクラスの詳細はこのリファレンスでは扱いません。ノードクラスも含めた完全な API については公式ドキュメントを参照してください。
+[c:Prism::Node] で扱いますが、個々のノードクラスの詳細はこのリファレンスでは扱いません([c:Prism::Node] にクラス名とフィールド名の一覧表だけを置いています)。
+また、ノードの種類ごとに `visit_xxx_node` のようなメソッドを持つ `Prism::Visitor`・`Prism::BasicVisitor`・`Prism::Compiler`・`Prism::Dispatcher`・`Prism::DSL`・`Prism::Translation::Ripper` などのクラスも扱いません。
+ノードクラスも含めた完全な API については公式ドキュメントを参照してください。
 
 - プロジェクトページ: <https://github.com/ruby/prism>
 - リファレンス(YARD): <https://www.rubydoc.info/gems/prism>
@@ -360,3 +362,201 @@ p comments.first.class  # => Prism::InlineComment
 ```
 
 - **SEE** [m:Prism?.parse_comments]
+
+#%since 4.1
+### module_function def find(callable) -> Prism::Node | nil
+
+`callable` に対応する構文木のノードを返します。
+
+CRuby では [m:Prism::Node#node_id] を使って正確に対応するノードを特定します。それ以外の実装では、ソースコード上の行番号によるベストエフォートの照合にフォールバックします。対応するノードが見つからない場合は nil を返します。
+
+- **param** `callable` -- 対応するノードを探したい [c:Method]・[c:UnboundMethod]・[c:Proc]・[c:Thread::Backtrace::Location] のいずれかを指定します。
+- **raise** `ArgumentError` -- `callable` が上記のいずれでもない場合に発生します。
+
+#%end
+
+### module_function def lex_compat(source, **options) -> Prism::Result
+
+`source` を字句解析し、[c:Ripper] の `Ripper.lex` に近い形式のトークン列を持つ結果オブジェクトを返します。
+
+戻り値は内部クラス `Prism::LexCompat::Result` のインスタンスです。`value` は各要素が `[[行, 桁], 種類を表すシンボル, 文字列, 状態]` という形式になっている配列で、`Ripper.lex` の戻り値に近い形式です。[m:Prism?.lex] が返す [c:Prism::Token] とは異なり、Ripper 互換の配列形式でトークンを扱いたい場合に使います。オプションは [m:Prism?.parse] と同じです。
+
+- **param** `source` -- 解析する Ruby プログラムの文字列を指定します。
+- **param** `options` -- [m:Prism?.parse] を参照してください。
+
+```ruby title="例"
+require "prism"
+
+result = Prism.lex_compat("1 + 2")
+p result.value.first
+# => [[1, 0], :on_int, "1", END]
+```
+
+- **SEE** [m:Prism?.lex], [c:Ripper]
+
+#%until 4.1
+### module_function def lex_ripper(source) -> Array
+
+`source` を [c:Ripper] の `Ripper.lex` を使って字句解析します。
+
+空白のイベントを除いた、`Ripper.lex` とほぼ同じ形式のトークンの配列を返します。[m:Prism?.lex_compat] とは異なり、prism 自身ではなく組み込みの [c:Ripper] を使って字句解析します。
+
+- **param** `source` -- 解析する Ruby プログラムの文字列を指定します。
+- **raise** `SyntaxError` -- `source` の構文が不正な場合に発生します。
+
+```ruby title="例"
+require "prism"
+
+p Prism.lex_ripper("1 + 2")
+# => [[[1, 0], :on_int, "1", END], [[1, 2], :on_op, "+", BEG], [[1, 4], :on_int, "2", END]]
+```
+
+- **SEE** [m:Prism?.lex_compat], [c:Ripper]
+
+#%end
+
+### module_function def load(source, serialized, freeze = false) -> Prism::ParseResult
+
+`source` と、それを prism でシリアライズした文字列 `serialized` から構文木を復元し、[c:Prism::ParseResult] として返します。
+
+[m:Prism?.dump] や [m:Prism?.dump_file] で得たシリアライズ済み文字列を、それを生成したときと同じ `source` と組み合わせてデシリアライズするために使います。`freeze` に true を指定すると、復元した構文木の各ノードを frozen にします。
+
+- **param** `source` -- `serialized` を生成したときに使ったソースコードの文字列を指定します。
+- **param** `serialized` -- [m:Prism?.dump] などで得たシリアライズ済みの文字列を指定します。
+- **param** `freeze` -- true を指定すると復元した構文木を frozen にします。省略した場合は false です。
+
+```ruby title="例"
+require "prism"
+
+source = "1 + 2"
+dumped = Prism.dump(source)
+result = Prism.load(source, dumped)
+p result.class        # => Prism::ParseResult
+p result.value.slice   # => "1 + 2"
+```
+
+- **SEE** [m:Prism?.dump], [m:Prism?.dump_file]
+
+### module_function def parse_file_success?(filepath, **options) -> bool
+
+`filepath` で指定したファイルを構文解析し、エラーなく解析できた場合に true を返します。
+
+[m:Prism?.parse_file] を呼び出して [`.success?`](m:Prism::ParseResult#success?) を確認するのとほぼ同じ結果になりますが、構文木を Ruby オブジェクトとして構築しないぶん高速です。[m:Prism?.parse_success?] のファイル版です。オプションは [m:Prism?.parse] と同じです。
+
+- **param** `filepath` -- 解析する Ruby プログラムのファイルパスを指定します。
+- **param** `options` -- [m:Prism?.parse] を参照してください。
+
+```ruby title="例"
+require "prism"
+
+File.write("sample.rb", "def foo(a, b) = a + b\n")
+p Prism.parse_file_success?("sample.rb") # => true
+
+File.write("bad.rb", "def foo(\n")
+p Prism.parse_file_success?("bad.rb")    # => false
+```
+
+- **SEE** [m:Prism?.parse_file_failure?], [m:Prism?.parse_success?]
+
+### module_function def parse_file_failure?(filepath, **options) -> bool
+
+`filepath` で指定したファイルの構文解析にエラーがあった場合に true を返します。
+
+[m:Prism?.parse_file_success?] の否定です。オプションは [m:Prism?.parse] と同じです。
+
+- **param** `filepath` -- 解析する Ruby プログラムのファイルパスを指定します。
+- **param** `options` -- [m:Prism?.parse] を参照してください。
+
+```ruby title="例"
+require "prism"
+
+File.write("sample.rb", "def foo(a, b) = a + b\n")
+p Prism.parse_file_failure?("sample.rb") # => false
+
+File.write("bad.rb", "def foo(\n")
+p Prism.parse_file_failure?("bad.rb")    # => true
+```
+
+- **SEE** [m:Prism?.parse_file_success?]
+
+#%since 3.4
+### module_function def parse_stream(stream, **options) -> Prism::ParseResult
+
+`gets` に応答するオブジェクト `stream` から少しずつ読み込みながら構文解析し、結果を [c:Prism::ParseResult] として返します。
+
+ソースコード全体を事前に文字列としてメモリに読み込むことなく構文解析したい場合に使います。オプションは [m:Prism?.parse] と同じです。
+
+- **param** `stream` -- `gets(limit)` に応答するオブジェクトを指定します。[c:IO] や [c:StringIO] などが使えます。
+- **param** `options` -- [m:Prism?.parse] を参照してください。
+
+```ruby title="例"
+require "prism"
+require "stringio"
+
+result = Prism.parse_stream(StringIO.new("1 + 2\n"))
+p result.class        # => Prism::ParseResult
+p result.value.slice   # => "1 + 2"
+```
+
+- **SEE** [m:Prism?.parse]
+
+### module_function def profile(source, **options) -> nil
+
+`source` を構文解析しますが、結果を Ruby オブジェクトとして構築せずに nil を返します。
+
+プロファイラが構文木を Ruby オブジェクト化するオーバーヘッドを避けつつ、構文解析そのものの処理時間を計測できるようにするためのメソッドです。オプションは [m:Prism?.parse] と同じです。
+
+- **param** `source` -- 解析する Ruby プログラムの文字列を指定します。
+- **param** `options` -- [m:Prism?.parse] を参照してください。
+
+```ruby title="例"
+require "prism"
+
+p Prism.profile("1 + 2") # => nil
+```
+
+- **SEE** [m:Prism?.parse], [m:Prism?.profile_file]
+
+### module_function def profile_file(filepath, **options) -> nil
+
+`filepath` で指定したファイルを構文解析しますが、結果を Ruby オブジェクトとして構築せずに nil を返します。
+
+[m:Prism?.profile] のファイル版です。オプションは [m:Prism?.parse] と同じです。
+
+- **param** `filepath` -- 解析する Ruby プログラムのファイルパスを指定します。
+- **param** `options` -- [m:Prism?.parse] を参照してください。
+
+```ruby title="例"
+require "prism"
+
+File.write("sample.rb", "1 + 2\n")
+p Prism.profile_file("sample.rb") # => nil
+```
+
+- **SEE** [m:Prism?.profile]
+
+#%end
+
+#%since 4.0
+### module_function def scope(locals: [], forwarding: []) -> Prism::Scope
+
+解析対象のソースコードの周囲にあるものとして扱うローカル変数と、そこから転送されるパラメータの情報をまとめた `Prism::Scope` のインスタンスを作成します。
+
+作成したオブジェクトは [m:Prism?.parse] などの `scopes:` オプションの要素として渡します。`eval` のように、周囲のスコープで定義済みのローカル変数を引き継いで解析したい場合に使います。
+
+- **param** `locals` -- そのスコープで定義済みとみなすローカル変数名をシンボルの配列で指定します。省略した場合は空配列です。
+- **param** `forwarding` -- そのスコープから次のスコープへ転送されるパラメータの種類を、`:*`・`:**`・`:&`・`:"..."` のいずれかのシンボルからなる配列で指定します。省略した場合は空配列です。
+
+```ruby title="例"
+require "prism"
+
+scope = Prism.scope(locals: [:x])
+result = Prism.parse("x + 1", scopes: [scope])
+p result.value.statements.body[0].receiver.class
+# => Prism::LocalVariableReadNode
+```
+
+- **SEE** [m:Prism?.parse]
+
+#%end
+

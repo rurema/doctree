@@ -72,3 +72,26 @@ nil を返します。
 [c:Prism::Location] の `code_units` 系メソッドを多数の位置に対して繰り返し使う場合の高速化用です。
 
 - **param** `encoding` -- コード単位の基準となるエンコーディング
+
+#%since 3.4
+### def deconstruct_keys(keys) -> Hash
+
+パターンマッチのハッシュパターンで使われます。`comments`・`magic_comments`・`data_loc`・`errors`・`warnings` をキーに持つハッシュを返します。
+
+- **param** `keys` -- 取り出したいキーの配列を指定します。すべて取り出す場合は nil を指定します。
+
+- **SEE** [m:Prism::ParseResult#deconstruct_keys]
+
+#%end
+
+#%since 4.1
+### def continuable? -> bool
+
+解析したソースコードが、追加の入力によって正しい構文になりうる不完全な式であった場合に true を返します。
+
+IRB のような REPL で、ユーザーが複数行にわたる式を 1 行ずつ入力している途中に、追加の入力を待つべきか、それまでに入力された内容を評価すべきかを判断するために使うことを想定しています。具体的には、発生したすべてのエラーが文字列・配列・ブロックなどが閉じられないまま入力が終了したことによるものであれば true を、`end` や `]`、`)` が対応する開始位置なしに単独で現れるなど、後続の入力によらず構文として不正であることが確定しているエラーが 1 つでもあれば false を返します。
+
+- **SEE** [m:Prism::Result#success?], [m:Prism::Result#failure?]
+
+#%end
+
