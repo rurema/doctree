@@ -418,7 +418,7 @@ path が pattern にマッチすれば真を返します。そうでない場合
 - "socket"
 - "unknown"
 
-- **param** `filename` -- ファイル名を表す文字列を指定します。 
+- **param** `filename` -- ファイル名を表す文字列を指定します。
 
 - **raise** `Errno::EXXX` -- 情報の取得に失敗した場合に発生します。
 
@@ -460,9 +460,9 @@ old を指す new という名前のハードリンクを生成します。old �
 
 失敗した場合は例外 [c:Errno::EXXX] が発生します。
 
-- **param** `old` -- ファイル名を表す文字列を指定します。 
+- **param** `old` -- ファイル名を表す文字列を指定します。
 
-- **param** `new` -- ファイル名を表す文字列を指定します。 
+- **param** `new` -- ファイル名を表す文字列を指定します。
 
 - **raise** `Errno::EXXX` -- 失敗した場合に発生します。
 
@@ -631,13 +631,13 @@ pathname を dirname とbasename に分割して、2 要素の配列を返しま
 
 と同じです。
 
-- **param** `pathname` -- パス名を表す文字列を指定します。 
+- **param** `pathname` -- パス名を表す文字列を指定します。
 
 ### def File.stat(filename)    -> File::Stat
 
 filename の情報を含む [c:File::Stat] オブジェクトを生成して返します。
 
-- **param** `filename` -- ファイル名を表す文字列を指定します。 
+- **param** `filename` -- ファイル名を表す文字列を指定します。
 
 - **raise** `Errno::EXXX` -- 情報の取得に失敗した場合に発生します。
 
@@ -652,7 +652,7 @@ p File.stat("testfile").mtime # => 2017-12-10 01:13:56 +0900
 
 [m:File.stat]と同様ですが、シンボリックリンクに関してリンクそのものの情報を File::Stat として返します。[man:lstat(2)] を実装していないシステムでは、File.stat と同じです。
 
-- **param** `filename` -- ファイル名を表す文字列を指定します。 
+- **param** `filename` -- ファイル名を表す文字列を指定します。
 
 - **raise** `Errno::EXXX` -- 情報の取得に失敗した場合に発生します。
 
@@ -670,9 +670,9 @@ old への new という名前のシンボリックリンクを生成します�
 
 シンボリックリンクの作成に成功すれば 0 を返します。失敗した場合は例外 [c:Errno::EXXX] が発生します。
 
-- **param** `old` -- ファイル名を表す文字列を指定します。 
+- **param** `old` -- ファイル名を表す文字列を指定します。
 
-- **param** `new` -- シンボリックリンクを表す文字列を指定します。 
+- **param** `new` -- シンボリックリンクを表す文字列を指定します。
 
 - **raise** `Errno::EXXX` -- 失敗した場合に発生します。
 
@@ -721,7 +721,7 @@ p File.umask       # => 6
 ### def File.utime(atime, mtime, *filename)    -> Integer
 
 ファイルの最終アクセス時刻と更新時刻を変更します。
-シンボリックリンクに対しては [m:File.lutime]　と違って、シンボリックのリンク先を変更します。
+シンボリックリンクに対しては [m:File.lutime] と違って、シンボリックのリンク先を変更します。
 
 - **param** `atime` -- 最終アクセス時刻を [c:Time] か、起算時からの経過秒数を数値で指定します。
 
@@ -752,7 +752,7 @@ p File.mtime("testfile")              # => 1970-01-01 09:00:02 +0900
 ### def File.lutime(atime, mtime, *filename)    -> Integer
 
 ファイルの最終アクセス時刻と更新時刻を変更します。
-シンボリックリンクに対しては [m:File.utime]　と違って、シンボリックそのものを変更します。
+シンボリックリンクに対しては [m:File.utime] と違って、シンボリックそのものを変更します。
 
 - **param** `atime` -- 最終アクセス時刻を [c:Time] か、起算時からの経過秒数を数値で指定します。
 
