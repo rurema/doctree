@@ -473,6 +473,30 @@ p IO.read("testlink")               # => "test"
 ```
 
 ### def File.new(path, mode = "r", perm = 0666, **opts)                -> File
+
+path で指定されるファイルをオープンし、[c:File] オブジェクトを生成して返します。
+
+path が整数の場合はファイルディスクリプタとして扱い、それに対応する
+[c:File] オブジェクトを生成して返します。[m:IO.new] と同じです。
+
+- **param** `path` -- ファイルを文字列で指定します。整数を指定した場合はファイルディスクリプタとして扱います。
+
+- **param** `mode` -- モードを文字列か定数の論理和で指定します。[m:Kernel?.open] と同じです。
+
+- **param** `perm` -- ファイルを生成する場合のファイルのパーミッションを整数で指定します。[m:Kernel?.open] と同じです。
+
+- **param** `opts` -- キーワード引数でオープン時のオプションを指定します。指定できるオプションは [m:IO.new] を参照してください。
+
+- **raise** `Errno::EXXX` -- ファイルのオープンに失敗した場合に発生します。
+
+```ruby title="例: 読み込みモードでのファイルオープン"
+f = File.new("testfile", "r")
+p f.class # => File
+f.close
+```
+
+- **SEE** [m:File.open]
+
 ### def File.open(path, mode = "r", perm = 0666, **opts)               -> File
 ### def File.open(path, mode = "r", perm = 0666, **opts) {|file| ... } -> object
 
@@ -492,22 +516,18 @@ path が整数の場合はファイルディスクリプタとして扱い、そ
 
 - **raise** `Errno::EXXX` -- ファイルのオープンに失敗した場合に発生します。
 
-```ruby title="例: File.new による読み込みモードでのファイルオープン"
-f = File.new("testfile", "r")
-p f.class # => File
-f.close
-```
-
-```ruby title="例: File.open による読み込みモードでのファイルオープン"
+```ruby title="例: 読み込みモードでのファイルオープン"
 f = File.open("testfile", "r")
 p f.class # => File
 f.close
 ```
 
-```ruby title="例: File.open による書き込みモードでのファイルオープン"
+```ruby title="例: 書き込みモードでのファイルオープン"
 File.open("testfile", "w", 0755) { |f| f.print "test" }
 p File.read("testfile")  # => "test"
 ```
+
+- **SEE** [m:File.new]
 
 ### def File.path(filename)    -> String
 

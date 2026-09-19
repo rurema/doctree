@@ -8,7 +8,6 @@ library: _builtin
 ## Class Methods
 
 ### def Exception.new(error_message = nil)       -> Exception
-### def Exception.exception(error_message = nil) -> Exception
 
 例外オブジェクトを生成して返します。
 
@@ -20,11 +19,21 @@ p e         # => #<Exception: some message>
 p e.message # => "some message"
 ```
 
+- **SEE** [m:Exception.exception]
+
+### def Exception.exception(error_message = nil) -> Exception
+
+例外オブジェクトを生成して返します。引数無しの [m:Exception.new] と同じです。
+
+- **param** `error_message` -- エラーメッセージを表す文字列を指定します。このメッセージは属性 [m:Exception#message] の値になり、デフォルトの例外ハンドラで表示されます。
+
 ```ruby title="例"
 e = Exception.exception("some message")
 p e         # => #<Exception: some message>
 p e.message # => "some message"
 ```
+
+- **SEE** [m:Exception.new], [m:Exception#exception]
 
 ### def Exception.to_tty? -> bool
 

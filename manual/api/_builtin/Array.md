@@ -672,19 +672,29 @@ p ary           # => [1, 1, 1]
 - **SEE** [m:Array#collect],  [c:Enumerator]
 
 ### def compact     -> Array
-### def compact!    -> self | nil
 
-compact は自身から nil を取り除いた配列を生成して返します。
-compact! は自身から破壊的に nil を取り除き、変更が行われた場合は self を、そうでなければ nil を返します。
+自身から nil を取り除いた配列を生成して返します。
 
 ```ruby title="例"
 ary = [1, nil, 2, nil, 3, nil]
 p ary.compact   # => [1, 2, 3]
 p ary           # => [1, nil, 2, nil, 3, nil]
+```
+
+- **SEE** [m:Array#compact!]
+
+### def compact!    -> self | nil
+
+自身から破壊的に nil を取り除き、変更が行われた場合は self を、そうでなければ nil を返します。
+
+```ruby title="例"
+ary = [1, nil, 2, nil, 3, nil]
 ary.compact!
 p ary           # => [1, 2, 3]
 p ary.compact!  # => nil
 ```
+
+- **SEE** [m:Array#compact]
 
 ### def concat(other)    -> self
 
@@ -805,15 +815,12 @@ p array             # => [0, 1, 3, 4]
 ```
 
 ### def delete_if {|x| ... }    -> self
-### def reject! {|x| ... }      -> self | nil
 ### def delete_if               -> Enumerator
-### def reject!                 -> Enumerator
 
 要素を順番にブロックに渡して評価し、その結果が真になった要素をすべて削除します。
-delete_if は常に self を返しますが、reject! は要素が 1 つ以上削除されれば self を、
-1 つも削除されなければ nil を返します。
+delete_if は常に self を返します。
 
-ブロックが与えられなかった場合は、自身と reject! から生成した
+ブロックが与えられなかった場合は、自身と delete_if から生成した
 [c:Enumerator] オブジェクトを返します。
 返された Enumerator オブジェクトの each メソッドには、もとの配列に対して副作用があることに注意してください。
 
@@ -821,6 +828,24 @@ delete_if は常に self を返しますが、reject! は要素が 1 つ以上�
 a = [0, 1, 2, 3, 4, 5]
 a.delete_if{|x| x % 2 == 0}
 p a # => [1, 3, 5]
+```
+
+- **SEE** [m:Array#reject!], [m:Array#select!], [m:Array#keep_if]
+
+### def reject! {|x| ... }      -> self | nil
+### def reject!                 -> Enumerator
+
+要素を順番にブロックに渡して評価し、その結果が真になった要素をすべて削除します。
+要素が 1 つ以上削除されれば self を、1 つも削除されなければ nil を返します。
+
+ブロックが与えられなかった場合は、自身と reject! から生成した
+[c:Enumerator] オブジェクトを返します。
+返された Enumerator オブジェクトの each メソッドには、もとの配列に対して副作用があることに注意してください。
+
+```ruby title="例"
+a = [0, 1, 2, 3, 4, 5]
+p a.reject!{|x| x % 2 == 0}  # => [1, 3, 5]
+p a.reject!{|x| x % 2 == 0}  # => nil
 
 a = [0, 1, 2, 3, 4, 5]
 e = a.reject!
@@ -828,7 +853,7 @@ e.each{|i| i % 2 == 0}
 p a                    # => [1, 3, 5]  もとの配列から削除されていることに注意。
 ```
 
-- **SEE** [m:Array#select!], [m:Array#keep_if]
+- **SEE** [m:Array#delete_if], [m:Array#select!], [m:Array#keep_if]
 
 ### def drop(n)               -> Array
 {: since=""}
@@ -1134,9 +1159,8 @@ p ary.first(4)
 - **SEE** [m:Array#last]
 
 ### def flatten(lv = nil)     -> Array
-### def flatten!(lv = nil)    -> self | nil
 
-flatten は自身を再帰的に平坦化した配列を生成して返します。flatten! は自身を再帰的かつ破壊的に平坦化し、平坦化が行われた場合は self をそうでない場合は nil を返します。
+自身を再帰的に平坦化した配列を生成して返します。
 lv が指定された場合、lv の深さまで再帰的に平坦化します。
 
 - **param** `lv` -- 平坦化の再帰の深さを整数で指定します。nil を指定した場合、再帰の深さの制限無しに平坦化します。
@@ -1152,6 +1176,26 @@ a = [1, [2, 3, [4], 5]]
 p a.flatten                     # => [1, 2, 3, 4, 5]
 p a                             # => [1, [2, 3, [4], 5]]
 
+# 平坦化の再帰の深さを指定する例。
+a = [ 1, 2, [3, [4, 5] ] ]
+p a.flatten(1)            # => [1, 2, 3, [4, 5]]
+```
+
+- **SEE** [m:Array#flatten!]
+
+### def flatten!(lv = nil)    -> self | nil
+
+自身を再帰的かつ破壊的に平坦化し、平坦化が行われた場合は self をそうでない場合は nil を返します。
+lv が指定された場合、lv の深さまで再帰的に平坦化します。
+
+- **param** `lv` -- 平坦化の再帰の深さを整数で指定します。nil を指定した場合、再帰の深さの制限無しに平坦化します。
+          整数以外のオブジェクトを指定した場合は to_int メソッドによる暗黙の型変換を試みます。
+
+- **raise** `TypeError` -- 引数に整数以外の(暗黙の型変換が行えない)オブジェクトを指定した場合に発生します。
+
+- **raise** `ArgumentError` -- 配列要素が自身を含むような無限にネストした配列に対して flatten! を呼んだ場合に発生します。
+
+```ruby title="例"
 # 自身を破壊的に平坦化する例。
 a = [[[1, [2, 3]]]]
 p a.flatten!                    # => [1, 2, 3]
@@ -1162,8 +1206,10 @@ p [1, 2, 3].flatten!            # => nil
 
 # 平坦化の再帰の深さを指定する例。
 a = [ 1, 2, [3, [4, 5] ] ]
-p a.flatten(1)            # => [1, 2, 3, [4, 5]]
+p a.flatten!(1)           # => [1, 2, 3, [4, 5]]
 ```
+
+- **SEE** [m:Array#flatten]
 
 ### def hash    -> Integer
 
@@ -1729,15 +1775,10 @@ p a                # => [ "a", "b", "c" ]
 ```
 
 ### def sort                -> Array
-### def sort!               -> self
 ### def sort {|a, b| ... }  -> Array
-### def sort! {|a, b| ... } -> self
 
-全ての要素を昇順にソートします。
+全ての要素を昇順にソートした配列を生成して返します。self は変更しません。
 要素同士の比較は <=> 演算子を使って行います。
-
-sort は self を変更せず、ソートされた配列を生成して返します。
-sort! は self を破壊的にソートし、self を返します。
 
 ブロックとともに呼び出された時には、要素同士の比較をブロックを用いて行います。
 ブロックに2つの要素を引数として与えて評価し、その結果で比較します。
@@ -1761,8 +1802,30 @@ p ary2.sort{|a, b| a.to_i <=> b.to_i }  # => ["7", "8", "9", "10", "11"] (ブロ
 p ary2.sort_by{|x| x.to_i }             # => ["7", "8", "9", "10", "11"]
 ```
 
-- **SEE** [m:Enumerable#sort_by]
-     , [m:Array#sort_by!]
+- **SEE** [m:Array#sort!], [m:Enumerable#sort_by], [m:Array#sort_by!]
+
+### def sort!               -> self
+### def sort! {|a, b| ... } -> self
+
+全ての要素を昇順に破壊的にソートし、self を返します。
+要素同士の比較は <=> 演算子を使って行います。
+ブロックとともに呼び出された時には、要素同士の比較をブロックを用いて行います。
+比較やブロックの扱いは [m:Array#sort] と同じです。
+
+Array#sort! は安定ではありません (unstable sort)。
+安定なソートが必要な場合は [m:Array#sort_by!] を使って工夫する必要があります。
+
+```ruby title="例"
+ary1 = [ "d", "a", "e", "c", "b" ]
+ary1.sort!
+p ary1                                  # => ["a", "b", "c", "d", "e"]
+
+ary2 = ["9", "7", "10", "11", "8"]
+ary2.sort!{|a, b| a.to_i <=> b.to_i }
+p ary2                                  # => ["7", "8", "9", "10", "11"]
+```
+
+- **SEE** [m:Array#sort], [m:Array#sort_by!]
 
 ### def sort_by!               -> Enumerator
 ### def sort_by! {|item| ... } -> self
@@ -1911,12 +1974,9 @@ p [[1,2],
 ```
 
 ### def uniq     -> Array
-### def uniq!    -> self | nil
 ### def uniq {|item| ... } -> Array
-### def uniq! {|item| ... } -> self | nil
 
-uniq は配列から重複した要素を取り除いた新しい配列を返します。
-uniq! は削除を破壊的に行い、削除が行われた場合は self を、そうでなければnil を返します。
+配列から重複した要素を取り除いた新しい配列を返します。
 
 取り除かれた要素の部分は前に詰められます。
 要素の重複判定は、[m:Object#eql?] により行われます。
@@ -1935,6 +1995,35 @@ p [1, 3, 2, "2", "3"].uniq { |n| n.to_s } # => [1, 3, 2]
 ```
 
 要素を先頭から辿っていき、最初に出現したものが残ります。
+
+- **SEE** [m:Array#uniq!]
+
+### def uniq!    -> self | nil
+### def uniq! {|item| ... } -> self | nil
+
+配列から重複した要素を破壊的に取り除きます。
+削除が行われた場合は self を、そうでなければnil を返します。
+
+取り除かれた要素の部分は前に詰められます。
+要素の重複判定は、[m:Object#eql?] により行われます。
+
+```ruby title="例"
+p [1, 1, 1].uniq!        # => [1]
+p [1, 4, 1].uniq!        # => [1, 4]
+p [1, 3, 2, 2, 3].uniq!  # => [1, 3, 2]
+p [1, 3, 2].uniq!        # => nil
+```
+
+ブロックが与えられた場合、ブロックが返した値が重複した要素を取り除きます。
+
+```ruby title="例"
+p [1, 3, 2, "2", "3"].uniq!                # => nil
+p [1, 3, 2, "2", "3"].uniq! { |n| n.to_s } # => [1, 3, 2]
+```
+
+要素を先頭から辿っていき、最初に出現したものが残ります。
+
+- **SEE** [m:Array#uniq]
 
 ### def unshift(*obj)        -> self
 ### def prepend(*obj)        -> self

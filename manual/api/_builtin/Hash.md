@@ -548,20 +548,29 @@ p h.default # => "default value"
 ```
 
 ### def compact -> Hash
-### def compact! -> self | nil
 
-compact は自身から value が nil のもの取り除いた Hash を生成して返します。 compact! は自身から破壊的に value が nil のものを取り除き、変更が行われた場合は self を、そうでなければ nil を返します。
+自身から value が nil のもの取り除いた Hash を生成して返します。
 
 ```ruby title="例"
 hash = {a: 1, b: nil, c: 3}
 p hash.compact  # => {:a=>1, :c=>3}
 p hash          # => {:a=>1, :b=>nil, :c=>3}
+```
+
+- **SEE** [m:Hash#compact!], [m:Array#compact]
+
+### def compact! -> self | nil
+
+自身から破壊的に value が nil のものを取り除き、変更が行われた場合は self を、そうでなければ nil を返します。
+
+```ruby title="例"
+hash = {a: 1, b: nil, c: 3}
 hash.compact!
 p hash          # => {:a=>1, :c=>3}
 p hash.compact! # =>  nil
 ```
 
-- **SEE** [m:Array#compact]
+- **SEE** [m:Hash#compact], [m:Array#compact!]
 
 ### def compare_by_identity -> self
 
@@ -893,14 +902,30 @@ p h.reject{|key, value| key.to_i < value.to_i} # => {6=>"4", 8=>"2"}
 - **SEE** [m:Hash#delete_if],[m:Hash#delete],[m:Enumerable#reject]
 
 ### def delete_if -> Enumerator
-### def reject!   -> Enumerator
 ### def delete_if {|key, value| ... } -> self
+
+キーと値を引数としてブロックを評価した結果が真であるような要素を self から削除します。
+
+常に self を返します。
+
+ブロックを省略した場合は [c:Enumerator] を返します。
+
+```ruby title="例"
+h = { 2 => "8" ,4 => "6" ,6 => "4" ,8 => "2" }
+
+p h.delete_if{|key, value| key.to_i < value.to_i } # => { 6 => "4", 8 => "2" }
+p h.delete_if{|key, value| key.to_i < value.to_i } # => { 6 => "4", 8 => "2" }
+```
+
+- **SEE** [m:Hash#reject!],[m:Hash#reject],[m:Hash#delete]
+- **SEE** [m:Hash#keep_if],[m:Hash#select!]
+
+### def reject!   -> Enumerator
 ### def reject! {|key, value| ... } -> self|nil
 
 キーと値を引数としてブロックを評価した結果が真であるような要素を self から削除します。
 
-delete_if は常に self を返します。
-reject! は、要素を削除しなかった場合には nil を返し、そうでなければ self を返します。
+要素を削除しなかった場合には nil を返し、そうでなければ self を返します。
 
 ブロックを省略した場合は [c:Enumerator] を返します。
 
@@ -909,12 +934,10 @@ h = { 2 => "8" ,4 => "6" ,6 => "4" ,8 => "2" }
 
 p h.reject!{|key, value| key.to_i < value.to_i }   # => { 6 => "4", 8 => "2" }
 p h                                                # => { 6 => "4", 8 => "2" }
-
-p h.delete_if{|key, value| key.to_i < value.to_i } # => { 6 => "4", 8 => "2" }
 p h.reject!{|key, value| key.to_i < value.to_i }   # => nil
 ```
 
-- **SEE** [m:Hash#reject],[m:Hash#delete]
+- **SEE** [m:Hash#delete_if],[m:Hash#reject],[m:Hash#delete]
 - **SEE** [m:Hash#keep_if],[m:Hash#select!]
 
 ### def each {|key, value| ... } -> self
@@ -1414,6 +1437,28 @@ p h.inspect # => "{\"c\"=>300, \"a\"=>100, \"d\"=>400}"
 
 ### def keep_if -> Enumerator
 ### def keep_if {|key, value| ... } -> self
+
+キーと値を引数としてブロックを評価した結果が真であるような要素を self
+に残します。
+
+常に self を返します。
+
+ブロックが与えられなかった場合は、自身と keep_if から生成した
+[c:Enumerator] オブジェクトを返します。
+
+```ruby title="例"
+h2 = {}
+c = ("a".."g")
+c.each_with_index {|e, i| h2[i] = e }
+
+p h2.keep_if  # => #<Enumerator: {0=>"a", 1=>"b", 2=>"c", 3=>"d", 4=>"e", 5=>"f", 6=>"g"}:keep_if>
+
+p h2.keep_if { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
+p h2.keep_if { |k, v| true }      # => {0=>"a", 3=>"d", 6=>"g"}
+```
+
+- **SEE** [m:Hash#select!], [m:Hash#select], [m:Hash#delete_if], [m:Hash#reject!]
+
 ### def select! -> Enumerator
 ### def select! {|key, value| ... } -> self | nil
 ### def filter! -> Enumerator
@@ -1422,10 +1467,9 @@ p h.inspect # => "{\"c\"=>300, \"a\"=>100, \"d\"=>400}"
 キーと値を引数としてブロックを評価した結果が真であるような要素を self
 に残します。
 
-keep_if は常に self を返します。
-filter! と select! はオブジェクトが変更された場合に self を、されていない場合に nil を返します。
+オブジェクトが変更された場合に self を、されていない場合に nil を返します。
 
-ブロックが与えられなかった場合は、自身と keep_if から生成した
+ブロックが与えられなかった場合は、自身と select! から生成した
 [c:Enumerator] オブジェクトを返します。
 
 ```ruby title="例"
@@ -1433,16 +1477,13 @@ h1 = {}
 c = ("a".."g")
 c.each_with_index {|e, i| h1[i] = e }
 
-h2 = h1.dup
 p h1.select!  # => #<Enumerator: {0=>"a", 1=>"b", 2=>"c", 3=>"d", 4=>"e", 5=>"f", 6=>"g"}:select!>
 
 p h1.select! { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
 p h1.select! { |k, v| true }      # => nil
-p h2.keep_if { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
-p h2.keep_if { |k, v| true }      # => {0=>"a", 3=>"d", 6=>"g"}
 ```
 
-- **SEE** [m:Hash#select], [m:Hash#delete_if], [m:Hash#reject!]
+- **SEE** [m:Hash#keep_if], [m:Hash#select], [m:Hash#delete_if], [m:Hash#reject!]
 
 ### def transform_values {|value| ... } -> Hash
 ### def transform_values                -> Enumerator
