@@ -238,14 +238,11 @@ p IO.try_convert("STDOUT") # => nil
 
 ### def IO.new(fd, mode = "r", **opts)                -> IO
 ### def IO.for_fd(fd, mode = "r", **opts)             -> IO
-### def IO.open(fd, mode = "r", **opts)               -> IO
-### def IO.open(fd, mode = "r", **opts) {|io| ... }   -> object
 
 オープン済みのファイルディスクリプタ fd に対する新しい
 IO オブジェクトを生成して返します。
 
-IO.open にブロックが与えられた場合、IO オブジェクトを生成しそれを引数としてブロックを実行します。ブロックの終了とともに fd はクローズされます。ブロックの結果を返します。
-IO.new, IO.for_fd はブロックを受け付けません。
+IO.new, IO.for_fd はブロックを受け付けません。ブロック付きで呼び出すには [m:IO.open] を使います。
 
 ### キーワード引数
 
@@ -294,9 +291,29 @@ p io.binmode? # => true
 io.close
 ```
 
-```ruby title="例:IO.open によるファイルオープン"
+- **SEE** [m:IO.open]
+
+### def IO.open(fd, mode = "r", **opts)               -> IO
+### def IO.open(fd, mode = "r", **opts) {|io| ... }   -> object
+
+オープン済みのファイルディスクリプタ fd に対する新しい
+IO オブジェクトを生成して返します。
+
+ブロックが与えられた場合、IO オブジェクトを生成しそれを引数としてブロックを実行します。ブロックの終了とともに fd はクローズされます。ブロックの結果を返します。
+
+- **param** `fd` -- ファイルディスクリプタである整数を指定します。
+
+- **param** `mode` -- [m:IO.new] の mode と同じです。
+
+- **param** `opts` -- キーワード引数。指定できるオプションは [m:IO.new] を参照してください。
+
+- **raise** `Errno::EXXX` -- IO オブジェクトの生成に失敗した場合に発生します。
+
+```ruby title="例"
 p IO.open(IO.sysopen("testfile")) { |io| p io.class } # => IO
 ```
+
+- **SEE** [m:IO.new]
 
 ### def IO.foreach(path, rs = $/, chomp: false, **opts) {|line| ... }    -> nil
 ### def IO.foreach(path, rs = $/, chomp: false, **opts)                  -> Enumerator

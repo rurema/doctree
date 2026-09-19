@@ -232,13 +232,8 @@ p s # => #<Set: {15, 25}>
 ```
 
 ### def flatten -> Set
-### def flatten! -> self | nil
 
-集合を再帰的に平坦化します。
-
-flatten は、平坦化した集合を新しく作成し、それを返します。
-
-flatten! は、元の集合を破壊的に平坦化します。集合の要素に変更が発生した場合には self を、そうでない場合には nil を返します。
+集合を再帰的に平坦化した集合を新しく作成し、それを返します。
 
 - **raise** `ArgumentError` -- 集合の要素として self が再帰的に現れた場合に発生します。
 
@@ -251,15 +246,28 @@ p s         # => Set[Set[1, 2], 3]
 p s.flatten # => #<Set: {1, 2, 3}>
 p s         # => #<Set: {#<Set: {1, 2}>, 3}>
 #%end
-s.flatten!
-#%since 4.0
-p s         # => Set[1, 2, 3]
-#%else
-p s         # => #<Set: {1, 2, 3}>
-#%end
 ```
 
-- **SEE** [m:Array#flatten]
+- **SEE** [m:Set#flatten!], [m:Array#flatten]
+
+### def flatten! -> self | nil
+
+集合を再帰的かつ破壊的に平坦化します。集合の要素に変更が発生した場合には self を、そうでない場合には nil を返します。
+
+- **raise** `ArgumentError` -- 集合の要素として self が再帰的に現れた場合に発生します。
+
+```ruby
+s = Set[Set[1,2], 3]
+s.flatten!
+#%since 4.0
+p s           # => Set[1, 2, 3]
+#%else
+p s           # => #<Set: {1, 2, 3}>
+#%end
+p s.flatten!  # => nil
+```
+
+- **SEE** [m:Set#flatten], [m:Array#flatten!]
 
 ### def to_a -> Array
 
@@ -383,14 +391,10 @@ p set  # => #<Set: {"Hello", "World"}>
 
 ### def add(o) -> self
 ### def <<(o) -> self
-### def add?(o) -> self | nil
 
 集合にオブジェクト o を加えます。
 
 add は常に self を返します。<< は add の別名です。
-
-add? は、集合に要素が追加された場合には self を、変化がなかった場合には
-nil を返します。
 
 - **param** `o` -- 追加対象のオブジェクトを指定します。
 
@@ -399,22 +403,39 @@ s = Set[1, 2]
 s << 10
 #%since 4.0
 p s           # => Set[1, 2, 10]
-p s.add?(20)  # => Set[1, 2, 10, 20]
 #%else
 p s           # => #<Set: {1, 2, 10}>
+#%end
+```
+
+- **SEE** [m:Set#add?]
+
+### def add?(o) -> self | nil
+
+集合にオブジェクト o を加えます。
+
+集合に要素が追加された場合には self を、変化がなかった場合には
+nil を返します。
+
+- **param** `o` -- 追加対象のオブジェクトを指定します。
+
+```ruby
+s = Set[1, 2, 10]
+#%since 4.0
+p s.add?(20)  # => Set[1, 2, 10, 20]
+#%else
 p s.add?(20)  # => #<Set: {1, 2, 10, 20}>
 #%end
 p s.add?(2)   # => nil
 ```
 
+- **SEE** [m:Set#add]
+
 ### def delete(o) -> self
-### def delete?(o) -> self | nil
 
 集合からオブジェクト o を削除します。
 
-delete は常に self を返します。
-
-delete? は、集合の要素が削除された場合には self を、変化がなかった場合には nil を返します。
+常に self を返します。
 
 - **param** `o` -- 削除対象のオブジェクトを指定します。
 
@@ -423,23 +444,38 @@ s = Set[10, 20, 30]
 s.delete(10)
 #%since 4.0
 p s              # => Set[20, 30]
-p s.delete?(20)  # => Set[30]
 #%else
 p s              # => #<Set: {20, 30}>
+#%end
+```
+
+- **SEE** [m:Set#delete?]
+
+### def delete?(o) -> self | nil
+
+集合からオブジェクト o を削除します。
+
+集合の要素が削除された場合には self を、変化がなかった場合には nil を返します。
+
+- **param** `o` -- 削除対象のオブジェクトを指定します。
+
+```ruby
+s = Set[20, 30]
+#%since 4.0
+p s.delete?(20)  # => Set[30]
+#%else
 p s.delete?(20)  # => #<Set: {30}>
 #%end
 p s.delete?(10)  # => nil
 ```
 
+- **SEE** [m:Set#delete]
+
 ### def delete_if {|o| ... } -> self
-### def reject! {|o| ... } -> self | nil
 
 集合の各要素に対してブロックを実行し、その結果が真であるようなすべての要素を削除します。
 
-delete_if は常に self を返します。
-
-reject! は、要素が 1 つ以上削除されれば self を、1 つも削除されなければ
-nil を返します。
+常に self を返します。
 
 ```ruby
 s1 = Set['hello.rb', 'test.rb', 'hello.rb.bak']
@@ -449,7 +485,18 @@ p s1 # => Set["hello.rb", "test.rb"]
 #%else
 p s1 # => #<Set: {"hello.rb", "test.rb"}>
 #%end
+```
 
+- **SEE** [m:Set#reject!], [m:Enumerable#reject]
+
+### def reject! {|o| ... } -> self | nil
+
+集合の各要素に対してブロックを実行し、その結果が真であるようなすべての要素を削除します。
+
+要素が 1 つ以上削除されれば self を、1 つも削除されなければ
+nil を返します。
+
+```ruby
 s2 = Set['hello.rb', 'test.rb', 'hello.rb.bak']
 #%since 4.0
 p s2.reject! {|str| str =~ /\.bak\z/} # => Set["hello.rb", "test.rb"]
@@ -459,7 +506,7 @@ p s2.reject! {|str| str =~ /\.bak\z/} # => #<Set: {"hello.rb", "test.rb"}>
 p s2.reject! {|str| str =~ /\.o\z/}   # => nil
 ```
 
-- **SEE** [m:Enumerable#reject]
+- **SEE** [m:Set#delete_if], [m:Enumerable#reject]
 
 ### def merge(enum) -> self
 

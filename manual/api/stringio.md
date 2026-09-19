@@ -43,13 +43,10 @@ sio.write("a")
 ## Class Methods
 
 ### def StringIO.new(string = '', mode = 'r+')                 -> StringIO
-### def StringIO.open(string = '', mode = 'r+')                -> StringIO
-### def StringIO.open(string = '', mode = 'r+') {|io| ... }    -> object
 
 StringIO オブジェクトを生成して返します。
 
 与えられた string がフリーズされている場合には、mode はデフォルトでは読み取りのみに設定されます。
-ブロックを与えた場合は生成した StringIO オブジェクトを引数としてブロックを評価してその結果を返します。
 
 - **param** `string` -- 生成される StringIO のデータを文字列で指定します。
               この文字列はバッファとして使われます。[m:StringIO#write] などによって、
@@ -72,11 +69,35 @@ p io.size       # => 4
 p s             # => "fbar"
 io.rewind
 p io.gets       # => "fbar"
+```
+
+- **SEE** [m:StringIO.open]
+
+### def StringIO.open(string = '', mode = 'r+')                -> StringIO
+### def StringIO.open(string = '', mode = 'r+') {|io| ... }    -> object
+
+StringIO オブジェクトを生成して返します。
+
+与えられた string がフリーズされている場合には、mode はデフォルトでは読み取りのみに設定されます。
+ブロックを与えた場合は生成した StringIO オブジェクトを引数としてブロックを評価してその結果を返します。
+
+- **param** `string` -- 生成される StringIO のデータを文字列で指定します。
+              この文字列はバッファとして使われます。[m:StringIO#write] などによって、
+              string 自身も書き換えられます。
+
+- **param** `mode` -- [m:Kernel?.open] 同様文字列か整数で指定します。
+
+- **raise** `Errno::EACCES` -- string がフリーズされていて、mode が書き込み可能に設定されている場合に発生します。
+
+```ruby title="例"
+require 'stringio'
 
 StringIO.open("hoge"){|io|
   p io.string   # => "hoge"
 }
 ```
+
+- **SEE** [m:StringIO.new]
 
 ## Instance Methods
 
