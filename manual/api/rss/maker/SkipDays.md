@@ -25,7 +25,7 @@ contentを指定する必要があります。
 ## Instance Methods
 
 ### def content
-### def content=()
+### def content=(content)
 #%todo
 
 # class RSS::Maker::RSS09::Channel::SkipDays::Day < RSS::Maker::ChannelBase::SkipDaysBase::DayBase

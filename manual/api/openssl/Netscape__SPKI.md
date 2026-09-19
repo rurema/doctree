@@ -6,7 +6,7 @@ library: openssl
 Netscape SPKI、もしくは SPKAC(Signed Public Key And Challenge) と呼ばれるデータフォーマットを扱うためのクラスです。
 
 ## Class Methods
-### def OpenSSL::Netscape::SPKI.new() -> OpenSSL::Netscape::SPKI
+### def OpenSSL::Netscape::SPKI.new -> OpenSSL::Netscape::SPKI
 ### def OpenSSL::Netscape::SPKI.new(buf) -> OpenSSL::Netscape::SPKI
 
 SPKI オブジェクトを生成します。

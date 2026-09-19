@@ -12,19 +12,19 @@ name、linkを設定する必要があります。
 ## Instance Methods
 
 ### def title
-### def title=()
+### def title=(title)
 #%todo
 
 ### def description
-### def description=()
+### def description=(description)
 #%todo
 
 ### def name
-### def name=()
+### def name=(name)
 #%todo
 
 ### def link
-### def link=()
+### def link=(link)
 #%todo
 
 # class RSS::Maker::RSS09::Textinput < RSS::Maker::TextinputBase

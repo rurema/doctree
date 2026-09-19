@@ -105,7 +105,7 @@ self.to_hash.reject{|key, value| ... }
 
 全ての value に対して繰り返すイテレータ。
 
-### def empty?() -> bool
+### def empty? -> bool
 
 データベースが空の時、真を返します。
 

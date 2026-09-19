@@ -82,7 +82,7 @@ DH パラメータの生成には時間がかかるため、鍵生成の途中�
 
 ### def OpenSSL::PKey::DH.new(size, generator = 2) -> OpenSSL::PKey::DH
 ### def OpenSSL::PKey::DH.new(obj) -> OpenSSL::PKey::DH
-### def OpenSSL::PKey::DH.new() -> OpenSSL::PKey::DH
+### def OpenSSL::PKey::DH.new -> OpenSSL::PKey::DH
 
 DH オブジェクトを生成します。
 

@@ -10,10 +10,10 @@ url、contentを設定する必要があります。
 ## Instance Methods
 
 ### def url
-### def url=()
+### def url=(url)
 #%todo
 
 ### def content
-### def content=()
+### def content=(content)
 #%todo
 

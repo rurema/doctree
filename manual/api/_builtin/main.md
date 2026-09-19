@@ -31,7 +31,7 @@ p public_methods(false) - basic_public_methods
 # => [:explicit_public_method]
 ```
 
-### def main.public() -> nil
+### def main.public -> nil
 ### def main.public(name) -> String | Symbol
 ### def main.public(*name) -> Array
 ### def main.public(names) -> Array
@@ -51,7 +51,7 @@ p public_methods(false) - basic_public_methods
 
 - **SEE** [m:Module#public]
 
-### def main.private() -> nil
+### def main.private -> nil
 ### def main.private(name) -> String | Symbol
 ### def main.private(*name) -> Array
 ### def main.private(names) -> Array

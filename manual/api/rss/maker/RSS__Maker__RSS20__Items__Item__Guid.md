@@ -10,10 +10,10 @@ contentを設定する必要があります。
 ## Instance Methods
 
 ### def isPermaLink
-### def isPermaLink=()
+### def isPermaLink=(isPermaLink)
 #%todo
 
 ### def content
-### def content=()
+### def content=(content)
 #%todo
 

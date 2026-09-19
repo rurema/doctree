@@ -12,23 +12,23 @@ maker.channel.linkが適切に設定されている必要があります。
 ## Instance Methods
 
 ### def title
-### def title=()
+### def title=(title)
 #%todo
 
 ### def url
-### def url=()
+### def url=(url)
 #%todo
 
 ### def width
-### def width=()
+### def width=(width)
 #%todo
 
 ### def height
-### def height=()
+### def height=(height)
 #%todo
 
 ### def description
-### def description=()
+### def description=(description)
 #%todo
 
 # class RSS::Maker::RSS09::Image < RSS::Maker::ImageBase

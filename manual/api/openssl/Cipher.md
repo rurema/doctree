@@ -484,7 +484,7 @@ RC2 暗号オブジェクトを生成します。
 RC4 暗号を表すクラス
 
 ## Class Methods
-### def OpenSSL::Cipher::RC4.new() -> OpenSSL::Cipher::RC4
+### def OpenSSL::Cipher::RC4.new -> OpenSSL::Cipher::RC4
 ### def OpenSSL::Cipher::RC4.new(bit) -> OpenSSL::Cipher::RC4
 
 RC4 暗号オブジェクトを生成し、返します。
