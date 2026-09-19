@@ -12,18 +12,74 @@ Ruby 4.0 から cgi ライブラリは default gems から削除されたため�
 #%end
 
 # module CGI::TagMaker
-#%#nodoc
+
+HTML の要素を生成するメソッドの実装を提供するモジュールです。
+
+[c:CGI::Html3]・[c:CGI::Html4]・[c:CGI::Html4Tr]・[c:CGI::Html4Fr]・[c:CGI::Html5] の各モジュールが include し、要素名と同名のメソッド(`html`・`p`・`br` など)の実体として利用しています。通常はこのモジュールのメソッドを直接呼び出す必要はありません。
 
 ## Instance Methods
 
-### def nn_element_def(element)
-#%todo
+### def nn_element(element, attributes = {}) -> String
+### def nn_element(element, attributes = {}) { ... } -> String
+{: since="2.1.0"}
 
-### def nOE_element_def(element, append = nil)
-#%todo
+開始タグと終了タグの両方が必要な要素を生成して返します。
 
-### def nO_element_def(element)
-#%todo
+- **param** `element` -- 要素名を指定します。タグ名は大文字に変換されます。
+- **param** `attributes` -- 属性名をキー・属性値を値とする [c:Hash] を指定します。値が `true` の属性は属性名だけを出力し、値が偽の属性は出力しません。属性名の文字列を指定すると、その属性名だけを出力します。
+- **return** -- ブロックを与えた場合はその返り値を内容として開始タグと終了タグで囲んだ文字列を、与えなかった場合は開始タグと終了タグだけの文字列を返します。
+
+```ruby title="例"
+require "cgi"
+
+cgi = CGI.new("html4")
+p cgi.nn_element("div", "class" => "note") { "text" } # => "<DIV class=\"note\">text</DIV>"
+p cgi.nn_element("div")                               # => "<DIV></DIV>"
+```
+
+### def nOE_element(element, attributes = {}) -> String
+{: since="2.1.0"}
+
+空要素(終了タグを持たない要素)の開始タグを生成して返します。
+
+- **param** `element` -- 要素名を指定します。タグ名は大文字に変換されます。
+- **param** `attributes` -- 属性名をキー・属性値を値とする [c:Hash] を指定します。値が `true` の属性は属性名だけを出力し、値が偽の属性は出力しません。属性名の文字列を指定すると、その属性名だけを出力します。
+
+```ruby title="例"
+require "cgi"
+
+cgi = CGI.new("html4")
+p cgi.nOE_element("input", "type" => "checkbox", "checked" => true) # => "<INPUT type=\"checkbox\" checked>"
+p cgi.nOE_element("br")                                             # => "<BR>"
+```
+
+### def nO_element(element, attributes = {}) -> String
+### def nO_element(element, attributes = {}) { ... } -> String
+{: since="2.1.0"}
+
+終了タグを省略できる要素を生成して返します。
+
+- **param** `element` -- 要素名を指定します。タグ名は大文字に変換されます。
+- **param** `attributes` -- 属性名をキー・属性値を値とする [c:Hash] を指定します。値が `true` の属性は属性名だけを出力し、値が偽の属性は出力しません。属性名の文字列を指定すると、その属性名だけを出力します。
+- **return** -- ブロックを与えた場合はその返り値を内容として開始タグと終了タグで囲んだ文字列を、与えなかった場合は開始タグだけの文字列を返します。
+
+```ruby title="例"
+require "cgi"
+
+cgi = CGI.new("html4")
+p cgi.nO_element("p") { "text" } # => "<P>text</P>"
+p cgi.nO_element("p")            # => "<P>"
+```
+
+### def nn_element_def(attributes = {}) -> String
+### def nn_element_def(attributes = {}) { ... } -> String
+### def nOE_element_def(attributes = {}) -> String
+### def nO_element_def(attributes = {}) -> String
+### def nO_element_def(attributes = {}) { ... } -> String
+
+要素名と同名のメソッド(`html`・`br`・`p` など)の実体です。呼び出されたメソッド名を要素名として、それぞれ [m:CGI::TagMaker#nn_element]・[m:CGI::TagMaker#nOE_element]・[m:CGI::TagMaker#nO_element] を呼び出します。
+
+- **param** `attributes` -- 属性名をキー・属性値を値とする [c:Hash] または属性名の文字列を指定します。
 
 # module CGI::HtmlExtension
 
@@ -679,34 +735,176 @@ textarea("name", 40, 5)
 ```
 
 # module CGI::Html3
-#%# nodoc
+
+HTML 3.2 の要素を生成するメソッドを提供するモジュールです。
+
+[c:CGI::TagMaker] を include し、以下の要素名を小文字にした名前のメソッド(`html`・`head`・`body`・`p` など)を定義しています。
+要素ごとのメソッドはすべて同じ形で、属性を、属性名をキー・属性値を値とする [c:Hash] または属性名の文字列で受け取り、ブロックを与えるとその返り値を要素の内容として開始タグと終了タグで囲みます。要素ごとの個別のエントリはこのリファレンスでは扱いません。
+
+| 種類 | 要素名(メソッド名) |
+|------|---------------------|
+| 開始タグと終了タグの両方が必要な要素(`nn_element`) | `a`・`tt`・`i`・`b`・`u`・`strike`・`big`・`small`・`sub`・`sup`・`em`・`strong`・`dfn`・`code`・`samp`・`kbd`・`var`・`cite`・`font`・`address`・`div`・`center`・`map`・`applet`・`pre`・`xmp`・`listing`・`dl`・`ol`・`ul`・`dir`・`menu`・`select`・`table`・`title`・`style`・`script`・`h1`・`h2`・`h3`・`h4`・`h5`・`h6`・`textarea`・`form`・`blockquote`・`caption` |
+| 空要素(終了タグを持たない要素)(`nOE_element`) | `img`・`base`・`basefont`・`br`・`area`・`link`・`param`・`hr`・`input`・`isindex`・`meta` |
+| 終了タグを省略できる要素(`nO_element`) | `html`・`head`・`body`・`p`・`plaintext`・`dt`・`dd`・`li`・`option`・`tr`・`th`・`td` |
+
+```ruby title="例"
+require "cgi"
+
+cgi = CGI.new("html3")
+p cgi.p("class" => "note") { "text" } # => "<P class=\"note\">text</P>"
+p cgi.br                             # => "<BR>"
+```
 
 ## Instance Methods
 
-### def doctype
-#%todo
+### def doctype -> String
+
+HTML 3.2 の DOCTYPE 宣言を返します。
+
+```ruby title="例"
+require "cgi"
+
+cgi = CGI.new("html3")
+p cgi.doctype
+# => "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">"
+```
 
 # module CGI::Html4
-#%# nodoc
+
+HTML 4.01 Strict の要素を生成するメソッドを提供するモジュールです。
+
+[c:CGI::TagMaker] を include し、以下の要素名を小文字にした名前のメソッド(`html`・`head`・`body`・`p` など)を定義しています。
+要素ごとのメソッドはすべて同じ形で、属性を、属性名をキー・属性値を値とする [c:Hash] または属性名の文字列で受け取り、ブロックを与えるとその返り値を要素の内容として開始タグと終了タグで囲みます。要素ごとの個別のエントリはこのリファレンスでは扱いません。
+
+| 種類 | 要素名(メソッド名) |
+|------|---------------------|
+| 開始タグと終了タグの両方が必要な要素(`nn_element`) | `tt`・`i`・`b`・`big`・`small`・`em`・`strong`・`dfn`・`code`・`samp`・`kbd`・`var`・`cite`・`abbr`・`acronym`・`sub`・`sup`・`span`・`bdo`・`address`・`div`・`map`・`object`・`h1`・`h2`・`h3`・`h4`・`h5`・`h6`・`pre`・`q`・`ins`・`del`・`dl`・`ol`・`ul`・`label`・`select`・`optgroup`・`fieldset`・`legend`・`button`・`table`・`title`・`style`・`script`・`noscript`・`textarea`・`form`・`a`・`blockquote`・`caption` |
+| 空要素(終了タグを持たない要素)(`nOE_element`) | `img`・`base`・`br`・`area`・`link`・`param`・`hr`・`input`・`col`・`meta` |
+| 終了タグを省略できる要素(`nO_element`) | `html`・`body`・`p`・`dt`・`dd`・`li`・`option`・`thead`・`tfoot`・`tbody`・`colgroup`・`tr`・`th`・`td`・`head` |
+
+```ruby title="例"
+require "cgi"
+
+cgi = CGI.new("html4")
+p cgi.p("class" => "note") { "text" } # => "<P class=\"note\">text</P>"
+p cgi.br                             # => "<BR>"
+```
 
 ## Instance Methods
 
-### def doctype
-#%todo
+### def doctype -> String
 
-# module CGI::Html4Fr
-#%# nodoc
+HTML 4.01 Strict の DOCTYPE 宣言を返します。
 
-## Instance Methods
+```ruby title="例"
+require "cgi"
 
-### def doctype
-#%todo
+cgi = CGI.new("html4")
+p cgi.doctype
+# => "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">"
+```
 
 # module CGI::Html4Tr
-#%# nodoc
+
+HTML 4.01 Transitional の要素を生成するメソッドを提供するモジュールです。
+
+[c:CGI::TagMaker] を include し、以下の要素名を小文字にした名前のメソッド(`html`・`head`・`body`・`p` など)を定義しています。
+要素ごとのメソッドはすべて同じ形で、属性を、属性名をキー・属性値を値とする [c:Hash] または属性名の文字列で受け取り、ブロックを与えるとその返り値を要素の内容として開始タグと終了タグで囲みます。要素ごとの個別のエントリはこのリファレンスでは扱いません。
+
+| 種類 | 要素名(メソッド名) |
+|------|---------------------|
+| 開始タグと終了タグの両方が必要な要素(`nn_element`) | `tt`・`i`・`b`・`u`・`s`・`strike`・`big`・`small`・`em`・`strong`・`dfn`・`code`・`samp`・`kbd`・`var`・`cite`・`abbr`・`acronym`・`font`・`sub`・`sup`・`span`・`bdo`・`address`・`div`・`center`・`map`・`object`・`applet`・`h1`・`h2`・`h3`・`h4`・`h5`・`h6`・`pre`・`q`・`ins`・`del`・`dl`・`ol`・`ul`・`dir`・`menu`・`label`・`select`・`optgroup`・`fieldset`・`legend`・`button`・`table`・`iframe`・`noframes`・`title`・`style`・`script`・`noscript`・`textarea`・`form`・`a`・`blockquote`・`caption` |
+| 空要素(終了タグを持たない要素)(`nOE_element`) | `img`・`base`・`basefont`・`br`・`area`・`link`・`param`・`hr`・`input`・`col`・`isindex`・`meta` |
+| 終了タグを省略できる要素(`nO_element`) | `html`・`body`・`p`・`dt`・`dd`・`li`・`option`・`thead`・`tfoot`・`tbody`・`colgroup`・`tr`・`th`・`td`・`head` |
+
+```ruby title="例"
+require "cgi"
+
+cgi = CGI.new("html4Tr")
+p cgi.p("class" => "note") { "text" } # => "<P class=\"note\">text</P>"
+p cgi.br                             # => "<BR>"
+```
 
 ## Instance Methods
 
-### def doctype
-#%todo
+### def doctype -> String
 
+HTML 4.01 Transitional の DOCTYPE 宣言を返します。
+
+```ruby title="例"
+require "cgi"
+
+cgi = CGI.new("html4Tr")
+p cgi.doctype
+# => "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">"
+```
+
+# module CGI::Html4Fr
+
+HTML 4.01 Frameset の要素を生成するメソッドを提供するモジュールです。
+
+[c:CGI::TagMaker] を include し、以下の要素名を小文字にした名前のメソッド(`frameset`・`frame`)を定義しています。フレームセット以外の要素は [c:CGI::Html4Tr] と組み合わせて使います(`CGI.new("html4Fr")` で得られるオブジェクトは両方を include しています)。
+要素ごとのメソッドはすべて同じ形で、属性を、属性名をキー・属性値を値とする [c:Hash] または属性名の文字列で受け取り、ブロックを与えるとその返り値を要素の内容として開始タグと終了タグで囲みます。要素ごとの個別のエントリはこのリファレンスでは扱いません。
+
+| 種類 | 要素名(メソッド名) |
+|------|---------------------|
+| 開始タグと終了タグの両方が必要な要素(`nn_element`) | `frameset` |
+| 空要素(終了タグを持たない要素)(`nOE_element`) | `frame` |
+
+```ruby title="例"
+require "cgi"
+
+cgi = CGI.new("html4Fr")
+p cgi.frameset("cols" => "50%,50%") { cgi.frame("src" => "a.html") + cgi.frame("src" => "b.html") }
+# => "<FRAMESET cols=\"50%,50%\"><FRAME src=\"a.html\"><FRAME src=\"b.html\"></FRAMESET>"
+```
+
+## Instance Methods
+
+### def doctype -> String
+
+HTML 4.01 Frameset の DOCTYPE 宣言を返します。
+
+```ruby title="例"
+require "cgi"
+
+cgi = CGI.new("html4Fr")
+p cgi.doctype
+# => "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\" \"http://www.w3.org/TR/html4/frameset.dtd\">"
+```
+
+# module CGI::Html5
+
+HTML5 の要素を生成するメソッドを提供するモジュールです。
+
+[c:CGI::TagMaker] を include し、以下の要素名を小文字にした名前のメソッド(`html`・`head`・`body`・`p` など)を定義しています。
+要素ごとのメソッドはすべて同じ形で、属性を、属性名をキー・属性値を値とする [c:Hash] または属性名の文字列で受け取り、ブロックを与えるとその返り値を要素の内容として開始タグと終了タグで囲みます。要素ごとの個別のエントリはこのリファレンスでは扱いません。
+
+| 種類 | 要素名(メソッド名) |
+|------|---------------------|
+| 開始タグと終了タグの両方が必要な要素(`nn_element`) | `section`・`nav`・`article`・`aside`・`hgroup`・`header`・`footer`・`figure`・`figcaption`・`s`・`time`・`u`・`mark`・`ruby`・`bdi`・`iframe`・`video`・`audio`・`canvas`・`datalist`・`output`・`progress`・`meter`・`details`・`summary`・`menu`・`dialog`・`i`・`b`・`small`・`em`・`strong`・`dfn`・`code`・`samp`・`kbd`・`var`・`cite`・`abbr`・`sub`・`sup`・`span`・`bdo`・`address`・`div`・`map`・`object`・`h1`・`h2`・`h3`・`h4`・`h5`・`h6`・`pre`・`q`・`ins`・`del`・`dl`・`ol`・`ul`・`label`・`select`・`fieldset`・`legend`・`button`・`table`・`title`・`style`・`script`・`noscript`・`textarea`・`form`・`a`・`blockquote`・`caption` |
+| 空要素(終了タグを持たない要素)(`nOE_element`) | `img`・`base`・`br`・`area`・`link`・`param`・`hr`・`input`・`col`・`meta`・`command`・`embed`・`keygen`・`source`・`track`・`wbr` |
+| 終了タグを省略できる要素(`nO_element`) | `html`・`head`・`body`・`p`・`dt`・`dd`・`li`・`option`・`thead`・`tfoot`・`tbody`・`optgroup`・`colgroup`・`rt`・`rp`・`tr`・`th`・`td` |
+
+```ruby title="例"
+require "cgi"
+
+cgi = CGI.new("html5")
+p cgi.p("class" => "note") { "text" } # => "<P class=\"note\">text</P>"
+p cgi.br                             # => "<BR>"
+```
+
+## Instance Methods
+
+### def doctype -> String
+{: since="2.0.0"}
+
+HTML5 の DOCTYPE 宣言を返します。
+
+```ruby title="例"
+require "cgi"
+
+cgi = CGI.new("html5")
+p cgi.doctype
+# => "<!DOCTYPE HTML>"
+```

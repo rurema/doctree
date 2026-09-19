@@ -172,6 +172,26 @@ documented = lambda do |c, k, n|
   if c == "Object" then (e = doc[["Kernel", k]][n]) and return e end
   nil
 end
+# ---- 方針上の除外(docs/FrequentlyAskedQuestions.md「実 Ruby にあるメソッドはすべて載せるのですか?」・rurema/doctree#3566)
+# 不足側の UNDOC 系に該当しても、方針として個別エントリを作らないものは category を POLICY(理由) にして集計対象から外す。
+POLICY_USER_FACING_GEM = %w[Gem Gem::Specification Gem::Version Gem::Requirement Gem::Dependency Gem::Platform Gem::ConfigFile Gem::Package].to_set
+POLICY_PRISM_GENERATED = /\APrism::(BasicVisitor|Visitor|Compiler|Dispatcher|DSL|InspectVisitor|DotVisitor|MutationCompiler|DesugarCompiler|RipperCompat|Translation::.*)\z/
+def policy_exclusion(lib, klass, name)
+  case lib
+  when "cgi/html"
+    # DTD ごとに要素名と同名のメソッドを生成する(要素名の一覧表で代える)
+    return "generated" if klass =~ /\ACGI::(Html3|Html4|Html4Tr|Html4Fr|Html5)\z/ && name != "doctype"
+  when "prism"
+    # ノードクラス(config.yml から生成・Prism::Node に一覧表)と Visitor/Compiler/DSL 等の visit_xxx_node 系
+    return "generated(node)" if klass =~ /\APrism::\w+Node\z/ && klass != "Prism::Node"
+    return "generated(visitor)" if klass =~ POLICY_PRISM_GENERATED
+  when %r{\Arubygems(/|\z)}
+    # 利用者向け API(Gem の設定・検索系、gemspec 属性、Version/Requirement/Dependency/Platform)と例外クラス以外は内部
+    return nil if POLICY_USER_FACING_GEM.include?(klass) || klass =~ /(Error|Exception)\z/
+    return "internal"
+  end
+  nil
+end
 shortage = []  # lib, scope, class, kind, vis, name, orig, feat, category, note
 real.each do |key, r|
   c, k, n = key
@@ -210,6 +230,9 @@ real.each do |key, r|
     cat = "UNDOC_UNDERSCORE"
   else
     cat = doc_classes.key?(c) ? (doc_method_count[c] > 0 ? "UNDOC" : "UNDOC(class-stub)") : "UNDOC(class-undoc)"
+  end
+  if cat.start_with?("UNDOC") && (why = policy_exclusion(lib, c, n))
+    cat = "POLICY(#{why})"
   end
   shortage << [lib, scope, c, k, r[:vis], n, r[:orig], r[:feat], cat, note]
 end

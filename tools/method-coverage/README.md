@@ -69,6 +69,14 @@ DOC_ON_ANCESTOR 等の除外分類を含む約 1 万行/版)はサイズの都�
 - `DOC_ON_ANCESTOR` / `DOC_ON_DESCENDANT`: 祖先(module_function の複製先を含む)/ 子孫側(Kernel→Object の慣例)で記載あり
 - `NOMETHOD_CONFLICT`: DB では `{: nomethod}`/`{: undef}` だが実 Ruby には存在する
 
+- `POLICY(理由)`: 実 Ruby に存在し UNDOC 系に該当するが、方針として個別エントリを作らないもの(2026-09-17 追加・
+  [docs/FrequentlyAskedQuestions.md](../../docs/FrequentlyAskedQuestions.md) の「実 Ruby にあるメソッドはすべて載せるのですか?」・rurema/doctree#3566)。
+  `generated`= cgi/html の各 DTD モジュールが要素名ごとに生成するメソッド(`doctype` は除く)、
+  `generated(node)`= prism のノードクラス(`Prism::*Node`)、`generated(visitor)`= prism の Visitor・Compiler・Dispatcher・DSL・Translation 系、
+  `internal`= rubygems の利用者向けクラス(`Gem`・`Gem::Specification`・`Gem::Version`・`Gem::Requirement`・`Gem::Dependency`・`Gem::Platform`・
+  `Gem::ConfigFile`・`Gem::Package`)と例外クラス以外。判定は `compare_mc.rb` の `policy_exclusion`。
+  `result/` の TSV は 2026-09-05 のスナップショットでこの分類より前に生成したものなので、UNDOC 系の件数には方針上の除外分が含まれている
+
 不足側のライブラリ帰属は「DB でそのクラスを記載しているライブラリ → メソッドの source_location から
 求めた feature の最長一致 → クラス内の多数派 feature → 差分に含んだライブラリのうち最小のもの」の順。
 forwardable/delegate 等で生成されたメソッド(source_location が forwardable.rb になる)は前段で吸収されるが、
