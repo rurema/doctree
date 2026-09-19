@@ -521,6 +521,334 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオ�
 ### def yaml_initialize
 #%todo
 
+### def activate -> bool
+{: since="1.9.3"}
+
+`self` を activate します。
+
+`self` を「ロード済みの仕様書」として登録し、[m:Gem::Specification#require_paths]
+を `$LOAD_PATH` に追加します。
+
+同じ名前の gem が既に activate 済みの場合、バージョンが `self` と同じであれば
+何もせず `false` を返します。バージョンが異なる場合は例外が発生します。
+まだ同じ名前の gem が activate されていない場合は、依存関係の競合が無いことを
+確認したうえで activate を行い `true` を返します。
+
+- **return** -- activate を行った場合は `true` を、同じバージョンで既に
+           activate 済みだった場合は `false` を返します。
+- **raise** `Gem::LoadError` -- `self` とは異なるバージョンの同名の gem が既に activate 済みの場合に発生します。
+- **raise** `Gem::ConflictError` -- 依存関係の競合がある場合に発生します。
+
+- **SEE** [m:Gem::Specification#activated?]
+
+### def activated? -> bool
+{: since="1.9.3"}
+
+`self` が activate 済みであれば true を返します。
+
+この属性は永続化されません。
+
+- **SEE** [m:Gem::Specification#activate]
+
+### def base_dir -> String
+{: since="1.9.3"}
+
+gem をインストールするベースディレクトリのフルパスを返します。
+
+例えば `/usr/local/lib/ruby/gems/3.4` のようなパスです。
+[m:Gem::Specification#loaded_from] が設定されていない場合は [m:Gem?.dir] を返します。
+
+- **SEE** [m:Gem::Specification#loaded_from], [m:Gem?.dir]
+
+### def bin_dir -> String
+{: since="1.9.3"}
+
+インストールされた gem の実行ファイル格納ディレクトリへのフルパスを返します。
+
+[m:Gem::Specification#bindir] とは異なり、こちらはフルパスを返します。
+
+- **SEE** [m:Gem::Specification#bindir]
+
+### def bin_file(name) -> String
+{: since="1.9.3"}
+
+この gem に含まれる実行可能ファイル `name` へのフルパスを返します。
+
+- **param** `name` -- 実行可能ファイル名を指定します。
+
+- **SEE** [m:Gem::Specification#bin_dir]
+
+### def build_args -> [String]
+{: since="2.0.0"}
+
+この gem をインストールした際に使われたビルド引数を返します。
+
+ビルド情報を保存したファイルが存在しない場合は空の配列を返します。
+
+```ruby title="例"
+spec = Gem::Specification.new { |s| s.name = "rfoo"; s.version = "1.0" }
+p spec.build_args   # => []
+```
+
+### def cache_dir -> String
+{: since="1.9.3"}
+
+この spec のキャッシュされた gem ファイルを格納するディレクトリへのフルパスを返します。
+
+- **SEE** [m:Gem::Specification#cache_file]
+
+### def cache_file -> String
+{: since="1.9.3"}
+
+この spec のキャッシュされた gem ファイルへのフルパスを返します。
+
+- **SEE** [m:Gem::Specification#cache_dir]
+
+### def conflicts -> {Gem::Specification => [object]}
+{: since="1.9.3"}
+
+現在ロードされている仕様書との間で発生しうる依存関係の競合を返します。
+
+キーが競合する [c:Gem::Specification]、値がその競合の原因となった依存関係
+([c:Gem::Dependency] や [c:Gem::Requirement])の配列であるハッシュを返します。
+競合が無い場合は空のハッシュを返します。
+
+```ruby title="例"
+spec = Gem::Specification.new { |s| s.name = "rfoo"; s.version = "1.0" }
+p spec.conflicts   # => {}
+```
+
+- **SEE** [m:Gem::Specification#has_conflicts?]
+
+### def dependent_specs -> [Gem::Specification]
+{: since="1.9.3"}
+
+`self` の RUNTIME 依存性を満たす仕様書をまとめて返します。
+
+```ruby title="例"
+spec = Gem::Specification.new { |s| s.name = "rfoo"; s.version = "1.0" }
+p spec.dependent_specs   # => []
+```
+
+- **SEE** [m:Gem::Specification#dependencies], [m:Gem::Specification#runtime_dependencies]
+
+### def doc_dir(type = nil) -> String
+{: since="1.9.3"}
+
+この spec のドキュメント格納ディレクトリへのフルパスを返します。
+
+`type` を指定した場合は、そのディレクトリの下の `type` という名前のディレクトリ
+(例えば `"ri"`)へのパスを返します。
+
+- **param** `type` -- ドキュメントの種類を表す文字列を指定します。省略した場合は
+           ドキュメント格納ディレクトリ自体のパスを返します。
+
+- **SEE** [m:Gem::Specification#ri_dir]
+
+### def extension_dir -> String
+{: since="2.1.0"}
+
+この gem 専用の拡張ライブラリのインストール先ディレクトリへのフルパスを返します。
+
+[m:Gem::Specification#extensions_dir] の下に作られる、
+[m:Gem::Specification#full_name] という名前のディレクトリです。
+
+- **SEE** [m:Gem::Specification#extensions_dir]
+
+### def extensions_dir -> String
+{: since="2.1.0"}
+
+拡張ライブラリのインストール先として使われるディレクトリ(プラットフォームごとに
+共有される)へのフルパスを返します。
+
+- **SEE** [m:Gem::Specification#extension_dir]
+
+### def gem_dir -> String
+{: since="1.9.3"}
+
+この spec の gem 本体が格納されているディレクトリへのフルパスを返します。
+
+[m:Gem::Specification#full_gem_path] と同じ値を返します。
+
+- **SEE** [m:Gem::Specification#full_gem_path], [m:Gem::Specification#gems_dir]
+
+### def gems_dir -> String
+{: since="1.9.3"}
+
+この spec の [m:Gem::Specification#gem_dir] を含む、gem のインストール先
+ディレクトリへのフルパスを返します。
+
+- **SEE** [m:Gem::Specification#gem_dir]
+
+### def has_conflicts? -> bool
+{: since="2.3.0"}
+
+現在ロードされている仕様書との間で発生しうる依存関係の競合があれば true を返します。
+
+```ruby title="例"
+spec = Gem::Specification.new { |s| s.name = "rfoo"; s.version = "1.0" }
+p spec.has_conflicts?   # => false
+```
+
+- **SEE** [m:Gem::Specification#conflicts]
+
+### def license -> String
+{: since="1.9.2"}
+
+[m:Gem::Specification#licenses] の最初の要素を返します。
+
+- **SEE** [m:Gem::Specification#licenses]
+
+### def license=(o)
+{: since="1.9.2"}
+
+この gem のライセンスをセットします。
+
+SPDX ライセンス識別子を 1 つ指定します。複数のライセンスが適用される gem の場合は
+[m:Gem::Specification#licenses=] を使ってください。
+
+- **param** `o` -- ライセンスを表す SPDX ライセンス識別子の文字列を指定します。
+
+```ruby title="例"
+spec = Gem::Specification.new { |s| s.name = "rfoo"; s.version = "1.0" }
+spec.license = "MIT"
+p spec.license    # => "MIT"
+```
+
+- **SEE** [m:Gem::Specification#licenses=]
+
+### def licenses -> [String]
+{: since="1.9.2"}
+
+この gem のライセンスを表す SPDX ライセンス識別子の配列を返します。
+
+- **SEE** [m:Gem::Specification#license]
+
+### def licenses=(licenses)
+{: since="1.9.2"}
+
+この gem のライセンスをセットします。
+
+複数のライセンスが適用される gem の場合は、[m:Gem::Specification#license=] とは
+異なりこちらを使って各ライセンスを別々の要素として指定します。
+
+- **param** `licenses` -- ライセンスを表す SPDX ライセンス識別子の文字列の配列を指定します。
+
+```ruby title="例"
+spec = Gem::Specification.new { |s| s.name = "rfoo"; s.version = "1.0" }
+spec.licenses = ["MIT", "GPL-2.0-only"]
+p spec.licenses   # => ["MIT", "GPL-2.0-only"]
+p spec.license    # => "MIT"
+```
+
+- **SEE** [m:Gem::Specification#license=]
+
+### def metadata -> {String => String}
+{: since="2.0.0"}
+
+この gem のメタデータを返します。
+
+- **SEE** [m:Gem::Specification#metadata=]
+
+### def metadata=(metadata)
+{: since="2.0.0"}
+
+この gem のメタデータをセットします。
+
+メタデータは gem の作者以外の利用者にも有用な追加情報です。
+キーと値がともに文字列である [c:Hash] を指定します。キーは最大 128 バイト、
+値は最大 1024 バイトまでで、全て UTF-8 文字列でなければなりません。
+ホームページやリポジトリ、changelog、issue tracker などの URI を指定するのに使えます。
+
+- **param** `metadata` -- キーと値がいずれも文字列の [c:Hash] を指定します。
+
+```ruby title="例"
+spec = Gem::Specification.new { |s| s.name = "rfoo"; s.version = "1.0" }
+spec.metadata = { "source_code_uri" => "https://example.com/rfoo" }
+p spec.metadata["source_code_uri"]   # => "https://example.com/rfoo"
+```
+
+- **SEE** [m:Gem::Specification#metadata]
+
+### def missing_extensions? -> bool
+{: since="2.2.0"}
+
+この spec に拡張ライブラリのビルドが必要なものが含まれていて、
+かつまだビルドされていない場合に true を返します。
+
+```ruby title="例"
+spec = Gem::Specification.new { |s| s.name = "rfoo"; s.version = "1.0" }
+p spec.missing_extensions?   # => false
+```
+
+### def name_tuple -> Gem::NameTuple
+{: since="2.0.0"}
+
+`self` を表す `Gem::NameTuple` を返します。
+
+```ruby title="例"
+spec = Gem::Specification.new { |s| s.name = "rfoo"; s.version = "1.0" }
+p spec.name_tuple         # => #<Gem::NameTuple rfoo, 1.0, ruby>
+p spec.name_tuple.class   # => Gem::NameTuple
+```
+
+- **SEE** [m:Gem::Specification#full_name]
+
+### def ri_dir -> String
+{: since="1.9.3"}
+
+この spec の ri 形式のドキュメントを格納するディレクトリへのフルパスを返します。
+
+- **SEE** [m:Gem::Specification#doc_dir]
+
+### def spec_dir -> String
+{: since="1.9.3"}
+
+この spec の gemspec ファイルが置かれているディレクトリへのフルパスを返します。
+
+- **SEE** [m:Gem::Specification#spec_file]
+
+### def spec_file -> String
+{: since="1.9.3"}
+
+この spec の gemspec ファイルへのフルパスを返します。
+
+例えば `/usr/local/lib/ruby/gems/3.4/specifications/rfoo-1.0.gemspec` のような
+パスです。
+
+- **SEE** [m:Gem::Specification#spec_dir], [m:Gem::Specification#spec_name]
+
+### def spec_name -> String
+{: since="1.9.2"}
+
+gemspec ファイルのデフォルトの名前を返します。
+
+[m:Gem::Specification#file_name] も参照してください。
+
+```ruby title="例"
+spec = Gem::Specification.new { |s| s.name = "rfoo"; s.version = "1.0" }
+p spec.spec_name   # => "rfoo-1.0.gemspec"
+```
+
+- **SEE** [m:Gem::Specification#file_name], [m:Gem::Specification#spec_file]
+
+### def stubbed? -> bool
+{: since="2.1.0"}
+
+常に false を返します。
+
+`self` は既に完全にロードされた仕様書であり、スタブ(gemspec ファイルの内容を
+遅延読み込みする軽量なオブジェクト)ではないためです。
+
+- **SEE** [m:Gem::Specification.stubs]
+
+### def to_spec -> self
+{: since="2.1.0"}
+
+`self` を返します。
+
+- **SEE** [m:Gem::Specification#to_ruby]
+
 ## Singleton Methods
 
 ### def Gem::Specification._load(str) -> Gem::Specification
@@ -602,6 +930,213 @@ p Gem::Specification.stubs_for("abbrev").map(&:name)
 ```
 
 - **SEE** [m:Gem::Specification.stubs]
+
+#%since 3.2
+### def Gem::Specification.add_spec(spec) -> ()
+
+既知の仕様書の一覧に `spec` を追加します。
+
+追加後、一覧はソートされた状態に保たれます。
+
+- **param** `spec` -- 追加する [c:Gem::Specification] を指定します。
+
+```ruby title="例"
+spec = Gem::Specification.new { |s| s.name = "rfoo_unique_test"; s.version = "1.0" }
+p Gem::Specification.all_names.include?("rfoo_unique_test-1.0")   # => false
+Gem::Specification.add_spec(spec)
+p Gem::Specification.all_names.include?("rfoo_unique_test-1.0")   # => true
+Gem::Specification.remove_spec(spec)
+p Gem::Specification.all_names.include?("rfoo_unique_test-1.0")   # => false
+```
+
+- **SEE** [m:Gem::Specification.remove_spec]
+
+#%end
+### def Gem::Specification.all -> [Gem::Specification]
+{: since="1.9.3"}
+
+既知の全ての仕様書を返します。
+
+このメソッドの利用は推奨されません。`Gem::Specification` は `Enumerable` を
+extend しているため、代わりに [m:Gem::Specification.each] などの
+`Enumerable` のメソッドを使ってください。
+
+- **SEE** [m:Gem::Specification.each]
+
+### def Gem::Specification.all=(specs)
+{: since="1.9.3"}
+
+既知の仕様書の一覧を `specs` にセットします。
+
+- **param** `specs` -- 仕様書の一覧として設定する [c:Gem::Specification] の配列を指定します。
+
+- **SEE** [m:Gem::Specification.all]
+
+### def Gem::Specification.all_names -> [String]
+{: since="1.9.3"}
+
+既知の全ての仕様書の [m:Gem::Specification#full_name] をソートした配列で返します。
+
+### def Gem::Specification.dirs -> [String]
+{: since="1.9.3"}
+
+`Gem::Specification` が仕様書を探すディレクトリの一覧を返します。
+
+- **SEE** [m:Gem::Specification.dirs=]
+
+### def Gem::Specification.dirs=(dirs)
+{: since="1.9.3"}
+
+`Gem::Specification` が仕様書を探すディレクトリを `dirs` にセットします。
+
+このメソッドを呼ぶと、既知の仕様書の一覧はリセットされます。
+
+- **param** `dirs` -- 仕様書を探すディレクトリの配列を指定します。
+
+- **SEE** [m:Gem::Specification.dirs], [m:Gem::Specification.reset]
+
+### def Gem::Specification.each {|spec| ... } -> [Gem::Specification]
+### def Gem::Specification.each               -> Enumerator
+{: since="1.9.3"}
+
+既知の仕様書 1 つ 1 つに対してブロックを評価します。
+
+ブロックを省略した場合は `Enumerator` を返します。
+
+- **SEE** [m:Gem::Specification.dirs=]
+
+### def Gem::Specification.find_all_by_full_name(full_name) -> [Gem::Specification]
+{: since="2.5.0"}
+
+指定した `full_name` を持つ全ての仕様書を返します。
+
+- **param** `full_name` -- 探す仕様書の [m:Gem::Specification#full_name] を文字列で指定します。
+
+#%since 3.3
+- **SEE** [m:Gem::Specification.find_by_full_name]
+#%end
+
+### def Gem::Specification.find_all_by_name(name, *requirements) -> [Gem::Specification]
+{: since="1.9.3"}
+
+指定した `name` と `requirements` にマッチする全ての仕様書を返します。
+
+- **param** `name` -- 探す gem の名前を指定します。
+- **param** `requirements` -- バージョンの必要条件を 0 個以上指定します。省略した場合は
+           全てのバージョンにマッチします。
+
+- **SEE** [m:Gem::Specification.find_by_name]
+
+#%since 3.3
+### def Gem::Specification.find_by_full_name(full_name) -> Gem::Specification | nil
+
+指定した `full_name` にもっとも合致する仕様書を返します。
+
+見つからなかった場合は nil を返します。
+
+- **param** `full_name` -- 探す仕様書の [m:Gem::Specification#full_name] を文字列で指定します。
+
+- **SEE** [m:Gem::Specification.find_all_by_full_name]
+
+#%end
+### def Gem::Specification.find_by_name(name, *requirements) -> Gem::Specification
+{: since="1.9.3"}
+
+指定した `name` と `requirements` にもっとも合致する仕様書を返します。
+
+- **param** `name` -- 探す gem の名前を指定します。
+- **param** `requirements` -- バージョンの必要条件を 0 個以上指定します。省略した場合は
+           全てのバージョンにマッチします。
+- **raise** `Gem::MissingSpecError` -- `name` を持つ gem が 1 つもインストールされていない場合に発生します。
+- **raise** `Gem::MissingSpecVersionError` -- `name` を持つ gem はインストールされているものの、
+           `requirements` を満たすバージョンが無い場合に発生します。
+
+- **SEE** [m:Gem::Specification.find_all_by_name]
+
+### def Gem::Specification.find_by_path(path) -> Gem::Specification | nil
+{: since="1.9.3"}
+
+指定した `path` にマッチするファイルを含む、もっとも合致する仕様書を返します。
+
+見つからなかった場合は nil を返します。
+
+- **param** `path` -- 探すファイルのパスを指定します。
+
+- **SEE** [m:Gem::Specification.find_inactive_by_path]
+
+### def Gem::Specification.find_inactive_by_path(path) -> Gem::Specification | nil
+{: since="2.0.0"}
+
+指定した `path` にマッチするファイルを含む仕様書のうち、まだ activate されて
+いないものの中からもっとも合致するものを返します。
+
+見つからなかった場合は nil を返します。
+
+- **param** `path` -- 探すファイルのパスを指定します。
+
+- **SEE** [m:Gem::Specification.find_by_path], [m:Gem::Specification#activated?]
+
+### def Gem::Specification.latest_spec_for(name) -> Gem::Specification | nil
+
+指定した `name` を持つ gem のうち、インストールされている最新の仕様書を返します。
+
+見つからなかった場合は nil を返します。
+
+- **param** `name` -- 探す gem の名前を指定します。
+
+- **SEE** [m:Gem::Specification.latest_specs]
+
+### def Gem::Specification.latest_specs(prerelease = false) -> [Gem::Specification]
+{: since="1.9.3"}
+
+インストールされている最新の仕様書の一覧を返します。
+
+- **param** `prerelease` -- true を指定するとプレリリース版の仕様書も対象に含めます。
+
+- **SEE** [m:Gem::Specification.latest_spec_for]
+
+### def Gem::Specification.outdated -> [String]
+{: since="1.9.3"}
+
+古くなっているローカルの gem の名前の一覧を返します。
+
+このメソッドはサーバへ問い合わせて仕様書を取得する必要があるため負荷が高い処理です。
+最新のリモートバージョンも合わせて取得したい場合は
+[m:Gem::Specification.outdated_and_latest_version] を使ってください。
+
+- **SEE** [m:Gem::Specification.outdated_and_latest_version]
+
+### def Gem::Specification.outdated_and_latest_version {|local_spec, latest_version| ... } -> nil
+### def Gem::Specification.outdated_and_latest_version                                     -> Enumerator
+{: since="2.1.0"}
+
+古くなっているローカルの gem について、ローカルの仕様書と最新のリモートバージョンを
+ブロックに渡して評価します。
+
+サーバの索引に対して 1 つ 1 つのローカル gem を問い合わせるため、返るまでに時間が
+かかることがあります。ブロックを省略した場合は `Enumerator` を返します。
+
+- **SEE** [m:Gem::Specification.outdated]
+
+#%since 3.2
+### def Gem::Specification.remove_spec(spec) -> ()
+
+既知の仕様書の一覧から `spec` を削除します。
+
+- **param** `spec` -- 削除する [c:Gem::Specification] を指定します。
+
+- **SEE** [m:Gem::Specification.add_spec]
+
+#%end
+### def Gem::Specification.reset -> ()
+{: since="1.9.3"}
+
+既知の仕様書の一覧をリセットします。
+
+リセットの前後で、`Gem` に登録された reset 前後のフック
+(`Gem.pre_reset_hooks`・`Gem.post_reset_hooks`)を実行します。
+
+- **SEE** [m:Gem::Specification.dirs=]
 
 ## Constants
 

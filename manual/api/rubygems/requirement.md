@@ -93,6 +93,21 @@ pp Gem::Requirement.new("~> 3.2.1")
 p Gem::Requirement.parse("~> 3.2.1") # => ["~>", #<Gem::Version "3.2.1">]
 ```
 
+### def Gem::Requirement.default_prerelease -> Gem::Requirement
+{: since="2.7.0"}
+
+`">= 0.a"` を条件とする [c:Gem::Requirement] のインスタンスを返します。
+
+[m:Gem::Requirement.default] と異なり、プレリリースバージョンも含めた
+すべてのバージョンを要求する条件になります。
+
+```ruby title="例"
+pp Gem::Requirement.default_prerelease
+# => Gem::Requirement.new([">= 0.a"])
+```
+
+- **SEE** [m:Gem::Requirement.default]
+
 ## Public Instance Methods
 
 ### def as_list -> [String]
@@ -112,10 +127,6 @@ p req.as_list  # => ["< 5.0", ">= 1.9"]
 #%# nodoc
 #%#必要条件をロードします。
 
-#%#--- requirements -> Array
-#%# nodoc
-#%#自身に含まれる必要条件の配列を返します。
-#%#
 #%#配列に含まれる各要素は、比較演算子と [[c:Gem::Version]] のインスタンスを要素とする二要素の配列です。
 
 ### def satisfied_by?(version) -> bool
@@ -206,3 +217,18 @@ pp メソッドで出力する際に、内部で用いられます。
 req = Gem::Requirement.new(["< 5.0", ">= 1.9"])
 pp req # => Gem::Requirement.new(["< 5.0", ">= 1.9"])
 ```
+
+### def requirements -> [[String, Gem::Version]]
+{: since="1.9.1"}
+
+`self` に含まれる必要条件の配列を返します。
+
+配列に含まれる各要素は、比較演算子を表す文字列と [c:Gem::Version] のインスタンスを
+要素とする、2 要素の配列です。
+
+```ruby title="例"
+req = Gem::Requirement.new("< 5.0", ">= 1.9")
+p req.requirements
+# => [["<", #<Gem::Version "5.0">], [">=", #<Gem::Version "1.9">]]
+```
+

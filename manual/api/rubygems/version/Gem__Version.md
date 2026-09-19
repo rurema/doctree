@@ -152,14 +152,6 @@ p version # => #<Gem::Version "1.2.0a">
 #%#
 #%# :nodoc:
 
-#%#--- segments -> Array
-#%#
-#%# :nodoc:
-
-#%#--- canonical_segments -> Array
-#%#
-#%# :nodoc:
-
 ### def version -> String
 ### def to_s -> String
 
@@ -198,6 +190,68 @@ p Gem::Version.new('1.2.0').release  # => #<Gem::Version "1.2.0">
 ```
 
 - **SEE** [m:Gem::Version#prerelease?]
+
+### def approximate_recommendation -> String
+{: since="2.0.0"}
+
+`self` を元にした、バージョン要求の推奨文字列を返します。
+
+`self` の先頭 2 つの数値要素(メジャー・マイナー)を使った `X.Y` の形式で、
+#%since 4.1
+`>= X.Y` という文字列を返します(Ruby 4.0 までは `~> X.Y` でした)。
+#%else
+`~> X.Y` という文字列を返します。
+
+#%end
+要素が 1 つしかない場合は `0` を補います。`self` が
+[m:Gem::Version#prerelease?] であれば、末尾に `.a` を追加します。
+
+```ruby title="例"
+#%since 4.1
+p Gem::Version.new("1.2.3").approximate_recommendation   # => ">= 1.2"
+p Gem::Version.new("2").approximate_recommendation       # => ">= 2.0"
+p Gem::Version.new("1.2.3.a").approximate_recommendation # => ">= 1.2.a"
+#%else
+p Gem::Version.new("1.2.3").approximate_recommendation   # => "~> 1.2"
+p Gem::Version.new("2").approximate_recommendation       # => "~> 2.0"
+p Gem::Version.new("1.2.3.a").approximate_recommendation # => "~> 1.2.a"
+
+#%end
+```
+
+- **SEE** [m:Gem::Version#segments], [m:Gem::Version#prerelease?]
+
+### def canonical_segments -> [Integer | String]
+{: since="2.5.0"}
+
+`self` の [m:Gem::Version#segments] から、末尾に連なる余分な `0` を取り除いた配列を返します。
+
+`self` が [m:Gem::Version#prerelease?] であれば、英字が現れる直前までの `0` も取り除きます。
+末尾の `0` の個数だけが異なるバージョン(`"1.0"` と `"1.0.0"` など)を同じ配列として
+扱えるようにするためのメソッドです。
+
+```ruby title="例"
+p Gem::Version.new("1.0.0").canonical_segments     # => [1]
+p Gem::Version.new("1.2.0").canonical_segments     # => [1, 2]
+p Gem::Version.new("1.0.0.a.0").canonical_segments # => [1, "a"]
+```
+
+- **SEE** [m:Gem::Version#segments]
+
+### def segments -> [Integer | String]
+{: since="1.9.2"}
+
+`self` のバージョン文字列をピリオド区切りの各要素に分解した配列を返します。
+
+数字だけの要素は `Integer` に、それ以外の要素は `String` に変換されます。
+呼び出すたびに新しい配列を返すので、返り値を破壊的に変更しても `self` には影響しません。
+
+```ruby title="例"
+p Gem::Version.new("1.2.3").segments   # => [1, 2, 3]
+p Gem::Version.new("1.2.3.a").segments # => [1, 2, 3, "a"]
+```
+
+- **SEE** [m:Gem::Version#canonical_segments]
 
 ## Constants
 
