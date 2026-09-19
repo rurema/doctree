@@ -935,12 +935,12 @@ pack は暗号になりやすい面があることを考慮し、pack を使い�
 - **構造体のアドレス**:
 
   例えば、
-  ```
-        struct {
-          int   a;
-          short b;
-          long  c;
-        } v = {1,2,3};
+  ```c
+  struct {
+    int   a;
+    short b;
+    long  c;
+  } v = {1,2,3};
   ```
   を表す文字列は
   ```ruby
