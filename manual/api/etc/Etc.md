@@ -173,11 +173,19 @@ require 'etc'
 require 'pp'
 
 pp Etc.uname
+#%since 3.4
+# => {sysname: "Linux",
+#     nodename: "boron",
+#     release: "2.6.18-6-xen-686",
+#     version: "#1 SMP Thu Nov 5 19:54:42 UTC 2009",
+#     machine: "i686"}
+#%else
 # => {:sysname=>"Linux",
 #     :nodename=>"boron",
 #     :release=>"2.6.18-6-xen-686",
 #     :version=>"#1 SMP Thu Nov 5 19:54:42 UTC 2009",
 #     :machine=>"i686"}
+#%end
 ```
 
 ### module_function def sysconf(name) -> Integer | nil

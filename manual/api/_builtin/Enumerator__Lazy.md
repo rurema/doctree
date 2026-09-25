@@ -116,7 +116,11 @@ p ["foo", "bar"].lazy.flat_map {|i| i.each_char.lazy}.force
 
 ```ruby
 p [{a:1}, {b:2}].lazy.flat_map {|i| i}.force
+#%since 3.4
+# => [{a: 1}, {b: 2}]
+#%else
 # => [{:a=>1}, {:b=>2}]
+#%end
 ```
 
 - **raise** `ArgumentError` -- ブロックを指定しなかった場合に発生します。

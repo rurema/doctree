@@ -18,8 +18,13 @@ since: "1.9.1"
 
 ```ruby title="例"
 p Encoding.aliases
+#%since 3.4
+# => {"BINARY" => "ASCII-8BIT", "ASCII" => "US-ASCII", "ANSI_X3.4-1968" => "US-ASCII",
+#   "SJIS" => "Windows-31J", "eucJP" => "EUC-JP", "CP932" => "Windows-31J"}
+#%else
 # => {"BINARY"=>"ASCII-8BIT", "ASCII"=>"US-ASCII", "ANSI_X3.4-1968"=>"US-ASCII",
 #   "SJIS"=>"Windows-31J", "eucJP"=>"EUC-JP", "CP932"=>"Windows-31J"}
+#%end
 ```
 
 ### def Encoding.compatible?(obj1, obj2) -> Encoding | nil

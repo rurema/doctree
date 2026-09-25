@@ -60,6 +60,20 @@ parser = REXML::Parsers::UltraLightParser.new(<<XML)
 </root>
 XML
 pp parser.parse
+#%since 3.4
+# >> [[:xmldecl, "1.0", "UTF-8", nil],
+# >>  [:text, "\n"],
+# >>  [:start_element,
+# >>   [...],
+# >>   "root",
+# >>   {},
+# >>   [:text, "\n  "],
+# >>   [:start_element, [...], "a", {"n" => "1"}, [:text, "xyz"]],
+# >>   [:text, "\n  "],
+# >>   [:start_element, [...], "b", {"m" => "2"}],
+# >>   [:text, "\n"]],
+# >>  [:text, "\n"]]
+#%else
 # >> [[:xmldecl, "1.0", "UTF-8", nil],
 # >>  [:text, "\n"],
 # >>  [:start_element,
@@ -72,6 +86,7 @@ pp parser.parse
 # >>   [:start_element, [...], "b", {"m"=>"2"}],
 # >>   [:text, "\n"]],
 # >>  [:text, "\n"]]
+#%end
 ```
 
 # class REXML::Parsers::UltraLightParser < Object

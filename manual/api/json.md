@@ -14,7 +14,11 @@ require "json"
 
 # JSON文字列をRubyのオブジェクトに変換する
 json_str = '{"name": "Ruby", "age": 30}'
+#%since 3.4
+p JSON.parse(json_str) # => {"name" => "Ruby", "age" => 30}
+#%else
 p JSON.parse(json_str) # => {"name"=>"Ruby", "age"=>30}
+#%end
 
 # RubyのオブジェクトをJSON文字列に変換する
 data = {"name" => "Ruby", "age" => 30}

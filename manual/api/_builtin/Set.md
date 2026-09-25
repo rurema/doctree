@@ -650,7 +650,11 @@ p numbers.classify {|o| o.class}
 #%since 4.0
 # => {Integer => Set[10, 20, 30], Float => Set[4.5, 31.2]}
 #%else
+#%since 3.4
+# => {Integer => #<Set: {10, 20, 30}>, Float => #<Set: {4.5, 31.2}>}
+#%else
 # => {Integer=>#<Set: {10, 20, 30}>, Float=>#<Set: {4.5, 31.2}>}
+#%end
 #%end
 ```
 

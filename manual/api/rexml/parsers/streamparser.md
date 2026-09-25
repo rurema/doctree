@@ -117,15 +117,26 @@ REXML::Parsers::StreamParser.new(xml, Listener.new).parse
 # >> [:elementdecl, "<!ELEMENT root (a+)"]
 # >> [:elementdecl, "<!ELEMENT a"]
 # >> [:entitydecl, ["bar", "barbarbarbar"]]
+#%since 3.4
+# >> [:attlistdecl, "a", {"att" => nil, "xyz" => "foobar"}, " \n  <!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"]
+#%else
 # >> [:attlistdecl, "a", {"att"=>nil, "xyz"=>"foobar"}, " \n  <!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"]
+#%end
 # >> [:notationdecl, ["foobar", "SYSTEM", nil, "http://example.org/foobar.dtd"]]
 # >> [:entitydecl, ["HTMLsymbol", "PUBLIC", "-//W3C//ENTITIES Symbols for XHTML//EN", "xhtml-symbol.ent", "%"]]
 # >> [:doctype_end]
 # >> [:text, "\n"]
+#%since 3.4
+# >> [:tag_start, "root", {"xmlns:foo" => "http://example.org/foo", "xmlns:bar" => "http://example.org/bar"}]
+# >> [:cdata, "cdata is here"]
+# >> [:text, "\n  "]
+# >> [:tag_start, "a", {"foo:att" => "1", "bar:att" => "2", "att" => "<"}]
+#%else
 # >> [:tag_start, "root", {"xmlns:foo"=>"http://example.org/foo", "xmlns:bar"=>"http://example.org/bar"}]
 # >> [:cdata, "cdata is here"]
 # >> [:text, "\n  "]
 # >> [:tag_start, "a", {"foo:att"=>"1", "bar:att"=>"2", "att"=>"<"}]
+#%end
 # >> [:tag_end, "a"]
 # >> [:text, "\n  && "]
 # >> [:comment, " comment here"]

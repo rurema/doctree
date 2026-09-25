@@ -347,7 +347,11 @@ ENV["bar"] = "rab"
 p ENV.slice()           # => {}
 p ENV.slice("")         # => {}
 p ENV.slice("unknown")  # => {}
+#%since 3.4
+p ENV.slice("foo", "baz") # => {"foo" => "bar", "baz" => "qux"}
+#%else
 p ENV.slice("foo", "baz") # => {"foo"=>"bar", "baz"=>"qux"}
+#%end
 ```
 
 - **SEE** [m:Hash#slice], [m:ENV.except]
@@ -364,8 +368,13 @@ Ruby 2.7 で追加された挙動です。それより前のバージョンで�
 引数で指定された以外のキーとその値だけを含む Hash を返します。
 
 ```ruby
+#%since 3.4
+p ENV                     # => {"LANG" => "en_US.UTF-8", "TERM" => "xterm-256color", "HOME" => "/Users/rhc"}
+p ENV.except("TERM","HOME") # => {"LANG" => "en_US.UTF-8"}
+#%else
 p ENV                     # => {"LANG"=>"en_US.UTF-8", "TERM"=>"xterm-256color", "HOME"=>"/Users/rhc"}
 p ENV.except("TERM","HOME") # => {"LANG"=>"en_US.UTF-8"}
+#%end
 ```
 
 - **SEE** [m:Hash#except], [m:ENV.slice]

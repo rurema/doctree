@@ -279,7 +279,11 @@ require 'net/http'
 
 uri = URI('http://www.example.com/index.html')
 res = Net::HTTP.get_response(uri)
+#%since 3.4
+p res.type_params # => {"charset" => "UTF-8"}
+#%else
 p res.type_params # => {"charset"=>"UTF-8"}
+#%end
 ```
 
 ### def form_data=(params)
@@ -298,7 +302,11 @@ require 'net/http'
 
 uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri.request_uri)
+#%since 3.4
+req.form_data = {"q" => ["ruby", "perl"], "lang" => "en"} # => {"q" => ["ruby", "perl"], "lang" => "en"}
+#%else
 req.form_data = {"q" => ["ruby", "perl"], "lang" => "en"} # => {"q"=>["ruby", "perl"], "lang"=>"en"}
+#%end
 ```
 
 ```ruby title="例 set_form_data"
@@ -667,7 +675,11 @@ require 'net/http'
 uri = URI('http://www.example.com/index.html')
 req = Net::HTTP::Get.new(uri)
 p req.to_hash
+#%since 3.4
+# => {"accept-encoding" => ["gzip;q=1.0,deflate;q=0.6,identity;q=0.3"], "accept" => ["*/*"], "user-agent" => ["Ruby"], "host" => ["www.example.com"]}
+#%else
 # => {"accept-encoding"=>["gzip;q=1.0,deflate;q=0.6,identity;q=0.3"], "accept"=>["*/*"], "user-agent"=>["Ruby"], "host"=>["www.example.com"]}
+#%end
 ```
 
 - **SEE** [m:Net::HTTPHeader#each_header]

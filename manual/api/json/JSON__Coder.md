@@ -112,8 +112,13 @@ parse は load の別名です。
 require "json"
 
 coder = JSON::Coder.new
+#%since 3.4
+p coder.load('{"name":"Ruby"}')  # => {"name" => "Ruby"}
+p coder.parse('{"name":"Ruby"}') # => {"name" => "Ruby"}
+#%else
 p coder.load('{"name":"Ruby"}')  # => {"name"=>"Ruby"}
 p coder.parse('{"name":"Ruby"}') # => {"name"=>"Ruby"}
+#%end
 ```
 
 ### def load_file(path) -> object
@@ -131,6 +136,10 @@ coder = JSON::Coder.new
 Tempfile.create(["sample", ".json"]) do |f|
   f.write(coder.dump({ "name" => "Ruby" }))
   f.flush
+#%since 3.4
+  p coder.load_file(f.path) # => {"name" => "Ruby"}
+#%else
   p coder.load_file(f.path) # => {"name"=>"Ruby"}
+#%end
 end
 ```

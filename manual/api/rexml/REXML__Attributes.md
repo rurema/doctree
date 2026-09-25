@@ -218,7 +218,11 @@ EOS
 a = doc.get_elements("/root/a").first
 
 p doc.root.attributes.namespaces
+#%since 3.4
+# => {"foo" => "http://example.org/foo", "bar" => "http://example.org/bar"}
+#%else
 # => {"foo"=>"http://example.org/foo", "bar"=>"http://example.org/bar"}
+#%end
 p a.attributes.namespaces
 # => {}
 ```

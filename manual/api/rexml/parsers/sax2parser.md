@@ -34,8 +34,13 @@ parser.listen(:start_element, ["a"]){|uri, localname, qname, attrs|
 texts = []
 parser.listen(:characters, ["a"]){|c| texts << c }
 parser.parse
+#%since 3.4
+p elements # => [["root", {"n" => "0"}], ["a", {"n" => "1"}], ["b", {"n" => "2"}], ["a", {"n" => "3"}]]
+p as # => [["a", {"n" => "1"}], ["a", {"n" => "3"}]]
+#%else
 p elements # => [["root", {"n"=>"0"}], ["a", {"n"=>"1"}], ["b", {"n"=>"2"}], ["a", {"n"=>"3"}]]
 p as # => [["a", {"n"=>"1"}], ["a", {"n"=>"3"}]]
+#%end
 p texts # => ["111", "333"]
 ```
 
@@ -97,7 +102,11 @@ parser.parse
 # >> [:progress, 159]
 # >> [:entitydecl, "bar", "barbarbarbar"]
 # >> [:progress, 190]
+#%since 3.4
+# >> [:attlistdecl, "a", {"att" => nil, "xyz" => "foobar"}, " \n  <!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"]
+#%else
 # >> [:attlistdecl, "a", {"att"=>nil, "xyz"=>"foobar"}, " \n  <!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"]
+#%end
 # >> [:progress, 245]
 # >> [:notationdecl, "foobar", "SYSTEM", nil, "http://example.org/foobar.dtd"]
 # >> [:progress, 683]
@@ -110,13 +119,21 @@ parser.parse
 # >> [:start_prefix_mapping, nil, "http://example.org/default"]
 # >> [:start_prefix_mapping, "foo", "http://example.org/foo"]
 # >> [:start_prefix_mapping, "bar", "http://example.org/bar"]
+#%since 3.4
+# >> [:start_element, "http://example.org/default", "root", "root", {"xmlns" => "http://example.org/default", "xmlns:foo" => "http://example.org/foo", "xmlns:bar" => "http://example.org/bar"}]
+#%else
 # >> [:start_element, "http://example.org/default", "root", "root", {"xmlns"=>"http://example.org/default", "xmlns:foo"=>"http://example.org/foo", "xmlns:bar"=>"http://example.org/bar"}]
+#%end
 # >> [:progress, 683]
 # >> [:cdata, "cdata is here"]
 # >> [:progress, 683]
 # >> [:characters, "\n  "]
 # >> [:progress, 683]
+#%since 3.4
+# >> [:start_element, "http://example.org/default", "a", "a", {"foo:att" => "1", "bar:att" => "2", "att" => "&lt;"}]
+#%else
 # >> [:start_element, "http://example.org/default", "a", "a", {"foo:att"=>"1", "bar:att"=>"2", "att"=>"&lt;"}]
+#%end
 # >> [:progress, 683]
 # >> [:characters, "\n  "]
 # >> [:progress, 683]

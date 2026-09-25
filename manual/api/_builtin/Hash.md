@@ -45,7 +45,11 @@ to_hash メソッドを用いて obj をハッシュに変換しようとしま�
 このメソッドは引数がハッシュであるかどうかを調べるために使えます。
 
 ```ruby
+#%since 3.4
+p Hash.try_convert({1=>2}) # => {1 => 2}
+#%else
 p Hash.try_convert({1=>2}) # => {1=>2}
+#%end
 p Hash.try_convert("1=>2") # => nil
 ```
 
@@ -67,18 +71,31 @@ h = {1 => "value"}
 h.default = "none"
 
 g = Hash[h]
+#%since 3.4
+p g # => {1 => "value"}
+#%else
 p g # => {1=>"value"}
+#%end
 
 p h[:no] # => "none"
 p g[:no] # => nil
 
 h[:add] = "some"
+#%since 3.4
+p h # => {1 => "value", add: "some"}
+p g # => {1 => "value"}
+
+h[1] << 'plus' #破壊的操作
+p h # => {1 => "valueplus", add: "some"}
+p g # => {1 => "valueplus"}
+#%else
 p h # => {1=>"value", :add=>"some"}
 p g # => {1=>"value"}
 
 h[1] << 'plus' #破壊的操作
 p h # => {1=>"valueplus", :add=>"some"}
 p g # => {1=>"valueplus"}
+#%end
 ```
 
 ### def Hash.[](*key_and_value)  -> Hash
@@ -99,7 +116,11 @@ p g # => {1=>"valueplus"}
 
 ```ruby
 ary = [1,"a", 2,"b", 3,["c"]]
+#%since 3.4
+p Hash[*ary]  # => {1 => "a", 2 => "b", 3 => ["c"]}
+#%else
 p Hash[*ary]  # => {1=>"a", 2=>"b", 3=>["c"]}
+#%end
 ```
 
 (2) キーと値のペアの配列からハッシュへ
@@ -107,7 +128,11 @@ p Hash[*ary]  # => {1=>"a", 2=>"b", 3=>["c"]}
 ```ruby
 alist = [[1,"a"], [2,"b"], [3,["c"]]]
 p alist.flatten(1) # => [1, "a", 2, "b", 3, ["c"]]
+#%since 3.4
+p Hash[*alist.flatten(1)]  # => {1 => "a", 2 => "b", 3 => ["c"]}
+#%else
 p Hash[*alist.flatten(1)]  # => {1=>"a", 2=>"b", 3=>["c"]}
+#%end
 ```
 
 (3) キーと値の配列のペアからハッシュへ
@@ -117,14 +142,22 @@ keys = [1, 2, 3]
 vals = ["a", "b", ["c"]]
 alist = keys.zip(vals)     # あるいは alist = [keys,vals].transpose
 p alist # => [[1, "a"], [2, "b"], [3, ["c"]]]
+#%since 3.4
+p Hash[alist]  # => {1 => "a", 2 => "b", 3 => ["c"]}
+#%else
 p Hash[alist]  # => {1=>"a", 2=>"b", 3=>["c"]}
+#%end
 ```
 
 (4) キーや値が配列の場合
 
 ```ruby
 alist = [[1,["a"]], [2,["b"]], [3,["c"]], [[4,5], ["a", "b"]]]
+#%since 3.4
+hash = Hash[alist] # => {1 => ["a"], 2 => ["b"], 3 => ["c"], [4, 5] => ["a", "b"]}
+#%else
 hash = Hash[alist] # => {1=>["a"], 2=>["b"], 3=>["c"], [4, 5]=>["a", "b"]}
+#%end
 ```
 
 #%until 3.4
@@ -226,7 +259,11 @@ p h[1]                  # => "foobar"
 p h[2]                  # => "foo"
 p h[2].object_id        # => 6126840
 
+#%since 3.4
+p h                     # => {1 => "foobar", 2 => "foo"}
+#%else
 p h                     # => {1=>"foobar", 2=>"foo"}
+#%end
 
 # 値が設定されていないときに(fetchのように)例外をあげるようにもできる
 h = Hash.new {|hash, key|
@@ -366,7 +403,11 @@ p my_hash.to_h.class  # => Hash
 
 ```ruby title="ブロック付きの例"
 hash = { "a" => 97, "b" => 98 }
+#%since 3.4
+p hash.to_h {|key, value| [key.upcase, value-32] } # => {"A" => 65, "B" => 66}
+#%else
 p hash.to_h {|key, value| [key.upcase, value-32] } # => {"A"=>65, "B"=>66}
+#%end
 ```
 
 - **SEE** [m:Enumerable#map]
@@ -410,7 +451,11 @@ puts({}.empty?) # => true
 
 ```ruby title="例"
 h = { "a" => 0, "b" => 100, "c" => 200, "d" => 300, "e" => 300 }
+#%since 3.4
+p h.invert   # => {0 => "a", 100 => "b", 200 => "c", 300 => "e"}
+#%else
 p h.invert   # => {0=>"a", 100=>"b", 200=>"c", 300=>"e"}
+#%end
 ```
 
 ### 参考
@@ -423,7 +468,11 @@ def safe_invert(orig_hash)
     orig_hash[key]
   end
 end
+#%since 3.4
+p safe_invert({"a"=>1, "b"=>1, "c"=>3}) # => {1 => ["a", "b"], 3 => ["c"]}
+#%else
 p safe_invert({"a"=>1, "b"=>1, "c"=>3}) # => {1=>["a", "b"], 3=>["c"]}
+#%end
 ```
 
 - **SEE** [m:Hash#key]
@@ -524,7 +573,11 @@ key に対して value を関連づけます。value を返します。
 h = {}
 
 h[:key] = "value"
-p h # =>{:key => "value"}
+#%since 3.4
+p h # =>{key: "value"}
+#%else
+p h # => {:key=>"value"}
+#%end
 ```
 
 - **SEE** [m:Hash#\[\]]
@@ -539,7 +592,11 @@ p h # =>{:key => "value"}
 ```ruby title="例"
 h = Hash.new("default value")
 h[:some] = "some"
+#%since 3.4
+p h # => {some: "some"}
+#%else
 p h # => {:some=>"some"}
+#%end
 
 h.clear
 
@@ -553,8 +610,13 @@ p h.default # => "default value"
 
 ```ruby title="例"
 hash = {a: 1, b: nil, c: 3}
+#%since 3.4
+p hash.compact  # => {a: 1, c: 3}
+p hash          # => {a: 1, b: nil, c: 3}
+#%else
 p hash.compact  # => {:a=>1, :c=>3}
 p hash          # => {:a=>1, :b=>nil, :c=>3}
+#%end
 ```
 
 - **SEE** [m:Hash#compact!], [m:Array#compact]
@@ -566,7 +628,11 @@ p hash          # => {:a=>1, :b=>nil, :c=>3}
 ```ruby title="例"
 hash = {a: 1, b: nil, c: 3}
 hash.compact!
+#%since 3.4
+p hash          # => {a: 1, c: 3}
+#%else
 p hash          # => {:a=>1, :c=>3}
+#%end
 p hash.compact! # =>  nil
 ```
 
@@ -681,11 +747,19 @@ foo = {1 => 'a', 2 => 'b'}
 bar = {2 => 'B', 3 => 'C'}
 
 foo.replace(bar)
+#%since 3.4
+p foo  # => {2 => "B", 3 => "C"}
+#%else
 p foo  # => {2=>"B", 3=>"C"}
+#%end
 
 zoo = {}
 zoo = bar.dup
+#%since 3.4
+p zoo  # => {2 => "B", 3 => "C"}
+#%else
 p zoo  # => {2=>"B", 3=>"C"}
+#%end
 
 class Foo
   def to_hash
@@ -695,7 +769,11 @@ end
 
 h = Hash.new
 h.replace(Foo.new) #暗黙の変換
+#%since 3.4
+p h # => {japan: "kyoto"}
+#%else
 p h # => {:japan=>"kyoto"}
+#%end
 ```
 
 - **SEE** [m:Hash#dup],[m:Hash#merge],[m:Object#to_hash]
@@ -745,7 +823,11 @@ p h # =>{}
 h = Hash.new{|hash, key| hash[key] ="default" }
 p h.default        # => nil
 p h.default(:some) # => "default"
+#%since 3.4
+p h                # => {some: "default"}
+#%else
 p h                # => {:some=>"default"}
+#%end
 
 h = Hash.new
 p h.default        # => nil
@@ -828,7 +910,11 @@ p h[15] # => "FizzBuzz"
 h.default_proc = nil
 p h[16] # => nil
 # default_proc が nil になったので `16=>16 が追加されていない`
+#%since 3.4
+p h     # => {1 => 1, 2 => 2, 3 => "Fizz", 5 => "Buzz", 15 => "FizzBuzz"}
+#%else
 p h     # => {1=>1, 2=>2, 3=>"Fizz", 5=>"Buzz", 15=>"FizzBuzz"}
+#%end
 ```
 
 - **SEE** [m:Hash#default_proc], [m:Hash#default]
@@ -848,12 +934,21 @@ h1 = {"have" => "have a","as" => "as a" }
 h2 = h1.dup
 
 h2["have"] = "has"
+#%since 3.4
+p h2 # => {"have" => "has", "as" => "as a"}
+p h1 # => {"have" => "have a", "as" => "as a"}
+
+h2["as"].upcase!
+p h2 # => {"have" => "has", "as" => "AS A"}
+p h1 # => {"have" => "have a", "as" => "AS A"}
+#%else
 p h2 # => {"have"=>"has", "as"=>"as a"}
 p h1 # => {"have"=>"have a", "as"=>"as a"}
 
 h2["as"].upcase!
 p h2 # => {"have"=>"has", "as"=>"AS A"}
 p h1 # => {"have"=>"have a", "as"=>"AS A"}
+#%end
 ```
 
 - **SEE** [m:Object#clone]
@@ -879,7 +974,11 @@ p h.delete(:ab) # => "some"
 p h.delete(:ef) # => nil
 p h.delete(:ef){|key|"#{key} Nothing"} # => "ef Nothing"
 
+#%since 3.4
+p h # => {cd: "all"}
+#%else
 p h # => {:cd=>"all"}
+#%end
 ```
 
 - **SEE** [m:Hash#delete_if]
@@ -896,7 +995,11 @@ selfを破壊的に変更したい場合はかわりに[m:Hash#delete_if]か[m:H
 ```ruby title="例"
 h = { 2 =>"8" ,4 =>"6" ,6 =>"4" ,8 =>"2" }
 
+#%since 3.4
+p h.reject{|key, value| key.to_i < value.to_i} # => {6 => "4", 8 => "2"}
+#%else
 p h.reject{|key, value| key.to_i < value.to_i} # => {6=>"4", 8=>"2"}
+#%end
 ```
 
 - **SEE** [m:Hash#delete_if],[m:Hash#delete],[m:Enumerable#reject]
@@ -913,8 +1016,13 @@ p h.reject{|key, value| key.to_i < value.to_i} # => {6=>"4", 8=>"2"}
 ```ruby title="例"
 h = { 2 => "8" ,4 => "6" ,6 => "4" ,8 => "2" }
 
-p h.delete_if{|key, value| key.to_i < value.to_i } # => { 6 => "4", 8 => "2" }
-p h.delete_if{|key, value| key.to_i < value.to_i } # => { 6 => "4", 8 => "2" }
+#%since 3.4
+p h.delete_if{|key, value| key.to_i < value.to_i } # => {6 => "4", 8 => "2"}
+p h.delete_if{|key, value| key.to_i < value.to_i } # => {6 => "4", 8 => "2"}
+#%else
+p h.delete_if{|key, value| key.to_i < value.to_i } # => {6=>"4", 8=>"2"}
+p h.delete_if{|key, value| key.to_i < value.to_i } # => {6=>"4", 8=>"2"}
+#%end
 ```
 
 - **SEE** [m:Hash#reject!],[m:Hash#reject],[m:Hash#delete]
@@ -932,8 +1040,13 @@ p h.delete_if{|key, value| key.to_i < value.to_i } # => { 6 => "4", 8 => "2" }
 ```ruby title="例"
 h = { 2 => "8" ,4 => "6" ,6 => "4" ,8 => "2" }
 
-p h.reject!{|key, value| key.to_i < value.to_i }   # => { 6 => "4", 8 => "2" }
-p h                                                # => { 6 => "4", 8 => "2" }
+#%since 3.4
+p h.reject!{|key, value| key.to_i < value.to_i }   # => {6 => "4", 8 => "2"}
+p h                                                # => {6 => "4", 8 => "2"}
+#%else
+p h.reject!{|key, value| key.to_i < value.to_i }   # => {6=>"4", 8=>"2"}
+p h                                                # => {6=>"4", 8=>"2"}
+#%end
 p h.reject!{|key, value| key.to_i < value.to_i }   # => nil
 ```
 
@@ -961,7 +1074,11 @@ each_pair は each のエイリアスです。
 # => [:a, 1]
 #   [:b, 2]
 
+#%since 3.4
+p({:a=>1, :b=>2}.each_pair)  # => #<Enumerator: {a: 1, b: 2}:each_pair>
+#%else
 p({:a=>1, :b=>2}.each_pair)  # => #<Enumerator: {:a=>1, :b=>2}:each_pair>
+#%end
 ```
 
 Ruby 3.0 から、ブロックには常に `[key, value]` という2要素の配列が1つの引数として
@@ -1000,7 +1117,11 @@ Ruby 2.7 までは動作していましたが、Ruby 3.0 以降は [c:ArgumentEr
 # => :a
 #   :b
 
+#%since 3.4
+p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {a: 1, b: 2}:each_key>
+#%else
 p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {:a=>1, :b=>2}:each_key>
+#%end
 ```
 
 - **SEE** [m:Hash#each_pair],[m:Hash#each_value]
@@ -1018,7 +1139,11 @@ p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {:a=>1, :b=>2}:each_key>
 # => 1
 #   2
 
+#%since 3.4
+p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {a: 1, b: 2}:each_value>
+#%else
 p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {:a=>1, :b=>2}:each_value>
+#%end
 ```
 
 - **SEE** [m:Hash#each_pair],[m:Hash#each_key]
@@ -1142,14 +1267,25 @@ othersがハッシュではない場合、othersのメソッドto_hashを使っ�
 h1 = { "a" => 100, "b" => 200 }
 h2 = { "b" => 246, "c" => 300 }
 h3 = { "b" => 357, "d" => 400 }
+#%since 3.4
+p h1.merge        # => {"a" => 100, "b" => 200}
+p h1.merge(h2)    # => {"a" => 100, "b" => 246, "c" => 300}
+p h1.merge(h2, h3)  # => {"a" => 100, "b" => 357, "c" => 300, "d" => 400}
+p h1.merge(h2) {|key, oldval, newval| newval - oldval}
+                  # => {"a" => 100, "b" => 46, "c" => 300}
+p h1.merge(h2, h3) {|key, oldval, newval| newval - oldval}
+                  # => {"a" => 100, "b" => 311, "c" => 300, "d" => 400}
+p h1              # => {"a" => 100, "b" => 200}
+#%else
 p h1.merge        # => {"a"=>100, "b"=>200}
 p h1.merge(h2)    # => {"a"=>100, "b"=>246, "c"=>300}
 p h1.merge(h2, h3)  # => {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
 p h1.merge(h2) {|key, oldval, newval| newval - oldval}
-                  # => {"a"=>100, "b"=>46,  "c"=>300}
+                  # => {"a"=>100, "b"=>46, "c"=>300}
 p h1.merge(h2, h3) {|key, oldval, newval| newval - oldval}
                   # => {"a"=>100, "b"=>311, "c"=>300, "d"=>400}
 p h1              # => {"a"=>100, "b"=>200}
+#%end
 ```
 
 ```ruby
@@ -1157,12 +1293,21 @@ foo = {1 => 'a', 2 => 'b', 3 => 'c'}
 bar = {2 => 'B', 3 => 'C', 4 => 'D'}
 
 p foo.merge(bar)
+#%since 3.4
+       # => {1 => "a", 2 => "B", 3 => "C", 4 => "D"}
+p foo  # => {1 => "a", 2 => "b", 3 => "c"}
+
+p foo.merge!(bar) {|key, foo_val, bar_val| foo_val + bar_val }
+       # => {1 => "a", 2 => "bB", 3 => "cC", 4 => "D"}
+p foo  # => {1 => "a", 2 => "bB", 3 => "cC", 4 => "D"}
+#%else
        # => {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
 p foo  # => {1=>"a", 2=>"b", 3=>"c"}
 
 p foo.merge!(bar) {|key, foo_val, bar_val| foo_val + bar_val }
        # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
 p foo  # => {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
+#%end
 ```
 
 ```ruby
@@ -1180,7 +1325,11 @@ h = {:Germany => 'Berlin',
      }
 
 # 暗黙の変換
+#%since 3.4
+p h.merge(Foo.new) # => {Germany: "Berlin", Australia: "Sydney", France: "Paris"}
+#%else
 p h.merge(Foo.new) # => {:Germany=>"Berlin", :Australia=>"Sydney", :France=>"Paris"}
+#%end
 ```
 
 - **SEE** [m:Hash#update],[m:Hash#replace]
@@ -1203,23 +1352,38 @@ othersがハッシュではない場合、othersのメソッドto_hashを使っ�
 
 ```ruby
 h1 = { "a" => 100, "b" => 200 }
+#%since 3.4
+p h1.merge!        # => {"a" => 100, "b" => 200}
+p h1               # => {"a" => 100, "b" => 200}
+#%else
 p h1.merge!        # => {"a"=>100, "b"=>200}
 p h1               # => {"a"=>100, "b"=>200}
+#%end
 ```
 
 ```ruby
 h1 = { "a" => 100, "b" => 200 }
 h2 = { "b" => 246, "c" => 300 }
+#%since 3.4
+p h1.merge!(h2)    # => {"a" => 100, "b" => 246, "c" => 300}
+p h1               # => {"a" => 100, "b" => 246, "c" => 300}
+#%else
 p h1.merge!(h2)    # => {"a"=>100, "b"=>246, "c"=>300}
 p h1               # => {"a"=>100, "b"=>246, "c"=>300}
+#%end
 ```
 
 ```ruby
 h1 = { "a" => 100, "b" => 200 }
 h2 = { "b" => 246, "c" => 300 }
 h3 = { "b" => 357, "d" => 400 }
+#%since 3.4
+p h1.merge!(h2, h3)  # => {"a" => 100, "b" => 357, "c" => 300, "d" => 400}
+p h1               # => {"a" => 100, "b" => 357, "c" => 300, "d" => 400}
+#%else
 p h1.merge!(h2, h3)  # => {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
 p h1               # => {"a"=>100, "b"=>357, "c"=>300, "d"=>400}
+#%end
 ```
 
 ```ruby
@@ -1227,19 +1391,32 @@ h1 = { "a" => 100, "b" => 200 }
 h2 = { "b" => 246, "c" => 300 }
 h3 = { "b" => 357, "d" => 400 }
 p h1.merge!(h2, h3) {|key, v1, v2| v1 }
+#%since 3.4
+                   # => {"a" => 100, "b" => 200, "c" => 300, "d" => 400}
+p h1               # => {"a" => 100, "b" => 200, "c" => 300, "d" => 400}
+#%else
                    # => {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
 p h1               # => {"a"=>100, "b"=>200, "c"=>300, "d"=>400}
+#%end
 ```
 
 ```ruby
 foo = {1 => 'a', 2 => 'b', 3 => 'c'}
 bar = {2 => 'B', 3 => 'C', 4 => 'D'}
 
+#%since 3.4
+p foo.update(bar) # => {1 => "a", 2 => "B", 3 => "C", 4 => "D"}
+p foo  # => {1 => "a", 2 => "B", 3 => "C", 4 => "D"}
+
+p foo.update(bar) {|key, foo_val, bar_val| foo_val + bar_val } # => {1 => "a", 2 => "BB", 3 => "CC", 4 => "DD"}
+p foo  # => {1 => "a", 2 => "BB", 3 => "CC", 4 => "DD"}
+#%else
 p foo.update(bar) # => {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
 p foo  # => {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
 
 p foo.update(bar) {|key, foo_val, bar_val| foo_val + bar_val } # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
 p foo  # => {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+#%end
 ```
 
 - **SEE** [m:Hash#merge],[m:Hash#replace]
@@ -1419,8 +1596,13 @@ key, value のペアについてブロックを評価し、真となるペアだ
 
 ```ruby
 h = { "a" => 100, "b" => 200, "c" => 300 }
+#%since 3.4
 p h.select {|k,v| k > "a"}  # => {"b" => 200, "c" => 300}
 p h.select {|k,v| v < 200}  # => {"a" => 100}
+#%else
+p h.select {|k,v| k > "a"}  # => {"b"=>200, "c"=>300}
+p h.select {|k,v| v < 200}  # => {"a"=>100}
+#%end
 ```
 
 - **SEE** [m:Hash#select!], [m:Hash#reject]
@@ -1430,10 +1612,19 @@ p h.select {|k,v| v < 200}  # => {"a" => 100}
 
 ハッシュの内容を人間に読みやすい文字列にして返します。
 
+#%since 3.4
+キーが [c:Symbol] の要素は `key: value` の形式で、それ以外の要素は `=>` の前後に空白を入れた `key => value` の形式で表示します。Ruby 3.3 までは、どちらのキーも空白を入れない `key=>value` の形式で表示していました。
+
 ```ruby title="例"
-h = { "c" => 300, "a" => 100, "d" => 400  }
-p h.inspect # => "{\"c\"=>300, \"a\"=>100, \"d\"=>400}"
+h = { "c" => 300, "a" => 100, "d" => 400, :e => 500 }
+p h.inspect # => "{\"c\" => 300, \"a\" => 100, \"d\" => 400, e: 500}"
 ```
+#%else
+```ruby title="例"
+h = { "c" => 300, "a" => 100, "d" => 400, :e => 500 }
+p h.inspect # => "{\"c\"=>300, \"a\"=>100, \"d\"=>400, :e=>500}"
+```
+#%end
 
 ### def keep_if -> Enumerator
 ### def keep_if {|key, value| ... } -> self
@@ -1451,10 +1642,17 @@ h2 = {}
 c = ("a".."g")
 c.each_with_index {|e, i| h2[i] = e }
 
+#%since 3.4
+p h2.keep_if  # => #<Enumerator: {0 => "a", 1 => "b", 2 => "c", 3 => "d", 4 => "e", 5 => "f", 6 => "g"}:keep_if>
+
+p h2.keep_if { |k, v| k % 3 == 0 }  # => {0 => "a", 3 => "d", 6 => "g"}
+p h2.keep_if { |k, v| true }      # => {0 => "a", 3 => "d", 6 => "g"}
+#%else
 p h2.keep_if  # => #<Enumerator: {0=>"a", 1=>"b", 2=>"c", 3=>"d", 4=>"e", 5=>"f", 6=>"g"}:keep_if>
 
 p h2.keep_if { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
 p h2.keep_if { |k, v| true }      # => {0=>"a", 3=>"d", 6=>"g"}
+#%end
 ```
 
 - **SEE** [m:Hash#select!], [m:Hash#select], [m:Hash#delete_if], [m:Hash#reject!]
@@ -1477,9 +1675,15 @@ h1 = {}
 c = ("a".."g")
 c.each_with_index {|e, i| h1[i] = e }
 
+#%since 3.4
+p h1.select!  # => #<Enumerator: {0 => "a", 1 => "b", 2 => "c", 3 => "d", 4 => "e", 5 => "f", 6 => "g"}:select!>
+
+p h1.select! { |k, v| k % 3 == 0 }  # => {0 => "a", 3 => "d", 6 => "g"}
+#%else
 p h1.select!  # => #<Enumerator: {0=>"a", 1=>"b", 2=>"c", 3=>"d", 4=>"e", 5=>"f", 6=>"g"}:select!>
 
 p h1.select! { |k, v| k % 3 == 0 }  # => {0=>"a", 3=>"d", 6=>"g"}
+#%end
 p h1.select! { |k, v| true }      # => nil
 ```
 
@@ -1538,11 +1742,19 @@ p h.transform_values!.with_index {|v, i| "#{v}.#{i}" }
 
 ```ruby title="例"
 h = { a: 1, b: 2, c: 3 }
+#%since 3.4
+p h.transform_keys {|k| k.to_s } # => {"a" => 1, "b" => 2, "c" => 3}
+p h.transform_keys(a: "a", d: "d") # => {"a" => 1, b: 2, c: 3}
+p h.transform_keys(&:to_s)       # => {"a" => 1, "b" => 2, "c" => 3}
+p h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
+                                 # => {"a.0" => 1, "b.1" => 2, "c.2" => 3}
+#%else
 p h.transform_keys {|k| k.to_s } # => {"a"=>1, "b"=>2, "c"=>3}
 p h.transform_keys(a: "a", d: "d") # => {"a"=>1, :b=>2, :c=>3}
 p h.transform_keys(&:to_s)       # => {"a"=>1, "b"=>2, "c"=>3}
 p h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
                                  # => {"a.0"=>1, "b.1"=>2, "c.2"=>3}
+#%end
 ```
 
 - **SEE** [m:Hash#transform_keys!]
@@ -1562,11 +1774,19 @@ p h.transform_keys.with_index {|k, i| "#{k}.#{i}" }
 
 ```ruby title="例"
 h = { a: 1, b: 2, c: 3 }
+#%since 3.4
+p h.transform_keys! {|k| k.to_s } # => {"a" => 1, "b" => 2, "c" => 3}
+p h.transform_keys!(&:to_sym)     # => {a: 1, b: 2, c: 3}
+p h.transform_keys!(a: "a", d: "d") # => {"a" => 1, b: 2, c: 3}
+p h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
+                                  # => {"a.0" => 1, "b.1" => 2, "c.2" => 3}
+#%else
 p h.transform_keys! {|k| k.to_s } # => {"a"=>1, "b"=>2, "c"=>3}
 p h.transform_keys!(&:to_sym)     # => {:a=>1, :b=>2, :c=>3}
 p h.transform_keys!(a: "a", d: "d") # => {"a"=>1, :b=>2, :c=>3}
 p h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
                                   # => {"a.0"=>1, "b.1"=>2, "c.2"=>3}
+#%end
 ```
 
 - **SEE** [m:Hash#transform_keys]
@@ -1579,9 +1799,15 @@ p h.transform_keys!.with_index {|k, i| "#{k}.#{i}" }
 
 ```ruby title="例"
 h = { a: 100, b: 200, c: 300 }
+#%since 3.4
+p h.slice(:a)         # => {a: 100}
+p h.slice(:c, :b)     # => {c: 300, b: 200}
+p h.slice(:b, :c, :d) # => {b: 200, c: 300}
+#%else
 p h.slice(:a)         # => {:a=>100}
 p h.slice(:c, :b)     # => {:c=>300, :b=>200}
 p h.slice(:b, :c, :d) # => {:b=>200, :c=>300}
+#%end
 ```
 
 - **SEE** [m:Hash#except], [m:ENV.slice]
@@ -1594,7 +1820,11 @@ p h.slice(:b, :c, :d) # => {:b=>200, :c=>300}
 
 ```ruby
 h = { a: 100, b: 200, c: 300 }
+#%since 3.4
+p h.except(:a) # => {b: 200, c: 300}
+#%else
 p h.except(:a) # => {:b=>200, :c=>300}
+#%end
 ```
 
 - **SEE** [m:Hash#slice], [m:ENV.except]

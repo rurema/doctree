@@ -111,7 +111,11 @@ p node.select!("//name")
 # => ["taro", "jiro"]
 
 p node.select!("/cat")
+#%since 3.4
+# => [[{"name" => "taro", "age" => 7}]]
+#%else
 # => [[{"name"=>"taro", "age"=>7}]]
+#%end
   
 __END__
 cat:

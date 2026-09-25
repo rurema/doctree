@@ -196,7 +196,11 @@ p DateTime.parse('2001-02-03T12:13:14Z').to_s
 ```ruby title="例"
 require 'date'
 p DateTime._strptime('2001-02-03T12:13:14Z')
+#%since 3.4
+# => {year: 2001, mon: 2, mday: 3, hour: 12, min: 13, sec: 14, zone: "Z", offset: 0}
+#%else
 # => {:year=>2001, :mon=>2, :mday=>3, :hour=>12, :min=>13, :sec=>14, :zone=>"Z", :offset=>0}
+#%end
 ```
 
 [m:DateTime.strptime] の内部で使用されています。

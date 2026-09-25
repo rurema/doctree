@@ -391,7 +391,11 @@ f("a", "b", "c", 2, 3, "foo", "bar", "baz", "x", "y", "z", k: 42, u: "unknown") 
   #   y: "y"
   #   z: "z"
   #   k: 42
+#%since 3.4
+  #   kwrest: {u: "unknown"}
+#%else
   #   kwrest: {:u=>"unknown"}
+#%end
   #   blk: #<Proc:0x007f7e7d8dd6c0 -:16>
 ```
 

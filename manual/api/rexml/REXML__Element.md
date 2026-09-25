@@ -183,7 +183,11 @@ self の文脈で定義されている名前空間の情報を返します。
 ```ruby
 require 'rexml/document'
 doc = REXML::Document.new("<a xmlns:x='1' xmlns:y='2'><b/><c xmlns:z='3'/></a>")
+#%since 3.4
+p doc.elements['//b'].namespaces # => {"x" => "1", "y" => "2"}
+#%else
 p doc.elements['//b'].namespaces # => {"x"=>"1", "y"=>"2"}
+#%end
 ```
 
 ### def namespace(prefix=nil) -> String

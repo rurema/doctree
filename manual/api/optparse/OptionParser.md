@@ -1104,7 +1104,11 @@ OptionParser.new do |opt|
   p opt.load("not_exist.txt") # => false
 end
 
+#%since 3.4
+p options # => {a: true, b: true}
+#%else
 p options # => {:a=>true, :b=>true}
+#%end
 ```
 
 ### def environment(env)    -> [String]
@@ -1127,7 +1131,11 @@ opts.on("-r", "--require LIBRARY"){|lib| config[:lib] = lib }
 # HOGE_OPT は hoge というプログラム名に対応した名前です
 ENV['HOGE_OPT'] = %q{--require lib1 'remain data'}
 p opts.environment('HOGE_OPT') # => ["remain data"]
+#%since 3.4
+p config                           # => {lib: "lib1"}
+#%else
 p config                           # => {:lib=>"lib1"}
+#%end
 ```
 
 ### def default_argv    -> [String]
@@ -1168,7 +1176,11 @@ p config          # => {}
 opts.default_argv = ["--require", "lib1"] # => ["--require", "lib"]
 p opts.default_argv # => ["--require", "param1"]
 opts.parse!
+#%since 3.4
+p config          # => {lib: "lib1"}
+#%else
 p config          # => {:lib=>"lib1"}
+#%end
 ```
 
 ### def getopts(argv, *opts)   -> Hash

@@ -127,7 +127,11 @@ p YAML.load(<<~EOS)
   regexp: !ruby/regexp /foo|bar/
   range: !ruby/range 1..10
 EOS
+#%since 3.4
+# => {"regexp" => /foo|bar/, "hash" => {"foo" => 1, "bar" => 2}, "array" => [1, 2, 3], "range" => 1..10}
+#%else
 # => {"regexp"=>/foo|bar/, "hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3], "range"=>1..10}
+#%end
 ```
 
 これらは tag:ruby.yaml.org,2002:array のように指定する事もできます。
@@ -139,7 +143,11 @@ p YAML.load(<<~EOS)
   array: !tag:ruby.yaml.org,2002:array [1, 2, 3]
   hash: !tag:ruby.yaml.org,2002:hash {foo: 1, bar: 2}
 EOS
+#%since 3.4
+# => {"hash" => {"foo" => 1, "bar" => 2}, "array" => [1, 2, 3]}
+#%else
 # => {"hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3]}
+#%end
 ```
 
 自分で定義したクラスなどは !ruby/object:<クラス名> を指定します。なお、読み込む場合には既にそのクラスが定義済みでないと読み込めません。

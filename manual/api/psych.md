@@ -142,8 +142,13 @@ end
 ```ruby title="例"
 require 'psych'
 
+#%since 3.4
+p Psych.load("---\n foo: bar")                       # => {"foo" => "bar"}
+p Psych.load("---\n foo: bar", symbolize_names: true)  # => {foo: "bar"}
+#%else
 p Psych.load("---\n foo: bar")                       # => {"foo"=>"bar"}
 p Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
+#%end
 ```
 
 ### def Psych.safe_load(yaml, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false) -> object
@@ -201,8 +206,13 @@ filename はパース中に発生した例外のメッセージに用います�
 ```ruby title="symbolize_names: true の例"
 require 'psych'
 
+#%since 3.4
+p Psych.safe_load("---\n foo: bar")                       # => {"foo" => "bar"}
+p Psych.safe_load("---\n foo: bar", symbolize_names: true)  # => {foo: "bar"}
+#%else
 p Psych.safe_load("---\n foo: bar")                       # => {"foo"=>"bar"}
 p Psych.safe_load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
+#%end
 ```
 
 キーワード引数 freeze に true を指定した場合は再帰的に
@@ -218,7 +228,11 @@ EOS
 
 yaml = Psych.load(data, freeze: true)
 p yaml
+#%since 3.4
+# => {"aaa" => {"bbb" => ["hoge"]}}
+#%else
 # => {"aaa"=>{"bbb"=>["hoge"]}}
+#%end
 p yaml.frozen?                        # = true
 p yaml["aaa"].frozen?                 # = true
 p yaml["aaa"]["bbb"].frozen?          # = true

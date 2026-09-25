@@ -679,10 +679,17 @@ p /^ugou.*?/i.inspect # => "/^ugou.*?/i"
 
 ```ruby title="例"
 p /(?<foo>.)(?<bar>.)/.named_captures
+#%since 3.4
+# => {"foo" => [1], "bar" => [2]}
+
+p /(?<foo>.)(?<foo>.)/.named_captures
+# => {"foo" => [1, 2]}
+#%else
 # => {"foo"=>[1], "bar"=>[2]}
 
 p /(?<foo>.)(?<foo>.)/.named_captures
 # => {"foo"=>[1, 2]}
+#%end
 
 # 名前付きキャプチャを持たないときは空の Hash を返します。
 p /(.)(.)/.named_captures

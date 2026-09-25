@@ -27,7 +27,11 @@ Ruby 1.8 までは同様の場面で [c:IndexError] が発生していました�
 h = {foo: 1}
 err = KeyError.new("Message", receiver: h, key: :bar)
 p err.message  # => "Message"
+#%since 3.4
+p err.receiver # => {foo: 1}
+#%else
 p err.receiver # => {:foo=>1}
+#%end
 p err.key      # => :bar
 ```
 

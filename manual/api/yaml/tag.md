@@ -18,6 +18,19 @@ tag で指定したタグ URI に　cls で指定したクラスを関連付け�
 
 タグ URI と、それが対応するクラスの一覧を返します。
 
+#%since 3.4
+```text title="例"
+require "pp"
+require "syck"
+require "yaml"
+pp YAML.tagged_classes
+# => {"tag:ruby.yaml.org,2002:struct" => Struct,
+"tag:yaml.org,2002:set" => YAML::Set,
+"tag:ruby.yaml.org,2002:sym" => Symbol,
+"tag:yaml.org,2002:omap" => YAML::Omap,
+...}
+```
+#%else
 ```text title="例"
 require "pp"
 require "syck"
@@ -29,3 +42,4 @@ pp YAML.tagged_classes
 "tag:yaml.org,2002:omap"=>YAML::Omap,
 ...}
 ```
+#%end

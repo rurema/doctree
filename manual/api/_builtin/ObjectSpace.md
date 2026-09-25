@@ -229,6 +229,10 @@ GC.start
 - **raise** `TypeError` -- 引数に [c:Hash] 以外を与えた場合、発生します。
 
 ```ruby title="例"
+#%since 3.4
+p ObjectSpace.count_objects # => {TOTAL: 10000, FREE: 3011, T_OBJECT: 6, T_CLASS: 404, ...}
+#%else
 p ObjectSpace.count_objects # => {:TOTAL=>10000, :FREE=>3011, :T_OBJECT=>6, :T_CLASS=>404, ...}
+#%end
 ```
 
