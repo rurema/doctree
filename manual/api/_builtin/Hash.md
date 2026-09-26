@@ -1614,17 +1614,16 @@ p h.select {|k,v| v < 200}  # => {"a"=>100}
 
 #%since 3.4
 キーが [c:Symbol] の要素は `key: value` の形式で、それ以外の要素は `=>` の前後に空白を入れた `key => value` の形式で表示します。Ruby 3.3 までは、どちらのキーも空白を入れない `key=>value` の形式で表示していました。
+#%end
 
 ```ruby title="例"
 h = { "c" => 300, "a" => 100, "d" => 400, :e => 500 }
+#%since 3.4
 p h.inspect # => "{\"c\" => 300, \"a\" => 100, \"d\" => 400, e: 500}"
-```
 #%else
-```ruby title="例"
-h = { "c" => 300, "a" => 100, "d" => 400, :e => 500 }
 p h.inspect # => "{\"c\"=>300, \"a\"=>100, \"d\"=>400, :e=>500}"
-```
 #%end
+```
 
 ### def keep_if -> Enumerator
 ### def keep_if {|key, value| ... } -> self

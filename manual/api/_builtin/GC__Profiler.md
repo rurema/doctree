@@ -134,41 +134,31 @@ p GC::Profiler.total_time # => 0.0011530000000000012
 GC のプロファイル情報を GC の発生ごとに [c:Hash] の配列
 (:GC_INVOKE_TIME が早いもの順)で返します。[c:GC::Profiler] が有効になっていない場合は nil を返します。
 
-#%since 3.4
 ```text title="例"
 GC::Profiler.enable
 GC.start
 GC::Profiler.raw_data
 # => [
   {
+#%since 3.4
      GC_TIME: 1.3000000000000858e-05,
      GC_INVOKE_TIME: 0.010634999999999999,
      HEAP_USE_SIZE: 289640,
      HEAP_TOTAL_SIZE: 588960,
      HEAP_TOTAL_OBJECTS: 14724,
      GC_IS_MARKED: false
-  },
-  # ...
-]
-```
 #%else
-```text title="例"
-GC::Profiler.enable
-GC.start
-GC::Profiler.raw_data
-# => [
-  {
      :GC_TIME=>1.3000000000000858e-05,
      :GC_INVOKE_TIME=>0.010634999999999999,
      :HEAP_USE_SIZE=>289640,
      :HEAP_TOTAL_SIZE=>588960,
      :HEAP_TOTAL_OBJECTS=>14724,
      :GC_IS_MARKED=>false
+#%end
   },
   # ...
 ]
 ```
-#%end
 
 各項目の意味を以下に示します。
 

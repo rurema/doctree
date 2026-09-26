@@ -162,19 +162,15 @@ DTDの属性リスト宣言をパースしたときに呼び出されるコー�
 
 という属性リスト宣言に対しては
 
+```text
+element_name: "a"
 #%since 3.4
-```text
-element_name: "a"
 attributes: {"att" => nil, "xyz" => "foobar"}
-raw_content: " \n<!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"
-```
 #%else
-```text
-element_name: "a"
 attributes: {"att"=>nil, "xyz"=>"foobar"}
+#%end
 raw_content: " \n<!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"
 ```
-#%end
 
 という引数が渡されます。
 

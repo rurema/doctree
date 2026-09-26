@@ -104,19 +104,15 @@ p params
 
 ↓
 
+```console
+ruby sample.rb -a foo bar -b baz
+# => ["foo", "bar", "baz"]
 #%since 3.4
-```console
-ruby sample.rb -a foo bar -b baz
-# => ["foo", "bar", "baz"]
      {a: true, b: true}
-```
 #%else
-```console
-ruby sample.rb -a foo bar -b baz
-# => ["foo", "bar", "baz"]
      {:a=>true, :b=>true}
-```
 #%end
+```
 
 明示的にコンテナへ格納する以外に、parse（及びparse!）メソッドの引数に
 :into オプションを指定することでハッシュへ自動的に値を格納できます。
@@ -138,19 +134,15 @@ p params
 
 ↓
 
+```console
+ruby sample.rb -a foo bar -b baz
+# => ["foo", "bar", "baz"]
 #%since 3.4
-```console
-ruby sample.rb -a foo bar -b baz
-# => ["foo", "bar", "baz"]
      {a: true, bbb: true}
-```
 #%else
-```console
-ruby sample.rb -a foo bar -b baz
-# => ["foo", "bar", "baz"]
      {:a=>true, :bbb=>true}
-```
 #%end
+```
 
 #### オプションの引数 {#optionarg}
 
@@ -396,17 +388,14 @@ p params
 
 この sample.rb を実行すると
 
+```console
+$ ruby sample.rb -a 1 --foo --bar xxx
 #%since 3.4
-```console
-$ ruby sample.rb -a 1 --foo --bar xxx
 {"a" => "1", "b" => nil, "foo" => true, "bar" => "xxx"}
-```
 #%else
-```console
-$ ruby sample.rb -a 1 --foo --bar xxx
 {"a"=>"1", "b"=>nil, "foo"=>true, "bar"=>"xxx"}
-```
 #%end
+```
 
 のようになります。
 

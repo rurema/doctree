@@ -19,9 +19,9 @@ Ruby 1.8.3 以降では変更できません。
 
 下記のオプションがあります。
 
-#%since 3.4
 ```text
 {
+#%since 3.4
  SortKeys: false,
  UseFold: false,
  AnchorFormat: "id%03d",
@@ -34,11 +34,7 @@ Ruby 1.8.3 以降では変更できません。
  BestWidth: 80,
  Version: "1.0",
  UseBlock: false
-}
-```
 #%else
-```text
-{
  :SortKeys=>false,
  :UseFold=>false,
  :AnchorFormat=>"id%03d",
@@ -51,6 +47,6 @@ Ruby 1.8.3 以降では変更できません。
  :BestWidth=>80,
  :Version=>"1.0",
  :UseBlock=>false
+#%end
 }
 ```
-#%end
