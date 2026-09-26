@@ -164,7 +164,11 @@ DTDの属性リスト宣言をパースしたときに呼び出されるコー�
 
 ```text
 element_name: "a"
+#%since 3.4
+attributes: {"att" => nil, "xyz" => "foobar"}
+#%else
 attributes: {"att"=>nil, "xyz"=>"foobar"}
+#%end
 raw_content: " \n<!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"
 ```
 

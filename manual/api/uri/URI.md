@@ -160,7 +160,11 @@ ary = URI.decode_www_form("a=1&a=2&b=3")
 p ary                 # => [['a', '1'], ['a', '2'], ['b', '3']]
 p ary.assoc('a').last # => '1'
 p ary.assoc('b').last # => '3'
+#%since 3.4
+p Hash[ary]           # => {"a" => "2", "b" => "3"}
+#%else
 p Hash[ary]           # => {"a"=>"2", "b"=>"3"}
+#%end
 ```
 
 - **param** `str` -- デコード対象の文字列
@@ -319,7 +323,11 @@ p URI.scheme_list['MS_SEARCH']                   # => URI::Generic
 ```ruby title="例"
 require 'uri'
 p URI.scheme_list
+#%since 3.4
 # => {"HTTPS" => URI::HTTPS, "LDAP" => URI::LDAP, "FILE" => URI::File, "FTP" => URI::FTP, "LDAPS" => URI::LDAPS, "MAILTO" => URI::MailTo, "WS" => URI::WS, "WSS" => URI::WSS, "HTTP" => URI::HTTP}
+#%else
+#=>{"HTTPS"=>URI::HTTPS, "LDAP"=>URI::LDAP, "FILE"=>URI::File, "FTP"=>URI::FTP, "LDAPS"=>URI::LDAPS, "MAILTO"=>URI::MailTo, "WS"=>URI::WS, "WSS"=>URI::WSS, "HTTP"=>URI::HTTP}
+#%end
 ```
 
 #%since 3.1

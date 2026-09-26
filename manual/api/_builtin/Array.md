@@ -1929,13 +1929,21 @@ p [1, 2, 3, 4].inspect # => "[1, 2, 3, 4]"
 self を [key, value] のペアの配列として解析した結果を [c:Hash] にして返します。
 
 ```ruby title="例"
-p [[:foo, :bar], [1, 2]].to_h # => {:foo => :bar, 1 => 2}
+#%since 3.4
+p [[:foo, :bar], [1, 2]].to_h # => {foo: :bar, 1 => 2}
+#%else
+p [[:foo, :bar], [1, 2]].to_h # => {:foo=>:bar, 1=>2}
+#%end
 ```
 
 ブロックを指定すると配列の各要素でブロックを呼び出し、その結果をペアとして使います。
 
 ```ruby title="ブロック付きの例"
+#%since 3.4
+p ["foo", "bar"].to_h {|s| [s.ord, s]} # => {102 => "foo", 98 => "bar"}
+#%else
 p ["foo", "bar"].to_h {|s| [s.ord, s]} # => {102=>"foo", 98=>"bar"}
+#%end
 ```
 
 ### def transpose    -> Array

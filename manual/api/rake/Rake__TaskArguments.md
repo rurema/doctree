@@ -85,7 +85,11 @@ end
 task default: :test_rake_app
 task :test_rake_app do
   arguments = Rake::TaskArguments.new(["name1", "name2"], ["value1", "value2"])
+#%since 3.4
+  p arguments.to_hash # => {name1: "value1", name2: "value2"}
+#%else
   p arguments.to_hash # => {:name1=>"value1", :name2=>"value2"}
+#%end
 end
 ```
 
@@ -101,9 +105,15 @@ end
 task default: :test_rake_app
 task :test_rake_app do
   arguments = Rake::TaskArguments.new(["name1", "name2"], ["value1", "value2"])
+#%since 3.4
+  p arguments.to_hash                                      # => {name1: "value1", name2: "value2"}
+  p arguments.with_defaults({ default_key: "default_value"}) # => {default_key: "default_value", name1: "value1", name2: "value2"}
+  p arguments.to_hash                                      # => {default_key: "default_value", name1: "value1", name2: "value2"}
+#%else
   p arguments.to_hash                                      # => {:name1=>"value1", :name2=>"value2"}
   p arguments.with_defaults({ default_key: "default_value"}) # => {:default_key=>"default_value", :name1=>"value1", :name2=>"value2"}
   p arguments.to_hash                                      # => {:default_key=>"default_value", :name1=>"value1", :name2=>"value2"}
+#%end
 end
 ```
 

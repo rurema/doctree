@@ -26,9 +26,15 @@ end
 #     @imported=[],
 #     @last_description=nil,
 #     @loaders=
+#%since 3.4
+#      {".rb" => #<Rake::DefaultLoader:0x31b0c18>,
+#       ".rf" => #<Rake::DefaultLoader:0x31b0b88>,
+#       ".rake" => #<Rake::DefaultLoader:0x31b0b10>},
+#%else
 #      {".rb"=>#<Rake::DefaultLoader:0x31b0c18>,
 #       ".rf"=>#<Rake::DefaultLoader:0x31b0b88>,
 #       ".rake"=>#<Rake::DefaultLoader:0x31b0b10>},
+#%end
 #     @name="rake",
 #     @options=#<OpenStruct rakelib=["rakelib"], trace_output=#<IO:<STDERR>>>,
 #     @original_dir="/path/to/dir",
@@ -38,8 +44,13 @@ end
 #     @rules=[],
 #     @scope=LL(),
 #     @tasks=
+#%since 3.4
+#      {"default" => <Rake::Task default => [test_rake_app]>,
+#       "test_rake_app" => <Rake::Task test_rake_app => []>},
+#%else
 #      {"default"=><Rake::Task default => [test_rake_app]>,
 #       "test_rake_app"=><Rake::Task test_rake_app => []>},
+#%end
 #     @terminal_columns=0,
 #     @top_level_tasks=["default"],
 #     @tty_output=false>
@@ -69,9 +80,15 @@ end
 #     @imported=[],
 #     @last_description=nil,
 #     @loaders=
+#%since 3.4
+#      {".rb" => #<Rake::DefaultLoader:0x00005624e6c30bc0>,
+#       ".rf" => #<Rake::DefaultLoader:0x00005624e6c30b48>,
+#       ".rake" => #<Rake::DefaultLoader:0x00005624e6c30a80>},
+#%else
 #      {".rb"=>#<Rake::DefaultLoader:0x00005624e6c30bc0>,
 #       ".rf"=>#<Rake::DefaultLoader:0x00005624e6c30b48>,
 #       ".rake"=>#<Rake::DefaultLoader:0x00005624e6c30a80>},
+#%end
 #     @name="rake",
 #     @options=
 #      #<OpenStruct always_multitask=false, backtrace=false, build_all=false, dryrun=false, ignore_deprecate=false, ignore_system=false, job_stats=false, load_system=false, nosearch=false, rakelib=["rakelib"], show_all_tasks=false, show_prereqs=false, show_task_pattern=nil, show_tasks=nil, silent=false, suppress_backtrace_pattern=nil, thread_pool_size=20, trace=false, trace_output=#<IO:<STDERR>>, trace_rules=false>,

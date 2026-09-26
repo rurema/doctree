@@ -98,10 +98,17 @@ URI.open('http://www.ruby-lang.org/') {|f|
 require 'open-uri'
 URI.open('http://example.com/') {|f|
   p f.meta
+#%since 3.4
+  # => {"date" => "Sun, 04 May 2008 11:26:40 GMT",
+  #    "content-type" => "text/html;charset=utf-8",
+  #    "server" => "Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
+  #    "transfer-encoding" => "chunked"}
+#%else
   # => {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
   #    "content-type"=>"text/html;charset=utf-8",
   #    "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
   #    "transfer-encoding"=>"chunked"}
+#%end
 }
 ```
 

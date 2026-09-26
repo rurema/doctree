@@ -87,16 +87,27 @@ pull は [c:REXML::Parsers::PullEvent] オブジェクトを返します。
   # >> elementdecl: ["<!ELEMENT root (a+)"]
   # >> elementdecl: ["<!ELEMENT a"]
   # >> entitydecl: ["bar", "barbarbarbar"]
+#%since 3.4
+  # >> attlistdecl: ["a", {"att" => nil, "xyz" => "foobar"}, " \n  <!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"]
+#%else
   # >> attlistdecl: ["a", {"att"=>nil, "xyz"=>"foobar"}, " \n  <!ATTLIST a att CDATA #REQUIRED xyz CDATA \"foobar\">"]
+#%end
   # >> notationdecl: ["foobar", "SYSTEM", nil, "http://example.org/foobar.dtd"]
   # >> entitydecl: ["HTMLsymbol", "PUBLIC", "-//W3C//ENTITIES Symbols for XHTML//EN", "xhtml-symbol.ent", "%"]
   # >> externalentity: ["%HTMLsymbol;"]
   # >> end_doctype: []
   # >> text: ["\n", "\n"]
+#%since 3.4
+  # >> start_element: ["root", {"xmlns:foo" => "http://example.org/foo", "xmlns:bar" => "http://example.org/bar"}]
+  # >> cdata: ["cdata is here"]
+  # >> text: ["\n  ", "\n  "]
+  # >> start_element: ["a", {"foo:att" => "1", "bar:att" => "2", "att" => "&lt;"}]
+#%else
   # >> start_element: ["root", {"xmlns:foo"=>"http://example.org/foo", "xmlns:bar"=>"http://example.org/bar"}]
   # >> cdata: ["cdata is here"]
   # >> text: ["\n  ", "\n  "]
   # >> start_element: ["a", {"foo:att"=>"1", "bar:att"=>"2", "att"=>"&lt;"}]
+#%end
   # >> end_element: ["a"]
   # >> text: ["\n  &amp;&amp; ", "\n  && "]
   # >> comment: [" comment here"]

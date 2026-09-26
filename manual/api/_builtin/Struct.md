@@ -77,11 +77,19 @@ Point3.new(x: 1, y: 2, z: 3) # ~> ArgumentError: unknown keywords: z
 
 Point4 = Struct.new(:x, :y, keyword_init: false)
 p Point4.new(1, 2)           # => #<struct Point4 x=1, y=2>
+#%since 3.4
+p Point4.new(x: 1, y: 2)     # => #<struct Point4 x={x: 1, y: 2}, y=nil>
+                             # これは Point4.new({x: 1, y: 2}) とみなされていることに注意
+p Point4.new(x: 1)           # => #<struct Point4 x={x: 1}, y=nil>
+p Point4.new(y: 2)           # => #<struct Point4 x={y: 2}, y=nil>
+p Point4.new(x: 1, y: 2, z: 3) # => #<struct Point4 x={x: 1, y: 2, z: 3}, y=nil>
+#%else
 p Point4.new(x: 1, y: 2)     # => #<struct Point4 x={:x=>1, :y=>2}, y=nil>
                              # これは Point4.new({x: 1, y: 2}) とみなされていることに注意
 p Point4.new(x: 1)           # => #<struct Point4 x={:x=>1}, y=nil>
 p Point4.new(y: 2)           # => #<struct Point4 x={:y=>2}, y=nil>
 p Point4.new(x: 1, y: 2, z: 3) # => #<struct Point4 x={:x=>1, :y=>2, :z=>3}, y=nil>
+#%end
 ```
 
 #%else
@@ -344,11 +352,19 @@ self のメンバの名前と値の組を [c:Hash] で返します。
 Customer = Struct.new(:name, :address, :zip)
 joe = Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345)
 h = joe.deconstruct_keys([:zip, :address])
+#%since 3.4
+p h # => {zip: 12345, address: "123 Maple, Anytown NC"}
+#%else
 p h # => {:zip=>12345, :address=>"123 Maple, Anytown NC"}
+#%end
 
 # 引数が nil の場合は全てのメンバを返します。
 h = joe.deconstruct_keys(nil)
+#%since 3.4
+p h # => {name: "Joseph Smith, Jr.", address: "123 Maple, Anytown NC", zip: 12345}
+#%else
 p h # => {:name=>"Joseph Smith, Jr.", :address=>"123 Maple, Anytown NC", :zip=>12345}
+#%end
 ```
 
 #%include(Struct.attention)
@@ -494,7 +510,11 @@ self のメンバ名([c:Symbol])と値の組を [c:Hash] にして返します�
 ```ruby title="例"
 Customer = Struct.new(:name, :address, :zip)
 p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
+#%since 3.4
+# => {name: "Joe Smith", address: "123 Maple, Anytown NC", zip: 12345}
+#%else
 # => {:name=>"Joe Smith", :address=>"123 Maple, Anytown NC", :zip=>12345}
+#%end
 ```
 
 ブロックを指定すると各ペアでブロックを呼び出し、その結果をペアとして使います。
@@ -503,7 +523,11 @@ p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
 Customer = Struct.new(:name, :address, :zip)
 p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value|
   [member, value*2]
+#%since 3.4
+} # => {name: "Joe SmithJoe Smith", address: "123 Maple, Anytown NC123 Maple, Anytown NC", zip: 24690}
+#%else
 } # => {:name=>"Joe SmithJoe Smith", :address=>"123 Maple, Anytown NC123 Maple, Anytown NC", :zip=>24690}
+#%end
 ```
 
 #%include(Struct.attention)

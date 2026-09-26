@@ -12,7 +12,11 @@ UNIX のシグナル関連の操作を行うモジュールです。
 シグナル名とシグナル番号を対応づけた [c:Hash] オブジェクトを返します。
 
 ```ruby title="例"
+#%since 3.4
+p Signal.list   # => {"WINCH" => 28, "PROF" => 27, ...}
+#%else
 p Signal.list   # => {"WINCH"=>28, "PROF"=>27, ...}
+#%end
 ```
 
 - **SEE** [m:Signal?.signame]

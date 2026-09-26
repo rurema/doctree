@@ -857,6 +857,32 @@ require 'net/ftp'
 Net::FTP.open("ftp.example.org") do |ftp|
   ftp.login("anonymous", "foobar@example.com")
   p ftp.mlsd("/")
+#%since 3.4
+  # =>
+  #  [#<Net::FTP::MLSxEntry:0x00558fbfa379c0
+  #    @facts=
+  #    {"modify" => 2014-08-25 16:44:41 UTC,
+  #    "perm" => "fle",
+  #    "type" => "cdir",
+  #    "unique" => "801U1FE8E6",
+  #    "unix.group" => 1042,
+  #    "unix.mode" => 493,
+  #    "unix.owner" => 106},
+  #    @pathname => ".",
+  #  #<Net::FTP::MLSxEntry:0x00558fbfa33e10
+  #   @facts=
+  #   {"modify" => 2004-12-22 08:56:36 UTC,
+  #   "perm" => "adfr",
+  #   "size" => 1128,
+  #   "type" => "file",
+  #   "unique" => "801U1FEF97",
+  #   "unix.group" => 0,
+  #   "unix.mode" => 420,
+  #   "unix.owner" => 106},
+  #   @pathname="README.txt">,
+  #      :
+  #  ]
+#%else
   # =>
   #  [#<Net::FTP::MLSxEntry:0x00558fbfa379c0
   #    @facts=
@@ -881,6 +907,7 @@ Net::FTP.open("ftp.example.org") do |ftp|
   #   @pathname="README.txt">,
   #      :
   #  ]
+#%end
 end
 ```
 

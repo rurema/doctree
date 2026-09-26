@@ -24,8 +24,13 @@ JSON
 hash = { a: 1, b: 2, c: 3 }
 
 p JSON[string].class                 # => Hash
+#%since 3.4
+p JSON[string]                       # => {"a" => 1, "b" => 2, "c" => 3}
+p JSON[string, symbolize_names: true]  # => {a: 1, b: 2, c: 3}
+#%else
 p JSON[string]                       # => {"a"=>1, "b"=>2, "c"=>3}
 p JSON[string, symbolize_names: true]  # => {:a=>1, :b=>2, :c=>3}
+#%end
 p JSON[hash].class                   # => String
 p JSON[hash]                         # => "{\"a\":1,\"b\":2,\"c\":3}"
 ```
@@ -381,8 +386,13 @@ str=<<JSON
 { "a":1, "b":2, "c":3 }
 JSON
   
+#%since 3.4
+p JSON.load(str) # => {"a" => 1, "b" => 2, "c" => 3}
+p JSON.load(str, proc{|v| p v }) # => {"a" => 1, "b" => 2, "c" => 3}
+#%else
 p JSON.load(str) # => {"a"=>1, "b"=>2, "c"=>3}
 p JSON.load(str, proc{|v| p v }) # => {"a"=>1, "b"=>2, "c"=>3}
+#%end
 # 以下が表示される
 # "a"
 # 1
@@ -390,7 +400,11 @@ p JSON.load(str, proc{|v| p v }) # => {"a"=>1, "b"=>2, "c"=>3}
 # 2
 # "c"
 # 3
+#%since 3.4
+# {"a" => 1, "b" => 2, "c" => 3}
+#%else
 # {"a"=>1, "b"=>2, "c"=>3}
+#%end
 ```
 
 - **param** `source` -- JSON 形式の文字列を指定します。他には、to_str, to_io, read メソッドを持つオブジェクトも指定可能です。
@@ -463,10 +477,17 @@ filespec で指定した JSON 形式のファイルを Ruby オブジェクト�
   require "json"
 
   JSON.parse('[1,2,{"name":"tanaka","age":19}]')
+#%since 3.4
+  # => [1, 2, {"name" => "tanaka", "age" => 19}]
+
+  JSON.parse('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
+  # => [1, 2, {name: "tanaka", age: 19}]
+#%else
   # => [1, 2, {"name"=>"tanaka", "age"=>19}]
 
   JSON.parse('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
   # => [1, 2, {:name=>"tanaka", :age=>19}]
+#%end
   ```
 
 - **SEE** [m:JSON::Parser#parse]
@@ -500,10 +521,17 @@ filespec で指定した JSON 形式のファイルを Ruby オブジェクト�
 
   json_text = "[1,2,{\"name\":\"tanaka\",\"age\":19}, NaN]"
   JSON.parse!(json_text)
+#%since 3.4
+  # => [1, 2, {"name" => "tanaka", "age" => 19}, NaN]
+
+  JSON.parse!(json_text, symbolize_names: true)
+  # => [1, 2, {name: "tanaka", age: 19}, NaN]
+#%else
   # => [1, 2, {"name"=>"tanaka", "age"=>19}, NaN]
 
   JSON.parse!(json_text, symbolize_names: true)
   # => [1, 2, {:name=>"tanaka", :age=>19}, NaN]
+#%end
 
   JSON.parse(json_text) # => unexpected token at 'NaN]' (JSON::ParserError)
   ```

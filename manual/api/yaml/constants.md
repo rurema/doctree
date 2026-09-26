@@ -21,6 +21,20 @@ Ruby 1.8.3 以降では変更できません。
 
 ```text
 {
+#%since 3.4
+ SortKeys: false,
+ UseFold: false,
+ AnchorFormat: "id%03d",
+ Encoding: :None,
+ Indent: 2,
+ ExplicitTypes: false,
+ UseHeader: false,
+ WidthType: "absolute",
+ UseVersion: false,
+ BestWidth: 80,
+ Version: "1.0",
+ UseBlock: false
+#%else
  :SortKeys=>false,
  :UseFold=>false,
  :AnchorFormat=>"id%03d",
@@ -33,5 +47,6 @@ Ruby 1.8.3 以降では変更できません。
  :BestWidth=>80,
  :Version=>"1.0",
  :UseBlock=>false
+#%end
 }
 ```

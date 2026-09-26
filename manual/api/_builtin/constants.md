@@ -316,6 +316,16 @@ SCRIPT_LINES__ = {}
 require 'English'
 pp SCRIPT_LINES__
 
+#%since 3.4
+# => {"/usr/local/lib/ruby/1.6/English.rb" =>
+#     ["alias $ERROR_INFO              $!\n",
+#      "alias $ERROR_POSITION          $@\n",
+#      "alias $LOADED_FEATURES         $\"\n",
+#               :
+#               :
+#      "alias $POSTMATCH               $'\n",
+#      "alias $LAST_PAREN_MATCH        $+\n"]}
+#%else
 # => {"/usr/local/lib/ruby/1.6/English.rb"=>
 #     ["alias $ERROR_INFO              $!\n",
 #      "alias $ERROR_POSITION          $@\n",
@@ -324,4 +334,5 @@ pp SCRIPT_LINES__
 #               :
 #      "alias $POSTMATCH               $'\n",
 #      "alias $LAST_PAREN_MATCH        $+\n"]}
+#%end
 ```

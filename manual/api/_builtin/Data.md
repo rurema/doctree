@@ -283,8 +283,13 @@ self のメンバの名前と値の組を Hash で返します。
 Measure = Data.define(:amount, :unit)
 
 distance = Measure.new(10, 'km')
+#%since 3.4
+p distance.deconstruct_keys(nil)     # => {amount: 10, unit: "km"}
+p distance.deconstruct_keys([:amount]) # => {amount: 10}
+#%else
 p distance.deconstruct_keys(nil)     # => {:amount=>10, :unit=>"km"}
 p distance.deconstruct_keys([:amount]) # => {:amount=>10}
+#%end
 ```
 
 このメソッドは以下のようにパターンマッチで利用されます。
@@ -387,7 +392,11 @@ self のメンバ名([c:Symbol])と値の組を [c:Hash] にして返します�
 ```ruby title="例"
 Customer = Data.define(:name, :address, :zip)
 p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
+#%since 3.4
+# => {name: "Joe Smith", address: "123 Maple, Anytown NC", zip: 12345}
+#%else
 # => {:name=>"Joe Smith", :address=>"123 Maple, Anytown NC", :zip=>12345}
+#%end
 ```
 
 ブロックを指定すると各ペアでブロックを呼び出し、その結果をペアとして使います。
@@ -396,7 +405,11 @@ p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h
 Customer = Data.define(:name, :address, :zip)
 p Customer.new("Joe Smith", "123 Maple, Anytown NC", 12345).to_h {|member, value|
   [member, value*2]
+#%since 3.4
+} # => {name: "Joe SmithJoe Smith", address: "123 Maple, Anytown NC123 Maple, Anytown NC", zip: 24690}
+#%else
 } # => {:name=>"Joe SmithJoe Smith", :address=>"123 Maple, Anytown NC123 Maple, Anytown NC", :zip=>24690}
+#%end
 ```
 
 #%include(Data.attention)

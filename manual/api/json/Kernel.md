@@ -59,10 +59,17 @@ p jj([1,2,{"name" => "tanaka","age" => 19}])
 require "json"
 
 p JSON('[1,2,{"name":"tanaka","age":19}]')
+#%since 3.4
+# => [1, 2, {"name" => "tanaka", "age" => 19}]
+
+p JSON('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
+# => [1, 2, {name: "tanaka", age: 19}]
+#%else
 # => [1, 2, {"name"=>"tanaka", "age"=>19}]
 
 p JSON('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
 # => [1, 2, {:name=>"tanaka", :age=>19}]
+#%end
 ```
 
 - **SEE** [m:JSON?.parse], [m:JSON?.generate]

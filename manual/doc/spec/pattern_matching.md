@@ -369,7 +369,11 @@ in a:, **rest
 else
   "not matched"
 end
+#%since 3.4
+# => "matched: 1, {b: 2, c: 3}"
+#%else
 # => "matched: 1, {:b=>2, :c=>3}"
+#%end
 ```
 
 #%# Binding to variables currently does NOT work for alternative patterns joined with <code>|</code>:

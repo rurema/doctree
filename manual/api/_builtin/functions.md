@@ -2687,7 +2687,11 @@ p Rational(0.3)        # => (5404319552844595/18014398509481984)
 ```ruby title="例"
 p Hash([])        # => {}
 p Hash(nil)       # => {}
-p Hash(key: :value) # => {:key => :value}
+#%since 3.4
+p Hash(key: :value) # => {key: :value}
+#%else
+p Hash(key: :value) # => {:key=>:value}
+#%end
 Hash([1, 2, 3])   # ~> TypeError
 ```
 

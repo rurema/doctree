@@ -130,5 +130,9 @@ p params
 ```console
 # 実行結果
 $ ruby t.rb -b 1 --foo  --bar xxx -- -a
+#%since 3.4
+{"bufsize" => "1024", "a" => false, "b" => "1", "foo" => true, "bar" => "xxx"}  # "a" => false であることに注意。
+#%else
 {"bufsize"=>"1024", "a"=>false, "b"=>"1", "foo"=>true, "bar"=>"xxx"}  # "a"=>false であることに注意。
+#%end
 ```

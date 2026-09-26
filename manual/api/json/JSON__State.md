@@ -461,6 +461,18 @@ require "pp"
 json_state = JSON::State.new
 pp json_state.to_h
 
+#%since 3.4
+# => {indent: "",
+#     space: "",
+#     space_before: "",
+#     object_nl: "",
+#     array_nl: "",
+#     allow_nan: false,
+#     ascii_only: false,
+#     max_nesting: 100,
+#     depth: 0,
+#     buffer_initial_length: 1024}
+#%else
 # => {:indent=>"",
 #     :space=>"",
 #     :space_before=>"",
@@ -471,6 +483,7 @@ pp json_state.to_h
 #     :max_nesting=>100,
 #     :depth=>0,
 #     :buffer_initial_length=>1024}
+#%end
 ```
 
 ### def ascii_only? -> bool

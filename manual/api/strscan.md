@@ -1135,7 +1135,11 @@ require 'strscan'
 s = StringScanner.new('Fri Dec 12 1975 14:39')
 pattern = /(?<wday>\w+) (?<month>\w+) (?<day>\d+) /
 s.match?(pattern)
+#%since 3.4
 p s.named_captures     # => {"wday" => "Fri", "month" => "Dec", "day" => "12"}
+#%else
+p s.named_captures     # => {"wday"=>"Fri", "month"=>"Dec", "day"=>"12"}
+#%end
 
 s.match?(/(\d+)/)
 p s.named_captures     # => {}
@@ -1147,7 +1151,11 @@ require 'strscan'
 s = StringScanner.new('nope')
 pattern = /(?<wday>\w+) (?<month>\w+) (?<day>\d+) /
 p s.match?(pattern)     # => nil
+#%since 3.4
 p s.named_captures      # => {"wday" => nil, "month" => nil, "day" => nil}
+#%else
+p s.named_captures      # => {"wday"=>nil, "month"=>nil, "day"=>nil}
+#%end
 ```
 
 - **SEE** [m:StringScanner#\[\]]

@@ -23,9 +23,16 @@ require "pp"
 require "syck"
 require "yaml"
 pp YAML.tagged_classes
+#%since 3.4
+# => {"tag:ruby.yaml.org,2002:struct" => Struct,
+"tag:yaml.org,2002:set" => YAML::Set,
+"tag:ruby.yaml.org,2002:sym" => Symbol,
+"tag:yaml.org,2002:omap" => YAML::Omap,
+#%else
 # => {"tag:ruby.yaml.org,2002:struct"=>Struct,
 "tag:yaml.org,2002:set"=>YAML::Set,
 "tag:ruby.yaml.org,2002:sym"=>Symbol,
 "tag:yaml.org,2002:omap"=>YAML::Omap,
+#%end
 ...}
 ```

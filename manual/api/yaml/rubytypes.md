@@ -345,7 +345,11 @@ s = <<EOS
   - 2001-07-23
 EOS
 p s.is_complex_yaml? # => 2
+#%since 3.4
+p YAML.load(s) # => {["Detroit Tigers", "Chicago cubs"] => [#<Date: 4904227/2,0,2299161>]}
+#%else
 p YAML.load(s) # => {["Detroit Tigers", "Chicago cubs"]=>[#<Date: 4904227/2,0,2299161>]}
+#%end
 ```
 
 ### def is_binary_data? -> true | nil

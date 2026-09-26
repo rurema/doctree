@@ -75,10 +75,17 @@ EOT
   
 ys = YAML.load_stream(str1)
 p ys.documents
+#%since 3.4
+# => [#<YAML::DomainType:0x2b07af0 @value={"name" => "pochi"}, @type_id="Dog", @domain="ruby.yaml.org,2002">]
+ys.add(Dog.new("tama"))
+p ys.documents
+# => [#<YAML::DomainType:0x2b07af0 @value={"name" => "pochi"}, @type_id="Dog", @domain="ruby.yaml.org,2002">, #<Dog:0x2b079b0 @name="tama">]
+#%else
 # => [#<YAML::DomainType:0x2b07af0 @value={"name"=>"pochi"}, @type_id="Dog", @domain="ruby.yaml.org,2002">]
 ys.add(Dog.new("tama"))
 p ys.documents
 # => [#<YAML::DomainType:0x2b07af0 @value={"name"=>"pochi"}, @type_id="Dog", @domain="ruby.yaml.org,2002">, #<Dog:0x2b079b0 @name="tama">]
+#%end
 ```
 
 ### def edit(doc_num, doc) -> ()
@@ -160,9 +167,15 @@ EOT
   
 ys = YAML.load_stream(str1)
 p ys.documents.pop
+#%since 3.4
+# => {age: 17, color: "white"}
+p ys.documents.pop
+# => #<YAML::DomainType:0x2b07e24 @type_id="Dog", @domain="ruby.yaml.org,2002", @value={"name" => "pochi"}>
+#%else
 # => {:age=>17, :color=>"white"}
 p ys.documents.pop
 # => #<YAML::DomainType:0x2b07e24 @type_id="Dog", @domain="ruby.yaml.org,2002", @value={"name"=>"pochi"}>
+#%end
 p ys.documents.pop
 # => nil
 ```

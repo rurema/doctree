@@ -429,7 +429,11 @@ class Foo
 end
 
 it = Foo.new
+#%since 3.4
+p({:as => 12}.merge(it)) # => {"as" => 24, as: 12}
+#%else
 p({:as => 12}.merge(it)) # => {"as"=>24, :as=>12}
+#%end
 ```
 
 ### def to_int -> Integer

@@ -552,7 +552,11 @@ STATUS コマンドを送り、mailbox のステータスを得ます。
 
 ```ruby title="例"
 p imap.status("inbox", ["MESSAGES", "RECENT"])
+#%since 3.4
+# => {"RECENT" => 0, "MESSAGES" => 44}
+#%else
 # => {"RECENT"=>0, "MESSAGES"=>44}
+#%end
 ```
 
 - **param** `mailbox` -- 問い合わせ対象のメールボックス(文字列)
@@ -666,9 +670,15 @@ attr には取得するアトリビュートを文字列の配列で渡してく
 
 ```ruby title="例"
 p imap.fetch(6..8, "UID")
+#%since 3.4
+# => [#<Net::IMAP::FetchData seqno=6, attr={"UID" => 98}>, #<Net::IMAP::FetchData seqno=7, attr={"UID" => 99}>, #<Net::IMAP::FetchData seqno=8, attr={"UID" => 100}>]
+p imap.fetch(6, "BODY[HEADER.FIELDS (SUBJECT)]")
+# => [#<Net::IMAP::FetchData seqno=6, attr={"BODY[HEADER.FIELDS (SUBJECT)]" => "Subject: test\r\n\r\n"}>]
+#%else
 # => [#<Net::IMAP::FetchData seqno=6, attr={"UID"=>98}>, #<Net::IMAP::FetchData seqno=7, attr={"UID"=>99}>, #<Net::IMAP::FetchData seqno=8, attr={"UID"=>100}>]
 p imap.fetch(6, "BODY[HEADER.FIELDS (SUBJECT)]")
 # => [#<Net::IMAP::FetchData seqno=6, attr={"BODY[HEADER.FIELDS (SUBJECT)]"=>"Subject: test\r\n\r\n"}>]
+#%end
 data = imap.uid_fetch(98, ["RFC822.SIZE", "INTERNALDATE"])[0]
 p data.seqno
 # => 6
@@ -725,7 +735,11 @@ flags には シンボルの配列で置き換え、追加もしくは削除さ�
 
 ```ruby title="例"
 p imap.store(6..8, "+FLAGS", [:Deleted])
+#%since 3.4
+# => [#<Net::IMAP::FetchData seqno=6, attr={"FLAGS" => [:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=7, attr={"FLAGS" => [:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=8, attr={"FLAGS" => [:Seen, :Deleted]}>]
+#%else
 # => [#<Net::IMAP::FetchData seqno=6, attr={"FLAGS"=>[:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=7, attr={"FLAGS"=>[:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=8, attr={"FLAGS"=>[:Seen, :Deleted]}>]
+#%end
 ```
 
 - **param** `set` -- 更新するメッセージのsequence number

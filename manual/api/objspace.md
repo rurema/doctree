@@ -22,7 +22,11 @@ CRuby の実装について詳しくない一般のユーザはこのライブ�
 require 'objspace'
 
 p ObjectSpace.count_objects_size
+#%since 3.4
+# => {TOTAL: 1461154, T_CLASS: 158280, T_MODULE: 20672, T_STRING: 527249, ...}
+#%else
 # => {:TOTAL=>1461154, :T_CLASS=>158280, :T_MODULE=>20672, :T_STRING=>527249, ...}
+#%end
 ```
 
 - **raise** `TypeError` -- result_hash にハッシュ以外を指定した時に発生します。
@@ -113,10 +117,17 @@ T_DATA の種類ごとにオブジェクトの数を格納したハッシュを�
 require 'objspace'
 
 p ObjectSpace.count_tdata_objects
+#%since 3.4
+# => {RubyVM::InstructionSequence => 504, parser: 5, barrier: 6,
+#     mutex: 6, Proc => 60, RubyVM::Env => 57, Mutex => 1, Encoding => 99,
+#     ThreadGroup => 1, Binding => 1, Thread => 1, RubyVM => 1, iseq: 1,
+#     Random => 1, ARGF.class => 1, Data => 1, autoload: 3, Time => 2}
+#%else
 # => {RubyVM::InstructionSequence=>504, :parser=>5, :barrier=>6,
 #     :mutex=>6, Proc=>60, RubyVM::Env=>57, Mutex=>1, Encoding=>99,
 #     ThreadGroup=>1, Binding=>1, Thread=>1, RubyVM=>1, :iseq=>1,
 #     Random=>1, ARGF.class=>1, Data=>1, :autoload=>3, Time=>2}
+#%end
 ```
 
 現在のバージョンでは、戻り値のキーはクラスオブジェクトかシンボルのオブジェクトです。

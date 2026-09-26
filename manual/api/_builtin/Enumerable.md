@@ -663,13 +663,21 @@ self を [key, value] のペアの配列として解析した結果を [c:Hash] 
 - **param** `args` -- each の呼び出し時に引数として渡されます。
 
 ```ruby title="例"
-p %i[hello world].each_with_index.to_h # => {:hello => 0, :world => 1}
+#%since 3.4
+p %i[hello world].each_with_index.to_h # => {hello: 0, world: 1}
+#%else
+p %i[hello world].each_with_index.to_h # => {:hello=>0, :world=>1}
+#%end
 ```
 
 ブロックを指定すると各要素でブロックを呼び出し、その結果をペアとして使います。
 
 ```ruby title="ブロック付きの例"
+#%since 3.4
+p (1..5).to_h {|x| [x, x ** 2]} # => {1 => 1, 2 => 4, 3 => 9, 4 => 16, 5 => 25}
+#%else
 p (1..5).to_h {|x| [x, x ** 2]} # => {1=>1, 2=>4, 3=>9, 4=>16, 5=>25}
+#%end
 ```
 
 ### def zip(*lists)  -> [[object]]
@@ -883,7 +891,11 @@ p e.first(2) # => []
 ブロックを評価した結果をキー、対応する要素の配列を値とするハッシュを返します。
 
 ```ruby title="例"
+#%since 3.4
+p (1..6).group_by {|i| i%3} # => {0 => [3, 6], 1 => [1, 4], 2 => [2, 5]}
+#%else
 p (1..6).group_by {|i| i%3} # => {0=>[3, 6], 1=>[1, 4], 2=>[2, 5]}
+#%end
 ```
 
 ブロックを省略した場合は [c:Enumerator] を返します。
@@ -1486,14 +1498,22 @@ Hash のキーは self に含まれる要素で、Hash の値は対応する要�
 #%end
 
 ```ruby title="例"
+#%since 3.4
+p ["a", "b", "c", "b"].tally  #=> {"a" => 1, "b" => 2, "c" => 1}
+#%else
 p ["a", "b", "c", "b"].tally  #=> {"a"=>1, "b"=>2, "c"=>1}
+#%end
 
 #%since 3.1
 h = {}
 [:a, :b, :c].tally(h)
 [:a, :b, :d].tally(h)
 
+#%since 3.4
+p h # => {a: 2, b: 2, c: 1, d: 1}
+#%else
 p h # => {:a=>2, :b=>2, :c=>1, :d=>1}
+#%end
 #%end
 ```
 

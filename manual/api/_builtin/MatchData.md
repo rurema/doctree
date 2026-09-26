@@ -240,8 +240,13 @@ p $~.captures   # => ["foo", "bar", nil]
 
 ```ruby title="例"
 m = /(?<hours>\d{2}):(?<minutes>\d{2}):(?<seconds>\d{2})/.match("18:37:22")
-p m.deconstruct_keys([:hours, :minutes]) # => {:hours => "18", :minutes => "37"}
-p m.deconstruct_keys(nil) # => {:hours => "18", :minutes => "37", :seconds => "22"}
+#%since 3.4
+p m.deconstruct_keys([:hours, :minutes]) # => {hours: "18", minutes: "37"}
+p m.deconstruct_keys(nil) # => {hours: "18", minutes: "37", seconds: "22"}
+#%else
+p m.deconstruct_keys([:hours, :minutes]) # => {:hours=>"18", :minutes=>"37"}
+p m.deconstruct_keys(nil) # => {:hours=>"18", :minutes=>"37", :seconds=>"22"}
+#%end
 
 # 名前付きキャプチャが定義されていなかった場合は空のハッシュを返す
 m = /(\d{2}):(\d{2}):(\d{2})/.match("18:37:22")
@@ -589,6 +594,7 @@ Hashのキーは名前付きキャプチャの名前です。Hashの値はキー
 - **param** `symbolize_names` -- 真を指定するとハッシュのキーを文字列ではなくシンボルにします。デフォルトは偽です。
 
 ```ruby title="例"
+#%since 3.4
 m = /(?<a>.)(?<b>.)/.match("01")
 p m.named_captures # => {"a" => "0", "b" => "1"}
 
@@ -600,10 +606,27 @@ p m.named_captures # => {"a" => "1"}
 
 m = /(?<a>x)|(?<a>y)/.match("x")
 p m.named_captures # => {"a" => "x"}
+#%else
+m = /(?<a>.)(?<b>.)/.match("01")
+p m.named_captures #=>{"a"=>"0", "b"=>"1"}
+
+m = /(?<a>.)(?<b>.)?/.match("0")
+p m.named_captures #=>{"a"=>"0", "b"=>nil}
+
+m = /(?<a>.)(?<a>.)/.match("01")
+p m.named_captures #=>{"a"=>"1"}
+
+m = /(?<a>x)|(?<a>y)/.match("x")
+p m.named_captures #=>{"a"=>"x"}
+#%end
 #%since 3.3
 
 m = /(?<a>.)(?<a>.)/.match("01")
-p m.named_captures(symbolize_names: true) #=> {:a => "1"}
+#%since 3.4
+p m.named_captures(symbolize_names: true) #=> {a: "1"}
+#%else
+p m.named_captures(symbolize_names: true) #=> {:a=>"1"}
+#%end
 #%end
 ```
 
