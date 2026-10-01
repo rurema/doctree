@@ -111,7 +111,7 @@ Rubyはロケールまたは -E オプションに従って default_external を
 
 -E オプションを指定していない場合は、WindowsではUTF-8、その他のOSではロケールに従って default_external を決定します。
 
-default_external は必ず設定されます。[m:Encoding.locale_charmap] が nil を返す場合には US-ASCII が、ロケールにRubyが扱えないエンコーディングが指定されている場合には ASCII-8BIT が、default_external に設定されます。
+default_external は必ず設定されます。locale charmap 名を取得できない環境では US-ASCII が、[m:Encoding.locale_charmap] の返す名前が Ruby の扱えないエンコーディングの場合には UTF-8 が、default_external に設定されます。
 
 - **SEE** [d:spec/rubycmd] [man:locale(1)], [m:Encoding.locale_charmap] [m:Encoding.default_internal]
 
@@ -149,9 +149,9 @@ default_internal を変更する前に作成した文字列と、default_interna
 
 - **SEE** [d:spec/rubycmd] [m:Encoding.default_internal]
 
-### def Encoding.locale_charmap -> String | nil
+### def Encoding.locale_charmap -> String
 
-ロケールエンコーディングを決定するために用いる、locale charmap 名を返します。nl_langinfo 等がない環境では nil を、miniruby では ASCII_8BIT を返します。
+ロケールエンコーディングを決定するために用いる、locale charmap 名を返します。nl_langinfo 等が使えず locale charmap 名を取得できない環境では "US-ASCII" を返します。
 
 ```ruby title="Debian GNU/Linux + LANG=C"
 p Encoding.locale_charmap # => "ANSI_X3.4-1968"
