@@ -34,6 +34,7 @@ require:
 
 - **return** -- [c:RDoc::TopLevel] オブジェクトを返します。
 
+#%until 4.0
 ### def remove_private_comment(comment) -> String
 {: since="2.0.0"}
 
@@ -42,3 +43,5 @@ require:
 - **param** `comment` -- 対象の文字列を指定します。
 
 - **return** -- コメントが削除された文字列を返します。
+
+#%end

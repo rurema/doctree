@@ -89,11 +89,10 @@ file_name を解析できるパーサのインスタンスを返します。
 
 ### def RDoc::Parser.parsers -> [[Regexp, RDoc::Parser]]
 
-[m:RDoc::Parser#parse_files_matching] で登録した正規表現とパーサクラスの配列の配列を返します。
+[m:RDoc::Parser.parse_files_matching] で登録した正規表現とパーサクラスの配列の配列を返します。
 
-## Instance Methods
-
-### def parse_files_matching(regexp) -> ()
+### def RDoc::Parser.parse_files_matching(regexp) -> ()
+{: since="1.9.1"}
 
 regexp で指定した正規表現にマッチするファイルを解析できるパーサとして、自身を登録します。
 

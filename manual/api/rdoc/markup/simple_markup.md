@@ -185,26 +185,6 @@ str で指定された文字列を formatter に変換させます。
 
 変換結果は formatter によって文字列や配列を返します。
 
-### def content -> String
-
-変換する文字列を返します。
-
-rdoc ライブラリのデバッグ用途に使用します。
-[m:RDoc::Markup#convert] の後に実行します。
-
-変換のために加工したオブジェクトを改行で連結したものを返すため、変換前の文字列と結果が異なる事があります。
-
-- **SEE** [m:RDoc::Markup#convert]
-
-### def get_line_types -> [Symbol]
-
-変換する文字列の各行のタイプを [c:Symbol] の配列で返します。
-
-rdoc ライブラリのデバッグ用途に使用します。
-[m:RDoc::Markup#convert] の後に実行します。
-
-- **SEE** [m:RDoc::Markup#convert]
-
 ### def attribute_manager -> RDoc::AttributeManager
 
 自身の `RDoc::AttributeManager` オブジェクトを返します。
