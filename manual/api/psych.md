@@ -104,9 +104,16 @@ libyaml のバージョンを返します。
 
 - **SEE** [m:Psych::LIBYAML_VERSION]
 
-#%since 3.1
+#%since 4.0
+### def Psych.load(yaml, permitted_classes: [Symbol], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false, strict_integer: false, parse_symbols: true) -> object
+#%end
+#%version 3.2...4.0
+### def Psych.load(yaml, permitted_classes: [Symbol], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false, strict_integer: false) -> object
+#%end
+#%version 3.1
 ### def Psych.load(yaml, permitted_classes: [Symbol], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false) -> object
-#%else
+#%end
+#%until 3.1
 ### def Psych.load(yaml, filename: nil, fallback: false, symbolize_names: false, freeze: false) -> object
 ### def Psych.load(yaml, filename = nil, fallback: false, symbolize_names: false, freeze: false) -> object
 #%end
@@ -157,6 +164,12 @@ filename はパース中に発生した例外のメッセージに用います�
                        true を指定した場合は変換します。デフォルトでは文字列に変換されます。
 - **param** `freeze` -- true を指定すると再帰的に freeze されたオブジェクトを返します。
               デフォルトは false です。
+#%since 3.2
+- **param** `strict_integer` -- true を指定すると、"1,000" のようなカンマを含む数値を [c:Integer] に変換せず、文字列として返します。デフォルトは false です。
+#%end
+#%since 4.0
+- **param** `parse_symbols` -- false を指定すると、":foo" のような文字列を [c:Symbol] に変換せず、文字列として返します。デフォルトは true です。
+#%end
 - **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
 #%since 3.1
 - **raise** `Psych::DisallowedClass` -- yaml に permitted_classes で許可されていないクラスが含まれていたときに発生します
@@ -197,7 +210,15 @@ p Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 #%end
 ```
 
+#%since 4.0
+### def Psych.safe_load(yaml, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false, strict_integer: false, parse_symbols: true) -> object
+#%end
+#%version 3.2...4.0
+### def Psych.safe_load(yaml, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false, strict_integer: false) -> object
+#%end
+#%until 3.2
 ### def Psych.safe_load(yaml, permitted_classes: [], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false) -> object
+#%end
 #%until 3.1
 ### def Psych.safe_load(yaml, legacy_permitted_classes=[], legacy_permitted_symbols=[], legacy_aliases=false, legacy_filename=nil) -> object
 #%end
@@ -309,6 +330,12 @@ Psych.safe_load("", [Date])
                        true を指定した場合は変換します。デフォルトでは文字列に変換されます。
 - **param** `freeze` -- true を指定すると再帰的に freeze されたオブジェクトを返します。
               デフォルトは false です。
+#%since 3.2
+- **param** `strict_integer` -- true を指定すると、"1,000" のようなカンマを含む数値を [c:Integer] に変換せず、文字列として返します。デフォルトは false です。
+#%end
+#%since 4.0
+- **param** `parse_symbols` -- false を指定すると、":foo" のような文字列を [c:Symbol] に変換せず、文字列として返します。デフォルトは true です。
+#%end
 
 ### def Psych.parse(yaml, filename: nil) -> Psych::Nodes::Document
 #%until 3.1
@@ -574,7 +601,15 @@ options でその他に指定できる項目は [m:Psych.dump] と同じです�
 #%end
 
 #%since 3.1
+#%since 4.0
+### def Psych.unsafe_load(yaml, filename: nil, fallback: false, symbolize_names: false, freeze: false, strict_integer: false, parse_symbols: true) -> object
+#%end
+#%version 3.2...4.0
+### def Psych.unsafe_load(yaml, filename: nil, fallback: false, symbolize_names: false, freeze: false, strict_integer: false) -> object
+#%end
+#%version 3.1
 ### def Psych.unsafe_load(yaml, filename: nil, fallback: false, symbolize_names: false, freeze: false) -> object
+#%end
 
 YAML ドキュメント yaml を Ruby のデータ構造(オブジェクト)に変換します。
 
@@ -596,6 +631,12 @@ filename はパース中に発生した例外のメッセージに用います�
 - **param** `fallback` -- 引数 yaml に空の YAML を指定した場合の戻り値。デフォルトは false です
 - **param** `symbolize_names` -- ハッシュのキーを [c:Symbol] に変換するかどうか
 - **param** `freeze` -- true を指定すると再帰的に freeze されたオブジェクトを返します
+#%since 3.2
+- **param** `strict_integer` -- true を指定すると、"1,000" のようなカンマを含む数値を [c:Integer] に変換せず、文字列として返します。デフォルトは false です。
+#%end
+#%since 4.0
+- **param** `parse_symbols` -- false を指定すると、":foo" のような文字列を [c:Symbol] に変換せず、文字列として返します。デフォルトは true です。
+#%end
 - **raise** `Psych::SyntaxError` -- YAML ドキュメントに文法エラーが発見されたときに発生します
 - **raise** `TypeError` -- yaml に nil を指定したときに発生します
 - **SEE** [m:Psych.load], [m:Psych.safe_load]
