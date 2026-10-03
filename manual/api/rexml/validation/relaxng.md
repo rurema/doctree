@@ -5,7 +5,7 @@ include:
 ---
 XML 文書を RELAX NG のスキーマで検証するためのライブラリです。
 
-[c:REXML::Validation::RelaxNG] のオブジェクト(バリデータ)を、[c:REXML::Parsers::UltraLightParser] などのパーサの add_listener メソッドに渡して使います。パーサが文書を読み進めるのに合わせて検証が行われ、文書がスキーマに合わないことが分かった時点で [c:REXML::Validation::ValidationException] が発生します。
+[c:REXML::Validation::RelaxNG] のオブジェクト(バリデータ)を、[m:REXML::Parsers::UltraLightParser#add_listener] などでパーサに登録して使います。パーサが文書を読み進めるのに合わせて検証が行われ、文書がスキーマに合わないことが分かった時点で [c:REXML::Validation::ValidationException] が発生します。
 
 ```ruby title="例"
 require 'rexml/parsers/ultralightparser'
@@ -77,7 +77,7 @@ data, param, include, externalRef, notAllowed, anyName, nsName, except, name
 
 パーサのイベント event を受け取り、[m:REXML::Validation::Validator#validate] で検証します。
 
-バリデータを add_listener で登録したパーサが、イベントが発生するたびに呼び出します。
+バリデータを [m:REXML::Parsers::UltraLightParser#add_listener] などで登録したパーサが、イベントが発生するたびに呼び出します。
 
 - **param** `event` -- パーサのイベント
 - **raise** `REXML::Validation::ValidationException` -- 文書がスキーマに合わないときに発生します
