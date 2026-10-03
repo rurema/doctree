@@ -12,14 +12,16 @@ doctree の版別 DB に収録されている全メソッドエントリと、�
 「版別 DB を基準に、不足方向も含めて」計測できるようにしたもの。
 分析の本文は [report.md](report.md)。
 
-作成: 2026-09-05。
+作成: 2026-09-05。データの更新: 2026-10-03(現 master での再測定。経緯は report.md の追記)。
 
 ## データ生成時点(スナップショット情報)
 
-- doctree 側(`db-extract/`): master 948a607c3 の `manual/api` から生成した 3.0〜4.1 の 7 版の DB
+- 同梱しているデータは 2026-10-03 の再測定のもの。最初のスナップショット(2026-09-05・doctree master 948a607c3・4.1 は 07ef97df22)は
+  コミット 82aaea377 にあり、report.md の本文(追記より前)はそちらの数字で書かれている
+- doctree 側(`db-extract/`): master 1c1f6965c の `manual/api` から生成した 3.0〜4.1 の 7 版の DB
 - 実測バイナリ: 3.0.0 / 3.1.0 / 3.2.0 / 3.3.0 / 3.4.0 / 4.0.0 = `ghcr.io/ruby/all-ruby`
   (`/all-ruby/bin/ruby-x.y.0`)、4.1 = `ghcr.io/ruby/ruby:master`
-  (2026-09-04 ビルド・4.1.0dev 07ef97df22・json 3.0.0.rc1)。各版の `real/<版>/ruby-v.txt` 参照
+  (2026-10-03 ビルド・4.1.0dev 088bf8962f・json 3.0.2・rubygems 4.1.0.beta1・rdoc 8.1.0)。各版の `real/<版>/ruby-v.txt` 参照
 - 実測環境の注意: all-ruby の 3.2〜4.0 は YJIT 非ビルド(`RubyVM::YJIT` が no-class になる)(フル機能ビルドとの差分は「ビルド環境依存の差分」節)、
   readline は libedit、システム OpenSSL は 3.0 系(`OpenSSL::Engine`・`Digest::MD2` 等が無い)。
   3.0.0 は fiddle/dbm の共有ライブラリ依存が欠けて require 不可
@@ -40,8 +42,8 @@ doctree の版別 DB に収録されている全メソッドエントリと、�
 | `result/<版>/excess.tsv` | 過剰側: DB エントリごとの判定(ok 以外のみ。EXCESS(no-method / no-class)・unmeasured・NOMETHOD_BUT_EXISTS) |
 | `result/<版>/summary-by-lib.tsv` | ライブラリ別の件数(過剰・不足の各分類) |
 | `result/<版>/summary.txt` | 版ごとのスコープ別サマリ |
-| `result/matrix-excess.tsv` | 過剰キー(403)× 7 版のマトリクス(X= 過剰 / o= 実在 / -= その版の DB に無し / ?= 未測定)+ pattern(all / new-only / old-only / middle / mixed)+ first_present |
-| `result/matrix-shortage.tsv` | 不足キー(25,055 = UNDOC・UNDOC(class-stub)・UNDOC(class-undoc)・NOMETHOD_CONFLICT の public/protected)× 7 版のマトリクス(X= 不足 / o= 実在かつ記載あり / -= その版に無し)+ pattern + first_present |
+| `result/matrix-excess.tsv` | 過剰キー(323)× 7 版のマトリクス(X= 過剰 / o= 実在 / -= その版の DB に無し / ?= 未測定)+ pattern(all / new-only / old-only / middle / mixed)+ first_present |
+| `result/matrix-shortage.tsv` | 不足キー(18,147 = UNDOC・UNDOC(class-stub)・UNDOC(class-undoc)・NOMETHOD_CONFLICT の public/protected)× 7 版のマトリクス(X= 不足 / o= 実在かつ記載あり / -= その版に無し)+ pattern + first_present |
 | `result/aggregate-summary.txt` | マトリクスの集計(スコープ×分類×パターン、pattern=all の初出版別) |
 | `tools/` | 再生成スクリプト一式(下記) |
 
@@ -75,7 +77,8 @@ DOC_ON_ANCESTOR 等の除外分類を含む約 1 万行/版)はサイズの都�
   `generated(node)`= prism のノードクラス(`Prism::*Node`)、`generated(visitor)`= prism の Visitor・Compiler・Dispatcher・DSL・Translation 系、
   `internal`= rubygems の利用者向けクラス(`Gem`・`Gem::Specification`・`Gem::Version`・`Gem::Requirement`・`Gem::Dependency`・`Gem::Platform`・
   `Gem::ConfigFile`・`Gem::Package`)と例外クラス以外。判定は `compare_mc.rb` の `policy_exclusion`。
-  `result/` の TSV は 2026-09-05 のスナップショットでこの分類より前に生成したものなので、UNDOC 系の件数には方針上の除外分が含まれている
+  `result/` の TSV は 2026-10-03 の再測定からこの分類を反映している。`POLICY` の件数は `result/<版>/summary.txt` の shortage 行と、
+  同梱していない `shortage.tsv` に出る。`summary-by-lib.tsv` の undoc 系の列と `matrix-shortage.tsv` には含まれない
 
 不足側のライブラリ帰属は「DB でそのクラスを記載しているライブラリ → メソッドの source_location から
 求めた feature の最長一致 → クラス内の多数派 feature → 差分に含んだライブラリのうち最小のもの」の順。
@@ -176,10 +179,17 @@ done
 - **x.y.0 基準**: 実測は各 minor の x.y.0(4.1 は master スナップショット)なので、teeny で追加された
   メソッド(例: `Prism::Node#each_child_node` は 4.0.1 から)は過剰側に出る。doctree 側が
   `{: since="x.y.z"}` で対応済みのものは無視する
-- 4.1 の json は 3.0.0.rc1。json 3.0 で消える API(`JSON.fast_generate` 等)・`json/add/*` の削除は
-  リリース版で再確認してから対応する
+- 4.1 は master のスナップショット(2026-10-03)。リリースまでに API が変わりうるので、4.1 だけの差分はリリース版で再確認する
 - 「存在する」はメソッド定義の有無のみで、引数追加などシグネチャ単位の差分は検出しない
 - サブクラス側に定義される慣例記述(`Struct.members`・`Data.new`・`Singleton.instance` 等)、
   プロトコル記述(`Object#marshal_dump` 等)、`Struct`/`Data` の生成メソッドは過剰側に出るが削除不要
 - probe の `no-class` は定数解決に inherit=false を使うため、mixin 先で生成されるクラスを見逃すことがある
   (tools/library-versions の README 参照)
+- `aggregate_mc.rb` の scope 列は、そのキーが最後に過剰/不足だった版の scope になる。途中の版で bundled gem になったライブラリ
+  (rdoc・irb など)のキーは、標準添付だった版の分も bundled 側に数えられる(全版で存在しない rdoc のエントリが stdlib の集計に出ないのはこのため)
+- 祖先クラスに同名メソッドの記載があると `DOC_ON_ANCESTOR` になり不足に出ない。新設されたサブクラスへメソッドが移った場合
+  (4.1 の `IO::Buffer::Storage` など)は不足にも未文書クラスにも現れないので、`real/<版>/builtin.tsv` の A/M レコードを前回の測定と比べて拾う
+- 組み込みは `--disable-gems` で測るので、RubyGems が起動時に読み込むライブラリが組み込みクラスに足すメソッド
+  (4.1 の `Thread::Monitor#mon_enter` などの別名)は過剰側に出る
+- クラスを別名(front matter の `alias:`)で記載していると、実 Ruby での名前の側が `UNDOC(class-stub)` に数えられる
+  (`JSON::State` に記載済みのメソッドが `JSON::Ext::Generator::State` の不足に出る)

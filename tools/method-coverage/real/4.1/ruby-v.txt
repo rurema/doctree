@@ -1,1 +1,1 @@
-ruby 4.1.0dev (2026-09-04T00:08:20Z master 07ef97df22) +PRISM [x86_64-linux]
+ruby 4.1.0dev (2026-10-03T00:00:26Z master 088bf8962f) +PRISM [x86_64-linux]

@@ -80,3 +80,59 @@
   ZJIT は 4.0 から存在する(rurema にページが無い= 実際の不足)
 - 4.1 は 2026-09-15 の master(0c3c61ca82)で組み込みを再測定したが、09-04 のスナップショットと差は無かった。
   4.1 新規 42 件(+ `Ruby::SourceRange`)は #3573、`Thread::Monitor` の組み込み化は #3574 で対応
+
+## 追記(2026-10-03): 現 master での再測定
+
+doctree master 1c1f6965c で再生成手順を再実行し、同梱データ(`db-extract/`・`real/`・`result/`)を置き換えた。
+実 Ruby は 3.0.0〜4.0.0 が前回と同じバイナリで、4.1 は `ghcr.io/ruby/ruby:master` の 2026-10-03(088bf8962f・json 3.0.2・rubygems 4.1.0.beta1・rdoc 8.1.0)。
+この追記より前の本文は 2026-09-05 のスナップショット(コミット 82aaea377)の数字のまま残している。
+09-05 以降の対応(rurema/doctree#3548 に並ぶ各 PR)と、rurema/doctree#3566 の方針による `POLICY(...)` 分類の導入で、件数は次のように変わった。
+
+### 版ごとの件数(09-05 → 10-03)
+
+| 版 | DB メソッド数 | 組み込み 過剰 | 組み込み 不足 | 標準添付 過剰 | 標準添付 不足(文書済みクラス) | 〃 stub クラス | 〃 未文書クラス | 未測定 |
+|---|---|---|---|---|---|---|---|---|
+| 3.0 | 8195 → 8535 | 15 → 15 | 6 → 2 | 185 → 121 | 1942 → 1132 | 109 → 101 | 2709 → 1844 | 352 → 352 |
+| 3.1 | 8135 → 8500 | 15 → 15 | 12 → 4 | 205 → 123 | 1904 → 1064 | 106 → 96 | 2875 → 1892 | 226 → 226 |
+| 3.2 | 8200 → 8591 | 24 → 24 | 12 → 4 | 203 → 123 | 1977 → 1115 | 111 → 98 | 2970 → 1972 | 222 → 222 |
+| 3.3 | 8262 → 8686 | 26 → 26 | 12 → 3 | 199 → 118 | 1992 → 1132 | 124 → 109 | 6004 → 2059 | 222 → 222 |
+| 3.4 | 8300 → 8794 | 28 → 28 | 13 → 3 | 220 → 136 | 2009 → 1082 | 122 → 106 | 5298 → 2208 | 200 → 200 |
+| 4.0 | 8196 → 8691 | 27 → 36 | 12 → 2 | 148 → 81 | 1054 → 382 | 100 → 82 | 4370 → 1224 | 70 → 70 |
+| 4.1 | 8060 → 8571 | 18 → 30 | 55 → 13 | 169 → 83 | 1088 → 405 | 100 → 85 | 4390 → 1227 | 26 → 2 |
+
+- 不足・stub・未文書クラスの減少には、記載を追加した分のほかに `POLICY(...)` へ移った分(cgi/html の要素メソッド・prism のノードクラスと Visitor 系・rubygems の内部クラス)が含まれる。
+  4.1 の標準添付では generated(node) 1,108・generated(visitor) 1,784・internal 1,006(private を含む)
+- 対象 lib 数が変わるのは 4.0(`io/wait` のエントリが無くなり −1)と 4.1(`io/wait` と、`until: "4.1"` にした json/add/* の 12 本で −13)だけ
+- 組み込みの過剰が増えたのは測定上の理由。4.0 の +9 は追加した `RubyVM::ZJIT` の 9 件(all-ruby が ZJIT 非対応ビルド。`ghcr.io/ruby/ruby:4.0.7` には存在)。
+  4.1 の +12 は、`IO::Buffer` の 8 件(master 側の再編。下記)と `Thread::Monitor` の `mon_enter` などの別名 5 件(`--disable-gems` で測るため。`require "monitor"` 後は存在)が増え、
+  `ObjectSpace._id2ref` の 1 件が解消した結果
+- 4.1 の未測定 26 → 2 は json/add/* を `until: "4.1"` にした分(残り 2 は win32/resolv)
+
+### ユニークキー(版横断)
+
+- 標準添付の不足(文書済みクラスの公開メソッド): 全版で不足のキー 1,580 → 578。一部の版だけ不足のものを含めると 1,613 → 590。
+  解消した 1,034 = 記載を追加 581・`POLICY` 451(cgi/html の要素メソッド 238・rubygems の内部クラス 213)・その他 2
+- 残り 590 の主なもの: rubygems 系 255(`Gem::Specification` 66・`Gem` 63・`Gem::ConfigFile` 46・`Gem::Package` 46 ほか)・net/imap 62(3.0 のみ)・irb 系 54(3.x のみ)・
+  psych 44・resolv 35・uri 26・ostruct 21(3.0〜3.1)・net/http 13・optparse 12・json 10・open-uri 10。
+  rurema/doctree#3566 で判断待ちの `Gem::ConfigFile`・`Gem::Package` と 4.1 の新規を除くと、各 PR で載せない判断をしたもの(`:nodoc:`・protected・内部用・生成物)が中心
+- stub クラス: 112 → 96 キー(13 クラス)。`JSON::Ext::Generator::State` の 47 は別名クラス側で数えられる見かけ上のもので、43 件は `JSON::State` に記載済み(残り 4 件は 4.1 の新規)。
+  `OptionParser::Switch` 17 は対象外にしたもの。それ以外の 32 キー(`Digest::Class`/`Digest::Instance` 8・`IRB::Irb` 5・`Resolv::DNS::Resource::Generic` 5 など)は未着手
+- 組み込みの不足: 公開メソッド 58 → 15・未文書クラス 36 → 6。残り 21 = 意図的に載せていないもの 11(rurema/doctree#3568 で対象外にした 4 件と、原典で `:nodoc:` の 7 件)・
+  `Ruby::Box::Loader` 3(原典で `:nodoc:`)・`RubyVM::RJIT` 2(3.3〜3.4)・master で増えた 5
+- 過剰: 403 → 323 行(同じメソッドがライブラリ名違いで 2 行になる重複を除くと 391 → 322)。108 件が解消し、39 件が新しく出た。
+  39 件のうち 28 件は環境・測定条件によるもの(`RubyVM::ZJIT` 9・Windows 専用の io/console 7・libedit ビルドの `Readline` 7・`Thread::Monitor` の別名 5)、
+  10 件は master 側の変化(`IO::Buffer` 8・rdoc の 2)、1 件は版ゲート漏れ(`RDoc::Parser::Simple#remove_private_comment`)
+
+### 残っている候補
+
+- `Set#eql?`(3.x では `==` と別実装・4.0 で別名化)の項目追加、`OpenSSL::Random.pseudo_bytes`(3.0〜3.4 に無く 4.0 で復活)の扱い
+- rdoc の過剰 48 件(scope は bundled)。3.0.0〜master のどの版にも無いもの 35 件(`RDoc::Options` 14・`RDoc::Stats` 7・`RDoc::Markdown` 6・`RDoc::Markup` 3・`RDoc::CodeObject` 2・`RDoc::Parser` 2・`RDoc::Parser::C` 1)、
+  3.4.0(rdoc 6.10.0)にあり 4.0.0(rdoc 7.0.3)に無いもの 7 件、4.0.0 にあり master(rdoc 8.1.0)に無いもの 6 件
+- json: `String.json_create`・`String#to_json_raw`・`#to_json_raw_object` は json 2.14.0 から `json/add/string` を読み込んだときだけ定義される。
+  4.0(json 2.18.0)では `require "json"` だけでは定義されず、`json/add/string`(4.0 だけに存在)のページが無い
+- 4.1 の master が 09-15 から進んだ分(リリース版で再確認が必要): `IO::Buffer` の再編(`IO::Buffer.new` が `IO::Buffer::Storage` を返し、`free`・`resize`・`transfer`・
+  `external?`・`internal?`・`mapped?`・`shared?`・`private?` の定義が `IO::Buffer::Storage` に移動。`IO::Buffer::Slice` は `resize` だけ。`IO::Buffer#advance`・`#source` を追加)、
+  `Enumerator::Lazy#each_with_index`、`RubyVM::YJIT.max_compile_time_ns`・`.max_compile_time_ns=`・`.total_compile_time_ns`、`JSON::State#rfc8785?`・`#rfc8785=`、
+  RubyGems 4.1.0.beta1 の `Gem.ruby_abi`・`Gem::Specification#ruby_abi`・`#content_address`・`#content_address=` など
+- `IO::Buffer::Storage`・`IO::Buffer::Slice`・`Enumerator::Lazy#each_with_index` は祖先クラスの記載に隠れて集計の「不足」に現れない(README「既知の限界」)。
+  4.1 の `real/4.1/builtin.tsv` を前回と比べて拾った

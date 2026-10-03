@@ -326,7 +326,6 @@ Gem::Ext::Builder	class	rubygems/ext/builder	Object			-
 Gem::Ext::ConfigureBuilder	class	rubygems/ext/configure_builder	Gem::Ext::Builder			-
 Gem::Ext::ExtConfBuilder	class	rubygems/ext/ext_conf_builder	Gem::Ext::Builder			-
 Gem::Ext::RakeBuilder	class	rubygems/ext/rake_builder	Gem::Ext::Builder			-
-Gem::FileOperations	class	rubygems/package	Object			-
 Gem::FilePermissionError	class	rubygems/exceptions	Gem::Exception			-
 Gem::FormatException	class	rubygems/exceptions	Gem::Exception			-
 Gem::GemNotFoundException	class	rubygems/exceptions	Gem::Exception			-
@@ -397,6 +396,7 @@ IO::Buffer::AllocationError	class	_builtin	RuntimeError			-
 IO::Buffer::InvalidatedError	class	_builtin	RuntimeError			-
 IO::Buffer::LockedError	class	_builtin	RuntimeError			-
 IO::Buffer::MaskError	class	_builtin	ArgumentError			-
+IO::ConsoleMode	class	io/console	Object			-
 IO::EAGAINWaitReadable	class	_builtin	Errno::EAGAIN	IO::WaitReadable		-
 IO::EAGAINWaitWritable	class	_builtin	Errno::EAGAIN	IO::WaitWritable		-
 IO::EINPROGRESSWaitReadable	class	_builtin	Errno::EINPROGRESS	IO::WaitReadable		-
@@ -657,6 +657,7 @@ NotImplementedError	class	_builtin	ScriptError			-
 Numeric	class	_builtin	Object	Comparable		-
 Object	class	_builtin	BasicObject	Kernel		-
 ObjectSpace	module	_builtin	-			-
+ObjectSpace::InternalObjectWrapper	class	objspace	Object			-
 ObjectSpace::WeakKeyMap	class	_builtin	Object			-
 ObjectSpace::WeakMap	class	_builtin	Object			-
 Observable	module	observer	-			-
@@ -1191,6 +1192,7 @@ RubyVM::AbstractSyntaxTree::Location	class	_builtin	Object			-
 RubyVM::AbstractSyntaxTree::Node	class	_builtin	Object			-
 RubyVM::InstructionSequence	class	_builtin	Object			-
 RubyVM::YJIT	module	_builtin	-			-
+RubyVM::ZJIT	module	_builtin	-			-
 RuntimeError	class	_builtin	StandardError			-
 SOCKSSocket	class	socket	TCPSocket			-
 ScriptError	class	_builtin	Exception			-
