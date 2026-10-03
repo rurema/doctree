@@ -582,7 +582,25 @@ Psych 関連のエラーを表す例外です。
 
 YAML の alias が不正である(本体が見つからない)というエラーを表す例外です。
 
-# class Psych::SyntaxError < SyntaxError
+#%since 3.2
+# class Psych::AliasesNotEnabled < Psych::BadAlias
+
+エイリアスの読み込みが許可されていないのに、YAML ドキュメントがエイリアスを含んでいるというエラーを表す例外です。
+
+[m:Psych.safe_load] などで、キーワード引数 aliases が false のときに発生します。
+
+# class Psych::AnchorNotDefined < Psych::BadAlias
+
+エイリアスが参照しているアンカーが定義されていないというエラーを表す例外です。
+
+#%end
+# class Psych::DisallowedClass < Psych::Exception
+
+許可されていないクラスのオブジェクトに変換しようとしたというエラーを表す例外です。
+
+[m:Psych.safe_load] などで、YAML ドキュメントにキーワード引数 permitted_classes で許可されていないクラスが含まれていたときに発生します。
+
+# class Psych::SyntaxError < Psych::Exception
 
 YAML の文法エラーを表すクラスです。
 
