@@ -30,6 +30,7 @@ puts "\\".to_json                      # => "\\"
 puts "𤘩宮城".to_json(ascii_only: true) # => "\ud851\ude29\u5bae\u57ce"
 ```
 
+#%until 4.0
 ### def to_json_raw -> String
 
 自身に対して [m:JSON::Ext::Generator::GeneratorMethods::String#to_json_raw_object] を呼び出して [m:JSON::Ext::Generator::GeneratorMethods::Hash#to_json] した結果を返します。
@@ -53,3 +54,4 @@ p "にほんご".encode("euc-jp").to_json_raw_object
 "にほんご".encode("euc-jp").to_json # source sequence is illegal/malformed (JSON::GeneratorError)
 ```
 
+#%end

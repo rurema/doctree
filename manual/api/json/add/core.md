@@ -6,6 +6,9 @@ require:
   - json/add/exception
   - json/add/range
   - json/add/regexp
+#%since 4.0
+  - json/add/string
+#%end
   - json/add/struct
   - json/add/symbol
   - json/add/time
