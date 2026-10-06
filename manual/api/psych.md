@@ -587,7 +587,7 @@ YAML の alias が不正である(本体が見つからない)というエラー
 
 エイリアスの読み込みが許可されていないのに、YAML ドキュメントがエイリアスを含んでいるというエラーを表す例外です。
 
-[m:Psych.safe_load] などで、キーワード引数 aliases が false のときに発生します。
+[m:Psych.safe_load] などで、キーワード引数 `aliases` が false のときに発生します。
 
 # class Psych::AnchorNotDefined < Psych::BadAlias
 
@@ -598,7 +598,7 @@ YAML の alias が不正である(本体が見つからない)というエラー
 
 許可されていないクラスのオブジェクトに変換しようとしたというエラーを表す例外です。
 
-[m:Psych.safe_load] などで、YAML ドキュメントにキーワード引数 permitted_classes で許可されていないクラスが含まれていたときに発生します。
+[m:Psych.safe_load] などで、YAML ドキュメントにキーワード引数 `permitted_classes` で許可されていないクラスが含まれていたときに発生します。
 
 # class Psych::SyntaxError < Psych::Exception
 
