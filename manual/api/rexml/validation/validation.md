@@ -14,7 +14,7 @@ library: rexml/validation/relaxng
 ### def validate(event) -> ()
 {: since=""}
 
-パーサのイベント event が、スキーマから見て次に来てよいものであるかを検証します。
+パーサのイベント `event` が、スキーマから見て次に来てよいものであるかを検証します。
 
 通常は [m:REXML::Validation::RelaxNG#receive] を通じて呼ばれます。
 
