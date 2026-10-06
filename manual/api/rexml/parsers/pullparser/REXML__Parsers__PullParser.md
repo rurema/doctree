@@ -40,9 +40,9 @@ extend:
 ### def add_listener(listener) -> ()
 {: since=""}
 
-listener を登録しますが、登録した listener が呼び出されることはありません。
+`listener` を登録しますが、登録した `listener` が呼び出されることはありません。
 
-[m:REXML::Parsers::UltraLightParser#add_listener] などと違い、このメソッドで登録した listener にはイベントが通知されません。イベントを順に処理するには [m:REXML::Parsers::PullParser#pull] や [m:REXML::Parsers::PullParser#each] を使ってください。
+[m:REXML::Parsers::UltraLightParser#add_listener] などと違い、このメソッドで登録した `listener` にはイベントが通知されません。イベントを順に処理するには [m:REXML::Parsers::PullParser#pull] や [m:REXML::Parsers::PullParser#each] を使ってください。
 
 - **param** `listener` -- 登録するオブジェクト
 

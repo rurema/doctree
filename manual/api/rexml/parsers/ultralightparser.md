@@ -106,15 +106,15 @@ pp parser.parse
 ### def add_listener(listener) -> ()
 {: since=""}
 
-パーサのイベントを受け取るオブジェクト listener を登録します。
+パーサのイベントを受け取るオブジェクト `listener` を登録します。
 
-[m:REXML::Parsers::UltraLightParser#parse] でパースしている間、パーサが XML を読み進めてイベントが発生するたびに listener.receive(event) が呼び出されます。
+[m:REXML::Parsers::UltraLightParser#parse] でパースしている間、パーサが XML を読み進めてイベントが発生するたびに `listener.receive(event)` が呼び出されます。
 
-event は、先頭がイベントの種類を表すシンボルで、その後にパラメータが続く配列です。イベントの種類は [ref:lib:rexml/parsers/pullparser#event_type] に挙げたものと同じですが、text のパラメータは正規化文字列だけです。また、文書の終わりで [:end_document] が通知されます。
+`event` は、先頭がイベントの種類を表すシンボルで、その後にパラメータが続く配列です。イベントの種類は [ref:lib:rexml/parsers/pullparser#event_type] に挙げたものと同じですが、text のパラメータは正規化文字列だけです。また、文書の終わりで `[:end_document]` が通知されます。
 
-複数の listener を登録できます。
+複数の `listener` を登録できます。
 
-- **param** `listener` -- receive メソッドを持つオブジェクト
+- **param** `listener` -- `receive` メソッドを持つオブジェクト
 - **SEE** [lib:rexml/validation/relaxng]
 
 ```ruby title="例"
