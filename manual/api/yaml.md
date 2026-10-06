@@ -96,7 +96,7 @@ end
 
 ### タグの指定
 
-!ruby/sym foo などのようにタグを指定することで、読み込み時に記述した値の型を指定できます。
+`!ruby/sym foo` などのようにタグを指定することで、読み込み時に記述した値の型を指定できます。
 
 ```ruby title="例"
 require 'yaml'
@@ -123,7 +123,7 @@ EOS
 - !ruby/object:<クラス名>: 上記以外のオブジェクト
 
 #%since 3.1
-YAML.load が既定で変換するのは、一部のクラスのオブジェクトだけです。それ以外のクラス([c:Regexp] や [c:Range]、自分で定義したクラスなど)のオブジェクトに変換しようとすると、例外 Psych::DisallowedClass が発生します。変換するには、キーワード引数 permitted_classes に変換を許可するクラスを指定してください。permitted_classes については [m:Psych.safe_load] を参照してください。
+[`YAML.load`](m:Psych.load) が既定で変換するのは、一部のクラスのオブジェクトだけです。それ以外のクラス([c:Regexp] や [c:Range]、自分で定義したクラスなど)のオブジェクトに変換しようとすると、例外 [c:Psych::DisallowedClass] が発生します。変換するには、キーワード引数 `permitted_classes` に変換を許可するクラスを指定してください。`permitted_classes` については [m:Psych.safe_load] を参照してください。
 #%end
 
 ```ruby title="例"
