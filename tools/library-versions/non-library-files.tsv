@@ -6,7 +6,6 @@ bigdecimal/BigMath
 cgi/core/CGI	
 cgi/core/CGI__InvalidEncoding	
 cgi/core/CGI__QueryExtension	
-cgi/core/CGI__QueryExtension__Value	
 csv/Array	
 csv/CSV	
 csv/CSV__FieldInfo	
@@ -40,7 +39,6 @@ etc/Etc
 etc/Etc__Group	
 etc/Etc__Passwd	
 etc/IO	
-fiddle/1.9/fiddle.lib	(no front matter)
 fiddle/2.0/Fiddle	
 fiddle/2.0/Fiddle__CStruct	
 fiddle/2.0/Fiddle__Function	
@@ -90,6 +88,7 @@ json/JSON__Ext__Generator__GeneratorMethods__String
 json/JSON__Ext__Generator__GeneratorMethods__String__Extend	
 json/JSON__Ext__Generator__GeneratorMethods__TrueClass	
 json/JSON__GeneratorError	
+json/JSON__GeneratorMethods	
 json/JSON__JSONError	
 json/JSON__MissingUnicodeSupport	
 json/JSON__NestingError	
@@ -232,6 +231,7 @@ net/smtp/Net__SMTPSyntaxError
 net/smtp/Net__SMTPUnknownError	
 net/smtp/Net__SMTPUnsupportedCommand	
 net/smtp/Net__SMTP__Response	
+objspace/ObjectSpace__InternalObjectWrapper	
 open-uri/Kernel	
 open-uri/OpenURI	
 open-uri/OpenURI__HTTPError	
@@ -408,25 +408,18 @@ rexml/cdata
 rexml/child	
 rexml/comment	
 rexml/context	(no front matter)
-rexml/dtd/attlistdecl	(no front matter)
-rexml/dtd/dtd	(no front matter)
-rexml/dtd/elementdecl	(no front matter)
-rexml/dtd/entitydecl	(no front matter)
-rexml/dtd/notationdecl	(no front matter)
 rexml/encoding	
 rexml/formatters/default	
 rexml/formatters/pretty	
 rexml/formatters/transitive	
 rexml/functions	
 rexml/instruction	
-rexml/light/node	(no front matter)
 rexml/namespace	
 rexml/node	
 rexml/output	
 rexml/parent	
 rexml/parseexception	
 rexml/parsers/baseparser	
-rexml/parsers/lightparser	(no front matter)
 rexml/parsers/pullparser/REXML__Parsers__PullEvent	
 rexml/parsers/pullparser/REXML__Parsers__PullParser	
 rexml/parsers/treeparser	
@@ -435,9 +428,8 @@ rexml/rexml
 rexml/security	
 rexml/text	
 rexml/undefinednamespaceexception	
-rexml/validation/relaxng	(no front matter)
-rexml/validation/validation	(no front matter)
-rexml/validation/validationexception	(no front matter)
+rexml/validation/validation	
+rexml/validation/validationexception	
 rexml/xmldecl	
 rexml/xmltokens	
 rexml/xpath	
@@ -495,8 +487,8 @@ rss/XMLStyleSheet
 rss/content	
 rss/dublincore	
 rss/maker/Channel	
-rss/maker/Cloud	(no front matter)
-rss/maker/DublinCore	(no front matter)
+rss/maker/Cloud	
+rss/maker/DublinCore	
 rss/maker/Image	
 rss/maker/Maker	
 rss/maker/RSS__Maker__Base	
@@ -620,15 +612,6 @@ win32ole/WIN32OLE_TYPE
 win32ole/WIN32OLE_TYPELIB	
 win32ole/WIN32OLE_VARIABLE	
 win32ole/WIN32OLE_VARIANT	
-yaml/basenode	
-yaml/constants	(no front matter)
-yaml/error	(no front matter)
-yaml/rubytypes	
-yaml/stream	(no front matter)
-yaml/stringio	(no front matter)
-yaml/tag	(no front matter)
-yaml/yamlnode	
-yaml/ypath	(no front matter)
 zlib/Deflate	
 zlib/Error	
 zlib/GzipFile	

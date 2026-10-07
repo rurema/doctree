@@ -108,19 +108,20 @@ irb/workspace
 irb/ws-for-case-2			
 irb/xmp			
 json			FileFormat
-json/add/bigdecimal			
-json/add/complex			
-json/add/core			
-json/add/date			
-json/add/date_time			
-json/add/exception			
-json/add/ostruct			
-json/add/range			
-json/add/rational			
-json/add/regexp			
-json/add/struct			
-json/add/symbol			
-json/add/time			
+json/add/bigdecimal		4.1	
+json/add/complex		4.1	
+json/add/core		4.1	
+json/add/date		4.1	
+json/add/date_time		4.1	
+json/add/exception		4.1	
+json/add/ostruct		4.1	
+json/add/range		4.1	
+json/add/rational		4.1	
+json/add/regexp		4.1	
+json/add/string	4.0	4.1	
+json/add/struct		4.1	
+json/add/symbol		4.1	
+json/add/time		4.1	
 kconv			CharacterEncoding
 logger			
 mathn		2.5.0	Math
@@ -248,6 +249,7 @@ rexml/parsers/streamparser
 rexml/parsers/ultralightparser			
 rexml/sax2listener			
 rexml/streamlistener			
+rexml/validation/relaxng			
 rinda/rinda			
 rinda/tuplespace			
 ripper	1.9.0		Text
