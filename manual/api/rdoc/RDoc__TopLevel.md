@@ -51,6 +51,7 @@ RDoc が収集したクラスの内、name で指定した名前のモジュー�
 
 自身が管理するファイルの名前を返します。
 
+#%until 4.0
 ### def file_stat -> File::Stat
 
 自身が管理するファイルに関する [c:File::Stat] オブジェクトを返します。
@@ -60,6 +61,8 @@ RDoc が収集したクラスの内、name で指定した名前のモジュー�
 自身が管理するファイルに関する [c:File::Stat] オブジェクトを設定します。
 
 - **param** `val` -- [c:File::Stat] オブジェクトを指定します。
+
+#%end
 
 ### def display? -> bool
 {: since="1.9.3"}

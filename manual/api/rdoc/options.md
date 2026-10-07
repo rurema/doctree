@@ -71,20 +71,6 @@ end
 
 - **param** `val` -- 設定するディレクトリを文字列で指定します。
 
-### def op_name -> String
-
-コマンドライン引数の --opname オプションで指定した名前を文字列で返します。
-
-### def show_all -> bool
-
-コマンドライン引数の --all オプションを指定していた場合、true を返します。そうでない場合は false を返します。
-
-### def show_all=(val)
-
-val に true を指定した場合、コマンドライン引数の --all オプションと同様の指定を行います。
-
-- **param** `val` -- --all オプションと同じ指定を行う場合は true、そうでない場合は false を指定します。
-
 ### def main_page -> String | nil
 
 コマンドライン引数の --main オプションで指定したファイル名、クラス/モジュール名を返します。
@@ -96,10 +82,6 @@ val に true を指定した場合、コマンドライン引数の --all オプ
 コマンドライン引数の --main オプションと同様の指定を行います。
 
 - **param** `val` -- 設定するファイル名、クラス/モジュール名を文字列で指定します。
-
-### def merge -> true | nil
-
-コマンドライン引数の --merge オプションを指定していた場合、true を返します。そうでない場合は nil を返します。
 
 ### def quiet -> bool
 
@@ -134,23 +116,9 @@ Generator を返します。
 
 指定しなかった場合は 'html' を返します。
 
-### def diagram -> bool
-
-コマンドライン引数の --diagram オプションを指定していた場合、true を返します。そうでない場合は false を返します。
-
-### def fileboxes -> bool
-
-コマンドライン引数の --diagram オプション、--fileboxes オプションを指定していた場合、true を返します。そうでない場合は false を返します。
-
 ### def show_hash -> bool
 
 コマンドライン引数の --show-hash オプションを指定していた場合、true を返します。そうでない場合は false を返します。
-
-### def image_format -> String
-
-コマンドライン引数の --image-format オプションで指定した名前を文字列の配列で返します。
-
-指定しなかった場合は 'png' を返します。
 
 ### def charset -> String
 
@@ -158,50 +126,15 @@ Generator を返します。
 
 指定しなかった場合は、[m:$KCODE] に応じた値になります。
 
-### def inline_source -> bool
-
-コマンドライン引数の --inline-source オプションか --one-file を指定していた場合、もしくは --fmt オプションに xml 指定した場合に true を返します。そうでない場合は false を返します。
-
-### def all_one_file -> bool
-
-コマンドライン引数の --one-file を指定していた場合、もしくは --fmt オプションに xml 指定した場合に true を返します。そうでない場合は false を返します。
-
 ### def tab_width -> Integer
 
 コマンドライン引数の --tab-width オプションで指定した数値を返します。
-
-### def include_line_numbers -> bool
-
-コマンドライン引数の --include-line-numbers を指定していた場合に true
-を返します。そうでない場合は false を返します。
-
-### def extra_accessors -> Regexp | nil
-
-コマンドライン引数の --accessor オプションで指定したアクセサの名前すべてにマッチする正規表現オブジェクトを返します。
-
-指定しなかった場合は nil を返します。
-
-### def extra_accessor_flags -> {String => String}
-
-コマンドライン引数の --accessor オプションで指定したアクセサがキー、アクセサの種類が値のハッシュを返します。
-
-値は r、w、rw のいずれかです。それぞれ attr_reader、attr_writer、
-attr_accessor に対応します。
-
-### def css -> String
-
-コマンドライン引数の --style オプションで指定した URL を文字列で返します。
 
 ### def webcvs -> String | nil
 
 コマンドライン引数の --webcvs オプションで指定した URL を文字列で返します。
 
 指定しなかった場合は nil を返します。
-
-### def promiscuous
-
-コマンドライン引数の --promiscuous を指定していた場合に true を返します。
-そうでない場合は false を返します。
 
 ### def force_update -> bool
 

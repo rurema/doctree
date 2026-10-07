@@ -62,8 +62,7 @@ RDoc のコードツリーを表現するクラスの基本クラスです。
 
 - **param** `val` -- true を指定した場合、上記をドキュメントに含めます。
 
-- **SEE** [m:RDoc::CodeObject#document_self=],
-     [m:RDoc::CodeObject#remove_classes_and_modules]
+- **SEE** [m:RDoc::CodeObject#document_self=]
 
 ### def document_self -> bool
 
@@ -80,16 +79,7 @@ RDoc のコードツリーを表現するクラスの基本クラスです。
 
 - **param** `val` -- true を指定した場合、自身をドキュメントに含めます。
 
-- **SEE** [m:RDoc::CodeObject#document_children=],
-     [m:RDoc::CodeObject#remove_methods_etc]
-
-### def remove_classes_and_modules -> ()
-
-何もしません。[m:RDoc::CodeObject#document_children=] に false を指定した時のコールバックとして呼び出されます。オーバーライドして使用します。
-
-### def remove_methods_etc -> ()
-
-何もしません。[m:RDoc::CodeObject#document_self=] に false を指定した時のコールバックとして呼び出されます。オーバーライドして使用します。
+- **SEE** [m:RDoc::CodeObject#document_children=]
 
 ### def start_doc -> ()
 
@@ -131,11 +121,14 @@ RDoc のコードツリーを表現するクラスの基本クラスです。
 
 - **param** `val` -- [c:RDoc::Context::Section] オブジェクトを指定します。
 
+#%until 4.0
 ### def parent_file_name -> String
 
 self.parent のファイル名を返します。
 
 - **SEE** [m:RDoc::CodeObject#parent]
+
+#%end
 
 ### def parent_name -> String
 

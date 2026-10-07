@@ -69,9 +69,12 @@ Files this context is found in
 
 追加された [c:RDoc::Context::Section] の配列を返します。
 
+#%until 4.1
 ### def visibility -> :public | :protected | :private
 
 自身の可視性を [c:Symbol] で返します。
+
+#%end
 
 ### def <=>(other) -> -1 | 0 | 1
 
@@ -175,6 +178,7 @@ array に thing を追加します。
 
 追加されたクラスの配列を返します。
 
+#%until 4.0
 ### def defined_in?(file)
 
 Return true if at least part of this thing was defined in file
@@ -183,15 +187,20 @@ Return true if at least part of this thing was defined in file
 
 追加された [c:RDoc::Attr] に対してブロックを評価します。
 
+#%end
+
 ### def each_classmodule {|m| ... } -> [RDoc::SingleClass | RDoc::NormalClass | RDoc::NormalModule]
 
 追加されたクラス、モジュールに対してブロックを評価します。
 
 - **SEE** [m:RDoc::Context#classes], [m:RDoc::Context#modules]
 
+#%until 4.0
 ### def each_constant {|c| ... } -> [RDoc::Constant]
 
 追加された [c:RDoc::Constant] に対してブロックを評価します。
+
+#%end
 
 ### def each_method {|m| ... } -> [RDoc::AnyMethod]
 
@@ -226,9 +235,12 @@ the symbol references a module that contains that method
 
 追加された [c:RDoc::NormalModule] の配列を返します。
 
+#%until 4.1
 ### def ongoing_visibility=(vis)
 
 Change the default visibility for new methods
+
+#%end
 
 ### def record_location(toplevel)
 
