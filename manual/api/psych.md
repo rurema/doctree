@@ -104,24 +104,70 @@ libyaml のバージョンを返します。
 
 - **SEE** [m:Psych::LIBYAML_VERSION]
 
-### def Psych.load(yaml, filename: nil, fallback: false, symbolize_names: false) -> object
-#%until 3.1
-### def Psych.load(yaml, filename = nil, fallback: false, symbolize_names: false) -> object
+#%since 3.1
+### def Psych.load(yaml, permitted_classes: [Symbol], permitted_symbols: [], aliases: false, filename: nil, fallback: nil, symbolize_names: false, freeze: false) -> object
+#%else
+### def Psych.load(yaml, filename: nil, fallback: false, symbolize_names: false, freeze: false) -> object
+### def Psych.load(yaml, filename = nil, fallback: false, symbolize_names: false, freeze: false) -> object
 #%end
 
 YAML ドキュメントを Ruby のデータ構造(オブジェクト)に変換します。
 
 入力に複数のドキュメントが含まれている場合は、先頭のものを変換して返します。
 
+#%since 3.1
+[m:Psych.safe_load] と同様に、デフォルトでは限られたクラスのオブジェクトにしか変換しません。[m:Psych.safe_load] との違いは、デフォルトで [c:Symbol] も許可されていることだけです。
+
+`yaml` に許可されていないクラスが含まれていた場合は、[c:Psych::DisallowedClass] 例外が発生します。変換を許可するクラスは、キーワード引数 `permitted_classes` で指定します。`permitted_classes` を指定した場合、[c:Symbol] は `permitted_classes` に含めない限り許可されません。
+
+```ruby title="permitted_classes: に Date を渡した例"
+require 'psych'
+require 'date'
+
+yaml = "--- 2024-01-01"
+begin
+  Psych.load(yaml)
+rescue Psych::DisallowedClass => e
+  p e.message  # => "Tried to load unspecified class: Date"
+end
+p Psych.load(yaml, permitted_classes: [Date]) == Date.new(2024, 1, 1)  # => true
+```
+
+`yaml` がエイリアスを含んでいてキーワード引数 `aliases` が false の時、[c:Psych::BadAlias] 例外が発生します。
+
+クラスを制限せずに変換するには [m:Psych.unsafe_load] を使います。
+
+#%end
 filename はパース中に発生した例外のメッセージに用います。
 
 - **param** `yaml` -- YAML ドキュメント(文字列 or IO オブジェクト)
+#%since 3.1
+- **param** `permitted_classes` -- 読み込みを許可するクラスの配列。デフォルトは [c:Symbol] だけを含む配列です。
+- **param** `permitted_symbols` -- 引数 `permitted_classes` に [c:Symbol] を含む場合に読み込みを許可する [c:Symbol] の配列。
+                         省略した場合は全ての [c:Symbol] を許可します。
+- **param** `aliases` -- エイリアスの読み込みを許可するかどうか。
+#%end
 - **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列。
-- **param** `fallback` -- 引数 yaml に空のYAMLを指定した場合の戻り値を指定します。デフォルトは false です。
+#%since 3.1
+- **param** `fallback` -- 引数 `yaml` に空のYAMLを指定した場合の戻り値を指定します。デフォルトは nil です。
+#%else
+- **param** `fallback` -- 引数 `yaml` に空のYAMLを指定した場合の戻り値を指定します。デフォルトは false です。
+#%end
 - **param** `symbolize_names` -- ハッシュ(YAMLの仕様では正確にはマッピング)のキーを [c:Symbol] に変換するかどうかを指定します。
                        true を指定した場合は変換します。デフォルトでは文字列に変換されます。
+- **param** `freeze` -- true を指定すると再帰的に freeze されたオブジェクトを返します。
+              デフォルトは false です。
 - **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
-- **SEE** [m:Psych.parse]
+#%since 3.1
+- **raise** `Psych::DisallowedClass` -- `yaml` に `permitted_classes` で許可されていないクラスが含まれていたときに発生します
+- **raise** `Psych::BadAlias` -- `yaml` がエイリアスを含んでいて `aliases` が false のときに発生します
+#%end
+- **raise** `TypeError` -- `yaml` に nil を指定したときに発生します
+#%since 3.1
+- **SEE** [m:Psych.parse], [m:Psych.safe_load], [m:Psych.unsafe_load]
+#%else
+- **SEE** [m:Psych.parse], [m:Psych.safe_load]
+#%end
 
 ```ruby title="例"
 require 'psych'
@@ -413,6 +459,10 @@ filename はパース中に発生した例外のメッセージに用います�
 filename で指定したファイルを YAML ドキュメントとして
 Ruby のオブジェクトに変換します。
 
+#%since 3.1
+[m:Psych.load] と同様に、デフォルトでは限られたクラスのオブジェクトにしか変換しません。`permitted_classes` などのオプションは [m:Psych.load] と同じものが指定できます。
+
+#%end
 - **param** `filename` -- ファイル名
 - **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
 
