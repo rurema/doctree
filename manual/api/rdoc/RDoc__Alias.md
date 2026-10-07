@@ -2,8 +2,7 @@
 library:
 #%since 3.4
   - rdoc/code_object/alias
-#%end
-#%until 3.4
+#%else
   - rdoc/alias
 #%end
 ---

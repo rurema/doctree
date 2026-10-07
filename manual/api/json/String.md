@@ -3,8 +3,7 @@ library: json
 include:
 #%until 4.1
   - JSON::Ext::Generator::GeneratorMethods::String
-#%end
-#%since 4.1
+#%else
   - JSON::GeneratorMethods
 #%end
 extend:

@@ -2,8 +2,7 @@
 library:
 #%since 3.4
   - rdoc/code_object/anon_class
-#%end
-#%until 3.4
+#%else
   - rdoc/anon_class
 #%end
 ---

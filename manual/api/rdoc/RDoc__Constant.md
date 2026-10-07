@@ -2,8 +2,7 @@
 library:
 #%since 3.4
   - rdoc/code_object/constant
-#%end
-#%until 3.4
+#%else
   - rdoc/constant
 #%end
 ---
