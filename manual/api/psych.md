@@ -8,7 +8,7 @@ category: FileFormat
 
 ### 概要
 
-Psych を用いると YAML のパースと出力ができます。
+[c:Psych] を用いると YAML のパースと出力ができます。
 これらの機能は libyaml <https://pyyaml.org/wiki/LibYAML> を用いて実装されています。さらに Ruby の大半のオブジェクトと YAML フォーマットのデータの間を相互に変換できます。
 
 ### 基本的な使いかた
@@ -28,7 +28,7 @@ p({ :a => 'b'}.to_yaml) # => "---\n:a: b\n"
 
 #### YAML のパース
 
-Psych は YAML ドキュメントのパースができます。
+[c:Psych] は YAML ドキュメントのパースができます。
 ユーザの必要に応じ、高水準な API から低水準な API まで用意されています。
 最も低水準なものは、イベントベースな API です。中程度の水準のものとして
 YAML の AST(Abstract Syntax Tree)にアクセスする APIがあります。
@@ -41,7 +41,7 @@ YAML の AST(Abstract Syntax Tree)にアクセスする APIがあります。
 
 ##### 中水準 パース API
 
-Psych には YAML ドキュメントの AST にアクセスする API があります。
+[c:Psych] には YAML ドキュメントの AST にアクセスする API があります。
 この AST は [c:Psych::Parser] と [c:Psych::TreeBuilder] で構築します。
 [m:Psych.parse_stream]、[c:Psych::Nodes]、[c:Psych::Nodes::Node]
 などを経由して AST を解析したり操作したりできます。
@@ -53,7 +53,7 @@ YAML ドキュメントをパースして Ruby のオブジェクトに変換で
 
 #### YAML ドキュメントの出力
 
-Psych は YAML ドキュメントを出力する機能があります。
+[c:Psych] は YAML ドキュメントを出力する機能があります。
 高・中・低の三つの水準の API があります。
 低水準 API はイベントベースの API で、中水準のものは AST を構築する API、高水準の API は Ruby のオブジェクトを直接 YAML ドキュメントに変換する API
 です。これはパースの高・中・低水準 API と対応しています。
@@ -88,7 +88,7 @@ Psych は YAML ドキュメントを出力する機能があります。
 
 ### const VERSION -> String
 
-Psych のバージョン。
+[c:Psych] のバージョン。
 
 ### const LIBYAML_VERSION -> String
 
@@ -100,7 +100,7 @@ libyaml のバージョン。
 
 libyaml のバージョンを返します。
 
-[major, minor patch-level] という 3 つの整数からなる配列を返します。
+`[major, minor patch-level]` という 3 つの整数からなる配列を返します。
 
 - **SEE** [m:Psych::LIBYAML_VERSION]
 
@@ -145,9 +145,9 @@ p Psych.load(yaml, permitted_classes: [Date]) == Date.new(2024, 1, 1)  # => true
 クラスを制限せずに変換するには [m:Psych.unsafe_load] を使います。
 
 #%end
-filename はパース中に発生した例外のメッセージに用います。
+`filename` はパース中に発生した例外のメッセージに用います。
 
-- **param** `yaml` -- YAML ドキュメント(文字列 or IO オブジェクト)
+- **param** `yaml` -- YAML ドキュメント(文字列 or [c:IO] オブジェクト)
 #%since 3.1
 - **param** `permitted_classes` -- 読み込みを許可するクラスの配列。デフォルトは [c:Symbol] だけを含む配列です。
 - **param** `permitted_symbols` -- 引数 `permitted_classes` に [c:Symbol] を含む場合に読み込みを許可する [c:Symbol] の配列。
@@ -162,7 +162,7 @@ filename はパース中に発生した例外のメッセージに用います�
 #%end
 - **param** `symbolize_names` -- ハッシュ(YAMLの仕様では正確にはマッピング)のキーを [c:Symbol] に変換するかどうかを指定します。
                        true を指定した場合は変換します。デフォルトでは文字列に変換されます。
-- **param** `freeze` -- true を指定すると再帰的に freeze されたオブジェクトを返します。
+- **param** `freeze` -- true を指定すると再帰的に [m:Object#freeze] されたオブジェクトを返します。
               デフォルトは false です。
 #%since 3.2
 - **param** `strict_integer` -- true を指定すると、"1,000" のようなカンマを含む数値を [c:Integer] に変換せず、文字列として返します。デフォルトは false です。
@@ -196,7 +196,7 @@ rescue Psych::SyntaxError => ex
 end
 ```
 
-キーワード引数 symbolize_names に true を指定した場合はハッシュのキーを [c:Symbol] に変換して返します。
+キーワード引数 `symbolize_names` に true を指定した場合はハッシュのキーを [c:Symbol] に変換して返します。
 
 ```ruby title="例"
 require 'psych'
@@ -227,17 +227,17 @@ p Psych.load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 
 デフォルトでは以下のクラスのオブジェクトしか変換しません。
 
-- TrueClass
-- FalseClass
-- NilClass
-- Numeric
-- String
-- Array
-- Hash
+- [c:TrueClass]
+- [c:FalseClass]
+- [c:NilClass]
+- [c:Numeric]
+- [c:String]
+- [c:Array]
+- [c:Hash]
 
 再帰的なデータ構造はデフォルトでは許可されていません。
 
-任意のクラスを許可するにはキーワード引数 permitted_classes を指定すると、そのクラスが追加されます。例えば Date クラスを許可するには以下のように書いてください:
+任意のクラスを許可するにはキーワード引数 `permitted_classes` を指定すると、そのクラスが追加されます。例えば [c:Date] クラスを許可するには以下のように書いてください:
 
 ```ruby title="permitted_classes: に Date を渡した例"
 require 'psych'
@@ -246,9 +246,9 @@ require 'date'
 Psych.safe_load(yaml, permitted_classes: [Date])
 ```
 
-すると上のクラス一覧に加えて Date クラスが読み込まれます。
+すると上のクラス一覧に加えて [c:Date] クラスが読み込まれます。
 
-エイリアスはキーワード引数 aliases を指定することで明示的に許可できます。
+エイリアスはキーワード引数 `aliases` を指定することで明示的に許可できます。
 
 ```ruby title="aliases: true の例"
 require 'psych'
@@ -260,15 +260,15 @@ Psych.safe_load yaml                # ~> Psych::AliasesNotEnabled
 p Psych.safe_load yaml, aliases: true # => エイリアスが読み込まれる
 ```
 
-yaml に許可されていないクラスが含まれていた場合は、
-Psych::DisallowedClass 例外が発生します。
+`yaml` に許可されていないクラスが含まれていた場合は、
+[c:Psych::DisallowedClass] 例外が発生します。
 
-yaml がエイリアスを含んでいてキーワード引数 aliases が false の時、
-Psych::BadAlias 例外が発生します。
+`yaml` がエイリアスを含んでいてキーワード引数 `aliases` が false の時、
+[c:Psych::BadAlias] 例外が発生します。
 
-filename はパース中に発生した例外のメッセージに用います。
+`filename` はパース中に発生した例外のメッセージに用います。
 
-キーワード引数 symbolize_names に true を指定した場合はハッシュのキーを [c:Symbol] に変換して返します。
+キーワード引数 `symbolize_names` に true を指定した場合はハッシュのキーを [c:Symbol] に変換して返します。
 
 ```ruby title="symbolize_names: true の例"
 require 'psych'
@@ -282,7 +282,7 @@ p Psych.safe_load("---\n foo: bar", symbolize_names: true)  # => {:foo=>"bar"}
 #%end
 ```
 
-キーワード引数 freeze に true を指定した場合は再帰的に
+キーワード引数 `freeze` に true を指定した場合は再帰的に
 [m:Object#freeze] したオブジェクトを返します。
 
 ```ruby title="freeze: true の例"
@@ -307,7 +307,7 @@ p yaml["aaa"]["bbb"].first.frozen?    # = true
 ```
 
 #%until 3.1
-また legacy_permitted_classes などのオプション引数は非推奨な引数となっています。
+また `legacy_permitted_classes` などのオプション引数は非推奨な引数となっています。
 [m:$-w] が true の時にオプション引数を渡すと警告が出力されます。
 
 ```ruby title="オプション引数を使用した例"
@@ -319,16 +319,16 @@ Psych.safe_load("", [Date])
 ```
 
 #%end
-- **param** `io` -- YAMLフォーマットの文書の読み込み先のIOオブジェクト。
+- **param** `io` -- YAMLフォーマットの文書の読み込み先の [c:IO] オブジェクト。
 - **param** `permitted_classes` -- 追加で読み込みを許可するクラスの配列。
-- **param** `permitted_symbols` -- 引数 permitted_classesに [c:Symbol] を含む場合に読み込みを許可する [c:Symbol] の配列。
+- **param** `permitted_symbols` -- 引数 `permitted_classes` に [c:Symbol] を含む場合に読み込みを許可する [c:Symbol] の配列。
                          省略した場合は全ての [c:Symbol] を許可します。
 - **param** `aliases` -- エイリアスの読み込みを許可するかどうか。
 - **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列。
-- **param** `fallback` -- 引数 yaml に空のYAMLを指定した場合の戻り値を指定します。デフォルトは nil です。
+- **param** `fallback` -- 引数 `yaml` に空のYAMLを指定した場合の戻り値を指定します。デフォルトは nil です。
 - **param** `symbolize_names` -- ハッシュ(YAMLの仕様では正確にはマッピング)のキーを [c:Symbol] に変換するかどうかを指定します。
                        true を指定した場合は変換します。デフォルトでは文字列に変換されます。
-- **param** `freeze` -- true を指定すると再帰的に freeze されたオブジェクトを返します。
+- **param** `freeze` -- true を指定すると再帰的に [m:Object#freeze] されたオブジェクトを返します。
               デフォルトは false です。
 #%since 3.2
 - **param** `strict_integer` -- true を指定すると、"1,000" のようなカンマを含む数値を [c:Integer] に変換せず、文字列として返します。デフォルトは false です。
@@ -346,11 +346,11 @@ YAML ドキュメントをパースし、YAML の AST を返します。
 
 入力に複数のドキュメントが含まれている場合は、先頭のものを AST に変換して返します。
 
-filename はパース中に発生した例外のメッセージに用います。
+`filename` はパース中に発生した例外のメッセージに用います。
 
 AST については [c:Psych::Nodes] を参照してください。
 
-- **param** `yaml` -- YAML ドキュメント(文字列 or IO オブジェクト)
+- **param** `yaml` -- YAML ドキュメント(文字列 or [c:IO] オブジェクト)
 - **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列。
 - **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
 - **SEE** [m:Psych.load]
@@ -370,7 +370,7 @@ end
 
 ### def Psych.parse_file(filename) -> Psych::Nodes::Document
 
-filename で指定したファイルをパースして YAML の AST を返します。
+`filename` で指定したファイルをパースして YAML の AST を返します。
 
 - **param** `filename` -- パースするファイルの名前
 - **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
@@ -383,11 +383,11 @@ filename で指定したファイルをパースして YAML の AST を返しま
 ### def Psych.parse_stream(yaml){|node| ... } -> ()
 
 YAML ドキュメントをパースします。
-yaml が 複数の YAML ドキュメントを含む場合を取り扱うことができます。
+`yaml` が 複数の YAML ドキュメントを含む場合を取り扱うことができます。
 
 ブロックなしの場合は YAML の AST (すべての YAML ドキュメントを保持した [c:Psych::Nodes::Stream] オブジェクト)を返します。
 
-ブロック付きの場合は、そのブロックに最初の YAML ドキュメントの Psych::Nodes::Document オブジェクトが渡されます。
+ブロック付きの場合は、そのブロックに最初の YAML ドキュメントの [c:Psych::Nodes::Document] オブジェクトが渡されます。
 この場合の返り値には意味がありません。
 
 - **SEE** [c:Psych::Nodes]
@@ -401,12 +401,12 @@ p Psych.parse_stream("---\n - a\n - b") # => #<Psych::Nodes::Stream:0x00>
 ### def Psych.dump(o, options = {}) -> String
 ### def Psych.dump(o, io, options = {}) -> ()
 
-Ruby のオブジェクト o を YAML ドキュメントに変換します。
+Ruby のオブジェクト `o` を YAML ドキュメントに変換します。
 
-io に IO オブジェクトを指定した場合は、変換されたドキュメントがその IO に書き込まれます。
+`io` に [c:IO] オブジェクトを指定した場合は、変換されたドキュメントがその IO に書き込まれます。
 指定しなかった場合は変換されたドキュメントが文字列としてメソッドの返り値となります。
 
-options で出力に関するオプションを以下の指定できます。
+`options` で出力に関するオプションを以下の指定できます。
 
 #%include(psych/dump_options)
 
@@ -445,7 +445,7 @@ p Psych.dump_stream("foo\n  ", {}) # => "--- ! \"foo\\n  \"\n--- {}\n"
 
 ### def Psych.to_json(o) -> String
 
-Ruby のオブジェクト o を JSON の文字列に変換します。
+Ruby のオブジェクト `o` を JSON の文字列に変換します。
 
 - **param** `o` -- 変換対象となるオブジェクト
 
@@ -475,15 +475,15 @@ end
 p list # => ['foo', 'bar']
 ```
 
-filename はパース中に発生した例外のメッセージに用います。
+`filename` はパース中に発生した例外のメッセージに用います。
 
-- **param** `yaml` -- YAML ドキュメント(文字列 or IO オブジェクト)
+- **param** `yaml` -- YAML ドキュメント(文字列 or [c:IO] オブジェクト)
 - **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列。
 - **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
 
 ### def Psych.load_file(filename) -> object
 
-filename で指定したファイルを YAML ドキュメントとして
+`filename` で指定したファイルを YAML ドキュメントとして
 Ruby のオブジェクトに変換します。
 
 #%since 3.1
@@ -516,9 +516,9 @@ Ruby のオブジェクトに変換します。
 
 ### def Psych.safe_load_file(filename) -> object
 
-filename で指定したファイルの内容を安全に YAML ドキュメントとして読み込み、Ruby のオブジェクトに変換します。
+`filename` で指定したファイルの内容を安全に YAML ドキュメントとして読み込み、Ruby のオブジェクトに変換します。
 
-オプションは [m:Psych.safe_load] と同じものが指定できます。ファイルが空の場合は fallback オプションで指定した値(デフォルトは nil)を返します。
+オプションは [m:Psych.safe_load] と同じものが指定できます。ファイルが空の場合は `fallback` オプションで指定した値(デフォルトは nil)を返します。
 
 - **param** `filename` -- 読み込むファイルの名前
 - **raise** `Psych::SyntaxError` -- YAML ドキュメントに文法エラーが発見されたときに発生します
@@ -534,14 +534,14 @@ filename で指定したファイルの内容を安全に YAML ドキュメン�
 
 ブロックありの場合は変換した各オブジェクトを引数としてそのブロックを呼び出し、nil を返します。
 
-permitted_classes、aliases の意味は [m:Psych.safe_load] と同じです。
+`permitted_classes`、`aliases` の意味は [m:Psych.safe_load] と同じです。
 
-- **param** `yaml` -- YAML ドキュメント(文字列 or IO オブジェクト)
+- **param** `yaml` -- YAML ドキュメント(文字列 or [c:IO] オブジェクト)
 - **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列
 - **param** `permitted_classes` -- 追加で読み込みを許可するクラスの配列
 - **param** `aliases` -- エイリアスの読み込みを許可するかどうか
-- **raise** `Psych::DisallowedClass` -- yaml に permitted_classes で許可されていないクラスが含まれていたときに発生します
-- **raise** `Psych::BadAlias` -- yaml がエイリアスを含み、かつ aliases が false のときに発生します
+- **raise** `Psych::DisallowedClass` -- `yaml` に `permitted_classes` で許可されていないクラスが含まれていたときに発生します
+- **raise** `Psych::BadAlias` -- `yaml` がエイリアスを含み、かつ `aliases` が false のときに発生します
 - **SEE** [m:Psych.safe_load], [m:Psych.load_stream]
 
 ```ruby title="例"
@@ -562,20 +562,20 @@ p list # => ['foo', 'bar']
 ### def Psych.safe_dump(o, options = {}) -> String
 ### def Psych.safe_dump(o, io, options = {}) -> ()
 
-Ruby のオブジェクト o を安全に YAML ドキュメントに変換します。
+Ruby のオブジェクト `o` を安全に YAML ドキュメントに変換します。
 
 [m:Psych.dump] と同様の変換を行いますが、デフォルトでは以下のクラスのオブジェクトしか変換しません。
 
-- TrueClass
-- FalseClass
-- NilClass
-- Integer
-- Float
-- String
-- Array
-- Hash
+- [c:TrueClass]
+- [c:FalseClass]
+- [c:NilClass]
+- [c:Integer]
+- [c:Float]
+- [c:String]
+- [c:Array]
+- [c:Hash]
 
-options のキー permitted_classes を指定すると、変換を許可するクラスを追加できます。
+`options` のキー `permitted_classes` を指定すると、変換を許可するクラスを追加できます。
 
 ```ruby title="permitted_classes に Date を渡した例"
 require 'psych'
@@ -584,18 +584,18 @@ require 'date'
 Psych.safe_dump(Date.today, permitted_classes: [Date])
 ```
 
-o が permitted_classes で許可されていないクラスのオブジェクトを含む場合は、
-Psych::DisallowedClass 例外が発生します。
+`o` が `permitted_classes` で許可されていないクラスのオブジェクトを含む場合は、
+[c:Psych::DisallowedClass] 例外が発生します。
 
-io に IO オブジェクトを指定した場合は、変換されたドキュメントがその IO に書き込まれます。
+`io` に [c:IO] オブジェクトを指定した場合は、変換されたドキュメントがその IO に書き込まれます。
 指定しなかった場合は変換されたドキュメントが文字列としてメソッドの返り値となります。
 
-options でその他に指定できる項目は [m:Psych.dump] と同じです。
+`options` でその他に指定できる項目は [m:Psych.dump] と同じです。
 
 - **param** `o` -- 変換するオブジェクト
 - **param** `io` -- 出力先
-- **param** `options` -- 出力オプション(permitted_classes を含む)
-- **raise** `Psych::DisallowedClass` -- o が permitted_classes で許可されていないクラスのオブジェクトを含むときに発生します
+- **param** `options` -- 出力オプション(`permitted_classes` を含む)
+- **raise** `Psych::DisallowedClass` -- `o` が `permitted_classes` で許可されていないクラスのオブジェクトを含むときに発生します
 - **SEE** [m:Psych.dump], [m:Psych.safe_load]
 
 #%end
@@ -611,26 +611,26 @@ options でその他に指定できる項目は [m:Psych.dump] と同じです�
 ### def Psych.unsafe_load(yaml, filename: nil, fallback: false, symbolize_names: false, freeze: false) -> object
 #%end
 
-YAML ドキュメント yaml を Ruby のデータ構造(オブジェクト)に変換します。
+YAML ドキュメント `yaml` を Ruby のデータ構造(オブジェクト)に変換します。
 
 [m:Psych.load] と異なりクラスの制限を行わず、任意の Ruby オブジェクトに変換します。
 外部から与えられた信頼できない YAML ドキュメントの変換には使わないでください。信頼できないドキュメントには [m:Psych.safe_load] を使ってください。
 
 入力に複数のドキュメントが含まれている場合は、先頭のものを変換して返します。
 
-yaml が空の場合は fallback で指定した値(デフォルトは false)を返します。
+`yaml` が空の場合は `fallback` で指定した値(デフォルトは false)を返します。
 
-filename はパース中に発生した例外のメッセージに用います。
+`filename` はパース中に発生した例外のメッセージに用います。
 
-キーワード引数 symbolize_names に true を指定した場合はハッシュのキーを [c:Symbol] に変換して返します。
+キーワード引数 `symbolize_names` に true を指定した場合はハッシュのキーを [c:Symbol] に変換して返します。
 
-キーワード引数 freeze に true を指定した場合は再帰的に [m:Object#freeze] したオブジェクトを返します。
+キーワード引数 `freeze` に true を指定した場合は再帰的に [m:Object#freeze] したオブジェクトを返します。
 
-- **param** `yaml` -- YAML ドキュメント(文字列 or IO オブジェクト)
+- **param** `yaml` -- YAML ドキュメント(文字列 or [c:IO] オブジェクト)
 - **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列
-- **param** `fallback` -- 引数 yaml に空の YAML を指定した場合の戻り値。デフォルトは false です
+- **param** `fallback` -- 引数 `yaml` に空の YAML を指定した場合の戻り値。デフォルトは false です
 - **param** `symbolize_names` -- ハッシュのキーを [c:Symbol] に変換するかどうか
-- **param** `freeze` -- true を指定すると再帰的に freeze されたオブジェクトを返します
+- **param** `freeze` -- true を指定すると再帰的に [m:Object#freeze] されたオブジェクトを返します
 #%since 3.2
 - **param** `strict_integer` -- true を指定すると、"1,000" のようなカンマを含む数値を [c:Integer] に変換せず、文字列として返します。デフォルトは false です。
 #%end
@@ -638,7 +638,7 @@ filename はパース中に発生した例外のメッセージに用います�
 - **param** `parse_symbols` -- false を指定すると、":foo" のような文字列を [c:Symbol] に変換せず、文字列として返します。デフォルトは true です。
 #%end
 - **raise** `Psych::SyntaxError` -- YAML ドキュメントに文法エラーが発見されたときに発生します
-- **raise** `TypeError` -- yaml に nil を指定したときに発生します
+- **raise** `TypeError` -- `yaml` に nil を指定したときに発生します
 - **SEE** [m:Psych.load], [m:Psych.safe_load]
 
 ```ruby title="例"
@@ -653,11 +653,11 @@ p Psych.unsafe_load("---\n - a\n - b")   # => ['a', 'b']
 #%since 3.1
 ### def Psych.unsafe_load_file(filename) -> object
 
-filename で指定したファイルの内容を [m:Psych.unsafe_load] を使って Ruby のオブジェクトに変換します。
+`filename` で指定したファイルの内容を [m:Psych.unsafe_load] を使って Ruby のオブジェクトに変換します。
 
 信頼できないファイルの変換には使わないでください。信頼できないファイルには [m:Psych.safe_load_file] を使ってください。
 
-ファイルが空の場合は fallback で指定した値(デフォルトは false)を返します。
+ファイルが空の場合は `fallback` で指定した値(デフォルトは false)を返します。
 
 - **param** `filename` -- 読み込むファイルの名前
 - **raise** `Psych::SyntaxError` -- YAML ドキュメントに文法エラーが発見されたときに発生します
@@ -667,7 +667,7 @@ filename で指定したファイルの内容を [m:Psych.unsafe_load] を使っ
 
 # class Psych::Exception < RuntimeError
 
-Psych 関連のエラーを表す例外です。
+[c:Psych] 関連のエラーを表す例外です。
 
 # class Psych::BadAlias < Psych::Exception
 
