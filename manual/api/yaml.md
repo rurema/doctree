@@ -42,7 +42,11 @@ str_r["Suzuki Suneo"] = {
   "birthday" => Date.new(1992, 12, 21)
 }
 
+#%since 3.1
+p str_r == YAML.load(str_l, permitted_classes: [Date])  # => true
+#%else
 p str_r == YAML.load(str_l)  # => true
+#%end
 ```
 
 ```ruby title="例3: 構造化されたログ"
@@ -92,13 +96,13 @@ end
 
 ### タグの指定
 
-!ruby/sym :foo などのようにタグを指定することで、読み込み時に記述した値の型を指定できます。
+`!ruby/sym foo` などのようにタグを指定することで、読み込み時に記述した値の型を指定できます。
 
 ```ruby title="例"
 require 'yaml'
 p YAML.load(<<~EOS)
   ---
-  !ruby/sym :foo
+  !ruby/sym foo
 EOS
 # => :foo
 ```
@@ -118,35 +122,29 @@ EOS
 - !ruby/exception: 例外オブジェクト
 - !ruby/object:<クラス名>: 上記以外のオブジェクト
 
+#%since 3.1
+[`YAML.load`](m:Psych.load) が既定で変換するのは、一部のクラスのオブジェクトだけです。それ以外のクラス([c:Regexp] や [c:Range]、自分で定義したクラスなど)のオブジェクトに変換しようとすると、例外 [c:Psych::DisallowedClass] が発生します。変換するには、キーワード引数 `permitted_classes` に変換を許可するクラスを指定してください。`permitted_classes` については [m:Psych.safe_load] を参照してください。
+#%end
+
 ```ruby title="例"
 require 'yaml'
-p YAML.load(<<~EOS)
+
+yaml = <<~EOS
   ---
   array: !ruby/array [1, 2, 3]
   hash: !ruby/hash {foo: 1, bar: 2}
   regexp: !ruby/regexp /foo|bar/
   range: !ruby/range 1..10
 EOS
-#%since 3.4
-# => {"regexp" => /foo|bar/, "hash" => {"foo" => 1, "bar" => 2}, "array" => [1, 2, 3], "range" => 1..10}
+#%since 3.1
+p YAML.load(yaml, permitted_classes: [Regexp, Range])
 #%else
-# => {"regexp"=>/foo|bar/, "hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3], "range"=>1..10}
+p YAML.load(yaml)
 #%end
-```
-
-これらは tag:ruby.yaml.org,2002:array のように指定する事もできます。
-
-```ruby title="例"
-require 'yaml'
-p YAML.load(<<~EOS)
-  ---
-  array: !tag:ruby.yaml.org,2002:array [1, 2, 3]
-  hash: !tag:ruby.yaml.org,2002:hash {foo: 1, bar: 2}
-EOS
 #%since 3.4
-# => {"hash" => {"foo" => 1, "bar" => 2}, "array" => [1, 2, 3]}
+# => {"array" => [1, 2, 3], "hash" => {"foo" => 1, "bar" => 2}, "regexp" => /foo|bar/, "range" => 1..10}
 #%else
-# => {"hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3]}
+# => {"array"=>[1, 2, 3], "hash"=>{"foo"=>1, "bar"=>2}, "regexp"=>/foo|bar/, "range"=>1..10}
 #%end
 ```
 
@@ -163,11 +161,16 @@ class Foo
   end
 end
 
-p YAML.load(<<~EOS)
+yaml = <<~EOS
   ---
   !ruby/object:Foo
   bar: "test.modified"
 EOS
+#%since 3.1
+p YAML.load(yaml, permitted_classes: [Foo])
+#%else
+p YAML.load(yaml)
+#%end
 # => #<Foo:0xf743f754 @bar="test.modified">
 ```
 
@@ -179,10 +182,15 @@ module Foo
   end
 end
 
-p YAML.load(<<~EOS)
+yaml = <<~EOS
   ---
-  !ruby/object:Foo
+  !ruby/object:Foo::Bar {}
 EOS
+#%since 3.1
+p YAML.load(yaml, permitted_classes: [Foo::Bar])
+#%else
+p YAML.load(yaml)
+#%end
 # => #<Foo::Bar:0xf73907b8>
 ```
 
