@@ -1,272 +1,119 @@
-# class REXML::Validation::RelaxNG < Object
+---
+type: library
+include:
+  - REXML::Validation::Validator
+---
+XML 文書を RELAX NG のスキーマで検証するためのライブラリです。
 
-include REXML::Validation::Validator
+[c:REXML::Validation::RelaxNG] のオブジェクト(バリデータ)を、[c:REXML::Parsers::UltraLightParser] などのパーサの `add_listener` メソッドに渡して使います。パーサが文書を読み進めるのに合わせて検証が行われ、文書がスキーマに合わないことが分かった時点で [c:REXML::Validation::ValidationException] が発生します。
 
-RelaxNGに基づくXMLバリデータ。
-
-```ruby
-require 'rexml/document'
+```ruby title="例"
+require 'rexml/parsers/ultralightparser'
 require 'rexml/validation/relaxng'
 
-relaxng_schema = <<RELAXNG
-<?xml version="1.0" encoding="UTF-8"?>
-<element name="addressBook" xmlns="http://relaxng.org/ns/structure/1.0">
-  <zeroOrMore>
-    <element name="card">
-      <element name="name">
-        <text/>
+schema = <<~RELAXNG
+  <?xml version="1.0" encoding="UTF-8"?>
+  <element name="addressBook" xmlns="http://relaxng.org/ns/structure/1.0">
+    <zeroOrMore>
+      <element name="card">
+        <element name="name"><text/></element>
+        <element name="email"><text/></element>
       </element>
-      <element name="email">
-        <text/>
-      </element>
-      <optional>
-        <element name="note">
-          <text/>
-        </element>
-      </optional>
-    </element>
-  </zeroOrMore>
-</element>
+    </zeroOrMore>
+  </element>
 RELAXNG
 
-xml = <<XML
-<addressBook>
-  <card>
-    <name>John Smith</name>
-    <email>js@example.com</email>
-  </card>
-  <card>
-    <name>Fred Bloggs</name>
-    <email>fb@example.net</email>
-  </card>
-</addressBook>
-XML
+validator = REXML::Validation::RelaxNG.new(schema)
 
-validator = REXML::Validation::RelaxNG.new(relaxng_schema)
-parser = REXML::Parsers::TreeParser.new(xml)
+# スキーマに合う文書は、例外が発生せずにパースが終わる
+xml = "<addressBook><card><name>John Smith</name><email>js@example.com</email></card></addressBook>"
+parser = REXML::Parsers::UltraLightParser.new(xml)
 parser.add_listener(validator)
 parser.parse
-#%since 3.4
-# ~> /path/to/gems/rexml-3.4.4/lib/rexml/validation/validation.rb:21:in 'REXML::Validation::Validator#validate': Validation error.  Expected: :end_element(  ) or :start_element( card ) from < Z.2 #:start_element( card ), :start_element( name ), :text(  ), :end_element(  ), :start_element( email ), :text(  ), :end_element(  ), < O.3 #:start_element( note ), :text(  ), :end_element(  ) >, :end_element(  ) >  but got :text(  (REXML::Validation::ValidationException)
-#%else
-# ~> /path/to/gems/rexml-3.3.9/lib/rexml/validation/validation.rb:21:in `validate': Validation error.  Expected: :end_element(  ) or :start_element( card ) from < Z.2 #:start_element( card ), :start_element( name ), :text(  ), :end_element(  ), :start_element( email ), :text(  ), :end_element(  ), < O.3 #:start_element( note ), :text(  ), :end_element(  ) >, :end_element(  ) >  but got :text(  (REXML::Validation::ValidationException)
-#%end
-# ~>    )
-#%since 3.4
-# ~> 	from /path/to/gems/rexml-3.4.4/lib/rexml/validation/relaxng.rb:123:in 'REXML::Validation::RelaxNG#receive'
-# ~> 	from /path/to/gems/rexml-3.4.4/lib/rexml/parsers/baseparser.rb:251:in 'block (2 levels) in REXML::Parsers::BaseParser#pull'
-# ~> 	from /path/to/gems/rexml-3.4.4/lib/rexml/parsers/baseparser.rb:250:in 'Array#each'
-# ~> 	from /path/to/gems/rexml-3.4.4/lib/rexml/parsers/baseparser.rb:250:in 'block in REXML::Parsers::BaseParser#pull'
-# ~> 	from <internal:kernel>:91:in 'Kernel#tap'
-# ~> 	from /path/to/gems/rexml-3.4.4/lib/rexml/parsers/baseparser.rb:249:in 'REXML::Parsers::BaseParser#pull'
-# ~> 	from /path/to/gems/rexml-3.4.4/lib/rexml/parsers/treeparser.rb:21:in 'REXML::Parsers::TreeParser#parse'
-# ~> 	from -:41:in '<main>'
-#%else
-# ~> 	from /path/to/gems/rexml-3.3.9/lib/rexml/validation/relaxng.rb:123:in `receive'
-# ~> 	from /path/to/gems/rexml-3.3.9/lib/rexml/parsers/baseparser.rb:245:in `block (2 levels) in pull'
-# ~> 	from /path/to/gems/rexml-3.3.9/lib/rexml/parsers/baseparser.rb:244:in `each'
-# ~> 	from /path/to/gems/rexml-3.3.9/lib/rexml/parsers/baseparser.rb:244:in `block in pull'
-# ~> 	from <internal:kernel>:90:in `tap'
-# ~> 	from /path/to/gems/rexml-3.3.9/lib/rexml/parsers/baseparser.rb:243:in `pull'
-# ~> 	from /path/to/gems/rexml-3.3.9/lib/rexml/parsers/treeparser.rb:21:in `parse'
-# ~> 	from -:41:in `<main>'
-#%end
+
+# 同じバリデータで別の文書を検証する前に reset を呼ぶ
+validator.reset
+
+# スキーマに合わない文書では例外が発生する
+xml = "<addressBook><card><name>John Smith</name></card></addressBook>"
+parser = REXML::Parsers::UltraLightParser.new(xml)
+parser.add_listener(validator)
+begin
+  parser.parse
+rescue REXML::Validation::ValidationException => e
+  p e.class  # => REXML::Validation::ValidationException
+end
 ```
+
+要素と要素の間にある空白(改行やインデント)もテキストとして検証されます。スキーマがテキストを許していない位置に空白があると、検証に失敗します。
+
+# class REXML::Validation::RelaxNG < Object
+
+#%# REXML::Validation::State などの状態を表すクラスは内部用なのでここでは省略
+
+RELAX NG のスキーマ(XML 構文)に基づくバリデータです。
+
+スキーマのうち、次の要素に対応しています。
+
+`empty`, `element`, `attribute`, `text`, `optional`, `choice`, `oneOrMore`, `zeroOrMore`, `group`, `value`, `interleave`, `mixed`, `ref`, `grammar`, `start`, `define`
+
+次の要素には対応していません。
+
+`data`, `param`, `include`, `externalRef`, `notAllowed`, `anyName`, `nsName`, `except`, `name`
 
 ## Class Methods
 
-### def REXML::Validation::RelaxNG.new(source)
-#%todo
+### def REXML::Validation::RelaxNG.new(source) -> REXML::Validation::RelaxNG
+{: since=""}
+
+スキーマ `source` を読み込み、バリデータを作成して返します。
+
+- **param** `source` -- RELAX NG のスキーマ(文字列、[c:IO]、[c:IO]互換オブジェクト([c:StringIO]など))
 
 ## Instance Methods
 
-### def current
+### def receive(event) -> ()
+{: since=""}
+
+パーサのイベント `event` を受け取り、[m:REXML::Validation::Validator#validate] で検証します。
+
+バリデータを `add_listener` で登録したパーサが、イベントが発生するたびに呼び出します。
+
+- **param** `event` -- パーサのイベント
+- **raise** `REXML::Validation::ValidationException` -- 文書がスキーマに合わないときに発生します
+
+### def current -> object
+{: since=""}
 ### def current=(value)
-#%todo
+{: since=""}
 
-### def count
+内部用なのでユーザは使わないでください。
+
+### def count -> Integer
+{: since=""}
 ### def count=(value)
-#%todo
+{: since=""}
 
-### def references
-#%todo
+内部用なのでユーザは使わないでください。
 
-### def receive(event)
-#%todo
+### def references -> Hash
+{: since=""}
+
+内部用なのでユーザは使わないでください。
 
 ## Constants
 
-### const INFINITY
-#%todo
+### const INFINITY -> Float
+{: since=""}
 
-### const EMPTY
-#%todo
+内部用なのでユーザは使わないでください。
 
-### const TEXT
-#%todo
+### const EMPTY -> object
+{: since=""}
 
-# class REXML::Validation::State < Object
+内部用なのでユーザは使わないでください。
 
-## Class Methods
+### const TEXT -> Array
+{: since=""}
 
-### def REXML::Validation::State.new(context)
-#%todo
-
-## Instance Methods
-
-### def reset
-#%todo
-
-### def previous=(previous)
-#%todo
-
-### def next(event)
-#%todo
-
-### def to_s
-#%todo
-
-### def inspect
-#%todo
-
-### def expected
-#%todo
-
-### def <<(event)
-#%todo
-
-## Protected Instance Methods
-
-### def expand_ref_in(arry, ind)
-#%todo
-
-### def add_event_to_arry(arry, evt)
-#%todo
-
-### def generate_event(event)
-#%todo
-
-# class REXML::Validation::Sequence < REXML::Validation::State
-
-## Instance Methods
-
-### def matches?(event)
-#%todo
-
-# class REXML::Validation::Optional < REXML::Validation::State
-
-## Instance Methods
-
-### def next(event)
-#%todo
-
-### def matches?(event)
-#%todo
-
-### def expected
-#%todo
-
-# class REXML::Validation::ZeroOrMore < REXML::Validation::Optional
-
-## Instance Methods
-
-### def next(event)
-#%todo
-
-### def expected
-#%todo
-
-# class REXML::Validation::OneOrMore < REXML::Validation::State
-
-## Class Methods
-
-### def REXML::Validation::OneOrMore.new(context)
-#%todo
-
-## Instance Methods
-
-### def reset
-#%todo
-
-### def next(event)
-#%todo
-
-### def matches?(event)
-#%todo
-
-### def expected
-#%todo
-
-# class REXML::Validation::Choice < REXML::Validation::State
-
-## Class Methods
-
-### def REXML::Validation::Choice.new(context)
-#%todo
-
-## Instance Methods
-
-### def reset
-#%todo
-
-### def <<(event)
-#%todo
-
-### def next(event)
-#%todo
-
-### def matches?(event)
-#%todo
-
-### def expected
-#%todo
-
-### def inspect
-#%todo
-
-## Protected Instance Methods
-
-### def add_event_to_arry(arry, evt)
-#%todo
-
-# class REXML::Validation::Interleave < REXML::Validation::Choice
-
-## Class methods
-
-### def REXML::Validation::Interleave.new(context)
-#%todo
-
-## Instance Methods
-
-### def reset
-#%todo
-
-### def next_current(event)
-#%todo
-
-### def next(event)
-#%todo
-
-### def matches?(event)
-#%todo
-
-### def expected
-#%todo
-
-### def inspect
-#%todo
-
-# class REXML::Validation::Ref < Object
-
-## Class Methods
-
-### def REXML::Validation::Ref.new(value)
-#%todo
-
-## Instance Methods
-
-### def to_s
-#%todo
-
-### def inspect
-#%todo
+内部用なのでユーザは使わないでください。

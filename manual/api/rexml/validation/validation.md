@@ -1,51 +1,43 @@
+---
+library: rexml/validation/relaxng
+---
 # module REXML::Validation::Validator
+
+#%# REXML::Validation::Event は内部用なのでここでは省略
+
+バリデータに共通の機能を提供するモジュールです。
+
+[c:REXML::Validation::RelaxNG] がこのモジュールを include しています。
 
 ## Instance Methods
 
-### def reset
-#%todo
+### def validate(event) -> ()
+{: since=""}
 
-### def dump
-#%todo
+パーサのイベント `event` が、スキーマから見て次に来てよいものであるかを検証します。
 
-### def validate(event)
-#%todo
+通常は [m:REXML::Validation::RelaxNG#receive] を通じて呼ばれます。
+
+- **param** `event` -- パーサのイベント
+- **raise** `REXML::Validation::ValidationException` -- 文書がスキーマに合わないときに発生します
+
+### def reset -> self
+{: since=""}
+
+検証の状態を最初に戻します。
+
+同じバリデータで別の文書を検証するときは、検証を始める前にこのメソッドを呼んでください。
+
+### def dump -> nil
+{: since=""}
+
+スキーマから作られた内部の状態を標準出力に出力します。
+
+デバッグ用のメソッドです。
 
 ## Constants
 
-### const NILEVENT
-#%todo
+### const NILEVENT -> Array
+{: since=""}
 
-# class REXML::Validation::Event < Object
-
-## Class Methods
-
-### def REXML::Validation::Event.new(event_type, event_arg = nil)
-#%todo
-
-## Instance Methods
-
-### def event_type
-#%todo
-
-### def event_arg
-### def event_arg=(value)
-#%todo
-
-### def done?
-#%todo
-
-### def single?
-#%todo
-
-### def matches?(event)
-#%todo
-
-### def ==(other)
-#%todo
-
-### def to_s
-#%todo
-
-### def inspect
-#%todo
+内部用なのでユーザは使わないでください。
