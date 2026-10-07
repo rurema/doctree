@@ -2827,7 +2827,6 @@ R	Array	#	<<	ok
 R	Array	#	<=>	ok
 R	Array	#	==	ok
 R	Array	#	[]	ok
-R	Array	#	at	ok
 R	Array	#	[]=	ok
 R	Array	#	|	ok
 R	Array	#	all?	ok
@@ -2835,6 +2834,7 @@ R	Array	#	any?	ok
 R	Array	#	append	ok
 R	Array	#	push	ok
 R	Array	#	assoc	ok
+R	Array	#	at	ok
 R	Array	#	bsearch	ok
 R	Array	#	bsearch_index	ok
 R	Array	#	clear	ok
@@ -2854,7 +2854,6 @@ R	Array	#	deconstruct	ok
 R	Array	#	delete	ok
 R	Array	#	delete_at	ok
 R	Array	#	delete_if	ok
-R	Array	#	reject!	ok
 R	Array	#	difference	ok
 R	Array	#	dig	ok
 R	Array	#	drop	ok
@@ -2899,6 +2898,7 @@ R	Array	#	unshift	ok
 R	Array	#	product	ok
 R	Array	#	rassoc	ok
 R	Array	#	reject	ok
+R	Array	#	reject!	ok
 R	Array	#	repeated_combination	ok
 R	Array	#	repeated_permutation	ok
 R	Array	#	replace	ok
@@ -3040,11 +3040,10 @@ R	Dir	#	to_path	ok
 R	Dir	#	pos	ok
 R	Dir	#	tell	ok
 R	Dir	#	pos=	ok
-R	Dir	#	seek	ok
 R	Dir	#	read	ok
 R	Dir	#	rewind	ok
+R	Dir	#	seek	ok
 R	Dir	.	[]	ok
-R	Dir	.	glob	ok
 R	Dir	.	chdir	ok
 R	Dir	.	children	ok
 R	Dir	.	chroot	ok
@@ -3058,6 +3057,7 @@ R	Dir	.	exist?	ok
 R	Dir	.	foreach	ok
 R	Dir	.	getwd	ok
 R	Dir	.	pwd	ok
+R	Dir	.	glob	ok
 R	Dir	.	home	ok
 R	Dir	.	mkdir	ok
 R	Dir	.	new	ok
@@ -3766,8 +3766,8 @@ R	Float	#	rationalize	ok
 R	Float	#	round	ok
 R	Float	#	to_f	ok
 R	Float	#	to_i	ok
-R	Float	#	truncate	ok
 R	Float	#	to_r	ok
+R	Float	#	truncate	ok
 R	Float	#	zero?	ok
 R	FrozenError	#	receiver	ok
 R	FrozenError	.	new	ok
@@ -3790,7 +3790,9 @@ R	GC	.	stat_heap	ok
 R	GC	.	stress	ok
 R	GC	.	stress=	ok
 R	GC	.	total_time	ok
+R	GC	.	using_rvargc?	ok
 R	GC	.	verify_compaction_references	ok
+R	GC	.	verify_internal_consistency	ok
 R	GC::Profiler	.	clear	ok
 R	GC::Profiler	.	disable	ok
 R	GC::Profiler	.	enable	ok
@@ -3824,7 +3826,6 @@ R	Hash	#	default_proc	ok
 R	Hash	#	default_proc=	ok
 R	Hash	#	delete	ok
 R	Hash	#	delete_if	ok
-R	Hash	#	reject!	ok
 R	Hash	#	dig	ok
 R	Hash	#	each	ok
 R	Hash	#	each_pair	ok
@@ -3838,7 +3839,6 @@ R	Hash	#	fetch_values	ok
 R	Hash	#	filter	ok
 R	Hash	#	select	ok
 R	Hash	#	filter!	ok
-R	Hash	#	keep_if	ok
 R	Hash	#	select!	ok
 R	Hash	#	flatten	ok
 R	Hash	#	has_key?	ok
@@ -3851,6 +3851,7 @@ R	Hash	#	hash	ok
 R	Hash	#	inspect	ok
 R	Hash	#	to_s	ok
 R	Hash	#	invert	ok
+R	Hash	#	keep_if	ok
 R	Hash	#	key	ok
 R	Hash	#	keys	ok
 R	Hash	#	length	ok
@@ -3861,6 +3862,7 @@ R	Hash	#	update	ok
 R	Hash	#	rassoc	ok
 R	Hash	#	rehash	ok
 R	Hash	#	reject	ok
+R	Hash	#	reject!	ok
 R	Hash	#	replace	ok
 R	Hash	#	shift	ok
 R	Hash	#	slice	ok
@@ -3879,11 +3881,14 @@ R	Hash	.	new	ok
 R	Hash	.	ruby2_keywords_hash	ok
 R	Hash	.	ruby2_keywords_hash?	ok
 R	Hash	.	try_convert	ok
+R	IO	::	PRIORITY	ok
+R	IO	::	READABLE	ok
 R	IO	::	SEEK_CUR	ok
 R	IO	::	SEEK_DATA	ok
 R	IO	::	SEEK_END	ok
 R	IO	::	SEEK_HOLE	ok
 R	IO	::	SEEK_SET	ok
+R	IO	::	WRITABLE	ok
 R	IO	#	<<	ok
 R	IO	#	advise	ok
 R	IO	#	autoclose=	ok
@@ -3956,6 +3961,10 @@ R	IO	#	timeout=	ok
 R	IO	#	to_io	ok
 R	IO	#	ungetbyte	ok
 R	IO	#	ungetc	ok
+R	IO	#	wait	ok
+R	IO	#	wait_priority	ok
+R	IO	#	wait_readable	ok
+R	IO	#	wait_writable	ok
 R	IO	#	write	ok
 R	IO	#	write_nonblock	ok
 R	IO	.	binread	ok
@@ -3963,8 +3972,8 @@ R	IO	.	binwrite	ok
 R	IO	.	copy_stream	ok
 R	IO	.	for_fd	ok
 R	IO	.	new	ok
-R	IO	.	open	ok
 R	IO	.	foreach	ok
+R	IO	.	open	ok
 R	IO	.	pipe	ok
 R	IO	.	popen	ok
 R	IO	.	read	ok
@@ -4037,7 +4046,6 @@ R	Integer	#	modulo	ok
 R	Integer	#	&	ok
 R	Integer	#	*	ok
 R	Integer	#	**	ok
-R	Integer	#	pow	ok
 R	Integer	#	+	ok
 R	Integer	#	-	ok
 R	Integer	#	-@	ok
@@ -4084,6 +4092,7 @@ R	Integer	#	nobits?	ok
 R	Integer	#	numerator	ok
 R	Integer	#	odd?	ok
 R	Integer	#	ord	ok
+R	Integer	#	pow	ok
 R	Integer	#	pred	ok
 R	Integer	#	rationalize	ok
 R	Integer	#	remainder	ok
@@ -4650,8 +4659,8 @@ R	Process	.#	times	ok
 R	Process	.#	uid	ok
 R	Process	.#	uid=	ok
 R	Process	.#	wait	ok
-R	Process	.#	wait2	ok
 R	Process	.#	waitpid	ok
+R	Process	.#	wait2	ok
 R	Process	.#	waitpid2	ok
 R	Process	.#	waitall	ok
 R	Process	.	_fork	ok
@@ -4760,29 +4769,30 @@ R	Random	.	srand	ok
 R	Random	.	state	ok
 R	Random	.	urandom	ok
 R	Random::Formatter	#	alphanumeric	no-method
+R	Random::Formatter	#	random_number	ok
 R	Range	#	%	ok
-R	Range	#	step	ok
 R	Range	#	==	ok
 R	Range	#	===	ok
 R	Range	#	begin	ok
-R	Range	#	first	ok
 R	Range	#	bsearch	ok
 R	Range	#	cover?	ok
 R	Range	#	each	ok
 R	Range	#	end	ok
-R	Range	#	last	ok
 R	Range	#	entries	ok
 R	Range	#	to_a	ok
 R	Range	#	eql?	ok
 R	Range	#	exclude_end?	ok
+R	Range	#	first	ok
 R	Range	#	hash	ok
 R	Range	#	include?	ok
 R	Range	#	member?	ok
 R	Range	#	inspect	ok
+R	Range	#	last	ok
 R	Range	#	max	ok
 R	Range	#	min	ok
 R	Range	#	minmax	ok
 R	Range	#	size	ok
+R	Range	#	step	ok
 R	Range	#	to_s	ok
 R	Range	.	new	ok
 R	Rational	#	*	ok
@@ -4811,9 +4821,9 @@ R	Rational	#	rationalize	ok
 R	Rational	#	round	ok
 R	Rational	#	to_f	ok
 R	Rational	#	to_i	ok
-R	Rational	#	truncate	ok
 R	Rational	#	to_r	ok
 R	Rational	#	to_s	ok
+R	Rational	#	truncate	ok
 R	Rational	.	convert	ok
 R	Refinement	#	import_methods	ok
 R	Refinement	#	refined_class	ok
@@ -4853,6 +4863,8 @@ R	Regexp	.	union	ok
 R	RubyVM	::	DEFAULT_PARAMS	ok
 R	RubyVM	::	INSTRUCTION_NAMES	ok
 R	RubyVM	::	OPTS	ok
+R	RubyVM	.	keep_script_lines	ok
+R	RubyVM	.	keep_script_lines=	ok
 R	RubyVM	.	stat	ok
 R	RubyVM::AbstractSyntaxTree	.	node_id_for_backtrace_location	ok
 R	RubyVM::AbstractSyntaxTree	.	of	ok
@@ -4874,13 +4886,16 @@ R	RubyVM::InstructionSequence	#	absolute_path	ok
 R	RubyVM::InstructionSequence	#	base_label	ok
 R	RubyVM::InstructionSequence	#	disasm	ok
 R	RubyVM::InstructionSequence	#	disassemble	ok
+R	RubyVM::InstructionSequence	#	each_child	ok
 R	RubyVM::InstructionSequence	#	eval	ok
 R	RubyVM::InstructionSequence	#	first_lineno	ok
 R	RubyVM::InstructionSequence	#	inspect	ok
 R	RubyVM::InstructionSequence	#	label	ok
 R	RubyVM::InstructionSequence	#	path	ok
+R	RubyVM::InstructionSequence	#	script_lines	ok
 R	RubyVM::InstructionSequence	#	to_a	ok
 R	RubyVM::InstructionSequence	#	to_binary	ok
+R	RubyVM::InstructionSequence	#	trace_points	ok
 R	RubyVM::InstructionSequence	.	compile	ok
 R	RubyVM::InstructionSequence	.	new	ok
 R	RubyVM::InstructionSequence	.	compile_file	ok
@@ -4913,7 +4928,6 @@ R	Set	#	proper_subset?	ok
 R	Set	#	subset?	ok
 R	Set	#	<<	ok
 R	Set	#	add	ok
-R	Set	#	add?	ok
 R	Set	#	==	ok
 R	Set	#	===	ok
 R	Set	#	include?	ok
@@ -4923,6 +4937,7 @@ R	Set	#	>=	ok
 R	Set	#	proper_superset?	ok
 R	Set	#	superset?	ok
 R	Set	#	^	ok
+R	Set	#	add?	ok
 R	Set	#	classify	ok
 R	Set	#	clear	ok
 R	Set	#	clone	ok
@@ -4934,7 +4949,6 @@ R	Set	#	compare_by_identity?	ok
 R	Set	#	delete	ok
 R	Set	#	delete?	ok
 R	Set	#	delete_if	ok
-R	Set	#	reject!	ok
 R	Set	#	disjoint?	ok
 R	Set	#	divide	ok
 R	Set	#	each	ok
@@ -4951,6 +4965,7 @@ R	Set	#	keep_if	ok
 R	Set	#	length	ok
 R	Set	#	size	ok
 R	Set	#	merge	ok
+R	Set	#	reject!	ok
 R	Set	#	replace	ok
 R	Set	#	reset	ok
 R	Set	#	subtract	ok
@@ -4971,7 +4986,6 @@ R	String	#	+@	ok
 R	String	#	-@	ok
 R	String	#	dedup	ok
 R	String	#	<<	ok
-R	String	#	concat	ok
 R	String	#	<=>	ok
 R	String	#	==	ok
 R	String	#	===	ok
@@ -5000,6 +5014,7 @@ R	String	#	chop!	ok
 R	String	#	chr	ok
 R	String	#	clear	ok
 R	String	#	codepoints	ok
+R	String	#	concat	ok
 R	String	#	count	ok
 R	String	#	crypt	ok
 R	String	#	delete	ok

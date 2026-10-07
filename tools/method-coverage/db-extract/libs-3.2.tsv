@@ -1,5 +1,5 @@
 English		top	0	19
-_builtin	Builtin	top	302	2452
+_builtin	Builtin	top	302	2531
 abbrev		top	1	2
 base64		top	1	6
 benchmark	Development	top	4	35
@@ -12,24 +12,24 @@ bigdecimal/util		sub	0	7
 bundler	Development	top	0	0
 cgi	Network	top	0	0
 cgi/cookie		sub	1	17
-cgi/core		sub	4	74
-cgi/html		sub	6	32
+cgi/core		sub	3	70
+cgi/html		sub	7	30
 cgi/session		sub	5	24
 cgi/session/pstore		sub	1	5
 cgi/util		sub	0	13
 continuation		top	1	2
-coverage	Development	top	1	5
+coverage	Development	top	1	10
 csv	FileFormat	top	5	125
-date	Date/Time	top	3	124
+date	Date/Time	top	3	128
 debug	Development	top	0	0
-delegate	DesignPattern	top	2	18
+delegate	DesignPattern	top	2	19
 did_you_mean	Development	top	0	0
 digest	Text	top	4	21
 digest/bubblebabble		sub	0	1
 digest/md5		sub	1	0
 digest/rmd160		sub	1	0
 digest/sha1		sub	1	0
-digest/sha2		sub	4	3
+digest/sha2		sub	4	5
 drb	Network	top	17	42
 drb/acl		sub	1	7
 drb/extserv		sub	1	5
@@ -39,7 +39,7 @@ drb/observer		sub	1	0
 drb/ssl		sub	0	0
 drb/timeridconv		sub	1	3
 drb/unix		sub	1	6
-erb	Text	top	3	15
+erb	Text	top	3	19
 error_highlight	Development	top	0	0
 etc	Unix	top	3	59
 expect	CUI	top	0	1
@@ -47,15 +47,15 @@ fcntl	I/O	top	1	22
 fiddle		top	8	115
 fiddle/import		sub	3	15
 fiddle/types		sub	2	0
-fileutils	File	top	4	44
+fileutils	File	top	4	45
 find	File	top	1	2
 forwardable	DesignPattern	top	2	9
 getoptlong	CommandLine	top	6	24
-io/console	CUI	top	0	14
+io/console	CUI	top	1	34
 io/console/size		sub	0	2
 io/nonblock	I/O	top	0	3
-io/wait	I/O	top	0	5
-ipaddr	Network	top	1	39
+io/wait	I/O	top	0	2
+ipaddr	Network	top	1	44
 irb	Development	top	3	10
 irb/cmd/chws		sub	2	2
 irb/cmd/help		sub	1	1
@@ -82,7 +82,7 @@ irb/init		sub	0	0
 irb/input-method		sub	5	23
 irb/inspector		sub	2	5
 irb/locale		sub	0	0
-irb/magic-file		sub	1	2
+irb/magic-file		sub	1	1
 irb/notifier		sub	0	0
 irb/output-method		sub	2	6
 irb/ruby-lex		sub	0	0
@@ -91,20 +91,20 @@ irb/version		sub	0	0
 irb/workspace		sub	1	0
 irb/ws-for-case-2		sub	0	0
 irb/xmp		sub	1	3
-json	FileFormat	top	22	65
+json	FileFormat	top	22	70
 json/add/bigdecimal		sub	0	2
-json/add/complex		sub	0	2
+json/add/complex		sub	0	3
 json/add/core		sub	0	0
-json/add/date		sub	0	2
-json/add/date_time		sub	0	2
-json/add/exception		sub	0	2
+json/add/date		sub	0	3
+json/add/date_time		sub	0	3
+json/add/exception		sub	0	3
 json/add/ostruct		sub	0	2
-json/add/range		sub	0	2
-json/add/rational		sub	0	2
-json/add/regexp		sub	0	2
-json/add/struct		sub	0	2
-json/add/symbol		sub	0	2
-json/add/time		sub	0	2
+json/add/range		sub	0	3
+json/add/rational		sub	0	3
+json/add/regexp		sub	0	3
+json/add/struct		sub	0	3
+json/add/symbol		sub	0	3
+json/add/time		sub	0	3
 kconv	CharacterEncoding	top	1	36
 logger		top	6	41
 matrix	Math	top	8	132
@@ -116,19 +116,19 @@ mkmf	Development	top	0	65
 monitor	Thread	top	3	22
 mutex_m	Thread	top	1	9
 net/ftp	Network	top	8	84
-net/http	Network	top	103	148
+net/http	Network	top	103	166
 net/https	Network	top	0	0
 net/imap	Network	top	28	165
 net/pop	Network	top	9	45
 net/protocol	Network	top	12	0
 net/smtp	Network	top	10	50
 nkf	CharacterEncoding	top	1	16
-objspace		top	0	18
+objspace		top	1	27
 observer	DesignPattern	top	1	7
 open3	I/O	top	1	11
-open-uri	Network	top	4	11
-openssl	Network	top	130	871
-optparse	CommandLine	top	10	54
+open-uri	Network	top	4	14
+openssl	Network	top	130	947
+optparse	CommandLine	top	10	63
 optparse/date		sub	0	0
 optparse/shellwords		sub	0	0
 optparse/time		sub	0	0
@@ -136,11 +136,11 @@ optparse/uri		sub	0	0
 ostruct		top	1	16
 pathname	File	top	1	97
 power_assert	Development	top	0	0
-pp	Development	top	1	12
-prettyprint		top	1	13
+pp	Development	top	1	13
+prettyprint		top	1	18
 prime	Math	top	5	27
 pstore	Database	top	3	21
-psych	FileFormat	top	24	137
+psych	FileFormat	top	24	159
 pty	CUI	top	2	4
 racc/parser		top	2	9
 rake	Development	top	20	153
@@ -159,13 +159,13 @@ rdoc/anon_class		sub	1	0
 rdoc/any_method		sub	1	0
 rdoc/attr		sub	1	0
 rdoc/class_module		sub	1	0
-rdoc/code_object		sub	1	19
+rdoc/code_object		sub	1	21
 rdoc/code_objects		sub	0	0
 rdoc/constant		sub	1	0
-rdoc/context		sub	2	53
+rdoc/context		sub	2	52
 rdoc/generator		sub	1	0
-rdoc/generator/darkfish		sub	1	4
-rdoc/generator/json_index		sub	1	3
+rdoc/generator/darkfish		sub	1	6
+rdoc/generator/json_index		sub	1	4
 rdoc/generator/markup		sub	1	0
 rdoc/generator/ri		sub	1	3
 rdoc/ghost_method		sub	1	0
@@ -199,10 +199,10 @@ rdoc/single_class		sub	1	0
 rdoc/stats		sub	1	10
 rdoc/text		sub	1	8
 rdoc/token_stream		sub	1	0
-rdoc/top_level		sub	1	14
-readline	CUI	top	2	38
+rdoc/top_level		sub	1	9
+readline	CUI	top	2	50
 reline	CUI	top	2	25
-resolv	Network	top	38	90
+resolv	Network	top	38	91
 resolv-replace	Network	top	0	6
 rexml	FileFormat	top	3	4
 rexml/document		sub	37	264
@@ -214,20 +214,20 @@ rexml/sax2listener		sub	1	17
 rexml/streamlistener		sub	1	14
 rinda/rinda		top	10	10
 rinda/tuplespace		top	2	17
-ripper	Text	top	1	25
-ripper/filter		sub	1	7
-ripper/lexer		sub	1	7
+ripper	Text	top	1	30
+ripper/filter		sub	1	8
+ripper/lexer		sub	1	9
 ripper/sexp		sub	0	2
 rss	FileFormat	top	119	271
-rubygems		top	2	23
+rubygems		top	2	71
 rubygems/command		sub	1	37
 rubygems/command_manager		sub	1	8
-rubygems/commands/build_command		sub	1	5
+rubygems/commands/build_command		sub	1	3
 rubygems/commands/cert_command		sub	1	0
 rubygems/commands/check_command		sub	1	0
 rubygems/commands/cleanup_command		sub	1	0
 rubygems/commands/contents_command		sub	1	0
-rubygems/commands/dependency_command		sub	1	6
+rubygems/commands/dependency_command		sub	1	5
 rubygems/commands/environment_command		sub	1	0
 rubygems/commands/fetch_command		sub	1	0
 rubygems/commands/generate_index_command		sub	1	0
@@ -247,58 +247,58 @@ rubygems/commands/specification_command		sub	1	0
 rubygems/commands/stale_command		sub	1	0
 rubygems/commands/uninstall_command		sub	1	0
 rubygems/commands/unpack_command		sub	1	1
-rubygems/commands/update_command		sub	1	2
-rubygems/commands/which_command		sub	1	3
-rubygems/config_file		sub	1	30
-rubygems/defaults		sub	0	9
-rubygems/dependency		sub	1	9
-rubygems/dependency_installer		sub	1	8
-rubygems/dependency_list		sub	1	8
+rubygems/commands/update_command		sub	1	1
+rubygems/commands/which_command		sub	1	2
+rubygems/config_file		sub	1	28
+rubygems/defaults		sub	0	14
+rubygems/dependency		sub	1	20
+rubygems/dependency_installer		sub	1	5
+rubygems/dependency_list		sub	1	7
 rubygems/exceptions		sub	19	0
 rubygems/ext		sub	1	0
-rubygems/ext/builder		sub	1	4
+rubygems/ext/builder		sub	1	3
 rubygems/ext/configure_builder		sub	1	1
 rubygems/ext/ext_conf_builder		sub	1	1
 rubygems/ext/rake_builder		sub	1	1
 rubygems/gem_runner		sub	1	1
-rubygems/indexer		sub	1	16
+rubygems/indexer		sub	1	12
 rubygems/install_update_options		sub	1	2
-rubygems/installer		sub	2	25
+rubygems/installer		sub	2	23
 rubygems/local_remote_options		sub	1	9
-rubygems/package		sub	8	3
+rubygems/package		sub	7	1
 rubygems/package/tar_header		sub	1	24
 rubygems/package/tar_reader		sub	2	4
 rubygems/package/tar_reader/entry		sub	1	12
 rubygems/package/tar_writer		sub	4	14
-rubygems/platform		sub	1	16
+rubygems/platform		sub	1	20
 rubygems/remote_fetcher		sub	2	6
-rubygems/requirement		sub	2	14
-rubygems/security		sub	4	33
-rubygems/spec_fetcher		sub	1	13
-rubygems/specification		sub	1	105
+rubygems/requirement		sub	2	16
+rubygems/security		sub	4	26
+rubygems/spec_fetcher		sub	1	4
+rubygems/specification		sub	1	153
 rubygems/uninstaller		sub	1	12
 rubygems/user_interaction		sub	8	39
-rubygems/validator		sub	1	6
-rubygems/version		sub	1	12
+rubygems/validator		sub	1	2
+rubygems/version		sub	1	15
 rubygems/version_option		sub	1	2
-securerandom		top	1	7
+securerandom		top	1	8
 shellwords	Text	top	1	9
 singleton	DesignPattern	top	1	3
-socket	Network	top	16	904
-stringio	Text	top	1	55
-strscan	Text	top	2	38
+socket	Network	top	16	910
+stringio	Text	top	1	57
+strscan	Text	top	2	43
 syslog	Unix	top	6	14
 syslog/logger		sub	2	24
 tempfile	File	top	1	8
 test/unit	Development	top	0	0
 thread	Thread	top	0	0
-time	Date/Time	top	0	8
+time	Date/Time	top	0	9
 timeout	Thread	top	2	1
 tmpdir	File	top	0	2
 tsort	Math	top	2	12
 typeprof	Development	top	0	0
 un	File	top	0	13
-uri	Network	top	12	88
+uri	Network	top	12	97
 weakref	GC	top	2	4
 win32/registry	Windows	top	5	49
 win32/resolv	Windows	top	1	2
@@ -306,4 +306,4 @@ win32ole	Windows	top	11	160
 yaml	FileFormat	top	1	0
 yaml/dbm		sub	1	21
 yaml/store		sub	1	1
-zlib	FileFormat	top	19	124
+zlib	FileFormat	top	19	133
