@@ -253,6 +253,17 @@ HTML を記述した場合にそのまま出力するかどうかを設定しま
 
 脚注の出力を有効にするかどうかを設定します。
 
+### def strike? -> bool
+{: since="2.5.0"}
+
+`~~text~~` による取り消し線を解釈するかどうかを返します。
+
+デフォルトでは true を返します。
+
+### def strike=(val)
+
+`~~text~~` による取り消し線を解釈するかどうかを設定します。
+
 ### def parse(markdown) -> RDoc::Markup::Document
 
 引数 markdown で指定したドキュメントを解析して

@@ -31,40 +31,74 @@ RDoc 形式のドキュメントを目的の形式に変換するためのクラ
 例:
 
 ```ruby
+require 'rdoc'
 require 'rdoc/markup/to_html'
 
+#%until 4.1
+h = RDoc::Markup::ToHtml.new(RDoc::Options.new)
+#%else
 h = RDoc::Markup::ToHtml.new
-puts h.convert(input_string)
+#%end
+p h.convert("*bold*")
+# => "\n<p><strong>bold</strong></p>\n"
 ```
 
 独自のフォーマットを行うようにパーサを拡張する事もできます。
 
+#%until 4.1
+
 ```ruby title="例"
-require 'rdoc/markup'
+require 'rdoc'
 require 'rdoc/markup/to_html'
 
 class WikiHtml < RDoc::Markup::ToHtml
   # WikiWord のフォントを赤く表示。
-  def handle_special_WIKIWORD(special)
-    "<font color=red>" + special.text + "</font>"
+  def handle_regexp_WIKIWORD(target)
+    "<font color=red>" + target.text + "</font>"
   end
 end
 
 m = RDoc::Markup.new
-# { 〜 } までを :STRIKE でフォーマットする。
-m.add_word_pair("{", "}", :STRIKE)
-# <no> 〜 </no> までを :STRIKE でフォーマットする。
-m.add_html("no", :STRIKE)
+# { 〜 } までを :MARK でフォーマットする。
+m.add_word_pair("{", "}", :MARK)
+# <no> 〜 </no> までを :MARK でフォーマットする。
+m.add_html("no", :MARK)
 
 # WikiWord を追加。
-m.add_special(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
+m.add_regexp_handling(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
 
-wh = WikiHtml.new(m)
-# :STRIKE のフォーマットを <strike> 〜 </strike> に指定。
-wh.add_tag(:STRIKE, "<strike>", "</strike>")
+wh = WikiHtml.new(RDoc::Options.new, m)
+# :MARK のフォーマットを <mark> 〜 </mark> に指定。
+wh.add_tag(:MARK, "<mark>", "</mark>")
 
-puts "<body>#{wh.convert ARGF.read}</body>"
+p wh.convert("WikiWord {del} <no>x</no>")
+# => "\n<p><font color=red>WikiWord</font> <mark>del</mark> <mark>x</mark></p>\n"
 ```
+
+#%else
+
+```ruby title="例"
+require 'rdoc'
+require 'rdoc/markup/to_html'
+
+class WikiHtml < RDoc::Markup::ToHtml
+  def initialize(...)
+    super
+    # WikiWord を追加。
+    @markup.add_regexp_handling(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
+  end
+
+  # WikiWord のフォントを赤く表示。
+  def handle_regexp_WIKIWORD(text)
+    "<font color=red>" + text + "</font>"
+  end
+end
+
+p WikiHtml.new.convert("see WikiWord here")
+# => "\n<p>see <font color=red>WikiWord</font> here</p>\n"
+```
+
+#%end
 
 変換する形式を変更する場合、フォーマッタ(例. [c:RDoc::Markup::ToHtml])
 を変更、拡張する必要があります。
@@ -87,14 +121,21 @@ puts "<body>#{wh.convert ARGF.read}</body>"
 
 ## Class Methods
 
+#%until 4.1
 ### def RDoc::Markup.new(attribute_manager = nil) -> RDoc::Markup
 
 自身を初期化します。
 
-- **param** `attribute_manager` -- `RDoc::AttributeManager` オブジェクトを指定します。
+- **param** `attribute_manager` -- `RDoc::Markup::AttributeManager` オブジェクトを指定します。
+#%else
+### def RDoc::Markup.new -> RDoc::Markup
+
+自身を初期化します。
+#%end
 
 ## Instance Methods
 
+#%until 4.1
 ### def add_word_pair(start, stop, name) -> ()
 
 start と stop ではさまれる文字列(例. *bold*)をフォーマットの対象にします。
@@ -106,17 +147,19 @@ start と stop ではさまれる文字列(例. *bold*)をフォーマットの�
 - **param** `name` -- [c:RDoc::Markup::ToHtml] などのフォーマッタに識別させる時の名前を
             [c:Symbol] で指定します。
 
-- **raise** `RuntimeError` -- start に "<" で始まる文字列を指定した場合に発生します。
+- **raise** `ArgumentError` -- start に "<" で始まる文字列を指定した場合に発生します。
 
 ```ruby title="例"
-require 'rdoc/markup/simple_markup'
-require 'rdoc/markup/simple_markup/to_html'
-m = SM::SimpleMarkup.new
-m.add_word_pair("{", "}", :STRIKE)
+require 'rdoc'
+require 'rdoc/markup/to_html'
 
-h = SM::ToHtml.new
-h.add_tag(:STRIKE, "<strike>", "</strike>")
-puts m.convert(input_string, h)
+m = RDoc::Markup.new
+m.add_word_pair("{", "}", :MARK)
+
+h = RDoc::Markup::ToHtml.new(RDoc::Options.new, m)
+h.add_tag(:MARK, "<mark>", "</mark>")
+p h.convert("a {b} c")
+# => "\n<p>a <mark>b</mark> c</p>\n"
 ```
 
 変換時に実際にフォーマットを行うには [m:RDoc::Markup::Formatter#add_tag] のように、フォーマッタ側でも操作を行う必要があります。
@@ -131,49 +174,86 @@ tag で指定したタグをフォーマットの対象にします。
             [c:Symbol] で指定します。
 
 ```ruby title="例"
-require 'rdoc/markup/simple_markup'
-require 'rdoc/markup/simple_markup/to_html'
-m = SM::SimpleMarkup.new
-m.add_html("no", :STRIKE)
+require 'rdoc'
+require 'rdoc/markup/to_html'
 
-h = SM::ToHtml.new
-h.add_tag(:STRIKE, "<strike>", "</strike>")
-puts m.convert(input_string, h)
+m = RDoc::Markup.new
+m.add_html("no", :MARK)
+
+h = RDoc::Markup::ToHtml.new(RDoc::Options.new, m)
+h.add_tag(:MARK, "<mark>", "</mark>")
+p h.convert("a <no>b</no> c")
+# => "\n<p>a <mark>b</mark> c</p>\n"
 ```
 
 変換時に実際にフォーマットを行うには [m:RDoc::Markup::Formatter#add_tag] のように、フォーマッタ側でも操作を行う必要があります。
+#%end
 
-### def add_special(pattern, name) -> ()
+### def add_regexp_handling(pattern, name) -> ()
 
 pattern で指定した正規表現にマッチする文字列をフォーマットの対象にします。
 
+#%until 4.1
 例えば WikiWord のような、[m:RDoc::Markup#add_word_pair]、
 [m:RDoc::Markup#add_html] でフォーマットできないものに対して使用します。
+#%else
+例えば WikiWord のような、単純な開始・終了の記号ではさめない文字列に対して使用します。
+#%end
 
 - **param** `pattern` -- 正規表現を指定します。
 
 - **param** `name` -- [c:RDoc::Markup::ToHtml] などのフォーマッタに識別させる時の名前を
             [c:Symbol] で指定します。
 
-```ruby title="例"
-require 'rdoc/markup/simple_markup'
-require 'rdoc/markup/simple_markup/to_html'
+#%until 4.1
 
-class WikiHtml < SM::ToHtml
-  def handle_special_WIKIWORD(special)
-    "<font color=red>" + special.text + "</font>"
+```ruby title="例"
+require 'rdoc'
+require 'rdoc/markup/to_html'
+
+class WikiHtml < RDoc::Markup::ToHtml
+  def handle_regexp_WIKIWORD(target)
+    "<font color=red>" + target.text + "</font>"
   end
 end
 
-m = SM::SimpleMarkup.new
-m.add_special(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
+m = RDoc::Markup.new
+m.add_regexp_handling(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
 
-h = WikiHtml.new
-puts m.convert(input_string, h)
+h = WikiHtml.new(RDoc::Options.new, m)
+p h.convert("see WikiWord here")
+# => "\n<p>see <font color=red>WikiWord</font> here</p>\n"
 ```
 
-変換時に実際にフォーマットを行うには SM::ToHtml#accept_special_<name で指定した名前>
-のように、フォーマッタ側でも操作を行う必要があります。
+変換時に実際にフォーマットを行うには、フォーマッタ側で `handle_regexp_<name で指定した名前>(target)` を定義します。
+`target` は `RDoc::Markup::RegexpHandling` オブジェクトで、`target.text` でマッチした文字列(正規表現にグループがある場合は最初のグループ)を取得できます。
+また、フォーマッタの生成時に、この [c:RDoc::Markup] オブジェクトを渡す必要があります。
+#%else
+フォーマッタ(例. [c:RDoc::Markup::ToHtml])は自身が持つ [c:RDoc::Markup] オブジェクトに登録された正規表現を使うため、
+独自のフォーマットを追加するには、フォーマッタのサブクラスで登録を行います。
+
+```ruby title="例"
+require 'rdoc'
+require 'rdoc/markup/to_html'
+
+class WikiHtml < RDoc::Markup::ToHtml
+  def initialize(...)
+    super
+    @markup.add_regexp_handling(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
+  end
+
+  def handle_regexp_WIKIWORD(text)
+    "<font color=red>" + text + "</font>"
+  end
+end
+
+p WikiHtml.new.convert("see WikiWord here")
+# => "\n<p>see <font color=red>WikiWord</font> here</p>\n"
+```
+
+変換時に実際にフォーマットを行うには、フォーマッタ側で `handle_regexp_<name で指定した名前>(text)` を定義します。
+`text` にはマッチした文字列(正規表現にグループがある場合は最初のグループ)が渡されます。
+#%end
 
 ### def convert(str, formatter) -> object | ""
 
@@ -185,6 +265,8 @@ str で指定された文字列を formatter に変換させます。
 
 変換結果は formatter によって文字列や配列を返します。
 
-### def attribute_manager -> RDoc::AttributeManager
+#%until 4.1
+### def attribute_manager -> RDoc::Markup::AttributeManager
 
-自身の `RDoc::AttributeManager` オブジェクトを返します。
+自身の `RDoc::Markup::AttributeManager` オブジェクトを返します。
+#%end
