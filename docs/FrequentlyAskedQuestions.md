@@ -114,9 +114,11 @@ since: "3.2"
   各ノードクラスのページやメソッドのエントリは作りません。`Prism::Visitor`・`Prism::Compiler`・`Prism::Dispatcher`・`Prism::DSL` など、
   ノードごとに `visit_xxx_node` のようなメソッドを持つクラスも同様に載せません
 - **内部 API**: rubygems は利用者向けの API(`Gem` の設定・検索系のメソッド、`Gem::Specification` の gemspec 属性と検索系のメソッド、
-  `Gem::Version`・`Gem::Requirement`・`Gem::Dependency`・`Gem::Platform`)と例外クラスだけを載せ、
+  `Gem::Version`・`Gem::Requirement`・`Gem::Dependency`・`Gem::Platform`、`Gem::ConfigFile` の設定と API キーを扱うメソッド、
+  `Gem::Package` の `.gem` ファイルを作る・検証する・展開するメソッド)と例外クラスだけを載せ、
   `Gem::Installer`・`Gem::Indexer`・`Gem::RemoteFetcher`・`Gem::Security`・`Gem::Commands::*` などの内部クラスや、
-  `Gem::Net::HTTP` のような vendored ライブラリは載せません(既存のページは残しますが、追補はしません)
+  `Gem::Net::HTTP` のような vendored ライブラリは載せません(既存のページは残しますが、追補はしません)。
+  `Gem::ConfigFile`・`Gem::Package` でも、状態ファイルや YAML の読み書き、tar の操作のような内部メソッドは載せません
 
 `tools/method-coverage` の集計では、これらを `POLICY(理由)` として不足側から除外しています。
 
