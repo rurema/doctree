@@ -1,8 +1,8 @@
 # doctree manual/api ライブラリ抽出メモ
 
-- type: library 総数: 360
+- type: library 総数: 361
 
-## since 付き (36 件)
+## since 付き (37 件)
 
 - error_highlight: since=3.1
 - irb/debug: since=3.3
@@ -12,6 +12,7 @@
 - irb/pager: since=3.3
 - irb/startup_message: since=4.1
 - irb/statement: since=3.3
+- json/add/set: since=2.7
 - json/add/string: since=4.0
 - minitest/autorun: since=1.9.1
 - minitest/mock: since=1.9.1
@@ -41,7 +42,7 @@
 - ripper/sexp: since=1.9.0
 - ubygems: since=1.9.1
 
-## until 付き (80 件)
+## until 付き (81 件)
 
 - cgi/cookie: until=4.0
 - cgi/core: until=4.0
@@ -77,6 +78,7 @@
 - json/add/range: until=4.1
 - json/add/rational: until=4.1
 - json/add/regexp: until=4.1
+- json/add/set: until=4.1
 - json/add/string: until=4.1
 - json/add/struct: until=4.1
 - json/add/symbol: until=4.1
@@ -127,7 +129,7 @@
 ## トップレベル(サブパスなし) vs サブパス付き
 
 - トップレベル(name に `/` を含まない): 101 件
-- サブパス付き(name に `/` を含む): 259 件
+- サブパス付き(name に `/` を含む): 260 件
 
 ## トップレベル第1階層ごとのサブライブラリ数
 
@@ -138,7 +140,7 @@
 - fiddle/: 2 件
 - io/: 4 件
 - irb/: 44 件
-- json/: 14 件
+- json/: 15 件
 - minitest/: 4 件
 - net/: 7 件
 - optparse/: 4 件
