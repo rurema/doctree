@@ -1,7 +1,7 @@
 ---
 library: rubygems/package/tar_reader
 include:
-  - Gem::Package
+  - Enumerable
 ---
 # class Gem::Package::TarReader
 

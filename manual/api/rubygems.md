@@ -16,7 +16,8 @@ sublibrary:
 RubyGems を扱うためのクラスやモジュールが定義されているライブラリです。
 
 このリファレンスでは、利用者向けの API([c:Gem] モジュールの設定・検索系のメソッド、[c:Gem::Specification] の gemspec 属性と検索系のメソッド、
-[c:Gem::Version]・[c:Gem::Requirement]・[c:Gem::Dependency]・[c:Gem::Platform])と例外クラスを扱います。
+[c:Gem::Version]・[c:Gem::Requirement]・[c:Gem::Dependency]・[c:Gem::Platform]、[c:Gem::ConfigFile] の設定と API キーを扱うメソッド、
+[c:Gem::Package] の `.gem` ファイルを作る・検証する・展開するメソッド)と例外クラスを扱います。
 `Gem::Installer`・`Gem::Indexer`・`Gem::RemoteFetcher`・`Gem::Security`・`Gem::Commands::*` などの内部クラスや、
 `Gem::Net::HTTP` のように RubyGems が同梱している他のライブラリのコピー(vendored)は、
 ページがあるものも含めて RubyGems の版に追随した記述はしていません。完全な API については公式ドキュメントを参照してください。
