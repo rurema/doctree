@@ -2,8 +2,7 @@
 library:
 #%since 3.4
   - rdoc/code_object/any_method
-#%end
-#%until 3.4
+#%else
   - rdoc/any_method
 #%end
 ---

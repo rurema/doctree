@@ -2,8 +2,7 @@
 library:
 #%since 3.4
   - rdoc/code_object/class_module
-#%end
-#%until 3.4
+#%else
   - rdoc/class_module
 #%end
 ---

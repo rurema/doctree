@@ -2,8 +2,7 @@
 library:
 #%since 3.4
   - rdoc/code_object/top_level
-#%end
-#%until 3.4
+#%else
   - rdoc/top_level
 #%end
 ---
