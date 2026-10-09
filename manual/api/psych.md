@@ -100,7 +100,7 @@ libyaml のバージョン。
 
 libyaml のバージョンを返します。
 
-`[major, minor patch-level]` という 3 つの整数からなる配列を返します。
+`[major, minor, patch-level]` という 3 つの整数からなる配列を返します。
 
 - **SEE** [m:Psych::LIBYAML_VERSION]
 
@@ -319,7 +319,6 @@ Psych.safe_load("", [Date])
 ```
 
 #%end
-- **param** `io` -- YAMLフォーマットの文書の読み込み先の [c:IO] オブジェクト。
 - **param** `permitted_classes` -- 追加で読み込みを許可するクラスの配列。
 - **param** `permitted_symbols` -- 引数 `permitted_classes` に [c:Symbol] を含む場合に読み込みを許可する [c:Symbol] の配列。
                          省略した場合は全ての [c:Symbol] を許可します。
@@ -377,7 +376,7 @@ end
 
 ### def Psych.parser -> Psych::Parser
 
-デフォルトで使われるのパーサを返します。
+デフォルトで使われるパーサを返します。
 
 ### def Psych.parse_stream(yaml) -> Psych::Nodes::Stream
 ### def Psych.parse_stream(yaml){|node| ... } -> ()
@@ -406,7 +405,7 @@ Ruby のオブジェクト `o` を YAML ドキュメントに変換します。
 `io` に [c:IO] オブジェクトを指定した場合は、変換されたドキュメントがその IO に書き込まれます。
 指定しなかった場合は変換されたドキュメントが文字列としてメソッドの返り値となります。
 
-`options` で出力に関するオプションを以下の指定できます。
+`options` で出力に関する以下のオプションを指定できます。
 
 #%include(psych/dump_options)
 
@@ -463,7 +462,7 @@ require 'psych'
 p Psych.load_stream("--- foo\n...\n--- bar\n...") # => ['foo', 'bar']
 ```
 
-ブロックありの場合は各オブジェクト引数としてそのブロックを呼び出します。
+ブロックありの場合は各オブジェクトを引数としてそのブロックを呼び出します。
 
 ```ruby title="例"
 require 'psych'
@@ -701,7 +700,7 @@ YAML の文法エラーを表すクラスです。
 エラーが生じたファイルの名前を返します。
 
 [m:Psych.load_file] で指定したファイルの名前や
-[m:Psych.load] の第2引数で指定した名前が返されます。
+[m:Psych.load] などの引数 `filename` で指定した名前が返されます。
 パース時にファイル名を指定しなかった場合は nil が返されます。
 
 ### def line -> Integer
