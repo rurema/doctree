@@ -461,6 +461,49 @@ p r.lazy.map{|n| n**2}.repeat(2).first(5)
 ```
 
 - **SEE** [m:Enumerator#with_index]
+
+#%since 4.1
+### def each_with_index {|(*args), idx| ... } -> Enumerator::Lazy
+### def each_with_index -> Enumerator::Lazy
+
+`with_index(0)` と同じです。要素にインデックスを添えて遅延評価します。
+
+ブロックを指定しなかった場合は、要素とインデックスの組を生成する [c:Enumerator::Lazy] を返します。
+
+ブロックを指定した場合は、各要素とインデックスでブロックを遅延評価し、
+元の要素をそのまま流す [c:Enumerator::Lazy] を返します。ブロックの返り値は使われません。
+返される [c:Enumerator::Lazy] のサイズは元と同じです。
+
+```ruby title="例"
+p (1..Float::INFINITY).lazy.each_with_index.first(2)
+# => [[1, 0], [2, 1]]
+
+p (1..Float::INFINITY).lazy.each_with_index.map { |x, i| x * i }.first(3)
+# => [0, 2, 6]
+
+p (1..Float::INFINITY).lazy.select(&:even?).each_with_index.first(2)
+# => [[2, 0], [4, 1]]
+
+p (1..3).lazy.each_with_index.size
+# => 3
+```
+
+ブロックを指定した場合、ブロックは要素を取り出すときに評価されます。
+
+```ruby title="例"
+p (1..3).lazy.each_with_index { |x, i| print [x, i].inspect }.to_a
+# => [1, 0][2, 1][3, 2][1, 2, 3]
+
+p (1..3).lazy.each_with_index { |x, i| x * 10 }.to_a
+# => [1, 2, 3]
+```
+
+Ruby 4.0 以前では、ブロックを指定すると [m:Enumerable#each_with_index] として
+即座にすべての要素を繰り返します(無限列では戻りません)。
+
+- **SEE** [m:Enumerator::Lazy#with_index], [m:Enumerable#each_with_index]
+#%end
+
 #%since 3.1
 ### def compact -> Enumerator::Lazy
 
