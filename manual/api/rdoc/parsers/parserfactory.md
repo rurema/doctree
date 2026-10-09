@@ -72,21 +72,31 @@ old_ext に登録されたパーサを new_ext でも解析できるようにエ
 
 - **return** -- エイリアスが登録された場合は true を返します。old_ext にパーサが登録されていない場合、エイリアスが登録されずに false を返します。
 
-### def RDoc::Parser.parser_for(top_level, file_name, body, options, stats) -> RDoc::Parser
+#%until 3.4
+### def RDoc::Parser.for(top_level, file_name, body, options, stats) -> RDoc::Parser | nil
+#%else
+### def RDoc::Parser.for(top_level, body, options, stats) -> RDoc::Parser | nil
+#%end
 
-file_name を解析できるパーサのインスタンスを返します。
-見つからなかった場合は [c:RDoc::Parser::Simple] のインスタンスを返します。
+ファイルを解析できるパーサのインスタンスを返します。
+解析できるパーサが見つからなかった場合やバイナリファイルの場合は nil を返します。
 
 - **param** `top_level` -- [c:RDoc::TopLevel] オブジェクトを指定します。
 
+#%until 3.4
 - **param** `file_name` -- ファイル名を文字列で指定します。
 
+#%end
 - **param** `body` -- ソースコードの内容を文字列で指定します。
 
 - **param** `options` -- [c:RDoc::Options] オブジェクトを指定します。
 
 - **param** `stats` -- [c:RDoc::Stats] オブジェクトを指定します。
 
+#%since 3.4
+ファイル名は `top_level` から取得します。
+
+#%end
 ### def RDoc::Parser.parsers -> [[Regexp, RDoc::Parser]]
 
 [m:RDoc::Parser.parse_files_matching] で登録した正規表現とパーサクラスの配列の配列を返します。
