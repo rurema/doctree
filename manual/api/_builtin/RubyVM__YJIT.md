@@ -78,6 +78,60 @@ JIT の有効・無効はコマンドラインオプションや環境変数な�
 
 - **SEE** [m:RubyVM::YJIT.runtime_stats], [m:RubyVM::YJIT.stats_enabled?]
 
+#%since 4.1
+### def RubyVM::YJIT.total_compile_time_ns -> Integer
+
+YJIT がコンパイルに使った実時間の合計をナノ秒単位で返します。
+値は単調に増加します。YJIT が有効でなければ 0 を返します。
+
+```ruby title="例"
+RubyVM::YJIT.enable
+2000.times { |i| i.to_s }
+p RubyVM::YJIT.total_compile_time_ns > 0 # => true
+```
+
+- **SEE** [m:RubyVM::YJIT.max_compile_time_ns], [m:RubyVM::YJIT.max_compile_time_ns=], [m:RubyVM::YJIT.runtime_stats]
+
+### def RubyVM::YJIT.max_compile_time_ns -> Integer
+
+YJIT がコンパイルに使ってよい時間の上限をナノ秒単位で返します。
+[m:RubyVM::YJIT.total_compile_time_ns] がこの値を超えると、上限が引き上げられるまで YJIT はコンパイルを止めます。
+0 は無制限を表し、デフォルトは 0 です。
+
+上限は best-effort で扱われるため、コンパイルが止まっているはずの間にもコンパイルすることがあります。
+JIT のウォームアップの速さを制御し、コンパイルの負荷をより長い時間に分散させるための機能です([feature:22236])。
+たとえば、リクエストや一定の周期ごとにコンパイル時間の予算を割り当てたいときは、
+`RubyVM::YJIT.max_compile_time_ns = RubyVM::YJIT.total_compile_time_ns + 20_000_000` のように、現在の合計に予算を足した値を設定します。
+
+YJIT が有効でなければ 0 を返します。
+
+```ruby title="例"
+p RubyVM::YJIT.max_compile_time_ns # => 0
+```
+
+- **SEE** [m:RubyVM::YJIT.max_compile_time_ns=], [m:RubyVM::YJIT.total_compile_time_ns]
+
+### def RubyVM::YJIT.max_compile_time_ns=(ns)
+
+YJIT がコンパイルに使ってよい時間の上限をナノ秒単位で設定します。
+意味は [m:RubyVM::YJIT.max_compile_time_ns] を参照してください。
+0 を指定すると無制限になります。
+
+[m:RubyVM::YJIT.enable] やコマンドラインオプション `--yjit` で YJIT を有効にしてから使います。
+
+- **param** `ns` -- 上限(ナノ秒)。Integer 以外は Integer に変換されます(`1.5` は `1` になります)。負の値は渡さないでください(符号なし整数として扱われ、非常に大きな値になります)。
+- **return** -- 設定した値を返します。
+- **raise** `TypeError` -- `ns` に文字列など Integer に変換できないものを指定した場合に発生します。
+
+```ruby title="例"
+RubyVM::YJIT.enable
+RubyVM::YJIT.max_compile_time_ns = 10
+p RubyVM::YJIT.max_compile_time_ns # => 10
+```
+
+- **SEE** [m:RubyVM::YJIT.max_compile_time_ns], [m:RubyVM::YJIT.total_compile_time_ns]
+#%end
+
 #%since 3.3
 #%version 4.0...
 ### def RubyVM::YJIT.enable(stats: false, log: false, mem_size: nil, call_threshold: nil) -> bool
