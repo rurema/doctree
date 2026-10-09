@@ -1,8 +1,8 @@
 # doctree manual/api ライブラリ抽出メモ
 
-- type: library 総数: 358
+- type: library 総数: 360
 
-## since 付き (35 件)
+## since 付き (36 件)
 
 - error_highlight: since=3.1
 - irb/debug: since=3.3
@@ -12,6 +12,7 @@
 - irb/pager: since=3.3
 - irb/startup_message: since=4.1
 - irb/statement: since=3.3
+- json/add/string: since=4.0
 - minitest/autorun: since=1.9.1
 - minitest/mock: since=1.9.1
 - minitest/spec: since=1.9.1
@@ -40,7 +41,7 @@
 - ripper/sexp: since=1.9.0
 - ubygems: since=1.9.1
 
-## until 付き (66 件)
+## until 付き (80 件)
 
 - cgi/cookie: until=4.0
 - cgi/core: until=4.0
@@ -66,6 +67,20 @@
 - irb/ruby-token: until=2.7.0
 - irb/slex: until=2.7.0
 - irb/src_encoding: until=3.3
+- json/add/bigdecimal: until=4.1
+- json/add/complex: until=4.1
+- json/add/core: until=4.1
+- json/add/date: until=4.1
+- json/add/date_time: until=4.1
+- json/add/exception: until=4.1
+- json/add/ostruct: until=4.1
+- json/add/range: until=4.1
+- json/add/rational: until=4.1
+- json/add/regexp: until=4.1
+- json/add/string: until=4.1
+- json/add/struct: until=4.1
+- json/add/symbol: until=4.1
+- json/add/time: until=4.1
 - mathn: until=2.5.0
 - minitest/mock: until=4.0
 - minitest/unit: until=4.0
@@ -112,7 +127,7 @@
 ## トップレベル(サブパスなし) vs サブパス付き
 
 - トップレベル(name に `/` を含まない): 101 件
-- サブパス付き(name に `/` を含む): 257 件
+- サブパス付き(name に `/` を含む): 259 件
 
 ## トップレベル第1階層ごとのサブライブラリ数
 
@@ -123,7 +138,7 @@
 - fiddle/: 2 件
 - io/: 4 件
 - irb/: 44 件
-- json/: 13 件
+- json/: 14 件
 - minitest/: 4 件
 - net/: 7 件
 - optparse/: 4 件
@@ -131,7 +146,7 @@
 - rake/: 6 件
 - rbconfig/: 1 件
 - rdoc/: 61 件
-- rexml/: 7 件
+- rexml/: 8 件
 - rinda/: 2 件
 - ripper/: 3 件
 - rubygems/: 62 件
@@ -143,6 +158,6 @@
 
 ## 特記事項
 
-- non-library-files.tsv の総数(_builtin/ 除く): 639
+- non-library-files.tsv の総数(_builtin/ 除く): 622
 - そのうちトップレベル(サブディレクトリでない)で type: library でないもの: 1 件
   - enumerator (type: (no front matter))
