@@ -51,7 +51,7 @@ p "にほんご".encode("euc-jp").to_json_raw_object
 #%else
 # => {"json_class"=>"String", "raw"=>[164, 203, 164, 219, 164, 243, 164, 180]}
 #%end
-"にほんご".encode("euc-jp").to_json # source sequence is illegal/malformed (JSON::GeneratorError)
+p "にほんご".encode("euc-jp").to_json # => "\"にほんご\""
 ```
 
 #%end
