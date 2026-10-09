@@ -32,6 +32,12 @@ argv で与えられた引数を元にドキュメントをフォーマットし
 指定できるオプションについては、[ref:lib:rdoc#usage] を参照してください。出力ディレクトリが指定されなかった場合はカレントディレクトリ の
 doc 以下に出力します。
 
+### def stats -> RDoc::Stats | nil
+{: since="1.9.1"}
+
+[m:RDoc::RDoc#document] でドキュメントを生成した後に、解析の統計情報を [c:RDoc::Stats] オブジェクトで返します。
+生成する前は nil を返します。
+
 #%until 3.1
 ### def load_options -> RDoc::Options
 {: since="2.0.0"}

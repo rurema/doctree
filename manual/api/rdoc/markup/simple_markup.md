@@ -255,13 +255,29 @@ p WikiHtml.new.convert("see WikiWord here")
 `text` にはマッチした文字列(正規表現にグループがある場合は最初のグループ)が渡されます。
 #%end
 
+#%since 4.1
+### def regexp_handlings -> [[Regexp, Symbol]]
+
+[m:RDoc::Markup#add_regexp_handling] で登録した正規表現と名前の組の配列を返します。
+
+```ruby title="例"
+require 'rdoc'
+
+m = RDoc::Markup.new
+m.add_regexp_handling(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
+p m.regexp_handlings
+# => [[/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD]]
+```
+
+#%end
+
 ### def convert(str, formatter) -> object | ""
 
 str で指定された文字列を formatter に変換させます。
 
 - **param** `str` -- 変換する文字列を指定します。
 
-- **param** `formatter` -- [c:RDoc::Markup::ToHtml]、`RDoc::Markup::ToLaTeX` などのインスタンスを指定します。
+- **param** `formatter` -- [c:RDoc::Markup::ToHtml]、[c:RDoc::Markup::ToRdoc] などのインスタンスを指定します。
 
 変換結果は formatter によって文字列や配列を返します。
 
