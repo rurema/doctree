@@ -118,6 +118,7 @@ json/add/ostruct		4.1
 json/add/range		4.1	
 json/add/rational		4.1	
 json/add/regexp		4.1	
+json/add/set	2.7	4.1	
 json/add/string	4.0	4.1	
 json/add/struct		4.1	
 json/add/symbol		4.1	
