@@ -14,17 +14,27 @@ rdoc で解析できるファイルの種類を追加するためのサブライ
 
 以下のメソッドを定義したクラスを作成する事で、新しいパーサクラスを作成する事ができます。
 
-- #initialize(top_level, file_name, body, options, stats)
-- #scan
+#%until 4.0
+- `#initialize(top_level, file_name, body, options, stats)`
+#%else
+- `#initialize(top_level, body, options, stats)`
+#%end
+- `#scan`
 
 initialize メソッドは以下の引数を受け取ります。
 
-- top_level [c:RDoc::TopLevel] オブジェクトを指定します。
-- file_name: file_name ファイル名を文字列で指定します。
-- body: ソースコードの内容を文字列で指定します。
-- options: [c:RDoc::Options] オブジェクトを指定します。
-- stats: [c:RDoc::Stats] オブジェクトを指定します。
+- `top_level`: [c:RDoc::TopLevel] オブジェクトを指定します。
+#%until 4.0
+- `file_name`: ファイル名を文字列で指定します。
+#%end
+- `body`: ソースコードの内容を文字列で指定します。
+- `options`: [c:RDoc::Options] オブジェクトを指定します。
+- `stats`: [c:RDoc::Stats] オブジェクトを指定します。
 
+#%since 4.0
+ファイル名は `top_level` から取得します。
+
+#%end
 scan メソッドは引数を受け取りません。処理の後は必ず
 [c:RDoc::TopLevel] オブジェクトを返す必要があります。
 
@@ -32,15 +42,20 @@ scan メソッドは引数を受け取りません。処理の後は必ず
 を継承し、parse_files_matching メソッドで自身が解析できるファイル名のパターンを登録しておく必要があります。
 
 ```ruby title="例"
-require "rdoc/parser"
-  
+require "rdoc"
+
 class RDoc::Parser::Xyz < RDoc::Parser
   parse_files_matching /\.xyz$/
-  
-  def initialize(file_name, body, options)
+
+#%until 4.0
+  def initialize(top_level, file_name, body, options, stats)
+#%else
+  def initialize(top_level, body, options, stats)
+#%end
+    super
     # ...
   end
-  
+
   def scan
     # ...
   end
