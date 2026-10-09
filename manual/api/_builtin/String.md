@@ -2990,6 +2990,9 @@ p some_method(5).to_s.downcase
 ```
 
 ### def tr(pattern, replace) -> String
+#%since 4.1
+### def tr(hash) -> String
+#%end
 
 pattern 文字列に含まれる文字を検索し、それを replace 文字列の対応する文字に置き換えます。
 
@@ -3005,8 +3008,23 @@ replace に対しても `-` による範囲指定が可能です。
 replace の範囲が pattern の範囲よりも小さい場合は、
 replace の最後の文字が無限に続くものとして扱われます。
 
+#%since 4.1
+Ruby 4.1 から、引数に Hash を 1 つだけ渡す形式も使えます。
+この形式では、`hash` のキー(1 文字の文字列)に一致する文字を、対応する値の文字列に置き換えます。
+値は任意の長さの文字列で、空文字列を指定するとその文字が削除されます。
+文字列に含まれないキーは無視されます。
+置き換えた結果に対して、さらに置き換えが行われることはありません。
+
+`hash` のキーが 1 文字でない文字列(空文字列を含む)の場合は [c:ArgumentError]、
+キーや値が文字列でない場合は [c:TypeError] が発生します。
+`tr("el", {"e" => "EE"})` のように、2 つの引数のどちらかに Hash を渡した場合も [c:TypeError] が発生します。
+
+#%end
 - **param** `pattern` --    置き換える文字のパターン
 - **param** `replace` --    pattern で指定した文字を置き換える文字
+#%since 4.1
+- **param** `hash` --    置き換える文字(キー)と置き換え後の文字列(値)の対応
+#%end
 
 ```ruby title="例"
 p "foo".tr("f", "X")      # => "Xoo"
@@ -3022,9 +3040,24 @@ p email.tr("０-９ａ-ｚＡ-Ｚ．＠−", "0-9a-zA-Z.@-")
 # => "ruby-lang@example.com"
 ```
 
+#%since 4.1
+
+```ruby title="Hash を渡す例"
+p "hello".tr({"e" => "EE", "l" => "L"}) # => "hEELLo"
+p "hello".tr({"e" => ""})               # => "hllo"
+p "hello".tr({"e" => "1", "x" => "2"})  # => "h1llo"
+p "héllo".tr({"é" => "e"})              # => "hello"
+p "hello".tr({"l" => "L", "L" => "z"})  # => "heLLo"
+"hello".tr({"ll" => "L"})               # ~> ArgumentError: keys must be of size 1
+```
+
+#%end
 - **SEE** [m:String#tr!], [m:String#tr_s]
 
 ### def tr!(pattern, replace) -> self | nil
+#%since 4.1
+### def tr!(hash) -> self | nil
+#%end
 
 pattern 文字列に含まれる文字を検索し、それを replace 文字列の対応する文字に破壊的に置き換えます。
 
@@ -3041,11 +3074,28 @@ replace に対しても `-` による範囲指定が可能です。
 replace の範囲が pattern の範囲よりも小さい場合は、
 replace の最後の文字が無限に続くものと扱われます。
 
+#%since 4.1
+Ruby 4.1 から、[m:String#tr] と同じく Hash を 1 つだけ渡す形式も使えます。
+
+#%end
 tr! は self を変更して返しますが、置換が起こらなかった場合は nil を返します。
 
 - **param** `pattern` --    置き換える文字のパターン
 - **param** `replace` --    pattern で指定した文字を置き換える文字
+#%since 4.1
+- **param** `hash` --    置き換える文字(キー)と置き換え後の文字列(値)の対応
+#%end
 
+#%since 4.1
+
+```ruby title="例"
+s = "hello"
+p s.tr!({"e" => "EE"}) # => "hEEllo"
+p s                    # => "hEEllo"
+p s.tr!({"z" => "E"})  # => nil
+```
+
+#%end
 - **SEE** [m:String#tr], [m:String#tr_s]
 
 ### def tr_s(pattern, replace) -> String
