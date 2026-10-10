@@ -636,6 +636,43 @@ p s1 == s2 # => false
 p s1 == s3 # => true
 ```
 
+### def eql?(other) -> bool
+{: since=""}
+
+`other` が Set オブジェクトであり、self と同じ要素を持つときに true を返します。
+
+要素の等しさは [m:Object#eql?] により判定されるため、`1.0` と `1` は別の要素として扱われます。
+`other` が Set オブジェクトでない場合は false を返します。
+
+Set を [c:Hash] のキーとして使うときの比較に使われます。
+
+- **param** `other` -- 比較対象のオブジェクトを指定します。
+
+```ruby title="例"
+p Set[1, 2].eql?(Set[2, 1])    # => true
+p Set[1, 2].eql?(Set[1, 2, 3]) # => false
+p Set[1, 2].eql?([1, 2])       # => false
+p Set[1.0].eql?(Set[1])        # => false
+```
+
+- **SEE** [m:Set#==], [m:Object#eql?]
+
+### def hash -> Integer
+{: since=""}
+
+self のハッシュ値を返します。
+
+同じ要素を持つ集合は、要素の順序にかかわらず同じハッシュ値を返します。
+そのため、Set を [c:Hash] のキーとして使えます。
+
+```ruby title="例"
+p Set[1, 2].hash == Set[2, 1].hash # => true
+h = {Set[1, 2] => :a}
+p h[Set[2, 1]]                      # => :a
+```
+
+- **SEE** [m:Set#eql?], [m:Object#hash]
+
 ### def classify {|o| ... } -> Hash
 
 集合をブロックの値によって分類し、結果をハッシュとして返します。
