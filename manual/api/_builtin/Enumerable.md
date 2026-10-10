@@ -1558,11 +1558,31 @@ p to_enum(:with_nils).compact # => [1, 2, 3]
 #%end
 
 #%since 3.2
+#%since 4.1
+### def to_set -> Set
+### def to_set {|o| ... } -> Set
+#%else
 ### def to_set(klass = Set, *args) -> Set
 ### def to_set(klass = Set, *args) {|o| ... } -> Set
+#%end
 
 Enumerable オブジェクトの要素から、新しい集合オブジェクトを作ります。
 
+#%since 4.1
+Ruby 4.1 から、引数を受け付けなくなりました。引数を渡すと [c:ArgumentError] が発生します。
+ブロックは、集合オブジェクトを生成するための [m:Set.new] に渡されます。
+ユーザ定義の集合クラスのインスタンスを作りたいときは、そのクラスの new メソッドを直接呼び出してください。
+
+- **param** `block` -- 集合オブジェクトを生成する [m:Set.new] に渡すブロックを指定します。
+- **return** -- 生成された集合オブジェクトを返します。
+
+```ruby
+p [30, 10, 20].to_set # => Set[30, 10, 20]
+p [30, 10, 20].to_set {|num| num / 10} # => Set[3, 1, 2]
+[30, 10, 20].to_set(Set) # ~> ArgumentError
+```
+
+#%else
 引数 klass を与えた場合、Set クラスの代わりに、指定した集合クラスのインスタンスを作ります。
 
 この引数を指定することで、ユーザ定義の集合クラスのインスタンスを作ることができます
@@ -1575,6 +1595,7 @@ Ruby 2.7 までは SortedSet が定義されていました)。
 #%since 4.0
 Ruby 4.0 から、引数 klass や args を渡す呼び出しは deprecated です。
 引数を渡すと「passing arguments to Enumerable#to_set is deprecated」という警告を出力します（ブロックのみを渡す呼び出しは deprecated ではありません）。
+Ruby 4.1 では引数を渡せなくなります。
 #%end
 
 - **param** `klass` -- 生成する集合クラスを指定します。
@@ -1602,6 +1623,8 @@ p [30, 10, 20].to_set {|num| num / 10}
 #=> #<Set: {3, 1, 2}>
 #%end
 ```
+
+#%end
 
 - **SEE** [m:Set.new]
 #%end
