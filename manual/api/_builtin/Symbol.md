@@ -138,7 +138,23 @@ p :foo.id2name  # => "foo"
 p :foo.id2name.intern == :foo  # => true
 ```
 
-#%since 3.4
+#%since 4.1
+Ruby 4.1 から、返り値の文字列は freeze されています。
+毎回同じオブジェクトが返され、[m:Symbol#name] の返り値と同一のオブジェクトです。
+破壊的に変更しようとすると [c:FrozenError] が発生します。
+変更可能な文字列が必要なときは、`dup` や `+` で複製してください。
+
+```ruby
+s = :foo.to_s
+p s.frozen?           # => true
+p s.equal?(:foo.to_s) # => true
+p s.equal?(:foo.name) # => true
+p s.dup.frozen?       # => false
+s << "bar"            # ~> FrozenError
+```
+
+#%end
+#%version 3.4...4.1
 返り値の文字列を破壊的に変更すると、Warning[:deprecated] が真のとき「この文字列は将来のバージョンで freeze される」という趣旨の警告が出るようになりました。将来のバージョンでは返り値が freeze される予定です。
 freeze された文字列が必要なときは [m:Symbol#name] を使用してください。
 
@@ -157,6 +173,19 @@ s << "bar"
 
 シンボルに対応する文字列を返します。
 
+#%since 4.1
+freeze された文字列を返します。Ruby 4.1 から [m:Symbol#to_s] の返り値も freeze されており、
+同じオブジェクトを返します。
+
+```ruby
+p :fred.name         # => "fred"
+p :fred.name.frozen? # => true
+p :fred.to_s         # => "fred"
+p :fred.to_s.frozen? # => true
+p :fred.name.equal?(:fred.to_s) # => true
+```
+
+#%else
 [m:Symbol#to_s]と違って freeze された文字列を返します。
 
 ```ruby
@@ -165,6 +194,8 @@ p :fred.name.frozen? # => true
 p :fred.to_s         # => "fred"
 p :fred.to_s.frozen? # => false
 ```
+
+#%end
 
 - **SEE** [m:Symbol#to_s]
 
