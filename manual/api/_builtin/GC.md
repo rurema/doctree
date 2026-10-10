@@ -238,6 +238,12 @@ p GC.config # => {rgengc_allow_full_mark: false, implementation: "default"}
 前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、
 false)。
 
+#%since 4.1
+Ruby 4.1 から、デフォルトの GC は [c:Ractor] ごとに動作し、このメソッドによる禁止状態も Ractor ごとに保持されます。
+ある Ractor で [m:GC.enable] を呼び出しても、別の Ractor が行った禁止は上書きされません。
+
+#%end
+
 ```ruby title="例"
 p GC.disable # => false
 p GC.disable # => true
@@ -252,6 +258,11 @@ p GC.disable # => true
 前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、
 false)。
 
+#%since 4.1
+Ruby 4.1 から、デフォルトの GC は [c:Ractor] ごとに動作し、禁止状態も Ractor ごとに保持されます。
+このメソッドは呼び出した Ractor の禁止だけを解除し、別の Ractor が [m:GC.disable] で行った禁止は上書きしません。
+
+#%end
 - **SEE** [m:GC.disable]
 
 ```ruby title="例"
@@ -260,7 +271,11 @@ p GC.enable  # => true
 p GC.enable  # => false
 ```
 
+#%since 4.1
+### def GC.start(full_mark: true, immediate_mark: true, immediate_sweep: true, global: true) -> nil
+#%else
 ### def GC.start(full_mark: true, immediate_mark: true, immediate_sweep: true) -> nil
+#%end
 
 ガーベージコレクトを開始します。
 
@@ -277,6 +292,12 @@ nil を返します。
 - **param** `immediate_sweep` -- sweep を遅らせる(Lazy Sweep を行う)場合は false
                        を、そうでない場合は true を指定します。
 
+#%since 4.1
+- **param** `global` -- 他の [c:Ractor] のオブジェクト空間が存在するときに、全 Ractor を対象とするグローバル GC を行う場合は true(デフォルト)を、呼び出した Ractor だけのメジャー GC を行う場合は false を指定します。Ractor が 1 つしか無いときは効果がありません。
+
+他の Ractor のオブジェクト空間が存在するとき(終了したがまだ吸収されていない Ractor のものを含みます)、`global` が true なら、[m:GC.stat] の `:global_gc_count` が増え、`:major_gc_count` は増えません。
+
+#%end
 注意: これらのキーワード引数は Ruby の実装やバージョンによって異なります。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポートしていない場合はキーワード引数を指定しても無視される可能性があります。
 
 ```ruby title="例"
@@ -325,8 +346,13 @@ GCのストレスモードを引数 value に設定します。
 p GC.count # => 3
 ```
 
+#%since 4.1
+### def GC.stat(result_hash = {}, scope: :ractor) -> {Symbol => Integer}
+### def GC.stat(key, scope: :ractor) -> Numeric
+#%else
 ### def GC.stat(result_hash = {}) -> {Symbol => Integer}
 ### def GC.stat(key) -> Numeric
+#%end
 
 GC 内部の統計情報を [c:Hash] で返します。
 
@@ -334,6 +360,27 @@ GC 内部の統計情報を [c:Hash] で返します。
 
 - **param** `key` -- 得られる統計情報から特定の情報を取得したい場合にキーを
            [c:Symbol] で指定します。
+
+#%since 4.1
+- **param** `scope` -- 統計情報の対象範囲を [c:Symbol] で指定します。`:ractor`(デフォルト)は現在の [c:Ractor] の値を返します。`:local` は `:ractor` の別名です。`:global` は、終了した Ractor の分も含む全 Ractor の累積の GC 回数と mark / sweep の CPU 時間を、stop-the-world の snapshot を取らずに返します。
+
+- **raise** `ArgumentError` -- `scope` に未知の値を指定した場合に発生します。
+
+Ruby 4.1 から、グローバル GC(全 Ractor を対象とする stop-the-world の GC)の回数を表すキー `:global_gc_count` が加わりました。グローバル GC は `:major_gc_count` には数えず、どちらのスコープでも `:count` は `:minor_gc_count`、`:major_gc_count`、`:global_gc_count` の合計になります。
+各グローバル GC はちょうど 1 つの Ractor に帰属するので、全 Ractor の `:global_gc_count` を足すとプロセス全体の回数になります。
+
+`scope: :global` のときに返るキーは `:count`、`:time`、`:marking_time`、`:sweeping_time`、`:minor_gc_count`、`:major_gc_count`、`:global_gc_count` の 7 つだけです。
+`scope` を指定しない場合は、従来どおり現在の Ractor の値を返します。[m:GC.count] と [m:GC.total_time] も同様です。
+
+```ruby title="例"
+r = Ractor.new { GC.start; GC.stat(:count) }
+p r.value                         # => 1
+p GC.stat(:count)                 # => 0 (main Ractor の値)
+p GC.stat(:count, scope: :global) # => 2
+p GC.stat(:global_gc_count, scope: :global) # => 1
+```
+
+#%end
 
 - **return** -- GC 内部の統計情報を[c:Hash] で返します。
         引数 key を指定した場合は数値を返します。
