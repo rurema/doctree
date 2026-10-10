@@ -45,6 +45,12 @@ p Random.new_seed # => 184271600931914695177248627591520900872
 
 - **return** -- 返り値はバイナリ形式で、暗号的に安全な擬似乱数だと期待できます。
 - **raise** `RuntimeError` -- プラットフォームの提供する機能の準備に失敗した場合に発生します。
+- **raise** `ArgumentError` -- `size` が負の場合に発生します。
+#%since 4.1
+- **raise** `RangeError` -- `size` が `long` の範囲を超える場合に発生します。
+#%else
+- **raise** `RangeError` -- `size` が `unsigned long` の範囲を超える場合に発生します。`long` の範囲を超えて `unsigned long` に収まる場合は `ArgumentError` が発生します。
+#%end
 
 2017年の時点で、Linuxのmanpage([man:random(7)])には「今日256ビット以上のセキュリティを約束できる暗号化プリミティブが入手可能だとは期待できません」と書いてあります。そのため、sizeとして32より大きい値を指定することには疑問の余地があります。
 
