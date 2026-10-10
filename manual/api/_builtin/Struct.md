@@ -218,6 +218,11 @@ p Baz.keyword_init? # => false
               [c:Symbol], [c:String] でメンバの名前を指定します。
 
 - **raise** `IndexError` -- member が整数で存在しないメンバを指定した場合に発生します。
+#%since 4.1
+- **raise** `RangeError` -- member が `long` の範囲を超える整数の場合に発生します。
+#%else
+- **raise** `RangeError` -- member が `int` の範囲を超える整数の場合に発生します。
+#%end
 
 - **raise** `NameError` -- member が [c:String], [c:Symbol] で存在しないメンバを指定した場合に発生します。
 
@@ -253,6 +258,11 @@ p obj[-1]       # => "BAR"    # Array のように負のインデックスも指
 - **param** `value` -- メンバに設定する値を指定します。
 
 - **raise** `IndexError` -- member が整数で存在しないメンバを指定した場合に発生します。
+#%since 4.1
+- **raise** `RangeError` -- member が `long` の範囲を超える整数の場合に発生します。
+#%else
+- **raise** `RangeError` -- member が `int` の範囲を超える整数の場合に発生します。
+#%end
 
 - **raise** `NameError` -- member が [c:String], [c:Symbol] で存在しないメンバを指定した場合に発生します。
 
