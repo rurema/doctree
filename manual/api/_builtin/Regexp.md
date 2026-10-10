@@ -28,8 +28,17 @@ p /abc/.frozen?
 p /a#{42}bc/.frozen?
 # => true
 p Regexp.new('abc').frozen?
+#%since 4.1
+# => true
+#%else
 # => false
+#%end
 ```
+
+#%since 4.1
+Ruby 4.1 からは [m:Regexp.new] や [m:Regexp.union] で生成したものを含め、[c:Regexp] のすべてのインスタンスが freeze されます。互換性のため [c:Regexp] のサブクラスのインスタンスは freeze されません。[feature:8948]
+
+#%end
 
 [d:spec/regexp] や [ref:d:spec/literal#regexp] も参照してください。
 
