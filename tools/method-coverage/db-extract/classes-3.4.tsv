@@ -356,14 +356,15 @@ Gem::InvalidSpecificationException	class	rubygems/exceptions	Gem::Exception			-
 Gem::LoadError	class	rubygems	LoadError			-
 Gem::LocalRemoteOptions	module	rubygems/local_remote_options	-			-
 Gem::OperationNotSupportedError	class	rubygems/exceptions	Gem::Exception			-
-Gem::Package	module	rubygems/package	-			-
-Gem::Package::BadCheckSum	class	rubygems/package	Gem::Package::Error			-
-Gem::Package::ClosedIO	class	rubygems/package	Gem::Package::Error			-
-Gem::Package::Error	class	rubygems/package	StandardError			-
+Gem::Package	class	rubygems/package	Object			-
+Gem::Package::Error	class	rubygems/package	Gem::Exception			-
 Gem::Package::FormatError	class	rubygems/package	Gem::Package::Error			-
 Gem::Package::NonSeekableIO	class	rubygems/package	Gem::Package::Error			-
+Gem::Package::PathError	class	rubygems/package	Gem::Package::Error			-
+Gem::Package::SymlinkError	class	rubygems/package	Gem::Package::Error			-
 Gem::Package::TarHeader	class	rubygems/package/tar_header	Object			-
-Gem::Package::TarReader	class	rubygems/package/tar_reader	Object	Gem::Package		-
+Gem::Package::TarInvalidError	class	rubygems/package	Gem::Package::Error			-
+Gem::Package::TarReader	class	rubygems/package/tar_reader	Object	Enumerable		-
 Gem::Package::TarReader::Entry	class	rubygems/package/tar_reader/entry	Object			-
 Gem::Package::TarReader::UnexpectedEOF	class	rubygems/package/tar_reader	StandardError			-
 Gem::Package::TarWriter	class	rubygems/package/tar_writer	Object			-
@@ -862,7 +863,10 @@ Process::Tms	class	_builtin	Struct			-
 Process::UID	module	_builtin	-			-
 Process::Waiter	class	_builtin	Thread			-
 Psych	module	psych	-			-
+Psych::AliasesNotEnabled	class	psych	Psych::BadAlias			-
+Psych::AnchorNotDefined	class	psych	Psych::BadAlias			-
 Psych::BadAlias	class	psych	Psych::Exception			-
+Psych::DisallowedClass	class	psych	Psych::Exception			-
 Psych::Emitter	class	psych	Psych::Handler			-
 Psych::Exception	class	psych	RuntimeError			-
 Psych::Handler	class	psych	Object			-
@@ -880,7 +884,7 @@ Psych::Parser::Mark	class	psych	Struct			-
 Psych::ScalarScanner	class	psych	Object			-
 Psych::Set	class	psych	Hash			-
 Psych::Stream	class	psych	Psych::Visitors::YAMLTree			-
-Psych::SyntaxError	class	psych	SyntaxError			-
+Psych::SyntaxError	class	psych	Psych::Exception			-
 Psych::TreeBuilder	class	psych	Psych::Handler			-
 Psych::Visitors	class	psych	Object			-
 Psych::Visitors::Visitor	class	psych	Object			-
@@ -978,6 +982,9 @@ REXML::SourceFactory	class	rexml/document	Object			-
 REXML::StreamListener	module	rexml/streamlistener	-			-
 REXML::Text	class	rexml/document	REXML::Child	Comparable		-
 REXML::UndefinedNamespaceException	class	rexml	REXML::ParseException			-
+REXML::Validation::RelaxNG	class	rexml/validation/relaxng	Object	REXML::Validation::Validator		-
+REXML::Validation::ValidationException	class	rexml/validation/relaxng	RuntimeError			-
+REXML::Validation::Validator	module	rexml/validation/relaxng	-			-
 REXML::XMLDecl	class	rexml/document	REXML::Child	REXML::Encoding		-
 REXML::XMLTokens	module	rexml/document	-			-
 REXML::XPath	class	rexml/document	Object	REXML::Functions		-
@@ -998,10 +1005,12 @@ RSS::Maker::Base	class	rss	Object			-
 RSS::Maker::ChannelBase	class	rss	Object			-
 RSS::Maker::ChannelBase::CategoriesBase	class	rss	Object	Enumerable		-
 RSS::Maker::ChannelBase::CategoriesBase::CategoryBase	class	rss	Object			-
+RSS::Maker::ChannelBase::CloudBase	class	rss	RSS::Maker::Base			-
 RSS::Maker::ChannelBase::SkipDaysBase	class	rss	Object			-
 RSS::Maker::ChannelBase::SkipDaysBase::DayBase	class	rss	Object			-
 RSS::Maker::ChannelBase::SkipHoursBase	class	rss	Object	Enumerable		-
 RSS::Maker::ChannelBase::SkipHoursBase::HourBase	class	rss	Object			-
+RSS::Maker::DublinCoreModel	module	rss	-			-
 RSS::Maker::ImageBase	class	rss	Object			-
 RSS::Maker::ItemsBase	class	rss	RSS::Maker::Base	Enumerable		-
 RSS::Maker::ItemsBase::ItemBase	class	rss	Object			-
@@ -1012,6 +1021,7 @@ RSS::Maker::ItemsBase::ItemBase::SourceBase	class	rss	RSS::Maker::Base			-
 RSS::Maker::RSS09::Channel	class	rss	RSS::Maker::ChannelBase			-
 RSS::Maker::RSS09::Channel::Categories	class	rss	RSS::Maker::ChannelBase::CategoriesBase			-
 RSS::Maker::RSS09::Channel::Categories::Category	class	rss	RSS::Maker::ChannelBase::CategoriesBase::CategoryBase			-
+RSS::Maker::RSS09::Channel::Cloud	class	rss	RSS::Maker::ChannelBase::CloudBase			-
 RSS::Maker::RSS09::Channel::SkipDays	class	rss	RSS::Maker::ChannelBase::SkipDaysBase			-
 RSS::Maker::RSS09::Channel::SkipDays::Day	class	rss	RSS::Maker::ChannelBase::SkipDaysBase::DayBase			-
 RSS::Maker::RSS09::Channel::SkipHours	class	rss	RSS::Maker::ChannelBase::SkipHoursBase			-
@@ -1028,6 +1038,7 @@ RSS::Maker::RSS10	class	rss	RSS::Maker::RSSBase			-
 RSS::Maker::RSS10::Channel	class	rss	RSS::Maker::ChannelBase			-
 RSS::Maker::RSS10::Channel::Categories	class	rss	RSS::Maker::ChannelBase::CategoriesBase			-
 RSS::Maker::RSS10::Channel::Categories::Category	class	rss	RSS::Maker::ChannelBase::CategoriesBase::CategoryBase			-
+RSS::Maker::RSS10::Channel::Cloud	class	rss	RSS::Maker::ChannelBase::CloudBase			-
 RSS::Maker::RSS10::Image	class	rss	RSS::Maker::ImageBase			-
 RSS::Maker::RSS10::Items	class	rss	RSS::Maker::ItemsBase			-
 RSS::Maker::RSS10::Items::Item	class	rss	RSS::Maker::ItemsBase::ItemBase			-
@@ -1036,6 +1047,7 @@ RSS::Maker::RSS20	class	rss	RSS::Maker::RSSBase			-
 RSS::Maker::RSS20::Channel	class	rss	RSS::Maker::RSS09::Channel			-
 RSS::Maker::RSS20::Channel::Categories	class	rss	RSS::Maker::RSS09::Channel::Categories			-
 RSS::Maker::RSS20::Channel::Categories::Category	class	rss	RSS::Maker::RSS09::Channel::Categories::Category			-
+RSS::Maker::RSS20::Channel::Cloud	class	rss	RSS::Maker::RSS09::Channel::Cloud			-
 RSS::Maker::RSS20::Channel::SkipDays	class	rss	RSS::Maker::RSS09::Channel::SkipDays			-
 RSS::Maker::RSS20::Channel::SkipDays::Day	class	rss	RSS::Maker::RSS09::Channel::SkipDays::Day			-
 RSS::Maker::RSS20::Channel::SkipHours	class	rss	RSS::Maker::RSS09::Channel::SkipHours			-
@@ -1206,6 +1218,7 @@ RubyVM::AbstractSyntaxTree	module	_builtin	-			-
 RubyVM::AbstractSyntaxTree::Location	class	_builtin	Object			-
 RubyVM::AbstractSyntaxTree::Node	class	_builtin	Object			-
 RubyVM::InstructionSequence	class	_builtin	Object			-
+RubyVM::RJIT	module	_builtin	-			-
 RubyVM::YJIT	module	_builtin	-			-
 RuntimeError	class	_builtin	StandardError			-
 SOCKSSocket	class	socket	TCPSocket			-

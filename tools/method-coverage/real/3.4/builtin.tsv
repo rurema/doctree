@@ -4985,6 +4985,8 @@ R	RubyVM::InstructionSequence	.	disassemble	ok
 R	RubyVM::InstructionSequence	.	load_from_binary	ok
 R	RubyVM::InstructionSequence	.	load_from_binary_extra_data	ok
 R	RubyVM::InstructionSequence	.	of	ok
+R	RubyVM::RJIT	.	enable	ok
+R	RubyVM::RJIT	.	enabled?	ok
 R	RubyVM::YJIT	.	code_gc	no-class
 R	RubyVM::YJIT	.	dump_exit_locations	no-class
 R	RubyVM::YJIT	.	enable	no-class
@@ -5033,10 +5035,12 @@ R	Set	#	disjoint?	ok
 R	Set	#	divide	ok
 R	Set	#	each	ok
 R	Set	#	empty?	ok
+R	Set	#	eql?	ok
 R	Set	#	filter!	ok
 R	Set	#	select!	ok
 R	Set	#	flatten	ok
 R	Set	#	flatten!	ok
+R	Set	#	hash	ok
 R	Set	#	inspect	ok
 R	Set	#	to_s	ok
 R	Set	#	intersect?	ok
