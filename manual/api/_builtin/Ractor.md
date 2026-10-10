@@ -6,6 +6,13 @@ since: "3.0"
 
 並列プログラミングの仕組みを提供するクラスです。
 
+#%since 4.1
+Ruby 4.1 から、クラスやモジュールを変更できるのは、それを作成した Ractor（owner）だけになりました。
+メソッドの定義・削除、`alias`、可視性の変更、`include` / `prepend`、定数の定義・削除、クラス自身のインスタンス変数・クラス変数への書き込みなどを他の Ractor から行うと、[c:Ractor::IsolationError] が発生します。読み取りは従来どおりできます。
+起動時や main Ractor で定義されたクラス（require したライブラリのものを含む）の owner は main Ractor なので、main 以外の Ractor からは変更できません。
+一方、Ractor が自分で作成したクラスは、shareable でない定数・インスタンス変数・クラス変数も含めて自由に使えます。[feature:22226]
+#%end
+
 ## Class Methods
 
 ### def Ractor.new(*args, name: nil) {|*args| ... } -> Ractor
@@ -59,6 +66,9 @@ obj が shareable でない場合、obj と obj が参照する shareable でな
 
 - **param** `obj` -- Shareable にしたいオブジェクトを指定します。
 - **param** `copy` -- true の場合、obj を変更する代わりに obj のコピーを作成し shareable にします。
+#%since 4.1
+- **raise** `Ractor::Error` -- obj が [c:IO] のインスタンスである場合に発生します。
+#%end
 
 ### def Ractor.receive -> object
 ### def Ractor.recv -> object
@@ -99,6 +109,10 @@ obj が shareable である場合、true を返します。
 
 - **param** `obj` -- Shareable であるか判定したいオブジェクトを指定します。
 
+#%since 4.1
+Ruby 4.1 から、[c:IO] のインスタンスは freeze されていても shareable ではなく、false を返します。Ruby 4.0 までは、freeze された [c:IO] は shareable でした。
+
+#%end
 #%since 4.0
 ### def Ractor.shareable_proc { ... } -> Proc
 
@@ -262,11 +276,21 @@ Ractor の実行が例外で終了した場合には、 [m:Ractor#value]を呼�
 ### def monitor(port) -> bool
 
 port を self の監視ポートとして登録します。
+#%since 4.1
+self が終了すると、port は `[self, :exited]`（例外なく終了した場合）または
+`[self, :aborted]`（未処理の例外で終了した場合）という配列を受信します。
+複数の Ractor を 1 つの port で監視しても、どの Ractor が終了したかを判別できます。
+#%else
 self が終了すると、port は :exited（例外なく終了した場合）または
 :aborted（未処理の例外で終了した場合）というシンボルを受信します。
+#%end
 
 監視を登録できた（self がまだ終了していない）場合は true を返します。
+#%since 4.1
+self が既に終了していた場合は false を返し、port は直ちに終了を表す配列を受信します。
+#%else
 self が既に終了していた場合は false を返し、port は直ちに終了を表すシンボルを受信します。
+#%end
 
 #%end
 
@@ -314,4 +338,10 @@ self が [m:Ractor.yield] で送ったメッセージ、または self のブロ
 self が終了するまで待ち、その Ractor のブロックが返した値を返します。
 Ractor の実行が例外で終了した場合には、その例外を再発生させます。
 
+#%since 4.1
+値を取り出せるのは 1 回だけです。2 回目以降の呼び出しでは [c:Ractor::Error] が発生します。
+
+- **raise** `Ractor::Error` -- 既に値を取り出している場合に発生します。
+
+#%end
 #%end
