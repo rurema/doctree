@@ -793,13 +793,24 @@ interpreter.interpret('dave')
 # => Hello there, Dave!
 ```
 
+#%since 4.1
+### def method_defined?(name, inherit=true, include_all=false) -> bool
+#%else
 ### def method_defined?(name, inherit=true) -> bool
+#%end
 
 モジュールにインスタンスメソッド name が定義されており、かつその可視性が public または protected であるときに
 true を返します。
 
+#%since 4.1
+`include_all` に真を指定すると private メソッドも対象になります。
+
+#%end
 - **param** `name` -- [c:Symbol] か [c:String] を指定します。
 - **param** `inherit` -- 真を指定するとスーパークラスや include したモジュールで定義されたメソッドも対象になります。
+#%since 4.1
+- **param** `include_all` -- 真を指定すると private メソッドも対象になります。
+#%end
 
 - **SEE** [m:Module#public_method_defined?], [m:Module#private_method_defined?], [m:Module#protected_method_defined?]
 
@@ -828,6 +839,10 @@ p C.method_defined? "method3"           # => true
 p C.method_defined? "protected_method1" # => true
 p C.method_defined? "method4"           # => false
 p C.method_defined? "private_method2"   # => false
+#%since 4.1
+p C.method_defined? "private_method2", true, true  # => true
+p C.method_defined? "private_method2", false, true # => false
+#%end
 ```
 
 ### def module_eval(expr, fname = "(eval)", lineno = 1) -> object
