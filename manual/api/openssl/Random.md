@@ -86,12 +86,18 @@ OpenSSL::Random.seed(File.read(filename)) と同じです。
 - **param** `filename` -- 読み込むファイル名
 - **raise** `OpenSSL::Random::RandomError` -- ファイルの読み込みに失敗した場合に発生します
 
+#%since 4.0
 ### module_function def pseudo_bytes(len) -> String
 
-暗号論的な予測不可能性を持たない(が高速な)
-乱数生成器によって、 len バイトのランダムなバイト列を返します。
+[m:OpenSSL::Random?.random_bytes] の別名です。
+
+Ruby 3.4 まで(openssl gem 3.x まで)は、OpenSSL 1.1.1 以降とリンクしてビルドした場合には定義されませんでした。
+互換性のために残されているものなので、新しいコードでは [m:OpenSSL::Random?.random_bytes] を使ってください。
 
 - **param** `len` -- 必要なランダムバイト列の長さ
+
+- **SEE** [m:OpenSSL::Random?.random_bytes]
+#%end
 
 ### module_function def random_bytes(len) -> String
 
