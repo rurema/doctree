@@ -19,6 +19,23 @@ Ruby 3.1 で導入されました。
   - 外部(external) -- [c:String] など、Ruby の他のオブジェクトが持つメモリ領域。
   - マップ(mapped) -- 仮想メモリ機構(Unix の mmap など)で確保されたメモリ領域。
 
+#%since 4.1
+Ruby 4.1 から、このクラスのインスタンスは必ず [c:IO::Buffer::Storage] か [c:IO::Buffer::Slice] のどちらかになります。
+[c:IO::Buffer] 自身のインスタンスは作れません。
+
+[m:IO::Buffer.new]・[m:IO::Buffer.for]・[m:IO::Buffer.map] が返すのは [c:IO::Buffer::Storage] で、メモリ領域を管理します。
+[m:IO::Buffer#slice] が返すのは [c:IO::Buffer::Slice] で、別のバッファの一部を参照します。
+
+メモリ領域の確保と解放に関するメソッド([m:IO::Buffer::Storage#resize]・[m:IO::Buffer::Storage#free]・[m:IO::Buffer::Storage#transfer] と [m:IO::Buffer::Storage#internal?]・[m:IO::Buffer::Storage#external?]・[m:IO::Buffer::Storage#mapped?]・[m:IO::Buffer::Storage#shared?]・[m:IO::Buffer::Storage#private?])を持つのは [c:IO::Buffer::Storage] だけです。
+[c:IO::Buffer::Slice] が持つのは [m:IO::Buffer::Slice#resize] だけです。
+
+```ruby
+buf = IO::Buffer.new(8)
+p buf.class             # => IO::Buffer::Storage
+p buf.slice(2, 4).class # => IO::Buffer::Slice
+```
+
+#%end
 このクラスは実験的な機能です。
 利用すると「IO::Buffer is experimental and both the Ruby and C interface may
 change in the future!」という警告が出力されます。
@@ -109,10 +126,20 @@ p IO::Buffer::HOST_ENDIAN == IO::Buffer::LITTLE_ENDIAN # => true
 
 ## Class Methods
 
+#%since 4.1
+### def IO::Buffer.for(string) -> IO::Buffer::Storage
+#%else
 ### def IO::Buffer.for(string) -> IO::Buffer
+#%end
 ### def IO::Buffer.for(string) {|buffer| ... } -> object
 
 文字列 string のメモリ領域を参照する、コピーを伴わないバッファを作成します。
+
+#%since 4.1
+Ruby 4.1 からは [c:IO::Buffer::Storage] のインスタンスを返します。
+ブロックを渡した場合は、ブロックにも [c:IO::Buffer::Storage] のインスタンスが渡されます。
+
+#%end
 
 ブロックを渡さない場合は、string の内容を複製した凍結済みの文字列をバッファの元として使い、読み取り専用のバッファを返します。
 元の文字列とは切り離されるため、あとから元の文字列を変更してもバッファの内容は変わりません。
@@ -148,9 +175,18 @@ p str # => "Ruby"
 
 - **SEE** [m:IO::Buffer.new], [m:IO::Buffer.map]
 
+#%since 4.1
+### def IO::Buffer.map(file, size = nil, offset = 0, flags = 0) -> IO::Buffer::Storage
+#%else
 ### def IO::Buffer.map(file, size = nil, offset = 0, flags = 0) -> IO::Buffer
+#%end
 
 ファイルをメモリにマップしたバッファを作成して返します。
+
+#%since 4.1
+Ruby 4.1 からは [c:IO::Buffer::Storage] のインスタンスを返します。
+
+#%end
 
 既定では書き込み可能かつ共有(shared)のマップになるため、file は書き込み可能な状態で開いておく必要があります。読み込み専用で開いたファイルをマップするには、flags に [m:IO::Buffer::READONLY] を指定します。
 [m:IO::Buffer::PRIVATE] を指定するとコピーオンライトのマップになり、バッファへの変更はファイルにも他のプロセスにも反映されません。
@@ -182,9 +218,18 @@ p File.read("test.txt") # => "HELLO world"
 
 - **SEE** [m:IO::Buffer.new], [m:IO::Buffer.for]
 
+#%since 4.1
+### def IO::Buffer.new(size = IO::Buffer::DEFAULT_SIZE, flags = 0) -> IO::Buffer::Storage
+#%else
 ### def IO::Buffer.new(size = IO::Buffer::DEFAULT_SIZE, flags = 0) -> IO::Buffer
+#%end
 
 size バイトの、0 で埋められた新しいバッファを作成して返します。
+
+#%since 4.1
+Ruby 4.1 からは [c:IO::Buffer::Storage] のインスタンスを返します。
+
+#%end
 
 既定では内部(internal)バッファ、すなわち Ruby が直接確保したメモリ領域になります。ただし size が OS 依存の [m:IO::Buffer::PAGE_SIZE] 以上の場合は、仮想メモリ機構(Unix では匿名 mmap、Windows では VirtualAlloc)を用いて確保されます。flags に [m:IO::Buffer::MAPPED] を指定すると、
 size によらず後者の方法で確保されます。
@@ -527,9 +572,13 @@ end
 - **SEE** [m:IO::Buffer#each]
 #%end
 
-#%since 3.2
+#%since 4.1
+### def slice(offset = 0, length = nil) -> IO::Buffer::Slice
+#%end
+#%version 3.2...4.1
 ### def slice(offset = 0, length = nil) -> IO::Buffer
-#%else
+#%end
+#%until 3.2
 ### def slice(offset, length) -> IO::Buffer
 #%end
 
@@ -539,6 +588,16 @@ end
 そのため、一方への書き込みはもう一方からも見えます。
 元のバッファが文字列やファイルに由来する場合、その関連も引き継がれます。
 
+#%since 4.1
+Ruby 4.1 からは [c:IO::Buffer::Slice] のインスタンスを返します。
+返されたスライスは `self` を参照元として保持し、[m:IO::Buffer#source] で取得できます。
+スライスからさらにスライスを作った場合の参照元は、直接の親です。
+
+参照元が [m:IO::Buffer::Storage#free] や [m:IO::Buffer::Storage#transfer] で手放されたときや、縮小されて参照範囲が外に出たときは、スライスは無効になります。
+参照範囲が再び参照元の範囲内に収まれば、有効に戻ります。
+参照元のメモリ領域が別のアドレスに再確保されても、無効にはなりません。
+
+#%end
 - **param** `offset` -- 参照を開始する位置をバッファの先頭からのバイト数で指定します。
 #%since 3.2
            省略した場合は 0 になります。
@@ -562,7 +621,106 @@ part.set_string("Xy")
 p buf.get_string  # => "Xyby\x00\x00\x00\x00"
 ```
 
+#%since 4.1
+- **SEE** [m:IO::Buffer#copy], [m:IO::Buffer::Slice.new], [m:IO::Buffer#source], [m:IO::Buffer#advance]
+#%else
 - **SEE** [m:IO::Buffer#copy]
+#%end
+
+#%since 4.1
+### def advance(amount) -> self
+
+自身がメモリ領域を所有していないバッファの先頭を、`amount` バイト進めます。
+
+進めた分だけ、バッファの大きさが減ります。
+メモリ領域の移動や変更は行われません。
+対象になるのは [c:IO::Buffer::Slice] と、[m:IO::Buffer.for] で作った外部バッファです。
+`self` を返します。
+
+参照元とロックの状態は変わりません。
+バッファの見え方を変えるだけなので、読み取り専用のバッファやロック中のバッファに対しても呼べます。
+`amount` が現在の大きさと同じ場合は、大きさ 0 の空のバッファになります。
+
+親のスライスを進めると、そこから作った子のスライスの見える範囲も同じだけずれます。
+
+- **param** `amount` -- 進めるバイト数を指定します。
+
+- **raise** `ArgumentError` -- `amount` が負の場合や、現在の大きさを超える場合に発生します。
+
+- **raise** `IO::Buffer::AccessError` -- 自身がメモリ領域を所有するバッファに対して呼び出した場合に発生します。
+  [m:IO::Buffer.new] で作った内部バッファ、マップバッファ、[m:IO::Buffer.map] で作ったバッファが該当します。
+
+- **raise** `IO::Buffer::InvalidatedError` -- 無効になったスライスに対して呼び出した場合に発生します。
+
+- **raise** `FrozenError` -- 凍結済みのバッファに対して呼び出した場合に発生します。
+
+```ruby
+buf = IO::Buffer.new(8)
+buf.set_string("abcdefgh")
+
+part = buf.slice(2, 4)
+p part.get_string   # => "cdef"
+
+part.advance(1)
+p part.size         # => 3
+p part.get_string   # => "def"
+p buf.get_string    # => "abcdefgh"
+
+p IO::Buffer.for("test").advance(1).get_string # => "est"
+
+buf.advance(1) # ~> IO::Buffer::AccessError
+```
+
+```ruby title="例: 親のスライスを進める"
+buf = IO::Buffer.for("abcdef")
+parent = buf.slice(1, 4)
+child = parent.slice(1, 2)
+p child.get_string  # => "cd"
+
+parent.advance(1)
+p child.get_string  # => "de"
+```
+
+- **SEE** [m:IO::Buffer#slice], [m:IO::Buffer#source], [m:IO::Buffer::Slice#resize]
+
+### def source -> IO::Buffer | String | nil
+
+バッファの参照元を返します。
+
+返す値はバッファの作り方によって異なります。
+
+  - [m:IO::Buffer#slice] で作ったスライス -- [m:IO::Buffer#slice] を呼んだバッファ。スライスからさらに作った場合は、直接の親
+  - [m:IO::Buffer.for] にブロックを渡して作ったバッファ -- 渡した文字列そのもの
+  - [m:IO::Buffer.for] にブロックを渡さずに作ったバッファ -- 内部で作った凍結済みの複製。渡した文字列が凍結済みの場合は、その文字列そのもの
+  - [m:IO::Buffer.new] や [m:IO::Buffer.map] で作ったバッファ -- nil
+
+無効になったスライスでも、参照元を返します。
+[m:IO::Buffer::Storage#free] や [m:IO::Buffer::Storage#transfer] を呼んだあとのバッファと、[m:IO::Buffer.for] のブロックを抜けたあとのバッファでは nil を返します。
+
+```ruby
+buf = IO::Buffer.new(8)
+p buf.source                    # => nil
+
+part = buf.slice(2, 4)
+p part.source.equal?(buf)       # => true
+
+# スライスからさらに作った場合は、直接の親が参照元になる
+child = part.slice(1, 2)
+p child.source.equal?(part)     # => true
+p part.source.equal?(buf)       # => true
+```
+
+```ruby title="例: IO::Buffer.for で作ったバッファ"
+str = +"abc"
+p IO::Buffer.for(str) {|b| b.source.equal?(str) } # => true
+
+copy = IO::Buffer.for(str).source
+p copy.frozen?        # => true
+p copy.equal?(str)    # => false
+```
+
+- **SEE** [m:IO::Buffer#slice], [m:IO::Buffer#advance]
+#%end
 
 ### def copy(source, offset = 0, length = nil, source_offset = 0) -> Integer
 
@@ -612,6 +770,7 @@ buf.clear(0x41, 1, 2)
 p buf.get_string # => "\x00AA\x00"
 ```
 
+#%until 4.1
 ### def resize(size) -> self
 
 バッファの大きさを size バイトに変更します。
@@ -689,6 +848,7 @@ p buf.size  # => 4
 ```
 
 - **SEE** [m:IO::Buffer#transfer], [m:IO::Buffer#null?]
+#%end
 
 ### def empty? -> bool
 
@@ -705,7 +865,11 @@ p IO::Buffer.new(4).empty? # => false
 
 バッファがどのメモリ領域も指していない場合に true を返します。
 
+#%since 4.1
+[m:IO::Buffer::Storage#free] で解放したバッファ、[m:IO::Buffer::Storage#transfer] で所有権を手放したバッファ、および最初からメモリ領域を確保していないバッファがこれにあたります。
+#%else
 [m:IO::Buffer#free] で解放したバッファ、[m:IO::Buffer#transfer] で所有権を手放したバッファ、および最初からメモリ領域を確保していないバッファがこれにあたります。
+#%end
 
 ```ruby
 p IO::Buffer.new(0).null? # => true
@@ -716,14 +880,38 @@ buf.free
 p buf.null? # => true
 ```
 
+#%since 4.1
+- **SEE** [m:IO::Buffer::Storage#free], [m:IO::Buffer::Storage#transfer]
+#%else
 - **SEE** [m:IO::Buffer#free], [m:IO::Buffer#transfer]
+#%end
 
 ### def valid? -> bool
 
 バッファがアクセス可能な場合に true を返します。
 
+#%until 4.1
 別のバッファや文字列の一部を参照している([m:IO::Buffer#slice] で作った)バッファは、参照元が解放されたり別のアドレスに再確保されたりすると、アクセスできなくなります。
+#%end
+#%since 4.1
+別のバッファの一部を参照している([m:IO::Buffer#slice] で作った)[c:IO::Buffer::Slice] は、参照元が [m:IO::Buffer::Storage#free] や [m:IO::Buffer::Storage#transfer] で手放されたときや、縮小されて参照範囲が外に出たときに、アクセスできなくなります。
+参照範囲が再び参照元の範囲内に収まれば、有効に戻ります。
+参照元のメモリ領域が別のアドレスに再確保されても、無効にはなりません。
+#%end
 
+```ruby
+buf = IO::Buffer.new(8)
+part = buf.slice(4, 4)
+p part.valid? # => true
+
+buf.resize(4)
+p part.valid? # => false
+
+buf.resize(8)
+p part.valid? # => true
+```
+
+#%until 4.1
 ### def internal? -> bool
 
 バッファが内部(internal)バッファである場合に true を返します。
@@ -752,6 +940,7 @@ p IO::Buffer.new(4).external?      # => false
 ```
 
 - **SEE** [m:IO::Buffer#internal?]
+#%end
 
 ### def readonly? -> bool
 
@@ -776,6 +965,7 @@ p IO::Buffer.for("test".freeze) { |buf| buf.readonly? } # => true
 p IO::Buffer.new(4).readonly?                       # => false
 ```
 
+#%until 4.1
 ### def mapped? -> bool
 
 バッファがマップ(mapped)バッファである場合に true を返します。
@@ -783,12 +973,23 @@ p IO::Buffer.new(4).readonly?                       # => false
 マップバッファは、仮想メモリ機構でマップされたメモリ領域を参照します。
 [m:IO::Buffer.new] に [m:IO::Buffer::MAPPED] を指定した場合や、大きさが [m:IO::Buffer::PAGE_SIZE] 以上の場合は匿名のマップになります。
 [m:IO::Buffer.map] で作った場合はファイルに紐づいたマップになります。
+#%end
 
 ### def locked? -> bool
 
 バッファがロックされている場合に true を返します。
 
+#%until 4.1
 ロックされたバッファは大きさの変更や解放ができず、さらにロックを取得することもできません。
+#%end
+#%since 4.1
+ロックされた [c:IO::Buffer::Storage] は、大きさの変更や解放、所有権の移動ができません。
+[m:IO::Buffer#locked] は入れ子にして呼べます。
+
+ロックは、同じメモリ領域を参照する [c:IO::Buffer::Slice] と共有されます。
+参照元がロックされている間は、スライスの `locked?` も true になります。
+スライスをロックすると、メモリ領域全体がロックされます。
+#%end
 システムコールでバッファを使っている間に、そのバッファが移動しないことを保証するための仕組みです。
 
 - **SEE** [m:IO::Buffer#locked]
@@ -797,9 +998,20 @@ p IO::Buffer.new(4).readonly?                       # => false
 
 ブロックを実行する間、バッファをロックします。ブロックの値を返します。
 
+#%until 4.1
 ロックされている間、そのバッファに対して [m:IO::Buffer#resize] や
 [m:IO::Buffer#free]、さらに [m:IO::Buffer#locked] を呼ぶと
 [c:IO::Buffer::LockedError] が発生します。
+#%end
+#%since 4.1
+ロックされている間、そのバッファに対して [m:IO::Buffer::Storage#resize] や
+[m:IO::Buffer::Storage#free]、[m:IO::Buffer::Storage#transfer] を呼ぶと
+[c:IO::Buffer::LockedError] が発生します。
+[m:IO::Buffer#locked] は、ロック中のバッファに対しても呼べます。
+ロックは同じメモリ領域を参照する [c:IO::Buffer::Slice] と共有されるため、
+スライスをロックしている間は、参照元の [m:IO::Buffer::Storage#resize] も [c:IO::Buffer::LockedError] になります。
+ロック中でも、スライスの [m:IO::Buffer::Slice#resize] と [m:IO::Buffer#advance] は呼べます。
+#%end
 バッファへの読み書き自体はロック中も行えます。
 
 システムコールでバッファを使っている間に、そのバッファが移動したり解放されたりしないことを保証するための仕組みです。
@@ -823,7 +1035,9 @@ Ruby 4.0.5 までは解除されずに残ります。
 
 - **raise** `LocalJumpError` -- ブロックを渡さなかった場合に発生します。
 
+#%until 4.1
 - **raise** `IO::Buffer::LockedError` -- すでにロックされているバッファに対して呼び出した場合に発生します。
+#%end
 
 ```ruby
 buf = IO::Buffer.new(4)
@@ -843,7 +1057,7 @@ buf.locked { buf.resize(8) } # ~> IO::Buffer::LockedError
 
 - **SEE** [m:IO::Buffer#locked?], [m:IO::Buffer::LOCKED]
 
-#%since 3.2
+#%version 3.2...4.1
 ### def shared? -> bool
 
 バッファが共有(shared)バッファである場合に true を返します。
@@ -852,7 +1066,7 @@ buf.locked { buf.resize(8) } # ~> IO::Buffer::LockedError
 そのため、このプロセスで変更しなくても内容が変わることがあります。
 #%end
 
-#%since 3.3
+#%version 3.3...4.1
 ### def private? -> bool
 
 バッファがプライベート(private)バッファである場合に true を返します。
@@ -945,7 +1159,11 @@ p buf.get_string.bytes.map {|b| "%02x" % b }.join(" ")  # => "ce cd cc cb ca c9 
 この表示形式は将来変更される可能性があります。
 
 ```ruby
+#%since 4.1
+p IO::Buffer.new(4).to_s # => "#<IO::Buffer::Storage 0x0000600002d10000+4 INTERNAL>"
+#%else
 p IO::Buffer.new(4).to_s # => "#<IO::Buffer 0x0000600002d10000+4 INTERNAL>"
+#%end
 ```
 
 アドレスの部分は実行するたびに変わります。
@@ -971,7 +1189,11 @@ p IO::Buffer.new(4).to_s # => "#<IO::Buffer 0x0000600002d10000+4 INTERNAL>"
 ```ruby
 buf = IO::Buffer.for("Hello World")
 puts buf.inspect
+#%since 4.1
+# => #<IO::Buffer::Storage 0x0000000100e726b8+11 EXTERNAL READONLY SLICE>
+#%else
 # => #<IO::Buffer 0x0000000100e726b8+11 EXTERNAL READONLY SLICE>
+#%end
 #    0x00000000  48 65 6c 6c 6f 20 57 6f 72 6c 64                Hello World
 ```
 
