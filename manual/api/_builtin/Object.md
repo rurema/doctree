@@ -1164,6 +1164,36 @@ clone は、オブジェクトの内容や taint 情報に加えて freeze の�
 
 clone や dup は浅い(shallow)コピーであることに注意してください。後述。
 
+#%since 4.1
+[c:Class] や [c:Module] を複製した場合、複製されたメソッドの中の定数とクラス変数の参照は、Ruby 4.1 からは元のクラスやモジュールを通して解決されます(継承や mix-in と同じ扱いです)。[feature:21981]
+#%else
+[c:Class] や [c:Module] を複製した場合、複製されたメソッドの中の定数とクラス変数の参照は、複製先のクラスやモジュールを通して解決されます。
+#%end
+
+```ruby title="例"
+class Foo
+  X = 1
+  @@cv = :foo
+  def x = X
+  def cv = @@cv
+end
+
+Bar = Foo.clone
+Bar.send(:remove_const, :X)
+Bar.const_set(:X, 2)
+Bar.class_variable_set(:@@cv, :bar)
+
+p Bar::X     # => 2
+#%since 4.1
+p Bar.new.x  # => 1
+p Bar.new.cv # => :foo
+#%else
+p Bar.new.x  # => 2
+p Bar.new.cv # => :bar
+#%end
+p Foo.new.x  # => 1
+```
+
 [c:TrueClass], [c:FalseClass], [c:NilClass], [c:Symbol], そして [c:Numeric] クラスのインスタンスなど一部のオブジェクトは複製ではなくインスタンス自身を返します。
 
 - **param** `freeze` -- true を指定すると freeze されたコピーを返します。
@@ -1242,6 +1272,8 @@ dup は、オブジェクトの内容と taint 情報をコピーします。
 [m:Object#clone] と異なり、freeze の状態や特異メソッドはコピーされません。
 
 浅いコピー・複製の詳細は [m:Object#clone] を参照してください。
+
+[c:Class] や [c:Module] を複製したときの定数・クラス変数の扱いも [m:Object#clone] を参照してください。
 
 ```ruby
 obj = "string"
