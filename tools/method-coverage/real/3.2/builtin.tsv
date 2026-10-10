@@ -4953,10 +4953,12 @@ R	Set	#	disjoint?	ok
 R	Set	#	divide	ok
 R	Set	#	each	ok
 R	Set	#	empty?	ok
+R	Set	#	eql?	ok
 R	Set	#	filter!	ok
 R	Set	#	select!	ok
 R	Set	#	flatten	ok
 R	Set	#	flatten!	ok
+R	Set	#	hash	ok
 R	Set	#	inspect	ok
 R	Set	#	to_s	ok
 R	Set	#	intersect?	ok

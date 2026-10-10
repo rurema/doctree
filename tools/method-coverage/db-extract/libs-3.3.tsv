@@ -1,5 +1,5 @@
 English		top	0	19
-_builtin	Builtin	top	302	2549
+_builtin	Builtin	top	303	2556
 abbrev		top	1	2
 base64		top	1	6
 benchmark	Development	top	4	35
@@ -103,6 +103,7 @@ json/add/ostruct		sub	0	2
 json/add/range		sub	0	3
 json/add/rational		sub	0	3
 json/add/regexp		sub	0	3
+json/add/set		sub	0	3
 json/add/struct		sub	0	3
 json/add/symbol		sub	0	3
 json/add/time		sub	0	3
@@ -128,7 +129,7 @@ objspace		top	1	27
 observer	DesignPattern	top	1	7
 open3	I/O	top	1	11
 open-uri	Network	top	4	14
-openssl	Network	top	130	951
+openssl	Network	top	130	950
 optparse	CommandLine	top	10	63
 optparse/date		sub	0	0
 optparse/shellwords		sub	0	0
@@ -142,7 +143,7 @@ prettyprint		top	1	18
 prime	Math	top	5	27
 prism	Text	top	12	87
 pstore	Database	top	3	21
-psych	FileFormat	top	24	159
+psych	FileFormat	top	27	159
 pty	CUI	top	2	4
 racc/parser		top	2	9
 rake	Development	top	20	153
@@ -161,7 +162,7 @@ rdoc/anon_class		sub	1	0
 rdoc/any_method		sub	1	0
 rdoc/attr		sub	1	0
 rdoc/class_module		sub	1	0
-rdoc/code_object		sub	1	21
+rdoc/code_object		sub	1	19
 rdoc/code_objects		sub	0	0
 rdoc/constant		sub	1	0
 rdoc/context		sub	2	52
@@ -173,9 +174,9 @@ rdoc/generator/ri		sub	1	3
 rdoc/ghost_method		sub	1	0
 rdoc/include		sub	1	0
 rdoc/known_classes		sub	0	1
-rdoc/markdown		sub	1	21
+rdoc/markdown		sub	1	23
 rdoc/markdown/entities		sub	0	1
-rdoc/markup		sub	1	11
+rdoc/markup		sub	1	9
 rdoc/markup/formatter		sub	1	3
 rdoc/markup/to_ansi		sub	1	1
 rdoc/markup/to_bs		sub	1	1
@@ -185,9 +186,9 @@ rdoc/markup/to_rdoc		sub	1	1
 rdoc/meta_method		sub	1	0
 rdoc/normal_class		sub	1	0
 rdoc/normal_module		sub	1	0
-rdoc/options		sub	1	72
+rdoc/options		sub	1	58
 rdoc/parser		sub	1	5
-rdoc/parser/c		sub	1	3
+rdoc/parser/c		sub	1	2
 rdoc/parser/changelog		sub	1	1
 rdoc/parser/markdown		sub	1	1
 rdoc/parser/rd		sub	1	1
@@ -195,10 +196,10 @@ rdoc/parser/ruby		sub	3	4
 rdoc/parser/ruby_tools		sub	1	0
 rdoc/parser/simple		sub	1	3
 rdoc/parser/text		sub	1	0
-rdoc/rdoc		sub	1	2
+rdoc/rdoc		sub	1	3
 rdoc/require		sub	1	0
 rdoc/single_class		sub	1	0
-rdoc/stats		sub	1	10
+rdoc/stats		sub	1	8
 rdoc/text		sub	1	8
 rdoc/token_stream		sub	1	0
 rdoc/top_level		sub	1	9
@@ -208,19 +209,20 @@ resolv	Network	top	38	91
 resolv-replace	Network	top	0	6
 rexml	FileFormat	top	3	4
 rexml/document		sub	37	264
-rexml/parsers/pullparser		sub	2	21
-rexml/parsers/sax2parser		sub	1	4
-rexml/parsers/streamparser		sub	1	2
-rexml/parsers/ultralightparser		sub	1	3
+rexml/parsers/pullparser		sub	2	22
+rexml/parsers/sax2parser		sub	1	5
+rexml/parsers/streamparser		sub	1	3
+rexml/parsers/ultralightparser		sub	1	4
 rexml/sax2listener		sub	1	17
 rexml/streamlistener		sub	1	14
+rexml/validation/relaxng		sub	3	13
 rinda/rinda		top	10	10
 rinda/tuplespace		top	2	17
 ripper	Text	top	1	30
 ripper/filter		sub	1	8
 ripper/lexer		sub	1	9
 ripper/sexp		sub	0	2
-rss	FileFormat	top	119	271
+rss	FileFormat	top	124	276
 rubygems		top	2	71
 rubygems/command		sub	1	37
 rubygems/command_manager		sub	1	8
@@ -251,7 +253,7 @@ rubygems/commands/uninstall_command		sub	1	0
 rubygems/commands/unpack_command		sub	1	1
 rubygems/commands/update_command		sub	1	1
 rubygems/commands/which_command		sub	1	2
-rubygems/config_file		sub	1	28
+rubygems/config_file		sub	1	52
 rubygems/defaults		sub	0	14
 rubygems/dependency		sub	1	20
 rubygems/dependency_installer		sub	1	5
@@ -266,7 +268,7 @@ rubygems/gem_runner		sub	1	1
 rubygems/install_update_options		sub	1	2
 rubygems/installer		sub	2	23
 rubygems/local_remote_options		sub	1	9
-rubygems/package		sub	7	1
+rubygems/package		sub	8	20
 rubygems/package/tar_header		sub	1	24
 rubygems/package/tar_reader		sub	2	4
 rubygems/package/tar_reader/entry		sub	1	12

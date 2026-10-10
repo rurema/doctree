@@ -136,3 +136,54 @@ doctree master 1c1f6965c で再生成手順を再実行し、同梱データ(`db
   RubyGems 4.1.0.beta1 の `Gem.ruby_abi`・`Gem::Specification#ruby_abi`・`#content_address`・`#content_address=` など
 - `IO::Buffer::Storage`・`IO::Buffer::Slice`・`Enumerator::Lazy#each_with_index` は祖先クラスの記載に隠れて集計の「不足」に現れない(README「既知の限界」)。
   4.1 の `real/4.1/builtin.tsv` を前回と比べて拾った
+
+## 追記(2026-10-10): 現 master での再測定(2 回目)
+
+doctree master aa88f1b72 で再生成手順を再実行し、同梱データ(`db-extract/`・`real/`・`result/`)を置き換えた。
+実 Ruby は 3.0.0〜4.0.0 が前回と同じバイナリで、4.1 は `ghcr.io/ruby/ruby:master` の 2026-10-09(a9d3eadfc8・json 3.0.2・rubygems 4.1.0.beta2・rdoc 8.1.0)。
+10-03 の再測定以降の対応(rurema/doctree#3604〜#3627 のうちメソッドの有無に関わるもの)で、件数は次のように変わった。
+
+### 版ごとの件数(10-03 → 10-10)
+
+| 版 | DB メソッド数 | 組み込み 過剰 | 組み込み 不足 | 標準添付 過剰 | 標準添付 不足(文書済みクラス) | 〃 stub クラス | 〃 未文書クラス | 未測定 |
+|---|---|---|---|---|---|---|---|---|
+| 3.0 | 8535 → 8585 | 15 → 15 | 2 → 2 | 121 → 85 | 1132 → 1075 | 101 → 101 | 1844 → 1844 | 352 → 352 |
+| 3.1 | 8500 → 8552 | 15 → 15 | 4 → 4 | 123 → 87 | 1064 → 1005 | 96 → 96 | 1892 → 1892 | 226 → 226 |
+| 3.2 | 8591 → 8643 | 24 → 24 | 4 → 4 | 123 → 87 | 1115 → 1056 | 98 → 98 | 1972 → 1972 | 222 → 222 |
+| 3.3 | 8686 → 8740 | 26 → 26 | 3 → 3 | 118 → 82 | 1132 → 1073 | 109 → 109 | 2059 → 2059 | 222 → 222 |
+| 3.4 | 8794 → 8850 | 28 → 28 | 3 → 3 | 136 → 100 | 1082 → 1021 | 106 → 106 | 2208 → 2208 | 200 → 200 |
+| 4.0 | 8691 → 8740 | 36 → 36 | 2 → 2 | 81 → 79 | 382 → 338 | 82 → 82 | 1224 → 1224 | 70 → 70 |
+| 4.1 | 8571 → 8621 | 30 → 30 | 13 → 10 | 83 → 83 | 405 → 356 | 85 → 85 | 1227 → 1220 | 2 → 2 |
+
+- 標準添付の過剰: 3.0〜3.4 の −36 は、どの版にも無い rdoc の 35 件(rurema/doctree#3605。rdoc は 3.x では標準添付)と `OpenSSL::Random.pseudo_bytes`(rurema/doctree#3618)。
+  4.0 の −2 は `String#to_json_raw`・`#to_json_raw_object`(rurema/doctree#3604)。4.1 は変わらず(`IO::Buffer` の 8 件は別 PR で対応中)。
+  bundled 側(参考)では rdoc の 48 件がすべて解消した(rurema/doctree#3605・#3612・#3615)
+- 標準添付の不足: 解消したキーは `Gem::ConfigFile` 30・`Gem::Package` 19(rurema/doctree#3613)と `String.json_create`(rurema/doctree#3604)の 50。
+  版ごとの減り方(−44〜−61)の差は、キーが存在する版の数の違い
+- 組み込みの不足: 4.1 の 13 → 10 は `RubyVM::YJIT.max_compile_time_ns`(`=`)・`.total_compile_time_ns`(rurema/doctree#3626)。
+  残りの 10 件は、意図的に載せていないもの 8(rurema/doctree#3568 で対象外にした `Class.allocate`・`Process::Tms.inspect`、原典で `:nodoc:` の `RubyVM::YJIT` の 5 件と `RubyVM::ZJIT.assert_compiles`)と、
+  4.1 の再編で追加された `IO::Buffer#advance`・`#source`(別 PR で対応中)。未文書クラスは `RubyVM::RJIT`(rurema/doctree#3619)が解消し、
+  残りは `Ruby::Box::Loader` の 3 件(原典で `:nodoc:`)と `Enumerator::Producer#each`
+- 4.1 の未文書クラスの −7 は、rinda の `Rinda::TupleBag::TupleBin` の 7 件が標準添付側から bundled 側の集計に移った分(分類の移動で、記載の変化ではない)
+- 未測定は実測データが同じなので変わらない(標準添付の `unmeasured(require-failed)` と `unmeasured(skipped-lib)` の合計)
+
+### ユニークキー(版横断)
+
+- 過剰: 323 → 272 行(同じメソッドがライブラリ名違いで 2 行になる重複を除くと 322 → 271)。51 件が解消し、新しく出たものは無い。
+  内訳は rdoc 48・`OpenSSL::Random.pseudo_bytes`・`String#to_json_raw`/`#to_json_raw_object`
+- 標準添付の不足(文書済みクラスの公開メソッド): 全版で不足のキー 578 → 528。一部の版だけ不足のものを含めると 590 → 540。
+  残りの主なもの: rubygems 系 206(`Gem::Specification` 66・`Gem` 63・`Gem::Package` 27・`Gem::ConfigFile` 16・`Gem::Dependency` 11 ほか)・net/imap 62(3.0 のみ)・irb 系 54(3.x のみ)・
+  psych 44・resolv 35・uri 26・ostruct 21(3.0〜3.1)・net/http 13・optparse 12・open-uri 10・json 9。
+  いずれも各 PR で載せない判断をしたもの(`:nodoc:`・protected・内部用・生成物。理由は各 PR 本文)か、4.1 の未リリース分
+- stub クラス: 96 キー(13 クラス)で変わらず
+- 組み込みの不足: 公開メソッド 15 → 12・未文書クラス 6 → 4(上記)
+- 4.1 の master が 10-03 から進んだ分: 組み込み(`--disable-gems` で観測したクラス・メソッド一覧)は 10-03 のスナップショットと差が無かった。
+  標準添付で新しく出たのは `JSON::Ext::Generator::State.rfc8785_number_formatter_proc=`(json master の RFC 8785 対応。json gem は 3.0.2 が最新で未リリース)と、
+  bundler の 5 件(`Bundler::Override` ほか。bundler はメソッド文書のないページ)
+
+### 残っている候補
+
+- `IO::Buffer::Storage`・`IO::Buffer::Slice`(4.1 の再編)と `IO::Buffer#advance`・`#source`: ページ追加と 8 件の振り分けを別 PR で対応中。master の NEWS.md には未記載なので、リリース版で再確認が必要
+- `JSON::State#rfc8785?`・`#rfc8785=`・`JSON::Ext::Generator::State.rfc8785_number_formatter_proc=`: ruby/json#1091(2026-10-02 マージ)が ruby master に同期されたもの。json 3.1 のリリース後に対応
+- RubyGems 4.1.0.beta2 の `Gem.ruby_abi`・`Gem::Specification#ruby_abi`・`#content_address`(`=`)など: 4.1 リリース後
+- `Ruby::Box::Loader`(4.0 から・原典で `:nodoc:`): 他の `:nodoc:` のメソッドと同じく載せない
