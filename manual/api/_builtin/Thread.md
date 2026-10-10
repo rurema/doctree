@@ -1124,11 +1124,45 @@ p thr.join             # => #<Thread:0x401b3f10 dead>
 p thr.thread_variables # => [:cat, :dog]
 ```
 
+#%since 4.1
+Ruby 4.1 から、value に `nil` を指定すると、その名前のスレッドローカル変数自体が削除されます。
+削除した変数は [m:Thread#thread_variables] の結果に含まれなくなります。
+返り値は指定した value(`nil`)です。
+
+```ruby title="nil を指定して削除する例"
+th = Thread.current
+th.thread_variable_set(:x, 1)
+p th.thread_variables      # => [:x]
+th.thread_variable_set(:x, nil)
+p th.thread_variable?(:x)  # => false
+p th.thread_variables      # => []
+p th.thread_variable_get(:x) # => nil
+```
+
+#%else
+value に `nil` を指定しても変数は削除されず、値が `nil` の変数として
+[m:Thread#thread_variables] の結果に残ります
+([m:Thread#thread_variable?] は false を返します)。
+
+```ruby title="nil を指定した例"
+th = Thread.current
+th.thread_variable_set(:x, 1)
+th.thread_variable_set(:x, nil)
+p th.thread_variable?(:x)  # => false
+p th.thread_variables      # => [:x]
+```
+
+#%end
+
 - **SEE** [m:Thread#thread_variable_get], [m:Thread#thread_variables], [m:Thread#\[\]]
 
 ### def thread_variable?(key) -> bool
 
 引数 key で指定した名前のスレッドローカル変数が存在する場合に true、そうでない場合に false を返します。
+
+#%until 4.1
+値が `nil` の変数は存在しないものとして扱われ、false を返します。
+#%end
 
 - **param** `key` -- 変数名を [c:String] か [c:Symbol] で指定します。
 
