@@ -16,6 +16,10 @@ alias との違いは以下の通りです。
 
 また、クラスメソッドに対して使用することはできません。
 
+#%since 4.1
+Ruby 4.1 から、モジュールの中で元のメソッドが [c:Object] へのフォールバックでだけ見つかる場合と、元のメソッドが prepend したモジュールで定義されている場合に deprecation 警告が出ます。詳しくは [ref:d:spec/def#alias] を参照してください。
+
+#%end
 - **param** `new` -- 新しいメソッド名。[c:String] または [c:Symbol] で指定します。
 
 - **param** `original` -- 元のメソッド名。[c:String] または [c:Symbol] で指定します。
