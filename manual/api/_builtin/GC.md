@@ -295,7 +295,8 @@ nil を返します。
 #%since 4.1
 - **param** `global` -- 他の [c:Ractor] のオブジェクト空間が存在するときに、全 Ractor を対象とするグローバル GC を行う場合は true(デフォルト)を、呼び出した Ractor だけのメジャー GC を行う場合は false を指定します。Ractor が 1 つしか無いときは効果がありません。
 
-他の Ractor のオブジェクト空間が存在するとき(終了したがまだ吸収されていない Ractor のものを含みます)、`global` が true なら、[m:GC.stat] の `:global_gc_count` が増え、`:major_gc_count` は増えません。
+終了した Ractor のオブジェクト空間はすぐには消えず、あとで別の Ractor(通常はメイン Ractor)のオブジェクト空間に統合されます。
+他の Ractor のオブジェクト空間が存在するとき(終了した Ractor の、まだ統合されていないオブジェクト空間も含みます)や、前回のグローバル GC のあとにこの統合が行われたときは、`global` が true なら全 Ractor を対象とするグローバル GC になり、[m:GC.stat] の `:global_gc_count` が増えて `:major_gc_count` は増えません。
 
 #%end
 注意: これらのキーワード引数は Ruby の実装やバージョンによって異なります。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポートしていない場合はキーワード引数を指定しても無視される可能性があります。
@@ -366,8 +367,9 @@ GC 内部の統計情報を [c:Hash] で返します。
 
 - **raise** `ArgumentError` -- `scope` に未知の値を指定した場合に発生します。
 
-Ruby 4.1 から、グローバル GC(全 Ractor を対象とする stop-the-world の GC)の回数を表すキー `:global_gc_count` が加わりました。グローバル GC は `:major_gc_count` には数えず、どちらのスコープでも `:count` は `:minor_gc_count`、`:major_gc_count`、`:global_gc_count` の合計になります。
-各グローバル GC はちょうど 1 つの Ractor に帰属するので、全 Ractor の `:global_gc_count` を足すとプロセス全体の回数になります。
+Ruby 4.1 から、キー `:global_gc_count` が加わりました。グローバル GC(全 Ractor を対象とする stop-the-world の GC)のうち、その Ractor が開始したものの回数です。
+各グローバル GC は、それを開始した 1 つの Ractor にだけ数えられるので、全 Ractor の `:global_gc_count` を足すとプロセス全体の回数になります。`scope: :global` では、終了した Ractor の分も含めたその合計を返します。
+グローバル GC は `:major_gc_count` には数えず、どちらのスコープでも `:count` は `:minor_gc_count`、`:major_gc_count`、`:global_gc_count` の合計になります。
 
 `scope: :global` のときに返るキーは `:count`、`:time`、`:marking_time`、`:sweeping_time`、`:minor_gc_count`、`:major_gc_count`、`:global_gc_count` の 7 つだけです。
 `scope` を指定しない場合は、従来どおり現在の Ractor の値を返します。[m:GC.count] と [m:GC.total_time] も同様です。
