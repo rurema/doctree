@@ -588,6 +588,10 @@ end
 そのため、一方への書き込みはもう一方からも見えます。
 元のバッファが文字列やファイルに由来する場合、その関連も引き継がれます。
 
+#%until 4.1
+ただし、返されたバッファの大きさを [m:IO::Buffer#resize] で変更すると、新しいメモリ領域に内容がコピーされ、元のバッファから切り離されます。
+
+#%end
 #%since 4.1
 Ruby 4.1 からは [c:IO::Buffer::Slice] のインスタンスを返します。
 返されたスライスは `self` を参照元として保持し、[m:IO::Buffer#source] で取得できます。
@@ -780,6 +784,10 @@ p buf.get_string # => "\x00AA\x00"
 
 [m:IO::Buffer.for] で作った外部バッファや、ロックされたバッファは大きさを変更できません。
 
+[m:IO::Buffer#slice] で作ったバッファ(スライス)に対して呼び出すと、新しいメモリ領域を確保して内容をコピーし、参照元から切り離された内部バッファになります。
+大きさを変えない場合も同じです。以降は、一方への書き込みがもう一方には反映されません。
+参照元が外部バッファやロック中のバッファであっても呼び出せ、参照元の範囲を超える大きさにもできます。
+
 - **param** `size` -- 変更後の大きさをバイト数で指定します。
 - **raise** `IO::Buffer::AccessError` -- 大きさを変更できないバッファに対して呼び出した場合に発生します。
 
@@ -792,6 +800,20 @@ p buf.size             # => 8
 p buf.get_string(0, 4) # => "test"
 
 IO::Buffer.for("abc").resize(8) # ~> IO::Buffer::AccessError
+```
+
+```ruby title="スライスに対する resize"
+buf = IO::Buffer.new(8)
+buf.set_string("abcdefgh")
+
+part = buf.slice(2, 4)
+part.resize(2)
+p part.internal?  # => true
+p part.get_string # => "cd"
+
+part.set_string("XY")
+p part.get_string # => "XY"
+p buf.get_string  # => "abcdefgh"
 ```
 
 ### def transfer -> IO::Buffer
