@@ -1,18 +1,18 @@
 == 3.2  ruby: ruby 3.2.0 (2022-12-25 revision a528908271) [x86_64-linux]
-DB method entries: 8591  (libs 309)  real methods: 27230
+DB method entries: 8643  (libs 311)  real methods: 27293
 require-failed libs (3): irb/ext/multi-irb irb/ws-for-case-2 yaml/dbm
 -- scope builtin
   excess methods: 24  (EXCESS(no-class)=6, EXCESS(no-method)=18)
   excess consts: 2
-  shortage: ALIAS_OF_DOC=18, DOC_ON_ANCESTOR=98, DOC_ON_DESCENDANT=4, UNDOC=4, UNDOC(class-undoc)=1, UNDOC_PRIV=7, UNDOC_UNDERSCORE=1
+  shortage: ALIAS_OF_DOC=18, DOC_ON_ANCESTOR=96, DOC_ON_DESCENDANT=4, UNDOC=4, UNDOC(class-undoc)=1, UNDOC_PRIV=7, UNDOC_UNDERSCORE=1
 -- scope stdlib
-  excess methods: 123  (EXCESS(no-class)=34, EXCESS(no-method)=89, unmeasured(require-failed)=22, unmeasured(skipped-lib)=200)
-  excess consts: 22
-  shortage: ALIAS_OF_DOC=30, DOC_ON_ANCESTOR=1148, DOC_ON_DESCENDANT=109, POLICY(generated)=347, POLICY(internal)=1263, UNDOC=1115, UNDOC(class-stub)=98, UNDOC(class-undoc)=1972, UNDOC_PRIV=980, UNDOC_UNDERSCORE=288
+  excess methods: 87  (EXCESS(no-class)=34, EXCESS(no-method)=53, unmeasured(require-failed)=22, unmeasured(skipped-lib)=200)
+  excess consts: 21
+  shortage: ALIAS_OF_DOC=30, DOC_ON_ANCESTOR=1150, DOC_ON_DESCENDANT=109, POLICY(generated)=347, POLICY(internal)=1259, UNDOC=1056, UNDOC(class-stub)=98, UNDOC(class-undoc)=1972, UNDOC_PRIV=980, UNDOC_UNDERSCORE=288
 -- scope bundled
   excess methods: 78  (EXCESS(no-class)=9, EXCESS(no-method)=69)
   excess consts: 1
-  shortage: ALIAS_OF_DOC=31, DOC_ON_ANCESTOR=859, DOC_ON_DESCENDANT=24, UNDOC=1081, UNDOC(class-stub)=140, UNDOC(class-undoc)=1505, UNDOC_PRIV=1282, UNDOC_UNDERSCORE=1
+  shortage: ALIAS_OF_DOC=31, DOC_ON_ANCESTOR=873, DOC_ON_DESCENDANT=24, UNDOC=1077, UNDOC(class-stub)=145, UNDOC(class-undoc)=1525, UNDOC_PRIV=1282, UNDOC_UNDERSCORE=1
 -- scope stale-lib
   excess methods: 0  ()
   excess consts: 0

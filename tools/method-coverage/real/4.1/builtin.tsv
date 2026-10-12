@@ -1,5 +1,6 @@
-V	4.1.0	ruby 4.1.0dev (2026-10-03T00:00:26Z master 088bf8962f) +PRISM [x86_64-linux]
+V	4.1.0	ruby 4.1.0dev (2026-10-09T22:45:03Z master a9d3eadfc8) +PRISM [x86_64-linux]
 A	Object	class	BasicObject	Object,Kernel,BasicObject
+A	Ruby	module	-	Ruby
 A	BasicObject	class	-	BasicObject
 A	Module	class	Object	Module,Object,Kernel,BasicObject
 A	Class	class	Module	Class,Module,Object,Kernel,BasicObject
@@ -94,7 +95,8 @@ A	Signal	module	-	Signal
 A	Thread::SizedQueue	class	Thread::Queue	Thread::SizedQueue,Thread::Queue,Object,Kernel,BasicObject
 A	FiberError	class	StandardError	FiberError,StandardError,Exception,Object,Kernel,BasicObject
 A	Fiber	class	Object	Fiber,Object,Kernel,BasicObject
-A	Ruby	module	-	Ruby
+A	Ruby::SourceRange	class	Object	Ruby::SourceRange,Object,Kernel,BasicObject
+A	Ruby::Box	class	Module	Ruby::Box,Module,Object,Kernel,BasicObject
 A	ObjectSpace::WeakMap	class	Object	ObjectSpace::WeakMap,Enumerable,Object,Kernel,BasicObject
 A	ObjectSpace::WeakKeyMap	class	Object	ObjectSpace::WeakKeyMap,Object,Kernel,BasicObject
 A	GC::Profiler	module	-	GC::Profiler
@@ -112,6 +114,7 @@ A	Process::Status	class	Object	Process::Status,Object,Kernel,BasicObject
 A	Process::Tms	class	Struct	Process::Tms,Struct,Enumerable,Object,Kernel,BasicObject
 A	Process::UID	module	-	Process::UID
 A	Process::GID	module	-	Process::GID
+A	Errno::ELOOP	class	SystemCallError	Errno::ELOOP,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
 A	Errno::EMEDIUMTYPE	class	SystemCallError	Errno::EMEDIUMTYPE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
 A	Errno::EMFILE	class	SystemCallError	Errno::EMFILE,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
 A	Errno::EMLINK	class	SystemCallError	Errno::EMLINK,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
@@ -243,7 +246,6 @@ A	Errno::ELIBEXEC	class	SystemCallError	Errno::ELIBEXEC,SystemCallError,Standard
 A	Errno::ELIBMAX	class	SystemCallError	Errno::ELIBMAX,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
 A	Errno::ELIBSCN	class	SystemCallError	Errno::ELIBSCN,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
 A	Errno::ELNRNG	class	SystemCallError	Errno::ELNRNG,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
-A	Errno::ELOOP	class	SystemCallError	Errno::ELOOP,SystemCallError,StandardError,Exception,Object,Kernel,BasicObject
 A	Encoding::CompatibilityError	class	EncodingError	Encoding::CompatibilityError,EncodingError,StandardError,Exception,Object,Kernel,BasicObject
 A	Encoding::UndefinedConversionError	class	EncodingError	Encoding::UndefinedConversionError,EncodingError,StandardError,Exception,Object,Kernel,BasicObject
 A	Encoding::InvalidByteSequenceError	class	EncodingError	Encoding::InvalidByteSequenceError,EncodingError,StandardError,Exception,Object,Kernel,BasicObject
@@ -256,6 +258,7 @@ A	Enumerator::Chain	class	Enumerator	Enumerator::Chain,Enumerator,Enumerable,Obj
 A	Enumerator::Product	class	Enumerator	Enumerator::Product,Enumerator,Enumerable,Object,Kernel,BasicObject
 A	Enumerator::ArithmeticSequence	class	Enumerator	Enumerator::ArithmeticSequence,Enumerator,Enumerable,Object,Kernel,BasicObject
 A	Enumerator::Lazy	class	Enumerator	Enumerator::Lazy,Enumerator,Enumerable,Object,Kernel,BasicObject
+A	Ractor::MovedError	class	Ractor::Error	Ractor::MovedError,Ractor::Error,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
 A	Ractor::ClosedError	class	StopIteration	Ractor::ClosedError,StopIteration,IndexError,StandardError,Exception,Object,Kernel,BasicObject
 A	Ractor::UnsafeError	class	Ractor::Error	Ractor::UnsafeError,Ractor::Error,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
 A	Ractor::MovedObject	class	BasicObject	Ractor::MovedObject,BasicObject
@@ -263,7 +266,6 @@ A	Ractor::Port	class	Object	Ractor::Port,Object,Kernel,BasicObject
 A	Ractor::Error	class	RuntimeError	Ractor::Error,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
 A	Ractor::IsolationError	class	Ractor::Error	Ractor::IsolationError,Ractor::Error,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
 A	Ractor::RemoteError	class	Ractor::Error	Ractor::RemoteError,Ractor::Error,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
-A	Ractor::MovedError	class	Ractor::Error	Ractor::MovedError,Ractor::Error,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
 A	File::Constants	module	-	File::Constants
 A	File::Stat	class	Object	File::Stat,Comparable,Object,Kernel,BasicObject
 A	RubyVM::AbstractSyntaxTree	module	-	RubyVM::AbstractSyntaxTree
@@ -277,8 +279,8 @@ A	Regexp::TimeoutError	class	RegexpError	Regexp::TimeoutError,RegexpError,Standa
 A	Set::CoreSet	class	Set	Set::CoreSet,Set,Enumerable,Object,Kernel,BasicObject
 A	Math::DomainError	class	StandardError	Math::DomainError,StandardError,Exception,Object,Kernel,BasicObject
 A	Thread::Monitor::ConditionVariable	class	Object	Thread::Monitor::ConditionVariable,Object,Kernel,BasicObject
-A	Ruby::Box	class	Module	Ruby::Box,Module,Object,Kernel,BasicObject
-A	Ruby::SourceRange	class	Object	Ruby::SourceRange,Object,Kernel,BasicObject
+A	Ruby::Box::Entry	class	Object	Ruby::Box::Entry,Object,Kernel,BasicObject
+A	Ruby::Box::Loader	module	-	Ruby::Box::Loader
 A	IO::Buffer::Storage	class	IO::Buffer	IO::Buffer::Storage,IO::Buffer,Comparable,Object,Kernel,BasicObject
 A	IO::Buffer::Slice	class	IO::Buffer	IO::Buffer::Slice,IO::Buffer,Comparable,Object,Kernel,BasicObject
 A	IO::Buffer::LockedError	class	RuntimeError	IO::Buffer::LockedError,RuntimeError,StandardError,Exception,Object,Kernel,BasicObject
@@ -289,8 +291,6 @@ A	IO::Buffer::MaskError	class	ArgumentError	IO::Buffer::MaskError,ArgumentError,
 A	RubyVM::AbstractSyntaxTree::Node	class	Object	RubyVM::AbstractSyntaxTree::Node,Object,Kernel,BasicObject
 A	RubyVM::AbstractSyntaxTree::Location	class	Object	RubyVM::AbstractSyntaxTree::Location,Object,Kernel,BasicObject
 A	Thread::Backtrace::Location	class	Object	Thread::Backtrace::Location,Object,Kernel,BasicObject
-A	Ruby::Box::Loader	module	-	Ruby::Box::Loader
-A	Ruby::Box::Entry	class	Object	Ruby::Box::Entry,Object,Kernel,BasicObject
 A	ARGF.class	class	Object	ARGF.class,Enumerable,Object,Kernel,BasicObject
 A	ENV	object	-	-
 A	main	object	-	-
@@ -299,18 +299,19 @@ M	BasicObject	i	pub	__send__	-	-
 M	BasicObject	i	pub	equal?	-	-
 M	BasicObject	i	pub	instance_eval	-	-
 M	BasicObject	i	pub	instance_exec	-	-
-M	BasicObject	i	pub	!=	-	-
 M	BasicObject	i	pub	==	-	-
+M	BasicObject	i	pub	!=	-	-
 M	BasicObject	i	pub	__id__	-	-
+M	BasicObject	i	priv	singleton_method_undefined	-	-
 M	BasicObject	i	priv	initialize	-	-
 M	BasicObject	i	priv	method_missing	-	-
 M	BasicObject	i	priv	singleton_method_added	-	-
 M	BasicObject	i	priv	singleton_method_removed	-	-
-M	BasicObject	i	priv	singleton_method_undefined	-	-
 M	Module	s	pub	used_modules	-	-
 M	Module	s	pub	used_refinements	-	-
 M	Module	s	pub	nesting	-	-
 M	Module	s	pub	constants	-	-
+M	Module	i	pub	public_method_defined?	-	-
 M	Module	i	pub	private_method_defined?	-	-
 M	Module	i	pub	protected_method_defined?	-	-
 M	Module	i	pub	public_class_method	-	-
@@ -335,27 +336,27 @@ M	Module	i	pub	inspect	to_s	-
 M	Module	i	pub	private_instance_methods	-	-
 M	Module	i	pub	public_instance_methods	-	-
 M	Module	i	pub	protected_instance_methods	-	-
-M	Module	i	pub	const_missing	-	-
+M	Module	i	pub	const_set	-	-
 M	Module	i	pub	const_defined?	-	-
 M	Module	i	pub	const_source_location	-	-
 M	Module	i	pub	class_variables	-	-
 M	Module	i	pub	remove_class_variable	-	-
-M	Module	i	pub	const_set	-	-
+M	Module	i	pub	const_missing	-	-
 M	Module	i	pub	undefined_instance_methods	-	-
 M	Module	i	pub	constants	-	-
 M	Module	i	pub	const_get	-	-
-M	Module	i	pub	class_variable_defined?	-	-
-M	Module	i	pub	class_variable_set	-	-
+M	Module	i	pub	>	-	-
 M	Module	i	pub	<	-	-
+M	Module	i	pub	class_variable_defined?	-	-
 M	Module	i	pub	public_constant	-	-
-M	Module	i	pub	deprecate_constant	-	-
+M	Module	i	pub	class_variable_set	-	-
 M	Module	i	pub	singleton_class?	-	-
 M	Module	i	pub	private_constant	-	-
 M	Module	i	pub	autoload?	-	-
-M	Module	i	pub	>	-	-
+M	Module	i	pub	deprecate_constant	-	-
+M	Module	i	pub	class_variable_get	-	-
 M	Module	i	pub	to_s	-	-
 M	Module	i	pub	autoload_relative	-	-
-M	Module	i	pub	class_variable_get	-	-
 M	Module	i	pub	instance_method	-	-
 M	Module	i	pub	public_instance_method	-	-
 M	Module	i	pub	include	-	-
@@ -372,7 +373,6 @@ M	Module	i	pub	remove_method	-	-
 M	Module	i	pub	undef_method	-	-
 M	Module	i	pub	alias_method	-	-
 M	Module	i	pub	method_defined?	-	-
-M	Module	i	pub	public_method_defined?	-	-
 M	Module	i	priv	included	-	-
 M	Module	i	priv	extended	-	-
 M	Module	i	priv	prepended	-	-
@@ -403,16 +403,16 @@ M	Class	i	priv	initialize	-	-
 M	Class	i	priv	inherited	-	-
 M	Refinement	i	pub	target	-	-
 M	Refinement	i	priv	import_methods	-	-
+M	ObjectSpace	s	pub	each_object	-	-
 M	ObjectSpace	s	pub	define_finalizer	-	-
 M	ObjectSpace	s	pub	undefine_finalizer	-	-
 M	ObjectSpace	s	pub	count_objects	-	-
 M	ObjectSpace	s	pub	garbage_collect	-	-
-M	ObjectSpace	s	pub	each_object	-	-
+M	ObjectSpace	i	priv	each_object	-	-
 M	ObjectSpace	i	priv	define_finalizer	-	-
 M	ObjectSpace	i	priv	undefine_finalizer	-	-
 M	ObjectSpace	i	priv	count_objects	-	-
 M	ObjectSpace	i	priv	garbage_collect	-	-
-M	ObjectSpace	i	priv	each_object	-	-
 M	Kernel	s	pub	trace_var	-	-
 M	Kernel	s	pub	untrace_var	-	-
 M	Kernel	s	pub	at_exit	-	-
@@ -455,11 +455,11 @@ M	Kernel	s	pub	abort	-	-
 M	Kernel	s	pub	proc	-	-
 M	Kernel	s	pub	lambda	-	-
 M	Kernel	s	pub	binding	-	-
-M	Kernel	s	pub	Pathname	-	-
-M	Kernel	s	pub	exit	-	-
 M	Kernel	s	pub	loop	-	-
+M	Kernel	s	pub	exit	-	-
 M	Kernel	s	pub	warn	-	-
 M	Kernel	s	pub	set_trace_func	-	-
+M	Kernel	s	pub	Pathname	-	-
 M	Kernel	s	pub	raise	-	-
 M	Kernel	s	pub	fail	-	-
 M	Kernel	s	pub	global_variables	-	-
@@ -574,7 +574,6 @@ M	Kernel	i	priv	autoload	-	-
 M	Kernel	i	priv	autoload_relative	-	-
 M	Kernel	i	priv	autoload?	-	-
 M	Kernel	i	priv	Pathname	-	-
-M	Kernel	i	priv	loop	-	-
 M	Kernel	i	priv	gets	-	-
 M	Kernel	i	priv	fork	-	-
 M	Kernel	i	priv	proc	-	-
@@ -585,12 +584,13 @@ M	Kernel	i	priv	initialize_copy	-	-
 M	Kernel	i	priv	initialize_clone	-	-
 M	Kernel	i	priv	initialize_dup	-	-
 M	Kernel	i	priv	set_trace_func	-	-
+M	Kernel	i	priv	loop	-	-
 M	Kernel	i	priv	test	-	-
 M	Kernel	i	priv	sleep	-	-
 M	Kernel	i	priv	trap	-	-
 M	GC	s	pub	start	-	-
-M	GC	s	pub	stress=	-	-
 M	GC	s	pub	count	-	-
+M	GC	s	pub	stress=	-	-
 M	GC	s	pub	stat	-	-
 M	GC	s	pub	stat_heap	-	-
 M	GC	s	pub	config	-	-
@@ -601,16 +601,16 @@ M	GC	s	pub	verify_compaction_references	-	-
 M	GC	s	pub	verify_internal_consistency	-	-
 M	GC	s	pub	compact	-	-
 M	GC	s	pub	enable	-	-
-M	GC	s	pub	measure_total_time=	-	-
+M	GC	s	pub	latest_gc_info	-	-
 M	GC	s	pub	disable	-	-
 M	GC	s	pub	stress	-	-
-M	GC	s	pub	latest_gc_info	-	-
 M	GC	s	pub	total_time	-	-
+M	GC	s	pub	measure_total_time=	-	-
 M	GC	s	pub	measure_total_time	-	-
 M	GC	i	pub	garbage_collect	-	-
 M	Marshal	s	pub	load	-	-
-M	Marshal	s	pub	dump	-	-
 M	Marshal	s	pub	restore	load	-
+M	Marshal	s	pub	dump	-	-
 M	Marshal	i	priv	dump	-	-
 M	Symbol	s	pub	all_symbols	-	-
 M	Symbol	i	pub	length	-	-
@@ -619,31 +619,32 @@ M	Symbol	i	pub	succ	-	-
 M	Symbol	i	pub	<=>	-	-
 M	Symbol	i	pub	==	-	-
 M	Symbol	i	pub	===	-	-
-M	Symbol	i	pub	=~	-	-
-M	Symbol	i	pub	upcase	-	-
-M	Symbol	i	pub	[]	-	-
 M	Symbol	i	pub	slice	-	-
-M	Symbol	i	pub	capitalize	-	-
-M	Symbol	i	pub	to_proc	-	-
+M	Symbol	i	pub	=~	-	-
 M	Symbol	i	pub	encoding	-	-
-M	Symbol	i	pub	swapcase	-	-
+M	Symbol	i	pub	[]	-	-
 M	Symbol	i	pub	downcase	-	-
+M	Symbol	i	pub	capitalize	-	-
+M	Symbol	i	pub	upcase	-	-
+M	Symbol	i	pub	to_proc	-	-
+M	Symbol	i	pub	to_sym	-	-
+M	Symbol	i	pub	swapcase	-	-
 M	Symbol	i	pub	to_s	-	-
 M	Symbol	i	pub	next	-	-
 M	Symbol	i	pub	empty?	-	-
-M	Symbol	i	pub	to_sym	-	-
 M	Symbol	i	pub	casecmp	-	-
 M	Symbol	i	pub	casecmp?	-	-
+M	Symbol	i	pub	start_with?	-	-
 M	Symbol	i	pub	end_with?	-	-
-M	Symbol	i	pub	name	to_s	-
 M	Symbol	i	pub	match	-	-
 M	Symbol	i	pub	match?	-	-
-M	Symbol	i	pub	start_with?	-	-
 M	Symbol	i	pub	id2name	to_s	-
+M	Symbol	i	pub	name	to_s	-
 M	Symbol	i	pub	inspect	-	-
 M	Symbol	i	pub	intern	to_sym	-
 M	Exception	s	pub	exception	-	-
 M	Exception	s	pub	to_tty?	-	-
+M	Exception	i	pub	detailed_message	-	-
 M	Exception	i	pub	exception	-	-
 M	Exception	i	pub	full_message	-	-
 M	Exception	i	pub	backtrace	-	-
@@ -655,10 +656,9 @@ M	Exception	i	pub	inspect	-	-
 M	Exception	i	pub	to_s	-	-
 M	Exception	i	pub	respond_to?	-	-
 M	Exception	i	pub	message	-	-
-M	Exception	i	pub	detailed_message	-	-
-M	Exception	i	priv	respond_to_missing?	-	-
 M	Exception	i	priv	initialize	-	-
 M	Exception	i	priv	method_missing	-	-
+M	Exception	i	priv	respond_to_missing?	-	-
 M	Range	i	pub	bsearch	-	-
 M	Range	i	pub	size	-	-
 M	Range	i	pub	member?	-	-
@@ -666,8 +666,8 @@ M	Range	i	pub	reverse_each	-	-
 M	Range	i	pub	each	-	-
 M	Range	i	pub	begin	-	-
 M	Range	i	pub	end	-	-
-M	Range	i	pub	==	-	-
 M	Range	i	pub	===	-	-
+M	Range	i	pub	==	-	-
 M	Range	i	pub	to_a	-	-
 M	Range	i	pub	to_s	-	-
 M	Range	i	pub	include?	-	-
@@ -690,18 +690,19 @@ M	Range	i	pub	first	-	-
 M	Range	i	pub	minmax	-	-
 M	Range	i	priv	initialize	-	-
 M	Range	i	priv	initialize_copy	-	-
-M	String	s	pub	try_convert	-	-
 M	String	s	pub	new	-	-
+M	String	s	pub	try_convert	-	-
+M	String	i	pub	delete_suffix	-	-
 M	String	i	pub	strip	-	-
 M	String	i	pub	lstrip!	-	-
 M	String	i	pub	chop!	-	-
 M	String	i	pub	chomp!	-	-
-M	String	i	pub	delete_suffix	-	-
-M	String	i	pub	tr	-	-
+M	String	i	pub	strip!	-	-
+M	String	i	pub	sub!	-	-
 M	String	i	pub	rstrip!	-	-
 M	String	i	pub	delete_prefix!	-	-
 M	String	i	pub	delete_suffix!	-	-
-M	String	i	pub	strip!	-	-
+M	String	i	pub	tr	-	-
 M	String	i	pub	tr_s	-	-
 M	String	i	pub	delete	-	-
 M	String	i	pub	squeeze	-	-
@@ -726,11 +727,11 @@ M	String	i	pub	unicode_normalize	-	-
 M	String	i	pub	b	-	-
 M	String	i	pub	%	-	-
 M	String	i	pub	to_r	-	-
-M	String	i	pub	encode	-	-
 M	String	i	pub	*	-	-
 M	String	i	pub	+	-	-
 M	String	i	pub	unpack	-	-
 M	String	i	pub	unpack1	-	-
+M	String	i	pub	encode	-	-
 M	String	i	pub	encode!	-	-
 M	String	i	pub	to_c	-	-
 M	String	i	pub	count	-	-
@@ -748,9 +749,9 @@ M	String	i	pub	[]	-	-
 M	String	i	pub	[]=	-	-
 M	String	i	pub	sum	-	-
 M	String	i	pub	include?	-	-
-M	String	i	pub	next	-	-
 M	String	i	pub	empty?	-	-
 M	String	i	pub	eql?	-	-
+M	String	i	pub	next	-	-
 M	String	i	pub	replace	-	-
 M	String	i	pub	casecmp	-	-
 M	String	i	pub	casecmp?	-	-
@@ -764,15 +765,15 @@ M	String	i	pub	upto	-	-
 M	String	i	pub	index	-	-
 M	String	i	pub	byteindex	-	-
 M	String	i	pub	hash	-	-
+M	String	i	pub	rindex	-	-
 M	String	i	pub	byterindex	-	-
 M	String	i	pub	clear	-	-
-M	String	i	pub	rindex	-	-
+M	String	i	pub	chr	-	-
 M	String	i	pub	getbyte	-	-
 M	String	i	pub	setbyte	-	-
-M	String	i	pub	chr	-	-
+M	String	i	pub	bit_get	-	-
 M	String	i	pub	bit_set?	-	-
 M	String	i	pub	bit_set	-	-
-M	String	i	pub	bit_clear	-	-
 M	String	i	pub	bit_flip	-	-
 M	String	i	pub	bit_count	-	-
 M	String	i	pub	bitwise_not	-	-
@@ -780,23 +781,23 @@ M	String	i	pub	bitwise_not!	-	-
 M	String	i	pub	bitwise_and	-	-
 M	String	i	pub	length	-	-
 M	String	i	pub	size	-	-
-M	String	i	pub	bitwise_or	-	-
-M	String	i	pub	succ	-	-
-M	String	i	pub	bitwise_xor	-	-
 M	String	i	pub	bitwise_or!	-	-
-M	String	i	pub	bit_get	-	-
+M	String	i	pub	succ	-	-
+M	String	i	pub	bit_clear	-	-
+M	String	i	pub	bitwise_xor!	-	-
+M	String	i	pub	bitwise_and!	-	-
+M	String	i	pub	bitwise_or	-	-
 M	String	i	pub	scrub	-	-
+M	String	i	pub	bitwise_xor	-	-
+M	String	i	pub	dedup	-@	-
+M	String	i	pub	dump	-	-
+M	String	i	pub	scrub!	-	-
 M	String	i	pub	byteslice	-	-
 M	String	i	pub	bytesplice	-	-
-M	String	i	pub	bitwise_and!	-	-
-M	String	i	pub	dump	-	-
-M	String	i	pub	bitwise_xor!	-	-
-M	String	i	pub	dedup	-@	-
-M	String	i	pub	upcase	-	-
 M	String	i	pub	to_str	-	-
-M	String	i	pub	scrub!	-	-
-M	String	i	pub	capitalize	-	-
 M	String	i	pub	downcase	-	-
+M	String	i	pub	upcase	-	-
+M	String	i	pub	swapcase	-	-
 M	String	i	pub	undump	-	-
 M	String	i	pub	freeze	-	-
 M	String	i	pub	to_s	-	-
@@ -804,54 +805,53 @@ M	String	i	pub	to_i	-	-
 M	String	i	pub	to_f	-	-
 M	String	i	pub	upcase!	-	-
 M	String	i	pub	downcase!	-	-
-M	String	i	pub	oct	-	-
-M	String	i	pub	swapcase	-	-
-M	String	i	pub	hex	-	-
-M	String	i	pub	bytes	-	-
-M	String	i	pub	inspect	-	-
+M	String	i	pub	capitalize	-	-
 M	String	i	pub	swapcase!	-	-
-M	String	i	pub	grapheme_clusters	-	-
+M	String	i	pub	hex	-	-
+M	String	i	pub	oct	-	-
+M	String	i	pub	inspect	-	-
+M	String	i	pub	reverse!	-	-
+M	String	i	pub	bytes	-	-
 M	String	i	pub	chars	-	-
 M	String	i	pub	split	-	-
 M	String	i	pub	capitalize!	-	-
 M	String	i	pub	append_as_bytes	-	-
-M	String	i	pub	reverse!	-	-
+M	String	i	pub	prepend	-	-
 M	String	i	pub	codepoints	-	-
-M	String	i	pub	ord	-	-
+M	String	i	pub	grapheme_clusters	-	-
 M	String	i	pub	lines	-	-
 M	String	i	pub	crypt	-	-
 M	String	i	pub	concat	-	-
 M	String	i	pub	start_with?	-	-
-M	String	i	pub	prepend	-	-
+M	String	i	pub	to_sym	-	-
 M	String	i	pub	reverse	-	-
-M	String	i	pub	ljust	-	-
+M	String	i	pub	ord	-	-
 M	String	i	pub	rjust	-	-
 M	String	i	pub	end_with?	-	-
 M	String	i	pub	scan	-	-
-M	String	i	pub	gsub	-	-
+M	String	i	pub	ljust	-	-
 M	String	i	pub	chop	-	-
 M	String	i	pub	intern	-	-
 M	String	i	pub	sub	-	-
-M	String	i	pub	lstrip	-	-
+M	String	i	pub	gsub	-	-
 M	String	i	pub	rstrip	-	-
 M	String	i	pub	chomp	-	-
 M	String	i	pub	center	-	-
-M	String	i	pub	sub!	-	-
+M	String	i	pub	lstrip	-	-
 M	String	i	pub	gsub!	-	-
 M	String	i	pub	delete_prefix	-	-
-M	String	i	pub	to_sym	-	-
 M	String	i	priv	initialize	-	-
 M	String	i	priv	initialize_copy	-	-
-M	Array	s	pub	try_convert	-	-
-M	Array	s	pub	[]	-	-
 M	Array	s	pub	new	-	-
+M	Array	s	pub	[]	-	-
+M	Array	s	pub	try_convert	-	-
 M	Array	i	pub	delete	-	-
 M	Array	i	pub	dig	-	-
 M	Array	i	pub	slice	-	-
 M	Array	i	pub	slice!	-	-
 M	Array	i	pub	last	-	-
-M	Array	i	pub	to_h	-	-
 M	Array	i	pub	&	-	-
+M	Array	i	pub	to_h	-	-
 M	Array	i	pub	*	-	-
 M	Array	i	pub	+	-	-
 M	Array	i	pub	-	-	-
@@ -880,8 +880,8 @@ M	Array	i	pub	map!	-	-
 M	Array	i	pub	sort	-	-
 M	Array	i	pub	filter!	-	-
 M	Array	i	pub	collect	-	-
+M	Array	i	pub	delete_at	-	-
 M	Array	i	pub	map	-	-
-M	Array	i	pub	delete_if	-	-
 M	Array	i	pub	select!	-	-
 M	Array	i	pub	transpose	-	-
 M	Array	i	pub	collect!	-	-
@@ -891,51 +891,51 @@ M	Array	i	pub	uniq!	-	-
 M	Array	i	pub	compact!	-	-
 M	Array	i	pub	flatten	-	-
 M	Array	i	pub	select	-	-
-M	Array	i	pub	filter	-	-
 M	Array	i	pub	|	-	-
+M	Array	i	pub	reject!	-	-
 M	Array	i	pub	minmax	-	-
 M	Array	i	pub	values_at	-	-
-M	Array	i	pub	delete_at	-	-
-M	Array	i	pub	flatten!	-	-
-M	Array	i	pub	reject!	-	-
 M	Array	i	pub	combination	-	-
+M	Array	i	pub	delete_if	-	-
+M	Array	i	pub	filter	-	-
+M	Array	i	pub	product	-	-
 M	Array	i	pub	reverse_each	-	-
-M	Array	i	pub	repeated_combination	-	-
+M	Array	i	pub	flatten!	-	-
 M	Array	i	pub	permutation	-	-
-M	Array	i	pub	bsearch	-	-
 M	Array	i	pub	<=>	-	-
 M	Array	i	pub	<<	-	-
 M	Array	i	pub	zip	-	-
-M	Array	i	pub	keep_if	-	-
-M	Array	i	pub	count	-	-
-M	Array	i	pub	==	-	-
-M	Array	i	pub	cycle	-	-
-M	Array	i	pub	product	-	-
-M	Array	i	pub	take	-	-
 M	Array	i	pub	fill	-	-
+M	Array	i	pub	keep_if	-	-
+M	Array	i	pub	==	-	-
+M	Array	i	pub	repeated_permutation	-	-
+M	Array	i	pub	cycle	-	-
+M	Array	i	pub	drop	-	-
+M	Array	i	pub	take	-	-
 M	Array	i	pub	[]	-	-
 M	Array	i	pub	[]=	-	-
-M	Array	i	pub	sum	-	-
+M	Array	i	pub	reject	-	-
+M	Array	i	pub	repeated_combination	-	-
 M	Array	i	pub	uniq	-	-
 M	Array	i	pub	compact	-	-
 M	Array	i	pub	drop_while	-	-
-M	Array	i	pub	one?	-	-
 M	Array	i	pub	include?	-	-
-M	Array	i	pub	repeated_permutation	-	-
-M	Array	i	pub	drop	-	-
+M	Array	i	pub	none?	-	-
+M	Array	i	pub	take_while	-	-
 M	Array	i	pub	empty?	-	-
 M	Array	i	pub	eql?	-	-
+M	Array	i	pub	bsearch	-	-
 M	Array	i	pub	bsearch_index	-	-
-M	Array	i	pub	any?	-	-
-M	Array	i	pub	take_while	-	-
-M	Array	i	pub	none?	-	-
-M	Array	i	pub	shuffle	-	-
+M	Array	i	pub	count	-	-
+M	Array	i	pub	one?	-	-
+M	Array	i	pub	shuffle!	-	-
+M	Array	i	pub	sum	-	-
 M	Array	i	pub	sample	-	-
 M	Array	i	pub	replace	-	-
 M	Array	i	pub	all?	-	-
-M	Array	i	pub	fetch_values	-	-
+M	Array	i	pub	any?	-	-
 M	Array	i	pub	insert	-	-
-M	Array	i	pub	shuffle!	-	-
+M	Array	i	pub	shuffle	-	-
 M	Array	i	pub	index	-	-
 M	Array	i	pub	max	-	-
 M	Array	i	pub	hash	-	-
@@ -946,7 +946,7 @@ M	Array	i	pub	freeze	-	-
 M	Array	i	pub	min	-	-
 M	Array	i	pub	deconstruct	-	-
 M	Array	i	pub	first	-	-
-M	Array	i	pub	reject	-	-
+M	Array	i	pub	fetch_values	-	-
 M	Array	i	pub	length	-	-
 M	Array	i	pub	size	-	-
 M	Array	i	pub	each	-	-
@@ -960,10 +960,10 @@ M	Array	i	pub	prepend	unshift	-
 M	Array	i	pub	pack	-	-
 M	Array	i	priv	initialize	-	-
 M	Array	i	priv	initialize_copy	-	-
-M	Hash	s	pub	ruby2_keywords_hash	-	-
-M	Hash	s	pub	[]	-	-
-M	Hash	s	pub	try_convert	-	-
 M	Hash	s	pub	ruby2_keywords_hash?	-	-
+M	Hash	s	pub	[]	-	-
+M	Hash	s	pub	ruby2_keywords_hash	-	-
+M	Hash	s	pub	try_convert	-	-
 M	Hash	i	pub	delete	-	-
 M	Hash	i	pub	member?	-	-
 M	Hash	i	pub	dig	-	-
@@ -974,42 +974,42 @@ M	Hash	i	pub	default_proc	-	-
 M	Hash	i	pub	default_proc=	-	-
 M	Hash	i	pub	each_value	-	-
 M	Hash	i	pub	each_key	-	-
-M	Hash	i	pub	each_pair	-	-
 M	Hash	i	pub	==	-	-
 M	Hash	i	pub	transform_keys	-	-
 M	Hash	i	pub	transform_keys!	-	-
-M	Hash	i	pub	transform_values!	-	-
-M	Hash	i	pub	keys	-	-
+M	Hash	i	pub	each_pair	-	-
+M	Hash	i	pub	transform_values	-	-
 M	Hash	i	pub	[]	-	-
 M	Hash	i	pub	[]=	-	-
+M	Hash	i	pub	transform_values!	-	-
 M	Hash	i	pub	fetch_values	-	-
-M	Hash	i	pub	transform_values	-	-
-M	Hash	i	pub	invert	-	-
-M	Hash	i	pub	slice	-	-
 M	Hash	i	pub	values	-	-
+M	Hash	i	pub	invert	-	-
+M	Hash	i	pub	keys	-	-
+M	Hash	i	pub	merge!	-	-
 M	Hash	i	pub	update	-	-
 M	Hash	i	pub	except	-	-
-M	Hash	i	pub	merge	-	-
 M	Hash	i	pub	empty?	-	-
 M	Hash	i	pub	eql?	-	-
-M	Hash	i	pub	key?	-	-
-M	Hash	i	pub	include?	-	-
-M	Hash	i	pub	compact	-	-
-M	Hash	i	pub	merge!	-	-
-M	Hash	i	pub	value?	-	-
-M	Hash	i	pub	has_key?	-	-
 M	Hash	i	pub	has_value?	-	-
+M	Hash	i	pub	merge	-	-
+M	Hash	i	pub	has_key?	-	-
+M	Hash	i	pub	compact	-	-
+M	Hash	i	pub	key?	-	-
+M	Hash	i	pub	slice	-	-
+M	Hash	i	pub	compare_by_identity	-	-
+M	Hash	i	pub	compare_by_identity?	-	-
 M	Hash	i	pub	deconstruct_keys	-	-
 M	Hash	i	pub	replace	-	-
 M	Hash	i	pub	to_h	-	-
-M	Hash	i	pub	compare_by_identity?	-	-
-M	Hash	i	pub	compare_by_identity	-	-
+M	Hash	i	pub	value?	-	-
+M	Hash	i	pub	include?	-	-
 M	Hash	i	pub	<=	-	-
 M	Hash	i	pub	>=	-	-
 M	Hash	i	pub	key	-	-
+M	Hash	i	pub	hash	-	-
 M	Hash	i	pub	freeze	-	-
 M	Hash	i	pub	inspect	-	-
-M	Hash	i	pub	hash	-	-
 M	Hash	i	pub	clear	-	-
 M	Hash	i	pub	<	-	-
 M	Hash	i	pub	>	-	-
@@ -1039,20 +1039,20 @@ M	Hash	i	pub	any?	-	-
 M	Hash	i	pub	default	-	-
 M	Hash	i	priv	initialize	-	-
 M	Hash	i	priv	initialize_copy	-	-
+M	NilClass	i	pub	to_r	-	-
 M	NilClass	i	pub	&	-	-
 M	NilClass	i	pub	to_h	-	-
 M	NilClass	i	pub	===	-	-
 M	NilClass	i	pub	=~	-	-
 M	NilClass	i	pub	to_c	-	-
 M	NilClass	i	pub	inspect	-	-
+M	NilClass	i	pub	nil?	-	-
 M	NilClass	i	pub	to_a	-	-
 M	NilClass	i	pub	to_s	-	-
-M	NilClass	i	pub	nil?	-	-
 M	NilClass	i	pub	to_i	-	-
 M	NilClass	i	pub	to_f	-	-
-M	NilClass	i	pub	to_r	-	-
-M	NilClass	i	pub	rationalize	-	-
 M	NilClass	i	pub	|	-	-
+M	NilClass	i	pub	rationalize	-	-
 M	NilClass	i	pub	^	-	-
 M	SystemExit	i	pub	success?	-	-
 M	SystemExit	i	pub	status	-	-
@@ -1066,6 +1066,7 @@ M	KeyError	i	pub	key	-	-
 M	KeyError	i	priv	initialize	-	-
 M	SyntaxError	i	pub	path	-	-
 M	SyntaxError	i	priv	initialize	-	-
+M	IO	s	pub	for_fd	-	-
 M	IO	s	pub	popen	-	-
 M	IO	s	pub	foreach	-	-
 M	IO	s	pub	binread	-	-
@@ -1080,7 +1081,8 @@ M	IO	s	pub	write	-	-
 M	IO	s	pub	readlines	-	-
 M	IO	s	pub	read	-	-
 M	IO	s	pub	sysopen	-	-
-M	IO	s	pub	for_fd	-	-
+M	IO	i	pub	wait_writable	-	-
+M	IO	i	pub	wait_priority	-	-
 M	IO	i	pub	write_nonblock	-	-
 M	IO	i	pub	each_line	-	-
 M	IO	i	pub	each_byte	-	-
@@ -1108,56 +1110,54 @@ M	IO	i	pub	timeout=	-	-
 M	IO	i	pub	gets	-	-
 M	IO	i	pub	each	-	-
 M	IO	i	pub	reopen	-	-
-M	IO	i	pub	pread	-	-
-M	IO	i	pub	pwrite	-	-
 M	IO	i	pub	sysread	-	-
+M	IO	i	pub	pread	-	-
 M	IO	i	pub	fsync	-	-
-M	IO	i	pub	sync	-	-
-M	IO	i	pub	sync=	-	-
 M	IO	i	pub	fdatasync	-	-
-M	IO	i	pub	lineno	-	-
 M	IO	i	pub	syswrite	-	-
+M	IO	i	pub	sync	-	-
+M	IO	i	pub	lineno	-	-
+M	IO	i	pub	pwrite	-	-
 M	IO	i	pub	to_io	-	-
+M	IO	i	pub	readchar	-	-
 M	IO	i	pub	lineno=	-	-
 M	IO	i	pub	to_i	fileno	-
-M	IO	i	pub	readchar	-	-
-M	IO	i	pub	readbyte	-	-
 M	IO	i	pub	ungetbyte	-	-
-M	IO	i	pub	ungetc	-	-
+M	IO	i	pub	readbyte	-	-
 M	IO	i	pub	tell	-	-
+M	IO	i	pub	sync=	-	-
 M	IO	i	pub	seek	-	-
 M	IO	i	pub	getc	-	-
 M	IO	i	pub	write	-	-
 M	IO	i	pub	rewind	-	-
-M	IO	i	pub	pos	-	-
+M	IO	i	pub	ungetc	-	-
 M	IO	i	pub	pos=	-	-
-M	IO	i	pub	eof	-	-
+M	IO	i	pub	pos	-	-
 M	IO	i	pub	eof?	-	-
-M	IO	i	pub	close_on_exec?	-	-
+M	IO	i	pub	eof	-	-
 M	IO	i	pub	close_on_exec=	-	-
-M	IO	i	pub	close	-	-
+M	IO	i	pub	close_on_exec?	-	-
 M	IO	i	pub	closed?	-	-
-M	IO	i	pub	close_read	-	-
+M	IO	i	pub	close	-	-
 M	IO	i	pub	close_write	-	-
-M	IO	i	pub	isatty	-	-
+M	IO	i	pub	close_read	-	-
 M	IO	i	pub	tty?	-	-
-M	IO	i	pub	binmode?	-	-
+M	IO	i	pub	isatty	-	-
 M	IO	i	pub	sysseek	-	-
-M	IO	i	pub	advise	-	-
+M	IO	i	pub	binmode?	-	-
 M	IO	i	pub	ioctl	-	-
-M	IO	i	pub	fcntl	-	-
+M	IO	i	pub	advise	-	-
 M	IO	i	pub	pid	-	-
-M	IO	i	pub	path	-	-
+M	IO	i	pub	fcntl	-	-
 M	IO	i	pub	external_encoding	-	-
 M	IO	i	pub	to_path	-	-
 M	IO	i	pub	set_encoding_by_bom	-	-
 M	IO	i	pub	internal_encoding	-	-
-M	IO	i	pub	autoclose=	-	-
+M	IO	i	pub	path	-	-
 M	IO	i	pub	autoclose?	-	-
-M	IO	i	pub	wait_readable	-	-
+M	IO	i	pub	autoclose=	-	-
 M	IO	i	pub	wait	-	-
-M	IO	i	pub	wait_priority	-	-
-M	IO	i	pub	wait_writable	-	-
+M	IO	i	pub	wait_readable	-	-
 M	IO	i	priv	initialize	-	-
 M	IO	i	priv	initialize_copy	-	-
 M	LoadError	i	pub	path	-	-
@@ -1220,6 +1220,7 @@ M	Process	s	pub	clock_getres	-	-
 M	Process	s	pub	pid	-	-
 M	Process	s	pub	setproctitle	-	-
 M	Process	s	pub	wait	-	-
+M	Process	i	priv	setpgid	-	-
 M	Process	i	priv	getsid	-	-
 M	Process	i	priv	setsid	-	-
 M	Process	i	priv	getpriority	-	-
@@ -1258,7 +1259,6 @@ M	Process	i	priv	ppid	-	-
 M	Process	i	priv	getpgrp	-	-
 M	Process	i	priv	setpgrp	-	-
 M	Process	i	priv	getpgid	-	-
-M	Process	i	priv	setpgid	-	-
 M	SystemCallError	s	pub	===	-	-
 M	SystemCallError	i	pub	errno	-	-
 M	SystemCallError	i	priv	initialize	-	-
@@ -1266,18 +1266,18 @@ M	Warning	s	pub	[]	-	-
 M	Warning	s	pub	[]=	-	-
 M	Warning	s	pub	categories	-	-
 M	Warning	i	pub	warn	-	-
-M	TrueClass	i	pub	^	-	-
+M	TrueClass	i	pub	to_s	-	-
+M	TrueClass	i	pub	===	-	-
 M	TrueClass	i	pub	inspect	to_s	-
 M	TrueClass	i	pub	|	-	-
-M	TrueClass	i	pub	===	-	-
 M	TrueClass	i	pub	&	-	-
-M	TrueClass	i	pub	to_s	-	-
-M	FalseClass	i	pub	^	-	-
+M	TrueClass	i	pub	^	-	-
+M	FalseClass	i	pub	to_s	-	-
+M	FalseClass	i	pub	===	-	-
 M	FalseClass	i	pub	inspect	to_s	-
 M	FalseClass	i	pub	|	-	-
-M	FalseClass	i	pub	===	-	-
 M	FalseClass	i	pub	&	-	-
-M	FalseClass	i	pub	to_s	-	-
+M	FalseClass	i	pub	^	-	-
 M	Encoding	s	pub	list	-	-
 M	Encoding	s	pub	name_list	-	-
 M	Encoding	s	pub	aliases	-	-
@@ -1289,21 +1289,22 @@ M	Encoding	s	pub	default_external=	-	-
 M	Encoding	s	pub	default_internal	-	-
 M	Encoding	s	pub	default_internal=	-	-
 M	Encoding	s	pub	locale_charmap	-	-
+M	Encoding	i	pub	names	-	-
 M	Encoding	i	pub	dummy?	-	-
 M	Encoding	i	pub	ascii_compatible?	-	-
 M	Encoding	i	pub	inspect	-	-
 M	Encoding	i	pub	to_s	name	-
 M	Encoding	i	pub	_dump	-	-
 M	Encoding	i	pub	name	-	-
-M	Encoding	i	pub	names	-	-
+M	Dir	s	pub	for_fd	-	-
 M	Dir	s	pub	exist?	-	-
 M	Dir	s	pub	foreach	-	-
 M	Dir	s	pub	entries	-	-
-M	Dir	s	pub	glob	-	-
 M	Dir	s	pub	delete	-	-
-M	Dir	s	pub	empty?	-	-
+M	Dir	s	pub	glob	-	-
 M	Dir	s	pub	scan	-	-
 M	Dir	s	pub	open	-	-
+M	Dir	s	pub	empty?	-	-
 M	Dir	s	pub	[]	-	-
 M	Dir	s	pub	each_child	-	-
 M	Dir	s	pub	children	-	-
@@ -1316,7 +1317,6 @@ M	Dir	s	pub	mkdir	-	-
 M	Dir	s	pub	rmdir	-	-
 M	Dir	s	pub	unlink	-	-
 M	Dir	s	pub	home	-	-
-M	Dir	s	pub	for_fd	-	-
 M	Dir	i	pub	rewind	-	-
 M	Dir	i	pub	pos	-	-
 M	Dir	i	pub	pos=	-	-
@@ -1334,13 +1334,14 @@ M	Dir	i	pub	chdir	-	-
 M	Dir	i	pub	tell	-	-
 M	Dir	i	pub	seek	-	-
 M	Dir	i	priv	initialize	-	-
+M	Comparable	i	pub	between?	-	-
 M	Comparable	i	pub	clamp	-	-
 M	Comparable	i	pub	<=	-	-
 M	Comparable	i	pub	>=	-	-
 M	Comparable	i	pub	==	-	-
 M	Comparable	i	pub	<	-	-
 M	Comparable	i	pub	>	-	-
-M	Comparable	i	pub	between?	-	-
+M	Enumerable	i	pub	max_by	-	-
 M	Enumerable	i	pub	minmax_by	-	-
 M	Enumerable	i	pub	member?	-	-
 M	Enumerable	i	pub	each_with_index	-	-
@@ -1364,9 +1365,9 @@ M	Enumerable	i	pub	sum	-	-
 M	Enumerable	i	pub	uniq	-	-
 M	Enumerable	i	pub	compact	-	-
 M	Enumerable	i	pub	include?	-	-
+M	Enumerable	i	pub	chain	-	-
 M	Enumerable	i	pub	lazy	-	-
 M	Enumerable	i	pub	to_set	-	-
-M	Enumerable	i	pub	chain	-	-
 M	Enumerable	i	pub	to_h	-	-
 M	Enumerable	i	pub	max	-	-
 M	Enumerable	i	pub	min	-	-
@@ -1401,9 +1402,8 @@ M	Enumerable	i	pub	one?	-	-
 M	Enumerable	i	pub	none?	-	-
 M	Enumerable	i	pub	minmax	-	-
 M	Enumerable	i	pub	min_by	-	-
-M	Enumerable	i	pub	max_by	-	-
-M	Enumerator	s	pub	product	-	-
 M	Enumerator	s	pub	produce	-	-
+M	Enumerator	s	pub	product	-	-
 M	Enumerator	i	pub	rewind	-	-
 M	Enumerator	i	pub	each_with_index	-	-
 M	Enumerator	i	pub	each	-	-
@@ -1411,18 +1411,18 @@ M	Enumerator	i	pub	with_index	-	-
 M	Enumerator	i	pub	with_object	-	-
 M	Enumerator	i	pub	each_with_object	-	-
 M	Enumerator	i	pub	next_values	-	-
-M	Enumerator	i	pub	peek_values	-	-
 M	Enumerator	i	pub	peek	-	-
 M	Enumerator	i	pub	feed	-	-
-M	Enumerator	i	pub	+	-	-
+M	Enumerator	i	pub	peek_values	-	-
 M	Enumerator	i	pub	size	-	-
 M	Enumerator	i	pub	inspect	-	-
+M	Enumerator	i	pub	+	-	-
 M	Enumerator	i	pub	next	-	-
 M	Enumerator	i	priv	initialize	-	-
 M	Enumerator	i	priv	initialize_copy	-	-
+M	UncaughtThrowError	i	pub	to_s	-	-
 M	UncaughtThrowError	i	pub	tag	-	-
 M	UncaughtThrowError	i	pub	value	-	-
-M	UncaughtThrowError	i	pub	to_s	-	-
 M	UncaughtThrowError	i	priv	initialize	-	-
 M	Time	s	pub	utc	-	-
 M	Time	s	pub	local	-	-
@@ -1434,8 +1434,8 @@ M	Time	s	priv	_load	-	-
 M	Time	i	pub	utc	-	-
 M	Time	i	pub	localtime	-	-
 M	Time	i	pub	gmtime	-	-
-M	Time	i	pub	getlocal	-	-
 M	Time	i	pub	<=>	-	-
+M	Time	i	pub	getlocal	-	-
 M	Time	i	pub	getgm	-	-
 M	Time	i	pub	getutc	-	-
 M	Time	i	pub	asctime	-	-
@@ -1455,13 +1455,13 @@ M	Time	i	pub	floor	-	-
 M	Time	i	pub	ceil	-	-
 M	Time	i	pub	round	-	-
 M	Time	i	pub	tv_sec	-	-
-M	Time	i	pub	tv_usec	-	-
 M	Time	i	pub	eql?	-	-
+M	Time	i	pub	saturday?	-	-
 M	Time	i	pub	strftime	-	-
 M	Time	i	pub	deconstruct_keys	-	-
 M	Time	i	pub	tv_nsec	-	-
-M	Time	i	pub	saturday?	-	-
 M	Time	i	pub	xmlschema	-	-
+M	Time	i	pub	tv_usec	-	-
 M	Time	i	pub	iso8601	xmlschema	-
 M	Time	i	pub	+	-	-
 M	Time	i	pub	-	-	-
@@ -1493,22 +1493,24 @@ M	Time	i	priv	initialize_copy	-	-
 M	Time	i	priv	_dump	-	-
 M	StopIteration	i	pub	result	-	-
 M	Ractor	s	pub	recv	receive	-
-M	Ractor	s	pub	shareable?	-	-
 M	Ractor	s	pub	main	-	-
-M	Ractor	s	pub	store_if_absent	-	-
+M	Ractor	s	pub	shareable?	-	-
 M	Ractor	s	pub	new	-	-
 M	Ractor	s	pub	count	-	-
-M	Ractor	s	pub	_require	-	-
 M	Ractor	s	pub	main?	-	-
+M	Ractor	s	pub	store_if_absent	-	-
 M	Ractor	s	pub	select	-	-
+M	Ractor	s	pub	_require	-	-
 M	Ractor	s	pub	shareable_proc	-	-
-M	Ractor	s	pub	shareable_lambda	-	-
 M	Ractor	s	pub	[]	-	-
 M	Ractor	s	pub	[]=	-	-
+M	Ractor	s	pub	shareable_lambda	-	-
 M	Ractor	s	pub	receive	-	-
 M	Ractor	s	pub	make_shareable	-	-
 M	Ractor	s	pub	current	-	-
 M	Ractor	s	priv	_activated	-	-
+M	Ractor	i	pub	unmonitor	-	-
+M	Ractor	i	pub	monitor	-	-
 M	Ractor	i	pub	default_port	-	-
 M	Ractor	i	pub	join	-	-
 M	Ractor	i	pub	send	-	-
@@ -1520,8 +1522,6 @@ M	Ractor	i	pub	[]=	-	-
 M	Ractor	i	pub	inspect	-	-
 M	Ractor	i	pub	value	-	-
 M	Ractor	i	pub	to_s	inspect	-
-M	Ractor	i	pub	unmonitor	-	-
-M	Ractor	i	pub	monitor	-	-
 M	Ractor	i	priv	recv	receive	-
 M	Ractor	i	priv	receive	-	-
 M	Numeric	i	pub	+@	-	-
@@ -1539,8 +1539,8 @@ M	Numeric	i	pub	floor	-	-
 M	Numeric	i	pub	ceil	-	-
 M	Numeric	i	pub	round	-	-
 M	Numeric	i	pub	truncate	-	-
-M	Numeric	i	pub	step	-	-
 M	Numeric	i	pub	eql?	-	-
+M	Numeric	i	pub	step	-	-
 M	Numeric	i	pub	positive?	-	-
 M	Numeric	i	pub	negative?	-	-
 M	Numeric	i	pub	numerator	-	-
@@ -1577,12 +1577,12 @@ M	FileTest	s	pub	directory?	-	-
 M	FileTest	s	pub	exist?	-	-
 M	FileTest	s	pub	readable?	-	-
 M	FileTest	s	pub	readable_real?	-	-
-M	FileTest	s	pub	world_readable?	-	-
 M	FileTest	s	pub	empty?	-	-
-M	FileTest	s	pub	writable_real?	-	-
 M	FileTest	s	pub	writable?	-	-
-M	FileTest	s	pub	executable?	-	-
+M	FileTest	s	pub	world_readable?	-	-
 M	FileTest	s	pub	world_writable?	-	-
+M	FileTest	s	pub	writable_real?	-	-
+M	FileTest	s	pub	file?	-	-
 M	FileTest	s	pub	size?	-	-
 M	FileTest	s	pub	owned?	-	-
 M	FileTest	s	pub	grpowned?	-	-
@@ -1592,23 +1592,23 @@ M	FileTest	s	pub	socket?	-	-
 M	FileTest	s	pub	blockdev?	-	-
 M	FileTest	s	pub	chardev?	-	-
 M	FileTest	s	pub	executable_real?	-	-
-M	FileTest	s	pub	file?	-	-
-M	FileTest	s	pub	setgid?	-	-
 M	FileTest	s	pub	setuid?	-	-
-M	FileTest	s	pub	identical?	-	-
+M	FileTest	s	pub	setgid?	-	-
 M	FileTest	s	pub	sticky?	-	-
+M	FileTest	s	pub	executable?	-	-
+M	FileTest	s	pub	identical?	-	-
 M	FileTest	i	priv	size	-	-
 M	FileTest	i	priv	zero?	-	-
 M	FileTest	i	priv	directory?	-	-
 M	FileTest	i	priv	exist?	-	-
 M	FileTest	i	priv	readable?	-	-
 M	FileTest	i	priv	readable_real?	-	-
-M	FileTest	i	priv	world_readable?	-	-
 M	FileTest	i	priv	empty?	-	-
-M	FileTest	i	priv	writable_real?	-	-
 M	FileTest	i	priv	writable?	-	-
-M	FileTest	i	priv	executable?	-	-
+M	FileTest	i	priv	world_readable?	-	-
 M	FileTest	i	priv	world_writable?	-	-
+M	FileTest	i	priv	writable_real?	-	-
+M	FileTest	i	priv	file?	-	-
 M	FileTest	i	priv	size?	-	-
 M	FileTest	i	priv	owned?	-	-
 M	FileTest	i	priv	grpowned?	-	-
@@ -1618,23 +1618,23 @@ M	FileTest	i	priv	socket?	-	-
 M	FileTest	i	priv	blockdev?	-	-
 M	FileTest	i	priv	chardev?	-	-
 M	FileTest	i	priv	executable_real?	-	-
-M	FileTest	i	priv	file?	-	-
-M	FileTest	i	priv	setgid?	-	-
 M	FileTest	i	priv	setuid?	-	-
-M	FileTest	i	priv	identical?	-	-
+M	FileTest	i	priv	setgid?	-	-
 M	FileTest	i	priv	sticky?	-	-
+M	FileTest	i	priv	executable?	-	-
+M	FileTest	i	priv	identical?	-	-
 M	File	s	pub	delete	-	-
 M	File	s	pub	zero?	-	-
 M	File	s	pub	directory?	-	-
 M	File	s	pub	exist?	-	-
 M	File	s	pub	readable?	-	-
 M	File	s	pub	readable_real?	-	-
-M	File	s	pub	world_readable?	-	-
 M	File	s	pub	empty?	-	-
-M	File	s	pub	writable_real?	-	-
 M	File	s	pub	writable?	-	-
-M	File	s	pub	executable?	-	-
+M	File	s	pub	world_readable?	-	-
 M	File	s	pub	world_writable?	-	-
+M	File	s	pub	writable_real?	-	-
+M	File	s	pub	file?	-	-
 M	File	s	pub	size?	-	-
 M	File	s	pub	owned?	-	-
 M	File	s	pub	grpowned?	-	-
@@ -1644,34 +1644,34 @@ M	File	s	pub	socket?	-	-
 M	File	s	pub	blockdev?	-	-
 M	File	s	pub	chardev?	-	-
 M	File	s	pub	executable_real?	-	-
-M	File	s	pub	file?	-	-
-M	File	s	pub	setgid?	-	-
 M	File	s	pub	setuid?	-	-
-M	File	s	pub	identical?	-	-
+M	File	s	pub	setgid?	-	-
 M	File	s	pub	sticky?	-	-
-M	File	s	pub	lstat	-	-
+M	File	s	pub	executable?	-	-
 M	File	s	pub	stat	-	-
-M	File	s	pub	atime	-	-
+M	File	s	pub	identical?	-	-
 M	File	s	pub	ftype	-	-
-M	File	s	pub	ctime	-	-
+M	File	s	pub	lstat	-	-
 M	File	s	pub	mtime	-	-
-M	File	s	pub	utime	-	-
+M	File	s	pub	atime	-	-
 M	File	s	pub	birthtime	-	-
-M	File	s	pub	chown	-	-
+M	File	s	pub	ctime	-	-
 M	File	s	pub	chmod	-	-
-M	File	s	pub	lchown	-	-
+M	File	s	pub	utime	-	-
 M	File	s	pub	lchmod	-	-
-M	File	s	pub	link	-	-
+M	File	s	pub	chown	-	-
 M	File	s	pub	lutime	-	-
-M	File	s	pub	readlink	-	-
+M	File	s	pub	lchown	-	-
 M	File	s	pub	symlink	-	-
-M	File	s	pub	rename	-	-
+M	File	s	pub	link	-	-
 M	File	s	pub	unlink	-	-
-M	File	s	pub	mkfifo	-	-
-M	File	s	pub	size	-	-
-M	File	s	pub	absolute_path	-	-
-M	File	s	pub	expand_path	-	-
+M	File	s	pub	readlink	-	-
 M	File	s	pub	umask	-	-
+M	File	s	pub	rename	-	-
+M	File	s	pub	size	-	-
+M	File	s	pub	mkfifo	-	-
+M	File	s	pub	expand_path	-	-
+M	File	s	pub	absolute_path	-	-
 M	File	s	pub	absolute_path?	-	-
 M	File	s	pub	realpath	-	-
 M	File	s	pub	truncate	-	-
@@ -1684,6 +1684,7 @@ M	File	s	pub	fnmatch	-	-
 M	File	s	pub	fnmatch?	-	-
 M	File	s	pub	join	-	-
 M	File	s	pub	path	-	-
+M	File	i	pub	atime	-	-
 M	File	i	pub	mtime	-	-
 M	File	i	pub	ctime	-	-
 M	File	i	pub	birthtime	-	-
@@ -1693,7 +1694,6 @@ M	File	i	pub	chown	-	-
 M	File	i	pub	truncate	-	-
 M	File	i	pub	flock	-	-
 M	File	i	pub	lstat	-	-
-M	File	i	pub	atime	-	-
 M	File	i	priv	initialize	-	-
 M	RubyVM	s	pub	stat	-	-
 M	RubyVM	s	pub	keep_script_lines	-	-
@@ -1759,8 +1759,8 @@ M	Thread	i	pub	pending_interrupt?	-	-
 M	Thread	i	pub	terminate	-	-
 M	Thread	i	pub	run	-	-
 M	Thread	i	pub	wakeup	-	-
-M	Thread	i	pub	[]=	-	-
 M	Thread	i	pub	[]	-	-
+M	Thread	i	pub	[]=	-	-
 M	Thread	i	pub	priority=	-	-
 M	Thread	i	pub	keys	-	-
 M	Thread	i	pub	thread_variables	-	-
@@ -1797,10 +1797,10 @@ M	Integer	i	pub	>=	-	-
 M	Integer	i	pub	==	-	-
 M	Integer	i	pub	===	-	-
 M	Integer	i	pub	coerce	-	-
+M	Integer	i	pub	[]	-	-
 M	Integer	i	pub	modulo	-	-
 M	Integer	i	pub	remainder	-	-
 M	Integer	i	pub	abs	-	-
-M	Integer	i	pub	[]	-	-
 M	Integer	i	pub	magnitude	abs	-
 M	Integer	i	pub	zero?	-	-
 M	Integer	i	pub	floor	-	-
@@ -1818,9 +1818,9 @@ M	Integer	i	pub	nobits?	-	-
 M	Integer	i	pub	downto	-	-
 M	Integer	i	pub	pred	-	-
 M	Integer	i	pub	%	-	-
-M	Integer	i	pub	&	-	-
-M	Integer	i	pub	digits	-	-
 M	Integer	i	pub	pow	-	-
+M	Integer	i	pub	digits	-	-
+M	Integer	i	pub	&	-	-
 M	Integer	i	pub	*	-	-
 M	Integer	i	pub	+	-	-
 M	Integer	i	pub	-	-	-
@@ -1874,10 +1874,10 @@ M	Struct	i	pub	dig	-	-
 M	Struct	i	pub	deconstruct	-	-
 M	Struct	i	pub	each	-	-
 M	Struct	i	pub	==	-	-
-M	Struct	i	pub	each_pair	-	-
-M	Struct	i	pub	values	-	-
 M	Struct	i	pub	[]	-	-
+M	Struct	i	pub	values	-	-
 M	Struct	i	pub	[]=	-	-
+M	Struct	i	pub	each_pair	-	-
 M	Struct	i	pub	to_a	-	-
 M	Struct	i	pub	to_s	inspect	-
 M	Struct	i	pub	eql?	-	-
@@ -1913,18 +1913,18 @@ M	Complex	i	pub	polar	-	-
 M	Complex	i	pub	real	-	-
 M	Complex	i	pub	imaginary	-	-
 M	Complex	i	pub	imag	-	-
-M	Complex	i	pub	+	-	-
 M	Complex	i	pub	-	-	-
-M	Complex	i	pub	angle	-	-
+M	Complex	i	pub	+	-	-
 M	Complex	i	pub	/	-	-
 M	Complex	i	pub	*	-	-
-M	Complex	i	pub	conj	-	-
-M	Complex	i	pub	abs2	-	-
-M	Complex	i	pub	inspect	-	-
+M	Complex	i	pub	angle	-	-
 M	Complex	i	pub	phase	-	-
-M	Complex	i	pub	conjugate	-	-
-M	Complex	i	pub	finite?	-	-
+M	Complex	i	pub	abs2	-	-
+M	Complex	i	pub	conj	-	-
 M	Complex	i	pub	hash	-	-
+M	Complex	i	pub	conjugate	-	-
+M	Complex	i	pub	inspect	-	-
+M	Complex	i	pub	finite?	-	-
 M	Complex	i	pub	infinite?	-	-
 M	Complex	i	pub	rationalize	-	-
 M	Complex	i	pub	to_c	-	-
@@ -1938,11 +1938,11 @@ M	Complex	i	priv	marshal_dump	-	-
 M	Float	i	pub	-@	-	-
 M	Float	i	pub	**	-	-
 M	Float	i	pub	<=>	-	-
-M	Float	i	pub	coerce	-	-
 M	Float	i	pub	<=	-	-
-M	Float	i	pub	==	-	-
-M	Float	i	pub	===	-	-
+M	Float	i	pub	coerce	-	-
 M	Float	i	pub	>=	-	-
+M	Float	i	pub	===	-	-
+M	Float	i	pub	==	-	-
 M	Float	i	pub	modulo	-	-
 M	Float	i	pub	abs	-	-
 M	Float	i	pub	magnitude	abs	-
@@ -1951,18 +1951,19 @@ M	Float	i	pub	floor	-	-
 M	Float	i	pub	ceil	-	-
 M	Float	i	pub	round	-	-
 M	Float	i	pub	truncate	-	-
-M	Float	i	pub	numerator	-	-
 M	Float	i	pub	eql?	-	-
-M	Float	i	pub	rationalize	-	-
 M	Float	i	pub	denominator	-	-
-M	Float	i	pub	positive?	-	-
+M	Float	i	pub	rationalize	-	-
 M	Float	i	pub	negative?	-	-
+M	Float	i	pub	positive?	-	-
+M	Float	i	pub	numerator	-	-
 M	Float	i	pub	arg	-	-
 M	Float	i	pub	%	-	-
 M	Float	i	pub	*	-	-
 M	Float	i	pub	+	-	-
 M	Float	i	pub	-	-	-
 M	Float	i	pub	angle	-	-
+M	Float	i	pub	phase	-	-
 M	Float	i	pub	/	-	-
 M	Float	i	pub	hash	-	-
 M	Float	i	pub	inspect	to_s	-
@@ -1972,7 +1973,6 @@ M	Float	i	pub	finite?	-	-
 M	Float	i	pub	next_float	-	-
 M	Float	i	pub	prev_float	-	-
 M	Float	i	pub	<	-	-
-M	Float	i	pub	phase	-	-
 M	Float	i	pub	>	-	-
 M	Float	i	pub	to_int	-	-
 M	Float	i	pub	to_s	-	-
@@ -1998,42 +1998,43 @@ M	Data	i	priv	initialize_copy	-	-
 M	Regexp	s	pub	compile	-	-
 M	Regexp	s	pub	quote	-	-
 M	Regexp	s	pub	escape	-	-
-M	Regexp	s	pub	last_match	-	-
 M	Regexp	s	pub	try_convert	-	-
+M	Regexp	s	pub	last_match	-	-
 M	Regexp	s	pub	linear_time?	-	-
 M	Regexp	s	pub	union	-	-
 M	Regexp	s	pub	timeout	-	-
 M	Regexp	s	pub	timeout=	-	-
-M	Regexp	i	pub	timeout	-	-
+M	Regexp	i	pub	named_captures	-	-
 M	Regexp	i	pub	match	-	-
-M	Regexp	i	pub	match?	-	-
 M	Regexp	i	pub	==	-	-
-M	Regexp	i	pub	=~	-	-
+M	Regexp	i	pub	match?	-	-
 M	Regexp	i	pub	===	-	-
-M	Regexp	i	pub	hash	-	-
 M	Regexp	i	pub	encoding	-	-
-M	Regexp	i	pub	inspect	-	-
+M	Regexp	i	pub	hash	-	-
 M	Regexp	i	pub	names	-	-
+M	Regexp	i	pub	inspect	-	-
+M	Regexp	i	pub	=~	-	-
 M	Regexp	i	pub	source	-	-
 M	Regexp	i	pub	to_s	-	-
 M	Regexp	i	pub	casefold?	-	-
 M	Regexp	i	pub	options	-	-
 M	Regexp	i	pub	fixed_encoding?	-	-
-M	Regexp	i	pub	named_captures	-	-
 M	Regexp	i	pub	eql?	-	-
+M	Regexp	i	pub	timeout	-	-
 M	Regexp	i	pub	~	-	-
 M	Regexp	i	priv	initialize_copy	-	-
 M	Regexp	i	priv	initialize	-	-
 M	Pathname	s	pub	getwd	-	-
-M	Pathname	s	pub	glob	-	-
 M	Pathname	s	pub	pwd	getwd	-
+M	Pathname	s	pub	glob	-	-
 M	Pathname	i	pub	delete	unlink	-
 M	Pathname	i	pub	each_line	-	-
 M	Pathname	i	pub	read	-	-
 M	Pathname	i	pub	open	-	-
 M	Pathname	i	pub	+	-	-
-M	Pathname	i	pub	mkpath	-	-
 M	Pathname	i	pub	/	+	-
+M	Pathname	i	pub	readlines	-	-
+M	Pathname	i	pub	mkpath	-	-
 M	Pathname	i	pub	parent	-	-
 M	Pathname	i	pub	cleanpath	-	-
 M	Pathname	i	pub	mountpoint?	-	-
@@ -2041,10 +2042,9 @@ M	Pathname	i	pub	relative?	-	-
 M	Pathname	i	pub	each_filename	-	-
 M	Pathname	i	pub	descend	-	-
 M	Pathname	i	pub	ascend	-	-
+M	Pathname	i	pub	sysopen	-	-
 M	Pathname	i	pub	binread	-	-
 M	Pathname	i	pub	binwrite	-	-
-M	Pathname	i	pub	sysopen	-	-
-M	Pathname	i	pub	readlines	-	-
 M	Pathname	i	pub	write	-	-
 M	Pathname	i	pub	relative_path_from	-	-
 M	Pathname	i	pub	each_child	-	-
@@ -2069,12 +2069,12 @@ M	Pathname	i	pub	readable?	-	-
 M	Pathname	i	pub	readable_real?	-	-
 M	Pathname	i	pub	world_readable?	-	-
 M	Pathname	i	pub	truncate	-	-
-M	Pathname	i	pub	empty?	-	-
 M	Pathname	i	pub	eql?	==	-
+M	Pathname	i	pub	world_writable?	-	-
+M	Pathname	i	pub	empty?	-	-
 M	Pathname	i	pub	executable?	-	-
 M	Pathname	i	pub	executable_real?	-	-
 M	Pathname	i	pub	file?	-	-
-M	Pathname	i	pub	size?	-	-
 M	Pathname	i	pub	owned?	-	-
 M	Pathname	i	pub	grpowned?	-	-
 M	Pathname	i	pub	pipe?	-	-
@@ -2084,8 +2084,8 @@ M	Pathname	i	pub	blockdev?	-	-
 M	Pathname	i	pub	chardev?	-	-
 M	Pathname	i	pub	setuid?	-	-
 M	Pathname	i	pub	setgid?	-	-
+M	Pathname	i	pub	size?	-	-
 M	Pathname	i	pub	sticky?	-	-
-M	Pathname	i	pub	world_writable?	-	-
 M	Pathname	i	pub	stat	-	-
 M	Pathname	i	pub	lstat	-	-
 M	Pathname	i	pub	ftype	-	-
@@ -2099,24 +2099,24 @@ M	Pathname	i	pub	root?	-	-
 M	Pathname	i	pub	absolute?	-	-
 M	Pathname	i	pub	chmod	-	-
 M	Pathname	i	pub	chown	-	-
-M	Pathname	i	pub	lchmod	-	-
+M	Pathname	i	pub	rename	-	-
 M	Pathname	i	pub	birthtime	-	-
 M	Pathname	i	pub	utime	-	-
-M	Pathname	i	pub	rename	-	-
-M	Pathname	i	pub	realpath	-	-
-M	Pathname	i	pub	basename	-	-
-M	Pathname	i	pub	lchown	-	-
-M	Pathname	i	pub	dirname	-	-
-M	Pathname	i	pub	extname	-	-
 M	Pathname	i	pub	expand_path	-	-
+M	Pathname	i	pub	realpath	-	-
+M	Pathname	i	pub	lchmod	-	-
+M	Pathname	i	pub	lchown	-	-
+M	Pathname	i	pub	extname	-	-
+M	Pathname	i	pub	basename	-	-
+M	Pathname	i	pub	dirname	-	-
+M	Pathname	i	pub	readlink	-	-
 M	Pathname	i	pub	zero?	-	-
 M	Pathname	i	pub	ctime	-	-
 M	Pathname	i	pub	realdirpath	-	-
-M	Pathname	i	pub	readlink	-	-
+M	Pathname	i	pub	size	-	-
 M	Pathname	i	pub	writable?	-	-
 M	Pathname	i	pub	writable_real?	-	-
 M	Pathname	i	pub	lutime	-	-
-M	Pathname	i	pub	size	-	-
 M	Pathname	i	pub	to_s	-	-
 M	Pathname	i	pub	unlink	-	-
 M	Pathname	i	pub	split	-	-
@@ -2147,15 +2147,15 @@ M	MatchData	i	pub	begin	-	-
 M	MatchData	i	pub	end	-	-
 M	MatchData	i	pub	match_length	-	-
 M	MatchData	i	pub	captures	-	-
-M	MatchData	i	pub	pre_match	-	-
+M	MatchData	i	pub	post_match	-	-
 M	MatchData	i	pub	names	-	-
-M	MatchData	i	pub	string	-	-
 M	MatchData	i	pub	[]	-	-
 M	MatchData	i	pub	==	-	-
-M	MatchData	i	pub	integer_at	-	-
-M	MatchData	i	pub	post_match	-	-
+M	MatchData	i	pub	string	-	-
+M	MatchData	i	pub	pre_match	-	-
 M	MatchData	i	pub	to_a	-	-
 M	MatchData	i	pub	to_s	-	-
+M	MatchData	i	pub	integer_at	-	-
 M	MatchData	i	pub	eql?	-	-
 M	MatchData	i	pub	deconstruct_keys	-	-
 M	MatchData	i	pub	match	-	-
@@ -2170,19 +2170,19 @@ M	Proc	i	pub	refined	-	-
 M	Proc	i	pub	lambda?	-	-
 M	Proc	i	pub	binding	-	-
 M	Proc	i	pub	curry	-	-
-M	Proc	i	pub	<<	-	-
-M	Proc	i	pub	clone	-	-
-M	Proc	i	pub	source_range	-	-
 M	Proc	i	pub	>>	-	-
-M	Proc	i	pub	===	-	-
-M	Proc	i	pub	parameters	-	-
+M	Proc	i	pub	clone	-	-
 M	Proc	i	pub	==	-	-
-M	Proc	i	pub	syntax_tree	-	-
+M	Proc	i	pub	===	-	-
+M	Proc	i	pub	<<	-	-
+M	Proc	i	pub	parameters	-	-
+M	Proc	i	pub	source_location	-	-
 M	Proc	i	pub	[]	-	-
 M	Proc	i	pub	dup	-	-
-M	Proc	i	pub	source_location	-	-
+M	Proc	i	pub	syntax_tree	-	-
 M	Proc	i	pub	to_proc	-	-
 M	Proc	i	pub	to_s	-	-
+M	Proc	i	pub	source_range	-	-
 M	Proc	i	pub	eql?	-	-
 M	Proc	i	pub	call	-	-
 M	Proc	i	pub	yield	-	-
@@ -2192,49 +2192,49 @@ M	Proc	i	pub	ruby2_keywords	-	-
 M	LocalJumpError	i	pub	exit_value	-	-
 M	LocalJumpError	i	pub	reason	-	-
 M	Method	i	pub	arity	-	-
-M	Method	i	pub	curry	-	-
 M	Method	i	pub	<<	-	-
+M	Method	i	pub	curry	-	-
+M	Method	i	pub	>>	-	-
 M	Method	i	pub	clone	-	-
-M	Method	i	pub	source_range	-	-
 M	Method	i	pub	==	-	-
 M	Method	i	pub	===	-	-
+M	Method	i	pub	source_range	-	-
 M	Method	i	pub	parameters	-	-
-M	Method	i	pub	>>	-	-
-M	Method	i	pub	syntax_tree	-	-
+M	Method	i	pub	source_location	-	-
+M	Method	i	pub	[]	-	-
+M	Method	i	pub	original_name	-	-
 M	Method	i	pub	dup	-	-
 M	Method	i	pub	owner	-	-
-M	Method	i	pub	unbind	-	-
-M	Method	i	pub	[]	-	-
 M	Method	i	pub	to_proc	-	-
-M	Method	i	pub	to_s	-	-
-M	Method	i	pub	source_location	-	-
-M	Method	i	pub	box	-	-
 M	Method	i	pub	super_method	-	-
-M	Method	i	pub	original_name	-	-
+M	Method	i	pub	unbind	-	-
+M	Method	i	pub	to_s	-	-
+M	Method	i	pub	box	-	-
+M	Method	i	pub	syntax_tree	-	-
 M	Method	i	pub	eql?	-	-
 M	Method	i	pub	call	-	-
 M	Method	i	pub	name	-	-
 M	Method	i	pub	receiver	-	-
 M	Method	i	pub	hash	-	-
 M	Method	i	pub	inspect	-	-
+M	TracePoint	s	pub	new	-	-
 M	TracePoint	s	pub	trace	-	-
 M	TracePoint	s	pub	allow_reentry	-	-
 M	TracePoint	s	pub	stat	-	-
-M	TracePoint	s	pub	new	-	-
 M	TracePoint	i	pub	event	-	-
 M	TracePoint	i	pub	method_id	-	-
 M	TracePoint	i	pub	callee_id	-	-
 M	TracePoint	i	pub	defined_class	-	-
-M	TracePoint	i	pub	binding	-	-
 M	TracePoint	i	pub	return_value	-	-
-M	TracePoint	i	pub	raised_exception	-	-
+M	TracePoint	i	pub	binding	-	-
 M	TracePoint	i	pub	path	-	-
 M	TracePoint	i	pub	parameters	-	-
+M	TracePoint	i	pub	raised_exception	-	-
 M	TracePoint	i	pub	eval_script	-	-
 M	TracePoint	i	pub	self	-	-
 M	TracePoint	i	pub	instruction_sequence	-	-
-M	TracePoint	i	pub	lineno	-	-
 M	TracePoint	i	pub	inspect	-	-
+M	TracePoint	i	pub	lineno	-	-
 M	TracePoint	i	pub	enable	-	-
 M	TracePoint	i	pub	disable	-	-
 M	TracePoint	i	pub	enabled?	-	-
@@ -2251,12 +2251,12 @@ M	Set	i	pub	===	include?	-
 M	Set	i	pub	merge	-	-
 M	Set	i	pub	include?	-	-
 M	Set	i	pub	empty?	-	-
+M	Set	i	pub	eql?	==	-
 M	Set	i	pub	compare_by_identity	-	-
 M	Set	i	pub	compare_by_identity?	-	-
 M	Set	i	pub	to_set	-	-
-M	Set	i	pub	eql?	==	-
-M	Set	i	pub	replace	-	-
 M	Set	i	pub	&	-	-
+M	Set	i	pub	replace	-	-
 M	Set	i	pub	+	|	-
 M	Set	i	pub	-	-	-
 M	Set	i	pub	hash	-	-
@@ -2272,17 +2272,16 @@ M	Set	i	pub	to_s	inspect	-
 M	Set	i	pub	add?	-	-
 M	Set	i	pub	classify	-	-
 M	Set	i	pub	union	|	-
-M	Set	i	pub	difference	-	-
-M	Set	i	pub	intersection	&	-
-M	Set	i	pub	proper_subset?	-	-
-M	Set	i	pub	^	-	-
-M	Set	i	pub	divide	-	-
 M	Set	i	pub	delete?	-	-
+M	Set	i	pub	intersection	&	-
+M	Set	i	pub	^	-	-
+M	Set	i	pub	intersect?	-	-
+M	Set	i	pub	divide	-	-
+M	Set	i	pub	proper_subset?	-	-
 M	Set	i	pub	add	-	-
 M	Set	i	pub	reset	-	-
-M	Set	i	pub	intersect?	-	-
+M	Set	i	pub	subset?	-	-
 M	Set	i	pub	proper_superset?	-	-
-M	Set	i	pub	disjoint?	-	-
 M	Set	i	pub	join	-	-
 M	Set	i	pub	subtract	-	-
 M	Set	i	pub	superset?	-	-
@@ -2291,9 +2290,10 @@ M	Set	i	pub	map!	collect!	-
 M	Set	i	pub	select!	-	-
 M	Set	i	pub	filter!	select!	-
 M	Set	i	pub	keep_if	-	-
-M	Set	i	pub	subset?	-	-
+M	Set	i	pub	difference	-	-
 M	Set	i	pub	delete_if	-	-
 M	Set	i	pub	reject!	-	-
+M	Set	i	pub	disjoint?	-	-
 M	Set	i	pub	flatten	-	-
 M	Set	i	pub	flatten!	-	-
 M	Set	i	pub	|	-	-
@@ -2302,25 +2302,25 @@ M	Set	i	priv	initialize_copy	-	-
 M	UnboundMethod	i	pub	arity	-	-
 M	UnboundMethod	i	pub	name	-	-
 M	UnboundMethod	i	pub	clone	-	-
-M	UnboundMethod	i	pub	source_range	-	-
 M	UnboundMethod	i	pub	==	-	-
-M	UnboundMethod	i	pub	parameters	-	-
 M	UnboundMethod	i	pub	source_location	-	-
+M	UnboundMethod	i	pub	source_range	-	-
+M	UnboundMethod	i	pub	parameters	-	-
 M	UnboundMethod	i	pub	syntax_tree	-	-
-M	UnboundMethod	i	pub	hash	-	-
+M	UnboundMethod	i	pub	original_name	-	-
 M	UnboundMethod	i	pub	dup	-	-
 M	UnboundMethod	i	pub	inspect	-	-
-M	UnboundMethod	i	pub	original_name	-	-
+M	UnboundMethod	i	pub	hash	-	-
 M	UnboundMethod	i	pub	owner	-	-
 M	UnboundMethod	i	pub	to_s	-	-
 M	UnboundMethod	i	pub	bind	-	-
-M	UnboundMethod	i	pub	bind_call	-	-
 M	UnboundMethod	i	pub	eql?	-	-
+M	UnboundMethod	i	pub	bind_call	-	-
 M	UnboundMethod	i	pub	super_method	-	-
+M	ThreadGroup	i	pub	enclose	-	-
 M	ThreadGroup	i	pub	enclosed?	-	-
 M	ThreadGroup	i	pub	add	-	-
 M	ThreadGroup	i	pub	list	-	-
-M	ThreadGroup	i	pub	enclose	-	-
 M	Binding	i	pub	local_variable_get	-	-
 M	Binding	i	pub	local_variable_set	-	-
 M	Binding	i	pub	local_variable_defined?	-	-
@@ -2334,13 +2334,13 @@ M	Binding	i	pub	irb	-	-
 M	Binding	i	pub	receiver	-	-
 M	Binding	i	pub	dup	-	-
 M	Binding	i	pub	local_variables	-	-
+M	Thread::Mutex	i	pub	sleep	-	-
 M	Thread::Mutex	i	pub	owned?	-	-
 M	Thread::Mutex	i	pub	locked?	-	-
 M	Thread::Mutex	i	pub	lock	-	-
 M	Thread::Mutex	i	pub	try_lock	-	-
 M	Thread::Mutex	i	pub	unlock	-	-
 M	Thread::Mutex	i	pub	synchronize	-	-
-M	Thread::Mutex	i	pub	sleep	-	-
 M	Thread::Mutex	i	priv	initialize	-	-
 M	Thread::Queue	i	pub	pop	-	-
 M	Thread::Queue	i	pub	shift	pop	-
@@ -2349,15 +2349,16 @@ M	Thread::Queue	i	pub	length	-	-
 M	Thread::Queue	i	pub	<<	push	-
 M	Thread::Queue	i	pub	close	-	-
 M	Thread::Queue	i	pub	closed?	-	-
-M	Thread::Queue	i	pub	deq	pop	-
 M	Thread::Queue	i	pub	marshal_dump	-	-
-M	Thread::Queue	i	pub	enq	push	-
+M	Thread::Queue	i	pub	deq	pop	-
 M	Thread::Queue	i	pub	clear	-	-
+M	Thread::Queue	i	pub	enq	push	-
 M	Thread::Queue	i	pub	num_waiting	-	-
 M	Thread::Queue	i	pub	freeze	-	-
 M	Thread::Queue	i	pub	empty?	-	-
 M	Thread::Queue	i	pub	push	-	-
 M	Thread::Queue	i	priv	initialize	-	-
+M	Math	s	pub	ldexp	-	-
 M	Math	s	pub	hypot	-	-
 M	Math	s	pub	erf	-	-
 M	Math	s	pub	erfc	-	-
@@ -2385,7 +2386,7 @@ M	Math	s	pub	log10	-	-
 M	Math	s	pub	log1p	-	-
 M	Math	s	pub	cbrt	-	-
 M	Math	s	pub	frexp	-	-
-M	Math	s	pub	ldexp	-	-
+M	Math	i	priv	ldexp	-	-
 M	Math	i	priv	hypot	-	-
 M	Math	i	priv	erf	-	-
 M	Math	i	priv	erfc	-	-
@@ -2413,21 +2414,20 @@ M	Math	i	priv	log10	-	-
 M	Math	i	priv	log1p	-	-
 M	Math	i	priv	cbrt	-	-
 M	Math	i	priv	frexp	-	-
-M	Math	i	priv	ldexp	-	-
 M	Thread::ConditionVariable	i	pub	marshal_dump	-	-
 M	Thread::ConditionVariable	i	pub	wait	-	-
-M	Thread::ConditionVariable	i	pub	broadcast	-	-
 M	Thread::ConditionVariable	i	pub	signal	-	-
+M	Thread::ConditionVariable	i	pub	broadcast	-	-
 M	Thread::ConditionVariable	i	priv	initialize	-	-
+M	Thread::Monitor	i	pub	try_enter	-	-
+M	Thread::Monitor	i	pub	enter	-	-
 M	Thread::Monitor	i	pub	mon_check_owner	-	-
 M	Thread::Monitor	i	pub	mon_locked?	-	-
 M	Thread::Monitor	i	pub	mon_owned?	-	-
 M	Thread::Monitor	i	pub	wait_for_cond	-	-
-M	Thread::Monitor	i	pub	new_cond	-	-
 M	Thread::Monitor	i	pub	exit	-	-
+M	Thread::Monitor	i	pub	new_cond	-	-
 M	Thread::Monitor	i	pub	synchronize	-	-
-M	Thread::Monitor	i	pub	try_enter	-	-
-M	Thread::Monitor	i	pub	enter	-	-
 M	Signal	s	pub	trap	-	-
 M	Signal	s	pub	signame	-	-
 M	Signal	s	pub	list	-	-
@@ -2440,8 +2440,8 @@ M	Thread::SizedQueue	i	pub	<<	push	-
 M	Thread::SizedQueue	i	pub	close	-	-
 M	Thread::SizedQueue	i	pub	max	-	-
 M	Thread::SizedQueue	i	pub	deq	pop	-
-M	Thread::SizedQueue	i	pub	enq	push	-
 M	Thread::SizedQueue	i	pub	clear	-	-
+M	Thread::SizedQueue	i	pub	enq	push	-
 M	Thread::SizedQueue	i	pub	num_waiting	-	-
 M	Thread::SizedQueue	i	pub	max=	-	-
 M	Thread::SizedQueue	i	pub	push	-	-
@@ -2469,6 +2469,22 @@ M	Fiber	i	pub	raise	-	-
 M	Fiber	i	pub	alive?	-	-
 M	Fiber	i	pub	transfer	-	-
 M	Fiber	i	priv	initialize	-	-
+M	Ruby::SourceRange	i	pub	start_line	-	-
+M	Ruby::SourceRange	i	pub	start_column	-	-
+M	Ruby::SourceRange	i	pub	absolute_path	-	-
+M	Ruby::SourceRange	i	pub	end_line	-	-
+M	Ruby::SourceRange	i	pub	end_column	-	-
+M	Ruby::SourceRange	i	pub	inspect	-	-
+M	Ruby::SourceRange	i	pub	path	-	-
+M	Ruby::Box	s	pub	current	-	-
+M	Ruby::Box	s	pub	enabled?	-	-
+M	Ruby::Box	i	pub	load	-	-
+M	Ruby::Box	i	pub	require	-	-
+M	Ruby::Box	i	pub	require_relative	-	-
+M	Ruby::Box	i	pub	inspect	-	-
+M	Ruby::Box	i	pub	eval	-	-
+M	Ruby::Box	i	pub	load_path	-	-
+M	Ruby::Box	i	priv	initialize	-	-
 M	ObjectSpace::WeakMap	i	pub	length	-	-
 M	ObjectSpace::WeakMap	i	pub	delete	-	-
 M	ObjectSpace::WeakMap	i	pub	member?	-	-
@@ -2477,20 +2493,20 @@ M	ObjectSpace::WeakMap	i	pub	size	-	-
 M	ObjectSpace::WeakMap	i	pub	each_value	-	-
 M	ObjectSpace::WeakMap	i	pub	each_key	-	-
 M	ObjectSpace::WeakMap	i	pub	each_pair	-	-
-M	ObjectSpace::WeakMap	i	pub	keys	-	-
 M	ObjectSpace::WeakMap	i	pub	[]	-	-
 M	ObjectSpace::WeakMap	i	pub	[]=	-	-
-M	ObjectSpace::WeakMap	i	pub	inspect	-	-
 M	ObjectSpace::WeakMap	i	pub	values	-	-
+M	ObjectSpace::WeakMap	i	pub	inspect	-	-
+M	ObjectSpace::WeakMap	i	pub	keys	-	-
 M	ObjectSpace::WeakMap	i	pub	include?	-	-
 M	ObjectSpace::WeakMap	i	pub	key?	-	-
-M	ObjectSpace::WeakKeyMap	i	pub	delete	-	-
+M	ObjectSpace::WeakKeyMap	i	pub	getkey	-	-
 M	ObjectSpace::WeakKeyMap	i	pub	[]	-	-
 M	ObjectSpace::WeakKeyMap	i	pub	[]=	-	-
+M	ObjectSpace::WeakKeyMap	i	pub	delete	-	-
 M	ObjectSpace::WeakKeyMap	i	pub	clear	-	-
 M	ObjectSpace::WeakKeyMap	i	pub	inspect	-	-
 M	ObjectSpace::WeakKeyMap	i	pub	key?	-	-
-M	ObjectSpace::WeakKeyMap	i	pub	getkey	-	-
 M	GC::Profiler	s	pub	clear	-	-
 M	GC::Profiler	s	pub	enable	-	-
 M	GC::Profiler	s	pub	raw_data	-	-
@@ -2501,17 +2517,17 @@ M	GC::Profiler	s	pub	report	-	-
 M	GC::Profiler	s	pub	result	-	-
 M	GC::Profiler	s	pub	total_time	-	-
 M	IO::Buffer	s	pub	new	-	-
+M	IO::Buffer	s	pub	string	-	-
 M	IO::Buffer	s	pub	map	-	-
 M	IO::Buffer	s	pub	size_of	-	-
 M	IO::Buffer	s	pub	for	-	-
-M	IO::Buffer	s	pub	string	-	-
 M	IO::Buffer	i	pub	size	-	-
 M	IO::Buffer	i	pub	get_value	-	-
 M	IO::Buffer	i	pub	get_values	-	-
 M	IO::Buffer	i	pub	each	-	-
-M	IO::Buffer	i	pub	set_value	-	-
 M	IO::Buffer	i	pub	set_values	-	-
 M	IO::Buffer	i	pub	<=>	-	-
+M	IO::Buffer	i	pub	set_value	-	-
 M	IO::Buffer	i	pub	each_byte	-	-
 M	IO::Buffer	i	pub	copy	-	-
 M	IO::Buffer	i	pub	get_string	-	-
@@ -2529,14 +2545,14 @@ M	IO::Buffer	i	pub	read	-	-
 M	IO::Buffer	i	pub	not!	-	-
 M	IO::Buffer	i	pub	to_s	-	-
 M	IO::Buffer	i	pub	empty?	-	-
+M	IO::Buffer	i	pub	write	-	-
 M	IO::Buffer	i	pub	^	-	-
 M	IO::Buffer	i	pub	null?	-	-
-M	IO::Buffer	i	pub	write	-	-
 M	IO::Buffer	i	pub	locked?	-	-
+M	IO::Buffer	i	pub	&	-	-
 M	IO::Buffer	i	pub	readonly?	-	-
 M	IO::Buffer	i	pub	locked	-	-
 M	IO::Buffer	i	pub	advance	-	-
-M	IO::Buffer	i	pub	&	-	-
 M	IO::Buffer	i	pub	inspect	-	-
 M	IO::Buffer	i	pub	clear	-	-
 M	IO::Buffer	i	pub	source	-	-
@@ -2588,11 +2604,11 @@ M	Process::Status	i	pub	termsig	-	-
 M	Process::Status	i	pub	exited?	-	-
 M	Process::Status	i	pub	exitstatus	-	-
 M	Process::Status	i	pub	coredump?	-	-
+M	Process::Tms	s	pub	new	-	-
 M	Process::Tms	s	pub	[]	-	-
 M	Process::Tms	s	pub	inspect	-	-
 M	Process::Tms	s	pub	keyword_init?	-	-
 M	Process::Tms	s	pub	members	-	-
-M	Process::Tms	s	pub	new	-	-
 M	Process::Tms	i	pub	utime	-	-
 M	Process::Tms	i	pub	utime=	-	-
 M	Process::Tms	i	pub	stime	-	-
@@ -2601,6 +2617,7 @@ M	Process::Tms	i	pub	cutime	-	-
 M	Process::Tms	i	pub	cutime=	-	-
 M	Process::Tms	i	pub	cstime	-	-
 M	Process::Tms	i	pub	cstime=	-	-
+M	Process::UID	s	pub	change_privilege	-	-
 M	Process::UID	s	pub	grant_privilege	-	-
 M	Process::UID	s	pub	eid=	grant_privilege	-
 M	Process::UID	s	pub	re_exchange	-	-
@@ -2610,7 +2627,7 @@ M	Process::UID	s	pub	switch	-	-
 M	Process::UID	s	pub	from_name	-	-
 M	Process::UID	s	pub	rid	-	-
 M	Process::UID	s	pub	eid	-	-
-M	Process::UID	s	pub	change_privilege	-	-
+M	Process::UID	i	priv	change_privilege	-	-
 M	Process::UID	i	priv	grant_privilege	-	-
 M	Process::UID	i	priv	re_exchange	-	-
 M	Process::UID	i	priv	re_exchangeable?	-	-
@@ -2619,7 +2636,7 @@ M	Process::UID	i	priv	switch	-	-
 M	Process::UID	i	priv	from_name	-	-
 M	Process::UID	i	priv	rid	-	-
 M	Process::UID	i	priv	eid	-	-
-M	Process::UID	i	priv	change_privilege	-	-
+M	Process::GID	s	pub	change_privilege	-	-
 M	Process::GID	s	pub	grant_privilege	-	-
 M	Process::GID	s	pub	eid=	grant_privilege	-
 M	Process::GID	s	pub	re_exchange	-	-
@@ -2629,7 +2646,7 @@ M	Process::GID	s	pub	switch	-	-
 M	Process::GID	s	pub	from_name	-	-
 M	Process::GID	s	pub	rid	-	-
 M	Process::GID	s	pub	eid	-	-
-M	Process::GID	s	pub	change_privilege	-	-
+M	Process::GID	i	priv	change_privilege	-	-
 M	Process::GID	i	priv	grant_privilege	-	-
 M	Process::GID	i	priv	re_exchange	-	-
 M	Process::GID	i	priv	re_exchangeable?	-	-
@@ -2638,21 +2655,21 @@ M	Process::GID	i	priv	switch	-	-
 M	Process::GID	i	priv	from_name	-	-
 M	Process::GID	i	priv	rid	-	-
 M	Process::GID	i	priv	eid	-	-
-M	Process::GID	i	priv	change_privilege	-	-
 M	Encoding::UndefinedConversionError	i	pub	source_encoding	-	-
 M	Encoding::UndefinedConversionError	i	pub	source_encoding_name	-	-
 M	Encoding::UndefinedConversionError	i	pub	destination_encoding	-	-
 M	Encoding::UndefinedConversionError	i	pub	destination_encoding_name	-	-
 M	Encoding::UndefinedConversionError	i	pub	error_char	-	-
+M	Encoding::InvalidByteSequenceError	i	pub	incomplete_input?	-	-
 M	Encoding::InvalidByteSequenceError	i	pub	destination_encoding	-	-
 M	Encoding::InvalidByteSequenceError	i	pub	destination_encoding_name	-	-
 M	Encoding::InvalidByteSequenceError	i	pub	error_bytes	-	-
 M	Encoding::InvalidByteSequenceError	i	pub	readagain_bytes	-	-
 M	Encoding::InvalidByteSequenceError	i	pub	source_encoding	-	-
 M	Encoding::InvalidByteSequenceError	i	pub	source_encoding_name	-	-
-M	Encoding::InvalidByteSequenceError	i	pub	incomplete_input?	-	-
 M	Encoding::Converter	s	pub	asciicompat_encoding	-	-
 M	Encoding::Converter	s	pub	search_convpath	-	-
+M	Encoding::Converter	i	pub	last_error	-	-
 M	Encoding::Converter	i	pub	replacement	-	-
 M	Encoding::Converter	i	pub	replacement=	-	-
 M	Encoding::Converter	i	pub	==	-	-
@@ -2666,11 +2683,10 @@ M	Encoding::Converter	i	pub	primitive_errinfo	-	-
 M	Encoding::Converter	i	pub	insert_output	-	-
 M	Encoding::Converter	i	pub	finish	-	-
 M	Encoding::Converter	i	pub	putback	-	-
-M	Encoding::Converter	i	pub	last_error	-	-
 M	Encoding::Converter	i	priv	initialize	-	-
 M	Enumerator::Generator	i	pub	each	-	-
-M	Enumerator::Generator	i	priv	initialize_copy	-	-
 M	Enumerator::Generator	i	priv	initialize	-	-
+M	Enumerator::Generator	i	priv	initialize_copy	-	-
 M	Enumerator::Yielder	i	pub	<<	-	-
 M	Enumerator::Yielder	i	pub	to_proc	-	-
 M	Enumerator::Yielder	i	pub	yield	-	-
@@ -2688,6 +2704,7 @@ M	Enumerator::Product	i	pub	inspect	-	-
 M	Enumerator::Product	i	pub	each	-	-
 M	Enumerator::Product	i	priv	initialize	-	-
 M	Enumerator::Product	i	priv	initialize_copy	-	-
+M	Enumerator::ArithmeticSequence	i	pub	exclude_end?	-	-
 M	Enumerator::ArithmeticSequence	i	pub	size	-	-
 M	Enumerator::ArithmeticSequence	i	pub	each	-	-
 M	Enumerator::ArithmeticSequence	i	pub	begin	-	-
@@ -2700,7 +2717,6 @@ M	Enumerator::ArithmeticSequence	i	pub	first	-	-
 M	Enumerator::ArithmeticSequence	i	pub	step	-	-
 M	Enumerator::ArithmeticSequence	i	pub	eql?	-	-
 M	Enumerator::ArithmeticSequence	i	pub	last	-	-
-M	Enumerator::ArithmeticSequence	i	pub	exclude_end?	-	-
 M	Enumerator::Lazy	i	pub	eager	-	-
 M	Enumerator::Lazy	i	pub	zip	-	-
 M	Enumerator::Lazy	i	pub	take	-	-
@@ -2732,13 +2748,14 @@ M	Enumerator::Lazy	i	pub	map	-	-
 M	Enumerator::Lazy	i	pub	flat_map	-	-
 M	Enumerator::Lazy	i	pub	collect_concat	-	-
 M	Enumerator::Lazy	i	pub	filter_map	-	-
+M	Enumerator::Lazy	i	priv	_enumerable_with_index	with_index	-
 M	Enumerator::Lazy	i	priv	_enumerable_each_with_index	each_with_index	-
 M	Enumerator::Lazy	i	priv	_enumerable_drop	drop	-
-M	Enumerator::Lazy	i	priv	_enumerable_drop_while	drop_while	-
+M	Enumerator::Lazy	i	priv	_enumerable_zip	zip	-
 M	Enumerator::Lazy	i	priv	_enumerable_take	take	-
 M	Enumerator::Lazy	i	priv	_enumerable_take_while	take_while	-
+M	Enumerator::Lazy	i	priv	_enumerable_drop_while	drop_while	-
 M	Enumerator::Lazy	i	priv	_enumerable_uniq	uniq	-
-M	Enumerator::Lazy	i	priv	_enumerable_with_index	with_index	-
 M	Enumerator::Lazy	i	priv	initialize	-	-
 M	Enumerator::Lazy	i	priv	_enumerable_map	map	-
 M	Enumerator::Lazy	i	priv	_enumerable_collect	collect	-
@@ -2751,8 +2768,6 @@ M	Enumerator::Lazy	i	priv	_enumerable_filter_map	filter_map	-
 M	Enumerator::Lazy	i	priv	_enumerable_reject	reject	-
 M	Enumerator::Lazy	i	priv	_enumerable_grep	grep	-
 M	Enumerator::Lazy	i	priv	_enumerable_grep_v	grep_v	-
-M	Enumerator::Lazy	i	priv	_enumerable_zip	zip	-
-M	Ractor::MovedObject	i	pub	instance_exec	-	-
 M	Ractor::MovedObject	i	pub	!	-	-
 M	Ractor::MovedObject	i	pub	__id__	-	-
 M	Ractor::MovedObject	i	pub	__send__	-	-
@@ -2761,6 +2776,7 @@ M	Ractor::MovedObject	i	pub	equal?	-	-
 M	Ractor::MovedObject	i	pub	==	-	-
 M	Ractor::MovedObject	i	pub	instance_eval	-	-
 M	Ractor::MovedObject	i	pub	!=	-	-
+M	Ractor::MovedObject	i	pub	instance_exec	-	-
 M	Ractor::Port	i	pub	inspect	-	-
 M	Ractor::Port	i	pub	receive	-	-
 M	Ractor::Port	i	pub	send	-	-
@@ -2815,10 +2831,10 @@ M	File::Stat	i	pub	blksize	-	-
 M	File::Stat	i	pub	blocks	-	-
 M	File::Stat	i	priv	initialize	-	-
 M	File::Stat	i	priv	initialize_copy	-	-
+M	RubyVM::AbstractSyntaxTree	s	pub	node_id_for_backtrace_location	-	-
 M	RubyVM::AbstractSyntaxTree	s	pub	parse	-	-
 M	RubyVM::AbstractSyntaxTree	s	pub	of	-	-
 M	RubyVM::AbstractSyntaxTree	s	pub	parse_file	-	-
-M	RubyVM::AbstractSyntaxTree	s	pub	node_id_for_backtrace_location	-	-
 M	RubyVM::ZJIT	s	pub	stats_enabled?	-	-
 M	RubyVM::ZJIT	s	pub	trace_exit_locations_enabled?	-	-
 M	RubyVM::ZJIT	s	pub	reset_stats!	-	-
@@ -2830,11 +2846,11 @@ M	RubyVM::ZJIT	s	pub	induce_breakpoint!	-	-
 M	RubyVM::ZJIT	s	pub	assert_compiles	-	-
 M	RubyVM::ZJIT	s	pub	enable	-	-
 M	RubyVM::ZJIT	s	pub	enabled?	-	-
-M	RubyVM::ZJIT	s	priv	add_jit_hook	-	-
 M	RubyVM::ZJIT	s	priv	print_stats_file	-	-
+M	RubyVM::ZJIT	s	priv	add_jit_hook	-	-
+M	RubyVM::ZJIT	s	priv	print_stats	-	-
 M	RubyVM::ZJIT	s	priv	print_counters_with_prefix	-	-
 M	RubyVM::ZJIT	s	priv	number_with_delimiter	-	-
-M	RubyVM::ZJIT	s	priv	print_stats	-	-
 M	RubyVM::ZJIT	s	priv	call_jit_hooks	-	-
 M	RubyVM::ZJIT	s	priv	print_counters	-	-
 M	RubyVM::YJIT	s	pub	stats_enabled?	-	-
@@ -2848,8 +2864,8 @@ M	RubyVM::YJIT	s	pub	exit_locations	-	-
 M	RubyVM::YJIT	s	pub	enable	-	-
 M	RubyVM::YJIT	s	pub	dump_exit_locations	-	-
 M	RubyVM::YJIT	s	pub	runtime_stats	-	-
-M	RubyVM::YJIT	s	pub	stats_string	-	-
 M	RubyVM::YJIT	s	pub	disasm	-	-
+M	RubyVM::YJIT	s	pub	stats_string	-	-
 M	RubyVM::YJIT	s	pub	insns_compiled	-	-
 M	RubyVM::YJIT	s	pub	code_gc	-	-
 M	RubyVM::YJIT	s	pub	simulate_oom!	-	-
@@ -2858,13 +2874,13 @@ M	RubyVM::YJIT	s	pub	enabled?	-	-
 M	RubyVM::YJIT	s	priv	format_number	-	-
 M	RubyVM::YJIT	s	priv	format_number_pct	-	-
 M	RubyVM::YJIT	s	priv	print_sorted_exit_counts	-	-
-M	RubyVM::YJIT	s	priv	print_sorted_method_calls	-	-
 M	RubyVM::YJIT	s	priv	add_jit_hook	-	-
+M	RubyVM::YJIT	s	priv	print_sorted_method_calls	-	-
 M	RubyVM::YJIT	s	priv	print_and_dump_stats	-	-
 M	RubyVM::YJIT	s	priv	_print_stats	-	-
+M	RubyVM::YJIT	s	priv	call_jit_hooks	-	-
 M	RubyVM::YJIT	s	priv	_dump_locations	-	-
 M	RubyVM::YJIT	s	priv	_print_stats_reasons	-	-
-M	RubyVM::YJIT	s	priv	call_jit_hooks	-	-
 M	RubyVM::YJIT	s	priv	print_counters	-	-
 M	RubyVM::InstructionSequence	s	pub	new	-	-
 M	RubyVM::InstructionSequence	s	pub	disasm	-	-
@@ -2907,27 +2923,17 @@ M	Random::Base	i	priv	initialize	-	-
 M	Random::Formatter	i	pub	rand	-	-
 M	Random::Formatter	i	pub	random_number	-	-
 M	Thread::Monitor::ConditionVariable	i	pub	wait_while	-	-
-M	Thread::Monitor::ConditionVariable	i	pub	wait_until	-	-
 M	Thread::Monitor::ConditionVariable	i	pub	wait	-	-
 M	Thread::Monitor::ConditionVariable	i	pub	signal	-	-
+M	Thread::Monitor::ConditionVariable	i	pub	wait_until	-	-
 M	Thread::Monitor::ConditionVariable	i	pub	broadcast	-	-
 M	Thread::Monitor::ConditionVariable	i	priv	initialize	-	-
-M	Ruby::Box	s	pub	enabled?	-	-
-M	Ruby::Box	s	pub	current	-	-
-M	Ruby::Box	i	pub	load	-	-
-M	Ruby::Box	i	pub	require	-	-
-M	Ruby::Box	i	pub	require_relative	-	-
-M	Ruby::Box	i	pub	inspect	-	-
-M	Ruby::Box	i	pub	eval	-	-
-M	Ruby::Box	i	pub	load_path	-	-
-M	Ruby::Box	i	priv	initialize	-	-
-M	Ruby::SourceRange	i	pub	start_column	-	-
-M	Ruby::SourceRange	i	pub	absolute_path	-	-
-M	Ruby::SourceRange	i	pub	end_line	-	-
-M	Ruby::SourceRange	i	pub	end_column	-	-
-M	Ruby::SourceRange	i	pub	inspect	-	-
-M	Ruby::SourceRange	i	pub	path	-	-
-M	Ruby::SourceRange	i	pub	start_line	-	-
+M	Ruby::Box::Loader	s	pub	load	-	-
+M	Ruby::Box::Loader	s	pub	require	-	-
+M	Ruby::Box::Loader	s	pub	require_relative	-	-
+M	Ruby::Box::Loader	i	priv	load	-	-
+M	Ruby::Box::Loader	i	priv	require	-	-
+M	Ruby::Box::Loader	i	priv	require_relative	-	-
 M	IO::Buffer::Storage	i	pub	external?	-	-
 M	IO::Buffer::Storage	i	pub	internal?	-	-
 M	IO::Buffer::Storage	i	pub	mapped?	-	-
@@ -2939,8 +2945,8 @@ M	IO::Buffer::Storage	i	pub	free	-	-
 M	IO::Buffer::Storage	i	priv	initialize	-	-
 M	IO::Buffer::Storage	i	priv	initialize_copy	-	-
 M	IO::Buffer::Slice	i	pub	resize	-	-
-M	IO::Buffer::Slice	i	priv	initialize_copy	-	-
 M	IO::Buffer::Slice	i	priv	initialize	-	-
+M	IO::Buffer::Slice	i	priv	initialize_copy	-	-
 M	RubyVM::AbstractSyntaxTree::Node	i	pub	type	-	-
 M	RubyVM::AbstractSyntaxTree::Node	i	pub	first_column	-	-
 M	RubyVM::AbstractSyntaxTree::Node	i	pub	last_lineno	-	-
@@ -2954,11 +2960,12 @@ M	RubyVM::AbstractSyntaxTree::Node	i	pub	children	-	-
 M	RubyVM::AbstractSyntaxTree::Node	i	pub	source	-	-
 M	RubyVM::AbstractSyntaxTree::Node	i	pub	script_lines	-	-
 M	RubyVM::AbstractSyntaxTree::Node	i	pub	node_id	-	-
-M	RubyVM::AbstractSyntaxTree::Location	i	pub	first_column	-	-
 M	RubyVM::AbstractSyntaxTree::Location	i	pub	first_lineno	-	-
 M	RubyVM::AbstractSyntaxTree::Location	i	pub	last_lineno	-	-
 M	RubyVM::AbstractSyntaxTree::Location	i	pub	last_column	-	-
+M	RubyVM::AbstractSyntaxTree::Location	i	pub	first_column	-	-
 M	RubyVM::AbstractSyntaxTree::Location	i	pub	inspect	-	-
+M	Thread::Backtrace::Location	i	pub	syntax_tree	-	-
 M	Thread::Backtrace::Location	i	pub	absolute_path	-	-
 M	Thread::Backtrace::Location	i	pub	lineno	-	-
 M	Thread::Backtrace::Location	i	pub	inspect	-	-
@@ -2967,13 +2974,6 @@ M	Thread::Backtrace::Location	i	pub	base_label	-	-
 M	Thread::Backtrace::Location	i	pub	to_s	-	-
 M	Thread::Backtrace::Location	i	pub	source_range	-	-
 M	Thread::Backtrace::Location	i	pub	path	-	-
-M	Thread::Backtrace::Location	i	pub	syntax_tree	-	-
-M	Ruby::Box::Loader	s	pub	load	-	-
-M	Ruby::Box::Loader	s	pub	require	-	-
-M	Ruby::Box::Loader	s	pub	require_relative	-	-
-M	Ruby::Box::Loader	i	priv	load	-	-
-M	Ruby::Box::Loader	i	priv	require	-	-
-M	Ruby::Box::Loader	i	priv	require_relative	-	-
 M	ARGF.class	i	pub	argv	-	-
 M	ARGF.class	i	pub	to_write_io	-	-
 M	ARGF.class	i	pub	each_line	-	-
@@ -3034,24 +3034,24 @@ M	ENV	s	pub	each_value	-	-
 M	ENV	s	pub	each_key	-	-
 M	ENV	s	pub	each_pair	-	-
 M	ENV	s	pub	slice	-	-
-M	ENV	s	pub	keys	-	-
 M	ENV	s	pub	[]	-	-
+M	ENV	s	pub	[]=	-	-
 M	ENV	s	pub	fetch_values	-	-
 M	ENV	s	pub	except	-	-
 M	ENV	s	pub	invert	-	-
-M	ENV	s	pub	[]=	-	-
 M	ENV	s	pub	update	-	-
 M	ENV	s	pub	merge!	-	-
+M	ENV	s	pub	values	-	-
 M	ENV	s	pub	include?	-	-
 M	ENV	s	pub	has_value?	-	-
-M	ENV	s	pub	key?	-	-
 M	ENV	s	pub	empty?	-	-
-M	ENV	s	pub	value?	-	-
 M	ENV	s	pub	has_key?	-	-
-M	ENV	s	pub	values	-	-
+M	ENV	s	pub	value?	-	-
+M	ENV	s	pub	key?	-	-
+M	ENV	s	pub	keys	-	-
+M	ENV	s	pub	dup	-	-
 M	ENV	s	pub	replace	-	-
 M	ENV	s	pub	to_h	-	-
-M	ENV	s	pub	dup	-	-
 M	ENV	s	pub	key	-	-
 M	ENV	s	pub	freeze	-	-
 M	ENV	s	pub	clear	-	-
@@ -3078,12 +3078,12 @@ M	ENV	s	pub	filter	-	-
 M	ENV	s	pub	rassoc	-	-
 M	main	s	pub	inspect	to_s	-
 M	main	s	pub	to_s	-	-
+M	main	s	priv	define_method	-	-
 M	main	s	priv	using	-	-
 M	main	s	priv	public	-	-
 M	main	s	priv	private	-	-
 M	main	s	priv	ruby2_keywords	-	-
 M	main	s	priv	include	-	-
-M	main	s	priv	define_method	-	-
 R	ARGF.class	#	argv	ok
 R	ARGF.class	#	binmode	ok
 R	ARGF.class	#	binmode?	ok
@@ -3794,6 +3794,7 @@ R	Enumerator::Lazy	#	flat_map	ok
 R	Enumerator::Lazy	#	compact	ok
 R	Enumerator::Lazy	#	drop	ok
 R	Enumerator::Lazy	#	drop_while	ok
+R	Enumerator::Lazy	#	each_with_index	ok
 R	Enumerator::Lazy	#	eager	ok
 R	Enumerator::Lazy	#	enum_for	ok
 R	Enumerator::Lazy	#	to_enum	ok
@@ -5318,10 +5319,13 @@ R	RubyVM::YJIT	.	enable	ok
 R	RubyVM::YJIT	.	enabled?	ok
 R	RubyVM::YJIT	.	log	ok
 R	RubyVM::YJIT	.	log_enabled?	ok
+R	RubyVM::YJIT	.	max_compile_time_ns	ok
+R	RubyVM::YJIT	.	max_compile_time_ns=	ok
 R	RubyVM::YJIT	.	reset_stats!	ok
 R	RubyVM::YJIT	.	runtime_stats	ok
 R	RubyVM::YJIT	.	stats_enabled?	ok
 R	RubyVM::YJIT	.	stats_string	ok
+R	RubyVM::YJIT	.	total_compile_time_ns	ok
 R	RubyVM::ZJIT	.	enable	ok
 R	RubyVM::ZJIT	.	enabled?	ok
 R	RubyVM::ZJIT	.	induce_breakpoint!	ok
@@ -5370,10 +5374,12 @@ R	Set	#	disjoint?	ok
 R	Set	#	divide	ok
 R	Set	#	each	ok
 R	Set	#	empty?	ok
+R	Set	#	eql?	ok
 R	Set	#	filter!	ok
 R	Set	#	select!	ok
 R	Set	#	flatten	ok
 R	Set	#	flatten!	ok
+R	Set	#	hash	ok
 R	Set	#	inspect	ok
 R	Set	#	to_s	ok
 R	Set	#	intersect?	ok

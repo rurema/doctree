@@ -12,16 +12,16 @@ doctree の版別 DB に収録されている全メソッドエントリと、�
 「版別 DB を基準に、不足方向も含めて」計測できるようにしたもの。
 分析の本文は [report.md](report.md)。
 
-作成: 2026-09-05。データの更新: 2026-10-03(現 master での再測定。経緯は report.md の追記)。
+作成: 2026-09-05。データの更新: 2026-10-03・2026-10-10(現 master での再測定。経緯は report.md の追記)。
 
 ## データ生成時点(スナップショット情報)
 
-- 同梱しているデータは 2026-10-03 の再測定のもの。最初のスナップショット(2026-09-05・doctree master 948a607c3・4.1 は 07ef97df22)は
+- 同梱しているデータは 2026-10-10 の再測定のもの(2026-10-03 の再測定はコミット cd479b4b4)。最初のスナップショット(2026-09-05・doctree master 948a607c3・4.1 は 07ef97df22)は
   コミット 82aaea377 にあり、report.md の本文(追記より前)はそちらの数字で書かれている
-- doctree 側(`db-extract/`): master 1c1f6965c の `manual/api` から生成した 3.0〜4.1 の 7 版の DB
+- doctree 側(`db-extract/`): master aa88f1b72 の `manual/api` から生成した 3.0〜4.1 の 7 版の DB
 - 実測バイナリ: 3.0.0 / 3.1.0 / 3.2.0 / 3.3.0 / 3.4.0 / 4.0.0 = `ghcr.io/ruby/all-ruby`
   (`/all-ruby/bin/ruby-x.y.0`)、4.1 = `ghcr.io/ruby/ruby:master`
-  (2026-10-03 ビルド・4.1.0dev 088bf8962f・json 3.0.2・rubygems 4.1.0.beta1・rdoc 8.1.0)。各版の `real/<版>/ruby-v.txt` 参照
+  (2026-10-09 ビルド・4.1.0dev a9d3eadfc8・json 3.0.2・rubygems 4.1.0.beta2・rdoc 8.1.0)。各版の `real/<版>/ruby-v.txt` 参照
 - 実測環境の注意: all-ruby の 3.2〜4.0 は YJIT 非ビルド(`RubyVM::YJIT` が no-class になる)(フル機能ビルドとの差分は「ビルド環境依存の差分」節)、
   readline は libedit、システム OpenSSL は 3.0 系(`OpenSSL::Engine`・`Digest::MD2` 等が無い)。
   3.0.0 は fiddle/dbm の共有ライブラリ依存が欠けて require 不可
@@ -179,7 +179,7 @@ done
 - **x.y.0 基準**: 実測は各 minor の x.y.0(4.1 は master スナップショット)なので、teeny で追加された
   メソッド(例: `Prism::Node#each_child_node` は 4.0.1 から)は過剰側に出る。doctree 側が
   `{: since="x.y.z"}` で対応済みのものは無視する
-- 4.1 は master のスナップショット(2026-10-03)。リリースまでに API が変わりうるので、4.1 だけの差分はリリース版で再確認する
+- 4.1 は master のスナップショット(2026-10-09 のビルド)。リリースまでに API が変わりうるので、4.1 だけの差分はリリース版で再確認する
 - 「存在する」はメソッド定義の有無のみで、引数追加などシグネチャ単位の差分は検出しない
 - サブクラス側に定義される慣例記述(`Struct.members`・`Data.new`・`Singleton.instance` 等)、
   プロトコル記述(`Object#marshal_dump` 等)、`Struct`/`Data` の生成メソッドは過剰側に出るが削除不要
