@@ -355,6 +355,12 @@ p Fiber.scheduler # => nil
   nil を指定するとスケジューラを解除します。
 - **return** -- `scheduler` をそのまま返します。
 - **raise** `ArgumentError` -- scheduler が必要なフックメソッドを実装していない場合に発生します。
+#%since 4.1
+  Ruby 4.1 からは `fiber_interrupt` フックも必須です。実装していないスケジューラは設定できません。
+#%end
+#%version 4.0...4.1
+  Ruby 4.0 では `fiber_interrupt` フックを実装していないと警告が出ます。
+#%end
 
 ```ruby
 Fiber.set_scheduler(Object.new) # ~> ArgumentError: Scheduler must implement #block
