@@ -1818,6 +1818,9 @@ at_exitがメソッドである点を除けば、END ブロックによる終了
 [d:spec/terminate]も参照してください。
 
 - **return** -- 登録した処理を [c:Proc] オブジェクトで返します。
+#%since 4.1
+- **raise** `Ractor::IsolationError` -- main 以外の Ractor から呼び出した場合に発生します。`END {}` も同様です。
+#%end
 
 ```ruby title="例"
 3.times do |i|
