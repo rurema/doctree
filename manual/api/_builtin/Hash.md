@@ -287,6 +287,10 @@ ruby2_keywords フラグを立てたハッシュを返します。
 
 Ruby 2.7.1 で追加されたため、Ruby 2.7.0 では定義されていません。
 
+#%since 4.1
+Ruby 4.1 でこのメソッドは deprecated になり、Ruby 4.5 で削除される予定です。[feature:22205]
+#%end
+
 - **param** `hash` -- ruby2_keywords フラグを立てる [c:Hash] を指定します。
 
 - **raise** `TypeError` -- hash が [c:Hash] でない場合に発生します。
@@ -323,6 +327,10 @@ ruby2_keywords フラグが設定されているかどうかを返します。
 このメソッドはデバッグや調査、シリアライゼーションのために本当に必要な場合のために用意されていて、普通のプログラムで使うことは想定されていません。
 
 Ruby 2.7.1 で追加されたため、Ruby 2.7.0 では定義されていません。
+
+#%since 4.1
+Ruby 4.1 でこのメソッドは deprecated になり、Ruby 4.5 で削除される予定です。[feature:22205]
+#%end
 
 ```ruby
 ruby2_keywords def foo(*args)

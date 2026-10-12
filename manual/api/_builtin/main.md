@@ -153,6 +153,10 @@ p "ABC".downcase # => "ABC"
 Ruby 2.7 より前との後方互換性のために用意されているメソッドです。
 詳細は [m:Module#ruby2_keywords] を参照してください。
 
+#%since 4.1
+Ruby 4.1 でこのメソッドは deprecated になり、Ruby 4.4 で削除される予定です。[feature:22205]
+#%end
+
 - **param** `method_name` -- メソッド名を [c:String] か [c:Symbol] で指定します。複数指定できます。
 
 ```ruby title="例"
