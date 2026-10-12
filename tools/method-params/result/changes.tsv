@@ -1,0 +1,722 @@
+class	kind	name	from	to	source	real_before	real_after	rbs_before	rbs_after	doc_before	doc_after	doc_changed	verdict_after	flag
+Array	i	bsearch	3.0	3.1	rbs	0|-|C	0|-|C	|0|0|req ; |0|0|req	|0|0|- ; |0|0|req ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	rbs-only
+Array	i	sample	3.0	3.1	rbs	-1|opt:n key:random|rb	-1|opt:n key:random|rb	n,random|0|1|- ; random|0|0|-	n,random|1|1|- ; random|0|0|-	0/0/0///0/0/ ; 0/0/0//random/0/0/ ; 1/0/0///0/0/n ; 1/0/0//random/0/0/n	0/0/0///0/0/ ; 0/0/0//random/0/0/ ; 1/0/0///0/0/n ; 1/0/0//random/0/0/n	0	ok-split	rbs-only
+Array	i	shift	3.0	3.1	rbs	-1|rest|C	-1|rest|C	n|0|1|- ; |0|0|-	n|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0///0/0/n	0/0/0///0/0/ ; 1/0/0///0/0/n	0	ok-split	rbs-only
+BasicObject	i	method_missing	3.0	3.1	rbs	-1|rest|C	-1|rest|C	|1|-|-	|1|-|opt	1/0/1///0/0/name,*args	1/0/1///0/0/name,*args	0	ok	rbs-only
+Enumerable	i	collect_concat	3.0	3.1	rbs	0|-|C	0|-|C	|0|0|req	|0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	rbs-only
+Enumerable	i	count	3.0	3.1	rbs	-1|rest|C	-1|rest|C	|0|0|- ; |0|0|req ; |0|1|-	|0|0|- ; |0|0|req ; |1|1|-	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/item	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/item	0	ok-split	rbs-only
+Enumerable	i	each_with_object	3.0	3.1	rbs	1|req|C	1|req|C	arg0|1|1|- ; arg0|1|1|req	obj|1|1|- ; obj|1|1|req	1/0/0///0/0/obj ; 1/0/0///0/1/obj	1/0/0///0/0/obj ; 1/0/0///0/1/obj	0	ok	rbs-only
+Enumerable	i	find_index	3.0	3.1	rbs	-1|rest|C	-1|rest|C	value|0|1|- ; |0|0|- ; |0|0|req	value|1|1|- ; |0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/val	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/val	0	ok-split	rbs-only
+Enumerable	i	grep_v	3.0	3.1	rbs	1|req|C	1|req|C	arg0|1|1|- ; arg0|1|1|req	|1|1|- ; |1|1|req	1/0/0///0/0/pattern ; 1/0/0///0/1/pattern	1/0/0///0/0/pattern ; 1/0/0///0/1/pattern	0	ok	rbs-only
+Enumerable	i	tally	3.0	3.1	real	0|-|C	-1|rest|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/ ; 1/0/0///0/0/hash	1	ok-split	reflected
+Enumerator	i	with_object	3.0	3.1	rbs	1|req|C	1|req|C	arg0|1|1|- ; arg0|1|1|req	obj|1|1|- ; obj|1|1|req	1/0/0///0/0/obj ; 1/0/0///0/1/obj	1/0/0///0/0/obj ; 1/0/0///0/1/obj	0	ok	rbs-only
+Exception	i	set_backtrace	3.0	3.1	rbs	1|req|C	1|req|C	arg0|1|1|-	arg0|1|1|- ; |1|1|-	1/0/0///0/0/errinfo	1/0/0///0/0/errinfo	0	ok	rbs-only
+File	s	dirname	3.0	3.1	real	1|req|C	-1|rest|C	file_name|1|1|-	file_name|1|1|-	1/0/0///0/0/filename	1/1/0///0/0/filename,level	1	ok	reflected
+File	s	lchmod	3.0	3.1	real	0|-|C	-1|rest|C	mode,file_name|1|-|-	mode,file_name|1|-|-	1/0/1///0/0/mode,*filename	1/0/1///0/0/mode,*filename	0	ok	c-decl-change
+File::Stat	i	<=>	3.0	3.1	rbs	1|req|C	1|req|C	other|1|1|-	other|1|1|- ; |1|1|-	1/0/0///0/0/o	1/0/0///0/0/o	0	ok	rbs-only
+Float	i	-@	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Float	i	abs	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Float	i	magnitude	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Float	i	negative?	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Float	i	positive?	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Float	i	to_f	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Float	i	zero?	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+IO	i	<<	3.0	3.1	rbs	1|req|C	1|req|C	arg0|1|1|-	obj|1|1|-	1/0/0///0/0/object	1/0/0///0/0/object	0	ok	rbs-only
+IO	i	advise	3.0	3.1	rbs	-1|rest|C	-1|rest|C	arg0,offset,len|1|3|-	advise,offset,len|1|3|-	1/2/0///0/0/advice,offset,len	1/2/0///0/0/advice,offset,len	0	ok	rbs-only
+IO	i	read_nonblock	3.0	3.1	rbs	-2|req:len opt:buf key:exception|rb	-2|req:len opt:buf key:exception|rb	len,buf|1|2|- ; len|1|1|-	len,buf,exception|1|2|- ; len,buf,exception|1|2|-	1/1/0//exception/0/0/maxlen,outbuf	1/1/0//exception/0/0/maxlen,outbuf	0	name-mismatch	rbs-only
+IO	s	readlines	3.0	3.1	rbs	-1|rest|C	-1|rest|C	name,sep,limit,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,mode|1|3|-	name,sep,limit,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,mode,chomp|1|3|-	1/2/0//chomp/0/0/path,rs,opts ; 2/1/0//chomp/0/0/path,limit,opts ; 3/1/0//chomp/0/0/path,rs,limit,opts	1/2/0//chomp/0/0/path,rs,opts ; 2/1/0//chomp/0/0/path,limit,opts ; 3/1/0//chomp/0/0/path,rs,limit,opts	0	ok	rbs-only
+IO	s	select	3.0	3.1	rbs	-1|rest|C	-1|rest|C	read_array,write_array,error_array,timeout|1|4|-	read_array,write_array,error_array,timeout|2|4|- ; read_array,write_array,error_array|1|3|-	1/3/0///0/0/reads,writes,excepts,timeout	1/3/0///0/0/reads,writes,excepts,timeout	0	ok	rbs-only
+Integer	i	<=>	3.0	3.1	rbs	1|req|C	1|req|C	|1|1|-	|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Integer	i	floor	3.0	3.1	rbs	-1|rest|C	-1|rest|C	digits|1|1|- ; |0|0|-	digits|0|1|-	0/1/0///0/0/ndigits	0/1/0///0/0/ndigits	0	ok	rbs-only
+Integer	i	size	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Kernel	i	Array	3.0	3.1	rbs	1|req|C	1|req|C	x|1|1|- ; x|1|1|- ; x|1|1|- ; x|1|1|- ; x|1|1|-	x|1|1|- ; x|1|1|- ; x|1|1|- ; x|1|1|- ; x|1|1|- ; x|1|1|-	1/0/0///0/0/arg	1/0/0///0/0/arg	0	ok	rbs-only
+Kernel	i	caller	3.0	3.1	rbs	-1|rest|C	-1|rest|C	start_or_range,length|0|2|- ; start_or_range|0|1|- ; |0|0|-	start_or_range,length|1|2|- ; start_or_range|1|1|- ; |0|0|-	0/1/0///0/0/start ; 1/0/0///0/0/range ; 2/0/0///0/0/start,length	0/1/0///0/0/start ; 1/0/0///0/0/range ; 2/0/0///0/0/start,length	0	ok	rbs-only
+Kernel	i	system	3.0	3.1	rbs	-1|rest|C	-1|rest|C	args|0|-|-	command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|1|-|- ; env,command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|2|-|-	1/1/0///0/0/command,options ; 1/1/1///0/0/program,*args,options ; 2/1/0///0/0/env,command,options ; 2/1/1///0/0/env,program,*args,options	1/1/0///0/0/command,options ; 1/1/1///0/0/program,*args,options ; 2/1/0///0/0/env,command,options ; 2/1/1///0/0/env,program,*args,options	0	ok	rbs-only
+Marshal	s	dump	3.0	3.1	rbs	-1|rest|C	-1|rest|C	arg0,arg1,arg2|1|3|- ; arg0,arg1|1|2|-	obj,limit|1|2|- ; obj,port,limit|2|3|-	1/1/0///0/0/obj,limit ; 2/1/0///0/0/obj,port,limit	1/1/0///0/0/obj,limit ; 2/1/0///0/0/obj,port,limit	0	ok	rbs-only
+Marshal	s	load	3.0	3.1	both	-1|rest|C	-2|req:source opt:proc key:freeze|rb	arg0,arg1|1|2|-	port|1|1|- ; port|2|2|-	1/1/0///0/0/port,proc	1/2/0///0/0/port,proc,options	1	opt-count	reflected
+Marshal	s	restore	3.0	3.1	both	-1|rest|C	-2|req:source opt:proc key:freeze|rb	arg0,arg1|1|2|-	port|1|1|- ; port|2|2|-	1/1/0///0/0/port,proc	1/2/0///0/0/port,proc,options	1	opt-count	reflected
+Module	i	class_eval	3.0	3.1	rbs	-1|rest|C	-1|rest|C	arg0,filename,lineno|1|3|- ; arg0|1|1|req	arg0,filename,lineno|1|3|- ; |0|0|req	0/0/0///0/1/ ; 1/2/0///0/0/expr,fname,lineno	0/0/0///0/1/ ; 1/2/0///0/0/expr,fname,lineno	0	ok	rbs-only
+Module	i	module_eval	3.0	3.1	rbs	-1|rest|C	-1|rest|C	arg0,filename,lineno|1|3|- ; arg0|1|1|req	arg0,filename,lineno|1|3|- ; |0|0|req	0/0/0///0/1/ ; 1/2/0///0/0/expr,fname,lineno	0/0/0///0/1/ ; 1/2/0///0/0/expr,fname,lineno	0	ok	rbs-only
+NilClass	i	to_f	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+NilClass	i	to_i	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Numeric	i	finite?	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Numeric	i	infinite?	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Numeric	i	integer?	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Numeric	i	real?	3.0	3.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Process::Tms	i	cstime=	3.0	3.1	real	1|req:_|rb	1|req:_|C			1/0/0///0/0/n	1/0/0///0/0/n	0	ok	already-consistent
+Process::Tms	i	cutime=	3.0	3.1	real	1|req:_|rb	1|req:_|C			1/0/0///0/0/n	1/0/0///0/0/n	0	ok	already-consistent
+Process::Tms	i	stime=	3.0	3.1	real	1|req:_|rb	1|req:_|C			1/0/0///0/0/n	1/0/0///0/0/n	0	ok	already-consistent
+Process::Tms	i	utime=	3.0	3.1	real	1|req:_|rb	1|req:_|C			1/0/0///0/0/n	1/0/0///0/0/n	0	ok	already-consistent
+Random	s	rand	3.0	3.1	rbs	-1|rest|C	-1|rest|C	max|0|1|-	max|1|1|- ; max|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0///0/0/max ; 1/0/0///0/0/range	0/0/0///0/0/ ; 1/0/0///0/0/max ; 1/0/0///0/0/range	0	ok-split	rbs-only
+Range	i	bsearch	3.0	3.1	rbs	0|-|C	0|-|C	|0|0|req	|0|0|- ; |0|0|req ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	rbs-only
+Range	i	first	3.0	3.1	rbs	-1|rest|C	-1|rest|C	n|0|1|- ; |0|0|-	n|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0///0/0/n	0/0/0///0/0/ ; 1/0/0///0/0/n	0	ok-split	rbs-only
+Range	i	last	3.0	3.1	rbs	-1|rest|C	-1|rest|C	n|0|1|- ; |0|0|-	n|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0///0/0/n	0/0/0///0/0/ ; 1/0/0///0/0/n	0	ok-split	rbs-only
+Range	i	max	3.0	3.1	rbs	-1|rest|C	-1|rest|C	n|0|1|- ; n|0|1|req ; |0|0|- ; |0|0|req	n|1|1|- ; n|1|1|req ; |0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/n ; 1/0/0///0/1/n	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/n ; 1/0/0///0/1/n	0	ok-split	rbs-only
+Range	i	min	3.0	3.1	rbs	-1|rest|C	-1|rest|C	n|0|1|- ; n|0|1|req ; |0|0|- ; |0|0|req	n|1|1|- ; n|1|1|req ; |0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/n ; 1/0/0///0/1/n	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/n ; 1/0/0///0/1/n	0	ok-split	rbs-only
+Rational	i	<=>	3.0	3.1	rbs	1|req|C	1|req|C	|1|1|-	|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+RubyVM::AbstractSyntaxTree	s	of	3.0	3.1	real	1|req:body|rb	-2|req:body key:keep_script_lines|rb			1/0/0///0/0/proc	1/0/0///0/0/proc ; 1/0/0//keep_script_lines/0/0/proc	1	ok-split	reflected
+RubyVM::AbstractSyntaxTree	s	parse	3.0	3.1	real	1|req:string|rb	-2|req:string key:keep_script_lines|rb			1/0/0///0/0/string	1/0/0///0/0/string ; 1/0/0//keep_script_lines/0/0/string	1	ok	reflected
+RubyVM::AbstractSyntaxTree	s	parse_file	3.0	3.1	real	1|req:pathname|rb	-2|req:pathname key:keep_script_lines|rb			1/0/0///0/0/pathname	1/0/0///0/0/pathname ; 1/0/0//keep_script_lines/0/0/pathname	1	ok	reflected
+String	i	<=>	3.0	3.1	rbs	1|req|C	1|req|C	other|1|1|-	other|1|1|- ; other|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+String	i	unpack	3.0	3.1	real	1|req:fmt|rb	-2|req:fmt key:offset|rb	format|1|1|-	format|1|1|-	1/0/0///0/0/template	1/0/0///0/0/template	0	kw-mismatch	unreflected
+String	i	unpack1	3.0	3.1	real	1|req:fmt|rb	-2|req:fmt key:offset|rb	format|1|1|-	format|1|1|-	1/0/0///0/0/format	1/0/0///0/0/format	0	kw-mismatch	unreflected
+Struct	i	each	3.0	3.1	rbs	0|-|C	0|-|C	|0|0|req	|0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	rbs-only
+Symbol	i	<=>	3.0	3.1	rbs	1|req|C	1|req|C	other|1|1|-	other|1|1|- ; other|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Thread	i	initialize	3.0	3.1	rbs	-1|rest|C	-1|rest|C	args|0|-|-	|0|-|req	0/0/1///0/1/*arg	0/0/1///0/1/*arg	0	ok	rbs-only
+Thread	s	start	3.0	3.1	rbs	-1|rest|C	-1|rest|C	args|0|-|-	args|0|-|req	0/0/1///0/1/*arg	0/0/1///0/1/*arg	0	ok	rbs-only
+Thread::Queue	i	initialize	3.0	3.1	real	0|-|C	-1|rest|C			0/0/0///0/0/	0/0/0///0/0/ ; 1/0/0///0/0/items	1	ok-split	reflected
+Time	i	<=>	3.0	3.1	rbs	1|req|C	1|req|C	other|1|1|-	other|1|1|- ; other|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Time	i	initialize	3.0	3.1	real	-1|rest|C	-1|opt:year opt:mon opt:mday opt:hour opt:min opt:sec opt:zone key:in|rb	year,month,day,hour,min,sec,usec_with_frac|0|7|-	year,month,day,hour,min,sec,usec_with_frac|0|7|-	0/0/0///0/0/ ; 1/6/0///0/0/year,mon,day,hour,min,sec,zone	0/0/0///0/0/ ; 1/5/0//in/0/0/year,mon,day,hour,min,sec ; 1/6/0///0/0/year,mon,day,hour,min,sec,zone	1	ok-split	reflected
+Time	s	at	3.0	3.1	real	-1|rest|C	-2|req:time opt:subsec opt:unit key:in|rb	seconds,microseconds_with_frac|1|2|- ; seconds|1|1|-	seconds,microseconds_with_frac|1|2|- ; seconds|1|1|-	1/0/0///0/0/time ; 1/0/0/in//0/0/time ; 2/0/0///0/0/time,usec ; 2/0/0/in//0/0/time,usec ; 3/0/0///0/0/seconds,xseconds,unit ; 3/0/0/in//0/0/seconds,xseconds,unit	1/0/0///0/0/time ; 1/0/0/in//0/0/time ; 2/0/0///0/0/time,usec ; 2/0/0/in//0/0/time,usec ; 3/0/0///0/0/seconds,xseconds,unit ; 3/0/0/in//0/0/seconds,xseconds,unit	0	ok-split	already-consistent
+Time	s	now	3.0	3.1	real	-1|rest|C	-1|key:in|rb	|0|0|-	|0|0|-	0/0/0///0/0/ ; 0/0/0/in//0/0/	0/0/0///0/0/ ; 0/0/0//in/0/0/	1	ok	reflected
+Enumerable	i	tally	3.1	3.2	rbs	-1|rest|C	-1|rest|C	|0|0|-	hash|0|1|-	0/0/0///0/0/ ; 1/0/0///0/0/hash	0/0/0///0/0/ ; 1/0/0///0/0/hash	0	ok-split	rbs-only
+Fiber	i	initialize	3.1	3.2	rbs	-1|rest|C	-1|rest|C	|0|0|req	blocking|0|0|req	0/0/0//blocking/0/1/	0/0/0//blocking,storage/0/1/	1	ok	reflected
+Fiber	i	raise	3.1	3.2	rbs	-1|rest|C	-1|rest|C	exception,message,backtrace|1|3|- ; message|1|1|- ; |0|0|-	msg,backtrace|1|3|- ; msg|0|1|-	0/0/0///0/0/ ; 1/0/0///0/0/message ; 1/2/0///0/0/exception,message,backtrace	0/0/0///0/0/ ; 1/0/0///0/0/message ; 1/2/0///0/0/exception,message,backtrace	0	ok	rbs-only
+Fiber	i	resume	3.1	3.2	rbs	-1|rest|C	-1|rest|C	args|0|-|-	|0|-|-	raw:### def resume(*arg = nil) -> object	raw:### def resume(*arg = nil) -> object	0	-	rbs-only
+Fiber	s	yield	3.1	3.2	rbs	-1|rest|C	-1|rest|C	args|0|-|-	|0|-|-	raw:### def Fiber.yield(*arg = nil) -> object	raw:### def Fiber.yield(*arg = nil) -> object	0	-	rbs-only
+File	s	dirname	3.1	3.2	rbs	-1|rest|C	-1|rest|C	file_name|1|1|-	file_name,level|1|2|-	1/1/0///0/0/filename,level	1/1/0///0/0/filename,level	0	ok	rbs-only
+GC	s	auto_compact	3.1	3.2	real	0|-|rb	0|-|C			0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+GC	s	auto_compact=	3.1	3.2	real	1|req:flag|rb	1|req|C			1/0/0///0/0/bool	1/0/0///0/0/bool	0	ok	already-consistent
+GC	s	compact	3.1	3.2	real	0|-|rb	0|-|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+GC	s	latest_compact_info	3.1	3.2	real	0|-|rb	0|-|C			0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+GC	s	using_rvargc?	3.1	3.2	real	0|-|rb	0|-|C			0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+GC	s	verify_compaction_references	3.1	3.2	real	-1|key:toward key:double_heap|rb	-1|key:toward key:double_heap key:expand_heap|rb	|0|0|-	|0|0|-	0/0/0//toward,double_heap/0/0/	0/0/0//toward,double_heap/0/0/	0	kw-mismatch	unreflected
+Hash	i	dig	3.1	3.2	rbs	-1|rest|C	-1|rest|C	|0|-|-	|1|-|-	1/0/1///1/1/key	1/0/1///1/1/key	0	ok	rbs-only
+IO::Buffer	i	pread	3.1	3.2	real	3|req req req|C	-1|rest|C		|3|3|-	3/0/0///0/0/io,length,from	2/2/0///0/0/io,from,length,offset	1	ok	reflected
+IO::Buffer	i	pwrite	3.1	3.2	real	3|req req req|C	-1|rest|C		|3|3|-	3/0/0///0/0/io,length,from	2/2/0///0/0/io,from,length,offset	1	ok	reflected
+IO::Buffer	i	read	3.1	3.2	real	2|req req|C	-1|rest|C		|2|2|-	2/0/0///0/0/io,length	1/2/0///0/0/io,length,offset	1	ok	reflected
+IO::Buffer	i	slice	3.1	3.2	real	2|req req|C	-1|rest|C		offset,length|2|2|-	2/0/0///0/0/offset,length	0/2/0///0/0/offset,length	1	ok	reflected
+IO::Buffer	i	write	3.1	3.2	real	2|req req|C	-1|rest|C		|2|2|-	2/0/0///0/0/io,length	1/2/0///0/0/io,length,offset	1	ok	reflected
+Integer	i	denominator	3.1	3.2	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Integer	i	numerator	3.1	3.2	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Kernel	i	fail	3.1	3.2	rbs	-1|rest|C	-1|rest|C	arg0,arg1,arg2|1|3|- ; arg0|1|1|- ; |0|0|-	exception,message,backtrace,cause|1|3|- ; message,cause|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0	ok	rbs-only
+Kernel	i	raise	3.1	3.2	rbs	-1|rest|C	-1|rest|C	arg0,arg1,arg2|1|3|- ; arg0|1|1|- ; |0|0|-	exception,message,backtrace,cause|1|3|- ; message,cause|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0	ok	rbs-only
+Kernel	i	warn	3.1	3.2	rbs	-1|rest:msgs key:uplevel key:category|rb	-1|rest:msgs key:uplevel key:category|rb	msg,uplevel|0|-|-	msg,uplevel,category|0|-|-	0/0/1//uplevel,category/0/0/*message	0/0/1//uplevel,category/0/0/*message	0	ok	rbs-only
+Kernel	s	fail	3.1	3.2	rbs	-1|rest|C	-1|rest|C	arg0,arg1,arg2|1|3|- ; arg0|1|1|- ; |0|0|-	exception,message,backtrace,cause|1|3|- ; message,cause|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0	ok	rbs-only
+Kernel	s	raise	3.1	3.2	rbs	-1|rest|C	-1|rest|C	arg0,arg1,arg2|1|3|- ; arg0|1|1|- ; |0|0|-	exception,message,backtrace,cause|1|3|- ; message,cause|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0	ok	rbs-only
+Kernel	s	warn	3.1	3.2	rbs	-1|rest:msgs key:uplevel key:category|rb	-1|rest:msgs key:uplevel key:category|rb	msg,uplevel|0|-|-	msg,uplevel,category|0|-|-	0/0/1//uplevel,category/0/0/*message	0/0/1//uplevel,category/0/0/*message	0	ok	rbs-only
+Marshal	s	load	3.1	3.2	rbs	-2|req:source opt:proc key:freeze|rb	-2|req:source opt:proc key:freeze|rb	port|1|1|- ; port|2|2|-	port,freeze|1|1|- ; port,freeze|2|2|-	1/2/0///0/0/port,proc,options	1/2/0///0/0/port,proc,options	0	opt-count	rbs-only
+Marshal	s	restore	3.1	3.2	rbs	-2|req:source opt:proc key:freeze|rb	-2|req:source opt:proc key:freeze|rb	port|1|1|- ; port|2|2|-	port,freeze|1|1|- ; port,freeze|2|2|-	1/2/0///0/0/port,proc,options	1/2/0///0/0/port,proc,options	0	opt-count	rbs-only
+Module	i	private	3.1	3.2	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	method_name|1|1|- ; method_name|1|1|- ; method_name|2|-|- ; method_name|2|-|- ; |0|0|-	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0	ok	rbs-only
+Module	i	public	3.1	3.2	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	method_name|1|1|- ; method_name|1|1|- ; method_name|2|-|- ; method_name|2|-|- ; |0|0|-	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0	ok	rbs-only
+Module	i	refine	3.1	3.2	rbs	1|req|C	1|req|C	arg0|1|1|req	mod|1|1|req	1/0/0///0/1/klass	1/0/0///0/1/klass	0	ok	rbs-only
+Numeric	i	conj	3.1	3.2	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Numeric	i	conjugate	3.1	3.2	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Numeric	i	imag	3.1	3.2	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Numeric	i	imaginary	3.1	3.2	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Numeric	i	real	3.1	3.2	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Proc	i	parameters	3.1	3.2	real	0|-|C	-1|rest|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0//lambda/0/0/	1	ok	reflected
+Process	s	clock_gettime	3.1	3.2	rbs	-1|rest|C	-1|rest|C	clock_id,unit|1|2|-	clock_id,unit|2|2|- ; clock_id,unit|2|2|- ; clock_id|1|1|-	1/1/0///0/0/clock_id,unit	1/1/0///0/0/clock_id,unit	0	ok	rbs-only
+Random	s	rand	3.1	3.2	rbs	-1|rest|C	-1|rest|C	max|1|1|- ; max|1|1|- ; |0|0|-	max|1|1|- ; max|1|1|- ; |0|0|- ; |1|1|-	0/0/0///0/0/ ; 1/0/0///0/0/max ; 1/0/0///0/0/range	0/0/0///0/0/ ; 1/0/0///0/0/max ; 1/0/0///0/0/range	0	ok-split	rbs-only
+RubyVM::AbstractSyntaxTree	s	of	3.1	3.2	real	-2|req:body key:keep_script_lines|rb	-2|req:body key:keep_script_lines key:error_tolerant key:keep_tokens|rb			1/0/0///0/0/proc ; 1/0/0//keep_script_lines/0/0/proc	1/0/0///0/0/proc ; 1/0/0//keep_script_lines,error_tolerant,keep_tokens/0/0/proc	1	ok-split	reflected
+RubyVM::AbstractSyntaxTree	s	parse	3.1	3.2	real	-2|req:string key:keep_script_lines|rb	-2|req:string key:keep_script_lines key:error_tolerant key:keep_tokens|rb			1/0/0///0/0/string ; 1/0/0//keep_script_lines/0/0/string	1/0/0///0/0/string ; 1/0/0//keep_script_lines,error_tolerant,keep_tokens/0/0/string	1	ok	reflected
+RubyVM::AbstractSyntaxTree	s	parse_file	3.1	3.2	real	-2|req:pathname key:keep_script_lines|rb	-2|req:pathname key:keep_script_lines key:error_tolerant key:keep_tokens|rb			1/0/0///0/0/pathname ; 1/0/0//keep_script_lines/0/0/pathname	1/0/0///0/0/pathname ; 1/0/0//keep_script_lines,error_tolerant,keep_tokens/0/0/pathname	1	ok	reflected
+RubyVM::MJIT	s	enabled?	3.1	3.2	real	0|-|C	0|-|rb			0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+RubyVM::MJIT	s	pause	3.1	3.2	real	-1|rest|C	-1|key:wait|rb			0/0/0//wait/0/0/	0/0/0//wait/0/0/	0	ok	already-consistent
+RubyVM::MJIT	s	resume	3.1	3.2	real	0|-|C	0|-|rb			0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+String	i	unpack	3.1	3.2	rbs	-2|req:fmt key:offset|rb	-2|req:fmt key:offset|rb	format|1|1|-	format,offset|1|1|-	1/0/0///0/0/template	1/0/0///0/0/template	0	kw-mismatch	rbs-only
+Symbol	i	intern	3.1	3.2	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Symbol	i	to_sym	3.1	3.2	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Queue	i	deq	3.1	3.2	real	-1|rest|C	-1|opt:non_block key:timeout|rb	non_block|0|1|-	non_block|0|1|-	0/1/0///0/0/non_block	0/1/0///0/0/non_block	0	kw-mismatch	unreflected
+Thread::Queue	i	pop	3.1	3.2	real	-1|rest|C	-1|opt:non_block key:timeout|rb	non_block|0|1|-	non_block|0|1|-	0/1/0///0/0/non_block	0/1/0///0/0/non_block	0	kw-mismatch	unreflected
+Thread::Queue	i	shift	3.1	3.2	real	-1|rest|C	-1|opt:non_block key:timeout|rb	non_block|0|1|-	non_block|0|1|-	0/1/0///0/0/non_block	0/1/0///0/0/non_block	0	kw-mismatch	unreflected
+Thread::SizedQueue	i	<<	3.1	3.2	real	-1|rest|C	-2|req:object opt:non_block key:timeout|rb	obj,non_block|1|2|-	obj,non_block|1|2|-	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	0	kw-mismatch	unreflected
+Thread::SizedQueue	i	deq	3.1	3.2	real	-1|rest|C	-1|opt:non_block key:timeout|rb			0/1/0///0/0/non_block	0/1/0///0/0/non_block	0	kw-mismatch	unreflected
+Thread::SizedQueue	i	enq	3.1	3.2	real	-1|rest|C	-2|req:object opt:non_block key:timeout|rb	obj,non_block|1|2|-	obj,non_block|1|2|-	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	0	kw-mismatch	unreflected
+Thread::SizedQueue	i	pop	3.1	3.2	real	-1|rest|C	-1|opt:non_block key:timeout|rb			0/1/0///0/0/non_block	0/1/0///0/0/non_block	0	kw-mismatch	unreflected
+Thread::SizedQueue	i	push	3.1	3.2	real	-1|rest|C	-2|req:object opt:non_block key:timeout|rb	obj,non_block|1|2|-	obj,non_block|1|2|-	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	0	kw-mismatch	unreflected
+Thread::SizedQueue	i	shift	3.1	3.2	real	-1|rest|C	-1|opt:non_block key:timeout|rb			0/1/0///0/0/non_block	0/1/0///0/0/non_block	0	kw-mismatch	unreflected
+Time	i	initialize	3.1	3.2	both	-1|opt:year opt:mon opt:mday opt:hour opt:min opt:sec opt:zone key:in|rb	-1|opt:year opt:mon opt:mday opt:hour opt:min opt:sec opt:zone key:in key:precision|rb	year,month,day,hour,min,sec,usec_with_frac|0|7|-	year,month,day,hour,min,sec,in|0|6|- ; year,month,day,hour,min,sec|0|7|-	0/0/0///0/0/ ; 1/5/0//in/0/0/year,mon,day,hour,min,sec ; 1/6/0///0/0/year,mon,day,hour,min,sec,zone	0/0/0///0/0/ ; 1/0/0//in/0/0/iso8601 ; 1/5/0//in/0/0/year,mon,day,hour,min,sec ; 1/6/0///0/0/year,mon,day,hour,min,sec,zone	1	opt-count	reflected
+Time	s	at	3.1	3.2	rbs	-2|req:time opt:subsec opt:unit key:in|rb	-2|req:time opt:subsec opt:unit key:in|rb	seconds,microseconds_with_frac|1|2|- ; seconds|1|1|-	in|1|1|- ; in|1|1|- ; sec_i,msec,msec,in|3|3|-	1/0/0///0/0/time ; 1/0/0/in//0/0/time ; 2/0/0///0/0/time,usec ; 2/0/0/in//0/0/time,usec ; 3/0/0///0/0/seconds,xseconds,unit ; 3/0/0/in//0/0/seconds,xseconds,unit	1/0/0///0/0/time ; 1/0/0/in//0/0/time ; 2/0/0///0/0/time,usec ; 2/0/0/in//0/0/time,usec ; 3/0/0///0/0/seconds,xseconds,unit ; 3/0/0/in//0/0/seconds,xseconds,unit	0	ok-split	rbs-only
+Time	s	now	3.1	3.2	rbs	-1|key:in|rb	-1|key:in|rb	|0|0|-	in|0|0|-	0/0/0///0/0/ ; 0/0/0//in/0/0/	0/0/0///0/0/ ; 0/0/0//in/0/0/	0	ok	rbs-only
+TracePoint	i	enable	3.1	3.2	rbs	-1|key:target key:target_line key:target_thread|rb	-1|key:target key:target_line key:target_thread|rb	|0|0|- ; |0|0|req	target,target_line,target_thread|0|0|- ; target,target_line,target_thread|0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	kw-mismatch	rbs-only
+Warning	i	warn	3.1	3.2	rbs	-1|rest|C	-1|rest|C	|1|1|-	message,category|1|1|-	1/0/0//category/0/0/message	1/0/0//category/0/0/message	0	ok	rbs-only
+Array	i	first	3.2	3.3	real	-1|rest|C	-1|opt:n|rb	n|1|1|- ; |0|0|-	n|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0///0/0/n	0/0/0///0/0/ ; 1/0/0///0/0/n	0	ok-split	already-consistent
+Array	i	last	3.2	3.3	real	-1|rest|C	-1|opt:n|rb	n|1|1|- ; |0|0|-	n|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0///0/0/n	0/0/0///0/0/ ; 1/0/0///0/0/n	0	ok-split	already-consistent
+BasicObject	i	__send__	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0,args|1|-|-	name|1|-|opt	1/0/1///0/0/name,*args ; 1/0/1///0/1/name,*args	1/0/1///0/0/name,*args ; 1/0/1///0/1/name,*args	0	ok	rbs-only
+BasicObject	i	instance_eval	3.2	3.3	rbs	-1|rest|C	-1|rest|C	filename,lineno|1|3|- ; |0|0|req	code,filename,lineno|1|3|- ; |0|0|req	0/0/0///0/1/ ; 1/2/0///0/0/expr,filename,lineno	0/0/0///0/1/ ; 1/2/0///0/0/expr,filename,lineno	0	ok	rbs-only
+BasicObject	i	singleton_method_added	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	name|1|1|-	1/0/0///0/0/name	1/0/0///0/0/name	0	ok	rbs-only
+BasicObject	i	singleton_method_removed	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	name|1|1|-	1/0/0///0/0/name	1/0/0///0/0/name	0	ok	rbs-only
+BasicObject	i	singleton_method_undefined	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	name|1|1|-	1/0/0///0/0/name	1/0/0///0/0/name	0	ok	rbs-only
+Binding	i	eval	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0,filename,lineno|1|3|-	src,filename,lineno|1|3|-	1/2/0///0/0/expr,fname,lineno	1/2/0///0/0/expr,fname,lineno	0	ok	rbs-only
+Binding	i	local_variable_defined?	3.2	3.3	rbs	1|req|C	1|req|C	symbol|1|1|-	varname|1|1|-	1/0/0///0/0/symbol	1/0/0///0/0/symbol	0	ok	rbs-only
+Binding	i	local_variable_get	3.2	3.3	rbs	1|req|C	1|req|C	symbol|1|1|-	varname|1|1|-	1/0/0///0/0/symbol	1/0/0///0/0/symbol	0	ok	rbs-only
+Binding	i	local_variable_set	3.2	3.3	rbs	2|req req|C	2|req req|C	symbol,obj|2|2|-	varname,obj|2|2|-	2/0/0///0/0/symbol,obj	2/0/0///0/0/symbol,obj	0	ok	rbs-only
+Dir	i	initialize	3.2	3.3	rbs	-2|req:name key:encoding|rb	-2|req:name key:encoding|rb	encoding|1|1|-	dir,encoding|1|1|-	1/0/0///0/0/path ; 1/0/0//encoding/0/0/path	1/0/0///0/0/path ; 1/0/0//encoding/0/0/path	0	ok-split	rbs-only
+Dir	i	seek	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	pos|1|1|-	1/0/0///0/0/pos	1/0/0///0/0/pos	0	ok	rbs-only
+Dir	s	[]	3.2	3.3	rbs	-1|rest:args key:base key:sort|rb	-1|rest:args key:base key:sort|rb	patterns,base|0|-|opt	patterns,base,sort|0|-|-	0/0/1//base,sort/0/0/*pattern	0/0/1//base,sort/0/0/*pattern	0	ok	rbs-only
+Dir	s	chdir	3.2	3.3	rbs	-1|rest|C	-1|rest|C	|0|1|- ; |0|1|req	dir|0|1|- ; dir|0|1|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/path ; 1/0/0///0/1/path	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/path ; 1/0/0///0/1/path	0	ok-split	rbs-only
+Dir	s	chroot	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	root|1|1|-	1/0/0///0/0/path	1/0/0///0/0/path	0	ok	rbs-only
+Dir	s	delete	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	dirname|1|1|-	1/0/0///0/0/path	1/0/0///0/0/path	0	ok	rbs-only
+Dir	s	exist?	3.2	3.3	rbs	1|req|C	1|req|C	file|1|1|-	file_name|1|1|-	1/0/0///0/0/file_name	1/0/0///0/0/file_name	0	ok	rbs-only
+Dir	s	glob	3.2	3.3	rbs	-2|req:pattern opt:_flags key:flags key:base key:sort|rb	-2|req:pattern opt:_flags key:flags key:base key:sort|rb	pattern,flags,base|1|2|- ; pattern,flags,base|1|2|req	pattern,flags,base,sort|1|2|- ; pattern,flags,base,sort|1|2|req	1/1/0//base,sort/0/0/pattern,flags ; 1/1/0//base,sort/0/1/pattern,flags	1/1/0//base,sort/0/0/pattern,flags ; 1/1/0//base,sort/0/1/pattern,flags	0	kw-mismatch	rbs-only
+Dir	s	mkdir	3.2	3.3	rbs	-1|rest|C	-1|rest|C	permissions|1|2|-	dirname,permissions|1|2|-	1/1/0///0/0/path,mode	1/1/0///0/0/path,mode	0	ok	rbs-only
+Dir	s	open	3.2	3.3	rbs	-2|req:name key:encoding block:block|rb	-2|req:name key:encoding block:block|rb	encoding|1|1|- ; encoding|1|1|req	dirname,encoding|1|1|- ; dirname,encoding|1|1|req	1/0/0///0/0/path ; 1/0/0///0/1/path ; 1/0/0//encoding/0/0/path ; 1/0/0//encoding/0/1/path	1/0/0///0/0/path ; 1/0/0///0/1/path ; 1/0/0//encoding/0/0/path ; 1/0/0//encoding/0/1/path	0	ok-split	rbs-only
+Dir	s	rmdir	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	dirname|1|1|-	1/0/0///0/0/path	1/0/0///0/0/path	0	ok	rbs-only
+Dir	s	unlink	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	dirname|1|1|-	1/0/0///0/0/path	1/0/0///0/0/path	0	ok	rbs-only
+Encoding	s	default_external=	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|- ; arg0|1|1|-	enc|1|1|- ; enc|1|1|-	1/0/0///0/0/encoding	1/0/0///0/0/encoding	0	ok	rbs-only
+Encoding	s	default_internal=	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|- ; arg0|1|1|- ; arg0|1|1|-	enc|1|1|- ; enc|1|1|- ; |1|1|-	1/0/0///0/0/encoding	1/0/0///0/0/encoding	0	ok	rbs-only
+Encoding	s	find	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|-	enc|1|1|-	1/0/0///0/0/name	1/0/0///0/0/name	0	ok	rbs-only
+Enumerable	i	zip	3.2	3.3	rbs	-1|rest|C	-1|rest|C	enum|1|1|- ; |1|1|req	enum|1|1|- ; |1|-|- ; |1|-|req ; |1|1|req	0/0/1///0/0/*lists ; 0/0/1///0/1/*lists	0/0/1///0/0/*lists ; 0/0/1///0/1/*lists	0	ok	rbs-only
+Exception	i	==	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|-	obj|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Exception	i	exception	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0|1|1|- ; |0|0|-	message|1|1|- ; |0|1|-	0/0/0///0/0/ ; 1/0/0///0/0/error_message	0/0/0///0/0/ ; 1/0/0///0/0/error_message	0	ok-split	rbs-only
+Exception	i	initialize	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0|0|1|-	message|0|1|-	0/1/0///0/0/error_message	0/1/0///0/0/error_message	0	ok	rbs-only
+Exception	i	set_backtrace	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|- ; |1|1|-	backtrace|1|1|- ; |1|1|-	1/0/0///0/0/errinfo	1/0/0///0/0/errinfo	0	ok	rbs-only
+FalseClass	i	^	3.2	3.3	rbs	1|req|C	1|req|C	obj|1|1|- ; |1|1|- ; |1|1|-	obj|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+FalseClass	i	|	3.2	3.3	rbs	1|req|C	1|req|C	obj|1|1|- ; |1|1|- ; |1|1|-	obj|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Fiber	i	initialize	3.2	3.3	rbs	-1|rest|C	-1|rest|C	blocking|0|0|req	blocking,storage|0|0|req	0/0/0//blocking,storage/0/1/	0/0/0//blocking,storage/0/1/	0	ok	rbs-only
+IO	i	autoclose=	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	bool|1|1|-	1/0/0///0/0/bool	1/0/0///0/0/bool	0	ok	rbs-only
+IO	i	close_on_exec=	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	bool|1|1|-	1/0/0///0/0/bool	1/0/0///0/0/bool	0	ok	rbs-only
+IO	i	fcntl	3.2	3.3	rbs	-1|rest|C	-1|rest|C	integer_cmd,arg|2|2|-	integer_cmd,argument|2|2|-	1/1/0///0/0/cmd,arg	1/1/0///0/0/cmd,arg	0	ok	rbs-only
+IO	i	gets	3.2	3.3	rbs	-1|rest|C	-1|rest|C	sep,limit|0|2|-	limit,chomp|0|1|- ; sep,limit,chomp|1|2|-	0/1/0//chomp/0/0/rs ; 1/0/0//chomp/0/0/limit ; 2/0/0//chomp/0/0/rs,limit	0/1/0//chomp/0/0/rs ; 1/0/0//chomp/0/0/limit ; 2/0/0//chomp/0/0/rs,limit	0	ok	rbs-only
+IO	i	initialize	3.2	3.3	rbs	-1|rest|C	-1|rest|C	fd,mode,opt|1|3|-	fd,mode,path,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,mode|1|2|-	1/1/0///1/0/fd,mode	1/1/0///1/0/fd,mode	0	ok	rbs-only
+IO	i	ioctl	3.2	3.3	rbs	-1|rest|C	-1|rest|C	integer_cmd,arg|2|2|-	integer_cmd,argument|2|2|-	1/1/0///0/0/cmd,arg	1/1/0///0/0/cmd,arg	0	ok	rbs-only
+IO	i	lineno=	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|-	integer|1|1|-	1/0/0///0/0/number	1/0/0///0/0/number	0	ok	rbs-only
+IO	i	pos=	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|-	new_position|1|1|-	1/0/0///0/0/n	1/0/0///0/0/n	0	ok	rbs-only
+IO	i	print	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	objects|0|-|-	0/0/1///0/0/*arg	0/0/1///0/0/*arg	0	ok	rbs-only
+IO	i	printf	3.2	3.3	rbs	-1|rest|C	-1|rest|C	format_string,arg0|1|-|-	format_string,objects|1|-|-	1/0/1///0/0/format,*arg	1/0/1///0/0/format,*arg	0	ok	rbs-only
+IO	i	putc	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|-	object|1|1|-	1/0/0///0/0/ch	1/0/0///0/0/ch	0	ok	rbs-only
+IO	i	puts	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	objects|0|-|-	0/0/1///0/0/*obj	0/0/1///0/0/*obj	0	ok	rbs-only
+IO	i	read	3.2	3.3	rbs	-1|rest|C	-1|rest|C	length,outbuf|0|2|-	length,outbuf|1|2|- ; outbuf|0|2|-	0/2/0///0/0/length,outbuf	0/2/0///0/0/length,outbuf	0	ok	rbs-only
+IO	i	readline	3.2	3.3	real	-1|rest|C	-1|opt:sep opt:limit key:chomp|rb	sep,limit|0|2|-	sep,limit|0|2|-	0/1/0//chomp/0/0/rs ; 1/0/0//chomp/0/0/limit ; 2/0/0//chomp/0/0/rs,limit	0/1/0//chomp/0/0/rs ; 1/0/0//chomp/0/0/limit ; 2/0/0//chomp/0/0/rs,limit	0	ok-split	already-consistent
+IO	i	sync=	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	boolean|1|1|-	1/0/0///0/0/newstate	1/0/0///0/0/newstate	0	ok	rbs-only
+IO	i	syswrite	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|-	object|1|1|-	1/0/0///0/0/string	1/0/0///0/0/string	0	ok	rbs-only
+IO	i	ungetbyte	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|-	object|1|1|-	1/0/0///0/0/c	1/0/0///0/0/c	0	ok	rbs-only
+IO	i	ungetc	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|-	object|1|1|-	1/0/0///0/0/char	1/0/0///0/0/char	0	ok	rbs-only
+IO	s	open	3.2	3.3	rbs	-1|rest|C	-1|rest|C	fd,mode|1|2|req	fd,mode,path,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,mode|1|2|- ; fd,mode,path,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,mode|1|2|req	1/1/0///1/0/fd,mode ; 1/1/0///1/1/fd,mode	1/1/0///1/0/fd,mode ; 1/1/0///1/1/fd,mode	0	ok	rbs-only
+IO	s	popen	3.2	3.3	rbs	-1|rest|C	-1|rest|C	args|0|-|-	cmd,mode,path,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,mode,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|1|2|- ; cmd,mode,path,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,mode,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|1|2|req ; env,cmd,mode,path,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,mode,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|2|3|- ; env,cmd,mode,path,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,mode,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|2|3|req	1/2/0///0/0/="-",mode,opt ; 1/2/0///0/1/="-",mode,opt ; 1/3/0///0/0/env,command,mode,opt ; 1/3/0///0/1/env,command,mode,opt ; 2/2/0///0/0/env,="-",mode,opt ; 2/2/0///0/1/env,="-",mode,opt ; raw:### def IO.popen([env = {}, [cmdname, arg0], *args, execopt={}], mode = "r", opt={}) -> IO ; raw:### def IO.popen([env = {}, [cmdname, arg0], *args, execopt={}], mode = "r", opt={}){|f| ... } -> object ; raw:### def IO.popen([env = {}, cmdname, *args, execopt={}], mode = "r", opt={}) -> IO ; raw:### def IO.popen([env = {}, cmdname, *args, execopt={}], mode = "r", opt={}){|f| ... } -> object ; raw:### def IO.popen(env = {}, [[cmdname, arg0], *args, execopt={}], mode = "r", opt={}) -> IO ; raw:### def IO.popen(env = {}, [[cmdname, arg0], *args, execopt={}], mode = "r", opt={}){|f| ... } -> object ; raw:### def IO.popen(env = {}, [cmdname, *args, execopt={}], mode = "r", opt={}) -> IO ; raw:### def IO.popen(env = {}, [cmdname, *args, execopt={}], mode = "r", opt={}){|f| ... } -> object	1/2/0///0/0/="-",mode,opt ; 1/2/0///0/1/="-",mode,opt ; 1/3/0///0/0/env,command,mode,opt ; 1/3/0///0/1/env,command,mode,opt ; 2/2/0///0/0/env,="-",mode,opt ; 2/2/0///0/1/env,="-",mode,opt ; raw:### def IO.popen([env = {}, [cmdname, arg0], *args, execopt={}], mode = "r", opt={}) -> IO ; raw:### def IO.popen([env = {}, [cmdname, arg0], *args, execopt={}], mode = "r", opt={}){|f| ... } -> object ; raw:### def IO.popen([env = {}, cmdname, *args, execopt={}], mode = "r", opt={}) -> IO ; raw:### def IO.popen([env = {}, cmdname, *args, execopt={}], mode = "r", opt={}){|f| ... } -> object ; raw:### def IO.popen(env = {}, [[cmdname, arg0], *args, execopt={}], mode = "r", opt={}) -> IO ; raw:### def IO.popen(env = {}, [[cmdname, arg0], *args, execopt={}], mode = "r", opt={}){|f| ... } -> object ; raw:### def IO.popen(env = {}, [cmdname, *args, execopt={}], mode = "r", opt={}) -> IO ; raw:### def IO.popen(env = {}, [cmdname, *args, execopt={}], mode = "r", opt={}){|f| ... } -> object	0	ok	rbs-only
+IO	s	try_convert	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|-	obj|1|1|- ; obj|1|1|-	1/0/0///0/0/obj	1/0/0///0/0/obj	0	ok	rbs-only
+IO	s	write	3.2	3.3	rbs	-1|rest|C	-1|rest|C	name,arg0,offset,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,mode|2|3|-	path,data,offset,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,mode|2|3|-	2/0/0///1/0/path,string ; 2/1/0///1/0/path,string,offset	2/0/0///1/0/path,string ; 2/1/0///1/0/path,string,offset	0	ok	rbs-only
+IO::Buffer	i	hexdump	3.2	3.3	real	0|-|C	-1|rest|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/3/0///0/0/offset,length,width	1	ok	reflected
+Integer	i	times	3.2	3.3	real	0|-|C	0|-|rb	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	already-consistent
+Kernel	i	Array	3.2	3.3	rbs	1|req|C	1|req|C	x|1|1|- ; x|1|1|- ; x|1|1|- ; x|1|1|- ; x|1|1|- ; x|1|1|-	array_like|1|1|- ; ele|1|1|- ; |1|1|-	1/0/0///0/0/arg	1/0/0///0/0/arg	0	ok	rbs-only
+Kernel	i	Complex	3.2	3.3	rbs	-1|rest|C	-1|rest|C	x,y,exception|1|2|-	complex_like,exception|1|1|- ; complex_like,exception|1|1|- ; exception|1|2|- ; real,imag,exception|1|2|- ; real,imag,exception|1|2|-	1/0/0//exception/0/0/s ; 1/1/0//exception/0/0/r,i	1/0/0//exception/0/0/s ; 1/1/0//exception/0/0/r,i	0	ok	rbs-only
+Kernel	i	Float	3.2	3.3	rbs	-2|req:arg key:exception|rb	-2|req:arg key:exception|rb	x,exception|1|1|-	exception|1|1|- ; float_like,exception|1|1|- ; float_like,exception|1|1|-	1/0/0//exception/0/0/arg	1/0/0//exception/0/0/arg	0	ok	rbs-only
+Kernel	i	Hash	3.2	3.3	rbs	1|req|C	1|req|C	x|1|1|-	_empty|1|1|- ; hash_like|1|1|-	1/0/0///0/0/arg	1/0/0///0/0/arg	0	ok	rbs-only
+Kernel	i	Integer	3.2	3.3	both	-1|rest|C	-2|req:arg opt:base key:exception|rb	arg,base,exception|1|2|- ; arg,exception|1|1|-	exception|1|2|- ; int_like,exception|1|1|- ; int_like,exception|1|1|- ; str,base,exception|2|2|- ; str,base,exception|2|2|-	1/1/0//exception/0/0/arg,base	1/1/0//exception/0/0/arg,base	0	ok	already-consistent
+Kernel	i	Rational	3.2	3.3	rbs	-1|rest|C	-1|rest|C	x,y,exception|1|2|-	exception|1|2|- ; numer,denom,exception|1|2|- ; numer,denom,exception|1|2|- ; numer,denom,exception|2|2|- ; rational_like,exception|1|1|- ; rational_like,exception|1|1|- ; value,exception|2|2|-	1/1/0//exception/0/0/x,y	1/1/0//exception/0/0/x,y	0	ok	rbs-only
+Kernel	i	String	3.2	3.3	rbs	1|req|C	1|req|C	x|1|1|-	string_like|1|1|-	1/0/0///0/0/arg	1/0/0///0/0/arg	0	ok	rbs-only
+Kernel	i	eval	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0,arg1,filename,lineno|1|4|-	src,scope,filename,lineno|1|4|-	1/0/0///0/0/expr ; 2/2/0///0/0/expr,bind,fname,lineno	1/0/0///0/0/expr ; 2/2/0///0/0/expr,bind,fname,lineno	0	ok	rbs-only
+Kernel	i	exec	3.2	3.3	rbs	-1|rest|C	-1|rest|C	args|0|-|-	command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|1|-|- ; env,command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|2|-|-	1/1/0///0/0/command,options ; 1/1/1///0/0/program,*args,options ; 2/1/0///0/0/env,command,options ; 2/1/1///0/0/env,program,*args,options	1/1/0///0/0/command,options ; 1/1/1///0/0/program,*args,options ; 2/1/0///0/0/env,command,options ; 2/1/1///0/0/env,program,*args,options	0	ok	rbs-only
+Kernel	i	exit	3.2	3.3	rbs	-1|rest|C	-1|rest|C	status|0|1|- ; |0|0|-	status|0|1|-	0/1/0///0/0/status	0/1/0///0/0/status	0	ok	rbs-only
+Kernel	i	exit!	3.2	3.3	rbs	-1|rest|C	-1|rest|C	status|1|1|-	status|0|1|-	0/1/0///0/0/status	0/1/0///0/0/status	0	ok	rbs-only
+Kernel	i	fail	3.2	3.3	rbs	-1|rest|C	-1|rest|C	exception,message,backtrace,cause|1|3|- ; message,cause|1|1|- ; |0|0|-	exception,cause|1|1|- ; exception,message,backtrace,cause|1|3|- ; message,cause|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0	ok	rbs-only
+Kernel	i	loop	3.2	3.3	real	0|-|C	0|-|rb	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	already-consistent
+Kernel	i	p	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0|0|-|- ; arg0|1|1|-	arg0,arg1,rest|2|-|- ; arg0|1|1|- ; |0|0|-	0/0/1///0/0/*arg	0/0/1///0/0/*arg	0	ok	rbs-only
+Kernel	i	pp	3.2	3.3	rbs	-1|rest:objs|rb	-1|rest:objs|rb	arg0|0|-|- ; arg0|1|1|-	arg0|1|1|- ; |0|0|- ; |2|-|-	0/0/1///0/0/*obj	0/0/1///0/0/*obj	0	ok	rbs-only
+Kernel	i	printf	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0,arg1,args|2|-|- ; arg1,args|1|-|- ; |0|0|-	fmt,args|1|-|- ; io,fmt,args|2|-|- ; |0|0|-	1/0/1///0/0/format,*arg ; 2/0/1///0/0/port,format,*arg	1/0/1///0/0/format,*arg ; 2/0/1///0/0/port,format,*arg	0	ok	rbs-only
+Kernel	i	putc	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|- ; arg0|1|1|-	chr|1|1|- ; chr|1|1|-	1/0/0///0/0/ch	1/0/0///0/0/ch	0	ok	rbs-only
+Kernel	i	puts	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	objects|0|-|-	0/0/1///0/0/*arg	0/0/1///0/0/*arg	0	ok	rbs-only
+Kernel	i	raise	3.2	3.3	rbs	-1|rest|C	-1|rest|C	exception,message,backtrace,cause|1|3|- ; message,cause|1|1|- ; |0|0|-	exception,cause|1|1|- ; exception,message,backtrace,cause|1|3|- ; message,cause|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0	ok	rbs-only
+Kernel	i	sleep	3.2	3.3	rbs	-1|rest|C	-1|rest|C	duration|1|1|- ; |0|0|-	duration|1|1|- ; |0|1|-	0/0/0///0/0/ ; 1/0/0///0/0/sec	0/0/0///0/0/ ; 1/0/0///0/0/sec	0	ok-split	rbs-only
+Kernel	s	Array	3.2	3.3	rbs	1|req|C	1|req|C	x|1|1|- ; x|1|1|- ; x|1|1|- ; x|1|1|- ; x|1|1|- ; x|1|1|-	array_like|1|1|- ; ele|1|1|- ; |1|1|-	1/0/0///0/0/arg	1/0/0///0/0/arg	0	ok	rbs-only
+Kernel	s	Complex	3.2	3.3	rbs	-1|rest|C	-1|rest|C	x,y,exception|1|2|-	complex_like,exception|1|1|- ; complex_like,exception|1|1|- ; exception|1|2|- ; real,imag,exception|1|2|- ; real,imag,exception|1|2|-	1/0/0//exception/0/0/s ; 1/1/0//exception/0/0/r,i	1/0/0//exception/0/0/s ; 1/1/0//exception/0/0/r,i	0	ok	rbs-only
+Kernel	s	Float	3.2	3.3	rbs	-2|req:arg key:exception|rb	-2|req:arg key:exception|rb	x,exception|1|1|-	exception|1|1|- ; float_like,exception|1|1|- ; float_like,exception|1|1|-	1/0/0//exception/0/0/arg	1/0/0//exception/0/0/arg	0	ok	rbs-only
+Kernel	s	Hash	3.2	3.3	rbs	1|req|C	1|req|C	x|1|1|-	_empty|1|1|- ; hash_like|1|1|-	1/0/0///0/0/arg	1/0/0///0/0/arg	0	ok	rbs-only
+Kernel	s	Integer	3.2	3.3	both	-1|rest|C	-2|req:arg opt:base key:exception|rb	arg,base,exception|1|2|- ; arg,exception|1|1|-	exception|1|2|- ; int_like,exception|1|1|- ; int_like,exception|1|1|- ; str,base,exception|2|2|- ; str,base,exception|2|2|-	1/1/0//exception/0/0/arg,base	1/1/0//exception/0/0/arg,base	0	ok	already-consistent
+Kernel	s	Rational	3.2	3.3	rbs	-1|rest|C	-1|rest|C	x,y,exception|1|2|-	exception|1|2|- ; numer,denom,exception|1|2|- ; numer,denom,exception|1|2|- ; numer,denom,exception|2|2|- ; rational_like,exception|1|1|- ; rational_like,exception|1|1|- ; value,exception|2|2|-	1/1/0//exception/0/0/x,y	1/1/0//exception/0/0/x,y	0	ok	rbs-only
+Kernel	s	String	3.2	3.3	rbs	1|req|C	1|req|C	x|1|1|-	string_like|1|1|-	1/0/0///0/0/arg	1/0/0///0/0/arg	0	ok	rbs-only
+Kernel	s	eval	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0,arg1,filename,lineno|1|4|-	src,scope,filename,lineno|1|4|-	1/0/0///0/0/expr ; 2/2/0///0/0/expr,bind,fname,lineno	1/0/0///0/0/expr ; 2/2/0///0/0/expr,bind,fname,lineno	0	ok	rbs-only
+Kernel	s	exec	3.2	3.3	rbs	-1|rest|C	-1|rest|C	args|0|-|-	command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|1|-|- ; env,command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|2|-|-	1/1/0///0/0/command,options ; 1/1/1///0/0/program,*args,options ; 2/1/0///0/0/env,command,options ; 2/1/1///0/0/env,program,*args,options	1/1/0///0/0/command,options ; 1/1/1///0/0/program,*args,options ; 2/1/0///0/0/env,command,options ; 2/1/1///0/0/env,program,*args,options	0	ok	rbs-only
+Kernel	s	exit	3.2	3.3	rbs	-1|rest|C	-1|rest|C	status|0|1|- ; |0|0|-	status|0|1|-	0/1/0///0/0/status	0/1/0///0/0/status	0	ok	rbs-only
+Kernel	s	exit!	3.2	3.3	rbs	-1|rest|C	-1|rest|C	status|1|1|-	status|0|1|-	0/1/0///0/0/status	0/1/0///0/0/status	0	ok	rbs-only
+Kernel	s	fail	3.2	3.3	rbs	-1|rest|C	-1|rest|C	exception,message,backtrace,cause|1|3|- ; message,cause|1|1|- ; |0|0|-	exception,cause|1|1|- ; exception,message,backtrace,cause|1|3|- ; message,cause|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0	ok	rbs-only
+Kernel	s	loop	3.2	3.3	real	0|-|C	0|-|rb	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	already-consistent
+Kernel	s	p	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0|0|-|- ; arg0|1|1|-	arg0,arg1,rest|2|-|- ; arg0|1|1|- ; |0|0|-	0/0/1///0/0/*arg	0/0/1///0/0/*arg	0	ok	rbs-only
+Kernel	s	printf	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0,arg1,args|2|-|- ; arg1,args|1|-|- ; |0|0|-	fmt,args|1|-|- ; io,fmt,args|2|-|- ; |0|0|-	1/0/1///0/0/format,*arg ; 2/0/1///0/0/port,format,*arg	1/0/1///0/0/format,*arg ; 2/0/1///0/0/port,format,*arg	0	ok	rbs-only
+Kernel	s	putc	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|- ; arg0|1|1|-	chr|1|1|- ; chr|1|1|-	1/0/0///0/0/ch	1/0/0///0/0/ch	0	ok	rbs-only
+Kernel	s	puts	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	objects|0|-|-	0/0/1///0/0/*arg	0/0/1///0/0/*arg	0	ok	rbs-only
+Kernel	s	raise	3.2	3.3	rbs	-1|rest|C	-1|rest|C	exception,message,backtrace,cause|1|3|- ; message,cause|1|1|- ; |0|0|-	exception,cause|1|1|- ; exception,message,backtrace,cause|1|3|- ; message,cause|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0/0/0///0/0/ ; 1/0/0//cause/0/0/message ; 1/2/0//cause/0/0/error_type,message,backtrace	0	ok	rbs-only
+Kernel	s	sleep	3.2	3.3	rbs	-1|rest|C	-1|rest|C	duration|1|1|- ; |0|0|-	duration|1|1|- ; |0|1|-	0/0/0///0/0/ ; 1/0/0///0/0/sec	0/0/0///0/0/ ; 1/0/0///0/0/sec	0	ok-split	rbs-only
+Marshal	s	load	3.2	3.3	rbs	-2|req:source opt:proc key:freeze|rb	-2|req:source opt:proc key:freeze|rb	port,freeze|1|1|- ; port,freeze|2|2|-	source,freeze|1|1|- ; source,proc,freeze|2|2|-	1/2/0///0/0/port,proc,options	1/2/0///0/0/port,proc,options	0	opt-count	rbs-only
+Marshal	s	restore	3.2	3.3	rbs	-2|req:source opt:proc key:freeze|rb	-2|req:source opt:proc key:freeze|rb	port,freeze|1|1|- ; port,freeze|2|2|-	source,freeze|1|1|- ; source,proc,freeze|2|2|-	1/2/0///0/0/port,proc,options	1/2/0///0/0/port,proc,options	0	opt-count	rbs-only
+MatchData	i	==	3.2	3.3	rbs	1|req|C	1|req|C	other|1|1|-	other|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+MatchData	i	[]	3.2	3.3	rbs	-1|rest|C	-1|rest|C	idx|1|1|- ; name|1|1|- ; range|1|1|- ; start,length|2|2|-	backref|1|2|- ; range|1|1|- ; start,length|2|2|-	1/0/0///0/0/n ; 1/0/0///0/0/name ; 1/0/0///0/0/range ; 2/0/0///0/0/start,length	1/0/0///0/0/n ; 1/0/0///0/0/name ; 1/0/0///0/0/range ; 2/0/0///0/0/start,length	0	ok-split	rbs-only
+MatchData	i	begin	3.2	3.3	rbs	1|req|C	1|req|C	n_or_name|1|1|-	backref|1|1|-	1/0/0///0/0/n ; 1/0/0///0/0/name	1/0/0///0/0/n ; 1/0/0///0/0/name	0	ok	rbs-only
+MatchData	i	end	3.2	3.3	rbs	1|req|C	1|req|C	n_or_name|1|1|-	backref|1|1|-	1/0/0///0/0/n ; 1/0/0///0/0/name	1/0/0///0/0/n ; 1/0/0///0/0/name	0	ok	rbs-only
+MatchData	i	eql?	3.2	3.3	rbs	1|req|C	1|req|C	other|1|1|-	other|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+MatchData	i	initialize_copy	3.2	3.3	rbs	1|req|C	1|req|C	object|1|1|-	instance|1|1|-			0	-	no-doc
+MatchData	i	match	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	backref|1|1|-	1/0/0///0/0/n ; 1/0/0///0/0/name	1/0/0///0/0/n ; 1/0/0///0/0/name	0	ok	rbs-only
+MatchData	i	match_length	3.2	3.3	rbs	1|req|C	1|req|C	|1|1|-	backref|1|1|-	1/0/0///0/0/n ; 1/0/0///0/0/name	1/0/0///0/0/n ; 1/0/0///0/0/name	0	ok	rbs-only
+MatchData	i	named_captures	3.2	3.3	both	0|-|C	-1|rest|C	|0|0|-	symbolize_names|0|0|- ; symbolize_names|0|0|- ; |0|0|-	0/0/0///0/0/	0/0/0//symbolize_names/0/0/	1	ok	reflected
+MatchData	i	offset	3.2	3.3	rbs	1|req|C	1|req|C	n_or_name|1|1|-	backref|1|1|-	1/0/0///0/0/n ; 1/0/0///0/0/name	1/0/0///0/0/n ; 1/0/0///0/0/name	0	ok	rbs-only
+MatchData	i	values_at	3.2	3.3	rbs	-1|rest|C	-1|rest|C	n_or_name|0|-|-	backrefs|0|-|-	0/0/1///0/0/*index	0/0/1///0/0/*index	0	ok	rbs-only
+Module	i	define_method	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0,arg1|1|2|- ; arg0|1|1|req	symbol,method|2|2|- ; symbol|1|1|req	1/0/0///0/1/name ; 2/0/0///0/0/name,method	1/0/0///0/1/name ; 2/0/0///0/0/name,method	0	ok-split	rbs-only
+NilClass	i	^	3.2	3.3	rbs	1|req|C	1|req|C	obj|1|1|- ; |1|1|- ; |1|1|-	obj|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+NilClass	i	|	3.2	3.3	rbs	1|req|C	1|req|C	obj|1|1|- ; |1|1|- ; |1|1|-	obj|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Proc	i	parameters	3.2	3.3	rbs	-1|rest|C	-1|rest|C	|0|0|-	lambda|0|0|-	0/0/0//lambda/0/0/	0/0/0//lambda/0/0/	0	ok	rbs-only
+Regexp	i	initialize	3.2	3.3	rbs	-1|rest|C	-1|rest|C	regexp|1|1|- ; string,options,kcode|1|3|-	regexp,timeout|1|1|- ; string,options,timeout|1|2|-	1/2/0///0/0/string,option,code	1/1/0///0/0/string,option	1	ok	reflected
+Regexp	s	compile	3.2	3.3	-	-1|rest|C	-1|rest|C			1/2/0///0/0/string,option,code	1/1/0///0/0/string,option	1	ok	doc-only
+Set	i	merge	3.2	3.3	real	1|req:enum|rb	-1|rest:enums nokey|rb		|1|1|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	req-count	unreflected
+Signal	s	signame	3.2	3.3	rbs	1|req|C	1|req|C	arg0|1|1|-	signo|1|1|-	1/0/0///0/0/signo	1/0/0///0/0/signo	0	ok	rbs-only
+Signal	s	trap	3.2	3.3	rbs	-1|rest|C	-1|rest|C	signal,command|1|2|- ; signal|1|1|req	signal,command|2|2|- ; signal|1|1|req	1/0/0///0/1/signal ; 2/0/0///0/0/signal,command	1/0/0///0/1/signal ; 2/0/0///0/0/signal,command	0	ok-split	rbs-only
+String	i	%	3.2	3.3	rbs	1|req|C	1|req|C	arg|1|1|- ; |1|1|- ; |1|1|-	arg|1|1|- ; named_args|1|1|- ; positional_args|1|1|-	1/0/0///0/0/args	1/0/0///0/0/args	0	ok	rbs-only
+String	i	*	3.2	3.3	rbs	1|req|C	1|req|C	n|1|1|-	amount|1|1|-	1/0/0///0/0/times	1/0/0///0/0/times	0	ok	rbs-only
+String	i	+	3.2	3.3	rbs	1|req|C	1|req|C	other_str|1|1|-	other_string|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+String	i	<=>	3.2	3.3	rbs	1|req|C	1|req|C	other|1|1|- ; other|1|1|-	|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+String	i	==	3.2	3.3	rbs	1|req|C	1|req|C	obj|1|1|-	other|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+String	i	===	3.2	3.3	rbs	1|req|C	1|req|C	obj|1|1|-	other|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+String	i	=~	3.2	3.3	rbs	1|req|C	1|req|C	obj|1|1|-	object|1|1|- ; regex|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+String	i	[]	3.2	3.3	rbs	-1|rest|C	-1|rest|C	index|1|1|- ; match_str|1|1|- ; range|1|1|- ; regexp,capture|2|2|- ; regexp|1|1|- ; start,length|2|2|-	range|1|1|- ; regexp,backref|1|2|- ; start,length|1|2|- ; substring|1|1|-	1/0/0///0/0/nth ; 1/0/0///0/0/range ; 1/0/0///0/0/substr ; 1/1/0///0/0/regexp,nth ; 2/0/0///0/0/nth,len ; 2/0/0///0/0/regexp,name	1/0/0///0/0/nth ; 1/0/0///0/0/range ; 1/0/0///0/0/substr ; 1/1/0///0/0/regexp,nth ; 2/0/0///0/0/nth,len ; 2/0/0///0/0/regexp,name	0	ok	rbs-only
+String	i	[]=	3.2	3.3	rbs	-1|rest|C	-1|rest|C	begin_pos,end_pos,new_str|3|3|- ; other_str,new_str|2|2|- ; pos,new_str|2|2|- ; range,new_str|2|2|- ; regexp,capture,new_str|3|3|- ; regexp,name,new_str|3|3|- ; regexp,new_str|2|2|-	index,replacement|2|2|- ; range,replacement|2|2|- ; regexp,backref,replacement|3|3|- ; regexp,replacement|2|2|- ; start,length,replacement|3|3|- ; substring,replacement|2|2|-	2/0/0///0/0/nth,val ; 2/0/0///0/0/range,val ; 2/0/0///0/0/regexp,val ; 2/0/0///0/0/substr,val ; 3/0/0///0/0/nth,len,val ; 3/0/0///0/0/regexp,name,val ; 3/0/0///0/0/regexp,nth,val	2/0/0///0/0/nth,val ; 2/0/0///0/0/range,val ; 2/0/0///0/0/regexp,val ; 2/0/0///0/0/substr,val ; 3/0/0///0/0/nth,len,val ; 3/0/0///0/0/regexp,name,val ; 3/0/0///0/0/regexp,nth,val	0	ok-split	rbs-only
+String	i	bytesplice	3.2	3.3	-	-1|rest|C	-1|rest|C		range,str,str_range|2|3|- ; start,length,str,str_start,str_length|5|5|- ; start,length,str|3|3|-	2/0/0///0/0/range,str ; 3/0/0///0/0/index,length,str	2/0/0///0/0/range,str ; 3/0/0///0/0/index,length,str ; 3/0/0///0/0/range,str,str_range ; 5/0/0///0/0/index,length,str,str_index,str_length	1	ok-split	doc-only
+String	i	casecmp	3.2	3.3	rbs	1|req|C	1|req|C	other|1|1|-	other|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+String	i	casecmp?	3.2	3.3	rbs	1|req|C	1|req|C	other|1|1|-	other|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+String	i	center	3.2	3.3	rbs	-1|rest|C	-1|rest|C	width,padstr|1|2|-	width,pad_string|1|2|-	1/1/0///0/0/width,padding	1/1/0///0/0/width,padding	0	ok	rbs-only
+String	i	chomp!	3.2	3.3	rbs	-1|rest|C	-1|rest|C	separator|0|1|-	separator|0|1|- ; |1|1|-	0/1/0///0/0/rs	0/1/0///0/0/rs	0	ok	rbs-only
+String	i	concat	3.2	3.3	rbs	-1|rest|C	-1|rest|C	str_or_codepoint|0|-|-	string_or_codepoints|0|-|-	0/0/1///0/0/*arguments ; 1/0/0///0/0/other	0/0/1///0/0/*arguments ; 1/0/0///0/0/other	0	ok	rbs-only
+String	i	count	3.2	3.3	rbs	-1|rest|C	-1|rest|C	other_str,other_strs|1|-|-	selector_0,more_selectors|1|-|-	0/0/1///0/0/*chars	0/0/1///0/0/*chars	0	ok	rbs-only
+String	i	delete	3.2	3.3	rbs	-1|rest|C	-1|rest|C	other_str,other_strs|1|-|-	selector_0,more_selectors|1|-|-	0/0/1///0/0/*strs	0/0/1///0/0/*strs	0	ok	rbs-only
+String	i	delete!	3.2	3.3	rbs	-1|rest|C	-1|rest|C	other_str,other_strs|1|-|-	selector_0,more_selectors|1|-|-	0/0/1///0/0/*strs	0/0/1///0/0/*strs	0	ok	rbs-only
+String	i	encode	3.2	3.3	rbs	-1|rest|C	-1|rest|C	encoding,from_encoding,invalid,undef,replace,fallback,xml,universal_newline,cr_newline,crlf_newline|0|2|-	source_encoding,from_encoding,invalid,undef,replace,xml,newline,universal_newline,cr_newline,crlf_newline,lf_newline,fallback|0|2|-	0/0/0///1/0/ ; 1/0/0///1/0/encoding ; 2/0/0///1/0/encoding,from_encoding	0/0/0///1/0/ ; 1/0/0///1/0/encoding ; 2/0/0///1/0/encoding,from_encoding	0	ok	rbs-only
+String	i	encode!	3.2	3.3	rbs	-1|rest|C	-1|rest|C	encoding,from_encoding,invalid,undef,replace,fallback,xml,universal_newline,cr_newline,crlf_newline|0|2|-	source_encoding,from_encoding,invalid,undef,replace,xml,newline,universal_newline,cr_newline,crlf_newline,lf_newline,fallback|0|2|-	1/1/0///0/0/encoding,options ; 2/1/0///0/0/encoding,from_encoding,options	1/1/0///0/0/encoding,options ; 2/1/0///0/0/encoding,from_encoding,options	0	ok	rbs-only
+String	i	force_encoding	3.2	3.3	rbs	1|req|C	1|req|C	encoding|1|1|-	enc|1|1|-	1/0/0///0/0/encoding	1/0/0///0/0/encoding	0	ok	rbs-only
+String	i	grapheme_clusters	3.2	3.3	rbs	0|-|C	0|-|C	|0|0|-	|0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	rbs-only
+String	i	gsub	3.2	3.3	rbs	-1|rest|C	-1|rest|C	pattern,hash|2|2|- ; pattern,replacement|2|2|- ; pattern|1|1|- ; pattern|1|1|req	pattern,replacement|2|2|- ; pattern|1|1|- ; pattern|1|1|req	1/0/0///0/0/pattern ; 1/0/0///0/1/pattern ; 2/0/0///0/0/pattern,hash ; 2/0/0///0/0/pattern,replace	1/0/0///0/0/pattern ; 1/0/0///0/1/pattern ; 2/0/0///0/0/pattern,hash ; 2/0/0///0/0/pattern,replace	0	ok-split	rbs-only
+String	i	gsub!	3.2	3.3	rbs	-1|rest|C	-1|rest|C	pattern,hash|2|2|- ; pattern,replacement|2|2|- ; pattern|1|1|- ; pattern|1|1|req	pattern,replacement|2|2|- ; pattern|1|1|- ; pattern|1|1|req	1/0/0///0/0/pattern ; 1/0/0///0/1/pattern ; 2/0/0///0/0/pattern,hash ; 2/0/0///0/0/pattern,replace	1/0/0///0/0/pattern ; 1/0/0///0/1/pattern ; 2/0/0///0/0/pattern,hash ; 2/0/0///0/0/pattern,replace	0	ok-split	rbs-only
+String	i	include?	3.2	3.3	rbs	1|req|C	1|req|C	other_str|1|1|-	other_string|1|1|-	1/0/0///0/0/substr	1/0/0///0/0/substr	0	ok	rbs-only
+String	i	index	3.2	3.3	rbs	-1|rest|C	-1|rest|C	substr_or_regexp,offset|1|2|-	pattern,offset|1|2|-	1/1/0///0/0/pattern,pos	1/1/0///0/0/pattern,pos	0	ok	rbs-only
+String	i	initialize	3.2	3.3	rbs	-1|rest|C	-1|rest|C	str,encoding,capacity|0|1|-	source,encoding,capacity|0|1|-	0/1/0///0/0/string ; 0/1/0//encoding,capacity/0/0/string	0/1/0///0/0/string ; 0/1/0//encoding,capacity/0/0/string	0	ok	rbs-only
+String	i	initialize_copy	3.2	3.3	rbs	1|req|C	1|req|C	other_str|1|1|-	other_string|1|1|-			0	-	no-doc
+String	i	lines	3.2	3.3	rbs	-1|rest|C	-1|rest|C	separator,chomp|0|1|-	separator,chomp|0|1|- ; separator,chomp|0|1|req	0/1/0//chomp/0/0/rs ; 0/1/0//chomp/0/1/rs	0/1/0//chomp/0/0/rs ; 0/1/0//chomp/0/1/rs	0	ok	rbs-only
+String	i	ljust	3.2	3.3	rbs	-1|rest|C	-1|rest|C	integer,padstr|1|2|-	size,pad_string|1|2|-	1/1/0///0/0/width,padding	1/1/0///0/0/width,padding	0	ok	rbs-only
+String	i	match	3.2	3.3	rbs	-1|rest|C	-1|rest|C	pattern,pos|1|2|- ; pattern,pos|1|2|req	pattern,offset|1|2|- ; pattern,offset|1|2|req	1/1/0///0/0/regexp,pos ; 1/1/0///0/1/regexp,pos	1/1/0///0/0/regexp,pos ; 1/1/0///0/1/regexp,pos	0	ok	rbs-only
+String	i	match?	3.2	3.3	rbs	-1|rest|C	-1|rest|C	pattern,pos|1|2|-	pattern,offset|1|2|-	1/1/0///0/0/regexp,pos	1/1/0///0/0/regexp,pos	0	ok	rbs-only
+String	i	partition	3.2	3.3	rbs	1|req|C	1|req|C	sep_or_regexp|1|1|-	pattern|1|1|-	1/0/0///0/0/sep	1/0/0///0/0/sep	0	ok	rbs-only
+String	i	prepend	3.2	3.3	rbs	-1|rest|C	-1|rest|C	other_strs|0|-|-	other_strings|0|-|-	0/0/1///0/0/*arguments ; 1/0/0///0/0/other_str	0/0/1///0/0/*arguments ; 1/0/0///0/0/other_str	0	ok	rbs-only
+String	i	replace	3.2	3.3	rbs	1|req|C	1|req|C	other_str|1|1|-	other_string|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+String	i	rindex	3.2	3.3	rbs	-1|rest|C	-1|rest|C	substr_or_regexp,pos|1|2|-	pattern,offset|1|2|-	1/1/0///0/0/pattern,pos	1/1/0///0/0/pattern,pos	0	ok	rbs-only
+String	i	rjust	3.2	3.3	rbs	-1|rest|C	-1|rest|C	integer,padstr|1|2|-	size,pad_string|1|2|-	1/1/0///0/0/width,padding	1/1/0///0/0/width,padding	0	ok	rbs-only
+String	i	rpartition	3.2	3.3	rbs	1|req|C	1|req|C	sep_or_regexp|1|1|-	pattern|1|1|-	1/0/0///0/0/sep	1/0/0///0/0/sep	0	ok	rbs-only
+String	i	scan	3.2	3.3	rbs	1|req|C	1|req|C	pattern|1|1|- ; pattern|1|1|req	pattern|1|1|- ; pattern|1|1|- ; pattern|1|1|req ; pattern|1|1|req	1/0/0///0/0/pattern ; 1/0/0///0/1/pattern	1/0/0///0/0/pattern ; 1/0/0///0/1/pattern	0	ok	rbs-only
+String	i	scrub	3.2	3.3	rbs	-1|rest|C	-1|rest|C	repl|0|1|- ; |0|0|req	replacement|0|1|- ; |0|1|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/repl	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/repl	0	ok-split	rbs-only
+String	i	scrub!	3.2	3.3	rbs	-1|rest|C	-1|rest|C	repl|0|1|- ; |0|0|req	replacement|0|1|- ; |0|1|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/repl	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/repl	0	ok-split	rbs-only
+String	i	setbyte	3.2	3.3	rbs	2|req req|C	2|req req|C	index,integer|2|2|-	index,byte|2|2|-	2/0/0///0/0/index,b	2/0/0///0/0/index,b	0	ok	rbs-only
+String	i	slice	3.2	3.3	rbs	-1|rest|C	-1|rest|C	index|1|1|- ; match_str|1|1|- ; range|1|1|- ; regexp,capture|2|2|- ; regexp|1|1|- ; start,length|2|2|-	range|1|1|- ; regexp,backref|1|2|- ; start,length|1|2|- ; substring|1|1|-	1/0/0///0/0/nth ; 1/0/0///0/0/range ; 1/0/0///0/0/substr ; 1/1/0///0/0/regexp,nth ; 2/0/0///0/0/nth,len ; 2/0/0///0/0/regexp,name	1/0/0///0/0/nth ; 1/0/0///0/0/range ; 1/0/0///0/0/substr ; 1/1/0///0/0/regexp,nth ; 2/0/0///0/0/nth,len ; 2/0/0///0/0/regexp,name	0	ok	rbs-only
+String	i	slice!	3.2	3.3	rbs	-1|rest|C	-1|rest|C	integer,integer|1|2|- ; other_str|1|1|- ; range|1|1|- ; regexp,capture|1|2|-	index,length|1|2|- ; range|1|1|- ; regexp,backref|1|2|- ; substring|1|1|-	1/0/0///0/0/nth ; 1/0/0///0/0/substr ; 1/1/0///0/0/regexp,nth ; 2/0/0///0/0/pos,len ; raw:### def slice!(first...last) -> String ; raw:### def slice!(first..last) -> String	1/0/0///0/0/nth ; 1/0/0///0/0/substr ; 1/1/0///0/0/regexp,nth ; 2/0/0///0/0/pos,len ; raw:### def slice!(first...last) -> String ; raw:### def slice!(first..last) -> String	0	ok	rbs-only
+String	i	squeeze	3.2	3.3	rbs	-1|rest|C	-1|rest|C	other_str|0|-|-	selectors|0|-|-	0/0/1///0/0/*chars	0/0/1///0/0/*chars	0	ok	rbs-only
+String	i	squeeze!	3.2	3.3	rbs	-1|rest|C	-1|rest|C	other_str|0|-|-	selectors|0|-|-	0/0/1///0/0/*chars	0/0/1///0/0/*chars	0	ok	rbs-only
+String	i	sum	3.2	3.3	rbs	-1|rest|C	-1|rest|C	n|0|1|-	bits|0|1|-	0/1/0///0/0/bits	0/1/0///0/0/bits	0	ok	rbs-only
+String	i	to_i	3.2	3.3	rbs	-1|rest|C	-1|rest|C	base|0|1|-	radix|0|1|-	0/1/0///0/0/base	0/1/0///0/0/base	0	ok	rbs-only
+String	i	tr	3.2	3.3	rbs	2|req req|C	2|req req|C	from_str,to_str|2|2|-	source,relpacement|2|2|-	2/0/0///0/0/pattern,replace	2/0/0///0/0/pattern,replace	0	ok	rbs-only
+String	i	tr!	3.2	3.3	rbs	2|req req|C	2|req req|C	from_str,to_str|2|2|-	source,relpacement|2|2|-	2/0/0///0/0/pattern,replace	2/0/0///0/0/pattern,replace	0	ok	rbs-only
+String	i	tr_s	3.2	3.3	rbs	2|req req|C	2|req req|C	from_str,to_str|2|2|-	source,replacement|2|2|-	2/0/0///0/0/pattern,replace	2/0/0///0/0/pattern,replace	0	ok	rbs-only
+String	i	tr_s!	3.2	3.3	rbs	2|req req|C	2|req req|C	from_str,to_str|2|2|-	source,replacement|2|2|-	2/0/0///0/0/pattern,replace	2/0/0///0/0/pattern,replace	0	ok	rbs-only
+String	i	unicode_normalize	3.2	3.3	rbs	-1|rest|C	-1|rest|C	|0|1|-	form|0|1|-	0/1/0///0/0/form	0/1/0///0/0/form	0	ok	rbs-only
+String	i	unicode_normalize!	3.2	3.3	rbs	-1|rest|C	-1|rest|C	|0|1|-	form|0|1|-	0/1/0///0/0/form	0/1/0///0/0/form	0	ok	rbs-only
+String	i	unpack	3.2	3.3	rbs	-2|req:fmt key:offset|rb	-2|req:fmt key:offset|rb	format,offset|1|1|-	template,offset|1|1|- ; template,offset|1|1|req	1/0/0///0/0/template	1/0/0///0/0/template	0	kw-mismatch	rbs-only
+String	i	unpack1	3.2	3.3	rbs	-2|req:fmt key:offset|rb	-2|req:fmt key:offset|rb	format|1|1|-	template,offset|1|1|-	1/0/0///0/0/format	1/0/0///0/0/format	0	kw-mismatch	rbs-only
+String	i	upto	3.2	3.3	rbs	-1|rest|C	-1|rest|C	other_str,exclusive|1|2|- ; other_str,exclusive|1|2|req	other_string,exclusive|1|2|- ; other_string,exclusive|1|2|req	1/1/0///0/1/max,exclusive	1/1/0///0/1/max,exclusive	0	ok	rbs-only
+String	s	try_convert	3.2	3.3	rbs	1|req|C	1|req|C	obj|1|1|-	object|1|1|- ; object|1|1|- ; object|1|1|-	1/0/0///0/0/obj	1/0/0///0/0/obj	0	ok	rbs-only
+Thread::Queue	i	deq	3.2	3.3	rbs	-1|opt:non_block key:timeout|rb	-1|opt:non_block key:timeout|rb	non_block|0|1|-	non_block,timeout|0|1|-	0/1/0///0/0/non_block	0/1/0///0/0/non_block	0	kw-mismatch	rbs-only
+Thread::Queue	i	pop	3.2	3.3	rbs	-1|opt:non_block key:timeout|rb	-1|opt:non_block key:timeout|rb	non_block|0|1|-	non_block,timeout|0|1|-	0/1/0///0/0/non_block	0/1/0///0/0/non_block	0	kw-mismatch	rbs-only
+Thread::Queue	i	shift	3.2	3.3	rbs	-1|opt:non_block key:timeout|rb	-1|opt:non_block key:timeout|rb	non_block|0|1|-	non_block,timeout|0|1|-	0/1/0///0/0/non_block	0/1/0///0/0/non_block	0	kw-mismatch	rbs-only
+Thread::SizedQueue	i	<<	3.2	3.3	rbs	-2|req:object opt:non_block key:timeout|rb	-2|req:object opt:non_block key:timeout|rb	obj,non_block|1|2|-	obj,non_block,timeout|1|2|-	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	0	kw-mismatch	rbs-only
+Thread::SizedQueue	i	enq	3.2	3.3	rbs	-2|req:object opt:non_block key:timeout|rb	-2|req:object opt:non_block key:timeout|rb	obj,non_block|1|2|-	obj,non_block,timeout|1|2|-	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	0	kw-mismatch	rbs-only
+Thread::SizedQueue	i	push	3.2	3.3	rbs	-2|req:object opt:non_block key:timeout|rb	-2|req:object opt:non_block key:timeout|rb	obj,non_block|1|2|-	obj,non_block,timeout|1|2|-	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	0	kw-mismatch	rbs-only
+Time	i	initialize	3.2	3.3	rbs	-1|opt:year opt:mon opt:mday opt:hour opt:min opt:sec opt:zone key:in key:precision|rb	-1|opt:year opt:mon opt:mday opt:hour opt:min opt:sec opt:zone key:in key:precision|rb	year,month,day,hour,min,sec,in|0|6|- ; year,month,day,hour,min,sec|0|7|-	in,precision|1|1|- ; year,month,day,hour,min,sec,in|0|6|- ; year,month,day,hour,min,sec|0|7|-	0/0/0///0/0/ ; 1/0/0//in/0/0/iso8601 ; 1/5/0//in/0/0/year,mon,day,hour,min,sec ; 1/6/0///0/0/year,mon,day,hour,min,sec,zone	0/0/0///0/0/ ; 1/0/0//in/0/0/iso8601 ; 1/5/0//in/0/0/year,mon,day,hour,min,sec ; 1/6/0///0/0/year,mon,day,hour,min,sec,zone	0	opt-count	rbs-only
+Time	i	round	3.2	3.3	rbs	-1|rest|C	-1|rest|C	arg0|0|1|-	ndigits|0|1|-	0/1/0///0/0/ndigits	0/1/0///0/0/ndigits	0	ok	rbs-only
+TrueClass	i	&	3.2	3.3	rbs	1|req|C	1|req|C	obj|1|1|- ; |1|1|- ; |1|1|-	obj|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+TrueClass	i	^	3.2	3.3	rbs	1|req|C	1|req|C	obj|1|1|- ; |1|1|- ; |1|1|-	obj|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+UnboundMethod	i	bind_call	3.2	3.3	rbs	-1|rest|C	-1|rest|C	recv,args|1|-|opt	recv|1|-|opt	1/0/1///0/0/recv,*args ; 1/0/1///0/1/recv,*args	1/0/1///0/0/recv,*args ; 1/0/1///0/1/recv,*args	0	ok	rbs-only
+UnboundMethod	i	parameters	3.2	3.3	rbs	0|-|C	0|-|C	|0|0|- ; |0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	rbs-only
+BasicObject	i	instance_exec	3.3	3.4	rbs	-1|rest|C	-1|rest|C	args|0|-|req	|0|-|req	0/0/1///0/1/*args	0/0/1///0/1/*args	0	ok	rbs-only
+Exception	i	set_backtrace	3.3	3.4	rbs	1|req|C	1|req|C	backtrace|1|1|- ; |1|1|-	|1|1|- ; |1|1|- ; |1|1|-	1/0/0///0/0/errinfo	1/0/0///0/0/errinfo	0	ok	rbs-only
+Float	i	divmod	3.3	3.4	rbs	1|req|C	1|req|C	|1|1|-	|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+GC	s	latest_gc_info	3.3	3.4	rbs	-1|opt:hash_or_key|rb	-1|opt:hash_or_key|rb	hash|0|1|- ; key|1|1|- ; |0|0|-	hash|0|1|- ; key|1|1|-	0/1/0///0/0/result_hash ; 1/0/0///0/0/key	0/1/0///0/0/result_hash ; 1/0/0///0/0/key	0	ok-split	rbs-only
+GC	s	stat	3.3	3.4	rbs	-1|opt:hash_or_key|rb	-1|opt:hash_or_key|rb	arg0|0|1|- ; arg0|0|1|-	hash|0|1|- ; key|1|1|-	0/1/0///0/0/result_hash ; 1/0/0///0/0/key	0/1/0///0/0/result_hash ; 1/0/0///0/0/key	0	ok-split	rbs-only
+GC	s	stress=	3.3	3.4	rbs	1|req:flag|rb	1|req:flag|rb	flag|1|1|-	flag|1|1|- ; flag|1|1|-	1/0/0///0/0/value	1/0/0///0/0/value	0	name-mismatch	rbs-only
+GC	s	verify_compaction_references	3.3	3.4	both	-1|key:toward key:double_heap key:expand_heap|rb	-1|rest|C	|0|0|-	toward,double_heap,expand_heap|0|0|-	0/0/0//toward,double_heap/0/0/	0/0/0//toward,double_heap/0/0/	0	ok	already-consistent
+Hash	i	initialize	3.3	3.4	both	-1|rest|C	-1|opt:ifnone key:capacity block:block|rb	default|1|1|- ; |0|0|- ; |0|0|req	capacity|0|0|- ; capacity|0|0|req ; default,capacity|1|1|-	0/0/0///0/1/ ; 0/1/0///0/0/ifnone	0/0/0//capacity/0/1/ ; 0/1/0//capacity/0/0/ifnone	1	ok-split	reflected
+IO	i	each	3.3	3.4	rbs	-1|rest|C	-1|rest|C	sep,limit|0|2|- ; sep,limit|0|2|req	sep,limit,chomp|0|2|- ; sep,limit,chomp|0|2|req	0/1/0//chomp/0/0/rs ; 0/1/0//chomp/0/1/rs ; 1/0/0//chomp/0/0/limit ; 1/0/0//chomp/0/1/limit ; 2/0/0//chomp/0/0/rs,limit ; 2/0/0//chomp/0/1/rs,limit	0/1/0//chomp/0/0/rs ; 0/1/0//chomp/0/1/rs ; 1/0/0//chomp/0/0/limit ; 1/0/0//chomp/0/1/limit ; 2/0/0//chomp/0/0/rs,limit ; 2/0/0//chomp/0/1/rs,limit	0	ok	rbs-only
+IO	i	each_line	3.3	3.4	rbs	-1|rest|C	-1|rest|C	sep,limit|0|2|- ; sep,limit|0|2|req	sep,limit,chomp|0|2|- ; sep,limit,chomp|0|2|req	0/1/0//chomp/0/0/rs ; 0/1/0//chomp/0/1/rs ; 1/0/0//chomp/0/0/limit ; 1/0/0//chomp/0/1/limit ; 2/0/0//chomp/0/0/rs,limit ; 2/0/0//chomp/0/1/rs,limit	0/1/0//chomp/0/0/rs ; 0/1/0//chomp/0/1/rs ; 1/0/0//chomp/0/0/limit ; 1/0/0//chomp/0/1/limit ; 2/0/0//chomp/0/0/rs,limit ; 2/0/0//chomp/0/1/rs,limit	0	ok	rbs-only
+IO	i	readline	3.3	3.4	rbs	-1|opt:sep opt:limit key:chomp|rb	-1|opt:sep opt:limit key:chomp|rb	sep,limit|0|2|-	sep,limit,chomp|0|2|-	0/1/0//chomp/0/0/rs ; 1/0/0//chomp/0/0/limit ; 2/0/0//chomp/0/0/rs,limit	0/1/0//chomp/0/0/rs ; 1/0/0//chomp/0/0/limit ; 2/0/0//chomp/0/0/rs,limit	0	ok-split	rbs-only
+IO	i	readlines	3.3	3.4	rbs	-1|rest|C	-1|rest|C	sep,limit|0|2|-	sep,limit,chomp|0|2|-	0/1/0//chomp/0/0/rs ; 1/0/0//chomp/0/0/limit ; 2/0/0//chomp/0/0/rs,limit	0/1/0//chomp/0/0/rs ; 1/0/0//chomp/0/0/limit ; 2/0/0//chomp/0/0/rs,limit	0	ok	rbs-only
+Integer	i	divmod	3.3	3.4	rbs	1|req|C	1|req|C	|1|1|- ; |1|1|- ; |1|1|-	|1|1|- ; |1|1|- ; |1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Integer	i	pow	3.3	3.4	rbs	-1|rest|C	-1|rest|C	other,modulo|1|2|- ; |1|1|- ; |1|1|- ; |1|1|-	other,modulo|2|2|- ; other|1|1|- ; |1|1|- ; |1|1|- ; |1|1|-	1/0/0///0/0/other ; 2/0/0///0/0/other,modulo	1/0/0///0/0/other ; 2/0/0///0/0/other,modulo	0	ok-split	rbs-only
+Kernel	i	!~	3.3	3.4	rbs	1|req|C	1|req|C	|1|1|-	other|1|1|-			0	-	no-doc
+Kernel	i	<=>	3.3	3.4	rbs	1|req|C	1|req|C	|1|1|-	other|1|1|-			0	-	no-doc
+Kernel	i	define_singleton_method	3.3	3.4	rbs	-1|rest|C	-1|rest|C	method|2|2|- ; |1|1|req	name,method|2|2|- ; name|1|1|req			0	-	no-doc
+Kernel	i	enum_for	3.3	3.4	rbs	-1|rest|C	-1|rest|C	method|1|-|opt ; |0|0|opt	method|0|-|opt			0	-	no-doc
+Kernel	i	eql?	3.3	3.4	rbs	1|req|C	1|req|C	|1|1|-	other|1|1|-			0	-	no-doc
+Kernel	i	extend	3.3	3.4	rbs	-1|rest|C	-1|rest|C	|0|-|-	module,other_modules|1|-|-			0	-	no-doc
+Kernel	i	instance_of?	3.3	3.4	rbs	1|req|C	1|req|C	|1|1|-	module_or_class|1|1|-			0	-	no-doc
+Kernel	i	instance_variable_defined?	3.3	3.4	rbs	1|req|C	1|req|C	var|1|1|-	variable|1|1|-			0	-	no-doc
+Kernel	i	instance_variable_get	3.3	3.4	rbs	1|req|C	1|req|C	var|1|1|-	variable|1|1|-			0	-	no-doc
+Kernel	i	instance_variable_set	3.3	3.4	rbs	2|req req|C	2|req req|C	var,value|2|2|-	variable,value|2|2|-			0	-	no-doc
+Kernel	i	is_a?	3.3	3.4	rbs	1|req|C	1|req|C	|1|1|-	module_or_class|1|1|-			0	-	no-doc
+Kernel	i	kind_of?	3.3	3.4	rbs	1|req|C	1|req|C	|1|1|-	module_or_class|1|1|-			0	-	no-doc
+Kernel	i	methods	3.3	3.4	rbs	-1|rest|C	-1|rest|C	|0|0|-	regular|0|1|-			0	-	no-doc
+Kernel	i	private_methods	3.3	3.4	rbs	-1|rest|C	-1|rest|C	|0|0|-	all|0|1|-			0	-	no-doc
+Kernel	i	protected_methods	3.3	3.4	rbs	-1|rest|C	-1|rest|C	|0|0|-	all|0|1|-			0	-	no-doc
+Kernel	i	public_send	3.3	3.4	rbs	-1|rest|C	-1|rest|C	name,args|1|-|opt	name|1|-|opt			0	-	no-doc
+Kernel	i	rand	3.3	3.4	rbs	-1|rest|C	-1|rest|C	arg0|1|1|- ; arg0|1|1|- ; arg0|1|1|- ; |0|0|-	arg0|1|1|- ; arg0|1|1|- ; arg0|1|1|- ; |0|1|-	0/1/0///0/0/max ; 1/0/0///0/0/range	0/1/0///0/0/max ; 1/0/0///0/0/range	0	ok	rbs-only
+Kernel	i	readlines	3.3	3.4	rbs	-1|rest|C	-1|rest|C	arg0,arg1|0|2|-	sep,limit,chomp|0|2|-	0/1/0///0/0/rs	0/1/0///0/0/rs	0	ok	rbs-only
+Kernel	i	remove_instance_variable	3.3	3.4	rbs	1|req|C	1|req|C	name|1|1|-	variable|1|1|-			0	-	no-doc
+Kernel	i	respond_to_missing?	3.3	3.4	rbs	2|req req|C	2|req req|C	|2|2|-	name,include_all|2|2|-			0	-	no-doc
+Kernel	i	singleton_methods	3.3	3.4	rbs	-1|rest|C	-1|rest|C	|0|0|-	all|0|1|-			0	-	no-doc
+Kernel	i	system	3.3	3.4	rbs	-1|rest|C	-1|rest|C	command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|1|-|- ; env,command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|2|-|-	command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir,exception|1|-|- ; env,command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir,exception|2|-|-	1/1/0///0/0/command,options ; 1/1/1///0/0/program,*args,options ; 2/1/0///0/0/env,command,options ; 2/1/1///0/0/env,program,*args,options	1/1/0///0/0/command,options ; 1/1/1///0/0/program,*args,options ; 2/1/0///0/0/env,command,options ; 2/1/1///0/0/env,program,*args,options	0	ok	rbs-only
+Kernel	i	to_enum	3.3	3.4	rbs	-1|rest|C	-1|rest|C	method|1|-|opt ; |0|0|opt	method|0|-|opt			0	-	no-doc
+Kernel	s	rand	3.3	3.4	rbs	-1|rest|C	-1|rest|C	arg0|1|1|- ; arg0|1|1|- ; arg0|1|1|- ; |0|0|-	arg0|1|1|- ; arg0|1|1|- ; arg0|1|1|- ; |0|1|-	0/1/0///0/0/max ; 1/0/0///0/0/range	0/1/0///0/0/max ; 1/0/0///0/0/range	0	ok	rbs-only
+Kernel	s	readlines	3.3	3.4	rbs	-1|rest|C	-1|rest|C	arg0,arg1|0|2|-	sep,limit,chomp|0|2|-	0/1/0///0/0/rs	0/1/0///0/0/rs	0	ok	rbs-only
+Kernel	s	system	3.3	3.4	rbs	-1|rest|C	-1|rest|C	command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|1|-|- ; env,command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir|2|-|-	command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir,exception|1|-|- ; env,command,args,unsetenv_others,pgroup,umask,in,out,err,close_others,chdir,exception|2|-|-	1/1/0///0/0/command,options ; 1/1/1///0/0/program,*args,options ; 2/1/0///0/0/env,command,options ; 2/1/1///0/0/env,program,*args,options	1/1/0///0/0/command,options ; 1/1/1///0/0/program,*args,options ; 2/1/0///0/0/env,command,options ; 2/1/1///0/0/env,program,*args,options	0	ok	rbs-only
+Method	i	===	3.3	3.4	rbs	-1|rest|C	-1|rest|C	args|0|-|-	|-|-|-	0/0/1///0/0/*args ; 0/0/1///0/1/*args	0/0/1///0/0/*args ; 0/0/1///0/1/*args	0	ok	rbs-only
+Method	i	[]	3.3	3.4	rbs	-1|rest|C	-1|rest|C	args|0|-|-	|-|-|-	0/0/1///0/0/*args ; 0/0/1///0/1/*args	0/0/1///0/0/*args ; 0/0/1///0/1/*args	0	ok	rbs-only
+Method	i	call	3.3	3.4	rbs	-1|rest|C	-1|rest|C	args|0|-|-	|-|-|-	0/0/1///0/0/*args ; 0/0/1///0/1/*args	0/0/1///0/0/*args ; 0/0/1///0/1/*args	0	ok	rbs-only
+Module	i	class_exec	3.3	3.4	rbs	-1|rest|C	-1|rest|C	args|0|-|req	|0|-|req	0/0/1///0/1/*args	0/0/1///0/1/*args	0	ok	rbs-only
+Module	i	include	3.3	3.4	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	arg0|1|-|-	0/0/1///0/0/*mod	0/0/1///0/0/*mod	0	ok	rbs-only
+Module	i	module_exec	3.3	3.4	rbs	-1|rest|C	-1|rest|C	args|0|-|req	|0|-|req	0/0/1///0/1/*args	0/0/1///0/1/*args	0	ok	rbs-only
+Module	i	module_function	3.3	3.4	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	method_name|1|1|- ; method_name|1|1|- ; method_name|2|-|- ; method_name|2|-|- ; |0|0|-	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name	0	ok	rbs-only
+Module	i	prepend	3.3	3.4	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	arg0|1|-|-	0/0/1///0/0/*modules	0/0/1///0/0/*modules	0	ok	rbs-only
+Module	i	private	3.3	3.4	rbs	-1|rest|C	-1|rest|C	method_name|1|1|- ; method_name|1|1|- ; method_name|2|-|- ; method_name|2|-|- ; |0|0|-	method_name|1|1|- ; method_name|1|1|- ; method_name|2|-|- ; method_name|2|-|- ; |0|0|- ; |1|1|-	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0	ok	rbs-only
+Module	i	private_class_method	3.3	3.4	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	arg0|0|-|- ; arg0|1|1|-	0/0/1///0/0/*name ; 1/0/0///0/0/names	0/0/1///0/0/*name ; 1/0/0///0/0/names	0	ok	rbs-only
+Module	i	protected	3.3	3.4	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	method_name|1|1|- ; method_name|1|1|- ; method_name|2|-|- ; method_name|2|-|- ; |0|0|- ; |1|1|-	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0	ok	rbs-only
+Module	i	public	3.3	3.4	rbs	-1|rest|C	-1|rest|C	method_name|1|1|- ; method_name|1|1|- ; method_name|2|-|- ; method_name|2|-|- ; |0|0|-	method_name|1|1|- ; method_name|1|1|- ; method_name|2|-|- ; method_name|2|-|- ; |0|0|- ; |1|1|-	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0	ok	rbs-only
+Module	i	public_class_method	3.3	3.4	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	arg0|0|-|- ; arg0|1|1|-	0/0/1///0/0/*name ; 1/0/0///0/0/names	0/0/1///0/0/*name ; 1/0/0///0/0/names	0	ok	rbs-only
+Numeric	i	+@	3.3	3.4	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Numeric	i	dup	3.3	3.4	real	0|-|C	0|-|rb					0	-	no-doc
+Proc	i	[]	3.3	3.4	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	|-|-|-	0/0/1///0/0/*arg	0/0/1///0/0/*arg	0	ok	rbs-only
+Proc	i	call	3.3	3.4	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	|-|-|-	0/0/1///0/0/*arg	0/0/1///0/0/*arg	0	ok	rbs-only
+Random	s	rand	3.3	3.4	rbs	-1|rest|C	-1|rest|C	max|1|1|- ; max|1|1|- ; |0|0|- ; |1|1|-	max|1|1|- ; max|1|1|- ; |0|1|- ; |1|1|-	0/0/0///0/0/ ; 1/0/0///0/0/max ; 1/0/0///0/0/range	0/0/0///0/0/ ; 1/0/0///0/0/max ; 1/0/0///0/0/range	0	ok-split	rbs-only
+Range	i	step	3.3	3.4	rbs	-1|rest|C	-1|rest|C	n|0|1|- ; n|0|1|req	|0|1|- ; |0|1|req ; |1|1|- ; |1|1|req	0/1/0///0/0/s ; 0/1/0///0/1/s	0/1/0///0/0/s ; 0/1/0///0/1/s	0	ok	rbs-only
+Refinement	i	import_methods	3.3	3.4	rbs	-1|rest|C	-1|rest|C	|0|-|-	module,extra_modules|1|-|-	0/0/1///0/0/*modules	0/0/1///0/0/*modules	0	ok	rbs-only
+Regexp	i	=~	3.3	3.4	rbs	1|req|C	1|req|C	str|1|1|-	string|1|1|- ; |1|1|-	1/0/0///0/0/string	1/0/0///0/0/string	0	ok	rbs-only
+Regexp	i	initialize	3.3	3.4	rbs	-1|rest|C	-1|rest|C	regexp,timeout|1|1|- ; string,options,timeout|1|2|-	pattern,options,timeout|1|2|- ; regexp,timeout|1|1|-	1/1/0///0/0/string,option	1/1/0///0/0/string,option	0	ok	rbs-only
+Regexp	i	match	3.3	3.4	rbs	-1|rest|C	-1|rest|C	str,pos|1|2|- ; str,pos|1|2|req	offset|1|2|opt ; str,offset|1|2|- ; str,offset|1|2|req	1/1/0///0/0/str,pos ; 1/1/0///0/1/str,pos	1/1/0///0/0/str,pos ; 1/1/0///0/1/str,pos	0	ok	rbs-only
+Regexp	i	match?	3.3	3.4	rbs	-1|rest|C	-1|rest|C	str,pos|1|2|-	offset|1|2|- ; str,offset|1|2|-	1/1/0///0/0/str,pos	1/1/0///0/0/str,pos	0	ok	rbs-only
+Regexp	s	last_match	3.3	3.4	rbs	-1|rest|C	-1|rest|C	n|1|1|- ; n|1|1|- ; |0|0|-	capture|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0///0/0/nth	0/0/0///0/0/ ; 1/0/0///0/0/nth	0	ok-split	rbs-only
+Regexp	s	linear_time?	3.3	3.4	rbs	-1|rest|C	-1|rest|C	|0|0|-	regex,options,timeout|1|2|- ; regex,timeout|1|2|-	1/0/0///0/0/re ; 1/1/0///0/0/string,options	1/0/0///0/0/re ; 1/1/0///0/0/string,options	0	ok	rbs-only
+Regexp	s	timeout=	3.3	3.4	rbs	1|req|C	1|req|C	|1|1|-	timeout|1|1|-	1/0/0///0/0/seconds	1/0/0///0/0/seconds	0	ok	rbs-only
+Regexp	s	try_convert	3.3	3.4	rbs	1|req|C	1|req|C	obj|1|1|-	other|1|1|- ; regexp_like|1|1|-	1/0/0///0/0/obj	1/0/0///0/0/obj	0	ok	rbs-only
+Regexp	s	union	3.3	3.4	rbs	-1|rest|C	-1|rest|C	pat1,pat2|1|-|- ; |0|0|- ; |1|1|-	patterns|0|-|- ; patterns|1|1|- ; symbol_pattern|1|1|-	0/0/1///0/0/*pattern	0/0/1///0/0/*pattern	0	ok	rbs-only
+Set	i	delete_if	3.3	3.4	real	0|-|rb	0|block:block|rb	|0|0|req	|0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Set	i	keep_if	3.3	3.4	real	0|-|rb	0|block:block|rb	|0|0|req	|0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Set	i	merge	3.3	3.4	rbs	-1|rest:enums nokey|rb	-1|rest:enums nokey|rb	|1|1|-	|0|-|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	req-count	rbs-only
+Symbol	i	<=>	3.3	3.4	rbs	1|req|C	1|req|C	other|1|1|- ; other|1|1|-	object|1|1|- ; |1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Symbol	i	==	3.3	3.4	rbs	1|req|C	1|req|C	obj|1|1|-	object|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Symbol	i	===	3.3	3.4	rbs	1|req|C	1|req|C	obj|1|1|-	object|1|1|-			0	-	no-doc
+Symbol	i	=~	3.3	3.4	rbs	1|req|C	1|req|C	obj|1|1|-	object|1|1|- ; regex|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Symbol	i	[]	3.3	3.4	rbs	-1|rest|C	-1|rest|C	index|1|1|- ; match_str|1|1|- ; range|1|1|- ; regexp,capture|2|2|- ; regexp|1|1|- ; start,length|2|2|-	range|1|1|- ; regexp,backref|1|2|- ; start,length|1|2|- ; substring|1|1|-	1/0/0///0/0/nth ; 1/0/0///0/0/range ; 1/0/0///0/0/substr ; 1/1/0///0/0/regexp,nth ; 2/0/0///0/0/nth,len	1/0/0///0/0/nth ; 1/0/0///0/0/range ; 1/0/0///0/0/substr ; 1/1/0///0/0/regexp,nth ; 2/0/0///0/0/nth,len	0	ok	rbs-only
+Symbol	i	casecmp	3.3	3.4	rbs	1|req|C	1|req|C	other|1|1|-	object|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Symbol	i	casecmp?	3.3	3.4	rbs	1|req|C	1|req|C	other|1|1|-	object|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Symbol	i	id2name	3.3	3.4	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Symbol	i	match	3.3	3.4	rbs	-1|rest|C	-1|rest|C	pattern,pos|1|2|- ; pattern,pos|1|2|req	pattern,offset|1|2|- ; pattern,offset|1|2|req	1/0/0///0/0/other	1/0/0///0/0/other	0	doc-no-optional?	rbs-only
+Symbol	i	match?	3.3	3.4	rbs	-1|rest|C	-1|rest|C	pattern,pos|1|2|-	pattern,offset|1|2|-	1/1/0///0/0/regexp,pos	1/1/0///0/0/regexp,pos	0	ok	rbs-only
+Symbol	i	name	3.3	3.4	real	0|-|C	0|-|rb		|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Symbol	i	slice	3.3	3.4	rbs	-1|rest|C	-1|rest|C	index|1|1|- ; match_str|1|1|- ; range|1|1|- ; regexp,capture|2|2|- ; regexp|1|1|- ; start,length|2|2|-	range|1|1|- ; regexp,backref|1|2|- ; start,length|1|2|- ; substring|1|1|-	1/0/0///0/0/nth ; 1/0/0///0/0/range ; 1/0/0///0/0/substr ; 1/1/0///0/0/regexp,nth ; 2/0/0///0/0/nth,len	1/0/0///0/0/nth ; 1/0/0///0/0/range ; 1/0/0///0/0/substr ; 1/1/0///0/0/regexp,nth ; 2/0/0///0/0/nth,len	0	ok	rbs-only
+Symbol	i	to_s	3.3	3.4	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread	s	each_caller_location	3.3	3.4	real	0|-|C	-1|rest|C	|0|0|req	|0|0|req	0/0/0///0/1/	0/2/0///0/1/start,length ; 1/0/0///0/1/range	1	ok	reflected
+Thread::SizedQueue	i	<<	3.3	3.4	rbs	-2|req:object opt:non_block key:timeout|rb	-2|req:object opt:non_block key:timeout|rb	obj,non_block,timeout|1|2|-	obj,non_block|1|2|- ; obj,timeout|1|1|-	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	0	kw-mismatch	rbs-only
+Thread::SizedQueue	i	enq	3.3	3.4	rbs	-2|req:object opt:non_block key:timeout|rb	-2|req:object opt:non_block key:timeout|rb	obj,non_block,timeout|1|2|-	obj,non_block|1|2|- ; obj,timeout|1|1|-	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	0	kw-mismatch	rbs-only
+Thread::SizedQueue	i	push	3.3	3.4	rbs	-2|req:object opt:non_block key:timeout|rb	-2|req:object opt:non_block key:timeout|rb	obj,non_block,timeout|1|2|-	obj,non_block|1|2|- ; obj,timeout|1|1|-	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	1/0/0///0/0/obj ; 1/1/0///0/0/obj,non_block	0	kw-mismatch	rbs-only
+Binding	i	irb	3.4	4.0	real	0|-|rb	-1|rest:* keyrest:** block:&|rb			0/0/0///0/0/	0/0/0///0/0/	0	forwarding?	forwarding
+Encoding::Converter	i	last_error	3.4	4.0	rbs	0|-|C	0|-|C	|0|0|- ; |0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	rbs-only
+Enumerable	i	to_set	3.4	4.0	real	-1|opt:klass rest:args block:block|rb	-1|rest:args block:block|rb	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req	0/1/1///0/0/klass,*args ; 0/1/1///0/1/klass,*args	0/1/1///0/0/klass,*args ; 0/1/1///0/1/klass,*args	0	opt-count	unreflected
+Enumerator	s	produce	3.4	4.0	-	-1|rest|C	-1|rest|C	initial|1|1|req ; |0|0|req	initial|1|1|req ; |0|0|req	0/1/0///0/1/initial	0/1/0//size/0/1/initial	1	ok	doc-only
+Enumerator::Chain	i	each	3.4	4.0	rbs	-1|rest|C	-1|rest|C	|0|0|req	|0|0|- ; |0|0|req	0/0/1///0/0/*args ; 0/0/1///0/1/*args	0/0/1///0/0/*args ; 0/0/1///0/1/*args	0	ok	rbs-only
+Fiber	i	raise	3.4	4.0	rbs	-1|rest|C	-1|rest|C	msg,backtrace|1|3|- ; msg|0|1|-	msg,backtrace,cause|1|3|- ; msg,cause|0|1|-	0/0/0///0/0/ ; 1/0/0///0/0/message ; 1/2/0///0/0/exception,message,backtrace	0/0/0///0/0/ ; 1/0/0///0/0/message ; 1/2/0///0/0/exception,message,backtrace	0	ok	rbs-only
+Kernel	i	gets	3.4	4.0	rbs	-1|rest|C	-1|rest|C	arg0,arg1|0|2|-	sep,limit,chomp|0|2|-	0/1/0///0/0/rs	0/1/0///0/0/rs	0	ok	rbs-only
+Kernel	i	readline	3.4	4.0	rbs	-1|rest|C	-1|rest|C	arg0,arg1|0|2|-	arg0,arg1,chomp|0|2|-	0/1/0///0/0/rs	0/1/0///0/0/rs	0	ok	rbs-only
+Kernel	s	gets	3.4	4.0	rbs	-1|rest|C	-1|rest|C	arg0,arg1|0|2|-	sep,limit,chomp|0|2|-	0/1/0///0/0/rs	0/1/0///0/0/rs	0	ok	rbs-only
+Kernel	s	readline	3.4	4.0	rbs	-1|rest|C	-1|rest|C	arg0,arg1|0|2|-	arg0,arg1,chomp|0|2|-	0/1/0///0/0/rs	0/1/0///0/0/rs	0	ok	rbs-only
+NilClass	i	rationalize	3.4	4.0	real	-1|rest|C	-1|opt:eps|rb	eps|0|1|-	eps|0|1|-	0/0/0///0/0/ ; 1/0/0///0/0/eps	0/0/0///0/0/ ; 1/0/0///0/0/eps	0	ok-split	already-consistent
+NilClass	i	to_c	3.4	4.0	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+NilClass	i	to_r	3.4	4.0	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Ractor	i	<<	3.4	4.0	real	-2|req:obj key:move|rb	-1|rest:* keyrest:** block:&|rb	obj,move|1|1|-	obj,move|1|1|-	1/0/0//move/0/0/msg	1/0/0//move/0/0/msg	0	forwarding?	forwarding
+Ractor	i	send	3.4	4.0	real	-2|req:obj key:move|rb	-1|rest:* keyrest:** block:&|rb	obj,move|1|1|-	obj,move|1|1|-	1/0/0//move/0/0/msg	1/0/0//move/0/0/msg	0	forwarding?	forwarding
+Ractor	s	select	3.4	4.0	both	-1|rest:ractors key:yield_value key:move|rb	-1|rest:ports|rb	ractors,move,yield_value|0|-|-	|-|-|-	0/0/1//yield_value,move/0/0/*ractors	0/0/1///0/0/*ports	1	ok	reflected
+Range	i	size	3.4	4.0	rbs	0|-|C	0|-|C	|0|0|- ; |0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	rbs-only
+Set	i	&	3.4	4.0	real	1|req:enum|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	ok	already-consistent
+Set	i	+	3.4	4.0	real	1|req:enum|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	ok	already-consistent
+Set	i	-	3.4	4.0	real	1|req:enum|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	ok	already-consistent
+Set	i	<	3.4	4.0	real	1|req:set|rb	1|req|C		|1|1|-	1/0/0///0/0/set	1/0/0///0/0/set	0	ok	already-consistent
+Set	i	<<	3.4	4.0	real	1|req:o|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/o	1/0/0///0/0/o	0	ok	already-consistent
+Set	i	<=	3.4	4.0	real	1|req:set|rb	1|req|C		|1|1|-	1/0/0///0/0/set	1/0/0///0/0/set	0	ok	already-consistent
+Set	i	<=>	3.4	4.0	real	1|req:set|rb	1|req|C					0	-	no-doc
+Set	i	==	3.4	4.0	real	1|req:other|rb	1|req|C			1/0/0///0/0/set	1/0/0///0/0/set	0	ok	already-consistent
+Set	i	===	3.4	4.0	real	1|req:o|rb	1|req|C			1/0/0///0/0/o	1/0/0///0/0/o	0	ok	already-consistent
+Set	i	>	3.4	4.0	real	1|req:set|rb	1|req|C		|1|1|-	1/0/0///0/0/set	1/0/0///0/0/set	0	ok	already-consistent
+Set	i	>=	3.4	4.0	real	1|req:set|rb	1|req|C		|1|1|-	1/0/0///0/0/set	1/0/0///0/0/set	0	ok	already-consistent
+Set	i	^	3.4	4.0	real	1|req:enum|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	ok	already-consistent
+Set	i	add	3.4	4.0	real	1|req:o|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/o	1/0/0///0/0/o	0	ok	already-consistent
+Set	i	add?	3.4	4.0	real	1|req:o|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/o	1/0/0///0/0/o	0	ok	already-consistent
+Set	i	classify	3.4	4.0	real	0|-|rb	0|-|C	|0|0|req	|0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Set	i	clear	3.4	4.0	real	0|-|rb	0|-|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	collect!	3.4	4.0	real	0|-|rb	0|-|C	|0|0|req	|0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Set	i	compare_by_identity	3.4	4.0	real	0|-|rb	0|-|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	compare_by_identity?	3.4	4.0	real	0|-|rb	0|-|C		|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	delete	3.4	4.0	real	1|req:o|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/o	1/0/0///0/0/o	0	ok	already-consistent
+Set	i	delete?	3.4	4.0	real	1|req:o|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/o	1/0/0///0/0/o	0	ok	already-consistent
+Set	i	delete_if	3.4	4.0	real	0|block:block|rb	0|-|C	|0|0|req	|0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Set	i	difference	3.4	4.0	real	1|req:enum|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	ok	already-consistent
+Set	i	disjoint?	3.4	4.0	real	1|req:set|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/set	1/0/0///0/0/set	0	ok	already-consistent
+Set	i	divide	3.4	4.0	real	0|block:func|rb	0|-|C	|0|0|req ; |0|0|req	|0|0|req ; |0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Set	i	each	3.4	4.0	real	0|block:block|rb	0|-|C	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Set	i	empty?	3.4	4.0	real	0|-|rb	0|-|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	eql?	3.4	4.0	real	1|req:o|rb	1|req|C			1/0/0///0/0/other	1/0/0///0/0/other	0	ok	already-consistent
+Set	i	filter!	3.4	4.0	real	0|block:block|rb	0|-|C		|0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Set	i	flatten	3.4	4.0	real	0|-|rb	0|-|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	flatten!	3.4	4.0	real	0|-|rb	0|-|C		|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	hash	3.4	4.0	real	0|-|rb	0|-|C			0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	include?	3.4	4.0	real	1|req:o|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/o	1/0/0///0/0/o	0	ok	already-consistent
+Set	i	initialize	3.4	4.0	real	-1|opt:enum block:block|rb	-1|rest|C	|0|1|- ; |1|1|- ; |1|1|req	|0|1|- ; |1|1|- ; |1|1|req	0/1/0///0/0/enum ; 0/1/0///0/1/enum	0/1/0///0/0/enum ; 0/1/0///0/1/enum	0	ok	already-consistent
+Set	i	inspect	3.4	4.0	real	0|-|rb	0|-|C			0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	intersect?	3.4	4.0	real	1|req:set|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/set	1/0/0///0/0/set	0	ok	already-consistent
+Set	i	intersection	3.4	4.0	real	1|req:enum|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	ok	already-consistent
+Set	i	join	3.4	4.0	real	-1|opt:separator|rb	-1|rest|C		separator|0|1|-	0/1/0///0/0/separator	0/1/0///0/0/separator	0	ok	already-consistent
+Set	i	keep_if	3.4	4.0	real	0|block:block|rb	0|-|C	|0|0|req	|0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Set	i	length	3.4	4.0	real	0|-|rb	0|-|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	map!	3.4	4.0	real	0|-|rb	0|-|C	|0|0|req	|0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Set	i	member?	3.4	4.0	real	1|req:o|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/o	1/0/0///0/0/o	0	ok	already-consistent
+Set	i	merge	3.4	4.0	real	-1|rest:enums nokey|rb	-1|rest|C	|0|-|-	|0|-|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	doc-no-optional?	impl-change
+Set	i	proper_subset?	3.4	4.0	real	1|req:set|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/set	1/0/0///0/0/set	0	ok	already-consistent
+Set	i	proper_superset?	3.4	4.0	real	1|req:set|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/set	1/0/0///0/0/set	0	ok	already-consistent
+Set	i	reject!	3.4	4.0	real	0|block:block|rb	0|-|C	|0|0|req	|0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Set	i	replace	3.4	4.0	real	1|req:enum|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	ok	already-consistent
+Set	i	reset	3.4	4.0	real	0|-|rb	0|-|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	select!	3.4	4.0	real	0|block:block|rb	0|-|C	|0|0|req	|0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Set	i	size	3.4	4.0	real	0|-|rb	0|-|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	subset?	3.4	4.0	real	1|req:set|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/set	1/0/0///0/0/set	0	ok	already-consistent
+Set	i	subtract	3.4	4.0	real	1|req:enum|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	ok	already-consistent
+Set	i	superset?	3.4	4.0	real	1|req:set|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/set	1/0/0///0/0/set	0	ok	already-consistent
+Set	i	to_a	3.4	4.0	real	0|-|rb	0|-|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	to_s	3.4	4.0	real	0|-|rb	0|-|C			0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Set	i	to_set	3.4	4.0	real	-1|opt:klass rest:args block:block|rb	-1|rest|C					0	-	no-doc
+Set	i	union	3.4	4.0	real	1|req:enum|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	ok	already-consistent
+Set	i	|	3.4	4.0	real	1|req:enum|rb	1|req|C	|1|1|-	|1|1|-	1/0/0///0/0/enum	1/0/0///0/0/enum	0	ok	already-consistent
+Set	s	[]	3.4	4.0	real	-1|rest:ary|rb	-1|rest|C	|0|-|-	|0|-|-	0/0/1///0/0/*ary	0/0/1///0/0/*ary	0	ok	already-consistent
+String	i	lstrip	3.4	4.0	real	0|-|C	-1|rest|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/1///0/0/*selectors	1	ok	reflected
+String	i	lstrip!	3.4	4.0	real	0|-|C	-1|rest|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/1///0/0/*selectors	1	ok	reflected
+String	i	rstrip	3.4	4.0	real	0|-|C	-1|rest|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/1///0/0/*selectors	1	ok	reflected
+String	i	rstrip!	3.4	4.0	real	0|-|C	-1|rest|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/1///0/0/*selectors	1	ok	reflected
+String	i	strip	3.4	4.0	real	0|-|C	-1|rest|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/1///0/0/*selectors	1	ok	reflected
+String	i	strip!	3.4	4.0	real	0|-|C	-1|rest|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/1///0/0/*selectors	1	ok	reflected
+Thread	i	raise	3.4	4.0	rbs	-1|rest|C	-1|rest|C	message,backtrace|1|3|- ; message|0|1|-	message,backtrace,cause|1|3|- ; message,cause|0|1|-	3/0/0///0/0/error_type,message,traceback	3/0/0///0/0/error_type,message,traceback	0	doc-no-optional?	rbs-only
+Thread::ConditionVariable	i	broadcast	3.4	4.0	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::ConditionVariable	i	initialize	3.4	4.0	real	0|-|C	0|-|rb			0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::ConditionVariable	i	marshal_dump	3.4	4.0	real	0|-|C	0|-|rb					0	-	no-doc
+Thread::ConditionVariable	i	signal	3.4	4.0	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::ConditionVariable	i	wait	3.4	4.0	real	-1|rest|C	-2|req:mutex opt:timeout|rb	mutex,timeout|1|2|-	mutex,timeout|1|2|-	1/1/0///0/0/mutex,timeout	1/1/0///0/0/mutex,timeout	0	ok	already-consistent
+Thread::Mutex	i	initialize	3.4	4.0	real	0|-|C	0|-|rb			0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Mutex	i	lock	3.4	4.0	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Mutex	i	locked?	3.4	4.0	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Mutex	i	owned?	3.4	4.0	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Mutex	i	sleep	3.4	4.0	real	-1|rest|C	-1|opt:timeout|rb			0/1/0///0/0/timeout	0/1/0///0/0/timeout	0	ok	already-consistent
+Thread::Mutex	i	synchronize	3.4	4.0	real	0|-|C	0|-|rb	|0|0|req	|0|0|req	0/0/0///0/1/	0/0/0///0/1/	0	ok	already-consistent
+Thread::Mutex	i	try_lock	3.4	4.0	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Mutex	i	unlock	3.4	4.0	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Time	i	iso8601	3.4	4.0	rbs	-1|rest|C	-1|rest|C	|0|0|-	fraction_digits|0|1|-			0	-	no-doc
+Time	i	xmlschema	3.4	4.0	rbs	-1|rest|C	-1|rest|C	|0|0|-	fraction_digits|0|1|-			0	-	no-doc
+Array	i	&	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other_array|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Array	i	*	4.0	4.1	rbs	1|req|C	1|req|C	int|1|1|- ; str|1|1|-	n|1|1|- ; string_separator|1|1|-	1/0/0///0/0/sep ; 1/0/0///0/0/times	1/0/0///0/0/sep ; 1/0/0///0/0/times	0	ok	rbs-only
+Array	i	+	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other_array|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Array	i	-	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other_array|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Array	i	<<	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	object|1|1|-	1/0/0///0/0/obj	1/0/0///0/0/obj	0	ok	rbs-only
+Array	i	[]=	4.0	4.1	rbs	-1|rest|C	-1|rest|C	index,obj|2|2|- ; obj|2|2|- ; start,length,obj|3|3|- ; start,length|3|3|- ; start,length|3|3|- ; |2|2|- ; |2|2|-	index,object|2|2|- ; range,array|2|2|- ; range,object|2|2|- ; start,length,array|3|3|- ; start,length,object|3|3|-	2/0/0///0/0/nth,val ; 2/0/0///0/0/range,val ; 3/0/0///0/0/start,length,val	2/0/0///0/0/nth,val ; 2/0/0///0/0/range,val ; 3/0/0///0/0/start,length,val	0	ok-split	rbs-only
+Array	i	append	4.0	4.1	rbs	-1|rest|C	-1|rest|C	obj|0|-|-	objects|0|-|-	0/0/1///0/0/*obj	0/0/1///0/0/*obj	0	ok	rbs-only
+Array	i	assoc	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	object|1|1|-	1/0/0///0/0/key	1/0/0///0/0/key	0	ok	rbs-only
+Array	i	bsearch_index	4.0	4.1	rbs	0|-|C	0|-|C	|0|0|req ; |0|0|req	|0|0|- ; |0|0|req ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	rbs-only
+Array	i	combination	4.0	4.1	rbs	1|req|C	1|req|C	n|1|1|- ; n|1|1|req	count|1|1|- ; count|1|1|req	1/0/0///0/0/n ; 1/0/0///0/1/n	1/0/0///0/0/n ; 1/0/0///0/1/n	0	ok	rbs-only
+Array	i	concat	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arrays|0|-|-	other_arrays|0|-|-	0/0/1///0/0/*other_arrays ; 1/0/0///0/0/other	0/0/1///0/0/*other_arrays ; 1/0/0///0/0/other	0	ok	rbs-only
+Array	i	count	4.0	4.1	rbs	-1|rest|C	-1|rest|C	obj|1|1|- ; |0|0|- ; |0|0|req	object|1|1|- ; |0|0|opt	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/item	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/item	0	ok-split	rbs-only
+Array	i	delete	4.0	4.1	rbs	1|req|C	1|req|C	obj|1|1|- ; obj|1|1|req	object|1|1|- ; object|1|1|req	1/0/0///0/0/val ; 1/0/0///0/1/val	1/0/0///0/0/val ; 1/0/0///0/1/val	0	ok	rbs-only
+Array	i	difference	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arrays|0|-|-	other_arrays|0|-|-	0/0/1///0/0/*other_arrays	0/0/1///0/0/*other_arrays	0	ok	rbs-only
+Array	i	dig	4.0	4.1	rbs	-1|rest|C	-1|rest|C	idx|1|1|- ; idx|2|-|-	index|1|1|- ; index|2|-|-	1/0/1///1/1/idx	1/0/1///1/1/idx	0	ok	rbs-only
+Array	i	drop	4.0	4.1	rbs	1|req|C	1|req|C	n|1|1|-	count|1|1|-	1/0/0///0/0/n	1/0/0///0/0/n	0	ok	rbs-only
+Array	i	fetch_values	4.0	4.1	rbs	-1|rest:indexes block:block|rb	-1|rest:indexes block:block|rb	indexes|0|-|-	indexes|0|-|- ; indexes|0|-|req	0/0/1///0/0/*indexes ; 0/0/1///0/1/*indexes	0/0/1///0/0/*indexes ; 0/0/1///0/1/*indexes	0	ok	rbs-only
+Array	i	fill	4.0	4.1	rbs	-1|rest|C	-1|rest|C	obj,range|2|2|- ; obj,start,length|2|3|- ; obj|1|1|- ; range|1|1|req ; start,length|0|2|req	object,range|2|2|- ; object,start,length|1|3|- ; range|1|1|req ; start,length|0|2|req	0/0/0///0/1/ ; 1/0/0///0/0/val ; 1/0/0///0/1/range ; 1/1/0///0/1/start,length ; 2/0/0///0/0/val,range ; 2/1/0///0/0/val,start,length	0/0/0///0/1/ ; 1/0/0///0/0/val ; 1/0/0///0/1/range ; 1/1/0///0/1/start,length ; 2/0/0///0/0/val,range ; 2/1/0///0/0/val,start,length	0	ok	rbs-only
+Array	i	find_index	4.0	4.1	rbs	-1|rest|C	-1|rest|C	obj|1|1|- ; |0|0|- ; |0|0|req	object|1|1|- ; |0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/val	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/val	0	doc-no-optional?	rbs-only
+Array	i	first	4.0	4.1	rbs	-1|opt:n|rb	-1|opt:n|rb	n|1|1|- ; |0|0|-	count|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0///0/0/n	0/0/0///0/0/ ; 1/0/0///0/0/n	0	ok-split	rbs-only
+Array	i	index	4.0	4.1	rbs	-1|rest|C	-1|rest|C	obj|1|1|- ; |0|0|- ; |0|0|req	object|1|1|- ; |0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/val	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/val	0	doc-no-optional?	rbs-only
+Array	i	initialize	4.0	4.1	rbs	-1|rest|C	-1|rest|C	ary|1|1|- ; size,val|1|2|- ; size|1|1|req ; |0|0|-	array|1|1|- ; size,default_value|1|2|- ; size|1|1|req ; |0|0|-	0/2/0///0/0/size,val ; 1/0/0///0/0/ary ; 1/0/0///0/1/size	0/2/0///0/0/size,val ; 1/0/0///0/0/ary ; 1/0/0///0/1/size	0	ok	rbs-only
+Array	i	initialize_copy	4.0	4.1	rbs	1|req|C	1|req|C	other_ary|1|1|-	other_array|1|1|-			0	-	no-doc
+Array	i	insert	4.0	4.1	rbs	-1|rest|C	-1|rest|C	index,obj|1|-|-	index,objects|1|-|-	1/0/1///0/0/nth,*val	1/0/1///0/0/nth,*val	0	ok	rbs-only
+Array	i	intersect?	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other_array|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Array	i	intersection	4.0	4.1	rbs	-1|rest|C	-1|rest|C	other_ary|0|-|-	other_arrays|0|-|-	0/0/1///0/0/*other_arrays	0/0/1///0/0/*other_arrays	0	ok	rbs-only
+Array	i	last	4.0	4.1	rbs	-1|opt:n|rb	-1|opt:n|rb	n|1|1|- ; |0|0|-	count|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0///0/0/n	0/0/0///0/0/ ; 1/0/0///0/0/n	0	ok-split	rbs-only
+Array	i	max	4.0	4.1	rbs	-1|rest|C	-1|rest|C	n|1|1|- ; n|1|1|req ; |0|0|- ; |0|0|req	count|1|1|- ; count|1|1|req ; count|1|1|req ; |0|0|- ; |0|0|req ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/n ; 1/0/0///0/1/n	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/n ; 1/0/0///0/1/n	0	ok-split	rbs-only
+Array	i	min	4.0	4.1	rbs	-1|rest|C	-1|rest|C	n|1|1|- ; n|1|1|req ; |0|0|- ; |0|0|req	count|1|1|- ; count|1|1|req ; count|1|1|req ; |0|0|- ; |0|0|req ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/n ; 1/0/0///0/1/n	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/n ; 1/0/0///0/1/n	0	ok-split	rbs-only
+Array	i	minmax	4.0	4.1	rbs	0|-|C	0|-|C	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	rbs-only
+Array	i	permutation	4.0	4.1	rbs	-1|rest|C	-1|rest|C	n|0|1|- ; n|0|1|req	count|0|1|- ; count|0|1|req	0/1/0///0/0/n ; 0/1/0///0/1/n	0/1/0///0/0/n ; 0/1/0///0/1/n	0	ok	rbs-only
+Array	i	pop	4.0	4.1	rbs	-1|rest|C	-1|rest|C	n|1|1|- ; |0|0|-	count|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0///0/0/n	0/0/0///0/0/ ; 1/0/0///0/0/n	0	ok-split	rbs-only
+Array	i	prepend	4.0	4.1	rbs	-1|rest|C	-1|rest|C	obj|0|-|-	objects|0|-|-	0/0/1///0/0/*obj	0/0/1///0/0/*obj	0	ok	rbs-only
+Array	i	product	4.0	4.1	rbs	-1|rest|C	-1|rest|C	other_ary1,other_ary2|2|2|- ; other_arys|0|-|- ; other_ary|1|1|- ; |0|0|-	other_ary1,other_ary2|2|2|- ; other_ary1,other_ary2|2|2|req ; other_arys|0|-|- ; other_arys|0|-|req ; other_ary|1|1|- ; other_ary|1|1|req ; |0|0|- ; |0|0|req	0/0/1///0/0/*lists ; 0/0/1///0/1/*lists	0/0/1///0/0/*lists ; 0/0/1///0/1/*lists	0	ok	rbs-only
+Array	i	push	4.0	4.1	rbs	-1|rest|C	-1|rest|C	obj|0|-|-	objects|0|-|-	0/0/1///0/0/*obj	0/0/1///0/0/*obj	0	ok	rbs-only
+Array	i	rassoc	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	object|1|1|-	1/0/0///0/0/obj	1/0/0///0/0/obj	0	ok	rbs-only
+Array	i	repeated_combination	4.0	4.1	rbs	1|req|C	1|req|C	n|1|1|- ; n|1|1|req	size|1|1|- ; size|1|1|req	1/0/0///0/0/n ; 1/0/0///0/1/n	1/0/0///0/0/n ; 1/0/0///0/1/n	0	ok	rbs-only
+Array	i	repeated_permutation	4.0	4.1	rbs	1|req|C	1|req|C	n|1|1|- ; n|1|1|req	size|1|1|- ; size|1|1|req	1/0/0///0/0/n ; 1/0/0///0/1/n	1/0/0///0/0/n ; 1/0/0///0/1/n	0	ok	rbs-only
+Array	i	replace	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other_array|1|1|-	1/0/0///0/0/another	1/0/0///0/0/another	0	ok	rbs-only
+Array	i	rindex	4.0	4.1	rbs	-1|rest|C	-1|rest|C	obj|1|1|- ; |0|0|- ; |0|0|req	object|1|1|- ; |0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/val	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/val	0	ok-split	rbs-only
+Array	i	sample	4.0	4.1	rbs	-1|opt:n key:random|rb	-1|opt:n key:random|rb	n,random|1|1|- ; random|0|0|-	count,random|1|1|- ; random|0|0|-	0/0/0///0/0/ ; 0/0/0//random/0/0/ ; 1/0/0///0/0/n ; 1/0/0//random/0/0/n	0/0/0///0/0/ ; 0/0/0//random/0/0/ ; 1/0/0///0/0/n ; 1/0/0//random/0/0/n	0	ok-split	rbs-only
+Array	i	shift	4.0	4.1	rbs	-1|rest|C	-1|rest|C	n|1|1|- ; |0|0|-	count|1|1|- ; |0|0|-	0/0/0///0/0/ ; 1/0/0///0/0/n	0/0/0///0/0/ ; 1/0/0///0/0/n	0	ok-split	rbs-only
+Array	i	sort	4.0	4.1	rbs	0|-|C	0|-|C	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	rbs-only
+Array	i	sort!	4.0	4.1	rbs	0|-|C	0|-|C	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	rbs-only
+Array	i	sort_by!	4.0	4.1	rbs	0|-|C	0|-|C	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	rbs-only
+Array	i	sum	4.0	4.1	rbs	-1|rest|C	-1|rest|C	init|0|1|- ; init|0|1|req	init|0|1|opt	0/1/0///0/0/init ; 0/1/0///0/1/init	0/1/0///0/0/init ; 0/1/0///0/1/init	0	ok	rbs-only
+Array	i	take	4.0	4.1	rbs	1|req|C	1|req|C	n|1|1|-	count|1|1|-	1/0/0///0/0/n	1/0/0///0/0/n	0	ok	rbs-only
+Array	i	union	4.0	4.1	rbs	-1|rest|C	-1|rest|C	other_arys|0|-|-	other_arrays|0|-|-	0/0/1///0/0/*other_arrays	0/0/1///0/0/*other_arrays	0	ok	rbs-only
+Array	i	unshift	4.0	4.1	rbs	-1|rest|C	-1|rest|C	obj|0|-|-	objects|0|-|-	0/0/1///0/0/*obj	0/0/1///0/0/*obj	0	ok	rbs-only
+Array	i	zip	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg,args|1|-|- ; arg,args|1|-|req ; arg|1|1|- ; arg|1|1|req	iterable1,iterable2|2|2|- ; iterable1,iterable2|2|2|req ; iterables|0|-|- ; iterables|0|-|req ; iterable|1|1|- ; iterable|1|1|req ; |0|0|- ; |0|0|req	0/0/1///0/0/*lists ; 0/0/1///0/1/*lists	0/0/1///0/0/*lists ; 0/0/1///0/1/*lists	0	ok	rbs-only
+Array	i	|	4.0	4.1	rbs	1|req|C	1|req|C	other_ary|1|1|-	other_array|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Array	s	try_convert	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	array|1|1|- ; ary|1|1|- ; |1|1|-	1/0/0///0/0/obj	1/0/0///0/0/obj	0	ok	rbs-only
+Class	i	inherited	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	subclass|1|1|-	1/0/0///0/0/subclass	1/0/0///0/0/subclass	0	ok	rbs-only
+Class	i	new	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|-	|0|-|opt	0/0/1///0/1/*args	0/0/1///0/1/*args	0	ok	rbs-only
+Enumerable	i	all?	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req ; |1|1|-	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/pattern	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/pattern	0	ok-split	rbs-only
+Enumerable	i	any?	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req ; |1|1|-	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/pattern	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/pattern	0	ok-split	rbs-only
+Enumerable	i	none?	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req ; |1|1|-	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/pattern	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/pattern	0	ok-split	rbs-only
+Enumerable	i	one?	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req ; |1|1|-	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/pattern	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/pattern	0	ok-split	rbs-only
+Enumerable	i	to_set	4.0	4.1	real	-1|rest:args block:block|rb	0|block:block|rb	|0|0|- ; |0|0|req	|0|0|- ; |0|0|req	0/1/1///0/0/klass,*args ; 0/1/1///0/1/klass,*args	0/0/0///0/0/ ; 0/0/0///0/1/	1	ok	reflected
+File	i	initialize	4.0	4.1	rbs	-1|rest|C	-1|rest|C	file_name,mode,perm|1|3|-	file_name,mode,perm,mode,flags,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,path,invalid,undef,replace,fallback,xml,cr_newline,crlf_newline,universal_newline|1|3|-	1/2/0///1/0/path,mode,perm	1/2/0///1/0/path,mode,perm	0	ok	rbs-only
+File::Stat	i	initialize	4.0	4.1	rbs	1|req|C	1|req|C	file|1|1|-	file_name|1|1|-	1/0/0///0/0/path	1/0/0///0/0/path	0	ok	rbs-only
+GC	i	garbage_collect	4.0	4.1	real	-1|key:full_mark key:immediate_mark key:immediate_sweep|rb	-1|key:full_mark key:immediate_mark key:immediate_sweep key:global|rb	immediate_sweep,immediate_mark,full_mark|0|0|-	immediate_sweep,immediate_mark,full_mark|0|0|-	0/0/0//full_mark,immediate_mark,immediate_sweep/0/0/	0/0/0//full_mark,immediate_mark,immediate_sweep/0/0/	0	kw-mismatch	unreflected
+GC	s	start	4.0	4.1	real	-1|key:full_mark key:immediate_mark key:immediate_sweep|rb	-1|key:full_mark key:immediate_mark key:immediate_sweep key:global|rb	immediate_sweep,immediate_mark,full_mark|0|0|-	immediate_sweep,immediate_mark,full_mark|0|0|-	0/0/0//full_mark,immediate_mark,immediate_sweep/0/0/	0/0/0//full_mark,immediate_mark,immediate_sweep,global/0/0/	1	ok	reflected
+GC	s	stat	4.0	4.1	real	-1|opt:hash_or_key|rb	-1|opt:hash_or_key key:scope|rb	hash|0|1|- ; key|1|1|-	hash|0|1|- ; key|1|1|-	0/1/0///0/0/result_hash ; 1/0/0///0/0/key	0/1/0//scope/0/0/result_hash ; 1/0/0//scope/0/0/key	1	ok-split	reflected
+GC::Profiler	s	raw_data	4.0	4.1	real	0|-|C	-1|rest|C	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	doc-no-optional?	c-decl-change
+Hash	i	<	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other_hash|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Hash	i	<=	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other_hash|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Hash	i	>	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other_hash|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Hash	i	>=	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other_hash|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Hash	i	[]	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	key|1|1|-	1/0/0///0/0/key	1/0/0///0/0/key	0	ok	rbs-only
+Hash	i	[]=	4.0	4.1	rbs	2|req req|C	2|req req|C	arg0,arg1|2|2|-	key,value|2|2|-	2/0/0///0/0/key,value	2/0/0///0/0/key,value	0	ok	rbs-only
+Hash	i	assoc	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	key|1|1|-	1/0/0///0/0/key	1/0/0///0/0/key	0	ok	rbs-only
+Hash	i	default	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0|0|1|-	key|0|1|-	0/0/0///0/0/ ; 1/0/0///0/0/key	0/0/0///0/0/ ; 1/0/0///0/0/key	0	ok-split	rbs-only
+Hash	i	default=	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	default|1|1|-	1/0/0///0/0/value	1/0/0///0/0/value	0	ok	rbs-only
+Hash	i	default_proc=	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	proc|1|1|- ; proc|1|1|- ; |1|1|-	1/0/0///0/0/pr	1/0/0///0/0/pr	0	ok	rbs-only
+Hash	i	delete	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|- ; arg0|1|1|req	key|1|1|- ; key|1|1|req	1/0/0///0/0/key ; 1/0/0///0/1/key	1/0/0///0/0/key ; 1/0/0///0/1/key	0	ok	rbs-only
+Hash	i	dig	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|1|-|-	key,identifiers|1|-|-	1/0/1///1/1/key	1/0/1///1/1/key	0	ok	rbs-only
+Hash	i	eql?	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	object|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Hash	i	except	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|-|-	keys|0|-|-	0/0/1///0/0/*keys	0/0/1///0/0/*keys	0	ok	rbs-only
+Hash	i	fetch	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0,arg1|2|2|- ; arg0|1|1|- ; arg0|1|1|req	key,default_value|2|2|- ; key|1|1|- ; key|1|1|req	1/0/0///0/0/key ; 1/0/0///0/1/key ; 2/0/0///0/0/key,default	1/0/0///0/0/key ; 1/0/0///0/1/key ; 2/0/0///0/0/key,default	0	ok-split	rbs-only
+Hash	i	fetch_values	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|-|- ; |0|-|req	keys|0|-|- ; keys|0|-|req	1/0/1///1/1/key	1/0/1///1/1/key	0	ok	rbs-only
+Hash	i	flatten	4.0	4.1	rbs	-1|rest|C	-1|rest|C	level|1|1|- ; level|1|1|- ; |0|0|-	level|0|1|- ; level|1|1|- ; level|1|1|-	0/1/0///0/0/level	0/1/0///0/0/level	0	ok	rbs-only
+Hash	i	has_key?	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	key|1|1|-	1/0/0///0/0/key	1/0/0///0/0/key	0	ok	rbs-only
+Hash	i	has_value?	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	value|1|1|-	1/0/0///0/0/value	1/0/0///0/0/value	0	ok	rbs-only
+Hash	i	include?	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	key|1|1|-	1/0/0///0/0/key	1/0/0///0/0/key	0	ok	rbs-only
+Hash	i	initialize	4.0	4.1	rbs	-1|opt:ifnone key:capacity block:block|rb	-1|opt:ifnone key:capacity block:block|rb	capacity|0|0|- ; capacity|0|0|req ; default,capacity|1|1|-	capacity|0|0|req ; default_value,capacity|0|1|-	0/0/0//capacity/0/1/ ; 0/1/0//capacity/0/0/ifnone	0/0/0//capacity/0/1/ ; 0/1/0//capacity/0/0/ifnone	0	ok-split	rbs-only
+Hash	i	initialize_copy	4.0	4.1	rbs	1|req|C	1|req|C	object|1|1|-	other|1|1|-			0	-	no-doc
+Hash	i	key?	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	key|1|1|-	1/0/0///0/0/key	1/0/0///0/0/key	0	ok	rbs-only
+Hash	i	member?	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	key|1|1|-	1/0/0///0/0/key	1/0/0///0/0/key	0	ok	rbs-only
+Hash	i	rassoc	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	value|1|1|-	1/0/0///0/0/value	1/0/0///0/0/value	0	ok	rbs-only
+Hash	i	replace	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Hash	i	slice	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|-|-	keys|0|-|-	0/0/1///0/0/*keys	0/0/1///0/0/*keys	0	ok	rbs-only
+Hash	i	store	4.0	4.1	rbs	2|req req|C	2|req req|C	arg0,arg1|2|2|-	key,value|2|2|-	2/0/0///0/0/key,value	2/0/0///0/0/key,value	0	ok	rbs-only
+Hash	i	transform_keys	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|- ; |0|0|req	replacements|1|1|- ; replacements|1|1|req ; |0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/hash	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/hash	0	ok-split	rbs-only
+Hash	i	transform_keys!	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|- ; |0|0|req	replacements|1|1|opt ; |0|0|- ; |0|0|req	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/hash	0/0/0///0/0/ ; 0/0/0///0/1/ ; 1/0/0///0/0/hash	0	ok-split	rbs-only
+Hash	i	value?	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	value|1|1|-	1/0/0///0/0/value	1/0/0///0/0/value	0	ok	rbs-only
+Hash	s	[]	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|-|- ; |1|1|- ; |1|1|-	hash|1|1|- ; objects|0|-|- ; two_element_arrays|1|1|-	0/0/1///0/0/*key_and_value ; 1/0/0///0/0/other	0/0/1///0/0/*key_and_value ; 1/0/0///0/0/other	0	ok	rbs-only
+Hash	s	try_convert	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|- ; |1|1|-	hash|1|1|- ; |1|1|-	1/0/0///0/0/obj	1/0/0///0/0/obj	0	ok	rbs-only
+IO	i	putc	4.0	4.1	rbs	1|req|C	1|req|C	object|1|1|-	|1|1|- ; |1|1|-	1/0/0///0/0/ch	1/0/0///0/0/ch	0	ok	rbs-only
+IO	i	sysread	4.0	4.1	rbs	-1|rest|C	-1|rest|C	maxlen,outbuf|2|2|-	maxlen,outbuf|1|2|-	1/1/0///0/0/maxlen,outbuf	1/1/0///0/0/maxlen,outbuf	0	ok	rbs-only
+IO::Buffer	i	pread	4.0	4.1	-	-1|rest|C	-1|rest|C	|3|3|-	|3|3|-	2/2/0///0/0/io,from,length,offset	2/2/0///0/0/io,from,offset,length	1	ok	doc-only
+IO::Buffer	i	pwrite	4.0	4.1	-	-1|rest|C	-1|rest|C	|3|3|-	|3|3|-	2/2/0///0/0/io,from,length,offset	2/2/0///0/0/io,from,offset,length	1	ok	doc-only
+IO::Buffer	i	read	4.0	4.1	-	-1|rest|C	-1|rest|C	|2|2|-	|2|2|-	1/2/0///0/0/io,length,offset	1/2/0///0/0/io,offset,length	1	ok	doc-only
+IO::Buffer	i	write	4.0	4.1	-	-1|rest|C	-1|rest|C	|2|2|-	|2|2|-	1/2/0///0/0/io,length,offset	1/2/0///0/0/io,offset,length	1	ok	doc-only
+Integer	i	==	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Integer	i	===	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other|1|1|-	1/0/0///0/0/other	1/0/0///0/0/other	0	ok	rbs-only
+Integer	i	ceil	4.0	4.1	rbs	-1|rest|C	-1|rest|C	digits|1|1|- ; |0|0|-	digits|0|1|-	0/1/0///0/0/ndigits	0/1/0///0/0/ndigits	0	ok	rbs-only
+Integer	i	chr	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|1|-	encoding|0|1|-	0/0/0///0/0/ ; 1/0/0///0/0/encoding	0/0/0///0/0/ ; 1/0/0///0/0/encoding	0	ok-split	rbs-only
+Integer	i	gcd	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other_int|1|1|-	1/0/0///0/0/n	1/0/0///0/0/n	0	ok	rbs-only
+Integer	i	gcdlcm	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other_int|1|1|-	1/0/0///0/0/n	1/0/0///0/0/n	0	ok	rbs-only
+Integer	i	inspect	4.0	4.1	rbs	-1|rest|C	-1|rest|C	base|1|1|- ; |0|0|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|-	base|0|1|-	0/1/0///0/0/base	0/1/0///0/0/base	0	ok	rbs-only
+Integer	i	lcm	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	other_int|1|1|-	1/0/0///0/0/n	1/0/0///0/0/n	0	ok	rbs-only
+Integer	i	round	4.0	4.1	rbs	-1|rest|C	-1|rest|C	digits,half|1|1|- ; half|0|0|-	digits,half|0|1|-	0/1/0//half/0/0/ndigits	0/1/0//half/0/0/ndigits	0	ok	rbs-only
+Integer	i	to_s	4.0	4.1	rbs	-1|rest|C	-1|rest|C	base|1|1|- ; |0|0|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|- ; |1|1|-	base|0|1|-	0/1/0///0/0/base	0/1/0///0/0/base	0	ok	rbs-only
+Integer	i	truncate	4.0	4.1	rbs	-1|rest|C	-1|rest|C	ndigits|1|1|- ; |0|0|-	ndigits|0|1|-	0/1/0///0/0/ndigits	0/1/0///0/0/ndigits	0	ok	rbs-only
+Kernel	i	autoload	4.0	4.1	rbs	2|req req|C	2|req req|C	_module,filename|2|2|-	const,filename|2|2|-	2/0/0///0/0/const_name,feature	2/0/0///0/0/const_name,feature	0	ok	rbs-only
+Kernel	i	autoload?	4.0	4.1	rbs	-1|rest|C	-1|rest|C	name|1|1|-	name,inherit|1|2|-	1/0/0///0/0/const_name	1/0/0///0/0/const_name	0	doc-no-optional?	rbs-only
+Kernel	i	caller	4.0	4.1	rbs	-1|rest|C	-1|rest|C	start_or_range,length|1|2|- ; start_or_range|1|1|- ; |0|0|-	range|1|1|- ; start,length|1|2|- ; |0|0|-	0/1/0///0/0/start ; 1/0/0///0/0/range ; 2/0/0///0/0/start,length	0/1/0///0/0/start ; 1/0/0///0/0/range ; 2/0/0///0/0/start,length	0	ok	rbs-only
+Kernel	i	caller_locations	4.0	4.1	rbs	-1|rest|C	-1|rest|C	start_or_range,length|0|2|- ; start_or_range|0|1|-	range|1|1|- ; start,length|1|2|- ; |0|0|-	0/2/0///0/0/start,length ; 1/0/0///0/0/range	0/2/0///0/0/start,length ; 1/0/0///0/0/range	0	ok	rbs-only
+Kernel	i	test	4.0	4.1	rbs	-1|rest|C	-1|rest|C	cmd,file1,file2|2|3|-	cmd,filepath1,filepath2|2|3|- ; filepath1,filepath2|3|3|- ; filepath|2|2|- ; filepath|2|2|- ; filepath|2|2|-	2/0/0///0/0/cmd,file ; 3/0/0///0/0/cmd,file1,file2	2/0/0///0/0/cmd,file ; 3/0/0///0/0/cmd,file1,file2	0	ok-split	rbs-only
+Kernel	s	autoload	4.0	4.1	rbs	2|req req|C	2|req req|C	_module,filename|2|2|-	const,filename|2|2|-	2/0/0///0/0/const_name,feature	2/0/0///0/0/const_name,feature	0	ok	rbs-only
+Kernel	s	autoload?	4.0	4.1	rbs	-1|rest|C	-1|rest|C	name|1|1|-	name,inherit|1|2|-	1/0/0///0/0/const_name	1/0/0///0/0/const_name	0	doc-no-optional?	rbs-only
+Kernel	s	caller	4.0	4.1	rbs	-1|rest|C	-1|rest|C	start_or_range,length|1|2|- ; start_or_range|1|1|- ; |0|0|-	range|1|1|- ; start,length|1|2|- ; |0|0|-	0/1/0///0/0/start ; 1/0/0///0/0/range ; 2/0/0///0/0/start,length	0/1/0///0/0/start ; 1/0/0///0/0/range ; 2/0/0///0/0/start,length	0	ok	rbs-only
+Kernel	s	caller_locations	4.0	4.1	rbs	-1|rest|C	-1|rest|C	start_or_range,length|0|2|- ; start_or_range|0|1|-	range|1|1|- ; start,length|1|2|- ; |0|0|-	0/2/0///0/0/start,length ; 1/0/0///0/0/range	0/2/0///0/0/start,length ; 1/0/0///0/0/range	0	ok	rbs-only
+Kernel	s	test	4.0	4.1	rbs	-1|rest|C	-1|rest|C	cmd,file1,file2|2|3|-	cmd,filepath1,filepath2|2|3|- ; filepath1,filepath2|3|3|- ; filepath|2|2|- ; filepath|2|2|- ; filepath|2|2|-	2/0/0///0/0/cmd,file ; 3/0/0///0/0/cmd,file1,file2	2/0/0///0/0/cmd,file ; 3/0/0///0/0/cmd,file1,file2	0	ok-split	rbs-only
+Module	i	append_features	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	mod|1|1|-	1/0/0///0/0/module_or_class	1/0/0///0/0/module_or_class	0	ok	rbs-only
+Module	i	attr	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	name,create_writer|2|2|- ; names|0|-|-	0/0/1///0/0/*name ; 2/0/0///0/0/name,=false ; 2/0/0///0/0/name,=true	0/0/1///0/0/*name ; 2/0/0///0/0/name,=false ; 2/0/0///0/0/name,=true	0	ok	rbs-only
+Module	i	attr_accessor	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	names|0|-|-	0/0/1///0/0/*name	0/0/1///0/0/*name	0	ok	rbs-only
+Module	i	attr_reader	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	names|0|-|-	0/0/1///0/0/*name	0/0/1///0/0/*name	0	ok	rbs-only
+Module	i	attr_writer	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	names|0|-|-	0/0/1///0/0/*name	0/0/1///0/0/*name	0	ok	rbs-only
+Module	i	autoload	4.0	4.1	rbs	2|req req|C	2|req req|C	_module,filename|2|2|-	constant,filename|2|2|-	2/0/0///0/0/const_name,feature	2/0/0///0/0/const_name,feature	0	ok	rbs-only
+Module	i	class_eval	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0,filename,lineno|1|3|- ; |0|0|req	code,filename,lineno|1|3|- ; |0|0|req	0/0/0///0/1/ ; 1/2/0///0/0/expr,fname,lineno	0/0/0///0/1/ ; 1/2/0///0/0/expr,fname,lineno	0	ok	rbs-only
+Module	i	class_variable_defined?	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	name|1|1|-	1/0/0///0/0/name	1/0/0///0/0/name	0	ok	rbs-only
+Module	i	class_variable_get	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	name|1|1|-	1/0/0///0/0/name	1/0/0///0/0/name	0	ok	rbs-only
+Module	i	class_variable_set	4.0	4.1	rbs	2|req req|C	2|req req|C	arg0,arg1|2|2|-	name,value|2|2|-	2/0/0///0/0/name,val	2/0/0///0/0/name,val	0	ok	rbs-only
+Module	i	const_added	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	const_name|1|1|-	1/0/0///0/0/name	1/0/0///0/0/name	0	ok	rbs-only
+Module	i	const_missing	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	name|1|1|-	1/0/0///0/0/name	1/0/0///0/0/name	0	ok	rbs-only
+Module	i	const_set	4.0	4.1	rbs	2|req req|C	2|req req|C	arg0,arg1|2|2|-	name,value|2|2|-	2/0/0///0/0/name,value	2/0/0///0/0/name,value	0	ok	rbs-only
+Module	i	deprecate_constant	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|-|-	names|0|-|-	0/0/1///0/0/*name	0/0/1///0/0/*name	0	ok	rbs-only
+Module	i	extend_object	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	object|1|1|-	1/0/0///0/0/obj	1/0/0///0/0/obj	0	ok	rbs-only
+Module	i	include	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0|1|-|-	module,additional_modules|1|-|-	0/0/1///0/0/*mod	0/0/1///0/0/*mod	0	ok	rbs-only
+Module	i	initialize	4.0	4.1	rbs	0|-|C	0|-|C	|0|0|- ; |0|0|req	|0|0|opt	0/0/0///0/0/ ; 0/0/0///0/1/	0/0/0///0/0/ ; 0/0/0///0/1/	0	ok	rbs-only
+Module	i	instance_method	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	name|1|1|-	1/0/0///0/0/name	1/0/0///0/0/name	0	ok	rbs-only
+Module	i	method_added	4.0	4.1	rbs	1|req|C	1|req|C	meth|1|1|-	method_name|1|1|-	1/0/0///0/0/name	1/0/0///0/0/name	0	ok	rbs-only
+Module	i	method_defined?	4.0	4.1	-	-1|rest|C	-1|rest|C	name,inherit|1|2|-	name,inherit|1|2|-	1/1/0///0/0/name,inherit	1/2/0///0/0/name,inherit,include_all	1	ok	doc-only
+Module	i	module_eval	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0,filename,lineno|1|3|- ; |0|0|req	code,filename,lineno|1|3|- ; |0|0|req	0/0/0///0/1/ ; 1/2/0///0/0/expr,fname,lineno	0/0/0///0/1/ ; 1/2/0///0/0/expr,fname,lineno	0	ok	rbs-only
+Module	i	module_function	4.0	4.1	rbs	-1|rest|C	-1|rest|C	method_name|1|1|- ; method_name|1|1|- ; method_name|2|-|- ; method_name|2|-|- ; |0|0|-	method_names|2|-|- ; method_names|2|-|- ; method_names|2|-|- ; method_name|1|1|- ; method_name|1|1|- ; method_name|1|1|- ; |0|0|-	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name	0	ok	rbs-only
+Module	i	prepend	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0|1|-|-	module,additional_modules|1|-|-	0/0/1///0/0/*modules	0/0/1///0/0/*modules	0	ok	rbs-only
+Module	i	prepend_features	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	mod|1|1|-	1/0/0///0/0/mod	1/0/0///0/0/mod	0	ok	rbs-only
+Module	i	private	4.0	4.1	rbs	-1|rest|C	-1|rest|C	method_name|1|1|- ; method_name|1|1|- ; method_name|2|-|- ; method_name|2|-|- ; |0|0|- ; |1|1|-	method_names|1|1|- ; method_names|1|1|- ; method_names|1|1|- ; method_names|2|-|- ; method_names|2|-|- ; method_names|2|-|- ; method_name|1|1|- ; method_name|1|1|- ; method_name|1|1|- ; |0|0|-	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0	ok	rbs-only
+Module	i	private_class_method	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0|0|-|- ; arg0|1|1|-	method_names|0|-|- ; method_names|1|1|-	0/0/1///0/0/*name ; 1/0/0///0/0/names	0/0/1///0/0/*name ; 1/0/0///0/0/names	0	ok	rbs-only
+Module	i	private_constant	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	names|0|-|-	0/0/1///0/0/*name	0/0/1///0/0/*name	0	ok	rbs-only
+Module	i	protected	4.0	4.1	rbs	-1|rest|C	-1|rest|C	method_name|1|1|- ; method_name|1|1|- ; method_name|2|-|- ; method_name|2|-|- ; |0|0|- ; |1|1|-	method_names|1|1|- ; method_names|1|1|- ; method_names|1|1|- ; method_names|2|-|- ; method_names|2|-|- ; method_names|2|-|- ; method_name|1|1|- ; method_name|1|1|- ; method_name|1|1|- ; |0|0|-	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0	ok	rbs-only
+Module	i	public	4.0	4.1	rbs	-1|rest|C	-1|rest|C	method_name|1|1|- ; method_name|1|1|- ; method_name|2|-|- ; method_name|2|-|- ; |0|0|- ; |1|1|-	method_names|1|1|- ; method_names|1|1|- ; method_names|1|1|- ; method_names|2|-|- ; method_names|2|-|- ; method_names|2|-|- ; method_name|1|1|- ; method_name|1|1|- ; method_name|1|1|- ; |0|0|-	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0/0/0///0/0/ ; 0/0/1///0/0/*name ; 1/0/0///0/0/name ; 1/0/0///0/0/names	0	ok	rbs-only
+Module	i	public_class_method	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0|0|-|- ; arg0|1|1|-	method_names|0|-|- ; method_names|1|1|-	0/0/1///0/0/*name ; 1/0/0///0/0/names	0/0/1///0/0/*name ; 1/0/0///0/0/names	0	ok	rbs-only
+Module	i	public_constant	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	names|0|-|-	0/0/1///0/0/*name	0/0/1///0/0/*name	0	ok	rbs-only
+Module	i	remove_class_variable	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	name|1|1|-	1/0/0///0/0/name	1/0/0///0/0/name	0	ok	rbs-only
+Module	i	remove_const	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	name|1|1|-	1/0/0///0/0/name	1/0/0///0/0/name	0	ok	rbs-only
+Module	i	remove_method	4.0	4.1	rbs	-1|rest|C	-1|rest|C	arg0|0|-|-	method_names|0|-|-	0/0/1///0/0/*name	0/0/1///0/0/*name	0	ok	rbs-only
+Module	i	set_temporary_name	4.0	4.1	rbs	1|req|C	1|req|C	|1|1|-	name|1|1|-	1/0/0///0/0/=nil ; 1/0/0///0/0/string	1/0/0///0/0/=nil ; 1/0/0///0/0/string	0	ok	rbs-only
+Module	i	using	4.0	4.1	rbs	1|req|C	1|req|C	arg0|1|1|-	mod|1|1|-	1/0/0///0/0/module	1/0/0///0/0/module	0	ok	rbs-only
+Module	s	constants	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|-	inherit|0|1|-	0/0/0///0/0/	0/0/0///0/0/	0	doc-no-optional?	rbs-only
+ObjectSpace	i	garbage_collect	4.0	4.1	real	-1|key:full_mark key:immediate_mark key:immediate_sweep|rb	-1|key:full_mark key:immediate_mark key:immediate_sweep key:global|rb	full_mark,immediate_mark,immediate_sweep|0|0|-	full_mark,immediate_mark,immediate_sweep|0|0|-	0/0/0//full_mark,immediate_sweep/0/0/	0/0/0//full_mark,immediate_sweep/0/0/	0	kw-mismatch	unreflected
+ObjectSpace	s	garbage_collect	4.0	4.1	real	-1|key:full_mark key:immediate_mark key:immediate_sweep|rb	-1|key:full_mark key:immediate_mark key:immediate_sweep key:global|rb	full_mark,immediate_mark,immediate_sweep|0|0|-	full_mark,immediate_mark,immediate_sweep|0|0|-	0/0/0//full_mark,immediate_sweep/0/0/	0/0/0//full_mark,immediate_sweep/0/0/	0	kw-mismatch	unreflected
+Pathname	i	absolute?	4.0	4.1	real	0|-|rb	0|-|C	|0|0|-	|0|0|-			0	-	no-doc
+Pathname	i	add_trailing_separator	4.0	4.1	real	1|req:path|rb	1|req|C	path|1|1|-	path|1|1|-			0	-	no-doc
+Pathname	i	chop_basename	4.0	4.1	real	1|req:path|rb	1|req|C	path|1|1|-	path|1|1|-			0	-	no-doc
+Pathname	i	del_trailing_separator	4.0	4.1	real	1|req:path|rb	1|req|C	path|1|1|-	path|1|1|-			0	-	no-doc
+Pathname	i	has_trailing_separator?	4.0	4.1	real	1|req:path|rb	1|req|C	path|1|1|-	path|1|1|-			0	-	no-doc
+Pathname	i	open	4.0	4.1	rbs	-1|rest:* keyrest:** block:&|rb	-1|rest:* keyrest:** block:&|rb	mode,perm|0|2|- ; mode,perm|0|2|req	mode,perm,flags,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,path,invalid,undef,replace,fallback,xml,cr_newline,crlf_newline,universal_newline|0|2|- ; mode,perm,mode,flags,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,path,invalid,undef,replace,fallback,xml,cr_newline,crlf_newline,universal_newline|0|2|req			0	-	no-doc
+Pathname	i	root?	4.0	4.1	real	0|-|rb	0|-|C	|0|0|-	|0|0|-			0	-	no-doc
+Pathname	i	same_paths?	4.0	4.1	real	2|req:a req:b|rb	2|req req|C					0	-	no-doc
+Pathname	i	split_names	4.0	4.1	real	1|req:path|rb	1|req|C	path|1|1|-	path|1|1|-			0	-	no-doc
+Pathname	i	sub_ext	4.0	4.1	real	1|req:repl|rb	1|req|C	replacement|1|1|-	replacement|1|1|-			0	-	no-doc
+Ractor	i	receive	4.0	4.1	real	0|-|rb	-1|key:timeout|rb	|0|0|-	|0|0|-			0	-	no-doc
+Ractor	i	recv	4.0	4.1	real	0|-|rb	-1|key:timeout|rb	|0|0|-	|0|0|-			0	-	no-doc
+Ractor	s	receive	4.0	4.1	real	0|-|rb	-1|key:timeout|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	kw-mismatch	unreflected
+Ractor	s	recv	4.0	4.1	real	0|-|rb	-1|key:timeout|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	kw-mismatch	unreflected
+Ractor	s	select	4.0	4.1	real	-1|rest:ports|rb	-1|rest:ports key:timeout|rb	|-|-|-	|-|-|-	0/0/1///0/0/*ports	0/0/1///0/0/*ports	0	kw-mismatch	unreflected
+Ractor::Port	i	receive	4.0	4.1	real	0|-|rb	-1|key:timeout|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	kw-mismatch	unreflected
+Range	i	to_set	4.0	4.1	real	-1|rest|C	0|-|C					0	-	no-doc
+Set	i	to_set	4.0	4.1	real	-1|rest|C	0|-|C					0	-	no-doc
+String	i	append_as_bytes	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|1|1|-	|0|-|-	0/0/1///0/0/*objects	0/0/1///0/0/*objects	0	ok	rbs-only
+String	i	ascii_only?	4.0	4.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+String	i	lstrip	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|-	|0|-|-	0/0/1///0/0/*selectors	0/0/1///0/0/*selectors	0	ok	rbs-only
+String	i	lstrip!	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|-	|0|-|-	0/0/1///0/0/*selectors	0/0/1///0/0/*selectors	0	ok	rbs-only
+String	i	rstrip	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|-	|0|-|-	0/0/1///0/0/*selectors	0/0/1///0/0/*selectors	0	ok	rbs-only
+String	i	rstrip!	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|-	|0|-|-	0/0/1///0/0/*selectors	0/0/1///0/0/*selectors	0	ok	rbs-only
+String	i	strip	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|-	|0|-|-	0/0/1///0/0/*selectors	0/0/1///0/0/*selectors	0	ok	rbs-only
+String	i	strip!	4.0	4.1	rbs	-1|rest|C	-1|rest|C	|0|0|-	|0|-|-	0/0/1///0/0/*selectors	0/0/1///0/0/*selectors	0	ok	rbs-only
+String	i	tr	4.0	4.1	both	2|req req|C	-1|rest|C	source,relpacement|2|2|-	source,replacement|2|2|-	2/0/0///0/0/pattern,replace	1/0/0///0/0/hash ; 2/0/0///0/0/pattern,replace	1	ok-split	reflected
+String	i	tr!	4.0	4.1	both	2|req req|C	-1|rest|C	source,relpacement|2|2|-	source,replacement|2|2|-	2/0/0///0/0/pattern,replace	1/0/0///0/0/hash ; 2/0/0///0/0/pattern,replace	1	ok-split	reflected
+String	i	valid_encoding?	4.0	4.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Symbol	i	empty?	4.0	4.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Queue	i	<<	4.0	4.1	real	1|req|C	1|req:object|rb	obj|1|1|-	obj|1|1|-	1/0/0///0/0/value	1/0/0///0/0/value	0	name-mismatch	name-only
+Thread::Queue	i	clear	4.0	4.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Queue	i	close	4.0	4.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Queue	i	closed?	4.0	4.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Queue	i	empty?	4.0	4.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Queue	i	enq	4.0	4.1	real	1|req|C	1|req:object|rb	obj|1|1|-	obj|1|1|-	1/0/0///0/0/value	1/0/0///0/0/value	0	name-mismatch	name-only
+Thread::Queue	i	freeze	4.0	4.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-			0	-	no-doc
+Thread::Queue	i	initialize	4.0	4.1	real	-1|rest|C	-1|opt:enumerable|rb			0/0/0///0/0/ ; 1/0/0///0/0/items	0/0/0///0/0/ ; 1/0/0///0/0/items	0	ok-split	already-consistent
+Thread::Queue	i	length	4.0	4.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Queue	i	marshal_dump	4.0	4.1	real	0|-|C	0|-|rb					0	-	no-doc
+Thread::Queue	i	num_waiting	4.0	4.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::Queue	i	push	4.0	4.1	real	1|req|C	1|req:object|rb	obj|1|1|-	obj|1|1|-	1/0/0///0/0/value	1/0/0///0/0/value	0	name-mismatch	name-only
+Thread::Queue	i	size	4.0	4.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::SizedQueue	i	clear	4.0	4.1	real	0|-|C	0|-|rb					0	-	no-doc
+Thread::SizedQueue	i	close	4.0	4.1	real	0|-|C	0|-|rb			0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::SizedQueue	i	initialize	4.0	4.1	real	1|req|C	1|req:vmax|rb	max|1|1|-	max|1|1|-	1/0/0///0/0/max	1/0/0///0/0/max	0	name-mismatch	name-only
+Thread::SizedQueue	i	max	4.0	4.1	real	0|-|C	0|-|rb	|0|0|-	|0|0|-	0/0/0///0/0/	0/0/0///0/0/	0	ok	already-consistent
+Thread::SizedQueue	i	max=	4.0	4.1	real	1|req|C	1|req:vmax|rb	max|1|1|-	max|1|1|-	1/0/0///0/0/n	1/0/0///0/0/n	0	name-mismatch	name-only
+Thread::SizedQueue	i	num_waiting	4.0	4.1	real	0|-|C	0|-|rb					0	-	no-doc
