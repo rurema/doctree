@@ -683,6 +683,9 @@ CRubyではメジャーGCを実行し以下のことをします：
 3. 全ての文字列のcoderange([m:String#valid_encoding?]などで使われる文字列の内容とエンコーディングとの整合性の情報)を事前計算します
 4. すべての空のヒープページを解放し、解放したページ数だけ割当可能なページカウンター(heap_allocatable_pages)を増分します
 5. 空のmallocページを解放するためにmalloc_trimを呼び出します
+#%since 4.1
+6. [lib:error_highlight]、[lib:did_you_mean]、`syntax_suggest` を読み込みます(Ruby 4.1 からこれらは最初のエラー表示時まで遅延して読み込まれるため、フォークする前に読み込んでおくことで子プロセス間でコードを共有できます)
+#%end
 #%end
 
 ### module_function def daemon(nochdir = nil, noclose = nil)    -> 0
