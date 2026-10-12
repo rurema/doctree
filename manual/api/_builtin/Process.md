@@ -684,7 +684,7 @@ CRubyではメジャーGCを実行し以下のことをします：
 4. すべての空のヒープページを解放し、解放したページ数だけ割当可能なページカウンター(heap_allocatable_pages)を増分します
 5. 空のmallocページを解放するためにmalloc_trimを呼び出します
 #%since 4.1
-6. [lib:error_highlight]、[lib:did_you_mean]、`syntax_suggest` を読み込みます(Ruby 4.1 からこれらは最初のエラー表示時まで遅延して読み込まれるため、フォークする前に読み込んでおくことで子プロセス間でコードを共有できます)
+6. [lib:error_highlight]、[lib:did_you_mean]、[lib:syntax_suggest] を読み込みます(Ruby 4.1 からこれらは最初のエラー表示時まで遅延して読み込まれるため、フォークする前に読み込んでおくことで子プロセス間でコードを共有できます)
 #%end
 #%end
 
