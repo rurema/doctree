@@ -705,6 +705,35 @@ alias 新グローバル変数名 旧グローバル変数名
 メソッドの定義内で別名を付けるには[c:Module]クラスのメソッド
 [m:Module#alias_method] を利用して下さい。
 
+#%since 4.1
+Ruby 4.1 から、次の場合に deprecation 警告が出るようになりました(`Warning[:deprecated]` が真のとき、たとえば `-W:deprecated` を指定したときに表示されます)。どちらも Ruby 4.3 で挙動が変わる予定です。[bug:22276]、[bug:22273]
+
+- モジュールの中で、元のメソッドがそのモジュールとその祖先には無く、[c:Object] へのフォールバックでだけ見つかる場合。Ruby 4.3 でこのフォールバックは削除され、[c:NameError] が発生するようになる予定です
+- 元のメソッドが `prepend` したモジュールで定義されている場合。Ruby 4.3 で、別名を付けるメソッドの探索は origin クラス(prepend されたモジュールより後)から始まるようになる予定です
+
+```ruby title="例"
+module M
+  alias my_puts puts
+  # warning: the fallback to Object for alias of 'puts' in module 'M' is deprecated and will be removed in Ruby 4.3
+end
+
+module P
+  def foo = :p
+end
+
+class C
+  def foo = :c
+  prepend P
+  alias bar foo
+  # warning: aliasing C#foo defined in a prepended module P is deprecated and will be removed in Ruby 4.3
+end
+
+p C.new.bar # => :p
+```
+
+[c:Module] のメソッド [m:Module#alias_method] でも同様です。[c:Class] は [c:Object] を祖先に持つので、クラスの中では前者の警告は出ません。
+
+#%end
 別名を付けられたメソッドは、その時点でのメソッド定義を引き継ぎ、元のメソッドが再定義されても、再定義前の古いメソッドと同じ働きをします。あるメソッドの動作を変え、再定義するメソッドで元のメソッドの結果を利用したいときなどに利用されます。
 
 ```ruby
