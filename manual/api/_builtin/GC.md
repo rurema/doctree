@@ -597,7 +597,11 @@ p GC.measure_total_time # => false
 
 - **SEE** [m:GC.compact], [m:GC.auto_compact]
 
+#%since 3.2
+### def GC.verify_compaction_references(toward: nil, double_heap: false, expand_heap: false) -> Hash
+#%else
 ### def GC.verify_compaction_references(toward: nil, double_heap: nil) -> Hash
+#%end
 
 コンパクションの参照の一貫性を検証します。
 
@@ -610,7 +614,14 @@ p GC.measure_total_time # => false
 SEGV が起きるでしょう。
 
 - **param** `toward` -- nil か :empty を指定します。
+#%since 3.2
+- **param** `double_heap` -- ヒープサイズを2倍にするかどうかを真偽値で指定します。Ruby 3.2 から非推奨です。`expand_heap` を使ってください。
+#%else
 - **param** `double_heap` -- ヒープサイズを2倍にするかどうかを真偽値で指定します。
+#%end
+#%since 3.2
+- **param** `expand_heap` -- 全てのオブジェクトが移動できる余地を確保するためにヒープを拡張するかどうかを真偽値で指定します。
+#%end
 
 - **return** -- [m:GC.compact] の返り値と同じです。
 
