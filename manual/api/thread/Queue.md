@@ -115,13 +115,27 @@ q.pop
 t.join
 ```
 
+#%since 3.2
+### def pop(non_block = false, timeout: nil) -> object | nil
+### def shift(non_block = false, timeout: nil) -> object | nil
+### def deq(non_block = false, timeout: nil) -> object | nil
+#%else
 ### def pop(non_block = false) -> object
 ### def shift(non_block = false) -> object
 ### def deq(non_block = false) -> object
+#%end
 
 キューからひとつ値を取り出します。キューが空の時、呼出元のスレッドは停止します。
 
+#%since 3.2
+`timeout` を指定した場合は、その秒数が経過してもキューが空のままであれば、停止をやめて `nil` を返します。
+
+#%end
 - **param** `non_block` -- true を与えると、キューが空の時に例外 [c:ThreadError] が発生します。
+#%since 3.2
+- **param** `timeout` -- 待つ秒数を数値で指定します。`nil` の場合は無期限に待ちます。`non_block` が真のときに指定することはできません。
+- **raise** `ArgumentError` -- `non_block` が真のときに `timeout` を指定した場合に発生します。
+#%end
 
 ```ruby title="例"
 q = Thread::Queue.new
