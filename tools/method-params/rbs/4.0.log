@@ -1,0 +1,5 @@
+path: bitclust RbsSigImporter (local rbs 4.1.3)
+source rbs gem: 3.10.0
+files: 243, parse failures: core 0, stdlib 0 (stdlib は参考)
+keys: 2632, overloads: 3429
+result: ok

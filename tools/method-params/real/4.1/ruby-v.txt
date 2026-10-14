@@ -1,0 +1,1 @@
+ruby 4.1.0dev (2026-10-11T13:56:36Z v4.1.0-preview1 2d08b5f42f) +PRISM [x86_64-linux]

@@ -1,0 +1,242 @@
+loc	class	typemark	names	real_verdict	rbs_verdict	detail	first_raw
+manual/api/_builtin/ARGF.class.md:12	ARGF.class	#	filename,path	no-class	no-rbs		### def filename -> String
+manual/api/_builtin/ARGF.class.md:36	ARGF.class	#	inspect,to_s	no-class	no-rbs		### def to_s -> String
+manual/api/_builtin/ARGF.class.md:43	ARGF.class	#	file	no-class	no-rbs		### def file -> IO
+manual/api/_builtin/ARGF.class.md:61	ARGF.class	#	lineno	no-class	no-rbs		### def lineno -> Integer
+manual/api/_builtin/ARGF.class.md:77	ARGF.class	#	lineno=	no-class	no-rbs		### def lineno=(number)
+manual/api/_builtin/ARGF.class.md:96	ARGF.class	#	skip	no-class	no-rbs		### def skip -> self
+manual/api/_builtin/ARGF.class.md:113	ARGF.class	#	binmode	no-class	no-rbs		### def binmode -> self
+manual/api/_builtin/ARGF.class.md:147	ARGF.class	#	binmode?	no-class	no-rbs		### def binmode? -> bool
+manual/api/_builtin/ARGF.class.md:163	ARGF.class	#	close	no-class	no-rbs		### def close -> self
+manual/api/_builtin/ARGF.class.md:183	ARGF.class	#	closed?	no-class	no-rbs		### def closed? -> bool
+manual/api/_builtin/ARGF.class.md:205	ARGF.class	#	each,each_line	no-class	no-rbs		### def each(rs = $/) { |line| ... }             -> self
+manual/api/_builtin/ARGF.class.md:244	ARGF.class	#	each_byte	no-class	no-rbs		### def each_byte { |byte| ...} -> self
+manual/api/_builtin/ARGF.class.md:263	ARGF.class	#	each_char	no-class	no-rbs		### def each_char { |c| ... } -> self
+manual/api/_builtin/ARGF.class.md:300	ARGF.class	#	each_codepoint	no-class	no-rbs		### def each_codepoint { |c| ... }   -> self
+manual/api/_builtin/ARGF.class.md:321	ARGF.class	#	eof,eof?	no-class	no-rbs		### def eof  -> bool
+manual/api/_builtin/ARGF.class.md:343	ARGF.class	#	fileno,to_i	no-class	no-rbs		### def fileno -> Integer
+manual/api/_builtin/ARGF.class.md:356	ARGF.class	#	getc	no-class	no-rbs		### def getc -> String | nil
+manual/api/_builtin/ARGF.class.md:381	ARGF.class	#	gets	no-class	no-rbs		### def gets(rs = $/, chomp: false)   -> String | nil
+manual/api/_builtin/ARGF.class.md:430	ARGF.class	#	pos,tell	no-class	no-rbs		### def pos  -> Integer
+manual/api/_builtin/ARGF.class.md:445	ARGF.class	#	pos=	no-class	no-rbs		### def pos=(n)
+manual/api/_builtin/ARGF.class.md:459	ARGF.class	#	read	no-class	no-rbs		### def read(length = nil, str = nil) -> String | nil
+manual/api/_builtin/ARGF.class.md:481	ARGF.class	#	readchar	no-class	no-rbs		### def readchar -> String
+manual/api/_builtin/ARGF.class.md:501	ARGF.class	#	readline	no-class	no-rbs		### def readline(rs = $/)   -> String
+manual/api/_builtin/ARGF.class.md:518	ARGF.class	#	readlines,to_a	no-class	no-rbs		### def readlines(rs = $/)   -> Array
+manual/api/_builtin/ARGF.class.md:544	ARGF.class	#	rewind	no-class	no-rbs		### def rewind -> 0
+manual/api/_builtin/ARGF.class.md:556	ARGF.class	#	seek	no-class	no-rbs		### def seek(offset, whence = IO::SEEK_SET) -> 0
+manual/api/_builtin/ARGF.class.md:567	ARGF.class	#	to_io	no-class	no-rbs		### def to_io -> IO
+manual/api/_builtin/ARGF.class.md:579	ARGF.class	#	getbyte	no-class	no-rbs		### def getbyte   -> Integer | nil
+manual/api/_builtin/ARGF.class.md:605	ARGF.class	#	readbyte	no-class	no-rbs		### def readbyte   -> Integer
+manual/api/_builtin/ARGF.class.md:624	ARGF.class	#	readpartial	no-class	no-rbs		### def readpartial(maxlen, outbuf = nil) -> String
+manual/api/_builtin/ARGF.class.md:633	ARGF.class	#	argv	no-class	no-rbs		### def argv -> Array
+manual/api/_builtin/ARGF.class.md:648	ARGF.class	#	external_encoding	no-class	no-rbs		### def external_encoding -> Encoding
+manual/api/_builtin/ARGF.class.md:662	ARGF.class	#	internal_encoding	no-class	no-rbs		### def internal_encoding -> Encoding | nil
+manual/api/_builtin/ARGF.class.md:688	ARGF.class	#	set_encoding	no-class	no-rbs		### def set_encoding(ext_enc)                        -> self
+manual/api/_builtin/ARGF.class.md:712	ARGF.class	#	inplace_mode	no-class	no-rbs		### def inplace_mode -> String | nil
+manual/api/_builtin/ARGF.class.md:742	ARGF.class	#	inplace_mode=	no-class	no-rbs		### def inplace_mode=(ext)
+manual/api/_builtin/ARGF.class.md:780	ARGF.class	#	print	no-class	no-rbs		### def print(*arg)  -> nil
+manual/api/_builtin/ARGF.class.md:791	ARGF.class	#	printf	no-class	no-rbs		### def printf(format, *arg)  -> nil
+manual/api/_builtin/ARGF.class.md:803	ARGF.class	#	putc	no-class	no-rbs		### def putc(ch)  -> object
+manual/api/_builtin/ARGF.class.md:815	ARGF.class	#	puts	no-class	no-rbs		### def puts(*arg)  -> nil
+manual/api/_builtin/ARGF.class.md:827	ARGF.class	#	read_nonblock	no-class	no-rbs		### def read_nonblock(maxlen, outbuf = nil, exception: true) -> String | Symbol | nil
+manual/api/_builtin/ARGF.class.md:846	ARGF.class	#	to_write_io	no-class	no-rbs		### def to_write_io  -> IO
+manual/api/_builtin/ARGF.class.md:854	ARGF.class	#	write	no-class	no-rbs		### def write(str)  -> Integer
+manual/api/_builtin/Array.md:610	Array	#	clone,dup	no-real	no-rbs		### def clone    -> Array
+manual/api/_builtin/Array.md:1240	Array	#	find_index,index	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def find_index(val)          -> Integer | nil
+manual/api/_builtin/Binding.md:248	Binding	#	irb	forwarding?	no-rbs	real forwards *, **, &	### def irb -> object
+manual/api/_builtin/Class.md:182	Class	#	_load	no-real	no-rbs		### def _load(str)    -> Class
+manual/api/_builtin/Complex.md:219	Complex	#	<	no-real	ok		### def <(other)    -> bool
+manual/api/_builtin/Complex.md:222	Complex	#	>	no-real	ok		### def >(other)    -> bool
+manual/api/_builtin/Complex.md:225	Complex	#	<=	no-real	ok		### def <=(other)    -> bool
+manual/api/_builtin/Complex.md:228	Complex	#	>=	no-real	ok		### def >=(other)    -> bool
+manual/api/_builtin/Complex.md:231	Complex	#	between?	no-real	no-rbs		### def between?(min, max)    -> bool
+manual/api/_builtin/Complex.md:234	Complex	#	clamp	no-real	no-rbs		### def clamp(range)     -> object
+manual/api/_builtin/Data.md:206	Data	.	members	no-real	no-rbs		### def Data.members -> [Symbol]
+manual/api/_builtin/Dir.md:30	Dir	.	glob	kw-mismatch	ok	doc=req[] opt[base,sort] rest0 real=req[] opt[base,flags,sort] rest0	### def Dir.glob(pattern, flags = 0, base: nil, sort: true)                -> [String]
+manual/api/_builtin/ENV.md:23	ENV	.	[]	no-class	no-rbs		### def ENV.[](key) -> String
+manual/api/_builtin/ENV.md:34	ENV	.	[]=,store	no-class	no-rbs		### def ENV.[]=(key, value)
+manual/api/_builtin/ENV.md:52	ENV	.	clear	no-class	no-rbs		### def ENV.clear  -> self
+manual/api/_builtin/ENV.md:61	ENV	.	delete	no-class	no-rbs		### def ENV.delete(key) -> String | nil
+manual/api/_builtin/ENV.md:77	ENV	.	reject	no-class	no-rbs		### def ENV.reject                     -> Enumerator
+manual/api/_builtin/ENV.md:90	ENV	.	delete_if,reject!	no-class	no-rbs		### def ENV.delete_if {|key, value| ... } -> ENV
+manual/api/_builtin/ENV.md:105	ENV	.	each,each_pair	no-class	no-rbs		### def ENV.each                          -> Enumerator
+manual/api/_builtin/ENV.md:120	ENV	.	each_key	no-class	no-rbs		### def ENV.each_key              -> Enumerator
+manual/api/_builtin/ENV.md:133	ENV	.	each_value	no-class	no-rbs		### def ENV.each_value                -> Enumerator
+manual/api/_builtin/ENV.md:138	ENV	.	empty?	no-class	no-rbs		### def ENV.empty? -> bool
+manual/api/_builtin/ENV.md:142	ENV	.	fetch	no-class	no-rbs		### def ENV.fetch(key) -> String
+manual/api/_builtin/ENV.md:155	ENV	.	fetch_values	no-class	no-rbs		### def ENV.fetch_values(*key)               -> [String]
+manual/api/_builtin/ENV.md:182	ENV	.	has_key?,include?,key?,member?	no-class	no-rbs		### def ENV.has_key?(key) -> bool
+manual/api/_builtin/ENV.md:192	ENV	.	has_value?,value?	no-class	no-rbs		### def ENV.has_value?(val) -> bool
+manual/api/_builtin/ENV.md:199	ENV	.	key	no-class	no-rbs		### def ENV.key(val)   -> String | nil
+manual/api/_builtin/ENV.md:206	ENV	.	inspect	no-class	no-rbs		### def ENV.inspect -> String
+manual/api/_builtin/ENV.md:210	ENV	.	invert	no-class	no-rbs		### def ENV.invert -> Hash
+manual/api/_builtin/ENV.md:214	ENV	.	keys	no-class	no-rbs		### def ENV.keys -> [String]
+manual/api/_builtin/ENV.md:218	ENV	.	length,size	no-class	no-rbs		### def ENV.length -> Integer
+manual/api/_builtin/ENV.md:223	ENV	.	rehash	no-class	no-rbs		### def ENV.rehash -> nil
+manual/api/_builtin/ENV.md:227	ENV	.	replace	no-class	no-rbs		### def ENV.replace(hash) -> ENV
+manual/api/_builtin/ENV.md:233	ENV	.	filter,select	no-class	no-rbs		### def ENV.select                      -> Enumerator
+manual/api/_builtin/ENV.md:240	ENV	.	shift	no-class	no-rbs		### def ENV.shift -> [String, String] | nil
+manual/api/_builtin/ENV.md:245	ENV	.	to_a	no-class	no-rbs		### def ENV.to_a -> [[String, String]]
+manual/api/_builtin/ENV.md:249	ENV	.	to_hash	no-class	no-rbs		### def ENV.to_hash -> Hash
+manual/api/_builtin/ENV.md:253	ENV	.	to_h	no-class	no-rbs		### def ENV.to_h -> Hash
+manual/api/_builtin/ENV.md:264	ENV	.	to_s	no-class	no-rbs		### def ENV.to_s -> String
+manual/api/_builtin/ENV.md:269	ENV	.	merge!,update	no-class	no-rbs		### def ENV.merge!(*others) -> ENV
+manual/api/_builtin/ENV.md:291	ENV	.	values	no-class	no-rbs		### def ENV.values -> [String]
+manual/api/_builtin/ENV.md:295	ENV	.	values_at	no-class	no-rbs		### def ENV.values_at(*key) -> [String]
+manual/api/_builtin/ENV.md:307	ENV	.	assoc	no-class	no-rbs		### def ENV.assoc(key) -> Array | nil
+manual/api/_builtin/ENV.md:315	ENV	.	rassoc	no-class	no-rbs		### def ENV.rassoc(value) -> Array | nil
+manual/api/_builtin/ENV.md:323	ENV	.	filter!,keep_if,select!	no-class	no-rbs		### def ENV.keep_if {|key, value| ... } -> ENV
+manual/api/_builtin/ENV.md:339	ENV	.	slice	no-class	no-rbs		### def ENV.slice(*keys) -> Hash
+manual/api/_builtin/ENV.md:359	ENV	.	freeze	no-class	no-rbs		### def ENV.freeze -> ()
+manual/api/_builtin/ENV.md:366	ENV	.	except	no-class	no-rbs		### def ENV.except(*keys) -> Hash
+manual/api/_builtin/ENV.md:383	ENV	.	clone	no-class	no-rbs		### def ENV.clone(freeze: true) -> ()
+manual/api/_builtin/ENV.md:408	ENV	.	dup	no-class	no-rbs		### def ENV.dup -> ()
+manual/api/_builtin/Encoding__Converter.md:77	Encoding::Converter	.	search_convpath	doc-no-optional?	rbs-unmatched-sig	doc has no opt/rest/kw; C arity=-1	### def Encoding::Converter.search_convpath(source_encoding, destination_encoding, options) -> Array
+manual/api/_builtin/Enumerable.md:1025	Enumerable	#	reverse_each	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def reverse_each -> Enumerator
+manual/api/_builtin/Enumerable.md:1233	Enumerable	#	each_entry	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def each_entry -> Enumerator
+manual/api/_builtin/Enumerator__Lazy.md:365	Enumerator::Lazy	#	slice_when	doc-no-optional?	no-rbs	doc has no opt/rest/kw; C arity=-1	### def slice_when {|elt_before, elt_after| bool } -> Enumerator::Lazy
+manual/api/_builtin/Enumerator__Lazy.md:434	Enumerator::Lazy	#	chunk_while	doc-no-optional?	no-rbs	doc has no opt/rest/kw; C arity=-1	### def chunk_while {|elt_before, elt_after| ... } -> Enumerator::Lazy
+manual/api/_builtin/File.md:500	File	.	open	no-real	ok		### def File.open(path, mode = "r", perm = 0666, **opts)               -> File
+manual/api/_builtin/File.md:1215	File	#	path,to_path	no-real	ok		### def path    -> String
+manual/api/_builtin/GC.md:318	GC	.	stress=	name-mismatch	ok	doc=value real=flag	### def GC.stress=(value)
+manual/api/_builtin/GC.md:645	GC	#	garbage_collect	kw-mismatch	ok	doc=req[] opt[full_mark,immediate_mark,immediate_sweep] rest0 real=req[] opt[full_mark,global,immediate_mark,immediate_sweep] rest0	### def garbage_collect(full_mark: true, immediate_mark: true, immediate_sweep: true) -> nil
+manual/api/_builtin/GC__Profiler.md:132	GC::Profiler	.	raw_data	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def GC::Profiler.raw_data -> [Hash, ...] | nil
+manual/api/_builtin/Hash.md:930	Hash	#	clone,dup	no-real	no-rbs		### def clone -> Hash
+manual/api/_builtin/Hash.md:1450	Hash	#	equal?	no-real	no-rbs		### def equal?(other) -> bool
+manual/api/_builtin/IO.md:906	IO	#	clone,dup	no-real	no-rbs		### def clone    -> IO
+manual/api/_builtin/IO.md:1569	IO	#	read_nonblock	name-mismatch	ok	doc=maxlen,outbuf real=len,buf	### def read_nonblock(maxlen, outbuf = nil, exception: true) -> String | Symbol | nil
+manual/api/_builtin/IO.md:1937	IO	#	write_nonblock	name-mismatch	ok	doc=string real=buf	### def write_nonblock(string, exception: true) -> Integer | :wait_writable
+manual/api/_builtin/IO__Buffer__Slice.md:130	IO::Buffer::Slice	#	clone,dup	no-real	no-rbs		### def dup -> IO::Buffer::Slice
+manual/api/_builtin/IO__Buffer__Storage.md:179	IO::Buffer::Storage	#	clone,dup	no-real	no-rbs		### def dup -> IO::Buffer::Storage
+manual/api/_builtin/Integer.md:921	Integer	#	hash	no-real	no-rbs		### def hash -> Integer
+manual/api/_builtin/Marshal.md:67	Marshal	.#	load,restore	opt-count	ok	doc=2 real=1	### module_function def load(port, proc = nil, options = {})      -> object
+manual/api/_builtin/Module.md:10	Module	.	constants	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def Module.constants -> [Symbol]
+manual/api/_builtin/NameError.md:65	NameError	#	to_s	no-real	no-rbs		### def to_s -> String
+manual/api/_builtin/Numeric.md:414	Numeric	#	/	no-real	no-rbs		### def /(other)    -> Numeric
+manual/api/_builtin/Numeric.md:435	Numeric	#	ceil	doc-no-optional?	rbs-unmatched-overload	doc has no opt/rest/kw; C arity=-1 [unmatched-overload: Numeric#ceil#1]	### def ceil   -> Integer
+manual/api/_builtin/Numeric.md:469	Numeric	#	round	doc-no-optional?	rbs-unmatched-overload	doc has no opt/rest/kw; C arity=-1 [unmatched-overload: Numeric#round#1]	### def round   -> Integer
+manual/api/_builtin/Numeric.md:486	Numeric	#	truncate	doc-no-optional?	rbs-unmatched-overload	doc has no opt/rest/kw; C arity=-1 [unmatched-overload: Numeric#truncate#1]	### def truncate   -> Integer
+manual/api/_builtin/Object.md:14	Object	.	new	no-class	no-rbs		### def Object.new -> Object
+manual/api/_builtin/Object.md:25	Object	#	==	no-class	no-rbs		### def ==(other) -> bool
+manual/api/_builtin/Object.md:54	Object	#	<=>	no-class	no-rbs		### def <=>(other) -> 0 | nil
+manual/api/_builtin/Object.md:67	Object	#	eql?	no-class	no-rbs		### def eql?(other) -> bool
+manual/api/_builtin/Object.md:90	Object	#	equal?	no-class	no-rbs		### def equal?(other) -> bool
+manual/api/_builtin/Object.md:113	Object	#	methods	no-class	no-rbs		### def methods(include_inherited = true) -> [Symbol]
+manual/api/_builtin/Object.md:190	Object	#	public_method	no-class	no-rbs		### def public_method(name) -> Method
+manual/api/_builtin/Object.md:210	Object	#	public_methods	no-class	no-rbs		### def public_methods(include_inherited = true) -> [Symbol]
+manual/api/_builtin/Object.md:220	Object	#	private_methods	no-class	no-rbs		### def private_methods(include_inherited = true) -> [Symbol]
+manual/api/_builtin/Object.md:230	Object	#	protected_methods	no-class	no-rbs		### def protected_methods(include_inherited = true) -> [Symbol]
+manual/api/_builtin/Object.md:240	Object	#	singleton_methods	no-class	no-rbs		### def singleton_methods(inherited_too = true) -> [Symbol]
+manual/api/_builtin/Object.md:312	Object	#	to_a	no-class	no-rbs		### def to_a -> Array
+manual/api/_builtin/Object.md:329	Object	#	to_s	no-class	no-rbs		### def to_s -> String
+manual/api/_builtin/Object.md:356	Object	#	to_str	no-class	no-rbs		### def to_str -> String
+manual/api/_builtin/Object.md:383	Object	#	to_ary	no-class	no-rbs		### def to_ary -> Array
+manual/api/_builtin/Object.md:410	Object	#	to_hash	no-class	no-rbs		### def to_hash -> Hash
+manual/api/_builtin/Object.md:439	Object	#	to_int	no-class	no-rbs		### def to_int -> Integer
+manual/api/_builtin/Object.md:466	Object	#	to_proc	no-class	no-rbs		### def to_proc -> Proc
+manual/api/_builtin/Object.md:490	Object	#	to_io	no-class	no-rbs		### def to_io -> IO
+manual/api/_builtin/Object.md:506	Object	#	to_regexp	no-class	no-rbs		### def to_regexp -> Regexp
+manual/api/_builtin/Object.md:531	Object	#	enum_for,to_enum	no-class	no-rbs		### def to_enum(method = :each, *args) -> Enumerator
+manual/api/_builtin/Object.md:582	Object	#	tap	no-class	no-rbs		### def tap{|x| ... } -> self
+manual/api/_builtin/Object.md:597	Object	#	then,yield_self	no-class	no-rbs		### def yield_self {|x| ... } -> object
+manual/api/_builtin/Object.md:632	Object	#	object_id	no-class	no-rbs		### def object_id -> Integer
+manual/api/_builtin/Object.md:661	Object	#	hash	no-class	no-rbs		### def hash -> Integer
+manual/api/_builtin/Object.md:696	Object	#	===	no-class	no-rbs		### def ===(other) -> bool
+manual/api/_builtin/Object.md:769	Object	#	!~	no-class	no-rbs		### def !~(other) -> bool
+manual/api/_builtin/Object.md:785	Object	#	display	no-class	no-rbs		### def display(out = $stdout) -> nil
+manual/api/_builtin/Object.md:809	Object	#	extend	no-class	no-rbs		### def extend(*modules) -> self
+manual/api/_builtin/Object.md:859	Object	#	inspect	no-class	no-rbs		### def inspect -> String
+manual/api/_builtin/Object.md:906	Object	#	instance_variable_get	no-class	no-rbs		### def instance_variable_get(var) -> object | nil
+manual/api/_builtin/Object.md:929	Object	#	instance_variable_set	no-class	no-rbs		### def instance_variable_set(var, value) -> object
+manual/api/_builtin/Object.md:948	Object	#	instance_variables	no-class	no-rbs		### def instance_variables -> [Symbol]
+manual/api/_builtin/Object.md:962	Object	#	instance_variable_defined?	no-class	no-rbs		### def instance_variable_defined?(var) -> bool
+manual/api/_builtin/Object.md:982	Object	#	send	no-class	no-rbs		### def send(name, *args) -> object
+manual/api/_builtin/Object.md:1027	Object	#	public_send	no-class	no-rbs		### def public_send(name, *args) -> object
+manual/api/_builtin/Object.md:1052	Object	#	_dump	no-class	no-rbs		### def _dump(limit) -> String
+manual/api/_builtin/Object.md:1092	Object	#	marshal_dump	no-class	no-rbs		### def marshal_dump -> object
+manual/api/_builtin/Object.md:1135	Object	#	marshal_load	no-class	no-rbs		### def marshal_load(obj) -> object
+manual/api/_builtin/Object.md:1155	Object	#	clone	no-class	no-rbs		### def clone(freeze: nil) -> object
+manual/api/_builtin/Object.md:1263	Object	#	dup	no-class	no-rbs		### def dup -> object
+manual/api/_builtin/Object.md:1308	Object	#	freeze	no-class	no-rbs		### def freeze -> self
+manual/api/_builtin/Object.md:1348	Object	#	frozen?	no-class	no-rbs		### def frozen? -> bool
+manual/api/_builtin/Object.md:1361	Object	#	method	no-class	no-rbs		### def method(name) -> Method
+manual/api/_builtin/Object.md:1389	Object	#	singleton_method	no-class	no-rbs		### def singleton_method(name) -> Method
+manual/api/_builtin/Object.md:1431	Object	#	define_singleton_method	no-class	no-rbs		### def define_singleton_method(symbol, method) -> Symbol
+manual/api/_builtin/Object.md:1460	Object	#	respond_to?	no-class	no-rbs		### def respond_to?(name, include_all = false) -> bool
+manual/api/_builtin/Object.md:1542	Object	#	remove_instance_variable	no-class	no-rbs		### def remove_instance_variable(name) -> object
+manual/api/_builtin/Object.md:1562	Object	#	instance_of?	no-class	no-rbs		### def instance_of?(klass) -> bool
+manual/api/_builtin/Object.md:1583	Object	#	is_a?,kind_of?	no-class	no-rbs		### def is_a?(mod) -> bool
+manual/api/_builtin/Object.md:1613	Object	#	nil?	no-class	no-rbs		### def nil? -> bool
+manual/api/_builtin/Object.md:1624	Object	#	class	no-class	no-rbs		### def class -> Class
+manual/api/_builtin/Object.md:1691	Object	#	singleton_class	no-class	no-rbs		### def singleton_class -> Class
+manual/api/_builtin/Object.md:1710	Object	#	itself	no-class	no-rbs		### def itself -> object
+manual/api/_builtin/Object.md:1721	Object	#	initialize	no-class	no-rbs		### def initialize(*args, &block) -> object
+manual/api/_builtin/Object.md:1763	Object	#	initialize_copy	no-class	no-rbs		### def initialize_copy(obj) -> object
+manual/api/_builtin/Object.md:1871	Object	#	initialize_clone	no-class	no-rbs		### def initialize_clone(obj, freeze: nil) -> object
+manual/api/_builtin/Object.md:1887	Object	#	initialize_dup	no-class	no-rbs		### def initialize_dup(obj) -> object
+manual/api/_builtin/Object.md:1898	Object	#	respond_to_missing?	no-class	no-rbs		### def respond_to_missing?(symbol, include_private) -> bool
+manual/api/_builtin/ObjectSpace.md:168	ObjectSpace	.#	garbage_collect	kw-mismatch	ok	doc=req[] opt[full_mark,immediate_sweep] rest0 real=req[] opt[full_mark,global,immediate_mark,immediate_sweep] rest0	### module_function def garbage_collect(full_mark: true, immediate_sweep: true) -> nil
+manual/api/_builtin/Proc.md:29	Proc	.	new	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def Proc.new { ... } -> Proc
+manual/api/_builtin/Process__Sys.md:55	Process::Sys	.#	setruid	req-count	ok	doc_req=1 real_arity=0	### module_function def setruid(id)    -> nil
+manual/api/_builtin/Process__Sys.md:65	Process::Sys	.#	setrgid	req-count	ok	doc_req=1 real_arity=0	### module_function def setrgid(id)    -> nil
+manual/api/_builtin/Ractor.md:73	Ractor	.	receive,recv	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[timeout] rest0	### def Ractor.receive -> object
+manual/api/_builtin/Ractor.md:94	Ractor	.	select	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[timeout] rest0	### def Ractor.select(*ports) -> [object, object]
+manual/api/_builtin/Ractor.md:117	Ractor	.	shareable_proc	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[self] rest0	### def Ractor.shareable_proc { ... } -> Proc
+manual/api/_builtin/Ractor.md:137	Ractor	.	shareable_lambda	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[self] rest0	### def Ractor.shareable_lambda { ... } -> Proc
+manual/api/_builtin/Ractor.md:151	Ractor	.	store_if_absent	name-mismatch	ok	doc=key real=sym	### def Ractor.store_if_absent(key) { ... } -> object
+manual/api/_builtin/Ractor.md:303	Ractor	#	<<,send	forwarding?	ok	real forwards *, **, &	### def <<(msg, move: false) -> self
+manual/api/_builtin/Random.md:15	Random	.	new	no-real:inherited	ok		### def Random.new(seed = Random.new_seed) -> Random
+manual/api/_builtin/Random.md:151	Random	#	bytes	no-real	no-rbs		### def bytes(size) -> String
+manual/api/_builtin/Random.md:164	Random	#	rand	no-real	no-rbs		### def rand -> Float
+manual/api/_builtin/Random.md:258	Random	#	seed	no-real	ok		### def seed -> Integer
+manual/api/_builtin/Random__Formatter.md:26	Random::Formatter	#	alphanumeric	no-real	no-rbs		### def alphanumeric(n = nil, chars: ALPHANUMERIC) -> String
+manual/api/_builtin/RubyVM__YJIT.md:114	RubyVM::YJIT	.	max_compile_time_ns=	name-mismatch	no-rbs	doc=ns real=max_compile_time_ns	### def RubyVM::YJIT.max_compile_time_ns=(ns)
+manual/api/_builtin/Set.md:109	Set	#	clone,dup	no-real	no-rbs		### def clone -> Set
+manual/api/_builtin/Set.md:511	Set	#	merge	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def merge(enum) -> self
+manual/api/_builtin/String.md:2992	String	#	tr	ok-split	rbs-unmatched-sig	doc has no opt/rest/kw; C arity=-1 [entry:ok-split]	### def tr(pattern, replace) -> String
+manual/api/_builtin/String.md:3057	String	#	tr!	ok-split	rbs-unmatched-sig	doc has no opt/rest/kw; C arity=-1 [entry:ok-split]	### def tr!(pattern, replace) -> self | nil
+manual/api/_builtin/String.md:3187	String	#	unpack	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[offset] rest0	### def unpack(template) -> Array
+manual/api/_builtin/String.md:3925	String	#	unpack1	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[offset] rest0	### def unpack1(format) -> object
+manual/api/_builtin/Struct.md:183	Struct	.	members	no-real	ok		### def Struct.members -> [Symbol]
+manual/api/_builtin/Struct.md:194	Struct	.	keyword_init?	no-real	ok		### def Struct.keyword_init? -> bool | nil
+manual/api/_builtin/Struct.md:397	Struct	#	filter,select	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def select {|i| ... } -> [object]
+manual/api/_builtin/Struct.md:490	Struct	#	equal?	no-real	no-rbs		### def equal?(other)   -> bool
+manual/api/_builtin/Symbol.md:242	Symbol	#	hash	no-real	no-rbs		### def hash -> Integer
+manual/api/_builtin/Symbol.md:377	Symbol	#	match	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def match(other) -> MatchData | nil
+manual/api/_builtin/SystemCallError.md:15	SystemCallError	.	new	ok	rbs-unmatched-sig	doc has no opt/rest/kw; C arity=-1	### def SystemCallError.new(error_message) -> SystemCallError
+manual/api/_builtin/SystemCallError.md:293	Errno::EXXX	.	new	no-class	no-rbs		### def Errno::EXXX.new -> Errno::EXXX
+manual/api/_builtin/Thread.md:277	Thread	.	each_caller_location	ok	rbs-unmatched-sig	doc has no opt/rest/kw; C arity=-1	### def Thread.each_caller_location(start = 1, length = nil) {|location| ... } -> nil
+manual/api/_builtin/Thread.md:312	Thread	.	DEBUG	no-real	no-rbs		### def Thread.DEBUG -> Integer
+manual/api/_builtin/Thread.md:327	Thread	.	DEBUG=	no-real	no-rbs		### def Thread.DEBUG=(val)
+manual/api/_builtin/Thread.md:812	Thread	#	raise	doc-no-optional?	rbs-unmatched-overload	doc has no opt/rest/kw; C arity=-1 [unmatched-overload: Thread#raise#0]	### def raise(error_type, message, traceback)     -> ()
+manual/api/_builtin/Thread.md:1022	Thread	#	backtrace	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def backtrace    -> [String] | nil
+manual/api/_builtin/ThreadGroup.md:41	ThreadGroup	.	new	no-real:inherited	no-rbs		### def ThreadGroup.new    -> ThreadGroup
+manual/api/_builtin/Thread__Monitor.md:65	Thread::Monitor	.	new	no-real:inherited	no-rbs		### def Thread::Monitor.new -> Thread::Monitor
+manual/api/_builtin/Time.md:44	Time	.	at	ok-split	rbs-unmatched-sig	doc=0 real=2 [entry:ok-split] / doc=2 real=1 [entry:ok-split] / doc=3 real=1 [entry:ok-split]	### def Time.at(time)         -> Time
+manual/api/_builtin/Time.md:227	Time	.	new	opt-count	ok	doc=0 real=7 / doc=1 real=0	### def Time.new    -> Time
+manual/api/_builtin/TracePoint.md:212	TracePoint	#	enable	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[target,target_line,target_thread] rest0	### def enable         -> bool
+manual/api/_builtin/Warning.md:53	Warning	.	warn	no-real	ok		### def Warning.warn(message, category: nil) -> nil
+manual/api/_builtin/functions.md:1085	Kernel	.#	autoload?	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### module_function def autoload?(const_name) -> String | nil
+manual/api/_builtin/functions.md:2117	Kernel	.#	sub	no-real	no-rbs		### module_function def sub(pattern, replace)          -> String
+manual/api/_builtin/functions.md:2144	Kernel	.#	gsub	no-real	no-rbs		### module_function def gsub(pattern, replace)          -> String
+manual/api/_builtin/functions.md:2170	Kernel	.#	chop	no-real	no-rbs		### module_function def chop  -> String
+manual/api/_builtin/functions.md:2197	Kernel	.#	chomp	no-real	no-rbs		### module_function def chomp(rs = $/)  -> String
+manual/api/_builtin/functions.md:2390	Kernel	.#	printf	ok	rbs-unmatched-overload	 [unmatched-overload: Kernel.printf#0 Kernel#printf#0]	### module_function def printf(format, *arg) -> nil
+manual/api/_builtin/main.md:34	main	.	public	no-class	no-rbs		### def main.public -> nil
+manual/api/_builtin/main.md:54	main	.	private	no-class	no-rbs		### def main.private -> nil
+manual/api/_builtin/main.md:74	main	.	inspect,to_s	no-class	no-rbs		### def main.to_s    -> "main"
+manual/api/_builtin/main.md:82	main	.	include	no-class	no-rbs		### def main.include(*modules) -> self
+manual/api/_builtin/main.md:98	main	.	define_method	no-class	no-rbs		### def main.define_method(name, method) -> Symbol
+manual/api/_builtin/main.md:119	main	.	using	no-class	no-rbs		### def main.using(module) -> self
+manual/api/_builtin/main.md:148	main	.	ruby2_keywords	no-class	no-rbs		### def main.ruby2_keywords(method_name, ...) -> nil
+manual/api/ractor/Port.md:15	Ractor::Port	#	<<,send	name-mismatch	ok	doc=msg real=obj	### def <<(msg, move: false)
+manual/api/ractor/Port.md:36	Ractor::Port	#	receive	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[timeout] rest0	### def receive -> object
+manual/api/thread/Queue.md:118	Thread::Queue	#	deq,pop,shift	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[timeout] rest0	### def pop(non_block = false) -> object
+manual/api/thread/Queue.md:170	Thread::Queue	#	<<,enq,push	name-mismatch	ok	doc=value real=object	### def push(value) -> ()
+manual/api/thread/SizedQueue.md:35	Thread::SizedQueue	.	new	name-mismatch	ok	doc=max real=vmax	### def Thread::SizedQueue.new(max) -> Thread::SizedQueue
+manual/api/thread/SizedQueue.md:55	Thread::SizedQueue	#	max=	name-mismatch	ok	doc=n real=vmax	### def max=(n)
+manual/api/thread/SizedQueue.md:68	Thread::SizedQueue	#	<<,enq,push	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[timeout] rest0 / doc=0 real=1	### def push(obj, non_block = false) -> ()
+manual/api/thread/SizedQueue.md:87	Thread::SizedQueue	#	deq,pop,shift	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[timeout] rest0	### def pop(non_block = false)   -> object
+manual/api/thread/SizedQueue.md:164	Thread::SizedQueue	#	empty?	no-real	no-rbs		### def empty? -> bool
+manual/api/thread/SizedQueue.md:168	Thread::SizedQueue	#	length,size	no-real	no-rbs		### def length -> Integer
