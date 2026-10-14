@@ -508,14 +508,27 @@ p s2.reject! {|str| str =~ /\.o\z/}   # => nil
 
 - **SEE** [m:Set#delete_if], [m:Enumerable#reject]
 
+#%since 3.3
+### def merge(*enums) -> self
+#%else
 ### def merge(enum) -> self
+#%end
 
+#%since 3.3
+元の集合に `enums` で与えられた要素を追加します。
+
+`enums` に指定する各オブジェクトには `each` メソッドが定義されている必要があります。
+
+- **param** `enums` -- 追加対象の要素を格納したオブジェクトを 1 つ以上指定します。
+- **raise** `ArgumentError` -- `enums` のいずれかに `each` メソッドが定義されていない場合に発生します。
+#%else
 元の集合に enum で与えられた要素を追加します。
 
 引数 enum には each メソッドが定義されている必要があります。
 
 - **param** `enum` -- 追加対象の要素を格納したオブジェクトを指定します。
 - **raise** `ArgumentError` -- 引数 enum に each メソッドが定義されていない場合に発生します。
+#%end
 
 ```ruby
 set = Set[10, 20]
@@ -524,6 +537,14 @@ set.merge([10, 30])
 p set # => Set[10, 20, 30]
 #%else
 p set # => #<Set: {10, 20, 30}>
+#%end
+#%since 3.3
+set.merge([30, 40], [50])
+#%since 4.0
+p set # => Set[10, 20, 30, 40, 50]
+#%else
+p set # => #<Set: {10, 20, 30, 40, 50}>
+#%end
 #%end
 ```
 
