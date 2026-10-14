@@ -3184,12 +3184,29 @@ p str   # => "f"
 
 - **SEE** [m:String#tr], [m:String#tr_s]
 
+#%since 3.1
+### def unpack(template, offset: 0) -> Array
+#%else
 ### def unpack(template) -> Array
+#%end
 
 [m:Array#pack] で生成された文字列をテンプレート文字列 template にしたがってアンパックし、それらの要素を含む配列を返します。
 
 - **param** `template` --    pack テンプレート文字列
+#%since 3.1
+- **param** `offset` --      `template` に従った展開を始める位置を、文字列の先頭からのバイト数で指定します。デフォルトは 0 です。
+#%end
 - **return** --            オブジェクトの配列
+#%since 3.1
+- **raise** `ArgumentError` -- `offset` が負の場合、または文字列の長さより大きい場合に発生します。
+
+```ruby title="例: offset を指定"
+p "\x01\x02\x03".unpack("C", offset: 1)  # => [2]
+p "abc".unpack("C*", offset: 3)           # => []
+"\x01".unpack("C", offset: 5)             # ~> ArgumentError: offset outside of string
+```
+
+#%end
 
 #%include(pack-template)
 
@@ -3922,7 +3939,11 @@ p "\u00E0".unicode_normalized?(:nfd) # => false
 
 - **SEE** [m:String#unicode_normalize], [m:String#unicode_normalize!]
 
+#%since 3.1
+### def unpack1(format, offset: 0) -> object
+#%else
 ### def unpack1(format) -> object
+#%end
 
 formatにしたがって文字列をデコードし、展開された1つ目の値を返します。
 unpackは配列を返しますがunpack1は配列の1つ目の要素のみを返します。
@@ -3931,10 +3952,25 @@ unpackは配列を返しますがunpack1は配列の1つ目の要素のみを返
 未知のテンプレート文字を指定すると [c:ArgumentError] が発生します。
 #%end
 
+- **param** `format` -- pack テンプレート文字列
+#%since 3.1
+- **param** `offset` -- `format` に従った展開を始める位置を、文字列の先頭からのバイト数で指定します。デフォルトは 0 です。
+- **raise** `ArgumentError` -- `offset` が負の場合、または文字列の長さより大きい場合に発生します。
+#%end
+
 ```ruby title="例"
 p "ABC".unpack1("C*") # => 65
 p "ABC".unpack("C*")  # => [65, 66, 67]
 ```
+
+#%since 3.1
+
+```ruby title="例: offset を指定"
+p "\x01\x02\x03".unpack1("C", offset: 2)  # => 3
+p "abc".unpack1("a*", offset: 3)           # => ""
+```
+
+#%end
 
 - **SEE** [m:String#unpack], [m:Array#pack]
 
