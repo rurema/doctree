@@ -165,15 +165,26 @@ puts "Total count: #{count}"
 # => Total count: 2
 ```
 
-### module_function def garbage_collect(full_mark: true, immediate_sweep: true) -> nil
+#%since 4.1
+### module_function def garbage_collect(full_mark: true, immediate_mark: true, immediate_sweep: true, global: true) -> nil
+#%else
+### module_function def garbage_collect(full_mark: true, immediate_mark: true, immediate_sweep: true) -> nil
+#%end
 
 どこからも参照されなくなったオブジェクトを回収します。
 [m:GC.start] と同じです。
 
 - **param** `full_mark` -- マイナー GC を動作させる場合は false を、そうでない場合は true を指定します。
 
+- **param** `immediate_mark` -- mark を遅らせる(Lazy Mark を行う)場合は false
+                       を、そうでない場合は true を指定します。
+
 - **param** `immediate_sweep` -- sweep を遅らせる(Lazy Sweep を行う)場合は false
                        を、そうでない場合は true を指定します。
+
+#%since 4.1
+- **param** `global` -- 他の [c:Ractor] のオブジェクト空間が存在するときに、全 Ractor を対象とするグローバル GC を行う場合は true(デフォルト)を、呼び出した Ractor だけのメジャー GC を行う場合は false を指定します。Ractor が 1 つしか無いときは効果がありません。詳しくは [m:GC.start] を参照してください。
+#%end
 
 注意: これらのキーワード引数は Ruby の実装やバージョンによって異なります。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポートしていない場合はキーワード引数を指定しても無視される可能性があります。
 

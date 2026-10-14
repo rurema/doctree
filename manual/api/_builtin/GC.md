@@ -653,7 +653,11 @@ p GC.verify_internal_consistency # => nil
 
 ## Instance Methods
 
+#%since 4.1
+### def garbage_collect(full_mark: true, immediate_mark: true, immediate_sweep: true, global: true) -> nil
+#%else
 ### def garbage_collect(full_mark: true, immediate_mark: true, immediate_sweep: true) -> nil
+#%end
 
 ガーベージコレクトを開始します。
 
@@ -669,6 +673,10 @@ nil を返します。
 
 - **param** `immediate_sweep` -- sweep を遅らせる(Lazy Sweep を行う)場合は false
                        を、そうでない場合は true を指定します。
+
+#%since 4.1
+- **param** `global` -- 他の [c:Ractor] のオブジェクト空間が存在するときに、全 Ractor を対象とするグローバル GC を行う場合は true(デフォルト)を、呼び出した Ractor だけのメジャー GC を行う場合は false を指定します。Ractor が 1 つしか無いときは効果がありません。詳しくは [m:GC.start] を参照してください。
+#%end
 
 注意: これらのキーワード引数は Ruby の実装やバージョンによって異なります。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポートしていない場合はキーワード引数を指定しても無視される可能性があります。
 
