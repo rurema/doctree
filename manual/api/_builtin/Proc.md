@@ -487,7 +487,7 @@ p method(:p).to_proc.source_range # => nil
 
 - **SEE** [m:Proc#source_location], [m:Proc#syntax_tree]
 
-### def syntax_tree -> Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
+### def syntax_tree -> Ruby::Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
 
 `self` のコンパイル元になった抽象構文木(AST)のノードを、コンパイルに使ったのと同じパーサでソースを再度パースし直すことで返します。
 
@@ -499,10 +499,10 @@ p method(:p).to_proc.source_range # => nil
 
 ```ruby title="例"
 node = -> { 42 }.syntax_tree
-p node.is_a?(Prism::LambdaNode) # => true
+p node.is_a?(Ruby::Prism::LambdaNode) # => true
 
 node = proc { 42 }.syntax_tree
-p node.is_a?(Prism::CallNode) # => true
+p node.is_a?(Ruby::Prism::CallNode) # => true
 ```
 
 - **SEE** [m:Proc#source_range], [m:RubyVM::InstructionSequence#syntax_tree]

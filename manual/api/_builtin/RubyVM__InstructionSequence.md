@@ -829,18 +829,18 @@ p iseq.source_hash.is_a?(Integer) # => true
 
 - **SEE** [m:RubyVM::InstructionSequence#node_id], [m:RubyVM::InstructionSequence#syntax_tree]
 
-### def syntax_tree -> Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
+### def syntax_tree -> Ruby::Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
 
 `self` のコンパイル元になった抽象構文木(AST)のノードを、コンパイルに使ったのと同じパーサでソースを再度パースし直すことで返します。
 
-デフォルトの prism でコンパイルされていれば [c:Prism::Node] を、`parse.y` でコンパイルされていれば [c:RubyVM::AbstractSyntaxTree::Node] を返します。
+デフォルトの prism でコンパイルされていれば [c:Ruby::Prism] のノード(`Ruby::Prism::Node` のサブクラス)を、`parse.y` でコンパイルされていれば [c:RubyVM::AbstractSyntaxTree::Node] を返します。
 
 以下のように、ノードを確実に取得できない場合は nil を返します。
 
 - ソースを利用できない場合(文字列からコンパイルした場合や、`RubyVM.keep_script_lines` を有効にせずに eval したコードなど)
 - コンパイルしたあとにソースファイルが変更されている場合
 
-デフォルトの prism gem 以外の prism gem が読み込まれていると、`$VERBOSE` が真のときに警告が出力されます。この場合、読み込まれている prism がコンパイル時に使われたパーサと異なる解釈をする可能性があるため、返されるノードが実際に実行されたコードと対応しないことがあります。
+返されるノードは prism gem のノードではなく、インタプリタに組み込まれた [c:Ruby::Prism] のノードです。そのため、インストールされている prism gem のバージョンにかかわらず、返される構文木は実行中のコードに対応します。
 
 このメソッドは実験的なもので、予告なく変更される可能性があります。
 

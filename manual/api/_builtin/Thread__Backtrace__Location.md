@@ -232,7 +232,7 @@ p range.start_line == loc.lineno # => true
 
 - **SEE** [m:Thread::Backtrace::Location#syntax_tree], [m:Proc#source_range]
 
-### def syntax_tree -> Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
+### def syntax_tree -> Ruby::Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
 
 `self` が表すフレームに対応する抽象構文木(AST)のノードを、ソースファイルを再度パースし直すことで返します。
 
@@ -242,8 +242,8 @@ p range.start_line == loc.lineno # => true
 
 ```ruby title="例"
 node = -> { caller_locations(0, 1)[0] }.call.syntax_tree
-p node.is_a?(Prism::CallNode) # => true
-p node.name                   # => :caller_locations
+p node.is_a?(Ruby::Prism::CallNode) # => true
+p node.name                        # => :caller_locations
 ```
 
 - **SEE** [m:Thread::Backtrace::Location#source_range], [m:RubyVM::InstructionSequence#syntax_tree]

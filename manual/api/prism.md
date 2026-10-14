@@ -9,6 +9,12 @@ prism は Ruby 3.3 で default gem として導入され、Ruby 3.4 以降は
 CRuby 本体が Ruby プログラムをコンパイルする際に使われるデフォルトのパーサの実装になっています(3.3 の時点では `ruby --parser=prism`
 オプションで試験的に切り替えられる位置づけでした)。
 
+#%since 4.1
+Ruby 4.1 から prism は bundled gem になりました。Bundler の下で `require "prism"` するには、Gemfile に prism を書く必要があります。
+
+実行中のインタプリタに組み込まれたパーサは、この gem とは別に [c:Ruby::Prism] として用意されています。[m:Method#syntax_tree] などは、そのノードを返します。
+#%end
+
 設計上の目標として、構文エラーがあっても可能な限り解析を継続する「エラー耐性(error tolerant)」を重視しており、エディタや IDE、linter
 といった、エラーを含む可能性があるコードも解析する必要があるツールから利用しやすくなっています。また C99 で実装された移植性の高いライブラリ
 (libprism)でもあり、CRuby 以外の Ruby 処理系やツール、他言語のバインディングからも利用できます。
