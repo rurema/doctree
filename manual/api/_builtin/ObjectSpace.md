@@ -52,6 +52,24 @@ obj の回収時にブロックは obj の ID ([m:BasicObject#__id__])を引数�
 
 - **param** `proc` -- ファイナライザとして [c:Proc] オブジェクトを指定します。proc は obj の回収時に obj の ID を引数として実行されます。
 
+#%since 4.1
+- **raise** `Ractor::IsolationError` -- 他の [c:Ractor] が作成したオブジェクトを `obj` に指定した場合に発生します。Ruby 4.1 から、ファイナライザを登録できるのはそのオブジェクトを作成した Ractor だけです。
+
+```ruby title="例: 他の Ractor のオブジェクト"
+class Foo; end
+r = Ractor.new do
+  begin
+    ObjectSpace.define_finalizer(Foo, proc {})
+  rescue Ractor::IsolationError => e
+    e.message
+  end
+end
+p r.value
+# => "can not define a finalizer for an object of another Ractor"
+```
+
+#%end
+
 ### 使い方の注意
 
 以下は、define_finalizer の使い方の悪い例です。
@@ -132,6 +150,17 @@ GC.start
 
 なお、[c:Symbol] をすべて列挙するには、かわりに [m:Symbol.all_symbols] が使用できます。
 
+#%since 4.1
+Ruby 4.1 からオブジェクト空間は [c:Ractor] ごとに分かれています。呼び出した Ractor が作成したオブジェクトと、他の Ractor の shareable なオブジェクト(クラスやモジュール、freeze された文字列など)だけを繰り返します。他の Ractor が作成した shareable でないオブジェクトは繰り返しません。
+
+Ruby 4.0 までは、main 以外の Ractor を作成したあとは、どの Ractor から呼び出しても shareable なオブジェクトだけを繰り返していました。
+
+すべての Ractor のオブジェクトを調べたい場合は、[lib:objspace] の `ObjectSpace.dump_all` が使えます。
+#%end
+#%version 3.0...4.1
+main 以外の [c:Ractor] を作成したあとは、どの Ractor から呼び出しても shareable なオブジェクト(クラスやモジュール、freeze された文字列など)だけを繰り返します。
+#%end
+
 - **param** `klass` -- クラスかモジュールを指定します。
 
 ```ruby title="例: ブロックなし"
@@ -166,6 +195,19 @@ puts "Total count: #{count}"
 ```
 
 #%since 4.1
+
+```ruby title="例: 複数の Ractor がある場合"
+class Foo; end
+objs = 3.times.map { Foo.new }
+r = Ractor.new { ObjectSpace.each_object(Foo).count }
+p r.value                            # => 0
+p ObjectSpace.each_object(Foo).count # => 3
+p objs.size                          # => 3
+```
+
+#%end
+
+#%since 4.1
 ### module_function def garbage_collect(full_mark: true, immediate_mark: true, immediate_sweep: true, global: true) -> nil
 #%else
 ### module_function def garbage_collect(full_mark: true, immediate_mark: true, immediate_sweep: true) -> nil
@@ -198,6 +240,10 @@ obj に対するファイナライザをすべて解除します。
 obj を返します。
 
 - **param** `obj` -- ファイナライザを解除したいオブジェクトを指定します。
+
+#%since 4.1
+- **raise** `Ractor::IsolationError` -- 他の [c:Ractor] が作成したオブジェクトを `obj` に指定した場合に発生します。Ruby 4.1 から、ファイナライザを解除できるのはそのオブジェクトを作成した Ractor だけです。
+#%end
 
 ```ruby title="例"
 class Sample
