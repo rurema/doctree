@@ -29,6 +29,8 @@ p Dir["f*", "b*"]    # => ["foo", "bar"]
 
 ### def Dir.glob(pattern, flags = 0, base: nil, sort: true)                -> [String]
 ### def Dir.glob(pattern, flags = 0, base: nil, sort: true) {|file| ...}   -> nil
+### def Dir.glob(pattern, flags: 0, base: nil, sort: true)                 -> [String]
+### def Dir.glob(pattern, flags: 0, base: nil, sort: true) {|file| ...}    -> nil
 
 ワイルドカードの展開を行い、パターンにマッチするファイル名を文字列の配列として返します。
 パターンにマッチするファイルがない場合は空の配列を返します。
