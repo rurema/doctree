@@ -209,12 +209,21 @@ inner.disable
 
 ## Instance Methods
 
-### def enable         -> bool
-### def enable { ... } -> object
+### def enable(target: nil, target_line: nil, target_thread: nil)         -> bool
+### def enable(target: nil, target_line: nil, target_thread: nil) { ... } -> object
 
 self のトレースを有効にします。
 
 実行前の [m:TracePoint#enabled?] を返します。(トレースが既に有効であった場合は true を返します。そうでなければ false を返します)
+
+- **param** `target` -- [c:Method]、[c:UnboundMethod]、[c:Proc]、[c:RubyVM::InstructionSequence] のいずれかを指定します。
+  指定すると、その内部で起きるイベントだけをフックします。
+- **param** `target_line` -- `target` と組み合わせて指定します。その行番号の `:line` イベントだけをフックします。
+- **param** `target_thread` -- 指定したスレッドで起きるイベントだけをフックします。
+#%since 3.2
+  ブロックが与えられ、`target` も `target_line` も指定されていない場合、デフォルトは現在のスレッド([m:Thread.current])になります。
+#%end
+- **raise** `ArgumentError` -- `target` を指定せずに `target_line` だけを指定した場合、または `target_line` を指定したのに `:line` イベントがフック対象に含まれていない場合に発生します。
 
 ```ruby title="例"
 p trace.enabled?  # => false
@@ -239,6 +248,14 @@ trace.enable do
 end
 
 p trace.enabled? # => false
+```
+
+```ruby title="例: target を指定"
+def foo; 1; end
+def bar; 2; end
+tp = TracePoint.new(:call) {|t| puts "call #{t.method_id}" }
+tp.enable(target: method(:foo)) { foo; bar; 1 }  # => 1
+# 出力は "call foo" だけ(bar は対象外)
 ```
 
 [注意] イベントフックのためのメソッドにブロックの外側で参照した場合は
