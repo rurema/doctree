@@ -114,12 +114,18 @@ Ruby 4.1 から、[c:IO] のインスタンスは freeze されていても shar
 
 #%end
 #%since 4.0
-### def Ractor.shareable_proc { ... } -> Proc
+### def Ractor.shareable_proc(self: nil) { ... } -> Proc
 
 与えられたブロックから shareable な [c:Proc] を作成して返します。
 
 通常の [c:Proc] は shareable ではないため、他の Ractor に渡せません。
 このメソッドで作成した [c:Proc] は shareable になるため、複数の Ractor から利用できます。
+
+作成される [c:Proc] の `self` は、キーワード引数 `self` で指定したオブジェクトになります。
+ブロックが外側のローカル変数を参照している場合、その値も shareable でなければなりません。
+
+- **param** `self` -- 作成する [c:Proc] の `self` にするオブジェクトを指定します。shareable でなければなりません。デフォルトは nil です。
+- **raise** `Ractor::IsolationError` -- `self` が shareable でない場合や、ブロックが shareable でないオブジェクトを参照している場合に発生します。
 
 ```ruby
 pr = Ractor.shareable_proc { 42 }
@@ -132,11 +138,24 @@ p Ractor.shareable?(proc { 42 }) # => false （通常の Proc は shareable で�
 p Ractor.new(pr) {|p| p.call }.value # => 42
 ```
 
+```ruby title="例: self を指定"
+p Ractor.shareable_proc { self }.call               # => nil
+p Ractor.shareable_proc(self: 42) { self + 1 }.call # => 43
+
+x = 1
+p Ractor.shareable_proc { x }.call # => 1
+
+Ractor.shareable_proc(self: Object.new) { self } # ~> Ractor::IsolationError
+```
+
 - **SEE** [m:Ractor.shareable_lambda], [m:Ractor.make_shareable]
 
-### def Ractor.shareable_lambda { ... } -> Proc
+### def Ractor.shareable_lambda(self: nil) { ... } -> Proc
 
 [m:Ractor.shareable_proc] と同じですが、lambda である [c:Proc] を返します。
+
+- **param** `self` -- 作成する [c:Proc] の `self` にするオブジェクトを指定します。shareable でなければなりません。デフォルトは nil です。
+- **raise** `Ractor::IsolationError` -- `self` が shareable でない場合や、ブロックが shareable でないオブジェクトを参照している場合に発生します。
 
 ```ruby
 l = Ractor.shareable_lambda { 42 }
