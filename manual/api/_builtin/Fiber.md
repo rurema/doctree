@@ -373,9 +373,14 @@ Fiber.set_scheduler(Object.new) # ~> ArgumentError: Scheduler must implement #bl
 #%include(Fiber.transfer)
 #%include(Fiber.alive_p)
 #%end
-### def raise                                            -> object
-### def raise(message)                                   -> object
-### def raise(exception, message = nil, backtrace = nil) -> object
+### def raise                                                       -> object
+#%since 4.0
+### def raise(message, cause: $!)                                   -> object
+### def raise(exception, message = nil, backtrace = nil, cause: $!) -> object
+#%else
+### def raise(message)                                              -> object
+### def raise(exception, message = nil, backtrace = nil)            -> object
+#%end
 
 selfが表すファイバーが最後に [m:Fiber.yield] を呼んだ場所で例外を発生させます。
 
@@ -396,6 +401,9 @@ message 引数を渡した場合、message 引数をメッセージとした Run
 - **param** `backtrace` -- 例外発生時のスタックトレースです。文字列の配列、または [c:Thread::Backtrace::Location] の配列で指定します。
 #%else
 - **param** `backtrace` -- 例外発生時のスタックトレースです。文字列の配列で指定します。
+#%end
+#%since 4.0
+- **param** `cause` -- 現在の例外([m:$!])の代わりに [m:Exception#cause] に設定する例外を指定します。[c:Exception] オブジェクトまたは nil を指定できます。Ruby 4.0 から指定できます。
 #%end
 
 ```ruby title="例"
