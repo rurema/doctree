@@ -84,6 +84,19 @@ p Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
     例えば,
     foo/**/bar は foo/bar, foo/*/bar,
     foo/*/*/bar ... (以下無限に続く)に対してそれぞれマッチ判定を行います。
+#%since 4.1
+- **`***/`**:
+    `**/` と同じくディレクトリを再帰的にたどってマッチを行いますが、
+    ディレクトリへのシンボリックリンクもたどります(`**/` はたどりません)。
+    無限ループを避けるため、再帰でたどってきた途中のディレクトリ(祖先)を指すシンボリックリンクの中には入りません。
+    そのリンク自身にはマッチします。
+    同じディレクトリに別の経路で到達した場合は、それぞれ独立に探索します。
+
+    `**/` と同じく、`***` がパスの 1 要素全体で後ろに `/` が続くときだけ再帰的になります。
+    それ以外の `***` は `*` と同じです。
+    例えば `***` は `*` と、`foo***/bar` は `foo*/bar` と同じです。
+    Ruby 4.1 から使えます。[feature:17548]
+#%end
 
   ```ruby
   # 一般的な例
@@ -114,6 +127,12 @@ p Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
                                       #    "lib/song/karaoke.rb"]
   p Dir.glob(rbfiles, base: "lib")    # => ["song.rb",
                                       #    "song/karaoke.rb"]
+#%since 4.1
+
+  # シンボリックリンクをたどる例(link は real へのシンボリックリンク)
+  p Dir.glob("**/*.txt")   # => ["real/a.txt", "real/sub/b.txt"]
+  p Dir.glob("***/*.txt")  # => ["link/a.txt", "link/sub/b.txt", "real/a.txt", "real/sub/b.txt"]
+#%end
   ```
 
 ### def Dir.chdir           -> 0
