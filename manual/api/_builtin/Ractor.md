@@ -70,12 +70,26 @@ obj が shareable でない場合、obj と obj が参照する shareable でな
 - **raise** `Ractor::Error` -- obj が [c:IO] のインスタンスである場合に発生します。
 #%end
 
+#%since 4.1
+### def Ractor.receive(timeout: nil) -> object | nil
+### def Ractor.recv(timeout: nil) -> object | nil
+#%else
 ### def Ractor.receive -> object
 ### def Ractor.recv -> object
+#%end
 
 #%since 4.0
 このメソッドを呼び出した Ractor の default port からメッセージを受信します。
 
+#%since 4.1
+- **param** `timeout` -- メッセージを待つ秒数を数値で指定します。nil の場合は、メッセージが届くまで待ち続けます。指定した秒数が経過しても届かなかった場合は nil を返します。0 を指定した場合はブロックしません。
+- **raise** `ArgumentError` -- `timeout` が負の場合に発生します。
+
+```ruby title="例: timeout を指定"
+p Ractor.receive(timeout: 0.2) # => nil
+```
+
+#%end
 - **SEE** [m:Ractor::Port#receive]
 #%else
 このメソッドを呼び出した Ractor が受信したメッセージを取り出して返します。
@@ -91,9 +105,26 @@ obj が shareable でない場合、obj と obj が参照する shareable でな
 #%end
 
 #%since 4.0
+#%since 4.1
+### def Ractor.select(*ports, timeout: nil) -> [object, object] | nil
+#%else
 ### def Ractor.select(*ports) -> [object, object]
+#%end
 
 引数で指定した Ractor または [c:Ractor::Port] のいずれかが受信可能になるまで待ち、受信可能になったものと受信した値の配列を返します。
+#%since 4.1
+
+`timeout` を指定した場合、その秒数が経過しても受信可能になったものが無ければ nil を返します。
+
+- **param** `timeout` -- 待つ秒数を数値で指定します。nil の場合は、受信可能になるまで待ち続けます。
+- **raise** `ArgumentError` -- `timeout` が負の場合や、待つ対象を 1 つも指定しなかった場合に発生します。
+
+```ruby title="例: timeout を指定"
+port = Ractor::Port.new
+p Ractor.select(port, timeout: 0.1) # => nil
+```
+
+#%end
 #%else
 ### def Ractor.select(*ractors, yield_value: nil, move: false) -> [object, object]
 

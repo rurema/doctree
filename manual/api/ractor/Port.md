@@ -33,8 +33,26 @@ Port を作成した Ractor 以外で close を呼ぶことはできません。
 
 Port が閉じられている場合、true を返します。
 
+#%since 4.1
+### def receive(timeout: nil) -> object | nil
+#%else
 ### def receive -> object
+#%end
 
 Port に送信されたメッセージを受信します。
 
 メッセージキューが空の場合はブロックします。
+
+#%since 4.1
+- **param** `timeout` -- メッセージを待つ秒数を数値で指定します。nil の場合は、メッセージが届くまで待ち続けます。指定した秒数が経過しても届かなかった場合は nil を返します。0 を指定した場合はブロックしません。
+- **raise** `ArgumentError` -- `timeout` が負の場合に発生します。
+#%end
+- **raise** `Ractor::ClosedError` -- Port が閉じられている場合に発生します。
+#%since 4.1
+
+```ruby title="例: timeout を指定"
+port = Ractor::Port.new
+p port.receive(timeout: 0.1) # => nil
+```
+
+#%end
