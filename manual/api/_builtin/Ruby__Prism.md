@@ -9,7 +9,7 @@ Ruby 4.1 で導入されました。[bug:22379]
 
 実行中のプログラムを解析したパーサそのものを使って、Ruby プログラムを解析できます。
 [lib:prism] の `Prism` モジュールとは独立していて、API は同じ構成です。
-たとえば `Ruby::Prism.parse` は [m:Prism.#parse] に対応します。
+たとえば `Ruby::Prism.parse` は [m:Prism?.parse] に対応します。
 このページには各メソッドのエントリを置いていません。メソッドの詳細は [lib:prism] のエントリを参照してください。
 
 構文木のノードは `Ruby::Prism::Node` のサブクラスです。ノードに共通の API は [c:Prism::Node] と同じです。
