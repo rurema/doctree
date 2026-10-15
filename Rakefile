@@ -172,7 +172,7 @@ def generate_statichtml(version)
   raise "Failed to generate static html" unless succeeded
 end
 
-task :default => [:check_filename_case_conflicts, :check_indent_in_samplecode, :check_single_space_indent, :check_blank_lines, :generate, :check_links, :check_format]
+task :default => [:check_filename_case_conflicts, :check_indent_in_samplecode, :check_single_space_indent, :check_blank_lines, :check_module_function_notation, :generate, :check_links, :check_format]
 
 namespace :generate do
   ALL_VERSIONS.each do |version|
@@ -476,6 +476,30 @@ task :check_blank_lines do
       end
     end
     flush_blank_run.call
+  end
+
+  unless errors.empty?
+    puts errors
+    fail
+  end
+end
+
+# モジュール関数の参照は Markdown 記法の `?.` で書く
+# (docs/HowToWriteMethodEntry.md)。bitclust は旧記法の `.#` もそのまま
+# 受理するため、`[m:...]`・`[[m:...]]`・`[...](m:...)` の typemark に
+# `.#` があれば失敗させる。対象は参照記法だけで、コメントや地の文に
+# 書かれた `Kernel.#rand` のような語は対象外(doc ページの地の文は版ごとの
+# 表示に合わせて `#%since 4.0`/`#%else` で分岐している)。
+desc 'Check legacy module function notation (.#) in method references'
+task :check_module_function_notation do
+  ref_re = /(?:\[\[?m:[^\]]*|\]\(m:[^)]*)\.#/
+  errors = []
+  Dir.glob('manual/**/*.md').sort.each do |path|
+    File.read(path).lines(chomp: true).each.with_index(1) do |line, lineno|
+      next unless ref_re.match?(line)
+
+      errors << "#{path}:#{lineno}: モジュール関数の参照が旧記法の .# になっています。?. に書き換えてください(例: [m:Kernel?.puts])"
+    end
   end
 
   unless errors.empty?
