@@ -121,7 +121,7 @@ p req.as_list  # => ["< 5.0", ">= 1.9"]
 
 #%#--- marshal_dump -> Array
 #%# nodoc
-#%#必要条件のみを [[m:Marshal.#dump]] で使用するために返します。
+#%#必要条件のみを [[m:Marshal?.dump]] で使用するために返します。
 
 #%#--- marshal_load(array) -> Gem::Requirement
 #%# nodoc
