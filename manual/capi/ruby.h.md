@@ -383,10 +383,6 @@ obj を struct RArray* にキャストする。
 
 ### VALUE rb_int_new(long v)
 
-### int rb_safe_level(void)
-
-現在のセーフレベルを返します。
-
 ### VALUE rb_uint_new(unsigned int v)
 
 ### MACRO struct RBasic *RBASIC(VALUE obj)
@@ -475,21 +471,6 @@ obj が実体の構造体を持たないとき真。
 現時点で真になるのは Qnil, Qtrue, Qfalse と、
 Fixnum, Symbol のインスタンス。
 
-### MACRO char *STR2CSTR(VALUE str)
-
-Ruby のオブジェクト str から C の文字列を取り出します。
-str が String でない場合は to_str によって変換を試みます。
-
-返り値を free したり直接書き換えたりしてはいけません。
-
-STR2CSTR は、与えられたオブジェクトが文字列でなく to_str メソッドを持つ場合、内部で to_str を呼び出して暗黙の型変換を行い、それが保持する文字列ポインタを返します。
-しかし、このAPIでは暗黙の型変換結果となるオブジェクトがどこからも保持されないため、注意して使用しないと結果が GC される可能性があります。
-
-Ruby 1.7 以降では代わりに [f:StringValuePtr] を使用します。こちらは、引数の参照先が暗黙の型変換の結果に置き換わるため変換結果が GC
-されません。(Ruby 1.7 では、STR2CSTR() は、obsolete です)
-
-[f:StringValue] は、引数が to_str による暗黙の型変換を期待する場合に使用します。
-
 ### MACRO void StringValue(VALUE val)
 
 val が String でなければ to_str メソッドを使って String に変換します。
@@ -522,4 +503,3 @@ obj の構造体型 ID を返します。
 ### MACRO VALUE ULL2NUM(unsigned long long n)
 
 ### MACRO VALUE ULONG2NUM(unsigned long n)
-

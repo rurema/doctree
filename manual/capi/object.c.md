@@ -54,8 +54,6 @@ rb_class_real(RBASIC(obj)->klass)
 
 でも良い。(が、やはり rb_obj_class(obj) を使う方が無難だろう)
 
-### static VALUE rb_class_s_new(int argc, VALUE *argv)
-
 ### static VALUE rb_class_superclass(VALUE klass)
 
 ### VALUE rb_convert_type(VALUE val, int type, const char *tname, const char *method)
@@ -133,8 +131,6 @@ Integer に変換します。
 ### static VALUE rb_mod_gt(VALUE mod, VALUE arg)
 
 ### static VALUE rb_mod_initialize(VALUE module)
-
-### static VALUE rb_mod_le(VALUE mod, VALUE arg)
 
 ### static VALUE rb_mod_lt(VALUE mod, VALUE arg)
 
