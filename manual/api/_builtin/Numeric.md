@@ -432,24 +432,37 @@ p (-34.56).abs # => 34.56
 p -34.56.abs   # => 34.56
 ```
 
-### def ceil   -> Integer
+### def ceil(ndigits = 0) -> Integer | Float
 
 `self` と等しいかより大きな整数のうち最小のものを返します。
 
+`self` を `to_f` で [c:Float] に変換してから [m:Float#ceil] を呼び出すのと同じです。
+
 [c:Complex] では未定義化されています。
+
+- **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
+               正の整数を指定した場合、[c:Float] を返します。
+               小数点以下を、最大 `ndigits` 桁にします。
+               負の整数を指定した場合、[c:Integer] を返します。
+               小数点位置から左に少なくとも `ndigits` 個の `0` が並びます。
 
 ```ruby title="例"
 p 1.ceil      # => 1
 p 1.2.ceil    # => 2
 p (-1.2).ceil # => -1
 p (-1.5).ceil # => -1
+
+p 1.234567.ceil(2)   # => 1.24
+p 34567.89.ceil(-2)  # => 34600
 ```
 
 - **SEE** [m:Numeric#floor], [m:Numeric#round], [m:Numeric#truncate]
 
-### def floor(ndigits = 0) -> Integer
+### def floor(ndigits = 0) -> Integer | Float
 
 `self` と等しいかより小さな整数のうち最大のものを返します。
+
+`self` を `to_f` で [c:Float] に変換してから [m:Float#floor] を呼び出すのと同じです。
 
 [c:Complex] では未定義化されています。
 
@@ -461,39 +474,71 @@ p 1.floor      # => 1
 p 1.2.floor    # => 1
 p (-1.2).floor # => -2
 p (-1.5).floor # => -2
+
+p 1.234567.floor(2)   # => 1.23
+p 34567.89.floor(-2)  # => 34500
 ```
 
 - **SEE** [m:Numeric#ceil], [m:Numeric#round], [m:Numeric#truncate]
 - **SEE** [m:Integer#floor]
 
-### def round   -> Integer
+### def round(ndigits = 0, half: :up) -> Integer | Float
 
 `self` ともっとも近い整数を返します。
+
+`self` を `to_f` で [c:Float] に変換してから [m:Float#round] を呼び出すのと同じです。
 
 中央値 `0.5`, `-0.5` はそれぞれ `1`, `-1` に切り上げされます。いわゆる四捨五入ですが、偶数丸めではありません。
 
 [c:Complex] では未定義化されています。
+
+- **param** `ndigits` -- 丸める位を指定します。
+       `ndigits` が `0` ならば、小数点以下を四捨五入し、整数を返します。
+       `ndigits` が `0` より大きいならば、小数点以下の指定された位で四捨五入されます。
+       `ndigits` が `0` より小さいならば、小数点以上の指定された位で四捨五入されます。
+- **param** `half` -- ちょうど半分の値の丸め方を指定します。
+       サポートされている値は以下の通りです。
+
+- `:up` or `nil`: 0から遠い方に丸められます。
+- `:even`: もっとも近い偶数に丸められます。
+- `:down`: 0に近い方に丸められます。
 
 ```ruby title="例"
 p 1.round      # => 1
 p 1.2.round    # => 1
 p (-1.2).round # => -1
 p (-1.5).round # => -2
+
+p 1.234567.round(2)        # => 1.23
+p 34567.89.round(-2)       # => 34600
+p 2.5.round(half: :even)   # => 2
+p 2.5.round(half: :down)   # => 2
 ```
 
 - **SEE** [m:Numeric#ceil], [m:Numeric#floor], [m:Numeric#truncate]
 
-### def truncate   -> Integer
+### def truncate(ndigits = 0) -> Integer | Float
 
 `0` から `self` までの整数で、`self` にもっとも近い整数を返します。
 
+`self` を `to_f` で [c:Float] に変換してから [m:Float#truncate] を呼び出すのと同じです。
+
 [c:Complex] では未定義化されています。
+
+- **param** `ndigits` -- 10進数での小数点以下の有効桁数を整数で指定します。
+               正の整数を指定した場合、[c:Float] を返します。
+               小数点以下を、最大 `ndigits` 桁にします。
+               負の整数を指定した場合、[c:Integer] を返します。
+               小数点位置から左に少なくとも `ndigits` 個の `0` が並びます。
 
 ```ruby title="例"
 p 1.truncate      # => 1
 p 1.2.truncate    # => 1
 p (-1.2).truncate # => -1
 p (-1.5).truncate # => -1
+
+p 1.234567.truncate(2)   # => 1.23
+p 34567.89.truncate(-2)  # => 34500
 ```
 
 - **SEE** [m:Numeric#ceil], [m:Numeric#floor], [m:Numeric#round]
