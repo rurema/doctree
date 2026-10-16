@@ -54,8 +54,6 @@ rb_class_real(RBASIC(obj)->klass)
 
 でも良い。(が、やはり rb_obj_class(obj) を使う方が無難だろう)
 
-### static VALUE rb_class_s_new(int argc, VALUE *argv)
-
 ### static VALUE rb_class_superclass(VALUE klass)
 
 ### VALUE rb_convert_type(VALUE val, int type, const char *tname, const char *method)
@@ -67,7 +65,7 @@ val がもともと type クラスのインスタンスなら val をそのま�
 
 ### double rb_cstr_to_dbl(const char *p, int badcheck)
 
-### VALUE rb_eql(VALUE obj1, VALUE obj2)
+### int rb_eql(VALUE obj1, VALUE obj2)
 
 obj1.equal?(obj2) ならば Qtrue、そうでないならば Qfalse。
 
@@ -133,8 +131,6 @@ Integer に変換します。
 ### static VALUE rb_mod_gt(VALUE mod, VALUE arg)
 
 ### static VALUE rb_mod_initialize(VALUE module)
-
-### static VALUE rb_mod_le(VALUE mod, VALUE arg)
 
 ### static VALUE rb_mod_lt(VALUE mod, VALUE arg)
 
@@ -215,17 +211,23 @@ obj がクラス klass およびそのサブクラスのインスタンスのと
 
 [m:Object#protected_methods] の実体です。
 
+#%until 3.2
 ### VALUE rb_obj_taint(VALUE obj)
 
 [m:Object#taint]
+#%end
 
+#%until 3.2
 ### VALUE rb_obj_tainted(VALUE obj)
 
 [m:Object#tainted?]
+#%end
 
+#%until 3.2
 ### VALUE rb_obj_untaint(VALUE obj)
 
 [m:Object#untaint]
+#%end
 
 ### double rb_str_to_dbl(VALUE str, int badcheck)
 
@@ -234,7 +236,7 @@ obj がクラス klass およびそのサブクラスのインスタンスのと
 [m:Kernel?.String] の実体です。
 val を文字列に変換します。
 
-### VALUE rb_to_id(VALUE name)
+### ID rb_to_id(VALUE name)
 
 String・Fixnum・Symbol を ID に変換します。
 
@@ -248,4 +250,6 @@ val を to_int メソッドを使って Ruby の整数に変換します。
 
 Qtrue を返します。
 
+#%until 3.1
 ### static VALUE rb_sym_interned_p(VALUE sym)
+#%end

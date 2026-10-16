@@ -1,24 +1,3 @@
-### static int delete_never(char *key, char *value, char *never)
-
-st_cleanup_safe() のイテレータブロック。
-
-### static int new_size(int size)
-
-必要なサイズ size から、最適なハッシュエントリのサイズを返す。
-
-### static int numcmp(long x, long y)
-
-int用の比較関数。
-
-### static int numhash(long n)
-
-int用のハッシュ関数。
-n に対するハッシュ値を計算する。
-
-### static void rehash(register st_table *table)
-
-テーブルの全要素に対しハッシュ値を計算しなおしてテーブルを再構成する。エントリに対して要素の数が増えすぎ、テーブルが狭くなってきたときに発生する。
-
 ### void st_add_direct(st_table *table, char *key, char *value)
 
 st_insert() と似ているが、同じハッシュ値を持つエントリーに対する「同値検査」を省略する。key がまだ登録されていないことがはっきりしている場合には、少し高速に登録できる。

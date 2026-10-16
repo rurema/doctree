@@ -35,6 +35,7 @@ obj のクラスを返します。
 OBJSETUP() の変種。
 clone を、obj から clone で作ったオブジェクトとして初期化します。
 
+#%until 4.1
 ### MACRO void Data_Get_Struct(VALUE obj, type, type *svar)
 
 Ruby のオブジェクト obj から type 型へのポインタをとりだし svar に代入します。
@@ -54,6 +55,10 @@ my_i(VALUE self)
 }
 ```
 
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
+
+#%until 4.1
 ### MACRO VALUE Data_Make_Struct(VALUE klass, type, RUBY_DATA_FUNC mark, RUBY_DATA_FUNC free, type *svar)
 
 type 型の構造体をヒープに割り当ててそれへのポインタを
@@ -86,10 +91,14 @@ my_s_new(klass)
 }
 ```
 
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
+
 ### MACRO void *DATA_PTR(VALUE dta)
 
 実際は struct RData* 型である dta から、それがラップしているポインタを取り出します。
 
+#%until 4.1
 ### MACRO VALUE Data_Wrap_Struct(VALUE klass, RUBY_DATA_FUNC mark, RUBY_DATA_FUNC free, void *sval)
 
 C の構造体 sval をラップして klass クラスのインスタンスである Ruby オブジェクトを生成し、それを返します。
@@ -119,6 +128,9 @@ my_s_new(klass)
     return Data_Wrap_Struct(MyClass, 0, free_my, m);
 }
 ```
+
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
 
 ### MACRO void DUPSETUP(dup, obj)
 
@@ -194,6 +206,15 @@ x のフラグ f が立っていたら真。
 
 x のフラグ f をクリアする。
 
+#%since 4.1
+### MACRO int HAVE_RB_LEN_T
+
+`rb_len_t` と `rb_ulen_t` が使えることを示すマクロです。
+値は `1` です。
+
+- **SEE** [f:rb_len_t], [f:rb_ulen_t]
+#%end
+
 ### MACRO VALUE ID2SYM(ID id)
 
 id を Symbol に変換します。
@@ -240,6 +261,15 @@ cが'0'から'9'のとき真。それ以外は偽。
 
 cが’0’から’9’、’a’から’f’、’A’から’F’のとき真。それ以外は偽。
 
+#%since 4.1
+### MACRO VALUE LEN2NUM(rb_len_t n)
+
+`rb_len_t` の値 `n` を Fixnum か Bignum に変換します。
+現状では [f:LONG2NUM] と同じです。
+
+- **SEE** [f:rb_len_t], [f:NUM2LEN], [f:ULEN2NUM]
+#%end
+
 ### MACRO VALUE LL2NUM(long long v)
 
 ```c title="例"
@@ -277,7 +307,9 @@ f が Fixnum の下限値以上ならば真。
 - **SEE** [f:FIXNUM_MIN], [f:FIXNUM_MAX], [f:FIXNUM_P],
      [f:FIXABLE], [f:POSFIXABLE]
 
+#%until 3.4
 ### MACRO void NEWOBJ(obj, int typeflag)
+#%end
 
 ### MACRO int NIL_P(VALUE obj)
 
@@ -296,6 +328,15 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合�
 - **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に発生します。
 
 - **raise** `RangeError` -- x が int 型で表現できる値の範囲外であった場合に発生します。
+
+#%since 4.1
+### MACRO rb_len_t NUM2LEN(VALUE x)
+
+`x` を `rb_len_t` に変換します。
+現状では [f:NUM2LONG] と同じです。
+
+- **SEE** [f:rb_len_t], [f:LEN2NUM]
+#%end
 
 ### MACRO long NUM2LONG(VALUE x)
 
@@ -351,17 +392,29 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合�
 
 ### MACRO int OBJ_FROZEN(VALUE x)
 
+#%until 4.1
 ### MACRO void OBJ_INFECT(VALUE dest, VALUE src)
 
 src に汚染マークが付いていたら dest も汚染する。
 
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
+
+#%until 4.1
 ### MACRO void OBJ_TAINT(VALUE x)
 
 x に汚染マークを付ける。
 
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
+
+#%until 4.1
 ### MACRO int OBJ_TAINTED(VALUE x)
 
 x に汚染マークが付いていたら真。
+
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
 
 ### MACRO void OBJSETUP(obj, VALUE klass, int typeflag)
 
@@ -374,6 +427,16 @@ f が Fixnum の上限値以下ならば真。
 - **SEE** [f:FIXNUM_MIN], [f:FIXNUM_MAX], [f:FIXNUM_P],
      [f:FIXABLE], [f:NEGFIXABLE]
 
+#%since 4.1
+### MACRO PRIdLEN
+
+`rb_len_t` の値を `printf` 系の関数で出力するための書式指定子です。
+`PRIdLEN`、`PRIiLEN`、`PRIoLEN`、`PRIuLEN`、`PRIxLEN`、`PRIXLEN` があり、それぞれ `d`、`i`、`o`、`u`、`x`、`X` 変換に対応します。
+`"%" PRIdLEN` のように書式文字列に連結して使います。
+
+- **SEE** [f:rb_len_t]
+#%end
+
 ### MACRO struct RArray *RARRAY(VALUE obj)
 
 obj を struct RArray* にキャストする。
@@ -383,11 +446,68 @@ obj を struct RArray* にキャストする。
 
 ### VALUE rb_int_new(long v)
 
-### int rb_safe_level(void)
+#%since 4.1
+### int rb_len2int(rb_len_t n)
 
-現在のセーフレベルを返します。
+`rb_len_t` の値 `n` を `int` に変換します。
+`int` に収まらないときは `RangeError` が発生します。
+
+- **SEE** [f:rb_len_t], [f:rb_len2long]
+
+### long rb_len2long(rb_len_t n)
+
+`rb_len_t` の値 `n` を `long` に変換します。
+`long` に収まらないときは [f:rb_out_of_long] によって `RangeError` が発生します。
+長さを `long` で保持している拡張ライブラリで使います。
+[feature:22400]
+
+- **SEE** [f:rb_len_t], [f:rb_len2int]
+
+### MACRO rb_len_t RB_LEN_MAX
+
+`rb_len_t` が取りうる最大値です。
+
+- **SEE** [f:rb_len_t], [f:RB_LEN_MIN], [f:RB_ULEN_MAX]
+
+### MACRO rb_len_t RB_LEN_MIN
+
+`rb_len_t` が取りうる最小値です。
+
+- **SEE** [f:rb_len_t], [f:RB_LEN_MAX]
+
+### typedef long rb_len_t
+
+`String` や `Array` などの長さや添字を表す符号付き整数型です。
+現状ではどの環境でも `long` ですが、将来は mswin で 64 ビットになる予定です。
+そのため拡張ライブラリは、これらの長さを `rb_len_t` で保持してください。
+`RSTRING_LEN` や `rb_range_beg_len` など、長さを受け渡す C API はこの型を使います。
+extconf.rb からは `RbConfig::SIZEOF["rb_len_t"]` で大きさを取得できます。
+[feature:22400]
+
+- **SEE** [f:rb_ulen_t], [f:SIZEOF_RB_LEN_T], [f:HAVE_RB_LEN_T], [f:LEN2NUM], [f:NUM2LEN]
+
+### void rb_out_of_long(SIGNED_VALUE num)
+
+`num` が `long` の範囲に収まらないことを示す `RangeError` を発生させます。
+
+- **SEE** [f:rb_len2long]
+#%end
 
 ### VALUE rb_uint_new(unsigned int v)
+
+#%since 4.1
+### MACRO rb_ulen_t RB_ULEN_MAX
+
+`rb_ulen_t` が取りうる最大値です。
+
+- **SEE** [f:rb_ulen_t], [f:RB_LEN_MAX]
+
+### typedef unsigned long rb_ulen_t
+
+`rb_len_t` と同じ幅の符号なし整数型です。
+
+- **SEE** [f:rb_len_t], [f:ULEN2NUM]
+#%end
 
 ### MACRO struct RBasic *RBASIC(VALUE obj)
 
@@ -406,6 +526,15 @@ type 型のメモリ領域 var のサイズを n 個に変更する。
 ### MACRO struct RFloat *RFLOAT(VALUE obj)
 
 ### MACRO struct RHash *RHASH(VALUE obj)
+
+### MACRO st_table *RHASH_TBL(VALUE h)
+
+`h` の内容を持つ `st_table` を返します。
+`h` の実装が `st_table` であるとは限らないため、必要なときに作成されます。
+
+#%since 4.1
+Ruby 4.1 から非推奨です。[feature:22232]
+#%end
 
 ### MACRO struct RClass *RMODULE(VALUE obj)
 
@@ -465,30 +594,42 @@ obj が Qfalse でも Qnil でもないとき真。
 
 任意の関数へのポインタ func を Ruby のメソッドの実体として適する型に強制キャストします。
 
+#%since 4.1
+### MACRO RUBY_TYPED_EMBEDDABLE
+
+`rb_data_type_t` の `flags` に指定するフラグです。
+Ruby は C の構造体を `malloc` で別に確保せず、オブジェクトのスロットに直接埋め込むことがあります。
+ポインタをたどる回数や `malloc` の負荷が減り、場合によってはメモリ使用量も減ります。
+ただし保証ではなく、構造体がスロットに収まらないときなどは埋め込まれません。
+[feature:21853]
+
+埋め込み可能にするには次の制限を守る必要があります。
+
+- 構造体へのポインタや構造体の内部を指すポインタを保持してはいけません。GC のコンパクションで無効になります。オブジェクトがスタック上にある間だけ、渡して使えます。
+- `DATA_PTR`、`RTYPEDDATA_DATA`、`TypedData_Wrap_Struct` は使えません。`RTYPEDDATA_GET_DATA` か `TypedData_Get_Struct` を使います。
+- `dfree` で構造体そのものを free してはいけません。`RUBY_DEFAULT_FREE` は指定できます。
+- `RUBY_TYPED_FREE_IMMEDIATELY` も指定する必要があります。
+
+構造体の大きさが可変のときは、`TypedData_Make_Struct` の代わりに `rb_data_typed_object_zalloc` を使えます。
+#%end
+
 ### MACRO SafeStringValue(v)
 
 [f:StringValue] と同じく、val が String でなければ to_str メソッドを使って String に変換します。同時に rb_check_safe_str() によるチェックも行います。
+
+#%since 4.1
+### MACRO int SIZEOF_RB_LEN_T
+
+`rb_len_t` の大きさをバイト単位で表すマクロです。
+
+- **SEE** [f:rb_len_t]
+#%end
 
 ### MACRO int SPECIAL_CONST_P(VALUE obj)
 
 obj が実体の構造体を持たないとき真。
 現時点で真になるのは Qnil, Qtrue, Qfalse と、
 Fixnum, Symbol のインスタンス。
-
-### MACRO char *STR2CSTR(VALUE str)
-
-Ruby のオブジェクト str から C の文字列を取り出します。
-str が String でない場合は to_str によって変換を試みます。
-
-返り値を free したり直接書き換えたりしてはいけません。
-
-STR2CSTR は、与えられたオブジェクトが文字列でなく to_str メソッドを持つ場合、内部で to_str を呼び出して暗黙の型変換を行い、それが保持する文字列ポインタを返します。
-しかし、このAPIでは暗黙の型変換結果となるオブジェクトがどこからも保持されないため、注意して使用しないと結果が GC される可能性があります。
-
-Ruby 1.7 以降では代わりに [f:StringValuePtr] を使用します。こちらは、引数の参照先が暗黙の型変換の結果に置き換わるため変換結果が GC
-されません。(Ruby 1.7 では、STR2CSTR() は、obsolete です)
-
-[f:StringValue] は、引数が to_str による暗黙の型変換を期待する場合に使用します。
 
 ### MACRO void StringValue(VALUE val)
 
@@ -519,7 +660,15 @@ obj の構造体型 ID を返します。
 
 任意の整数を Fixnum か Bignum に変換します。
 
+#%since 4.1
+### MACRO VALUE ULEN2NUM(rb_ulen_t n)
+
+`rb_ulen_t` の値 `n` を Fixnum か Bignum に変換します。
+現状では [f:ULONG2NUM] と同じです。
+
+- **SEE** [f:rb_ulen_t], [f:LEN2NUM]
+#%end
+
 ### MACRO VALUE ULL2NUM(unsigned long long n)
 
 ### MACRO VALUE ULONG2NUM(unsigned long n)
-
