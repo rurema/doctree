@@ -1,18 +1,4 @@
-### static VALUE add_final(VALUE os, VALUE proc)
-
-### static void add_heap(void)
-
-Rubyオブジェクトのヒープスロットを増設する。
-
-### static VALUE call_final(VALUE os, VALUE obj)
-
 ### static VALUE define_final(int argc, VALUE *argv, VALUE os)
-
-### static VALUE finals(void)
-
-### static void gc_mark_all(void)
-
-### static void gc_mark_rest(void)
 
 ### static void gc_sweep(void)
 
@@ -27,23 +13,13 @@ Ruby の整数で表されたオブジェクト ID id からオブジェクト�
 
 ### static void init_mark_stack(void)
 
-### void Init_stack(VALUE *addr)
-
 ### static inline int is_pointer_to_heap(void *ptr)
 
-### static int mark_entry(ID key, VALUE value)
-
-### static int mark_hashentry(VALUE key, VALUE value)
-
 ### static void mark_locations_array(register VALUE *x, register long n)
-
-### static void mark_source_filename(char *f)
 
 ### static void obj_free(VALUE obj)
 
 ### static VALUE os_each_obj(int argc, VALUE *argv)
-
-### static VALUE os_live_obj(void)
 
 ### static VALUE os_obj_of(VALUE of)
 
@@ -78,10 +54,6 @@ v をマークします。
 ### void rb_gc_mark_children(VALUE ptr)
 
 v から指されているオブジェクトを全てマークします。
-
-### void rb_gc_mark_frame(struct FRAME *frame)
-
-frame をマークします。
 
 ### void rb_gc_mark_locations(VALUE *start, VALUE *end)
 
@@ -123,10 +95,6 @@ NoMemoryErrorをraiseする。
 未使用のオブジェクト領域一つへのポインタを返す。
 返り値が返ってきたときは失敗はない。
 
-### char *rb_source_filename(const char *f)
-
-### static VALUE rm_final(VALUE os, VALUE proc)
-
 ### int ruby_stack_check(void)
 
 ### int ruby_stack_length(VALUE **p)
@@ -162,7 +130,4 @@ obj のファイナライズを行います。
 
 ### static VALUE run_single_final(VALUE *args)
 
-### static enum st_retval sweep_source_filename(char *key, char *value)
-
 ### static VALUE undefine_final(VALUE os, VALUE obj)
-

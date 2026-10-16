@@ -3,10 +3,6 @@
 m_tbl 格納形式のメソッド (構文木) をコピーして返します。
 ST_CONTINUE を返します。
 
-### static VALUE include_class_new(VALUE module, VALUE super)
-
-super をスーパークラスとしてモジュールの「化身」クラスを作成し返します。
-
 ### static int ins_methods_i(ID key, NODE *body, VALUE ary)
 
 rb_class_instance_methods() のイテレータブロック (通常版)。
@@ -20,10 +16,6 @@ rb_class_instance_methods() のイテレータブロック
 
 rb_class_instance_methods() のイテレータブロック
 (protected メソッド版)。
-
-### static VALUE method_list(VALUE mod, int option, int (*func)())
-
-モジュール mod に定義されているメソッドに対して順番に func を繰り返し呼び出します。
 
 ### VALUE rb_class_boot(VALUE super)
 
@@ -182,14 +174,6 @@ Module#append_features の実体。
 
 モジュール mod にインクルードされているモジュール、さらに mod がクラスならばスーパークラスとそれにインクルードされているモジュールを再帰的に集めてメソッド探索優先順位順に並べて返します (早く探索されるほうが前)。
 
-### VALUE rb_mod_clone(VALUE mod)
-
-モジュール mod を clone して返します。
-
-### VALUE rb_mod_dup(VALUE mod)
-
-モジュール mod を dup して返します。
-
 ### VALUE rb_mod_include_p(VALUE mod, VALUE mod2)
 
 モジュール mod が mod2 をインクルードしていれば真。
@@ -256,10 +240,6 @@ obj が特異メソッドを定義できない型のオブジェクトである�
 
 特異クラス klass を clone して返します。
 klass が特異クラスでないときはただ klass を返します。
-
-### VALUE rb_singleton_class_new(VALUE super)
-
-super をスーパークラスとする特異クラスを生成し、返します。
 
 ### void rb_undef_method(VALUE klass, const char *name)
 

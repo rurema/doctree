@@ -1,18 +1,6 @@
-### static int autoload_i(ID key, const char *name, st_table *tbl)
-
 ### static VALUE classname(VALUE klass)
 
 ### static int cv_i(ID key, VALUE value, VALUE ary)
-
-### static void cvar_override_check(VALUE id, VALUE a)
-
-### static int fc_i(ID key, VALUE value, struct fc_result *res)
-
-### static VALUE fc_path(struct fc_result *fc, ID name)
-
-### static VALUE find_class_path(VALUE klass)
-
-クラス klass のクラスパスを探索し、Ruby の文字列で返します。
 
 ### static VALUE generic_ivar_defined(VALUE obj, ID id)
 
@@ -21,10 +9,6 @@
 ### static int generic_ivar_remove(VALUE obj, ID id, VALUE *valp)
 
 ### static void generic_ivar_set(VALUE obj, ID id, VALUE val)
-
-### static int givar_i(VALUE obj, st_table *tbl)
-
-### static int givar_mark_i(ID key, VALUE value)
 
 ### static ID global_id(const char *name)
 
@@ -38,8 +22,6 @@
 
 ### static int mark_global_entry(ID key, struct global_entry *entry)
 
-### static void mod_av_set(VALUE klass, ID id, VALUE val, int isconst)
-
 ### static VALUE original_module(VALUE c)
 
 ### void rb_alias_variable(ID name1, ID name2)
@@ -47,10 +29,6 @@
 ### void rb_autoload(const char *klass, const char *filename)
 
 この関数は Ruby 2.3 以降で deprecated です。[f:rb_funcall] を使用してください。
-
-### int rb_autoload_defined(ID id)
-
-### static void rb_autoload_id(ID id, const char *filename)
 
 ### void rb_autoload_load(ID id)
 
@@ -76,8 +54,6 @@ rb_str_dup(rb_class_path(klass));
 ```
 
 です。
-
-### void rb_const_assign(VALUE klass, ID id, VALUE val)
 
 ### int rb_const_defined(VALUE klass, ID id)
 
@@ -112,10 +88,6 @@ klass のクラス変数 name の値を取得します。
 
 klass のクラス変数 name に val を代入します。
 変数がまだ定義されていない場合は NameError を発生します。
-
-### void rb_cvar_declear(VALUE klass, ID name, VALUE val)
-
-klass のクラス変数 name に val を代入します。
 
 ### VALUE rb_cvar_defined(VALUE klass, ID id)
 
@@ -215,8 +187,6 @@ val を代入します。
 
 ### void rb_mark_generic_ivar(VALUE obj)
 
-### void rb_mark_generic_ivar_tbl(void)
-
 ### VALUE rb_mod_class_variables(VALUE obj)
 
 ### void *rb_mod_const_at(VALUE mod, void *data)
@@ -234,10 +204,6 @@ val を代入します。
 
 ### VALUE rb_mod_remove_cvar(VALUE mod, VALUE name)
 
-### void rb_name_class(VALUE klass, ID id)
-
-クラス klass を id と命名します。
-
 ### VALUE rb_obj_instance_variables(VALUE obj)
 
 ### VALUE rb_obj_remove_instance_variable(VALUE obj, VALUE name)
@@ -248,36 +214,10 @@ val を代入します。
 
 ### static void rb_trace_eval(VALUE cmd, VALUE val)
 
-### static void readonly_setter(VALUE val, ID id, void *var)
-
 ### static void remove_trace(struct global_variable *var)
 
 ### static int sv_i(ID key, VALUE value, st_table *tbl)
 
-### static int top_const_get(ID id, VALUE *klassp)
-
-トップレベルの定数 id を参照します。
-定数 id が定義されていたら真を返し klassp にその値を書き込みます。未定義なら偽を返します。
-
 ### static VALUE trace_en(struct global_variable *var)
 
 ### static VALUE trace_ev(struct trace_data *data)
-
-### static VALUE undef_getter(ID id)
-
-### static void undef_marker(void)
-
-### static void undef_setter(VALUE val, ID id, void *data, struct global_variable *var)
-
-### static VALUE val_getter(ID id, VALUE val)
-
-### static void val_marker(VALUE data)
-
-### static void val_setter(VALUE val, ID id, void *data, struct global_variable *var)
-
-### static VALUE var_getter(ID id, VALUE *var)
-
-### static void var_marker(VALUE *var)
-
-### static void var_setter(VALUE val, ID id, VALUE *var)
-
