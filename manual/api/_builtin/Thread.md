@@ -809,15 +809,28 @@ p count2  # => 11571921
 
 - **SEE** [m:Thread#priority]
 
-### def raise(error_type, message, traceback)     -> ()
+### def raise                                                        -> ()
+#%since 4.0
+### def raise(message, cause: $!)                                    -> ()
+### def raise(error_type, message = nil, traceback = nil, cause: $!) -> ()
+#%else
+### def raise(message)                                               -> ()
+### def raise(error_type, message = nil, traceback = nil)            -> ()
+#%end
 
 自身が表すスレッドで強制的に例外を発生させます。
+
+引数を渡さない場合は [c:RuntimeError] を発生させます。`message` だけを渡した場合は、`message` をメッセージとした [c:RuntimeError] を発生させます。引数の意味は [m:Kernel?.raise] と同じです。
 
 - **param** `error_type` -- [m:Kernel?.raise] を参照してください。
 
 - **param** `message` -- [m:Kernel?.raise] を参照してください。
 
-- **param** `traceback` -- [m:Kernel?.raise] を参照してください。
+- **param** `traceback` -- [m:Kernel?.raise] を参照してください。省略した場合は、例外が発生した時点でのそのスレッドのバックトレースになります。
+
+#%since 4.0
+- **param** `cause` -- 現在の例外([m:$!])の代わりに [m:Exception#cause] に設定する例外を指定します。[c:Exception] オブジェクトまたは nil を指定できます。Ruby 4.0 から指定できます。
+#%end
 
 ```text
 Thread.new {
@@ -834,6 +847,25 @@ end
 => #<RuntimeError: foobar>
    ["-:3"]
 ```
+
+#%since 4.0
+
+```ruby title="例: cause: を指定する"
+th = Thread.new do
+  begin
+    sleep
+  rescue => e
+    e
+  end
+end
+sleep 0.1 until th.status == "sleep"
+th.raise(ArgumentError, "foo", cause: RuntimeError.new("bar"))
+e = th.value
+p e        # => #<ArgumentError: foo>
+p e.cause  # => #<RuntimeError: bar>
+```
+
+#%end
 
 ### def run    -> self
 
