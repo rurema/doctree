@@ -11,6 +11,10 @@ category: FileFormat
 [c:Psych] を用いると YAML のパースと出力ができます。
 これらの機能は libyaml <https://pyyaml.org/wiki/LibYAML> を用いて実装されています。さらに Ruby の大半のオブジェクトと YAML フォーマットのデータの間を相互に変換できます。
 
+#%since 4.1
+Ruby 4.1 から、実験的な libfyaml バックエンドがあります。psych を `--enable-libfyaml` を指定してビルドした場合だけ使われ、指定しなければ従来どおり libyaml を使います。Windows では使えません。
+#%end
+
 ### 基本的な使いかた
 
 ```ruby
