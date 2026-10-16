@@ -125,7 +125,7 @@ Rubyレベルでの super です。
 
 Continuation オブジェクトを生成します。
 
-### VALUE rb_catch(const char *tag, VALUE (*proc)(), VALUE data)
+### VALUE rb_catch(const char *tag, rb_block_call_func_t proc, VALUE data)
 
 catch と同等の動作を実行します。
 
@@ -189,7 +189,7 @@ klass とそのスーパークラスで name というメソッドが定義さ�
 klass とそのスーパークラスで name というメソッドが定義されていないときは例外 NameError を発生します。
 #%end
 
-### VALUE rb_ensure(VALUE (*body)(), VALUE data1, VALUE (*ensure)(), VALUE data2)
+### VALUE rb_ensure(VALUE (*body)(VALUE), VALUE data1, VALUE (*ensure)(VALUE), VALUE data2)
 
 ensure の C 版です。まず body(data1) を実行し、その途中で例外や exit が起きたとしても ensure(data2) が確実に実行されます ( body() が正常終了しても実行されます)。
 
@@ -247,7 +247,7 @@ block_given? の実体。
 
 ### static VALUE rb_f_eval(int argc, VALUE *argv, VALUE self)
 
-### static VALUE rb_f_exit(int argc, VALUE *argv, VALUE obj)
+### VALUE rb_f_exit(int argc, const VALUE *argv)
 
 ### static VALUE rb_f_load(int argc, VALUE *argv)
 
@@ -416,14 +416,14 @@ proc が Proc のインスタンスであれば真。
 
 ### static VALUE rb_obj_method(VALUE obj, VALUE vid)
 
-### static VALUE rb_obj_respond_to(int argc, VALUE *argv, VALUE obj)
+### int rb_obj_respond_to(VALUE obj, ID mid, int private_p)
 
-### VALUE rb_proc_new(func, val)
+`obj` がメソッド `mid` に応答するなら 1、そうでなければ 0 を返します。
+`private_p` が真のときはプライベートメソッドも対象にします。
 
-VALUE (*func)(ANYARGS);
-VALUE val;
+### VALUE rb_proc_new(rb_block_call_func_t func, VALUE val)
 
-### VALUE rb_protect(VALUE (*proc)(), VALUE data, int *state)
+### VALUE rb_protect(VALUE (*proc)(VALUE), VALUE data, int *state)
 
 初出: [ruby-dev:4064]
 
@@ -454,12 +454,12 @@ if (status != 0) {
 
 require の C 版です。feature「fname」をロードします。
 
-### VALUE rb_rescue(VALUE (*b_proc)(), VALUE data1, VALUE (*r_proc)(), VALUE data2)
+### VALUE rb_rescue(VALUE (*b_proc)(VALUE), VALUE data1, VALUE (*r_proc)(VALUE, VALUE), VALUE data2)
 
 まず b_proc(data1) を実行し、その途中で例外が発生したら r_proc(data2) を実行します。
 捕捉する例外は [c:StandardError] のサブクラスだけです。
 
-### VALUE rb_rescue2(VALUE (*b_proc)(), VALUE data1, VALUE (*r_proc)(), VALUE data2, ...)
+### VALUE rb_rescue2(VALUE (*b_proc)(VALUE), VALUE data1, VALUE (*r_proc)(VALUE, VALUE), VALUE data2, ...)
 
 まず b_proc(data1) を実行し、その途中で例外が発生したら r_proc(data2) を実行します。
 第五引数以降の可変長引数に捕捉したい例外クラスのリストを指定します。
@@ -490,10 +490,7 @@ obj にメソッド id が定義されているとき真。
 
 ### void rb_thread_atfork(void)
 
-### VALUE rb_thread_create(fn, arg)
-
-VALUE (*fn)();
-void *arg;
+### VALUE rb_thread_create(VALUE (*fn)(void *), void *arg)
 
 ### VALUE rb_thread_current(void)
 
@@ -555,7 +552,11 @@ void *arg;
 
 ### static VALUE rb_thread_stop_p(VALUE thread)
 
+#%since 4.0
+### int rb_thread_wait_fd(int fd)
+#%else
 ### void rb_thread_wait_fd(int fd)
+#%end
 
 ファイルディスクリプタ fd を読み込めるようになるまでカレントスレッドを停止します。
 
@@ -605,7 +606,7 @@ Proc の呼び出しのときは pcall=非ゼロ にしなければならない�
 
 評価器を初期化します。Ruby C API を呼ぶプロセスでは前もって必ずこの関数を呼ばなければなりません。
 
-### void ruby_options(int argc, char **argv)
+### void *ruby_options(int argc, char **argv)
 
 argc と argv を ruby へのコマンドラインオプションとして処理します。
 
