@@ -124,6 +124,10 @@ s = serv.accept
 level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR
 といった整数値の他、文字列("SOL_SOCKET", prefixなしの "SOCKET")やシンボル(:SO_REUSEADDR, :REUSEADDR)を用いることができます。
 
+#%since 4.1
+Windows では、Ruby 4.1 から、`getsockopt(:SOCKET, :ERROR)` が他のプラットフォームと同じく errno の値を返します。Ruby 4.0 までは Winsock のエラーコード(`WSAE*` の値)をそのまま返していました。[bug:18661]
+#%end
+
 - **param** `level` --    [man:getsockopt(2)] の 第二引数のlevel 
 - **param** `optname` --  [man:getsockopt(2)] の 第三引数のoption_name 
 - **SEE** [m:BasicSocket#setsockopt]
