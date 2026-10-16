@@ -600,7 +600,7 @@ p GC.measure_total_time # => false
 #%since 3.2
 ### def GC.verify_compaction_references(toward: nil, double_heap: false, expand_heap: false) -> Hash
 #%else
-### def GC.verify_compaction_references(toward: nil, double_heap: nil) -> Hash
+### def GC.verify_compaction_references(toward: nil, double_heap: false) -> Hash
 #%end
 
 コンパクションの参照の一貫性を検証します。
@@ -609,7 +609,16 @@ p GC.measure_total_time # => false
 コンパクション中に移動されたオブジェクトは T_MOVED オブジェクトに置き換えられます。
 コンパクション後には T_MOVED を参照するオブジェクトは存在するべきではありません。
 
-この関数は全てのオブジェクトが移動する余地を確保するためにヒープを2倍にして、全ての移動を確実にするためにヒープをコンパクションして、全ての参照を更新して、それからフルGCを実行します。
+#%since 3.4
+`expand_heap` または `double_heap` に真を指定した場合は、全てのオブジェクトを確実に移動できる余地を確保するためにヒープを拡張します(Ruby 3.4 以降はどちらを指定しても同じです)。
+#%end
+#%version 3.2...3.4
+`expand_heap` に真を指定した場合は、全てのオブジェクトを確実に移動できる余地を確保するためにヒープを拡張します。`double_heap` に真を指定した場合はヒープを 2 倍にします(両方を指定した場合は `expand_heap` が優先されます)。
+#%end
+#%until 3.2
+`double_heap` に真を指定した場合は、全てのオブジェクトが移動する余地を確保するためにヒープを 2 倍にします。
+#%end
+その後、全ての移動を確実にするためにヒープをコンパクションして、全ての参照を更新して、それからフル GC を実行します。
 もし T_MOVED への参照をもつオブジェクトがあれば、マークスタックにプッシュされて、
 SEGV が起きるでしょう。
 
