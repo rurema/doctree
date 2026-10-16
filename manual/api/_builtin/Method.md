@@ -631,7 +631,7 @@ p method(:puts).source_range # => nil
 
 - **SEE** [m:Method#source_location], [m:Method#syntax_tree]
 
-### def syntax_tree -> Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
+### def syntax_tree -> Ruby::Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
 
 このメソッドのコンパイル元になった抽象構文木(AST)のノードを、コンパイルに使ったのと同じパーサでソースを再度パースし直すことで返します。
 

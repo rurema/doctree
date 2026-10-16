@@ -310,7 +310,7 @@ p Time.instance_method(:zone).source_range # => nil
 
 - **SEE** [m:UnboundMethod#source_location], [m:Method#source_range]
 
-### def syntax_tree -> Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
+### def syntax_tree -> Ruby::Prism::Node | RubyVM::AbstractSyntaxTree::Node | nil
 
 このメソッドのコンパイル元になった抽象構文木(AST)のノードを、コンパイルに使ったのと同じパーサでソースを再度パースし直すことで返します。
 
