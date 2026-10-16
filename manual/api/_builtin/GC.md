@@ -5,6 +5,12 @@ library: _builtin
 
 GC は Ruby インタプリタの「ゴミ集め(Garbage Collection)」を制御するモジュールです。
 
+#%since 4.1
+Ruby 4.1 から、デフォルトの GC は [c:Ractor] ごとに動作します。各 Ractor は自分のヒープを自分のスレッドで、他の Ractor を止めずに回収します。
+全 Ractor を止める(stop-the-world の)グローバル GC は、明示的な [m:GC.start]、共有可能オブジェクトの増加、終了した Ractor のヒープの回収といった、本当に必要なときだけ行われます。
+[m:GC.start] の `global` キーワード引数、[m:GC.stat] の `scope` キーワード引数と `:global_gc_count`、[m:GC.disable] と [m:GC.enable] の Ractor ごとの扱いも参照してください。
+#%end
+
 ### GCのチューニングについて
 
 Ruby 2.1ではRGenGCと呼ばれる新たなGCメカニズムが導入されました。
