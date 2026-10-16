@@ -1,5 +1,3 @@
-### static NODE *arg_add(NODE *node1, NODE *node2)
-
 ### static void arg_ambiguous(void)
 
 メソッド引数の括弧が省略され、最初の引数の一文字目が演算子とも解釈できる場合に警告を出します。
@@ -7,8 +5,6 @@
 ### static NODE *arg_blk_pass(NODE *node1, NODE *node2)
 
 ### static NODE *arg_concat(NODE *node1, NODE *node2)
-
-### static NODE *arg_prepend(NODE *node1, NODE *node2)
 
 ### static NODE *aryset(NODE *recv, NODE *idx)
 
@@ -26,8 +22,6 @@ head と tail を NODE_BLOCK のリストとして連結し、先頭ノードを
 でない場合は NODE_BLOCK に入れたうえでそれを連結します。
 head もしくは tail が NULL なら連結はせず、
 NULL でないほうを返します。
-
-### static NODE *call_op(NODE *recv, ID id, int narg, NODE *arg1)
 
 ### static NODE *cond(NODE *node)
 
@@ -100,24 +94,7 @@ tail を連結し、先頭ノードを返します。head が NULL
 
 NODE_LISTのリストheadにNODE_LISTのノードtailを連結し、先頭ノードを返す。head、tailともにNULLであってはならない。
 
-### static NODE *literal_append(NODE *head, NODE *tail)
-
 ### static NODE *literal_concat(NODE *head, NODE *tail)
-
-### static NODE *literal_concat_dstr(NODE *head, NODE *tail)
-
-### static NODE *literal_concat_list(NODE *head, NODE *tail)
-
-### static NODE *literal_concat_string(NODE *head, NODE *tail, VALUE str)
-
-### static int local_append(ID id)
-
-新しいローカル変数 id をテーブルに追加します。
-
-### static int local_cnt(ID id)
-
-ローカル変数 id の変数 ID を取得します。
-定義されていてもいなくても正しい ID が取得できます。
 
 ### static int local_id(ID id)
 
@@ -138,14 +115,6 @@ NODE_LISTのリストheadにNODE_LISTのノードtailを連結し、先頭ノー
 ローカル変数テーブルスタックの先頭にあるテーブルを取得します。
 
 ### static NODE *logop(enum node_type type, NODE *left, NODE *right)
-
-### static NODE *match_gen(NODE *node1, NODE *node2)
-
-### static NODE *new_call(NODE *r, ID m, NODE *a)
-
-### static NODE *new_fcall(ID m, NODE *a)
-
-### static NODE *new_super(NODE *a)
 
 ### static NODE *newline_node(NODE *node)
 
@@ -198,24 +167,6 @@ c が EOF (-1) のときはなにもしません。
 
 現在の SCOPE の $~ に val を代入します。
 
-### NODE *rb_compile_cstr(const char *f, const char *s, int len, int line)
-
-C の文字列 s を構文木にコンパイルし、ruby_eval_tree と
-ruby_eval_tree_begin に格納します。ruby_eval_tree を返します。
-またコンパイルするときにファイル f の line 行目からをコンパイルしていると仮定します。
-
-### NODE *rb_compile_file(const char *f, VALUE file, int start)
-
-Ruby の IO オブジェクト file から文字列を読み込み、それを Ruby プログラムとして構文木にコンパイルします。
-作成した構文木は ruby_eval_tree と ruby_eval_tree_begin に格納し、同時に ruby_eval_tree を返します。
-またコンパイルするときにファイル f の line 行目からをコンパイルしていると仮定します。
-
-### NODE *rb_compile_string(const char *f, VALUE s, int line)
-
-Ruby の文字列 s を構文木にコンパイルし、ruby_eval_tree と
-ruby_eval_tree_begin に格納します。ruby_eval_tree を返します。
-またコンパイルするときにファイル f の line 行目からをコンパイルしていると仮定します。
-
 ### char *rb_id2name(ID id)
 
 id に対応する文字列を返します。
@@ -251,19 +202,11 @@ id に対応する文字列を返します。
 
 現在評価中の SCOPE の $_ に val を代入します。
 
+#%until 3.3
 ### NODE *rb_node_newnode(enum node_type type, NODE *a0, NODE *a1, NODE *a2)
 
 ノードタイプが type で a0 a1 a2 を要素に持つノードを生成し、返します。
-
-### void rb_parser_append_print(void)
-
-ruby の -p オプションの実装。
-ループと print のノードを ruby_eval_tree に加えます。
-
-### void rb_parser_while_loop(int chop, int split)
-
-ruby の -n オプションの実装。
-ループと print のノードを ruby_eval_tree に加えます。
+#%end
 
 ### static struct kwtable *rb_reserved_word(const char *str, unsigned int len)
 
@@ -296,11 +239,6 @@ struct kwtable {
 
 ### static NODE *ret_args(NODE *node)
 
-### static void special_local_set(char c, VALUE val)
-
-$~ と $_ をセットします。
-現在は c=0 が $_ で c=1 が $~ です。
-
 ### static int symbols_i(char *key, ID value, VALUE ary)
 
 rb_sym_all_symbols() のイテレータブロック。
@@ -326,21 +264,9 @@ free してはならない。
 
 トークンバッファを NUL で終端します。
 
-### MACRO static char* toklast(void)
-
-現在のトークンの末尾へのポインタ。
-
 ### MACRO static int toklen(void)
 
 現在のトークンの長さ。
-
-### static void top_local_init(void)
-
-パース中のプログラムのトップレベルのためのローカル変数テーブルをプッシュする。
-
-### static void top_local_setup(void)
-
-パース中のプログラムのトップレベルのためのローカル変数テーブルをポップし、現在存在する SCOPE にそれを接ぎ足す。
 
 ### static int value_expr(NODE *node)
 
@@ -367,14 +293,6 @@ lvar = 1
 lvar      # 無駄
 p lvar
 ```
-
-### static void warn_unless_e_option(const char *str)
-
-ruby -e で与えたプログラムの評価中ではないなら、警告メッセージ str を出力する。
-
-### static void warning_unless_e_option(const char *str)
-
-ruby -e で与えたプログラムの評価中ではなく、しかも $VERBOSE が真ならば、警告メッセージ str を出力する。
 
 ### static int whole_match_p(char *eos, int len, int indent)
 
