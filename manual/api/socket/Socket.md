@@ -411,6 +411,10 @@ local_host や local_port を指定した場合、ソケットをそこにバイ
 ブロックを渡すと、生成したソケットをそのブロックに渡し呼び出します。
 ブロック終了時にソケットオブジェクトを閉じます。
 
+#%since 4.1
+Windows では、Ruby 4.1 から、接続が拒否されたときや相手に到達できないときに、Winsock がそれを報告した時点で対応する [c:Errno::EXXX] の例外(たとえば `Errno::ECONNREFUSED`)が発生します。Ruby 4.0 までは、`connect_timeout` が経過してから `Errno::ETIMEDOUT` が発生したり、errno に対応しない [c:SystemCallError] が発生したりしていました。[bug:18661]
+#%end
+
 - **param** `host` -- 接続先のホスト名
 - **param** `port` -- 接続先のポート番号
 - **param** `local_host` -- 接続元のホスト名
