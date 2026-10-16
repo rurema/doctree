@@ -38,7 +38,7 @@
 この関数は Ruby 2.3 以降で deprecated です。[f:rb_funcall] を使用してください。
 #%end
 
-### void rb_autoload_load(ID id)
+### VALUE rb_autoload_load(VALUE space, ID name)
 
 ### char *rb_class2name(VALUE klass)
 
@@ -120,13 +120,13 @@ klass のクラス変数 name に val を代入します。
 
 トップレベル (現在は [c:Object]) の定数 name を初期値 val で定義します。既に同名の定数が定義されていたら警告します。
 
-### void rb_define_hooked_variable(const char *name, VALUE *var, VALUE (*getter)(), VALUE (*setter)())
+### void rb_define_hooked_variable(const char *name, VALUE *var, rb_gvar_getter_t *getter, rb_gvar_setter_t *setter)
 
 ### void rb_define_readonly_variable(const char *name, VALUE *var)
 
 ### void rb_define_variable(const char *name, VALUE *var)
 
-### void rb_define_virtual_variable(const char *name, VALUE (*getter)(), VALUE (*setter)())
+### void rb_define_virtual_variable(const char *name, rb_gvar_getter_t *getter, rb_gvar_setter_t *setter)
 
 ### VALUE rb_f_autoload(VALUE obj, VALUE klass, VALUE file)
 
@@ -197,13 +197,13 @@ val を代入します。
 
 ### void rb_mark_generic_ivar(VALUE obj)
 
-### VALUE rb_mod_class_variables(VALUE obj)
+### VALUE rb_mod_class_variables(int argc, const VALUE *argv, VALUE mod)
 
 ### void *rb_mod_const_at(VALUE mod, void *data)
 
 ### void *rb_mod_const_of(VALUE mod, void *data)
 
-### VALUE rb_mod_constants(VALUE mod)
+### VALUE rb_mod_constants(int argc, const VALUE *argv, VALUE mod)
 
 ### VALUE rb_mod_name(VALUE mod)
 
