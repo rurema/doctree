@@ -211,17 +211,23 @@ obj がクラス klass およびそのサブクラスのインスタンスのと
 
 [m:Object#protected_methods] の実体です。
 
+#%until 3.2
 ### VALUE rb_obj_taint(VALUE obj)
 
 [m:Object#taint]
+#%end
 
+#%until 3.2
 ### VALUE rb_obj_tainted(VALUE obj)
 
 [m:Object#tainted?]
+#%end
 
+#%until 3.2
 ### VALUE rb_obj_untaint(VALUE obj)
 
 [m:Object#untaint]
+#%end
 
 ### double rb_str_to_dbl(VALUE str, int badcheck)
 
@@ -244,4 +250,6 @@ val を to_int メソッドを使って Ruby の整数に変換します。
 
 Qtrue を返します。
 
+#%until 3.1
 ### static VALUE rb_sym_interned_p(VALUE sym)
+#%end

@@ -2,11 +2,17 @@
 
 ### static int cv_i(ID key, VALUE value, VALUE ary)
 
+#%until 3.2
 ### static VALUE generic_ivar_defined(VALUE obj, ID id)
+#%end
 
+#%until 3.2
 ### static VALUE generic_ivar_get(VALUE obj, ID id)
+#%end
 
+#%until 3.2
 ### static int generic_ivar_remove(VALUE obj, ID id, VALUE *valp)
+#%end
 
 ### static void generic_ivar_set(VALUE obj, ID id, VALUE val)
 
@@ -26,9 +32,11 @@
 
 ### void rb_alias_variable(ID name1, ID name2)
 
+#%until 3.2
 ### void rb_autoload(const char *klass, const char *filename)
 
 この関数は Ruby 2.3 以降で deprecated です。[f:rb_funcall] を使用してください。
+#%end
 
 ### void rb_autoload_load(ID id)
 
@@ -132,7 +140,9 @@ klass のクラス変数 name に val を代入します。
 
 ### void rb_gc_mark_global_tbl(void)
 
+#%until 3.2
 ### st_table *rb_generic_ivar_table(VALUE obj)
+#%end
 
 ### struct global_entry *rb_global_entry(ID id)
 

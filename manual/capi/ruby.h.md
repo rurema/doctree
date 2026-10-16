@@ -35,6 +35,7 @@ obj のクラスを返します。
 OBJSETUP() の変種。
 clone を、obj から clone で作ったオブジェクトとして初期化します。
 
+#%until 4.1
 ### MACRO void Data_Get_Struct(VALUE obj, type, type *svar)
 
 Ruby のオブジェクト obj から type 型へのポインタをとりだし svar に代入します。
@@ -54,6 +55,10 @@ my_i(VALUE self)
 }
 ```
 
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
+
+#%until 4.1
 ### MACRO VALUE Data_Make_Struct(VALUE klass, type, RUBY_DATA_FUNC mark, RUBY_DATA_FUNC free, type *svar)
 
 type 型の構造体をヒープに割り当ててそれへのポインタを
@@ -86,10 +91,14 @@ my_s_new(klass)
 }
 ```
 
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
+
 ### MACRO void *DATA_PTR(VALUE dta)
 
 実際は struct RData* 型である dta から、それがラップしているポインタを取り出します。
 
+#%until 4.1
 ### MACRO VALUE Data_Wrap_Struct(VALUE klass, RUBY_DATA_FUNC mark, RUBY_DATA_FUNC free, void *sval)
 
 C の構造体 sval をラップして klass クラスのインスタンスである Ruby オブジェクトを生成し、それを返します。
@@ -119,6 +128,9 @@ my_s_new(klass)
     return Data_Wrap_Struct(MyClass, 0, free_my, m);
 }
 ```
+
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
 
 ### MACRO void DUPSETUP(dup, obj)
 
@@ -277,7 +289,9 @@ f が Fixnum の下限値以上ならば真。
 - **SEE** [f:FIXNUM_MIN], [f:FIXNUM_MAX], [f:FIXNUM_P],
      [f:FIXABLE], [f:POSFIXABLE]
 
+#%until 3.4
 ### MACRO void NEWOBJ(obj, int typeflag)
+#%end
 
 ### MACRO int NIL_P(VALUE obj)
 
@@ -351,17 +365,29 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合�
 
 ### MACRO int OBJ_FROZEN(VALUE x)
 
+#%until 4.1
 ### MACRO void OBJ_INFECT(VALUE dest, VALUE src)
 
 src に汚染マークが付いていたら dest も汚染する。
 
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
+
+#%until 4.1
 ### MACRO void OBJ_TAINT(VALUE x)
 
 x に汚染マークを付ける。
 
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
+
+#%until 4.1
 ### MACRO int OBJ_TAINTED(VALUE x)
 
 x に汚染マークが付いていたら真。
+
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
 
 ### MACRO void OBJSETUP(obj, VALUE klass, int typeflag)
 
