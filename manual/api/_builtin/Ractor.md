@@ -11,6 +11,9 @@ Ruby 4.1 から、クラスやモジュールを変更できるのは、それ�
 メソッドの定義・削除、`alias`、可視性の変更、`include` / `prepend`、定数の定義・削除、クラス自身のインスタンス変数・クラス変数への書き込みなどを他の Ractor から行うと、[c:Ractor::IsolationError] が発生します。読み取りは従来どおりできます。
 起動時や main Ractor で定義されたクラス（require したライブラリのものを含む）の owner は main Ractor なので、main 以外の Ractor からは変更できません。
 一方、Ractor が自分で作成したクラスは、shareable でない定数・インスタンス変数・クラス変数も含めて自由に使えます。[feature:22226]
+
+また、Ruby 4.1 から、デフォルトの GC は Ractor ごとに動作します。各 Ractor は自分のヒープを自分のスレッドで、他の Ractor を止めずに回収します。
+全 Ractor を止めるグローバル GC は、明示的な [m:GC.start]、共有可能オブジェクトの増加、終了した Ractor のヒープの回収のときだけ行われます。詳しくは [c:GC] を参照してください。
 #%end
 
 ## Class Methods
