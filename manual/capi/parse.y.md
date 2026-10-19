@@ -202,9 +202,11 @@ id に対応する文字列を返します。
 
 現在評価中の SCOPE の $_ に val を代入します。
 
+#%until 3.3
 ### NODE *rb_node_newnode(enum node_type type, NODE *a0, NODE *a1, NODE *a2)
 
 ノードタイプが type で a0 a1 a2 を要素に持つノードを生成し、返します。
+#%end
 
 ### static struct kwtable *rb_reserved_word(const char *str, unsigned int len)
 

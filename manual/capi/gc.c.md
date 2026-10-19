@@ -4,36 +4,50 @@
 
 GC のスイープフェイズを実行します。
 
+#%until 4.1
 ### static VALUE id2ref(VALUE obj, VALUE id)
 
 ObjectSpace#_id2ref の実体。
 Ruby の整数で表されたオブジェクト ID id からオブジェクトを返します。
+#%end
 
+#%until 3.4
 ### void Init_heap(void)
+#%end
 
 ### static void init_mark_stack(void)
 
 ### static inline int is_pointer_to_heap(void *ptr)
 
+#%until 3.1
 ### static void mark_locations_array(register VALUE *x, register long n)
+#%end
 
+#%until 3.4
 ### static void obj_free(VALUE obj)
+#%end
 
 ### static VALUE os_each_obj(int argc, VALUE *argv)
 
 ### static VALUE os_obj_of(VALUE of)
 
+#%until 4.1
 ### VALUE rb_data_object_alloc(VALUE klass, void *datap, RUBY_DATA_FUNC dmark, RUBY_DATA_FUNC dfree)
 
 datap をラップするオブジェクトを生成し、返します。
 そのクラスは klass となり、datap をマークするときは
 dmark、解放するときは dfree を使うようになります。
 
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
+
 ### VALUE rb_gc(void)
 
 明示的に GC を開始します。rb_gc_disable() で禁止中のときおよびすでに GC が実行中のときは実際には行われません。
 
+#%until 3.2
 ### void rb_gc_call_finalizer_at_exit(void)
+#%end
 
 ### VALUE rb_gc_disable(void)
 
@@ -43,9 +57,13 @@ GC を禁止します。
 
 GC を許可します。
 
+#%until 4.1
 ### void rb_gc_force_recycle(VALUE p)
 
 p を強制的に GC します。
+
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
 
 ### void rb_gc_mark(VALUE v)
 
@@ -128,6 +146,8 @@ GC を行いそれでもだめなときは NoMemoryError を raise する。
 
 obj のファイナライズを行います。
 
+#%until 3.4
 ### static VALUE run_single_final(VALUE *args)
+#%end
 
 ### static VALUE undefine_final(VALUE os, VALUE obj)

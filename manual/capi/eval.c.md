@@ -1,6 +1,8 @@
 ### static VALUE backtrace(int lev)
 
+#%until 3.3
 ### static void bm_mark(struct METHOD *data)
+#%end
 
 ### static VALUE bmcall(VALUE args, VALUE method)
 
@@ -20,7 +22,9 @@
 
 ### static void error_pos(void)
 
+#%until 3.2
 ### static void error_print(void)
+#%end
 
 ### static VALUE eval_under(VALUE under, VALUE self, VALUE src, const char *file, int line)
 
@@ -42,9 +46,13 @@
 
 ### static VALUE method_unbind(VALUE obj)
 
+#%until 3.1
 ### static VALUE mnew(VALUE klass, VALUE obj, ID id, VALUE mklass)
+#%end
 
+#%until 3.1
 ### static VALUE mproc(void)
+#%end
 
 ### static VALUE proc_arity(VALUE proc)
 
@@ -52,7 +60,9 @@
 
 ### static VALUE proc_call(VALUE proc, VALUE args)
 
+#%until 4.1
 ### static VALUE proc_eq(VALUE self, VALUE other)
+#%end
 
 ### static VALUE proc_new(VALUE klass)
 
@@ -153,25 +163,31 @@ Init_foo(void)
 }
 ```
 
+#%until 3.1
 ### void rb_clear_cache(void)
 
 メソッドキャッシュをすべて消去します。
+#%end
 
 ### static VALUE rb_cont_call(int argc, VALUE *argv, VALUE cont)
 
 Continuation#call の実体。
 
+#%until 3.2
 ### void rb_disable_super(VALUE klass, const char *name)
 
 クラス klass のメソッド name からの super を禁止します。
 klass とそのスーパークラスで name というメソッドが定義されていないときは例外 NameError を発生します。
+#%end
 
 ### VALUE rb_dvar_defined(ID id)
 
+#%until 3.2
 ### void rb_enable_super(VALUE klass, const char *name)
 
 クラス klass のメソッド name からの super を許可します。
 klass とそのスーパークラスで name というメソッドが定義されていないときは例外 NameError を発生します。
+#%end
 
 ### VALUE rb_ensure(VALUE (*body)(), VALUE data1, VALUE (*ensure)(), VALUE data2)
 
@@ -200,9 +216,11 @@ state が NULL でなければそれに値が代入され Qnil を返します�
 
 例外オブジェクト err を投げます。
 
+#%until 3.2
 ### void rb_exec_end_proc(void)
 
 END ブロックおよび Kernel#at_exit で登録した Proc オブジェクトを実行します。
+#%end
 
 ### void rb_exit(int status)
 
@@ -237,9 +255,11 @@ load の実体。
 
 ### static VALUE rb_f_local_variables(void)
 
+#%until 3.3
 ### static VALUE rb_f_loop(void)
 
 loop の実体。永遠に yield を繰り返します。
+#%end
 
 ### static VALUE rb_f_raise(int argc, VALUE *argv)
 
@@ -258,7 +278,9 @@ self == obj として fname を require します。
 
 現在呼び出し中の (Rubyで実装された) メソッドの呼び出し名を返します。
 
+#%until 3.2
 ### void rb_frozen_class_p(VALUE klass)
+#%end
 
 ### VALUE rb_funcall(VALUE recv, ID name, int nargs, ...)
 
@@ -290,6 +312,7 @@ break の C 用インターフェイスです。
 
 代表的には、rb_iterate の block_proc 中で使います。
 
+#%until 4.1
 ### VALUE rb_iterate(VALUE (*call_proc)(), VALUE date1, VALUE (*block_proc)(), date2)
 
 ブロック付きメソッド(イテレータ)呼び出しを行う関数です。
@@ -303,6 +326,9 @@ block_proc(VALUE block_arg, VALUE data2, VALUE self)
 block_arg はブロック引数(複数なら配列に入っている)、
 data2 は rb_iterate() に渡したもの、
 self は block_proc 呼び出し時点での self です。
+
+Ruby 4.1 で削除されました。[feature:21768]
+#%end
 
 ### void rb_jump_tag(int tag)
 
