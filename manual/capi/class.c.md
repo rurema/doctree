@@ -1,3 +1,16 @@
+### int rb_check_arity(int argc, int min, int max)
+
+引数の個数 `argc` が `min` 以上 `max` 以下の範囲にあることを検査します。
+`max` に `UNLIMITED_ARGUMENTS` を指定すると、上限は検査しません。
+範囲外のときは [c:ArgumentError] が発生します。
+[f:rb_scan_args] が使えるときは、そちらのほうが強力で分かりやすいので、そちらを使ってください。
+
+- **param** `argc` -- 引数の個数です。
+- **param** `min` -- 許される最小の個数です。
+- **param** `max` -- 許される最大の個数です。`UNLIMITED_ARGUMENTS` なら上限はありません。
+- **return** -- 引数の `argc` です。
+- **raise** `ArgumentError` -- `argc` が範囲外のとき。
+
 ### VALUE rb_class_instance_methods(int argc, VALUE *argv, VALUE mod)
 
 Module#instance_methods の実体。
@@ -134,6 +147,41 @@ func と argc は rb_define_method と同じです。
 obj に特異メソッド name を定義します。
 メソッドの実体を func に関数ポインタで与え、その関数がとる引数のタイプを argc に渡します。argc のフォーマットについては rb_define_method の記述を参照してください。
 
+### VALUE rb_extract_keywords(VALUE *orighash)
+
+ハッシュを、シンボルをキーとする部分とそれ以外に分けます。
+シンボルをキーとする部分は新しいハッシュとして返します。
+残りは新しいハッシュとして `orighash` が指す先に格納します。
+元のハッシュは変更しません。
+
+`orighash` が指すハッシュにシンボル以外のキーがなければ、`orighash` が指す先には `0` が格納されます。
+
+- **param** `orighash` -- 分割するハッシュへのポインタです。呼び出し後は、残りのハッシュを指します。
+- **return** -- シンボルをキーとする要素を集めたハッシュです。
+
+### int rb_get_kwargs(VALUE keyword_hash, const ID *table, int required, int optional, VALUE *values)
+
+キーワード引数のハッシュ `keyword_hash` から、`table` に並べたキーワードに対応する値を取り出して `values` に格納します。
+取り出した要素は `keyword_hash` から削除されます。
+
+`table` の先頭の `required` 個のキーワードは必須です。
+続く `optional` 個のキーワードは省略できます。
+`optional` が負のときは、省略できるキーワードは `-optional-1` 個で、`table` にない残りのキーワードは無視されます。
+`optional` が負でなければ、`table` にないキーワードがあると例外が発生します。
+省略できるキーワードが `keyword_hash` になければ、`values` の対応する要素には `Qundef` が設定されます。
+
+C API でキーワード引数を扱うのは Ruby で扱うよりも効率が悪くなります。
+Ruby でラッパーメソッドを書き、キーワード引数を取らない C の関数を呼び出すことも検討してください。
+
+- **param** `keyword_hash` -- 分解するキーワード引数のハッシュです。
+- **param** `table` -- 取り出したいキーワードの ID の配列です。
+- **param** `required` -- 必須のキーワードの個数です。
+- **param** `optional` -- 省略できるキーワードの個数です。負の数も指定できます。
+- **param** `values` -- 取り出した値を格納するバッファです。
+- **return** -- `values` に格納した値の個数です。
+- **raise** `ArgumentError` -- 必須のキーワードがないとき。
+- **raise** `ArgumentError` -- 未知のキーワードがあったとき。
+
 ### void rb_include_module(VALUE klass, VALUE module)
 
 Module#append_features の実体。
@@ -193,6 +241,27 @@ def some_method(a, *rest, &block)
 ```
 
 - **SEE** <https://github.com/ruby/ruby/blob/master/doc/extension.ja.rdoc>
+
+### int rb_scan_args_kw(int kw_splat, int argc, const VALUE *argv, const char *fmt, ...)
+
+[f:rb_scan_args] と同じように、`argc` と `argv` の引数を `fmt` の書式に従って、続く VALUE への参照に格納します。
+キーワード引数が渡されているかどうかを、Ruby からの呼び出しで決めるのではなく、`kw_splat` で指定する点が異なります。
+`fmt` の書式は [f:rb_scan_args] と同じです。
+
+`kw_splat` には次のどれかを指定します。
+
+- `RB_SCAN_ARGS_PASS_CALLED_KEYWORDS` -- [f:rb_scan_args] と同じ動作です。
+- `RB_SCAN_ARGS_KEYWORDS` -- 最後の引数をキーワード引数のハッシュとして扱います。
+- `RB_SCAN_ARGS_LAST_HASH_KEYWORDS` -- 最後の引数がハッシュならキーワード引数として扱い、そうでなければ扱いません。
+
+- **param** `kw_splat` -- キーワード引数の扱いです。
+- **param** `argc` -- `argv` の要素数です。
+- **param** `argv` -- 解析する引数の配列です。
+- **param** `fmt` -- 引数の形式を表す書式文字列です。
+- **param** `...` -- 値を格納する変数への参照です。
+- **return** -- 実際に解析した引数の個数です。
+- **raise** `fatal` -- `fmt` の形式が不正なとき。
+- **raise** `ArgumentError` -- 引数の個数が合わないとき。
 
 ### VALUE rb_singleton_class(VALUE obj)
 

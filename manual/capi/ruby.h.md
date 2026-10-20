@@ -340,6 +340,16 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合�
 - **SEE** [f:rb_len_t], [f:LEN2NUM]
 #%end
 
+### MACRO long long NUM2LL(VALUE x)
+
+[c:Numeric] のオブジェクト `x` を、C の `long long` に変換します。
+逆の変換には [f:LL2NUM] を使います。
+
+- **param** `x` -- 変換する数値のオブジェクトです。
+- **return** -- `long long` に変換した値です。
+- **raise** `TypeError` -- `x` が数値でないとき。
+- **raise** `RangeError` -- `x` が `long long` で表せる範囲外のとき。
+
 ### MACRO long NUM2LONG(VALUE x)
 
 x を long 型の整数に変換します。
@@ -350,6 +360,28 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合�
 
 - **raise** `RangeError` -- x が long 型で表現できる値の範囲外であった場合に発生します。
 
+### MACRO off_t NUM2OFFT(VALUE x)
+
+[c:Numeric] のオブジェクト `x` を、C の `off_t` に変換します。
+`off_t` の大きさに応じて、`long long`、`long`、`int` への変換のどれかと同じになります。
+
+- **param** `x` -- 変換する数値のオブジェクトです。
+- **return** -- `off_t` に変換した値です。
+
+### MACRO size_t NUM2SIZET(VALUE x)
+
+[c:Integer] のオブジェクト `x` を、C の `size_t` に変換します。
+
+- **param** `x` -- 変換する整数のオブジェクトです。
+- **return** -- `size_t` に変換した値です。
+
+### MACRO ssize_t NUM2SSIZET(VALUE x)
+
+[c:Integer] のオブジェクト `x` を、C の `ssize_t` に変換します。
+
+- **param** `x` -- 変換する整数のオブジェクトです。
+- **return** -- `ssize_t` に変換した値です。
+
 ### MACRO unsigned int NUM2UINT(VALUE x)
 
 x を unsigned int 型の整数に変換します。
@@ -359,6 +391,15 @@ x が [c:Integer]、[c:Float] オブジェクトのいずれでもない場合�
 - **raise** `TypeError` -- x が nil の場合か、暗黙の型変換が成功しなかった場合に発生します。
 
 - **raise** `RangeError` -- x が unsigned int 型で表現できる値の範囲外であった場合に発生します。
+
+### MACRO unsigned long long NUM2ULL(VALUE x)
+
+[c:Numeric] のオブジェクト `x` を、C の `unsigned long long` に変換します。
+
+- **param** `x` -- 変換する数値のオブジェクトです。
+- **return** -- `unsigned long long` に変換した値です。
+- **raise** `TypeError` -- `x` が数値でないとき。
+- **raise** `RangeError` -- `x` が `unsigned long long` で表せる範囲外のとき。
 
 ### MACRO unsigned long NUM2ULONG(VALUE x)
 
@@ -447,7 +488,21 @@ obj を struct RArray* にキャストする。
 
 ### VALUE rb_fix_new(long v)
 
+### MACRO bool RB_FLOAT_TYPE_P(VALUE obj)
+
+`obj` が [c:Float] のインスタンスかどうかを調べます。
+
+- **param** `obj` -- 調べるオブジェクトです。
+- **return** -- `obj` が [c:Float] のインスタンスなら `true`、そうでなければ `false` です。
+
 ### VALUE rb_int_new(long v)
+
+### MACRO bool RB_INTEGER_TYPE_P(VALUE obj)
+
+`obj` が [c:Integer] のインスタンスかどうかを調べます。
+
+- **param** `obj` -- 調べるオブジェクトです。
+- **return** -- `obj` が [c:Integer] のインスタンスなら `true`、そうでなければ `false` です。
 
 #%since 4.1
 ### int rb_len2int(rb_len_t n)
@@ -505,6 +560,15 @@ extconf.rb からは `RbConfig::SIZEOF["rb_len_t"]` で大きさを取得でき�
 
 - **SEE** [f:rb_len2long]
 #%end
+
+### MACRO bool RB_TYPE_P(VALUE obj, enum ruby_value_type t)
+
+`obj` の内部の型が `t`(`T_NIL`、`T_FIXNUM` など)かどうかを調べます。
+型が合わないときに例外を発生させたいときは [f:Check_Type] を使います。
+
+- **param** `obj` -- 調べるオブジェクトです。
+- **param** `t` -- 型を表す定数です。
+- **return** -- `obj` が型 `t` なら `true`、そうでなければ `false` です。
 
 ### VALUE rb_uint_new(unsigned int v)
 
@@ -602,6 +666,52 @@ obj が Qfalse でも Qnil でもないとき真。
 任意の関数へのポインタ func を Ruby のメソッドの実体として適する型に強制キャストします。
 
 #%since 3.3
+### MACRO size_t RUBY_REF_EDGE(type, member)
+
+構造体 `type` のメンバ `member` を、`VALUE` への参照(edge)として宣言します。
+[f:RUBY_REFERENCES] のブロックの中で使います。
+値は構造体の先頭から `member` までのオフセットです。
+
+使い方は [f:RUBY_REFERENCES] を参照してください。
+
+- **param** `type` -- 構造体の型です。
+- **param** `member` -- 構造体の中の `VALUE` を持つメンバの名前です。
+- **return** -- `member` のオフセットです。
+#%end
+
+#%since 3.3
+### MACRO void RUBY_REFERENCES(ref_list_name)
+
+`ref_list_name` を、構造体が持つ `VALUE` への参照の一覧として定義します。
+構造体のメンバへのオフセットを並べた静的な配列になります。
+一覧は `RUBY_REF_END` で終わらせます。
+
+構造体の参照がこの一覧に書ける単純なものだけなら、`dmark` や `dcompact` を定義しなくても、GC が参照のマークとコンパクションに対応できます。
+一覧は `RUBY_REFS_LIST_PTR` で `dmark` の欄に指定し、`rb_data_type_t` の `flags` に `RUBY_TYPED_DECL_MARKING` を指定します。
+
+```c title="使用例"
+struct dir_data {
+    DIR *dir;
+    const VALUE path;
+    rb_encoding *enc;
+};
+
+RUBY_REFERENCES(dir_refs) = {
+    RUBY_REF_EDGE(struct dir_data, path),
+    RUBY_REF_END
+};
+
+static const rb_data_type_t dir_data_type = {
+    "dir",
+    {RUBY_REFS_LIST_PTR(dir_refs), dir_free, dir_memsize,},
+    0, NULL, RUBY_TYPED_WB_PROTECTED | RUBY_TYPED_FREE_IMMEDIATELY | RUBY_TYPED_DECL_MARKING
+};
+```
+
+- **param** `ref_list_name` -- 定義する参照の一覧の名前です。
+#%end
+
+#%since 3.3
 ### MACRO RUBY_TYPED_EMBEDDABLE
 
 `rb_data_type_t` の `flags` に指定するフラグです。
@@ -646,6 +756,18 @@ Fixnum, Symbol のインスタンス。
 val が String でなければ to_str メソッドを使って String に変換します。
 
 このマクロに渡した VALUE は ruby の GC から確実に保護されます。
+
+### MACRO char *StringValueCStr(VALUE v)
+
+`v` を [c:String] に変換し、その実体の C の文字列へのポインタを返します。
+[f:StringValuePtr] と同じですが、内容が C の文字列として使えるかも検査します。
+Ruby は C より広い範囲の内容を文字列として受け付けるため、この検査が必要になります。
+返り値は NUL で終端されています。
+
+- **param** `v` -- 変換する Ruby のオブジェクトです。呼び出し後は [c:String] になります。
+- **return** -- `v` の実体の C の文字列です。
+- **raise** `TypeError` -- 暗黙の型変換が定義されていないとき。
+- **raise** `ArgumentError` -- 内容が C の文字列として使えないとき。
 
 ### MACRO char *StringValuePtr(VALUE val)
 
