@@ -85,6 +85,16 @@ v が Ruby のオブジェクトであればマークします。
 
 ポインタ addr が指す変数を GC の対象にします。
 
+#%since 4.1
+`addr` は呼び出した [c:Ractor] に登録され、その [c:Ractor] の GC だけが格納されたオブジェクトをマークします。
+どの [c:Ractor] からでも登録できますが、`*addr` に格納できる値は、特別な定数、shareable なオブジェクト、登録した [c:Ractor] が所有する unshareable なオブジェクトに限ります。
+他の [c:Ractor] の unshareable なオブジェクトを格納すると、`addr` が参照したままオブジェクトが解放され、use-after-free になることがあります。
+プロセスと同じ寿命のアドレス (static な `VALUE`) は、main [c:Ractor] から登録するか、shareable な値だけを格納してください。
+登録した [c:Ractor] が [m:Ractor#value] で join されると、残りの登録は join した [c:Ractor] に移ります。
+そうでなければ、その [c:Ractor] が回収されたときに main [c:Ractor] に移ります。
+[feature:22277]
+#%end
+
 ### VALUE rb_gc_start(void)
 
 GC を起動します。
@@ -98,6 +108,10 @@ GC を起動します。
 ### void rb_global_variable(VALUE *var)
 
 [f:rb_gc_register_address] と同じです。
+
+#%since 4.1
+[c:Ractor] ごとの登録の扱いについても [f:rb_gc_register_address] を参照してください。
+#%end
 
 ### void rb_mark_hash(st_table *tbl)
 
@@ -141,6 +155,27 @@ GC を行いそれでもだめなときは NoMemoryError を raise する。
 ただしメモリ割り当てに失敗したときは
 GC を行いそれでもだめなときは NoMemoryError を raise する。
 つまりこの関数が返り値を返したときは常に割り当ては成功している。
+
+#%since 4.1
+### void ruby_xfree_sized(void *ptr, size_t size)
+
+[f:ruby_xfree] と同じですが、確保したときの大きさ `size` を受け取ります。
+C23 の `free_sized` に倣った関数で、GC がメモリ使用量をより正確に追跡できます。
+`size` は `ptr` を確保したときの大きさと正確に一致していなければならず、誤った大きさを渡すと未定義動作になり、クラッシュやメモリリークを起こすことがあります。
+[feature:21861]
+
+### void *ruby_xrealloc_sized(void *ptr, size_t newsiz, size_t oldsiz)
+
+[f:ruby_xrealloc] と同じですが、現在の大きさ `oldsiz` を受け取ります。
+`oldsiz` は `ptr` を確保したときの大きさと正確に一致していなければならず、誤った大きさを渡すと未定義動作になります。
+[feature:21861]
+
+### void *ruby_xrealloc2_sized(void *ptr, size_t newelems, size_t newsiz, size_t oldelems)
+
+`ruby_xrealloc2` と同じですが、現在の要素数 `oldelems` を受け取ります。
+`oldelems` は `ptr` を確保したときの要素数と正確に一致していなければならず、誤った大きさを渡すと未定義動作になります。
+[feature:21861]
+#%end
 
 ### static void run_final(VALUE obj)
 
