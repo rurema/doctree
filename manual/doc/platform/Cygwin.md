@@ -1,11 +1,18 @@
 # Cygwin
 
-Win32 上で [d:platform/Unix] をエミュレートする環境。Windows 上でまさに Unix
-を使っているような感覚が味わえる。GNU ユーティリティのおかげで下手な商用 Unix よりもある意味使いやすい。Cygwin環境でコンパイルされた実行ファイルは cygwin1.dll がリンクされ、この DLL が Unix のシステムコール等をエミュレートしてくれる。
+Windows 上で [d:platform/Unix] をエミュレートする環境です。GNU ユーティリティが揃っており、Windows 上で Unix に近い環境を使えます。
+Cygwin 環境でコンパイルされた実行ファイルには `cygwin1.dll` がリンクされ、この DLL が Unix のシステムコール等をエミュレートします。
 
-Cygwin を使う人にとって本当に必要な環境が Unix なのか Windows なのかは謎。(何事も行き過ぎはよくない。中間こそが心地よいのかもしれない)
+詳細は <https://www.cygwin.com/> を参照してください。
 
-<http://cygwin.com/> を参照。
+Cygwin 版 Ruby は `cygwin1.dll` を必要とする反面、Unix 版との互換性が高いので、Unix 用のスクリプトが変更なしに動く可能性が高いという利点があります。
+一方で、Cygwin 環境自体の制約を受けます。
 
-Cygwin版Rubyは、cygwin1.dllを必要とする反面、Unix版との互換性が高いので、Unix用のスクリプトが変更なしに動く可能性が高くて便利である。しかし、日本語パス名(「表」や「ソ」のように2バイト目に「\」を含むもの)が扱えないなど、
-Cygwin 環境自体の制約を受ける。
+Ruby のソースツリーには Cygwin 向けの設定(`configure.ac` の `cygwin*`)があり、MSYS2 の `msys` 環境も同様に扱われます。
+Cygwin には保守担当者 (platform maintainer) がいません。
+
+#%since 4.1
+Ruby 4.1 で、Cygwin 1.3 まで向けのサポートコードを削除しました。
+#%end
+
+削除されたプラットフォームの一覧は [d:platform/index] を参照してください。
