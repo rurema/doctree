@@ -65,7 +65,7 @@ val がもともと type クラスのインスタンスなら val をそのま�
 
 ### double rb_cstr_to_dbl(const char *p, int badcheck)
 
-### VALUE rb_eql(VALUE obj1, VALUE obj2)
+### int rb_eql(VALUE obj1, VALUE obj2)
 
 obj1.equal?(obj2) ならば Qtrue、そうでないならば Qfalse。
 
@@ -236,7 +236,7 @@ obj がクラス klass およびそのサブクラスのインスタンスのと
 [m:Kernel?.String] の実体です。
 val を文字列に変換します。
 
-### VALUE rb_to_id(VALUE name)
+### ID rb_to_id(VALUE name)
 
 String・Fixnum・Symbol を ID に変換します。
 

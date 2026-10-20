@@ -60,7 +60,11 @@ VALUE assoc_string(VALUE str_a, VALUE str_b)
 }
 ```
 
+#%since 4.1
+### VALUE rb_ary_entry(VALUE ary, rb_len_t offset)
+#%else
 ### VALUE rb_ary_entry(VALUE ary, long offset)
+#%end
 
 ary のインデックス offset の要素を返します。
 
@@ -87,7 +91,11 @@ VALUE num = RARRAY(ary)->ptr[offset];
 argc が 1 のときは ary[*argv]、
 2 のときは ary[argv[0], argv[1]] を返します。
 
+#%since 4.1
+### void rb_ary_store(VALUE ary, rb_len_t idx, VALUE val)
+#%else
 ### void rb_ary_store(VALUE ary, long idx, VALUE val)
+#%end
 
 配列 ary のインデックス idx に
 val を格納します。idx が範囲を越えるときは
@@ -166,7 +174,7 @@ void debug_print(VALUE ary)
 
 ary.sort
 
-### VALUE rb_ary_includes(ary, item)
+### VALUE rb_ary_includes(VALUE ary, VALUE item)
 
 ary.include? item
 

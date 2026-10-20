@@ -1,4 +1,8 @@
+#%since 4.1
+### VALUE rb_str_new(const char *ptr, rb_len_t len)
+#%else
 ### VALUE rb_str_new(const char *ptr, long len)
+#%end
 
 ptr から len バイト分をコピーして
 Ruby の文字列を作成し返します。
@@ -21,11 +25,19 @@ rb_str_new(ptr, strlen(ptr))
 
 文字列 str の複製を作成し返します。
 
+#%since 4.1
+### VALUE rb_str_substr(VALUE str, rb_len_t beg, rb_len_t len)
+#%else
 ### VALUE rb_str_substr(VALUE str, long beg, long len)
+#%end
 
 str[beg, len]
 
+#%since 4.1
+### VALUE rb_str_cat(VALUE str, const char *ptr, rb_len_t len)
+#%else
 ### VALUE rb_str_cat(VALUE str, const char *ptr, long len)
+#%end
 
 文字列 str に、長さ len (NUL 含まず)の C の文字列
 ptr を破壊的に連結します。

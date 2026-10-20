@@ -41,7 +41,7 @@ dmark、解放するときは dfree を使うようになります。
 Ruby 4.1 で削除されました。[feature:21768]
 #%end
 
-### VALUE rb_gc(void)
+### void rb_gc(void)
 
 明示的に GC を開始します。rb_gc_disable() で禁止中のときおよびすでに GC が実行中のときは実際には行われません。
 
@@ -69,9 +69,11 @@ Ruby 4.1 で削除されました。[feature:21768]
 
 v をマークします。
 
+#%since 3.4
 ### void rb_gc_mark_children(VALUE ptr)
 
 v から指されているオブジェクトを全てマークします。
+#%end
 
 ### void rb_gc_mark_locations(VALUE *start, VALUE *end)
 
@@ -129,9 +131,9 @@ NoMemoryErrorをraiseする。
 
 ### int ruby_stack_check(void)
 
-### int ruby_stack_length(VALUE **p)
+### size_t ruby_stack_length(VALUE **p)
 
-### void *ruby_xcalloc(long n, long size)
+### void *ruby_xcalloc(size_t n, size_t size)
 
 引数と返り値は calloc() と同じです。
 ただしメモリ割り当てに失敗したときは
@@ -142,14 +144,14 @@ GC を行いそれでもだめなときは例外 NoMemoryError を発生しま�
 
 以前 malloc/calloc/realloc して free していないポインタ x を開放します。ruby のシグナル機構とコンフリクトしません。
 
-### void *ruby_xmalloc(long size)
+### void *ruby_xmalloc(size_t size)
 
 引数と返り値は malloc() と同じ。
 ただしメモリ割り当てに失敗したときは
 GC を行いそれでもだめなときは NoMemoryError を raise する。
 つまりこの関数が返り値を返したときは常に割り当ては成功している。
 
-### void *ruby_xrealloc(void *ptr, long size)
+### void *ruby_xrealloc(void *ptr, size_t size)
 
 引数と返り値の意味は realloc() と同じ。
 ただしメモリ割り当てに失敗したときは
