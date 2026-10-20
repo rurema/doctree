@@ -1,35 +1,3 @@
-### static VALUE classname(VALUE klass)
-
-### static int cv_i(ID key, VALUE value, VALUE ary)
-
-#%until 3.2
-### static VALUE generic_ivar_defined(VALUE obj, ID id)
-#%end
-
-#%until 3.2
-### static VALUE generic_ivar_get(VALUE obj, ID id)
-#%end
-
-#%until 3.2
-### static int generic_ivar_remove(VALUE obj, ID id, VALUE *valp)
-#%end
-
-### static void generic_ivar_set(VALUE obj, ID id, VALUE val)
-
-### static ID global_id(const char *name)
-
-### static int gvar_i(ID key, struct global_entry *entry, VALUE ary)
-
-### void Init_var_tables(void)
-
-### static int ivar_i(ID key, struct global_entry *entry, VALUE ary)
-
-### static int list_i(ID key, ID value, VALUE ary)
-
-### static int mark_global_entry(ID key, struct global_entry *entry)
-
-### static VALUE original_module(VALUE c)
-
 ### void rb_alias_variable(ID name1, ID name2)
 
 #%until 3.2
@@ -128,8 +96,6 @@ klass のクラス変数 name に val を代入します。
 
 ### void rb_define_virtual_variable(const char *name, rb_gvar_getter_t *getter, rb_gvar_setter_t *setter)
 
-### VALUE rb_f_autoload(VALUE obj, VALUE klass, VALUE file)
-
 ### VALUE rb_f_global_variables(void)
 
 ### VALUE rb_f_trace_var(int argc, VALUE *argv)
@@ -137,14 +103,6 @@ klass のクラス変数 name に val を代入します。
 ### VALUE rb_f_untrace_var(int argc, VALUE *argv)
 
 ### void rb_free_generic_ivar(VALUE obj)
-
-### void rb_gc_mark_global_tbl(void)
-
-#%until 3.2
-### st_table *rb_generic_ivar_table(VALUE obj)
-#%end
-
-### struct global_entry *rb_global_entry(ID id)
 
 ### VALUE rb_gv_get(const char *name)
 #%# [1.5 feature]
@@ -160,18 +118,6 @@ VALUE v = rb_gv_get("$!")
 
 Ruby のグローバル変数 name に val を代入します。
 val を返します。
-
-### VALUE rb_gvar_defined(struct global_entry *entry)
-
-entry で示されるグローバル変数が定義されているなら真。
-
-### VALUE rb_gvar_get(struct global_entry *entry)
-
-グローバル変数のエントリ entry から値を取得します。
-
-### VALUE rb_gvar_set(struct global_entry *entry, VALUE val)
-
-グローバル変数のエントリ entry に値を代入します。
 
 ### VALUE rb_iv_get(VALUE obj, char *name)
 
@@ -194,8 +140,6 @@ val を代入します。
 
 オブジェクト obj のインスタンス変数 name に
 val を代入します。
-
-### void rb_mark_generic_ivar(VALUE obj)
 
 ### VALUE rb_mod_class_variables(int argc, const VALUE *argv, VALUE mod)
 
@@ -221,13 +165,3 @@ val を代入します。
 ### VALUE rb_path2class(const char *path)
 
 ### void rb_set_class_path(VALUE klass, VALUE under, const char *name)
-
-### static void rb_trace_eval(VALUE cmd, VALUE val)
-
-### static void remove_trace(struct global_variable *var)
-
-### static int sv_i(ID key, VALUE value, st_table *tbl)
-
-### static VALUE trace_en(struct global_variable *var)
-
-### static VALUE trace_ev(struct trace_data *data)

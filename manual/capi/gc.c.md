@@ -1,36 +1,3 @@
-### static VALUE define_final(int argc, VALUE *argv, VALUE os)
-
-### static void gc_sweep(void)
-
-GC のスイープフェイズを実行します。
-
-#%until 4.1
-### static VALUE id2ref(VALUE obj, VALUE id)
-
-ObjectSpace#_id2ref の実体。
-Ruby の整数で表されたオブジェクト ID id からオブジェクトを返します。
-#%end
-
-#%until 3.4
-### void Init_heap(void)
-#%end
-
-### static void init_mark_stack(void)
-
-### static inline int is_pointer_to_heap(void *ptr)
-
-#%until 3.1
-### static void mark_locations_array(register VALUE *x, register long n)
-#%end
-
-#%until 3.4
-### static void obj_free(VALUE obj)
-#%end
-
-### static VALUE os_each_obj(int argc, VALUE *argv)
-
-### static VALUE os_obj_of(VALUE of)
-
 #%until 4.1
 ### VALUE rb_data_object_alloc(VALUE klass, void *datap, RUBY_DATA_FUNC dmark, RUBY_DATA_FUNC dfree)
 
@@ -44,10 +11,6 @@ Ruby 4.1 で削除されました。[feature:21768]
 ### void rb_gc(void)
 
 明示的に GC を開始します。rb_gc_disable() で禁止中のときおよびすでに GC が実行中のときは実際には行われません。
-
-#%until 3.2
-### void rb_gc_call_finalizer_at_exit(void)
-#%end
 
 ### VALUE rb_gc_disable(void)
 
@@ -68,12 +31,6 @@ Ruby 4.1 で削除されました。[feature:21768]
 ### void rb_gc_mark(VALUE v)
 
 v をマークします。
-
-#%since 3.4
-### void rb_gc_mark_children(VALUE ptr)
-
-v から指されているオブジェクトを全てマークします。
-#%end
 
 ### void rb_gc_mark_locations(VALUE *start, VALUE *end)
 
@@ -124,10 +81,12 @@ GC を起動します。
 NoMemoryErrorをraiseする。
 しかしraise自体にもメモリ容量を使うため、メモリが足りない状況ではその途中でまたメモリ不足になる可能性がある。そのためこの関数では再帰を検出した場合はraiseではなくexitするようになっている。
 
+#%until 3.4
 ### VALUE rb_newobj(void)
 
 未使用のオブジェクト領域一つへのポインタを返す。
 返り値が返ってきたときは失敗はない。
+#%end
 
 ### int ruby_stack_check(void)
 
@@ -178,13 +137,3 @@ C23 の `free_sized` に倣った関数で、GC がメモリ使用量をより�
 `oldelems` は `ptr` を確保したときの要素数と正確に一致していなければならず、誤った大きさを渡すと未定義動作になります。
 [feature:21861]
 #%end
-
-### static void run_final(VALUE obj)
-
-obj のファイナライズを行います。
-
-#%until 3.4
-### static VALUE run_single_final(VALUE *args)
-#%end
-
-### static VALUE undefine_final(VALUE os, VALUE obj)

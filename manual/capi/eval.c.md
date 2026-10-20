@@ -1,83 +1,3 @@
-### static VALUE backtrace(int lev)
-
-#%until 3.3
-### static void bm_mark(struct METHOD *data)
-#%end
-
-### static VALUE bmcall(VALUE args, VALUE method)
-
-### static void call_trace_func(char *event, NODE *pos, VALUE self, ID id, VALUE klass)
-
-評価器の動作をフックする手続き trace_func を評価します。
-
-### static VALUE catch_i(ID tag)
-
-### static void compile_error(const char *at)
-
-### static VALUE errat_getter(ID id)
-
-### static void errat_setter(VALUE val, ID id, VALUE *var)
-
-### static int error_handle(int ex)
-
-### static void error_pos(void)
-
-#%until 3.2
-### static void error_print(void)
-#%end
-
-### static VALUE eval_under(VALUE under, VALUE self, VALUE src, const char *file, int line)
-
-### void Init_eval(void)
-
-### void Init_load(void)
-
-### void Init_Proc(void)
-
-### void Init_Thread(void)
-
-### static VALUE method_arity(VALUE method)
-
-### static VALUE method_clone(VALUE self)
-
-### static VALUE method_eq(VALUE method, VALUE other)
-
-### static VALUE method_inspect(VALUE method)
-
-### static VALUE method_unbind(VALUE obj)
-
-#%until 3.1
-### static VALUE mnew(VALUE klass, VALUE obj, ID id, VALUE mklass)
-#%end
-
-#%until 3.1
-### static VALUE mproc(void)
-#%end
-
-### static VALUE proc_arity(VALUE proc)
-
-### static VALUE proc_binding(VALUE proc)
-
-### static VALUE proc_call(VALUE proc, VALUE args)
-
-#%until 4.1
-### static VALUE proc_eq(VALUE self, VALUE other)
-#%end
-
-### static VALUE proc_new(VALUE klass)
-
-評価器のその時点でのスナップショットを保存する
-Proc オブジェクトを生成します。クラスを klass にします。
-
-### static VALUE proc_to_proc(VALUE proc)
-
-### static VALUE proc_to_s(VALUE self, VALUE other)
-
-### void rb_add_method(VALUE klass, ID mid, NODE *node, int noex)
-
-クラス klass に mid という名前のメソッドを定義する。
-その本体は node であり、noex で示される可視性を持つ。
-
 ### void rb_alias(VALUE klass, ID def, ID name)
 
 クラス klass に定義されたメソッド name の本体を実体とする新しいメソッド def を定義します。
@@ -94,36 +14,10 @@ Proc オブジェクトを生成します。クラスを klass にします。
 
 メソッドがブロック付きで呼ばれていれば true を返します。
 
-### static VALUE rb_call(VALUE klass, VALUE recv, ID mid, int argc, const VALUE *argv, int scope)
-
-クラス klass に定義されたメソッド mid を呼び出します。
-レシーバは recv で、引数は長さ argc の配列 argv で渡します。
-
-scope は以下のように呼び出しの形式を示します。
-
-- **`0`**:
-    obj.method()   (private/protected メソッドを呼べない)
-- **`1`**:
-    method()       (private/protected メソッドも呼べる)
-- **`2`**:
-    method_or_lvar (1とはエラーメッセージが変わる)
-- **`3`**:
-    super
-
-### static VALUE rb_call0(VALUE klass, VALUE recv, ID id, int argc, VALUE *argv, NODE *body, int nosuper)
-
-クラス klass に定義されたメソッドのコード body を起動します。
-レシーバは recv で、引数は長さ argc の配列 argv で渡します。
-nosuper が非ゼロのときは、この呼び出し中の super がエラーになります。
-
 ### VALUE rb_call_super(int argc, const VALUE *argv)
 
 Rubyレベルでの super です。
 現在評価中のメソッドのスーパークラスのメソッドを呼び出します。
-
-### static VALUE rb_callcc(VALUE self)
-
-Continuation オブジェクトを生成します。
 
 ### VALUE rb_catch(const char *tag, rb_block_call_func_t proc, VALUE data)
 
@@ -169,18 +63,12 @@ Init_foo(void)
 メソッドキャッシュをすべて消去します。
 #%end
 
-### static VALUE rb_cont_call(int argc, VALUE *argv, VALUE cont)
-
-Continuation#call の実体。
-
 #%until 3.2
 ### void rb_disable_super(VALUE klass, const char *name)
 
 クラス klass のメソッド name からの super を禁止します。
 klass とそのスーパークラスで name というメソッドが定義されていないときは例外 NameError を発生します。
 #%end
-
-### VALUE rb_dvar_defined(ID id)
 
 #%until 3.2
 ### void rb_enable_super(VALUE klass, const char *name)
@@ -216,67 +104,20 @@ state が NULL でなければそれに値が代入され Qnil を返します�
 
 例外オブジェクト err を投げます。
 
-#%until 3.2
-### void rb_exec_end_proc(void)
-
-END ブロックおよび Kernel#at_exit で登録した Proc オブジェクトを実行します。
-#%end
-
 ### void rb_exit(int status)
 
 ステータス status でインタプリタを終了させます。
 
-### static void rb_export_method(VALUE klass, ID name, ID noex)
-
 ### void rb_extend_object(VALUE obj, VALUE module)
 
-### static VALUE rb_f_abort(int argc, VALUE *argv)
-
-### static VALUE rb_f_at_exit(void)
-
-### static VALUE rb_f_binding(VALUE self)
-
-### static VALUE rb_f_block_given_p(void)
-
-block_given? の実体。
-現在評価中の (Ruby で実装された) メソッドに対してブロックが与えられていたら真。
-
-### static VALUE rb_f_caller(int argc, VALUE *argv)
-
-### static VALUE rb_f_catch(VALUE dmy, VALUE tag)
-
-### static VALUE rb_f_eval(int argc, VALUE *argv, VALUE self)
+### VALUE rb_f_abort(int argc, const VALUE *argv)
 
 ### VALUE rb_f_exit(int argc, const VALUE *argv)
-
-### static VALUE rb_f_load(int argc, VALUE *argv)
-
-load の実体。
-
-### static VALUE rb_f_local_variables(void)
-
-#%until 3.3
-### static VALUE rb_f_loop(void)
-
-loop の実体。永遠に yield を繰り返します。
-#%end
-
-### static VALUE rb_f_raise(int argc, VALUE *argv)
 
 ### VALUE rb_f_require(VALUE obj, VALUE fname)
 
 require の実体。
 self == obj として fname を require します。
-
-### static VALUE rb_f_send(int argc, VALUE *argv, VALUE recv)
-
-### static VALUE rb_f_throw(int argc, VALUE *argv)
-
-### static int rb_feature_p(const char *feature, int wait)
-
-### ID rb_frame_last_func(void)
-
-現在呼び出し中の (Rubyで実装された) メソッドの呼び出し名を返します。
 
 #%until 3.2
 ### void rb_frozen_class_p(VALUE klass)
@@ -355,66 +196,24 @@ tagには上記関数の引数で受け取ったstateを指定します。
 
 ### void rb_load_protect(VALUE fname, int wrap, int *state)
 
-### static void rb_longjmp(int tag, VALUE mesg)
-
-### void rb_mark_end_proc(void)
-
 ### int rb_method_boundp(VALUE klass, ID id, int ex)
-
-### static VALUE rb_mod_alias_method(VALUE mod, VALUE newname, VALUE oldname)
-
-### static VALUE rb_mod_append_features(VALUE module, VALUE include)
-
-### static VALUE rb_mod_define_method(int argc, VALUE *argv, VALUE mod)
-
-### static VALUE rb_mod_extend_object(VALUE mod, VALUE obj)
-
-### static VALUE rb_mod_include(int argc, VALUE *argv, VALUE module)
-
-### static VALUE rb_mod_method_defined(VALUE mod, VALUE mid)
-
-### static VALUE rb_mod_modfunc(int argc, VALUE *argv, VALUE module)
 
 ### VALUE rb_mod_module_eval(int argc, VALUE *argv, VALUE mod)
 
 Module#module_eval の実体です。
-
-### static VALUE rb_mod_nesting(void)
-
-### static VALUE rb_mod_private(int argc, VALUE *argv, VALUE module)
-
-### static VALUE rb_mod_private_method(int argc, VALUE *argv, VALUE obj)
-
-### static VALUE rb_mod_protected(int argc, VALUE *argv, VALUE module)
-
-### static VALUE rb_mod_public(int argc, VALUE *argv, VALUE module)
-
-### static VALUE rb_mod_public_method(int argc, VALUE *argv, VALUE obj)
-
-### static VALUE rb_mod_remove_method(VALUE mod, VALUE name)
-
-Module#remove_method の実体。
-
-モジュール mod から name という名前のメソッドを検索し、エントリを削除します。見付からなかったときは例外 [c:NameError] が発生します。
-
-### static VALUE rb_mod_s_constants(void)
-
-### static VALUE rb_mod_undef_method(VALUE mod, VALUE name)
 
 ### void rb_obj_call_init(VALUE obj, int argc, VALUE *argv)
 
 オブジェクト obj に対して initialize を呼び出します。
 引数は長さ argc の配列 argv で表され、ブロックが積んである場合はそれも自動的に渡されます。
 
-### static VALUE rb_obj_extend(int argc, VALUE *argv, VALUE obj)
-
 ### VALUE rb_obj_instance_eval(int argc, VALUE *argv, VALUE self)
 
-### static VALUE rb_obj_is_proc(VALUE proc)
+### VALUE rb_obj_is_proc(VALUE recv)
 
-proc が Proc のインスタンスであれば真。
+`recv` が [c:Proc] のインスタンスであれば真を返します。
 
-### static VALUE rb_obj_method(VALUE obj, VALUE vid)
+### VALUE rb_obj_method(VALUE recv, VALUE mid)
 
 ### int rb_obj_respond_to(VALUE obj, ID mid, int private_p)
 
@@ -440,8 +239,6 @@ if (status != 0) {
 ### void rb_provide(const char *feature)
 
 ライブラリ feature をロードしたものとしてロックをかけます。
-
-### static void rb_provide_feature(VALUE feature)
 
 ### int rb_provided(const char *feature)
 
@@ -472,21 +269,9 @@ obj にメソッド id が定義されているとき真。
 
 ### void rb_set_end_proc(void (*func)(VALUE), VALUE data)
 
-### static VALUE rb_thread_abort_exc(VALUE thread)
-
-### static VALUE rb_thread_abort_exc_set(VALUE thread, VALUE val)
-
-### static VALUE rb_thread_alive_p(VALUE thread)
-
-### static rb_thread_t rb_thread_alloc(VALUE klass)
-
 ### int rb_thread_alone(void)
 
 評価器にスレッドが一つしか存在しないとき真。
-
-### static VALUE rb_thread_aref(VALUE thread, VALUE id)
-
-### static VALUE rb_thread_aset(VALUE thread, VALUE id, VALUE val)
 
 ### void rb_thread_atfork(void)
 
@@ -496,19 +281,11 @@ obj にメソッド id が定義されているとき真。
 
 現在実行中のスレッドを返します。
 
-### static VALUE rb_thread_exit(void)
-
 ### void rb_thread_fd_close(int fd)
 
 ### int rb_thread_fd_writable(int fd)
 
-### static VALUE rb_thread_key_p(VALUE thread, VALUE id)
-
-### static VALUE rb_thread_keys(VALUE thread)
-
-### static VALUE rb_thread_kill(VALUE thread)
-
-### VALUE rb_thread_list(void)
+### VALUE rb_thread_kill(VALUE thread)
 
 ### VALUE rb_thread_local_aref(VALUE thread, ID id)
 
@@ -518,19 +295,9 @@ obj にメソッド id が定義されているとき真。
 
 メインスレッド (プロセスの一番最初に存在するスレッド) を返します。
 
-### static VALUE rb_thread_priority(VALUE thread)
-
-### static VALUE rb_thread_priority_set(VALUE thread, VALUE prio)
-
 ### VALUE rb_thread_run(VALUE thread)
 
 スレッド thread に実行権を渡します。
-
-### static VALUE rb_thread_s_abort_exc(void)
-
-### static VALUE rb_thread_s_abort_exc_set(VALUE self, VALUE val)
-
-### static VALUE rb_thread_s_kill(VALUE obj, VALUE th)
 
 ### void rb_thread_schedule(void)
 
@@ -543,14 +310,10 @@ obj にメソッド id が定義されているとき真。
 
 ### void rb_thread_sleep_forever(void)
 
-### static VALUE rb_thread_status(VALUE thread)
-
 ### VALUE rb_thread_stop(void)
 
 現在実行中のスレッドを停止します。
 他のスレッドから rb_thread_wakeup を呼ばれると再開します。
-
-### static VALUE rb_thread_stop_p(VALUE thread)
 
 #%since 4.0
 ### int rb_thread_wait_fd(int fd)
@@ -587,17 +350,6 @@ yield の C 版です。val を引数にブロックを実行します。
 この関数を呼び出したメソッドがブロックを伴わない場合は、例外
 [c:LocalJumpError] が発生します。
 
-### static VALUE rb_yield_0(VALUE val, VALUE self, VALUE klass, int pcall)
-
-カレントブロックに val を渡して処理を移す。
-そのさい self とクラスを self と klass に切り替える。
-Proc の呼び出しのときは pcall=非ゼロ にしなければならない。
-
-### static void remove_method(VALUE klass, ID mid)
-
-クラス klass 自体に登録されている mid という名前のメソッドを検索し、エントリを削除します。見付からなかったときは例外 [c:NameError]
-を発生します。
-
 ### void ruby_finalize(void)
 
 評価器プロセスの終了処理を行います。
@@ -613,53 +365,3 @@ argc と argv を ruby へのコマンドラインオプションとして処理
 ### void ruby_stop(int ex)
 
 評価器プロセスを停止します。
-
-### static NODE *search_method(VALUE klass, ID id, VALUE *origin)
-
-クラス klass から id という名前のメソッドエントリを検索し、返します。見付からなければ NULL を返します。
-
-このメソッドは undef を考慮しません。つまり m_tbl にエントリがあるならその内容に関らず探索は成功します。
-
-### static void set_backtrace(VALUE info, VALUE bt)
-
-### static void set_method_visibility(VALUE self, int argc, VALUE *argv, ID ex)
-
-### static VALUE set_trace_func(VALUE obj, VALUE trace)
-
-Kernel#set_trace_func の実体。
-評価器に対するフック手続きを登録します。
-
-### static VALUE specific_eval(int argc, VALUE *argv, VALUE klass, VALUE self)
-
-rb_obj_instance_eval と rb_mod_module_eval を共通化するための補助関数です。
-
-### static void stack_check(void)
-
-### static VALUE thgroup_add(VALUE group, VALUE thread)
-
-### static VALUE thgroup_list(VALUE group)
-
-### static VALUE thgroup_s_alloc(VALUE klass)
-
-### static void thread_free(rb_thread_t th)
-
-### static int thread_keys_i(ID key, VALUE value, VALUE ary)
-
-### static void thread_mark(rb_thread_t th)
-
-### static const char *thread_status_name(enum thread_status status)
-
-### static VALUE top_include(int argc, VALUE *argv)
-
-### static VALUE top_private(int argc, VALUE *argv)
-
-### static VALUE top_public(int argc, VALUE *argv)
-
-### static VALUE umethod_bind(VALUE method, VALUE recv)
-
-UnboundMethod method を recv に束縛します。
-
-### static VALUE yield_under(VALUE under, VALUE self)
-
-モジュール under の元のコンテキストで
-ruby_block を評価します。

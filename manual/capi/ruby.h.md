@@ -526,8 +526,6 @@ extconf.rb からは `RbConfig::SIZEOF["rb_len_t"]` で大きさを取得でき�
 
 ### MACRO struct RBasic *RBASIC(VALUE obj)
 
-### MACRO struct RBignum *RBIGNUM(VALUE obj)
-
 ### MACRO struct RClass *RCLASS(VALUE obj)
 
 ### MACRO struct RData *RDATA(VALUE obj)
@@ -537,10 +535,6 @@ extconf.rb からは `RbConfig::SIZEOF["rb_len_t"]` で大きさを取得でき�
 type 型のメモリ領域 var のサイズを n 個に変更する。
 
 ### MACRO struct RFile *RFILE(VALUE obj)
-
-### MACRO struct RFloat *RFLOAT(VALUE obj)
-
-### MACRO struct RHash *RHASH(VALUE obj)
 
 ### MACRO st_table *RHASH_TBL(VALUE h)
 
@@ -594,8 +588,6 @@ Ruby 4.1 から非推奨です。[feature:22232]
 - **param** `str` -- RString 構造体を指定します。
 
 - **SEE** [f:RSTRING_PTR]
-
-### MACRO struct RStruct *RSTRUCT(VALUE obj)
 
 ### MACRO int RTEST(VALUE obj)
 
