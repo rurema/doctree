@@ -67,13 +67,3 @@ key に対応する値をみつけて value にポインタを書きこむ。
 
 任意の型ポインタにvoid*でなくchar*を使っているのは古いライブラリだからだ。ANSI C以前はvoid*の意味に
 char*を使っていた。
-
-### static void stat_col(void)
-
-ハッシュの衝突に関する統計を /tmp/col に出力する。
-\#ifdef HASH_LOG のときだけ定義される、開発者用関数。
-
-### static int strhash(register char *string)
-
-文字列用のハッシュ関数。
-string に対するハッシュ値を計算する。

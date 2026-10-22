@@ -1,30 +1,3 @@
-### static int clone_method(ID mid, NODE *body, st_table *tbl)
-
-m_tbl 格納形式のメソッド (構文木) をコピーして返します。
-ST_CONTINUE を返します。
-
-### static int ins_methods_i(ID key, NODE *body, VALUE ary)
-
-rb_class_instance_methods() のイテレータブロック (通常版)。
-
-### static int ins_methods_priv_i(ID key, NODE *body, VALUE ary)
-
-rb_class_instance_methods() のイテレータブロック
-(private メソッド版)。
-
-### static int ins_methods_prot_i(ID key, NODE *body, VALUE ary)
-
-rb_class_instance_methods() のイテレータブロック
-(protected メソッド版)。
-
-### VALUE rb_class_boot(VALUE super)
-
-スーパークラスを super とするクラスオブジェクトを作成し、返します。
-
-### VALUE rb_class_inherited(VALUE super, VALUE klass)
-
-クラス super の下位クラス klass が作成されたことを受けて、super に対し inherited メソッドを呼び出します。
-
 ### VALUE rb_class_instance_methods(int argc, VALUE *argv, VALUE mod)
 
 Module#instance_methods の実体。
@@ -165,10 +138,6 @@ obj に特異メソッド name を定義します。
 
 Module#append_features の実体。
 クラスまたはモジュール klass にモジュール module をインクルードします。
-
-### VALUE rb_make_metaclass(VALUE obj, VALUE klass)
-
-クラス klass のインスタンス obj に特異クラスを導入し特異クラスと obj を結びつけます。
 
 ### VALUE rb_mod_ancestors(VALUE mod)
 
