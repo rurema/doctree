@@ -189,3 +189,94 @@ ary.clear
 ### VALUE rb_ary_concat(VALUE ary, VALUE x)
 
 ary.concat x
+
+#%since 4.1
+### VALUE rb_ary_cat(VALUE ary, const VALUE *train, rb_len_t len)
+#%else
+### VALUE rb_ary_cat(VALUE ary, const VALUE *train, long len)
+#%end
+
+配列 `ary` の末尾に、`train` が指す `len` 個のオブジェクトを破壊的に追加します。
+
+- **param** `ary` -- 追加先の配列です。
+- **param** `train` -- 追加するオブジェクトの C の配列です。
+- **param** `len` -- `train` の要素数です。
+- **return** -- 引数の `ary` です。
+- **raise** `IndexError` -- `len` が大きすぎるとき。
+- **raise** `FrozenError` -- `ary` が凍結されているとき。
+
+#%since 4.1
+### MACRO VALUE rb_ary_new4(rb_len_t n, const VALUE *elts)
+#%else
+### MACRO VALUE rb_ary_new4(long n, const VALUE *elts)
+#%end
+
+[f:rb_ary_new_from_values] の古い名前です。
+新しく書くコードでは [f:rb_ary_new_from_values] を使ってください。
+
+- **param** `n` -- `elts` の要素数です。
+- **param** `elts` -- 配列に入れるオブジェクトの C の配列です。
+- **return** -- 要素数 `n` の新しい配列です。
+
+#%since 4.1
+### VALUE rb_ary_new_capa(rb_len_t capa)
+#%else
+### VALUE rb_ary_new_capa(long capa)
+#%end
+
+要素を持たない配列を作成します。
+内部のバッファは `capa` 個の要素分を確保します。
+配列が最終的にある大きさまで育つと分かっているときは、サイズ変更を繰り返すよりも効率的です。
+
+- **param** `capa` -- 作成する配列の容量です。
+- **return** -- 空で、容量が `capa` の新しい配列です。
+
+#%since 4.1
+### VALUE rb_ary_new_from_args(rb_len_t n, ...)
+#%else
+### VALUE rb_ary_new_from_args(long n, ...)
+#%end
+
+可変長引数で渡されたオブジェクトから、要素数 `n` の配列を作成します。
+
+- **param** `n` -- 続く引数の個数です。
+- **param** `...` -- 配列に入れる Ruby のオブジェクトです。`n` 個渡します。
+- **return** -- 要素数 `n` の新しい配列です。
+
+#%since 4.1
+### VALUE rb_ary_new_from_values(rb_len_t n, const VALUE *elts)
+#%else
+### VALUE rb_ary_new_from_values(long n, const VALUE *elts)
+#%end
+
+C の配列で渡されたオブジェクトから、要素数 `n` の配列を作成します。
+[f:rb_ary_new_from_args] とは、オブジェクトの渡し方だけが異なります。
+
+- **param** `n` -- `elts` の要素数です。
+- **param** `elts` -- 配列に入れる Ruby のオブジェクトの C の配列です。
+- **return** -- 要素数 `n` の新しい配列です。
+
+#%since 4.1
+### VALUE rb_ary_subseq(VALUE ary, rb_len_t beg, rb_len_t len)
+#%else
+### VALUE rb_ary_subseq(VALUE ary, long beg, long len)
+#%end
+
+配列 `ary` の一部を、新しい配列として取り出します。
+
+範囲が `ary` の外であれば `Qnil` を返します。
+たとえば `[0, 1, 2, 3]` の 4 番目から 1,000,000,000 番目までを要求したときのように、返す配列は `len` より短くなることがあります。
+
+- **param** `ary` -- 対象の配列です。
+- **param** `beg` -- 取り出す部分の先頭の添字です。
+- **param** `len` -- 取り出す要素数です。
+- **return** -- `ary` の `beg` から `len` 個を持つ新しい配列です。範囲が外のときは `Qnil` です。
+
+### VALUE rb_ary_to_ary(VALUE obj)
+
+オブジェクトを強制的に配列にします。
+まず `obj` の `to_ary` メソッドを試し、結果があればそれを返します。
+そうでなければ、`obj` だけを要素とする長さ 1 の配列を作って返します。
+
+- **param** `obj` -- 変換するオブジェクトです。
+- **return** -- `obj` を表す配列です。

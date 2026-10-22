@@ -10,6 +10,59 @@
 
 ### void rb_backtrace(void)
 
+### VALUE rb_block_call(VALUE obj, ID mid, int argc, const VALUE *argv, rb_block_call_func_t proc, VALUE data2)
+
+`obj` のメソッド `mid` を、C の関数 `proc` をブロックとして渡して呼び出します。
+[f:rb_funcallv] にブロックとして関数を渡せるようにしたものです。
+
+メソッドが `yield` すると、`proc` が呼ばれます。
+`proc` は第 1 引数に `yield` された値を、第 2 引数に `data2` を受け取ります。
+複数の値が `yield` されたとき、第 1 引数にはそれらを集めた [c:Array] が渡されます。
+個々の値は、`proc` の第 3 引数 `argc` と第 4 引数 `argv` から取り出せます。
+
+```c title="使用例"
+VALUE
+my_own_iterator(RB_BLOCK_CALL_FUNC_ARGLIST(y, c))
+{
+    ID plus = rb_intern("+");
+    return rb_funcall(c, plus, 1, y);
+}
+
+VALUE
+my_own_method(VALUE self)
+{
+    ID each = rb_intern("each");
+    return rb_block_call(self, each, 0, 0, my_own_iterator, self);
+}
+```
+
+- **param** `obj` -- メソッドのレシーバです。
+- **param** `mid` -- 呼び出すメソッドの名前です。
+- **param** `argc` -- `argv` の要素数です。
+- **param** `argv` -- メソッドに渡す引数の配列です。
+- **param** `proc` -- ブロックとして働く関数です。
+- **param** `data2` -- `proc` の第 2 引数として渡される値です。
+- **return** -- `obj` のメソッド `mid` の返り値です。
+
+### VALUE rb_block_call_kw(VALUE obj, ID mid, int argc, const VALUE *argv, rb_block_call_func_t proc, VALUE data2, int kw_splat)
+
+[f:rb_block_call] と同じですが、`argv` の最後の要素をキーワード引数として扱うかどうかを `kw_splat` で指定します。
+
+`kw_splat` には次のどれかを指定します。
+
+- `RB_NO_KEYWORDS` -- `argv` の最後はキーワード引数ではありません。
+- `RB_PASS_KEYWORDS` -- `argv` の最後はキーワード引数です。
+- `RB_PASS_CALLED_KEYWORDS` -- 現在のメソッドがキーワード引数付きで呼ばれていれば、キーワード引数を渡します。
+
+- **param** `obj` -- メソッドのレシーバです。
+- **param** `mid` -- 呼び出すメソッドの名前です。
+- **param** `argc` -- キーワード引数を含めた引数の個数です。
+- **param** `argv` -- メソッドに渡す引数の配列です。
+- **param** `proc` -- ブロックとして働く関数です。
+- **param** `data2` -- `proc` の第 2 引数として渡される値です。
+- **param** `kw_splat` -- キーワード引数の扱いです。
+- **return** -- `obj` のメソッド `mid` の返り値です。
+
 ### int rb_block_given_p(void)
 
 メソッドがブロック付きで呼ばれていれば true を返します。
@@ -144,6 +197,156 @@ recv に対してメソッド name を呼びだし、メソッドの返り値を
 
 rb_funcall2 との違いは、プライベートメソッドを呼び出せないことです。
 
+### VALUE rb_funcall_passing_block(VALUE recv, ID mid, int argc, const VALUE *argv)
+
+[f:rb_funcallv_public] と同じですが、現在のメソッドが受け取ったブロックを、呼び出すメソッドのブロックとして渡します。
+`foo(x, y, &z)` のようなメソッドが、受け取ったブロックをそのまま別のメソッドへ渡したいときに使います。
+
+```c title="使用例"
+/* def foo(x, y, &z)
+ *   x.open(y, &z)
+ * end
+ * に相当する C の関数 */
+VALUE
+foo_translated_into_C(VALUE self, VALUE x, VALUE y)
+{
+    ID open = rb_intern("open");
+
+    return rb_funcall_passing_block(x, open, 1, &y);
+}
+```
+
+- **param** `recv` -- メソッドのレシーバです。
+- **param** `mid` -- 呼び出すメソッドの名前です。
+- **param** `argc` -- `argv` の要素数です。
+- **param** `argv` -- メソッドに渡す引数の配列です。
+- **return** -- 呼び出したメソッドの返り値です。
+- **raise** `NoMethodError` -- メソッドがないとき、またはメソッドが private か protected のとき。
+- **raise** `Exception` -- 呼び出したメソッドの中で例外が発生したとき。
+
+### VALUE rb_funcall_passing_block_kw(VALUE recv, ID mid, int argc, const VALUE *argv, int kw_splat)
+
+[f:rb_funcall_passing_block] と同じですが、`argv` の最後の要素をキーワード引数として扱うかどうかを `kw_splat` で指定します。
+
+`kw_splat` には次のどれかを指定します。
+
+- `RB_NO_KEYWORDS` -- `argv` の最後はキーワード引数ではありません。
+- `RB_PASS_KEYWORDS` -- `argv` の最後はキーワード引数です。
+- `RB_PASS_CALLED_KEYWORDS` -- 現在のメソッドがキーワード引数付きで呼ばれていれば、キーワード引数を渡します。
+
+- **param** `recv` -- メソッドのレシーバです。
+- **param** `mid` -- 呼び出すメソッドの名前です。
+- **param** `argc` -- `argv` の要素数です。
+- **param** `argv` -- メソッドに渡す引数の配列です。
+- **param** `kw_splat` -- キーワード引数の扱いです。
+- **return** -- 呼び出したメソッドの返り値です。
+- **raise** `NoMethodError` -- メソッドがないとき、またはメソッドが private か protected のとき。
+- **raise** `Exception` -- 呼び出したメソッドの中で例外が発生したとき。
+
+### VALUE rb_funcall_with_block(VALUE recv, ID mid, int argc, const VALUE *argv, VALUE procval)
+
+[f:rb_funcallv_public] と同じですが、ブロックを渡せます。
+ブロックには [c:Proc] のインスタンスを指定します。
+`to_proc` による変換が必要なときは、この関数に渡す前に済ませてください。
+ただし `nil` とシンボルは特別に受け付けます。
+
+- **param** `recv` -- メソッドのレシーバです。
+- **param** `mid` -- 呼び出すメソッドの名前です。
+- **param** `argc` -- `argv` の要素数です。
+- **param** `argv` -- メソッドに渡す引数の配列です。
+- **param** `procval` -- ブロックとして渡す [c:Proc]、シンボル、または `nil` です。
+- **return** -- 呼び出したメソッドの返り値です。
+- **raise** `NoMethodError` -- メソッドがないとき、またはメソッドが private か protected のとき。
+- **raise** `Exception` -- 呼び出したメソッドの中で例外が発生したとき。
+
+### VALUE rb_funcall_with_block_kw(VALUE recv, ID mid, int argc, const VALUE *argv, VALUE procval, int kw_splat)
+
+[f:rb_funcall_with_block] と同じですが、`argv` の最後の要素をキーワード引数として扱うかどうかを `kw_splat` で指定します。
+
+`kw_splat` には次のどれかを指定します。
+
+- `RB_NO_KEYWORDS` -- `argv` の最後はキーワード引数ではありません。
+- `RB_PASS_KEYWORDS` -- `argv` の最後はキーワード引数です。
+- `RB_PASS_CALLED_KEYWORDS` -- 現在のメソッドがキーワード引数付きで呼ばれていれば、キーワード引数を渡します。
+
+- **param** `recv` -- メソッドのレシーバです。
+- **param** `mid` -- 呼び出すメソッドの名前です。
+- **param** `argc` -- `argv` の要素数です。
+- **param** `argv` -- メソッドに渡す引数の配列です。
+- **param** `procval` -- ブロックとして渡す [c:Proc]、シンボル、または `nil` です。
+- **param** `kw_splat` -- キーワード引数の扱いです。
+- **return** -- 呼び出したメソッドの返り値です。
+- **raise** `NoMethodError` -- メソッドがないとき、またはメソッドが private か protected のとき。
+- **raise** `Exception` -- 呼び出したメソッドの中で例外が発生したとき。
+
+### VALUE rb_funcallv(VALUE recv, ID mid, int argc, const VALUE *argv)
+
+`recv` のメソッド `mid` を、引数を C の配列で渡して呼び出します。
+private や protected のメソッドも呼び出せます。
+[f:rb_funcall] とは、引数の渡し方だけが異なります。
+
+- **param** `recv` -- メソッドのレシーバです。
+- **param** `mid` -- 呼び出すメソッドの名前です。
+- **param** `argc` -- `argv` の要素数です。
+- **param** `argv` -- メソッドに渡す引数の配列です。
+- **return** -- 呼び出したメソッドの返り値です。
+- **raise** `NoMethodError` -- メソッドがないとき。
+- **raise** `Exception` -- 呼び出したメソッドの中で例外が発生したとき。
+
+### VALUE rb_funcallv_kw(VALUE recv, ID mid, int argc, const VALUE *argv, int kw_splat)
+
+[f:rb_funcallv] と同じですが、`argv` の最後の要素をキーワード引数として扱うかどうかを `kw_splat` で指定します。
+
+`kw_splat` には次のどれかを指定します。
+
+- `RB_NO_KEYWORDS` -- `argv` の最後はキーワード引数ではありません。
+- `RB_PASS_KEYWORDS` -- `argv` の最後はキーワード引数です。
+- `RB_PASS_CALLED_KEYWORDS` -- 現在のメソッドがキーワード引数付きで呼ばれていれば、キーワード引数を渡します。
+
+- **param** `recv` -- メソッドのレシーバです。
+- **param** `mid` -- 呼び出すメソッドの名前です。
+- **param** `argc` -- `argv` の要素数です。
+- **param** `argv` -- メソッドに渡す引数の配列です。
+- **param** `kw_splat` -- キーワード引数の扱いです。
+- **return** -- 呼び出したメソッドの返り値です。
+- **raise** `NoMethodError` -- メソッドがないとき。
+- **raise** `Exception` -- 呼び出したメソッドの中で例外が発生したとき。
+
+### VALUE rb_funcallv_public(VALUE recv, ID mid, int argc, const VALUE *argv)
+
+`recv` のメソッド `mid` を、引数を C の配列で渡して呼び出します。
+[f:rb_funcallv] と異なり、public のメソッドだけを呼び出せます。
+Ruby の [m:Object#public_send] に近い動作です。
+
+- **param** `recv` -- メソッドのレシーバです。
+- **param** `mid` -- 呼び出すメソッドの名前です。
+- **param** `argc` -- `argv` の要素数です。
+- **param** `argv` -- メソッドに渡す引数の配列です。
+- **return** -- 呼び出したメソッドの返り値です。
+- **raise** `NoMethodError` -- メソッドがないとき。
+- **raise** `NoMethodError` -- メソッドが private か protected のとき。
+- **raise** `Exception` -- 呼び出したメソッドの中で例外が発生したとき。
+
+### VALUE rb_funcallv_public_kw(VALUE recv, ID mid, int argc, const VALUE *argv, int kw_splat)
+
+[f:rb_funcallv_public] と同じですが、`argv` の最後の要素をキーワード引数として扱うかどうかを `kw_splat` で指定します。
+
+`kw_splat` には次のどれかを指定します。
+
+- `RB_NO_KEYWORDS` -- `argv` の最後はキーワード引数ではありません。
+- `RB_PASS_KEYWORDS` -- `argv` の最後はキーワード引数です。
+- `RB_PASS_CALLED_KEYWORDS` -- 現在のメソッドがキーワード引数付きで呼ばれていれば、キーワード引数を渡します。
+
+- **param** `recv` -- メソッドのレシーバです。
+- **param** `mid` -- 呼び出すメソッドの名前です。
+- **param** `argc` -- `argv` の要素数です。
+- **param** `argv` -- メソッドに渡す引数の配列です。
+- **param** `kw_splat` -- キーワード引数の扱いです。
+- **return** -- 呼び出したメソッドの返り値です。
+- **raise** `NoMethodError` -- メソッドがないとき。
+- **raise** `NoMethodError` -- メソッドが private か protected のとき。
+- **raise** `Exception` -- 呼び出したメソッドの中で例外が発生したとき。
+
 ### void rb_interrupt(void)
 
 ### void rb_iter_break(void)
@@ -152,6 +355,16 @@ break の C 用インターフェイスです。
 現在評価中のブロックから抜けます。
 
 代表的には、rb_iterate の block_proc 中で使います。
+
+### void rb_iter_break_value(VALUE val)
+
+現在もっとも内側のブロックから抜けます。
+[f:rb_iter_break] と同じですが、イテレータの評価結果となる値 `val` を指定できます。
+この値はブロックの `yield` の値ではなく、ブロックを渡されたイテレータ(メソッド)の返り値になります。
+この関数は呼び出し元に戻りません。
+
+- **param** `val` -- イテレータの返り値にする値です。
+- **raise** `LocalJumpError` -- ブロックの外から呼ばれたとき。
 
 #%until 4.1
 ### VALUE rb_iterate(VALUE (*call_proc)(), VALUE date1, VALUE (*block_proc)(), date2)
@@ -350,6 +563,61 @@ yield の C 版です。val を引数にブロックを実行します。
 この関数を呼び出したメソッドがブロックを伴わない場合は、例外
 [c:LocalJumpError] が発生します。
 
+### VALUE rb_yield_splat(VALUE ary)
+
+配列 `ary` の要素を、それぞれ別の引数としてブロックに `yield` します。
+[f:rb_yield_values2] と同じですが、引数を Ruby の配列で指定します。
+
+- **param** `ary` -- 展開して渡す引数の配列です。
+- **return** -- ブロックの評価結果です。
+- **raise** `LocalJumpError` -- ブロックが渡されていないとき。
+
+### VALUE rb_yield_splat_kw(VALUE ary, int kw_splat)
+
+[f:rb_yield_splat] と同じですが、`ary` の最後の要素をキーワード引数として扱うかどうかを `kw_splat` で指定します。
+
+`kw_splat` には `RB_NO_KEYWORDS`(最後はキーワード引数ではない)か `RB_PASS_KEYWORDS`(最後はキーワード引数)を指定します。
+`RB_PASS_CALLED_KEYWORDS` はここでは意味を持ちません。
+
+- **param** `ary` -- 展開して渡す引数の配列です。
+- **param** `kw_splat` -- キーワード引数の扱いです。
+- **return** -- ブロックの評価結果です。
+- **raise** `LocalJumpError` -- ブロックが渡されていないとき。
+
+### VALUE rb_yield_values(int n, ...)
+
+`n` 個の引数をブロックに `yield` します。
+[f:rb_yield] と同じですが、引数を可変長で渡します。
+Ruby の引数 1 つにつき、C の引数 1 つを使います。
+
+- **param** `n` -- ブロックに渡す引数の個数です。
+- **param** `...` -- ブロックに渡す引数です。`n` 個渡します。
+- **return** -- ブロックの評価結果です。
+- **raise** `LocalJumpError` -- ブロックが渡されていないとき。
+
+### VALUE rb_yield_values2(int n, const VALUE *argv)
+
+`n` 個の引数をブロックに `yield` します。
+[f:rb_yield_values] と同じですが、引数を C の配列 `argv` で渡します。
+
+- **param** `n` -- ブロックに渡す引数の個数です。
+- **param** `argv` -- ブロックに渡す引数の配列です。
+- **return** -- ブロックの評価結果です。
+- **raise** `LocalJumpError` -- ブロックが渡されていないとき。
+
+### VALUE rb_yield_values_kw(int n, const VALUE *argv, int kw_splat)
+
+[f:rb_yield_values2] と同じですが、`argv` の最後の要素をキーワード引数として扱うかどうかを `kw_splat` で指定します。
+
+`kw_splat` には `RB_NO_KEYWORDS`(最後はキーワード引数ではない)か `RB_PASS_KEYWORDS`(最後はキーワード引数)を指定します。
+`RB_PASS_CALLED_KEYWORDS` はここでは意味を持ちません。
+
+- **param** `n` -- ブロックに渡す引数の個数です。
+- **param** `argv` -- ブロックに渡す引数の配列です。
+- **param** `kw_splat` -- キーワード引数の扱いです。
+- **return** -- ブロックの評価結果です。
+- **raise** `LocalJumpError` -- ブロックが渡されていないとき。
+
 ### void ruby_finalize(void)
 
 評価器プロセスの終了処理を行います。
@@ -361,6 +629,21 @@ yield の C 版です。val を引数にブロックを実行します。
 ### void *ruby_options(int argc, char **argv)
 
 argc と argv を ruby へのコマンドラインオプションとして処理します。
+
+### int ruby_run_node(void *n)
+
+コンパイル済みのソースを実行し、このプロセスを終了します。
+`n` には `rb_load_file` などで得た、中身の見えない「ノード」のポインタを渡します。
+
+- **param** `n` -- 実行するソースを表す、中身の見えないノードのポインタです。
+- **return** -- ソースの実行に成功すると `EXIT_SUCCESS` です。エラーが起きたときは `EXIT_FAILURE` です。
+
+### void ruby_script(const char *name)
+
+現在のスクリプト名を `name` に設定します。
+Ruby レベルで `$0 = name` とするのと似ていますが、インタプリタが保持するスクリプト名も変わります。
+
+- **param** `name` -- 設定するファイル名です。
 
 ### void ruby_stop(int ex)
 

@@ -152,3 +152,27 @@ val を to_int メソッドを使って Ruby の整数に変換します。
 #%until 3.1
 ### VALUE rb_sym_interned_p(VALUE sym)
 #%end
+
+### VALUE rb_obj_hide(VALUE obj)
+
+オブジェクトを Ruby のコードから見えなくします。
+`RBasic::klass` フィールドを消去し、オブジェクトを内部オブジェクトにします。
+[m:ObjectSpace?.each_object] ではこのオブジェクトを列挙できなくなります。
+同時に、そのオブジェクトに対してメソッドを呼び出す手段も失われます。
+
+GC の管理下に置いたまま、内部のデータ構造を Ruby から見えなくしたいときに便利です。
+元に戻すには [f:rb_obj_reveal] を使います。
+
+- **param** `obj` -- 隠す Ruby のオブジェクトです。
+- **return** -- 引数の `obj` です。
+
+### VALUE rb_obj_reveal(VALUE obj, VALUE klass)
+
+[f:rb_obj_hide] で隠したオブジェクトを、再び見えるようにします。
+`RBasic::klass` を `klass` に戻します。
+`obj` が本来属していたクラスを、呼び出し側が正しく渡してください。
+この関数をクラス情報の変更に使ってはいけません。
+
+- **param** `obj` -- 隠されていた Ruby のオブジェクトです。
+- **param** `klass` -- `obj` のクラスです。
+- **return** -- 引数の `obj` です。
