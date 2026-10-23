@@ -1,0 +1,1241 @@
+lib	loc	class	typemark	names	real_verdict	rbs_verdict	detail	first_raw
+benchmark	manual/api/benchmark.md:146	Benchmark	.#	benchmark	name-mismatch	ok	doc=caption,label_width,fmtstr real=caption,label_width,format	### module_function def benchmark(caption = "", label_width = nil, fmtstr = nil, *labels){|rep| ...} -> [Benchmark::Tms]
+benchmark	manual/api/benchmark.md:280	Benchmark::Tms	#	+	name-mismatch	ok	doc=x real=other	### def +(x) -> Benchmark::Tms
+benchmark	manual/api/benchmark.md:290	Benchmark::Tms	#	-	name-mismatch	ok	doc=x real=other	### def -(x) -> Benchmark::Tms
+benchmark	manual/api/benchmark.md:324	Benchmark::Tms	#	format	name-mismatch	ok	doc=fmtstr real=format	### def format(fmtstr = nil, *args) -> String
+benchmark	manual/api/benchmark.md:483	Benchmark::Report	.	new	name-mismatch	no-rbs	doc=width,fmtstr real=width,format	### def Benchmark::Report.new(width = 0, fmtstr = nil) -> Benchmark::Report
+bigdecimal	manual/api/bigdecimal/BigDecimal.md:362	BigDecimal	#	/,div,quo	ok	rbs-unmatched-overload	doc has no opt/rest/kw; C arity=-1 [unmatched-overload: BigDecimal#div#1]	### def div(other) -> BigDecimal
+bigdecimal	manual/api/bigdecimal/BigDecimal.md:419	BigDecimal	#	div	doc-no-optional?	rbs-unmatched-overload	doc has no opt/rest/kw; C arity=-1 [unmatched-overload: BigDecimal#div#0]	### def div(other, n) -> BigDecimal
+bigdecimal	manual/api/bigdecimal/BigDecimal.md:633	BigDecimal	#	precs	no-real	no-rbs		### def precs -> [Integer, Integer]
+bigdecimal	manual/api/bigdecimal/BigDecimal.md:733	BigDecimal	#	**,power	name-mismatch	ok	doc=0 real=1 / doc=2 real=1 / doc=n real=y	### def power(n)       -> BigDecimal
+bigdecimal	manual/api/bigdecimal/BigDecimal.md:747	BigDecimal	#	sqrt	name-mismatch	ok	doc=n real=prec	### def sqrt(n) -> BigDecimal
+bigdecimal	manual/api/bigdecimal/BigDecimal.md:855	BigDecimal	#	_dump	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def _dump -> String
+bigdecimal/util	manual/api/bigdecimal/util.md:78	Rational	#	to_d	req-count	ok	doc=1 real=0	### def to_d(nFig)     -> BigDecimal
+cgi/util	manual/api/cgi/util.md:13	CGI	.	escape	no-class	no-rbs		### def CGI.escape(string) -> String
+cgi/util	manual/api/cgi/util.md:30	CGI	.	unescape	no-class	no-rbs		### def CGI.unescape(string) -> String
+cgi/util	manual/api/cgi/util.md:46	CGI	.	escapeURIComponent	no-class	no-rbs		### def CGI.escapeURIComponent(string) -> String
+cgi/util	manual/api/cgi/util.md:67	CGI	.	unescapeURIComponent	no-class	no-rbs		### def CGI.unescapeURIComponent(string) -> String
+cgi/util	manual/api/cgi/util.md:82	CGI	.	escapeHTML,escape_html	no-class	no-rbs		### def CGI.escapeHTML(string) -> String
+cgi/util	manual/api/cgi/util.md:100	CGI	.	unescapeHTML,unescape_html	no-class	no-rbs		### def CGI.unescapeHTML(string) -> String
+cgi/util	manual/api/cgi/util.md:114	CGI	.	escapeElement,escape_element	no-class	no-rbs		### def CGI.escapeElement(string, *elements) -> String
+cgi/util	manual/api/cgi/util.md:133	CGI	.	unescapeElement,unescape_element	no-class	no-rbs		### def CGI.unescapeElement(string, *elements) -> String
+csv	manual/api/csv/CSV.md:215	CSV	.	new	opt-count	ok	doc=1 real=0	### def CSV.new(data, options = Hash.new) -> CSV
+csv	manual/api/csv/CSV.md:325	CSV	.	filter	opt-count	no-rbs	doc=1 real=2 / doc=1 real=0 / doc=2 real=0	### def CSV.filter(options = Hash.new){|row| ... }
+csv	manual/api/csv/CSV.md:395	CSV	.	foreach	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def CSV.foreach(path, options = Hash.new) -> Enumerator
+csv	manual/api/csv/CSV.md:421	CSV	.	generate	opt-count	ok	doc=2 real=1	### def CSV.generate(str = "", options = Hash.new){|csv| ... } -> String
+csv	manual/api/csv/CSV.md:461	CSV	.	generate_line	opt-count	no-rbs	doc=1 real=0	### def CSV.generate_line(row, options = Hash.new) -> String
+csv	manual/api/csv/CSV.md:522	CSV	.	open	kw-mismatch	no-rbs	doc=2 real=1 / doc=req[] opt[] rest0 real=req[] opt[] rest1	### def CSV.open(filename, mode = "rb", options = Hash.new){|csv| ... } -> nil
+csv	manual/api/csv/CSV.md:636	CSV	.	parse	opt-count	ok	doc=1 real=0	### def CSV.parse(str, options = Hash.new){|row| ... } -> nil
+csv	manual/api/csv/CSV.md:681	CSV	.	parse_line	opt-count	ok	doc=1 real=0	### def CSV.parse_line(line, options = Hash.new) -> Array
+csv	manual/api/csv/CSV.md:704	CSV	.	read,readlines	opt-count	ok	doc=1 real=0	### def CSV.read(path, options = Hash.new) -> [Array] | CSV::Table
+csv	manual/api/csv/CSV.md:759	CSV	.	table	opt-count	no-rbs	doc=1 real=0	### def CSV.table(path, options = Hash.new) -> CSV::Table | [Array]
+csv	manual/api/csv/CSV.md:841	CSV	#	binmode	forwarding?	no-rbs	real forwards *, **, &	### def binmode -> self
+csv	manual/api/csv/CSV.md:857	CSV	#	close	forwarding?	no-rbs	real forwards *, **, &	### def close -> nil
+csv	manual/api/csv/CSV.md:865	CSV	#	close_read	forwarding?	no-rbs	real forwards *, **, &	### def close_read -> nil
+csv	manual/api/csv/CSV.md:873	CSV	#	close_write	forwarding?	no-rbs	real forwards *, **, &	### def close_write -> nil
+csv	manual/api/csv/CSV.md:881	CSV	#	closed?	forwarding?	no-rbs	real forwards *, **, &	### def closed? -> bool
+csv	manual/api/csv/CSV.md:1038	CSV	#	external_encoding	forwarding?	no-rbs	real forwards *, **, &	### def external_encoding -> Encoding | nil
+csv	manual/api/csv/CSV.md:1042	CSV	#	fcntl	forwarding?	no-rbs	real forwards *, **, &	### def fcntl(cmd, arg = 0)    -> Integer
+csv	manual/api/csv/CSV.md:1077	CSV	#	flock	req-count	no-rbs	doc=1 real=0	### def flock(operation)    -> 0 | false
+csv	manual/api/csv/CSV.md:1081	CSV	#	flush	forwarding?	no-rbs	real forwards *, **, &	### def flush    -> self
+csv	manual/api/csv/CSV.md:1120	CSV	#	fsync	forwarding?	no-rbs	real forwards *, **, &	### def fsync -> 0 | nil
+csv	manual/api/csv/CSV.md:1214	CSV	#	internal_encoding	forwarding?	no-rbs	real forwards *, **, &	### def internal_encoding   -> Encoding | nil
+csv	manual/api/csv/CSV.md:1222	CSV	#	ioctl	req-count	no-rbs	doc=1 real=0	### def ioctl(cmd, arg = 0)    -> Integer
+csv	manual/api/csv/CSV.md:1230	CSV	#	isatty,tty?	forwarding?	no-rbs	real forwards *, **, &	### def isatty    -> bool
+csv	manual/api/csv/CSV.md:1267	CSV	#	pid	forwarding?	no-rbs	real forwards *, **, &	### def pid    -> Integer | nil
+csv	manual/api/csv/CSV.md:1275	CSV	#	pos,tell	forwarding?	no-rbs	real forwards *, **, &	### def pos    -> Integer
+csv	manual/api/csv/CSV.md:1284	CSV	#	pos=	forwarding?	no-rbs	real forwards *, **, &	### def pos=(n)
+csv	manual/api/csv/CSV.md:1339	CSV	#	reopen	forwarding?	no-rbs	real forwards *, **, &	### def reopen(io) -> self
+csv	manual/api/csv/CSV.md:1397	CSV	#	seek	forwarding?	no-rbs	real forwards *, **, &	### def seek(offset, whence = IO::SEEK_SET)    -> 0
+csv	manual/api/csv/CSV.md:1445	CSV	#	stat	rest	no-rbs	doc=0 real=1	### def stat    -> File::Stat
+csv	manual/api/csv/CSV.md:1453	CSV	#	string	forwarding?	no-rbs	real forwards *, **, &	### def string -> String
+csv	manual/api/csv/CSV.md:1461	CSV	#	sync	forwarding?	no-rbs	real forwards *, **, &	### def sync -> bool
+csv	manual/api/csv/CSV.md:1469	CSV	#	sync=	forwarding?	no-rbs	real forwards *, **, &	### def sync=(newstate)
+csv	manual/api/csv/CSV.md:1485	CSV	#	truncate	forwarding?	no-rbs	real forwards *, **, &	### def truncate(path, length)    -> 0
+csv	manual/api/csv/CSV__Row.md:129	CSV::Row	#	[]=	req-count	ok	doc=2 real=0 / doc=3 real=0	### def []=(header_or_index, value)
+csv	manual/api/csv/CSV__Row.md:263	CSV::Row	#	empty?	forwarding?	ok	real forwards *, **, &	### def empty? -> bool
+csv	manual/api/csv/CSV__Row.md:317	CSV::Row	#	header?,include?	name-mismatch	ok	doc=name real=header	### def header?(name) -> bool
+csv	manual/api/csv/CSV__Row.md:387	CSV::Row	#	length,size	forwarding?	ok	real forwards *, **, &	### def length -> Integer
+csv	manual/api/csv/CSV__Row.md:408	CSV::Row	#	to_csv,to_s	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def to_csv -> String
+csv	manual/api/csv/CSV__Table.md:35	CSV::Table	.	new	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[headers] rest0	### def CSV::Table.new(array_of_rows) -> CSV::Table
+csv	manual/api/csv/CSV__Table.md:292	CSV::Table	#	delete	req-count	ok	doc=1 real=0	### def delete(index_or_header) -> object
+csv	manual/api/csv/CSV__Table.md:377	CSV::Table	#	empty?	forwarding?	ok	real forwards *, **, &	### def empty? -> bool
+csv	manual/api/csv/CSV__Table.md:419	CSV::Table	#	length,size	forwarding?	ok	real forwards *, **, &	### def length -> Integer
+csv	manual/api/csv/CSV__Table.md:492	CSV::Table	#	to_csv,to_s	opt-count	ok	doc=1 real=0	### def to_csv(options = Hash.new) -> String
+csv	manual/api/csv/CSV__Table.md:510	CSV::Table	#	values_at	req-count	ok	doc=1 real=0	### def values_at(indices_or_headers) -> Array
+date	manual/api/date/Date.md:146	Date	.	_httpdate	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def Date._httpdate(str) -> Hash
+date	manual/api/date/Date.md:164	Date	.	_iso8601	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def Date._iso8601(str) -> Hash
+date	manual/api/date/Date.md:184	Date	.	_jisx0301	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def Date._jisx0301(str) -> Hash
+date	manual/api/date/Date.md:258	Date	.	_rfc2822,_rfc822	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def Date._rfc2822(str) -> Hash
+date	manual/api/date/Date.md:278	Date	.	_rfc3339	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def Date._rfc3339(str) -> Hash
+date	manual/api/date/Date.md:419	Date	.	_xmlschema	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def Date._xmlschema(str) -> Hash
+date	manual/api/date/DateTime.md:151	DateTime	.	today	no-real	no-rbs		### def DateTime.today(start = Date::ITALY) -> Date
+delegate	manual/api/delegate.md:23	Kernel	#	DelegateClass	no-real	no-rbs		### def DelegateClass(superclass) -> object
+delegate	manual/api/delegate.md:102	Delegator	#	marshal_load	name-mismatch	ok	doc=obj real=data	### def marshal_load(obj) -> object
+delegate	manual/api/delegate.md:108	Delegator	#	method_missing	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def method_missing(m, *args) -> object
+delegate	manual/api/delegate.md:120	Delegator	#	respond_to?	no-real	no-rbs		### def respond_to?(m) -> bool
+delegate	manual/api/delegate.md:134	Delegator	#	methods	opt-count	ok	doc=0 real=1	### def methods -> [Symbol]
+delegate	manual/api/delegate/SimpleDelegator.md:23	SimpleDelegator	.	new	no-real:inherited	no-rbs		### def SimpleDelegator.new(obj) -> object
+digest	manual/api/digest/Digest__Base.md:23	Digest::Base	.	new	no-real:inherited	no-rbs		### def Digest::Base.new            -> Digest::Base
+digest	manual/api/digest/Digest__Base.md:27	Digest::Base	.	digest	no-real	no-rbs		### def Digest::Base.digest(str) -> String
+digest	manual/api/digest/Digest__Base.md:32	Digest::Base	.	hexdigest	no-real	no-rbs		### def Digest::Base.hexdigest(str) -> String
+digest	manual/api/digest/Digest__Base.md:38	Digest::Base	.	base64digest	no-real	no-rbs		### def Digest::Base.base64digest(str) -> String
+digest	manual/api/digest/Digest__Base.md:52	Digest::Base	.	file	no-real	no-rbs		### def Digest::Base.file(path) -> object
+digest	manual/api/digest/Digest__Base.md:68	Digest::Base	#	clone,dup	no-real	no-rbs		### def dup   -> Digest::Base
+digest	manual/api/digest/Digest__Base.md:73	Digest::Base	#	digest	no-real	no-rbs		### def digest -> String
+digest	manual/api/digest/Digest__Base.md:90	Digest::Base	#	digest!	no-real	no-rbs		### def digest! -> String
+digest	manual/api/digest/Digest__Base.md:109	Digest::Base	#	hexdigest,to_s	no-real	no-rbs		### def hexdigest -> String
+digest	manual/api/digest/Digest__Base.md:137	Digest::Base	#	hexdigest!	no-real	no-rbs		### def hexdigest! -> String
+digest	manual/api/digest/Digest__Base.md:154	Digest::Base	#	base64digest	no-real	no-rbs		### def base64digest(str = nil) -> String
+digest	manual/api/digest/Digest__Base.md:178	Digest::Base	#	base64digest!	no-real	no-rbs		### def base64digest! -> String
+digest	manual/api/digest/Digest__Base.md:221	Digest::Base	#	==	no-real	no-rbs		### def ==(md)  -> bool
+digest	manual/api/digest/Digest__Base.md:251	Digest::Base	#	file	no-real	no-rbs		### def file(path) -> self
+digest	manual/api/digest/Kernel.md:6	Kernel	#	Digest	no-real	no-rbs		### def Digest(name) -> object
+drb	manual/api/drb.md:213	DRb	.#	start_service	name-mismatch	no-rbs	doc=uri,front,config_or_acl real=uri,front,config	### module_function def start_service(uri=nil, front=nil, config_or_acl=nil) -> ()
+drb	manual/api/drb/DRbServer.md:115	DRb::DRbServer	#	verbose=	name-mismatch	no-rbs	doc=on real=v	### def verbose=(on)
+drb/unix	manual/api/drb/DRbUNIXSocket.md:64	DRb::DRbUNIXSocket	#	uri	no-real	no-rbs		### def uri -> String
+drb/timeridconv	manual/api/drb/timeridconv.md:23	DRb::TimerIdConv	.	new	name-mismatch	no-rbs	doc=timeout real=keeping	### def DRb::TimerIdConv.new(timeout=600) -> DRb::TimerIdConv
+erb	manual/api/erb.md:388	ERB	#	filename=	req-count	rbs-unmatched-sig	doc=0 real=1	### def filename= -> String
+erb	manual/api/erb.md:516	ERB::DefMethod	.#	def_erb_method	name-mismatch	ok	doc=methodname,erb real=methodname,erb_or_fname	### module_function def def_erb_method(methodname, erb) -> nil
+etc	manual/api/etc/Etc.md:98	Etc	.#	getgrgid	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### module_function def getgrgid(gid) -> Etc::Group
+etc	manual/api/etc/Etc__Passwd.md:104	Etc::Passwd	#	change	no-real	ok		### def change -> Integer
+etc	manual/api/etc/Etc__Passwd.md:108	Etc::Passwd	#	change=	no-real	ok		### def change=(change)
+etc	manual/api/etc/Etc__Passwd.md:112	Etc::Passwd	#	quota	no-real	no-rbs		### def quota -> Integer
+etc	manual/api/etc/Etc__Passwd.md:116	Etc::Passwd	#	quota=	no-real	no-rbs		### def quota=(quota)
+etc	manual/api/etc/Etc__Passwd.md:120	Etc::Passwd	#	age	no-real	no-rbs		### def age -> Integer
+etc	manual/api/etc/Etc__Passwd.md:124	Etc::Passwd	#	age=	no-real	no-rbs		### def age=(age)
+etc	manual/api/etc/Etc__Passwd.md:128	Etc::Passwd	#	uclass	no-real	ok		### def uclass -> String
+etc	manual/api/etc/Etc__Passwd.md:132	Etc::Passwd	#	uclass=	no-real	ok		### def uclass=(class)
+etc	manual/api/etc/Etc__Passwd.md:136	Etc::Passwd	#	comment	no-real	no-rbs		### def comment -> String
+etc	manual/api/etc/Etc__Passwd.md:140	Etc::Passwd	#	comment=	no-real	no-rbs		### def comment=(comment)
+etc	manual/api/etc/Etc__Passwd.md:144	Etc::Passwd	#	expire	no-real	ok		### def expire -> Integer
+etc	manual/api/etc/Etc__Passwd.md:148	Etc::Passwd	#	expire=	no-real	ok		### def expire=(expire)
+fiddle	manual/api/fiddle/2.0/Fiddle.md:13	Fiddle	.	win32_last_error	no-real	no-rbs		### def Fiddle.win32_last_error -> Integer
+fiddle	manual/api/fiddle/2.0/Fiddle.md:21	Fiddle	.	win32_last_error=	no-real	no-rbs		### def Fiddle.win32_last_error=(errno)
+fiddle	manual/api/fiddle/2.0/Fiddle.md:37	Fiddle	.	last_error=	name-mismatch	no-rbs	doc=errno real=error	### def Fiddle.last_error=(errno)
+fiddle	manual/api/fiddle/2.0/Fiddle.md:47	Fiddle	.#	dlopen	name-mismatch	no-rbs	doc=lib real=library	### module_function def dlopen(lib)                    -> Fiddle::Handle
+fiddle/import	manual/api/fiddle/2.0/Fiddle__CStruct.md:28	Fiddle::CStruct	.	new	no-real:inherited	no-rbs		### def Fiddle::CStruct.new(addr) -> Fiddle::CStruct
+fiddle/import	manual/api/fiddle/2.0/Fiddle__CStruct.md:42	Fiddle::CStruct	.	malloc	no-real	no-rbs		### def Fiddle::CStruct.malloc -> Fiddle::CStruct
+fiddle/import	manual/api/fiddle/2.0/Fiddle__CStruct.md:55	Fiddle::CStruct	.	size	no-real	no-rbs		### def Fiddle::CStruct.size -> Integer
+fiddle/import	manual/api/fiddle/2.0/Fiddle__CStruct.md:63	Fiddle::CStruct	#	to_i	no-real	no-rbs		### def to_i -> Integer
+fiddle/import	manual/api/fiddle/2.0/Fiddle__CStruct.md:67	Fiddle::CStruct	#	to_ptr	no-real	no-rbs		### def to_ptr -> Fiddle::Pointer
+fiddle	manual/api/fiddle/2.0/Fiddle__Function.md:211	Fiddle::Closure::BlockCaller	.	new	name-mismatch	no-rbs	doc=ret,args,abi real=ctype,args,abi	### def Fiddle::Closure::BlockCaller.new(ret, args, abi=Fiddle::Function::DEFAULT){ ... } -> Fiddle::Closure::BlockCaller
+fiddle/import	manual/api/fiddle/2.0/Fiddle__Importer.md:109	Fiddle::Importer	#	sizeof	name-mismatch	no-rbs	doc=t real=ty	### def sizeof(t) -> Integer
+fiddle/import	manual/api/fiddle/2.0/Fiddle__Importer.md:188	Fiddle::Importer	#	typealias	name-mismatch	no-rbs	doc=new,orig real=alias_type,orig_type	### def typealias(new, orig) -> ()
+fiddle/import	manual/api/fiddle/2.0/Fiddle__Importer.md:241	Fiddle::Importer	#	create_value,value	name-mismatch	no-rbs	doc=type,val real=ty,val	### def create_value(type, val = nil) -> Fiddle::CStruct
+fileutils	manual/api/fileutils/FileUtils.md:193	FileUtils	.#	cmp,compare_file,identical?	name-mismatch	ok	doc=file_a,file_b real=a,b	### module_function def cmp(file_a, file_b)          -> bool
+fileutils	manual/api/fileutils/FileUtils.md:209	FileUtils	.#	compare_stream	name-mismatch	ok	doc=io_a,io_b real=a,b	### module_function def compare_stream(io_a, io_b) -> bool
+fileutils	manual/api/fileutils/FileUtils.md:217	FileUtils	.#	copy_entry	opt-count	ok	doc=2 real=3	### module_function def copy_entry(src, dest, preserve = false, dereference_root = false) -> ()
+fileutils	manual/api/fileutils/FileUtils.md:232	FileUtils	.#	copy_file	name-mismatch	ok	doc=src,dest,preserve,dereference_root real=src,dest,preserve,dereference	### module_function def copy_file(src, dest, preserve = false, dereference_root = true) -> ()
+fileutils	manual/api/fileutils/FileUtils.md:535	FileUtils	.#	mkdir	name-mismatch	ok	doc=dir real=list	### module_function def mkdir(dir, mode: nil, noop: nil, verbose: nil) -> ()
+fileutils	manual/api/fileutils/FileUtils.md:712	FileUtils	.#	rmdir	name-mismatch	ok	doc=dir real=list	### module_function def rmdir(dir, parents: nil, noop: nil, verbose: nil) -> ()
+fileutils	manual/api/fileutils/FileUtils.md:820	FileUtils	.#	uptodate?	name-mismatch	ok	doc=newer,older_list real=new,old_list	### module_function def uptodate?(newer, older_list) -> bool
+forwardable	manual/api/forwardable.md:52	Forwardable	.	debug=	req-count	no-rbs	doc=0 real=1	### def Forwardable.debug= -> bool
+io/console	manual/api/io/console.md:75	IO	#	getch	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def getch -> String
+io/console	manual/api/io/console.md:324	IO	#	pressed?	req-count	ok	doc_req=1 real_arity=0	### def pressed?(key) -> bool
+io/console	manual/api/io/console.md:414	IO	.	console	doc-no-optional?	rbs-unmatched-overload	doc has no opt/rest/kw; C arity=-1 [unmatched-overload: IO.console#1 IO.console#2]	### def IO.console -> File | nil
+ipaddr	manual/api/ipaddr.md:61	IPAddr	#	&	name-mismatch	ok	doc=ipaddr real=other	### def &(ipaddr) -> IPAddr
+ipaddr	manual/api/ipaddr.md:68	IPAddr	#	|	name-mismatch	ok	doc=ipaddr real=other	### def |(ipaddr) -> IPAddr
+ipaddr	manual/api/ipaddr.md:91	IPAddr	#	==	name-mismatch	ok	doc=ipaddr real=other	### def ==(ipaddr) -> bool
+ipaddr	manual/api/ipaddr.md:111	IPAddr	#	===,include?	name-mismatch	ok	doc=ipaddr real=other	### def include?(ipaddr) -> bool
+ipaddr	manual/api/ipaddr.md:236	IPAddr	#	prefix=	name-mismatch	ok	doc=prefixlen real=prefix	### def prefix=(prefixlen)
+irb	manual/api/irb.md:721	IRB	.	irb_at_exit	no-real	no-rbs		### def IRB.irb_at_exit -> ()
+irb	manual/api/irb.md:727	IRB	.	irb_exit	req-count	no-rbs	doc=2 real=0	### def IRB.irb_exit(irb, ret) -> object
+irb/context	manual/api/irb/context.md:101	IRB::Context	.	new	opt-count	no-rbs	doc=3 real=2	### def IRB::Context.new(irb, workspace = nil, input_method = nil, output_method = nil) -> IRB::Context
+irb/context	manual/api/irb/context.md:182	IRB::Context	#	debug?	no-real	no-rbs		### def debug? -> bool
+irb/context	manual/api/irb/context.md:190	IRB::Context	#	debug_level	no-real	no-rbs		### def debug_level -> Integer
+irb/context	manual/api/irb/context.md:198	IRB::Context	#	debug_level=	no-real	no-rbs		### def debug_level=(val)
+irb/context	manual/api/irb/context.md:225	IRB::Context	#	evaluate	name-mismatch	no-rbs	doc=line,line_no real=statement,line_no	### def evaluate(line, line_no) -> object
+irb/context	manual/api/irb/context.md:229	IRB::Context	#	exit	no-real	no-rbs		### def exit(ret = 0) -> object
+irb/context	manual/api/irb/context.md:367	IRB::Context	#	irb_path=	name-mismatch	no-rbs	doc=val real=path	### def irb_path=(val)
+irb/context	manual/api/irb/context.md:451	IRB::Context	#	prompt_n=	name-mismatch	no-rbs	doc=val real=_	### def prompt_n=(val)
+irb/context	manual/api/irb/context.md:575	IRB::Context	#	workspace=	no-real	no-rbs		### def workspace=(val)
+irb/ext/eval_history	manual/api/irb/ext/eval_history.md:23	IRB::Context	#	eval_history=	name-mismatch	no-rbs	doc=val real=no	### def eval_history=(val)
+irb/ext/tracer	manual/api/irb/ext/tracer.md:25	IRB::Context	#	use_tracer,use_tracer?	no-real	no-rbs		### def use_tracer  -> bool
+irb/input-method	manual/api/irb/input-method/IRB__FileInputMethod.md:10	IRB::FileInputMethod	.	new	name-mismatch	no-rbs	doc=path real=file	### def IRB::FileInputMethod.new(path) -> IRB::FileInputMethod
+irb/input-method	manual/api/irb/input-method/IRB__InputMethod.md:10	IRB::InputMethod	.	new	no-real:inherited	no-rbs		### def IRB::InputMethod.new(file = STDIN_FILE_NAME) -> IRB::InputMethod
+irb/input-method	manual/api/irb/input-method/IRB__InputMethod.md:16	IRB::InputMethod	#	file_name	no-real	no-rbs		### def file_name -> String
+irb/input-method	manual/api/irb/input-method/IRB__InputMethod.md:30	IRB::InputMethod	#	readable_atfer_eof?	no-real	no-rbs		### def readable_atfer_eof? -> false
+irb/input-method	manual/api/irb/input-method/IRB__ReadlineInputMethod.md:33	IRB::ReadlineInputMethod	#	readable_atfer_eof?	no-real	no-rbs		### def readable_atfer_eof? -> false
+irb/input-method	manual/api/irb/input-method/IRB__ReadlineInputMethod.md:37	IRB::ReadlineInputMethod	#	line	no-real	no-rbs		### def line(line_no) -> String
+irb/input-method	manual/api/irb/input-method/IRB__ReadlineInputMethod.md:43	IRB::ReadlineInputMethod	#	encoding	no-real	no-rbs		### def encoding -> Encoding
+irb/input-method	manual/api/irb/input-method/IRB__StdioInputMethod.md:26	IRB::StdioInputMethod	#	readable_atfer_eof?	no-real	no-rbs		### def readable_atfer_eof? -> true
+irb/inspector	manual/api/irb/inspector.md:30	IRB::Inspector	#	inspect_value	req-count	no-rbs	doc=1 real=2	### def inspect_value(v) -> ()
+irb/xmp	manual/api/irb/xmp.md:79	Kernel	#	xmp	no-real	no-rbs		### def xmp(exps, bind = nil) -> XMP
+json	manual/api/json/JSON.md:10	JSON	.	[]	req-count	ok	doc=2 real=1	### def JSON.[](object, options) -> object
+json	manual/api/json/JSON.md:79	JSON	.	create_id=	name-mismatch	ok	doc=identifier real=new_value	### def JSON.create_id=(identifier)
+json	manual/api/json/JSON.md:239	JSON	.#	dump	opt-count	ok	doc=2 real=3	### module_function def dump(object, io = nil, limit = nil) -> String | IO
+json	manual/api/json/JSON.md:271	JSON	.#	fast_generate,fast_unparse	forwarding?	ok	doc=0 real=1 / real forwards *, **, &	### module_function def fast_generate(object) -> String
+json	manual/api/json/JSON.md:292	JSON	.#	generate,unparse	forwarding?	ok	doc=object,state real=obj,opts / real forwards *, **, &	### module_function def generate(object, state = nil) -> String
+json	manual/api/json/JSON.md:453	JSON	.#	parse	name-mismatch	ok	doc=source,options real=source,opts	### module_function def parse(source, options = {}) -> object
+json	manual/api/json/JSON.md:495	JSON	.#	parse!	name-mismatch	ok	doc=source,options real=source,opts	### module_function def parse!(source, options = {}) -> object
+json	manual/api/json/JSON.md:541	JSON	.#	pretty_generate,pretty_unparse	forwarding?	ok	doc=object,options real=obj,opts / real forwards *, **, &	### module_function def pretty_generate(object, options = nil) -> String
+json	manual/api/json/JSON__Coder.md:74	JSON::Coder	#	dump,generate	opt-count	no-rbs	doc=0 real=1 / doc=2 real=1	### def dump(object) -> String
+json	manual/api/json/JSON__Parser.md:10	JSON::Parser	.	new	name-mismatch	no-rbs	doc=source,options real=source,opts	### def JSON::Parser.new(source, options => {}) -> JSON::Parser
+json	manual/api/json/JSON__State.md:17	JSON::State	.	new	name-mismatch	no-rbs	doc=options real=opts	### def JSON::State.new(options = {}) -> JSON::State
+json	manual/api/json/JSON__State.md:235	JSON::State	#	configure,merge	req-count	no-rbs	doc=0 real=1	### def configure(options = {}) -> self
+json	manual/api/json/JSON__State.md:552	JSON::State	#	generate	doc-no-optional?	no-rbs	doc has no opt/rest/kw; C arity=-1	### def generate(obj) -> String
+json	manual/api/json/Kernel.md:47	Kernel	#	JSON	name-mismatch	ok	doc=object,options real=object,opts	### def JSON(object, options = {}) -> object
+json/add/bigdecimal	manual/api/json/add/bigdecimal.md:12	BigDecimal	.	json_create	no-class	ok		### def BigDecimal.json_create(hash) -> BigDecimal
+json/add/bigdecimal	manual/api/json/add/bigdecimal.md:26	BigDecimal	#	to_json	no-class	ok		### def to_json(*args) -> String
+json/add/complex	manual/api/json/add/complex.md:10	Complex	.	json_create	name-mismatch	ok	doc=hash real=object	### def Complex.json_create(hash) -> Complex
+json/add/date	manual/api/json/add/date.md:12	Date	.	json_create	name-mismatch	ok	doc=hash real=object	### def Date.json_create(hash) -> Date
+json/add/date_time	manual/api/json/add/date_time.md:12	DateTime	.	json_create	name-mismatch	ok	doc=hash real=object	### def DateTime.json_create(hash) -> DateTime
+json/add/exception	manual/api/json/add/exception.md:10	Exception	.	json_create	name-mismatch	ok	doc=hash real=object	### def Exception.json_create(hash) -> Exception
+json/add/ostruct	manual/api/json/add/ostruct.md:12	OpenStruct	.	json_create	no-class	ok		### def OpenStruct.json_create(hash) -> OpenStruct
+json/add/ostruct	manual/api/json/add/ostruct.md:25	OpenStruct	#	to_json	no-class	ok		### def to_json(*args) -> String
+json/add/range	manual/api/json/add/range.md:10	Range	.	json_create	name-mismatch	ok	doc=hash real=object	### def Range.json_create(hash) -> Range
+json/add/rational	manual/api/json/add/rational.md:10	Rational	.	json_create	name-mismatch	ok	doc=hash real=object	### def Rational.json_create(hash) -> Rational
+json/add/regexp	manual/api/json/add/regexp.md:10	Regexp	.	json_create	name-mismatch	ok	doc=hash real=object	### def Regexp.json_create(hash) -> Regexp
+json/add/string	manual/api/json/add/string.md:13	String	.	json_create	name-mismatch	no-rbs	doc=hash real=object	### def String.json_create(hash) -> String
+json/add/string	manual/api/json/add/string.md:28	String	#	to_json_raw	forwarding?	no-rbs	real forwards *, **, &	### def to_json_raw(*args) -> String
+json/add/struct	manual/api/json/add/struct.md:10	Struct	.	json_create	name-mismatch	ok	doc=hash real=object	### def Struct.json_create(hash) -> Struct
+json/add/symbol	manual/api/json/add/symbol.md:10	Symbol	.	json_create	name-mismatch	ok	doc=hash real=o	### def Symbol.json_create(hash) -> Symbol
+json/add/symbol	manual/api/json/add/symbol.md:18	Symbol	#	to_json	opt-count	ok	doc=0 real=1	### def to_json(*args) -> String
+json/add/time	manual/api/json/add/time.md:10	Time	.	json_create	name-mismatch	ok	doc=hash real=object	### def Time.json_create(hash) -> Time
+kconv	manual/api/kconv.md:40	String	#	kconv	name-mismatch	no-rbs	doc=out_code,in_code real=to_enc,from_enc	### def kconv(out_code, in_code = Kconv::AUTO) -> String
+kconv	manual/api/kconv.md:175	Kconv	.#	kconv	name-mismatch	ok	doc=str,out_code,in_code real=str,to_enc,from_enc	### module_function def kconv(str, out_code, in_code = Kconv::AUTO) -> String
+logger	manual/api/logger/Logger.md:154	Logger	#	datetime_format=	name-mismatch	ok	doc=format real=datetime_format	### def datetime_format=(format)
+logger	manual/api/logger/Logger.md:404	Logger	#	level=,sev_threshold=	name-mismatch	ok	doc=level real=severity	### def level=(level)
+logger	manual/api/logger/Logger__LogDevice.md:10	Logger::LogDevice	.	new	opt-count	ok	doc=2 real=1	### def Logger::LogDevice.new(log = nil, opt = {}) -> Logger::LogDevice
+matrix	manual/api/matrix/Matrix.md:232	Matrix	.	hstack	req-count	no-rbs	doc=0 real=1	### def Matrix.hstack(*matrices) -> Matrix
+matrix	manual/api/matrix/Matrix.md:247	Matrix	.	vstack	req-count	no-rbs	doc=0 real=1	### def Matrix.vstack(*matrices) -> Matrix
+matrix	manual/api/matrix/Matrix.md:329	Matrix	#	find_index,index	opt-count	no-rbs	doc=1 real=0	### def index(value, selector = :all) -> [Integer, Integer] | nil
+matrix	manual/api/matrix/Matrix.md:407	Matrix	#	minor	req-count	no-rbs	doc=4 real=0 / unusual:from_row..to_row	### def minor(from_row, row_size, from_col, col_size) -> Matrix
+matrix	manual/api/matrix/Matrix.md:434	Matrix	#	[]=	name-mismatch	no-rbs	doc=row,col,v real=i,j,v	### def []=(row, col, v)
+matrix	manual/api/matrix/Matrix.md:536	Matrix	#	**	name-mismatch	no-rbs	doc=n real=exp	### def **(n) -> Matrix
+matrix	manual/api/matrix/Matrix.md:735	Matrix	#	vstack	rest	no-rbs	doc=0 real=1	### def vstack -> Matrix
+matrix	manual/api/matrix/Matrix.md:1180	Matrix	#	combine	forwarding?	no-rbs	real forwards rest:matrices block:block	### def combine(*matrices) {|*elements| ... } -> Matrix
+matrix	manual/api/matrix/Vector.md:55	Vector	.	elements	name-mismatch	no-rbs	doc=a,copy real=array,copy	### def Vector.elements(a, copy = true) -> Vector
+matrix	manual/api/matrix/Vector.md:173	Vector	#	==,eql?	name-mismatch	no-rbs	doc=v real=other	### def ==(v) -> bool
+matrix	manual/api/matrix/Vector.md:256	Vector	#	/	name-mismatch	no-rbs	doc=other real=x	### def /(other) -> Vector
+mkmf	manual/api/mkmf.md:160	Kernel	#	xsystem	no-real	no-rbs		### def xsystem(command, opts = nil) -> ()
+mkmf	manual/api/mkmf.md:170	Kernel	#	xpopen	no-real	no-rbs		### def xpopen(command, *mode) -> IO
+mkmf	manual/api/mkmf.md:181	Kernel	#	log_src	no-real	no-rbs		### def log_src(src) -> ()
+mkmf	manual/api/mkmf.md:187	Kernel	#	create_tmpsrc	no-real	no-rbs		### def create_tmpsrc(src) -> String
+mkmf	manual/api/mkmf.md:196	Kernel	#	have_devel?	no-real	no-rbs		### def have_devel? -> bool
+mkmf	manual/api/mkmf.md:200	Kernel	#	try_do	no-real	no-rbs		### def try_do(src, command, *opts) -> ()
+mkmf	manual/api/mkmf.md:213	Kernel	#	link_command	no-real	no-rbs		### def link_command(ldflags, opt = "", libpath = $DEFLIBPATH|$LIBPATH) -> String
+mkmf	manual/api/mkmf.md:225	Kernel	#	cc_command	no-real	no-rbs		### def cc_command(opt = "") -> String
+mkmf	manual/api/mkmf.md:233	Kernel	#	cpp_command	no-real	no-rbs		### def cpp_command(outfile, opt = "") -> String
+mkmf	manual/api/mkmf.md:243	Kernel	#	libpathflag	no-real	no-rbs		### def libpathflag(libpath = $DEFLIBPATH|$LIBPATH) -> String
+mkmf	manual/api/mkmf.md:249	Kernel	#	with_werror	no-real	no-rbs		### def with_werror(opt, opts = nil){|opt| ... } -> object
+mkmf	manual/api/mkmf.md:261	Kernel	#	rm_f	no-real	no-rbs		### def rm_f(*files) -> ()
+mkmf	manual/api/mkmf.md:270	Kernel	#	rm_rf	no-real	no-rbs		### def rm_rf(*files) -> ()
+mkmf	manual/api/mkmf.md:279	Kernel	#	modified?	no-real	no-rbs		### def modified?(target, times) -> Time | nil
+mkmf	manual/api/mkmf.md:288	Kernel	#	merge_libs	no-real	no-rbs		### def merge_libs(*libs) -> [String]
+mkmf	manual/api/mkmf.md:293	Kernel	#	try_link	no-real	no-rbs		### def try_link(src, opt = "", *options) -> bool
+mkmf	manual/api/mkmf.md:314	Kernel	#	try_cpp	no-real	no-rbs		### def try_cpp(src, opt = "", *opts) -> bool
+mkmf	manual/api/mkmf.md:337	Kernel	#	egrep_cpp	no-real	no-rbs		### def egrep_cpp(pattern, src, opt = "") -> bool
+mkmf	manual/api/mkmf.md:369	Kernel	#	install_rb	no-real	no-rbs		### def install_rb(mfile, dest, srcdir = nil) -> Array
+mkmf	manual/api/mkmf.md:404	Kernel	#	have_macro	no-real	no-rbs		### def have_macro(macro, headers = nil, opt = "") -> bool
+mkmf	manual/api/mkmf.md:416	Kernel	#	have_library	no-real	no-rbs		### def have_library(lib, func = nil, headers = nil) -> bool
+mkmf	manual/api/mkmf.md:430	Kernel	#	find_library	no-real	no-rbs		### def find_library(lib, func, *paths) -> bool
+mkmf	manual/api/mkmf.md:449	Kernel	#	find_header	no-real	no-rbs		### def find_header(header, *paths) -> bool
+mkmf	manual/api/mkmf.md:460	Kernel	#	have_func	no-real	no-rbs		### def have_func(func, headers = nil) -> bool
+mkmf	manual/api/mkmf.md:471	Kernel	#	have_header	no-real	no-rbs		### def have_header(header, preheaders = nil) -> bool
+mkmf	manual/api/mkmf.md:483	Kernel	#	have_struct_member	no-real	no-rbs		### def have_struct_member(type, member, headers = nil) -> bool
+mkmf	manual/api/mkmf.md:507	Kernel	#	have_type	no-real	no-rbs		### def have_type(type, headers = nil, opt = "") -> bool
+mkmf	manual/api/mkmf.md:530	Kernel	#	find_type	no-real	no-rbs		### def find_type(type, opt, *headers) -> Array
+mkmf	manual/api/mkmf.md:543	Kernel	#	have_const	no-real	no-rbs		### def have_const(const, headers = nil, opt = "") -> bool
+mkmf	manual/api/mkmf.md:576	Kernel	#	have_var	no-real	no-rbs		### def have_var(var, headers = nil) -> bool
+mkmf	manual/api/mkmf.md:597	Kernel	#	have_framework	no-real	no-rbs		### def have_framework(framework) -> bool
+mkmf	manual/api/mkmf.md:616	Kernel	#	check_sizeof	no-real	no-rbs		### def check_sizeof(type, headers = nil) -> Integer | nil
+mkmf	manual/api/mkmf.md:637	Kernel	#	check_signedness	no-real	no-rbs		### def check_signedness(type, headers = nil, opts = nil) -> "signed" | "unsigned" | nil
+mkmf	manual/api/mkmf.md:657	Kernel	#	convertible_int	no-real	no-rbs		### def convertible_int(type, headers = nil, opts = nil)
+mkmf	manual/api/mkmf.md:684	Kernel	#	arg_config	no-real	no-rbs		### def arg_config(config, default) { ... } -> object | String | true | nil
+mkmf	manual/api/mkmf.md:707	Kernel	#	with_config	no-real	no-rbs		### def with_config(config, default = nil) -> bool | String
+mkmf	manual/api/mkmf.md:727	Kernel	#	enable_config	no-real	no-rbs		### def enable_config(config, default) -> bool | String
+mkmf	manual/api/mkmf.md:747	Kernel	#	create_header	no-real	no-rbs		### def create_header(header = "extconf.h") -> String
+mkmf	manual/api/mkmf.md:776	Kernel	#	dir_config	no-real	no-rbs		### def dir_config(target, idefault = nil, ldefault = nil) -> [String, String]
+mkmf	manual/api/mkmf.md:812	Kernel	#	create_makefile	no-real	no-rbs		### def create_makefile(target, srcprefix = nil) -> true
+mkmf	manual/api/mkmf.md:866	Kernel	#	find_executable	no-real	no-rbs		### def find_executable(bin, path = nil) -> String | nil
+mkmf	manual/api/mkmf.md:881	Kernel	#	dummy_makefile	no-real	no-rbs		### def dummy_makefile(srcdir) -> String
+mkmf	manual/api/mkmf.md:887	Kernel	#	depend_rules	no-real	no-rbs		### def depend_rules(depend) -> Array
+mkmf	manual/api/mkmf.md:936	Kernel	#	try_run	no-real	no-rbs		### def try_run(src, opt = "") -> bool | nil
+mkmf	manual/api/mkmf.md:959	Kernel	#	try_compile	no-real	no-rbs		### def try_compile(src, opt = "", *opts) -> bool
+mkmf	manual/api/mkmf.md:973	Kernel	#	try_static_assert	no-real	no-rbs		### def try_static_assert(expr, headers = nil, opt = "") -> bool
+mkmf	manual/api/mkmf.md:986	Kernel	#	try_constant	no-real	no-rbs		### def try_constant(const, headers = nil, opt = "") -> Integer | nil
+mkmf	manual/api/mkmf.md:1002	Kernel	#	try_func	no-real	no-rbs		### def try_func(func, libs, headers = nil) -> bool
+mkmf	manual/api/mkmf.md:1014	Kernel	#	try_var	no-real	no-rbs		### def try_var(var, headers = nil) -> bool
+mkmf	manual/api/mkmf.md:1023	Kernel	#	try_type	no-real	no-rbs		### def try_type(type, headers = nil, opt = "") -> bool
+mkmf	manual/api/mkmf.md:1034	Kernel	#	install_files	no-real	no-rbs		### def install_files(mfile, ifiles, map = nil, srcprefix = nil) -> []
+mkmf	manual/api/mkmf.md:1047	Kernel	#	message	no-real	no-rbs		### def message(format, *arg) -> nil
+monitor	manual/api/monitor/Monitor.md:65	Monitor	.	new	no-real:inherited	no-rbs		### def Monitor.new -> Monitor
+mutex_m	manual/api/mutex_m.md:56	Mutex_m	.	append_features	name-mismatch	ok	doc=klass real=cl	### def Mutex_m.append_features(klass) -> Class | nil
+mutex_m	manual/api/mutex_m.md:62	Mutex_m	.	define_aliases	name-mismatch	ok	doc=klass real=cl	### def Mutex_m.define_aliases(klass) -> Class
+mutex_m	manual/api/mutex_m.md:66	Mutex_m	.	extend_object	name-mismatch	ok	doc=module real=obj	### def Mutex_m.extend_object(module) -> Module
+net/http	manual/api/net/Net__HTTPGenericRequest.md:46	Net::HTTPGenericRequest	#	body=	name-mismatch	ok	doc=body real=str	### def body=(body)
+net/ftp	manual/api/net/ftp.md:126	Net::FTP	.	open	opt-count	no-rbs	doc=3 real=0	### def Net::FTP.open(host, user = nil, passwd = nil, acct = nil) -> Net::FTP
+net/ftp	manual/api/net/ftp.md:155	Net::FTP	.	default_passive=	name-mismatch	no-rbs	doc=on real=value	### def Net::FTP.default_passive=(on)
+net/ftp	manual/api/net/ftp.md:410	Net::FTP	#	dir,list,ls	forwarding?	no-rbs	real forwards rest:args block:block	### def list(*args) -> [String]
+net/ftp	manual/api/net/ftp.md:534	Net::FTP	#	status	opt-count	no-rbs	doc=0 real=1	### def status -> String
+net/ftp	manual/api/net/ftp.md:571	Net::FTP	#	return_code=	name-mismatch	no-rbs	doc=string real=s	### def return_code=(string)
+net/ftp	manual/api/net/ftp.md:743	Net::FTP	#	binary=	name-mismatch	no-rbs	doc=bool real=newmode	### def binary=(bool)
+net/ftp	manual/api/net/ftp.md:820	Net::FTP	#	read_timeout=	name-mismatch	no-rbs	doc=seconds real=sec	### def read_timeout=(seconds)
+net/http	manual/api/net/http/Net__HTTP.md:22	Net::HTTP	.	new	opt-count	ok	doc=6 real=7	### def Net::HTTP.new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil, no_proxy=nil) -> Net::HTTP
+net/http	manual/api/net/http/Net__HTTP.md:44	Net::HTTP	.	start	opt-count	ok	doc=5 real=0	### def Net::HTTP.start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
+net/http	manual/api/net/http/Net__HTTP.md:117	Net::HTTP	.	get_response	name-mismatch	ok	doc=0 real=2 / doc=host,path,port real=uri_or_host,path_or_headers,port	### def Net::HTTP.get_response(uri) -> Net::HTTPResponse
+net/http	manual/api/net/http/Net__HTTP.md:132	Net::HTTP	.	post_form	name-mismatch	ok	doc=uri,params real=url,params	### def Net::HTTP.post_form(uri, params) -> Net::HTTPResponse
+net/http	manual/api/net/http/Net__HTTP.md:182	Net::HTTP	.	Proxy	req-count	ok	doc=1 real=0	### def Net::HTTP.Proxy(address, port = 80) -> Class
+net/http	manual/api/net/http/Net__HTTP.md:385	Net::HTTP	#	set_debug_output	name-mismatch	ok	doc=io real=output	### def set_debug_output(io) -> ()
+net/http	manual/api/net/http/Net__HTTP.md:640	Net::HTTP	#	read_timeout=	name-mismatch	ok	doc=seconds real=sec	### def read_timeout=(seconds)
+net/http	manual/api/net/http/Net__HTTP.md:669	Net::HTTP	#	write_timeout=	name-mismatch	ok	doc=seconds real=sec	### def write_timeout=(seconds)
+net/http	manual/api/net/http/Net__HTTP.md:693	Net::HTTP	#	max_retries=	name-mismatch	ok	doc=times real=retries	### def max_retries=(times)
+net/http	manual/api/net/http/Net__HTTP.md:740	Net::HTTP	#	continue_timeout=	name-mismatch	ok	doc=seconds real=sec	### def continue_timeout=(seconds)
+net/http	manual/api/net/http/Net__HTTP.md:800	Net::HTTP	#	head	name-mismatch	ok	doc=path,header real=path,initheader	### def head(path, header = nil) -> Net::HTTPResponse
+net/http	manual/api/net/http/Net__HTTP.md:873	Net::HTTP	#	get2,request_get	name-mismatch	ok	doc=path,header real=path,initheader	### def request_get(path, header = nil) -> Net::HTTPResponse
+net/http	manual/api/net/http/Net__HTTP.md:910	Net::HTTP	#	head2,request_head	name-mismatch	ok	doc=path,header real=path,initheader	### def request_head(path, header = nil) -> Net::HTTPResponse
+net/http	manual/api/net/http/Net__HTTP.md:937	Net::HTTP	#	post2,request_post	name-mismatch	ok	doc=path,data,header real=path,data,initheader	### def request_post(path, data, header = nil) -> Net::HTTPResponse
+net/http	manual/api/net/http/Net__HTTP.md:1094	Net::HTTP	#	mkcol	req-count	ok	doc=2 real=1	### def mkcol(path, body, initheader = nil) -> Net::HTTPResponse
+net/http	manual/api/net/http/Net__HTTP.md:1106	Net::HTTP	#	move	req-count	ok	doc=2 real=1	### def move(path, body, initheader = nil) -> Net::HTTPResponse
+net/http	manual/api/net/http/Net__HTTP.md:1127	Net::HTTP	#	propfind	req-count	ok	doc=2 real=1	### def propfind(path, body, initheader = {'Depth' => '0'}) -> Net::HTTPResponse
+net/http	manual/api/net/http/Net__HTTP.md:1200	Net::HTTP	#	use_ssl=	name-mismatch	ok	doc=bool real=flag	### def use_ssl=(bool)
+net/http	manual/api/net/http/Net__HTTPHeader.md:113	Net::HTTPHeader	#	fetch	rest	ok	doc=0 real=1 / doc=2 real=1	### def fetch(key) -> String
+net/http	manual/api/net/http/Net__HTTPHeader.md:566	Net::HTTPHeader	#	range=,set_range	opt-count	ok	doc=0 real=1 / doc=2 real=1	### def range=(r)
+net/imap	manual/api/net/imap.md:185	Net::IMAP	.	new	no-real:inherited	no-rbs		### def Net::IMAP.new(host, port = 143, usessl = false, certs = nil, verify = true) -> Net::IMAP
+net/imap	manual/api/net/imap.md:236	Net::IMAP	.	add_authenticator	no-real	no-rbs		### def Net::IMAP.add_authenticator(auth_type, authenticator) -> ()
+net/imap	manual/api/net/imap.md:249	Net::IMAP	.	decode_utf7	name-mismatch	no-rbs	doc=str real=s	### def Net::IMAP.decode_utf7(str) -> String
+net/imap	manual/api/net/imap.md:263	Net::IMAP	.	encode_utf7	name-mismatch	no-rbs	doc=str real=s	### def Net::IMAP.encode_utf7(str) -> String
+net/imap	manual/api/net/imap.md:275	Net::IMAP	.	format_date	name-mismatch	no-rbs	doc=time real=date	### def Net::IMAP.format_date(time) -> String
+net/imap	manual/api/net/imap.md:346	Net::IMAP	#	responses	opt-count	no-rbs	doc=0 real=1	### def responses -> { String => [object] }
+net/imap	manual/api/net/imap.md:389	Net::IMAP	#	authenticate	req-count	no-rbs	doc=3 real=0	### def authenticate(auth_type, user, password) -> Net::IMAP::TaggedResponse
+net/imap	manual/api/net/imap.md:425	Net::IMAP	#	select	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[condstore] rest0	### def select(mailbox) -> Net::IMAP::TaggedResponse
+net/imap	manual/api/net/imap.md:440	Net::IMAP	#	examine	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[condstore] rest0	### def examine(mailbox) -> Net::IMAP::TaggedResponse
+net/imap	manual/api/net/imap.md:608	Net::IMAP	#	search	forwarding?	no-rbs	real forwards *, **, &	### def search(keys, charset = nil) -> [Integer]
+net/imap	manual/api/net/imap.md:633	Net::IMAP	#	uid_search	forwarding?	no-rbs	real forwards *, **, &	### def uid_search(keys, charset = nil) -> [Integer]
+net/imap	manual/api/net/imap.md:658	Net::IMAP	#	fetch	forwarding?	no-rbs	real forwards *, **, &	### def fetch(set, attr) -> [Net::IMAP::FetchData]
+net/imap	manual/api/net/imap.md:697	Net::IMAP	#	uid_fetch	forwarding?	no-rbs	real forwards *, **, &	### def uid_fetch(set, attr) -> [Net::IMAP::FetchData]
+net/imap	manual/api/net/imap.md:714	Net::IMAP	#	store	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[unchangedsince] rest0	### def store(set, attr, flags) -> [Net::IMAP::FetchData] | nil
+net/imap	manual/api/net/imap.md:750	Net::IMAP	#	uid_store	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[unchangedsince] rest0	### def uid_store(set, attr, flags) -> [Net::IMAP::FetchData] | nil
+net/imap	manual/api/net/imap.md:931	Net::IMAP	#	add_response_handler	req-count	no-rbs	doc=1 real=0	### def add_response_handler(handler) -> ()
+net/imap	manual/api/net/imap.md:968	Net::IMAP	#	starttls	no-real	no-rbs		### def starttls(options) -> Net::IMAP::TaggedResponse
+net/imap	manual/api/net/imap.md:1037	Net::IMAP	#	idle	opt-count	no-rbs	doc=0 real=1	### def idle {|resp| ...} -> Net::IMAP::TaggedResponse
+net/imap	manual/api/net/imap.md:1186	Net::IMAP::ContinuationRequest	#	data	no-class	no-rbs		### def data -> Net::IMAP::ResponseText
+net/imap	manual/api/net/imap.md:1186	Net::IMAP::TaggedResponse	#	data	no-class	no-rbs		### def data -> Net::IMAP::ResponseText
+net/imap	manual/api/net/imap.md:1190	Net::IMAP::ContinuationRequest	#	raw_data	no-class	no-rbs		### def raw_data -> String
+net/imap	manual/api/net/imap.md:1190	Net::IMAP::TaggedResponse	#	raw_data	no-class	no-rbs		### def raw_data -> String
+net/imap	manual/api/net/imap.md:1190	Net::IMAP::UntaggedResponse	#	raw_data	no-class	no-rbs		### def raw_data -> String
+net/imap	manual/api/net/imap.md:1204	Net::IMAP::MailboxList	#	name	no-class	no-rbs		### def name -> String
+net/imap	manual/api/net/imap.md:1204	Net::IMAP::ResponseCode	#	name	no-class	no-rbs		### def name -> String
+net/imap	manual/api/net/imap.md:1204	Net::IMAP::TaggedResponse	#	name	no-class	no-rbs		### def name -> String
+net/imap	manual/api/net/imap.md:1204	Net::IMAP::UntaggedResponse	#	name	no-class	no-rbs		### def name -> String
+net/imap	manual/api/net/imap.md:1220	Net::IMAP::UntaggedResponse	#	data	no-class	no-rbs		### def data -> object
+net/imap	manual/api/net/imap.md:1243	Net::IMAP::TaggedResponse	#	tag	no-class	no-rbs		### def tag -> String
+net/imap	manual/api/net/imap.md:1275	Net::IMAP::ResponseText	#	code	no-class	no-rbs		### def code -> Net::IMAP::ResponseCode | nil
+net/imap	manual/api/net/imap.md:1283	Net::IMAP::ResponseText	#	text	no-class	no-rbs		### def text -> String
+net/imap	manual/api/net/imap.md:1301	Net::IMAP::ResponseCode	#	data	no-class	no-rbs		### def data -> object | nil
+net/imap	manual/api/net/imap.md:1315	Net::IMAP::MailboxList	#	attr	no-class	no-rbs		### def attr -> [Symbol]
+net/imap	manual/api/net/imap.md:1329	Net::IMAP::MailboxList	#	delim	no-class	no-rbs		### def delim -> String|nil
+net/imap	manual/api/net/imap.md:1348	Net::IMAP::MailboxQuota	#	mailbox	no-class	no-rbs		### def mailbox -> String
+net/imap	manual/api/net/imap.md:1348	Net::IMAP::MailboxQuotaRoot	#	mailbox	no-class	no-rbs		### def mailbox -> String
+net/imap	manual/api/net/imap.md:1348	Net::IMAP::StatusData	#	mailbox	no-class	no-rbs		### def mailbox -> String
+net/imap	manual/api/net/imap.md:1352	Net::IMAP::MailboxQuota	#	usage	no-class	no-rbs		### def usage -> Integer
+net/imap	manual/api/net/imap.md:1356	Net::IMAP::MailboxQuota	#	quota	no-class	no-rbs		### def quota -> Integer
+net/imap	manual/api/net/imap.md:1373	Net::IMAP::MailboxQuotaRoot	#	quotaroots	no-class	no-rbs		### def quotaroots -> [String]
+net/imap	manual/api/net/imap.md:1389	Net::IMAP::MailboxACLItem	#	user	no-class	no-rbs		### def user -> String
+net/imap	manual/api/net/imap.md:1396	Net::IMAP::MailboxACLItem	#	rights	no-class	no-rbs		### def rights -> String
+net/imap	manual/api/net/imap.md:1414	Net::IMAP::StatusData	#	attr	no-class	no-rbs		### def attr -> { String => Integer }
+net/imap	manual/api/net/imap.md:1433	Net::IMAP::FetchData	#	seqno	no-class	no-rbs		### def seqno -> Integer
+net/imap	manual/api/net/imap.md:1440	Net::IMAP::FetchData	#	attr	no-class	no-rbs		### def attr -> { String => object }
+net/imap	manual/api/net/imap.md:1496	Net::IMAP::Envelope	#	date	no-class	no-rbs		### def date -> String | nil
+net/imap	manual/api/net/imap.md:1502	Net::IMAP::Envelope	#	subject	no-class	no-rbs		### def subject -> String | nil
+net/imap	manual/api/net/imap.md:1508	Net::IMAP::Envelope	#	from	no-class	no-rbs		### def from -> [Net::IMAP::Address] | nil
+net/imap	manual/api/net/imap.md:1514	Net::IMAP::Envelope	#	sender	no-class	no-rbs		### def sender -> [Net::IMAP::Address] | nil
+net/imap	manual/api/net/imap.md:1520	Net::IMAP::Envelope	#	reply_to	no-class	no-rbs		### def reply_to -> [Net::IMAP::Address] | nil
+net/imap	manual/api/net/imap.md:1526	Net::IMAP::Envelope	#	to	no-class	no-rbs		### def to -> [Net::IMAP::Address] | nil
+net/imap	manual/api/net/imap.md:1532	Net::IMAP::Envelope	#	cc	no-class	no-rbs		### def cc -> [Net::IMAP::Address] | nil
+net/imap	manual/api/net/imap.md:1538	Net::IMAP::Envelope	#	bcc	no-class	no-rbs		### def bcc -> [Net::IMAP::Address] | nil
+net/imap	manual/api/net/imap.md:1544	Net::IMAP::Envelope	#	in_reply_to	no-class	no-rbs		### def in_reply_to -> String | nil
+net/imap	manual/api/net/imap.md:1550	Net::IMAP::Envelope	#	message_id	no-class	no-rbs		### def message_id -> String | nil
+net/imap	manual/api/net/imap.md:1562	Net::IMAP::Address	#	name	no-class	no-rbs		### def name -> String | nil
+net/imap	manual/api/net/imap.md:1570	Net::IMAP::Address	#	route	no-class	no-rbs		### def route -> String | nil
+net/imap	manual/api/net/imap.md:1578	Net::IMAP::Address	#	mailbox	no-class	no-rbs		### def mailbox -> String | nil
+net/imap	manual/api/net/imap.md:1589	Net::IMAP::Address	#	host	no-class	no-rbs		### def host -> String | nil
+net/imap	manual/api/net/imap.md:1606	Net::IMAP::ContentDisposition	#	dsp_type	no-class	no-rbs		### def dsp_type -> String
+net/imap	manual/api/net/imap.md:1614	Net::IMAP::BodyTypeBasic	#	param	no-real	no-rbs		### def param -> { String => String } | nil
+net/imap	manual/api/net/imap.md:1614	Net::IMAP::BodyTypeMessage	#	param	no-real	no-rbs		### def param -> { String => String } | nil
+net/imap	manual/api/net/imap.md:1614	Net::IMAP::BodyTypeText	#	param	no-real	no-rbs		### def param -> { String => String } | nil
+net/imap	manual/api/net/imap.md:1614	Net::IMAP::ContentDisposition	#	param	no-class	no-rbs		### def param -> { String => String } | nil
+net/imap	manual/api/net/imap.md:1632	Net::IMAP::ThreadMember	#	seqno	no-real	no-rbs		### def seqno -> Integer | nil
+net/imap	manual/api/net/imap.md:1639	Net::IMAP::ThreadMember	#	children	no-real	no-rbs		### def children -> [Net::IMAP::ThreadMember]
+net/imap	manual/api/net/imap.md:1654	Net::IMAP::BodyTypeBasic	#	media_type	no-real	no-rbs		### def media_type -> String
+net/imap	manual/api/net/imap.md:1654	Net::IMAP::BodyTypeMessage	#	media_type	no-real	no-rbs		### def media_type -> String
+net/imap	manual/api/net/imap.md:1654	Net::IMAP::BodyTypeMultipart	#	media_type	no-real	no-rbs		### def media_type -> String
+net/imap	manual/api/net/imap.md:1654	Net::IMAP::BodyTypeText	#	media_type	no-real	no-rbs		### def media_type -> String
+net/imap	manual/api/net/imap.md:1677	Net::IMAP::BodyTypeBasic	#	content_id	no-real	no-rbs		### def content_id -> String | nil
+net/imap	manual/api/net/imap.md:1677	Net::IMAP::BodyTypeMessage	#	content_id	no-real	no-rbs		### def content_id -> String | nil
+net/imap	manual/api/net/imap.md:1677	Net::IMAP::BodyTypeText	#	content_id	no-real	no-rbs		### def content_id -> String | nil
+net/imap	manual/api/net/imap.md:1683	Net::IMAP::BodyTypeBasic	#	description	no-real	no-rbs		### def description -> String | nil
+net/imap	manual/api/net/imap.md:1683	Net::IMAP::BodyTypeMessage	#	description	no-real	no-rbs		### def description -> String | nil
+net/imap	manual/api/net/imap.md:1683	Net::IMAP::BodyTypeText	#	description	no-real	no-rbs		### def description -> String | nil
+net/imap	manual/api/net/imap.md:1689	Net::IMAP::BodyTypeBasic	#	encoding	no-real	no-rbs		### def encoding -> String
+net/imap	manual/api/net/imap.md:1689	Net::IMAP::BodyTypeMessage	#	encoding	no-real	no-rbs		### def encoding -> String
+net/imap	manual/api/net/imap.md:1689	Net::IMAP::BodyTypeText	#	encoding	no-real	no-rbs		### def encoding -> String
+net/imap	manual/api/net/imap.md:1695	Net::IMAP::BodyTypeBasic	#	size	no-real	no-rbs		### def size -> Integer
+net/imap	manual/api/net/imap.md:1695	Net::IMAP::BodyTypeMessage	#	size	no-real	no-rbs		### def size -> Integer
+net/imap	manual/api/net/imap.md:1695	Net::IMAP::BodyTypeText	#	size	no-real	no-rbs		### def size -> Integer
+net/imap	manual/api/net/imap.md:1699	Net::IMAP::BodyTypeBasic	#	md5	no-real	no-rbs		### def md5 -> String | nil
+net/imap	manual/api/net/imap.md:1699	Net::IMAP::BodyTypeMessage	#	md5	no-real	no-rbs		### def md5 -> String | nil
+net/imap	manual/api/net/imap.md:1699	Net::IMAP::BodyTypeText	#	md5	no-real	no-rbs		### def md5 -> String | nil
+net/imap	manual/api/net/imap.md:1703	Net::IMAP::BodyTypeBasic	#	disposition	no-real	no-rbs		### def disposition -> Net::IMAP::ContentDisposition | nil
+net/imap	manual/api/net/imap.md:1703	Net::IMAP::BodyTypeMessage	#	disposition	no-real	no-rbs		### def disposition -> Net::IMAP::ContentDisposition | nil
+net/imap	manual/api/net/imap.md:1703	Net::IMAP::BodyTypeMultipart	#	disposition	no-real	no-rbs		### def disposition -> Net::IMAP::ContentDisposition | nil
+net/imap	manual/api/net/imap.md:1703	Net::IMAP::BodyTypeText	#	disposition	no-real	no-rbs		### def disposition -> Net::IMAP::ContentDisposition | nil
+net/imap	manual/api/net/imap.md:1711	Net::IMAP::BodyTypeBasic	#	language	no-real	no-rbs		### def language -> String | [String] | nil
+net/imap	manual/api/net/imap.md:1711	Net::IMAP::BodyTypeMessage	#	language	no-real	no-rbs		### def language -> String | [String] | nil
+net/imap	manual/api/net/imap.md:1711	Net::IMAP::BodyTypeMultipart	#	language	no-real	no-rbs		### def language -> String | [String] | nil
+net/imap	manual/api/net/imap.md:1711	Net::IMAP::BodyTypeText	#	language	no-real	no-rbs		### def language -> String | [String] | nil
+net/imap	manual/api/net/imap.md:1715	Net::IMAP::BodyTypeBasic	#	extension	no-real	no-rbs		### def extension -> Array | nil
+net/imap	manual/api/net/imap.md:1715	Net::IMAP::BodyTypeMultipart	#	extension	no-real	no-rbs		### def extension -> Array | nil
+net/imap	manual/api/net/imap.md:1715	Net::IMAP::BodyTypeText	#	extension	no-real	no-rbs		### def extension -> Array | nil
+net/imap	manual/api/net/imap.md:1780	Net::IMAP::BodyTypeMessage	#	lines	no-real	no-rbs		### def lines -> Integer
+net/imap	manual/api/net/imap.md:1780	Net::IMAP::BodyTypeText	#	lines	no-real	no-rbs		### def lines -> Integer
+net/imap	manual/api/net/imap.md:1865	Net::IMAP::BodyTypeMessage	#	envelope	no-real	no-rbs		### def envelope -> Net::IMAP::Envelpe | nil
+net/imap	manual/api/net/imap.md:1869	Net::IMAP::BodyTypeMessage	#	body	no-real	no-rbs		### def body -> Net::IMAP::BodyTypeBasic | Net::IMAP::BodyTypeMessage | Net::IMAP::BodyTypeText | Net::IMAP::BodyTypeMultipart
+net/imap	manual/api/net/imap.md:1893	Net::IMAP::BodyTypeMessage	#	extension	no-real	no-rbs		### def extension  -> Array | nil
+net/imap	manual/api/net/imap.md:1927	Net::IMAP::BodyTypeMultipart	#	parts	no-real	no-rbs		### def parts -> [Net::IMAP::BodyTypeBasic | Net::IMAP::BodyTypeText | Net::IMAP::BodyTypeMessage | Net::IMAP::BodyTypeMultipart]
+net/imap	manual/api/net/imap.md:1931	Net::IMAP::BodyTypeMultipart	#	param	no-real	no-rbs		### def param -> { String => String }
+net/pop	manual/api/net/pop/Net__POP3.md:13	Net::POP3	.	new	name-mismatch	no-rbs	doc=address,port,apop real=addr,port,isapop	### def Net::POP3.new(address, port = nil, apop = false) -> Net::POP3
+net/pop	manual/api/net/pop/Net__POP3.md:72	Net::POP3	.	APOP	name-mismatch	no-rbs	doc=is_apop real=isapop	### def Net::POP3.APOP(is_apop) -> Class
+net/pop	manual/api/net/pop/Net__POP3.md:87	Net::POP3	.	foreach	req-count	no-rbs	doc=3 real=1	### def Net::POP3.foreach(address, port = nil, account, password, isapop=false) {|mail| .... } -> ()
+net/pop	manual/api/net/pop/Net__POP3.md:129	Net::POP3	.	delete_all	req-count	no-rbs	doc=3 real=1	### def Net::POP3.delete_all(address, port = nil, account, password, isapop=false) -> ()
+net/pop	manual/api/net/pop/Net__POP3.md:159	Net::POP3	.	auth_only	req-count	no-rbs	doc=3 real=1	### def Net::POP3.auth_only(address, port = nil, account, password, isapop=false)
+net/pop	manual/api/net/pop/Net__POP3.md:212	Net::POP3	.	enable_ssl	opt-count	no-rbs	doc=2 real=0	### def Net::POP3.enable_ssl(verify_or_params={}, certs=nil) -> ()
+net/pop	manual/api/net/pop/Net__POP3.md:273	Net::POP3	#	enable_ssl	opt-count	no-rbs	doc=2 real=3	### def enable_ssl(verify_or_params={}, certs=nil) -> ()
+net/pop	manual/api/net/pop/Net__POP3.md:343	Net::POP3	#	set_debug_output	name-mismatch	no-rbs	doc=f real=arg	### def set_debug_output(f) -> ()
+net/pop	manual/api/net/pop/Net__POP3.md:401	Net::POP3	#	read_timeout=	name-mismatch	no-rbs	doc=n real=sec	### def read_timeout=(n)
+net/pop	manual/api/net/pop/Net__POPMail.md:13	Net::POPMail	#	all,mail,pop	opt-count	no-rbs	doc=0 real=1 / doc=1 real=0	### def pop -> String
+net/smtp	manual/api/net/smtp/Net__SMTP.md:12	Net::SMTP	.	new	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[ssl_context_params,starttls,tls,tls_hostname,tls_verify] rest0	### def Net::SMTP.new(address, port = Net::SMTP.default_port) -> Net::SMTP
+net/smtp	manual/api/net/smtp/Net__SMTP.md:28	Net::SMTP	.	start	rest	ok	doc=0 real=1 / doc=5 real=1	### def Net::SMTP.start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
+net/smtp	manual/api/net/smtp/Net__SMTP.md:82	Net::SMTP	.	default_ssl_context	opt-count	no-rbs	doc=0 real=1	### def Net::SMTP.default_ssl_context -> OpenSSL::SSL::SSLContext
+net/smtp	manual/api/net/smtp/Net__SMTP.md:213	Net::SMTP	#	debug_output=,set_debug_output	name-mismatch	no-rbs	doc=f real=arg	### def set_debug_output(f) -> ()
+net/smtp	manual/api/net/smtp/Net__SMTP.md:222	Net::SMTP	#	start	rest	no-rbs	doc=0 real=1 / doc=4 real=0	### def start(helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
+net/smtp	manual/api/net/smtp/Net__SMTP.md:295	Net::SMTP	#	read_timeout=	name-mismatch	no-rbs	doc=n real=sec	### def read_timeout=(n)
+net/smtp	manual/api/net/smtp/Net__SMTP.md:309	Net::SMTP	#	send_mail,send_message,sendmail	name-mismatch	ok	doc=mailsrc,from_addr real=msgstr,from_addr	### def send_message(mailsrc, from_addr, *to_addrs) -> ()
+net/smtp	manual/api/net/smtp/Net__SMTP.md:388	Net::SMTP	#	authenticate	req-count	no-rbs	doc=3 real=2	### def authenticate(user, secret, authtype) -> ()
+open-uri	manual/api/open-uri/OpenURI.md:10	OpenURI	.	open_uri	opt-count	no-rbs	doc=3 real=0	### def OpenURI.open_uri(name, mode = 'r', perm = nil, options = {})                  -> StringIO
+open-uri	manual/api/open-uri/OpenURI__OpenRead.md:10	OpenURI::OpenRead	#	open	forwarding?	ok	real forwards rest:rest block:block	### def open(mode = 'r', perm = nil, options = {})                 -> StringIO
+open-uri	manual/api/open-uri/URI.md:9	URI	.	open	opt-count	ok	doc=3 real=0	### def URI.open(name, mode = 'r', perm = nil, options = {})                -> StringIO | Tempfile | IO
+open3	manual/api/open3.md:35	Open3	.#	popen3	forwarding?	no-rbs	real forwards rest:cmd block:block	### module_function def popen3(*cmd) -> [IO, IO, IO, Thread]
+open3	manual/api/open3.md:106	Open3	.#	popen2	forwarding?	no-rbs	real forwards rest:cmd block:block	### module_function def popen2(*cmd) -> [IO, IO, Thread]
+open3	manual/api/open3.md:120	Open3	.#	popen2e	forwarding?	no-rbs	real forwards rest:cmd block:block	### module_function def popen2e(*cmd) -> [IO, IO, Thread]
+open3	manual/api/open3.md:205	Open3	.#	pipeline_rw	forwarding?	no-rbs	real forwards rest:cmds block:block	### module_function def pipeline_rw(*cmds) -> [IO, IO, [Thread]]
+open3	manual/api/open3.md:246	Open3	.#	pipeline_r	forwarding?	no-rbs	real forwards rest:cmds block:block	### module_function def pipeline_r(*cmds) -> [IO, [Thread]]
+open3	manual/api/open3.md:280	Open3	.#	pipeline_w	forwarding?	no-rbs	real forwards rest:cmds block:block	### module_function def pipeline_w(*cmds) -> [IO, [Thread]]
+open3	manual/api/open3.md:312	Open3	.#	pipeline_start	forwarding?	no-rbs	real forwards rest:cmds block:block	### module_function def pipeline_start(*cmds) -> [Thread]
+openssl	manual/api/openssl.md:131	OpenSSL	.#	secure_compare	name-mismatch	ok	doc=string1,string2 real=a,b	### module_function def secure_compare(string1, string2) -> bool
+openssl	manual/api/openssl/ASN1.md:382	OpenSSL::ASN1	.#	Null	ok-split	rbs-unmatched-sig	doc has no opt/rest/kw; C arity=-1 [entry:ok-split]	### module_function def Null(value) -> OpenSSL::ASN1::Null -> OpenSSL::ASN1::Null
+openssl	manual/api/openssl/ASN1.md:454	OpenSSL::ASN1	.#	EndOfContent	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### module_function def EndOfContent -> OpenSSL::ASN1::EndOfContent
+openssl	manual/api/openssl/ASN1__ObjectId.md:12	OpenSSL::ASN1::ObjectId	.	new	no-real:inherited	no-rbs		### def OpenSSL::ASN1::ObjectId.new(value) -> OpenSSL::ASN1::ObjectId
+openssl	manual/api/openssl/ASN1__Primitive.md:36	OpenSSL::ASN1::Boolean	.	new	no-class	no-rbs		### def OpenSSL::ASN1::Boolean.new(value) ->  OpenSSL::ASN1::Boolean
+openssl	manual/api/openssl/ASN1__Primitive.md:53	OpenSSL::ASN1::Integer	.	new	no-class	no-rbs		### def OpenSSL::ASN1::Integer.new(value) ->  OpenSSL::ASN1::Integer
+openssl	manual/api/openssl/ASN1__Primitive.md:70	OpenSSL::ASN1::Enumerated	.	new	no-class	no-rbs		### def OpenSSL::ASN1::Enumerated.new(value) ->  OpenSSL::ASN1::Boolean
+openssl	manual/api/openssl/ASN1__Primitive.md:87	OpenSSL::ASN1::BitString	.	new	no-real:inherited	no-rbs		### def OpenSSL::ASN1::BitString.new(value) ->  OpenSSL::ASN1::BitString
+openssl	manual/api/openssl/ASN1__Primitive.md:119	OpenSSL::ASN1::OctetString	.	new	no-class	no-rbs		### def OpenSSL::ASN1::OctetString.new(value) ->  OpenSSL::ASN1::OctetString
+openssl	manual/api/openssl/ASN1__Primitive.md:136	OpenSSL::ASN1::UTF8String	.	new	no-class	no-rbs		### def OpenSSL::ASN1::UTF8String.new(value) ->  OpenSSL::ASN1::UTF8String
+openssl	manual/api/openssl/ASN1__Primitive.md:153	OpenSSL::ASN1::NumericString	.	new	no-class	no-rbs		### def OpenSSL::ASN1::NumericString.new(value) ->  OpenSSL::ASN1::NumericString
+openssl	manual/api/openssl/ASN1__Primitive.md:170	OpenSSL::ASN1::PrintableString	.	new	no-class	no-rbs		### def OpenSSL::ASN1::PrintableString.new(value) ->  OpenSSL::ASN1::PrintableString
+openssl	manual/api/openssl/ASN1__Primitive.md:187	OpenSSL::ASN1::T61String	.	new	no-class	no-rbs		### def OpenSSL::ASN1::T61String.new(value) ->  OpenSSL::ASN1::T61String
+openssl	manual/api/openssl/ASN1__Primitive.md:204	OpenSSL::ASN1::VideotexString	.	new	no-class	no-rbs		### def OpenSSL::ASN1::VideotexString.new(value) ->  OpenSSL::ASN1::VideotexString
+openssl	manual/api/openssl/ASN1__Primitive.md:221	OpenSSL::ASN1::IA5String	.	new	no-class	no-rbs		### def OpenSSL::ASN1::IA5String.new(value) ->  OpenSSL::ASN1::IA5String
+openssl	manual/api/openssl/ASN1__Primitive.md:238	OpenSSL::ASN1::GraphicString	.	new	no-class	no-rbs		### def OpenSSL::ASN1::GraphicString.new(value) ->  OpenSSL::ASN1::GraphicString
+openssl	manual/api/openssl/ASN1__Primitive.md:255	OpenSSL::ASN1::ISO64String	.	new	no-class	no-rbs		### def OpenSSL::ASN1::ISO64String.new(value) ->  OpenSSL::ASN1::ISO64String
+openssl	manual/api/openssl/ASN1__Primitive.md:272	OpenSSL::ASN1::GeneralString	.	new	no-class	no-rbs		### def OpenSSL::ASN1::GeneralString.new(value) ->  OpenSSL::ASN1::GeneralString
+openssl	manual/api/openssl/ASN1__Primitive.md:289	OpenSSL::ASN1::UniversalString	.	new	no-class	no-rbs		### def OpenSSL::ASN1::UniversalString.new(value) ->  OpenSSL::ASN1::UniversalString
+openssl	manual/api/openssl/ASN1__Primitive.md:306	OpenSSL::ASN1::BMPString	.	new	no-class	no-rbs		### def OpenSSL::ASN1::BMPString.new(value) ->  OpenSSL::ASN1::BMPString
+openssl	manual/api/openssl/ASN1__Primitive.md:323	OpenSSL::ASN1::Null	.	new	no-class	no-rbs		### def OpenSSL::ASN1::Null.new(value) ->  OpenSSL::ASN1::Null
+openssl	manual/api/openssl/ASN1__Primitive.md:340	OpenSSL::ASN1::UTCTime	.	new	no-class	no-rbs		### def OpenSSL::ASN1::UTCTime.new(value) ->  OpenSSL::ASN1::UTCTime
+openssl	manual/api/openssl/ASN1__Primitive.md:357	OpenSSL::ASN1::GeneralizedTime	.	new	no-class	no-rbs		### def OpenSSL::ASN1::GeneralizedTime.new(value) ->  OpenSSL::ASN1::GeneralizedTime
+openssl	manual/api/openssl/Cipher.md:143	OpenSSL::Cipher	#	encrypt	ok	rbs-unmatched-sig	doc_req=1 real_arity=0	### def encrypt -> self
+openssl	manual/api/openssl/Cipher.md:156	OpenSSL::Cipher	#	decrypt	ok	rbs-unmatched-sig	doc_req=1 real_arity=0	### def decrypt -> self
+openssl	manual/api/openssl/Cipher.md:169	OpenSSL::Cipher	#	update	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def update(data) -> String
+openssl	manual/api/openssl/Cipher.md:351	OpenSSL::Cipher::AES	.	new	req-count	ok	doc=2 real=0	### def OpenSSL::Cipher::AES.new(bit, mode) -> OpenSSL::Cipher::AES
+openssl	manual/api/openssl/Cipher.md:367	OpenSSL::Cipher::AES128	.	new	req-count	ok	doc=1 real=0	### def OpenSSL::Cipher::AES128.new(mode) -> OpenSSL::Cipher::AES128
+openssl	manual/api/openssl/Cipher.md:382	OpenSSL::Cipher::AES192	.	new	req-count	ok	doc=1 real=0	### def OpenSSL::Cipher::AES192.new(mode) -> OpenSSL::Cipher::AES192
+openssl	manual/api/openssl/Cipher.md:397	OpenSSL::Cipher::AES256	.	new	req-count	ok	doc=1 real=0	### def OpenSSL::Cipher::AES256.new(mode) -> OpenSSL::Cipher::AES256
+openssl	manual/api/openssl/Cipher.md:412	OpenSSL::Cipher::BF	.	new	req-count	ok	doc=1 real=0	### def OpenSSL::Cipher::BF.new(mode) -> OpenSSL::Cipher::BF
+openssl	manual/api/openssl/Cipher.md:427	OpenSSL::Cipher::CAST5	.	new	req-count	ok	doc=1 real=0	### def OpenSSL::Cipher::CAST5.new(mode) -> OpenSSL::Cipher::CAST5
+openssl	manual/api/openssl/Cipher.md:442	OpenSSL::Cipher::DES	.	new	req-count	ok	doc=1 real=0	### def OpenSSL::Cipher::DES.new(mode) -> OpenSSL::Cipher::DES
+openssl	manual/api/openssl/Cipher.md:468	OpenSSL::Cipher::RC2	.	new	req-count	ok	doc=2 real=0 / doc=1 real=0	### def OpenSSL::Cipher::RC2.new(bit, mode) -> OpenSSL::Cipher::RC2
+openssl	manual/api/openssl/Cipher.md:487	OpenSSL::Cipher::RC4	.	new	rest	ok	doc=0 real=1 / doc=1 real=0	### def OpenSSL::Cipher::RC4.new -> OpenSSL::Cipher::RC4
+openssl	manual/api/openssl/Digest.md:87	OpenSSL::Digest::DSS	.	new	no-class	no-rbs		### def OpenSSL::Digest::DSS.new(data=nil) -> OpenSSL::Digest::DSS
+openssl	manual/api/openssl/Digest.md:95	OpenSSL::Digest::DSS	.	digest	no-class	no-rbs		### def OpenSSL::Digest::DSS.digest(data) -> String
+openssl	manual/api/openssl/Digest.md:101	OpenSSL::Digest::DSS	.	hexdigest	no-class	no-rbs		### def OpenSSL::Digest::DSS.hexdigest(data) -> String
+openssl	manual/api/openssl/Digest.md:112	OpenSSL::Digest::DSS1	.	new	no-class	no-rbs		### def OpenSSL::Digest::DSS1.new(data=nil) -> OpenSSL::Digest::DSS1
+openssl	manual/api/openssl/Digest.md:120	OpenSSL::Digest::DSS1	.	digest	no-class	no-rbs		### def OpenSSL::Digest::DSS1.digest(data) -> String
+openssl	manual/api/openssl/Digest.md:126	OpenSSL::Digest::DSS1	.	hexdigest	no-class	no-rbs		### def OpenSSL::Digest::DSS1.hexdigest(data) -> String
+openssl	manual/api/openssl/Digest.md:137	OpenSSL::Digest::MD2	.	new	no-class	no-rbs		### def OpenSSL::Digest::MD2.new(data=nil) -> OpenSSL::Digest::MD2
+openssl	manual/api/openssl/Digest.md:145	OpenSSL::Digest::MD2	.	digest	no-class	no-rbs		### def OpenSSL::Digest::MD2.digest(data) -> String
+openssl	manual/api/openssl/Digest.md:151	OpenSSL::Digest::MD2	.	hexdigest	no-class	no-rbs		### def OpenSSL::Digest::MD2.hexdigest(data) -> String
+openssl	manual/api/openssl/Digest.md:212	OpenSSL::Digest::MDC2	.	new	no-class	no-rbs		### def OpenSSL::Digest::MDC2.new(data=nil) -> OpenSSL::Digest::MDC2
+openssl	manual/api/openssl/Digest.md:220	OpenSSL::Digest::MDC2	.	digest	no-class	no-rbs		### def OpenSSL::Digest::MDC2.digest(data) -> String
+openssl	manual/api/openssl/Digest.md:226	OpenSSL::Digest::MDC2	.	hexdigest	no-class	no-rbs		### def OpenSSL::Digest::MDC2.hexdigest(data) -> String
+openssl	manual/api/openssl/Digest.md:262	OpenSSL::Digest::SHA	.	new	no-class	no-rbs		### def OpenSSL::Digest::SHA.new(data=nil) -> OpenSSL::Digest::SHA
+openssl	manual/api/openssl/Digest.md:270	OpenSSL::Digest::SHA	.	digest	no-class	no-rbs		### def OpenSSL::Digest::SHA.digest(data) -> String
+openssl	manual/api/openssl/Digest.md:276	OpenSSL::Digest::SHA	.	hexdigest	no-class	no-rbs		### def OpenSSL::Digest::SHA.hexdigest(data) -> String
+openssl	manual/api/openssl/Digest__Digest.md:11	OpenSSL::Digest::Digest	.	new	no-class	no-rbs		### def OpenSSL::Digest::Digest.new(*args) -> OpenSSL::Digest::Digest
+openssl	manual/api/openssl/Engine.md:14	OpenSSL::Engine	.	by_id	no-class	ok		### def OpenSSL::Engine.by_id(id) -> OpenSSL::Engine
+openssl	manual/api/openssl/Engine.md:23	OpenSSL::Engine	.	cleanup	no-class	ok		### def OpenSSL::Engine.cleanup -> nil
+openssl	manual/api/openssl/Engine.md:31	OpenSSL::Engine	.	engines	no-class	ok		### def OpenSSL::Engine.engines -> [OpenSSL::Engine]
+openssl	manual/api/openssl/Engine.md:37	OpenSSL::Engine	.	load	no-class	ok		### def OpenSSL::Engine.load(name = nil) -> true | nil
+openssl	manual/api/openssl/Engine.md:66	OpenSSL::Engine	#	cipher	no-class	ok		### def cipher(name) -> OpenSSL::Cipher
+openssl	manual/api/openssl/Engine.md:74	OpenSSL::Engine	#	cmds	no-class	ok		### def cmds -> [[String, String, String]]
+openssl	manual/api/openssl/Engine.md:88	OpenSSL::Engine	#	ctrl_cmd	no-class	ok		### def ctrl_cmd(cmd, val=nil) -> self
+openssl	manual/api/openssl/Engine.md:96	OpenSSL::Engine	#	digest	no-class	ok		### def digest(name) -> OpenSSL::Digest
+openssl	manual/api/openssl/Engine.md:104	OpenSSL::Engine	#	finish	no-class	ok		### def finish -> nil
+openssl	manual/api/openssl/Engine.md:108	OpenSSL::Engine	#	id	no-class	ok		### def id -> String
+openssl	manual/api/openssl/Engine.md:114	OpenSSL::Engine	#	load_private_key	no-class	ok		### def load_private_key(id=nil, data=nil) -> OpenSSL::PKey::PKey
+openssl	manual/api/openssl/Engine.md:121	OpenSSL::Engine	#	load_public_key	no-class	ok		### def load_public_key(id=nil, data=nil) -> OpenSSL::PKey::PKey
+openssl	manual/api/openssl/Engine.md:128	OpenSSL::Engine	#	name	no-class	ok		### def name -> String
+openssl	manual/api/openssl/Engine.md:138	OpenSSL::Engine	#	set_default	no-class	ok		### def set_default(flags) -> true
+openssl	manual/api/openssl/OCSP.md:245	OpenSSL::OCSP::BasicResponse	.	new	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def OpenSSL::OCSP::BasicResponse.new -> OpenSSL::OCSP::BasicResponse
+openssl	manual/api/openssl/OCSP.md:408	OpenSSL::OCSP::CertificateId	.	new	ok	rbs-unmatched-overload	 [unmatched-overload: OpenSSL::OCSP::CertificateId#initialize#0]	### def OpenSSL::OCSP::CertificateId.new(subject, issuer, digest=nil) -> OpenSSL::OCSP::CertificateId
+openssl	manual/api/openssl/OpenSSL__ASN1__Sequence.md:9	OpenSSL::ASN1::Sequence	.	new	no-class	no-rbs		### def OpenSSL::ASN1::Sequence.new(value) ->  OpenSSL::ASN1::Sequence
+openssl	manual/api/openssl/OpenSSL__ASN1__Set.md:9	OpenSSL::ASN1::Set	.	new	no-class	no-rbs		### def OpenSSL::ASN1::Set.new(value) ->  OpenSSL::ASN1::Set
+openssl	manual/api/openssl/OpenSSL__BN.md:608	OpenSSL::BN	#	pretty_print	name-mismatch	ok	doc=pp real=q	### def pretty_print(pp)
+openssl	manual/api/openssl/OpenSSL__Buffering.md:82	OpenSSL::Buffering	#	gets	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[chomp] rest0	### def gets(eol=$/, limit=nil) -> String | nil
+openssl	manual/api/openssl/OpenSSL__Buffering.md:108	OpenSSL::Buffering	#	printf	name-mismatch	ok	doc=format real=s	### def printf(format, *args) -> nil
+openssl	manual/api/openssl/OpenSSL__Buffering.md:126	OpenSSL::Buffering	#	read	name-mismatch	ok	doc=length,buf real=size,buf	### def read(length=nil, buf=nil) -> String | nil
+openssl	manual/api/openssl/OpenSSL__Buffering.md:164	OpenSSL::Buffering	#	ungetc	name-mismatch	ok	doc=char real=c	### def ungetc(char) -> ()
+openssl	manual/api/openssl/OpenSSL__Buffering.md:174	OpenSSL::Buffering	#	write	req-count	ok	doc=1 real=0	### def write(str) -> Integer
+openssl	manual/api/openssl/OpenSSL__Buffering.md:198	OpenSSL::Buffering	#	read_nonblock	req-count	ok	doc=2 real=1	### def read_nonblock(maxlen, buf) -> String
+openssl	manual/api/openssl/OpenSSL__Buffering.md:221	OpenSSL::Buffering	#	write_nonblock	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[exception] rest0	### def write_nonblock(s) -> Integer
+openssl	manual/api/openssl/OpenSSL__SSL__SSLSocket.md:220	OpenSSL::SSL::SSLSocket	#	accept_nonblock	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def accept_nonblock -> self
+openssl	manual/api/openssl/OpenSSL__SSL__SSLSocket.md:235	OpenSSL::SSL::SSLSocket	#	connect_nonblock	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def connect_nonblock -> self
+openssl	manual/api/openssl/OpenSSL__SSL__SocketForwarder.md:44	OpenSSL::SSL::SocketForwarder	#	fcntl	req-count	ok	doc=1 real=0	### def fcntl(cmd, arg=0) -> Integer
+openssl	manual/api/openssl/OpenSSL__SSL__SocketForwarder.md:60	OpenSSL::SSL::SocketForwarder	#	do_not_reverse_lookup=	name-mismatch	ok	doc=bool real=flag	### def do_not_reverse_lookup=(bool)
+openssl	manual/api/openssl/OpenSSL__SSL__SocketForwarder.md:75	OpenSSL::SSL::SocketForwarder	#	close_on_exec=	name-mismatch	no-rbs	doc=bool real=value	### def close_on_exec=(bool)
+openssl	manual/api/openssl/OpenSSL__SSL__SocketForwarder.md:125	OpenSSL::SSL::SocketForwarder	#	wait,wait_readable	opt-count	no-rbs	doc=1 real=0	### def wait(events, timeout = nil) -> Integer | nil
+openssl	manual/api/openssl/OpenSSL__SSL__SocketForwarder.md:139	OpenSSL::SSL::SocketForwarder	#	wait_writable	opt-count	no-rbs	doc=1 real=0	### def wait_writable(timeout = nil) -> self | nil
+openssl	manual/api/openssl/PKey__DH.md:83	OpenSSL::PKey::DH	.	new	forwarding?	ok	real forwards rest:args block:blk	### def OpenSSL::PKey::DH.new(size, generator = 2) -> OpenSSL::PKey::DH
+openssl	manual/api/openssl/PKey__DH.md:111	OpenSSL::PKey::DH	#	compute_key	name-mismatch	ok	doc=bn real=pub_bn	### def compute_key(bn) -> String
+openssl	manual/api/openssl/PKey__DH.md:119	OpenSSL::PKey::DH	#	to_text	no-real	ok		### def to_text -> String
+openssl	manual/api/openssl/PKey__DSA.md:46	OpenSSL::PKey::DSA	.	new	forwarding?	ok	real forwards rest:args block:blk	### def OpenSSL::PKey::DSA.new -> OpenSSL::PKey::DSA
+openssl	manual/api/openssl/PKey__DSA.md:110	OpenSSL::PKey::DSA	#	to_text	no-real	ok		### def to_text -> String
+openssl	manual/api/openssl/PKey__DSA.md:114	OpenSSL::PKey::DSA	#	syssign	name-mismatch	ok	doc=data real=string	### def syssign(data) -> String
+openssl	manual/api/openssl/PKey__DSA.md:124	OpenSSL::PKey::DSA	#	sysverify	name-mismatch	ok	doc=data,sign real=digest,sig	### def sysverify(data, sign) -> bool
+openssl	manual/api/openssl/PKey__EC.md:213	OpenSSL::PKey::EC	#	to_text	no-real	ok		### def to_text -> String
+openssl	manual/api/openssl/PKey__EC.md:454	OpenSSL::PKey::EC::Point	#	to_bn	opt-count	ok	doc=0 real=1	### def to_bn -> OpenSSL::BN
+openssl	manual/api/openssl/PKey__PKey.md:134	OpenSSL::PKey::PKey	#	sign	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def sign(digest, data) -> String
+openssl	manual/api/openssl/PKey__PKey.md:147	OpenSSL::PKey::PKey	#	verify	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def verify(digest, sign, data) -> bool
+openssl	manual/api/openssl/PKey__PKey.md:320	OpenSSL::PKey::PKey	#	derive	doc-no-optional?	no-rbs	doc has no opt/rest/kw; C arity=-1	### def derive(peer_pkey) -> String
+openssl	manual/api/openssl/PKey__RSA.md:74	OpenSSL::PKey::RSA	.	new	forwarding?	rbs-unmatched-overload	real forwards rest:args block:blk [unmatched-overload: OpenSSL::PKey::RSA#initialize#0]	### def OpenSSL::PKey::RSA.new(size, exponent = 65537) -> OpenSSL::PKey::RSA
+openssl	manual/api/openssl/PKey__RSA.md:124	OpenSSL::PKey::RSA	#	to_text	no-real	ok		### def to_text -> String
+openssl	manual/api/openssl/PKey__RSA.md:154	OpenSSL::PKey::RSA	#	public_encrypt	name-mismatch	ok	doc=str,mode real=data,padding	### def public_encrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING) -> String
+openssl	manual/api/openssl/PKey__RSA.md:170	OpenSSL::PKey::RSA	#	public_decrypt	name-mismatch	ok	doc=str,mode real=string,padding	### def public_decrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING) -> String
+openssl	manual/api/openssl/PKey__RSA.md:184	OpenSSL::PKey::RSA	#	private_encrypt	name-mismatch	ok	doc=str,mode real=string,padding	### def private_encrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING) -> String
+openssl	manual/api/openssl/PKey__RSA.md:199	OpenSSL::PKey::RSA	#	private_decrypt	name-mismatch	ok	doc=str,mode real=data,padding	### def private_decrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING) -> String
+openssl	manual/api/openssl/Random.md:57	OpenSSL::Random	.#	egd	no-real	no-rbs		### module_function def egd(filename) -> true
+openssl	manual/api/openssl/Random.md:68	OpenSSL::Random	.#	egd_bytes	no-real	no-rbs		### module_function def egd_bytes(filename, length) -> true
+openssl	manual/api/openssl/SSL__SSLContext.md:469	OpenSSL::SSL::SSLContext	#	set_params	req-count	ok	doc=1 real=0	### def set_params(params) -> Hash
+openssl	manual/api/openssl/SSL__SSLContext.md:498	OpenSSL::SSL::SSLContext	#	ssl_version=	name-mismatch	ok	doc=ver real=meth	### def ssl_version=(ver)
+openssl	manual/api/openssl/X509__ExtensionFactory.md:76	OpenSSL::X509::ExtensionFactory	#	create_extension	req-count	rbs-unmatched-sig	doc=1 real=0 / doc=2 real=0	### def create_extension(obj)  -> OpenSSL::X509::Extension
+openssl	manual/api/openssl/X509__Revoked.md:12	OpenSSL::X509::Revoked	.	new	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def OpenSSL::X509::Revoked.new -> OpenSSL::X509::Revoked
+openssl	manual/api/openssl/X509__Store.md:12	OpenSSL::X509::Store	.	new	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def OpenSSL::X509::Store.new -> OpenSSL::X509::Store
+optparse	manual/api/optparse/Arguable.md:46	OptionParser::Arguable	#	order!	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def order!               -> [String]
+optparse	manual/api/optparse/Arguable.md:64	OptionParser::Arguable	#	permute!	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def permute!             -> [String]
+optparse	manual/api/optparse/Arguable.md:81	OptionParser::Arguable	#	parse!	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def parse!               -> [String]
+optparse	manual/api/optparse/Arguable.md:99	OptionParser::Arguable	#	getopts	req-count	ok	doc=1 real=0	### def getopts(short_opt, *long_opt, symbolize_names: false)    -> Hash
+optparse	manual/api/optparse/OptionParser.md:71	OptionParser	.	accept	forwarding?	ok	real forwards rest:args block:blk	### def OptionParser.accept(klass, pat = /.*/){|str| ...}    -> ()
+optparse	manual/api/optparse/OptionParser.md:107	OptionParser	.	reject	forwarding?	ok	real forwards rest:args block:blk	### def OptionParser.reject(klass)    -> ()
+optparse	manual/api/optparse/OptionParser.md:139	OptionParser	.	getopts	kw-mismatch	ok	doc=1 real=0 / doc=req[] opt[] rest0 real=req[] opt[symbolize_names] rest0	### def OptionParser.getopts(argv, *opts)   -> Hash
+optparse	manual/api/optparse/OptionParser.md:168	OptionParser	#	accept	forwarding?	ok	real forwards rest:args block:blk	### def accept(klass, pat = /.*/){|str| ...}    -> ()
+optparse	manual/api/optparse/OptionParser.md:196	OptionParser	#	reject	forwarding?	ok	real forwards rest:args block:blk	### def reject(klass)    -> ()
+optparse	manual/api/optparse/OptionParser.md:544	OptionParser	#	separator	name-mismatch	ok	doc=sep real=string	### def separator(sep)    -> ()
+optparse	manual/api/optparse/OptionParser.md:574	OptionParser	#	on	forwarding?	ok	real forwards rest:opts block:block	### def on(short, desc = "") {|v| ... }        -> self
+optparse	manual/api/optparse/OptionParser.md:787	OptionParser	#	on_head	forwarding?	ok	real forwards rest:opts block:block	### def on_head(*arg, &block) -> self
+optparse	manual/api/optparse/OptionParser.md:814	OptionParser	#	on_tail	forwarding?	ok	real forwards rest:opts block:block	### def on_tail(*arg, &block) -> self
+optparse	manual/api/optparse/OptionParser.md:858	OptionParser	#	order	forwarding?	ok	real forwards rest:argv keyrest:keywords block:nonopt	### def order(argv, into: nil)            -> [String]
+optparse	manual/api/optparse/OptionParser.md:901	OptionParser	#	order!	kw-mismatch	ok	doc=req[] opt[into] rest0 real=req[] opt[into] rest1	### def order!(argv = self.default_argv, into: nil)             -> [String]
+optparse	manual/api/optparse/OptionParser.md:942	OptionParser	#	permute	kw-mismatch	ok	doc=1 real=0 / doc=req[] opt[into] rest0 real=req[] opt[] rest1	### def permute(argv, into: nil)   -> [String]
+optparse	manual/api/optparse/OptionParser.md:982	OptionParser	#	permute!	kw-mismatch	ok	doc=req[] opt[into] rest0 real=req[] opt[] rest1	### def permute!(argv = self.default_argv, into: nil)    -> [String]
+optparse	manual/api/optparse/OptionParser.md:1019	OptionParser	#	parse	kw-mismatch	ok	doc=1 real=0 / doc=req[] opt[into] rest0 real=req[] opt[] rest1	### def parse(argv, into: nil)   -> [String]
+optparse	manual/api/optparse/OptionParser.md:1052	OptionParser	#	parse!	kw-mismatch	ok	doc=req[] opt[into] rest0 real=req[] opt[] rest1	### def parse!(argv = self.default_argv, into: nil)   -> [String]
+optparse	manual/api/optparse/OptionParser.md:1085	OptionParser	#	load	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def load(filename = nil)     -> bool
+optparse	manual/api/optparse/OptionParser.md:1114	OptionParser	#	environment	req-count	ok	doc=1 real=0	### def environment(env)    -> [String]
+optparse	manual/api/optparse/OptionParser.md:1186	OptionParser	#	getopts	kw-mismatch	ok	doc=1 real=0 / doc=req[] opt[] rest0 real=req[] opt[symbolize_names] rest1	### def getopts(argv, *opts)   -> Hash
+optparse	manual/api/optparse/OptionParser.md:1210	OptionParser	#	def_option,define	forwarding?	ok	real forwards rest:opts block:block	### def define(*params) {|v| ... } -> OptionParser::Switch
+optparse	manual/api/optparse/OptionParser.md:1222	OptionParser	#	def_head_option,define_head	forwarding?	ok	real forwards rest:opts block:block	### def define_head(*params) {|v| ... } -> OptionParser::Switch
+optparse	manual/api/optparse/OptionParser.md:1234	OptionParser	#	def_tail_option,define_tail	forwarding?	ok	real forwards rest:opts block:block	### def define_tail(*params) {|v| ... } -> OptionParser::Switch
+ostruct	manual/api/ostruct.md:122	OpenStruct	#	delete_field	block-missing	no-rbs	real has &block	### def delete_field(name) -> object
+ostruct	manual/api/ostruct.md:193	OpenStruct	#	dig	kw-mismatch	no-rbs	doc=req[] opt[] rest1 real=req[] opt[] rest0	### def dig(key, ...) -> object | nil
+ostruct	manual/api/ostruct.md:218	OpenStruct	#	modifiable	no-real	no-rbs		### def modifiable -> Hash
+ostruct	manual/api/ostruct.md:226	OpenStruct	#	new_ostruct_member	no-real	no-rbs		### def new_ostruct_member(name) -> Symbol
+pathname	manual/api/pathname.md:86	Pathname	.	glob	req-count	no-rbs	doc=1 real=0	### def Pathname.glob(pattern, flags=0) -> [Pathname]
+pathname	manual/api/pathname.md:219	Pathname	#	realpath	forwarding?	no-rbs	real forwards *, **, &	### def realpath(basedir = nil) -> Pathname
+pathname	manual/api/pathname.md:253	Pathname	#	realdirpath	forwarding?	no-rbs	real forwards *, **, &	### def realdirpath(basedir = nil) -> Pathname
+pathname	manual/api/pathname.md:449	Pathname	#	each_line	forwarding?	no-rbs	real forwards *, **, &	### def each_line(*args){|line| ... } -> nil
+pathname	manual/api/pathname.md:499	Pathname	#	read	forwarding?	no-rbs	real forwards *, **, &	### def read(*args) -> String | nil
+pathname	manual/api/pathname.md:507	Pathname	#	binread	forwarding?	no-rbs	real forwards *, **, &	### def binread(*args) -> String | nil
+pathname	manual/api/pathname.md:522	Pathname	#	readlines	forwarding?	no-rbs	real forwards *, **, &	### def readlines(*args) -> [String]
+pathname	manual/api/pathname.md:530	Pathname	#	sysopen	forwarding?	no-rbs	real forwards *, **, &	### def sysopen(*args) -> Integer
+pathname	manual/api/pathname.md:652	Pathname	#	fnmatch	forwarding?	no-rbs	real forwards *, **, &	### def fnmatch(pattern, *args) -> bool
+pathname	manual/api/pathname.md:672	Pathname	#	fnmatch?	forwarding?	no-rbs	real forwards *, **, &	### def fnmatch?(pattern, *args) -> bool
+pathname	manual/api/pathname.md:691	Pathname	#	open	forwarding?	no-rbs	real forwards *, **, &	### def open(mode = 'r', perm = 0666) -> File
+pathname	manual/api/pathname.md:789	Pathname	#	basename	forwarding?	no-rbs	real forwards *, **, &	### def basename(suffix = "") -> Pathname
+pathname	manual/api/pathname.md:828	Pathname	#	expand_path	forwarding?	no-rbs	real forwards *, **, &	### def expand_path(default_dir = '.') -> Pathname
+pathname	manual/api/pathname.md:1042	Pathname	#	write	forwarding?	no-rbs	real forwards *, **, &	### def write(string, offset=nil, **opts) -> Integer
+pathname	manual/api/pathname.md:1050	Pathname	#	binwrite	forwarding?	no-rbs	real forwards *, **, &	### def binwrite(string, offset=nil) -> Integer
+pathname	manual/api/pathname.md:1164	Pathname	#	mkdir	forwarding?	no-rbs	real forwards *, **, &	### def mkdir(*args) -> 0
+pathname	manual/api/pathname.md:1199	Pathname	#	mkpath	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[mode] rest0	### def mkpath -> nil
+pathname	manual/api/pathname.md:1207	Pathname	#	rmtree	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[noop,secure,verbose] rest0	### def rmtree -> nil
+pathname	manual/api/pathname.md:1306	Pathname	#	sub_ext	name-mismatch	no-rbs	doc=replace real=repl	### def sub_ext(replace) -> Pathname
+pathname	manual/api/pathname.md:1329	Pathname	#	glob	req-count	no-rbs	doc=1 real=0	### def glob(pattern, flags=0) -> [Pathname]
+pp	manual/api/pp.md:225	PP	#	pp	no-real	no-rbs		### def pp(obj)    -> ()
+pp	manual/api/pp.md:234	PP	#	object_group	no-real	no-rbs		### def object_group(obj) { ... }    -> ()
+pp	manual/api/pp.md:246	PP	#	comma_breakable	no-real	no-rbs		### def comma_breakable    -> ()
+pp	manual/api/pp.md:257	PP	#	seplist	no-real	no-rbs		### def seplist(list, sep = lambda { comma_breakable }, iter_method = :each){|e| ...}    -> ()
+pp	manual/api/pp.md:289	Object	#	pretty_print	no-class	no-rbs		### def pretty_print(pp)    -> ()
+pp	manual/api/pp.md:313	Object	#	pretty_print_cycle	no-class	no-rbs		### def pretty_print_cycle(pp)    -> ()
+pp	manual/api/pp.md:332	Object	#	pretty_print_instance_variables	no-class	no-rbs		### def pretty_print_instance_variables    -> [String | Symbol]
+pp	manual/api/pp.md:339	Object	#	pretty_print_inspect	no-class	no-rbs		### def pretty_print_inspect    -> String
+pp	manual/api/pp.md:350	Object	#	pretty_inspect	no-class	no-rbs		### def pretty_inspect    -> String
+prime	manual/api/prime/Prime.md:25	Prime	.	instance	no-real	no-rbs		### def Prime.instance -> Prime
+prime	manual/api/prime/Prime.md:29	Prime	.	each	forwarding?	no-rbs	real forwards *, **, &	### def Prime.each(upper_bound = nil, generator = EratosthenesGenerator.new){|prime| ... } -> object
+prime	manual/api/prime/Prime.md:46	Prime	.	int_from_prime_division	forwarding?	no-rbs	real forwards *, **, &	### def Prime.int_from_prime_division(pd) -> Integer
+prime	manual/api/prime/Prime.md:56	Prime	.	prime?	forwarding?	no-rbs	real forwards *, **, &	### def Prime.prime?(value, generator = Prime::Generator23.new) -> bool
+prime	manual/api/prime/Prime.md:71	Prime	.	prime_division	forwarding?	no-rbs	real forwards *, **, &	### def Prime.prime_division(value, generator= Prime::Generator23.new) -> [[Integer, Integer]]
+prime	manual/api/prime/Prime__PseudoPrimeGenerator.md:17	Prime::PseudoPrimeGenerator	.	new	name-mismatch	no-rbs	doc=upper_bound real=ubound	### def Prime::PseudoPrimeGenerator.new(upper_bound = nil) -> Prime::PseudoPrimeGenerator
+prime	manual/api/prime/Prime__PseudoPrimeGenerator.md:54	Prime::PseudoPrimeGenerator	#	upper_bound=	name-mismatch	no-rbs	doc=upper_bound real=ubound	### def upper_bound=(upper_bound)
+prime	manual/api/prime/Prime__PseudoPrimeGenerator.md:60	Prime::PseudoPrimeGenerator	#	each_with_index,with_index	opt-count	no-rbs	doc=0 real=1	### def with_index{|prime, index| ... }      -> self
+prism	manual/api/prism/Node.md:91	Prism::Node	#	copy	no-real	no-rbs		### def copy(**params) -> Prism::Node
+prism	manual/api/prism/Node.md:110	Prism::Node	#	deconstruct_keys	no-real	no-rbs		### def deconstruct_keys(keys) -> Hash
+prism	manual/api/prism/Node.md:221	Prism::Node	#	===	no-real	no-rbs		### def ===(other) -> bool
+prism	manual/api/prism/Node.md:320	Prism::Node	#	each_child_node	no-real	no-rbs		### def each_child_node -> Enumerator
+prism	manual/api/prism/ParseResult.md:36	Prism::ParseResult	#	success?	no-real	no-rbs		### def success? -> bool
+prism	manual/api/prism/ParseResult.md:50	Prism::ParseResult	#	failure?	no-real	no-rbs		### def failure? -> bool
+prism	manual/api/prism/ParseResult.md:63	Prism::ParseResult	#	errors	no-real	no-rbs		### def errors -> Array
+prism	manual/api/prism/ParseResult.md:85	Prism::ParseResult	#	warnings	no-real	no-rbs		### def warnings -> Array
+prism	manual/api/prism/ParseResult.md:102	Prism::ParseResult	#	comments	no-real	no-rbs		### def comments -> Array
+prism	manual/api/prism/ParseResult.md:117	Prism::ParseResult	#	magic_comments	no-real	no-rbs		### def magic_comments -> Array
+prism	manual/api/prism/ParseResult.md:155	Prism::ParseResult	#	data_loc	no-real	no-rbs		### def data_loc -> Prism::Location | nil
+prism	manual/api/prism/ParseResult.md:175	Prism::ParseResult	#	source	no-real	no-rbs		### def source -> Prism::Source
+prism	manual/api/prism/Source.md:243	Prism::Source	.	for	req-count	no-rbs	doc=3 real=1	### def Prism::Source.for(source, start_line, offsets) -> Prism::Source
+pstore	manual/api/pstore.md:76	PStore	#	[]	name-mismatch	ok	doc=name real=key	### def [](name) -> object
+pstore	manual/api/pstore.md:86	PStore	#	[]=	name-mismatch	ok	doc=name,value real=key,value	### def []=(name, value)
+pstore	manual/api/pstore.md:98	PStore	#	fetch	name-mismatch	ok	doc=name,default real=key,default	### def fetch(name, default = PStore::Error) -> object
+pstore	manual/api/pstore.md:130	PStore	#	delete	name-mismatch	ok	doc=name real=key	### def delete(name) -> object
+pstore	manual/api/pstore.md:165	PStore	#	root?	name-mismatch	ok	doc=name real=key	### def root?(name) -> bool
+pstore	manual/api/pstore.md:283	PStore::DummyMutex	#	synchronize	no-class	no-rbs		### def synchronize{ ... } -> object
+psych	manual/api/psych.md:374	Psych	.	parse_file	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[fallback] rest0	### def Psych.parse_file(filename) -> Psych::Nodes::Document
+psych	manual/api/psych.md:385	Psych	.	parse_stream	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[filename] rest0	### def Psych.parse_stream(yaml) -> Psych::Nodes::Stream
+psych	manual/api/psych.md:449	Psych	.	to_json	name-mismatch	no-rbs	doc=o real=object	### def Psych.to_json(o) -> String
+psych	manual/api/psych.md:455	Psych	.	load_stream	opt-count	no-rbs	doc=1 real=0	### def Psych.load_stream(yaml, filename=nil) -> [object]
+psych	manual/api/psych.md:487	Psych	.	load_file	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def Psych.load_file(filename) -> object
+psych	manual/api/psych.md:520	Psych	.	safe_load_file	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def Psych.safe_load_file(filename) -> object
+psych	manual/api/psych.md:657	Psych	.	unsafe_load_file	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def Psych.unsafe_load_file(filename) -> object
+psych	manual/api/psych/Psych__Handler.md:368	Psych::Emitter	.	new	doc-no-optional?	no-rbs	doc has no opt/rest/kw; C arity=-1	### def Psych::Emitter.new(io) -> Psych::Emitter
+psych	manual/api/psych/Psych__Nodes__Node.md:47	Psych::Nodes::Node	#	to_ruby,transform	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[freeze,parse_symbols,strict_integer,symbolize_names] rest0	### def to_ruby -> object
+psych	manual/api/psych/Psych__Parser.md:81	Psych::Parser	#	parse	opt-count	no-rbs	doc=0 real=1	### def parse(yaml) -> self
+psych	manual/api/psych/Psych__Parser.md:113	Psych::Parser::Mark	#	index	no-class	no-rbs		### def index -> Integer
+psych	manual/api/psych/Psych__Parser.md:117	Psych::Parser::Mark	#	line	no-class	no-rbs		### def line -> Integer
+psych	manual/api/psych/Psych__Parser.md:121	Psych::Parser::Mark	#	column	no-class	no-rbs		### def column -> Integer
+psych	manual/api/psych/Psych__ScalarScanner.md:16	Psych::ScalarScanner	.	new	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[parse_symbols,strict_integer] rest0	### def Psych::ScalarScanner.new(class_loader) -> Psych::ScalarScanner
+psych	manual/api/psych/Psych__Stream.md:37	Psych::Stream	.	new	no-class	no-rbs		### def Psych::Stream.new(io) -> Psych::Stream
+psych	manual/api/psych/Psych__Stream.md:46	Psych::Stream	#	start	no-class	no-rbs		### def start(encoding = Psych::Nodes::Stream::UTF8) -> Psych::Stream
+psych	manual/api/psych/Psych__Stream.md:61	Psych::Stream	#	finish	no-class	no-rbs		### def finish -> ()
+psych	manual/api/psych/core_ext.md:8	Object	.	yaml_tag	name-mismatch	no-rbs	doc=tag real=url	### def Object.yaml_tag(tag) -> ()
+psych	manual/api/psych/core_ext.md:74	Kernel	#	y	no-real	no-rbs		### def y(*objects) -> nil
+pty	manual/api/pty.md:13	PTY	.#	getpty,spawn	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### module_function def getpty(command)                          -> [IO, IO, Integer]
+rake	manual/api/rake/FileUtils.md:8	FileUtils	#	sh	forwarding?	no-rbs	real forwards rest:cmd block:block	### def sh(*cmd){|result, status| ... }
+rake	manual/api/rake/FileUtils.md:31	FileUtils	#	ruby	forwarding?	no-rbs	real forwards rest:args keyrest:options block:block	### def ruby(*args){|result, status| ... }
+rake	manual/api/rake/FileUtils.md:43	FileUtils	#	safe_ln	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def safe_ln(*args)
+rake	manual/api/rake/Rake__Application.md:101	Rake::Application	#	init	opt-count	no-rbs	doc=1 real=2	### def init(app_name = 'rake')
+rake	manual/api/rake/Rake__Application.md:222	Rake::Application	#	run	opt-count	no-rbs	doc=0 real=1	### def run
+rake	manual/api/rake/Rake__Cloneable.md:11	Rake::Cloneable	#	clone	no-real	no-rbs		### def clone -> object
+rake	manual/api/rake/Rake__Cloneable.md:30	Rake::Cloneable	#	dup	no-real	no-rbs		### def dup -> object
+rake	manual/api/rake/Rake__DSL.md:16	Rake::DSL	#	task	forwarding?	no-rbs	real forwards rest:args block:block	### def task(*args){ ... } -> Rake::Task
+rake	manual/api/rake/Rake__DSL.md:30	Rake::DSL	#	file	forwarding?	no-rbs	real forwards rest:args block:block	### def file(*args){ ... } -> Rake::FileTask
+rake	manual/api/rake/Rake__DSL.md:50	Rake::DSL	#	file_create	forwarding?	no-rbs	real forwards rest:args block:block	### def file_create(*args){ ... } -> Rake::FileCreationTask
+rake	manual/api/rake/Rake__DSL.md:56	Rake::DSL	#	directory	forwarding?	no-rbs	real forwards rest:args block:block	### def directory(dir) -> ()
+rake	manual/api/rake/Rake__DSL.md:66	Rake::DSL	#	multitask	forwarding?	no-rbs	real forwards rest:args block:block	### def multitask(args){ ... } -> Rake::MultiTask
+rake	manual/api/rake/Rake__DSL.md:91	Rake::DSL	#	rule	forwarding?	no-rbs	real forwards rest:args block:block	### def rule(*args){|t| ... } -> Rake::Task
+rake	manual/api/rake/Rake__DefaultLoader.md:10	Rake::DefaultLoader	#	load	name-mismatch	no-rbs	doc=filename real=fn	### def load(filename)
+rake	manual/api/rake/Rake__FileList.md:33	Rake::FileList	#	exclude	forwarding?	no-rbs	real forwards rest:patterns block:block	### def exclude(*patterns){|entry| ... } -> self
+rake	manual/api/rake/Rake__FileList.md:146	Rake::FileList	#	sub	name-mismatch	no-rbs	doc=pattern,replace real=pat,rep	### def sub(pattern, replace) -> Rake::FileList
+rake	manual/api/rake/Rake__FileList.md:154	Rake::FileList	#	gsub	name-mismatch	no-rbs	doc=pattern,replace real=pat,rep	### def gsub(pattern, replace) -> Rake::FileList
+rake	manual/api/rake/Rake__FileList.md:162	Rake::FileList	#	sub!	name-mismatch	no-rbs	doc=pattern,replace real=pat,rep	### def sub!(pattern, replace) -> self
+rake	manual/api/rake/Rake__FileList.md:178	Rake::FileList	#	gsub!	name-mismatch	no-rbs	doc=pattern,replace real=pat,rep	### def gsub!(pattern, replace) -> self
+rake	manual/api/rake/Rake__FileList.md:197	Rake::FileList	#	pathmap	block-missing	no-rbs	real has &block	### def pathmap(spec = nil) -> Rake::FileList
+rake	manual/api/rake/Rake__FileList.md:232	Rake::FileList	#	egrep	rest	no-rbs	doc=0 real=1	### def egrep(pattern){|filename, count, line| ... }
+rake	manual/api/rake/Rake__FileList.md:315	Rake::FileList	#	excluded_from_list?	name-mismatch	no-rbs	doc=file_name real=fn	### def excluded_from_list?(file_name) -> bool
+rake	manual/api/rake/Rake__InvocationChain.md:18	Rake::InvocationChain	#	append	name-mismatch	no-rbs	doc=task_name real=invocation	### def append(task_name) -> Rake::InvocationChain
+rake	manual/api/rake/Rake__InvocationChain.md:18	Rake::InvocationChain::EmptyInvocationChain	#	append	name-mismatch	no-rbs	doc=task_name real=invocation	### def append(task_name) -> Rake::InvocationChain
+rake	manual/api/rake/Rake__InvocationChain.md:36	Rake::InvocationChain	#	member?	name-mismatch	no-rbs	doc=task_name real=invocation	### def member?(task_name) -> bool
+rake	manual/api/rake/Rake__InvocationChain.md:36	Rake::InvocationChain::EmptyInvocationChain	#	member?	name-mismatch	no-rbs	doc=task_name real=obj	### def member?(task_name) -> bool
+rake	manual/api/rake/Rake__InvocationChain.md:70	Rake::InvocationChain	.	new	no-real:inherited	no-rbs		### def Rake::InvocationChain.new(task_name, tail)
+rake	manual/api/rake/Rake__InvocationChain.md:90	Rake::InvocationChain	.	append	name-mismatch	no-rbs	doc=task_name,chain real=invocation,chain	### def Rake::InvocationChain.append(task_name, chain) -> Rake::InvocationChain
+rake	manual/api/rake/Rake__Task.md:163	Rake::Task	.	create_rule	forwarding?	no-rbs	real forwards rest:args block:block	### def Rake::Task.create_rule(*args){ ... } -> Rake::Task
+rake	manual/api/rake/Rake__Task.md:167	Rake::Task	.	define_task	forwarding?	no-rbs	real forwards rest:args block:block	### def Rake::Task.define_task(*args){ ... } -> Rake::Task
+rake	manual/api/rake/Rake__TaskArguments.md:12	Rake::TaskArguments	#	[]	name-mismatch	no-rbs	doc=key real=index	### def [](key) -> object
+rake	manual/api/rake/Rake__TaskManager.md:42	Rake::TaskManager	#	create_rule	forwarding?	no-rbs	real forwards rest:args block:block	### def create_rule(*args){ ... }
+rake/loaders/makefile	manual/api/rake/loaders/makefile.md:12	Rake::MakefileLoader	#	load	name-mismatch	no-rbs	doc=filename real=fn	### def load(filename)
+rdoc/code_object	manual/api/rdoc/RDoc__CodeObject.md:57	RDoc::CodeObject	#	document_children=	name-mismatch	no-rbs	doc=val real=document_children	### def document_children=(val)
+rdoc/code_object	manual/api/rdoc/RDoc__CodeObject.md:73	RDoc::CodeObject	#	document_self=	name-mismatch	no-rbs	doc=val real=document_self	### def document_self=(val)
+rdoc/code_object/context	manual/api/rdoc/RDoc__Context.md:92	RDoc::Context	#	add_attribute	name-mismatch	ok	doc=an_attribute real=attribute	### def add_attribute(an_attribute) -> ()
+rdoc/code_object/context	manual/api/rdoc/RDoc__Context.md:98	RDoc::Context	#	add_class	req-count	ok	doc=3 real=2	### def add_class(class_type, name, superclass) -> RDoc::SingleClass | RDoc::NormalClass
+rdoc/code_object/context	manual/api/rdoc/RDoc__Context.md:109	RDoc::Context	#	add_class_or_module	opt-count	no-rbs	doc=1 real=0	### def add_class_or_module(collection, class_type, name, superclass = nil) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule
+rdoc/code_object/context	manual/api/rdoc/RDoc__Context.md:124	RDoc::Context	#	add_constant	name-mismatch	ok	doc=const real=constant	### def add_constant(const) -> ()
+rdoc/code_object/context	manual/api/rdoc/RDoc__Context.md:130	RDoc::Context	#	add_include	name-mismatch	ok	doc=an_include real=include	### def add_include(an_include) -> ()
+rdoc/code_object/context	manual/api/rdoc/RDoc__Context.md:136	RDoc::Context	#	add_method	name-mismatch	ok	doc=a_method real=method	### def add_method(a_method) -> ()
+rdoc/code_object/context	manual/api/rdoc/RDoc__Context.md:155	RDoc::Context	#	add_require	name-mismatch	no-rbs	doc=a_require real=require	### def add_require(a_require) -> ()
+rdoc/code_object/context	manual/api/rdoc/RDoc__Context.md:224	RDoc::Context	#	find_symbol	opt-count	no-rbs	doc=1 real=0	### def find_symbol(symbol, method=nil)
+rdoc/code_object/context	manual/api/rdoc/RDoc__Context.md:238	RDoc::Context	#	ongoing_visibility=	name-mismatch	no-rbs	doc=vis real=visibility	### def ongoing_visibility=(vis)
+rdoc/code_object/context	manual/api/rdoc/RDoc__Context.md:244	RDoc::Context	#	record_location	name-mismatch	no-rbs	doc=toplevel real=top_level	### def record_location(toplevel)
+rdoc/rdoc	manual/api/rdoc/RDoc__RDoc.md:24	RDoc::RDoc	#	document	name-mismatch	no-rbs	doc=argv real=options	### def document(argv) -> nil
+rdoc/code_object/top_level	manual/api/rdoc/RDoc__TopLevel.md:15	RDoc::TopLevel	.	new	opt-count	ok	doc=0 real=1	### def RDoc::TopLevel.new(file_name) -> RDoc::TopLevel
+rdoc/code_object/top_level	manual/api/rdoc/RDoc__TopLevel.md:23	RDoc::TopLevel	#	add_class_or_module	no-real	no-rbs		### def add_class_or_module(collection, class_type, name, superclass) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule
+rdoc/code_object/top_level	manual/api/rdoc/RDoc__TopLevel.md:38	RDoc::TopLevel	#	find_local_symbol	name-mismatch	no-rbs	doc=name real=symbol	### def find_local_symbol(name) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule | RDoc::AnyMethod | RDoc::Alias | RDoc::Attr | RDoc::Constant
+rdoc/code_object/top_level	manual/api/rdoc/RDoc__TopLevel.md:66	RDoc::TopLevel	#	display?	no-real	no-rbs		### def display? -> bool
+rdoc/markdown	manual/api/rdoc/markdown.md:197	RDoc::Markdown	#	break_on_newline=	name-mismatch	no-rbs	doc=val real=enable	### def break_on_newline=(val)
+rdoc/markdown	manual/api/rdoc/markdown.md:208	RDoc::Markdown	#	css=	name-mismatch	no-rbs	doc=val real=enable	### def css=(val)
+rdoc/markdown	manual/api/rdoc/markdown.md:219	RDoc::Markdown	#	definition_lists=	name-mismatch	no-rbs	doc=val real=enable	### def definition_lists=(val)
+rdoc/markdown	manual/api/rdoc/markdown.md:230	RDoc::Markdown	#	github=	name-mismatch	no-rbs	doc=val real=enable	### def github=(val)
+rdoc/markdown	manual/api/rdoc/markdown.md:241	RDoc::Markdown	#	html=	name-mismatch	no-rbs	doc=val real=enable	### def html=(val)
+rdoc/markdown	manual/api/rdoc/markdown.md:252	RDoc::Markdown	#	notes=	name-mismatch	no-rbs	doc=val real=enable	### def notes=(val)
+rdoc/markdown	manual/api/rdoc/markdown.md:263	RDoc::Markdown	#	strike=	name-mismatch	no-rbs	doc=val real=enable	### def strike=(val)
+rdoc/markup	manual/api/rdoc/markup/simple_markup.md:274	RDoc::Markup	#	convert	name-mismatch	no-rbs	doc=str,formatter real=input,formatter	### def convert(str, formatter) -> object | ""
+rdoc/markup/to_html_crossref	manual/api/rdoc/markup/to_html_crossref.md:16	RDoc::Markup::ToHtmlCrossref	.	new	opt-count	no-rbs	doc=0 real=1	### def RDoc::Markup::ToHtmlCrossref.new(path, context, show_hash) -> RDoc::Markup::ToHtmlCrossref
+rdoc/options	manual/api/rdoc/options.md:330	RDoc::Options	#	visibility=	name-mismatch	no-rbs	doc=val real=visibility	### def visibility=(val)
+rdoc/parser/c	manual/api/rdoc/parser/../parsers/parse_c.md:95	RDoc::Parser::C	.	new	req-count	no-rbs	doc=5 real=4	### def RDoc::Parser::C.new(top_level, file_name, body, options, stats) -> RDoc::Parser::C
+rdoc/parser/ruby	manual/api/rdoc/parser/../parsers/parse_rb.md:102	RDoc::Parser::Ruby	.	new	req-count	no-rbs	doc=5 real=4	### def RDoc::Parser::Ruby.new(top_level, file_name, body, options, stats) -> RDoc::Parser::Ruby
+rdoc/parser/simple	manual/api/rdoc/parser/../parsers/parse_simple.md:15	RDoc::Parser::Simple	.	new	req-count	no-rbs	doc=5 real=4	### def RDoc::Parser::Simple.new(top_level, file_name, body, options, stats) -> RDoc::Parser::Simple
+rdoc/parser	manual/api/rdoc/parsers/parserfactory.md:93	RDoc::Parser	.	for	name-mismatch	no-rbs	doc=top_level,body,options,stats real=top_level,content,options,stats	### def RDoc::Parser.for(top_level, body, options, stats) -> RDoc::Parser | nil
+rdoc/text	manual/api/rdoc/text.md:43	RDoc::Text	#	parse	opt-count	no-rbs	doc=0 real=1	### def parse(text) -> RDoc::Markup::Document | Array
+readline	manual/api/readline/Readline.md:40	Readline	.#	readline	forwarding?	no-rbs	real forwards *, **, &	### module_function def readline(prompt = "", add_hist = false) -> String | nil
+readline	manual/api/readline/Readline.md:168	Readline	.	input=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.input=(input)
+readline	manual/api/readline/Readline.md:175	Readline	.	output=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.output=(output)
+readline	manual/api/readline/Readline.md:182	Readline	.	completion_proc=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.completion_proc=(proc)
+readline	manual/api/readline/Readline.md:216	Readline	.	completion_proc	forwarding?	no-rbs	real forwards *, **, &	### def Readline.completion_proc -> Proc
+readline	manual/api/readline/Readline.md:223	Readline	.	completion_case_fold=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.completion_case_fold=(bool)
+readline	manual/api/readline/Readline.md:232	Readline	.	completion_case_fold	forwarding?	no-rbs	real forwards *, **, &	### def Readline.completion_case_fold -> bool
+readline	manual/api/readline/Readline.md:247	Readline	.	vi_editing_mode	forwarding?	no-rbs	real forwards *, **, &	### def Readline.vi_editing_mode -> nil
+readline	manual/api/readline/Readline.md:256	Readline	.	emacs_editing_mode	forwarding?	no-rbs	real forwards *, **, &	### def Readline.emacs_editing_mode -> nil
+readline	manual/api/readline/Readline.md:266	Readline	.	completion_append_character=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.completion_append_character=(string)
+readline	manual/api/readline/Readline.md:297	Readline	.	completion_append_character	forwarding?	no-rbs	real forwards *, **, &	### def Readline.completion_append_character -> String
+readline	manual/api/readline/Readline.md:305	Readline	.	basic_word_break_characters=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.basic_word_break_characters=(string)
+readline	manual/api/readline/Readline.md:318	Readline	.	basic_word_break_characters	forwarding?	no-rbs	real forwards *, **, &	### def Readline.basic_word_break_characters -> String
+readline	manual/api/readline/Readline.md:326	Readline	.	completer_word_break_characters=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.completer_word_break_characters=(string)
+readline	manual/api/readline/Readline.md:341	Readline	.	completer_word_break_characters	forwarding?	no-rbs	real forwards *, **, &	### def Readline.completer_word_break_characters -> String
+readline	manual/api/readline/Readline.md:351	Readline	.	basic_quote_characters=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.basic_quote_characters=(string)
+readline	manual/api/readline/Readline.md:363	Readline	.	basic_quote_characters	forwarding?	no-rbs	real forwards *, **, &	### def Readline.basic_quote_characters -> String
+readline	manual/api/readline/Readline.md:371	Readline	.	completer_quote_characters=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.completer_quote_characters=(string)
+readline	manual/api/readline/Readline.md:383	Readline	.	completer_quote_characters	forwarding?	no-rbs	real forwards *, **, &	### def Readline.completer_quote_characters -> String
+readline	manual/api/readline/Readline.md:391	Readline	.	filename_quote_characters=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.filename_quote_characters=(string)
+readline	manual/api/readline/Readline.md:403	Readline	.	filename_quote_characters	forwarding?	no-rbs	real forwards *, **, &	### def Readline.filename_quote_characters -> String
+readline	manual/api/readline/Readline.md:411	Readline	.	set_screen_size	no-real	no-rbs		### def Readline.set_screen_size(rows, columns) -> Readline
+readline	manual/api/readline/Readline.md:423	Readline	.	get_screen_size	forwarding?	no-rbs	real forwards *, **, &	### def Readline.get_screen_size -> [Integer, Integer]
+readline	manual/api/readline/Readline.md:431	Readline	.	completion_quote_character	forwarding?	no-rbs	real forwards *, **, &	### def Readline.completion_quote_character -> String | nil
+readline	manual/api/readline/Readline.md:444	Readline	.	delete_text	forwarding?	no-rbs	real forwards *, **, &	### def Readline.delete_text(start, length) -> self
+readline	manual/api/readline/Readline.md:461	Readline	.	emacs_editing_mode?	forwarding?	no-rbs	real forwards *, **, &	### def Readline.emacs_editing_mode? -> bool
+readline	manual/api/readline/Readline.md:470	Readline	.	insert_text	name-mismatch	no-rbs	doc=string real=text	### def Readline.insert_text(string) -> self
+readline	manual/api/readline/Readline.md:481	Readline	.	line_buffer	forwarding?	no-rbs	real forwards *, **, &	### def Readline.line_buffer -> String
+readline	manual/api/readline/Readline.md:494	Readline	.	point,point=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.point=(pos)
+readline	manual/api/readline/Readline.md:509	Readline	.	pre_input_hook,pre_input_hook=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.pre_input_hook=(proc)
+readline	manual/api/readline/Readline.md:548	Readline	.	redisplay	forwarding?	no-rbs	real forwards *, **, &	### def Readline.redisplay -> self
+readline	manual/api/readline/Readline.md:569	Readline	.	special_prefixes,special_prefixes=	forwarding?	no-rbs	real forwards *, **, &	### def Readline.special_prefixes=(string)
+readline	manual/api/readline/Readline.md:582	Readline	.	vi_editing_mode?	forwarding?	no-rbs	real forwards *, **, &	### def Readline.vi_editing_mode? -> bool
+readline	manual/api/readline/Readline__HISTORY.md:13	Readline::HISTORY	.	to_s	no-class	no-rbs		### def Readline::HISTORY.to_s -> "HISTORY"
+readline	manual/api/readline/Readline__HISTORY.md:22	Readline::HISTORY	.	[]	no-class	no-rbs		### def Readline::HISTORY.[](index) -> String
+readline	manual/api/readline/Readline__HISTORY.md:69	Readline::HISTORY	.	[]=	no-class	no-rbs		### def Readline::HISTORY.[]=(index, string)
+readline	manual/api/readline/Readline__HISTORY.md:87	Readline::HISTORY	.	<<	no-class	no-rbs		### def Readline::HISTORY.<<(string) -> self
+readline	manual/api/readline/Readline__HISTORY.md:115	Readline::HISTORY	.	push	no-class	no-rbs		### def Readline::HISTORY.push(*string) -> self
+readline	manual/api/readline/Readline__HISTORY.md:143	Readline::HISTORY	.	pop	no-class	no-rbs		### def Readline::HISTORY.pop -> String
+readline	manual/api/readline/Readline__HISTORY.md:162	Readline::HISTORY	.	shift	no-class	no-rbs		### def Readline::HISTORY.shift -> String
+readline	manual/api/readline/Readline__HISTORY.md:181	Readline::HISTORY	.	each	no-class	no-rbs		### def Readline::HISTORY.each -> Enumerator
+readline	manual/api/readline/Readline__HISTORY.md:208	Readline::HISTORY	.	length,size	no-class	no-rbs		### def Readline::HISTORY.length -> Integer
+readline	manual/api/readline/Readline__HISTORY.md:222	Readline::HISTORY	.	empty?	no-class	no-rbs		### def Readline::HISTORY.empty? -> bool
+readline	manual/api/readline/Readline__HISTORY.md:236	Readline::HISTORY	.	delete_at	no-class	no-rbs		### def Readline::HISTORY.delete_at(index) -> String | nil
+readline	manual/api/readline/Readline__HISTORY.md:257	Readline::HISTORY	.	clear	no-class	no-rbs		### def Readline::HISTORY.clear -> self
+reline	manual/api/reline.md:52	Reline	.	readline	forwarding?	no-rbs	real forwards *, **, &	### def Reline.readline(prompt = "", add_hist = false) -> String | nil
+reline	manual/api/reline.md:72	Reline	.	readmultiline	forwarding?	no-rbs	real forwards *, **, &	### def Reline.readmultiline(prompt = "", add_hist = false) { |text| ... } -> String | nil
+reline	manual/api/reline.md:98	Reline	.	input=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.input=(input)
+reline	manual/api/reline.md:107	Reline	.	output=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.output=(output)
+reline	manual/api/reline.md:116	Reline	.	completion_proc,completion_proc=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.completion_proc -> Proc | nil
+reline	manual/api/reline.md:150	Reline	.	autocompletion,autocompletion=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.autocompletion -> bool
+reline	manual/api/reline.md:161	Reline	.	completion_case_fold,completion_case_fold=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.completion_case_fold -> bool
+reline	manual/api/reline.md:173	Reline	.	completion_append_character,completion_append_character=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.completion_append_character -> String | nil
+reline	manual/api/reline.md:186	Reline	.	completion_quote_character	forwarding?	no-rbs	real forwards *, **, &	### def Reline.completion_quote_character -> String | nil
+reline	manual/api/reline.md:192	Reline	.	completer_word_break_characters,completer_word_break_characters=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.completer_word_break_characters -> String
+reline	manual/api/reline.md:203	Reline	.	completer_quote_characters,completer_quote_characters=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.completer_quote_characters -> String
+reline	manual/api/reline.md:215	Reline	.	basic_word_break_characters,basic_word_break_characters=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.basic_word_break_characters -> String
+reline	manual/api/reline.md:229	Reline	.	basic_quote_characters,basic_quote_characters=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.basic_quote_characters -> String
+reline	manual/api/reline.md:243	Reline	.	filename_quote_characters,filename_quote_characters=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.filename_quote_characters -> String
+reline	manual/api/reline.md:254	Reline	.	special_prefixes,special_prefixes=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.special_prefixes -> String
+reline	manual/api/reline.md:265	Reline	.	prompt_proc,prompt_proc=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.prompt_proc -> Proc | nil
+reline	manual/api/reline.md:278	Reline	.	output_modifier_proc,output_modifier_proc=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.output_modifier_proc -> Proc | nil
+reline	manual/api/reline.md:292	Reline	.	auto_indent_proc,auto_indent_proc=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.auto_indent_proc -> Proc | nil
+reline	manual/api/reline.md:310	Reline	.	pre_input_hook,pre_input_hook=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.pre_input_hook -> Proc | nil
+reline	manual/api/reline.md:321	Reline	.	dig_perfect_match_proc,dig_perfect_match_proc=	forwarding?	no-rbs	real forwards *, **, &	### def Reline.dig_perfect_match_proc -> Proc | nil
+reline	manual/api/reline.md:332	Reline	.	vi_editing_mode	forwarding?	no-rbs	real forwards *, **, &	### def Reline.vi_editing_mode -> nil
+reline	manual/api/reline.md:341	Reline	.	emacs_editing_mode	forwarding?	no-rbs	real forwards *, **, &	### def Reline.emacs_editing_mode -> nil
+reline	manual/api/reline.md:348	Reline	.	vi_editing_mode?	forwarding?	no-rbs	real forwards *, **, &	### def Reline.vi_editing_mode? -> bool
+reline	manual/api/reline.md:355	Reline	.	emacs_editing_mode?	forwarding?	no-rbs	real forwards *, **, &	### def Reline.emacs_editing_mode? -> bool
+reline	manual/api/reline.md:362	Reline	.	get_screen_size	forwarding?	no-rbs	real forwards *, **, &	### def Reline.get_screen_size -> [Integer, Integer]
+resolv-replace	manual/api/resolv-replace.md:23	TCPSocket	.	new,open	opt-count	ok	doc=2 real=0	### def TCPSocket.open(host, serv, local_host=nil, local_service=nil) -> TCPSocket
+resolv-replace	manual/api/resolv-replace.md:57	UDPSocket	#	send	opt-count	ok	doc=1 real=0 / doc=4 real=2	### def send(mesg, flags , dest_sockaddr=nil) -> Integer
+resolv-replace	manual/api/resolv-replace.md:73	SOCKSSocket	.	new	no-class	no-rbs		### def SOCKSSocket.new(host, serv) -> SOCKSSocket
+resolv	manual/api/resolv.md:35	Resolv	.	new	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[use_ipv6] rest0	### def Resolv.new(resolvers = [Hosts.new, DNS.new]) -> Resolv
+resolv	manual/api/resolv.md:176	Resolv::Hosts	.	new	name-mismatch	ok	doc=hosts real=filename	### def Resolv::Hosts.new(hosts = DefaultFileName) -> Resolv::Hosts
+resolv	manual/api/resolv.md:253	Resolv::DNS	.	new	name-mismatch	ok	doc=resolv_conf real=config_info	### def Resolv::DNS.new(resolv_conf = nil) -> Resolv::DNS
+resolv	manual/api/resolv.md:1463	Resolv::DNS::Name	.	create	name-mismatch	ok	doc=name real=arg	### def Resolv::DNS::Name.create(name) -> Resolv::DNS::Name
+resolv	manual/api/resolv.md:1559	Resolv::IPv4	.	create	name-mismatch	ok	doc=address real=arg	### def Resolv::IPv4.create(address) -> Resolv::IPv4
+resolv	manual/api/resolv.md:1599	Resolv::IPv6	.	create	name-mismatch	ok	doc=address real=arg	### def Resolv::IPv6.create(address) -> Resolv::IPv6
+rexml/document	manual/api/rexml/REXML__DocType.md:24	REXML::DocType	.	new	name-mismatch	no-rbs	doc=source,parent real=first,parent	### def REXML::DocType.new(source, parent = nil) -> REXML::DocType
+rexml/document	manual/api/rexml/REXML__Element.md:607	REXML::Element	#	add_attributes	name-mismatch	no-rbs	doc=attrs real=hash	### def add_attributes(attrs) -> ()
+rexml/document	manual/api/rexml/attribute.md:45	REXML::Attribute	#	normalized=	name-mismatch	no-rbs	doc=value real=new_normalized	### def normalized=(value)
+rexml/document	manual/api/rexml/cdata.md:12	REXML::CData	.	new	name-mismatch	no-rbs	doc=text,respect_whitespace,parent real=first,whitespace,parent	### def REXML::CData.new(text, respect_whitespace = true, parent = nil) -> REXML::CData
+rexml/document	manual/api/rexml/document.md:270	REXML::Document	#	write	rest	no-rbs	doc=5 real=0 / doc=0 real=1	### def write(output = $stdout, indent = -1, transitive = false, ie_hack = false, encoding=nil) -> ()
+rexml/document	manual/api/rexml/formatters/transitive.md:43	REXML::Formatters::Transitive	.	new	no-class	no-rbs		### def REXML::Formatters::Transitive.new(indentation=2, ie_hack=false) -> REXML::Formatter::Transitive
+rexml/document	manual/api/rexml/parent.md:94	REXML::Parent	#	[]=	req-count	no-rbs	doc=2 real=0 / doc=3 real=0	### def []=(index, node)
+rexml/parsers/pullparser	manual/api/rexml/parsers/pullparser/REXML__Parsers__PullParser.md:22	REXML::Parsers::PullParser	#	has_next?	forwarding?	no-rbs	real forwards *, **, &	### def has_next? -> bool
+rexml/parsers/pullparser	manual/api/rexml/parsers/pullparser/REXML__Parsers__PullParser.md:31	REXML::Parsers::PullParser	#	empty?	forwarding?	no-rbs	real forwards *, **, &	### def empty? -> bool
+rexml/parsers/sax2parser	manual/api/rexml/parsers/sax2parser.md:212	REXML::Parsers::SAX2Parser	#	listen	forwarding?	no-rbs	real forwards rest:args block:blok	### def listen(sym, ary) { ... } -> ()
+rexml/parsers/sax2parser	manual/api/rexml/parsers/sax2parser.md:302	REXML::Parsers::SAX2Parser	#	deafen	req-count	no-rbs	doc=1 real=0	### def deafen(listener) -> ()
+rexml/sax2listener	manual/api/rexml/sax2listener.md:121	REXML::SAX2Listener	#	entitydecl	name-mismatch	no-rbs	doc=content real=declaration	### def entitydecl(content) -> ()
+rexml/document	manual/api/rexml/text.md:91	REXML::Text	.	unnormalize	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[entity_expansion_text_limit] rest0	### def REXML::Text.unnormalize(string, doctype = nil, filter = nil, illegal = nil) -> String
+rexml/document	manual/api/rexml/xmldecl.md:136	REXML::XMLDecl	#	encoding	no-real	no-rbs		### def encoding -> String | nil
+rexml/document	manual/api/rexml/xpath.md:14	REXML::XPath	.	first	opt-count	no-rbs	doc=3 real=4	### def REXML::XPath.first(element, path = nil, namespaces = {}, variables = {}) -> Node | nil
+rexml/document	manual/api/rexml/xpath.md:61	REXML::XPath	.	each	opt-count	no-rbs	doc=3 real=4	### def REXML::XPath.each(element, path = nil, namespaces = {}, variables = {}) {|e| ... } -> ()
+rexml/document	manual/api/rexml/xpath.md:98	REXML::XPath	.	match	opt-count	no-rbs	doc=3 real=4	### def REXML::XPath.match(element, path = nil, namespaces = {}, variables = {}) -> [Node]
+rinda/tuplespace	manual/api/rinda/Rinda__TupleSpace.md:51	Rinda::TupleSpace	#	notify	name-mismatch	no-rbs	doc=event,pattern,sec real=event,tuple,sec	### def notify(event, pattern, sec = nil) -> Rinda::NotifyTemplateEntry
+rinda/tuplespace	manual/api/rinda/Rinda__TupleSpace.md:123	Rinda::TupleSpace	#	take	block-missing	no-rbs	real has &block	### def take(tuple, sec = nil) -> Array | Hash
+rinda/rinda	manual/api/rinda/Rinda__TupleSpaceProxy.md:31	Rinda::TupleSpaceProxy	#	read	block-missing	no-rbs	real has &block	### def read(tuple, sec=nil) -> [Array|Hash]
+rinda/rinda	manual/api/rinda/Rinda__TupleSpaceProxy.md:53	Rinda::TupleSpaceProxy	#	take	block-missing	no-rbs	real has &block	### def take(tuple, sec = nil) -> Array | Hash
+ripper/filter	manual/api/ripper/filter.md:112	Ripper::Filter	#	on_XXX	no-real	no-rbs		### def on_XXX(token, data) -> object
+ripper/lexer	manual/api/ripper/lexer.md:9	Ripper	.	lex	kw-mismatch	ok	doc=req[] opt[raise_errors] rest0 real=req[] opt[] rest1	### def Ripper.lex(src, filename = '-', lineno = 1, raise_errors: false) -> [[Integer, Integer], Symbol, String, Ripper::Lexer::State]
+ripper/lexer	manual/api/ripper/lexer.md:60	Ripper	.	tokenize	kw-mismatch	ok	doc=req[] opt[raise_errors] rest0 real=req[] opt[] rest1	### def Ripper.tokenize(src, filename = '-', lineno = 1, raise_errors: false) -> [String]
+ripper/lexer	manual/api/ripper/lexer.md:129	Ripper::Lexer	#	tokenize	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def tokenize -> [String]
+ripper/lexer	manual/api/ripper/lexer.md:135	Ripper::Lexer	#	lex	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def lex -> [[Integer, Integer], Symbol, String, Ripper::Lexer::State]
+ripper/lexer	manual/api/ripper/lexer.md:141	Ripper::Lexer	#	parse	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[raise_errors] rest0	### def parse -> [[Integer, Integer], Symbol, String, Ripper::Lexer::State]
+ripper/lexer	manual/api/ripper/lexer.md:156	Ripper::Lexer	#	scan	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[] rest1	### def scan -> [Ripper::Lexer::Elem]
+ripper/sexp	manual/api/ripper/sexp.md:9	Ripper	.	sexp	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[raise_errors] rest0	### def Ripper.sexp(src, filename = '-', lineno = 1) -> object
+ripper/sexp	manual/api/ripper/sexp.md:57	Ripper	.	sexp_raw	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[raise_errors] rest0	### def Ripper.sexp_raw(src, filename = '-', lineno = 1) -> object
+rss	manual/api/rss.md:33	RSS::RootElementMixin	#	to_xml	opt-count	no-rbs	doc=0 real=1	### def to_xml
+rss	manual/api/rss/Parser.md:6	RSS::Parser	.	parse	req-count	no-rbs	doc=0 real=1	### def RSS::Parser.parse
+rss	manual/api/rss/Parser.md:9	RSS::Parser	.	new	req-count	no-rbs	doc=0 real=1	### def RSS::Parser.new
+rss	manual/api/rss/Parser.md:14	RSS::Parser	#	do_validate,do_validate=	forwarding?	no-rbs	real forwards *, **, &	### def do_validate
+rss	manual/api/rss/Parser.md:18	RSS::Parser	#	ignore_unknown_element,ignore_unknown_element=	forwarding?	no-rbs	real forwards *, **, &	### def ignore_unknown_element
+rss	manual/api/rss/Parser.md:22	RSS::Parser	#	parse	forwarding?	no-rbs	real forwards *, **, &	### def parse
+rss	manual/api/rss/Parser.md:25	RSS::Parser	#	rss	forwarding?	no-rbs	real forwards *, **, &	### def rss
+rss	manual/api/rss/RSS__BaseTrackBackModel.md:7	RSS::BaseTrackBackModel	#	trackback_about,trackback_about=	no-real	no-rbs		### def trackback_about
+rss	manual/api/rss/RSS__BaseTrackBackModel.md:11	RSS::BaseTrackBackModel	#	trackback_abouts	no-real	no-rbs		### def trackback_abouts
+rss	manual/api/rss/RSS__BaseTrackBackModel.md:14	RSS::BaseTrackBackModel	#	trackback_ping,trackback_ping=	no-real	no-rbs		### def trackback_ping
+rss	manual/api/rss/RSS__ImageFaviconModel.md:6	RSS::ImageFaviconModel	#	image_favicon,image_favicon=	no-real	no-rbs		### def image_favicon
+rss	manual/api/rss/RSS__ImageItemModel.md:8	RSS::ImageItemModel	#	image_item,image_item=	no-real	no-rbs		### def image_item
+rss	manual/api/rss/RSS__RDF.md:15	RSS::RDF	#	encoding,encoding=	no-real	no-rbs		### def encoding
+rss	manual/api/rss/RSS__RDF.md:23	RSS::RDF	#	item,item=	rest	no-rbs	doc=0 real=1	### def item
+rss	manual/api/rss/RSS__RDF.md:34	RSS::RDF	#	standalone,standalone=	no-real	no-rbs		### def standalone
+rss	manual/api/rss/RSS__RDF.md:42	RSS::RDF	#	version,version=	no-real	no-rbs		### def version
+rss	manual/api/rss/RSS__RDF__Channel__ImageFavicon.md:10	RSS::RDF::Channel::ImageFavicon	#	about,about=	no-class	no-rbs		### def about
+rss	manual/api/rss/RSS__RDF__Channel__ImageFavicon.md:14	RSS::RDF::Channel::ImageFavicon	#	date,date=	no-class	no-rbs		### def date
+rss	manual/api/rss/RSS__RDF__Channel__ImageFavicon.md:18	RSS::RDF::Channel::ImageFavicon	#	image_size,image_size=,size,size=	no-class	no-rbs		### def image_size
+rss	manual/api/rss/RSS__Rss.md:15	RSS::Rss	#	encoding,encoding=	no-real	no-rbs		### def encoding
+rss	manual/api/rss/RSS__Rss.md:29	RSS::Rss	#	standalone,standalone=	no-real	no-rbs		### def standalone
+rss	manual/api/rss/RSS__Rss.md:36	RSS::Rss	#	version,version=	no-real	no-rbs		### def version
+rss	manual/api/rss/RSS__Rss__Channel.md:10	RSS::Rss::Channel	#	category,category=	rest	no-rbs	doc=0 real=1	### def category
+rss	manual/api/rss/RSS__Rss__Channel.md:39	RSS::Rss::Channel	#	item,item=	rest	no-rbs	doc=0 real=1	### def item
+rss	manual/api/rss/RSS__Rss__Channel__Item.md:13	RSS::Rss::Channel::Item	#	category,category=	rest	no-rbs	doc=0 real=1	### def category
+rss	manual/api/rss/RSS__Rss__Channel__Item__Enclosure.md:16	RSS::Rss::Channel::Item::Enclosure	#	url=	req-count	no-rbs	doc=0 real=1	### def url=
+rss	manual/api/rss/RSS__TaxonomyTopicModel.md:7	RSS::TaxonomyTopicModel	#	taxo_topic,taxo_topic=	no-real	no-rbs		### def taxo_topic
+rss	manual/api/rss/RSS__TaxonomyTopicsModel.md:7	RSS::TaxonomyTopicsModel	#	taxo_topics	no-real	no-rbs		### def taxo_topics
+rss	manual/api/rss/content.md:6	RSS::ContentModel	#	content_encoded,content_encoded=	no-real	no-rbs		### def content_encoded
+rss	manual/api/rss/dublincore.md:9	RSS::DublinCoreModel	#	dc_contributor,dc_contributor=	no-class	no-rbs		### def dc_contributor
+rss	manual/api/rss/dublincore.md:13	RSS::DublinCoreModel	#	dc_contributors	no-class	no-rbs		### def dc_contributors
+rss	manual/api/rss/dublincore.md:16	RSS::DublinCoreModel	#	dc_coverage,dc_coverage=	no-class	no-rbs		### def dc_coverage
+rss	manual/api/rss/dublincore.md:20	RSS::DublinCoreModel	#	dc_coverages	no-class	no-rbs		### def dc_coverages
+rss	manual/api/rss/dublincore.md:23	RSS::DublinCoreModel	#	dc_creator,dc_creator=	no-class	no-rbs		### def dc_creator
+rss	manual/api/rss/dublincore.md:27	RSS::DublinCoreModel	#	dc_creators	no-class	no-rbs		### def dc_creators
+rss	manual/api/rss/dublincore.md:30	RSS::DublinCoreModel	#	dc_date,dc_date=	no-class	no-rbs		### def dc_date
+rss	manual/api/rss/dublincore.md:34	RSS::DublinCoreModel	#	dc_dates	no-class	no-rbs		### def dc_dates
+rss	manual/api/rss/dublincore.md:37	RSS::DublinCoreModel	#	dc_description,dc_description=	no-class	no-rbs		### def dc_description
+rss	manual/api/rss/dublincore.md:41	RSS::DublinCoreModel	#	dc_descriptions	no-class	no-rbs		### def dc_descriptions
+rss	manual/api/rss/dublincore.md:44	RSS::DublinCoreModel	#	dc_format,dc_format=	no-class	no-rbs		### def dc_format
+rss	manual/api/rss/dublincore.md:48	RSS::DublinCoreModel	#	dc_formats	no-class	no-rbs		### def dc_formats
+rss	manual/api/rss/dublincore.md:51	RSS::DublinCoreModel	#	dc_identifier,dc_identifier=	no-class	no-rbs		### def dc_identifier
+rss	manual/api/rss/dublincore.md:55	RSS::DublinCoreModel	#	dc_identifiers	no-class	no-rbs		### def dc_identifiers
+rss	manual/api/rss/dublincore.md:58	RSS::DublinCoreModel	#	dc_language,dc_language=	no-class	no-rbs		### def dc_language
+rss	manual/api/rss/dublincore.md:62	RSS::DublinCoreModel	#	dc_languages	no-class	no-rbs		### def dc_languages
+rss	manual/api/rss/dublincore.md:65	RSS::DublinCoreModel	#	dc_publisher,dc_publisher=	no-class	no-rbs		### def dc_publisher
+rss	manual/api/rss/dublincore.md:69	RSS::DublinCoreModel	#	dc_publishers	no-class	no-rbs		### def dc_publishers
+rss	manual/api/rss/dublincore.md:72	RSS::DublinCoreModel	#	dc_relation,dc_relation=	no-class	no-rbs		### def dc_relation
+rss	manual/api/rss/dublincore.md:76	RSS::DublinCoreModel	#	dc_relations	no-class	no-rbs		### def dc_relations
+rss	manual/api/rss/dublincore.md:79	RSS::DublinCoreModel	#	dc_rights,dc_rights=	no-class	no-rbs		### def dc_rights
+rss	manual/api/rss/dublincore.md:83	RSS::DublinCoreModel	#	dc_rightses	no-class	no-rbs		### def dc_rightses
+rss	manual/api/rss/dublincore.md:86	RSS::DublinCoreModel	#	dc_source,dc_source=	no-class	no-rbs		### def dc_source
+rss	manual/api/rss/dublincore.md:90	RSS::DublinCoreModel	#	dc_sources	no-class	no-rbs		### def dc_sources
+rss	manual/api/rss/dublincore.md:93	RSS::DublinCoreModel	#	dc_subject,dc_subject=	no-class	no-rbs		### def dc_subject
+rss	manual/api/rss/dublincore.md:97	RSS::DublinCoreModel	#	dc_subjects	no-class	no-rbs		### def dc_subjects
+rss	manual/api/rss/dublincore.md:100	RSS::DublinCoreModel	#	dc_title,dc_title=	no-class	no-rbs		### def dc_title
+rss	manual/api/rss/dublincore.md:104	RSS::DublinCoreModel	#	dc_titles	no-class	no-rbs		### def dc_titles
+rss	manual/api/rss/dublincore.md:107	RSS::DublinCoreModel	#	dc_type,dc_type=	no-class	no-rbs		### def dc_type
+rss	manual/api/rss/dublincore.md:111	RSS::DublinCoreModel	#	dc_types	no-class	no-rbs		### def dc_types
+rss	manual/api/rss/maker/Channel.md:70	RSS::Maker::ChannelBase	#	pubDate=	name-mismatch	no-rbs	doc=pubDate real=date	### def pubDate=(pubDate)
+rss	manual/api/rss/maker/RSS__Maker__ItemsBase__ItemBase.md:34	RSS::Maker::ItemsBase::ItemBase	#	pubDate=	name-mismatch	no-rbs	doc=pubDate real=date	### def pubDate=(pubDate)
+rss	manual/api/rss/maker/RSS__Maker__RSS20__Items__Item__Categories.md:12	RSS::Maker::RSS20::Items::Item::Categories	#	new_category	no-real	no-rbs		### def new_category
+rss	manual/api/rss/maker/RSS__Maker__RSS20__Items__Item__Enclosure.md:12	RSS::Maker::RSS20::Items::Item::Enclosure	#	url,url=	no-real	no-rbs		### def url
+rss	manual/api/rss/maker/RSS__Maker__RSS20__Items__Item__Enclosure.md:16	RSS::Maker::RSS20::Items::Item::Enclosure	#	length,length=	no-real	no-rbs		### def length
+rss	manual/api/rss/maker/RSS__Maker__RSS20__Items__Item__Enclosure.md:20	RSS::Maker::RSS20::Items::Item::Enclosure	#	type,type=	no-real	no-rbs		### def type
+rss	manual/api/rss/maker/RSS__Maker__RSS20__Items__Item__Guid.md:12	RSS::Maker::RSS20::Items::Item::Guid	#	isPermaLink,isPermaLink=	no-real	no-rbs		### def isPermaLink
+rss	manual/api/rss/maker/RSS__Maker__RSS20__Items__Item__Guid.md:16	RSS::Maker::RSS20::Items::Item::Guid	#	content,content=	no-real	no-rbs		### def content
+rss	manual/api/rss/maker/RSS__Maker__RSS20__Items__Item__Source.md:12	RSS::Maker::RSS20::Items::Item::Source	#	url,url=	no-real	no-rbs		### def url
+rss	manual/api/rss/maker/RSS__Maker__RSS20__Items__Item__Source.md:16	RSS::Maker::RSS20::Items::Item::Source	#	content,content=	no-real	no-rbs		### def content
+rss	manual/api/rss/syndication.md:10	RSS::SyndicationModel	#	sy_updateBase,sy_updateBase=	no-real	no-rbs		### def sy_updateBase
+rss	manual/api/rss/syndication.md:14	RSS::SyndicationModel	#	sy_updateFrequency,sy_updateFrequency=	no-real	no-rbs		### def sy_updateFrequency
+rss	manual/api/rss/syndication.md:18	RSS::SyndicationModel	#	sy_updatePeriod,sy_updatePeriod=	no-real	no-rbs		### def sy_updatePeriod
+rubygems	manual/api/rubygems.md:327	Gem	.#	ensure_gem_subdirectories	opt-count	no-rbs	doc=0 real=2	### module_function def ensure_gem_subdirectories
+rubygems/command	manual/api/rubygems/command.md:22	Gem::Command	#	add_option	forwarding?	no-rbs	real forwards rest:opts block:handler	### def add_option(*opts){|value, options| ... }
+rubygems/command	manual/api/rubygems/command.md:172	Gem::Command	#	show_lookup_failure	req-count	no-rbs	doc=2 real=3	### def show_lookup_failure(gem_name, version, errors = nil) -> ()
+rubygems/command	manual/api/rubygems/command.md:184	Gem::Command	.	add_common_option	forwarding?	no-rbs	real forwards rest:args block:handler	### def Gem::Command.add_common_option(*args){|value, options| ... }
+rubygems/command_manager	manual/api/rubygems/command_manager.md:77	Gem::CommandManager	#	find_command	name-mismatch	no-rbs	doc=command_name real=cmd_name	### def find_command(command_name) -> Gem::Command | nil
+rubygems/command_manager	manual/api/rubygems/command_manager.md:88	Gem::CommandManager	#	find_command_possibilities	name-mismatch	no-rbs	doc=command_name real=cmd_name	### def find_command_possibilities(command_name) -> Array
+rubygems/command_manager	manual/api/rubygems/command_manager.md:94	Gem::CommandManager	#	process_args	opt-count	no-rbs	doc=0 real=1	### def process_args(args) -> ()
+rubygems/command_manager	manual/api/rubygems/command_manager.md:100	Gem::CommandManager	#	register_command	opt-count	no-rbs	doc=0 real=1	### def register_command(command_name) -> false
+rubygems/command_manager	manual/api/rubygems/command_manager.md:106	Gem::CommandManager	#	run	opt-count	no-rbs	doc=0 real=1	### def run(args) -> ()
+rubygems/commands/unpack_command	manual/api/rubygems/commands/unpack_command.md:36	Gem::Commands::UnpackCommand	#	get_path	req-count	no-rbs	doc=2 real=1	### def get_path(gemname, version_req) -> String | nil
+rubygems/config_file	manual/api/rubygems/config_file.md:248	Gem::ConfigFile	#	load_file	name-mismatch	no-rbs	doc=file_name real=filename	### def load_file(file_name) -> object
+rubygems/dependency_list	manual/api/rubygems/dependency_list.md:49	Gem::DependencyList	#	ok_to_remove?	opt-count	no-rbs	doc=0 real=1	### def ok_to_remove?(full_name) -> bool
+rubygems/ext/builder	manual/api/rubygems/ext/builder.md:20	Gem::Ext::Builder	.	make	opt-count	no-rbs	doc=0 real=3	### def Gem::Ext::Builder.make(dest_path, results)
+rubygems/ext/builder	manual/api/rubygems/ext/builder.md:33	Gem::Ext::Builder	.	run	opt-count	no-rbs	doc=0 real=3	### def Gem::Ext::Builder.run(command, results)
+rubygems/ext/configure_builder	manual/api/rubygems/ext/configure_builder.md:14	Gem::Ext::ConfigureBuilder	.	build	req-count	no-rbs	doc=4 real=3	### def Gem::Ext::ConfigureBuilder.build(extension, directory, dest_path, results) -> Array
+rubygems/ext/ext_conf_builder	manual/api/rubygems/ext/ext_conf_builder.md:14	Gem::Ext::ExtConfBuilder	.	build	req-count	no-rbs	doc=4 real=3	### def Gem::Ext::ExtConfBuilder.build(extension, directory, dest_path, results) -> Array
+rubygems/ext/rake_builder	manual/api/rubygems/ext/rake_builder.md:14	Gem::Ext::RakeBuilder	.	build	req-count	no-rbs	doc=4 real=3	### def Gem::Ext::RakeBuilder.build(extension, directory, dest_path, results) -> Array
+rubygems/installer	manual/api/rubygems/installer/Gem__Installer.md:15	Gem::Installer	#	app_script_text	req-count	no-rbs	doc=0 real=1	### def app_script_text -> String
+rubygems/installer	manual/api/rubygems/installer/Gem__Installer.md:139	Gem::Installer	#	windows_stub_script	req-count	no-rbs	doc=0 real=2	### def windows_stub_script -> String
+rubygems/installer	manual/api/rubygems/installer/Gem__Installer.md:149	Gem::Installer	.	new	name-mismatch	no-rbs	doc=gem,options real=package,options	### def Gem::Installer.new(gem, options = {}) -> Gem::Installer
+rubygems/package/tar_reader/entry	manual/api/rubygems/package/tar_reader/entry.md:60	Gem::Package::TarReader::Entry	#	read	name-mismatch	no-rbs	doc=length real=maxlen	### def read(length = nil) -> String
+rubygems/package/tar_writer	manual/api/rubygems/package/tar_writer.md:12	Gem::Package::TarWriter	#	add_file	opt-count	no-rbs	doc=0 real=1	### def add_file(name, mode) -> self
+rubygems/platform	manual/api/rubygems/platform.md:118	Gem::Platform	.	local	kw-mismatch	no-rbs	doc=req[] opt[] rest0 real=req[] opt[refresh] rest0	### def Gem::Platform.local -> Gem::Platform
+rubygems/requirement	manual/api/rubygems/requirement.md:47	Gem::Requirement	.	create	req-count	no-rbs	doc=1 real=0	### def Gem::Requirement.create(input) -> Gem::Requirement
+rubygems/requirement	manual/api/rubygems/requirement.md:71	Gem::Requirement	.	new	req-count	no-rbs	doc=1 real=0	### def Gem::Requirement.new(requirements) -> Gem::Requirement
+rubygems/requirement	manual/api/rubygems/requirement.md:179	Gem::Requirement	#	concat	name-mismatch	no-rbs	doc=requirements real=new	### def concat(requirements) -> Array
+rubygems/requirement	manual/api/rubygems/requirement.md:209	Gem::Requirement	#	pretty_print	name-mismatch	no-rbs	doc=pp real=q	### def pretty_print(pp) -> String
+rubygems/security	manual/api/rubygems/security.md:433	Gem::Security::Policy	.	new	req-count	no-rbs	doc=0 real=1	### def Gem::Security::Policy.new(policy = {}, options = {}) -> Gem::Security::Policy
+rubygems/security	manual/api/rubygems/security.md:471	Gem::Security::Signer	.	new	opt-count	no-rbs	doc=0 real=2	### def Gem::Security::Signer.new(key, cert_chain) -> Gem::Security::Signer
+rubygems/specification	manual/api/rubygems/specification.md:30	Gem::Specification	#	_dump	req-count	no-rbs	doc=0 real=1	### def _dump -> String
+rubygems/specification	manual/api/rubygems/specification.md:78	Gem::Specification	#	author=	name-mismatch	no-rbs	doc=name real=o	### def author=(name)
+rubygems/specification	manual/api/rubygems/specification.md:86	Gem::Specification	#	authors=	name-mismatch	no-rbs	doc=names real=value	### def authors=(names)
+rubygems/specification	manual/api/rubygems/specification.md:142	Gem::Specification	#	dependent_gems	opt-count	no-rbs	doc=0 real=1	### def dependent_gems -> Array
+rubygems/specification	manual/api/rubygems/specification.md:156	Gem::Specification	#	description=	name-mismatch	no-rbs	doc=desc real=str	### def description=(desc)
+rubygems/specification	manual/api/rubygems/specification.md:180	Gem::Specification	#	executable=	name-mismatch	no-rbs	doc=executable real=o	### def executable=(executable)
+rubygems/specification	manual/api/rubygems/specification.md:190	Gem::Specification	#	executables=	name-mismatch	no-rbs	doc=executables real=value	### def executables=(executables)
+rubygems/specification	manual/api/rubygems/specification.md:200	Gem::Specification	#	extensions=	name-mismatch	no-rbs	doc=paths real=extensions	### def extensions=(paths)
+rubygems/specification	manual/api/rubygems/specification.md:210	Gem::Specification	#	extra_rdoc_files=	name-mismatch	no-rbs	doc=paths real=files	### def extra_rdoc_files=(paths)
+rubygems/specification	manual/api/rubygems/specification.md:230	Gem::Specification	#	full_gem_path	no-real	no-rbs		### def full_gem_path -> String
+rubygems/specification	manual/api/rubygems/specification.md:234	Gem::Specification	#	full_name	no-real	no-rbs		### def full_name -> String
+rubygems/specification	manual/api/rubygems/specification.md:281	Gem::Specification	#	loaded_from	no-real	no-rbs		### def loaded_from -> String
+rubygems/specification	manual/api/rubygems/specification.md:287	Gem::Specification	#	loaded_from=	no-real	no-rbs		### def loaded_from=(path)
+rubygems/specification	manual/api/rubygems/specification.md:376	Gem::Specification	#	require_paths	no-real	no-rbs		### def require_paths -> [String]
+rubygems/specification	manual/api/rubygems/specification.md:380	Gem::Specification	#	require_paths=	name-mismatch	no-rbs	doc=paths real=val	### def require_paths=(paths)
+rubygems/specification	manual/api/rubygems/specification.md:390	Gem::Specification	#	required_ruby_version=	name-mismatch	no-rbs	doc=requirement real=req	### def required_ruby_version=(requirement)
+rubygems/specification	manual/api/rubygems/specification.md:402	Gem::Specification	#	required_rubygems_version=	name-mismatch	no-rbs	doc=requirement real=req	### def required_rubygems_version=(requirement)
+rubygems/specification	manual/api/rubygems/specification.md:415	Gem::Specification	#	requirements=	name-mismatch	no-rbs	doc=informations real=req	### def requirements=(informations)
+rubygems/specification	manual/api/rubygems/specification.md:473	Gem::Specification	#	summary=	name-mismatch	no-rbs	doc=summary real=str	### def summary=(summary)
+rubygems/specification	manual/api/rubygems/specification.md:503	Gem::Specification	#	validate	opt-count	no-rbs	doc=0 real=2	### def validate -> bool
+rubygems/specification	manual/api/rubygems/specification.md:521	Gem::Specification	#	yaml_initialize	req-count	no-rbs	doc=0 real=2	### def yaml_initialize
+rubygems/specification	manual/api/rubygems/specification.md:648	Gem::Specification	#	extension_dir	no-real	no-rbs		### def extension_dir -> String
+rubygems/specification	manual/api/rubygems/specification.md:879	Gem::Specification	.	load	name-mismatch	no-rbs	doc=filename real=file	### def Gem::Specification.load(filename) -> Gem::Specification
+rubygems/uninstaller	manual/api/rubygems/uninstaller.md:39	Gem::Uninstaller	#	path_ok?	req-count	no-rbs	doc=1 real=2	### def path_ok?(spec) -> bool
+rubygems/uninstaller	manual/api/rubygems/uninstaller.md:45	Gem::Uninstaller	#	remove	req-count	no-rbs	doc=2 real=1	### def remove(spec, list)
+rubygems/uninstaller	manual/api/rubygems/uninstaller.md:66	Gem::Uninstaller	#	remove_executables	name-mismatch	no-rbs	doc=gemspec real=spec	### def remove_executables(gemspec)
+rubygems/uninstaller	manual/api/rubygems/uninstaller.md:84	Gem::Uninstaller	#	uninstall_gem	req-count	no-rbs	doc=2 real=1	### def uninstall_gem(spec, specs)
+rubygems/user_interaction	manual/api/rubygems/user_interaction/Gem__StreamUI.md:10	Gem::StreamUI	.	new	opt-count	no-rbs	doc=1 real=2	### def Gem::StreamUI.new(in_stream, out_stream, err_stream = STDERR)
+rubygems/user_interaction	manual/api/rubygems/user_interaction/Gem__StreamUI.md:70	Gem::StreamUI	#	ask_yes_no	opt-count	no-rbs	doc=0 real=1	### def ask_yes_no(question) -> bool
+rubygems/user_interaction	manual/api/rubygems/user_interaction/Gem__UserInteraction.md:16	Gem::UserInteraction	#	alert	req-count	no-rbs	doc=0 real=1	### def alert(*args) -> ()
+rubygems/user_interaction	manual/api/rubygems/user_interaction/Gem__UserInteraction.md:22	Gem::UserInteraction	#	alert_error	req-count	no-rbs	doc=0 real=1	### def alert_error(*args) -> ()
+rubygems/user_interaction	manual/api/rubygems/user_interaction/Gem__UserInteraction.md:28	Gem::UserInteraction	#	alert_warning	req-count	no-rbs	doc=0 real=1	### def alert_warning(*args) -> ()
+rubygems/user_interaction	manual/api/rubygems/user_interaction/Gem__UserInteraction.md:34	Gem::UserInteraction	#	ask	req-count	no-rbs	doc=0 real=1	### def ask(*args) -> String
+rubygems/user_interaction	manual/api/rubygems/user_interaction/Gem__UserInteraction.md:40	Gem::UserInteraction	#	ask_yes_no	req-count	no-rbs	doc=0 real=1	### def ask_yes_no(*args) -> bool
+rubygems/user_interaction	manual/api/rubygems/user_interaction/Gem__UserInteraction.md:48	Gem::UserInteraction	#	choose_from_list	req-count	no-rbs	doc=0 real=2	### def choose_from_list(*args) -> Array
+rubygems/user_interaction	manual/api/rubygems/user_interaction/Gem__UserInteraction.md:56	Gem::UserInteraction	#	say	opt-count	no-rbs	doc=0 real=1	### def say(*args) -> ()
+rubygems/user_interaction	manual/api/rubygems/user_interaction/Gem__UserInteraction.md:62	Gem::UserInteraction	#	terminate_interaction	opt-count	no-rbs	doc=0 real=1	### def terminate_interaction(*args) -> ()
+rubygems/validator	manual/api/rubygems/validator.md:16	Gem::Validator	#	alien	opt-count	no-rbs	doc=0 real=1	### def alien -> [Gem::Validator.ErrorData]
+securerandom	manual/api/securerandom.md:47	SecureRandom	.	base64	no-real	ok		### def SecureRandom.base64(n = nil)    -> String
+securerandom	manual/api/securerandom.md:64	SecureRandom	.	urlsafe_base64	no-real	ok		### def SecureRandom.urlsafe_base64(n = nil, padding = false)  -> String
+securerandom	manual/api/securerandom.md:87	SecureRandom	.	hex	no-real	ok		### def SecureRandom.hex(n = nil)    -> String
+securerandom	manual/api/securerandom.md:102	SecureRandom	.	random_bytes	no-real	ok		### def SecureRandom.random_bytes(n = nil)    -> String
+securerandom	manual/api/securerandom.md:116	SecureRandom	.	random_number	no-real	ok		### def SecureRandom.random_number(n = 0)     -> Integer | Float
+securerandom	manual/api/securerandom.md:131	SecureRandom	.	uuid	no-real	ok		### def SecureRandom.uuid   -> String
+securerandom	manual/api/securerandom.md:149	SecureRandom	.	alphanumeric	no-real	ok		### def SecureRandom.alphanumeric(n = nil, chars: Random::Formatter::ALPHANUMERIC)    -> String
+singleton	manual/api/singleton.md:45	Singleton	.	instance	no-real	ok		### def Singleton.instance -> object
+singleton	manual/api/singleton.md:54	Singleton	#	clone	no-real	ok		### def clone
+singleton	manual/api/singleton.md:58	Singleton	#	dup	no-real	ok		### def dup
+socket	manual/api/socket/Addrinfo.md:118	Addrinfo	.	foreach	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[timeout] rest0	### def Addrinfo.foreach(nodename, service, family=nil, socktype=nil, protocol=nil, flags=0) -> Enumerator
+socket	manual/api/socket/Addrinfo.md:455	Addrinfo	#	family_addrinfo	req-count	ok	doc=2 real=0 / doc=1 real=0	### def family_addrinfo(host, port) -> Addrinfo
+socket	manual/api/socket/Addrinfo.md:476	Addrinfo	#	connect_from	req-count	ok	doc=2 real=0 / doc=1 real=0	### def connect_from(host, port, timeout: nil) -> Socket
+socket	manual/api/socket/Addrinfo.md:527	Addrinfo	#	connect_to	req-count	ok	doc=2 real=0 / doc=1 real=0	### def connect_to(host, port, timeout: nil) -> Socket
+socket	manual/api/socket/BasicSocket.md:197	BasicSocket	#	recv_nonblock	opt-count	ok	doc=1 real=2	### def recv_nonblock(maxlen, flags = 0) -> String | nil
+socket	manual/api/socket/BasicSocket.md:390	BasicSocket	#	recvmsg	opt-count	ok	doc=4 real=3	### def recvmsg(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData] | nil
+socket	manual/api/socket/BasicSocket.md:447	BasicSocket	#	recvmsg_nonblock	opt-count	ok	doc=4 real=3	### def recvmsg_nonblock(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData] | nil
+socket	manual/api/socket/BasicSocket.md:524	BasicSocket	#	sendmsg_nonblock	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[exception] rest0	### def sendmsg_nonblock(mesg, flags=0, dest_sockaddr=nil, *controls) -> Integer
+socket	manual/api/socket/IPSocket.md:26	IPSocket	#	addr	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def addr -> Array
+socket	manual/api/socket/IPSocket.md:43	IPSocket	#	peeraddr	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def peeraddr -> Array
+socket	manual/api/socket/SOCKSSocket.md:10	SOCKSSocket	.	new,open	no-class	no-rbs		### def SOCKSSocket.open(host, service) -> SOCKSSocket
+socket	manual/api/socket/SOCKSSocket.md:20	SOCKSSocket	#	close	no-class	no-rbs		### def close -> nil
+socket	manual/api/socket/Socket.md:377	Socket	.	accept_loop	req-count	ok	doc=1 real=0	### def Socket.accept_loop(sockets) {|sock, client_addrinfo| ...} -> ()
+socket	manual/api/socket/Socket.md:780	Socket	#	accept_nonblock	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[exception] rest0	### def accept_nonblock -> Array
+socket	manual/api/socket/Socket.md:824	Socket	#	connect_nonblock	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[exception] rest0	### def connect_nonblock(server_sockaddr) -> 0
+socket	manual/api/socket/Socket.md:896	Socket	#	recvfrom_nonblock	opt-count	ok	doc=1 real=2	### def recvfrom_nonblock(maxlen, flags=0) -> [String, Addrinfo]
+socket	manual/api/socket/Socket__Ifaddr.md:47	Socket::Ifaddr	#	vhid	no-real	no-rbs		### def vhid -> Integer | nil
+socket	manual/api/socket/Socket__UDPSource.md:10	Socket::UDPSource	.	new	name-mismatch	ok	doc=remote_addr,local_addr real=remote_address,local_address	### def Socket::UDPSource.new(remote_addr, local_addr) {|msg| ... } -> Socket::UDPSource
+socket	manual/api/socket/TCPServer.md:101	TCPServer	#	accept_nonblock	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[exception] rest0	### def accept_nonblock -> TCPSocket
+socket	manual/api/socket/UDPSocket.md:90	UDPSocket	#	recvfrom_nonblock	opt-count	ok	doc=1 real=2	### def recvfrom_nonblock(maxlen, flags=0) -> [String, Array]
+socket	manual/api/socket/UNIXServer.md:51	UNIXServer	#	accept_nonblock	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[exception] rest0	### def accept_nonblock -> UnixSocket
+stringio	manual/api/stringio.md:134	StringIO	#	<<	no-real	ok		### def <<(obj)    -> self
+stringio	manual/api/stringio.md:231	StringIO	#	fcntl	doc-no-optional?	rbs-unmatched-sig	doc has no opt/rest/kw; C arity=-1	### def fcntl    -> ()
+stringio	manual/api/stringio.md:336	StringIO	#	print	no-real	ok		### def print          -> nil
+stringio	manual/api/stringio.md:353	StringIO	#	printf	no-real	ok		### def printf(format, *obj)    -> nil
+stringio	manual/api/stringio.md:379	StringIO	#	puts	no-real	ok		### def puts(*obj)    -> nil
+stringio	manual/api/stringio.md:408	StringIO	#	readchar	no-real	ok		### def readchar    -> String
+stringio	manual/api/stringio.md:422	StringIO	#	readbyte	no-real	ok		### def readbyte    -> Integer
+stringio	manual/api/stringio.md:436	StringIO	#	readline	no-real	ok		### def readline(rs = $/)    -> String
+stringio	manual/api/stringio.md:548	StringIO	#	readpartial,sysread	no-real	rbs-unmatched-sig		### def sysread                  -> String
+stringio	manual/api/stringio.md:564	StringIO	#	read_nonblock	no-real	ok		### def read_nonblock(maxlen, outbuf = nil, exception: true) -> String | nil
+stringio	manual/api/stringio.md:577	StringIO	#	syswrite,write_nonblock	no-real	ok		### def syswrite(obj)    -> Integer
+syslog/logger	manual/api/syslog/logger.md:44	Syslog::Logger	.	new	opt-count	no-rbs	doc=1 real=2	### def Syslog::Logger.new(program_name = 'ruby') -> Syslog::Logger
+syslog/logger	manual/api/syslog/logger.md:255	Syslog::Logger::Formatter	#	call	name-mismatch	no-rbs	doc=severity,time,progname,message real=severity,time,progname,msg	### def call(severity, time, progname, message) -> String
+tempfile	manual/api/tempfile.md:29	Tempfile	.	new,open	name-mismatch	ok	doc=basename,tempdir real=basename,tmpdir / doc=2 real=0	### def Tempfile.new(basename = '', tempdir = nil, mode: 0, **options) -> Tempfile
+tempfile	manual/api/tempfile.md:119	Tempfile	#	close	name-mismatch	ok	doc=real real=unlink_now	### def close(real = false) -> nil
+time	manual/api/time.md:129	Time	.	iso8601,xmlschema	name-mismatch	ok	doc=date real=time	### def Time.xmlschema(date) -> Time
+tmpdir	manual/api/tmpdir.md:11	Dir	.	mktmpdir	opt-count	ok	doc=2 real=1	### def Dir.mktmpdir(prefix_suffix = nil, tmpdir = nil)             -> String
+un	manual/api/un.md:33	Kernel	#	chmod	no-real	no-rbs		### def chmod -> ()
+un	manual/api/un.md:47	Kernel	#	cp	no-real	no-rbs		### def cp -> ()
+un	manual/api/un.md:61	Kernel	#	help	no-real	no-rbs		### def help -> ()
+un	manual/api/un.md:69	Kernel	#	install	no-real	no-rbs		### def install -> ()
+un	manual/api/un.md:83	Kernel	#	ln	no-real	no-rbs		### def ln -> ()
+un	manual/api/un.md:97	Kernel	#	mkdir	no-real	no-rbs		### def mkdir -> ()
+un	manual/api/un.md:111	Kernel	#	mv	no-real	no-rbs		### def mv -> ()
+un	manual/api/un.md:123	Kernel	#	rm	no-real	no-rbs		### def rm -> ()
+un	manual/api/un.md:137	Kernel	#	rmdir	no-real	no-rbs		### def rmdir -> ()
+un	manual/api/un.md:150	Kernel	#	touch	no-real	no-rbs		### def touch -> ()
+un	manual/api/un.md:164	Kernel	#	wait_writable	no-real	no-rbs		### def wait_writable -> ()
+un	manual/api/un.md:176	Kernel	#	mkmf	no-real	no-rbs		### def mkmf -> ()
+un	manual/api/un.md:194	Kernel	#	httpd	no-real	no-rbs		### def httpd -> ()
+uri	manual/api/uri.md:24	Kernel	.#	URI	name-mismatch	ok	doc=uri_str real=uri	### module_function def URI(uri_str) -> object
+uri	manual/api/uri/FTP.md:49	URI::FTP	.	new	opt-count	no-rbs	doc=1 real=2	### def URI::FTP.new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)    -> URI::FTP
+uri	manual/api/uri/FTP.md:116	URI::FTP	#	typecode=	name-mismatch	no-rbs	doc=t real=typecode	### def typecode=(t)
+uri	manual/api/uri/Generic.md:125	URI::Generic	#	scheme=	name-mismatch	ok	doc=s real=v	### def scheme=(s)
+uri	manual/api/uri/Generic.md:138	URI::Generic	#	userinfo=	name-mismatch	ok	doc=s real=userinfo	### def userinfo=(s)
+uri	manual/api/uri/Generic.md:169	URI::Generic	#	user=	name-mismatch	ok	doc=s real=user	### def user=(s)
+uri	manual/api/uri/Generic.md:183	URI::Generic	#	password=	name-mismatch	ok	doc=s real=password	### def password=(s)
+uri	manual/api/uri/Generic.md:201	URI::Generic	#	host=	name-mismatch	ok	doc=s real=v	### def host=(s)
+uri	manual/api/uri/Generic.md:217	URI::Generic	#	port=	name-mismatch	ok	doc=s real=v	### def port=(s)
+uri	manual/api/uri/Generic.md:240	URI::Generic	#	hostname=	name-mismatch	ok	doc=s real=v	### def hostname=(s)
+uri	manual/api/uri/Generic.md:265	URI::Generic	#	registry=	name-mismatch	ok	doc=s real=v	### def registry=(s)
+uri	manual/api/uri/Generic.md:288	URI::Generic	#	path=	name-mismatch	ok	doc=s real=v	### def path=(s)
+uri	manual/api/uri/Generic.md:307	URI::Generic	#	query=	name-mismatch	ok	doc=s real=v	### def query=(s)
+uri	manual/api/uri/Generic.md:328	URI::Generic	#	opaque=	name-mismatch	ok	doc=s real=v	### def opaque=(s)
+uri	manual/api/uri/Generic.md:348	URI::Generic	#	fragment=	name-mismatch	ok	doc=s real=v	### def fragment=(s)
+uri	manual/api/uri/Generic.md:381	URI::Generic	#	merge!	name-mismatch	ok	doc=rel real=oth	### def merge!(rel)    -> self
+uri	manual/api/uri/Generic.md:397	URI::Generic	#	+,merge	name-mismatch	ok	doc=rel real=oth	### def merge(rel)     -> URI::Generic
+uri	manual/api/uri/Generic.md:418	URI::Generic	#	-,route_from	name-mismatch	ok	doc=src real=oth	### def route_from(src)    -> URI::Generic
+uri	manual/api/uri/Generic.md:431	URI::Generic	#	route_to	name-mismatch	ok	doc=dst real=oth	### def route_to(dst)     -> URI::Generic
+uri	manual/api/uri/Generic.md:468	URI::Generic	#	==	name-mismatch	ok	doc=uri real=oth	### def ==(uri)    -> bool
+uri	manual/api/uri/HTTP.md:30	URI::HTTP	.	new	no-real:inherited	no-rbs		### def URI::HTTP.new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)     -> URI::HTTP
+uri	manual/api/uri/LDAP.md:38	URI::LDAP	.	new	req-count	ok	doc=9 real=0	### def URI::LDAP.new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)   -> URI::LDAP
+uri	manual/api/uri/LDAP.md:73	URI::LDAP	#	dn=	name-mismatch	ok	doc=s real=val	### def dn=(s)
+uri	manual/api/uri/LDAP.md:83	URI::LDAP	#	attributes=	name-mismatch	ok	doc=s real=val	### def attributes=(s)
+uri	manual/api/uri/LDAP.md:93	URI::LDAP	#	scope=	name-mismatch	ok	doc=s real=val	### def scope=(s)
+uri	manual/api/uri/LDAP.md:103	URI::LDAP	#	filter=	name-mismatch	ok	doc=s real=val	### def filter=(s)
+uri	manual/api/uri/LDAP.md:113	URI::LDAP	#	extensions=	name-mismatch	ok	doc=s real=val	### def extensions=(s)
+uri	manual/api/uri/MailTo.md:30	URI::MailTo	.	new	req-count	no-rbs	doc=9 real=0	### def URI::MailTo.new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)    -> URI::MailTo
+uri	manual/api/uri/MailTo.md:70	URI::MailTo	#	to=	name-mismatch	ok	doc=s real=v	### def to=(s)
+uri	manual/api/uri/MailTo.md:95	URI::MailTo	#	headers=	name-mismatch	ok	doc=s real=v	### def headers=(s)
+uri	manual/api/uri/URI.md:19	URI	.	split	name-mismatch	ok	doc=url real=uri	### def URI.split(url)    -> [String | nil]
+uri	manual/api/uri/URI.md:45	URI	.	parse	name-mismatch	ok	doc=uri_str real=uri	### def URI.parse(uri_str)    -> object
+uri	manual/api/uri/URI.md:66	URI	.	join	req-count	ok	doc=1 real=0	### def URI.join(uri_str, *path)    -> object
+uri	manual/api/uri/URI.md:143	URI	.	decode_www_form	kw-mismatch	ok	doc=req[] opt[] rest0 real=req[] opt[isindex,separator,use__charset_] rest0	### def URI.decode_www_form(str, enc=Encoding::UTF_8) -> [[String, String]]
+weakref	manual/api/weakref.md:42	WeakRef	#	__getobj__	block-missing	no-rbs	real has &block	### def __getobj__ -> object
+win32/registry	manual/api/win32/registry/Win32__Registry.md:11	Win32::Registry	.	new,open	lib-not-measured	no-rbs		### def Win32::Registry.new(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:28	Win32::Registry	.	create	lib-not-measured	no-rbs		### def Win32::Registry.create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:41	Win32::Registry	.	expand_environ	lib-not-measured	no-rbs		### def Win32::Registry.expand_environ(str)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:51	Win32::Registry	.	type2name	lib-not-measured	no-rbs		### def Win32::Registry.type2name(type)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:56	Win32::Registry	.	wtime2time	lib-not-measured	no-rbs		### def Win32::Registry.wtime2time(wtime)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:65	Win32::Registry	.	time2wtime	lib-not-measured	no-rbs		### def Win32::Registry.time2wtime(time)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:73	Win32::Registry	#	open	lib-not-measured	no-rbs		### def open(subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:78	Win32::Registry	#	create	lib-not-measured	no-rbs		### def create(subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:83	Win32::Registry	#	close	lib-not-measured	no-rbs		### def close
+win32/registry	manual/api/win32/registry/Win32__Registry.md:90	Win32::Registry	#	read	lib-not-measured	no-rbs		### def read(name, *rtype)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:123	Win32::Registry	#	read_bin,read_i,read_s	lib-not-measured	no-rbs		### def read_s(name)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:133	Win32::Registry	#	read_s_expand	lib-not-measured	no-rbs		### def read_s_expand(name)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:141	Win32::Registry	#	write	lib-not-measured	no-rbs		### def write(name, type, data)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:151	Win32::Registry	#	[]	lib-not-measured	no-rbs		### def [](name, wtype = nil)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:165	Win32::Registry	#	write_bin,write_i,write_s	lib-not-measured	no-rbs		### def write_s(name, value)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:175	Win32::Registry	#	each,each_value	lib-not-measured	no-rbs		### def each {|name, type, value| ... }
+win32/registry	manual/api/win32/registry/Win32__Registry.md:181	Win32::Registry	#	each_key	lib-not-measured	no-rbs		### def each_key {|subkey, wtime| ... }
+win32/registry	manual/api/win32/registry/Win32__Registry.md:190	Win32::Registry	#	delete,delete_value	lib-not-measured	no-rbs		### def delete(name)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:197	Win32::Registry	#	delete_key	lib-not-measured	no-rbs		### def delete_key(name, recursive = false)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:205	Win32::Registry	#	flush	lib-not-measured	no-rbs		### def flush
+win32/registry	manual/api/win32/registry/Win32__Registry.md:210	Win32::Registry	#	created?	lib-not-measured	no-rbs		### def created?
+win32/registry	manual/api/win32/registry/Win32__Registry.md:216	Win32::Registry	#	opened?	lib-not-measured	no-rbs		### def opened?
+win32/registry	manual/api/win32/registry/Win32__Registry.md:221	Win32::Registry	#	parent	lib-not-measured	no-rbs		### def parent
+win32/registry	manual/api/win32/registry/Win32__Registry.md:227	Win32::Registry	#	keyname	lib-not-measured	no-rbs		### def keyname
+win32/registry	manual/api/win32/registry/Win32__Registry.md:233	Win32::Registry	#	disposition	lib-not-measured	no-rbs		### def disposition
+win32/registry	manual/api/win32/registry/Win32__Registry.md:239	Win32::Registry	#	name,to_s	lib-not-measured	no-rbs		### def name
+win32/registry	manual/api/win32/registry/Win32__Registry.md:246	Win32::Registry	#	info	lib-not-measured	no-rbs		### def info
+win32/registry	manual/api/win32/registry/Win32__Registry.md:269	Win32::Registry	#	descriptor_length,max_key_length,max_value_length,max_value_name_length,num_keys,num_values,wtime	lib-not-measured	no-rbs		### def num_keys
+win32/registry	manual/api/win32/registry/Win32__Registry.md:280	Win32::Registry	#	[]=	lib-not-measured	no-rbs		### def []=(name, rtype, value = nil)
+win32/registry	manual/api/win32/registry/Win32__Registry.md:283	Win32::Registry	#	_dump	lib-not-measured	no-rbs		### def _dump
+win32/registry	manual/api/win32/registry/Win32__Registry.md:286	Win32::Registry	#	hkey	lib-not-measured	no-rbs		### def hkey
+win32/registry	manual/api/win32/registry/Win32__Registry.md:289	Win32::Registry	#	inspect	lib-not-measured	no-rbs		### def inspect
+win32/registry	manual/api/win32/registry/Win32__Registry.md:292	Win32::Registry	#	keys	lib-not-measured	no-rbs		### def keys
+win32/registry	manual/api/win32/registry/Win32__Registry.md:295	Win32::Registry	#	open?	lib-not-measured	no-rbs		### def open?
+win32/registry	manual/api/win32/registry/Win32__Registry__API.md:6	Win32::Registry::API	.#	CloseKey,CreateKey,DeleteKey,DeleteValue,EnumKey,EnumValue,FlushKey,OpenKey,QueryInfoKey,QueryValue,SetValue,check,packdw,packqw,unpackdw,unpackqw	lib-not-measured	no-rbs		### module_function def CloseKey(hkey)
+win32/registry	manual/api/win32/registry/Win32__Registry__Error.md:8	Win32::Registry::Error	#	code	lib-not-measured	no-rbs		### def code
+win32/registry	manual/api/win32/registry/Win32__Registry__PredefinedKey.md:8	Win32::Registry::PredefinedKey	.	new	lib-not-measured	no-rbs		### def Win32::Registry::PredefinedKey.new(hkey, keyname)
+win32/registry	manual/api/win32/registry/Win32__Registry__PredefinedKey.md:13	Win32::Registry::PredefinedKey	#	class	lib-not-measured	no-rbs		### def class
+win32/registry	manual/api/win32/registry/Win32__Registry__PredefinedKey.md:16	Win32::Registry::PredefinedKey	#	close	lib-not-measured	no-rbs		### def close
+win32/resolv	manual/api/win32/resolv.md:14	Win32::Resolv	.#	get_hosts_path	lib-not-measured	no-rbs		### module_function def get_hosts_path -> String | nil
+win32/resolv	manual/api/win32/resolv.md:23	Win32::Resolv	.#	get_resolv_info	lib-not-measured	no-rbs		### module_function def get_resolv_info -> [[String], [String]]
+win32ole	manual/api/win32ole/WIN32OLE.md:62	WIN32OLE	.	create_guid	lib-not-measured	no-rbs		### def WIN32OLE.create_guid -> String
+win32ole	manual/api/win32ole/WIN32OLE.md:81	WIN32OLE	.	locale	lib-not-measured	no-rbs		### def WIN32OLE.locale -> Integer
+win32ole	manual/api/win32ole/WIN32OLE.md:98	WIN32OLE	.	locale=	lib-not-measured	no-rbs		### def WIN32OLE.locale=(lcid)
+win32ole	manual/api/win32ole/WIN32OLE.md:117	WIN32OLE	.	codepage	lib-not-measured	no-rbs		### def WIN32OLE.codepage -> Integer
+win32ole	manual/api/win32ole/WIN32OLE.md:133	WIN32OLE	.	codepage=	lib-not-measured	no-rbs		### def WIN32OLE.codepage=(cp)
+win32ole	manual/api/win32ole/WIN32OLE.md:146	WIN32OLE	.	connect	lib-not-measured	no-rbs		### def WIN32OLE.connect(ole) -> WIN32OLE
+win32ole	manual/api/win32ole/WIN32OLE.md:173	WIN32OLE	.	const_load	lib-not-measured	no-rbs		### def WIN32OLE.const_load(ole, mod = WIN32OLE) -> ()
+win32ole	manual/api/win32ole/WIN32OLE.md:216	WIN32OLE	.	new	lib-not-measured	no-rbs		### def WIN32OLE.new(server, host=nil) -> WIN32OLE
+win32ole	manual/api/win32ole/WIN32OLE.md:239	WIN32OLE	.	ole_free	lib-not-measured	no-rbs		### def WIN32OLE.ole_free(aWIN32OLE) -> Integer
+win32ole	manual/api/win32ole/WIN32OLE.md:249	WIN32OLE	.	ole_reference_count	lib-not-measured	no-rbs		### def WIN32OLE.ole_reference_count(aWIN32OLE) -> Integer
+win32ole	manual/api/win32ole/WIN32OLE.md:259	WIN32OLE	.	ole_show_help	lib-not-measured	no-rbs		### def WIN32OLE.ole_show_help(obj, helpcontext = nil) -> ()
+win32ole	manual/api/win32ole/WIN32OLE.md:331	WIN32OLE	#	_getproperty	lib-not-measured	no-rbs		### def _getproperty(dispid, args, types) -> object
+win32ole	manual/api/win32ole/WIN32OLE.md:367	WIN32OLE	#	_invoke	lib-not-measured	no-rbs		### def _invoke(dispid, args, types) -> object | nil
+win32ole	manual/api/win32ole/WIN32OLE.md:417	WIN32OLE	#	_setproperty	lib-not-measured	no-rbs		### def _setproperty(dispid, args, types) -> ()
+win32ole	manual/api/win32ole/WIN32OLE.md:454	WIN32OLE	#	each	lib-not-measured	no-rbs		### def each {|i|...} -> ()
+win32ole	manual/api/win32ole/WIN32OLE.md:475	WIN32OLE	#	invoke	lib-not-measured	no-rbs		### def invoke(name, *args) -> object | nil
+win32ole	manual/api/win32ole/WIN32OLE.md:504	WIN32OLE	#	method_missing	lib-not-measured	no-rbs		### def method_missing(id, *args) -> object | nil
+win32ole	manual/api/win32ole/WIN32OLE.md:522	WIN32OLE	#	ole_activex_initialize	lib-not-measured	no-rbs		### def ole_activex_initialize -> nil
+win32ole	manual/api/win32ole/WIN32OLE.md:546	WIN32OLE	#	ole_free	lib-not-measured	no-rbs		### def ole_free -> ()
+win32ole	manual/api/win32ole/WIN32OLE.md:582	WIN32OLE	#	ole_func_methods	lib-not-measured	no-rbs		### def ole_func_methods -> [WIN32OLE_METHOD]
+win32ole	manual/api/win32ole/WIN32OLE.md:606	WIN32OLE	#	ole_get_methods	lib-not-measured	no-rbs		### def ole_get_methods -> [WIN32OLE_METHOD]
+win32ole	manual/api/win32ole/WIN32OLE.md:630	WIN32OLE	#	ole_method,ole_method_help	lib-not-measured	no-rbs		### def ole_method(method) -> WIN32OLE_METHOD
+win32ole	manual/api/win32ole/WIN32OLE.md:646	WIN32OLE	#	ole_methods	lib-not-measured	no-rbs		### def ole_methods -> [WIN32OLE_METHOD]
+win32ole	manual/api/win32ole/WIN32OLE.md:663	WIN32OLE	#	ole_obj_help,ole_type	lib-not-measured	no-rbs		### def ole_obj_help -> WIN32OLE_TYPE | nil
+win32ole	manual/api/win32ole/WIN32OLE.md:680	WIN32OLE	#	ole_put_methods	lib-not-measured	no-rbs		### def ole_put_methods -> [WIN32OLE_METHOD]
+win32ole	manual/api/win32ole/WIN32OLE.md:698	WIN32OLE	#	setproperty	lib-not-measured	no-rbs	unusual:args...	### def setproperty(name, val) -> ()
+win32ole	manual/api/win32ole/WIN32OLE.md:736	WIN32OLE	#	ole_query_interface	lib-not-measured	no-rbs		### def ole_query_interface(iid) -> WIN32OLE
+win32ole	manual/api/win32ole/WIN32OLE.md:794	WIN32OLE	#	ole_respond_to?	lib-not-measured	no-rbs		### def ole_respond_to?(name) -> bool
+win32ole	manual/api/win32ole/WIN32OLE.md:812	WIN32OLE	#	ole_typelib	lib-not-measured	no-rbs		### def ole_typelib -> WIN32OLE_TYPELIB
+win32ole	manual/api/win32ole/WIN32OLE_EVENT.md:36	WIN32OLE_EVENT	.	message_loop	lib-not-measured	no-rbs		### def WIN32OLE_EVENT.message_loop -> ()
+win32ole	manual/api/win32ole/WIN32OLE_EVENT.md:65	WIN32OLE_EVENT	.	new	lib-not-measured	no-rbs		### def WIN32OLE_EVENT.new(ole, event = nil) -> WIN32OLE_EVENT
+win32ole	manual/api/win32ole/WIN32OLE_EVENT.md:99	WIN32OLE_EVENT	#	on_event	lib-not-measured	no-rbs		### def on_event(event = nil) {|*args| ... } -> ()
+win32ole	manual/api/win32ole/WIN32OLE_EVENT.md:137	WIN32OLE_EVENT	#	on_event_with_outargs	lib-not-measured	no-rbs		### def on_event_with_outargs(event = nil) {|*args| ... } -> ()
+win32ole	manual/api/win32ole/WIN32OLE_EVENT.md:162	WIN32OLE_EVENT	#	off_event	lib-not-measured	no-rbs		### def off_event(event = nil) -> ()
+win32ole	manual/api/win32ole/WIN32OLE_EVENT.md:176	WIN32OLE_EVENT	#	handler=	lib-not-measured	no-rbs		### def handler=(obj)
+win32ole	manual/api/win32ole/WIN32OLE_EVENT.md:216	WIN32OLE_EVENT	#	handler	lib-not-measured	no-rbs		### def handler -> object
+win32ole	manual/api/win32ole/WIN32OLE_EVENT.md:222	WIN32OLE_EVENT	#	unadvise	lib-not-measured	no-rbs		### def unadvise -> ()
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:33	WIN32OLE_METHOD	.	new	lib-not-measured	no-rbs		### def WIN32OLE_METHOD.new(ole_type,  method) -> WIN32OLE_METHOD
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:53	WIN32OLE_METHOD	#	dispid	lib-not-measured	no-rbs		### def dispid -> Integer
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:71	WIN32OLE_METHOD	#	event?	lib-not-measured	no-rbs		### def event? -> bool
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:87	WIN32OLE_METHOD	#	event_interface	lib-not-measured	no-rbs		### def event_interface -> String | nil
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:99	WIN32OLE_METHOD	#	helpcontext	lib-not-measured	no-rbs		### def helpcontext -> Integer | nil
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:117	WIN32OLE_METHOD	#	helpfile	lib-not-measured	no-rbs		### def helpfile -> String | nil
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:135	WIN32OLE_METHOD	#	helpstring	lib-not-measured	no-rbs		### def helpstring -> String | nil
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:149	WIN32OLE_METHOD	#	invkind	lib-not-measured	no-rbs		### def invkind -> Integer
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:177	WIN32OLE_METHOD	#	invoke_kind	lib-not-measured	no-rbs		### def invoke_kind -> String
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:209	WIN32OLE_METHOD	#	name,to_s	lib-not-measured	no-rbs		### def name -> String
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:222	WIN32OLE_METHOD	#	offset_vtbl	lib-not-measured	no-rbs		### def offset_vtbl -> Integer
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:236	WIN32OLE_METHOD	#	params	lib-not-measured	no-rbs		### def params -> [WIN32OLE_PARAM]
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:253	WIN32OLE_METHOD	#	return_type	lib-not-measured	no-rbs		### def return_type -> String
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:272	WIN32OLE_METHOD	#	return_type_detail	lib-not-measured	no-rbs		### def return_type_detail -> [String]
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:290	WIN32OLE_METHOD	#	return_vtype	lib-not-measured	no-rbs		### def return_vtype -> Integer
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:305	WIN32OLE_METHOD	#	size_opt_params	lib-not-measured	no-rbs		### def size_opt_params -> Integer | nil
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:317	WIN32OLE_METHOD	#	size_params	lib-not-measured	no-rbs		### def size_params -> Integer | nil
+win32ole	manual/api/win32ole/WIN32OLE_METHOD.md:329	WIN32OLE_METHOD	#	visible?	lib-not-measured	no-rbs		### def visible? -> bool
+win32ole	manual/api/win32ole/WIN32OLE_PARAM.md:27	WIN32OLE_PARAM	.	new	lib-not-measured	no-rbs		### def WIN32OLE_PARAM.new(ole_method,  index) -> WIN32OLE_PARAM
+win32ole	manual/api/win32ole/WIN32OLE_PARAM.md:49	WIN32OLE_PARAM	#	default	lib-not-measured	no-rbs		### def default -> object | nil
+win32ole	manual/api/win32ole/WIN32OLE_PARAM.md:69	WIN32OLE_PARAM	#	input?	lib-not-measured	no-rbs		### def input? -> bool
+win32ole	manual/api/win32ole/WIN32OLE_PARAM.md:90	WIN32OLE_PARAM	#	name,to_s	lib-not-measured	no-rbs		### def name -> String
+win32ole	manual/api/win32ole/WIN32OLE_PARAM.md:104	WIN32OLE_PARAM	#	ole_type	lib-not-measured	no-rbs		### def ole_type -> String
+win32ole	manual/api/win32ole/WIN32OLE_PARAM.md:124	WIN32OLE_PARAM	#	ole_type_detail	lib-not-measured	no-rbs		### def ole_type_detail -> [String]
+win32ole	manual/api/win32ole/WIN32OLE_PARAM.md:141	WIN32OLE_PARAM	#	optional?	lib-not-measured	no-rbs		### def optional? -> bool
+win32ole	manual/api/win32ole/WIN32OLE_PARAM.md:154	WIN32OLE_PARAM	#	output?	lib-not-measured	no-rbs		### def output? -> bool
+win32ole	manual/api/win32ole/WIN32OLE_PARAM.md:184	WIN32OLE_PARAM	#	retval?	lib-not-measured	no-rbs		### def retval? -> bool
+win32ole	manual/api/win32ole/WIN32OLE_RECORD.md:51	WIN32OLE_RECORD	.	new	lib-not-measured	no-rbs		### def WIN32OLE_RECORD.new(typename, obj) -> WIN32OLE_RECORD
+win32ole	manual/api/win32ole/WIN32OLE_RECORD.md:90	WIN32OLE_RECORD	#	to_h	lib-not-measured	no-rbs		### def to_h -> Hash
+win32ole	manual/api/win32ole/WIN32OLE_RECORD.md:130	WIN32OLE_RECORD	#	typename	lib-not-measured	no-rbs		### def typename -> String
+win32ole	manual/api/win32ole/WIN32OLE_RECORD.md:143	WIN32OLE_RECORD	#	method_missing	lib-not-measured	no-rbs		### def method_missing(name, *args) -> object
+win32ole	manual/api/win32ole/WIN32OLE_RECORD.md:181	WIN32OLE_RECORD	#	ole_instance_variable_get	lib-not-measured	no-rbs		### def ole_instance_variable_get(name) -> object
+win32ole	manual/api/win32ole/WIN32OLE_RECORD.md:216	WIN32OLE_RECORD	#	ole_instance_variable_set	lib-not-measured	no-rbs		### def ole_instance_variable_set(name, val) -> object
+win32ole	manual/api/win32ole/WIN32OLE_RECORD.md:249	WIN32OLE_RECORD	#	inspect	lib-not-measured	no-rbs		### def inspect -> String
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:29	WIN32OLE_TYPE	.	new	lib-not-measured	no-rbs		### def WIN32OLE_TYPE.new(libname, ole_class) -> WIN32OLE_TYPE
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:47	WIN32OLE_TYPE	.	ole_classes	lib-not-measured	no-rbs		### def WIN32OLE_TYPE.ole_classes(libname) -> [WIN32OLE_TYPE]
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:64	WIN32OLE_TYPE	.	progids	lib-not-measured	no-rbs		### def WIN32OLE_TYPE.progids -> [String]
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:90	WIN32OLE_TYPE	.	typelibs	lib-not-measured	no-rbs		### def WIN32OLE_TYPE.typelibs -> [String]
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:105	WIN32OLE_TYPE	#	guid	lib-not-measured	no-rbs		### def guid -> String | nil
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:118	WIN32OLE_TYPE	#	helpcontext	lib-not-measured	no-rbs		### def helpcontext -> Integer | nil
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:129	WIN32OLE_TYPE	#	helpfile	lib-not-measured	no-rbs		### def helpfile -> String | nil
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:152	WIN32OLE_TYPE	#	helpstring	lib-not-measured	no-rbs		### def helpstring -> String | nil
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:165	WIN32OLE_TYPE	#	major_version	lib-not-measured	no-rbs		### def major_version -> Integer
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:177	WIN32OLE_TYPE	#	minor_version	lib-not-measured	no-rbs		### def minor_version -> Integer
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:189	WIN32OLE_TYPE	#	name,to_s	lib-not-measured	no-rbs		### def name -> String
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:201	WIN32OLE_TYPE	#	ole_methods	lib-not-measured	no-rbs		### def ole_methods -> [WIN32OLE_METHOD]
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:216	WIN32OLE_TYPE	#	ole_type	lib-not-measured	no-rbs		### def ole_type -> String | nil
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:252	WIN32OLE_TYPE	#	progid	lib-not-measured	no-rbs		### def progid -> String | nil
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:272	WIN32OLE_TYPE	#	src_type	lib-not-measured	no-rbs		### def src_type -> String | nil
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:297	WIN32OLE_TYPE	#	typekind	lib-not-measured	no-rbs		### def typekind -> Integer
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:313	WIN32OLE_TYPE	#	variables	lib-not-measured	no-rbs		### def variables -> [WIN32OLE_VARIABLE]
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:344	WIN32OLE_TYPE	#	visible?	lib-not-measured	no-rbs		### def visible? -> bool
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:355	WIN32OLE_TYPE	#	ole_typelib	lib-not-measured	no-rbs		### def ole_typelib -> WIN32OLE_TYPELIB | nil
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:366	WIN32OLE_TYPE	#	implemented_ole_types	lib-not-measured	no-rbs		### def implemented_ole_types -> [WIN32OLE_TYPE]
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:381	WIN32OLE_TYPE	#	source_ole_types	lib-not-measured	no-rbs		### def source_ole_types -> [WIN32OLE_TYPE]
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:397	WIN32OLE_TYPE	#	default_event_sources	lib-not-measured	no-rbs		### def default_event_sources -> [WIN32OLE_TYPE]
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:497	WIN32OLE_TYPE	#	default_ole_types	lib-not-measured	no-rbs		### def default_ole_types -> [WIN32OLE_TYPE]
+win32ole	manual/api/win32ole/WIN32OLE_TYPE.md:510	WIN32OLE_TYPE	#	inspect	lib-not-measured	no-rbs		### def inspect -> String
+win32ole	manual/api/win32ole/WIN32OLE_TYPELIB.md:46	WIN32OLE_TYPELIB	.	new	lib-not-measured	no-rbs		### def WIN32OLE_TYPELIB.new(libname, mjv = nil, miv = nil) -> WIN32OLE_TYPELIB
+win32ole	manual/api/win32ole/WIN32OLE_TYPELIB.md:76	WIN32OLE_TYPELIB	.	typelibs	lib-not-measured	no-rbs		### def WIN32OLE_TYPELIB.typelibs -> [WIN32OLE_TYPELIB]
+win32ole	manual/api/win32ole/WIN32OLE_TYPELIB.md:88	WIN32OLE_TYPELIB	#	guid	lib-not-measured	no-rbs		### def guid -> String
+win32ole	manual/api/win32ole/WIN32OLE_TYPELIB.md:100	WIN32OLE_TYPELIB	#	library_name	lib-not-measured	no-rbs		### def library_name -> String
+win32ole	manual/api/win32ole/WIN32OLE_TYPELIB.md:112	WIN32OLE_TYPELIB	#	major_version	lib-not-measured	no-rbs		### def major_version -> Integer
+win32ole	manual/api/win32ole/WIN32OLE_TYPELIB.md:124	WIN32OLE_TYPELIB	#	minor_version	lib-not-measured	no-rbs		### def minor_version -> Integer
+win32ole	manual/api/win32ole/WIN32OLE_TYPELIB.md:136	WIN32OLE_TYPELIB	#	name,to_s	lib-not-measured	no-rbs		### def name -> String
+win32ole	manual/api/win32ole/WIN32OLE_TYPELIB.md:150	WIN32OLE_TYPELIB	#	ole_classes,ole_types	lib-not-measured	no-rbs		### def ole_types -> [WIN32OLE_TYPE]
+win32ole	manual/api/win32ole/WIN32OLE_TYPELIB.md:164	WIN32OLE_TYPELIB	#	path	lib-not-measured	no-rbs		### def path -> String
+win32ole	manual/api/win32ole/WIN32OLE_TYPELIB.md:179	WIN32OLE_TYPELIB	#	version	lib-not-measured	no-rbs		### def version -> Float
+win32ole	manual/api/win32ole/WIN32OLE_TYPELIB.md:191	WIN32OLE_TYPELIB	#	visible?	lib-not-measured	no-rbs		### def visible? -> bool
+win32ole	manual/api/win32ole/WIN32OLE_VARIABLE.md:42	WIN32OLE_VARIABLE	#	name,to_s	lib-not-measured	no-rbs		### def name -> String
+win32ole	manual/api/win32ole/WIN32OLE_VARIABLE.md:57	WIN32OLE_VARIABLE	#	ole_type	lib-not-measured	no-rbs		### def ole_type -> String
+win32ole	manual/api/win32ole/WIN32OLE_VARIABLE.md:73	WIN32OLE_VARIABLE	#	ole_type_detail	lib-not-measured	no-rbs		### def ole_type_detail -> [String]
+win32ole	manual/api/win32ole/WIN32OLE_VARIABLE.md:104	WIN32OLE_VARIABLE	#	value	lib-not-measured	no-rbs		### def value -> object | nil
+win32ole	manual/api/win32ole/WIN32OLE_VARIABLE.md:130	WIN32OLE_VARIABLE	#	variable_kind	lib-not-measured	no-rbs		### def variable_kind -> String
+win32ole	manual/api/win32ole/WIN32OLE_VARIABLE.md:156	WIN32OLE_VARIABLE	#	varkind	lib-not-measured	no-rbs		### def varkind -> Integer
+win32ole	manual/api/win32ole/WIN32OLE_VARIABLE.md:171	WIN32OLE_VARIABLE	#	visible?	lib-not-measured	no-rbs		### def visible? -> bool
+win32ole	manual/api/win32ole/WIN32OLE_VARIANT.md:51	WIN32OLE_VARIANT	.	array	lib-not-measured	no-rbs		### def WIN32OLE_VARIANT.array(dims, vt) -> WIN32OLE_VARIANT
+win32ole	manual/api/win32ole/WIN32OLE_VARIANT.md:70	WIN32OLE_VARIANT	.	new	lib-not-measured	no-rbs		### def WIN32OLE_VARIANT.new(val, vartype = nil) -> WIN32OLE_VARIANT
+win32ole	manual/api/win32ole/WIN32OLE_VARIANT.md:151	WIN32OLE_VARIANT	#	value	lib-not-measured	no-rbs		### def value -> object
+win32ole	manual/api/win32ole/WIN32OLE_VARIANT.md:162	WIN32OLE_VARIANT	#	value=	lib-not-measured	no-rbs		### def value=(val)
+win32ole	manual/api/win32ole/WIN32OLE_VARIANT.md:180	WIN32OLE_VARIANT	#	vartype	lib-not-measured	no-rbs		### def vartype -> Integer
+yaml/dbm	manual/api/yaml/dbm.md:49	YAML::DBM	#	[]	no-class	no-rbs		### def [](key) -> object | nil
+yaml/dbm	manual/api/yaml/dbm.md:63	YAML::DBM	#	[]=,store	no-class	no-rbs		### def []=(key, value)
+yaml/dbm	manual/api/yaml/dbm.md:76	YAML::DBM	#	delete	no-class	no-rbs		### def delete(key) -> object | nil
+yaml/dbm	manual/api/yaml/dbm.md:86	YAML::DBM	#	delete_if	no-class	no-rbs		### def delete_if {|key, val| ... } -> YAML::DBM
+yaml/dbm	manual/api/yaml/dbm.md:94	YAML::DBM	#	each,each_pair	no-class	no-rbs		### def each                        -> YAML::DBM
+yaml/dbm	manual/api/yaml/dbm.md:101	YAML::DBM	#	each_value	no-class	no-rbs		### def each_value {|val| ... } -> YAML::DBM
+yaml/dbm	manual/api/yaml/dbm.md:107	YAML::DBM	#	fetch	no-class	no-rbs		### def fetch(key, ifnone = nil) -> object
+yaml/dbm	manual/api/yaml/dbm.md:117	YAML::DBM	#	has_value?	no-class	no-rbs		### def has_value?(value) -> bool
+yaml/dbm	manual/api/yaml/dbm.md:123	YAML::DBM	#	shift	no-class	no-rbs		### def shift -> [String, object]
+yaml/dbm	manual/api/yaml/dbm.md:129	YAML::DBM	#	index	no-class	no-rbs		### def index(value) -> String | nil
+yaml/dbm	manual/api/yaml/dbm.md:141	YAML::DBM	#	key	no-class	no-rbs		### def key(value) -> String | nil
+yaml/dbm	manual/api/yaml/dbm.md:149	YAML::DBM	#	invert	no-class	no-rbs		### def invert -> {object => String}
+yaml/dbm	manual/api/yaml/dbm.md:155	YAML::DBM	#	reject	no-class	no-rbs		### def reject {|key, val| ... } -> {String => object}
+yaml/dbm	manual/api/yaml/dbm.md:161	YAML::DBM	#	replace	no-class	no-rbs		### def replace(other) -> YAML::DBM
+yaml/dbm	manual/api/yaml/dbm.md:175	YAML::DBM	#	select	no-class	no-rbs		### def select(*keys) -> [object]
+yaml/dbm	manual/api/yaml/dbm.md:186	YAML::DBM	#	update	no-class	no-rbs		### def update(other) -> self
+yaml/dbm	manual/api/yaml/dbm.md:200	YAML::DBM	#	to_a	no-class	no-rbs		### def to_a -> [[String, object]]
+yaml/dbm	manual/api/yaml/dbm.md:204	YAML::DBM	#	to_hash	no-class	no-rbs		### def to_hash -> Hash
+yaml/dbm	manual/api/yaml/dbm.md:208	YAML::DBM	#	values	no-class	no-rbs		### def values -> object
+yaml/dbm	manual/api/yaml/dbm.md:212	YAML::DBM	#	values_at	no-class	no-rbs		### def values_at(*keys) -> [object]
+yaml/store	manual/api/yaml/store.md:51	YAML::Store	.	new	no-class	no-rbs		### def YAML::Store.new(file_name, yaml_opts = {})                      -> YAML::Store
+zlib	manual/api/zlib/Deflate.md:158	Zlib::Deflate	#	finish	no-real	no-rbs		### def finish -> String
+zlib	manual/api/zlib/GzipFile.md:14	Zlib::GzipFile	.	new	no-real:inherited	no-rbs		### def Zlib::GzipFile.new(*args) -> ()
+zlib	manual/api/zlib/GzipFile.md:30	Zlib::GzipFile	.	open	no-real	no-rbs		### def Zlib::GzipFile.open(*args) {|gz| ... } -> ()
+zlib	manual/api/zlib/GzipFile.md:91	Zlib::GzipFile	#	path	no-real	no-rbs		### def path -> String
+zlib	manual/api/zlib/GzipReader.md:32	Zlib::GzipReader	.	new	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def Zlib::GzipReader.new(io) -> Zlib::GzipReader
+zlib	manual/api/zlib/GzipReader.md:58	Zlib::GzipReader	.	wrap	no-real	ok		### def Zlib::GzipReader.wrap(io) -> Zlib::GzipReader
+zlib	manual/api/zlib/GzipReader.md:93	Zlib::GzipReader	.	open	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def Zlib::GzipReader.open(filename) -> Zlib::GzipReader
+zlib	manual/api/zlib/GzipWriter.md:51	Zlib::GzipWriter	.	wrap	no-real	no-rbs		### def Zlib::GzipWriter.wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
+zlib	manual/api/zlib/GzipWriter.md:120	Zlib::GzipWriter	#	close,finish	no-real	no-rbs		### def close -> File
+zlib	manual/api/zlib/Inflate.md:58	Zlib::Inflate	#	inflate	doc-no-optional?	ok	doc has no opt/rest/kw; C arity=-1	### def inflate(string) -> String
+zlib	manual/api/zlib/Inflate.md:95	Zlib::Inflate	#	finish	no-real	no-rbs		### def finish -> String
+zlib	manual/api/zlib/ZStream.md:40	Zlib::ZStream	.	new	no-real:inherited	no-rbs		### def Zlib::ZStream.new -> ()

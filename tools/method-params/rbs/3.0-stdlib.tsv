@@ -1,0 +1,1017 @@
+lib	key	idx	params	arity_min	arity_max	block	type
+abbrev	Abbrev#abbrev	0		1	2	-	(Array[String], ?String | Regexp | nil) -> Hash[String, String]
+abbrev	Abbrev.abbrev	0		1	2	-	(Array[String], ?String | Regexp | nil) -> Hash[String, String]
+base64	Base64#decode64	0	str	1	1	-	(String str) -> String
+base64	Base64#encode64	0	bin	1	1	-	(String bin) -> String
+base64	Base64#strict_decode64	0	str	1	1	-	(String str) -> String
+base64	Base64#strict_encode64	0	bin	1	1	-	(String bin) -> String
+base64	Base64#urlsafe_decode64	0	str	1	1	-	(String str) -> String
+base64	Base64#urlsafe_encode64	0	bin,padding	1	1	-	(String bin, ?padding: boolish) -> String
+base64	Base64.decode64	0	str	1	1	-	(String str) -> String
+base64	Base64.encode64	0	bin	1	1	-	(String bin) -> String
+base64	Base64.strict_decode64	0	str	1	1	-	(String str) -> String
+base64	Base64.strict_encode64	0	bin	1	1	-	(String bin) -> String
+base64	Base64.urlsafe_decode64	0	str	1	1	-	(String str) -> String
+base64	Base64.urlsafe_encode64	0	bin,padding	1	1	-	(String bin, ?padding: boolish) -> String
+bigdecimal	BigDecimal#%	0		1	1	-	(Numeric) -> BigDecimal
+bigdecimal	BigDecimal#*	0		1	1	-	(Numeric) -> BigDecimal
+bigdecimal	BigDecimal#**	0		1	1	-	(Numeric) -> BigDecimal
+bigdecimal	BigDecimal#+	0		1	1	-	(Numeric) -> BigDecimal
+bigdecimal	BigDecimal#+@	0		0	0	-	() -> BigDecimal
+bigdecimal	BigDecimal#-	0		1	1	-	(Numeric) -> BigDecimal
+bigdecimal	BigDecimal#-@	0		0	0	-	() -> BigDecimal
+bigdecimal	BigDecimal#/	0		1	1	-	(Numeric) -> BigDecimal
+bigdecimal	BigDecimal#<	0		1	1	-	(Numeric) -> bool
+bigdecimal	BigDecimal#<=	0		1	1	-	(Numeric) -> bool
+bigdecimal	BigDecimal#<=>	0		1	1	-	(Numeric) -> Integer?
+bigdecimal	BigDecimal#==	0		1	1	-	(untyped) -> bool
+bigdecimal	BigDecimal#===	0		1	1	-	(untyped) -> bool
+bigdecimal	BigDecimal#>	0		1	1	-	(Numeric) -> bool
+bigdecimal	BigDecimal#>=	0		1	1	-	(Numeric) -> bool
+bigdecimal	BigDecimal#_dump	0		0	1	-	(?untyped) -> String
+bigdecimal	BigDecimal#abs	0		0	0	-	() -> BigDecimal
+bigdecimal	BigDecimal#add	0	value,digits	2	2	-	(Numeric value, Integer digits) -> BigDecimal
+bigdecimal	BigDecimal#ceil	0		0	0	-	() -> Integer
+bigdecimal	BigDecimal#ceil	1	n	1	1	-	(int n) -> BigDecimal
+bigdecimal	BigDecimal#clone	0		0	0	-	() -> self
+bigdecimal	BigDecimal#coerce	0		1	1	-	(Numeric) -> [ BigDecimal, BigDecimal ]
+bigdecimal	BigDecimal#div	0	value	1	1	-	(Numeric value) -> Integer
+bigdecimal	BigDecimal#div	1	value,digits	2	2	-	(Numeric value, int digits) -> BigDecimal
+bigdecimal	BigDecimal#divmod	0		1	1	-	(Numeric) -> [ BigDecimal, BigDecimal ]
+bigdecimal	BigDecimal#dup	0		0	0	-	() -> self
+bigdecimal	BigDecimal#eql?	0		1	1	-	(untyped) -> bool
+bigdecimal	BigDecimal#exponent	0		0	0	-	() -> Integer
+bigdecimal	BigDecimal#finite?	0		0	0	-	() -> bool
+bigdecimal	BigDecimal#fix	0		0	0	-	() -> BigDecimal
+bigdecimal	BigDecimal#floor	0		0	0	-	() -> Integer
+bigdecimal	BigDecimal#floor	1	n	1	1	-	(int n) -> BigDecimal
+bigdecimal	BigDecimal#frac	0		0	0	-	() -> BigDecimal
+bigdecimal	BigDecimal#hash	0		0	0	-	() -> Integer
+bigdecimal	BigDecimal#infinite?	0		0	0	-	() -> Integer?
+bigdecimal	BigDecimal#initialize_copy	0		1	1	-	(self) -> self
+bigdecimal	BigDecimal#inspect	0		0	0	-	() -> String
+bigdecimal	BigDecimal#modulo	0	b	1	1	-	(Numeric b) -> BigDecimal
+bigdecimal	BigDecimal#mult	0	value,digits	2	2	-	(Numeric value, int digits) -> BigDecimal
+bigdecimal	BigDecimal#nan?	0		0	0	-	() -> bool
+bigdecimal	BigDecimal#nonzero?	0		0	0	-	() -> self?
+bigdecimal	BigDecimal#power	0	n,prec	2	2	-	(Numeric n, int prec) -> BigDecimal
+bigdecimal	BigDecimal#precs	0		0	0	-	() -> [ Integer, Integer ]
+bigdecimal	BigDecimal#quo	0		1	1	-	(Numeric) -> BigDecimal
+bigdecimal	BigDecimal#remainder	0		1	1	-	(Numeric) -> BigDecimal
+bigdecimal	BigDecimal#round	0		0	0	-	() -> Integer
+bigdecimal	BigDecimal#round	1	n,mode	1	2	-	(Numeric n, ?Integer mode) -> BigDecimal
+bigdecimal	BigDecimal#sign	0		0	0	-	() -> Integer
+bigdecimal	BigDecimal#split	0		0	0	-	() -> [ Integer, String, Integer, Integer ]
+bigdecimal	BigDecimal#sqrt	0	n	1	1	-	(int n) -> BigDecimal
+bigdecimal	BigDecimal#sub	0	value,digits	2	2	-	(Numeric value, int digits) -> BigDecimal
+bigdecimal	BigDecimal#to_f	0		0	0	-	() -> Float
+bigdecimal	BigDecimal#to_i	0		0	0	-	() -> Integer
+bigdecimal	BigDecimal#to_int	0		0	0	-	() -> Integer
+bigdecimal	BigDecimal#to_r	0		0	0	-	() -> Rational
+bigdecimal	BigDecimal#to_s	0	s	0	1	-	(?String | int s) -> String
+bigdecimal	BigDecimal#truncate	0		0	0	-	() -> Integer
+bigdecimal	BigDecimal#truncate	1	n	1	1	-	(int n) -> BigDecimal
+bigdecimal	BigDecimal#zero?	0		0	0	-	() -> bool
+bigdecimal	BigDecimal._load	0		1	1	-	(String) -> BigDecimal
+bigdecimal	BigDecimal.double_fig	0		0	0	-	() -> Integer
+bigdecimal	BigDecimal.interpret_loosely	0		1	1	-	(string) -> BigDecimal
+bigdecimal	BigDecimal.limit	0	digits	0	1	-	(?Integer? digits) -> Integer
+bigdecimal	BigDecimal.mode	0	mode,value	1	2	-	(Integer mode, ?Integer? value) -> Integer?
+bigdecimal	BigDecimal.save_exception_mode	0		0	0	req	() { (?nil) -> void } -> void
+bigdecimal	BigDecimal.save_limit	0		0	0	req	() { (?nil) -> void } -> void
+bigdecimal	BigDecimal.save_rounding_mode	0		0	0	req	() { (?nil) -> void } -> void
+bigdecimal-math	BigMath#E	0	prec	1	1	-	(Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath#PI	0	prec	1	1	-	(Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath#atan	0	x,prec	2	2	-	(BigDecimal x, Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath#cos	0	x,prec	2	2	-	(BigDecimal x, Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath#sin	0	x,prec	2	2	-	(BigDecimal x, Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath#sqrt	0	x,prec	2	2	-	(BigDecimal x, Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath.E	0	prec	1	1	-	(Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath.PI	0	prec	1	1	-	(Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath.atan	0	x,prec	2	2	-	(BigDecimal x, Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath.cos	0	x,prec	2	2	-	(BigDecimal x, Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath.exp	0	prec	2	2	-	(BigDecimal, Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath.log	0	prec	2	2	-	(BigDecimal, Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath.sin	0	x,prec	2	2	-	(BigDecimal x, Numeric prec) -> BigDecimal
+bigdecimal-math	BigMath.sqrt	0	x,prec	2	2	-	(BigDecimal x, Numeric prec) -> BigDecimal
+coverage	Coverage.line_stub	0		0	0	-	() -> Array[Integer?]
+coverage	Coverage.peek_result	0		0	0	-	() -> Hash[String, untyped]
+coverage	Coverage.result	0	stop,clear	0	0	-	(?stop: boolish, ?clear: boolish) -> Hash[String, untyped]
+coverage	Coverage.running?	0		0	0	-	() -> bool
+coverage	Coverage.start	0	lines,branches,methods,oneshot_lines	0	0	-	(?lines: boolish, ?branches: boolish, ?methods: boolish, ?oneshot_lines: boolish) -> nil
+csv	CSV#<<	0	row	1	1	-	(::Array[untyped] | CSV::Row row) -> void
+csv	CSV#initialize	0	io,options	0	2	-	(?String | IO | StringIO io, ?::Hash[Symbol, untyped] options) -> void
+csv	CSV#read	0		0	0	-	() -> ::Array[::Array[String?]]
+csv	CSV#readline	0		0	0	-	() -> ::Array[String?]?
+csv	CSV.foreach	0	path,options	1	2	req	[U] (String | IO | StringIO path, ?::Hash[Symbol, U] options) { (::Array[String?] arg0) -> void } -> void
+csv	CSV.generate	0	str	0	1	req	(?String str, **untyped options) { (CSV csv) -> void } -> String
+csv	CSV.parse	0	str,options	1	2	opt	(String str, ?::Hash[Symbol, untyped] options) ?{ (::Array[String?] arg0) -> void } -> ::Array[::Array[String?]]?
+csv	CSV.parse_line	0	str,options	1	2	-	(String str, ?::Hash[Symbol, untyped] options) -> ::Array[String?]?
+csv	CSV.read	0	path,options	1	2	-	(String path, ?::Hash[Symbol, untyped] options) -> ::Array[::Array[String?]]
+csv	CSV::Row#<<	0	arg	1	1	-	(untyped arg) -> untyped
+csv	CSV::Row#==	0	other	1	1	-	(untyped other) -> bool
+csv	CSV::Row#[]	0	header_or_index,minimum_index	1	2	-	(untyped header_or_index, ?untyped minimum_index) -> untyped
+csv	CSV::Row#[]=	0	args	0	-	-	(*untyped args) -> untyped
+csv	CSV::Row#delete	0	header_or_index,minimum_index	1	2	-	(untyped header_or_index, ?untyped minimum_index) -> untyped
+csv	CSV::Row#delete_if	0		0	0	req	() { (*untyped) -> untyped } -> untyped
+csv	CSV::Row#dig	0	index_or_header,indexes	1	-	-	(untyped index_or_header, *untyped indexes) -> untyped
+csv	CSV::Row#each	0		0	0	req	() { (*untyped) -> untyped } -> untyped
+csv	CSV::Row#each_pair	0		0	0	req	() { (*untyped) -> untyped } -> untyped
+csv	CSV::Row#empty?	0	args	0	-	req	(*untyped args) { (*untyped) -> untyped } -> bool
+csv	CSV::Row#fetch	0	header,varargs	1	-	opt	(untyped header, *untyped varargs) ?{ (*untyped) -> untyped } -> untyped
+csv	CSV::Row#field	0	header_or_index,minimum_index	1	2	-	(untyped header_or_index, ?untyped minimum_index) -> untyped
+csv	CSV::Row#field?	0	data	1	1	-	(untyped data) -> bool
+csv	CSV::Row#field_row?	0		0	0	-	() -> bool
+csv	CSV::Row#fields	0	headers_and_or_indices	0	-	-	(*untyped headers_and_or_indices) -> untyped
+csv	CSV::Row#has_key?	0	header	1	1	-	(untyped header) -> bool
+csv	CSV::Row#header?	0	header	1	1	-	(untyped header) -> bool
+csv	CSV::Row#header_row?	0		0	0	-	() -> bool
+csv	CSV::Row#headers	0		0	0	-	() -> untyped
+csv	CSV::Row#include?	0	header	1	1	-	(untyped header) -> bool
+csv	CSV::Row#index	0	header,minimum_index	1	2	-	(untyped header, ?untyped minimum_index) -> untyped
+csv	CSV::Row#inspect	0		0	0	-	() -> String
+csv	CSV::Row#key?	0	header	1	1	-	(untyped header) -> bool
+csv	CSV::Row#length	0	args	0	-	req	(*untyped args) { (*untyped) -> untyped } -> untyped
+csv	CSV::Row#member?	0	header	1	1	-	(untyped header) -> bool
+csv	CSV::Row#push	0	args	0	-	-	(*untyped args) -> untyped
+csv	CSV::Row#size	0	args	0	-	req	(*untyped args) { (*untyped) -> untyped } -> untyped
+csv	CSV::Row#to_csv	0		0	0	-	(**untyped) -> untyped
+csv	CSV::Row#to_h	0		0	0	-	() -> untyped
+csv	CSV::Row#to_hash	0		0	0	-	() -> untyped
+csv	CSV::Row#to_s	0		0	0	-	(**untyped) -> untyped
+csv	CSV::Row#values_at	0	headers_and_or_indices	0	-	-	(*untyped headers_and_or_indices) -> untyped
+csv	CSV::Table#<<	0	row_or_array	1	1	-	(untyped row_or_array) -> untyped
+csv	CSV::Table#==	0	other	1	1	-	(untyped other) -> bool
+csv	CSV::Table#[]	0	index_or_header	1	1	-	(untyped index_or_header) -> untyped
+csv	CSV::Table#[]=	0	index_or_header,value	2	2	-	(untyped index_or_header, untyped value) -> untyped
+csv	CSV::Table#by_col	0		0	0	-	() -> untyped
+csv	CSV::Table#by_col!	0		0	0	-	() -> untyped
+csv	CSV::Table#by_col_or_row	0		0	0	-	() -> untyped
+csv	CSV::Table#by_col_or_row!	0		0	0	-	() -> untyped
+csv	CSV::Table#by_row	0		0	0	-	() -> untyped
+csv	CSV::Table#by_row!	0		0	0	-	() -> untyped
+csv	CSV::Table#delete	0	indexes_or_headers	0	-	-	(*untyped indexes_or_headers) -> untyped
+csv	CSV::Table#delete_if	0		0	0	req	() { (*untyped) -> untyped } -> untyped
+csv	CSV::Table#dig	0	index_or_header,index_or_headers	1	-	-	(untyped index_or_header, *untyped index_or_headers) -> untyped
+csv	CSV::Table#each	0		0	0	req	() { (*untyped) -> untyped } -> untyped
+csv	CSV::Table#empty?	0	args	0	-	req	(*untyped args) { (*untyped) -> untyped } -> untyped
+csv	CSV::Table#headers	0		0	0	-	() -> untyped
+csv	CSV::Table#initialize	0	array_of_rows,headers	1	1	-	(untyped array_of_rows, ?headers: untyped) -> untyped
+csv	CSV::Table#inspect	0		0	0	-	() -> String
+csv	CSV::Table#length	0	args	0	-	req	(*untyped args) { (*untyped) -> untyped } -> untyped
+csv	CSV::Table#mode	0		0	0	-	() -> untyped
+csv	CSV::Table#push	0	rows	0	-	-	(*untyped rows) -> untyped
+csv	CSV::Table#size	0	args	0	-	req	(*untyped args) { (*untyped) -> untyped } -> untyped
+csv	CSV::Table#to_a	0		0	0	-	() -> untyped
+csv	CSV::Table#to_csv	0	write_headers	0	0	-	(?write_headers: boolish, **untyped) -> untyped
+csv	CSV::Table#to_s	0	write_headers	0	0	-	(?write_headers: boolish, **untyped) -> untyped
+csv	CSV::Table#values_at	0	indices_or_headers	0	-	-	(*untyped indices_or_headers) -> untyped
+date	Date#+	0	other	1	1	-	(Integer | Rational other) -> Date
+date	Date#-	0	other	1	1	-	(Integer | Rational other) -> Date
+date	Date#-	1	other	1	1	-	(Date other) -> Rational
+date	Date#<<	0	month	1	1	-	(Integer month) -> Date
+date	Date#<=>	0	other	1	1	-	(Date | Rational | Object other) -> Integer?
+date	Date#===	0	other	1	1	-	(Date other) -> bool
+date	Date#>>	0	month	1	1	-	(Integer month) -> Date
+date	Date#ajd	0		0	0	-	() -> Rational
+date	Date#amjd	0		0	0	-	() -> Rational
+date	Date#asctime	0		0	0	-	() -> String
+date	Date#ctime	0		0	0	-	() -> String
+date	Date#cwday	0		0	0	-	() -> Integer
+date	Date#cweek	0		0	0	-	() -> Integer
+date	Date#cwyear	0		0	0	-	() -> Integer
+date	Date#day	0		0	0	-	() -> Integer
+date	Date#downto	0	min	1	1	req	(Date min) { (Date) -> untyped } -> Date
+date	Date#downto	1	min	1	1	-	(Date min) -> Enumerator[Date, Date]
+date	Date#england	0		0	0	-	() -> Date
+date	Date#friday?	0		0	0	-	() -> bool
+date	Date#gregorian	0		0	0	-	() -> Date
+date	Date#gregorian?	0		0	0	-	() -> bool
+date	Date#httpdate	0		0	0	-	() -> String
+date	Date#initialize	0	year,month,mday,start	0	4	-	(?Integer year, ?Integer month, ?Integer mday, ?Integer start) -> void
+date	Date#inspect	0		0	0	-	() -> String
+date	Date#iso8601	0		0	0	-	() -> String
+date	Date#italy	0		0	0	-	() -> Date
+date	Date#jd	0		0	0	-	() -> Integer
+date	Date#jisx0301	0		0	0	-	() -> String
+date	Date#julian	0		0	0	-	() -> Date
+date	Date#julian?	0		0	0	-	() -> bool
+date	Date#ld	0		0	0	-	() -> Integer
+date	Date#leap?	0		0	0	-	() -> bool
+date	Date#mday	0		0	0	-	() -> Integer
+date	Date#mjd	0		0	0	-	() -> Integer
+date	Date#mon	0		0	0	-	() -> Integer
+date	Date#monday?	0		0	0	-	() -> bool
+date	Date#month	0		0	0	-	() -> Integer
+date	Date#new_start	0	start	0	1	-	(?Integer start) -> Date
+date	Date#next	0		0	0	-	() -> Date
+date	Date#next_day	0	day	0	1	-	(?Integer day) -> Date
+date	Date#next_month	0	month	0	1	-	(?Integer month) -> Date
+date	Date#next_year	0	year	0	1	-	(?Integer year) -> Date
+date	Date#prev_day	0	day	0	1	-	(?Integer day) -> Date
+date	Date#prev_month	0	month	0	1	-	(?Integer month) -> Date
+date	Date#prev_year	0	year	0	1	-	(?Integer year) -> Date
+date	Date#rfc2822	0		0	0	-	() -> String
+date	Date#rfc3339	0		0	0	-	() -> String
+date	Date#rfc822	0		0	0	-	() -> String
+date	Date#saturday?	0		0	0	-	() -> bool
+date	Date#start	0		0	0	-	() -> Float
+date	Date#step	0	limit,step	1	2	req	(Date limit, ?Integer step) { (Date) -> untyped } -> Date
+date	Date#step	1	limit,step	1	2	-	(Date limit, ?Integer step) -> ::Enumerator[Date, Date]
+date	Date#strftime	0	format	0	1	-	(?String format) -> String
+date	Date#succ	0		0	0	-	() -> Date
+date	Date#sunday?	0		0	0	-	() -> bool
+date	Date#thursday?	0		0	0	-	() -> bool
+date	Date#to_date	0		0	0	-	() -> Date
+date	Date#to_datetime	0		0	0	-	() -> DateTime
+date	Date#to_s	0		0	0	-	() -> String
+date	Date#to_time	0		0	0	-	() -> Time
+date	Date#tuesday?	0		0	0	-	() -> bool
+date	Date#upto	0	max	1	1	req	(Date max) { (Date) -> untyped } -> Date
+date	Date#upto	1	max	1	1	-	(Date max) -> ::Enumerator[Date, Date]
+date	Date#wday	0		0	0	-	() -> Integer
+date	Date#wednesday?	0		0	0	-	() -> bool
+date	Date#xmlschema	0		0	0	-	() -> String
+date	Date#yday	0		0	0	-	() -> Integer
+date	Date#year	0		0	0	-	() -> Integer
+date	Date._httpdate	0	str	1	1	-	(String str) -> Hash[Symbol, Integer]
+date	Date._iso8601	0	str	1	1	-	(String str) -> Hash[Symbol, Integer]
+date	Date._jisx0301	0	str	1	1	-	(String str) -> Hash[Symbol, Integer]
+date	Date._parse	0	str,complete	1	2	-	(String str, ?boolish complete) -> Hash[Symbol, Integer]
+date	Date._rfc2822	0	str	1	1	-	(String str) -> Hash[Symbol, Integer | String]
+date	Date._rfc3339	0	str	1	1	-	(String str) -> Hash[Symbol, Integer | String]
+date	Date._rfc822	0	str	1	1	-	(String str) -> Hash[Symbol, Integer | String]
+date	Date._strptime	0	str,format	1	2	-	(String str, ?String format) -> Hash[Symbol, Integer]
+date	Date._xmlschema	0	str	1	1	-	(String str) -> Hash[Symbol, Integer]
+date	Date.civil	0	year,month,mday,start	0	4	-	(?Integer year, ?Integer month, ?Integer mday, ?Integer start) -> Date
+date	Date.commercial	0	cwyear,cweek,cwday,start	0	4	-	(?Integer cwyear, ?Integer cweek, ?Integer cwday, ?Integer start) -> Date
+date	Date.gregorian_leap?	0	year	1	1	-	(Integer year) -> bool
+date	Date.httpdate	0	str,start	1	2	-	(String str, ?Integer start) -> Date
+date	Date.iso8601	0	str,start	1	2	-	(String str, ?Integer start) -> Date
+date	Date.jd	0	jd,start	1	2	-	(Integer jd, ?Integer start) -> Date
+date	Date.jisx0301	0	str,start	1	2	-	(String str, ?Integer start) -> Date
+date	Date.julian_leap?	0	year	1	1	-	(Integer year) -> bool
+date	Date.leap?	0	year	1	1	-	(Integer year) -> bool
+date	Date.ordinal	0	year,yday,start	0	3	-	(?Integer year, ?Integer yday, ?Integer start) -> Date
+date	Date.parse	0	str,complete,start	1	3	-	(String str, ?boolish complete, ?Integer start) -> Date
+date	Date.rfc2822	0	str,start	1	2	-	(String str, ?Integer start) -> Date
+date	Date.rfc3339	0	str,start	1	2	-	(String str, ?Integer start) -> Date
+date	Date.rfc822	0	str,start	1	2	-	(String str, ?Integer start) -> Date
+date	Date.strptime	0	str,format,start	1	3	-	(String str, ?String format, ?Integer start) -> Date
+date	Date.today	0	start	0	1	-	(?Integer start) -> Date
+date	Date.valid_civil?	0	year,month,mday,start	3	4	-	(Integer year, Integer month, Integer mday, ?Integer start) -> bool
+date	Date.valid_commercial?	0	cwyear,cweek,cwday,start	3	4	-	(Integer cwyear, Integer cweek, Integer cwday, ?Integer start) -> bool
+date	Date.valid_date?	0	year,month,mday,start	3	4	-	(Integer year, Integer month, Integer mday, ?Integer start) -> bool
+date	Date.valid_jd?	0	jd,start	1	2	-	(Integer jd, ?Integer start) -> bool
+date	Date.valid_ordinal?	0	year,yday,start	2	3	-	(Integer year, Integer yday, ?Integer start) -> bool
+date	Date.xmlschema	0	str,start	1	2	-	(String str, ?Integer start) -> Date
+date	DateTime#hour	0		0	0	-	() -> Integer
+date	DateTime#initialize	0	year,month,mday,hour,minute,second,offset,start	0	8	-	(?Integer year, ?Integer month, ?Integer mday, ?Integer hour, ?Integer minute, ?Integer second, ?Integer offset, ?Integer start) -> void
+date	DateTime#iso8601	0	n	0	1	-	(?Integer n) -> String
+date	DateTime#jisx0301	0	n	0	1	-	(?Integer n) -> String
+date	DateTime#min	0		0	0	-	() -> Integer
+date	DateTime#minute	0		0	0	-	() -> Integer
+date	DateTime#new_offset	0	offset	0	1	-	(?String offset) -> DateTime
+date	DateTime#offset	0		0	0	-	() -> Rational
+date	DateTime#rfc3339	0	n	0	1	-	(?Integer n) -> String
+date	DateTime#sec	0		0	0	-	() -> Integer
+date	DateTime#sec_fraction	0		0	0	-	() -> Rational
+date	DateTime#second	0		0	0	-	() -> Integer
+date	DateTime#second_fraction	0		0	0	-	() -> Rational
+date	DateTime#strftime	0	format	0	1	-	(?String format) -> String
+date	DateTime#to_date	0		0	0	-	() -> Date
+date	DateTime#to_datetime	0		0	0	-	() -> DateTime
+date	DateTime#to_s	0		0	0	-	() -> String
+date	DateTime#to_time	0		0	0	-	() -> Time
+date	DateTime#xmlschema	0	n	0	1	-	(?Integer n) -> String
+date	DateTime#zone	0		0	0	-	() -> String
+date	DateTime._strptime	0	str,format	1	2	-	(String str, ?String format) -> Hash[Symbol, Integer | String]
+date	DateTime.civil	0	year,month,mday,hour,minute,second,offset,start	0	8	-	(?Integer year, ?Integer month, ?Integer mday, ?Integer hour, ?Integer minute, ?Integer second, ?Integer offset, ?Integer start) -> DateTime
+date	DateTime.commercial	0	cwyear,cweek,cwday,hour,minute,second,offset,start	0	8	-	(?Integer cwyear, ?Integer cweek, ?Integer cwday, ?Integer hour, ?Integer minute, ?Integer second, ?Integer offset, ?Integer start) -> DateTime
+date	DateTime.httpdate	0	str,start	1	2	-	(String str, ?Integer start) -> DateTime
+date	DateTime.iso8601	0	str,start	1	2	-	(String str, ?Integer start) -> DateTime
+date	DateTime.jd	0	jd,hour,minute,second,offset,start	0	6	-	(?Integer jd, ?Integer hour, ?Integer minute, ?Integer second, ?Integer offset, ?Integer start) -> DateTime
+date	DateTime.jisx0301	0	str,start	1	2	-	(String str, ?Integer start) -> DateTime
+date	DateTime.now	0	start	0	1	-	(?Integer start) -> DateTime
+date	DateTime.ordinal	0	year,yday,hour,minute,second,offset,start	0	7	-	(?Integer year, ?Integer yday, ?Integer hour, ?Integer minute, ?Integer second, ?Integer offset, ?Integer start) -> DateTime
+date	DateTime.parse	0	str,complete,start	1	3	-	(String str, ?boolish complete, ?Integer start) -> DateTime
+date	DateTime.rfc2822	0	str,start	1	2	-	(String str, ?Integer start) -> DateTime
+date	DateTime.rfc3339	0	str,start	1	2	-	(String str, ?Integer start) -> DateTime
+date	DateTime.rfc822	0	str,start	1	2	-	(String str, ?Integer start) -> DateTime
+date	DateTime.strptime	0	str,format,start	1	3	-	(String str, ?String format, ?Integer start) -> DateTime
+date	DateTime.xmlschema	0	str,start	1	2	-	(String str, ?Integer start) -> DateTime
+dbm	DBM#[]	0		1	1	-	(untyped) -> untyped
+dbm	DBM#[]=	0		2	2	-	(untyped, untyped) -> untyped
+dbm	DBM#clear	0		0	0	-	() -> self
+dbm	DBM#close	0		0	0	-	() -> NilClass
+dbm	DBM#closed?	0		0	0	-	() -> bool
+dbm	DBM#delete	0		1	1	-	(untyped) -> untyped
+dbm	DBM#delete_if	0		0	0	opt	() ?{ (untyped) -> bool } -> self
+dbm	DBM#each	0		0	2	-	(?untyped, ?untyped) -> Enumerator[untyped, ::DBM]
+dbm	DBM#each_key	0		0	0	-	() -> Enumerator[String, ::DBM]
+dbm	DBM#each_pair	0		0	2	-	(?untyped, ?untyped) -> Enumerator[untyped, ::DBM]
+dbm	DBM#each_value	0		0	0	-	() -> Enumerator[untyped, ::DBM]
+dbm	DBM#empty?	0		0	0	-	() -> bool
+dbm	DBM#fetch	0		0	-	-	(*String) -> untyped
+dbm	DBM#has_key?	0		1	1	-	(String) -> bool
+dbm	DBM#has_value?	0		1	1	-	(untyped) -> bool
+dbm	DBM#include?	0		1	1	-	(String) -> bool
+dbm	DBM#initialize	0		0	-	-	(*untyped) -> self
+dbm	DBM#invert	0		0	0	-	() -> Hash[untyped, String]
+dbm	DBM#key	0		1	1	-	(untyped) -> (String | NilClass)
+dbm	DBM#key?	0		1	1	-	(untyped) -> bool
+dbm	DBM#keys	0		0	0	-	() -> Array[String]
+dbm	DBM#length	0		0	0	-	() -> Integer
+dbm	DBM#member?	0		1	1	-	(untyped) -> bool
+dbm	DBM#reject	0		0	0	-	() -> Hash[untyped, untyped]
+dbm	DBM#reject!	0		0	0	req	() { (String, untyped) -> untyped } -> self
+dbm	DBM#replace	0		1	1	-	(untyped) -> ::DBM
+dbm	DBM#select	0		0	0	req	() { () -> untyped } -> Array[untyped]
+dbm	DBM#shift	0		0	0	-	() -> Array[untyped]
+dbm	DBM#size	0		0	0	-	() -> Integer
+dbm	DBM#store	0		2	2	-	(String, untyped) -> String
+dbm	DBM#to_a	0		0	0	-	() -> Array[untyped]
+dbm	DBM#to_hash	0		0	0	-	() -> Hash[String, untyped]
+dbm	DBM#update	0		1	1	-	(untyped) -> ::DBM
+dbm	DBM#value?	0		1	1	-	(untyped) -> bool
+dbm	DBM#values	0		0	0	-	() -> Array[untyped]
+dbm	DBM#values_at	0		0	-	-	(*String) -> Array[untyped]
+dbm	DBM.open	0		0	-	-	(*untyped) -> ::DBM
+erb	ERB#def_class	0		0	2	-	(?Class, ?String) -> Class
+erb	ERB#def_method	0		2	3	-	(Module, String, ?String) -> untyped
+erb	ERB#def_module	0		0	1	-	(?String) -> Module
+erb	ERB#encoding	0		0	0	-	() -> Encoding
+erb	ERB#filename	0		0	0	-	() -> (String | NilClass)
+erb	ERB#filename=	0		1	1	-	(String | NilClass) -> untyped
+erb	ERB#initialize	0	eoutvar,trim_mode	1	1	-	(String, ?eoutvar: String, ?trim_mode: Integer | String | NilClass) -> untyped
+erb	ERB#lineno	0		0	0	-	() -> Integer
+erb	ERB#lineno=	0		1	1	-	(Integer) -> untyped
+erb	ERB#location=	0		1	1	-	(Array[String | Integer]) -> untyped
+erb	ERB#result	0		0	1	-	(?Binding) -> String
+erb	ERB#result_with_hash	0		1	1	-	(Hash[untyped, untyped]) -> String
+erb	ERB#run	0		0	1	-	(?Binding) -> untyped
+erb	ERB#src	0		0	0	-	() -> String
+erb	ERB.version	0		0	0	-	() -> String
+fiber	Fiber#alive?	0		0	0	-	() -> bool
+fiber	Fiber#transfer	0		0	-	-	(*untyped) -> untyped
+fiber	Fiber.current	0		0	0	-	() -> Fiber
+find	Find#find	0	paths,ignore_error	0	-	-	(*String | _ToPath paths, ?ignore_error: boolish) -> Enumerator[String, nil]
+find	Find#find	1	paths,ignore_error	0	-	req	(*String | _ToPath paths, ?ignore_error: boolish) { (String) -> void } -> nil
+find	Find#prune	0		0	0	-	() -> void
+find	Find.find	0	paths,ignore_error	0	-	-	(*String | _ToPath paths, ?ignore_error: boolish) -> Enumerator[String, nil]
+find	Find.find	1	paths,ignore_error	0	-	req	(*String | _ToPath paths, ?ignore_error: boolish) { (String) -> void } -> nil
+find	Find.prune	0		0	0	-	() -> void
+forwardable	Forwardable#def_delegator	0	accessor,method,ali	2	3	-	(Symbol | String accessor, Symbol method, ?Symbol ali) -> void
+forwardable	Forwardable#def_delegators	0	accessor,methods	1	-	-	(Symbol | String accessor, *Symbol methods) -> void
+forwardable	Forwardable#def_instance_delegator	0	accessor,method,ali	2	3	-	(Symbol | String accessor, Symbol method, ?Symbol ali) -> void
+forwardable	Forwardable#def_instance_delegators	0	accessor,methods	1	-	-	(Symbol | String accessor, *Symbol methods) -> void
+forwardable	Forwardable#delegate	0	hash	1	1	-	(Hash[Symbol | Array[Symbol], Symbol] hash) -> void
+forwardable	Forwardable#instance_delegate	0	hash	1	1	-	(Hash[Symbol | Array[Symbol], Symbol] hash) -> void
+forwardable	SingleForwardable#def_delegator	0	accessor,method,ali	2	3	-	(Symbol | String accessor, Symbol method, ?Symbol ali) -> void
+forwardable	SingleForwardable#def_delegators	0	accessor,methods	1	-	-	(Symbol | String accessor, *Symbol methods) -> void
+forwardable	SingleForwardable#def_single_delegator	0	accessor,method,ali	2	3	-	(Symbol | String accessor, Symbol method, ?Symbol ali) -> void
+forwardable	SingleForwardable#def_single_delegators	0	accessor,methods	1	-	-	(Symbol | String accessor, *Symbol methods) -> void
+forwardable	SingleForwardable#delegate	0	hash	1	1	-	(Hash[Symbol | Array[Symbol], Symbol] hash) -> void
+forwardable	SingleForwardable#single_delegate	0	hash	1	1	-	(Hash[Symbol | Array[Symbol], Symbol] hash) -> void
+ipaddr	IPAddr#&	0	other	1	1	-	(untyped other) -> IPAddr
+ipaddr	IPAddr#<<	0	num	1	1	-	(Integer num) -> IPAddr
+ipaddr	IPAddr#<=>	0	other	1	1	-	(untyped other) -> Integer?
+ipaddr	IPAddr#==	0	other	1	1	-	(untyped other) -> bool
+ipaddr	IPAddr#===	0	other	1	1	-	(untyped other) -> bool
+ipaddr	IPAddr#>>	0	num	1	1	-	(Integer num) -> IPAddr
+ipaddr	IPAddr#eql?	0	other	1	1	-	(untyped other) -> bool
+ipaddr	IPAddr#family	0		-	-	-	Integer
+ipaddr	IPAddr#hash	0		0	0	-	() -> Integer
+ipaddr	IPAddr#hton	0		0	0	-	() -> String
+ipaddr	IPAddr#include?	0	other	1	1	-	(untyped other) -> bool
+ipaddr	IPAddr#initialize	0	addr,family	0	2	-	(?String addr, ?untyped family) -> IPAddr
+ipaddr	IPAddr#inspect	0		0	0	-	() -> String
+ipaddr	IPAddr#ip6_arpa	0		0	0	-	() -> String
+ipaddr	IPAddr#ip6_int	0		0	0	-	() -> String
+ipaddr	IPAddr#ipv4?	0		0	0	-	() -> bool
+ipaddr	IPAddr#ipv4_compat	0		0	0	-	() -> IPAddr
+ipaddr	IPAddr#ipv4_compat?	0		0	0	-	() -> bool
+ipaddr	IPAddr#ipv4_mapped	0		0	0	-	() -> IPAddr
+ipaddr	IPAddr#ipv4_mapped?	0		0	0	-	() -> bool
+ipaddr	IPAddr#ipv6?	0		0	0	-	() -> bool
+ipaddr	IPAddr#link_local?	0		0	0	-	() -> bool
+ipaddr	IPAddr#loopback?	0		0	0	-	() -> bool
+ipaddr	IPAddr#mask	0	prefixlen	1	1	-	(String | Integer prefixlen) -> IPAddr
+ipaddr	IPAddr#native	0		0	0	-	() -> IPAddr
+ipaddr	IPAddr#prefix	0		0	0	-	() -> Integer
+ipaddr	IPAddr#prefix=	0	prefix	1	1	-	(Integer prefix) -> self
+ipaddr	IPAddr#private?	0		0	0	-	() -> bool
+ipaddr	IPAddr#reverse	0		0	0	-	() -> String
+ipaddr	IPAddr#succ	0		0	0	-	() -> IPAddr
+ipaddr	IPAddr#to_i	0		0	0	-	() -> Integer
+ipaddr	IPAddr#to_range	0		0	0	-	() -> Range[IPAddr]
+ipaddr	IPAddr#to_s	0		0	0	-	() -> String
+ipaddr	IPAddr#to_string	0		0	0	-	() -> String
+ipaddr	IPAddr#|	0	other	1	1	-	(untyped other) -> IPAddr
+ipaddr	IPAddr#~	0		0	0	-	() -> IPAddr
+ipaddr	IPAddr.new_ntoh	0	addr	1	1	-	(String addr) -> IPAddr
+ipaddr	IPAddr.ntop	0	addr	1	1	-	(String addr) -> String
+json	JSON#dump	0	obj,limit	1	2	-	(_ToJson obj, ?Integer limit) -> String
+json	JSON#dump	1	obj,anIO	2	2	-	(_ToJson obj, _JsonToWritableIO anIO) -> _JsonWrite
+json	JSON#dump	2	obj,anIO,limit	2	3	-	(_ToJson obj, _JsonWrite anIO, ?Integer limit) -> _JsonWrite
+json	JSON#fast_generate	0	obj,opts	1	2	-	(_ToJson obj, ?json_options opts) -> String
+json	JSON#fast_unparse	0	obj,opts	1	2	-	(_ToJson obj, ?json_options opts) -> String
+json	JSON#generate	0	obj,opts	1	2	-	(_ToJson obj, ?json_options opts) -> String
+json	JSON#load	0	source,proc,options	1	3	-	(string | _JsonReadableIO | _JsonRead source, ?Proc proc, ?json_options options) -> untyped
+json	JSON#parse	0	source,opts	1	2	-	(string source, ?json_options opts) -> untyped
+json	JSON#parse!	0	source,opts	1	2	-	(string source, ?json_options opts) -> untyped
+json	JSON#pretty_generate	0	obj,opts	1	2	-	(_ToJson obj, ?json_options opts) -> untyped
+json	JSON#pretty_unparse	0	obj,opts	1	2	-	(_ToJson obj, ?json_options opts) -> untyped
+json	JSON#recurse_proc	0	result	1	1	req	(untyped result) { (*untyped) -> void } -> void
+json	JSON#restore	0	source,proc,options	1	3	-	(string | _JsonReadableIO | _JsonRead source, ?Proc proc, ?json_options options) -> untyped
+json	JSON#unparse	0	obj,opts	1	2	-	(_ToJson obj, ?json_options opts) -> String
+json	JSON.[]	0	object,opts	1	2	-	(untyped object, ?json_options opts) -> untyped
+json	JSON.create_id	0		0	0	-	() -> _ToS
+json	JSON.create_id=	0	create_id	1	1	-	(_ToS create_id) -> _ToS
+json	JSON.deep_const_get	0	path	1	1	-	(_ToS path) -> untyped
+json	JSON.dump	0	obj,limit	1	2	-	(_ToJson obj, ?Integer limit) -> String
+json	JSON.dump	1	obj,anIO	2	2	-	(_ToJson obj, _JsonToWritableIO anIO) -> _JsonWrite
+json	JSON.dump	2	obj,anIO,limit	2	3	-	(_ToJson obj, _JsonWrite anIO, ?Integer limit) -> _JsonWrite
+json	JSON.dump_default_options	0		0	0	-	() -> json_options
+json	JSON.dump_default_options=	0		1	1	-	(json_options) -> json_options
+json	JSON.fast_generate	0	obj,opts	1	2	-	(_ToJson obj, ?json_options opts) -> String
+json	JSON.fast_unparse	0	obj,opts	1	2	-	(_ToJson obj, ?json_options opts) -> String
+json	JSON.generate	0	obj,opts	1	2	-	(_ToJson obj, ?json_options opts) -> String
+json	JSON.generator	0		0	0	-	() -> json_generator
+json	JSON.generator=	0	generator	1	1	-	(json_generator generator) -> void
+json	JSON.iconv	0	to,from,string	3	3	-	(encoding to, encoding from, String string) -> String
+json	JSON.load	0	source,proc,options	1	3	-	(string | _JsonReadableIO | _JsonRead source, ?Proc proc, ?json_options options) -> untyped
+json	JSON.load_default_options	0		0	0	-	() -> json_options
+json	JSON.load_default_options=	0		1	1	-	(json_options) -> json_options
+json	JSON.parse	0	source,opts	1	2	-	(string source, ?json_options opts) -> untyped
+json	JSON.parse!	0	source,opts	1	2	-	(string source, ?json_options opts) -> untyped
+json	JSON.parser	0		0	0	-	() -> json_parser
+json	JSON.parser=	0	parser	1	1	-	(json_parser parser) -> void
+json	JSON.pretty_generate	0	obj,opts	1	2	-	(_ToJson obj, ?json_options opts) -> untyped
+json	JSON.pretty_unparse	0	obj,opts	1	2	-	(_ToJson obj, ?json_options opts) -> untyped
+json	JSON.recurse_proc	0	result	1	1	req	(untyped result) { (*untyped) -> void } -> void
+json	JSON.restore	0	source,proc,options	1	3	-	(string | _JsonReadableIO | _JsonRead source, ?Proc proc, ?json_options options) -> untyped
+json	JSON.state	0		0	0	-	() -> json_state
+json	JSON.state=	0		1	1	-	(json_state) -> json_state
+json	JSON.unparse	0	obj,opts	1	2	-	(_ToJson obj, ?json_options opts) -> String
+logger	Logger#<<	0	msg	1	1	-	(untyped msg) -> (untyped | nil)
+logger	Logger#add	0	severity,message,progname	1	3	opt	(Integer severity, ?untyped message, ?untyped progname) ?{ () -> untyped } -> true
+logger	Logger#close	0		0	0	-	() -> untyped
+logger	Logger#datetime_format	0		0	0	-	() -> String?
+logger	Logger#datetime_format=	0	datetime_format	1	1	-	(String datetime_format) -> String
+logger	Logger#datetime_format=	1	datetime_format	1	1	-	(nil datetime_format) -> nil
+logger	Logger#debug	0	progname	0	1	opt	(?untyped progname) ?{ () -> untyped } -> true
+logger	Logger#debug!	0		0	0	-	() -> Integer
+logger	Logger#debug?	0		0	0	-	() -> bool
+logger	Logger#error	0	progname	0	1	opt	(?untyped progname) ?{ () -> untyped } -> true
+logger	Logger#error!	0		0	0	-	() -> Integer
+logger	Logger#error?	0		0	0	-	() -> bool
+logger	Logger#fatal	0	progname	0	1	opt	(?untyped progname) ?{ () -> untyped } -> true
+logger	Logger#fatal!	0		0	0	-	() -> Integer
+logger	Logger#fatal?	0		0	0	-	() -> bool
+logger	Logger#format_message	0	severity,datetime,progname,msg	4	4	-	(String severity, Time datetime, untyped progname, untyped msg) -> _ToS
+logger	Logger#format_severity	0	severity	1	1	-	(Integer severity) -> String
+logger	Logger#formatter	0		0	0	-	() -> (_Formatter | nil)
+logger	Logger#formatter=	0		1	1	-	(_Formatter) -> _Formatter
+logger	Logger#formatter=	1		1	1	-	(nil) -> nil
+logger	Logger#info	0	progname	0	1	opt	(?untyped progname) ?{ () -> untyped } -> true
+logger	Logger#info!	0		0	0	-	() -> Integer
+logger	Logger#info?	0		0	0	-	() -> bool
+logger	Logger#initialize	0	logdev,shift_age,shift_size,shift_period_suffix,binmode,datetime_format,formatter,progname,level	1	3	-	(logdev logdev, ?Numeric | String shift_age, ?Integer shift_size, ?shift_period_suffix: String, ?binmode: boolish, ?datetime_format: String, ?formatter: _Formatter, ?progname: String, ?level: Integer) -> void
+logger	Logger#level	0		0	0	-	() -> Integer
+logger	Logger#level=	0	severity	1	1	-	(Integer | String severity) -> Integer
+logger	Logger#log	0	severity,message,progname	1	3	opt	(Integer severity, ?untyped message, ?untyped progname) ?{ () -> untyped } -> true
+logger	Logger#progname	0		0	0	-	() -> untyped
+logger	Logger#progname=	0		1	1	-	(untyped) -> untyped
+logger	Logger#reopen	0		0	0	-	() -> self
+logger	Logger#reopen	1		1	1	-	(logdev?) -> self
+logger	Logger#sev_threshold	0		0	0	-	() -> Integer
+logger	Logger#sev_threshold=	0	severity	1	1	-	(Integer | String severity) -> Integer
+logger	Logger#unknown	0	progname	0	1	opt	(?untyped progname) ?{ () -> untyped } -> true
+logger	Logger#warn	0	progname	0	1	opt	(?untyped progname) ?{ () -> untyped } -> true
+logger	Logger#warn!	0		0	0	-	() -> Integer
+logger	Logger#warn?	0		0	0	-	() -> bool
+logger	Logger::Formatter#call	0	severity,time,progname,msg	4	4	-	(String severity, Time time, untyped progname, untyped msg) -> String
+logger	Logger::Formatter#datetime_format	0		-	-	-	String?
+logger	Logger::Formatter#datetime_format=	0		-	-	-	String?
+logger	Logger::Formatter#format_datetime	0	time	1	1	-	(Time time) -> untyped
+logger	Logger::Formatter#initialize	0		0	0	-	() -> void
+logger	Logger::Formatter#msg2str	0	msg	1	1	-	(String | Exception | untyped msg) -> String
+logger	Logger::LogDevice#add_log_header	0	file	1	1	-	(IO file) -> untyped
+logger	Logger::LogDevice#check_shift_log	0		0	0	-	() -> untyped
+logger	Logger::LogDevice#close	0		0	0	-	() -> nil
+logger	Logger::LogDevice#create_logfile	0	filename	1	1	-	(String filename) -> File
+logger	Logger::LogDevice#dev	0		-	-	-	_WriteCloser
+logger	Logger::LogDevice#filename	0		-	-	-	String?
+logger	Logger::LogDevice#initialize	0	logdev,binmode,shift_period_suffix,shift_size,shift_age	0	1	-	(?untyped logdev, ?binmode: boolish, ?shift_period_suffix: String, ?shift_size: Integer, ?shift_age: Numeric | String) -> void
+logger	Logger::LogDevice#lock_shift_log	0		0	0	req	() { () -> untyped } -> untyped
+logger	Logger::LogDevice#open_logfile	0	filename	1	1	-	(String filename) -> File
+logger	Logger::LogDevice#reopen	0	log	0	1	-	(?logdev log) -> self
+logger	Logger::LogDevice#set_dev	0	log	1	1	-	(logdev log) -> untyped
+logger	Logger::LogDevice#shift_log_age	0		0	0	-	() -> true
+logger	Logger::LogDevice#shift_log_period	0	period_end	1	1	-	(Time period_end) -> true
+logger	Logger::LogDevice#write	0	message	1	1	-	(untyped message) -> untyped
+logger	Logger::Period#next_rotate_time	0	now,shift_age	2	2	-	(Time now, String shift_age) -> untyped
+logger	Logger::Period#previous_period_end	0	now,shift_age	2	2	-	(Time now, String shift_age) -> untyped
+logger	Logger::Period.next_rotate_time	0	now,shift_age	2	2	-	(Time now, String shift_age) -> untyped
+logger	Logger::Period.previous_period_end	0	now,shift_age	2	2	-	(Time now, String shift_age) -> untyped
+monitor	Monitor#enter	0		0	0	-	() -> nil
+monitor	Monitor#exit	0		0	0	-	() -> nil
+monitor	Monitor#mon_check_owner	0		0	0	-	() -> nil
+monitor	Monitor#mon_enter	0		0	0	-	() -> nil
+monitor	Monitor#mon_exit	0		0	0	-	() -> nil
+monitor	Monitor#mon_locked?	0		0	0	-	() -> bool
+monitor	Monitor#mon_owned?	0		0	0	-	() -> bool
+monitor	Monitor#mon_synchronize	0		0	0	req	[T] () { () -> T } -> T
+monitor	Monitor#mon_try_enter	0		0	0	-	() -> bool
+monitor	Monitor#new_cond	0		0	0	-	() -> ::MonitorMixin::ConditionVariable
+monitor	Monitor#synchronize	0		0	0	req	[T] () { () -> T } -> T
+monitor	Monitor#try_enter	0		0	0	-	() -> bool
+monitor	Monitor#try_mon_enter	0		0	0	-	() -> bool
+monitor	Monitor#wait_for_cond	0	timeout	2	2	-	(::MonitorMixin::ConditionVariable, Numeric? timeout) -> untyped
+monitor	MonitorMixin#initialize	0		0	-	req	(*untyped) { (*untyped) -> untyped } -> void
+monitor	MonitorMixin#mon_check_owner	0		0	0	-	() -> nil
+monitor	MonitorMixin#mon_enter	0		0	0	-	() -> nil
+monitor	MonitorMixin#mon_exit	0		0	0	-	() -> nil
+monitor	MonitorMixin#mon_initialize	0		0	0	-	() -> untyped
+monitor	MonitorMixin#mon_locked?	0		0	0	-	() -> bool
+monitor	MonitorMixin#mon_owned?	0		0	0	-	() -> bool
+monitor	MonitorMixin#mon_synchronize	0		0	0	req	[T] () { () -> T } -> T
+monitor	MonitorMixin#mon_try_enter	0		0	0	-	() -> bool
+monitor	MonitorMixin#new_cond	0		0	0	-	() -> ::MonitorMixin::ConditionVariable
+monitor	MonitorMixin#synchronize	0		0	0	req	[T] () { () -> T } -> T
+monitor	MonitorMixin#try_mon_enter	0		0	0	-	() -> bool
+monitor	MonitorMixin.extend_object	0	obj	1	1	-	(untyped obj) -> untyped
+monitor	MonitorMixin::ConditionVariable#broadcast	0		0	0	-	() -> Thread::ConditionVariable
+monitor	MonitorMixin::ConditionVariable#initialize	0	monitor	1	1	-	(Monitor monitor) -> void
+monitor	MonitorMixin::ConditionVariable#signal	0		0	0	-	() -> Thread::ConditionVariable
+monitor	MonitorMixin::ConditionVariable#wait	0	timeout	0	1	-	(?Numeric? timeout) -> untyped
+monitor	MonitorMixin::ConditionVariable#wait_until	0		0	0	req	() { () -> boolish } -> untyped
+monitor	MonitorMixin::ConditionVariable#wait_while	0		0	0	req	() { () -> boolish } -> untyped
+mutex_m	Mutex_m#initialize	0	args	0	-	-	(*untyped args) -> untyped
+mutex_m	Mutex_m#lock	0		0	0	-	() -> Thread::Mutex
+mutex_m	Mutex_m#locked?	0		0	0	-	() -> bool
+mutex_m	Mutex_m#mu_extended	0		0	0	-	() -> untyped
+mutex_m	Mutex_m#mu_initialize	0		0	0	-	() -> untyped
+mutex_m	Mutex_m#mu_lock	0		0	0	-	() -> Thread::Mutex
+mutex_m	Mutex_m#mu_locked?	0		0	0	-	() -> bool
+mutex_m	Mutex_m#mu_synchronize	0		0	0	req	[T] () { () -> T } -> T
+mutex_m	Mutex_m#mu_try_lock	0		0	0	-	() -> bool
+mutex_m	Mutex_m#mu_unlock	0		0	0	-	() -> Thread::Mutex
+mutex_m	Mutex_m#sleep	0	timeout	0	1	-	(?Numeric timeout) -> Integer
+mutex_m	Mutex_m#synchronize	0		0	0	req	[T] () { () -> T } -> T
+mutex_m	Mutex_m#try_lock	0		0	0	-	() -> bool
+mutex_m	Mutex_m#unlock	0		0	0	-	() -> Thread::Mutex
+mutex_m	Mutex_m.append_features	0	cl	1	1	-	(Module cl) -> untyped
+mutex_m	Mutex_m.define_aliases	0	cl	1	1	-	(Module cl) -> untyped
+mutex_m	Mutex_m.extend_object	0	obj	1	1	-	(Object obj) -> untyped
+pathname	Kernel#Pathname	0		1	1	-	(String | Pathname) -> Pathname
+pathname	Pathname#+	0	other	1	1	-	(Pathname | String | _ToStr other) -> Pathname
+pathname	Pathname#/	0	other	1	1	-	(Pathname | String | _ToStr other) -> Pathname
+pathname	Pathname#<=>	0	other	1	1	-	(untyped other) -> Integer?
+pathname	Pathname#==	0		1	1	-	(untyped) -> bool
+pathname	Pathname#===	0		1	1	-	(untyped) -> bool
+pathname	Pathname#absolute?	0		0	0	-	() -> bool
+pathname	Pathname#add_trailing_separator	0	path	1	1	-	(untyped path) -> untyped
+pathname	Pathname#ascend	0		0	0	req	() { (Pathname) -> untyped } -> nil
+pathname	Pathname#ascend	1		0	0	-	() -> Enumerator[Pathname, nil]
+pathname	Pathname#atime	0		0	0	-	() -> Time
+pathname	Pathname#basename	0	suffix	0	1	-	(?String | _ToStr suffix) -> Pathname
+pathname	Pathname#binread	0	length,offset	0	2	-	(?Integer length, ?Integer offset) -> String
+pathname	Pathname#binwrite	0	offset,mode,flags,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,invalid,undef,replace,fallback,xml,universal_newline,cr_newline,crlf_newline	1	2	-	(String, ?Integer offset, ?mode: Integer | String, ?flags: Integer, ?external_encoding: encoding, ?internal_encoding: encoding, ?encoding: encoding, ?textmode: boolish, ?binmode: boolish, ?autoclose: boolish, ?invalid: :replace ?, ?undef: :replace ?, ?replace: String, ?fallback: Hash[String, String] | Proc | Method, ?xml: :text | :attr, ?universal_newline: true, ?cr_newline: true, ?crlf_newline: true) -> Integer
+pathname	Pathname#birthtime	0		0	0	-	() -> Time
+pathname	Pathname#blockdev?	0		0	0	-	() -> bool
+pathname	Pathname#chardev?	0		0	0	-	() -> bool
+pathname	Pathname#children	0	with_directory	0	1	-	(?boolish with_directory) -> Array[Pathname]
+pathname	Pathname#chmod	0	mode_int	1	1	-	(Integer mode_int) -> Integer
+pathname	Pathname#chop_basename	0	path	1	1	-	(untyped path) -> untyped
+pathname	Pathname#chown	0	owner,group	2	2	-	(Integer owner, Integer group) -> Integer
+pathname	Pathname#cleanpath	0	consider_symlink	0	1	-	(?boolish consider_symlink) -> Pathname
+pathname	Pathname#cleanpath_aggressive	0		0	0	-	() -> untyped
+pathname	Pathname#cleanpath_conservative	0		0	0	-	() -> untyped
+pathname	Pathname#ctime	0		0	0	-	() -> Time
+pathname	Pathname#del_trailing_separator	0	path	1	1	-	(untyped path) -> untyped
+pathname	Pathname#delete	0		0	0	-	() -> Integer
+pathname	Pathname#descend	0		0	0	req	() { (Pathname) -> untyped } -> nil
+pathname	Pathname#descend	1		0	0	-	() -> Enumerator[Pathname, nil]
+pathname	Pathname#directory?	0		0	0	-	() -> bool
+pathname	Pathname#dirname	0		0	0	-	() -> Pathname
+pathname	Pathname#each_child	0	with_directory	0	1	req	(?boolish with_directory) { (Pathname) -> void } -> Array[Pathname]
+pathname	Pathname#each_child	1	with_directory	0	1	-	(?boolish with_directory) -> Enumerator[Pathname, Array[Pathname]]
+pathname	Pathname#each_entry	0		0	0	req	() { (Pathname) -> untyped } -> nil
+pathname	Pathname#each_filename	0		0	0	req	() { (String) -> untyped } -> nil
+pathname	Pathname#each_filename	1		0	0	-	() -> Enumerator[String, nil]
+pathname	Pathname#each_line	0	sep,limit,mode,flags,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,chomp	0	2	req	(?String sep, ?Integer limit, ?mode: Integer | String, ?flags: Integer, ?external_encoding: encoding, ?internal_encoding: encoding, ?encoding: encoding, ?textmode: boolish, ?binmode: boolish, ?autoclose: boolish, ?chomp: boolish) { (String) -> untyped } -> nil
+pathname	Pathname#each_line	1	limit,mode,flags,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,chomp	1	1	req	(Integer limit, ?mode: Integer | String, ?flags: Integer, ?external_encoding: encoding, ?internal_encoding: encoding, ?encoding: encoding, ?textmode: boolish, ?binmode: boolish, ?autoclose: boolish, ?chomp: boolish) { (String) -> untyped } -> nil
+pathname	Pathname#each_line	2	sep,limit,mode,flags,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,chomp	0	2	-	(?String sep, ?Integer limit, ?mode: Integer | String, ?flags: Integer, ?external_encoding: encoding, ?internal_encoding: encoding, ?encoding: encoding, ?textmode: boolish, ?binmode: boolish, ?autoclose: boolish, ?chomp: boolish) -> Enumerator[String, nil]
+pathname	Pathname#each_line	3	limit,mode,flags,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,chomp	1	1	-	(Integer limit, ?mode: Integer | String, ?flags: Integer, ?external_encoding: encoding, ?internal_encoding: encoding, ?encoding: encoding, ?textmode: boolish, ?binmode: boolish, ?autoclose: boolish, ?chomp: boolish) -> Enumerator[String, nil]
+pathname	Pathname#empty?	0		0	0	-	() -> bool
+pathname	Pathname#entries	0		0	0	-	() -> Array[Pathname]
+pathname	Pathname#eql?	0		1	1	-	(untyped) -> bool
+pathname	Pathname#executable?	0		0	0	-	() -> bool
+pathname	Pathname#executable_real?	0		0	0	-	() -> bool
+pathname	Pathname#exist?	0		0	0	-	() -> bool
+pathname	Pathname#expand_path	0	dir	0	1	-	(?String dir) -> Pathname
+pathname	Pathname#extname	0		0	0	-	() -> String
+pathname	Pathname#file?	0		0	0	-	() -> bool
+pathname	Pathname#find	0	ignore_error	0	0	req	(?ignore_error: boolish) { (Pathname) -> untyped } -> nil
+pathname	Pathname#find	1	ignore_error	0	0	-	(?ignore_error: boolish) -> Enumerator[Pathname, nil]
+pathname	Pathname#fnmatch	0	pattern,flags	1	2	-	(String pattern, ?Integer flags) -> bool
+pathname	Pathname#fnmatch?	0	pattern,flags	1	2	-	(String pattern, ?Integer flags) -> bool
+pathname	Pathname#freeze	0		0	0	-	() -> Pathname
+pathname	Pathname#ftype	0		0	0	-	() -> String
+pathname	Pathname#glob	0	pattern,flags	1	2	-	(String | Array[String] pattern, ?Integer flags) -> Array[Pathname]
+pathname	Pathname#glob	1	pattern,flags	1	2	req	(String | Array[String] pattern, ?Integer flags) { (Pathname) -> untyped } -> nil
+pathname	Pathname#grpowned?	0		0	0	-	() -> bool
+pathname	Pathname#has_trailing_separator?	0	path	1	1	-	(untyped path) -> untyped
+pathname	Pathname#hash	0		0	0	-	() -> Integer
+pathname	Pathname#initialize	0		1	1	-	(string | Pathname) -> void
+pathname	Pathname#inspect	0		0	0	-	() -> String
+pathname	Pathname#join	0	args	0	-	-	(*String | _ToStr | Pathname args) -> Pathname
+pathname	Pathname#lchmod	0	mode	1	1	-	(Integer mode) -> Integer
+pathname	Pathname#lchown	0	owner,group	2	2	-	(Integer owner, Integer group) -> Integer
+pathname	Pathname#lstat	0		0	0	-	() -> ::File::Stat
+pathname	Pathname#make_link	0	old	1	1	-	(String | Pathname | _ToStr old) -> Integer
+pathname	Pathname#make_symlink	0	old	1	1	-	(String | Pathname | _ToStr old) -> Integer
+pathname	Pathname#mkdir	0	perm	0	1	-	(?Integer perm) -> Integer
+pathname	Pathname#mkpath	0		0	0	-	() -> nil
+pathname	Pathname#mountpoint?	0		0	0	-	() -> bool
+pathname	Pathname#mtime	0		0	0	-	() -> Time
+pathname	Pathname#open	0	mode,perm	0	2	-	(?String mode, ?Integer perm) -> File
+pathname	Pathname#open	1	mode,perm	0	2	req	[T] (?String mode, ?Integer perm) { (File) -> T } -> T
+pathname	Pathname#opendir	0		0	0	-	() -> Dir
+pathname	Pathname#opendir	1		0	0	req	[U] () { (Dir) -> U } -> U
+pathname	Pathname#owned?	0		0	0	-	() -> bool
+pathname	Pathname#parent	0		0	0	-	() -> Pathname
+pathname	Pathname#pipe?	0		0	0	-	() -> bool
+pathname	Pathname#plus	0	path1,path2	2	2	-	(untyped path1, untyped path2) -> untyped
+pathname	Pathname#prepend_prefix	0	prefix,relpath	2	2	-	(untyped prefix, untyped relpath) -> untyped
+pathname	Pathname#read	0	length,offset,mode,flags,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose	0	2	-	(?Integer length, ?Integer offset, ?mode: Integer | String, ?flags: Integer, ?external_encoding: encoding, ?internal_encoding: encoding, ?encoding: encoding, ?textmode: boolish, ?binmode: boolish, ?autoclose: boolish) -> String
+pathname	Pathname#readable?	0		0	0	-	() -> bool
+pathname	Pathname#readable_real?	0		0	0	-	() -> bool
+pathname	Pathname#readlines	0	sep,limit,mode,flags,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,chomp	0	2	-	(?String sep, ?Integer limit, ?mode: Integer | String, ?flags: Integer, ?external_encoding: encoding, ?internal_encoding: encoding, ?encoding: encoding, ?textmode: boolish, ?binmode: boolish, ?autoclose: boolish, ?chomp: boolish) -> Array[String]
+pathname	Pathname#readlines	1	limit,mode,flags,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose,chomp	1	1	-	(Integer limit, ?mode: Integer | String, ?flags: Integer, ?external_encoding: encoding, ?internal_encoding: encoding, ?encoding: encoding, ?textmode: boolish, ?binmode: boolish, ?autoclose: boolish, ?chomp: boolish) -> Array[String]
+pathname	Pathname#readlink	0		0	0	-	() -> untyped
+pathname	Pathname#realdirpath	0	base_dir	0	1	-	(?string | Pathname base_dir) -> Pathname
+pathname	Pathname#realpath	0	base_dir	0	1	-	(?string | Pathname base_dir) -> Pathname
+pathname	Pathname#relative?	0		0	0	-	() -> bool
+pathname	Pathname#relative_path_from	0	base_directory	1	1	-	(Pathname | string base_directory) -> Pathname
+pathname	Pathname#rename	0	new_name	1	1	-	(Pathname | string new_name) -> 0
+pathname	Pathname#rmdir	0		0	0	-	() -> 0
+pathname	Pathname#rmtree	0		0	0	-	() -> void
+pathname	Pathname#root?	0		0	0	-	() -> bool
+pathname	Pathname#setgid?	0		0	0	-	() -> bool
+pathname	Pathname#setuid?	0		0	0	-	() -> bool
+pathname	Pathname#size	0		0	0	-	() -> Integer
+pathname	Pathname#size?	0		0	0	-	() -> Integer?
+pathname	Pathname#socket?	0		0	0	-	() -> untyped
+pathname	Pathname#split	0		0	0	-	() -> [ Pathname, Pathname ]
+pathname	Pathname#split_names	0	path	1	1	-	(untyped path) -> untyped
+pathname	Pathname#stat	0		0	0	-	() -> File::Stat
+pathname	Pathname#sticky?	0		0	0	-	() -> untyped
+pathname	Pathname#sub	0	pattern,replacement	2	2	-	(Regexp | string pattern, string | Hash[String, String] replacement) -> Pathname
+pathname	Pathname#sub	1	pattern	1	1	req	(Regexp | string pattern) { (String match) -> string } -> Pathname
+pathname	Pathname#sub_ext	0	replacement	1	1	-	(string replacement) -> Pathname
+pathname	Pathname#symlink?	0		0	0	-	() -> untyped
+pathname	Pathname#sysopen	0	mode,perm	0	2	-	(?String mode, ?Integer perm) -> Integer
+pathname	Pathname#taint	0		0	0	-	() -> Pathname
+pathname	Pathname#to_path	0		0	0	-	() -> String
+pathname	Pathname#to_s	0		0	0	-	() -> String
+pathname	Pathname#truncate	0	length	1	1	-	(Integer length) -> 0
+pathname	Pathname#unlink	0		0	0	-	() -> Integer
+pathname	Pathname#untaint	0		0	0	-	() -> Pathname
+pathname	Pathname#utime	0	atime,mtime	2	2	-	(Integer | Time atime, Integer | Time mtime) -> Integer
+pathname	Pathname#world_readable?	0		0	0	-	() -> (Integer | nil)
+pathname	Pathname#world_writable?	0		0	0	-	() -> (Integer | nil)
+pathname	Pathname#writable?	0		0	0	-	() -> bool
+pathname	Pathname#writable_real?	0		0	0	-	() -> bool
+pathname	Pathname#write	0	content,offset,mode,flags,external_encoding,internal_encoding,encoding,textmode,binmode,autoclose	1	2	-	(String content, ?Integer offset, ?mode: Integer | String, ?flags: Integer, ?external_encoding: encoding, ?internal_encoding: encoding, ?encoding: encoding, ?textmode: boolish, ?binmode: boolish, ?autoclose: boolish) -> Integer
+pathname	Pathname#zero?	0		0	0	-	() -> bool
+pathname	Pathname.getwd	0		0	0	-	() -> Pathname
+pathname	Pathname.glob	0	pattern,flags	1	2	-	(String | Array[String] pattern, ?Integer flags) -> Array[Pathname]
+pathname	Pathname.glob	1	pattern,flags	1	2	req	(String | Array[String] pattern, ?Integer flags) { (Pathname) -> untyped } -> nil
+pathname	Pathname.pwd	0		0	0	-	() -> Pathname
+prime	Integer#prime?	0		0	0	-	() -> bool
+prime	Integer#prime_division	0		0	1	-	(?Prime::PseudoPrimeGenerator) -> Array[[ Integer, Integer ]]
+prime	Integer.each_prime	0		1	1	req	(Integer) { (Integer) -> void } -> void
+prime	Integer.from_prime_division	0		1	1	-	(Array[[ String ]]) -> Integer
+prime	Prime#each	0	ubound,generator	0	2	req	(?Integer? ubound, ?PseudoPrimeGenerator generator) { (Integer) -> void } -> void
+prime	Prime#each	1	ubound,generator	0	2	-	(?Integer? ubound, ?PseudoPrimeGenerator generator) -> PseudoPrimeGenerator
+prime	Prime#int_from_prime_division	0		1	1	-	(Array[[ Integer, Integer ]]) -> Integer
+prime	Prime#prime?	0	value,generator	1	2	-	(Integer value, ?PseudoPrimeGenerator generator) -> bool
+prime	Prime#prime_division	0	generator	1	2	-	(Integer, ?PseudoPrimeGenerator generator) -> Array[[ Integer, Integer ]]
+prime	Prime.each	0	ubound,generator	0	2	req	(?Integer? ubound, ?PseudoPrimeGenerator generator) { (Integer) -> void } -> void
+prime	Prime.each	1	ubound,generator	0	2	-	(?Integer? ubound, ?PseudoPrimeGenerator generator) -> PseudoPrimeGenerator
+prime	Prime.instance	0		0	0	-	() -> Prime
+prime	Prime.int_from_prime_division	0		1	1	-	(Array[[ Integer, Integer ]]) -> Integer
+prime	Prime.prime?	0	value,generator	1	2	-	(Integer value, ?PseudoPrimeGenerator generator) -> bool
+prime	Prime.prime_division	0	generator	1	2	-	(Integer, ?PseudoPrimeGenerator generator) -> Array[[ Integer, Integer ]]
+prime	Prime::PseudoPrimeGenerator#each	0		0	0	req	() { (Integer) -> void } -> void
+prime	Prime::PseudoPrimeGenerator#initialize	0		0	1	-	(?Integer?) -> void
+prime	Prime::PseudoPrimeGenerator#next	0		0	0	-	() -> Integer
+prime	Prime::PseudoPrimeGenerator#rewind	0		0	0	-	() -> void
+prime	Prime::PseudoPrimeGenerator#size	0		0	0	-	() -> Float
+prime	Prime::PseudoPrimeGenerator#succ	0		0	0	-	() -> Integer
+prime	Prime::PseudoPrimeGenerator#upper_bound	0		-	-	-	Integer?
+prime	Prime::PseudoPrimeGenerator#upper_bound=	0		-	-	-	Integer?
+pstore	PStore#[]	0	name	1	1	-	(untyped name) -> untyped
+pstore	PStore#[]=	0	name,value	2	2	-	(untyped name, untyped value) -> untyped
+pstore	PStore#abort	0		0	0	-	() -> untyped
+pstore	PStore#commit	0		0	0	-	() -> nil
+pstore	PStore#delete	0	name	1	1	-	(untyped name) -> untyped
+pstore	PStore#dump	0	table	1	1	-	(untyped table) -> untyped
+pstore	PStore#empty_marshal_checksum	0		0	0	-	() -> untyped
+pstore	PStore#empty_marshal_data	0		0	0	-	() -> untyped
+pstore	PStore#fetch	0	name,default	1	2	-	(untyped name, ?untyped default) -> untyped
+pstore	PStore#in_transaction	0		0	0	-	() -> untyped
+pstore	PStore#in_transaction_wr	0		0	0	-	() -> untyped
+pstore	PStore#initialize	0	file,thread_safe	1	2	-	(untyped file, ?boolish thread_safe) -> untyped
+pstore	PStore#load	0	content	1	1	-	(untyped content) -> untyped
+pstore	PStore#load_data	0	file,read_only	2	2	-	(untyped file, untyped read_only) -> untyped
+pstore	PStore#on_windows?	0		0	0	-	() -> bool
+pstore	PStore#open_and_lock_file	0	filename,read_only	2	2	-	(untyped filename, untyped read_only) -> untyped
+pstore	PStore#path	0		0	0	-	() -> untyped
+pstore	PStore#root?	0	name	1	1	-	(untyped name) -> bool
+pstore	PStore#roots	0		0	0	-	() -> Array[untyped]
+pstore	PStore#save_data	0	original_checksum,original_file_size,file	3	3	-	(untyped original_checksum, untyped original_file_size, untyped file) -> untyped
+pstore	PStore#save_data_with_atomic_file_rename_strategy	0	data,file	2	2	-	(untyped data, untyped file) -> untyped
+pstore	PStore#save_data_with_fast_strategy	0	data,file	2	2	-	(untyped data, untyped file) -> untyped
+pstore	PStore#transaction	0	read_only	0	1	-	(?untyped read_only) -> untyped
+pstore	PStore#ultra_safe	0		0	0	-	() -> untyped
+pstore	PStore#ultra_safe=	0		1	1	-	(untyped) -> untyped
+pty	PTY.check	0	pid,raise	1	2	-	(Integer pid, ?boolish raise) -> Process::Status?
+pty	PTY.getpty	0	command	0	-	-	(*String command) -> [ IO, IO, Integer ]
+pty	PTY.getpty	1	command	0	-	req	(*String command) { ([ IO, IO, Integer ]) -> void } -> void
+pty	PTY.open	0		0	0	-	() -> [ IO, File ]
+pty	PTY.open	1		0	0	req	[A] () { ([ IO, File ]) -> A } -> A
+pty	PTY.spawn	0	command	0	-	-	(*String command) -> [ IO, IO, Integer ]
+pty	PTY.spawn	1	command	0	-	req	(*String command) { ([ IO, IO, Integer ]) -> void } -> void
+securerandom	SecureRandom.alphanumeric	0		0	1	-	(?Integer?) -> String
+securerandom	SecureRandom.base64	0		0	1	-	(?Integer?) -> String
+securerandom	SecureRandom.hex	0		0	1	-	(?Integer?) -> String
+securerandom	SecureRandom.random_bytes	0		0	1	-	(?Integer?) -> String
+securerandom	SecureRandom.random_number	0		0	1	-	(?Integer?) -> (Integer | Float)
+securerandom	SecureRandom.urlsafe_base64	0		0	2	-	(?Integer?, ?bool?) -> String
+securerandom	SecureRandom.uuid	0		0	0	-	() -> String
+set	Set#&	0		1	1	-	(_Each[A]) -> self
+set	Set#+	0		1	1	-	(_Each[A]) -> self
+set	Set#-	0		1	1	-	(_Each[A]) -> self
+set	Set#<<	0		1	1	-	(A) -> self
+set	Set#^	0		1	1	-	(_Each[A]) -> self
+set	Set#add	0		1	1	-	(A) -> self
+set	Set#add?	0		1	1	-	(A) -> self?
+set	Set#classify	0		0	0	req	[X] () { (A) -> X } -> Hash[X, self]
+set	Set#clear	0		0	0	-	() -> self
+set	Set#collect!	0		0	0	req	() { (A) -> A } -> self
+set	Set#delete	0		1	1	-	(untyped) -> self
+set	Set#delete?	0		1	1	-	(untyped) -> self?
+set	Set#delete_if	0		0	0	req	() { (A) -> untyped } -> self
+set	Set#difference	0		1	1	-	(_Each[A]) -> self
+set	Set#disjoint?	0		1	1	-	(self) -> bool
+set	Set#divide	0		0	0	req	() { (A, A) -> untyped } -> Set[self]
+set	Set#divide	1		0	0	req	() { (A) -> untyped } -> Set[self]
+set	Set#each	0		0	0	req	() { (A) -> void } -> self
+set	Set#empty?	0		0	0	-	() -> bool
+set	Set#flatten	0		0	0	-	() -> Set[untyped]
+set	Set#include?	0		1	1	-	(untyped) -> bool
+set	Set#initialize	0		1	1	-	(_Each[A]) -> untyped
+set	Set#initialize	1		1	1	req	[X] (_Each[X]) { (X) -> A } -> untyped
+set	Set#initialize	2		0	1	-	(?nil) -> untyped
+set	Set#intersect?	0		1	1	-	(self) -> bool
+set	Set#intersection	0		1	1	-	(_Each[A]) -> self
+set	Set#keep_if	0		0	0	req	() { (A) -> untyped } -> self
+set	Set#length	0		0	0	-	() -> Integer
+set	Set#map!	0		0	0	req	() { (A) -> A } -> self
+set	Set#member?	0		1	1	-	(untyped) -> bool
+set	Set#merge	0		1	1	-	(_Each[A]) -> self
+set	Set#proper_subst?	0		1	1	-	(self) -> bool
+set	Set#proper_superset?	0		1	1	-	(self) -> bool
+set	Set#reject!	0		0	0	req	() { (A) -> untyped } -> self
+set	Set#replace	0		1	1	-	(_Each[A]) -> self
+set	Set#reset	0		0	0	-	() -> self
+set	Set#select!	0		0	0	req	() { (A) -> untyped } -> self?
+set	Set#size	0		0	0	-	() -> Integer
+set	Set#subset?	0		1	1	-	(self) -> bool
+set	Set#subtract	0		1	1	-	(_Each[A]) -> self
+set	Set#superset?	0		1	1	-	(self) -> bool
+set	Set#to_a	0		0	0	-	() -> Array[A]
+set	Set#union	0		1	1	-	(_Each[A]) -> self
+set	Set#|	0		1	1	-	(_Each[A]) -> self
+set	Set.[]	0		0	-	-	[X] (*X) -> Set[X]
+singleton	Singleton#_dump	0	depth	0	1	-	(?Integer depth) -> String
+singleton	Singleton#clone	0		0	0	-	() -> bot
+singleton	Singleton#dup	0		0	0	-	() -> bot
+singleton	Singleton.__init__	0	klass	1	1	-	(Class klass) -> Class
+singleton	Singleton.instance	0		0	0	-	() -> instance
+time	Time#httpdate	0		0	0	-	() -> String
+time	Time#iso8601	0	fraction_digits	0	1	-	(?Integer fraction_digits) -> String
+time	Time#rfc2822	0		0	0	-	() -> String
+time	Time#rfc822	0		0	0	-	() -> String
+time	Time#xmlschema	0	fraction_digits	0	1	-	(?Integer fraction_digits) -> String
+time	Time.httpdate	0	date	1	1	-	(String date) -> Time
+time	Time.iso8601	0	date	1	1	-	(String date) -> Time
+time	Time.parse	0	date,now	1	2	opt	(String date, ?_TimeLike now) ?{ (Integer) -> Integer } -> Time
+time	Time.rfc2822	0	date	1	1	-	(String date) -> Time
+time	Time.rfc822	0	date	1	1	-	(String date) -> Time
+time	Time.strptime	0	date,format,now	2	3	opt	(String date, String format, ?_TimeLike now) ?{ (Integer) -> Integer } -> Time
+time	Time.xmlschema	0	date	1	1	-	(String date) -> Time
+time	Time.zone_offset	0	zone,year	1	2	-	(String zone, ?Integer year) -> Integer
+tmpdir	Dir.mktmpdir	0	max_try	0	2	-	(?String | [ String, String ] | nil, ?String?, ?max_try: Integer?) -> String
+tmpdir	Dir.mktmpdir	1	max_try	0	2	req	[X] (?String | [ String, String ] | nil, ?String?, ?max_try: Integer?) { (String) -> X } -> X
+tmpdir	Dir.tmpdir	0		0	0	-	() -> String
+tsort	TSort#each_strongly_connected_component	0		0	0	req	() { (Array[Node]) -> void } -> void
+tsort	TSort#each_strongly_connected_component	1		0	0	-	() -> Enumerator[Array[Node], void]
+tsort	TSort#each_strongly_connected_component_from	0	id_map,stack	1	3	req	(Node, ?untyped id_map, ?untyped stack) { (Array[Node]) -> void } -> void
+tsort	TSort#each_strongly_connected_component_from	1	id_map,stack	1	3	-	(Node, ?untyped id_map, ?untyped stack) -> Enumerator[Array[Node], void]
+tsort	TSort#strongly_connected_components	0		0	0	-	() -> Array[Array[Node]]
+tsort	TSort#tsort	0		0	0	-	() -> Array[Node]
+tsort	TSort#tsort_each	0		0	0	req	() { (Node) -> void } -> void
+tsort	TSort#tsort_each	1		0	0	-	() -> Enumerator[Node, void]
+tsort	TSort.each_strongly_connected_component	0	each_node,each_child	2	2	req	[T] (_EachNode[T] each_node, _EachChild[T] each_child) { (Array[T]) -> void } -> void
+tsort	TSort.each_strongly_connected_component	1	each_node,each_child	2	2	-	[T] (_EachNode[T] each_node, _EachChild[T] each_child) -> Enumerator[Array[T], void]
+tsort	TSort.each_strongly_connected_component	2	each_node,each_child	2	2	req	[T] (^() { (T) -> void } -> void each_node, ^(T) { (T) -> void } -> void each_child) { (Array[T]) -> void } -> void
+tsort	TSort.each_strongly_connected_component	3	each_node,each_child	2	2	-	[T] (^() { (T) -> void } -> void each_node, ^(T) { (T) -> void } -> void each_child) -> Enumerator[Array[T], void]
+tsort	TSort.each_strongly_connected_component_from	0	node,each_child,id_map,stack	2	4	req	[T] (T node, _EachChild[T] each_child, ?untyped id_map, ?untyped stack) { (Array[T]) -> void } -> void
+tsort	TSort.each_strongly_connected_component_from	1	node,each_child,id_map,stack	2	4	-	[T] (T node, _EachChild[T] each_child, ?untyped id_map, ?untyped stack) -> Enumerator[Array[T], void]
+tsort	TSort.each_strongly_connected_component_from	2	node,each_child,id_map,stack	2	4	req	[T] (T node, ^(T) { (T) -> void } -> void each_child, ?untyped id_map, ?untyped stack) { (Array[T]) -> void } -> void
+tsort	TSort.each_strongly_connected_component_from	3	node,each_child,id_map,stack	2	4	-	[T] (T node, ^(T) { (T) -> void } -> void each_child, ?untyped id_map, ?untyped stack) -> Enumerator[Array[T], void]
+tsort	TSort.strongly_connected_components	0	each_node,each_child	2	2	-	[T] (_EachNode[T] each_node, _EachChild[T] each_child) -> Array[Array[T]]
+tsort	TSort.strongly_connected_components	1	each_node,each_child	2	2	-	[T] (^() { (T) -> void } -> void each_node, ^(T) { (T) -> void } -> void each_child) -> Array[Array[T]]
+tsort	TSort.tsort	0	each_node,each_child	2	2	-	[T] (_EachNode[T] each_node, _EachChild[T] each_child) -> Array[T]
+tsort	TSort.tsort	1	each_node,each_child	2	2	-	[T] (^() { (T) -> void } -> void each_node, ^(T) { (T) -> void } -> void each_child) -> Array[T]
+tsort	TSort.tsort_each	0	each_node,each_child	2	2	req	[T] (_EachNode[T] each_node, _EachChild[T] each_child) { (T) -> void } -> void
+tsort	TSort.tsort_each	1	each_node,each_child	2	2	-	[T] (_EachNode[T] each_node, _EachChild[T] each_child) -> Enumerator[T, void]
+tsort	TSort.tsort_each	2	each_node,each_child	2	2	req	[T] (^() { (T) -> void } -> void each_node, ^(T) { (T) -> void } -> void each_child) { (T) -> void } -> void
+tsort	TSort.tsort_each	3	each_node,each_child	2	2	-	[T] (^() { (T) -> void } -> void each_node, ^(T) { (T) -> void } -> void each_child) -> Enumerator[T, void]
+uri	Kernel#URI	0	uri	1	1	-	(URI::Generic | String uri) -> URI::Generic
+uri	URI.decode_www_form	0	str,enc,isindex,use__charset_,separator	1	2	-	(String str, ?encoding enc, ?isindex: boolish, ?use__charset_: boolish, ?separator: String) -> Array[[ String, String ]]
+uri	URI.decode_www_form_component	0	str,enc	1	2	-	(String str, ?encoding enc) -> String
+uri	URI.encode_www_form	0	enum,enc	1	2	-	(Enumerable[[ _ToS, _ToS ]] enum, ?encoding enc) -> String
+uri	URI.encode_www_form_component	0	str,enc	1	2	-	(String str, ?encoding enc) -> String
+uri	URI.extract	0	str,schemes	1	2	-	(String str, ?Array[String] schemes) -> Array[String]
+uri	URI.extract	1	str,schemes	1	2	req	(String str, ?Array[String] schemes) { (String) -> void } -> nil
+uri	URI.get_encoding	0	label	1	1	-	(String label) -> Encoding?
+uri	URI.join	0	str,strs	1	-	-	(String str, *String strs) -> URI::Generic
+uri	URI.parse	0	uri	1	1	-	(String uri) -> URI::Generic
+uri	URI.regexp	0	schemes	0	1	-	(?Array[String] schemes) -> Regexp
+uri	URI.scheme_list	0		0	0	-	() -> Hash[String, Class]
+uri	URI.split	0	uri	1	1	-	(String uri) -> [ String?, String?, String?, String?, String?, String?, String?, String?, String? ]
+uri	URI::File#check_password	0	user	1	1	-	(String user) -> nil
+uri	URI::File#check_user	0	user	1	1	-	(String user) -> nil
+uri	URI::File#check_userinfo	0	user	1	1	-	(String user) -> nil
+uri	URI::File#set_host	0	v	1	1	-	(String? v) -> String
+uri	URI::File#set_password	0	v	1	1	-	(String v) -> nil
+uri	URI::File#set_port	0	v	1	1	-	(Integer v) -> nil
+uri	URI::File#set_user	0	v	1	1	-	(String v) -> nil
+uri	URI::File#set_userinfo	0	v	1	1	-	(String v) -> nil
+uri	URI::File.build	0	args	1	1	-	(Array[String] args) -> URI::File
+uri	URI::File.build	1		1	1	-	({ host: String, path: String }) -> URI::File
+uri	URI::Generic#==	0	oth	1	1	-	(URI::Generic oth) -> bool
+uri	URI::Generic#absolute?	0		0	0	-	() -> bool
+uri	URI::Generic#check_host	0	v	1	1	-	(String v) -> (String | true)
+uri	URI::Generic#check_opaque	0	v	1	1	-	(String v) -> (String | true)
+uri	URI::Generic#check_password	0	v,user	1	2	-	(String v, ?String user) -> (String | true)
+uri	URI::Generic#check_path	0	v	1	1	-	(String v) -> true
+uri	URI::Generic#check_port	0	v	1	1	-	(Integer v) -> (Integer | true)
+uri	URI::Generic#check_registry	0	v	1	1	-	(String v) -> nil
+uri	URI::Generic#check_scheme	0	v	1	1	-	(String v) -> true
+uri	URI::Generic#check_user	0	v	1	1	-	(String v) -> (String | true)
+uri	URI::Generic#check_userinfo	0	user,password	1	2	-	(String user, ?String? password) -> true
+uri	URI::Generic#coerce	0	oth	1	1	-	(URI::Generic | String oth) -> Array[URI::Generic]
+uri	URI::Generic#component	0		0	0	-	() -> Array[Symbol]
+uri	URI::Generic#component_ary	0		0	0	-	() -> Array[nil | String | Integer]
+uri	URI::Generic#default_port	0		0	0	-	() -> (nil | Integer)
+uri	URI::Generic#eql?	0	oth	1	1	-	(URI::Generic oth) -> bool
+uri	URI::Generic#escape_userpass	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#find_proxy	0	env	0	1	-	(?String env) -> (nil | URI::Generic)
+uri	URI::Generic#fragment	0		-	-	-	String
+uri	URI::Generic#fragment=	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#hash	0		0	0	-	() -> Integer
+uri	URI::Generic#hierarchical?	0		0	0	-	() -> bool
+uri	URI::Generic#host	0		-	-	-	String
+uri	URI::Generic#host=	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#hostname	0		0	0	-	() -> String
+uri	URI::Generic#hostname=	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#initialize	0	scheme,userinfo,host,port,registry,path,opaque,query,fragment,parser,arg_check	9	11	-	(String scheme, String userinfo, String host, Integer port, String? registry, String path, String? opaque, String query, String fragment, ?untyped parser, ?boolish arg_check) -> URI::Generic
+uri	URI::Generic#inspect	0		0	0	-	() -> String
+uri	URI::Generic#merge	0	oth	1	1	-	(String oth) -> URI::Generic
+uri	URI::Generic#merge!	0	oth	1	1	-	(String oth) -> String
+uri	URI::Generic#merge_path	0	base,rel	2	2	-	(String base, String rel) -> String
+uri	URI::Generic#normalize	0		0	0	-	() -> untyped
+uri	URI::Generic#normalize!	0		0	0	-	() -> untyped
+uri	URI::Generic#opaque	0		-	-	-	String?
+uri	URI::Generic#opaque=	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#parser	0		0	0	-	() -> untyped
+uri	URI::Generic#password	0		0	0	-	() -> String
+uri	URI::Generic#password=	0	password	1	1	-	(String password) -> String
+uri	URI::Generic#path	0		-	-	-	String
+uri	URI::Generic#path=	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#port	0		-	-	-	Integer
+uri	URI::Generic#port=	0	v	1	1	-	(Integer v) -> Integer
+uri	URI::Generic#query	0		-	-	-	String
+uri	URI::Generic#query=	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#registry	0		0	0	-	() -> nil
+uri	URI::Generic#registry=	0	v	1	1	-	(String v) -> nil
+uri	URI::Generic#relative?	0		0	0	-	() -> bool
+uri	URI::Generic#replace!	0	oth	1	1	-	(URI::Generic oth) -> URI::Generic
+uri	URI::Generic#route_from	0	oth	1	1	-	(String oth) -> URI::Generic
+uri	URI::Generic#route_from0	0	oth	1	1	-	(String oth) -> Array[URI::Generic]
+uri	URI::Generic#route_from_path	0	src,dst	2	2	-	(String src, String dst) -> String
+uri	URI::Generic#route_to	0	oth	1	1	-	(String oth) -> URI::Generic
+uri	URI::Generic#scheme	0		-	-	-	String
+uri	URI::Generic#scheme=	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#select	0	components	0	-	-	(*Symbol components) -> Array[nil | String | Integer]
+uri	URI::Generic#set_host	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#set_opaque	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#set_password	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#set_path	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#set_port	0	v	1	1	-	(Integer v) -> Integer
+uri	URI::Generic#set_registry	0	v	1	1	-	(String v) -> nil
+uri	URI::Generic#set_scheme	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#set_user	0	v	1	1	-	(String v) -> String
+uri	URI::Generic#set_userinfo	0	user,password	1	2	-	(String user, ?String? password) -> Array[String | nil]
+uri	URI::Generic#split_path	0	path	1	1	-	(String path) -> Array[String]
+uri	URI::Generic#split_userinfo	0	ui	1	1	-	(String ui) -> Array[String | nil]
+uri	URI::Generic#to_s	0		0	0	-	() -> String
+uri	URI::Generic#user	0		0	0	-	() -> String
+uri	URI::Generic#user=	0	user	1	1	-	(String user) -> String
+uri	URI::Generic#userinfo	0		0	0	-	() -> String?
+uri	URI::Generic#userinfo=	0	userinfo	1	1	-	(String? userinfo) -> Array[String | nil]?
+uri	URI::Generic.build	0		1	1	-	(Array[nil | String | Integer]) -> URI::Generic
+uri	URI::Generic.build	1		1	1	-	({ scheme: String, userinfo: String, host: String, port: Integer, registry: String?, path: String, opaque: String?, query: String, fragment: String }) -> URI::Generic
+uri	URI::Generic.build2	0		1	1	-	(Array[nil | String | Integer]) -> URI::Generic
+uri	URI::Generic.build2	1		1	1	-	({ scheme: String, userinfo: String, host: String, port: Integer, registry: String?, path: String, opaque: String?, query: String, fragment: String }) -> URI::Generic
+uri	URI::Generic.component	0		0	0	-	() -> Array[Symbol]
+uri	URI::Generic.default_port	0		0	0	-	() -> (nil | Integer)
+uri	URI::Generic.use_proxy?	0	hostname,addr,port,no_proxy	4	4	-	(String hostname, String addr, Integer port, String no_proxy) -> bool
+uri	URI::Generic.use_registry	0		0	0	-	() -> bool
+uri	URI::HTTP#request_uri	0		0	0	-	() -> String
+uri	URI::HTTP.build	0	args	1	1	-	(Array[String | Integer] args) -> URI::HTTP
+uri	URI::HTTP.build	1		1	1	-	({ userinfo: String, host: String, port: Integer, path: String, query: String, fragment: String }) -> URI::HTTP
+uri	URI::LDAP#attributes	0		0	0	-	() -> String
+uri	URI::LDAP#attributes=	0	val	1	1	-	(String val) -> String
+uri	URI::LDAP#build_path_query	0		0	0	-	() -> String
+uri	URI::LDAP#dn	0		0	0	-	() -> String
+uri	URI::LDAP#dn=	0	val	1	1	-	(String val) -> String
+uri	URI::LDAP#extensions	0		0	0	-	() -> untyped
+uri	URI::LDAP#extensions=	0	val	1	1	-	(String val) -> String
+uri	URI::LDAP#filter	0		0	0	-	() -> String
+uri	URI::LDAP#filter=	0	val	1	1	-	(String val) -> String
+uri	URI::LDAP#hierarchical?	0		0	0	-	() -> ::FalseClass
+uri	URI::LDAP#initialize	0	schema,userinfo,host,port,registry,path,opaque,query,fragment	9	9	-	(String schema, String? userinfo, String host, Integer? port, String? registry, String? path, String? opaque, String query, String? fragment) -> URI::LDAP
+uri	URI::LDAP#parse_dn	0		0	0	-	() -> nil
+uri	URI::LDAP#parse_query	0		0	0	-	() -> nil
+uri	URI::LDAP#scope	0		0	0	-	() -> String
+uri	URI::LDAP#scope=	0	val	1	1	-	(String val) -> String
+uri	URI::LDAP#set_attributes	0	val	1	1	-	(String val) -> String
+uri	URI::LDAP#set_dn	0	val	1	1	-	(String val) -> String
+uri	URI::LDAP#set_extensions	0	val	1	1	-	(String val) -> String
+uri	URI::LDAP#set_filter	0	val	1	1	-	(String val) -> String
+uri	URI::LDAP#set_scope	0	val	1	1	-	(String val) -> String
+uri	URI::LDAP.build	0	args	1	1	-	(Array[nil | String | Integer] args) -> URI::LDAP
+uri	URI::LDAP.build	1		1	1	-	({ host: String, port: Integer?, dn: String, attributes: String?, scope: String?, filter: String?, extensions: String? }) -> URI::LDAP
+yaml	YAML::DBM#[]	0	key	1	1	-	(String key) -> untyped
+yaml	YAML::DBM#[]=	0	key,val	2	2	-	(String key, untyped val) -> untyped
+yaml	YAML::DBM#delete	0	key	1	1	-	(String key) -> untyped
+yaml	YAML::DBM#delete_if	0		0	0	req	() { (untyped, untyped) -> untyped } -> untyped
+yaml	YAML::DBM#each_pair	0		0	0	req	() { (untyped, untyped) -> untyped } -> untyped
+yaml	YAML::DBM#each_value	0		0	0	req	() { (untyped) -> untyped } -> untyped
+yaml	YAML::DBM#fetch	0	keystr,ifnone	1	2	req	(String keystr, ?untyped? ifnone) { (untyped) -> untyped } -> untyped
+yaml	YAML::DBM#has_value?	0	val	1	1	-	(untyped val) -> (::TrueClass | ::FalseClass)
+yaml	YAML::DBM#index	0	keystr	1	1	-	(String keystr) -> untyped
+yaml	YAML::DBM#invert	0		0	0	-	() -> Hash[untyped, untyped]
+yaml	YAML::DBM#key	0	keystr	1	1	-	(String keystr) -> String
+yaml	YAML::DBM#reject	0		0	0	req	() { (untyped, untyped) -> untyped } -> Hash[untyped, untyped]
+yaml	YAML::DBM#replace	0	hsh	1	1	-	(Hash[untyped, untyped] | DBM hsh) -> YAML::DBM
+yaml	YAML::DBM#select	0	keys	0	-	req	(*untyped keys) { (untyped, untyped) -> untyped } -> Array[untyped]
+yaml	YAML::DBM#shift	0		0	0	-	() -> (Array[untyped] | untyped)
+yaml	YAML::DBM#store	0	key,val	2	2	-	(String key, untyped val) -> untyped
+yaml	YAML::DBM#to_a	0		0	0	-	() -> Array[untyped]
+yaml	YAML::DBM#to_hash	0		0	0	-	() -> Hash[untyped, untyped]
+yaml	YAML::DBM#update	0		1	1	-	(Hash[untyped, untyped]) -> YAML::DBM
+yaml	YAML::DBM#values	0		0	0	-	() -> untyped
+yaml	YAML::DBM#values_at	0	keys	0	-	-	(*untyped keys) -> Array[untyped]
+yaml	YAML::Store#dump	0	table	1	1	-	(untyped table) -> String
+yaml	YAML::Store#empty_marshal_checksum	0		0	0	-	() -> String
+yaml	YAML::Store#empty_marshal_data	0		0	0	-	() -> String
+yaml	YAML::Store#initialize	0	o	0	-	-	(*untyped o) -> YAML::Store
+yaml	YAML::Store#load	0		1	1	-	(String) -> untyped
+yaml	YAML::Store#marshal_dump_supports_canonical_option?	0		0	0	-	() -> ::FalseClass
+zlib	Zlib.adler32	0		0	0	-	() -> Integer
+zlib	Zlib.adler32	1		1	1	-	(String) -> Integer
+zlib	Zlib.adler32	2		2	2	-	(String, Integer) -> Integer
+zlib	Zlib.adler32_combine	0		3	3	-	(Integer, Integer, Integer) -> Integer
+zlib	Zlib.crc32	0		0	0	-	() -> Integer
+zlib	Zlib.crc32	1		1	1	-	(String) -> Integer
+zlib	Zlib.crc32	2		2	2	-	(String, Integer) -> Integer
+zlib	Zlib.crc32_combine	0		3	3	-	(Integer, Integer, Integer) -> Integer
+zlib	Zlib.crc_table	0		0	0	-	() -> Array[Integer]
+zlib	Zlib.deflate	0		1	1	-	(String) -> String
+zlib	Zlib.deflate	1		2	2	-	(String, Integer) -> String
+zlib	Zlib.gunzip	0		1	1	-	(String) -> String
+zlib	Zlib.gzip	0		1	1	-	(String) -> String
+zlib	Zlib.gzip	1	level	1	1	-	(String, level: Integer) -> String
+zlib	Zlib.gzip	2	strategy	1	1	-	(String, strategy: Integer) -> String
+zlib	Zlib.gzip	3	level,strategy	1	1	-	(String, level: Integer, strategy: Integer) -> String
+zlib	Zlib.inflate	0		1	1	-	(String) -> String
+zlib	Zlib.zlib_version	0		0	0	-	() -> String

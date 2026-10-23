@@ -1,0 +1,20 @@
+versions: 3.0 3.1 3.2 3.3 3.4 4.0 4.1  rows=696
+
+[by flag]
+forwarding	263
+already-consistent	182
+unreflected	130
+rbs-only	42
+name-only	33
+reflected	25
+c-decl-change	13
+doc-only	8
+
+[by version pair]
+pair	already-consistent	c-decl-change	doc-only	forwarding	name-only	rbs-only	reflected	unreflected	total
+3.0->3.1	38	11	0	85	7	3	3	10	157
+3.1->3.2	15	0	3	0	9	8	9	16	60
+3.2->3.3	1	0	0	37	4	3	2	16	63
+3.3->3.4	25	0	3	5	4	4	3	31	75
+3.4->4.0	98	2	2	136	6	8	5	19	276
+4.0->4.1	5	0	0	0	3	16	3	38	65

@@ -1,0 +1,5 @@
+path: extract_rbs_stdlib.rb (local rbs 4.1.3)
+source rbs gem: 3.10.0
+files: 159, parse failures: 0, member failures: 0
+libs: 58, keys: 4470, overloads: 4729
+result: ok

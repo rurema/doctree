@@ -1,0 +1,46 @@
+3.0 (stdlib): entries=5825 lines(ok-status)=7024
+skipped lines (unusual/parse-error)=7
+
+[line-level vs real]
+ok	5059
+no-real	311
+name-mismatch	303
+req-count	270
+lib-not-measured	200
+lib-require-failed	162
+forwarding?	155
+doc-no-optional?	145
+no-class	145
+opt-count	145
+block-missing	57
+kw-mismatch	38
+rest	23
+no-real:inherited	11
+
+[entry-level vs real]
+ok	4537
+no-real	241
+name-mismatch	227
+lib-not-measured	160
+lib-require-failed	138
+forwarding?	102
+no-class	99
+ok-split	95
+req-count	75
+opt-count	71
+kw-mismatch	30
+doc-no-optional?	22
+rest	12
+no-real:inherited	9
+block-missing	7
+
+[line-level vs rbs]
+no-rbs	6149
+ok	873
+rbs-unmatched-sig	2
+
+[entry-level vs rbs]
+no-rbs	5129
+ok	692
+rbs-unmatched-overload	2
+rbs-unmatched-sig	2

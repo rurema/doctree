@@ -1,4 +1,4 @@
-# メソッド引数チェック(Ruby 3.0〜4.1・組み込み)— 2026-10-12(初版)
+# メソッド引数チェック(Ruby 3.0〜4.1・組み込み・標準添付)— 2026-10-12(組み込み)・2026-10-23(標準添付)
 
 ## 方法
 
@@ -317,6 +317,167 @@ name-only(5 件・仮引数名の差だけ。parameters のみで未実測): Thr
 | manual/api/win32ole/WIN32OLE_VARIANT.md:126 | WIN32OLE_VARIANT#[]= |  | i |
 | manual/api/yaml/dbm.md:107 | YAML::DBM#fetch | ifnone |  |
 
+## 標準添付ライブラリ — 2026-10-23
+
+### 方法(標準添付)
+
+- doctree master be865330e の版別 DB(3.0〜4.1・`update --markdowntree=manual/api`)から `tools/extract_db_sigs.rb` で `db-extract/` を作り直した。組み込みの節(上)は 629beb441 の DB の結果のままで、作り直していない(下の「組み込みの結果は変えていない」)
+- 実 Ruby: `tools/measure_lib.sh`(docker を 1 版ずつ・`--memory=1500m`・`ulimit -c 0`)。ライブラリごとに新しいプロセスで `dump_params.rb --lib`。require に失敗したら gems 有効、さらに `--pre <親>` で再実行。未加工のダンプ(7 版で 265MB)は `tools/filter_lib.rb` で doctree にエントリのある [クラス, 名前] に絞って `real/<版>/lib.tsv`(先頭に lib 列)にまとめた
+- 測った Ruby は 3.0〜4.0 が組み込みと同じ all-ruby の x.y.0、4.1 は `ghcr.io/ruby/ruby:master` の `ruby 4.1.0dev (2026-10-19T07:07:39Z master dfe721da1e)`(組み込みを測った 4.1.0-preview1 2d08b5f42f のイメージは手元に残っていない。比較で `builtin.tsv` を引く分は preview1 のもの)
+- RBS: `measure_lib.sh` が取り出した各版の rbs gem の `stdlib/` を `tools/extract_rbs_stdlib.rb`(手元の rbs 4.1.3)で解析。同時に取り出した `core/` を `extract_rbs.rb` で解析し直した結果は 7 版とも既存の `rbs/<版>.tsv` とバイト単位で一致
+- 実行したコマンド(doctree の worktree で。`W=/tmp/claude-1000/mps-work`)
+
+```
+for v in 3.0 3.1 3.2 3.3 3.4 4.0 4.1; do ruby -I../bitclust/lib tools/method-params/tools/extract_db_sigs.rb /tmp/claude-1000/db/$v tools/method-params $v; done
+sh tools/method-params/tools/measure_lib.sh $PWD/tools/method-params $W
+for v in 3.0 3.1 3.2 3.3 3.4 4.0 4.1; do
+  ruby tools/method-params/tools/filter_lib.rb tools/method-params $W/lib-raw/$v $v
+  BITCLUST_PATH=../bitclust bundle exec ruby tools/method-params/tools/extract_rbs_stdlib.rb $W/rbs-src/$v tools/method-params/rbs $v
+  ruby tools/method-params/tools/compare_params.rb tools/method-params $v --stdlib
+done
+ruby tools/method-params/tools/diff_versions.rb tools/method-params --stdlib 3.0 3.1 3.2 3.3 3.4 4.0 4.1
+```
+
+### 測定できた範囲
+
+| 版 | シグネチャ行を持つライブラリ | SKIP | 測定(lib-status.tsv の行) | nogems | gems | pre | gems+pre | failed |
+|---|---|---|---|---|---|---|---|---|
+| 3.0 | 223 | 4(debug・win32ole・win32/registry・win32/resolv) | 226 | 150 | 38 | 28 | 1 | 9 |
+| 3.1 | 217 | 3(win32ole・win32/registry・win32/resolv) | 221 | 143 | 44 | 28 | 1 | 5 |
+| 3.2 | 216 | 3 | 220 | 142 | 45 | 28 | 1 | 4 |
+| 3.3 | 214 | 3 | 218 | 137 | 48 | 28 | 1 | 4 |
+| 3.4 | 207 | 3 | 211 | 111 | 70 | 26 | 1 | 3 |
+| 4.0 | 202 | 3 | 206 | 85 | 91 | 0 | 27 | 3 |
+| 4.1 | 186 | 3 | 190 | 69 | 94 | 0 | 24 | 3 |
+
+- 測定にはシグネチャ行を持たない親ライブラリ 7 つ(`cgi`・`io`・`net`・`racc`・`rdoc`・`rinda`・`yaml`)を含む。このうち `io`・`net`・`rinda` はその名前のライブラリが無いので全版で `failed`(エントリは無く、比較には影響しない)
+- 本物の require 失敗(エントリが `lib-require-failed` になるもの):
+  - 3.0: `fiddle`・`fiddle/import`(libffi.so.7 が無い)・`dbm`・`yaml/dbm`(libgdbm_compat.so.4 が無い)・`rexml`(all-ruby 3.0.0 に bundled gem が入っていない)・`irb/cmd/subirb`(単体では `IRB.conf` が nil で NoMethodError)
+  - 3.1: `irb/cmd/subirb`・`yaml/dbm`(dbm が bundled gem になり all-ruby に無い)
+  - 3.2・3.3: `yaml/dbm`
+  - 3.4〜4.1: なし。ただし 3.4 以降の `yaml/dbm` は require できても `YAML::DBM` が定義されない(dbm が無い)ので、エントリは `no-class`
+- シグネチャ行を持たないライブラリ(定数・概要だけ。3.4 で 101 個)は対象外: `English`・`bundler`・`did_you_mean`・`digest/md5` などの digest のサブライブラリ・`fcntl`・`irb/*` の多く・`json/add/core`・`minitest/*`・`net/https`・`optparse/date` などの optparse のサブライブラリ・`rbconfig/sizeof`・`rdoc/code_object/*` の多く・`rubygems/commands/*`・`thread`・`typeprof`・`yaml` など
+
+### 段階 1: 実 Ruby との突き合わせ(エントリ単位・標準添付)
+
+| 版 | エントリ数 | ok | ok-split | forwarding? | doc-no-optional? | req-count | opt-count | rest | kw-mismatch | name-mismatch | block-missing | doc-allows-more | no-real | no-real:inherited | no-class | lib-require-failed | lib-not-measured |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 3.0 | 5825 | 4537 | 95 | 102 | 22 | 75 | 71 | 12 | 30 | 227 | 7 | 0 | 241 | 9 | 99 | 138 | 160 |
+| 3.1 | 5736 | 4500 | 102 | 106 | 31 | 74 | 70 | 12 | 34 | 217 | 4 | 0 | 235 | 10 | 158 | 24 | 159 |
+| 3.2 | 5723 | 4476 | 102 | 106 | 30 | 77 | 72 | 12 | 37 | 223 | 5 | 0 | 236 | 10 | 158 | 20 | 159 |
+| 3.3 | 5794 | 4496 | 101 | 139 | 30 | 76 | 74 | 12 | 44 | 225 | 5 | 0 | 248 | 12 | 153 | 20 | 159 |
+| 3.4 | 5880 | 4554 | 101 | 141 | 30 | 75 | 75 | 12 | 53 | 225 | 5 | 0 | 264 | 11 | 175 | 0 | 159 |
+| 4.0 | 5748 | 4412 | 101 | 152 | 30 | 81 | 73 | 12 | 52 | 219 | 6 | 0 | 252 | 12 | 187 | 0 | 159 |
+| 4.1 | 5584 | 4254 | 100 | 147 | 28 | 78 | 81 | 13 | 59 | 201 | 6 | 1 | 266 | 11 | 180 | 0 | 159 |
+
+- `lib-not-measured` は SKIP のライブラリ(大半が `win32ole`)。ライブラリ別の件数は `result/<版>/lib-summary-by-lib.tsv`
+- `name-mismatch` が組み込みより多い(200 件台)。rurema の読みやすい仮引数名と実装の名前の差で、#3589 に近い話
+- `no-real`(250 件前後)の多くは doc の置き場と実装のモジュールの違い: `mkmf`(4.0 で 52 件。doc は `Kernel#...`、実装は `MakeMakefile`)・`net/imap`(44 件。`Struct` で作る応答クラスのメンバー)・`rss`・`digest`・`un`・`prism`・`etc`・`stringio` など
+- `no-class` の主なもの(4.0): `RSS::DublinCoreModel`(30・メソッドを動的に定義するモジュール)・`YAML::DBM`(20・上記)・`OpenSSL::Engine`(14・OpenSSL 3 で無い)・`Readline::HISTORY`(12・オブジェクト)・`Net::IMAP::*` の応答の構造体・`CGI`(cgi/util)・`Object`(pp)・`OpenSSL::Digest::SHA` など OpenSSL 3 で消えたダイジェスト
+
+### 段階 1: RBS との突き合わせ(エントリ単位・標準添付)
+
+| 版 | ok | no-rbs | rbs-unmatched-sig | rbs-unmatched-overload |
+|---|---|---|---|---|
+| 3.0 | 692 | 5129 | 2 | 2 |
+| 3.1 | 2094 | 3630 | 8 | 4 |
+| 3.2 | 2121 | 3592 | 6 | 4 |
+| 3.3 | 2320 | 3465 | 5 | 4 |
+| 3.4 | 2403 | 3466 | 7 | 4 |
+| 4.0 | 2242 | 3494 | 7 | 5 |
+| 4.1 | 2204 | 3369 | 6 | 5 |
+
+- rbs gem 同梱の stdlib は 3.0(rbs 1.0.0)で 30 ライブラリ・4.1(rbs 4.2.0)で 60 ライブラリ。`no-rbs` が多いのはそのため
+- 読めなかった RBS ファイル: 3.0 は `benchmark`、3.1・3.2 は `benchmark`・`fileutils`(いずれも `void` の構文エラー。`rbs/<版>-stdlib.log`)
+
+### 段階 2: 版間の変化(標準添付)
+
+| 版の組 | unreflected | name-only | already-consistent | forwarding | c-decl-change | reflected | rbs-only | doc-only | 計 |
+|---|---|---|---|---|---|---|---|---|---|
+| 3.0→3.1 | 10 | 7 | 38 | 85 | 11 | 3 | 3 | 0 | 157 |
+| 3.1→3.2 | 16 | 9 | 15 | 0 | 0 | 9 | 8 | 3 | 60 |
+| 3.2→3.3 | 16 | 4 | 1 | 37 | 0 | 2 | 3 | 0 | 63 |
+| 3.3→3.4 | 31 | 4 | 25 | 5 | 0 | 3 | 4 | 3 | 75 |
+| 3.4→4.0 | 19 | 6 | 98 | 136 | 2 | 5 | 8 | 2 | 276 |
+| 4.0→4.1 | 38 | 3 | 5 | 0 | 0 | 3 | 16 | 0 | 65 |
+| 計 | 130 | 33 | 182 | 263 | 13 | 25 | 42 | 8 | 696 |
+
+- `forwarding` の内訳: 3.0→3.1 は委譲メソッド(`forwardable` の `def_delegator`・`Gem::Deprecate` のラッパーなど)の `parameters` が `rest:args block:block` から `rest:args keyrest:** block:block` になったもの 85 件(`reline` 38・`csv` 28・`rss` 6・`rubygems/*` 7・`prime` 4・`rexml/parsers/pullparser` 2)。3.2→3.3 は C 実装の `readline` が `reline` の委譲になったもの 36 件と `Gem::Platform.match` 1 件。3.4→4.0 は委譲メソッドが無名の `(*, **, &)` になったもの(`reline` 40・`readline` 35・`csv` 28・`rss` 6・`prime` 4・`rexml` 2)、C 実装の `Pathname` のメソッドが Ruby 定義の `(*, **, &)` になったもの 15 件、`JSON.unparse`/`fast_unparse`/`pretty_unparse` が `(obj, opts = nil)` から `(*, **, &)` の転送になったもの 6 件。3.3→3.4 は `Net::IMAP#fetch`/`uid_fetch`/`search`/`uid_search` が `(*, **, &)` になったもの 4 件と `OptionParser#order` 1 件(`(*argv, **keywords, &nonopt)`。ブロックを持つので転送とみなした)
+- `forwarding` にした行は実 Ruby の引数の形から何も言えないだけで、API が変わっていないとは限らない(`Net::IMAP#fetch` は 3.3 で `changedsince:` が付いたあと 3.4 で転送の形になった)
+- `impl-change`・`no-doc` は 0 件
+
+### 候補: unreflected(130 件)
+
+`result/lib-changes.tsv` の flag が `unreflected` の行をライブラリごとにまとめた。「実 Ruby の変化」は `parameters` の差(`+` 追加・`-` 削除)。【実測済み】は docker で呼んで確かめたもの(下の「実測の記録」)、それ以外は `parameters` からの読み。
+
+| ライブラリ | 版 | メソッド | 実 Ruby の変化 | 読み |
+|---|---|---|---|---|
+| json | 4.0→4.1 | `JSON.parse`/`parse!`/`load`/`load_file`/`load_file!`/`unsafe_load`(`JSON#...` のモジュール関数も。12 件)・`JSON::Coder.new` | 位置引数の `opts`/`options` が `**options` になり、`parse` に `on_load:`・`object_class:`・`array_class:`、`load` に `allow_blank:` | 【実測済み】本物。4.1(json 3.1.0)で `JSON.parse(src, {symbolize_names: true})` は ArgumentError(given 2, expected 1)。doc は全版 `parse(source, options = {})` |
+| json | 3.2→3.3・4.0→4.1 | `JSON.dump`(と `JSON#dump`) | 3.3 で `kwargs` を追加、4.1 で `limit` が `_deprecated_limit` に | 本物(軽微)。4.1 の `limit` 非推奨は本文の確認が要る |
+| json | 3.3→3.4・3.4→4.0 | `JSON::State#configure`/`merge`/`generate` | 3.4 で C から Ruby 定義(`generate(obj, io = nil)`)、4.0 で C に戻る | `generate` の `io` は 3.4 からの追加の可能性(未確認)。他は実装の移行 |
+| json/add/symbol | 3.4→4.0 | `Symbol#to_json` | `(*a)` → `(state = nil, *a)` | ノイズ(呼び方は同じ) |
+| net/imap | 3.2→3.3 | `#examine`/`#select`(`condstore:`)・`#fetch`/`#uid_fetch`(`changedsince:`)・`#store`/`#uid_store`(`unchangedsince:`)・`#responses(type = nil)` | キーワード・任意引数の追加 | 本物(bundled gem net-imap) |
+| net/imap | 3.1→3.2・3.2→3.3・3.3→3.4 | `#authenticate` | `(auth_type, *args)` → `(mechanism, *creds, sasl_ir:, **props, &callback)` → `(*args, sasl_ir:, **props, &callback)` | 本物。doc は `authenticate(auth_type, user, password)` のまま |
+| net/imap | 4.0→4.1 | `#disconnect` | `timeout:` | 本物 |
+| net/smtp | 3.0→3.1 | `Net::SMTP.new`・`.start`・`#start`・`.default_ssl_context` | `tls:`・`starttls:`・`tls_verify:`・`tls_hostname:`・`ssl_context_params:`(net-smtp は 3.1 から bundled gem) | 本物。doc は 3.0 の形のまま |
+| optparse | 3.1→3.2 | `OptionParser#load` | `into:` | 本物 |
+| optparse | 3.2→3.3 | `OptionParser#getopts`・`.getopts` | `symbolize_names:` | 【実測済み】本物(3.3 から `getopts(["-a"], "a", symbolize_names: true)` が `{a: true}`。3.2 以前は NoMethodError)。`OptionParser::Arguable#getopts` の doc には既にある |
+| optparse | 3.3→3.4 | `#parse`/`parse!`/`order!`/`permute`/`permute!`/`environment`/`load`/`getopts`・`Arguable#parse!`/`order!`/`permute!`/`getopts`(12 件) | `into:` などが `**keywords` に | ノイズ寄り(`into:` を `**keywords` で受けて下へ渡す形に変わっただけ)。doc の `into:` はそのまま使える |
+| psych | 3.0→3.1 | `Psych.load_stream`・`Psych.parse_stream` | 位置引数 `legacy_filename` が無くなり `filename:` キーワードだけに | 本物。doc は `load_stream(yaml, filename=nil)` で、3.1 から `Psych.load_stream("--- 1\n", "f.yml")` は ArgumentError【実測済み】 |
+| psych | 3.1→3.2・3.4→4.0 | `Psych::Nodes::Node#to_ruby`/`transform`・`Psych::ScalarScanner.new` | 3.2 で `strict_integer:`、4.0 で `parse_symbols:` | 本物 |
+| psych | 3.1→3.2 | `Psych::Parser#parse` | C から Ruby 定義 `parse(yaml, path = ...)` | `path` は C 実装にもあった可能性(未確認)。doc は `parse(yaml)` |
+| openssl | 3.3→3.4 | `OpenSSL::Buffering#gets` | `chomp:` | 本物 |
+| openssl | 4.0→4.1 | `OpenSSL::Buffering#each`/`each_line`/`readline`/`readlines` | `limit`・`chomp:` | 本物 |
+| openssl | 4.0→4.1 | `OpenSSL::SSL::SSLSocket#connect`/`accept`(`timeout:`)・`#connect_nonblock`/`accept_nonblock`(`exception:`) | C から Ruby 定義 | 【実測済み】`connect` の `parameters` は 4.1 で `[[:key, :timeout]]`、4.0 で `[]`。`exception:` は C 実装にもあった(doc に無い) |
+| logger | 3.3→3.4・3.4→4.0 | `Logger.new`・`Logger::LogDevice.new` | 3.4 で `reraise_write_errors:`、4.0 で `LogDevice` に `skip_header:` | 【実測済み】`Logger.new($stderr, reraise_write_errors: [IOError])` は 3.4 から通り、3.3 以前は unknown keyword |
+| net/http | 3.3→3.4 | `Net::HTTP.new`・`Net::HTTP.Proxy` | 8 番目の位置引数 `p_use_ssl` | 【実測済み】3.4 から 8 引数が通る(3.3 以前は 1..7) |
+| pathname | 3.0→3.1・3.1→3.2 | `Pathname#mkpath`(`mode:`)・`Pathname#rmtree`(`noop:`・`verbose:`・`secure:`) | キーワードの追加 | 【実測済み】`mkpath(mode: 0700)` は 3.1 から、`rmtree(noop: true)` は 3.2 から通る。doc はどちらも引数なし |
+| pathname | 3.4→4.0 | `Pathname.glob`・`Pathname#glob` | C から Ruby 定義 `(*args, **kwargs)` | ノイズ(実装の移行) |
+| resolv | 3.2→3.3 | `Resolv.new` | `use_ipv6:` | 本物(`parameters` のみ。3.2 以前は位置引数の Hash として受けてしまうので呼んでも区別できない) |
+| rexml/document | 3.3→3.4 | `REXML::Text.unnormalize` | `entity_expansion_text_limit:` | 本物(内部向けに近い) |
+| ostruct | 3.1→3.2 | `OpenStruct#delete_field` | `&block` | 【実測済み】3.1 からブロックで既定値を返す(`parameters` に出たのは 3.2)。doc にブロックが無い |
+| bigdecimal/util | 3.4→4.0 | `Rational#to_d` | `precision` が省略可能に | 【実測済み】4.0 から `Rational(1,3).to_d` が通る(4.0 同梱 bigdecimal)。doc は `to_d(nFig)` |
+| time | 4.0→4.1 | `Time.parse` | `zone:` | 【実測済み】4.1 の `parameters` は `[[:req, :date], [:opt, :now], [:key, :zone]]`。4.0 は `zone:` を `now` の Hash として受けてしまう |
+| rdoc/parser/c・ruby・simple | 3.4→4.0 | `RDoc::Parser::C.new` など 3 件 | `file_name` 引数が無くなる | 本物。doc は全版 5 引数 `(top_level, file_name, body, options, stats)` |
+| rdoc/markup/* | 4.0→4.1 | `ToAnsi`/`ToBs`/`ToRdoc.new`(`markup` が無くなる)・`ToHtmlCrossref.new`(`options` が無くなりキーワードに)・`RDoc::Context::Section.new`(`store` の追加) | 4.1 の rdoc での変更 | 本物(rdoc のクラス API) |
+| rubygems/ext/* | 3.1→3.2・3.3→3.4・3.4→4.0 | `Gem::Ext::Builder.make`/`run`・`ConfigureBuilder`/`ExtConfBuilder`/`RakeBuilder.build`(10 件) | `sitedir`・`targets`・`env`・`target_rbconfig`・`n_jobs:` | 本物だが RubyGems の内部 API |
+| rubygems/* | 3.3→3.4・3.4→4.0・4.0→4.1 | `Gem::Platform.local`(`refresh:`)・`Gem::Uninstaller#uninstall_gem`(引数 1 つ。doc は 2 つ)・`Gem::Package::TarWriter#add_file`(`mtime`)・`Gem::Package.build`(`content_addressable:`) | 追加・変更 | 本物(内部 API 寄り。`content_addressable:` は #3613 で保留の件) |
+| csv | 3.1→3.2 | `CSV.new`(`max_field_size:`)・`CSV::Table#to_csv`/`to_s`(`limit:`) | キーワードの追加 | 本物。doc は `options` の Hash で受ける書き方なので、本文の表に足すかどうか |
+| csv | 3.0→3.1・3.3→3.4・4.0→4.1 | `CSV.new` の並び替え・`CSV.open`/`foreach`/`read`/`readlines`/`table` の仮引数名(`path` → `path_or_io`) | 名前だけ | ノイズ(doc の `options` Hash の書き方で opt-count/kw-mismatch が残る) |
+| prism | 4.0→4.1 | `Prism::Source.for` | `start_line`・`offsets` が必須になり、`comments` などを追加 | 本物(4.1 は prism の master) |
+| irb・irb/* | 3.0→4.0 | `IRB.irb_exit`・`IRB::ExtendCommand::*`・`IRB::ExtendCommandBundle.def_extend_command`・`IRB::Inspector#inspect_value`(8 件) | 内部 API の変化 | 低優先(irb の内部。doc の掲載自体の見直し候補) |
+| delegate・open-uri・resolv-replace・tmpdir・weakref | 各版 | `Delegator#method_missing`・`URI.open`・`TCPSocket.new`(resolv-replace)・`Dir.mktmpdir`・`WeakRef#__getobj__` | 無名の `**` や `&block` が増えただけ | ノイズ(呼び方は変わらない) |
+
+### 実測の記録
+
+```
+# ghcr.io/ruby/ruby:master(4.1.0dev dfe721da1e)と all-ruby 4.0.0
+JSON::VERSION                                    4.1: "3.1.0"   4.0: "2.18.0"
+JSON.parse('{"a":1}', {symbolize_names: true})   4.1: ArgumentError (given 2, expected 1)   4.0: {a: 1}
+Time.method(:parse).parameters                   4.1: [[:req, :date], [:opt, :now], [:key, :zone]]   4.0: [[:req, :date], [:opt, :now]]
+OpenSSL::SSL::SSLSocket.instance_method(:connect).parameters   4.1: [[:key, :timeout]]   4.0: []
+# all-ruby 3.0.0〜4.0.0(左から初めて通った版)
+Pathname#mkpath(mode: 0700)                       3.1
+Pathname#rmtree(noop: true)                       3.2
+Psych.load_stream("--- 1\n", "f.yml")             3.0 だけ通り、3.1 以降は ArgumentError (given 2, expected 1)
+OptionParser.new.getopts(["-a"], "a", symbolize_names: true)   3.3
+Logger.new($stderr, reraise_write_errors: [IOError])            3.4
+Net::HTTP.new("example.com", 80, nil, nil, nil, nil, nil, true) 3.4
+OpenStruct.new.delete_field(:x) { :dflt }         3.1
+Rational(1,3).to_d                                4.0
+```
+
+### doc-only(8 件)と name-only(33 件)
+
+- `doc-only`: `result/lib-changes.tsv` の flag `doc-only`。doc の行の集合だけが変わったもの(`#%since` の置き場所の確認候補)
+- `name-only`: 変化後に残る差が仮引数名だけ(多くは csv・net/imap・rdoc の名前の変更)
+
+### 組み込みの結果は変えていない
+
+- 組み込みの出力(`result/<版>/{mismatch,mismatch-entries,entry-verdicts,summary}.*`・`result/changes*`)は、変更前の `compare_params.rb`/`diff_versions.rb`(HEAD のもの)と変更後のものを同じ入力(be865330e の `db-extract/` と既存の `real/<版>/builtin.tsv`・`rbs/<版>.tsv`)で動かし、`diff -r` で全ファイル一致を確かめた
+- `dump_params.rb` も `--lib` なしの出力が変更前と一致する(手元の ruby 3.4 で `ruby --disable-gems` の出力を `cmp`)
+- コミットしてある組み込みの結果は 629beb441 の DB のもので、be865330e で作り直すと doctree 側の修正(上の候補の反映)の分だけ件数が変わる。作り直しはしていない
+
 ## 限界と次の作業
 
 ### 検証の区分
@@ -334,7 +495,7 @@ name-only(5 件・仮引数名の差だけ。parameters のみで未実測): Thr
 - 実測側に行が無いクラス(`Object`・`ENV`・`ARGF.class`・`main`・`RubyVM::YJIT`/`ZJIT`)は `no-class`。独自の型として別に実測が必要
 - 環境依存の arity(`Process::Sys` など Linux で未実装のもの)
 - 段階 2 の `no-doc` は doc の別名・エントリの置き場(`Kernel`↔`Object` など)の違いを含む。RBS が片方の版にしか無いメソッドは `rbs-only` を判定しない
-- 組み込みのみ。標準添付(`require` が必要なライブラリ)は未着手
+- 標準添付は上の「標準添付ライブラリ」の節。README の「標準添付に固有の限界」も参照
 
 ### 修正する前に手で確認すること
 
@@ -345,5 +506,5 @@ name-only(5 件・仮引数名の差だけ。parameters のみで未実測): Thr
 ### 次の作業
 
 - 実測で確認した候補を doctree の PR にする(キーワード追加+版分岐)
-- 標準添付ライブラリへの拡張(`require` 後の差分ダンプ)
+- 標準添付の本物の候補(json 4.1 の `**options` 化・psych の `filename:`・pathname・net/smtp・net/imap・optparse・logger・openssl など)を doctree の PR にする
 - `check_params` の結果(#3589)との突き合わせ・`rbs-unmatched-*` を RBS 側へ報告するか判断
