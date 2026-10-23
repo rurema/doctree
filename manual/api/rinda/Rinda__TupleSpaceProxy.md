@@ -24,8 +24,8 @@ event で指定した種類のイベントの監視を開始します。
 内部的にはリモートオブジェクトの [m:Rinda::TupleSpace#notify] にフォワードされます。
 詳細は [m:Rinda::TupleSpace#notify] 参照してください
 
-- **param** `event` -- 監視対象のイベント(文字列)
-- **param** `pattern` -- 監視対象となるタプルのパターン
+- **param** `ev` -- 監視対象のイベント(文字列)
+- **param** `tuple` -- 監視対象となるタプルのパターン
 - **param** `sec` -- 監視期間の長さ(秒数)
 
 ### def read(tuple, sec=nil) -> [Array|Hash]

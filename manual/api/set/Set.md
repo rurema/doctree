@@ -594,7 +594,7 @@ puts Set.new(['element1', 'element2']).inspect
 
 self と set の共通要素がある場合に true を返します。
 
-- **param** `self` -- Set オブジェクトを指定します。
+- **param** `set` -- Set オブジェクトを指定します。
 - **raise** `ArgumentError` -- 引数が Set オブジェクトでない場合に発生します。
 
 ```ruby
@@ -611,7 +611,7 @@ self と set が互いに素な集合である場合に true を返します。
 
 逆に self と set の共通集合かを確認する場合には [m:Set#intersect?] を使用します。
 
-- **param** `self` -- Set オブジェクトを指定します。
+- **param** `set` -- Set オブジェクトを指定します。
 - **raise** `ArgumentError` -- 引数が Set オブジェクトでない場合に発生します。
 
 ```ruby

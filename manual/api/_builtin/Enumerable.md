@@ -1560,10 +1560,10 @@ p to_enum(:with_nils).compact # => [1, 2, 3]
 #%since 3.2
 #%since 4.1
 ### def to_set -> Set
-### def to_set {|o| ... } -> Set
+### def to_set(&block) -> Set
 #%else
 ### def to_set(klass = Set, *args) -> Set
-### def to_set(klass = Set, *args) {|o| ... } -> Set
+### def to_set(klass = Set, *args, &block) -> Set
 #%end
 
 Enumerable オブジェクトの要素から、新しい集合オブジェクトを作ります。

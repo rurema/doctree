@@ -27,7 +27,7 @@ category: Network
 の名前解決に [lib:resolv] ライブラリを使います。
 
 - **param** `host` --           ホスト名、またはインターネットアドレスを示す文字列を指定します。
-- **param** `service` --        /etc/services (または NIS) に登録されているサービス名かポート番号を指定します。
+- **param** `serv` --           /etc/services (または NIS) に登録されているサービス名かポート番号を指定します。
 - **param** `local_host` --     ホスト名、またはインターネットアドレスを示す文字列を指定します。
 - **param** `local_service` --  /etc/services (または NIS) に登録されているサービス名かポート番号を指定します。
 - **raise** `SocketError` -- 名前解決に失敗した場合に発生します。
@@ -62,6 +62,7 @@ category: Network
 
 - **param** `mesg` -- 送るデータを文字列で与えます。
 - **param** `flags` -- フラグを指定します。
+- **param** `dest_sockaddr` -- データを送る先のアドレスを指定します。
 - **param** `host` -- データを送る先のホストを指定します。
 - **param** `port` -- データを送る先のポートを指定します。
 - **raise** `SocketError` -- 名前解決に失敗した場合に発生します。

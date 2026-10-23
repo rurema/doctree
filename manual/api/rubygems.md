@@ -284,7 +284,7 @@ gem メソッドは全ての require メソッドよりも前に実行されま�
 GEM_SKIP=libA:libB ruby-I../libA -I../libB ./mycode.rb
 ```
 
-- **param** `gem` -- Gem の名前の文字列か、Gem の依存関係を [c:Gem::Dependency] のインスタンスで指定します。
+- **param** `gem_name` -- Gem の名前の文字列か、Gem の依存関係を [c:Gem::Dependency] のインスタンスで指定します。
 
 - **param** `version_requirements` -- 必要とする gem のバージョンを指定します。
 
@@ -411,8 +411,6 @@ p Gem.discover_gems_on_require # => true
 
 ブロックには、インストールを行った [c:Gem::DependencyInstaller] のインスタンスと、インストールされた [c:Gem::Specification] の配列が渡されます。
 
-- **param** `installer` -- インストールを行った [c:Gem::DependencyInstaller] のインスタンスです。
-- **param** `specs` -- インストールされた [c:Gem::Specification] の配列です。
 - **return** -- 登録済みのフック(`Proc`)の配列です。
 - **SEE** [m:Gem::DependencyInstaller#install], [m:Gem?.done_installing_hooks]
 
@@ -527,8 +525,6 @@ Gem `name` の、最新のリリースバージョンを返します。
 
 ブロック引数として新しい `Gem::RequestSet` のインスタンスを受け取ります。ブロックの中で `RequestSet#gem` を呼び出して必要な Gem とバージョンを宣言すると、このメソッドがそれらを解決して有効化します。
 
-- **param** `request_set` -- 必要な Gem を宣言するための `Gem::RequestSet` のインスタンスです。
-
 ```ruby title="例"
 Gem.needs do |req|
   req.gem "rake"
@@ -575,7 +571,8 @@ RubyGems のプラグインをインストールするディレクトリのパ�
 
 ブロックが偽を返した場合、インストールされたファイルは削除され、インストールは中止されます。
 
-- **param** `installer` -- インストールを行っている [c:Gem::Installer] のインスタンスです。
+ブロックには、インストールを行っている [c:Gem::Installer] のインスタンスが渡されます。
+
 - **return** -- 登録済みのフック(`Proc`)の配列です。
 - **SEE** [m:Gem::Installer#install], [m:Gem?.post_build_hooks]
 
@@ -591,7 +588,8 @@ RubyGems のプラグインをインストールするディレクトリのパ�
 
 [m:Gem::Installer#install] が完了した後に呼び出すフックを登録します。
 
-- **param** `installer` -- インストールを行った [c:Gem::Installer] のインスタンスです。
+ブロックには、インストールを行った [c:Gem::Installer] のインスタンスが渡されます。
+
 - **return** -- 登録済みのフック(`Proc`)の配列です。
 - **SEE** [m:Gem::Installer#install], [m:Gem?.post_install_hooks]
 
@@ -626,7 +624,6 @@ RubyGems のプラグインをインストールするディレクトリのパ�
 
 ブロックには [c:Gem::Uninstaller] のインスタンスが渡されます。アンインストールされた [c:Gem::Specification] は、そのインスタンスの `spec` から取得できます。
 
-- **param** `uninstaller` -- アンインストールを行った [c:Gem::Uninstaller] のインスタンスです。
 - **return** -- 登録済みのフック(`Proc`)の配列です。
 - **SEE** [m:Gem::Uninstaller#uninstall], [m:Gem?.post_uninstall_hooks]
 
@@ -644,7 +641,8 @@ RubyGems のプラグインをインストールするディレクトリのパ�
 
 ブロックが偽を返した場合、インストールは中止されます。
 
-- **param** `installer` -- インストールを行おうとしている [c:Gem::Installer] のインスタンスです。
+ブロックには、インストールを行おうとしている [c:Gem::Installer] のインスタンスが渡されます。
+
 - **return** -- 登録済みのフック(`Proc`)の配列です。
 - **SEE** [m:Gem::Installer#install], [m:Gem?.pre_install_hooks]
 
@@ -679,7 +677,6 @@ RubyGems のプラグインをインストールするディレクトリのパ�
 
 ブロックには [c:Gem::Uninstaller] のインスタンスが渡されます。アンインストールされる予定の [c:Gem::Specification] は、そのインスタンスの `spec` から取得できます。
 
-- **param** `uninstaller` -- アンインストールを行おうとしている [c:Gem::Uninstaller] のインスタンスです。
 - **return** -- 登録済みのフック(`Proc`)の配列です。
 - **SEE** [m:Gem::Uninstaller#uninstall], [m:Gem?.pre_uninstall_hooks]
 

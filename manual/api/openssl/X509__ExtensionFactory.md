@@ -110,7 +110,7 @@ ExtensionFactory オブジェクトを生成します。
 
 証明書が設定されていない場合は nil を返します。
 
-### def subject_certificate=(name)
+### def subject_certificate=(cert)
 
 自身に所有者(subject)の証明書オブジェクトを設定します。
 

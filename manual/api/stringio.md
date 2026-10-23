@@ -565,7 +565,7 @@ p sio.read                      # => "foo"
 
 [m:StringIO#read]に似ていますが、 exception オプションに false を指定すると EOFError を発生させず nil を返します。
 
-- **param** `len` -- 読み込みたい長さを整数で指定します。[m:StringIO#read] と同じです。
+- **param** `maxlen` -- 読み込みたい長さを整数で指定します。[m:StringIO#read] と同じです。
 
 - **param** `outbuf` -- 読み込んだ文字列を出力するバッファを文字列で指定します。指定した文字列オブジェクトがあらかじめ length 長の領域であれば、余計なメモリの割当てが行われません。指定した文字列の長さが length と異なる場合、その文字列は一旦 length 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。[m:IO#read] と同じです。
 

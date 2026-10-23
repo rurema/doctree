@@ -28,7 +28,7 @@ XPathインジェクション攻撃を避けるため、適切なエスケープ
 
 - **param** `element` -- 要素([c:REXML::Element])
 - **param** `path` -- XPath文字列
-- **param** `namespace` -- 名前空間とURLの対応付け
+- **param** `namespaces` -- 名前空間とURLの対応付け
 - **param** `variables` -- 変数名とその値の対応付け
 
 ```ruby
@@ -73,7 +73,7 @@ XPathインジェクション攻撃を避けるため、適切なエスケープ
 
 - **param** `element` -- 要素([c:REXML::Element])
 - **param** `path` -- XPath文字列
-- **param** `namespace` -- 名前空間とURLの対応付け
+- **param** `namespaces` -- 名前空間とURLの対応付け
 - **param** `variables` -- 変数名とその値の対応付け
 
 ```ruby
@@ -110,7 +110,7 @@ XPathインジェクション攻撃を避けるため、適切なエスケープ
 
 - **param** `element` -- 要素([c:REXML::Element])
 - **param** `path` -- XPath文字列
-- **param** `namespace` -- 名前空間とURLの対応付け
+- **param** `namespaces` -- 名前空間とURLの対応付け
 - **param** `variables` -- 変数名とその値の対応付け
 
 ```ruby

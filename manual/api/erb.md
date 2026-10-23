@@ -437,8 +437,9 @@ p erb.lineno    # => 3
 
 エラーメッセージや `eval` に使われるファイル名と行番号をまとめて設定します。
 
-- **param** `filename` -- ファイル名を文字列で指定します。
-- **param** `lineno` -- 行番号を整数で指定します。nil を渡した場合、行番号は変更されません。
+引数には `[filename, lineno]` の形の配列を指定します。
+`filename` はファイル名を文字列で、`lineno` は行番号を整数で指定します。
+`lineno` に `nil` を渡した場合、行番号は変更されません。
 
 ```ruby title="例"
 require 'erb'

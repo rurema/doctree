@@ -436,7 +436,7 @@ filespec で指定した JSON 形式のファイルを Ruby オブジェクト�
 
 - **param** `filespec` -- ファイル名を指定します。
 
-- **param** `options` -- オプションをハッシュで指定します。指定可能なオプションは [m:JSON?.parse] と同様です。
+- **param** `opts` -- オプションをハッシュで指定します。指定可能なオプションは [m:JSON?.parse] と同様です。
 
 - **SEE** [m:JSON?.parse]
 
@@ -446,7 +446,7 @@ filespec で指定した JSON 形式のファイルを Ruby オブジェクト�
 
 - **param** `filespec` -- ファイル名を指定します。
 
-- **param** `options` -- オプションをハッシュで指定します。指定可能なオプションは [m:JSON?.parse!] と同様です。
+- **param** `opts` -- オプションをハッシュで指定します。指定可能なオプションは [m:JSON?.parse!] と同様です。
 
 - **SEE** [m:JSON?.parse!]
 

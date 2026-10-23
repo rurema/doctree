@@ -119,6 +119,7 @@ p Ractor.receive(timeout: 0.2) # => nil
 
 `timeout` を指定した場合、その秒数が経過しても受信可能になったものが無ければ nil を返します。
 
+- **param** `ports` -- 待つ対象の [c:Ractor] または [c:Ractor::Port] を指定します。
 - **param** `timeout` -- 待つ秒数を数値で指定します。nil の場合は、受信可能になるまで待ち続けます。
 - **raise** `ArgumentError` -- `timeout` が負の場合や、待つ対象を 1 つも指定しなかった場合に発生します。
 

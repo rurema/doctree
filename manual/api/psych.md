@@ -323,6 +323,13 @@ Psych.safe_load("", [Date])
 ```
 
 #%end
+- **param** `yaml` -- YAML ドキュメント(文字列 or [c:IO] オブジェクト)
+#%until 3.1
+- **param** `legacy_permitted_classes` -- キーワード引数 `permitted_classes` と同じ意味を持つ非推奨の引数です。
+- **param** `legacy_permitted_symbols` -- キーワード引数 `permitted_symbols` と同じ意味を持つ非推奨の引数です。
+- **param** `legacy_aliases` -- キーワード引数 `aliases` と同じ意味を持つ非推奨の引数です。
+- **param** `legacy_filename` -- キーワード引数 `filename` と同じ意味を持つ非推奨の引数です。
+#%end
 - **param** `permitted_classes` -- 追加で読み込みを許可するクラスの配列。
 - **param** `permitted_symbols` -- 引数 `permitted_classes` に [c:Symbol] を含む場合に読み込みを許可する [c:Symbol] の配列。
                          省略した場合は全ての [c:Symbol] を許可します。

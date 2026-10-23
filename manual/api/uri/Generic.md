@@ -100,6 +100,8 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 
 - **param** `fragment` -- 構成要素を表す文字列を与えます。
 
+- **param** `parser` -- 内部で使用する URI パーサを与えます。
+
 - **param** `arg_check` -- 真が与えられた場合は、各引数が字句規則に適合しているか否かを検査します。適合しない場合は例外 URI::InvalidComponentError が起ります。
 
 - **raise** `URI::InvalidURIError` -- use_registry が偽のとき、registry が与えられると発生します。

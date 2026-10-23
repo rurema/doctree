@@ -229,6 +229,8 @@ call メソッドは文字列を返す必要があります。
 
 - **param** `progname` -- 無視されます。
 
+- **param** `block` -- ログに記録するメッセージを返すブロックを指定します。
+
 - **SEE** [m:Logger#add]
 
 ## Constants
