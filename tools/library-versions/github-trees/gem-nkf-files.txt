@@ -1,2 +1,0 @@
-kconv.rb
-nkf.rb
