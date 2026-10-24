@@ -120,7 +120,7 @@ since: "3.2"
   `Gem::Net::HTTP` のような vendored ライブラリは載せません(既存のページは残しますが、追補はしません)。
   `Gem::ConfigFile`・`Gem::Package` でも、状態ファイルや YAML の読み書き、tar の操作のような内部メソッドは載せません
 
-`tools/method-coverage` の集計では、これらを `POLICY(理由)` として不足側から除外しています。
+[rurema/doctree-measurements](https://github.com/rurema/doctree-measurements) の `method-coverage` の集計では、これらを `POLICY(理由)` として不足側から除外しています。
 
 ### default gem と bundled gemはどう書く？
 

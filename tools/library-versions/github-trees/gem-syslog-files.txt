@@ -1,3 +1,0 @@
-syslog.rb
-syslog/jruby.rb
-syslog/logger.rb

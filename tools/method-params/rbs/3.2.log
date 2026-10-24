@@ -1,8 +1,0 @@
-path: bitclust RbsSigImporter (local rbs 4.1.3)
-source rbs gem: 2.8.2
-files: 198, parse failures: core 0, stdlib 2 (stdlib は参考)
-  FAILED stdlib/benchmark/0/benchmark.rbs: RBS::ParsingError: /tmp/claude-1000/-home-debian-rurema/e5d7ae8d-bf1b-438c-b2b8-048f2d1de385/scratchpad/mp-work/rbs-src/3.2/stdlib/benchmark/0/benchmark.rbs:149:131...149:135: Syn
-  FAILED stdlib/fileutils/0/fileutils.rbs: RBS::ParsingError: /tmp/claude-1000/-home-debian-rurema/e5d7ae8d-bf1b-438c-b2b8-048f2d1de385/scratchpad/mp-work/rbs-src/3.2/stdlib/fileutils/0/fileutils.rbs:746:38...746:42: Synta
-note: stdlib/stringio が無いので空の StringIO を補った
-keys: 2298, overloads: 2985
-result: ok

@@ -1,2 +1,0 @@
-win32ole.rb
-win32ole/property.rb
