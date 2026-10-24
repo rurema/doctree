@@ -621,7 +621,7 @@ nilを設定するとタイムアウトしなくなります。
   - [m:Net::HTTP.start]
   - [m:Net::HTTP#start]
 
-- **param** `second` -- 待つ秒数を指定します。
+- **param** `seconds` -- 待つ秒数を指定します。
 - **SEE** [m:Net::HTTP#read_timeout], [m:Net::HTTP#open_timeout]
 
 ### def read_timeout -> Integer|nil
@@ -650,7 +650,7 @@ nilを設定するとタイムアウトしなくなります。
 
 デフォルトは 60 (秒)です。
 
-- **param** `second` -- 待つ秒数を指定します。
+- **param** `seconds` -- 待つ秒数を指定します。
 - **SEE** [m:Net::HTTP#open_timeout], [m:Net::HTTP#read_timeout]
 
 ### def write_timeout -> Numeric|nil
@@ -679,7 +679,7 @@ Windows では Net::WriteTimeout は発生しません。
 
 デフォルトは 60 (秒)です。
 
-- **param** `second` -- 待つ秒数を指定します。
+- **param** `seconds` -- 待つ秒数を指定します。
 - **SEE** [m:Net::HTTP#open_timeout], [m:Net::HTTP#read_timeout], [m:Net::HTTP#write_timeout]
 
 ### def max_retries -> Integer
@@ -847,6 +847,7 @@ dest は時代遅れの引数です。利用しないでください。
 dest を指定した場合にはボディを少しずつ取得して順次「dest << ボディの断片」を実行します。
 
 - **param** `path` -- POST先のパスを文字列で指定します。
+- **param** `data` -- POST するデータを文字列で指定します。
 - **param** `header` -- リクエストの HTTP ヘッダをハッシュで指定します。
 - **param** `dest` -- 利用しないでください。
 
@@ -1154,7 +1155,8 @@ Dest は時代遅れの引数です。利用しないでください。
 dest を指定した場合にはボディを少しずつ取得して順次「dest << ボディの断片」を実行します。
 
 - **param** `path` -- POST先のパスを文字列で指定します。
-- **param** `header` -- リクエストの HTTP ヘッダをハッシュで指定します。
+- **param** `data` -- PATCH で送るデータを文字列で指定します。
+- **param** `initheader` -- リクエストの HTTP ヘッダをハッシュで指定します。
 - **param** `dest` -- 利用しないでください。
 
 ### def proppatch(path, body, initheader = nil) -> Net::HTTPResponse

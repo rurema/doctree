@@ -1142,8 +1142,6 @@ p config                           # => {:lib=>"lib1"}
 
 自身がデフォルトでパースする引数を文字列の配列で返します。
 
-- **param** `argv` -- デフォルトでパースする文字列の配列を返します。
-
 ```ruby title="例"
 require "optparse"
 

@@ -20,7 +20,7 @@ XPath で相対パスを指定した場合は、この REXML::Element#elements �
 
 通常は [m:REXML::Element.new] によって Elements オブジェクトが生成されるため、このメソッドを使う必要はありません。
 
-- **param** `parant` -- 親要素オブジェクト
+- **param** `parent` -- 親要素オブジェクト
 
 ## Instance Methods
 
@@ -239,5 +239,6 @@ xpath を指定した場合は、その XPath 文字列にマッチする要素�
 xpath を指定した場合は、その XPath 文字列にマッチする要素に対し同様の操作をします。
 
 - **param** `xpath` -- XPath文字列
+- **param** `initial` -- 畳み込みの初期値
 - **SEE** [m:REXML::Elements#each]
 

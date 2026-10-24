@@ -70,7 +70,7 @@ start_prefix_mapping が呼びだされます。
        nil が渡されます
 - **param** `localname` -- 接頭辞を取り除いた要素名文字列が渡されます
 - **param** `qname` -- 修飾名(qualified-name)文字列、つまり接頭辞を含む文字列が渡されます
-- **param** `attribute` -- 属性が { 属性名 => 属性値文字列 } という [c:Hash] でで渡されます。
+- **param** `attributes` -- 属性が { 属性名 => 属性値文字列 } という [c:Hash] でで渡されます。
 
 ### def end_element(uri, localname, qname) -> ()
 

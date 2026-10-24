@@ -626,7 +626,7 @@ p imap.search('SUBJECT "hello"')
 # => [1, 6, 7, 8]
 ```
 
-- **param** `key` -- 検索キー(文字列の配列もしくは文字列)
+- **param** `keys` -- 検索キー(文字列の配列もしくは文字列)
 - **param** `charset` -- 検索に用いるcharset
 - **SEE** [m:Net::IMAP#search]
 
@@ -651,7 +651,7 @@ p imap.uid_search('SUBJECT "hello"')
 # => [1, 6, 7, 8]
 ```
 
-- **param** `key` -- 検索キー(文字列の配列もしくは文字列)
+- **param** `keys` -- 検索キー(文字列の配列もしくは文字列)
 - **param** `charset` -- 検索に用いるcharset
 - **SEE** [m:Net::IMAP#uid_search]
 
@@ -856,8 +856,8 @@ p imap.sort(["DATE"], ["SUBJECT", "hello"], "US-ASCII")
 # => [6, 7, 8, 1]
 ```
 
-- **param** `sort_key` -- ソート順のキー(文字列配列)
-- **param** `search_key` -- 検索条件(文字列配列)
+- **param** `sort_keys` -- ソート順のキー(文字列配列)
+- **param** `search_keys` -- 検索条件(文字列配列)
 - **param** `charset` -- 検索条件の解釈に用いるCHARSET名(文字列)
 
 ### def setquota(mailbox, quota) -> Net::IMAP::TaggedResponse
@@ -1005,7 +1005,7 @@ search_key には検索条件を渡します。
 [m:Net::IMAP#search] と同等です。
 
 - **param** `algorithm` -- スレッド構造構築アルゴリズム名(文字列)
-- **param** `search_key` -- 検索条件(文字列配列)
+- **param** `search_keys` -- 検索条件(文字列配列)
 - **param** `charset` -- 検索条件の解釈に用いるCHARSET名(文字列)
 - **SEE** [c:Net::IMAP::ThreadMember], [m:Net::IMAP#uid_thread]
 
@@ -1018,7 +1018,7 @@ THREADコマンドを送り、メールボックスを検索した結果をス�
 ではなく UID となります。
 
 - **param** `algorithm` -- スレッド構造構築アルゴリズム名(文字列)
-- **param** `search_key` -- 検索条件(文字列配列)
+- **param** `search_keys` -- 検索条件(文字列配列)
 - **param** `charset` -- 検索条件の解釈に用いるCHARSET名(文字列)
 - **SEE** [c:Net::IMAP::ThreadMember], [m:Net::IMAP#thread]
 

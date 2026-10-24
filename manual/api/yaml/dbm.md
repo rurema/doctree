@@ -112,6 +112,8 @@ key をキーとする要素を削除します。
 
 - **param** `key` -- キーを文字列で指定します。
 
+- **param** `ifnone` -- 対応する値が見つからなかった場合に返す値を指定します。
+
 - **SEE** [m:YAML::DBM#\[\]]
 
 ### def has_value?(value) -> bool

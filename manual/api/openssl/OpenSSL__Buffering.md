@@ -112,7 +112,7 @@ format に従い引数 args を文字列に変換して出力します。
 [m:IO#printf] と同様です。
 
 - **param** `format` -- 出力フォーマット文字列
-- **param** `arg` -- 出力するオブジェクト
+- **param** `args` -- 出力するオブジェクト
 - **SEE** [m:Kernel?.printf]
 
 ### def puts(*objs) -> nil

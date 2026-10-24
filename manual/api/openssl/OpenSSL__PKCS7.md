@@ -186,7 +186,7 @@ PKCS7 オブジェクトのタイプを [c:Symbol] オブジェクトで設定�
 
 - **param** `cipher` -- 共通鍵暗号アルゴリズム([c:OpenSSL::Cipher] オブジェクト)
 
-### def add_signer(singer) -> self
+### def add_signer(signer) -> self
 
 署名者を追加します。
 

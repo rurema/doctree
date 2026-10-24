@@ -447,6 +447,8 @@ self が substr を含む場合、一致した文字列を新しく作って返�
 
 (self.to_s[substr] と同じです。)
 
+- **param** `substr` -- 探す部分文字列を指定します。
+
 ```ruby title="例"
 p :foobar.slice("foo") # => "foo"
 p :foobar.slice("baz") # => nil

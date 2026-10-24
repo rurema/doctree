@@ -1460,6 +1460,7 @@ p Fred.foo # => 99
 val をセットします。val を返します。
 
 - **param** `name` -- [c:String] または [c:Symbol] を指定します。
+- **param** `val` -- クラス変数に設定する値を指定します。
 
 ```ruby title="例"
 class Fred

@@ -804,7 +804,7 @@ SITE コマンドを発行します。
   - [m:Net::FTP#storbinary]
   - [m:Net::FTP#storlines]
 
-- **param** `second` -- 待つ秒数を指定します。
+- **param** `seconds` -- 待つ秒数を指定します。
 - **SEE** [m:Net::HTTP#read_timeout], [m:Net::HTTP#open_timeout]
 
 ### def read_timeout -> Numeric|nil
@@ -827,7 +827,7 @@ SITE コマンドを発行します。
 
 このタイムアウト秒数は、サーバとやりとりするほとんどの [c:Net::FTP] のメソッドで有効です。
 
-- **param** `second` -- 待つ秒数を指定します。
+- **param** `seconds` -- 待つ秒数を指定します。
 - **SEE** [m:Net::HTTP#open_timeout], [m:Net::HTTP#read_timeout]
 
 ### def mlsd(pathname = nil) -> [Net::FTP::MLSxEntry]

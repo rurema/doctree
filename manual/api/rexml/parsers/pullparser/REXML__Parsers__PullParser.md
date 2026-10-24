@@ -15,7 +15,7 @@ extend:
 
 新たな PullParser オブジェクトを生成して返します。
 
-- **param** `source` -- 入力(文字列、IO、IO互換オブジェクト(StringIOなど))
+- **param** `stream` -- 入力(文字列、IO、IO互換オブジェクト(StringIOなど))
 
 ## Instance Methods
 

@@ -48,6 +48,9 @@ p $~[0..2]      # => ["foobar", "foo", "bar"]
 
 `start` 番目から `length` 個の要素を含む部分配列を返します。
 
+- **param** `start` -- 部分配列の開始位置を指定します。
+- **param** `length` -- 部分配列の要素数を指定します。
+
 ```ruby title="例"
 /(foo)(bar)/ =~ "foobarbaz"
 p $~[0, 3]      # => ["foobar", "foo", "bar"]
@@ -591,7 +594,9 @@ p m1 == m2  # => true
 
 Hashのキーは名前付きキャプチャの名前です。Hashの値はキーの名前に対応した名前付きグループのうち最後にマッチした文字列です。
 
+#%since 3.3
 - **param** `symbolize_names` -- 真を指定するとハッシュのキーを文字列ではなくシンボルにします。デフォルトは偽です。
+#%end
 
 ```ruby title="例"
 #%since 3.4

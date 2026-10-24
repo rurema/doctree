@@ -64,8 +64,12 @@ def classify(params_str)
       r[:req] += 1; r[:pos_names] << $1; r[:names] << $1
     when /\A(#{IDENT})\s*=\s*\S/
       r[:opt] += 1; r[:pos_names] << $1; r[:names] << $1
-    when /\A\*(#{IDENT})?\z/
+    when /\A\*(#{IDENT})?\z/, /\A\*(#{IDENT})\s*=\s*\S/, /\A(#{IDENT})\.\.\.\z/
+      # *name = 既定値 と name... は可変長引数の表記として扱う
       r[:rest] = 1; r[:pos_names] << "*#{$1}"; r[:names] << $1 if $1
+    when /\A\[(.*)\]\z/
+      # [a, *b] のように配列の要素を引数として並べた表記は要素の名前を拾う
+      r[:req] += 1; r[:pos_names] << item; r[:names].concat(classify($1)[:names])
     when /\A(#{IDENT}):\z/
       r[:kwreq] << $1; r[:names] << $1
     when /\A(#{IDENT}):\s*\S/

@@ -268,6 +268,10 @@ TSort.each_strongly_connected_component_fromは[c:TSort]をincludeしてグラ�
 
 - **param** `each_child` -- 引数で与えられた頂点の子をそれぞれ評価するcallメソッドを持つオブジェクトを指定します。
 
+- **param** `id_map` -- 再帰呼び出しの際に内部で使われるハッシュで、通常は省略します。
+
+- **param** `stack` -- 再帰呼び出しの際に内部で使われる配列で、通常は省略します。
+
 ```ruby title="使用例"
 require 'tsort'
 
@@ -417,6 +421,10 @@ each_strongly_connected_component_from は
 tsort_each_node を呼びません。
 
 - **param** `node` -- ノードを指定します。
+
+- **param** `id_map` -- 再帰呼び出しの際に内部で使われるハッシュで、通常は省略します。
+
+- **param** `stack` -- 再帰呼び出しの際に内部で使われる配列で、通常は省略します。
 
 ```ruby title="例 到達可能なノードを表示する"
 require 'tsort'

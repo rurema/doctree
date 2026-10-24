@@ -407,6 +407,7 @@ self に複数の文字列を破壊的に連結します。
 
 self を返します。
 
+- **param** `other` -- 連結する文字列もしくは 0 以上の整数
 - **param** `arguments` -- 複数の文字列もしくは 0 以上の整数
 
 ```ruby title="例"
@@ -3571,7 +3572,7 @@ self を指定したエンコーディングに変換した文字列を作成し
 
 - **param** `encoding` --       変換先のエンコーディングを表す文字列か [c:Encoding] オブジェクトを指定します。
 - **param** `from_encoding` --  変換元のエンコーディングを表す文字列か [c:Encoding] オブジェクトを指定します。
-- **param** `option` --         変換オプションをキーワード引数で与えます。
+- **param** `options` --        変換オプションをキーワード引数で与えます。
 - **return** --               変換された文字列
 
 変換オプション
@@ -3626,6 +3627,7 @@ self のエンコーディングが使われます。変換後の self を返し
 
 - **param** `encoding` --       変換先のエンコーディングを表す文字列か Encoding オブジェクトを指定します。
 - **param** `from_encoding` --  変換元のエンコーディングを表す文字列か Encoding オブジェクトを指定します。
+- **param** `options` --        [m:String#encode] と同じ変換オプションを指定します。
 - **return** --               変換後のself
 
 ```ruby title="例"
@@ -3789,6 +3791,7 @@ str_index と str_length もしくは str_range が与えられたとき、self 
 
 - **param** `index` -- 置換したい文字列の範囲の始端
 - **param** `length` -- 置換したい文字列の範囲の長さ
+- **param** `str` -- 置き換える文字列
 #%since 3.3
 - **param** `str_index` -- str の範囲の始端
 - **param** `str_length` -- str の範囲の長さ

@@ -9,10 +9,10 @@ abort "usage: check_params.rb <method-params dir> <ver>" unless ver
 out_dir = File.join(dir, "result", ver)
 FileUtils.mkdir_p(out_dir)
 
-# 名前の正規化: 先頭の * ** & と末尾の : を除き、self と空文字は捨てる
+# 名前の正規化: 先頭の * ** & と末尾の : を除き、self と ... と空文字は捨てる
 norm = lambda do |s|
   s.to_s.split(",").map { |n| n.strip.sub(/\A(?:\*\*|\*|&)/, "").sub(/:\z/, "") }
-   .reject { |n| n.empty? || n == "self" }.uniq
+   .reject { |n| n.empty? || n == "self" || n == "..." }.uniq
 end
 
 total = with_param = mismatched = args_no_param = 0

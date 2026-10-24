@@ -290,8 +290,8 @@ target が times の全ての要素よりも新しい場合は target の更新�
 
 - **param** `libs` -- ???
 
-### def try_link(src, opt = "", *options) -> bool
-### def try_link(src, opt = "", *options){ ... } -> bool
+### def try_link(src, opt = "", *opts) -> bool
+### def try_link(src, opt = "", *opts){ ... } -> bool
 
 C プログラムのソースコード src をコンパイル、リンクします。
 
@@ -303,6 +303,8 @@ C プログラムのソースコード src をコンパイル、リンクしま�
 - **param** `src` -- C プログラムのソースコードを指定します。
 
 - **param** `opt` -- リンカにコマンド引数として渡す値を指定します。
+
+- **param** `opts` -- コマンドを実行する際のオプションを指定します。
 
 ```ruby title="例"
 require 'mkmf'
@@ -323,6 +325,8 @@ C プログラムのソースコード src をプリプロセスします。
 - **param** `src` -- C プログラムのソースコードを指定します。
 
 - **param** `opt` -- プリプロセッサにコマンドライン引数として渡す値を指定します。
+
+- **param** `opts` -- コマンドを実行する際のオプションを指定します。
 
 - **return** -- 問題なくプリプロセスできたら true を返します。
         プリプロセスに失敗したら false を返します。
@@ -351,6 +355,8 @@ CPP $CFLAGS opt | egrep pat
                 Ruby の正規表現ではありません。
 
 - **param** `src` -- C 言語のソースコードを文字列で記述します。
+
+- **param** `opt` -- プリプロセッサにコマンドライン引数として渡す値を指定します。
 
 - **SEE** [man:egrep(1)]
 
@@ -969,6 +975,8 @@ create_makefile('foo') {|conf|
 
 - **param** `opt` -- コンパイラに渡すオプションを指定します。
            $CFLAGS もコンパイラには渡されます。
+
+- **param** `opts` -- コマンドを実行する際のオプションを指定します。
 
 ### def try_static_assert(expr, headers = nil, opt = "") -> bool
 ### def try_static_assert(expr, headers = nil, opt = ""){ ... } -> bool
