@@ -363,7 +363,7 @@ p GC.count # => 3
 
 GC 内部の統計情報を [c:Hash] で返します。
 
-- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新しくハッシュを作成します。result_hash の内容は上書きされます。
+- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新しくハッシュを作成します。`result_hash` の内容は上書きされます。
 
 - **param** `key` -- 得られる統計情報から特定の情報を取得したい場合にキーを
            [c:Symbol] で指定します。
@@ -413,8 +413,8 @@ GC.stat(:page_pool_arenas) # ~> unknown key: page_pool_arenas (ArgumentError)
 
 #%end
 
-- **return** -- GC 内部の統計情報を[c:Hash] で返します。
-        引数 key を指定した場合は数値を返します。
+- **return** -- GC 内部の統計情報を [c:Hash] で返します。
+        引数 `key` を指定した場合は数値を返します。
 
 ```ruby
 p GC.stat
