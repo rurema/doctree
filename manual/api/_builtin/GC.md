@@ -8,7 +8,7 @@ GC は Ruby インタプリタの「ゴミ集め(Garbage Collection)」を制御
 #%since 4.1
 Ruby 4.1 から、デフォルトの GC は [c:Ractor] ごとに動作します。各 Ractor は自分のヒープを自分のスレッドで、他の Ractor を止めずに回収します。
 全 Ractor を止める(stop-the-world の)グローバル GC は、明示的な [m:GC.start]、共有可能オブジェクトの増加、終了した Ractor のヒープの回収といった、本当に必要なときだけ行われます。
-[m:GC.start] の `global` キーワード引数、[m:GC.stat] の `scope` キーワード引数と `:global_gc_count`、[m:GC.disable] と [m:GC.enable] の Ractor ごとの扱いも参照してください。
+[m:GC.start] の `global` キーワード引数、[m:GC.stat] の `process` キーワード引数と `:global_gc_count`・`:global_gc_invocation_count`、[m:GC.disable] と [m:GC.enable] の Ractor ごとの扱いも参照してください。
 #%end
 
 ### GCのチューニングについて
@@ -302,7 +302,7 @@ nil を返します。
 - **param** `global` -- 他の [c:Ractor] のオブジェクト空間が存在するときに、全 Ractor を対象とするグローバル GC を行う場合は true(デフォルト)を、呼び出した Ractor だけのメジャー GC を行う場合は false を指定します。Ractor が 1 つしか無いときは効果がありません。
 
 終了した Ractor のオブジェクト空間はすぐには消えず、あとで別の Ractor(通常はメイン Ractor)のオブジェクト空間に統合されます。
-他の Ractor のオブジェクト空間が存在するとき(終了した Ractor の、まだ統合されていないオブジェクト空間も含みます)や、前回のグローバル GC のあとにこの統合が行われたときは、`global` が true なら全 Ractor を対象とするグローバル GC になり、[m:GC.stat] の `:global_gc_count` が増えて `:major_gc_count` は増えません。
+他の Ractor のオブジェクト空間が存在するとき(終了した Ractor の、まだ統合されていないオブジェクト空間も含みます)や、前回のグローバル GC のあとにこの統合が行われたときは、`global` が true なら全 Ractor を対象とするグローバル GC になり、[m:GC.stat] の `:global_gc_count` と `:global_gc_invocation_count` が増えて `:major_gc_count` は増えません。
 
 #%end
 注意: これらのキーワード引数は Ruby の実装やバージョンによって異なります。将来のバージョンとの互換性も保証されません。また、Ruby の実装がサポートしていない場合はキーワード引数を指定しても無視される可能性があります。
@@ -354,8 +354,8 @@ p GC.count # => 3
 ```
 
 #%since 4.1
-### def GC.stat(result_hash = {}, scope: :ractor) -> {Symbol => Integer}
-### def GC.stat(key, scope: :ractor) -> Numeric
+### def GC.stat(result_hash = {}, process: false) -> {Symbol => Integer}
+### def GC.stat(key, process: false) -> Numeric
 #%else
 ### def GC.stat(result_hash = {}) -> {Symbol => Integer}
 ### def GC.stat(key) -> Numeric
@@ -363,35 +363,58 @@ p GC.count # => 3
 
 GC 内部の統計情報を [c:Hash] で返します。
 
-- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新しくハッシュを作成します。result_hash の内容は上書きされます。
+- **param** `result_hash` -- 戻り値のためのハッシュを指定します。省略した場合は新しくハッシュを作成します。`result_hash` の内容は上書きされます。
 
 - **param** `key` -- 得られる統計情報から特定の情報を取得したい場合にキーを
            [c:Symbol] で指定します。
 
 #%since 4.1
-- **param** `scope` -- 統計情報の対象範囲を [c:Symbol] で指定します。`:ractor`(デフォルト)は現在の [c:Ractor] の値を返します。`:local` は `:ractor` の別名です。`:global` は、終了した Ractor の分も含む全 Ractor の累積の GC 回数と mark / sweep の CPU 時間を、stop-the-world の snapshot を取らずに返します。
+- **param** `process` -- 統計情報の対象を指定します。偽(デフォルト)のときは現在の [c:Ractor] のオブジェクト空間の統計情報を、真のときはプロセス全体の統計情報を返します。
 
-- **raise** `ArgumentError` -- `scope` に未知の値を指定した場合に発生します。
+- **raise** `ArgumentError` -- `key` に未知のキーや、`process` で選んだ統計情報に含まれないキーを指定した場合に発生します。
 
-Ruby 4.1 から、キー `:global_gc_count` が加わりました。グローバル GC(全 Ractor を対象とする stop-the-world の GC)のうち、その Ractor が開始したものの回数です。
-各グローバル GC は、それを開始した 1 つの Ractor にだけ数えられるので、全 Ractor の `:global_gc_count` を足すとプロセス全体の回数になります。`scope: :global` では、終了した Ractor の分も含めたその合計を返します。
-グローバル GC は `:major_gc_count` には数えず、どちらのスコープでも `:count` は `:minor_gc_count`、`:major_gc_count`、`:global_gc_count` の合計になります。
+- **raise** `NotImplementedError` -- デフォルト以外の GC 実装(MMTk など)で `process` に真を指定した場合に発生します。
 
-`scope: :global` のときに返るキーは `:count`、`:time`、`:marking_time`、`:sweeping_time`、`:minor_gc_count`、`:major_gc_count`、`:global_gc_count` の 7 つだけです。
-`scope` を指定しない場合は、従来どおり現在の Ractor の値を返します。[m:GC.count] と [m:GC.total_time] も同様です。
+`process` が偽のときの統計情報には、グローバル GC(全 [c:Ractor] を止める stop-the-world の GC)の回数を表すキーが 2 つ含まれます。
+`:global_gc_count` は、その Ractor のヒープを回収したグローバル GC の回数です。どの Ractor が開始したかは問いません。
+`:global_gc_invocation_count` は、その Ractor が開始したグローバル GC の回数です。各グローバル GC を開始した Ractor はちょうど 1 つです。
+`:minor_gc_count` と `:major_gc_count` はその Ractor のヒープに対するローカルな GC の回数で、グローバル GC は含みません。
+`:count` は `:minor_gc_count`、`:major_gc_count`、`:global_gc_count` の合計です。
+
+`process` が真のとき、デフォルトの GC では、全 Ractor にわたる累積の GC 回数と計測した CPU 時間、全オブジェクト空間が共有するページプールの状態を返します。
+GC 回数と CPU 時間には、終了した Ractor のオブジェクト空間の分も含みます。
+返るキーは `:count`、`:time`、`:marking_time`、`:sweeping_time`、`:minor_gc_count`、`:major_gc_count`、`:global_gc_count`、`:page_pool_arenas`、`:page_pool_arenas_freed`、`:page_pool_total_pages`、`:page_pool_discarded_pages` の 11 個だけです。
+
+`process` が真のときの `:global_gc_count` はプロセス内のグローバル GC の回数で、止めた Ractor の数によらず 1 回ずつ数えます。
+`:count` は各ローカル GC と各グローバル GC を 1 回ずつ数えるので、`:minor_gc_count`、`:major_gc_count`、`:global_gc_count` の合計になります。
+1 回のグローバル GC は全ヒープを回収するので、この `:count` は Ractor ごとの `:count` の合計とは一致しません。
+
+`:page_pool_arenas` は現在マップされているページプールのアリーナの数、`:page_pool_arenas_freed` はページプールがアンマップしたアリーナの数です。
+`:page_pool_total_pages` はマップされているアリーナ内のページ本体の数、`:page_pool_discarded_pages` はメモリを OS に返した空きページ本体の数です。
+
+このときの `:time` はナノ秒単位の値を合計してからミリ秒に変換するので、`:marking_time` と `:sweeping_time` の和より 1 ミリ秒大きくなることがあります。
+これらの時間は GC が使った CPU 時間で、プログラムの停止時間ではありません。
+時間が累積されるかどうかは [m:GC.measure_total_time] の設定に従います。
+読み出しは各オブジェクト空間が公開している値を合算するだけで、stop-the-world を要求しません。
+[m:Process.fork] で作った子プロセスは、親プロセスの累積値を引き継ぎます。
+
+[m:GC.count] と [m:GC.total_time] は、常に現在の Ractor の値を返します。
 
 ```ruby title="例"
-r = Ractor.new { GC.start; GC.stat(:count) }
-p r.value                         # => 1
-p GC.stat(:count)                 # => 0 (main Ractor の値)
-p GC.stat(:count, scope: :global) # => 2
-p GC.stat(:global_gc_count, scope: :global) # => 1
+# 他の Ractor のオブジェクト空間があるので、子 Ractor の GC.start はグローバル GC になる
+r = Ractor.new { GC.start; GC.stat(:global_gc_invocation_count) }
+p r.value                                  # => 1
+p GC.stat(:global_gc_count)                # => 1 (main Ractor のヒープも回収された)
+p GC.stat(:global_gc_invocation_count)     # => 0 (main Ractor は開始していない)
+p GC.stat(:global_gc_count, process: true) # => 1
+p GC.stat(process: true).key?(:page_pool_arenas) # => true
+GC.stat(:page_pool_arenas) # ~> unknown key: page_pool_arenas (ArgumentError)
 ```
 
 #%end
 
-- **return** -- GC 内部の統計情報を[c:Hash] で返します。
-        引数 key を指定した場合は数値を返します。
+- **return** -- GC 内部の統計情報を [c:Hash] で返します。
+        引数 `key` を指定した場合は数値を返します。
 
 ```ruby
 p GC.stat
