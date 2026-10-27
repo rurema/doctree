@@ -268,6 +268,25 @@ self がカレント Ractor でなくても例外にはならず、常にカレ�
 - **SEE** [m:Ractor.\[\]=], [m:Ractor.store_if_absent]
 #%end
 
+#%since 4.1
+### def alive? -> bool
+
+self がまだ終了していなければ true を返します。
+
+正常に終了した場合も、捕捉されなかった例外で終了した場合も、実行を終えた後は false を返します。
+
+```ruby title="例"
+r = Ractor.new { Ractor.receive }
+p r.alive? # => true
+r << :done
+r.join
+p r.alive? # => false
+```
+
+- **SEE** [m:Ractor#join], [m:Ractor#value]
+
+#%end
+
 #%since 4.0
 ### def close -> bool
 
