@@ -236,7 +236,11 @@ p JSON.iconv("UTF-8", "EUC-JP", "test".encode("EUC-JP")) # => "test"
 
 ## Module Functions
 
+#%since 3.3
+### module_function def dump(object, io = nil, limit = nil, options = nil) -> String | IO
+#%else
 ### module_function def dump(object, io = nil, limit = nil) -> String | IO
+#%end
 
 与えられたオブジェクトを JSON 形式の文字列に変換してダンプします。
 
@@ -247,8 +251,23 @@ p JSON.iconv("UTF-8", "EUC-JP", "test".encode("EUC-JP")) # => "test"
 - **param** `io` --  [c:IO] のように write メソッドを実装しているオブジェクトを指定します。
 
 - **param** `limit` -- 指定した場合、limit 段以上深くリンクしたオブジェクトをダンプできません。
+#%since 4.1
+           `limit` は非推奨です。代わりに `options` の `:max_nesting` を指定してください。
+#%end
 
+#%since 3.3
+- **param** `options` -- [m:JSON?.generate] と同じオプションをハッシュで指定します。
+           キーワード引数の形でも指定できます。
+#%since 4.1
+           `rfc8785: true` を指定した場合は、`allow_nan` を偽として扱います。
+#%end
+
+#%end
+#%since 4.1
+- **raise** `JSON::NestingError` -- オブジェクトのネストの深さが `limit` または `:max_nesting` を越えた場合に発生します。
+#%else
 - **raise** `ArgumentError` -- オブジェクトのネストの深さが limit を越えた場合に発生します。
+#%end
 
 ```ruby title="例"
 require "json"
@@ -261,7 +280,11 @@ require "json"
 
 File.open("test.txt", "w") do |f|
   p JSON.dump([[[[[[[[[[]]]]]]]]]], f, 10) # => #<File:test.txt>
+#%since 4.1
+  JSON.dump([[[[[[[[[[[]]]]]]]]]]], f, 10) # ~> nesting of 11 is too deep. Did you try to serialize objects with circular references? (JSON::NestingError)
+#%else
   JSON.dump([[[[[[[[[[[]]]]]]]]]]], f, 10) # => exceed depth limit (ArgumentError)
+#%end
 end
 ```
 
@@ -330,6 +353,16 @@ unparse は将来削除される予定です。
 - **`:max_nesting`**:
   入れ子になっているデータの最大の深さを指定します。
   偽を指定すると深さのチェックを行いません。デフォルトは 19 です。
+#%since 4.1
+- **`:sort_keys`**:
+  真を指定すると、オブジェクト(ハッシュ)のキーを昇順に並べ替えます。
+  `Proc` を指定すると、その `Proc` で並べ替えます。
+  詳しくは [m:JSON::State#sort_keys=] を参照してください。デフォルトは偽です。
+- **`:rfc8785`**:
+  真を指定すると、[rfc:8785] の JSON Canonicalization Scheme に従って正規化した
+  JSON 形式の文字列を生成します。
+  詳しくは [m:JSON::State#rfc8785=] を参照してください。デフォルトは偽です。
+#%end
 
 - **raise** `JSON::GeneratorError` -- [m:JSON::NaN], [m:JSON::Infinity],[m:JSON::MinusInfinity]
        を生成しようとした場合に発生します。
@@ -348,8 +381,10 @@ p JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
 
 - **SEE** [c:JSON::State], [m:JSON?.pretty_generate]
 
+#%since 4.1
+### module_function def load(source, proc = nil, allow_blank: true, **options) -> object
+#%else
 ### module_function def load(source, proc = nil, options = {}) -> object
-#%until 4.1
 ### module_function def restore(source, proc = nil, options = {}) -> object
 #%end
 
@@ -366,6 +401,11 @@ restore は将来削除される予定です。
 #%end
 
 proc として手続きオブジェクトが与えられた場合は、読み込んだオブジェクトを引数にその手続きを呼び出します。
+
+#%since 4.1
+オプションはキーワード引数で指定します。
+`proc` の位置にハッシュを渡してもオプションとしては扱われず、[m:Hash#to_proc] で変換した手続きとして各値に適用されます。
+#%end
 
 ```ruby
 require 'json'
@@ -411,7 +451,15 @@ p JSON.load(str, proc{|v| p v }) # => {"a"=>1, "b"=>2, "c"=>3}
 
 - **param** `proc` -- [c:Proc] オブジェクトを指定します。
 
+#%since 4.1
+- **param** `allow_blank` -- 真を指定すると、`source` が nil または空文字列の場合に nil を返します。
+           偽を指定すると、`source` が nil の場合は [c:TypeError] が、
+           空文字列の場合は [c:JSON::ParserError] が発生します。デフォルトは真です。
+
+- **param** `options` -- その他のオプションをキーワード引数で指定します。指定可能なオプションは以下の通りです。
+#%else
 - **param** `options` -- オプションをハッシュで指定します。指定可能なオプションは以下の通りです。
+#%end
 
 - **`:max_nesting`**:
   入れ子になっているデータの最大の深さを指定します。
@@ -420,8 +468,10 @@ p JSON.load(str, proc{|v| p v }) # => {"a"=>1, "b"=>2, "c"=>3}
   真を指定した場合、[m:JSON::NaN], [m:JSON::Infinity],
   [m:JSON::MinusInfinity] を生成することを許すようになります。
   偽を指定した場合、これらの値を生成しようとすると例外が発生します。デフォルトは真です。
+#%until 4.1
 - **`:allow_blank`**:
   真を指定すると、sourceがnilの場合にnilを返します。デフォルトは真です。
+#%end
 #%until 4.1
 - **`:create_additions`**:
   偽を指定するとマッチするクラスや [m:JSON.create_id] が見つかっても付加情報を生成しません。
@@ -430,34 +480,85 @@ p JSON.load(str, proc{|v| p v }) # => {"a"=>1, "b"=>2, "c"=>3}
 - **`:symbolize_names`**:
   真を指定するとハッシュのキーを文字列ではなくシンボルにします。デフォルトは偽です。
 
+#%since 4.1
+- **raise** `ArgumentError` -- オプションのハッシュを位置引数で渡した場合や、未知のキーワードを指定した場合に発生します。
+
+#%end
+#%since 4.1
+### module_function def load_file(filespec, **options) -> object
+#%else
 ### module_function def load_file(filespec, opts = {}) -> object
+#%end
 
 filespec で指定した JSON 形式のファイルを Ruby オブジェクトとしてロードして返します。
 
+#%since 4.1
+オプションはキーワード引数で指定します。
+
+#%end
 - **param** `filespec` -- ファイル名を指定します。
 
+#%since 4.1
+- **param** `options` -- オプションをキーワード引数で指定します。指定可能なオプションは [m:JSON?.parse] と同様です。
+
+- **raise** `ArgumentError` -- オプションのハッシュを位置引数で渡した場合や、未知のキーワードを指定した場合に発生します。
+#%else
 - **param** `opts` -- オプションをハッシュで指定します。指定可能なオプションは [m:JSON?.parse] と同様です。
+#%end
 
 - **SEE** [m:JSON?.parse]
 
+#%since 4.1
+### module_function def load_file!(filespec, **options) -> object
+#%else
 ### module_function def load_file!(filespec, opts = {}) -> object
+#%end
 
 filespec で指定した JSON 形式のファイルを Ruby オブジェクトとしてロードして返します。
 
+#%since 4.1
+オプションはキーワード引数で指定します。
+
+#%end
 - **param** `filespec` -- ファイル名を指定します。
 
+#%since 4.1
+- **param** `options` -- オプションをキーワード引数で指定します。指定可能なオプションは [m:JSON?.parse!] と同様です。
+
+- **raise** `ArgumentError` -- オプションのハッシュを位置引数で渡した場合や、未知のキーワードを指定した場合に発生します。
+#%else
 - **param** `opts` -- オプションをハッシュで指定します。指定可能なオプションは [m:JSON?.parse!] と同様です。
+#%end
 
 - **SEE** [m:JSON?.parse!]
 
+#%since 4.1
+### module_function def parse(source, on_load: nil, object_class: nil, array_class: nil, **options) -> object
+#%else
 ### module_function def parse(source, options = {}) -> object
+#%end
 
 与えられた JSON 形式の文字列を Ruby オブジェクトに変換して返します。
 
+#%since 4.1
+オプションはキーワード引数で指定します。
+
+#%end
 - **param** `source` -- JSON 形式の文字列を指定します。
 
+#%since 4.1
+- **param** `on_load` -- パースで生成した値ごとに呼び出す手続きオブジェクトを指定します。下記の `:on_load` を参照してください。
+
+- **param** `object_class` -- JSON のオブジェクトを変換するクラスを指定します。下記の `:object_class` を参照してください。
+
+- **param** `array_class` -- JSON の配列を変換するクラスを指定します。下記の `:array_class` を参照してください。
+
+- **param** `options` -- その他のオプションをキーワード引数で指定します。
+       指定可能なオプションは以下の通りです。
+#%else
 - **param** `options` -- オプションをハッシュで指定します。
        指定可能なオプションは以下の通りです。
+#%end
 
 - **`:max_nesting`**:
   入れ子になっているデータの最大の深さを指定します。
@@ -469,6 +570,16 @@ filespec で指定した JSON 形式のファイルを Ruby オブジェクト�
 - **`:create_additions`**:
   偽を指定するとマッチするクラスや [m:JSON.create_id] が見つかっても付加情報を生成しません。
   デフォルトは偽です。
+#%end
+- **`:object_class`**:
+  JSON のオブジェクトを変換するクラスを指定します。デフォルトは [c:Hash] です。
+- **`:array_class`**:
+  JSON の配列を変換するクラスを指定します。デフォルトは [c:Array] です。
+#%since 4.1
+- **`:on_load`**:
+  パースで生成したすべての値(文字列・数値・true・false・nil・配列・ハッシュ。オブジェクトのキーの文字列も含みます)ごとに
+  呼び出す手続きオブジェクトを指定します。手続きの返り値が、その値の代わりに使われます。
+  デフォルトは nil です。
 #%end
 - **`:symbolize_names`**:
   真を指定するとハッシュのキーを文字列ではなくシンボルにします。デフォルトは偽です。
@@ -490,18 +601,48 @@ filespec で指定した JSON 形式のファイルを Ruby オブジェクト�
 #%end
   ```
 
+#%since 4.1
+- **raise** `ArgumentError` -- オプションのハッシュを位置引数で渡した場合や、未知のキーワードを指定した場合に発生します。
+
+```ruby title="例 on_load を指定する"
+require "json"
+
+JSON.parse('[1,2]', on_load: ->(o) { o.is_a?(Integer) ? o * 10 : o }) # => [10, 20]
+```
+
+```ruby title="例 オプションをハッシュで渡した場合と未知のキーワードを指定した場合"
+require "json"
+
+JSON.parse('{"a":1}', {symbolize_names: true}) # ~> wrong number of arguments (given 2, expected 1) (ArgumentError)
+JSON.parse('{"a":1}', foo: 1)                  # ~> unknown keyword: foo (ArgumentError)
+```
+
+#%end
 - **SEE** [m:JSON::Parser#parse]
 
+#%since 4.1
+### module_function def parse!(source, **options) -> object
+#%else
 ### module_function def parse!(source, options = {}) -> object
+#%end
 
 与えられた JSON 形式の文字列を Ruby オブジェクトに変換して返します。
 
 [m:JSON?.parse] よりも危険なデフォルト値が指定されているので信頼できる文字列のみを入力として使用するようにしてください。
 
+#%since 4.1
+オプションはキーワード引数で指定します。
+
+#%end
 - **param** `source` -- JSON 形式の文字列を指定します。
 
+#%since 4.1
+- **param** `options` -- オプションをキーワード引数で指定します。
+       指定可能なオプションは以下の通りです。
+#%else
 - **param** `options` -- オプションをハッシュで指定します。
        指定可能なオプションは以下の通りです。
+#%end
 
 - **`:max_nesting`**:
   入れ子になっているデータの最大の深さを指定します。
@@ -536,6 +677,10 @@ filespec で指定した JSON 形式のファイルを Ruby オブジェクト�
   JSON.parse(json_text) # => unexpected token at 'NaN]' (JSON::ParserError)
   ```
 
+#%since 4.1
+- **raise** `ArgumentError` -- オプションのハッシュを位置引数で渡した場合や、未知のキーワードを指定した場合に発生します。
+
+#%end
 - **SEE** [m:JSON::Parser#parse]
 
 ### module_function def pretty_generate(object, options = nil) -> String
@@ -555,6 +700,10 @@ pretty_unparse は将来削除される予定です。
 
 - **param** `options` -- [c:JSON::State] または、to_hash や to_h メソッドでハッシュに変換可能なオブジェクトを指定できます。
        ハッシュを使用する場合指定可能なオプションは [m:JSON?.generate] を参照してください。
+
+#%since 4.1
+- **raise** `ArgumentError` -- `:rfc8785` オプションに真を指定した場合に発生します。
+#%end
 
 ```ruby title="例"
 require "json"
@@ -582,7 +731,11 @@ puts JSON.pretty_generate(hash, space: "\t")
 #%# --- recurse_proc(result, &proc) -> object
 
 #%since 3.4
+#%since 4.1
+### module_function def unsafe_load(source, proc = nil, **options) -> object
+#%else
 ### module_function def unsafe_load(source, proc = nil, options = nil) -> object
+#%end
 
 与えられた JSON 形式の文字列を Ruby オブジェクトとしてロードして返します。
 
@@ -600,9 +753,19 @@ puts JSON.pretty_generate(hash, space: "\t")
 `proc` として手続きオブジェクトが与えられた場合は、読み込んだ結果を引数にその手続きを呼び出し、
 その返り値を最終的な結果とします。
 
+#%since 4.1
+オプションはキーワード引数で指定します。
+`proc` の位置にハッシュを渡してもオプションとしては扱われず、[m:Hash#to_proc] で変換した手続きとして各値に適用されます。
+
+#%end
 - **param** `source` -- JSON 形式の文字列を指定します。他には、`to_str`, `to_io`, `read` メソッドを持つオブジェクトも指定可能です。
 - **param** `proc` -- [c:Proc] オブジェクトを指定します。
+#%since 4.1
+- **param** `options` -- オプションをキーワード引数で指定します。指定可能なオプションは [m:JSON?.parse] と同様です。
+- **raise** `ArgumentError` -- オプションのハッシュを位置引数で渡した場合や、未知のキーワードを指定した場合に発生します。
+#%else
 - **param** `options` -- オプションをハッシュで指定します。指定可能なオプションは [m:JSON?.parse] と同様です。
+#%end
 
 #%until 4.1
 

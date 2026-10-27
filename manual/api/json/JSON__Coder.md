@@ -34,11 +34,19 @@ p MyApp::API_JSON_CODER.dump(t) # => "\"2025-01-21T08:41:44.286Z\""
 
 ## Singleton Methods
 
+#%since 4.1
+### def JSON::Coder.new(object_class: nil, array_class: nil, on_load: nil, strict: true, **options) {|object| ... } -> JSON::Coder
+#%else
 ### def JSON::Coder.new(options = nil) {|object| ... } -> JSON::Coder
+#%end
 
 自身を初期化します。
 
+#%since 4.1
+`options` には、JSON 形式の文字列を生成する際([m:JSON?.generate])とパースする際([m:JSON?.parse])の両方に使われるオプションをキーワード引数で指定します。
+#%else
 options には、JSON 形式の文字列を生成する際([m:JSON?.generate])とパースする際([m:JSON?.parse])の両方に使われるオプションをハッシュで指定します。
+#%end
 ただし、生成に関しては常に `strict: true` を指定した場合と同様に扱われます。
 すなわち、文字列・シンボル・整数・浮動小数点数・配列・ハッシュ・true・false・nil
 以外のオブジェクトを変換しようとすると、ブロックが指定されていない限り
@@ -47,8 +55,26 @@ options には、JSON 形式の文字列を生成する際([m:JSON?.generate])�
 ブロックを指定すると、上記のような JSON にネイティブ対応していない型のオブジェクトを生成しようとしたときにそのブロックが呼び出されます。ブロックには対象のオブジェクトが渡され、
 JSON にネイティブ対応した値(文字列など)を返す必要があります。ブロックの戻り値もネイティブ対応していない型であった場合はエラーになります。
 
+#%since 4.1
+`strict` に true 以外を指定すると [c:ArgumentError] が発生します。
+オプションのハッシュを位置引数で渡した場合も [c:ArgumentError] が発生します。
+
+- **param** `object_class` -- JSON のオブジェクトを変換するクラスを指定します。[m:JSON?.parse] の `object_class` と同じです。
+
+- **param** `array_class` -- JSON の配列を変換するクラスを指定します。[m:JSON?.parse] の `array_class` と同じです。
+
+- **param** `on_load` -- パースで生成した値ごとに呼び出す手続きオブジェクトを指定します。[m:JSON?.parse] の `on_load` と同じです。
+
+- **param** `strict` -- true のみ指定できます。
+
+- **param** `options` -- その他のオプションをキーワード引数で指定します。指定可能なオプションは
+  [m:JSON?.generate], [m:JSON?.parse] を参照してください。
+
+- **raise** `ArgumentError` -- `strict` に true 以外を指定した場合や、オプションのハッシュを位置引数で渡した場合に発生します。
+#%else
 - **param** `options` -- ハッシュを指定します。指定可能なオプションは
   [m:JSON?.generate], [m:JSON?.parse] を参照してください。
+#%end
 
 ```ruby title="例 options はパースと生成の両方に適用される"
 require "json"

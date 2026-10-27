@@ -44,6 +44,16 @@ JSON 形式の文字列を生成するための設定を保持しておくため
 - **`:ascii_only`**:
   真を指定した場合、ASCII 文字列のみを用いて JSON 形式の文字列を生成します。
   デフォルトは偽です。
+#%since 4.1
+- **`:sort_keys`**:
+  真を指定すると、オブジェクト(ハッシュ)のキーを昇順に並べ替えます。
+  `Proc` を指定すると、その `Proc` で並べ替えます。
+  詳しくは [m:JSON::State#sort_keys=] を参照してください。デフォルトは偽です。
+- **`:rfc8785`**:
+  真を指定すると、[rfc:8785] の JSON Canonicalization Scheme に従って正規化した
+  JSON 形式の文字列を生成します。
+  詳しくは [m:JSON::State#rfc8785=] を参照してください。デフォルトは偽です。
+#%end
 - **`:buffer_initial_length`**:
   JSON 形式の文字列を生成する際に使用する内部バッファの初期の長さを指定します。デフォルトは 1024 です。
 
@@ -112,6 +122,11 @@ p JSON.generate({b: 1, a: 2}, state) # => "{\"a\":2,\"b\":1}"
 - **SEE** [m:JSON::State#sort_keys=]
 
 #%end
+
+#%# nodoc
+#%# --- rfc8785_number_formatter_proc=(prc)
+#%#
+#%# --- rfc8785_sort_keys_proc=(prc)
 
 #%since 3.4
 ### def JSON::State.generate(obj, options, io) -> String | IO
@@ -667,6 +682,66 @@ p JSON.generate({a: 1, b: 2}, state2) # => "{\"b\":2,\"a\":1}"
 ```
 
 - **SEE** [m:JSON::State.default_sort_keys_proc=]
+
+#%end
+
+#%since 4.1
+### def rfc8785? -> bool
+### def rfc8785=(enable)
+
+JSON 形式の文字列を [rfc:8785] の JSON Canonicalization Scheme に従って正規化して生成するかどうかを取得・設定します。
+
+真を設定すると、次のように JSON 形式の文字列を生成します。
+
+- オブジェクト(ハッシュ)のキーを UTF-16 のコード単位の順に並べ替えます。入れ子のハッシュのキーも並べ替えます。
+- 数値を ECMAScript の Number の文字列表現と同じ形式で出力します。
+  整数も [c:Float] に変換してから出力するため、丸められることがあります。
+- トークンの間に空白を入れません。
+
+`JSON::Fragment` の内容は、そのまま挿入されます。正規形にするのは呼び出し側の責任です。
+
+キーの並べ替えはこの設定自体が行うため、`rfc8785?` が真でも [m:JSON::State#sort_keys] は偽のままです。
+
+- **param** `enable` -- 真を指定すると正規化した JSON 形式の文字列を生成するようにします。
+           偽を指定すると正規化しないようにします。
+
+- **raise** `ArgumentError` -- `indent`, `space`, `space_before`, `object_nl`, `array_nl` のいずれかが空文字列でない場合や、
+           `ascii_only`, `script_safe`, `allow_nan` のいずれかが真の場合に、JSON 形式の文字列を生成するときに発生します。
+           [m:JSON::State.new] や [m:JSON::State#configure] でこれらと同時に指定した場合は、そのときに発生します。
+
+- **raise** `JSON::GeneratorError` -- NaN, Infinity, -Infinity を生成しようとした場合や、
+           [c:Float] で表せない大きさの整数を生成しようとした場合に発生します。
+
+```ruby title="例"
+require "json"
+
+p JSON::State.new(rfc8785: true).rfc8785? # => true
+
+state = JSON::State.new
+p state.rfc8785?                         # => false
+state.rfc8785 = true
+p state.generate({"b" => 1, "a" => 2.0}) # => "{\"a\":2,\"b\":1}"
+state.rfc8785 = false
+p state.generate({"b" => 1, "a" => 2.0}) # => "{\"b\":1,\"a\":2.0}"
+```
+
+```ruby title="例 キーの並べ替えと数値の形式"
+require "json"
+
+p JSON.generate({b: 1, "a" => 2, "B" => 3, "あ" => 4, "ab" => 5}, rfc8785: true)
+# => "{\"B\":3,\"a\":2,\"ab\":5,\"b\":1,\"あ\":4}"
+p JSON.generate([1.0, -0.0, 1.0e100, 1e-5, 1e-7, 1e21, 1e20, 123456789012345678, 0.1+0.2, 2.5e-8, 1.5e300], rfc8785: true)
+# => "[1,0,1e+100,0.00001,1e-7,1e+21,100000000000000000000,123456789012345680,0.30000000000000004,2.5e-8,1.5e+300]"
+```
+
+```ruby title="例 例外が発生する場合"
+require "json"
+
+JSON.generate([10**400], rfc8785: true)         # ~> Integer out of range for RFC 8785 (JSON::GeneratorError)
+JSON.pretty_generate({"a" => 1}, rfc8785: true) # ~> indent cannot be used with rfc8785 (ArgumentError)
+```
+
+- **SEE** [m:JSON::State#sort_keys=], [m:JSON?.generate]
 
 #%end
 
