@@ -44,6 +44,42 @@ JSON 形式の文字列を生成するための設定を保持しておくため
 - **`:ascii_only`**:
   真を指定した場合、ASCII 文字列のみを用いて JSON 形式の文字列を生成します。
   デフォルトは偽です。
+- **`:max_nesting`**:
+  入れ子になっているデータの最大の深さを指定します。
+  0 を指定すると深さのチェックを行いません。デフォルトは 100 です。
+#%since 3.3
+- **`:script_safe`**:
+  真を指定すると、`/` を `\/` に、U+2028・U+2029 を `\u2028`・`\u2029` にエスケープし、
+  JavaScript に埋め込んでも安全な JSON 形式の文字列を生成します。デフォルトは偽です。
+#%end
+#%until 4.1
+- **`:escape_slash`**:
+#%since 3.3
+  `:script_safe` の別名です。
+#%else
+  真を指定すると `/` を `\/` にエスケープします。デフォルトは偽です。
+#%end
+#%end
+#%since 3.3
+- **`:strict`**:
+  真を指定すると、nil・true・false・[c:Integer]・[c:Float]・[c:String]・[c:Array]・[c:Hash] 以外のオブジェクトを
+  `to_json` や `to_s` で変換せず、[c:JSON::GeneratorError] を発生させます。
+#%since 4.0
+  [c:Symbol] は文字列として変換します。デフォルトは偽です。
+#%else
+  [c:Symbol] の値も [c:JSON::GeneratorError] になります(ハッシュのキーの [c:Symbol] は文字列に変換します)。デフォルトは偽です。
+#%end
+#%end
+#%since 4.0
+- **`:allow_duplicate_key`**:
+  真を指定すると、キーを文字列に変換した結果が重複するハッシュ(`{foo: 1, "foo" => 2}` など)をそのまま出力します。
+#%since 4.1
+  デフォルトは偽で、この場合は [c:JSON::GeneratorError] が発生します。
+#%else
+  偽を指定すると [c:JSON::GeneratorError] が発生します。
+  デフォルトでは警告を出してそのまま出力します。
+#%end
+#%end
 #%since 4.1
 - **`:sort_keys`**:
   真を指定すると、オブジェクト(ハッシュ)のキーを昇順に並べ替えます。
@@ -476,7 +512,40 @@ require "pp"
 json_state = JSON::State.new
 pp json_state.to_h
 
-#%since 3.4
+#%since 4.1
+# => {indent: "",
+#     space: "",
+#     space_before: "",
+#     object_nl: "",
+#     array_nl: "",
+#     as_json: false,
+#     allow_nan: false,
+#     ascii_only: false,
+#     max_nesting: 100,
+#     script_safe: false,
+#     strict: false,
+#     depth: 0,
+#     buffer_initial_length: 1024,
+#     sort_keys: false,
+#     rfc8785: false,
+#     allow_duplicate_key: false}
+#%end
+#%version 4.0...4.1
+# => {indent: "",
+#     space: "",
+#     space_before: "",
+#     object_nl: "",
+#     array_nl: "",
+#     as_json: false,
+#     allow_nan: false,
+#     ascii_only: false,
+#     max_nesting: 100,
+#     script_safe: false,
+#     strict: false,
+#     depth: 0,
+#     buffer_initial_length: 1024}
+#%end
+#%version 3.4...4.0
 # => {indent: "",
 #     space: "",
 #     space_before: "",
@@ -485,9 +554,12 @@ pp json_state.to_h
 #     allow_nan: false,
 #     ascii_only: false,
 #     max_nesting: 100,
+#     script_safe: false,
+#     strict: false,
 #     depth: 0,
 #     buffer_initial_length: 1024}
-#%else
+#%end
+#%version 3.3...3.4
 # => {:indent=>"",
 #     :space=>"",
 #     :space_before=>"",
@@ -496,6 +568,21 @@ pp json_state.to_h
 #     :allow_nan=>false,
 #     :ascii_only=>false,
 #     :max_nesting=>100,
+#     :script_safe=>false,
+#     :strict=>false,
+#     :depth=>0,
+#     :buffer_initial_length=>1024}
+#%end
+#%until 3.3
+# => {:indent=>"",
+#     :space=>"",
+#     :space_before=>"",
+#     :object_nl=>"",
+#     :array_nl=>"",
+#     :allow_nan=>false,
+#     :ascii_only=>false,
+#     :max_nesting=>100,
+#     :escape_slash=>false,
 #     :depth=>0,
 #     :buffer_initial_length=>1024}
 #%end

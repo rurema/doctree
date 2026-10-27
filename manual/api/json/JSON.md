@@ -352,7 +352,42 @@ unparse は将来削除される予定です。
   デフォルトは偽です。
 - **`:max_nesting`**:
   入れ子になっているデータの最大の深さを指定します。
-  偽を指定すると深さのチェックを行いません。デフォルトは 19 です。
+  偽を指定すると深さのチェックを行いません。デフォルトは 100 です。
+- **`:ascii_only`**:
+  真を指定すると、ASCII 以外の文字を `\uXXXX` の形式にエスケープします。デフォルトは偽です。
+#%since 3.3
+- **`:script_safe`**:
+  真を指定すると、`/` を `\/` に、U+2028・U+2029 を `\u2028`・`\u2029` にエスケープし、
+  JavaScript に埋め込んでも安全な JSON 形式の文字列を生成します。デフォルトは偽です。
+#%end
+#%until 4.1
+- **`:escape_slash`**:
+#%since 3.3
+  `:script_safe` の別名です。
+#%else
+  真を指定すると `/` を `\/` にエスケープします。デフォルトは偽です。
+#%end
+#%end
+#%since 3.3
+- **`:strict`**:
+  真を指定すると、nil・true・false・[c:Integer]・[c:Float]・[c:String]・[c:Array]・[c:Hash] 以外のオブジェクトを
+  `to_json` や `to_s` で変換せず、[c:JSON::GeneratorError] を発生させます。
+#%since 4.0
+  [c:Symbol] は文字列として変換します。デフォルトは偽です。
+#%else
+  [c:Symbol] の値も [c:JSON::GeneratorError] になります(ハッシュのキーの [c:Symbol] は文字列に変換します)。デフォルトは偽です。
+#%end
+#%end
+#%since 4.0
+- **`:allow_duplicate_key`**:
+  真を指定すると、キーを文字列に変換した結果が重複するハッシュ(`{foo: 1, "foo" => 2}` など)をそのまま出力します。
+#%since 4.1
+  デフォルトは偽で、この場合は [c:JSON::GeneratorError] が発生します。
+#%else
+  偽を指定すると [c:JSON::GeneratorError] が発生します。
+  デフォルトでは警告を出してそのまま出力します。
+#%end
+#%end
 #%since 4.1
 - **`:sort_keys`**:
   真を指定すると、オブジェクト(ハッシュ)のキーを昇順に並べ替えます。
@@ -369,6 +404,17 @@ unparse は将来削除される予定です。
 
 - **raise** `JSON::CircularDatastructure` -- 与えられたオブジェクトが循環参照を持つ場合に発生します。
 
+#%since 4.1
+- **raise** `JSON::GeneratorError` -- `:allow_duplicate_key` が偽の場合(デフォルト)に、キーを文字列に変換した結果が重複するハッシュを変換しようとすると発生します。
+
+- **raise** `JSON::GeneratorError` -- ASCII 以外のバイトを含む BINARY(ASCII-8BIT)エンコーディングの文字列を変換しようとすると発生します。
+
+#%end
+#%version 3.4...4.1
+ASCII 以外のバイトを含む BINARY(ASCII-8BIT)エンコーディングの文字列は UTF-8 として扱い、非推奨の警告を出します。
+
+#%end
+
 ```ruby title="例"
 require "json"
 
@@ -379,6 +425,17 @@ p JSON.generate([1, 2, { name: "tanaka", age: 19 }], json_state)
 # => "[1,2,{\"name\": \"tanaka\",\"age\": 19}]"
 ```
 
+#%since 4.1
+
+```ruby title="例 キーの重複と BINARY 文字列"
+require "json"
+
+JSON.generate({foo: 1, "foo" => 2})                            # ~> detected duplicate key "foo" in {foo: 1, "foo" => 2} (JSON::GeneratorError)
+JSON.generate({foo: 1, "foo" => 2}, allow_duplicate_key: true) # => "{\"foo\":1,\"foo\":2}"
+JSON.generate(["é".b])                                         # ~> "\xC3" from ASCII-8BIT to UTF-8 (JSON::GeneratorError)
+```
+
+#%end
 - **SEE** [c:JSON::State], [m:JSON?.pretty_generate]
 
 #%since 4.1
@@ -463,7 +520,12 @@ p JSON.load(str, proc{|v| p v }) # => {"a"=>1, "b"=>2, "c"=>3}
 
 - **`:max_nesting`**:
   入れ子になっているデータの最大の深さを指定します。
-  偽を指定すると深さのチェックを行いません。デフォルトは偽です。
+  偽を指定すると深さのチェックを行いません。
+#%since 3.4
+  デフォルトは 100 です。
+#%else
+  デフォルトは偽です。
+#%end
 - **`:allow_nan`**:
   真を指定した場合、[m:JSON::NaN], [m:JSON::Infinity],
   [m:JSON::MinusInfinity] を生成することを許すようになります。
@@ -475,7 +537,11 @@ p JSON.load(str, proc{|v| p v }) # => {"a"=>1, "b"=>2, "c"=>3}
 #%until 4.1
 - **`:create_additions`**:
   偽を指定するとマッチするクラスや [m:JSON.create_id] が見つかっても付加情報を生成しません。
+#%since 3.4
+  デフォルトは nil で、この場合も付加情報を生成しますが非推奨の警告を出します。
+#%else
   デフォルトは真です。
+#%end
 #%end
 - **`:symbolize_names`**:
   真を指定するとハッシュのキーを文字列ではなくシンボルにします。デフォルトは偽です。
@@ -562,7 +628,7 @@ filespec で指定した JSON 形式のファイルを Ruby オブジェクト�
 
 - **`:max_nesting`**:
   入れ子になっているデータの最大の深さを指定します。
-  偽を指定すると深さのチェックを行いません。デフォルトは 19 です。
+  偽を指定すると深さのチェックを行いません。デフォルトは 100 です。
 - **`:allow_nan`**:
   真を指定すると [rfc:4627] を無視してパース時に [m:JSON::NaN], [m:JSON::Infinity],
   [m:JSON::MinusInfinity] を許可するようになります。デフォルトは偽です。
@@ -583,23 +649,80 @@ filespec で指定した JSON 形式のファイルを Ruby オブジェクト�
 #%end
 - **`:symbolize_names`**:
   真を指定するとハッシュのキーを文字列ではなくシンボルにします。デフォルトは偽です。
-
-  ```ruby title="例"
-  require "json"
-
-  JSON.parse('[1,2,{"name":"tanaka","age":19}]')
+- **`:freeze`**:
+  真を指定すると、パースした結果のすべてのオブジェクト(文字列・配列・ハッシュ)を凍結して返します。
+  同じ内容の文字列は同一のオブジェクトになります。デフォルトは偽です。
+- **`:decimal_class`**:
+  JSON の小数を変換するクラスを指定します。デフォルトは nil で、[c:Float] に変換します。
 #%since 3.4
-  # => [1, 2, {"name" => "tanaka", "age" => 19}]
-
-  JSON.parse('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
-  # => [1, 2, {name: "tanaka", age: 19}]
-#%else
-  # => [1, 2, {"name"=>"tanaka", "age"=>19}]
-
-  JSON.parse('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
-  # => [1, 2, {:name=>"tanaka", :age=>19}]
+- **`:allow_trailing_comma`**:
+  真を指定すると、配列やオブジェクトの末尾の余分なカンマを許可します。デフォルトは偽です。
 #%end
-  ```
+#%since 4.0
+- **`:allow_control_characters`**:
+  真を指定すると、文字列中のエスケープされていない ASCII 制御文字(改行など)を許可します。デフォルトは偽です。
+- **`:allow_duplicate_key`**:
+  真を指定すると、オブジェクト内でキーが重複している場合に後の値を採用します。
+#%since 4.1
+  デフォルトは偽で、この場合はキーが重複していると [c:JSON::ParserError] が発生します。
+#%else
+  偽を指定すると、キーが重複している場合に [c:JSON::ParserError] が発生します。
+  デフォルトでは警告を出して後の値を採用します。
+#%end
+#%end
+#%since 4.1
+- **`:allow_comments`**:
+  真を指定すると、JavaScript 形式のコメント(`/* ... */` と `// ...`)を許可します。デフォルトは偽です。
+  4.0 までは常に許可していました。
+- **`:allow_invalid_escape`**:
+  真を指定すると、文字列中の不正なエスケープ(`\q` など)をエラーにせず、バックスラッシュを取り除いた文字として扱います。
+  デフォルトは偽です。
+#%end
+
+```ruby title="例"
+require "json"
+
+JSON.parse('[1,2,{"name":"tanaka","age":19}]')
+#%since 3.4
+# => [1, 2, {"name" => "tanaka", "age" => 19}]
+
+JSON.parse('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
+# => [1, 2, {name: "tanaka", age: 19}]
+#%else
+# => [1, 2, {"name"=>"tanaka", "age"=>19}]
+
+JSON.parse('[1,2,{"name":"tanaka","age":19}]', symbolize_names: true)
+# => [1, 2, {:name=>"tanaka", :age=>19}]
+#%end
+```
+
+```ruby title="例 パースのオプション"
+require "json"
+require "bigdecimal"
+
+JSON.parse('[1.5]', decimal_class: BigDecimal) # => [0.15e1]
+
+a = JSON.parse('["x","x"]', freeze: true)
+a.frozen?         # => true
+a[0].frozen?      # => true
+a[0].equal?(a[1]) # => true
+#%since 3.4
+
+JSON.parse('[1, 2,]', allow_trailing_comma: true)   # => [1, 2]
+JSON.parse('{"a": 1,}', allow_trailing_comma: true) # => {"a" => 1}
+#%end
+#%since 4.0
+
+JSON.parse("\"a\nb\"", allow_control_characters: true) # => "a\nb"
+JSON.parse('{"a":1,"a":2}', allow_duplicate_key: true)  # => {"a" => 2}
+#%end
+#%since 4.1
+
+JSON.parse('{"a":1,"a":2}')                     # ~> duplicate key "a" at line 1 column 1 (JSON::ParserError)
+JSON.parse('/* c */ [1]', allow_comments: true) # => [1]
+JSON.parse('"\\q"', allow_invalid_escape: true) # => "q"
+#%end
+```
 
 #%since 4.1
 - **raise** `ArgumentError` -- オプションのハッシュを位置引数で渡した場合や、未知のキーワードを指定した場合に発生します。
@@ -656,6 +779,8 @@ JSON.parse('{"a":1}', foo: 1)                  # ~> unknown keyword: foo (Argume
   偽を指定するとマッチするクラスや [m:JSON.create_id] が見つかっても付加情報を生成しません。
   デフォルトは偽です。
 #%end
+
+このほかに [m:JSON?.parse] と同じオプションを指定できます。
 
   ```ruby title="例"
   require "json"
