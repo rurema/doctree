@@ -35,9 +35,9 @@ p MyApp::API_JSON_CODER.dump(t) # => "\"2025-01-21T08:41:44.286Z\""
 ## Singleton Methods
 
 #%since 4.1
-### def JSON::Coder.new(object_class: nil, array_class: nil, on_load: nil, strict: true, **options) {|object| ... } -> JSON::Coder
+### def JSON::Coder.new(object_class: nil, array_class: nil, on_load: nil, strict: true, **options) {|object, is_key| ... } -> JSON::Coder
 #%else
-### def JSON::Coder.new(options = nil) {|object| ... } -> JSON::Coder
+### def JSON::Coder.new(options = nil) {|object, is_key| ... } -> JSON::Coder
 #%end
 
 自身を初期化します。
@@ -52,8 +52,13 @@ options には、JSON 形式の文字列を生成する際([m:JSON?.generate])�
 以外のオブジェクトを変換しようとすると、ブロックが指定されていない限り
 [c:JSON::GeneratorError] が発生します。
 
-ブロックを指定すると、上記のような JSON にネイティブ対応していない型のオブジェクトを生成しようとしたときにそのブロックが呼び出されます。ブロックには対象のオブジェクトが渡され、
-JSON にネイティブ対応した値(文字列など)を返す必要があります。ブロックの戻り値もネイティブ対応していない型であった場合はエラーになります。
+ブロックを指定すると、上記のような JSON にネイティブ対応していない型のオブジェクトを生成しようとしたときにそのブロックが呼び出されます。
+ブロックには対象のオブジェクトと、それがハッシュのキーとして使われているかどうかを表す真偽値が渡されます。
+ブロックの返り値が、そのオブジェクトの代わりに変換されます。
+返り値の中にさらにネイティブ対応していないオブジェクトが含まれていれば、それに対してもブロックが呼び出されます。[c:JSON::Fragment] を返すと、その内容がそのまま挿入されます。
+ハッシュのキーに対する返り値は [c:String] か [c:Symbol] でなければなりません。
+不正なエンコーディングの文字列や、ASCII 以外のバイトを含む BINARY(ASCII-8BIT)エンコーディングの文字列に対してもブロックが呼び出されます。
+ブロックの返り値もネイティブ対応していない型であった場合は [c:JSON::GeneratorError] が発生します。
 
 #%since 4.1
 `strict` に true 以外を指定すると [c:ArgumentError] が発生します。
@@ -70,7 +75,7 @@ JSON にネイティブ対応した値(文字列など)を返す必要があり�
 - **param** `options` -- その他のオプションをキーワード引数で指定します。指定可能なオプションは
   [m:JSON?.generate], [m:JSON?.parse] を参照してください。
 
-- **raise** `ArgumentError` -- `strict` に true 以外を指定した場合や、オプションのハッシュを位置引数で渡した場合に発生します。
+- **raise** `ArgumentError` -- `strict` に true 以外を指定した場合や、オプションのハッシュを位置引数で渡した場合、未知のキーワードを指定した場合に発生します。
 #%else
 - **param** `options` -- ハッシュを指定します。指定可能なオプションは
   [m:JSON?.generate], [m:JSON?.parse] を参照してください。
@@ -95,6 +100,25 @@ rescue JSON::GeneratorError => e
 end
 ```
 
+```ruby title="例 ハッシュのキーと値でブロックの引数が異なる"
+require "json"
+
+coder = JSON::Coder.new do |object, is_key|
+  is_key ? object.to_s : object.to_a
+end
+p coder.dump({1..2 => 3..4, "k" => 5..6}) # => "{\"1..2\":[3,4],\"k\":[5,6]}"
+```
+
+```ruby title="例 JSON::Fragment で生成済みの JSON を埋め込む"
+require "json"
+
+cached = '{"id":1,"name":"Ruby"}'
+coder = JSON::Coder.new { |object| JSON::Fragment.new(cached) }
+p coder.dump({"item" => Object.new}) # => "{\"item\":{\"id\":1,\"name\":\"Ruby\"}}"
+```
+
+- **SEE** [m:JSON::State#as_json=], [m:JSON::State#strict=]
+
 ## Public Instance Methods
 
 ### def dump(object) -> String
@@ -113,7 +137,7 @@ generate は dump の別名です。
 
 - **param** `io` -- [c:IO] のように write メソッドを実装しているオブジェクトを指定します。
 
-- **raise** `JSON::GeneratorError` -- object(またはその内部の値)が JSON にネイティブ対応しておらず、[m:JSON::Coder.new] にブロックも指定されていなかった場合に発生します。
+- **raise** `JSON::GeneratorError` -- object(またはその内部の値)が JSON にネイティブ対応しておらず、[m:JSON::Coder.new] にブロックも指定されていなかった場合や、ブロックの返り値も JSON にネイティブ対応していなかった場合に発生します。
 
 ```ruby title="例"
 require "json"
