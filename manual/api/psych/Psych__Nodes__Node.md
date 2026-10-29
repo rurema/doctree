@@ -44,10 +44,31 @@ self のノードをルートとする部分木の各ノードを引数として
 
 ブロックを省略した場合は [c:Enumerator] を返します。
 
-### def to_ruby -> object
-### def transform -> object
+#%since 4.0
+### def to_ruby(symbolize_names: false, freeze: false, strict_integer: false, parse_symbols: true) -> object
+### def transform(symbolize_names: false, freeze: false, strict_integer: false, parse_symbols: true) -> object
+#%end
+#%version 3.2...4.0
+### def to_ruby(symbolize_names: false, freeze: false, strict_integer: false) -> object
+### def transform(symbolize_names: false, freeze: false, strict_integer: false) -> object
+#%end
+#%until 3.2
+### def to_ruby(symbolize_names: false, freeze: false) -> object
+### def transform(symbolize_names: false, freeze: false) -> object
+#%end
 
 AST を ruby のオブジェクトに変換します。
+
+- **param** `symbolize_names` -- ハッシュ(YAMLの仕様では正確にはマッピング)のキーを [c:Symbol] に変換するかどうかを指定します。
+                       true を指定した場合は変換します。デフォルトでは文字列に変換されます。
+- **param** `freeze` -- true を指定すると再帰的に [m:Object#freeze] されたオブジェクトを返します。
+              デフォルトは false です。
+#%since 3.2
+- **param** `strict_integer` -- true を指定すると、"1,000" のようなカンマを含む数値を [c:Integer] に変換せず、文字列として返します。デフォルトは false です。
+#%end
+#%since 4.0
+- **param** `parse_symbols` -- false を指定すると、":foo" のような文字列を [c:Symbol] に変換せず、文字列として返します。デフォルトは true です。
+#%end
 
 ### def yaml(io=nil, options={}) -> String | IO
 ### def to_yaml(io=nil, options={}) -> String | IO
