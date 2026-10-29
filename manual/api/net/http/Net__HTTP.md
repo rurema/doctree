@@ -19,7 +19,11 @@ Net::HTTP は、リクエストに Accept-Encoding ヘッダも Range ヘッダ�
 
 ## Class Methods
 
+#%since 3.4
+### def Net::HTTP.new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil, no_proxy=nil, proxy_use_ssl=nil) -> Net::HTTP
+#%else
 ### def Net::HTTP.new(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil, no_proxy=nil) -> Net::HTTP
+#%end
 
 新しい [c:Net::HTTP] オブジェクトを生成します。
 
@@ -40,6 +44,9 @@ no_proxy の文字列に address のホスト名やIPアドレスが含まれて
 - **param** `proxy_user` -- プロクシの認証のユーザ名を指定します。省略した場合には認証はなされません。
 - **param** `proxy_pass` -- プロクシの認証のパスワードを指定します。
 - **param** `no_proxy` -- プロクシを経由せずに接続するホストの名前/IPアドレスを文字列で指定します。
+#%since 3.4
+- **param** `proxy_use_ssl` -- プロクシとの接続に SSL/TLS を使うかどうかを指定します。接続先に SSL/TLS を使う場合([m:Net::HTTP#use_ssl=])にだけ効きます。`proxy_addr` に `:ENV` を指定した場合は無視されます。[m:Net::HTTP#proxy_use_ssl=] も参照してください。
+#%end
 
 ### def Net::HTTP.start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
 ### def Net::HTTP.start(address, port = 80, proxy_addr = :ENV, proxy_port = nil, proxy_user=nil, proxy_pass=nil) {|http| .... } -> object
@@ -179,7 +186,11 @@ POST します。
 #%#
 #%# このメソッドは obsolete です。
 
-### def Net::HTTP.Proxy(address, port = 80) -> Class
+#%since 3.4
+### def Net::HTTP.Proxy(address, port = 80, user = nil, pass = nil, use_ssl = nil) -> Class
+#%else
+### def Net::HTTP.Proxy(address, port = 80, user = nil, pass = nil) -> Class
+#%end
 
 Proxy 経由で http サーバに接続するためのクラスを作成し返します。
 
@@ -206,6 +217,13 @@ proxy_class.start('www.example.org') {|h|
 
 - **param** `address` -- プロクシのホスト名を文字列で与えます。
 - **param** `port` -- プロクシのポート番号を与えます。
+- **param** `user` -- プロクシの認証のユーザ名を与えます。省略した場合には認証はなされません。
+- **param** `pass` -- プロクシの認証のパスワードを与えます。
+#%since 3.4
+- **param** `use_ssl` -- プロクシとの接続に SSL/TLS を使うかどうかを与えます。接続先に SSL/TLS を使う場合([m:Net::HTTP#use_ssl=])にだけ効きます。
+
+- **SEE** [m:Net::HTTP.proxy_use_ssl]
+#%end
 
 ### def Net::HTTP.proxy_class? -> bool
 
