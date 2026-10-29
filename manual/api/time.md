@@ -14,8 +14,13 @@ category: Date/Time
 
 ## Class Methods
 
+#%since 4.1
+### def Time.parse(date, now = Time.now, zone: nil) -> Time
+### def Time.parse(date, now = Time.now, zone: nil) {|year| year } -> Time
+#%else
 ### def Time.parse(date, now = Time.now) -> Time
 ### def Time.parse(date, now = Time.now) {|year| year } -> Time
+#%end
 
 date を [m:Date._parse] によってパースして [c:Time]オブジェクトに変換します。
 
@@ -39,6 +44,13 @@ p Time.parse("12:00", time) # => 2019-05-01 12:00:00 +0900
 - **param** `date` -- [c:Time] オブジェクトに変換可能な文字列を指定します。
 - **param** `now` --  現在時刻を[c:Time] オブジェクトで指定します。
             デフォルトは[m:Time.now]となります。
+#%since 4.1
+- **param** `zone` -- `date` にタイムゾーンやオフセットが含まれていない場合に使うタイムゾーンを文字列で指定します。
+            `"+09:00"`・`"+0900"`・`"+09"` のようなオフセットか、`"UTC"`・`"Z"`、`"GMT"`・`"EST"` などの [RFC:822] で定義された略称、システムのタイムゾーンの略称を指定できます([m:Time.zone_offset] が解釈できる文字列)。
+            これら以外の文字列(`"Asia/Tokyo"` など)は解釈されず、`zone` を省略した場合と同じくローカル時刻として扱います。
+            `date` にタイムゾーンやオフセットが含まれている場合はそちらが優先されます。
+            省略した場合は nil です。
+#%end
 
 - **raise** `ArgumentError` -- dateに空文字列を与えた場合、発生します。
                      なお、1.9.2より前は例外は発生せず、現在時刻を表す
@@ -68,6 +80,18 @@ Time.xmlschema(date) rescue Time.parse(date)
 ```
 
 従って [m:Time.parse] の失敗はチェックすべきです。
+
+#%since 4.1
+
+```ruby title="zone を指定する例"
+require 'time'
+
+p Time.parse("2000-01-01 12:00:00", zone: "+09:00")        # => 2000-01-01 12:00:00 +0900
+p Time.parse("2000-01-01 12:00:00", zone: "UTC")           # => 2000-01-01 12:00:00 UTC
+p Time.parse("2000-01-01 12:00:00 +01:00", zone: "UTC")    # => 2000-01-01 12:00:00 +0100
+```
+
+#%end
 
 ### def Time.rfc2822(date) -> Time
 ### def Time.rfc822(date) -> Time
