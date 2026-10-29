@@ -23,8 +23,14 @@ RDoc 形式のドキュメントをエスケープシーケンスで太字やア
 
 ## Class Methods
 
+#%since 4.1
+### def RDoc::Markup::ToBs.new -> RDoc::Markup::ToBs
+#%else
 ### def RDoc::Markup::ToBs.new(markup = nil) -> RDoc::Markup::ToBs
+#%end
 
 自身を初期化します。
 
+#%until 4.1
 - **param** `markup` -- [c:RDoc::Markup] オブジェクトを指定します。省略した場合は新しく作成します。
+#%end

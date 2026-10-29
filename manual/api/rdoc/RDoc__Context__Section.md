@@ -21,7 +21,11 @@ section に関する情報を保持するクラスです。
 
 ## Class Methods
 
+#%since 4.1
+### def RDoc::Context::Section.new(parent, title, comment, store = nil) -> RDoc::Context::Section
+#%else
 ### def RDoc::Context::Section.new(parent, title, comment) -> RDoc::Context::Section
+#%end
 
 自身を初期化します。
 
@@ -31,6 +35,10 @@ section に関する情報を保持するクラスです。
 
 - **param** `comment` -- section のコメントを文字列で指定します。
 
+#%since 4.1
+- **param** `store` -- このオブジェクトが属する `RDoc::Store` オブジェクトを指定します。
+
+#%end
 また、section のシーケンス番号を新しく作成します。
 
 ## Instance Methods
