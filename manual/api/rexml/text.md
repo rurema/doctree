@@ -88,7 +88,11 @@ input を正規化(すべての entity をエスケープ)したものを返し�
 - **param** `doctype` -- DTD([c:REXML::DocType] オブジェクト)
 - **param** `entity_filter` -- 置換したい実体の名前の配列
 
+#%since 3.4
+### def REXML::Text.unnormalize(string, doctype = nil, filter = nil, illegal = nil, entity_expansion_text_limit: nil) -> String
+#%else
 ### def REXML::Text.unnormalize(string, doctype = nil, filter = nil, illegal = nil) -> String
+#%end
 
 string を非正規化(すべての entity をアンエスケープ)したものを返します。
 
@@ -98,6 +102,13 @@ filter でアンエスケープしない実体の実体名を文字列配列で�
 - **param** `doctype` -- DTD([c:REXML::DocType] オブジェクト)
 - **param** `filter` -- アンエスケープしない実体の実体名(文字列配列)
 - **param** `illegal` -- 内部用。使わないでください。
+#%since 3.4
+- **param** `entity_expansion_text_limit` -- 実体参照の展開による文字列の増分(バイト数)の上限。
+       nil を指定した場合(省略した場合)は [m:REXML::Security.entity_expansion_text_limit] の値を使います
+- **raise** `RuntimeError` -- 実体参照の展開による文字列の増分が `entity_expansion_text_limit` を越えた場合に発生します
+#%else
+- **raise** `RuntimeError` -- 実体参照の展開による文字列の増分が [m:REXML::Security.entity_expansion_text_limit] を越えた場合に発生します
+#%end
 
 ```ruby
 require 'rexml/text'
