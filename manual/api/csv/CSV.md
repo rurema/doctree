@@ -256,6 +256,11 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   prevent what are effectively DoS  attacks on the parser.  However, this
   limit can cause a legitimate parse to  fail and thus is set to +nil+, or off,
   by default.
+#%since 3.2
+  非推奨のオプションです。`:max_field_size` を指定しなかった場合、`:max_field_size` に `field_size_limit - 1` を指定したものとして扱います。
+- **`:max_field_size`**:
+  フィールドの最大の長さ(文字数)を指定します。これより長いフィールドがあると [c:CSV::MalformedCSVError] が発生します。デフォルトは nil(制限なし)です。
+#%end
 - **`:converters`**:
   [m:CSV::Converters] から取り出した名前の配列です。変換器が一つだけの場合は配列に格納する必要はありません。
   全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変換を試みます。エンコーディング変換に失敗した場合はフィールドは変換されません。
