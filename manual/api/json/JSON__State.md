@@ -71,6 +71,9 @@ JSON 形式の文字列を生成するための設定を保持しておくため
 #%end
 #%end
 #%since 4.0
+- **`:as_json`**:
+  `:strict` が真のときに、JSON にネイティブ対応していないオブジェクトを変換するための `Proc` を指定します。
+  詳しくは [m:JSON::State#as_json=] を参照してください。デフォルトは偽です。
 - **`:allow_duplicate_key`**:
   真を指定すると、キーを文字列に変換した結果が重複するハッシュ(`{foo: 1, "foo" => 2}` など)をそのまま出力します。
 #%since 4.1
@@ -638,7 +641,7 @@ name という名前のメソッドを呼び出し、その戻り値を返しま
 
 #%end
 #%version 4.0...4.1
-このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除されました。代わりの手段として JSON::Coder が挙げられています。
+このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除されました。代わりの手段として [c:JSON::Coder] が挙げられています。
 #%end
 
 #%until 4.1
@@ -648,7 +651,7 @@ name という名前のメソッドを呼び出し、その戻り値を返しま
 
 #%end
 #%version 4.0...4.1
-このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除されました。代わりの手段として JSON::Coder が挙げられています。
+このメソッドは非推奨です(json 2.16.0 から)。json 3.0.0 で削除されました。代わりの手段として [c:JSON::Coder] が挙げられています。
 #%end
 
 ### def generate(obj) -> String
@@ -657,17 +660,26 @@ name という名前のメソッドを呼び出し、その戻り値を返しま
 有効な JSON 形式の文字列を生成できない場合は、[c:JSON::GeneratorError] 例外が発生します。
 
 #%since 4.0
-### def as_json -> Proc | nil
+### def as_json -> Proc | false
 ### def as_json=(prc)
 
-`strict?` が真のとき、そのままでは JSON 形式の文字列に変換できないオブジェクトを
-変換するために使用する `Proc` を取得・設定します。
+`strict?` が真のとき、JSON にネイティブ対応していないオブジェクトを変換するために使用する `Proc` を取得・設定します。
+
+設定していなければ `as_json` は偽を返します。
 
 設定した `Proc` は、変換できないオブジェクトが現れるたびに、そのオブジェクトと、
-それがハッシュのキーとして使われているかどうかを表す真偽値の 2 引数で呼び出されます。
-`Proc` の返り値が、代わりに JSON 形式の文字列への変換に使われます。
+それがハッシュのキーとして使われているかどうかを表す真偽値の 2 引数で呼び出されます。`Proc` の返り値が、そのオブジェクトの代わりに変換されます。
+返り値の中にさらに変換できないオブジェクトが含まれていれば、それに対しても呼び出されます。[c:JSON::Fragment] を返すと、その内容がそのまま挿入されます。
+ハッシュのキーに対する返り値は [c:String] か [c:Symbol] でなければなりません。
+不正なエンコーディングの文字列に対しても呼び出されます。
+
+`strict?` が偽のときは使用されません。
 
 - **param** `prc` -- 変換できないオブジェクトを変換するための `Proc` を指定します。
+
+- **raise** `TypeError` -- `Proc` に変換できないオブジェクトを設定しようとした場合に発生します。
+
+- **raise** `JSON::GeneratorError` -- `Proc` の返り値が JSON にネイティブ対応していないオブジェクトだった場合に、JSON 形式の文字列を生成するときに発生します。
 
 ```ruby title="例"
 require "json"
@@ -675,9 +687,18 @@ require "json"
 state = JSON::State.new(strict: true, as_json: ->(obj, is_key) { obj.to_s })
 p state.as_json.class             # => Proc
 p JSON.generate([1, 2..3], state) # => "[1,\"2..3\"]"
+p JSON.generate({1 => 2}, state)  # => "{\"1\":2}"
+p JSON::State.new.as_json         # => false
 ```
 
-- **SEE** [m:JSON::State#strict]
+```ruby title="例 返り値はさらに変換される"
+require "json"
+
+JSON.generate([1..2], strict: true, as_json: ->(obj, is_key) { obj.to_a.map { |i| i * 10 } }) # => "[[10,20]]"
+JSON.generate([1..2], strict: true, as_json: ->(obj, is_key) { Object.new })                  # ~> Object not allowed in JSON (JSON::GeneratorError)
+```
+
+- **SEE** [m:JSON::State#strict=], [c:JSON::Coder]
 
 #%end
 
@@ -717,15 +738,29 @@ p JSON.generate(["a/b"], state) # => "[\"a\\/b\"]"
 ### def strict? -> bool
 ### def strict=(enable)
 
-JSON 形式で表現できない型のオブジェクトが現れたときの挙動を取得・設定します。
+JSON にネイティブ対応していない型のオブジェクトが現れたときの挙動を取得・設定します。
 
-偽の場合(デフォルト)、JSON 形式で表現できない型のオブジェクトは文字列に変換されて出力されます。
-真の場合、そのようなオブジェクトが現れると [c:JSON::GeneratorError] が発生します。
+偽の場合(デフォルト)、nil・true・false・[c:Integer]・[c:Float]・[c:String]・[c:Symbol]・[c:Array]・[c:Hash] 以外のオブジェクトは `to_json` メソッドを呼び出して変換します
+#%since 4.1
+([m:JSON::GeneratorMethods#to_json] は `to_s` の結果の文字列にします)。
+#%else
+([m:JSON::Ext::Generator::GeneratorMethods::Object#to_json] は `to_s` の結果の文字列にします)。
+#%end
+真の場合、そのようなオブジェクトが現れると [c:JSON::GeneratorError] が発生します(`to_json` メソッドを定義していても呼び出されません)。
 
-- **param** `enable` -- 真を指定すると、JSON 形式で表現できない型のオブジェクトが現れたときに
+#%since 4.0
+真の場合、[c:Symbol] は値としても許可されます。
+ハッシュのキーは [c:String] と [c:Symbol] 以外だと [c:JSON::GeneratorError] が発生します。
+[m:JSON::State#as_json=] で `Proc` を設定していれば、例外を発生させる代わりにそれで変換します。
+#%else
+真の場合、[c:Symbol] はハッシュのキーとしてのみ許可され、値に現れると [c:JSON::GeneratorError] が発生します。
+ハッシュのキーは `to_s` で文字列に変換します。
+#%end
+
+- **param** `enable` -- 真を指定すると、JSON にネイティブ対応していない型のオブジェクトが現れたときに
            例外を発生させるようになります。
 
-- **raise** `JSON::GeneratorError` -- `strict?` が真の状態で、JSON 形式で表現できない
+- **raise** `JSON::GeneratorError` -- `strict?` が真の状態で、JSON にネイティブ対応していない
            型のオブジェクトを変換しようとした場合に発生します。
 
 ```ruby title="例"
@@ -740,7 +775,17 @@ rescue JSON::GeneratorError => e
 end
 ```
 
-- **SEE** `JSON::State#as_json=`
+#%since 4.0
+
+```ruby title="例 ハッシュのキー"
+require "json"
+
+JSON.generate({1 => 2}, strict: true)                                        # ~> Integer not allowed as object key in JSON (JSON::GeneratorError)
+JSON.generate({1 => 2}, strict: true, as_json: ->(obj, is_key) { obj.to_s }) # => "{\"1\":2}"
+```
+
+- **SEE** [m:JSON::State#as_json=], [c:JSON::Coder]
+#%end
 
 #%end
 
@@ -785,7 +830,7 @@ JSON 形式の文字列を [rfc:8785] の JSON Canonicalization Scheme に従っ
   整数も [c:Float] に変換してから出力するため、丸められることがあります。
 - トークンの間に空白を入れません。
 
-`JSON::Fragment` の内容は、そのまま挿入されます。正規形にするのは呼び出し側の責任です。
+[c:JSON::Fragment] の内容は、そのまま挿入されます。正規形にするのは呼び出し側の責任です。
 
 キーの並べ替えはこの設定自体が行うため、`rfc8785?` が真でも [m:JSON::State#sort_keys] は偽のままです。
 
