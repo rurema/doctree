@@ -75,23 +75,36 @@ p ((1.0 / 3) / (2.0 / 3)).to_d     # => 0.5e0
 
 ## Instance Methods
 
-### def to_d(nFig)     -> BigDecimal
+#%since 4.0
+### def to_d(precision = 0) -> BigDecimal
+#%else
+### def to_d(precision) -> BigDecimal
+#%end
 
 自身を [c:BigDecimal] に変換します。
 
-nFig 桁まで計算を行います。
+`precision` 桁まで計算を行います。
+`precision` に 0 を指定した場合は桁数を自動的に決めます。
+#%since 4.0
+`precision` を省略した場合は 0 を指定したものとみなします。
+#%end
 
-- **param** `nFig` -- 計算を行う桁数
+- **param** `precision` -- 計算を行う桁数
 
 - **return** -- [c:BigDecimal] に変換したオブジェクト
 
-- **raise** `ArgumentError` -- nFig に 0 以下を指定した場合に発生します。
+- **raise** `ArgumentError` -- `precision` に負の数を指定した場合に発生します。
 
 ```ruby
 require "bigdecimal"
 require "bigdecimal/util"
 p (1/3r).to_d(3)  # => 0.333e0
 p (1/3r).to_d(10) # => 0.3333333333e0
+#%since 4.0
+p Rational(1, 3).to_d   # => 0.33333333333333333333333333333333e0
+p Rational(22, 7).to_d  # => 0.31428571428571428571428571428571e1
+p Rational(1, 4).to_d   # => 0.25e0
+#%end
 ```
 
 # reopen Integer
