@@ -18,8 +18,14 @@ RDoc 形式のドキュメントを ANSI エスケープシーケンスで色付
 
 ## Class Methods
 
+#%since 4.1
+### def RDoc::Markup::ToAnsi.new -> RDoc::Markup::ToAnsi
+#%else
 ### def RDoc::Markup::ToAnsi.new(markup = nil) -> RDoc::Markup::ToAnsi
+#%end
 
 自身を初期化します。
 
+#%until 4.1
 - **param** `markup` -- [c:RDoc::Markup] オブジェクトを指定します。省略した場合は新しく作成します。
+#%end
