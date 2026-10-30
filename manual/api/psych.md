@@ -389,8 +389,13 @@ end
 
 デフォルトで使われるパーサを返します。
 
-### def Psych.parse_stream(yaml) -> Psych::Nodes::Stream
-### def Psych.parse_stream(yaml){|node| ... } -> ()
+#%since 3.1
+### def Psych.parse_stream(yaml, filename: nil) -> Psych::Nodes::Stream
+### def Psych.parse_stream(yaml, filename: nil){|node| ... } -> ()
+#%else
+### def Psych.parse_stream(yaml, filename = nil) -> Psych::Nodes::Stream
+### def Psych.parse_stream(yaml, filename = nil){|node| ... } -> ()
+#%end
 
 YAML ドキュメントをパースします。
 `yaml` が 複数の YAML ドキュメントを含む場合を取り扱うことができます。
@@ -400,6 +405,15 @@ YAML ドキュメントをパースします。
 ブロック付きの場合は、そのブロックに最初の YAML ドキュメントの [c:Psych::Nodes::Document] オブジェクトが渡されます。
 この場合の返り値には意味がありません。
 
+`filename` はパース中に発生した例外のメッセージに用います。
+
+#%until 3.1
+`filename` はキーワード引数 `filename:` でも指定できます。位置引数で指定した場合は、`$VERBOSE` が真のときに非推奨である旨の警告が出ます。
+
+#%end
+- **param** `yaml` -- YAML ドキュメント(文字列 or [c:IO] オブジェクト)
+- **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列。
+- **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
 - **SEE** [c:Psych::Nodes]
 
 ```ruby title="例"
@@ -459,8 +473,13 @@ Ruby のオブジェクト `o` を JSON の文字列に変換します。
 
 - **param** `o` -- 変換対象となるオブジェクト
 
-### def Psych.load_stream(yaml, filename=nil) -> [object]
-### def Psych.load_stream(yaml, filename=nil){|obj| ... } -> ()
+#%since 3.1
+### def Psych.load_stream(yaml, filename: nil, fallback: [], **kwargs) -> [object]
+### def Psych.load_stream(yaml, filename: nil, fallback: [], **kwargs){|obj| ... } -> ()
+#%else
+### def Psych.load_stream(yaml, filename = nil, fallback: [], **kwargs) -> [object]
+### def Psych.load_stream(yaml, filename = nil, fallback: [], **kwargs){|obj| ... } -> ()
+#%end
 
 複数の YAML ドキュメントを含むデータを
 Ruby のオブジェクトに変換します。
@@ -485,10 +504,26 @@ end
 p list # => ['foo', 'bar']
 ```
 
+ブロックなしの場合に `yaml` がドキュメントを 1 つも含まないときは、`fallback` を返します。
+
+```ruby title="fallback の例"
+require 'psych'
+
+p Psych.load_stream("", fallback: [:none]) # => [:none]
+```
+
 `filename` はパース中に発生した例外のメッセージに用います。
+
+#%until 3.1
+`filename` はキーワード引数 `filename:` でも指定できます。位置引数で指定した場合は、`$VERBOSE` が真のときに非推奨である旨の警告が出ます。
+
+#%end
+その他のキーワード引数 `kwargs` は、各ドキュメントを変換する [m:Psych::Nodes::Node#to_ruby] にそのまま渡します。
 
 - **param** `yaml` -- YAML ドキュメント(文字列 or [c:IO] オブジェクト)
 - **param** `filename` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列。
+- **param** `fallback` -- ブロックなしの場合に、`yaml` がドキュメントを 1 つも含まないときの返り値を指定します。デフォルトは `[]` です。
+- **param** `kwargs` -- [m:Psych::Nodes::Node#to_ruby] に渡すキーワード引数(`symbolize_names` や `freeze` など)を指定します。
 - **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
 
 ### def Psych.load_file(filename) -> object

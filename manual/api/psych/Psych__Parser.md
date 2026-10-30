@@ -79,9 +79,16 @@ handler で YAML のイベントを処理するハンドラを指定します。
 ## Instance Methods
 
 ### def parse(yaml) -> self
+### def parse(yaml, path) -> self
 
 YAML ドキュメントをパースし、イベントハンドラにイベントを逐次通知します。
 
+`path` はパース中に発生した例外 [c:Psych::SyntaxError] のメッセージと [m:Psych::SyntaxError#file] に用います。
+省略した場合は、`yaml` が `path` メソッドを持つ([c:File] オブジェクトなど)ときはその値を、そうでなければ `"<unknown>"` を用います。
+
+- **param** `yaml` -- YAML ドキュメント(文字列 or [c:IO] オブジェクト)
+- **param** `path` -- [c:Psych::SyntaxError] 発生時にファイル名として表示する文字列
+- **raise** `Psych::SyntaxError` -- YAMLドキュメントに文法エラーが発見されたときに発生します
 - **SEE** [m:Psych::Parser.new], [c:Psych::Handler], [m:Psych::Parser#handler]
 
 ### def mark -> Psych::Parser::Mark
