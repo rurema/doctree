@@ -1196,21 +1196,63 @@ Find.find(self.to_s) {|f| yield Pathname.new(f)}
 
 - **SEE** [m:Find?.find]
 
+#%since 3.4
+### def mkpath(mode: nil) -> self
+#%end
+#%version 3.1...3.4
+### def mkpath(mode: nil) -> nil
+#%end
+#%until 3.1
 ### def mkpath -> nil
+#%end
 
 FileUtils.mkpath(self.to_s) と同じです。
 
+#%since 3.4
+`self` を返します。
+
+#%end
 #%#noexample FileUtils.#mkpath の例を参照
 
+#%since 3.1
+- **param** `mode` -- 作成するディレクトリのパーミッションを8進数で指定します。[m:FileUtils?.mkpath] の `mode` と同じです。
+
+#%end
 - **SEE** [m:FileUtils?.mkpath]
 
+#%since 3.4
+### def rmtree(noop: nil, verbose: nil, secure: nil) -> self
+#%end
+#%version 3.2...3.4
+### def rmtree(noop: nil, verbose: nil, secure: nil) -> nil
+#%end
+#%until 3.2
 ### def rmtree -> nil
+#%end
 
+#%since 3.2
+`FileUtils.rm_rf(self.to_s, noop: noop, verbose: verbose, secure: secure)` と同じです。
+#%else
 FileUtils.rm_r(self.to_s) と同じです。
+#%end
 
+#%since 3.4
+`self` を返します。
+
+#%end
 #%#noexample FileUtils.#rmtree の例を参照
 
+#%since 3.2
+- **param** `noop` -- 真を指定すると実際の処理は行いません。
+
+- **param** `verbose` -- 真を指定すると詳細を出力します。
+
+- **param** `secure` -- 真を指定するとファイルの削除に [m:FileUtils?.remove_entry_secure] を使用します。
+
+- **SEE** [m:FileUtils?.rm_rf]
+#%else
 - **SEE** [m:FileUtils?.rm_r]
+#%end
 
 ### def unlink -> Integer
 ### def delete -> Integer
