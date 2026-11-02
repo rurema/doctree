@@ -9,7 +9,11 @@ SMTP のセッションを表現したクラスです。
 
 ## Singleton Methods
 
+#%since 3.1
+### def Net::SMTP.new(address, port = Net::SMTP.default_port, tls: false, starttls: :auto, tls_verify: true, tls_hostname: nil, ssl_context_params: nil) -> Net::SMTP
+#%else
 ### def Net::SMTP.new(address, port = Net::SMTP.default_port) -> Net::SMTP
+#%end
 
 新しい SMTP オブジェクトを生成します。
 address はSMTPサーバーのFQDNで、
@@ -22,11 +26,23 @@ port は接続するポート番号です。
 
 - **param** `address` -- 接続先のSMTPサーバの文字列
 - **param** `port` -- 接続ポート番号
+#%since 3.1
+- **param** `tls` -- 真を指定すると、接続した時点から TLS を使います(SMTPS)。デフォルトは false です
+- **param** `starttls` -- STARTTLS を使うかどうかを指定します。`:always` なら常に使い、`:auto` ならサーバが STARTTLS をサポートしている場合に使い、false なら使いません。デフォルトは `:auto` です
+- **param** `tls_verify` -- 真を指定すると、サーバー証明書を検証します。デフォルトは true です
+- **param** `tls_hostname` -- サーバー証明書の検証と SNI に使うホスト名を指定します。nil なら `address` を使います
+- **param** `ssl_context_params` -- [m:OpenSSL::SSL::SSLContext#set_params] に渡す追加のパラメータを [c:Hash] で指定します。`:verify_mode` を含む場合は `tls_verify` よりそちらが優先されます
+#%end
 
 - **SEE** [m:Net::SMTP.start], [m:Net::SMTP#start]
 
+#%since 3.1
+### def Net::SMTP.start(address, port = Net::SMTP.default_port, tls: false, starttls: :auto, tls_verify: true, tls_hostname: nil, ssl_context_params: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
+### def Net::SMTP.start(address, port = Net::SMTP.default_port, tls: false, starttls: :auto, tls_verify: true, tls_hostname: nil, ssl_context_params: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) {|smtp| ... } -> object
+#%else
 ### def Net::SMTP.start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def Net::SMTP.start(address, port = Net::SMTP.default_port, tls_verify: true, tls_hostname: nil, helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) {|smtp| ... } -> object
+#%end
 ### def Net::SMTP.start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def Net::SMTP.start(address, port = Net::SMTP.default_port, helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
 
@@ -56,8 +72,15 @@ Net::SMTP.start('smtp.example.com') {|smtp|
 
 - **param** `address` -- 接続するサーバをホスト名もしくはIPアドレスで指定します
 - **param** `port` -- ポート番号、デフォルトは 25 です
+#%since 3.1
+- **param** `tls` -- 真を指定すると、接続した時点から TLS を使います(SMTPS)
+- **param** `starttls` -- STARTTLS を使うかどうか(`:always`, `:auto`, false のいずれか)。[m:Net::SMTP.new] を参照してください
+#%end
 - **param** `tls_verify` -- サーバー証明書を検証するか否か
 - **param** `tls_hostname` -- サーバー証明書のホスト名
+#%since 3.1
+- **param** `ssl_context_params` -- [m:OpenSSL::SSL::SSLContext#set_params] に渡す追加のパラメータの [c:Hash]
+#%end
 - **param** `helo` -- HELO で名乗るドメイン名です
 - **param** `user` -- 認証で使うアカウント名
 - **param** `password` -- 認証で使うパスワード
@@ -79,9 +102,19 @@ SMTPのデフォルトのポート番号(25)を返します。
 
 デフォルトのサブミッションポート番号(587)を返します。
 
-### def Net::SMTP.default_ssl_context -> OpenSSL::SSL::SSLContext
+#%since 3.1
+### def Net::SMTP.default_ssl_context(ssl_context_params = nil) -> OpenSSL::SSL::SSLContext
+#%else
+### def Net::SMTP.default_ssl_context(verify_peer = true) -> OpenSSL::SSL::SSLContext
+#%end
 
 SSL 通信に使われる SSL のコンテキストのデフォルト値を返します。
+
+#%since 3.1
+- **param** `ssl_context_params` -- [m:OpenSSL::SSL::SSLContext#set_params] に渡すパラメータを [c:Hash] で指定します。nil なら空の [c:Hash] を渡します
+#%else
+- **param** `verify_peer` -- 真ならサーバー証明書を検証する(`OpenSSL::SSL::VERIFY_PEER`)コンテキストを、偽なら検証しない(`OpenSSL::SSL::VERIFY_NONE`)コンテキストを返します
+#%end
 
 ### def Net::SMTP.default_tls_port -> Integer
 ### def Net::SMTP.default_ssl_port -> Integer
@@ -219,8 +252,13 @@ ESMTPモードで [m:Net::SMTP#start] を呼び、うまくいかなかった場
 
 - **param** `f` -- デバッグ出力先を [c:IO] (もしくは << というメソッドを持つクラス)で指定します
 
+#%since 3.1
 ### def start(helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE) {|smtp| ... } -> object
+#%else
+### def start(helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE, tls_verify: true, tls_hostname: nil) -> Net::SMTP
+### def start(helo: 'localhost', user: nil, password: nil, authtype: DEFAULT_AUTH_TYPE, tls_verify: true, tls_hostname: nil) {|smtp| ... } -> object
+#%end
 ### def start(helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) -> Net::SMTP
 ### def start(helo = 'localhost', user = nil, password = nil, authtype = DEFAULT_AUTH_TYPE) {|smtp| .... } -> object
 
@@ -240,6 +278,10 @@ authtype は使用する認証のタイプで、シンボルで :plain, :login, 
 - **param** `user` -- 認証で使うアカウント名
 - **param** `password` -- 認証で使うパスワード
 - **param** `authtype` -- 認証の種類(:plain, :login, :cram_md5 のいずれか)
+#%until 3.1
+- **param** `tls_verify` -- サーバー証明書を検証するか否か
+- **param** `tls_hostname` -- サーバー証明書のホスト名
+#%end
 
 - **raise** `IOError` -- すでにセッションを開始している場合に発生します
 - **raise** `TimeoutError` -- 接続がタイムアウトした場合に発生します
