@@ -33,13 +33,13 @@ section に関する情報を保持するクラスです。
 
 - **param** `title` -- section のタイトルを文字列で指定します。
 
-- **param** `comment` -- section のコメントを文字列で指定します。
+- **param** `comment` -- section のコメントを `RDoc::Comment` オブジェクト(またはその配列)で指定します。nil も指定できます。
 
 #%since 4.1
 - **param** `store` -- このオブジェクトが属する `RDoc::Store` オブジェクトを指定します。
 
 #%end
-また、section のシーケンス番号を新しく作成します。
+- **raise** `TypeError` -- `comment` に文字列など受け付けない型のオブジェクトを指定した場合に発生します。
 
 ## Instance Methods
 
@@ -55,7 +55,7 @@ section のコメントを返します。
 ### def eql?(other) -> bool
 {: since=""}
 
-自身と other のシーケンス番号を比較した結果を返します。
+`other` が [c:RDoc::Context::Section] オブジェクトで、タイトルが自身と同じ場合に真を返します。
 
 - **param** `other` -- [c:RDoc::Context::Section] オブジェクトを指定します。
 
