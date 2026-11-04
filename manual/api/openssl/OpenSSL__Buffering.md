@@ -41,16 +41,26 @@ sysclose といった [c:OpenSSL::SSL::SSLSocket] が提供するメソッドを
 
 #%since 4.1
 ### def each(eol = $/, limit = nil, chomp: false){|line| ... } -> ()
+### def each(eol = $/, limit = nil, chomp: false) -> Enumerator
 ### def each_line(eol = $/, limit = nil, chomp: false){|line| ... } -> ()
+### def each_line(eol = $/, limit = nil, chomp: false) -> Enumerator
 #%else
 ### def each(eol=$/){|line| ... } -> ()
 ### def each_line(eol=$/){|line| ... } -> ()
 #%end
 
 現在の読み込み位置から1行ずつ文字列として読み込み、それを引数としてブロックを呼び出します。
+#%since 4.1
+ブロックを省略した場合は [c:Enumerator] を返します。
+#%end
 
+#%since 4.1
+[m:IO#each] と同様に、`eol` に nil を渡すと残りすべてを 1 行として読み込み、`""` を渡すと空行を区切りとして(パラグラフモード)読み込みます。
+`eol` を省略して `limit` だけを渡すこともできます。
+#%else
 [m:IO#each] と同様ですが、区切り文字列に
 "" を渡した場合や、nil を渡したときの意味が異なり、これらの場合は正しく動作しません。
+#%end
 
 - **param** `eol` -- 行区切り文字列/正規表現
 #%since 4.1
@@ -103,8 +113,13 @@ eol に到達するまで読み込みます。
 
 読み込みが終端に到達した場合は nil を返します。
 
+#%since 4.1
+[m:IO#gets] と同様に、`eol` に nil を渡すと残りすべてを 1 行として読み込み、`""` を渡すと空行を区切りとして(パラグラフモード)読み込みます。
+`eol` を省略して `limit` だけを渡すこともできます。
+#%else
 [m:IO#gets] と同様ですが、区切り文字列に
 "" を渡した場合や、nil を渡したときの意味が異なり、これらの場合は正しく動作しません。
+#%end
 
 - **param** `eol` -- 行区切り文字列/正規表現
 - **param** `limit` -- 最大の読み込みバイト数
@@ -179,8 +194,13 @@ bufに文字列を渡した場合はその領域が出力用のバッファと�
 
 行区切りは eol で指定した文字列/正規表現になります。
 
+#%since 4.1
+[m:IO#readlines] と同様に、`eol` に nil を渡すと残りすべてを 1 つの要素とし、`""` を渡すと空行を区切りとして(パラグラフモード)各行に分けます。
+`eol` を省略して `limit` だけを渡すこともできます。
+#%else
 [m:IO#readlines] と同様ですが、区切り文字列に
 "" を渡した場合や、nil を渡したときの意味が異なり、これらの場合は正しく動作しません。
+#%end
 
 - **param** `eol` -- 行区切り文字列/正規表現
 #%since 4.1
@@ -220,8 +240,13 @@ str を出力します。
 
 読み込みが終端に到達した場合は例外 EOFError を発生します。
 
+#%since 4.1
+[m:IO#readline] と同様に、`eol` に nil を渡すと残りすべてを 1 行として読み込み、`""` を渡すと空行を区切りとして(パラグラフモード)読み込みます。
+`eol` を省略して `limit` だけを渡すこともできます。
+#%else
 [m:IO#readline] と同様ですが、区切り文字列に
 "" を渡した場合や、nil を渡したときの意味が異なり、これらの場合は正しく動作しません。
+#%end
 
 - **param** `eol` -- 行区切り文字列/正規表現
 #%since 4.1
