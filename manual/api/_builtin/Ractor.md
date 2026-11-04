@@ -14,6 +14,9 @@ Ruby 4.1 から、クラスやモジュールを変更できるのは、それ�
 
 また、Ruby 4.1 から、デフォルトの GC は Ractor ごとに動作します。各 Ractor は自分のヒープを自分のスレッドで、他の Ractor を止めずに回収します。
 全 Ractor を止めるグローバル GC は、明示的な [m:GC.start]、共有可能オブジェクトの増加、終了した Ractor のヒープの回収のときだけ行われます。詳しくは [c:GC] を参照してください。
+
+また、Ruby 4.1 から、[m:Ractor.new] のブロックは [m:Ractor.shareable_proc] と同じ規則で隔離されます。
+再代入されない外側のローカル変数を通して shareable なオブジェクトを参照できます。[feature:22444]
 #%end
 
 ## Class Methods
@@ -23,10 +26,54 @@ Ruby 4.1 から、クラスやモジュールを変更できるのは、それ�
 Ractor を生成して、ブロックの評価を開始します。
 生成した Ractor を返します。
 
+ブロックは外側のスコープから隔離されます。ブロックの中の `self` は生成した Ractor です。
+#%since 4.1
+隔離の規則は [m:Ractor.shareable_proc] と同じです。
+ブロックは、外側のローカル変数のうち、再代入されず、かつ shareable なオブジェクトを参照しているものだけを読めます。
+再代入されるローカル変数は、再代入がブロックより後にあっても参照できません。
+外側のローカル変数への代入、shareable でないオブジェクトを参照している外側のローカル変数の参照、`yield` があると [c:Ractor::IsolationError] が発生します。
+隔離はブロックの複製に対して行われるので、`&` で渡した [c:Proc] 自体は変更されません。
+#%else
+ブロックは外側のローカル変数を参照できません。
+外側のオブジェクトをブロックで使うには `args` で渡します。
+また、`&` で渡した [c:Proc] は隔離のために変更され、shareable になります。
+#%end
+
 - **param** `args` -- ブロックの引数として渡されます。
             値が shareable である場合はそのインスタンスが、そうでない場合はコピーが試みられた値が渡されます。
             コピーできない値であった場合は例外が発生します。
 - **param** `name` -- Ractor の名前を指定します。
+#%since 4.1
+- **raise** `Ractor::IsolationError` -- ブロックが外側のローカル変数に代入している場合、再代入される外側のローカル変数や shareable でないオブジェクトを参照している外側のローカル変数を参照している場合、`yield` を使っている場合に発生します。
+#%else
+- **raise** `ArgumentError` -- ブロックが外側のローカル変数を参照している場合や、`yield` を使っている場合に発生します。
+#%end
+
+```ruby title="例: 外側のローカル変数の参照"
+a = 1
+#%since 4.1
+p Ractor.new { a }.value # => 1
+
+b = []
+Ractor.new { b } # ~> Ractor::IsolationError
+
+c = 1
+Ractor.new { c } # ~> Ractor::IsolationError
+c = 2
+#%else
+Ractor.new { a } # ~> ArgumentError
+#%end
+```
+
+```ruby title="例: 外側のオブジェクトを引数で渡す"
+a = [1, 2]
+r = Ractor.new(a) {|x| x.sum }
+#%since 4.0
+p r.value # => 3
+#%else
+p r.take # => 3
+#%end
+```
 
 #%since 3.4
 ### def Ractor.[](sym) -> object | nil
