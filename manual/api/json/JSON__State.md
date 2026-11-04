@@ -273,7 +273,15 @@ s = JSON.state.new
 begin
   JSON.generate(a, s)
 rescue JSON::NestingError => e
+#%since 4.1
+  [e, s.max_nesting, s.check_circular?] # => [#<JSON::NestingError: nesting of 101 is too deep. Did you try to serialize objects with circular references?>, 100, true]
+#%end
+#%version 4.0...4.1
+  [e, s.max_nesting, s.check_circular?] # => [#<JSON::NestingError: nesting of 100 is too deep. Did you try to serialize objects with circular references?>, 100, true]
+#%end
+#%until 4.0
   [e, s.max_nesting, s.check_circular?] # => [#<JSON::NestingError: nesting of 100 is too deep>, 100, true]
+#%end
 end
 ```
 
