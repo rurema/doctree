@@ -32,13 +32,42 @@ NIS はサポートされていません。
 順に問合せる過程で、あるリゾルバが1個以上の結果を返した場合、それ以降のリゾルバには問い合わせをしません。
 
 ## Class Methods
+#%since 3.3
+### def Resolv.new(resolvers = nil, use_ipv6: nil) -> Resolv
+#%else
 ### def Resolv.new(resolvers = [Hosts.new, DNS.new]) -> Resolv
+#%end
 
 resolvers に与えたリゾルバの配列を先頭から順に名前解決を試すような、新しいリゾルバオブジェクトを返します。
 
 resolvers の各要素は each_address と each_name というメソッドを持っていなければなりません。
 
+#%since 3.4
+`resolvers` が nil もしくは [c:Hash] の場合は、[c:Resolv::Hosts] と [c:Resolv::DNS] のリゾルバをこの順に使います。
+[c:Hash] の場合は、システムの既定の DNS の設定にその内容をマージしたものを DNS のリゾルバの設定に使います(指定できるキーは [m:Resolv::DNS.new] を参照してください)。
+
+`use_ipv6` の値は無視されます。
+DNS のリゾルバで IPv6 のアドレス(AAAA レコード)も引くかどうかは、`resolvers` に `{use_ipv6: false}` のような [c:Hash] を渡して指定します。
+`:use_ipv6` が true なら A レコードと AAAA レコードを、false なら A レコードだけを引きます。
+指定しないか nil の場合は、ループバックアドレスとリンクローカルアドレス以外の IPv6 のアドレスがこのホストにあるときだけ AAAA レコードも引きます。
+`resolvers` と `use_ipv6` を両方指定すると、非推奨である旨の警告が出ます。
+
+- **param** `resolvers` -- リゾルバの配列もしくは DNS のリゾルバの設定の [c:Hash]
+- **param** `use_ipv6` -- 無視されます
+#%end
+#%version 3.3...3.4
+`resolvers` が nil の場合は、[c:Resolv::Hosts] と [c:Resolv::DNS] のリゾルバをこの順に使います。
+
+`use_ipv6` は `resolvers` が nil の場合だけ使われ、DNS のリゾルバが IPv6 のアドレス(AAAA レコード)も引くかどうかを指定します。
+true なら A レコードと AAAA レコードを、false なら A レコードだけを引きます。
+nil の場合は、ループバックアドレスとリンクローカルアドレス以外の IPv6 のアドレスがこのホストにあるときだけ AAAA レコードも引きます。
+
 - **param** `resolvers` -- リゾルバの配列
+- **param** `use_ipv6` -- DNS のリゾルバで AAAA レコードを引くかどうか
+#%end
+#%until 3.3
+- **param** `resolvers` -- リゾルバの配列
+#%end
 
 ### def Resolv.getaddress(name) -> String
 
