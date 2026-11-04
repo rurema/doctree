@@ -1077,25 +1077,25 @@ p csv.encoding # => #<Encoding:UTF-8>
 ```ruby title="例"
 require "csv"
 
-csv = CSV.new(DATA)
+text = <<~CSV
+  "a","b"
+  "
+  2
+  2
+  ",""
+CSV
+
+csv = CSV.new(text)
 p csv.field_size_limit # => nil
 p csv.read # => [["a", "b"], ["\n2\n2\n", ""]]
 
-DATA.rewind
-csv = CSV.new(DATA, field_size_limit: 4)
+csv = CSV.new(text, field_size_limit: 4)
 p csv.field_size_limit # => 4
 #%since 3.2
 csv.read # ~> CSV::MalformedCSVError: Field size exceeded: 5 > 3 in line 2.
 #%else
 csv.read # ~> CSV::MalformedCSVError: Field size exceeded in line 2.
 #%end
-
-__END__
-"a","b"
-"
-2
-2
-",""
 ```
 
 - **SEE** [m:CSV.new]
