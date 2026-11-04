@@ -402,7 +402,7 @@ YAML ドキュメントをパースします。
 
 ブロックなしの場合は YAML の AST (すべての YAML ドキュメントを保持した [c:Psych::Nodes::Stream] オブジェクト)を返します。
 
-ブロック付きの場合は、そのブロックに最初の YAML ドキュメントの [c:Psych::Nodes::Document] オブジェクトが渡されます。
+ブロック付きの場合は、パースした各 YAML ドキュメントの [c:Psych::Nodes::Document] オブジェクトが順にブロックに渡されます。
 この場合の返り値には意味がありません。
 
 `filename` はパース中に発生した例外のメッセージに用います。
@@ -420,6 +420,16 @@ YAML ドキュメントをパースします。
 require 'psych'
 
 p Psych.parse_stream("---\n - a\n - b") # => #<Psych::Nodes::Stream:0x00>
+```
+
+```ruby title="例 ブロック付き"
+require 'psych'
+
+Psych.parse_stream("--- a\n--- b\n") do |doc|
+  p doc.children.first.value
+end
+# => "a"
+#    "b"
 ```
 
 ### def Psych.dump(o, options = {}) -> String
@@ -748,6 +758,7 @@ YAML の文法エラーを表すクラスです。
 [m:Psych.load_file] で指定したファイルの名前や
 [m:Psych.load] などの引数 `filename` で指定した名前が返されます。
 パース時にファイル名を指定しなかった場合は nil が返されます。
+ただし、[m:Psych::Parser#parse] を直接呼び出してファイル名を省略した場合は `"<unknown>"` が返されます。
 
 ### def line -> Integer
 
