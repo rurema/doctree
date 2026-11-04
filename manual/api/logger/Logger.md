@@ -10,13 +10,13 @@ include:
 ## Class Methods
 
 #%since 4.0
-### def Logger.new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: Formatter.new, datetime_format: nil, binmode: false, shift_period_suffix: '%Y%m%d', reraise_write_errors: [], skip_header: false) -> Logger
+### def Logger.new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: nil, datetime_format: nil, binmode: false, shift_period_suffix: '%Y%m%d', reraise_write_errors: [], skip_header: false) -> Logger
 #%end
 #%version 3.4...4.0
-### def Logger.new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: Formatter.new, datetime_format: nil, binmode: false, shift_period_suffix: '%Y%m%d', reraise_write_errors: []) -> Logger
+### def Logger.new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: nil, datetime_format: nil, binmode: false, shift_period_suffix: '%Y%m%d', reraise_write_errors: []) -> Logger
 #%end
 #%until 3.4
-### def Logger.new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: Formatter.new, datetime_format: nil, binmode: false, shift_period_suffix: '%Y%m%d') -> Logger
+### def Logger.new(logdev, shift_age = 0, shift_size = 1048576, level: Logger::Severity::DEBUG, progname: nil, formatter: nil, datetime_format: nil, binmode: false, shift_period_suffix: '%Y%m%d') -> Logger
 #%end
 
 Logger オブジェクトを生成します。
@@ -36,7 +36,7 @@ Logger オブジェクトを生成します。
 - **param** `progname` -- ログに記録する時のプログラム名を指定します。省略した場合は nil です。
 
 - **param** `formatter` -- ログに記録する時のログのフォーマッタを指定します。
-                 省略した場合は [c:Logger::Formatter] インスタンスです。
+                 省略した場合や nil を指定した場合は [c:Logger::Formatter] のインスタンスが使われます。
 
 - **param** `datetime_format` -- ログに記録する時の日時のフォーマットを指定します。
                        省略した場合は '%Y-%m-%d %H:%M:%S' です。
