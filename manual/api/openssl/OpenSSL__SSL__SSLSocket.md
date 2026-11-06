@@ -145,21 +145,49 @@ OpenSSL内部のバッファが保持している、直ちに読み取り可能�
 
 ハンドシェイク開始前には nil を返します。
 
+#%since 4.1
+### def accept(timeout: self.timeout) -> self
+#%else
 ### def accept -> self
+#%end
 
 TLS/SSL 通信をサーバモードとして開始し、クライアントからのハンドシェイク開始を待ち、クライアントとのハンドシェイクを実行します。
 
+#%since 4.1
+`timeout` 秒以内にハンドシェイクが完了しない場合は例外 [c:IO::TimeoutError] が発生します。
+`timeout` を省略した場合はラップされているソケットのタイムアウト
+([m:OpenSSL::SSL::SocketForwarder#timeout])を使います。
+
+- **param** `timeout` -- ハンドシェイクのタイムアウトの秒数。nil を指定するとタイムアウトしません
+#%end
 - **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
        場合に発生します
+#%since 4.1
+- **raise** `IO::TimeoutError` -- `timeout` 秒以内にハンドシェイクが完了しなかった場合に発生します
+#%end
 - **SEE** [m:OpenSSL::SSL::SSLSocket#connect],
      [m:OpenSSL::SSL::SSLSocket#accept_nonblock]
 
+#%since 4.1
+### def connect(timeout: self.timeout) -> self
+#%else
 ### def connect -> self
+#%end
 
 TLS/SSl 通信をクライアントモードとして開始し、サーバとのハンドシェイクを実行します。
 
+#%since 4.1
+`timeout` 秒以内にハンドシェイクが完了しない場合は例外 [c:IO::TimeoutError] が発生します。
+`timeout` を省略した場合はラップされているソケットのタイムアウト
+([m:OpenSSL::SSL::SocketForwarder#timeout])を使います。
+
+- **param** `timeout` -- ハンドシェイクのタイムアウトの秒数。nil を指定するとタイムアウトしません
+#%end
 - **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
        場合に発生します
+#%since 4.1
+- **raise** `IO::TimeoutError` -- `timeout` 秒以内にハンドシェイクが完了しなかった場合に発生します
+#%end
 - **SEE** [m:OpenSSL::SSL::SSLSocket#accept],
      [m:OpenSSL::SSL::SSLSocket#connect_nonblock]
 
@@ -217,13 +245,16 @@ bufに文字列を指定するとその文字列のメモリ領域にデータ�
 - **param** `string` -- 書き込むデータ文字列
 - **raise** `OpenSSL::SSL::SSLError` -- 書き込みに失敗した場合に発生します
 
-### def accept_nonblock -> self
+### def accept_nonblock(exception: true) -> self | :wait_readable | :wait_writable
 
 ノンブロッキング方式で
 TLS/SSL 通信をサーバモードとして開始し、クライアントとのハンドシェイクを実行します。
 
 IO が読み込み待ち、もしくは書き込み待ちになった場合は例外を発生させ、ハンドシェイクを中断します。IO が読み込み/書き込み可能状態になってからこのメソッドをもう一度呼ぶとハンドシェイクを再開します。
 
+`exception` に false を指定すると、読み込み待ち・書き込み待ちになった場合に例外を発生させる代わりに、それぞれシンボル `:wait_readable`・`:wait_writable` を返します。
+
+- **param** `exception` -- false を指定すると、読み込み待ち・書き込み待ちの場合に例外ではなくシンボルを返します
 - **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
        場合に発生します
        (実際は [c:OpenSSL::SSL::SSLError] をこのモジュールで extend した例外オブジェクトが生成されます)
@@ -232,13 +263,16 @@ IO が読み込み待ち、もしくは書き込み待ちになった場合は�
 - **SEE** [m:OpenSSL::SSL::SSLSocket#connect_nonblock],
      [m:OpenSSL::SSL::SSLSocket#accept]
 
-### def connect_nonblock -> self
+### def connect_nonblock(exception: true) -> self | :wait_readable | :wait_writable
 
 ノンブロッキング方式で
 TLS/SSL 通信をクライアントモードとして開始し、サーバとのハンドシェイクを実行します。
 
 IO が読み込み待ち、もしくは書き込み待ちになった場合は例外を発生させ、ハンドシェイクを中断します。IO が読み込み/書き込み可能状態になってからこのメソッドをもう一度呼ぶとハンドシェイクを再開します。
 
+`exception` に false を指定すると、読み込み待ち・書き込み待ちになった場合に例外を発生させる代わりに、それぞれシンボル `:wait_readable`・`:wait_writable` を返します。
+
+- **param** `exception` -- false を指定すると、読み込み待ち・書き込み待ちの場合に例外ではなくシンボルを返します
 - **raise** `OpenSSL::SSL::SSLError` -- ハンドシェイクに失敗した(VERIFY_PEER で証明書の検証に失敗した場合や、プロトコル合意に失敗したなど)
        場合に発生します
 - **raise** `OpenSSL::SSL::SSLError` -- ソケットが読み込み/書き込み可能状態になるのを待つ必要がある場合に発生します。

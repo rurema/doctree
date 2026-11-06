@@ -39,15 +39,34 @@ sysclose といった [c:OpenSSL::SSL::SSLSocket] が提供するメソッドを
 
 [m:OpenSSL::Buffering#flush] を呼んでから閉じます。
 
+#%since 4.1
+### def each(eol = $/, limit = nil, chomp: false){|line| ... } -> ()
+### def each(eol = $/, limit = nil, chomp: false) -> Enumerator
+### def each_line(eol = $/, limit = nil, chomp: false){|line| ... } -> ()
+### def each_line(eol = $/, limit = nil, chomp: false) -> Enumerator
+#%else
 ### def each(eol=$/){|line| ... } -> ()
 ### def each_line(eol=$/){|line| ... } -> ()
+#%end
 
 現在の読み込み位置から1行ずつ文字列として読み込み、それを引数としてブロックを呼び出します。
+#%since 4.1
+ブロックを省略した場合は [c:Enumerator] を返します。
+#%end
 
+#%since 4.1
+[m:IO#each] と同様に、`eol` に nil を渡すと残りすべてを 1 行として読み込み、`""` を渡すと空行を区切りとして(パラグラフモード)読み込みます。
+`eol` を省略して `limit` だけを渡すこともできます。
+#%else
 [m:IO#each] と同様ですが、区切り文字列に
 "" を渡した場合や、nil を渡したときの意味が異なり、これらの場合は正しく動作しません。
+#%end
 
 - **param** `eol` -- 行区切り文字列/正規表現
+#%since 4.1
+- **param** `limit` -- 1 行の最大の読み込みバイト数
+- **param** `chomp` -- 真を指定すると各行の末尾の行区切り文字列を取り除きます
+#%end
 
 ### def each_byte{|ch| ... } -> ()
 
@@ -79,7 +98,11 @@ sysclose といった [c:OpenSSL::SSL::SSLSocket] が提供するメソッドを
 
 [m:IO#getc] と同様です。
 
+#%since 3.4
+### def gets(eol=$/, limit=nil, chomp: false) -> String | nil
+#%else
 ### def gets(eol=$/, limit=nil) -> String | nil
+#%end
 
 通信路から一行読み込んで、それを返します。
 
@@ -90,11 +113,22 @@ eol に到達するまで読み込みます。
 
 読み込みが終端に到達した場合は nil を返します。
 
+#%since 4.1
+[m:IO#gets] と同様に、`eol` に nil を渡すと残りすべてを 1 行として読み込み、`""` を渡すと空行を区切りとして(パラグラフモード)読み込みます。
+`eol` を省略して `limit` だけを渡すこともできます。
+#%else
 [m:IO#gets] と同様ですが、区切り文字列に
 "" を渡した場合や、nil を渡したときの意味が異なり、これらの場合は正しく動作しません。
+#%end
 
 - **param** `eol` -- 行区切り文字列/正規表現
 - **param** `limit` -- 最大の読み込みバイト数
+#%since 3.4
+- **param** `chomp` -- 真を指定すると読み込んだ行の末尾の行区切り文字列を取り除きます
+#%end
+#%since 4.1
+- **raise** `ArgumentError` -- `eol` に正規表現を指定し、`chomp` に真を指定した場合に発生します。
+#%end
 
 ### def print(*args) -> nil
 
@@ -150,16 +184,29 @@ bufに文字列を渡した場合はその領域が出力用のバッファと�
 
 - **raise** `EOFError` -- 読み込みが終端に到達した場合に発生します。
 
+#%since 4.1
+### def readlines(eol = $/, limit = nil, chomp: false) -> [String]
+#%else
 ### def readlines(eol=$/) -> [String]
+#%end
 
 データを通信路から末端まで全て読み込んで、各行を要素として持つ配列を返します。
 
 行区切りは eol で指定した文字列/正規表現になります。
 
+#%since 4.1
+[m:IO#readlines] と同様に、`eol` に nil を渡すと残りすべてを 1 つの要素とし、`""` を渡すと空行を区切りとして(パラグラフモード)各行に分けます。
+`eol` を省略して `limit` だけを渡すこともできます。
+#%else
 [m:IO#readlines] と同様ですが、区切り文字列に
 "" を渡した場合や、nil を渡したときの意味が異なり、これらの場合は正しく動作しません。
+#%end
 
 - **param** `eol` -- 行区切り文字列/正規表現
+#%since 4.1
+- **param** `limit` -- 1 行の最大の読み込みバイト数
+- **param** `chomp` -- 真を指定すると各行の末尾の行区切り文字列を取り除きます
+#%end
 
 ### def ungetc(char) -> ()
 
@@ -181,7 +228,11 @@ str を出力します。
 
 - **param** `str` -- 出力する文字列
 
+#%since 4.1
+### def readline(eol = $/, limit = nil, chomp: false) -> String
+#%else
 ### def readline(eol=$/) -> String
+#%end
 
 通信路から一行読み込んで、それを返します。
 
@@ -189,10 +240,19 @@ str を出力します。
 
 読み込みが終端に到達した場合は例外 EOFError を発生します。
 
+#%since 4.1
+[m:IO#readline] と同様に、`eol` に nil を渡すと残りすべてを 1 行として読み込み、`""` を渡すと空行を区切りとして(パラグラフモード)読み込みます。
+`eol` を省略して `limit` だけを渡すこともできます。
+#%else
 [m:IO#readline] と同様ですが、区切り文字列に
 "" を渡した場合や、nil を渡したときの意味が異なり、これらの場合は正しく動作しません。
+#%end
 
 - **param** `eol` -- 行区切り文字列/正規表現
+#%since 4.1
+- **param** `limit` -- 最大の読み込みバイト数
+- **param** `chomp` -- 真を指定すると読み込んだ行の末尾の行区切り文字列を取り除きます
+#%end
 - **raise** `EOFError` -- 読み込みが終端に到達した場合に発生します。
 
 ### def read_nonblock(maxlen, buf) -> String
