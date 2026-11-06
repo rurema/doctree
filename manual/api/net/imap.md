@@ -343,13 +343,50 @@ p Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
 サーバから最初に送られてくるメッセージ(greeting message)
 を返します。
 
+#%since 3.4
 ### def responses -> { String => [object] }
+### def responses(type) -> [object]
+### def responses {|hash| ... } -> object
+### def responses(type) {|array| ... } -> object
+#%end
+#%version 3.3...3.4
+### def responses -> { String => [object] }
+### def responses {|hash| ... } -> object
+### def responses(type) {|array| ... } -> object
+#%end
+#%until 3.3
+### def responses -> { String => [object] }
+#%end
 
 サーバから送られてきた untagged な応答の記録を返します。
 
 untagged な応答は種類ごとに記録されます。
 応答の種類には "FLAGS", "OK", "UIDVALIDITY", "EXISTS" などがあり、この文字列がハッシュテーブルのキーとなります。
 そして各種類ごとに配列が用意され、untagged な応答を受信するたびにその配列の末尾にその内容が記録されます。
+
+#%since 3.3
+ブロックを渡すと、記録をブロックに渡してブロックの値を返します。
+`type` を指定するとその種類の応答の配列だけを渡します(`type` は大文字に変換して探します)。
+ブロックの実行中は受信スレッドなどが記録を更新しないよう同期されます。
+
+#%end
+#%since 4.0
+ブロックを渡さないときは、`type` を指定するとその種類の応答の配列を凍結した複製を返します。
+`type` を指定しないときの動作は接続の設定 `responses_without_block`(`Net::IMAP::Config#responses_without_block`)で決まり、既定値の `:frozen_dup` では記録のハッシュを凍結した複製(値の配列も凍結したもの)を返します。
+`:raise` を設定すると [c:ArgumentError] が発生します。
+
+#%end
+#%version 3.4...4.0
+ブロックを渡さないときは、`type` を指定するとその種類の応答の配列を凍結した複製を返します。
+`type` を指定しないときの動作は接続の設定 `responses_without_block`(`Net::IMAP::Config#responses_without_block`)で決まり、既定値の `:warn` では非推奨の警告(カテゴリは `:deprecated`)を出して記録のハッシュそのものを返します。
+`:frozen_dup` を設定すると記録のハッシュを凍結した複製(値の配列も凍結したもの)を、`:raise` を設定すると [c:ArgumentError] が発生します。
+
+#%end
+#%version 3.3...3.4
+ブロックを渡さずに `type` を指定すると [c:ArgumentError] が発生します。
+ブロックも `type` も渡さないときは記録のハッシュそのものを返します。
+
+#%end
 
 ```ruby title="例"
 imap.select("inbox")
@@ -359,10 +396,27 @@ p imap.responses["UIDVALIDITY"].last
 # => 968263756
 ```
 
+#%since 3.3
+- **param** `type` -- 応答の種類("EXISTS" など)を文字列で指定します。
+#%end
+#%version 3.3...3.4
+- **raise** `ArgumentError` -- ブロックを渡さずに `type` を指定した場合に発生します。
+#%end
+#%since 3.4
+- **raise** `ArgumentError` -- ブロックも `type` も渡さず、設定 `responses_without_block` が `:raise` の場合に発生します。
+#%end
+
+#%since 4.1
+### def disconnect(timeout: nil) -> nil
+#%else
 ### def disconnect -> nil
+#%end
 
 サーバとの接続を切断します。
 
+#%since 4.1
+- **param** `timeout` -- 受信スレッドの終了を待つ秒数の上限を指定します。nil なら終了するまで待ちます。
+#%end
 - **SEE** [m:Net::IMAP#disconnected?]
 
 ### def capability -> [String]
@@ -386,25 +440,62 @@ NOOP コマンドを送ります。
 
 LOGOUT コマンドを送り、コネクションを切断することをサーバに伝えます。
 
+#%since 3.3
+### def authenticate(mechanism, *creds, sasl_ir: true, **props) -> Net::IMAP::TaggedResponse
+#%end
+#%version 3.2...3.3
+### def authenticate(mechanism, *creds, **props) -> Net::IMAP::TaggedResponse
+#%end
+#%until 3.2
 ### def authenticate(auth_type, user, password) -> Net::IMAP::TaggedResponse
+#%end
 
 AUTHENTICATE コマンドを送り、クライアントを認証します。
 
+#%since 3.2
+`mechanism` で利用する SASL の認証方式を文字列で指定します。
+残りの引数とブロックはその認証方式の実装にそのまま渡されます。
+渡す認証情報(ユーザ名、パスワード、アクセストークンなど)は認証方式ごとに異なります。
+#%else
 auth_type で利用する認証方式を文字列で指定します。
+#%end
 
 ```ruby title="例"
 imap.authenticate('LOGIN', user, password)
 ```
 
+#%since 3.2
+`mechanism` としては以下がサポートされています。
+#%else
 auth_type としては以下がサポートされています。
+#%end
   - "LOGIN"
   - "PLAIN"
   - "CRAM-MD5"
   - "DIGEST-MD5"
 
+#%since 3.3
+サーバが SASL-IR 拡張([RFC:4959])と指定した認証方式に対応していて、認証方式がクライアントから先に応答するものであれば、`sasl_ir` が真のときは最初の応答を AUTHENTICATE コマンドの引数として送り、往復を 1 回省きます。
+
+#%end
+#%since 3.4
+`sasl_ir` の既定値は接続の設定 `sasl_ir`(`Net::IMAP::Config#sasl_ir`)の値で、その既定値は true です。
+
+#%end
+#%since 3.2
+- **param** `mechanism` -- 認証方式を表す文字列
+- **param** `creds` -- 認証方式の実装に渡す認証情報。認証方式ごとに異なります
+#%end
+#%since 3.3
+- **param** `sasl_ir` -- 偽を指定すると最初の応答を AUTHENTICATE コマンドの引数として送りません
+#%end
+#%since 3.2
+- **param** `props` -- 認証方式の実装に渡すキーワード引数。認証方式ごとに異なります
+#%else
 - **param** `auth_type` -- 認証方式を表す文字列
 - **param** `user` -- ユーザ名文字列
 - **param** `password` -- パスワード文字列
+#%end
 - **SEE** [m:Net::IMAP#login]
 
 ### def login(user, password) -> Net::IMAP::TaggedResponse
@@ -422,7 +513,11 @@ LOGIN コマンドを送り、平文でパスワードを送りクライアン�
 - **raise** `Net::IMAP::NoResponseError` -- 認証に失敗した場合に発生します
 - **SEE** [m:Net::IMAP#authenticate]
 
+#%since 3.3
+### def select(mailbox, condstore: false) -> Net::IMAP::TaggedResponse
+#%else
 ### def select(mailbox) -> Net::IMAP::TaggedResponse
+#%end
 
 SELECT コマンドを送り、指定したメールボックスを処理対象のメールボックスにします。
 
@@ -435,15 +530,25 @@ SELECT コマンドを送り、指定したメールボックスを処理対象�
 [m:Net::IMAP#add_response_handler] を使うとそのような更新情報を即座に取得できます。
 
 - **param** `mailbox` -- 処理対象としたいメールボックスの名前(文字列)
+#%since 3.3
+- **param** `condstore` -- 真を指定すると CONDSTORE 拡張([RFC:7162])を有効にします。メールボックスが mod-sequence の保持に対応していれば HIGHESTMODSEQ 応答コードが untagged な応答として送られ、以後の FETCH の応答に mod-sequence が含まれます。
+#%end
 - **raise** `Net::IMAP::NoResponseError` -- mailboxが存在しない等の理由でコマンドの実行に失敗した場合に発生します。
 
+#%since 3.3
+### def examine(mailbox, condstore: false) -> Net::IMAP::TaggedResponse
+#%else
 ### def examine(mailbox) -> Net::IMAP::TaggedResponse
+#%end
 
 EXAMINE コマンドを送り、指定したメールボックスを処理対象のメールボックスにします。
 
 [m:Net::IMAP#select] と異なりセッション中はメールボックスが読み取り専用となります。それ以外は select と同じです。
 
 - **param** `mailbox` -- 処理対象としたいメールボックスの名前(文字列)
+#%since 3.3
+- **param** `condstore` -- 真を指定すると CONDSTORE 拡張([RFC:7162])を有効にします。メールボックスが mod-sequence の保持に対応していれば HIGHESTMODSEQ 応答コードが untagged な応答として送られ、以後の FETCH の応答に mod-sequence が含まれます。
+#%end
 - **raise** `Net::IMAP::NoResponseError` -- mailboxが存在しない等の理由でコマンドの実行に失敗した場合に発生します。
 
 ### def create(mailbox) -> Net::IMAP::TaggedResponse
@@ -655,7 +760,11 @@ p imap.uid_search('SUBJECT "hello"')
 - **param** `charset` -- 検索に用いるcharset
 - **SEE** [m:Net::IMAP#uid_search]
 
+#%since 3.3
+### def fetch(set, attr, changedsince: nil) -> [Net::IMAP::FetchData]
+#%else
 ### def fetch(set, attr) -> [Net::IMAP::FetchData]
+#%end
 
 FETCH コマンドを送り、メールボックス内のメッセージに関するデータを取得します。
 
@@ -692,9 +801,20 @@ p data.attr["UID"]
 
 - **param** `set` -- 処理対象のメッセージの sequence number
 - **param** `attr` -- アトリビュート(文字列配列)
+#%since 3.3
+- **param** `changedsince` -- mod-sequence を整数で指定すると、mod-sequence がそれより大きいメッセージだけを対象にします。指定すると CONDSTORE 拡張([RFC:7162])を暗黙に有効にします。
+#%end
 - **SEE** [m:Net::IMAP#uid_fetch]
 
+#%since 3.4
+### def uid_fetch(set, attr, changedsince: nil, partial: nil) -> [Net::IMAP::FetchData]
+#%end
+#%version 3.3...3.4
+### def uid_fetch(set, attr, changedsince: nil) -> [Net::IMAP::FetchData]
+#%end
+#%until 3.3
 ### def uid_fetch(set, attr) -> [Net::IMAP::FetchData]
+#%end
 
 UID FETCH コマンドを送り、メールボックス内のメッセージに関するデータを取得します。
 
@@ -709,9 +829,19 @@ attr には取得するアトリビュートを文字列の配列で渡してく
 
 - **param** `set` -- 処理対象のメッセージの UID
 - **param** `attr` -- アトリビュート(文字列配列)
+#%since 3.3
+- **param** `changedsince` -- mod-sequence を整数で指定すると、mod-sequence がそれより大きいメッセージだけを対象にします。指定すると CONDSTORE 拡張([RFC:7162])を暗黙に有効にします。
+#%end
+#%since 3.4
+- **param** `partial` -- 返す結果の範囲を [c:Range] で指定し、件数を制限します。`1..500` で `set` のうち最初の 500 件、`-500..-1` で最後の 500 件です。サーバが PARTIAL 拡張([RFC:9394])に対応している必要があります。
+#%end
 - **SEE** [m:Net::IMAP#fetch]
 
+#%since 3.3
+### def store(set, attr, flags, unchangedsince: nil) -> [Net::IMAP::FetchData] | nil
+#%else
 ### def store(set, attr, flags) -> [Net::IMAP::FetchData] | nil
+#%end
 
 STORE コマンドを送り、メールボックス内のメッセージを更新します。
 
@@ -745,9 +875,16 @@ p imap.store(6..8, "+FLAGS", [:Deleted])
 - **param** `set` -- 更新するメッセージのsequence number
 - **param** `attr` -- 更新方式(文字列)
 - **param** `flags` -- 更新内容([c:Symbol] の配列)
+#%since 3.3
+- **param** `unchangedsince` -- mod-sequence を整数で指定すると、mod-sequence がそれより大きいメッセージは更新しません。更新しなかったメッセージは MODIFIED 応答コードで返されます。指定すると CONDSTORE 拡張([RFC:7162])を暗黙に有効にします。
+#%end
 - **SEE** [m:Net::IMAP#uid_store], [m:Net::IMAP#fetch]
 
+#%since 3.3
+### def uid_store(set, attr, flags, unchangedsince: nil) -> [Net::IMAP::FetchData] | nil
+#%else
 ### def uid_store(set, attr, flags) -> [Net::IMAP::FetchData] | nil
+#%end
 
 UID STORE コマンドを送り、メールボックス内のメッセージを更新します。
 
@@ -770,6 +907,9 @@ attr で何をどのように変化させるかを指定します。
 - **param** `set` -- 更新するメッセージの UID
 - **param** `attr` -- 更新方式(文字列)
 - **param** `flags` -- 更新内容([c:Symbol] の配列)
+#%since 3.3
+- **param** `unchangedsince` -- mod-sequence を整数で指定すると、mod-sequence がそれより大きいメッセージは更新しません。更新しなかったメッセージは MODIFIED 応答コードで返されます。指定すると CONDSTORE 拡張([RFC:7162])を暗黙に有効にします。
+#%end
 
 - **SEE** [m:Net::IMAP#store], [m:Net::IMAP#uid_fetch]
 
