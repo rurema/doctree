@@ -92,14 +92,20 @@ C 言語で記述されたソースコードから組み込みクラス/モジ�
 
 ## Class Methods
 
+#%since 4.0
+### def RDoc::Parser::C.new(top_level, body, options, stats) -> RDoc::Parser::C
+#%else
 ### def RDoc::Parser::C.new(top_level, file_name, body, options, stats) -> RDoc::Parser::C
+#%end
 
 自身を初期化します。
 
 - **param** `top_level` -- [c:RDoc::TopLevel] オブジェクトを指定します。
 
+#%until 4.0
 - **param** `file_name` -- ファイル名を文字列で指定します。
 
+#%end
 - **param** `body` -- ソースコードの内容を文字列で指定します。
 
 - **param** `options` -- [c:RDoc::Options] オブジェクトを指定します。
