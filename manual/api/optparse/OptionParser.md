@@ -136,14 +136,23 @@ opts2 = OptionParser.new
 parse(opts2) # => unsupported argument type: Time (ArgumentError)
 ```
 
+#%since 3.3
+### def OptionParser.getopts(argv, *opts, symbolize_names: false)   -> Hash
+### def OptionParser.getopts(*opts, symbolize_names: false)         -> Hash
+#%else
 ### def OptionParser.getopts(argv, *opts)   -> Hash
 ### def OptionParser.getopts(*opts)         -> Hash
+#%end
 
 引数をパースした結果を、Hash として返します。(self.new.getopts と同じです)
 
 - **param** `argv` -- パースしたい配列を指定します。
 
 - **param** `opts` -- 引数を文字列で指定します。
+
+#%since 3.3
+- **param** `symbolize_names` -- true を指定すると、戻り値の [c:Hash] はキーがシンボルになります。false を指定した場合、戻り値の [c:Hash] はキーが文字列になります。
+#%end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブクラスになります。
@@ -1082,7 +1091,11 @@ p opts.parse!(ARGV) # => ["test"]
 p ARGV            # => ["test"]
 ```
 
+#%since 3.2
+### def load(filename = nil, into: nil)     -> bool
+#%else
 ### def load(filename = nil)     -> bool
+#%end
 
 指定された filename を読み込んで各行をまとめたものに対して [m:OptionParser#parse] を行ないます。
 
@@ -1091,6 +1104,10 @@ p ARGV            # => ["test"]
 
 - **param** `filename` -- 各行をパースしたいファイルの名前を文字列で指定します。
                 指定されないか nil である場合、~/.options/ にプログラムのサフィックスを付けた '~/.options/コマンド名' というファイルをパースします。
+
+#%since 3.2
+- **param** `into` -- オプションを格納するハッシュを指定します。[m:OptionParser#parse] の `into` と同じです。
+#%end
 
 ```ruby title="例"
 require "optparse"
@@ -1181,8 +1198,13 @@ p config          # => {:lib=>"lib1"}
 #%end
 ```
 
+#%since 3.3
+### def getopts(argv, *opts, symbolize_names: false)   -> Hash
+### def getopts(*opts, symbolize_names: false)         -> Hash
+#%else
 ### def getopts(argv, *opts)   -> Hash
 ### def getopts(*opts)         -> Hash
+#%end
 
 引数をパースした結果を、Hash として返します。
 
@@ -1201,6 +1223,10 @@ params = opt.getopts(ARGV, "ab:", "foo", "bar:")
 - **param** `argv` -- パースしたい配列を指定します。
 
 - **param** `opts` -- 引数を文字列で指定します。
+
+#%since 3.3
+- **param** `symbolize_names` -- true を指定すると、戻り値の [c:Hash] はキーがシンボルになります。false を指定した場合、戻り値の [c:Hash] はキーが文字列になります。
+#%end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブクラスになります。
