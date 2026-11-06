@@ -232,30 +232,30 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 - **`:row_sep`**:
   行区切りの文字列を指定します。:auto という特別な値をセットできます。
   :auto を指定した場合データから自動的に行区切りの文字列を見つけ出します。このときデータの先頭から次の "\r\n", "\n", "\r" の並びまでを読みます。
-  A sequence will be selected even if it occurs in a quoted field, assuming that you
-  would have the same line endings there.  If none of those sequences is
-  found, +data+ is [c:ARGF], [m:Object::STDIN], [m:Object::STDOUT], or
-  [m:Object::STDERR], or the stream is only  available for output, the default
-  [m:$INPUT_RECORD_SEPARATOR]  ([m:$/]) is used.  Obviously,
-  discovery takes a little time.  Set  manually if speed is important.  Also
-  note that IO objects should be opened  in binary mode on Windows if this
-  feature will be used as the  line-ending translation can cause
-  problems with resetting the document  position to where it was before the
-  read ahead. This String will be  transcoded into the data's Encoding  before parsing.
+  この並びはクオートされたフィールドの中にあっても選ばれます(そこでも同じ行末が使われているものとみなします)。
+  どの並びも見つからなかった場合、`data` が [c:ARGF]・[m:Object::STDIN]・[m:Object::STDOUT]・[m:Object::STDERR] の場合、
+  またはストリームが出力専用の場合は、デフォルトの [m:$INPUT_RECORD_SEPARATOR]([m:$/])を使います。
+  自動検出には多少の時間がかかるので、速度が重要な場合は明示的に指定してください。
+  また、Windows でこの機能を使う場合は [c:IO] オブジェクトをバイナリモードで開いてください。
+  改行の変換によって、先読みする前の位置に戻す処理に問題が起きることがあるためです。
+  指定した文字列はパースする前にデータのエンコーディングに変換されます。
 - **`:quote_char`**:
   フィールドをクオートする文字を指定します。長さ 1 の文字列でなければなりません。
   正しいダブルクオートではなく間違ったシングルクオートを使用しているアプリケーションで便利です。
-  CSV will always consider a double  sequence this character to be an
-  escaped quote.
+  この文字を 2 つ続けたものは、常にエスケープされたクオート文字とみなします。
   この文字列はパースする前にデータのエンコーディングに変換されます。
 - **`:field_size_limit`**:
-  This is a maximum size CSV will read  ahead looking for the closing quote
-  for a field.  (In truth, it reads to  the first line ending beyond this
-  size.)  If a quote cannot be found  within the limit CSV will raise a
-  MalformedCSVError, assuming the data  is faulty.  You can use this limit to
-  prevent what are effectively DoS  attacks on the parser.  However, this
-  limit can cause a legitimate parse to  fail and thus is set to +nil+, or off,
-  by default.
+#%since 3.2
+  `:max_field_size` の古い形で、非推奨です。`:max_field_size` を指定しなかった場合、`:max_field_size` に `field_size_limit - 1` を指定したものとして扱います。
+#%else
+  クオートされたフィールドの閉じクオートを探すときに先読みする大きさの上限を指定します。
+  この上限の範囲内に閉じクオートが見つからなかった場合、データが壊れているものとみなして [c:CSV::MalformedCSVError] が発生します。
+  パーサへの事実上の DoS 攻撃を防ぐために使えますが、正当なデータのパースも失敗する可能性があるため、デフォルトは nil(無効)です。
+#%end
+#%since 3.2
+- **`:max_field_size`**:
+  フィールドの最大の長さ(文字数)を指定します。これより長いフィールドがあると [c:CSV::MalformedCSVError] が発生します。デフォルトは nil(制限なし)です。
+#%end
 - **`:converters`**:
   [m:CSV::Converters] から取り出した名前の配列です。変換器が一つだけの場合は配列に格納する必要はありません。
   全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変換を試みます。エンコーディング変換に失敗した場合はフィールドは変換されません。
