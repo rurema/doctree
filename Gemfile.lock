@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/rurema/bitclust.git
-  revision: 581943661862910ff2035df2974709aef816a1c0
+  revision: cd61b42d09bbd6fb61126ffbf7630dc518911897
   specs:
-    bitclust-core (1.8.0)
+    bitclust-core (1.9.0)
       drb
       json
       nkf
@@ -11,10 +11,10 @@ GIT
       rbs (>= 3.10)
       rouge
       webrick
-    bitclust-dev (1.8.0)
-      bitclust-core (= 1.8.0)
-    refe2 (1.8.0)
-      bitclust-core (= 1.8.0)
+    bitclust-dev (1.9.0)
+      bitclust-core (= 1.9.0)
+    refe2 (1.9.0)
+      bitclust-core (= 1.9.0)
 
 GEM
   remote: https://rubygems.org/
