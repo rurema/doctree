@@ -182,11 +182,69 @@ IMAP 接続を表現するクラスです。
 
 ## Class Methods
 
+#%since 4.0
+### def Net::IMAP.new(host, port: nil, ssl: nil, response_handlers: nil, config: Net::IMAP::Config.global, **config_options) -> Net::IMAP
+#%end
+#%version 3.4...4.0
+### def Net::IMAP.new(host, port: nil, ssl: nil, config: Net::IMAP::Config.global, **config_options) -> Net::IMAP
+#%end
+#%version 3.3...3.4
+### def Net::IMAP.new(host, port: nil, ssl: nil, open_timeout: 30, idle_response_timeout: 5) -> Net::IMAP
+#%end
+#%until 3.3
 ### def Net::IMAP.new(host, port = 143, usessl = false, certs = nil, verify = true) -> Net::IMAP
 ### def Net::IMAP.new(host, options) -> Net::IMAP
+#%end
 
-新たな Net::IMAP オブジェクトを生成し、指定したホストの指定したポートに接続し、接続語の IMAP オブジェクトを返します。
+新たな Net::IMAP オブジェクトを生成し、指定したホストの指定したポートに接続し、接続後の IMAP オブジェクトを返します。
 
+#%since 3.3
+`ssl` に真を渡すと、サーバに繋ぐのに SSL/TLS を用います。
+`ssl` がハッシュならば、それを [m:OpenSSL::SSL::SSLContext#set_params] に渡して SSL/TLS のパラメータを設定します。
+true ならば、[m:OpenSSL::SSL::SSLContext#set_params] の既定のパラメータを使います。
+SSL/TLS での接続には OpenSSL と [lib:openssl] が使える必要があります。
+`port` を省略すると、SSL/TLS を使うときは 993、使わないときは 143 に接続します。
+
+#%end
+#%version 3.3...3.4
+`open_timeout` で接続が確立するまで待つ秒数を、`idle_response_timeout` で IDLE の応答を待つ秒数を指定します。
+
+#%end
+#%since 4.0
+`response_handlers` には受信スレッドを開始する前に追加する応答ハンドラのリストを指定します。
+こうすると最初の応答([m:Net::IMAP#greeting])も含めて、サーバからのすべての応答がハンドラで処理されます。
+
+#%end
+#%since 3.4
+`config` には接続の設定(`Net::IMAP::Config` オブジェクト)を指定します。
+これは接続ごとに作られる設定(`Net::IMAP#config`)を直接置き換えるのではなく、その継承元になります。
+省略時は全体の設定 `Net::IMAP::Config.global` が継承元になります。
+残りのキーワード引数 `config_options` は `Net::IMAP::Config.new` に渡され、接続ごとの設定の初期値になります。
+たとえば `open_timeout`(接続が確立するまで待つ秒数。既定値は 30)や `idle_response_timeout`(IDLE の応答を待つ秒数。既定値は 5)を指定できます。
+
+#%end
+#%since 3.3
+互換性のため、`Net::IMAP.new(host, port)` と `Net::IMAP.new(host, options)`(`options` はハッシュ)の形も受け付けます。
+それぞれ `port` を `port:` のキーワード引数に、`options` をキーワード引数に変換し、警告は出ません。
+`Net::IMAP.new(host, port, usessl, certs, verify)` の形は非推奨で、警告を出します。
+`usessl` が偽ならば `certs` と `verify` は無視され、SSL/TLS を使いません。
+`usessl` が真ならば `certs` と `verify` を `ssl` のハッシュに変換します。
+`certs` がファイルならば `ca_file` に、ディレクトリならば `ca_path` に変換し、`verify` が真ならば `verify_mode` に [m:OpenSSL::SSL::VERIFY_PEER] を、偽ならば [m:OpenSSL::SSL::VERIFY_NONE] を設定します。
+
+```ruby title="例"
+require 'net/imap'
+
+imap = Net::IMAP.new('imap.example.com', port: 993,
+                     ssl: { verify_mode: OpenSSL::SSL::VERIFY_PEER,
+                            timeout: 600 })
+```
+
+#%end
+#%since 3.4
+この警告は `Warning[:deprecated]` が真のとき(`-W:deprecated` を指定したときなど)だけ表示されます。
+
+#%end
+#%until 3.3
 usessl が真ならば、サーバに繋ぐのに SSL/TLS を用います。
 SSL/TLS での接続には OpenSSL と [lib:openssl] が使える必要があります。
 certs は利用する証明書のファイル名もしくは証明書があるディレクトリ名を文字列で渡します。
@@ -211,12 +269,32 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
                                :timeout => 600 } )
 ```
 
+#%end
 - **param** `host` -- 接続するホスト名の文字列
 - **param** `port` -- 接続するポート番号
+#%since 3.3
+- **param** `ssl` -- 真で SSL/TLS を使う。ハッシュなら [m:OpenSSL::SSL::SSLContext#set_params] に渡すパラメータ
+#%end
+#%version 3.3...3.4
+- **param** `open_timeout` -- 接続が確立するまで待つ秒数
+- **param** `idle_response_timeout` -- IDLE の応答を待つ秒数
+#%end
+#%since 4.0
+- **param** `response_handlers` -- 受信スレッドを開始する前に追加する応答ハンドラのリスト
+#%end
+#%since 3.4
+- **param** `config` -- 接続ごとの設定の継承元とする `Net::IMAP::Config` オブジェクト
+- **param** `config_options` -- 接続ごとの設定の初期値(`open_timeout` など)
+#%end
+#%until 3.3
 - **param** `usessl` -- 真でSSL/TLSを使う
 - **param** `certs` -- 証明書のファイル名/ディレクトリ名の文字列
 - **param** `verify` -- 真で接続先を検証する
 - **param** `options` -- 各種接続パラメータのハッシュ
+#%end
+#%since 3.3
+- **raise** `ArgumentError` -- 互換のための形の引数とキーワード引数を同時に渡した場合や、`options` のハッシュと `usessl` などを同時に渡した場合に発生します
+#%end
 
 ### def Net::IMAP.debug -> bool
 
@@ -368,6 +446,7 @@ untagged な応答は種類ごとに記録されます。
 ブロックを渡すと、記録をブロックに渡してブロックの値を返します。
 `type` を指定するとその種類の応答の配列だけを渡します(`type` は大文字に変換して探します)。
 ブロックの実行中は受信スレッドなどが記録を更新しないよう同期されます。
+ブロックの外で記録のハッシュやその配列を扱うのはスレッド安全ではないため、下の例のようにブロックを渡して使います。
 
 #%end
 #%since 4.0
@@ -385,15 +464,23 @@ untagged な応答は種類ごとに記録されます。
 #%version 3.3...3.4
 ブロックを渡さずに `type` を指定すると [c:ArgumentError] が発生します。
 ブロックも `type` も渡さないときは記録のハッシュそのものを返します。
+ブロックを渡さずに呼ぶ形は非推奨ですが、警告は出ません。
 
 #%end
 
 ```ruby title="例"
 imap.select("inbox")
+#%since 3.3
+p imap.responses("EXISTS", &:last)
+# => 2
+p imap.responses("UIDVALIDITY", &:last)
+# => 968263756
+#%else
 p imap.responses["EXISTS"].last
 # => 2
 p imap.responses["UIDVALIDITY"].last
 # => 968263756
+#%end
 ```
 
 #%since 3.3
@@ -461,18 +548,42 @@ auth_type で利用する認証方式を文字列で指定します。
 #%end
 
 ```ruby title="例"
+#%since 3.3
+imap.authenticate('PLAIN', user, password)
+#%else
 imap.authenticate('LOGIN', user, password)
+#%end
 ```
 
-#%since 3.2
+#%since 3.3
 `mechanism` としては以下がサポートされています。
-#%else
+  - "ANONYMOUS"
+  - "EXTERNAL"
+  - "OAUTHBEARER"
+  - "PLAIN"
+  - "SCRAM-SHA-1"
+  - "SCRAM-SHA-256"
+  - "XOAUTH2"
+  - "LOGIN"(非推奨)
+  - "CRAM-MD5"(非推奨)
+  - "DIGEST-MD5"(非推奨)
+
+非推奨の認証方式は互換性のために残されているもので、使うと警告を出します。
+`"LOGIN"` の代わりには `"PLAIN"` を使います。
+`"XOAUTH2"` は非標準で `"OAUTHBEARER"` に置き換えられたものですが、広く使われています。
+#%end
+#%version 3.2...3.3
+`mechanism` としては以下がサポートされています。
+#%end
+#%until 3.2
 auth_type としては以下がサポートされています。
 #%end
+#%until 3.3
   - "LOGIN"
   - "PLAIN"
   - "CRAM-MD5"
   - "DIGEST-MD5"
+#%end
 
 #%since 3.3
 サーバが SASL-IR 拡張([RFC:4959])と指定した認証方式に対応していて、認証方式がクライアントから先に応答するものであれば、`sasl_ir` が真のときは最初の応答を AUTHENTICATE コマンドの引数として送り、往復を 1 回省きます。
@@ -1105,21 +1216,51 @@ end
 
 - **SEE** [m:Net::IMAP#add_response_handler]
 
+#%since 3.3
+### def starttls(**options) -> Net::IMAP::TaggedResponse
+#%else
 ### def starttls(options) -> Net::IMAP::TaggedResponse
 ### def starttls(certs, verify) -> Net::IMAP::TaggedResponse
+#%end
 
 STARTTLS コマンドを送って TLS のセッションを開始します。
 
+#%since 3.3
+キーワード引数 `options` は [m:OpenSSL::SSL::SSLContext#set_params] にそのまま渡されます。
+キーは [c:OpenSSL::SSL::SSLContext] の属性の代入メソッドの名前です。
+TLS の交渉とホスト名の検証が両方成功してから返ります。
+
+#%end
+#%since 4.0
+サーバが TLS の開始に同意した後、接続の設定 `open_timeout`(`Net::IMAP::Config#open_timeout`)の秒数まで待ち、それを超えると [c:Net::OpenTimeout] が発生します。
+
+#%end
+#%since 3.3
+互換性のため、`starttls(options)`(`options` はハッシュ)と `starttls(certs, verify)` の形も受け付けます。
+`starttls(options)` はハッシュをキーワード引数に変換します。
+`starttls(certs, verify)` の形は非推奨で、警告を出します。
+`certs` と `verify` は [m:Net::IMAP.new] の `certs` と `verify` と同じように変換します。
+#%end
+#%since 3.4
+この警告は `Warning[:deprecated]` が真のとき(`-W:deprecated` を指定したときなど)だけ表示されます。
+#%end
+#%until 3.3
 options で [lib:openssl] に渡すオプションを指定します。
 [m:OpenSSL::SSL::SSLContext#set_params] の引数と同じ意味です。
 
 互換性のため、certs で証明書or証明書ディレクトリのファイル名(文字列)、
 verify で検証するかどうか([m:OpenSSL::SSL::VERIFY_PEER]、
 [m:OpenSSL::SSL::VERIFY_NONE]に対応します)を指定できます。
+#%end
 
+#%since 3.3
+- **param** `options` -- [m:OpenSSL::SSL::SSLContext#set_params] に渡す SSL/TLS のパラメータ
+- **raise** `ArgumentError` -- 互換のための形の引数とキーワード引数を同時に渡した場合や、`options` のハッシュと `verify` を同時に渡した場合に発生します
+#%else
 - **param** `options` -- SSL/TLS のオプション([c:Hash] オブジェクト)
 - **param** `certs` -- 証明書ファイル名、もしくは証明書ディレクトリ名(文字列)
 - **param** `verify` -- 真なら SSL/TLS 接続時に証明書を検証します
+#%end
 
 ### def disconnected? -> bool
 
