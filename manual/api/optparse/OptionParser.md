@@ -864,10 +864,17 @@ end
 
 - **SEE** [m:OptionParser#on], [m:OptionParser#on_head]
 
+#%since 3.4
+### def order(argv, into: nil, exact: self.require_exact)            -> [String]
+### def order(argv, into: nil, exact: self.require_exact){|s| ...}   -> [String]
+### def order(*args, into: nil, exact: self.require_exact)           -> [String]
+### def order(*args, into: nil, exact: self.require_exact){|s| ...}  -> [String]
+#%else
 ### def order(argv, into: nil)            -> [String]
 ### def order(argv, into: nil){|s| ...}   -> [String]
 ### def order(*args, into: nil)           -> [String]
 ### def order(*args, into: nil){|s| ...}  -> [String]
+#%end
 
 与えられた argv を順番にパースします。
 オプションではないコマンドの引数(下の例で言うと somefile)に出会うと、パースを中断します。
@@ -884,6 +891,10 @@ argv からオプションを取り除いたものを返します。
 - **param** `into` -- オプションを格納するハッシュを指定します。
             指定したハッシュにはオプションの名前をキーとして、[m:OptionParser#on]に渡されたブロックの値が格納されます。
             キーの名前はロングオプションが定義されていればロングオプションの値を、ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
+
+#%since 3.4
+- **param** `exact` -- 真を指定すると、ロングオプションを省略した形([m:OptionParser#require_exact] を参照)を受け付けなくなります。省略時は [m:OptionParser#require_exact] の値です。
+#%end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブクラスになります。
@@ -907,8 +918,13 @@ $ ruby opt.rb -a foo somefile -b
 ["-a", "foo", "somefile", "-b"]
 ```
 
+#%since 3.4
+### def order!(argv = self.default_argv, into: nil, exact: self.require_exact)             -> [String]
+### def order!(argv = self.default_argv, into: nil, exact: self.require_exact) {|s| ...}   -> [String]
+#%else
 ### def order!(argv = self.default_argv, into: nil)             -> [String]
 ### def order!(argv = self.default_argv, into: nil) {|s| ...}   -> [String]
+#%end
 
 与えられた argv を順番に破壊的にパースします。
 argv からオプションがすべて取り除かれます。
@@ -925,6 +941,10 @@ argv を返します。
 - **param** `into` -- オプションを格納するハッシュを指定します。
             指定したハッシュにはオプションの名前をキーとして、[m:OptionParser#on]に渡されたブロックの値が格納されます。
             キーの名前はロングオプションが定義されていればロングオプションの値を、ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
+
+#%since 3.4
+- **param** `exact` -- 真を指定すると、ロングオプションを省略した形([m:OptionParser#require_exact] を参照)を受け付けなくなります。省略時は [m:OptionParser#require_exact] の値です。
+#%end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブクラスになります。
@@ -948,8 +968,13 @@ $ ruby opt.rb -a foo somefile -b
 ["somefile", "-b"]
 ```
 
+#%since 3.4
+### def permute(argv, into: nil, exact: self.require_exact)   -> [String]
+### def permute(*args, into: nil, exact: self.require_exact)  -> [String]
+#%else
 ### def permute(argv, into: nil)   -> [String]
 ### def permute(*args, into: nil)  -> [String]
+#%end
 
 与えられた argv をパースします。
 オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
@@ -965,6 +990,10 @@ argv からオプションを取り除いたものを返します。
             指定したハッシュにはオプションの名前をキーとして、[m:OptionParser#on]に渡されたブロックの値が格納されます。
             キーの名前はロングオプションが定義されていればロングオプションの値を、ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
 
+#%since 3.4
+- **param** `exact` -- 真を指定すると、ロングオプションを省略した形([m:OptionParser#require_exact] を参照)を受け付けなくなります。省略時は [m:OptionParser#require_exact] の値です。
+#%end
+
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブクラスになります。
 
@@ -988,7 +1017,11 @@ $ ruby opt.rb -a foo somefile -b
 ["somefile"]
 ```
 
+#%since 3.4
+### def permute!(argv = self.default_argv, into: nil, exact: self.require_exact)    -> [String]
+#%else
 ### def permute!(argv = self.default_argv, into: nil)    -> [String]
+#%end
 
 与えられた argv を破壊的にパースします。argv からオプションがすべて取り除かれます。
 オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
@@ -1002,6 +1035,10 @@ argv を返します。
             指定したハッシュにはオプションの名前をキーとして、[m:OptionParser#on]に渡されたブロックの値が格納されます。
             キーの名前はロングオプションが定義されていればロングオプションの値を、ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
 
+#%since 3.4
+- **param** `exact` -- 真を指定すると、ロングオプションを省略した形([m:OptionParser#require_exact] を参照)を受け付けなくなります。省略時は [m:OptionParser#require_exact] の値です。
+#%end
+
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブクラスになります。
 
@@ -1025,8 +1062,13 @@ $ ruby opt.rb -a foo somefile -b
 ["somefile"]
 ```
 
+#%since 3.4
+### def parse(argv, into: nil, exact: self.require_exact)   -> [String]
+### def parse(*args, into: nil, exact: self.require_exact)  -> [String]
+#%else
 ### def parse(argv, into: nil)   -> [String]
 ### def parse(*args, into: nil)  -> [String]
+#%end
 
 与えられた argv をパースします。
 argv からオプションを取り除いたものを返します。
@@ -1041,6 +1083,10 @@ argv からオプションを取り除いたものを返します。
 - **param** `into` -- オプションを格納するハッシュを指定します。
             指定したハッシュにはオプションの名前をキーとして、[m:OptionParser#on]に渡されたブロックの値が格納されます。
             キーの名前はロングオプションが定義されていればロングオプションの値を、ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
+
+#%since 3.4
+- **param** `exact` -- 真を指定すると、ロングオプションを省略した形([m:OptionParser#require_exact] を参照)を受け付けなくなります。省略時は [m:OptionParser#require_exact] の値です。
+#%end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブクラスになります。
@@ -1058,7 +1104,29 @@ p ARGV           # => ["-i", "-u", "-h", "test"]
 p opts.parse(ARGV) # => ["test"]
 ```
 
+#%since 3.4
+
+```ruby title="例 exact を指定する"
+require "optparse"
+
+opts = OptionParser.new
+opts.on("--verbose")
+
+p opts.parse(["--verb", "x"])               # => ["x"]
+begin
+  opts.parse(["--verb", "x"], exact: true)
+rescue OptionParser::InvalidOption => e
+  puts e.message   # => invalid option: --verb
+end
+```
+
+#%end
+
+#%since 3.4
+### def parse!(argv = self.default_argv, into: nil, exact: self.require_exact)   -> [String]
+#%else
 ### def parse!(argv = self.default_argv, into: nil)   -> [String]
+#%end
 
 与えられた argv をパースします。
 
@@ -1071,6 +1139,10 @@ p opts.parse(ARGV) # => ["test"]
 - **param** `into` -- オプションを格納するハッシュを指定します。
             指定したハッシュにはオプションの名前をキーとして、[m:OptionParser#on]に渡されたブロックの値が格納されます。
             キーの名前はロングオプションが定義されていればロングオプションの値を、ショートオプションのみの場合はショートオプションの値から、先頭の "-" を除いてシンボル化した値が使用されます。
+
+#%since 3.4
+- **param** `exact` -- 真を指定すると、ロングオプションを省略した形([m:OptionParser#require_exact] を参照)を受け付けなくなります。省略時は [m:OptionParser#require_exact] の値です。
+#%end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブクラスになります。
@@ -1091,9 +1163,13 @@ p opts.parse!(ARGV) # => ["test"]
 p ARGV            # => ["test"]
 ```
 
-#%since 3.2
+#%since 3.4
+### def load(filename = nil, into: nil, exact: self.require_exact)     -> bool
+#%end
+#%version 3.2...3.4
 ### def load(filename = nil, into: nil)     -> bool
-#%else
+#%end
+#%until 3.2
 ### def load(filename = nil)     -> bool
 #%end
 
@@ -1107,6 +1183,10 @@ p ARGV            # => ["test"]
 
 #%since 3.2
 - **param** `into` -- オプションを格納するハッシュを指定します。[m:OptionParser#parse] の `into` と同じです。
+#%end
+
+#%since 3.4
+- **param** `exact` -- 真を指定すると、ロングオプションを省略した形([m:OptionParser#require_exact] を参照)を受け付けなくなります。省略時は [m:OptionParser#require_exact] の値です。
 #%end
 
 ```ruby title="例"
@@ -1198,10 +1278,15 @@ p config          # => {:lib=>"lib1"}
 #%end
 ```
 
-#%since 3.3
+#%since 3.4
+### def getopts(argv, *opts, symbolize_names: false, exact: self.require_exact)   -> Hash
+### def getopts(*opts, symbolize_names: false, exact: self.require_exact)         -> Hash
+#%end
+#%version 3.3...3.4
 ### def getopts(argv, *opts, symbolize_names: false)   -> Hash
 ### def getopts(*opts, symbolize_names: false)         -> Hash
-#%else
+#%end
+#%until 3.3
 ### def getopts(argv, *opts)   -> Hash
 ### def getopts(*opts)         -> Hash
 #%end
@@ -1226,6 +1311,10 @@ params = opt.getopts(ARGV, "ab:", "foo", "bar:")
 
 #%since 3.3
 - **param** `symbolize_names` -- true を指定すると、戻り値の [c:Hash] はキーがシンボルになります。false を指定した場合、戻り値の [c:Hash] はキーが文字列になります。
+#%end
+
+#%since 3.4
+- **param** `exact` -- 真を指定すると、ロングオプションを省略した形([m:OptionParser#require_exact] を参照)を受け付けなくなります。省略時は [m:OptionParser#require_exact] の値です。
 #%end
 
 - **raise** `OptionParser::ParseError` -- パースに失敗した場合、発生します。
