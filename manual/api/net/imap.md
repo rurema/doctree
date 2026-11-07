@@ -201,7 +201,8 @@ IMAP 接続を表現するクラスです。
 #%since 3.3
 `ssl` に真を渡すと、サーバに繋ぐのに SSL/TLS を用います。
 `ssl` がハッシュならば、それを [m:OpenSSL::SSL::SSLContext#set_params] に渡して SSL/TLS のパラメータを設定します。
-true ならば、[m:OpenSSL::SSL::SSLContext#set_params] の既定のパラメータを使います。
+ハッシュでない真の値(true など)ならば、空のハッシュを渡したのと同じで、[m:OpenSSL::SSL::SSLContext#set_params] の既定のパラメータを使います。
+ハッシュへの変換は [m:Hash.try_convert] で行うので、`to_hash` を持つオブジェクトもハッシュとして扱います。
 SSL/TLS での接続には OpenSSL と [lib:openssl] が使える必要があります。
 `port` を省略すると、SSL/TLS を使うときは 993、使わないときは 143 に接続します。
 
@@ -216,10 +217,11 @@ SSL/TLS での接続には OpenSSL と [lib:openssl] が使える必要があり
 
 #%end
 #%since 3.4
-`config` には接続の設定(`Net::IMAP::Config` オブジェクト)を指定します。
-これは接続ごとに作られる設定(`Net::IMAP#config`)を直接置き換えるのではなく、その継承元になります。
-省略時は全体の設定 `Net::IMAP::Config.global` が継承元になります。
-残りのキーワード引数 `config_options` は `Net::IMAP::Config.new` に渡され、接続ごとの設定の初期値になります。
+`config` には接続の設定([c:Net::IMAP::Config] オブジェクト)を指定します。
+設定のほかに、版の数値(`0.4` など)や名前(`:current` など)やハッシュも [Net::IMAP::Config.[]](m:Net::IMAP::Config.[]) と同じように指定できます。
+これは接続ごとに作られる設定([m:Net::IMAP#config])を直接置き換えるのではなく、その継承元になります。
+省略時は全体の設定 [m:Net::IMAP::Config.global] が継承元になります。
+残りのキーワード引数 `config_options` は [m:Net::IMAP::Config.new] に渡され、接続ごとの設定の初期値になります。
 たとえば `open_timeout`(接続が確立するまで待つ秒数。既定値は 30)や `idle_response_timeout`(IDLE の応答を待つ秒数。既定値は 5)を指定できます。
 
 #%end
@@ -273,7 +275,7 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
 - **param** `host` -- 接続するホスト名の文字列
 - **param** `port` -- 接続するポート番号
 #%since 3.3
-- **param** `ssl` -- 真で SSL/TLS を使う。ハッシュなら [m:OpenSSL::SSL::SSLContext#set_params] に渡すパラメータ
+- **param** `ssl` -- 真で SSL/TLS を使う。ハッシュなら [m:OpenSSL::SSL::SSLContext#set_params] に渡すパラメータ(ハッシュでない真の値は既定のパラメータ)
 #%end
 #%version 3.3...3.4
 - **param** `open_timeout` -- 接続が確立するまで待つ秒数
@@ -283,7 +285,7 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
 - **param** `response_handlers` -- 受信スレッドを開始する前に追加する応答ハンドラのリスト
 #%end
 #%since 3.4
-- **param** `config` -- 接続ごとの設定の継承元とする `Net::IMAP::Config` オブジェクト
+- **param** `config` -- 接続ごとの設定の継承元とする [c:Net::IMAP::Config] オブジェクト。版の数値や名前やハッシュも指定できます
 - **param** `config_options` -- 接続ごとの設定の初期値(`open_timeout` など)
 #%end
 #%until 3.3
@@ -296,10 +298,31 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
 - **raise** `ArgumentError` -- 互換のための形の引数とキーワード引数を同時に渡した場合や、`options` のハッシュと `usessl` などを同時に渡した場合に発生します
 #%end
 
+#%since 3.4
+### def Net::IMAP.config -> Net::IMAP::Config
+
+全体の設定 [m:Net::IMAP::Config.global] を返します。
+
+[m:Net::IMAP.new] で `config` を省略すると、接続ごとの設定 [m:Net::IMAP#config] はこの設定を継承します。
+
+```ruby title="例"
+require 'net/imap'
+
+p Net::IMAP.config.equal?(Net::IMAP::Config.global) # => true
+p Net::IMAP.config.open_timeout                     # => 30
+```
+
+- **SEE** [c:Net::IMAP::Config], [m:Net::IMAP#config]
+
+#%end
 ### def Net::IMAP.debug -> bool
 
 デバッグモードが on になっていれば真を返します。
 
+#%since 3.4
+全体の設定 [m:Net::IMAP::Config#debug] の値を返します。
+
+#%end
 - **SEE** [m:Net::IMAP.debug=]
 
 ### def Net::IMAP.debug=(val)
@@ -308,6 +331,10 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
 
 真を渡すと on になります。
 
+#%since 3.4
+全体の設定 [m:Net::IMAP::Config#debug=] に設定します。
+
+#%end
 - **param** `val` -- 設定するデバッグモードの on/off の真偽値
 - **SEE** [m:Net::IMAP.debug]
 
@@ -422,6 +449,57 @@ p Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
 を返します。
 
 #%since 3.4
+### def config -> Net::IMAP::Config
+
+接続ごとの設定を返します。
+
+この設定は [m:Net::IMAP.new] で接続ごとに作られ、`config` で指定した設定(省略時は全体の設定 [m:Net::IMAP.config])を継承します。
+[m:Net::IMAP.new] の残りのキーワード引数が、この設定の初期値になります。
+
+- **SEE** [c:Net::IMAP::Config], [m:Net::IMAP.config]
+
+#%end
+### def open_timeout -> Integer
+
+接続が確立するまで待つ秒数を返します。
+
+#%since 3.4
+接続の設定 [m:Net::IMAP::Config#open_timeout] の値を返します。
+
+#%end
+- **SEE** [m:Net::IMAP.new]
+
+### def idle_response_timeout -> Integer
+
+IDLE の応答を待つ秒数を返します。
+
+#%since 3.4
+接続の設定 [m:Net::IMAP::Config#idle_response_timeout] の値を返します。
+
+#%end
+- **SEE** [m:Net::IMAP#idle]
+
+#%since 4.0
+### def max_response_size -> Integer | nil
+
+サーバの応答 1 つの大きさの上限(バイト数)を返します。
+
+接続の設定 [m:Net::IMAP::Config#max_response_size] の値を返します。
+nil は上限がないことを表します。
+
+- **SEE** [m:Net::IMAP#max_response_size=]
+
+### def max_response_size=(val)
+
+サーバの応答 1 つの大きさの上限(バイト数)を設定します。
+
+接続の設定 [m:Net::IMAP::Config#max_response_size=] に設定します。
+
+- **param** `val` -- 上限のバイト数。nil で上限をなくします。
+- **SEE** [m:Net::IMAP#max_response_size]
+
+#%end
+#%since 3.4
 ### def responses -> { String => [object] }
 ### def responses(type) -> [object]
 ### def responses {|hash| ... } -> object
@@ -451,13 +529,13 @@ untagged な応答は種類ごとに記録されます。
 #%end
 #%since 4.0
 ブロックを渡さないときは、`type` を指定するとその種類の応答の配列を凍結した複製を返します。
-`type` を指定しないときの動作は接続の設定 `responses_without_block`(`Net::IMAP::Config#responses_without_block`)で決まり、既定値の `:frozen_dup` では記録のハッシュを凍結した複製(値の配列も凍結したもの)を返します。
+`type` を指定しないときの動作は接続の設定 [m:Net::IMAP::Config#responses_without_block] で決まり、既定値の `:frozen_dup` では記録のハッシュを凍結した複製(値の配列も凍結したもの)を返します。
 `:raise` を設定すると [c:ArgumentError] が発生します。
 
 #%end
 #%version 3.4...4.0
 ブロックを渡さないときは、`type` を指定するとその種類の応答の配列を凍結した複製を返します。
-`type` を指定しないときの動作は接続の設定 `responses_without_block`(`Net::IMAP::Config#responses_without_block`)で決まり、既定値の `:warn` では非推奨の警告(カテゴリは `:deprecated`)を出して記録のハッシュそのものを返します。
+`type` を指定しないときの動作は接続の設定 [m:Net::IMAP::Config#responses_without_block] で決まり、既定値の `:warn` では非推奨の警告(カテゴリは `:deprecated`)を出して記録のハッシュそのものを返します。
 `:frozen_dup` を設定すると記録のハッシュを凍結した複製(値の配列も凍結したもの)を、`:raise` を設定すると [c:ArgumentError] が発生します。
 
 #%end
@@ -481,6 +559,7 @@ p imap.responses["EXISTS"].last
 p imap.responses["UIDVALIDITY"].last
 # => 968263756
 #%end
+
 ```
 
 #%since 3.3
@@ -553,6 +632,7 @@ imap.authenticate('PLAIN', user, password)
 #%else
 imap.authenticate('LOGIN', user, password)
 #%end
+
 ```
 
 #%since 3.3
@@ -590,7 +670,7 @@ auth_type としては以下がサポートされています。
 
 #%end
 #%since 3.4
-`sasl_ir` の既定値は接続の設定 `sasl_ir`(`Net::IMAP::Config#sasl_ir`)の値で、その既定値は true です。
+`sasl_ir` の既定値は接続の設定 [m:Net::IMAP::Config#sasl_ir] の値で、その既定値は true です。
 
 #%end
 #%since 3.2
@@ -622,6 +702,9 @@ LOGIN コマンドを送り、平文でパスワードを送りクライアン�
 - **param** `user` -- ユーザ名文字列
 - **param** `password` -- パスワード文字列
 - **raise** `Net::IMAP::NoResponseError` -- 認証に失敗した場合に発生します
+#%since 3.4
+- **raise** `Net::IMAP::LoginDisabledError` -- サーバの機能一覧に LOGINDISABLED があり、[m:Net::IMAP::Config#enforce_logindisabled] の設定で確認する場合に発生します。LOGIN コマンドは送られません
+#%end
 - **SEE** [m:Net::IMAP#authenticate]
 
 #%since 3.3
@@ -773,6 +856,7 @@ p imap.status("inbox", ["MESSAGES", "RECENT"])
 #%else
 # => {"RECENT"=>0, "MESSAGES"=>44}
 #%end
+
 ```
 
 - **param** `mailbox` -- 問い合わせ対象のメールボックス(文字列)
@@ -981,6 +1065,7 @@ p imap.store(6..8, "+FLAGS", [:Deleted])
 #%else
 # => [#<Net::IMAP::FetchData seqno=6, attr={"FLAGS"=>[:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=7, attr={"FLAGS"=>[:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=8, attr={"FLAGS"=>[:Seen, :Deleted]}>]
 #%end
+
 ```
 
 - **param** `set` -- 更新するメッセージのsequence number
@@ -1232,7 +1317,7 @@ TLS の交渉とホスト名の検証が両方成功してから返ります。
 
 #%end
 #%since 4.0
-サーバが TLS の開始に同意した後、接続の設定 `open_timeout`(`Net::IMAP::Config#open_timeout`)の秒数まで待ち、それを超えると [c:Net::OpenTimeout] が発生します。
+サーバが TLS の開始に同意した後、接続の設定 [m:Net::IMAP::Config#open_timeout] の秒数まで待ち、それを超えると [c:Net::OpenTimeout] が発生します。
 
 #%end
 #%since 3.3
@@ -1451,6 +1536,765 @@ LIST応答の属性
 として用いられます。
 
 詳しくは [RFC:2060] を参照してください。
+
+#%since 3.4
+# class Net::IMAP::Config < Object
+
+[c:Net::IMAP] の動作の設定を表すクラスです。
+
+全体の設定は [m:Net::IMAP.config] または [m:Net::IMAP::Config.global] で、接続ごとの設定は [m:Net::IMAP#config] で得られます。
+[m:Net::IMAP.new] は、`config` で指定した設定(省略時は全体の設定)を継承元とする接続ごとの設定を作り、残りのキーワード引数をその初期値にします。
+
+各設定は継承元([m:Net::IMAP::Config#parent] で得られます)を持ち、自身で値を設定していない属性は継承元の値を返します。
+継承元の値は参照するたびに調べるので、継承元の値を変えると、それを継承している設定にもすぐに反映されます。
+既定では、接続ごとの設定は全体の設定を、全体の設定は [m:Net::IMAP::Config.default] を継承します。
+
+```ruby title="継承の例"
+require 'net/imap'
+
+parent = Net::IMAP::Config.new(open_timeout: 10)
+config = parent.new(idle_response_timeout: 3)
+p config.open_timeout              # => 10
+p config.inherited?(:open_timeout) # => true
+parent.open_timeout = 20
+p config.open_timeout              # => 20
+p config.idle_response_timeout     # => 3
+```
+
+[m:Net::IMAP.new] の `config` に net-imap の版の数値(`0.4` など)を渡すと、その版の既定値を使えます。
+版ごとの既定値は [Net::IMAP::Config.[]](m:Net::IMAP::Config.[]) で得られる凍結済みの設定で、その継承元は全体の設定です。
+ただし `debug` は版ごとの既定値に含まれず、全体の設定から継承します。
+版の数値のかわりに、次の名前も使えます。
+
+- `:current` は、現在の版の既定値です。
+- `:default` は、`:current` と同じです。[m:Net::IMAP::Config.default] とは別のオブジェクトで、`debug` を全体の設定から継承します。
+- `:next` は、次の版で予定している既定値です。
+- `:future` は、将来の版で予定している既定値です。
+#%since 4.0
+- `:original` は、版の数値 `0.0` と同じで、設定の仕組みが入る前の動作に合わせた既定値です。
+#%end
+
+```ruby title="版ごとの既定値の例"
+require 'net/imap'
+
+p Net::IMAP::Config[0.3].sasl_ir                 # => false
+p Net::IMAP::Config[0.4].sasl_ir                 # => true
+p Net::IMAP::Config[0.4].responses_without_block # => :silence_deprecation_warning
+p Net::IMAP::Config[0.4].frozen?                 # => true
+Net::IMAP.debug = true
+p Net::IMAP::Config[0.4].debug                   # => true
+```
+
+既にある設定の属性をある版の既定値にするには [m:Net::IMAP::Config#load_defaults] を使います。
+
+設定の変更はスレッド間で同期されません。
+
+## Class Methods
+
+### def Net::IMAP::Config.default -> Net::IMAP::Config
+
+組み込みの既定値を持つ設定を返します。
+
+この設定は凍結されていて、継承元を持ちません。
+全体の設定 [m:Net::IMAP::Config.global] の継承元です。
+
+- **SEE** [m:Net::IMAP::Config.global]
+
+### def Net::IMAP::Config.global -> Net::IMAP::Config
+
+全体の設定を返します。
+
+[m:Net::IMAP.config] と同じオブジェクトです。
+この設定は凍結されておらず、継承元は [m:Net::IMAP::Config.default] です。
+[m:Net::IMAP::Config.new] で `parent` を省略したときや、[m:Net::IMAP.new] で `config` を省略したときの継承元になります。
+
+- **SEE** [m:Net::IMAP.config], [m:Net::IMAP::Config.default]
+
+### def Net::IMAP::Config.version_defaults -> {object => Net::IMAP::Config}
+
+版ごとの既定値の設定を、版の数値や名前をキーとして保持するハッシュを返します。
+
+[Net::IMAP::Config.[]](m:Net::IMAP::Config.[]) はこのハッシュから設定を取り出します。
+ハッシュも、値の設定も凍結されています。
+
+#%since 4.0
+キーは版の数値(`0.0` から `1.0` までの `0.1` 刻みの [c:Rational] と [c:Float])と名前(`:original`、`:default`、`:current`、`:next`、`:future`)です。
+キーに一致しない数値や文字列は、版の数値や名前に変換して探します。
+
+#%else
+キーは版の数値(`0` と、`0.0` から `0.6` までの `0.1` 刻みの [c:Float])と名前(`:default`、`:current`、`:next`、`:future`)です。
+
+#%end
+- **SEE** [Net::IMAP::Config.[]](m:Net::IMAP::Config.[])
+
+### def Net::IMAP::Config.[](config) -> Net::IMAP::Config
+
+`config` に対応する設定を返します。
+
+`config` には次のものを指定できます。
+
+- [c:Net::IMAP::Config] オブジェクトを指定すると、それをそのまま返します。
+- ハッシュ(`to_hash` に応答するオブジェクト)を指定すると、その内容を属性の値とし、全体の設定を継承元とする凍結済みの新しい設定を返します。
+- 版の数値(`0.4` など)を指定すると、その版の既定値の設定を返します。
+- 名前(`:current` など)を指定すると、その名前の既定値の設定を返します。
+#%since 4.0
+- 文字列(`"0.5"` など)を指定すると、版の数値や名前に変換して、その既定値の設定を返します。
+#%end
+
+版の数値や名前で得られる設定は凍結済みで、継承元は全体の設定です。
+
+- **param** `config` -- 設定、ハッシュ、版の数値、名前のいずれか
+- **raise** `RangeError` -- 未知の版の数値を指定した場合に発生します。
+#%since 4.0
+- **raise** `KeyError` -- 未知の名前(シンボルか文字列)を指定した場合に発生します。
+- **raise** `TypeError` -- 上記以外のもの(nil など)を指定した場合に発生します。
+#%else
+- **raise** `KeyError` -- 未知の名前を指定した場合に発生します。
+- **raise** `TypeError` -- 上記以外のもの(nil や文字列など)を指定した場合に発生します。
+#%end
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config[{open_timeout: 1}]
+p config.open_timeout # => 1
+p config.frozen?      # => true
+p Net::IMAP::Config[Net::IMAP::Config.default].equal?(Net::IMAP::Config.default) # => true
+```
+
+- **SEE** [m:Net::IMAP::Config.version_defaults], [m:Net::IMAP::Config.new]
+
+### def Net::IMAP::Config.new(parent = Net::IMAP::Config.global, **attrs) -> Net::IMAP::Config
+### def Net::IMAP::Config.new(parent = Net::IMAP::Config.global, **attrs) {|config| ... } -> Net::IMAP::Config
+
+`parent` を継承元とする新しい設定を作り、`attrs` で属性の値を設定して返します。
+
+`parent` は [Net::IMAP::Config.[]](m:Net::IMAP::Config.[]) で変換するので、設定のほかに版の数値や名前やハッシュも指定できます。
+ブロックを渡すと、作った設定をブロックに渡してから返します。
+
+- **param** `parent` -- 継承元の設定。省略時は全体の設定
+- **param** `attrs` -- 設定する属性の名前と値
+- **raise** `ArgumentError` -- `attrs` に未知の属性名がある場合や、属性に不正な値を指定した場合に発生します。
+- **raise** `TypeError` -- `parent` に設定に変換できないもの(nil など)を指定した場合に発生します。
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new(open_timeout: 10)
+p config.open_timeout                            # => 10
+p config.parent.equal?(Net::IMAP::Config.global) # => true
+p Net::IMAP::Config.new(0.3).sasl_ir             # => false
+```
+
+- **SEE** [m:Net::IMAP::Config#new], [m:Net::IMAP::Config#with]
+
+## Instance Methods
+
+### def debug -> bool
+### def debug? -> bool
+
+デバッグモードが on になっていれば真を返します。
+
+on のときは、サーバとの間で送受信したデータを標準エラー出力に出力し、応答の解析に失敗したときの警告も詳しくなります。
+既定値は false です。
+版ごとの既定値の設定はこの属性を全体の設定から継承し、[m:Net::IMAP::Config#load_defaults] もこの属性を変えません。
+[m:Net::IMAP.debug] は全体の設定のこの属性を返します。
+
+#%#noexample Net::IMAP::Config#debug= を参照
+
+- **SEE** [m:Net::IMAP::Config#debug=], [m:Net::IMAP.debug]
+
+### def debug=(val)
+
+デバッグモードの on/off を設定します。
+
+`val` は真偽値に変換します。
+
+- **param** `val` -- 真で on、偽で off にします。
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new
+config.debug = 1
+p config.debug              # => true
+p config.inherited?(:debug) # => false
+```
+
+- **SEE** [m:Net::IMAP::Config#debug], [m:Net::IMAP.debug=]
+
+### def open_timeout -> Integer
+
+接続が確立するまで待つ秒数を返します。
+
+[m:Net::IMAP.new] で TCP の接続と TLS の開始のそれぞれに適用し、この秒数を超えると [c:Net::OpenTimeout] が発生します。
+既定値は 30 です。
+
+#%since 4.0
+[m:Net::IMAP#starttls] でも使います。
+
+#%end
+
+#%#noexample Net::IMAP::Config.new を参照
+
+- **SEE** [m:Net::IMAP::Config#open_timeout=], [m:Net::IMAP#open_timeout]
+
+### def open_timeout=(val)
+
+接続が確立するまで待つ秒数を設定します。
+
+`val` は [m:Kernel?.Integer] で整数に変換します。
+
+- **param** `val` -- 待つ秒数
+- **raise** `ArgumentError` -- 整数に変換できない文字列を指定した場合に発生します。
+
+- **SEE** [m:Net::IMAP::Config#open_timeout]
+
+### def idle_response_timeout -> Integer
+
+IDLE の応答を待つ秒数を返します。
+
+[m:Net::IMAP#idle] で IDLE を終えるよう要求してから、応答を受け取るまで待つ秒数です。
+既定値は 5 です。
+
+#%#noexample Net::IMAP::Config#idle_response_timeout= を参照
+
+- **SEE** [m:Net::IMAP::Config#idle_response_timeout=], [m:Net::IMAP#idle_response_timeout], [m:Net::IMAP#idle_done]
+
+### def idle_response_timeout=(val)
+
+IDLE の応答を待つ秒数を設定します。
+
+`val` は [m:Kernel?.Integer] で整数に変換します。
+
+- **param** `val` -- 待つ秒数
+- **raise** `ArgumentError` -- 整数に変換できない文字列を指定した場合に発生します。
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new
+config.idle_response_timeout = "10"
+p config.idle_response_timeout # => 10
+```
+
+- **SEE** [m:Net::IMAP::Config#idle_response_timeout]
+
+#%since 4.0
+### def sasl_ir -> Symbol | bool
+### def sasl_ir? -> Symbol | bool
+#%else
+### def sasl_ir -> bool
+### def sasl_ir? -> bool
+#%end
+
+[m:Net::IMAP#authenticate] で SASL-IR 拡張([RFC:4959])を使うかどうかを返します。
+
+サーバと認証方式の両方が SASL-IR 拡張に対応しているときに使います。
+[m:Net::IMAP#authenticate] で `sasl_ir` を指定すると、そちらが優先されます。
+
+#%since 4.0
+値の意味は次のとおりです。
+
+- false のときは、SASL-IR 拡張を使いません。
+- `:when_capabilities_cached` のときは、サーバの機能一覧を取得済みのときだけ SASL-IR 拡張を使い、機能一覧を調べるための CAPABILITY コマンドは送りません。
+- true のときは、SASL-IR 拡張を使います。
+
+#%end
+既定値は true です。
+版ごとの既定値は、`0.3` 以前が false、`0.4` 以降が true です。
+
+#%#noexample Net::IMAP::Config#sasl_ir= を参照
+
+- **SEE** [m:Net::IMAP::Config#sasl_ir=], [m:Net::IMAP#authenticate]
+
+### def sasl_ir=(val)
+
+[m:Net::IMAP#authenticate] で SASL-IR 拡張を使うかどうかを設定します。
+
+#%since 4.0
+`val` には false、`:when_capabilities_cached`、true のいずれかを指定します。
+
+- **param** `val` -- false、`:when_capabilities_cached`、true のいずれか
+- **raise** `ArgumentError` -- 上記以外の値を指定した場合に発生します。
+#%else
+`val` は真偽値に変換します。
+
+- **param** `val` -- 真で使い、偽で使いません。
+#%end
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new
+config.sasl_ir = false
+p config.sasl_ir # => false
+```
+
+- **SEE** [m:Net::IMAP::Config#sasl_ir]
+
+### def enforce_logindisabled -> Symbol | bool
+
+[m:Net::IMAP#login] の前に、サーバの機能一覧に LOGINDISABLED があるかを確認するかどうかを返します。
+
+確認して LOGINDISABLED があったときは、LOGIN コマンドを送らずに [c:Net::IMAP::LoginDisabledError] が発生します。
+値の意味は次のとおりです。
+
+- false のときは、確認せずに LOGIN コマンドを送ります。
+- `:when_capabilities_cached` のときは、サーバの機能一覧を取得済みのときだけ確認し、機能一覧を調べるための CAPABILITY コマンドは送りません。
+- true のときは、確認します。機能一覧が未取得なら、LOGIN コマンドの前に CAPABILITY コマンドを送ります。
+
+既定値は true です。
+版ごとの既定値は、`0.4` 以前が false、`0.5` 以降が true です。
+
+#%#noexample Net::IMAP::Config#enforce_logindisabled= を参照
+
+- **SEE** [m:Net::IMAP::Config#enforce_logindisabled=], [m:Net::IMAP#login]
+
+### def enforce_logindisabled=(val)
+
+[m:Net::IMAP#login] の前に、サーバの機能一覧に LOGINDISABLED があるかを確認するかどうかを設定します。
+
+- **param** `val` -- false、`:when_capabilities_cached`、true のいずれか
+- **raise** `ArgumentError` -- 上記以外の値を指定した場合に発生します。
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new
+config.enforce_logindisabled = :when_capabilities_cached
+p config.enforce_logindisabled # => :when_capabilities_cached
+```
+
+- **SEE** [m:Net::IMAP::Config#enforce_logindisabled]
+
+#%since 4.1
+### def max_non_synchronizing_literal -> Integer
+
+同期しないリテラルとして送るデータの大きさの上限(バイト数)を返します。
+
+同期しないリテラルは、サーバが続行を許可するのを待たずに送るリテラルです。
+サーバの機能一覧を取得済みで、LITERAL+、LITERAL-、IMAP4rev2 のいずれかを含むときに、大きさがこの上限以下のデータを同期しないリテラルとして送ります。
+LITERAL- と IMAP4rev2 では、大きさが 4096 バイト以下であることも必要です。
+-1 にすると、同期しないリテラルを送りません。
+既定値は 16384(16 KiB)です。
+版ごとの既定値は、`0.5` 以前が -1、`0.6` 以降が 16384 です。
+
+#%#noexample Net::IMAP::Config#max_non_synchronizing_literal= を参照
+
+- **SEE** [m:Net::IMAP::Config#max_non_synchronizing_literal=]
+
+### def max_non_synchronizing_literal=(val)
+
+同期しないリテラルとして送るデータの大きさの上限(バイト数)を設定します。
+
+`val` は [m:Kernel?.Integer] で整数に変換します。
+
+- **param** `val` -- 上限のバイト数。-1 で同期しないリテラルを送りません。
+- **raise** `ArgumentError` -- 整数に変換できない文字列を指定した場合に発生します。
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new
+config.max_non_synchronizing_literal = -1
+p config.max_non_synchronizing_literal # => -1
+```
+
+- **SEE** [m:Net::IMAP::Config#max_non_synchronizing_literal]
+
+#%end
+#%since 4.0
+### def max_response_size -> Integer | nil
+
+サーバの応答 1 つの大きさの上限(バイト数)を返します。
+
+nil は上限がないことを表します。
+応答の大きさが上限に達するか、リテラルを読むと上限を超えるときは、[c:Net::IMAP::ResponseTooLargeError] が発生して接続を閉じます。
+この上限は応答 1 つごとのもので、応答の数や、記録される未処理の応答の量は制限しません。
+既定値は 536870912(512 MiB)で、信頼できないサーバに接続するときはもっと小さい値にするべきです。
+版ごとの既定値は、`0.4` 以前が nil、`0.5` 以降が 536870912 です。
+
+値を変えてもすぐには反映されないことがあります。
+受信スレッドが前の値で次の応答を待っていることがあるためで、[m:Net::IMAP#noop] などで応答を受け取ると新しい値が使われます。
+
+#%#noexample Net::IMAP::Config#max_response_size= を参照
+
+- **SEE** [m:Net::IMAP::Config#max_response_size=], [m:Net::IMAP#max_response_size]
+
+### def max_response_size=(val)
+
+サーバの応答 1 つの大きさの上限(バイト数)を設定します。
+
+`val` は nil でなければ [m:Kernel?.Integer] で整数に変換します。
+
+- **param** `val` -- 上限のバイト数。nil で上限をなくします。
+- **raise** `ArgumentError` -- 整数に変換できない文字列を指定した場合に発生します。
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new
+config.max_response_size = "1024"
+p config.max_response_size # => 1024
+config.max_response_size = nil
+p config.max_response_size # => nil
+```
+
+- **SEE** [m:Net::IMAP::Config#max_response_size], [m:Net::IMAP#max_response_size=]
+
+#%end
+### def responses_without_block -> Symbol
+
+[m:Net::IMAP#responses] を `type` もブロックも渡さずに呼んだときの動作を返します。
+
+値の意味は次のとおりです。
+
+- `:silence_deprecation_warning` のときは、警告を出さずに記録のハッシュそのものを返します。
+- `:warn` のときは、非推奨の警告を出して記録のハッシュそのものを返します。
+- `:frozen_dup` のときは、記録のハッシュを凍結した複製(値の配列も凍結したもの)を返します。
+- `:raise` のときは、[c:ArgumentError] が発生します。
+
+記録のハッシュそのものを扱うのはスレッド安全ではありません。
+
+#%since 4.0
+既定値は `:frozen_dup` です。
+
+#%else
+既定値は `:warn` です。
+
+#%end
+版ごとの既定値は、`0.4` 以前が `:silence_deprecation_warning`、`0.5` が `:warn`、`0.6` 以降が `:frozen_dup` です。
+
+#%#noexample Net::IMAP::Config#responses_without_block= を参照
+
+- **SEE** [m:Net::IMAP::Config#responses_without_block=], [m:Net::IMAP#responses]
+
+### def responses_without_block=(val)
+
+[m:Net::IMAP#responses] を `type` もブロックも渡さずに呼んだときの動作を設定します。
+
+- **param** `val` -- `:silence_deprecation_warning`、`:warn`、`:frozen_dup`、`:raise` のいずれか
+- **raise** `ArgumentError` -- 上記以外の値を指定した場合に発生します。
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new
+config.responses_without_block = :raise
+p config.responses_without_block # => :raise
+```
+
+- **SEE** [m:Net::IMAP::Config#responses_without_block]
+
+#%since 4.0
+### def parser_use_deprecated_uidplus_data -> Symbol | bool
+
+COPYUID と APPENDUID の応答コードを解析するときに非推奨の警告を出すかどうかを返します。
+
+この属性の値は解析の結果に影響しません。
+true か `:up_to_max_size` のときは、COPYUID と APPENDUID の応答コードを解析するたびに非推奨の警告(カテゴリは `:deprecated`)を出します。
+false のときは警告を出しません。
+既定値は false です。
+版ごとの既定値は、`0.4` 以前が true、`0.5` が `:up_to_max_size`、`0.6` 以降が false です。
+
+#%#noexample Net::IMAP::Config#parser_use_deprecated_uidplus_data= を参照
+
+- **SEE** [m:Net::IMAP::Config#parser_use_deprecated_uidplus_data=]
+
+### def parser_use_deprecated_uidplus_data=(val)
+
+COPYUID と APPENDUID の応答コードを解析するときに非推奨の警告を出すかどうかを設定します。
+
+- **param** `val` -- true、`:up_to_max_size`、false のいずれか
+- **raise** `ArgumentError` -- 上記以外の値を指定した場合に発生します。
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new
+config.parser_use_deprecated_uidplus_data = :up_to_max_size
+p config.parser_use_deprecated_uidplus_data # => :up_to_max_size
+```
+
+- **SEE** [m:Net::IMAP::Config#parser_use_deprecated_uidplus_data]
+
+### def parser_max_deprecated_uidplus_data_size -> Integer
+
+互換のために残されている属性の値を返します。
+
+この属性の値は無視され、COPYUID と APPENDUID の応答コードの解析にも警告にも影響しません。
+既定値は 0 です。
+版ごとの既定値は、`0.3` 以前が 10000、`0.4` が 1000、`0.5` が 100、`0.6` 以降が 0 です。
+
+#%#noexample Net::IMAP::Config#parser_max_deprecated_uidplus_data_size= を参照
+
+- **SEE** [m:Net::IMAP::Config#parser_max_deprecated_uidplus_data_size=]
+
+### def parser_max_deprecated_uidplus_data_size=(val)
+
+互換のために残されている属性の値を設定します。
+
+`val` は [m:Kernel?.Integer] で整数に変換します。
+
+- **param** `val` -- 設定する整数
+- **raise** `ArgumentError` -- 整数に変換できない文字列を指定した場合に発生します。
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new
+config.parser_max_deprecated_uidplus_data_size = 100
+p config.parser_max_deprecated_uidplus_data_size # => 100
+```
+
+- **SEE** [m:Net::IMAP::Config#parser_max_deprecated_uidplus_data_size]
+
+#%end
+### def parent -> Net::IMAP::Config | nil
+
+継承元の設定を返します。
+
+継承元を持たない [m:Net::IMAP::Config.default] では nil を返します。
+
+```ruby title="例"
+require 'net/imap'
+
+p Net::IMAP::Config.global.parent.equal?(Net::IMAP::Config.default) # => true
+p Net::IMAP::Config.default.parent                                   # => nil
+```
+
+### def new(**attrs) -> Net::IMAP::Config
+
+`self` を継承元とする新しい設定を作り、`attrs` で属性の値を設定して返します。
+
+`Net::IMAP::Config.new(self, **attrs)` と同じです。
+
+- **param** `attrs` -- 設定する属性の名前と値
+- **raise** `ArgumentError` -- `attrs` に未知の属性名がある場合や、属性に不正な値を指定した場合に発生します。
+
+#%#noexample Net::IMAP::Config クラスの継承の例を参照
+
+- **SEE** [m:Net::IMAP::Config.new], [m:Net::IMAP::Config#with]
+
+### def update(**attrs) -> self
+
+`attrs` で属性の値を設定して `self` を返します。
+
+不正な値があって例外が発生したときは、それより前の属性だけが設定されていることがあります。
+
+- **param** `attrs` -- 設定する属性の名前と値
+- **raise** `ArgumentError` -- `attrs` に未知の属性名がある場合や、属性に不正な値を指定した場合に発生します。未知の属性名があるときは、どの属性も設定しません。
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new
+config.update(open_timeout: 1, debug: true)
+p config.open_timeout # => 1
+p config.debug        # => true
+```
+
+### def with(**attrs) -> Net::IMAP::Config
+### def with(**attrs) {|config| ... } -> object
+
+`self` を継承元とする新しい設定を作り、`attrs` で属性の値を設定して返します。
+
+`self` が凍結されているときは、新しい設定も凍結します。
+ブロックを渡すと、新しい設定をブロックに渡し、ブロックの値を返します。
+
+- **param** `attrs` -- 設定する属性の名前と値
+- **raise** `ArgumentError` -- `attrs` を 1 つも指定しなかった場合や、未知の属性名がある場合、属性に不正な値を指定した場合に発生します。
+
+```ruby title="例"
+require 'net/imap'
+
+base = Net::IMAP::Config.new.freeze
+config = base.with(open_timeout: 3)
+p config.open_timeout        # => 3
+p config.parent.equal?(base) # => true
+p config.frozen?             # => true
+p base.with(open_timeout: 3) {|c| c.open_timeout * 2 } # => 6
+```
+
+- **SEE** [m:Net::IMAP::Config#new]
+
+### def load_defaults(version) -> self
+
+`debug` 以外の属性に `version` の版の既定値を設定して `self` を返します。
+
+継承元は変わりません。
+設定した属性は継承元から継承しなくなります。
+`version` は [Net::IMAP::Config.[]](m:Net::IMAP::Config.[]) と同じように、版の数値や名前で指定します。
+
+#%since 4.0
+版の数値や名前を表す文字列も指定できます。
+
+#%end
+- **param** `version` -- 版の数値か名前
+- **raise** `ArgumentError` -- `version` が数値でもシンボルでも文字列でもない場合に発生します。
+- **raise** `RangeError` -- 未知の版の数値を指定した場合に発生します。
+- **raise** `KeyError` -- 未知の名前を指定した場合に発生します。
+#%until 4.0
+- **raise** `TypeError` -- 文字列を指定した場合に発生します。
+#%end
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new(debug: true)
+config.load_defaults(0.4)
+p config.enforce_logindisabled              # => false
+p config.responses_without_block            # => :silence_deprecation_warning
+p config.debug                              # => true
+p config.inherited?(:enforce_logindisabled) # => false
+```
+
+#%since 4.0
+### def inherited?(*attrs) -> bool
+
+`attrs` の属性がすべて継承元から継承されていれば真を返します。
+
+`attrs` を省略すると、すべての属性を調べます。
+1 つでも `self` で値を設定した属性があれば偽を返します。
+
+- **param** `attrs` -- 属性の名前のシンボル
+
+#%else
+### def inherited?(attr) -> bool
+
+`attr` の属性が継承元から継承されていれば真を返します。
+
+`self` で値を設定した属性なら偽を返します。
+
+- **param** `attr` -- 属性の名前のシンボル
+
+#%end
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new(open_timeout: 1)
+p config.inherited?(:open_timeout) # => false
+p config.inherited?(:debug)        # => true
+```
+
+- **SEE** [m:Net::IMAP::Config#reset]
+
+#%since 4.1
+### def inherits_defaults?(*attrs) -> bool | Rational | nil
+
+`attrs` の属性がすべて既定値の設定から継承されているかどうかを返します。
+
+`attrs` を省略すると、すべての属性を調べます。
+すべて [m:Net::IMAP::Config.default] から継承していれば true を、版ごとの既定値の設定から継承していればその版の数値([c:Rational])を返します。
+全体の設定で値を設定した属性を継承していれば nil を、`self` やほかの継承元で値を設定した属性があれば false を返します。
+
+- **param** `attrs` -- 属性の名前のシンボル
+
+```ruby title="例"
+require 'net/imap'
+
+p Net::IMAP::Config.new.inherits_defaults?                  # => true
+p Net::IMAP::Config.new(open_timeout: 1).inherits_defaults? # => false
+p Net::IMAP::Config[0.4].inherits_defaults?                 # => (2/5)
+```
+
+- **SEE** [m:Net::IMAP::Config#overrides?]
+
+### def overrides?(*attrs) -> bool
+
+`attrs` の属性のうち 1 つでも `self` で値を設定したものがあれば真を返します。
+
+`attrs` を省略すると、すべての属性を調べます。
+
+- **param** `attrs` -- 属性の名前のシンボル
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new(open_timeout: 1)
+p config.overrides?                # => true
+p config.overrides?(:debug)        # => false
+p Net::IMAP::Config.new.overrides? # => false
+```
+
+- **SEE** [m:Net::IMAP::Config#inherited?]
+
+#%end
+### def reset(attr) -> object
+### def reset -> self
+
+属性を継承元から継承するように戻します。
+
+`attr` を指定すると、その属性を戻し、`self` で設定していた値を返します。
+その属性が既に継承されていれば nil を返します。
+`attr` を省略するか nil を指定すると、すべての属性を戻して `self` を返します。
+
+- **param** `attr` -- 属性の名前のシンボル
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new(open_timeout: 1)
+p config.reset(:open_timeout) # => 1
+p config.open_timeout         # => 30
+p config.reset(:open_timeout) # => nil
+```
+
+- **SEE** [m:Net::IMAP::Config#inherited?]
+
+### def to_h -> {Symbol => object}
+
+すべての属性の名前と値をハッシュにして返します。
+
+値は継承元から継承したものも含みます。
+
+```ruby title="例"
+require 'net/imap'
+
+config = Net::IMAP::Config.new(open_timeout: 1)
+p config.to_h[:open_timeout]          # => 1
+p config.to_h[:idle_response_timeout] # => 5
+```
+
+### def freeze -> self
+
+`self` を凍結します。
+
+凍結した設定の属性を変更しようとすると [c:FrozenError] が発生します。
+
+#%since 4.0
+### def inspect -> String
+### def to_s -> String
+
+`self` で値を設定した属性と継承の連鎖を表す文字列を返します。
+
+継承元で値を設定した属性も、継承元ごとに再帰的に示します。
+既定値の設定から継承した属性は示しません。
+
+```ruby title="例"
+require 'net/imap'
+
+Net::IMAP.debug = true
+p Net::IMAP::Config.global
+# => #<Net::IMAP::Config.global debug=true inherits from Net::IMAP::Config.default>
+```
+
+- **SEE** [m:Net::IMAP::Config#pretty_print], [m:Net::IMAP::Config#to_h]
+
+### def pretty_print(pp) -> ()
+
+[lib:pp] で、すべての属性と継承の連鎖を表す文字列を出力するのに使います。
+
+継承した属性は、それを継承した継承元とともに示します。
+
+- **param** `pp` -- [c:PP] オブジェクト
+
+- **SEE** [m:Net::IMAP::Config#inspect]
+
+#%end
+#%end
 
 # class Net::IMAP::ContinuationRequest < Struct
 
@@ -2318,10 +3162,62 @@ true を返します。
 
 すべての IMAP 例外クラスのスーパークラス。
 
+#%since 3.4
+# class Net::IMAP::LoginDisabledError < Net::IMAP::Error
+
+サーバの機能一覧に LOGINDISABLED があるために [m:Net::IMAP#login] で LOGIN コマンドを送らないときに発生する例外のクラスです。
+
+LOGINDISABLED を確認するかどうかは [m:Net::IMAP::Config#enforce_logindisabled] の設定で決まります。
+この例外が発生するときは、LOGIN コマンドはサーバに送られません。
+既定のメッセージは "Remote server has disabled the LOGIN command" です。
+
+#%end
 # class Net::IMAP::DataFormatError < Net::IMAP::Error
 
 データフォーマットが正しくない場合に発生する例外のクラスです。
 
+#%since 4.0
+# class Net::IMAP::ResponseReadError < Net::IMAP::Error
+
+設定された上限のためにサーバからの応答を読めないときに発生する例外のクラスです。
+
+実際にはこれを継承した [c:Net::IMAP::ResponseTooLargeError] の例外が発生します。
+
+# class Net::IMAP::ResponseTooLargeError < Net::IMAP::ResponseReadError
+
+サーバからの応答 1 つの大きさが [m:Net::IMAP#max_response_size] を超えるときに発生する例外のクラスです。
+
+応答の大きさが上限に達するか、リテラルを読むと上限を超えるときに発生し、接続は閉じられます。
+上限については [m:Net::IMAP::Config#max_response_size] を参照してください。
+
+## Instance Methods
+### def bytes_read -> Integer | nil
+
+例外が発生した時点までに、その応答について読み込んだバイト数を返します。
+
+例外の生成時に指定されなかったときは nil を返します。
+
+#%since 4.1
+### def literal_size -> Integer | false | nil
+#%else
+### def literal_size -> Integer | nil
+#%end
+
+リテラルを読む前に上限を超えると分かったときは、そのリテラルの大きさ(バイト数)を返します。
+
+#%since 4.1
+それ以外のときは nil か false を返します。
+#%else
+それ以外のときは nil を返します。
+#%end
+
+### def max_response_size -> Integer | nil
+
+例外が発生したときの応答の大きさの上限(バイト数)を返します。
+
+例外の生成時に指定されなかったときは nil を返します。
+
+#%end
 # class Net::IMAP::ResponseParseError < Net::IMAP::Error
 
 サーバからのレスポンスが正しくパースできない場合に発生する例外のクラスです。
