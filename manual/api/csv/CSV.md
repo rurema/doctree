@@ -189,6 +189,10 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   '"'
 - **`:field_size_limit`**:
   nil
+#%since 3.2
+- **`:max_field_size`**:
+  nil
+#%end
 - **`:converters`**:
   nil
 - **`:unconverted_fields`**:
@@ -201,10 +205,28 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   nil
 - **`:skip_blanks`**:
   false
-- **`:force_quotes`**:
-  false
 - **`:skip_lines`**:
   nil
+- **`:liberal_parsing`**:
+  false
+- **`:nil_value`**:
+  nil
+- **`:empty_value`**:
+  ""
+- **`:strip`**:
+  false
+- **`:write_headers`**:
+  nil
+- **`:quote_empty`**:
+  true
+- **`:force_quotes`**:
+  false
+- **`:write_converters`**:
+  nil
+- **`:write_nil_value`**:
+  nil
+- **`:write_empty_value`**:
+  ""
 
 ### const VERSION -> String
 
@@ -1043,31 +1065,65 @@ p csv.encoding # => #<Encoding:UTF-8>
 
 [m:IO#fcntl] に委譲します。
 
-### def field_size_limit -> Integer
+### def field_size_limit -> Integer | nil
 
 フィールドサイズの最大値を返します。
+
+#%since 3.2
+3.2 以降は [m:CSV#max_field_size] に 1 を足した値(`:max_field_size` が nil なら nil)を返します。
+
+#%end
 
 ```ruby title="例"
 require "csv"
 
-csv = CSV.new(DATA)
+text = <<~CSV
+  "a","b"
+  "
+  2
+  2
+  ",""
+CSV
+
+csv = CSV.new(text)
 p csv.field_size_limit # => nil
 p csv.read # => [["a", "b"], ["\n2\n2\n", ""]]
 
-DATA.rewind
-csv = CSV.new(DATA, field_size_limit: 4)
+csv = CSV.new(text, field_size_limit: 4)
 p csv.field_size_limit # => 4
-csv.read # => #<CSV::MalformedCSVError: Field size exceeded on line 2.>
-
-__END__
-"a","b"
-"
-2
-2
-",""
+#%since 3.2
+csv.read # ~> CSV::MalformedCSVError: Field size exceeded: 5 > 3 in line 2.
+#%else
+csv.read # ~> CSV::MalformedCSVError: Field size exceeded in line 2.
+#%end
 ```
 
 - **SEE** [m:CSV.new]
+
+#%since 3.2
+### def max_field_size -> Integer | nil
+
+フィールドの長さ(文字数)の上限を返します。制限していない場合は nil を返します。
+
+[m:CSV.new] の `:max_field_size` オプション、または `:field_size_limit` オプション(この場合は指定した値から 1 を引いた値)で設定します。
+
+- **SEE** [m:CSV#field_size_limit]
+
+```ruby title="例"
+require "csv"
+
+csv = CSV.new("a,b\n")
+p csv.max_field_size # => nil
+
+csv = CSV.new("a,b\n", max_field_size: 3)
+p csv.max_field_size # => 3
+p csv.field_size_limit # => 4
+
+csv = CSV.new("a,b\n", field_size_limit: 4)
+p csv.max_field_size # => 3
+```
+
+#%end
 
 ### def fileno -> Integer
 ### def to_i   -> Integer
