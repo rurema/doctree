@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 gem "rake"
 gem "rackup"
+gem "test-unit"
 
 bitclust_gems = proc do
   gem "bitclust-core"
