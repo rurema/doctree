@@ -43,11 +43,24 @@ ARGV.options{|opt|
 p o                         # => true
 ```
 
+#%since 3.4
+### def order!(into: nil, exact: options.require_exact)               -> [String]
+### def order!(into: nil, exact: options.require_exact) {|s| ... }   -> [String]
+#%else
 ### def order!               -> [String]
 ### def order!{|s| ... }     -> [String]
+#%end
 
 自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
 [m:OptionParser#order!] を参照して下さい。
+
+#%since 3.4
+`into` と `exact` のキーワード引数は [m:OptionParser#order!] にそのまま渡します。それ以外のキーワード引数を渡しても無視されます([c:ArgumentError] は発生しません)。
+
+- **param** `into` -- オプションを格納するハッシュを指定します。[m:OptionParser#order!] の `into` と同じです。
+
+- **param** `exact` -- 真を指定すると、ロングオプションを省略した形([m:OptionParser#require_exact] を参照)を受け付けなくなります。省略時は [m:OptionParser#require_exact] の値です。
+#%end
 
 - **raise** `OptionParser::ParseError` -- 自身のパースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブクラスの例外になります。
@@ -61,10 +74,22 @@ ARGV.order!
 p o                                # => true
 ```
 
+#%since 3.4
+### def permute!(into: nil, exact: options.require_exact)   -> [String]
+#%else
 ### def permute!             -> [String]
+#%end
 
 自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
 [m:OptionParser#permute!] を参照して下さい。
+
+#%since 3.4
+`into` と `exact` のキーワード引数は [m:OptionParser#permute!] にそのまま渡します。それ以外のキーワード引数を渡しても無視されます([c:ArgumentError] は発生しません)。
+
+- **param** `into` -- オプションを格納するハッシュを指定します。[m:OptionParser#permute!] の `into` と同じです。
+
+- **param** `exact` -- 真を指定すると、ロングオプションを省略した形([m:OptionParser#require_exact] を参照)を受け付けなくなります。省略時は [m:OptionParser#require_exact] の値です。
+#%end
 
 - **raise** `OptionParser::ParseError` -- 自身のパースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブクラスの例外になります。
@@ -78,10 +103,22 @@ ARGV.permute!
 p o                                # => true
 ```
 
+#%since 3.4
+### def parse!(into: nil, exact: options.require_exact)     -> [String]
+#%else
 ### def parse!               -> [String]
+#%end
 
 自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
 [m:OptionParser#parse!] を参照して下さい。
+
+#%since 3.4
+`into` と `exact` のキーワード引数は [m:OptionParser#parse!] にそのまま渡します。それ以外のキーワード引数を渡しても無視されます([c:ArgumentError] は発生しません)。
+
+- **param** `into` -- オプションを格納するハッシュを指定します。[m:OptionParser#parse!] の `into` と同じです。
+
+- **param** `exact` -- 真を指定すると、ロングオプションを省略した形([m:OptionParser#require_exact] を参照)を受け付けなくなります。省略時は [m:OptionParser#require_exact] の値です。
+#%end
 
 - **raise** `OptionParser::ParseError` -- 自身のパースに失敗した場合、発生します。
                                 実際は OptionParser::ParseError のサブクラスの例外になります。
@@ -95,15 +132,41 @@ ARGV.parse!
 p o                                # => true
 ```
 
-#%since 3.3
+#%since 3.4
+
+```ruby
+require 'optparse'
+
+argv = ["--verbose", "--name", "foo", "file.txt"]
+argv.extend(OptionParser::Arguable)
+argv.options.on("-v", "--verbose")
+argv.options.on("--name NAME")
+h = {}
+argv.parse!(into: h)
+p argv                             # => ["file.txt"]
+p h                                # => {verbose: true, name: "foo"}
+```
+
+#%end
+
+#%since 3.4
+### def getopts(short_opt, *long_opt, symbolize_names: false, exact: options.require_exact)    -> Hash
+#%end
+#%version 3.3...3.4
 ### def getopts(short_opt, *long_opt, symbolize_names: false)    -> Hash
-#%else
+#%end
+#%until 3.3
 ### def getopts(short_opt, *long_opt)    -> Hash
 #%end
 
 指定された short_opt や long_opt に応じて自身をパースし、結果を Hash として返します。
 
 コマンドラインに - もしくは -- を指定した場合、それ以降の解析を行ないません。
+
+#%since 3.4
+`symbolize_names` と `exact` 以外のキーワード引数を渡しても無視されます([c:ArgumentError] は発生しません)。
+
+#%end
 
 - **param** `short_opt` -- ショートネームのオプション(-f や -fx)を文字列で指定します。オプションが -f と -x の
                  2つの場合は "fx" の様に指定します。ここでオプションがないときは空文字列を指定します。
@@ -116,6 +179,10 @@ p o                                # => true
 
 #%since 3.3
 - **param** `symbolize_names` -- true を指定すると、戻り値の Hash はキーがシンボルになります。false を指定した場合、戻り値の Hash はキーが文字列になります。
+#%end
+
+#%since 3.4
+- **param** `exact` -- 真を指定すると、ロングオプションを省略した形([m:OptionParser#require_exact] を参照)を受け付けなくなります。省略時は [m:OptionParser#require_exact] の値です。
 #%end
 
 - **raise** `OptionParser::ParseError` -- 自身のパースに失敗した場合、発生します。
