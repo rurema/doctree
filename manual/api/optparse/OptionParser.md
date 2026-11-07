@@ -884,6 +884,11 @@ argv からオプションを取り除いたものを返します。
 
 下の例で言うと、コマンドの引数 somefile よりも後ろにオプションを置くことができません。-b もコマンドのオプションではない引数として扱われてしまいます。
 
+#%since 3.4
+`into` と `exact` 以外のキーワード引数を渡しても無視されます([c:ArgumentError] は発生しません)。
+
+#%end
+
 - **param** `argv` -- パースしたい引数を文字列の配列で指定します。
 
 - **param** `args` -- パースしたい引数を順に文字列として与えます。
@@ -936,6 +941,11 @@ argv を返します。
 下の例で言うと、コマンドの引数 somefile よりも後ろにオプションを置くことができません。
 -b もコマンドのオプションではない引数として扱われてしまいます。
 
+#%since 3.4
+`into` と `exact` 以外のキーワード引数を渡しても無視されます([c:ArgumentError] は発生しません)。
+
+#%end
+
 - **param** `argv` -- パースしたい引数を文字列の配列で指定します。
 
 - **param** `into` -- オプションを格納するハッシュを指定します。
@@ -981,6 +991,11 @@ $ ruby opt.rb -a foo somefile -b
 argv からオプションを取り除いたものを返します。
 
 下の例で言うと、order と違いコマンドの引数 somefile よりも後ろにオプションを置くことができます。
+
+#%since 3.4
+`into` と `exact` 以外のキーワード引数を渡しても無視されます([c:ArgumentError] は発生しません)。
+
+#%end
 
 - **param** `argv` -- パースしたい引数を文字列の配列で指定します。
 
@@ -1029,6 +1044,11 @@ argv を返します。
 
 下の例で言うと、order と違いコマンドの引数 somefile よりも後ろにオプションを置くことができます。
 
+#%since 3.4
+`into` と `exact` 以外のキーワード引数を渡しても無視されます([c:ArgumentError] は発生しません)。
+
+#%end
+
 - **param** `argv` -- パースしたい引数を文字列の配列で指定します。
 
 - **param** `into` -- オプションを格納するハッシュを指定します。
@@ -1075,6 +1095,11 @@ argv からオプションを取り除いたものを返します。
 
 [m:OptionParser#permute] と同様に振舞います。しかし、環境変数に POSIXLY_CORRECT が設定されている場合は、
 [m:OptionParser#order] と同様に振舞います。
+
+#%since 3.4
+`into` と `exact` 以外のキーワード引数を渡しても無視されます([c:ArgumentError] は発生しません)。
+
+#%end
 
 - **param** `argv` -- パースしたい引数を文字列の配列で指定します。
 
@@ -1134,6 +1159,11 @@ end
 環境変数に POSIXLY_CORRECT が設定されている場合は、
 [m:OptionParser#order!] と同様に振舞います。
 
+#%since 3.4
+`into` と `exact` 以外のキーワード引数を渡しても無視されます([c:ArgumentError] は発生しません)。
+
+#%end
+
 - **param** `argv` -- パースしたい引数を文字列の配列で指定します。
 
 - **param** `into` -- オプションを格納するハッシュを指定します。
@@ -1177,6 +1207,11 @@ p ARGV            # => ["test"]
 
 パースが成功した場合に true を返します。
 ファイルが存在しなかった場合に false を返します。
+
+#%since 3.4
+`into` と `exact` 以外のキーワード引数を渡しても無視されます([c:ArgumentError] は発生しません)。
+
+#%end
 
 - **param** `filename` -- 各行をパースしたいファイルの名前を文字列で指定します。
                 指定されないか nil である場合、~/.options/ にプログラムのサフィックスを付けた '~/.options/コマンド名' というファイルをパースします。
@@ -1304,6 +1339,11 @@ params = opt.getopts(ARGV, "ab:", "foo", "bar:")
 # params["foo"] = true  # --foo
 # params["bar"] = "x"  # --bar x
 ```
+
+#%since 3.4
+`symbolize_names` と `exact` 以外のキーワード引数を渡しても無視されます([c:ArgumentError] は発生しません)。
+
+#%end
 
 - **param** `argv` -- パースしたい配列を指定します。
 
