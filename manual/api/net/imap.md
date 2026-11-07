@@ -702,6 +702,9 @@ LOGIN コマンドを送り、平文でパスワードを送りクライアン�
 - **param** `user` -- ユーザ名文字列
 - **param** `password` -- パスワード文字列
 - **raise** `Net::IMAP::NoResponseError` -- 認証に失敗した場合に発生します
+#%since 3.4
+- **raise** `Net::IMAP::LoginDisabledError` -- サーバの機能一覧に LOGINDISABLED があり、[m:Net::IMAP::Config#enforce_logindisabled] の設定で確認する場合に発生します。LOGIN コマンドは送られません
+#%end
 - **SEE** [m:Net::IMAP#authenticate]
 
 #%since 3.3
@@ -1834,7 +1837,7 @@ p config.sasl_ir # => false
 
 [m:Net::IMAP#login] の前に、サーバの機能一覧に LOGINDISABLED があるかを確認するかどうかを返します。
 
-確認して LOGINDISABLED があったときは、LOGIN コマンドを送らずに `Net::IMAP::LoginDisabledError` が発生します。
+確認して LOGINDISABLED があったときは、LOGIN コマンドを送らずに [c:Net::IMAP::LoginDisabledError] が発生します。
 値の意味は次のとおりです。
 
 - false のときは、確認せずに LOGIN コマンドを送ります。
@@ -1907,7 +1910,7 @@ p config.max_non_synchronizing_literal # => -1
 サーバの応答 1 つの大きさの上限(バイト数)を返します。
 
 nil は上限がないことを表します。
-応答の大きさが上限に達するか、リテラルを読むと上限を超えるときは、`Net::IMAP::ResponseTooLargeError` が発生して接続を閉じます。
+応答の大きさが上限に達するか、リテラルを読むと上限を超えるときは、[c:Net::IMAP::ResponseTooLargeError] が発生して接続を閉じます。
 この上限は応答 1 つごとのもので、応答の数や、記録される未処理の応答の量は制限しません。
 既定値は 536870912(512 MiB)で、信頼できないサーバに接続するときはもっと小さい値にするべきです。
 版ごとの既定値は、`0.4` 以前が nil、`0.5` 以降が 536870912 です。
@@ -3159,10 +3162,62 @@ true を返します。
 
 すべての IMAP 例外クラスのスーパークラス。
 
+#%since 3.4
+# class Net::IMAP::LoginDisabledError < Net::IMAP::Error
+
+サーバの機能一覧に LOGINDISABLED があるために [m:Net::IMAP#login] で LOGIN コマンドを送らないときに発生する例外のクラスです。
+
+LOGINDISABLED を確認するかどうかは [m:Net::IMAP::Config#enforce_logindisabled] の設定で決まります。
+この例外が発生するときは、LOGIN コマンドはサーバに送られません。
+既定のメッセージは "Remote server has disabled the LOGIN command" です。
+
+#%end
 # class Net::IMAP::DataFormatError < Net::IMAP::Error
 
 データフォーマットが正しくない場合に発生する例外のクラスです。
 
+#%since 4.0
+# class Net::IMAP::ResponseReadError < Net::IMAP::Error
+
+設定された上限のためにサーバからの応答を読めないときに発生する例外のクラスです。
+
+実際にはこれを継承した [c:Net::IMAP::ResponseTooLargeError] の例外が発生します。
+
+# class Net::IMAP::ResponseTooLargeError < Net::IMAP::ResponseReadError
+
+サーバからの応答 1 つの大きさが [m:Net::IMAP#max_response_size] を超えるときに発生する例外のクラスです。
+
+応答の大きさが上限に達するか、リテラルを読むと上限を超えるときに発生し、接続は閉じられます。
+上限については [m:Net::IMAP::Config#max_response_size] を参照してください。
+
+## Instance Methods
+### def bytes_read -> Integer | nil
+
+例外が発生した時点までに、その応答について読み込んだバイト数を返します。
+
+例外の生成時に指定されなかったときは nil を返します。
+
+#%since 4.1
+### def literal_size -> Integer | false | nil
+#%else
+### def literal_size -> Integer | nil
+#%end
+
+リテラルを読む前に上限を超えると分かったときは、そのリテラルの大きさ(バイト数)を返します。
+
+#%since 4.1
+それ以外のときは nil か false を返します。
+#%else
+それ以外のときは nil を返します。
+#%end
+
+### def max_response_size -> Integer | nil
+
+例外が発生したときの応答の大きさの上限(バイト数)を返します。
+
+例外の生成時に指定されなかったときは nil を返します。
+
+#%end
 # class Net::IMAP::ResponseParseError < Net::IMAP::Error
 
 サーバからのレスポンスが正しくパースできない場合に発生する例外のクラスです。
