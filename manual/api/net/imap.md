@@ -201,7 +201,8 @@ IMAP 接続を表現するクラスです。
 #%since 3.3
 `ssl` に真を渡すと、サーバに繋ぐのに SSL/TLS を用います。
 `ssl` がハッシュならば、それを [m:OpenSSL::SSL::SSLContext#set_params] に渡して SSL/TLS のパラメータを設定します。
-true ならば、[m:OpenSSL::SSL::SSLContext#set_params] の既定のパラメータを使います。
+ハッシュでない真の値(true など)ならば、空のハッシュを渡したのと同じで、[m:OpenSSL::SSL::SSLContext#set_params] の既定のパラメータを使います。
+ハッシュへの変換は [m:Hash.try_convert] で行うので、`to_hash` を持つオブジェクトもハッシュとして扱います。
 SSL/TLS での接続には OpenSSL と [lib:openssl] が使える必要があります。
 `port` を省略すると、SSL/TLS を使うときは 993、使わないときは 143 に接続します。
 
@@ -274,7 +275,7 @@ imap = Net::IMAP.new('imap.example.com', :port => 993,
 - **param** `host` -- 接続するホスト名の文字列
 - **param** `port` -- 接続するポート番号
 #%since 3.3
-- **param** `ssl` -- 真で SSL/TLS を使う。ハッシュなら [m:OpenSSL::SSL::SSLContext#set_params] に渡すパラメータ
+- **param** `ssl` -- 真で SSL/TLS を使う。ハッシュなら [m:OpenSSL::SSL::SSLContext#set_params] に渡すパラメータ(ハッシュでない真の値は既定のパラメータ)
 #%end
 #%version 3.3...3.4
 - **param** `open_timeout` -- 接続が確立するまで待つ秒数
