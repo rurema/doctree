@@ -171,7 +171,16 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 - **`:symbol`**:
   ヘッダの文字列を小文字に変換してから、空白文字列 (\s) をアンダースコアに置換し、非英数字 (\W) を削除します。最後に [m:String#to_sym] を呼び出します。
 
-全ての組み込みのヘッダ用変換器は、実際に変換する前にヘッダのデータの文字エンコーディングを UTF-8 に変換します。そのヘッダの文字エンコーディングを UTF-8 に変換できなかった場合は、変換には失敗しますが、データは変更されません。
+全ての組み込みのヘッダ用変換器は、実際に変換する前にヘッダのデータの文字エンコーディングを UTF-8 に変換します。`:downcase` が返すヘッダは UTF-8 に変換した文字列のままで、元の文字エンコーディングには戻しません。ヘッダの文字エンコーディングを UTF-8 に変換できなかった場合は、[m:String#encode] の例外([c:Encoding::UndefinedConversionError] など)が発生します。
+
+```ruby title="例 Shift_JIS のヘッダを変換する"
+require "csv"
+
+data = "名前,Count\n太郎,1\n".encode("Shift_JIS")
+table = CSV.parse(data, headers: true, header_converters: :downcase)
+p table.headers                 # => ["名前", "count"]
+p table.headers.map(&:encoding) # => [#<Encoding:UTF-8>, #<Encoding:UTF-8>]
+```
 
 このハッシュは [m:Object#freeze] されていないので、ユーザは自由に値を追加することが出来ます。
 
@@ -296,7 +305,7 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   真を指定して :headers にも値をセットすると、ヘッダを出力します。
 - **`:header_converters`**:
   :converters オプションに似ていますが、ヘッダ専用の変換器を定義します。
-  全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変換を試みます。エンコーディング変換に失敗した場合はヘッダは変換されません。
+  全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変換を試みます。変換後のヘッダの文字エンコーディングと、UTF-8 に変換できなかった場合の例外については [m:CSV::HeaderConverters] を参照してください。
 - **`:skip_blanks`**:
   真を指定すると、空行を読み飛ばします。
 - **`:force_quotes`**:
