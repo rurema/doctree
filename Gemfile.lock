@@ -26,7 +26,7 @@ GEM
     power_assert (3.0.1)
     prism (1.9.0)
     progressbar (1.13.0)
-    rack (3.2.7)
+    rack (3.2.8)
     rackup (2.1.0)
       rack (>= 3)
       webrick (~> 1.8)
