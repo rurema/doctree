@@ -1,4 +1,6 @@
 # coding: utf-8
+require "rake/testtask"
+
 OLD_VERSIONS = %w[
   1.8.7 1.9.3
   2.0.0 2.1.0 2.2.0 2.3.0 2.4.0 2.5.0 2.6.0 2.7.0
@@ -172,7 +174,13 @@ def generate_statichtml(version)
   raise "Failed to generate static html" unless succeeded
 end
 
-task :default => [:check_filename_case_conflicts, :check_indent_in_samplecode, :check_single_space_indent, :check_blank_lines, :check_module_function_notation, :generate, :check_links, :check_format]
+Rake::TestTask.new(:test) do |t|
+  t.description = "Run unit tests of the Rakefile helpers"
+  t.libs << "test"
+  t.test_files = FileList["test/test_*.rb"]
+end
+
+task :default => [:check_filename_case_conflicts, :check_indent_in_samplecode, :check_single_space_indent, :check_blank_lines, :check_module_function_notation, :test, :generate, :check_links, :check_params, :check_format]
 
 namespace :generate do
   ALL_VERSIONS.each do |version|
@@ -247,6 +255,31 @@ end
 
 desc "Check broken cross references (CI versions)"
 task :check_links => CI_VERSIONS.map {|version| "check_links:#{version}" }
+
+# シグネチャの引数名と本文の `- **param**` 行の名前が一致するか検査する
+# param 行が無いエントリは件数を数えるだけでエラーにしない
+def check_params(version)
+  check_bitclust_version!
+  db = "/tmp/db-#{version}"
+  generate_database(version) unless File.exist?(db)
+  puts "check params of #{version}"
+  require "bitclust"
+  require_relative "lib/check_params"
+  mismatches = CheckParams.run(BitClust::MethodDatabase.new(db))
+  raise "Parameter name mismatches found in #{version} (see above)" unless mismatches.zero?
+end
+
+namespace :check_params do
+  ALL_VERSIONS.each do |version|
+    desc "Check parameter names of #{version}"
+    task version do
+      check_params(version)
+    end
+  end
+end
+
+desc "Check parameter names against signatures (CI versions)"
+task :check_params => CI_VERSIONS.map {|version| "check_params:#{version}" }
 
 desc "Create index"
 task :create_index do
