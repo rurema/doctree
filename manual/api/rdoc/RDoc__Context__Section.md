@@ -47,9 +47,22 @@ section に関する情報を保持するクラスです。
 
 section のタイトルを返します。
 
-### def comment -> String | nil
+#%since 4.1
+### def comment -> RDoc::Comment | nil
 
-section のコメントを返します。
+section の全てのコメントを 1 つの `RDoc::Comment` オブジェクトにまとめて返します。コメントが無い場合は nil を返します。
+
+返されるオブジェクトの `RDoc::Comment#text` は空文字列で、内容は `RDoc::Comment#parse` で得られる `RDoc::Markup::Document` に保持されます。
+#%else
+### def comment -> nil
+
+常に nil を返します。section のコメントは [m:RDoc::Context::Section#comments] で取得できます。
+#%end
+
+### def comments -> [RDoc::Comment]
+{: since="2.0.0"}
+
+section のコメントを `RDoc::Comment` オブジェクトの配列で返します。コメントが無い場合は空の配列を返します。
 
 ### def ==(other) -> bool
 ### def eql?(other) -> bool
