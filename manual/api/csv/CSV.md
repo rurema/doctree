@@ -169,7 +169,23 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
 - **`:downcase`**:
   ヘッダの文字列に対して [m:String#downcase] を呼び出します。
 - **`:symbol`**:
-  ヘッダの文字列を小文字に変換してから、空白文字列 (\s) をアンダースコアに置換し、非英数字 (\W) を削除します。最後に [m:String#to_sym] を呼び出します。
+  ヘッダの文字列を小文字に変換してから、英数字・アンダースコア・空白文字 (`\s`) 以外の文字を削除し、前後の空白文字を取り除いて、残った空白文字の並びをアンダースコアに置換します。最後に [m:String#to_sym] を呼び出します。英数字は ASCII の範囲の文字だけなので、日本語などの文字は削除されます。
+#%since 3.2
+- **`:symbol_raw`**:
+  ヘッダの文字列に対して [m:String#to_sym] を呼び出します。`:symbol` と違い、小文字への変換や文字の削除はしません。
+
+日本語だけのヘッダは `:symbol` では `:""` になります。そのようなヘッダには `:symbol_raw` を使ってください。
+#%end
+
+```ruby title="例 日本語のヘッダをシンボルに変換する"
+require "csv"
+
+data = "名前,First Name!\n太郎,1\n"
+p CSV.parse(data, headers: true, header_converters: :symbol).headers     # => [:"", :first_name]
+#%since 3.2
+p CSV.parse(data, headers: true, header_converters: :symbol_raw).headers # => [:名前, :"First Name!"]
+#%end
+```
 
 全ての組み込みのヘッダ用変換器は、実際に変換する前にヘッダのデータの文字エンコーディングを UTF-8 に変換します。`:downcase` が返すヘッダは UTF-8 に変換した文字列のままで、元の文字エンコーディングには戻しません。ヘッダの文字エンコーディングを UTF-8 に変換できなかった場合は、[m:String#encode] の例外([c:Encoding::UndefinedConversionError] など)が発生します。
 
@@ -1226,7 +1242,11 @@ p csv.first.headers # => [:header1, :header2]
 require "csv"
 
 csv = CSV.new("HEADER1,HEADER2\nrow1_1,row1_2", headers: true, header_converters: CSV::HeaderConverters.keys)
+#%since 3.2
+p csv.header_converters # => [:downcase, :symbol, :symbol_raw]
+#%else
 p csv.header_converters # => [:downcase, :symbol]
+#%end
 p csv.read.to_a       # => [[:header1, :header2], ["row1_1", "row1_2"]]
 ```
 
