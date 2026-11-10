@@ -305,6 +305,9 @@ row of output though, when using CSV::generate_line() or Array#to_csv().
   指定した正規表現にマッチしたそれぞれの行をコメントとして読み飛ばします。
 
 - **raise** `CSV::MalformedCSVError` -- 不正な CSV をパースしようとしたときに発生します。
+#%since 3.3
+- **raise** `CSV::InvalidEncodingError` -- 入力に不正なバイト列が含まれていたときに発生します。[c:CSV::MalformedCSVError] のサブクラスです。
+#%end
 
 ```ruby title="例: ファイルの読み込み"
 require "csv"
