@@ -87,37 +87,26 @@ CSV($stderr)    { |csv_err| csv_err << %w{my data here} }  # to $stderr
 
 ### CSV と文字エンコーディング (M17n or Multilingualization)
 
-This new CSV parser is m17n savvy.  The parser works in the Encoding of the IO
-or String object being read from or written to.  Your data is never transcoded
-(unless you ask Ruby to transcode it for you) and will literally be parsed in
-the Encoding it is in.  Thus CSV will return Arrays or Rows of Strings in the
-Encoding of your data.  This is accomplished by transcoding the parser itself
-into your Encoding.
+CSV のパーサは、読み込み元または書き込み先の [c:IO] や [c:String] のエンコーディングのまま動作します。
+データは (Ruby にエンコーディングを変換させない限り) エンコーディングを変換されず、そのエンコーディングのままパースされます。
+そのため、CSV が返す [c:Array] や [c:CSV::Row] の文字列は、データと同じエンコーディングになります。
+これは、パーサ自身をデータのエンコーディングに変換することで実現しています。
 
-Some transcoding must take place, of course, to accomplish this multiencoding
-support.  For example, <tt>:col_sep</tt>, <tt>:row_sep</tt>, and
-<tt>:quote_char</tt> must be transcoded to match your data.  Hopefully this
-makes the entire process feel transparent, since CSV's defaults should just
-magically work for you data.  However, you can set these values manually in
-the target Encoding to avoid the translation.
+複数のエンコーディングに対応するために、いくつかの値はエンコーディングの変換が必要です。
+たとえば `:col_sep`、`:row_sep`、`:quote_char` は、データのエンコーディングに合わせて変換されます。
+このため、CSV のデフォルト値はデータのエンコーディングを意識せずにそのまま使えます。
+この変換を避けたい場合は、これらの値を対象のエンコーディングで直接指定してください。
 
-It's also important to note that while all of CSV's core parser is now
-Encoding agnostic, some features are not.  For example, the built-in
-converters will try to transcode data to UTF-8 before making conversions.
-Again, you can provide custom converters that are aware of your Encodings to
-avoid this translation.  It's just too hard for me to support native
-conversions in all of Ruby's Encodings.
+CSV のパーサの中核部分はエンコーディングに依存しませんが、一部の機能は依存します。
+たとえば、組み込みの変換器は、すべてのエンコーディングでネイティブに変換するのは難しいため、変換の前にデータを UTF-8 に変換しようとします。
+この変換を避けたい場合は、使用するエンコーディングに対応した独自の変換器を指定してください。
 
-Anyway, the practical side of this is simple:  make sure IO and String objects
-passed into CSV have the proper Encoding set and everything should just work.
-CSV methods that allow you to open IO objects (CSV::foreach(), CSV::open(),
-CSV::read(), and CSV::readlines()) do allow you to specify the Encoding.
+実際に必要な作業は単純で、CSV に渡す [c:IO] や [c:String] に正しいエンコーディングが設定されていれば、そのまま動作します。
+[c:IO] を開く CSV のメソッド ([m:CSV.foreach]、[m:CSV.open]、[m:CSV.read]、[m:CSV.readlines]) では、エンコーディングを指定できます。
 
-One minor exception comes when generating CSV into a String with an Encoding
-that is not ASCII compatible.  There's no existing data for CSV to use to
-prepare itself and thus you will probably need to manually specify the desired
-Encoding for most of those cases.  It will try to guess using the fields in a
-row of output though, when using CSV::generate_line() or Array#to_csv().
+ただし、ASCII 互換でないエンコーディングの [c:String] に CSV を生成するときは少し事情が異なります。
+この場合は CSV が準備のために参照できるデータがないため、ほとんどの場合は目的のエンコーディングを明示的に指定する必要があります。
+なお、[m:CSV.generate_line] や [m:Array#to_csv] では、出力する行のフィールドからエンコーディングを推測します。
 
 ## Constants
 
