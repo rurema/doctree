@@ -27,7 +27,11 @@ irb コマンドで実行結果の出力方式(inspect_mode)を定義するた�
 
 ライブラリ内部で使用します。
 
+#%since 4.0
+### def inspect_value(v, output, colorize: true) -> ()
+#%else
 ### def inspect_value(v) -> ()
+#%end
 
 ライブラリ内部で使用します。
 
