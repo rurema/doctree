@@ -118,7 +118,11 @@ since: "3.2"
   `Gem::Package` の `.gem` ファイルを作る・検証する・展開するメソッド)と例外クラスだけを載せ、
   `Gem::Installer`・`Gem::Indexer`・`Gem::RemoteFetcher`・`Gem::Security`・`Gem::Commands::*` などの内部クラスや、
   `Gem::Net::HTTP` のような vendored ライブラリは載せません(既存のページは残しますが、追補はしません)。
-  `Gem::ConfigFile`・`Gem::Package` でも、状態ファイルや YAML の読み書き、tar の操作のような内部メソッドは載せません
+  `Gem::ConfigFile`・`Gem::Package` でも、状態ファイルや YAML の読み書き、tar の操作のような内部メソッドは載せません。
+  irb も同じ扱いです。`.irbrc` や拡張ライブラリから使う API(`IRB.conf`、`IRB::Context` の設定メソッド、`IRB::Inspector.def_inspector` など)を対象にし、
+  入力メソッド(`IRB::InputMethod` のサブクラス)・コマンドの実装クラス(`IRB::ExtendCommand::*`・`IRB::Command::*`)・`IRB::Irb`・`IRB::WorkSpace` などの内部クラスや、
+  原典で `:nodoc:` のメソッドは追補しません(既存のページは残し、実 Ruby から消えたものを版で外します)。
+  コマンドや設定項目の一覧は irb ライブラリの概要に書きます([rurema/doctree#3645](https://github.com/rurema/doctree/issues/3645))
 
 [rurema/doctree-measurements](https://github.com/rurema/doctree-measurements) の `method-coverage` の集計では、これらを `POLICY(理由)` として不足側から除外しています。
 
