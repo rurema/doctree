@@ -179,6 +179,7 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する�
 
 - **SEE** [m:IRB::Context#back_trace_limit]
 
+#%until 2.7.0
 ### def debug? -> bool
 
 irb がデバッグモード([m:IRB::Context#debug_level] が 1 以上)で動作しているかどうかを返します。
@@ -203,6 +204,7 @@ irb のデバッグレベルを val に設定します。
 
 - **SEE** [m:IRB::Context#debug_level], [m:IRB::Context#debug?]
 
+#%end
 ### def echo  -> bool
 ### def echo? -> bool
 
@@ -226,6 +228,7 @@ irb のプロンプトでの評価結果を表示するかどうかを設定し�
 
 ライブラリ内部で使用します。
 
+#%until 3.4
 ### def exit(ret = 0) -> object
 
 irb を終了します。ret で指定したオブジェクトを返します。
@@ -234,6 +237,7 @@ irb を終了します。ret で指定したオブジェクトを返します。
 
 - **SEE** [m:IRB.irb_exit]
 
+#%end
 ### def file_input? -> bool
 
 ライブラリ内部で使用します。
@@ -572,10 +576,12 @@ false や nil を指定した場合でも、[m:IRB::Context#verbose?] が true �
 
 ライブラリ内部で使用します。
 
+#%until 3.4
 ### def workspace=(val)
 
 ライブラリ内部で使用します。
 
+#%end
 #%# 使用されていないため省略しました。
 #%# --- workspace_home -> nil
 

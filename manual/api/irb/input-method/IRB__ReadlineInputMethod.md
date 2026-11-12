@@ -5,7 +5,11 @@ include:
   - Readline
 #%end
 ---
+#%until 3.3
 # class IRB::ReadlineInputMethod < IRB::InputMethod
+#%else
+# class IRB::ReadlineInputMethod < IRB::StdioInputMethod
+#%end
 
 readline を用いた標準入力からの入力を表すクラスです。ライブラリ内部で使用します。
 #%until 4.0
@@ -30,7 +34,8 @@ readline を用いた標準入力からの入力を表すクラスです。ラ�
 
 入力が EOF(End Of File)に達したかどうかを返します。
 
-### def readable_atfer_eof? -> false
+#%until 3.3
+### def readable_after_eof? -> false
 
 入力が EOF(End Of File)に達した後も読み込みが行えるかどうかを返します。
 
@@ -43,3 +48,5 @@ readline を用いた標準入力からの入力を表すクラスです。ラ�
 ### def encoding -> Encoding
 
 自身の文字エンコーディングを返します。
+
+#%end
