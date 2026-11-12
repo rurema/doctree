@@ -58,7 +58,7 @@ foo.extend              foo.nil?
 foo.freeze              foo.private_methods     
 ```
 
-# module IRB::Completor
+# module IRB::InputCompletor
 
 irb の completion 機能を提供するモジュールです。
 ユーザがこのモジュールを直接使用することはありません。

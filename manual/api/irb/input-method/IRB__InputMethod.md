@@ -7,16 +7,22 @@ library: irb/input-method
 
 ## Class Methods
 
+#%until 3.3
 ### def IRB::InputMethod.new(file = STDIN_FILE_NAME) -> IRB::InputMethod
+#%else
+### def IRB::InputMethod.new -> IRB::InputMethod
+#%end
 
 自身を初期化します。
 
 ## Instance Methods
 
+#%until 3.3
 ### def file_name -> String
 
 ファイル名を文字列で返します。
 
+#%end
 #%# 使用されていないようなので省略。
 #%# --- prompt -> String
 #%# --- prompt=(val)
@@ -27,7 +33,7 @@ library: irb/input-method
 
 - **raise** `NotImplementedError` -- 必ず発生します。
 
-### def readable_atfer_eof? -> false
+### def readable_after_eof? -> false
 
 入力が EOF(End Of File)に達した後も読み込みが行えるかどうかを返します。
 

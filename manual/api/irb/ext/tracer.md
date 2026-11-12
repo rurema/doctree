@@ -22,6 +22,7 @@ conf.use_tracer か IRB.conf[:USE_TRACER] に true を設定する事で使用�
 
 ## Instance Methods
 
+#%until 3.4
 ### def use_tracer  -> bool
 ### def use_tracer? -> bool
 
@@ -35,6 +36,7 @@ irb への入力を評価する時に [lib:tracer] が有効かどうかを返�
 - **SEE** [lib:tracer], [m:IRB::Context#use_tracer=]
 #%end
 
+#%end
 ### def use_tracer=(val)
 
 #%since 3.1
@@ -47,8 +49,10 @@ irb への入力を評価する時に [lib:tracer] が有効にするかどう�
 
 #%since 3.1
 - **param** `val` -- トレース出力を有効にする場合に true を指定します。
+#%until 3.4
 
 - **SEE** [m:IRB::Context#use_tracer]
+#%end
 #%else
 - **param** `val` -- [lib:tracer] を有効にする場合に true を指定します。
 

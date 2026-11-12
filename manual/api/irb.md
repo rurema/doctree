@@ -718,12 +718,14 @@ IRB のバージョンを文字列で返します。
 
 - **param** `ap_path` -- irb コマンドのパスを指定します。
 
+#%until 3.3
 ### def IRB.irb_at_exit -> ()
 
 at_exit で登録された処理を実行します。
 
 ユーザが直接使用するものではありません。
 
+#%end
 ### def IRB.irb_exit(irb, ret) -> object
 
 irb を終了します。ret で指定したオブジェクトを返します。

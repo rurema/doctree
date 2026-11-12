@@ -1,5 +1,6 @@
 ---
 library: irb/input-method
+until: "3.3"
 ---
 # reopen IRB
 
