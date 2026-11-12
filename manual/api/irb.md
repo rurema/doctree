@@ -84,8 +84,32 @@ options:
 --noverbose       これから実行する行を表示しない (デフォルト)
 --echo            実行結果を表示する (デフォルト)
 --noecho          実行結果を表示しない
+--echo-on-assignment
+                  代入式の結果を表示する
+--noecho-on-assignment
+                  代入式の結果を表示しない
+--truncate-echo-on-assignment
+                  代入式の結果を切り詰めて表示する (デフォルト)
 --inspect         結果出力にinspectを用いる
 --noinspect       結果出力にinspectを用いない
+#%since 3.3
+--no-pager        ページャを使わない
+#%end
+--multiline       マルチラインエディタを利用する
+--nomultiline     マルチラインエディタを利用しない
+--singleline      シングルラインエディタを利用する
+--nosingleline    シングルラインエディタを利用しない
+--colorize        色付けを利用する
+--nocolorize      色付けを利用しない
+#%since 3.1
+--autocomplete    オートコンプリートを利用する
+--noautocomplete  オートコンプリートを利用しない
+#%end
+#%since 3.3
+--regexp-completor
+                  補完に正規表現を利用する
+--type-completor  補完に型情報を利用する
+#%end
 --readline        readlineライブラリを利用する
 --noreadline      readlineライブラリを利用しない。デフォルトでは
                   inf-ruby-mode 以外で readline ライブラリを利用する。
@@ -99,17 +123,31 @@ options:
 --simple-prompt
                   非常にシンプルなプロンプトを用いるモード。
 --noprompt        プロンプトを表示しない。
+#%since 3.2
+--script          最初の引数をスクリプトファイルとして扱う (デフォルト)
+--noscript        引数をスクリプトファイルとして扱わず、ARGV に残す
+#%end
+#%since 4.1
+--nobanner        起動時のバナーを表示しない
+#%end
 --tracer          コマンド実行時にトレースする。
 --back-trace-limit n
                   バックトレース表示をバックトレースの頭から n、
                   うしろから n だけ行なう。デフォルト値は 16。
 --context-mode n  新しいワークスペースを作成した時に関連する Binding
-                  オブジェクトの作成方法を 0 から 3 で設定する。
+#%until 4.0
+                  オブジェクトの作成方法を 0 から 4 で設定する。
+#%else
+                  オブジェクトの作成方法を 0 から 5 で設定する。
+#%end
                   (IRB::Context 参照)
+#%since 3.1
+--extra-doc-dir dir
+                  ドキュメント表示 (doc dialog) で参照する RI ドキュメントの
+                  ディレクトリを追加する
+#%end
 --single-irb      irb 中で self を実行して得られるオブジェクトをサブ irb と共
                   有する
---irb_debug n     irb のデバッグレベルを n に設定する
-                  (ユーザは利用すべきではない)
 -v, --version     irb のバージョンを表示する
 -h, --help        irb のヘルプを表示する
 --                以降のコマンドライン引数をオプションとして扱わない
@@ -117,14 +155,30 @@ options:
 
 ### irb のカスタマイズ
 
+#%until 3.4
 irb コマンドは起動時に以下のパスを上から順番に探索し、最初に見つかったファイルを読み込みます。
+#%else
+irb コマンドは起動時に以下のパスを上から順番に探索し、見つかったファイルをすべて読み込みます。
+#%end
 
   - $IRBRC (もし環境変数 IRBRC が設定されていれば)
   - $XDG_CONFIG_HOME/irb/irbrc (もし環境変数 XDG_CONFIG_HOME が設定されていれば)
   - $HOME/.irbrc (もし環境変数 HOME が設定されていれば)
+#%until 3.3
   - ./.config/irb/irbrc
+#%end
+#%version 3.3...3.4
+  - $HOME/.config/irb/irbrc (もし環境変数 HOME が設定されていれば)
+#%end
+#%since 3.4
+  - $HOME/.config/irb/irbrc (もし環境変数 HOME が設定されていて、環境変数 XDG_CONFIG_HOME が設定されていなければ)
+#%end
   - ./.irbrc
+#%until 3.4
   - ./irb.rc
+#%else
+  - ./irbrc
+#%end
   - ./_irbrc
   - ./$irbrc (環境変数ではなく $irbrc というファイル名)
 
@@ -136,7 +190,6 @@ irb コマンドのオプションを指定したのと同じ効果が得られ�
 ```ruby
 IRB.conf[:AUTO_INDENT] = false
 IRB.conf[:BACK_TRACE_LIMIT] = 16
-IRB.conf[:DEBUG_LEVEL] = 1
 IRB.conf[:ECHO] = nil
 IRB.conf[:EVAL_HISTORY] = nil
 IRB.conf[:HISTORY_FILE] = nil
@@ -158,6 +211,184 @@ IRB.conf[:VERBOSE] = true
 ```
 
 それぞれの設定値の詳細については、[c:IRB::Context] を参照してください。
+
+上記以外にも、[m:IRB.conf] には以下のキーがあります。
+
+- **`:AP_NAME`**:
+
+  アプリケーション名です。初期値は `"irb"` です。[m:IRB::Context#ap_name] で参照できます。
+
+- **`:AT_EXIT`**:
+
+  irb の終了時に呼び出す [c:Proc] の配列です。初期値は `[]` です。
+
+#%since 3.2
+- **`:COMMAND_ALIASES`**:
+
+  コマンドの別名を `{ 別名のシンボル => コマンド名のシンボル }` の [c:Hash] で指定します。
+  `$`(`show_source`)と `@`(`whereami`)が初期値として定義されています。
+
+#%end
+#%since 3.3
+- **`:COMPLETOR`**:
+
+  補完の方式です。`:regexp`(正規表現)または `:type`(型情報。gem の `repl_type_completor` が必要)を指定します。
+#%until 3.4
+  環境変数 `IRB_COMPLETOR` を設定していない場合の初期値は `:regexp` です。
+#%else
+  環境変数 `IRB_COMPLETOR` を設定していない場合の初期値は `nil` で、[lib:repl_type_completor] が使える場合は `:type`、使えない場合は `:regexp` として扱われます。
+#%end
+
+#%end
+- **`:CONTEXT_MODE`**:
+
+  新しいワークスペースを作成した時の [c:Binding] オブジェクトの作成方法です。
+  コマンドラインオプション `--context-mode` と同じ意味で、初期値は `4` です。
+
+#%since 4.0
+- **`:COPY_COMMAND`**:
+
+  `copy` コマンドがクリップボードへの書き込みに使うプログラムです。初期値は環境変数 `IRB_COPY_COMMAND` の値です。
+
+#%end
+- **`:ECHO_ON_ASSIGNMENT`**:
+
+  代入式の結果の表示方法です。`true`(表示する)・`false`(表示しない)・`:truncate`(切り詰めて表示する)のいずれかを指定します。
+  初期値は `nil` で、`:truncate` として扱われます。
+
+#%since 3.1
+- **`:EXTRA_DOC_DIRS`**:
+
+  ドキュメント表示 (doc dialog) で参照する RI ドキュメントのディレクトリの配列です。初期値は `[]` です。
+  コマンドラインオプション `--extra-doc-dir` で追加できます。
+
+#%end
+- **`:IRB_LIB_PATH`**:
+
+  irb のライブラリが置かれているディレクトリのパスです。
+
+- **`:LC_MESSAGES`**:
+
+  メッセージのロケールを表す `IRB::Locale` のオブジェクトです。
+
+- **`:LOAD_MODULES`**:
+
+  起動時に require するライブラリ名の配列です。初期値は `[]` で、`-r` オプションで追加されます。
+
+- **`:MAIN_CONTEXT`**:
+
+  メインの irb の [c:IRB::Context] オブジェクトです。
+
+- **`:MEASURE`**:
+
+  `measure` コマンドによる実行時間の計測が有効かどうかです。初期値は `false` です。
+
+- **`:MEASURE_CALLBACKS`**:
+
+  有効になっている計測のコールバックの配列です。初期値は `[]` です。
+
+- **`:MEASURE_PROC`**:
+
+  `measure` コマンドで選べる計測方法を、名前をキー、[c:Proc] を値として保持する [c:Hash] です。
+  初期値として `:TIME` と `:STACKPROF` が定義されています。
+
+- **`:RC`**:
+
+  設定ファイルの読み込みを行うかどうかです。初期値は `true` で、`-f` オプションを指定すると `false` になります。
+  [m:IRB::Context#rc?] でも参照できます。
+
+#%since 4.1
+- **`:SHOW_BANNER`**:
+
+  起動時のバナーを表示するかどうかです。初期値は `true` で、`--nobanner` オプションを指定すると `false` になります。
+
+#%end
+#%since 3.1
+- **`:USE_AUTOCOMPLETE`**:
+
+  オートコンプリートを使うかどうかです。初期値は `true` で、`--noautocomplete` オプションを指定すると `false` になります。
+#%since 3.2
+  環境変数 `IRB_USE_AUTOCOMPLETE` に `false` を設定した場合も、初期値は `false` になります。
+#%end
+
+#%end
+- **`:USE_COLORIZE`**:
+
+  色付けを使うかどうかです。コマンドラインオプション `--colorize`・`--nocolorize` で指定できます。
+
+#%since 3.3
+- **`:USE_PAGER`**:
+
+  長い出力をページャで表示するかどうかです。初期値は `true` で、`--no-pager` オプションを指定すると `false` になります。
+
+#%end
+- **`:__MAIN__`**:
+
+  irb の main オブジェクト (self) です。
+
+#### 環境変数 {#environment_variables}
+
+irb は以下の環境変数を参照します。
+
+- **`IRBRC`**:
+- **`XDG_CONFIG_HOME`**:
+
+  設定ファイルの探索に使います。前述の「irb のカスタマイズ」を参照してください。
+
+#%since 3.1
+- **`NO_COLOR`**:
+
+#%until 3.2
+  設定されている場合、`:USE_COLORIZE` の初期値が `false` になります。
+#%else
+  空でない値が設定されている場合、`:USE_COLORIZE` の初期値が `false` になります。
+#%end
+
+#%end
+#%since 3.2
+- **`IRB_USE_AUTOCOMPLETE`**:
+
+  `false` を設定すると、`:USE_AUTOCOMPLETE` の初期値が `false` になります。
+
+#%end
+#%since 3.3
+- **`IRB_COMPLETOR`**:
+
+  `:COMPLETOR` の初期値を指定します。`regexp` または `type` を設定します。
+
+#%end
+#%since 4.0
+- **`IRB_COPY_COMMAND`**:
+
+  `:COPY_COMMAND` の初期値を指定します。
+
+#%end
+#%since 3.2
+#%since 3.3
+- **`VISUAL`**:
+#%end
+- **`EDITOR`**:
+
+#%until 3.3
+  `edit` コマンドが起動するエディタを指定します。
+#%else
+  `edit` コマンドが起動するエディタを指定します。`VISUAL` が設定されていれば `VISUAL` が優先されます。
+#%end
+
+#%end
+#%since 3.3
+- **`RI_PAGER`**:
+- **`PAGER`**:
+
+  長い出力を表示するページャを指定します。`RI_PAGER`・`PAGER` の順に参照します。
+
+#%end
+- **`IRB_LANG`**:
+- **`LC_MESSAGES`**:
+- **`LC_ALL`**:
+- **`LANG`**:
+
+  メッセージのロケールの決定に使います。この順に参照し、最初に見つかったものを使います。
 
 #### プロンプトのカスタマイズ {#customize_prompt}
 
@@ -216,11 +447,17 @@ PROMPT_I, PROMPT_S, PROMPT_C にはフォーマット文字列を指定します
 例えば、デフォルトのプロンプトモードである「default」プロンプトモードは以下のように設定されています。
 
 ```ruby
-IRB.conf[:PROMPT_MODE][:DEFAULT] = {
+IRB.conf[:PROMPT][:DEFAULT] = {
+#%until 3.3
   :PROMPT_I => "%N(%m):%03n:%i> ",
   :PROMPT_S => "%N(%m):%03n:%i%l ",
   :PROMPT_C => "%N(%m):%03n:%i* ",
-  :RETURN => "%s\n"
+#%else
+  :PROMPT_I => "%N(%m):%03n> ",
+  :PROMPT_S => "%N(%m):%03n%l ",
+  :PROMPT_C => "%N(%m):%03n* ",
+#%end
+  :RETURN => "=> %s\n"
 }
 ```
 
@@ -240,8 +477,10 @@ irb(main):004:0> x = "OK"          # ローカル変数 x を定義
 irb(main):005:0> x                 # x を表示
 => "OK"
 irb(main):006:0> irb               # サブ irb を起動
+#%since 3.3
 Multi-irb commands are deprecated and will be removed in IRB 2.0.0. Please use workspace commands instead.
 If you have any use case for multi-irb, please leave a comment at https://github.com/ruby/irb/issues/653
+#%end
 irb#1(main):001:0> x               # x を表示
 #%since 3.4
 (irb#1):1:in '<top (required)>': undefined local variable or method 'x' for main (NameError)
@@ -255,9 +494,11 @@ irb#1(main):001:0> x               # x を表示
 起動時のインタプリタでローカル変数 x を定義しましたが、「irb」でサブ irb を起動すると、ローカル変数 x が見えなくなっています。
 これが「独立した環境」の意味です。
 
+#%since 3.3
 なお、「irb」コマンドによるサブ irb の起動(multi-irb)は非推奨となっており、将来の IRB 2.0.0 で削除される予定です。
 今後は後述の「irb で使用可能なコマンド一覧」にある workspace 関連のコマンド
 (`cws`、`pushws` など)の利用が推奨されています。
+#%end
 
 ### サブ irb の設定 {#configure_sub_irb}
 
@@ -371,6 +612,13 @@ irb のコマンドは、簡単な名前と頭に「irb_」をつけた名前と
   irb を終了します。
   サブ irb で呼び出した場合は、そのサブ irb だけを終了します。
 
+#%since 3.4
+- **`exit!`**:
+- **`irb_exit!`**:
+
+  irb を終了したあと、続けて [m:Kernel?.exit] を呼び出してプロセスを終了します。
+
+#%end
 #%# ret は使用されていないようなので、削除しました。
 
 - **`conf`**:
@@ -503,10 +751,14 @@ irb のコマンドは、簡単な名前と頭に「irb_」をつけた名前と
   拡張ライブラリ(*.so,*.o,*.dll など)を指定した場合は単純に require さ
   れます。
 
+#%until 3.4
 - **`help(*names)`**:
 - **`irb_help(*names)`**:
 
   RI から Ruby のドキュメントを参照します。
+#%since 3.3
+  このコマンドは非推奨で、実行すると `show_doc` コマンドを使うようにという警告が表示されます。
+#%end
 
   ```irb
     irb(main):001:0> help String#match
@@ -535,6 +787,220 @@ irb のコマンドは、簡単な名前と頭に「irb_」をつけた名前と
     ...
   ```
 
+#%else
+- **`help`**:
+- **`irb_help`**:
+
+  使用できるコマンドとヘルパーメソッドの一覧を表示します。
+  `help ls` のようにコマンド名を指定すると、そのコマンドの説明を表示します。
+
+#%end
+#%since 3.2
+- **`show_doc(*names)`**:
+#%since 3.3
+- **`irb_show_doc(*names)`**:
+#%end
+#%since 4.0
+- **`ri(*names)`**:
+#%end
+
+  RI から Ruby のドキュメントを参照します。
+  `show_doc String#match` のようにメソッド名などを指定します。
+  指定しなかった場合は、RI を対話的なモードで起動します。
+
+#%end
+#%since 3.2
+- **`show_cmds`**:
+#%version 3.2...3.4
+- **`irb_show_cmds`**:
+#%end
+
+  使用できるコマンドの一覧を表示します。
+
+#%end
+#%since 3.1
+- **`ls`**:
+- **`irb_ls`**:
+
+  オブジェクトのメソッド・定数・変数を一覧表示します。
+  `ls obj` のようにオブジェクトを指定します。省略した場合は `self` が対象です。
+#%since 3.2
+  `ls obj -g パターン` のように `-g` を指定すると、出力をパターンで絞り込めます。
+#%end
+
+- **`show_source`**:
+- **`irb_show_source`**:
+#%since 3.2
+- **`$`**:
+#%end
+
+  メソッド・クラス・モジュール・定数のソースコードを表示します。
+#%until 3.2
+  `show_source "Foo#bar"` や `show_source "Foo"` のように文字列で指定します。
+#%else
+  `show_source Foo#bar` や `show_source Foo` のように指定します。
+#%end
+#%since 3.3
+  `-s` を付けるとスーパークラス側の定義を表示し、`-ss` のように重ねるとさらに上位の定義を表示します。
+#%end
+
+- **`whereami`**:
+- **`irb_whereami`**:
+#%since 3.2
+- **`@`**:
+#%end
+
+  `binding.irb` を呼び出した位置の周辺のソースコードをもう一度表示します。
+
+#%end
+#%since 3.2
+- **`edit`**:
+- **`irb_edit`**:
+
+  ファイルをエディタで開きます。
+  `edit foo.rb` のようにファイル名を指定するほか、`edit Foo#bar` のようにメソッドや定数を指定すると、その定義があるファイルを開きます。
+  省略した場合は、現在のコンテキストが定義されているファイルを開きます。
+  エディタは環境変数 `EDITOR` で指定します。
+#%since 3.3
+  `VISUAL` が設定されている場合は、`VISUAL` が優先されます。
+#%end
+
+#%end
+#%since 3.3
+- **`history`**:
+- **`irb_history`**:
+- **`hist`**:
+
+  入力履歴を表示します。`history -g パターン` のように `-g` を指定すると、パターンに一致する履歴だけを表示します。
+
+#%end
+#%since 3.4
+- **`cd`**:
+
+  指定したオブジェクトをワークスペースのスタックに積みます(`pushws` に相当)。
+  `cd ..` で一つ前のワークスペースに戻り(`popws` に相当)、引数なしの `cd` で最初のワークスペースまで戻ります。
+
+#%end
+#%since 4.0
+- **`copy`**:
+
+  式の実行結果の `inspect` をクリップボードにコピーします。
+  式を省略した場合は、直前の実行結果(`_`)をコピーします。
+  コピーに使うプログラムは `:COPY_COMMAND` で変更できます。
+
+#%end
+- **`measure`**:
+#%since 3.1
+- **`irb_measure`**:
+#%end
+
+  式の実行時間を計測するモードを有効にします。`measure :off` で無効にします。
+  計測方法は `IRB.conf[:MEASURE_PROC]` で追加できます。
+
+- **`irb_info`**:
+
+  Ruby と irb のバージョンなど、irb の情報を表示します。
+
+#%since 3.4
+- **`disable_irb`**:
+- **`irb_disable_irb`**:
+
+  現在の irb を終了し、以降の `binding.irb` の呼び出しを何もしないようにします。
+
+#%end
+#%since 3.2
+- **`debug`**:
+- **`irb_debug`**:
+
+  [lib:debug] (debug gem) のデバッガを起動します。
+  `binding.irb` から起動した irb でのみ使え、debug gem がインストールされている必要があります。
+
+- **`break`**:
+- **`irb_break`**:
+- **`catch`**:
+- **`irb_catch`**:
+- **`next`**:
+- **`irb_next`**:
+- **`delete`**:
+- **`irb_delete`**:
+- **`step`**:
+- **`irb_step`**:
+- **`continue`**:
+- **`irb_continue`**:
+- **`finish`**:
+- **`irb_finish`**:
+- **`backtrace`**:
+- **`bt`**:
+- **`irb_backtrace`**:
+- **`info`**:
+- **`irb_debug_info`**:
+
+  デバッガを起動し、debug gem の同名のコマンドを実行します。
+  `debug` コマンドと同様、`binding.irb` から起動した irb でのみ使えます。
+
+#%end
+
+#%since 3.4
+### irb の拡張 {#extend_irb}
+
+ライブラリや .irbrc から、独自のコマンドやヘルパーメソッドを irb に追加できます。
+
+コマンドは `ls -g pattern` のように、シェルのコマンドに似た形で使うものです。
+Ruby の構文として正しくない引数も受け取れます。
+ヘルパーメソッドは `my_helper("foo").upcase` のように、Ruby のメソッドとして使うものです。
+どちらにするか迷った場合は、コマンドを選んでください。
+
+#### コマンドの登録
+
+`IRB::Command::Base` を継承したクラスを作り、`IRB::Command.register` でコマンド名と一緒に登録します。
+`execute` は、コマンド名の後ろに続く入力を 1 つの文字列として受け取ります。
+
+```ruby
+require "irb/command"
+
+class Greet < IRB::Command::Base
+  category "Greeting"
+  description "Greets the user"
+  help_message <<~HELP
+    Greets the user with the given name.
+
+    Usage: greet <name>
+  HELP
+
+  def execute(arg)
+    puts "Hello! #{arg}"
+  end
+end
+
+IRB::Command.register(:greet, Greet)
+```
+
+irb を起動する前にこのコードが読み込まれていれば、`greet Stan` のように使えます。
+`category` と `description` は `help` コマンドの一覧に表示され、`help_message` は `help greet` で表示されます。
+
+#### ヘルパーメソッドの登録
+
+`IRB::HelperMethod::Base` を継承したクラスを作り、`IRB::HelperMethod.register` でメソッド名と一緒に登録します。
+ヘルパーメソッドは Ruby のメソッドとして呼び出され、`execute` の引数にはその呼び出しの引数がそのまま渡されます。
+
+```ruby
+require "irb/helper_method"
+
+class MyHelper < IRB::HelperMethod::Base
+  description "This is a test helper"
+
+  def execute(arg, kwarg:)
+    "arg: #{arg}, kwarg: #{kwarg}"
+  end
+end
+
+IRB::HelperMethod.register(:my_helper, MyHelper)
+```
+
+irb を起動する前にこのコードが読み込まれていれば、`my_helper("foo", kwarg: "bar").upcase` のように使えます。
+登録したヘルパーメソッドは `help` コマンドの一覧にも表示されます。
+
+#%end
 ### システム変数
 
 - **`_`**:
