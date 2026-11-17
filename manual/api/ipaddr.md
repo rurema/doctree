@@ -408,6 +408,23 @@ p IPAddr.new("192.168.1.1").link_local?  # => false
 ```
 
 #%since 4.1
+### def unspecified? -> bool
+
+`self` が未指定(Unspecified)アドレスなら真を返します。IPv4 の 0.0.0.0/32 と IPv6 の ::/128 が未指定アドレスとみなされます。IPv4 射影 IPv6 アドレス範囲内の未指定 IPv4 アドレスも未指定アドレスとみなされます。
+
+```ruby title="例"
+require "ipaddr"
+p IPAddr.new("0.0.0.0").unspecified?         # => true
+p IPAddr.new("::").unspecified?              # => true
+p IPAddr.new("::ffff:0.0.0.0").unspecified?  # => true
+p IPAddr.new("0.0.0.0/0").unspecified?       # => false
+p IPAddr.new("192.0.2.1").unspecified?       # => false
+p IPAddr.new("2001:db8::1").unspecified?     # => false
+```
+
+#%end
+
+#%since 4.1
 ### def multicast? -> bool
 
 `self` がマルチキャストアドレスなら真を返します。IPv4 の 224.0.0.0/4 と IPv6 の ff00::/8 がマルチキャストとみなされます。IPv4 射影 IPv6 アドレス範囲内のマルチキャストな IPv4 アドレスもマルチキャストとみなされます。
